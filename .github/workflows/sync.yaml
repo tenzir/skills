@@ -1,0 +1,194 @@
+name: Sync Skill
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "Source repository to sync (any tenzir/* repo)"
+        required: true
+        type: string
+      source_path:
+        description: "Path to the skill directory in the source repo"
+        required: true
+        type: string
+      target_path:
+        description: "Target path inside tenzir/skills (defaults to source path)"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "sync-skill"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync Skill
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.TENZIR_GITHUB_APP_ID }}
+          private-key: ${{ secrets.TENZIR_GITHUB_APP_PRIVATE_KEY }}
+          owner: tenzir
+
+      - name: Resolve paths
+        id: resolve
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          source_path="${{ inputs.source_path }}"
+          target_path="${{ inputs.target_path }}"
+
+          source_path="${source_path%/}"
+          target_path="${target_path%/}"
+
+          if [[ -z "$target_path" ]]; then
+            target_path="$source_path"
+          fi
+
+          echo "source_path=$source_path" >> "$GITHUB_OUTPUT"
+          echo "target_path=$target_path" >> "$GITHUB_OUTPUT"
+
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Validate inputs
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          project="${{ inputs.project }}"
+          source_path="${{ steps.resolve.outputs.source_path }}"
+          target_path="${{ steps.resolve.outputs.target_path }}"
+
+          validate_path() {
+            local label="$1" path="$2"
+            if [[ -z "$path" ]]; then
+              echo "::error::${label} must not be empty"
+              exit 1
+            fi
+            if [[ "$path" = /* ]]; then
+              echo "::error::${label} must be relative: $path"
+              exit 1
+            fi
+            if [[ "$path" == "." || "$path" == *"/./"* || "$path" == "./"* || "$path" == *"/." ]]; then
+              echo "::error::${label} must not contain dot path segments: $path"
+              exit 1
+            fi
+            if [[ "$path" == ".." || "$path" == "../"* || "$path" == *"/../"* || "$path" == *"/.." ]]; then
+              echo "::error::${label} must not contain parent path traversal: $path"
+              exit 1
+            fi
+          }
+
+          if [[ ! "$project" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
+            echo "::error::Invalid repository name: $project"
+            exit 1
+          fi
+
+          validate_path "source_path" "$source_path"
+          validate_path "target_path" "$target_path"
+
+          case "$target_path" in
+            skills/*) ;;
+            *)
+              echo "::error::target_path must stay within skills/: $target_path"
+              exit 1
+              ;;
+          esac
+
+          if ! gh api "repos/tenzir/$project" --silent; then
+            echo "::error::Repository tenzir/$project does not exist"
+            exit 1
+          fi
+
+      - name: Clone source repository
+        id: clone
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git clone --depth 1 \
+            "https://x-access-token:${GH_TOKEN}@github.com/tenzir/${{ inputs.project }}.git" \
+            /tmp/source
+
+          echo "sha=$(git -C /tmp/source rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Validate source skill
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          source_dir="/tmp/source/${{ steps.resolve.outputs.source_path }}"
+
+          if [[ ! -d "$source_dir" ]]; then
+            echo "::error::Source path does not exist or is not a directory: ${{ steps.resolve.outputs.source_path }}"
+            exit 1
+          fi
+
+          if [[ ! -f "$source_dir/SKILL.md" ]]; then
+            echo "::error::Source path does not contain SKILL.md: ${{ steps.resolve.outputs.source_path }}"
+            exit 1
+          fi
+
+      - name: Sync skill
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          target_path="${{ steps.resolve.outputs.target_path }}"
+          mkdir -p "$(dirname "$target_path")"
+          mkdir -p "$target_path"
+
+          rsync -av --delete \
+            "/tmp/source/${{ steps.resolve.outputs.source_path }}/" \
+            "$target_path/"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Validate skills with skills-ref
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t skill_dirs < <(
+            find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort
+          )
+
+          for skill_dir in "${skill_dirs[@]}"; do
+            echo "Validating ${skill_dir}"
+            uvx skills-ref validate "${skill_dir}"
+          done
+
+      - name: Stage changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A -- "${{ steps.resolve.outputs.target_path }}"
+
+      - name: Commit changes
+        uses: planetscale/ghcommit-action@v0.2.0
+        with:
+          commit_message: "Sync skill from tenzir/${{ inputs.project }}:${{ steps.resolve.outputs.source_path }}@${{ steps.clone.outputs.sha }}"
+          repo: ${{ github.repository }}
+          branch: ${{ github.ref_name }}
+          empty: false
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}

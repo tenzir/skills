@@ -1,0 +1,33 @@
+name: Sync Skill
+description: Trigger skill sync to tenzir/skills
+
+inputs:
+  project:
+    description: >-
+      Source repository name (usually not needed - defaults to source repo name)
+    required: false
+    default: ${{ github.event.repository.name }}
+  source_path:
+    description: Path to the skill directory in the source repository
+    required: true
+  target_path:
+    description: Path to the skill directory in tenzir/skills
+    required: false
+    default: ""
+  token:
+    description: GitHub token with workflow trigger permissions
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Trigger sync workflow
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+      run: |
+        gh workflow run sync.yaml \
+          --repo tenzir/skills \
+          --field project="${{ inputs.project }}" \
+          --field source_path="${{ inputs.source_path }}" \
+          --field target_path="${{ inputs.target_path }}"
