@@ -1,4 +1,4 @@
-name: skills-ref
+name: Validate Skills
 
 on:
   pull_request:
@@ -17,6 +17,7 @@ on:
 
 jobs:
   actionlint:
+    name: Lint Workflows
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +28,7 @@ jobs:
         uses: docker://rhysd/actionlint:1.7.8
 
   validate:
+    name: Validate Skills
     runs-on: ubuntu-latest
 
     steps:
