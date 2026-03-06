@@ -6,9 +6,8 @@ Run `skills-ref` across every local skill after changing anything under
 `skills/`:
 
 ```bash
-uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
 for skill in $(find skills -name SKILL.md -print | sed 's#/SKILL.md$##'); do
-  skills-ref validate "$skill"
+  uvx skills-ref validate "$skill"
 done
 ```
 
