@@ -39,5 +39,5 @@ jobs:
 
           for skill_dir in "${skill_dirs[@]}"; do
             echo "Validating ${skill_dir}"
-            uvx skills-ref validate "${skill_dir}"
+            uvx --refresh skills-ref validate "${skill_dir}"
           done

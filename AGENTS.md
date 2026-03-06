@@ -7,7 +7,7 @@ Run `skills-ref` across every local skill after changing anything under
 
 ```bash
 for skill in $(find skills -name SKILL.md -print | sed 's#/SKILL.md$##'); do
-  uvx skills-ref validate "$skill"
+  uvx --refresh skills-ref validate "$skill"
 done
 ```
 
