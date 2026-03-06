@@ -1,0 +1,43 @@
+name: skills-ref
+
+on:
+  pull_request:
+    paths:
+      - "AGENTS.md"
+      - ".github/workflows/skills-ref.yml"
+      - "skills/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "AGENTS.md"
+      - ".github/workflows/skills-ref.yml"
+      - "skills/**"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Validate skills with skills-ref
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t skill_dirs < <(
+            find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort
+          )
+
+          for skill_dir in "${skill_dirs[@]}"; do
+            echo "Validating ${skill_dir}"
+            uvx skills-ref validate "${skill_dir}"
+          done

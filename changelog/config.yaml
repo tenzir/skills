@@ -1,0 +1,5 @@
+id: tenzir-skills
+name: Tenzir Skills
+description: >-
+  Skills for coding agents in the Tenzir ecosystem.
+repository: tenzir/skills
