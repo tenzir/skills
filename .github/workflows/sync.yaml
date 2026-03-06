@@ -54,8 +54,11 @@ jobs:
             target_path="$source_path"
           fi
 
-          echo "source_path=$source_path" >> "$GITHUB_OUTPUT"
-          echo "target_path=$target_path" >> "$GITHUB_OUTPUT"
+          {
+            echo "source_path=$source_path"
+            echo "target_path=$target_path"
+            echo "skill_name=$(basename "$target_path")"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Check out repository
         uses: actions/checkout@v5
@@ -160,8 +163,6 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
 
       - name: Install skills-ref
         shell: bash
@@ -190,7 +191,7 @@ jobs:
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync skill from tenzir/${{ inputs.project }}:${{ steps.resolve.outputs.source_path }}@${{ steps.clone.outputs.sha }}"
+          commit_message: "Sync ${{ steps.resolve.outputs.skill_name }} from tenzir/${{ inputs.project }}"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false
