@@ -291,12 +291,36 @@ def format_attribute(name: str, data: dict) -> str:
     return "\n".join(lines)
 
 
+def format_constraints(constraints: dict) -> str:
+    """Render an OCSF constraints dict as Markdown."""
+    lines: list[str] = []
+    for kind in ("at_least_one", "just_one"):
+        attrs = constraints.get(kind)
+        if not attrs:
+            continue
+        label = "At least one of" if kind == "at_least_one" else "Exactly one of"
+        attrs_str = ", ".join(f"`{a}`" for a in attrs)
+        lines.append(f"- **{label}**: {attrs_str}")
+    return "\n".join(lines)
+
+
+def format_associations(associations: dict) -> str:
+    """Render an OCSF associations dict as Markdown."""
+    lines: list[str] = []
+    for source, targets in associations.items():
+        targets_str = ", ".join(f"`{t}`" for t in targets)
+        lines.append(f"- `{source}` ↔ {targets_str}")
+    return "\n".join(lines)
+
+
 def render_entity_page(
     *,
     title: str,
     description: str | None,
     meta_entries: list[tuple[str, object]],
     attributes: list[tuple[str, dict]],
+    constraints: dict | None = None,
+    associations: dict | None = None,
 ) -> str:
     lines = [f"# {title}", ""]
     if description:
@@ -304,6 +328,14 @@ def render_entity_page(
     meta = format_meta_list(meta_entries)
     if meta:
         lines.extend([meta, ""])
+    if constraints:
+        rendered = format_constraints(constraints)
+        if rendered:
+            lines.extend(["## Constraints", "", rendered, ""])
+    if associations:
+        rendered = format_associations(associations)
+        if rendered:
+            lines.extend(["## Associations", "", rendered, ""])
     if attributes:
         lines.extend(["## Attributes", ""])
         for attr_name, attr_data in attributes:
@@ -646,6 +678,17 @@ def main() -> None:
                 class_profiles = resolve_profiles(
                     class_data, data["classes"], data["intermediates"],
                 )
+                # Collect constraints: prefer class-level, fall back to parent.
+                constraints = class_data.get("constraints")
+                if not constraints:
+                    parent = data["intermediates"].get(class_data.get("extends", ""))
+                    if parent:
+                        constraints = parent.get("constraints")
+                associations = class_data.get("associations")
+                if not associations:
+                    parent = data["intermediates"].get(class_data.get("extends", ""))
+                    if parent:
+                        associations = parent.get("associations")
                 page = render_entity_page(
                     title=f"{class_data.get('caption') or name} ({name})",
                     description=class_data.get("description"),
@@ -663,6 +706,8 @@ def main() -> None:
                             ", ".join(f"`{p}`" for p in class_profiles) if class_profiles else "",
                         ),
                     ],
+                    constraints=constraints,
+                    associations=associations,
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (class_data.get("attributes") or {}).items()
