@@ -760,6 +760,43 @@ def main() -> None:
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
 
+            for name, intermediate_data in data["intermediates"].items():
+                category_info = data["categories"].get(intermediate_data.get("category_key"), {})
+                intermediate_profiles = resolve_profiles(
+                    intermediate_data, data["classes"], data["intermediates"],
+                )
+                page = render_entity_page(
+                    title=f"{intermediate_data.get('caption') or name} ({name})",
+                    description=(
+                        f"Abstract base class for {category_info.get('caption', name)} event classes. "
+                        "Concrete classes in this category extend this class and inherit its attributes."
+                    ),
+                    meta_entries=[
+                        (
+                            "Category",
+                            category_info.get("caption")
+                            or intermediate_data.get("category_key")
+                            or "",
+                        ),
+                        ("Extends", f"`{intermediate_data['extends']}`" if intermediate_data.get("extends") else ""),
+                        (
+                            "Profiles",
+                            ", ".join(f"`{p}`" for p in intermediate_profiles) if intermediate_profiles else "",
+                        ),
+                    ],
+                    constraints=intermediate_data.get("constraints"),
+                    associations=intermediate_data.get("associations"),
+                    inherited_attributes=collect_inherited_attributes(
+                        intermediate_data, data["classes"], data["intermediates"], data["dictionary"],
+                    ),
+                    attributes=[
+                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
+                        for attr_name, attr_data in (intermediate_data.get("attributes") or {}).items()
+                        if not attr_name.startswith("$")
+                    ],
+                )
+                write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
+
             for name, object_data in data["objects"].items():
                 page = render_entity_page(
                     title=f"{object_data.get('caption') or name} ({name})",
