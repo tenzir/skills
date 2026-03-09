@@ -619,6 +619,7 @@ def main() -> None:
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (class_data.get("attributes") or {}).items()
+                        if not attr_name.startswith("$")
                     ],
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
@@ -631,6 +632,7 @@ def main() -> None:
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (object_data.get("attributes") or {}).items()
+                        if not attr_name.startswith("$")
                     ],
                 )
                 write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
@@ -643,6 +645,7 @@ def main() -> None:
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
+                        if not attr_name.startswith("$")
                     ],
                 )
                 write_file(output_dir / data["slug"] / "profiles" / f"{name_to_slug(name)}.md", page)
