@@ -313,6 +313,39 @@ def format_associations(associations: dict) -> str:
     return "\n".join(lines)
 
 
+def collect_inherited_attributes(
+    class_data: dict,
+    all_classes: dict[str, dict],
+    intermediates: dict[str, dict],
+    dictionary: dict,
+) -> list[tuple[str, list[tuple[str, str]]]]:
+    """Walk the extends chain and collect required/recommended attributes
+    from each ancestor.  Returns a list of (ancestor_name, [(attr, requirement), ...])."""
+    result: list[tuple[str, list[tuple[str, str]]]] = []
+    own_attrs = set((class_data.get("attributes") or {}).keys())
+    extends = class_data.get("extends")
+    while extends:
+        parent = all_classes.get(extends) or intermediates.get(extends)
+        if parent is None:
+            break
+        parent_caption = parent.get("caption") or extends
+        parent_attrs = parent.get("attributes") or {}
+        important: list[tuple[str, str]] = []
+        for attr_name, attr_data in parent_attrs.items():
+            if attr_name.startswith("$") or attr_name in own_attrs:
+                continue
+            resolved = resolve_attribute(attr_name, attr_data, dictionary)
+            requirement = resolved.get("requirement", "")
+            if requirement in ("required", "recommended"):
+                important.append((attr_name, requirement))
+                own_attrs.add(attr_name)
+        if important:
+            important.sort(key=lambda pair: (0 if pair[1] == "required" else 1, pair[0]))
+            result.append((parent_caption, important))
+        extends = parent.get("extends")
+    return result
+
+
 def render_entity_page(
     *,
     title: str,
@@ -321,6 +354,7 @@ def render_entity_page(
     attributes: list[tuple[str, dict]],
     constraints: dict | None = None,
     associations: dict | None = None,
+    inherited_attributes: list[tuple[str, list[tuple[str, str]]]] | None = None,
 ) -> str:
     lines = [f"# {title}", ""]
     if description:
@@ -336,6 +370,13 @@ def render_entity_page(
         rendered = format_associations(associations)
         if rendered:
             lines.extend(["## Associations", "", rendered, ""])
+    if inherited_attributes:
+        lines.extend(["## Inherited attributes", ""])
+        for ancestor_name, attrs in inherited_attributes:
+            lines.append(f"**From {ancestor_name}:**")
+            for attr_name, requirement in attrs:
+                lines.append(f"- `{attr_name}` ({requirement})")
+            lines.append("")
     if attributes:
         lines.extend(["## Attributes", ""])
         for attr_name, attr_data in attributes:
@@ -708,6 +749,9 @@ def main() -> None:
                     ],
                     constraints=constraints,
                     associations=associations,
+                    inherited_attributes=collect_inherited_attributes(
+                        class_data, data["classes"], data["intermediates"], data["dictionary"],
+                    ),
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (class_data.get("attributes") or {}).items()
