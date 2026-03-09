@@ -29,7 +29,7 @@ The request header that identifies the original [media type](https://www.iana.or
 
 ### `http_headers`
 
-- **Type**: `http_header`
+- **Type**: [`http_header`](http_header.md)
 - **Requirement**: recommended
 
 Additional HTTP headers of an HTTP request or response.

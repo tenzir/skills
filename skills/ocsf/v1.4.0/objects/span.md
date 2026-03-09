@@ -43,7 +43,7 @@ The ID of the parent span for this span object, establishing its relationship in
 
 ### `service`
 
-- **Type**: `service`
+- **Type**: [`service`](service.md)
 - **Requirement**: optional
 
 Identifies the service or component that generates the span, helping trace its path through the distributed system.

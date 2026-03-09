@@ -15,7 +15,7 @@ The graph description - provides additional details about the graph's purpose an
 
 ### `edges`
 
-- **Type**: `edge`
+- **Type**: [`edge`](edge.md)
 - **Requirement**: optional
 
 The edges/connections between nodes in the graph - contains the collection of `edge` objects defining relationships between nodes.
@@ -35,7 +35,7 @@ The graph name - a human readable identifier for the graph.
 
 ### `nodes`
 
-- **Type**: `node`
+- **Type**: [`node`](node.md)
 - **Requirement**: required
 
 The nodes/vertices of the graph - contains the collection of `node` objects that make up the graph.

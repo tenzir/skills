@@ -2,15 +2,28 @@
 
 Operating System Patch State reports the installation of an OS patch to a device and any associated knowledgebase articles.
 
-- **UID**: `4`
+- **Class UID**: `5004`
 - **Category**: Discovery
-- **Extends**: `discovery`
+- **Extends**: [Discovery (discovery)](discovery.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Constraints
+
+- **At least one of**: `device.os.sp_name`, `device.os.sp_ver`, `device.os.version`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -18,7 +31,7 @@ An addressable device, computer system or host.
 
 ### `kb_article_list`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](../objects/kb_article.md)
 - **Requirement**: recommended
 - **Group**: primary
 

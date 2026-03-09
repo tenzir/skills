@@ -22,7 +22,7 @@ The installation path of the affected package.
 
 ### `remediation`
 
-- **Type**: `remediation`
+- **Type**: [`remediation`](remediation.md)
 - **Requirement**: optional
 
 Describes the recommended remediation steps to address identified issue(s).

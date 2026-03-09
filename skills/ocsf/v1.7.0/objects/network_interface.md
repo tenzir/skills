@@ -42,7 +42,7 @@ The namespace is useful in merger or acquisition situations. For example, when s
 
 ### `open_ports`
 
-- **Type**: `port_info`
+- **Type**: [`port_info`](port_info.md)
 - **Requirement**: optional
 
 The list of open ports on a network interface, including port numbers and associated protocol information.

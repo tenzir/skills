@@ -2,15 +2,33 @@
 
 Device Config State Change events report state changes that impact the security of the device.
 
-- **UID**: `19`
+- **Class UID**: `5019`
 - **Category**: Discovery
-- **Extends**: `discovery`
+- **Extends**: [Discovery (discovery)](discovery.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -18,7 +36,7 @@ The actor object describes details about the user/role/process that was the sour
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -51,7 +69,7 @@ The previous security level of the entity
 
 ### `prev_security_states`
 
-- **Type**: `security_state`
+- **Type**: [`security_state`](../objects/security_state.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -84,7 +102,7 @@ The current security level of the entity
 
 ### `security_states`
 
-- **Type**: `security_state`
+- **Type**: [`security_state`](../objects/security_state.md)
 - **Requirement**: recommended
 - **Group**: primary
 

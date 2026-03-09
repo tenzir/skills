@@ -2,15 +2,33 @@
 
 Folder Query events report information about folders that are present on the system.
 
-- **UID**: `8`
+- **Class UID**: `5008`
 - **Category**: Discovery
-- **Extends**: `discovery_result`
+- **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Discovery Result:**
+- `query_result_id` (required)
+- `query_info` (recommended)
+- `query_result` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
 ### `folder`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: required
 - **Group**: primary
 

@@ -46,14 +46,14 @@ The normalized caption of the `ai_role_id`.
 
 ### `application`
 
-- **Type**: `application`
+- **Type**: [`application`](application.md)
 - **Requirement**: recommended
 
 The initiating client application. In AI systems, this represents the client-side application or framework that initiates requests (e.g., LangChain application, web browser, mobile app, SDK implementation).
 
 ### `service`
 
-- **Type**: `service`
+- **Type**: [`service`](service.md)
 - **Requirement**: recommended
 
 The server or service handling the request. In AI systems, this represents the AI service, API endpoint, or agent that processes and responds to requests (e.g., OpenAI API service, Claude API service, internal AI model service).

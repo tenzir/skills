@@ -6,11 +6,9 @@ The databucket object is a basic container that holds data, typically organized 
 
 ## Attributes
 
-### `$include`
-
 ### `agent_list`
 
-- **Type**: `agent`
+- **Type**: [`agent`](agent.md)
 - **Requirement**: optional
 
 A list of `agent` objects associated with a device, endpoint, or resource.
@@ -45,28 +43,28 @@ The description of the databucket.
 
 ### `encryption_details`
 
-- **Type**: `encryption_details`
+- **Type**: [`encryption_details`](encryption_details.md)
 - **Requirement**: optional
 
 The encryption details of the databucket. Should be populated if the databucket is encrypted.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: optional
 
 Details about the file/object within a databucket.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The name of the related resource group.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The group names to which the databucket belongs.
@@ -128,7 +126,7 @@ The namespace is useful when similar entities exist that you need to keep separa
 
 ### `owner`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The identity of the service or user account that owns the databucket.
@@ -142,7 +140,7 @@ The cloud region of the databucket.
 
 ### `resource_relationship`
 
-- **Type**: `graph`
+- **Type**: [`graph`](graph.md)
 - **Requirement**: optional
 
 A graph representation showing how this databucket relates to and interacts with other entities in the environment. This can include parent/child relationships, dependencies, or other connections.

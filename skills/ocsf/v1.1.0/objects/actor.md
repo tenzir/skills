@@ -8,14 +8,14 @@ The Actor object contains details about the user, role, or process that initiate
 
 ### `authorizations`
 
-- **Type**: `authorization`
+- **Type**: [`authorization`](authorization.md)
 - **Requirement**: optional
 
 Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
 
 ### `idp`
 
-- **Type**: `idp`
+- **Type**: [`idp`](idp.md)
 - **Requirement**: optional
 
 This object describes details about the Identity Provider used.
@@ -29,21 +29,21 @@ The name of the service that invoked the activity as described in the event.
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](process.md)
 - **Requirement**: recommended
 
 The process that initiated the activity.
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](session.md)
 - **Requirement**: optional
 
 The user session from which the activity was initiated.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The user that initiated the activity or the user context from which the activity was initiated.

@@ -22,7 +22,7 @@ The criticality of the resource as defined by the event source.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The name of the related resource group.
@@ -36,7 +36,7 @@ The namespace is useful when similar entities exist that you need to keep separa
 
 ### `owner`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The identity of the service or user account that owns the resource.

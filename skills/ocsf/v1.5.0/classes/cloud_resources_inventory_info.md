@@ -2,15 +2,37 @@
 
 Cloud Resources Inventory Info events report cloud asset inventory data. This data can be either logged or proactively collected. For example, use this event class when creating an inventory of cloud resource information from a Configuration Management Database (CMDB), Cyber Asset Attack Surface Management (CAASM), direct public cloud service provider APIs, Software-as-a-Service (SaaS) APIs, or otherwise.
 
-- **UID**: `23`
+- **Class UID**: `5023`
 - **Category**: Discovery
-- **Extends**: `discovery`
+- **Extends**: [Discovery (discovery)](discovery.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `cloud`, `container`, `database`, `databucket`, `idp`, `resources`, `table`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `cloud`
 
-- **Type**: `cloud`
+- **Type**: [`cloud`](../objects/cloud.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -18,7 +40,7 @@ Cloud service provider or SaaS platform metadata about the cloud resource(s) tha
 
 ### `container`
 
-- **Type**: `container`
+- **Type**: [`container`](../objects/container.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -26,7 +48,7 @@ A cloud-based container image or running container discovered by an inventory pr
 
 ### `database`
 
-- **Type**: `database`
+- **Type**: [`database`](../objects/database.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -34,7 +56,7 @@ A cloud-based database discovered by an inventory process.
 
 ### `databucket`
 
-- **Type**: `databucket`
+- **Type**: [`databucket`](../objects/databucket.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -42,7 +64,7 @@ A cloud-based data bucket or other object storage discovered by an inventory pro
 
 ### `idp`
 
-- **Type**: `idp`
+- **Type**: [`idp`](../objects/idp.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -58,7 +80,7 @@ The cloud region where the resource is located, e.g., `us-isof-south-1`, `eastus
 
 ### `resources`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -66,7 +88,7 @@ The cloud resource(s) that are being discovered by an inventory process. Use thi
 
 ### `table`
 
-- **Type**: `table`
+- **Type**: [`table`](../objects/table.md)
 - **Requirement**: recommended
 - **Group**: primary
 

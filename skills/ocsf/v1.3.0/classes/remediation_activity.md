@@ -2,13 +2,23 @@
 
 Remediation Activity events report on attempts at remediating a compromised device or computer network. It follows the MITRE countermeasures defined by the D3FEND™ [Matrix](https://d3fend.mitre.org/).
 
-- **UID**: `1`
+- **Class UID**: `7001`
 - **Category**: Remediation
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `cloud`, `datetime`, `osint`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -34,7 +44,7 @@ The unique identifier of the remediation command that pertains to this event.
 
 ### `countermeasures`
 
-- **Type**: `d3fend`
+- **Type**: [`d3fend`](../objects/d3fend.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -42,7 +52,7 @@ The MITRE DEFEND™ Matrix Countermeasures associated with a remediation.
 
 ### `remediation`
 
-- **Type**: `remediation`
+- **Type**: [`remediation`](../objects/remediation.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -50,7 +60,7 @@ Describes the recommended remediation steps to address identified issue(s).
 
 ### `scan`
 
-- **Type**: `scan`
+- **Type**: [`scan`](../objects/scan.md)
 - **Requirement**: optional
 - **Group**: context
 

@@ -8,7 +8,7 @@ The Resource Details object describes details about resources that were affected
 
 ### `agent_list`
 
-- **Type**: `agent`
+- **Type**: [`agent`](agent.md)
 - **Requirement**: optional
 
 A list of `agent` objects associated with a device, endpoint, or resource.
@@ -29,7 +29,7 @@ The criticality of the resource as defined by the event source.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The name of the related resource group.
@@ -65,7 +65,7 @@ The namespace is useful when similar entities exist that you need to keep separa
 
 ### `owner`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The identity of the service or user account that owns the resource.

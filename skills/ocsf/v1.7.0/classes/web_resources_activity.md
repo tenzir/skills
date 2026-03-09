@@ -2,13 +2,29 @@
 
 Web Resources Activity events describe actions executed on a set of Web Resources.
 
-- **UID**: `1`
+- **Class UID**: `6001`
 - **Category**: Application Activity
-- **Extends**: `application`
+- **Extends**: [Application Activity (application)](application.md)
+- **Profiles**: `network_proxy`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -30,7 +46,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -38,7 +54,7 @@ Details about server providing the web resources.
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: recommended
 - **Group**: context
 
@@ -46,7 +62,7 @@ Details about the underlying HTTP request.
 
 ### `http_response`
 
-- **Type**: `http_response`
+- **Type**: [`http_response`](../objects/http_response.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -54,7 +70,7 @@ Details about the HTTP response, if available.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -62,7 +78,7 @@ Details about the endpoint from which the request originated.
 
 ### `tls`
 
-- **Type**: `tls`
+- **Type**: [`tls`](../objects/tls.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -70,7 +86,7 @@ The Transport Layer Security (TLS) attributes, if available.
 
 ### `web_resources`
 
-- **Type**: `web_resource`
+- **Type**: [`web_resource`](../objects/web_resource.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -78,7 +94,7 @@ Describes details about web resources that were affected by an activity/event.
 
 ### `web_resources_result`
 
-- **Type**: `web_resource`
+- **Type**: [`web_resource`](../objects/web_resource.md)
 - **Requirement**: recommended
 - **Group**: primary
 

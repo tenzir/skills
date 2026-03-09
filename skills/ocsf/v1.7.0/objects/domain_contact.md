@@ -15,7 +15,7 @@ The user's primary email address.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: recommended
 
 Location details for the contract such as the city, state/province, country, etc.

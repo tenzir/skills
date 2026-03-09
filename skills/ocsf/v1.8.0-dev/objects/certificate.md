@@ -22,7 +22,7 @@ The expiration time of the certificate.
 
 ### `fingerprints`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 The fingerprint list of the certificate.
@@ -43,7 +43,7 @@ The certificate issuer distinguished name.
 
 ### `sans`
 
-- **Type**: `san`
+- **Type**: [`san`](san.md)
 - **Requirement**: optional
 
 The list of subject alternative names that are secured by a specific certificate.

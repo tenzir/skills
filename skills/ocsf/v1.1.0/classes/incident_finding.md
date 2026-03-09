@@ -2,9 +2,21 @@
 
 An Incident Finding reports the creation, update, or closure of security incidents as a result of detections and/or analytics.
 
-- **UID**: `5`
+- **Class UID**: `2005`
 - **Category**: Findings
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `cloud`, `datetime`
+
+## Constraints
+
+- **At least one of**: `assignee`, `assignee_group`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
 
 ## Attributes
 
@@ -31,7 +43,7 @@ The Incident activity name, as defined by the `activity_id`.
 
 ### `assignee`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -39,7 +51,7 @@ The details of the user assigned to an Incident.
 
 ### `assignee_group`
 
-- **Type**: `group`
+- **Type**: [`group`](../objects/group.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -47,7 +59,7 @@ The details of the group assigned to an Incident.
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -110,7 +122,7 @@ The time of the most recent event included in the incident.
 
 ### `finding_info_list`
 
-- **Type**: `finding_info`
+- **Type**: [`finding_info`](../objects/finding_info.md)
 - **Requirement**: required
 - **Group**: primary
 

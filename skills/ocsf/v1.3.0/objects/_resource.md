@@ -6,8 +6,6 @@ The Resource object contains attributes that provide information about a particu
 
 ## Attributes
 
-### `$include`
-
 ### `data`
 
 - **Type**: `json_t`

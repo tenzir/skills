@@ -2,13 +2,38 @@
 
 DHCP Activity events report MAC to IP assignment via DHCP from a client or server.
 
-- **UID**: `4`
+- **Class UID**: `4004`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `network_proxy`, `load_balancer`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `dst_endpoint`, `src_endpoint`
+
+## Inherited attributes
+
+**From Network:**
+- `connection_info` (recommended)
+- `proxy` (recommended)
+- `traffic` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -32,7 +57,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -56,7 +81,7 @@ This represents the length of the DHCP lease in seconds. This is present in DHCP
 
 ### `relay`
 
-- **Type**: `network_interface`
+- **Type**: [`network_interface`](../objects/network_interface.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -64,7 +89,7 @@ The network relay that is associated with the event.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 

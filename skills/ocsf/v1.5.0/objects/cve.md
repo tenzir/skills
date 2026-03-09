@@ -15,14 +15,14 @@ The Record Creation Date identifies when the CVE ID was issued to a CVE Numberin
 
 ### `cvss`
 
-- **Type**: `cvss`
+- **Type**: [`cvss`](cvss.md)
 - **Requirement**: recommended
 
 The CVSS object details Common Vulnerability Scoring System ([CVSS](https://www.first.org/cvss/)) scores from the advisory that are related to the vulnerability.
 
 ### `cwe`
 
-- **Type**: `cwe`
+- **Type**: [`cwe`](cwe.md)
 - **Requirement**: optional
 
 The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack. The CWE object is based on the [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) catalog.
@@ -50,7 +50,7 @@ A brief description of the CVE Record.
 
 ### `epss`
 
-- **Type**: `epss`
+- **Type**: [`epss`](epss.md)
 - **Requirement**: optional
 
 The Exploit Prediction Scoring System (EPSS) object describes the estimated probability a vulnerability will be exploited. EPSS is a community-driven effort to combine descriptive information about vulnerabilities (CVEs) with evidence of actual exploitation in-the-wild. ([EPSS](https://www.first.org/epss/)).
@@ -64,7 +64,7 @@ The Record Modified Date identifies when the CVE record was last updated.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 The product where the vulnerability was discovered.
@@ -78,7 +78,7 @@ A list of reference URLs with additional information about the CVE Record.
 
 ### `related_cwes`
 
-- **Type**: `cwe`
+- **Type**: [`cwe`](cwe.md)
 - **Requirement**: optional
 
 Describes the Common Weakness Enumeration [(CWE)](https://cwe.mitre.org/) details related to the CVE Record.

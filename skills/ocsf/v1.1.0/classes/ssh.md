@@ -2,13 +2,25 @@
 
 SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
 
-- **UID**: `7`
+- **Class UID**: `4007`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Network:**
+- `dst_endpoint` (required)
+- `src_endpoint` (required)
+- `connection_info` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `auth_type`
 
@@ -40,7 +52,7 @@ The normalized identifier of the SSH authentication type.
 
 ### `client_hassh`
 
-- **Type**: `hassh`
+- **Type**: [`hassh`](../objects/hassh.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -56,7 +68,7 @@ The Secure Shell Protocol version.
 
 ### `server_hassh`
 
-- **Type**: `hassh`
+- **Type**: [`hassh`](../objects/hassh.md)
 - **Requirement**: recommended
 - **Group**: primary
 

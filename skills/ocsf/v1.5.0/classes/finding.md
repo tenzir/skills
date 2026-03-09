@@ -3,11 +3,25 @@
 The Finding event is a generic event that defines a set of attributes available in the Findings category.
 
 - **Category**: Findings
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `incident`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -71,7 +85,7 @@ The confidence score as reported by the event source.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -88,7 +102,7 @@ The time of the most recent event included in the finding.
 
 ### `finding_info`
 
-- **Type**: `finding_info`
+- **Type**: [`finding_info`](../objects/finding_info.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -128,7 +142,7 @@ The normalized status identifier of the Finding, set by the consumer.
 
 ### `vendor_attributes`
 
-- **Type**: `vendor_attributes`
+- **Type**: [`vendor_attributes`](../objects/vendor_attributes.md)
 - **Requirement**: optional
 - **Group**: context
 

@@ -15,7 +15,7 @@ The error indication returned from the function. This may differ from the return
 
 ### `parameters`
 
-- **Type**: `parameter`
+- **Type**: [`parameter`](parameter.md)
 - **Requirement**: optional
 
 The parameters passed into a function invocation.

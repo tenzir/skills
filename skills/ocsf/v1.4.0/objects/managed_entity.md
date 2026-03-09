@@ -15,28 +15,28 @@ The managed entity content as a JSON object.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](device.md)
 - **Requirement**: recommended
 
 An addressable device, computer system or host.
 
 ### `email`
 
-- **Type**: `email`
+- **Type**: [`email`](email.md)
 - **Requirement**: recommended
 
 The email object.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: recommended
 
 The group object associated with an entity such as user, policy, or rule.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: optional
 
 The detailed geographical location usually associated with an IP address.
@@ -49,14 +49,14 @@ The name of the managed entity.
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: recommended
 
 Organization and org unit relevant to the event or object.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: recommended
 
 Describes details of a managed policy.
@@ -93,7 +93,7 @@ The identifier of the managed entity.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The user that pertains to the event or object.

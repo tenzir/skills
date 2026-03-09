@@ -2,9 +2,27 @@
 
 Email Activity events report SMTP protocol and email activities including those with embedded URLs and files. See the `Email` object for details.
 
-- **UID**: `9`
+- **Class UID**: `4009`
 - **Category**: Network Activity
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -77,7 +95,7 @@ Email scanned at an internet gateway might be characterized as inbound to the or
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -85,7 +103,7 @@ The responder (server) receiving the email.
 
 ### `email`
 
-- **Type**: `email`
+- **Type**: [`email`](../objects/email.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -93,7 +111,7 @@ The email object.
 
 ### `email_auth`
 
-- **Type**: `email_auth`
+- **Type**: [`email_auth`](../objects/email_auth.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -133,7 +151,7 @@ The value of the SMTP HELO or EHLO command sent by the initiator (client).
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 

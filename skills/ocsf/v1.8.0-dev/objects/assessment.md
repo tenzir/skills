@@ -36,7 +36,7 @@ The name of the configuration or signal being assessed. For example: `Kernel Mod
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: optional
 
 The details of any policy associated with an assessment.

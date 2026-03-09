@@ -15,21 +15,21 @@ The time when the SBOM was created.
 
 ### `package`
 
-- **Type**: `package`
+- **Type**: [`package`](package.md)
 - **Requirement**: required
 
 The device software that is being discovered by an inventory process.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: recommended
 
 The product that generated the SBOM e.g. cdxgen or Syft.
 
 ### `software_components`
 
-- **Type**: `software_component`
+- **Type**: [`software_component`](software_component.md)
 - **Requirement**: required
 
 The list of software components used in the software package.

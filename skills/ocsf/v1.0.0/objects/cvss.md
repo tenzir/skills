@@ -28,7 +28,7 @@ The CVSS depth represents a depth of the equation used to calculate CVSS score.
 
 ### `metrics`
 
-- **Type**: `metric`
+- **Type**: [`metric`](metric.md)
 - **Requirement**: optional
 
 The Common Vulnerability Scoring System metrics.This attribute contains information on the CVE's impact. If the CVE has been analyzed, this attribute will contain any CVSSv2 or CVSSv3 information associated with the vulnerability. For example:  `{{"Access Vector", "Network"}, {"Access Complexity", "Low"}, ...}`.

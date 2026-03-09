@@ -2,15 +2,15 @@
 
 SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
 
-- **UID**: `7`
+- **Class UID**: `4007`
 - **Category**: Network Activity
-- **Extends**: `network_activity`
+- **Extends**: [network_activity (network_activity)](network_activity.md)
 
 ## Attributes
 
 ### `client_hassh`
 
-- **Type**: `hassh`
+- **Type**: [`hassh`](../objects/hassh.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -26,7 +26,7 @@ The Secure Shell Protocol version.
 
 ### `server_hassh`
 
-- **Type**: `hassh`
+- **Type**: [`hassh`](../objects/hassh.md)
 - **Requirement**: recommended
 - **Group**: primary
 

@@ -6,8 +6,6 @@ The File object represents the metadata associated with a file stored in a compu
 
 ## Attributes
 
-### `$include`
-
 ### `accessed_time`
 
 - **Type**: `timestamp_t`
@@ -17,7 +15,7 @@ The time when the file was last accessed.
 
 ### `accessor`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The name of the user who last accessed the object.
@@ -71,7 +69,7 @@ The time when the file was created.
 
 ### `creator`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user that created the file.
@@ -85,7 +83,7 @@ The description of the file, as returned by file system. For example: the descri
 
 ### `hashes`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 An array of hash attributes.
@@ -113,7 +111,7 @@ The time when the file was last modified.
 
 ### `modifier`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user that last modified the file.
@@ -127,7 +125,7 @@ The name of the file. For example: `svchost.exe`
 
 ### `owner`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user that owns the file/object.
@@ -148,7 +146,7 @@ The full path to the file. For example: `c:\windows\system32\svchost.exe`.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 The product that created or installed the file.
@@ -162,7 +160,7 @@ The object security descriptor.
 
 ### `signature`
 
-- **Type**: `digital_signature`
+- **Type**: [`digital_signature`](digital_signature.md)
 - **Requirement**: optional
 
 The digital signature of the file.
@@ -217,7 +215,7 @@ The file version. For example: `8.0.7601.17514`.
 
 ### `xattributes`
 
-- **Type**: `object`
+- **Type**: [`object`](object.md)
 - **Requirement**: optional
 
 An unordered collection of zero or more name/value pairs where each pair represents a file or folder extended attribute.For example: Windows alternate data stream attributes (ADS stream name, ADS size, etc.), user-defined or application-defined attributes, ACL, owner, primary group, etc. Examples from DCS:

@@ -77,7 +77,7 @@ A text, binary, file name, or datastore that matched against a detection rule.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: recommended
 
 Details about the policy that triggered the finding.

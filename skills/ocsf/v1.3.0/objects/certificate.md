@@ -22,7 +22,7 @@ The expiration time of the certificate.
 
 ### `fingerprints`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: required
 
 The fingerprint list of the certificate.

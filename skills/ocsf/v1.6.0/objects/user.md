@@ -8,7 +8,7 @@ The User object describes the characteristics of a user/person or a security pri
 
 ### `account`
 
-- **Type**: `account`
+- **Type**: [`account`](account.md)
 - **Requirement**: optional
 
 The user's account or the account associated with the user.
@@ -58,7 +58,7 @@ The full name of the user, as reported by the product.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The administrative groups to which the user belongs.
@@ -72,7 +72,7 @@ The user has a multi-factor or secondary-factor device assigned.
 
 ### `ldap_person`
 
-- **Type**: `ldap_person`
+- **Type**: [`ldap_person`](ldap_person.md)
 - **Requirement**: optional
 
 The additional LDAP attributes that describe a person.
@@ -86,7 +86,7 @@ The username. For example, `janedoe1`.
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: optional
 
 Organization and org unit related to the user.
@@ -100,7 +100,7 @@ The telephone number of the user.
 
 ### `programmatic_credentials`
 
-- **Type**: `programmatic_credential`
+- **Type**: [`programmatic_credential`](programmatic_credential.md)
 - **Requirement**: optional
 
 Details about the programmatic credential (API keys, access tokens, certificates, etc) associated to the user.

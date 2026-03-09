@@ -22,7 +22,7 @@ The name of the transformation or mapping.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 The product or instance used to make the transformation

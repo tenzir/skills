@@ -2,9 +2,41 @@
 
 Authentication events report authentication session activities such as user attempts a logon or logoff, successfully or otherwise.
 
-- **UID**: `2`
+- **Class UID**: `3002`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `service`, `dst_endpoint`
+
+## Associations
+
+- `actor.user` ↔ `src_endpoint`
+- `dst_endpoint` ↔ `user`
+- `src_endpoint` ↔ `actor.user`
+- `user` ↔ `dst_endpoint`
+
+## Inherited attributes
+
+**From Identity & Access Management:**
+- `actor` (recommended)
+- `src_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -26,7 +58,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `auth_factors`
 
-- **Type**: `auth_factor`
+- **Type**: [`auth_factor`](../objects/auth_factor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -67,7 +99,7 @@ The normalized identifier of the authentication protocol used to create the user
 
 ### `certificate`
 
-- **Type**: `certificate`
+- **Type**: [`certificate`](../objects/certificate.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -75,7 +107,7 @@ The certificate associated with the authentication or pre-authentication (Kerber
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -117,7 +149,7 @@ The attempted authentication is over a remote connection.
 
 ### `logon_process`
 
-- **Type**: `process`
+- **Type**: [`process`](../objects/process.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -159,7 +191,7 @@ The normalized logon type identifier.
 
 ### `service`
 
-- **Type**: `service`
+- **Type**: [`service`](../objects/service.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -167,7 +199,7 @@ The service or gateway to which the user or process is being authenticated
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](../objects/session.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -194,7 +226,7 @@ The details about the authentication request. For example, possible details for 
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

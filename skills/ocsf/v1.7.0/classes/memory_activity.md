@@ -2,9 +2,36 @@
 
 Memory Activity events report when a process has memory allocated, read/modified, or other manipulation activities - such as a buffer overflow or turning off data execution protection (DEP).
 
-- **UID**: `4`
+- **Class UID**: `1004`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Associations
+
+- `actor.user` ↔ `device`
+- `device` ↔ `actor.user`
+
+## Inherited attributes
+
+**From System Activity:**
+- `actor` (required)
+- `device` (required)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -45,7 +72,7 @@ The memory address that was access or requested.
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](../objects/process.md)
 - **Requirement**: required
 - **Group**: primary
 

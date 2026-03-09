@@ -15,14 +15,14 @@ The number of discovered entities of the specified type.
 
 ### `occurrence_details`
 
-- **Type**: `occurrence_details`
+- **Type**: [`occurrence_details`](occurrence_details.md)
 - **Requirement**: optional
 
 Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populated.
 
 ### `occurrences`
 
-- **Type**: `occurrence_details`
+- **Type**: [`occurrence_details`](occurrence_details.md)
 - **Requirement**: optional
 
 Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populated.

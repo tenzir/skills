@@ -29,7 +29,7 @@ The KB article/s related to the entity. A KB Article contains metadata that desc
 
 ### `kb_article_list`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of KB articles or patches related to an endpoint. A KB Article contains metadata that describes the patch or an update.

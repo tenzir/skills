@@ -2,13 +2,40 @@
 
 HTTP Activity events report HTTP connection and traffic information.
 
-- **UID**: `2`
+- **Class UID**: `4002`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `trace`, `network_proxy`, `load_balancer`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `http_request`, `http_response`
+
+## Inherited attributes
+
+**From Network:**
+- `connection_info` (recommended)
+- `dst_endpoint` (recommended)
+- `proxy` (recommended)
+- `src_endpoint` (recommended)
+- `traffic` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -31,7 +58,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -39,7 +66,7 @@ The file that is the target of the HTTP activity.
 
 ### `http_cookies`
 
-- **Type**: `http_cookie`
+- **Type**: [`http_cookie`](../objects/http_cookie.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -47,7 +74,7 @@ The cookies object describes details about HTTP cookies
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -55,7 +82,7 @@ The HTTP Request Object documents attributes of a request made to a web server.
 
 ### `http_response`
 
-- **Type**: `http_response`
+- **Type**: [`http_response`](../objects/http_response.md)
 - **Requirement**: recommended
 - **Group**: primary
 

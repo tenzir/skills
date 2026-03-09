@@ -15,7 +15,7 @@ The author(s) who published the software component.
 
 ### `hash`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: optional
 
 Cryptographic hash to identify the binary instance of a software component.

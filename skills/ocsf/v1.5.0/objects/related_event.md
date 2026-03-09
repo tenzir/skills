@@ -8,7 +8,7 @@ The Related Event object describes an event or another finding related to a find
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](attack.md)
 - **Requirement**: optional
 
 An array of MITRE ATT&CK® objects describing identified tactics, techniques & sub-techniques. The objects are compatible with MITRE ATLAS™ tactics, techniques & sub-techniques.
@@ -44,7 +44,7 @@ It can differ from the `created_time` timestamp, which reflects the time this fi
 
 ### `kill_chain`
 
-- **Type**: `kill_chain_phase`
+- **Type**: [`kill_chain_phase`](kill_chain_phase.md)
 - **Requirement**: optional
 
 The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html) provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
@@ -66,14 +66,14 @@ The time when the related event/finding was last modified.
 
 ### `observables`
 
-- **Type**: `observable`
+- **Type**: [`observable`](observable.md)
 - **Requirement**: optional
 
 The observables associated with the event or a finding.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 Details about the product that reported the related event/finding.
@@ -115,7 +115,7 @@ The normalized severity is a measurement the effort and expense required to mana
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated with the related event/finding.
@@ -129,7 +129,7 @@ A title or a brief phrase summarizing the related event/finding.
 
 ### `traits`
 
-- **Type**: `trait`
+- **Type**: [`trait`](trait.md)
 - **Requirement**: optional
 
 The list of key traits or characteristics extracted from the related event/finding that influenced or contributed to the overall finding's outcome.

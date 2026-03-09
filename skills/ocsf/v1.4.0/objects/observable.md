@@ -15,7 +15,7 @@ The full name of the observable attribute. The `name` is a pointer/reference to 
 
 ### `reputation`
 
-- **Type**: `reputation`
+- **Type**: [`reputation`](reputation.md)
 - **Requirement**: optional
 
 Contains the original and normalized reputation scores.

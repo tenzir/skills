@@ -2,9 +2,38 @@
 
 The Network Time Protocol (NTP) Activity events report instances of remote clients synchronizing their clocks with an NTP server, as observed on the network.
 
-- **UID**: `13`
+- **Class UID**: `4013`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `network_proxy`, `load_balancer`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `dst_endpoint`, `src_endpoint`
+
+## Inherited attributes
+
+**From Network:**
+- `connection_info` (recommended)
+- `dst_endpoint` (recommended)
+- `proxy` (recommended)
+- `src_endpoint` (recommended)
+- `traffic` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 

@@ -15,7 +15,7 @@ A numerical response status code providing details about the connection.
 
 ### `network_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](network_endpoint.md)
 - **Requirement**: recommended
 
 Provides characteristics of the network endpoint.

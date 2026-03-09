@@ -6,7 +6,7 @@ The container context for a process.
 
 ### `container`
 
-- **Type**: `container`
+- **Type**: [`container`](../objects/container.md)
 - **Requirement**: recommended
 - **Group**: context
 

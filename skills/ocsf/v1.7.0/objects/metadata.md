@@ -6,8 +6,6 @@ The Metadata object describes the metadata associated with the event.
 
 ## Attributes
 
-### `$include`
-
 ### `correlation_uid`
 
 - **Type**: `string_t`
@@ -31,14 +29,14 @@ The identifier of the original event. For example the numerical Windows Event Co
 
 ### `extension`
 
-- **Type**: `extension`
+- **Type**: [`extension`](extension.md)
 - **Requirement**: optional
 
 The schema extension used to create the event.
 
 ### `extensions`
 
-- **Type**: `extension`
+- **Type**: [`extension`](extension.md)
 - **Requirement**: optional
 
 The schema extensions used to create the event.
@@ -110,7 +108,7 @@ This attribute is distinct from the event time in that event time typically cont
 
 ### `loggers`
 
-- **Type**: `logger`
+- **Type**: [`logger`](logger.md)
 - **Requirement**: optional
 
 An array of Logger objects that describe the pipeline of devices and logging products between the event source and its eventual destination. Note, this attribute can be used when there is a complex end-to-end path of event flow and/or to track the chain of custody of the data.
@@ -145,7 +143,7 @@ The event processed time, such as an ETL operation.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: required
 
 The product that reported the event.
@@ -159,7 +157,7 @@ The list of profiles used to create the event. Profiles should be referenced by 
 
 ### `reporter`
 
-- **Type**: `reporter`
+- **Type**: [`reporter`](reporter.md)
 - **Requirement**: recommended
 
 The entity from which the event or finding was first reported.
@@ -180,7 +178,7 @@ The source of the event or finding. This can be any distinguishing name for the 
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the event.
@@ -194,7 +192,7 @@ The unique tenant identifier.
 
 ### `transformation_info_list`
 
-- **Type**: `transformation_info`
+- **Type**: [`transformation_info`](transformation_info.md)
 - **Requirement**: optional
 
 An array of transformation info that describes the mappings or transforms applied to the data.

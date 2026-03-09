@@ -2,9 +2,36 @@
 
 Network Activity events report network connection and traffic activity.
 
-- **UID**: `1`
+- **Class UID**: `4001`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `network_proxy`, `load_balancer`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `dst_endpoint`, `src_endpoint`
+
+## Inherited attributes
+
+**From Network:**
+- `connection_info` (recommended)
+- `proxy` (recommended)
+- `traffic` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -27,7 +54,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 
 The responder of the network connection. In some contexts an event source cannot correctly identify the responder. Refer to `is_src_dst_assignment_known` for certainty.
 
@@ -41,13 +68,13 @@ The responder of the network connection. In some contexts an event source cannot
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 
 The initiator of the network connection. In some contexts an event source cannot correctly identify the initiator. Refer to `is_src_dst_assignment_known` for certainty.
 
 ### `url`
 
-- **Type**: `url`
+- **Type**: [`url`](../objects/url.md)
 - **Requirement**: recommended
 - **Group**: primary
 

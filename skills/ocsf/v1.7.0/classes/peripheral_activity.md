@@ -2,9 +2,36 @@
 
 Peripheral Activity events log a system's interactions with external, connectable, and detachable hardware. These events provide visibility into the external devices connected to and used by a system.
 
-- **UID**: `10`
+- **Class UID**: `1010`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Associations
+
+- `actor.user` ↔ `device`
+- `device` ↔ `actor.user`
+
+## Inherited attributes
+
+**From System Activity:**
+- `actor` (required)
+- `device` (required)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -25,7 +52,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `peripheral_device`
 
-- **Type**: `peripheral_device`
+- **Type**: [`peripheral_device`](../objects/peripheral_device.md)
 - **Requirement**: required
 - **Group**: primary
 

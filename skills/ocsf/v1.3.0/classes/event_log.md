@@ -2,9 +2,29 @@
 
 Event Log Activity events report actions pertaining to the system's event logging service(s), such as disabling logging or clearing the log data.
 
-- **UID**: `8`
+- **Class UID**: `1008`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`, `osint`
+
+## Constraints
+
+- **At least one of**: `log_file`, `log_name`, `log_provider`, `log_type`, `log_type_id`
+
+## Associations
+
+- `device` ↔ `actor.user`
+- `actor.user` ↔ `device`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -30,7 +50,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -38,7 +58,7 @@ The actor that performed the activity.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -46,7 +66,7 @@ The device that reported the event.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -58,7 +78,7 @@ endpoint for the event log activity.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -119,7 +139,7 @@ The normalized log type identifier.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 

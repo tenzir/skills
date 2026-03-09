@@ -6,7 +6,7 @@ The attributes that describe information specific to data classification.
 
 ### `data_classification`
 
-- **Type**: `data_classification`
+- **Type**: [`data_classification`](../objects/data_classification.md)
 - **Requirement**: recommended
 - **Group**: context
 

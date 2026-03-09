@@ -6,7 +6,7 @@ The Data Classification profile adds attributes to spepcific resource objects, a
 
 ### `data_classification`
 
-- **Type**: `data_classification`
+- **Type**: [`data_classification`](../objects/data_classification.md)
 - **Requirement**: recommended
 - **Group**: context
 
@@ -14,7 +14,7 @@ The Data Classification object includes information about data classification le
 
 ### `data_classifications`
 
-- **Type**: `data_classification`
+- **Type**: [`data_classification`](../objects/data_classification.md)
 - **Requirement**: recommended
 - **Group**: context
 

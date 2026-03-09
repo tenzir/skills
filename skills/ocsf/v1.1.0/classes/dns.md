@@ -2,9 +2,21 @@
 
 DNS Activity events report DNS queries and answers as seen on the network.
 
-- **UID**: `3`
+- **Class UID**: `4003`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Network:**
+- `src_endpoint` (required)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -23,7 +35,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `answers`
 
-- **Type**: `dns_answer`
+- **Type**: [`dns_answer`](../objects/dns_answer.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -31,7 +43,7 @@ The Domain Name System (DNS) answers.
 
 ### `connection_info`
 
-- **Type**: `network_connection_info`
+- **Type**: [`network_connection_info`](../objects/network_connection_info.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -39,14 +51,14 @@ The network connection information.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 
 The network destination endpoint.
 
 ### `query`
 
-- **Type**: `dns_query`
+- **Type**: [`dns_query`](../objects/dns_query.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -113,7 +125,7 @@ The Domain Name System (DNS) response time.
 
 ### `traffic`
 
-- **Type**: `network_traffic`
+- **Type**: [`network_traffic`](../objects/network_traffic.md)
 - **Requirement**: optional
 - **Group**: context
 

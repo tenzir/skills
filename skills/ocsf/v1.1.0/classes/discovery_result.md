@@ -3,11 +3,18 @@
 Discovery Result events report the results of a discovery request.
 
 - **Category**: Discovery
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 

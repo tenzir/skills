@@ -3,11 +3,20 @@
 The Finding event is a generic event that defines a set of attributes available in the Findings category.
 
 - **Category**: Findings
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_name`
 
@@ -70,7 +79,7 @@ The confidence score as reported by the event source.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -87,7 +96,7 @@ The time of the most recent event included in the finding.
 
 ### `finding_info`
 
-- **Type**: `finding_info`
+- **Type**: [`finding_info`](../objects/finding_info.md)
 - **Requirement**: required
 - **Group**: primary
 

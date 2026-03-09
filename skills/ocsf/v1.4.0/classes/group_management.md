@@ -2,9 +2,31 @@
 
 Group Management events report management updates to a group, including updates to membership and permissions.
 
-- **UID**: `6`
+- **Class UID**: `3006`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Identity & Access Management:**
+- `actor` (recommended)
+- `src_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -26,7 +48,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](../objects/group.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -42,7 +64,7 @@ A list of privileges assigned to the group.
 
 ### `resource`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -50,7 +72,7 @@ Resource that the privileges give access to.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: recommended
 - **Group**: primary
 

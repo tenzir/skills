@@ -2,9 +2,9 @@
 
 DNS Activity events report DNS queries and answers as seen on the network.
 
-- **UID**: `3`
+- **Class UID**: `4003`
 - **Category**: Network Activity
-- **Extends**: `network_activity`
+- **Extends**: [network_activity (network_activity)](network_activity.md)
 
 ## Attributes
 
@@ -22,7 +22,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `answers`
 
-- **Type**: `dns_answer`
+- **Type**: [`dns_answer`](../objects/dns_answer.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -30,7 +30,7 @@ The Domain Name System (DNS) answers.
 
 ### `connection_info`
 
-- **Type**: `network_connection_info`
+- **Type**: [`network_connection_info`](../objects/network_connection_info.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -38,7 +38,7 @@ The network connection information.
 
 ### `proxy`
 
-- **Type**: `network_proxy`
+- **Type**: [`network_proxy`](../objects/network_proxy.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -46,7 +46,7 @@ If a proxy connection is present, the connection from the client to the proxy se
 
 ### `query`
 
-- **Type**: `dns_query`
+- **Type**: [`dns_query`](../objects/dns_query.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -113,7 +113,7 @@ The Domain Name System (DNS) response time.
 
 ### `traffic`
 
-- **Type**: `network_traffic`
+- **Type**: [`network_traffic`](../objects/network_traffic.md)
 - **Requirement**: optional
 - **Group**: context
 

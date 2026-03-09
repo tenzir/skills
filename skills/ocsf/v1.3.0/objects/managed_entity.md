@@ -45,35 +45,35 @@ The type of the Managed Entity. It is recommended to also populate the `type` at
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](device.md)
 - **Requirement**: recommended
 
 An addressable device, computer system or host.
 
 ### `email`
 
-- **Type**: `email`
+- **Type**: [`email`](email.md)
 - **Requirement**: recommended
 
 The email object.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: recommended
 
 The group object associated with an entity such as user, policy, or rule.
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: recommended
 
 Organization and org unit relevant to the event or object.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: recommended
 
 Describes details of a managed policy.
@@ -86,7 +86,7 @@ The identifier of the managed entity.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The user that pertains to the event or object.

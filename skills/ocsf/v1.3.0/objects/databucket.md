@@ -6,8 +6,6 @@ The databucket object is a basic container that holds data, typically organized 
 
 ## Attributes
 
-### `$include`
-
 ### `created_time`
 
 - **Type**: `timestamp_t`
@@ -38,14 +36,14 @@ The size of the databucket in bytes.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: optional
 
 A file within a databucket.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The group names to which the databucket belongs.

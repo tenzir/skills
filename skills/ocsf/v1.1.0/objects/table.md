@@ -36,7 +36,7 @@ The size of the data table in bytes.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The group names to which the table belongs.

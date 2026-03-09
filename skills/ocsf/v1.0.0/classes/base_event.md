@@ -2,13 +2,13 @@
 
 The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
 
-## Attributes
+- **Profiles**: `cloud`, `datetime`
 
-### `$include`
+## Attributes
 
 ### `enrichments`
 
-- **Type**: `enrichment`
+- **Type**: [`enrichment`](../objects/enrichment.md)
 - **Group**: context
 
 The additional information from an external data source, which is associated with the event. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`
@@ -23,7 +23,7 @@ The description of the event, as defined by the event source.
 
 ### `metadata`
 
-- **Type**: `metadata`
+- **Type**: [`metadata`](../objects/metadata.md)
 - **Requirement**: required
 - **Group**: context
 
@@ -31,7 +31,7 @@ The metadata associated with the event.
 
 ### `observables`
 
-- **Type**: `observable`
+- **Type**: [`observable`](../objects/observable.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -116,7 +116,7 @@ The normalized identifier of the event status.
 
 ### `unmapped`
 
-- **Type**: `object`
+- **Type**: [`object`](../objects/object.md)
 - **Group**: context
 
 The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.

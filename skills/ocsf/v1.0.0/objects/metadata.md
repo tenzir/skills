@@ -21,7 +21,7 @@ The Event ID or Code that the product uses to describe the event.
 
 ### `extension`
 
-- **Type**: `extension`
+- **Type**: [`extension`](extension.md)
 
 The schema extension used to create the event.
 
@@ -83,7 +83,7 @@ The event processed time, such as an ETL operation.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: required
 
 The product that reported the event.

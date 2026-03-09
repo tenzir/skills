@@ -17,6 +17,7 @@ The file tree follows this layout:
 
 ```
 introduction.md
+introduction/{section}.md
 faqs.md
 faqs/{slug}.md
 articles.md
@@ -65,7 +66,23 @@ articles/{slug}.md
 ### Naming conventions
 
 - `snake_case` everywhere: `process_activity`, `network_endpoint`.
-- Suffixes carry meaning: `_id`, `_uid`, `_uuid`, `_name`, `_time`, `_dt`.
+- Key suffixes:
+
+| Suffix | Meaning |
+| ------ | ------- |
+| `_id` | Enum integer identifier with a sibling string (same name minus `_id`). `0` = Unknown, `99` = Other. |
+| `_uid` | Schema-unique or external unique identifier (integer for classification attrs, string otherwise). Sibling uses `_name`. |
+| `_uuid` | Globally unique 128-bit identifier (string). No sibling. |
+| `_name` | Friendly name / caption sibling for `_uid` or `_id` attributes. |
+| `_time` | Timestamp (`timestamp_t`, milliseconds since epoch). |
+| `_dt` | Datetime (`datetime_t`, RFC 3339 string). Added by the Date/Time profile alongside `_time` attributes. |
+| `_info` / `_detail` | Object carrying supplementary information. |
+| `_process` | Reference to a Process object. |
+| `_ver` | Version string. |
+| `_list` | Array of values. |
+
+- Arrays use plural names: `answers`, `enrichments`, `attacks`.
+- When `_id` is `Other` (`99`), the sibling string **must** be populated with the source value.
 
 ## Answering principles
 

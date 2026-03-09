@@ -2,9 +2,18 @@
 
 Account Change events report when specific user account management tasks are performed, such as a user/role being created, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
 
-- **UID**: `1`
+- **Class UID**: `3001`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -29,7 +38,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: recommended
 - **Group**: context
 
@@ -37,7 +46,7 @@ The actor object describes details about the user/role/process that was the sour
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -45,7 +54,7 @@ Details about the underlying http request.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -53,7 +62,7 @@ Details about the source of the activity.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -61,7 +70,7 @@ The user that was a target of an activity.
 
 ### `user_result`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: optional
 - **Group**: primary
 

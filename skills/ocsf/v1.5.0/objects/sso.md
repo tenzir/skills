@@ -40,7 +40,7 @@ The normalized identifier of the authentication protocol used by the SSO resourc
 
 ### `certificate`
 
-- **Type**: `certificate`
+- **Type**: [`certificate`](certificate.md)
 - **Requirement**: recommended
 
 Digital Signature associated with the SSO resource, e.g., SAML X.509 certificate details.

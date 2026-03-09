@@ -8,7 +8,7 @@ The Identity Provider object contains detailed information about a provider resp
 
 ### `auth_factors`
 
-- **Type**: `auth_factor`
+- **Type**: [`auth_factor`](auth_factor.md)
 - **Requirement**: optional
 
 The Authentication Factors object describes the different types of Multi-Factor Authentication (MFA) methods and/or devices supported by the Identity Provider.
@@ -22,7 +22,7 @@ The primary domain associated with the Identity Provider.
 
 ### `fingerprint`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: optional
 
 The fingerprint of the X.509 certificate used by the Identity Provider.
@@ -57,14 +57,14 @@ The supported protocol of the Identity Provider. E.g., `SAML`, `OIDC`, or `OAuth
 
 ### `scim`
 
-- **Type**: `scim`
+- **Type**: [`scim`](scim.md)
 - **Requirement**: optional
 
 The System for Cross-domain Identity Management (SCIM) resource object provides a structured set of attributes related to SCIM protocols used for identity provisioning and management across cloud-based platforms. It standardizes user and group provisioning details, enabling identity synchronization and lifecycle management with compatible Identity Providers (IdPs) and applications. SCIM is defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643)
 
 ### `sso`
 
-- **Type**: `sso`
+- **Type**: [`sso`](sso.md)
 - **Requirement**: optional
 
 The Single Sign-On (SSO) object provides a structure for normalizing SSO attributes, configuration, and/or settings from Identity Providers.

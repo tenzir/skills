@@ -8,7 +8,7 @@ The Common Vulnerabilities and Exposures (CVE) object represents publicly disclo
 
 ### `cvss`
 
-- **Type**: `cvss`
+- **Type**: [`cvss`](cvss.md)
 - **Requirement**: recommended
 
 The CVSS object details Common Vulnerability Scoring System ([CVSS](https://www.first.org/cvss/)) scores from the advisory that are related to the vulnerability.
@@ -50,7 +50,7 @@ The Common Vulnerabilities and Exposures unique number assigned to a specific co
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 The product where the vulnerability was discovered.

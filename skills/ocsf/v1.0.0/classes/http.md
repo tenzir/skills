@@ -2,9 +2,9 @@
 
 HTTP Activity events report HTTP connection and traffic information.
 
-- **UID**: `2`
+- **Class UID**: `4002`
 - **Category**: Network Activity
-- **Extends**: `network_activity`
+- **Extends**: [network_activity (network_activity)](network_activity.md)
 
 ## Attributes
 
@@ -29,7 +29,7 @@ The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assign
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -37,7 +37,7 @@ The HTTP Request Object documents attributes of a request made to a web server.
 
 ### `http_response`
 
-- **Type**: `http_response`
+- **Type**: [`http_response`](../objects/http_response.md)
 - **Requirement**: required
 - **Group**: primary
 

@@ -8,21 +8,21 @@ The OSINT (Open Source Intelligence) object contains details related to an indic
 
 ### `answers`
 
-- **Type**: `dns_answer`
+- **Type**: [`dns_answer`](dns_answer.md)
 - **Requirement**: optional
 
 Any pertinent DNS answers information related to an indicator or OSINT analysis.
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](attack.md)
 - **Requirement**: optional
 
 MITRE ATT&CK Tactics, Techniques, and/or Procedures (TTPs) pertinent to an indicator or OSINT analysis.
 
 ### `autonomous_system`
 
-- **Type**: `autonomous_system`
+- **Type**: [`autonomous_system`](autonomous_system.md)
 - **Requirement**: optional
 
 Any pertinent autonomous system information related to an indicator or OSINT analysis.
@@ -59,63 +59,63 @@ The normalized confidence refers to the accuracy of collected information relate
 
 ### `email`
 
-- **Type**: `email`
+- **Type**: [`email`](email.md)
 - **Requirement**: optional
 
 Any email information pertinent to an indicator or OSINT analysis.
 
 ### `email_auth`
 
-- **Type**: `email_auth`
+- **Type**: [`email_auth`](email_auth.md)
 - **Requirement**: optional
 
 Any email authentication information pertinent to an indicator or OSINT analysis.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: optional
 
 Any pertinent file information related to an indicator or OSINT analysis.
 
 ### `kill_chain`
 
-- **Type**: `kill_chain_phase`
+- **Type**: [`kill_chain_phase`](kill_chain_phase.md)
 - **Requirement**: optional
 
 Lockheed Martin Kill Chain Phases pertinent to an indicator or OSINT analysis.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: optional
 
 Any pertinent geolocation information related to an indicator or OSINT analysis.
 
 ### `related_analytics`
 
-- **Type**: `analytic`
+- **Type**: [`analytic`](analytic.md)
 - **Requirement**: optional
 
 Any analytics related to an indicator or OSINT analysis.
 
 ### `reputation`
 
-- **Type**: `reputation`
+- **Type**: [`reputation`](reputation.md)
 - **Requirement**: optional
 
 Related reputational analysis from third-party engines and analysts for a given indicator or OSINT analysis.
 
 ### `script`
 
-- **Type**: `script`
+- **Type**: [`script`](script.md)
 - **Requirement**: optional
 
 Any pertinent script information related to an indicator or OSINT analysis.
 
 ### `signatures`
 
-- **Type**: `digital_signature`
+- **Type**: [`digital_signature`](digital_signature.md)
 - **Requirement**: optional
 
 Any digital signatures or hashes related to an indicator or OSINT analysis.
@@ -207,14 +207,14 @@ The vendor name of a tool which generates intelligence or provides indicators.
 
 ### `vulnerabilities`
 
-- **Type**: `vulnerability`
+- **Type**: [`vulnerability`](vulnerability.md)
 - **Requirement**: optional
 
 Any vulnerabilities related to an indicator or OSINT analysis.
 
 ### `whois`
 
-- **Type**: `whois`
+- **Type**: [`whois`](whois.md)
 - **Requirement**: optional
 
 Any pertinent WHOIS information related to an indicator or OSINT analysis.

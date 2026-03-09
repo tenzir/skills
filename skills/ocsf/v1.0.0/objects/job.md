@@ -29,7 +29,7 @@ The description of the job.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: required
 
 The file that pertains to the job.
@@ -81,7 +81,7 @@ The run state ID of the job.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user that created the job.

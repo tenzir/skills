@@ -2,13 +2,20 @@
 
 Email events report activities of emails.
 
-- **UID**: `9`
+- **Class UID**: `4009`
 - **Category**: Network Activity
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -70,7 +77,7 @@ Email scanned at an internet gateway might be characterized as inbound to the or
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -78,7 +85,7 @@ The responder (server) receiving the email.
 
 ### `email`
 
-- **Type**: `email`
+- **Type**: [`email`](../objects/email.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -86,7 +93,7 @@ The email object.
 
 ### `email_auth`
 
-- **Type**: `email_auth`
+- **Type**: [`email_auth`](../objects/email_auth.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -94,7 +101,7 @@ The SPF, DKIM and DMARC attributes of an email.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: primary
 

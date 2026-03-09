@@ -36,7 +36,7 @@ An operation number used to identify a specific remote procedure call (RPC) meth
 
 ### `rpc_interface`
 
-- **Type**: `rpc_interface`
+- **Type**: [`rpc_interface`](rpc_interface.md)
 - **Requirement**: required
 
 The RPC Interface object describes the details pertaining to the remote procedure call interface.

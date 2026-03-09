@@ -50,14 +50,14 @@ The unique identifier of the product that reported the finding.
 
 ### `related_events`
 
-- **Type**: `related_event`
+- **Type**: [`related_event`](related_event.md)
 - **Requirement**: optional
 
 Describes events and/or other findings related to the finding as identified by the security product.
 
 ### `remediation`
 
-- **Type**: `remediation`
+- **Type**: [`remediation`](remediation.md)
 - **Requirement**: optional
 
 Describes the recommended remediation steps to address identified issue(s).

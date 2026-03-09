@@ -2,15 +2,38 @@
 
 Network Connection Query events report information about active network connections.
 
-- **UID**: `12`
+- **Class UID**: `5012`
 - **Category**: Discovery
-- **Extends**: `discovery_result`
+- **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Discovery Result:**
+- `query_result_id` (required)
+- `query_info` (recommended)
+- `query_result` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `connection_info`
 
-- **Type**: `network_connection_info`
+- **Type**: [`network_connection_info`](../objects/network_connection_info.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -18,7 +41,7 @@ The network connection information.
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](../objects/process.md)
 - **Requirement**: required
 - **Group**: primary
 

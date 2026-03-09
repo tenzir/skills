@@ -29,7 +29,7 @@ The name of the analytic that generated the finding.
 
 ### `related_analytics`
 
-- **Type**: `analytic`
+- **Type**: [`analytic`](analytic.md)
 - **Requirement**: optional
 
 Describes analytics related to the analytic of a finding or detection as identified by the security product.

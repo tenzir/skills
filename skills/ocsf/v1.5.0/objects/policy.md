@@ -24,7 +24,7 @@ The description of the policy.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The policy group.

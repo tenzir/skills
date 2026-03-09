@@ -2,9 +2,35 @@
 
 Airborne Broadcast Activity events report the activity of any aircraft or unmanned system as reported and tracked by Automatic Dependent Surveillance - Broadcast (ADS-B) receivers. Based on the ADS-B standards described in [Code of Federal Regulations (CFR) Title 14 Chapter I Subchapter F Part 91](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91#91.225) and in other general Federal Aviation Administration (FAA) supplemental orders and guidance described [here](https://www.faa.gov/about/office_org/headquarters_offices/avs/offices/afx/afs/afs400/afs410/ads-b).
 
-- **UID**: `2`
+- **Class UID**: `8002`
 - **Category**: Unmanned Systems
-- **Extends**: `unmanned_systems`
+- **Extends**: [Unmanned Systems (unmanned_systems)](unmanned_systems.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `aircraft`, `unmanned_aerial_system`, `unmanned_system_operating_area`
+
+## Inherited attributes
+
+**From Unmanned Systems:**
+- `connection_info` (recommended)
+- `proxy_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -26,7 +52,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `aircraft`
 
-- **Type**: `aircraft`
+- **Type**: [`aircraft`](../objects/aircraft.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -34,7 +60,7 @@ The Aircraft object represents any aircraft or otherwise airborne asset such as 
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -58,7 +84,7 @@ Recent average RSSI (signal power) measured in dbFS. This value will always be n
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -66,7 +92,7 @@ The source network endpoint for the ADS-B system.
 
 ### `traffic`
 
-- **Type**: `network_traffic`
+- **Type**: [`network_traffic`](../objects/network_traffic.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -74,7 +100,7 @@ Traffic refers to the amount of data transmitted from a ADS-B remote monitoring 
 
 ### `unmanned_aerial_system`
 
-- **Type**: `unmanned_aerial_system`
+- **Type**: [`unmanned_aerial_system`](../objects/unmanned_aerial_system.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -82,7 +108,7 @@ The Unmanned Aerial System object describes the characteristics, Position Locati
 
 ### `unmanned_system_operating_area`
 
-- **Type**: `unmanned_system_operating_area`
+- **Type**: [`unmanned_system_operating_area`](../objects/unmanned_system_operating_area.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -90,7 +116,7 @@ The UAS Operating Area object describes details about a precise area of operatio
 
 ### `unmanned_system_operator`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

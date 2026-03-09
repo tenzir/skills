@@ -8,7 +8,7 @@ The Aircraft object represents any aircraft or otherwise airborne asset such as 
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: recommended
 
 The detailed geographical location usually associated with an IP address.

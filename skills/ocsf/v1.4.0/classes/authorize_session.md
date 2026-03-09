@@ -2,9 +2,40 @@
 
 Authorize Session events report privileges or groups assigned to a new user session, usually at login time.
 
-- **UID**: `3`
+- **Class UID**: `3003`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **Exactly one of**: `privileges`, `group`
+
+## Associations
+
+- `session` ↔ `user`
+- `user` ↔ `session`
+
+## Inherited attributes
+
+**From Identity & Access Management:**
+- `actor` (recommended)
+- `src_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -22,7 +53,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -30,7 +61,7 @@ The Endpoint for which the user session was targeted.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](../objects/group.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -46,7 +77,7 @@ The list of sensitive privileges, assigned to the new user session.
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](../objects/session.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -54,7 +85,7 @@ The user session with the assigned privileges.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

@@ -8,7 +8,7 @@ The Advisory object represents publicly disclosed cybersecurity vulnerabilities 
 
 ### `avg_timespan`
 
-- **Type**: `timespan`
+- **Type**: [`timespan`](timespan.md)
 - **Requirement**: optional
 
 The average time to patch.
@@ -80,14 +80,14 @@ The time when the Advisory record was last updated.
 
 ### `os`
 
-- **Type**: `os`
+- **Type**: [`os`](os.md)
 - **Requirement**: recommended
 
 The operating system the Advisory applies to.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 The product where the vulnerability was discovered.
@@ -101,14 +101,14 @@ A list of reference URLs with additional information about the vulnerabilities d
 
 ### `related_cves`
 
-- **Type**: `cve`
+- **Type**: [`cve`](cve.md)
 - **Requirement**: optional
 
 A list of Common Vulnerabilities and Exposures [(CVE)](https://cve.mitre.org/) identifiers related to the vulnerabilities disclosed in the Advisory.
 
 ### `related_cwes`
 
-- **Type**: `cwe`
+- **Type**: [`cwe`](cwe.md)
 - **Requirement**: optional
 
 A list of Common Weakness Enumeration [(CWE)](https://cwe.mitre.org/) identifiers related to the vulnerabilities disclosed in the Advisory.

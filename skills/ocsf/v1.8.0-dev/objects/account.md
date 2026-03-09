@@ -22,7 +22,7 @@ The name of the account (e.g.  `GCP Project name` ,  `Linux Account name`  or  `
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the account.
@@ -71,3 +71,17 @@ The normalized account type identifier.
 - **Observable**: 35
 
 The unique identifier of the account (e.g.  `AWS Account ID` ,  `OCID` ,  `GCP Project ID` ,  `Azure Subscription ID` ,  `Google Workspace Customer ID` , or  `M365 Tenant UID`).
+
+### `is_disabled`
+
+- **Type**: `boolean_t`
+- **Requirement**: optional
+
+Indicates if the account is disabled.
+
+### `is_locked`
+
+- **Type**: `boolean_t`
+- **Requirement**: optional
+
+Indicates if the account is locked. For example, due to the amount of failed logins.

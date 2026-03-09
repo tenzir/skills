@@ -35,7 +35,7 @@ The image tag. For example: `1.11-alpine`.
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the image.

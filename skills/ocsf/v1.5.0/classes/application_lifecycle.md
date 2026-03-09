@@ -2,9 +2,27 @@
 
 Application Lifecycle events report installation, removal, start, stop of an application or service.
 
-- **UID**: `2`
+- **Class UID**: `6002`
 - **Category**: Application Activity
-- **Extends**: `application`
+- **Extends**: [Application Activity (application)](application.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -29,7 +47,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `app`
 
-- **Type**: `product`
+- **Type**: [`product`](../objects/product.md)
 - **Requirement**: required
 - **Group**: primary
 

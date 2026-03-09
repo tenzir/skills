@@ -2,9 +2,31 @@
 
 Entity Management events report activity by a managed client, a micro service, or a user at a management console. The activity can be a create, read, update, and delete operation on a managed entity.
 
-- **UID**: `4`
+- **Class UID**: `3004`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Identity & Access Management:**
+- `actor` (recommended)
+- `src_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -57,7 +79,7 @@ The user provided comment about why the entity was changed.
 
 ### `entity`
 
-- **Type**: `managed_entity`
+- **Type**: [`managed_entity`](../objects/managed_entity.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -65,7 +87,7 @@ The managed entity that is being acted upon.
 
 ### `entity_result`
 
-- **Type**: `managed_entity`
+- **Type**: [`managed_entity`](../objects/managed_entity.md)
 - **Requirement**: recommended
 - **Group**: primary
 

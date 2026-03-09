@@ -2,9 +2,31 @@
 
 User Access Management events report management updates to a user's privileges.
 
-- **UID**: `5`
+- **Class UID**: `3005`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Identity & Access Management:**
+- `actor` (recommended)
+- `src_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -30,7 +52,7 @@ List of privileges assigned to a user.
 
 ### `resource`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -38,7 +60,7 @@ Resource that the privileges give access to.
 
 ### `resources`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -46,7 +68,7 @@ Resources that the privileges give access to.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

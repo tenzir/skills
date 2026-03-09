@@ -2,15 +2,28 @@
 
 Software Inventory Info events report device software inventory data that is either logged or proactively collected. For example, when collecting device information from a CMDB or running a network sweep of connected devices.
 
-- **UID**: `20`
+- **Class UID**: `5020`
 - **Category**: Discovery
-- **Extends**: `discovery`
+- **Extends**: [Discovery (discovery)](discovery.md)
+- **Profiles**: `host`, `cloud`, `datetime`, `osint`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -18,7 +31,7 @@ The actor object describes details about the user/role/process that was the sour
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -26,7 +39,7 @@ The device that is being discovered by an inventory process.
 
 ### `package`
 
-- **Type**: `package`
+- **Type**: [`package`](../objects/package.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -34,7 +47,7 @@ The device software that is being discovered by an inventory process.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](../objects/product.md)
 - **Requirement**: optional
 - **Group**: context
 

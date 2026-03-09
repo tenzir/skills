@@ -2,15 +2,28 @@
 
 User Inventory Info events report user inventory data that is either logged or proactively collected. For example, when collecting user information from Active Directory entries.
 
-- **UID**: `3`
+- **Class UID**: `5003`
 - **Category**: Discovery
-- **Extends**: `discovery`
+- **Extends**: [Discovery (discovery)](discovery.md)
+- **Profiles**: `cloud`, `datetime`, `osint`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -18,7 +31,7 @@ The actor describes the process that was the source of the inventory activity. I
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

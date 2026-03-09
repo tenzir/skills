@@ -2,11 +2,26 @@
 
 The attributes that identify security controls such as malware or policy violations.
 
+## Applies to
+
+- Email Activity
+- Email File Activity
+- Email URL Activity
+- File System Activity
+- Kernel Activity
+- Kernel Extension Activity
+- Memory Activity
+- Module Activity
+- Network Activity
+- Process Activity
+- Scheduled Job Activity
+- System Activity
+
 ## Attributes
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: recommended
 
 An array of attacks associated with an event.
@@ -51,7 +66,7 @@ When security issues, such as malware or policy violations, are detected and pos
 
 ### `malware`
 
-- **Type**: `malware`
+- **Type**: [`malware`](../objects/malware.md)
 - **Requirement**: optional
 
 The list of malware identified by a finding.

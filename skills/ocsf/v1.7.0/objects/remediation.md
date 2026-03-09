@@ -8,7 +8,7 @@ The Remediation object describes the recommended remediation steps to address id
 
 ### `cis_controls`
 
-- **Type**: `cis_control`
+- **Type**: [`cis_control`](cis_control.md)
 - **Requirement**: optional
 
 An array of Center for Internet Security (CIS) Controls that can be optionally mapped to provide additional remediation details.
@@ -22,7 +22,7 @@ The description of the remediation strategy.
 
 ### `kb_article_list`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of KB articles or patches related to an endpoint. A KB Article contains metadata that describes the patch or an update.

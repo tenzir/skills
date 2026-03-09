@@ -2,9 +2,22 @@
 
 Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
 
-- **UID**: `5`
+- **Class UID**: `6005`
 - **Category**: Application Activity
-- **Extends**: `application`
+- **Extends**: [Application Activity (application)](application.md)
+- **Profiles**: `cloud`, `datetime`
+
+## Constraints
+
+- **At least one of**: `database`, `databucket`, `table`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -27,7 +40,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `database`
 
-- **Type**: `database`
+- **Type**: [`database`](../objects/database.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -35,7 +48,7 @@ The database object is used for databases which are typically datastore services
 
 ### `databucket`
 
-- **Type**: `databucket`
+- **Type**: [`databucket`](../objects/databucket.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -43,7 +56,7 @@ The data bucket object is a basic container that holds data, typically organized
 
 ### `table`
 
-- **Type**: `table`
+- **Type**: [`table`](../objects/table.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -74,7 +87,7 @@ The normalized datastore resource type identifier.
 
 ### `query_info`
 
-- **Type**: `query_info`
+- **Type**: [`query_info`](../objects/query_info.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -82,7 +95,7 @@ The query info object holds information related to data access within a datastor
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -90,7 +103,7 @@ Details about the endpoint hosting the datastore application or service.
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -98,7 +111,7 @@ Details about the underlying http request.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -106,7 +119,7 @@ The actor object describes details about the user/role/process that was the sour
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: required
 - **Group**: primary
 

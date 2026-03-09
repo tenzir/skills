@@ -2,9 +2,27 @@
 
 Scan events report the start, completion, and results of a scan job. The scan event includes the number of items that were scanned and the number of detections that were resolved.
 
-- **UID**: `7`
+- **Class UID**: `6007`
 - **Category**: Application Activity
-- **Extends**: `application`
+- **Extends**: [Application Activity (application)](application.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -124,7 +142,7 @@ The number of trusted items.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](../objects/policy.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -132,7 +150,7 @@ The policy associated with this Scan event; required if the scan was initiated b
 
 ### `scan`
 
-- **Type**: `scan`
+- **Type**: [`scan`](../objects/scan.md)
 - **Requirement**: required
 - **Group**: primary
 

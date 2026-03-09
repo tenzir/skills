@@ -8,28 +8,28 @@ The [MITRE ATT&CK®](https://attack.mitre.org) object describes the tactic, tech
 
 ### `tactic`
 
-- **Type**: `tactic`
+- **Type**: [`tactic`](tactic.md)
 - **Requirement**: optional
 
 The Tactic object describes the tactic ID and/or name that is associated to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
 
 ### `tactics`
 
-- **Type**: `tactic`
+- **Type**: [`tactic`](tactic.md)
 - **Requirement**: optional
 
 The Tactic object describes the tactic ID and/or tactic name that are associated with the attack technique, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
 
 ### `technique`
 
-- **Type**: `technique`
+- **Type**: [`technique`](technique.md)
 - **Requirement**: optional
 
 The Technique object describes the technique ID and/or name associated to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
 
 ### `sub_technique`
 
-- **Type**: `sub_technique`
+- **Type**: [`sub_technique`](sub_technique.md)
 - **Requirement**: optional
 
 The Sub Technique object describes the sub technique ID and/or name associated to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).

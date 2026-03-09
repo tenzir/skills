@@ -22,7 +22,7 @@ The type of analysis being performed to establish baseline behavior. Common type
 
 ### `observations`
 
-- **Type**: `observation`
+- **Type**: [`observation`](observation.md)
 - **Requirement**: required
 
 Collection of actual measured values, data points and observations recorded for this baseline.

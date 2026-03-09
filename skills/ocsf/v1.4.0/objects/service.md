@@ -21,7 +21,7 @@ The name of the service.
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the service.

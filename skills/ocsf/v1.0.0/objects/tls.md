@@ -15,7 +15,7 @@ The integer value of TLS alert if present. The alerts are defined in the TLS spe
 
 ### `certificate`
 
-- **Type**: `certificate`
+- **Type**: [`certificate`](certificate.md)
 - **Requirement**: recommended
 
 The certificate object containing information about the digital certificate.
@@ -57,14 +57,14 @@ The amount of total time for the TLS handshake to complete after the TCP connect
 
 ### `ja3_hash`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 The MD5 hash of a JA3 string.
 
 ### `ja3s_hash`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 The MD5 hash of a JA3S string.
@@ -78,7 +78,7 @@ The length of the encryption key.
 
 ### `sans`
 
-- **Type**: `san`
+- **Type**: [`san`](san.md)
 - **Requirement**: optional
 
 The list of subject alternative names that are secured by a specific certificate.

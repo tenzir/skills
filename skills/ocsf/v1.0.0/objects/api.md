@@ -15,21 +15,21 @@ Verb/Operation associated with the request
 
 ### `request`
 
-- **Type**: `request`
+- **Type**: [`request`](request.md)
 - **Requirement**: recommended
 
 Details pertaining to the API request.
 
 ### `response`
 
-- **Type**: `response`
+- **Type**: [`response`](response.md)
 - **Requirement**: recommended
 
 Details pertaining to the API response.
 
 ### `service`
 
-- **Type**: `service`
+- **Type**: [`service`](service.md)
 - **Requirement**: optional
 
 The information pertaining to the API service.

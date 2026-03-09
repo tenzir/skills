@@ -6,11 +6,9 @@ The Product object describes characteristics of a software product.
 
 ## Attributes
 
-### `$include`
-
 ### `feature`
 
-- **Type**: `feature`
+- **Type**: [`feature`](feature.md)
 - **Requirement**: optional
 
 The feature that reported the event.

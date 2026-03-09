@@ -8,7 +8,7 @@ The Logger object represents the device and product where events are stored with
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](device.md)
 - **Requirement**: recommended
 
 The device where the events are logged.
@@ -73,7 +73,7 @@ The name of the logging product instance.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: recommended
 
 The product logging the event.  This may be the event source product, a management server product, a scanning product, a SIEM, etc.

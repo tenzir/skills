@@ -2,9 +2,29 @@
 
 Authentication events report authentication session activities such as user attempts a logon or logoff, successfully or otherwise.
 
-- **UID**: `2`
+- **Class UID**: `3002`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Constraints
+
+- **At least one of**: `service`, `dst_endpoint`
+
+## Associations
+
+- `actor.user` ↔ `src_endpoint`
+- `dst_endpoint` ↔ `user`
+- `src_endpoint` ↔ `actor.user`
+- `user` ↔ `dst_endpoint`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -25,7 +45,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Group**: context
 
 The actor that requested the authentication.
@@ -64,7 +84,7 @@ The normalized identifier of the authentication protocol used to create the user
 
 ### `certificate`
 
-- **Type**: `certificate`
+- **Type**: [`certificate`](../objects/certificate.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -72,7 +92,7 @@ The certificate associated with the authentication or pre-authentication (Kerber
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -80,7 +100,7 @@ The endpoint to which the authentication was targeted.
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -122,7 +142,7 @@ The attempted authentication is over a remote connection.
 
 ### `logon_process`
 
-- **Type**: `process`
+- **Type**: [`process`](../objects/process.md)
 - **Group**: context
 
 The trusted process that validated the authentication credentials.
@@ -162,7 +182,7 @@ The normalized logon type identifier.
 
 ### `service`
 
-- **Type**: `service`
+- **Type**: [`service`](../objects/service.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -170,7 +190,7 @@ The service or gateway to which the user or process is being authenticated
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](../objects/session.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -178,7 +198,7 @@ The authenticated user or service session.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -205,7 +225,7 @@ The details about the authentication request. For example, possible details for 
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

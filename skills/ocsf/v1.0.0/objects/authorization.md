@@ -14,6 +14,6 @@ Authorization Result/outcome, e.g. allowed, denied.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 
 Details about the Identity/Access management policies that are applicable.

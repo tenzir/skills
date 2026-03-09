@@ -8,7 +8,7 @@ The CIS Benchmark object describes best practices for securely configuring IT sy
 
 ### `cis_controls`
 
-- **Type**: `cis_control`
+- **Type**: [`cis_control`](cis_control.md)
 - **Requirement**: recommended
 
 The CIS Critical Security Controls is a prioritized set of actions to protect your organization and data from cyber-attack vectors.

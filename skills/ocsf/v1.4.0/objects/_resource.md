@@ -6,8 +6,6 @@ The Resource object contains attributes that provide information about a particu
 
 ## Attributes
 
-### `$include`
-
 ### `data`
 
 - **Type**: `json_t`
@@ -30,7 +28,7 @@ The name of the resource.
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the resource.

@@ -41,7 +41,7 @@ The normalized identifier for the authentication factor.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](device.md)
 - **Requirement**: recommended
 - **Group**: primary
 

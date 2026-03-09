@@ -8,7 +8,7 @@ The Compliance object contains information about Industry and Regulatory Framewo
 
 ### `assessments`
 
-- **Type**: `assessment`
+- **Type**: [`assessment`](assessment.md)
 - **Requirement**: optional
 
 A list of assessments associated with the compliance requirements evaluation.
@@ -22,21 +22,21 @@ The category a control framework pertains to, as reported by the source tool, su
 
 ### `checks`
 
-- **Type**: `check`
+- **Type**: [`check`](check.md)
 - **Requirement**: optional
 
 A list of compliance checks associated with specific industry standards or frameworks. Each check represents an individual rule or requirement that has been evaluated against a target device. Checks typically include details such as the check name (e.g., CIS: 'Ensure mounting of cramfs filesystems is disabled' or DISA STIG descriptive titles), unique identifiers (such as CIS identifier '1.1.1.1' or DISA STIG identifier 'V-230234'), descriptions (detailed explanations of security requirements or vulnerability discussions), and version information.
 
 ### `compliance_references`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of reference KB articles that provide information to help organizations understand, interpret, and implement compliance standards. They provide guidance, best practices, and examples.
 
 ### `compliance_standards`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of established guidelines or criteria that define specific requirements an organization must follow.
@@ -50,7 +50,7 @@ A Control is a prescriptive, actionable set of specifications that strengthens d
 
 ### `control_parameters`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of control parameters evaluated in a Compliance check. E.g., parameters for CloudTrail configuration might include `multiRegionTrailEnabled: true`, `logFileValidationEnabled: true`, and `requiredRegions: [us-east-1, us-west-2]`

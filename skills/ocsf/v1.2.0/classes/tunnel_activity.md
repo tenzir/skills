@@ -2,9 +2,34 @@
 
 Tunnel Activity events report secure tunnel establishment (such as VPN), teardowns, renewals, and other network tunnel specific actions.
 
-- **UID**: `14`
+- **Class UID**: `4014`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`
+
+## Constraints
+
+- **At least one of**: `connection_info`, `session`, `src_endpoint`, `traffic`, `tunnel_interface`, `tunnel_type_id`
+
+## Associations
+
+- `user` ↔ `src_endpoint`
+- `src_endpoint` ↔ `user`
+
+## Inherited attributes
+
+**From Network:**
+- `proxy` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -26,7 +51,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `connection_info`
 
-- **Type**: `network_connection_info`
+- **Type**: [`network_connection_info`](../objects/network_connection_info.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -34,7 +59,7 @@ The tunnel connection information.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -42,7 +67,7 @@ The server responding to the tunnel connection.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -58,7 +83,7 @@ The networking protocol associated with the tunnel. E.g. `IPSec`, `SSL`, `GRE`.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -66,7 +91,7 @@ The initiator (client) of the tunnel connection.
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](../objects/session.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -74,7 +99,7 @@ The session associated with the tunnel.
 
 ### `traffic`
 
-- **Type**: `network_traffic`
+- **Type**: [`network_traffic`](../objects/network_traffic.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -82,7 +107,7 @@ Traffic refers to the amount of data moving across the tunnel at a given point o
 
 ### `tunnel_interface`
 
-- **Type**: `network_interface`
+- **Type**: [`network_interface`](../objects/network_interface.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -114,7 +139,7 @@ The normalized tunnel type ID.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: recommended
 - **Group**: primary
 

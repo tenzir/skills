@@ -22,14 +22,14 @@ The CIS benchmark name.
 
 ### `remediation`
 
-- **Type**: `remediation`
+- **Type**: [`remediation`](remediation.md)
 - **Requirement**: optional
 
 The remediation recommendations on how to fix the identified issue(s).
 
 ### `rule`
 
-- **Type**: `rule`
+- **Type**: [`rule`](rule.md)
 - **Requirement**: optional
 
 The CIS benchmark rule.

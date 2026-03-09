@@ -8,21 +8,21 @@ The Related Event object describes an event related to a finding or detection as
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](attack.md)
 - **Requirement**: optional
 
 An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques identified by a security control or finding.
 
 ### `kill_chain`
 
-- **Type**: `kill_chain_phase`
+- **Type**: [`kill_chain_phase`](kill_chain_phase.md)
 - **Requirement**: optional
 
 The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html) provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
 
 ### `observables`
 
-- **Type**: `observable`
+- **Type**: [`observable`](observable.md)
 - **Requirement**: optional
 
 The observables associated with the event or a finding.

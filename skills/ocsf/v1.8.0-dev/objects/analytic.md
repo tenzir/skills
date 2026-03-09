@@ -35,7 +35,7 @@ The name of the analytic that generated the finding.
 
 ### `related_analytics`
 
-- **Type**: `analytic`
+- **Type**: [`analytic`](analytic.md)
 - **Requirement**: optional
 
 Other analytics related to this analytic.

@@ -22,7 +22,7 @@ The description of the table.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The group names to which the table belongs.

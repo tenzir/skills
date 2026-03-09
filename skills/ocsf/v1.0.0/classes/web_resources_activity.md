@@ -2,13 +2,20 @@
 
 Web Resources Activity events describe actions executed on a set of Web Resources.
 
-- **UID**: `1`
+- **Class UID**: `6001`
 - **Category**: Application Activity
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -30,7 +37,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -38,7 +45,7 @@ Details about server providing the web resources.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -46,7 +53,7 @@ Details about the endpoint from which the request originated.
 
 ### `web_resources`
 
-- **Type**: `web_resource`
+- **Type**: [`web_resource`](../objects/web_resource.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -54,7 +61,7 @@ Describes details about web resources that were affected by an activity/event.
 
 ### `web_resources_result`
 
-- **Type**: `web_resource`
+- **Type**: [`web_resource`](../objects/web_resource.md)
 - **Requirement**: optional
 - **Group**: primary
 

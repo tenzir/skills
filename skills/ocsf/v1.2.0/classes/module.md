@@ -2,9 +2,30 @@
 
 Module Activity events report when a process loads or unloads the `module`.
 
-- **UID**: `5`
+- **Class UID**: `1005`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+
+## Associations
+
+- `device` ↔ `actor.user`
+- `actor.user` ↔ `device`
+
+## Inherited attributes
+
+**From System Activity:**
+- `device` (required)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -22,14 +43,14 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: required
 
 The actor that loaded or unloaded the `module`.
 
 ### `module`
 
-- **Type**: `module`
+- **Type**: [`module`](../objects/module.md)
 - **Requirement**: required
 - **Group**: primary
 

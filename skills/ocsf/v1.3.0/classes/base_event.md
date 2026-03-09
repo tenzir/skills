@@ -2,13 +2,13 @@
 
 The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
 
-## Attributes
+- **Profiles**: `cloud`, `datetime`, `osint`
 
-### `$include`
+## Attributes
 
 ### `enrichments`
 
-- **Type**: `enrichment`
+- **Type**: [`enrichment`](../objects/enrichment.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -24,7 +24,7 @@ The description of the event/finding, as defined by the source.
 
 ### `metadata`
 
-- **Type**: `metadata`
+- **Type**: [`metadata`](../objects/metadata.md)
 - **Requirement**: required
 - **Group**: context
 
@@ -32,7 +32,7 @@ The metadata associated with the event or a finding.
 
 ### `observables`
 
-- **Type**: `observable`
+- **Type**: [`observable`](../objects/observable.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -120,7 +120,7 @@ The normalized identifier of the event status.
 
 ### `unmapped`
 
-- **Type**: `object`
+- **Type**: [`object`](../objects/object.md)
 - **Requirement**: optional
 - **Group**: context
 

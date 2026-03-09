@@ -8,7 +8,7 @@ The resources of a WHOIS record for a given domain. This can include domain name
 
 ### `autonomous_system`
 
-- **Type**: `autonomous_system`
+- **Type**: [`autonomous_system`](autonomous_system.md)
 - **Requirement**: optional
 
 The autonomous system information associated with a domain.
@@ -51,7 +51,7 @@ The domain name corresponding to the WHOIS record.
 
 ### `domain_contacts`
 
-- **Type**: `domain_contact`
+- **Type**: [`domain_contact`](domain_contact.md)
 - **Requirement**: recommended
 
 An array of `Domain Contact` objects.

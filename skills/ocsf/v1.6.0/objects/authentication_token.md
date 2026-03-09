@@ -15,7 +15,7 @@ The time that the authentication token was created.
 
 ### `encryption_details`
 
-- **Type**: `encryption_details`
+- **Type**: [`encryption_details`](encryption_details.md)
 - **Requirement**: recommended
 
 The encryption details of the authentication token.

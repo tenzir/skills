@@ -2,9 +2,23 @@
 
 HTTP Activity events report HTTP connection and traffic information.
 
-- **UID**: `2`
+- **Class UID**: `4002`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Network:**
+- `dst_endpoint` (required)
+- `src_endpoint` (required)
+- `connection_info` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -28,7 +42,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `http_cookies`
 
-- **Type**: `http_cookie`
+- **Type**: [`http_cookie`](../objects/http_cookie.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -36,7 +50,7 @@ The cookies object describes details about HTTP cookies
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -44,7 +58,7 @@ The HTTP Request Object documents attributes of a request made to a web server.
 
 ### `http_response`
 
-- **Type**: `http_response`
+- **Type**: [`http_response`](../objects/http_response.md)
 - **Requirement**: required
 - **Group**: primary
 

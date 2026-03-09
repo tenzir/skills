@@ -6,14 +6,14 @@ The startup item object describes an application component that has associated s
 
 ### `driver`
 
-- **Type**: `kernel_driver`
+- **Type**: [`kernel_driver`](kernel_driver.md)
 - **Requirement**: optional
 
 The startup item kernel driver resource.
 
 ### `job`
 
-- **Type**: `job`
+- **Type**: [`job`](job.md)
 - **Requirement**: optional
 
 The startup item job resource.
@@ -27,7 +27,7 @@ The unique name of the startup item.
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](process.md)
 - **Requirement**: optional
 
 The startup item process resource.

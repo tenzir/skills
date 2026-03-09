@@ -2,9 +2,18 @@
 
 User Access Management events report management updates to a user's privileges.
 
-- **UID**: `5`
+- **Class UID**: `3005`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -30,7 +39,7 @@ List of privileges assigned to a user.
 
 ### `resource`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -38,7 +47,7 @@ Resource that the privileges give access to.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

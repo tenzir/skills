@@ -2,6 +2,36 @@
 
 The attributes including disposition that represent the outcome of a security control including but not limited to access control, malware or policy violation, network proxy, firewall, or data control.  The profile is intended to augment activities or findings with an outcome where a security control has intervened.
 
+## Applies to
+
+- Data Security Finding
+- Datastore Activity
+- Detection Finding
+- DHCP Activity
+- DNS Activity
+- Email Activity
+- Email File Activity
+- Email URL Activity
+- File System Activity
+- FTP Activity
+- HTTP Activity
+- Kernel Activity
+- Kernel Extension Activity
+- Memory Activity
+- Module Activity
+- Network
+- Network Activity
+- Network File Activity
+- NTP Activity
+- Process Activity
+- RDP Activity
+- Scheduled Job Activity
+- SMB Activity
+- SSH Activity
+- System Activity
+- Tunnel Activity
+- Web Resources Activity
+
 ## Attributes
 
 ### `action`
@@ -27,14 +57,14 @@ The action taken by a control or other policy-based system leading to an outcome
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: optional
 
 An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques identified by a security control or finding.
 
 ### `authorizations`
 
-- **Type**: `authorization`
+- **Type**: [`authorization`](../objects/authorization.md)
 - **Requirement**: optional
 
 Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
@@ -88,14 +118,14 @@ Describes the outcome or action taken by a security control, such as access cont
 
 ### `firewall_rule`
 
-- **Type**: `firewall_rule`
+- **Type**: [`firewall_rule`](../objects/firewall_rule.md)
 - **Requirement**: optional
 
 The firewall rule that triggered the event.
 
 ### `malware`
 
-- **Type**: `malware`
+- **Type**: [`malware`](../objects/malware.md)
 - **Requirement**: optional
 
 A list of Malware objects, describing details about the identified malware.

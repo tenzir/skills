@@ -6,8 +6,6 @@ The Email object describes the email metadata such as sender, recipients, and di
 
 ## Attributes
 
-### `$include`
-
 ### `cc`
 
 - **Type**: `email_t`

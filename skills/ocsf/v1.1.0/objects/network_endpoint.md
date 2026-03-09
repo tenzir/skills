@@ -15,7 +15,7 @@ The intermediate IP Addresses. For example, the IP addresses in the HTTP X-Forwa
 
 ### `proxy_endpoint`
 
-- **Type**: `network_proxy`
+- **Type**: [`network_proxy`](network_proxy.md)
 - **Requirement**: optional
 
 The network proxy information pertaining to a specific endpoint. This can be used to describe information pertaining to network address translation (NAT).

@@ -117,7 +117,7 @@ The Internet Protocol version identifier.
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](session.md)
 - **Requirement**: optional
 
 The authenticated user or service session.

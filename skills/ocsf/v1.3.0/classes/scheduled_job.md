@@ -2,9 +2,30 @@
 
 Scheduled Job Activity events report activities related to scheduled jobs or tasks.
 
-- **UID**: `6`
+- **Class UID**: `1006`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`, `osint`
+
+## Associations
+
+- `device` ↔ `actor.user`
+- `actor.user` ↔ `device`
+
+## Inherited attributes
+
+**From System Activity:**
+- `device` (required)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -26,7 +47,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -34,7 +55,7 @@ The actor that performed the activity on the `job` object.
 
 ### `job`
 
-- **Type**: `job`
+- **Type**: [`job`](../objects/job.md)
 - **Requirement**: required
 - **Group**: primary
 

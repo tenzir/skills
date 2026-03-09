@@ -2,9 +2,9 @@
 
 The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
 
-## Attributes
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
 
-### `$include`
+## Attributes
 
 ### `activity_id`
 
@@ -96,7 +96,7 @@ The end time of a time period, or the time of the most recent event included in 
 
 ### `enrichments`
 
-- **Type**: `enrichment`
+- **Type**: [`enrichment`](../objects/enrichment.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -112,7 +112,7 @@ The description of the event/finding, as defined by the source.
 
 ### `metadata`
 
-- **Type**: `metadata`
+- **Type**: [`metadata`](../objects/metadata.md)
 - **Requirement**: required
 - **Group**: context
 
@@ -120,7 +120,7 @@ The metadata associated with the event or a finding.
 
 ### `observables`
 
-- **Type**: `observable`
+- **Type**: [`observable`](../objects/observable.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -136,7 +136,7 @@ The raw event/finding data as received from the source.
 
 ### `raw_data_hash`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](../objects/fingerprint.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -265,7 +265,7 @@ The event/finding type ID. It identifies the event's semantics and structure. Th
 
 ### `unmapped`
 
-- **Type**: `object`
+- **Type**: [`object`](../objects/object.md)
 - **Requirement**: optional
 - **Group**: context
 

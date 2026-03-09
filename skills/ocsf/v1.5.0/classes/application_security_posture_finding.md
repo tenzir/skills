@@ -3,15 +3,41 @@
 The Application Security Posture Finding event is a notification about any bug, defect, deficiency, exploit, vulnerability, weakness or any other issue with software and related systems. Application Security Posture Findings typically involve reporting on the greater context including compliance, impacted resources, remediation guidance, specific code defects, and/or vulnerability metadata. Application Security Posture Findings can be reported by Threat & Vulnerability Management (TVM) tools, Application Security Posture Management (ASPM) tools, or other similar tools. Note: if the event producer is a security control, the `security_control` profile should be applied and its `attacks` information, if present, should be duplicated into the `finding_info` object.
 Note: If the Finding is an incident, i.e. requires incident workflow, also apply the `incident` profile or aggregate this finding into an `Incident Finding`.
 
-- **UID**: `7`
+- **Class UID**: `2007`
 - **Category**: Findings
-- **Extends**: `finding`
+- **Extends**: [Finding (finding)](finding.md)
+- **Profiles**: `incident`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `application`, `compliance`, `remediation`, `vulnerabilities`
+
+## Inherited attributes
+
+**From Finding:**
+- `finding_info` (required)
+- `confidence_id` (recommended)
+- `device` (recommended)
+- `status_id` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `application`
 
-- **Type**: `application`
+- **Type**: [`application`](../objects/application.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -19,7 +45,7 @@ An Application describes the details for an inventoried application as reported 
 
 ### `compliance`
 
-- **Type**: `compliance`
+- **Type**: [`compliance`](../objects/compliance.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -27,7 +53,7 @@ Provides compliance context to vulnerabilities and other weaknesses that are rep
 
 ### `remediation`
 
-- **Type**: `remediation`
+- **Type**: [`remediation`](../objects/remediation.md)
 - **Requirement**: recommended
 - **Group**: context
 
@@ -35,7 +61,7 @@ Describes the recommended remediation steps to address identified vulnerabilitie
 
 ### `resources`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: context
 
@@ -43,7 +69,7 @@ Describes details about the resource/resources that are affected by the vulnerab
 
 ### `vulnerabilities`
 
-- **Type**: `vulnerability`
+- **Type**: [`vulnerability`](../objects/vulnerability.md)
 - **Requirement**: recommended
 - **Group**: primary
 

@@ -15,7 +15,7 @@ Integer representing the total number of times this specific value/event was obs
 
 ### `timespan`
 
-- **Type**: `timespan`
+- **Type**: [`timespan`](timespan.md)
 - **Requirement**: recommended
 
 The time window when the value or event was first observed. It is used to analyze activity patterns, detect trends, or correlate events within a specific timeframe.

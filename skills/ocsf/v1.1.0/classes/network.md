@@ -1,0 +1,72 @@
+# Network (network)
+
+Abstract base class for Network Activity event classes. Concrete classes in this category extend this class and inherit its attributes.
+
+- **Category**: Network Activity
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
+
+## Attributes
+
+### `app_name`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: context
+
+The name of the application that is associated with the event or object.
+
+### `connection_info`
+
+- **Type**: [`network_connection_info`](../objects/network_connection_info.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The network connection information.
+
+### `dst_endpoint`
+
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
+- **Requirement**: required
+- **Group**: primary
+
+The responder (server) in a network connection.
+
+### `proxy`
+
+- **Type**: [`network_proxy`](../objects/network_proxy.md)
+- **Requirement**: optional
+- **Group**: primary
+
+The proxy (server) in a network connection.
+
+### `src_endpoint`
+
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
+- **Requirement**: required
+- **Group**: primary
+
+The initiator (client) of the network connection.
+
+### `tls`
+
+- **Type**: [`tls`](../objects/tls.md)
+- **Group**: primary
+
+The Transport Layer Security (TLS) attributes.
+
+### `traffic`
+
+- **Type**: [`network_traffic`](../objects/network_traffic.md)
+- **Requirement**: optional
+- **Group**: primary
+
+The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.

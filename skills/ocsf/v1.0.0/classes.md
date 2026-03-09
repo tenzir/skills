@@ -4,6 +4,7 @@
 
 System Activity events.
 
+- [System Activity (system)](classes/system.md) [base class]
 - [File System Activity](classes/filesystem.md)
 - [Kernel Activity](classes/kernel.md)
 - [Kernel Extension Activity](classes/kernel_extension.md)
@@ -16,12 +17,14 @@ System Activity events.
 
 Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.
 
+- [Findings (findings)](classes/findings.md) [base class]
 - [Security Finding](classes/security_finding.md)
 
 ## Identity & Access Management
 
 Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
 
+- [Identity & Access Management (iam)](classes/iam.md) [base class]
 - [Account Change](classes/account_change.md)
 - [Authentication](classes/authentication.md)
 - [Authorize Session](classes/authorize_session.md)
@@ -33,6 +36,7 @@ Identity & Access Management (IAM) events relate to the supervision of the syste
 
 Network Activity events.
 
+- [Network Activity (network)](classes/network.md) [base class]
 - [DHCP Activity](classes/dhcp.md)
 - [DNS Activity](classes/dns.md)
 - [Email Activity](classes/email.md)
@@ -49,6 +53,7 @@ Network Activity events.
 
 Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
 
+- [Discovery (discovery)](classes/discovery.md) [base class]
 - [Device Config State](classes/config_state.md)
 - [Device Inventory Info](classes/inventory_info.md)
 
@@ -56,6 +61,7 @@ Discovery events report the existence and state of devices, files, configuration
 
 Application Activity events report detailed information about the behavior of applications and services.
 
+- [Application Activity (application)](classes/application.md) [base class]
 - [API Activity](classes/api.md)
 - [Application Lifecycle](classes/application_lifecycle.md)
 - [Web Resource Access Activity](classes/web_resource_access_activity.md)

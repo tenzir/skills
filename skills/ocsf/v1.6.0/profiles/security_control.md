@@ -2,6 +2,92 @@
 
 The attributes including disposition that represent the outcome of a security control including but not limited to access control, malware or policy violation, network proxy, intrusion detection, firewall, or data control. The profile is intended to augment activities or findings with an outcome when a security control has observed or intervened. If the control detected a security violation, and the `disposition_id` or `action_id` is an alertable outcome or action, the `is_alert` flag may be set to `true`.
 
+## Applies to
+
+- Account Change
+- Admin Group Query
+- Airborne Broadcast Activity
+- API Activity
+- Application Activity
+- Application Error
+- Application Lifecycle
+- Application Security Posture Finding
+- Authentication
+- Authorize Session
+- Base Event
+- Cloud Resources Inventory Info
+- Compliance Finding
+- Data Security Finding
+- Datastore Activity
+- Detection Finding
+- Device Config State
+- Device Config State Change
+- Device Inventory Info
+- DHCP Activity
+- Discovery
+- Discovery Result
+- DNS Activity
+- Drone Flights Activity
+- Email Activity
+- Email File Activity
+- Email URL Activity
+- Entity Management
+- Event Log Activity
+- File Hosting Activity
+- File Query
+- File Remediation Activity
+- File System Activity
+- Finding
+- Folder Query
+- FTP Activity
+- Group Management
+- HTTP Activity
+- IAM Analysis Finding
+- Identity & Access Management
+- Incident Finding
+- Job Query
+- Kernel Activity
+- Kernel Extension Activity
+- Kernel Object Query
+- Live Evidence Info
+- Memory Activity
+- Module Activity
+- Module Query
+- Network
+- Network Activity
+- Network Connection Query
+- Network File Activity
+- Network Remediation Activity
+- Networks Query
+- NTP Activity
+- Operating System Patch State
+- OSINT Inventory Info
+- Peripheral Device Query
+- Process Activity
+- Process Query
+- Process Remediation Activity
+- RDP Activity
+- Remediation Activity
+- Scan Activity
+- Scheduled Job Activity
+- Script Activity
+- Security Finding
+- Service Query
+- SMB Activity
+- Software Inventory Info
+- SSH Activity
+- Startup Item Query
+- System Activity
+- Tunnel Activity
+- Unmanned Systems
+- User Access Management
+- User Inventory Info
+- User Query
+- User Session Query
+- Vulnerability Finding
+- Web Resource Access Activity
+- Web Resources Activity
+
 ## Attributes
 
 ### `action`
@@ -30,14 +116,14 @@ The action taken by a control or other policy-based system leading to an outcome
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: optional
 
 An array of MITRE ATT&CK® objects describing identified tactics, techniques & sub-techniques. The objects are compatible with MITRE ATLAS™ tactics, techniques & sub-techniques.
 
 ### `authorizations`
 
-- **Type**: `authorization`
+- **Type**: [`authorization`](../objects/authorization.md)
 - **Requirement**: optional
 
 Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
@@ -124,7 +210,7 @@ Describes the outcome or action taken by a security control, such as access cont
 
 ### `firewall_rule`
 
-- **Type**: `firewall_rule`
+- **Type**: [`firewall_rule`](../objects/firewall_rule.md)
 - **Requirement**: optional
 
 The firewall rule that pertains to the control that triggered the event, if applicable.
@@ -138,21 +224,21 @@ Indicates that the event is considered to be an alertable signal. Should be set 
 
 ### `malware`
 
-- **Type**: `malware`
+- **Type**: [`malware`](../objects/malware.md)
 - **Requirement**: optional
 
 A list of Malware objects, describing details about the identified malware.
 
 ### `malware_scan_info`
 
-- **Type**: `malware_scan_info`
+- **Type**: [`malware_scan_info`](../objects/malware_scan_info.md)
 - **Requirement**: optional
 
 Describes details about the scan job that identified malware on the target system.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](../objects/policy.md)
 - **Requirement**: optional
 
 The policy that pertains to the control that triggered the event, if applicable. For example the name of an anti-malware policy or an access control policy.

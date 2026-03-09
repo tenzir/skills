@@ -8,14 +8,14 @@ The Network Endpoint object describes characteristics of a network endpoint. The
 
 ### `fingerprints`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: optional
 
 Fingerprints that identify the specific application implementation on this endpoint, such as Cisco NPF or HASSH.
 
 ### `autonomous_system`
 
-- **Type**: `autonomous_system`
+- **Type**: [`autonomous_system`](autonomous_system.md)
 - **Requirement**: optional
 
 The Autonomous System details associated with an IP address.
@@ -72,7 +72,7 @@ The port used for communication within the network connection.
 
 ### `proxy_endpoint`
 
-- **Type**: `network_proxy`
+- **Type**: [`network_proxy`](network_proxy.md)
 - **Requirement**: optional
 
 The network proxy information pertaining to a specific endpoint. This can be used to describe information pertaining to network address translation (NAT).

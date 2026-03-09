@@ -15,7 +15,7 @@ The name of the agent or sensor. For example: `AWS SSM Agent`.
 
 ### `policies`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: optional
 
 Describes the various policies that may be applied or enforced by an agent or sensor. E.g., Conditional Access, prevention, auto-update, tamper protection, destination configuration, etc.

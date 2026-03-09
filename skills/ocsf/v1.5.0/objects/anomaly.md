@@ -22,7 +22,7 @@ The type of analysis methodology used to detect the anomaly. This indicates how 
 
 ### `observations`
 
-- **Type**: `observation`
+- **Type**: [`observation`](observation.md)
 - **Requirement**: required
 
 Details about the observed anomaly or observations that were flagged as anomalous compared to expected baseline behavior.

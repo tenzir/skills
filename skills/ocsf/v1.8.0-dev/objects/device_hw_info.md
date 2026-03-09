@@ -94,7 +94,7 @@ The processor type. For example: `x86 Family 6 Model 37 Stepping 5`.
 
 ### `desktop_display`
 
-- **Type**: `display`
+- **Type**: [`display`](display.md)
 - **Requirement**: optional
 
 The desktop display affiliated with the event
@@ -108,14 +108,14 @@ The number of GPU's on a system. For example: `1`.
 
 ### `gpu_info_list`
 
-- **Type**: `gpu_info`
+- **Type**: [`gpu_info`](gpu_info.md)
 - **Requirement**: optional
 
 A list of GPU objects describing the hardware properties of each graphics processor installed on the device.
 
 ### `keyboard_info`
 
-- **Type**: `keyboard_info`
+- **Type**: [`keyboard_info`](keyboard_info.md)
 - **Requirement**: optional
 
 The keyboard detailed information.

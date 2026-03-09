@@ -29,7 +29,7 @@ The name of the entity from which the event or finding was reported.
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: optional
 
 The organization properties of the entity that reported the event or finding.

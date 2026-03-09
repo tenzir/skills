@@ -43,7 +43,7 @@ The enrichment data provider name.
 
 ### `reputation`
 
-- **Type**: `reputation`
+- **Type**: [`reputation`](reputation.md)
 - **Requirement**: optional
 
 The reputation of the enrichment data.

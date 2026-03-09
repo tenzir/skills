@@ -2,9 +2,31 @@
 
 Account Change events report when specific user account management tasks are performed, such as a user/role being created, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
 
-- **UID**: `1`
+- **Class UID**: `3001`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Identity & Access Management:**
+- `actor` (recommended)
+- `src_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -32,7 +54,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `auth_factors`
 
-- **Type**: `auth_factor`
+- **Type**: [`auth_factor`](../objects/auth_factor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -40,7 +62,7 @@ Details about the authentication factors associated with the MFA Factor Enable/D
 
 ### `policies`
 
-- **Type**: `policy`
+- **Type**: [`policy`](../objects/policy.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -48,7 +70,7 @@ Details about the IAM policies associated with the Attach/Detach Policy activiti
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](../objects/policy.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -56,7 +78,7 @@ Details about the IAM policy associated to the Attach/Detach Policy activities.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -64,7 +86,7 @@ The user that was a target of an activity.
 
 ### `user_result`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: recommended
 - **Group**: primary
 

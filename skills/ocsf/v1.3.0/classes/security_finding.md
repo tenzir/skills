@@ -2,9 +2,22 @@
 
 Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
 
-- **UID**: `1`
+- **Class UID**: `2001`
 - **Category**: Findings
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `cloud`, `datetime`, `osint`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -23,7 +36,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `analytic`
 
-- **Type**: `analytic`
+- **Type**: [`analytic`](../objects/analytic.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -31,7 +44,7 @@ The analytic technique used to analyze and derive insights from the data or info
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -39,7 +52,7 @@ The attack object describes the technique and associated tactics as defined by [
 
 ### `cis_csc`
 
-- **Type**: `cis_csc`
+- **Type**: [`cis_csc`](../objects/cis_csc.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -47,7 +60,7 @@ The CIS Critical Security Controls is a list of top 20 actions and practices an 
 
 ### `compliance`
 
-- **Type**: `compliance`
+- **Type**: [`compliance`](../objects/compliance.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -104,7 +117,7 @@ The data the finding exposes to the analyst.
 
 ### `finding`
 
-- **Type**: `finding`
+- **Type**: [`finding`](../objects/finding.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -146,7 +159,7 @@ The impact of the finding, valid range 0-100.
 
 ### `kill_chain`
 
-- **Type**: `kill_chain_phase`
+- **Type**: [`kill_chain_phase`](../objects/kill_chain_phase.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -154,7 +167,7 @@ The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber
 
 ### `malware`
 
-- **Type**: `malware`
+- **Type**: [`malware`](../objects/malware.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -170,7 +183,7 @@ The NIST Cybersecurity Framework recommendations for managing the cybersecurity 
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](../objects/process.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -178,7 +191,7 @@ The process object.
 
 ### `resources`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -244,7 +257,7 @@ The normalized state identifier of a security finding.
 
 ### `vulnerabilities`
 
-- **Type**: `vulnerability`
+- **Type**: [`vulnerability`](../objects/vulnerability.md)
 - **Requirement**: optional
 - **Group**: context
 

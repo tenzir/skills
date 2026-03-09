@@ -8,14 +8,14 @@ The Compliance object contains information about Industry and Regulatory Framewo
 
 ### `compliance_references`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of reference KB articles that provide information to help organizations understand, interpret, and implement compliance standards. They provide guidance, best practices, and examples.
 
 ### `compliance_standards`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of established guidelines or criteria that define specific requirements an organization must follow.
@@ -29,7 +29,7 @@ A Control is prescriptive, prioritized, and simplified set of best practices tha
 
 ### `control_parameters`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of control parameters evaluated in a Compliance check.

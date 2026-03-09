@@ -6,8 +6,6 @@ The database object is used for databases which are typically datastore services
 
 ## Attributes
 
-### `$include`
-
 ### `created_time`
 
 - **Type**: `timestamp_t`
@@ -38,7 +36,7 @@ The size of the database in bytes.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The group names to which the database belongs.

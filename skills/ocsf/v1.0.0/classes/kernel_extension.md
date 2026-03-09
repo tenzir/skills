@@ -2,9 +2,26 @@
 
 Kernel Extension events report when a driver/extension is loaded or unloaded into the kernel
 
-- **UID**: `2`
+- **Class UID**: `1002`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+
+## Associations
+
+- `device` ↔ `actor.user`
+- `actor.user` ↔ `device`
+
+## Inherited attributes
+
+**From System Activity:**
+- `device` (required)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -22,14 +39,14 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: required
 
 The actor process that loaded or unloaded the driver/extension.
 
 ### `driver`
 
-- **Type**: `kernel_driver`
+- **Type**: [`kernel_driver`](../objects/kernel_driver.md)
 - **Requirement**: required
 - **Group**: primary
 

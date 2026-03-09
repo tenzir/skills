@@ -6,8 +6,6 @@ The Metadata object describes the metadata associated with the event.
 
 ## Attributes
 
-### `$include`
-
 ### `correlation_uid`
 
 - **Type**: `string_t`
@@ -31,14 +29,14 @@ The `Event ID, Code, or Name` that the product uses to primarily identify the ev
 
 ### `extension`
 
-- **Type**: `extension`
+- **Type**: [`extension`](extension.md)
 - **Requirement**: optional
 
 The schema extension used to create the event.
 
 ### `extensions`
 
-- **Type**: `extension`
+- **Type**: [`extension`](extension.md)
 - **Requirement**: optional
 
 The schema extensions used to create the event.
@@ -89,7 +87,7 @@ This attribute is distinct from the event time in that event time typically cont
 
 ### `loggers`
 
-- **Type**: `logger`
+- **Type**: [`logger`](logger.md)
 - **Requirement**: optional
 
 An array of Logger objects that describe the devices and logging products between the event source and its eventual destination. Note, this attribute can be used when there is a complex end-to-end path of event flow.
@@ -117,7 +115,7 @@ The event processed time, such as an ETL operation.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: required
 
 The product that reported the event.
@@ -138,7 +136,7 @@ Sequence number of the event. The sequence number is a value available in some e
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the event.

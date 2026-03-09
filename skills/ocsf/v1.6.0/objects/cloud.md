@@ -8,7 +8,7 @@ The Cloud object contains information about a cloud or Software-as-a-Service acc
 
 ### `account`
 
-- **Type**: `account`
+- **Type**: [`account`](account.md)
 - **Requirement**: optional
 
 The account object describes details about the account that was the source or target of the activity.
@@ -22,7 +22,7 @@ The canonical cloud partition name to which the region is assigned (e.g. AWS Par
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: optional
 
 Organization and org unit relevant to the event or object.

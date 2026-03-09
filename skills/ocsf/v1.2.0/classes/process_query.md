@@ -2,15 +2,33 @@
 
 Process Query events report information about running processes.
 
-- **UID**: `15`
+- **Class UID**: `5015`
 - **Category**: Discovery
-- **Extends**: `discovery_result`
+- **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Discovery Result:**
+- `query_result_id` (required)
+- `query_info` (recommended)
+- `query_result` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](../objects/process.md)
 - **Requirement**: required
 - **Group**: primary
 

@@ -29,7 +29,7 @@ A description or commentary for an application, usually retrieved from an upstre
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The name of the related application or associated resource group.
@@ -57,7 +57,7 @@ The name of the application.
 
 ### `owner`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The identity of the service or user account that owns the application.
@@ -71,7 +71,7 @@ The cloud region of the resource.
 
 ### `resource_relationship`
 
-- **Type**: `graph`
+- **Type**: [`graph`](graph.md)
 - **Requirement**: optional
 
 A graph representation showing how this application relates to and interacts with other entities in the environment. This can include parent/child relationships, dependencies, or other connections.
@@ -109,14 +109,14 @@ The risk score as reported by the event source.
 
 ### `sbom`
 
-- **Type**: `sbom`
+- **Type**: [`sbom`](sbom.md)
 - **Requirement**: optional
 
 The Software Bill of Materials (SBOM) associated with the application
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the application.
@@ -144,7 +144,7 @@ An alternative or contextual identifier for the application, such as a configura
 
 ### `url`
 
-- **Type**: `url`
+- **Type**: [`url`](url.md)
 - **Requirement**: optional
 
 The URL of the application.

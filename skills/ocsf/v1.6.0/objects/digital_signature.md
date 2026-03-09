@@ -32,7 +32,7 @@ The identifier of the normalized digital signature algorithm.
 
 ### `certificate`
 
-- **Type**: `certificate`
+- **Type**: [`certificate`](certificate.md)
 - **Requirement**: recommended
 
 The certificate object containing information about the digital certificate.
@@ -53,7 +53,7 @@ The developer ID on the certificate that signed the file.
 
 ### `digest`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: optional
 
 The message digest attribute contains the fixed length message hash representation and the corresponding hashing algorithm information.

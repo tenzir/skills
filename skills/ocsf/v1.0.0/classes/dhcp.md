@@ -2,13 +2,20 @@
 
 DHCP Activity events report MAC to IP assignment via DHCP from a client or server.
 
-- **UID**: `4`
+- **Class UID**: `4004`
 - **Category**: Network Activity
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -32,7 +39,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -56,7 +63,7 @@ This represents the length of the DHCP lease in seconds. This is present in DHCP
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -64,7 +71,7 @@ The initiator (client) of the DHCP connection.
 
 ### `relay`
 
-- **Type**: `network_interface`
+- **Type**: [`network_interface`](../objects/network_interface.md)
 - **Requirement**: optional
 - **Group**: primary
 

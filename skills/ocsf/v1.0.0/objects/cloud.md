@@ -8,14 +8,14 @@ The Cloud object contains information about a cloud account such as AWS Account 
 
 ### `account`
 
-- **Type**: `account`
+- **Type**: [`account`](account.md)
 - **Requirement**: optional
 
 The account object describes details about the account that was the source or target of the activity.
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: optional
 
 Organization and org unit relevant to the event or object.

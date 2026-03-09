@@ -22,21 +22,21 @@ The type or category of access being granted to the identity. This describes the
 
 ### `accessors`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: required
 
 The identities that are granted access through the analyzed policy configuration. This identifies the specific entity that can exercise the permissions and helps assess the access relationship and potential security implications. Examples include user accounts, service principals, roles, account identifiers, or system identities.
 
 ### `additional_restrictions`
 
-- **Type**: `additional_restriction`
+- **Type**: [`additional_restriction`](additional_restriction.md)
 - **Requirement**: optional
 
 Details about supplementary restrictions and guardrails that may limit the granted access, applied through additional policy types such as Resource Control Policies (RCPs) and Service Control Policies (SCPs) in AWS, or other policy constraints.
 
 ### `condition_keys`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The condition keys and their values that constrain when and how the granted access can be exercised. These conditions define the circumstances under which the access relationship is valid and the privileges can be used. Examples: IP address restrictions like 'aws:SourceIp:192.0.2.0/24', time-based constraints like 'aws:RequestedRegion:us-east-1', MFA requirements like 'aws:MultiFactorAuthPresent:true', or custom conditions based on resource tags and request context.

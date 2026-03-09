@@ -15,7 +15,7 @@ The container name.
 
 ### `image`
 
-- **Type**: `image`
+- **Type**: [`image`](image.md)
 - **Requirement**: recommended
 
 The container image used as a template to run the container.
@@ -64,7 +64,7 @@ The size of the container image.
 
 ### `hash`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 Commit hash of image created for docker or the SHA256 hash of the container. For example: `13550340a8681c84c861aac2e5b440161c2b33a3e4f302ac680ca5b686de48de`.

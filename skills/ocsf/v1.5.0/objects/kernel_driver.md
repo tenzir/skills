@@ -8,7 +8,7 @@ The Kernel Extension object describes a kernel driver that has been loaded or un
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: required
 - **Group**: primary
 

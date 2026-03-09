@@ -8,7 +8,7 @@ An Authentication Factor object describes a category of methods used for identit
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](device.md)
 - **Requirement**: recommended
 - **Group**: primary
 

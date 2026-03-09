@@ -8,7 +8,7 @@ The MITRE Mitigation object describes the ATT&CK® or ATLAS™ Mitigation ID and
 
 ### `countermeasures`
 
-- **Type**: `d3fend`
+- **Type**: [`d3fend`](d3fend.md)
 - **Requirement**: optional
 
 The D3FEND countermeasures that are associated with the attack technique. For example: ATT&CK Technique `T1003` is addressed by Mitigation `M1027`, and D3FEND Technique `D3-OTP`.

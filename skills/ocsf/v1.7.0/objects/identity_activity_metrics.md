@@ -36,7 +36,7 @@ The timestamp when password-based authentication was last used by this identity.
 
 ### `programmatic_credentials`
 
-- **Type**: `programmatic_credential`
+- **Type**: [`programmatic_credential`](programmatic_credential.md)
 - **Requirement**: optional
 
 Details about the programmatic credentials associated with this identity, such as API keys, service account keys, access tokens, and client certificates used for automated access.

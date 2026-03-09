@@ -6,7 +6,7 @@ The specific resulting evidence information that was queried or discovered. When
 
 ### `connection_info`
 
-- **Type**: `network_connection_info`
+- **Type**: [`network_connection_info`](network_connection_info.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -14,7 +14,7 @@ The network connection information related to a Network Connection query type.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -22,7 +22,7 @@ The file that is the target of the query when query_type_id indicates a File que
 
 ### `folder`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -30,7 +30,7 @@ The folder that is the target of the query when query_type_id indicates a Folder
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -38,7 +38,7 @@ The administrative group that is the target of the query when query_type_id indi
 
 ### `job`
 
-- **Type**: `job`
+- **Type**: [`job`](job.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -46,7 +46,7 @@ The job object that pertains to the event when query_type_id indicates a Job que
 
 ### `kernel`
 
-- **Type**: `kernel`
+- **Type**: [`kernel`](kernel.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -54,7 +54,7 @@ The kernel object that pertains to the event when query_type_id indicates a Kern
 
 ### `module`
 
-- **Type**: `module`
+- **Type**: [`module`](module.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -62,7 +62,7 @@ The module that pertains to the event when query_type_id indicates a Module quer
 
 ### `network_interfaces`
 
-- **Type**: `network_interface`
+- **Type**: [`network_interface`](network_interface.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -70,7 +70,7 @@ The physical or virtual network interfaces that are associated with the device w
 
 ### `peripheral_device`
 
-- **Type**: `peripheral_device`
+- **Type**: [`peripheral_device`](peripheral_device.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -78,7 +78,7 @@ The peripheral device that triggered the event when query_type_id indicates a Pe
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](process.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -86,7 +86,7 @@ The process that pertains to the event when query_type_id indicates a Process qu
 
 ### `service`
 
-- **Type**: `service`
+- **Type**: [`service`](service.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -94,7 +94,7 @@ The service that pertains to the event when query_type_id indicates a Service qu
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](session.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -102,7 +102,7 @@ The authenticated user or service session when query_type_id indicates a Session
 
 ### `startup_item`
 
-- **Type**: `startup_item`
+- **Type**: [`startup_item`](startup_item.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -141,7 +141,7 @@ The state of the TCP socket for the network connection.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -149,7 +149,7 @@ The user that pertains to the event when query_type_id indicates a User query.
 
 ### `users`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 - **Group**: context
 

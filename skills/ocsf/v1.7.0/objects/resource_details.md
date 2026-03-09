@@ -8,7 +8,7 @@ The Resource Details object describes details about resources that were affected
 
 ### `agent_list`
 
-- **Type**: `agent`
+- **Type**: [`agent`](agent.md)
 - **Requirement**: optional
 
 A list of `agent` objects associated with a device, endpoint, or resource.
@@ -29,7 +29,7 @@ The criticality of the resource as defined by the event source.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The name of the related resource group.
@@ -72,7 +72,7 @@ The namespace is useful when similar entities exist that you need to keep separa
 
 ### `owner`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The details of the entity that owns the resource. This object includes properties such as the owner's name, unique identifier, type, domain, and other relevant attributes that help identify the resource owner within the environment.
@@ -86,7 +86,7 @@ The cloud region where the resource is hosted, as defined by the cloud provider.
 
 ### `resource_relationship`
 
-- **Type**: `graph`
+- **Type**: [`graph`](graph.md)
 - **Requirement**: optional
 
 A graph representation showing how this resource relates to and interacts with other entities in the environment. This can include parent/child relationships, dependencies, or other connections.

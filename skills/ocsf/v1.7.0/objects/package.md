@@ -29,7 +29,7 @@ The software package epoch. Epoch is a way to define weighted dependencies based
 
 ### `hash`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: optional
 
 Cryptographic hash to identify the binary instance of a software component. This can include any component such file, package, or library.

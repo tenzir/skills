@@ -6,8 +6,6 @@ The databucket object is a basic container that holds data, typically organized 
 
 ## Attributes
 
-### `$include`
-
 ### `created_time`
 
 - **Type**: `timestamp_t`
@@ -24,21 +22,21 @@ The description of the databucket.
 
 ### `encryption_details`
 
-- **Type**: `encryption_details`
+- **Type**: [`encryption_details`](encryption_details.md)
 - **Requirement**: optional
 
 The encryption details of the databucket. Should be populated if the databucket is encrypted.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: optional
 
 Details about the file/object within a databucket.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The group names to which the databucket belongs.

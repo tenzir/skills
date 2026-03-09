@@ -34,7 +34,7 @@ The normalized identifier of the data classification category.
 
 ### `classifier_details`
 
-- **Type**: `classifier_details`
+- **Type**: [`classifier_details`](classifier_details.md)
 - **Requirement**: recommended
 
 Describes details about the classifier used for data classification.
@@ -67,14 +67,14 @@ The normalized identifier of the file content confidentiality indicator.
 
 ### `discovery_details`
 
-- **Type**: `discovery_details`
+- **Type**: [`discovery_details`](discovery_details.md)
 - **Requirement**: optional
 
 Details about the data discovered by classification job.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: optional
 
 Details about the data policy that governs data handling and security measures related to classification.

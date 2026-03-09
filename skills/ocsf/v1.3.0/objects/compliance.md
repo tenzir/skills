@@ -8,14 +8,14 @@ The Compliance object contains information about Industry and Regulatory Framewo
 
 ### `compliance_references`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of sources of information or tools that help organizations understand, interpret, and implement compliance standards. They provide guidance, best practices, and examples.
 
 ### `compliance_standards`
 
-- **Type**: `kb_article`
+- **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
 A list of established guidelines or criteria that define specific requirements an organization must follow.

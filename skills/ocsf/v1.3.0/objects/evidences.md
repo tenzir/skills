@@ -8,28 +8,28 @@ A collection of evidence artifacts associated to the activity/activities that tr
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](actor.md)
 - **Requirement**: recommended
 
 Describes details about the user/role/process that was the source of the activity that triggered the detection.
 
 ### `api`
 
-- **Type**: `api`
+- **Type**: [`api`](api.md)
 - **Requirement**: recommended
 
 Describes details about the API call associated to the activity that triggered the detection.
 
 ### `container`
 
-- **Type**: `container`
+- **Type**: [`container`](container.md)
 - **Requirement**: recommended
 
 Describes details about the container associated to the activity that triggered the detection.
 
 ### `connection_info`
 
-- **Type**: `network_connection_info`
+- **Type**: [`network_connection_info`](network_connection_info.md)
 - **Requirement**: recommended
 
 Describes details about the network connection associated to the activity that triggered the detection.
@@ -43,84 +43,84 @@ Additional evidence data that is not accounted for in the specific evidence attr
 
 ### `database`
 
-- **Type**: `database`
+- **Type**: [`database`](database.md)
 - **Requirement**: recommended
 
 Describes details about the database associated to the activity that triggered the detection.
 
 ### `databucket`
 
-- **Type**: `databucket`
+- **Type**: [`databucket`](databucket.md)
 - **Requirement**: recommended
 
 Describes details about the databucket associated to the activity that triggered the detection.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](device.md)
 - **Requirement**: recommended
 
 An addressable device, computer system or host associated to the activity that triggered the detection.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](network_endpoint.md)
 - **Requirement**: recommended
 
 Describes details about the destination of the network activity that triggered the detection.
 
 ### `email`
 
-- **Type**: `email`
+- **Type**: [`email`](email.md)
 - **Requirement**: recommended
 
 The email object associated to the activity that triggered the detection.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: recommended
 
 Describes details about the file associated to the activity that triggered the detection.
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](process.md)
 - **Requirement**: recommended
 
 Describes details about the process associated to the activity that triggered the detection.
 
 ### `query`
 
-- **Type**: `dns_query`
+- **Type**: [`dns_query`](dns_query.md)
 - **Requirement**: recommended
 
 Describes details about the DNS query associated to the activity that triggered the detection.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](network_endpoint.md)
 - **Requirement**: recommended
 
 Describes details about the source of the network activity that triggered the detection.
 
 ### `url`
 
-- **Type**: `url`
+- **Type**: [`url`](url.md)
 - **Requirement**: recommended
 
 The URL object that pertains to the event or object associated to the activity that triggered the detection.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 Describes details about the user that was the target or somehow else associated with the activity that triggered the detection.
 
 ### `job`
 
-- **Type**: `job`
+- **Type**: [`job`](job.md)
 - **Requirement**: recommended
 
 Describes details about the scheduled job that was associated with the activity that triggered the detection.

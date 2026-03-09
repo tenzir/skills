@@ -99,14 +99,14 @@ The timestamp when the user left or will be leaving the organization.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: optional
 
 The geographical location associated with a user. This is typically the user's usual work location.
 
 ### `manager`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user's manager. This helps in understanding an org hierarchy. This should only ever be populated once in an event. I.e. there should not be a manager's manager in an event.
@@ -141,7 +141,7 @@ The last or family name for the user.
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the user.

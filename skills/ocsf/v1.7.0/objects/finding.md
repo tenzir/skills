@@ -43,7 +43,7 @@ The time when the finding was last modified.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 Details about the product that reported the finding.
@@ -57,14 +57,14 @@ The unique identifier of the product that reported the finding.
 
 ### `related_events`
 
-- **Type**: `related_event`
+- **Type**: [`related_event`](related_event.md)
 - **Requirement**: optional
 
 Describes events and/or other findings related to the finding as identified by the security product. Note that these events may or may not be in OCSF.
 
 ### `remediation`
 
-- **Type**: `remediation`
+- **Type**: [`remediation`](remediation.md)
 - **Requirement**: optional
 
 Describes the recommended remediation steps to address identified issue(s).

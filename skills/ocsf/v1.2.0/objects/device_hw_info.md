@@ -71,14 +71,14 @@ The processor type. For example: `x86 Family 6 Model 37 Stepping 5`.
 
 ### `desktop_display`
 
-- **Type**: `display`
+- **Type**: [`display`](display.md)
 - **Requirement**: optional
 
 The desktop display affiliated with the event
 
 ### `keyboard_info`
 
-- **Type**: `keyboard_info`
+- **Type**: [`keyboard_info`](keyboard_info.md)
 - **Requirement**: optional
 
 The keyboard detailed information.

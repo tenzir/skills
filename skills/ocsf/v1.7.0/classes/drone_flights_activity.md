@@ -2,9 +2,34 @@
 
 Drone Flights Activity events report the activity of Unmanned Aerial Systems (UAS), their Operators, and mission-planning and authorization metadata as reported by the UAS platforms themselves, by Counter-UAS (CUAS) systems, or other remote monitoring or sensing infrastructure. Based on the Remote ID defined in Standard Specification for Remote ID and Tracking (ASTM Designation: F3411-22a) [ASTM F3411-22a](https://cdn.standards.iteh.ai/samples/112830/71297057ac42432880a203654f213709/ASTM-F3411-22a.pdf)
 
-- **UID**: `1`
+- **Class UID**: `8001`
 - **Category**: Unmanned Systems
-- **Extends**: `unmanned_systems`
+- **Extends**: [Unmanned Systems (unmanned_systems)](unmanned_systems.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `src_endpoint`, `unmanned_aerial_system`, `unmanned_system_operator`, `unmanned_system_operating_area`
+
+## Inherited attributes
+
+**From Unmanned Systems:**
+- `dst_endpoint` (required)
+- `connection_info` (recommended)
+- `proxy_endpoint` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -80,7 +105,7 @@ The networking protocol associated with the Remote ID device or beacon. E.g. `BL
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -114,7 +139,7 @@ The normalized Operational status identifier for the Unmanned Aerial System (UAS
 
 ### `traffic`
 
-- **Type**: `network_traffic`
+- **Type**: [`network_traffic`](../objects/network_traffic.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -122,7 +147,7 @@ Traffic refers to the amount of data transmitted from a Unmanned Aerial System (
 
 ### `unmanned_aerial_system`
 
-- **Type**: `unmanned_aerial_system`
+- **Type**: [`unmanned_aerial_system`](../objects/unmanned_aerial_system.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -130,7 +155,7 @@ The Unmanned Aerial System object describes the characteristics, Position Locati
 
 ### `unmanned_system_operating_area`
 
-- **Type**: `unmanned_system_operating_area`
+- **Type**: [`unmanned_system_operating_area`](../objects/unmanned_system_operating_area.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -138,7 +163,7 @@ The UAS Operating Area object describes details about a precise area of operatio
 
 ### `unmanned_system_operator`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: required
 - **Group**: primary
 

@@ -8,14 +8,14 @@ The Script object describes a script or command that can be executed by a shell,
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: optional
 
 Present if this script is associated with a file. Not present in the case of a file-less script.
 
 ### `hashes`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 An array of the script's cryptographic hashes. Note that these hashes are calculated on the script in its original encoding, and not on the normalized UTF-8 encoding found in the `script_content` attribute.
@@ -36,7 +36,7 @@ This attribute relates a sub-script to a parent script having the matching `uid`
 
 ### `script_content`
 
-- **Type**: `long_string`
+- **Type**: [`long_string`](long_string.md)
 - **Requirement**: required
 - **Observable**: 36
 

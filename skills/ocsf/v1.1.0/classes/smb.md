@@ -2,9 +2,23 @@
 
 Server Message Block (SMB) Protocol Activity events report client/server connections sharing resources within the network.
 
-- **UID**: `6`
+- **Class UID**: `4006`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Network:**
+- `dst_endpoint` (required)
+- `src_endpoint` (required)
+- `connection_info` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -42,7 +56,7 @@ The command name (e.g. SMB2_COMMAND_CREATE, SMB1_COMMAND_WRITE_ANDX).
 
 ### `dce_rpc`
 
-- **Type**: `dce_rpc`
+- **Type**: [`dce_rpc`](../objects/dce_rpc.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -58,7 +72,7 @@ The negotiated protocol dialect.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -74,7 +88,7 @@ Indicates how the file was opened (e.g. normal, delete on close).
 
 ### `response`
 
-- **Type**: `response`
+- **Type**: [`response`](../objects/response.md)
 - **Requirement**: recommended
 - **Group**: primary
 

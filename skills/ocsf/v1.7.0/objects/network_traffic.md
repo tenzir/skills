@@ -92,7 +92,7 @@ The start time of the observation or reporting period.
 
 ### `timespan`
 
-- **Type**: `timespan`
+- **Type**: [`timespan`](timespan.md)
 - **Requirement**: optional
 
 The time span object representing the duration of the observation or reporting period.

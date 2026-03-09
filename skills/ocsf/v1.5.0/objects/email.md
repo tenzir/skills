@@ -6,8 +6,6 @@ The Email object describes the email metadata such as sender, recipients, and di
 
 ## Attributes
 
-### `$include`
-
 ### `cc`
 
 - **Type**: `email_t`
@@ -38,7 +36,7 @@ The machine-readable Delivered-To email header values. For example `example.user
 
 ### `files`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: optional
 
 The files embedded or attached to the email.
@@ -59,7 +57,7 @@ The human-readable email header From Mailbox value. For example `'Example User <
 
 ### `http_headers`
 
-- **Type**: `http_header`
+- **Type**: [`http_header`](http_header.md)
 - **Requirement**: optional
 
 Additional HTTP headers of an HTTP request or response.
@@ -153,7 +151,7 @@ The unique identifier of the email thread.
 
 ### `urls`
 
-- **Type**: `url`
+- **Type**: [`url`](url.md)
 - **Requirement**: optional
 
 The URLs embedded in the email.

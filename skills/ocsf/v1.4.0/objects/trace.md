@@ -29,14 +29,14 @@ The flags associated with the trace, used to indicate specific properties or beh
 
 ### `service`
 
-- **Type**: `service`
+- **Type**: [`service`](service.md)
 - **Requirement**: optional
 
 Identifies the service or component generating the trace, helping to track and correlate the flow of requests through various parts of a distributed system. This information is essential for understanding the role and performance of specific services within the broader context of system operations and for diagnosing issues across different components.
 
 ### `span`
 
-- **Type**: `span`
+- **Type**: [`span`](span.md)
 - **Requirement**: optional
 
 Represents a single unit of work or operation within a distributed trace. A span typically tracks the execution of a request across a service, capturing important details such as the operation, timestamps, and status. Spans help break down the overall trace into smaller, manageable parts, enabling detailed analysis of the performance and behavior of specific operations within the system. They are crucial for understanding latency, dependencies, and bottlenecks in complex distributed systems.

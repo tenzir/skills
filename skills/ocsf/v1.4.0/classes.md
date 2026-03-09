@@ -4,6 +4,7 @@
 
 Application Activity events report detailed information about the behavior of applications and services.
 
+- [Application Activity (application)](classes/application.md) [base class]
 - [API Activity](classes/api_activity.md)
 - [Application Error](classes/application_error.md)
 - [Application Lifecycle](classes/application_lifecycle.md)
@@ -17,6 +18,7 @@ Application Activity events report detailed information about the behavior of ap
 
 Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
 
+- [Discovery (discovery)](classes/discovery.md) [base class]
 - [Admin Group Query](classes/admin_group_query.md)
 - [Cloud Resources Inventory Info](classes/cloud_resources_inventory_info.md)
 - [Device Config State](classes/config_state.md)
@@ -57,6 +59,7 @@ Findings events report findings, detections, and possible resolutions of malware
 
 Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
 
+- [Identity & Access Management (iam)](classes/iam.md) [base class]
 - [Account Change](classes/account_change.md)
 - [Authentication](classes/authentication.md)
 - [Authorize Session](classes/authorize_session.md)
@@ -68,6 +71,7 @@ Identity & Access Management (IAM) events relate to the supervision of the syste
 
 Network Activity events.
 
+- [Network (network)](classes/network.md) [base class]
 - [DHCP Activity](classes/dhcp_activity.md)
 - [DNS Activity](classes/dns_activity.md)
 - [Email Activity](classes/email_activity.md)
@@ -96,6 +100,7 @@ Remediation events report the results of remediation commands targeting files, p
 
 System Activity events.
 
+- [System Activity (system)](classes/system.md) [base class]
 - [Event Log Activity](classes/event_log_activity.md)
 - [File System Activity](classes/file_activity.md)
 - [Kernel Activity](classes/kernel_activity.md)
@@ -110,6 +115,7 @@ System Activity events.
 
 Unmanned Systems events report the activity, existence, and/or state of unmanned systems for tracking, mission planning, and other related activities.
 
+- [Unmanned Systems (unmanned_systems)](classes/unmanned_systems.md) [base class]
 - [Airborne Broadcast Activity](classes/airborne_broadcast_activity.md)
 - [Drone Flights Activity](classes/drone_flights_activity.md)
 

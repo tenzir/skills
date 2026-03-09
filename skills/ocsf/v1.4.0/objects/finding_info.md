@@ -8,14 +8,14 @@ The Finding Information object describes metadata related to a security finding 
 
 ### `analytic`
 
-- **Type**: `analytic`
+- **Type**: [`analytic`](analytic.md)
 - **Requirement**: recommended
 
 The analytic technique used to analyze and derive insights from the data or information that led to the finding or conclusion.
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](attack.md)
 - **Requirement**: optional
 
 The [MITRE ATT&CK®](https://attack.mitre.org) technique and associated tactics related to the finding.
@@ -52,7 +52,7 @@ It can differ from the `created_time` timestamp, which reflects the time this fi
 
 ### `kill_chain`
 
-- **Type**: `kill_chain_phase`
+- **Type**: [`kill_chain_phase`](kill_chain_phase.md)
 - **Requirement**: optional
 
 The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html) provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
@@ -75,7 +75,7 @@ The time when the finding was last modified.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 Details about the product that reported the finding.
@@ -89,14 +89,14 @@ The unique identifier of the product that reported the finding.
 
 ### `related_analytics`
 
-- **Type**: `analytic`
+- **Type**: [`analytic`](analytic.md)
 - **Requirement**: optional
 
 Other analytics related to this finding.
 
 ### `related_events`
 
-- **Type**: `related_event`
+- **Type**: [`related_event`](related_event.md)
 - **Requirement**: optional
 
 Describes events and/or other findings related to the finding as identified by the security product. Note that these events may or may not be in OCSF.
@@ -117,7 +117,7 @@ The URL pointing to the source of the finding.
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated with the finding.

@@ -2,9 +2,29 @@
 
 File Transfer Protocol (FTP) Activity events report file transfers between a server and a client as seen on the network.
 
-- **UID**: `8`
+- **Class UID**: `4008`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`, `osint`
+
+## Inherited attributes
+
+**From Network:**
+- `dst_endpoint` (required)
+- `connection_info` (recommended)
+- `proxy` (recommended)
+- `src_endpoint` (recommended)
+- `traffic` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -50,7 +70,7 @@ The list of responses to the FTP command.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: optional
 - **Group**: context
 

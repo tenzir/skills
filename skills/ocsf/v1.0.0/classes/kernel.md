@@ -2,9 +2,27 @@
 
 Kernel Activity events report when an process creates, reads, or deletes a kernel resource.
 
-- **UID**: `3`
+- **Class UID**: `1003`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+
+## Associations
+
+- `device` ↔ `actor.user`
+- `actor.user` ↔ `device`
+
+## Inherited attributes
+
+**From System Activity:**
+- `actor` (required)
+- `device` (required)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -22,7 +40,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `kernel`
 
-- **Type**: `kernel`
+- **Type**: [`kernel`](../objects/kernel.md)
 - **Requirement**: required
 - **Group**: primary
 

@@ -2,13 +2,29 @@
 
 API events describe general CRUD (Create, Read, Update, Delete) API activities, e.g. (AWS Cloudtrail)
 
-- **UID**: `3`
+- **Class UID**: `6003`
 - **Category**: Application Activity
-- **Extends**: `application`
+- **Extends**: [Application Activity (application)](application.md)
+- **Profiles**: `trace`, `ai_operation`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -26,7 +42,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -34,7 +50,7 @@ The actor object describes details about the user/role/process that was the sour
 
 ### `api`
 
-- **Type**: `api`
+- **Type**: [`api`](../objects/api.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -42,7 +58,7 @@ Describes details about a typical API (Application Programming Interface) call.
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -50,7 +66,7 @@ The network destination endpoint.
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -58,7 +74,7 @@ Details about the underlying http request.
 
 ### `http_response`
 
-- **Type**: `http_response`
+- **Type**: [`http_response`](../objects/http_response.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -66,7 +82,7 @@ Details about the underlying http response.
 
 ### `resources`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -74,7 +90,7 @@ Details about resources that were affected by the activity/event.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: required
 - **Group**: primary
 

@@ -2,11 +2,21 @@
 
 The attributes that add incident handling semantics to a Finding.
 
+## Applies to
+
+- Application Security Posture Finding
+- Compliance Finding
+- Data Security Finding
+- Detection Finding
+- Finding
+- Incident Finding
+- Vulnerability Finding
+
 ## Attributes
 
 ### `assignee`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -14,7 +24,7 @@ The details of the user assigned to an Incident.
 
 ### `assignee_group`
 
-- **Type**: `group`
+- **Type**: [`group`](../objects/group.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -98,7 +108,7 @@ A Url link used to access the original incident.
 
 ### `ticket`
 
-- **Type**: `ticket`
+- **Type**: [`ticket`](../objects/ticket.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -106,7 +116,7 @@ The linked ticket in the ticketing system.
 
 ### `tickets`
 
-- **Type**: `ticket`
+- **Type**: [`ticket`](../objects/ticket.md)
 - **Requirement**: optional
 - **Group**: context
 

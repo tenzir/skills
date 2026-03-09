@@ -15,14 +15,14 @@ The memory address where the module was loaded.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: recommended
 
 The module file object.
 
 ### `function_invocation`
 
-- **Type**: `function_invocation`
+- **Type**: [`function_invocation`](function_invocation.md)
 - **Requirement**: optional
 
 Details about the invocation of the function given in `function_name`.

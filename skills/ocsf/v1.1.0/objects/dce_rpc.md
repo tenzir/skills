@@ -29,7 +29,7 @@ The list of interface flags.
 
 ### `rpc_interface`
 
-- **Type**: `rpc_interface`
+- **Type**: [`rpc_interface`](rpc_interface.md)
 - **Requirement**: required
 
 The RPC Interface object describes the details pertaining to the remote procedure call interface.

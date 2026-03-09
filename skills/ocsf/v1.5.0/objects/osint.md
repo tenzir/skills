@@ -8,21 +8,21 @@ The OSINT (Open Source Intelligence) object contains details related to an indic
 
 ### `answers`
 
-- **Type**: `dns_answer`
+- **Type**: [`dns_answer`](dns_answer.md)
 - **Requirement**: optional
 
 Any pertinent DNS answers information related to an indicator or OSINT analysis.
 
 ### `attacks`
 
-- **Type**: `attack`
+- **Type**: [`attack`](attack.md)
 - **Requirement**: optional
 
 MITRE ATT&CK Tactics, Techniques, and/or Procedures (TTPs) pertinent to an indicator or OSINT analysis.
 
 ### `autonomous_system`
 
-- **Type**: `autonomous_system`
+- **Type**: [`autonomous_system`](autonomous_system.md)
 - **Requirement**: optional
 
 Any pertinent autonomous system information related to an indicator or OSINT analysis.
@@ -59,7 +59,7 @@ The normalized confidence refers to the accuracy of collected information relate
 
 ### `campaign`
 
-- **Type**: `campaign`
+- **Type**: [`campaign`](campaign.md)
 - **Requirement**: optional
 
 The campaign object describes details about the campaign that was the source of the activity.
@@ -80,7 +80,7 @@ The timestamp when the indicator was initially created or identified.
 
 ### `creator`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The identifier of the user, system, or organization that contributed the indicator.
@@ -94,14 +94,14 @@ A detailed explanation of the indicator, including its context, purpose, and rel
 
 ### `email`
 
-- **Type**: `email`
+- **Type**: [`email`](email.md)
 - **Requirement**: optional
 
 Any email information pertinent to an indicator or OSINT analysis.
 
 ### `email_auth`
 
-- **Type**: `email_auth`
+- **Type**: [`email_auth`](email_auth.md)
 - **Requirement**: optional
 
 Any email authentication information pertinent to an indicator or OSINT analysis.
@@ -122,7 +122,7 @@ A unique identifier assigned by an external system for cross-referencing.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: optional
 
 Any pertinent file information related to an indicator or OSINT analysis.
@@ -169,7 +169,7 @@ A grouping of adversarial behaviors and resources believed to be associated with
 
 ### `kill_chain`
 
-- **Type**: `kill_chain_phase`
+- **Type**: [`kill_chain_phase`](kill_chain_phase.md)
 - **Requirement**: optional
 
 Lockheed Martin Kill Chain Phases pertinent to an indicator or OSINT analysis.
@@ -183,14 +183,14 @@ Tags or keywords associated with the indicator to enhance searchability.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: optional
 
 Any pertinent geolocation information related to an indicator or OSINT analysis.
 
 ### `malware`
 
-- **Type**: `malware`
+- **Type**: [`malware`](malware.md)
 - **Requirement**: optional
 
 A list of Malware objects, describing details about the identified malware.
@@ -211,14 +211,14 @@ The `name` is a pointer/reference to an attribute within the OCSF event data. Fo
 
 ### `related_analytics`
 
-- **Type**: `analytic`
+- **Type**: [`analytic`](analytic.md)
 - **Requirement**: optional
 
 Any analytics related to an indicator or OSINT analysis.
 
 ### `reputation`
 
-- **Type**: `reputation`
+- **Type**: [`reputation`](reputation.md)
 - **Requirement**: optional
 
 Related reputational analysis from third-party engines and analysts for a given indicator or OSINT analysis.
@@ -239,7 +239,7 @@ Provides a reference to an external source of information related to the CTI bei
 
 ### `script`
 
-- **Type**: `script`
+- **Type**: [`script`](script.md)
 - **Requirement**: optional
 
 Any pertinent script information related to an indicator or OSINT analysis.
@@ -272,7 +272,7 @@ The normalized severity level of the threat indicator, typically reflecting its 
 
 ### `signatures`
 
-- **Type**: `digital_signature`
+- **Type**: [`digital_signature`](digital_signature.md)
 - **Requirement**: optional
 
 Any digital signatures or hashes related to an indicator or OSINT analysis.
@@ -300,7 +300,7 @@ A CIDR or network block related to an indicator or OSINT analysis.
 
 ### `threat_actor`
 
-- **Type**: `threat_actor`
+- **Type**: [`threat_actor`](threat_actor.md)
 - **Requirement**: optional
 
 A threat actor is an individual or group that conducts malicious cyber activities, often with financial, political, or ideological motives.
@@ -385,14 +385,14 @@ The vendor name of a tool which generates intelligence or provides indicators.
 
 ### `vulnerabilities`
 
-- **Type**: `vulnerability`
+- **Type**: [`vulnerability`](vulnerability.md)
 - **Requirement**: optional
 
 Any vulnerabilities related to an indicator or OSINT analysis.
 
 ### `whois`
 
-- **Type**: `whois`
+- **Type**: [`whois`](whois.md)
 - **Requirement**: optional
 
 Any pertinent WHOIS information related to an indicator or OSINT analysis.

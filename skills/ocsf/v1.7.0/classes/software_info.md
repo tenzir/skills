@@ -2,15 +2,33 @@
 
 Software Inventory Info events report device software inventory data that is either logged or proactively collected. For example, when collecting device information from a CMDB or running a network sweep of connected devices.
 
-- **UID**: `20`
+- **Class UID**: `5020`
 - **Category**: Discovery
-- **Extends**: `discovery`
+- **Extends**: [Discovery (discovery)](discovery.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -18,7 +36,7 @@ The actor object describes details about the user/role/process that was the sour
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -26,7 +44,7 @@ The device that is being discovered by an inventory process.
 
 ### `package`
 
-- **Type**: `package`
+- **Type**: [`package`](../objects/package.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -34,7 +52,7 @@ The device software that is being discovered by an inventory process.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](../objects/product.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -42,7 +60,7 @@ Additional product attributes that have been discovered or enriched from a catal
 
 ### `sbom`
 
-- **Type**: `sbom`
+- **Type**: [`sbom`](../objects/sbom.md)
 - **Requirement**: recommended
 - **Group**: primary
 

@@ -2,9 +2,38 @@
 
 Remote Desktop Protocol (RDP) Activity events report remote client connections to a server as seen on the network.
 
-- **UID**: `5`
+- **Class UID**: `4005`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `network_proxy`, `load_balancer`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `dst_endpoint`, `src_endpoint`
+
+## Inherited attributes
+
+**From Network:**
+- `connection_info` (recommended)
+- `dst_endpoint` (recommended)
+- `proxy` (recommended)
+- `src_endpoint` (recommended)
+- `traffic` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -42,14 +71,14 @@ The list of observed certificates in an RDP TLS connection.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: optional
 
 The device instigating the RDP connection.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -65,7 +94,7 @@ The client identifier cookie during client/server exchange.
 
 ### `keyboard_info`
 
-- **Type**: `keyboard_info`
+- **Type**: [`keyboard_info`](../objects/keyboard_info.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -81,7 +110,7 @@ The Remote Desktop Protocol version.
 
 ### `remote_display`
 
-- **Type**: `display`
+- **Type**: [`display`](../objects/display.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -89,7 +118,7 @@ The remote display affiliated with the event
 
 ### `request`
 
-- **Type**: `request`
+- **Type**: [`request`](../objects/request.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -97,7 +126,7 @@ The client request in an RDP network connection.
 
 ### `response`
 
-- **Type**: `response`
+- **Type**: [`response`](../objects/response.md)
 - **Requirement**: recommended
 - **Group**: primary
 

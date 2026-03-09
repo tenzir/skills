@@ -2,9 +2,22 @@
 
 Group Management events report management updates to a group, including updates to membership and permissions.
 
-- **UID**: `6`
+- **Class UID**: `3006`
 - **Category**: Identity & Access Management
-- **Extends**: `iam`
+- **Extends**: [Identity & Access Management (iam)](iam.md)
+- **Profiles**: `host`, `cloud`, `datetime`
+
+## Constraints
+
+- **At least one of**: `privileges`, `user`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -26,7 +39,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `group`
 
-- **Type**: `group`
+- **Type**: [`group`](../objects/group.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -42,7 +55,7 @@ A list of privileges assigned to the group.
 
 ### `resource`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: optional
 - **Group**: primary
 
@@ -50,7 +63,7 @@ Resource that the privileges give access to.
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: recommended
 - **Group**: primary
 

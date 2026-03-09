@@ -2,9 +2,9 @@
 
 File Transfer Protocol (FTP) Activity events report file transfers between a server and a client as seen on the network.
 
-- **UID**: `8`
+- **Class UID**: `4008`
 - **Category**: Network Activity
-- **Extends**: `network_activity`
+- **Extends**: [network_activity (network_activity)](network_activity.md)
 
 ## Attributes
 

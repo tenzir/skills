@@ -8,7 +8,7 @@ The Permission Analysis object describes analysis results of permissions, polici
 
 ### `condition_keys`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The condition keys and their values that were evaluated during policy analysis, including contextual constraints that affect permission grants. These conditions define when and how permissions are applied. Examples: `aws:SourceIp:1.2.3.4`, `aws:RequestedRegion:us-east-1`.
@@ -22,7 +22,7 @@ The specific privileges, actions, or permissions that are explicitly granted by 
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: recommended
 
 Detailed information about the policy document that was analyzed, including policy metadata, version, type (identity-based, resource-based, etc.), and structural details. This provides context for understanding the scope and nature of the permission analysis.

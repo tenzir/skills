@@ -6,8 +6,6 @@ The Product object describes characteristics of a software product.
 
 ## Attributes
 
-### `$include`
-
 ### `cpe_name`
 
 - **Type**: `string_t`
@@ -17,7 +15,7 @@ The Common Platform Enumeration (CPE) name as described by ([NIST](https://nvd.n
 
 ### `feature`
 
-- **Type**: `feature`
+- **Type**: [`feature`](feature.md)
 - **Requirement**: optional
 
 The feature that reported the event.

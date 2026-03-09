@@ -36,7 +36,7 @@ The date and time at which a group or an Intent-Based Network Participant operat
 
 ### `locations`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: recommended
 
 A list of Position Location Information (PLI) (latitude/longitude pairs) defining the area where a group or Intent-Based Network Participant operation is taking place. (This field is only applicable to Network Remote ID.)

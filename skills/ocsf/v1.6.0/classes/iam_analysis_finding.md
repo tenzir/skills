@@ -4,15 +4,40 @@ This finding represents an IAM analysis result, which evaluates IAM policies, ac
 Note: Use `permission_analysis_results` for identity-centric analysis (evaluating what an identity can do) and `access_analysis_result` for resource-centric analysis (evaluating who can access a resource). These complement each other for comprehensive IAM security assessment.
 Note: If the Finding is an incident, i.e. requires incident workflow, also apply the `incident` profile or aggregate this finding into an `Incident Finding`.
 
-- **UID**: `8`
+- **Class UID**: `2008`
 - **Category**: Findings
-- **Extends**: `finding`
+- **Extends**: [Finding (finding)](finding.md)
+- **Profiles**: `incident`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `access_analysis_result`, `applications`, `identity_activity_metrics`, `permission_analysis_results`
+
+## Inherited attributes
+
+**From Finding:**
+- `finding_info` (required)
+- `confidence_id` (recommended)
+- `status_id` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `access_analysis_result`
 
-- **Type**: `access_analysis_result`
+- **Type**: [`access_analysis_result`](../objects/access_analysis_result.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -20,7 +45,7 @@ Describes access relationships and pathways between identities, resources, focus
 
 ### `applications`
 
-- **Type**: `application`
+- **Type**: [`application`](../objects/application.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -28,7 +53,7 @@ Details about applications, services, or systems that are accessible based on th
 
 ### `identity_activity_metrics`
 
-- **Type**: `identity_activity_metrics`
+- **Type**: [`identity_activity_metrics`](../objects/identity_activity_metrics.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -36,7 +61,7 @@ Describes usage activity and other metrics of an Identity i.e. AWS IAM User, GCP
 
 ### `permission_analysis_results`
 
-- **Type**: `permission_analysis_result`
+- **Type**: [`permission_analysis_result`](../objects/permission_analysis_result.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -44,7 +69,7 @@ Describes analysis results of permissions, policies directly associated with an 
 
 ### `remediation`
 
-- **Type**: `remediation`
+- **Type**: [`remediation`](../objects/remediation.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -52,7 +77,7 @@ Describes the recommended remediation steps to address identified issue(s).
 
 ### `resources`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -60,7 +85,7 @@ Details about resources involved in the IAM analysis. For identity-centric analy
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](../objects/user.md)
 - **Requirement**: recommended
 - **Group**: primary
 

@@ -2,9 +2,18 @@
 
 Network File Activity events report activities on a cloud file storage service such as Box, MS OneDrive, or Google Drive.
 
-- **UID**: `10`
+- **Class UID**: `4010`
 - **Category**: Network Activity
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -34,7 +43,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -50,7 +59,7 @@ The share expiration time.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -58,7 +67,7 @@ The file that is the target of the activity.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: required
 - **Group**: primary
 

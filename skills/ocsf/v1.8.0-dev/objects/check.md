@@ -22,7 +22,7 @@ The name or title of the compliance check. For example, CIS: `Ensure mounting of
 
 ### `resource`
 
-- **Type**: `resource_details`
+- **Type**: [`resource_details`](resource_details.md)
 - **Requirement**: optional
 
 Describes details about the resource that this check evaluated.

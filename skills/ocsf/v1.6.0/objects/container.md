@@ -8,14 +8,14 @@ The Container object describes an instance of a specific container. A container 
 
 ### `hash`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 Commit hash of image created for docker or the SHA256 hash of the container. For example: `13550340a8681c84c861aac2e5b440161c2b33a3e4f302ac680ca5b686de48de`.
 
 ### `image`
 
-- **Type**: `image`
+- **Type**: [`image`](image.md)
 - **Requirement**: recommended
 
 The container image used as a template to run the container.
@@ -78,7 +78,7 @@ The tag used by the container. It can indicate version, format, OS.
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the container.

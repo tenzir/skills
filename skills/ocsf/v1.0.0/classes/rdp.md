@@ -2,9 +2,9 @@
 
 Remote Desktop Protocol (RDP) Activity events report remote client connections to a server as seen on the network.
 
-- **UID**: `5`
+- **Class UID**: `4005`
 - **Category**: Network Activity
-- **Extends**: `network_activity`
+- **Extends**: [network_activity (network_activity)](network_activity.md)
 
 ## Attributes
 
@@ -41,7 +41,7 @@ The list of observed certificates in an RDP TLS connection.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: optional
 
 The device instigating the RDP connection.
@@ -64,14 +64,14 @@ The Remote Desktop Protocol version.
 
 ### `remote_display`
 
-- **Type**: `display`
+- **Type**: [`display`](../objects/display.md)
 - **Requirement**: optional
 
 The remote display affiliated with the event
 
 ### `request`
 
-- **Type**: `request`
+- **Type**: [`request`](../objects/request.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -79,7 +79,7 @@ The client request in an RDP network connection.
 
 ### `response`
 
-- **Type**: `response`
+- **Type**: [`response`](../objects/response.md)
 - **Requirement**: recommended
 - **Group**: primary
 

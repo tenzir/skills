@@ -8,7 +8,7 @@ The Additional Restriction object describes supplementary access controls and gu
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: required
 
 Detailed information about the policy document that defines this restriction, including policy metadata, type, scope, and the specific rules or conditions that implement the access control.

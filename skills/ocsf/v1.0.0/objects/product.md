@@ -8,7 +8,7 @@ The Product object describes characteristics of a software product.
 
 ### `feature`
 
-- **Type**: `feature`
+- **Type**: [`feature`](feature.md)
 
 The feature that reported the event.
 

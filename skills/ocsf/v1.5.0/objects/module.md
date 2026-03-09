@@ -15,7 +15,7 @@ The memory address where the module was loaded.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: recommended
 
 The module file object.

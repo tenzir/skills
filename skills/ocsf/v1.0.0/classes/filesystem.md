@@ -2,9 +2,26 @@
 
 File System Activity events report when a process performs an action on a file or folder.
 
-- **UID**: `1`
+- **Class UID**: `1001`
 - **Category**: System Activity
-- **Extends**: `system`
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+
+## Associations
+
+- `device` ↔ `actor.user`
+- `actor.user` ↔ `device`
+
+## Inherited attributes
+
+**From System Activity:**
+- `device` (required)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
@@ -30,7 +47,7 @@ The activity ID of the event.
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: required
 
 The actor that performed the activity on the `file` object
@@ -63,7 +80,7 @@ The original Windows mask that is required to create the object.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -79,7 +96,7 @@ File content differences used for change detection. For example, a common use ca
 
 ### `file_result`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: optional
 - **Group**: primary
 

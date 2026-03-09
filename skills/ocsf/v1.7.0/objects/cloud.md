@@ -8,7 +8,7 @@ The Cloud object describes the cloud computing environment where an event or fin
 
 ### `account`
 
-- **Type**: `account`
+- **Type**: [`account`](account.md)
 - **Requirement**: optional
 
 The Account object containing details about the cloud account, subscription, or billing unit where the event or finding was created. This object includes properties such as the account name, unique identifier, type, labels, and tags.
@@ -34,7 +34,7 @@ Examples:
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: optional
 
 The Organization object containing details about the organizational unit or management structure that governs the account, subscription, or project where the event or finding was created. This object includes properties such as the organization name, unique identifier, type, and other organizational metadata.

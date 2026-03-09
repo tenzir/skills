@@ -6,8 +6,6 @@ The Endpoint object describes a physical or virtual device that connects to and 
 
 ## Attributes
 
-### `$include`
-
 ### `domain`
 
 - **Type**: `string_t`
@@ -24,7 +22,7 @@ The fully qualified name of the endpoint.
 
 ### `hw_info`
 
-- **Type**: `device_hw_info`
+- **Type**: [`device_hw_info`](device_hw_info.md)
 - **Requirement**: optional
 
 The endpoint hardware information.
@@ -59,7 +57,7 @@ The IP address of the endpoint, in either IPv4 or IPv6 format.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: optional
 
 The geographical location of the endpoint.
@@ -79,7 +77,7 @@ The short name of the endpoint.
 
 ### `os`
 
-- **Type**: `os`
+- **Type**: [`os`](os.md)
 - **Requirement**: optional
 
 The endpoint operating system.

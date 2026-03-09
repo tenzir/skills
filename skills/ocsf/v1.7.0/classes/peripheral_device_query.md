@@ -2,15 +2,38 @@
 
 Peripheral Device Query events report information about peripheral devices.
 
-- **UID**: `14`
+- **Class UID**: `5014`
 - **Category**: Discovery
-- **Extends**: `discovery_result`
+- **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Discovery Result:**
+- `query_result_id` (required)
+- `query_info` (recommended)
+- `query_result` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `peripheral_device`
 
-- **Type**: `peripheral_device`
+- **Type**: [`peripheral_device`](../objects/peripheral_device.md)
 - **Requirement**: required
 - **Group**: primary
 

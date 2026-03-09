@@ -2,13 +2,24 @@
 
 Email URL Activity events report URLs within an email.
 
-- **UID**: `12`
+- **Class UID**: `4012`
 - **Category**: Network Activity
-- **Extends**: `base_event`
+- **Extends**: [Base Event (base_event)](base_event.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -34,7 +45,7 @@ The unique identifier of the email, used to correlate related email alert and ac
 
 ### `url`
 
-- **Type**: `url`
+- **Type**: [`url`](../objects/url.md)
 - **Requirement**: required
 - **Group**: primary
 

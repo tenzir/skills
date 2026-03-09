@@ -15,7 +15,7 @@ The concatenation of key exchange, encryption, authentication and compression al
 
 ### `fingerprint`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: required
 
 The hash of the key exchange, encryption, authentication and compression algorithms.

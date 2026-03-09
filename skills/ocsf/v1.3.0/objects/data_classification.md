@@ -60,7 +60,7 @@ The normalized identifier of the file content confidentiality indicator.
 
 ### `policy`
 
-- **Type**: `policy`
+- **Type**: [`policy`](policy.md)
 - **Requirement**: optional
 
 Details about the data policy that governs data handling and security measures related to classification.

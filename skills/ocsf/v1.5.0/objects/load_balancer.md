@@ -22,14 +22,14 @@ The numeric response status code detailing the connection from the load balancer
 
 ### `dst_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](network_endpoint.md)
 - **Requirement**: recommended
 
 The destination to which the load balancer is distributing traffic.
 
 ### `endpoint_connections`
 
-- **Type**: `endpoint_connection`
+- **Type**: [`endpoint_connection`](endpoint_connection.md)
 - **Requirement**: recommended
 
 An object detailing the load balancer connection attempts and responses.
@@ -57,7 +57,7 @@ The load balancer message.
 
 ### `metrics`
 
-- **Type**: `metric`
+- **Type**: [`metric`](metric.md)
 - **Requirement**: optional
 
 General purpose metrics associated with the load balancer.

@@ -6,8 +6,6 @@ The File object represents the metadata associated with a file stored in a compu
 
 ## Attributes
 
-### `$include`
-
 ### `accessed_time`
 
 - **Type**: `timestamp_t`
@@ -17,7 +15,7 @@ The time when the file was last accessed.
 
 ### `accessor`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The name of the user who last accessed the object.
@@ -71,7 +69,7 @@ The time when the file was created.
 
 ### `creator`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user that created the file.
@@ -110,7 +108,7 @@ Identifies the type of a disk drive, i.e. fixed, removable, etc.
 
 ### `encryption_details`
 
-- **Type**: `encryption_details`
+- **Type**: [`encryption_details`](encryption_details.md)
 - **Requirement**: optional
 
 The encryption details of the file. Should be populated if the file is encrypted.
@@ -124,7 +122,7 @@ The extension of the file, excluding the leading dot. For example: `exe` from `s
 
 ### `hashes`
 
-- **Type**: `fingerprint`
+- **Type**: [`fingerprint`](fingerprint.md)
 - **Requirement**: recommended
 
 An array of hash attributes.
@@ -194,7 +192,7 @@ The time when the file was last modified.
 
 ### `modifier`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user that last modified the file.
@@ -208,7 +206,7 @@ The name of the file. For example: `svchost.exe`
 
 ### `owner`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: optional
 
 The user that owns the file/object.
@@ -229,7 +227,7 @@ The full path to the file. For example: `c:\windows\system32\svchost.exe`.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 The product that created or installed the file.
@@ -243,14 +241,14 @@ The object security descriptor.
 
 ### `signature`
 
-- **Type**: `digital_signature`
+- **Type**: [`digital_signature`](digital_signature.md)
 - **Requirement**: optional
 
 The digital signature of the file.
 
 ### `signatures`
 
-- **Type**: `digital_signature`
+- **Type**: [`digital_signature`](digital_signature.md)
 - **Requirement**: optional
 
 A collection of `Digital Signature` objects.
@@ -271,7 +269,7 @@ The storage class of the file. For example in AWS S3: `STANDARD, STANDARD_IA, GL
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the file.
@@ -320,7 +318,7 @@ The file URI, such as those reporting by static analysis tools. E.g., `file:///C
 
 ### `url`
 
-- **Type**: `url`
+- **Type**: [`url`](url.md)
 - **Requirement**: optional
 
 The URL of the file, when applicable.
@@ -341,7 +339,7 @@ The volume on the storage device where the file is located.
 
 ### `xattributes`
 
-- **Type**: `object`
+- **Type**: [`object`](object.md)
 - **Requirement**: optional
 
 An unordered collection of zero or more name/value pairs where each pair represents a file or folder extended attribute.For example: Windows alternate data stream attributes (ADS stream name, ADS size, etc.), user-defined or application-defined attributes, ACL, owner, primary group, etc. Examples from DCS:

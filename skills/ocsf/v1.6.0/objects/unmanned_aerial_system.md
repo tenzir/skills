@@ -8,14 +8,14 @@ The Unmanned Aerial System object describes the characteristics, Position Locati
 
 ### `hw_info`
 
-- **Type**: `device_hw_info`
+- **Type**: [`device_hw_info`](device_hw_info.md)
 - **Requirement**: optional
 
 The endpoint hardware information.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: recommended
 
 The detailed geographical location usually associated with an IP address.

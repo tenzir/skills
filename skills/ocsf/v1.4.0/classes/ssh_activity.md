@@ -2,9 +2,38 @@
 
 SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
 
-- **UID**: `7`
+- **Class UID**: `4007`
 - **Category**: Network Activity
-- **Extends**: `network`
+- **Extends**: [Network (network)](network.md)
+- **Profiles**: `network_proxy`, `load_balancer`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Constraints
+
+- **At least one of**: `dst_endpoint`, `src_endpoint`
+
+## Inherited attributes
+
+**From Network:**
+- `connection_info` (recommended)
+- `dst_endpoint` (recommended)
+- `proxy` (recommended)
+- `src_endpoint` (recommended)
+- `traffic` (recommended)
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -55,7 +84,7 @@ The normalized identifier of the SSH authentication type.
 
 ### `client_hassh`
 
-- **Type**: `hassh`
+- **Type**: [`hassh`](../objects/hassh.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -63,7 +92,7 @@ The Client HASSH fingerprinting object.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](../objects/file.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -79,7 +108,7 @@ The Secure Shell Protocol version.
 
 ### `server_hassh`
 
-- **Type**: `hassh`
+- **Type**: [`hassh`](../objects/hassh.md)
 - **Requirement**: recommended
 - **Group**: primary
 

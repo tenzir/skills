@@ -6,8 +6,6 @@ The Resource object contains attributes that provide information about a particu
 
 ## Attributes
 
-### `$include`
-
 ### `created_time`
 
 - **Type**: `timestamp_t`
@@ -44,7 +42,7 @@ The time when the resource was last modified.
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the resource.

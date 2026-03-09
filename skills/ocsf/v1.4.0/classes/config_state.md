@@ -2,15 +2,33 @@
 
 Device Config State events report device configuration data and CIS Benchmark results.
 
-- **UID**: `2`
+- **Class UID**: `5002`
 - **Category**: Discovery
-- **Extends**: `discovery`
+- **Extends**: [Discovery (discovery)](discovery.md)
+- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+
+## Inherited attributes
+
+**From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
+- `metadata` (required)
+- `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `actor`
 
-- **Type**: `actor`
+- **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -18,7 +36,7 @@ The actor object describes details about the user/role/process that was the sour
 
 ### `cis_benchmark_result`
 
-- **Type**: `cis_benchmark_result`
+- **Type**: [`cis_benchmark_result`](../objects/cis_benchmark_result.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -26,7 +44,7 @@ The CIS benchmark result.
 
 ### `device`
 
-- **Type**: `device`
+- **Type**: [`device`](../objects/device.md)
 - **Requirement**: required
 - **Group**: primary
 

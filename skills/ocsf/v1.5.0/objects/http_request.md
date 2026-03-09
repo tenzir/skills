@@ -22,7 +22,7 @@ The actual length of the HTTP request body, in number of bytes, independent of a
 
 ### `http_headers`
 
-- **Type**: `http_header`
+- **Type**: [`http_header`](http_header.md)
 - **Requirement**: recommended
 
 Additional HTTP headers of an HTTP request or response.
@@ -68,7 +68,7 @@ The unique identifier of the http request.
 
 ### `url`
 
-- **Type**: `url`
+- **Type**: [`url`](url.md)
 - **Requirement**: recommended
 
 The URL object that pertains to the request.

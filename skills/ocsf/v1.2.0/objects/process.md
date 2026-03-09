@@ -6,8 +6,6 @@ The Process object describes a running instance of a launched program. Defined b
 
 ## Attributes
 
-### `$include`
-
 ### `cmd_line`
 
 - **Type**: `string_t`
@@ -25,7 +23,7 @@ The time when the process was created/started.
 
 ### `file`
 
-- **Type**: `file`
+- **Type**: [`file`](file.md)
 - **Requirement**: recommended
 
 The process file object.
@@ -78,7 +76,7 @@ The friendly name of the process, for example: `Notepad++`.
 
 ### `parent_process`
 
-- **Type**: `process`
+- **Type**: [`process`](process.md)
 - **Requirement**: recommended
 
 The parent process of this process object. It is recommended to only populate this field for the first process object, to prevent deep nesting.
@@ -100,7 +98,7 @@ The name of the containment jail (i.e., sandbox). For example, hardened_ps, high
 
 ### `session`
 
-- **Type**: `session`
+- **Type**: [`session`](session.md)
 - **Requirement**: optional
 
 The user session under which this process is running.
@@ -127,14 +125,14 @@ A unique identifier for this process assigned by the producer (tool).  Facilitat
 
 ### `user`
 
-- **Type**: `user`
+- **Type**: [`user`](user.md)
 - **Requirement**: recommended
 
 The user under which this process is running.
 
 ### `xattributes`
 
-- **Type**: `object`
+- **Type**: [`object`](object.md)
 - **Requirement**: optional
 
 An unordered collection of zero or more name/value pairs that represent a process extended attribute.

@@ -50,7 +50,7 @@ The initial discovery time of the device.
 
 ### `groups`
 
-- **Type**: `group`
+- **Type**: [`group`](group.md)
 - **Requirement**: optional
 
 The group names to which the device belongs. For example: `["Windows Laptops", "Engineering"]`.
@@ -71,7 +71,7 @@ The name of the hypervisor running on the device. For example, `Xen`, `VMware`, 
 
 ### `image`
 
-- **Type**: `image`
+- **Type**: [`image`](image.md)
 - **Requirement**: optional
 
 The image used as a template to run the virtual machine.
@@ -134,7 +134,7 @@ The most recent discovery time of the device.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: optional
 
 The geographical location of the device.
@@ -164,7 +164,7 @@ Note: The Name could be any other string that helps to identify the device, such
 
 ### `network_interfaces`
 
-- **Type**: `network_interface`
+- **Type**: [`network_interface`](network_interface.md)
 - **Requirement**: optional
 
 The network interfaces that are associated with the device, one for each unique MAC address/IP address/hostname/name combination.
@@ -173,7 +173,7 @@ Note: The first element of the array is the network information that pertains to
 
 ### `org`
 
-- **Type**: `organization`
+- **Type**: [`organization`](organization.md)
 - **Requirement**: optional
 
 Organization and org unit related to the device.

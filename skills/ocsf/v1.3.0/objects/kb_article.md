@@ -8,7 +8,7 @@ The KB Article object contains metadata that describes the patch or update.
 
 ### `avg_timespan`
 
-- **Type**: `timespan`
+- **Type**: [`timespan`](timespan.md)
 - **Requirement**: optional
 
 The average time to patch.
@@ -52,7 +52,7 @@ The unique identifier for the kb article.
 
 ### `os`
 
-- **Type**: `os`
+- **Type**: [`os`](os.md)
 - **Requirement**: recommended
 
 The operating system the kb article applies.
@@ -73,7 +73,7 @@ The kb article bulletin identifier.
 
 ### `product`
 
-- **Type**: `product`
+- **Type**: [`product`](product.md)
 - **Requirement**: optional
 
 The product details the kb article applies.

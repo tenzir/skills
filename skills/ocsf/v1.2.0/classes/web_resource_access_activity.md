@@ -2,13 +2,24 @@
 
 Web Resource Access Activity events describe successful/failed attempts to access a web resource over HTTP.
 
-- **UID**: `4`
+- **Class UID**: `6004`
 - **Category**: Application Activity
-- **Extends**: `application`
+- **Extends**: [Application Activity (application)](application.md)
+- **Profiles**: `host`, `network_proxy`, `cloud`, `datetime`
+
+## Inherited attributes
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
-
-### `$include`
 
 ### `activity_id`
 
@@ -26,7 +37,7 @@ The normalized identifier of the activity that triggered the event.
 
 ### `http_request`
 
-- **Type**: `http_request`
+- **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: required
 - **Group**: context
 
@@ -34,7 +45,7 @@ Details about the underlying HTTP request.
 
 ### `http_response`
 
-- **Type**: `http_response`
+- **Type**: [`http_response`](../objects/http_response.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -42,7 +53,7 @@ Details about the HTTP response, if available.
 
 ### `proxy`
 
-- **Type**: `network_proxy`
+- **Type**: [`network_proxy`](../objects/network_proxy.md)
 - **Requirement**: optional
 - **Group**: context
 
@@ -50,7 +61,7 @@ Details about the proxy service, if available.
 
 ### `web_resources`
 
-- **Type**: `web_resource`
+- **Type**: [`web_resource`](../objects/web_resource.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -58,7 +69,7 @@ Details about the resource that is the target of the activity.
 
 ### `src_endpoint`
 
-- **Type**: `network_endpoint`
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -66,7 +77,7 @@ Details about the source endpoint of the request.
 
 ### `tls`
 
-- **Type**: `tls`
+- **Type**: [`tls`](../objects/tls.md)
 - **Requirement**: optional
 - **Group**: context
 

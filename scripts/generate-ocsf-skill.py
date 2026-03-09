@@ -229,6 +229,18 @@ def resolve_profiles(
     return profiles
 
 
+def format_class_doc_link(
+    name: str,
+    class_data: dict,
+    *,
+    link_prefix: str,
+    include_schema_name: bool = False,
+) -> str:
+    caption = class_data.get("caption") or name
+    label = f"{caption} ({name})" if include_schema_name else caption
+    return f"[{label}]({link_prefix}{name_to_slug(name)}.md)"
+
+
 def load_extensions(schema_dir: Path) -> dict[str, dict]:
     result: dict[str, dict] = {}
     extensions_dir = schema_dir / "extensions"
@@ -349,10 +361,12 @@ def collect_inherited_attributes(
             if attr_name.startswith("$") or attr_name in own_attrs:
                 continue
             resolved = resolve_attribute(attr_name, attr_data, dictionary)
+            # Any nearer ancestor shadows the same attribute higher in the chain,
+            # even if the nearer definition downgrades it to optional.
+            own_attrs.add(attr_name)
             requirement = resolved.get("requirement", "")
             if requirement in ("required", "recommended"):
                 important.append((attr_name, requirement))
-                own_attrs.add(attr_name)
         if important:
             important.sort(key=lambda pair: (0 if pair[1] == "required" else 1, pair[0]))
             result.append((parent_caption, important))
@@ -401,7 +415,8 @@ def render_entity_page(
                 objects_link_prefix=objects_link_prefix,
                 known_objects=known_objects,
             ))
-    return f"{re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()}\n"
+    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
+    return content + "\n"
 
 
 def build_version_docs(version: str, schema_dir: Path) -> dict:
@@ -431,6 +446,14 @@ def build_version_docs(version: str, schema_dir: Path) -> dict:
 def generate_classes_overview(version_data: dict) -> str:
     lines = [f"# Classes ({version_data['version']})", ""]
     for category_key, category in version_data["categories"].items():
+        category_bases = sorted(
+            (
+                (name, data)
+                for name, data in version_data["intermediates"].items()
+                if data.get("category_key") == category_key
+            ),
+            key=lambda item: (item[1].get("caption") or item[0]).casefold(),
+        )
         category_classes = sorted(
             (
                 (name, data)
@@ -439,15 +462,26 @@ def generate_classes_overview(version_data: dict) -> str:
             ),
             key=lambda item: (item[1].get("caption") or item[0]).casefold(),
         )
-        if not category_classes:
+        if not category_bases and not category_classes:
             continue
         lines.extend([f"## {category['caption']}", "", clean_description(category.get("description", "")), ""])
+        for name, data in category_bases:
+            lines.append(
+                f"- {format_class_doc_link(name, data, link_prefix='classes/', include_schema_name=True)}"
+                " [base class]"
+            )
         for name, data in category_classes:
-            lines.append(f"- [{data.get('caption') or name}](classes/{name_to_slug(name)}.md)")
+            lines.append(f"- {format_class_doc_link(name, data, link_prefix='classes/')}")
         lines.append("")
     if "base_event" in version_data["classes"]:
-        lines.extend(["## Base Event", "", "- [Base Event](classes/base_event.md)", ""])
-    return f"{re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()}\n"
+        lines.extend([
+            "## Base Event",
+            "",
+            f"- {format_class_doc_link('base_event', version_data['classes']['base_event'], link_prefix='classes/')}",
+            "",
+        ])
+    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
+    return content + "\n"
 
 
 def generate_named_overview(version_data: dict, title: str, section: str) -> str:
@@ -563,7 +597,8 @@ def generate_objects_overview(version_data: dict) -> str:
             lines.append(f"- [{data.get('caption') or name}](objects/{name_to_slug(name)}.md)")
         lines.append("")
 
-    return f"{re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()}\n"
+    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
+    return content + "\n"
 
 
 def generate_extensions_overview(version_data: dict) -> str:
@@ -596,7 +631,8 @@ def generate_types_overview(version_data: dict) -> str:
         if desc:
             lines.extend(["", desc])
         lines.append("")
-    return f"{re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()}\n"
+    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
+    return content + "\n"
 
 
 def generate_changelog(current: dict, previous: dict | None) -> str:
@@ -951,7 +987,18 @@ def main() -> None:
                             or class_data.get("category_key")
                             or "",
                         ),
-                        ("Extends", f"`{class_data['extends']}`" if class_data.get("extends") else ""),
+                        (
+                            "Extends",
+                            format_class_doc_link(
+                                class_data["extends"],
+                                data["classes"].get(class_data["extends"])
+                                or data["intermediates"].get(class_data["extends"], {}),
+                                link_prefix="",
+                                include_schema_name=True,
+                            )
+                            if class_data.get("extends")
+                            else "",
+                        ),
                         (
                             "Profiles",
                             ", ".join(f"`{p}`" for p in class_profiles) if class_profiles else "",
@@ -990,7 +1037,18 @@ def main() -> None:
                             or intermediate_data.get("category_key")
                             or "",
                         ),
-                        ("Extends", f"`{intermediate_data['extends']}`" if intermediate_data.get("extends") else ""),
+                        (
+                            "Extends",
+                            format_class_doc_link(
+                                intermediate_data["extends"],
+                                data["classes"].get(intermediate_data["extends"])
+                                or data["intermediates"].get(intermediate_data["extends"], {}),
+                                link_prefix="",
+                                include_schema_name=True,
+                            )
+                            if intermediate_data.get("extends")
+                            else "",
+                        ),
                         (
                             "Profiles",
                             ", ".join(f"`{p}`" for p in intermediate_profiles) if intermediate_profiles else "",
@@ -1029,12 +1087,10 @@ def main() -> None:
             # Build reverse mapping: profile name → list of classes that register for it.
             profile_to_classes: dict[str, list[str]] = {}
             for cname, cdata in {**data["classes"], **data["intermediates"]}.items():
-                for pname in cdata.get("profiles") or []:
-                    profile_to_classes.setdefault(pname, []).append(
-                        cdata.get("caption") or cname
-                    )
-            for pname in profile_to_classes:
-                profile_to_classes[pname].sort(key=str.casefold)
+                for pname in resolve_profiles(cdata, data["classes"], data["intermediates"]):
+                    profile_to_classes.setdefault(pname, []).append(cdata.get("caption") or cname)
+            for pname, consumers in profile_to_classes.items():
+                profile_to_classes[pname] = sorted(set(consumers), key=str.casefold)
 
             for name, profile_data in data["profiles"].items():
                 applies_to = profile_to_classes.get(name, [])

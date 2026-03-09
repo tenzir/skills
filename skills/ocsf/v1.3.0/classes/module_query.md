@@ -2,15 +2,33 @@
 
 Module Query events report information about loaded modules.
 
-- **UID**: `11`
+- **Class UID**: `5011`
 - **Category**: Discovery
-- **Extends**: `discovery_result`
+- **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
+- **Profiles**: `host`, `cloud`, `datetime`, `osint`
+
+## Inherited attributes
+
+**From Discovery Result:**
+- `query_result_id` (required)
+- `query_info` (recommended)
+- `query_result` (recommended)
+
+**From Base Event:**
+- `metadata` (required)
+- `severity_id` (required)
+- `message` (recommended)
+- `observables` (recommended)
+- `status` (recommended)
+- `status_code` (recommended)
+- `status_detail` (recommended)
+- `status_id` (recommended)
 
 ## Attributes
 
 ### `module`
 
-- **Type**: `module`
+- **Type**: [`module`](../objects/module.md)
 - **Requirement**: required
 - **Group**: primary
 
@@ -18,7 +36,7 @@ The module that pertains to the event.
 
 ### `process`
 
-- **Type**: `process`
+- **Type**: [`process`](../objects/process.md)
 - **Requirement**: required
 - **Group**: primary
 

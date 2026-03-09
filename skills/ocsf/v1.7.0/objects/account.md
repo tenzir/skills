@@ -22,7 +22,7 @@ The name of the account (e.g.  `GCP Project name` ,  `Linux Account name`  or  `
 
 ### `tags`
 
-- **Type**: `key_value_object`
+- **Type**: [`key_value_object`](key_value_object.md)
 - **Requirement**: optional
 
 The list of tags; `{key:value}` pairs associated to the account.

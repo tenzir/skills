@@ -50,7 +50,7 @@ The IP address of the endpoint, in either IPv4 or IPv6 format.
 
 ### `location`
 
-- **Type**: `location`
+- **Type**: [`location`](location.md)
 - **Requirement**: optional
 
 The geographical location of the endpoint.
