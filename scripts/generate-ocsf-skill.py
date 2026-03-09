@@ -918,7 +918,26 @@ def main() -> None:
                 )
                 write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
 
+            # Build reverse mapping: profile name → list of classes that register for it.
+            profile_to_classes: dict[str, list[str]] = {}
+            for cname, cdata in {**data["classes"], **data["intermediates"]}.items():
+                for pname in cdata.get("profiles") or []:
+                    profile_to_classes.setdefault(pname, []).append(
+                        cdata.get("caption") or cname
+                    )
+            for pname in profile_to_classes:
+                profile_to_classes[pname].sort(key=str.casefold)
+
             for name, profile_data in data["profiles"].items():
+                applies_to = profile_to_classes.get(name, [])
+                applies_section = (
+                    "\n".join(f"- {cls}" for cls in applies_to)
+                    if applies_to
+                    else ""
+                )
+                extra_sections = ""
+                if applies_section:
+                    extra_sections = f"\n\n## Applies to\n\n{applies_section}\n"
                 page = render_entity_page(
                     title=f"{profile_data.get('caption') or name} ({name})",
                     description=profile_data.get("description"),
@@ -929,6 +948,12 @@ def main() -> None:
                         if not attr_name.startswith("$")
                     ],
                 )
+                if extra_sections:
+                    # Insert "Applies to" before ## Attributes (or at end if no attributes).
+                    if "## Attributes" in page:
+                        page = page.replace("## Attributes", f"{extra_sections.strip()}\n\n## Attributes")
+                    else:
+                        page = page.rstrip("\n") + "\n" + extra_sections
                 write_file(output_dir / data["slug"] / "profiles" / f"{name_to_slug(name)}.md", page)
 
             for name, extension_data in data["extensions"].items():
