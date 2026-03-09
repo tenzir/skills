@@ -176,11 +176,18 @@ def load_directory_json(directory: Path) -> dict[str, dict]:
     }
 
 
-def load_classes(schema_dir: Path) -> dict[str, dict]:
+def load_classes(schema_dir: Path) -> tuple[dict[str, dict], dict[str, dict]]:
+    """Load event classes and intermediate (category-level) base classes.
+
+    Returns (classes, intermediate_classes) where intermediate_classes
+    are the abstract category base classes like ``network``, ``system``,
+    ``iam`` etc. that concrete classes extend.
+    """
     classes: dict[str, dict] = {}
+    intermediates: dict[str, dict] = {}
     events_dir = schema_dir / "events"
     if not events_dir.exists():
-        return classes
+        return classes, intermediates
 
     base_event_path = events_dir / "base_event.json"
     if base_event_path.exists():
@@ -191,11 +198,35 @@ def load_classes(schema_dir: Path) -> dict[str, dict]:
         for entry in sorted(category_dir.glob("*.json")):
             class_name = entry.stem
             if class_name == category_key:
+                data = read_json(entry)
+                data["category_key"] = category_key
+                intermediates[class_name] = data
                 continue
             data = read_json(entry)
             data["category_key"] = category_key
             classes[class_name] = data
-    return classes
+    return classes, intermediates
+
+
+def resolve_profiles(
+    class_data: dict,
+    all_classes: dict[str, dict],
+    intermediates: dict[str, dict],
+) -> list[str]:
+    """Collect profile names registered on a class and its ancestors."""
+    seen: set[str] = set()
+    profiles: list[str] = []
+    current: dict | None = class_data
+    while current is not None:
+        for name in current.get("profiles") or []:
+            if name not in seen:
+                seen.add(name)
+                profiles.append(name)
+        extends = current.get("extends")
+        if not extends:
+            break
+        current = all_classes.get(extends) or intermediates.get(extends)
+    return profiles
 
 
 def load_extensions(schema_dir: Path) -> dict[str, dict]:
@@ -284,7 +315,7 @@ def build_version_docs(version: str, schema_dir: Path) -> dict:
     slug = version_to_slug(version)
     categories = read_json(schema_dir / "categories.json").get("attributes", {})
     dictionary = read_json(schema_dir / "dictionary.json")
-    classes = load_classes(schema_dir)
+    classes, intermediates = load_classes(schema_dir)
     objects = load_directory_json(schema_dir / "objects")
     profiles = load_directory_json(schema_dir / "profiles")
     extensions = load_extensions(schema_dir)
@@ -296,6 +327,7 @@ def build_version_docs(version: str, schema_dir: Path) -> dict:
         "categories": categories,
         "dictionary": dictionary,
         "classes": classes,
+        "intermediates": intermediates,
         "objects": objects,
         "profiles": profiles,
         "extensions": extensions,
@@ -611,6 +643,9 @@ def main() -> None:
                     if category_uid is not None and relative_uid is not None
                     else None
                 )
+                class_profiles = resolve_profiles(
+                    class_data, data["classes"], data["intermediates"],
+                )
                 page = render_entity_page(
                     title=f"{class_data.get('caption') or name} ({name})",
                     description=class_data.get("description"),
@@ -623,6 +658,10 @@ def main() -> None:
                             or "",
                         ),
                         ("Extends", f"`{class_data['extends']}`" if class_data.get("extends") else ""),
+                        (
+                            "Profiles",
+                            ", ".join(f"`{p}`" for p in class_profiles) if class_profiles else "",
+                        ),
                     ],
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
