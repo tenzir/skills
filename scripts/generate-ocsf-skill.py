@@ -600,6 +600,30 @@ def generate_version_overview(version_data: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def split_introduction(text: str) -> list[dict[str, str]]:
+    """Split a long Markdown document at ``## `` headings.
+
+    Returns a list of dicts with keys *slug*, *title*, and *content*.
+    The first chunk uses the document's ``# `` heading (or falls back
+    to "Introduction").
+    """
+    sections: list[dict[str, str]] = []
+    # Split on lines starting with "## ".
+    parts = re.split(r"(?m)^(?=## )", text)
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+        heading_match = re.match(r"^(#{1,2})\s+(.+)$", part, flags=re.MULTILINE)
+        if heading_match:
+            title = heading_match.group(2).strip()
+        else:
+            title = "Introduction"
+        slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+        sections.append({"slug": slug, "title": title, "content": part})
+    return sections
+
+
 def fetch_json(client: httpx.Client, url: str) -> object:
     response = client.get(url)
     response.raise_for_status()
@@ -689,6 +713,7 @@ def main() -> None:
                     "",
                     "```",
                     "introduction.md",
+                    "introduction/{section}.md",
                     "faqs.md",
                     "faqs/{slug}.md",
                     "articles.md",
@@ -780,10 +805,21 @@ def main() -> None:
             ),
         )
 
-        write_file(
-            output_dir / "introduction.md",
-            overview if overview.endswith("\n") else f"{overview}\n",
-        )
+        intro_sections = split_introduction(overview)
+        if intro_sections:
+            toc_lines = ["# Introduction", "", "OCSF overview split into focused sections.", ""]
+            for section in intro_sections:
+                toc_lines.append(f"- [{section['title']}](introduction/{section['slug']}.md)")
+                section_content = section["content"]
+                if not section_content.endswith("\n"):
+                    section_content += "\n"
+                write_file(output_dir / "introduction" / f"{section['slug']}.md", section_content)
+            write_file(output_dir / "introduction.md", "\n".join(toc_lines) + "\n")
+        else:
+            write_file(
+                output_dir / "introduction.md",
+                overview if overview.endswith("\n") else f"{overview}\n",
+            )
 
         write_file(
             output_dir / "faqs.md",
