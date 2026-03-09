@@ -257,12 +257,27 @@ def resolve_attribute(name: str, local_data: object, dictionary: dict) -> dict:
     return {**base, **local_data}
 
 
-def format_attribute(name: str, data: dict) -> str:
+def format_attribute(
+    name: str,
+    data: dict,
+    objects_link_prefix: str = "",
+    known_objects: set[str] | None = None,
+) -> str:
     desc = clean_description(data.get("description") or data.get("caption") or "")
     lines = [f"### `{name}`", ""]
+    # Build the type display, optionally linking to the object page.
+    obj_type = data.get("object_type")
+    if obj_type and known_objects and obj_type in known_objects and objects_link_prefix:
+        type_display = f"[`{obj_type}`]({objects_link_prefix}{name_to_slug(obj_type)}.md)"
+    elif obj_type:
+        type_display = f"`{obj_type}`"
+    elif data.get("type"):
+        type_display = f"`{data['type']}`"
+    else:
+        type_display = ""
     meta = format_meta_list(
         [
-            ("Type", f"`{data['object_type']}`" if data.get("object_type") else f"`{data['type']}`" if data.get("type") else ""),
+            ("Type", type_display),
             ("Requirement", data.get("requirement")),
             ("Observable", data.get("observable")),
             ("Group", data.get("group")),
@@ -355,6 +370,8 @@ def render_entity_page(
     constraints: dict | None = None,
     associations: dict | None = None,
     inherited_attributes: list[tuple[str, list[tuple[str, str]]]] | None = None,
+    objects_link_prefix: str = "",
+    known_objects: set[str] | None = None,
 ) -> str:
     lines = [f"# {title}", ""]
     if description:
@@ -380,7 +397,11 @@ def render_entity_page(
     if attributes:
         lines.extend(["## Attributes", ""])
         for attr_name, attr_data in attributes:
-            lines.append(format_attribute(attr_name, attr_data))
+            lines.append(format_attribute(
+                attr_name, attr_data,
+                objects_link_prefix=objects_link_prefix,
+                known_objects=known_objects,
+            ))
     return f"{re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()}\n"
 
 
@@ -873,6 +894,7 @@ def main() -> None:
 
         for idx, data in enumerate(version_docs):
             prev = version_docs[idx - 1] if idx > 0 else None
+            obj_names = set(data["objects"].keys())
             write_file(output_dir / f"{data['slug']}.md", generate_version_overview(data, prev))
             write_file(output_dir / data["slug"] / "classes.md", generate_classes_overview(data))
             write_file(output_dir / data["slug"] / "objects.md", generate_objects_overview(data))
@@ -930,6 +952,8 @@ def main() -> None:
                         for attr_name, attr_data in (class_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
+                    objects_link_prefix="../objects/",
+                    known_objects=obj_names,
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
 
@@ -967,6 +991,8 @@ def main() -> None:
                         for attr_name, attr_data in (intermediate_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
+                    objects_link_prefix="../objects/",
+                    known_objects=obj_names,
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
 
@@ -980,6 +1006,8 @@ def main() -> None:
                         for attr_name, attr_data in (object_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
+                    objects_link_prefix="",
+                    known_objects=obj_names,
                 )
                 write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
 
@@ -1012,6 +1040,8 @@ def main() -> None:
                         for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
+                    objects_link_prefix="../objects/",
+                    known_objects=obj_names,
                 )
                 if extra_sections:
                     # Insert "Applies to" before ## Attributes (or at end if no attributes).
