@@ -77,15 +77,15 @@ articles/{slug}.md
 
 ### [Introduction](introduction.md)
 
-### [Latest classes](1-7-0/classes.md)
+### [Latest classes](v1.7.0/classes.md)
 
-### [Latest objects](1-7-0/objects.md)
+### [Latest objects](v1.7.0/objects.md)
 
-### [Latest profiles](1-7-0/profiles.md)
+### [Latest profiles](v1.7.0/profiles.md)
 
-### [Latest extensions](1-7-0/extensions.md)
+### [Latest extensions](v1.7.0/extensions.md)
 
-### [Latest types](1-7-0/types.md)
+### [Latest types](v1.7.0/types.md)
 
 ### [FAQs](faqs.md)
 

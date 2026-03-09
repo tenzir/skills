@@ -33,7 +33,7 @@ HTTP_HEADERS = {
 
 
 def version_to_slug(version: str) -> str:
-    return version.replace(".", "-")
+    return f"v{version}"
 
 
 def name_to_slug(name: str) -> str:
