@@ -266,13 +266,12 @@ def format_attribute(
     desc = clean_description(data.get("description") or data.get("caption") or "")
     lines = [f"### `{name}`", ""]
     # Build the type display, optionally linking to the object page.
-    obj_type = data.get("object_type")
-    if obj_type and known_objects and obj_type in known_objects and objects_link_prefix:
-        type_display = f"[`{obj_type}`]({objects_link_prefix}{name_to_slug(obj_type)}.md)"
-    elif obj_type:
-        type_display = f"`{obj_type}`"
-    elif data.get("type"):
-        type_display = f"`{data['type']}`"
+    type_name = data.get("object_type") or data.get("type") or ""
+    if type_name and known_objects is not None and type_name in known_objects:
+        link_target = f"{objects_link_prefix}{name_to_slug(type_name)}.md"
+        type_display = f"[`{type_name}`]({link_target})"
+    elif type_name:
+        type_display = f"`{type_name}`"
     else:
         type_display = ""
     meta = format_meta_list(
