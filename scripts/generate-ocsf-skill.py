@@ -603,14 +603,22 @@ def main() -> None:
             write_file(output_dir / data["slug"] / "types.md", generate_types_overview(data))
 
             for name, class_data in data["classes"].items():
+                category_info = data["categories"].get(class_data.get("category_key"), {})
+                category_uid = category_info.get("uid")
+                relative_uid = class_data.get("uid")
+                class_uid = (
+                    category_uid * 1000 + relative_uid
+                    if category_uid is not None and relative_uid is not None
+                    else None
+                )
                 page = render_entity_page(
                     title=f"{class_data.get('caption') or name} ({name})",
                     description=class_data.get("description"),
                     meta_entries=[
-                        ("UID", f"`{class_data['uid']}`" if class_data.get("uid") else ""),
+                        ("Class UID", f"`{class_uid}`" if class_uid is not None else ""),
                         (
                             "Category",
-                            data["categories"].get(class_data.get("category_key"), {}).get("caption")
+                            category_info.get("caption")
                             or class_data.get("category_key")
                             or "",
                         ),
