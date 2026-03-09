@@ -1,0 +1,69 @@
+# HTTP Activity (http_activity)
+
+HTTP Activity events report HTTP connection and traffic information.
+
+- **UID**: `2`
+- **Category**: Network Activity
+- **Extends**: `network`
+
+## Attributes
+
+### `$include`
+
+### `activity_id`
+
+- **Type**: `integer_t`
+- **Sibling**: `activity_name`
+
+#### Enum values
+
+- `1`: `Connect` - The CONNECT method establishes a tunnel to the server identified by the target resource.
+- `2`: `Delete` - The DELETE method deletes the specified resource.
+- `3`: `Get` - The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+- `4`: `Head` - The HEAD method asks for a response identical to a GET request, but without the response body.
+- `5`: `Options` - The OPTIONS method describes the communication options for the target resource.
+- `6`: `Post` - The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
+- `7`: `Put` - The PUT method replaces all current representations of the target resource with the request payload.
+- `8`: `Trace` - The TRACE method performs a message loop-back test along the path to the target resource.
+
+The normalized identifier of the activity that triggered the event.
+
+### `file`
+
+- **Type**: `file`
+- **Requirement**: optional
+- **Group**: context
+
+The file that is the target of the HTTP activity.
+
+### `http_cookies`
+
+- **Type**: `http_cookie`
+- **Requirement**: recommended
+- **Group**: primary
+
+The cookies object describes details about HTTP cookies
+
+### `http_request`
+
+- **Type**: `http_request`
+- **Requirement**: recommended
+- **Group**: primary
+
+The HTTP Request Object documents attributes of a request made to a web server.
+
+### `http_response`
+
+- **Type**: `http_response`
+- **Requirement**: recommended
+- **Group**: primary
+
+The HTTP Response from a web server to a requester.
+
+### `http_status`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Group**: primary
+
+The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) returned to the client.

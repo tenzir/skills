@@ -1,0 +1,238 @@
+# Configuration
+
+
+This page explains how to configure the Tenzir CLI and Node. Configuration flows through four layers, sorted by precedence:
+
+1. Command-line arguments
+2. Environment variables
+3. Configuration files
+4. Compile-time defaults
+
+The options are sorted by precedence, i.e., command-line arguments override environment variables, which override configuration file settings. Compile-time defaults can only be changed by rebuilding Tenzir from source.
+
+Let’s discuss the first three options in more detail.
+
+## Command Line Arguments
+
+The command line arguments of the executables have the following synopsis:
+
+```plaintext
+tenzir [opts] <pipeline>
+tenzir-node [opts]
+```
+
+We have both long `--long=X` and short `-s X` options. Boolean options do not require explicit specification of a value, and it suffices to write `--long` and `-s` to set an option to true.
+
+## Environment Variables
+
+You can use environment variables as an alternative method to passing command line options. This comes in handy when working with non-interactive deployments where the command line is hard-coded, such as in Docker containers.
+
+An environment variable has the form `KEY=VALUE`, and we describe the format of `KEY` and `VALUE` below. Tenzir processes only environment variables that have the form `TENZIR_{KEY}=VALUE`. For example, `TENZIR_ENDPOINT=1.2.3.4` translates to the command line option `--endpoint=1.2.3.4` and YAML configuration `tenzir.endpoint: 1.2.3.4`.
+
+### Keys
+
+There exists a one-to-one mapping from configuration file keys to environment variable names. Here are two examples:
+
+* `tenzir.import.batch-size` - configuration file key
+* `TENZIR_IMPORT__BATCH_SIZE` - environment variable
+
+A hierarchical key of the form `tenzir.x.y.z` maps to the environment variable `TENZIR_X__Y__Z`. More generally, the `KEY` in `TENZIR_{KEY}=VALUE` adheres to the following rules:
+
+1. Double underscores map to the `.` separator of YAML dictionaries.
+
+2. Single underscores `_` map to a `-` in the corresponding configuration file key. This is unambiguous because Tenzir does not have any options that include a literal underscore.
+
+From the perspective of the command line, setting the `--foo` option via `tenzir --foo` or `tenzir-node --foo` maps onto the environment variable `TENZIR_FOO` and the configuration file key `tenzir.foo`. Here are two examples with identical behavior:
+
+```sh
+TENZIR_ENDPOINT=0.0.0.0:42000 tenzir-node
+tenzir-node --endpoint=0.0.0.0:42000
+```
+
+CAF and Plugin Settings
+
+To provide [CAF](https://github.com/actor-framework/actor-framework) and plugin settings, which have the form `caf.x.y.z` and `plugins.name.x.y.z` in the configuration file, the environment variable must have the form `TENZIR_CAF__X__Y__Z` and `TENZIR_PLUGINS__NAME__X__Y__Z` respectively.
+
+The configuration file is an exception in this regard: `tenzir.caf.` and `tenzir.plugins.` are invalid key prefixes. Instead, CAF and plugin configuration file keys have the prefixes `caf.` and `plugins.`, i.e., they are hoisted into the global scope.
+
+### Values
+
+While all environment variables are strings on the shell, Tenzir parses them into a typed value internally. In general, parsing values from the environment follows the same syntactical rules as command line parsing.
+
+In particular, this applies to lists. For example, `TENZIR_PLUGINS="foo,bar"` is equivalent to `--plugins=foo,bar`.
+
+Tenzir ignores environment variables with an empty value because the type cannot be inferred. For example, `TENZIR_PLUGINS=` will not be considered.
+
+## Configuration files
+
+Tenzir’s configuration file is in YAML format. On startup, Tenzir attempts to read configuration files from the following places, in order:
+
+1. `/opt/tenzir/etc/tenzir/tenzir.yaml` for system-wide configuration, where `/opt/tenzir` is the default install prefix and `/etc/tenzir` is the default sysconfdir.
+
+2. `~/.config/tenzir/tenzir.yaml` for user-specific configuration. Tenzir respects the XDG base directory specification and its environment variables.
+
+3. A path to a configuration file passed via `--config=/path/to/tenzir.yaml`.
+
+If there exist configuration files in multiple locations, options from all configuration files are merged in order, with the latter files receiving a higher precedence than former ones. For lists, merging means concatenating the list elements.
+
+Example configuration
+
+Check out the [example configuration](../reference/node/configuration.md) for a fully documented `tenzir.yaml` that shows all available settings.
+
+### Plugin Configuration Files
+
+In addition to `tenzir/tenzir.yaml`, Tenzir loads `tenzir/plugin/<plugin>.yaml` for plugin-specific configuration for a given plugin named `<plugin>`. The same rules apply as for the regular configuration file directory lookup.
+
+### Bare Mode
+
+Sometimes, users may wish to run Tenzir without side effects, e.g., when wrapping Tenzir in their own scripts. Run with `--bare-mode` to disable looking at all system- and user-specified configuration paths.
+
+## TLS Configuration
+
+Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](../reference/operators/to_opensearch.md), [`to_splunk`](../reference/operators/to_splunk.md), [`save_email`](../reference/operators/save_email.md)) and those that accept inbound connections (e.g., [`load_tcp`](../reference/operators/load_tcp.md), [`save_tcp`](../reference/operators/save_tcp.md)).
+
+Use Only When Required
+
+We do not recommend manually configuring TLS settings unless required for specific compliance or security policies. The default TLS configuration uses OpenSSL’s secure defaults, which are regularly updated and work with most services. Only override these settings if you have specific requirements.
+
+### Minimum TLS Version
+
+You can configure the minimum TLS protocol version to use for all TLS connections:
+
+\<configdir>/tenzir/tenzir.yaml
+
+```yaml
+tenzir:
+  tls:
+    min-version: "1.2"
+```
+
+Valid values are `"1.0"`, `"1.1"`, `"1.2"`, and `"1.3"`. We recommend using `"1.2"` or higher for security.
+
+TLS 1.0 and 1.1 Deprecated
+
+TLS versions 1.0 and 1.1 are considered deprecated and insecure. Most modern services no longer support them. Use TLS 1.2 or 1.3 whenever possible.
+
+### Cipher Suites
+
+You can specify which cipher suites to use for TLS connections:
+
+\<configdir>/tenzir/tenzir.yaml
+
+```yaml
+tenzir:
+  tls:
+    ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+```
+
+The cipher list format follows OpenSSL cipher list syntax. See the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html) for details on how to construct cipher lists.
+
+### Operators Supporting TLS Configuration
+
+The following operators and connectors automatically respect the node-level TLS configuration:
+
+* [`to_opensearch`](../reference/operators/to_opensearch.md): Applies min version and ciphers to HTTPS connections
+* [`to_splunk`](../reference/operators/to_splunk.md): Applies min version and ciphers to Splunk HEC connections
+* [`save_email`](../reference/operators/save_email.md): Applies min version and ciphers to SMTP connections
+* [`load_tcp`](../reference/operators/load_tcp.md): Applies min version and ciphers to TLS server mode
+* [`save_tcp`](../reference/operators/save_tcp.md): Applies min version and ciphers to TLS client and server modes
+* [`from_opensearch`](../reference/operators/from_opensearch.md): Applies min version and ciphers to HTTPS connections
+
+## Plugins
+
+Tenzir’s plugin architecture allows for flexible replacement and enhancement of functionality at various pre-defined customization points. There exist **dynamic plugins** that ship as shared libraries and **static plugins** that are compiled into libtenzir.
+
+### Install plugins
+
+Dynamic plugins are just shared libraries and can be placed at a location of your choice. We recommend putting them into a single directory and add the path to the `tenzir.plugin-dirs` configuration option..
+
+Static plugins do not require installation since they are compiled into Tenzir.
+
+### Load plugins
+
+The configuration key `tenzir.plugins` specifies the list of plugins that should load at startup. The `all` plugin name is reserved. When `all` is specified Tenzir loads all available plugins in the configured plugin directories. If no `tenzir.plugins` key is specified, Tenzir will load `all` plugins by default. To load no plugins at all, specify a `tenzir.plugins` configuration key with no plugin values, e.g. the configuration file entry `plugins: []` or launch parameter `--plugins=`.
+
+Since dynamic plugins are shared libraries, they must be loaded first into the running Tenzir process. At startup, Tenzir looks for the `tenzir.plugins` inside the `tenzir.plugin-dirs` directories configured in `tenzir.yaml`. For example:
+
+\<configdir>/tenzir/tenzir.yaml
+
+```yaml
+tenzir:
+  plugin-dirs:
+    - .
+    - /opt/foo/lib
+  plugins:
+    - example
+    - /opt/bar/lib/libtenzir-plugin-example.so
+```
+
+Before executing plugin code, Tenzir loads the specified plugins via `dlopen(3)` and attempts to initialize them as plugins. Part of the initialization is passing configuration options to the plugin. To this end, Tenzir looks for a YAML dictionary under `plugins.<name>` in the `tenzir.yaml` file. For example:
+
+\<configdir>/tenzir/tenzir.yaml
+
+```yaml
+plugins:
+  example:
+    option: 42
+```
+
+Alternatively, you can specify a `plugin/<plugin>.yaml` file. The example configurations above and below are equivalent. This makes plugin deployments easier, as plugins can be installed and uninstalled alongside their respective configuration.
+
+\<configdir>/tenzir/plugin/example.yaml
+
+```yaml
+option: 42
+```
+
+After initialization with the configuration options, the plugin is fully operational and Tenzir will call its functions at the plugin-specific customization points.
+
+### Platform TLS Configuration
+
+When connecting a node to the Tenzir Platform, you can configure TLS settings specifically for this connection. These settings take precedence over the node-level `tenzir.tls.*` settings, but fall back to them if not specified.
+
+Use Only When Required
+
+We do not recommend manually configuring TLS settings unless required for specific compliance or security policies. The default TLS configuration is secure and compatible with the Tenzir Platform.
+
+You can configure these settings in `<configdir>/tenzir/plugin/platform.yaml`:
+
+\<configdir>/tenzir/plugin/platform.yaml
+
+```yaml
+# Minimum TLS protocol version for platform connections
+# Valid values: "1.0", "1.1", "1.2", "1.3"
+tls-min-version: "1.2"
+
+
+# OpenSSL cipher list for platform connections
+tls-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256"
+```
+
+These options only affect the connection from the node to the Tenzir Platform. If not specified, the settings fall back to the node-level `tenzir.tls.min-version` and `tenzir.tls.ciphers` settings.
+
+### List plugins
+
+You can get the list of available plugins using the [`plugins`](../reference/operators/plugins.md) operator:
+
+```bash
+tenzir 'plugins'
+```
+
+### Block plugins
+
+As part of your Tenzir deployment, you can selectively disable plugins by name. For example, if you do not want the `shell` operator and the `kafka` connector to be available, set this in your configuration:
+
+\<configdir>/tenzir/tenzir.yaml
+
+```yaml
+tenzir:
+  disable-plugins:
+    - shell
+    - kafka
+```
+
+## Contents
+
+- [Secrets](secrets.md)
+- [Enrichment](enrichment.md)
+- [Packages](packages.md)

@@ -1,0 +1,42 @@
+# package::add
+
+
+Installs a package.
+
+```tql
+package::add [package_path:string, inputs=record]
+```
+
+## Description
+
+The `package::add` operator installs all operators, pipelines, and contexts from a package.
+
+### `package_path : string (optional)`
+
+The path to a package located on the file system.
+
+### `inputs = record (optional)`
+
+A record of optional package inputs that configure the package.
+
+## Examples
+
+### Add a package from the Community Library
+
+```tql
+package::add "suricata-ocsf"
+```
+
+### Add a local package with inputs
+
+```tql
+package::add "/mnt/config/tenzir/library/zeek",
+  inputs={format: "tsv", "log-directory": "/opt/tenzir/logs"}
+```
+
+## See Also
+
+* [`package::list`](list.md)
+* [`package::remove`](remove.md)
+* [Install a package](../../../guides/packages/install-a-package.md)
+* [Write a package](../../../tutorials/write-a-package.md)

@@ -1,0 +1,89 @@
+name: Sync OCSF Skill
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Specific OCSF schema version to build (defaults to all stable 1.x releases)"
+        required: false
+        default: ""
+        type: string
+  schedule:
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "sync-ocsf-skill"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Rebuild ocsf
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.TENZIR_GITHUB_APP_ID }}
+          private-key: ${{ secrets.TENZIR_GITHUB_APP_PRIVATE_KEY }}
+          owner: tenzir
+
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Rebuild OCSF skill
+        env:
+          OCSF_VERSION: ${{ github.event.inputs.version || '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          args=(--output-dir skills/ocsf)
+          if [[ -n "$OCSF_VERSION" ]]; then
+            args+=(--version "$OCSF_VERSION")
+          fi
+
+          node scripts/generate-ocsf-skill.mjs "${args[@]}"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install skills-ref
+        shell: bash
+        run: uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
+
+      - name: Validate skills with skills-ref
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t skill_dirs < <(
+            find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort
+          )
+
+          for skill_dir in "${skill_dirs[@]}"; do
+            echo "Validating ${skill_dir}"
+            skills-ref validate "${skill_dir}"
+          done
+
+      - name: Stage changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A -- skills/ocsf
+
+      - name: Commit changes
+        uses: planetscale/ghcommit-action@v0.2.0
+        with:
+          commit_message: "Sync ocsf from upstream schema"
+          repo: ${{ github.repository }}
+          branch: ${{ github.ref_name }}
+          empty: false
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}

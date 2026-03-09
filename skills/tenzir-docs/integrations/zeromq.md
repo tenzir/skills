@@ -1,0 +1,31 @@
+# ZeroMQ
+
+
+[ZeroMQ](https://zeromq.org/) (0mq) is a light-weight messaging framework with various socket types. Tenzir supports writing to [PUB sockets](https://zeromq.org/socket-api/#pub-socket) and reading from [SUB sockets](https://zeromq.org/socket-api/#sub-socket), both in server (listening) and client (connect) mode.
+
+Use the IP address `0.0.0.0` to listen on all available network interfaces.
+
+Because ZeroMQ is entirely asynchronous, publishers send messages even when no subscriber is present. This can lead to lost messages when the publisher begins operating before the subscriber. To avoid data loss due to such races, pass `monitor=true` to activate message buffering until at least one remote peer has connected.
+
+URL Support
+
+The URL scheme `zmq://` dispatches to [`load_zmq`](../reference/operators/load_zmq.md) and [`save_zmq`](../reference/operators/save_zmq.md) for seamless URL-style use via [`from`](../reference/operators/from.md) and [`to`](../reference/operators/to.md).
+
+## Examples
+
+### Accept Syslog messages over ZeroMQ
+
+```tql
+from "zmq://127.0.0.1:541" {
+  read_syslog
+}
+```
+
+### Send events to a ZeroMQ socket
+
+```tql
+from {message: "Tenzir"}
+to "zmq://1.2.3.4:8080" {
+  write_ndjson
+}
+```

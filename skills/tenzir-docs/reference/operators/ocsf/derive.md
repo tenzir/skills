@@ -1,0 +1,121 @@
+# ocsf::derive
+
+
+Automatically assigns enum strings from their integer counterparts and vice versa.
+
+```tql
+ocsf::derive
+```
+
+## Description
+
+The `ocsf::derive` operator performs bidirectional enum derivation for OCSF events by automatically assigning enum string values based on their integer counterparts and vice versa.
+
+The operator preserves the original field order from the input record. Enum/sibling pairs are always ordered alphabetically within the pair to match the ordering used by `ocsf::cast`. For example, `activity_id` comes before `activity_name`, and `class_name` comes before `class_uid`.
+
+When deriving new fields:
+
+* If both the enum field and its sibling field exist in the input, they are emitted in alphabetical order at the position of the first field.
+* If only one field exists, the derived counterpart is inserted adjacent to it in alphabetical order.
+* Non-OCSF fields remain at their original positions.
+
+In the future, this operator will also automatically assign computable values such as `type_uid` based on what is available in the event.
+
+## Examples
+
+### Integer to string
+
+```tql
+from {
+  metadata: {
+    version: "1.5.0",
+  },
+  class_uid: 1001,
+  activity_id: 1,
+}
+ocsf::derive
+```
+
+```tql
+{
+  metadata: {
+    version: "1.5.0",
+  },
+  class_name: "File System Activity",
+  class_uid: 1001,
+  activity_id: 1,
+  activity_name: "Create",
+}
+```
+
+The derived `class_name` appears before `class_uid` (alphabetically), and the derived `activity_name` appears after `activity_id` (alphabetically). Each pair is positioned where the original field appeared in the input.
+
+### String to Integer
+
+```tql
+from {
+  metadata: {
+    version: "1.5.0",
+  },
+  class_uid: 1001,
+  activity_name: "Read",
+}
+ocsf::derive
+```
+
+```tql
+{
+  metadata: {
+    version: "1.5.0",
+  },
+  class_name: "File System Activity",
+  class_uid: 1001,
+  activity_id: 2,
+  activity_name: "Read",
+}
+```
+
+The derived `activity_id` appears before `activity_name` (alphabetically), and the derived `class_name` appears before `class_uid` (alphabetically).
+
+### Bidirectional enum validation
+
+```tql
+from {
+  metadata: {
+    version: "1.5.0",
+  },
+  class_uid: 1001,
+  activity_id: 1,
+  activity_name: "Delete",  // Inconsistent with activity_id=1
+}
+ocsf::derive
+```
+
+```tql
+{
+  metadata: {
+    version: "1.5.0",
+  },
+  class_name: "File System Activity",
+  class_uid: 1001,
+  activity_id: 1,
+  activity_name: "Delete",
+}
+```
+
+This emits a warning about inconsistent values and preserves both original values without modification, allowing you to decide how to handle the conflict.
+
+```plaintext
+warning: found inconsistency between `activity_id` and `activity_name`
+  |
+  | ocsf::derive
+  | ~~~~~~~~~~~~
+  |
+  = note: got 1 ("Create") and "Delete" (4)
+```
+
+## See Also
+
+* [`ocsf::cast`](cast.md)
+* [`ocsf::trim`](trim.md)
+* [Map data to OCSF](../../../tutorials/map-data-to-ocsf.md)

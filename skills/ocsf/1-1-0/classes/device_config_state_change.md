@@ -1,0 +1,85 @@
+# Device Config State Change (device_config_state_change)
+
+Device Config State Change events report state changes that impact the security of the device.
+
+- **UID**: `19`
+- **Category**: Discovery
+- **Extends**: `discovery`
+
+## Attributes
+
+### `actor`
+
+- **Type**: `actor`
+- **Requirement**: optional
+- **Group**: context
+
+The actor object describes details about the user/role/process that was the source of the activity.
+
+### `device`
+
+- **Type**: `device`
+- **Requirement**: required
+- **Group**: primary
+
+The device that is impacted by the state change.
+
+### `security_level`
+
+- **Type**: `string_t`
+- **Group**: primary
+
+The current security level of the entity
+
+### `security_level_id`
+
+- **Type**: `integer_t`
+- **Group**: primary
+- **Sibling**: `security_level`
+
+#### Enum values
+
+- `0`: `Unknown`
+- `1`: `Secure`
+- `2`: `At Risk`
+- `3`: `Compromised`
+- `99`: `Other` - The security level is not mapped. See the `security_level` attribute, which contains data source specific values.
+
+The current security level of the entity
+
+### `security_states`
+
+- **Type**: `security_state`
+- **Group**: primary
+
+The current security states of the device.
+
+### `prev_security_level`
+
+- **Type**: `string_t`
+- **Group**: primary
+
+The previous security level of the entity
+
+### `prev_security_level_id`
+
+- **Type**: `integer_t`
+- **Group**: primary
+- **Sibling**: `prev_security_level`
+
+#### Enum values
+
+- `0`: `Unknown`
+- `1`: `Secure`
+- `2`: `At Risk`
+- `3`: `Compromised`
+- `99`: `Other` - The security level is not mapped. See the `prev_security_level` attribute, which contains data source specific values.
+
+The previous security level of the entity
+
+### `prev_security_states`
+
+- **Type**: `security_state`
+- **Group**: primary
+
+The previous security states of the device.

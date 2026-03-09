@@ -1,0 +1,854 @@
+# Learn idiomatic TQL
+
+
+This tutorial teaches you to write TQL that is clear, efficient, and maintainable. It assumes you already know basic TQL syntax and operators, and shows you how experienced TQL developers approach common patterns.
+
+Understanding TQL First
+
+If you’re new to TQL or want to understand its design philosophy and architecture, read the [TQL language explanation](../explanations/language.md) first. This tutorial focuses on practical patterns, while the explanation covers the conceptual foundations.
+
+## What makes TQL idiomatic?
+
+Idiomatic TQL follows consistent patterns that leverage the language’s strengths:
+
+* **Vertical clarity**: Pipelines flow top-to-bottom for readability
+* **Explicit data contracts**: Clear about what data should vs. might exist
+* **Domain-aware types**: Uses IP addresses, not strings; durations, not integers
+* **Composition over complexity**: Small, focused operators that combine well
+* **Performance-conscious**: Filters early, aggregates late
+
+This tutorial shows you these patterns through concrete examples, comparing idiomatic approaches with common pitfalls.
+
+## Pipeline structure
+
+### Vertical vs horizontal: choosing the right style
+
+TQL offers two ways to chain statements: a newline `\n` (vertical) or pipe `|` (horizontal). While both are valid, each has its place.
+
+#### Always use vertical structure in files
+
+✅ Idiomatic vertical structure:
+
+```tql
+let $ports = [22, 443]
+
+
+from "/tmp/logs.json"
+where port in $ports
+select src_ip, dst_ip, bytes
+summarize src_ip, total=sum(bytes)
+```
+
+Benefits of vertical structure:
+
+* **Readability**: Easy to scan and understand data flow
+* **Debugging**: Simple to comment out individual operators
+* **Modification**: Easy to insert or remove pipeline stages
+* **Version Control**: Clear diffs when pipelines change
+
+#### Use horizontal structure only for command-line
+
+✅ Appropriate for one-liners:
+
+```tql
+tenzir 'from "logs.json" | where severity == "high" | summarize count()'
+```
+
+The horizontal approach is ideal for:
+
+* **Command-line usage**: Quick ad-hoc queries in the terminal
+* **API requests**: Single-line strings in JSON payloads
+* **Shell scripts**: Embedding TQL in bash scripts
+* **Interactive exploration**: Building pipelines in a REPL
+
+#### Never mix styles
+
+❌ Avoid hybrid approaches:
+
+```tql
+let $ports = [22, 443]
+
+
+from "/tmp/logs.json"
+| where port in $ports
+| select src_ip, dst_ip, bytes
+| summarize src_ip, total=sum(bytes)
+```
+
+This Kusto-like style makes code harder to read and maintain, especially with nested pipelines that increase indentation.
+
+Quick rule
+
+* **In files**: Always use newlines (vertical)
+* **On command-line**: Use pipes (horizontal)
+* **Never**: Mix both styles
+
+### Trailing commas in vertical structures
+
+When writing vertical structures, use trailing commas consistently to improve maintainability.
+
+#### Lists and records
+
+✅ Vertical structures with trailing commas:
+
+```tql
+let $ports = [
+  22,
+  80,
+  443,
+  3306,
+]
+
+
+let $config = {
+  threshold: 100,
+  timeout: 30s,
+  enabled: true,
+}
+```
+
+Benefits:
+
+* Add new items without modifying existing lines
+* Reorder items without worrying about comma placement
+* Get cleaner diffs in version control
+* Avoid syntax errors when adding/removing items
+
+✅ Horizontal structures without trailing commas:
+
+```tql
+let $ports = [22, 80, 443, 3306]
+let $config = {threshold: 100, timeout: 30s}
+```
+
+❌ Never use trailing commas horizontally:
+
+```tql
+let $ports = [22, 80, 443, 3306,]  // Wrong!
+let $config = {threshold: 100, timeout: 30s,}  // Wrong!
+```
+
+❌ No trailing comma after an operator argument sequence:
+
+```tql
+from {status: 200, path: "/api"},
+     {status: 404, path: "/missing"}  // No comma here
+```
+
+Quick rule
+
+Trailing commas are only allowed in contexts with parentheses (’()’), brackets (’\[]’), or braces ('').
+
+### Line continuation in operator arguments
+
+When writing operators with multiple arguments across lines, you must explicitly signal that the statement continues. This is a common source of errors.
+
+✅ Trailing comma signals continuation:
+
+```tql
+select uid,
+       src,
+       dst
+```
+
+✅ Backslash for explicit continuation:
+
+```tql
+select \
+  uid,
+  src,
+  dst
+```
+
+❌ Invalid - newline ends the statement:
+
+```tql
+select
+  uid,
+  src,
+  dst
+```
+
+The rule is simple: **a newline after an operator name (with no arguments) ends the statement**. Either put the first argument on the same line (with a trailing comma) or use a backslash to continue.
+
+Quick rule
+
+* First argument on same line with trailing comma: `select uid,`
+* Or use backslash: `select \`
+* Inside `()`, `[]`, `{}`: newlines don’t end the statement
+
+## Expression style
+
+### Avoid unnecessary parentheses
+
+TQL’s `if` and `where` don’t require parentheses around conditions. Adding them creates visual noise without any benefit.
+
+✅ Clean:
+
+```tql
+if @name == "suricata.dns" {
+  // ...
+}
+
+
+where severity == "critical"
+```
+
+❌ Noisy:
+
+```tql
+if (@name == "suricata.dns") {
+  // ...
+}
+
+
+where (severity == "critical")
+```
+
+Use parentheses only when they clarify precedence in complex expressions:
+
+```tql
+where (a > 1 and b < 2) or c == 3
+```
+
+## Field management
+
+### Use `move` expressions to prevent field duplication
+
+✅ Clean field transfers with move:
+
+```tql
+// Moving fields during transformation
+normalized.src_ip = move raw.source_address
+normalized.dst_port = move raw.destination.port
+normalized.severity = move alert.level
+```
+
+❌ Avoid copy-then-drop pattern:
+
+```tql
+normalized.src_ip = raw.source_address
+normalized.dst_port = raw.destination.port
+normalized.severity = alert.level
+drop raw.source_address, raw.destination.port, alert.level
+```
+
+### Be intentional about field preservation
+
+✅ Move fields that are transformed:
+
+```tql
+ocsf.activity_id = move http_methods[method]? else 99
+```
+
+✅ Drop only static metadata fields:
+
+```tql
+drop event_kind  // Same across all events
+```
+
+❌ Don’t leave transformed data in original location:
+
+```tql
+ocsf.src_ip = original.ip  // Bad: original.ip still exists
+```
+
+When normalizing data (e.g., to OCSF format):
+
+* Use `move` for fields being transformed to prevent duplication
+* Ensure transformed values don’t appear in both old and new locations
+* Only drop fields you’re certain are constant across events
+* Verify no critical data ends up in `unmapped` fields
+* Treat all input-derived values as dynamic, not constants
+* Don’t hardcode field values based on example data
+
+### Use `replace` to normalize placeholder values
+
+When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](../reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
+
+✅ Clear and composable approach:
+
+```tql
+from {content: {field: null}},
+     {content: {field: "-"}},
+     {content: {field: "value"}}
+replace content.field, what="-", with=null
+drop_null_fields content
+```
+
+❌ Complex conditional logic:
+
+```tql
+from {content: {field: null}},
+     {content: {field: "-"}},
+     {content: {field: "value"}}
+if content.has("field") {
+  if content.field == "-" or content.field == null {
+    drop content.field
+  }
+}
+```
+
+Benefits of using `replace`:
+
+* **Clear intent**: The operator name explicitly states what you’re doing
+* **No branching**: Avoid nested conditionals that are hard to follow
+* **Composable**: Chain with `drop_null_fields` for complete cleanup
+* **Maintainable**: Easy to add more placeholder values if needed
+
+✅ Handling multiple placeholder values:
+
+```tql
+replace what="-", with=null
+replace what="N/A", with=null
+replace what="", with=null
+drop_null_fields
+```
+
+Operator vs. function
+
+Don’t confuse the [`replace`](../reference/operators/replace.md) operator with the [`replace`](../reference/functions/replace.md) function:
+
+* **Operator**: Replaces entire values across all fields in events (e.g., replace all `"-"` with `null`)
+* **Function**: Replaces substrings within a string (e.g., `"hello".replace("l", "r")` → `"herro"`)
+
+### Use meaningful names for computed fields
+
+✅ Clear intent:
+
+```tql
+summarize \
+  src_ip,
+  total_traffic=sum(bytes),
+  avg_response=mean(response_time),
+  error_rate=count(status >= 400) / count()
+```
+
+❌ Unclear:
+
+```tql
+summarize src_ip, sum(bytes), mean(response_time)
+```
+
+## Type awareness
+
+### Leverage TQL’s domain-specific types
+
+✅ Use native types:
+
+```tql
+let $timestamp = now()
+let $weekend = $timestamp.day_of_week() in ["Saturday", "Sunday"]
+
+
+where src_ip in 10.0.0.0/8
+where duration > 5min
+```
+
+⚠️ Less expressive and error-prone:
+
+```tql
+let $timestamp = now()
+let $weekend = $timestamp_day in [0, 6]  // What do 0 and 6 mean?
+
+
+where src_ip.string().starts_with("10.")
+where duration_ms > 300000
+```
+
+### Use method chaining for time conversions
+
+When converting numeric values to timestamps or durations, prefer method chaining over multiplication with duration units.
+
+✅ Idiomatic method chaining:
+
+```tql
+// Convert Unix epoch seconds to timestamp
+timestamp = epoch_secs.seconds().from_epoch()
+
+
+// Convert to duration
+timeout = timeout_secs.seconds()
+
+
+// Chain multiple conversions
+duration_ms = (end_time - start_time).milliseconds()
+```
+
+❌ Less readable multiplication:
+
+```tql
+// Multiplication obscures intent
+timestamp = from_epoch(epoch_secs * 1s)
+
+
+// What unit is this? Seconds? Milliseconds?
+timeout = timeout_value * 1s
+
+
+// Hard to parse at a glance
+duration_ms = count_milliseconds(from_epoch(end * 1s) - from_epoch(start * 1s))
+```
+
+Method chaining reads naturally left-to-right: “take epoch seconds, interpret as seconds, convert from epoch.” The multiplication style requires understanding that `* 1s` converts a number to a duration, which is less intuitive.
+
+## Performance considerations
+
+### Place filters early in pipelines
+
+✅ Filter first, reduce data volume:
+
+```tql
+from "large_dataset.json"
+where severity == "critical"     // Reduce early
+where timestamp > now() - 1h     // Further reduction
+select relevant_fields           // Drop unnecessary data
+summarize ...                    // Aggregate reduced dataset
+```
+
+❌ Process everything, then filter:
+
+```tql
+from "large_dataset.json"
+select all_fields
+summarize ...
+where result > threshold        // Filter after expensive operation
+```
+
+## Composition patterns
+
+### Use constants for reusable values
+
+✅ Maintainable and self-documenting:
+
+```tql
+let $internal_net = 10.0.0.0/8
+let $critical_ports = [22, 3389, 5432]  // SSH, RDP, PostgreSQL
+let $high_risk_threshold = 0.8
+
+
+where src_ip in $internal_net
+where dst_port in $critical_ports
+where risk_score > $high_risk_threshold
+```
+
+❌ Magic numbers scattered throughout:
+
+```tql
+where src_ip in 10.0.0.0/8
+where dst_port in [22, 3389, 5432]
+where risk_score > 0.8          // What does 0.8 mean?
+```
+
+## Record constants and mappings
+
+### Use record constants for mappings instead of if-else chains
+
+✅ Clean record-based mappings with else fallback:
+
+```tql
+let $http_methods = {
+  CONNECT: 1,
+  DELETE: 2,
+  GET: 3,
+  HEAD: 4,
+  OPTIONS: 5,
+  POST: 6,
+  PUT: 7,
+  TRACE: 8,
+  PATCH: 9,
+}
+
+
+let $activity_names = [
+  "Unknown",
+  "Connect",
+  "Delete",
+  "Get",
+  "Head",
+  "Options",
+  "Post",
+  "Put",
+  "Trace",
+  "Patch",
+]
+
+
+let $dispositions = {
+  OBSERVED: {id: 15, name: "Detected"},
+  LOGGED: {id: 17, name: "Logged"},
+  ALLOWED: {id: 1, name: "Allowed"},
+  BLOCKED: {id: 2, name: "Blocked"},
+  DENIED: {id: 2, name: "Blocked"},
+}
+
+
+// Use record indexing with else for fallback values
+activity_id = $http_methods[method]? else 99
+activity_name = $activity_names[activity_id]? else "Other"
+disposition = $dispositions[action]? else {id: 0, name: "Unknown"}
+```
+
+❌ Complex if-else chains:
+
+```tql
+// Hard to maintain and extend
+if method == "GET" {
+  activity_id = 3
+} else if method == "POST" {
+  activity_id = 6
+} else if method == "PUT" {
+  activity_id = 7
+} else if method == "DELETE" {
+  activity_id = 2
+} else {
+  activity_id = 99
+}
+
+
+// Error-prone string building
+if activity_id == 1 {
+  activity_name = "Connect"
+} else if activity_id == 2 {
+  activity_name = "Delete"
+} else if activity_id == 3 {
+  activity_name = "Get"
+} // ... many more conditions
+```
+
+❌ Inline nested if-else expressions are especially problematic:
+
+```tql
+// TERRIBLE: Unreadable chain of inline conditionals
+activity_id = 3 if method == "GET" else 6 if method == "POST" else 7 if method == "PUT" else 2 if method == "DELETE" else 99
+
+
+// AWFUL: Complex nested logic impossible to follow
+severity_level = "critical" if score > 90 else "high" if score > 70 else "medium" if score > 50 else "low" if score > 30 else "info"
+
+
+// UNMAINTAINABLE: Mixed logic with nested conditions
+result = "blocked" if is_malicious else "allowed" if is_trusted else "quarantine" if risk > 0.8 else "review" if risk > 0.5 else "log"
+```
+
+These inline chains are a serious anti-pattern because:
+
+* **Unreadable**: Eyes can’t parse the logic flow easily
+* **Error-prone**: Easy to mix up conditions and values
+* **Unmaintainable**: Adding/removing conditions requires rewriting the entire expression
+* **Debugging nightmare**: Can’t set breakpoints or log intermediate values
+* **Performance issues**: Every condition is evaluated sequentially
+
+✅ Always use record constants instead:
+
+```tql
+// Clean, maintainable lookups with record indexing
+activity_id = $http_methods[method]? else 99
+activity_name = $activity_names[activity_id]? else "Other"
+disposition = $dispositions[action]? else {id: 0, name: "Unknown"}
+```
+
+The `else` keyword provides a fallback value when:
+
+* A field doesn’t exist (`field? else default`)
+* An array index is out of bounds (`array[index]? else default`)
+* A record key doesn’t exist (`record[key]? else default`)
+
+This pattern is particularly powerful for:
+
+* Normalizing data to standard formats (like OCSF)
+* Mapping between different naming conventions
+* Providing sensible defaults for missing data
+* Creating reusable transformation logic
+
+## Writing comments
+
+Good comments explain the reasoning, business logic, or non-obvious decisions behind code. The code itself should show what it does; comments should explain why it does it.
+
+❌ Bad; explains what (redundant):
+
+```tql
+// Increment counter by 1
+set counter = counter + 1
+```
+
+✅ Good; Explains why:
+
+```tql
+/*
+ * Binary field curves are deprecated due to:
+ * 1. Weak reduction polynomials in some cases
+ * 2. Complex implementation leading to side-channel vulnerabilities
+ * 3. Patent concerns that historically limited adoption
+ * 4. Generally slower performance compared to prime field curves
+ * 5. Less scrutiny from cryptographic community
+ * RFC 8422 deprecates these for TLS 1.3.
+ */
+let $weak_prime_curves = [
+  "secp160k1", // 160-bit curves
+  "secp160r1",
+  "secp160r2",
+  "secp192k1", // 192-bit curves
+  "secp224k1", // 224-bit curves
+  "secp224r1", // NIST P-224
+]
+```
+
+Why you should comment your code
+
+Don’t be skimpy with your comments—here’s why:
+
+* **Prevent “improvements” that break things**: Future developers won’t accidentally “fix” your intentional design choices.
+* **Save investigation time**: Document your research so others don’t repeat the same Stack Overflow searches.
+* **Explain business constraints**: Code reviews can’t capture why you chose the “worse” technical solution for valid business reasons.
+* **Help your future self**: You’ll forget your own reasoning faster than you think.
+* **Speed up onboarding**: New team members understand decisions instead of guessing at intent.
+
+Remember: well-named fields and clear structure communicate *what* your code does—comments explain *why* you chose to do it that way.
+
+## Data quality
+
+TQL’s diagnostic system helps you maintain data quality by distinguishing between expected variations and genuine problems. Understanding how to work with warnings intentionally is key to building robust pipelines.
+
+In TQL, warnings are not annoyances to suppress—they’re signals about your data’s health. The language provides tools to express your expectations clearly:
+
+* **No `?`**: Field should exist; warning indicates a problem
+* **With `?`**: Field naturally varies; absence is normal
+* **`assert`**: Enforce invariants with warnings
+* **`strict`**: Escalate warnings to errors when quality matters
+
+### Be deliberate about optional field access
+
+The `?` operator controls whether missing fields trigger warnings. Use it to express your data contract clearly.
+
+✅ Clear data expectations in transformations:
+
+```tql
+// Required field - warning if missing
+result = {id: event_id, severity: severity}
+
+
+// Optional field - no warning if missing
+result = {id: event_id, customer: customer_id?}
+```
+
+✅ Express expectations in selections:
+
+```tql
+// Required field - warning if missing
+select event_id, timestamp
+
+
+// Mix required and optional fields
+select event_id, customer_id?
+```
+
+❌ Suppressing warnings on required fields:
+
+```tql
+// Bad: This hides data quality problems
+select event_id?  // Should warn if missing!
+```
+
+Tip
+
+The `?` operator expresses your data contract. Use it to distinguish between “this field should exist” and “this field naturally varies.”
+
+### Enforce invariants with `assert`
+
+Use `assert` when specific conditions must be true for your pipeline to work correctly. Unlike `where`, which silently filters, `assert` emits warnings when invariants are violated.
+
+✅ Use `assert` for data quality checks:
+
+```tql
+// Ensure critical field has valid values
+assert severity in ["low", "medium", "high", "critical"]
+
+
+// Verify schema expectations
+subscribe "ocsf"
+assert @name == "ocsf.network_activity"  // Wrong event type = warning
+```
+
+✅ Combine `assert` with filtering:
+
+```tql
+// First assert invariant (with warning)
+assert src_ip != null
+
+
+// Then filter normally (silent)
+where src_ip.is_private()
+```
+
+❌ Don’t use `assert` for normal filtering:
+
+```tql
+// Wrong: This creates unnecessary warnings
+assert severity == "critical"
+
+
+// Right: Use where for filtering
+where severity == "critical"
+```
+
+Performance
+
+`where` is faster than `assert` due to optimizations like predicate pushdown. Only use `assert` when you specifically want warnings for violated conditions.
+
+### Treat warnings as errors with `strict`
+
+The [`strict`](../reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
+
+✅ Use `strict` for critical data processing:
+
+```tql
+// Stop pipeline if any required field is missing
+strict {
+  select transaction_id  // Warning → Error if missing
+}
+```
+
+✅ Combine with `assert` for comprehensive checks:
+
+```tql
+strict {
+  // Assertion becomes fatal if violated
+  assert amount > 0
+
+
+  // Missing field also becomes fatal
+  select customer_id
+}
+```
+
+Quick rule
+
+By default, trust the operator to accurately distinguish between warnings and errors. Only use `strict` when warnings should halt the pipeline, and when data loss is less important than data correctness.
+
+### Choose the right quality control
+
+| Tool         | Use When             | Behavior           |
+| ------------ | -------------------- | ------------------ |
+| `field`      | Field must exist     | Warning if missing |
+| `field?`     | Field is optional    | Silent if missing  |
+| `where`      | Filtering data       | Silent filter      |
+| `assert`     | Enforcing invariants | Warning + filter   |
+| `strict { }` | Zero tolerance       | Warnings → Errors  |
+
+✅ Production pipeline with layered quality control:
+
+```tql
+// Constants for validation
+let $valid_severities = ["low", "medium", "high", "critical"]
+let $required_fields = ["event_id", "timestamp", "source"]
+
+
+// Strict mode for critical path
+strict {
+  subscribe "prod"
+
+
+  // Assertions for data integrity
+  assert severity in $valid_severities
+  assert timestamp > 2024-01-01
+
+
+  // Required field access (warnings → errors)
+  where event_id != null and source != null
+
+
+  // Normal processing
+  context::enrich "geo", key=source
+}
+
+
+// Optional enrichment (outside strict)
+where geo?.country? == "US"  // No warning if geo missing
+```
+
+This layered approach ensures critical data meets requirements while allowing flexibility for optional enrichments.
+
+## OCSF mapping best practices
+
+### Work with record-based mappings
+
+✅ Drive dispatching with clear maps:
+
+```tql
+let $severities = {
+  critical: 5,
+  high: 4,
+  medium: 3,
+  low: 2,
+  none: 0,
+}
+ocsf.severity_id = $severities[source.severity]? else 0
+```
+
+❌ Don’t use `if-else` chains for this.
+
+### Use range checks to map status codes
+
+✅ Derive `status_id` from status codes, e.g., HTTP:
+
+```tql
+if http_status >= 200 and http_status < 400 {
+  ocsf.status_id = 1  // Success
+} else if http_status >= 400 {
+  ocsf.status_id = 2  // Failure
+} else {
+  ocsf.status_id = 0  // Unknown
+}
+```
+
+❌ Don’t use `record` mapping when status code are partitioned into ranges.
+
+✅ Use `status_detail` for human-readable status messages.
+
+✅ Use `status_code` for the raw status code (as `string`).
+
+### OCSF Profile: Network Proxy
+
+✅ For proxy logs, identify which endpoint is the proxy itself:
+
+* `src_endpoint`: The client machine initiating the request
+* `dst_endpoint`: The destination server being accessed
+* `proxy_endpoint`: The proxy/gateway infrastructure
+
+### OCSF Profile: Security Control
+
+✅ Set `is_alert` to `true` if the event represents an alert.
+
+### Only add profiles when necessary
+
+OCSF profiles extend the base event class with additional fields. Only declare a profile in `metadata.profiles` when your source data contains fields that:
+
+1. Map naturally to profile-specific OCSF fields
+2. Would otherwise end up in `unmapped` without a proper home
+
+✅ Add a profile when you have data for its fields:
+
+```tql
+// Source has cloud-specific fields like account_id, region, zone
+ocsf.metadata.profiles = ["cloud"]
+ocsf.cloud.account.uid = move source.account_id
+ocsf.cloud.region = move source.region
+```
+
+❌ Don’t add profiles “just in case” or for redundant fields:
+
+```tql
+// Wrong: datetime profile adds *_dt variants of time fields,
+// but TQL timestamps already serialize as ISO 8601 datetimes
+ocsf.metadata.profiles = ["cloud", "datetime"]  // datetime is redundant
+ocsf.start_time = source.start.seconds().from_epoch()
+ocsf.start_time_dt = ocsf.start_time  // Same value, no benefit
+```
+
+The datetime profile is particularly prone to misuse—it adds `time_dt`, `start_time_dt`, and `end_time_dt` fields that duplicate the base timestamp fields. Since TQL’s `time` type already serializes as ISO 8601 datetimes, these `_dt` variants provide no additional value.
+
+## Contents
+
+- [Write-a-package](write-a-package.md)
+- [Map-data-to-ocsf](map-data-to-ocsf.md)

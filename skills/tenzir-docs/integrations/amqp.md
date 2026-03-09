@@ -1,0 +1,36 @@
+# AMQP
+
+
+The [Advanced Message Queuing Protocol (AMQP)](https://www.amqp.org/) is an open standard application layer protocol for message-oriented middleware.
+
+The diagram below shows the key abstractions and how they relate to a pipeline:
+
+Tenzir supports sending and receiving messages via AMQP version 0-9-1.
+
+URL Support
+
+The URL scheme `amqp://` dispatches to [`load_amqp`](../reference/operators/load_amqp.md) and [`save_amqp`](../reference/operators/save_amqp.md) for seamless URL-style use via [`from`](../reference/operators/from.md) and [`to`](../reference/operators/to.md).
+
+## Examples
+
+### Send events to an AMQP exchange
+
+```tql
+from {
+  x: 42,
+  y: "foo",
+}
+to "amqp://admin:pass@0.0.0.1:5672/vhost"
+```
+
+### Receive events from an AMQP queue
+
+```tql
+from "amqp://admin:pass@0.0.0.1:5672/vhost"
+```
+
+## Contents
+
+- [Fluent-bit](fluent-bit.md)
+- [Kafka](kafka.md)
+- [Zeromq](zeromq.md)

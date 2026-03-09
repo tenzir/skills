@@ -1,0 +1,109 @@
+name: Sync Tenzir Docs Skill
+
+on:
+  workflow_dispatch:
+    inputs:
+      docs_tag:
+        description: "tenzir/docs release tag to consume"
+        required: false
+        default: "latest"
+        type: string
+      docs_sha:
+        description: "Source tenzir/docs commit SHA for traceability"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "sync-docs-skill"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Rebuild tenzir-docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.TENZIR_GITHUB_APP_ID }}
+          private-key: ${{ secrets.TENZIR_GITHUB_APP_PRIVATE_KEY }}
+          owner: tenzir
+
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Download docs bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          archive_url="https://github.com/tenzir/docs/releases/download/${{ inputs.docs_tag }}/tenzir-docs.tar.gz"
+          curl -L --fail --retry 3 --retry-all-errors -o /tmp/tenzir-docs.tar.gz "$archive_url"
+          mkdir -p /tmp/tenzir-docs
+          tar -xzf /tmp/tenzir-docs.tar.gz -C /tmp/tenzir-docs
+
+      - name: Rebuild tenzir-docs skill
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/generate-tenzir-docs-skill.mjs \
+            --input-dir /tmp/tenzir-docs \
+            --output-dir skills/tenzir-docs
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install skills-ref
+        shell: bash
+        run: uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
+
+      - name: Validate skills with skills-ref
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t skill_dirs < <(
+            find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort
+          )
+
+          for skill_dir in "${skill_dirs[@]}"; do
+            echo "Validating ${skill_dir}"
+            skills-ref validate "${skill_dir}"
+          done
+
+      - name: Stage changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A -- skills/tenzir-docs
+
+      - name: Build commit message
+        id: commit-message
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          message="Sync tenzir-docs from tenzir/docs"
+          if [[ -n "${{ github.event.inputs.docs_sha || '' }}" ]]; then
+            message="${message} (${{ github.event.inputs.docs_sha }})"
+          fi
+
+          echo "message=$message" >> "$GITHUB_OUTPUT"
+
+      - name: Commit changes
+        uses: planetscale/ghcommit-action@v0.2.0
+        with:
+          commit_message: ${{ steps.commit-message.outputs.message }}
+          repo: ${{ github.repository }}
+          branch: ${{ github.ref_name }}
+          empty: false
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}

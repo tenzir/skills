@@ -1,0 +1,26 @@
+# Configure a node
+
+
+The default node configuration is optimized for most common scenarios. But you can fine-tune the settings to match your specific requirements.
+
+We recommend beginning with learning [how the node configuration process](../../explanations/configuration.md) works, and then browse the [example configuration](../../reference/node/configuration.md) for tuning knobs.
+
+Here are few common configuration scenarios.
+
+## Accept incoming connections
+
+When your node starts it will listen for node-to-node connections on the TCP endpoint `127.0.0.1:5158`. Select a different endpoint via the `tenzir.endpoint` option. For example, to bind to an IPv6 address use `[::1]:42000`.
+
+## Refuse incoming connections
+
+Set `tenzir.endpoint` to `false` to disable the endpoint, making the node exclusively accessible through the Tenzir Platform. This effectively prevents connections from other `tenzir` or `tenzir-node` processes.
+
+## Configure pipeline subprocesses
+
+Pipelines that run in a node can be partially moved to a subprocess for improved error resilience and resource utilization. Operators that need to communicate with a component still run inside the main node process for architectural reasons. Set `tenzir.pipeline-subprocesses: true` in `tenzir.yaml` or `TENZIR_PIPELINE_SUBPROCESSES=true` on the command line to enable this feature, which is disabled by default.
+
+Learn more about [pipeline subprocesses](../../explanations/node.md#pipeline-subprocesses) and their trade-offs.
+
+## Configure the platform TLS connection
+
+By default, the platform connection uses TLS and picks up the settings from the `tenzir.tls` config block. To configure TLS specifically for the platform connection, see [Platform connection TLS](configure-tls.md#platform-connection-tls).

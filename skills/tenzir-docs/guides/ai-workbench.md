@@ -1,0 +1,38 @@
+# Overview
+
+
+Build your own **AI Workbench** by bringing an AI agent and configuring it according to the guides in this section. Once set up, use it to write TQL pipelines, understand OCSF schemas, generate parsers, and create data mappings.
+
+## Three ways to get AI assistance
+
+Tenzir offers three integration points for AI agents:
+
+1. **MCP Server**: A [Model Context Protocol](https://modelcontextprotocol.io) server that exposes Tenzir functionality as tools. Works with any MCP-compatible agent.
+2. **Claude Plugins**: [Skills](https://agentskills.io), subagents, slash commands, and hooks that integrate deeply with Claude Code.
+3. **Agent Skills**: Portable documentation packaged in the [Agent Skills](https://agentskills.io) format. Works with any skill-compatible agent.
+
+### Which should you use?
+
+**Claude Code users: install our plugins.** We maintain plugins that encode how we write TQL, document features, and manage releases. Skills auto-activate based on context, subagents handle specialized tasks, slash commands provide quick actions, and hooks automate workflows. This is the recommended experience.
+
+**Other agents with skills support:** Use the documentation skill for portable access to Tenzir knowledge. Download it from the [docs releases](https://github.com/tenzir/docs/releases/latest) and point your agent to the extracted directory.
+
+**All other agents: use the MCP server.** If your agent doesn’t support skills, the MCP server gives you access to core tools like `make_parser`, `make_ocsf_mapping`, and `run_pipeline`. Any MCP-compatible agent works with the server.
+
+**Want both documentation and tools?** Combine the Agent Skill with the MCP server for comprehensive AI assistance.
+
+## Getting started
+
+1. [Install the MCP server](ai-workbench/install-mcp-server.md): Connect your AI agent to Tenzir.
+2. [Configure your agent](ai-workbench/configure-your-agent.md): Optimize settings for Tenzir development.
+3. [Use Claude plugins](ai-workbench/use-claude-plugins.md): Install the TQL, OCSF, and Docs plugins for enhanced workflows.
+4. [Use documentation skill](ai-workbench/use-documentation-skill.md): Access Tenzir docs with any skill-compatible agent.
+
+Once set up, use [our Claude plugins](ai-workbench/use-claude-plugins.md) for guided workflows to generate parsers and OCSF mappings.
+
+## Contents
+
+- [Install-mcp-server](ai-workbench/install-mcp-server.md)
+- [Configure-your-agent](ai-workbench/configure-your-agent.md)
+- [Use-claude-plugins](ai-workbench/use-claude-plugins.md)
+- [Use-documentation-skill](ai-workbench/use-documentation-skill.md)
