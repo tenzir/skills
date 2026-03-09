@@ -438,6 +438,114 @@ def generate_named_overview(version_data: dict, title: str, section: str) -> str
     return "\n".join(lines) + "\n"
 
 
+# Semantic grouping for objects overview.  Each entry maps a group
+# heading to a set of object names.  Objects not listed land in the
+# catch-all group at the end.
+_OBJECT_GROUPS: list[tuple[str, set[str]]] = [
+    ("Base", {
+        "object", "_entity", "_resource",
+    }),
+    ("Network", {
+        "_dns", "dns_answer", "dns_query", "endpoint", "endpoint_connection",
+        "network_endpoint", "network_proxy", "network_connection_info",
+        "network_interface", "network_traffic", "autonomous_system", "hassh",
+        "http_cookie", "http_header", "http_request", "http_response",
+        "ja4_fingerprint", "load_balancer", "tls", "tls_extension", "url",
+        "dce_rpc", "rpc_interface", "port_info",
+    }),
+    ("Identity & Access", {
+        "account", "actor", "auth_factor", "authentication_token",
+        "authorization", "group", "idp", "ldap_person", "scim", "session",
+        "sso", "user", "identity_activity_metrics", "programmatic_credential",
+    }),
+    ("Device & Host", {
+        "agent", "device", "device_hw_info", "display", "keyboard_info",
+        "os", "peripheral_device", "container", "image", "kernel",
+        "kernel_driver",
+    }),
+    ("Process & Module", {
+        "process", "process_entity", "module", "script", "service",
+        "startup_item", "environment_variable", "function_invocation",
+        "parameter",
+    }),
+    ("File & Data", {
+        "file", "fingerprint", "digital_signature", "database", "databucket",
+        "table", "web_resource", "data_classification", "data_security",
+        "encryption_details", "sbom", "software_component", "package",
+        "affected_code", "affected_package",
+    }),
+    ("Threat Intelligence", {
+        "attack", "campaign", "cve", "cvss", "cwe", "epss", "kill_chain_phase",
+        "malware", "malware_scan_info", "osint", "reputation", "sub_technique",
+        "tactic", "technique", "threat_actor", "vulnerability", "d3fend",
+        "d3f_tactic", "d3f_technique", "mitigation",
+    }),
+    ("Findings & Compliance", {
+        "analytic", "anomaly", "anomaly_analysis", "assessment", "baseline",
+        "check", "cis_benchmark", "cis_benchmark_result", "cis_control",
+        "cis_csc", "compliance", "evidences", "finding", "finding_info",
+        "observation", "remediation", "rule", "firewall_rule", "policy",
+        "security_state", "access_analysis_result", "permission_analysis_result",
+    }),
+    ("Email", {
+        "email", "email_auth",
+    }),
+    ("Cloud & Resources", {
+        "cloud", "resource_details", "managed_entity",
+    }),
+    ("Metadata & Context", {
+        "api", "application", "classifier_details", "enrichment", "extension",
+        "feature", "key_value_object", "logger", "long_string", "metadata",
+        "metric", "observable", "occurrence_details", "organization",
+        "product", "query_info", "query_evidence", "related_event", "request",
+        "response", "span", "trace", "ticket", "vendor_attributes",
+        "transformation_info", "reporter",
+    }),
+    ("Location & Geography", {
+        "location", "domain_contact", "whois", "san", "certificate",
+    }),
+    ("Unmanned Systems", {
+        "aircraft", "unmanned_aerial_system", "unmanned_system_operating_area",
+    }),
+    ("Discovery", {
+        "analysis_target", "discovery_details", "graph", "edge", "node",
+        "trait", "kb_article", "job",
+    }),
+]
+
+
+def generate_objects_overview(version_data: dict) -> str:
+    objects = version_data["objects"]
+    assigned: set[str] = set()
+    lines = [f"# Objects ({version_data['version']})", ""]
+
+    for group_title, group_names in _OBJECT_GROUPS:
+        group_items = sorted(
+            ((name, data) for name, data in objects.items() if name in group_names),
+            key=lambda item: (item[1].get("caption") or item[0]).casefold(),
+        )
+        if not group_items:
+            continue
+        lines.extend([f"## {group_title}", ""])
+        for name, data in group_items:
+            lines.append(f"- [{data.get('caption') or name}](objects/{name_to_slug(name)}.md)")
+            assigned.add(name)
+        lines.append("")
+
+    # Catch-all for objects not assigned to any group.
+    remaining = sorted(
+        ((name, data) for name, data in objects.items() if name not in assigned),
+        key=lambda item: (item[1].get("caption") or item[0]).casefold(),
+    )
+    if remaining:
+        lines.extend(["## Other", ""])
+        for name, data in remaining:
+            lines.append(f"- [{data.get('caption') or name}](objects/{name_to_slug(name)}.md)")
+        lines.append("")
+
+    return f"{re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()}\n"
+
+
 def generate_extensions_overview(version_data: dict) -> str:
     lines = [f"# Extensions ({version_data['version']})", ""]
     for name, data in sorted(
@@ -702,7 +810,7 @@ def main() -> None:
         for data in version_docs:
             write_file(output_dir / f"{data['slug']}.md", generate_version_overview(data))
             write_file(output_dir / data["slug"] / "classes.md", generate_classes_overview(data))
-            write_file(output_dir / data["slug"] / "objects.md", generate_named_overview(data, "Objects", "objects"))
+            write_file(output_dir / data["slug"] / "objects.md", generate_objects_overview(data))
             write_file(output_dir / data["slug"] / "profiles.md", generate_named_overview(data, "Profiles", "profiles"))
             write_file(output_dir / data["slug"] / "extensions.md", generate_extensions_overview(data))
             write_file(output_dir / data["slug"] / "types.md", generate_types_overview(data))
