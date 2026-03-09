@@ -16,6 +16,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+from dataclasses import dataclass
 from pathlib import Path
 
 import httpx
@@ -24,12 +25,22 @@ from packaging.version import Version
 
 
 OCSF_SCHEMA_REPO = "https://github.com/ocsf/ocsf-schema.git"
+OCSF_SCHEMA_RAW = "https://raw.githubusercontent.com/ocsf/ocsf-schema/main"
 OCSF_DOCS_API = "https://api.github.com/repos/ocsf/ocsf-docs/contents"
 OCSF_DOCS_RAW = "https://raw.githubusercontent.com/ocsf/ocsf-docs/main"
 HTTP_HEADERS = {
     "User-Agent": "tenzir-skills-generator",
     "Accept": "application/json",
 }
+SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
+DEV_VERSION_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)-dev$")
+
+
+@dataclass(frozen=True, slots=True)
+class VersionSpec:
+    version: str
+    ref: str
+    is_stable: bool
 
 
 def version_to_slug(version: str) -> str:
@@ -98,12 +109,15 @@ def list_stable_versions() -> list[str]:
     return [str(version) for version in sorted((Version(version) for version in versions))]
 
 
-def clone_schema(version: str, temp_root: Path) -> Path:
+def clone_schema(version: str, ref: str, temp_root: Path) -> Path:
     repo_dir = temp_root / f"ocsf-schema-{version}"
-    for ref in (f"v{version}", version):
+    refs = [ref]
+    if ref == version:
+        refs.insert(0, f"v{version}")
+    for candidate in refs:
         try:
             subprocess.run(
-                ["git", "clone", "--depth", "1", "--branch", ref, OCSF_SCHEMA_REPO, str(repo_dir)],
+                ["git", "clone", "--depth", "1", "--branch", candidate, OCSF_SCHEMA_REPO, str(repo_dir)],
                 check=True,
                 capture_output=True,
                 text=True,
@@ -111,7 +125,45 @@ def clone_schema(version: str, temp_root: Path) -> Path:
             return repo_dir
         except subprocess.CalledProcessError:
             pass
-    raise RuntimeError(f"Failed to clone OCSF schema for version {version}")
+    raise RuntimeError(f"Failed to clone OCSF schema for version {version} from ref {ref}")
+
+
+def parse_semver_triplet(version: str) -> tuple[int, int, int]:
+    match = SEMVER_RE.fullmatch(version)
+    if not match:
+        raise ValueError(f"Unsupported stable version format: {version}")
+    return tuple(int(part) for part in match.groups())
+
+
+def fetch_latest_dev_version(client: httpx.Client) -> str | None:
+    response = client.get(f"{OCSF_SCHEMA_RAW}/version.json")
+    response.raise_for_status()
+    version = response.json().get("version")
+    if not isinstance(version, str):
+        return None
+    return version if DEV_VERSION_RE.fullmatch(version) else None
+
+
+def collect_version_specs(client: httpx.Client, requested_version: str | None) -> list[VersionSpec]:
+    if requested_version:
+        if requested_version.endswith("-dev"):
+            return [VersionSpec(version=requested_version, ref="main", is_stable=False)]
+        return [VersionSpec(version=requested_version, ref=requested_version, is_stable=True)]
+
+    stable_versions = list_stable_versions()
+    specs = [
+        VersionSpec(version=version, ref=version, is_stable=True)
+        for version in stable_versions
+    ]
+
+    dev_version = fetch_latest_dev_version(client)
+    if dev_version:
+        dev_triplet = tuple(int(part) for part in DEV_VERSION_RE.fullmatch(dev_version).groups())
+        latest_stable_triplet = parse_semver_triplet(stable_versions[-1])
+        if dev_triplet >= latest_stable_triplet:
+            specs.append(VersionSpec(version=dev_version, ref="main", is_stable=False))
+
+    return specs
 
 
 def load_directory_json(directory: Path) -> dict[str, dict]:
@@ -376,24 +428,27 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    versions = [args.version] if args.version else list_stable_versions()
-    if args.latest_only:
-        versions = [versions[-1]]
-
     output_dir = Path(args.output_dir).resolve()
     temp_root = Path(tempfile.mkdtemp(prefix="ocsf-skill-"))
     version_docs: list[dict] = []
 
     try:
-        for version in versions:
-            schema_dir = clone_schema(version, temp_root)
-            version_docs.append(build_version_docs(version, schema_dir))
-
-        latest = version_docs[-1]
         with httpx.Client(headers=HTTP_HEADERS, follow_redirects=True, timeout=30.0) as client:
+            version_specs = collect_version_specs(client, args.version)
+            if args.latest_only:
+                version_specs = [version_specs[-1]]
+
+            for spec in version_specs:
+                schema_dir = clone_schema(spec.version, spec.ref, temp_root)
+                version_docs.append(build_version_docs(spec.version, schema_dir))
+
             faqs = fetch_pages(client, "faqs")
             articles = fetch_pages(client, "articles")
             overview = fetch_text(client, f"{OCSF_DOCS_RAW}/overview/understanding-ocsf.md")
+
+        latest_stable = next((data for data in reversed(version_docs) if not data["version"].endswith("-dev")), None)
+        latest_dev = next((data for data in reversed(version_docs) if data["version"].endswith("-dev")), None)
+        latest_reference = latest_stable or version_docs[-1]
 
         shutil.rmtree(output_dir, ignore_errors=True)
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -413,12 +468,13 @@ def main() -> None:
                     "",
                     "## Reading the documentation",
                     "",
-                    "Start with [index.md](index.md) to discover available versions. Use the latest stable version unless the user requests a specific one. Stick to one version per answer.",
+                    "Use the version links in this file to pick a schema release. Use the latest stable version unless the user requests a specific one. Stick to one version per answer.",
+                    "",
+                    "A development snapshot is available when the upstream `main` branch reports a `-dev` schema version. Treat that version as unreleased.",
                     "",
                     "The file tree follows this layout:",
                     "",
                     "```",
-                    "index.md",
                     "introduction.md",
                     "faqs.md",
                     "faqs/{slug}.md",
@@ -477,39 +533,35 @@ def main() -> None:
                     "- Consult [faqs.md](faqs.md) when the question is about schema choices or ambiguity.",
                     "- Read multiple candidates for selection questions and explain trade-offs.",
                     "",
+                    "## Versions",
+                    "",
+                    *[f"- [{data['version']}]({data['slug']}.md)" for data in version_docs],
+                    "",
                     "## Documentation map",
                     "",
                     "### [Introduction](introduction.md)",
                     "",
-                    f"### [Latest classes]({latest['slug']}/classes.md)",
+                    f"### [Latest stable classes]({latest_reference['slug']}/classes.md)",
                     "",
-                    f"### [Latest objects]({latest['slug']}/objects.md)",
+                    f"### [Latest stable objects]({latest_reference['slug']}/objects.md)",
                     "",
-                    f"### [Latest profiles]({latest['slug']}/profiles.md)",
+                    f"### [Latest stable profiles]({latest_reference['slug']}/profiles.md)",
                     "",
-                    f"### [Latest extensions]({latest['slug']}/extensions.md)",
+                    f"### [Latest stable extensions]({latest_reference['slug']}/extensions.md)",
                     "",
-                    f"### [Latest types]({latest['slug']}/types.md)",
+                    f"### [Latest stable types]({latest_reference['slug']}/types.md)",
+                    "",
+                    *(
+                        [
+                            f"### [Latest dev snapshot]({latest_dev['slug']}.md)",
+                        ]
+                        if latest_dev
+                        else []
+                    ),
                     "",
                     "### [FAQs](faqs.md)",
                     "",
                     "### [Articles](articles.md)",
-                    "",
-                ]
-            ),
-        )
-
-        write_file(
-            output_dir / "index.md",
-            "\n".join(
-                [
-                    "# OCSF",
-                    "",
-                    "Generated from the official [`ocsf-schema`](https://github.com/ocsf/ocsf-schema) and [`ocsf-docs`](https://github.com/ocsf/ocsf-docs) repositories.",
-                    "",
-                    "## Versions",
-                    "",
-                    *[f"- [{data['version']}]({data['slug']}.md)" for data in version_docs],
                     "",
                 ]
             ),

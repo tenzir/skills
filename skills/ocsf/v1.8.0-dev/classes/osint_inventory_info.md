@@ -1,0 +1,25 @@
+# OSINT Inventory Info (osint_inventory_info)
+
+OSINT Inventory Info events report open source intelligence or threat intelligence inventory data that is either logged or proactively collected. For example, when collecting OSINT information from Threat Intelligence Platforms (TIPs) or Extended Detection and Response (XDR) platforms, or collecting data from OSINT or other generic threat intelligence and enrichment feeds such as APIs and datastores.
+
+- **UID**: `21`
+- **Category**: Discovery
+- **Extends**: `discovery`
+
+## Attributes
+
+### `actor`
+
+- **Type**: `actor`
+- **Requirement**: optional
+- **Group**: context
+
+The actor describes the process that was the source of the inventory activity. In the case of OSINT inventory data, that could be a particular process or script that is run to scrape the OSINT or threat intelligence data. For example, it could be a Python process that runs to pull data from a MISP or Shodan API.
+
+### `osint`
+
+- **Type**: `osint`
+- **Requirement**: required
+- **Group**: primary
+
+The OSINT that is being discovered by an inventory process.

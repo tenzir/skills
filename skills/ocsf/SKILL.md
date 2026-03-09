@@ -9,12 +9,13 @@ Look up OCSF reference documentation and answer from those sources. Only state f
 
 ## Reading the documentation
 
-Start with [index.md](index.md) to discover available versions. Use the latest stable version unless the user requests a specific one. Stick to one version per answer.
+Use the version links in this file to pick a schema release. Use the latest stable version unless the user requests a specific one. Stick to one version per answer.
+
+A development snapshot is available when the upstream `main` branch reports a `-dev` schema version. Treat that version as unreleased.
 
 The file tree follows this layout:
 
 ```
-index.md
 introduction.md
 faqs.md
 faqs/{slug}.md
@@ -73,19 +74,33 @@ articles/{slug}.md
 - Consult [faqs.md](faqs.md) when the question is about schema choices or ambiguity.
 - Read multiple candidates for selection questions and explain trade-offs.
 
+## Versions
+
+- [1.0.0](v1.0.0.md)
+- [1.1.0](v1.1.0.md)
+- [1.2.0](v1.2.0.md)
+- [1.3.0](v1.3.0.md)
+- [1.4.0](v1.4.0.md)
+- [1.5.0](v1.5.0.md)
+- [1.6.0](v1.6.0.md)
+- [1.7.0](v1.7.0.md)
+- [1.8.0-dev](v1.8.0-dev.md)
+
 ## Documentation map
 
 ### [Introduction](introduction.md)
 
-### [Latest classes](v1.7.0/classes.md)
+### [Latest stable classes](v1.7.0/classes.md)
 
-### [Latest objects](v1.7.0/objects.md)
+### [Latest stable objects](v1.7.0/objects.md)
 
-### [Latest profiles](v1.7.0/profiles.md)
+### [Latest stable profiles](v1.7.0/profiles.md)
 
-### [Latest extensions](v1.7.0/extensions.md)
+### [Latest stable extensions](v1.7.0/extensions.md)
 
-### [Latest types](v1.7.0/types.md)
+### [Latest stable types](v1.7.0/types.md)
+
+### [Latest dev snapshot](v1.8.0-dev.md)
 
 ### [FAQs](faqs.md)
 
