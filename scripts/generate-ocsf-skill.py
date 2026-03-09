@@ -579,7 +579,31 @@ def generate_types_overview(version_data: dict) -> str:
     return f"{re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()}\n"
 
 
-def generate_version_overview(version_data: dict) -> str:
+def generate_changelog(current: dict, previous: dict | None) -> str:
+    """Generate a compact 'What's new' section comparing two version dicts."""
+    if previous is None:
+        return ""
+
+    def _caption_set(section: dict) -> dict[str, str]:
+        return {name: data.get("caption") or name for name, data in section.items()}
+
+    lines: list[str] = []
+    for label, key in [("Classes", "classes"), ("Objects", "objects"), ("Profiles", "profiles")]:
+        cur_names = _caption_set(current[key])
+        prev_names = _caption_set(previous[key])
+        added = sorted(set(cur_names) - set(prev_names))
+        removed = sorted(set(prev_names) - set(cur_names))
+        if added:
+            lines.append(f"**New {label.lower()}:** {', '.join(cur_names[n] for n in added)}")
+        if removed:
+            lines.append(f"**Removed {label.lower()}:** {', '.join(prev_names[n] for n in removed)}")
+
+    if not lines:
+        return ""
+    return "## What's new\n\n" + "\n\n".join(lines) + "\n"
+
+
+def generate_version_overview(version_data: dict, previous: dict | None = None) -> str:
     lines = [f"# OCSF {version_data['version']}", ""]
     lines.append(f"- **Classes**: {len(version_data['classes'])}")
     lines.append(f"- **Objects**: {len(version_data['objects'])}")
@@ -597,6 +621,10 @@ def generate_version_overview(version_data: dict) -> str:
             "",
         ]
     )
+
+    changelog = generate_changelog(version_data, previous)
+    if changelog:
+        lines.extend([changelog, ""])
     return "\n".join(lines) + "\n"
 
 
@@ -843,8 +871,9 @@ def main() -> None:
                 article["content"] if article["content"].endswith("\n") else f"{article['content']}\n",
             )
 
-        for data in version_docs:
-            write_file(output_dir / f"{data['slug']}.md", generate_version_overview(data))
+        for idx, data in enumerate(version_docs):
+            prev = version_docs[idx - 1] if idx > 0 else None
+            write_file(output_dir / f"{data['slug']}.md", generate_version_overview(data, prev))
             write_file(output_dir / data["slug"] / "classes.md", generate_classes_overview(data))
             write_file(output_dir / data["slug"] / "objects.md", generate_objects_overview(data))
             write_file(output_dir / data["slug"] / "profiles.md", generate_named_overview(data, "Profiles", "profiles"))
