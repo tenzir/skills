@@ -37,6 +37,9 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
       - name: Rebuild OCSF skill
         env:
           OCSF_VERSION: ${{ github.event.inputs.version || '' }}
@@ -49,10 +52,7 @@ jobs:
             args+=(--version "$OCSF_VERSION")
           fi
 
-          node scripts/generate-ocsf-skill.mjs "${args[@]}"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
+          uv run scripts/generate-ocsf-skill.py "${args[@]}"
 
       - name: Install skills-ref
         shell: bash
