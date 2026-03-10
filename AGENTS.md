@@ -1,13 +1,18 @@
 # Repository Instructions
 
+This repository contains the shared Tenzir skill collection: reusable skills
+for coding agents in and around the Tenzir ecosystem. The `skills/` tree mixes
+hand-maintained skills with generated ones, and the surrounding metadata files
+keep the collection installable, discoverable, and internally consistent.
+
 ## Auto-generated skills
 
 The following skills are produced by generator scripts and must not be
 edited by hand. Change the corresponding script instead, then regenerate.
 
-| Skill | Generator |
-| --- | --- |
-| `skills/ocsf/` | `scripts/generate-ocsf-skill.py` |
+| Skill                 | Generator                               |
+| --------------------- | --------------------------------------- |
+| `skills/ocsf/`        | `scripts/generate-ocsf-skill.py`        |
 | `skills/tenzir-docs/` | `scripts/generate-tenzir-docs-skill.py` |
 
 ## Organization
