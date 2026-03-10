@@ -307,13 +307,27 @@ def render_node(
 
 
 def strip_deep_content(node: Node, *, threshold: int) -> None:
-    """Remove content_lines from nodes at or above the threshold level.
+    """Trim content from deeply nested nodes to keep SKILL.md compact.
 
-    Keeps heading links for navigation but removes description paragraphs,
-    reducing SKILL.md size while preserving the navigable structure.
+    For nodes at *threshold* level or deeper that link to a page (leaf
+    entries), the description is condensed to a single line so the model
+    still has enough context to navigate.  Nodes that are purely structural
+    groupings (no page link) lose their content entirely.
     """
     if node.level >= threshold:
-        node.content_lines = []
+        source_path = get_node_source_path(node)
+        if source_path:
+            # Leaf page: keep only the first non-blank content line so the
+            # model still has enough context to navigate.
+            first_line = ""
+            for line in node.content_lines:
+                stripped = line.strip()
+                if stripped:
+                    first_line = stripped
+                    break
+            node.content_lines = [first_line] if first_line else []
+        else:
+            node.content_lines = []
     for child in node.children:
         strip_deep_content(child, threshold=threshold)
 
