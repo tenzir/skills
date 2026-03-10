@@ -19,7 +19,8 @@ from markdown_it import MarkdownIt
 
 
 DOCS_URL_PREFIX = re.compile(r"^https?://docs\.tenzir\.com")
-CHANGELOG_ROOT = "changelog"
+EXCLUDED_SOURCE_PATHS = frozenset({"changelog.md"})
+EXCLUDED_SOURCE_PREFIXES = ("changelog/",)
 SECTION_MAX_LEVEL = {
     "Guides": 4,
     "Tutorials": 4,
@@ -42,7 +43,12 @@ class Node:
 
 
 def is_changelog_source_path(source_path: str) -> bool:
-    return source_path == f"{CHANGELOG_ROOT}.md" or source_path.startswith(f"{CHANGELOG_ROOT}/")
+    normalized = posixpath.normpath(source_path.lstrip("/"))
+    if normalized in ("", "."):
+        return False
+    return normalized in EXCLUDED_SOURCE_PATHS or any(
+        normalized.startswith(prefix) for prefix in EXCLUDED_SOURCE_PREFIXES
+    )
 
 
 def is_excluded_source_path(source_path: str) -> bool:
