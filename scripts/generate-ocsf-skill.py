@@ -171,6 +171,16 @@ def fetch_latest_dev_version(client: httpx.Client) -> str | None:
 def collect_version_specs(client: httpx.Client, requested_version: str | None) -> list[VersionSpec]:
     if requested_version:
         if requested_version.endswith("-dev"):
+            if not DEV_VERSION_RE.fullmatch(requested_version):
+                raise ValueError(f"Unsupported development version format: {requested_version}")
+            current_dev_version = fetch_latest_dev_version(client)
+            if current_dev_version != requested_version:
+                current_label = current_dev_version or "no development snapshot"
+                raise ValueError(
+                    "Requested development version "
+                    f"{requested_version} does not match the version published from main "
+                    f"({current_label})"
+                )
             return [VersionSpec(version=requested_version, ref="main", is_stable=False)]
         return [VersionSpec(version=requested_version, ref=requested_version, is_stable=True)]
 
