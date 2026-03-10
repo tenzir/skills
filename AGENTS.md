@@ -46,4 +46,4 @@ fi
 ```
 
 The same validation runs in `.github/workflows/skills-ref.yml`
-for pull requests that touch the skill tree or the workflow itself, along with a check that ensures all skills are listed exactly once in the marketplace JSON.
+for pull requests that touch the skill tree or the workflow itself, and on every push to `main`, along with a check that ensures all skills are listed exactly once in the marketplace JSON.
