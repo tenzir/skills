@@ -1,0 +1,30 @@
+# ends_with
+
+
+Checks if a string ends with a specified substring.
+
+```tql
+ends_with(x:string, suffix:string) -> bool
+```
+
+## Description
+
+The `ends_with` function returns `true` if `x` ends with `suffix` and `false` otherwise.
+
+## Examples
+
+### Check if a string ends with a substring
+
+```tql
+from {x: "hello".ends_with("lo")}
+```
+
+```tql
+{x: true}
+```
+
+## See Also
+
+* fn[`starts_with`](starts_with.md)
+* [Filter and select data](../../guides/transformation/filter-and-select-data.md)
+* [Manipulate strings](../../guides/transformation/manipulate-strings.md)

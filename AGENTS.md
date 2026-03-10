@@ -1,5 +1,15 @@
 # Repository Instructions
 
+## Auto-generated skills
+
+The following skills are produced by generator scripts and must not be
+edited by hand. Change the corresponding script instead, then regenerate.
+
+| Skill | Generator |
+| --- | --- |
+| `skills/ocsf/` | `scripts/generate-ocsf-skill.py` |
+| `skills/tenzir-docs/` | `scripts/generate-tenzir-docs-skill.py` |
+
 ## Validation
 
 Run `skills-ref` across every local skill after changing anything under

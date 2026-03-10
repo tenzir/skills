@@ -1,0 +1,730 @@
+# Ship Framework
+
+
+[`tenzir-ship`](https://github.com/tenzir/ship) helps you ship faster with automated release engineering. Manage changelogs, generate release notes, and publish GitHub releases. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guide for [maintaining a changelog](../guides/packages/maintain-a-changelog.md).
+
+## Install
+
+`tenzir-ship` ships as a Python package that requires Python 3.12 or later. Install it with [`uv`](https://docs.astral.sh/uv/) (or `pip`) and verify the console script:
+
+```sh
+uv add tenzir-ship
+uvx tenzir-ship --help
+```
+
+## Python API
+
+Drive the CLI flows from another Python process by importing the `Changelog` helper:
+
+```python
+from pathlib import Path
+from tenzir_ship import Changelog
+
+
+client = Changelog(root=Path("changelog"))
+client.add(
+    title="API entry",
+    entry_type="feature",
+    description="Body text",
+    co_authors=["codex"],
+)
+
+
+# Show entries using scope tokens as identifiers
+client.show(identifiers=["unreleased"], view="markdown", explicit_links=True)
+client.show(identifiers=["v1.0.0"], release_mode=True, view="markdown")
+client.show(identifiers=["released"], release_mode=True, view="json")
+
+
+# Get the latest version
+version = client.release_version()  # Returns "v1.0.0"
+bare_version = client.release_version(bare=True)  # Returns "1.0.0"
+
+
+# Publish defaults to latest release
+client.release_publish(create_tag=True, assume_yes=True)
+```
+
+For advanced scenarios, reuse `tenzir_ship.create_cli_context` and call the helper functions from `tenzir_ship.cli` directly.
+
+## Core concepts
+
+* **Project** – Identifies which documentation stream the changelog belongs to. Every entry and release references the same project string.
+* **Entry** – A changelog consists of entries. Each entry uses one of four hard-coded types: `breaking`, `feature`, `bugfix`, or `change`.
+* **Unreleased bucket** – Pending entries live in `unreleased/` until you move them to a release.
+* **Release** – Versioned milestone under `releases/<version>/` containing `manifest.yaml`, `notes.md`, and archived entry files in `entries/`.
+* **Configuration file** – Settings live in `config.yaml` by default, or you can store them in `package.yaml` alongside the `changelog/` directory. `config.yaml` takes precedence when both exist.
+* **Export style** – Controls whether release notes use a detailed card layout or a compact bullet-list layout. Set `export_style: compact` in configuration to prefer the bullet-list format without passing `--compact` each time.
+* **Explicit links** – Controls whether @mentions and #PR references render as explicit Markdown links. Set `explicit_links: true` to produce portable output for documentation sites or Markdown renderers that don’t auto-link GitHub references. CLI flags `--explicit-links/--no-explicit-links` override this setting.
+* **Components** – You may constrain the optional `component` field on entries by declaring allowed labels in configuration. Use a dict mapping component names to descriptions. Component filters apply to the CLI table, exports, and validation.
+* **Modules** – Independent changelog projects discovered via a glob pattern. Each module has its own configuration and versioning. The parent project acts as a workspace that provides discovery, aggregated views, and typically handles distribution of the bundled modules.
+
+A typical project layout looks like this:
+
+* project-root/
+
+  * changelog/
+
+    * config.yaml
+
+    * unreleased/
+
+      * add-feature.md
+      * fix-bug.md
+
+    * releases/
+
+      * v1.0.0/
+
+        * manifest.yaml
+
+        * notes.md
+
+        * entries/
+
+          * add-feature.md
+          * fix-bug.md
+
+For a [package](../explanations/packages.md) layout (with `package.yaml`), the structure may look like:
+
+* my-package/
+
+  * package.yaml
+
+  * changelog/
+
+    * unreleased/
+
+      * …
+
+    * releases/
+
+      * …
+
+## Commands
+
+Run changelog commands from the project root or the `changelog/` directory:
+
+```sh
+uvx tenzir-ship [command] [options]
+```
+
+All commands accept `--config` to point at an explicit configuration file (YAML format, defaulting to `config.yaml`) and `--root` to operate on another repository. When you omit both options, the CLI looks for `config.yaml` inside the changelog root or, failing that, for a `package.yaml` one directory above the changelog folder. The CLI also automatically uses a `changelog/` subdirectory as the project root when running from a parent directory that contains one. This *package mode* lets you run commands from either the package root or the `changelog/` directory without repeating `--root`.
+
+### show
+
+Display changelog entries in multiple views.
+
+```text
+tenzir-ship show [identifiers...] [options]
+```
+
+| Option                | Description                                             |
+| --------------------- | ------------------------------------------------------- |
+| `identifiers`         | Row numbers, entry IDs, scope tokens, or versions       |
+| `-c/--card`           | Show detailed cards for matching entries                |
+| `-m/--markdown`       | Export as Markdown                                      |
+| `-j/--json`           | Export as JSON                                          |
+| `--release`           | Display entries grouped by release with full metadata   |
+| `--compact`           | Use compact bullet-list layout                          |
+| `--no-compact`        | Use detailed card layout                                |
+| `--no-emoji`          | Remove type emoji from output                           |
+| `--explicit-links`    | Render @mentions and PR refs as explicit Markdown links |
+| `--project <id>`      | Filter to specific project (repeatable)                 |
+| `--component <label>` | Filter to specific component (repeatable)               |
+| `--banner`            | Display project banner above table output               |
+
+#### Scope tokens
+
+Scope tokens control which entries to display. Pass one as a positional argument:
+
+| Token        | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `all`        | All entries (released and unreleased) — the default |
+| `unreleased` | Only unreleased entries                             |
+| `released`   | Only released entries                               |
+| `latest`     | Only entries from the latest release                |
+
+You can combine a scope token with version identifiers (except `all`, which must be used alone):
+
+```sh
+# Show a specific release
+tenzir-ship show v1.0.0
+
+
+# Show only unreleased entries
+tenzir-ship show unreleased
+
+
+# Show released entries, filtering to specific versions
+tenzir-ship show released v1.0.0 v1.1.0
+```
+
+The table view (default) lists entries with ID, title, type, project, PRs, and authors. Row numbers count backward from the newest entry, so `#1` always targets the latest change.
+
+Use `--release` to display entries grouped by release with full release metadata. This is the recommended mode for exporting release notes:
+
+```sh
+# Export a specific release as Markdown
+tenzir-ship show v1.0.0 --release --markdown
+
+
+# Preview unreleased entries as release notes
+tenzir-ship show unreleased --release --markdown
+
+
+# Export all releases as JSON
+tenzir-ship show all --release --json
+
+
+# Export only released versions (exclude unreleased)
+tenzir-ship show released --release --json
+
+
+# Show entries from the latest release only
+tenzir-ship show latest --release --markdown
+```
+
+Use `--explicit-links` when rendering Markdown outside of GitHub. By default, the output uses `@username` and `#123` references that GitHub auto-links. With `--explicit-links`, these become explicit Markdown links like `[@username](https://github.com/username)` and `[#123](https://github.com/owner/repo/pull/123)`, making the output portable to documentation sites, blogs, or other Markdown renderers.
+
+### add
+
+Create a new changelog entry in `unreleased/`.
+
+```text
+tenzir-ship add [options]
+```
+
+| Option                 | Description                                  |
+| ---------------------- | -------------------------------------------- |
+| `--title <text>`       | Entry title                                  |
+| `--type <type>`        | `breaking`, `feature`, `bugfix`, or `change` |
+| `--description <text>` | Entry body                                   |
+| `--author <name>`      | Contributor name (repeatable)                |
+| `--co-author <name>`   | Additional contributor (repeatable)          |
+| `--pr <number>`        | Pull request number (repeatable)             |
+| `--component <label>`  | Component label (repeatable)                 |
+| `--web`                | Open prefilled GitHub file creation URL      |
+
+The command prompts for any information you do not pass explicitly. The first invocation scaffolds the project automatically, creating a `changelog/` subdirectory with `config.yaml` and `unreleased/`. When you provide an explicit `--root` flag, the CLI uses that directory directly instead of creating a subdirectory. The CLI names entry files using the slugified title (e.g., `my-feature.md`).
+
+By default, the CLI infers the primary author from environment variables (`TENZIR_CHANGELOG_AUTHOR`, `GH_USERNAME`) or the GitHub CLI (`gh api user`). Using `--author` overrides this inference entirely. The `--co-author` option adds to the inferred or explicit author list without replacing it, making it ideal for AI-assisted development, pair programming, or collaborative contributions. Duplicates are removed automatically while preserving order.
+
+### release create
+
+Stage a release under `releases/<version>/`.
+
+```text
+tenzir-ship release create [version] [options]
+```
+
+| Option                | Description                                                |
+| --------------------- | ---------------------------------------------------------- |
+| `version`             | Release version (e.g., `v1.0.0`)                           |
+| `--patch`             | Bump patch version from latest release                     |
+| `--minor`             | Bump minor version from latest release                     |
+| `--major`             | Bump major version from latest release                     |
+| `--yes`               | Commit changes (default is dry run)                        |
+| `--title <text>`      | Custom title for release heading                           |
+| `--intro <text>`      | Inline intro text (mutually exclusive with `--intro-file`) |
+| `--intro-file <path>` | Path to intro file (mutually exclusive with `--intro`)     |
+| `--compact`           | Use bullet-list layout for `notes.md`                      |
+| `--explicit-links`    | Render @mentions and PR refs as explicit Markdown links    |
+| `--date <YYYY-MM-DD>` | Override release date                                      |
+
+When creating a release, the command also updates version fields in detected package manifest files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`). See the [version bumping configuration](#version-bumping) for details.
+
+The command renders `notes.md`, updates `manifest.yaml`, and moves entry files into `entries/`. It performs a dry run by default. When the release already exists, the CLI appends additional unreleased entries. If no changelog entries are available, the command still succeeds when you provide `--intro` or `--intro-file`, creating an intro-only release. This is useful for re-publishing after yanking a package or retrying a failed publish workflow. Without either entries or intro text, the command fails with an error.
+
+### release version
+
+Print the latest released version.
+
+```text
+tenzir-ship release version [options]
+```
+
+| Option   | Description                      |
+| -------- | -------------------------------- |
+| `--bare` | Print version without `v` prefix |
+
+Use this command in scripts to query the current version without parsing output from other commands:
+
+```sh
+# Get the latest version
+tenzir-ship release version
+# Output: v1.2.0
+
+
+# Get version without prefix (for semver tools)
+tenzir-ship release version --bare
+# Output: 1.2.0
+
+
+# Use in commit messages
+git commit -m "Release $(tenzir-ship release version)"
+```
+
+### release publish
+
+Publish a release to GitHub via `gh`.
+
+```text
+tenzir-ship release publish [version] [options]
+```
+
+| Option             | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| `version`          | Release version (defaults to latest)                    |
+| `--yes`            | Skip confirmation prompts                               |
+| `--draft`          | Mark as draft                                           |
+| `--prerelease`     | Mark as prerelease                                      |
+| `--no-latest`      | Prevent GitHub from marking as latest release           |
+| `--tag`            | Create and push annotated Git tag                       |
+| `--commit`         | Commit staged changes before tagging (requires `--tag`) |
+| `--commit-message` | Custom commit message (default: `Release {version}`)    |
+
+The command reads project metadata from `config.yaml` or `package.yaml` for the repository slug and uses `notes.md` as the release body. Projects without a `repository` field cannot publish—this is intentional for changelogs that track changes without producing GitHub releases (e.g., modules in a workspace).
+
+#### How it works
+
+The `release publish` command executes the following steps:
+
+1. **Validate configuration**: Checks that the `repository` field is set in `config.yaml` or `package.yaml`. This field determines the GitHub repository to publish to (e.g., `tenzir/tenzir`).
+
+2. **Check for `gh` CLI**: Verifies that the [GitHub CLI](https://cli.github.com/) is installed and available in `PATH`. The command uses `gh` for all GitHub operations.
+
+3. **Find release manifest**: Locates the release manifest at `releases/<version>/manifest.yaml`. Fails if the specified version doesn’t exist.
+
+4. **Verify release notes**: Checks that `releases/<version>/notes.md` exists and is non-empty. If missing, prompts you to run `release create` first.
+
+5. **Commit staged changes** (if `--commit`): Creates a git commit with all staged changes. Requires `--tag` to be set. Uses the commit message from `--commit-message`, the `release.commit_message` config field, or defaults to `Release {version}`.
+
+6. **Create and push git tag** (if `--tag`): Creates an annotated git tag named after the version with message `Release {version}`. If the tag already exists, skips creation but continues. Pushes the current branch to its upstream remote, then pushes the tag to the remote matching the configured repository.
+
+7. **Check for existing GitHub release**: Queries GitHub to determine if a release with this version already exists.
+
+8. **Create or update GitHub release**:
+
+   * If the release exists, runs `gh release edit` to update the release notes and title.
+   * If the release doesn’t exist, runs `gh release create` with the version tag, release notes from `notes.md`, and optional `--draft`, `--prerelease`, or `--latest=false` flags.
+
+9. **Confirm and execute**: Unless `--yes` is provided, prompts for confirmation before running the `gh` command. Shows the exact action (`gh release create` or `gh release edit`) that will run.
+
+#### Handling failures
+
+When a step fails mid-workflow, the command displays a progress panel showing which steps completed and which step failed. This helps you understand exactly where the workflow stopped and what manual commands to run for recovery.
+
+```text
+╭──────────────── Release Progress (2/5) ────────────────╮
+│ ✔ git commit -m "Release v1.2.0"                       │
+│ ✔ git tag -a v1.2.0 -m "Release v1.2.0"                │
+│ ✘ git push origin main:main                            │
+│ ○ git push origin v1.2.0                               │
+│ ○ gh release create v1.2.0 --repo owner/repo ...       │
+╰────────────────────────────────────────────────────────╯
+```
+
+The icons indicate step status:
+
+* **✔** (green): Step completed successfully
+* **✘** (red): Step failed
+* **○** (dim): Step not yet executed
+
+In this example, the commit and tag were created locally, but the branch push failed—perhaps due to network issues. You can fix the underlying issue and retry the push manually, then run `release publish` again to complete the remaining steps.
+
+#### Typical workflow
+
+A full release workflow with commit and tag:
+
+```sh
+# 1. Create the release (generates manifest.yaml and notes.md)
+tenzir-ship release create --minor --yes
+
+
+# 2. Review the generated notes
+tenzir-ship show --release --markdown
+
+
+# 3. Stage release files
+git add changelog/releases/
+
+
+# 4. Publish with commit and tag (defaults to latest release)
+tenzir-ship release publish --commit --tag --yes
+```
+
+Alternatively, commit manually to customize the message using `release version`:
+
+```sh
+# 3. Stage and commit with custom message
+git add changelog/releases/
+git commit -m "Release $(tenzir-ship release version)"
+
+
+# 4. Publish (defaults to latest release)
+tenzir-ship release publish --tag --yes
+```
+
+Both workflows are version-agnostic after step 1. The `release publish` command defaults to the latest release when no version is specified.
+
+### validate
+
+Run structural checks across entry files, release manifests, and exported documentation.
+
+```text
+tenzir-ship validate
+```
+
+The validator reports missing metadata, unused entries, duplicate entry IDs, and configuration drift across repositories. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
+
+### stats
+
+Display project and release statistics.
+
+```text
+tenzir-ship stats [options]
+```
+
+| Option    | Description                           |
+| --------- | ------------------------------------- |
+| `--table` | Force table view even for one project |
+| `--json`  | Export statistics as JSON             |
+
+The command adapts its display based on the project structure:
+
+* **Single projects**: Vertical card layout with detailed sections for project metadata, releases, entry types, and status
+* **Multi-module projects**: Compact table comparing all modules side by side
+
+Statistics include:
+
+* **Project info**: Name, latest version, age since last release
+* **Releases**: Total count, time span, release cadence (exponentially weighted for recent activity)
+* **Entry types**: Distribution of breaking, feature, change, and bugfix entries with percentages
+* **Entry status**: Total, shipped, and unreleased counts
+
+The release cadence uses exponential weighting to emphasize recent activity. A project releasing monthly for the past quarter shows higher cadence than one with sporadic releases.
+
+Use `--json` to export structured data for automation:
+
+```sh
+tenzir-ship stats --json
+```
+
+The JSON output includes the project root path, parent project statistics, and an array of module statistics when modules are configured.
+
+## Configuration
+
+Configuration settings live in `config.yaml` by default, or you can store them in `package.yaml` alongside the `changelog/` directory. `config.yaml` takes precedence when both exist.
+
+Configuration fields:
+
+| Field            | Description                                                              |
+| ---------------- | ------------------------------------------------------------------------ |
+| `id`             | Canonical project slug written into entry frontmatter (required)         |
+| `name`           | Human-friendly label surfaced in release titles and CLI output           |
+| `description`    | Optional project description included in release manifests               |
+| `repository`     | GitHub slug (e.g., `owner/repo`) required by `release publish`           |
+| `export_style`   | Default layout: `compact` (bullet-list) or omit for detailed cards       |
+| `explicit_links` | Render @mentions and #PR references as explicit Markdown links (boolean) |
+| `omit_pr`        | Suppress PR numbers in entries (boolean, default `false`)                |
+| `omit_author`    | Suppress author attribution in entries (boolean, default `false`)        |
+| `components`     | Optional dict mapping component names to descriptions                    |
+| `modules`        | Optional glob pattern for discovering nested changelog projects          |
+| `release`        | Release settings block (see below)                                       |
+
+Example:
+
+```yaml
+id: tenzir-core
+name: Tenzir Core
+description: Core pipeline engine
+repository: tenzir/tenzir
+export_style: compact
+explicit_links: true
+components:
+  cli: Command-line interface and user commands
+  engine: Core pipeline engine internals
+  operators: Built-in pipeline operators
+release:
+  commit_message: "Release {version}"
+```
+
+The `release` block supports:
+
+| Field               | Default             | Description                                              |
+| ------------------- | ------------------- | -------------------------------------------------------- |
+| `commit_message`    | `Release {version}` | Template for `--commit` flag; `{version}` expands        |
+| `version_bump_mode` | `auto`              | `auto` to detect and update version files, `off` to skip |
+| `version_files`     | `[]`                | Explicit list of paths to version files to update        |
+
+### Version bumping
+
+During `release create`, tenzir-ship can automatically update version fields in package manifest files. By default (`version_bump_mode: auto`), it searches the project root for `package.json`, `pyproject.toml`, `project.toml`, and `Cargo.toml` files and updates their version fields to match the release version.
+
+#### Auto-detection behavior
+
+In auto mode, files without a static version field are skipped gracefully:
+
+* **pyproject.toml**: Updates `[project].version`. Falls back to `[tool.poetry].version` when `[project]` has `dynamic = ["version"]` or is absent. Skips files where neither section has a static version.
+* **Cargo.toml**: Updates `[package].version`. Falls back to `[workspace.package].version` for workspace root manifests. Skips files where neither section has a version field.
+* **package.json**: Updates the top-level `version` field. Skips files without one.
+* **project.toml**: Same behavior as `pyproject.toml`.
+
+#### Explicit version files
+
+To specify exactly which files to update, use `version_files`:
+
+```yaml
+release:
+  version_files:
+    - ../pyproject.toml
+    - ../Cargo.toml
+```
+
+Explicitly configured files use strict validation: the command fails if the file exists but has no recognizable version field, preventing silent misconfiguration. Auto-detected files skip silently instead.
+
+#### Disabling version bumping
+
+Set `version_bump_mode: off` to disable version file updates entirely.
+
+#### Downgrade prevention
+
+Version files are only updated when the release version is equal to or newer than the latest existing release. Editing an older release does not downgrade version fields in manifest files.
+
+The `omit_pr` and `omit_author` options suppress PR numbers and author attribution in generated entries. When enabled, the CLI skips auto-detection and ignores any `--pr`, `--author`, or `--co-author` flags (with a warning). Use these options for projects that don’t use GitHub pull requests or prefer anonymous changelog entries.
+
+The first invocation of `tenzir-ship add` scaffolds a `changelog/` subdirectory with `config.yaml`, inferring defaults from the parent directory name. When you provide an explicit `--root` flag, the CLI uses that directory directly. Projects with `package.yaml` next to `changelog/` reuse the package `id` and `name` automatically.
+
+## Entry file format
+
+Entry files live in `unreleased/` or `releases/<version>/entries/` as Markdown files with YAML frontmatter. The CLI names entry files using the slugified title (e.g., `my-feature.md`, `fix-bug.md`).
+
+Example entry:
+
+```markdown
+---
+title: Add pipeline builder
+type: feature
+author: alice
+created: 2025-10-16T14:30:00Z
+pr: 101
+component: cli
+---
+
+
+Introduces the new pipeline builder UI with drag-and-drop support.
+```
+
+You can use either singular (`author`, `pr`, `component`) or plural (`authors`, `prs`, `components`) keys. The singular form is shorthand for single values and is normalized to the plural form internally.
+
+Frontmatter fields:
+
+| Field                      | Type          | Required | Description                                    |
+| -------------------------- | ------------- | -------- | ---------------------------------------------- |
+| `title`                    | string        | yes      | Entry title                                    |
+| `type`                     | string        | yes      | `breaking`, `feature`, `bugfix`, or `change`   |
+| `author` / `authors`       | list\[string] | no       | Contributor names (singular or plural form)    |
+| `created`                  | string        | yes      | Creation datetime in ISO 8601 UTC format       |
+| `pr` / `prs`               | list\[int]    | no       | Pull request numbers (singular or plural form) |
+| `component` / `components` | list\[string] | no       | Labels matching configured components          |
+
+## Release manifest format
+
+Release manifests live at `releases/<version>/manifest.yaml` and record metadata about a release.
+
+Example manifest:
+
+```yaml
+created: 2025-10-18
+title: Big Release
+intro: |
+  Welcome to version 1.0.0!
+
+
+  This release includes significant performance improvements.
+```
+
+Manifest fields:
+
+| Field     | Type   | Required | Description                                      |
+| --------- | ------ | -------- | ------------------------------------------------ |
+| `created` | string | yes      | Release date in `YYYY-MM-DD` format              |
+| `title`   | string | no       | Custom title for the release heading             |
+| `intro`   | string | no       | Introductory content (supports Markdown)         |
+| `modules` | dict   | no       | Module versions at release time (auto-populated) |
+
+The `modules` field is automatically populated when creating a release for a parent project with configured modules. It maps module IDs to their latest versions, enabling incremental module summaries in subsequent releases.
+
+Example manifest with modules:
+
+```yaml
+created: 2025-10-18
+title: Marketplace v1.0.0
+intro: |
+  Initial release with all plugins.
+modules:
+  git: v1.0.0
+  docs: v1.1.0
+  changelog: v1.2.0
+```
+
+The CLI generates `notes.md` with an H1 heading followed by the intro and grouped entry sections. The heading format depends on whether a custom title is set:
+
+* **With custom title**: `# {title}` (e.g., `# Big Release`)
+* **Without title**: `# {name} {version}` (e.g., `# My Project v1.0.0`)
+
+Intro content comes from either `--intro` (inline text) or `--intro-file` (file path) when creating a release.
+
+## JSON export format
+
+JSON exports (`-j` flag) return structured objects for programmatic consumption. Entries include `prs` and `authors` fields as structured objects with URLs.
+
+### PR objects
+
+Each PR is an object with `number` and optional `url`:
+
+```json
+{
+  "prs": [
+    {"number": 123, "url": "https://github.com/owner/repo/pull/123"},
+    {"number": 456, "url": "https://github.com/owner/repo/pull/456"}
+  ]
+}
+```
+
+The `url` field is included when the project’s `repository` setting is configured. Without a repository, PRs contain only the `number` field.
+
+### Author objects
+
+Each author is an object with either `handle` + `url` (for GitHub handles) or `name` (for full names):
+
+```json
+{
+  "authors": [
+    {"handle": "alice", "url": "https://github.com/alice"},
+    {"name": "Bob Smith"}
+  ]
+}
+```
+
+GitHub handles (names without spaces) include a `url` field linking to the user’s profile. Full names (containing spaces) include only the `name` field.
+
+## Environment variables
+
+The CLI recognizes these environment variables:
+
+| Variable       | Description                                      |
+| -------------- | ------------------------------------------------ |
+| `GITHUB_TOKEN` | GitHub token with `repo` scope for private repos |
+
+## Modules
+
+Modules enable monorepo support by discovering nested changelog projects via a glob pattern. Each module is a fully independent project with its own configuration, versioning, and release cycle. The parent project serves as a **workspace** that provides discovery and aggregated views.
+
+### Configuration
+
+Add a `modules` field to your parent project’s `config.yaml`:
+
+```yaml
+id: library
+name: Tenzir Library
+modules: "../packages/*/changelog"
+```
+
+The glob pattern resolves relative to the changelog root directory. Each matched directory must contain a valid `config.yaml` with its own `id` and `name`:
+
+```yaml
+id: amazon_vpc_flow
+name: Amazon VPC Flow Package
+```
+
+### Parent as workspace
+
+When a parent project defines `modules`, it typically acts as a workspace coordinator rather than a versioned project itself. The parent provides:
+
+* **Discovery**: Automatically finds modules matching the glob pattern
+* **Aggregation**: Shows entries from all modules in unified views
+* **Validation**: Checks module ID uniqueness and configuration validity
+
+The parent may or may not have its own releases. A parent without releases exists purely for coordination.
+
+### Aggregated views
+
+When `modules` is configured, `show` includes entries from all modules. The table displays a **Project** column showing which project (parent or module) each entry belongs to:
+
+```sh
+# Show all entries (parent + modules)
+tenzir-ship show
+
+
+# Show only parent entries
+tenzir-ship show --project parent
+```
+
+### Aggregated release summaries
+
+When creating a release for a parent project, `release create` automatically appends a summary of module changes to the release notes. Each module with new entries since the previous parent release gets a section showing:
+
+* The module name and version as a heading
+* A compact bullet list of entries with emoji prefix, title, and byline
+
+```markdown
+---
+
+
+## Git Plugin v1.1.0
+
+
+- 🚀 Add commit message templates — *@alice*
+- 🐞 Fix branch detection — *@bob and @codex*
+
+
+## Docs Plugin v1.2.0
+
+
+- 🔧 Improve search indexing — *@alice*
+```
+
+The release manifest records each module’s version at release time in the `modules` field. Subsequent releases compare against this baseline and only include entries from module releases newer than the recorded version. This prevents duplicate entries across parent releases.
+
+The `show --release` command also renders module summaries when viewing a specific release, using the same incremental logic based on the manifest’s recorded module versions.
+
+### Operating on modules
+
+Each module is a standalone changelog project. Use `--root` to operate on a specific module:
+
+```sh
+# Add entry to a module
+tenzir-ship --root ../packages/amazon_vpc_flow/changelog add --title "Add parser"
+
+
+# Create a release for a module
+tenzir-ship --root ../packages/amazon_vpc_flow/changelog release create v1.0.0
+```
+
+The `--show-modules` option lists discovered modules with their paths for convenient copy-paste into `--root` flags.
+
+### Independent versioning
+
+Each module maintains its own version history and releases on its own schedule. There is no coordinated release mechanism—modules evolve independently.
+
+Typically, modules do not publish GitHub releases themselves. Instead, the parent workspace handles distribution (e.g., bundling modules into a product release or publishing to a package registry). Modules that need to publish standalone GitHub releases can add a `repository` field to their configuration.
+
+### Validation
+
+When `modules` is configured, `tenzir-ship validate` checks:
+
+* Module ID uniqueness across all discovered modules
+* Valid configuration in each module directory
+
+## Troubleshooting
+
+* **Validation errors** – Run `tenzir-ship validate` to identify missing metadata, unused entries, or duplicate IDs.
+* **Component mismatch** – When `components` is configured, ensure every entry either omits `component` or uses an allowed label.
+* **Configuration not found** – Ensure `config.yaml` exists in the changelog root or `package.yaml` sits next to the `changelog/` directory. Run `tenzir-ship add` once to scaffold the configuration.
+* **Version bump fails** – Bump flags read the latest release manifest on disk. Create an initial release with an explicit version before using `--patch/--minor/--major`.
+
+## Further reading
+
+* [Maintain a changelog](../guides/packages/maintain-a-changelog.md)

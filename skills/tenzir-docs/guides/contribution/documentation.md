@@ -1,0 +1,232 @@
+# Documentation
+
+
+The source code of the Tenzir documentation is at <https://github.com/tenzir/docs>. We use [Astro](https://astro.build) with [Starlight](https://starlight.astro.build) as our site framework.
+
+## Quick Reference
+
+### Essential Commands
+
+| Command                       | Action                                                            |
+| :---------------------------- | :---------------------------------------------------------------- |
+| `bun install`                 | Install dependencies                                              |
+| `bun run dev`                 | Start local dev server at `localhost:4321`                        |
+| `bun run build`               | Build production site to `./dist/`                                |
+| `bun run preview`             | Preview build locally before deploying                            |
+| `bun run generate:changelog`  | Sync changelog from [tenzir/news](https://github.com/tenzir/news) |
+| `bun run generate:docs-map`   | Generate documentation map for AI agents                          |
+| `bun run generate:excalidraw` | Convert `.excalidraw` diagrams to SVG                             |
+
+### Development Commands
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `bun run lint:markdown`   | Lint all Markdown files                          |
+| `bun run lint:biome`      | Lint and check formatting of JS/TS/Astro files   |
+| `bun run lint:prettier`   | Check Markdown formatting                        |
+| `bun run build:linkcheck` | Validate all internal and external links         |
+| `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `bun run astro -- --help` | Get help using the Astro CLI                     |
+
+For anything beyond editing Markdown content, check out [Starlight’s docs](https://starlight.astro.build/) or read [Astro’s documentation](https://docs.astro.build).
+
+For git workflow, branching strategy, and commit message conventions, see our [Git and GitHub Workflow](workflow.md) guide.
+
+## Local Development
+
+### First-Time Setup
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/tenzir/docs.git
+   cd docs
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   bun install
+   ```
+
+3. **Start development server**:
+
+   ```bash
+   bun run dev
+   ```
+
+4. **View the site**: Browse to `http://localhost:4321/`
+
+The development server includes:
+
+* 🔥 Hot module reloading for instant updates
+* 📝 Live Markdown rendering
+* 🔍 Error reporting in the browser
+
+### Production Build
+
+Create and preview a production build:
+
+```bash
+# Build the site
+bun run build
+
+
+# Preview the build
+bun run preview
+```
+
+Then browse to `http://localhost:4321/` to view the production site.
+
+CI/CD Pipeline
+
+Production builds are automatically created in CI. Check out our [GitHub workflow](https://github.com/tenzir/docs/blob/main/.github/workflows/docs.yaml) for implementation details.
+
+## Link Checking
+
+The documentation includes automated link validation to ensure all internal and external links work correctly:
+
+### Local Link Checking
+
+Before submitting changes, run link checking locally to catch broken links:
+
+```bash
+bun run build:linkcheck
+```
+
+This will build the site with link validation enabled and report any broken links found.
+
+### CI Integration
+
+Link checking runs automatically in our CI pipeline:
+
+* **All builds**: Link validation is enabled for production builds
+* **Pull requests**: Link checking runs as part of the lint workflow
+* **Scheduled maintenance**: Weekly link checks run every Sunday to catch broken external links
+
+### How It Works
+
+The link checker validates:
+
+* Internal page references (e.g., `/guides/quickstart`)
+* Anchor links within pages (e.g., `/reference/operators#aggregate`)
+* External URLs (with appropriate timeout and retry logic)
+* Relative links between documentation files
+
+### Fixing Broken Links
+
+When the link checker finds issues:
+
+1. **Invalid internal links**: Update the link to point to the correct page path
+2. **Missing anchor references**: Ensure the target heading or element exists
+3. **Broken external links**: Update URLs or remove outdated references
+4. **False positives**: Add exclusions to the `starlightLinksValidator` configuration in `astro.config.mjs`
+
+The link checker will cause builds to fail if broken links are detected, ensuring the documentation maintains high quality.
+
+## Optimize Images
+
+To keep the repository size manageable, always optimize image files *before* committing them. This is especially important for formats like PNG, which can contain unnecessary metadata or use inefficient compression.
+
+### PNG Images
+
+We recommend using [pngquant](https://pngquant.org/), a command-line utility for lossy compression of PNG files. It significantly reduces file size while preserving image quality.
+
+To compress a PNG file in-place:
+
+```bash
+pngquant --ext .png --force --quality=65-80 image.png
+```
+
+### JPEG Images
+
+Use [jpegoptim](https://github.com/tjko/jpegoptim), a utility for optimizing JPEGs without perceptible quality loss:
+
+```bash
+jpegoptim --strip-all --max=80 image.jpg
+```
+
+Alternatively, you can use [mozjpeg](https://github.com/mozilla/mozjpeg) for even better compression ratios.
+
+### SVG Images
+
+Use [svgo](https://github.com/svg/svgo), a Node-based tool to optimize SVG files by removing unnecessary data:
+
+```bash
+svgo image.svg
+```
+
+This automatically rewrites the file in-place with redundant code removed and optimized structure.
+
+## Edit Diagrams
+
+We use [Excalidraw](https://excalidraw.com) as primary tool to create sketches of architectural diagrams.
+
+### Creating New Diagrams
+
+For new diagrams, save the `.excalidraw` source file directly in the content directory alongside your markdown:
+
+1. Create your diagram in Excalidraw (use light mode)
+2. Save as `diagram-name.excalidraw` in the same directory as your markdown file
+3. Reference it in markdown: `![Alt text](diagram-name.excalidraw)`
+4. Run `bun run generate:excalidraw` to generate the SVG
+
+The build process converts `.excalidraw` files to `.excalidraw.svg` and inlines them directly into the HTML. This enables automatic dark mode support via CSS.
+
+Generated `.excalidraw.svg` files are gitignored—only the `.excalidraw` source files are tracked.
+
+Don’t commit exported SVGs
+
+Always commit `.excalidraw` source files, not exported SVGs. Source files are editable, diffable, and the build generates optimized SVGs automatically.
+
+AI-assisted diagramming
+
+You can use AI-assisted diagramming tools to create and edit `.excalidraw` files from natural-language prompts. This is useful for generating diagrams from descriptions or making quick edits without leaving your editor.
+
+### Editing Existing SVGs
+
+Some older diagrams exist only as exported SVGs. When exporting Excalidraw scenes manually, always **use light mode** and **choose SVG** as export format, as we have CSS in place that automatically inverts colors so diagrams look nice in dark mode.
+
+Tenzir developers have access to our Excalidraw [Documentation collection](https://app.excalidraw.com/o/6dBWEFf9h1l/9RErQkL9e2v). For everyone else, please reach out to us on our [Discord server](https://docs.tenzir.com/discord) to request changes to existing SVGs.
+
+## Writing Style and Formatting
+
+This section covers the editorial and technical standards for contributing to the Tenzir documentation.
+
+### Writing Guidelines
+
+We follow the [Google Style Guide](https://developers.google.com/style) for clear and consistent technical documentation. Most notably:
+
+* Use **active voice** in general.
+* Avoid anthropomorphic language—don’t attribute human qualities to software or hardware.
+* Include definite and indefinite articles (a, an, and the) in your writing. Don’t skip articles for brevity, including in headings and titles.
+* In document titles and headings, use **sentence case**. Capitalize only the first word in the title, the first word in a subheading after a colon, and any proper nouns or other terms that are always capitalized a certain way.
+* Capitalize product names.
+* Write documentation in an **informal tone**—use common two-word contractions such as “you’re,” “don’t,” and “there’s.”
+* **Define technical terms and acronyms** on first use. Don’t assume readers know specialized vocabulary.
+* **Put the most important information first**. Don’t bury key details in the middle of paragraphs.
+* **Use consistent terminology** throughout. Don’t use different words for the same concept (e.g., don’t alternate between “node” and “instance”).
+* **Avoid unclear pronouns** like “it,” “this,” or “that” without clear antecedents. Be explicit about what you’re referring to.
+* **Choose strong, specific verbs** over weak ones. Use “use” instead of “utilize,” “help” instead of “facilitate,” and “show” instead of “demonstrate.”
+* **Eliminate redundant phrases**. Write “to” instead of “in order to,” “now” instead of “at this point in time,” and “because” instead of “due to the fact that.”
+* **Avoid vague qualifiers** like “simply,” “just,” “easily,” or “obviously.” These don’t add clarity and may frustrate readers who find the task difficult.
+* **Provide context** for why something matters. Don’t just explain what to do— explain when and why to do it.
+* **Use hyperlinks judiciously**. Link to external tools, products, or resources when first mentioned, but avoid overlinking within the same document.
+
+### Formatting Standards
+
+Follow these conventions to maintain consistency across all documentation files.
+
+#### General
+
+* Every file must end with a newline character, but avoid empty lines at the end of a file.
+
+#### Markdown Content
+
+* Break lines at **80 characters**.
+* When editing Markdown, run `bun run lint:markdown:fix` and `bun run lint:prettier:fix` when you’re done.
+
+#### Code
+
+* Avoid empty lines within functions.
+* When editing source code (`.js`, `.jsx`, `.ts`, `.tsx`, `.astro` files), run `bun run lint:biome:fix` when you’re done.

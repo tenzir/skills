@@ -1,0 +1,33 @@
+# decode_base58
+
+
+Decodes bytes as Base58.
+
+```tql
+decode_base58(bytes: blob|string) -> blob
+```
+
+## Description
+
+Decodes bytes as Base58.
+
+### `bytes: blob|string`
+
+The value to decode as Base58.
+
+## Examples
+
+### Decode a Base58 encoded string
+
+```tql
+from {bytes: "JxF12TrwUP45BMd"}
+decoded = bytes.decode_base58()
+```
+
+```tql
+{bytes: "JxF12TrwUP45BMd", decoded: "Hello World"}
+```
+
+## See Also
+
+* fn[`encode_base58`](encode_base58.md)

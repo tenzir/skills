@@ -1,0 +1,221 @@
+# Map to OCSF
+
+
+This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.
+
+OCSF Tutorial
+
+For an end-to-end walkthrough with Zeek logs, see the [Map data to OCSF tutorial](../../tutorials/map-data-to-ocsf.md).
+
+## Write the OCSF mapping
+
+This section uses Palo Alto NGFW traffic logs as a running example. The namespace follows the `vendor::product::` convention, resulting in `paloalto::ngfw::ocsf::map`.
+
+### Operator template
+
+Use this annotated template as a starting point for creating a [user-defined operator](../packages/add-operators.md) as part of a TQL package.
+
+We recommend organizing fields by OCSF attribute groups: classification, occurrence, context, primary.
+
+```tql
+// --- Preamble ---------------------------------
+
+
+// Move source data into a dedicated field to prevent name clashes
+// and enable automatic unmapped field collection.
+this = { src: this }
+
+
+// --- OCSF: classification attributes ----------
+
+
+ocsf.category_uid = 4
+ocsf.class_uid = 4001
+ocsf.activity_id = 6
+ocsf.severity_id = 1
+ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
+
+
+// --- OCSF: occurrence attributes --------------
+
+
+ocsf.time = move src.time_generated
+ocsf.start_time = move src.start
+ocsf.duration = move src.elapsed
+ocsf.end_time = ocsf.start_time + ocsf.duration if ocsf.duration != null
+
+
+// --- OCSF: context attributes -----------------
+
+
+// Metadata about the event source.
+ocsf.metadata = {
+  log_name: "traffic",
+  product: {
+    cpe_name: "cpe:/a:paloaltonetworks:pan-os",
+    name: "NGFW",
+    vendor_name: "Palo Alto Networks",
+  },
+  uid: move src.sessionid,
+  version: "1.7.0",
+}
+ocsf.app_name = move src.app
+
+
+// --- OCSF: primary attributes -----------------
+
+
+// Primary attributes reflect the core semantic meaning of the event.
+
+
+ocsf.src_endpoint = {
+  ip: move src.src,
+  port: move src.sport,
+}
+
+
+ocsf.dst_endpoint = {
+  ip: move src.dst,
+  port: move src.dport,
+}
+
+
+let $proto_nums = {tcp: 6, udp: 17, icmp: 1}
+ocsf.connection_info = {
+  protocol_num: $proto_nums[src.proto]? else -1,
+  protocol_name: src.proto,
+}
+drop src.proto
+
+
+// --- OCSF: profile-specific attributes --------
+
+
+// Add fields for declared profiles (host, network_proxy, etc.)
+// ocsf.device = {...}
+// ocsf.proxy = {...}
+
+
+// --- Epilogue ---------------------------------
+
+
+// Hoist OCSF fields to root, collect unmapped.
+this = {...ocsf, unmapped: src}
+drop_null_fields unmapped
+
+
+// Derive sibling fields (activity_name, category_name, etc.)
+ocsf::derive
+
+
+// Set TQL-internal schema name for easier dispatching.
+@name = "ocsf.network_activity"
+```
+
+### Key principles
+
+* **Isolate source data**: `this = { src: this }` prevents name clashes and makes unmapped field collection automatic.
+* **Use `move`**: Transfer fields with `move` to simultaneously assign and remove from source, for example `ocsf.time = move src.time_generated`.
+* **Only use `drop` for multi-use fields**: When a field appears in multiple mappings, drop it after the last use. Prefer `move` and single assignments.
+* **Collect unmapped**: `this = {...ocsf, unmapped: src}` gathers any fields you didn’t map.
+
+Think in graphs
+
+OCSF mapping is a bipartite graph transformation: source fields form one vertex set, OCSF attributes form another, and your mapping defines the edges. Edges can be 1:1 (direct assignment), 1:n (field splitting), n:1 (aggregation), or n:m (complex transformation). Fields with no outgoing edges remain `unmapped`.
+
+### Package structure
+
+Organize OCSF mappings as a package with a dispatcher and per-event-type operators:
+
+* paloalto/
+
+  * operators/
+
+    * ngfw/
+
+      * ocsf/
+
+        * map.tql Main dispatcher
+
+        * base.tql Fallback to OCSF base event
+
+        * event/
+
+          * network.tql Traffic logs → Network Activity
+          * dns.tql DNS logs → DNS Activity
+          * threat.tql Threat logs → Security Finding
+
+  * tests/
+
+    * inputs/
+
+      * traffic.json Input shared across multiple tests
+
+    * ngfw/
+
+      * ocsf/
+
+        * map.tql
+
+        * map.txt
+
+        * base.tql
+
+        * base.txt
+
+        * event/
+
+          * network.stdin Log sample(s)
+          * network.tql Mapping for network event type
+          * network.txt Mapped OCSF event(s)
+          * dns.stdin
+          * dns.tql
+          * dns.txt
+
+  * package.yaml
+
+### Dispatcher operator
+
+Your package should include one dispatching operator. The dispatcher routes events to an event-specific mapping operator:
+
+paloalto/operators/ngfw/ocsf/map.tql
+
+```tql
+if src.type == "TRAFFIC" {
+  paloalto::ngfw::ocsf::event::network
+} else if src.type == "DNS" {
+  paloalto::ngfw::ocsf::event::dns
+} else if src.type == "THREAT" {
+  paloalto::ngfw::ocsf::event::threat
+} else {
+  // Map to base event.
+  paloalto::ngfw::ocsf::base
+}
+```
+
+If the parser package does not set a type field, dispatch on a different field in the log that differentiates the event types.
+
+### Test structure
+
+Create one test file per event type:
+
+```tql
+paloalto::ngfw::parse
+paloalto::ngfw::clean
+paloalto::ngfw::ocsf::event::network
+ocsf::cast
+```
+
+This requires that your test file has a sibling `.stdin` input that the [test framework](../testing/write-tests.md) picks up automatically.
+
+### Validation gate
+
+The [`ocsf::cast`](../../reference/operators/ocsf/cast.md) operator is the primary schema validation gate. It ensures that your mapping produces schema-compliant output.
+
+Your mapping is complete once [`ocsf::cast`](../../reference/operators/ocsf/cast.md) no longer emits warnings.
+
+## See also
+
+* [Clean up values](clean-up-values.md)
+* [Map to other schemas](map-to-other-schemas.md)
+* [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)

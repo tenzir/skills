@@ -1,0 +1,44 @@
+# Overview
+
+
+Tenzir integrates with the services from [Amazon Web Services (AWS)](https://aws.amazon.com) listed below.
+
+## Configuration
+
+To interact with AWS services, you need to provide appropriate credentials.
+
+### Inline credentials
+
+All AWS operators support an `aws_iam` parameter for specifying credentials directly in the pipeline:
+
+```tql
+load_sqs "my-queue", aws_iam={
+  region: "us-east-1",
+  access_key_id: "AKIAIOSFODNN7EXAMPLE",
+  secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+}
+```
+
+You can also use the `aws_iam` parameter to assume an IAM role:
+
+```tql
+load_s3 "s3://my-bucket/data.json", aws_iam={
+  assume_role: "arn:aws:iam::123456789012:role/MyRole",
+  session_name: "tenzir-session"
+}
+```
+
+### Default credential chain
+
+If no `aws_iam` parameter is specified, operators use AWS’s [default credentials provider chain](https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/credentials.html).
+
+Make sure to configure AWS credentials for the same user account that runs `tenzir` and `tenzir-node`. The AWS CLI creates configuration files for the current user under `~/.aws`, which can only be read by the same user account.
+
+The `tenzir-node` systemd unit by default creates a `tenzir` user and runs as that user, meaning that the AWS credentials must also be configured for that user. The directory `~/.aws` must be readable for the `tenzir` user.
+
+## Contents
+
+- [Msk](amazon/msk.md)
+- [S3](amazon/s3.md)
+- [Security-lake](amazon/security-lake.md)
+- [Sqs](amazon/sqs.md)

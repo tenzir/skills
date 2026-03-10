@@ -26,7 +26,18 @@ Install a specific skill into the current project, for example:
 ```bash
 npx skills add tenzir/skills@commit-changes
 npx skills add tenzir/skills@technical-writing
+npx skills add tenzir/skills@tenzir-docs
+npx skills add tenzir/skills@ocsf
 ```
+
+## Generated skills
+
+`tenzir-docs` is generated from the structured Markdown bundle published by
+[`tenzir/docs`](https://github.com/tenzir/docs/releases/tag/latest).
+
+`ocsf` is generated directly from the upstream
+[`ocsf-schema`](https://github.com/ocsf/ocsf-schema) and
+[`ocsf-docs`](https://github.com/ocsf/ocsf-docs) repositories.
 
 ## 🧩 Dependencies
 

@@ -1,105 +1,139 @@
 ---
 name: ocsf
-description: Answer questions about OCSF (Open Cyber Security Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
+description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
 ---
 
 # OCSF
 
 Look up OCSF reference documentation and answer from those sources. Only state
 facts from files you read. Never invent schema details. If the documentation
-doesn't cover the question, say so.
+does not cover the question, say so.
 
-## Reading the documentation
+## Versions
 
-The OCSF reference lives inside the `tenzir` skill. Invoke the skill, resolve
-its directory, and read files relative to that directory.
+Use the latest stable version unless the user requests a specific one. Stick to
+one version per answer.
 
-The file tree follows this layout:
+- [1.0.0](v1.0.0.md)
+- [1.1.0](v1.1.0.md)
+- [1.2.0](v1.2.0.md)
+- [1.3.0](v1.3.0.md)
+- [1.4.0](v1.4.0.md)
+- [1.5.0](v1.5.0.md)
+- [1.6.0](v1.6.0.md)
+- **[1.7.0](v1.7.0.md)** ← latest stable
+- [1.8.0-dev](v1.8.0-dev.md) ← unreleased development snapshot
+
+Each version page links to its classes, objects, profiles, extensions, and
+types.
+
+## File layout
 
 ```
-reference/ocsf.md                       # version table + overview
-reference/ocsf/introduction.md          # conceptual introduction
-reference/ocsf/faqs.md                  # FAQ index
-reference/ocsf/faqs/{slug}.md           # individual FAQ
-reference/ocsf/articles.md              # articles index
-reference/ocsf/articles/{slug}.md       # individual article
-reference/ocsf/{v}.md                   # version overview  (v = 1-7-0, …)
-reference/ocsf/{v}/classes.md           # class index
-reference/ocsf/{v}/classes/{name}.md    # individual class
-reference/ocsf/{v}/objects.md           # object index
-reference/ocsf/{v}/objects/{name}.md    # individual object
-reference/ocsf/{v}/profiles.md          # profile index
-reference/ocsf/{v}/profiles/{name}.md   # individual profile
-reference/ocsf/{v}/extensions.md        # extension index
-reference/ocsf/{v}/types.md             # type index
+introduction.md          # OCSF overview and conceptual sections
+introduction/{section}.md
+faqs.md                  # Schema design rationale
+faqs/{slug}.md
+articles.md              # Deep-dive guides on specific topics
+articles/{slug}.md
+{version}.md             # Version summary (what's new, counts)
+{version}/classes.md     # Class index grouped by category
+{version}/classes/{name}.md
+{version}/objects.md
+{version}/objects/{name}.md
+{version}/profiles.md
+{version}/profiles/{name}.md
+{version}/extensions.md
+{version}/extensions/{name}/index.md
+{version}/extensions/{name}/events/{event}.md
+{version}/extensions/{name}/objects/{object}.md
+{version}/extensions/{name}/profiles/{profile}.md
+{version}/types.md
 ```
 
-Start by reading `reference/ocsf.md` to discover available versions. Use the
-latest stable version unless the user requests a specific one. Stick to one
-version per answer.
+## Question routing
+
+Pick the shortest reading path for the question type.
+
+| Question pattern | Start here |
+| --- | --- |
+| Which class fits event X? | Category table below → version classes index → candidate class pages |
+| What attributes does class/object Y have? | Version classes or objects index → the specific page |
+| How do profiles work? / Which profile for X? | [Introduction: Profiles](introduction/profiles.md) → version profiles index |
+| How do I extend the schema? | [Introduction: Extensions](introduction/extensions.md) or [Patching the Core Schema](articles/patching-core-using-extensions.md) |
+| How do I populate observables / model alerts? | [FAQs](faqs.md) and [Articles](articles.md) |
+| What changed between versions? | Compare the two version pages |
+| Conceptual / design question | [Introduction](introduction.md) → [FAQs](faqs.md) |
+
+When the question asks you to pick a class, read multiple candidates and explain
+trade-offs.
 
 ## Domain knowledge
 
 ### Core concepts
 
-**Attributes** are named fields with a data type (scalar like `string_t` or
-complex like `object`). Every OCSF field has a requirement level: required,
-recommended, or optional.
+**Attributes** are named fields with a data type. Every OCSF field has a
+requirement level: required, recommended, or optional.
 
-**Objects** group related attributes into reusable structures (`process`,
-`user`, `file`, `device`, …). Objects can nest other objects.
+**Objects** group related attributes into reusable structures. Objects can nest
+other objects.
 
-**Event classes** define schemas for specific security events. Each class
-belongs to a category and inherits from Base Event.
+**Event classes** define schemas for specific security events. Each class belongs
+to a category and inherits from Base Event.
 
-**Base Event** provides universal attributes (`time`, `metadata`,
-`severity_id`, `message`, `observables`, `unmapped`) and serves as a catch-all
-when no specific class fits.
+**Base Event** provides universal attributes and serves as a catch-all when no
+more specific class fits.
 
-**Profiles** are mix-ins that add cross-cutting attributes (for example
-`cloud`, `container`, `host`). A class can apply multiple profiles.
+**Profiles** are mix-ins that add cross-cutting attributes. A class can apply
+multiple profiles.
 
-**Extensions** add vendor-specific attributes without modifying the core
-schema. They use a namespace prefix (for example `linux/exec_flags`).
+**Extensions** add vendor-specific attributes without modifying the core schema.
 
 ### Event categories
 
-| Range | Category             | Focus                                                       |
-| ----- | -------------------- | ----------------------------------------------------------- |
-| 1xxx  | System Activity      | OS-level: process, file, module, memory, kernel, registry   |
-| 2xxx  | Findings             | Detections, vulnerabilities, incidents, compliance          |
-| 3xxx  | IAM                  | Authentication, authorization, account/group changes        |
-| 4xxx  | Network Activity     | General traffic and protocol-specific (DNS, HTTP, SSH, …)   |
-| 5xxx  | Discovery            | Device, user, service, resource enumeration                 |
-| 6xxx  | Application Activity | Web resources, API calls, file hosting, datastore ops       |
-| 7xxx  | Remediation          | File, process, network, entity remediation actions          |
-| 8xxx  | Unmanned             | Drones, vehicles, robots                                    |
+Use the category range to narrow scope before diving into individual class
+pages.
+
+| Range | Category | Focus |
+| ----- | -------- | ----- |
+| 1xxx | System Activity | OS-level: process, file, module, memory, kernel, registry |
+| 2xxx | Findings | Detections, vulnerabilities, incidents, compliance |
+| 3xxx | IAM | Authentication, authorization, account and group changes |
+| 4xxx | Network Activity | General traffic and protocol-specific activity |
+| 5xxx | Discovery | Device, user, service, and resource enumeration |
+| 6xxx | Application Activity | Web resources, API calls, file hosting, datastore operations |
+| 7xxx | Remediation | File, process, network, and entity remediation actions |
+| 8xxx | Unmanned | Drones, vehicles, and robots |
 
 ### Naming conventions
 
 - `snake_case` everywhere: `process_activity`, `network_endpoint`.
-- Suffixes carry meaning: `_id` (enum int), `_uid` (schema-unique), `_uuid`
-  (globally unique), `_name` (display label), `_time` / `_dt` (timestamp).
+- Arrays use plural names: `answers`, `enrichments`, `attacks`.
+- When `_id` is `Other` (`99`), the sibling string **must** be populated with
+  the source value.
+
+Key suffixes:
+
+| Suffix | Meaning |
+| ------ | ------- |
+| `_id` | Enum integer identifier with a sibling string (same name minus `_id`). `0` = Unknown, `99` = Other. |
+| `_uid` | Schema-unique or external unique identifier (integer for classification attrs, string otherwise). Sibling uses `_name`. |
+| `_uuid` | Globally unique 128-bit identifier (string). No sibling. |
+| `_name` | Friendly name / caption sibling for `_uid` or `_id` attributes. |
+| `_time` | Timestamp (`timestamp_t`, milliseconds since epoch). |
+| `_dt` | Datetime (`datetime_t`, RFC 3339 string). Added by the Date/Time profile alongside `_time` attributes. |
+| `_info` / `_detail` | Object carrying supplementary information. |
+| `_process` | Reference to a Process object. |
+| `_ver` | Version string. |
+| `_list` | Array of values. |
 
 ## Answering principles
 
-- **Read before answering.** Every claim must trace back to a file you read.
-- **Use the category table to narrow scope.** It tells you which class-ID
-  range to explore for a given event type.
-- **Consult the FAQs for ambiguous choices.** Read `faqs.md` for the index,
-  then the relevant individual FAQ files.
-- **Read multiple candidates for selection questions.** Aim for 2-4, then
-  rank them.
-
-## Entity selection scoring
-
-When the question is "which class / object / profile fits?", rank candidates:
-
-| Score     | Meaning             |
-| --------- | ------------------- |
-| 90–100 %  | Strong fit          |
-| 60–89 %   | Viable, trade-offs  |
-| < 60 %    | Poor fit            |
-
-Score profiles independently — they combine freely. After ranking, explain
-trade-offs and recommend when to prefer each option.
+- Read before answering. Every claim must trace back to a file you read.
+- Use the question routing table and category table to narrow scope before
+  reading class or object pages.
+- Consult [FAQs](faqs.md) for schema design rationale and ambiguous mappings.
+- Consult [Articles](articles.md) for deep-dive topics like observables, alerts,
+  process parentage, and extensions.
+- Read [Introduction](introduction.md) sections for conceptual questions about
+  the framework itself.
