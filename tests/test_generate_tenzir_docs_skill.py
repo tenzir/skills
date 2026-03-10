@@ -71,7 +71,13 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             sitemap_root = MODULE.parse_heading_tree(
                 (input_dir / "sitemap.md").read_text(encoding="utf-8")
             )
-            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
+            markdown_files = [
+                f for f in MODULE.collect_markdown_files(input_dir) if f != "sitemap.md"
+            ]
+            available_source_paths = MODULE.build_available_source_paths(markdown_files)
+            skill_markdown = MODULE.generate_skill_markdown(
+                input_dir, sitemap_root, available_source_paths
+            )
             self.assertIn("guides/packages/maintain-a-changelog.md", skill_markdown)
             self.assertIn("reference/ship-framework.md", skill_markdown)
             self.assertNotIn("](changelog.md)", skill_markdown)
@@ -249,12 +255,26 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             sitemap_root = MODULE.parse_heading_tree(
                 (input_dir / "sitemap.md").read_text(encoding="utf-8")
             )
-            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
+            markdown_files = [
+                f for f in MODULE.collect_markdown_files(input_dir) if f != "sitemap.md"
+            ]
+            available_source_paths = MODULE.build_available_source_paths(markdown_files)
+            skill_markdown = MODULE.generate_skill_markdown(
+                input_dir, sitemap_root, available_source_paths
+            )
 
             self.assertIn("##### [Deploy a node](guides/node-setup/deploy-a-node.md)", skill_markdown)
             self.assertIn("##### [GuardDuty](integrations/amazon/guardduty.md)", skill_markdown)
-            self.assertIn("#### Operator Index", skill_markdown)
-            self.assertIn("#### Function Index", skill_markdown)
+            # Operator and function indexes are extracted to separate files,
+            # so they must NOT appear inline in SKILL.md.
+            self.assertNotIn("#### Operator Index", skill_markdown)
+            self.assertNotIn("#### Function Index", skill_markdown)
+            # Instead, a pointer section directs the model to the extracted
+            # index files.
+            self.assertIn("### Indexes", skill_markdown)
+            self.assertIn("[Operator Index](reference/operators-index.md)", skill_markdown)
+            self.assertIn("[Function Index](reference/functions-index.md)", skill_markdown)
+            # Non-operator/function reference indexes remain inline.
             self.assertIn("#### Claude Marketplace Index", skill_markdown)
             self.assertIn("- [Python](reference/claude-plugins/python.md)", skill_markdown)
             self.assertIn("#### Node Index", skill_markdown)
@@ -264,14 +284,11 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
                 "- [Command line interface](reference/platform/command-line-interface.md)",
                 skill_markdown,
             )
-            self.assertIn("##### Query", skill_markdown)
-            self.assertIn("- [api](reference/operators/api.md)", skill_markdown)
-            self.assertIn("- [chart_area](reference/operators/chart_area.md)", skill_markdown)
-            self.assertIn(
-                "- [where](https://docs.tenzir.com/reference/operators/where.md)",
-                skill_markdown,
-            )
-            self.assertIn("[count](reference/functions/count.md)", skill_markdown)
+            # Per-category operator/function entries are in the extracted
+            # files, not inline.
+            self.assertNotIn("##### Query", skill_markdown)
+            self.assertNotIn("- [api](reference/operators/api.md)", skill_markdown)
+            self.assertNotIn("- [chart_area](reference/operators/chart_area.md)", skill_markdown)
             self.assertNotIn("reference/ocsf.md", skill_markdown)
             self.assertNotIn("reference/ocsf/1-7-0/classes.md", skill_markdown)
             self.assertNotIn("[chart\\_area]", skill_markdown)
@@ -309,7 +326,13 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             sitemap_root = MODULE.parse_heading_tree(
                 (input_dir / "sitemap.md").read_text(encoding="utf-8")
             )
-            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
+            markdown_files = [
+                f for f in MODULE.collect_markdown_files(input_dir) if f != "sitemap.md"
+            ]
+            available_source_paths = MODULE.build_available_source_paths(markdown_files)
+            skill_markdown = MODULE.generate_skill_markdown(
+                input_dir, sitemap_root, available_source_paths
+            )
 
             self.assertIn("#### Node Index", skill_markdown)
             self.assertIn("- [Configuration](reference/node/configuration.md)", skill_markdown)
@@ -361,13 +384,33 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             sitemap_root = MODULE.parse_heading_tree(
                 (input_dir / "sitemap.md").read_text(encoding="utf-8")
             )
-            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
+            markdown_files = [
+                f for f in MODULE.collect_markdown_files(input_dir) if f != "sitemap.md"
+            ]
+            available_source_paths = MODULE.build_available_source_paths(markdown_files)
+            skill_markdown = MODULE.generate_skill_markdown(
+                input_dir, sitemap_root, available_source_paths
+            )
 
-            self.assertIn("#### Function Index", skill_markdown)
-            self.assertIn("##### Aggregation", skill_markdown)
-            self.assertIn("- [count](reference/functions/count.md)", skill_markdown)
-            self.assertIn("##### Additional Pages", skill_markdown)
-            self.assertIn("- [hmac](reference/functions/hmac.md)", skill_markdown)
+            # The Function Index is extracted to a separate file, not
+            # inlined in SKILL.md.
+            self.assertNotIn("#### Function Index", skill_markdown)
+            self.assertIn("[Function Index](reference/functions-index.md)", skill_markdown)
+
+            # Verify the extracted index contains both the categorized
+            # entries and the unindexed "hmac" page.
+            func_index = MODULE.generate_extracted_index(
+                input_dir,
+                "reference/functions.md",
+                "Function Index",
+                "reference/functions-index.md",
+                available_source_paths,
+            )
+            self.assertIsNotNone(func_index)
+            self.assertIn("## Aggregation", func_index)
+            self.assertIn("- [count](functions/count.md)", func_index)
+            self.assertIn("## Additional Pages", func_index)
+            self.assertIn("- [hmac](functions/hmac.md)", func_index)
 
     @staticmethod
     def _write(path: Path, content: str) -> None:
