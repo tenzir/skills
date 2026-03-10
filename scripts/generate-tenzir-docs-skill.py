@@ -22,16 +22,21 @@ DOCS_URL_PREFIX = re.compile(r"^https?://docs\.tenzir\.com")
 EXCLUDED_SOURCE_PATHS = frozenset({"changelog.md"})
 EXCLUDED_SOURCE_PREFIXES = ("changelog/",)
 SECTION_MAX_LEVEL = {
-    "Guides": 4,
+    "Guides": 5,
     "Tutorials": 4,
     "Explanations": 4,
-    "Integrations": 4,
-    "Reference": 3,
+    "Integrations": 5,
+    "Reference": 4,
 }
 MARKDOWN = MarkdownIt()
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)]+)\)")
 HEADING_LINK_RE = re.compile(r"^#{1,6}\s+\[([^\]]+)\]\(([^)]+)\)")
 HEADING_TEXT_RE = re.compile(r"^#{1,6}\s+(.+)$")
+MARKDOWN_ESCAPE_RE = re.compile(r"\\([\\`*_{}\[\]()#+\-.!|>])")
+REFERENCE_INDEX_PAGES = (
+    ("reference/operators.md", "Operator Index"),
+    ("reference/functions.md", "Function Index"),
+)
 
 
 @dataclass(slots=True)
@@ -40,6 +45,7 @@ class Node:
     level: int
     content_lines: list[str] = field(default_factory=list)
     children: list["Node"] = field(default_factory=list)
+    preserve_bullets: bool = False
 
 
 def is_changelog_source_path(source_path: str) -> bool:
@@ -68,6 +74,10 @@ def extract_heading_text(line: str) -> str | None:
 def extract_heading_href(line: str) -> str | None:
     match = HEADING_LINK_RE.match(line)
     return match.group(2) if match else None
+
+
+def unescape_markdown_text(text: str) -> str:
+    return MARKDOWN_ESCAPE_RE.sub(r"\1", text)
 
 
 def normalize_docs_href(href: str | None) -> str | None:
@@ -164,6 +174,7 @@ def filter_node(node: Node, *, max_depth: int) -> Node | None:
         level=node.level,
         content_lines=list(node.content_lines),
         children=children,
+        preserve_bullets=node.preserve_bullets,
     )
 
 
@@ -219,9 +230,12 @@ def render_node(node: Node, *, level_offset: int = 0, from_path: str = "SKILL.md
         heading_text = re.sub(r"^#{1,6}", "#" * level, heading_text)
         lines.extend([heading_text, ""])
 
-    content_lines = trim_blank_lines(
-        [rewrite_content(line, from_path) for line in node.content_lines if not is_bullet_line(line)]
+    source_lines = (
+        node.content_lines
+        if node.preserve_bullets
+        else [line for line in node.content_lines if not is_bullet_line(line)]
     )
+    content_lines = trim_blank_lines([rewrite_content(line, from_path) for line in source_lines])
     if content_lines:
         lines.extend([*content_lines, ""])
 
@@ -233,6 +247,69 @@ def render_node(node: Node, *, level_offset: int = 0, from_path: str = "SKILL.md
     return "\n".join(lines)
 
 
+def build_compact_index_node(
+    page_markdown: str,
+    *,
+    index_heading: str,
+    index_level: int,
+    category_level: int,
+) -> Node | None:
+    page_root = parse_heading_tree(page_markdown)
+    title_node = next((child for child in page_root.children if child.level == 1), None)
+    if title_node is None:
+        return None
+
+    category_nodes: list[Node] = []
+    for category in title_node.children:
+        category_name = extract_heading_text(category.heading or "")
+        if not category_name:
+            continue
+        links: list[str] = []
+        for item in category.children:
+            label = extract_heading_text(item.heading or "")
+            href = extract_heading_href(item.heading or "")
+            if not label or not href or rewrite_link_destination(href, "SKILL.md") is None:
+                continue
+            label = unescape_markdown_text(label)
+            links.append(f"[{label}]({href})")
+        if not links:
+            continue
+        category_nodes.append(
+            Node(
+                heading=f"{'#' * category_level} {category_name}",
+                level=category_level,
+                content_lines=[f"- {link}" for link in links],
+                preserve_bullets=True,
+            )
+        )
+
+    if not category_nodes:
+        return None
+
+    return Node(
+        heading=f"{'#' * index_level} {index_heading}",
+        level=index_level,
+        children=category_nodes,
+    )
+
+
+def build_reference_index_nodes(input_dir: Path, reference_level: int) -> list[Node]:
+    index_nodes: list[Node] = []
+    index_level = min(6, reference_level + 2)
+    category_level = min(6, index_level + 1)
+    for relative_path, index_heading in REFERENCE_INDEX_PAGES:
+        source_file = input_dir / relative_path
+        if not source_file.is_file():
+            continue
+        node = build_compact_index_node(
+            source_file.read_text(encoding="utf-8"),
+            index_heading=index_heading,
+            index_level=index_level,
+            category_level=category_level,
+        )
+        if node is not None:
+            index_nodes.append(node)
+    return index_nodes
 def collect_markdown_files(directory: Path, *, root_dir: Path | None = None) -> list[str]:
     root = root_dir or directory
     files: list[str] = []
@@ -267,7 +344,7 @@ def create_skill_frontmatter() -> str:
     )
 
 
-def generate_skill_markdown(sitemap_root: Node) -> str:
+def generate_skill_markdown(input_dir: Path, sitemap_root: Node) -> str:
     title_node = next((child for child in sitemap_root.children if child.level == 1), None)
     if title_node is None:
         raise ValueError("Could not find the sitemap title in sitemap.md.")
@@ -280,6 +357,8 @@ def generate_skill_markdown(sitemap_root: Node) -> str:
             continue
         filtered = filter_node(section, max_depth=max_depth)
         if filtered is not None:
+            if section_name == "Reference":
+                filtered.children.extend(build_reference_index_nodes(input_dir, filtered.level))
             filtered_children.append(filtered)
 
     filtered_title = Node(
@@ -288,7 +367,11 @@ def generate_skill_markdown(sitemap_root: Node) -> str:
         content_lines=list(title_node.content_lines),
         children=filtered_children,
     )
-    return re.sub(r"\n{3,}", "\n\n", f"{create_skill_frontmatter()}{render_node(filtered_title)}")
+    return re.sub(
+        r"\n{3,}",
+        "\n\n",
+        f"{create_skill_frontmatter()}{render_node(filtered_title)}",
+    )
 
 
 def parse_args() -> argparse.Namespace:
@@ -317,7 +400,7 @@ def main() -> None:
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    skill_md = generate_skill_markdown(sitemap_root)
+    skill_md = generate_skill_markdown(input_dir, sitemap_root)
     (output_dir / "SKILL.md").write_text(skill_md, encoding="utf-8")
     copied = write_skill_files(input_dir, output_dir, markdown_files)
 

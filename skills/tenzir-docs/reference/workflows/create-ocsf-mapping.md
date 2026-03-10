@@ -43,7 +43,7 @@ Analyze your source events to determine which OCSF event class best represents t
 
 **Resources**:
 
-* OCSF
+* [OCSF](../ocsf.md)
 
 ## 3. Write mapping operators
 

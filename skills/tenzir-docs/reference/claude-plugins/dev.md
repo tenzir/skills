@@ -112,9 +112,9 @@ Create a changelog entry @dev:changelog-adder
 
 The agent analyzes your changes and creates an appropriate changelog entry using tenzir-ship.
 
-[ Changelog ](../../changelog/claude-plugins/dev.md)
+ Changelog 
 
-[View the release history and recent changes.](../../changelog/claude-plugins/dev.md)
+View the release history and recent changes.
 
 [ View on GitHub ](https://github.com/tenzir/claude-plugins/tree/main/plugins/dev)
 

@@ -217,7 +217,7 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
   709825985650.dkr.ecr.us-east-1.amazonaws.com/tenzir/tenzir-node:v<MAJOR>.<MINOR>.<PATCH>
   ```
 
-  Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version (e.g., `v4.30.3`). Check our [changelog](../../changelog.md) for the latest version.
+  Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version (e.g., `v4.30.3`). Check our changelog for the latest version.
 
   * Console
 
@@ -322,7 +322,7 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
      709825985650.dkr.ecr.us-east-1.amazonaws.com/tenzir/tenzir-node:v<MAJOR>.<MINOR>.<PATCH>
      ```
 
-     Each node version has its own image tag. Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version. Check the [changelog](../../changelog.md) for the latest version.
+     Each node version has its own image tag. Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version. Check the changelog for the latest version.
 
   4. Return to your cluster, navigate to the *Tasks* tab, and click *Run new task*. Select the task definition you just created.
 

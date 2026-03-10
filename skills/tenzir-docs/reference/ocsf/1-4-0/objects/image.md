@@ -1,0 +1,52 @@
+# Image
+
+> The Image object provides a description of a specific Virtual Machine (VM) or Container image.
+
+
+The Image object provides a description of a specific Virtual Machine (VM) or Container image.
+
+* **Extends**: `_entity`
+
+## Attributes
+
+**`uid`**
+
+* **Type**: `string_t`
+* **Requirement**: required
+
+The unique image ID. For example: `77af4d6b9913`.
+
+**`name`**
+
+* **Type**: `string_t`
+* **Requirement**: recommended
+
+The image name. For example: `elixir`.
+
+**`labels`**
+
+* **Type**: `string_t`
+* **Requirement**: optional
+
+The list of labels associated to the image.
+
+**`path`**
+
+* **Type**: `string_t`
+* **Requirement**: optional
+
+The full path to the image file.
+
+**`tag`**
+
+* **Type**: `string_t`
+* **Requirement**: optional
+
+The image tag. For example: `1.11-alpine`.
+
+**`tags`**
+
+* **Type**: [`key_value_object`](key_value_object.md)
+* **Requirement**: optional
+
+The list of tags; `{key:value}` pairs associated to the image.

@@ -100,9 +100,9 @@ uv run ruff check && uv run ruff format --check && uv run mypy && uv run pytest
 
 **Project Setup** - For new projects, the skill provides ready-to-use `pyproject.toml` templates with Tenzir metadata, Hatchling build config, and standard tool configurations.
 
-[ Changelog ](../../changelog/claude-plugins/python.md)
+ Changelog 
 
-[View the release history and recent changes.](../../changelog/claude-plugins/python.md)
+View the release history and recent changes.
 
 [ View on GitHub ](https://github.com/tenzir/claude-plugins/tree/main/plugins/python)
 

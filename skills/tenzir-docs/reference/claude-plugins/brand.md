@@ -77,9 +77,9 @@ Tenzir brand and style guidelines for frontend development. Includes design toke
 
 The `brand:styling-tenzir-ui` skill activates automatically when you work on Tenzir frontend code. It provides design tokens, component specs, and CSS snippets for consistent UI styling.
 
-[ Changelog ](../../changelog/claude-plugins/brand.md)
+ Changelog 
 
-[View the release history and recent changes.](../../changelog/claude-plugins/brand.md)
+View the release history and recent changes.
 
 [ View on GitHub ](https://github.com/tenzir/claude-plugins/tree/main/plugins/brand)
 

@@ -1,0 +1,63 @@
+# Process Entity
+
+> The Process Entity object provides critical fields for referencing a process.
+
+
+The Process Entity object provides critical fields for referencing a process.
+
+* **Extends**: `_entity`
+
+## Attributes
+
+**`cmd_line`**
+
+* **Type**: `string_t`
+* **Requirement**: recommended
+
+The full command line used to launch an application, service, process, or job. For example: `ssh user@10.0.0.10`. If the command line is unavailable or missing, the empty string `''` is to be used.
+
+**`created_time`**
+
+* **Type**: `timestamp_t`
+* **Requirement**: recommended
+
+The time when the process was created/started.
+
+**`name`**
+
+* **Type**: `process_name_t`
+* **Requirement**: recommended
+
+The friendly name of the process, for example: `Notepad++`.
+
+**`pid`**
+
+* **Type**: `integer_t`
+* **Requirement**: recommended
+
+The process identifier, as reported by the operating system. Process ID (PID) is a number used by the operating system to uniquely identify an active process.
+
+**`uid`**
+
+* **Type**: `string_t`
+* **Requirement**: recommended
+
+A unique identifier for this process assigned by the producer (tool). Facilitates correlation of a process event with other events for that process.
+
+**`created_time_dt`**
+
+* **Type**: `datetime_t`
+* **Requirement**: optional
+
+The time when the process was created/started.
+
+**`path`**
+
+* **Type**: `string_t`
+* **Requirement**: optional
+
+The process file path.
+
+## Constraints
+
+At least one of: `cmd_line`, `name`, `path`, `pid`, `uid`

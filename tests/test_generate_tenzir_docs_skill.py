@@ -69,7 +69,7 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             sitemap_root = MODULE.parse_heading_tree(
                 (input_dir / "sitemap.md").read_text(encoding="utf-8")
             )
-            skill_markdown = MODULE.generate_skill_markdown(sitemap_root)
+            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
             self.assertIn("guides/packages/maintain-a-changelog.md", skill_markdown)
             self.assertIn("reference/ship-framework.md", skill_markdown)
             self.assertNotIn("](changelog.md)", skill_markdown)
@@ -98,6 +98,114 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             self.assertIn("[Ship Framework](../../reference/ship-framework.md)", guide_text)
             self.assertIn("Recent releases", guide_text)
             self.assertNotIn("[Recent releases]", guide_text)
+
+    def test_generation_adds_compact_reference_indexes_and_deeper_leaf_pages(self) -> None:
+        with tempfile.TemporaryDirectory() as input_dir_str:
+            input_dir = Path(input_dir_str)
+
+            self._write(
+                input_dir / "sitemap.md",
+                "\n".join(
+                    [
+                        "# [Tenzir Documentation Map](https://docs.tenzir.com/sitemap.md)",
+                        "",
+                        "## [Guides](https://docs.tenzir.com/guides.md)",
+                        "",
+                        "### Setup",
+                        "",
+                        "#### [Node Setup](https://docs.tenzir.com/guides/node-setup.md)",
+                        "",
+                        "##### [Deploy a node](https://docs.tenzir.com/guides/node-setup/deploy-a-node.md)",
+                        "",
+                        "## [Reference](https://docs.tenzir.com/reference.md)",
+                        "",
+                        "### Language (TQL)",
+                        "",
+                        "#### [Operators](https://docs.tenzir.com/reference/operators.md)",
+                        "",
+                        "##### [api](https://docs.tenzir.com/reference/operators/api.md)",
+                        "",
+                        "#### [Functions](https://docs.tenzir.com/reference/functions.md)",
+                        "",
+                        "##### [count](https://docs.tenzir.com/reference/functions/count.md)",
+                        "",
+                        "## [Integrations](https://docs.tenzir.com/integrations.md)",
+                        "",
+                        "### Cloud Providers",
+                        "",
+                        "#### [Amazon](https://docs.tenzir.com/integrations/amazon.md)",
+                        "",
+                        "##### [GuardDuty](https://docs.tenzir.com/integrations/amazon/guardduty.md)",
+                        "",
+                    ]
+                ),
+            )
+            self._write(input_dir / "guides/node-setup.md", "# Node Setup\n")
+            self._write(input_dir / "guides/node-setup/deploy-a-node.md", "# Deploy a node\n")
+            self._write(input_dir / "reference/operators/api.md", "# api\n")
+            self._write(input_dir / "reference/operators/chart_area.md", "# chart_area\n")
+            self._write(input_dir / "reference/functions/count.md", "# count\n")
+            self._write(input_dir / "integrations/amazon.md", "# Amazon\n")
+            self._write(input_dir / "integrations/amazon/guardduty.md", "# GuardDuty\n")
+            self._write(
+                input_dir / "reference/operators.md",
+                "\n".join(
+                    [
+                        "# Operators",
+                        "",
+                        "## Query",
+                        "",
+                        "### [api](https://docs.tenzir.com/reference/operators/api.md)",
+                        "",
+                        "Use Tenzir's REST API directly from a pipeline.",
+                        "",
+                        "### [chart\\_area](https://docs.tenzir.com/reference/operators/chart_area.md)",
+                        "",
+                        "Plots events on an area chart.",
+                        "",
+                        "### [where](https://docs.tenzir.com/reference/operators/where.md)",
+                        "",
+                        "Filters events by predicate.",
+                        "",
+                    ]
+                ),
+            )
+            self._write(
+                input_dir / "reference/functions.md",
+                "\n".join(
+                    [
+                        "# Functions",
+                        "",
+                        "## Aggregation",
+                        "",
+                        "### [count](https://docs.tenzir.com/reference/functions/count.md)",
+                        "",
+                        "Counts events.",
+                        "",
+                    ]
+                ),
+            )
+
+            sitemap_root = MODULE.parse_heading_tree(
+                (input_dir / "sitemap.md").read_text(encoding="utf-8")
+            )
+            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
+
+            self.assertIn("##### [Deploy a node](guides/node-setup/deploy-a-node.md)", skill_markdown)
+            self.assertIn("##### [GuardDuty](integrations/amazon/guardduty.md)", skill_markdown)
+            self.assertIn("#### Operator Index", skill_markdown)
+            self.assertIn("#### Function Index", skill_markdown)
+            self.assertIn("##### Query", skill_markdown)
+            self.assertIn(
+                "- [api](reference/operators/api.md)\n- [chart_area](reference/operators/chart_area.md)\n- [where](reference/operators/where.md)",
+                skill_markdown,
+            )
+            self.assertIn("[count](reference/functions/count.md)", skill_markdown)
+            self.assertNotIn("[chart\\_area]", skill_markdown)
+            self.assertNotIn("Use Tenzir's REST API directly from a pipeline.", skill_markdown)
+            self.assertNotIn("Plots events on an area chart.", skill_markdown)
+            self.assertNotIn("Filters events by predicate.", skill_markdown)
+            self.assertNotIn("Counts events.", skill_markdown)
 
     @staticmethod
     def _write(path: Path, content: str) -> None:

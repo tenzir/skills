@@ -87,9 +87,9 @@ Provides the complete Tenzir documentation as context. The documentation is auto
 
 The skill covers deployment, configuration, TQL (Tenzir Query Language), operators, functions, formats, connectors, integrations, and the Tenzir Platform.
 
-[ Changelog ](../../changelog/claude-plugins/tenzir.md)
+ Changelog 
 
-[View the release history and recent changes.](../../changelog/claude-plugins/tenzir.md)
+View the release history and recent changes.
 
 [ View on GitHub ](https://github.com/tenzir/claude-plugins/tree/main/plugins/tenzir)
 

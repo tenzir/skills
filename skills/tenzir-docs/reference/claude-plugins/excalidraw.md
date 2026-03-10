@@ -97,9 +97,9 @@ Draw a state machine with Start, Processing, and Done states
 Make a simple org chart with a root node and three children
 ```
 
-[ Changelog ](../../changelog/claude-plugins/excalidraw.md)
+ Changelog 
 
-[View the release history and recent changes.](../../changelog/claude-plugins/excalidraw.md)
+View the release history and recent changes.
 
 [ View on GitHub ](https://github.com/tenzir/claude-plugins/tree/main/plugins/excalidraw)
 
