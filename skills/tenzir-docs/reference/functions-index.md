@@ -2,465 +2,252 @@
 
 ## Aggregation
 
-- [all](functions/all.md)
-- [any](functions/any.md)
-- [collect](functions/collect.md)
-- [count](functions/count.md)
-- [count_distinct](functions/count_distinct.md)
-- [count_if](functions/count_if.md)
-- [distinct](functions/distinct.md)
-- [entropy](functions/entropy.md)
-- [first](functions/first.md)
-- [last](functions/last.md)
-- [max](functions/max.md)
-- [mean](functions/mean.md)
-- [median](functions/median.md)
-- [min](functions/min.md)
-- [mode](functions/mode.md)
-- [otherwise](functions/otherwise.md)
-- [quantile](functions/quantile.md)
-- [stddev](functions/stddev.md)
-- [sum](functions/sum.md)
-- [value_counts](functions/value_counts.md)
-- [variance](functions/variance.md)
+- [all](functions/all.md): Computes the conjunction (AND) of all grouped boolean values.
+- [any](functions/any.md): Computes the disjunction (OR) of all grouped boolean values.
+- [collect](functions/collect.md): Creates a list of all non-null grouped values, preserving duplicates.
+- [count](functions/count.md): Counts the events or non-null grouped values.
+- [count_distinct](functions/count_distinct.md): Counts all distinct non-null grouped values.
+- [count_if](functions/count_if.md): Counts the events or non-null grouped values matching a given predicate.
+- [distinct](functions/distinct.md): Creates a sorted list without duplicates of non-null grouped values.
+- [entropy](functions/entropy.md): Computes the Shannon entropy of all grouped values.
+- [first](functions/first.md): Takes the first non-null grouped value.
+- [last](functions/last.md): Takes the last non-null grouped value.
+- [max](functions/max.md): Computes the maximum of all grouped values.
+- [mean](functions/mean.md): Computes the mean of all grouped values.
+- [median](functions/median.md): Computes the approximate median of all grouped values using a t-digest algorithm.
+- [min](functions/min.md): Computes the minimum of all grouped values.
+- [mode](functions/mode.md): Takes the most common non-null grouped value.
+- [otherwise](functions/otherwise.md): Returns a `fallback` value if `primary` is `null`.
+- [quantile](functions/quantile.md): Computes the specified quantile of all grouped values.
+- [stddev](functions/stddev.md): Computes the standard deviation of all grouped values.
+- [sum](functions/sum.md): Computes the sum of all values.
+- [value_counts](functions/value_counts.md): Returns a list of all grouped values alongside their frequency.
+- [variance](functions/variance.md): Computes the variance of all grouped values.
 
 ## Bit Operations
 
-- [bit_and](functions/bit_and.md)
-- [bit_not](functions/bit_not.md)
-- [bit_or](functions/bit_or.md)
-- [bit_xor](functions/bit_xor.md)
-- [shift_left](functions/shift_left.md)
-- [shift_right](functions/shift_right.md)
+- [bit_and](functions/bit_and.md): Computes the bit-wise AND of its arguments.
+- [bit_not](functions/bit_not.md): Computes the bit-wise NOT of its argument.
+- [bit_or](functions/bit_or.md): Computes the bit-wise OR of its arguments.
+- [bit_xor](functions/bit_xor.md): Computes the bit-wise XOR of its arguments.
+- [shift_left](functions/shift_left.md): Performs a bit-wise left shift.
+- [shift_right](functions/shift_right.md): Performs a bit-wise right shift.
 
 ## Decoding
 
-- [decode_base58](functions/decode_base58.md)
-- [decode_base64](functions/decode_base64.md)
-- [decode_hex](functions/decode_hex.md)
-- [decode_url](functions/decode_url.md)
+- [decode_base58](functions/decode_base58.md): Decodes bytes as Base58.
+- [decode_base64](functions/decode_base64.md): Decodes bytes as Base64.
+- [decode_hex](functions/decode_hex.md): Decodes bytes from their hexadecimal representation.
+- [decode_url](functions/decode_url.md): Decodes URL encoded strings.
 
 ## Encoding
 
-- [encode_base58](functions/encode_base58.md)
-- [encode_base64](functions/encode_base64.md)
-- [encode_hex](functions/encode_hex.md)
-- [encode_url](functions/encode_url.md)
+- [encode_base58](functions/encode_base58.md): Encodes bytes as Base58.
+- [encode_base64](functions/encode_base64.md): Encodes bytes as Base64.
+- [encode_hex](functions/encode_hex.md): Encodes bytes into their hexadecimal representation.
+- [encode_url](functions/encode_url.md): Encodes strings using URL encoding.
 
 ## Hashing
 
-- [hash_md5](functions/hash_md5.md)
-- [hash_sha1](functions/hash_sha1.md)
-- [hash_sha224](functions/hash_sha224.md)
-- [hash_sha256](functions/hash_sha256.md)
-- [hash_sha3_224](functions/hash_sha3_224.md)
-- [hash_sha3_256](functions/hash_sha3_256.md)
-- [hash_sha3_384](functions/hash_sha3_384.md)
-- [hash_sha3_512](functions/hash_sha3_512.md)
-- [hash_sha384](functions/hash_sha384.md)
-- [hash_sha512](functions/hash_sha512.md)
-- [hash_xxh3](functions/hash_xxh3.md)
+- [hash_md5](functions/hash_md5.md): Computes an MD5 hash digest.
+- [hash_sha1](functions/hash_sha1.md): Computes a SHA-1 hash digest.
+- [hash_sha224](functions/hash_sha224.md): Computes a SHA-224 hash digest.
+- [hash_sha256](functions/hash_sha256.md): Computes a SHA-256 hash digest.
+- [hash_sha3_224](functions/hash_sha3_224.md): Computes a SHA3-224 hash digest.
+- [hash_sha3_256](functions/hash_sha3_256.md): Computes a SHA3-256 hash digest.
+- [hash_sha3_384](functions/hash_sha3_384.md): Computes a SHA3-384 hash digest.
+- [hash_sha3_512](functions/hash_sha3_512.md): Computes a SHA3-512 hash digest.
+- [hash_sha384](functions/hash_sha384.md): Computes a SHA-384 hash digest.
+- [hash_sha512](functions/hash_sha512.md): Computes a SHA-512 hash digest.
+- [hash_xxh3](functions/hash_xxh3.md): Computes an XXH3 hash digest.
 
 ## IP
 
-- [ip_category](functions/ip_category.md)
-- [is_global](functions/is_global.md)
-- [is_link_local](functions/is_link_local.md)
-- [is_loopback](functions/is_loopback.md)
-- [is_multicast](functions/is_multicast.md)
-- [is_private](functions/is_private.md)
-- [is_v4](functions/is_v4.md)
-- [is_v6](functions/is_v6.md)
-- [network](functions/network.md)
+- [ip_category](functions/ip_category.md): Returns the type classification of an IP address.
+- [is_global](functions/is_global.md): Checks whether an IP address is a global address.
+- [is_link_local](functions/is_link_local.md): Checks whether an IP address is a link-local address.
+- [is_loopback](functions/is_loopback.md): Checks whether an IP address is a loopback address.
+- [is_multicast](functions/is_multicast.md): Checks whether an IP address is a multicast address.
+- [is_private](functions/is_private.md): Checks whether an IP address is a private address.
+- [is_v4](functions/is_v4.md): Checks whether an IP address has version number 4.
+- [is_v6](functions/is_v6.md): Checks whether an IP address has version number 6.
+- [network](functions/network.md): Retrieves the network address of a subnet.
 
 ## List
 
-- [add](functions/add.md)
-- [append](functions/append.md)
-- [concatenate](functions/concatenate.md)
-- [get](functions/get.md)
-- [length](functions/length.md)
-- [map](functions/map.md)
-- [prepend](functions/prepend.md)
-- [remove](functions/remove.md)
-- [sort](functions/sort.md)
-- [where](functions/where.md)
-- [zip](functions/zip.md)
+- [add](functions/add.md): Adds an element into a list if it doesn’t already exist (set-insertion).
+- [append](functions/append.md): Inserts an element at the back of a list.
+- [concatenate](functions/concatenate.md): Merges two lists.
+- [get](functions/get.md): Gets a field from a record or an element from a list
+- [length](functions/length.md): Retrieves the length of a list.
+- [map](functions/map.md): Maps each list element to an expression.
+- [prepend](functions/prepend.md): Inserts an element at the start of a list.
+- [remove](functions/remove.md): Removes all occurrences of an element from a list.
+- [sort](functions/sort.md): Sorts lists and record fields.
+- [where](functions/where.md): Filters list elements based on a predicate.
+- [zip](functions/zip.md): Combines two lists into a list of pairs.
 
 ## Math
 
-- [abs](functions/abs.md)
-- [ceil](functions/ceil.md)
-- [floor](functions/floor.md)
-- [round](functions/round.md)
-- [sqrt](functions/sqrt.md)
+- [abs](functions/abs.md): Returns the absolute value.
+- [ceil](functions/ceil.md): Computes the ceiling of a number or a time/duration with a specified unit.
+- [floor](functions/floor.md): Computes the floor of a number or a time/duration with a specified unit.
+- [round](functions/round.md): Rounds a number or a time/duration with a specified unit.
+- [sqrt](functions/sqrt.md): Computes the square root of a number.
 
 ## Networking
 
-- [community_id](functions/community_id.md)
-- [decapsulate](functions/decapsulate.md)
-- [encrypt_cryptopan](functions/encrypt_cryptopan.md)
+- [community_id](functions/community_id.md): Computes the Community ID for a network connection/flow.
+- [decapsulate](functions/decapsulate.md): Decapsulates packet data at link, network, and transport layer.
+- [encrypt_cryptopan](functions/encrypt_cryptopan.md): Encrypts an IP address via Crypto-PAn.
 
 ## OCSF
 
-- [ocsf::category_name](functions/ocsf/category_name.md)
-- [ocsf::category_uid](functions/ocsf/category_uid.md)
-- [ocsf::class_name](functions/ocsf/class_name.md)
-- [ocsf::class_uid](functions/ocsf/class_uid.md)
-- [ocsf::type_name](functions/ocsf/type_name.md)
-- [ocsf::type_uid](functions/ocsf/type_uid.md)
+- [ocsf::category_name](functions/ocsf/category_name.md): Returns the `category_name` for a given `category_uid`.
+- [ocsf::category_uid](functions/ocsf/category_uid.md): Returns the `category_uid` for a given `category_name`.
+- [ocsf::class_name](functions/ocsf/class_name.md): Returns the `class_name` for a given `class_uid`.
+- [ocsf::class_uid](functions/ocsf/class_uid.md): Returns the `class_uid` for a given `class_name`.
+- [ocsf::type_name](functions/ocsf/type_name.md): Returns the `type_name` for a given `type_uid`.
+- [ocsf::type_uid](functions/ocsf/type_uid.md): Returns the `type_uid` for a given `type_name`.
 
 ## Parsing
 
-- [parse_cef](functions/parse_cef.md)
-- [parse_csv](functions/parse_csv.md)
-- [parse_grok](functions/parse_grok.md)
-- [parse_json](functions/parse_json.md)
-- [parse_kv](functions/parse_kv.md)
-- [parse_leef](functions/parse_leef.md)
-- [parse_ssv](functions/parse_ssv.md)
-- [parse_syslog](functions/parse_syslog.md)
-- [parse_tsv](functions/parse_tsv.md)
-- [parse_winlog](functions/parse_winlog.md)
-- [parse_xml](functions/parse_xml.md)
-- [parse_xsv](functions/parse_xsv.md)
-- [parse_yaml](functions/parse_yaml.md)
+- [parse_cef](functions/parse_cef.md): Parses a string as a CEF message
+- [parse_csv](functions/parse_csv.md): Parses a string as CSV (Comma-Separated Values).
+- [parse_grok](functions/parse_grok.md): Parses a string according to a grok pattern.
+- [parse_json](functions/parse_json.md): Parses a string as a JSON value.
+- [parse_kv](functions/parse_kv.md): Parses a string as key-value pairs.
+- [parse_leef](functions/parse_leef.md): Parses a string as a LEEF message
+- [parse_ssv](functions/parse_ssv.md): Parses a string as space separated values.
+- [parse_syslog](functions/parse_syslog.md): Parses a string as a Syslog message.
+- [parse_tsv](functions/parse_tsv.md): Parses a string as tab separated values.
+- [parse_winlog](functions/parse_winlog.md): Parses a string as a Windows Event Log XML record.
+- [parse_xml](functions/parse_xml.md): Parses a string as XML and extracts elements matching an XPath expression.
+- [parse_xsv](functions/parse_xsv.md): Parses a string as delimiter separated values.
+- [parse_yaml](functions/parse_yaml.md): Parses a string as a YAML value.
 
 ## Printing
 
-- [print_cef](functions/print_cef.md)
-- [print_csv](functions/print_csv.md)
-- [print_json](functions/print_json.md)
-- [print_kv](functions/print_kv.md)
-- [print_leef](functions/print_leef.md)
-- [print_ndjson](functions/print_ndjson.md)
-- [print_ssv](functions/print_ssv.md)
-- [print_tsv](functions/print_tsv.md)
-- [print_xsv](functions/print_xsv.md)
-- [print_yaml](functions/print_yaml.md)
+- [print_cef](functions/print_cef.md): Prints records as Common Event Format (CEF) messages
+- [print_csv](functions/print_csv.md): Prints a record as a comma-separated string of values.
+- [print_json](functions/print_json.md): Transforms a value into a JSON string.
+- [print_kv](functions/print_kv.md): Prints records in a key-value format.
+- [print_leef](functions/print_leef.md): Prints records as LEEF messages
+- [print_ndjson](functions/print_ndjson.md): Transforms a value into a single-line JSON string.
+- [print_ssv](functions/print_ssv.md): Prints a record as a space-separated string of values.
+- [print_tsv](functions/print_tsv.md): Prints a record as a tab-separated string of values.
+- [print_xsv](functions/print_xsv.md): Prints a record as a delimited sequence of values.
+- [print_yaml](functions/print_yaml.md): Prints a value as a YAML document.
 
 ## Record
 
-- [get](functions/get.md)
-- [has](functions/has.md)
-- [keys](functions/keys.md)
-- [merge](functions/merge.md)
-- [sort](functions/sort.md)
+- [get](functions/get.md): Gets a field from a record or an element from a list
+- [has](functions/has.md): Checks whether a record has a specified field.
+- [keys](functions/keys.md): Retrieves a list of field names from a record.
+- [merge](functions/merge.md): Combines two records into a single record by merging their fields.
+- [sort](functions/sort.md): Sorts lists and record fields.
 
 ## Runtime
 
-- [config](functions/config.md)
-- [env](functions/env.md)
-- [secret](functions/secret.md)
+- [config](functions/config.md): Reads Tenzir’s configuration file.
+- [env](functions/env.md): Reads an environment variable.
+- [secret](functions/secret.md): Use the value of a secret.
 
 ## Subnet
 
-- [network](functions/network.md)
+- [network](functions/network.md): Retrieves the network address of a subnet.
 
 ## Time & Date
 
-- [count_days](functions/count_days.md)
-- [count_hours](functions/count_hours.md)
-- [count_microseconds](functions/count_microseconds.md)
-- [count_milliseconds](functions/count_milliseconds.md)
-- [count_minutes](functions/count_minutes.md)
-- [count_months](functions/count_months.md)
-- [count_nanoseconds](functions/count_nanoseconds.md)
-- [count_seconds](functions/count_seconds.md)
-- [count_weeks](functions/count_weeks.md)
-- [count_years](functions/count_years.md)
-- [day](functions/day.md)
-- [days](functions/days.md)
-- [format_time](functions/format_time.md)
-- [from_epoch](functions/from_epoch.md)
-- [hour](functions/hour.md)
-- [hours](functions/hours.md)
-- [microseconds](functions/microseconds.md)
-- [milliseconds](functions/milliseconds.md)
-- [minute](functions/minute.md)
-- [minutes](functions/minutes.md)
-- [month](functions/month.md)
-- [months](functions/months.md)
-- [nanoseconds](functions/nanoseconds.md)
-- [now](functions/now.md)
-- [parse_time](functions/parse_time.md)
-- [second](functions/second.md)
-- [seconds](functions/seconds.md)
-- [since_epoch](functions/since_epoch.md)
-- [weeks](functions/weeks.md)
-- [year](functions/year.md)
-- [years](functions/years.md)
+- [count_days](functions/count_days.md): Counts the number of `days` in a duration.
+- [count_hours](functions/count_hours.md): Counts the number of `hours` in a duration.
+- [count_microseconds](functions/count_microseconds.md): Counts the number of `microseconds` in a duration.
+- [count_milliseconds](functions/count_milliseconds.md): Counts the number of `milliseconds` in a duration.
+- [count_minutes](functions/count_minutes.md): Counts the number of `minutes` in a duration.
+- [count_months](functions/count_months.md): Counts the number of `months` in a duration.
+- [count_nanoseconds](functions/count_nanoseconds.md): Counts the number of `nanoseconds` in a duration.
+- [count_seconds](functions/count_seconds.md): Counts the number of `seconds` in a duration.
+- [count_weeks](functions/count_weeks.md): Counts the number of `weeks` in a duration.
+- [count_years](functions/count_years.md): Counts the number of `years` in a duration.
+- [day](functions/day.md): Extracts the day component from a timestamp.
+- [days](functions/days.md): Converts a number to equivalent days.
+- [format_time](functions/format_time.md): Formats a time into a string that follows a specific format.
+- [from_epoch](functions/from_epoch.md): Interprets a duration as Unix time.
+- [hour](functions/hour.md): Extracts the hour component from a timestamp.
+- [hours](functions/hours.md): Converts a number to equivalent hours.
+- [microseconds](functions/microseconds.md): Converts a number to equivalent microseconds.
+- [milliseconds](functions/milliseconds.md): Converts a number to equivalent milliseconds.
+- [minute](functions/minute.md): Extracts the minute component from a timestamp.
+- [minutes](functions/minutes.md): Converts a number to equivalent minutes.
+- [month](functions/month.md): Extracts the month component from a timestamp.
+- [months](functions/months.md): Converts a number to equivalent months.
+- [nanoseconds](functions/nanoseconds.md): Converts a number to equivalent nanoseconds.
+- [now](functions/now.md): Gets the current wallclock time.
+- [parse_time](functions/parse_time.md): Parses a time from a string that follows a specific format.
+- [second](functions/second.md): Extracts the second component from a timestamp with subsecond precision.
+- [seconds](functions/seconds.md): Converts a number to equivalent seconds.
+- [since_epoch](functions/since_epoch.md): Interprets a time value as duration since the Unix epoch.
+- [weeks](functions/weeks.md): Converts a number to equivalent weeks.
+- [year](functions/year.md): Extracts the year component from a timestamp.
+- [years](functions/years.md): Converts a number to equivalent years.
 
 ## Utility
 
-- [contains](functions/contains.md)
-- [contains_null](functions/contains_null.md)
-- [is_empty](functions/is_empty.md)
-- [random](functions/random.md)
-- [uuid](functions/uuid.md)
+- [contains](functions/contains.md): Searches for a value within data structures recursively.
+- [contains_null](functions/contains_null.md): Checks whether the input contains any `null` values.
+- [is_empty](functions/is_empty.md): Checks whether a value is empty.
+- [random](functions/random.md): Generates a random number in *\[0,1]*.
+- [uuid](functions/uuid.md): Generates a Universally Unique Identifier (UUID) string.
 
 ## String
 
-- [file_contents](functions/file_contents.md)
-- [file_name](functions/file_name.md)
-- [parent_dir](functions/parent_dir.md)
-- [ends_with](functions/ends_with.md)
-- [is_alnum](functions/is_alnum.md)
-- [is_alpha](functions/is_alpha.md)
-- [is_lower](functions/is_lower.md)
-- [is_numeric](functions/is_numeric.md)
-- [is_printable](functions/is_printable.md)
-- [is_title](functions/is_title.md)
-- [is_upper](functions/is_upper.md)
-- [length_bytes](functions/length_bytes.md)
-- [length_chars](functions/length_chars.md)
-- [match_regex](functions/match_regex.md)
-- [slice](functions/slice.md)
-- [starts_with](functions/starts_with.md)
-- [capitalize](functions/capitalize.md)
-- [join](functions/join.md)
-- [pad_end](functions/pad_end.md)
-- [pad_start](functions/pad_start.md)
-- [replace](functions/replace.md)
-- [replace_regex](functions/replace_regex.md)
-- [reverse](functions/reverse.md)
-- [split](functions/split.md)
-- [split_regex](functions/split_regex.md)
-- [to_lower](functions/to_lower.md)
-- [to_title](functions/to_title.md)
-- [to_upper](functions/to_upper.md)
-- [trim](functions/trim.md)
-- [trim_end](functions/trim_end.md)
-- [trim_start](functions/trim_start.md)
+- [file_contents](functions/file_contents.md): Reads a file’s contents.
+- [file_name](functions/file_name.md): Extracts the file name from a file path.
+- [parent_dir](functions/parent_dir.md): Extracts the parent directory from a file path.
+- [ends_with](functions/ends_with.md): Checks if a string ends with a specified substring.
+- [is_alnum](functions/is_alnum.md): Checks if a string is alphanumeric.
+- [is_alpha](functions/is_alpha.md): Checks if a string contains only alphabetic characters.
+- [is_lower](functions/is_lower.md): Checks if a string is in lowercase.
+- [is_numeric](functions/is_numeric.md): Checks if a string contains only numeric characters.
+- [is_printable](functions/is_printable.md): Checks if a string contains only printable characters.
+- [is_title](functions/is_title.md): Checks if a string follows title case.
+- [is_upper](functions/is_upper.md): Checks if a string is in uppercase.
+- [length_bytes](functions/length_bytes.md): Returns the length of a string in bytes.
+- [length_chars](functions/length_chars.md): Returns the length of a string in characters.
+- [match_regex](functions/match_regex.md): Checks if a string partially matches a regular expression.
+- [slice](functions/slice.md): Slices a string or list with offsets and strides.
+- [starts_with](functions/starts_with.md): Checks if a string starts with a specified substring.
+- [capitalize](functions/capitalize.md): Capitalizes the first character of a string.
+- [join](functions/join.md): Joins a list of strings into a single string using a separator.
+- [pad_end](functions/pad_end.md): Pads a string at the end to a specified length.
+- [pad_start](functions/pad_start.md): Pads a string at the start to a specified length.
+- [replace](functions/replace.md): Replaces characters within a string.
+- [replace_regex](functions/replace_regex.md): Replaces characters within a string based on a regular expression.
+- [reverse](functions/reverse.md): Reverses the characters of a string.
+- [split](functions/split.md): Splits a string into substrings.
+- [split_regex](functions/split_regex.md): Splits a string into substrings with a regex.
+- [to_lower](functions/to_lower.md): Converts a string to lowercase.
+- [to_title](functions/to_title.md): Converts a string to title case.
+- [to_upper](functions/to_upper.md): Converts a string to uppercase.
+- [trim](functions/trim.md): Trims whitespace or specified characters from both ends of a string.
+- [trim_end](functions/trim_end.md): Trims whitespace or specified characters from the end of a string.
+- [trim_start](functions/trim_start.md): Trims whitespace or specified characters from the start of a string.
 
 ## Type System
 
-- [duration](functions/duration.md)
-- [float](functions/float.md)
-- [int](functions/int.md)
-- [ip](functions/ip.md)
-- [string](functions/string.md)
-- [subnet](functions/subnet.md)
-- [time](functions/time.md)
-- [uint](functions/uint.md)
-- [type_id](functions/type_id.md)
-- [type_of](functions/type_of.md)
-- [flatten](functions/flatten.md)
-- [unflatten](functions/unflatten.md)
+- [duration](functions/duration.md): Casts an expression to a duration value.
+- [float](functions/float.md): Casts an expression to a float.
+- [int](functions/int.md): Casts an expression to an integer.
+- [ip](functions/ip.md): Casts an expression to an IP address.
+- [string](functions/string.md): Casts an expression to a string.
+- [subnet](functions/subnet.md): Casts an expression to a subnet value.
+- [time](functions/time.md): Casts an expression to a time value.
+- [uint](functions/uint.md): Casts an expression to an unsigned integer.
+- [type_id](functions/type_id.md): Retrieves the type id of an expression.
+- [type_of](functions/type_of.md): Retrieves the type definition of an expression.
+- [flatten](functions/flatten.md): Flattens nested data.
+- [unflatten](functions/unflatten.md): Unflattens nested data.
 
 ## Additional Pages
 
-- [Expressions](expressions.md)
-- [hmac](functions/hmac.md)
-- [Node Configuration](node/configuration.md)
-- [Operators](operators.md)
-- [api](operators/api.md)
-- [assert](operators/assert.md)
-- [assert_throughput](operators/assert_throughput.md)
-- [batch](operators/batch.md)
-- [buffer](operators/buffer.md)
-- [cache](operators/cache.md)
-- [chart_area](operators/chart_area.md)
-- [chart_bar](operators/chart_bar.md)
-- [chart_line](operators/chart_line.md)
-- [chart_pie](operators/chart_pie.md)
-- [compress](operators/compress.md)
-- [compress_brotli](operators/compress_brotli.md)
-- [compress_bz2](operators/compress_bz2.md)
-- [compress_gzip](operators/compress_gzip.md)
-- [compress_lz4](operators/compress_lz4.md)
-- [compress_zstd](operators/compress_zstd.md)
-- [context::create_bloom_filter](operators/context/create_bloom_filter.md)
-- [context::create_geoip](operators/context/create_geoip.md)
-- [context::create_lookup_table](operators/context/create_lookup_table.md)
-- [context::enrich](operators/context/enrich.md)
-- [context::erase](operators/context/erase.md)
-- [context::inspect](operators/context/inspect.md)
-- [context::list](operators/context/list.md)
-- [context::load](operators/context/load.md)
-- [context::remove](operators/context/remove.md)
-- [context::reset](operators/context/reset.md)
-- [context::save](operators/context/save.md)
-- [context::update](operators/context/update.md)
-- [cron](operators/cron.md)
-- [decompress](operators/decompress.md)
-- [decompress_brotli](operators/decompress_brotli.md)
-- [decompress_bz2](operators/decompress_bz2.md)
-- [decompress_gzip](operators/decompress_gzip.md)
-- [decompress_lz4](operators/decompress_lz4.md)
-- [decompress_zstd](operators/decompress_zstd.md)
-- [deduplicate](operators/deduplicate.md)
-- [delay](operators/delay.md)
-- [diagnostics](operators/diagnostics.md)
-- [discard](operators/discard.md)
-- [dns_lookup](operators/dns_lookup.md)
-- [drop](operators/drop.md)
-- [drop_null_fields](operators/drop_null_fields.md)
-- [enumerate](operators/enumerate.md)
-- [every](operators/every.md)
-- [export](operators/export.md)
-- [fields](operators/fields.md)
-- [files](operators/files.md)
-- [fork](operators/fork.md)
-- [from](operators/from.md)
-- [from_azure_blob_storage](operators/from_azure_blob_storage.md)
-- [from_file](operators/from_file.md)
-- [from_fluent_bit](operators/from_fluent_bit.md)
-- [from_gcs](operators/from_gcs.md)
-- [from_google_cloud_pubsub](operators/from_google_cloud_pubsub.md)
-- [from_http](operators/from_http.md)
-- [from_kafka](operators/from_kafka.md)
-- [from_opensearch](operators/from_opensearch.md)
-- [from_s3](operators/from_s3.md)
-- [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md)
-- [from_udp](operators/from_udp.md)
-- [from_velociraptor](operators/from_velociraptor.md)
-- [head](operators/head.md)
-- [http](operators/http.md)
-- [import](operators/import.md)
-- [load_amqp](operators/load_amqp.md)
-- [load_azure_blob_storage](operators/load_azure_blob_storage.md)
-- [load_balance](operators/load_balance.md)
-- [load_file](operators/load_file.md)
-- [load_ftp](operators/load_ftp.md)
-- [load_gcs](operators/load_gcs.md)
-- [load_google_cloud_pubsub](operators/load_google_cloud_pubsub.md)
-- [load_http](operators/load_http.md)
-- [load_kafka](operators/load_kafka.md)
-- [load_nic](operators/load_nic.md)
-- [load_s3](operators/load_s3.md)
-- [load_sqs](operators/load_sqs.md)
-- [load_stdin](operators/load_stdin.md)
-- [load_tcp](operators/load_tcp.md)
-- [load_udp](operators/load_udp.md)
-- [load_zmq](operators/load_zmq.md)
-- [local](operators/local.md)
-- [measure](operators/measure.md)
-- [metrics](operators/metrics.md)
-- [move](operators/move.md)
-- [nics](operators/nics.md)
-- [ocsf::apply](operators/ocsf/apply.md)
-- [ocsf::cast](operators/ocsf/cast.md)
-- [ocsf::derive](operators/ocsf/derive.md)
-- [ocsf::trim](operators/ocsf/trim.md)
-- [openapi](operators/openapi.md)
-- [package::add](operators/package/add.md)
-- [package::list](operators/package/list.md)
-- [package::remove](operators/package/remove.md)
-- [parallel](operators/parallel.md)
-- [partitions](operators/partitions.md)
-- [pass](operators/pass.md)
-- [pipeline::activity](operators/pipeline/activity.md)
-- [pipeline::detach](operators/pipeline/detach.md)
-- [pipeline::list](operators/pipeline/list.md)
-- [pipeline::run](operators/pipeline/run.md)
-- [plugins](operators/plugins.md)
-- [processes](operators/processes.md)
-- [publish](operators/publish.md)
-- [python](operators/python.md)
-- [rare](operators/rare.md)
-- [read_all](operators/read_all.md)
-- [read_bitz](operators/read_bitz.md)
-- [read_cef](operators/read_cef.md)
-- [read_csv](operators/read_csv.md)
-- [read_delimited](operators/read_delimited.md)
-- [read_delimited_regex](operators/read_delimited_regex.md)
-- [read_feather](operators/read_feather.md)
-- [read_gelf](operators/read_gelf.md)
-- [read_grok](operators/read_grok.md)
-- [read_json](operators/read_json.md)
-- [read_kv](operators/read_kv.md)
-- [read_leef](operators/read_leef.md)
-- [read_lines](operators/read_lines.md)
-- [read_ndjson](operators/read_ndjson.md)
-- [read_parquet](operators/read_parquet.md)
-- [read_pcap](operators/read_pcap.md)
-- [read_ssv](operators/read_ssv.md)
-- [read_suricata](operators/read_suricata.md)
-- [read_syslog](operators/read_syslog.md)
-- [read_tsv](operators/read_tsv.md)
-- [read_xsv](operators/read_xsv.md)
-- [read_yaml](operators/read_yaml.md)
-- [read_zeek_json](operators/read_zeek_json.md)
-- [read_zeek_tsv](operators/read_zeek_tsv.md)
-- [remote](operators/remote.md)
-- [repeat](operators/repeat.md)
-- [replace](operators/replace.md)
-- [reverse](operators/reverse.md)
-- [sample](operators/sample.md)
-- [save_amqp](operators/save_amqp.md)
-- [save_azure_blob_storage](operators/save_azure_blob_storage.md)
-- [save_email](operators/save_email.md)
-- [save_file](operators/save_file.md)
-- [save_ftp](operators/save_ftp.md)
-- [save_gcs](operators/save_gcs.md)
-- [save_google_cloud_pubsub](operators/save_google_cloud_pubsub.md)
-- [save_http](operators/save_http.md)
-- [save_kafka](operators/save_kafka.md)
-- [save_s3](operators/save_s3.md)
-- [save_sqs](operators/save_sqs.md)
-- [save_stdout](operators/save_stdout.md)
-- [save_tcp](operators/save_tcp.md)
-- [save_udp](operators/save_udp.md)
-- [save_zmq](operators/save_zmq.md)
-- [schemas](operators/schemas.md)
-- [select](operators/select.md)
-- [serve](operators/serve.md)
-- [set](operators/set.md)
-- [shell](operators/shell.md)
-- [sigma](operators/sigma.md)
-- [slice](operators/slice.md)
-- [sockets](operators/sockets.md)
-- [sort](operators/sort.md)
-- [strict](operators/strict.md)
-- [subscribe](operators/subscribe.md)
-- [summarize](operators/summarize.md)
-- [tail](operators/tail.md)
-- [taste](operators/taste.md)
-- [throttle](operators/throttle.md)
-- [timeshift](operators/timeshift.md)
-- [to](operators/to.md)
-- [to_amazon_security_lake](operators/to_amazon_security_lake.md)
-- [to_azure_log_analytics](operators/to_azure_log_analytics.md)
-- [to_clickhouse](operators/to_clickhouse.md)
-- [to_fluent_bit](operators/to_fluent_bit.md)
-- [to_google_cloud_logging](operators/to_google_cloud_logging.md)
-- [to_google_cloud_pubsub](operators/to_google_cloud_pubsub.md)
-- [to_google_secops](operators/to_google_secops.md)
-- [to_hive](operators/to_hive.md)
-- [to_kafka](operators/to_kafka.md)
-- [to_opensearch](operators/to_opensearch.md)
-- [to_sentinelone_data_lake](operators/to_sentinelone_data_lake.md)
-- [to_snowflake](operators/to_snowflake.md)
-- [to_splunk](operators/to_splunk.md)
-- [top](operators/top.md)
-- [unordered](operators/unordered.md)
-- [unroll](operators/unroll.md)
-- [version](operators/version.md)
-- [where](operators/where.md)
-- [write_bitz](operators/write_bitz.md)
-- [write_csv](operators/write_csv.md)
-- [write_feather](operators/write_feather.md)
-- [write_json](operators/write_json.md)
-- [write_kv](operators/write_kv.md)
-- [write_lines](operators/write_lines.md)
-- [write_ndjson](operators/write_ndjson.md)
-- [write_parquet](operators/write_parquet.md)
-- [write_pcap](operators/write_pcap.md)
-- [write_ssv](operators/write_ssv.md)
-- [write_syslog](operators/write_syslog.md)
-- [write_tql](operators/write_tql.md)
-- [write_tsv](operators/write_tsv.md)
-- [write_xsv](operators/write_xsv.md)
-- [write_yaml](operators/write_yaml.md)
-- [write_zeek_tsv](operators/write_zeek_tsv.md)
-- [yara](operators/yara.md)
-- [Platform command line interface](platform/command-line-interface.md)
-- [Platform Configuration](platform/configuration.md)
-- [Programs](programs.md)
-- [Ship Framework](ship-framework.md)
-- [Statements](statements.md)
-- [Test Framework](test-framework.md)
-- [Type System](types.md)
-- [Create an OCSF mapping](workflows/create-ocsf-mapping.md)
-- [Create a parser package](workflows/create-parser-package.md)
+- [hmac](functions/hmac.md): Computes an HMAC (Hash-based Message Authentication Code).

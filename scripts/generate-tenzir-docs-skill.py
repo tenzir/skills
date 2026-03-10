@@ -328,6 +328,34 @@ def _extract_page_title(markdown: str) -> str:
     return ""
 
 
+def _extract_page_description(markdown: str) -> str:
+    """Extract the short description line from a reference page.
+
+    Reference pages follow a consistent structure where the first non-empty
+    line after the ``# title`` heading is a one-line description, before the
+    code block with the syntax signature.  Blockquotes (``>``) and admonition
+    markers are skipped.
+    """
+    in_heading = False
+    for line in markdown.splitlines():
+        if line.startswith("# "):
+            in_heading = True
+            continue
+        if in_heading:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            # Skip blockquotes (e.g., ``> Documentation index: …``).
+            if stripped.startswith(">"):
+                continue
+            # Stop at code fences — the description always precedes the
+            # syntax block.
+            if stripped.startswith("```"):
+                break
+            return stripped
+    return ""
+
+
 def create_navigation_node() -> Node:
     """Create the navigation routing section for SKILL.md."""
     return Node(
@@ -409,17 +437,25 @@ def generate_extracted_index(
             source_path = to_source_markdown_path(href)
             if source_path:
                 indexed_paths.add(source_path)
-            cat_links.append(f"- [{unescape_markdown_text(label)}]({rewritten})")
+            entry = f"[{unescape_markdown_text(label)}]({rewritten})"
+            if source_path:
+                desc = _extract_page_description(
+                    (input_dir / source_path).read_text(encoding="utf-8")
+                )
+                if desc:
+                    entry = f"{entry}: {desc}"
+            cat_links.append(f"- {entry}")
         if cat_links:
             lines.extend([f"## {cat_name}", "", *cat_links, ""])
 
     # Find additional pages not covered by the categorized index.
-    parent_dir = posixpath.dirname(source_relative_path)
+    # Scope to the directory that corresponds to the source index page
+    # (e.g., ``reference/operators/`` for ``reference/operators.md``).
+    index_dir = source_relative_path.removesuffix(".md")
     additional = sorted(
         sp
         for sp in available_source_paths
-        if sp.startswith(f"{parent_dir}/")
-        and sp != source_relative_path
+        if sp.startswith(f"{index_dir}/")
         and sp not in indexed_paths
     )
     if additional:
@@ -428,7 +464,11 @@ def generate_extracted_index(
             ap_md = (input_dir / ap).read_text(encoding="utf-8")
             ap_title = _extract_page_title(ap_md) or Path(ap).stem.replace("-", " ").title()
             rel = posixpath.relpath(ap, posixpath.dirname(output_relative_path))
-            add_links.append(f"- [{ap_title}]({rel})")
+            desc = _extract_page_description(ap_md)
+            entry = f"[{ap_title}]({rel})"
+            if desc:
+                entry = f"{entry}: {desc}"
+            add_links.append(f"- {entry}")
         if add_links:
             lines.extend(["## Additional Pages", "", *add_links, ""])
 
