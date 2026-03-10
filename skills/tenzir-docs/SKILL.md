@@ -1046,6 +1046,10 @@ This workflow guides you through creating an OCSF mapping for a parser package. 
 - [flatten](reference/functions/flatten.md)
 - [unflatten](reference/functions/unflatten.md)
 
+##### Additional Pages
+
+- [hmac](reference/functions/hmac.md)
+
 #### Claude Marketplace Index
 
 - [Brand](reference/claude-plugins/brand.md)

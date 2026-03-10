@@ -303,13 +303,14 @@ def build_compact_index_node(
     index_level: int,
     category_level: int,
     available_source_paths: set[str],
-) -> Node | None:
+) -> tuple[Node | None, set[str]]:
     page_root = parse_heading_tree(page_markdown)
     title_node = next((child for child in page_root.children if child.level == 1), None)
     if title_node is None:
-        return None
+        return None, set()
 
     category_nodes: list[Node] = []
+    linked_source_paths: set[str] = set()
     for category in title_node.children:
         category_name = extract_heading_text(category.heading or "")
         if not category_name:
@@ -324,6 +325,9 @@ def build_compact_index_node(
                 or rewrite_link_destination(href, "SKILL.md", available_source_paths) is None
             ):
                 continue
+            source_path = to_source_markdown_path(href)
+            if source_path is not None:
+                linked_source_paths.add(source_path)
             label = unescape_markdown_text(label)
             links.append(f"[{label}]({href})")
         if not links:
@@ -338,12 +342,15 @@ def build_compact_index_node(
         )
 
     if not category_nodes:
-        return None
+        return None, linked_source_paths
 
-    return Node(
-        heading=f"{'#' * index_level} {index_heading}",
-        level=index_level,
-        children=category_nodes,
+    return (
+        Node(
+            heading=f"{'#' * index_level} {index_heading}",
+            level=index_level,
+            children=category_nodes,
+        ),
+        linked_source_paths,
     )
 
 
@@ -355,18 +362,22 @@ def build_reference_index_nodes(
     index_nodes: list[Node] = []
     index_level = min(6, reference_level + 2)
     category_level = min(6, index_level + 1)
+    compact_index_nodes_by_parent: dict[str, Node] = {}
+    compact_index_paths_by_parent: dict[str, set[str]] = {}
     for relative_path, index_heading in REFERENCE_INDEX_PAGES:
         source_file = input_dir / relative_path
         if not source_file.is_file():
             continue
-        node = build_compact_index_node(
+        node, indexed_paths = build_compact_index_node(
             source_file.read_text(encoding="utf-8"),
             index_heading=index_heading,
             index_level=index_level,
             category_level=category_level,
             available_source_paths=available_source_paths,
         )
+        compact_index_paths_by_parent[relative_path] = indexed_paths
         if node is not None:
+            compact_index_nodes_by_parent[relative_path] = node
             index_nodes.append(node)
 
     flat_index_level = min(6, reference_level + 2)
@@ -376,9 +387,7 @@ def build_reference_index_nodes(
             continue
         parent_dir = posixpath.dirname(source_path)
         parent_path = f"{posixpath.dirname(source_path)}.md"
-        if parent_path in SPECIAL_REFERENCE_INDEX_PAGES:
-            continue
-        if parent_path in available_source_paths:
+        if parent_path in available_source_paths or parent_path in SPECIAL_REFERENCE_INDEX_PAGES:
             group_key = parent_path
         elif parent_dir in SYNTHETIC_REFERENCE_INDEX_DIRS:
             group_key = parent_dir
@@ -387,6 +396,13 @@ def build_reference_index_nodes(
         flat_child_paths_by_parent.setdefault(group_key, []).append(source_path)
 
     for parent_key, child_paths in sorted(flat_child_paths_by_parent.items()):
+        indexed_paths = compact_index_paths_by_parent.get(parent_key, set())
+        remaining_child_paths = [
+            child_path for child_path in child_paths if child_path not in indexed_paths
+        ]
+        if not remaining_child_paths:
+            continue
+
         parent_title = ""
         parent_markdown_path = f"{parent_key}.md" if not parent_key.endswith(".md") else parent_key
         if parent_markdown_path in available_source_paths:
@@ -404,7 +420,7 @@ def build_reference_index_nodes(
             parent_title = Path(parent_key).name.replace("-", " ").title()
 
         links: list[str] = []
-        for child_path in child_paths:
+        for child_path in remaining_child_paths:
             child_markdown = (input_dir / child_path).read_text(encoding="utf-8")
             child_heading_nodes = parse_heading_tree(child_markdown).children
             child_title = next(
@@ -420,6 +436,16 @@ def build_reference_index_nodes(
             links.append(f"[{child_title}]({child_path})")
 
         if not links:
+            continue
+        if parent_key in compact_index_nodes_by_parent:
+            compact_index_nodes_by_parent[parent_key].children.append(
+                Node(
+                    heading=f"{'#' * category_level} Additional Pages",
+                    level=category_level,
+                    content_lines=[f"- {link}" for link in links],
+                    preserve_bullets=True,
+                )
+            )
             continue
         index_nodes.append(
             Node(

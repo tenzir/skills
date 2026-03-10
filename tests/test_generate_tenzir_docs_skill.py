@@ -319,6 +319,56 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
                 skill_markdown,
             )
 
+    def test_generation_keeps_unindexed_special_reference_children(self) -> None:
+        with tempfile.TemporaryDirectory() as input_dir_str:
+            input_dir = Path(input_dir_str)
+
+            self._write(
+                input_dir / "sitemap.md",
+                "\n".join(
+                    [
+                        "# [Tenzir Documentation Map](https://docs.tenzir.com/sitemap.md)",
+                        "",
+                        "## [Reference](https://docs.tenzir.com/reference.md)",
+                        "",
+                        "### Language (TQL)",
+                        "",
+                        "#### [Functions](https://docs.tenzir.com/reference/functions.md)",
+                        "",
+                        "##### [count](https://docs.tenzir.com/reference/functions/count.md)",
+                        "",
+                    ]
+                ),
+            )
+            self._write(
+                input_dir / "reference/functions.md",
+                "\n".join(
+                    [
+                        "# Functions",
+                        "",
+                        "## Aggregation",
+                        "",
+                        "### [count](https://docs.tenzir.com/reference/functions/count.md)",
+                        "",
+                        "Counts events.",
+                        "",
+                    ]
+                ),
+            )
+            self._write(input_dir / "reference/functions/count.md", "# count\n")
+            self._write(input_dir / "reference/functions/hmac.md", "# hmac\n")
+
+            sitemap_root = MODULE.parse_heading_tree(
+                (input_dir / "sitemap.md").read_text(encoding="utf-8")
+            )
+            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
+
+            self.assertIn("#### Function Index", skill_markdown)
+            self.assertIn("##### Aggregation", skill_markdown)
+            self.assertIn("- [count](reference/functions/count.md)", skill_markdown)
+            self.assertIn("##### Additional Pages", skill_markdown)
+            self.assertIn("- [hmac](reference/functions/hmac.md)", skill_markdown)
+
     @staticmethod
     def _write(path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
