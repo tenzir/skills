@@ -7,6 +7,7 @@ on:
       - ".github/workflows/**"
       - "scripts/**"
       - "skills/**"
+      - ".claude-plugin/**"
   push:
     branches:
       - main
@@ -15,6 +16,7 @@ on:
       - ".github/workflows/**"
       - "scripts/**"
       - "skills/**"
+      - ".claude-plugin/**"
   workflow_dispatch:
 
 jobs:
@@ -57,3 +59,30 @@ jobs:
             echo "Validating ${skill_dir}"
             skills-ref validate "${skill_dir}"
           done
+
+      - name: Validate marketplace.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          
+          local_skills=$(mktemp)
+          marketplace_skills=$(mktemp)
+          
+          find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | sed 's#^#./#' > "$local_skills"
+          jq -r '.plugins[].skills[]' .claude-plugin/marketplace.json | sort > "$marketplace_skills"
+          
+          duplicates=$(uniq -d < "$marketplace_skills")
+          if [[ -n "${duplicates}" ]]; then
+            echo "Error: Found duplicate skills in marketplace.json:"
+            echo "${duplicates}"
+            exit 1
+          fi
+          
+          if ! cmp -s "$local_skills" "$marketplace_skills"; then
+            echo "Error: Mismatch between skills directories and marketplace.json!"
+            echo "Differences (skills/ vs marketplace.json):"
+            diff -u "$local_skills" "$marketplace_skills" || true
+            exit 1
+          fi
+          
+          echo "marketplace.json is valid."
