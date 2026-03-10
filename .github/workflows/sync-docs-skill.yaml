@@ -48,7 +48,11 @@ jobs:
         run: |
           set -euo pipefail
 
-          archive_url="https://github.com/tenzir/docs/releases/download/${{ inputs.docs_tag }}/tenzir-docs.tar.gz"
+          if [[ "${{ inputs.docs_tag }}" == "latest" ]]; then
+            archive_url="https://github.com/tenzir/docs/releases/latest/download/tenzir-docs.tar.gz"
+          else
+            archive_url="https://github.com/tenzir/docs/releases/download/${{ inputs.docs_tag }}/tenzir-docs.tar.gz"
+          fi
           curl -L --fail --retry 3 --retry-all-errors -o /tmp/tenzir-docs.tar.gz "$archive_url"
           mkdir -p /tmp/tenzir-docs
           tar -xzf /tmp/tenzir-docs.tar.gz -C /tmp/tenzir-docs
