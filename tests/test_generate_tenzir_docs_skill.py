@@ -412,6 +412,59 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             self.assertIn("## Additional Pages", func_index)
             self.assertIn("- [hmac](functions/hmac.md)", func_index)
 
+    def test_extracted_index_keeps_external_links_without_local_descriptions(self) -> None:
+        with tempfile.TemporaryDirectory() as input_dir_str:
+            input_dir = Path(input_dir_str)
+
+            self._write(
+                input_dir / "reference/operators.md",
+                "\n".join(
+                    [
+                        "# Operators",
+                        "",
+                        "## Query",
+                        "",
+                        "### [api](https://docs.tenzir.com/reference/operators/api.md)",
+                        "",
+                        "Use Tenzir's REST API directly from a pipeline.",
+                        "",
+                        "### [future](https://docs.tenzir.com/reference/operators/future.md)",
+                        "",
+                        "Future operator docs that are not bundled yet.",
+                        "",
+                    ]
+                ),
+            )
+            self._write(
+                input_dir / "reference/operators/api.md",
+                "# api\n\nUse Tenzir's REST API directly from a pipeline.\n",
+            )
+
+            available_source_paths = MODULE.build_available_source_paths(
+                MODULE.collect_markdown_files(input_dir)
+            )
+            operator_index = MODULE.generate_extracted_index(
+                input_dir,
+                "reference/operators.md",
+                "Operator Index",
+                "reference/operators-index.md",
+                available_source_paths,
+            )
+
+            self.assertIsNotNone(operator_index)
+            self.assertIn(
+                "- [api](operators/api.md): Use Tenzir's REST API directly from a pipeline.",
+                operator_index,
+            )
+            self.assertIn(
+                "- [future](https://docs.tenzir.com/reference/operators/future.md)",
+                operator_index,
+            )
+            self.assertNotIn(
+                "future.md): Future operator docs that are not bundled yet.",
+                operator_index,
+            )
+
     @staticmethod
     def _write(path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)

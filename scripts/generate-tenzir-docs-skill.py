@@ -449,10 +449,10 @@ def generate_extracted_index(
             if rewritten is None:
                 continue
             source_path = to_source_markdown_path(href)
-            if source_path:
+            if source_path in available_source_paths:
                 indexed_paths.add(source_path)
             entry = f"[{unescape_markdown_text(label)}]({rewritten})"
-            if source_path:
+            if source_path in available_source_paths:
                 desc = _extract_page_description(
                     (input_dir / source_path).read_text(encoding="utf-8")
                 )
