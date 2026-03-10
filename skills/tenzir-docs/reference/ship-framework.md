@@ -26,7 +26,7 @@ client.add(
     title="API entry",
     entry_type="feature",
     description="Body text",
-    co_authors=["claude"],
+    co_authors=["codex"],
 )
 
 
@@ -677,7 +677,7 @@ When creating a release for a parent project, `release create` automatically app
 
 
 - 🚀 Add commit message templates — *@alice*
-- 🐞 Fix branch detection — *@bob and @claude*
+- 🐞 Fix branch detection — *@bob and @codex*
 
 
 ## Docs Plugin v1.2.0

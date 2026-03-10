@@ -453,4 +453,4 @@ Now that you have a package, what’s next?
 
 AI-based package creation
 
-It’s quite a bit of work to manually create a package. In the age of AI and modern agentic tooling, you have powertools available to fully automate this task. Stay tuned for updates on our [MCP Server](../reference/mcp-server.md), as we have plans to make package creation a 100% hands-off-keyboard activity.
+It’s quite a bit of work to manually create a package. In the age of AI and modern agentic tooling, you have powertools available to fully automate this task.

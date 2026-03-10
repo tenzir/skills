@@ -859,5 +859,3 @@ uvx tenzir-test --update
 ## Contents
 
 - [Ship Framework](ship-framework.md)
-- [MCP Server](mcp-server.md)
-- [Claude Marketplace](claude-plugins.md)

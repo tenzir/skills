@@ -34,7 +34,7 @@ The Tenzir Platform is a web interface for managing pipelines and nodes. Create 
 
 ##### [Run pipelines](guides/basic-usage/run-pipelines.md)
 
-You can run a pipeline via the platform, on the command line using the tenzir binary, or as code via the configuration file.
+You can run a pipeline via the platform, on the command line using the `tenzir` binary, or as code via the configuration file.
 
 ##### [Manage a pipeline](guides/basic-usage/manage-a-pipeline.md)
 
@@ -64,7 +64,7 @@ The default node configuration is optimized for most common scenarios. But you c
 
 ##### [Configure TLS](guides/node-setup/configure-tls.md)
 
-Tenzir supports Transport Layer Security (TLS) for encrypting network connections. You can configure TLS settings centrally in tenzir.yaml so they apply to all compatible operators, or override them per-operator as needed.
+Tenzir supports Transport Layer Security (TLS) for encrypting network connections. You can configure TLS settings centrally in `tenzir.yaml` so they apply to all compatible operators, or override them per-operator as needed.
 
 ##### [Start the API](guides/node-setup/start-the-api.md)
 
@@ -130,23 +130,11 @@ An ephemeral node is ideal for temporary or auto-scaling deployments. It is a te
 
 #### [AI Workbench](guides/ai-workbench.md)
 
-Build your own AI Workbench by bringing an AI agent and configuring it according to the guides in this section. Once set up, use it to write TQL pipelines, understand OCSF schemas, generate parsers, and create data mappings.
+Build your own AI Workbench by bringing an AI agent and configuring it with Tenzir’s agent skills. Once set up, use it to write TQL pipelines, understand OCSF schemas, generate parsers, and create data mappings.
 
-##### [Install MCP server](guides/ai-workbench/install-mcp-server.md)
+##### [Use agent skills](guides/ai-workbench/use-agent-skills.md)
 
-This guide shows you how to install the MCP server, which lets AI agents run Tenzir pipelines through the Model Context Protocol. Choose one of two installation options:
-
-##### [Configure your agent](guides/ai-workbench/configure-your-agent.md)
-
-After installing the MCP server, you can further optimize your AI agent for Tenzir development workflows. This guide covers project-level configuration that enhances the development experience.
-
-##### [Use Claude plugins](guides/ai-workbench/use-claude-plugins.md)
-
-This guide shows you how to install and use the tenzir plugin for Claude Code. The plugin provides documentation for writing TQL pipelines and the tenzir:ocsf subagent for OCSF schema questions.
-
-##### [Use documentation skill](guides/ai-workbench/use-documentation-skill.md)
-
-This guide shows you how to use the Tenzir documentation as an Agent Skill. You’ll learn how to download the skill artifact, understand its structure, and configure it with your AI agent.
+This guide shows you how to install and manage Tenzir’s agent skills. You’ll learn how to add skills globally or per project, install individual skills, and keep them up to date.
 
 ### Work with Data
 
@@ -156,11 +144,11 @@ This guide provides an overview of data collection in TQL. You’ll learn about 
 
 ##### [Read and watch files](guides/collecting/read-and-watch-files.md)
 
-This guide shows you how to read files and monitor directories using the from_file operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
+This guide shows you how to read files and monitor directories using the `from_file` operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
 
 ##### [Fetch via HTTP and APIs](guides/collecting/fetch-via-http-and-apis.md)
 
-This guide shows you how to fetch data from HTTP APIs using the from_http and http operators. You’ll learn to make GET requests, handle authentication, and implement pagination for large result sets.
+This guide shows you how to fetch data from HTTP APIs using the `from_http` and `http` operators. You’ll learn to make GET requests, handle authentication, and implement pagination for large result sets.
 
 ##### [Read from message brokers](guides/collecting/read-from-message-brokers.md)
 
@@ -242,7 +230,7 @@ A lookup table is a specific type of context in Tenzir’s enrichment framework.
 
 ##### [Enrich with network inventory](guides/enrichment/enrich-with-network-inventory.md)
 
-Tenzir’s enrichment framework features lookup tables that you can use to enrich data in your pipelines. Lookup tables have a unique property that makes them attractive for tracking information associated with CIDR subnets: when you use subnet values as keys, you can probe the lookup table with ip values and will get a longest-prefix match.
+Tenzir’s enrichment framework features lookup tables that you can use to enrich data in your pipelines. Lookup tables have a unique property that makes them attractive for tracking information associated with CIDR subnets: when you use `subnet` values as keys, you can probe the lookup table with `ip` values and will get a longest-prefix match.
 
 ##### [Enrich with threat intel](guides/enrichment/enrich-with-threat-intel.md)
 
@@ -250,7 +238,7 @@ Tenzir has a powerful enrichment framework for real-time contextualization. The 
 
 ##### [Execute Sigma rules](guides/enrichment/execute-sigma-rules.md)
 
-Tenzir supports executing Sigma rules using the sigma operator. This allows you to run your Sigma rules in the pipeline. The operator transpiles the provided rules into an expression, and wraps matching events into a sighting record along with the matched rule.
+Tenzir supports executing Sigma rules using the `sigma` operator. This allows you to run your Sigma rules in the pipeline. The operator transpiles the provided rules into an expression, and wraps matching events into a sighting record along with the matched rule.
 
 #### Optimization
 
@@ -260,7 +248,7 @@ When working with data streams, you often need to control which events flow thro
 
 ##### [Deduplicate events](guides/optimization/deduplicate-events.md)
 
-The deduplicate operator provides a powerful mechanism to remove duplicate events in a pipeline.
+The `deduplicate` operator provides a powerful mechanism to remove duplicate events in a pipeline.
 
 #### Routing
 
@@ -270,17 +258,17 @@ This guide shows you how to send data to various destinations using TQL output o
 
 ##### [Split and merge streams](guides/routing/split-and-merge-streams.md)
 
-This guide shows you how to connect pipelines using publish and subscribe operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
+This guide shows you how to connect pipelines using `publish` and `subscribe` operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
 
 ##### [Load-balance pipelines](guides/routing/load-balance-pipelines.md)
 
-This guide shows you how to distribute events across multiple destinations using the load_balance operator. You’ll learn to route events to multiple endpoints for high availability and throughput.
+This guide shows you how to distribute events across multiple destinations using the `load_balance` operator. You’ll learn to route events to multiple endpoints for high availability and throughput.
 
 #### Analytics
 
 ##### [Aggregate and summarize data](guides/analytics/aggregate-and-summarize.md)
 
-Aggregation transforms streams of events into meaningful summaries. Whether you’re calculating statistics, counting occurrences, or finding extremes, the summarize operator combined with aggregation functions provides powerful data analysis capabilities.
+Aggregation transforms streams of events into meaningful summaries. Whether you’re calculating statistics, counting occurrences, or finding extremes, the `summarize` operator combined with aggregation functions provides powerful data analysis capabilities.
 
 ##### [Collect metrics](guides/analytics/collect-metrics.md)
 
@@ -290,11 +278,11 @@ Tenzir keeps track of metrics about node resource usage, pipeline state, and run
 
 ##### [Import into a node](guides/edge-storage/import-into-a-node.md)
 
-Importing (or ingesting) data can be done by running a pipeline that ends with the import output operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the import operator runs within the node.
+Importing (or ingesting) data can be done by running a pipeline that ends with the `import` output operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `import` operator runs within the node.
 
 ##### [Export from a node](guides/edge-storage/export-from-a-node.md)
 
-Exporting (or querying) data can be done by running a pipeline that begins with the export input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the export operator runs within the node.
+Exporting (or querying) data can be done by running a pipeline that begins with the `export` input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `export` operator runs within the node.
 
 ##### [Show available schemas](guides/edge-storage/show-available-schemas.md)
 
@@ -338,7 +326,7 @@ This guide shows you how to make packages configurable with inputs. You’ll lea
 
 ##### [Maintain a changelog](guides/packages/maintain-a-changelog.md)
 
-This guide shows you how to maintain changelogs for packages using tenzir-ship.
+This guide shows you how to maintain changelogs for packages using `tenzir-ship`.
 
 ##### [Publish a package](guides/packages/publish-a-package.md)
 
@@ -348,15 +336,15 @@ This guide shows you how to publish your package. You’ll learn how to contribu
 
 ##### [Run tests](guides/testing/run-tests.md)
 
-This guide shows you how to run existing integration tests with the tenzir-test framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
+This guide shows you how to run existing integration tests with the `tenzir-test` framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
 
 ##### [Write tests](guides/testing/write-tests.md)
 
-This guide shows you how to create integration tests with the tenzir-test framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the run tests guide.
+This guide shows you how to create integration tests with the `tenzir-test` framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the run tests guide.
 
 ##### [Run fixtures](guides/testing/run-fixtures.md)
 
-This guide shows you how to start fixtures in standalone mode without running tests. You’ll learn how to use the --fixture CLI option to bring up managed services, inspect their environment variables, and tear them down cleanly.
+This guide shows you how to start fixtures in standalone mode without running tests. You’ll learn how to use the `--fixture` CLI option to bring up managed services, inspect their environment variables, and tear them down cleanly.
 
 ##### [Create fixtures](guides/testing/create-fixtures.md)
 
@@ -364,7 +352,7 @@ This guide shows you how to create a fixture, wire it into the test harness, and
 
 ##### [Add custom runners](guides/testing/add-custom-runners.md)
 
-Runners tell tenzir-test how to execute a discovered file. This guide shows you how to register the XXD runner from the example project so you can compare binary artifacts by dumping their hexadecimal representation with xxd.
+Runners tell `tenzir-test` how to execute a discovered file. This guide shows you how to register the XXD runner from the example project so you can compare binary artifacts by dumping their hexadecimal representation with `xxd`.
 
 ### Contribute
 
@@ -385,6 +373,10 @@ The source code of the Tenzir documentation is at <https://github.com/tenzir/doc
 Security is a serious matter for us. We want to ensure and maintain a secure environment for our customers and the open-source community.
 
 #### Development
+
+##### [Setup syntax highlighting](guides/development/setup-syntax-highlighting.md)
+
+This guide shows you how to set up TQL syntax highlighting in your editor. You’ll get proper colorization, language detection, and basic language support for `.tql` files.
 
 ##### [Build from source](guides/development/build-from-source.md)
 
@@ -509,19 +501,11 @@ Functions appear in expressions and take positional and/or named arguments, prod
 
 #### [Test Framework](reference/test-framework.md)
 
-The tenzir-test harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for running tests, writing tests, creating fixtures, and adding custom runners.
+The `tenzir-test` harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for running tests, writing tests, creating fixtures, and adding custom runners.
 
 #### [Ship Framework](reference/ship-framework.md)
 
-tenzir-ship helps you ship faster with automated release engineering. Manage changelogs, generate release notes, and publish GitHub releases. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guide for maintaining a changelog.
-
-#### [MCP Server](reference/mcp-server.md)
-
-The Tenzir MCP Server enables AI assistants to interact with Tenzir through the Model Context Protocol (MCP).
-
-#### [Claude Marketplace](reference/claude-plugins.md)
-
-The Tenzir Claude Marketplace provides plugins with specialized knowledge and workflows for Tenzir development. Claude Code supports plugins that extend the agent with custom slash commands, skills, agents, and hooks. Marketplaces bundle Claude plugins for easy distribution.
+`tenzir-ship` helps you ship faster with automated release engineering. Manage changelogs, generate release notes, and publish GitHub releases. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guide for maintaining a changelog.
 
 ### Workflows
 
@@ -1050,14 +1034,6 @@ This workflow guides you through creating an OCSF mapping for a parser package. 
 
 - [hmac](reference/functions/hmac.md)
 
-#### Claude Marketplace Index
-
-- [Brand](reference/claude-plugins/brand.md)
-- [Dev](reference/claude-plugins/dev.md)
-- [Excalidraw](reference/claude-plugins/excalidraw.md)
-- [Python](reference/claude-plugins/python.md)
-- [Tenzir](reference/claude-plugins/tenzir.md)
-
 #### Node Index
 
 - [Node Configuration](reference/node/configuration.md)
@@ -1142,7 +1118,7 @@ The Advanced Message Queuing Protocol (AMQP) is an open standard application lay
 
 #### [Fluent Bit](integrations/fluent-bit.md)
 
-Fluent Bit is a an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its inputs via from_fluent_bit and outputs via to_fluent_bit
+Fluent Bit is a an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its inputs via `from_fluent_bit` and outputs via `to_fluent_bit`
 
 #### [Kafka](integrations/kafka.md)
 
@@ -1156,7 +1132,7 @@ ZeroMQ (0mq) is a light-weight messaging framework with various socket types. Te
 
 #### [Email](integrations/email.md)
 
-Tenzir supports sending events as email using the save_email operator. To this end, the operator establishes a connection with an SMTP server that sends the message on behalf of Tenzir.
+Tenzir supports sending events as email using the `save_email` operator. To this end, the operator establishes a connection with an SMTP server that sends the message on behalf of Tenzir.
 
 #### [File](integrations/file.md)
 

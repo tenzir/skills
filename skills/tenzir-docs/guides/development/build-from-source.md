@@ -188,7 +188,3 @@ Every [release](https://github.com/tenzir/tenzir/releases) includes an [SBOM](ht
 [ Latest SBOM ](https://github.com/tenzir/tenzir/releases/latest/download/tenzir.spdx.json)
 
 [Download the Software Bill of Materials in SPDX format](https://github.com/tenzir/tenzir/releases/latest/download/tenzir.spdx.json)
-
-## Contents
-
-- [Write-a-node-plugin](write-a-node-plugin.md)

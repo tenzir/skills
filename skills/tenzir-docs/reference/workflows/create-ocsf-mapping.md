@@ -43,7 +43,8 @@ Analyze your source events to determine which OCSF event class best represents t
 
 **Resources**:
 
-* OCSF
+* [OCSF schema](https://schema.ocsf.io)
+* [Map to OCSF](../../guides/normalization/map-to-ocsf.md)
 
 ## 3. Write mapping operators
 

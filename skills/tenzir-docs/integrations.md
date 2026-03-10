@@ -7,7 +7,7 @@ Tenzir offers a layered integration architecture, from turn-key packages at the 
 
 [Packages](explanations/packages.md) are 1-click deployable integrations that deliver instant value. They bundle pipelines, [enrichment contexts](explanations/enrichment.md), and configurations for common security tools like Splunk, CrowdStrike, Elastic, SentinelOne, Palo Alto, and many more.
 
-Browse our freely available [package library on GitHub](https://github.com/tenzir/library). You can also use our [MCP server](guides/ai-workbench/install-mcp-server.md) to generate custom packages with AI assistance.
+Browse our freely available [package library on GitHub](https://github.com/tenzir/library).
 
 ## Core Integrations
 
