@@ -15,6 +15,6 @@
 
 [Master the Tenzir Query Language. Understand pipelines and how to shape your data.](explanations/language.md)
 
-[ Join the Community ](/discord)
+[ Join the Community ](https://docs.tenzir.com/discord)
 
-[Chat with security data enthusiasts and the Tenzir team on Discord. We'd love to hear from you!](/discord)
+[Chat with security data enthusiasts and the Tenzir team on Discord. We'd love to hear from you!](https://docs.tenzir.com/discord)

@@ -53,7 +53,7 @@ Contains information about all accessed API endpoints, emitted once per second.
 }
 ```
 
-The schema of the record `params` depends on the API endpoint used. Refer to the [API documentation](/reference/node/api) to see the available parameters per endpoint.
+The schema of the record `params` depends on the API endpoint used. Refer to the [API documentation](https://docs.tenzir.com/reference/node/api) to see the available parameters per endpoint.
 
 ### `tenzir.metrics.caf`
 

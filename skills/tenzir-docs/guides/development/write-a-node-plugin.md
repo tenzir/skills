@@ -178,4 +178,4 @@ If you plan to publish your plugin, you may want to create a GitHub repository. 
 
 Contribute Upstream
 
-If you think your plugin provides key functionality beneficial to all Tenzir users, feel free to [submit a pull request](https://github.com/tenzir/tenzir/pulls) to the main repository. But please consider swinging by our [community chat](/discord) or starting a [GitHub Discussion](https://github.com/tenzir/tenzir/discussions) to ensure that your contribution becomes a fruitful addition. 🙏
+If you think your plugin provides key functionality beneficial to all Tenzir users, feel free to [submit a pull request](https://github.com/tenzir/tenzir/pulls) to the main repository. But please consider swinging by our [community chat](https://docs.tenzir.com/discord) or starting a [GitHub Discussion](https://github.com/tenzir/tenzir/discussions) to ensure that your contribution becomes a fruitful addition. 🙏

@@ -7,11 +7,11 @@ Prefer the command line?
 
 You don’t need an account to run pipelines locally. See [Install Tenzir](../installation.md) to get started with the CLI.
 
-1. Go to [app.tenzir.com](https://app.tenzir.com). ![Landing page](/_astro/signin.D-Kjtq1Z_23m9gG.png)
+1. Go to [app.tenzir.com](https://app.tenzir.com). ![Landing page](https://docs.tenzir.com/_astro/signin.D-Kjtq1Z_23m9gG.png)
 
-2. Log in with your identity provider. This creates an account implicitly. ![IdP](/_astro/signin-choice.CDMmwGmU_2fLRck.png)
+2. Log in with your identity provider. This creates an account implicitly. ![IdP](https://docs.tenzir.com/_astro/signin-choice.CDMmwGmU_2fLRck.png)
 
-3. Can’t use an identity provider? Click **Sign up** below the **Continue** button. We recommend using a [passkey](https://www.passkeys.com/what-are-passkeys.html) as a safer alternative to traditional passwords. ![Create passkey](/_astro/signin-passkey.AZS33VhO_1nDeNo.png)
+3. Can’t use an identity provider? Click **Sign up** below the **Continue** button. We recommend using a [passkey](https://www.passkeys.com/what-are-passkeys.html) as a safer alternative to traditional passwords. ![Create passkey](https://docs.tenzir.com/_astro/signin-passkey.AZS33VhO_1nDeNo.png)
 
 4. If you created an account with us, you’ll receive an email with a link to verify your email address. Click the link to complete the registration process.
 

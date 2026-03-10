@@ -9,7 +9,7 @@ serve id:string, [buffer_size=int]
 
 ## Description
 
-The `serve` operator bridges between pipelines and the corresponding `/serve` [REST API endpoint](/reference/node/api).
+The `serve` operator bridges between pipelines and the corresponding `/serve` [REST API endpoint](https://docs.tenzir.com/reference/node/api).
 
 Pipelines ending with the `serve` operator exit when all events have been delivered over the corresponding endpoint.
 

@@ -99,7 +99,7 @@ Our [tuning guide](../guides/node-setup/tune-performance.md) has further details
 
 We support the platforms that we mention in our [deployment instructions](../guides/node-setup/provision-a-node.md).
 
-For any other platform, the answer is most likely *no*. Please [talk to us](/discord) to let us know what is missing, or dive right in by contributing to our [open source repository](https://github.com/tenzir/tenzir).
+For any other platform, the answer is most likely *no*. Please [talk to us](https://docs.tenzir.com/discord) to let us know what is missing, or dive right in by contributing to our [open source repository](https://github.com/tenzir/tenzir).
 
 ## Do you have an integration for *X*?
 
@@ -109,8 +109,8 @@ Tenzir has multiple layers where integrations can occur. If you cannot find *X* 
 2. **Format**. If your *X* is a wire format, either text-based like JSON or binary like PCAP, then look for [parsing operators](../reference/operators.md#parsing) and [printing operators](../reference/operators.md#printing). Those start with `read_*` and `write_*`, respectively. Similarly, there exist [parsing functions](../reference/functions.md#parsing) and [printing functions](../reference/functions.md#printing) that start with `parse_*` and `print_*`.
 3. **Fluent Bit**. Sometimes we can compensate for the lack of an existing integration by going through one level of indirection. Tenzir ships with all of Fluent Bit’s [inputs](https://docs.fluentbit.io/manual/pipeline/inputs/) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs/), because the Fluent Bit library is baked into every Tenzir binary. Use the [`from_fluent_bit`](../reference/operators/from_fluent_bit.md) operator to get events in via Fluent Bit and the [`to_fluent_bit`](../reference/operators/to_fluent_bit.md) operator to send events via Fluent Bit.
 4. **Escape Hatches**. As last resort, you can bring in Shell and Python scripts to make up for native support for *X*. The [`shell`](../reference/operators/shell.md) operator brings byte streams via standard input and output into a pipeline, and the [`python`](../reference/operators/python.md) operator allows you to perform arbitrary event-to-event transformation using the full power of Python.
-5. **Community**. Still unlucky? Then please let us know in our friendly [Discord server](/discord). Perhaps we are already working on an integration for *X* or it is somewhere on the roadmap. If you’re feeling adventurous and want to contribute to our open source core, let us know beforehand! We’re happy to guide you such that your contribution gets successfully into our code base.
+5. **Community**. Still unlucky? Then please let us know in our friendly [Discord server](https://docs.tenzir.com/discord). Perhaps we are already working on an integration for *X* or it is somewhere on the roadmap. If you’re feeling adventurous and want to contribute to our open source core, let us know beforehand! We’re happy to guide you such that your contribution gets successfully into our code base.
 
 Don’t be shy!
 
-Please do not hesitate to reach out to us if you think something is missing, by [opening a GitHub Discussion](https://github.com/orgs/tenzir/discussions/new/choose) or asking us directly in our [Discord server](/discord). All questions are welcome.
+Please do not hesitate to reach out to us if you think something is missing, by [opening a GitHub Discussion](https://github.com/orgs/tenzir/discussions/new/choose) or asking us directly in our [Discord server](https://docs.tenzir.com/discord). All questions are welcome.

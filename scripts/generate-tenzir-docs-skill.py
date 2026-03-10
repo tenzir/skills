@@ -100,6 +100,14 @@ def get_node_source_path(node: Node) -> str | None:
     return to_source_markdown_path(extract_heading_href(node.heading or ""))
 
 
+def build_available_source_paths(source_paths: list[str]) -> set[str]:
+    return {
+        source_path
+        for source_path in source_paths
+        if source_path != "sitemap.md" and not is_excluded_source_path(source_path)
+    }
+
+
 def is_bullet_line(line: str) -> bool:
     return line.startswith("- ") or line.startswith("  - ")
 
@@ -178,7 +186,22 @@ def filter_node(node: Node, *, max_depth: int) -> Node | None:
     )
 
 
-def rewrite_link_destination(href: str, from_path: str) -> str | None:
+def resolve_local_markdown_path(pathname: str, available_source_paths: set[str]) -> str | None:
+    candidate = pathname.lstrip("/")
+    if candidate in available_source_paths:
+        return candidate
+    if not candidate.endswith(".md"):
+        candidate = f"{candidate}.md"
+        if candidate in available_source_paths:
+            return candidate
+    return None
+
+
+def rewrite_link_destination(
+    href: str,
+    from_path: str,
+    available_source_paths: set[str],
+) -> str | None:
     if not href or href.startswith(("#", "mailto:", "tel:")):
         return href
 
@@ -194,26 +217,28 @@ def rewrite_link_destination(href: str, from_path: str) -> str | None:
     pathname = normalized[:suffix_index]
     suffix = normalized[suffix_index:]
     source_path = pathname[1:]
-    if not source_path.endswith(".md"):
-        return href
-    if is_excluded_source_path(source_path):
+    if source_path.endswith(".md") and is_excluded_source_path(source_path):
         return None
+
+    local_source_path = resolve_local_markdown_path(pathname, available_source_paths)
+    if local_source_path is None:
+        return f"https://docs.tenzir.com{normalized}"
 
     from_dir = posixpath.dirname(from_path)
     if from_dir == ".":
         from_dir = ""
-    relative = posixpath.relpath(source_path, from_dir or ".")
+    relative = posixpath.relpath(local_source_path, from_dir or ".")
     if relative == ".":
-        relative = source_path
+        relative = local_source_path
     return f"{relative}{suffix}"
 
 
-def rewrite_content(text: str, from_path: str) -> str:
+def rewrite_content(text: str, from_path: str, available_source_paths: set[str]) -> str:
     text = re.sub(r"^> Documentation index:.*\n?", "", text, flags=re.MULTILINE)
 
     def replace(match: re.Match[str]) -> str:
         bang, label, href = match.groups()
-        rewritten_href = rewrite_link_destination(href, from_path)
+        rewritten_href = rewrite_link_destination(href, from_path, available_source_paths)
         if rewritten_href is None:
             return f"![{label}]" if bang else label
         return f"{bang}[{label}]({rewritten_href})"
@@ -221,12 +246,18 @@ def rewrite_content(text: str, from_path: str) -> str:
     return LINK_RE.sub(replace, text)
 
 
-def render_node(node: Node, *, level_offset: int = 0, from_path: str = "SKILL.md") -> str:
+def render_node(
+    node: Node,
+    *,
+    level_offset: int = 0,
+    from_path: str = "SKILL.md",
+    available_source_paths: set[str],
+) -> str:
     lines: list[str] = []
 
     if node.heading:
         level = max(1, min(6, node.level + level_offset))
-        heading_text = rewrite_content(node.heading, from_path)
+        heading_text = rewrite_content(node.heading, from_path, available_source_paths)
         heading_text = re.sub(r"^#{1,6}", "#" * level, heading_text)
         lines.extend([heading_text, ""])
 
@@ -235,12 +266,19 @@ def render_node(node: Node, *, level_offset: int = 0, from_path: str = "SKILL.md
         if node.preserve_bullets
         else [line for line in node.content_lines if not is_bullet_line(line)]
     )
-    content_lines = trim_blank_lines([rewrite_content(line, from_path) for line in source_lines])
+    content_lines = trim_blank_lines(
+        [rewrite_content(line, from_path, available_source_paths) for line in source_lines]
+    )
     if content_lines:
         lines.extend([*content_lines, ""])
 
     for child in node.children:
-        rendered = render_node(child, level_offset=level_offset, from_path=from_path)
+        rendered = render_node(
+            child,
+            level_offset=level_offset,
+            from_path=from_path,
+            available_source_paths=available_source_paths,
+        )
         if rendered:
             lines.append(rendered)
 
@@ -253,6 +291,7 @@ def build_compact_index_node(
     index_heading: str,
     index_level: int,
     category_level: int,
+    available_source_paths: set[str],
 ) -> Node | None:
     page_root = parse_heading_tree(page_markdown)
     title_node = next((child for child in page_root.children if child.level == 1), None)
@@ -268,7 +307,11 @@ def build_compact_index_node(
         for item in category.children:
             label = extract_heading_text(item.heading or "")
             href = extract_heading_href(item.heading or "")
-            if not label or not href or rewrite_link_destination(href, "SKILL.md") is None:
+            if (
+                not label
+                or not href
+                or rewrite_link_destination(href, "SKILL.md", available_source_paths) is None
+            ):
                 continue
             label = unescape_markdown_text(label)
             links.append(f"[{label}]({href})")
@@ -293,7 +336,11 @@ def build_compact_index_node(
     )
 
 
-def build_reference_index_nodes(input_dir: Path, reference_level: int) -> list[Node]:
+def build_reference_index_nodes(
+    input_dir: Path,
+    reference_level: int,
+    available_source_paths: set[str],
+) -> list[Node]:
     index_nodes: list[Node] = []
     index_level = min(6, reference_level + 2)
     category_level = min(6, index_level + 1)
@@ -306,6 +353,7 @@ def build_reference_index_nodes(input_dir: Path, reference_level: int) -> list[N
             index_heading=index_heading,
             index_level=index_level,
             category_level=category_level,
+            available_source_paths=available_source_paths,
         )
         if node is not None:
             index_nodes.append(node)
@@ -320,13 +368,18 @@ def collect_markdown_files(directory: Path, *, root_dir: Path | None = None) -> 
 
 
 def write_skill_files(input_dir: Path, output_dir: Path, source_paths: list[str]) -> int:
+    available_source_paths = build_available_source_paths(source_paths)
     count = 0
     for source_path in source_paths:
         if is_excluded_source_path(source_path):
             continue
         source_file = input_dir / source_path
         dest_file = output_dir / source_path
-        rewritten = rewrite_content(source_file.read_text(encoding="utf-8"), source_path)
+        rewritten = rewrite_content(
+            source_file.read_text(encoding="utf-8"),
+            source_path,
+            available_source_paths,
+        )
         dest_file.parent.mkdir(parents=True, exist_ok=True)
         dest_file.write_text(rewritten, encoding="utf-8")
         count += 1
@@ -345,6 +398,8 @@ def create_skill_frontmatter() -> str:
 
 
 def generate_skill_markdown(input_dir: Path, sitemap_root: Node) -> str:
+    source_paths = collect_markdown_files(input_dir)
+    available_source_paths = build_available_source_paths(source_paths)
     title_node = next((child for child in sitemap_root.children if child.level == 1), None)
     if title_node is None:
         raise ValueError("Could not find the sitemap title in sitemap.md.")
@@ -358,7 +413,13 @@ def generate_skill_markdown(input_dir: Path, sitemap_root: Node) -> str:
         filtered = filter_node(section, max_depth=max_depth)
         if filtered is not None:
             if section_name == "Reference":
-                filtered.children.extend(build_reference_index_nodes(input_dir, filtered.level))
+                filtered.children.extend(
+                    build_reference_index_nodes(
+                        input_dir,
+                        filtered.level,
+                        available_source_paths,
+                    )
+                )
             filtered_children.append(filtered)
 
     filtered_title = Node(
@@ -370,7 +431,7 @@ def generate_skill_markdown(input_dir: Path, sitemap_root: Node) -> str:
     return re.sub(
         r"\n{3,}",
         "\n\n",
-        f"{create_skill_frontmatter()}{render_node(filtered_title)}",
+        f"{create_skill_frontmatter()}{render_node(filtered_title, available_source_paths=available_source_paths)}",
     )
 
 

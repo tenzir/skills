@@ -45,7 +45,7 @@ conn.log (TSV)
 1637229399.549141 CBTne9tomX1ktuCQa 10.4.21.101 53824 107.23.103.216 587 - - tcp smtp 606.747526 975904 11950 SF - - 0 ShAdDaTtTfF 1786 1069118 1070 55168 - - - 00:08:02:1c:47:ae 20:e5:2a:b6:93:f1 - - - - - US VA Ashburn 39.0469 -77.4903 1:I6VoTvbCqaKvPrlFnNbRRbjlMsc=
 ```
 
-You can also [download this sample](../packages/zeek/tests/inputs/conn.log.md) to avoid dealing with tabs and spaces in the snippet above.
+You can also [download this sample](https://docs.tenzir.com/packages/zeek/tests/inputs/conn.log.md) to avoid dealing with tabs and spaces in the snippet above.
 
 ### Step 1: Parse the input
 

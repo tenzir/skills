@@ -187,7 +187,7 @@ Our [Excalidraw Claude plugin](https://github.com/tenzir/claude-plugins/tree/mai
 
 Some older diagrams exist only as exported SVGs. When exporting Excalidraw scenes manually, always **use light mode** and **choose SVG** as export format, as we have CSS in place that automatically inverts colors so diagrams look nice in dark mode.
 
-Tenzir developers have access to our Excalidraw [Documentation collection](https://app.excalidraw.com/o/6dBWEFf9h1l/9RErQkL9e2v). For everyone else, please reach out to us on our [Discord server](/discord) to request changes to existing SVGs.
+Tenzir developers have access to our Excalidraw [Documentation collection](https://app.excalidraw.com/o/6dBWEFf9h1l/9RErQkL9e2v). For everyone else, please reach out to us on our [Discord server](https://docs.tenzir.com/discord) to request changes to existing SVGs.
 
 ## Writing Style and Formatting
 

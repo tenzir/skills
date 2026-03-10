@@ -1,7 +1,7 @@
 # Start the API
 
 
-The node offers a [REST API](/reference/node/api) for CRUD-style pipeline management. By default, the API is not accessible from the outside. Only the platform can access it internaly through the existing node-to-platform connection. To enable the API for direct access, you need to configure the built in web server that exposes the API.
+The node offers a [REST API](https://docs.tenzir.com/reference/node/api) for CRUD-style pipeline management. By default, the API is not accessible from the outside. Only the platform can access it internaly through the existing node-to-platform connection. To enable the API for direct access, you need to configure the built in web server that exposes the API.
 
 ## Expose the REST API
 

@@ -168,11 +168,11 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
 1. Go to [AWS Marketplace](https://console.aws.amazon.com/marketplace/) and subscribe to the free [Tenzir Node](https://console.aws.amazon.com/marketplace/search/listing/prodview-gsofc3z6f3vsu) product.
 
-   ![AWS Marketplace Tenzir Node](/_astro/01-aws-marketplace.BV34EsMs_Z1SWAhS.png)
+   ![AWS Marketplace Tenzir Node](https://docs.tenzir.com/_astro/01-aws-marketplace.BV34EsMs_Z1SWAhS.png)
 
 2. Accept the terms to subscribe to the offering.
 
-   ![AWS Marketplace Tenzir Node](/_astro/02-subscribe.BuWO6X8P_Z1LfgkR.png)
+   ![AWS Marketplace Tenzir Node](https://docs.tenzir.com/_astro/02-subscribe.BuWO6X8P_Z1LfgkR.png)
 
 ### Choose your deployment method
 
@@ -186,7 +186,7 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   1. **Review the pre-filled template**: The CloudFormation console will open with our single-node container template already loaded:
 
-     ![CloudFormation Create Stack](/_astro/01-create-stack.GmdJ5tXH_2okx2I.png)
+     ![CloudFormation Create Stack](https://docs.tenzir.com/_astro/01-create-stack.GmdJ5tXH_2okx2I.png)
 
   2. **Configure your stack**:
 
@@ -195,15 +195,15 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
      Double-check that the container image URL points to the Tenzir Node version you want to deploy.
 
-     ![Stack Parameters](/_astro/02-stack-parameters.B4Oua0h9_Z2mdd0o.png)
+     ![Stack Parameters](https://docs.tenzir.com/_astro/02-stack-parameters.B4Oua0h9_Z2mdd0o.png)
 
   3. **Accept the default stack options**: For most deployments, the defaults work perfectly:
 
-     ![Stack Options](/_astro/03-stack-options.5n7bQip1_1voPe2.png)
+     ![Stack Options](https://docs.tenzir.com/_astro/03-stack-options.5n7bQip1_1voPe2.png)
 
   4. **Review and acknowledge**: Confirm your configuration and check the acknowledgment box:
 
-     ![Review Stack](/_astro/04-review-stack.DSPyQTC8_Z1t888J.png)
+     ![Review Stack](https://docs.tenzir.com/_astro/04-review-stack.DSPyQTC8_Z1t888J.png)
 
   5. **Deploy your node**: Click *Submit* to start the deployment. Monitor progress in the *Events* tab.
 
@@ -303,18 +303,18 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   1. Navigate to [Amazon Elastic Container Service (ECS)](https://console.aws.amazon.com/ecs).
 
-     ![Amazon Elastic Container Service (ECS)](/_astro/01-ecs.D-9AB8KO_Z1P4kme.png)
+     ![Amazon Elastic Container Service (ECS)](https://docs.tenzir.com/_astro/01-ecs.D-9AB8KO_Z1P4kme.png)
 
   2. Create a new cluster. Choose between **EC2** or **Fargate** based on your needs:
 
      * **EC2 clusters** give you full control over the underlying instances. They’re ideal for long-running workloads with consistent resource requirements.
      * **Fargate clusters** provide serverless container execution where you pay only for the resources you use. They’re cost-effective for workloads with variable demand.
 
-     ![Create a Cluster](/_astro/02-create-cluster.DWOcGwyQ_Z1wYnvS.png)
+     ![Create a Cluster](https://docs.tenzir.com/_astro/02-create-cluster.DWOcGwyQ_Z1wYnvS.png)
 
   3. Create a task definition to specify how the Tenzir node container should run.
 
-     ![Create a Cluster](/_astro/03-create-task-definition.Ds8CzEXJ_1y9Jew.png)
+     ![Create a Cluster](https://docs.tenzir.com/_astro/03-create-task-definition.Ds8CzEXJ_1y9Jew.png)
 
      In the *Containers* section, enter the repository URL from your AWS Marketplace subscription:
 
@@ -326,11 +326,11 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   4. Return to your cluster, navigate to the *Tasks* tab, and click *Run new task*. Select the task definition you just created.
 
-     ![Create a Cluster](/_astro/04-run-task.BaW9wNbx_Z1TYNR4.png)
+     ![Create a Cluster](https://docs.tenzir.com/_astro/04-run-task.BaW9wNbx_Z1TYNR4.png)
 
      In the *Container overrides* section, add the `TENZIR_TOKEN` environment variable with the token value corresponding to your node.
 
-     ![Container Overrides](/_astro/05-container-overrides.DgPIqnAZ_2rS1Oj.png)
+     ![Container Overrides](https://docs.tenzir.com/_astro/05-container-overrides.DgPIqnAZ_2rS1Oj.png)
 
      Click *Create* to launch your node.
 
@@ -362,19 +362,19 @@ In the *Basics* tab, perform the following action:
 2. For *Image source*, select *Other registry*.
 3. For *Image*, enter `tenzir/tenzir-node`.
 
-![Basics](/_astro/basics.bOCDyyP__Z18rgYp.png)
+![Basics](https://docs.tenzir.com/_astro/basics.bOCDyyP__Z18rgYp.png)
 
 #### Networking
 
 In the *Networking* tab, configure the ports you plan to use for pipelines that receive incoming connections.
 
-![Networking](/_astro/networking.DpOSLd0n_2quA37.png)
+![Networking](https://docs.tenzir.com/_astro/networking.DpOSLd0n_2quA37.png)
 
 #### Advanced
 
 In the *Advanced* tab, enter the `TENZIR_TOKEN` environment variable from your Docker Compose file.
 
-![Advanced](/_astro/advanced.afPiy2h8_Z76Ic4.png)
+![Advanced](https://docs.tenzir.com/_astro/advanced.afPiy2h8_Z76Ic4.png)
 
 #### Create
 
@@ -384,7 +384,7 @@ Once you’ve completed the configuration, click the *Create* button. Your node 
 
 Looking for a native macOS package? We’re not quite there yet—but you can still run Tenzir smoothly on macOS using [Docker](deploy-a-node.md#docker).
 
-Want to see a native macOS build? Let us know! Drop your vote in our [Discord community](/discord)—we prioritize what our users need most.
+Want to see a native macOS build? Let us know! Drop your vote in our [Discord community](https://docs.tenzir.com/discord)—we prioritize what our users need most.
 
 Tenzir *does* run well on macOS under the hood. Docker just bridges the gap for now.
 

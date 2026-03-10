@@ -196,14 +196,12 @@ def load_classes(schema_dir: Path) -> tuple[dict[str, dict], dict[str, dict]]:
     for category_dir in sorted(path for path in events_dir.iterdir() if path.is_dir()):
         category_key = category_dir.name
         for entry in sorted(category_dir.glob("*.json")):
-            class_name = entry.stem
-            if class_name == category_key:
-                data = read_json(entry)
-                data["category_key"] = category_key
+            data = read_json(entry)
+            class_name = data.get("name") or entry.stem
+            data["category_key"] = category_key
+            if entry.stem == category_key:
                 intermediates[class_name] = data
                 continue
-            data = read_json(entry)
-            data["category_key"] = category_key
             classes[class_name] = data
     return classes, intermediates
 

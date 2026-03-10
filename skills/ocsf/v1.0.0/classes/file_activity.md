@@ -1,13 +1,21 @@
-# Network File Activity (file_activity)
+# File System Activity (file_activity)
 
-Network File Activity events report activities on a cloud file storage service such as Box, MS OneDrive, or Google Drive.
+File System Activity events report when a process performs an action on a file or folder.
 
-- **Class UID**: `4010`
-- **Category**: Network Activity
-- **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `cloud`, `datetime`
+- **Class UID**: `1001`
+- **Category**: System Activity
+- **Extends**: [System Activity (system)](system.md)
+- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+
+## Associations
+
+- `device` ↔ `actor.user`
+- `actor.user` ↔ `device`
 
 ## Inherited attributes
+
+**From System Activity:**
+- `device` (required)
 
 **From Base Event:**
 - `metadata` (required)
@@ -17,6 +25,14 @@ Network File Activity events report activities on a cloud file storage service s
 
 ## Attributes
 
+### `access_mask`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Group**: context
+
+The access mask in a platform-native format.
+
 ### `activity_id`
 
 - **Type**: `integer_t`
@@ -24,38 +40,43 @@ Network File Activity events report activities on a cloud file storage service s
 
 #### Enum values
 
-- `1`: `Upload`
-- `2`: `Download`
-- `3`: `Update`
-- `4`: `Delete`
-- `5`: `Rename`
-- `6`: `Copy`
-- `7`: `Move`
-- `8`: `Restore`
-- `9`: `Preview`
-- `10`: `Lock`
-- `11`: `Unlock`
-- `12`: `Share`
-- `13`: `Unshare`
-- `14`: `Open`
+- `99`: `Other` - The event activity is not mapped.
+- `0`: `Unknown` - The event activity is unknown.
 
-The normalized identifier of the activity that triggered the event.
+The activity ID of the event.
 
 ### `actor`
 
 - **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: required
+
+The actor that performed the activity on the `file` object
+
+### `component`
+
+- **Type**: `string_t`
+- **Requirement**: optional
 - **Group**: primary
 
-The actor that performed the activity on the target file.
+The name or relative pathname of a sub-component of the data object, if applicable.
 
-### `expiration_time`
+For example: `attachment.doc`, `attachment.zip/bad.doc`, or `part.mime/part.cab/part.uue/part.doc`.
 
-- **Type**: `timestamp_t`
+### `connection_uid`
+
+- **Type**: `string_t`
 - **Requirement**: optional
 - **Group**: context
 
-The share expiration time.
+The network connection identifier.
+
+### `create_mask`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: primary
+
+The original Windows mask that is required to create the object.
 
 ### `file`
 
@@ -65,10 +86,18 @@ The share expiration time.
 
 The file that is the target of the activity.
 
-### `src_endpoint`
+### `file_diff`
 
-- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
-- **Requirement**: required
+- **Type**: `string_t`
+- **Requirement**: optional
 - **Group**: primary
 
-The endpoint that performed the activity on the target file.
+File content differences used for change detection. For example, a common use case is to identify itemized changes within INI or configuration/property setting values.
+
+### `file_result`
+
+- **Type**: [`file`](../objects/file.md)
+- **Requirement**: optional
+- **Group**: primary
+
+The resulting file object when the activity was allowed and successful.

@@ -11,12 +11,15 @@ The attributes that identify host/device attributes.
 - Device Config State
 - Device Inventory Info
 - DHCP Activity
+- DNS Activity
 - Email Activity
 - Email File Activity
 - Email URL Activity
 - Entity Management
 - File System Activity
+- FTP Activity
 - Group Management
+- HTTP Activity
 - Identity & Access Management
 - Kernel Activity
 - Kernel Extension Activity
@@ -24,7 +27,10 @@ The attributes that identify host/device attributes.
 - Module Activity
 - Network Activity
 - Process Activity
+- RDP Activity
 - Scheduled Job Activity
+- SMB Activity
+- SSH Activity
 - System Activity
 - User Access Management
 - Web Resource Access Activity

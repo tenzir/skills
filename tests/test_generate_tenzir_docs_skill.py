@@ -99,6 +99,37 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             self.assertIn("Recent releases", guide_text)
             self.assertNotIn("[Recent releases]", guide_text)
 
+    def test_out_of_bundle_docs_targets_stay_absolute(self) -> None:
+        available_source_paths = {
+            "reference/operators/api.md",
+            "tutorials/map-data-to-ocsf.md",
+        }
+
+        self.assertEqual(
+            MODULE.rewrite_link_destination(
+                "/reference/operators/api.md",
+                "tutorials/map-data-to-ocsf.md",
+                available_source_paths,
+            ),
+            "../reference/operators/api.md",
+        )
+        self.assertEqual(
+            MODULE.rewrite_link_destination(
+                "/reference/node/api",
+                "reference/operators/api.md",
+                available_source_paths,
+            ),
+            "https://docs.tenzir.com/reference/node/api",
+        )
+        self.assertEqual(
+            MODULE.rewrite_link_destination(
+                "/packages/zeek/tests/inputs/conn.log.md",
+                "tutorials/map-data-to-ocsf.md",
+                available_source_paths,
+            ),
+            "https://docs.tenzir.com/packages/zeek/tests/inputs/conn.log.md",
+        )
+
     def test_generation_adds_compact_reference_indexes_and_deeper_leaf_pages(self) -> None:
         with tempfile.TemporaryDirectory() as input_dir_str:
             input_dir = Path(input_dir_str)
@@ -196,8 +227,10 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             self.assertIn("#### Operator Index", skill_markdown)
             self.assertIn("#### Function Index", skill_markdown)
             self.assertIn("##### Query", skill_markdown)
+            self.assertIn("- [api](reference/operators/api.md)", skill_markdown)
+            self.assertIn("- [chart_area](reference/operators/chart_area.md)", skill_markdown)
             self.assertIn(
-                "- [api](reference/operators/api.md)\n- [chart_area](reference/operators/chart_area.md)\n- [where](reference/operators/where.md)",
+                "- [where](https://docs.tenzir.com/reference/operators/where.md)",
                 skill_markdown,
             )
             self.assertIn("[count](reference/functions/count.md)", skill_markdown)

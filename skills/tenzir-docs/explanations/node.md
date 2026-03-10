@@ -3,7 +3,7 @@
 
 A **node** is a running process that manages and executes pipelines.
 
-When a node starts, it will automatically attempt to connect to the [platform](platform.md), giving you a seamless way to manage and deploy pipelines through a web interface. However, using the platform is optional—you can also be manually manage pipelines via the node’s [REST API](/reference/node/api).
+When a node starts, it will automatically attempt to connect to the [platform](platform.md), giving you a seamless way to manage and deploy pipelines through a web interface. However, using the platform is optional—you can also be manually manage pipelines via the node’s [REST API](https://docs.tenzir.com/reference/node/api).
 
 ## Standalone vs. Managed Pipeline Execution
 

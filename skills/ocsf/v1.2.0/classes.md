@@ -5,13 +5,13 @@
 System Activity events.
 
 - [System Activity (system)](classes/system.md) [base class]
-- [File System Activity](classes/filesystem.md)
-- [Kernel Activity](classes/kernel.md)
+- [File System Activity](classes/file_activity.md)
+- [Kernel Activity](classes/kernel_activity.md)
 - [Kernel Extension Activity](classes/kernel_extension.md)
-- [Memory Activity](classes/memory.md)
-- [Module Activity](classes/module.md)
-- [Process Activity](classes/process.md)
-- [Scheduled Job Activity](classes/scheduled_job.md)
+- [Memory Activity](classes/memory_activity.md)
+- [Module Activity](classes/module_activity.md)
+- [Process Activity](classes/process_activity.md)
+- [Scheduled Job Activity](classes/scheduled_job_activity.md)
 
 ## Findings
 
@@ -42,19 +42,19 @@ Identity & Access Management (IAM) events relate to the supervision of the syste
 Network Activity events.
 
 - [Network (network)](classes/network.md) [base class]
-- [DHCP Activity](classes/dhcp.md)
-- [DNS Activity](classes/dns.md)
-- [Email Activity](classes/email.md)
-- [Email File Activity](classes/email_file.md)
-- [Email URL Activity](classes/email_url.md)
-- [FTP Activity](classes/ftp.md)
-- [HTTP Activity](classes/http.md)
+- [DHCP Activity](classes/dhcp_activity.md)
+- [DNS Activity](classes/dns_activity.md)
+- [Email Activity](classes/email_activity.md)
+- [Email File Activity](classes/email_file_activity.md)
+- [Email URL Activity](classes/email_url_activity.md)
+- [FTP Activity](classes/ftp_activity.md)
+- [HTTP Activity](classes/http_activity.md)
 - [Network Activity](classes/network_activity.md)
-- [Network File Activity](classes/file_activity.md)
-- [NTP Activity](classes/ntp.md)
-- [RDP Activity](classes/rdp.md)
-- [SMB Activity](classes/smb.md)
-- [SSH Activity](classes/ssh.md)
+- [Network File Activity](classes/network_file_activity.md)
+- [NTP Activity](classes/ntp_activity.md)
+- [RDP Activity](classes/rdp_activity.md)
+- [SMB Activity](classes/smb_activity.md)
+- [SSH Activity](classes/ssh_activity.md)
 - [Tunnel Activity](classes/tunnel_activity.md)
 
 ## Discovery
@@ -62,7 +62,7 @@ Network Activity events.
 Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
 
 - [Discovery (discovery)](classes/discovery.md) [base class]
-- [Admin Group Query](classes/group_query.md)
+- [Admin Group Query](classes/admin_group_query.md)
 - [Device Config State](classes/config_state.md)
 - [Device Config State Change](classes/device_config_state_change.md)
 - [Device Inventory Info](classes/inventory_info.md)
@@ -87,7 +87,7 @@ Discovery events report the existence and state of devices, files, configuration
 Application Activity events report detailed information about the behavior of applications and services.
 
 - [Application Activity (application)](classes/application.md) [base class]
-- [API Activity](classes/api.md)
+- [API Activity](classes/api_activity.md)
 - [Application Lifecycle](classes/application_lifecycle.md)
 - [Datastore Activity](classes/datastore_activity.md)
 - [File Hosting Activity](classes/file_hosting.md)

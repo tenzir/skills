@@ -15,13 +15,16 @@ The attributes that describe information specific to Cloud services/applications
 - Device Inventory Info
 - DHCP Activity
 - Discovery
+- DNS Activity
 - Email Activity
 - Email File Activity
 - Email URL Activity
 - Entity Management
 - File System Activity
 - Findings
+- FTP Activity
 - Group Management
+- HTTP Activity
 - Identity & Access Management
 - Kernel Activity
 - Kernel Extension Activity
@@ -30,8 +33,11 @@ The attributes that describe information specific to Cloud services/applications
 - Network Activity
 - Network File Activity
 - Process Activity
+- RDP Activity
 - Scheduled Job Activity
 - Security Finding
+- SMB Activity
+- SSH Activity
 - System Activity
 - User Access Management
 - Web Resource Access Activity

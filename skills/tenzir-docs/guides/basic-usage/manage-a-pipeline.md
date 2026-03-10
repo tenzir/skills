@@ -10,7 +10,7 @@ This guide shows you how to control pipeline lifecycles through the app or API. 
 * **Paused**: the user interrupted execution, keeping in-memory state.
 * **Stopped**: the user interrupted execution, resetting all in-memory state.
 
-The [app](https://app.tenzir.com/) or [API](/reference/node/api) allow you to manage the pipeline lifecycles.
+The [app](https://app.tenzir.com/) or [API](https://docs.tenzir.com/reference/node/api) allow you to manage the pipeline lifecycles.
 
 ## Change the state of a pipeline
 
@@ -20,7 +20,7 @@ In the [app](https://app.tenzir.com/overview), an icon visualizes the current pi
 2. Click the button corresponding to the desired action, i.e., *Start*, *Pause*, *Stop*, or *Delete*.
 3. Confirm your selection.
 
-For the [API](/reference/node/api), use the following endpoints based on the desired actions:
+For the [API](https://docs.tenzir.com/reference/node/api), use the following endpoints based on the desired actions:
 
 * Start, pause, and stop: `/pipeline/update`
 * Delete: `/pipeline/delete`

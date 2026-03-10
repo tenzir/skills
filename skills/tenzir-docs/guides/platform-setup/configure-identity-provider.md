@@ -76,7 +76,7 @@ Keycloak defaults to the `master` realm and the bundled Docker Compose stack use
 
 If you want to use a different realm, or if you already have an existing one, update the `TENZIR_PLATFORM_OIDC_ISSUER_URL` variable to point to the new realm instead.
 
-![Configuration 0](/_astro/keycloak-create-realm.Bya4pY8v_R2aSw.png)
+![Configuration 0](https://docs.tenzir.com/_astro/keycloak-create-realm.Bya4pY8v_R2aSw.png)
 
 #### Create a client for the app
 
@@ -84,19 +84,19 @@ Use the `Add Client` button in the `Clients` menu on the left. Configure the new
 
 Under *General settings*, set the client type to *OpenID Connect* and the client ID to `tenzir-app`. If you use a different client ID, remember to update the `TENZIR_PLATFORM_OIDC_PROVIDER_CLIENT_ID` variable in your Tenzir Platform configuration accordingly.
 
-![Configuration 0](/_astro/keycloak-create-app-client-0.B0dL2lBu_Z1GlGsq.png)
+![Configuration 0](https://docs.tenzir.com/_astro/keycloak-create-app-client-0.B0dL2lBu_Z1GlGsq.png)
 
 Under *Capability config*, enable client authentication and the *Standard flow* access method.
 
-![Configuration 1](/_astro/keycloak-create-app-client-1.BwnUkGAP_ZBKCgB.png)
+![Configuration 1](https://docs.tenzir.com/_astro/keycloak-create-app-client-1.BwnUkGAP_ZBKCgB.png)
 
 Under *Login settings*, enter a redirect URL that points to `${TENZIR_PLATFORM_DOMAIN}/login/oauth/callback`, where `TENZIR_PLATFORM_DOMAIN` is the domain you configure in your Tenzir Platform configuration. For example, if the app runs under `https://tenzir-app.example.org` then this should be `https://tenzir-app.example.org/login/oauth/callback`.
 
-![Configuration 2](/_astro/keycloak-create-app-client-2.CcGxuXQl_1UJfDb.png)
+![Configuration 2](https://docs.tenzir.com/_astro/keycloak-create-app-client-2.CcGxuXQl_1UJfDb.png)
 
 Finally, in the client view, go to the Credentials tab and copy the value of the generated client secret. You must add this to the Tenzir Platform configuration under `TENZIR_PLATFORM_OIDC_PROVIDER_CLIENT_SECRET`.
 
-![Configuration 3](/_astro/keycloak-create-app-client-3.nrdSE4hA_ZFjsuw.png)
+![Configuration 3](https://docs.tenzir.com/_astro/keycloak-create-app-client-3.nrdSE4hA_ZFjsuw.png)
 
 ### Create a client for the CLI
 
@@ -104,7 +104,7 @@ To use the `tenzir-platform` CLI, you need to set up an additional client that s
 
 To do this, proceed exactly as above, but use `tenzir-cli` as the client ID and under *Capability config* disable the *Client authentication* setting and enable the *OAuth 2.0 Device Authorization Grant* authentication flow.
 
-![Create CLI client](/_astro/keycloak-create-cli-client-0.Bw33IN8V_Z1pKCTe.png)
+![Create CLI client](https://docs.tenzir.com/_astro/keycloak-create-cli-client-0.Bw33IN8V_Z1pKCTe.png)
 
 ## Microsoft Entra Identity
 
@@ -114,43 +114,43 @@ Follow these steps to create the required resources:
 
 1. Navigate to `portal.azure.com` and open the page for “Microsoft Entra ID”.
 
-![Navigate to Entra](/_astro/entra-oidc-navigate.UgOk1iDU_kfeLm.png)
+![Navigate to Entra](https://docs.tenzir.com/_astro/entra-oidc-navigate.UgOk1iDU_kfeLm.png)
 
 2. Open the “App registrations” sub page.
 
-![Select App registrations](/_astro/entra-oidc-app-registrations.oSzkSuHl_28LLnA.png)
+![Select App registrations](https://docs.tenzir.com/_astro/entra-oidc-app-registrations.oSzkSuHl_28LLnA.png)
 
 3. Create a new registration named `Tenzir Platform CLI`.
 
-![Register CLI](/_astro/entra-oidc-register-cli.Bg_oTrMa_Z1IgiIE.png)
+![Register CLI](https://docs.tenzir.com/_astro/entra-oidc-register-cli.Bg_oTrMa_Z1IgiIE.png)
 
 4. Enable the public client flows for this app.
 
-![Enable public client flows](/_astro/entra-oidc-cli-public-client-flows.s5Ak9_BR_UEIqg.png)
+![Enable public client flows](https://docs.tenzir.com/_astro/entra-oidc-cli-public-client-flows.s5Ak9_BR_UEIqg.png)
 
 5. Create a second registration named `Tenzir UI`.
 
-![Register UI](/_astro/entra-oidc-register-ui.jbBJuTxF_1ha3e4.png)
+![Register UI](https://docs.tenzir.com/_astro/entra-oidc-register-ui.jbBJuTxF_1ha3e4.png)
 
 6. For this registration, open “Certificates & Secrets”.
 
-![Navigate Secrets](/_astro/entra-oidc-create-secret-1.DXZEOI8E_Z1EWunp.png)
+![Navigate Secrets](https://docs.tenzir.com/_astro/entra-oidc-create-secret-1.DXZEOI8E_Z1EWunp.png)
 
 7. Create a new secret and give it a descriptive name.
 
-![Create Secret](/_astro/entra-oidc-create-secret-2.DnIODWhC_ZN2d9t.png)
+![Create Secret](https://docs.tenzir.com/_astro/entra-oidc-create-secret-2.DnIODWhC_ZN2d9t.png)
 
 8. Make a local copy of the secret value.
 
-![Copy Secret](/_astro/entra-oidc-copy-secret.Ci3SrFI__28yGWS.png)
+![Copy Secret](https://docs.tenzir.com/_astro/entra-oidc-copy-secret.Ci3SrFI__28yGWS.png)
 
 9. Copy the client id to your local machine.
 
-![Copy Client ID](/_astro/entra-oidc-client-id.DCKjpMwg_2928iB.png)
+![Copy Client ID](https://docs.tenzir.com/_astro/entra-oidc-client-id.DCKjpMwg_2928iB.png)
 
 10. Copy the issuer url to your local machine.
 
-![Copy Issuer URL](/_astro/entra-oidc-issuer-url.C08Q45Ve_Z1kjxK6.png)
+![Copy Issuer URL](https://docs.tenzir.com/_astro/entra-oidc-issuer-url.C08Q45Ve_Z1kjxK6.png)
 
 Now you can supply the created resources and values to the stack by editing the `.env` file in your Compose folder:
 
@@ -180,11 +180,11 @@ If you plan to use the client credentials flow for non-interactive CLI usage, yo
 
 11. Navigate to “Expose an API” and add an Application ID URI (you can use the suggested default value).
 
-![Expose API Configuration](/_astro/entra-oidc-expose-api.abcXYbMN_Z1aHdB.png)
+![Expose API Configuration](https://docs.tenzir.com/_astro/entra-oidc-expose-api.abcXYbMN_Z1aHdB.png)
 
 12. Navigate to “Manifest” and update the `requestedAccessTokenVersion` to `2` in the JSON manifest, then save the changes.
 
-![Update Access Token Version](/_astro/entra-oidc-client-api-version.B78ur6Zl_Z2tAea4.png)
+![Update Access Token Version](https://docs.tenzir.com/_astro/entra-oidc-client-api-version.B78ur6Zl_Z2tAea4.png)
 
 13. When using the client credentials flow with this registration, you must override the scope by setting `TENZIR_PLATFORM_CLI_SCOPE` to `${APPLICATION_ID_URL}/.default`, where `${APPLICATION_ID_URL}` is the Application ID URI you configured in step 11.
 

@@ -23,7 +23,7 @@ Refer to the [CLI reference](../../reference/platform/command-line-interface.md#
 
 To manage secrets from the web interface, go to the `Workspace Settings` screen by clicking the gear icon in the workspace selector.
 
-![Screenshot](/_astro/secrets.Dd085Pjn_ZqXKpL.png)
+![Screenshot](https://docs.tenzir.com/_astro/secrets.Dd085Pjn_ZqXKpL.png)
 
 ## Configuring External Secret Stores
 

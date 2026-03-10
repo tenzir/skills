@@ -4,17 +4,23 @@ The attributes that identify security controls such as malware or policy violati
 
 ## Applies to
 
+- DNS Activity
 - Email Activity
 - Email File Activity
 - Email URL Activity
 - File System Activity
+- FTP Activity
+- HTTP Activity
 - Kernel Activity
 - Kernel Extension Activity
 - Memory Activity
 - Module Activity
 - Network Activity
 - Process Activity
+- RDP Activity
 - Scheduled Job Activity
+- SMB Activity
+- SSH Activity
 - System Activity
 
 ## Attributes

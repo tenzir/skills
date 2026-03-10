@@ -47,15 +47,15 @@ The following steps
 
 1. In the **Contexts** tab in your node, click the `+` button:
 
-   ![Create context](/_astro/context-add.CjA5yN5-_Z26lvns.png)
+   ![Create context](https://docs.tenzir.com/_astro/context-add.CjA5yN5-_Z26lvns.png)
 
 2. Select type `lookup-table` and enter a name:
 
-   ![Choose name and type](/_astro/context-name.BK7qez7U_ZY5Xxk.png)
+   ![Choose name and type](https://docs.tenzir.com/_astro/context-name.BK7qez7U_ZY5Xxk.png)
 
 3. Click **Create** and observe the new lookup table context:
 
-   ![View created context](/_astro/context-created.CLPG07O__1Umj0P.png)
+   ![View created context](https://docs.tenzir.com/_astro/context-created.CLPG07O__1Umj0P.png)
 
 ## Show all available lookup tables
 

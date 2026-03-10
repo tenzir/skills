@@ -7,7 +7,7 @@ Semantically, you can think of executing Sigma rules as applying the [`where`](.
 
 pySigma Support
 
-Unlike the legacy `sigmac` compiler that tailors a rule to specific backend, like Elastic or Splunk, the `sigma` operator only transpiles the structural YAML rules to produce an expression that is then used to filter a dataflow. In the future, we would like to write a native Tenzir backend for [pySigma](https://github.com/SigmaHQ/pySigma). Please reach out on our [Discord](/discord) if you would like to help us with that!
+Unlike the legacy `sigmac` compiler that tailors a rule to specific backend, like Elastic or Splunk, the `sigma` operator only transpiles the structural YAML rules to produce an expression that is then used to filter a dataflow. In the future, we would like to write a native Tenzir backend for [pySigma](https://github.com/SigmaHQ/pySigma). Please reach out on our [Discord](https://docs.tenzir.com/discord) if you would like to help us with that!
 
 ## Run a Sigma rule on an EVTX file
 

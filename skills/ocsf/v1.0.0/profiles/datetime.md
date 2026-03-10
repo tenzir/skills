@@ -16,13 +16,16 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 - Device Inventory Info
 - DHCP Activity
 - Discovery
+- DNS Activity
 - Email Activity
 - Email File Activity
 - Email URL Activity
 - Entity Management
 - File System Activity
 - Findings
+- FTP Activity
 - Group Management
+- HTTP Activity
 - Identity & Access Management
 - Kernel Activity
 - Kernel Extension Activity
@@ -31,8 +34,11 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 - Network Activity
 - Network File Activity
 - Process Activity
+- RDP Activity
 - Scheduled Job Activity
 - Security Finding
+- SMB Activity
+- SSH Activity
 - System Activity
 - User Access Management
 - Web Resource Access Activity

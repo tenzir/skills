@@ -15,7 +15,7 @@ The `api` operator interacts with Tenzir’s REST API without needing to spin up
 
 The endpoint to request, e.g., `/pipeline/list` to list all managed pipelines.
 
-Tenzir’s [REST API specification](/reference/node/api) lists all available endpoints.
+Tenzir’s [REST API specification](https://docs.tenzir.com/reference/node/api) lists all available endpoints.
 
 ### `request_body: string (optional)`
 

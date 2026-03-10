@@ -45,7 +45,7 @@ Create a directory named `sslbl` and add the standard package layout:
 
 ## Add the package manifest
 
-The [`package.yaml`](/packages/sslbl/package.yaml) is the **package manifest**. I contains descriptive metadata, but also the definitions of contexts and inputs, as we shall see below.
+The [`package.yaml`](https://docs.tenzir.com/packages/sslbl/package.yaml) is the **package manifest**. I contains descriptive metadata, but also the definitions of contexts and inputs, as we shall see below.
 
 ### Add descriptive metadata
 
@@ -412,7 +412,7 @@ As expected, a valid OCSF OSINT object. Let’s confirm this as our new baseline
 uvx tenzir-test --update
 ```
 
-This created a [`to_osint.txt`](/packages/sslbl/tests/ocsf/to_osint.txt) file next to the [`to_osint.tql`](../packages/sslbl/tests/ocsf/to_osint.tql.md) file. Future runs will use this baseline for comparisons.
+This created a [`to_osint.txt`](https://docs.tenzir.com/packages/sslbl/tests/ocsf/to_osint.txt) file next to the [`to_osint.tql`](https://docs.tenzir.com/packages/sslbl/tests/ocsf/to_osint.tql.md) file. Future runs will use this baseline for comparisons.
 
 Continue to test the remaining operators, or add additional tests for some examples.
 
@@ -447,7 +447,7 @@ Phew, you made it! You now have a reusable package. 🎉
 
 Now that you have a package, what’s next?
 
-1. Join our [Discord server](/discord) and showcase the package in the `show-and-tell` channel to gather feedback.
+1. Join our [Discord server](https://docs.tenzir.com/discord) and showcase the package in the `show-and-tell` channel to gather feedback.
 2. If you deem it useful for everyone, open a pull request in our [Community Library on GitHub](https://github.com/tenzir/library). Packages from this library appear automatically in the [Tenzir Library](https://app.tenzir.com/library).
 3. Spread the word on social media and tag us so we can amplify it.
 

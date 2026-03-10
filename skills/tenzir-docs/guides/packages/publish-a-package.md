@@ -54,7 +54,7 @@ Before submitting, verify your package meets these requirements:
 
 Get feedback first
 
-Before opening a pull request, consider sharing your package on our [Discord server](/discord) in the `show-and-tell` channel. Community feedback helps refine your package before it reaches a wider audience.
+Before opening a pull request, consider sharing your package on our [Discord server](https://docs.tenzir.com/discord) in the `show-and-tell` channel. Community feedback helps refine your package before it reaches a wider audience.
 
 ## Host your own package repository
 

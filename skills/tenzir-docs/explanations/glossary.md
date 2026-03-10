@@ -5,7 +5,7 @@ This page defines central terms in the Tenzir ecosystem.
 
 Missing term?
 
-If you are missing a term, please open a [GitHub Discussion](https://github.com/orgs/tenzir/discussions/new?category=questions-answers) or ping us in our [Discord server](/discord).
+If you are missing a term, please open a [GitHub Discussion](https://github.com/orgs/tenzir/discussions/new?category=questions-answers) or ping us in our [Discord server](https://docs.tenzir.com/discord).
 
 ## App
 
@@ -113,7 +113,7 @@ A host for [pipelines](#pipeline) and storage reachable over the network.
 The `tenzir-node` binary starts a node in a dedicated server process that listens on TCP port 5158.
 
 * [Deploy a node](../guides/node-setup/provision-a-node.md)
-* Use the [REST API](/reference/node/api) to manage a node
+* Use the [REST API](https://docs.tenzir.com/reference/node/api) to manage a node
 * [Import into a node](../guides/edge-storage/import-into-a-node.md)
 * [Export from a node](../guides/edge-storage/export-from-a-node.md)
 

@@ -21,7 +21,7 @@ Run pipelines directly on your machine with `uvx tenzir 'your pipeline'`. See [I
 
 Visit [app.tenzir.com](https://app.tenzir.com), sign in to [create a free account](installation/create-account.md), and you’ll see this page:
 
-![Landing page](/_astro/new-account.Qul5lKOD_1KFSe1.png)
+![Landing page](https://docs.tenzir.com/_astro/new-account.Qul5lKOD_1KFSe1.png)
 
 Begin with deploying a node:
 
@@ -37,11 +37,11 @@ Our demo nodes have the Demo Node [package](../explanations/packages.md) pre-ins
 
 The **Packages** tab shows that the demo node package is installed:
 
-![Demo node package installed](/_astro/demo-node-packages.B7a3szfC_2tvWzk.png)
+![Demo node package installed](https://docs.tenzir.com/_astro/demo-node-packages.B7a3szfC_2tvWzk.png)
 
 When you go back to the **Pipelines** tab, you see the pipelines churning away:
 
-![Nodes page after demo node package](/_astro/demo-node-pipelines.B3TjVIac_1Dsfct.png)
+![Nodes page after demo node package](https://docs.tenzir.com/_astro/demo-node-pipelines.B3TjVIac_1Dsfct.png)
 
 Note the two new pipelines that import data into our demo node. If you click on them, a context pane opens on the right and you’ll see details about their activity as well as the their definition.
 
@@ -62,7 +62,7 @@ taste
 
 This pipelines does the following: [`export`](../reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](../reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
 
-![Getting a taste](/_astro/demo-node-export-taste.DKQLkuB8_1OcT8H.png)
+![Getting a taste](https://docs.tenzir.com/_astro/demo-node-export-taste.DKQLkuB8_1OcT8H.png)
 
 Auto-completion of pipelines
 
@@ -159,7 +159,7 @@ A few notes:
 * [`select`](../reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
 * As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](../reference/functions/to_lower.md), which makes working with values a breeze.
 
-![Reshaping Suricata flow logs](/_astro/demo-node-reshape-flow.DGbYIpBh_Z2tYdMl.png)
+![Reshaping Suricata flow logs](https://docs.tenzir.com/_astro/demo-node-reshape-flow.DGbYIpBh_Z2tYdMl.png)
 
 Now what do you do with this normalized data from these two data sources? It just has a new shape, so what? Read on, we’ll show you next.
 
@@ -213,11 +213,11 @@ Let’s adapt our transformation pipelines from above:
 
 When clicking the **Run** button for these pipeline, the events will *not* show up in the Explorer because we now use `publish` as output operator. Instead, you’ll see this deployment modal:
 
-![Deployment modal](/_astro/demo-node-deploy-modal.C8YJw_nJ_2mLMt8.png)
+![Deployment modal](https://docs.tenzir.com/_astro/demo-node-deploy-modal.C8YJw_nJ_2mLMt8.png)
 
 After you give the pipeline a name (or leave it blank for a dummy name), click **Confirm** to deploy the pipeline. You’ll see it popping up on the **Pipelines** tab:
 
-![New pipeline](/_astro/demo-node-pipelines-new.BSYbUO4v_Z1xifxd.png)
+![New pipeline](https://docs.tenzir.com/_astro/demo-node-pipelines-new.BSYbUO4v_Z1xifxd.png)
 
 Now that you’ve deployed one pipeline with two topics as its “interface,” you can direct data to it from other pipelines. For example, you can create a pipeline that accepts logs via [Syslog](../integrations/syslog.md) and forwards them to the transformation pipeline. Then you can write two more pipelines that each take a subset to implement split-routing scenario.
 
@@ -234,7 +234,7 @@ You’ve just scratched the surface. Here’s where to go next:
 3. [Map your logs to OCSF](../tutorials/map-data-to-ocsf.md)
 4. Send events to your data lake, such as [Amazon Security Lake](../integrations/amazon/security-lake.md)
 
-Curious how it all fits together? Brush up on the [Tenzir architecture](../explanations/deployment.md) to learn more about all moving parts. We’re here to help. Join us at our friendly [Tenzir Discord](/discord) if you have any questions.
+Curious how it all fits together? Brush up on the [Tenzir architecture](../explanations/deployment.md) to learn more about all moving parts. We’re here to help. Join us at our friendly [Tenzir Discord](https://docs.tenzir.com/discord) if you have any questions.
 
 ## Contents
 

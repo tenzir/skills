@@ -103,7 +103,7 @@ Remediation events report the results of remediation commands targeting files, p
 System Activity events.
 
 - [System Activity (system)](classes/system.md) [base class]
-- [Event Log Activity](classes/event_log_activity.md)
+- [Event Log Activity](classes/event_log_actvity.md)
 - [File System Activity](classes/file_activity.md)
 - [Kernel Activity](classes/kernel_activity.md)
 - [Kernel Extension Activity](classes/kernel_extension_activity.md)

@@ -9,7 +9,7 @@ openapi
 
 ## Description
 
-The `openapi` operator shows the current Tenzir node’s [OpenAPI specification](/reference/node/api) for all available REST endpoint plugins.
+The `openapi` operator shows the current Tenzir node’s [OpenAPI specification](https://docs.tenzir.com/reference/node/api) for all available REST endpoint plugins.
 
 ## Examples
 
