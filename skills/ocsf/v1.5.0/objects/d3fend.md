@@ -2,7 +2,7 @@
 
 The MITRE D3FEND™ object describes the tactic & technique associated with a countermeasure.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

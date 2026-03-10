@@ -2,7 +2,7 @@
 
 The MITRE DEFEND™ Technique object describes the leaf defensive technique ID and/or name associated to a countermeasure, as defined by [D3FENDTM Matrix](https://d3fend.mitre.org).
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

@@ -34,6 +34,7 @@ HTTP_HEADERS = {
 }
 SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 DEV_VERSION_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)-dev$")
+MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)")
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,7 +52,29 @@ def name_to_slug(name: str) -> str:
     return name.replace("/", "_")
 
 
-def clean_description(text: str) -> str:
+def rewrite_markdown_links(text: str, relative_link_prefix: str = "") -> str:
+    def replace(match: re.Match[str]) -> str:
+        label, href = match.groups()
+        if href.startswith(("http://", "https://", "mailto:", "tel:", "#")):
+            return match.group(0)
+
+        link_target = href
+        anchor = ""
+        if "#" in link_target:
+            link_target, anchor = link_target.split("#", 1)
+            anchor = f"#{anchor}"
+        if "?" in link_target:
+            return match.group(0)
+        if not link_target.endswith(".md"):
+            link_target = f"{link_target}.md"
+        if relative_link_prefix and not link_target.startswith(("./", "../")):
+            link_target = f"{relative_link_prefix}{link_target}"
+        return f"[{label}]({link_target}{anchor})"
+
+    return MARKDOWN_LINK_RE.sub(replace, text)
+
+
+def clean_description(text: str, *, relative_link_prefix: str = "") -> str:
     if not text:
         return ""
     if re.search(r"</?[A-Za-z][^>]*>", text):
@@ -67,6 +90,7 @@ def clean_description(text: str) -> str:
     rendered = rendered.replace("\r\n", "\n")
     rendered = re.sub(r"\n{3,}", "\n\n", rendered)
     rendered = re.sub(r"[ \t]+$", "", rendered, flags=re.MULTILINE)
+    rendered = rewrite_markdown_links(rendered, relative_link_prefix=relative_link_prefix)
     return rendered.strip()
 
 
@@ -208,8 +232,7 @@ def load_classes(schema_dir: Path) -> tuple[dict[str, dict], dict[str, dict]]:
 
 def resolve_profiles(
     class_data: dict,
-    all_classes: dict[str, dict],
-    intermediates: dict[str, dict],
+    *parent_mappings: dict[str, dict],
 ) -> list[str]:
     """Collect profile names registered on a class and its ancestors."""
     seen: set[str] = set()
@@ -223,8 +246,20 @@ def resolve_profiles(
         extends = current.get("extends")
         if not extends:
             break
-        current = all_classes.get(extends) or intermediates.get(extends)
+        current = lookup_schema(extends, *parent_mappings)
     return profiles
+
+
+def format_doc_link(
+    name: str,
+    data: dict,
+    *,
+    target: str,
+    include_schema_name: bool = False,
+) -> str:
+    caption = data.get("caption") or name
+    label = f"{caption} ({name})" if include_schema_name else caption
+    return f"[{label}]({target})"
 
 
 def format_class_doc_link(
@@ -234,9 +269,36 @@ def format_class_doc_link(
     link_prefix: str,
     include_schema_name: bool = False,
 ) -> str:
-    caption = class_data.get("caption") or name
-    label = f"{caption} ({name})" if include_schema_name else caption
-    return f"[{label}]({link_prefix}{name_to_slug(name)}.md)"
+    return format_doc_link(
+        name,
+        class_data,
+        target=f"{link_prefix}{name_to_slug(name)}.md",
+        include_schema_name=include_schema_name,
+    )
+
+
+def format_named_links(
+    names: list[str],
+    *,
+    data_by_name: dict[str, dict],
+    link_by_name: dict[str, str],
+    include_schema_name: bool = False,
+) -> str:
+    rendered: list[str] = []
+    for name in names:
+        target = link_by_name.get(name)
+        if target is None:
+            rendered.append(f"`{name}`")
+            continue
+        rendered.append(
+            format_doc_link(
+                name,
+                data_by_name.get(name, {}),
+                target=target,
+                include_schema_name=include_schema_name,
+            )
+        )
+    return ", ".join(rendered)
 
 
 def load_extensions(schema_dir: Path) -> dict[str, dict]:
@@ -249,13 +311,35 @@ def load_extensions(schema_dir: Path) -> dict[str, dict]:
         meta_path = extension_dir / "extension.json"
         if not meta_path.exists():
             continue
+        dictionary_path = extension_dir / "dictionary.json"
         result[extension_dir.name] = {
             "meta": read_json(meta_path),
+            "dictionary": read_json(dictionary_path) if dictionary_path.exists() else {},
             "objects": load_directory_json(extension_dir / "objects"),
             "profiles": load_directory_json(extension_dir / "profiles"),
             "events": load_directory_json(extension_dir / "events"),
         }
     return result
+
+
+def merge_dictionaries(base: dict, extra: dict | None = None) -> dict:
+    merged = dict(base)
+    merged["attributes"] = dict(base.get("attributes", {}))
+    merged["types"] = dict(base.get("types", {}))
+    if not extra:
+        return merged
+    if isinstance(extra.get("attributes"), dict):
+        merged["attributes"].update(extra["attributes"])
+    if isinstance(extra.get("types"), dict):
+        merged["types"].update(extra["types"])
+    return merged
+
+
+def lookup_schema(name: str, *mappings: dict[str, dict]) -> dict | None:
+    for mapping in mappings:
+        if name in mapping:
+            return mapping[name]
+    return None
 
 
 def resolve_attribute(name: str, local_data: object, dictionary: dict) -> dict:
@@ -270,15 +354,19 @@ def resolve_attribute(name: str, local_data: object, dictionary: dict) -> dict:
 def format_attribute(
     name: str,
     data: dict,
-    objects_link_prefix: str = "",
-    known_objects: set[str] | None = None,
+    object_links: dict[str, str] | None = None,
+    *,
+    relative_link_prefix: str = "",
 ) -> str:
-    desc = clean_description(data.get("description") or data.get("caption") or "")
+    desc = clean_description(
+        data.get("description") or data.get("caption") or "",
+        relative_link_prefix=relative_link_prefix,
+    )
     lines = [f"### `{name}`", ""]
     # Build the type display, optionally linking to the object page.
     type_name = data.get("object_type") or data.get("type") or ""
-    if type_name and known_objects is not None and type_name in known_objects:
-        link_target = f"{objects_link_prefix}{name_to_slug(type_name)}.md"
+    if type_name and object_links is not None and type_name in object_links:
+        link_target = object_links[type_name]
         type_display = f"[`{type_name}`]({link_target})"
     elif type_name:
         type_display = f"`{type_name}`"
@@ -305,7 +393,10 @@ def format_attribute(
     if isinstance(data.get("enum"), dict) and data["enum"]:
         lines.extend(["#### Enum values", ""])
         for key, value in data["enum"].items():
-            enum_desc = clean_description(value.get("description", ""))
+            enum_desc = clean_description(
+                value.get("description", ""),
+                relative_link_prefix=relative_link_prefix,
+            )
             label = value.get("caption") or key
             suffix = f" - {enum_desc}" if enum_desc else ""
             lines.append(f"- `{key}`: `{label}`{suffix}")
@@ -338,18 +429,21 @@ def format_associations(associations: dict) -> str:
 
 
 def collect_inherited_attributes(
-    class_data: dict,
-    all_classes: dict[str, dict],
-    intermediates: dict[str, dict],
+    entity_data: dict,
     dictionary: dict,
+    *parent_mappings: dict[str, dict],
 ) -> list[tuple[str, list[tuple[str, str]]]]:
     """Walk the extends chain and collect required/recommended attributes
     from each ancestor.  Returns a list of (ancestor_name, [(attr, requirement), ...])."""
     result: list[tuple[str, list[tuple[str, str]]]] = []
-    own_attrs = set((class_data.get("attributes") or {}).keys())
-    extends = class_data.get("extends")
+    own_attrs = set((entity_data.get("attributes") or {}).keys())
+    extends = entity_data.get("extends")
+    seen_parents: set[str] = set()
     while extends:
-        parent = all_classes.get(extends) or intermediates.get(extends)
+        if extends in seen_parents:
+            break
+        seen_parents.add(extends)
+        parent = lookup_schema(extends, *parent_mappings)
         if parent is None:
             break
         parent_caption = parent.get("caption") or extends
@@ -381,12 +475,12 @@ def render_entity_page(
     constraints: dict | None = None,
     associations: dict | None = None,
     inherited_attributes: list[tuple[str, list[tuple[str, str]]]] | None = None,
-    objects_link_prefix: str = "",
-    known_objects: set[str] | None = None,
+    object_links: dict[str, str] | None = None,
+    relative_link_prefix: str = "",
 ) -> str:
     lines = [f"# {title}", ""]
     if description:
-        lines.extend([clean_description(description), ""])
+        lines.extend([clean_description(description, relative_link_prefix=relative_link_prefix), ""])
     meta = format_meta_list(meta_entries)
     if meta:
         lines.extend([meta, ""])
@@ -410,8 +504,8 @@ def render_entity_page(
         for attr_name, attr_data in attributes:
             lines.append(format_attribute(
                 attr_name, attr_data,
-                objects_link_prefix=objects_link_prefix,
-                known_objects=known_objects,
+                object_links=object_links,
+                relative_link_prefix=relative_link_prefix,
             ))
     content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
     return content + "\n"
@@ -605,7 +699,49 @@ def generate_extensions_overview(version_data: dict) -> str:
         version_data["extensions"].items(),
         key=lambda item: (item[1]["meta"].get("caption") or item[0]).casefold(),
     ):
-        lines.append(f"- [{data['meta'].get('caption') or name}](extensions/{name_to_slug(name)}.md)")
+        lines.append(
+            f"- [{data['meta'].get('caption') or name}](extensions/{name_to_slug(name)}/index.md)"
+        )
+    return "\n".join(lines) + "\n"
+
+
+def build_name_link_map(names: list[str] | set[str], *, prefix: str) -> dict[str, str]:
+    return {
+        name: f"{prefix}{name_to_slug(name)}.md"
+        for name in sorted(names)
+    }
+
+
+def build_extension_index_page(name: str, extension_data: dict) -> str:
+    lines = [f"# {extension_data['meta'].get('caption') or name}", ""]
+    desc = clean_description(extension_data["meta"].get("description", ""))
+    if desc:
+        lines.extend([desc, ""])
+    lines.append(f"- **Name**: `{extension_data['meta'].get('name') or name}`")
+    if extension_data["meta"].get("version"):
+        lines.append(f"- **Version**: `{extension_data['meta']['version']}`")
+    if extension_data["meta"].get("uid") is not None:
+        lines.append(f"- **UID**: `{extension_data['meta']['uid']}`")
+    lines.append("")
+
+    for section_title, key in (
+        ("Events", "events"),
+        ("Objects", "objects"),
+        ("Profiles", "profiles"),
+    ):
+        section_items = extension_data[key]
+        if not section_items:
+            continue
+        lines.extend([f"## {section_title}", ""])
+        for item_name, item_data in sorted(
+            section_items.items(),
+            key=lambda item: (item[1].get("caption") or item[0]).casefold(),
+        ):
+            lines.append(
+                f"- [{item_data.get('caption') or item_name}]({key}/{name_to_slug(item_name)}.md)"
+            )
+        lines.append("")
+
     return "\n".join(lines) + "\n"
 
 
@@ -825,7 +961,10 @@ def main() -> None:
                     "{version}/profiles.md",
                     "{version}/profiles/{name}.md",
                     "{version}/extensions.md",
-                    "{version}/extensions/{name}.md",
+                    "{version}/extensions/{name}/index.md",
+                    "{version}/extensions/{name}/events/{event}.md",
+                    "{version}/extensions/{name}/objects/{object}.md",
+                    "{version}/extensions/{name}/profiles/{profile}.md",
                     "{version}/types.md",
                     "```",
                     "",
@@ -960,7 +1099,12 @@ def main() -> None:
 
         for idx, data in enumerate(version_docs):
             prev = version_docs[idx - 1] if idx > 0 else None
+            class_names = set(data["classes"].keys()) | set(data["intermediates"].keys())
             obj_names = set(data["objects"].keys())
+            profile_names = set(data["profiles"].keys())
+            object_links = build_name_link_map(obj_names, prefix="")
+            profile_links = build_name_link_map(profile_names, prefix="../profiles/")
+            object_links_from_class_pages = build_name_link_map(obj_names, prefix="../objects/")
             write_file(output_dir / f"{data['slug']}.md", generate_version_overview(data, prev))
             write_file(output_dir / data["slug"] / "classes.md", generate_classes_overview(data))
             write_file(output_dir / data["slug"] / "objects.md", generate_objects_overview(data))
@@ -1016,21 +1160,26 @@ def main() -> None:
                         ),
                         (
                             "Profiles",
-                            ", ".join(f"`{p}`" for p in class_profiles) if class_profiles else "",
+                            format_named_links(
+                                class_profiles,
+                                data_by_name=data["profiles"],
+                                link_by_name=profile_links,
+                            )
+                            if class_profiles
+                            else "",
                         ),
                     ],
                     constraints=constraints,
                     associations=associations,
                     inherited_attributes=collect_inherited_attributes(
-                        class_data, data["classes"], data["intermediates"], data["dictionary"],
+                        class_data, data["dictionary"], data["classes"], data["intermediates"],
                     ),
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (class_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
-                    objects_link_prefix="../objects/",
-                    known_objects=obj_names,
+                    object_links=object_links_from_class_pages,
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
 
@@ -1066,36 +1215,53 @@ def main() -> None:
                         ),
                         (
                             "Profiles",
-                            ", ".join(f"`{p}`" for p in intermediate_profiles) if intermediate_profiles else "",
+                            format_named_links(
+                                intermediate_profiles,
+                                data_by_name=data["profiles"],
+                                link_by_name=profile_links,
+                            )
+                            if intermediate_profiles
+                            else "",
                         ),
                     ],
                     constraints=intermediate_data.get("constraints"),
                     associations=intermediate_data.get("associations"),
                     inherited_attributes=collect_inherited_attributes(
-                        intermediate_data, data["classes"], data["intermediates"], data["dictionary"],
+                        intermediate_data, data["dictionary"], data["classes"], data["intermediates"],
                     ),
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (intermediate_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
-                    objects_link_prefix="../objects/",
-                    known_objects=obj_names,
+                    object_links=object_links_from_class_pages,
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
 
             for name, object_data in data["objects"].items():
+                extends = object_data.get("extends")
                 page = render_entity_page(
                     title=f"{object_data.get('caption') or name} ({name})",
                     description=object_data.get("description"),
-                    meta_entries=[("Extends", f"`{object_data['extends']}`" if object_data.get("extends") else "")],
+                    meta_entries=[
+                        (
+                            "Extends",
+                            format_doc_link(
+                                extends,
+                                data["objects"].get(extends, {}),
+                                target=object_links.get(extends, f"{name_to_slug(extends)}.md"),
+                                include_schema_name=True,
+                            )
+                            if extends
+                            else "",
+                        ),
+                    ],
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
                         for attr_name, attr_data in (object_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
-                    objects_link_prefix="",
-                    known_objects=obj_names,
+                    object_links=object_links,
                 )
                 write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
 
@@ -1126,8 +1292,7 @@ def main() -> None:
                         for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
-                    objects_link_prefix="../objects/",
-                    known_objects=obj_names,
+                    object_links=object_links_from_class_pages,
                 )
                 if extra_sections:
                     # Insert "Applies to" before ## Attributes (or at end if no attributes).
@@ -1138,49 +1303,250 @@ def main() -> None:
                 write_file(output_dir / data["slug"] / "profiles" / f"{name_to_slug(name)}.md", page)
 
             for name, extension_data in data["extensions"].items():
-                lines = [f"# {extension_data['meta'].get('caption') or name}", ""]
-                desc = clean_description(extension_data["meta"].get("description", ""))
-                if desc:
-                    lines.extend([desc, ""])
-                lines.append(f"- **Name**: `{extension_data['meta'].get('name') or name}`")
-                if extension_data["meta"].get("uid") is not None:
-                    lines.append(f"- **UID**: `{extension_data['meta']['uid']}`")
-                lines.append("")
-
-                if extension_data["events"]:
-                    lines.extend(["## Events", ""])
-                    for event_name, event_data in sorted(
-                        extension_data["events"].items(),
-                        key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-                    ):
-                        suffix = f" - {event_data['caption']}" if event_data.get("caption") else ""
-                        lines.append(f"- `{event_name}`{suffix}")
-                    lines.append("")
-
-                if extension_data["objects"]:
-                    lines.extend(["## Objects", ""])
-                    for object_name, object_data in sorted(
-                        extension_data["objects"].items(),
-                        key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-                    ):
-                        suffix = f" - {object_data['caption']}" if object_data.get("caption") else ""
-                        lines.append(f"- `{object_name}`{suffix}")
-                    lines.append("")
-
-                if extension_data["profiles"]:
-                    lines.extend(["## Profiles", ""])
-                    for profile_name, profile_data in sorted(
-                        extension_data["profiles"].items(),
-                        key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-                    ):
-                        suffix = f" - {profile_data['caption']}" if profile_data.get("caption") else ""
-                        lines.append(f"- `{profile_name}`{suffix}")
-                    lines.append("")
+                extension_slug = name_to_slug(name)
+                extension_output_dir = output_dir / data["slug"] / "extensions" / extension_slug
+                extension_dictionary = merge_dictionaries(
+                    data["dictionary"],
+                    extension_data.get("dictionary"),
+                )
+                extension_events = extension_data["events"]
+                extension_objects = extension_data["objects"]
+                extension_profiles = extension_data["profiles"]
+                extension_object_links = build_name_link_map(
+                    data["objects"].keys(),
+                    prefix="../../../objects/",
+                )
+                extension_object_links.update(
+                    build_name_link_map(extension_objects.keys(), prefix="../objects/")
+                )
+                extension_class_links = build_name_link_map(
+                    class_names,
+                    prefix="../../../classes/",
+                )
+                extension_class_links.update(
+                    build_name_link_map(extension_events.keys(), prefix="../events/")
+                )
+                qualified_extension_profiles = {
+                    f"{name}/{profile_name}": profile_data
+                    for profile_name, profile_data in extension_profiles.items()
+                }
+                extension_profile_links = build_name_link_map(
+                    data["profiles"].keys(),
+                    prefix="../../../profiles/",
+                )
+                extension_profile_links.update(
+                    build_name_link_map(extension_profiles.keys(), prefix="../profiles/")
+                )
+                extension_profile_links.update(
+                    {
+                        qualified_name: f"../profiles/{name_to_slug(profile_name)}.md"
+                        for qualified_name, profile_name in (
+                            (f"{name}/{profile_name}", profile_name)
+                            for profile_name in extension_profiles
+                        )
+                    }
+                )
+                extension_profile_data = {
+                    **data["profiles"],
+                    **extension_profiles,
+                    **qualified_extension_profiles,
+                }
 
                 write_file(
-                    output_dir / data["slug"] / "extensions" / f"{name_to_slug(name)}.md",
-                    "\n".join(lines) + "\n",
+                    extension_output_dir / "index.md",
+                    build_extension_index_page(name, extension_data),
                 )
+
+                for event_name, event_data in extension_events.items():
+                    extends = event_data.get("extends")
+                    parent = lookup_schema(
+                        extends or "",
+                        data["classes"],
+                        data["intermediates"],
+                        extension_events,
+                    )
+                    parent_category_key = (
+                        parent.get("category_key")
+                        if parent is not None
+                        else ""
+                    )
+                    category_info = data["categories"].get(parent_category_key, {})
+                    event_profiles = resolve_profiles(
+                        event_data,
+                        extension_events,
+                        data["classes"],
+                        data["intermediates"],
+                    )
+                    constraints = event_data.get("constraints")
+                    if not constraints and parent is not None:
+                        constraints = parent.get("constraints")
+                    associations = event_data.get("associations")
+                    if not associations and parent is not None:
+                        associations = parent.get("associations")
+                    page = render_entity_page(
+                        title=f"{event_data.get('caption') or event_name} ({event_name})",
+                        description=event_data.get("description"),
+                        meta_entries=[
+                            ("Event UID", f"`{event_data['uid']}`" if event_data.get("uid") is not None else ""),
+                            (
+                                "Category",
+                                category_info.get("caption") or parent_category_key or "",
+                            ),
+                            (
+                                "Extends",
+                                format_doc_link(
+                                    extends,
+                                    parent or {},
+                                    target=extension_class_links.get(
+                                        extends,
+                                        f"../../../classes/{name_to_slug(extends)}.md",
+                                    ),
+                                    include_schema_name=True,
+                                )
+                                if extends
+                                else "",
+                            ),
+                            (
+                                "Profiles",
+                                format_named_links(
+                                    event_profiles,
+                                    data_by_name=extension_profile_data,
+                                    link_by_name=extension_profile_links,
+                                )
+                                if event_profiles
+                                else "",
+                            ),
+                        ],
+                        constraints=constraints,
+                        associations=associations,
+                        inherited_attributes=collect_inherited_attributes(
+                            event_data,
+                            extension_dictionary,
+                            extension_events,
+                            data["classes"],
+                            data["intermediates"],
+                        ),
+                        attributes=[
+                            (
+                                attr_name,
+                                resolve_attribute(attr_name, attr_data, extension_dictionary),
+                            )
+                            for attr_name, attr_data in (event_data.get("attributes") or {}).items()
+                            if not attr_name.startswith("$")
+                        ],
+                        object_links=extension_object_links,
+                    )
+                    write_file(
+                        extension_output_dir / "events" / f"{name_to_slug(event_name)}.md",
+                        page,
+                    )
+
+                for object_name, object_data in extension_objects.items():
+                    extends = object_data.get("extends")
+                    object_profiles = list(object_data.get("profiles") or [])
+                    parent = lookup_schema(extends or "", data["objects"], extension_objects)
+                    page = render_entity_page(
+                        title=f"{object_data.get('caption') or object_name} ({object_name})",
+                        description=object_data.get("description"),
+                        meta_entries=[
+                            (
+                                "Extends",
+                                format_doc_link(
+                                    extends,
+                                    parent or {},
+                                    target=(
+                                        f"../../../objects/{name_to_slug(extends)}.md"
+                                        if extends in data["objects"]
+                                        else f"../objects/{name_to_slug(extends)}.md"
+                                    ),
+                                    include_schema_name=True,
+                                )
+                                if extends
+                                else "",
+                            ),
+                            (
+                                "Profiles",
+                                format_named_links(
+                                    object_profiles,
+                                    data_by_name=extension_profile_data,
+                                    link_by_name=extension_profile_links,
+                                )
+                                if object_profiles
+                                else "",
+                            ),
+                        ],
+                        inherited_attributes=collect_inherited_attributes(
+                            object_data,
+                            extension_dictionary,
+                            data["objects"],
+                            extension_objects,
+                        ),
+                        attributes=[
+                            (
+                                attr_name,
+                                resolve_attribute(attr_name, attr_data, extension_dictionary),
+                            )
+                            for attr_name, attr_data in (object_data.get("attributes") or {}).items()
+                            if not attr_name.startswith("$")
+                        ],
+                        object_links=extension_object_links,
+                    )
+                    write_file(
+                        extension_output_dir / "objects" / f"{name_to_slug(object_name)}.md",
+                        page,
+                    )
+
+                extension_profile_to_entities: dict[str, list[str]] = {}
+                for entity_name, entity_data in {**extension_events, **extension_objects}.items():
+                    for profile_name in entity_data.get("profiles") or []:
+                        extension_profile_to_entities.setdefault(profile_name, []).append(
+                            entity_data.get("caption") or entity_name
+                        )
+                for profile_name, consumers in extension_profile_to_entities.items():
+                    extension_profile_to_entities[profile_name] = sorted(
+                        set(consumers),
+                        key=str.casefold,
+                    )
+
+                for profile_name, profile_data in extension_profiles.items():
+                    applies_to = sorted(
+                        {
+                            *extension_profile_to_entities.get(profile_name, []),
+                            *extension_profile_to_entities.get(f"{name}/{profile_name}", []),
+                        },
+                        key=str.casefold,
+                    )
+                    applies_section = (
+                        "\n".join(f"- {item}" for item in applies_to)
+                        if applies_to
+                        else ""
+                    )
+                    extra_sections = ""
+                    if applies_section:
+                        extra_sections = f"\n\n## Applies to\n\n{applies_section}\n"
+                    page = render_entity_page(
+                        title=f"{profile_data.get('caption') or profile_name} ({profile_name})",
+                        description=profile_data.get("description"),
+                        meta_entries=[],
+                        attributes=[
+                            (
+                                attr_name,
+                                resolve_attribute(attr_name, attr_data, extension_dictionary),
+                            )
+                            for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
+                            if not attr_name.startswith("$")
+                        ],
+                        object_links=extension_object_links,
+                    )
+                    if extra_sections:
+                        if "## Attributes" in page:
+                            page = page.replace("## Attributes", f"{extra_sections.strip()}\n\n## Attributes")
+                        else:
+                            page = page.rstrip("\n") + "\n" + extra_sections
+                    write_file(
+                        extension_output_dir / "profiles" / f"{name_to_slug(profile_name)}.md",
+                        page,
+                    )
 
         print(f"Generated OCSF skill in {output_dir}")
     finally:

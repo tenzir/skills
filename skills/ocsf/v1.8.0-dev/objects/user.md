@@ -2,7 +2,7 @@
 
 The User object describes the characteristics of a user/person or a security principal.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

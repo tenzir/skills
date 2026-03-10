@@ -2,7 +2,7 @@
 
 The Security State object describes the security related state of a managed entity.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

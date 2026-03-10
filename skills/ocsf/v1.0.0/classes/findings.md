@@ -4,7 +4,7 @@ Abstract base class for Findings event classes. Concrete classes in this categor
 
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `cloud`, `datetime`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

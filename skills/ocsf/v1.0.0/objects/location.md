@@ -2,7 +2,7 @@
 
 The Geo Location object describes a geographical location, usually associated with an IP address. Defined by D3FEND [d3f:PhysicalLocation](https://d3fend.mitre.org/dao/artifact/d3f:PhysicalLocation/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Access Analysis Result object describes access relationships and pathways between identities, resources, focusing on who can access what and through which mechanisms. This evaluates access levels (read/write/admin), access types (direct, cross-account, public, federated), and the conditions under which access is granted. Use this for resource-centric security assessments such as external access discovery, public exposure analysis, etc.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

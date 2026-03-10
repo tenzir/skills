@@ -2,7 +2,7 @@
 
 The Resource Details object describes details about resources that were affected by the activity/event.
 
-- **Extends**: `_resource`
+- **Extends**: [Resource (_resource)](_resource.md)
 
 ## Attributes
 

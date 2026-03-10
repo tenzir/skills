@@ -2,7 +2,7 @@
 
 The Rule object describes characteristics of a rule associated with a policy or an event.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

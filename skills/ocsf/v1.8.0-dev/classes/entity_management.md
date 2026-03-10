@@ -5,7 +5,7 @@ Entity Management events report activity by a managed client, a micro service, o
 - **Class UID**: `3004`
 - **Category**: Identity & Access Management
 - **Extends**: [Identity & Access Management (iam)](iam.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

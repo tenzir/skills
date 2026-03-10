@@ -2,7 +2,7 @@
 
 The Unmanned Aerial System object describes the characteristics, Position Location Information (PLI), and other metadata of Unmanned Aerial Systems (UAS) and other unmanned and drone systems used in Remote ID. Remote ID is defined in the Standard Specification for Remote ID and Tracking (ASTM Designation: F3411-22a) [ASTM F3411-22a](https://cdn.standards.iteh.ai/samples/112830/71297057ac42432880a203654f213709/ASTM-F3411-22a.pdf).
 
-- **Extends**: `aircraft`
+- **Extends**: [Aircraft (aircraft)](aircraft.md)
 
 ## Attributes
 

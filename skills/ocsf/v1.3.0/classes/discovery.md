@@ -4,7 +4,7 @@ Abstract base class for Discovery event classes. Concrete classes in this catego
 
 - **Category**: Discovery
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `cloud`, `datetime`, `osint`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Inherited attributes
 

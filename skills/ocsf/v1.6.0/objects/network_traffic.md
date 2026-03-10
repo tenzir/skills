@@ -2,7 +2,7 @@
 
 The Network Traffic object describes characteristics of network traffic. Network traffic refers to data moving across a network at a given point of time.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

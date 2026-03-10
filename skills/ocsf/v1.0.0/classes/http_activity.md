@@ -5,7 +5,7 @@ HTTP Activity events report HTTP connection and traffic information.
 - **Class UID**: `4002`
 - **Category**: Network Activity
 - **Extends**: [Network Activity (network_activity)](network_activity.md)
-- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Security Control](../profiles/security_control.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

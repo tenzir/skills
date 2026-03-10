@@ -2,7 +2,7 @@
 
 The Analytic object contains details about the analytic technique used to analyze and derive insights from the data or information that led to the finding or conclusion.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

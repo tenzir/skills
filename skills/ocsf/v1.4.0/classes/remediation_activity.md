@@ -5,7 +5,7 @@ Remediation Activity events report on attempts at remediating a compromised devi
 - **Class UID**: `7001`
 - **Category**: Remediation
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

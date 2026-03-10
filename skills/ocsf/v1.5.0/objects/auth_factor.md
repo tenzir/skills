@@ -2,7 +2,7 @@
 
 An Authentication Factor object describes a category of methods used for identity verification in an authentication attempt.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

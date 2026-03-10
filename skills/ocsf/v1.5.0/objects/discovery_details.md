@@ -2,7 +2,7 @@
 
 The Discovery Details object describes results of a discovery task/job.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

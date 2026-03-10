@@ -2,7 +2,7 @@
 
 The DNS Answer object represents a specific response provided by the Domain Name System (DNS) when querying for information about a domain or performing a DNS operation. It encapsulates the relevant details and data returned by the DNS server in response to a query.
 
-- **Extends**: `_dns`
+- **Extends**: [DNS (_dns)](_dns.md)
 
 ## Attributes
 

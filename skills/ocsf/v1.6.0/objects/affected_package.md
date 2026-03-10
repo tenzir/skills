@@ -2,7 +2,7 @@
 
 The Affected Package object describes details about a software package identified as affected by a vulnerability/vulnerabilities.
 
-- **Extends**: `package`
+- **Extends**: [Software Package (package)](package.md)
 
 ## Attributes
 

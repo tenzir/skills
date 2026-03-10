@@ -2,7 +2,7 @@
 
 The Software Component object describes characteristics of a software component within a software package.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

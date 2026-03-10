@@ -5,7 +5,7 @@ Module Query events report information about loaded modules.
 - **Class UID**: `5011`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

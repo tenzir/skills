@@ -2,7 +2,7 @@
 
 The Network Connection Information object describes characteristics of an OSI Transport Layer communication, including TCP and UDP.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

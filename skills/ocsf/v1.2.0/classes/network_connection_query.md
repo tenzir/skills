@@ -5,7 +5,7 @@ Network Connection Query events report information about active network connecti
 - **Class UID**: `5012`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

@@ -2,7 +2,7 @@
 
 The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network.
 
-- **Extends**: `endpoint`
+- **Extends**: [Endpoint (endpoint)](endpoint.md)
 
 ## Attributes
 

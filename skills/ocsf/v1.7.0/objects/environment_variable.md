@@ -2,7 +2,7 @@
 
 An environment variable.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

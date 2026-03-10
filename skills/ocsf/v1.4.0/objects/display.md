@@ -2,7 +2,7 @@
 
 The Display object contains information about the physical or virtual display connected to a computer system.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

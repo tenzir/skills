@@ -5,7 +5,7 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 - **Class UID**: `6005`
 - **Category**: Application Activity
 - **Extends**: [Application Activity (application)](application.md)
-- **Profiles**: `security_control`, `cloud`, `datetime`
+- **Profiles**: [Security Control](../profiles/security_control.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 

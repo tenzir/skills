@@ -5,7 +5,7 @@ An Incident Finding reports the creation, update, or closure of security inciden
 - **Class UID**: `2005`
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `cloud`, `datetime`, `osint`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Constraints
 

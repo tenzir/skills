@@ -2,7 +2,7 @@
 
 The Network Interface object describes the type and associated attributes of a physical or virtual network interface.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

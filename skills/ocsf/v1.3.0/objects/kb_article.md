@@ -2,7 +2,7 @@
 
 The KB Article object contains metadata that describes the patch or update.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

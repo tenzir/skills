@@ -5,7 +5,7 @@ Security Finding events describe findings, detections, anomalies, alerts and/or 
 - **Class UID**: `2001`
 - **Category**: Findings
 - **Extends**: [Findings (findings)](findings.md)
-- **Profiles**: `cloud`, `datetime`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

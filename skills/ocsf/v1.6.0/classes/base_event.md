@@ -2,7 +2,7 @@
 
 The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
 
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Attributes
 

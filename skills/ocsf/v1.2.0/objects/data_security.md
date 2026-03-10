@@ -2,7 +2,7 @@
 
 The Data Security object describes the characteristics, techniques and content of a Data Loss Prevention (DLP), Data Loss Detection (DLD), Data Classification, or similar tools' finding, alert, or detection mechanism(s).
 
-- **Extends**: `data_classification`
+- **Extends**: [Data Classification (data_classification)](data_classification.md)
 
 ## Attributes
 

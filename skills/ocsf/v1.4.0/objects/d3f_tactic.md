@@ -2,7 +2,7 @@
 
 The MITRE D3FEND™ Tactic object describes the tactic ID and/or name that is associated to an attack
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

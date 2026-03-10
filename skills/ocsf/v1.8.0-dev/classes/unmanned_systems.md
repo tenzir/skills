@@ -4,7 +4,7 @@ Abstract base class for Unmanned Systems event classes. Concrete classes in this
 
 - **Category**: Unmanned Systems
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

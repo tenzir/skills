@@ -2,7 +2,7 @@
 
 The Assessment object describes a point-in-time assessment, check, or evaluation of a specific configuration or signal against an asset, entity, person, or otherwise. For example, this can encapsulate `os_signals` from CrowdStrike Falcon Zero Trust Assessments, or account for `Datastore` configurations from Cyera, or capture details of Microsoft Intune configuration policies.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

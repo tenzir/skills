@@ -5,7 +5,7 @@ Service Query events report information about running services.
 - **Class UID**: `5016`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
-- **Profiles**: `host`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Inherited attributes
 

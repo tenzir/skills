@@ -2,7 +2,7 @@
 
 The Kernel Extension object describes a kernel driver that has been loaded or unloaded into the operating system (OS) kernel.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

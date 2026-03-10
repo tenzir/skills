@@ -2,7 +2,7 @@
 
 The Software Package object describes details about a software package.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

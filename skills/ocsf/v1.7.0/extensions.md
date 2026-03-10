@@ -1,4 +1,4 @@
 # Extensions (1.7.0)
 
-- [Linux](extensions/linux.md)
-- [Windows](extensions/windows.md)
+- [Linux](extensions/linux/index.md)
+- [Windows](extensions/windows/index.md)

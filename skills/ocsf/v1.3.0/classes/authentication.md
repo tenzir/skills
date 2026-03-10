@@ -5,7 +5,7 @@ Authentication events report authentication session activities such as user atte
 - **Class UID**: `3002`
 - **Category**: Identity & Access Management
 - **Extends**: [Identity & Access Management (iam)](iam.md)
-- **Profiles**: `host`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Constraints
 

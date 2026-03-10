@@ -2,7 +2,7 @@
 
 The Technique object describes the technique related to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Process object describes a running instance of a launched program. Defined by D3FEND [d3f:Process](https://d3fend.mitre.org/dao/artifact/d3f:Process/).
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

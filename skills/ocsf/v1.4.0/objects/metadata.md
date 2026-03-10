@@ -2,7 +2,7 @@
 
 The Metadata object describes the metadata associated with the event.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

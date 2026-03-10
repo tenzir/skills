@@ -2,7 +2,7 @@
 
 The Software Package object describes details about a software package. Defined by D3FEND [d3f:SoftwarePackage](https://d3fend.mitre.org/dao/artifact/d3f:SoftwarePackage/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

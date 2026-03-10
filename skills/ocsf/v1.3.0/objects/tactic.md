@@ -2,7 +2,7 @@
 
 The MITRE ATT&CK® Tactic object describes the tactic ID and/or name that is associated to an attack, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

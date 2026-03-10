@@ -2,7 +2,7 @@
 
 This object is a used to capture strings which may be truncated by a security product due to their length.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

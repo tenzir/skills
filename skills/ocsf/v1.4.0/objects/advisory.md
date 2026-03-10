@@ -2,7 +2,7 @@
 
 The Advisory object represents publicly disclosed cybersecurity vulnerabilities defined in a Secruity advisory. e.g.  `Microsoft KB Article, Apple Security Advisory`
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

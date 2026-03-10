@@ -2,7 +2,7 @@
 
 Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populuated.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

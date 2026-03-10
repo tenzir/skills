@@ -523,12 +523,6 @@ The Tenzir MCP Server enables AI assistants to interact with Tenzir through the 
 
 The Tenzir Claude Marketplace provides plugins with specialized knowledge and workflows for Tenzir development. Claude Code supports plugins that extend the agent with custom slash commands, skills, agents, and hooks. Marketplaces bundle Claude plugins for easy distribution.
 
-### Standards
-
-#### [OCSF](reference/ocsf.md)
-
-This reference provides comprehensive documentation for the Open Cybersecurity Schema Framework (OCSF), an open standard for normalizing security telemetry across tools and vendors.
-
 ### Workflows
 
 #### [Create a parser package](reference/workflows/create-parser-package.md)
@@ -1051,6 +1045,23 @@ This workflow guides you through creating an OCSF mapping for a parser package. 
 - [type_of](reference/functions/type_of.md)
 - [flatten](reference/functions/flatten.md)
 - [unflatten](reference/functions/unflatten.md)
+
+#### Claude Marketplace Index
+
+- [Brand](reference/claude-plugins/brand.md)
+- [Dev](reference/claude-plugins/dev.md)
+- [Excalidraw](reference/claude-plugins/excalidraw.md)
+- [Python](reference/claude-plugins/python.md)
+- [Tenzir](reference/claude-plugins/tenzir.md)
+
+#### Node Index
+
+- [Node Configuration](reference/node/configuration.md)
+
+#### Platform Index
+
+- [Platform command line interface](reference/platform/command-line-interface.md)
+- [Platform Configuration](reference/platform/configuration.md)
 
 ## [Integrations](integrations.md)
 

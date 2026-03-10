@@ -2,7 +2,7 @@
 
 The Subject Alternative name (SAN) object describes a SAN secured by a digital certificate
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

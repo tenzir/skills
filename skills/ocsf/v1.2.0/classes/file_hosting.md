@@ -5,7 +5,7 @@ File Hosting Activity events report the actions taken by file management applica
 - **Class UID**: `6006`
 - **Category**: Application Activity
 - **Extends**: [Application Activity (application)](application.md)
-- **Profiles**: `cloud`, `datetime`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

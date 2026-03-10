@@ -2,7 +2,7 @@
 
 The Domain Name System (DNS) object represents the shared information associated with the DNS query and answer objects.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

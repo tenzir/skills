@@ -2,7 +2,7 @@
 
 The Image object provides a description of a specific Virtual Machine (VM) or Container image.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

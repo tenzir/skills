@@ -2,7 +2,7 @@
 
 The Authentication Token object contains the attributes pertaining to an authentication token, ticket, or assertion e.g. Kerberos, OIDC, SAML.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Network Traffic object describes characteristics of network traffic. Network traffic refers to data moving across a network at a given point of time. Defined by D3FEND [d3f:NetworkTraffic](https://d3fend.mitre.org/dao/artifact/d3f:NetworkTraffic/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

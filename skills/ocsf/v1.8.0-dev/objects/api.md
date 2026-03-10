@@ -2,7 +2,7 @@
 
 The API, or Application Programming Interface, object represents  information pertaining to an API request and response.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

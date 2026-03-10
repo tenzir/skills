@@ -2,7 +2,7 @@
 
 The database object is used for databases which are typically datastore services that contain an organized collection of structured and unstructured data or a types of data.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

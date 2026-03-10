@@ -5,7 +5,7 @@ Drone Flights Activity events report the activity of Unmanned Aerial Systems (UA
 - **Class UID**: `8001`
 - **Category**: Unmanned Systems
 - **Extends**: [Unmanned Systems (unmanned_systems)](unmanned_systems.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Constraints
 

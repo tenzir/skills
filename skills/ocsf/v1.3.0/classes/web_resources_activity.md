@@ -5,7 +5,7 @@ Web Resources Activity events describe actions executed on a set of Web Resource
 - **Class UID**: `6001`
 - **Category**: Application Activity
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `host`, `network_proxy`, `security_control`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Network Proxy](../profiles/network_proxy.md), [Security Control](../profiles/security_control.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Inherited attributes
 

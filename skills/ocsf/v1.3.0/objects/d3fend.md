@@ -2,7 +2,7 @@
 
 The [MITRE D3FEND™](https://d3fend.mitre.org) object describes the tactic, technique & sub-technique associated with a countermeasure as defined in [DEFEND MatrixTM](https://d3fend.mitre.org/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

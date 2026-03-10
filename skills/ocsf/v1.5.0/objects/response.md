@@ -2,7 +2,7 @@
 
 The Response Elements object describes characteristics of an API response.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

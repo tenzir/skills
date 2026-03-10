@@ -2,7 +2,7 @@
 
 The entity from which an event or finding was reported.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

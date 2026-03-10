@@ -2,7 +2,7 @@
 
 The Request Elements object describes characteristics of an API request.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

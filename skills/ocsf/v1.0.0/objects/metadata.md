@@ -2,7 +2,7 @@
 
 The Metadata object describes the metadata associated with the event. Defined by D3FEND [d3f:Metadata](https://d3fend.mitre.org/dao/artifact/d3f:Metadata/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

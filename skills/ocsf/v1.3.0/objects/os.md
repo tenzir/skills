@@ -2,7 +2,7 @@
 
 The Operating System (OS) object describes characteristics of an OS, such as Linux or Windows. Defined by D3FEND [d3f:OperatingSystem](https://d3fend.mitre.org/dao/artifact/d3f:OperatingSystem/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

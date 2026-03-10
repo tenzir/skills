@@ -5,7 +5,7 @@ Web Resource Access Activity events describe successful/failed attempts to acces
 - **Class UID**: `6004`
 - **Category**: Application Activity
 - **Extends**: [Application Activity (application)](application.md)
-- **Profiles**: `network_proxy`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Network Proxy](../profiles/network_proxy.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

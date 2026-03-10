@@ -2,7 +2,7 @@
 
 Threat actor is responsible for the observed malicious activity.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Email object describes the email metadata such as sender, recipients, and direction, and can include embedded URLs and files.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

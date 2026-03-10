@@ -44,7 +44,10 @@ articles/{slug}.md
 {version}/profiles.md
 {version}/profiles/{name}.md
 {version}/extensions.md
-{version}/extensions/{name}.md
+{version}/extensions/{name}/index.md
+{version}/extensions/{name}/events/{event}.md
+{version}/extensions/{name}/objects/{object}.md
+{version}/extensions/{name}/profiles/{profile}.md
 {version}/types.md
 ```
 

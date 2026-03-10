@@ -2,7 +2,7 @@
 
 The observable object is a pivot element that contains related information found in many places in the event.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

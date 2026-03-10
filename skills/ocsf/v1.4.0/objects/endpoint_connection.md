@@ -2,7 +2,7 @@
 
 The Endpoint Connection object contains information detailing a connection attempt to an endpoint.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

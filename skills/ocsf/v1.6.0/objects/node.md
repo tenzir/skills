@@ -2,7 +2,7 @@
 
 Represents a node or a vertex in a graph structure.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -4,7 +4,7 @@ The Finding event is a generic event that defines a set of attributes available 
 
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

@@ -5,7 +5,7 @@ File Remediation Activity events report on attempts at remediating files. It fol
 - **Class UID**: `7002`
 - **Category**: Remediation
 - **Extends**: [Remediation Activity (remediation_activity)](remediation_activity.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

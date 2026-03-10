@@ -2,7 +2,7 @@
 
 The Module object describes the load attributes of a module.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

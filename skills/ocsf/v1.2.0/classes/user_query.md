@@ -5,7 +5,7 @@ User Query events report user data that have been discovered, queried, polled or
 - **Class UID**: `5018`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

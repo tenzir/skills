@@ -2,7 +2,7 @@
 
 The Related Event object describes an event related to a finding or detection as identified by the security product.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -6,7 +6,7 @@ Note: If the Finding is an incident, i.e. requires incident workflow, also apply
 - **Class UID**: `2003`
 - **Category**: Findings
 - **Extends**: [Finding (finding)](finding.md)
-- **Profiles**: `incident`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Incident](../profiles/incident.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

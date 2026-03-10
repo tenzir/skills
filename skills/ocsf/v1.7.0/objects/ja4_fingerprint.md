@@ -2,7 +2,7 @@
 
 The JA4+ fingerprint object provides detailed fingerprint information about various aspects of network traffic which is both machine and human readable.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

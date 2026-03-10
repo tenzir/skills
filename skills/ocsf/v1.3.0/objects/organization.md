@@ -2,7 +2,7 @@
 
 The Organization object describes characteristics of an organization or company and its division if any.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

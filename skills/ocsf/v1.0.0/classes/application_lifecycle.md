@@ -5,7 +5,7 @@ Application Lifecycle events report installation, removal, start, stop of an app
 - **Class UID**: `6002`
 - **Category**: Application Activity
 - **Extends**: [Application Activity (application)](application.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

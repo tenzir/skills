@@ -2,7 +2,7 @@
 
 The Affected Code object describes details about a code block identified as vulnerable.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

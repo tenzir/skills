@@ -2,7 +2,7 @@
 
 The Service object describes characteristics of a service,  `e.g. AWS EC2.`
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

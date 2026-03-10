@@ -2,7 +2,7 @@
 
 The DCE/RPC, or Distributed Computing Environment/Remote Procedure Call, object describes the remote procedure call system for distributed computing environments. Defined by D3FEND [d3f:RemoteProcedureCall](https://d3fend.mitre.org/dao/artifact/d3f:RemoteProcedureCall/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

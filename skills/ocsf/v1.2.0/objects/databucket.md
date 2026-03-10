@@ -2,7 +2,7 @@
 
 The databucket object is a basic container that holds data, typically organized through the use of data partitions.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The MITRE Technique object describes the ATT&CK® or ATLAS™ Technique ID and/or name associated to an attack.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Operating System (OS) object describes characteristics of an OS, such as Linux or Windows.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

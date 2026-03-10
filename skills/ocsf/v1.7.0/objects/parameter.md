@@ -2,7 +2,7 @@
 
 The Parameter object provides details regarding a parameter of a a function.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

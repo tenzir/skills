@@ -5,7 +5,7 @@ Email File Activity events report files within emails.
 - **Class UID**: `4011`
 - **Category**: Network Activity
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `host`, `security_control`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Security Control](../profiles/security_control.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Inherited attributes
 

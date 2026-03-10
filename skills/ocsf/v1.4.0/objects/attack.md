@@ -2,7 +2,7 @@
 
 The [MITRE ATT&CK®](https://attack.mitre.org) object describes the tactic, technique & sub-technique associated to an attack as defined in [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

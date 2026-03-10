@@ -2,7 +2,7 @@
 
 The TLS Extension object describes additional attributes that extend the base Transport Layer Security (TLS) object.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

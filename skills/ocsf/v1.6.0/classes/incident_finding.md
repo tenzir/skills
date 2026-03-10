@@ -6,7 +6,7 @@ Note: `Incident Finding` implicitly includes the `incident` profile and it shoul
 - **Class UID**: `2005`
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `incident`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Incident](../profiles/incident.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Constraints
 

@@ -2,7 +2,7 @@
 
 The additional LDAP attributes that describe a person.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

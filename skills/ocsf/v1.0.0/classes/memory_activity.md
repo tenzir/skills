@@ -5,7 +5,7 @@ Memory Activity events report when a process has memory allocated, read/modified
 - **Class UID**: `1004`
 - **Category**: System Activity
 - **Extends**: [System Activity (system)](system.md)
-- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Security Control](../profiles/security_control.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Associations
 

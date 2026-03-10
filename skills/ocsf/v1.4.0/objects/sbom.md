@@ -2,7 +2,7 @@
 
 The Software Bill of Materials object describes characteristics of a generated SBOM.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

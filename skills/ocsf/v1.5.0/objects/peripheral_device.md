@@ -2,7 +2,7 @@
 
 The peripheral device object describes the identity, vendor and model of a peripheral device.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

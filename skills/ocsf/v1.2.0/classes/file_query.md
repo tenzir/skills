@@ -5,7 +5,7 @@ File Query events report information about files that are present on the system.
 - **Class UID**: `5007`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

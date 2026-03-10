@@ -2,7 +2,7 @@
 
 The GPU information object contains attributes describing graphical processing hardware.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

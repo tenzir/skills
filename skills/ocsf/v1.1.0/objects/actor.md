@@ -2,7 +2,7 @@
 
 The Actor object contains details about the user, role, or process that initiated or performed a specific activity.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

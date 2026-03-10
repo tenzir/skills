@@ -2,7 +2,7 @@
 
 The peripheral device object describes the properties of external, connectable, and detachable hardware.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

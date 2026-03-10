@@ -2,7 +2,7 @@
 
 The Uniform Resource Locator(URL) object describes the characteristics of a URL. Defined in [RFC 1738](https://datatracker.ietf.org/doc/html/rfc1738) and by D3FEND [d3f:URL](https://d3fend.mitre.org/dao/artifact/d3f:URL/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

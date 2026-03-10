@@ -2,7 +2,7 @@
 
 The transformation_info object represents the mapping or transformation used.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

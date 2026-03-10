@@ -2,7 +2,7 @@
 
 The Cloud object contains information about a cloud account such as AWS Account ID, regions, etc.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

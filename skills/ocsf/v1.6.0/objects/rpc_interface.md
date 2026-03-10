@@ -2,7 +2,7 @@
 
 The RPC Interface represents the remote procedure call interface used in the DCE/RPC session.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

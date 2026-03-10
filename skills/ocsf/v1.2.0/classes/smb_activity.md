@@ -5,7 +5,7 @@ Server Message Block (SMB) Protocol Activity events report client/server connect
 - **Class UID**: `4006`
 - **Category**: Network Activity
 - **Extends**: [Network (network)](network.md)
-- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Network Proxy](../profiles/network_proxy.md), [Security Control](../profiles/security_control.md), [Load Balancer](../profiles/load_balancer.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

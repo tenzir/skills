@@ -5,7 +5,7 @@ Group Management events report management updates to a group, including updates 
 - **Class UID**: `3006`
 - **Category**: Identity & Access Management
 - **Extends**: [Identity & Access Management (iam)](iam.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

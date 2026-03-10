@@ -2,7 +2,7 @@
 
 The Account object contains details about the account that initiated or performed a specific activity within a system or application.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Unmanned System Operating Area object describes details about a precise area of operations for a UAS flight or mission.
 
-- **Extends**: `location`
+- **Extends**: [Geo Location (location)](location.md)
 
 ## Attributes
 

@@ -5,7 +5,7 @@ Network File Activity events report file activities traversing the network, incl
 - **Class UID**: `4010`
 - **Category**: Network Activity
 - **Extends**: [Network (network)](network.md)
-- **Profiles**: `network_proxy`, `load_balancer`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Network Proxy](../profiles/network_proxy.md), [Load Balancer](../profiles/load_balancer.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Constraints
 

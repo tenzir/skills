@@ -5,7 +5,7 @@ Device Config State events report device configuration data and CIS Benchmark re
 - **Class UID**: `5002`
 - **Category**: Discovery
 - **Extends**: [Discovery (discovery)](discovery.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

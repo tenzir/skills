@@ -2,7 +2,7 @@
 
 The DNS query object represents a specific request made to the Domain Name System (DNS) to retrieve information about a domain or perform a DNS operation. This object encapsulates the necessary attributes and methods to construct and send DNS queries, specify the query type (e.g., A, AAAA, MX). Defined by D3FEND [d3f:DNSLookup](https://d3fend.mitre.org/dao/artifact/d3f:DNSLookup/).
 
-- **Extends**: `_dns`
+- **Extends**: [DNS (_dns)](_dns.md)
 
 ## Attributes
 

@@ -5,7 +5,7 @@ User Inventory Info events report user inventory data that is either logged or p
 - **Class UID**: `5003`
 - **Category**: Discovery
 - **Extends**: [Discovery (discovery)](discovery.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

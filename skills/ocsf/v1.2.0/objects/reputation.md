@@ -2,7 +2,7 @@
 
 The Reputation object describes the reputation/risk score of an entity (e.g. device, user, domain).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

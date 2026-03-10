@@ -2,7 +2,7 @@
 
 The Remediation object describes the recommended remediation steps to address identified issue(s).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

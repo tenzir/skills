@@ -2,7 +2,7 @@
 
 A graph data structure representation with nodes and edges.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

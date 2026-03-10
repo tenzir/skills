@@ -2,7 +2,7 @@
 
 The Managed Entity object describes the type and version of an entity, such as a user, device, or policy. For types in the `type_id` enum list, an associated attribute should be populated. If the type of entity is not in the `type_id` list, information can be put into the `data` attribute, `type_id` should be 'Other' and the `type` attribute should label the entity type.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

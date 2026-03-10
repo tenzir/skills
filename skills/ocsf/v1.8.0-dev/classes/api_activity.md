@@ -5,7 +5,7 @@ API events describe general CRUD (Create, Read, Update, Delete) API activities, 
 - **Class UID**: `6003`
 - **Category**: Application Activity
 - **Extends**: [Application Activity (application)](application.md)
-- **Profiles**: `trace`, `ai_operation`, `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Trace](../profiles/trace.md), [AI Operation](../profiles/ai_operation.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 

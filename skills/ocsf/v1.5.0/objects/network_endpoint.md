@@ -2,7 +2,7 @@
 
 The Network Endpoint object describes characteristics of a network endpoint. These can be a source or destination of a network connection.
 
-- **Extends**: `endpoint`
+- **Extends**: [Endpoint (endpoint)](endpoint.md)
 
 ## Attributes
 

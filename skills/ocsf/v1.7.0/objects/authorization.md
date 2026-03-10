@@ -2,7 +2,7 @@
 
 The Authorization Result object provides details about the authorization outcome and associated policies related to activity.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

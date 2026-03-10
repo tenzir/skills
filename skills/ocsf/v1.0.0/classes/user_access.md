@@ -5,7 +5,7 @@ User Access Management events report management updates to a user's privileges.
 - **Class UID**: `3005`
 - **Category**: Identity & Access Management
 - **Extends**: [Identity & Access Management (iam)](iam.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

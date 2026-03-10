@@ -2,7 +2,7 @@
 
 The Classifier Details object describes details about the classifier used for data classification.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

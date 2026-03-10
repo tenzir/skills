@@ -2,7 +2,7 @@
 
 The Managed Entity object describes the type and version of an entity, such as a policy or configuration.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

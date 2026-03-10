@@ -5,7 +5,7 @@ Kernel Activity events report when an process creates, reads, or deletes a kerne
 - **Class UID**: `1003`
 - **Category**: System Activity
 - **Extends**: [System Activity (system)](system.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Associations
 

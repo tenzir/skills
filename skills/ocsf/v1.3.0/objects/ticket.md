@@ -2,7 +2,7 @@
 
 The Ticket object represents ticket in the customer's systems like Salesforce, jira etc.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

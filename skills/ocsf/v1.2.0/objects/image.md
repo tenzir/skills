@@ -2,7 +2,7 @@
 
 The Image object provides a description of a specific Virtual Machine (VM) or Container image. Defined by D3FEND [d3f:ContainerImage](https://d3fend.mitre.org/dao/artifact/d3f:ContainerImage/).
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

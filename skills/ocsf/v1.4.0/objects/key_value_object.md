@@ -2,7 +2,7 @@
 
 A generic object allowing to define a `{key:value}` pair.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

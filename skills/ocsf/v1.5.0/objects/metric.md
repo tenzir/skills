@@ -2,7 +2,7 @@
 
 The Metric object defines a simple name/value pair entity for a metric.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

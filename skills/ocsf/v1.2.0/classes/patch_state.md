@@ -5,7 +5,7 @@ Operating System Patch State reports the installation of an OS patch to a device
 - **Class UID**: `5004`
 - **Category**: Discovery
 - **Extends**: [Discovery (discovery)](discovery.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 

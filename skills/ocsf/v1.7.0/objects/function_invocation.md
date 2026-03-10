@@ -2,7 +2,7 @@
 
 The Function Invocation object provides details regarding the invocation of a function.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

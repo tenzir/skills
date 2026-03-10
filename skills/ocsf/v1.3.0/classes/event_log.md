@@ -5,7 +5,7 @@ Event Log Activity events report actions pertaining to the system's event loggin
 - **Class UID**: `1008`
 - **Category**: System Activity
 - **Extends**: [System Activity (system)](system.md)
-- **Profiles**: `host`, `security_control`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Security Control](../profiles/security_control.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Constraints
 

@@ -5,7 +5,7 @@ Network File Activity events report activities on a cloud file storage service s
 - **Class UID**: `4010`
 - **Category**: Network Activity
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `cloud`, `datetime`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

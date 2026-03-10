@@ -2,7 +2,7 @@
 
 The Data Classification object includes information about data classification levels and data category types.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

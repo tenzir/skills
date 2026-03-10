@@ -4,7 +4,7 @@ Abstract base class for Network Activity event classes. Concrete classes in this
 
 - **Category**: Network Activity
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `host`, `security_control`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Security Control](../profiles/security_control.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

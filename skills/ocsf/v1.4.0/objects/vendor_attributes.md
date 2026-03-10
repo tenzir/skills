@@ -3,7 +3,7 @@
 The Vendor Attributes object can be used to represent values of attributes populated by the Vendor/Finding Provider. It can help distinguish between the vendor-prodvided values and consumer-updated values, of key attributes like `severity_id`.
 The original finding producer should not populate this object. It should be populated by consuming systems that support data mutability.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

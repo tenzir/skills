@@ -5,7 +5,7 @@ DNS Activity events report DNS queries and answers as seen on the network.
 - **Class UID**: `4003`
 - **Category**: Network Activity
 - **Extends**: [Network (network)](network.md)
-- **Profiles**: `host`, `network_proxy`, `security_control`, `load_balancer`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Network Proxy](../profiles/network_proxy.md), [Security Control](../profiles/security_control.md), [Load Balancer](../profiles/load_balancer.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Inherited attributes
 

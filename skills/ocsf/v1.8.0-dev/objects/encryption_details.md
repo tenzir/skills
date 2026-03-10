@@ -2,7 +2,7 @@
 
 Details about the encryption methodology utilized.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

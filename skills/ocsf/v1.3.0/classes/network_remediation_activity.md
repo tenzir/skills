@@ -5,7 +5,7 @@ Network Remediation Activity events report on attempts at remediating computer n
 - **Class UID**: `7004`
 - **Category**: Remediation
 - **Extends**: [Remediation Activity (remediation_activity)](remediation_activity.md)
-- **Profiles**: `host`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Inherited attributes
 

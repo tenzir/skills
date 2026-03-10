@@ -2,7 +2,7 @@
 
 The Process object describes a running instance of a launched program.
 
-- **Extends**: `process_entity`
+- **Extends**: [Process Entity (process_entity)](process_entity.md)
 
 ## Attributes
 

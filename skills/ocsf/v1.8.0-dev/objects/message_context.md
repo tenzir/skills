@@ -2,7 +2,7 @@
 
 Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

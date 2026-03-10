@@ -5,7 +5,7 @@ Compliance Finding events describe results of evaluations performed against reso
 - **Class UID**: `2003`
 - **Category**: Findings
 - **Extends**: [Finding (finding)](finding.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

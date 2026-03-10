@@ -2,7 +2,7 @@
 
 The Transport Layer Security (TLS) object describes the negotiated TLS protocol used for secure communications over an establish network connection.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

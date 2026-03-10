@@ -2,7 +2,7 @@
 
 The Uniform Resource Locator (URL) object describes the characteristics of a URL.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

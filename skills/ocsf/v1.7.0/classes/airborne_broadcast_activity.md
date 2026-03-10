@@ -5,7 +5,7 @@ Airborne Broadcast Activity events report the activity of any aircraft or unmann
 - **Class UID**: `8002`
 - **Category**: Unmanned Systems
 - **Extends**: [Unmanned Systems (unmanned_systems)](unmanned_systems.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Constraints
 

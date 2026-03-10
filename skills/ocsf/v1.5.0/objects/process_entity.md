@@ -2,7 +2,7 @@
 
 The Process Entity object provides critical fields for referencing a process.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

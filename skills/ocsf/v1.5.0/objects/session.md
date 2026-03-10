@@ -2,7 +2,7 @@
 
 The Session object describes details about an authenticated session. e.g. Session Creation Time, Session Issuer.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

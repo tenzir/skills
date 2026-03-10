@@ -5,7 +5,7 @@ DHCP Activity events report MAC to IP assignment via DHCP from a client or serve
 - **Class UID**: `4004`
 - **Category**: Network Activity
 - **Extends**: [Base Event (base_event)](base_event.md)
-- **Profiles**: `host`, `cloud`, `datetime`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
 
 ## Inherited attributes
 

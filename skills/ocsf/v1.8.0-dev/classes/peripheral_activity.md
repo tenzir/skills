@@ -5,7 +5,7 @@ Peripheral Activity events log a system's interactions with external, connectabl
 - **Class UID**: `1010`
 - **Category**: System Activity
 - **Extends**: [System Activity (system)](system.md)
-- **Profiles**: `cloud`, `datetime`, `host`, `osint`, `security_control`
+- **Profiles**: [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Associations
 
@@ -46,7 +46,7 @@ Peripheral Activity events log a system's interactions with external, connectabl
 - `2`: `Disconnect` - A peripheral device was disconnected from the system.
 - `3`: `Enable` - A peripheral device was enabled on the system.
 - `4`: `Disable` - A peripheral device was disabled on the system.
-- `5`: `Eject` - A peripheral device was ejected from the system. This is typically used for removable media devices. Note: For `Mount` and `Unmount` events, see the [File System Activity](file_activity) event class.
+- `5`: `Eject` - A peripheral device was ejected from the system. This is typically used for removable media devices. Note: For `Mount` and `Unmount` events, see the [File System Activity](file_activity.md) event class.
 
 The normalized identifier of the activity that triggered the event.
 

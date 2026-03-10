@@ -23,6 +23,8 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
         self.assertTrue(MODULE.is_excluded_source_path("changelog.md"))
         self.assertTrue(MODULE.is_excluded_source_path("changelog/tenzir-ship.md"))
         self.assertTrue(MODULE.is_excluded_source_path("/changelog/timeline/2026.md"))
+        self.assertTrue(MODULE.is_excluded_source_path("reference/ocsf.md"))
+        self.assertTrue(MODULE.is_excluded_source_path("/reference/ocsf/1-7-0/classes.md"))
         self.assertFalse(MODULE.is_excluded_source_path("reference/ship-framework.md"))
         self.assertFalse(
             MODULE.is_excluded_source_path("guides/packages/maintain-a-changelog.md")
@@ -160,6 +162,22 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
                         "",
                         "##### [count](https://docs.tenzir.com/reference/functions/count.md)",
                         "",
+                        "#### [Node](https://docs.tenzir.com/reference/node.md)",
+                        "",
+                        "##### [Configuration](https://docs.tenzir.com/reference/node/configuration.md)",
+                        "",
+                        "#### [Platform](https://docs.tenzir.com/reference/platform.md)",
+                        "",
+                        "##### [Command line interface](https://docs.tenzir.com/reference/platform/command-line-interface.md)",
+                        "",
+                        "#### [Claude Marketplace](https://docs.tenzir.com/reference/claude-plugins.md)",
+                        "",
+                        "##### [Python](https://docs.tenzir.com/reference/claude-plugins/python.md)",
+                        "",
+                        "#### [OCSF](https://docs.tenzir.com/reference/ocsf.md)",
+                        "",
+                        "##### [Classes](https://docs.tenzir.com/reference/ocsf/1-7-0/classes.md)",
+                        "",
                         "## [Integrations](https://docs.tenzir.com/integrations.md)",
                         "",
                         "### Cloud Providers",
@@ -176,6 +194,17 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             self._write(input_dir / "reference/operators/api.md", "# api\n")
             self._write(input_dir / "reference/operators/chart_area.md", "# chart_area\n")
             self._write(input_dir / "reference/functions/count.md", "# count\n")
+            self._write(input_dir / "reference/node.md", "# Node\n")
+            self._write(input_dir / "reference/node/configuration.md", "# Configuration\n")
+            self._write(input_dir / "reference/platform.md", "# Platform\n")
+            self._write(
+                input_dir / "reference/platform/command-line-interface.md",
+                "# Command line interface\n",
+            )
+            self._write(input_dir / "reference/claude-plugins.md", "# Claude Marketplace\n")
+            self._write(input_dir / "reference/claude-plugins/python.md", "# Python\n")
+            self._write(input_dir / "reference/ocsf.md", "# OCSF\n")
+            self._write(input_dir / "reference/ocsf/1-7-0/classes.md", "# Classes\n")
             self._write(input_dir / "integrations/amazon.md", "# Amazon\n")
             self._write(input_dir / "integrations/amazon/guardduty.md", "# GuardDuty\n")
             self._write(
@@ -226,6 +255,15 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             self.assertIn("##### [GuardDuty](integrations/amazon/guardduty.md)", skill_markdown)
             self.assertIn("#### Operator Index", skill_markdown)
             self.assertIn("#### Function Index", skill_markdown)
+            self.assertIn("#### Claude Marketplace Index", skill_markdown)
+            self.assertIn("- [Python](reference/claude-plugins/python.md)", skill_markdown)
+            self.assertIn("#### Node Index", skill_markdown)
+            self.assertIn("- [Configuration](reference/node/configuration.md)", skill_markdown)
+            self.assertIn("#### Platform Index", skill_markdown)
+            self.assertIn(
+                "- [Command line interface](reference/platform/command-line-interface.md)",
+                skill_markdown,
+            )
             self.assertIn("##### Query", skill_markdown)
             self.assertIn("- [api](reference/operators/api.md)", skill_markdown)
             self.assertIn("- [chart_area](reference/operators/chart_area.md)", skill_markdown)
@@ -234,11 +272,52 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
                 skill_markdown,
             )
             self.assertIn("[count](reference/functions/count.md)", skill_markdown)
+            self.assertNotIn("reference/ocsf.md", skill_markdown)
+            self.assertNotIn("reference/ocsf/1-7-0/classes.md", skill_markdown)
             self.assertNotIn("[chart\\_area]", skill_markdown)
             self.assertNotIn("Use Tenzir's REST API directly from a pipeline.", skill_markdown)
             self.assertNotIn("Plots events on an area chart.", skill_markdown)
             self.assertNotIn("Filters events by predicate.", skill_markdown)
             self.assertNotIn("Counts events.", skill_markdown)
+
+    def test_generation_adds_synthetic_reference_indexes_without_parent_pages(self) -> None:
+        with tempfile.TemporaryDirectory() as input_dir_str:
+            input_dir = Path(input_dir_str)
+
+            self._write(
+                input_dir / "sitemap.md",
+                "\n".join(
+                    [
+                        "# [Tenzir Documentation Map](https://docs.tenzir.com/sitemap.md)",
+                        "",
+                        "## [Reference](https://docs.tenzir.com/reference.md)",
+                        "",
+                        "### Tools",
+                        "",
+                    ]
+                ),
+            )
+            self._write(
+                input_dir / "reference/node/configuration.md",
+                "# Configuration\n",
+            )
+            self._write(
+                input_dir / "reference/platform/command-line-interface.md",
+                "# Command line interface\n",
+            )
+
+            sitemap_root = MODULE.parse_heading_tree(
+                (input_dir / "sitemap.md").read_text(encoding="utf-8")
+            )
+            skill_markdown = MODULE.generate_skill_markdown(input_dir, sitemap_root)
+
+            self.assertIn("#### Node Index", skill_markdown)
+            self.assertIn("- [Configuration](reference/node/configuration.md)", skill_markdown)
+            self.assertIn("#### Platform Index", skill_markdown)
+            self.assertIn(
+                "- [Command line interface](reference/platform/command-line-interface.md)",
+                skill_markdown,
+            )
 
     @staticmethod
     def _write(path: Path, content: str) -> None:

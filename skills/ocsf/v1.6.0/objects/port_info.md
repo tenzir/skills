@@ -2,7 +2,7 @@
 
 The Port Information object describes a port and its associated protocol details.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The contact information related to a domain registration, e.g., registrant, administrator, abuse, billing, or technical contact.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -5,7 +5,7 @@ Device Inventory Info events report device inventory data that is either logged 
 - **Class UID**: `5001`
 - **Category**: Discovery
 - **Extends**: [Discovery (discovery)](discovery.md)
-- **Profiles**: `host`, `cloud`, `datetime`, `osint`
+- **Profiles**: [Host](../profiles/host.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [OSINT](../profiles/osint.md)
 
 ## Inherited attributes
 

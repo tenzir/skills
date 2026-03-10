@@ -2,7 +2,7 @@
 
 The Attack object describes the technique and associated tactics related to an attack. See [MITRE ATT&CK®](https://attack.mitre.org).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Kernel Resource object provides information about a specific kernel resource, including its name and type. It describes essential attributes associated with a resource managed by the kernel of an operating system. Defined by D3FEND [d3f:Kernel](https://d3fend.mitre.org/dao/artifact/d3f:Kernel/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

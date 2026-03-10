@@ -2,7 +2,7 @@
 
 The File object represents the metadata associated with a file stored in a computer system. It encompasses information about the file itself, including its attributes, properties, and organizational details. Defined by D3FEND [d3f:File](https://next.d3fend.mitre.org/dao/artifact/d3f:File/).
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

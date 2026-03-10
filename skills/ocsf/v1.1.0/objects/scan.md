@@ -2,7 +2,7 @@
 
 The Scan object describes characteristics of a proactive scan.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

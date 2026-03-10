@@ -2,7 +2,7 @@
 
 The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack. The CWE object is based on the [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) catalog.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

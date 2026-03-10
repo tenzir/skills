@@ -2,7 +2,7 @@
 
 The Compliance object contains information about Industry and Regulatory Framework standards, controls and requirements.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

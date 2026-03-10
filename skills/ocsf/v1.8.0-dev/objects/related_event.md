@@ -2,7 +2,7 @@
 
 The Related Event object describes an event or another finding related to a finding. It may or may not be an OCSF event.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

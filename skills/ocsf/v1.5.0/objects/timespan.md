@@ -4,7 +4,7 @@ The Time Span object represents different time period durations. If a timespan i
 
 A timespan may also be defined by its time interval boundaries, `start_time` and `end_time`.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

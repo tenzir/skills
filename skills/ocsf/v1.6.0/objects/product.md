@@ -2,7 +2,7 @@
 
 The Product object describes characteristics of a software product.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

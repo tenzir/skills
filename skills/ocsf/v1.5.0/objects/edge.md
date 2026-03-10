@@ -2,7 +2,7 @@
 
 Represents a connection or relationship between two nodes in a graph.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

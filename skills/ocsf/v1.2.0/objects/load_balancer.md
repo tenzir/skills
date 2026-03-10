@@ -2,7 +2,7 @@
 
 The load balancer object describes the load balancer entity and contains additional information regarding the distribution of traffic across a network.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

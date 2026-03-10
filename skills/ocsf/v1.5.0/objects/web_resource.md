@@ -2,7 +2,7 @@
 
 The Web Resource object describes characteristics of a web resource that was affected by the activity/event.
 
-- **Extends**: `_resource`
+- **Extends**: [Resource (_resource)](_resource.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Common Vulnerability Scoring System ([CVSS](https://www.first.org/cvss/)) object provides a way to capture the principal characteristics of a vulnerability and produce a numerical score reflecting its severity.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

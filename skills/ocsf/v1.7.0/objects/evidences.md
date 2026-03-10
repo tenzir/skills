@@ -2,7 +2,7 @@
 
 A collection of evidence artifacts associated to the activity/activities that triggered a security detection.
 
-- **Extends**: `_entity`
+- **Extends**: [Entity (_entity)](_entity.md)
 
 ## Attributes
 

@@ -2,7 +2,7 @@
 
 The Geo Location object describes a geographical location, usually associated with an IP address.
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 

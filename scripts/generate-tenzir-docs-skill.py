@@ -19,8 +19,14 @@ from markdown_it import MarkdownIt
 
 
 DOCS_URL_PREFIX = re.compile(r"^https?://docs\.tenzir\.com")
-EXCLUDED_SOURCE_PATHS = frozenset({"changelog.md"})
-EXCLUDED_SOURCE_PREFIXES = ("changelog/",)
+EXCLUDED_SOURCE_PATHS = frozenset({
+    "changelog.md",
+    "reference/ocsf.md",
+})
+EXCLUDED_SOURCE_PREFIXES = (
+    "changelog/",
+    "reference/ocsf/",
+)
 SECTION_MAX_LEVEL = {
     "Guides": 5,
     "Tutorials": 4,
@@ -37,6 +43,11 @@ REFERENCE_INDEX_PAGES = (
     ("reference/operators.md", "Operator Index"),
     ("reference/functions.md", "Function Index"),
 )
+SPECIAL_REFERENCE_INDEX_PAGES = frozenset(relative_path for relative_path, _ in REFERENCE_INDEX_PAGES)
+SYNTHETIC_REFERENCE_INDEX_DIRS = frozenset({
+    "reference/node",
+    "reference/platform",
+})
 
 
 @dataclass(slots=True)
@@ -357,6 +368,67 @@ def build_reference_index_nodes(
         )
         if node is not None:
             index_nodes.append(node)
+
+    flat_index_level = min(6, reference_level + 2)
+    flat_child_paths_by_parent: dict[str, list[str]] = {}
+    for source_path in sorted(available_source_paths):
+        if not source_path.startswith("reference/") or source_path.count("/") != 2:
+            continue
+        parent_dir = posixpath.dirname(source_path)
+        parent_path = f"{posixpath.dirname(source_path)}.md"
+        if parent_path in SPECIAL_REFERENCE_INDEX_PAGES:
+            continue
+        if parent_path in available_source_paths:
+            group_key = parent_path
+        elif parent_dir in SYNTHETIC_REFERENCE_INDEX_DIRS:
+            group_key = parent_dir
+        else:
+            continue
+        flat_child_paths_by_parent.setdefault(group_key, []).append(source_path)
+
+    for parent_key, child_paths in sorted(flat_child_paths_by_parent.items()):
+        parent_title = ""
+        parent_markdown_path = f"{parent_key}.md" if not parent_key.endswith(".md") else parent_key
+        if parent_markdown_path in available_source_paths:
+            parent_markdown = (input_dir / parent_markdown_path).read_text(encoding="utf-8")
+            parent_heading = parse_heading_tree(parent_markdown).children
+            parent_title = next(
+                (
+                    unescape_markdown_text(extract_heading_text(node.heading or "") or "")
+                    for node in parent_heading
+                    if node.level == 1
+                ),
+                "",
+            )
+        if not parent_title:
+            parent_title = Path(parent_key).name.replace("-", " ").title()
+
+        links: list[str] = []
+        for child_path in child_paths:
+            child_markdown = (input_dir / child_path).read_text(encoding="utf-8")
+            child_heading_nodes = parse_heading_tree(child_markdown).children
+            child_title = next(
+                (
+                    unescape_markdown_text(extract_heading_text(node.heading or "") or "")
+                    for node in child_heading_nodes
+                    if node.level == 1
+                ),
+                "",
+            )
+            if not child_title:
+                child_title = Path(child_path).stem.replace("-", " ").title()
+            links.append(f"[{child_title}]({child_path})")
+
+        if not links:
+            continue
+        index_nodes.append(
+            Node(
+                heading=f"{'#' * flat_index_level} {parent_title} Index",
+                level=flat_index_level,
+                content_lines=[f"- {link}" for link in links],
+                preserve_bullets=True,
+            )
+        )
     return index_nodes
 def collect_markdown_files(directory: Path, *, root_dir: Path | None = None) -> list[str]:
     root = root_dir or directory

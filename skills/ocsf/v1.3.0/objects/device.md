@@ -2,7 +2,7 @@
 
 The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network. Defined by D3FEND [d3f:Host](https://d3fend.mitre.org/dao/artifact/d3f:Host/).
 
-- **Extends**: `endpoint`
+- **Extends**: [Endpoint (endpoint)](endpoint.md)
 
 ## Attributes
 

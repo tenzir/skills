@@ -2,7 +2,7 @@
 
 The Network Connection Information object describes characteristics of a network connection. Defined by D3FEND [d3f:NetworkSession](https://d3fend.mitre.org/dao/artifact/d3f:NetworkSession/).
 
-- **Extends**: `object`
+- **Extends**: [Object (object)](object.md)
 
 ## Attributes
 
