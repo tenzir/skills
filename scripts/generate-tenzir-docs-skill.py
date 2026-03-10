@@ -34,6 +34,10 @@ SECTION_MAX_LEVEL = {
     "Integrations": 5,
     "Reference": 4,
 }
+# In SKILL.md, strip description content from nodes at or above this heading
+# level.  Keeps the heading link for navigation but removes the paragraph
+# beneath it, keeping the skill file compact.
+SKILL_CONTENT_THRESHOLD = 5
 MARKDOWN = MarkdownIt()
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)]+)\)")
 HEADING_LINK_RE = re.compile(r"^#{1,6}\s+\[([^\]]+)\]\(([^)]+)\)")
@@ -48,6 +52,12 @@ SYNTHETIC_REFERENCE_INDEX_DIRS = frozenset({
     "reference/node",
     "reference/platform",
 })
+# Operator and function indexes are extracted to standalone files instead of
+# being inlined into SKILL.md.  Maps source page → (output path, title).
+EXTRACTED_INDEX_FILES = {
+    source_path: (f"reference/{Path(source_path).stem}-index.md", title)
+    for source_path, title in REFERENCE_INDEX_PAGES
+}
 
 
 @dataclass(slots=True)
@@ -296,6 +306,135 @@ def render_node(
     return "\n".join(lines)
 
 
+def strip_deep_content(node: Node, *, threshold: int) -> None:
+    """Remove content_lines from nodes at or above the threshold level.
+
+    Keeps heading links for navigation but removes description paragraphs,
+    reducing SKILL.md size while preserving the navigable structure.
+    """
+    if node.level >= threshold:
+        node.content_lines = []
+    for child in node.children:
+        strip_deep_content(child, threshold=threshold)
+
+
+def _extract_page_title(markdown: str) -> str:
+    """Extract the h1 title from a markdown page."""
+    for node in parse_heading_tree(markdown).children:
+        if node.level == 1:
+            text = extract_heading_text(node.heading or "")
+            if text:
+                return unescape_markdown_text(text)
+    return ""
+
+
+def create_navigation_node() -> Node:
+    """Create the navigation routing section for SKILL.md."""
+    return Node(
+        heading="## How to use this skill",
+        level=2,
+        content_lines=[
+            "",
+            "Navigate the documentation based on the type of question:",
+            "",
+            "| Question type | Where to look |",
+            "|---|---|",
+            "| \"How do I…\" tasks | [Guides](guides.md) — step-by-step instructions organized by task |",
+            "| Operator or function syntax | [Operator Index](reference/operators-index.md) or [Function Index](reference/functions-index.md), then the specific page |",
+            "| Integration setup (Splunk, Kafka, S3…) | [Integrations](integrations.md) — per-product setup and pipeline examples |",
+            "| Concepts (nodes, pipelines, deployment) | [Explanations](explanations.md) — architecture and design |",
+            "| Learning from scratch | [Tutorials](tutorials.md) — guided lessons |",
+            "| TQL language rules | [Language](explanations/language.md), [Expressions](reference/expressions.md), [Statements](reference/statements.md) |",
+            "",
+            "Always read the relevant page before answering. Prefer TQL examples from the",
+            "documentation over inventing syntax.",
+        ],
+    )
+
+
+def create_examples_node() -> Node:
+    """Create the answer-pattern examples section for SKILL.md."""
+    return Node(
+        heading="## Answer patterns",
+        level=2,
+        content_lines=[
+            "",
+            "**Operator syntax question** — *\"How does `where` work?\"*",
+            "→ Read [where](reference/operators/where.md), explain the syntax, show the doc's TQL examples.",
+            "",
+            "**Integration question** — *\"How do I send data to Splunk?\"*",
+            "→ Read [Splunk](integrations/splunk.md), provide the pipeline example from the page.",
+            "",
+            "**Task question** — *\"How do I parse syslog?\"*",
+            "→ Read [Parse delimited text](guides/parsing/parse-delimited-text.md) and",
+            "[read_syslog](reference/operators/read_syslog.md). Combine the guide's approach",
+            "with the operator reference.",
+        ],
+    )
+
+
+def generate_extracted_index(
+    input_dir: Path,
+    source_relative_path: str,
+    title: str,
+    output_relative_path: str,
+    available_source_paths: set[str],
+) -> str | None:
+    """Generate a standalone categorized index file for operators or functions."""
+    source_file = input_dir / source_relative_path
+    if not source_file.is_file():
+        return None
+
+    page_root = parse_heading_tree(source_file.read_text(encoding="utf-8"))
+    title_node = next((c for c in page_root.children if c.level == 1), None)
+    if title_node is None:
+        return None
+
+    indexed_paths: set[str] = set()
+    lines: list[str] = [f"# {title}", ""]
+
+    for category in title_node.children:
+        cat_name = extract_heading_text(category.heading or "")
+        if not cat_name:
+            continue
+        cat_links: list[str] = []
+        for item in category.children:
+            label = extract_heading_text(item.heading or "")
+            href = extract_heading_href(item.heading or "")
+            if not label or not href:
+                continue
+            rewritten = rewrite_link_destination(href, output_relative_path, available_source_paths)
+            if rewritten is None:
+                continue
+            source_path = to_source_markdown_path(href)
+            if source_path:
+                indexed_paths.add(source_path)
+            cat_links.append(f"- [{unescape_markdown_text(label)}]({rewritten})")
+        if cat_links:
+            lines.extend([f"## {cat_name}", "", *cat_links, ""])
+
+    # Find additional pages not covered by the categorized index.
+    parent_dir = posixpath.dirname(source_relative_path)
+    additional = sorted(
+        sp
+        for sp in available_source_paths
+        if sp.startswith(f"{parent_dir}/")
+        and sp != source_relative_path
+        and sp not in indexed_paths
+    )
+    if additional:
+        add_links: list[str] = []
+        for ap in additional:
+            ap_md = (input_dir / ap).read_text(encoding="utf-8")
+            ap_title = _extract_page_title(ap_md) or Path(ap).stem.replace("-", " ").title()
+            rel = posixpath.relpath(ap, posixpath.dirname(output_relative_path))
+            add_links.append(f"- [{ap_title}]({rel})")
+        if add_links:
+            lines.extend(["## Additional Pages", "", *add_links, ""])
+
+    return "\n".join(lines) if len(lines) > 2 else None
+
+
 def build_compact_index_node(
     page_markdown: str,
     *,
@@ -358,6 +497,8 @@ def build_reference_index_nodes(
     input_dir: Path,
     reference_level: int,
     available_source_paths: set[str],
+    *,
+    skip_compact_indexes: bool = False,
 ) -> list[Node]:
     index_nodes: list[Node] = []
     index_level = min(6, reference_level + 2)
@@ -378,7 +519,8 @@ def build_reference_index_nodes(
         compact_index_paths_by_parent[relative_path] = indexed_paths
         if node is not None:
             compact_index_nodes_by_parent[relative_path] = node
-            index_nodes.append(node)
+            if not skip_compact_indexes:
+                index_nodes.append(node)
 
     flat_index_level = min(6, reference_level + 2)
     flat_child_paths_by_parent: dict[str, list[str]] = {}
@@ -488,19 +630,31 @@ def create_skill_frontmatter() -> str:
     return (
         "---\n"
         "name: tenzir-docs\n"
-        "description: Answer questions using the Tenzir documentation. Use when the user asks about "
-        "TQL, operators, pipelines, packages, nodes, the platform, MCP tools, or documented "
-        "integrations.\n"
+        "description: >-\n"
+        "  Answer questions using the Tenzir documentation. Use whenever the user asks\n"
+        "  about TQL syntax, pipeline operators, functions, data parsing or\n"
+        "  transformation, normalization, OCSF mapping, enrichment, lookup tables,\n"
+        "  contexts, packages, nodes, platform setup, deployment, configuration,\n"
+        "  integrations with tools like Splunk, Kafka, S3, Elasticsearch, or any other\n"
+        "  Tenzir feature. Also use when the user asks how to collect, route, filter,\n"
+        "  aggregate, or export security data with Tenzir, or needs help writing or\n"
+        "  debugging TQL pipelines, even if they don't mention 'Tenzir' explicitly but\n"
+        "  are clearly working in a Tenzir context.\n"
         "---\n\n"
     )
 
 
-def generate_skill_markdown(input_dir: Path, sitemap_root: Node) -> str:
-    source_paths = collect_markdown_files(input_dir)
-    available_source_paths = build_available_source_paths(source_paths)
+def generate_skill_markdown(
+    input_dir: Path,
+    sitemap_root: Node,
+    available_source_paths: set[str],
+) -> str:
     title_node = next((child for child in sitemap_root.children if child.level == 1), None)
     if title_node is None:
         raise ValueError("Could not find the sitemap title in sitemap.md.")
+
+    # Build the navigation and examples sections that precede the doc map.
+    preamble: list[Node] = [create_navigation_node(), create_examples_node()]
 
     filtered_children: list[Node] = []
     for section in title_node.children:
@@ -511,20 +665,45 @@ def generate_skill_markdown(input_dir: Path, sitemap_root: Node) -> str:
         filtered = filter_node(section, max_depth=max_depth)
         if filtered is not None:
             if section_name == "Reference":
+                # Only inline small indexes (node, platform); operator and
+                # function indexes live in their own extracted files.
                 filtered.children.extend(
                     build_reference_index_nodes(
                         input_dir,
                         filtered.level,
                         available_source_paths,
+                        skip_compact_indexes=True,
+                    )
+                )
+                # Add a pointer so the model knows where to find the full
+                # operator and function listings.
+                pointer_level = min(6, filtered.level + 1)
+                filtered.children.append(
+                    Node(
+                        heading=f"{'#' * pointer_level} Indexes",
+                        level=pointer_level,
+                        content_lines=[
+                            "",
+                            "For the complete operator listing by category, read "
+                            "[Operator Index](reference/operators-index.md).",
+                            "",
+                            "For the complete function listing by category, read "
+                            "[Function Index](reference/functions-index.md).",
+                        ],
                     )
                 )
             filtered_children.append(filtered)
+
+    # Strip description paragraphs from deeply nested headings to keep
+    # SKILL.md compact while preserving the navigable heading links.
+    for child in filtered_children:
+        strip_deep_content(child, threshold=SKILL_CONTENT_THRESHOLD)
 
     filtered_title = Node(
         heading=title_node.heading,
         level=title_node.level,
         content_lines=list(title_node.content_lines),
-        children=filtered_children,
+        children=preamble + filtered_children,
     )
     return re.sub(
         r"\n{3,}",
@@ -555,16 +734,30 @@ def main() -> None:
     markdown_files = [
         file_path for file_path in collect_markdown_files(input_dir) if file_path != "sitemap.md"
     ]
+    available_source_paths = build_available_source_paths(markdown_files)
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    skill_md = generate_skill_markdown(input_dir, sitemap_root)
+    skill_md = generate_skill_markdown(input_dir, sitemap_root, available_source_paths)
     (output_dir / "SKILL.md").write_text(skill_md, encoding="utf-8")
     copied = write_skill_files(input_dir, output_dir, markdown_files)
 
+    # Generate extracted index files (operator and function listings).
+    index_count = 0
+    for source_path, (output_path, title) in EXTRACTED_INDEX_FILES.items():
+        content = generate_extracted_index(
+            input_dir, source_path, title, output_path, available_source_paths,
+        )
+        if content:
+            dest = output_dir / output_path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(content, encoding="utf-8")
+            index_count += 1
+
     print(f"Generated {output_dir}/SKILL.md")
     print(f"Copied {copied} markdown files into {output_dir}/")
+    print(f"Generated {index_count} extracted index files")
 
 
 if __name__ == "__main__":
