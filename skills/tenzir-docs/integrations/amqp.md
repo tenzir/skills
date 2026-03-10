@@ -1,7 +1,7 @@
 # AMQP
 
 
-The [Advanced Message Queuing Protocol (AMQP)](https://www.amqp.org/) is an open standard application layer protocol for message-oriented middleware.
+The [Advanced Message Queuing Protocol (AMQP)](https://www.amqp.org/) is an open standard for message-oriented middleware. It defines how producers, exchanges, queues, and consumers route messages between systems.
 
 The diagram below shows the key abstractions and how they relate to a pipeline:
 

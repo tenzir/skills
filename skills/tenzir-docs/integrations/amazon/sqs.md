@@ -1,7 +1,7 @@
 # SQS
 
 
-[Amazon Simple Queuing Service (SQS)](https://aws.amazon.com/sqs/) is a managed message queue for microservices, distributed systems, and serverless applications.
+[Amazon Simple Queuing Service (SQS)](https://aws.amazon.com/sqs/) is a managed message queue on AWS. It supports microservices, distributed systems, and serverless applications.
 
 Tenzir can interact with SQS by sending messages to and reading messages from SQS queues.
 

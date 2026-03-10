@@ -1,7 +1,7 @@
 # Sentinel & Log Analytics
 
 
-Send security logs and events from Tenzir to Microsoft’s cloud, where you can analyze them with [Microsoft Sentinel](https://learn.microsoft.com/en-us/azure/sentinel/overview) (SIEM), create alerts with [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/overview), or query them with [KQL](https://learn.microsoft.com/en-us/kusto/query/).
+Send security logs and events from Tenzir to Microsoft’s Log Analytics platform. You can analyze them with [Microsoft Sentinel](https://learn.microsoft.com/en-us/azure/sentinel/overview), create alerts with [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/overview), or query them with [KQL](https://learn.microsoft.com/en-us/kusto/query/).
 
 All logs in Azure land in a [Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview). Microsoft Sentinel and Azure Monitor read from this workspace; they don’t store data themselves.
 

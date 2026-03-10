@@ -1,7 +1,7 @@
 # Zscaler
 
 
-Zscaler’s [Nanolog Streaming Service (NSS)](https://help.zscaler.com/zia/understanding-nanolog-streaming-service) is a family of products that enable Zscaler cloud communication with third-party security solution devices for exchanging event logs. You can either use Zscaler’s Cloud NSS or deploy an on-prem NSS server to obtain the logs. Tenzir can receive Zscaler logs in either case.
+Zscaler’s [Nanolog Streaming Service (NSS)](https://help.zscaler.com/zia/understanding-nanolog-streaming-service) streams Zscaler logs to external systems. You can use Zscaler’s Cloud NSS or deploy an on-prem NSS server, and Tenzir can receive logs in either case.
 
 ## Use a Cloud NSS Feed to send events to Tenzir
 

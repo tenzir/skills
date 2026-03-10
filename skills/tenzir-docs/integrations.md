@@ -1,7 +1,7 @@
 # Overview
 
 
-Tenzir offers a layered integration architecture, from turn-key packages at the top to native protocol connectors at the core.
+Tenzir offers a layered integration architecture. It ranges from turn-key packages at the top to native protocol connectors at the core.
 
 ## Packages
 

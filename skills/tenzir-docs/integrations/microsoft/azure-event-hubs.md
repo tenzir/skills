@@ -1,7 +1,7 @@
 # Azure Event Hubs
 
 
-[Azure Event Hubs](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about) is a real-time data streaming platform and event ingestion service that can receive and process millions of events per second. Event Hubs provides a Kafka endpoint, allowing you to stream events from various Microsoft services to Tenzir.
+[Azure Event Hubs](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about) is a real-time event ingestion service. It can receive and process millions of events per second, and it provides a Kafka endpoint for streaming data from Microsoft services to Tenzir.
 
 <!--?xml version="1.0" standalone="no"?-->
 

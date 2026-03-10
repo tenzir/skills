@@ -1,7 +1,7 @@
 # File
 
 
-Tenzir supports reading from and writing to files, including non-regular files, such as [Unix domain sockets](https://en.wikipedia.org/wiki/Unix_domain_socket), standard input, standard output, and standard error.
+Tenzir can read from and write to files. This includes non-regular files such as [Unix domain sockets](https://en.wikipedia.org/wiki/Unix_domain_socket), standard input, standard output, and standard error.
 
 When `~` is the first character in the file path, the operator substitutes it with the `$HOME` environment variable.
 

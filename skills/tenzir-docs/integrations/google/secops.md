@@ -1,7 +1,7 @@
 # SecOps
 
 
-[Google Security Operations (SecOps)](https://cloud.google.com/security/products/security-operations) is Google’s security operations platform that enables detection, investigation and response to incidents. Tenzir can send events to Google SecOps using the [unstructured logs ingestion API](https://cloud.google.com/chronicle/docs/reference/ingestion-api#unstructuredlogentries).
+[Google Security Operations (SecOps)](https://cloud.google.com/security/products/security-operations) is Google’s security operations platform. Tenzir can send events to Google SecOps using the [unstructured logs ingestion API](https://cloud.google.com/chronicle/docs/reference/ingestion-api#unstructuredlogentries).
 
 ## Examples
 

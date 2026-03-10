@@ -1,7 +1,7 @@
 # ClickHouse
 
 
-[ClickHouse](https://clickhouse.com/clickhouse) is an open-source analytical database that enables its users to generate powerful analytics, using SQL queries, in real-time.
+[ClickHouse](https://clickhouse.com/clickhouse) is an open-source analytical database. It lets you run real-time analytics with SQL queries.
 
 ## How Tenzir Connects to ClickHouse
 

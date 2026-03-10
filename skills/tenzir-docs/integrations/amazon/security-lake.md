@@ -1,7 +1,7 @@
 # Security Lake
 
 
-[Amazon Security Lake](https://aws.amazon.com/security-lake/) is a centralized security data lake service that collects and stores security data in the Open Cybersecurity Schema Framework (OCSF) format.
+[Amazon Security Lake](https://aws.amazon.com/security-lake/) is a managed security data lake on AWS. It collects and stores security data in the Open Cybersecurity Schema Framework (OCSF) format.
 
 <!--?xml version="1.0" standalone="no"?-->
 
