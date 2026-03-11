@@ -54,7 +54,7 @@ pattern in config loading.
 ```
 
 ```text
-Good catch. Went with an enum instead of the suggested string constant —
+Good catch. Went with an enum instead of the suggested string constant;
 same intent but catches typos at compile time. Fixed in abc1234.
 ```
 
