@@ -1,14 +1,6 @@
 ---
 name: tenzir-ship
-description: >-
-  Use when adding changelog entries, creating release notes, cutting releases,
-  publishing them to GitHub, or when the user says "release this", "ship it",
-  "add a changelog entry", "what changed", "prepare a release", or "bump the
-  version." Also use for any release engineering task involving tenzir-ship.
-metadata:
-  requires:
-    skills:
-      - technical-writing
+description: Use when adding changelog entries, creating release notes, cutting releases, and publishing them to GitHub.
 ---
 
 # tenzir-ship
@@ -16,6 +8,14 @@ metadata:
 This skill bundles key release engineering use cases with tenzir-ship.
 
 ## Use Cases
+
+### Initialize a changelog project
+
+Set up a new changelog workspace before the first entry exists. Prefer the
+explicit `init` command when the task is project setup rather than entry
+creation.
+
+Instructions: `references/init-changelog-project.md`
 
 ### Add a changelog entry
 

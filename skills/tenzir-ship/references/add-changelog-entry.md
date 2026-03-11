@@ -96,6 +96,10 @@ uvx tenzir-ship add \
 
 Notes:
 
+- If no changelog workspace exists yet and the task is setup-first, prefer
+  `uvx tenzir-ship init` before creating the first entry.
+- `uvx tenzir-ship add` can still bootstrap a missing changelog automatically
+  when you are ready to create the first entry.
 - Pass `--root <path/to/changelog>` to `tenzir-ship` when the changelog is
   not in the top-level directory.
 - In CI, include `--pr <number>` when PR number is known from `$GITHUB_EVENT_PATH`.
