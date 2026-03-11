@@ -364,7 +364,7 @@ This guide shows you how to make packages configurable with inputs. You’ll lea
 
 ##### [Maintain a changelog](guides/packages/maintain-a-changelog.md)
 
-This guide shows you how to maintain changelogs for packages using `tenzir-ship`.
+This guide shows you how to manage changelog entries and publish releases with `tenzir-ship`. You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
 
 ##### [Publish a package](guides/packages/publish-a-package.md)
 

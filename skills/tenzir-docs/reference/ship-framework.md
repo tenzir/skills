@@ -45,6 +45,8 @@ bare_version = client.release_version(bare=True)  # Returns "1.0.0"
 client.release_publish(create_tag=True, assume_yes=True)
 ```
 
+Version identifiers passed to `show()` must match existing release directories in `releases/<version>/`. The method validates identifiers against release manifests on disk. Scope tokens like `"unreleased"`, `"released"`, and `"latest"` work without corresponding directories.
+
 For advanced scenarios, reuse `tenzir_ship.create_cli_context` and call the helper functions from `tenzir_ship.cli` directly.
 
 ## Core concepts
@@ -160,6 +162,8 @@ tenzir-ship show unreleased
 tenzir-ship show released v1.0.0 v1.1.0
 ```
 
+Version identifiers must match an existing release version exactly. The CLI resolves versions by checking for a corresponding release manifest in `releases/<version>/`. Matching is case-insensitive, so `v1.0.0` and `V1.0.0` both resolve to the same release if it exists.
+
 The table view (default) lists entries with ID, title, type, project, PRs, and authors. Row numbers count backward from the newest entry, so `#1` always targets the latest change.
 
 Use `--release` to display entries grouped by release with full release metadata. This is the recommended mode for exporting release notes:
@@ -235,6 +239,8 @@ tenzir-ship release create [version] [options]
 When creating a release, the command also updates version fields in detected package manifest files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`). See the [version bumping configuration](#version-bumping) for details.
 
 The command renders `notes.md`, updates `manifest.yaml`, and moves entry files into `entries/`. It performs a dry run by default. When the release already exists, the CLI appends additional unreleased entries. If no changelog entries are available, the command still succeeds when you provide `--intro` or `--intro-file`, creating an intro-only release. This is useful for re-publishing after yanking a package or retrying a failed publish workflow. Without either entries or intro text, the command fails with an error.
+
+By default, `release create` also updates common package-manager version files to the created release version (without the optional `v` prefix). In `auto` mode, the CLI discovers `package.json`, `pyproject.toml`, `project.toml`, and `Cargo.toml` in the changelog root and, when running from `changelog/`, in the parent directory. Configure this behavior under `release.version_bump_mode` and `release.version_files`.
 
 ### release version
 
@@ -448,6 +454,9 @@ components:
   operators: Built-in pipeline operators
 release:
   commit_message: "Release {version}"
+  version_bump_mode: auto
+  version_files:
+    - ../python/pyproject.toml
 ```
 
 The `release` block supports:
@@ -724,6 +733,7 @@ When `modules` is configured, `tenzir-ship validate` checks:
 * **Component mismatch** – When `components` is configured, ensure every entry either omits `component` or uses an allowed label.
 * **Configuration not found** – Ensure `config.yaml` exists in the changelog root or `package.yaml` sits next to the `changelog/` directory. Run `tenzir-ship add` once to scaffold the configuration.
 * **Version bump fails** – Bump flags read the latest release manifest on disk. Create an initial release with an explicit version before using `--patch/--minor/--major`.
+* **Version file update fails** – In `release.version_bump_mode: auto`, the CLI must parse every detected/configured version file. Use supported files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`) or set `release.version_bump_mode: off` and handle updates in your workflow script.
 
 ## Further reading
 
