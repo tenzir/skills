@@ -24,14 +24,19 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
         self.assertTrue(MODULE.is_excluded_source_path("changelog/tenzir-ship.md"))
         self.assertTrue(MODULE.is_excluded_source_path("/changelog/timeline/2026.md"))
         self.assertTrue(MODULE.is_excluded_source_path("reference/ocsf.md"))
-        self.assertTrue(MODULE.is_excluded_source_path("/reference/ocsf/1-7-0/classes.md"))
+        self.assertTrue(
+            MODULE.is_excluded_source_path("/reference/ocsf/1-7-0/classes.md")
+        )
         self.assertFalse(MODULE.is_excluded_source_path("reference/ship-framework.md"))
         self.assertFalse(
             MODULE.is_excluded_source_path("guides/packages/maintain-a-changelog.md")
         )
 
     def test_generation_keeps_release_docs_and_drops_changelog_tree(self) -> None:
-        with tempfile.TemporaryDirectory() as input_dir_str, tempfile.TemporaryDirectory() as output_dir_str:
+        with (
+            tempfile.TemporaryDirectory() as input_dir_str,
+            tempfile.TemporaryDirectory() as output_dir_str,
+        ):
             input_dir = Path(input_dir_str)
             output_dir = Path(output_dir_str)
 
@@ -95,15 +100,19 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             copied = MODULE.write_skill_files(input_dir, output_dir, markdown_files)
 
             self.assertEqual(copied, 2)
-            self.assertTrue((output_dir / "guides/packages/maintain-a-changelog.md").exists())
+            self.assertTrue(
+                (output_dir / "guides/packages/maintain-a-changelog.md").exists()
+            )
             self.assertTrue((output_dir / "reference/ship-framework.md").exists())
             self.assertFalse((output_dir / "changelog.md").exists())
             self.assertFalse((output_dir / "changelog/tenzir-ship.md").exists())
 
-            guide_text = (output_dir / "guides/packages/maintain-a-changelog.md").read_text(
-                encoding="utf-8"
+            guide_text = (
+                output_dir / "guides/packages/maintain-a-changelog.md"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "[Ship Framework](../../reference/ship-framework.md)", guide_text
             )
-            self.assertIn("[Ship Framework](../../reference/ship-framework.md)", guide_text)
             self.assertIn("Recent releases", guide_text)
             self.assertNotIn("[Recent releases]", guide_text)
 
@@ -138,7 +147,59 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             "https://docs.tenzir.com/packages/zeek/tests/inputs/conn.log.md",
         )
 
-    def test_generation_adds_compact_reference_indexes_and_deeper_leaf_pages(self) -> None:
+    def test_rewrite_content_strips_images_but_keeps_normal_links(self) -> None:
+        available_source_paths = {"guides/quickstart.md", "reference/operators/api.md"}
+
+        rewritten = MODULE.rewrite_content(
+            "See [Quickstart](/guides/quickstart.md).\n"
+            "\n"
+            "![Screenshot](https://docs.tenzir.com/_astro/example.png)\n"
+            "\n"
+            "Inline image ![Preview](images/preview.png) after text.\n"
+            "Read [api](/reference/operators/api.md).\n",
+            "guides/installation.md",
+            available_source_paths,
+        )
+
+        self.assertEqual(
+            rewritten,
+            "See [Quickstart](quickstart.md).\n"
+            "\n"
+            "Inline image  after text.\n"
+            "Read [api](../reference/operators/api.md).\n",
+        )
+        self.assertNotIn("![Screenshot]", rewritten)
+        self.assertNotIn("![Preview]", rewritten)
+        self.assertNotIn("_astro/example.png", rewritten)
+        self.assertNotIn("images/preview.png", rewritten)
+
+    def test_rewrite_content_trims_trailing_space_after_inline_images(self) -> None:
+        rewritten = MODULE.rewrite_content(
+            "1. Go to [app.tenzir.com](https://app.tenzir.com). ![Landing page](https://docs.tenzir.com/_astro/signin.png)\n",
+            "guides/installation/create-account.md",
+            set(),
+        )
+
+        self.assertEqual(
+            rewritten,
+            "1. Go to [app.tenzir.com](https://app.tenzir.com).\n",
+        )
+
+    def test_rewrite_content_preserves_image_syntax_inside_inline_code(self) -> None:
+        rewritten = MODULE.rewrite_content(
+            "3. Reference it in markdown: `![Alt text](diagram-name.excalidraw)`\n",
+            "guides/contribution/documentation.md",
+            set(),
+        )
+
+        self.assertEqual(
+            rewritten,
+            "3. Reference it in markdown: `![Alt text](diagram-name.excalidraw)`\n",
+        )
+
+    def test_generation_adds_compact_reference_indexes_and_deeper_leaf_pages(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory() as input_dir_str:
             input_dir = Path(input_dir_str)
 
@@ -196,18 +257,26 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
                 ),
             )
             self._write(input_dir / "guides/node-setup.md", "# Node Setup\n")
-            self._write(input_dir / "guides/node-setup/deploy-a-node.md", "# Deploy a node\n")
+            self._write(
+                input_dir / "guides/node-setup/deploy-a-node.md", "# Deploy a node\n"
+            )
             self._write(input_dir / "reference/operators/api.md", "# api\n")
-            self._write(input_dir / "reference/operators/chart_area.md", "# chart_area\n")
+            self._write(
+                input_dir / "reference/operators/chart_area.md", "# chart_area\n"
+            )
             self._write(input_dir / "reference/functions/count.md", "# count\n")
             self._write(input_dir / "reference/node.md", "# Node\n")
-            self._write(input_dir / "reference/node/configuration.md", "# Configuration\n")
+            self._write(
+                input_dir / "reference/node/configuration.md", "# Configuration\n"
+            )
             self._write(input_dir / "reference/platform.md", "# Platform\n")
             self._write(
                 input_dir / "reference/platform/command-line-interface.md",
                 "# Command line interface\n",
             )
-            self._write(input_dir / "reference/claude-plugins.md", "# Claude Marketplace\n")
+            self._write(
+                input_dir / "reference/claude-plugins.md", "# Claude Marketplace\n"
+            )
             self._write(input_dir / "reference/claude-plugins/python.md", "# Python\n")
             self._write(input_dir / "reference/ocsf.md", "# OCSF\n")
             self._write(input_dir / "reference/ocsf/1-7-0/classes.md", "# Classes\n")
@@ -263,8 +332,13 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
                 input_dir, sitemap_root, available_source_paths
             )
 
-            self.assertIn("##### [Deploy a node](guides/node-setup/deploy-a-node.md)", skill_markdown)
-            self.assertIn("##### [GuardDuty](integrations/amazon/guardduty.md)", skill_markdown)
+            self.assertIn(
+                "##### [Deploy a node](guides/node-setup/deploy-a-node.md)",
+                skill_markdown,
+            )
+            self.assertIn(
+                "##### [GuardDuty](integrations/amazon/guardduty.md)", skill_markdown
+            )
             # Operator and function indexes are extracted to separate files,
             # so they must NOT appear inline in SKILL.md.
             self.assertNotIn("#### Operator Index", skill_markdown)
@@ -272,13 +346,21 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             # Instead, a pointer section directs the model to the extracted
             # index files.
             self.assertIn("### Indexes", skill_markdown)
-            self.assertIn("[Operator Index](reference/operators-index.md)", skill_markdown)
-            self.assertIn("[Function Index](reference/functions-index.md)", skill_markdown)
+            self.assertIn(
+                "[Operator Index](reference/operators-index.md)", skill_markdown
+            )
+            self.assertIn(
+                "[Function Index](reference/functions-index.md)", skill_markdown
+            )
             # Non-operator/function reference indexes remain inline.
             self.assertIn("#### Claude Marketplace Index", skill_markdown)
-            self.assertIn("- [Python](reference/claude-plugins/python.md)", skill_markdown)
+            self.assertIn(
+                "- [Python](reference/claude-plugins/python.md)", skill_markdown
+            )
             self.assertIn("#### Node Index", skill_markdown)
-            self.assertIn("- [Configuration](reference/node/configuration.md)", skill_markdown)
+            self.assertIn(
+                "- [Configuration](reference/node/configuration.md)", skill_markdown
+            )
             self.assertIn("#### Platform Index", skill_markdown)
             self.assertIn(
                 "- [Command line interface](reference/platform/command-line-interface.md)",
@@ -288,16 +370,22 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             # files, not inline.
             self.assertNotIn("##### Query", skill_markdown)
             self.assertNotIn("- [api](reference/operators/api.md)", skill_markdown)
-            self.assertNotIn("- [chart_area](reference/operators/chart_area.md)", skill_markdown)
+            self.assertNotIn(
+                "- [chart_area](reference/operators/chart_area.md)", skill_markdown
+            )
             self.assertNotIn("reference/ocsf.md", skill_markdown)
             self.assertNotIn("reference/ocsf/1-7-0/classes.md", skill_markdown)
             self.assertNotIn("[chart\\_area]", skill_markdown)
-            self.assertNotIn("Use Tenzir's REST API directly from a pipeline.", skill_markdown)
+            self.assertNotIn(
+                "Use Tenzir's REST API directly from a pipeline.", skill_markdown
+            )
             self.assertNotIn("Plots events on an area chart.", skill_markdown)
             self.assertNotIn("Filters events by predicate.", skill_markdown)
             self.assertNotIn("Counts events.", skill_markdown)
 
-    def test_generation_adds_synthetic_reference_indexes_without_parent_pages(self) -> None:
+    def test_generation_adds_synthetic_reference_indexes_without_parent_pages(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory() as input_dir_str:
             input_dir = Path(input_dir_str)
 
@@ -335,7 +423,9 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             )
 
             self.assertIn("#### Node Index", skill_markdown)
-            self.assertIn("- [Configuration](reference/node/configuration.md)", skill_markdown)
+            self.assertIn(
+                "- [Configuration](reference/node/configuration.md)", skill_markdown
+            )
             self.assertIn("#### Platform Index", skill_markdown)
             self.assertIn(
                 "- [Command line interface](reference/platform/command-line-interface.md)",
@@ -395,7 +485,9 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             # The Function Index is extracted to a separate file, not
             # inlined in SKILL.md.
             self.assertNotIn("#### Function Index", skill_markdown)
-            self.assertIn("[Function Index](reference/functions-index.md)", skill_markdown)
+            self.assertIn(
+                "[Function Index](reference/functions-index.md)", skill_markdown
+            )
 
             # Verify the extracted index contains both the categorized
             # entries and the unindexed "hmac" page.
@@ -412,7 +504,9 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
             self.assertIn("## Additional Pages", func_index)
             self.assertIn("- [hmac](functions/hmac.md)", func_index)
 
-    def test_extracted_index_keeps_external_links_without_local_descriptions(self) -> None:
+    def test_extracted_index_keeps_external_links_without_local_descriptions(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory() as input_dir_str:
             input_dir = Path(input_dir_str)
 

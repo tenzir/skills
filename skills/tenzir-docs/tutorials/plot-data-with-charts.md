@@ -41,15 +41,9 @@ To make a chart permanent:
 
 1. Click the **Dashboard** button.
 
-   ![Add Chart to Dashboard](https://docs.tenzir.com/_astro/add-chart-to-dashboard-1.CKWKUeyV_Z2vk1yO.png)
-
 2. Enter a title for the chart, then click **Add to Dashboard**.
 
-   ![Add Chart Title](https://docs.tenzir.com/_astro/add-chart-to-dashboard-2.CH4qklWh_1JIvHg.png)
-
 3. View the chart in your dashboard.
-
-   ![Chart in Dashboard](https://docs.tenzir.com/_astro/add-chart-to-dashboard-3.CbiY8Gpy_Z1BwGqk.png)
 
 Congratulations! Your chart is now saved and will automatically reload when you open the dashboard.
 
@@ -59,8 +53,6 @@ Download a chart in the Explorer as follows:
 
 1. Click the download button in the top-right corner.
 
-   ![Download Chart](https://docs.tenzir.com/_astro/download-chart-explorer.BaT4xIUq_Zudyq0.png)
-
 2. Choose **PNG** or **SVG** to save the chart as an image.
 
 You can also download a chart on a dashboard:
@@ -68,8 +60,6 @@ You can also download a chart on a dashboard:
 1. Click the three-dot menu in the top-right corner of the chart.
 
 2. Click **Download**
-
-   ![Download Chart](https://docs.tenzir.com/_astro/download-chart-dashboard.CDK7X36c_1CVWds.png)
 
 3. Choose **PNG** or **SVG** to save the chart as an image.
 
@@ -109,8 +99,6 @@ A good use case for bar charts is visualization of counters of categorical value
    chart_bar x=outcome, y=n
    ```
 
-   ![Bar chart](https://docs.tenzir.com/_astro/chart-bar.DEYyg_Q2_ZKLdFq.png)
-
 ##### Group and stack bars
 
 Sometimes, your data has a third dimension. You can **group** multiple series into a single plot.
@@ -129,8 +117,6 @@ from (
 chart_bar x=outcome, y=n, group=time
 ```
 
-![Grouped bar chart](https://docs.tenzir.com/_astro/chart-bar-grouped.CFNoOv9R_Z2cyY08.png)
-
 To **stack** the grouped bars, add `position="stacked"`:
 
 ```tql
@@ -144,8 +130,6 @@ from (
 )
 chart_bar x=outcome, y=n, group=time, position="stacked"
 ```
-
-![Stacked bar chart](https://docs.tenzir.com/_astro/chart-bar-stacked.D14MtCVs_Z2s0NJ7.png)
 
 #### Scale the y-axis logarithmically
 
@@ -164,8 +148,6 @@ from (
 chart_bar x=outcome, y=n
 ```
 
-![Unscaled bar chart](https://docs.tenzir.com/_astro/chart-bar-nolog.Bbkxdwf4_NcheB.png)
-
 The large value (`E`) dominates the chart, hiding the smaller categories.
 
 Enable log scaling via `y_log=true` to reveal them:
@@ -180,8 +162,6 @@ from (
 )
 chart_bar x=outcome, y=n, y_log=true
 ```
-
-![Log-scaled bar chart](https://docs.tenzir.com/_astro/chart-bar-log.DkLhynLc_ArLqJ.png)
 
 Now, you can clearly see all the values!
 
@@ -203,8 +183,6 @@ from (
 )
 chart_pie label=category, value=percentage
 ```
-
-![Pie chart](https://docs.tenzir.com/_astro/chart-pie.DZN_Mgb1_Z1A3gn5.png)
 
 To provide a consistent user experience across all chart types, `chart_pie` treats `label` and `x` as interchangeable, as well as `value` and `y`. This mapping makes intuitive sense when you consider a pie chart as a bar chart rendered in a radial coordinate system.
 
@@ -238,8 +216,6 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    chart_line x=timestamp, y=current_memory_usage
    ```
 
-   ![Line chart](https://docs.tenzir.com/_astro/chart-line.BGCcmM4p_Z2p3Ifq.png)
-
 3. **Aggregate to reduce the resolution**: Plotting metrics with a 1-second granularity over the course of a full day can make a line chart very noisy. In fact, we have a total of 86,400 samples in our plot. This can make a line chart quickly illegible. Let’s reduce the noise by aggregating the samples into 15-min buckets:
 
    ```tql
@@ -249,8 +225,6 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    summarize timestamp, mem=mean(current_memory_usage)
    chart_line x=timestamp, y=mem
    ```
-
-   ![Line chart with summarize](https://docs.tenzir.com/_astro/chart-line-summarize.C-kldtdX_18Igi4.png)
 
    This looks a lot smoother! **Pro tip**: you can even further [optimize the above pipeline](#optimize-plotting-with-inline-expressions) by using additional operator arguments.
 
@@ -267,8 +241,6 @@ chart_line (
   resolution=15min
 )
 ```
-
-![Line chart with multiple series](https://docs.tenzir.com/_astro/chart-line-multiple.Dp7WqfNy_x0JSb.png)
 
 Because `current_memory_usage` comes in gigabytes and `peak_memory_usage` in megabytes, we cannot compare them directly. Hence we normalized the peak usage to gigabytes to make them comparable in a single plot.
 
@@ -302,8 +274,6 @@ from (
 chart_area x=time, y={a: a, b: b}
 ```
 
-![Area chart](https://docs.tenzir.com/_astro/chart-area.qpx_UOJY_1kXsQs.png)
-
 The area under the curve gives you a strong visual impression of the total event volume over time.
 
 #### Stack multiple series
@@ -322,8 +292,6 @@ from (
 )
 chart_area x=time, y={a: a, b: b}, position="stacked"
 ```
-
-![Stacked area chart](https://docs.tenzir.com/_astro/chart-area-stacked.D1LdGZR3_1RaXh.png)
 
 Notice the difference in the y-axis interpretation:
 
@@ -344,8 +312,6 @@ summarize timestamp, mem=mean(current_memory_usage)  // aggregation
 chart_line x=timestamp, y=mem
 ```
 
-![Line chart with summarize](https://docs.tenzir.com/_astro/chart-line-summarize.C-kldtdX_18Igi4.png)
-
 You can push the filtering, rounding, and aggregation into the chart operator:
 
 ```tql
@@ -357,8 +323,6 @@ chart_line (
   x_min=now() - 1d,             // filtering
 )
 ```
-
-![Line chart with resolution](https://docs.tenzir.com/_astro/chart-line-resolution.CA1-QTst_17JjyX.png)
 
 Note how this make the pipeline more succinct by removing the extra `where`, `set`, and `summarize` operators.
 

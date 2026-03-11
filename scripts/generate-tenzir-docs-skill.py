@@ -19,10 +19,12 @@ from markdown_it import MarkdownIt
 
 
 DOCS_URL_PREFIX = re.compile(r"^https?://docs\.tenzir\.com")
-EXCLUDED_SOURCE_PATHS = frozenset({
-    "changelog.md",
-    "reference/ocsf.md",
-})
+EXCLUDED_SOURCE_PATHS = frozenset(
+    {
+        "changelog.md",
+        "reference/ocsf.md",
+    }
+)
 EXCLUDED_SOURCE_PREFIXES = (
     "changelog/",
     "reference/ocsf/",
@@ -40,6 +42,8 @@ SECTION_MAX_LEVEL = {
 SKILL_CONTENT_THRESHOLD = 5
 MARKDOWN = MarkdownIt()
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)]+)\)")
+CODE_SPAN_RE = re.compile(r"(`+)([^`]*?)\1")
+IMAGE_ONLY_LINE_RE = re.compile(r"^\s*(?:!\[[^\]]*\]\([^)]*\)\s*)+$")
 HEADING_LINK_RE = re.compile(r"^#{1,6}\s+\[([^\]]+)\]\(([^)]+)\)")
 HEADING_TEXT_RE = re.compile(r"^#{1,6}\s+(.+)$")
 MARKDOWN_ESCAPE_RE = re.compile(r"\\([\\`*_{}\[\]()#+\-.!|>])")
@@ -47,11 +51,15 @@ REFERENCE_INDEX_PAGES = (
     ("reference/operators.md", "Operator Index"),
     ("reference/functions.md", "Function Index"),
 )
-SPECIAL_REFERENCE_INDEX_PAGES = frozenset(relative_path for relative_path, _ in REFERENCE_INDEX_PAGES)
-SYNTHETIC_REFERENCE_INDEX_DIRS = frozenset({
-    "reference/node",
-    "reference/platform",
-})
+SPECIAL_REFERENCE_INDEX_PAGES = frozenset(
+    relative_path for relative_path, _ in REFERENCE_INDEX_PAGES
+)
+SYNTHETIC_REFERENCE_INDEX_DIRS = frozenset(
+    {
+        "reference/node",
+        "reference/platform",
+    }
+)
 # Operator and function indexes are extracted to standalone files instead of
 # being inlined into SKILL.md.  Maps source page → (output path, title).
 EXTRACTED_INDEX_FILES = {
@@ -153,7 +161,11 @@ def parse_heading_tree(markdown: str) -> Node:
     heading_entries: list[tuple[int, str, int, int]] = []
 
     for token in MARKDOWN.parse(markdown):
-        if token.type != "heading_open" or not token.tag.startswith("h") or token.map is None:
+        if (
+            token.type != "heading_open"
+            or not token.tag.startswith("h")
+            or token.map is None
+        ):
             continue
         level = int(token.tag[1:])
         start_line, end_line = token.map
@@ -177,7 +189,11 @@ def parse_heading_tree(markdown: str) -> Node:
 
     for index, node in enumerate(nodes_in_order):
         _level, _heading_line, _start_line, end_line = heading_entries[index]
-        next_start = heading_entries[index + 1][2] if index + 1 < len(heading_entries) else len(lines)
+        next_start = (
+            heading_entries[index + 1][2]
+            if index + 1 < len(heading_entries)
+            else len(lines)
+        )
         node.content_lines = lines[end_line:next_start]
 
     return root
@@ -192,10 +208,16 @@ def filter_node(node: Node, *, max_depth: int) -> Node | None:
 
     children = [
         child
-        for child in (filter_node(candidate, max_depth=max_depth) for candidate in node.children)
+        for child in (
+            filter_node(candidate, max_depth=max_depth) for candidate in node.children
+        )
         if child is not None
     ]
-    if not children and not has_meaningful_content(node.content_lines) and not source_path:
+    if (
+        not children
+        and not has_meaningful_content(node.content_lines)
+        and not source_path
+    ):
         return None
 
     return Node(
@@ -207,7 +229,9 @@ def filter_node(node: Node, *, max_depth: int) -> Node | None:
     )
 
 
-def resolve_local_markdown_path(pathname: str, available_source_paths: set[str]) -> str | None:
+def resolve_local_markdown_path(
+    pathname: str, available_source_paths: set[str]
+) -> str | None:
     candidate = pathname.lstrip("/")
     if candidate in available_source_paths:
         return candidate
@@ -259,12 +283,57 @@ def rewrite_content(text: str, from_path: str, available_source_paths: set[str])
 
     def replace(match: re.Match[str]) -> str:
         bang, label, href = match.groups()
-        rewritten_href = rewrite_link_destination(href, from_path, available_source_paths)
+        if bang:
+            return ""
+        rewritten_href = rewrite_link_destination(
+            href, from_path, available_source_paths
+        )
         if rewritten_href is None:
-            return f"![{label}]" if bang else label
-        return f"{bang}[{label}]({rewritten_href})"
+            return label
+        return f"[{label}]({rewritten_href})"
 
-    return LINK_RE.sub(replace, text)
+    def rewrite_line_outside_code(line: str) -> str:
+        parts: list[str] = []
+        last = 0
+        for match in CODE_SPAN_RE.finditer(line):
+            parts.append(LINK_RE.sub(replace, line[last : match.start()]))
+            parts.append(match.group(0))
+            last = match.end()
+        parts.append(LINK_RE.sub(replace, line[last:]))
+        return "".join(parts)
+
+    rewritten_lines: list[str] = []
+    in_fence = False
+    skip_next_blank = False
+
+    for line in text.splitlines():
+        fence_marker = line.lstrip()
+        if fence_marker.startswith(("```", "~~~")):
+            rewritten_lines.append(line.rstrip())
+            in_fence = not in_fence
+            skip_next_blank = False
+            continue
+
+        if in_fence:
+            rewritten_lines.append(line.rstrip())
+            continue
+
+        if IMAGE_ONLY_LINE_RE.match(line):
+            skip_next_blank = bool(rewritten_lines and rewritten_lines[-1] == "")
+            continue
+
+        rewritten_line = rewrite_line_outside_code(line).rstrip()
+        if skip_next_blank and not rewritten_line.strip():
+            skip_next_blank = False
+            continue
+
+        skip_next_blank = False
+        rewritten_lines.append(rewritten_line)
+
+    rewritten = "\n".join(rewritten_lines)
+    if text.endswith("\n"):
+        rewritten += "\n"
+    return rewritten
 
 
 def render_node(
@@ -288,7 +357,10 @@ def render_node(
         else [line for line in node.content_lines if not is_bullet_line(line)]
     )
     content_lines = trim_blank_lines(
-        [rewrite_content(line, from_path, available_source_paths) for line in source_lines]
+        [
+            rewrite_content(line, from_path, available_source_paths)
+            for line in source_lines
+        ]
     )
     if content_lines:
         lines.extend([*content_lines, ""])
@@ -381,7 +453,7 @@ def create_navigation_node() -> Node:
             "",
             "| Question type | Where to look |",
             "|---|---|",
-            "| \"How do I…\" tasks | [Guides](guides.md) — step-by-step instructions organized by task |",
+            '| "How do I…" tasks | [Guides](guides.md) — step-by-step instructions organized by task |',
             "| Operator or function syntax | [Operator Index](reference/operators-index.md) or [Function Index](reference/functions-index.md), then the specific page |",
             "| Integration setup (Splunk, Kafka, S3…) | [Integrations](integrations.md) — per-product setup and pipeline examples |",
             "| Concepts (nodes, pipelines, deployment) | [Explanations](explanations.md) — architecture and design |",
@@ -401,13 +473,13 @@ def create_examples_node() -> Node:
         level=2,
         content_lines=[
             "",
-            "**Operator syntax question** — *\"How does `where` work?\"*",
+            '**Operator syntax question** — *"How does `where` work?"*',
             "→ Read [where](reference/operators/where.md), explain the syntax, show the doc's TQL examples.",
             "",
-            "**Integration question** — *\"How do I send data to Splunk?\"*",
+            '**Integration question** — *"How do I send data to Splunk?"*',
             "→ Read [Splunk](integrations/splunk.md), provide the pipeline example from the page.",
             "",
-            "**Task question** — *\"How do I parse syslog?\"*",
+            '**Task question** — *"How do I parse syslog?"*',
             "→ Read [Parse delimited text](guides/parsing/parse-delimited-text.md) and",
             "[read_syslog](reference/operators/read_syslog.md). Combine the guide's approach",
             "with the operator reference.",
@@ -445,7 +517,9 @@ def generate_extracted_index(
             href = extract_heading_href(item.heading or "")
             if not label or not href:
                 continue
-            rewritten = rewrite_link_destination(href, output_relative_path, available_source_paths)
+            rewritten = rewrite_link_destination(
+                href, output_relative_path, available_source_paths
+            )
             if rewritten is None:
                 continue
             source_path = to_source_markdown_path(href)
@@ -469,14 +543,15 @@ def generate_extracted_index(
     additional = sorted(
         sp
         for sp in available_source_paths
-        if sp.startswith(f"{index_dir}/")
-        and sp not in indexed_paths
+        if sp.startswith(f"{index_dir}/") and sp not in indexed_paths
     )
     if additional:
         add_links: list[str] = []
         for ap in additional:
             ap_md = (input_dir / ap).read_text(encoding="utf-8")
-            ap_title = _extract_page_title(ap_md) or Path(ap).stem.replace("-", " ").title()
+            ap_title = (
+                _extract_page_title(ap_md) or Path(ap).stem.replace("-", " ").title()
+            )
             rel = posixpath.relpath(ap, posixpath.dirname(output_relative_path))
             desc = _extract_page_description(ap_md)
             entry = f"[{ap_title}]({rel})"
@@ -515,7 +590,8 @@ def build_compact_index_node(
             if (
                 not label
                 or not href
-                or rewrite_link_destination(href, "SKILL.md", available_source_paths) is None
+                or rewrite_link_destination(href, "SKILL.md", available_source_paths)
+                is None
             ):
                 continue
             source_path = to_source_markdown_path(href)
@@ -583,7 +659,10 @@ def build_reference_index_nodes(
             continue
         parent_dir = posixpath.dirname(source_path)
         parent_path = f"{posixpath.dirname(source_path)}.md"
-        if parent_path in available_source_paths or parent_path in SPECIAL_REFERENCE_INDEX_PAGES:
+        if (
+            parent_path in available_source_paths
+            or parent_path in SPECIAL_REFERENCE_INDEX_PAGES
+        ):
             group_key = parent_path
         elif parent_dir in SYNTHETIC_REFERENCE_INDEX_DIRS:
             group_key = parent_dir
@@ -600,13 +679,19 @@ def build_reference_index_nodes(
             continue
 
         parent_title = ""
-        parent_markdown_path = f"{parent_key}.md" if not parent_key.endswith(".md") else parent_key
+        parent_markdown_path = (
+            f"{parent_key}.md" if not parent_key.endswith(".md") else parent_key
+        )
         if parent_markdown_path in available_source_paths:
-            parent_markdown = (input_dir / parent_markdown_path).read_text(encoding="utf-8")
+            parent_markdown = (input_dir / parent_markdown_path).read_text(
+                encoding="utf-8"
+            )
             parent_heading = parse_heading_tree(parent_markdown).children
             parent_title = next(
                 (
-                    unescape_markdown_text(extract_heading_text(node.heading or "") or "")
+                    unescape_markdown_text(
+                        extract_heading_text(node.heading or "") or ""
+                    )
                     for node in parent_heading
                     if node.level == 1
                 ),
@@ -621,7 +706,9 @@ def build_reference_index_nodes(
             child_heading_nodes = parse_heading_tree(child_markdown).children
             child_title = next(
                 (
-                    unescape_markdown_text(extract_heading_text(node.heading or "") or "")
+                    unescape_markdown_text(
+                        extract_heading_text(node.heading or "") or ""
+                    )
                     for node in child_heading_nodes
                     if node.level == 1
                 ),
@@ -652,7 +739,11 @@ def build_reference_index_nodes(
             )
         )
     return index_nodes
-def collect_markdown_files(directory: Path, *, root_dir: Path | None = None) -> list[str]:
+
+
+def collect_markdown_files(
+    directory: Path, *, root_dir: Path | None = None
+) -> list[str]:
     root = root_dir or directory
     files: list[str] = []
     for path in sorted(directory.rglob("*.md")):
@@ -661,7 +752,9 @@ def collect_markdown_files(directory: Path, *, root_dir: Path | None = None) -> 
     return files
 
 
-def write_skill_files(input_dir: Path, output_dir: Path, source_paths: list[str]) -> int:
+def write_skill_files(
+    input_dir: Path, output_dir: Path, source_paths: list[str]
+) -> int:
     available_source_paths = build_available_source_paths(source_paths)
     count = 0
     for source_path in source_paths:
@@ -703,7 +796,9 @@ def generate_skill_markdown(
     sitemap_root: Node,
     available_source_paths: set[str],
 ) -> str:
-    title_node = next((child for child in sitemap_root.children if child.level == 1), None)
+    title_node = next(
+        (child for child in sitemap_root.children if child.level == 1), None
+    )
     if title_node is None:
         raise ValueError("Could not find the sitemap title in sitemap.md.")
 
@@ -786,7 +881,9 @@ def main() -> None:
 
     sitemap_root = parse_heading_tree(sitemap_path.read_text(encoding="utf-8"))
     markdown_files = [
-        file_path for file_path in collect_markdown_files(input_dir) if file_path != "sitemap.md"
+        file_path
+        for file_path in collect_markdown_files(input_dir)
+        if file_path != "sitemap.md"
     ]
     available_source_paths = build_available_source_paths(markdown_files)
 
@@ -801,7 +898,11 @@ def main() -> None:
     index_count = 0
     for source_path, (output_path, title) in EXTRACTED_INDEX_FILES.items():
         content = generate_extracted_index(
-            input_dir, source_path, title, output_path, available_source_paths,
+            input_dir,
+            source_path,
+            title,
+            output_path,
+            available_source_paths,
         )
         if content:
             dest = output_dir / output_path
