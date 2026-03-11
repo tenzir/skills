@@ -2,7 +2,12 @@
   "plugins": [
     {
       "name": "🛡️ Tenzir",
-      "skills": ["./skills/ocsf", "./skills/tenzir-docs"]
+      "skills": [
+        "./skills/create-ocsf-mapping",
+        "./skills/create-parser-package",
+        "./skills/ocsf",
+        "./skills/tenzir-docs"
+      ]
     },
     {
       "name": "🏗️ Engineering",

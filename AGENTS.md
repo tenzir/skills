@@ -32,6 +32,21 @@ Keep cross-references minimal — only declare a dependency when one skill's
 workflow actively delegates a step to another skill. Do not add a dependency
 just because two skills cover related topics.
 
+### `tenzir-docs` page references in workflow skills
+
+Workflow skills (e.g., `create-parser-package`, `create-ocsf-mapping`) point to
+`tenzir-docs` pages by relative path (e.g., `guides/packages/create-a-package.md`)
+instead of duplicating documentation content. These paths must stay in sync with
+the generated `tenzir-docs` skill tree:
+
+- After regenerating `tenzir-docs`, verify that every path referenced in a
+  workflow skill still resolves to a file under `skills/tenzir-docs/`.
+- When renaming or removing a `tenzir-docs` page, search workflow skills for
+  the old path and update it.
+- Never copy guide or tutorial content into a workflow skill. The skill provides
+  the workflow structure (steps, results, ordering); `tenzir-docs` provides the
+  domain knowledge.
+
 ## Skill descriptions
 
 Skill descriptions are the primary triggering mechanism. Write them to be

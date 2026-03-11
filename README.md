@@ -7,10 +7,12 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ### 🛡️ Tenzir
 
-| Skill         | Description                                                                      |
-| ------------- | -------------------------------------------------------------------------------- |
-| `ocsf`        | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
-| `tenzir-docs` | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
+| Skill                   | Description                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| `create-ocsf-mapping`   | Create OCSF mapping operators for a parser package                               |
+| `create-parser-package` | Scaffold a parser package from sample log data                                   |
+| `ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
+| `tenzir-docs`           | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
 
 ### 🏗️ Engineering
 
