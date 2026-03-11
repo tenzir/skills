@@ -3,6 +3,33 @@
 Skills for coding agents in the Tenzir ecosystem, built on the
 [Agent Skills](https://agentskills.io) standard.
 
+## 🗂️ Skills
+
+### 🛡️ Tenzir
+
+| Skill         | Description                                                                      |
+| ------------- | -------------------------------------------------------------------------------- |
+| `ocsf`        | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
+| `tenzir-docs` | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
+
+### 🏗️ Engineering
+
+| Skill                       | Description                                               |
+| --------------------------- | --------------------------------------------------------- |
+| `commit-changes`            | Stage, split, and commit changes with clean messages      |
+| `create-pull-requests`      | Open PRs, add changelog entries, cross-link docs PRs      |
+| `follow-python-conventions` | Python toolchain standards — uv, ruff, mypy, pytest       |
+| `review-changes`            | Code review with severity ratings and structured findings |
+| `tenzir-design-system`      | Frontend design tokens, components, and brand assets      |
+| `tenzir-ship`               | Changelog entries, release notes, and GitHub releases     |
+| `update-documentation`      | Coordinate docs.tenzir.com updates alongside code changes |
+
+### 📚 General
+
+| Skill               | Description                                                           |
+| ------------------- | --------------------------------------------------------------------- |
+| `technical-writing` | Technical documentation style following Google's developer docs guide |
+
 ## 📦 Install
 
 ### All skills
