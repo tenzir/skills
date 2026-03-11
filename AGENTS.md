@@ -45,6 +45,14 @@ SKILL.md bodies unless the skill is correcting a specific mistake the model
 would otherwise make. Prefer explaining intent and letting the model choose the
 best way to accomplish each step.
 
+## Keeping things in sync
+
+Three places list skills and must stay consistent:
+
+1. `skills/` directory — source of truth
+2. `.claude-plugin/marketplace.json` — validated by CI
+3. `README.md` skills table — update manually when adding or removing skills
+
 ## Validation
 
 Run `skills-ref` across every local skill after changing anything under
