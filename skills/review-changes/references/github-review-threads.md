@@ -9,27 +9,32 @@ you need to recommend how to respond to a reviewer.
 
 Use this when the fix is obvious and the commit itself is enough:
 
-- typo fixes
-- straightforward bug fixes
-- small refactors that match the reviewer suggestion
+- Typo fixes
+- Straightforward bug fixes
+- Small refactors that match the reviewer's suggestion exactly
 
 ### Reply, then resolve
 
 Use this when the fix needs a short explanation:
 
-- non-obvious implementation choices
-- partial fixes
-- alternate implementations of the reviewer suggestion
+- Non-obvious implementation choices
+- Partial fixes where you addressed the spirit but not the letter of the
+  comment
+- Alternate approaches to what the reviewer suggested
 
 ### Discuss before acting
 
-Use this when the comment is ambiguous, conflicts with another requirement, or
-would change the design substantially.
+Use this when:
+
+- The comment is ambiguous or could be read multiple ways
+- Acting on it would conflict with another requirement or reviewer's feedback
+- It would change the design substantially — scope creep risk
 
 ### Respectfully disagree
 
 Explain the constraint or tradeoff, keep the thread open, and let the reviewer
-close it.
+close it. Provide concrete reasoning — "I considered that but chose X
+because…" is useful; "I disagree" is not.
 
 ## Reply Style
 
@@ -48,6 +53,11 @@ Fixed in abc1234. Kept the current structure because it matches the existing
 pattern in config loading.
 ```
 
+```text
+Good catch. Went with an enum instead of the suggested string constant —
+same intent but catches typos at compile time. Fixed in abc1234.
+```
+
 ## Thread Resolution
 
 Resolve only after the fix is pushed or the discussion is genuinely complete.
@@ -55,3 +65,31 @@ Do not resolve open disagreements on behalf of the reviewer.
 
 When automating replies with `gh api graphql`, use the thread ID from the
 GitHub review thread and reply before resolving.
+
+## What a GIT Finding Looks Like
+
+When existing review comments need attention, surface them as GIT-prefixed
+findings:
+
+```markdown
+### 🟠 P2 · 💬 GIT-1 · Unaddressed reviewer concern about error handling · 90%
+
+- **File:** src/api.cpp:88
+- **Issue:** @reviewer flagged that the new endpoint swallows parse errors,
+  but no follow-up commit addresses it.
+- **Reasoning:** The reviewer's concern is valid — silent parse failures will
+  make debugging difficult for users.
+- **Evidence:** Review comment from 2 days ago, no subsequent commits touch
+  the error path.
+- **Suggestion:** Add error propagation as the reviewer suggested, reply with
+  the fix SHA, then resolve the thread.
+```
+
+## Common False Positives to Avoid
+
+- Treating resolved threads as open findings — check thread status before
+  reporting.
+- Surfacing old review comments from previous review rounds that have already
+  been addressed in subsequent commits.
+- Reporting nit-level review comments as P2+ findings — match the severity to
+  the reviewer's intent.
