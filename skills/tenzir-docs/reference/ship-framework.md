@@ -113,6 +113,45 @@ uvx tenzir-ship [command] [options]
 
 All commands accept `--config` to point at an explicit configuration file (YAML format, defaulting to `config.yaml`) and `--root` to operate on another repository. When you omit both options, the CLI looks for `config.yaml` inside the changelog root or, failing that, for a `package.yaml` one directory above the changelog folder. The CLI also automatically uses a `changelog/` subdirectory as the project root when running from a parent directory that contains one. This *package mode* lets you run commands from either the package root or the `changelog/` directory without repeating `--root`.
 
+The `init` command is the exception for `--config`: it always writes `config.yaml` in standalone mode and therefore does not accept an explicit config path.
+
+### init
+
+Create the initial changelog scaffold.
+
+```text
+tenzir-ship init [options]
+```
+
+| Option                 | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `--yes`                | Initialize without interactive prompts                    |
+| `--package`            | Force package mode using `package.yaml` metadata          |
+| `--standalone`         | Force standalone mode with `config.yaml`                  |
+| `--id <id>`            | Project identifier for standalone mode                    |
+| `--name <text>`        | Project display name for standalone mode                  |
+| `--description <text>` | Project description for standalone mode                   |
+| `--repository <slug>`  | GitHub repository slug (`owner/repo`) for standalone mode |
+
+Without `--root`, `init` creates `./changelog` by default. If you run it from inside an empty `changelog/` directory, it initializes the current directory instead of nesting another `changelog/` below it. In standalone mode, the interactive defaults come from the surrounding workspace directory, even when you pass `--root changelog` explicitly.
+
+Standalone mode writes `config.yaml` and creates `unreleased/`. Package mode requires `package.yaml` next to the changelog directory, reuses the package metadata, and only creates the directories needed for changelog content. Existing projects are never overwritten: `init` fails with an explicit error if `config.yaml`, `unreleased/`, or `releases/` already exist in the target.
+
+Examples:
+
+```sh
+# Interactive standalone setup
+uvx tenzir-ship init
+
+
+# Non-interactive standalone setup
+uvx tenzir-ship init --yes --id my-project --name "My Project"
+
+
+# Package-aware setup from a repository root with package.yaml
+uvx tenzir-ship init --package
+```
+
 ### show
 
 Display changelog entries in multiple views.
@@ -210,7 +249,7 @@ tenzir-ship add [options]
 | `--component <label>`  | Component label (repeatable)                 |
 | `--web`                | Open prefilled GitHub file creation URL      |
 
-The command prompts for any information you do not pass explicitly. The first invocation scaffolds the project automatically, creating a `changelog/` subdirectory with `config.yaml` and `unreleased/`. When you provide an explicit `--root` flag, the CLI uses that directory directly instead of creating a subdirectory. The CLI names entry files using the slugified title (e.g., `my-feature.md`).
+The command prompts for any information you do not pass explicitly. The first invocation can scaffold the project automatically, creating a `changelog/` subdirectory with `config.yaml` and `unreleased/`. When you provide an explicit `--root` flag, the CLI uses that directory directly instead of creating a subdirectory. Prefer `tenzir-ship init` when you want to set up the changelog workspace without creating an entry. The CLI names entry files using the slugified title (e.g., `my-feature.md`).
 
 By default, the CLI infers the primary author from environment variables (`TENZIR_CHANGELOG_AUTHOR`, `GH_USERNAME`) or the GitHub CLI (`gh api user`). Using `--author` overrides this inference entirely. The `--co-author` option adds to the inferred or explicit author list without replacing it, making it ideal for AI-assisted development, pair programming, or collaborative contributions. Duplicates are removed automatically while preserving order.
 
@@ -731,7 +770,7 @@ When `modules` is configured, `tenzir-ship validate` checks:
 
 * **Validation errors** – Run `tenzir-ship validate` to identify missing metadata, unused entries, or duplicate IDs.
 * **Component mismatch** – When `components` is configured, ensure every entry either omits `component` or uses an allowed label.
-* **Configuration not found** – Ensure `config.yaml` exists in the changelog root or `package.yaml` sits next to the `changelog/` directory. Run `tenzir-ship add` once to scaffold the configuration.
+* **Configuration not found** – Ensure `config.yaml` exists in the changelog root or `package.yaml` sits next to the `changelog/` directory. Run `tenzir-ship init` to scaffold the workspace, or let `tenzir-ship add` bootstrap it while creating the first entry.
 * **Version bump fails** – Bump flags read the latest release manifest on disk. Create an initial release with an explicit version before using `--patch/--minor/--major`.
 * **Version file update fails** – In `release.version_bump_mode: auto`, the CLI must parse every detected/configured version file. Use supported files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`) or set `release.version_bump_mode: off` and handle updates in your workflow script.
 
