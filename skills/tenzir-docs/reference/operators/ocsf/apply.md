@@ -9,7 +9,7 @@ ocsf::apply [preserve_variants=bool]
 
 Deprecated
 
-The `ocsf::apply` operator is deprecated. Use [`ocsf::cast`](cast.md) instead.
+The `ocsf::apply` operator is deprecated. Use [`ocsf::cast`](/reference/operators/ocsf/cast.md) instead.
 
 ## Description
 
@@ -99,6 +99,6 @@ to_clickhouse table="network_activity"
 
 ## See Also
 
-* [`ocsf::cast`](cast.md)
-* [`ocsf::derive`](derive.md)
-* [`ocsf::trim`](trim.md)
+* [`ocsf::cast`](/reference/operators/ocsf/cast.md)
+* [`ocsf::derive`](/reference/operators/ocsf/derive.md)
+* [`ocsf::trim`](/reference/operators/ocsf/trim.md)

@@ -30,7 +30,7 @@ summarize total=count(x)
 
 ## See Also
 
-* fn[`count_distinct`](count_distinct.md)
+* fn[`count_distinct`](/reference/functions/count_distinct.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

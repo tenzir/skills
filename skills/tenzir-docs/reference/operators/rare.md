@@ -11,7 +11,7 @@ rare x:field
 
 Shows the least common values for a given field. For each unique value, a new event containing its count will be produced. In general, `rare x` is equivalent to:
 
-This operator is the dual to [`top`](top.md).
+This operator is the dual to [`top`](/reference/operators/top.md).
 
 ```tql
 summarize x, count=count()
@@ -51,7 +51,7 @@ head 5
 
 ## See Also
 
-* [`sort`](sort.md)
-* [`summarize`](summarize.md)
-* [`top`](top.md)
+* [`sort`](/reference/operators/sort.md)
+* [`summarize`](/reference/operators/summarize.md)
+* [`top`](/reference/operators/top.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

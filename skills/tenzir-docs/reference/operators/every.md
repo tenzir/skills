@@ -44,7 +44,7 @@ publish "threat-feed"
 
 ## See Also
 
-* [`cron`](cron.md)
+* [`cron`](/reference/operators/cron.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
 * [Write a package](../../tutorials/write-a-package.md)

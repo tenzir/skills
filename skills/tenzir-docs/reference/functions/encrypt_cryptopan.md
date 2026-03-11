@@ -40,5 +40,5 @@ from {
 
 ## See Also
 
-* fn[`community_id`](community_id.md)
+* fn[`community_id`](/reference/functions/community_id.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

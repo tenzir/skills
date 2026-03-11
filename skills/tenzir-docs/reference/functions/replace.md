@@ -53,6 +53,6 @@ from {x: "hello".replace("l", "r", max=1)}
 
 ## See Also
 
-* fn[`replace_regex`](replace_regex.md)
-* [`replace`](../operators/replace.md)
+* fn[`replace_regex`](/reference/functions/replace_regex.md)
+* [`replace`](/reference/operators/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

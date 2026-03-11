@@ -25,7 +25,7 @@ context::update "threatfox", key=ioc, value=data
 
 Example data for context updating
 
-If we replace [`context::update`](../../reference/operators/context/update.md) in the above pipeline with `head 5`, we get output similar to the following, depending on the current state of the API:
+If we replace [`context::update`](/reference/operators/context/update.md) in the above pipeline with `head 5`, we get output similar to the following, depending on the current state of the API:
 
 ```tql
 {
@@ -124,7 +124,7 @@ If we replace [`context::update`](../../reference/operators/context/update.md) i
 
 Now that we loaded IoCs into the context, we can enrich with it in other pipelines. Since we previously imported only domains, we look for fields in the data of that type.
 
-The following pipeline subscribes to the import feed of all data arriving at the node via `export live=true` and applies the `threatfox` context to Suricata DNS requests in field `dns.rrname` via [`context::enrich`](../../reference/operators/context/enrich.md):
+The following pipeline subscribes to the import feed of all data arriving at the node via `export live=true` and applies the `threatfox` context to Suricata DNS requests in field `dns.rrname` via [`context::enrich`](/reference/operators/context/enrich.md):
 
 ```tql
 export live=true

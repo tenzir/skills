@@ -144,10 +144,10 @@ output = input.parse_leef()
 
 ## See Also
 
-* fn[`parse_cef`](parse_cef.md)
-* fn[`print_leef`](print_leef.md)
-* [`read_leef`](../operators/read_leef.md)
-* [`read_syslog`](../operators/read_syslog.md)
-* [`write_syslog`](../operators/write_syslog.md)
+* fn[`parse_cef`](/reference/functions/parse_cef.md)
+* fn[`print_leef`](/reference/functions/print_leef.md)
+* [`read_leef`](/reference/operators/read_leef.md)
+* [`read_syslog`](/reference/operators/read_syslog.md)
+* [`write_syslog`](/reference/operators/write_syslog.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)
 * [Syslog](../../integrations/syslog.md)

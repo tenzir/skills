@@ -59,4 +59,4 @@ parallel 4 {
 
 ## See Also
 
-* [`load_balance`](load_balance.md)
+* [`load_balance`](/reference/operators/load_balance.md)

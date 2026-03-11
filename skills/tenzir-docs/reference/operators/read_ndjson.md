@@ -156,4 +156,4 @@ read_ndjson unflatten="."
 
 ## See Also
 
-* [`read_json`](read_json.md)
+* [`read_json`](/reference/operators/read_json.md)

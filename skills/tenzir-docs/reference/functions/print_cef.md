@@ -104,8 +104,8 @@ write_syslog
 
 ## See Also
 
-* fn[`parse_cef`](parse_cef.md)
-* [`read_cef`](../operators/read_cef.md)
-* [`read_syslog`](../operators/read_syslog.md)
-* [`write_syslog`](../operators/write_syslog.md)
+* fn[`parse_cef`](/reference/functions/parse_cef.md)
+* [`read_cef`](/reference/operators/read_cef.md)
+* [`read_syslog`](/reference/operators/read_syslog.md)
+* [`write_syslog`](/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

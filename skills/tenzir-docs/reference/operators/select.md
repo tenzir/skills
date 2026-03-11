@@ -60,7 +60,7 @@ select id=name.to_upper(), pos.x, added=true
 
 ## See Also
 
-* [`drop`](drop.md)
-* [`where`](where.md)
+* [`drop`](/reference/operators/drop.md)
+* [`where`](/reference/operators/where.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

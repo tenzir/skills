@@ -210,9 +210,9 @@ This requires that your test file has a sibling `.stdin` input that the [test fr
 
 ### Validation gate
 
-The [`ocsf::cast`](../../reference/operators/ocsf/cast.md) operator is the primary schema validation gate. It ensures that your mapping produces schema-compliant output.
+The [`ocsf::cast`](/reference/operators/ocsf/cast.md) operator is the primary schema validation gate. It ensures that your mapping produces schema-compliant output.
 
-Your mapping is complete once [`ocsf::cast`](../../reference/operators/ocsf/cast.md) no longer emits warnings.
+Your mapping is complete once [`ocsf::cast`](/reference/operators/ocsf/cast.md) no longer emits warnings.
 
 ## See also
 

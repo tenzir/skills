@@ -116,6 +116,6 @@ warning: found inconsistency between `activity_id` and `activity_name`
 
 ## See Also
 
-* [`ocsf::cast`](cast.md)
-* [`ocsf::trim`](trim.md)
+* [`ocsf::cast`](/reference/operators/ocsf/cast.md)
+* [`ocsf::trim`](/reference/operators/ocsf/trim.md)
 * [Map data to OCSF](../../../tutorials/map-data-to-ocsf.md)

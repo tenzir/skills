@@ -29,5 +29,5 @@ Use `nc -ul 127.0.0.1 56789` to spin up a UDP server to test the above pipeline.
 
 ## See Also
 
-* [`load_udp`](load_udp.md)
+* [`load_udp`](/reference/operators/load_udp.md)
 * [UDP](../../integrations/udp.md)

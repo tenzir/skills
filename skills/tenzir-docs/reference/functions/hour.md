@@ -35,9 +35,9 @@ hour = ts.hour()
 
 ## See Also
 
-* fn[`year`](year.md)
-* fn[`month`](month.md)
-* fn[`day`](day.md)
-* fn[`minute`](minute.md)
-* fn[`second`](second.md)
+* fn[`year`](/reference/functions/year.md)
+* fn[`month`](/reference/functions/month.md)
+* fn[`day`](/reference/functions/day.md)
+* fn[`minute`](/reference/functions/minute.md)
+* fn[`second`](/reference/functions/second.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

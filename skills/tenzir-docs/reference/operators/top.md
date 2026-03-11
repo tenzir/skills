@@ -16,7 +16,7 @@ summarize x, count=count()
 sort -count
 ```
 
-This operator is the dual to [`rare`](rare.md).
+This operator is the dual to [`rare`](/reference/operators/rare.md).
 
 Potentially High Memory Usage
 
@@ -51,8 +51,8 @@ head 5
 
 ## See Also
 
-* [`rare`](rare.md)
-* [`sort`](sort.md)
-* [`summarize`](summarize.md)
+* [`rare`](/reference/operators/rare.md)
+* [`sort`](/reference/operators/sort.md)
+* [`summarize`](/reference/operators/summarize.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

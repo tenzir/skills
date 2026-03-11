@@ -46,5 +46,5 @@ save_ftp "ftp.example.org"
 
 ## See Also
 
-* [`load_ftp`](load_ftp.md)
+* [`load_ftp`](/reference/operators/load_ftp.md)
 * [FTP](../../integrations/ftp.md)

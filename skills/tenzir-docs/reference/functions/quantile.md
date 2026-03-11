@@ -34,6 +34,6 @@ summarize median_value=quantile(x, q=0.5)
 
 ## See Also
 
-* fn[`median`](median.md)
-* fn[`mean`](mean.md)
+* fn[`median`](/reference/functions/median.md)
+* fn[`mean`](/reference/functions/mean.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

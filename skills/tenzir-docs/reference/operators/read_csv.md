@@ -195,10 +195,10 @@ read_csv header="message,count,ip"
 
 ## See Also
 
-* fn[`parse_csv`](../functions/parse_csv.md)
-* fn[`print_csv`](../functions/print_csv.md)
-* [`read_ssv`](read_ssv.md)
-* [`read_tsv`](read_tsv.md)
-* [`read_xsv`](read_xsv.md)
-* [`write_csv`](write_csv.md)
+* fn[`parse_csv`](/reference/functions/parse_csv.md)
+* fn[`print_csv`](/reference/functions/print_csv.md)
+* [`read_ssv`](/reference/operators/read_ssv.md)
+* [`read_tsv`](/reference/operators/read_tsv.md)
+* [`read_xsv`](/reference/operators/read_xsv.md)
+* [`write_csv`](/reference/operators/write_csv.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

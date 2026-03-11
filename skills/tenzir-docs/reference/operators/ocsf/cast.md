@@ -84,5 +84,5 @@ to_clickhouse table="network_activity"
 
 ## See Also
 
-* [`ocsf::derive`](derive.md)
-* [`ocsf::trim`](trim.md)
+* [`ocsf::derive`](/reference/operators/ocsf/derive.md)
+* [`ocsf::trim`](/reference/operators/ocsf/trim.md)

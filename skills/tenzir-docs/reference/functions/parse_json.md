@@ -152,5 +152,5 @@ output = input.parse_json()
 
 ## See Also
 
-* [`read_json`](../operators/read_json.md)
+* [`read_json`](/reference/operators/read_json.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

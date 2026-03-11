@@ -73,6 +73,6 @@ slice end=-5, stride=-1
 
 ## See Also
 
-* [`head`](head.md)
-* [`tail`](tail.md)
+* [`head`](/reference/operators/head.md)
+* [`tail`](/reference/operators/tail.md)
 * [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)

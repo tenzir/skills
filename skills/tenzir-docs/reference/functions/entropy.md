@@ -51,6 +51,6 @@ summarize normalized_entropy=entropy(x, normalize=true)
 
 ## See Also
 
-* fn[`mode`](mode.md)
-* fn[`value_counts`](value_counts.md)
+* fn[`mode`](/reference/functions/mode.md)
+* fn[`value_counts`](/reference/functions/value_counts.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

@@ -63,5 +63,5 @@ save_http "example.org/api", headers={"X-API-Token": "0000-0000-0000"}
 
 ## See Also
 
-* [`load_http`](load_http.md)
+* [`load_http`](/reference/operators/load_http.md)
 * [HTTP(S)](../../integrations/http.md)

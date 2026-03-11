@@ -11,7 +11,7 @@ tail [n:int]
 
 Forwards the last `n` events and discards the rest.
 
-`tail n` is a shorthand notation for [`slice begin=-n`](slice.md).
+`tail n` is a shorthand notation for [`slice begin=-n`](/reference/operators/slice.md).
 
 ### `n: int (optional)`
 
@@ -37,6 +37,6 @@ tail 5
 
 ## See Also
 
-* [`head`](head.md)
-* [`slice`](slice.md)
+* [`head`](/reference/operators/head.md)
+* [`slice`](/reference/operators/slice.md)
 * [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)

@@ -25,6 +25,6 @@ from {x: "hello".is_printable()}
 
 ## See Also
 
-* fn[`is_alnum`](is_alnum.md)
-* fn[`is_alpha`](is_alpha.md)
+* fn[`is_alnum`](/reference/functions/is_alnum.md)
+* fn[`is_alpha`](/reference/functions/is_alpha.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

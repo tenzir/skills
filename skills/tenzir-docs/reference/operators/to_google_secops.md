@@ -79,5 +79,5 @@ to_google_secops \
 
 ## See Also
 
-* [`to_google_cloud_logging`](to_google_cloud_logging.md)
+* [`to_google_cloud_logging`](/reference/operators/to_google_cloud_logging.md)
 * [SecOps](../../integrations/google/secops.md)

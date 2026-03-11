@@ -117,7 +117,7 @@ from_azure_blob_storage "abfs://data/**.json", path_field=source_file
 
 ## See Also
 
-* [`from_file`](from_file.md)
-* [`load_azure_blob_storage`](load_azure_blob_storage.md)
-* [`save_azure_blob_storage`](save_azure_blob_storage.md)
+* [`from_file`](/reference/operators/from_file.md)
+* [`load_azure_blob_storage`](/reference/operators/load_azure_blob_storage.md)
+* [`save_azure_blob_storage`](/reference/operators/save_azure_blob_storage.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

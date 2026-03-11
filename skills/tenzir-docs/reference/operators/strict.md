@@ -24,5 +24,5 @@ strict {
 
 ## See Also
 
-* [`assert`](assert.md)
+* [`assert`](/reference/operators/assert.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

@@ -545,16 +545,6 @@ The `tenzir-test` harness discovers and runs integration tests for pipelines, fi
 
 `tenzir-ship` helps you ship faster with automated release engineering. Manage changelogs, generate release notes, and publish GitHub releases. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guide for maintaining a changelog.
 
-### Workflows
-
-#### [Create a parser package](reference/workflows/create-parser-package.md)
-
-This workflow guides you through creating a package to parse and clean log events. To this end, you scaffold a Tenzir package and build user-defined operators.
-
-#### [Create an OCSF mapping](reference/workflows/create-ocsf-mapping.md)
-
-This workflow guides you through creating an OCSF mapping for a parser package. It builds on a parser package, adding OCSF-specific mapping and validation steps.
-
 #### Node Index
 
 - [Node Configuration](reference/node/configuration.md)

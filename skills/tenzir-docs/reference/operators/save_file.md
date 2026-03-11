@@ -37,7 +37,7 @@ save_file "/tmp/out.txt"
 
 ## See Also
 
-* [`files`](files.md)
-* [`load_file`](load_file.md)
-* [`save_stdout`](save_stdout.md)
+* [`files`](/reference/operators/files.md)
+* [`load_file`](/reference/operators/load_file.md)
+* [`save_stdout`](/reference/operators/save_stdout.md)
 * [File](../../integrations/file.md)

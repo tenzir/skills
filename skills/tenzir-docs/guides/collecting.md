@@ -5,9 +5,9 @@ This guide provides an overview of data collection in TQL. You’ll learn about 
 
 TQL provides two types of input operators:
 
-* **`from_*` operators** like [`from_file`](../reference/operators/from_file.md) and [`from_http`](../reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
+* **`from_*` operators** like [`from_file`](/reference/operators/from_file.md) and [`from_http`](/reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
 
-* **Direct event operators** like [`from_kafka`](../reference/operators/from_kafka.md) and [`from_udp`](../reference/operators/from_udp.md) produce structured events directly without an intermediate byte stream.
+* **Direct event operators** like [`from_kafka`](/reference/operators/from_kafka.md) and [`from_udp`](/reference/operators/from_udp.md) produce structured events directly without an intermediate byte stream.
 
 Migration note
 

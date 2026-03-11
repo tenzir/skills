@@ -93,8 +93,8 @@ write_syslog
 
 ## See Also
 
-* fn[`parse_leef`](parse_leef.md)
-* [`read_leef`](../operators/read_leef.md)
-* [`read_syslog`](../operators/read_syslog.md)
-* [`write_syslog`](../operators/write_syslog.md)
+* fn[`parse_leef`](/reference/functions/parse_leef.md)
+* [`read_leef`](/reference/operators/read_leef.md)
+* [`read_syslog`](/reference/operators/read_syslog.md)
+* [`write_syslog`](/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

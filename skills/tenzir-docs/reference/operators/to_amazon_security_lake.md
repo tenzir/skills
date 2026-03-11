@@ -12,7 +12,7 @@ to_amazon_security_lake s3_uri:string, region=string, account_id=string,
 
 The `to_amazon_security_lake` operator sends OCSF events to [Amazon Security Lake](https://aws.amazon.com/security-lake/), AWS’s centralized security data repository that normalizes and stores security data from multiple sources.
 
-The operator automatically handles Amazon Security Lake’s partitioning requirements and file size constraints, but does not validate the OCSF schema of the events. Consider [`ocsf::apply`](ocsf/apply.md) in your pipeline to ensure schema compliance.
+The operator automatically handles Amazon Security Lake’s partitioning requirements and file size constraints, but does not validate the OCSF schema of the events. Consider [`ocsf::apply`](/reference/operators/ocsf/apply.md) in your pipeline to ensure schema compliance.
 
 For a list of OCSF event classes supported by Amazon Security Lake, see the [AWS documentation](https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html#ocsf-eventclass). The operator generates random UUID (v7) file names with a `.parquet` extension.
 
@@ -101,6 +101,6 @@ to_amazon_security_lake $s3_uri,
 
 ## See Also
 
-* [`ocsf::apply`](ocsf/apply.md)
-* [`save_s3`](save_s3.md)
+* [`ocsf::apply`](/reference/operators/ocsf/apply.md)
+* [`save_s3`](/reference/operators/save_s3.md)
 * [Security Lake](../../integrations/amazon/security-lake.md)

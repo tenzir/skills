@@ -1,7 +1,7 @@
 # Maintain a changelog
 
 
-This guide shows you how to manage changelog entries and publish releases with [`tenzir-ship`](../../reference/ship-framework.md). You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
+This guide shows you how to manage changelog entries and publish releases with [`tenzir-ship`](/reference/ship-framework.md). You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
 
 ## Prerequisites
 

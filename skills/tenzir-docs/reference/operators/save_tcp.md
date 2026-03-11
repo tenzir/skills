@@ -71,5 +71,5 @@ save_tcp "127.0.0.1:4000", tls=true, skip_peer_verification=true
 
 ## See Also
 
-* [`load_tcp`](load_tcp.md)
+* [`load_tcp`](/reference/operators/load_tcp.md)
 * [TCP](../../integrations/tcp.md)

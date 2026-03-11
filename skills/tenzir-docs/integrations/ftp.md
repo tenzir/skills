@@ -7,7 +7,7 @@ FTP consists of two separate TCP connections, one control and one data connectio
 
 URL Support
 
-The URL schemes `ftp://` and `ftps://` dispatch to [`load_ftp`](../reference/operators/load_ftp.md) and [`save_ftp`](../reference/operators/save_ftp.md) for seamless URL-style use via [`from`](../reference/operators/from.md) and [`to`](../reference/operators/to.md).
+The URL schemes `ftp://` and `ftps://` dispatch to [`load_ftp`](/reference/operators/load_ftp.md) and [`save_ftp`](/reference/operators/save_ftp.md) for seamless URL-style use via [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md).
 
 ## Examples
 

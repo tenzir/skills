@@ -90,5 +90,5 @@ load_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`save_sqs`](save_sqs.md)
+* [`save_sqs`](/reference/operators/save_sqs.md)
 * [SQS](../../integrations/amazon/sqs.md)

@@ -23,7 +23,7 @@ Specifies an optional compression type. Supported options are `zstd` for [Zstand
 
 Why would I use this over the `compress` operator?
 
-The Parquet format offers more efficient compression compared to the [`compress`](compress.md) operator. This is because it compresses the data column-by-column, leaving metadata that needs to be accessed frequently uncompressed.
+The Parquet format offers more efficient compression compared to the [`compress`](/reference/operators/compress.md) operator. This is because it compresses the data column-by-column, leaving metadata that needs to be accessed frequently uncompressed.
 
 ## Examples
 
@@ -37,8 +37,8 @@ write_parquet
 
 ## See Also
 
-* [`read_bitz`](read_bitz.md)
-* [`read_parquet`](read_parquet.md)
-* [`to_hive`](to_hive.md)
-* [`write_bitz`](write_bitz.md)
-* [`write_feather`](write_feather.md)
+* [`read_bitz`](/reference/operators/read_bitz.md)
+* [`read_parquet`](/reference/operators/read_parquet.md)
+* [`to_hive`](/reference/operators/to_hive.md)
+* [`write_bitz`](/reference/operators/write_bitz.md)
+* [`write_feather`](/reference/operators/write_feather.md)

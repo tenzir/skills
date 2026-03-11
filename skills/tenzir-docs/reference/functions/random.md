@@ -25,5 +25,5 @@ from {x: random()}
 
 ## See Also
 
-* fn[`uuid`](uuid.md)
+* fn[`uuid`](/reference/functions/uuid.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

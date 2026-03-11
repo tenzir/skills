@@ -141,5 +141,5 @@ x = x.parse_yaml()
 
 ## See Also
 
-* [`read_yaml`](../operators/read_yaml.md)
-* fn[`print_yaml`](print_yaml.md)
+* [`read_yaml`](/reference/operators/read_yaml.md)
+* fn[`print_yaml`](/reference/functions/print_yaml.md)

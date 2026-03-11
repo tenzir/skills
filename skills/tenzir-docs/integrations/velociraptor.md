@@ -43,7 +43,7 @@ The `velociraptor` acts as client and establishes a connection to a Velociraptor
 
 ### Run raw VQL
 
-After you have created a TLS certificate, you can use the [`from_velociraptor`](../reference/operators/from_velociraptor.md) operator to execute a [Velociraptor Query Language (VQL)](https://docs.velociraptor.app/docs/vql/) query:
+After you have created a TLS certificate, you can use the [`from_velociraptor`](/reference/operators/from_velociraptor.md) operator to execute a [Velociraptor Query Language (VQL)](https://docs.velociraptor.app/docs/vql/) query:
 
 ```tql
 from_velociraptor query="select * from pslist()"

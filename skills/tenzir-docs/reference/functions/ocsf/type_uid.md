@@ -15,4 +15,4 @@ The `type_name` for which `type_uid` should be returned.
 
 ## See Also
 
-* fn[`ocsf::type_name`](type_name.md)
+* fn[`ocsf::type_name`](/reference/functions/ocsf/type_name.md)

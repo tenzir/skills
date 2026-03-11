@@ -30,7 +30,7 @@ summarize unique=distinct(x)
 
 ## See Also
 
-* fn[`collect`](collect.md)
-* fn[`count_distinct`](count_distinct.md)
-* fn[`value_counts`](value_counts.md)
+* fn[`collect`](/reference/functions/collect.md)
+* fn[`count_distinct`](/reference/functions/count_distinct.md)
+* fn[`value_counts`](/reference/functions/value_counts.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

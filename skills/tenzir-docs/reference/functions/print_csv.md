@@ -49,5 +49,5 @@ output = this.print_csv()
 
 ## See Also
 
-* [`write_csv`](../operators/write_csv.md)
-* fn[`parse_csv`](parse_csv.md)
+* [`write_csv`](/reference/operators/write_csv.md)
+* fn[`parse_csv`](/reference/functions/parse_csv.md)

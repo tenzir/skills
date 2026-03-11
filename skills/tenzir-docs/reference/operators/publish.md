@@ -9,7 +9,7 @@ publish [topic:string]
 
 ## Description
 
-The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribers`](subscribe.md) of the channel operator receive the events immediately.
+The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribers`](/reference/operators/subscribe.md) of the channel operator receive the events immediately.
 
 Note
 
@@ -42,8 +42,8 @@ publish f"suricata.{event_type}"
 
 ## See Also
 
-* [`import`](import.md)
-* [`subscribe`](subscribe.md)
+* [`import`](/reference/operators/import.md)
+* [`subscribe`](/reference/operators/subscribe.md)
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/routing/split-and-merge-streams.md)
 * [Write a package](../../tutorials/write-a-package.md)

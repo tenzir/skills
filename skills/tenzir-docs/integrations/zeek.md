@@ -137,7 +137,7 @@ Zeek ships with a helper utility `zeek-cut` that operators on Zeek’s tab-separ
 zeek-cut id.orig_h id.resp_h < conn.log
 ```
 
-The list of arguments to `zeek-cut` are the column names of the log. The [`select`](../reference/operators/select.md) operator performs the equivalent in Tenzir after we parse the logs as Zeek TSV:
+The list of arguments to `zeek-cut` are the column names of the log. The [`select`](/reference/operators/select.md) operator performs the equivalent in Tenzir after we parse the logs as Zeek TSV:
 
 ```bash
 tenzir 'read_zeek_tsv | select id.orig_h id.resp_h' < conn.log
@@ -151,7 +151,7 @@ cat *.log | tenzir 'read_zeek_tsv | select id.orig_h id.resp_h'
 
 ### Generate Zeek TSV from arbitrary data
 
-You can render any data as Zeek TSV log using [`write_zeek_tsv`](../reference/operators/write_zeek_tsv.md):
+You can render any data as Zeek TSV log using [`write_zeek_tsv`](/reference/operators/write_zeek_tsv.md):
 
 For example, this is how you create a filtered version of a Zeek conn.log:
 

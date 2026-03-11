@@ -9,7 +9,7 @@ Because ZeroMQ is entirely asynchronous, publishers send messages even when no s
 
 URL Support
 
-The URL scheme `zmq://` dispatches to [`load_zmq`](../reference/operators/load_zmq.md) and [`save_zmq`](../reference/operators/save_zmq.md) for seamless URL-style use via [`from`](../reference/operators/from.md) and [`to`](../reference/operators/to.md).
+The URL scheme `zmq://` dispatches to [`load_zmq`](/reference/operators/load_zmq.md) and [`save_zmq`](/reference/operators/save_zmq.md) for seamless URL-style use via [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md).
 
 ## Examples
 

@@ -89,4 +89,4 @@ pipeline::activity range=20s, interval=20s
 
 ## See Also
 
-* [`pipeline::list`](list.md)
+* [`pipeline::list`](/reference/operators/pipeline/list.md)

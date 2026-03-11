@@ -17,6 +17,6 @@ Internally, BITZ uses Arrow’s IPC format for serialization and deserialization
 
 ## See Also
 
-* [`read_feather`](read_feather.md)
-* [`read_parquet`](read_parquet.md)
-* [`write_bitz`](write_bitz.md)
+* [`read_feather`](/reference/operators/read_feather.md)
+* [`read_parquet`](/reference/operators/read_parquet.md)
+* [`write_bitz`](/reference/operators/write_bitz.md)

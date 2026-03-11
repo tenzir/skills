@@ -12,7 +12,7 @@ load_kafka topic:string, [count=int, exit=bool, offset=int|string, options=recor
 
 Deprecated
 
-The `load_kafka` operator does not respect event boundaries. Consider using [`from_kafka`](from_kafka.md) instead.
+The `load_kafka` operator does not respect event boundaries. Consider using [`from_kafka`](/reference/operators/from_kafka.md) instead.
 
 The `load_kafka` operator reads bytes from a Kafka topic.
 
@@ -116,6 +116,6 @@ read_zeek_json
 
 ## See Also
 
-* [`from_kafka`](from_kafka.md)
-* [`to_kafka`](to_kafka.md)
+* [`from_kafka`](/reference/operators/from_kafka.md)
+* [`to_kafka`](/reference/operators/to_kafka.md)
 * [Kafka](../../integrations/kafka.md)

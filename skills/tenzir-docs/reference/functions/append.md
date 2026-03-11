@@ -26,8 +26,8 @@ xs = xs.append(3)
 
 ## See Also
 
-* fn[`add`](add.md)
-* fn[`concatenate`](concatenate.md)
-* fn[`prepend`](prepend.md)
-* fn[`remove`](remove.md)
+* fn[`add`](/reference/functions/add.md)
+* fn[`concatenate`](/reference/functions/concatenate.md)
+* fn[`prepend`](/reference/functions/prepend.md)
+* fn[`remove`](/reference/functions/remove.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

@@ -89,7 +89,7 @@ Sometimes, users may wish to run Tenzir without side effects, e.g., when wrappin
 
 ## TLS Configuration
 
-Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](../reference/operators/to_opensearch.md), [`to_splunk`](../reference/operators/to_splunk.md), [`save_email`](../reference/operators/save_email.md)) and those that accept inbound connections (e.g., [`load_tcp`](../reference/operators/load_tcp.md), [`save_tcp`](../reference/operators/save_tcp.md)).
+Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](/reference/operators/to_opensearch.md), [`to_splunk`](/reference/operators/to_splunk.md), [`save_email`](/reference/operators/save_email.md)) and those that accept inbound connections (e.g., [`load_tcp`](/reference/operators/load_tcp.md), [`save_tcp`](/reference/operators/save_tcp.md)).
 
 Use Only When Required
 
@@ -131,12 +131,12 @@ The cipher list format follows OpenSSL cipher list syntax. See the [OpenSSL docu
 
 The following operators and connectors automatically respect the node-level TLS configuration:
 
-* [`to_opensearch`](../reference/operators/to_opensearch.md): Applies min version and ciphers to HTTPS connections
-* [`to_splunk`](../reference/operators/to_splunk.md): Applies min version and ciphers to Splunk HEC connections
-* [`save_email`](../reference/operators/save_email.md): Applies min version and ciphers to SMTP connections
-* [`load_tcp`](../reference/operators/load_tcp.md): Applies min version and ciphers to TLS server mode
-* [`save_tcp`](../reference/operators/save_tcp.md): Applies min version and ciphers to TLS client and server modes
-* [`from_opensearch`](../reference/operators/from_opensearch.md): Applies min version and ciphers to HTTPS connections
+* [`to_opensearch`](/reference/operators/to_opensearch.md): Applies min version and ciphers to HTTPS connections
+* [`to_splunk`](/reference/operators/to_splunk.md): Applies min version and ciphers to Splunk HEC connections
+* [`save_email`](/reference/operators/save_email.md): Applies min version and ciphers to SMTP connections
+* [`load_tcp`](/reference/operators/load_tcp.md): Applies min version and ciphers to TLS server mode
+* [`save_tcp`](/reference/operators/save_tcp.md): Applies min version and ciphers to TLS client and server modes
+* [`from_opensearch`](/reference/operators/from_opensearch.md): Applies min version and ciphers to HTTPS connections
 
 ## Plugins
 
@@ -212,7 +212,7 @@ These options only affect the connection from the node to the Tenzir Platform. I
 
 ### List plugins
 
-You can get the list of available plugins using the [`plugins`](../reference/operators/plugins.md) operator:
+You can get the list of available plugins using the [`plugins`](/reference/operators/plugins.md) operator:
 
 ```bash
 tenzir 'plugins'

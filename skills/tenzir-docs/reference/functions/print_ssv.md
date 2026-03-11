@@ -47,5 +47,5 @@ output = this.print_ssv()
 
 ## See Also
 
-* [`write_ssv`](../operators/write_ssv.md)
-* fn[`parse_ssv`](parse_ssv.md)
+* [`write_ssv`](/reference/operators/write_ssv.md)
+* fn[`parse_ssv`](/reference/functions/parse_ssv.md)

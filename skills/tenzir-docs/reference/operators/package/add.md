@@ -36,7 +36,7 @@ package::add "/mnt/config/tenzir/library/zeek",
 
 ## See Also
 
-* [`package::list`](list.md)
-* [`package::remove`](remove.md)
+* [`package::list`](/reference/operators/package/list.md)
+* [`package::remove`](/reference/operators/package/remove.md)
 * [Install a package](../../../guides/packages/install-a-package.md)
 * [Write a package](../../../tutorials/write-a-package.md)

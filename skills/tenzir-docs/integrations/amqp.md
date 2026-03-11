@@ -9,7 +9,7 @@ Tenzir supports sending and receiving messages via AMQP version 0-9-1.
 
 URL Support
 
-The URL scheme `amqp://` dispatches to [`load_amqp`](../reference/operators/load_amqp.md) and [`save_amqp`](../reference/operators/save_amqp.md) for seamless URL-style use via [`from`](../reference/operators/from.md) and [`to`](../reference/operators/to.md).
+The URL scheme `amqp://` dispatches to [`load_amqp`](/reference/operators/load_amqp.md) and [`save_amqp`](/reference/operators/save_amqp.md) for seamless URL-style use via [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md).
 
 ## Examples
 

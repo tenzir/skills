@@ -53,5 +53,5 @@ from {x: replace_regex("hellolo", "l+", "y", max=1)}
 
 ## See Also
 
-* fn[`replace`](replace.md)
+* fn[`replace`](/reference/functions/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

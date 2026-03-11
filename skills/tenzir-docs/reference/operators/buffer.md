@@ -40,4 +40,4 @@ buffer 10M, policy="drop"
 
 ## See Also
 
-* [`cache`](cache.md)
+* [`cache`](/reference/operators/cache.md)

@@ -13,7 +13,7 @@ Tenzir pipelines that read from an SQS queue automatically send a deletion reque
 
 URL Support
 
-The URL scheme `sqs://` dispatches to [`load_sqs`](../../reference/operators/load_sqs.md) and [`save_sqs`](../../reference/operators/save_sqs.md) for seamless URL-style use via [`from`](../../reference/operators/from.md) and [`to`](../../reference/operators/to.md).
+The URL scheme `sqs://` dispatches to [`load_sqs`](/reference/operators/load_sqs.md) and [`save_sqs`](/reference/operators/save_sqs.md) for seamless URL-style use via [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md).
 
 ## Configuration
 
@@ -29,7 +29,7 @@ load_sqs "my-queue", aws_iam={
 }
 ```
 
-See the [`load_sqs`](../../reference/operators/load_sqs.md) and [`save_sqs`](../../reference/operators/save_sqs.md) operator documentation for all available options, including IAM role assumption.
+See the [`load_sqs`](/reference/operators/load_sqs.md) and [`save_sqs`](/reference/operators/save_sqs.md) operator documentation for all available options, including IAM role assumption.
 
 ## Examples
 

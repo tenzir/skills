@@ -11,7 +11,7 @@ context::create_geoip name:string, [db_path=string]
 
 The `context::create_geoip` operator constructs a new context of type [GeoIP](../../../explanations/enrichment.md#geoip-database).
 
-You must either provide a database with the `db_path` argument or use [`context::load`](load.md) to populate the context after creation.
+You must either provide a database with the `db_path` argument or use [`context::load`](/reference/operators/context/load.md) to populate the context after creation.
 
 You can also create a GeoIP context as code by adding it to `tenzir.contexts` in your `tenzir.yaml`:
 
@@ -55,14 +55,14 @@ context::load "ctx"
 
 ## See Also
 
-* [`context::create_bloom_filter`](create_bloom_filter.md)
-* [`context::create_lookup_table`](create_lookup_table.md)
-* [`context::enrich`](enrich.md)
-* [`context::erase`](erase.md)
-* [`context::inspect`](inspect.md)
-* [`context::list`](list.md)
-* [`context::load`](load.md)
-* [`context::remove`](remove.md)
-* [`context::reset`](reset.md)
-* [`context::save`](save.md)
-* [`context::update`](update.md)
+* [`context::create_bloom_filter`](/reference/operators/context/create_bloom_filter.md)
+* [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md)
+* [`context::enrich`](/reference/operators/context/enrich.md)
+* [`context::erase`](/reference/operators/context/erase.md)
+* [`context::inspect`](/reference/operators/context/inspect.md)
+* [`context::list`](/reference/operators/context/list.md)
+* [`context::load`](/reference/operators/context/load.md)
+* [`context::remove`](/reference/operators/context/remove.md)
+* [`context::reset`](/reference/operators/context/reset.md)
+* [`context::save`](/reference/operators/context/save.md)
+* [`context::update`](/reference/operators/context/update.md)

@@ -1,7 +1,7 @@
 # Write tests
 
 
-This guide shows you how to create integration tests with the [`tenzir-test`](../../reference/test-framework.md) framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the [run tests](run-tests.md) guide.
+This guide shows you how to create integration tests with the [`tenzir-test`](/reference/test-framework.md) framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the [run tests](run-tests.md) guide.
 
 ## Prerequisites
 

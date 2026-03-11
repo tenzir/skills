@@ -76,6 +76,6 @@ x = x.format_time("%d.%m.%Y")
 
 ## See Also
 
-* fn[`parse_time`](parse_time.md)
-* fn[`time`](time.md)
+* fn[`parse_time`](/reference/functions/parse_time.md)
+* fn[`time`](/reference/functions/time.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

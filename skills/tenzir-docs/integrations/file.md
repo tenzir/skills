@@ -5,7 +5,7 @@ Tenzir can read from and write to files. This includes non-regular files such as
 
 When `~` is the first character in the file path, the operator substitutes it with the `$HOME` environment variable.
 
-Use [`from_file`](../reference/operators/from_file.md) to read files with glob patterns, automatic format detection, and file monitoring. For writing, use [`save_file`](../reference/operators/save_file.md) with a print operator.
+Use [`from_file`](/reference/operators/from_file.md) to read files with glob patterns, automatic format detection, and file monitoring. For writing, use [`save_file`](/reference/operators/save_file.md) with a print operator.
 
 ## Examples
 
@@ -75,7 +75,7 @@ print_ndjson
 save_file "/tmp/socket", uds=true
 ```
 
-When reading from a Unix domain socket, use [`from_file`](../reference/operators/from_file.md) with a parsing pipeline:
+When reading from a Unix domain socket, use [`from_file`](/reference/operators/from_file.md) with a parsing pipeline:
 
 ```tql
 from_file "/tmp/socket" {

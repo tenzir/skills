@@ -1,11 +1,11 @@
 # Split and merge streams
 
 
-This guide shows you how to connect pipelines using [`publish`](../../reference/operators/publish.md) and [`subscribe`](../../reference/operators/subscribe.md) operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
+This guide shows you how to connect pipelines using [`publish`](/reference/operators/publish.md) and [`subscribe`](/reference/operators/subscribe.md) operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
 
 ## How publish/subscribe works
 
-The [`publish`](../../reference/operators/publish.md) operator sends events to a named channel (topic) on a node. The [`subscribe`](../../reference/operators/subscribe.md) operator receives events from that channel. Multiple subscribers can receive the same events, and multiple publishers can write to the same topic.
+The [`publish`](/reference/operators/publish.md) operator sends events to a named channel (topic) on a node. The [`subscribe`](/reference/operators/subscribe.md) operator receives events from that channel. Multiple subscribers can receive the same events, and multiple publishers can write to the same topic.
 
 ```tql
 // Publisher pipeline
@@ -129,7 +129,7 @@ to_kafka "all-priority-events"
 
 ## Combining with fork
 
-Use [`fork`](../../reference/operators/fork.md) with [`publish`](../../reference/operators/publish.md) to send copies of events while continuing the main pipeline:
+Use [`fork`](/reference/operators/fork.md) with [`publish`](/reference/operators/publish.md) to send copies of events while continuing the main pipeline:
 
 ```tql
 from_file "events.json"
@@ -151,6 +151,6 @@ Pipelines not visible on the overview page at [app.tenzir.com](https://app.tenzi
 
 * [Send to destinations](send-to-destinations.md)
 * [Load-balance pipelines](load-balance-pipelines.md)
-* [`publish`](../../reference/operators/publish.md)
-* [`subscribe`](../../reference/operators/subscribe.md)
-* [`fork`](../../reference/operators/fork.md)
+* [`publish`](/reference/operators/publish.md)
+* [`subscribe`](/reference/operators/subscribe.md)
+* [`fork`](/reference/operators/fork.md)

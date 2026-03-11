@@ -5,7 +5,7 @@
 
 ## Examples
 
-Use [`from_azure_blob_storage`](../../reference/operators/from_azure_blob_storage.md) to read files from Azure Blob Storage. It supports glob patterns and automatic format detection. For writing, use [`save_azure_blob_storage`](../../reference/operators/save_azure_blob_storage.md) with a print operator.
+Use [`from_azure_blob_storage`](/reference/operators/from_azure_blob_storage.md) to read files from Azure Blob Storage. It supports glob patterns and automatic format detection. For writing, use [`save_azure_blob_storage`](/reference/operators/save_azure_blob_storage.md) with a print operator.
 
 ### Read events from a file in a container
 

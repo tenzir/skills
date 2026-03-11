@@ -30,6 +30,6 @@ summarize counts=value_counts(x)
 
 ## See Also
 
-* fn[`mode`](mode.md)
-* fn[`distinct`](distinct.md)
+* fn[`mode`](/reference/functions/mode.md)
+* fn[`distinct`](/reference/functions/distinct.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

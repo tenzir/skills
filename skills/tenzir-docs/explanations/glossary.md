@@ -35,13 +35,13 @@ Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP 
 
 ## Destination
 
-An pipeline ending with an [output](#output) operator preceded by a [`subscribe`](../reference/operators/subscribe.md) input operator.
+An pipeline ending with an [output](#output) operator preceded by a [`subscribe`](/reference/operators/subscribe.md) input operator.
 
 * Learn more about [pipelines](pipeline.md)
 
 ## Edge Storage
 
-The indexed storage that pipelines can use at the [node](#node). Every node has a light-weight storage engine for importing and exporting events. You must mount the storage into the node such that it can be used from [pipelines](#pipeline) using the [`import`](../reference/operators/import.md) and [`export`](../reference/operators/export.md) [operators](#operator). The storage cengine comes with a [catalog](#catalog) that tracks [partitions](#partition) and keeps sparse [indexes](#index) to accelerate historical queries.
+The indexed storage that pipelines can use at the [node](#node). Every node has a light-weight storage engine for importing and exporting events. You must mount the storage into the node such that it can be used from [pipelines](#pipeline) using the [`import`](/reference/operators/import.md) and [`export`](/reference/operators/export.md) [operators](#operator). The storage cengine comes with a [catalog](#catalog) that tracks [partitions](#partition) and keeps sparse [indexes](#index) to accelerate historical queries.
 
 * [Ingest data into the node’s edge storage](../guides/edge-storage/import-into-a-node.md)
 * [Query the node’s edge storage](../guides/edge-storage/export-from-a-node.md)
@@ -102,7 +102,7 @@ Our community library is [freely available at GitHub](https://github.com/tenzir/
 
 A connector that acquires bytes.
 
-A loader is the dual to a [saver](#saver). It has a no input and only performs a side effect that acquires bytes. Use a loader implicitly with the [`from`](../reference/operators/from.md) operator or explicitly with the `load_*` operators.
+A loader is the dual to a [saver](#saver). It has a no input and only performs a side effect that acquires bytes. Use a loader implicitly with the [`from`](/reference/operators/from.md) operator or explicitly with the `load_*` operators.
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -160,7 +160,7 @@ A collection of [pipelines](#pipeline) and [contexts](#context).
 
 A bytes-to-events operator.
 
-A parser is the dual to a [printer](#printer). You use a parser implicitly in the [`from`](../reference/operators/from.md) operator, or via the `read_*` operators. There exist also [functions](#function) for applying parsers to string values.
+A parser is the dual to a [printer](#printer). You use a parser implicitly in the [`from`](/reference/operators/from.md) operator, or via the `read_*` operators. There exist also [functions](#function) for applying parsers to string values.
 
 * Learn more about [pipelines](pipeline.md)
 * See available [operators for parsing](../reference/operators.md#parsing)
@@ -191,7 +191,7 @@ An events-to-bytes operator.
 
 A [format](#format) that translates events into bytes.
 
-A printer is the dual to a [parser](#parser). Use a parser implicitly in the [`to`](../reference/operators/to.md) operator.
+A printer is the dual to a [parser](#parser). Use a parser implicitly in the [`to`](/reference/operators/to.md) operator.
 
 * Learn more about [pipelines](pipeline.md)
 * See available [operators for printing](../reference/operators.md#printing)
@@ -201,7 +201,7 @@ A printer is the dual to a [parser](#parser). Use a parser implicitly in the [`t
 
 A [connector](#connector) that emits bytes.
 
-A saver is the dual to a [loader](#loader). It has a no output and only performs a side effect that emits bytes. Use a saver implicitly with the [`to`](../reference/operators/to.md) operator or explicitly with the `save_*` operators.
+A saver is the dual to a [loader](#loader). It has a no output and only performs a side effect that emits bytes. Use a saver implicitly with the [`to`](/reference/operators/to.md) operator or explicitly with the `save_*` operators.
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -213,7 +213,7 @@ A top-level record type of an event.
 
 ## Source
 
-An pipeline starting with an [input](#input) operator followed by a [`publish`](../reference/operators/publish.md) output operator.
+An pipeline starting with an [input](#input) operator followed by a [`publish`](/reference/operators/publish.md) output operator.
 
 * Learn more about [pipelines](pipeline.md)
 

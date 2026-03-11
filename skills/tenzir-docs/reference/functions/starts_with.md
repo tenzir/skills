@@ -25,7 +25,7 @@ from {x: "hello".starts_with("he")}
 
 ## See Also
 
-* fn[`ends_with`](ends_with.md)
+* fn[`ends_with`](/reference/functions/ends_with.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

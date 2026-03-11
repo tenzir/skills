@@ -34,5 +34,5 @@ summarize total=x.count_if(x => x > 1)
 
 ## See Also
 
-* fn[`count`](count.md)
+* fn[`count`](/reference/functions/count.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

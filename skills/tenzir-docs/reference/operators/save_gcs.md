@@ -36,5 +36,5 @@ save_gcs "gs://bucket/test.json?endpoint_override=gcs.mycloudservice.com"
 
 ## See Also
 
-* [`load_gcs`](load_gcs.md)
+* [`load_gcs`](/reference/operators/load_gcs.md)
 * [Cloud Storage](../../integrations/google/cloud-storage.md)

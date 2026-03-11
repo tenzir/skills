@@ -47,9 +47,9 @@ from {x: uint("0x42", base=16)}
 
 ## See Also
 
-* fn[`float`](float.md)
-* fn[`int`](int.md)
-* fn[`ip`](ip.md)
-* fn[`string`](string.md)
-* fn[`subnet`](subnet.md)
-* fn[`time`](time.md)
+* fn[`float`](/reference/functions/float.md)
+* fn[`int`](/reference/functions/int.md)
+* fn[`ip`](/reference/functions/ip.md)
+* fn[`string`](/reference/functions/string.md)
+* fn[`subnet`](/reference/functions/subnet.md)
+* fn[`time`](/reference/functions/time.md)

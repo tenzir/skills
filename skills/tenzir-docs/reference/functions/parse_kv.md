@@ -201,6 +201,6 @@ this = { ...input.parse_kv() }
 
 ## See Also
 
-* fn[`print_kv`](print_kv.md)
-* [`read_kv`](../operators/read_kv.md)
+* fn[`print_kv`](/reference/functions/print_kv.md)
+* [`read_kv`](/reference/operators/read_kv.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

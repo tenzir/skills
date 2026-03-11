@@ -49,5 +49,5 @@ output = this.print_tsv()
 
 ## See Also
 
-* [`write_tsv`](../operators/write_tsv.md)
-* fn[`parse_tsv`](parse_tsv.md)
+* [`write_tsv`](/reference/operators/write_tsv.md)
+* fn[`parse_tsv`](/reference/functions/parse_tsv.md)

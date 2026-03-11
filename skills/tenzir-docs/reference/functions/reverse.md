@@ -27,6 +27,6 @@ from {x: reverse("hello")}
 
 ## See Also
 
-* fn[`slice`](slice.md)
-* fn[`length_chars`](length_chars.md)
+* fn[`slice`](/reference/functions/slice.md)
+* fn[`length_chars`](/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

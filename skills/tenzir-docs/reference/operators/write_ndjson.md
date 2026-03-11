@@ -82,10 +82,10 @@ write_ndjson strip_null_fields=true
 
 ## See Also
 
-* fn[`parse_json`](../functions/parse_json.md)
-* fn[`print_json`](../functions/print_json.md)
-* fn[`print_ndjson`](../functions/print_ndjson.md)
-* [`read_json`](read_json.md)
-* [`read_ndjson`](read_ndjson.md)
-* [`write_json`](write_json.md)
+* fn[`parse_json`](/reference/functions/parse_json.md)
+* fn[`print_json`](/reference/functions/print_json.md)
+* fn[`print_ndjson`](/reference/functions/print_ndjson.md)
+* [`read_json`](/reference/operators/read_json.md)
+* [`read_ndjson`](/reference/operators/read_ndjson.md)
+* [`write_json`](/reference/operators/write_json.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

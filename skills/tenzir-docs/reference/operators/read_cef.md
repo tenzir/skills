@@ -159,7 +159,7 @@ Type Conflict
 
 ## See Also
 
-* [`read_leef`](read_leef.md)
-* fn[`parse_cef`](../functions/parse_cef.md)
-* fn[`print_cef`](../functions/print_cef.md)
+* [`read_leef`](/reference/operators/read_leef.md)
+* fn[`parse_cef`](/reference/functions/parse_cef.md)
+* fn[`print_cef`](/reference/functions/print_cef.md)
 * [Syslog](../../integrations/syslog.md)

@@ -55,6 +55,6 @@ from {xs: split_regex("a1b2c3", r"\d", max=1)}
 
 ## See Also
 
-* fn[`split`](split.md)
-* fn[`join`](join.md)
+* fn[`split`](/reference/functions/split.md)
+* fn[`join`](/reference/functions/join.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

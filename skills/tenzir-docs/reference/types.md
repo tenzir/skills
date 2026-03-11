@@ -44,7 +44,7 @@ Basic types are stateless types with a static structure. The following basic typ
 
 #### Secrets
 
-The `secret` type is a special type created by the [`secret`](functions/secret.md) function. Secrets can only be used as arguments for operators that accept them and only support a limited set of operations, such as concatenation.
+The `secret` type is a special type created by the [`secret`](/reference/functions/secret.md) function. Secrets can only be used as arguments for operators that accept them and only support a limited set of operations, such as concatenation.
 
 See the [explanation page for secrets](../explanations/secrets.md) for more details.
 

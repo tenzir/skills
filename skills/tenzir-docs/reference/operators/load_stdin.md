@@ -32,6 +32,6 @@ read_lines
 
 ## See Also
 
-* [`load_file`](load_file.md)
-* [`save_stdout`](save_stdout.md)
+* [`load_file`](/reference/operators/load_file.md)
+* [`save_stdout`](/reference/operators/save_stdout.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)

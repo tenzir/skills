@@ -96,7 +96,7 @@ Adapt `input.channels` according to the Event Log channels you would like Fluent
 
 #### Run a Tenzir pipeline
 
-Use the [`from_fluent_bit`](../../reference/operators/from_fluent_bit.md) source operator with the [Forward input](https://docs.fluentbit.io/manual/pipeline/inputs/forward):
+Use the [`from_fluent_bit`](/reference/operators/from_fluent_bit.md) source operator with the [Forward input](https://docs.fluentbit.io/manual/pipeline/inputs/forward):
 
 ```tql
 from_fluent_bit "forward", options={
@@ -512,7 +512,7 @@ publish "wec"
 
 ## Parse Windows Event Log XML
 
-When receiving Windows Event Log data in its native XML format, use [`parse_winlog`](../../reference/functions/parse_winlog.md) to convert the XML into structured records. This function is optimized for the [Windows XML Event Log format](https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema) and handles the `System`, `EventData`, `UserData`, and `RenderingInfo` sections.
+When receiving Windows Event Log data in its native XML format, use [`parse_winlog`](/reference/functions/parse_winlog.md) to convert the XML into structured records. This function is optimized for the [Windows XML Event Log format](https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema) and handles the `System`, `EventData`, `UserData`, and `RenderingInfo` sections.
 
 ### Parse XML events from a file
 

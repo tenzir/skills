@@ -34,4 +34,4 @@ read_json
 
 ## See Also
 
-* [`python`](python.md)
+* [`python`](/reference/operators/python.md)

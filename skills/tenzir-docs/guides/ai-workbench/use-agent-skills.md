@@ -27,17 +27,11 @@ The CLI auto-detects which coding agents you have installed and prompts you to s
 
 ### Install individual skills
 
-Use the `--skill` flag to install specific skills:
+Append `@<skill-name>` to install a specific skill:
 
 ```bash
-npx skills add tenzir/skills --skill ocsf
-npx skills add tenzir/skills --skill tenzir-docs
-```
-
-You can also combine multiple skills in one command:
-
-```bash
-npx skills add tenzir/skills --skill ocsf --skill tenzir-docs
+npx skills add tenzir/skills@ocsf
+npx skills add tenzir/skills@tenzir-docs
 ```
 
 ### Choose the installation scope
@@ -58,7 +52,7 @@ npx skills add -g tenzir/skills
 Install a specific skill globally:
 
 ```bash
-npx skills add -g tenzir/skills --skill ocsf
+npx skills add -g tenzir/skills@ocsf
 ```
 
 ### Target specific agents

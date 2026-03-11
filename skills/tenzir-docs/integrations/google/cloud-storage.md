@@ -9,7 +9,7 @@ You need to configure appropriate credentials using Google’s [Application Defa
 
 ## Examples
 
-Use [`from_gcs`](../../reference/operators/from_gcs.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`save_gcs`](../../reference/operators/save_gcs.md) with a print operator.
+Use [`from_gcs`](/reference/operators/from_gcs.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`save_gcs`](/reference/operators/save_gcs.md) with a print operator.
 
 ### Read events from a file in a bucket
 

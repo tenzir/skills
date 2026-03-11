@@ -82,4 +82,4 @@ where severity == "error"
 
 ## See Also
 
-* [`metrics`](metrics.md)
+* [`metrics`](/reference/operators/metrics.md)

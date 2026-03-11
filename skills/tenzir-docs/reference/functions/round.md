@@ -53,7 +53,7 @@ from {
 
 ## See Also
 
-* fn[`ceil`](ceil.md)
-* fn[`floor`](floor.md)
+* fn[`ceil`](/reference/functions/ceil.md)
+* fn[`floor`](/reference/functions/floor.md)
 * [Transform values](../../guides/transformation/transform-values.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

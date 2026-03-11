@@ -110,6 +110,6 @@ throttle rate=500, drop=true
 
 ## See Also
 
-* [`assert_throughput`](assert_throughput.md)
-* [`batch`](batch.md)
-* [`buffer`](buffer.md)
+* [`assert_throughput`](/reference/operators/assert_throughput.md)
+* [`batch`](/reference/operators/batch.md)
+* [`buffer`](/reference/operators/buffer.md)

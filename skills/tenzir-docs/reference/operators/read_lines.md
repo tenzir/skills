@@ -26,7 +26,7 @@ Ignores empty lines in the input.
 
 Deprecated
 
-This option is deprecated. Use [`read_delimited`](read_delimited.md) instead.
+This option is deprecated. Use [`read_delimited`](/reference/operators/read_delimited.md) instead.
 
 Use null byte (`\0`) as the delimiter instead of newline characters.
 
@@ -34,7 +34,7 @@ Use null byte (`\0`) as the delimiter instead of newline characters.
 
 Deprecated
 
-This option is deprecated. Use [`read_delimited_regex`](read_delimited_regex.md) instead.
+This option is deprecated. Use [`read_delimited_regex`](/reference/operators/read_delimited_regex.md) instead.
 
 Use the specified regex as the delimiter instead of newline characters. The regex flavor is Perl compatible and documented [here](https://www.boost.org/doc/libs/1_88_0/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html).
 
@@ -50,7 +50,7 @@ is_error = line.starts_with("error:")
 
 ### Split Syslog-like events without newline terminators from a TCP input
 
-Consider using [`read_delimited_regex`](read_delimited_regex.md) for regex-based splitting:
+Consider using [`read_delimited_regex`](/reference/operators/read_delimited_regex.md) for regex-based splitting:
 
 ```tql
 load_tcp "0.0.0.0:514"
@@ -66,9 +66,9 @@ this = line.parse_syslog()
 
 ## See Also
 
-* [`read_all`](read_all.md)
-* [`read_delimited_regex`](read_delimited_regex.md)
-* [`read_ssv`](read_ssv.md)
-* [`read_tsv`](read_tsv.md)
-* [`read_xsv`](read_xsv.md)
-* [`write_lines`](write_lines.md)
+* [`read_all`](/reference/operators/read_all.md)
+* [`read_delimited_regex`](/reference/operators/read_delimited_regex.md)
+* [`read_ssv`](/reference/operators/read_ssv.md)
+* [`read_tsv`](/reference/operators/read_tsv.md)
+* [`read_xsv`](/reference/operators/read_xsv.md)
+* [`write_lines`](/reference/operators/write_lines.md)

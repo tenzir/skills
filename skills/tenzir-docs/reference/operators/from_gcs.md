@@ -107,6 +107,6 @@ from_gcs "gs://security-logs/suricata/**.json" {
 
 ## See Also
 
-* [`load_gcs`](load_gcs.md)
-* [`save_gcs`](save_gcs.md)
+* [`load_gcs`](/reference/operators/load_gcs.md)
+* [`save_gcs`](/reference/operators/save_gcs.md)
 * [Cloud Storage](../../integrations/google/cloud-storage.md)

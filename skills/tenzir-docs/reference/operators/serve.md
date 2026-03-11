@@ -72,7 +72,7 @@ The call to `/serve` will wait up to 5 seconds for the first event from the pipe
 
 ## See Also
 
-* [`api`](api.md)
-* [`from_http`](from_http.md)
-* [`openapi`](openapi.md)
+* [`api`](/reference/operators/api.md)
+* [`from_http`](/reference/operators/from_http.md)
+* [`openapi`](/reference/operators/openapi.md)
 * [HTTP(S)](../../integrations/http.md)

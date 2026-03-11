@@ -13,7 +13,7 @@ context::update name:string, key=any,
 
 The `context::update` operator adds new data to a specified context.
 
-Use the `key` argument to specify the field in the input that should be associated with the context. The [`context::enrich`](enrich.md) operator uses this key to access the context. For contexts that support assigning a value with a given key, you can provide an expression to customize what’s being associated with the given key.
+Use the `key` argument to specify the field in the input that should be associated with the context. The [`context::enrich`](/reference/operators/context/enrich.md) operator uses this key to access the context. For contexts that support assigning a value with a given key, you can provide an expression to customize what’s being associated with the given key.
 
 The three arguments `create_timeout`, `write_timeout`, and `read_timeout` only work with lookup tables and set the respective timeouts per table entry.
 
@@ -87,17 +87,17 @@ context::update "ctx", key=x, value=x*x
 
 ## See Also
 
-* [`context::create_bloom_filter`](create_bloom_filter.md)
-* [`context::create_geoip`](create_geoip.md)
-* [`context::create_lookup_table`](create_lookup_table.md)
-* [`context::enrich`](enrich.md)
-* [`context::erase`](erase.md)
-* [`context::inspect`](inspect.md)
-* [`context::list`](list.md)
-* [`context::load`](load.md)
-* [`context::remove`](remove.md)
-* [`context::reset`](reset.md)
-* [`context::save`](save.md)
+* [`context::create_bloom_filter`](/reference/operators/context/create_bloom_filter.md)
+* [`context::create_geoip`](/reference/operators/context/create_geoip.md)
+* [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md)
+* [`context::enrich`](/reference/operators/context/enrich.md)
+* [`context::erase`](/reference/operators/context/erase.md)
+* [`context::inspect`](/reference/operators/context/inspect.md)
+* [`context::list`](/reference/operators/context/list.md)
+* [`context::load`](/reference/operators/context/load.md)
+* [`context::remove`](/reference/operators/context/remove.md)
+* [`context::reset`](/reference/operators/context/reset.md)
+* [`context::save`](/reference/operators/context/save.md)
 * [Work with lookup tables](../../../guides/enrichment/work-with-lookup-tables.md)
 * [Enrich with threat intel](../../../guides/enrichment/enrich-with-threat-intel.md)
 * [Enrich with network inventory](../../../guides/enrichment/enrich-with-network-inventory.md)

@@ -22,5 +22,5 @@ write_yaml
 
 ## See Also
 
-* [`api`](api.md)
-* [`serve`](serve.md)
+* [`api`](/reference/operators/api.md)
+* [`serve`](/reference/operators/serve.md)

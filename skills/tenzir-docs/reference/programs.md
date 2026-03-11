@@ -8,7 +8,7 @@ TQL **programs** compose [statements](statements.md) into complete data processi
 
 Pipeline Auto-Completion
 
-When a pipeline is not closed, Tenzir attempts to *auto-complete* it. On the [command line](../guides/basic-usage/run-pipelines.md#on-the-command-line), it suffices to write a sequence of transformations because Tenzir automatically adds a JSON input operator at the beginning and TQL output operator at the end. In the [web inteface](../guides/basic-usage/run-pipelines.md#in-the-platform), auto-completetion takes place with an output operator: The web app appends [`serve`](operators/serve.md) to turn the dataflow into a REST API, allowing your browser to access it by routing the data through the platform.
+When a pipeline is not closed, Tenzir attempts to *auto-complete* it. On the [command line](../guides/basic-usage/run-pipelines.md#on-the-command-line), it suffices to write a sequence of transformations because Tenzir automatically adds a JSON input operator at the beginning and TQL output operator at the end. In the [web inteface](../guides/basic-usage/run-pipelines.md#in-the-platform), auto-completetion takes place with an output operator: The web app appends [`serve`](/reference/operators/serve.md) to turn the dataflow into a REST API, allowing your browser to access it by routing the data through the platform.
 
 ## Statement chaining
 
@@ -60,15 +60,15 @@ Operators can contain entire subpipelines that execute based on the operator’s
 
 There are three types of subpipelines based on what they expect and produce:
 
-1. **Closed subpipelines** (void-to-void): Complete programs that run independently, used by operators like [`every`](operators/every.md) and [`subscribe`](operators/subscribe.md).
+1. **Closed subpipelines** (void-to-void): Complete programs that run independently, used by operators like [`every`](/reference/operators/every.md) and [`subscribe`](/reference/operators/subscribe.md).
 
-2. **Parsing subpipelines** (bytes-to-events): Transform raw bytes into structured events, used by input operators like [`from_file`](operators/from_file.md) and [`from_http`](operators/from_http.md).
+2. **Parsing subpipelines** (bytes-to-events): Transform raw bytes into structured events, used by input operators like [`from_file`](/reference/operators/from_file.md) and [`from_http`](/reference/operators/from_http.md).
 
-3. **Printing subpipelines** (events-to-bytes): Transform structured events into raw bytes, used by output operators like [`to`](operators/to.md).
+3. **Printing subpipelines** (events-to-bytes): Transform structured events into raw bytes, used by output operators like [`to`](/reference/operators/to.md).
 
 ### Closed subpipelines
 
-The [`every`](operators/every.md) operator executes a closed subpipeline at regular intervals:
+The [`every`](/reference/operators/every.md) operator executes a closed subpipeline at regular intervals:
 
 ```tql
 every 1h {
@@ -80,7 +80,7 @@ every 1h {
 
 ### Parsing subpipelines
 
-Input operators like [`from_file`](operators/from_file.md) or [`from_http`](operators/from_http.md) that read raw bytes use parsing subpipelines to convert bytes into events. This pattern separates *where* data comes from (the outer operator) from *how* it’s parsed (the subpipeline):
+Input operators like [`from_file`](/reference/operators/from_file.md) or [`from_http`](/reference/operators/from_http.md) that read raw bytes use parsing subpipelines to convert bytes into events. This pattern separates *where* data comes from (the outer operator) from *how* it’s parsed (the subpipeline):
 
 ```tql
 from_file "data.log" {
@@ -103,7 +103,7 @@ When the input operator can infer the format automatically (e.g., from the file 
 from_file "data.json"  // Automatically uses read_json
 ```
 
-Operators that produce events directly, like [`from_kafka`](operators/from_kafka.md) or [`from_udp`](operators/from_udp.md), don’t take a parsing subpipeline because the data format is inherent to the source.
+Operators that produce events directly, like [`from_kafka`](/reference/operators/from_kafka.md) or [`from_udp`](/reference/operators/from_udp.md), don’t take a parsing subpipeline because the data format is inherent to the source.
 
 ## Comments
 
@@ -165,15 +165,15 @@ Understanding operator behavior helps write efficient pipelines:
 
 **Streaming operators** process events incrementally:
 
-* [`where`](operators/where.md): Filters one event at a time
-* [`select`](operators/select.md): Transforms fields immediately
-* [`drop`](operators/drop.md): Removes fields as events flow
+* [`where`](/reference/operators/where.md): Filters one event at a time
+* [`select`](/reference/operators/select.md): Transforms fields immediately
+* [`drop`](/reference/operators/drop.md): Removes fields as events flow
 
 **Blocking operators** need all input before producing output:
 
-* [`sort`](operators/sort.md): Must see all events to order them
-* [`summarize`](operators/summarize.md): Aggregates across the entire stream
-* [`reverse`](operators/reverse.md): Needs complete input to reverse order
+* [`sort`](/reference/operators/sort.md): Must see all events to order them
+* [`summarize`](/reference/operators/summarize.md): Aggregates across the entire stream
+* [`reverse`](/reference/operators/reverse.md): Needs complete input to reverse order
 
  Efficient: streaming operations first:
 
@@ -219,4 +219,4 @@ age = current_time - timestamp      // Runtime calculation
 
 ### Network transparency
 
-TQL pipelines can span network boundaries seamlessly. For example, the [`import`](operators/import.md) operator implicitly performs a network connection based on where it runs. If the `tenzir` binary executes the pipeline, the executor establishesa transparent network connection. If the pipeline runs within a node, the executor passes the data directly to the next operator in the same process.
+TQL pipelines can span network boundaries seamlessly. For example, the [`import`](/reference/operators/import.md) operator implicitly performs a network connection based on where it runs. If the `tenzir` binary executes the pipeline, the executor establishesa transparent network connection. If the pipeline runs within a node, the executor passes the data directly to the next operator in the same process.

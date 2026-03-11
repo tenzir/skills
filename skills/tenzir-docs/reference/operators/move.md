@@ -37,4 +37,4 @@ move z=y, w.x=x
 
 ## See Also
 
-* [`set`](set.md)
+* [`set`](/reference/operators/set.md)

@@ -75,9 +75,9 @@ read_delimited "\x00\x01", binary=true
 
 ## See Also
 
-* [`read_all`](read_all.md)
-* [`read_delimited_regex`](read_delimited_regex.md)
-* [`read_lines`](read_lines.md)
-* [`read_ssv`](read_ssv.md)
-* [`read_tsv`](read_tsv.md)
-* [`read_xsv`](read_xsv.md)
+* [`read_all`](/reference/operators/read_all.md)
+* [`read_delimited_regex`](/reference/operators/read_delimited_regex.md)
+* [`read_lines`](/reference/operators/read_lines.md)
+* [`read_ssv`](/reference/operators/read_ssv.md)
+* [`read_tsv`](/reference/operators/read_tsv.md)
+* [`read_xsv`](/reference/operators/read_xsv.md)

@@ -25,4 +25,4 @@ remote {
 
 ## See Also
 
-* [`local`](local.md)
+* [`local`](/reference/operators/local.md)

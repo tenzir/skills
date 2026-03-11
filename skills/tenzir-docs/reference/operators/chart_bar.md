@@ -23,7 +23,7 @@ Positions on the y-axis for each data point. Multiple data points for the same g
 
 Multiple `y` values and their labels can be specified by using the record syntax: `{name: value, ...}`.
 
-For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](../functions/mean.md) of the `load` field and labels it as `Avg. Load`.
+For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](/reference/functions/mean.md) of the `load` field and labels it as `Avg. Load`.
 
 ### `x_min = any (optional)`
 
@@ -87,7 +87,7 @@ chart_bar x=schema, y=sum(events), x_min=now()-1d
 
 ## See Also
 
-* [`chart_area`](chart_area.md)
-* [`chart_line`](chart_line.md)
-* [`chart_pie`](chart_pie.md)
+* [`chart_area`](/reference/operators/chart_area.md)
+* [`chart_line`](/reference/operators/chart_line.md)
+* [`chart_pie`](/reference/operators/chart_pie.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

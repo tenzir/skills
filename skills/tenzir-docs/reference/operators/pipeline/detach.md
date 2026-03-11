@@ -36,5 +36,5 @@ pipeline::detach {
 
 ## See Also
 
-* [`pipeline::list`](list.md)
-* [`pipeline::run`](run.md)
+* [`pipeline::list`](/reference/operators/pipeline/list.md)
+* [`pipeline::run`](/reference/operators/pipeline/run.md)

@@ -31,11 +31,11 @@ from {
 
 ## See Also
 
-* fn[`ip_category`](ip_category.md)
-* fn[`is_global`](is_global.md)
-* fn[`is_link_local`](is_link_local.md)
-* fn[`is_loopback`](is_loopback.md)
-* fn[`is_multicast`](is_multicast.md)
-* fn[`is_private`](is_private.md)
-* fn[`is_v4`](is_v4.md)
+* fn[`ip_category`](/reference/functions/ip_category.md)
+* fn[`is_global`](/reference/functions/is_global.md)
+* fn[`is_link_local`](/reference/functions/is_link_local.md)
+* fn[`is_loopback`](/reference/functions/is_loopback.md)
+* fn[`is_multicast`](/reference/functions/is_multicast.md)
+* fn[`is_private`](/reference/functions/is_private.md)
+* fn[`is_v4`](/reference/functions/is_v4.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)

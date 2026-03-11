@@ -53,7 +53,7 @@ The [User Datagram Protocol (UDP)](../../integrations/udp.md) is a connectionles
 
 ### Receive UDP datagrams
 
-Use [`from_udp`](../../reference/operators/from_udp.md) to receive UDP messages as structured events:
+Use [`from_udp`](/reference/operators/from_udp.md) to receive UDP messages as structured events:
 
 ```tql
 from_udp "0.0.0.0:514"
@@ -129,7 +129,7 @@ Each packet becomes an event with metadata and the raw packet data:
 
 ### Decapsulate packets
 
-Extract protocol headers from captured packets using the [`decapsulate`](../../reference/functions/decapsulate.md) function:
+Extract protocol headers from captured packets using the [`decapsulate`](/reference/functions/decapsulate.md) function:
 
 ```tql
 from_nic "eth0" {

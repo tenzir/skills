@@ -24,6 +24,6 @@ save_file "output.yaml"
 
 ## See Also
 
-* fn[`parse_yaml`](../functions/parse_yaml.md)
-* fn[`print_yaml`](../functions/print_yaml.md)
-* [`read_yaml`](read_yaml.md)
+* fn[`parse_yaml`](/reference/functions/parse_yaml.md)
+* fn[`print_yaml`](/reference/functions/print_yaml.md)
+* [`read_yaml`](/reference/operators/read_yaml.md)

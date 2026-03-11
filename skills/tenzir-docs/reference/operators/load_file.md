@@ -37,8 +37,8 @@ load_file "example.txt"
 
 ## See Also
 
-* [`files`](files.md)
-* [`from_file`](from_file.md)
-* [`load_stdin`](load_stdin.md)
-* [`save_file`](save_file.md)
+* [`files`](/reference/operators/files.md)
+* [`from_file`](/reference/operators/from_file.md)
+* [`load_stdin`](/reference/operators/load_stdin.md)
+* [`save_file`](/reference/operators/save_file.md)
 * [File](../../integrations/file.md)

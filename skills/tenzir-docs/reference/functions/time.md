@@ -59,7 +59,7 @@ Prefix a Unix epoch value with `@`:
 | Future offset | `now + 1h`, `in 2d`       |
 | Past offset   | `now - 30min`, `5min ago` |
 
-For timestamps in non-standard formats, use [`parse_time`](parse_time.md) with an explicit format string.
+For timestamps in non-standard formats, use [`parse_time`](/reference/functions/parse_time.md) with an explicit format string.
 
 ## Examples
 
@@ -168,13 +168,13 @@ timestamp = timestamp.time()
 
 ## See Also
 
-* fn[`format_time`](format_time.md)
-* fn[`parse_time`](parse_time.md)
-* fn[`duration`](duration.md)
-* fn[`float`](float.md)
-* fn[`int`](int.md)
-* fn[`ip`](ip.md)
-* fn[`string`](string.md)
-* fn[`subnet`](subnet.md)
-* fn[`uint`](uint.md)
+* fn[`format_time`](/reference/functions/format_time.md)
+* fn[`parse_time`](/reference/functions/parse_time.md)
+* fn[`duration`](/reference/functions/duration.md)
+* fn[`float`](/reference/functions/float.md)
+* fn[`int`](/reference/functions/int.md)
+* fn[`ip`](/reference/functions/ip.md)
+* fn[`string`](/reference/functions/string.md)
+* fn[`subnet`](/reference/functions/subnet.md)
+* fn[`uint`](/reference/functions/uint.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

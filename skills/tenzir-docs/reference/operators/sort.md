@@ -53,6 +53,6 @@ sort src_ip, -dest_ip
 
 ## See Also
 
-* [`rare`](rare.md)
-* [`reverse`](reverse.md)
-* [`top`](top.md)
+* [`rare`](/reference/operators/rare.md)
+* [`reverse`](/reference/operators/reverse.md)
+* [`top`](/reference/operators/top.md)

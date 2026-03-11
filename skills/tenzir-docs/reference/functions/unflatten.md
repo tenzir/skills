@@ -13,7 +13,7 @@ The `unflatten` function creates nested records out of fields whose names includ
 
 Note
 
-`unflatten` uses a heuristic to determine the unflattened schema. Thus, the schema of a record that has been flattened using [`flatten`](flatten.md) and unflattened afterwards may not be identical to the schema of the unmodified record.
+`unflatten` uses a heuristic to determine the unflattened schema. Thus, the schema of a record that has been flattened using [`flatten`](/reference/functions/flatten.md) and unflattened afterwards may not be identical to the schema of the unmodified record.
 
 ### `x: record`
 
@@ -72,6 +72,6 @@ this = unflatten(this)
 
 ## See Also
 
-* fn[`flatten`](flatten.md)
+* fn[`flatten`](/reference/functions/flatten.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Reshape complex data](../../guides/transformation/reshape-complex-data.md)

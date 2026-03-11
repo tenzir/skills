@@ -3,7 +3,7 @@
 
 Tip
 
-If you are receiving newline-delimited JSON (NDJSON), use [`read_ndjson`](read_ndjson.md) instead.
+If you are receiving newline-delimited JSON (NDJSON), use [`read_ndjson`](/reference/operators/read_ndjson.md) instead.
 
 Parses an incoming JSON stream into events.
 
@@ -280,7 +280,7 @@ Example Output
 
 ## See Also
 
-* fn[`parse_json`](../functions/parse_json.md)
-* [`read_ndjson`](read_ndjson.md)
-* [`write_json`](write_json.md)
+* fn[`parse_json`](/reference/functions/parse_json.md)
+* [`read_ndjson`](/reference/operators/read_ndjson.md)
+* [`write_json`](/reference/operators/write_json.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

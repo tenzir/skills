@@ -43,5 +43,5 @@ select flag = $flags.get(country, "unknown")
 
 ## See Also
 
-* fn[`env`](env.md)
-* fn[`secret`](secret.md)
+* fn[`env`](/reference/functions/env.md)
+* fn[`secret`](/reference/functions/secret.md)

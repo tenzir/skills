@@ -37,8 +37,8 @@ save_file "out.lz4"
 
 ## See Also
 
-* [`compress_brotli`](compress_brotli.md)
-* [`compress_bz2`](compress_bz2.md)
-* [`compress_gzip`](compress_gzip.md)
-* [`compress_zstd`](compress_zstd.md)
-* [`decompress_lz4`](decompress_lz4.md)
+* [`compress_brotli`](/reference/operators/compress_brotli.md)
+* [`compress_bz2`](/reference/operators/compress_bz2.md)
+* [`compress_gzip`](/reference/operators/compress_gzip.md)
+* [`compress_zstd`](/reference/operators/compress_zstd.md)
+* [`decompress_lz4`](/reference/operators/decompress_lz4.md)

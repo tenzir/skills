@@ -254,5 +254,5 @@ This is useful for APIs that include pagination URLs in the `Link` response head
 
 ## See Also
 
-* [`from_http`](from_http.md)
+* [`from_http`](/reference/operators/from_http.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)

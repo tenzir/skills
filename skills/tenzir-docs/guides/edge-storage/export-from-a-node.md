@@ -1,7 +1,7 @@
 # Export from a node
 
 
-Exporting (or *querying*) data can be done by [running a pipeline](../basic-usage/run-pipelines.md) that begins with the [`export`](../../reference/operators/export.md) input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `export` operator runs within the node.
+Exporting (or *querying*) data can be done by [running a pipeline](../basic-usage/run-pipelines.md) that begins with the [`export`](/reference/operators/export.md) input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `export` operator runs within the node.
 
 Let’s bring back a sample of historical data we [imported in the previous section](import-into-a-node.md):
 
@@ -10,7 +10,7 @@ export
 head
 ```
 
-Think of `export` being the entire data at a node. As this can grow quickly, you may query only subsets of it, e.g., by filtering using [`where`](../../reference/operators/where.md):
+Think of `export` being the entire data at a node. As this can grow quickly, you may query only subsets of it, e.g., by filtering using [`where`](/reference/operators/where.md):
 
 ```tql
 export

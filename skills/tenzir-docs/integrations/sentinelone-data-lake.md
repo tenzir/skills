@@ -7,7 +7,7 @@
 
 ## Query events from SentinelOne Data Lake
 
-Use the [`from_sentinelone_data_lake`](../reference/operators/from_sentinelone_data_lake.md) operator to retrieve security events from the Data Lake using PowerQuery:
+Use the [`from_sentinelone_data_lake`](/reference/operators/from_sentinelone_data_lake.md) operator to retrieve security events from the Data Lake using PowerQuery:
 
 ```tql
 from_sentinelone_data_lake "https://xdr.eu1.sentinelone.net",
@@ -32,7 +32,7 @@ from_sentinelone_data_lake "https://xdr.eu1.sentinelone.net",
 
 ## Send events to SentinelOne Data Lake
 
-Use the [`to_sentinelone_data_lake`](../reference/operators/to_sentinelone_data_lake.md) operator to send structured security events to the Data Lake. The operator provides special handling for OCSF events—if it detects that the input event is OCSF, it will automatically map timestamp and severity fields to the corresponding SentinelOne Data Lake fields.
+Use the [`to_sentinelone_data_lake`](/reference/operators/to_sentinelone_data_lake.md) operator to send structured security events to the Data Lake. The operator provides special handling for OCSF events—if it detects that the input event is OCSF, it will automatically map timestamp and severity fields to the corresponding SentinelOne Data Lake fields.
 
 ### Send events
 

@@ -342,6 +342,6 @@ where System.EventID in [4624, 4625]
 
 ## See Also
 
-* fn[`parse_xml`](parse_xml.md)
-* fn[`parse_syslog`](parse_syslog.md)
+* fn[`parse_xml`](/reference/functions/parse_xml.md)
+* fn[`parse_syslog`](/reference/functions/parse_syslog.md)
 * [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)

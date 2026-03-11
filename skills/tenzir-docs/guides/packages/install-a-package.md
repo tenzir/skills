@@ -18,7 +18,7 @@ The most convenient way to install a package is through the [Tenzir Library](htt
 
 ## Install with the package operator
 
-To install a package interactively in TQL, use the [`package::add`](../../reference/operators/package/add.md) operator:
+To install a package interactively in TQL, use the [`package::add`](/reference/operators/package/add.md) operator:
 
 ```tql
 package::add "/path/to/pkg"
@@ -47,7 +47,7 @@ package::list
 }
 ```
 
-To uninstall a package interactively, use [`package::remove`](../../reference/operators/package/remove.md) and pass the package ID.
+To uninstall a package interactively, use [`package::remove`](/reference/operators/package/remove.md) and pass the package ID.
 
 ```tql
 package::remove "your-package"

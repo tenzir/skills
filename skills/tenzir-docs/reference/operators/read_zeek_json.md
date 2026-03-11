@@ -89,6 +89,6 @@ read_zeek_json
 
 ## See Also
 
-* [`read_zeek_tsv`](read_zeek_tsv.md)
-* [`write_zeek_tsv`](write_zeek_tsv.md)
+* [`read_zeek_tsv`](/reference/operators/read_zeek_tsv.md)
+* [`write_zeek_tsv`](/reference/operators/write_zeek_tsv.md)
 * [Zeek](../../integrations/zeek.md)

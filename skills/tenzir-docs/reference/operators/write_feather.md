@@ -46,8 +46,8 @@ save_file "output.feather"
 
 ## See Also
 
-* [`read_bitz`](read_bitz.md)
-* [`read_feather`](read_feather.md)
-* [`to_hive`](to_hive.md)
-* [`write_bitz`](write_bitz.md)
-* [`write_parquet`](write_parquet.md)
+* [`read_bitz`](/reference/operators/read_bitz.md)
+* [`read_feather`](/reference/operators/read_feather.md)
+* [`to_hive`](/reference/operators/to_hive.md)
+* [`write_bitz`](/reference/operators/write_bitz.md)
+* [`write_parquet`](/reference/operators/write_parquet.md)

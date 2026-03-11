@@ -1,7 +1,7 @@
 # Run tests
 
 
-This guide shows you how to run existing integration tests with the [`tenzir-test`](../../reference/test-framework.md) framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
+This guide shows you how to run existing integration tests with the [`tenzir-test`](/reference/test-framework.md) framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
 
 When you’re ready to create your own tests, see the [write tests](write-tests.md) guide.
 

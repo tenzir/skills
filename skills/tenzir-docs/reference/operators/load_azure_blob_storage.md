@@ -54,5 +54,5 @@ read_json
 
 ## See Also
 
-* [`save_azure_blob_storage`](save_azure_blob_storage.md)
+* [`save_azure_blob_storage`](/reference/operators/save_azure_blob_storage.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

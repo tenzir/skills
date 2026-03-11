@@ -9,7 +9,7 @@ When sending data from a pipeline to an API or website, the events in the pipeli
 
 In both cases, you can only provide static header data.
 
-Use [`from_http`](../reference/operators/from_http.md) to perform HTTP requests or run an HTTP server. This operator automatically tries to infer the format from the `Content-Type` header. For sending, use [`save_http`](../reference/operators/save_http.md) with a write operator.
+Use [`from_http`](/reference/operators/from_http.md) to perform HTTP requests or run an HTTP server. This operator automatically tries to infer the format from the `Content-Type` header. For sending, use [`save_http`](/reference/operators/save_http.md) with a write operator.
 
 ## Examples
 

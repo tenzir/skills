@@ -1,7 +1,7 @@
 # Fetch via HTTP and APIs
 
 
-This guide shows you how to fetch data from HTTP APIs using the [`from_http`](../../reference/operators/from_http.md) and [`http`](../../reference/operators/http.md) operators. You’ll learn to make GET requests, handle authentication, and implement pagination for large result sets.
+This guide shows you how to fetch data from HTTP APIs using the [`from_http`](/reference/operators/from_http.md) and [`http`](/reference/operators/http.md) operators. You’ll learn to make GET requests, handle authentication, and implement pagination for large result sets.
 
 ## Basic API Requests
 
@@ -115,7 +115,7 @@ from_http "https://api.example.com/data", headers={
   }
 ```
 
-Headers help you authenticate with APIs and specify request formats. Use the [`secret`](../../reference/functions/secret.md) function to retrieve sensitive API tokens, as in the above example.
+Headers help you authenticate with APIs and specify request formats. Use the [`secret`](/reference/functions/secret.md) function to retrieve sensitive API tokens, as in the above example.
 
 ### TLS and Security
 
@@ -219,7 +219,7 @@ Link: <https://api.example.com/items?page=2>; rel="next"
 
 Relative URLs in the `Link` header are resolved against the request URL, so both absolute and relative pagination links work correctly.
 
-The same approach works with the [`http`](../../reference/operators/http.md) operator:
+The same approach works with the [`http`](/reference/operators/http.md) operator:
 
 ```tql
 from {url: "https://api.github.com/repos/tenzir/tenzir/issues?per_page=10"}
@@ -262,7 +262,7 @@ select date=metadata.headers.Date.parse_time("%a, %d %b %Y %H:%M:%S %Z")
 latency = now() - date
 ```
 
-The above example parses the `Date` header from the HTTP response via [`parse_time`](../../reference/functions/parse_time.md) into a timestamp and then compares it to the current wallclock time using the [`now`](../../reference/functions/now.md) function.
+The above example parses the `Date` header from the HTTP response via [`parse_time`](/reference/functions/parse_time.md) into a timestamp and then compares it to the current wallclock time using the [`now`](/reference/functions/now.md) function.
 
 Nit: `%T` is a shortcut for `%H:%M:%S`.
 

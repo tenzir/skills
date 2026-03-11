@@ -93,4 +93,4 @@ summarize src_ip, total=sum(total), destinations=count(dest_ip)
 
 ## See Also
 
-* [`buffer`](buffer.md)
+* [`buffer`](/reference/operators/buffer.md)

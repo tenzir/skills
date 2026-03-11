@@ -36,5 +36,5 @@ read_json
 
 ## See Also
 
-* [`save_gcs`](save_gcs.md)
+* [`save_gcs`](/reference/operators/save_gcs.md)
 * [Cloud Storage](../../integrations/google/cloud-storage.md)

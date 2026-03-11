@@ -264,7 +264,7 @@ On-premise setup required
 
 This CLI functionality requires an on-premise platform deployment, available with the [Sovereign Edition](https://tenzir.com/pricing).
 
-These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](../../guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
+These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
 
 ### Synopsis
 
@@ -308,7 +308,7 @@ On-premise setup required
 
 You can use this CLI functionality only with an on-premise platform deployment, which is available to users of the [Sovereign Edition](https://tenzir.com/pricing).
 
-These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](../../guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
+These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
 
 ### Synopsis
 

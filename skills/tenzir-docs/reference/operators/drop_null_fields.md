@@ -156,7 +156,7 @@ In this example:
 
 ## See Also
 
-* [`drop`](drop.md)
-* [`select`](select.md)
-* [`where`](where.md)
+* [`drop`](/reference/operators/drop.md)
+* [`select`](/reference/operators/select.md)
+* [`where`](/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

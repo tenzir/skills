@@ -31,7 +31,7 @@ Creates PCAP file headers for every flushed batch.
 
 The operator emits chunk of bytes that represent a stream of packets. When setting `emit_file_headers` every chunk gets its own PCAP file header, as opposed to just the very first. This yields a continuous stream of concatenated PCAP files.
 
-Our [`read_pcap`](read_pcap.md) operator can handle such concatenated traces, and optionally re-emit thes file headers as separate events.
+Our [`read_pcap`](/reference/operators/read_pcap.md) operator can handle such concatenated traces, and optionally re-emit thes file headers as separate events.
 
 ## Examples
 
@@ -53,7 +53,7 @@ save_file "trace.pcap"
 
 ## See Also
 
-* [`nics`](nics.md)
-* [`read_pcap`](read_pcap.md)
-* [`write_pcap`](write_pcap.md)
+* [`nics`](/reference/operators/nics.md)
+* [`read_pcap`](/reference/operators/read_pcap.md)
+* [`write_pcap`](/reference/operators/write_pcap.md)
 * [Network Interface](../../integrations/nic.md)

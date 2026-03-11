@@ -33,8 +33,8 @@ subscribe "alerts", "notices", "critical"
 
 ## See Also
 
-* [`export`](export.md)
-* [`publish`](publish.md)
+* [`export`](/reference/operators/export.md)
+* [`publish`](/reference/operators/publish.md)
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/routing/split-and-merge-streams.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

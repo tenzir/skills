@@ -42,7 +42,7 @@ Microsoft’s [Logs Ingestion API tutorial](https://learn.microsoft.com/en-us/az
 
 ### Send Suricata Alerts as OCSF to Sentinel
 
-Use [`to_azure_log_analytics`](../../reference/operators/to_azure_log_analytics.md) to forward Suricata alerts as OCSF Detection Findings for correlation in Sentinel:
+Use [`to_azure_log_analytics`](/reference/operators/to_azure_log_analytics.md) to forward Suricata alerts as OCSF Detection Findings for correlation in Sentinel:
 
 ```tql
 from_file "/var/log/suricata/eve.json", follow=true

@@ -83,5 +83,5 @@ save_amqp
 
 ## See Also
 
-* [`load_amqp`](load_amqp.md)
+* [`load_amqp`](/reference/operators/load_amqp.md)
 * [AMQP](../../integrations/amqp.md)

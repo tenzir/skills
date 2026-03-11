@@ -238,5 +238,5 @@ read_kv
 
 ## See Also
 
-* [`write_kv`](write_kv.md)
-* fn[`parse_kv`](../functions/parse_kv.md)
+* [`write_kv`](/reference/operators/write_kv.md)
+* fn[`parse_kv`](/reference/functions/parse_kv.md)

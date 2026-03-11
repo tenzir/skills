@@ -5,7 +5,7 @@
 
 ## How Tenzir Connects to ClickHouse
 
-Tenzir connects to ClickHouse over the network using the native ClickHouse TCP protocol using the official [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) library. Tenzir communicates with ClickHouse via the host and port you specify in the [`to_clickhouse`](../reference/operators/to_clickhouse.md) operator. This means:
+Tenzir connects to ClickHouse over the network using the native ClickHouse TCP protocol using the official [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) library. Tenzir communicates with ClickHouse via the host and port you specify in the [`to_clickhouse`](/reference/operators/to_clickhouse.md) operator. This means:
 
 * **Network**: Tenzir and ClickHouse can run on the same machine (using `localhost`) or on different machines in the same network. You just need to make sure that Tenzir can reach the ClickHouse server.
 * **IPC**: There is no direct inter-process communication (IPC) mechanism; all communication uses ClickHouse’s network protocol.
@@ -56,7 +56,7 @@ You can now connect to ClickHouse at `localhost:9000` (native protocol) or `loca
 
 These examples assume that the ClickHouse server is running on the same host as Tenzir and that it allows non-TLS connections (hence using `tls=false` in the pipelines).
 
-You can find out more about how to configure TLS on the [`to_clickhouse`](../reference/operators/to_clickhouse.md) documentation and the [Clickhouse SSL-TLS configuration guide](https://clickhouse.com/docs/guides/sre/configuring-ssl)
+You can find out more about how to configure TLS on the [`to_clickhouse`](/reference/operators/to_clickhouse.md) documentation and the [Clickhouse SSL-TLS configuration guide](https://clickhouse.com/docs/guides/sre/configuring-ssl)
 
 ### 1. Easy Mode: Automatic table creation
 
@@ -68,9 +68,9 @@ ocsf::cast
 to_clickhouse table="ocsf.network_activity", primary=timestamp, tls=false
 ```
 
-When creating a table, the [`to_clickhouse`](../reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. You must take care that there are no untyped nulls in this event, as the operator cannot transmit those.
+When creating a table, the [`to_clickhouse`](/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. You must take care that there are no untyped nulls in this event, as the operator cannot transmit those.
 
-In this example, we use the [`ocsf::cast`](../reference/operators/ocsf/cast.md) operator, which will automatically align events with the correct OCSF schema, giving all fields the correct types and adding all fields that should be in `ocsf.network_activity`. This ensures that we create a complete table without missing or incorrectly typed columns.
+In this example, we use the [`ocsf::cast`](/reference/operators/ocsf/cast.md) operator, which will automatically align events with the correct OCSF schema, giving all fields the correct types and adding all fields that should be in `ocsf.network_activity`. This ensures that we create a complete table without missing or incorrectly typed columns.
 
 You can now query the data in ClickHouse, e.g.:
 

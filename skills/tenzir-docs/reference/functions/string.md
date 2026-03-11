@@ -25,11 +25,11 @@ from {x: string(1.2.3.4)}
 
 ## See Also
 
-* fn[`float`](float.md)
-* fn[`int`](int.md)
-* fn[`ip`](ip.md)
-* fn[`subnet`](subnet.md)
-* fn[`time`](time.md)
-* fn[`uint`](uint.md)
+* fn[`float`](/reference/functions/float.md)
+* fn[`int`](/reference/functions/int.md)
+* fn[`ip`](/reference/functions/ip.md)
+* fn[`subnet`](/reference/functions/subnet.md)
+* fn[`time`](/reference/functions/time.md)
+* fn[`uint`](/reference/functions/uint.md)
 * [Transform values](../../guides/transformation/transform-values.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

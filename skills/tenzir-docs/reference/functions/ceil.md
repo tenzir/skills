@@ -53,5 +53,5 @@ from {
 
 ## See Also
 
-* fn[`floor`](floor.md)
-* fn[`round`](round.md)
+* fn[`floor`](/reference/functions/floor.md)
+* fn[`round`](/reference/functions/round.md)

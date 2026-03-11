@@ -7,7 +7,7 @@ Internally, we use Confluent’s official [librdkafka](https://github.com/conflu
 
 ## Examples
 
-Use [`from_kafka`](../reference/operators/from_kafka.md) and [`to_kafka`](../reference/operators/to_kafka.md) to receive and send messages.
+Use [`from_kafka`](/reference/operators/from_kafka.md) and [`to_kafka`](/reference/operators/to_kafka.md) to receive and send messages.
 
 ### Subscribe to a topic
 
@@ -32,4 +32,4 @@ from {
 to_kafka "topic"
 ```
 
-You can control the message encoding with the `message` argument in [`to_kafka`](../reference/operators/to_kafka.md) that defaults to `this.print_json()`.
+You can control the message encoding with the `message` argument in [`to_kafka`](/reference/operators/to_kafka.md) that defaults to `this.print_json()`.

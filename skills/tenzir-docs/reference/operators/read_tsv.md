@@ -176,7 +176,7 @@ read_tsv
 
 ## See Also
 
-* [`read_csv`](read_csv.md)
-* [`read_ssv`](read_ssv.md)
-* [`read_xsv`](read_xsv.md)
-* fn[`parse_tsv`](../functions/parse_tsv.md)
+* [`read_csv`](/reference/operators/read_csv.md)
+* [`read_ssv`](/reference/operators/read_ssv.md)
+* [`read_xsv`](/reference/operators/read_xsv.md)
+* fn[`parse_tsv`](/reference/functions/parse_tsv.md)

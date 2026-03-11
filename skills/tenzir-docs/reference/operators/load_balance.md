@@ -65,6 +65,6 @@ load_balance $cfg {
 
 ## See Also
 
-* [`fork`](fork.md)
-* [`publish`](publish.md)
+* [`fork`](/reference/operators/fork.md)
+* [`publish`](/reference/operators/publish.md)
 * [Load-balance pipelines](../../guides/routing/load-balance-pipelines.md)

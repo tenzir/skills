@@ -361,7 +361,7 @@ output = xml.parse_xml(xpath="/record", key_attr="name")
 
 ## See Also
 
-* fn[`parse_winlog`](parse_winlog.md)
-* fn[`parse_json`](parse_json.md)
-* fn[`parse_yaml`](parse_yaml.md)
+* fn[`parse_winlog`](/reference/functions/parse_winlog.md)
+* fn[`parse_json`](/reference/functions/parse_json.md)
+* fn[`parse_yaml`](/reference/functions/parse_yaml.md)
 * [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)

@@ -30,10 +30,10 @@ summarize n=sum(x)
 
 ## See Also
 
-* fn[`collect`](collect.md)
-* fn[`max`](max.md)
-* fn[`mean`](mean.md)
-* fn[`min`](min.md)
+* fn[`collect`](/reference/functions/collect.md)
+* fn[`max`](/reference/functions/max.md)
+* fn[`mean`](/reference/functions/mean.md)
+* fn[`min`](/reference/functions/min.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

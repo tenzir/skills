@@ -3,15 +3,15 @@
 
 Tenzir supports reading packets from a network interface card (NIC).
 
-The [`load_nic`](../reference/operators/load_nic.md) produces a stream of bytes in PCAP file format:
+The [`load_nic`](/reference/operators/load_nic.md) produces a stream of bytes in PCAP file format:
 
-We designed `load_nic` such that it produces a byte stream in the form of a PCAP file. That is, when the pipeline starts, it first produces a file header, followed by chunks of packets. This creates a byte stream that is wire-compatible with the PCAP format, allowing you to exchange `load_nic` with [`load_file`](../reference/operators/load_file.md) and It Just Works™.
+We designed `load_nic` such that it produces a byte stream in the form of a PCAP file. That is, when the pipeline starts, it first produces a file header, followed by chunks of packets. This creates a byte stream that is wire-compatible with the PCAP format, allowing you to exchange `load_nic` with [`load_file`](/reference/operators/load_file.md) and It Just Works™.
 
 ## Examples
 
 ### List active network interfaces
 
-If you don’t know what interface to read from, use the [`nics`](../reference/operators/nics.md) operator to identify suitable candidates:
+If you don’t know what interface to read from, use the [`nics`](/reference/operators/nics.md) operator to identify suitable candidates:
 
 ```tql
 nics
@@ -82,7 +82,7 @@ head 3
 
 ### Decapsulate packets
 
-After you have structured data in the form of PCAP events, you can use the [`decapsulate`](../reference/functions/decapsulate.md) function to decode the binary `data`:
+After you have structured data in the form of PCAP events, you can use the [`decapsulate`](/reference/functions/decapsulate.md) function to decode the binary `data`:
 
 ```tql
 load_nic "eth0"
@@ -112,4 +112,4 @@ head 1
   }
 ```
 
-Decapsulation automatically computes a [Community ID](https://github.com/corelight/community-id-spec) for correlation in the `community_id` field. You could also use the [`community_id`](../reference/functions/community_id.md) function to compute this value manually for different events.
+Decapsulation automatically computes a [Community ID](https://github.com/corelight/community-id-spec) for correlation in the `community_id` field. You could also use the [`community_id`](/reference/functions/community_id.md) function to compute this value manually for different events.

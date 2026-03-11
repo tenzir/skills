@@ -7,7 +7,7 @@ Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
 ## Examples
 
-Use [`from_udp`](../reference/operators/from_udp.md) to receive UDP datagrams as structured events containing message data and peer information. For sending, use [`save_udp`](../reference/operators/save_udp.md) with a write operator.
+Use [`from_udp`](/reference/operators/from_udp.md) to receive UDP datagrams as structured events containing message data and peer information. For sending, use [`save_udp`](/reference/operators/save_udp.md) with a write operator.
 
 ### Receive syslog messages over UDP
 

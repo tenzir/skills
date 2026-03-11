@@ -31,7 +31,7 @@ Index notation:
 
 ## Add elements to lists
 
-Use [`append()`](../../reference/functions/append.md) and [`prepend()`](../../reference/functions/prepend.md):
+Use [`append()`](/reference/functions/append.md) and [`prepend()`](/reference/functions/prepend.md):
 
 ```tql
 from {colors: ["red", "green"]}
@@ -51,7 +51,7 @@ multi_append = colors.append("blue").append("purple")
 
 ## Combine lists
 
-Join multiple lists with [`concatenate()`](../../reference/functions/concatenate.md) or spread syntax:
+Join multiple lists with [`concatenate()`](/reference/functions/concatenate.md) or spread syntax:
 
 ```tql
 from {
@@ -77,7 +77,7 @@ with_value = [...list1, 10, ...list2]
 
 ## Transform list elements
 
-Apply functions to each element with [`map()`](../../reference/functions/map.md):
+Apply functions to each element with [`map()`](/reference/functions/map.md):
 
 ```tql
 from {
@@ -101,7 +101,7 @@ squared = prices.map(x => x * x)
 
 ## Filter list elements
 
-Keep only elements that match a condition with [`where()`](../../reference/functions/where.md):
+Keep only elements that match a condition with [`where()`](/reference/functions/where.md):
 
 ```tql
 from {
@@ -127,7 +127,7 @@ a_names = users.where(u => u.starts_with("a"))
 
 ## Sort lists
 
-Order elements with [`sort()`](../../reference/functions/sort.md):
+Order elements with [`sort()`](/reference/functions/sort.md):
 
 ```tql
 from {
@@ -194,7 +194,7 @@ by_name = users.sort(cmp=(a, b) => a.name < b.name)
 
 ## Slice lists
 
-Extract portions of a list with [`slice()`](../../reference/functions/slice.md):
+Extract portions of a list with [`slice()`](/reference/functions/slice.md):
 
 Get the first N elements:
 
@@ -253,7 +253,7 @@ every_other = xs.slice(stride=2)
 
 ## Top-k and bottom-k
 
-Chain [`sort()`](../../reference/functions/sort.md) and [`slice()`](../../reference/functions/slice.md) to implement a top-k query over list elements:
+Chain [`sort()`](/reference/functions/sort.md) and [`slice()`](/reference/functions/slice.md) to implement a top-k query over list elements:
 
 ```tql
 from {scores: [72, 95, 88, 61, 83, 97, 56]}
@@ -271,7 +271,7 @@ bottom_3 = scores.sort().slice(end=3)
 
 ## Get unique values
 
-Remove duplicates with [`distinct()`](../../reference/functions/distinct.md):
+Remove duplicates with [`distinct()`](/reference/functions/distinct.md):
 
 ```tql
 from {
@@ -293,7 +293,7 @@ unique_nums = distinct(numbers).sort()
 
 ## Use lists as sets
 
-Use [`add()`](../../reference/functions/add.md) for set-insertion (append only if absent) and [`remove()`](../../reference/functions/remove.md) to delete all occurrences:
+Use [`add()`](/reference/functions/add.md) for set-insertion (append only if absent) and [`remove()`](/reference/functions/remove.md) to delete all occurrences:
 
 ```tql
 from {tags: ["info", "warning", "info"]}
@@ -311,7 +311,7 @@ without_info = tags.remove("info")
 }
 ```
 
-Combine `add()` with [`distinct()`](../../reference/functions/distinct.md) when you need a deduplicated collection:
+Combine `add()` with [`distinct()`](/reference/functions/distinct.md) when you need a deduplicated collection:
 
 ```tql
 from {xs: [1, 2, 2, 3]}
@@ -331,7 +331,7 @@ with_2 = unique.add(2)
 
 ## Flatten nested lists
 
-Note: Direct list flattening is not currently supported in TQL. The [`flatten()`](../../reference/functions/flatten.md) function is designed for flattening records, not lists. To work with nested lists, you would need to process them element by element.
+Note: Direct list flattening is not currently supported in TQL. The [`flatten()`](/reference/functions/flatten.md) function is designed for flattening records, not lists. To work with nested lists, you would need to process them element by element.
 
 ## Combine lists and records
 
@@ -370,7 +370,7 @@ avg_age = users.map(u => u.age).sum() / users.length()
 
 ### Zip lists together
 
-Combine parallel lists with [`zip()`](../../reference/functions/zip.md):
+Combine parallel lists with [`zip()`](/reference/functions/zip.md):
 
 ```tql
 from {
@@ -491,7 +491,7 @@ This pattern is particularly useful when:
 
 ### Enumerate with indices
 
-Add row numbers to your data using the [`enumerate`](../../reference/operators/enumerate.md) operator:
+Add row numbers to your data using the [`enumerate`](/reference/operators/enumerate.md) operator:
 
 ```tql
 from {item: "apple"}, {item: "banana"}, {item: "cherry"}
@@ -584,8 +584,8 @@ expensive = items.where(item => item.price > 15)
 
 ## See Also
 
-* fn[`sort`](../../reference/functions/sort.md)
-* fn[`slice`](../../reference/functions/slice.md)
+* fn[`sort`](/reference/functions/sort.md)
+* fn[`slice`](/reference/functions/slice.md)
 * [Shape records](shape-records.md)
 * [Filter and select data](filter-and-select-data.md)
 * [Transform values](transform-values.md)

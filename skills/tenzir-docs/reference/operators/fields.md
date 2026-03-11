@@ -24,5 +24,5 @@ head 5
 
 ## See Also
 
-* [`schemas`](schemas.md)
+* [`schemas`](/reference/operators/schemas.md)
 * [Show available schemas](../../guides/edge-storage/show-available-schemas.md)

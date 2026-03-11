@@ -35,6 +35,6 @@ from {x: join(["a", "b", "c"], "-")}
 
 ## See Also
 
-* fn[`split`](split.md)
-* fn[`split_regex`](split_regex.md)
+* fn[`split`](/reference/functions/split.md)
+* fn[`split_regex`](/reference/functions/split_regex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

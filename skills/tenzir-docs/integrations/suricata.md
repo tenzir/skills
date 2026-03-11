@@ -24,7 +24,7 @@ outputs:
 
 The `filetype` setting determines how you’d process the log file and defaults to `regular`.
 
-Onboard Suricata EVE JSON logs via the [`read_suricata`](../reference/operators/read_suricata.md) operator as follows:
+Onboard Suricata EVE JSON logs via the [`read_suricata`](/reference/operators/read_suricata.md) operator as follows:
 
 ```tql
 from_file "/path/to/eve.json" {

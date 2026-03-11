@@ -1,7 +1,7 @@
 # Email
 
 
-Tenzir supports sending events as email using the [`save_email`](../reference/operators/save_email.md) operator. To this end, the operator establishes a connection with an SMTP server that sends the message on behalf of Tenzir.
+Tenzir supports sending events as email using the [`save_email`](/reference/operators/save_email.md) operator. To this end, the operator establishes a connection with an SMTP server that sends the message on behalf of Tenzir.
 
 ## Examples
 

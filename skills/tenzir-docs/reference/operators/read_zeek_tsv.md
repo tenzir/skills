@@ -50,8 +50,8 @@ read_zeek_tsv
 
 ## See Also
 
-* [`read_zeek_json`](read_zeek_json.md)
-* [`write_zeek_tsv`](write_zeek_tsv.md)
+* [`read_zeek_json`](/reference/operators/read_zeek_json.md)
+* [`write_zeek_tsv`](/reference/operators/write_zeek_tsv.md)
 * [Import into a node](../../guides/edge-storage/import-into-a-node.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)
 * [Zeek](../../integrations/zeek.md)

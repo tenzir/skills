@@ -43,11 +43,11 @@ x,y,z
 
 ## See Also
 
-* fn[`parse_csv`](../functions/parse_csv.md)
-* fn[`print_csv`](../functions/print_csv.md)
-* [`read_csv`](read_csv.md)
-* [`write_lines`](write_lines.md)
-* [`write_ssv`](write_ssv.md)
-* [`write_tsv`](write_tsv.md)
-* [`write_xsv`](write_xsv.md)
+* fn[`parse_csv`](/reference/functions/parse_csv.md)
+* fn[`print_csv`](/reference/functions/print_csv.md)
+* [`read_csv`](/reference/operators/read_csv.md)
+* [`write_lines`](/reference/operators/write_lines.md)
+* [`write_ssv`](/reference/operators/write_ssv.md)
+* [`write_tsv`](/reference/operators/write_tsv.md)
+* [`write_xsv`](/reference/operators/write_xsv.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

@@ -12,11 +12,11 @@ Lookup tables are particularly powerful for:
 
 ## Create a lookup table
 
-You can create a lookup table with the [`context::create_lookup_table`](../../reference/operators/context/create_lookup_table.md) operator as a pipeline, or interactively in the platform.
+You can create a lookup table with the [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md) operator as a pipeline, or interactively in the platform.
 
 ### Create a lookup table from a pipeline
 
-The [`context::create_lookup_table`](../../reference/operators/context/create_lookup_table.md) operator creates a new, empty lookup table:
+The [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md) operator creates a new, empty lookup table:
 
 ```tql
 context::create_lookup_table "my_lookup_table"
@@ -53,7 +53,7 @@ The following steps
 
 ## Show all available lookup tables
 
-Use the [`context::list`](../../reference/operators/context/list.md) operator to retrieve all contexts in your node:
+Use the [`context::list`](/reference/operators/context/list.md) operator to retrieve all contexts in your node:
 
 ```tql
 context::list
@@ -100,7 +100,7 @@ where name.match_regex("[T|t]hreat")
 
 ## Delete a lookup table
 
-Use the [`context::remove`](../../reference/operators/context/remove.md) operator to delete a lookup table:
+Use the [`context::remove`](/reference/operators/context/remove.md) operator to delete a lookup table:
 
 ```tql
 context::remove "my_lookup_table"
@@ -110,7 +110,7 @@ This permanently deletes the specified lookup table and its persisted data.
 
 ## Perform lookups
 
-Use the [`context::enrich`](../../reference/operators/context/enrich.md) operator to enrich events with data from a lookup table.
+Use the [`context::enrich`](/reference/operators/context/enrich.md) operator to enrich events with data from a lookup table.
 
 ### Perform a point lookup
 
@@ -329,7 +329,7 @@ Compound keys enable sophisticated matching based on multiple fields.
 
 ## Add/overwrite entries in lookup table
 
-Use the [`context::update`](../../reference/operators/context/update.md) operator to add or update entries. This is ideal for maintaining dynamic threat intelligence or asset inventory:
+Use the [`context::update`](/reference/operators/context/update.md) operator to add or update entries. This is ideal for maintaining dynamic threat intelligence or asset inventory:
 
 Update threat intelligence from an API:
 
@@ -361,7 +361,7 @@ context::update "user_logins", key=user, value={
 
 ### Associate timeouts with entries
 
-Timeouts are essential for managing the lifecycle of threat intelligence and maintaining fresh context. You can set expiration timeouts on lookup table entries using the [`context::update`](../../reference/operators/context/update.md) operator:
+Timeouts are essential for managing the lifecycle of threat intelligence and maintaining fresh context. You can set expiration timeouts on lookup table entries using the [`context::update`](/reference/operators/context/update.md) operator:
 
 Most IoCs have a short half-life. Automatically expire stale entries:
 
@@ -430,7 +430,7 @@ The three timeout types work together:
 
 ## Remove entries from a lookup table
 
-Use the [`context::erase`](../../reference/operators/context/erase.md) operator to remove specific entries, useful for allowlisting, removing false positives, or cleaning up outdated data:
+Use the [`context::erase`](/reference/operators/context/erase.md) operator to remove specific entries, useful for allowlisting, removing false positives, or cleaning up outdated data:
 
 Remove false positives from threat intelligence:
 
@@ -472,7 +472,7 @@ context::erase "temp_indicators", key=indicator
 
 ## Show entries in a lookup table
 
-Use the [`context::inspect`](../../reference/operators/context/inspect.md) operator to view and analyze the contents of a lookup table:
+Use the [`context::inspect`](/reference/operators/context/inspect.md) operator to view and analyze the contents of a lookup table:
 
 ```tql
 // View all entries
@@ -535,7 +535,7 @@ Periodically poll APIs to maintain fresh reference data, threat intelligence, or
 
 ### Basic periodic updates
 
-Use the [`every`](../../reference/operators/every.md) operator to schedule regular API polls that update a lookup table:
+Use the [`every`](/reference/operators/every.md) operator to schedule regular API polls that update a lookup table:
 
 ```tql
 every 1h {
@@ -569,7 +569,7 @@ context::update "blocklist",
 
 ### Export lookup table state
 
-Use the [`context::save`](../../reference/operators/context/save.md) operator to create backups or migrate lookup tables between nodes:
+Use the [`context::save`](/reference/operators/context/save.md) operator to create backups or migrate lookup tables between nodes:
 
 Backup critical threat intelligence:
 
@@ -596,7 +596,7 @@ every 1d {
 
 ### Import lookup table state
 
-Use the [`context::load`](../../reference/operators/context/load.md) operator to restore lookup tables from backups or migrate data:
+Use the [`context::load`](/reference/operators/context/load.md) operator to restore lookup tables from backups or migrate data:
 
 ```tql
 from_file "threat_intel_backup_2024_01_15.bin"

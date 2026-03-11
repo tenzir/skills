@@ -155,7 +155,7 @@ from_s3 "s3://public-bucket/zeek/**.log", anonymous=true {
 
 ## See Also
 
-* [`from_file`](from_file.md)
-* [`load_s3`](load_s3.md)
-* [`save_s3`](save_s3.md)
+* [`from_file`](/reference/operators/from_file.md)
+* [`load_s3`](/reference/operators/load_s3.md)
+* [`save_s3`](/reference/operators/save_s3.md)
 * [S3](../../integrations/amazon/s3.md)

@@ -33,8 +33,8 @@ where src_ip in 10.10.5.0/25 and (orig_bytes > 1Mi or duration > 30min)
 
 ## See Also
 
-* [`assert`](assert.md)
-* [`drop`](drop.md)
-* [`select`](select.md)
+* [`assert`](/reference/operators/assert.md)
+* [`drop`](/reference/operators/drop.md)
+* [`select`](/reference/operators/select.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

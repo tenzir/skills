@@ -19,7 +19,7 @@ The current implementation does *not* support [PCAPNG](https://www.ietf.org/arch
 
 Emit a `pcap.file_header` event that represents the PCAP file header. If present, the parser injects this additional event before the subsequent stream of packets.
 
-Emitting this extra event makes it possible to seed the [`write_pcap`](write_pcap.md) operator with a file header from the input. This allows for controlling the timestamp formatting (microseconds vs. nanosecond granularity) and byte order in the packet headers.
+Emitting this extra event makes it possible to seed the [`write_pcap`](/reference/operators/write_pcap.md) operator with a file header from the input. This allows for controlling the timestamp formatting (microseconds vs. nanosecond granularity) and byte order in the packet headers.
 
 When the PCAP parser processes a concatenated stream of PCAP files, specifying `emit_file_headers` will also re-emit every intermediate file header as separate event.
 
@@ -59,5 +59,5 @@ read_pcap
 
 ## See Also
 
-* [`load_nic`](load_nic.md)
-* [`write_pcap`](write_pcap.md)
+* [`load_nic`](/reference/operators/load_nic.md)
+* [`write_pcap`](/reference/operators/write_pcap.md)

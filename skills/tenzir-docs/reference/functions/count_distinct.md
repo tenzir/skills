@@ -30,6 +30,6 @@ summarize unique=count_distinct(x)
 
 ## See Also
 
-* fn[`count`](count.md)
-* fn[`distinct`](distinct.md)
+* fn[`count`](/reference/functions/count.md)
+* fn[`distinct`](/reference/functions/distinct.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

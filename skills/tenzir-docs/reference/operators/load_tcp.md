@@ -164,5 +164,5 @@ openssl s_client -connect 127.0.0.1:4000 -cert client.pem -key client-key.pem -C
 
 ## See Also
 
-* [`save_tcp`](save_tcp.md)
+* [`save_tcp`](/reference/operators/save_tcp.md)
 * [TCP](../../integrations/tcp.md)

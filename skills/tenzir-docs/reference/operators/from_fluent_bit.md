@@ -27,7 +27,7 @@ from_fluent_bit "plugin", options={key1: value1, key2: value2, …}
 
 Output to Fluent Bit
 
-You can output events to Fluent Bit using the [`to_fluent_bit` operator](to_fluent_bit.md).
+You can output events to Fluent Bit using the [`to_fluent_bit` operator](/reference/operators/to_fluent_bit.md).
 
 ### `plugin: string`
 
@@ -183,7 +183,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ## URI support & integration with `from`
 
-The `from_fluent_bit` operator can also be used from the [`from`](from.md) operator. For this, the `fluentbit://` scheme can be used. The URI is then translated:
+The `from_fluent_bit` operator can also be used from the [`from`](/reference/operators/from.md) operator. For this, the `fluentbit://` scheme can be used. The URI is then translated:
 
 ```tql
 from "fluentbit://plugin"
@@ -223,5 +223,5 @@ from_fluent_bit "splunk", options={port: 8088}
 
 ## See Also
 
-* [`to_fluent_bit`](to_fluent_bit.md)
+* [`to_fluent_bit`](/reference/operators/to_fluent_bit.md)
 * [Fluent Bit](../../integrations/fluent-bit.md)

@@ -51,9 +51,9 @@ full_second = ts.second().floor()
 
 ## See Also
 
-* fn[`year`](year.md)
-* fn[`month`](month.md)
-* fn[`day`](day.md)
-* fn[`hour`](hour.md)
-* fn[`minute`](minute.md)
+* fn[`year`](/reference/functions/year.md)
+* fn[`month`](/reference/functions/month.md)
+* fn[`day`](/reference/functions/day.md)
+* fn[`hour`](/reference/functions/hour.md)
+* fn[`minute`](/reference/functions/minute.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

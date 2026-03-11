@@ -17,7 +17,7 @@ This operator is currently only available in the amd64 Docker images.
 
 The `to_snowflake` operator makes it possible to send events to a [Snowflake](https://www.snowflake.com/) database. It uploads the events via bulk-ingestion under the hood and then copies them into the target table.
 
-The operator supports nested types as [Snowflake semi-structured types](https://docs.snowflake.com/en/sql-reference/data-types-semistructured). Alternatively, you can use the [`flatten`](../functions/flatten.md) function operator beforehand.
+The operator supports nested types as [Snowflake semi-structured types](https://docs.snowflake.com/en/sql-reference/data-types-semistructured). Alternatively, you can use the [`flatten`](/reference/functions/flatten.md) function operator beforehand.
 
 ### `account_identifier = string`
 

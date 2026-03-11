@@ -30,5 +30,5 @@ decoded = bytes.decode_base64()
 
 ## See Also
 
-* fn[`encode_base64`](encode_base64.md)
+* fn[`encode_base64`](/reference/functions/encode_base64.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -11,7 +11,7 @@ import
 
 The `import` operator persists events in a Tenzir node.
 
-This operator is the dual to [`export`](export.md).
+This operator is the dual to [`export`](/reference/operators/export.md).
 
 ## Examples
 
@@ -25,6 +25,6 @@ import
 
 ## See Also
 
-* [`export`](export.md)
-* [`publish`](publish.md)
+* [`export`](/reference/operators/export.md)
+* [`publish`](/reference/operators/publish.md)
 * [Import into a node](../../guides/edge-storage/import-into-a-node.md)

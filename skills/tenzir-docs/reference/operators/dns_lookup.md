@@ -140,4 +140,4 @@ dns_lookup destination, result=dest_ips
 
 ## See Also
 
-* [`set`](set.md)
+* [`set`](/reference/operators/set.md)

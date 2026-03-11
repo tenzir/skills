@@ -60,4 +60,4 @@ publish "api"
 
 ## See Also
 
-* [`every`](every.md)
+* [`every`](/reference/operators/every.md)

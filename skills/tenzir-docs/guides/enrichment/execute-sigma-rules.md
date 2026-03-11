@@ -1,9 +1,9 @@
 # Execute Sigma rules
 
 
-Tenzir supports executing [Sigma rules](https://github.com/SigmaHQ/sigma) using the [`sigma`](../../reference/operators/sigma.md) operator. This allows you to run your Sigma rules in the pipeline. The operator transpiles the provided rules into an expression, and wraps matching events into a sighting record along with the matched rule.
+Tenzir supports executing [Sigma rules](https://github.com/SigmaHQ/sigma) using the [`sigma`](/reference/operators/sigma.md) operator. This allows you to run your Sigma rules in the pipeline. The operator transpiles the provided rules into an expression, and wraps matching events into a sighting record along with the matched rule.
 
-Semantically, you can think of executing Sigma rules as applying the [`where`](../../reference/operators/where.md) operator to the input. At a high level, the translation process looks as follows:
+Semantically, you can think of executing Sigma rules as applying the [`where`](/reference/operators/where.md) operator to the input. At a high level, the translation process looks as follows:
 
 pySigma Support
 

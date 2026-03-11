@@ -58,5 +58,5 @@ head 5
 
 ## See Also
 
-* [`files`](files.md)
-* [`sockets`](sockets.md)
+* [`files`](/reference/operators/files.md)
+* [`sockets`](/reference/operators/sockets.md)

@@ -13,7 +13,7 @@ Read more in the [Security Design](#security-design) section.
 
 You can use secret values only with operators that accept secrets. Operators generally do not document that they accept a secret, but they will accept secrets where appropriate.
 
-You have two ways to pass an argument to an operator that expects a secret. The following examples use the [`to_splunk`](../reference/operators/to_splunk.md) operator, which expects a HEC-token for authentication:
+You have two ways to pass an argument to an operator that expects a secret. The following examples use the [`to_splunk`](/reference/operators/to_splunk.md) operator, which expects a HEC-token for authentication:
 
 * Provide a plain `string` ([Ad-hoc Secret](#ad-hoc-secrets)):
 
@@ -23,7 +23,7 @@ You have two ways to pass an argument to an operator that expects a secret. The 
 
   This creates a “secret” containing the string literal `my-plaintext-token`.
 
-* Use the [`secret`](../reference/functions/secret.md) function ([Managed Secret](#managed-secrets)):
+* Use the [`secret`](/reference/functions/secret.md) function ([Managed Secret](#managed-secrets)):
 
   ```tql
   to_splunk "https://localhost:8088", hec_token=secret("splunk-hec-token")
@@ -33,7 +33,7 @@ You have two ways to pass an argument to an operator that expects a secret. The 
 
 ## The `secret` type
 
-Tenzir’s [type system](../reference/types.md) includes secrets as a special type. You can access secrets only with the [`secret`](../reference/functions/secret.md) function.
+Tenzir’s [type system](../reference/types.md) includes secrets as a special type. You can access secrets only with the [`secret`](/reference/functions/secret.md) function.
 
 ### Internals
 
@@ -87,7 +87,7 @@ You cannot turn a secret into a string. Any such attempt produces the string `"*
 
 #### Python
 
-Since secrets can be values in a pipeline, you can pass them through the [`python`](../reference/operators/python.md) operator. You must not modify a secret in the `python` operator.
+Since secrets can be values in a pipeline, you can pass them through the [`python`](/reference/operators/python.md) operator. You must not modify a secret in the `python` operator.
 
 ## Ad-hoc Secrets
 
@@ -107,7 +107,7 @@ Managed secrets are identified by their name and can come from the following sou
 
 <!--?xml version="1.0" standalone="no"?-->
 
-Access a managed secret’s value with the [`secret`](../reference/functions/secret.md) function.
+Access a managed secret’s value with the [`secret`](/reference/functions/secret.md) function.
 
 The Tenzir Node looks up the secret’s actual value only when an operator requires it. It first checks the config, with environment variables taking precedence over configuration file entries. If the secret is not found there, the node requests it from the Tenzir Platform.
 
@@ -132,7 +132,7 @@ Since you can set Tenzir’s configuration options as environment variables, you
 
 See the [configuration reference](../reference/node/configuration.md) for more details.
 
-Tenzir hides the `tenzir.secrets` section from the [`config()`](../reference/functions/config.md) function.
+Tenzir hides the `tenzir.secrets` section from the [`config()`](/reference/functions/config.md) function.
 
 ### Platform Secrets
 

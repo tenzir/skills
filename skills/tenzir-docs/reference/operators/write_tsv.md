@@ -43,7 +43,7 @@ x  y  z
 
 ## See Also
 
-* [`write_csv`](write_csv.md)
-* [`write_lines`](write_lines.md)
-* [`write_ssv`](write_ssv.md)
-* [`write_xsv`](write_xsv.md)
+* [`write_csv`](/reference/operators/write_csv.md)
+* [`write_lines`](/reference/operators/write_lines.md)
+* [`write_ssv`](/reference/operators/write_ssv.md)
+* [`write_xsv`](/reference/operators/write_xsv.md)

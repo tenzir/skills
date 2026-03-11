@@ -25,6 +25,6 @@ from { x: since_epoch(2021-02-24) }
 
 ## See Also
 
-* fn[`from_epoch`](from_epoch.md)
-* fn[`now`](now.md)
+* fn[`from_epoch`](/reference/functions/from_epoch.md)
+* fn[`now`](/reference/functions/now.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

@@ -134,7 +134,7 @@ The Library shows input names, descriptions, and default values to guide users.
 
 ### package::add operator
 
-Use the [`package::add`](../../reference/operators/package/add.md) operator with an `inputs` record:
+Use the [`package::add`](/reference/operators/package/add.md) operator with an `inputs` record:
 
 ```tql
 package::add "/path/to/package", inputs={

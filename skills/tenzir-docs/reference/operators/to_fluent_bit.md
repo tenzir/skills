@@ -26,7 +26,7 @@ to_fluent_bit "plugin", options={key1: value1, key2:value2, …}
 
 Read from Fluent Bit
 
-You can acquire events from Fluent Bit using the [`from_fluent_bit` operator](from_fluent_bit.md).
+You can acquire events from Fluent Bit using the [`from_fluent_bit` operator](/reference/operators/from_fluent_bit.md).
 
 ### `plugin: string`
 
@@ -73,7 +73,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ## URI support & integration with `from`
 
-The `to_fluent_bit` operator can also be used from the [`to`](to.md) operator. For this, the `fluentbit://` scheme can be used. The URI is then translated:
+The `to_fluent_bit` operator can also be used from the [`to`](/reference/operators/to.md) operator. For this, the `fluentbit://` scheme can be used. The URI is then translated:
 
 ```tql
 to "fluentbit://plugin"
@@ -96,5 +96,5 @@ to_fluent_bit "slack", options={webhook: $slack_hook}
 
 ## See Also
 
-* [`from_fluent_bit`](from_fluent_bit.md)
+* [`from_fluent_bit`](/reference/operators/from_fluent_bit.md)
 * [Fluent Bit](../../integrations/fluent-bit.md)

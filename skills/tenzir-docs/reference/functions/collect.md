@@ -30,6 +30,6 @@ summarize values=collect(x)
 
 ## See Also
 
-* fn[`distinct`](distinct.md)
-* fn[`sum`](sum.md)
+* fn[`distinct`](/reference/functions/distinct.md)
+* fn[`sum`](/reference/functions/sum.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

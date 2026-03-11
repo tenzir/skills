@@ -17,9 +17,9 @@ The following table lists existing XSV configurations:
 
 | Format                                    | Field Separator | List Separator | Null Value |
 | ----------------------------------------- | :-------------: | :------------: | :--------: |
-| [`csv`](read_csv.md) |       `,`       |       `;`      |    empty   |
-| [`ssv`](read_ssv.md) |    `<space>`    |       `,`      |     `-`    |
-| [`tsv`](read_tsv.md) |       `\t`      |       `,`      |     `-`    |
+| [`csv`](/reference/operators/read_csv.md) |       `,`       |       `;`      |    empty   |
+| [`ssv`](/reference/operators/read_ssv.md) |    `<space>`    |       `,`      |     `-`    |
+| [`tsv`](/reference/operators/read_tsv.md) |       `\t`      |       `,`      |     `-`    |
 
 ### `field_separator = string`
 
@@ -162,7 +162,7 @@ Type Conflict
 
 ## See Also
 
-* [`read_csv`](read_csv.md)
-* [`read_ssv`](read_ssv.md)
-* [`read_tsv`](read_tsv.md)
-* fn[`parse_xsv`](../functions/parse_xsv.md)
+* [`read_csv`](/reference/operators/read_csv.md)
+* [`read_ssv`](/reference/operators/read_ssv.md)
+* [`read_tsv`](/reference/operators/read_tsv.md)
+* fn[`parse_xsv`](/reference/functions/parse_xsv.md)

@@ -187,4 +187,4 @@ read_grok $pattern
 
 ## See Also
 
-* fn[`parse_grok`](../functions/parse_grok.md)
+* fn[`parse_grok`](/reference/functions/parse_grok.md)

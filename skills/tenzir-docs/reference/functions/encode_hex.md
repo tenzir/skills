@@ -30,5 +30,5 @@ encoded = bytes.encode_hex()
 
 ## See Also
 
-* fn[`decode_hex`](decode_hex.md)
+* fn[`decode_hex`](/reference/functions/decode_hex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

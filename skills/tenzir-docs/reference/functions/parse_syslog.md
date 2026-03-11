@@ -245,6 +245,6 @@ Use `octet_counting=true` to require the prefix or `octet_counting=false` to dis
 
 ## See Also
 
-* [`read_syslog`](../operators/read_syslog.md)
-* [`write_syslog`](../operators/write_syslog.md)
+* [`read_syslog`](/reference/operators/read_syslog.md)
+* [`write_syslog`](/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

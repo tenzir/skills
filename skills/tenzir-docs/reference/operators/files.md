@@ -96,7 +96,7 @@ where type == "fifo"
 
 ## See Also
 
-* [`load_file`](load_file.md)
-* [`processes`](processes.md)
-* [`save_file`](save_file.md)
-* [`sockets`](sockets.md)
+* [`load_file`](/reference/operators/load_file.md)
+* [`processes`](/reference/operators/processes.md)
+* [`save_file`](/reference/operators/save_file.md)
+* [`sockets`](/reference/operators/sockets.md)

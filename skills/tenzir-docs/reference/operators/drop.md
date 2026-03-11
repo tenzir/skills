@@ -40,7 +40,7 @@ drop role, info.id
 
 ## See Also
 
-* [`select`](select.md)
-* [`where`](where.md)
+* [`select`](/reference/operators/select.md)
+* [`where`](/reference/operators/where.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

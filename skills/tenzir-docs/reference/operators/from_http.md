@@ -286,8 +286,8 @@ Observe the request in the Tenzir pipeline, parsed and decompressed:
 
 ## See Also
 
-* [`http`](http.md)
-* [`serve`](serve.md)
+* [`http`](/reference/operators/http.md)
+* [`serve`](/reference/operators/serve.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
 * [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)

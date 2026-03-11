@@ -171,9 +171,9 @@ Type Conflict
 
 ## See Also
 
-* [`read_cef`](read_cef.md)
-* [`read_syslog`](read_syslog.md)
-* [`write_syslog`](write_syslog.md)
-* fn[`parse_leef`](../functions/parse_leef.md)
-* fn[`print_leef`](../functions/print_leef.md)
+* [`read_cef`](/reference/operators/read_cef.md)
+* [`read_syslog`](/reference/operators/read_syslog.md)
+* [`write_syslog`](/reference/operators/write_syslog.md)
+* fn[`parse_leef`](/reference/functions/parse_leef.md)
+* fn[`print_leef`](/reference/functions/print_leef.md)
 * [Syslog](../../integrations/syslog.md)

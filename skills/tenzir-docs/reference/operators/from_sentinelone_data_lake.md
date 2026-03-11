@@ -74,5 +74,5 @@ from_sentinelone_data_lake "https://xdr.eu1.sentinelone.net",
 
 ## See Also
 
-* [`to_sentinelone_data_lake`](to_sentinelone_data_lake.md)
+* [`to_sentinelone_data_lake`](/reference/operators/to_sentinelone_data_lake.md)
 * [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)

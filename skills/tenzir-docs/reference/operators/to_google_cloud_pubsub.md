@@ -41,5 +41,5 @@ to_google_cloud_pubsub project_id="amazing-project-123456", topic_id="alerts-top
 
 ## See Also
 
-* [`from_google_cloud_pubsub`](from_google_cloud_pubsub.md)
+* [`from_google_cloud_pubsub`](/reference/operators/from_google_cloud_pubsub.md)
 * [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

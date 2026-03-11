@@ -49,7 +49,7 @@ You can also [download this sample](https://docs.tenzir.com/packages/zeek/tests/
 
 ### Step 1: Parse the input
 
-We first parse the log file into a structured form so that we can work with the individual fields. The [`read_zeek_tsv`](../reference/operators/read_zeek_tsv.md) operator parses the above structure out of the box:
+We first parse the log file into a structured form so that we can work with the individual fields. The [`read_zeek_tsv`](/reference/operators/read_zeek_tsv.md) operator parses the above structure out of the box:
 
 ```sh
 tenzir 'read_zeek_tsv' < conn.log
@@ -248,10 +248,10 @@ ocsf::derive
 Let’s unpack this:
 
 1. With `this = { zeek: this }` we move the original event into the field `zeek`. This approach also avoids name clashes when we create new fields in the next steps. Because we are mapping Zeek logs, we chose `zeek` as a name to make the subsequent mappings almost self-explanatory.
-2. The main work takes place here. Our approach is structured: for every field in the source event, (1) map it, and (2) remove it. Ideally, use the `move` keyword to perform (1) and (2) together, e.g., `ocsf.x = move source.y`. If a field needs to be used multiple times in the same expression, use the [`drop`](../reference/operators/drop.md) afterwards.
+2. The main work takes place here. Our approach is structured: for every field in the source event, (1) map it, and (2) remove it. Ideally, use the `move` keyword to perform (1) and (2) together, e.g., `ocsf.x = move source.y`. If a field needs to be used multiple times in the same expression, use the [`drop`](/reference/operators/drop.md) afterwards.
 3. The assignment `this = {...ocsf, unmapped: zeek}` means that we move all fields from the `ocsf` record into the top-level record (`this`), and at the same time add a new field `unmapped` that contains everything that we didn’t map. This is why it’s important to remove the fields from the source as we perform the mapping. If you forget to map a field, it simply lands in the `unmapped` catch-all record and you can tweak your mapping later.
 4. We drop null fields from `unmapped` to keep the output clean.
-5. We keep the mapping terse by only mapping the `*_[u]id` field and relying on [`ocsf::derive`](../reference/operators/ocsf/derive.md) to auto-populate the corresponding sibling fields.
+5. We keep the mapping terse by only mapping the `*_[u]id` field and relying on [`ocsf::derive`](/reference/operators/ocsf/derive.md) to auto-populate the corresponding sibling fields.
 6. We give the event a new schema name so that we can easily filter by its shape in further pipelines.
 
 Now that we have a template, let’s get our hands dirty and go deep into the actual mapping.
@@ -272,7 +272,7 @@ ocsf.severity = "Informational"
 ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
 ```
 
-Note that computing the field `type_uid` requires simple arithmetic. You can rely on [`ocsf::derive`](../reference/operators/ocsf/derive.md) to populate sibling fields—an optimization to write more concise mappings. This would simplify the above snippet to:
+Note that computing the field `type_uid` requires simple arithmetic. You can rely on [`ocsf::derive`](/reference/operators/ocsf/derive.md) to populate sibling fields—an optimization to write more concise mappings. This would simplify the above snippet to:
 
 ```tql
 ocsf.activity_id = 6
@@ -390,7 +390,7 @@ drop zeek.resp_bytes, zeek.orig_bytes, zeek.resp_pkts, zeek.orig_pkts
 Here’s what happens here:
 
 * The expression `$proto_nums[zeek.proto]` takes the value of Zeek’s `proto` field (e.g., `tcp`) and uses it as an index into a static record `$proto_nums`. Add a `?` at the end to avoid warnings when the lookup returns `null`, and use the inline `else` expression for the fallback value.
-* To check whether we have an IPv4 or an IPv6 connection, we call [`is_v6()`](../reference/functions/is_v6.md) on the IPs of the connection record. TQL comes with numerous other domain-specific [functions](../reference/functions.md) that make mapping security data a breeze.
+* To check whether we have an IPv4 or an IPv6 connection, we call [`is_v6()`](/reference/functions/is_v6.md) on the IPs of the connection record. TQL comes with numerous other domain-specific [functions](../reference/functions.md) that make mapping security data a breeze.
 
 #### Putting it together
 
@@ -490,7 +490,7 @@ Most pipelines (1) onboard data from a source, (2) transform it, and (3) send it
 
 <!--?xml version="1.0" standalone="no"?-->
 
-We’ve addressed data *onboarding* by reading a log file and decomposing the unstructured Zeek TSV contents into a structured record. The built-in [`read_zeek_tsv`](../reference/operators/read_zeek_tsv.md) operator made this trivial. But it often requires a lot more elbow grease to get there. Check out our extensive [guide on parsing string fields](../guides/parsing/parse-string-fields.md) for more details. We haven’t yet addressed the other end of the pipeline: data *offboarding*. Our examples run `tenzir` on the command line, relying on an implicit output operator that writes the result of the last transformation to the terminal.
+We’ve addressed data *onboarding* by reading a log file and decomposing the unstructured Zeek TSV contents into a structured record. The built-in [`read_zeek_tsv`](/reference/operators/read_zeek_tsv.md) operator made this trivial. But it often requires a lot more elbow grease to get there. Check out our extensive [guide on parsing string fields](../guides/parsing/parse-string-fields.md) for more details. We haven’t yet addressed the other end of the pipeline: data *offboarding*. Our examples run `tenzir` on the command line, relying on an implicit output operator that writes the result of the last transformation to the terminal.
 
 In other words, we have a sandwich structure in our pipeline. To make it explicit:
 
@@ -765,7 +765,7 @@ Perfect. Now proceed with all log types and you have production-grade package.
 
 ### Step 4: Install and use the package
 
-After you have fleshed out the complete package, [install it](../guides/packages/install-a-package.md), either interactively via [`package::add`](../reference/operators/package/add.md), or IaC-style by putting it into a git repo and pointing the config option `tenzir.package-dirs` to it.
+After you have fleshed out the complete package, [install it](../guides/packages/install-a-package.md), either interactively via [`package::add`](/reference/operators/package/add.md), or IaC-style by putting it into a git repo and pointing the config option `tenzir.package-dirs` to it.
 
 Tenzir Community Library
 

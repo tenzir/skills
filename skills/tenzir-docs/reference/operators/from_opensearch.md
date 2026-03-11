@@ -70,6 +70,6 @@ from_opensearch tls=true, certfile="server.crt", keyfile="private.key"
 
 ## See Also
 
-* [`to_opensearch`](to_opensearch.md)
+* [`to_opensearch`](/reference/operators/to_opensearch.md)
 * [OpenSearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)

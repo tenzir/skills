@@ -113,5 +113,5 @@ read_json
 
 ## See Also
 
-* [`save_amqp`](save_amqp.md)
+* [`save_amqp`](/reference/operators/save_amqp.md)
 * [AMQP](../../integrations/amqp.md)

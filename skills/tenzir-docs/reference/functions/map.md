@@ -119,6 +119,6 @@ l = l.map(str => str.parse_json())
 
 ## See Also
 
-* fn[`where`](where.md)
-* fn[`zip`](zip.md)
+* fn[`where`](/reference/functions/where.md)
+* fn[`zip`](/reference/functions/zip.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

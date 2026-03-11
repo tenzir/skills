@@ -80,7 +80,7 @@ flattened = {
 
 ## Unflatten data
 
-Reconstruct hierarchical structures from flattened data using [`unflatten()`](../../reference/functions/unflatten.md):
+Reconstruct hierarchical structures from flattened data using [`unflatten()`](/reference/functions/unflatten.md):
 
 ### Basic unflattening
 
@@ -447,7 +447,7 @@ select normalized = events.map(e => {
 
 ### Unroll arrays to individual events
 
-Some data sources aggregate multiple events into a single record. Use [`unroll`](../../reference/operators/unroll.md) to expand these into individual events:
+Some data sources aggregate multiple events into a single record. Use [`unroll`](/reference/operators/unroll.md) to expand these into individual events:
 
 Expanding aggregated message types
 

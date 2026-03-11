@@ -57,7 +57,7 @@ b = move a
 
 ## See Also
 
-* [`move`](move.md)
+* [`move`](/reference/operators/move.md)
 * [Statements](../statements.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

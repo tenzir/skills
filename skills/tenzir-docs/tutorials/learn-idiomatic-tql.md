@@ -264,7 +264,7 @@ When normalizing data (e.g., to OCSF format):
 
 ### Use `replace` to normalize placeholder values
 
-When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](../reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
+When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
 
 ✅ Clear and composable approach:
 
@@ -307,7 +307,7 @@ drop_null_fields
 
 Operator vs. function
 
-Don’t confuse the [`replace`](../reference/operators/replace.md) operator with the [`replace`](../reference/functions/replace.md) function:
+Don’t confuse the [`replace`](/reference/operators/replace.md) operator with the [`replace`](/reference/functions/replace.md) function:
 
 * **Operator**: Replaces entire values across all fields in events (e.g., replace all `"-"` with `null`)
 * **Function**: Replaces substrings within a string (e.g., `"hello".replace("l", "r")` → `"herro"`)
@@ -698,7 +698,7 @@ Performance
 
 ### Treat warnings as errors with `strict`
 
-The [`strict`](../reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
+The [`strict`](/reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
 
 ✅ Use `strict` for critical data processing:
 

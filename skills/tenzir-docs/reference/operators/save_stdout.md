@@ -27,6 +27,6 @@ save_stdout
 
 ## See Also
 
-* [`load_stdin`](load_stdin.md)
-* [`save_file`](save_file.md)
+* [`load_stdin`](/reference/operators/load_stdin.md)
+* [`save_file`](/reference/operators/save_file.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)

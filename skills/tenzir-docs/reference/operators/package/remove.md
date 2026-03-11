@@ -25,7 +25,7 @@ package::remove "suricata-ocsf"
 
 ## See Also
 
-* [`package::add`](add.md)
-* [`package::list`](list.md)
+* [`package::add`](/reference/operators/package/add.md)
+* [`package::list`](/reference/operators/package/list.md)
 * [Install a package](../../../guides/packages/install-a-package.md)
 * [Write a package](../../../tutorials/write-a-package.md)

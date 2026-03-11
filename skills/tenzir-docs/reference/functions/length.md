@@ -25,7 +25,7 @@ from {n: [1, 2, 3].length()}
 
 ## See Also
 
-* fn[`is_empty`](is_empty.md)
-* fn[`length_bytes`](length_bytes.md)
-* fn[`length_chars`](length_chars.md)
+* fn[`is_empty`](/reference/functions/is_empty.md)
+* fn[`length_bytes`](/reference/functions/length_bytes.md)
+* fn[`length_chars`](/reference/functions/length_chars.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

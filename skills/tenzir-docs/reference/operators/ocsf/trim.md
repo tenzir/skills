@@ -120,6 +120,6 @@ ocsf::trim drop_optional=true, drop_recommended=true
 
 ## See Also
 
-* [`ocsf::cast`](cast.md)
-* [`ocsf::derive`](derive.md)
+* [`ocsf::cast`](/reference/operators/ocsf/cast.md)
+* [`ocsf::derive`](/reference/operators/ocsf/derive.md)
 * [Write a package](../../../tutorials/write-a-package.md)

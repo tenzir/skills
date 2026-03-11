@@ -15,7 +15,7 @@ The connector tries to retrieve the appropriate credentials using Google’s [Ap
 
 Deprecated
 
-`load_google_cloud_pubsub` is deprecated. Use [`from_google_cloud_pubsub`](from_google_cloud_pubsub.md), which preserves event boundaries and supports attaching metadata.
+`load_google_cloud_pubsub` is deprecated. Use [`from_google_cloud_pubsub`](/reference/operators/from_google_cloud_pubsub.md), which preserves event boundaries and supports attaching metadata.
 
 The operator acquires raw bytes from a Google Cloud Pub/Sub subscription.
 
@@ -35,7 +35,7 @@ The default value is `0s`.
 
 ## URI support & integration with `from`
 
-The `load_google_cloud_pubsub` operator can also be used from the [`from`](from.md) operator. For this, the `gcps://` scheme can be used. The URI is then translated:
+The `load_google_cloud_pubsub` operator can also be used from the [`from`](/reference/operators/from.md) operator. For this, the `gcps://` scheme can be used. The URI is then translated:
 
 ```tql
 from "gcps://my_project/my_subscription"
@@ -58,6 +58,6 @@ read_json
 
 ## See Also
 
-* [`from_google_cloud_pubsub`](from_google_cloud_pubsub.md)
-* [`save_google_cloud_pubsub`](save_google_cloud_pubsub.md)
+* [`from_google_cloud_pubsub`](/reference/operators/from_google_cloud_pubsub.md)
+* [`save_google_cloud_pubsub`](/reference/operators/save_google_cloud_pubsub.md)
 * [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

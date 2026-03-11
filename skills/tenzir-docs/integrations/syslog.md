@@ -5,8 +5,8 @@ Tenzir supports parsing and emitting Syslog messages across multiple transport p
 
 Syslog support in Tenzir is powered by two components:
 
-* [`read_syslog`](../reference/operators/read_syslog.md): a parser that turns unstructured Syslog messages into structured events.
-* [`write_syslog`](../reference/operators/write_syslog.md): a printer that transforms structured events into compliant Syslog messages.
+* [`read_syslog`](/reference/operators/read_syslog.md): a parser that turns unstructured Syslog messages into structured events.
+* [`write_syslog`](/reference/operators/write_syslog.md): a printer that transforms structured events into compliant Syslog messages.
 
 Together, these building blocks enable round-trip Syslog processing.
 
@@ -14,7 +14,7 @@ Together, these building blocks enable round-trip Syslog processing.
 
 ### Create a Syslog Server
 
-To receive Syslog messages on a UDP socket, use [`from_udp`](../reference/operators/from_udp.md):
+To receive Syslog messages on a UDP socket, use [`from_udp`](/reference/operators/from_udp.md):
 
 ```tql
 from_udp "0.0.0.0:514"
@@ -22,7 +22,7 @@ this = data.parse_syslog()
 publish "syslog"
 ```
 
-To use TCP instead of UDP, use [`load_tcp`](../reference/operators/load_tcp.md) with [`read_syslog`](../reference/operators/read_syslog.md):
+To use TCP instead of UDP, use [`load_tcp`](/reference/operators/load_tcp.md) with [`read_syslog`](/reference/operators/read_syslog.md):
 
 ```tql
 load_tcp "0.0.0.0:514" {
@@ -41,7 +41,7 @@ If your Syslog messages embed structured formats like CEF, LEEF, or JSON, you ca
 Nov 13 16:00:02 host123 FOO: CEF:0|FORCEPOINT|Firewall|6.6.1|78002|TLS connection state|0|deviceExternalId=Master FW node 1 dvc=10.1.1.40 dvchost=10.1.1.40 msg=TLS: Couldn't establish TLS connection (11, N/A) deviceFacility=Management rt=Jan 17 2020 08:52:09
 ```
 
-When you throw [`read_syslog`](../reference/operators/read_syslog.md) at this line, you’ll get this output:
+When you throw [`read_syslog`](/reference/operators/read_syslog.md) at this line, you’ll get this output:
 
 sample.syslog
 
@@ -57,7 +57,7 @@ sample.syslog
 }
 ```
 
-Note that the `content` field is just a big string. Parse it with [`parse_cef`](../reference/functions/parse_cef.md):
+Note that the `content` field is just a big string. Parse it with [`parse_cef`](/reference/functions/parse_cef.md):
 
 ```tql
 from_file "/tmp/sample.syslog" {
@@ -142,7 +142,7 @@ When receiving syslog over TCP, some implementations use [RFC 6587](https://data
 
 Here, `65` is the byte count of the syslog message that follows.
 
-Tenzir auto-detects octet-counted messages in both [`read_syslog`](../reference/operators/read_syslog.md) for streaming input and [`parse_syslog`](../reference/functions/parse_syslog.md) for parsing individual strings. Use the `octet_counting` parameter to require or disable this behavior.
+Tenzir auto-detects octet-counted messages in both [`read_syslog`](/reference/operators/read_syslog.md) for streaming input and [`parse_syslog`](/reference/functions/parse_syslog.md) for parsing individual strings. Use the `octet_counting` parameter to require or disable this behavior.
 
 ### Check Point structured data compatibility
 
@@ -152,7 +152,7 @@ When a record omits the SD-ID, Tenzir stores the parsed parameters under `struct
 
 ## Emit Events as Syslog
 
-Tenzir also supports **creating** Syslog messages from structured events via [`write_syslog`](../reference/operators/write_syslog.md).
+Tenzir also supports **creating** Syslog messages from structured events via [`write_syslog`](/reference/operators/write_syslog.md).
 
 Here’s a basic example that emits a single Syslog line over UDP:
 
@@ -213,4 +213,4 @@ Output:
 <165>1 2003-10-11T22:14:15.000000Z mymachineexamplecom evntslog - ID47 [exampleSDID@32473 iut="5" eventSource="Applic\\ation" eventID="1011"][examplePriority@32473 class="high"]
 ```
 
-The [`write_syslog`](../reference/operators/write_syslog.md) operator converts the `structured_data` field into a valid [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424) structured block.
+The [`write_syslog`](/reference/operators/write_syslog.md) operator converts the `structured_data` field into a valid [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424) structured block.

@@ -89,8 +89,8 @@ package::list
 
 ## See Also
 
-* [`package::add`](add.md)
-* [`package::remove`](remove.md)
-* [`pipeline::list`](../pipeline/list.md)
+* [`package::add`](/reference/operators/package/add.md)
+* [`package::remove`](/reference/operators/package/remove.md)
+* [`pipeline::list`](/reference/operators/pipeline/list.md)
 * [Install a package](../../../guides/packages/install-a-package.md)
 * [Write a package](../../../tutorials/write-a-package.md)

@@ -15,7 +15,7 @@ Transforms the input event stream to a JSON byte stream.
 
 Newline-Delimited JSON (NDJSON)
 
-Use [`write_ndjson` operator](write_ndjson.md) to write Newline-Delimited JSON.
+Use [`write_ndjson` operator](/reference/operators/write_ndjson.md) to write Newline-Delimited JSON.
 
 ### `strip = bool (optional)`
 
@@ -85,8 +85,8 @@ write_json strip_null_fields=true
 
 ## See Also
 
-* fn[`parse_json`](../functions/parse_json.md)
-* fn[`print_json`](../functions/print_json.md)
-* [`read_json`](read_json.md)
-* [`write_tql`](write_tql.md)
+* fn[`parse_json`](/reference/functions/parse_json.md)
+* fn[`print_json`](/reference/functions/print_json.md)
+* [`read_json`](/reference/operators/read_json.md)
+* [`write_tql`](/reference/operators/write_tql.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

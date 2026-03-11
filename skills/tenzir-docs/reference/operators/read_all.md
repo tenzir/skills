@@ -43,6 +43,6 @@ read_all binary=true
 
 ## See Also
 
-* [`read_delimited`](read_delimited.md)
-* [`read_delimited_regex`](read_delimited_regex.md)
-* [`read_lines`](read_lines.md)
+* [`read_delimited`](/reference/operators/read_delimited.md)
+* [`read_delimited_regex`](/reference/operators/read_delimited_regex.md)
+* [`read_lines`](/reference/operators/read_lines.md)

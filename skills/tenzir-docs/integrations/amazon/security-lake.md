@@ -5,7 +5,7 @@
 
 <!--?xml version="1.0" standalone="no"?-->
 
-Tenzir sends events to Amazon Security Lake using the [`to_amazon_security_lake`](../../reference/operators/to_amazon_security_lake.md) operator.
+Tenzir sends events to Amazon Security Lake using the [`to_amazon_security_lake`](/reference/operators/to_amazon_security_lake.md) operator.
 
 ## Configuration
 
@@ -17,7 +17,7 @@ The current architectural pattern for Amazon Security Lake requires creating one
 /ext/{custom-source-name}/region={region}/accountId={accountID}/eventDay={YYYYMMDD}/
 ```
 
-This architecture naturally leads to deploying one Tenzir pipeline per custom source. The [`to_amazon_security_lake`](../../reference/operators/to_amazon_security_lake.md) operator handles the partitioning according to this structure automatically.
+This architecture naturally leads to deploying one Tenzir pipeline per custom source. The [`to_amazon_security_lake`](/reference/operators/to_amazon_security_lake.md) operator handles the partitioning according to this structure automatically.
 
 ### Custom Source Setup
 

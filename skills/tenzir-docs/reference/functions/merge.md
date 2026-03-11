@@ -72,5 +72,5 @@ select result = merge(x, y)
 
 ## See Also
 
-* fn[`concatenate`](concatenate.md)
+* fn[`concatenate`](/reference/functions/concatenate.md)
 * [Shape records](../../guides/transformation/shape-records.md)

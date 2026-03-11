@@ -54,7 +54,7 @@ Only process files that were modified within the specified duration from the cur
 
 Pipeline to use for parsing the file. By default, this pipeline is derived from the path of the file, and will not only handle parsing but also decompression if applicable.
 
-The pipeline uses the same logic as [`from`](from.md).
+The pipeline uses the same logic as [`from`](/reference/operators/from.md).
 
 ## Examples
 
@@ -94,8 +94,8 @@ from_file "/logs/*.json", max_age=1h
 
 ## See Also
 
-* [`from`](from.md)
-* [`load_file`](load_file.md)
+* [`from`](/reference/operators/from.md)
+* [`load_file`](/reference/operators/load_file.md)
 * [Enrich with network inventory](../../guides/enrichment/enrich-with-network-inventory.md)
 * [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
 * [Import into a node](../../guides/edge-storage/import-into-a-node.md)

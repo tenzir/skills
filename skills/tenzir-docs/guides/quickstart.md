@@ -54,13 +54,13 @@ export
 taste
 ```
 
-This pipelines does the following: [`export`](../reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](../reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
+This pipelines does the following: [`export`](/reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](/reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
 
 Auto-completion of pipelines
 
 If you look carefully, you’ll note that the above pipeline doesn’t end with an *output operator*. Just an input (`export`) and a transformation (`taste`). But for a [pipeline](../explanations/pipeline.md) to be well-formed, it must have at least one input and one output. Otherwise data would leak somewhere! So what’s happening?
 
-If you don’t write an output operator in the Explorer, the platform auto-completes the [`serve`](../reference/operators/serve.md) operator, turning your pipeline into a tiny REST API, so that platform can extract events from it and show them to you in the browser.
+If you don’t write an output operator in the Explorer, the platform auto-completes the [`serve`](/reference/operators/serve.md) operator, turning your pipeline into a tiny REST API, so that platform can extract events from it and show them to you in the browser.
 
 Also note the **Schemas** pane. It gives you an overview of how heterogeneous the data is. Click on a schema to zoom into all events having the same shape. Later, you’ll learn to normalize the data to make it more homogeneous by reducing the number of unique schemas.
 
@@ -145,11 +145,11 @@ Here we filter on event metadata, starting with `@`. The special `@name` field i
 
 A few notes:
 
-* The [`set`](../reference/operators/set.md) operator performs an assignment and creates new fields.
+* The [`set`](/reference/operators/set.md) operator performs an assignment and creates new fields.
 * Because `set` is *the* most frequently used operator, it is “implied” and you just write `x = y` instead of `set x = y`. We generally recommend doing so and write it out only out for didactic reasons.
 * You can use `set` to assign schema names, e.g., `@name = "new-schema-name"`.
-* [`select`](../reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
-* As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](../reference/functions/to_lower.md), which makes working with values a breeze.
+* [`select`](/reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
+* As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](/reference/functions/to_lower.md), which makes working with values a breeze.
 
 Now what do you do with this normalized data from these two data sources? It just has a new shape, so what? Read on, we’ll show you next.
 
@@ -157,7 +157,7 @@ Now what do you do with this normalized data from these two data sources? It jus
 
 The above example starts with a specific input operator (`export`) and no output operator (we used the Explorer). This is useful for explorative data analysis, but in practice you’d want these sorts of transformations to run continuously. In fact, what you really want is a streaming pipeline that accepts data, potentially from multiple sources, and exposes its results in a way so that you can route it to multiple destinations.
 
-To this end, nodes have a publish/subscribe feature, allowing you to efficiently connect pipelines using static topics (and very soon dynamic routes). The [`publish`](../reference/operators/publish.md) and [`subscribe`](../reference/operators/subscribe.md) operators are all you need for this. The typical pipeline pattern for composable pipelines looks like this:
+To this end, nodes have a publish/subscribe feature, allowing you to efficiently connect pipelines using static topics (and very soon dynamic routes). The [`publish`](/reference/operators/publish.md) and [`subscribe`](/reference/operators/subscribe.md) operators are all you need for this. The typical pipeline pattern for composable pipelines looks like this:
 
 ```tql
 subscribe "in"

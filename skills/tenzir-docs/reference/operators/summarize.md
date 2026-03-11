@@ -143,10 +143,10 @@ summarize count(this), severity, options={frequency: 10s, mode: "update"}
 
 ## See Also
 
-* [`rare`](rare.md)
-* [`top`](top.md)
-* fn[`sum`](../functions/sum.md)
-* fn[`count`](../functions/count.md)
+* [`rare`](/reference/operators/rare.md)
+* [`top`](/reference/operators/top.md)
+* fn[`sum`](/reference/functions/sum.md)
+* fn[`count`](/reference/functions/count.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

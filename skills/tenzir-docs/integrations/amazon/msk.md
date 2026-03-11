@@ -5,13 +5,13 @@
 
 ## Sending and Receiving
 
-Tenzir’s Kafka operators [`from_kafka`](../../reference/operators/from_kafka.md) and [`to_kafka`](../../reference/operators/to_kafka.md) can send and receive events from Amazon MSK Clusters.
+Tenzir’s Kafka operators [`from_kafka`](/reference/operators/from_kafka.md) and [`to_kafka`](/reference/operators/to_kafka.md) can send and receive events from Amazon MSK Clusters.
 
 ## Authentication
 
 Provisioned MSK Clusters support different authentication mechanisms such as mTLS, SASL/SCRAM, IAM etc. However Serverless MSK instances currently only support IAM Authentication.
 
-The [`from_kafka`](../../reference/operators/from_kafka.md) and [`to_kafka`](../../reference/operators/to_kafka.md) operators can authenticate with MSK using AWS IAM by simply specifying the `aws_iam` option with a record of configuration values such as:
+The [`from_kafka`](/reference/operators/from_kafka.md) and [`to_kafka`](/reference/operators/to_kafka.md) operators can authenticate with MSK using AWS IAM by simply specifying the `aws_iam` option with a record of configuration values such as:
 
 ```tql
 from_kafka "kafkaesque-data", aws_iam={region: "eu-west-1"}, options={

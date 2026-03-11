@@ -1,21 +1,21 @@
 # Read and watch files
 
 
-This guide shows you how to read files and monitor directories using the [`from_file`](../../reference/operators/from_file.md) operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
+This guide shows you how to read files and monitor directories using the [`from_file`](/reference/operators/from_file.md) operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
 
 Transitioning from legacy operators
 
-We designed the [`from_file`](../../reference/operators/from_file.md) operator to replace the existing [`load_file`](../../reference/operators/load_file.md), [`load_s3`](../../reference/operators/load_s3.md), and [`load_gcs`](../../reference/operators/load_gcs.md) operators. While we still support these legacy operators, [`from_file`](../../reference/operators/from_file.md) provides a more unified and feature-rich approach to file ingestion.
+We designed the [`from_file`](/reference/operators/from_file.md) operator to replace the existing [`load_file`](/reference/operators/load_file.md), [`load_s3`](/reference/operators/load_s3.md), and [`load_gcs`](/reference/operators/load_gcs.md) operators. While we still support these legacy operators, [`from_file`](/reference/operators/from_file.md) provides a more unified and feature-rich approach to file ingestion.
 
-We plan to add some advanced features from the legacy operators (such as file tailing, anonymous S3 access, and Unix domain socket support) in future releases of [`from_file`](../../reference/operators/from_file.md).
+We plan to add some advanced features from the legacy operators (such as file tailing, anonymous S3 access, and Unix domain socket support) in future releases of [`from_file`](/reference/operators/from_file.md).
 
 ## Basic file reading
 
-The [`from_file`](../../reference/operators/from_file.md) operator handles various file types and formats. Start with these fundamental patterns for reading individual files.
+The [`from_file`](/reference/operators/from_file.md) operator handles various file types and formats. Start with these fundamental patterns for reading individual files.
 
 ### Single files
 
-To read a single file, specify the path to the [`from_file`](../../reference/operators/from_file.md) operator:
+To read a single file, specify the path to the [`from_file`](/reference/operators/from_file.md) operator:
 
 ```tql
 from_file "/path/to/file.json"

@@ -45,7 +45,7 @@ Create a directory named `sslbl` and add the standard package layout:
 
 ## Add the package manifest
 
-The [`package.yaml`](https://docs.tenzir.com/packages/sslbl/package.yaml) is the **package manifest**. I contains descriptive metadata, but also the definitions of contexts and inputs, as we shall see below.
+The [`package.yaml`](/packages/sslbl/package.yaml) is the **package manifest**. I contains descriptive metadata, but also the definitions of contexts and inputs, as we shall see below.
 
 ### Add descriptive metadata
 
@@ -147,7 +147,7 @@ This pipeline translates the original feed into this shape:
 
 OCSF Verbosity
 
-You may notice that this shape is a lot more verbose than the original event. Don’t worry, it is absolutely normal when upgrading your raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf::trim`](../reference/operators/ocsf/trim.md) operator or manually by [`drop`](../reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
+You may notice that this shape is a lot more verbose than the original event. Don’t worry, it is absolutely normal when upgrading your raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf::trim`](/reference/operators/ocsf/trim.md) operator or manually by [`drop`](/reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
 
 We’re not done yet. Let’s create one final operator that wraps a single fetch into an OCSF event that describes a single collection of IoCs: the [OSINT Inventory Info](https://schema.ocsf.io/1.6.0/classes/osint_inventory_info) event.
 
@@ -207,7 +207,7 @@ For example, an operator that tags events with threat metadata could accept a co
 
 With our operators in place, we can now create deployable pipelines. Packages that include pipelines execute on installation, which is useful for background tasks like periodic data fetching. To ship a pipeline as a template that users must explicitly enable, add `disabled: true` to the frontmatter. See [Add pipelines](../guides/packages/add-pipelines.md) for all frontmatter options.
 
-The `sslbl::fetch` operator just downloads the blacklist entries once. But the remote data source changes periodically, and we want to always work with the latest version. So we turn the one-shot download into a continuous data feed using the [`every`](../reference/operators/every.md) operator:
+The `sslbl::fetch` operator just downloads the blacklist entries once. But the remote data source changes periodically, and we want to always work with the latest version. So we turn the one-shot download into a continuous data feed using the [`every`](/reference/operators/every.md) operator:
 
 sslbl/pipelines/publish-as-ocsf.tql
 
@@ -229,7 +229,7 @@ sslbl::ocsf::to_osint_inventory_info
 publish "ocsf"
 ```
 
-This is a closed pipeline, meaning, it has an input operator ([`every`](../reference/operators/every.md)) and an output operator ([`publish`](../reference/operators/publish.md)). The pipeline produces a new OCSF Inventory Info event every hour and publishes it to the `ocsf` topic so that other pipelines in the same node can consume it. This is a best-practice design pattern to expose data that you may reuse multiple times.
+This is a closed pipeline, meaning, it has an input operator ([`every`](/reference/operators/every.md)) and an output operator ([`publish`](/reference/operators/publish.md)). The pipeline produces a new OCSF Inventory Info event every hour and publishes it to the `ocsf` topic so that other pipelines in the same node can consume it. This is a best-practice design pattern to expose data that you may reuse multiple times.
 
 But instead of publishing the data as OCSF events and subscribing to it afterwards, we can directly update the lookup table from the plain OSINT objects:
 
@@ -412,7 +412,7 @@ As expected, a valid OCSF OSINT object. Let’s confirm this as our new baseline
 uvx tenzir-test --update
 ```
 
-This created a [`to_osint.txt`](https://docs.tenzir.com/packages/sslbl/tests/ocsf/to_osint.txt) file next to the [`to_osint.tql`](https://docs.tenzir.com/packages/sslbl/tests/ocsf/to_osint.tql.md) file. Future runs will use this baseline for comparisons.
+This created a [`to_osint.txt`](/packages/sslbl/tests/ocsf/to_osint.txt) file next to the [`to_osint.tql`](/packages/sslbl/tests/ocsf/to_osint.tql.md) file. Future runs will use this baseline for comparisons.
 
 Continue to test the remaining operators, or add additional tests for some examples.
 
@@ -433,7 +433,7 @@ The suite updates the lookup table and verifies the expected values. See [Test p
 
 Creating a package is rarely a one-time act. Vendors make upstream changes, you find corner cases, and users request new features. Do your users a favor and maintain a changelog!
 
-From the package directory, create a new entry with [`tenzir-ship`](../reference/ship-framework.md):
+From the package directory, create a new entry with [`tenzir-ship`](/reference/ship-framework.md):
 
 ```sh
 uvx tenzir-ship add

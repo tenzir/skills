@@ -682,5 +682,5 @@ select timestamp, port, handle, reads, bytes
 
 ## See Also
 
-* [`diagnostics`](diagnostics.md)
+* [`diagnostics`](/reference/operators/diagnostics.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

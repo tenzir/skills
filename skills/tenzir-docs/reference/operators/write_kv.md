@@ -71,7 +71,7 @@ x.y.z=0 y.y2=42 a=string
 
 ## See Also
 
-* fn[`parse_kv`](../functions/parse_kv.md)
-* fn[`print_kv`](../functions/print_kv.md)
-* [`read_kv`](read_kv.md)
-* [`write_lines`](write_lines.md)
+* fn[`parse_kv`](/reference/functions/parse_kv.md)
+* fn[`print_kv`](/reference/functions/print_kv.md)
+* [`read_kv`](/reference/operators/read_kv.md)
+* [`write_lines`](/reference/operators/write_lines.md)

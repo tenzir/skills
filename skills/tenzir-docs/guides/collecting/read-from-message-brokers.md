@@ -5,7 +5,7 @@ This guide shows you how to receive events from message brokers using TQL. Youâ€
 
 ## Apache Kafka
 
-[Apache Kafka](../../integrations/kafka.md) is a distributed message broker commonly used for high-throughput event streaming. Use [`from_kafka`](../../reference/operators/from_kafka.md) to subscribe to topics.
+[Apache Kafka](../../integrations/kafka.md) is a distributed message broker commonly used for high-throughput event streaming. Use [`from_kafka`](/reference/operators/from_kafka.md) to subscribe to topics.
 
 ### Subscribe to a topic
 
@@ -56,7 +56,7 @@ from_kafka "security-logs",
 
 ## AMQP (RabbitMQ)
 
-[AMQP](../../integrations/amqp.md) is supported by brokers like RabbitMQ. Use AMQP URLs with [`from`](../../reference/operators/from.md) or [`load_amqp`](../../reference/operators/load_amqp.md) directly.
+[AMQP](../../integrations/amqp.md) is supported by brokers like RabbitMQ. Use AMQP URLs with [`from`](/reference/operators/from.md) or [`load_amqp`](/reference/operators/load_amqp.md) directly.
 
 ### Receive from a queue
 
@@ -68,7 +68,7 @@ The URL structure is `amqp://user:password@host:port/vhost`. Configure additiona
 
 ## Amazon SQS
 
-[Amazon SQS](../../integrations/amazon/sqs.md) is a managed message queue. Use [`load_sqs`](../../reference/operators/load_sqs.md) or the `sqs://` URL scheme.
+[Amazon SQS](../../integrations/amazon/sqs.md) is a managed message queue. Use [`load_sqs`](/reference/operators/load_sqs.md) or the `sqs://` URL scheme.
 
 ### Receive from a queue
 
@@ -92,7 +92,7 @@ SQS automatically deletes messages after successful receipt.
 
 ## Google Cloud Pub/Sub
 
-[Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md) provides managed messaging for Google Cloud. Use [`from_google_cloud_pubsub`](../../reference/operators/from_google_cloud_pubsub.md) to subscribe.
+[Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md) provides managed messaging for Google Cloud. Use [`from_google_cloud_pubsub`](/reference/operators/from_google_cloud_pubsub.md) to subscribe.
 
 ### Receive from a subscription
 

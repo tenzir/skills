@@ -89,5 +89,5 @@ from {
 
 ## See Also
 
-* fn[`has`](has.md)
-* fn[`length`](length.md)
+* fn[`has`](/reference/functions/has.md)
+* fn[`length`](/reference/functions/length.md)

@@ -131,5 +131,5 @@ from_kafka "alerts", exit=true
 
 ## See Also
 
-* [`to_kafka`](to_kafka.md)
+* [`to_kafka`](/reference/operators/to_kafka.md)
 * [Kafka](../../integrations/kafka.md)

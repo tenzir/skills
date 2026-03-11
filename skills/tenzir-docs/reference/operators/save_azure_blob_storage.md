@@ -54,5 +54,5 @@ save_azure_blob_storage "abfss://tenzirdev@container/obj.json"
 
 ## See Also
 
-* [`load_azure_blob_storage`](load_azure_blob_storage.md)
+* [`load_azure_blob_storage`](/reference/operators/load_azure_blob_storage.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

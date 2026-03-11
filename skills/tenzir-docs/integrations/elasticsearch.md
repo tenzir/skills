@@ -5,9 +5,9 @@
 
 When sending data to Elasticsearch, Tenzir uses the [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html) and attempts to maximally batch events for throughput, accumulating multiple events before shipping them within a single API call. You can control batching behavior with the `max_content_length` and `send_timeout` options.
 
-For more details, see the documentation for the [`to_opensearch`](../reference/operators/to_opensearch.md) operator.
+For more details, see the documentation for the [`to_opensearch`](/reference/operators/to_opensearch.md) operator.
 
-Tenzir can also present an Elasticsearch-compatible REST API via the [`from_opensearch`](../reference/operators/from_opensearch.md) operator.
+Tenzir can also present an Elasticsearch-compatible REST API via the [`from_opensearch`](/reference/operators/from_opensearch.md) operator.
 
 ## Examples
 

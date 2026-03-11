@@ -152,7 +152,7 @@ Tenzir processes log messages in a dedicated thread, which by default buffers up
 
 ## Caching
 
-Tenzir Nodes cache results for results for pipelines used in the Tenzir Platform’s Explorer. Internally, this utilizes the [`cache`](../../reference/operators/cache.md) operator.
+Tenzir Nodes cache results for results for pipelines used in the Tenzir Platform’s Explorer. Internally, this utilizes the [`cache`](/reference/operators/cache.md) operator.
 
 Caches have two primary tuning knobs:
 

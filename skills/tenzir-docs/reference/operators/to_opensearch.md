@@ -114,6 +114,6 @@ to_opensearch "localhost:9200", action="create", index="main"
 
 ## See Also
 
-* [`from_opensearch`](from_opensearch.md)
+* [`from_opensearch`](/reference/operators/from_opensearch.md)
 * [OpenSearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)

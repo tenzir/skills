@@ -7,4 +7,3 @@ The **reference** has nitty-gritty technical descriptions of how Tenzir works. I
 
 - [Language (TQL)](reference/types.md)
 - [Tools](reference/test-framework.md)
-- [Workflows](reference/workflows/create-parser-package.md)

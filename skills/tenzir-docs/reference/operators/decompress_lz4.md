@@ -24,8 +24,8 @@ import
 
 ## See Also
 
-* [`compress_lz4`](compress_lz4.md)
-* [`decompress_brotli`](decompress_brotli.md)
-* [`decompress_bz2`](decompress_bz2.md)
-* [`decompress_gzip`](decompress_gzip.md)
-* [`decompress_zstd`](decompress_zstd.md)
+* [`compress_lz4`](/reference/operators/compress_lz4.md)
+* [`decompress_brotli`](/reference/operators/decompress_brotli.md)
+* [`decompress_bz2`](/reference/operators/decompress_bz2.md)
+* [`decompress_gzip`](/reference/operators/decompress_gzip.md)
+* [`decompress_zstd`](/reference/operators/decompress_zstd.md)

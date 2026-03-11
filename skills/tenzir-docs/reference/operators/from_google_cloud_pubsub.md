@@ -65,5 +65,5 @@ from_google_cloud_pubsub project_id="amazing-project-123456", subscription_id="m
 
 ## See Also
 
-* [`to_google_cloud_pubsub`](to_google_cloud_pubsub.md)
+* [`to_google_cloud_pubsub`](/reference/operators/to_google_cloud_pubsub.md)
 * [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

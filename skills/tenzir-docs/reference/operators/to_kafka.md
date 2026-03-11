@@ -119,5 +119,5 @@ to_kafka "metrics", message=this.print_json(), key="server-01"
 
 ## See Also
 
-* [`from_kafka`](from_kafka.md)
+* [`from_kafka`](/reference/operators/from_kafka.md)
 * [Kafka](../../integrations/kafka.md)

@@ -15,9 +15,9 @@ The following table lists existing XSV configurations:
 
 | Format                                     | Field Separator | List Separator | Null Value |
 | ------------------------------------------ | :-------------: | :------------: | :--------: |
-| [`csv`](write_csv.md) |       `,`       |       `;`      |    empty   |
-| [`ssv`](write_ssv.md) |    `<space>`    |       `,`      |     `-`    |
-| [`tsv`](write_tsv.md) |       `\t`      |       `,`      |     `-`    |
+| [`csv`](/reference/operators/write_csv.md) |       `,`       |       `;`      |    empty   |
+| [`ssv`](/reference/operators/write_ssv.md) |    `<space>`    |       `,`      |     `-`    |
+| [`tsv`](/reference/operators/write_tsv.md) |       `\t`      |       `,`      |     `-`    |
 
 Note that nested records have dot-separated field names.
 
@@ -51,8 +51,8 @@ x/y/z
 
 ## See Also
 
-* fn[`print_xsv`](../functions/print_xsv.md)
-* [`write_csv`](write_csv.md)
-* [`write_lines`](write_lines.md)
-* [`write_ssv`](write_ssv.md)
-* [`write_tsv`](write_tsv.md)
+* fn[`print_xsv`](/reference/functions/print_xsv.md)
+* [`write_csv`](/reference/operators/write_csv.md)
+* [`write_lines`](/reference/operators/write_lines.md)
+* [`write_ssv`](/reference/operators/write_ssv.md)
+* [`write_tsv`](/reference/operators/write_tsv.md)

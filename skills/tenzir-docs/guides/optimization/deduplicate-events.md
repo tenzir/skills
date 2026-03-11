@@ -1,7 +1,7 @@
 # Deduplicate events
 
 
-The [`deduplicate`](../../reference/operators/deduplicate.md) operator provides a powerful mechanism to remove duplicate events in a pipeline.
+The [`deduplicate`](/reference/operators/deduplicate.md) operator provides a powerful mechanism to remove duplicate events in a pipeline.
 
 There are numerous use cases for deduplication, such as reducing noise, optimizing costs and making threat detection and response more efficient.
 
@@ -176,7 +176,7 @@ A high suppression count indicates persistent activity from a specific source, s
 
 1. **Choose fields carefully**: Deduplicate on fields that truly identify unique events for your use case. Too few fields may drop important events; too many may not deduplicate effectively.
 
-2. **Consider order**: The [`deduplicate`](../../reference/operators/deduplicate.md) operator keeps the *first* occurrence. If you need the latest, consider using [`reverse`](../../reference/operators/reverse.md) first:
+2. **Consider order**: The [`deduplicate`](/reference/operators/deduplicate.md) operator keeps the *first* occurrence. If you need the latest, consider using [`reverse`](/reference/operators/reverse.md) first:
 
    ```tql
    reverse | deduplicate user | reverse
@@ -184,7 +184,7 @@ A high suppression count indicates persistent activity from a specific source, s
 
 3. **Use timeout wisely**: For streaming data, `create_timeout` prevents memory from growing indefinitely while still reducing noise. Choose durations based on your threat detection windows.
 
-4. **Combine with other operators**: Often you’ll want to filter ([`where`](../../reference/operators/where.md)) or transform ([`set`](../../reference/operators/set.md)) data before deduplication to normalize keys:
+4. **Combine with other operators**: Often you’ll want to filter ([`where`](/reference/operators/where.md)) or transform ([`set`](/reference/operators/set.md)) data before deduplication to normalize keys:
 
    ```tql
    normalized_ip = src_ip.string()

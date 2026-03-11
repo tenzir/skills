@@ -15,7 +15,7 @@ Reads events from a [Parquet](https://parquet.apache.org/) byte stream.
 
 MMAP Parsing
 
-When using theis with the [`load_file`](load_file.md) operator, we recommend passing the `mmap=true` option to `load_file` to give the parser full control over the reads, which leads to better performance and memory usage.
+When using theis with the [`load_file`](/reference/operators/load_file.md) operator, we recommend passing the `mmap=true` option to `load_file` to give the parser full control over the reads, which leads to better performance and memory usage.
 
 Limitation
 
@@ -32,6 +32,6 @@ read_parquet
 
 ## See Also
 
-* [`read_feather`](read_feather.md)
-* [`to_hive`](to_hive.md)
-* [`write_parquet`](write_parquet.md)
+* [`read_feather`](/reference/operators/read_feather.md)
+* [`to_hive`](/reference/operators/to_hive.md)
+* [`write_parquet`](/reference/operators/write_parquet.md)

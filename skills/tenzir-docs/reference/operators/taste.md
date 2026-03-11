@@ -37,6 +37,6 @@ taste 1
 
 ## See Also
 
-* [`export`](export.md)
-* [`head`](head.md)
+* [`export`](/reference/operators/export.md)
+* [`head`](/reference/operators/head.md)
 * [Quickstart](../../guides/quickstart.md)

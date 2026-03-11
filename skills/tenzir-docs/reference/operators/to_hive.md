@@ -77,7 +77,7 @@ to_hive "s3://my-bucket/some/subdirectory",
 
 ## See Also
 
-* [`read_parquet`](read_parquet.md)
-* [`write_bitz`](write_bitz.md)
-* [`write_feather`](write_feather.md)
-* [`write_parquet`](write_parquet.md)
+* [`read_parquet`](/reference/operators/read_parquet.md)
+* [`write_bitz`](/reference/operators/write_bitz.md)
+* [`write_feather`](/reference/operators/write_feather.md)
+* [`write_parquet`](/reference/operators/write_parquet.md)

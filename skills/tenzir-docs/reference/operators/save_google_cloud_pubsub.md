@@ -15,7 +15,7 @@ The connector tries to retrieve the appropriate credentials using Google’s [Ap
 
 Deprecated
 
-`save_google_cloud_pubsub` is deprecated. Use [`to_google_cloud_pubsub`](to_google_cloud_pubsub.md) to send one message per event.
+`save_google_cloud_pubsub` is deprecated. Use [`to_google_cloud_pubsub`](/reference/operators/to_google_cloud_pubsub.md) to send one message per event.
 
 The operator publishes bytes to a Google Cloud Pub/Sub topic.
 
@@ -29,7 +29,7 @@ The topic to publish to.
 
 ## URI support & integration with `from`
 
-The `save_google_cloud_pubsub` operator can also be used from the [`to`](to.md) operator. For this, the `gcps://` scheme can be used. The URI is then translated:
+The `save_google_cloud_pubsub` operator can also be used from the [`to`](/reference/operators/to.md) operator. For this, the `gcps://` scheme can be used. The URI is then translated:
 
 ```tql
 to "gcps://my_project/my_topic"
@@ -54,6 +54,6 @@ save_google_cloud_pubsub project_id="amazing-project-123456", topic_id="alerts-t
 
 ## See Also
 
-* [`load_google_cloud_pubsub`](load_google_cloud_pubsub.md)
-* [`to_google_cloud_pubsub`](to_google_cloud_pubsub.md)
+* [`load_google_cloud_pubsub`](/reference/operators/load_google_cloud_pubsub.md)
+* [`to_google_cloud_pubsub`](/reference/operators/to_google_cloud_pubsub.md)
 * [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

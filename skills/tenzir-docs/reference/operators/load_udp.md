@@ -11,7 +11,7 @@ load_udp endpoint:str, [connect=bool, insert_newlines=bool]
 
 Loads bytes from a UDP socket. The operator defaults to creating a socket in listening mode. Use `connect=true` if the operator should initiate the connection instead.
 
-When you have a socket in listening mode, use `0.0.0.0` to accept connections on all interfaces. The [`nics`](nics.md) operator lists all all available interfaces.
+When you have a socket in listening mode, use `0.0.0.0` to accept connections on all interfaces. The [`nics`](/reference/operators/nics.md) operator lists all all available interfaces.
 
 ### `endpoint: str`
 
@@ -42,5 +42,5 @@ import
 
 ## See Also
 
-* [`save_udp`](save_udp.md)
+* [`save_udp`](/reference/operators/save_udp.md)
 * [UDP](../../integrations/udp.md)

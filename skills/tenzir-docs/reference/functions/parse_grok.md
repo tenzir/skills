@@ -186,5 +186,5 @@ output.dur = output.dur * 1s
 
 ## See Also
 
-* [`read_grok`](../operators/read_grok.md)
+* [`read_grok`](/reference/operators/read_grok.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

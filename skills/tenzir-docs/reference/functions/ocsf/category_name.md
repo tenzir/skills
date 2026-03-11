@@ -15,4 +15,4 @@ The `category_uid` for which `category_name` should be returned.
 
 ## See Also
 
-* fn[`ocsf::category_uid`](category_uid.md)
+* fn[`ocsf::category_uid`](/reference/functions/ocsf/category_uid.md)

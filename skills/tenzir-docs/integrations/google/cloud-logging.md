@@ -7,7 +7,7 @@
 
 ### Send an event to Google Cloud Logging
 
-The easiest way to send data to Cloud Logging is via Google [Applciation Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials). Assuming you have configured your node so that it finds the credentials, you can pipe any data to the [`to_google_cloud_logging`](../../reference/operators/to_google_cloud_logging.md) operator:
+The easiest way to send data to Cloud Logging is via Google [Applciation Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials). Assuming you have configured your node so that it finds the credentials, you can pipe any data to the [`to_google_cloud_logging`](/reference/operators/to_google_cloud_logging.md) operator:
 
 ```tql
 from {

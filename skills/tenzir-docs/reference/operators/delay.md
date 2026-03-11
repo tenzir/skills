@@ -75,5 +75,5 @@ delay ts, start=now()+2h
 
 ## See Also
 
-* [`timeshift`](timeshift.md)
+* [`timeshift`](/reference/operators/timeshift.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

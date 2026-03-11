@@ -19,9 +19,9 @@ The following table lists existing XSV configurations:
 
 | Format                                     | Field Separator | List Separator | Null Value |
 | ------------------------------------------ | :-------------: | :------------: | :--------: |
-| [`csv`](parse_csv.md) |       `,`       |       `;`      |    empty   |
-| [`ssv`](parse_ssv.md) |    `<space>`    |       `,`      |     `-`    |
-| [`tsv`](parse_tsv.md) |       `\t`      |       `,`      |     `-`    |
+| [`csv`](/reference/functions/parse_csv.md) |       `,`       |       `;`      |    empty   |
+| [`ssv`](/reference/functions/parse_ssv.md) |    `<space>`    |       `,`      |     `-`    |
+| [`tsv`](/reference/functions/parse_tsv.md) |       `\t`      |       `,`      |     `-`    |
 
 ### `header = list<string>|string`
 
@@ -175,7 +175,7 @@ output = input.parse_xsv(
 
 ## See Also
 
-* [`read_xsv`](../operators/read_xsv.md)
-* fn[`parse_csv`](parse_csv.md)
-* fn[`parse_ssv`](parse_ssv.md)
-* fn[`parse_tsv`](parse_tsv.md)
+* [`read_xsv`](/reference/operators/read_xsv.md)
+* fn[`parse_csv`](/reference/functions/parse_csv.md)
+* fn[`parse_ssv`](/reference/functions/parse_ssv.md)
+* fn[`parse_tsv`](/reference/functions/parse_tsv.md)

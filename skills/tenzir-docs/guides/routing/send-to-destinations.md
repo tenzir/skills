@@ -144,10 +144,10 @@ to_kafka f"events.{event_type}", message=this.print_json()
 
 * [Load-balance pipelines](load-balance-pipelines.md)
 * [Split and merge streams](split-and-merge-streams.md)
-* [`to_kafka`](../../reference/operators/to_kafka.md)
-* [`to_splunk`](../../reference/operators/to_splunk.md)
-* [`to_opensearch`](../../reference/operators/to_opensearch.md)
-* [`fork`](../../reference/operators/fork.md)
+* [`to_kafka`](/reference/operators/to_kafka.md)
+* [`to_splunk`](/reference/operators/to_splunk.md)
+* [`to_opensearch`](/reference/operators/to_opensearch.md)
+* [`fork`](/reference/operators/fork.md)
 
 ## Contents
 
