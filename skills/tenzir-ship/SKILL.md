@@ -1,6 +1,14 @@
 ---
 name: tenzir-ship
-description: Use when adding changelog entries, creating release notes, cutting releases, and publishing them to GitHub.
+description: >-
+  Use when adding changelog entries, creating release notes, cutting releases,
+  publishing them to GitHub, or when the user says "release this", "ship it",
+  "add a changelog entry", "what changed", "prepare a release", or "bump the
+  version." Also use for any release engineering task involving tenzir-ship.
+metadata:
+  requires:
+    skills:
+      - technical-writing
 ---
 
 # tenzir-ship

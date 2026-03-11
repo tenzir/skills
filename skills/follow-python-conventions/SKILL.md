@@ -3,7 +3,9 @@ name: follow-python-conventions
 description: >-
   Tenzir Python coding standards and tooling workflow. Use when editing Python
   code, running `uv`, `ruff`, `mypy`, or `pytest`, working with
-  `pyproject.toml` or `uv.lock`, or setting up a Tenzir Python project.
+  `pyproject.toml` or `uv.lock`, or setting up a Tenzir Python project. Also
+  use when the user asks how to structure a new Tenzir Python project, set up
+  linting, or asks about Python best practices in the Tenzir context.
 ---
 
 # Follow Python Conventions

@@ -3,7 +3,10 @@ name: update-documentation
 description: >-
   Coordinate docs.tenzir.com updates alongside code changes. Use when preparing
   the `.docs/` checkout, creating a matching docs branch, opening a
-  `tenzir/docs` pull request, or cross-linking docs and code PRs.
+  `tenzir/docs` pull request, or cross-linking docs and code PRs. Also use when
+  the user mentions "update the docs", "docs PR", ".docs/", or when a code
+  change affects user-facing behavior that should be reflected on
+  docs.tenzir.com.
 metadata:
   requires:
     skills:
@@ -24,7 +27,8 @@ Handle the operational workflow around docs.tenzir.com changes.
    documentation guidance and conventions.
 4. Run relevant documentation checks if the docs repository provides them.
 5. File a `tenzir/docs` pull request from `.docs/`.
-6. Cross-link the pull requests:
+6. Cross-link the pull requests (see also the `create-pull-requests` skill for
+   the code-side PR workflow):
    - In the docs PR, add a `Functional PRs` section linking the main PR.
    - In the main PR, add a `Documentation PR` section linking the docs PR.
 7. Summarize what changed and note any follow-up work.

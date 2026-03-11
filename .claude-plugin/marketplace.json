@@ -1,29 +1,24 @@
 {
   "plugins": [
     {
-      "name": "Development lifecycle",
+      "name": "Tenzir",
+      "skills": ["./skills/ocsf", "./skills/tenzir-docs"]
+    },
+    {
+      "name": "Engineering",
       "skills": [
         "./skills/commit-changes",
         "./skills/create-pull-requests",
         "./skills/follow-python-conventions",
         "./skills/review-changes",
-        "./skills/technical-writing",
-        "./skills/tenzir-ship"
-      ]
-    },
-    {
-      "name": "Data models",
-      "skills": [
-        "./skills/ocsf"
-      ]
-    },
-    {
-      "name": "Tenzir engineering",
-      "skills": [
         "./skills/tenzir-design-system",
-        "./skills/tenzir-docs",
+        "./skills/tenzir-ship",
         "./skills/update-documentation"
       ]
+    },
+    {
+      "name": "General",
+      "skills": ["./skills/technical-writing"]
     }
   ]
 }

@@ -19,6 +19,32 @@ edited by hand. Change the corresponding script instead, then regenerate.
 
 We use `.claude-plugin/marketplace.json` to put the skills into different groups. This is for `npx skills` to pick this up and _not_ a claude-only mechanism. Every skill directory in `skills/` (that is, every directory containing a `SKILL.md`) must be referenced exactly once in this file.
 
+## Skill cross-references
+
+Skills that compose with other skills must declare the dependency explicitly:
+
+1. **Metadata**: list required skills under `metadata.requires.skills` in the
+   SKILL.md frontmatter so that tooling can resolve the dependency graph.
+2. **Body**: mention the dependent skill by name at the point where delegation
+   happens, so the model knows when and why to load it.
+
+Keep cross-references minimal — only declare a dependency when one skill's
+workflow actively delegates a step to another skill. Do not add a dependency
+just because two skills cover related topics.
+
+## Skill descriptions
+
+Skill descriptions are the primary triggering mechanism. Write them to be
+slightly "pushy": include both what the skill does and the natural phrases a
+user might say when they need it. Descriptions should cover implicit triggers
+(for example, a user saying "ship this" should trigger the pull request skill
+even without the words "pull request").
+
+Do not put tool invocations (specific CLI commands, flags, or API calls) into
+SKILL.md bodies unless the skill is correcting a specific mistake the model
+would otherwise make. Prefer explaining intent and letting the model choose the
+best way to accomplish each step.
+
 ## Validation
 
 Run `skills-ref` across every local skill after changing anything under

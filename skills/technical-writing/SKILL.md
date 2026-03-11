@@ -1,6 +1,12 @@
 ---
 name: technical-writing
-description: Write clear technical documentation. Use when writing docs, README files, API documentation, code comments, user guides, or asking about writing style.
+description: >-
+  Write clear technical documentation following Tenzir's style conventions. Use
+  when writing or editing docs, README files, API documentation, user guides,
+  changelog descriptions, or error messages. Also use when the user asks about
+  writing style, tone, formatting, capitalization rules, inclusive language, or
+  how to structure technical content — even if they don't mention
+  "documentation" explicitly.
 ---
 
 # Technical Writing
