@@ -97,7 +97,7 @@ uvx tenzir-ship add \
 List all unreleased entries:
 
 ```sh
-uvx tenzir-ship show
+uvx tenzir-ship show unreleased
 ```
 
 Show detailed information for a specific entry:
