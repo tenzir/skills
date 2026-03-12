@@ -16,4 +16,4 @@ Please do not publicly mention the security issue until after we have updated th
 
 ## Contact
 
-If you have any questions, please contact us directly at [security@tenzir.com](mailto://security@tenzir.com).
+If you have any questions, please contact us directly at <security@tenzir.com>.
