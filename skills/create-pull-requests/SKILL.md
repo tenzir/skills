@@ -32,3 +32,24 @@ Create pull requests and keep their changelog current.
 
 When doing follow-up edits, ensure that the changelog entries remain in sync
 with the changed functionality.
+
+## PR body
+
+Use this template for the pull request description:
+
+```markdown
+## Problem
+
+<!-- What's broken, missing, or not good enough? -->
+
+## Solution
+
+<!-- What does this PR do about it? -->
+
+## Review
+
+<!-- Where to start, what to watch out for, or how to test. -->
+```
+
+Replace each HTML comment with a brief explanation. A sentence or two per
+section is plenty—the diff speaks for itself.
