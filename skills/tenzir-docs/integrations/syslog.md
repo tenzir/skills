@@ -144,6 +144,10 @@ Here, `65` is the byte count of the syslog message that follows.
 
 Tenzir auto-detects octet-counted messages in both [`read_syslog`](/reference/operators/read_syslog.md) for streaming input and [`parse_syslog`](/reference/functions/parse_syslog.md) for parsing individual strings. Use the `octet_counting` parameter to require or disable this behavior.
 
+### RFC 3164 messages with structured data
+
+Some legacy syslog emitters, such as VMware ESXi, prepend RFC 5424-style structured-data blocks to the message content. Tenzir detects these automatically and extracts the key-value pairs into a `structured_data` field. Events with extracted structured data use the schema `syslog.rfc3164.structured` while ordinary RFC 3164 events keep the `syslog.rfc3164` schema.
+
 ### Check Point structured data compatibility
 
 Some Check Point exports use structured-data syntax that differs from RFC 5424, for example `key:"value"` parameters and semicolon separators. Tenzir supports these variants in both `read_syslog` and `parse_syslog`.
