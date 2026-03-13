@@ -168,22 +168,47 @@ Avoid:
 
 ## Summary
 
-End every review with a short verdict:
+End every review with:
 
-```text
-**Verdict:** <one-line recommendation>
-<count> P1 · <count> P2 · <count> P3 · <count> P4
+1. A bordered summary that includes only the severity counts.
+2. A verdict label.
+3. One to three short, action-oriented bullets that explain the TL;DR.
+
+Use this format:
+
+```markdown
+╭───────────────────────────────────────────╮
+│ 🔴 P1: 0   🟠 P2: 1   🟡 P3: 2   ⚪ P4: 1 │
+╰───────────────────────────────────────────╯
+**Needs changes**:
+- Fix the inconsistent error handling in `src/api.ts`, `src/jobs.ts`, and `src/worker.ts`.
+- Add a retry-path test so this regression does not recur.
+- Merge after the P2 issue is resolved.
 ```
 
-The one-line recommendation should be one of:
+The verdict label should be one of:
 
-- **Ship it** — no findings, or only P4 nits.
-- **Ship with fixes** — P3 or below; nothing blocking.
-- **Needs changes** — at least one P2 that should be resolved before merge.
-- **Blocked** — at least one P1; do not merge.
+- **Ship it**: no findings, or only P4 nits.
+- **Ship with fixes**: P3 or below; nothing blocking.
+- **Needs changes**: at least one P2 that should be resolved before merge.
+- **Blocked**: at least one P1; do not merge.
 
-If cross-cutting themes emerged (e.g., "error handling is inconsistent across
-three files"), call them out in the verdict as a single sentence.
+Write the bullets as a call to action. Prefer concrete next steps over vague
+summaries.
+
+Good:
+- `Add the missing authorization check in the admin route.`
+- `Update the docs to mention the new default timeout.`
+- `Merge after the flaky retry test is fixed.`
+
+Avoid:
+- `Authorization issue.`
+- `Docs need work.`
+- `Some tests are missing.`
+
+If cross-cutting themes emerged (for example, "error handling is inconsistent
+across three files"), use one bullet to name the theme and the remaining
+bullets to say what should happen next.
 
 ## Reviewer Lenses
 
