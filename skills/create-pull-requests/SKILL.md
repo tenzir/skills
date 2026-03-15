@@ -23,15 +23,17 @@ Create pull requests and keep their changelog current.
 1. Ensure changes are committed in coherent units. Use the `commit-changes`
    skill for staging, splitting, and writing commit messages.
 2. Create a pull request from the current worktree branch.
-3. Add and commit a changelog entry. Use the `tenzir-ship` skill for writing
-   and formatting the entry.
+3. Add and commit a changelog entry. Do not create or edit changelog entries
+   manually here; use the `tenzir-ship` skill for generating, formatting, and
+   updating the entry.
 4. If the change affects user-facing behavior documented on docs.tenzir.com,
    follow the `update-documentation` skill to open a companion docs PR and
    cross-link the two PRs.
 5. Push the branch.
 
 When doing follow-up edits, ensure that the changelog entries remain in sync
-with the changed functionality.
+with the changed functionality by routing any entry updates through
+`tenzir-ship` rather than editing changelog files by hand.
 
 ## PR body
 
