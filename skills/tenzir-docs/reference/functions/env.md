@@ -25,5 +25,5 @@ from {x: env("PATH")}
 
 ## See Also
 
-* fn[`config`](/reference/functions/config.md)
-* fn[`secret`](/reference/functions/secret.md)
+* [`config`](/reference/functions/config.md)
+* [`secret`](/reference/functions/secret.md)

@@ -72,6 +72,6 @@ this = unflatten(this)
 
 ## See Also
 
-* fn[`flatten`](/reference/functions/flatten.md)
+* [`flatten`](/reference/functions/flatten.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Reshape complex data](../../guides/transformation/reshape-complex-data.md)

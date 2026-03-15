@@ -33,4 +33,4 @@ encoded = input.encode_base58()
 
 ## See Also
 
-* fn[`decode_base58`](/reference/functions/decode_base58.md)
+* [`decode_base58`](/reference/functions/decode_base58.md)

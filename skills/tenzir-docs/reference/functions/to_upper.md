@@ -25,8 +25,8 @@ from {x: "hello".to_upper()}
 
 ## See Also
 
-* fn[`capitalize`](/reference/functions/capitalize.md)
-* fn[`is_upper`](/reference/functions/is_upper.md)
-* fn[`to_lower`](/reference/functions/to_lower.md)
-* fn[`to_title`](/reference/functions/to_title.md)
+* [`capitalize`](/reference/functions/capitalize.md)
+* [`is_upper`](/reference/functions/is_upper.md)
+* [`to_lower`](/reference/functions/to_lower.md)
+* [`to_title`](/reference/functions/to_title.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

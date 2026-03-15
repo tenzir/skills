@@ -30,8 +30,8 @@ zs = concatenate(xs, ys)
 
 ## See Also
 
-* fn[`append`](/reference/functions/append.md)
-* fn[`merge`](/reference/functions/merge.md)
-* fn[`prepend`](/reference/functions/prepend.md)
-* fn[`zip`](/reference/functions/zip.md)
+* [`append`](/reference/functions/append.md)
+* [`merge`](/reference/functions/merge.md)
+* [`prepend`](/reference/functions/prepend.md)
+* [`zip`](/reference/functions/zip.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

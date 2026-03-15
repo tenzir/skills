@@ -25,6 +25,6 @@ from {x: "hello".ends_with("lo")}
 
 ## See Also
 
-* fn[`starts_with`](/reference/functions/starts_with.md)
+* [`starts_with`](/reference/functions/starts_with.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

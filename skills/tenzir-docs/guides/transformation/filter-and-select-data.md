@@ -7,8 +7,8 @@ Filtering and selecting are fundamental operations when working with data stream
 
 Before we dive in, it’s important to understand a key distinction in TQL:
 
-* **Operators** like [`where`](/reference/operators/where.md), [`select`](/reference/operators/select.md), and [`drop`](/reference/operators/drop.md) work on entire event streams
-* **Functions** like [`starts_with()`](/reference/functions/starts_with.md) or mathematical comparisons work on individual values within events
+* **Operators** like [`where`](/reference/operators/where.md), [`select`](/reference/operators/select.md), and [`drop`](/reference/operators/drop.md) work on entire event streams.
+* **Functions** like [`starts_with`](/reference/functions/starts_with.md) or mathematical comparisons work on individual values within events.
 
 You’ll see both in action throughout this guide.
 
@@ -50,7 +50,7 @@ where status == 200 and size > 1000
 {status: 200, path: "/home", size: 2048}
 ```
 
-You can also use `or` and `not` with functions like [`starts_with()`](/reference/functions/starts_with.md):
+You can also use `or` and `not` with functions like [`starts_with`](/reference/functions/starts_with.md):
 
 ```tql
 from {status: 200, path: "/api/users"},
@@ -66,7 +66,7 @@ where status == 200 or not path.starts_with("/api/m")
 
 ### Using functions in filters
 
-Functions work on values to create more sophisticated filters. For example, [`ends_with()`](/reference/functions/ends_with.md) checks string suffixes:
+Functions work on values to create more sophisticated filters. For example, [`ends_with`](/reference/functions/ends_with.md) checks string suffixes:
 
 ```tql
 from {user: "alice", email: "alice@example.com"},
@@ -82,7 +82,7 @@ where email.ends_with("example.com")
 
 ### Filtering with patterns
 
-Match patterns using regular expressions with [`match_regex()`](/reference/functions/match_regex.md):
+Match patterns using regular expressions with [`match_regex`](/reference/functions/match_regex.md):
 
 ```tql
 from {log: "Error: Connection timeout"},

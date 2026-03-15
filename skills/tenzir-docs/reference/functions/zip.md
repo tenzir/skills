@@ -33,6 +33,6 @@ select zs = zip(xs, ys)
 
 ## See Also
 
-* fn[`concatenate`](/reference/functions/concatenate.md)
-* fn[`map`](/reference/functions/map.md)
+* [`concatenate`](/reference/functions/concatenate.md)
+* [`map`](/reference/functions/map.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

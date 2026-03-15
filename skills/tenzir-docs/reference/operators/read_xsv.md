@@ -165,4 +165,4 @@ Type Conflict
 * [`read_csv`](/reference/operators/read_csv.md)
 * [`read_ssv`](/reference/operators/read_ssv.md)
 * [`read_tsv`](/reference/operators/read_tsv.md)
-* fn[`parse_xsv`](/reference/functions/parse_xsv.md)
+* [`parse_xsv`](/reference/functions/parse_xsv.md)

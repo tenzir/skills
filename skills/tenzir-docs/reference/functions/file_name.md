@@ -25,5 +25,5 @@ from {x: file_name("/path/to/log.json")}
 
 ## See Also
 
-* fn[`parent_dir`](/reference/functions/parent_dir.md)
+* [`parent_dir`](/reference/functions/parent_dir.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

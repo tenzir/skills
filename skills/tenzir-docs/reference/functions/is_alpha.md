@@ -25,9 +25,9 @@ from {x: "hello".is_alpha()}
 
 ## See Also
 
-* fn[`is_alnum`](/reference/functions/is_alnum.md)
-* fn[`is_lower`](/reference/functions/is_lower.md)
-* fn[`is_numeric`](/reference/functions/is_numeric.md)
-* fn[`is_printable`](/reference/functions/is_printable.md)
-* fn[`is_upper`](/reference/functions/is_upper.md)
+* [`is_alnum`](/reference/functions/is_alnum.md)
+* [`is_lower`](/reference/functions/is_lower.md)
+* [`is_numeric`](/reference/functions/is_numeric.md)
+* [`is_printable`](/reference/functions/is_printable.md)
+* [`is_upper`](/reference/functions/is_upper.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

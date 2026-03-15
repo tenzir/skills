@@ -56,8 +56,8 @@ xs = xs.remove("apple")
 
 ## See Also
 
-* fn[`add`](/reference/functions/add.md)
-* fn[`append`](/reference/functions/append.md)
-* fn[`distinct`](/reference/functions/distinct.md)
-* fn[`prepend`](/reference/functions/prepend.md)
+* [`add`](/reference/functions/add.md)
+* [`append`](/reference/functions/append.md)
+* [`distinct`](/reference/functions/distinct.md)
+* [`prepend`](/reference/functions/prepend.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

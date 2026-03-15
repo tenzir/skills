@@ -40,7 +40,7 @@ from {x: from_epoch(50y + 12w + 20m)}
 
 ## See Also
 
-* fn[`now`](/reference/functions/now.md)
-* fn[`since_epoch`](/reference/functions/since_epoch.md)
+* [`now`](/reference/functions/now.md)
+* [`since_epoch`](/reference/functions/since_epoch.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

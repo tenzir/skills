@@ -29,10 +29,10 @@ cap_name = name.capitalize()
 
 Functions explained:
 
-* [`to_lower()`](/reference/functions/to_lower.md) - Converts all characters to lowercase
-* [`to_upper()`](/reference/functions/to_upper.md) - Converts all characters to uppercase
-* [`to_title()`](/reference/functions/to_title.md) - Capitalizes first letter of each word
-* [`capitalize()`](/reference/functions/capitalize.md) - Capitalizes only the first letter
+* [`to_lower`](/reference/functions/to_lower.md) - Converts all characters to lowercase
+* [`to_upper`](/reference/functions/to_upper.md) - Converts all characters to uppercase
+* [`to_title`](/reference/functions/to_title.md) - Capitalizes first letter of each word
+* [`capitalize`](/reference/functions/capitalize.md) - Capitalizes only the first letter
 
 ## Trim whitespace
 
@@ -62,9 +62,9 @@ no_suffix = suffix.trim_end()
 
 Functions:
 
-* [`trim()`](/reference/functions/trim.md) - Removes whitespace from both ends
-* [`trim_start()`](/reference/functions/trim_start.md) - Removes whitespace from beginning
-* [`trim_end()`](/reference/functions/trim_end.md) - Removes whitespace from end
+* [`trim`](/reference/functions/trim.md) - Removes whitespace from both ends
+* [`trim_start`](/reference/functions/trim_start.md) - Removes whitespace from beginning
+* [`trim_end`](/reference/functions/trim_end.md) - Removes whitespace from end
 
 ## Split and join strings
 
@@ -102,7 +102,7 @@ rejoined = parts.join("-")
 
 ### Split with regular expressions
 
-Use [`split_regex()`](/reference/functions/split_regex.md) for complex splitting:
+Use [`split_regex`](/reference/functions/split_regex.md) for complex splitting:
 
 ```tql
 from {text: "error:42|warning:7|info:125"}
@@ -149,7 +149,7 @@ filled = template.replace("{name}", "Alice").replace("{place}", "Tenzir")
 
 ### Pattern-based replacement
 
-Use [`replace_regex()`](/reference/functions/replace_regex.md) for complex replacements:
+Use [`replace_regex`](/reference/functions/replace_regex.md) for complex replacements:
 
 ```tql
 from {
@@ -200,9 +200,9 @@ is_pdf = file.ends_with(".pdf")
 
 Pattern matching functions:
 
-* [`match_regex()`](/reference/functions/match_regex.md) - Test against regular expression
-* [`starts_with()`](/reference/functions/starts_with.md) - Check string prefix
-* [`ends_with()`](/reference/functions/ends_with.md) - Check string suffix
+* [`match_regex`](/reference/functions/match_regex.md) - Test against regular expression
+* [`starts_with`](/reference/functions/starts_with.md) - Check string prefix
+* [`ends_with`](/reference/functions/ends_with.md) - Check string suffix
 
 ## Validate string content
 
@@ -242,13 +242,13 @@ has_upper = name.is_title()
 
 Validation functions:
 
-* [`is_numeric()`](/reference/functions/is_numeric.md) - Contains only digits
-* [`is_alpha()`](/reference/functions/is_alpha.md) - Contains only letters
-* [`is_alnum()`](/reference/functions/is_alnum.md) - Contains only letters and digits
-* [`is_lower()`](/reference/functions/is_lower.md) - All cased characters are lowercase
-* [`is_upper()`](/reference/functions/is_upper.md) - All cased characters are uppercase
-* [`is_title()`](/reference/functions/is_title.md) - String is in title case
-* [`is_printable()`](/reference/functions/is_printable.md) - Contains only printable characters
+* [`is_numeric`](/reference/functions/is_numeric.md) - Contains only digits
+* [`is_alpha`](/reference/functions/is_alpha.md) - Contains only letters
+* [`is_alnum`](/reference/functions/is_alnum.md) - Contains only letters and digits
+* [`is_lower`](/reference/functions/is_lower.md) - All cased characters are lowercase
+* [`is_upper`](/reference/functions/is_upper.md) - All cased characters are uppercase
+* [`is_title`](/reference/functions/is_title.md) - String is in title case
+* [`is_printable`](/reference/functions/is_printable.md) - Contains only printable characters
 
 ## Measure string properties
 
@@ -282,15 +282,15 @@ directory = path.parent_dir()
 
 String property functions:
 
-* [`length_chars()`](/reference/functions/length_chars.md) - Count Unicode characters
-* [`length_bytes()`](/reference/functions/length_bytes.md) - Count bytes
-* [`reverse()`](/reference/functions/reverse.md) - Reverse character order
-* [`file_name()`](/reference/functions/file_name.md) - Extract filename from path
-* [`parent_dir()`](/reference/functions/parent_dir.md) - Extract directory from path
+* [`length_chars`](/reference/functions/length_chars.md) - Count Unicode characters
+* [`length_bytes`](/reference/functions/length_bytes.md) - Count bytes
+* [`reverse`](/reference/functions/reverse.md) - Reverse character order
+* [`file_name`](/reference/functions/file_name.md) - Extract filename from path
+* [`parent_dir`](/reference/functions/parent_dir.md) - Extract directory from path
 
 ## Extract substrings
 
-Use [`slice()`](/reference/functions/slice.md) to extract portions of strings:
+Use [`slice`](/reference/functions/slice.md) to extract portions of strings:
 
 ```tql
 from {
@@ -344,7 +344,7 @@ decoded = encoded.decode_base64()
 
 ### Hex encoding
 
-Use [`encode_hex()`](/reference/functions/encode_hex.md) and [`decode_hex()`](/reference/functions/decode_hex.md):
+Use [`encode_hex`](/reference/functions/encode_hex.md) and [`decode_hex`](/reference/functions/decode_hex.md):
 
 ```tql
 from {data: "Hello", hex_string: "48656c6c6f"}
@@ -381,9 +381,9 @@ decoded = encoded.decode_url()
 
 Encoding functions:
 
-* [`encode_base64()`](/reference/functions/encode_base64.md) / [`decode_base64()`](/reference/functions/decode_base64.md)
-* [`encode_hex()`](/reference/functions/encode_hex.md) / [`decode_hex()`](/reference/functions/decode_hex.md)
-* [`encode_url()`](/reference/functions/encode_url.md) / [`decode_url()`](/reference/functions/decode_url.md)
+* [`encode_base64`](/reference/functions/encode_base64.md) / [`decode_base64`](/reference/functions/decode_base64.md)
+* [`encode_hex`](/reference/functions/encode_hex.md) / [`decode_hex`](/reference/functions/decode_hex.md)
+* [`encode_url`](/reference/functions/encode_url.md) / [`decode_url`](/reference/functions/decode_url.md)
 
 ## Pad strings
 
@@ -409,8 +409,8 @@ padded_code = code.pad_end(10, "-")
 
 Padding functions:
 
-* [`pad_start()`](/reference/functions/pad_start.md) - Add characters to the beginning
-* [`pad_end()`](/reference/functions/pad_end.md) - Add characters to the end
+* [`pad_start`](/reference/functions/pad_start.md) - Add characters to the beginning
+* [`pad_end`](/reference/functions/pad_end.md) - Add characters to the end
 
 ## Read file contents
 
@@ -427,7 +427,7 @@ hostname = file_contents("/etc/hostname")
 }
 ```
 
-The [`file_contents()`](/reference/functions/file_contents.md) function reads the entire file as a string. The file path must be a constant expression. Use with caution on large files.
+The [`file_contents`](/reference/functions/file_contents.md) function reads the entire file as a string. The file path must be a constant expression. Use with caution on large files.
 
 ## Practical examples
 
@@ -527,17 +527,17 @@ xxh3 = data.hash_xxh3()
 
 Hash functions:
 
-* [`hash_md5()`](/reference/functions/hash_md5.md) - MD5 digest (128-bit)
-* [`hash_sha1()`](/reference/functions/hash_sha1.md) - SHA-1 digest (160-bit)
-* [`hash_sha224()`](/reference/functions/hash_sha224.md) - SHA-224 digest
-* [`hash_sha256()`](/reference/functions/hash_sha256.md) - SHA-256 digest
-* [`hash_sha384()`](/reference/functions/hash_sha384.md) - SHA-384 digest
-* [`hash_sha512()`](/reference/functions/hash_sha512.md) - SHA-512 digest
-* [`hash_sha3_224()`](/reference/functions/hash_sha3_224.md) - SHA3-224 digest
-* [`hash_sha3_256()`](/reference/functions/hash_sha3_256.md) - SHA3-256 digest
-* [`hash_sha3_384()`](/reference/functions/hash_sha3_384.md) - SHA3-384 digest
-* [`hash_sha3_512()`](/reference/functions/hash_sha3_512.md) - SHA3-512 digest
-* [`hash_xxh3()`](/reference/functions/hash_xxh3.md) - XXH3 digest (fast, 64-bit)
+* [`hash_md5`](/reference/functions/hash_md5.md) - MD5 digest (128-bit)
+* [`hash_sha1`](/reference/functions/hash_sha1.md) - SHA-1 digest (160-bit)
+* [`hash_sha224`](/reference/functions/hash_sha224.md) - SHA-224 digest
+* [`hash_sha256`](/reference/functions/hash_sha256.md) - SHA-256 digest
+* [`hash_sha384`](/reference/functions/hash_sha384.md) - SHA-384 digest
+* [`hash_sha512`](/reference/functions/hash_sha512.md) - SHA-512 digest
+* [`hash_sha3_224`](/reference/functions/hash_sha3_224.md) - SHA3-224 digest
+* [`hash_sha3_256`](/reference/functions/hash_sha3_256.md) - SHA3-256 digest
+* [`hash_sha3_384`](/reference/functions/hash_sha3_384.md) - SHA3-384 digest
+* [`hash_sha3_512`](/reference/functions/hash_sha3_512.md) - SHA3-512 digest
+* [`hash_xxh3`](/reference/functions/hash_xxh3.md) - XXH3 digest (fast, 64-bit)
 
 ### Create unique identifiers
 
@@ -591,7 +591,7 @@ Process network data with specialized security functions:
 
 ### Generate Community IDs
 
-Use [`community_id()`](/reference/functions/community_id.md) to create standardized flow hashes:
+Use [`community_id`](/reference/functions/community_id.md) to create standardized flow hashes:
 
 ```tql
 from {
@@ -623,7 +623,7 @@ flow_id = community_id(
 
 ### Anonymize IP addresses
 
-Use [`encrypt_cryptopan()`](/reference/functions/encrypt_cryptopan.md) for consistent IP anonymization:
+Use [`encrypt_cryptopan`](/reference/functions/encrypt_cryptopan.md) for consistent IP anonymization:
 
 ```tql
 from {

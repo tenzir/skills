@@ -110,8 +110,8 @@ xs = xs.slice(stride=-1)
 
 ## See Also
 
-* fn[`sort`](/reference/functions/sort.md)
-* fn[`split`](/reference/functions/split.md)
-* fn[`length_chars`](/reference/functions/length_chars.md)
+* [`sort`](/reference/functions/sort.md)
+* [`split`](/reference/functions/split.md)
+* [`length_chars`](/reference/functions/length_chars.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

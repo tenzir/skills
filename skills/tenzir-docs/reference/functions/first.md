@@ -30,5 +30,5 @@ summarize first_value=first(x)
 
 ## See Also
 
-* fn[`last`](/reference/functions/last.md)
+* [`last`](/reference/functions/last.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

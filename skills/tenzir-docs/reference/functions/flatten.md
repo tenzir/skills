@@ -138,6 +138,6 @@ this = flatten(this)
 
 ## See Also
 
-* fn[`unflatten`](/reference/functions/unflatten.md)
+* [`unflatten`](/reference/functions/unflatten.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Reshape complex data](../../guides/transformation/reshape-complex-data.md)

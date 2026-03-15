@@ -88,5 +88,5 @@ replace what=192.168.1.1, with="REDACTED"
 
 ## See Also
 
-* fn[`replace`](/reference/functions/replace.md)
+* [`replace`](/reference/functions/replace.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

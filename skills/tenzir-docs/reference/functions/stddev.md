@@ -30,6 +30,6 @@ summarize stddev_value=stddev(x)
 
 ## See Also
 
-* fn[`variance`](/reference/functions/variance.md)
-* fn[`mean`](/reference/functions/mean.md)
+* [`variance`](/reference/functions/variance.md)
+* [`mean`](/reference/functions/mean.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

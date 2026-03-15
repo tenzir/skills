@@ -144,8 +144,8 @@ output = input.parse_leef()
 
 ## See Also
 
-* fn[`parse_cef`](/reference/functions/parse_cef.md)
-* fn[`print_leef`](/reference/functions/print_leef.md)
+* [`parse_cef`](/reference/functions/parse_cef.md)
+* [`print_leef`](/reference/functions/print_leef.md)
 * [`read_leef`](/reference/operators/read_leef.md)
 * [`read_syslog`](/reference/operators/read_syslog.md)
 * [`write_syslog`](/reference/operators/write_syslog.md)

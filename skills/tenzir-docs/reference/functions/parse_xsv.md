@@ -176,6 +176,6 @@ output = input.parse_xsv(
 ## See Also
 
 * [`read_xsv`](/reference/operators/read_xsv.md)
-* fn[`parse_csv`](/reference/functions/parse_csv.md)
-* fn[`parse_ssv`](/reference/functions/parse_ssv.md)
-* fn[`parse_tsv`](/reference/functions/parse_tsv.md)
+* [`parse_csv`](/reference/functions/parse_csv.md)
+* [`parse_ssv`](/reference/functions/parse_ssv.md)
+* [`parse_tsv`](/reference/functions/parse_tsv.md)

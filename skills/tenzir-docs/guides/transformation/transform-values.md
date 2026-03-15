@@ -9,7 +9,7 @@ TQL provides functions to convert values between different types. This is essent
 
 ### Convert to numbers
 
-Use [`int()`](/reference/functions/int.md) and [`float()`](/reference/functions/float.md) to convert values to numeric types:
+Use [`int`](/reference/functions/int.md) and [`float`](/reference/functions/float.md) to convert values to numeric types:
 
 ```tql
 from {price: "42", quantity: "3.5"},
@@ -25,7 +25,7 @@ quantity = quantity.float()
 
 ### Convert to strings
 
-Use [`string()`](/reference/functions/string.md) to convert any value to its string representation:
+Use [`string`](/reference/functions/string.md) to convert any value to its string representation:
 
 ```tql
 from {status: 200, ratio: 0.95},
@@ -40,7 +40,7 @@ message = status.string() + " - " + (ratio * 100).string() + "%"
 
 ### Parse times and durations
 
-Convert strings to time values with [`time()`](/reference/functions/time.md):
+Convert strings to time values with [`time`](/reference/functions/time.md):
 
 ```tql
 from {timestamp: "2024-01-15"},
@@ -53,7 +53,7 @@ parsed_time = timestamp.time()
 {timestamp: "2024-02-20", parsed_time: 2024-02-20T00:00:00Z}
 ```
 
-Convert strings to durations with [`duration()`](/reference/functions/duration.md):
+Convert strings to durations with [`duration`](/reference/functions/duration.md):
 
 ```tql
 from {interval: "5s"},
@@ -68,7 +68,7 @@ parsed_duration = interval.duration()
 
 ### Convert to unsigned integers
 
-Use [`uint()`](/reference/functions/uint.md) for non-negative integers:
+Use [`uint`](/reference/functions/uint.md) for non-negative integers:
 
 ```tql
 from {count: "42", ratio: 3.7},
@@ -95,7 +95,7 @@ warning: `uint` failed to convert some string
 
 ### Work with IP addresses and subnets
 
-TQL supports IP address and subnet literals directly. You can also parse them from strings using [`ip()`](/reference/functions/ip.md) and [`subnet()`](/reference/functions/subnet.md):
+TQL supports IP address and subnet literals directly. You can also parse them from strings using [`ip`](/reference/functions/ip.md) and [`subnet`](/reference/functions/subnet.md):
 
 ```tql
 from {direct_ip: 192.168.1.1, direct_subnet: 10.0.0.0/24},
@@ -146,7 +146,7 @@ Analyze and categorize IP addresses with inspection functions:
 
 ### Check IP address types
 
-Use IP inspection functions like [`is_v4()`](/reference/functions/is_v4.md), [`is_v6()`](/reference/functions/is_v6.md), [`is_private()`](/reference/functions/is_private.md), [`is_global()`](/reference/functions/is_global.md), [`is_loopback()`](/reference/functions/is_loopback.md), and [`is_multicast()`](/reference/functions/is_multicast.md) to analyze addresses:
+Use IP inspection functions like [`is_v4`](/reference/functions/is_v4.md), [`is_v6`](/reference/functions/is_v6.md), [`is_private`](/reference/functions/is_private.md), [`is_global`](/reference/functions/is_global.md), [`is_loopback`](/reference/functions/is_loopback.md), and [`is_multicast`](/reference/functions/is_multicast.md) to analyze addresses:
 
 ```tql
 from {ip1: 192.168.1.1, ip2: 8.8.8.8, ip3: ::1},
@@ -186,7 +186,7 @@ is_multicast = ip2.is_multicast()
 
 ### Categorize IP addresses
 
-Get detailed IP address classification with [`ip_category()`](/reference/functions/ip_category.md):
+Get detailed IP address classification with [`ip_category`](/reference/functions/ip_category.md):
 
 ```tql
 from {client: "192.168.1.100", server: "8.8.8.8", local: "127.0.0.1"},
@@ -217,7 +217,7 @@ local_category = local.ip().ip_category()
 
 ### Check link-local addresses
 
-Identify link-local addresses with [`is_link_local()`](/reference/functions/is_link_local.md):
+Identify link-local addresses with [`is_link_local`](/reference/functions/is_link_local.md):
 
 ```tql
 from {addr1: 169.254.1.1, addr2: fe80::1, addr3: 192.168.1.1},
@@ -338,7 +338,7 @@ floor_val = value.floor()
 
 ### Mathematical functions
 
-Use [`abs()`](/reference/functions/abs.md) for absolute values and [`sqrt()`](/reference/functions/sqrt.md) for square roots:
+Use [`abs`](/reference/functions/abs.md) for absolute values and [`sqrt`](/reference/functions/sqrt.md) for square roots:
 
 ```tql
 from {x: -5, y: 16},
@@ -424,7 +424,7 @@ Generate new values using built-in functions:
 
 ### Generate unique identifiers
 
-Use [`uuid()`](/reference/functions/uuid.md) to create unique identifiers:
+Use [`uuid`](/reference/functions/uuid.md) to create unique identifiers:
 
 ```tql
 from {user: "alice", action: "login"},
@@ -450,7 +450,7 @@ session_id = uuid()
 
 ### Generate random numbers
 
-Use [`random()`](/reference/functions/random.md) to generate random values:
+Use [`random`](/reference/functions/random.md) to generate random values:
 
 ```tql
 from {
@@ -474,7 +474,7 @@ Retrieve values from external sources like the environment, configuration, or fi
 
 ### Read environment variables
 
-Use [`env()`](/reference/functions/env.md) to access environment variables:
+Use [`env`](/reference/functions/env.md) to access environment variables:
 
 ```tql
 from {
@@ -494,7 +494,7 @@ from {
 
 ### Access configuration
 
-Use [`config()`](/reference/functions/config.md) to read Tenzir’s configuration:
+Use [`config`](/reference/functions/config.md) to read Tenzir’s configuration:
 
 ```tql
 from {
@@ -504,7 +504,7 @@ from {
 
 ### Read file contents
 
-Use [`file_contents()`](/reference/functions/file_contents.md) to read files:
+Use [`file_contents`](/reference/functions/file_contents.md) to read files:
 
 ```tql
 from {
@@ -514,7 +514,7 @@ from {
 
 ### Access secrets
 
-Use [`secret()`](/reference/functions/secret.md) to retrieve [secrets](../../explanations/secrets.md):
+Use [`secret`](/reference/functions/secret.md) to retrieve [secrets](../../explanations/secrets.md):
 
 ```tql
 from {
@@ -528,7 +528,7 @@ Examine data types at runtime:
 
 ### Get type information
 
-Use [`type_of()`](/reference/functions/type_of.md) to inspect value types. Note that this function returns detailed type information as objects:
+Use [`type_of`](/reference/functions/type_of.md) to inspect value types. Note that this function returns detailed type information as objects:
 
 ```tql
 from {
@@ -566,7 +566,7 @@ obj_type = obj.type_of()
 
 ### Get type identifiers
 
-Use [`type_id()`](/reference/functions/type_id.md) for type comparison:
+Use [`type_id`](/reference/functions/type_id.md) for type comparison:
 
 ```tql
 from {value1: "text", value2: 123, value3: "456"}

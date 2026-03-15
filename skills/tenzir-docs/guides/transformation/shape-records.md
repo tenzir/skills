@@ -65,7 +65,7 @@ num_fields = config.keys().length()
 
 ## Merge records
 
-Combine multiple records with [`merge()`](/reference/functions/merge.md) or spread syntax:
+Combine multiple records with [`merge`](/reference/functions/merge.md) or spread syntax:
 
 ```tql
 from {

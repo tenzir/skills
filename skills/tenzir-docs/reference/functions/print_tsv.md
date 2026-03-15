@@ -50,4 +50,4 @@ output = this.print_tsv()
 ## See Also
 
 * [`write_tsv`](/reference/operators/write_tsv.md)
-* fn[`parse_tsv`](/reference/functions/parse_tsv.md)
+* [`parse_tsv`](/reference/functions/parse_tsv.md)

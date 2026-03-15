@@ -30,6 +30,6 @@ summarize variance_value=variance(x)
 
 ## See Also
 
-* fn[`stddev`](/reference/functions/stddev.md)
-* fn[`mean`](/reference/functions/mean.md)
+* [`stddev`](/reference/functions/stddev.md)
+* [`mean`](/reference/functions/mean.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

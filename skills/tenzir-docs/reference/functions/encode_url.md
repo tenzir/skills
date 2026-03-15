@@ -33,5 +33,5 @@ encoded = input.encode_url()
 
 ## See Also
 
-* fn[`decode_url`](/reference/functions/decode_url.md)
+* [`decode_url`](/reference/functions/decode_url.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

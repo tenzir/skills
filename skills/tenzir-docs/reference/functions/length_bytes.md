@@ -37,6 +37,6 @@ from {x: "👻".length_bytes()}
 
 ## See Also
 
-* fn[`length`](/reference/functions/length.md)
-* fn[`length_chars`](/reference/functions/length_chars.md)
+* [`length`](/reference/functions/length.md)
+* [`length_chars`](/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

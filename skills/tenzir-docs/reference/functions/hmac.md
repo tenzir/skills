@@ -76,8 +76,8 @@ digest = hmac(message, "my-secret-key")
 
 ## See Also
 
-* fn[`hash_sha256`](/reference/functions/hash_sha256.md)
-* fn[`hash_sha512`](/reference/functions/hash_sha512.md)
-* fn[`hash_sha384`](/reference/functions/hash_sha384.md)
-* fn[`hash_sha1`](/reference/functions/hash_sha1.md)
-* fn[`hash_md5`](/reference/functions/hash_md5.md)
+* [`hash_sha256`](/reference/functions/hash_sha256.md)
+* [`hash_sha512`](/reference/functions/hash_sha512.md)
+* [`hash_sha384`](/reference/functions/hash_sha384.md)
+* [`hash_sha1`](/reference/functions/hash_sha1.md)
+* [`hash_md5`](/reference/functions/hash_md5.md)

@@ -64,7 +64,7 @@ The connector is inferred based on the URI `scheme://`. If no scheme is present,
 ### URI schemes
 
 | Scheme                             | Operator                                                                     | Example                                        |
-| :--------------------------------- | :--------------------------------------------------------------------------- | :--------------------------------------------- |
+| ---------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------- |
 | `abfs`,`abfss`                     | [`save_azure_blob_storage`](/reference/operators/save_azure_blob_storage.md) | `to "abfs://path/to/file.json"`                |
 | `amqp`                             | [`save_amqp`](/reference/operators/save_amqp.md)                             | `to "amqp://…`                                 |
 | `elasticsearch`                    | [`to_opensearch`](/reference/operators/to_opensearch.md)                     | `to "elasticsearch://…`                        |
@@ -92,7 +92,7 @@ Please see the respective operator pages for details on the URI’s locator form
 The `to` operator can deduce the file format based on these file-endings:
 
 | Format  | File Endings         | Operator                                                 |
-| :------ | :------------------- | :------------------------------------------------------- |
+| ------- | -------------------- | -------------------------------------------------------- |
 | CSV     | `.csv`               | [`write_csv`](/reference/operators/write_csv.md)         |
 | Feather | `.feather`, `.arrow` | [`write_feather`](/reference/operators/write_feather.md) |
 | JSON    | `.json`              | [`write_json`](/reference/operators/write_json.md)       |

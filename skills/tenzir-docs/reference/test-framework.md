@@ -700,8 +700,6 @@ Implement fixtures in `fixtures/` and register them with `@tenzir_test.fixture()
 from tenzir_test import fixture
 
 
-
-
 @fixture()
 def http():
     server = _start_server()
@@ -749,8 +747,6 @@ Fixtures can signal that they cannot provide their service by raising `FixtureUn
 
 ```python
 from tenzir_test.fixtures import FixtureUnavailable, fixture
-
-
 
 
 @fixture()

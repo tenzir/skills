@@ -30,5 +30,5 @@ summarize result=all(x)
 
 ## See Also
 
-* fn[`any`](/reference/functions/any.md)
+* [`any`](/reference/functions/any.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

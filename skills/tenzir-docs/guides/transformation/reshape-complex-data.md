@@ -80,7 +80,7 @@ flattened = {
 
 ## Unflatten data
 
-Reconstruct hierarchical structures from flattened data using [`unflatten()`](/reference/functions/unflatten.md):
+Reconstruct hierarchical structures from flattened data using [`unflatten`](/reference/functions/unflatten.md):
 
 ### Basic unflattening
 

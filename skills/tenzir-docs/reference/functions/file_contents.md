@@ -31,6 +31,6 @@ to_google_secops client_email=$secops_config.client_email, …
 
 ## See Also
 
-* fn[`file_name`](/reference/functions/file_name.md)
-* fn[`parent_dir`](/reference/functions/parent_dir.md)
+* [`file_name`](/reference/functions/file_name.md)
+* [`parent_dir`](/reference/functions/parent_dir.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

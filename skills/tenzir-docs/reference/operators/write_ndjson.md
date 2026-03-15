@@ -82,9 +82,9 @@ write_ndjson strip_null_fields=true
 
 ## See Also
 
-* fn[`parse_json`](/reference/functions/parse_json.md)
-* fn[`print_json`](/reference/functions/print_json.md)
-* fn[`print_ndjson`](/reference/functions/print_ndjson.md)
+* [`parse_json`](/reference/functions/parse_json.md)
+* [`print_json`](/reference/functions/print_json.md)
+* [`print_ndjson`](/reference/functions/print_ndjson.md)
 * [`read_json`](/reference/operators/read_json.md)
 * [`read_ndjson`](/reference/operators/read_ndjson.md)
 * [`write_json`](/reference/operators/write_json.md)

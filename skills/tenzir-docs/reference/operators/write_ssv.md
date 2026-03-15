@@ -43,7 +43,7 @@ x y z
 
 ## See Also
 
-* fn[`print_ssv`](/reference/functions/print_ssv.md)
+* [`print_ssv`](/reference/functions/print_ssv.md)
 * [`read_ssv`](/reference/operators/read_ssv.md)
 * [`write_csv`](/reference/operators/write_csv.md)
 * [`write_lines`](/reference/operators/write_lines.md)

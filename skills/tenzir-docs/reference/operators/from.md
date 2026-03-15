@@ -113,7 +113,7 @@ load_tcp "tcp://0.0.0.0:12345", parallel=10 {
 ### URI schemes
 
 | Scheme          | Operator                                                                     | Example                                         |
-| :-------------- | :--------------------------------------------------------------------------- | :---------------------------------------------- |
+| --------------- | ---------------------------------------------------------------------------- | ----------------------------------------------- |
 | `abfs`,`abfss`  | [`load_azure_blob_storage`](/reference/operators/load_azure_blob_storage.md) | `from "abfs://path/to/file.json"`               |
 | `amqp`          | [`load_amqp`](/reference/operators/load_amqp.md)                             | `from "amqp://…`                                |
 | `elasticsearch` | [`from_opensearch`](/reference/operators/from_opensearch.md)                 | `from "elasticsearch://1.2.3.4:9200`            |
@@ -140,7 +140,7 @@ Please see the respective operator pages for details on the URI’s locator form
 The `from` operator can deduce the file format based on these file-endings:
 
 | Format  | File Endings         | Operator                                               |
-| :------ | :------------------- | :----------------------------------------------------- |
+| ------- | -------------------- | ------------------------------------------------------ |
 | CSV     | `.csv`               | [`read_csv`](/reference/operators/read_csv.md)         |
 | Feather | `.feather`, `.arrow` | [`read_feather`](/reference/operators/read_feather.md) |
 | JSON    | `.json`              | [`read_json`](/reference/operators/read_json.md)       |

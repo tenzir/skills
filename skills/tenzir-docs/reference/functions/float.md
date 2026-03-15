@@ -35,10 +35,10 @@ from {x: float("4.2")}
 
 ## See Also
 
-* fn[`int`](/reference/functions/int.md)
-* fn[`ip`](/reference/functions/ip.md)
-* fn[`string`](/reference/functions/string.md)
-* fn[`subnet`](/reference/functions/subnet.md)
-* fn[`time`](/reference/functions/time.md)
-* fn[`uint`](/reference/functions/uint.md)
+* [`int`](/reference/functions/int.md)
+* [`ip`](/reference/functions/ip.md)
+* [`string`](/reference/functions/string.md)
+* [`subnet`](/reference/functions/subnet.md)
+* [`time`](/reference/functions/time.md)
+* [`uint`](/reference/functions/uint.md)
 * [Transform values](../../guides/transformation/transform-values.md)

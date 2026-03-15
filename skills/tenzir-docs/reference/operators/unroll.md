@@ -53,6 +53,6 @@ unroll y
 
 ## See Also
 
-* fn[`flatten`](/reference/functions/flatten.md)
+* [`flatten`](/reference/functions/flatten.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
 * [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)

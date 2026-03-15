@@ -30,7 +30,7 @@ summarize median_value=median(x)
 
 ## See Also
 
-* fn[`mean`](/reference/functions/mean.md)
-* fn[`mode`](/reference/functions/mode.md)
-* fn[`quantile`](/reference/functions/quantile.md)
+* [`mean`](/reference/functions/mean.md)
+* [`mode`](/reference/functions/mode.md)
+* [`quantile`](/reference/functions/quantile.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

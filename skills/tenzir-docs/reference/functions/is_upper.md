@@ -25,7 +25,7 @@ from {x: "HELLO".is_upper()}
 
 ## See Also
 
-* fn[`is_alpha`](/reference/functions/is_alpha.md)
-* fn[`is_lower`](/reference/functions/is_lower.md)
-* fn[`to_upper`](/reference/functions/to_upper.md)
+* [`is_alpha`](/reference/functions/is_alpha.md)
+* [`is_lower`](/reference/functions/is_lower.md)
+* [`to_upper`](/reference/functions/to_upper.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

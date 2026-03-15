@@ -55,6 +55,6 @@ from {xs: split("a-b-c", "-", max=1)}
 
 ## See Also
 
-* fn[`split_regex`](/reference/functions/split_regex.md)
-* fn[`join`](/reference/functions/join.md)
+* [`split_regex`](/reference/functions/split_regex.md)
+* [`join`](/reference/functions/join.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

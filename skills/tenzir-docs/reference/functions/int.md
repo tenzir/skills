@@ -57,10 +57,10 @@ from {x: int("0x42", base=16)}
 
 ## See Also
 
-* fn[`float`](/reference/functions/float.md)
-* fn[`ip`](/reference/functions/ip.md)
-* fn[`string`](/reference/functions/string.md)
-* fn[`subnet`](/reference/functions/subnet.md)
-* fn[`time`](/reference/functions/time.md)
-* fn[`uint`](/reference/functions/uint.md)
+* [`float`](/reference/functions/float.md)
+* [`ip`](/reference/functions/ip.md)
+* [`string`](/reference/functions/string.md)
+* [`subnet`](/reference/functions/subnet.md)
+* [`time`](/reference/functions/time.md)
+* [`uint`](/reference/functions/uint.md)
 * [Transform values](../../guides/transformation/transform-values.md)

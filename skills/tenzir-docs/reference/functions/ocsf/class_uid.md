@@ -15,4 +15,4 @@ The `class_name` for which `class_uid` should be returned.
 
 ## See Also
 
-* fn[`ocsf::class_name`](/reference/functions/ocsf/class_name.md)
+* [`ocsf::class_name`](/reference/functions/ocsf/class_name.md)

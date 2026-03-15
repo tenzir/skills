@@ -165,6 +165,6 @@ output = input.parse_csv(header=["a","b","c"])
 ## See Also
 
 * [`read_csv`](/reference/operators/read_csv.md)
-* fn[`parse_ssv`](/reference/functions/parse_ssv.md)
-* fn[`parse_tsv`](/reference/functions/parse_tsv.md)
-* fn[`parse_xsv`](/reference/functions/parse_xsv.md)
+* [`parse_ssv`](/reference/functions/parse_ssv.md)
+* [`parse_tsv`](/reference/functions/parse_tsv.md)
+* [`parse_xsv`](/reference/functions/parse_xsv.md)

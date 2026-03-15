@@ -73,6 +73,6 @@ output = input.print_kv()
 
 ## See Also
 
-* fn[`parse_kv`](/reference/functions/parse_kv.md)
+* [`parse_kv`](/reference/functions/parse_kv.md)
 * [`read_kv`](/reference/operators/read_kv.md)
 * [`write_kv`](/reference/operators/write_kv.md)

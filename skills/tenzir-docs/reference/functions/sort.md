@@ -79,5 +79,5 @@ xs = xs.sort(cmp=(a, b) => a.v < b.v)
 
 ## See Also
 
-* fn[`slice`](/reference/functions/slice.md)
+* [`slice`](/reference/functions/slice.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

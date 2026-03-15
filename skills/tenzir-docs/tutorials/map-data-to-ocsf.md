@@ -390,7 +390,7 @@ drop zeek.resp_bytes, zeek.orig_bytes, zeek.resp_pkts, zeek.orig_pkts
 Here’s what happens here:
 
 * The expression `$proto_nums[zeek.proto]` takes the value of Zeek’s `proto` field (e.g., `tcp`) and uses it as an index into a static record `$proto_nums`. Add a `?` at the end to avoid warnings when the lookup returns `null`, and use the inline `else` expression for the fallback value.
-* To check whether we have an IPv4 or an IPv6 connection, we call [`is_v6()`](/reference/functions/is_v6.md) on the IPs of the connection record. TQL comes with numerous other domain-specific [functions](../reference/functions.md) that make mapping security data a breeze.
+* Use [`is_v6`](/reference/functions/is_v6.md) on the connection IPs to identify IPv6 connections.
 
 #### Putting it together
 

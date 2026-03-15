@@ -80,5 +80,5 @@ x = x.print_json(strip_null_fields=true)
 ## See Also
 
 * [`write_json`](/reference/operators/write_json.md)
-* fn[`parse_json`](/reference/functions/parse_json.md)
-* fn[`print_ndjson`](/reference/functions/print_ndjson.md)
+* [`parse_json`](/reference/functions/parse_json.md)
+* [`print_ndjson`](/reference/functions/print_ndjson.md)

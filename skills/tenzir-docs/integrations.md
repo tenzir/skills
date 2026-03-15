@@ -16,7 +16,7 @@ Core integrations are native connectors to the ecosystem, enabling communication
 * **Cloud storage**: [S3](integrations/amazon/s3.md), [GCS](integrations/google/cloud-storage.md), [Azure Blob Storage](integrations/microsoft/azure-blob-storage.md)
 * **Message queues**: [Kafka](integrations/kafka.md), [SQS](integrations/amazon/sqs.md), [AMQP](integrations/amqp.md)
 * **Databases**: [Snowflake](integrations/snowflake.md), [ClickHouse](integrations/clickhouse.md)
-* **Network protocols**: [TCP](integrations/tcp.md), [UDP](integrations/udp.md), [HTTP](integrations/http.md), [Syslog](integrations/syslog.md)
+* **Network protocols**: [TCP](integrations/tcp.md), [UDP](integrations/udp.md), [HTTP(S)](integrations/http.md), [Syslog](integrations/syslog.md)
 
 Under the hood, core integrations use a C++ plugin abstraction to provide an [operator](reference/operators.md), [function](reference/functions.md), or [context](explanations/enrichment.md) that you can use in TQL to directly interface with the respective resource, such as a TCP socket or cloud storage bucket. We typically implement this functionality using the respective SDK, such as the [AWS SDK](https://aws.amazon.com/sdk-for-cpp/), [Google Cloud SDK](https://cloud.google.com/cpp), or [librdkafka](https://github.com/confluentinc/librdkafka), though some integrations require a custom implementation.
 

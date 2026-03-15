@@ -73,6 +73,6 @@ top key
 
 ## See Also
 
-* fn[`has`](/reference/functions/has.md)
-* fn[`get`](/reference/functions/get.md)
+* [`has`](/reference/functions/has.md)
+* [`get`](/reference/functions/get.md)
 * [Shape records](../../guides/transformation/shape-records.md)

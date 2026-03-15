@@ -280,7 +280,7 @@ Example Output
 
 ## See Also
 
-* fn[`parse_json`](/reference/functions/parse_json.md)
+* [`parse_json`](/reference/functions/parse_json.md)
 * [`read_ndjson`](/reference/operators/read_ndjson.md)
 * [`write_json`](/reference/operators/write_json.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

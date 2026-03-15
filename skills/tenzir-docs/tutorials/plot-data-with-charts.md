@@ -171,7 +171,9 @@ Log scaling removes linearity. Comparing bar heights no longer reflects a simple
 
 ### Plot compositions as pie chart
 
-Pie charts are well-understood and frequently occur in management dashboards. Let’s plot some synthetic data with the [`chart_pie`](/reference/operators/chart_pie.md) operator:
+Pie charts are well-understood and frequently occur in management dashboards. Let’s plot some synthetic data with the
+
+[`chart_pie`](/reference/operators/chart_pie.md) operator:
 
 ```tql
 from (
@@ -261,7 +263,9 @@ chart_line (
 
 Area charts are fantastic for visualizing quantities that accumulate over a continuous variable, such as time or value ranges. They are similar to line charts but emphasize the volume underneath the line.
 
-In the above section about line charts, you can exchange every call to [`chart_line`](/reference/operators/chart_line.md) with [`chart_area`](/reference/operators/chart_area.md) and will get a working plot.
+In the above section about line charts, you can exchange every call to
+
+[`chart_line`](/reference/operators/chart_line.md) with [`chart_area`](/reference/operators/chart_area.md) and will get a working plot.
 
 ```tql
 from (

@@ -373,5 +373,5 @@ read_syslog raw_message=raw
 ## See Also
 
 * [`write_syslog`](/reference/operators/write_syslog.md)
-* fn[`parse_syslog`](/reference/functions/parse_syslog.md)
+* [`parse_syslog`](/reference/functions/parse_syslog.md)
 * [Syslog](../../integrations/syslog.md)

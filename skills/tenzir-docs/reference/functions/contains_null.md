@@ -55,6 +55,6 @@ contains_null = this.contains_null()
 
 ## See Also
 
-* fn[`contains`](/reference/functions/contains.md)
-* fn[`has`](/reference/functions/has.md)
-* fn[`is_empty`](/reference/functions/is_empty.md)
+* [`contains`](/reference/functions/contains.md)
+* [`has`](/reference/functions/has.md)
+* [`is_empty`](/reference/functions/is_empty.md)

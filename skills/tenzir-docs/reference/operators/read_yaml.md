@@ -161,5 +161,5 @@ read_yaml
 ## See Also
 
 * [`write_yaml`](/reference/operators/write_yaml.md)
-* fn[`parse_yaml`](/reference/functions/parse_yaml.md)
-* fn[`print_yaml`](/reference/functions/print_yaml.md)
+* [`parse_yaml`](/reference/functions/parse_yaml.md)
+* [`print_yaml`](/reference/functions/print_yaml.md)

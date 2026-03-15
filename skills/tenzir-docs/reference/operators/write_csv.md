@@ -43,8 +43,8 @@ x,y,z
 
 ## See Also
 
-* fn[`parse_csv`](/reference/functions/parse_csv.md)
-* fn[`print_csv`](/reference/functions/print_csv.md)
+* [`parse_csv`](/reference/functions/parse_csv.md)
+* [`print_csv`](/reference/functions/print_csv.md)
 * [`read_csv`](/reference/operators/read_csv.md)
 * [`write_lines`](/reference/operators/write_lines.md)
 * [`write_ssv`](/reference/operators/write_ssv.md)

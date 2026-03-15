@@ -57,6 +57,6 @@ from {x: "hello/-/".trim_end("/-")}
 
 ## See Also
 
-* fn[`trim`](/reference/functions/trim.md)
-* fn[`trim_start`](/reference/functions/trim_start.md)
+* [`trim`](/reference/functions/trim.md)
+* [`trim_start`](/reference/functions/trim_start.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

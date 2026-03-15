@@ -132,7 +132,7 @@ Since you can set Tenzir’s configuration options as environment variables, you
 
 See the [configuration reference](../reference/node/configuration.md) for more details.
 
-Tenzir hides the `tenzir.secrets` section from the [`config()`](/reference/functions/config.md) function.
+Tenzir hides the `tenzir.secrets` section from the [`config`](/reference/functions/config.md) function.
 
 ### Platform Secrets
 

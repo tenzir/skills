@@ -56,5 +56,5 @@ output = this.print_xsv(
 
 ## See Also
 
-* fn[`parse_xsv`](/reference/functions/parse_xsv.md)
+* [`parse_xsv`](/reference/functions/parse_xsv.md)
 * [`write_xsv`](/reference/operators/write_xsv.md)

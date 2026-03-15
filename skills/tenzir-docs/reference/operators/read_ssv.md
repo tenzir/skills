@@ -179,4 +179,4 @@ read_ssv
 * [`read_csv`](/reference/operators/read_csv.md)
 * [`read_tsv`](/reference/operators/read_tsv.md)
 * [`read_xsv`](/reference/operators/read_xsv.md)
-* fn[`parse_ssv`](/reference/functions/parse_ssv.md)
+* [`parse_ssv`](/reference/functions/parse_ssv.md)

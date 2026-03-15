@@ -37,5 +37,5 @@ x = x.print_yaml()
 
 ## See Also
 
-* fn[`parse_yaml`](/reference/functions/parse_yaml.md)
+* [`parse_yaml`](/reference/functions/parse_yaml.md)
 * [`write_yaml`](/reference/operators/write_yaml.md)

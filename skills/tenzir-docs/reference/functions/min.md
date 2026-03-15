@@ -30,7 +30,7 @@ summarize min_value=min(x)
 
 ## See Also
 
-* fn[`max`](/reference/functions/max.md)
-* fn[`mean`](/reference/functions/mean.md)
-* fn[`sum`](/reference/functions/sum.md)
+* [`max`](/reference/functions/max.md)
+* [`mean`](/reference/functions/mean.md)
+* [`sum`](/reference/functions/sum.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)

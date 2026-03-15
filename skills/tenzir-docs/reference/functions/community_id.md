@@ -43,5 +43,5 @@ from {x: community_id(src_ip=1.2.3.4, dst_ip=43.3.132.3, proto="udp")}
 
 ## See Also
 
-* fn[`encrypt_cryptopan`](/reference/functions/encrypt_cryptopan.md)
+* [`encrypt_cryptopan`](/reference/functions/encrypt_cryptopan.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

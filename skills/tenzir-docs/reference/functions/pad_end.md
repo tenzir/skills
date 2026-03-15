@@ -59,7 +59,7 @@ from {x: "hello world".pad_end(5)}
 
 ## See Also
 
-* fn[`pad_start`](/reference/functions/pad_start.md)
-* fn[`trim`](/reference/functions/trim.md)
-* fn[`trim_end`](/reference/functions/trim_end.md)
+* [`pad_start`](/reference/functions/pad_start.md)
+* [`trim`](/reference/functions/trim.md)
+* [`trim_end`](/reference/functions/trim_end.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -82,5 +82,5 @@ write_syslog
 ## See Also
 
 * [`read_syslog`](/reference/operators/read_syslog.md)
-* fn[`parse_syslog`](/reference/functions/parse_syslog.md)
+* [`parse_syslog`](/reference/functions/parse_syslog.md)
 * [Syslog](../../integrations/syslog.md)

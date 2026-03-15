@@ -25,4 +25,4 @@ from {x: type_id(1 + 3.2)}
 
 ## See Also
 
-* fn[`type_of`](/reference/functions/type_of.md)
+* [`type_of`](/reference/functions/type_of.md)

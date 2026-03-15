@@ -141,7 +141,7 @@ y = x.parse_cef()
 
 ## See Also
 
-* fn[`print_cef`](/reference/functions/print_cef.md)
+* [`print_cef`](/reference/functions/print_cef.md)
 * [`read_cef`](/reference/operators/read_cef.md)
 * [`read_syslog`](/reference/operators/read_syslog.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

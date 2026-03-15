@@ -33,8 +33,8 @@ from {x: bit_xor(5, 3)}
 
 ## See Also
 
-* fn[`bit_and`](/reference/functions/bit_and.md)
-* fn[`bit_not`](/reference/functions/bit_not.md)
-* fn[`bit_or`](/reference/functions/bit_or.md)
-* fn[`shift_left`](/reference/functions/shift_left.md)
-* fn[`shift_right`](/reference/functions/shift_right.md)
+* [`bit_and`](/reference/functions/bit_and.md)
+* [`bit_not`](/reference/functions/bit_not.md)
+* [`bit_or`](/reference/functions/bit_or.md)
+* [`shift_left`](/reference/functions/shift_left.md)
+* [`shift_right`](/reference/functions/shift_right.md)

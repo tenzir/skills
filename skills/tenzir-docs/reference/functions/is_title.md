@@ -25,5 +25,5 @@ from {x: "Hello World".is_title()}
 
 ## See Also
 
-* fn[`to_title`](/reference/functions/to_title.md)
+* [`to_title`](/reference/functions/to_title.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

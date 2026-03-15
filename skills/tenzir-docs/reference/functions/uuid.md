@@ -59,4 +59,4 @@ from {guid: uuid(version="nil")}
 
 ## See Also
 
-* fn[`random`](/reference/functions/random.md)
+* [`random`](/reference/functions/random.md)

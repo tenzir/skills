@@ -30,8 +30,8 @@ summarize max_value=max(x)
 
 ## See Also
 
-* fn[`min`](/reference/functions/min.md)
-* fn[`mean`](/reference/functions/mean.md)
-* fn[`sum`](/reference/functions/sum.md)
+* [`min`](/reference/functions/min.md)
+* [`mean`](/reference/functions/mean.md)
+* [`sum`](/reference/functions/sum.md)
 * [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

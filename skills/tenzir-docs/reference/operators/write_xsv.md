@@ -51,7 +51,7 @@ x/y/z
 
 ## See Also
 
-* fn[`print_xsv`](/reference/functions/print_xsv.md)
+* [`print_xsv`](/reference/functions/print_xsv.md)
 * [`write_csv`](/reference/operators/write_csv.md)
 * [`write_lines`](/reference/operators/write_lines.md)
 * [`write_ssv`](/reference/operators/write_ssv.md)

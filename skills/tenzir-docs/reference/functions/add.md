@@ -56,8 +56,8 @@ xs = xs.add("hello")
 
 ## See Also
 
-* fn[`append`](/reference/functions/append.md)
-* fn[`distinct`](/reference/functions/distinct.md)
-* fn[`prepend`](/reference/functions/prepend.md)
-* fn[`remove`](/reference/functions/remove.md)
+* [`append`](/reference/functions/append.md)
+* [`distinct`](/reference/functions/distinct.md)
+* [`prepend`](/reference/functions/prepend.md)
+* [`remove`](/reference/functions/remove.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

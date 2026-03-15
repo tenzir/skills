@@ -25,6 +25,6 @@ from {x: "1234".is_numeric()}
 
 ## See Also
 
-* fn[`is_alnum`](/reference/functions/is_alnum.md)
-* fn[`is_alpha`](/reference/functions/is_alpha.md)
+* [`is_alnum`](/reference/functions/is_alnum.md)
+* [`is_alpha`](/reference/functions/is_alpha.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

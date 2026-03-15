@@ -27,7 +27,7 @@ from_fluent_bit "plugin", options={key1: value1, key2: value2, …}
 
 Output to Fluent Bit
 
-You can output events to Fluent Bit using the [`to_fluent_bit` operator](/reference/operators/to_fluent_bit.md).
+You can output events to Fluent Bit using the [`to_fluent_bit`](/reference/operators/to_fluent_bit.md) operator.
 
 ### `plugin: string`
 

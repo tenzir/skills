@@ -59,27 +59,27 @@ publish "normalized-events"
 
 Work through these guides in order for a complete normalization workflow:
 
-### [Clean up values](normalization/clean-up-values.md)
+### Clean up values
 
-Start by fixing data quality issues:
+[Clean up values](normalization/clean-up-values.md) — Start by fixing data quality issues:
 
 * Replace null placeholders (`"None"`, `"N/A"`, `"-"`)
 * Normalize sentinel values
 * Fix types (strings to timestamps, IPs, numbers)
 * Provide default values for missing fields
 
-### [Map to OCSF](normalization/map-to-ocsf.md)
+### Map to OCSF
 
-Learn the comprehensive approach to OCSF mapping:
+[Map to OCSF](normalization/map-to-ocsf.md) — Learn the comprehensive approach to OCSF mapping:
 
 * Identify the correct event class
 * Map fields by attribute group
 * Handle unmapped fields
 * Validate with `ocsf::cast`
 
-### [Map to other schemas](normalization/map-to-other-schemas.md)
+### Map to other schemas
 
-Brief guidance on alternative schemas:
+[Map to other schemas](normalization/map-to-other-schemas.md) — Brief guidance on alternative schemas:
 
 * Elastic Common Schema (ECS)
 * Google UDM

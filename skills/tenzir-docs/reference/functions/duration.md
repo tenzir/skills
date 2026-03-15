@@ -26,5 +26,5 @@ dur = duration(str)
 
 ## See Also
 
-* fn[`time`](/reference/functions/time.md)
+* [`time`](/reference/functions/time.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

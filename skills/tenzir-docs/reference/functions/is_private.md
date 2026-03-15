@@ -51,11 +51,11 @@ from {
 
 ## See Also
 
-* fn[`ip_category`](/reference/functions/ip_category.md)
-* fn[`is_global`](/reference/functions/is_global.md)
-* fn[`is_link_local`](/reference/functions/is_link_local.md)
-* fn[`is_loopback`](/reference/functions/is_loopback.md)
-* fn[`is_multicast`](/reference/functions/is_multicast.md)
-* fn[`is_v4`](/reference/functions/is_v4.md)
-* fn[`is_v6`](/reference/functions/is_v6.md)
+* [`ip_category`](/reference/functions/ip_category.md)
+* [`is_global`](/reference/functions/is_global.md)
+* [`is_link_local`](/reference/functions/is_link_local.md)
+* [`is_loopback`](/reference/functions/is_loopback.md)
+* [`is_multicast`](/reference/functions/is_multicast.md)
+* [`is_v4`](/reference/functions/is_v4.md)
+* [`is_v6`](/reference/functions/is_v6.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

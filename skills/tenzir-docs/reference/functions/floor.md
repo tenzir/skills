@@ -53,5 +53,5 @@ from {
 
 ## See Also
 
-* fn[`ceil`](/reference/functions/ceil.md)
-* fn[`round`](/reference/functions/round.md)
+* [`ceil`](/reference/functions/ceil.md)
+* [`round`](/reference/functions/round.md)

@@ -37,6 +37,6 @@ this = {
 
 ## See Also
 
-* fn[`is_empty`](/reference/functions/is_empty.md)
-* fn[`keys`](/reference/functions/keys.md)
+* [`is_empty`](/reference/functions/is_empty.md)
+* [`keys`](/reference/functions/keys.md)
 * [Shape records](../../guides/transformation/shape-records.md)

@@ -50,5 +50,5 @@ from {x: secret("geheim")}
 
 ## See Also
 
-* fn[`config`](/reference/functions/config.md)
-* fn[`env`](/reference/functions/env.md)
+* [`config`](/reference/functions/config.md)
+* [`env`](/reference/functions/env.md)

@@ -57,8 +57,8 @@ output = input.match_regex("^[E|e]xample[!]?$")
 
 ## See Also
 
-* fn[`replace_regex`](/reference/functions/replace_regex.md)
-* fn[`split_regex`](/reference/functions/split_regex.md)
-* fn[`starts_with`](/reference/functions/starts_with.md)
-* fn[`ends_with`](/reference/functions/ends_with.md)
+* [`replace_regex`](/reference/functions/replace_regex.md)
+* [`split_regex`](/reference/functions/split_regex.md)
+* [`starts_with`](/reference/functions/starts_with.md)
+* [`ends_with`](/reference/functions/ends_with.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

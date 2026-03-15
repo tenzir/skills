@@ -51,7 +51,7 @@ from_fluent_bit "splunk", options = {port: 8088}
 
 Tip
 
-Use the dedicated [`to_splunk` operator](/reference/operators/to_splunk.md) to send events to a Splunk HEC.
+Use the dedicated [`to_splunk`](/reference/operators/to_splunk.md) operator to send events to a Splunk HEC.
 
 ### Imitate an ElasticSearch & OpenSearch Bulk API endpoint
 
