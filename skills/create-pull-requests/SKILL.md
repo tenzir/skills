@@ -38,18 +38,39 @@ with the changed functionality.
 Use this template for the pull request description:
 
 ```markdown
-## Problem
+<!-- Intro: what changed and why, in one or two sentences. Focus on user impact. -->
 
-<!-- What's broken, missing, or not good enough? -->
+### Review
 
-## Solution
+<!-- What deserves human attention? Architecture impact, trade-offs, risks, open questions. -->
 
-<!-- What does this PR do about it? -->
+### Details
 
-## Review
+<details>
+<summary>⁉️ Motivation</summary>
 
-<!-- Where to start, what to watch out for, or how to test. -->
+<!-- Background, prior state, motivation. Add section only if the intro doesn't make it obvious. -->
+
+</details>
+
+<details>
+<summary>🧪 Testing</summary>
+
+<!-- How was this verified? New unit/integration tests, manual steps, CI only? -->
+
+</details>
+
+<details>
+<summary>📌 References</summary>
+
+<!-- Issue/ticket link, e.g., TNZ-XXXX. Linked docs PRs. Relevant external resources.-->
+
+</details>
 ```
 
-Replace each HTML comment with a brief explanation. A sentence or two per
-section is plenty—the diff speaks for itself.
+Instructions:
+
+- Replace each HTML comment with a brief explanation.
+- Keep the intro to one or two sentences.
+- Prefer bullet lists over elaborate prose.
+- The diff speaks for itself, don't explain what files you changed.
