@@ -1,6 +1,6 @@
 # Linux
 
-The Linux extension defines Linux specific attributes, objects and classes.
+The Linux extension defines Linux specific attributes, profiles, objects, and classes.
 
 - **Name**: `linux`
 - **Version**: `1.8.0-dev`

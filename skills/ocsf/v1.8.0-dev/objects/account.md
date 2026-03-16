@@ -6,6 +6,13 @@ The Account object contains details about the account that initiated or performe
 
 ## Attributes
 
+### `is_on_premises_sync_enabled`
+
+- **Type**: `boolean_t`
+- **Requirement**: optional
+
+Indicates whether synchronization with an on-premises directory service is enabled. For example, Microsoft Entra Connect.
+
 ### `labels`
 
 - **Type**: `string_t`
@@ -48,7 +55,7 @@ The account type, normalized to the caption of 'account_type_id'. In the case of
 - `3`: `AWS IAM User`
 - `4`: `AWS IAM Role`
 - `5`: `GCP Account`
-- `6`: `Azure AD Account`
+- `6`: `Azure AD Account` - Note: The new product name for Azure AD is Microsoft Entra ID.
 - `7`: `Mac OS Account`
 - `8`: `Apple Account`
 - `9`: `Linux Account`
@@ -61,6 +68,7 @@ The account type, normalized to the caption of 'account_type_id'. In the case of
 - `16`: `Servicenow Instance`
 - `17`: `M365 Tenant`
 - `18`: `Email Account`
+- `19`: `ActiveDirectory Account`
 - `99`: `Other` - The account type is not mapped.
 
 The normalized account type identifier.

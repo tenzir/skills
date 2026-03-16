@@ -1,11 +1,6 @@
 ---
 name: ocsf
-description: >-
-  Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when
-  the user asks about OCSF classes, objects, attributes, profiles, extensions,
-  or event normalization. Also use when the user wants to classify security
-  events, find the right OCSF event class for a log source, or understand OCSF
-  attribute naming conventions.
+description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
 ---
 
 # OCSF
@@ -60,15 +55,15 @@ articles/{slug}.md
 
 Pick the shortest reading path for the question type.
 
-| Question pattern                              | Start here                                                                                                                       |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Which class fits event X?                     | Category table below → version classes index → candidate class pages                                                             |
-| What attributes does class/object Y have?     | Version classes or objects index → the specific page                                                                             |
-| How do profiles work? / Which profile for X?  | [Introduction: Profiles](introduction/profiles.md) → version profiles index                                                      |
-| How do I extend the schema?                   | [Introduction: Extensions](introduction/extensions.md) or [Patching the Core Schema](articles/patching-core-using-extensions.md) |
-| How do I populate observables / model alerts? | [FAQs](faqs.md) and [Articles](articles.md)                                                                                      |
-| What changed between versions?                | Compare the two version pages                                                                                                    |
-| Conceptual / design question                  | [Introduction](introduction.md) → [FAQs](faqs.md)                                                                                |
+| Question pattern | Start here |
+| --- | --- |
+| Which class fits event X? | Category table below → version classes index → candidate class pages |
+| What attributes does class/object Y have? | Version classes or objects index → the specific page |
+| How do profiles work? / Which profile for X? | [Introduction: Profiles](introduction/profiles.md) → version profiles index |
+| How do I extend the schema? | [Introduction: Extensions](introduction/extensions.md) or [Patching the Core Schema](articles/patching-core-using-extensions.md) |
+| How do I populate observables / model alerts? | [FAQs](faqs.md) and [Articles](articles.md) |
+| What changed between versions? | Compare the two version pages |
+| Conceptual / design question | [Introduction](introduction.md) → [FAQs](faqs.md) |
 
 When the question asks you to pick a class, read multiple candidates and explain
 trade-offs.
@@ -99,16 +94,16 @@ multiple profiles.
 Use the category range to narrow scope before diving into individual class
 pages.
 
-| Range | Category             | Focus                                                        |
-| ----- | -------------------- | ------------------------------------------------------------ |
-| 1xxx  | System Activity      | OS-level: process, file, module, memory, kernel, registry    |
-| 2xxx  | Findings             | Detections, vulnerabilities, incidents, compliance           |
-| 3xxx  | IAM                  | Authentication, authorization, account and group changes     |
-| 4xxx  | Network Activity     | General traffic and protocol-specific activity               |
-| 5xxx  | Discovery            | Device, user, service, and resource enumeration              |
-| 6xxx  | Application Activity | Web resources, API calls, file hosting, datastore operations |
-| 7xxx  | Remediation          | File, process, network, and entity remediation actions       |
-| 8xxx  | Unmanned             | Drones, vehicles, and robots                                 |
+| Range | Category | Focus |
+| ----- | -------- | ----- |
+| 1xxx | System Activity | OS-level: process, file, module, memory, kernel, registry |
+| 2xxx | Findings | Detections, vulnerabilities, incidents, compliance |
+| 3xxx | IAM | Authentication, authorization, account and group changes |
+| 4xxx | Network Activity | General traffic and protocol-specific activity |
+| 5xxx | Discovery | Device, user, service, and resource enumeration |
+| 6xxx | Application Activity | Web resources, API calls, file hosting, datastore operations |
+| 7xxx | Remediation | File, process, network, and entity remediation actions |
+| 8xxx | Unmanned | Drones, vehicles, and robots |
 
 ### Naming conventions
 
@@ -119,18 +114,18 @@ pages.
 
 Key suffixes:
 
-| Suffix              | Meaning                                                                                                                 |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `_id`               | Enum integer identifier with a sibling string (same name minus `_id`). `0` = Unknown, `99` = Other.                     |
-| `_uid`              | Schema-unique or external unique identifier (integer for classification attrs, string otherwise). Sibling uses `_name`. |
-| `_uuid`             | Globally unique 128-bit identifier (string). No sibling.                                                                |
-| `_name`             | Friendly name / caption sibling for `_uid` or `_id` attributes.                                                         |
-| `_time`             | Timestamp (`timestamp_t`, milliseconds since epoch).                                                                    |
-| `_dt`               | Datetime (`datetime_t`, RFC 3339 string). Added by the Date/Time profile alongside `_time` attributes.                  |
-| `_info` / `_detail` | Object carrying supplementary information.                                                                              |
-| `_process`          | Reference to a Process object.                                                                                          |
-| `_ver`              | Version string.                                                                                                         |
-| `_list`             | Array of values.                                                                                                        |
+| Suffix | Meaning |
+| ------ | ------- |
+| `_id` | Enum integer identifier with a sibling string (same name minus `_id`). `0` = Unknown, `99` = Other. |
+| `_uid` | Schema-unique or external unique identifier (integer for classification attrs, string otherwise). Sibling uses `_name`. |
+| `_uuid` | Globally unique 128-bit identifier (string). No sibling. |
+| `_name` | Friendly name / caption sibling for `_uid` or `_id` attributes. |
+| `_time` | Timestamp (`timestamp_t`, milliseconds since epoch). |
+| `_dt` | Datetime (`datetime_t`, RFC 3339 string). Added by the Date/Time profile alongside `_time` attributes. |
+| `_info` / `_detail` | Object carrying supplementary information. |
+| `_process` | Reference to a Process object. |
+| `_ver` | Version string. |
+| `_list` | Array of values. |
 
 ## Answering principles
 

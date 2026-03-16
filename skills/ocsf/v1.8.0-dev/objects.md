@@ -214,6 +214,7 @@
 - [AI Model](objects/ai_model.md)
 - [GPU Information](objects/gpu_info.md)
 - [Message Context](objects/message_context.md)
+- [Packet](objects/packet.md)
 - [Scan](objects/scan.md)
 - [Time Span](objects/timespan.md)
 - [Token](objects/token.md)

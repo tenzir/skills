@@ -80,6 +80,14 @@ The responder (server) in a network connection.
 
 A list of the JA4+ network fingerprints.
 
+### `network_observation_point`
+
+- **Type**: [`network_endpoint`](../objects/network_endpoint.md)
+- **Requirement**: optional
+- **Group**: context
+
+The network endpoint that observes or inspects network traffic as a third-party system, used when the observer is neither the source nor the destination of the communication (when `observation_point_id` = 3). Examples include network taps, span ports, inline security devices, or packet capture systems that monitor traffic between other endpoints.
+
 ### `observation_point`
 
 - **Type**: `string_t`
@@ -98,11 +106,19 @@ Indicates whether the source network endpoint, destination network endpoint, or 
 - `0`: `Unknown` - The observation point is unknown.
 - `1`: `Source` - The source network endpoint is the observation point.
 - `2`: `Destination` - The destination network endpoint is the observation point.
-- `3`: `Neither` - Neither the source nor destination network endpoint is the observation point.
+- `3`: `Neither` - Neither the source nor destination network endpoint is the observation point. Refer to the `network_observation_point` attribute for details.
 - `4`: `Both` - Both the source and destination network endpoint are the observation point. This typically occurs in localhost or internal communications where the source and destination are the same endpoint, often resulting in a `connection_info.direction` of `Local`.
 - `99`: `Other` - The observation point is not mapped. See the `observation_point` attribute for a data source specific value.
 
 The normalized identifier of the observation point. The observation point identifier indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity.
+
+### `packet_list`
+
+- **Type**: [`packet`](../objects/packet.md)
+- **Requirement**: optional
+- **Group**: context
+
+The list of packet objects describing captured network packets.
 
 ### `proxy`
 

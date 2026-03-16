@@ -27,6 +27,13 @@ The timestamp when the user was created.
 
 The timestamp when the user was deleted. In Active Directory (AD), when a user is deleted they are moved to a temporary container and then removed after 30 days. So, this field can be populated even after a user is deleted for the next 30 days.
 
+### `department`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The name of the department in which the user works.
+
 ### `display_name`
 
 - **Type**: `string_t`

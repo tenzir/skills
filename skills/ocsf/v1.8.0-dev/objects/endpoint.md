@@ -103,6 +103,13 @@ The endpoint operating system.
 
 The identity of the service or user account that owns the endpoint or was last logged into it.
 
+### `pool`
+
+- **Type**: [`group`](group.md)
+- **Requirement**: optional
+
+The pool of desktops or virtual machines to which the endpoint belongs.
+
 ### `subnet_uid`
 
 - **Type**: `string_t`

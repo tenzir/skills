@@ -86,7 +86,7 @@ Provides quality/containment on horizontal position. This is based on ADS-B NACp
 - **Type**: `boolean_t`
 - **Requirement**: optional
 
-The indication of whether the location is on premises.
+Indicates whether the location is on-premises.
 
 ### `isp`
 

@@ -1,6 +1,6 @@
 # Windows
 
-The Windows extension defines Windows specific attributes, objects and classes.
+The Windows extension defines Windows specific attributes, objects, and classes.
 
 - **Name**: `win`
 - **Version**: `1.8.0-dev`
