@@ -51,7 +51,9 @@ Title rules:
 
 ## Create the release
 
-Cut the release by running:
+### Stable release from the current queue
+
+Cut a stable release by running:
 
 ```sh
 uvx tenzir-ship release create \
@@ -64,6 +66,10 @@ This auto-bumps the version to the next version according to the set of
 available changelog entries. Auto-bumping is the best default and should always
 be used unless the user explicitly asks for something different.
 
+If the latest release is an outstanding release candidate, the same command
+promotes that latest RC to its matching stable release automatically. This is
+the preferred follow-up to `release create --rc`.
+
 For a manual bump, pass `--patch`, `--minor`, or `--major`. Only use this when
 the automatic detection is not the right fit for the release, e.g., when a minor
 feature should yield a patch instead of a minor release, or when a breaking
@@ -73,6 +79,44 @@ Only when the user explicitly provides a specific version, pass it as positional
 argument, e.g., `create v1.2.3`. This is a rare override, e.g., to re-cut a
 release that was tagged but failed to publish, or to align with an externally
 dictated version number.
+
+### Release candidate workflow
+
+Create or continue a release candidate by passing `--rc`:
+
+```sh
+uvx tenzir-ship release create --rc \
+  --title "<title>" \
+  --intro "<intro>" \
+  --yes
+```
+
+Release candidates snapshot the current unreleased queue without consuming it,
+so you can iterate on `-rc.N` releases before shipping the stable release.
+The stable base is inferred from the unreleased entry types; when the matching
+RC series already exists, `release create --rc` increments the `-rc.N` counter.
+
+When you are ready to ship the stable release, run the normal stable command
+again without `--rc`:
+
+```sh
+uvx tenzir-ship release create \
+  --title "<title>" \
+  --intro "<intro>" \
+  --yes
+```
+
+If an outstanding RC exists, this promotes the latest candidate to its matching
+stable release automatically.
+
+To override the inferred base, prefer a manual bump flag, for example
+`release create --rc --minor`. Pass a stable version only when the user needs
+an exact base version.
+
+Once an RC series exists, keep the workflow on that series: use `--rc` to cut
+another candidate, or run the stable command without `--rc` to promote the
+latest candidate. Do not try to bypass the RC snapshot with an explicit stable
+version or a manual bump.
 
 Replace `--intro` with `--intro-file` if the introduction contains escape-worthy
 characters.
@@ -102,6 +146,8 @@ Notes:
 
 - The `--commit` flag commits whatever is staged
 - The `--tag` option creates an annotated tag (that gets pushed automatically)
+- Without an explicit version, `release publish` targets the latest release, so the same command works for both stable releases and RCs
 - Add `--draft` if the user requested a draft release
-- Add `--prerelease` if the user requested marking the release as prerelease
-- Add `--no-latest` if the user requested that the release must not be marked as latest
+- `release publish` automatically treats `vX.Y.Z-rc.N` releases as GitHub prereleases and prevents them from being marked as latest
+- Add `--prerelease` only when the user explicitly wants to mark a stable version as prerelease
+- Add `--no-latest` if the user requested that a stable release must not be marked as latest
