@@ -61,12 +61,18 @@ uvx tenzir-ship release create \
 ```
 
 This auto-bumps the version to the next version according to the set of
-available changelog entries.
+available changelog entries. Auto-bumping is the best default and should always
+be used unless the user explicitly asks for something different.
 
-For a manual bump, pass `--patch`, `--minor`, or `--major`.
+For a manual bump, pass `--patch`, `--minor`, or `--major`. Only use this when
+the automatic detection is not the right fit for the release, e.g., when a minor
+feature should yield a patch instead of a minor release, or when a breaking
+change only affects an internal API and a major bump would be misleading.
 
-When a specific version is requested, pass an explicit version as position
-argument, e.g., `create v1.2.3`.
+Only when the user explicitly provides a specific version, pass it as positional
+argument, e.g., `create v1.2.3`. This is a rare override, e.g., to re-cut a
+release that was tagged but failed to publish, or to align with an externally
+dictated version number.
 
 Replace `--intro` with `--intro-file` if the introduction contains escape-worthy
 characters.
