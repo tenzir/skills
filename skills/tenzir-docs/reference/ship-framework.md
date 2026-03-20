@@ -290,7 +290,7 @@ When creating a release, the command also updates version fields in detected pac
 
 For stable releases, the default and preferred workflow is to omit both the manual bump flags and an explicit `version`. `tenzir-ship` auto-bumps from the unreleased entry types. Use `--patch`, `--minor`, or `--major` only when the automatic detection is not the right fit. Pass an explicit stable `version` only as a rare exact override, for example to re-cut a failed tagged release or to match an externally dictated version.
 
-If an outstanding release candidate exists, the same version-less stable command promotes the latest RC to its matching stable release automatically.
+If an outstanding release candidate exists, the same version-less stable command promotes the latest RC to its matching stable release automatically. This is the only promotion path for the active RC. If you need to leave the RC cycle and ship a different stable release instead, pass a new explicit version such as `v1.2.4`, `v1.3.0`, or `v2.0.0`. An explicit version matching the active RC base is rejected.
 
 The command renders `notes.md`, updates `manifest.yaml`, and writes entry snapshots into `entries/`. Stable releases consume matching entry files from `unreleased/`. Release candidates created with `--rc` copy the current unreleased queue without consuming it, so you can iterate on `-rc.N` releases before promoting one to stable. It performs a dry run by default. When the release already exists, the CLI refreshes metadata and synchronizes the selected entries. If no changelog entries are available, the command still succeeds when you provide `--intro` or `--intro-file`, creating an intro-only release. This is useful for re-publishing after yanking a package or retrying a failed publish workflow. Without either entries or intro text, the command fails with an error.
 
@@ -304,7 +304,7 @@ Create or continue a release candidate with:
 tenzir-ship release create --rc --yes
 ```
 
-`tenzir-ship` infers the stable base from the current unreleased changes and existing release history. Re-running `release create --rc` for the same base increments the matching `-rc.N` series instead of consuming unreleased entries. To override the inferred base, prefer a manual bump such as `--minor`. Pass an explicit stable `version` only when you need an exact base.
+`tenzir-ship` infers the stable base from the current unreleased changes and existing release history. Re-running `release create --rc` for the same base increments the matching `-rc.N` series instead of consuming unreleased entries. Each new `-rc.N` supersedes the previous RC snapshot for that stable target, so only the active candidate remains in release history. To override the inferred base, prefer a manual bump such as `--minor`. Pass an explicit stable `version` only when you need an exact base.
 
 When you are ready to ship the stable release, rerun the normal stable command without `--rc`:
 
@@ -327,7 +327,13 @@ tenzir-ship release create --rc --yes
 tenzir-ship release create --yes
 ```
 
-Avoid explicit stable versions and manual bump flags while an RC is outstanding. They add room for mistakes and the CLI rejects them.
+The RC workflow has three outcomes only:
+
+* Run `release create --rc` to continue the current RC series.
+* Run `release create` without a version or bump flag to promote the active RC.
+* Run `release create <new-version>` or a manual bump flag to leave the RC cycle and ship a different stable release instead.
+
+Promoting to stable closes the RC cycle and removes that cycle’s `vX.Y.Z-rc.N` manifests from `releases/`. An explicit version matching the active RC base is rejected, and manual bump flags never promote the active RC.
 
 ### release version
 
@@ -477,7 +483,7 @@ Use `rc: true` for iterative release-candidate builds.
 
 For normal stable releases, prefer leaving both `bump` and `version` unset so the workflow auto-resolves the release version from the changelog.
 
-If an outstanding RC exists, that same version-less workflow promotes the latest candidate automatically. Once an RC exists, either keep using `rc: true` to continue that series or run the stable workflow without `rc` to promote the latest candidate.
+If an outstanding RC exists, that same version-less workflow promotes the latest candidate automatically. This is the only promotion path for the active RC. To leave the RC cycle and ship a different stable release instead, set `version` to a new stable target. Once an RC exists, either keep using `rc: true` to continue that series or run the stable workflow without `rc`, `bump`, or `version` to promote the latest candidate.
 
 ### validate
 
