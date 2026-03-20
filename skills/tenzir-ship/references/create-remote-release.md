@@ -23,8 +23,9 @@ repository accepts these common inputs:
 - **bump**: Optional manual bump for a stable release (`patch`, `minor`, or
   `major`). Leave this unset or use `auto` unless the user explicitly requests
   a manual bump.
-- **version**: Optional explicit stable version, used for exact overrides or
-  when promoting a specific stable release.
+- **version**: Optional explicit stable version. During an active RC phase,
+  use this only to leave the RC cycle and ship a different stable release
+  target.
 - **rc**: Optional boolean that creates or continues the release-candidate
   series for the resolved stable version.
 
@@ -44,8 +45,9 @@ gh workflow run release.yaml \
 
 Do not specify a version bump unless explicitly requested. The workflow will
 pick the appropriate bump according to the changelog entry types. If an
-outstanding release candidate exists, this same invocation promotes the latest
-RC to its matching stable release automatically.
+outstanding release candidate exists, this same version-less invocation
+promotes the latest RC to its matching stable release automatically. This is
+the only promotion path for the active RC.
 
 ### Stable release with manual bump
 
@@ -69,10 +71,15 @@ To override the inferred stable base for the RC, prefer a manual bump such as
 `-f rc=true -f bump=minor`. Pass a stable `version` only when the user needs an
 exact base version.
 
-Once an RC series exists, keep the workflow on that series: trigger another RC
-with `-f rc=true`, or trigger the normal stable workflow without `rc` to
-promote the latest candidate. Do not try to bypass the RC snapshot with an
-explicit stable version or a manual bump.
+Once an RC series exists, the workflow has three outcomes only:
+
+- Trigger another RC with `-f rc=true` to continue the same RC series.
+- Trigger the normal stable workflow without `rc`, `bump`, or `version` to
+  promote the latest candidate.
+- Use `bump` or an explicit later stable `version` only when the user wants to
+  leave the RC cycle and ship a different stable release instead.
+
+Reject an explicit stable `version` that matches the active RC base.
 
 ## Monitor the run
 
