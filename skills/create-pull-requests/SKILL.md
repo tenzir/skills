@@ -49,7 +49,7 @@ Use this template for the pull request description:
 ### Details
 
 <details>
-<summary>⁉️ Motivation</summary>
+<summary>🙋‍♂️ Motivation</summary>
 
 <!-- Background, prior state, motivation. Add section only if the intro doesn't make it obvious. -->
 
@@ -65,14 +65,17 @@ Use this template for the pull request description:
 <details>
 <summary>📌 References</summary>
 
-<!-- Issue/ticket link, e.g., TNZ-XXXX. Linked docs PRs. Relevant external resources.-->
+<!-- Issue/ticket link incl. *magic words*, e.g., "Resolves TNZ-XXXX". Linked
+docs PRs. Relevant external resources. -->
 
 </details>
 ```
 
 Instructions:
 
-- Replace each HTML comment with a brief explanation.
+- The target audience is a senior software engineer. Be brief and to the point.
+- Replace each HTML comment with a terse explanation.
 - Keep the intro to one or two sentences.
 - Prefer bullet lists over elaborate prose.
 - The diff speaks for itself, don't explain what files you changed.
+- Do not render empty subsections in the details section.
