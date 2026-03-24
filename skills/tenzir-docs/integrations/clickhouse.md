@@ -64,19 +64,19 @@ Tenzir can automatically create tables in ClickHouse based on the incoming data 
 
 ```tql
 from "ocsf_network_activity.json"
-ocsf::cast
-to_clickhouse table="ocsf.network_activity", primary=timestamp, tls=false
+ocsf::cast encode_variants=true, null_fill=true
+to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time, tls=false
 ```
 
 When creating a table, the [`to_clickhouse`](/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. You must take care that there are no untyped nulls in this event, as the operator cannot transmit those.
 
-In this example, we use the [`ocsf::cast`](/reference/operators/ocsf/cast.md) operator, which will automatically align events with the correct OCSF schema, giving all fields the correct types and adding all fields that should be in `ocsf.network_activity`. This ensures that we create a complete table without missing or incorrectly typed columns.
+In this example, we use the [`ocsf::cast`](/reference/operators/ocsf/cast.md) operator, which will automatically align events with the correct OCSF schema, giving all fields the correct types and adding all fields that should be in `ocsf.Network_Activity`. This ensures that we create a complete table without missing or incorrectly typed columns.
 
 You can now query the data in ClickHouse, e.g.:
 
 ```sql
 SELECT median(traffic.bytes_in), median(traffic.bytes_out)
-FROM ocsf.network_activity
+FROM ocsf.Network_Activity
 GROUP BY *
 ```
 

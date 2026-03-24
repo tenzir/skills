@@ -5,7 +5,7 @@ Sends events to a ClickHouse table.
 
 ```tql
 to_clickhouse table=string, [host=string, port=int, user=string, password=string,
-                             mode=string, primary=field,
+                             mode=string, primary=field, database=string,
                              tls=record]
 ```
 
@@ -13,7 +13,11 @@ to_clickhouse table=string, [host=string, port=int, user=string, password=string
 
 ### `table = string`
 
-The name of the table you want to write to. When giving a plain table name, it will use the `default` database, otherwise `database.table` can be specified.
+The name of the table you want to write to.
+
+This can be a dynamic expression, allowing you to automatically write to different tables based on the data.
+
+The `<database>.<table>` notation can be used to also specify a table. If no `<database>`, is provided, `"default"` will be used.
 
 ### `host = string (optional)`
 
@@ -41,9 +45,9 @@ Defaults to `""`.
 
 ### `mode = string (optional)`
 
-* `"create"` if you want to create a table and fail if it already exists
-* `"append"` to append to an existing table
-* `"create_append"` to create a table if it does not exist and append to it otherwise.
+* `"create"` Create a table and database. Fails the table already exists.
+* `"append"` Appends to an existing table. Fails if the table or database do not exist.
+* `"create_append"` Creates a table and database if they do not exist. Appends if the table already exists.
 
 Defaults to `"create_append"`.
 
@@ -149,6 +153,16 @@ from "my_file.csv"
 to_clickhouse table="my_table", tls=false
 ```
 
+### Send OCSF data to ClickHouse
+
+When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](/reference/operators/ocsf/cast.md). This allows us to encode the `unmapped` field as JSON and fill any missing fields with `null`, ensuring a single schema.
+
+```tql
+subscribe "ocsf"
+ocsf::cast encode_variants=true, null_fill=true
+to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time
+```
+
 ### Create a new table with multiple fields
 
 ```tql
@@ -171,4 +185,5 @@ This creates the following table:
 
 ## See Also
 
+* [`ocsf::cast`](/reference/operators/ocsf/cast.md)
 * [ClickHouse](../../integrations/clickhouse.md)
