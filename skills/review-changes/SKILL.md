@@ -181,6 +181,7 @@ Use this format:
 │ 🔴 P1: 0   🟠 P2: 1   🟡 P3: 2   ⚪ P4: 1 │
 ╰───────────────────────────────────────────╯
 **Needs changes**:
+
 - Fix the inconsistent error handling in `src/api.ts`, `src/jobs.ts`, and `src/worker.ts`.
 - Add a retry-path test so this regression does not recur.
 - Merge after the P2 issue is resolved.
@@ -197,11 +198,13 @@ Write the bullets as a call to action. Prefer concrete next steps over vague
 summaries.
 
 Good:
+
 - `Add the missing authorization check in the admin route.`
 - `Update the docs to mention the new default timeout.`
 - `Merge after the flaky retry test is fixed.`
 
 Avoid:
+
 - `Authorization issue.`
 - `Docs need work.`
 - `Some tests are missing.`

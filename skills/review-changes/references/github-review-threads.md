@@ -3,7 +3,15 @@
 Use this reference when the review includes existing GitHub PR feedback or when
 you need to recommend how to respond to a reviewer.
 
+*Replying and resolving is last step of any response to a review.* Every comment
+you act on must receive a reply and be resolved before the task is considered
+done. Leaving threads open after making the requested changes is an incomplete
+response, even if the code is correct.
+
 ## Decision Rules
+
+Every open thread requires a decision: pick one of the four rules below and act
+on it.
 
 ### Resolve without reply
 
