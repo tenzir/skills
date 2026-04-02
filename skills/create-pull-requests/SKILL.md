@@ -40,42 +40,22 @@ with the changed functionality by routing any entry updates through
 Use this template for the pull request description:
 
 ```markdown
-<!-- Intro: what changed and why, in one or two sentences. Focus on user impact. -->
+## 🔍 Problem
 
-### Review
+<!-- What is the problem, gap, or pain point this PR addresses? -->
 
-<!-- What deserves human attention? Architecture impact, trade-offs, risks, open questions. -->
+## 🛠️ Solution
 
-### Details
+<!-- How does this PR address the problem? -->
 
-<details>
-<summary>🙋‍♂️ Motivation</summary>
+## 💬 Review
 
-<!-- Background, prior state, motivation. Add section only if the intro doesn't make it obvious. -->
-
-</details>
-
-<details>
-<summary>🧪 Testing</summary>
-
-<!-- How was this verified? New unit/integration tests, manual steps, CI only? -->
-
-</details>
-
-<details>
-<summary>📌 References</summary>
-
-<!-- Issue/ticket link incl. *magic words*, e.g., "Resolves TNZ-XXXX". Linked
-docs PRs. Relevant external resources. -->
-
-</details>
+<!-- Where should reviewers focus? Architecture decisions, trade-offs, risks, open questions. -->
 ```
 
 Instructions:
 
 - The target audience is a senior software engineer. Be brief and to the point.
 - Replace each HTML comment with a terse explanation.
-- Keep the intro to one or two sentences.
 - Prefer bullet lists over elaborate prose.
 - The diff speaks for itself, don't explain what files you changed.
-- Do not render empty subsections in the details section.
