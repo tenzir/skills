@@ -141,8 +141,7 @@ Publishing a release via `tenzir-ship` performs the following steps:
 
 ### Procedure
 
-Inspect the current git changes and stage the exact set you want in the release
-commit via `git add`. Then run:
+Inspect the current git changes and stage the exact set you want in the release commit via `git add`. Then run:
 
 ```sh
 uvx tenzir-ship release publish \
@@ -164,3 +163,5 @@ Notes:
   version as prerelease.
 - Add `--no-latest` if the user requested that a stable release must not be
   marked as latest.
+
+After `release publish` completes, **stop**. Do not publish to package registries (npm, PyPI, etc.) manually, CI typically handles this automatically when the tag is pushed.
