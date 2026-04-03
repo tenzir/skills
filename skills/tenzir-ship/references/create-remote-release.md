@@ -9,7 +9,19 @@ If either check fails, abort.
 
 ## Locate GitHub Actions workflow
 
-Identify the CI release workflow file, e.g., `.github/workflows/release.yaml`.
+Find the workflow file that triggers releases in this repository. Look for a
+`workflow_dispatch` workflow under `.github/workflows/` whose job calls
+`tenzir/ship/.github/workflows/release.yaml` or whose name/filename suggests
+it is the release entrypoint (common names: `release.yaml`,
+`trigger-release.yaml`, `publish.yaml`).
+
+```sh
+grep -rl "workflow_dispatch" .github/workflows/ | xargs grep -l "release" 2>/dev/null
+```
+
+Use the discovered filename for all `gh workflow run` invocations below. If
+more than one candidate matches, prefer the one that explicitly delegates to
+`tenzir/ship/.github/workflows/release.yaml`.
 
 ## Determine release inputs
 
@@ -33,12 +45,13 @@ If you encounter other inputs, make reasonable choices and inform the user.
 
 ## Trigger the workflow
 
-Pick the invocation that matches the requested workflow.
+Pick the invocation that matches the requested workflow. Replace
+`<workflow-file>` with the filename discovered above.
 
 ### Stable release with auto-inferred bump
 
 ```sh
-gh workflow run release.yaml \
+gh workflow run <workflow-file> \
   -f intro="<intro text>" \
   -f title="<title>"
 ```
@@ -52,7 +65,7 @@ the only promotion path for the active RC.
 ### Stable release with manual bump
 
 ```sh
-gh workflow run release.yaml \
+gh workflow run <workflow-file> \
   -f intro="<intro text>" \
   -f title="<title>" \
   -f bump=<patch|minor|major>
@@ -61,7 +74,7 @@ gh workflow run release.yaml \
 ### Release candidate
 
 ```sh
-gh workflow run release.yaml \
+gh workflow run <workflow-file> \
   -f intro="<intro text>" \
   -f title="<title>" \
   -f rc=true
