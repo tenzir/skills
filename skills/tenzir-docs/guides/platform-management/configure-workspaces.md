@@ -153,8 +153,3 @@ tenzir-platform tools generate-workspace-token <workspace-id>
 Caution
 
 Workspace tokens have a specific format. Do not create them manually. Use the `generate-workspace-token` command or see the [ephemeral nodes guide](use-ephemeral-nodes.md#workspace-token-format) for format details.
-
-## Contents
-
-- [Configure-dashboards](configure-dashboards.md)
-- [Use-ephemeral-nodes](use-ephemeral-nodes.md)

@@ -154,6 +154,18 @@ This guide shows you how to start the Tenzir Platform using Docker Compose. Comp
 
 #### Platform Management
 
+##### [Manage organizations](guides/platform-management/manage-organizations.md)
+
+This guide shows you how to create, configure, and delete organizations in the Tenzir Platform. You’ll learn how to perform these tasks through both the web app and the CLI.
+
+##### [Manage organization members](guides/platform-management/manage-organization-members.md)
+
+This guide shows you how to invite people to your organization, manage existing members, and understand the role-based permission model. You’ll learn how to use both the web app and the CLI for these tasks.
+
+##### [Manage organization workspaces](guides/platform-management/manage-organization-workspaces.md)
+
+This guide shows you how to create, view, and delete workspaces that belong to an organization. You’ll learn the difference between personal and organization workspaces and how access control works for shared workspaces.
+
 ##### [Configure workspaces](guides/platform-management/configure-workspaces.md)
 
 Workspaces in the platform logically group nodes, secrets, and dashboards.
