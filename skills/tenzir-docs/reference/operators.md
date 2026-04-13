@@ -149,7 +149,7 @@ context::inspect "ctx"
 
 ### [context::list](operators/context/list.md)
 
-Lists all contexts
+Lists all contexts.
 
 ```tql
 context::list
@@ -161,6 +161,14 @@ Loads context state.
 
 ```tql
 context::load "ctx"
+```
+
+### [context::lookup](operators/context/lookup.md)
+
+Performs unified matching.
+
+```tql
+context::lookup "ctx", key=field
 ```
 
 ### [context::remove](operators/context/remove.md)

@@ -30,6 +30,7 @@
 - [context::inspect](operators/context/inspect.md): Resets a context.
 - [context::list](operators/context/list.md): Lists all contexts
 - [context::load](operators/context/load.md): Loads context state.
+- [context::lookup](operators/context/lookup.md): Performs live filtering of the import feed using a context and translates context updates into historical queries.
 - [context::remove](operators/context/remove.md): Deletes a context.
 - [context::reset](operators/context/reset.md): Resets a context.
 - [context::save](operators/context/save.md): Saves context state.
