@@ -4,11 +4,11 @@ description: >-
   Review code changes in Tenzir projects. Use when auditing diffs or pull
   requests for bugs, security issues, missing tests, documentation drift,
   readability problems, performance regressions, user experience issues, or
-  when deciding how to respond to GitHub review comments. Also use this skill
-  whenever the user says "review", "look at this PR", "check my changes",
-  "audit this diff", "what do you think of this code", or asks for feedback on
-  any code they've written or changed — even if they don't explicitly say
-  "code review."
+  when deciding how to respond to pull request review comments, especially
+  GitHub review comments and threads. Also use this skill whenever the user
+  says "review", "look at this PR", "check my changes", "audit this diff",
+  "what do you think of this code", or asks for feedback on any code they've
+  written or changed — even if they don't explicitly say "code review."
 ---
 
 # Review Changes
@@ -19,21 +19,28 @@ Review changed code with explicit severity and confidence.
 
 Follow this sequence to produce a thorough, efficient review:
 
-1. **Understand intent.** Read the PR description, commit messages, and any
-   linked issues. Know what the change is _trying_ to do before judging how
-   well it does it.
-2. **Scan for scope.** Skim the full diff to understand what areas it touches —
+1. **Understand intent.** Read the PR description, commit messages, linked
+   issues, and any existing reviewer feedback. Know what the change is _trying_
+   to do before judging how well it does it.
+2. **Load prior-feedback guidance when needed.** If the review already has
+   comments or notes, read `references/reviewer-feedback.md` before reviewing
+   the diff so you can check whether that feedback still applies and how to
+   respond to it. On GitHub pull requests, also read
+   `references/github-pr-reviews.md` for thread state, reply, and resolution
+   guidance.
+3. **Scan for scope.** Skim the full diff to understand what areas it touches —
    files, modules, layers. This determines which lenses to load.
-3. **Select lenses.** Use the table below to pick the relevant reviewer lenses.
-   Load only what applies; skip the rest.
-4. **Review each file.** Walk the diff file by file. Pull in adjacent unchanged
+4. **Select lenses.** Use the table below to pick the relevant technical
+   lenses. Load only what applies; skip the rest. Readability is the baseline.
+5. **Review each file.** Walk the diff file by file. Pull in adjacent unchanged
    code only when it is necessary to explain impact or verify whether an issue
-   is real.
-5. **Synthesize.** After the file-by-file pass, look for groupable root causes.
+   is real. Re-check prior reviewer feedback against the latest code before you
+   repeat or endorse it.
+6. **Synthesize.** After the file-by-file pass, look for groupable root causes.
    Multiple symptoms in different files may share one underlying problem —
    present those as a grouped finding instead of separate entries.
-6. **Write up findings** using the format and presentation rules below.
-7. **Produce a verdict** in the summary section.
+7. **Write up findings** using the format and presentation rules below.
+8. **Produce a verdict** in the summary section.
 
 ## Lens Selection
 
@@ -48,7 +55,6 @@ Readability is always worth loading as a baseline.
 | Hot paths, loops, queries, large data    | Performance             |
 | New features, bug fixes, branching logic | Tests                   |
 | Docs, README, docstrings, examples       | Documentation           |
-| Existing GitHub review comments          | GitHub review threads   |
 | Anything else                            | Readability (always on) |
 
 ## Scope
@@ -79,8 +85,12 @@ Each finding must include:
 - `File`: location with line numbers
 - `Issue`: one-sentence problem statement
 - `Reasoning`: why the behavior is wrong or risky
-- `Evidence`: concrete code, types, behavior, or reviewer comment
+- `Evidence`: concrete code, types, or behavior
 - `Suggestion`: a specific fix or next action
+
+When a finding originates from external review feedback, add an optional
+`Source` field with a link to the originating comment or note. For GitHub
+reviews, link directly to the review comment.
 
 Use this header format:
 
@@ -97,7 +107,6 @@ Use these prefixes:
 - `RDY`: readability
 - `DOC`: documentation
 - `PRF`: performance
-- `GIT`: GitHub review feedback
 
 Use these category icons when presenting a review summary:
 
@@ -110,7 +119,6 @@ Use these category icons when presenting a review summary:
 | `RDY`  | 👁️    | readability      |
 | `DOC`  | 📖    | documentation    |
 | `PRF`  | 🚀    | performance      |
-| `GIT`  | 💬    | GitHub feedback  |
 | `GRP`  | 📦    | grouped findings |
 
 ## Review Presentation
@@ -129,11 +137,8 @@ Examples:
 🟡 P3 · 🧪 TST-2 · Missing edge case test (82%) · tests/api.test.ts:78
 ```
 
-For GitHub findings, append the author when available:
-
-```text
-🟠 P2 · 💬 GIT-1 · Consider using constants (90%) · src/config.ts:23 (@reviewer)
-```
+When a finding originates from prior review feedback, add a `Source` line with
+that comment or note.
 
 If multiple findings collapse into one root cause, you may present a grouped
 summary:
@@ -213,15 +218,32 @@ If cross-cutting themes emerged (for example, "error handling is inconsistent
 across three files"), use one bullet to name the theme and the remaining
 bullets to say what should happen next.
 
-## Reviewer Lenses
+## Technical Lenses
 
 Load only the lenses that matter for the current diff:
 
 - [architecture](references/architecture.md)
 - [documentation](references/docs.md)
-- [GitHub review threads](references/github-review-threads.md)
 - [performance](references/performance.md)
 - [readability](references/readability.md)
 - [security](references/security.md)
 - [tests](references/tests.md)
 - [user experience](references/ux.md)
+
+## Prior Reviewer Feedback
+
+When the change already has review comments or the user asks how to respond,
+read [reviewer feedback](references/reviewer-feedback.md). Use that input to
+sharpen findings, verify whether comments still apply, and draft concise
+responses after the technical review is complete.
+
+### GitHub pull requests
+
+When reviewing a GitHub pull request, check for existing review comments and
+unresolved threads up front. If any exist, read
+[reviewer feedback](references/reviewer-feedback.md) and
+[GitHub pull request reviews](references/github-pr-reviews.md) before
+reviewing the diff. When a valid finding originates from a GitHub comment, add
+a `Source` line that links directly to that comment. Use the GitHub-specific
+reference to decide whether to reply, resolve, discuss further, or leave the
+thread open.
