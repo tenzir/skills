@@ -1,6 +1,12 @@
 # Write commit messages
 
-Write clear, consistent git commit messages in Tenzir projects.
+Write clear, consistent Git commit messages in Tenzir projects.
+
+## Goal
+
+Help a future reader understand what changed and why. Lead with the effect of
+the change. That is often user-facing, but internal commits can describe
+correctness, performance, batching, or cleanup outcomes when those matter more.
 
 ## Format
 
@@ -10,21 +16,41 @@ Write clear, consistent git commit messages in Tenzir projects.
 <body>
 ```
 
+A subject line alone is enough for tiny, obvious commits. If a reader would ask
+"why?", add a body.
+
+## Before writing
+
+If nothing is staged yet, read the relevant working-tree diff to decide what
+belongs in the commit. After staging, read the staged diff and write the
+message from that exact snapshot. Identify:
+
+1. The single logical change.
+2. The motivation or bug.
+3. Any consequence worth noting, such as test updates or cleanup.
+
 ## Subject line
 
 - Keep it under 50 characters.
 - Use the imperative mood.
-- Focus on user capability, not implementation.
-- Capitalize the first letter.
-- Do not end the line with a period.
+- Capitalize the first word.
+- Do not end it with a period.
+- Describe the effect of the change, not just the mechanics.
+- For performance or correctness work, name the invariant, failure mode, or
+  cost you changed.
 
 ## Body
 
 - Wrap at 72 characters.
-- Explain what changed and why it changed.
+- Explain what changed and why.
 - Separate it from the subject with a blank line.
+- Use active voice and present tense.
+- Prefer one to three short paragraphs.
 
 ## Writing style
+
+Write for someone reading the log in six months. Avoid narrating only code
+motion when you can describe the outcome instead.
 
 Perspective: Write from users' capabilities and needs, not technical
 implementation.
@@ -58,11 +84,9 @@ Remove deprecated export command
 Use `to` instead. The export command has been deprecated since v4.0.
 ```
 
-## Best practices
+## Commit mechanics
 
-- One logical change per commit.
-- Commit early and often.
-- Order commits so dependencies appear in sequence.
-- Write for someone reading the log in six months.
+- Use separate `-m` arguments for the subject and body.
+- Do not put literal `\n` escapes in a single `-m` string.
+- Use `git commit --fixup <SHA1>` for commits meant to be squashed.
 - Reference issues when relevant with `Resolves: #123` or `See also: #456`.
-- Use `git commit --fixup <SHA1>` for corrections meant to be squashed.
