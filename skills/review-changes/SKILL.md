@@ -25,9 +25,12 @@ Follow this sequence to produce a thorough, efficient review:
 2. **Load prior-feedback guidance when needed.** If the review already has
    comments or notes, read `references/reviewer-feedback.md` before reviewing
    the diff so you can check whether that feedback still applies and how to
-   respond to it. On GitHub pull requests, also read
-   `references/github-pr-reviews.md` for thread state, reply, and resolution
-   guidance.
+   respond to it. When the user asks to address existing GitHub review
+   feedback, collect the active comments first, map each still-valid concern
+   to the relevant technical lens, and surface it in the normal finding
+   format before you decide how to reply or resolve. On GitHub pull requests,
+   also read `references/github-pr-reviews.md` for thread state, reply, and
+   resolution guidance.
 3. **Scan for scope.** Skim the full diff to understand what areas it touches —
    files, modules, layers. This determines which lenses to load.
 4. **Select lenses.** Use the table below to pick the relevant technical
@@ -235,7 +238,9 @@ Load only the lenses that matter for the current diff:
 When the change already has review comments or the user asks how to respond,
 read [reviewer feedback](references/reviewer-feedback.md). Use that input to
 sharpen findings, verify whether comments still apply, and draft concise
-responses after the technical review is complete.
+responses after the technical review is complete. Carry prior feedback into
+the review by translating each still-valid concern into the appropriate
+technical finding.
 
 ### GitHub pull requests
 
@@ -243,7 +248,7 @@ When reviewing a GitHub pull request, check for existing review comments and
 unresolved threads up front. If any exist, read
 [reviewer feedback](references/reviewer-feedback.md) and
 [GitHub pull request reviews](references/github-pr-reviews.md) before
-reviewing the diff. When a valid finding originates from a GitHub comment, add
-a `Source` line that links directly to that comment. Use the GitHub-specific
-reference to decide whether to reply, resolve, discuss further, or leave the
-thread open.
+reviewing the diff. Surface each still-valid concern as the appropriate
+technical finding, and add a `Source` line that links directly to the GitHub
+comment. Use the GitHub-specific reference to decide whether to reply,
+resolve, discuss further, or leave the thread open.

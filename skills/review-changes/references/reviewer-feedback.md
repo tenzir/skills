@@ -14,9 +14,10 @@ For GitHub-specific thread handling, also read
 
 - **Re-check comments against the latest code.** Do not assume a comment from a
   previous review round is still accurate after follow-up commits.
-- **Distill the underlying concern.** Fold the comment into the relevant
-  category — security, architecture, tests, UX, readability, documentation, or
-  performance.
+- **Distill the underlying concern.** Fold each still-valid comment into the
+  relevant category — security, architecture, tests, UX, readability,
+  documentation, or performance — and restate it as a normal finding before
+  you draft a response.
 - **Capture provenance.** When a finding originates from prior feedback, add a
   `Source` line with a link to the originating comment or note.
 - **Collapse duplicates.** If several reviewers point at the same root cause,
@@ -67,7 +68,8 @@ concern without explaining why the current approach is still the right choice.
 Use the standard finding format from [the main skill](../SKILL.md). When a
 finding originates from prior feedback, add a compact `Source` line with the
 original comment or note URL first, then append the reviewer identity if that
-helps.
+helps. For example, a comment about missing coverage should surface as `TST`,
+and a comment about confusing behavior should surface as `UXD`.
 
 Example:
 

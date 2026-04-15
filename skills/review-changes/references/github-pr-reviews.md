@@ -16,6 +16,9 @@ Before you review the latest diff:
 - Re-check comments against the latest commits before surfacing them as active
   findings.
 - Skip resolved threads and comments that later commits already addressed.
+- When the task involves existing GitHub review comments, translate each
+  still-active concern into the appropriate technical finding before you
+  decide whether to reply or resolve.
 - When a finding originates from a GitHub comment, link the `Source` field to
   the direct comment URL.
 
@@ -70,6 +73,8 @@ close it unless they explicitly ask you to resolve it. Give concrete reasoning.
 Use the standard finding format from [the main skill](../SKILL.md). For
 GitHub-originated findings, keep the `Source` line compact: use the direct
 review comment URL first, then append the reviewer handle if that helps.
+Classify the concern under the relevant technical category, then attach the
+GitHub source.
 
 Example:
 
@@ -83,6 +88,9 @@ If the concern is already fixed, summarize that instead of reporting a finding:
 The latest commit adds the missing retry test, so I would not keep this as an
 active review finding. Suggested reply: "Added in abc1234."
 ```
+
+If the concern is still active, surface it like any other finding, with the
+right technical category and a `Source` line back to the thread.
 
 ## Reply style
 
