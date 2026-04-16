@@ -27,10 +27,14 @@ Handle the operational workflow around docs.tenzir.com changes.
    documentation guidance and conventions.
 4. Run relevant documentation checks if the docs repository provides them.
 5. File a `tenzir/docs` pull request from `.docs/`.
-6. Cross-link the pull requests (see also the `create-pull-requests` skill for
-   the code-side PR workflow):
-   - In the docs PR, add a `Functional PRs` section linking the main PR.
-   - In the main PR, add a `Documentation PR` section linking the docs PR.
+6. Cross-link the pull requests using one shared compact footer pattern:
+   - In the docs PR, append a final `<sub>...</sub>` footer line such as
+     `🔗 Code PR: <code-pr-url>`.
+   - In the code PR, append or extend the final `<sub>...</sub>` footer with
+     `🔗 Documentation PR: <docs-pr-url>`.
+   - Prefer that footer over dedicated `Code PR` or `Documentation PR`
+     sections. If a footer already exists, add another `<br>`-separated line
+     instead of creating a second footer.
 7. Summarize what changed and note any follow-up work.
 
 ## Branching
@@ -38,6 +42,30 @@ Handle the operational workflow around docs.tenzir.com changes.
 Keep the `.docs/` branch name aligned with the code branch whenever possible.
 If the code change spans multiple repositories, use the code branch as the
 source of truth for naming and cross-links.
+
+## PR cross-link format
+
+Keep docs/code cross-links in a compact footer at the end of each PR
+description. When multiple issues share the same relationship in the code PR
+footer, enumerate them after one magic word on one line to keep the footer
+compact. Use separate lines only when the relationship differs.
+
+Docs PR example:
+
+```markdown
+<sub>
+🔗 Code PR: https://github.com/tenzir/tenzir/pull/1234
+</sub>
+```
+
+Code PR example:
+
+```markdown
+<sub>
+🔗 Documentation PR: https://github.com/tenzir/docs/pull/261<br>
+✅ Resolves TNZ-150, TNZ-151
+</sub>
+```
 
 ## Cross-Checks
 
