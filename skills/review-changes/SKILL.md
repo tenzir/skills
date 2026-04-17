@@ -42,8 +42,9 @@ Follow this sequence to produce a thorough, efficient review:
 6. **Synthesize.** After the file-by-file pass, look for groupable root causes.
    Multiple symptoms in different files may share one underlying problem —
    present those as a grouped finding instead of separate entries.
-7. **Write up findings** using the format and presentation rules below.
-8. **Produce a verdict** in the summary section.
+7. **Write up the review** using the report structure below: H1, short
+   introduction, `## Overview`, `## Findings`, and `## Verdict`.
+8. **Produce a verdict** in the final section.
 
 ## Lens Selection
 
@@ -81,6 +82,19 @@ Report findings with confidence ≥ 80. For findings between 60–79, mention th
 briefly in a "Lower-confidence observations" section at the end, clearly marked
 as uncertain. Below 60, drop them entirely.
 
+## Report Structure
+
+Use this shape:
+
+1. `# Code Review`
+2. one or two sentences of context
+3. `## Overview`
+4. `## Findings`
+5. `## Verdict`
+6. optional `## Lower-confidence observations`
+
+Prefer the example below over extra narration.
+
 ## Finding Format
 
 Each finding must include:
@@ -91,11 +105,10 @@ Each finding must include:
 - `Evidence`: concrete code, types, or behavior
 - `Suggestion`: a specific fix or next action
 
-When a finding originates from external review feedback, add an optional
-`Source` field with a link to the originating comment or note. For GitHub
+Add `Source` when a finding comes from prior review feedback. For GitHub
 reviews, link directly to the review comment.
 
-Use this header format:
+Use this heading format:
 
 ```markdown
 ### 🟠 P2 · 🛡️ SEC-1 · Missing authorization check · 92%
@@ -111,7 +124,7 @@ Use these prefixes:
 - `DOC`: documentation
 - `PRF`: performance
 
-Use these category icons when presenting a review summary:
+Use these category icons:
 
 | Prefix | Emoji | Category         |
 | ------ | ----- | ---------------- |
@@ -126,73 +139,70 @@ Use these category icons when presenting a review summary:
 
 ## Review Presentation
 
-When summarizing findings for a human, present them in an emoji-led format:
+In `## Overview`, list findings like this:
 
-```text
-{severity_emoji} {severity} · {category_emoji} {id} · {title} ({confidence}%) · {file}:{line}
+```markdown
+- {severity_emoji} {severity} · {category_emoji} {id} · {title} ({confidence}%) · {file}:{line}
 ```
 
-Examples:
-
-```text
-🔴 P1 · 🛡️ SEC-1 · SQL injection vulnerability (95%) · src/db.ts:45
-🟠 P2 · 🏗️ ARC-1 · Circular dependency (88%) · src/modules/a.ts:12
-🟡 P3 · 🧪 TST-2 · Missing edge case test (82%) · tests/api.test.ts:78
-```
-
-When a finding originates from prior review feedback, add a `Source` line with
-that comment or note.
-
-If multiple findings collapse into one root cause, you may present a grouped
-summary:
-
-```text
-╭──────────────────────────────────────────────────────────────────────────╮
-│ 🟠 P2 · 📦 GRP-1 · Inconsistent error handling (3 findings)              │
-╰┬─────────────────────────────────────────────────────────────────────────╯
- ├─ 🟠 P2 · 👁️ RDY-1 · Missing error check (85%) · src/api.ts:23
- ├─ 🟡 P3 · 👁️ RDY-2 · Silent failure (82%) · src/api.ts:45
- └─ 🟡 P3 · 👁️ RDY-3 · No error logging (80%) · src/api.ts:67
-```
-
-Sort summaries by severity first, then by confidence. Include a legend when the
-review is long enough that readers would benefit from one.
+Sort by severity first, then confidence. Group findings only when they share one
+root cause.
 
 ## Actionability
 
 Prefer findings that are specific, reproducible, and cheap enough to act on in
-the current change. Cap output at roughly 8 findings for a normal-sized diff —
-prioritize ruthlessly rather than dumping everything.
+the current change. Cap output at roughly 8 findings for a normal-sized diff.
 
 Avoid:
 
-- Speculative concerns without concrete evidence in the diff.
-- Style preferences that linters or formatters already enforce.
-- Suggesting rewrites of working code unless there's a clear maintainability or
-  correctness risk.
-- Flagging pre-existing TODO/FIXME comments that aren't part of this change.
-- Issues outside the review scope (e.g., unrelated files, hypothetical future
-  requirements).
+- speculative concerns without concrete evidence
+- style nits already enforced by tooling
+- rewrite suggestions without a clear risk
+- pre-existing issues outside the diff
+- unrelated scope creep
 
-## Summary
-
-End every review with:
-
-1. A bordered summary that includes only the severity counts.
-2. A verdict label.
-3. One to three short, action-oriented bullets that explain the TL;DR.
-
-Use this format:
+## Example Layout
 
 ```markdown
-╭───────────────────────────────────────────╮
-│ 🔴 P1: 0   🟠 P2: 1   🟡 P3: 2   ⚪ P4: 1 │
-╰───────────────────────────────────────────╯
-**Needs changes**:
+# Code Review
 
-- Fix the inconsistent error handling in `src/api.ts`, `src/jobs.ts`, and `src/worker.ts`.
-- Add a retry-path test so this regression does not recur.
-- Merge after the P2 issue is resolved.
+I reviewed the BITZ parser changes with a focus on payload validation and test
+coverage. I found one P2 issue and one P3 gap.
+
+## Overview
+
+- 🟠 P2 · 🛡️ SEC-1 · Corrupted BITZ frames are accepted if garbage follows a valid Arrow stream (96%) · libtenzir/builtins/formats/bitz.cpp:209
+- 🟡 P3 · 🧪 TST-1 · The new tests miss payload-corruption and compatibility coverage (93%) · test/tests/operators/bitz/round_trip.tql:1
+
+## Findings
+
+### 🟠 P2 · 🛡️ SEC-1 · Corrupted BITZ frames are accepted if garbage follows a valid Arrow stream · 96%
+
+- File: libtenzir/builtins/formats/bitz.cpp:209-247
+- Issue: ...
+- Reasoning: ...
+- Evidence: ...
+- Suggestion: ...
+
+### 🟡 P3 · 🧪 TST-1 · The new tests miss payload-corruption and compatibility coverage · 93%
+
+- File: test/tests/operators/bitz/round_trip.tql:1-6
+- Issue: ...
+- Reasoning: ...
+- Evidence: ...
+- Suggestion: ...
+
+## Verdict
+
+**Needs changes**
+
+| 🔴 P1 | 🟠 P2 | 🟡 P3 | ⚪ P4 |
+| :---: | :---: | :---: | :---: |
+|   0   |   1   |   1   |   0   |
+
+- Reject BITZ frames that contain unread tail bytes after the embedded Feather stream.
+- Add a regression test for malformed message payloads and a mixed legacy/new compatibility fixture.
+- Merge after the parser validation bug is fixed.
 ```
 
 The verdict label should be one of:
@@ -202,24 +212,7 @@ The verdict label should be one of:
 - **Needs changes**: at least one P2 that should be resolved before merge.
 - **Blocked**: at least one P1; do not merge.
 
-Write the bullets as a call to action. Prefer concrete next steps over vague
-summaries.
-
-Good:
-
-- `Add the missing authorization check in the admin route.`
-- `Update the docs to mention the new default timeout.`
-- `Merge after the flaky retry test is fixed.`
-
-Avoid:
-
-- `Authorization issue.`
-- `Docs need work.`
-- `Some tests are missing.`
-
-If cross-cutting themes emerged (for example, "error handling is inconsistent
-across three files"), use one bullet to name the theme and the remaining
-bullets to say what should happen next.
+Write verdict bullets as concrete next steps.
 
 ## Technical Lenses
 
