@@ -25,15 +25,17 @@ Create pull requests and keep their changelog current.
 2. Scan the current context for related issues before drafting the PR body.
    Check the user request, surrounding conversation, branch name, commit
    messages, any existing changelog entry, existing PR text, and any available
-   issue-tracker context. If the tracker is available, determine whether each
-   issue should close on merge or should only be linked.
+   issue-tracker context. If the tracker is available, identify the main
+   Linear issue(s) this code PR should close; companion docs PRs should only
+   reference them.
 3. Create a pull request from the current worktree branch.
 4. Add and commit a changelog entry. Do not create or edit changelog entries
    manually here; use the `tenzir-ship` skill for generating, formatting, and
    updating the entry.
 5. If the change affects user-facing behavior documented on docs.tenzir.com,
-   follow the `update-documentation` skill to open a companion docs PR and
-   cross-link the two PRs.
+   follow the `update-documentation` skill to open a companion docs PR,
+   cross-link the two PRs, and have the docs PR reference the same Linear
+   issue(s).
 6. Push the branch.
 
 When doing follow-up edits, ensure that the changelog entries remain in sync
@@ -48,7 +50,7 @@ description.
 - Scan the current context first: user prompt, branch name, recent commits,
   existing changelog text if any, PR title/body draft, and companion docs or
   follow-up PRs.
-- If tracker context is available, confirm which issues this PR should affect.
+- If tracker context is available, confirm which issue(s) this code PR should close.
 - Use one compact `<sub>...</sub>` footer at the very end of the PR body.
 - Put that footer in the PR description itself, not in a PR comment.
 - If a footer already exists, extend it instead of creating a new section or a
@@ -60,10 +62,10 @@ description.
 
 For Linear, use its magic words explicitly in that footer:
 
-- Use a closing word such as `closes` when the issue should move toward done
-  and close on merge.
-- Use a non-closing word such as `references`, `related to`, or `part of`
-  when the PR should be linked without closing the issue.
+- In the main code PR, use a closing word such as `closes` so the primary
+  issue moves toward done on merge.
+- Reserve non-closing words such as `references`, `related to`, or `part of`
+  for companion docs PRs or secondary issues this PR should not close.
 - Emojis may prefix a line for readability, but they do not replace Linear's
   magic words. Keep the actual keyword text intact.
 - Even if the branch name or PR title already mentions the issue ID, still add

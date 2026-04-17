@@ -28,8 +28,9 @@ Handle the operational workflow around docs.tenzir.com changes.
 4. Run relevant documentation checks if the docs repository provides them.
 5. File a `tenzir/docs` pull request from `.docs/`.
 6. Cross-link the pull requests using one shared compact footer pattern:
-   - In the docs PR, append a final `<sub>...</sub>` footer line such as
-     `🛠️ Code PR: tenzir/tenzir#6048`.
+   - In the docs PR, append a final `<sub>...</sub>` footer block that links
+     the code PR and references the same Linear issue(s), for example
+     `🛠️ Code PR: tenzir/tenzir#6048<br>🎫 References TNZ-150, TNZ-151`.
    - In the code PR, append or extend the final `<sub>...</sub>` footer with
      `📚 Docs PR: tenzir/docs#261`.
    - Prefer that footer over dedicated `Code PR` or `Docs PR`
@@ -46,15 +47,18 @@ source of truth for naming and cross-links.
 ## PR cross-link format
 
 Keep docs/code cross-links in a compact footer at the end of each PR
-description. When multiple issues share the same relationship in the code PR
-footer, enumerate them after one magic word on one line to keep the footer
-compact. Use separate lines only when the relationship differs.
+description. In the docs PR footer, reference the same Linear issue(s) with a
+non-closing word such as `references` so the companion docs PR does not move
+the issue independently. When multiple issues share the same relationship,
+enumerate them after one magic word on one line to keep the footer compact.
+Use separate lines only when the relationship differs.
 
 Docs PR example:
 
 ```markdown
 <sub>
-🛠️ Code PR: tenzir/tenzir#1234
+🛠️ Code PR: tenzir/tenzir#1234<br>
+🎫 References TNZ-150, TNZ-151
 </sub>
 ```
 
