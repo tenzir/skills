@@ -74,14 +74,14 @@ For Linear, use its magic words explicitly in that footer:
 - Use separate lines only when the relationship differs, for example one line
   for `resolves` and another for `refs`.
 - When there is a companion docs PR, add a plain link line such as
-  `🔗 Documentation PR: https://github.com/tenzir/docs/pull/261` to the same
-  footer block rather than creating a dedicated section.
+  `🔗 Docs PR: tenzir/docs#261` to the same footer block rather than creating
+  a dedicated section.
 
 Example footer:
 
 ```markdown
 <sub>
-🔗 Documentation PR: https://github.com/tenzir/docs/pull/261<br>
+🔗 Docs PR: tenzir/docs#261<br>
 ✅ Resolves TNZ-150, TNZ-151<br>
 🔗 Refs TNZ-152
 </sub>
