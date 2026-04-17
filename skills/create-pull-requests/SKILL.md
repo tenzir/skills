@@ -60,19 +60,19 @@ description.
 
 For Linear, use its magic words explicitly in that footer:
 
-- Use a closing word such as `resolves` when the issue should move toward done
+- Use a closing word such as `closes` when the issue should move toward done
   and close on merge.
-- Use a non-closing word such as `refs`, `related to`, or `part of` when the PR
-  should be linked without closing the issue.
+- Use a non-closing word such as `references`, `related to`, or `part of`
+  when the PR should be linked without closing the issue.
 - Emojis may prefix a line for readability, but they do not replace Linear's
   magic words. Keep the actual keyword text intact.
 - Even if the branch name or PR title already mentions the issue ID, still add
   the footer when you want the close-vs-link intent to be explicit.
 - When multiple issues share the same relationship, enumerate them after one
   magic word on one line to keep the footer compact, for example
-  `✅ Resolves TNZ-82, TNZ-499, TNZ-108, TNZ-109`.
+  `✅ Closes TNZ-82, TNZ-499, TNZ-108, TNZ-109`.
 - Use separate lines only when the relationship differs, for example one line
-  for `resolves` and another for `refs`.
+  for `closes` and another for `references`.
 - When there is a companion docs PR, add a plain link line such as
   `🔗 Docs PR: tenzir/docs#261` to the same footer block rather than creating
   a dedicated section.
@@ -82,8 +82,8 @@ Example footer:
 ```markdown
 <sub>
 🔗 Docs PR: tenzir/docs#261<br>
-✅ Resolves TNZ-150, TNZ-151<br>
-🔗 Refs TNZ-152
+✅ Closes TNZ-150, TNZ-151<br>
+🎫 References TNZ-152
 </sub>
 ```
 

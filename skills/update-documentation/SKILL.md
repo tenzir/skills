@@ -63,7 +63,7 @@ Code PR example:
 ```markdown
 <sub>
 🔗 Docs PR: tenzir/docs#261<br>
-✅ Resolves TNZ-150, TNZ-151
+✅ Closes TNZ-150, TNZ-151
 </sub>
 ```
 
