@@ -29,9 +29,9 @@ Handle the operational workflow around docs.tenzir.com changes.
 5. File a `tenzir/docs` pull request from `.docs/`.
 6. Cross-link the pull requests using one shared compact footer pattern:
    - In the docs PR, append a final `<sub>...</sub>` footer line such as
-     `🔗 Code PR: tenzir/tenzir#6048`.
+     `🛠️ Code PR: tenzir/tenzir#6048`.
    - In the code PR, append or extend the final `<sub>...</sub>` footer with
-     `🔗 Docs PR: tenzir/docs#261`.
+     `📚 Docs PR: tenzir/docs#261`.
    - Prefer that footer over dedicated `Code PR` or `Docs PR`
      sections. If a footer already exists, add another `<br>`-separated line
      instead of creating a second footer.
@@ -54,7 +54,7 @@ Docs PR example:
 
 ```markdown
 <sub>
-🔗 Code PR: tenzir/tenzir#1234
+🛠️ Code PR: tenzir/tenzir#1234
 </sub>
 ```
 
@@ -62,8 +62,9 @@ Code PR example:
 
 ```markdown
 <sub>
-🔗 Docs PR: tenzir/docs#261<br>
-✅ Closes TNZ-150, TNZ-151
+📚 Docs PR: tenzir/docs#261<br>
+✅ Closes TNZ-150, TNZ-151<br>
+📎 Related: https://github.com/tenzir/tenzir/issues/6048#issuecomment-1234567890
 </sub>
 ```
 

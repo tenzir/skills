@@ -73,17 +73,18 @@ For Linear, use its magic words explicitly in that footer:
   `✅ Closes TNZ-82, TNZ-499, TNZ-108, TNZ-109`.
 - Use separate lines only when the relationship differs, for example one line
   for `closes` and another for `references`.
-- When there is a companion docs PR, add a plain link line such as
-  `🔗 Docs PR: tenzir/docs#261` to the same footer block rather than creating
+- When there is a companion docs PR, add a plain line such as
+  `📚 Docs PR: tenzir/docs#261` to the same footer block rather than creating
   a dedicated section.
 
 Example footer:
 
 ```markdown
 <sub>
-🔗 Docs PR: tenzir/docs#261<br>
+📚 Docs PR: tenzir/docs#261<br>
 ✅ Closes TNZ-150, TNZ-151<br>
-🎫 References TNZ-152
+🎫 References TNZ-152<br>
+📎 Related: https://github.com/tenzir/tenzir/issues/6048#issuecomment-1234567890
 </sub>
 ```
 
