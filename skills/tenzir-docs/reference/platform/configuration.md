@@ -1,7 +1,7 @@
 # Platform Configuration
 
 
-This reference documents configuration settings for the Tenzir Platform.
+These settings configure the Tenzir Platform.
 
 ## Environment variables
 
