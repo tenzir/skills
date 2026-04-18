@@ -197,3 +197,15 @@ Confusion exists here because both `Module Activity: Load` and `Process Activity
 `Process Activity: Inject` with `injection_type_id = 2 (Load Library)` represents when an actor process acts on a target process to cause that target process to load a module.
 `Module Activity: Load` covers the more general case of an endpoint process loading a module which is something that endpoint processes routinely do.
 Given that `Process Activity: Inject` with `injection_type_id = 2 (Load Library)` is more specific, it should be used if applicable.
+
+## How should I model and populate arrays in OCSF?
+
+Arrays in OCSF are used to represent collections of related values or objects when an event may contain multiple instances of the same conceptual data element. This includes cases such as multiple identifiers, addresses, entities, or other repeated data that cannot be meaningfully represented as a single attribute. Because the number of instances may vary from event to event, arrays provide a flexible and consistent way to model this variability.
+
+Array attributes are typically named using a plural form to clearly indicate that they represent a collection. In most cases, a simple plural suffix is sufficient and preferred. In situations where pluralization is ambiguous, awkward, or could conflict with another attribute name, an optional `_list` suffix may be used to explicitly convey that the attribute is an array. The choice of naming should prioritize clarity and avoid collisions with existing singular attributes.
+
+At the dictionary and object level, the data type of the array elements is always defined using the singular form. Each element of the array represents a single instance of the underlying scalar or object type, even though multiple instances may appear in the event. When arrays contain complex data types, the object itself is defined once and reused, rather than defining a separate plural object type.
+
+In some cases, both a singular attribute and an array attribute may appear in the same schema when they carry different semantic meanings. For example, a singular attribute may represent a primary or most relevant instance, while the array represents the full set of related instances observed in the event. The singular form is optional and should only be included when it provides meaningful distinction or improves the readability and usability of the schema.
+
+Overall, arrays should be used when multiplicity is inherent to the data being modeled, named clearly to indicate their plural nature, and structured so that each element remains a well‑defined, reusable data type within the OCSF framework.

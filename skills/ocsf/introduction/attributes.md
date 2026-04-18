@@ -12,9 +12,86 @@ OCSF adheres to naming conventions in order to more easily identify attributes w
 _id, _ids, _uid, _uuid, _ip, _name, _info, _detail, _time, _dt, _process, _ver, _list
 ```
 
-#### Arrays
+### Arrays
 
-Attribute names used for arrays end with `s`.  For example `category_ids`.  A MITRE ATT&CK<sup>TM</sup> array is named `attacks`.
+Arrays in OCSF represent collections of related scalar values or objects within event classes and objects. They are used when an event may contain multiple instances of the same conceptual data element, such as multiple identifiers, addresses, or related entities. This section defines the conventions, requirements, and naming patterns for array attributes across the schema, including pluralization rules, optional suffix usage, and how arrays are represented at the dictionary, object, and event class levels.
+
+#### Naming Conventions for Arrays
+
+In general, array attributes are named to clearly convey that they represent a collection rather than a single instance. OCSF favors simple, readable naming that maintains semantic clarity and avoids collisions with singular attributes.
+
+##### Plural “s” Suffix (Preferred)
+
+Array attributes **should generally use a plural form ending in “s”** to indicate a collection of elements.
+
+Examples include:
+
+*   `category_ids`
+*   `attacks` (MITRE ATT\&CK techniques)
+
+This approach is preferred when pluralization is natural and unambiguous.
+
+##### Optional `_list` Suffix
+
+In cases where pluralization is ambiguous, awkward, or may conflict with another attribute name, the optional `_list` suffix may be used to explicitly indicate an array.
+
+Examples include:
+
+*   `finding_info_list`
+
+The `_list` suffix is not required and should be used only when it improves readability or avoids ambiguity in the schema.
+
+#### Dictionary-Level Representation
+
+Within the attribute dictionary, arrays are defined using the following conventions:
+
+*   The **array attribute name** may use `_list` when necessary to distinguish it from a singular attribute:
+    *   `finding_info_list`
+
+*   The **data type of the array elements** is always defined using the **singular form**:
+    *   Element type: `finding_info`
+
+*   A **singular attribute may coexist** with an array attribute when each conveys different semantics:
+    *   `finding_info` → a single instance
+    *   `finding_info_list` → a collection of instances
+
+This approach avoids naming collisions while preserving semantic precision and reuse of data types.
+
+#### Object-Level Representation
+
+When an array contains complex data types, the object representing each array element follows standard object naming rules:
+
+*   The **object name is always singular**, regardless of how many instances appear in the event.
+    *   Object type: `finding_info`
+
+This reinforces the conceptual model that each array element represents an individual entity.
+
+#### Event Class and Parent Object Usage
+
+Within an event class or a parent object, array attributes are expressed using the plural form or the `_list` suffix, consistent with the naming rules described above.
+
+Examples include:
+
+*   `finding_info_list`
+
+This convention applies uniformly whether the array attribute appears at the top level of an event or within a nested object.
+
+#### Optional Singular Attributes
+
+In addition to array attributes, OCSF permits the inclusion of a **singular form** of an attribute when it represents a distinct or more specific semantic meaning. This pattern is commonly used when:
+
+*   The singular attribute represents a primary, default, or most relevant instance
+*   The array attribute represents the complete set of related instances
+*   Both forms improve clarity or usability of the data model
+
+Examples include:
+
+*   `finding_info` → a single, primary instance
+*   `finding_info_list` → a collection of instances
+``
+
+The singular attribute is optional and should only be defined when it adds meaningful distinction or improves the interpretability of the schema.
+
 
 #### Unique IDs
 
