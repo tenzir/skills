@@ -78,6 +78,10 @@ For Linear, use its magic words explicitly in that footer:
 - When there is a companion docs PR, add a plain line such as
   `📚 Docs PR: tenzir/docs#261` to the same footer block rather than creating
   a dedicated section.
+- When linking GitHub PRs in that footer, use GitHub shorthand such as
+  `tenzir/tenzir#5999` or `tenzir/docs#261` instead of full URLs. Use a full
+  URL only for deep links that shorthand cannot express, such as a specific
+  issue comment.
 
 Example footer:
 
@@ -86,7 +90,7 @@ Example footer:
 📚 Docs PR: tenzir/docs#261<br>
 ✅ Closes TNZ-150, TNZ-151<br>
 🎫 References TNZ-152<br>
-📎 Related: https://github.com/tenzir/tenzir/issues/6048#issuecomment-1234567890
+📎 Related: tenzir/tenzir#5999
 </sub>
 ```
 

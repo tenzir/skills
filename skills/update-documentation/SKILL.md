@@ -33,6 +33,10 @@ Handle the operational workflow around docs.tenzir.com changes.
      `🛠️ Code PR: tenzir/tenzir#6048<br>🎫 References TNZ-150, TNZ-151`.
    - In the code PR, append or extend the final `<sub>...</sub>` footer with
      `📚 Docs PR: tenzir/docs#261`.
+   - Use GitHub shorthand for PR links in both directions, such as
+     `tenzir/tenzir#6048` or `tenzir/docs#261`, instead of full URLs. Use full
+     URLs only for deep links that shorthand cannot express, such as a
+     specific comment.
    - Prefer that footer over dedicated `Code PR` or `Docs PR`
      sections. If a footer already exists, add another `<br>`-separated line
      instead of creating a second footer.
@@ -68,7 +72,7 @@ Code PR example:
 <sub>
 📚 Docs PR: tenzir/docs#261<br>
 ✅ Closes TNZ-150, TNZ-151<br>
-📎 Related: https://github.com/tenzir/tenzir/issues/6048#issuecomment-1234567890
+📎 Related: tenzir/tenzir#5999
 </sub>
 ```
 
