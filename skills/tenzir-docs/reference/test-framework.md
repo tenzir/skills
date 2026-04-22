@@ -471,7 +471,7 @@ The `skip` key supports two forms:
 skip: "pending upstream fix"
 ```
 
-**Structured form** conditionally skips tests when a runtime condition occurs. Use this when the suite depends on an external resource that may not be available in every environment:
+**Structured form** conditionally skips tests when a runtime condition occurs. Use this when a fixture or suite capability depends on an external resource that may not be available in every environment:
 
 ```yaml
 skip:
@@ -481,7 +481,9 @@ skip:
 The `on` field accepts the following values:
 
 * `fixture-unavailable` — skip when a fixture raises `FixtureUnavailable` during initialization. See [Fixture unavailability](#fixture-unavailability).
-* `capability-unavailable` — skip when a required capability (declared via [`requires`](#capability-requirements)) is missing from the runtime environment.
+* `capability-unavailable` — skip when a required capability (declared via [`requires`](#capability-requirements)) is missing from the runtime environment. This value is only valid in directory-level `test.yaml` files.
+
+`fixture-unavailable` follows fixture activation scope. If a fixture is selected by one test, put `skip: {on: fixture-unavailable}` in that test’s frontmatter or inherit it from a directory-level `test.yaml`; only that test is skipped when the fixture is unavailable. If a suite fixture is selected in `test.yaml`, put the skip opt-in in the suite’s directory-level configuration; suite setup happens before any member test runs, so member frontmatter cannot control a suite fixture failure.
 
 You can combine multiple conditions by passing a list:
 
@@ -492,7 +494,7 @@ skip:
     - capability-unavailable
 ```
 
-When the triggering condition occurs and the suite carries the matching `on` value, all tests in the suite are marked as skipped with exit code 0. Without the opt-in configuration the exception propagates normally and causes a test failure.
+When the triggering condition occurs and the active scope carries the matching `on` value, the affected test or suite is marked as skipped with exit code 0. Without the opt-in configuration the exception propagates normally and causes a test failure.
 
 The optional `reason` field provides additional context that is combined with the condition message in the skip output.
 
@@ -756,7 +758,7 @@ def mysql():
     # ... start container, yield env, cleanup ...
 ```
 
-By default the exception propagates and causes a test failure. To convert it into a skip, add a structured `skip` entry to the suite’s `test.yaml`:
+By default the exception propagates and causes a test failure. To convert a suite fixture failure into a skip, add a structured `skip` entry to the suite’s `test.yaml`:
 
 tests/mysql/test.yaml
 
@@ -769,6 +771,19 @@ skip:
 ```
 
 When the fixture raises `FixtureUnavailable` and the suite carries this configuration, the harness marks every test in the suite as skipped (exit code 0) and logs the combined reason. Without the opt-in configuration the exception surfaces as a regular failure. See [skip configuration](#skip-configuration) for the full syntax of the `skip` key.
+
+For fixtures that are selected by individual tests, use the same skip mapping in test frontmatter:
+
+```yaml
+---
+fixtures: [mysql]
+skip:
+  on: fixture-unavailable
+  reason: "needs container runtime"
+---
+```
+
+In this form, an unavailable fixture skips only that test. Suite fixture skips remain controlled by directory-level configuration.
 
 ### Container runtime helpers
 
@@ -841,7 +856,7 @@ uvx tenzir-test --update
 
 * **Missing binaries** – The harness auto-detects binaries on `PATH` and falls back to `uvx tenzir` when `uv` is installed. If neither is available, set the `TENZIR_BINARY` and `TENZIR_NODE_BINARY` environment variables to point at your installation.
 * **Unexpected exits** – Set `error: true` in frontmatter when a non-zero exit is expected.
-* **Skipped tests** – Use `skip: reason` to document temporary skips; baseline files can stay empty. For fixture-dependent suites, use `skip: {on: fixture-unavailable}` so tests skip gracefully when a required tool is missing. For capability-dependent suites, combine `requires` with `skip: {on: capability-unavailable}`.
+* **Skipped tests** – Use `skip: reason` to document temporary skips; baseline files can stay empty. For fixture-dependent suites, put `skip: {on: fixture-unavailable}` in `test.yaml`. For fixtures selected by one test, use the same mapping in frontmatter. For capability-dependent suites, combine `requires` with `skip: {on: capability-unavailable}`.
 * **Noisy output** – Use `--jobs 1` to serialize worker logs, and enable `--debug` (or set `TENZIR_TEST_DEBUG=1`) when you need to trace comparisons and fixture activity. Note that `--debug` automatically enables verbose output.
 
 ## See Also
