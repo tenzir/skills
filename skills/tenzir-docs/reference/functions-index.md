@@ -240,7 +240,7 @@
 - [int](functions/int.md): Casts an expression to an integer.
 - [ip](functions/ip.md): Casts an expression to an IP address.
 - [string](functions/string.md): Casts an expression to a string.
-- [subnet](functions/subnet.md): Casts an expression to a subnet value.
+- [subnet](functions/subnet.md): Converts an expression to a subnet value.
 - [time](functions/time.md): Casts an expression to a time value.
 - [uint](functions/uint.md): Casts an expression to an unsigned integer.
 - [type_id](functions/type_id.md): Retrieves the type id of an expression.
