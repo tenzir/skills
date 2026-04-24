@@ -340,7 +340,7 @@ let $ports = [80, 443, 8080]
 let $mixed = [1, 2+3, foo()]  // Can contain expressions
 ```
 
-Lists support indexing with `[]` and membership testing with `in`, with negative indices counting from the end of the list (`-1` refers to the last element):
+Lists support indexing with signed or unsigned integer indices and membership testing with `in`. Negative signed indices count from the end of the list (`-1` refers to the last element):
 
 ```tql
 let $items = [10, 20, 30]
@@ -573,7 +573,7 @@ Both lists and records support indexing operations to access their elements.
 
 #### List Indexing
 
-Access list elements using integral indices, starting with `0`:
+Access list elements using signed or unsigned integer indices, starting with `0`:
 
 ```tql
 let $my_list = ["Hello", "World"]
@@ -607,7 +607,7 @@ from {
 level = $severity_to_level[severity]  // Dynamic field access
 ```
 
-Indexing expressions (see next section below) support numeric indices for records:
+Indexing expressions (see next section below) support signed and unsigned integer indices for records:
 
 Accessing a field by position
 

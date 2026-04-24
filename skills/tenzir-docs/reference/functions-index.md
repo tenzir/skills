@@ -78,7 +78,7 @@
 - [add](functions/add.md): Adds an element into a list if it doesn’t already exist (set-insertion).
 - [append](functions/append.md): Inserts an element at the back of a list.
 - [concatenate](functions/concatenate.md): Merges two lists.
-- [get](functions/get.md): Gets a field from a record or an element from a list
+- [get](functions/get.md): Gets a field from a record or an element from a list.
 - [length](functions/length.md): Retrieves the length of a list.
 - [map](functions/map.md): Maps each list element to an expression.
 - [prepend](functions/prepend.md): Inserts an element at the start of a list.
@@ -141,7 +141,7 @@
 
 ## Record
 
-- [get](functions/get.md): Gets a field from a record or an element from a list
+- [get](functions/get.md): Gets a field from a record or an element from a list.
 - [has](functions/has.md): Checks whether a record has a specified field.
 - [keys](functions/keys.md): Retrieves a list of field names from a record.
 - [merge](functions/merge.md): Combines two records into a single record by merging their fields.
