@@ -70,6 +70,8 @@ Controls automatic pagination of HTTP responses.
 
 **Link mode**: The string `"link"` to automatically follow pagination links in the HTTP `Link` response header per [RFC 8288](https://datatracker.ietf.org/doc/html/rfc8288). The operator parses `Link` headers and follows the `rel=next` relation to fetch the next page. Pagination stops when the response no longer contains a `rel=next` link.
 
+**[OData](https://www.oasis-open.org/standard/odata-v4-01-os/) mode**: For [`from_http`](/reference/operators/from_http.md), the string `"odata"` to follow OData collection responses such as Microsoft Graph. The response body must be a JSON object with a top-level `value` array. The operator emits each object from `value`, follows a top-level string `@odata.nextLink` as an opaque URL, and sends follow-up requests as `GET` requests with the same headers.
+
 ### `paginate_delay = duration (optional)`
 
 The duration to wait between consecutive pagination requests.
