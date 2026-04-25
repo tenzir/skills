@@ -28,8 +28,8 @@ Commit changes as clean, reviewable snapshots.
    - Stage only the relevant hunks.
    - Read the staged diff before writing the message.
    - [Write the commit message](references/write-commit-messages.md) from what
-     is actually staged.
+     is actually staged, including the AI assistance trailer.
    - Create the commit with a real multiline message, using separate `-m`
-     arguments for subject and body.
+     arguments for subject, body, and final trailer block.
    - Do not put literal `\n` escapes in a single `-m` string.
    - Amend immediately if the final message reads awkwardly.

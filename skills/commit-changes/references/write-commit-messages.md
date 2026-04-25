@@ -14,10 +14,12 @@ correctness, performance, batching, or cleanup outcomes when those matter more.
 <subject>
 
 <body>
+
+Assisted-by: MODEL (AGENT)
 ```
 
-A subject line alone is enough for tiny, obvious commits. If a reader would ask
-"why?", add a body.
+A subject line alone is enough for tiny, obvious commits, but still include the
+AI assistance trailer. If a reader would ask "why?", add a body.
 
 ## Before writing
 
@@ -47,6 +49,21 @@ message from that exact snapshot. Identify:
 - Use active voice and present tense.
 - Prefer one to three short paragraphs.
 
+## AI assistance trailer
+
+Add a final trailer to every commit created with AI assistance:
+
+```text
+Assisted-by: MODEL (AGENT)
+```
+
+Replace `MODEL` with the model name or identifier powering the session and
+`AGENT` with the agent or harness name. For example: `Assisted-by: ChatGPT 5.5
+(pi)`. Put the trailer at the end of the message. If there are other
+trailers such as `Resolves: #456`, keep them together in the final trailer block
+and put `Assisted-by` last. If there is no body, put the trailer after the
+subject with a blank line.
+
 ## Writing style
 
 Write for someone reading the log in six months. Avoid narrating only code
@@ -67,6 +84,8 @@ Bad: "Fixed a bug that was causing crashes"
 
 ```text
 Add slice function for substring extraction
+
+Assisted-by: ChatGPT 5.5 (pi)
 ```
 
 ```text
@@ -76,17 +95,20 @@ The parser assumed at least one byte of input. Now it handles
 empty files gracefully by returning an empty result.
 
 Resolves: #456
+Assisted-by: ChatGPT 5.5 (pi)
 ```
 
 ```text
 Remove deprecated export command
 
 Use `to` instead. The export command has been deprecated since v4.0.
+
+Assisted-by: ChatGPT 5.5 (pi)
 ```
 
 ## Commit mechanics
 
-- Use separate `-m` arguments for the subject and body.
+- Use separate `-m` arguments for the subject, body, and final trailer block.
 - Do not put literal `\n` escapes in a single `-m` string.
 - Use `git commit --fixup <SHA1>` for commits meant to be squashed.
 - Reference issues when relevant with `Resolves: #123` or `See also: #456`.
