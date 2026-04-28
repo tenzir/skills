@@ -4,9 +4,10 @@ Add a changelog entry for a change.
 
 ## Gather context
 
-Run `scripts/detect-change-scope.sh` to determine the scope for the change.
+Run `bash <skill-dir>/scripts/detect-change-scope.sh` to determine the scope for
+the change.
 
-This script injects the files and diff command for the changes in scope.
+This script prints the files and diff command for the changes in scope.
 
 ## Determine key entry details
 

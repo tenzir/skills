@@ -7,6 +7,13 @@ description: Use when adding changelog entries, creating release notes, cutting 
 
 This skill bundles key release engineering use cases with tenzir-ship.
 
+## Available scripts
+
+- `bash <skill-dir>/scripts/detect-change-scope.sh`: Detects the current
+  changelog scope. Use this before adding a changelog entry to identify whether
+  staged, unstaged, or branch changes should drive the entry; the script prints
+  a suggested diff command and the files in scope.
+
 ## Use Cases
 
 ### Initialize a changelog project
