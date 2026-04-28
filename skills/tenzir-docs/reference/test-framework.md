@@ -1,7 +1,7 @@
 # Test Framework
 
 
-The [`tenzir-test`](https://github.com/tenzir/test) harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for [running tests](../guides/testing/run-tests.md), [writing tests](../guides/testing/write-tests.md), [creating fixtures](../guides/testing/create-fixtures.md), and [adding custom runners](../guides/testing/add-custom-runners.md).
+The [`tenzir-test`](https://github.com/tenzir/test) harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for [running tests](../guides/testing/run-tests.md), [writing tests](../guides/testing/write-tests.md), [creating fixtures](../guides/testing/create-fixtures.md), [adding custom runners](../guides/testing/add-custom-runners.md), and [configuring project hooks](../guides/testing/configure-project-hooks.md).
 
 ## Install
 
@@ -19,6 +19,7 @@ uvx tenzir-test --help
 * **Library** – A root that contains multiple packages (each with a `package.yaml` and its own `tests/`). The harness can discover all packages under such a library root and run their suites in one invocation. Use `--package-dirs` to load packages so their operators can cross-import.
 * **Test** – Any supported file under `tests/`; frontmatter controls execution.
 * **Runner** – Named strategy that executes a test (`tenzir`, `python`, custom entries).
+* **Hook** – Project-level Python callback registered under `hooks/` or `hooks.py` and invoked at stable lifecycle points.
 * **Fixture** – Reusable environment provider registered under `fixtures/` and requested via frontmatter.
 * **Suite** – Directory-owned group of tests that share fixtures. Declare it with `suite:` in a `test.yaml`; all descendants join automatically. Members run sequentially by default, or concurrently when `mode: parallel` is set.
 * **Input** – Data accessed with `TENZIR_INPUTS`; defaults to `<root>/inputs` but you can override it per directory or per test with an `inputs:` setting. The harness also supports inline inputs via `TENZIR_INPUT` for test-specific data files.
@@ -32,6 +33,8 @@ A typical project layout looks like this:
 ```text
 project-root/
 ├── fixtures/
+│   └── __init__.py
+├── hooks/
 │   └── __init__.py
 ├── inputs/
 │   └── sample.ndjson
@@ -116,6 +119,7 @@ Useful options:
 * `-a`, `--all-projects`: Run the root project together with any satellites provided on the command line.
 * `-m`, `--match`: Select tests whose relative path matches a substring or glob pattern. Bare strings (without `*`, `?`, or `[`) match as substrings, so `-m mysql` selects any test with “mysql” anywhere in its path. Patterns containing glob metacharacters use fnmatch syntax. Repeatable; tests matching any pattern are selected. When combined with positional TEST paths, only tests matching both are run (intersection).
 * `--fixture`: Activate fixtures in standalone foreground mode without running tests. Repeatable. Accepts bare names (`--fixture mysql`) or YAML mapping specs (`--fixture 'kafka: {port: 9092}'`). When provided, positional TEST arguments are not allowed. See the [run fixtures](../guides/testing/run-fixtures.md) guide.
+* `--no-hooks`: Disable project hook loading and invocation. Use this when you need to recover from a broken hook or compare behavior without hook side effects.
 
 Set `TENZIR_TEST_DEBUG=1` in CI when you want the same diagnostics without passing `--debug` on the command line.
 
@@ -399,6 +403,24 @@ TENZIR_BINARY=/opt/tenzir/bin/tenzir \
 TENZIR_NODE_BINARY=/opt/tenzir/bin/tenzir-node \
 uvx tenzir-test --root tests --update
 ```
+
+## Hooks
+
+Hooks are Python callbacks in `hooks/__init__.py` or `hooks.py` at the project root. They can run at invocation, project, and test lifecycle points. The harness doesn’t load hooks from nested test directories.
+
+Available events:
+
+| Event            | When it runs                                                                |
+| ---------------- | --------------------------------------------------------------------------- |
+| `startup`        | Once per invocation, before settings and binary discovery.                  |
+| `shutdown`       | Once before the invocation exits normally.                                  |
+| `project_start`  | Before the harness starts executing a root project or satellite.            |
+| `project_finish` | After the harness finishes a root project or satellite.                     |
+| `test_start`     | Before a logical test starts. Static skips don’t trigger this event.        |
+| `test_finish`    | After the final outcome for passed, failed, skipped, and parse-error tests. |
+| `test_failure`   | After `test_finish` for failed tests, before `TENZIR_TMP_DIR` cleanup.      |
+
+For examples and lifecycle details, see the [configure project hooks](../guides/testing/configure-project-hooks.md) guide.
 
 ## Runners
 
@@ -825,6 +847,7 @@ The [fixture guide](../guides/testing/create-fixtures.md#add-fixture-assertions)
 * `TENZIR_STDIN` – Path to the stdin file when a `.stdin` file exists next to the test. The harness pipes this file’s content to the subprocess stdin. Not set otherwise.
 * `TENZIR_KEEP_TMP_DIRS` – Keep per-test scratch directories (equivalent to `--keep`).
 * `TENZIR_TEST_DEBUG` – Enable debug logging and verbose output (equivalent to `--debug`).
+* `TENZIR_TEST_DISABLE_HOOKS` – Disable project hook loading and invocation (equivalent to `--no-hooks`).
 
 ### Binary resolution
 

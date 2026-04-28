@@ -164,3 +164,4 @@ Once the suite passes locally, integrate it into your CI pipeline. Configure the
 - [Run-fixtures](run-fixtures.md)
 - [Create-fixtures](create-fixtures.md)
 - [Add-custom-runners](add-custom-runners.md)
+- [Configure-project-hooks](configure-project-hooks.md)

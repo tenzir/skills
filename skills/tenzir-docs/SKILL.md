@@ -404,6 +404,10 @@ This guide shows you how to create a fixture, wire it into the test harness, and
 
 Runners tell `tenzir-test` how to execute a discovered file. This guide shows you how to register the XXD runner from the example project so you can compare binary artifacts by dumping their hexadecimal representation with `xxd`.
 
+##### [Configure project hooks](guides/testing/configure-project-hooks.md)
+
+This guide shows you how to configure `tenzir-test` project hooks for setup and cleanup tasks that belong next to your tests. You’ll learn how to select local Tenzir binaries before discovery, set project-scoped environment variables, and collect artifacts from failed tests.
+
 ### Contribute
 
 #### Contribution
@@ -551,7 +555,7 @@ Functions appear in expressions and take positional and/or named arguments, prod
 
 #### [Test Framework](reference/test-framework.md)
 
-The `tenzir-test` harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for running tests, writing tests, creating fixtures, and adding custom runners.
+The `tenzir-test` harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for running tests, writing tests, creating fixtures, adding custom runners, and configuring project hooks.
 
 #### [Ship Framework](reference/ship-framework.md)
 
