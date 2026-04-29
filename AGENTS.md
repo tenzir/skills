@@ -5,15 +5,17 @@ for coding agents in and around the Tenzir ecosystem. The `skills/` tree mixes
 hand-maintained skills with generated ones, and the surrounding metadata files
 keep the collection installable, discoverable, and internally consistent.
 
-## Auto-generated skills
+## Generated and synced skills
 
-The following skills are produced by generator scripts and must not be
-edited by hand. Change the corresponding script instead, then regenerate.
+The following skills are produced by generator scripts or synced from another
+repository and must not be edited by hand in this repository. Change the source
+listed below instead, then regenerate or let the sync workflow update this repo.
 
-| Skill                 | Generator                               |
-| --------------------- | --------------------------------------- |
-| `skills/ocsf/`        | `scripts/generate-ocsf-skill.py`        |
-| `skills/tenzir-docs/` | `scripts/generate-tenzir-docs-skill.py` |
+| Skill                 | Source of truth                         | Sync mechanism                                                                     |
+| --------------------- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| `skills/ocsf/`        | `scripts/generate-ocsf-skill.py`        | `.github/workflows/sync-ocsf-skill.yaml`                                           |
+| `skills/tenzir-docs/` | `scripts/generate-tenzir-docs-skill.py` | `.github/workflows/sync-docs-skill.yaml`                                           |
+| `skills/tenzir-ship/` | `tenzir/ship:skills/tenzir-ship/`       | `tenzir/ship:.github/workflows/sync-skills.yaml` via `.github/workflows/sync.yaml` |
 
 ## Organization
 
