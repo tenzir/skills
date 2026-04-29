@@ -124,7 +124,7 @@ The information about the virtual tunnel interface, e.g. `utun0`. This is usuall
 - **Requirement**: recommended
 - **Group**: primary
 
-The tunnel type. Example: `Split` or `Full`.
+The type of tunnel configuration, normalized to the caption of the `tunnel_type_id` value, indicating the scope of traffic routed through the connection. Example: `Split Tunnel` or `Full Tunnel`.
 
 ### `tunnel_type_id`
 
@@ -140,7 +140,7 @@ The tunnel type. Example: `Split` or `Full`.
 - `2`: `Full Tunnel`
 - `99`: `Other`
 
-The normalized tunnel type ID.
+The normalized identifier for the type of tunnel configuration, indicating the scope of traffic routed through the connection. Example: `1 (Split Tunnel)` or `2 (Full Tunnel)`.
 
 ### `user`
 
