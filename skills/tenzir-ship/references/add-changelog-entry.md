@@ -163,7 +163,7 @@ uvx tenzir-ship add \
   --type <type> \
   --description-file /tmp/description.md \
   --pr <number> \
-  --co-author <agent-name>
+  --co-author <github-username>
 ```
 
 Notes:
@@ -176,7 +176,9 @@ Notes:
   not in the top-level directory.
 - In CI, include `--pr <number>` when PR number is known from `$GITHUB_EVENT_PATH`.
 - Locally, omit `--pr` when auto-inference via `gh` context is available.
-- Set `--co-author <agent-name>` for GitHub accounts of agent-authored entries,
-  e.g, `claude` or `codex`.
+- Set `--co-author <github-username>` only to a real GitHub username for
+  agent-authored entries, e.g., `claude` or `codex`.
+- For OpenAI Codex or ChatGPT-assisted work, use the GitHub username `codex`;
+  do not use product or model names such as `chatgpt`, `gpt-5`, or `openai`.
 
 On success, remove the temporary description file.
