@@ -15,10 +15,11 @@ Before you review the latest diff:
 - Look for existing review comments and unresolved threads.
 - Re-check comments against the latest commits before surfacing them as active
   findings.
-- Skip resolved threads and comments that later commits already addressed.
+- Treat resolved threads and addressed comments as context for understanding the
+  review history.
 - When the task involves existing GitHub review comments, translate each
-  still-active concern into the appropriate technical finding before you
-  decide whether to reply or resolve.
+  still-active concern into the appropriate technical finding and track each
+  open thread through fix, reply, and final state.
 - When a finding originates from a GitHub comment, link the `Source` field to
   the direct comment URL.
 
@@ -42,7 +43,7 @@ enough.
 Use this when the fix needs a short explanation:
 
 - Non-obvious implementation choices.
-- Partial fixes that address the spirit but not the exact suggestion.
+- Alternate fixes that address the underlying concern with a different shape.
 - Alternate approaches that solve the same problem.
 
 ### Discuss before acting
@@ -60,13 +61,17 @@ close it unless they explicitly ask you to resolve it. Give concrete reasoning.
 
 ## Thread resolution
 
-- Resolve only after the fix is pushed or the discussion is genuinely complete.
-- Reply before resolving when the change is not self-explanatory or when team
+- Resolve a thread after the fix is pushed or the discussion is genuinely
+  complete.
+- Reply before resolving when the change benefits from explanation or when team
   norms expect a reply.
-- Do not resolve open disagreements on behalf of the reviewer.
-- If the latest code still does not address the concern, keep the thread open
-  and report it as an active finding.
-- Treat unresolved reviewer comments as part of the review's remaining work.
+- Leave open disagreements with the reviewer and add a concise explanation of
+  the constraint or tradeoff.
+- Keep active concerns open, report them as findings, and include the next step
+  needed to close them.
+- Treat the review feedback as complete when every unresolved reviewer comment
+  has a recorded outcome: replied, resolved, or intentionally left open for
+  reviewer input.
 
 ## What good GitHub handling looks like
 
@@ -82,11 +87,12 @@ Example:
 - **Source:** https://github.com/owner/repo/pull/123#discussion_r456 by @alice
 ```
 
-If the concern is already fixed, summarize that instead of reporting a finding:
+If the concern is already fixed, summarize the final state instead of reporting
+it as an active finding:
 
 ```text
-The latest commit adds the missing retry test, so I would not keep this as an
-active review finding. Suggested reply: "Added in abc1234."
+The latest commit adds the missing retry test. Suggested reply: "Added in
+abc1234."
 ```
 
 If the concern is still active, surface it like any other finding, with the
@@ -114,15 +120,16 @@ matches the rest of the module.
 ```
 
 ```text
-I did not fold these two branches together because the retry path needs the
-extra metric emission. Happy to revisit if you want a larger refactor.
+I kept these two branches separate because the retry path needs the extra metric
+emission. Happy to revisit if you want a larger refactor.
 ```
 
-## Common false positives to avoid
+## Good review hygiene
 
-- Treating every GitHub comment as still active.
-- Reporting stale comments from earlier review rounds that later commits
-  already addressed.
-- Resolving a disagreement on the reviewer's behalf.
-- Double-reporting the same issue because multiple reviewers mentioned it.
-- Suggesting a reply that sounds defensive or vague.
+- Re-check each GitHub comment against the latest code and current thread state.
+- Report comments from earlier review rounds as active only when the underlying
+  concern remains in the latest diff.
+- Leave reviewer disagreements open with a concise explanation or clarification
+  question.
+- Group duplicate comments that point to the same root cause.
+- Write replies that are short, factual, and tied to the fix or tradeoff.

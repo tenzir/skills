@@ -1,14 +1,17 @@
 ---
 name: review-changes
 description: >-
-  Review code changes in Tenzir projects. Use when auditing diffs or pull
-  requests for bugs, security issues, missing tests, documentation drift,
-  readability problems, performance regressions, user experience issues, or
-  when deciding how to respond to pull request review comments, especially
-  GitHub review comments and threads. Also use this skill whenever the user
-  says "review", "look at this PR", "check my changes", "audit this diff",
-  "what do you think of this code", or asks for feedback on any code they've
-  written or changed — even if they don't explicitly say "code review."
+  Review and address code changes in Tenzir projects. Use when auditing diffs
+  or pull requests for bugs, security issues, missing tests, documentation
+  drift, readability problems, performance regressions, user experience issues,
+  or when handling pull request review comments, especially implementing
+  requested changes, replying to reviewers, resolving GitHub review threads, or
+  verifying that review feedback has a final state. Also use this skill whenever
+  the user says "review", "look at this PR", "check my changes", "audit this
+  diff", "address the PR feedback", "resolve review comments", "what do you
+  think of this code", or asks for feedback on any code they've written or
+  changed — including prompts that describe the work without saying "code
+  review."
 ---
 
 # Review Changes
@@ -26,11 +29,11 @@ Follow this sequence to produce a thorough, efficient review:
    comments or notes, read `references/reviewer-feedback.md` before reviewing
    the diff so you can check whether that feedback still applies and how to
    respond to it. When the user asks to address existing GitHub review
-   feedback, collect the active comments first, map each still-valid concern
-   to the relevant technical lens, and surface it in the normal finding
-   format before you decide how to reply or resolve. On GitHub pull requests,
-   also read `references/github-pr-reviews.md` for thread state, reply, and
-   resolution guidance.
+   feedback, collect the active comments first, track each open thread, map each
+   still-valid concern to the relevant technical lens, and carry that list
+   through implementation, replies, and final thread state. On GitHub pull
+   requests, also read `references/github-pr-reviews.md` for thread state,
+   reply, and resolution guidance.
 3. **Scan for scope.** Skim the full diff to understand what areas it touches —
    files, modules, layers. This determines which lenses to load.
 4. **Select lenses.** Use the table below to pick the relevant technical
@@ -42,9 +45,14 @@ Follow this sequence to produce a thorough, efficient review:
 6. **Synthesize.** After the file-by-file pass, look for groupable root causes.
    Multiple symptoms in different files may share one underlying problem —
    present those as a grouped finding instead of separate entries.
-7. **Write up the review** using the report structure below: H1, short
+7. **Close out requested review feedback.** When the task includes addressing
+   PR comments, implement the accepted changes, run the relevant checks, then
+   revisit the list of open threads. Post concise replies where context helps,
+   resolve threads whose concerns are fixed or fully answered, and leave threads
+   that need reviewer input with a clear question or tradeoff explanation.
+8. **Write up the review** using the report structure below: H1, short
    introduction, `## Overview`, `## Findings`, and `## Verdict`.
-8. **Produce a verdict** in the final section.
+9. **Produce a verdict** in the final section.
 
 ## Lens Selection
 
@@ -152,14 +160,10 @@ root cause.
 
 Prefer findings that are specific, reproducible, and cheap enough to act on in
 the current change. Cap output at roughly 8 findings for a normal-sized diff.
-
-Avoid:
-
-- speculative concerns without concrete evidence
-- style nits already enforced by tooling
-- rewrite suggestions without a clear risk
-- pre-existing issues outside the diff
-- unrelated scope creep
+Strong findings have concrete evidence, connect directly to changed behavior,
+explain the risk, and point to a practical fix within the PR's scope. Treat
+style, formatting, and mechanical consistency as tooling concerns when the
+project already enforces them automatically.
 
 ## Example Layout
 
@@ -210,7 +214,7 @@ The verdict label should be one of:
 - **Ship it**: no findings, or only P4 nits.
 - **Ship with fixes**: P3 or below; nothing blocking.
 - **Needs changes**: at least one P2 that should be resolved before merge.
-- **Blocked**: at least one P1; do not merge.
+- **Blocked**: at least one P1; hold the merge until the blocker is resolved.
 
 Write verdict bullets as concrete next steps.
 
@@ -243,5 +247,6 @@ unresolved threads up front. If any exist, read
 [GitHub pull request reviews](references/github-pr-reviews.md) before
 reviewing the diff. Surface each still-valid concern as the appropriate
 technical finding, and add a `Source` line that links directly to the GitHub
-comment. Use the GitHub-specific reference to decide whether to reply,
-resolve, discuss further, or leave the thread open.
+comment. When the user asks to address comments, finish with a thread-by-thread
+summary that records the implemented fix or response, the GitHub action taken,
+and any thread left open for reviewer input.
