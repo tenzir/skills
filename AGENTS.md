@@ -62,6 +62,13 @@ SKILL.md bodies unless the skill is correcting a specific mistake the model
 would otherwise make. Prefer explaining intent and letting the model choose the
 best way to accomplish each step.
 
+## Skill writing style
+
+Use positive, action-oriented language when writing skill instructions. Focus on
+what successful behavior looks like, what sequence to follow, and what evidence
+marks the task complete. The space of possible mistakes is much larger than the
+desired path, so describe the desired path instead of enumerating what to avoid.
+
 ## Keeping things in sync
 
 Three places list skills and must stay consistent:
