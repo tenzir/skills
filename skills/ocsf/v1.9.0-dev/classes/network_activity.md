@@ -56,7 +56,30 @@ The normalized identifier of the activity that triggered the event.
 
 - **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 
-The responder of the network connection. In some contexts an event source cannot correctly identify the responder. Refer to `is_src_dst_assignment_known` for certainty.
+The destination endpoint of the network activity — typically the responder. In bi-flow or asymmetric flow scenarios, this endpoint may represent the true initiator of the original communication. Use `initiator_id` to determine which endpoint actually initiated the communication.
+
+### `initiator`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The endpoint that initiated the network communication, normalized to the caption of `initiator_id`. In the case of `Other`, it is defined by the event source.
+
+### `initiator_id`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Group**: primary
+- **Sibling**: `initiator`
+
+#### Enum values
+
+- `0`: `Unknown`
+- `1`: `Source Endpoint` - The `src_endpoint` is the true initiator and the source/destination assignment is correct.
+- `2`: `Destination Endpoint` - The `dst_endpoint` is the true initiator and the source/destination assignment is reversed.
+- `99`: `Other`
+
+The normalized identifier of the endpoint that initiated the network communication. Use this field to disambiguate source and destination roles in bi-directional or asymmetric flow scenarios.
 
 ### `is_src_dst_assignment_known`
 
@@ -70,7 +93,7 @@ The responder of the network connection. In some contexts an event source cannot
 
 - **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 
-The initiator of the network connection. In some contexts an event source cannot correctly identify the initiator. Refer to `is_src_dst_assignment_known` for certainty.
+The source endpoint of the network activity — typically the initiator. In bi-flow or asymmetric flow scenarios, this endpoint may represent the response side of communication originally initiated by the destination. Use `initiator_id` to determine which endpoint actually initiated the communication.
 
 ### `url`
 
