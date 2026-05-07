@@ -1,5 +1,5 @@
 ---
-name: create-parser-package
+name: tenzir-create-parser-package
 description: >-
   Create a Tenzir parser package from sample data. Use when the user wants to
   parse a new log format, scaffold a package, write parse/clean operators, or

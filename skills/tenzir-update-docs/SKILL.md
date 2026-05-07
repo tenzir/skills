@@ -1,5 +1,5 @@
 ---
-name: update-documentation
+name: tenzir-update-docs
 description: >-
   Coordinate docs.tenzir.com updates alongside code changes. Use when preparing
   the `.docs/` checkout, creating a matching docs branch, opening a
@@ -10,7 +10,7 @@ description: >-
 metadata:
   requires:
     skills:
-      - technical-writing
+      - tenzir-technical-writing
 ---
 
 # Update Documentation

@@ -1,29 +1,26 @@
 {
   "plugins": [
     {
-      "name": "🛡️ Tenzir",
+      "name": "🛡️ Tenzir users",
       "skills": [
-        "./skills/create-ocsf-mapping",
-        "./skills/create-parser-package",
+        "./skills/tenzir-docs",
         "./skills/ocsf",
-        "./skills/tenzir-docs"
+        "./skills/tenzir-create-parser-package",
+        "./skills/tenzir-create-ocsf-mapping"
       ]
     },
     {
-      "name": "🏗️ Engineering",
+      "name": "🏗️ Tenzir contributors",
       "skills": [
-        "./skills/commit-changes",
-        "./skills/create-pull-requests",
-        "./skills/follow-python-conventions",
-        "./skills/review-changes",
+        "./skills/tenzir-commit-changes",
+        "./skills/tenzir-create-pull-requests",
+        "./skills/tenzir-follow-python-conventions",
+        "./skills/tenzir-review-changes",
         "./skills/tenzir-design-system",
         "./skills/tenzir-ship",
-        "./skills/update-documentation"
+        "./skills/tenzir-update-docs",
+        "./skills/tenzir-technical-writing"
       ]
-    },
-    {
-      "name": "📚 General",
-      "skills": ["./skills/technical-writing"]
     }
   ]
 }

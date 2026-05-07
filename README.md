@@ -5,32 +5,27 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 🗂️ Skills
 
-### 🛡️ Tenzir
+### 🛡️ Tenzir users
 
-| Skill                   | Description                                                                      |
-| ----------------------- | -------------------------------------------------------------------------------- |
-| `create-ocsf-mapping`   | Create OCSF mapping operators for a parser package                               |
-| `create-parser-package` | Scaffold a parser package from sample log data                                   |
-| `ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
-| `tenzir-docs`           | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
+| Skill                         | Description                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| `tenzir-docs`                 | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
+| `ocsf`                        | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
+| `tenzir-create-parser-package` | Scaffold a parser package from sample log data                                  |
+| `tenzir-create-ocsf-mapping`   | Create OCSF mapping operators for a parser package                              |
 
-### 🏗️ Engineering
+### 🏗️ Tenzir contributors
 
-| Skill                       | Description                                               |
-| --------------------------- | --------------------------------------------------------- |
-| `commit-changes`            | Stage, split, and commit changes with clean messages      |
-| `create-pull-requests`      | Open PRs, add changelog entries, cross-link docs PRs      |
-| `follow-python-conventions` | Python toolchain standards — uv, ruff, mypy, pytest       |
-| `review-changes`            | Code review with severity ratings and structured findings |
-| `tenzir-design-system`      | Frontend design tokens, components, and brand assets      |
-| `tenzir-ship`               | Changelog entries, release notes, and GitHub releases     |
-| `update-documentation`      | Coordinate docs.tenzir.com updates alongside code changes |
-
-### 📚 General
-
-| Skill               | Description                                                           |
-| ------------------- | --------------------------------------------------------------------- |
-| `technical-writing` | Technical documentation style following Google's developer docs guide |
+| Skill                               | Description                                                           |
+| ----------------------------------- | --------------------------------------------------------------------- |
+| `tenzir-commit-changes`             | Stage, split, and commit changes with clean messages                  |
+| `tenzir-create-pull-requests`       | Open PRs, add changelog entries, cross-link docs PRs                  |
+| `tenzir-follow-python-conventions`  | Python toolchain standards — uv, ruff, mypy, pytest                   |
+| `tenzir-review-changes`             | Code review with severity ratings and structured findings             |
+| `tenzir-design-system`              | Frontend design tokens, components, and brand assets                  |
+| `tenzir-ship`                       | Changelog entries, release notes, and GitHub releases                 |
+| `tenzir-update-docs`                | Coordinate docs.tenzir.com updates alongside code changes             |
+| `tenzir-technical-writing`          | Technical documentation style following Google's developer docs guide |
 
 ## 📦 Install
 
@@ -53,8 +48,8 @@ npx skills add -g tenzir/skills
 Install a specific skill into the current project, for example:
 
 ```bash
-npx skills add tenzir/skills@commit-changes
-npx skills add tenzir/skills@technical-writing
+npx skills add tenzir/skills@tenzir-commit-changes
+npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir-docs
 npx skills add tenzir/skills@ocsf
 ```
@@ -77,13 +72,13 @@ Use unrolled YAML arrays:
 
 ```yaml
 ---
-name: create-pull-requests
+name: tenzir-create-pull-requests
 description: Create and update pull requests for Tenzir projects.
 metadata:
   requires:
     skills:
-      - commit-changes
-      - update-documentation
+      - tenzir-commit-changes
+      - tenzir-update-docs
 ---
 ```
 

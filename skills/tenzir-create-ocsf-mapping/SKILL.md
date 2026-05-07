@@ -1,5 +1,5 @@
 ---
-name: create-ocsf-mapping
+name: tenzir-create-ocsf-mapping
 description: >-
   Create OCSF mapping operators for a Tenzir parser package. Use when the user
   wants to map parsed events to OCSF, normalize security data to OCSF, or says
@@ -8,7 +8,7 @@ description: >-
 metadata:
   requires:
     skills:
-      - create-parser-package
+      - tenzir-create-parser-package
       - ocsf
       - tenzir-docs
 ---
@@ -26,7 +26,7 @@ Execute each step in order. Verify the **Results** before moving on.
 ### 1. Ensure a parser package exists
 
 Before mapping to OCSF, you need a package that can parse and clean the source
-data. If one does not exist yet, complete the `create-parser-package` workflow
+data. If one does not exist yet, complete the `tenzir-create-parser-package` workflow
 first.
 
 **Results:**
