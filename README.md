@@ -5,7 +5,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 🗂️ Skills
 
-### 🛡️ Tenzir users
+### 🛡️ Users
 
 | Skill                         | Description                                                                      |
 | ----------------------------- | -------------------------------------------------------------------------------- |
@@ -14,7 +14,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 | `tenzir-create-parser-package` | Scaffold a parser package from sample log data                                  |
 | `tenzir-create-ocsf-mapping`   | Create OCSF mapping operators for a parser package                              |
 
-### 🏗️ Tenzir contributors
+### 🏗️ Contributors
 
 | Skill                               | Description                                                           |
 | ----------------------------------- | --------------------------------------------------------------------- |
