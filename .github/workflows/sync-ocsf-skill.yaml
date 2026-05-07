@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   sync:
-    name: Rebuild ocsf
+    name: Rebuild tenzir-ocsf
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +47,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          args=(--output-dir skills/ocsf)
+          args=(--output-dir skills/tenzir-ocsf)
           if [[ -n "$OCSF_VERSION" ]]; then
             args+=(--version "$OCSF_VERSION")
           fi
@@ -76,12 +76,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add -A -- skills/ocsf
+          git add -A -- skills/tenzir-ocsf
 
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync ocsf from upstream schema"
+          commit_message: "Sync tenzir-ocsf from upstream schema"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false

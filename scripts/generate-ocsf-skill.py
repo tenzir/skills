@@ -934,7 +934,7 @@ def main() -> None:
             "\n".join(
                 [
                     "---",
-                    "name: ocsf",
+                    "name: tenzir-ocsf",
                     "description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.",
                     "---",
                     "",

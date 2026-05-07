@@ -173,6 +173,17 @@ class GenerateTenzirDocsSkillTest(unittest.TestCase):
         self.assertNotIn("_astro/example.png", rewritten)
         self.assertNotIn("images/preview.png", rewritten)
 
+    def test_rewrite_content_updates_renamed_skill_examples(self) -> None:
+        rewritten = MODULE.rewrite_content(
+            "Install `tenzir/skills@ocsf`.\n\n```sh\nnpx skills remove ocsf\n```\n",
+            "guides/ai-workbench/use-agent-skills.md",
+            set(),
+        )
+
+        self.assertIn("tenzir/skills@tenzir-ocsf", rewritten)
+        self.assertIn("npx skills remove tenzir-ocsf", rewritten)
+        self.assertNotIn("tenzir/skills@ocsf", rewritten)
+
     def test_rewrite_content_trims_trailing_space_after_inline_images(self) -> None:
         rewritten = MODULE.rewrite_content(
             "1. Go to [app.tenzir.com](https://app.tenzir.com). ![Landing page](https://docs.tenzir.com/_astro/signin.png)\n",

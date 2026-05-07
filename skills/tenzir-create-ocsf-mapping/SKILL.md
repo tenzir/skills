@@ -9,7 +9,7 @@ metadata:
   requires:
     skills:
       - tenzir-create-parser-package
-      - ocsf
+      - tenzir-ocsf
       - tenzir-docs
 ---
 
@@ -37,7 +37,7 @@ first.
 ### 2. Identify the OCSF event class
 
 Analyze the source events to determine which OCSF event class best represents
-them. Consider the event semantics, not just field names. Use the `ocsf` skill
+them. Consider the event semantics, not just field names. Use the `tenzir-ocsf` skill
 to look up event classes, required attributes, and profiles.
 
 **Results:**
@@ -48,7 +48,7 @@ to look up event classes, required attributes, and profiles.
 
 **Resources:**
 
-- Use the `ocsf` skill to look up event classes, attributes, and profiles
+- Use the `tenzir-ocsf` skill to look up event classes, attributes, and profiles
 
 ### 3. Write mapping operators
 

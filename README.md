@@ -10,7 +10,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 | Skill                         | Description                                                                      |
 | ----------------------------- | -------------------------------------------------------------------------------- |
 | `tenzir-docs`                 | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
-| `ocsf`                        | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
+| `tenzir-ocsf`                 | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
 | `tenzir-create-parser-package` | Scaffold a parser package from sample log data                                  |
 | `tenzir-create-ocsf-mapping`   | Create OCSF mapping operators for a parser package                              |
 
@@ -51,7 +51,7 @@ Install a specific skill into the current project, for example:
 npx skills add tenzir/skills@tenzir-commit-changes
 npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir-docs
-npx skills add tenzir/skills@ocsf
+npx skills add tenzir/skills@tenzir-ocsf
 ```
 
 ## Generated skills
@@ -59,7 +59,7 @@ npx skills add tenzir/skills@ocsf
 `tenzir-docs` is generated from the structured Markdown bundle published by
 [`tenzir/docs`](https://github.com/tenzir/docs/releases/tag/latest).
 
-`ocsf` is generated directly from the upstream
+`tenzir-ocsf` is generated directly from the upstream
 [`ocsf-schema`](https://github.com/ocsf/ocsf-schema) and
 [`ocsf-docs`](https://github.com/ocsf/ocsf-docs) repositories.
 

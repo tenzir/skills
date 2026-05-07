@@ -66,6 +66,10 @@ EXTRACTED_INDEX_FILES = {
     source_path: (f"reference/{Path(source_path).stem}-index.md", title)
     for source_path, title in REFERENCE_INDEX_PAGES
 }
+SKILL_NAME_REWRITES = {
+    "tenzir/skills@ocsf": "tenzir/skills@tenzir-ocsf",
+    "npx skills remove ocsf": "npx skills remove tenzir-ocsf",
+}
 
 
 @dataclass(slots=True)
@@ -280,6 +284,8 @@ def rewrite_link_destination(
 
 def rewrite_content(text: str, from_path: str, available_source_paths: set[str]) -> str:
     text = re.sub(r"^> Documentation index:.*\n?", "", text, flags=re.MULTILINE)
+    for old, new in SKILL_NAME_REWRITES.items():
+        text = text.replace(old, new)
 
     def replace(match: re.Match[str]) -> str:
         bang, label, href = match.groups()

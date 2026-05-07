@@ -238,6 +238,8 @@ class GenerateOcsfSkillTest(unittest.TestCase):
                 MODULE.main()
 
             extension_dir = output_dir / "v1.7.0" / "extensions" / "linux"
+            skill_markdown = (output_dir / "SKILL.md").read_text(encoding="utf-8")
+            self.assertIn("name: tenzir-ocsf", skill_markdown)
             self.assertTrue((extension_dir / "index.md").exists())
             self.assertTrue((extension_dir / "events" / "process_exec.md").exists())
             self.assertTrue((extension_dir / "objects" / "process.md").exists())
