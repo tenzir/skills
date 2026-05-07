@@ -30,7 +30,7 @@ The CLI auto-detects which coding agents you have installed and prompts you to s
 Append `@<skill-name>` to install a specific skill:
 
 ```bash
-npx skills add tenzir/skills@ocsf
+npx skills add tenzir/skills@tenzir-ocsf
 npx skills add tenzir/skills@tenzir-docs
 ```
 
@@ -52,7 +52,7 @@ npx skills add -g tenzir/skills
 Install a specific skill globally:
 
 ```bash
-npx skills add -g tenzir/skills@ocsf
+npx skills add -g tenzir/skills@tenzir-ocsf
 ```
 
 ### Target specific agents
@@ -102,7 +102,7 @@ npx skills remove
 Remove a specific skill:
 
 ```bash
-npx skills remove ocsf
+npx skills remove tenzir-ocsf
 ```
 
 Remove all installed Tenzir skills:

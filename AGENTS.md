@@ -13,7 +13,7 @@ listed below instead, then regenerate or let the sync workflow update this repo.
 
 | Skill                 | Source of truth                         | Sync mechanism                                                                     |
 | --------------------- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| `skills/ocsf/`        | `scripts/generate-ocsf-skill.py`        | `.github/workflows/sync-ocsf-skill.yaml`                                           |
+| `skills/tenzir-ocsf/` | `scripts/generate-ocsf-skill.py`        | `.github/workflows/sync-ocsf-skill.yaml`                                           |
 | `skills/tenzir-docs/` | `scripts/generate-tenzir-docs-skill.py` | `.github/workflows/sync-docs-skill.yaml`                                           |
 | `skills/tenzir-ship/` | `tenzir/ship:skills/tenzir-ship/`       | `tenzir/ship:.github/workflows/sync-skills.yaml` via `.github/workflows/sync.yaml` |
 

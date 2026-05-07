@@ -4,7 +4,7 @@
       "name": "🛡️ Tenzir users",
       "skills": [
         "./skills/tenzir-docs",
-        "./skills/ocsf",
+        "./skills/tenzir-ocsf",
         "./skills/tenzir-create-parser-package",
         "./skills/tenzir-create-ocsf-mapping"
       ]
