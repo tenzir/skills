@@ -1,5 +1,5 @@
 ---
-name: review-changes
+name: tenzir-review-changes
 description: >-
   Review and address code changes in Tenzir projects. Use when auditing diffs
   or pull requests for bugs, security issues, missing tests, documentation

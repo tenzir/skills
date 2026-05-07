@@ -1,5 +1,5 @@
 ---
-name: commit-changes
+name: tenzir-commit-changes
 description: >-
   Commit changes as clean, reviewable snapshots. Use when committing, staging,
   splitting work into logical units, writing or fixing commit messages,
@@ -9,7 +9,7 @@ description: >-
 metadata:
   requires:
     skills:
-      - follow-python-conventions
+      - tenzir-follow-python-conventions
 ---
 
 # Commit Changes
@@ -23,7 +23,7 @@ Commit changes as clean, reviewable snapshots.
 2. Split orthogonal work into separate logical units. If a file mixes unrelated
    edits, stage only the hunks for the current commit.
 3. Run the relevant checks before committing. For Python projects, delegate to
-   the `follow-python-conventions` skill. If you skip a check, say so.
+   the `tenzir-follow-python-conventions` skill. If you skip a check, say so.
 4. For each commit:
    - Stage only the relevant hunks.
    - Read the staged diff before writing the message.

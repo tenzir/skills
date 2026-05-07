@@ -1,5 +1,5 @@
 ---
-name: technical-writing
+name: tenzir-technical-writing
 description: >-
   Write clear technical documentation following Tenzir's style conventions. Use
   when writing or editing docs, README files, API documentation, user guides,

@@ -19,7 +19,7 @@ content.
   table-of-contents entries should stay coherent. Adding a new page without
   linking it from the parent index is a common miss.
 - **Style.** Follow existing documentation conventions and the Tenzir
-  technical-writing guide. Consistent terminology, active voice, and concrete
+  tenzir-technical-writing guide. Consistent terminology, active voice, and concrete
   examples over abstract descriptions.
 
 ## What a Real Finding Looks Like

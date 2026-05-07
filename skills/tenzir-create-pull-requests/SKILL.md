@@ -1,5 +1,5 @@
 ---
-name: create-pull-requests
+name: tenzir-create-pull-requests
 description: >-
   Ship changes via pull request in Tenzir projects. Use when the user wants to
   open a PR, push a branch, add or update changelog entries, create a pull
@@ -9,9 +9,9 @@ description: >-
 metadata:
   requires:
     skills:
-      - commit-changes
+      - tenzir-commit-changes
       - tenzir-ship
-      - update-documentation
+      - tenzir-update-docs
 ---
 
 # Create Pull Requests
@@ -20,7 +20,7 @@ Create pull requests and keep their changelog current.
 
 ## Workflow
 
-1. Ensure changes are committed in coherent units. Use the `commit-changes`
+1. Ensure changes are committed in coherent units. Use the `tenzir-commit-changes`
    skill for staging, splitting, and writing commit messages.
 2. Scan the current context for related issues before drafting the PR body.
    Check the user request, surrounding conversation, branch name, commit
@@ -33,7 +33,7 @@ Create pull requests and keep their changelog current.
    manually here; use the `tenzir-ship` skill for generating, formatting, and
    updating the entry.
 5. If the change affects user-facing behavior documented on docs.tenzir.com,
-   follow the `update-documentation` skill to open a companion docs PR,
+   follow the `tenzir-update-docs` skill to open a companion docs PR,
    cross-link the two PRs, and have the docs PR reference the same Linear
    issue(s).
 6. Push the branch.

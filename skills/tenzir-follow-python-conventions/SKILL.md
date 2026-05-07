@@ -1,5 +1,5 @@
 ---
-name: follow-python-conventions
+name: tenzir-follow-python-conventions
 description: >-
   Tenzir Python coding standards and tooling workflow. Use when editing Python
   code, running `uv`, `ruff`, `mypy`, or `pytest`, working with
