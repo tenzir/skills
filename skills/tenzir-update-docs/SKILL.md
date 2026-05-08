@@ -20,9 +20,10 @@ Handle the operational workflow around docs.tenzir.com changes.
 ## Workflow
 
 All docs changes take place in `.docs/`, which is a clone of `tenzir/docs`.
-Clone `./docs` if it doesn't exist. Otherwise fetch the latest refs from origin.
+Clone `.docs` if it doesn't exist. Otherwise fetch the latest refs from origin.
 
-1. Create a topic branch in `.docs/` that matches the parent repo branch name.
+1. Create or check out a topic branch in `.docs/` that matches the parent repo
+   branch name.
 2. Author the content update in `.docs/` using the docs repository's own
    documentation guidance and conventions.
 3. Run relevant documentation checks if the docs repository provides them.
