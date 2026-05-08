@@ -20,7 +20,7 @@ For example, write `from {x: 42}` and click *Run* to see a single event show up.
 
 On the command line, run `tenzir <pipeline>` where `<pipeline>` is the definition of the pipeline. See [Install Tenzir](../installation.md) for how to get the binary.
 
-If the pipeline expects events as its input, an implicit `load_stdin | read_json` will be prepended. If it expects bytes instead, only `load_stdin` is prepended. Likewise, if the pipeline outputs events, an implicit `write_json | save_stdout` will be appended. If it outputs bytes instead, only `save_stdout` is appended.
+If the pipeline expects events as its input, an implicit `from_stdin | read_json` will be prepended. If it expects bytes instead, only `from_stdin` is prepended. Likewise, if the pipeline outputs events, an implicit `to_stdout` will be appended. If it outputs bytes instead, no implicit output operator is appended.
 
 The diagram below illustrates these mechanics:
 
@@ -57,7 +57,7 @@ You could also render the output differently by choosing a different format:
 ```sh
 tenzir 'version | drop dependencies | write_csv'
 tenzir 'version | drop dependencies | write_ssv'
-tenzir 'version | drop dependencies | write_parquet | save_file "version.parquet'
+tenzir 'version | drop dependencies | to_file "version.parquet" { write_parquet }'
 ```
 
 Instead of passing the pipeline description to the `tenzir` executable, you can also load the definition from a file via `-f`:
@@ -93,7 +93,7 @@ tenzir:
       # The definition of the pipeline. Configured pipelines that fail to start
       # cause the node to fail to start.
       definition: |
-        from "tcp://0.0.0.0:34343" {
+        accept_tcp "0.0.0.0:34343" {
           read_suricata
         }
         publish "suricata"

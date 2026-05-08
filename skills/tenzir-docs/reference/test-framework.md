@@ -226,8 +226,9 @@ tests/parsing/
 Access the inline input in TQL:
 
 ```tql
-from_file env("TENZIR_INPUT")
-read_csv
+from_file env("TENZIR_INPUT") {
+  read_csv
+}
 ```
 
 Or in a shell script:
@@ -529,7 +530,7 @@ tests/gcs/test.yaml
 ```yaml
 suite: gcs-integration
 requires:
-  operators: [from_gcs, to_gcs]
+  operators: [from_google_cloud_storage, to_google_cloud_storage]
 skip:
   on: capability-unavailable
   reason: requires GCS operators

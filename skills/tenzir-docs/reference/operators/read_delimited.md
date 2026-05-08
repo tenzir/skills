@@ -34,43 +34,49 @@ When enabled, includes the matched separator string in the output events. By def
 ### Split on a simple delimiter
 
 ```tql
-load_file "data.txt"
-read_delimited "||"
+from_file "data.txt" {
+  read_delimited "||"
+}
 ```
 
 ### Parse CSV-like data with custom delimiter
 
 ```tql
-load_file "custom.csv"
-read_delimited ";;;"
+from_file "custom.csv" {
+  read_delimited ";;;"
+}
 ```
 
 ### Include the separator in the output
 
 ```tql
-load_file "data.txt"
-read_delimited "||", include_separator=true
+from_file "data.txt" {
+  read_delimited "||", include_separator=true
+}
 ```
 
 ### Parse binary data with blob delimiters
 
 ```tql
-load_file "binary.dat"
-read_delimited b"\x00\x01"
+from_file "binary.dat" {
+  read_delimited b"\x00\x01"
+}
 ```
 
 ### Use blob separator with include\_separator
 
 ```tql
-load_file "data.txt"
-read_delimited b"||", include_separator=true
+from_file "data.txt" {
+  read_delimited b"||", include_separator=true
+}
 ```
 
 ### Parse binary data with string delimiters
 
 ```tql
-load_file "binary.dat"
-read_delimited "\x00\x01", binary=true
+from_file "binary.dat" {
+  read_delimited "\x00\x01", binary=true
+}
 ```
 
 ## See Also

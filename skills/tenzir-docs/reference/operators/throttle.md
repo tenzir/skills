@@ -58,7 +58,7 @@ Defaults to `false`.
 Limit the number of events processed:
 
 ```tql
-from "https://api.example.com/events" { read_json }
+from_http "https://api.example.com/events" { read_json }
 throttle rate=1000
 ```
 
@@ -67,7 +67,7 @@ throttle rate=1000
 Use a larger window for smoother rate limiting:
 
 ```tql
-from "kafka://events"
+from_kafka "events"
 throttle rate=100, window=5s
 ```
 
@@ -76,9 +76,9 @@ throttle rate=100, window=5s
 Limit throughput based on the serialized size of events. Note that serializing each event adds computational overhead for high-volume data flows.
 
 ```tql
-from "https://api.example.com/events" { read_json }
+from_http "https://api.example.com/events" { read_json }
 throttle rate=10Mi, weight=this.print_ndjson().length_bytes()
-to "output.json"
+to_file "output.json"
 ```
 
 ### Throttle network traffic using packet size
@@ -86,7 +86,7 @@ to "output.json"
 Use the captured packet length for byte-based rate limiting:
 
 ```tql
-from "network-capture.pcap" { read_pcap }
+from_file "network-capture.pcap" { read_pcap }
 throttle rate=100Mi, weight=this.captured_packet_length, window=5s
 ```
 
@@ -95,7 +95,7 @@ throttle rate=100Mi, weight=this.captured_packet_length, window=5s
 Assume each event is 512 bytes and limit to 1 MiB/s:
 
 ```tql
-from "input.json" { read_json }
+from_file "input.json" { read_json }
 throttle rate=1Mi, weight=512
 ```
 
@@ -104,7 +104,7 @@ throttle rate=1Mi, weight=512
 Drop excess events when the rate limit is reached:
 
 ```tql
-from "input.json" { read_json }
+from_file "input.json" { read_json }
 throttle rate=500, drop=true
 ```
 

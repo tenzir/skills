@@ -45,36 +45,36 @@ The diagram below illustrates the cross-product of upstream and downstream types
 Here are visual examples that illustrate the upstream and downstream operator types.
 
 ```tql
-from "/path/to/file.json"
+from_file "/path/to/file.json"
 where src_ip in 10.0.0.0/8
-to "s3://bucket/dir/file.parquet"
+to_file "s3://bucket/dir/file.parquet"
 ```
 
 This pipeline consists of three operators:
 
 Let’s break it down:
 
-1. [`from`](/reference/operators/from.md): A void-to-events input operator that reads events from a URI.
+1. [`from_file`](/reference/operators/from_file.md): A void-to-events input operator that reads events from a URI.
 2. [`where`](/reference/operators/where.md): An events-to-events transformation operator that filters events matching a predicate.
-3. [`to`](/reference/operators/to.md): An events-to-void output operator the writes to the specified URI.
+3. [`to_file`](/reference/operators/to_file.md): An events-to-void output operator that writes to the specified URI.
 
-The [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md) operators perform a bit “magic” in that they also infer the format of the data being read or written, i.e., JSON due to the `.json` extension and Parquet due to the `.parquet` extension. You can also write the specific operators for these operations yourself:
+Some source and sink operators infer the format of the data being read or written, i.e., JSON due to the `.json` extension and Parquet due to the `.parquet` extension. You can also write the specific operators for these operations yourself:
 
 ```tql
-load_kafka "topic"
-read_ndjson
+from_file "events.ndjson" {
+  read_ndjson
+}
 select host, message
-write_yaml
-save_zmq "tcp://1.2.3.4"
+to_zmq "tcp://1.2.3.4", encoding="yaml"
 ```
 
 Here, we use a separate set of operators that go through bytes explicitly. Let’s break it down as well:
 
-1. [`load_kafka`](/reference/operators/load_kafka.md): A void-to-events input operator that reads from a Kafka topic.
+1. [`from_kafka`](/reference/operators/from_kafka.md): A void-to-events input operator that reads from a Kafka topic.
 2. [`read_ndjson`](/reference/operators/read_ndjson.md): An bytes-to-events transformation operator (aka. *parser*) that reads newline-delimited JSON.
 3. [`select`](/reference/operators/select.md): An events-to-events transformation operator that selects specific fields from events.
 4. [`write_yaml`](/reference/operators/write_yaml.md): An events-to-bytes transformation operator that turns events to YAML foramt.
-5. [`save_zmq`](/reference/operators/save_zmq.md): A bytes-to-void output operator that writes bytes to a ZeroMQ socket.
+5. [`to_zmq`](/reference/operators/to_zmq.md): A bytes-to-void output operator that writes bytes to a ZeroMQ socket.
 
 ### Line continuation
 

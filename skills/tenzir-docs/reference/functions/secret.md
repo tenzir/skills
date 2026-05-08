@@ -13,7 +13,7 @@ An operator accepting a secret will first try and lookup the value in the enviro
 
 If the secret is not found in the node, a request is made to the Tenzir Platform. Should the platform also not be able to find the secret, an error is raised.
 
-See the [explanation page for secrets](../../explanations/secrets.md) for more details.
+See [Secrets](../../explanations/secrets.md) for more details.
 
 ### `name: string`
 
@@ -32,7 +32,7 @@ We do not recommend enabling this option.
 ### Using secrets in an operator
 
 ```tql
-load_tcp "127.0.0.1:4000" {
+accept_tcp "127.0.0.1:4000" {
   read_ndjson
 }
 to_splunk "https://localhost:8088", hec_token=secret("splunk-hec-token")

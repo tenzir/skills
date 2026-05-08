@@ -9,7 +9,7 @@ TQL provides `to_*` operators for sending events to various destinations. These 
 
 ### Message brokers
 
-Send events to message brokers like [Kafka](../../integrations/kafka.md).
+Send events to message brokers like [Kafka](../../integrations/kafka.md) and [NATS](../../integrations/nats.md).
 
 Send to Kafka with automatic JSON formatting:
 
@@ -26,6 +26,15 @@ to_kafka "events", message=this.print_json()
 ```
 
 The `message` parameter accepts any expression that evaluates to a string or blob.
+
+Send to NATS JetStream:
+
+```tql
+subscribe "security-events"
+to_nats "alerts"
+```
+
+The NATS server must have a JetStream stream that captures the subject you publish to.
 
 ### Analytics platforms
 
@@ -50,54 +59,56 @@ to_opensearch "https://opensearch.example.com:9200",
 
 ### Cloud services
 
-Route events to cloud destinations like [Amazon SQS](../../integrations/amazon/sqs.md) and [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md).
+Route events to cloud destinations like [SQS](../../integrations/amazon/sqs.md) and [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md).
 
 Send to SQS:
 
 ```tql
 subscribe "notifications"
-to_sqs "https://sqs.us-east-1.amazonaws.com/123456789/queue"
+to_sqs "sqs://notifications", message=this.print_json()
 ```
 
 Send to Pub/Sub:
 
 ```tql
 subscribe "events"
-to_gcp_pubsub "projects/my-project/topics/events"
+to_google_cloud_pubsub project_id="my-project", topic_id="events", message=this.print_ndjson()
 ```
 
 ## File output
 
-For writing to files, use `write_*` operators followed by `save_*` operators. This two-operator pattern separates serialization from storage.
+For writing to files, use a `to_*` destination operator with a printing subpipeline. This pattern separates serialization from storage.
 
 Write JSON to a local file:
 
 ```tql
 subscribe "logs"
-write_json
-save_file "output.json"
+to_file "output.json" {
+  write_json
+}
 ```
 
 Write compressed Parquet:
 
 ```tql
 export
-write_parquet
-save_file "archive.parquet.zst"
+to_file "archive.parquet.zst" {
+  write_parquet
+}
 ```
 
 Write JSON Lines to [S3](../../integrations/amazon/s3.md):
 
 ```tql
-write_json
-save_file "s3://bucket/logs/events.jsonl"
+to_file "s3://bucket/logs/events.jsonl" {
+  write_json
+}
 ```
 
 Send NDJSON over [TCP](../../integrations/tcp.md):
 
 ```tql
-write_json
-save_tcp "collector.example.com:5044"
+to_tcp "collector.example.com:5044" { write_json }
 ```
 
 ## Expression-based serialization
@@ -106,10 +117,10 @@ Destination operators use expressions for flexible message formatting:
 
 ### Serialize the entire event
 
-Serialize as JSON (the default for most operators):
+Use the default event serialization:
 
 ```tql
-to_kafka "events", message=this.print_json()
+to_kafka "events"
 ```
 
 Serialize as compact JSON without nulls:
@@ -137,7 +148,7 @@ to_kafka "metrics", message=f"{host}: {metric_name}={value}"
 Route events to different destinations based on content:
 
 ```tql
-to_kafka f"events.{event_type}", message=this.print_json()
+to_kafka f"events.{event_type}"
 ```
 
 ## See also
@@ -151,5 +162,7 @@ to_kafka f"events.{event_type}", message=this.print_json()
 
 ## Contents
 
+- [Expose-data-as-server](expose-data-as-server.md)
 - [Split-and-merge-streams](split-and-merge-streams.md)
+- [Fan-out-with-subpipelines](fan-out-with-subpipelines.md)
 - [Load-balance-pipelines](load-balance-pipelines.md)

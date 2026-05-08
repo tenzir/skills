@@ -21,7 +21,7 @@ The name of the context whose state to save.
 
 ```tql
 context::save "ctx"
-save_file "snapshot.mmdb"
+to_file "snapshot.mmdb"
 ```
 
 ## See Also

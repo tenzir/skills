@@ -387,7 +387,7 @@ select cef
 write_lines
 ```
 
-You could now add [`save_file`](/reference/operators/save_file.md) or use [`write_lines`](/reference/operators/write_lines.md) as printing pipeline in [`to`](/reference/operators/to.md).
+You could now add [`to_file`](/reference/operators/to_file.md) or use [`write_lines`](/reference/operators/write_lines.md) as a printing subpipeline in a destination operator.
 
 ### LEEF (Log Event Extended Format)
 

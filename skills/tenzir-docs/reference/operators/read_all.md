@@ -22,8 +22,9 @@ Treat the input as binary data instead of UTF-8 text. When enabled, invalid UTF-
 ### Read an entire text file into a single event
 
 ```tql
-load_file "data.txt"
-read_all
+from_file "data.txt" {
+  read_all
+}
 ```
 
 ```tql
@@ -33,8 +34,9 @@ read_all
 ### Read an entire binary file into a single event
 
 ```tql
-load_file "data.bin"
-read_all binary=true
+from_file "data.bin" {
+  read_all binary=true
+}
 ```
 
 ```tql

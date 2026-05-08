@@ -3,7 +3,7 @@
 
 This page explains Tenzir’s deployment architecture, which separates data processing from management through a layered design. Three primary abstractions work together:
 
-1. [**Pipeline**](pipeline.md): A sequence of operators responsible for loading, parsing, transforming, and routing data. Pipelines are the core mechanism for data processing.
+1. [**Pipeline**](pipeline.md): A sequence of operators responsible for collecting, transforming, and routing data. Pipelines are the core mechanism for data processing.
 2. [**Node**](node.md): A running process that manages and executes pipelines.
 3. [**Platform**](platform.md): A higher-level management layer that provides oversight and control over multiple nodes.
 

@@ -141,8 +141,9 @@ dependencies:
 ```
 
 ```tql
-load_file "input.yaml"
-read_yaml
+from_file "input.yaml" {
+  read_yaml
+}
 ```
 
 ```tql

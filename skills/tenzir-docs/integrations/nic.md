@@ -1,11 +1,11 @@
 # Network Interface
 
 
-Tenzir supports reading packets from a network interface card (NIC).
+Tenzir supports capturing packets from a network interface card (NIC).
 
-The [`load_nic`](/reference/operators/load_nic.md) produces a stream of bytes in PCAP file format:
+Use [`from_nic`](/reference/operators/from_nic.md) to capture live packets as events:
 
-We designed `load_nic` such that it produces a byte stream in the form of a PCAP file. That is, when the pipeline starts, it first produces a file header, followed by chunks of packets. This creates a byte stream that is wire-compatible with the PCAP format, allowing you to exchange `load_nic` with [`load_file`](/reference/operators/load_file.md) and It Just Works™.
+`from_nic` uses [`read_pcap`](/reference/operators/read_pcap.md) by default.
 
 ## Examples
 
@@ -48,11 +48,10 @@ where up
 
 ### Read packets from a network interface
 
-Load packets from `eth0` and parse them as PCAP:
+Capture packets from `eth0`:
 
 ```tql
-load_nic "eth0"
-read_pcap
+from_nic "eth0"
 head 3
 ```
 
@@ -85,8 +84,7 @@ head 3
 After you have structured data in the form of PCAP events, you can use the [`decapsulate`](/reference/functions/decapsulate.md) function to decode the binary `data`:
 
 ```tql
-load_nic "eth0"
-read_pcap
+from_nic "eth0"
 select packet = decapsulate(this)
 head 1
 ```

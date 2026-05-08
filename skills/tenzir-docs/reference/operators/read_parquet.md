@@ -15,7 +15,7 @@ Reads events from a [Parquet](https://parquet.apache.org/) byte stream.
 
 MMAP Parsing
 
-When using theis with the [`load_file`](/reference/operators/load_file.md) operator, we recommend passing the `mmap=true` option to `load_file` to give the parser full control over the reads, which leads to better performance and memory usage.
+When using theis with the [`from_file`](/reference/operators/from_file.md) operator, we recommend passing the `mmap=true` option to `from_file` to give the parser full control over the reads, which leads to better performance and memory usage.
 
 Limitation
 
@@ -26,8 +26,9 @@ Tenzir currently assumes that all Parquet files use metadata recognized by Tenzi
 Read a Parquet file:
 
 ```tql
-load_file "/tmp/data.prq", mmap=true
-read_parquet
+from_file "/tmp/data.prq", mmap=true {
+  read_parquet
+}
 ```
 
 ## See Also

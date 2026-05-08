@@ -7,12 +7,12 @@ Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
 ## Examples
 
-Use [`from_udp`](/reference/operators/from_udp.md) to receive UDP datagrams as structured events containing message data and peer information. For sending, use [`save_udp`](/reference/operators/save_udp.md) with a write operator.
+Use [`accept_udp`](/reference/operators/accept_udp.md) to receive UDP datagrams as structured events containing message data and peer information. Use [`to_udp`](/reference/operators/to_udp.md) to send one UDP datagram per event directly from structured data.
 
 ### Receive syslog messages over UDP
 
 ```tql
-from_udp "0.0.0.0:514"
+accept_udp "0.0.0.0:514"
 this = data.parse_syslog()
 ```
 
@@ -20,6 +20,5 @@ this = data.parse_syslog()
 
 ```tql
 from {message: "Tenzir"}
-write_ndjson
-save_udp "1.2.3.4:8080"
+to_udp "1.2.3.4:8080", message=message
 ```

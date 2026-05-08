@@ -133,8 +133,9 @@ versions.json
 ```
 
 ```tql
-load_file "versions.json"
-read_ndjson unflatten="."
+from_file "versions.json" {
+  read_ndjson unflatten="."
+}
 ```
 
 ```tql

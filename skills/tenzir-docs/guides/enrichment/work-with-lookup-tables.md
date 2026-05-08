@@ -511,7 +511,7 @@ Export data for reporting:
 ```tql
 context::inspect "asset_inventory"
 select asset_id=key, value.owner, value.department, value.last_seen
-to "asset_report.csv"
+to_file "asset_report.csv"
 ```
 
 Check table size and find old entries:
@@ -575,14 +575,14 @@ Backup critical threat intelligence:
 
 ```tql
 context::save "threat_indicators"
-save_file "threat_intel_backup_2024_01_15.bin"
+to_file "threat_intel_backup_2024_01_15.bin"
 ```
 
 Export for migration to another node:
 
 ```tql
 context::save "network_inventory"
-save_file "network_inventory_prod.bin"
+to_file "network_inventory_prod.bin"
 ```
 
 Automated daily backup:
@@ -590,7 +590,7 @@ Automated daily backup:
 ```tql
 every 1d {
   context::save "asset_tracking"
-  save_file f"backups/assets_{now().format('%Y%m%d')}.bin"
+  to_file f"backups/assets_{now().format('%Y%m%d')}.bin"
 }
 ```
 
@@ -605,7 +605,7 @@ context::load "threat_indicators"
 
 Caution
 
-Loading replaces the entire lookup table state. Existing entries will be lost. Consider backing up with `context::save` before loading new data.
+Reading replaces the entire lookup table state. Existing entries will be lost. Consider backing up with `context::save` before reading new data.
 
 ## Best Practices
 

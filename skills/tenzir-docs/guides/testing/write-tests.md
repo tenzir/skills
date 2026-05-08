@@ -307,7 +307,7 @@ tests/gcs/test.yaml
 ```yaml
 suite: gcs-smoke
 requires:
-  operators: [from_gcs]
+  operators: [from_google_cloud_storage]
 skip:
   on: capability-unavailable
 ```

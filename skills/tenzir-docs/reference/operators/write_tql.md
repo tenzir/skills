@@ -95,5 +95,6 @@ write_tql strip_null_fields=true
 
 ## See Also
 
+* [`read_tql`](/reference/operators/read_tql.md)
 * [`write_json`](/reference/operators/write_json.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)

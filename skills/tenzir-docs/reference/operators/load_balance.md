@@ -39,8 +39,7 @@ let $cfg = ["192.168.0.30:8080", "192.168.0.30:8081"]
 
 subscribe "input"
 load_balance $cfg {
-  write_json
-  save_tcp $cfg
+  to_tcp $cfg { write_json }
 }
 ```
 
@@ -66,5 +65,7 @@ load_balance $cfg {
 ## See Also
 
 * [`fork`](/reference/operators/fork.md)
+* [`group`](/reference/operators/group.md)
 * [`publish`](/reference/operators/publish.md)
+* [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)
 * [Load-balance pipelines](../../guides/routing/load-balance-pipelines.md)

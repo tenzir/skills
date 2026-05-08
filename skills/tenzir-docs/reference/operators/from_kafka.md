@@ -5,7 +5,7 @@ Receives events from an Apache Kafka topic.
 
 ```tql
 from_kafka topic:string, [count=int, exit=bool, offset=int|string, options=record,
-           aws_iam=record, aws_region=string, commit_batch_size=int]
+           aws_iam=record, aws_region=string, batch_size=int]
 ```
 
 ## Description
@@ -63,11 +63,11 @@ The `from_kafka` operator passes the key-value pairs directly to [librdkafka](ht
 
 We recommend factoring these options into the plugin-specific `kafka.yaml` so that they are independent of the `from_kafka` arguments.
 
-### `commit_batch_size = int (optional)`
+### `batch_size = int (optional)`
 
-The operator commits offsets after receiving `commit_batch_size` messages to improve throughput. If you need to ensure exactly-once semantics for your pipeline, set this option to `1` to commit every message individually.
+The number of messages to accumulate before emitting a batch. The operator commits offsets after each batch to improve throughput.
 
-Defaults to `1000`.
+Defaults to `10k`.
 
 ## Amazon MSK
 
@@ -169,4 +169,5 @@ from_kafka "alerts", exit=true
 ## See Also
 
 * [`to_kafka`](/reference/operators/to_kafka.md)
+* [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)

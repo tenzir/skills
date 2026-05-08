@@ -13,8 +13,9 @@ Export metrics continuously to a file via `metrics --live`:
 
 ```tql
 metrics live=true
-write_ndjson
-save_file "metrics.json", append=true
+to_file "metrics.json", append=true {
+  write_ndjson
+}
 ```
 
 This attaches to incoming metrics feed, renders them as NDJSON, and then writes the output to a file. Without the `live` option, the `metrics` operator returns the snapshot of all historical metrics.

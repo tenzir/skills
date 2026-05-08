@@ -125,8 +125,9 @@ Type Conflict
 ### Read a GELF stream from a TCP socket
 
 ```tql
-load_tcp "0.0.0.0:54321"
-read_gelf
+accept_tcp "0.0.0.0:54321" {
+  read_gelf
+}
 ```
 
 ## See Also

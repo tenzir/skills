@@ -32,4 +32,4 @@ from {
 to_kafka "topic"
 ```
 
-You can control the message encoding with the `message` argument in [`to_kafka`](/reference/operators/to_kafka.md) that defaults to `this.print_json()`.
+You can control the message encoding with the `message` argument in [`to_kafka`](/reference/operators/to_kafka.md) that defaults to `this.print_ndjson()`.

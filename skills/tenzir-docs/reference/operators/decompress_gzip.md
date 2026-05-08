@@ -16,9 +16,10 @@ The `decompress_gzip` operator decompresses bytes in a pipeline incrementally. T
 ### Import Suricata events from a Gzip-compressed file
 
 ```tql
-load_file "eve.json.gz"
-decompress_gzip
-read_suricata
+from_file "eve.json.gz" {
+  decompress_gzip
+  read_suricata
+}
 import
 ```
 

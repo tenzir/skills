@@ -9,18 +9,18 @@ You need to configure appropriate credentials using Google’s [Application Defa
 
 ## Examples
 
-Use [`from_gcs`](/reference/operators/from_gcs.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`save_gcs`](/reference/operators/save_gcs.md) with a print operator.
+Use [`from_google_cloud_storage`](/reference/operators/from_google_cloud_storage.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`to_google_cloud_storage`](/reference/operators/to_google_cloud_storage.md) with a print operator.
 
 ### Read events from a file in a bucket
 
 ```tql
-from_gcs "gs://bucket/path/to/file.json"
+from_google_cloud_storage "gs://bucket/path/to/file.json"
 ```
 
 ### Read all JSON files from a bucket
 
 ```tql
-from_gcs "gs://bucket/logs/**.json"
+from_google_cloud_storage "gs://bucket/logs/**.json"
 ```
 
 ### Write an event to a file in a bucket
@@ -28,5 +28,5 @@ from_gcs "gs://bucket/logs/**.json"
 ```tql
 from {foo: 42}
 print_json
-save_gcs "gs://bucket/path/to/file.json"
+to_google_cloud_storage "gs://bucket/path/to/file.json"
 ```

@@ -71,13 +71,9 @@ Any value not specified in the record will either be picked up from the configur
 
 See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
 
-## URI support & integration with `from`
+## Direct operator usage
 
-The `to_fluent_bit` operator can also be used from the [`to`](/reference/operators/to.md) operator. For this, the `fluentbit://` scheme can be used. The URI is then translated:
-
-```tql
-to "fluentbit://plugin"
-```
+Use `to_fluent_bit` directly to send events to Fluent Bit:
 
 ```tql
 to_fluent_bit "plugin"

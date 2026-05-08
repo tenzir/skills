@@ -16,9 +16,10 @@ Transforms the input [Feather](https://arrow.apache.org/docs/python/feather.html
 ### Publish a feather logs file
 
 ```tql
-load_file "logs.feather"
-read_feather
-pulish "log"
+from_file "logs.feather" {
+  read_feather
+}
+publish "log"
 ```
 
 ## See Also

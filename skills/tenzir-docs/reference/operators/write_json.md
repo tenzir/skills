@@ -64,10 +64,12 @@ Defaults to `false`.
 ### Convert a YAML stream into a JSON file
 
 ```tql
-load_file "input.yaml"
-read_yaml
-write_json
-save_file "output.json"
+from_file "input.yaml" {
+  read_yaml
+}
+to_file "output.json" {
+  write_json
+}
 ```
 
 ### Strip null fields

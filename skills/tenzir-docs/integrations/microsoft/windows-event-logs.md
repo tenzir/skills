@@ -37,7 +37,7 @@ winlogbeat.event_logs:
   - name: Microsoft-Windows-TerminalServices-RDPClient/Operational
 
 
-# Send data to a Tenzir pipeline with an ElasticSearch source.
+# Send data to a Tenzir pipeline with an Elasticsearch-compatible endpoint.
 output.elasticsearch:
   hosts: ["https://10.0.0.1:9200"]
   username: "$USER"
@@ -60,13 +60,13 @@ C:\Program Files\Winlogbeat> Start-Service winlogbeat
 
 #### Run a Tenzir pipeline
 
-Now consume the data via a Tenzir pipeline using the [Elasticsearch](../elasticsearch.md)/[OpenSearch](../opensearch.md) integration that mimics a bulk ingest endpoint:
+Now consume the data via a Tenzir pipeline using the [Elasticsearch](../elasticsearch.md)/[OpenSearch](../opensearch.md) integration that mimics a Bulk API endpoint:
 
 ```tql
-from "elasticsearch://10.0.0.1:92000" \
-  tls=true,
-  certfile="server.crt",
-  keyfile="private.key"
+accept_opensearch "10.0.0.1:9200", tls={
+  certfile: "server.crt",
+  keyfile: "private.key",
+}
 import
 ```
 
@@ -162,7 +162,7 @@ To send logs straight to a TCP socket, use the [TCP output module](https://docs.
 Import the logs via TCP:
 
 ```tql
-from "tcp://10.0.0.1:1514" {
+accept_tcp "10.0.0.1:1514" {
   read_json
 }
 import
@@ -194,10 +194,8 @@ For an encrypted connection, use the [SSL output module](https://docs.nxlog.co/r
 Import the logs via TCP:
 
 ```tql
-load_tcp "127.0.0.1:4000",
-  tls=true,
-  certfile="key_and_cert.pem",
-  keyfile="key_and_cert.pem" {
+accept_tcp "127.0.0.1:4000",
+  tls={certfile: "key_and_cert.pem", keyfile: "key_and_cert.pem"} {
     read_json
   }
 import
@@ -222,7 +220,7 @@ The [Kafka output module](https://docs.nxlog.co/refman/current/om/kafka.html) pu
 </Output>
 ```
 
-Then use our [Kafka integration](../kafka.md) to read from the topic:
+Then use [Kafka](../kafka.md) to read from the topic:
 
 ```tql
 from_kafka "nxlog"
@@ -504,7 +502,7 @@ That’s it! You should now be able read the Windows event logs in JSON format b
 Accept the logs sent with the configuration above into Tenzir via [TCP](../tcp.md):
 
 ```tql
-load_tcp "10.0.0.1:1514" {
+accept_tcp "10.0.0.1:1514" {
   read_json
 }
 publish "wec"
@@ -528,7 +526,7 @@ this = data.parse_winlog()
 Security monitoring often focuses on specific event types. Filter for logon events (Event ID 4624) and failed logon attempts (Event ID 4625):
 
 ```tql
-load_tcp "10.0.0.1:1514" {
+accept_tcp "10.0.0.1:1514" {
   read_delimited "</Event>\n", include_separator=true
 }
 this = data.parse_winlog()
@@ -540,7 +538,7 @@ where System.EventID in [4624, 4625]
 The `EventData` section contains event-specific fields. For a successful logon event, extract the relevant information:
 
 ```tql
-load_tcp "10.0.0.1:1514" {
+accept_tcp "10.0.0.1:1514" {
   read_delimited "</Event>\n", include_separator=true
 }
 this = data.parse_winlog()

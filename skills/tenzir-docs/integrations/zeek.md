@@ -86,7 +86,7 @@ else
 fi
 
 
-pipeline="load_file \"$file_name\" | $read | import"
+pipeline="from_file \"$file_name\" | $read | import"
 
 
 tenzir "$pipeline"
@@ -115,13 +115,13 @@ tenzir:
 This allows you run Zeek on a packet trace as follows:
 
 ```bash
-tenzir 'load_file "/path/to/trace.pcap" | zeek'
+tenzir 'from_file "/path/to/trace.pcap" | zeek'
 ```
 
 You can also perform more elaborate packet filtering after light-weight [decapsulation](../reference/functions/decapsulate.md):
 
 ```bash
-tenzir 'load_file "/path/to/trace.pcap"
+tenzir 'from_file "/path/to/trace.pcap"
         read_pcap
         this = decapsulate(this)
         where ip.src in 10.0.0.0/8 || community == "1:YXWfTYEyYLKVv5Ge4WqijUnKTrM="
@@ -159,6 +159,7 @@ For example, this is how you create a filtered version of a Zeek conn.log:
 subscribe "zeek"
 where @name == "zeek.conn"
 where duration > 2s and id.orig_p != 80
-write_zeek_tsv
-save_file "filtered_conn.log"
+to_file "filtered_conn.log" {
+  write_zeek_tsv
+}
 ```

@@ -1,7 +1,7 @@
 # read_pcap
 
 
-Reads raw network packets in PCAP file format.
+Parses PCAP byte streams into packet events.
 
 ```tql
 read_pcap [emit_file_headers=bool]
@@ -19,45 +19,62 @@ The current implementation does *not* support [PCAPNG](https://www.ietf.org/arch
 
 Emit a `pcap.file_header` event that represents the PCAP file header. If present, the parser injects this additional event before the subsequent stream of packets.
 
-Emitting this extra event makes it possible to seed the [`write_pcap`](/reference/operators/write_pcap.md) operator with a file header from the input. This allows for controlling the timestamp formatting (microseconds vs. nanosecond granularity) and byte order in the packet headers.
+Emitting this extra event makes it possible to seed [`write_pcap`](/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
 
-When the PCAP parser processes a concatenated stream of PCAP files, specifying `emit_file_headers` will also re-emit every intermediate file header as separate event.
+When the parser processes a concatenated stream of PCAP files, `emit_file_headers=true` also re-emits every intermediate file header as a separate event.
 
-Use this option when you would like to reproduce the identical trace file layout of the PCAP input.
+Use this option when you want to reproduce the original trace layout.
 
 ## Schemas
 
-The operator emits events with the following schema.
+The operator emits events with the following schemas.
+
+### `pcap.file_header`
+
+Contains the global header for one PCAP trace.
+
+| Field           | Type     | Description                                 |
+| :-------------- | :------- | :------------------------------------------ |
+| `magic_number`  | `uint64` | The PCAP magic number.                      |
+| `major_version` | `uint64` | The major PCAP format version.              |
+| `minor_version` | `uint64` | The minor PCAP format version.              |
+| `reserved1`     | `uint64` | Reserved header field.                      |
+| `reserved2`     | `uint64` | Reserved header field.                      |
+| `snaplen`       | `uint64` | The maximum captured packet size.           |
+| `linktype`      | `uint64` | The link-layer type for subsequent packets. |
 
 ### `pcap.packet`
 
-Contains information about all accessed API endpoints, emitted once per second.
+Contains one captured packet from the trace.
 
-| Field                    | Type     | Description                           |
-| :----------------------- | :------- | :------------------------------------ |
-| `timestamp`              | `time`   | The time of capturing the packet.     |
-| `linktype`               | `uint64` | The linktype of the captured packet.  |
-| `original_packet_length` | `uint64` | The length of the original packet.    |
-| `captured_packet_length` | `uint64` | The length of the captured packet.    |
-| `data`                   | `blob`   | The captured packet’s data as a blob. |
+| Field                    | Type     | Description                            |
+| :----------------------- | :------- | :------------------------------------- |
+| `timestamp`              | `time`   | The time when the packet was captured. |
+| `linktype`               | `uint64` | The link-layer type of the packet.     |
+| `original_packet_length` | `uint64` | The length of the original packet.     |
+| `captured_packet_length` | `uint64` | The length of the captured packet.     |
+| `data`                   | `blob`   | The captured packet payload.           |
 
 ## Examples
 
 ### Read packets from a PCAP file
 
 ```tql
-load_file "/tmp/trace.pcap"
-read_pcap
+from_file "/tmp/trace.pcap" {
+  read_pcap
+}
 ```
 
-### Read packets from the [network interface](load_nic.md) `eth0`
+### Capture packets from `en1` and preserve file headers
 
 ```tql
-load_nic "eth0"
-read_pcap
+from_nic "en1" {
+  read_pcap emit_file_headers=true
+}
 ```
 
 ## See Also
 
-* [`load_nic`](/reference/operators/load_nic.md)
+* [`from_nic`](/reference/operators/from_nic.md)
 * [`write_pcap`](/reference/operators/write_pcap.md)
+* [`decapsulate`](/reference/functions/decapsulate.md)

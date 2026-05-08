@@ -53,7 +53,7 @@ The basic anatomy of a plugin class looks as follows:
 class example_plugin final : public virtual component_plugin,
                              public virtual command_plugin {
 public:
-  /// Loading logic.
+  /// Reading logic.
   example_plugin();
 
 
@@ -132,7 +132,7 @@ When configuring the Tenzir build, you need to tell CMake the path to the plugin
 
 To test that Tenzir loads the plugin properly, you can use `tenzir --plugins=example version` and look into the `plugins`. A key-value pair with your plugin name and version should exist in the output.
 
-Refer to the [plugin loading](../../explanations/configuration.md) section of the documentation to find out how to explicitly de-/activate plugins.
+Refer to the [plugin Reading](../../explanations/configuration.md) section of the documentation to find out how to explicitly de-/activate plugins.
 
 ### Building against an installed Tenzir
 

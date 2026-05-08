@@ -1,7 +1,7 @@
 # Syslog
 
 
-Tenzir supports parsing and emitting Syslog messages across multiple transport protocols, including both UDP and TCP. This enables seamless integration with Syslog-based systems for ingesting or exporting logs.
+Tenzir supports parsing Syslog messages from transport protocols such as UDP and TCP, and emitting Syslog-formatted byte streams. This enables seamless integration with Syslog-based systems for ingesting or exporting logs.
 
 Syslog support in Tenzir is powered by two components:
 
@@ -14,24 +14,24 @@ Together, these building blocks enable round-trip Syslog processing.
 
 ### Create a Syslog Server
 
-To receive Syslog messages on a UDP socket, use [`from_udp`](/reference/operators/from_udp.md):
+To receive Syslog messages on a UDP socket, use [`accept_udp`](/reference/operators/accept_udp.md):
 
 ```tql
-from_udp "0.0.0.0:514"
+accept_udp "0.0.0.0:514"
 this = data.parse_syslog()
 publish "syslog"
 ```
 
-To use TCP instead of UDP, use [`load_tcp`](/reference/operators/load_tcp.md) with [`read_syslog`](/reference/operators/read_syslog.md):
+To use TCP instead of UDP, use [`accept_tcp`](/reference/operators/accept_tcp.md) with [`read_syslog`](/reference/operators/read_syslog.md):
 
 ```tql
-load_tcp "0.0.0.0:514" {
+accept_tcp "0.0.0.0:514" {
   read_syslog
 }
 publish "syslog"
 ```
 
-The pipeline inside `load_tcp` executes *for each accepted connection*.
+The pipeline inside [`accept_tcp`](/reference/operators/accept_tcp.md) executes *for each accepted connection*.
 
 ### Parsing CEF, LEEF, or JSON Payloads
 
@@ -112,7 +112,7 @@ This allows ingesting logs with stack traces or other verbose content correctly.
 For auditing, compliance, or debugging purposes, you may need to keep the original syslog line alongside the parsed fields. Use the `raw_message` parameter to store the unparsed input:
 
 ```tql
-load_tcp "0.0.0.0:514" {
+accept_tcp "0.0.0.0:514" {
   read_syslog raw_message=raw
 }
 ```
@@ -158,7 +158,7 @@ When a record omits the SD-ID, Tenzir stores the parsed parameters under `struct
 
 Tenzir also supports **creating** Syslog messages from structured events via [`write_syslog`](/reference/operators/write_syslog.md).
 
-Here’s a basic example that emits a single Syslog line over UDP:
+Here’s a basic example that emits a single Syslog line over TCP:
 
 ```tql
 from {
@@ -172,11 +172,12 @@ from {
   structured_data: {},
   message: " PARENT process running...",
 }
-write_syslog
-save_udp "1.2.3.4:514"
+to_tcp "1.2.3.4:514" {
+  write_syslog
+}
 ```
 
-This pipeline sends the following RFC 5424-formatted message to `1.2.3.4:514/udp`:
+This pipeline sends the following RFC 5424-formatted message to `1.2.3.4:514/tcp`:
 
 ```txt
 <30>1 2020-03-02T18:44:46.000000Z parallels-Parallels-Virtual-Platform packagekitd 1370 - -  PARENT process running...

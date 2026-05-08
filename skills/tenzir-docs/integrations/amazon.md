@@ -12,7 +12,7 @@ To interact with AWS services, you need to provide appropriate credentials.
 All AWS operators support an `aws_iam` parameter for specifying credentials directly in the pipeline:
 
 ```tql
-load_sqs "my-queue", aws_iam={
+from_s3 "s3://my-bucket/data.json", aws_iam={
   region: "us-east-1",
   access_key_id: "AKIAIOSFODNN7EXAMPLE",
   secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
@@ -22,7 +22,7 @@ load_sqs "my-queue", aws_iam={
 You can also use the `aws_iam` parameter to assume an IAM role:
 
 ```tql
-load_s3 "s3://my-bucket/data.json", aws_iam={
+from_s3 "s3://my-bucket/data.json", aws_iam={
   assume_role: "arn:aws:iam::123456789012:role/MyRole",
   session_name: "tenzir-session"
 }
@@ -33,7 +33,7 @@ load_s3 "s3://my-bucket/data.json", aws_iam={
 For cross-cloud authentication, you can use OIDC tokens from external identity providers like Azure, Google Cloud, or custom OIDC endpoints. This approach uses the AWS `AssumeRoleWithWebIdentity` API to exchange an OIDC token for temporary AWS credentials.
 
 ```tql
-load_s3 "s3://my-bucket/data.json", aws_iam={
+from_s3 "s3://my-bucket/data.json", aws_iam={
   region: "us-east-1",
   assume_role: "arn:aws:iam::123456789012:role/CrossCloudRole",
   web_identity: {

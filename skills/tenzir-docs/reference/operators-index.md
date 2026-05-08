@@ -43,13 +43,11 @@
 
 ## Encode & Decode
 
-- [compress](operators/compress.md): Compresses a stream of bytes.
 - [compress_brotli](operators/compress_brotli.md): Compresses a stream of bytes using Brotli compression.
 - [compress_bz2](operators/compress_bz2.md): Compresses a stream of bytes using bz2 compression.
 - [compress_gzip](operators/compress_gzip.md): Compresses a stream of bytes using gzip compression.
 - [compress_lz4](operators/compress_lz4.md): Compresses a stream of bytes using lz4 compression.
 - [compress_zstd](operators/compress_zstd.md): Compresses a stream of bytes using zstd compression.
-- [decompress](operators/decompress.md): Decompresses a stream of bytes.
 - [decompress_brotli](operators/decompress_brotli.md): Decompresses a stream of bytes in the Brotli format.
 - [decompress_bz2](operators/decompress_bz2.md): Decompresses a stream of bytes in the Bzip2 format.
 - [decompress_gzip](operators/decompress_gzip.md): Decompresses a stream of bytes in the Gzip format.
@@ -78,8 +76,10 @@
 - [cron](operators/cron.md): Runs a pipeline periodically according to a cron expression.
 - [delay](operators/delay.md): Delays events relative to a given start time, with an optional speedup.
 - [discard](operators/discard.md): Discards all incoming events.
+- [each](operators/each.md): Spawns a subpipeline for every incoming event, with the event bound to `$this`.
 - [every](operators/every.md): Runs a pipeline periodically at a fixed interval.
 - [fork](operators/fork.md): Executes a subpipeline with a copy of the input.
+- [group](operators/group.md): Routes events with the same key through the same subpipeline.
 - [load_balance](operators/load_balance.md): Routes the data to one of multiple subpipelines.
 - [parallel](operators/parallel.md): Runs a subpipeline across multiple parallel workers.
 - [pass](operators/pass.md): Does nothing with the input.
@@ -92,6 +92,33 @@
 - [nics](operators/nics.md): Shows a snapshot of available network interfaces.
 - [processes](operators/processes.md): Shows a snapshot of running processes.
 - [sockets](operators/sockets.md): Shows a snapshot of open sockets.
+
+## Inputs
+
+- [accept_http](operators/accept_http.md): Accepts incoming HTTP requests and forwards them as events.
+- [accept_opensearch](operators/accept_opensearch.md): Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.
+- [accept_tcp](operators/accept_tcp.md): Listens for incoming TCP or TLS connections and receives events.
+- [accept_udp](operators/accept_udp.md): Receives UDP datagrams and outputs structured events.
+- [accept_zmq](operators/accept_zmq.md): Listens on a ZeroMQ endpoint and receives events.
+- [from_amqp](operators/from_amqp.md): Receives messages from an AMQP queue.
+- [from_azure_blob_storage](operators/from_azure_blob_storage.md): Reads one or multiple files from Azure Blob Storage.
+- [from_file](operators/from_file.md): Reads one or multiple files from a filesystem.
+- [from_fluent_bit](operators/from_fluent_bit.md): Receives events via Fluent Bit.
+- [from_ftp](operators/from_ftp.md): Downloads bytes via FTP or FTPS and parses them with a subpipeline.
+- [from_google_cloud_pubsub](operators/from_google_cloud_pubsub.md): Subscribes to a Google Cloud Pub/Sub subscription and yields events.
+- [from_google_cloud_storage](operators/from_google_cloud_storage.md): Reads one or multiple files from Google Cloud Storage.
+- [from_http](operators/from_http.md): Sends an HTTP/1.1 request and returns the response as events.
+- [from_kafka](operators/from_kafka.md): Receives events from an Apache Kafka topic.
+- [from_mysql](operators/from_mysql.md): Reads events from a MySQL database.
+- [from_nats](operators/from_nats.md): Consumes messages from a NATS JetStream subject.
+- [from_nic](operators/from_nic.md): Captures packets from a network interface and outputs events.
+- [from_s3](operators/from_s3.md): Reads one or multiple files from Amazon S3.
+- [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md): Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
+- [from_sqs](operators/from_sqs.md): Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
+- [from_stdin](operators/from_stdin.md): Reads and parses events from standard input.
+- [from_tcp](operators/from_tcp.md): Connects to a remote TCP or TLS endpoint and receives events.
+- [from_velociraptor](operators/from_velociraptor.md): Submits VQL to a Velociraptor server and returns the response as events.
+- [from_zmq](operators/from_zmq.md): Connects to a remote ZeroMQ publisher and receives events.
 
 ## Internals
 
@@ -112,7 +139,7 @@
 - [drop](operators/drop.md): Removes fields from the event.
 - [drop_null_fields](operators/drop_null_fields.md): Removes fields containing null values from the event.
 - [enumerate](operators/enumerate.md): Add a field with the number of preceding events.
-- [http](operators/http.md): Sends HTTP/1.1 requests and forwards the response.
+- [http](operators/http.md): The `http` operator is deprecated. Use the dedicated HTTP operators instead.
 - [move](operators/move.md): Moves values from one field to another, removing the original field.
 - [replace](operators/replace.md): Replaces all occurrences of a value with another value.
 - [select](operators/select.md): Selects some values and discards the rest.
@@ -120,12 +147,52 @@
 - [timeshift](operators/timeshift.md): Adjusts timestamps relative to a given start time, with an optional speedup.
 - [unroll](operators/unroll.md): Returns a new event for each member of a list or a record in an event, duplicating the surrounding event.
 
+## Node
+
+- [diagnostics](operators/diagnostics.md): Retrieves diagnostic events from a Tenzir node.
+- [metrics](operators/metrics.md): Retrieves metrics events from a Tenzir node.
+- [openapi](operators/openapi.md): Shows the node’s OpenAPI specification.
+- [plugins](operators/plugins.md): Shows all available plugins and built-ins.
+- [version](operators/version.md): Shows the current version.
+
 ## OCSF
 
 - [ocsf::apply](operators/ocsf/apply.md): Casts incoming events to their OCSF type.
 - [ocsf::cast](operators/ocsf/cast.md): Casts incoming events to their OCSF type.
 - [ocsf::derive](operators/ocsf/derive.md): Automatically assigns enum strings from their integer counterparts and vice versa.
 - [ocsf::trim](operators/ocsf/trim.md): Drops fields from OCSF events to reduce their size.
+
+## Outputs
+
+- [serve_http](operators/serve_http.md): Starts an HTTP server and streams bytes produced by a nested pipeline to connected clients.
+- [serve_tcp](operators/serve_tcp.md): Listens for incoming TCP connections and sends events to all connected clients.
+- [serve_zmq](operators/serve_zmq.md): Listens on a ZeroMQ endpoint and sends events.
+- [to_amazon_security_lake](operators/to_amazon_security_lake.md): Sends OCSF events to Amazon Security Lake.
+- [to_amqp](operators/to_amqp.md): Sends messages to an AMQP exchange.
+- [to_azure_blob_storage](operators/to_azure_blob_storage.md): Writes events to one or multiple blobs in Azure Blob Storage.
+- [to_azure_log_analytics](operators/to_azure_log_analytics.md): Sends events to the Microsoft Azure Logs Ingestion API.
+- [to_clickhouse](operators/to_clickhouse.md): Sends events to a ClickHouse table.
+- [to_file](operators/to_file.md): Writes events to one or multiple files on a filesystem.
+- [to_fluent_bit](operators/to_fluent_bit.md): Sends events via Fluent Bit.
+- [to_ftp](operators/to_ftp.md): Prints events to bytes and uploads them via FTP or FTPS.
+- [to_google_cloud_logging](operators/to_google_cloud_logging.md): Sends events to Google Cloud Logging.
+- [to_google_cloud_pubsub](operators/to_google_cloud_pubsub.md): Publishes events to a Google Cloud Pub/Sub topic.
+- [to_google_cloud_storage](operators/to_google_cloud_storage.md): Writes events to one or multiple objects in Google Cloud Storage.
+- [to_google_secops](operators/to_google_secops.md): Sends unstructured events to a Google SecOps Chronicle instance.
+- [to_hive](operators/to_hive.md): Writes events to a URI using hive partitioning.
+- [to_http](operators/to_http.md): Sends events as HTTP requests to a webhook or API endpoint.
+- [to_kafka](operators/to_kafka.md): Sends messages to an Apache Kafka topic.
+- [to_nats](operators/to_nats.md): Publishes messages to a NATS JetStream subject.
+- [to_opensearch](operators/to_opensearch.md): Sends events to an OpenSearch-compatible Bulk API.
+- [to_s3](operators/to_s3.md): Writes events to one or multiple objects in Amazon S3.
+- [to_sentinelone_data_lake](operators/to_sentinelone_data_lake.md): Sends security events to SentinelOne Singularity Data Lake via REST API.
+- [to_snowflake](operators/to_snowflake.md): Sends events to a Snowflake database.
+- [to_splunk](operators/to_splunk.md): Sends events to a Splunk [HTTP Event Collector (HEC)](https://docs.splunk.com/Documentation/Splunk/9.3.1/Data/UsetheHTTPEventCollector).
+- [to_sqs](operators/to_sqs.md): Sends messages to an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
+- [to_stdout](operators/to_stdout.md): Writes events to standard output.
+- [to_tcp](operators/to_tcp.md): Connects to a remote TCP or TLS endpoint and sends events.
+- [to_udp](operators/to_udp.md): Sends one UDP datagram per input event.
+- [to_zmq](operators/to_zmq.md): Connects to a remote ZeroMQ subscriber endpoint and sends events.
 
 ## Packages
 
@@ -150,10 +217,11 @@
 - [read_lines](operators/read_lines.md): Parses an incoming bytes stream into events.
 - [read_ndjson](operators/read_ndjson.md): Parses an incoming NDJSON (newline-delimited JSON) stream into events.
 - [read_parquet](operators/read_parquet.md): Reads events from a Parquet byte stream.
-- [read_pcap](operators/read_pcap.md): Reads raw network packets in PCAP file format.
+- [read_pcap](operators/read_pcap.md): Parses PCAP byte streams into packet events.
 - [read_ssv](operators/read_ssv.md): Read SSV (Space-Separated Values) from a byte stream.
 - [read_suricata](operators/read_suricata.md): Parse an incoming [Suricata EVE JSON](https://suricata.readthedocs.io/en/latest/output/eve/eve-json-output.html) stream into events.
 - [read_syslog](operators/read_syslog.md): Parses an incoming Syslog stream into events.
+- [read_tql](operators/read_tql.md): Parses an incoming byte stream of TQL-formatted records into events.
 - [read_tsv](operators/read_tsv.md): Read TSV (Tab-Separated Values) from a byte stream.
 - [read_xsv](operators/read_xsv.md): Read XSV from a byte stream.
 - [read_yaml](operators/read_yaml.md): Parses an incoming YAML stream into events.
@@ -177,7 +245,7 @@
 - [write_lines](operators/write_lines.md): Writes events as key-value pairsthe *values* of an event.
 - [write_ndjson](operators/write_ndjson.md): Transforms the input event stream to a Newline-Delimited JSON byte stream.
 - [write_parquet](operators/write_parquet.md): Transforms event stream to a Parquet byte stream.
-- [write_pcap](operators/write_pcap.md): Transforms event stream to PCAP byte stream.
+- [write_pcap](operators/write_pcap.md): Serializes packet events as a PCAP byte stream.
 - [write_ssv](operators/write_ssv.md): Transforms event stream to SSV (Space-Separated Values) byte stream.
 - [write_syslog](operators/write_syslog.md): Writes events as syslog.
 - [write_tql](operators/write_tql.md): Transforms the input event stream to a TQL notation byte stream.
@@ -186,78 +254,14 @@
 - [write_yaml](operators/write_yaml.md): Transforms the input event stream to YAML byte stream.
 - [write_zeek_tsv](operators/write_zeek_tsv.md): Transforms event stream into Zeek Tab-Separated Value byte stream.
 
-## Inputs
+## Storage
 
-- [load_amqp](operators/load_amqp.md): Loads a byte stream via AMQP messages.
-- [load_azure_blob_storage](operators/load_azure_blob_storage.md): Loads bytes from Azure Blob Storage.
-- [load_file](operators/load_file.md): Loads the contents of the file at `path` as a byte stream.
-- [load_ftp](operators/load_ftp.md): Loads a byte stream via FTP.
-- [load_gcs](operators/load_gcs.md): Loads bytes from a Google Cloud Storage object.
-- [load_google_cloud_pubsub](operators/load_google_cloud_pubsub.md): Subscribes to a Google Cloud Pub/Sub subscription and obtains bytes.
-- [load_http](operators/load_http.md): Loads a byte stream via HTTP.
-- [load_kafka](operators/load_kafka.md): Loads a byte stream from an Apache Kafka topic.
-- [load_nic](operators/load_nic.md): Loads bytes from a network interface card (NIC).
-- [load_s3](operators/load_s3.md): Loads from an Amazon S3 object.
-- [load_sqs](operators/load_sqs.md): Loads bytes from [Amazon SQS](https://docs.aws.amazon.com/sqs/) queues.
-- [load_stdin](operators/load_stdin.md): Accepts bytes from standard input.
-- [load_tcp](operators/load_tcp.md): Loads bytes from a TCP or TLS connection.
-- [load_udp](operators/load_udp.md): Loads bytes from a UDP socket.
-- [load_zmq](operators/load_zmq.md): Receives ZeroMQ messages.
-- [from](operators/from.md): Obtains events from an URI, inferring the source, compression and format.
-- [from_azure_blob_storage](operators/from_azure_blob_storage.md): Reads one or multiple files from Azure Blob Storage.
-- [from_file](operators/from_file.md): Reads one or multiple files from a filesystem.
-- [from_fluent_bit](operators/from_fluent_bit.md): Receives events via Fluent Bit.
-- [from_gcs](operators/from_gcs.md): Reads one or multiple files from Google Cloud Storage.
-- [from_google_cloud_pubsub](operators/from_google_cloud_pubsub.md): Subscribes to a Google Cloud Pub/Sub subscription and yields events.
-- [from_http](operators/from_http.md): Sends and receives HTTP/1.1 requests.
-- [from_kafka](operators/from_kafka.md): Receives events from an Apache Kafka topic.
-- [from_opensearch](operators/from_opensearch.md): Receives events via Opensearch Bulk API.
-- [from_s3](operators/from_s3.md): Reads one or multiple files from Amazon S3.
-- [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md): Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
-- [from_udp](operators/from_udp.md): Receives UDP datagrams and outputs structured events.
-- [from_velociraptor](operators/from_velociraptor.md): Submits VQL to a Velociraptor server and returns the response as events.
-
-## Node
-
-- [diagnostics](operators/diagnostics.md): Retrieves diagnostic events from a Tenzir node.
-- [metrics](operators/metrics.md): Retrieves metrics events from a Tenzir node.
-- [openapi](operators/openapi.md): Shows the node’s OpenAPI specification.
-- [plugins](operators/plugins.md): Shows all available plugins and built-ins.
-- [version](operators/version.md): Shows the current version.
 - [export](operators/export.md): Retrieves events from a Tenzir node.
 - [fields](operators/fields.md): Retrieves all fields stored at a node.
 - [import](operators/import.md): Imports events into a Tenzir node.
 - [partitions](operators/partitions.md): Retrieves metadata about events stored at a node.
 - [schemas](operators/schemas.md): Retrieves all schemas for events stored at a node.
 
-## Outputs
+## Additional Pages
 
-- [save_amqp](operators/save_amqp.md): Saves a byte stream via AMQP messages.
-- [save_azure_blob_storage](operators/save_azure_blob_storage.md): Saves bytes to Azure Blob Storage.
-- [save_email](operators/save_email.md): Saves bytes through an SMTP server.
-- [save_file](operators/save_file.md): Writes a byte stream to a file.
-- [save_ftp](operators/save_ftp.md): Saves a byte stream via FTP.
-- [save_gcs](operators/save_gcs.md): Saves bytes to a Google Cloud Storage object.
-- [save_google_cloud_pubsub](operators/save_google_cloud_pubsub.md): Publishes to a Google Cloud Pub/Sub topic.
-- [save_http](operators/save_http.md): Sends a byte stream via HTTP.
-- [save_kafka](operators/save_kafka.md): Saves a byte stream to a Apache Kafka topic.
-- [save_s3](operators/save_s3.md): Saves bytes to an Amazon S3 object.
-- [save_sqs](operators/save_sqs.md): Saves bytes to [Amazon SQS](https://docs.aws.amazon.com/sqs/) queues.
-- [save_stdout](operators/save_stdout.md): Writes a byte stream to standard output.
-- [save_tcp](operators/save_tcp.md): Saves bytes to a TCP or TLS connection.
-- [save_udp](operators/save_udp.md): Saves bytes to a UDP socket.
-- [save_zmq](operators/save_zmq.md): Sends bytes as ZeroMQ messages.
-- [to](operators/to.md): Saves to an URI, inferring the destination, compression and format.
-- [to_amazon_security_lake](operators/to_amazon_security_lake.md): Sends OCSF events to Amazon Security Lake.
-- [to_azure_log_analytics](operators/to_azure_log_analytics.md): Sends events to the Microsoft Azure Logs Ingestion API.
-- [to_clickhouse](operators/to_clickhouse.md): Sends events to a ClickHouse table.
-- [to_fluent_bit](operators/to_fluent_bit.md): Sends events via Fluent Bit.
-- [to_google_cloud_logging](operators/to_google_cloud_logging.md): Sends events to Google Cloud Logging.
-- [to_google_cloud_pubsub](operators/to_google_cloud_pubsub.md): Publishes events to a Google Cloud Pub/Sub topic.
-- [to_google_secops](operators/to_google_secops.md): Sends unstructured events to a Google SecOps Chronicle instance.
-- [to_hive](operators/to_hive.md): Writes events to a URI using hive partitioning.
-- [to_kafka](operators/to_kafka.md): Sends messages to an Apache Kafka topic.
-- [to_opensearch](operators/to_opensearch.md): Sends events to an OpenSearch-compatible Bulk API.
-- [to_sentinelone_data_lake](operators/to_sentinelone_data_lake.md): Sends security events to SentinelOne Singularity Data Lake via REST API.
-- [to_snowflake](operators/to_snowflake.md): Sends events to a Snowflake database.
-- [to_splunk](operators/to_splunk.md): Sends events to a Splunk [HTTP Event Collector (HEC)](https://docs.splunk.com/Documentation/Splunk/9.3.1/Data/UsetheHTTPEventCollector).
+- [from_opensearch](operators/from_opensearch.md): The `from_opensearch` operator is no longer available.

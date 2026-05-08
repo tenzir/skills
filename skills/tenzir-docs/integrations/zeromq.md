@@ -1,31 +1,49 @@
 # ZeroMQ
 
 
-[ZeroMQ](https://zeromq.org/) (0mq) is a light-weight messaging framework with various socket types. Tenzir supports writing to [PUB sockets](https://zeromq.org/socket-api/#pub-socket) and reading from [SUB sockets](https://zeromq.org/socket-api/#sub-socket), both in server (listening) and client (connect) mode.
+[ZeroMQ](https://zeromq.org/) (0mq) is a light-weight messaging framework with various socket types. Tenzir supports writing to [PUB sockets](https://zeromq.org/socket-api/#pub-socket) and reading from [SUB sockets](https://zeromq.org/socket-api/#sub-socket), both in bind mode and connect mode.
 
 Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
-Because ZeroMQ is entirely asynchronous, publishers send messages even when no subscriber is present. This can lead to lost messages when the publisher begins operating before the subscriber. To avoid data loss due to such races, pass `monitor=true` to activate message buffering until at least one remote peer has connected.
+The event-oriented ZeroMQ operators are:
 
-URL Support
+* [`from_zmq`](/reference/operators/from_zmq.md): Connects as a `SUB` socket and receives events.
+* [`accept_zmq`](/reference/operators/accept_zmq.md): Binds a `SUB` socket and receives events.
+* [`to_zmq`](/reference/operators/to_zmq.md): Connects as a `PUB` socket and sends events.
+* [`serve_zmq`](/reference/operators/serve_zmq.md): Binds a `PUB` socket and sends events.
 
-The URL scheme `zmq://` dispatches to [`load_zmq`](/reference/operators/load_zmq.md) and [`save_zmq`](/reference/operators/save_zmq.md) for seamless URL-style use via [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md).
+Tenzir documents these operators for PUB/SUB-style use. ZeroMQ itself does not have a first-class topic abstraction. Instead, Tenzir uses an optional `prefix` that is prepended to outgoing messages and matched by subscribers with ZeroMQ’s native byte-prefix filtering. Receivers strip the matched prefix before running their nested `read_*` pipeline unless `keep_prefix=true`.
+
+Because ZeroMQ is entirely asynchronous, publishers send messages even when no subscriber is present. This can lead to lost messages when the publisher begins operating before the subscriber. To avoid data loss due to such races, pass `monitor=true` on [`to_zmq`](/reference/operators/to_zmq.md) or [`serve_zmq`](/reference/operators/serve_zmq.md) to wait until at least one remote peer has connected on TCP transports.
 
 ## Examples
 
-### Accept Syslog messages over ZeroMQ
+### Connect to a remote publisher and parse JSON
 
 ```tql
-from "zmq://127.0.0.1:541" {
-  read_syslog
+from_zmq "tcp://collector.example.com:5555" {
+  read_json
 }
 ```
 
-### Send events to a ZeroMQ socket
+### Receive a prefixed stream
 
 ```tql
-from {message: "Tenzir"}
-to "zmq://1.2.3.4:8080" {
-  write_ndjson
+accept_zmq "tcp://0.0.0.0:5555", prefix="alerts/" {
+  read_ndjson
 }
+```
+
+### Publish events with a dynamic prefix
+
+```tql
+export
+serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=kind + "/"
+```
+
+### Connect and publish JSON
+
+```tql
+export
+to_zmq "tcp://collector.example.com:5555", encoding="json"
 ```

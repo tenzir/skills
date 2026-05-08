@@ -5,7 +5,7 @@ Reads one or multiple files from Azure Blob Storage.
 
 ```tql
 from_azure_blob_storage url:string, [account_key=string, watch=bool,
-  remove=bool, rename=string->string, path_field=field, max_age=duration] { … }
+  remove=bool, rename=string->string, max_age=duration] { … }
 ```
 
 ## Description
@@ -66,12 +66,6 @@ If the target path already exists, the operator will overwrite the file.
 
 The operator automatically creates any intermediate directories required for the target path. If the target path ends with a trailing slash (`/`), the original filename will be automatically appended to create the final path.
 
-### `path_field = field (optional)`
-
-This makes the operator insert the path to the file where an event originated from before emitting it.
-
-By default, paths will not be inserted into the outgoing events.
-
 ### `max_age = duration (optional)`
 
 Only process files that were modified within the specified duration from the current time. Files older than this duration will be skipped.
@@ -79,6 +73,19 @@ Only process files that were modified within the specified duration from the cur
 ### `{ … } (optional)`
 
 Pipeline to use for parsing the file. By default, this pipeline is derived from the path of the file, and will not only handle parsing but also decompression if applicable.
+
+Inside the subpipeline, the `$file` variable is available as a record with the following fields:
+
+\| Field | Type | Description | | :------ | :------- | :--------------------------------------- | | `path` | `string` | The absolute path of the file being read | | `mtime` | `time` | The last modification time of the file |
+
+For example, to attach the source path to each event:
+
+```tql
+from_file "/data/*.json" {
+  read_json
+  source = $file.path
+}
+```
 
 ## Examples
 
@@ -112,12 +119,15 @@ from_azure_blob_storage "abfs://input/**.json",
 ### Add source path to events
 
 ```tql
-from_azure_blob_storage "abfs://data/**.json", path_field=source_file
+from_azure_blob_storage "abfs://data/**.json" {
+  read_json
+  source_file = $file.path
+}
 ```
 
 ## See Also
 
 * [`from_file`](/reference/operators/from_file.md)
-* [`load_azure_blob_storage`](/reference/operators/load_azure_blob_storage.md)
-* [`save_azure_blob_storage`](/reference/operators/save_azure_blob_storage.md)
+* [`from_azure_blob_storage`](/reference/operators/from_azure_blob_storage.md)
+* [`to_azure_blob_storage`](/reference/operators/to_azure_blob_storage.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

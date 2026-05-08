@@ -1,7 +1,7 @@
 # Fluent Bit
 
 
-[Fluent Bit](https://fluentbit.io) is a an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its [inputs](https://docs.fluentbit.io/manual/pipeline/inputs) via [`from_fluent_bit`](/reference/operators/from_fluent_bit.md) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs) via [`to_fluent_bit`](/reference/operators/to_fluent_bit.md)
+[Fluent Bit](https://fluentbit.io) is an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its [inputs](https://docs.fluentbit.io/manual/pipeline/inputs) via [`from_fluent_bit`](/reference/operators/from_fluent_bit.md) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs) via [`to_fluent_bit`](/reference/operators/to_fluent_bit.md)
 
 This makes Tenzir effectively a superset of Fluent Bit.
 
@@ -53,12 +53,12 @@ Tip
 
 Use the dedicated [`to_splunk`](/reference/operators/to_splunk.md) operator to send events to a Splunk HEC.
 
-### Imitate an ElasticSearch & OpenSearch Bulk API endpoint
+### Collect host metrics
 
-This allows you to ingest from beats (e.g., Filebeat, Metricbeat, Winlogbeat).
+Use Fluent Bit’s Node Exporter Metrics input plugin to collect host metrics from Linux systems:
 
 ```tql
-from_fluent_bit "elasticsearch", options = {port: 9200}
+from_fluent_bit "node_exporter_metrics", options={scrape_interval: 5}
 ```
 
 ### Send to Datadog
@@ -67,8 +67,10 @@ from_fluent_bit "elasticsearch", options = {port: 9200}
 to_fluent_bit "datadog", options = {apikey: "XXX"}
 ```
 
-### Send to ElasticSearch
+### Send to Elasticsearch
+
+Use Fluent Bit’s Elasticsearch output plugin to send data to Elasticsearch:
 
 ```tql
-to_fluent_bit "es", options = {host: 192.168.2.3, port: 9200, index: "my_index", type: "my_type"}
+to_fluent_bit "es", options={host: "192.168.2.3", port: 9200, index: "my_index"}
 ```

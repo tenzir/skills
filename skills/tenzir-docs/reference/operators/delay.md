@@ -40,16 +40,18 @@ Defaults to 1.0.
 Replay the M57 Zeek logs with real-world inter-arrival times from the `ts` field. For example, if an event arrives at time *t* and the next event at time *u*, then the `delay` operator will wait time *u - t* between emitting the two events. If *t > u* then the operator immediately emits next event.
 
 ```tql
-load_http "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst"
-read_zeek_tsv
+from_http "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst" {
+  read_zeek_tsv
+}
 delay ts
 ```
 
 ### Replay logs at 10.5 times the original speed
 
 ```tql
-load_http "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst"
-read_zeek_tsv
+from_http "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst" {
+  read_zeek_tsv
+}
 delay ts, speed=10.5
 ```
 
@@ -58,17 +60,19 @@ delay ts, speed=10.5
 Replay and start delaying only after `ts` exceeds `2021-11-17T16:35` and emit all events prior to that timestamp immediately.
 
 ```tql
-load_file "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst"
-read_zeek_tsv
+from_file "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst" {
+  read_zeek_tsv
+}
 delay ts, start=2021-11-17T16:35, speed=10.0
 ```
 
 Adjust the timestamp to the present, and then start replaying in 2 hours from now:
 
 ```tql
-load_file "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst"
-decompress "zstd"
-read_zeek_tsv
+from_file "https://storage.googleapis.com/tenzir-datasets/M57/zeek-all.log.zst" {
+  decompress_zstd
+  read_zeek_tsv
+}
 timeshift ts
 delay ts, start=now()+2h
 ```

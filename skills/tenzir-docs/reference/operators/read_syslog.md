@@ -234,8 +234,9 @@ Type Conflict
 Pipeline
 
 ```tql
-load_file "/var/log/auth.log"
-read_syslog
+from_file "/var/log/auth.log" {
+  read_syslog
+}
 ```
 
 ```tql
@@ -266,7 +267,7 @@ When receiving syslog over TCP from systems that use RFC 6587 octet counting, th
 Pipeline
 
 ```tql
-load_tcp "0.0.0.0:514" {
+accept_tcp "0.0.0.0:514" {
   read_syslog
 }
 ```
@@ -353,8 +354,9 @@ Use `raw_message` to keep the unparsed syslog line alongside the parsed fields:
 Pipeline
 
 ```tql
-load_file "/var/log/auth.log"
-read_syslog raw_message=raw
+from_file "/var/log/auth.log" {
+  read_syslog raw_message=raw
+}
 ```
 
 ```tql

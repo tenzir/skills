@@ -24,7 +24,7 @@ An optional topic for publishing events under. If unspecified, the operator publ
 ### Publish Zeek connection logs under the fixed topic `zeek`
 
 ```tql
-from "conn.log.gz" {
+from_file "conn.log.gz" {
   decompress_gzip
   read_zeek_tsv
 }
@@ -34,7 +34,7 @@ publish "zeek"
 ### Publish Suricata events under a dynamic topic depending on their event type
 
 ```tql
-from "eve.json" {
+from_file "eve.json" {
   read_suricata
 }
 publish f"suricata.{event_type}"

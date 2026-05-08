@@ -19,7 +19,7 @@ Defaults to the compression type’s default compression level.
 
 ### `compression_type = str (optional)`
 
-Supported options are `zstd` for [Zstandard](http://facebook.github.io/zstd/) compression and `lz4` for [LZ4 Frame](https://android.googlesource.com/platform/external/lz4/+/HEAD/doc/lz4_Frame_format.md) compression.
+Supported options are `uncompressed` to disable compression, `zstd` for [Zstandard](http://facebook.github.io/zstd/) compression, and `lz4` for [LZ4 Frame](https://android.googlesource.com/platform/external/lz4/+/HEAD/doc/lz4_Frame_format.md) compression.
 
 Why would I use this over the `compress_*` operators?
 
@@ -38,10 +38,12 @@ Defaults to `0`, i.e., always applying compression.
 ### Convert a JSON stream into a Feather file
 
 ```tql
-load_file "input.json"
-read_json
-write_feather
-save_file "output.feather"
+from_file "input.json" {
+  read_json
+}
+to_file "output.feather" {
+  write_feather
+}
 ```
 
 ## See Also

@@ -164,7 +164,7 @@ inputs:
   api_endpoint: https://api.example.com/data
 ```
 
-The node reads this configuration automatically when loading the package from the `packages` directory.
+The node reads this configuration automatically when Reading the package from the `packages` directory.
 
 ## Design guidelines
 

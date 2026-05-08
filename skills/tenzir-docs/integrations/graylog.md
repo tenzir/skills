@@ -42,17 +42,17 @@ This setup will direct all messages that arrive in Graylog to the specified outp
 Now that Graylog is configured, you can test that data is flowing using the following Tenzir pipeline:
 
 ```tql
-from "tcp://1.2.3.4:5678" {
+accept_tcp "1.2.3.4:5678" {
   read_gelf
 }
 ```
 
-This pipelines opens a listening socket at IP address 1.2.3.4 at port 5678 via [`from`](/reference/operators/from.md) and then spawns a nested pipeline per accepted connection, each of which reads a stream of GELF messages using [`read_gelf`](/reference/operators/read_gelf.md). Graylog will connect to this socket, based on the reconnect interval that you configured in the output (by default 500ms).
+This pipelines opens a listening socket at IP address 1.2.3.4 at port 5678 via [`accept_tcp`](/reference/operators/accept_tcp.md) and then spawns a nested pipeline per accepted connection, each of which reads a stream of GELF messages using [`read_gelf`](/reference/operators/read_gelf.md). Graylog will connect to this socket, based on the reconnect interval that you configured in the output (by default 500ms).
 
 Now that data is flowing, you can decide what to do with the Graylog data, e.g., make available the data on an topic using [`publish`](/reference/operators/publish.md):
 
 ```tql
-from "tcp://1.2.3.4:5678" {
+accept_tcp "1.2.3.4:5678" {
   read_gelf
 }
 publish "graylog"

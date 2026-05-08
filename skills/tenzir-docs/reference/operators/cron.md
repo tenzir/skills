@@ -53,11 +53,12 @@ Pull an endpoint on every 10th minute, Monday through Friday:
 
 ```tql
 cron "* */10 * * * MON-FRI" {
-  from "https://example.org/api"
+  from_http "https://example.org/api"
 }
 publish "api"
 ```
 
 ## See Also
 
+* [`each`](/reference/operators/each.md)
 * [`every`](/reference/operators/every.md)

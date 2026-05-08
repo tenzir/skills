@@ -33,7 +33,7 @@ TQL offers two ways to chain statements: a newline `\n` (vertical) or pipe `|` (
 let $ports = [22, 443]
 
 
-from "/tmp/logs.json"
+from_file "/tmp/logs.json"
 where port in $ports
 select src_ip, dst_ip, bytes
 summarize src_ip, total=sum(bytes)
@@ -51,7 +51,7 @@ Benefits of vertical structure:
 ✅ Appropriate for one-liners:
 
 ```tql
-tenzir 'from "logs.json" | where severity == "high" | summarize count()'
+tenzir 'from_file "logs.json" | where severity == "high" | summarize count()'
 ```
 
 The horizontal approach is ideal for:
@@ -69,7 +69,7 @@ The horizontal approach is ideal for:
 let $ports = [22, 443]
 
 
-from "/tmp/logs.json"
+from_file "/tmp/logs.json"
 | where port in $ports
 | select src_ip, dst_ip, bytes
 | summarize src_ip, total=sum(bytes)
@@ -337,9 +337,7 @@ When normalizing data (e.g., to OCSF format):
 
 ### Use `replace` to normalize placeholder values
 
-When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the
-
-[`replace`](/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
+When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
 
 ✅ Clear and composable approach:
 
@@ -474,7 +472,7 @@ Method chaining reads naturally left-to-right: “take epoch seconds, interpret 
 ✅ Filter first, reduce data volume:
 
 ```tql
-from "large_dataset.json"
+from_file "large_dataset.json"
 where severity == "critical"     // Reduce early
 where timestamp > now() - 1h     // Further reduction
 select relevant_fields           // Drop unnecessary data
@@ -484,7 +482,7 @@ summarize ...                    // Aggregate reduced dataset
 ❌ Process everything, then filter:
 
 ```tql
-from "large_dataset.json"
+from_file "large_dataset.json"
 select all_fields
 summarize ...
 where result > threshold        // Filter after expensive operation

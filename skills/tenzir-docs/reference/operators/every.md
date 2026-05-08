@@ -36,8 +36,9 @@ enumerate
 
 ```tql
 every 10min {
-  load_http "example.org/api/threats"
-  read_json
+  from_http "example.org/api/threats" {
+    read_json
+  }
 }
 publish "threat-feed"
 ```
@@ -45,6 +46,7 @@ publish "threat-feed"
 ## See Also
 
 * [`cron`](/reference/operators/cron.md)
+* [`each`](/reference/operators/each.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
 * [Write a package](../../tutorials/write-a-package.md)

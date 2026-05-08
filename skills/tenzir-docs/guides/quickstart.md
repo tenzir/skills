@@ -224,5 +224,6 @@ Curious how it all fits together? Brush up on the [Tenzir architecture](../expla
 
 ## Contents
 
+- [Tenzir-v6-migration](tenzir-v6-migration.md)
 - [Installation](installation.md)
 - [Basic Usage](basic-usage/run-pipelines.md)

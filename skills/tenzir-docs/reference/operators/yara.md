@@ -4,36 +4,30 @@
 Executes YARA rules on byte streams.
 
 ```tql
-yara rule:list<string>, [blockwise=bool, compiled_rules=bool, fast_scan=bool]
+yara rule:string|list<string>, [compiled_rules=bool, fast_scan=bool]
 ```
 
 ## Description
 
-The `yara` operator applies [YARA](https://virustotal.github.io/yara/) rules to an input of bytes, emitting rule context upon a match.
+The `yara` operator applies [YARA](https://virustotal.github.io/yara/) rules to an input of bytes and emits rule context for each match.
 
-We modeled the operator after the official [`yara` command-line utility](https://yara.readthedocs.io/en/stable/commandline.html) to enable a familiar experience for the command users. Similar to the official `yara` command, the operator compiles the rules by default, unless you provide the option `compiled_rules=true`. To quote from the above link:
+We modeled the operator after the official [`yara` command-line utility](https://yara.readthedocs.io/en/stable/commandline.html) to enable a familiar experience for command-line users. Similar to the official `yara` command, the operator compiles the rules by default unless you provide the `compiled_rules=true` option. To quote from the above link:
 
 > This is a security measure to prevent users from inadvertently using compiled rules coming from a third-party. Using compiled rules from untrusted sources can lead to the execution of malicious code in your computer.
 
-The operator uses a YARA *scanner* under the hood that buffers blocks of bytes incrementally. Even though the input arrives in non-contiguous blocks of memories, the YARA scanner engine support matching across block boundaries. For continuously running pipelines, use the `blockwise=true` option that considers each block as a separate unit. Otherwise the scanner engine would simply accumulate blocks but never trigger a scan.
+The operator scans the entire logical input as one contiguous byte sequence. It buffers the full input in memory and runs the YARA scan when the input ends. This lets matches span chunk boundaries, but it also means the operator is only suitable for finite byte streams.
 
-### `rule: list<string>`
+### `rule: string | list<string>`
 
-The path to the YARA rule(s).
+The path to one YARA rule or a list of rule paths.
 
-If the path is a directory, the operator attempts to recursively add all contained files as YARA rules.
-
-### `blockwise = bool (optional)`
-
-Whether to match on every byte chunk instead of triggering a scan when the input exhausted.
-
-This option makes sense for never-ending dataflows where each chunk of bytes constitutes a self-contained unit, such as a single file.
+If a path is a directory, the operator attempts to recursively add all contained files as YARA rules.
 
 ### `compiled_rules = bool (optional)`
 
 Whether to interpret the rules as compiled.
 
-When providing this flag, you must exactly provide one rule path as positional argument.
+When you provide this flag, you must provide exactly one rule path as the positional argument.
 
 ### `fast_scan = bool (optional)`
 
@@ -41,20 +35,25 @@ Enable fast matching mode.
 
 ## Examples
 
-The examples below show how you can scan a single file and how you can create a simple rule scanning service.
+The example below shows how you can scan a file with YARA rules.
 
-### Perform one-shot scanning of files
+### Scan a file
 
 Scan a file with a set of YARA rules:
 
 ```tql
-load_file "evil.exe", mmap=true
-yara "rule.yara"
+from_file "evil.exe", mmap=true {
+  yara "rule.yara"
+}
 ```
 
-Memory Mapping Optimization
+Memory mapping optimization
 
-The `mmap` flag is merely an optimization that constructs a single chunk of bytes instead of a contiguous stream. Without `mmap=true`, [`load_file`](/reference/operators/load_file.md) generates a stream of byte chunks and feeds them incrementally to the `yara` operator. This also works, but performance is better due to memory locality when using `mmap`.
+When reading from a local file, `from_file ..., mmap=true` uses `mmap(2)` so `yara` can scan one contiguous chunk without an extra copy. Without `mmap=true`, `from_file` may deliver multiple chunks; `yara` still works because it buffers and joins the full input before scanning.
+
+Finite inputs only
+
+`yara` waits for the end of input before it emits any matches. Don’t use it on never-ending byte streams.
 
 Let’s unpack a concrete example:
 
@@ -117,4 +116,4 @@ You can produce test matches by feeding bytes into the `yara` operator. You will
 }
 ```
 
-Each match has a `rule` field describing the rule and a `matches` record indexed by string identifier to report a list of matches per rule string.
+Each match has a `rule` field that describes the rule and a `matches` record indexed by string identifier to report a list of matches per rule string.

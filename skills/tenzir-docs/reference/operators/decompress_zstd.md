@@ -16,9 +16,10 @@ The `decompress_zstd` operator decompresses bytes in a pipeline incrementally. T
 ### Import Suricata events from a Zstd-compressed file
 
 ```tql
-load_file "eve.json.zstd"
-decompress_zstd
-read_suricata
+from_file "eve.json.zstd" {
+  decompress_zstd
+  read_suricata
+}
 import
 ```
 

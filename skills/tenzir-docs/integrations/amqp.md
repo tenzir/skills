@@ -7,9 +7,7 @@ The diagram below shows the key abstractions and how they relate to a pipeline:
 
 Tenzir supports sending and receiving messages via AMQP version 0-9-1.
 
-URL Support
-
-The URL scheme `amqp://` dispatches to [`load_amqp`](/reference/operators/load_amqp.md) and [`save_amqp`](/reference/operators/save_amqp.md) for seamless URL-style use via [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md).
+When receiving messages, Tenzir emits each AMQP payload in the `message` field as a blob. Parse this field in the pipeline when the payload contains structured data.
 
 ## Examples
 
@@ -20,17 +18,21 @@ from {
   x: 42,
   y: "foo",
 }
-to "amqp://admin:pass@0.0.0.1:5672/vhost"
+to_amqp "amqp://admin:pass@0.0.0.1:5672/vhost"
 ```
+
+By default, `to_amqp` sends each input event as NDJSON. Use the `message` parameter to send a specific string or blob field instead.
 
 ### Receive events from an AMQP queue
 
 ```tql
-from "amqp://admin:pass@0.0.0.1:5672/vhost"
+from_amqp "amqp://admin:pass@0.0.0.1:5672/vhost", queue="events"
+this = string(message).parse_json()
 ```
 
 ## Contents
 
 - [Fluent-bit](fluent-bit.md)
 - [Kafka](kafka.md)
+- [Nats](nats.md)
 - [Zeromq](zeromq.md)

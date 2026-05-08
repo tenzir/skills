@@ -202,7 +202,7 @@ auth_header = f"Bearer {$api_key}"
 
 // Use secrets without exposing them
 http "api.example.com", headers={Auth: $api_key}  // Use secret safely
-to "debug.json"  // Secret value is not written to file
+to_file "debug.json"  // Secret value is not written to file
 ```
 
 ❌ Without secret type (using strings):
@@ -213,7 +213,7 @@ api_key = "sk_live_abc123..."   // Shows up in debug output
 
 
 // No protection against exposure
-to "debug.json"  // Oops, secret written to file
+to_file "debug.json"  // Oops, secret written to file
 ```
 
 The secret type ensures sensitive data is never accidentally exposed in logs, outputs, or debugging.

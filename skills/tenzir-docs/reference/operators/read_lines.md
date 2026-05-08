@@ -43,8 +43,9 @@ Use the specified regex as the delimiter instead of newline characters. The rege
 ### Reads lines from a file
 
 ```tql
-load_file "events.log"
-read_lines
+from_file "events.log" {
+  read_lines
+}
 is_error = line.starts_with("error:")
 ```
 
@@ -53,14 +54,16 @@ is_error = line.starts_with("error:")
 Consider using [`read_delimited_regex`](/reference/operators/read_delimited_regex.md) for regex-based splitting:
 
 ```tql
-load_tcp "0.0.0.0:514"
-read_delimited_regex "(?=<[0-9]+>)"
+accept_tcp "0.0.0.0:514" {
+  read_delimited_regex "(?=<[0-9]+>)"
+}
 this = line.parse_syslog()
 ```
 
 ```tql
-load_tcp "0.0.0.0:514"
-read_lines split_at_regex="(?=<[0-9]+>)"
+accept_tcp "0.0.0.0:514" {
+  read_lines split_at_regex="(?=<[0-9]+>)"
+}
 this = line.parse_syslog()
 ```
 

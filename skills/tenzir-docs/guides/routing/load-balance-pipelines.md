@@ -11,8 +11,7 @@ The `load_balance` operator spawns a nested pipeline for each element in a confi
 let $endpoints = ["host1:8080", "host2:8080", "host3:8080"]
 subscribe "events"
 load_balance $endpoints {
-  write_json
-  save_tcp $endpoints
+  to_tcp $endpoints { write_json }
 }
 ```
 
@@ -30,8 +29,7 @@ let $cfg = ["192.168.0.30:8080", "192.168.0.31:8080"]
 
 subscribe "input"
 load_balance $cfg {
-  write_json
-  save_tcp $cfg
+  to_tcp $cfg { write_json }
 }
 ```
 

@@ -34,7 +34,7 @@ summarize src_ip, total=sum(bytes)
 And here a horziontal one:
 
 ```tql
-let $ports = [22, 443] | from "/tmp/logs.json" | where port in $ports | select src_ip, dst_ip, bytes | summarize src_ip, total=sum(bytes)
+let $ports = [22, 443] | from_file "/tmp/logs.json" | where port in $ports | select src_ip, dst_ip, bytes | summarize src_ip, total=sum(bytes)
 ```
 
 In theory, you can combine pipes and newlines to write programs that resemble Kusto and similar languages. However, [we discourage](../tutorials/learn-idiomatic-tql.md) this practice because it can make the code harder to read and maintain, especially when adding nested pipelines that increase the level of indentation.
@@ -56,7 +56,7 @@ We have a dedicated [section on warnings and errors](../tutorials/learn-idiomati
 
 ## Pipeline nesting
 
-Operators can contain entire subpipelines that execute based on the operator’s semantics. You define subpipelines syntactically within a block of curly braces (`{}`).
+Subpipelines are nested pipelines that an outer operator executes based on its own semantics. You define subpipelines within a block of curly braces (`{}`). They are a first-class part of TQL and the standard pattern for separating transport from parsing or printing.
 
 There are three types of subpipelines based on what they expect and produce:
 
@@ -64,7 +64,7 @@ There are three types of subpipelines based on what they expect and produce:
 
 2. **Parsing subpipelines** (bytes-to-events): Transform raw bytes into structured events, used by input operators like [`from_file`](/reference/operators/from_file.md) and [`from_http`](/reference/operators/from_http.md).
 
-3. **Printing subpipelines** (events-to-bytes): Transform structured events into raw bytes, used by output operators like [`to`](/reference/operators/to.md).
+3. **Printing subpipelines** (events-to-bytes): Transform structured events into raw bytes, used by output operators like [`to_file`](/reference/operators/to_file.md) and [`to_http`](/reference/operators/to_http.md).
 
 ### Closed subpipelines
 
@@ -103,7 +103,7 @@ When the input operator can infer the format automatically (e.g., from the file 
 from_file "data.json"  // Automatically uses read_json
 ```
 
-Operators that produce events directly, like [`from_kafka`](/reference/operators/from_kafka.md) or [`from_udp`](/reference/operators/from_udp.md), don’t take a parsing subpipeline because the data format is inherent to the source.
+Operators that produce events directly, like [`from_kafka`](/reference/operators/from_kafka.md) or [`accept_udp`](/reference/operators/accept_udp.md), don’t take a parsing subpipeline because the data format is inherent to the source.
 
 ## Comments
 
@@ -172,13 +172,13 @@ Understanding operator behavior helps write efficient pipelines:
 **Blocking operators** need all input before producing output:
 
 * [`sort`](/reference/operators/sort.md): Must see all events to order them
-* [`summarize`](/reference/operators/summarize.md): Aggregates across the entire stream
+* [`summarize`](/reference/operators/summarize.md): Aggregates across the stream
 * [`reverse`](/reference/operators/reverse.md): Needs complete input to reverse order
 
  Efficient: streaming operations first:
 
 ```tql
-from "large_file.json"
+from_file "large_file.json"
 where severity == "critical"    // Streaming: reduces data early
 select relevant_fields          // Streaming: drops unnecessary data
 sort timestamp                  // Blocking: but on reduced dataset
@@ -187,7 +187,7 @@ sort timestamp                  // Blocking: but on reduced dataset
 L Less efficient: blocking operation on full data:
 
 ```tql
-from "large_file.json"
+from_file "large_file.json"
 sort timestamp                  // Blocking: processes everything
 where severity == "critical"    // Then filters
 ```

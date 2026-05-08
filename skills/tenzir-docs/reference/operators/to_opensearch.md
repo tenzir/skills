@@ -5,14 +5,15 @@ Sends events to an OpenSearch-compatible Bulk API.
 
 ```tql
 to_opensearch url:string, action=string, [index=string, id=string, doc=record,
-    user=string, passwd=string, tls=record]
+    user=string, passwd=string, tls=record, include_nulls=bool,
+    max_content_length=int, buffer_timeout=duration, compress=bool]
 ```
 
 ## Description
 
-The `to_opensearch` operator sends events to a [OpenSearch-compatible Bulk API](https://opensearch.org/docs/latest/api-reference/document-apis/bulk/) such as [ElasticSearch](https://www.elastic.co/elasticsearch).
+The `to_opensearch` operator sends events to an [OpenSearch-compatible Bulk API](https://opensearch.org/docs/latest/api-reference/document-apis/bulk/), including Elasticsearch.
 
-The operator accumulates multiple events before sending them as a single request. You can control the maximum request size via the `max_content_length` and the timeout before sending all accumulated events via the `send_timeout` option.
+The operator appends `/_bulk` to the URL if the path doesn’t already end with `/_bulk`. It accumulates multiple events before sending them as a single request. You can control the maximum request size with `max_content_length` and the timeout before sending accumulated events with `buffer_timeout`.
 
 ### `url: string`
 
@@ -26,9 +27,9 @@ Supported actions:
 
 * `create`: Creates a document if it doesn’t already exist and returns an error otherwise.
 * `delete`: Deletes a document if it exists.
-* `index`: Creates a document if it doesn’t yet exist and replace the document if it already exists.
+* `index`: Creates a document if it doesn’t exist yet and replaces the document if it already exists.
 * `update`: Updates existing documents and returns an error if the document doesn’t exist.
-* `upsert`: If a document exists, it is updated; if it does not exist, a new document is indexed.
+* `upsert`: Updates a document if it exists, or indexes a new document if it doesn’t exist.
 
 ### `index = string (optional)`
 
@@ -40,7 +41,7 @@ Must be provided if the `url` does not have an index.
 
 The `id` of the document to act on.
 
-Must be provided when using the `delete` and `update` actions.
+Must be provided when using the `delete`, `update`, and `upsert` actions.
 
 ### `doc = record (optional)`
 
@@ -87,13 +88,13 @@ Defaults to `false`.
 
 ### `max_content_length = int (optional)`
 
-The maximum size of the message uncompressed body in bytes. A message may consist of multiple events. If a single event is larger than this limit, it is dropped and a warning is emitted.
+The maximum size of the uncompressed message body in bytes. A message may consist of multiple events. If a single event is larger than this limit, the operator drops it and emits a warning.
 
 Defaults to `5Mi`.
 
 ### `buffer_timeout = duration (optional)`
 
-The maximum amount of time for which the operator accumulates messages before sending them out to the HEC endpoint as a single message.
+The maximum amount of time for which the operator accumulates events before sending them to the Bulk API as a single request.
 
 Defaults to `5s`.
 
@@ -108,12 +109,12 @@ Defaults to `true`.
 ### Send events from a JSON file
 
 ```tql
-from "example.json"
+from_file "example.json"
 to_opensearch "localhost:9200", action="create", index="main"
 ```
 
 ## See Also
 
-* [`from_opensearch`](/reference/operators/from_opensearch.md)
+* [`accept_opensearch`](/reference/operators/accept_opensearch.md)
 * [OpenSearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)

@@ -14,7 +14,9 @@ The `dns_lookup` operator performs DNS resolution on the specified field. It aut
 * **Reverse lookup**: When the field contains an IP address, the operator performs a PTR query to find the associated hostname.
 * **Forward lookup**: When the field contains a string, the operator performs A and AAAA queries to find associated IP addresses.
 
-The result is stored as a record in the specified result field.
+The result is stored in the specified result field.
+
+Tenzir caches DNS results and reuses them across lookups. For forward lookups, the `ttl` field shows the remaining lifetime of the cached answer.
 
 ### `field: ip|string`
 
@@ -52,7 +54,7 @@ Where each record has the structure:
 }
 ```
 
-If the lookup fails or times out, the result field will be `null`.
+If an individual lookup fails or times out, the result field will be `null`. If Tenzir cannot initialize DNS resolution at all, the operator emits an error and stops instead of writing `null` results.
 
 ## Examples
 

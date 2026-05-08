@@ -102,5 +102,5 @@ to_amazon_security_lake $s3_uri,
 ## See Also
 
 * [`ocsf::apply`](/reference/operators/ocsf/apply.md)
-* [`save_s3`](/reference/operators/save_s3.md)
+* [`to_s3`](/reference/operators/to_s3.md)
 * [Security Lake](../../integrations/amazon/security-lake.md)

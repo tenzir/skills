@@ -5,26 +5,26 @@ This guide shows you how to receive data directly from network sources using TQL
 
 ## TCP sockets
 
-The [Transmission Control Protocol (TCP)](../../integrations/tcp.md) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
+[TCP](../../integrations/tcp.md) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
 
 ### Listen for connections
 
-Start a TCP server that accepts incoming connections:
+Use [`accept_tcp`](/reference/operators/accept_tcp.md) to start a TCP server that accepts incoming connections:
 
 ```tql
-from "tcp://0.0.0.0:9000" {
+accept_tcp "0.0.0.0:9000" {
   read_json
 }
 ```
 
-This listens on all interfaces (`0.0.0.0`) on port 9000. Specify a parsing pipeline to convert incoming bytes to events.
+This listens on all interfaces (`0.0.0.0`) on port 9000. Specify a parsing pipeline to convert incoming bytes to events. Inside the nested pipeline, `$peer.ip` and `$peer.port` identify the connecting client. Set `resolve_hostnames=true` to also expose `$peer.hostname` from reverse DNS.
 
 ### Connect to a remote server
 
-Act as a TCP client by connecting to an existing server:
+Use [`from_tcp`](/reference/operators/from_tcp.md) to connect to an existing server:
 
 ```tql
-from "tcp://192.168.1.100:9000", connect=true {
+from_tcp "192.168.1.100:9000" {
   read_json
 }
 ```
@@ -34,7 +34,7 @@ from "tcp://192.168.1.100:9000", connect=true {
 Secure your TCP connections with TLS by passing a `tls` record:
 
 ```tql
-from "tcp://0.0.0.0:9443", tls={certfile: "cert.pem", keyfile: "key.pem"} {
+accept_tcp "0.0.0.0:9443", tls={certfile: "cert.pem", keyfile: "key.pem"} {
   read_json
 }
 ```
@@ -47,16 +47,30 @@ uv run --with trustme python -m trustme
 
 For production TLS configuration, including mutual TLS and cipher settings, see [Configure TLS](../node-setup/configure-tls.md).
 
+### Accept plaintext and TLS on one port
+
+Use TLS auto-detection when you need to migrate clients from plaintext TCP to TLS without changing the listening port:
+
+```tql
+accept_tcp "0.0.0.0:514",
+           tls={certfile: "cert.pem", keyfile: "key.pem"},
+           auto_detect_tls=true {
+  read_syslog
+}
+```
+
+With `auto_detect_tls=true`, [`accept_tcp`](/reference/operators/accept_tcp.md) accepts both plaintext clients and clients that start with a TLS ClientHello on the same endpoint.
+
 ## UDP sockets
 
-The [User Datagram Protocol (UDP)](../../integrations/udp.md) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
+[UDP](../../integrations/udp.md) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
 
 ### Receive UDP datagrams
 
-Use [`from_udp`](/reference/operators/from_udp.md) to receive UDP messages as structured events:
+Use [`accept_udp`](/reference/operators/accept_udp.md) to receive UDP messages as structured events:
 
 ```tql
-from_udp "0.0.0.0:514"
+accept_udp "0.0.0.0:514"
 ```
 
 Each datagram becomes an event with `data` (the message content) and `peer` (the sender’s address) fields.
@@ -66,7 +80,7 @@ Each datagram becomes an event with `data` (the message content) and `peer` (the
 A common pattern is receiving syslog over UDP:
 
 ```tql
-from_udp "0.0.0.0:514"
+accept_udp "0.0.0.0:514"
 this = data.parse_syslog()
 ```
 
@@ -75,12 +89,12 @@ this = data.parse_syslog()
 Include the sender’s IP address and collection timestamp in your events:
 
 ```tql
-from_udp "0.0.0.0:514"
+accept_udp "0.0.0.0:514"
 syslog = data.parse_syslog()
 this = {
   ...syslog,
   collector: {
-    source_ip: peer.ip(),
+    source_ip: peer.ip,
     received_at: now(),
   },
 }
@@ -88,7 +102,7 @@ this = {
 
 ## Packet capture
 
-Capture raw network packets from a [network interface card (NIC)](../../integrations/nic.md) for deep packet inspection or network forensics.
+Capture raw network packets with [Network Interface](../../integrations/nic.md) for deep packet inspection or network forensics.
 
 ### List available interfaces
 
@@ -154,12 +168,10 @@ The `community_id` field provides a [Community ID](https://github.com/corelight/
 
 ### Filter by BPF expression
 
-Apply Berkeley Packet Filter (BPF) expressions to capture only specific traffic:
+Use a Berkeley Packet Filter (BPF) expression to drop unwanted traffic before Tenzir parses packets:
 
 ```tql
-from_nic filter="tcp port 443", "eth0" {
-  read_pcap
-}
+from_nic "eth0", filter="tcp port 443"
 ```
 
 ### Read PCAP files

@@ -49,7 +49,7 @@ context::create_geoip "ctx", db_path="GeoLite2-City.mmdb"
 Load [CIRCL’s Geo Open](https://data.public.lu/en/datasets/geo-open-ip-address-geolocation-per-country-in-mmdb-format/) dataset from November 12, 2024:
 
 ```tql
-load_http "https://data.public.lu/fr/datasets/r/69064b5d-bf46-4244-b752-2096b16917a4"
+from_http "https://data.public.lu/fr/datasets/r/69064b5d-bf46-4244-b752-2096b16917a4"
 context::load "ctx"
 ```
 

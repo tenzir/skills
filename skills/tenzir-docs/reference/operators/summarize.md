@@ -143,6 +143,7 @@ summarize count(this), severity, options={frequency: 10s, mode: "update"}
 
 ## See Also
 
+* [`group`](/reference/operators/group.md)
 * [`rare`](/reference/operators/rare.md)
 * [`top`](/reference/operators/top.md)
 * [`sum`](/reference/functions/sum.md)

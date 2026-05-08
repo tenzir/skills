@@ -149,7 +149,7 @@ Empty records cannot be send to ClickHouse. Should an empty record appear in the
 ### Send CSV file to a local ClickHouse instance, without TLS
 
 ```tql
-from "my_file.csv"
+from_file "my_file.csv"
 to_clickhouse table="my_table", tls=false
 ```
 

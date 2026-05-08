@@ -16,9 +16,10 @@ The `decompress_bz2` operator decompresses bytes in a pipeline incrementally. Th
 ### Import Suricata events from a Bzip2-compressed file
 
 ```tql
-load_file "eve.json.bz"
-decompress_bz2
-read_suricata
+from_file "eve.json.bz" {
+  decompress_bz2
+  read_suricata
+}
 import
 ```
 

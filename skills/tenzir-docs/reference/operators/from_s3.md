@@ -5,7 +5,7 @@ Reads one or multiple files from Amazon S3.
 
 ```tql
 from_s3 url:string, [anonymous=bool, aws_iam=record, watch=bool,
-  remove=bool, rename=string->string, path_field=field, max_age=duration] { … }
+  remove=bool, rename=string->string, max_age=duration] { … }
 ```
 
 ## Description
@@ -124,12 +124,6 @@ If the target path already exists, the operator will overwrite the file.
 
 The operator automatically creates any intermediate directories required for the target path. If the target path ends with a trailing slash (`/`), the original filename will be automatically appended to create the final path.
 
-### `path_field = field (optional)`
-
-This makes the operator insert the path to the file where an event originated from before emitting it.
-
-By default, paths will not be inserted into the outgoing events.
-
 ### `max_age = duration (optional)`
 
 Only process files that were modified within the specified duration from the current time. Files older than this duration will be skipped.
@@ -137,6 +131,19 @@ Only process files that were modified within the specified duration from the cur
 ### `{ … } (optional)`
 
 Pipeline to use for parsing the file. By default, this pipeline is derived from the path of the file, and will not only handle parsing but also decompression if applicable.
+
+Inside the subpipeline, the `$file` variable is available as a record with the following fields:
+
+\| Field | Type | Description | | :------ | :------- | :--------------------------------------- | | `path` | `string` | The absolute path of the file being read | | `mtime` | `time` | The last modification time of the file |
+
+For example, to attach the source path to each event:
+
+```tql
+from_file "/data/*.json" {
+  read_json
+  source = $file.path
+}
+```
 
 ## Examples
 
@@ -179,7 +186,10 @@ from_s3 "s3://input-bucket/**.json",
 ### Add source path to events
 
 ```tql
-from_s3 "s3://data-bucket/**.json", path_field=source_file
+from_s3 "s3://data-bucket/**.json" {
+  read_json
+  source_file = $file.path
+}
 ```
 
 ### Read Zeek logs with anonymous access
@@ -193,6 +203,6 @@ from_s3 "s3://public-bucket/zeek/**.log", anonymous=true {
 ## See Also
 
 * [`from_file`](/reference/operators/from_file.md)
-* [`load_s3`](/reference/operators/load_s3.md)
-* [`save_s3`](/reference/operators/save_s3.md)
+* [`from_s3`](/reference/operators/from_s3.md)
+* [`to_s3`](/reference/operators/to_s3.md)
 * [S3](../../integrations/amazon/s3.md)

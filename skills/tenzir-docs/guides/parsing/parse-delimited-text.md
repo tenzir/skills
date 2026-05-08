@@ -32,7 +32,7 @@ from_file "app.log" {
 The same pattern works for network streams:
 
 ```tql
-from "tcp://0.0.0.0:9000" {
+accept_tcp "0.0.0.0:9000" {
   read_lines
 }
 ```
@@ -97,7 +97,7 @@ from_file "paragraphs.txt" {
 Some protocols use null bytes as record terminators:
 
 ```tql
-from "tcp://0.0.0.0:9000" {
+accept_tcp "0.0.0.0:9000" {
   read_delimited "\x00", binary=true
 }
 ```

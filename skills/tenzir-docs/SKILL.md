@@ -60,6 +60,10 @@ Start here when you're trying to get something done.
 
 Drowning in logs, alerts, and rigid tools? Meet Tenzir—your engine for taming security data. In just a few minutes, you’ll be ingesting, transforming, and enriching data on your terms, with full control. Here’s what you’ll accomplish:
 
+#### [Tenzir v6 Migration](guides/tenzir-v6-migration.md)
+
+This guide shows you how to migrate legacy TQL pipelines to Tenzir v6. For most pipelines, the upgrade is small: many pipelines keep working as-is, and others need only a few local updates to sources and sinks. The sections that follow help you find the pipelines that do need attention and update them without changing the intent of your data flow.
+
 #### [Installation](guides/installation.md)
 
 This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node. The package includes two binaries:
@@ -198,11 +202,11 @@ This guide shows you how to read files and monitor directories using the `from_f
 
 ##### [Fetch via HTTP and APIs](guides/collecting/fetch-via-http-and-apis.md)
 
-This guide shows you how to fetch data from HTTP APIs using the `from_http` and `http` operators. You’ll learn to make GET requests, handle authentication, and implement pagination for large result sets.
+This guide shows you how to interact with HTTP APIs using the `from_http` and `to_http` operators. You’ll learn to make GET requests, send data, handle authentication, and implement pagination for large result sets.
 
 ##### [Read from message brokers](guides/collecting/read-from-message-brokers.md)
 
-This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
+This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
 
 ##### [Get data from the network](guides/collecting/get-data-from-the-network.md)
 
@@ -216,7 +220,7 @@ This guide shows you how to parse text streams into structured events. You’ll 
 
 ##### [Parse binary data](guides/parsing/parse-binary-data.md)
 
-This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native Bitz format, and compressed data.
+This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
 
 ##### [Parse string fields](guides/parsing/parse-string-fields.md)
 
@@ -306,9 +310,17 @@ The `deduplicate` operator provides a powerful mechanism to remove duplicate eve
 
 This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about destination operators, file output patterns, and expression-based serialization.
 
+##### [Expose data as a server](guides/routing/expose-data-as-server.md)
+
+This guide shows you how to make pipeline data available to external consumers by starting an HTTP server. You’ll learn how to stream serialized pipeline output to HTTP clients, pick a wire format, and configure connection limits and TLS.
+
 ##### [Split and merge streams](guides/routing/split-and-merge-streams.md)
 
 This guide shows you how to connect pipelines using `publish` and `subscribe` operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
+
+##### [Fan out with subpipelines](guides/routing/fan-out-with-subpipelines.md)
+
+This guide shows you how to fan out an event stream into subpipelines with `each` and `group`. You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like `fork`, `parallel`, and `load_balance`.
 
 ##### [Load-balance pipelines](guides/routing/load-balance-pipelines.md)
 
@@ -601,7 +613,7 @@ Amazon Security Lake is a managed security data lake on AWS. It collects and sto
 
 ##### [SQS](integrations/amazon/sqs.md)
 
-Amazon Simple Queuing Service (SQS) is a managed message queue on AWS. It supports microservices, distributed systems, and serverless applications.
+Amazon Simple Queue Service (SQS) is a managed message queue on AWS. It supports microservices, distributed systems, and serverless applications.
 
 #### Google
 
@@ -651,21 +663,21 @@ The Advanced Message Queuing Protocol (AMQP) is an open standard for message-ori
 
 #### [Fluent Bit](integrations/fluent-bit.md)
 
-Fluent Bit is a an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its inputs via `from_fluent_bit` and outputs via `to_fluent_bit`
+Fluent Bit is an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its inputs via `from_fluent_bit` and outputs via `to_fluent_bit`
 
 #### [Kafka](integrations/kafka.md)
 
 Apache Kafka is a distributed open-source message broker. The Tenzir integration can publish (send messages to a topic) or subscribe (receive) messages from a topic.
 
+#### [NATS](integrations/nats.md)
+
+NATS is a messaging system for services, edge deployments, and cloud-native applications. Tenzir integrates with NATS JetStream to consume messages from subjects and publish events back to subjects.
+
 #### [ZeroMQ](integrations/zeromq.md)
 
-ZeroMQ (0mq) is a light-weight messaging framework with various socket types. Tenzir supports writing to PUB sockets and reading from SUB sockets, both in server (listening) and client (connect) mode.
+ZeroMQ (0mq) is a light-weight messaging framework with various socket types. Tenzir supports writing to PUB sockets and reading from SUB sockets, both in bind mode and connect mode.
 
 ### Protocols
-
-#### [Email](integrations/email.md)
-
-Tenzir supports sending events as email using the `save_email` operator. To this end, the operator establishes a connection with an SMTP server that sends the message on behalf of Tenzir.
 
 #### [File](integrations/file.md)
 
@@ -673,23 +685,23 @@ Tenzir can read from and write to files. This includes non-regular files such as
 
 #### [FTP](integrations/ftp.md)
 
-Tenzir supports the File Transfer Protocol (FTP), both downloading and uploading files.
+Tenzir supports the File Transfer Protocol (FTP), both downloading and uploading files. Use `from_ftp` to download bytes and parse them with a subpipeline, and use `to_ftp` to print events with a subpipeline and upload the result.
 
 #### [HTTP](integrations/http.md)
 
-Tenzir supports HTTP and HTTPS, both as sender and receiver.
+HTTP is the foundation of data exchange on the web. Tenzir provides operators for all sides of an HTTP conversation: fetching data from APIs, sending events to webhooks, streaming pipeline output to clients, and accepting incoming requests.
 
 #### [Network Interface](integrations/nic.md)
 
-Tenzir supports reading packets from a network interface card (NIC).
+Tenzir supports capturing packets from a network interface card (NIC).
 
 #### [Syslog](integrations/syslog.md)
 
-Tenzir supports parsing and emitting Syslog messages across multiple transport protocols, including both UDP and TCP. This enables seamless integration with Syslog-based systems for ingesting or exporting logs.
+Tenzir supports parsing Syslog messages from transport protocols such as UDP and TCP, and emitting Syslog-formatted byte streams. This enables seamless integration with Syslog-based systems for ingesting or exporting logs.
 
 #### [TCP](integrations/tcp.md)
 
-The Transmission Control Protocol (TCP) provides a bidirectional byte stream over IP. Tenzir supports reading from and writing to TCP sockets in both server (listening) and client (connect) mode.
+The Transmission Control Protocol (TCP) provides a bidirectional byte stream over IP. Tenzir provides operators for both sides of a TCP conversation: connecting to remote endpoints, accepting incoming connections, and serving data to connected clients.
 
 #### [UDP](integrations/udp.md)
 
@@ -703,15 +715,19 @@ ClickHouse is an open-source analytical database. It lets you run real-time anal
 
 #### [Elasticsearch](integrations/elasticsearch.md)
 
-Elasticsearch is a search and observability suite for unstructured data. Tenzir can send events to Elasticsearch and emulate and Elasticsearch Bulk API endpoint.
+Elasticsearch is a search and observability suite for unstructured data. Tenzir can send events to Elasticsearch and emulate a Elasticsearch-compatible Bulk API endpoint.
 
 #### [Graylog](integrations/graylog.md)
 
 Graylog is a log management solution based on top of OpenSearch. Tenzir can send data to and receive data from Graylog.1
 
+#### [MySQL](integrations/mysql.md)
+
+MySQL is an open-source relational database management system widely used for web applications, data warehousing, and enterprise applications.
+
 #### [OpenSearch](integrations/opensearch.md)
 
-OpenSearch is a search and observability suite for unstructured data. Tenzir can send events to OpenSearch and emulate and OpenSearch Bulk API endpoint.
+OpenSearch is a search and observability suite for unstructured data. Tenzir can send events to OpenSearch and emulate a OpenSearch-compatible Bulk API endpoint.
 
 #### [Snowflake](integrations/snowflake.md)
 

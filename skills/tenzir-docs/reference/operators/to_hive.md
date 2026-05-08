@@ -35,7 +35,7 @@ The total file size after which a new file will be opened for the same partition
 
 ### `compression = string (optional)`
 
-Compress the output files with the given compression algorithm. See docs for the `compress` operator for supported compression algorithms.
+Compress the output files with the given compression algorithm.
 
 ## Examples
 

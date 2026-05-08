@@ -488,15 +488,13 @@ There are still several fields that we can map to the schema, but we’ll leave 
 
 Most pipelines (1) onboard data from a source, (2) transform it, and (3) send it somewhere. This tutorial focuses on the middle piece, with transformation being the mapping to OCSF.
 
-<!--?xml version="1.0" standalone="no"?-->
-
 We’ve addressed data *onboarding* by reading a log file and decomposing the unstructured Zeek TSV contents into a structured record. The built-in [`read_zeek_tsv`](/reference/operators/read_zeek_tsv.md) operator made this trivial. But it often requires a lot more elbow grease to get there. Check out our extensive [guide on parsing string fields](../guides/parsing/parse-string-fields.md) for more details. We haven’t yet addressed the other end of the pipeline: data *offboarding*. Our examples run `tenzir` on the command line, relying on an implicit output operator that writes the result of the last transformation to the terminal.
 
 In other words, we have a sandwich structure in our pipeline. To make it explicit:
 
 ```tql
 // (1) Onboard data (explicit)
-load_stdin
+from_stdin
 read_zeek_tsv
 
 
@@ -507,8 +505,7 @@ read_zeek_tsv
 
 
 // (3) Offboard data (implicit)
-write_tql
-save_stdout
+to_stdout
 ```
 
 Such a pipeline is impractical because data may arrive via multiple channels: log files, Kafka messages, or via Syslog over the wire. Even the encoding may vary. Zeek TSV is one way you can configure Zeek, but JSON output is another format. Similarly, users may want to consume the data in various ways.
@@ -524,11 +521,10 @@ To make our OCSF mapping more reusable, we extract it as **user-defined operator
 Let’s work towards a package that comes with a user-defined operator called `zeek::ocsf::map` that maps Zeek connection logs to OCSF:
 
 ```tql
-load_stdin
+from_stdin
 read_zeek_tsv
 zeek::ocsf::map // 👈 Maps Zeek logs to OCSF with a user-defined operator.
-write_tql
-save_stdout
+to_stdout
 ```
 
 All you have to do to get there is create a package with following directory structure:

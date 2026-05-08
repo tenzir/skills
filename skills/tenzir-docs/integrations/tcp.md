@@ -1,44 +1,24 @@
 # TCP
 
 
-The [Transmission Control Protocol (TCP)](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) provides a bidirectional byte stream over IP. Tenzir supports reading from and writing to TCP sockets in both server (listening) and client (connect) mode.
+The [Transmission Control Protocol (TCP)](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) provides a bidirectional byte stream over IP. Tenzir provides operators for both sides of a TCP conversation: connecting to remote endpoints, accepting incoming connections, and serving data to connected clients.
 
 Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
-URL Support
+## Connecting to remote endpoints
 
-The URL schemes `tcp://` and `tcps://` dispatch to [`load_tcp`](/reference/operators/load_tcp.md) and [`save_tcp`](/reference/operators/save_tcp.md) for seamless URL-style use via [`from`](/reference/operators/from.md) and [`to`](/reference/operators/to.md).
+Use [`from_tcp`](/reference/operators/from_tcp.md) to connect to a remote TCP endpoint as a client and read data from it, or [`to_tcp`](/reference/operators/to_tcp.md) to send data to a remote endpoint. Both operators reconnect automatically with exponential backoff on connection failure.
+
+## Accepting incoming connections
+
+Use [`accept_tcp`](/reference/operators/accept_tcp.md) to listen on a local endpoint and accept incoming TCP connections. Each connection spawns a nested pipeline that processes the incoming byte stream independently. Inside that pipeline, `$peer.ip` and `$peer.port` describe the connected client. Set `resolve_hostnames=true` to also expose `$peer.hostname` from reverse DNS.
+
+## Serving data to clients
+
+Use [`serve_tcp`](/reference/operators/serve_tcp.md) to start a TCP server that broadcasts pipeline output to all connected clients. A nested pipeline serializes events into bytes before sending.
+
+See [Get data from the network](../guides/collecting/get-data-from-the-network.md) for practical examples.
 
 ## SSL/TLS
 
-To enable TLS, use `tls=true`. You can optionally pass a PEM-encoded certificate and private key via the `certfile` and `keyfile` options.
-
-For testing purposes, you can quickly generate a self-signed certificate as follows:
-
-```bash
-openssl req -x509 -newkey rsa:2048 -keyout key_and_cert.pem -out key_and_cert.pem -days 365 -nodes
-```
-
-An easy way to test a TLS connection is to try connecting via OpenSSL:
-
-```bash
-openssl s_client 127.0.0.1:443
-```
-
-## Examples
-
-### Read data by connecting to a remote TCP server
-
-```tql
-from "tcp://127.0.0.1:443", connect=true {
-  read_json
-}
-```
-
-### Read data by listen on localhost with TLS enabled
-
-```tql
-from "tcp://127.0.0.1:443", tls=true, certfile="cert.pem", keyfile="key.pem" {
-  read_json
-}
-```
+All TCP operators support TLS via the `tls` option. Pass an empty record (`tls={}`) for defaults, or provide specific options like `certfile` and `keyfile`.

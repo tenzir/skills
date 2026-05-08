@@ -21,18 +21,23 @@ The compression level to use. The supported values depend on the codec used. If 
 
 ```tql
 export
-write_ndjson
-compress_lz4
-save_file "/tmp/backup.json.lz4"
+to_file "/tmp/backup.json.lz4" {
+  write_ndjson
+  compress_lz4
+}
 ```
 
-### Recompress a Lz4-compressed file at a different compression level
+### Read and write LZ4-compressed NDJSON
 
 ```tql
-load_file "in.lz4"
-decompress_lz4
-compress_lz4 level=18
-save_file "out.lz4"
+from_file "in.lz4" {
+  decompress_lz4
+  read_ndjson
+}
+to_file "out.lz4" {
+  write_ndjson
+  compress_lz4 level=18
+}
 ```
 
 ## See Also

@@ -29,8 +29,9 @@ pipeline::detach {
     version
   }
   select version
-  write_lines
-  save_stdout
+  to_stdout {
+    write_lines
+  }
 }
 ```
 

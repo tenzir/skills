@@ -150,6 +150,7 @@ Pipelines not visible on the overview page at [app.tenzir.com](https://app.tenzi
 ## See also
 
 * [Send to destinations](send-to-destinations.md)
+* [Fan out with subpipelines](fan-out-with-subpipelines.md)
 * [Load-balance pipelines](load-balance-pipelines.md)
 * [`publish`](/reference/operators/publish.md)
 * [`subscribe`](/reference/operators/subscribe.md)

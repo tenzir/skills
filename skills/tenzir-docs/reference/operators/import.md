@@ -18,8 +18,9 @@ This operator is the dual to [`export`](/reference/operators/export.md).
 ### Import Zeek connection logs in TSV format
 
 ```tql
-load_file "conn.log"
-read_zeek_tsv
+from_file "conn.log" {
+  read_zeek_tsv
+}
 import
 ```
 

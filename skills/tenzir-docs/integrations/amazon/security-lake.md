@@ -104,7 +104,7 @@ This example assumes:
 let $s3_uri = "s3://aws-security-data-lake-eu-west-2-lake-abcdefghijklmnopqrstuvwxyz1234/ext/tnz-ocsf-4001/"
 
 
-load_kafka "ocsf_events"
+from_kafka "ocsf_events"
 read_ndjson
 where class_uid == ocsf::class_uid("Network Activity")
 to_amazon_security_lake $s3_uri,

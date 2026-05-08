@@ -58,8 +58,9 @@ outputs:
 Suricata creates `eve.sock` upon startup. Thereafter, you can read from the socket:
 
 ```tql
-load_file "eve.sock"
-read_suricata
+from_file "eve.sock" {
+  read_suricata
+}
 ```
 
 ## See Also

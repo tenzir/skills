@@ -50,8 +50,9 @@ The harness exposes the input file path via `TENZIR_INPUT`:
 tests/parse-csv.tql
 
 ```tql
-from_file env("TENZIR_INPUT")
-read_csv
+from_file env("TENZIR_INPUT") {
+  read_csv
+}
 ```
 
 tests/parse-csv.input

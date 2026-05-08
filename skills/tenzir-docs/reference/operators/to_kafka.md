@@ -27,7 +27,7 @@ The Kafka topic to send messages to.
 
 An expression that evaluates to the message content for each row.
 
-Defaults to `this.print_json()` when not specified.
+Defaults to `this.print_ndjson()` when not specified.
 
 ### `key = string (optional)`
 
@@ -111,7 +111,7 @@ The AWS region used to construct the MSK authentication URL. Required when conne
 
 ## Examples
 
-### Send JSON-formatted events to topic `events` (using default)
+### Send NDJSON-formatted events to topic `events` (using default)
 
 Stream security events to a Kafka topic with automatic JSON formatting:
 
@@ -122,22 +122,17 @@ select timestamp, source_ip, alert_type, details
 to_kafka "events"
 ```
 
-This pipeline subscribes to security alerts, filters for high-severity events, selects relevant fields, and sends them to Kafka as JSON. Each event is automatically formatted using `this.print_json()`, producing messages like:
+This pipeline subscribes to security alerts, filters for high-severity events, selects relevant fields, and sends them to Kafka as JSON. Each event is formatted using `this.print_ndjson()`, producing one compact JSON object per message:
 
 ```json
-{
-  "timestamp": "2024-03-15T10:30:00.000000",
-  "source_ip": "192.168.1.100",
-  "alert_type": "brute_force",
-  "details": "Multiple failed login attempts detected"
-}
+{"timestamp":"2024-03-15T10:30:00.000000","severity":"high"}
 ```
 
-### Send JSON-formatted events with explicit message
+### Send NDJSON-formatted events with explicit message
 
 ```tql
 subscribe "logs"
-to_kafka "events", message=this.print_json()
+to_kafka "events", message=this.print_ndjson()
 ```
 
 ### Send specific field values with a timestamp
@@ -151,10 +146,11 @@ to_kafka "alerts", message=alert_msg, timestamp=2024-01-01T00:00:00
 
 ```tql
 metrics
-to_kafka "metrics", message=this.print_json(), key="server-01"
+to_kafka "metrics", message=this.print_ndjson(), key="server-01"
 ```
 
 ## See Also
 
 * [`from_kafka`](/reference/operators/from_kafka.md)
+* [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)

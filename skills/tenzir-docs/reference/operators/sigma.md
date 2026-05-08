@@ -98,8 +98,9 @@ sigma "rule.yaml"
 Watch a directory of Sigma rules and apply all of them on a continuous stream of Suricata events:
 
 ```tql
-load_file "eve.json", follow=true
-read_suricata
+from_file "eve.json", follow=true {
+  read_suricata
+}
 sigma "/tmp/rules/"
 ```
 

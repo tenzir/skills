@@ -4,31 +4,43 @@
 Runs a subpipeline across multiple parallel workers.
 
 ```tql
-parallel jobs:int { … }
+parallel [jobs:int] [, route_by=any] { … }
 ```
 
 ## Description
 
-The `parallel` operator distributes incoming events across multiple parallel instances of a subpipeline. Each event is processed by exactly one worker.
+The [`parallel`](/reference/operators/parallel.md) operator distributes incoming events across multiple parallel instances of a subpipeline. Each event is processed by exactly one worker.
 
 Use this operator to parallelize CPU-intensive transformations or I/O-bound operations that would otherwise bottleneck on a single thread.
 
+By default, events are distributed across workers using an adaptive round-robin strategy that keeps worker loads balanced. Use `route_by` to instead route events deterministically by a key, ensuring that all events with the same key value go to the same worker.
+
 This operator may reorder the event stream since workers process events concurrently.
+
+When used as a source operator (without upstream input), `parallel` spawns multiple independent instances of the subpipeline. This is useful for running the same source pipeline with concurrent connections.
 
 Expert Operator
 
 The `parallel` operator is a building block for performance optimization. Use it when you have identified a specific bottleneck that benefits from parallelization. Not all operations scale linearly with parallelism.
 
-### `jobs: int`
+### `jobs: int (optional)`
 
-The number of parallel workers to spawn. Must be greater than zero.
+The number of parallel workers to spawn. Must be greater than zero. Defaults to the number of available CPU cores.
+
+### `route_by = any (optional)`
+
+An expression evaluated per event to determine which worker processes it. Events with the same `route_by` value are always sent to the same worker. This guarantees that related events are grouped together, which is required for stateful subpipelines like [`deduplicate`](/reference/operators/deduplicate.md) or [`summarize`](/reference/operators/summarize.md).
+
+Cannot be used when `parallel` is used as a source operator.
 
 ### `{ … }`
 
-The subpipeline to run in parallel. The subpipeline receives events as input and may either:
+The subpipeline to run in parallel. The subpipeline may either:
 
 * Produce events as output (transformation)
 * End with a sink (void output)
+
+When `parallel` is used as a source operator, the subpipeline runs as an independent source producing events or as a full pipeline ending with a sink.
 
 The subpipeline must not produce bytes as output.
 
@@ -42,6 +54,17 @@ Parse raw JSON strings across multiple workers:
 subscribe "raw"
 parallel 4 {
   parsed = data.parse_json()
+}
+```
+
+### Route events by source IP
+
+Ensure events from the same source IP are always handled by the same worker, enabling per-source deduplication:
+
+```tql
+subscribe "events"
+parallel route_by=src_ip {
+  deduplicate src_ip, dst_ip, dst_port
 }
 ```
 
@@ -59,4 +82,7 @@ parallel 4 {
 
 ## See Also
 
+* [`each`](/reference/operators/each.md)
+* [`group`](/reference/operators/group.md)
 * [`load_balance`](/reference/operators/load_balance.md)
+* [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)

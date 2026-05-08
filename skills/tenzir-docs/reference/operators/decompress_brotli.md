@@ -16,9 +16,10 @@ The `decompress_brotli` operator decompresses bytes in a pipeline incrementally.
 ### Import Suricata events from a Brotli-compressed file
 
 ```tql
-load_file "eve.json.brotli"
-decompress_brotli
-read_suricata
+from_file "eve.json.brotli" {
+  decompress_brotli
+  read_suricata
+}
 import
 ```
 

@@ -5,7 +5,7 @@ Tenzir can read from and write to files. This includes non-regular files such as
 
 When `~` is the first character in the file path, the operator substitutes it with the `$HOME` environment variable.
 
-Use [`from_file`](/reference/operators/from_file.md) to read files with glob patterns, automatic format detection, and file monitoring. For writing, use [`save_file`](/reference/operators/save_file.md) with a print operator.
+Use [`from_file`](/reference/operators/from_file.md) to read files with glob patterns, automatic format detection, and file monitoring. For writing, use [`to_file`](/reference/operators/to_file.md) with a print operator.
 
 ## Examples
 
@@ -43,17 +43,19 @@ Write to a file in a specific format:
 
 ```tql
 version
-print_json
-save_file "/tmp/tenzir-version.json"
+to_file "/tmp/tenzir-version.json" {
+  write_json
+}
 ```
 
 With compression:
 
 ```tql
 version
-print_json
-compress_bz2
-save_file "/tmp/tenzir-version.json.bz2"
+to_file "/tmp/tenzir-version.json.bz2" {
+  write_json
+  compress_bz2
+}
 ```
 
 ### Append to a file
@@ -62,8 +64,9 @@ In case the file exists and you do not want to overwrite it, pass `append=true` 
 
 ```tql
 from {x: 42}
-print_csv
-save_file "/tmp/event.csv", append=true
+to_file "/tmp/event.csv", append=true {
+  write_csv
+}
 ```
 
 ### Read/write a Unix domain socket
@@ -71,8 +74,9 @@ save_file "/tmp/event.csv", append=true
 Pass `uds=true` to signal that the file is a Unix domain socket:
 
 ```tql
-print_ndjson
-save_file "/tmp/socket", uds=true
+to_file "/tmp/socket", uds=true {
+  write_ndjson
+}
 ```
 
 When reading from a Unix domain socket, use [`from_file`](/reference/operators/from_file.md) with a parsing pipeline:
@@ -82,3 +86,12 @@ from_file "/tmp/socket" {
   read_ndjson
 }
 ```
+
+## Contents
+
+- [Ftp](ftp.md)
+- [Http](http.md)
+- [Nic](nic.md)
+- [Syslog](syslog.md)
+- [Tcp](tcp.md)
+- [Udp](udp.md)

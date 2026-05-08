@@ -63,7 +63,7 @@ You can find out more about how to configure TLS on the [`to_clickhouse`](/refer
 Tenzir can automatically create tables in ClickHouse based on the incoming data schema. For example, to ingest OCSF network activity data:
 
 ```tql
-from "ocsf_network_activity.json"
+from_file "ocsf_network_activity.json"
 ocsf::cast encode_variants=true, null_fill=true
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time, tls=false
 ```
@@ -105,7 +105,7 @@ For more control, you can create the table in ClickHouse first. Use this approac
    ```
 
    ```tql
-   from "my_file.csv"
+   from_file "my_file.csv"
    to_clickhouse table="my_table", mode="append", tls=false
    ```
 
@@ -117,6 +117,7 @@ For more control, you can create the table in ClickHouse first. Use this approac
 
 - [Elasticsearch](elasticsearch.md)
 - [Graylog](graylog.md)
+- [Mysql](mysql.md)
 - [Opensearch](opensearch.md)
 - [Snowflake](snowflake.md)
 - [Splunk](splunk.md)

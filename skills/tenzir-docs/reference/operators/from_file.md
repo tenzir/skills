@@ -5,7 +5,7 @@ Reads one or multiple files from a filesystem.
 
 ```tql
 from_file url:string, [watch=bool, remove=bool, rename=string->string,
-          path_field=field, max_age=duration] { … }
+          max_age=duration, mmap=bool] { … }
 ```
 
 ## Description
@@ -40,12 +40,6 @@ If the target path already exists, the operator will overwrite the file.
 
 The operator automatically creates any intermediate directories required for the target path. If the target path ends with a trailing slash (`/`), the original filename will be automatically appended to create the final path.
 
-### `path_field = field (optional)`
-
-This makes the operator insert the path to the file where an event originated from before emitting it.
-
-By default, paths will not be inserted into the outgoing events.
-
 ### `max_age = duration (optional)`
 
 Only process files that were modified within the specified duration from the current time. Files older than this duration will be skipped.
@@ -54,7 +48,26 @@ Only process files that were modified within the specified duration from the cur
 
 Pipeline to use for parsing the file. By default, this pipeline is derived from the path of the file, and will not only handle parsing but also decompression if applicable.
 
-The pipeline uses the same logic as [`from`](/reference/operators/from.md).
+Inside the subpipeline, the `$file` variable is available as a record with the following fields:
+
+\| Field | Type | Description | | :------ | :------- | :--------------------------------------- | | `path` | `string` | The absolute path of the file being read | | `mtime` | `time` | The last modification time of the file |
+
+For example, to attach the source path to each event:
+
+```tql
+from_file "/data/*.json" {
+  read_json
+  source = $file.path
+}
+```
+
+### `mmap = bool (optional)`
+
+Uses memory-mapped I/O for reading files instead of regular reads. This can improve performance for large files.
+
+Defaults to `false`.
+
+The pipeline uses the same format and compression inference logic as other file sources.
 
 ## Examples
 
@@ -94,8 +107,8 @@ from_file "/logs/*.json", max_age=1h
 
 ## See Also
 
-* [`from`](/reference/operators/from.md)
-* [`load_file`](/reference/operators/load_file.md)
+* [`from_file`](/reference/operators/from_file.md)
+* [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Enrich with network inventory](../../guides/enrichment/enrich-with-network-inventory.md)
 * [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
 * [Import into a node](../../guides/edge-storage/import-into-a-node.md)

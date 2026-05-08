@@ -30,8 +30,9 @@ Defaults to `1Ki`.
 Read a Zeek `conn.log` and make it available as `zeek-conn-logs`:
 
 ```tql
-load_file "path/to/conn.log"
-read_zeek_tsv
+from_file "path/to/conn.log" {
+  read_zeek_tsv
+}
 serve "zeek-conn-logs"'
 ```
 

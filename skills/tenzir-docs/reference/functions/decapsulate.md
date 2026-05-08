@@ -36,7 +36,7 @@ The `decapsulate` function also extracts [802.1Q](https://en.wikipedia.org/wiki/
 ### Decapsulate packets from a PCAP file
 
 ```tql
-from "/path/to/trace.pcap"
+from_file "/path/to/trace.pcap" { read_pcap }
 this = decapsulate(this)
 ```
 

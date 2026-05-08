@@ -218,18 +218,10 @@ sigma "/tmp/rules/"
 Executes YARA rules on byte streams.
 
 ```tql
-yara "/path/to/rules", blockwise=true
+yara "/path/to/rules"
 ```
 
 ## Encode & Decode
-
-### [compress](operators/compress.md)
-
-Compresses a stream of bytes.
-
-```tql
-compress "zstd"
-```
 
 ### [compress\_brotli](operators/compress_brotli.md)
 
@@ -269,14 +261,6 @@ Compresses a stream of bytes using zstd compression.
 
 ```tql
 compress_zstd, level=6
-```
-
-### [decompress](operators/decompress.md)
-
-Decompresses a stream of bytes.
-
-```tql
-decompress "gzip"
 ```
 
 ### [decompress\_brotli](operators/decompress_brotli.md)
@@ -418,7 +402,7 @@ where name.starts_with("John")
 Runs a pipeline periodically according to a cron expression.
 
 ```tql
-cron "* */10 * * * MON-FRI" { from "https://example.org" }
+cron "* */10 * * * MON-FRI" { from_http "https://example.org" }
 ```
 
 ### [delay](operators/delay.md)
@@ -437,6 +421,14 @@ Discards all incoming events.
 discard
 ```
 
+### [each](operators/each.md)
+
+Spawns a subpipeline for every incoming event, with the event bound to `$this`.
+
+```tql
+each { from $this }
+```
+
 ### [every](operators/every.md)
 
 Runs a pipeline periodically at a fixed interval.
@@ -450,7 +442,15 @@ every 10s { summarize sum(amount) }
 Executes a subpipeline with a copy of the input.
 
 ```tql
-fork { to "copy.json" }
+fork { publish "copy" }
+```
+
+### [group](operators/group.md)
+
+Routes events with the same key through the same subpipeline.
+
+```tql
+group tenant { summarize count() }
 ```
 
 ### [load\_balance](operators/load_balance.md)
@@ -525,6 +525,202 @@ Shows a snapshot of open sockets.
 
 ```tql
 sockets
+```
+
+## Inputs
+
+### [accept\_http](operators/accept_http.md)
+
+Accepts incoming HTTP requests and forwards them as events.
+
+```tql
+accept_http "0.0.0.0:8080" { read_json }
+```
+
+### [accept\_opensearch](operators/accept_opensearch.md)
+
+Accepts incoming OpenSearch Bulk API requests and forwards them as events.
+
+```tql
+accept_opensearch "0.0.0.0:9200"
+```
+
+### [accept\_tcp](operators/accept_tcp.md)
+
+Accepts incoming TCP or TLS connections and yields events.
+
+```tql
+accept_tcp "0.0.0.0:8090" { read_json }
+```
+
+### [accept\_udp](operators/accept_udp.md)
+
+Receives UDP datagrams and outputs structured events.
+
+```tql
+accept_udp "0.0.0.0:8090"
+```
+
+### [accept\_zmq](operators/accept_zmq.md)
+
+Listens on a ZeroMQ endpoint and receives events.
+
+```tql
+accept_zmq "tcp://0.0.0.0:5555", prefix="alerts/" { read_json }
+```
+
+### [from\_amqp](operators/from_amqp.md)
+
+Receives messages from an AMQP queue.
+
+```tql
+from_amqp "amqp://admin:pass@0.0.0.1:5672/vhost", queue="events"
+```
+
+### [from\_azure\_blob\_storage](operators/from_azure_blob_storage.md)
+
+Reads one or multiple files from Azure Blob Storage.
+
+```tql
+from_azure_blob_storage "abfs://container/data/**.json"
+```
+
+### [from\_file](operators/from_file.md)
+
+Reads one or multiple files from a filesystem.
+
+```tql
+from_file "s3://data/**.json"
+```
+
+### [from\_fluent\_bit](operators/from_fluent_bit.md)
+
+Receives events via Fluent Bit.
+
+```tql
+from_fluent_bit "opentelemetry"
+```
+
+### [from\_ftp](operators/from_ftp.md)
+
+Downloads bytes via FTP and parses them with a subpipeline.
+
+```tql
+from_ftp "ftp.example.org/events.ndjson" { read_ndjson }
+```
+
+### [from\_google\_cloud\_pubsub](operators/from_google_cloud_pubsub.md)
+
+Subscribes to a Google Cloud Pub/Sub subscription and yields events.
+
+```tql
+from_google_cloud_pubsub project_id="my-project", subscription_id="my-sub"
+```
+
+### [from\_google\_cloud\_storage](operators/from_google_cloud_storage.md)
+
+Reads one or multiple files from Google Cloud Storage.
+
+```tql
+from_google_cloud_storage "gs://my-bucket/data/**.json"
+```
+
+### [from\_http](operators/from_http.md)
+
+Sends an HTTP/1.1 request and returns the response as events.
+
+```tql
+from_http "https://example.com/api" { read_json }
+```
+
+### [from\_kafka](operators/from_kafka.md)
+
+Receives events from an Apache Kafka topic.
+
+```tql
+from_kafka "logs"
+```
+
+### [from\_mysql](operators/from_mysql.md)
+
+Reads events from a MySQL database.
+
+```tql
+from_mysql table="users", host="db.example.com", database="mydb"
+```
+
+### [from\_nats](operators/from_nats.md)
+
+Consumes messages from a NATS JetStream subject.
+
+```tql
+from_nats "alerts"
+```
+
+### [from\_nic](operators/from_nic.md)
+
+Captures packets from a network interface and outputs events.
+
+```tql
+from_nic "eth0"
+```
+
+### [from\_s3](operators/from_s3.md)
+
+Reads one or multiple files from Amazon S3.
+
+```tql
+from_s3 "s3://my-bucket/data/**.json"
+```
+
+### [from\_sentinelone\_data\_lake](operators/from_sentinelone_data_lake.md)
+
+Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
+
+```tql
+from_sentinelone_data_lake "https://…", …
+```
+
+### [from\_sqs](operators/from_sqs.md)
+
+Receives messages from an Amazon SQS queue.
+
+```tql
+from_sqs "sqs://tenzir", poll_time=5s
+```
+
+### [from\_stdin](operators/from_stdin.md)
+
+Reads and parses events from standard input.
+
+```tql
+from_stdin { read_json }
+```
+
+### [from\_tcp](operators/from_tcp.md)
+
+Connects to a remote TCP or TLS endpoint and receives events.
+
+```tql
+from_tcp "example.org:4000" {
+  read_json
+}
+```
+
+### [from\_velociraptor](operators/from_velociraptor.md)
+
+Submits VQL to a Velociraptor server and returns the response as events.
+
+```tql
+from_velociraptor subscribe="Windows"
+```
+
+### [from\_zmq](operators/from_zmq.md)
+
+Connects to a remote ZeroMQ publisher and receives events.
+
+```tql
+from_zmq "tcp://collector.example.com:5555", prefix="alerts/" { read_json }
 ```
 
 ## Internals
@@ -699,6 +895,48 @@ Returns a new event for each member of a list or a record in an event, duplicati
 unroll names
 ```
 
+## Node
+
+### [diagnostics](operators/diagnostics.md)
+
+Retrieves diagnostic events from a Tenzir node.
+
+```tql
+diagnostics
+```
+
+### [metrics](operators/metrics.md)
+
+Retrieves metrics events from a Tenzir node.
+
+```tql
+metrics "cpu"
+```
+
+### [openapi](operators/openapi.md)
+
+Shows the node's OpenAPI specification.
+
+```tql
+openapi
+```
+
+### [plugins](operators/plugins.md)
+
+Shows all available plugins and built-ins.
+
+```tql
+plugins
+```
+
+### [version](operators/version.md)
+
+Shows the current version.
+
+```tql
+version
+```
+
 ## OCSF
 
 ### [ocsf::apply](operators/ocsf/apply.md)
@@ -731,6 +969,240 @@ Drops fields from OCSF events to reduce their size.
 
 ```tql
 ocsf::trim
+```
+
+## Outputs
+
+### [serve\_http](operators/serve_http.md)
+
+Starts an HTTP server and streams bytes produced by a nested pipeline to connected clients.
+
+```tql
+serve_http "0.0.0.0:8080" { write_ndjson }
+```
+
+### [serve\_tcp](operators/serve_tcp.md)
+
+Listens for incoming TCP connections and sends events to all connected clients.
+
+```tql
+serve_tcp "0.0.0.0:8090" { write_json }
+```
+
+### [serve\_zmq](operators/serve_zmq.md)
+
+Listens on a ZeroMQ endpoint and sends events.
+
+```tql
+serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=kind + "/"
+```
+
+### [to\_amazon\_security\_lake](operators/to_amazon_security_lake.md)
+
+Sends OCSF events to Amazon Security Lake.
+
+```tql
+to_amazon_security_lake "s3://…"
+```
+
+### [to\_amqp](operators/to_amqp.md)
+
+Sends messages to an AMQP exchange.
+
+```tql
+to_amqp "amqp://admin:pass@0.0.0.1:5672/vhost"
+```
+
+### [to\_azure\_blob\_storage](operators/to_azure_blob_storage.md)
+
+Writes events to one or multiple blobs in Azure Blob Storage.
+
+```tql
+to_azure_blob_storage "abfs://container/data/{uuid}.json" { write_ndjson }
+```
+
+### [to\_azure\_log\_analytics](operators/to_azure_log_analytics.md)
+
+Sends events to the Microsoft Azure Logs Ingestion API.
+
+```tql
+to_azure_log_analytics tenant_id="...", workspace_id="..."
+```
+
+### [to\_clickhouse](operators/to_clickhouse.md)
+
+Sends events to a ClickHouse table.
+
+```tql
+to_clickhouse table="my_table"
+```
+
+### [to\_file](operators/to_file.md)
+
+Writes events to one or multiple files on a filesystem.
+
+```tql
+to_file "/tmp/out.json" { write_ndjson }
+```
+
+### [to\_fluent\_bit](operators/to_fluent_bit.md)
+
+Sends events via Fluent Bit.
+
+```tql
+to_fluent_bit "elasticsearch" …
+```
+
+### [to\_ftp](operators/to_ftp.md)
+
+Prints events to bytes and uploads them via FTP.
+
+```tql
+to_ftp "ftp.example.org/events.ndjson" { write_ndjson }
+```
+
+### [to\_google\_cloud\_logging](operators/to_google_cloud_logging.md)
+
+Sends events to Google Cloud Logging.
+
+```tql
+to_google_cloud_logging …
+```
+
+### [to\_google\_cloud\_pubsub](operators/to_google_cloud_pubsub.md)
+
+Publishes events to a Google Cloud Pub/Sub topic.
+
+```tql
+to_google_cloud_pubsub project_id="my-project", topic_id="alerts", message=text
+```
+
+### [to\_google\_cloud\_storage](operators/to_google_cloud_storage.md)
+
+Writes events to one or multiple objects in Google Cloud Storage.
+
+```tql
+to_google_cloud_storage "gs://my-bucket/data/{uuid}.json" { write_ndjson }
+```
+
+### [to\_google\_secops](operators/to_google_secops.md)
+
+Sends unstructured events to a Google SecOps Chronicle instance.
+
+```tql
+to_google_secops …
+```
+
+### [to\_hive](operators/to_hive.md)
+
+Writes events to a URI using hive partitioning.
+
+```tql
+to_hive "s3://…", partition_by=[x]
+```
+
+### [to\_http](operators/to_http.md)
+
+Sends events as HTTP requests to a webhook or API endpoint.
+
+```tql
+to_http "https://example.com/webhook" { write_ndjson }
+```
+
+### [to\_kafka](operators/to_kafka.md)
+
+Sends messages to an Apache Kafka topic.
+
+```tql
+to_kafka "topic"
+```
+
+### [to\_nats](operators/to_nats.md)
+
+Publishes messages to a NATS JetStream subject.
+
+```tql
+to_nats "alerts"
+```
+
+### [to\_opensearch](operators/to_opensearch.md)
+
+Sends events to an OpenSearch-compatible Bulk API.
+
+```tql
+to_opensearch "localhost:9200", …
+```
+
+### [to\_s3](operators/to_s3.md)
+
+Writes events to one or multiple objects in Amazon S3.
+
+```tql
+to_s3 "s3://my-bucket/data/{uuid}.json" { write_ndjson }
+```
+
+### [to\_sentinelone\_data\_lake](operators/to_sentinelone_data_lake.md)
+
+Sends security events to SentinelOne Singularity Data Lake via REST API.
+
+```tql
+to_sentinelone_data_lake "https://…", …
+```
+
+### [to\_snowflake](operators/to_snowflake.md)
+
+Sends events to a Snowflake database.
+
+```tql
+to_snowflake account_identifier="…
+```
+
+### [to\_splunk](operators/to_splunk.md)
+
+Sends events to a Splunk HTTP Event Collector (HEC).
+
+```tql
+to_splunk "localhost:8088", …
+```
+
+### [to\_sqs](operators/to_sqs.md)
+
+Sends messages to an Amazon SQS queue.
+
+```tql
+to_sqs "sqs://tenzir"
+```
+
+### [to\_stdout](operators/to_stdout.md)
+
+Writes events to standard output.
+
+```tql
+to_stdout
+```
+
+### [to\_tcp](operators/to_tcp.md)
+
+Connects to a remote TCP or TLS endpoint and sends events.
+
+```tql
+to_tcp "collector.example.com:5044" { write_json }
+```
+
+### [to\_udp](operators/to_udp.md)
+
+Sends one UDP datagram per input event.
+
+```tql
+to_udp "127.0.0.1:514"
+```
+
+### [to\_zmq](operators/to_zmq.md)
+
+Connects to a remote ZeroMQ subscriber endpoint and sends events.
+
+```tql
+to_zmq "tcp://collector.example.com:5555", encoding="json", prefix=kind + "/"
 ```
 
 ## Packages
@@ -911,6 +1383,14 @@ Parses an incoming Syslog stream into events.
 
 ```tql
 read_syslog
+```
+
+### [read\_tql](operators/read_tql.md)
+
+Parses an incoming byte stream of TQL-formatted records into events.
+
+```tql
+read_tql
 ```
 
 ### [read\_tsv](operators/read_tsv.md)
@@ -1117,281 +1597,7 @@ Transforms event stream into Zeek Tab-Separated Value byte stream.
 write_zeek_tsv
 ```
 
-## Inputs
-
-### Bytes
-
-### [load\_amqp](operators/load_amqp.md)
-
-Loads a byte stream via AMQP messages.
-
-```tql
-load_amqp
-```
-
-### [load\_azure\_blob\_storage](operators/load_azure_blob_storage.md)
-
-Loads bytes from Azure Blob Storage.
-
-```tql
-load_azure_blob_storage "abfs://container/file"
-```
-
-### [load\_file](operators/load_file.md)
-
-Loads the contents of the file at `path` as a byte stream.
-
-```tql
-load_file "/tmp/data.json"
-```
-
-### [load\_ftp](operators/load_ftp.md)
-
-Loads a byte stream via FTP.
-
-```tql
-load_ftp "ftp.example.org"
-```
-
-### [load\_gcs](operators/load_gcs.md)
-
-Loads bytes from a Google Cloud Storage object.
-
-```tql
-load_gcs "gs://bucket/object.json"
-```
-
-### [load\_google\_cloud\_pubsub](operators/load_google_cloud_pubsub.md)
-
-Subscribes to a Google Cloud Pub/Sub subscription and obtains bytes.
-
-```tql
-load_google_cloud_pubsub project_id="my-project"
-```
-
-### [load\_http](operators/load_http.md)
-
-Loads a byte stream via HTTP.
-
-```tql
-load_http "example.org", params={n: 5}
-```
-
-### [load\_kafka](operators/load_kafka.md)
-
-Loads a byte stream from an Apache Kafka topic.
-
-```tql
-load_kafka topic="example"
-```
-
-### [load\_nic](operators/load_nic.md)
-
-Loads bytes from a network interface card (NIC).
-
-```tql
-load_nic "eth0"
-```
-
-### [load\_s3](operators/load_s3.md)
-
-Loads from an Amazon S3 object.
-
-```tql
-load_s3 "s3://my-bucket/obj.csv"
-```
-
-### [load\_sqs](operators/load_sqs.md)
-
-Loads bytes from Amazon SQS queues.
-
-```tql
-load_sqs "sqs://tenzir"
-```
-
-### [load\_stdin](operators/load_stdin.md)
-
-Accepts bytes from standard input.
-
-```tql
-load_stdin
-```
-
-### [load\_tcp](operators/load_tcp.md)
-
-Loads bytes from a TCP or TLS connection.
-
-```tql
-load_tcp "0.0.0.0:8090" { read_json }
-```
-
-### [load\_udp](operators/load_udp.md)
-
-Loads bytes from a UDP socket.
-
-```tql
-load_udp "0.0.0.0:8090"
-```
-
-### [load\_zmq](operators/load_zmq.md)
-
-Receives ZeroMQ messages.
-
-```tql
-load_zmq
-```
-
-### Events
-
-### [from](operators/from.md)
-
-Obtains events from an URI, inferring the source, compression and format.
-
-```tql
-from "data.json"
-```
-
-### [from\_azure\_blob\_storage](operators/from_azure_blob_storage.md)
-
-Reads one or multiple files from Azure Blob Storage.
-
-```tql
-from_azure_blob_storage "abfs://container/data/**.json"
-```
-
-### [from\_file](operators/from_file.md)
-
-Reads one or multiple files from a filesystem.
-
-```tql
-from_file "s3://data/**.json"
-```
-
-### [from\_fluent\_bit](operators/from_fluent_bit.md)
-
-Receives events via Fluent Bit.
-
-```tql
-from_fluent_bit "opentelemetry"
-```
-
-### [from\_gcs](operators/from_gcs.md)
-
-Reads one or multiple files from Google Cloud Storage.
-
-```tql
-from_gcs "gs://my-bucket/data/**.json"
-```
-
-### [from\_google\_cloud\_pubsub](operators/from_google_cloud_pubsub.md)
-
-Subscribes to a Google Cloud Pub/Sub subscription and yields events.
-
-```tql
-from_google_cloud_pubsub project_id="my-project", subscription_id="my-sub"
-```
-
-### [from\_http](operators/from_http.md)
-
-Sends and receives HTTP/1.1 requests.
-
-```tql
-from_http "0.0.0.0:8080"
-```
-
-### [from\_kafka](operators/from_kafka.md)
-
-Receives events from an Apache Kafka topic.
-
-```tql
-from_kafka "logs"
-```
-
-### [from\_opensearch](operators/from_opensearch.md)
-
-Receives events via Opensearch Bulk API.
-
-```tql
-from_opensearch
-```
-
-### [from\_s3](operators/from_s3.md)
-
-Reads one or multiple files from Amazon S3.
-
-```tql
-from_s3 "s3://my-bucket/data/**.json"
-```
-
-### [from\_sentinelone\_data\_lake](operators/from_sentinelone_data_lake.md)
-
-Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
-
-```tql
-from_sentinelone_data_lake "https://…", …
-```
-
-### [from\_udp](operators/from_udp.md)
-
-Receives UDP datagrams and outputs structured events.
-
-```tql
-from_udp "0.0.0.0:8090"
-```
-
-### [from\_velociraptor](operators/from_velociraptor.md)
-
-Submits VQL to a Velociraptor server and returns the response as events.
-
-```tql
-from_velociraptor subscribe="Windows"
-```
-
-## Node
-
-### Inspection
-
-### [diagnostics](operators/diagnostics.md)
-
-Retrieves diagnostic events from a Tenzir node.
-
-```tql
-diagnostics
-```
-
-### [metrics](operators/metrics.md)
-
-Retrieves metrics events from a Tenzir node.
-
-```tql
-metrics "cpu"
-```
-
-### [openapi](operators/openapi.md)
-
-Shows the node's OpenAPI specification.
-
-```tql
-openapi
-```
-
-### [plugins](operators/plugins.md)
-
-Shows all available plugins and built-ins.
-
-```tql
-plugins
-```
-
-### [version](operators/version.md)
-
-Shows the current version.
-
-```tql
-version
-```
-
-### Storage Engine
+## Storage
 
 ### [export](operators/export.md)
 
@@ -1431,242 +1637,4 @@ Retrieves all schemas for events stored at a node.
 
 ```tql
 schemas
-```
-
-## Outputs
-
-### Bytes
-
-### [save\_amqp](operators/save_amqp.md)
-
-Saves a byte stream via AMQP messages.
-
-```tql
-save_amqp
-```
-
-### [save\_azure\_blob\_storage](operators/save_azure_blob_storage.md)
-
-Saves bytes to Azure Blob Storage.
-
-```tql
-save_azure_blob_storage "abfs://container/file"
-```
-
-### [save\_email](operators/save_email.md)
-
-Saves bytes through an SMTP server.
-
-```tql
-save_email "user@example.org"
-```
-
-### [save\_file](operators/save_file.md)
-
-Writes a byte stream to a file.
-
-```tql
-save_file "/tmp/out.json"
-```
-
-### [save\_ftp](operators/save_ftp.md)
-
-Saves a byte stream via FTP.
-
-```tql
-save_ftp "ftp.example.org"
-```
-
-### [save\_gcs](operators/save_gcs.md)
-
-Saves bytes to a Google Cloud Storage object.
-
-```tql
-save_gcs "gs://bucket/object.json"
-```
-
-### [save\_google\_cloud\_pubsub](operators/save_google_cloud_pubsub.md)
-
-Publishes to a Google Cloud Pub/Sub topic.
-
-```tql
-save_google_cloud_pubsub project_id="my-project"
-```
-
-### [save\_http](operators/save_http.md)
-
-Sends a byte stream via HTTP.
-
-```tql
-save_http "example.org/api"
-```
-
-### [save\_kafka](operators/save_kafka.md)
-
-Saves a byte stream to a Apache Kafka topic.
-
-```tql
-save_kafka topic="example"
-```
-
-### [save\_s3](operators/save_s3.md)
-
-Saves bytes to an Amazon S3 object.
-
-```tql
-save_s3 "s3://my-bucket/obj.csv"
-```
-
-### [save\_sqs](operators/save_sqs.md)
-
-Saves bytes to Amazon SQS queues.
-
-```tql
-save_sqs "sqs://tenzir"
-```
-
-### [save\_stdout](operators/save_stdout.md)
-
-Writes a byte stream to standard output.
-
-```tql
-save_stdout
-```
-
-### [save\_tcp](operators/save_tcp.md)
-
-Saves bytes to a TCP or TLS connection.
-
-```tql
-save_tcp "0.0.0.0:8090", tls=true
-```
-
-### [save\_udp](operators/save_udp.md)
-
-Saves bytes to a UDP socket.
-
-```tql
-save_udp "0.0.0.0:8090"
-```
-
-### [save\_zmq](operators/save_zmq.md)
-
-Sends bytes as ZeroMQ messages.
-
-```tql
-save_zmq
-```
-
-### Events
-
-### [to](operators/to.md)
-
-Saves to an URI, inferring the destination, compression and format.
-
-```tql
-to "output.json"
-```
-
-### [to\_amazon\_security\_lake](operators/to_amazon_security_lake.md)
-
-Sends OCSF events to Amazon Security Lake.
-
-```tql
-to_amazon_security_lake "s3://…"
-```
-
-### [to\_azure\_log\_analytics](operators/to_azure_log_analytics.md)
-
-Sends events to the Microsoft Azure Logs Ingestion API.
-
-```tql
-to_azure_log_analytics tenant_id="...", workspace_id="..."
-```
-
-### [to\_clickhouse](operators/to_clickhouse.md)
-
-Sends events to a ClickHouse table.
-
-```tql
-to_clickhouse table="my_table"
-```
-
-### [to\_fluent\_bit](operators/to_fluent_bit.md)
-
-Sends events via Fluent Bit.
-
-```tql
-to_fluent_bit "elasticsearch" …
-```
-
-### [to\_google\_cloud\_logging](operators/to_google_cloud_logging.md)
-
-Sends events to Google Cloud Logging.
-
-```tql
-to_google_cloud_logging …
-```
-
-### [to\_google\_cloud\_pubsub](operators/to_google_cloud_pubsub.md)
-
-Publishes events to a Google Cloud Pub/Sub topic.
-
-```tql
-to_google_cloud_pubsub project_id="my-project", topic_id="alerts", message=text
-```
-
-### [to\_google\_secops](operators/to_google_secops.md)
-
-Sends unstructured events to a Google SecOps Chronicle instance.
-
-```tql
-to_google_secops …
-```
-
-### [to\_hive](operators/to_hive.md)
-
-Writes events to a URI using hive partitioning.
-
-```tql
-to_hive "s3://…", partition_by=[x]
-```
-
-### [to\_kafka](operators/to_kafka.md)
-
-Sends messages to an Apache Kafka topic.
-
-```tql
-to_kafka "topic", message=this.print_json()
-```
-
-### [to\_opensearch](operators/to_opensearch.md)
-
-Sends events to an OpenSearch-compatible Bulk API.
-
-```tql
-to_opensearch "localhost:9200", …
-```
-
-### [to\_sentinelone\_data\_lake](operators/to_sentinelone_data_lake.md)
-
-Sends security events to SentinelOne Singularity Data Lake via REST API.
-
-```tql
-to_sentinelone_data_lake "https://…", …
-```
-
-### [to\_snowflake](operators/to_snowflake.md)
-
-Sends events to a Snowflake database.
-
-```tql
-to_snowflake account_identifier="…
-```
-
-### [to\_splunk](operators/to_splunk.md)
-
-Sends events to a Splunk HTTP Event Collector (HEC).
-
-```tql
-to_splunk "localhost:8088", …
 ```

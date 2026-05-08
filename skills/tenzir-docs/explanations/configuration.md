@@ -89,7 +89,7 @@ Sometimes, users may wish to run Tenzir without side effects, e.g., when wrappin
 
 ## TLS Configuration
 
-Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](/reference/operators/to_opensearch.md), [`to_splunk`](/reference/operators/to_splunk.md), [`save_email`](/reference/operators/save_email.md)) and those that accept inbound connections (e.g., [`load_tcp`](/reference/operators/load_tcp.md), [`save_tcp`](/reference/operators/save_tcp.md)).
+Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](/reference/operators/to_opensearch.md) and [`to_splunk`](/reference/operators/to_splunk.md)) and those that accept inbound connections (e.g., [`accept_tcp`](/reference/operators/accept_tcp.md) and [`serve_tcp`](/reference/operators/serve_tcp.md)).
 
 Use Only When Required
 
@@ -133,10 +133,10 @@ The following operators and connectors automatically respect the node-level TLS 
 
 * [`to_opensearch`](/reference/operators/to_opensearch.md): Applies min version and ciphers to HTTPS connections
 * [`to_splunk`](/reference/operators/to_splunk.md): Applies min version and ciphers to Splunk HEC connections
-* [`save_email`](/reference/operators/save_email.md): Applies min version and ciphers to SMTP connections
-* [`load_tcp`](/reference/operators/load_tcp.md): Applies min version and ciphers to TLS server mode
-* [`save_tcp`](/reference/operators/save_tcp.md): Applies min version and ciphers to TLS client and server modes
-* [`from_opensearch`](/reference/operators/from_opensearch.md): Applies min version and ciphers to HTTPS connections
+* [`accept_tcp`](/reference/operators/accept_tcp.md): Applies min version and ciphers to TLS server mode
+* [`from_tcp`](/reference/operators/from_tcp.md): Applies min version and ciphers to TLS client mode
+* [`serve_tcp`](/reference/operators/serve_tcp.md): Applies min version and ciphers to TLS server mode
+* [`accept_opensearch`](/reference/operators/accept_opensearch.md): Applies min version and ciphers to HTTPS connections
 
 ## Plugins
 

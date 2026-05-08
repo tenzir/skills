@@ -1,11 +1,11 @@
 # Read from message brokers
 
 
-This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
+This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
 
 ## Apache Kafka
 
-[Apache Kafka](../../integrations/kafka.md) is a distributed message broker commonly used for high-throughput event streaming. Use [`from_kafka`](/reference/operators/from_kafka.md) to subscribe to topics.
+[Apache Kafka](../../integrations/kafka.md) is a distributed message broker commonly used for high-throughput event streaming. Use `from_kafka` to subscribe to topics.
 
 ### Subscribe to a topic
 
@@ -54,28 +54,53 @@ from_kafka "security-logs",
   aws_iam={region: "us-east-1"}
 ```
 
+## NATS JetStream
+
+[NATS](../../integrations/nats.md) is a messaging system for services, edge deployments, and cloud-native applications. Use `from_nats` to consume messages from JetStream subjects.
+
+### Consume from a subject
+
+```tql
+from_nats "alerts", durable="tenzir-alerts"
+this = string(message).parse_json()
+```
+
+The NATS server must have a JetStream stream that captures the subject you consume from.
+
+### Preserve message metadata
+
+Use `metadata_field` to copy NATS metadata into events:
+
+```tql
+from_nats "alerts", metadata_field=nats
+parsed = string(message).parse_json()
+nats_subject = nats.subject
+nats_stream = nats.stream
+nats_sequence = nats.stream_sequence
+```
+
 ## AMQP (RabbitMQ)
 
-[AMQP](../../integrations/amqp.md) is supported by brokers like RabbitMQ. Use AMQP URLs with [`from`](/reference/operators/from.md) or [`load_amqp`](/reference/operators/load_amqp.md) directly.
+[AMQP](../../integrations/amqp.md) is supported by brokers such as RabbitMQ. Use `from_amqp` directly with AMQP URLs.
 
 ### Receive from a queue
 
 ```tql
-from "amqp://user:pass@broker:5672/vhost"
+from_amqp "amqp://user:pass@broker:5672/vhost", queue="events"
+this = string(message).parse_json()
 ```
 
-The URL structure is `amqp://user:password@host:port/vhost`. Configure additional options like exchange and routing key in the operator parameters.
+The URL structure is `amqp://user:password@host:port/vhost`. Configure additional options like `exchange`, `routing_key`, and `queue` in the operator parameters. The operator emits each AMQP payload in the `message` field.
 
 ## Amazon SQS
 
-[Amazon SQS](../../integrations/amazon/sqs.md) is a managed message queue. Use [`load_sqs`](/reference/operators/load_sqs.md) or the `sqs://` URL scheme.
+[Amazon SQS](../../integrations/amazon/sqs.md) is a managed message queue. Use `from_sqs` to receive events from SQS queues.
 
 ### Receive from a queue
 
 ```tql
-from "sqs://my-queue" {
-  read_json
-}
+from_sqs "sqs://my-queue"
+this = message.parse_json()
 ```
 
 ### Configure polling
@@ -83,16 +108,14 @@ from "sqs://my-queue" {
 Use long polling to reduce API calls and receive messages in batches:
 
 ```tql
-from "sqs://my-queue", poll_interval=5s {
-  read_json
-}
+from_sqs "sqs://my-queue", poll_time=5s
 ```
 
 SQS automatically deletes messages after successful receipt.
 
 ## Google Cloud Pub/Sub
 
-[Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md) provides managed messaging for Google Cloud. Use [`from_google_cloud_pubsub`](/reference/operators/from_google_cloud_pubsub.md) to subscribe.
+[Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md) provides managed messaging for Google Cloud. Use `from_google_cloud_pubsub` to subscribe.
 
 ### Receive from a subscription
 
@@ -108,6 +131,7 @@ The operator produces events with a `message` field containing the raw message c
 
 * [Parse string fields](../parsing/parse-string-fields.md)
 * [Kafka](../../integrations/kafka.md)
+* [NATS](../../integrations/nats.md)
 * [AMQP](../../integrations/amqp.md)
 * [SQS](../../integrations/amazon/sqs.md)
 * [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

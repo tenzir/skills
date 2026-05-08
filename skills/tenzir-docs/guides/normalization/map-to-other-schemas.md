@@ -192,7 +192,7 @@ fork {
 fork {
   // Translate and send to Elasticsearch
   ocsf_to_ecs
-  to_elasticsearch "..."
+  to_opensearch "https://elasticsearch.example.com:9200", action="index", index="ecs"
 }
 fork {
   // Translate and send to Chronicle
@@ -213,7 +213,8 @@ fork {
 
 5. **Monitor for schema updates**: All schemas evolve; plan for periodic updates to your mappings.
 
-## See also
+## See Also
 
+* [`to_opensearch`](/reference/operators/to_opensearch.md)
 * [Map to OCSF](map-to-ocsf.md)
 * [Transform values](../transformation/transform-values.md)

@@ -16,9 +16,10 @@ The `decompress_lz4` operator decompresses bytes in a pipeline incrementally. Th
 ### Import Suricata events from a LZ4-compressed file
 
 ```tql
-load_file "eve.json.lz4"
-decompress_lz4
-read_suricata
+from_file "eve.json.lz4" {
+  decompress_lz4
+  read_suricata
+}
 import
 ```
 

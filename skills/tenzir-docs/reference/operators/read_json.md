@@ -154,8 +154,9 @@ input.json
 Pipeline
 
 ```tql
-load_file "events.json"
-read_json unflatten="."
+from_file "events.json" {
+  read_json unflatten="."
+}
 ```
 
 Output

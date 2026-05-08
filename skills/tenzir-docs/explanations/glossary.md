@@ -21,9 +21,9 @@ The catalog is a component in the [node](#node) that owns the [partitions](#part
 
 ## Connector
 
-Manages chunks of raw bytes by interacting with a resource.
+Connects a pipeline to an external resource.
 
-A connector is either a *loader* that acquires bytes from a resource, or a *saver* that sends bytes to a resource. Loaders are implemented as ordinary [operators](../reference/operators.md) prefixed with `load_*` while savers are prefixed with `save_*`.
+A connector is usually exposed as a source operator that reads from a resource, or as a sink operator that writes to a resource.
 
 ## Context
 
@@ -98,11 +98,11 @@ A collection of [packages](#package).
 
 Our community library is [freely available at GitHub](https://github.com/tenzir/library).
 
-## Loader
+## Source
 
-A connector that acquires bytes.
+An operator that reads from an external resource.
 
-A loader is the dual to a [saver](#saver). It has a no input and only performs a side effect that acquires bytes. Use a loader implicitly with the [`from`](/reference/operators/from.md) operator or explicitly with the `load_*` operators.
+A source is the dual to a [sink](#sink). It has no input and emits events or bytes into the pipeline.
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -160,7 +160,7 @@ A collection of [pipelines](#pipeline) and [contexts](#context).
 
 A bytes-to-events operator.
 
-A parser is the dual to a [printer](#printer). You use a parser implicitly in the [`from`](/reference/operators/from.md) operator, or via the `read_*` operators. There exist also [functions](#function) for applying parsers to string values.
+A parser is the dual to a [printer](#printer). You use parsers via the `read_*` operators. There exist also [functions](#function) for applying parsers to string values.
 
 * Learn more about [pipelines](pipeline.md)
 * See available [operators for parsing](../reference/operators.md#parsing)
@@ -191,17 +191,17 @@ An events-to-bytes operator.
 
 A [format](#format) that translates events into bytes.
 
-A printer is the dual to a [parser](#parser). Use a parser implicitly in the [`to`](/reference/operators/to.md) operator.
+A printer is the dual to a [parser](#parser). Use printers via the `write_*` operators or as printing subpipelines in output operators.
 
 * Learn more about [pipelines](pipeline.md)
 * See available [operators for printing](../reference/operators.md#printing)
 * See available [functions for printing](../reference/functions.md#printing)
 
-## Saver
+## Sink
 
-A [connector](#connector) that emits bytes.
+An operator that writes to an external resource.
 
-A saver is the dual to a [loader](#loader). It has a no output and only performs a side effect that emits bytes. Use a saver implicitly with the [`to`](/reference/operators/to.md) operator or explicitly with the `save_*` operators.
+A sink is the dual to a [source](#source). It consumes events or bytes from the pipeline and has no output.
 
 * Learn more about [pipelines](pipeline.md)
 

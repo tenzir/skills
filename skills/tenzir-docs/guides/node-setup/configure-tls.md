@@ -19,7 +19,16 @@ tenzir:
     cacert: "/etc/ssl/certs/ca-certificates.crt"
 ```
 
-These settings apply automatically to operators like [`from_http`](/reference/operators/from_http.md), [`load_tcp`](/reference/operators/load_tcp.md), [`save_tcp`](/reference/operators/save_tcp.md), [`to_opensearch`](/reference/operators/to_opensearch.md), [`from_opensearch`](/reference/operators/from_opensearch.md), [`to_splunk`](/reference/operators/to_splunk.md), [`save_email`](/reference/operators/save_email.md), and [`to_fluent_bit`](/reference/operators/to_fluent_bit.md).
+These settings apply automatically to operators that use TLS, including:
+
+* [`from_http`](/reference/operators/from_http.md)
+* [`accept_tcp`](/reference/operators/accept_tcp.md)
+* [`from_tcp`](/reference/operators/from_tcp.md)
+* [`serve_tcp`](/reference/operators/serve_tcp.md)
+* [`to_opensearch`](/reference/operators/to_opensearch.md)
+* [`accept_opensearch`](/reference/operators/accept_opensearch.md)
+* [`to_splunk`](/reference/operators/to_splunk.md)
+* [`to_fluent_bit`](/reference/operators/to_fluent_bit.md)
 
 ### Available options
 

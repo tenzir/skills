@@ -75,7 +75,7 @@ Note that the forwarding TCP connection is *unencrypted*, as the assumption is t
 Spin up a Tenzir pipeline that accepts [TCP](tcp.md) connection and parses [Syslog](syslog.md):
 
 ```tql
-from "tcp://0.0.0.0:514" {
+accept_tcp "0.0.0.0:514" {
   read_syslog
 }
 publish "zscaler"

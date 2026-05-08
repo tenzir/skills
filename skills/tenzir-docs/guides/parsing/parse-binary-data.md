@@ -1,7 +1,7 @@
 # Parse binary data
 
 
-This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native Bitz format, and compressed data.
+This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
 
 The examples use [`from_file`](/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
 
@@ -55,7 +55,7 @@ from_file "capture.pcap" {
 {linktype: 1, timestamp: 2024-01-15T10:30:45.123456Z, captured_packet_length: 74, original_packet_length: 74, data: "ABY88f1tZJ7zvttmCABFAAA8..."}
 ```
 
-Use `from_nic` to parse directly from a live interface. TQL furhter comes with light-weight packet processing functions. For example, you can extract protocol headers from raw packet data using the [`decapsulate`](/reference/functions/decapsulate.md) function:
+Use [`from_nic`](/reference/operators/from_nic.md) to parse directly from a live interface. TQL also includes lightweight packet processing functions. For example, you can extract protocol headers from raw packet data using the [`decapsulate`](/reference/functions/decapsulate.md) function:
 
 ```tql
 from_file "capture.pcap" {
@@ -68,9 +68,9 @@ packet = decapsulate(this)
 {packet: {ether: {src: "64-9E-F3-BE-DB-66", dst: "00-16-3C-F1-FD-6D", type: 2048}, ip: {src: "192.168.1.100", dst: "10.0.0.1", type: 6}, tcp: {src_port: 54321, dst_port: 443}, community_id: "1:YXWfTYEyYLKVv5Ge4WqijUnKTrM="}}
 ```
 
-## Bitz
+## BITZ
 
-Bitz is Tenzir’s native columnar format, optimized for schema-rich security data. Use [`read_bitz`](/reference/operators/read_bitz.md) to parse it:
+BITZ, short for **Bi**nary **T**en**z**ir, is Tenzir’s native columnar format, optimized for schema-rich security data. Use [`read_bitz`](/reference/operators/read_bitz.md) to parse it. Use [`write_bitz`](/reference/operators/write_bitz.md) to serialize events into the same format for later reuse:
 
 ```tql
 from_file "archive.bitz" {

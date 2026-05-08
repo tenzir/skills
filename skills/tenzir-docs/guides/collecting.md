@@ -9,13 +9,7 @@ TQL provides two types of input operators:
 
   [`from_http`](/reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
 
-* **Direct event operators** like [`from_kafka`](/reference/operators/from_kafka.md) and [`from_udp`](/reference/operators/from_udp.md) produce structured events directly without an intermediate byte stream.
-
-Migration note
-
-The `from_*` family of operators supersedes the older `load_*` operators that produce bytes. While `load_*` operators remain supported, prefer the newer `from_*` variants which provide a more unified experience with built-in format inference.
-
-For example, `from_file "data.csv"` replaces `load_file "data.csv" | read_csv`.
+* **Direct event operators** like [`from_kafka`](/reference/operators/from_kafka.md) and [`accept_udp`](/reference/operators/accept_udp.md) produce structured events directly without an intermediate byte stream.
 
 ## Collection patterns
 
@@ -53,10 +47,17 @@ See the [HTTP and API guide](collecting/fetch-via-http-and-apis.md) for paginati
 
 ### Message brokers
 
-Subscribe to topics or queues from Apache Kafka, AMQP, Amazon SQS, and Google Cloud Pub/Sub:
+Subscribe to topics or queues from Apache Kafka, NATS, AMQP, Amazon SQS, and Google Cloud Pub/Sub:
 
 ```tql
 from_kafka "security-events", offset="end"
+```
+
+For NATS JetStream, consume from a subject and parse the message field:
+
+```tql
+from_nats "alerts"
+this = string(message).parse_json()
 ```
 
 See the [message broker guide](collecting/read-from-message-brokers.md) for broker-specific configurations.
@@ -67,11 +68,13 @@ Receive data over TCP or UDP sockets, or capture packets from network interfaces
 
 ```tql
 // UDP syslog receiver
-from_udp "0.0.0.0:514"
+accept_udp "0.0.0.0:514"
 
 
 // TCP with TLS
-from "tcp://0.0.0.0:8443", tls=true
+accept_tcp "0.0.0.0:8443", tls={} {
+  read_json
+}
 ```
 
 See the [network data guide](collecting/get-data-from-the-network.md) for socket configurations and packet capture.
