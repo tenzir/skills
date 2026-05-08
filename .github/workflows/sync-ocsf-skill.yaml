@@ -54,23 +54,9 @@ jobs:
 
           uv run scripts/generate-ocsf-skill.py "${args[@]}"
 
-      - name: Install skills-ref
+      - name: Validate skills
         shell: bash
-        run: uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
-
-      - name: Validate skills with skills-ref
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          mapfile -t skill_dirs < <(
-            find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort
-          )
-
-          for skill_dir in "${skill_dirs[@]}"; do
-            echo "Validating ${skill_dir}"
-            skills-ref validate "${skill_dir}"
-          done
+        run: scripts/validate-skills
 
       - name: Stage changes
         shell: bash

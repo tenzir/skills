@@ -1,0 +1,41 @@
+name: Checks
+
+on:
+  pull_request:
+    paths:
+      - "AGENTS.md"
+      - ".github/workflows/**"
+      - "scripts/**"
+      - "skills/**"
+      - ".claude-plugin/**"
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  actionlint:
+    name: Lint Workflows
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Run actionlint
+        uses: docker://rhysd/actionlint:1.7.8
+
+  validate:
+    name: Validate Skills
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Validate skills
+        shell: bash
+        run: scripts/validate-skills --marketplace

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+validate_marketplace=false
+
+for arg in "$@"; do
+  case "$arg" in
+    --marketplace)
+      validate_marketplace=true
+      ;;
+    *)
+      echo "usage: $0 [--marketplace]" >&2
+      exit 2
+      ;;
+  esac
+done
+
+if ! command -v skills-ref >/dev/null 2>&1; then
+  if ! command -v uv >/dev/null 2>&1; then
+    echo "uv is required to install skills-ref" >&2
+    exit 1
+  fi
+
+  uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
+fi
+
+find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | while read -r skill_dir; do
+  echo "Validating ${skill_dir}"
+  skills-ref validate "${skill_dir}"
+done
+
+if [[ "$validate_marketplace" != true ]]; then
+  exit 0
+fi
+
+local_skills=$(mktemp)
+marketplace_skills=$(mktemp)
+trap 'rm -f "$local_skills" "$marketplace_skills"' EXIT
+
+find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | sed 's#^#./#' > "$local_skills"
+jq -r '.plugins[].skills[]' .claude-plugin/marketplace.json | sort > "$marketplace_skills"
+
+duplicates=$(uniq -d < "$marketplace_skills")
+if [[ -n "$duplicates" ]]; then
+  echo "Duplicate skills in marketplace.json:"
+  echo "$duplicates"
+  exit 1
+fi
+
+if ! cmp -s "$local_skills" "$marketplace_skills"; then
+  echo "Mismatch between skills/ and marketplace.json:"
+  diff -u "$local_skills" "$marketplace_skills" || true
+  exit 1
+fi
+
+echo "marketplace.json is valid."
