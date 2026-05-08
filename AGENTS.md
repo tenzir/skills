@@ -79,34 +79,13 @@ Three places list skills and must stay consistent:
 
 ## Validation
 
-Run `skills-ref` across every local skill after changing anything under
-`skills/`, and verify that `.claude-plugin/marketplace.json` lists each
-skill exactly once:
+Run the shared validator after changing anything under `skills/`. It runs
+`skills-ref` across every local skill and verifies that
+`.claude-plugin/marketplace.json` lists each skill exactly once:
 
 ```bash
-for skill in $(find skills -name SKILL.md -print | sed 's#/SKILL.md$##'); do
-  uvx skills-ref validate "$skill"
-done
-
-local_skills=$(mktemp)
-marketplace_skills=$(mktemp)
-
-find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | sed 's#^#./#' > "$local_skills"
-jq -r '.plugins[].skills[]' .claude-plugin/marketplace.json | sort > "$marketplace_skills"
-
-duplicates=$(uniq -d < "$marketplace_skills")
-if [[ -n "${duplicates}" ]]; then
-  echo "Duplicate skills in marketplace.json:"
-  echo "${duplicates}"
-  exit 1
-fi
-
-if ! cmp -s "$local_skills" "$marketplace_skills"; then
-  echo "Mismatch between skills/ and marketplace.json:"
-  diff -u "$local_skills" "$marketplace_skills" || true
-  exit 1
-fi
+scripts/validate-skills --marketplace
 ```
 
-The same validation runs in `.github/workflows/skills-ref.yml`
-for pull requests that touch the skill tree or the workflow itself, and on every push to `main`, along with a check that ensures all skills are listed exactly once in the marketplace JSON.
+The same validation script runs in `.github/workflows/checks.yaml`
+for pull requests that touch the skill tree or the workflow itself, and on every push to `main`.

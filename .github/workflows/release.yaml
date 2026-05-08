@@ -57,31 +57,7 @@ jobs:
       pre-create: |
         set -euo pipefail
 
-        uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
-
-        find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | while read -r skill_dir; do
-          echo "Validating ${skill_dir}"
-          skills-ref validate "${skill_dir}"
-        done
-
-        local_skills=$(mktemp)
-        marketplace_skills=$(mktemp)
-
-        find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | sed 's#^#./#' > "$local_skills"
-        jq -r '.plugins[].skills[]' .claude-plugin/marketplace.json | sort > "$marketplace_skills"
-
-        duplicates=$(uniq -d < "$marketplace_skills")
-        if [[ -n "${duplicates}" ]]; then
-          echo "Duplicate skills in marketplace.json:"
-          echo "${duplicates}"
-          exit 1
-        fi
-
-        if ! cmp -s "$local_skills" "$marketplace_skills"; then
-          echo "Mismatch between skills/ and marketplace.json:"
-          diff -u "$local_skills" "$marketplace_skills" || true
-          exit 1
-        fi
+        scripts/validate-skills --marketplace
       github_app_id: ${{ vars.TENZIR_GITHUB_APP_ID }}
       git_user_name: tenzir-bot
       git_user_email: engineering@tenzir.com
