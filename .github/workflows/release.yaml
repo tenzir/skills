@@ -1,0 +1,92 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      intro:
+        description: |
+          Intro of the release
+
+          The intro should be 1-2 sentences long, must be written in active
+          voice, and should clearly communicate the theme of the release to the
+          user. Use full sentences and avoid abbreviations.
+        required: true
+        type: string
+      title:
+        description: |
+          User-facing release title (auto-generated if omitted)
+        required: false
+        type: string
+
+jobs:
+  validate-release-config:
+    name: Validate release workflow configuration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate release configuration
+        env:
+          TENZIR_GITHUB_APP_ID: ${{ vars.TENZIR_GITHUB_APP_ID }}
+          TENZIR_GITHUB_APP_PRIVATE_KEY: ${{ secrets.TENZIR_GITHUB_APP_PRIVATE_KEY }}
+          TENZIR_BOT_GPG_SIGNING_KEY: ${{ secrets.TENZIR_BOT_GPG_SIGNING_KEY }}
+        run: |
+          if [ -z "$TENZIR_GITHUB_APP_ID" ]; then
+            echo "::error::Repository variable 'TENZIR_GITHUB_APP_ID' must be set for release runs."
+            exit 1
+          fi
+
+          if [ -z "$TENZIR_GITHUB_APP_PRIVATE_KEY" ]; then
+            echo "::error::Repository secret 'TENZIR_GITHUB_APP_PRIVATE_KEY' must be set for release runs."
+            exit 1
+          fi
+
+          if [ -z "$TENZIR_BOT_GPG_SIGNING_KEY" ]; then
+            echo "::error::Repository secret 'TENZIR_BOT_GPG_SIGNING_KEY' must be set for release runs."
+            exit 1
+          fi
+
+  release:
+    name: Create GitHub release
+    needs: validate-release-config
+    permissions:
+      contents: write
+    uses: tenzir/ship/.github/workflows/release.yaml@main
+    with:
+      intro: ${{ inputs.intro }}
+      title: ${{ inputs.title }}
+      pre-create: |
+        set -euo pipefail
+
+        uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
+
+        find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | while read -r skill_dir; do
+          echo "Validating ${skill_dir}"
+          skills-ref validate "${skill_dir}"
+        done
+
+        local_skills=$(mktemp)
+        marketplace_skills=$(mktemp)
+
+        find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | sed 's#^#./#' > "$local_skills"
+        jq -r '.plugins[].skills[]' .claude-plugin/marketplace.json | sort > "$marketplace_skills"
+
+        duplicates=$(uniq -d < "$marketplace_skills")
+        if [[ -n "${duplicates}" ]]; then
+          echo "Duplicate skills in marketplace.json:"
+          echo "${duplicates}"
+          exit 1
+        fi
+
+        if ! cmp -s "$local_skills" "$marketplace_skills"; then
+          echo "Mismatch between skills/ and marketplace.json:"
+          diff -u "$local_skills" "$marketplace_skills" || true
+          exit 1
+        fi
+      github_app_id: ${{ vars.TENZIR_GITHUB_APP_ID }}
+      git_user_name: tenzir-bot
+      git_user_email: engineering@tenzir.com
+      sign_commits: true
+      sign_tags: true
+    secrets:
+      github_app_private_key: ${{ secrets.TENZIR_GITHUB_APP_PRIVATE_KEY }}
+      gpg_private_key: ${{ secrets.TENZIR_BOT_GPG_SIGNING_KEY }}
