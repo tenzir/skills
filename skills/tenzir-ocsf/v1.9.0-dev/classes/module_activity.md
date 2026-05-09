@@ -45,7 +45,7 @@ Module Activity events report when an endpoint process acts on a `module`.
 - `2`: `Unload` - The target module was unloaded.
 - `3`: `Invoke` - A function exported from the target module was invoked.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `actor`
 

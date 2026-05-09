@@ -38,7 +38,7 @@ Web Resource Access Activity events describe successful/failed attempts to acces
 - `3`: `Access Revoke` - The incoming request's access has been revoked due to security policy enforcements.
 - `4`: `Access Error` - An error occurred during processing the request.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `http_request`
 

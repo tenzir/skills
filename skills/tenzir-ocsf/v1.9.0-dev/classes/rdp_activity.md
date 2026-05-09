@@ -52,7 +52,7 @@ Remote Desktop Protocol (RDP) Activity events report post-authentication remote 
 - `7`: `Disconnect` - An RDP connection disconnect.
 - `8`: `Reconnect` - An RDP connection reconnect.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `capabilities`
 

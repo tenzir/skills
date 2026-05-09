@@ -20,7 +20,6 @@ Note: If the Finding is an incident, i.e. requires incident workflow, also apply
 - `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
-- `time` (required)
 - `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)

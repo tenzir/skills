@@ -44,7 +44,7 @@ Kernel Extension events report when a driver/extension is loaded or unloaded int
 - `1`: `Load` - A driver/extension was loaded into the kernel
 - `2`: `Unload` - A driver/extension was unloaded (removed) from the kernel
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `actor`
 

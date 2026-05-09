@@ -53,4 +53,4 @@ The communication flags that are associated with the api response.
 - **Type**: `string_t`
 - **Requirement**: recommended
 
-The description of the event/finding, as defined by the source.
+The response message provided by the service or API.

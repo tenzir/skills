@@ -39,4 +39,4 @@ The registry key object describes a Windows registry key.
 - **Requirement**: recommended
 - **Group**: primary
 
-The registry key object describes a Windows registry value.
+The registry value object describes a Windows registry value.

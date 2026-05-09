@@ -48,7 +48,7 @@ Airborne Broadcast Activity events report the activity of any aircraft or unmann
 - `2`: `Record` - ADS-B information is being recorded, for example by a standalone transceiver.
 - `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `aircraft`
 

@@ -54,7 +54,7 @@ The Network Time Protocol (NTP) Activity events report instances of remote clien
 - `7`: `Private Use Case` - Reserved - Not defined in standard NTP specifications.
 - `99`: `Other` - The event activity is not mapped.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `delay`
 

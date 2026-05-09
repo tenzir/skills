@@ -79,7 +79,7 @@ The normalized identifier of the account switch method.
 - `6`: `Preauth` - A preauthentication stage was engaged.
 - `7`: `Account Switch` - A utility or service switched the user account. See the `account_switch_type_id` attribute for more details.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `auth_factors`
 

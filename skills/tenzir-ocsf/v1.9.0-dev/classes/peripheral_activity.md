@@ -48,7 +48,7 @@ Peripheral Activity events log a system's interactions with external, connectabl
 - `4`: `Disable` - A peripheral device was disabled on the system.
 - `5`: `Eject` - A peripheral device was ejected from the system. This is typically used for removable media devices. Note: For `Mount` and `Unmount` events, see the [File System Activity](file_activity.md) event class.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `peripheral_device`
 

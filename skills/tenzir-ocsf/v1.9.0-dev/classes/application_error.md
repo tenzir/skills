@@ -35,7 +35,7 @@ Application Error events describe issues with an applications. The error message
 - `1`: `General Error` - The application has experienced an error.
 - `2`: `Translation Error` - The application has experienced an error translating (mapping) a raw event to OCSF. Including the original raw event in the raw_data field is highly recommended.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `message`
 

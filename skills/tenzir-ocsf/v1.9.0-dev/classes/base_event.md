@@ -18,7 +18,7 @@ The base event is a generic and concrete event. It also defines a set of attribu
 - `0`: `Unknown`
 - `99`: `Other`
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `activity_name`
 
@@ -26,7 +26,7 @@ The normalized identifier of the activity that triggered the event.
 - **Requirement**: optional
 - **Group**: classification
 
-The event activity name, as defined by the activity_id.
+The event activity name, as defined by the `activity_id`. When `activity_id` is `99` (Other), this attribute must contain the source-specific activity label. For all other `activity_id` values, this must match the caption defined for that `activity_id` enum value.
 
 ### `category_name`
 
@@ -34,7 +34,7 @@ The event activity name, as defined by the activity_id.
 - **Requirement**: optional
 - **Group**: classification
 
-The event category name, as defined by category_uid value.
+The event category name, as defined by the `category_uid` value. The value must match the caption defined for the corresponding `category_uid` enum value (e.g., `"Findings"` for `category_uid: 2`).
 
 ### `category_uid`
 
@@ -47,7 +47,7 @@ The event category name, as defined by category_uid value.
 
 - `0`: `Uncategorized`
 
-The category unique identifier of the event.
+The category unique identifier of the event. Each event class belongs to exactly one category. Producers and mappers must set this to the category defined by the event class being used.
 
 ### `class_name`
 
@@ -55,7 +55,7 @@ The category unique identifier of the event.
 - **Requirement**: optional
 - **Group**: classification
 
-The event class name, as defined by class_uid value.
+The event class name, as defined by the `class_uid` value. The value must match the caption defined for the corresponding `class_uid` (e.g., `"Detection Finding"` for `class_uid: 2004`).
 
 ### `class_uid`
 
@@ -68,7 +68,7 @@ The event class name, as defined by class_uid value.
 
 - `0`: `Base Event`
 
-The unique identifier of a class. A class describes the attributes available in an event.
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
 
 ### `count`
 
@@ -76,7 +76,7 @@ The unique identifier of a class. A class describes the attributes available in 
 - **Requirement**: optional
 - **Group**: occurrence
 
-The number of times that events in the same logical group occurred during the event Start Time to End Time period.
+The number of events aggregated into this single record. Only populate for aggregate events. When set, `start_time` and `end_time` should also be provided to define the aggregation window.
 
 ### `duration`
 
@@ -84,7 +84,7 @@ The number of times that events in the same logical group occurred during the ev
 - **Requirement**: optional
 - **Group**: occurrence
 
-The event duration or aggregate time, the amount of time the event covers from `start_time` to `end_time` in milliseconds.
+The elapsed time of the aggregation window in milliseconds, from `start_time` to `end_time`. Only populate for aggregate events (`count` > 1). The value should equal `end_time - start_time`.
 
 ### `end_time`
 
@@ -92,7 +92,7 @@ The event duration or aggregate time, the amount of time the event covers from `
 - **Requirement**: optional
 - **Group**: occurrence
 
-The end time of a time period, or the time of the most recent event included in the aggregate event.
+The time of the most recent event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events — use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
 
 ### `enrichments`
 
@@ -108,7 +108,7 @@ The additional information from an external data source, which is associated wit
 - **Requirement**: recommended
 - **Group**: primary
 
-The description of the event/finding, as defined by the source.
+A human-readable description of the event, as defined by the source. This should be a concise, meaningful summary suitable for display in a UI or alert notification — not a raw log line. For example: `"User john_doe logged in from 10.0.0.1."` rather than a raw syslog string.
 
 ### `metadata`
 
@@ -116,7 +116,7 @@ The description of the event/finding, as defined by the source.
 - **Requirement**: required
 - **Group**: context
 
-The metadata associated with the event or a finding.
+The metadata object describes the event producer, schema version, and processing information. Producers and mappers must populate `metadata.product` to identify the data source, and `metadata.version` to indicate the OCSF schema version used. Consumers rely on this to interpret the event correctly.
 
 ### `observables`
 
@@ -124,7 +124,7 @@ The metadata associated with the event or a finding.
 - **Requirement**: recommended
 - **Group**: primary
 
-The observables associated with the event or a finding.
+The observables array surfaces key indicators and entities from the event or finding in a single, consistent location for downstream correlation and detection. Each entry references an attribute path within the event (e.g., `src_endpoint.ip`) along with its type and value, enabling consumers to extract IOCs without parsing the full event structure.
 
 ### `raw_data`
 
@@ -132,7 +132,7 @@ The observables associated with the event or a finding.
 - **Requirement**: optional
 - **Group**: context
 
-The raw event/finding data as received from the source.
+The original event/finding data as received from the source, before normalization into OCSF. Populate this with the verbatim log line, JSON payload, or other native format for forensic and debugging purposes. This field is not intended for structured querying &mdash; use the normalized OCSF attributes instead.
 
 ### `raw_data_hash`
 
@@ -140,7 +140,7 @@ The raw event/finding data as received from the source.
 - **Requirement**: optional
 - **Group**: context
 
-The hash, which describes the content of the raw_data field.
+A fingerprint (hash) of the `raw_data` content. Use this to verify the integrity of the original event data or to deduplicate events.
 
 ### `raw_data_size`
 
@@ -148,7 +148,7 @@ The hash, which describes the content of the raw_data field.
 - **Requirement**: optional
 - **Group**: context
 
-The size of the raw data which was transformed into an OCSF event, in bytes.
+The size of the original event data (as captured in `raw_data`) in bytes, before OCSF normalization. Useful for metering and capacity planning.
 
 ### `severity`
 
@@ -156,7 +156,7 @@ The size of the raw data which was transformed into an OCSF event, in bytes.
 - **Requirement**: optional
 - **Group**: classification
 
-The event/finding severity, normalized to the caption of the `severity_id` value. In the case of 'Other', it is defined by the source.
+The event/finding severity label, normalized to the caption of the `severity_id` value. When `severity_id` is `99` (Other), this attribute must contain the source-specific severity label. For all other values, this should match the caption defined for that `severity_id` enum value (e.g., `"High"` for `severity_id: 4`).
 
 ### `severity_id`
 
@@ -186,7 +186,7 @@ The normalized severity is a measurement the effort and expense required to mana
 - **Requirement**: optional
 - **Group**: occurrence
 
-The start time of a time period, or the time of the least recent event included in the aggregate event.
+The time of the earliest event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events — use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
 
 ### `status`
 
@@ -194,7 +194,7 @@ The start time of a time period, or the time of the least recent event included 
 - **Requirement**: recommended
 - **Group**: primary
 
-The event status, normalized to the caption of the status_id value. In the case of 'Other', it is defined by the event source.
+The event status label, normalized to the caption of the `status_id` value. When `status_id` is `99` (Other), this attribute must contain the source-specific status label. For all other values, this must match the caption defined for that `status_id` enum value (e.g., `"Success"` for `status_id: 1`).
 
 ### `status_code`
 
@@ -202,9 +202,7 @@ The event status, normalized to the caption of the status_id value. In the case 
 - **Requirement**: recommended
 - **Group**: primary
 
-The event status code, as reported by the event source.
-
-For example, in a Windows Failed Authentication event, this would be the value of 'Failure Code', e.g. 0x18.
+The source-specific status or error code as reported by the event source. For example, a Windows logon failure code (`0x18`), an HTTP response code (`403`), or an AWS API error code. This preserves the original code for detailed troubleshooting beyond what `status_id` conveys.
 
 ### `status_detail`
 
@@ -212,7 +210,7 @@ For example, in a Windows Failed Authentication event, this would be the value o
 - **Requirement**: recommended
 - **Group**: primary
 
-The status detail contains additional information about the event/finding outcome.
+A human-readable description providing additional context about the event outcome. Use this to convey details that go beyond the normalized `status_id` and source-specific `status_code`, such as a failure reason or error message. For example: `"Account locked after 5 failed attempts."`.
 
 ### `status_id`
 
@@ -223,12 +221,10 @@ The status detail contains additional information about the event/finding outcom
 
 #### Enum values
 
-- `0`: `Unknown` - The status is unknown.
-- `1`: `Success`
-- `2`: `Failure`
-- `99`: `Other` - The status is not mapped. See the `status` attribute, which contains a data source specific value.
+- `1`: `Success` - The activity completed successfully.
+- `2`: `Failure` - The activity failed.
 
-The normalized identifier of the event status.
+The normalized status of the event outcome. Use this family of attributes to convey the outcome of the activity described by the event. Producers should map their source outcome to `1` (Success) or `2` (Failure). Use `0` (Unknown) when the outcome cannot be determined, and `99` (Other) with a populated `status` string when the source value does not map cleanly.
 
 ### `time`
 
@@ -236,7 +232,7 @@ The normalized identifier of the event status.
 - **Requirement**: required
 - **Group**: occurrence
 
-The normalized event occurrence time or the finding creation time.
+The primary timestamp of the event — when the activity actually occurred at the source. This does not capture when the event record was created or serialized by the source system; for event lifecycle timestamps such as ingestion and processing, use `metadata.logged_time` and `metadata.processed_time` respectively, or the equivalent attributes in the `metadata.loggers` array when recording pipeline stages. For aggregate events (`count` > 1), set this to `start_time` (the earliest OCSF `time` in the aggregate) to preserve causal ordering and consistent timeline alignment. Note: finding classes redefine `time` as the finding creation time rather than the activity occurrence time. This must be a UTC epoch value in milliseconds (e.g., `1776881335332`). Mappers should use the most precise and authoritative timestamp available from the source.
 
 ### `timezone_offset`
 
@@ -244,7 +240,7 @@ The normalized event occurrence time or the finding creation time.
 - **Requirement**: recommended
 - **Group**: occurrence
 
-The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080.
+The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080. This allows consumers to reconstruct the local time at the event source. For example, US Eastern Standard Time is `-300`. Populate this when the source provides local time zone information.
 
 ### `type_name`
 
@@ -252,7 +248,7 @@ The number of minutes that the reported event `time` is ahead or behind UTC, in 
 - **Requirement**: optional
 - **Group**: classification
 
-The event/finding type name, as defined by the type_uid.
+The event/finding type name, combining the class and activity (e.g., `"Detection Finding: Create"`). The value must match the `class_name` and `activity_name` joined by `": "`.
 
 ### `type_uid`
 
@@ -261,7 +257,7 @@ The event/finding type name, as defined by the type_uid.
 - **Group**: classification
 - **Sibling**: `type_name`
 
-The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.
 
 ### `unmapped`
 
@@ -269,4 +265,4 @@ The event/finding type ID. It identifies the event's semantics and structure. Th
 - **Requirement**: optional
 - **Group**: context
 
-The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.
+A container for source-specific attributes that do not map to any defined OCSF attribute. Use this to preserve valuable source data that would otherwise be lost during normalization. The keys and values are specific to the event source. Consumers should not rely on a stable structure within this field.

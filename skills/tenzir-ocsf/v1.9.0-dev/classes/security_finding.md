@@ -37,7 +37,7 @@ Security Finding events describe findings, detections, anomalies, alerts and/or 
 - `2`: `Update` - A security finding was updated.
 - `3`: `Close` - A security finding was closed.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `analytic`
 

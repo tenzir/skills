@@ -48,7 +48,7 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 - `9`: `Encrypt` - The 'Encrypt' activity involves securing data by encrypting a specific data record.
 - `10`: `Decrypt` - The 'Decrypt' activity involves converting encrypted data back to its original format.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `actor`
 

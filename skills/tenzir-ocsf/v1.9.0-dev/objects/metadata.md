@@ -102,16 +102,14 @@ The event log schema version of the original event. For example the syslog versi
 - **Type**: `timestamp_t`
 - **Requirement**: optional
 
-The time when the logging system collected and logged the event.
-
-This attribute is distinct from the event time in that event time typically contain the time extracted from the original event. Most of the time, these two times will be different.
+The ultimate logged time in the event pipeline — when the event reached its final destination (e.g., SIEM, data lake). If `loggers` is populated, this should match the `logged_time` of the last entry in the `loggers` array. This is distinct from `time` (when the activity occurred) and `processed_time` (when an intermediate system processed the event).
 
 ### `loggers`
 
 - **Type**: [`logger`](logger.md)
 - **Requirement**: optional
 
-An array of Logger objects that describe the pipeline of devices and logging products between the event source and its eventual destination. Note, this attribute can be used when there is a complex end-to-end path of event flow and/or to track the chain of custody of the data.
+An ordered array of Logger objects describing each hop in the event pipeline between the source and its final destination. Each entry captures the logging product, device, and timestamps (`logged_time`, `transmit_time`) at that stage. The last entry's `logged_time` should match `metadata.logged_time`.
 
 ### `modified_time`
 
@@ -132,14 +130,14 @@ The unique identifier assigned to the event in its original logging system befor
 - **Type**: `string_t`
 - **Requirement**: recommended
 
-The original event time as reported by the event source. For example, the time in the original format from system event log such as Syslog on Unix/Linux and the System event file on Windows. Omit if event is generated instead of collected via logs.
+The original event time as reported by the event source, preserved as a pass-through string in its native format (e.g., Syslog timestamp, Windows event time). This is not normalized to `timestamp_t` — the normalized equivalent is the base event `time` attribute. Omit if the event is generated rather than collected via logs.
 
 ### `processed_time`
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
 
-The event processed time, such as an ETL operation.
+The time when the event was processed by an intermediate system (e.g., ETL pipeline, event processor) before reaching its final destination. Can be used with `logged_time` to calculate queuing duration via `total_queued_duration`.
 
 ### `product`
 

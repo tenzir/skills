@@ -13,7 +13,6 @@ The Finding event is a generic event that defines a set of attributes available 
 - `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
-- `time` (required)
 - `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
@@ -34,13 +33,13 @@ The Finding event is a generic event that defines a set of attributes available 
 - `2`: `Update` - A finding was updated.
 - `3`: `Close` - A finding was closed.
 
-The normalized identifier of the finding activity.
+The normalized identifier of the finding activity. Use `1` (Create) when a finding is first generated, `2` (Update) when an existing finding is modified (e.g., severity change, new evidence), and `3` (Close) when a finding is resolved or dismissed.
 
 ### `activity_name`
 
 - **Type**: `string_t`
 
-The finding activity name, as defined by the `activity_id`.
+The finding activity name, as defined by the `activity_id`. When `activity_id` is `99` (Other), this must contain the source-specific activity label.
 
 ### `comment`
 
@@ -98,7 +97,7 @@ e.g. Specific details about an AWS EC2 instance, that is affected by the Finding
 - **Type**: `timestamp_t`
 - **Requirement**: optional
 
-The time of the most recent event included in the finding.
+The time of the most recent event or finding that contributed to this finding.
 
 ### `finding_info`
 
@@ -113,7 +112,13 @@ Describes the supporting information about a generated finding.
 - **Type**: `timestamp_t`
 - **Requirement**: optional
 
-The time of the least recent event included in the finding.
+The time of the earliest event or finding that contributed to this finding.
+
+### `time`
+
+- **Type**: `timestamp_t`
+
+The finding creation time — when the finding was first generated, not when the underlying activity occurred. For the time range of contributing events, use `start_time` and `end_time`.
 
 ### `status`
 
@@ -121,7 +126,7 @@ The time of the least recent event included in the finding.
 - **Requirement**: optional
 - **Group**: context
 
-The normalized status of the Finding set by the consumer normalized to the caption of the status_id value. In the case of 'Other', it is defined by the source.
+The finding lifecycle status label, normalized to the caption of the `status_id` value. When `status_id` is `99` (Other), this must contain the source-specific status label.
 
 ### `status_id`
 
@@ -139,7 +144,7 @@ The normalized status of the Finding set by the consumer normalized to the capti
 - `5`: `Archived` - The Finding was archived.
 - `6`: `Deleted` - The Finding was deleted. For example, it might have been created in error.
 
-The normalized status identifier of the Finding, set by the consumer.
+The normalized finding lifecycle status identifier. Unlike the status of an activity event, which indicates the success or failure of the activity, finding status tracks the review and triage workflow: whether the finding is new, being investigated, suppressed, or resolved. Producers should set this to reflect the current state of the finding in their system (e.g., `1` for newly created findings, `4` when remediated).
 
 ### `vendor_attributes`
 

@@ -50,7 +50,7 @@ Account Change events report when specific user account management tasks are per
 - `11`: `MFA Factor Disable` - One or more authentication factors were disabled for a user account.
 - `12`: `Unlock` - A user account was unlocked.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `auth_factors`
 

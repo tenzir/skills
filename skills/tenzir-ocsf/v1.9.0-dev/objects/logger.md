@@ -67,9 +67,7 @@ The event log schema version of the original event. For example the syslog versi
 - **Type**: `timestamp_t`
 - **Requirement**: recommended
 
-The time when the logging system collected and logged the event.
-
-This attribute is distinct from the event time in that event time typically contain the time extracted from the original event. Most of the time, these two times will be different.
+The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
 
 ### `name`
 

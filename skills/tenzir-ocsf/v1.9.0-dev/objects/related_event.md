@@ -71,7 +71,7 @@ The time when the related event/finding was last modified.
 - **Type**: [`observable`](observable.md)
 - **Requirement**: optional
 
-The observables associated with the event or a finding.
+The observables array surfaces key indicators and entities from the event or finding in a single, consistent location for downstream correlation and detection. Each entry references an attribute path within the event (e.g., `src_endpoint.ip`) along with its type and value, enabling consumers to extract IOCs without parsing the full event structure.
 
 ### `product`
 
@@ -92,7 +92,7 @@ The unique identifier of the product that reported the related event.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The event/finding severity, normalized to the caption of the `severity_id` value. In the case of 'Other', it is defined by the source.
+The event/finding severity label, normalized to the caption of the `severity_id` value. When `severity_id` is `99` (Other), this attribute must contain the source-specific severity label. For all other values, this should match the caption defined for that `severity_id` enum value (e.g., `"High"` for `severity_id: 4`).
 
 ### `severity_id`
 

@@ -34,7 +34,7 @@ Discovery Result events report the results of a discovery request.
 
 - `1`: `Query` - The discovered results are via a query request.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `query_info`
 

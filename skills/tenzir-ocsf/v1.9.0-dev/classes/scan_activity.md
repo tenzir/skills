@@ -44,7 +44,7 @@ Scan events report the start, completion, and results of a scan job. The scan ev
 - `9`: `Restarted` - The scan restarted from the beginning of the file enumeration.
 - `10`: `Delayed` - The user delayed the scan.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `command_uid`
 

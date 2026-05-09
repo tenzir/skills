@@ -1,6 +1,6 @@
 # Host (host)
 
-The attributes that identify host/device attributes.
+Adds host and actor context to event classes. Apply this profile when the event originates from or is observed on a specific host or device, and when the initiating user, process, or service is known. All event classes include this profile by default through the base event.
 
 ## Applies to
 
@@ -96,11 +96,11 @@ The attributes that identify host/device attributes.
 - **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
 
-The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
+The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
 
 ### `device`
 
 - **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
 
-An addressable device, computer system or host.
+The host or device where the activity was observed. Populate with details such as hostname, IP address, OS, and hardware identifiers when available from the source.

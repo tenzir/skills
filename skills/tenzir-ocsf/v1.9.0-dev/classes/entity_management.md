@@ -67,7 +67,7 @@ The access mask in a platform-native format.
 - `12`: `Suspend` - Suspend an existing managed entity.
 - `13`: `Resume` - Resume (unsuspend) an existing managed entity.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `comment`
 

@@ -40,7 +40,7 @@ Email Activity events report SMTP protocol and email activities including those 
 - `4`: `Trace` - Follow an email message as it travels through an organization. The `message_trace_uid` should be populated when selected.
 - `5`: `MTA Relay` - Email processed by an MTA, typically combining send, receive, and scan operations into a single activity.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `attempt`
 

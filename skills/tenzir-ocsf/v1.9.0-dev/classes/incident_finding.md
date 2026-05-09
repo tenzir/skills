@@ -19,7 +19,6 @@ Note: `Incident Finding` implicitly includes the `incident` profile and it shoul
 - `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
-- `time` (required)
 - `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
@@ -41,14 +40,14 @@ Note: `Incident Finding` implicitly includes the `incident` profile and it shoul
 - `2`: `Update` - Reports updates to an Incident.
 - `3`: `Close` - Reports closure of an Incident .
 
-The normalized identifier of the Incident activity.
+The normalized identifier of the incident activity. Use `1` (Create) when an incident is first opened, `2` (Update) when an existing incident is modified (e.g., new findings added, priority changed, assignee updated), and `3` (Close) when the incident is resolved.
 
 ### `activity_name`
 
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The Incident activity name, as defined by the `activity_id`.
+The incident activity name, as defined by the `activity_id`. When `activity_id` is `99` (Other), this must contain the source-specific activity label.
 
 ### `assignee`
 
@@ -128,7 +127,7 @@ The short description of the Incident.
 - **Type**: `timestamp_t`
 - **Requirement**: optional
 
-The time of the most recent event included in the incident.
+The time of the most recent event or finding that contributed to this incident.
 
 ### `finding_info_list`
 
@@ -219,7 +218,13 @@ A Url link used to access the original incident.
 - **Type**: `timestamp_t`
 - **Requirement**: optional
 
-The time of the least recent event included in the incident.
+The time of the earliest event or finding that contributed to this incident.
+
+### `time`
+
+- **Type**: `timestamp_t`
+
+The incident creation time — when the incident was first opened, not when the underlying activity occurred. For the time range of contributing events, use `start_time` and `end_time`.
 
 ### `status`
 
@@ -227,7 +232,7 @@ The time of the least recent event included in the incident.
 - **Requirement**: recommended
 - **Group**: primary
 
-The normalized status of the Incident normalized to the caption of the status_id value. In the case of 'Other', it is defined by the source.
+The incident lifecycle status label, normalized to the caption of the `status_id` value. When `status_id` is `99` (Other), this must contain the source-specific status label.
 
 ### `status_id`
 
@@ -244,7 +249,7 @@ The normalized status of the Incident normalized to the caption of the status_id
 - `4`: `Resolved` - The service desk has confirmed that the incident is resolved.
 - `5`: `Closed` - The incident is resolved and no further action is necessary.
 
-The normalized status identifier of the Incident.
+The normalized incident lifecycle status identifier. This tracks the incident management workflow from initial triage through resolution. Producers should set this to reflect the current state in their incident management system.
 
 ### `ticket`
 

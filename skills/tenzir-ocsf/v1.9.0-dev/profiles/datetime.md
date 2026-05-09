@@ -1,6 +1,6 @@
 # Date/Time (datetime)
 
-This profile defines date/time attributes as defined in RFC-3339. For example 1985-04-12T23:20:50.52Z.
+When applied, this profile adds a sibling attribute of data type `datetime_t` (RFC-3339 string) wherever a `timestamp_t` attribute appears in the event class. This provides human-readable date/time representations alongside the epoch-millisecond timestamps. For example, `time` (`timestamp_t`) would gain a `time_dt` (`datetime_t`) sibling such as `"1985-04-12T23:20:50.52Z"`.
 
 
 ## Applies to

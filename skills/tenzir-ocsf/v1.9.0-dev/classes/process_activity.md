@@ -47,7 +47,7 @@ Process Activity events report when a process launches, injects, opens or termin
 - `4`: `Inject` - A request by the actor to execute code within the context of a process. The target is usually a different process but this activity can also be reflexive. Refer to the `injection_type_id` attribute for details of the specific injection type.
 - `5`: `Set User ID` - A request by the actor to change its user identity by invoking the `setuid()` system call. Common programs like `su` and `sudo` use this mechanism. Note that the impersonation mechanism on Windows is not directly equivalent because it acts at the thread level.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `actor`
 

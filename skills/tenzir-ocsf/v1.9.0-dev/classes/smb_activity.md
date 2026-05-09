@@ -51,7 +51,7 @@ Server Message Block (SMB) Protocol Activity events report client/server connect
 - `5`: `File Overwrite` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and fails if it doesn't).
 - `6`: `File Overwrite If` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and created otherwise)
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `client_dialects`
 

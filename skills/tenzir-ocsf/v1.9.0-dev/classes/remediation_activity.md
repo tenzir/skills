@@ -84,4 +84,4 @@ The remediation scan that pertains to this event.
 - `5`: `Unsupported` - The remediation was not supported.
 - `6`: `Error` - There was an error during the remediation process.
 
-The normalized identifier of the event status.
+The normalized status identifier. See specific usage.

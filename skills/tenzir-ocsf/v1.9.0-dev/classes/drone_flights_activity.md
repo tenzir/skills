@@ -47,7 +47,7 @@ Drone Flights Activity events report the activity of Unmanned Aerial Systems (UA
 - `2`: `Record` - Unmanned System activity is being recorded.
 - `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `auth_protocol`
 

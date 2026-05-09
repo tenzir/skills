@@ -46,7 +46,7 @@ Group Management events report management updates to a group, including updates 
 - `7`: `Add Subgroup` - Add subgroup to a group.
 - `8`: `Remove Subgroup` - Remove subgroup from a group.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `group`
 

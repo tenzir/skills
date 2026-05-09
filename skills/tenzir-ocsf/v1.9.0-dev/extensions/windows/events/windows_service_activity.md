@@ -50,7 +50,7 @@ Windows Service Activity events report when a process interacts with the Service
 - `6`: `Continue` - A paused service is continued, for example by calling `ControlService` or `ControlServiceEx`. Refer to the `win_service` attribute for details.
 - `7`: `Delete` - A service is deleted, for example by calling `DeleteService`. Refer to the `win_service` attribute for details.
 
-The normalized identifier of the activity that triggered the event.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `win_service`
 
