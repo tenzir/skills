@@ -5,27 +5,27 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 🗂️ Skills
 
-### 🛡️ Users
+### 🛡️ Tenzir Users
 
-| Skill                         | Description                                                                      |
-| ----------------------------- | -------------------------------------------------------------------------------- |
-| `tenzir-docs`                 | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
-| `tenzir-ocsf`                 | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
-| `tenzir-create-parser-package` | Scaffold a parser package from sample log data                                  |
-| `tenzir-create-ocsf-mapping`   | Create OCSF mapping operators for a parser package                              |
+| Skill                          | Description                                                                      |
+| ------------------------------ | -------------------------------------------------------------------------------- |
+| `tenzir-docs`                  | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
+| `tenzir-ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
+| `tenzir-create-parser-package` | Scaffold a parser package from sample log data                                   |
+| `tenzir-create-ocsf-mapping`   | Create OCSF mapping operators for a parser package                               |
 
-### 🏗️ Contributors
+### 🏗️ Tenzir Contributors
 
-| Skill                               | Description                                                           |
-| ----------------------------------- | --------------------------------------------------------------------- |
-| `tenzir-commit-changes`             | Stage, split, and commit changes with clean messages                  |
-| `tenzir-create-pull-requests`       | Open PRs, add changelog entries, cross-link docs PRs                  |
-| `tenzir-follow-python-conventions`  | Python toolchain standards — uv, ruff, mypy, pytest                   |
-| `tenzir-review-changes`             | Code review with severity ratings and structured findings             |
-| `tenzir-design-system`              | Frontend design tokens, components, and brand assets                  |
-| `tenzir-ship`                       | Changelog entries, release notes, and GitHub releases                 |
-| `tenzir-update-docs`                | Coordinate docs.tenzir.com updates alongside code changes             |
-| `tenzir-technical-writing`          | Technical documentation style following Google's developer docs guide |
+| Skill                              | Description                                                           |
+| ---------------------------------- | --------------------------------------------------------------------- |
+| `tenzir-commit-changes`            | Stage, split, and commit changes with clean messages                  |
+| `tenzir-create-pull-requests`      | Open PRs, add changelog entries, cross-link docs PRs                  |
+| `tenzir-follow-python-conventions` | Python toolchain standards — uv, ruff, mypy, pytest                   |
+| `tenzir-review-changes`            | Code review with severity ratings and structured findings             |
+| `tenzir-design-system`             | Frontend design tokens, components, and brand assets                  |
+| `tenzir-ship`                      | Changelog entries, release notes, and GitHub releases                 |
+| `tenzir-update-docs`               | Coordinate docs.tenzir.com updates alongside code changes             |
+| `tenzir-technical-writing`         | Technical documentation style following Google's developer docs guide |
 
 ## 📦 Install
 

@@ -1,7 +1,7 @@
 {
   "plugins": [
     {
-      "name": "🛡️ Users",
+      "name": "🛡️ Tenzir Users",
       "skills": [
         "./skills/tenzir-docs",
         "./skills/tenzir-ocsf",
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "name": "🏗️ Contributors",
+      "name": "🏗️ Tenzir Contributors",
       "skills": [
         "./skills/tenzir-commit-changes",
         "./skills/tenzir-create-pull-requests",
