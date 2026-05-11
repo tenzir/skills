@@ -1558,6 +1558,14 @@ uint(4.2)
 
 ### Introspection
 
+### [internal\_memory\_size](functions/internal_memory_size.md)
+
+Estimates the internal memory size of a value in bytes.
+
+```tql
+internal_memory_size(this)
+```
+
 ### [type\_id](functions/type_id.md)
 
 Retrieves the type id of an expression.

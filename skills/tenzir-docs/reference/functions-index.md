@@ -243,6 +243,7 @@
 - [subnet](functions/subnet.md): Converts an expression to a subnet value.
 - [time](functions/time.md): Casts an expression to a time value.
 - [uint](functions/uint.md): Casts an expression to an unsigned integer.
+- [internal_memory_size](functions/internal_memory_size.md): Estimates the internal memory size of a value in bytes.
 - [type_id](functions/type_id.md): Retrieves the type id of an expression.
 - [type_of](functions/type_of.md): Retrieves the type definition of an expression.
 - [flatten](functions/flatten.md): Flattens nested data.
