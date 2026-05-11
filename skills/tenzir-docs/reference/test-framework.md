@@ -106,18 +106,19 @@ Useful options:
 * `--purge`: Remove generated artifacts (diffs, text outputs) from previous runs.
 * `--jobs N`: Control concurrency (`4 * CPU cores` by default).
 * `--coverage` and `--coverage-source-dir`: Enable LLVM coverage.
-* `-k`, `--keep`: Preserve per-test scratch directories instead of deleting them (same as setting `TENZIR_KEEP_TMP_DIRS=1`).
+* `--keep`: Preserve per-test scratch directories instead of deleting them (same as setting `TENZIR_KEEP_TMP_DIRS=1`).
 * `--package-dirs <path>`: Extra package directories for Tenzir binaries. Repeatable and accepts comma-separated lists. Entries merge with any `package-dirs:` declared in directory `test.yaml` files, then get normalized, de-duplicated, and exported via `TENZIR_PACKAGE_DIRS`.
 * `--debug`: Emit framework-level diagnostics (fixture lifecycle, discovery notes, comparison targets, etc.) and automatically enable verbose output so you see all test results (pass/skip/fail) instead of only failures. The same mode is available via `TENZIR_TEST_DEBUG=1`.
 * `--summary`: Print the tabular breakdown and failure tree after each project.
 * `--diff/--no-diff`: Toggle unified diff output for failed comparisons. Diffs are shown by default; disable them when you only need aggregated statistics.
 * `--diff-stat/--no-diff-stat`: Show (or suppress) the per-file change counter, which summarises additions and deletions even when the diff body is hidden.
-* `-p`, `--passthrough`: Stream raw stdout/stderr to the terminal instead of comparing against reference artifacts. The harness forces single-job execution (overriding `--jobs` when necessary) and ignores `--update` while passthrough is active. Passthrough mode automatically enables verbose output.
-* `-v`, `--verbose`: Print individual test results as they complete. By default (quiet mode) the harness only shows failures and a compact summary, significantly reducing noise for large test suites. Verbose mode displays passing and skipped tests alongside failures. Use `--summary` together with `--verbose` to include the tree summary at the end of the run.
+* `--passthrough`: Stream raw stdout/stderr to the terminal instead of comparing against reference artifacts. The harness forces single-job execution (overriding `--jobs` when necessary) and ignores `--update` while passthrough is active. Passthrough mode automatically enables verbose output.
+* `--verbose`: Print individual test results as they complete. By default (quiet mode) the harness only shows failures and a compact summary, significantly reducing noise for large test suites. Verbose mode displays passing and skipped tests alongside failures. Use `--summary` together with `--verbose` to include the tree summary at the end of the run.
 * `--run-skipped`: Run all skipped tests unconditionally. Both static skips (`skip: reason`) and conditional skips (`skip: {on: fixture-unavailable}`) are bypassed. When a fixture raises `FixtureUnavailable` and `--run-skipped` is active, the exception propagates as a hard failure instead of being caught. This is the sledgehammer approach---use it when you want to force every skipped test to execute regardless of its skip reason.
 * `--run-skipped-reason`: Selectively run skipped tests whose reason matches a substring or glob pattern. Bare strings match as substrings; patterns containing `*`, `?`, or `[` use fnmatch syntax---the same matching semantics as `--match`. Repeatable; a test runs if its skip reason matches any provided pattern. The match applies to the final displayed reason, including the `fixture unavailable:` prefix for conditional skips. When both `--run-skipped` and `--run-skipped-reason` are provided, `--run-skipped` takes precedence and all skipped tests run. When no skipped tests match the reason filters, the harness prints a diagnostic message.
-* `-a`, `--all-projects`: Run the root project together with any satellites provided on the command line.
-* `-m`, `--match`: Select tests whose relative path matches a substring or glob pattern. Bare strings (without `*`, `?`, or `[`) match as substrings, so `-m mysql` selects any test with “mysql” anywhere in its path. Patterns containing glob metacharacters use fnmatch syntax. Repeatable; tests matching any pattern are selected. When combined with positional TEST paths, only tests matching both are run (intersection).
+* `--all-projects`: Run the root project together with any satellites provided on the command line.
+* `--match`: Select tests whose relative path matches a substring or glob pattern. Bare strings (without `*`, `?`, or `[`) match as substrings, so `--match mysql` selects any test with “mysql” anywhere in its path. Patterns containing glob metacharacters use fnmatch syntax. Repeatable; tests matching any pattern are selected. When combined with positional TEST paths, only tests matching both are run (intersection).
+* `--fixture-tag`: Select tests that request fixtures with the given tag. Repeatable; tests matching any tag are selected. When combined with positional TEST paths or `--match` patterns, only tests matching all selectors are run (intersection). Use `--fixture-tag container` to run tests backed by container fixtures, or `--fixture-tag docker-compose` to run tests using the built-in Docker Compose fixture.
 * `--fixture`: Activate fixtures in standalone foreground mode without running tests. Repeatable. Accepts bare names (`--fixture mysql`) or YAML mapping specs (`--fixture 'kafka: {port: 9092}'`). When provided, positional TEST arguments are not allowed. See the [run fixtures](../guides/testing/run-fixtures.md) guide.
 * `--no-hooks`: Disable project hook loading and invocation. Use this when you need to recover from a broken hook or compare behavior without hook side effects.
 
@@ -338,33 +339,71 @@ uvx tenzir-test tests/alerts ../contrib/plugins/*/tests
 
 ### Filter tests by pattern
 
-Use `-m`/`--match` to select tests by matching against their relative path. Bare strings default to substring matching, so you can write short keywords without glob syntax:
+Use `--match` to select tests by matching against their relative path. Bare strings default to substring matching, so you can write short keywords without glob syntax:
 
 ```sh
-uvx tenzir-test -m mysql         # runs every test with "mysql" in its path
-uvx tenzir-test -m connect       # runs every test with "connect" in its path
+uvx tenzir-test --match mysql         # runs every test with "mysql" in its path
+uvx tenzir-test --match connect       # runs every test with "connect" in its path
 ```
 
 Patterns containing glob metacharacters (`*`, `?`, `[`) still use fnmatch syntax, which is fully backwards-compatible:
 
 ```sh
-uvx tenzir-test -m '*mysql*'             # equivalent to -m mysql
-uvx tenzir-test -m 'tests/*/connect.tql' # glob with wildcard
+uvx tenzir-test --match '*mysql*'             # equivalent to --match mysql
+uvx tenzir-test --match 'tests/*/connect.tql' # glob with wildcard
 ```
 
 Repeat the flag to match multiple patterns (logical OR):
 
 ```sh
-uvx tenzir-test -m context -m create     # tests matching either substring
+uvx tenzir-test --match context --match create     # tests matching either substring
 ```
 
-When you combine positional TEST paths with `-m` patterns, the harness runs only tests that satisfy both constraints (intersection):
+When you combine positional TEST paths with `--match` patterns, the harness runs only tests that satisfy both constraints (intersection):
 
 ```sh
-uvx tenzir-test tests/integrations/ -m mysql  # only mysql tests under integrations/
+uvx tenzir-test tests/integrations/ --match mysql  # only mysql tests under integrations/
 ```
 
 If a matched test belongs to a suite (configured via `test.yaml`), all tests in that suite are included automatically so the shared fixture lifecycle stays intact.
+
+### Filter tests by fixture tag
+
+Use `--fixture-tag` to select tests by metadata inherited from their requested fixtures:
+
+```sh
+uvx tenzir-test --fixture-tag container
+uvx tenzir-test --fixture-tag docker-compose
+```
+
+Fixture tags are cumulative. The built-in `docker-compose` fixture has both the `container` and `docker-compose` tags, so `--fixture-tag container` includes Docker Compose tests and `--fixture-tag docker-compose` selects only tests that request the Docker Compose fixture.
+
+Repeat the flag to match any tag:
+
+```sh
+uvx tenzir-test --fixture-tag container --fixture-tag node
+```
+
+Combine fixture tags with positional paths or `--match` patterns to narrow the selection:
+
+```sh
+uvx tenzir-test tests/integrations/ --match kafka --fixture-tag container
+```
+
+The harness infers tags from tagged fixture abstractions. Fixtures that use `tenzir_test.fixtures.container_runtime` inherit the `container` tag automatically. Fixtures that use custom abstractions can pass explicit tags at registration time:
+
+```python
+from tenzir_test import fixture
+
+
+
+
+@fixture(name="localstack", tags=("container", "localstack"))
+def localstack():
+    ...
+```
+
+If a selected test belongs to a suite, the harness includes every test in that suite to keep the shared fixture lifecycle intact.
 
 ### Run multiple projects with one command
 
@@ -454,7 +493,7 @@ The harness cycles between three internal modes:
 
 * `HarnessMode.COMPARE` – default behavior; compare actual output with stored baselines.
 * `HarnessMode.UPDATE` – engaged when you pass `--update`; runners should overwrite reference files.
-* `HarnessMode.PASSTHROUGH` – enabled via `-p/--passthrough`; stream output directly without touching baselines.
+* `HarnessMode.PASSTHROUGH` – enabled via `--passthrough`; stream output directly without touching baselines.
 
 `get_harness_mode()` returns the current enum value so custom runners can adapt logic if needed.
 
@@ -810,7 +849,9 @@ In this form, an unavailable fixture skips only that test. Suite fixture skips r
 
 ### Container runtime helpers
 
-The `tenzir_test.fixtures.container_runtime` module provides shared building blocks for fixtures that manage containers directly (without Docker Compose): runtime detection, detached container startup, readiness polling, and lifecycle management. The built-in `docker-compose` fixture uses these helpers internally.
+The `tenzir_test.fixtures.container_runtime` module provides shared building blocks for fixtures that manage containers directly (without Docker Compose): runtime detection, detached container startup, readiness polling, and lifecycle management. Fixtures that use these helpers inherit the `container` fixture tag, so you can select their tests with `tenzir-test --fixture-tag container`.
+
+The built-in `docker-compose` fixture has both the `container` and `docker-compose` tags. Use `tenzir-test --fixture-tag docker-compose` when you want only tests that request that fixture.
 
 See the [create fixtures](../guides/testing/create-fixtures.md#use-container-runtime-helpers) guide for a step-by-step walkthrough.
 

@@ -17,7 +17,7 @@ The harness discovers tests under `tests/`, runs them against their baselines, a
 
 ## Control output
 
-Add `--verbose` (`-v`) to see passing and skipped tests as they complete:
+Add `--verbose` to see passing and skipped tests as they complete:
 
 ```sh
 uvx tenzir-test --verbose
@@ -31,7 +31,7 @@ Add `--summary` together with `--verbose` when you also want the tabular breakdo
 uvx tenzir-test --verbose --summary
 ```
 
-Use `--passthrough` (`-p`) to stream raw stdout/stderr to the terminal instead of comparing against baselines. This is useful during early iterations when you want to inspect command output before recording reference artifacts:
+Use `--passthrough` to stream raw stdout/stderr to the terminal instead of comparing against baselines. This is useful during early iterations when you want to inspect command output before recording reference artifacts:
 
 ```sh
 uvx tenzir-test --passthrough tests/high-severity.tql
@@ -55,35 +55,55 @@ uvx tenzir-test tests/alerts tests/parsing/csv.tql
 
 ### By name pattern
 
-Use `-m`/`--match` to select tests whose relative path contains a given substring:
+Use `--match` to select tests whose relative path contains a given substring:
 
 ```sh
-uvx tenzir-test -m context
+uvx tenzir-test --match context
 ```
 
-Bare strings without glob metacharacters perform a **substring match** against the test’s relative POSIX path from the project root. For example, `-m mysql` matches any test whose path contains `mysql`, such as `tests/mysql/connect.tql`. This means you no longer need to wrap the keyword in wildcards---`-m mysql` works the same as `-m '*mysql*'`.
+Bare strings without glob metacharacters perform a **substring match** against the test’s relative POSIX path from the project root. For example, `--match mysql` matches any test whose path contains `mysql`, such as `tests/mysql/connect.tql`. This means you no longer need to wrap the keyword in wildcards---`--match mysql` works the same as `--match "*mysql*"`.
 
 Patterns containing `*`, `?`, or `[` still use [fnmatch](https://docs.python.org/3/library/fnmatch.html) glob syntax with case-sensitive comparison, so existing glob patterns continue to work:
 
 ```sh
-uvx tenzir-test -m 'tests/*/connect.tql'
+uvx tenzir-test --match 'tests/*/connect.tql'
 ```
 
 Multiple patterns act as an OR filter---a test runs if it matches any pattern:
 
 ```sh
-uvx tenzir-test -m create -m update
+uvx tenzir-test --match create --match update
 ```
 
-You can combine `-m` with positional paths. The harness intersects both selections, so only tests matching both the path selection and a pattern are run. This lets you narrow a directory to a subset of its tests:
+You can combine `--match` with positional paths. The harness intersects both selections, so only tests matching both the path selection and a pattern are run. This lets you narrow a directory to a subset of its tests:
 
 ```sh
-uvx tenzir-test tests/context/ -m create
+uvx tenzir-test tests/context/ --match create
 ```
 
 Suite expansion
 
 If a matched test belongs to a suite (configured via `test.yaml`), all tests in that suite are included automatically. Empty and whitespace-only patterns are silently ignored.
+
+### By fixture tag
+
+Use `--fixture-tag` to select tests by the fixtures they request:
+
+```sh
+uvx tenzir-test --fixture-tag container
+```
+
+The harness assigns fixture tags from the abstractions that fixtures use. For example, fixtures that use `tenzir_test.fixtures.container_runtime` inherit the `container` tag. The built-in Docker Compose fixture has both the `container` and `docker-compose` tags:
+
+```sh
+uvx tenzir-test --fixture-tag docker-compose
+```
+
+Repeat `--fixture-tag` to match any tag. Combine it with paths and `--match` to narrow the selection:
+
+```sh
+uvx tenzir-test tests/integrations/ --match kafka --fixture-tag container
+```
 
 ## Retry flaky tests
 
