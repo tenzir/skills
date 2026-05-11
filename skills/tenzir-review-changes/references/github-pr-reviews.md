@@ -1,8 +1,7 @@
 # GitHub pull request reviews
 
-Use this reference when you review a GitHub pull request that already has
-review comments or unresolved threads, or when the user asks how to respond on
-GitHub.
+Use this reference when you review a GitHub pull request that has
+review comments or unresolved threads.
 
 Read this alongside [reviewer feedback](reviewer-feedback.md). That file covers
 how to evaluate prior feedback in general. This file covers GitHub-specific
@@ -25,7 +24,7 @@ Before you review the latest diff:
 
 ## Decide what to do with each thread
 
-Every open thread needs one of these outcomes:
+Every open thread needs one of the following outcomes.
 
 ### Resolve directly
 
@@ -56,21 +55,25 @@ Use this when:
 
 ### Respectfully disagree
 
-Explain the constraint or tradeoff, keep the thread open, and let the reviewer
-close it unless they explicitly ask you to resolve it. Give concrete reasoning.
+Explain the constraint or tradeoff with concrete reasoning. Keep the thread
+open when the disagreement still needs reviewer input. Resolve it only when the
+reviewer has already accepted the explanation or the user explicitly asks you to
+close the disagreement.
 
 ## Thread resolution
 
 - Resolve a thread after the fix is pushed or the discussion is genuinely
-  complete.
+  complete. Treat this as the default final step for fixed or fully answered
+  GitHub review feedback.
 - Reply before resolving when the change benefits from explanation or when team
   norms expect a reply.
-- Leave open disagreements with the reviewer and add a concise explanation of
-  the constraint or tradeoff.
+- Leave open only active concerns, unresolved disagreements, ambiguous comments,
+  threads that need a reviewer decision, and threads you cannot resolve with the
+  available GitHub permissions.
 - Keep active concerns open, report them as findings, and include the next step
   needed to close them.
 - Treat the review feedback as complete when every unresolved reviewer comment
-  has a recorded outcome: replied, resolved, or intentionally left open for
+  has a recorded outcome: resolved, replied and intentionally left open for
   reviewer input.
 
 ## What good GitHub handling looks like
@@ -123,13 +126,3 @@ matches the rest of the module.
 I kept these two branches separate because the retry path needs the extra metric
 emission. Happy to revisit if you want a larger refactor.
 ```
-
-## Good review hygiene
-
-- Re-check each GitHub comment against the latest code and current thread state.
-- Report comments from earlier review rounds as active only when the underlying
-  concern remains in the latest diff.
-- Leave reviewer disagreements open with a concise explanation or clarification
-  question.
-- Group duplicate comments that point to the same root cause.
-- Write replies that are short, factual, and tied to the fix or tradeoff.
