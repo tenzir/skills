@@ -8,10 +8,7 @@ description: >-
   requested changes, replying to reviewers, resolving GitHub review threads, or
   verifying that review feedback has a final state. Also use this skill whenever
   the user says "review", "look at this PR", "check my changes", "audit this
-  diff", "address the PR feedback", "resolve review comments", "what do you
-  think of this code", or asks for feedback on any code they've written or
-  changed — including prompts that describe the work without saying "code
-  review."
+  diff", "address the review findings", or "resolve PR comments".
 ---
 
 # Review Changes
@@ -28,12 +25,14 @@ Follow this sequence to produce a thorough, efficient review:
 2. **Load prior-feedback guidance when needed.** If the review already has
    comments or notes, read `references/reviewer-feedback.md` before reviewing
    the diff so you can check whether that feedback still applies and how to
-   respond to it. When the user asks to address existing GitHub review
-   feedback, collect the active comments first, track each open thread, map each
-   still-valid concern to the relevant technical lens, and carry that list
-   through implementation, replies, and final thread state. On GitHub pull
-   requests, also read `references/github-pr-reviews.md` for thread state,
-   reply, and resolution guidance.
+   respond to it. Treat requests to address review findings, PR feedback,
+   review comments, requested changes, or an end-to-end review follow-up as
+   requests to handle existing GitHub review feedback when the change is on a
+   GitHub pull request. Collect the active comments first, track each open
+   thread, map each still-valid concern to the relevant technical lens, and
+   carry that list through implementation, replies, and final thread state. On
+   GitHub pull requests, also read `references/github-pr-reviews.md` for thread
+   state, reply, and resolution guidance.
 3. **Scan for scope.** Skim the full diff to understand what areas it touches —
    files, modules, layers. This determines which lenses to load.
 4. **Select lenses.** Use the table below to pick the relevant technical
@@ -46,10 +45,15 @@ Follow this sequence to produce a thorough, efficient review:
    Multiple symptoms in different files may share one underlying problem —
    present those as a grouped finding instead of separate entries.
 7. **Close out requested review feedback.** When the task includes addressing
-   PR comments, implement the accepted changes, run the relevant checks, then
-   revisit the list of open threads. Post concise replies where context helps,
-   resolve threads whose concerns are fixed or fully answered, and leave threads
-   that need reviewer input with a clear question or tradeoff explanation.
+   review findings, PR comments, requested changes, or PR feedback, implement
+   the accepted changes, run the relevant checks, then revisit the list of open
+   threads. Resolve each thread whose concern is fixed or fully answered; do
+   this as part of the task rather than treating resolution as a separate
+   permission step. Post concise replies before resolving when context helps.
+   Leave a thread open only when it still needs a reviewer decision, has an
+   unresolved disagreement, is ambiguous, or cannot be resolved with the
+   available GitHub permissions; in that case, add a clear question or tradeoff
+   explanation.
 8. **Write up the review** using the report structure below: H1, short
    introduction, `## Overview`, `## Findings`, and `## Verdict`.
 9. **Produce a verdict** in the final section.
@@ -232,12 +236,12 @@ Load only the lenses that matter for the current diff:
 
 ## Prior Reviewer Feedback
 
-When the change already has review comments or the user asks how to respond,
-read [reviewer feedback](references/reviewer-feedback.md). Use that input to
-sharpen findings, verify whether comments still apply, and draft concise
-responses after the technical review is complete. Carry prior feedback into
-the review by translating each still-valid concern into the appropriate
-technical finding.
+When the change already has review comments, the user asks how to respond, or
+the user asks to address review findings, read
+[reviewer feedback](references/reviewer-feedback.md). Use that input to sharpen
+findings, verify whether comments still apply, and draft concise responses
+after the technical review is complete. Carry prior feedback into the review by
+translating each still-valid concern into the appropriate technical finding.
 
 ### GitHub pull requests
 
@@ -249,4 +253,7 @@ reviewing the diff. Surface each still-valid concern as the appropriate
 technical finding, and add a `Source` line that links directly to the GitHub
 comment. When the user asks to address comments, finish with a thread-by-thread
 summary that records the implemented fix or response, the GitHub action taken,
-and any thread left open for reviewer input.
+and any thread left open for reviewer input. Apply the same closeout when the
+user says to address review findings, PR feedback, requested changes, or to
+handle the review end-to-end. A fixed or fully answered thread should normally
+have the GitHub action `resolved`, not merely `replied`.
