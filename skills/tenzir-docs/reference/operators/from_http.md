@@ -246,7 +246,6 @@ This retries transient transport failures and HTTP `429` and `5xx` responses up 
 * [`http`](/reference/operators/http.md)
 * [`to_http`](/reference/operators/to_http.md)
 * [`serve_http`](/reference/operators/serve_http.md)
-* [`serve`](/reference/operators/serve.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)

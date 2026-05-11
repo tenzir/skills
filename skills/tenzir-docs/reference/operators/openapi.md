@@ -23,4 +23,3 @@ write_yaml
 ## See Also
 
 * [`api`](/reference/operators/api.md)
-* [`serve`](/reference/operators/serve.md)

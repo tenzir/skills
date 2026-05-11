@@ -60,7 +60,7 @@ Auto-completion of pipelines
 
 If you look carefully, you’ll note that the above pipeline doesn’t end with an *output operator*. Just an input (`export`) and a transformation (`taste`). But for a [pipeline](../explanations/pipeline.md) to be well-formed, it must have at least one input and one output. Otherwise data would leak somewhere! So what’s happening?
 
-If you don’t write an output operator in the Explorer, the platform auto-completes the [`serve`](/reference/operators/serve.md) operator, turning your pipeline into a tiny REST API, so that platform can extract events from it and show them to you in the browser.
+If you don’t write an output operator in the Explorer, the platform auto-completes the pipeline so that it can extract events and show them to you in the browser.
 
 Also note the **Schemas** pane. It gives you an overview of how heterogeneous the data is. Click on a schema to zoom into all events having the same shape. Later, you’ll learn to normalize the data to make it more homogeneous by reducing the number of unique schemas.
 

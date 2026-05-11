@@ -8,7 +8,7 @@ TQL **programs** compose [statements](statements.md) into complete data processi
 
 Pipeline Auto-Completion
 
-When a pipeline is not closed, Tenzir attempts to *auto-complete* it. On the [command line](../guides/basic-usage/run-pipelines.md#on-the-command-line), it suffices to write a sequence of transformations because Tenzir automatically adds a JSON input operator at the beginning and TQL output operator at the end. In the [web inteface](../guides/basic-usage/run-pipelines.md#in-the-platform), auto-completetion takes place with an output operator: The web app appends [`serve`](/reference/operators/serve.md) to turn the dataflow into a REST API, allowing your browser to access it by routing the data through the platform.
+When a pipeline is not closed, Tenzir attempts to *auto-complete* it. On the [command line](../guides/basic-usage/run-pipelines.md#on-the-command-line), it suffices to write a sequence of transformations because Tenzir automatically adds a JSON input operator at the beginning and TQL output operator at the end. In the [web interface](../guides/basic-usage/run-pipelines.md#in-the-platform), auto-completion takes place with an output operator so that your browser can access the pipeline output through the platform.
 
 ## Statement chaining
 

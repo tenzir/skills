@@ -129,7 +129,6 @@
 - [local](operators/local.md): Forces a pipeline to run locally.
 - [measure](operators/measure.md): Replaces the input with metrics describing the input.
 - [remote](operators/remote.md): Forces a pipeline to run remotely at a node.
-- [serve](operators/serve.md): Make events available under the `/serve` REST API endpoint
 - [strict](operators/strict.md): Treats all warnings as errors.
 - [unordered](operators/unordered.md): Removes ordering assumptions from a pipeline.
 

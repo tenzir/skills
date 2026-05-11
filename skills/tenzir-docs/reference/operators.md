@@ -781,14 +781,6 @@ Forces a pipeline to run remotely at a node.
 remote { version }
 ```
 
-### [serve](operators/serve.md)
-
-Make events available under the `/serve` REST API endpoint
-
-```tql
-serve "abcde12345"
-```
-
 ### [strict](operators/strict.md)
 
 Treats all warnings as errors.
