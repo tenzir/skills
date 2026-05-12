@@ -1,5 +1,6 @@
 id: tenzir-skills
 name: Tenzir Skills
 description: >-
-  Skills for coding agents in the Tenzir ecosystem.
+  Reusable agent skills that help Tenzir users and contributors work with
+  documentation, code review, releases, and project workflows.
 repository: tenzir/skills
