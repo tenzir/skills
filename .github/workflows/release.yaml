@@ -57,7 +57,7 @@ jobs:
       pre-create: |
         set -euo pipefail
 
-        scripts/validate-skills --marketplace
+        uvx --from lefthook==2.1.6 lefthook run pre-push --all-files
       github_app_id: ${{ vars.TENZIR_GITHUB_APP_ID }}
       git_user_name: tenzir-bot
       git_user_email: engineering@tenzir.com

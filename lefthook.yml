@@ -1,0 +1,7 @@
+pre-push:
+  parallel: true
+  commands:
+    validate-skills:
+      run: scripts/validate-skills --marketplace
+    validate-changelog:
+      run: uvx tenzir-ship --root changelog validate
