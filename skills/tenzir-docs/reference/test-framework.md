@@ -118,7 +118,8 @@ Useful options:
 * `--run-skipped-reason`: Selectively run skipped tests whose reason matches a substring or glob pattern. Bare strings match as substrings; patterns containing `*`, `?`, or `[` use fnmatch syntax---the same matching semantics as `--match`. Repeatable; a test runs if its skip reason matches any provided pattern. The match applies to the final displayed reason, including the `fixture unavailable:` prefix for conditional skips. When both `--run-skipped` and `--run-skipped-reason` are provided, `--run-skipped` takes precedence and all skipped tests run. When no skipped tests match the reason filters, the harness prints a diagnostic message.
 * `--all-projects`: Run the root project together with any satellites provided on the command line.
 * `--match`: Select tests whose relative path matches a substring or glob pattern. Bare strings (without `*`, `?`, or `[`) match as substrings, so `--match mysql` selects any test with “mysql” anywhere in its path. Patterns containing glob metacharacters use fnmatch syntax. Repeatable; tests matching any pattern are selected. When combined with positional TEST paths, only tests matching both are run (intersection).
-* `--fixture-tag`: Select tests that request fixtures with the given tag. Repeatable; tests matching any tag are selected. When combined with positional TEST paths or `--match` patterns, only tests matching all selectors are run (intersection). Use `--fixture-tag container` to run tests backed by container fixtures, or `--fixture-tag docker-compose` to run tests using the built-in Docker Compose fixture.
+* `--fixture-name`: Select tests that request a fixture with the given name. Matching is case-sensitive and uses the configured fixture name, not fixture options. Repeatable; tests matching any selected fixture name or fixture tag are selected.
+* `--fixture-tag`: Select tests that request fixtures with the given tag. Repeatable; tests matching any selected fixture tag or fixture name are selected. When combined with positional TEST paths or `--match` patterns, only tests matching all selectors are run (intersection). Use `--fixture-tag container` to run tests backed by container fixtures, or `--fixture-tag docker-compose` to run tests using the built-in Docker Compose fixture.
 * `--fixture`: Activate fixtures in standalone foreground mode without running tests. Repeatable. Accepts bare names (`--fixture mysql`) or YAML mapping specs (`--fixture 'kafka: {port: 9092}'`). When provided, positional TEST arguments are not allowed. See the [run fixtures](../guides/testing/run-fixtures.md) guide.
 * `--no-hooks`: Disable project hook loading and invocation. Use this when you need to recover from a broken hook or compare behavior without hook side effects.
 
@@ -367,7 +368,16 @@ uvx tenzir-test tests/integrations/ --match mysql  # only mysql tests under inte
 
 If a matched test belongs to a suite (configured via `test.yaml`), all tests in that suite are included automatically so the shared fixture lifecycle stays intact.
 
-### Filter tests by fixture tag
+### Filter tests by fixture
+
+Use `--fixture-name` to select tests that request a fixture directly:
+
+```sh
+uvx tenzir-test --fixture-name node
+uvx tenzir-test --fixture-name docker-compose
+```
+
+Fixture-name matching is case-sensitive and uses the fixture name from the `fixtures` configuration, ignoring fixture options.
 
 Use `--fixture-tag` to select tests by metadata inherited from their requested fixtures:
 
@@ -378,17 +388,22 @@ uvx tenzir-test --fixture-tag docker-compose
 
 Fixture tags are cumulative. The built-in `docker-compose` fixture has both the `container` and `docker-compose` tags, so `--fixture-tag container` includes Docker Compose tests and `--fixture-tag docker-compose` selects only tests that request the Docker Compose fixture.
 
-Repeat the flag to match any tag:
+Repeat fixture selectors to match any selected fixture name or tag:
 
 ```sh
+uvx tenzir-test --fixture-name node --fixture-name sink
 uvx tenzir-test --fixture-tag container --fixture-tag node
+uvx tenzir-test --fixture-name node --fixture-tag container
 ```
 
-Combine fixture tags with positional paths or `--match` patterns to narrow the selection:
+Combine fixture selectors with positional paths or `--match` patterns to narrow the selection:
 
 ```sh
+uvx tenzir-test tests/integrations/ --match kafka --fixture-name docker-compose
 uvx tenzir-test tests/integrations/ --match kafka --fixture-tag container
 ```
+
+The fixture selector is separate from `--fixture`, which starts fixtures in standalone foreground mode without running tests.
 
 The harness infers tags from tagged fixture abstractions. Fixtures that use `tenzir_test.fixtures.container_runtime` inherit the `container` tag automatically. Fixtures that use custom abstractions can pass explicit tags at registration time:
 
