@@ -14,7 +14,6 @@
       "skills": [
         "./skills/tenzir-commit-changes",
         "./skills/tenzir-create-pull-requests",
-        "./skills/tenzir-follow-python-conventions",
         "./skills/tenzir-review-changes",
         "./skills/tenzir-design-system",
         "./skills/tenzir-ship",

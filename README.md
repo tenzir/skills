@@ -20,7 +20,6 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 | ---------------------------------- | --------------------------------------------------------------------- |
 | `tenzir-commit-changes`            | Stage, split, and commit changes with clean messages                  |
 | `tenzir-create-pull-requests`      | Open PRs, add changelog entries, cross-link docs PRs                  |
-| `tenzir-follow-python-conventions` | Python toolchain standards — uv, ruff, mypy, pytest                   |
 | `tenzir-review-changes`            | Code review with severity ratings and structured findings             |
 | `tenzir-design-system`             | Frontend design tokens, components, and brand assets                  |
 | `tenzir-ship`                      | Changelog entries, release notes, and GitHub releases                 |

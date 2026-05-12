@@ -6,10 +6,6 @@ description: >-
   creating fixup commits, or cleaning up commit history. Also use when the user
   says "commit this", "save my changes", "make a commit", or "write a better
   commit message."
-metadata:
-  requires:
-    skills:
-      - tenzir-follow-python-conventions
 ---
 
 # Commit Changes
@@ -22,8 +18,7 @@ Commit changes as clean, reviewable snapshots.
    make.
 2. Split orthogonal work into separate logical units. If a file mixes unrelated
    edits, stage only the hunks for the current commit.
-3. Run the relevant checks before committing. For Python projects, delegate to
-   the `tenzir-follow-python-conventions` skill. If you skip a check, say so.
+3. Run the relevant checks before committing. If you skip a check, say so.
 4. For each commit:
    - Stage only the relevant hunks.
    - Read the staged diff before writing the message.
