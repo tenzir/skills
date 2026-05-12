@@ -99,6 +99,8 @@ A good use case for bar charts is visualization of counters of categorical value
    chart_bar x=outcome, y=n
    ```
 
+   Bar charts with categorical labels preserve the input order of the labels. Use [`sort`](/reference/operators/sort.md) before [`chart_bar`](/reference/operators/chart_bar.md) when you want to order categorical bars by a metric instead of first-seen order.
+
 ##### Group and stack bars
 
 Sometimes, your data has a third dimension. You can **group** multiple series into a single plot.

@@ -56,3 +56,4 @@ sort src_ip, -dest_ip
 * [`rare`](/reference/operators/rare.md)
 * [`reverse`](/reference/operators/reverse.md)
 * [`top`](/reference/operators/top.md)
+* [Plot data with charts](../../tutorials/plot-data-with-charts.md)

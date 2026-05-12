@@ -17,6 +17,10 @@ Visualizes events with an bar chart on the [Tenzir Platform](https://app.tenzir.
 
 Label for each bar.
 
+String, IP, subnet, and `null` labels use the order in which they first appear in the input. Use [`sort`](/reference/operators/sort.md) before [`chart_bar`](/reference/operators/chart_bar.md) to control the order of categorical bars.
+
+Numeric, duration, and timestamp labels are sorted by value.
+
 ### `y|value = any`
 
 Positions on the y-axis for each data point. Multiple data points for the same group can be be aggregated using an [aggregation function](../functions.md#aggregation).

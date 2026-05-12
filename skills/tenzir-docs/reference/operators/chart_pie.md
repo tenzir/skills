@@ -15,6 +15,10 @@ Visualizes events with an pie chart on the [Tenzir Platform](https://app.tenzir.
 
 Name of each slice on the chart.
 
+String, IP, subnet, and `null` labels use the order in which they first appear in the input. Use [`sort`](/reference/operators/sort.md) before [`chart_pie`](/reference/operators/chart_pie.md) to control the order of categorical slices.
+
+Numeric, duration, and timestamp labels are sorted by value.
+
 ### `y|value = any`
 
 Value of each slice on the chart. Multiple data points for the same group can be be aggregated using an [aggregation function](../functions.md#aggregation).

@@ -17,6 +17,8 @@ Visualizes events with an line chart on the [Tenzir Platform](https://app.tenzir
 
 Positions on the x-axis for each data point.
 
+Line charts use a continuous x-axis. Numeric, duration, and timestamp values are sorted by value before rendering.
+
 ### `y = any`
 
 Positions on the y-axis for each data point. Multiple data points for the same group can be be aggregated using an [aggregation function](../functions.md#aggregation).
