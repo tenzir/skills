@@ -1,0 +1,8 @@
+created: 2026-05-12
+title: Initial stable skill collection
+intro: >-
+  The Tenzir skill collection is now available as its initial stable release. This
+  release establishes the shared skill set as the stable baseline for coding agents
+  working in and around the Tenzir ecosystem.
+source:
+  mode: sync-stable-queue
