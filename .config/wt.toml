@@ -1,0 +1,5 @@
+# Install the shared Git hooks for new Worktrunk worktrees.
+pre-start = "uv tool install --force lefthook==2.1.6 && \"$(uv tool dir --bin)/lefthook\" install"
+
+# Run the same quality gate before Worktrunk merges as local pushes and CI.
+pre-merge = "uvx --from lefthook==2.1.6 lefthook run pre-push --all-files"

@@ -8,6 +8,9 @@ on:
       - "scripts/**"
       - "skills/**"
       - ".claude-plugin/**"
+      - ".config/**"
+      - "changelog/**"
+      - "lefthook.yml"
   push:
     branches:
       - main
@@ -36,6 +39,6 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
 
-      - name: Validate skills
+      - name: Run quality checks
         shell: bash
-        run: scripts/validate-skills --marketplace
+        run: uvx --from lefthook==2.1.6 lefthook run pre-push --all-files
