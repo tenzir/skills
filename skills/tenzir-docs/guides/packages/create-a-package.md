@@ -31,13 +31,13 @@ Create a directory with the standard package layout:
 
       * …
 
-  * package.yaml Manifest: metadata, contexts, and inputs
+  * package.yaml Manifest: descriptive fields, metadata, contexts, and inputs
 
 The `tests/inputs/` directory holds sample data that the test harness makes available via the `TENZIR_INPUTS` environment variable. Reference these files from test pipelines using `f"{env("TENZIR_INPUTS")}/filename.txt"`.
 
 ## Add the package manifest
 
-The `package.yaml` file is the **package manifest**. It identifies the directory as a package and contains metadata, context definitions, and input specifications.
+The `package.yaml` file is the **package manifest**. It identifies the directory as a package and contains descriptive fields, external metadata, context definitions, and input specifications.
 
 ### Add descriptive metadata
 
@@ -65,6 +65,22 @@ description: |
   A brief description of what your package does and the use cases it supports.
   You can use **Markdown** formatting here.
 ```
+
+### Add external metadata
+
+Use the top-level `metadata` field for data consumed by external tools. Tenzir accepts this field but does not interpret its contents.
+
+package.yaml
+
+```yaml
+metadata:
+  vendor: Acme
+  source: https://github.com/acme/tenzir-packages
+  categories:
+    - threat-intelligence
+```
+
+Unknown top-level keys outside the package schema fail validation. Put non-engine package data under `metadata` instead.
 
 ### Define inputs
 

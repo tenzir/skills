@@ -41,11 +41,11 @@ Create a directory named `sslbl` and add the standard package layout:
 
     * …
 
-  * package.yaml Manifest: metadata, contexts, and inputs
+  * package.yaml Manifest: descriptive fields, metadata, contexts, and inputs
 
 ## Add the package manifest
 
-The [`package.yaml`](/packages/sslbl/package.yaml) is the **package manifest**. I contains descriptive metadata, but also the definitions of contexts and inputs, as we shall see below.
+The [`package.yaml`](/packages/sslbl/package.yaml) is the **package manifest**. It contains descriptive fields, metadata for external tools, and the definitions of contexts and inputs, as we shall see below.
 
 ### Add descriptive metadata
 
@@ -60,7 +60,14 @@ package_icon: |
 description: |
   The [SSLBL](https://sslbl.abuse.ch/) package provides a lookup table with
   SHA1 hashes of blacklisted certificates for TLS monitoring use cases.
+
+
+metadata:
+  upstream: https://sslbl.abuse.ch/blacklist/sslblacklist.csv
+  category: threat-intelligence
 ```
+
+Tenzir accepts the top-level `metadata` field for external tooling and keeps its contents opaque. Unknown top-level keys outside the package schema still fail validation, so put non-engine data under `metadata`.
 
 ### Define the lookup table context
 

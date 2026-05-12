@@ -44,7 +44,7 @@ A package is a directory with the following structure:
 
   * package.yaml Package manifest
 
-The `package.yaml` manifest is the only required file. It identifies the directory as a package and contains metadata, context definitions, and input specifications.
+The `package.yaml` manifest is the only required file. It identifies the directory as a package and contains descriptive fields, external metadata, context definitions, and input specifications.
 
 ## Package components
 
@@ -67,6 +67,10 @@ Pipeline [frontmatter options](../guides/packages/add-pipelines.md#configure-pip
 ### Examples
 
 **Examples** in the `examples` directory demonstrate how to use the package. These self-contained snippets appear in the Tenzir Library and help users understand package capabilities.
+
+### Metadata
+
+The top-level `metadata` key stores opaque package data for external tools. Tenzir accepts the key in `package.yaml` but does not interpret its contents. Unknown top-level keys outside the package schema still fail validation, so use `metadata` for non-engine data that should travel with the package definition.
 
 ### Tests
 
