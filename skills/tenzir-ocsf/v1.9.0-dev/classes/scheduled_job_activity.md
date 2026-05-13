@@ -64,4 +64,12 @@ The actor that performed the activity on the `job` object.
 - **Requirement**: required
 - **Group**: primary
 
-The job object that pertains to the event.
+The object provides information about a scheduled job or a task.
+
+### `updated_job`
+
+- **Type**: [`job`](../objects/job.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The intended state of the `job` after the update. On `Success`, represents the actual post-update state.

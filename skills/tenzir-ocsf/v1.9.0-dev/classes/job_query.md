@@ -37,4 +37,4 @@ Job Query events report information about scheduled jobs.
 - **Requirement**: required
 - **Group**: primary
 
-The job object that pertains to the event.
+The object provides information about a scheduled job or a task.
