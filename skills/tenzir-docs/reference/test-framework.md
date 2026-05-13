@@ -792,6 +792,21 @@ def http():
 
 The [fixture guide](../guides/testing/create-fixtures.md) demonstrates an HTTP echo server that exposes `HTTP_FIXTURE_URL` and tears down cleanly.
 
+### Fixture dependencies
+
+Project fixture modules can declare Python package dependencies with a PEP 723 script metadata block:
+
+```python
+# /// script
+# dependencies = ["boto3"]
+# ///
+
+
+from tenzir_test import fixture
+```
+
+This applies to normal test execution and standalone fixture mode with `tenzir-test --fixture`. When fixture files declare dependencies, `uv` must be available on `PATH`. See the [fixture guide](../guides/testing/create-fixtures.md#declare-python-dependencies) for a complete example.
+
 ### Fixture options
 
 Fixtures can declare a frozen dataclass via `options=` on `@fixture()`. The harness constructs a typed instance from frontmatter values:
