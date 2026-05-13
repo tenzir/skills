@@ -3,21 +3,38 @@
 
 [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) is a managed message queue on AWS. It supports microservices, distributed systems, and serverless applications.
 
-Tenzir can interact with SQS by sending messages to and reading messages from SQS queues.
+Tenzir can receive messages from SQS queues with [`from_sqs`](/reference/operators/from_sqs.md) and send messages to SQS queues with [`to_sqs`](/reference/operators/to_sqs.md).
 
-When reading from SQS queues, Tenzir receives one SQS message at a time and emits the message body in the `message` field, together with SQS metadata such as the message ID and receive count.
+When Tenzir reads from an SQS queue, it emits one event per SQS message. The event uses the `tenzir.sqs` schema and contains the message body in the `message` field together with SQS metadata such as the message ID, receive count, and send time.
 
-The `poll_time` parameter configures [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html). This reduces empty responses when there are no messages available.
+By default, Tenzir deletes each received message from the queue after it emits the event. Set `keep_messages=true` to receive messages without deleting them. Combine it with `visibility_timeout` to control when SQS makes the messages visible again:
 
-Tenzir pipelines that read from an SQS queue automatically send a deletion request after receiving messages.
+```tql
+from_sqs "sqs://my-queue", keep_messages=true, visibility_timeout=30s
+```
 
-URL Support
+With `keep_messages=true`, SQS makes the message visible again after the queue’s visibility timeout. Use this when you want to inspect or replay messages. It doesn’t make downstream processing transactional.
 
-Use `from_sqs` and `to_sqs` directly with `sqs://` URLs.
+The `poll_time` option configures [SQS long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html). Long polling waits for messages to arrive and reduces empty responses when the queue has no visible messages.
+
+The `batch_size` option controls the maximum number of messages that SQS returns per receive request. SQS supports values from `1` to `10`.
+
+## Queue identifiers
+
+Pass a queue name, an `sqs://` URL, or a full SQS queue URL:
+
+```tql
+from_sqs "alerts"
+from_sqs "sqs://alerts"
+from_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/alerts",
+  aws_region="eu-west-1"
+```
+
+When you pass a queue name or an `sqs://` URL, Tenzir resolves the queue URL with `sqs:GetQueueUrl`. When you pass a full queue URL, Tenzir uses it directly. Set `aws_region` when the queue is outside the default AWS SDK region so request signing uses the correct region.
 
 ## Configuration
 
-Follow the [standard configuration instructions](../amazon.md) to authenticate with your AWS credentials.
+Follow the [Amazon integration configuration](../amazon.md) to authenticate with your AWS credentials.
 
 Alternatively, use the `aws_iam` parameter to provide explicit credentials:
 
@@ -29,7 +46,24 @@ from_sqs "my-queue", aws_iam={
 }
 ```
 
-See the `from_sqs` and `to_sqs` operator documentation for all available options, including IAM role assumption.
+You can also use `aws_iam` to assume an IAM role:
+
+```tql
+from_sqs "my-queue", aws_iam={
+  region: "eu-west-1",
+  assume_role: "arn:aws:iam::123456789012:role/my-sqs-role",
+  session_name: "tenzir-session"
+}
+```
+
+Tenzir needs these SQS permissions:
+
+| Operator                                       | Required permissions                                         |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| [`from_sqs`](/reference/operators/from_sqs.md) | `sqs:GetQueueUrl`, `sqs:ReceiveMessage`, `sqs:DeleteMessage` |
+| [`to_sqs`](/reference/operators/to_sqs.md)     | `sqs:GetQueueUrl`, `sqs:SendMessage`                         |
+
+You don’t need `sqs:GetQueueUrl` when you pass a full queue URL. You also don’t need `sqs:DeleteMessage` for `from_sqs` pipelines that always use `keep_messages=true`.
 
 ## Examples
 
@@ -37,16 +71,34 @@ See the `from_sqs` and `to_sqs` operator documentation for all available options
 
 ```tql
 from {foo: 42}
-to_sqs "sqs://my-queue"
+to_sqs "sqs://my-queue", message=this.print_json()
 ```
 
 ### Receive messages from an SQS queue
 
 ```tql
-from_sqs "sqs://my-queue", poll_time=5s
+from_sqs "sqs://my-queue", poll_time=5s, batch_size=10
 this = message.parse_json()
 ```
 
 ```tql
 {foo: 42}
 ```
+
+### Receive messages without deleting them
+
+```tql
+from_sqs "sqs://my-queue",
+  keep_messages=true,
+  poll_time=5s,
+  batch_size=10,
+  visibility_timeout=30s
+this = message.parse_json()
+```
+
+## See Also
+
+* [`from_sqs`](/reference/operators/from_sqs.md)
+* [`to_sqs`](/reference/operators/to_sqs.md)
+* [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
+* [Send to destinations](../../guides/routing/send-to-destinations.md)
