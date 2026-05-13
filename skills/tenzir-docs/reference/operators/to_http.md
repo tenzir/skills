@@ -13,7 +13,7 @@ to_http url:string, [method=string, headers=record, timeout=duration,
 
 The `to_http` operator sends each input event as an HTTP request to a webhook or API endpoint. A required printer sub-pipeline turns each input event into bytes, which become the request body. By default, the operator sends requests with the `POST` method.
 
-The operator retries transient transport failures and HTTP `429` and `5xx` responses up to `max_retry_count` times. If a response includes a `Retry-After` header, Tenzir waits for that duration before retrying. Otherwise, it uses exponential backoff starting at `retry_delay`.
+The operator retries transient transport failures and HTTP `429` and `5xx` responses up to `max_retry_count` times. If a response includes a `Retry-After` header, Tenzir waits for that duration before retrying. Otherwise, it uses exponential backoff starting at `retry_delay`. Tenzir emits a diagnostic before each retry with the reason and wait time.
 
 Non-2xx HTTP status codes emit warnings. Request failures, such as connection or retry exhaustion, cause pipeline errors.
 
