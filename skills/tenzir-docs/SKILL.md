@@ -647,9 +647,13 @@ Azure Event Hubs is a real-time event ingestion service. It can receive and proc
 
 Microsoft Defender offers protection, detection, investigation, and response to threats. Defender comes in multiple editions, Defender for Office 365, Defender for Endpoint, Defender for IoT, Defender for Identity, and Defender for Cloud. All Defender products can stream events in real time to Tenzir using Azure Event Hubs.
 
+##### [Microsoft Graph](integrations/microsoft/graph.md)
+
+Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
+
 ##### [Sentinel & Log Analytics](integrations/microsoft/sentinel-log-analytics.md)
 
-Send security logs and events from Tenzir to Microsoft’s Log Analytics platform. You can analyze them with Microsoft Sentinel, create alerts with Azure Monitor, or query them with KQL.
+Send security logs and events from Tenzir to Microsoft’s Log Analytics platform. You can analyze them with Microsoft Sentinel, create alerts with Azure Monitor, or query them with KQL. To read Microsoft Entra and Microsoft 365 data from Microsoft Graph, use Microsoft Graph instead.
 
 ##### [Windows Event Logs](integrations/microsoft/windows-event-logs.md)
 

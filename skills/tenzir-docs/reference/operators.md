@@ -641,6 +641,14 @@ Receives events from an Apache Kafka topic.
 from_kafka "logs"
 ```
 
+### [from\_microsoft\_graph](operators/from_microsoft_graph.md)
+
+Reads events from a Microsoft Graph v1.0 collection.
+
+```tql
+from_microsoft_graph "auditLogs/signIns", auth={…}
+```
+
 ### [from\_mysql](operators/from_mysql.md)
 
 Reads events from a MySQL database.
