@@ -138,7 +138,6 @@
 - [drop](operators/drop.md): Removes fields from the event.
 - [drop_null_fields](operators/drop_null_fields.md): Removes fields containing null values from the event.
 - [enumerate](operators/enumerate.md): Add a field with the number of preceding events.
-- [http](operators/http.md): The `http` operator is deprecated. Use the dedicated HTTP operators instead.
 - [move](operators/move.md): Moves values from one field to another, removing the original field.
 - [replace](operators/replace.md): Replaces all occurrences of a value with another value.
 - [select](operators/select.md): Selects some values and discards the rest.
@@ -264,3 +263,4 @@
 ## Additional Pages
 
 - [from_opensearch](operators/from_opensearch.md): The `from_opensearch` operator is no longer available.
+- [http](operators/http.md): The `http` operator is deprecated. Use the dedicated HTTP operators instead.

@@ -831,14 +831,6 @@ Add a field with the number of preceding events.
 enumerate num
 ```
 
-### [http](operators/http.md)
-
-Sends HTTP/1.1 requests and forwards the response.
-
-```tql
-http "example.com"
-```
-
 ### [move](operators/move.md)
 
 Moves values from one field to another, removing the original field.
