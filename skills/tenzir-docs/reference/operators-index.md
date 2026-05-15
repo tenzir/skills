@@ -236,6 +236,7 @@
 
 ## Printing
 
+- [write_all](operators/write_all.md): Concatenates one field from all input events into a byte stream.
 - [write_bitz](operators/write_bitz.md): Writes events in *BITZ* format.
 - [write_csv](operators/write_csv.md): Transforms event stream to CSV (Comma-Separated Values) byte stream.
 - [write_feather](operators/write_feather.md): Transforms the input event stream to Feather byte stream.

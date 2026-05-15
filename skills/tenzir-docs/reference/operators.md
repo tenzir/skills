@@ -1461,6 +1461,14 @@ pipeline::run { … }
 
 ## Printing
 
+### [write\_all](operators/write_all.md)
+
+Concatenates one field from all input events into a byte stream.
+
+```tql
+write_all data
+```
+
 ### [write\_bitz](operators/write_bitz.md)
 
 Writes events in *BITZ* format.
