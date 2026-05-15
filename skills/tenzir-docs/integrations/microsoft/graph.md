@@ -3,7 +3,7 @@
 
 Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 
-Use [`from_microsoft_graph`](/reference/operators/from_microsoft_graph.md) to read events and inventory data from Microsoft Graph collection resources. The operator handles Microsoft Entra client-credentials authentication, emits each object from the OData `value` array, and follows `@odata.nextLink` pagination.
+Use [`from_microsoft_graph`](/reference/operators/from_microsoft_graph.md) to read events and inventory data from Microsoft Graph collection resources. The operator handles Microsoft Entra client-credentials authentication, emits each object from the OData `value` array, follows `@odata.nextLink` pagination, and uses a bounded default HTTP retry policy for throttling and transient service failures. When Microsoft Graph returns `Retry-After`, the operator waits for that duration before retrying.
 
 Common security use cases include collecting Microsoft Entra audit and sign-in logs, reading users and groups for enrichment, and extracting inventory from Microsoft 365 services that expose collection resources through Microsoft Graph.
 
