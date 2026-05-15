@@ -643,7 +643,7 @@ from_kafka "logs"
 
 ### [from\_microsoft\_graph](operators/from_microsoft_graph.md)
 
-Reads events from a Microsoft Graph v1.0 collection.
+Reads events from a Microsoft Graph collection.
 
 ```tql
 from_microsoft_graph "auditLogs/signIns", auth={…}
