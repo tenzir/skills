@@ -1416,6 +1416,14 @@ Replaces characters within a string based on a regular expression.
 "hello".replace("l+o", "y")
 ```
 
+### [repeat](functions/repeat.md)
+
+Repeats a string a specified number of times.
+
+```tql
+"na".repeat(8)
+```
+
 ### [reverse](functions/reverse.md)
 
 Reverses the characters of a string.

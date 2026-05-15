@@ -412,6 +412,22 @@ Padding functions:
 * [`pad_start`](/reference/functions/pad_start.md) - Add characters to the beginning
 * [`pad_end`](/reference/functions/pad_end.md) - Add characters to the end
 
+## Repeat strings
+
+Use [`repeat`](/reference/functions/repeat.md) to repeat a string a fixed number of times:
+
+```tql
+from {separator: "-"}
+line = separator.repeat(8)
+```
+
+```tql
+{
+  separator: "-",
+  line: "--------",
+}
+```
+
 ## Read file contents
 
 Access text from files during processing:

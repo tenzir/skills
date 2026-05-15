@@ -223,6 +223,7 @@
 - [pad_start](functions/pad_start.md): Pads a string at the start to a specified length.
 - [replace](functions/replace.md): Replaces characters within a string.
 - [replace_regex](functions/replace_regex.md): Replaces characters within a string based on a regular expression.
+- [repeat](functions/repeat.md): Repeats a string a specified number of times.
 - [reverse](functions/reverse.md): Reverses the characters of a string.
 - [split](functions/split.md): Splits a string into substrings.
 - [split_regex](functions/split_regex.md): Splits a string into substrings with a regex.
