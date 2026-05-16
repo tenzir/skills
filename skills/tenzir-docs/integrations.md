@@ -14,7 +14,7 @@ Browse our freely available [package library on GitHub](https://github.com/tenzi
 Core integrations are native connectors to the ecosystem, enabling communication over numerous protocols and APIs:
 
 * **Cloud storage**: [S3](integrations/amazon/s3.md), [Cloud Storage](integrations/google/cloud-storage.md), [Azure Blob Storage](integrations/microsoft/azure-blob-storage.md)
-* **Cloud APIs**: [Microsoft Graph](integrations/microsoft/graph.md)
+* **Cloud APIs**: [Graph](integrations/microsoft/graph.md)
 * **Message queues**: [Kafka](integrations/kafka.md), [NATS](integrations/nats.md), [SQS](integrations/amazon/sqs.md), [AMQP](integrations/amqp.md)
 * **Databases**: [Snowflake](integrations/snowflake.md), [ClickHouse](integrations/clickhouse.md), [MySQL](integrations/mysql.md)
 * **Network protocols**: [TCP](integrations/tcp.md), [UDP](integrations/udp.md), [HTTP(S)](integrations/http.md), [Syslog](integrations/syslog.md)

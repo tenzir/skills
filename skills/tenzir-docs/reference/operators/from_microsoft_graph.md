@@ -149,4 +149,4 @@ from_microsoft_graph "users",
 ## See Also
 
 * [`from_http`](/reference/operators/from_http.md)
-* [Microsoft Graph](../../integrations/microsoft/graph.md)
+* [Graph](../../integrations/microsoft/graph.md)

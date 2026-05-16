@@ -1,4 +1,4 @@
-# Microsoft Graph
+# Graph
 
 
 Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.

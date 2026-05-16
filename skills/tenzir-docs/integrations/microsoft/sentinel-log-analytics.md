@@ -1,7 +1,7 @@
 # Sentinel & Log Analytics
 
 
-Send security logs and events from Tenzir to Microsoft’s Log Analytics platform. You can analyze them with [Microsoft Sentinel](https://learn.microsoft.com/en-us/azure/sentinel/overview), create alerts with [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview), or query them with [KQL](https://learn.microsoft.com/en-us/kusto/query/). To read Microsoft Entra and Microsoft 365 data from Microsoft Graph, use [Microsoft Graph](graph.md) instead.
+Send security logs and events from Tenzir to Microsoft’s Log Analytics platform. You can analyze them with [Microsoft Sentinel](https://learn.microsoft.com/en-us/azure/sentinel/overview), create alerts with [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview), or query them with [KQL](https://learn.microsoft.com/en-us/kusto/query/). To read Microsoft Entra and Microsoft 365 data from Microsoft Graph, use [Graph](graph.md) instead.
 
 All logs in Azure land in a [Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview). Microsoft Sentinel and Azure Monitor read from this workspace; they don’t store data themselves.
 
@@ -83,4 +83,4 @@ Auxiliary tables store data in Parquet format with retention up to 12 years, mak
 
 * [`from_microsoft_graph`](/reference/operators/from_microsoft_graph.md)
 * [`to_azure_log_analytics`](/reference/operators/to_azure_log_analytics.md)
-* [Microsoft Graph](graph.md)
+* [Graph](graph.md)
