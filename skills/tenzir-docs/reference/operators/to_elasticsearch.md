@@ -1,19 +1,19 @@
-# to_opensearch
+# to_elasticsearch
 
 
-Sends events to a Bulk API compatible with OpenSearch.
+Sends events to a Bulk API compatible with Elasticsearch.
 
 ```tql
-to_opensearch url:string, action=string, [index=string, id=string, doc=record,
+to_elasticsearch url:string, action=string, [index=string, id=string, doc=record,
   user=string, passwd=string, tls=record, include_nulls=bool,
   max_content_length=int, buffer_timeout=duration, compress=bool]
 ```
 
 ## Description
 
-The `to_opensearch` operator sends events to a [Bulk API compatible with OpenSearch](https://opensearch.org/docs/latest/api-reference/document-apis/bulk/). The same implementation also works with Bulk API endpoints compatible with Elasticsearch.
+The `to_elasticsearch` operator sends events to a [Bulk API compatible with Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html). The same implementation also works with Bulk API endpoints compatible with OpenSearch.
 
-You can also use [`to_elasticsearch`](/reference/operators/to_elasticsearch.md) as an alias.
+You can also use [`to_opensearch`](/reference/operators/to_opensearch.md) as an alias.
 
 The operator appends `/_bulk` to the URL if the path doesn't already end with `/_bulk`. It accumulates multiple events before sending them as a single request. You can control the maximum request size with `max_content_length` and the timeout before sending accumulated events with `buffer_timeout`.
 
@@ -112,12 +112,12 @@ Defaults to `true`.
 
 ```tql
 from_file "example.json"
-to_opensearch "localhost:9200", action="create", index="main"
+to_elasticsearch "localhost:9200", action="create", index="main"
 ```
 
 ## See Also
 
-* [`accept_opensearch`](/reference/operators/accept_opensearch.md)
-* [`to_elasticsearch`](/reference/operators/to_elasticsearch.md)
-* [OpenSearch](../../integrations/opensearch.md)
+* [`accept_elasticsearch`](/reference/operators/accept_elasticsearch.md)
+* [`to_opensearch`](/reference/operators/to_opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
+* [OpenSearch](../../integrations/opensearch.md)

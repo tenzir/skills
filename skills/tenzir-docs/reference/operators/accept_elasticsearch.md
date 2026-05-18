@@ -1,24 +1,24 @@
-# accept_opensearch
+# accept_elasticsearch
 
 
-Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.
+Accepts incoming Elasticsearch-compatible Bulk API requests and forwards them as events.
 
 ```tql
-accept_opensearch [url:string, keep_actions=bool, max_request_size=int,
+accept_elasticsearch [url:string, keep_actions=bool, max_request_size=int,
                tls=record]
 ```
 
 ## Description
 
-The `accept_opensearch` operator starts an HTTP server that accepts OpenSearch-compatible bulk ingestion requests on `/_bulk` and `/{index}/_bulk`. Elasticsearch clients can use the same endpoint.
+The `accept_elasticsearch` operator starts an HTTP server that accepts Elasticsearch-compatible bulk ingestion requests on `/_bulk` and `/{index}/_bulk`. OpenSearch clients can use the same endpoint.
 
-You can also use [`accept_elasticsearch`](/reference/operators/accept_elasticsearch.md) as an alias.
+You can also use [`accept_opensearch`](/reference/operators/accept_opensearch.md) as an alias.
 
 For each bulk request, the operator buffers the request body in memory, up to `max_request_size`, optionally decompresses it based on the HTTP `Content-Encoding` header, parses the NDJSON payload, and emits the resulting records as events.
 
 By default, the operator drops Bulk API action objects such as `{"create": ...}` and emits only the document records. To keep the action objects, set `keep_actions=true`.
 
-The operator also responds to `GET /` with a minimal OpenSearch-compatible info response so that basic health checks and client probes succeed.
+The operator also responds to `GET /` with a minimal Elasticsearch-compatible info response so that basic health checks and client probes succeed.
 
 ### `url: string (optional)`
 
@@ -70,19 +70,19 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 ### Listen on port 8080
 
 ```tql
-accept_opensearch "0.0.0.0:8080"
+accept_elasticsearch "0.0.0.0:8080"
 ```
 
 ### Keep action objects in the output
 
 ```tql
-accept_opensearch keep_actions=true
+accept_elasticsearch keep_actions=true
 ```
 
 ### Accept HTTPS requests with TLS
 
 ```tql
-accept_opensearch "0.0.0.0:8443",
+accept_elasticsearch "0.0.0.0:8443",
                 tls={
                   certfile: "/path/to/cert.pem",
                   keyfile: "/path/to/key.pem",
@@ -91,7 +91,7 @@ accept_opensearch "0.0.0.0:8443",
 
 ## See Also
 
-* [`to_opensearch`](/reference/operators/to_opensearch.md)
-* [`accept_elasticsearch`](/reference/operators/accept_elasticsearch.md)
-* [OpenSearch](../../integrations/opensearch.md)
+* [`to_elasticsearch`](/reference/operators/to_elasticsearch.md)
+* [`accept_opensearch`](/reference/operators/accept_opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
+* [OpenSearch](../../integrations/opensearch.md)

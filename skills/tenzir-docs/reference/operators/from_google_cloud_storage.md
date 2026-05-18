@@ -4,8 +4,8 @@
 Reads one or multiple files from Google Cloud Storage.
 
 ```tql
-from_google_cloud_storage url:string, [anonymous=bool, watch=bool, remove=bool,
-  rename=string->string, max_age=duration] { … }
+from_google_cloud_storage url:string, [anonymous=bool, watch=duration,
+  remove=bool, rename=string->string, max_age=duration] { … }
 ```
 
 ## Description
@@ -35,11 +35,7 @@ Use anonymous credentials instead of any configured authentication. This only wo
 
 Defaults to `false`.
 
-### `watch = bool (optional)`
-
-In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. Currently, this scans the filesystem up to every 10s.
-
-Defaults to `false`.
+\### \`watch = duration (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, \`watch=30s\` polls every 30 seconds. Disabled by default.
 
 ### `remove = bool (optional)`
 
@@ -93,7 +89,7 @@ from_google_cloud_storage "gs://public-dataset/data.csv", anonymous=true
 ### Read Zeek logs continuously
 
 ```tql
-from_google_cloud_storage "gs://logs/zeek/**.log", watch=true {
+from_google_cloud_storage "gs://logs/zeek/**.log", watch=10s {
   read_zeek_tsv
 }
 ```

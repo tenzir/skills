@@ -121,3 +121,4 @@ For more control, you can create the table in ClickHouse first. Use this approac
 - [Opensearch](opensearch.md)
 - [Snowflake](snowflake.md)
 - [Splunk](splunk.md)
+- [Wazuh](wazuh.md)

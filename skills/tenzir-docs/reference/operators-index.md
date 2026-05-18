@@ -95,6 +95,7 @@
 
 ## Inputs
 
+- [accept_elasticsearch](operators/accept_elasticsearch.md): Accepts incoming Elasticsearch-compatible Bulk API requests and forwards them as events.
 - [accept_http](operators/accept_http.md): Accepts incoming HTTP requests and forwards them as events.
 - [accept_opensearch](operators/accept_opensearch.md): Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.
 - [accept_tcp](operators/accept_tcp.md): Listens for incoming TCP or TLS connections and receives events.
@@ -171,6 +172,7 @@
 - [to_azure_blob_storage](operators/to_azure_blob_storage.md): Writes events to one or multiple blobs in Azure Blob Storage.
 - [to_azure_log_analytics](operators/to_azure_log_analytics.md): Sends events to the Microsoft Azure Logs Ingestion API.
 - [to_clickhouse](operators/to_clickhouse.md): Sends events to a ClickHouse table.
+- [to_elasticsearch](operators/to_elasticsearch.md): Sends events to a Bulk API compatible with Elasticsearch.
 - [to_file](operators/to_file.md): Writes events to one or multiple files on a filesystem.
 - [to_fluent_bit](operators/to_fluent_bit.md): Sends events via Fluent Bit.
 - [to_ftp](operators/to_ftp.md): Prints events to bytes and uploads them via FTP or FTPS.
@@ -182,7 +184,7 @@
 - [to_http](operators/to_http.md): Sends events as HTTP requests to a webhook or API endpoint.
 - [to_kafka](operators/to_kafka.md): Sends messages to an Apache Kafka topic.
 - [to_nats](operators/to_nats.md): Publishes messages to a NATS JetStream subject.
-- [to_opensearch](operators/to_opensearch.md): Sends events to an OpenSearch-compatible Bulk API.
+- [to_opensearch](operators/to_opensearch.md): Sends events to a Bulk API compatible with OpenSearch.
 - [to_s3](operators/to_s3.md): Writes events to one or multiple objects in Amazon S3.
 - [to_sentinelone_data_lake](operators/to_sentinelone_data_lake.md): Sends security events to SentinelOne Singularity Data Lake via REST API.
 - [to_snowflake](operators/to_snowflake.md): Sends events to a Snowflake database.

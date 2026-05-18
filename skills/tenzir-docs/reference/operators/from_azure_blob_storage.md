@@ -4,7 +4,7 @@
 Reads one or multiple files from Azure Blob Storage.
 
 ```tql
-from_azure_blob_storage url:string, [account_key=string, watch=bool,
+from_azure_blob_storage url:string, [account_key=string, watch=duration,
   remove=bool, rename=string->string, max_age=duration] { â€¦ }
 ```
 
@@ -44,11 +44,7 @@ Run `az login` on the command-line to authenticate the current user with Azureâ€
 
 Account key for authenticating with Azure Blob Storage.
 
-### `watch = bool (optional)`
-
-In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. Currently, this scans the filesystem up to every 10s.
-
-Defaults to `false`.
+\### \`watch = duration (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, \`watch=30s\` polls every 30 seconds. Disabled by default.
 
 ### `remove = bool (optional)`
 
@@ -104,7 +100,7 @@ from_azure_blob_storage "abfs://container/data.csv", account_key="your-account-k
 ### Read Suricata EVE JSON logs continuously
 
 ```tql
-from_azure_blob_storage "abfs://logs/suricata/**.json", watch=true {
+from_azure_blob_storage "abfs://logs/suricata/**.json", watch=10s {
   read_suricata
 }
 ```
@@ -113,7 +109,7 @@ from_azure_blob_storage "abfs://logs/suricata/**.json", watch=true {
 
 ```tql
 from_azure_blob_storage "abfs://input/**.json",
-  rename=(path => "/archive/" + path)
+  rename=(path => f"/archive/{path}")
 ```
 
 ### Add source path to events

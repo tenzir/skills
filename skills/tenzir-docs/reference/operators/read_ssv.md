@@ -5,7 +5,7 @@ Read SSV (Space-Separated Values) from a byte stream.
 
 ```tql
 read_ssv [list_separator=string, null_value=string, comments=bool, header=string,
-          quotes=string, auto_expand=bool,
+          quotes=string, auto_expand=bool, auto_fill=bool,
           schema=string, selector=string, schema_only=bool, raw=bool, unflatten_separator=string]
 ```
 
@@ -16,6 +16,10 @@ The `read_ssv` operator transforms a byte stream into a event stream by parsing 
 ### `auto_expand = bool (optional)`
 
 Automatically add fields to the schema when encountering events with too many values instead of dropping the excess values.
+
+### `auto_fill = bool (optional)`
+
+Silently fill missing trailing values in a row with `null` instead of emitting a warning. The missing fields are already filled with `null` either way; this option only suppresses the warning.
 
 ### `comments = bool (optional)`
 

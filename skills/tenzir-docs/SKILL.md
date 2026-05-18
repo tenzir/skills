@@ -202,7 +202,7 @@ This guide shows you how to read files and monitor directories using the `from_f
 
 ##### [Fetch via HTTP and APIs](guides/collecting/fetch-via-http-and-apis.md)
 
-This guide shows you how to interact with HTTP APIs using the `from_http` and `to_http` operators. You’ll learn to make GET requests, send data, handle authentication, and implement pagination for large result sets.
+This guide shows you how to interact with HTTP APIs using `from_http` and `to_http` operators. You’ll learn to make GET requests, send data, handle authentication, and implement pagination for large result sets.
 
 ##### [Read from message brokers](guides/collecting/read-from-message-brokers.md)
 
@@ -740,6 +740,10 @@ Snowflake is a multi-cloud data warehouse. Tenzir can send events from a pipelin
 #### [Splunk](integrations/splunk.md)
 
 Splunk is a SIEM solution for storing and processing logs. Tenzir can send data to Splunk via HEC.
+
+#### [Wazuh](integrations/wazuh.md)
+
+Wazuh is an open source XDR and SIEM platform. Tenzir can forward events to Wazuh over Syslog and query Wazuh alerts from the Wazuh indexer API.
 
 ### Security Tools
 

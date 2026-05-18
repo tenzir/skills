@@ -4,14 +4,14 @@
 Connects to a remote TCP or TLS endpoint and sends events.
 
 ```tql
-to_tcp endpoint:string, [tls=record] { … }
+to_tcp endpoint:string, [tls=record, max_retry_count=int] { … }
 ```
 
 ## Description
 
 Connects to the specified TCP endpoint as a client and writes serialized events to the connection. Input events are run through a nested pipeline that must produce bytes (e.g., `{ write_json }`).
 
-If the connection fails, the operator reconnects automatically with exponential backoff.
+If the connection fails, the operator reconnects automatically with exponential backoff. By default it retries forever; use `max_retry_count` to bound the number of reconnect attempts.
 
 ### `endpoint: string`
 
@@ -39,6 +39,12 @@ The `client_ca` and `require_client_cert` options are only applied for operators
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
 See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
+
+### `max_retry_count = int (optional)`
+
+Maximum number of reconnect attempts after a failed connection. After this many consecutive failures, the operator emits an error and stops.
+
+Defaults to retrying forever.
 
 ### `{ … }`
 

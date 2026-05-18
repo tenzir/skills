@@ -529,6 +529,14 @@ sockets
 
 ## Inputs
 
+### [accept\_elasticsearch](operators/accept_elasticsearch.md)
+
+Accepts incoming Elasticsearch-compatible Bulk API requests and forwards them as events.
+
+```tql
+accept_elasticsearch "0.0.0.0:9200"
+```
+
 ### [accept\_http](operators/accept_http.md)
 
 Accepts incoming HTTP requests and forwards them as events.
@@ -539,7 +547,7 @@ accept_http "0.0.0.0:8080" { read_json }
 
 ### [accept\_opensearch](operators/accept_opensearch.md)
 
-Accepts incoming OpenSearch Bulk API requests and forwards them as events.
+Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.
 
 ```tql
 accept_opensearch "0.0.0.0:9200"
@@ -630,7 +638,7 @@ from_google_cloud_storage "gs://my-bucket/data/**.json"
 Sends an HTTP/1.1 request and returns the response as events.
 
 ```tql
-from_http "https://example.com/api" { read_json }
+from_http "https://example.com/api/events.json"
 ```
 
 ### [from\_kafka](operators/from_kafka.md)
@@ -986,7 +994,7 @@ serve_tcp "0.0.0.0:8090" { write_json }
 Listens on a ZeroMQ endpoint and sends events.
 
 ```tql
-serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=kind + "/"
+serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=f"{kind}/"
 ```
 
 ### [to\_amazon\_security\_lake](operators/to_amazon_security_lake.md)
@@ -1027,6 +1035,14 @@ Sends events to a ClickHouse table.
 
 ```tql
 to_clickhouse table="my_table"
+```
+
+### [to\_elasticsearch](operators/to_elasticsearch.md)
+
+Sends events to an Elasticsearch-compatible Bulk API.
+
+```tql
+to_elasticsearch "localhost:9200", …
 ```
 
 ### [to\_file](operators/to_file.md)
@@ -1194,7 +1210,7 @@ to_udp "127.0.0.1:514"
 Connects to a remote ZeroMQ subscriber endpoint and sends events.
 
 ```tql
-to_zmq "tcp://collector.example.com:5555", encoding="json", prefix=kind + "/"
+to_zmq "tcp://collector.example.com:5555", encoding="json", prefix=f"{kind}/"
 ```
 
 ## Packages

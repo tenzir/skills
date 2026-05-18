@@ -13,13 +13,23 @@ The `metrics` operator retrieves metrics events from a Tenzir node. Metrics even
 
 Retention Policy
 
-Set the `tenzir.retention.metrics` configuration option to change how long Tenzir Nodes store metrics:
+Set the `tenzir.retention.metrics` configuration option to change how long Tenzir Nodes store general metrics:
 
 ```yaml
 tenzir:
   retention:
     metrics: 7d
 ```
+
+Operator metrics use the separate `tenzir.retention.operator-metrics` setting:
+
+```yaml
+tenzir:
+  retention:
+    operator-metrics: 0s
+```
+
+With `0s`, Tenzir does not persist `tenzir.metrics.operator` or `tenzir.metrics.operator_profile` events, but live subscribers can still receive them.
 
 ### `name: string (optional)`
 

@@ -41,20 +41,11 @@ A value of type `secret` contains only the secret’s name, not the secret value
 
 ### Supported Operations
 
-#### Concatenation
-
-You can concatenate secrets with other secrets or strings using the `+` operator:
-
-```tql
-auth = "Bearer " + secret("my-secret")
-url = $base_url + secret("user-name") + ":" + secret("password")
-```
-
 #### Format Strings
 
 You can use secrets in [format strings](../reference/expressions.md#format-strings-f-strings). Unlike other types, which create strings with values formatted as if using the `string` function, a format string containing a secret yields a secret.
 
-You can write the above concatenations using format strings:
+Use format strings when you combine secrets with other values:
 
 ```tql
 auth = f"Bearer {secret("my-secret")}"
@@ -62,6 +53,10 @@ url = f"{$base_url}{secret("user-name")}:{secret("password")}"
 ```
 
 Format strings turn secrets nested in a structured value (`record`, `list`) into the string `"***"`.
+
+#### Concatenation
+
+You can concatenate secrets with other secrets or strings using the `+` operator, but prefer format strings for assembled headers, URLs, and other text.
 
 #### Encoding & Decoding
 

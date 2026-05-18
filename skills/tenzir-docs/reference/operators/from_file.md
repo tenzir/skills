@@ -20,11 +20,7 @@ The characters `*` and `**` have a special meaning. `*` matches everything excep
 
 The URL can include additional options. For `s3://`, the options that can be included in the URI as query parameters are `region`, `scheme`, `endpoint_override`, `allow_bucket_creation`, and `allow_bucket_deletion`. For `gs://`, the supported parameters are `scheme`, `endpoint_override`, and `retry_limit_seconds`.
 
-### `watch = bool (optional)`
-
-In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. Currently, this scans the filesystem up to every 10s.
-
-Defaults to `false`.
+\### \`watch = bool (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. Currently, this scans the filesystem up to every 10s. Defaults to \`false\`.
 
 ### `remove = bool (optional)`
 

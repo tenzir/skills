@@ -5,7 +5,7 @@ Writes events to one or multiple files on a filesystem.
 
 ```tql
 to_file url:string, [max_size=int, timeout=duration,
-        partition_by=list<field>] { … }
+        partition_by=list<field>, append=bool] { … }
 ```
 
 ## Description
@@ -46,6 +46,12 @@ Unlike [`to_hive`](/reference/operators/to_hive.md), the partitioning fields are
 Pipeline that transforms the incoming events into the byte stream that is written to each file. The pipeline must return bytes, so it must end with a writer such as `write_ndjson`, `write_parquet`, or `write_csv`, optionally followed by a compressor such as `compress_gzip`.
 
 The subpipeline runs once per output file. When rotation or partitioning produces a new file, a new instance of the subpipeline is spawned for it.
+
+### `append = bool (optional)`
+
+If `true`, existing files are opened for appending instead of truncated. Useful for accumulating output across pipeline runs into a stable path. When combined with a `{uuid}` placeholder the flag is a no-op, since every rotation already targets a fresh filename.
+
+Defaults to `false`.
 
 ## Examples
 

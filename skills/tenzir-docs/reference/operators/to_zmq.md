@@ -48,7 +48,7 @@ to_zmq "tcp://collector.example.com:5555", encoding="json"
 
 ```tql
 export
-to_zmq "tcp://collector.example.com:5555", encoding="ndjson", prefix=source + "/"
+to_zmq "tcp://collector.example.com:5555", encoding="ndjson", prefix=f"{source}/"
 ```
 
 ## See Also

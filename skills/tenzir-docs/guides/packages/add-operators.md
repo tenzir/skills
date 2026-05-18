@@ -131,7 +131,7 @@ args:
 ---
 
 
-$field = $prefix + $value
+$field = f"{$prefix}{$value}"
 ```
 
 Call this operator with both positional and named arguments:
@@ -161,7 +161,7 @@ args:
 ---
 
 
-greeting = "Hello, " + $name + "!"
+greeting = f"Hello, {$name}!"
 ```
 
 Calling the operator without arguments uses the default value:
@@ -283,7 +283,7 @@ args:
 
 
 if $suffix != null {
-  $field = $field + $suffix
+  $field = f"{$field}{$suffix}"
 }
 ```
 

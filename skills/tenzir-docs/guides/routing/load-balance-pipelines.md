@@ -65,7 +65,7 @@ let $cfg = [
 
 subscribe "input"
 load_balance $cfg {
-  let $endpoint = string($cfg.ip) + ":8088"
+  let $endpoint = f"{$cfg.ip}:8088"
   to_splunk $endpoint, hec_token=$cfg.token
 }
 ```

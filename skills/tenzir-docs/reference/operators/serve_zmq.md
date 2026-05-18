@@ -48,7 +48,7 @@ serve_zmq "tcp://0.0.0.0:5555", encoding="json"
 
 ```tql
 export
-serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=kind + "/"
+serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=f"{kind}/"
 ```
 
 ## See Also

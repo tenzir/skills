@@ -4,7 +4,7 @@
 Reads one or multiple files from Amazon S3.
 
 ```tql
-from_s3 url:string, [anonymous=bool, aws_iam=record, watch=bool,
+from_s3 url:string, [anonymous=bool, aws_iam=record, watch=duration,
   remove=bool, rename=string->string, max_age=duration] { … }
 ```
 
@@ -102,11 +102,7 @@ Exactly one of `token_file`, `token_endpoint`, or `token` must be specified:
 
 Credentials are automatically refreshed before expiration, with exponential backoff retry logic for transient failures.
 
-### `watch = bool (optional)`
-
-In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. Currently, this scans the filesystem up to every 10s.
-
-Defaults to `false`.
+\### \`watch = duration (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, \`watch=30s\` polls every 30 seconds. Disabled by default.
 
 ### `remove = bool (optional)`
 
@@ -171,7 +167,7 @@ from_s3 "s3://my-bucket/data/**.json?endpoint_override=minio.example.com:9000&sc
 ### Read files continuously and assume IAM role
 
 ```tql
-from_s3 "s3://logs/application/**.json", watch=true, aws_iam={
+from_s3 "s3://logs/application/**.json", watch=10s, aws_iam={
   assume_role: "arn:aws:iam::123456789012:role/LogReaderRole"
 }
 ```
@@ -180,7 +176,7 @@ from_s3 "s3://logs/application/**.json", watch=true, aws_iam={
 
 ```tql
 from_s3 "s3://input-bucket/**.json",
-  rename=(path => "archive/" + path)
+  rename=(path => f"archive/{path}")
 ```
 
 ### Add source path to events

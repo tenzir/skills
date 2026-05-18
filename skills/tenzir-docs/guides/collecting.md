@@ -40,7 +40,7 @@ Fetch data from web APIs with authentication, pagination, and retry handling:
 
 ```tql
 from_http "https://api.example.com/events",
-  headers={"Authorization": "Bearer " + secret("API_TOKEN")}
+  headers={"Authorization": f"Bearer {secret("API_TOKEN")}"}
 ```
 
 See the [HTTP and API guide](collecting/fetch-via-http-and-apis.md) for pagination patterns and advanced configurations.

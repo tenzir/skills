@@ -5,17 +5,25 @@ Sends an HTTP/1.1 request and returns the response as events.
 
 ```tql
 from_http url:string, [method=string, body=record|string|blob, encode=string,
-          headers=record, error_field=field, paginate=string,
+          headers=record, error_field=field, paginate=string|lambda,
           paginate_delay=duration, connection_timeout=duration,
           max_retry_count=int, retry_delay=duration, tls=record]
-          { … }
+          [{ … }]
 ```
 
 ## Description
 
 The `from_http` operator issues an HTTP request and returns the response as events.
 
-The `from_http` operator requires a parser sub-pipeline. The operator sends the HTTP response body to that sub-pipeline as bytes.
+The `from_http` operator sends the HTTP response body to a parser sub-pipeline as bytes. You can provide the sub-pipeline explicitly, or omit it when Tenzir can infer the response format.
+
+When you omit the parser sub-pipeline, Tenzir infers the parser for each response page in this order:
+
+1. Use a non-empty `Content-Type` response header.
+2. Use the URL path extension.
+3. Emit an error that asks you to provide an explicit parser sub-pipeline.
+
+If a response contains a non-empty unsupported `Content-Type` header, Tenzir doesn’t fall back to the URL extension. Provide an explicit parser sub-pipeline for ambiguous or custom formats.
 
 Use the sub-pipeline to parse the response body. The operator automatically handles HTTP `Content-Encoding`. If the downloaded file itself is compressed, add the appropriate decompressor to the sub-pipeline. For example, use `decompress_gzip` followed by `read_json` for a downloaded gzip-compressed JSON file.
 
@@ -81,11 +89,24 @@ Specifies how to encode `record` bodies. Supported values:
 
 Defaults to `json`.
 
-### `paginate = record -> string | string (optional)`
+### `paginate = record -> string | record | null | string (optional)`
 
 Controls automatic pagination of HTTP responses.
 
-**Lambda mode**: A lambda expression to evaluate against the parsed result of a request. If the expression evaluates successfully and returns a non-null string, Tenzir uses that string as the URL for a new `GET` request with the same headers.
+**Lambda mode**: A lambda expression to evaluate against the parsed result of a request. The lambda receives one parsed page envelope. If the parser emits multiple events for one page, Tenzir emits a warning and stops pagination.
+
+If the lambda returns `null`, pagination stops. If it returns a non-null string, Tenzir uses that string as the URL for a new `GET` request with the same headers.
+
+If the lambda returns a record, Tenzir patches the next request. The record supports these fields:
+
+* `url`: The next URL as a `string`. Relative URLs are resolved against the current request URL.
+* `method`: The next HTTP method as a `string`.
+* `headers`: A record of request headers. Header names are matched case-insensitively. String values set or replace headers, and `null` values delete headers.
+* `body`: The next request body as a `blob`, `record`, or `string`. Set this field to `null` to clear the body.
+
+Each request record is a patch against the request that produced the current page. Setting `body` does not change the method. Set `method` explicitly if the next request must use a different method. If `body` is a record, the `encode` option also applies to paginated request bodies.
+
+This request-record pagination behavior applies to [`from_http`](/reference/operators/from_http.md) only. It does not change [`http`](/reference/operators/http.md), [`to_http`](/reference/operators/to_http.md), [`accept_http`](/reference/operators/accept_http.md), or [`serve_http`](/reference/operators/serve_http.md).
 
 **Link mode**: The string `"link"` to automatically follow pagination links in the HTTP `Link` response header as defined in [RFC 8288](https://datatracker.ietf.org/doc/html/rfc8288). Tenzir follows the `rel=next` relation until the response no longer contains one.
 
@@ -132,9 +153,9 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 The `server=true` flag is no longer supported. Use [`accept_http`](/reference/operators/accept_http.md) to listen for incoming HTTP requests.
 
-### `{ … }`
+### `{ … } (optional)`
 
-A required pipeline that receives the response body as bytes, allowing parsing per request. This is especially useful in scenarios where the response body can be parsed into multiple events.
+An optional pipeline that receives the response body as bytes, allowing parsing per request. Explicit parser sub-pipelines take precedence over inferred formats. This is especially useful for ambiguous formats, custom parsing, or scenarios where the response body can be parsed into multiple events.
 
 Inside the pipeline, the `$response` variable is available as a record with the following fields:
 
@@ -178,6 +199,22 @@ head 1
 }
 ```
 
+### Infer the parser
+
+Omit the parser sub-pipeline when the response declares a supported `Content-Type` header or the URL path has a supported extension:
+
+```tql
+from_http "https://example.com/events.json"
+```
+
+Explicit parser sub-pipelines still take precedence:
+
+```tql
+from_http "https://example.com/events" {
+  read_ndjson
+}
+```
+
 ### Send a POST request with JSON body
 
 ```tql
@@ -218,7 +255,7 @@ Use `paginate="odata"` for APIs that return an OData collection envelope, such a
 ```tql
 from_http "https://graph.microsoft.com/v1.0/users",
   headers={
-    "Authorization": "Bearer " + secret("MICROSOFT_GRAPH_TOKEN"),
+    "Authorization": f"Bearer {secret("MICROSOFT_GRAPH_TOKEN")}",
     "ConsistencyLevel": "eventual",
   },
   paginate="odata" {
@@ -227,6 +264,65 @@ from_http "https://graph.microsoft.com/v1.0/users",
 ```
 
 The response body must be a JSON object with a top-level `value` array. The operator emits each object from `value`, follows a top-level string `@odata.nextLink` as an opaque URL, and stops when the field is absent or not a string. Follow-up requests use `GET` with the same headers as the initial request.
+
+### Paginate with request records
+
+Use a request record when an API expects pagination state in the request body instead of the URL. This OpenSearch example uses `search_after` from the last hit in the previous page. The next request inherits the URL, method, and headers, but replaces the body:
+
+```tql
+let $headers = {
+  "Authorization": f"Bearer {secret("OPENSEARCH_TOKEN")}",
+}
+
+
+from_http "https://opensearch.example.com/logs-*/_search",
+  headers=$headers,
+  body={
+    size: 1000,
+    sort: [{"@timestamp": "asc"}, {"_id": "asc"}],
+    query: {match_all: {}},
+  },
+  paginate=(x => {
+    body: {
+      size: 1000,
+      sort: [{"@timestamp": "asc"}, {"_id": "asc"}],
+      query: {match_all: {}},
+      search_after: x.hits.hits[-1].sort,
+    },
+  } if x.hits.hits != []) {
+  read_json
+}
+unroll hits.hits
+this = hits.hits._source
+```
+
+For scroll-style APIs, return both a new URL and a new body. The next request keeps the configured method and headers:
+
+```tql
+let $search = "https://opensearch.example.com/logs/_search?scroll=1m"
+let $scroll = "https://opensearch.example.com/_search/scroll"
+let $headers = {
+  "Authorization": f"Bearer {secret("OPENSEARCH_TOKEN")}",
+}
+
+
+from_http $search,
+  headers=$headers,
+  body={size: 1000, query: {match_all: {}}},
+  paginate=(x => {
+    url: $scroll,
+    body: {
+      scroll: "1m",
+      scroll_id: x._scroll_id,
+    },
+  } if x.hits.hits != []) {
+  read_json
+}
+unroll hits.hits
+this = hits.hits._source
+```
+
+Keep operators such as [`unroll`](/reference/operators/unroll.md) after [`from_http`](/reference/operators/from_http.md) for these pagination styles. The pagination lambda receives the parsed page envelope, so the parsing subpipeline must emit one event for the whole response.
 
 ### Retry Failed Requests
 

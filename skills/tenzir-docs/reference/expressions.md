@@ -322,7 +322,7 @@ Create secrets using the [`secret`](/reference/functions/secret.md) function or 
 
 ```tql
 // Using managed secret
-auth_header = "Bearer " + secret("api-token")
+auth_header = f"Bearer {secret("api-token")}"
 
 
 // Using format string (produces a secret)
