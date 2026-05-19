@@ -153,6 +153,7 @@ Use `every` to group events into time-based batches, with each batch sent as a s
 ```tql
 subscribe "stream-of-events"
 every 1m {
+  batch
   to_http "https://example.com/ingest" {
     write_ndjson
   }
