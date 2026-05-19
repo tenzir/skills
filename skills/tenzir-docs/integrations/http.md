@@ -7,13 +7,13 @@
 
 When retrieving data from an API or website, you prepare your HTTP request and get back the HTTP response body as your pipeline data:
 
-Use [`from_http`](/reference/operators/from_http.md) to issue a one-shot HTTP request, or [`http`](/reference/operators/http.md) to enrich events flowing through a pipeline with HTTP responses. Both operators automatically infer the response format from the URL extension or `Content-Type` header.
+Use [`from_http`](/reference/operators/from_http.md) to issue a one-shot HTTP request and stream the response body chunks into its parser sub-pipeline as they arrive. The operator automatically infers the response format from the URL extension or `Content-Type` header.
 
 See the [Fetch via HTTP and APIs](../guides/collecting/fetch-via-http-and-apis.md) guide for practical examples covering authentication, pagination, error handling, and data enrichment.
 
 ## Sending data to webhooks and APIs
 
-Use [`to_http`](/reference/operators/to_http.md) to send events as HTTP requests to a webhook or API endpoint. Each input event is sent as a separate request, with the event JSON-encoded as the body by default. This is useful for pushing alerts to webhooks, forwarding events to SIEMs, or calling external APIs for each event.
+Use [`to_http`](/reference/operators/to_http.md) to send events to a webhook or API endpoint as a single HTTP request per operator invocation. A printer sub-pipeline turns the input events into the request body bytes, which Tenzir streams directly into the outgoing request. This is useful for pushing alerts to webhooks, forwarding events to SIEMs, or sending periodic batches to external APIs.
 
 ## Streaming data to HTTP clients
 

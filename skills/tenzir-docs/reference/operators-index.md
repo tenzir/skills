@@ -181,7 +181,7 @@
 - [to_google_cloud_storage](operators/to_google_cloud_storage.md): Writes events to one or multiple objects in Google Cloud Storage.
 - [to_google_secops](operators/to_google_secops.md): Sends unstructured events to a Google SecOps Chronicle instance.
 - [to_hive](operators/to_hive.md): Writes events to a URI using hive partitioning.
-- [to_http](operators/to_http.md): Sends events as HTTP requests to a webhook or API endpoint.
+- [to_http](operators/to_http.md): Sends events as a single HTTP request to a webhook or API endpoint.
 - [to_kafka](operators/to_kafka.md): Sends messages to an Apache Kafka topic.
 - [to_nats](operators/to_nats.md): Publishes messages to a NATS JetStream subject.
 - [to_opensearch](operators/to_opensearch.md): Sends events to a Bulk API compatible with OpenSearch.

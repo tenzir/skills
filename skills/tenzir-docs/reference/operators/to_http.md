@@ -1,21 +1,23 @@
 # to_http
 
 
-Sends events as HTTP requests to a webhook or API endpoint.
+Sends events as a single HTTP request to a webhook or API endpoint.
 
 ```tql
 to_http url:string, [method=string, headers=record, timeout=duration,
-        parallel=int, tls=record, connection_timeout=duration,
+        tls=record, connection_timeout=duration,
         max_retry_count=int, retry_delay=duration] { … }
 ```
 
 ## Description
 
-The `to_http` operator sends each input event as an HTTP request to a webhook or API endpoint. A required printer sub-pipeline turns each input event into bytes, which become the request body. By default, the operator sends requests with the `POST` method.
+The `to_http` operator collects all input events into a single HTTP request to a webhook or API endpoint. A required printer sub-pipeline turns the events into bytes, which Tenzir streams as the request body. The request body flows from the printer sub-pipeline into the HTTP connection as chunks become available, without buffering the entire body in memory first. By default, the operator sends requests with the `POST` method.
 
-The operator retries transient transport failures and HTTP `429` and `5xx` responses up to `max_retry_count` times. If a response includes a `Retry-After` header, Tenzir waits for that duration before retrying. Otherwise, it uses exponential backoff starting at `retry_delay`. Tenzir emits a diagnostic before each retry with the reason and wait time.
+To split events across multiple requests, wrap `to_http` in the [`every`](/reference/operators/every.md) operator. For example, `every 1m { to_http ... }` sends one request per minute with the events that arrived during that window.
 
-Non-2xx HTTP status codes emit warnings. Request failures, such as connection or retry exhaustion, cause pipeline errors.
+The operator retries transient connection errors and HTTP `429` and `5xx` responses up to `max_retry_count` times, but only before any body data has been sent. Once the body stream has started, retries are not possible because the data cannot be replayed. For retried HTTP responses, a `Retry-After` header overrides the configured delay.
+
+Non-2xx HTTP status codes cause pipeline errors.
 
 ### `url: string`
 
@@ -36,11 +38,17 @@ One of the following HTTP methods to use:
 * `options`
 * `trace`
 
-For [`from_http`](/reference/operators/from_http.md), the default is `get`, or `post` when you set `body`. For [`to_http`](/reference/operators/to_http.md), the default is `post`.
+Defaults to `post`.
 
 ### `headers = record (optional)`
 
 Record of headers to send with the request. Each value is resolved as a [secret](../../explanations/secrets.md), so you can pass secret names to avoid hardcoding tokens or API keys directly in the pipeline.
+
+### `timeout = duration (optional)`
+
+Timeout for the overall request.
+
+Defaults to `90s`.
 
 ### `connection_timeout = duration (optional)`
 
@@ -52,7 +60,7 @@ Defaults to `5s`.
 
 Maximum number of retry attempts per request.
 
-A request is retried on transient transport failures and HTTP `429` and `5xx` responses.
+A request is retried on transient transport failures and HTTP `429` and `5xx` responses, but only before any request body bytes have been sent.
 
 Defaults to `5`.
 
@@ -60,7 +68,7 @@ Defaults to `5`.
 
 Base duration between retry attempts.
 
-Tenzir uses exponential backoff starting at `retry_delay` and capping at `16 * retry_delay`. A `Retry-After` response header overrides this delay.
+Tenzir uses exponential backoff starting at `retry_delay` and capping at `16 * retry_delay`. For retried HTTP `429` and `5xx` responses, a `Retry-After` response header overrides this delay.
 
 Defaults to `1s`.
 
@@ -68,13 +76,7 @@ Defaults to `1s`.
 
 A required pipeline that receives events and must return bytes. The output of this pipeline becomes the HTTP request body.
 
-Use this pipeline to choose the request format explicitly. For example, use `write_ndjson`, `write_json`, or another byte-producing pipeline.
-
-### `parallel = int (optional)`
-
-Maximum number of requests that can be in progress at any time.
-
-Defaults to `1`.
+Tenzir reads this pipeline incrementally and forwards the emitted chunks to the HTTP client as they are produced. Use this pipeline to choose the request format explicitly. For example, use `write_ndjson`, `write_json`, or another byte-producing pipeline.
 
 ### `tls = record (optional)`
 
@@ -103,7 +105,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ### Send events to a webhook
 
-Send each event as a JSON POST request:
+Send all events as a single JSON POST request:
 
 ```tql
 from {message: "hello", severity: "info"}
@@ -114,7 +116,7 @@ to_http "https://example.com/webhook" {
 
 ### Control the request body format
 
-Use the printer sub-pipeline to control how the operator serializes each event:
+Use the printer sub-pipeline to control how the operator serializes events:
 
 ```tql
 from {foo: "bar"}
@@ -144,16 +146,16 @@ to_http "https://secure.example.com/api",
 }
 ```
 
-### Send requests in parallel
+### Send events in periodic batches
 
-Increase throughput by sending multiple requests concurrently:
+Use `every` to group events into time-based batches, with each batch sent as a separate HTTP request:
 
 ```tql
-from_file "events.json" {
-  read_json
-}
-to_http "https://example.com/ingest", parallel=4 {
-  write_ndjson
+subscribe "stream-of-events"
+every 1m {
+  to_http "https://example.com/ingest" {
+    write_ndjson
+  }
 }
 ```
 
@@ -163,6 +165,7 @@ to_http "https://example.com/ingest", parallel=4 {
 * [`http`](/reference/operators/http.md)
 * [`accept_http`](/reference/operators/accept_http.md)
 * [`serve_http`](/reference/operators/serve_http.md)
+* [`every`](/reference/operators/every.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [HTTP(S)](../../integrations/http.md)

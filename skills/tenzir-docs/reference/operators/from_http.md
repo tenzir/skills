@@ -15,7 +15,7 @@ from_http url:string, [method=string, body=record|string|blob, encode=string,
 
 The `from_http` operator issues an HTTP request and returns the response as events.
 
-The `from_http` operator sends the HTTP response body to a parser sub-pipeline as bytes. You can provide the sub-pipeline explicitly, or omit it when Tenzir can infer the response format.
+The `from_http` operator streams the HTTP response body to a parser sub-pipeline as bytes. As response chunks arrive from the server, Tenzir forwards them to the parser pipeline without buffering the entire response body in memory first. You can provide the sub-pipeline explicitly, or omit it when Tenzir can infer the response format.
 
 When you omit the parser sub-pipeline, Tenzir infers the parser for each response page in this order:
 
@@ -46,11 +46,17 @@ One of the following HTTP methods to use:
 * `options`
 * `trace`
 
-For [`from_http`](/reference/operators/from_http.md), the default is `get`, or `post` when you set `body`. For [`to_http`](/reference/operators/to_http.md), the default is `post`.
+Defaults to `get`, or `post` when you set `body`.
 
 ### `headers = record (optional)`
 
 Record of headers to send with the request. Each value is resolved as a [secret](../../explanations/secrets.md), so you can pass secret names to avoid hardcoding tokens or API keys directly in the pipeline.
+
+### `timeout = duration (optional)`
+
+Timeout for the overall request.
+
+Defaults to `90s`.
 
 ### `connection_timeout = duration (optional)`
 
@@ -156,6 +162,8 @@ The `server=true` flag is no longer supported. Use [`accept_http`](/reference/op
 ### `{ … } (optional)`
 
 An optional pipeline that receives the response body as bytes, allowing parsing per request. Explicit parser sub-pipelines take precedence over inferred formats. This is especially useful for ambiguous formats, custom parsing, or scenarios where the response body can be parsed into multiple events.
+
+Tenzir feeds the pipeline incrementally as response chunks arrive, so parsers can emit events before the full response has been downloaded.
 
 Inside the pipeline, the `$response` variable is available as a record with the following fields:
 

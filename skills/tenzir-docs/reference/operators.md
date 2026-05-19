@@ -1111,7 +1111,7 @@ to_hive "s3://…", partition_by=[x]
 
 ### [to\_http](operators/to_http.md)
 
-Sends events as HTTP requests to a webhook or API endpoint.
+Sends events as a single HTTP request to a webhook or API endpoint.
 
 ```tql
 to_http "https://example.com/webhook" { write_ndjson }
