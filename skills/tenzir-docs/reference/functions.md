@@ -864,6 +864,14 @@ record.print_yaml()
 
 ## Record
 
+### [drop\_matching](functions/drop_matching.md)
+
+Removes top-level fields from a record when their names match a regular expression.
+
+```tql
+record.drop_matching("^debug_")
+```
+
 ### [get](functions/get.md)
 
 Gets a field from a record or an element from a list
@@ -894,6 +902,14 @@ Combines two records into a single record by merging their fields.
 
 ```tql
 merge(foo, bar)
+```
+
+### [select\_matching](functions/select_matching.md)
+
+Selects top-level fields from a record when their names match a regular expression.
+
+```tql
+record.select_matching("^src_")
 ```
 
 ### [sort](functions/sort.md)

@@ -109,7 +109,7 @@ with_tax = {
 
 ## Filter record fields
 
-Keep only specific fields:
+Keep explicit fields by constructing a new record. Use [`select_matching`](/reference/functions/select_matching.md) and [`drop_matching`](/reference/functions/drop_matching.md) when field names follow a pattern:
 
 ```tql
 from {
@@ -121,8 +121,6 @@ from {
     api_key: "xyz123"
   }
 }
-// Note: filter_keys and select functions are not available
-// Manual field selection:
 public_info = {
   id: user.id,
   name: user.name,
@@ -132,6 +130,8 @@ contact = {
   name: user.name,
   email: user.email
 }
+credentials = user.select_matching("(password|api_key)$")
+safe_user = user.drop_matching("(password|api_key)$")
 ```
 
 ```tql
@@ -151,12 +151,27 @@ contact = {
   contact: {
     name: "Alice",
     email: "alice@example.com"
+  },
+  credentials: {
+    password: "secret",
+    api_key: "xyz123"
+  },
+  safe_user: {
+    id: 123,
+    name: "Alice",
+    email: "alice@example.com"
   }
 }
 ```
 
+The matching functions inspect only top-level field names on the record you call them on. They don’t recurse into nested records.
+
 ## See Also
 
+* [`drop_matching`](/reference/functions/drop_matching.md)
+* [`keys`](/reference/functions/keys.md)
+* [`merge`](/reference/functions/merge.md)
+* [`select_matching`](/reference/functions/select_matching.md)
 * [Shape lists](shape-lists.md)
 * [Filter and select data](filter-and-select-data.md)
 * [Transform values](transform-values.md)

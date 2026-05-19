@@ -149,6 +149,28 @@ select price, tax=price * tax_rate, total=price * (1 + tax_rate)
 {price: 50, tax: 4.0, total: 54.0}
 ```
 
+### Selecting fields by name pattern
+
+The [`select`](/reference/operators/select.md) operator requires explicit field names. When you need to shape a record value by matching field names, use [`select_matching`](/reference/functions/select_matching.md):
+
+```tql
+from {
+  user_id: "u-123",
+  session_id: "s-456",
+  message: "login",
+}
+select identifiers = this.select_matching("_id$")
+```
+
+```tql
+{
+  identifiers: {
+    user_id: "u-123",
+    session_id: "s-456",
+  },
+}
+```
+
 ## Remove unwanted fields
 
 The [`drop`](/reference/operators/drop.md) operator removes specified fields, keeping everything else.
@@ -181,6 +203,29 @@ drop internal_id, debug
 ```tql
 {id: 1, name: "alice"}
 {id: 2, name: "bob"}
+```
+
+### Dropping fields by name pattern
+
+Use [`drop_matching`](/reference/functions/drop_matching.md) when you want to remove top-level fields from a record based on a regular expression:
+
+```tql
+from {
+  message: "login",
+  debug_trace: "abc",
+  debug_flags: ["verbose"],
+  user: "alice",
+}
+select cleaned = this.drop_matching("^debug_")
+```
+
+```tql
+{
+  cleaned: {
+    message: "login",
+    user: "alice",
+  },
+}
 ```
 
 ## Add computed fields
@@ -308,6 +353,8 @@ select method, path, duration = duration_ms.milliseconds()
 
 ## See also
 
+* [`drop_matching`](/reference/functions/drop_matching.md)
+* [`select_matching`](/reference/functions/select_matching.md)
 * [Transform values](transform-values.md)
 * [Slice and sample data](../optimization/slice-and-sample-data.md)
 * [Reshape complex data](reshape-complex-data.md)
