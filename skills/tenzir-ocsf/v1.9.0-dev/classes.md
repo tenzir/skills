@@ -68,7 +68,9 @@ Identity & Access Management (IAM) events relate to the supervision of the syste
 - [Authorize Session](classes/authorize_session.md)
 - [Entity Management](classes/entity_management.md)
 - [Group Management](classes/group_management.md)
+- [Role Management](classes/role_management.md)
 - [User Access Management](classes/user_access.md)
+- [User Management](classes/user_management.md)
 
 ## Network Activity
 

@@ -213,6 +213,7 @@
 - [Advisory](objects/advisory.md)
 - [AI Model](objects/ai_model.md)
 - [GPU Information](objects/gpu_info.md)
+- [IAM Role](objects/iam_role.md)
 - [Job Action](objects/job_action.md)
 - [Job Trigger](objects/job_trigger.md)
 - [Message Context](objects/message_context.md)

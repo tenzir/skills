@@ -70,6 +70,7 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 - Process Remediation Activity
 - RDP Activity
 - Remediation Activity
+- Role Management
 - Scan Activity
 - Scheduled Job Activity
 - Script Activity
@@ -84,6 +85,7 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 - Unmanned Systems
 - User Access Management
 - User Inventory Info
+- User Management
 - User Query
 - User Session Query
 - Vulnerability Finding

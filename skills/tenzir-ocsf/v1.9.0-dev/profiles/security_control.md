@@ -69,6 +69,7 @@ The attributes including disposition that represent the outcome of a security co
 - Process Remediation Activity
 - RDP Activity
 - Remediation Activity
+- Role Management
 - Scan Activity
 - Scheduled Job Activity
 - Script Activity
@@ -83,6 +84,7 @@ The attributes including disposition that represent the outcome of a security co
 - Unmanned Systems
 - User Access Management
 - User Inventory Info
+- User Management
 - User Query
 - User Session Query
 - Vulnerability Finding

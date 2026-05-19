@@ -1,6 +1,6 @@
 # Account Change (account_change)
 
-Account Change events report when specific user account management tasks are performed, such as a user/role being created, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
+Account Change events report when specific user account management tasks are performed, such as a user/role being created or role assigned, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
 
 - **Class UID**: `3001`
 - **Category**: Identity & Access Management

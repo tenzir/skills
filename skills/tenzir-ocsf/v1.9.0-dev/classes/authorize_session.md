@@ -1,6 +1,6 @@
 # Authorize Session (authorize_session)
 
-Authorize Session events report privileges or groups assigned to a new user session, usually at login time.
+Authorize Session events report privileges, groups or roles assigned to a new user session, usually at login time.
 
 - **Class UID**: `3003`
 - **Category**: Identity & Access Management
@@ -9,7 +9,7 @@ Authorize Session events report privileges or groups assigned to a new user sess
 
 ## Constraints
 
-- **Exactly one of**: `privileges`, `group`
+- **At least one of**: `privileges`, `groups`, `iam_roles`
 
 ## Associations
 
@@ -48,6 +48,7 @@ Authorize Session events report privileges or groups assigned to a new user sess
 
 - `1`: `Assign Privileges` - Assign special privileges to a new logon.
 - `2`: `Assign Groups` - Assign special groups to a new logon.
+- `3`: `Assign Roles` - Assign special roles to a new logon.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -66,6 +67,22 @@ The Endpoint for which the user session was targeted.
 - **Group**: primary
 
 Group that was assigned to the new user session.
+
+### `groups`
+
+- **Type**: [`group`](../objects/group.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The list of groups assigned to the new user session.
+
+### `iam_roles`
+
+- **Type**: [`iam_role`](../objects/iam_role.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The list of roles assigned to the new user session.
 
 ### `privileges`
 

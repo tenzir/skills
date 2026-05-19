@@ -6,6 +6,20 @@ The Email object describes the email metadata such as sender, recipients, and di
 
 ## Attributes
 
+### `bcc`
+
+- **Type**: `email_t`
+- **Requirement**: optional
+
+The machine-readable email header Bcc values, as defined by RFC 5322. For example `example.user@usersdomain.com`.
+
+### `bcc_mailboxes`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The human-readable email header Bcc Mailbox values. For example `'Example User <example.user@usersdomain.com>'`.
+
 ### `cc`
 
 - **Type**: `email_t`

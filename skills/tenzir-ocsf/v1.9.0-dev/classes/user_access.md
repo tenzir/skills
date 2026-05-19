@@ -39,13 +39,23 @@ User Access Management events report management updates to a user's privileges.
 
 - `1`: `Assign Privileges` - Assign privileges to a user.
 - `2`: `Revoke Privileges` - Revoke privileges from a user.
+- `3`: `Assign Role` - Assign a role to a user.
+- `4`: `Remove Role` - Remove a role from a user.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
+
+### `iam_role`
+
+- **Type**: [`iam_role`](../objects/iam_role.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The role assigned to or removed from a user.
 
 ### `privileges`
 
 - **Type**: `string_t`
-- **Requirement**: required
+- **Requirement**: recommended
 - **Group**: primary
 
 List of privileges assigned to a user.

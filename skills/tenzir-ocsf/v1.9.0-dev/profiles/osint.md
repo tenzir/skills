@@ -69,6 +69,7 @@ The OSINT (Open Source Intelligence) profile contains one or more indicators and
 - Process Remediation Activity
 - RDP Activity
 - Remediation Activity
+- Role Management
 - Scan Activity
 - Scheduled Job Activity
 - Script Activity
@@ -83,6 +84,7 @@ The OSINT (Open Source Intelligence) profile contains one or more indicators and
 - Unmanned Systems
 - User Access Management
 - User Inventory Info
+- User Management
 - User Query
 - User Session Query
 - Vulnerability Finding

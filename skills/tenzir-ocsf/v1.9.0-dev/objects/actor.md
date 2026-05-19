@@ -27,6 +27,13 @@ The unique identifier of the client application or service that initiated the ac
 
 Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
 
+### `iam_role`
+
+- **Type**: [`iam_role`](iam_role.md)
+- **Requirement**: optional
+
+The actor's role, or as an alternative to `user` or `process` when the role is serving as a security principal for the operation that initiated the activity.
+
 ### `idp`
 
 - **Type**: [`idp`](idp.md)

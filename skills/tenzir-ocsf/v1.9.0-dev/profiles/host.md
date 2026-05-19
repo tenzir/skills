@@ -69,6 +69,7 @@ Adds host and actor context to event classes. Apply this profile when the event 
 - Process Remediation Activity
 - RDP Activity
 - Remediation Activity
+- Role Management
 - Scan Activity
 - Scheduled Job Activity
 - Script Activity
@@ -83,6 +84,7 @@ Adds host and actor context to event classes. Apply this profile when the event 
 - Unmanned Systems
 - User Access Management
 - User Inventory Info
+- User Management
 - User Query
 - User Session Query
 - Vulnerability Finding
