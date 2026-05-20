@@ -13,6 +13,8 @@ The `every` operator repeats running a pipeline indefinitely at a fixed interval
 
 Every `interval`, the executor spawns a new sub-pipeline. When the interval elapses, `every` stops the inputs of the running sub-pipeline, waits for it to finish processing, and then starts a new one. This means sub-pipelines with sink operators work as expected — events flow in for the duration of the interval, then the sub-pipeline flushes and restarts. Sub-pipelines without inputs (pure sources) must terminate on their own; if they run longer than `interval`, the next run starts immediately after.
 
+The sub-pipeline either emits events—which are forwarded as the operator’s output—or ends with a sink, in which case `every` itself becomes a sink. The sub-pipeline must not produce bytes.
+
 Source sub-pipelines must terminate on their own
 
 `every` stops inputs to a sub-pipeline but cannot stop operators that produce data indefinitely on their own. Source operators like [`subscribe`](/reference/operators/subscribe.md) inside an `every` block will prevent the next iteration from starting.
@@ -70,6 +72,19 @@ every 10min {
   }
 }
 publish "threat-feed"
+```
+
+### Periodically import a snapshot
+
+When the sub-pipeline ends with a sink, `every` itself becomes a sink:
+
+```tql
+every 1h {
+  from_http "example.org/api/inventory" {
+    read_json
+  }
+  import
+}
 ```
 
 ## See Also
