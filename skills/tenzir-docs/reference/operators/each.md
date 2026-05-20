@@ -83,5 +83,7 @@ each {
 * [`fork`](/reference/operators/fork.md)
 * [`group`](/reference/operators/group.md)
 * [`parallel`](/reference/operators/parallel.md)
+* [`to_http`](/reference/operators/to_http.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
+* [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)

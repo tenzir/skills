@@ -103,16 +103,51 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ## Examples
 
-### Send events to a webhook
+### Send all events in a single request
 
-Send all events as a single JSON POST request:
+By default, `to_http` collects all input events into a single HTTP request:
 
 ```tql
-from {message: "hello", severity: "info"}
+from {message: "hello", severity: "info"},
+     {message: "world", severity: "warn"}
 to_http "https://example.com/webhook" {
   write_ndjson
 }
 ```
+
+This sends one `POST` request whose body contains both events as NDJSON. Use any printer, such as `write_json`, `write_csv`, or `write_parquet`, to control the wire format.
+
+### Send one request per event
+
+Wrap `to_http` in [`each`](/reference/operators/each.md) to send a separate HTTP request for every incoming event:
+
+```tql
+from {message: "hello", severity: "info"},
+     {message: "world", severity: "warn"}
+each {
+  from $this
+  to_http "https://example.com/webhook" {
+    write_json
+  }
+}
+```
+
+Each event becomes an independent `POST` request with a JSON body. Use the `parallel` option of [`each`](/reference/operators/each.md) to control concurrency.
+
+### Send events in periodic batches
+
+Use [`every`](/reference/operators/every.md) to group events into time-based batches, with each batch sent as a separate HTTP request:
+
+```tql
+subscribe "stream-of-events"
+every 1m {
+  to_http "https://example.com/ingest" {
+    write_parquet
+  }
+}
+```
+
+Every minute, `every` stops the input, causing `to_http` to finish the request, wait for response and then restart. Adjust the interval to control batch size — use `every 5s` for near-real-time delivery or `every 10m` for larger batches.
 
 ### Control the request body format
 
@@ -121,7 +156,7 @@ Use the printer sub-pipeline to control how the operator serializes events:
 ```tql
 from {foo: "bar"}
 to_http "https://example.com/api" {
-  write_json
+  write_csv
 }
 ```
 
@@ -129,9 +164,7 @@ to_http "https://example.com/api" {
 
 ```tql
 from {foo: "bar"}
-to_http "https://example.com/api",
-  method="put",
-  headers={"X-Custom": "value"} {
+to_http "192.168.1.10", method="put", headers={"X-Custom": "value"} {
   write_ndjson
 }
 ```
@@ -140,32 +173,17 @@ to_http "https://example.com/api",
 
 ```tql
 from {data: "sensitive"}
-to_http "https://secure.example.com/api",
-  tls={skip_peer_verification: true} {
+to_http "https://secure.example.com/api", tls={skip_peer_verification: true} {
   write_ndjson
-}
-```
-
-### Send events in periodic batches
-
-Use `every` to group events into time-based batches, with each batch sent as a separate HTTP request:
-
-```tql
-subscribe "stream-of-events"
-every 1m {
-  batch
-  to_http "https://example.com/ingest" {
-    write_ndjson
-  }
 }
 ```
 
 ## See Also
 
 * [`from_http`](/reference/operators/from_http.md)
-* [`http`](/reference/operators/http.md)
 * [`accept_http`](/reference/operators/accept_http.md)
 * [`serve_http`](/reference/operators/serve_http.md)
+* [`each`](/reference/operators/each.md)
 * [`every`](/reference/operators/every.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)

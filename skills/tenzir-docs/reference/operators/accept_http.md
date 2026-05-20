@@ -156,7 +156,6 @@ accept_http "0.0.0.0:8443" {
 ## See Also
 
 * [`from_http`](/reference/operators/from_http.md)
-* [`http`](/reference/operators/http.md)
 * [`to_http`](/reference/operators/to_http.md)
 * [`serve_http`](/reference/operators/serve_http.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
