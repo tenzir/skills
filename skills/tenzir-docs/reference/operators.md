@@ -577,6 +577,14 @@ Listens on a ZeroMQ endpoint and receives events.
 accept_zmq "tcp://0.0.0.0:5555", prefix="alerts/" { read_json }
 ```
 
+### [from\_amazon\_cloudwatch](operators/from_amazon_cloudwatch.md)
+
+Reads events from Amazon CloudWatch.
+
+```tql
+from_amazon_cloudwatch "/aws/lambda/api", mode="search"
+```
+
 ### [from\_amqp](operators/from_amqp.md)
 
 Receives messages from an AMQP queue.
@@ -995,6 +1003,14 @@ Listens on a ZeroMQ endpoint and sends events.
 
 ```tql
 serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=f"{kind}/"
+```
+
+### [to\_amazon\_cloudwatch](operators/to_amazon_cloudwatch.md)
+
+Sends events to Amazon CloudWatch.
+
+```tql
+to_amazon_cloudwatch "/tenzir/events", stream="default"
 ```
 
 ### [to\_amazon\_security\_lake](operators/to_amazon_security_lake.md)

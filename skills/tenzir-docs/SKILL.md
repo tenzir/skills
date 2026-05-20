@@ -599,6 +599,10 @@ Start here to connect Tenzir with Splunk, Elastic, CrowdStrike, etc.
 
 Tenzir integrates with the services from Amazon Web Services (AWS) listed below.
 
+##### [CloudWatch](integrations/amazon/cloudwatch.md)
+
+Amazon CloudWatch is a monitoring and observability service in AWS. Tenzir can read CloudWatch events with `from_amazon_cloudwatch` and write events with `to_amazon_cloudwatch`.
+
 ##### [MSK](integrations/amazon/msk.md)
 
 Amazon Managed Streaming for Apache Kafka (Amazon MSK) is a managed Kafka service on AWS. It handles infrastructure and operations, making it easier to run Kafka applications and Kafka Connect connectors without becoming a Kafka expert.

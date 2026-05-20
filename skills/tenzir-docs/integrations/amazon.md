@@ -62,6 +62,7 @@ The `tenzir-node` systemd unit by default creates a `tenzir` user and runs as th
 
 ## Contents
 
+- [Cloudwatch](amazon/cloudwatch.md)
 - [Msk](amazon/msk.md)
 - [S3](amazon/s3.md)
 - [Security-lake](amazon/security-lake.md)

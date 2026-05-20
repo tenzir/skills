@@ -101,6 +101,7 @@
 - [accept_tcp](operators/accept_tcp.md): Listens for incoming TCP or TLS connections and receives events.
 - [accept_udp](operators/accept_udp.md): Receives UDP datagrams and outputs structured events.
 - [accept_zmq](operators/accept_zmq.md): Listens on a ZeroMQ endpoint and receives events.
+- [from_amazon_cloudwatch](operators/from_amazon_cloudwatch.md): Reads events from Amazon CloudWatch.
 - [from_amqp](operators/from_amqp.md): Receives messages from an AMQP queue.
 - [from_azure_blob_storage](operators/from_azure_blob_storage.md): Reads one or multiple files from Azure Blob Storage.
 - [from_file](operators/from_file.md): Reads one or multiple files from a filesystem.
@@ -167,6 +168,7 @@
 - [serve_http](operators/serve_http.md): Starts an HTTP server and streams bytes produced by a nested pipeline to connected clients.
 - [serve_tcp](operators/serve_tcp.md): Listens for incoming TCP connections and sends events to all connected clients.
 - [serve_zmq](operators/serve_zmq.md): Listens on a ZeroMQ endpoint and sends events.
+- [to_amazon_cloudwatch](operators/to_amazon_cloudwatch.md): Sends events to Amazon CloudWatch Logs.
 - [to_amazon_security_lake](operators/to_amazon_security_lake.md): Sends OCSF events to Amazon Security Lake.
 - [to_amqp](operators/to_amqp.md): Sends messages to an AMQP exchange.
 - [to_azure_blob_storage](operators/to_azure_blob_storage.md): Writes events to one or multiple blobs in Azure Blob Storage.
