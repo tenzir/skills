@@ -313,13 +313,61 @@ connection_info = {
 // raw.initiated and raw.is_ipv6 are already consumed — no drop needed
 ```
 
-The ternary form is appropriate *only for genuinely binary choices*. The moment you need a third branch, switch to if/else chains or preferably a [record constant lookup](#use-record-constants-for-mappings-instead-of-if-else-chains):
+The ternary form is appropriate *only for genuinely binary choices*. The moment you need a third branch, switch to `match` for branch pipelines or a [record constant lookup](#use-record-constants-for-value-mappings) for pure value mappings:
 
 ```tql
 // Three or more enum-like outcomes → record constant
 let $protocols = { tcp: 6, udp: 17, icmp: 1 }
 protocol_num = $protocols[proto]? else 255
 ```
+
+### Use match for finite case branching
+
+Use `match` when you route events by comparing one value against a finite set of cases. This keeps dispatching logic close to the field it depends on, and the final `_` arm makes the fallback explicit.
+
+✅ Clear:
+
+```tql
+from {action: "allow"},
+     {action: "deny"},
+     {action: "reset"}
+match action {
+  "allow" => {
+    verdict = "allowed"
+  }
+  "deny" => {
+    verdict = "blocked"
+  }
+  _ => {
+    verdict = "unknown"
+  }
+}
+```
+
+Use guarded arms when the case also depends on another field:
+
+```tql
+from {status: 503, retries: 1},
+     {status: 503, retries: 0},
+     {status: 429, retries: 0},
+     {status: 404, retries: 0}
+match status {
+  499..600 | 429 if retries > 0 => {
+    action = "retry"
+  }
+  499..600 => {
+    action = "page"
+  }
+  429 => {
+    action = "throttle"
+  }
+  _ => {
+    action = "ignore"
+  }
+}
+```
+
+Keep `if` for a single predicate or a simple binary decision. Use record constants when you only map keys to values and don’t need to run different statements.
 
 ### Use `in` for multi-value membership tests
 
@@ -581,7 +629,7 @@ where risk_score > 0.8          // What does 0.8 mean?
 
 ## Record constants and mappings
 
-### Use record constants for mappings instead of if-else chains
+### Use record constants for value mappings
 
 ✅ Clean record-based mappings with else fallback:
 
@@ -675,10 +723,10 @@ These inline chains are a serious anti-pattern because:
 * **Unreadable**: Eyes can’t parse the logic flow easily
 * **Error-prone**: Easy to mix up conditions and values
 * **Unmaintainable**: Adding/removing conditions requires rewriting the entire expression
-* **Debugging nightmare**: Can’t set breakpoints or log intermediate values
-* **Performance issues**: Every condition is evaluated sequentially
+* **Hard to inspect**: You can’t see each case as a separate branch
+* **Wrong abstraction**: Static value lookups belong in records, and branch pipelines belong in `match`
 
-✅ Always use record constants instead:
+✅ Use record constants for pure value lookup:
 
 ```tql
 // Clean, maintainable lookups with record indexing
@@ -699,6 +747,8 @@ This pattern is particularly powerful for:
 * Mapping between different naming conventions
 * Providing sensible defaults for missing data
 * Creating reusable transformation logic
+
+If each case needs to run statements instead of returning values, use `match` instead of forcing the logic into a record.
 
 ## Writing comments
 
@@ -932,16 +982,25 @@ ocsf.severity_id = $severities[source.severity]? else 0
 ✅ Derive `status_id` from status codes, e.g., HTTP:
 
 ```tql
-if http_status >= 200 and http_status < 400 {
-  ocsf.status_id = 1  // Success
-} else if http_status >= 400 {
-  ocsf.status_id = 2  // Failure
-} else {
-  ocsf.status_id = 0  // Unknown
+from {http_status: 200},
+     {http_status: 302},
+     {http_status: 404},
+     {http_status: 503},
+     {http_status: 100}
+match http_status {
+  199..400 => {
+    ocsf.status_id = 1  // Success
+  }
+  399..600 => {
+    ocsf.status_id = 2  // Failure
+  }
+  _ => {
+    ocsf.status_id = 0  // Unknown
+  }
 }
 ```
 
-❌ Don’t use `record` mapping when status code are partitioned into ranges.
+❌ Don’t use `record` mapping when status codes are partitioned into ranges.
 
 ✅ Use `status_detail` for human-readable status messages.
 

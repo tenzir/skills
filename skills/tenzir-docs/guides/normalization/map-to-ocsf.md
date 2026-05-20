@@ -176,24 +176,30 @@ Organize OCSF mappings as a package with a dispatcher and per-event-type operato
 
 ### Dispatcher operator
 
-Your package should include one dispatching operator. The dispatcher routes events to an event-specific mapping operator:
-
-paloalto/operators/ngfw/ocsf/map.tql
+Your package should include one dispatching operator. The dispatcher routes events based on the event type:
 
 ```tql
-if src.type == "TRAFFIC" {
-  paloalto::ngfw::ocsf::event::network
-} else if src.type == "DNS" {
-  paloalto::ngfw::ocsf::event::dns
-} else if src.type == "THREAT" {
-  paloalto::ngfw::ocsf::event::threat
-} else {
-  // Map to base event.
-  paloalto::ngfw::ocsf::base
+from {src: {type: "TRAFFIC"}},
+     {src: {type: "DNS"}},
+     {src: {type: "THREAT"}},
+     {src: {type: "SYSTEM"}}
+match src.type {
+  "TRAFFIC" => {
+    mapper = "network"
+  }
+  "DNS" => {
+    mapper = "dns"
+  }
+  "THREAT" => {
+    mapper = "threat"
+  }
+  _ => {
+    mapper = "base"
+  }
 }
 ```
 
-If the parser package does not set a type field, dispatch on a different field in the log that differentiates the event types.
+If the parser package does not set a type field, dispatch on a different field in the log that differentiates the event types. In a package, each arm can call an event-specific mapping operator instead of setting `mapper`.
 
 ### Test structure
 

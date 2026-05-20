@@ -840,6 +840,8 @@ Expressions like `1 - 2 * 3 + 4` follow these precedence and associativity rules
 
 ## Conditional Expressions
 
+Use conditional expressions when one value depends on a predicate. If you need to route events through different statements based on literal values, use the [`match` statement](/reference/statements.md#match).
+
 ### Python-style Conditionals
 
 TQL uses Python-style conditional expressions, i.e., `x if condition else y` where `x`, `y`, and `condition` are expressions.
