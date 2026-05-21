@@ -4,8 +4,8 @@
 Sends events as a single HTTP request to a webhook or API endpoint.
 
 ```tql
-to_http url:string, [method=string, headers=record, timeout=duration,
-        tls=record, connection_timeout=duration,
+to_http url:string, [method=string, headers=record, buffer_all=bool,
+        timeout=duration, tls=record, connection_timeout=duration,
         max_retry_count=int, retry_delay=duration] { … }
 ```
 
@@ -15,7 +15,7 @@ The `to_http` operator collects all input events into a single HTTP request to a
 
 To split events across multiple requests, wrap `to_http` in the [`every`](/reference/operators/every.md) operator. For example, `every 1m { to_http ... }` sends one request per minute with the events that arrived during that window.
 
-The operator retries transient connection errors and HTTP `429` and `5xx` responses up to `max_retry_count` times, but only before any body data has been sent. Once the body stream has started, retries are not possible because the data cannot be replayed. For retried HTTP responses, a `Retry-After` header overrides the configured delay.
+The operator retries transient connection errors and HTTP `429` and `5xx` responses up to `max_retry_count` times, but only before any body data has been sent. Once the body stream has started, retries are not possible because the data cannot be replayed. Set `buffer_all` to buffer the entire body in memory, which enables retries regardless of how much data has been sent. For retried HTTP responses, a `Retry-After` header overrides the configured delay.
 
 Non-2xx HTTP status codes cause pipeline errors.
 
@@ -39,6 +39,16 @@ One of the following HTTP methods to use:
 * `trace`
 
 Defaults to `post`.
+
+### `buffer_all = bool (optional)`
+
+Buffer the entire request body in memory before sending it.
+
+When set to `true`, the operator accumulates all output from the printer sub-pipeline and sends the request with a `Content-Length` header instead of `Transfer-Encoding: chunked`. This is required for servers that don’t support chunked transfer encoding.
+
+Buffering also enables retries for every failure, because the full body is always available for replay. Without `buffer_all`, retries are only possible before the body stream starts.
+
+Defaults to `false`.
 
 ### `headers = record (optional)`
 
@@ -177,6 +187,20 @@ to_http "https://secure.example.com/api", tls={skip_peer_verification: true} {
   write_ndjson
 }
 ```
+
+### Buffer the full body
+
+Some HTTP servers don’t support chunked transfer encoding and require a `Content-Length` header. Use `buffer_all` to send the complete body at once:
+
+```tql
+subscribe "events"
+head 1000
+to_http "https://s3.example.com/bucket/key", method="put", buffer_all=true {
+  write_ndjson
+}
+```
+
+The `head 1000` limits the input so that `buffer_all` has a finite body to buffer. Without a bound, `subscribe` streams indefinitely and the buffer grows without limit. Use [`every`](/reference/operators/every.md) instead of `head` when you want periodic flushing.
 
 ## See Also
 
