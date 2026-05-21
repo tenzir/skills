@@ -84,6 +84,8 @@ Defaults to `1s`.
 
 Body to send with the HTTP request.
 
+Tenzir resolves secrets in string bodies and in nested record values before it sends the request.
+
 If the value is a `record`, the body is encoded according to the `encode` option and Tenzir sets an appropriate `Content-Type` header.
 
 ### `encode = string (optional)`
