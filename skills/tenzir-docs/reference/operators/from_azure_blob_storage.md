@@ -44,7 +44,11 @@ Run `az login` on the command-line to authenticate the current user with Azureâ€
 
 Account key for authenticating with Azure Blob Storage.
 
-\### \`watch = duration (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, \`watch=30s\` polls every 30 seconds. Disabled by default.
+### `watch = duration (optional)`
+
+In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, `watch=30s` polls every 30 seconds.
+
+Disabled by default.
 
 ### `remove = bool (optional)`
 

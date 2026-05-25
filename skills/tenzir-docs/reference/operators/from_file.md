@@ -4,7 +4,7 @@
 Reads one or multiple files from a filesystem.
 
 ```tql
-from_file url:string, [watch=bool, remove=bool, rename=string->string,
+from_file url:string, [watch=duration, remove=bool, rename=string->string,
           max_age=duration, mmap=bool] { … }
 ```
 
@@ -20,7 +20,11 @@ The characters `*` and `**` have a special meaning. `*` matches everything excep
 
 The URL can include additional options. For `s3://`, the options that can be included in the URI as query parameters are `region`, `scheme`, `endpoint_override`, `allow_bucket_creation`, and `allow_bucket_deletion`. For `gs://`, the supported parameters are `scheme`, `endpoint_override`, and `retry_limit_seconds`.
 
-\### \`watch = bool (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. Currently, this scans the filesystem up to every 10s. Defaults to \`false\`.
+### `watch = duration (optional)`
+
+In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, `watch=30s` polls every 30 seconds.
+
+Disabled by default.
 
 ### `remove = bool (optional)`
 
@@ -84,7 +88,7 @@ from_file "/data/**.json" {
 ### Read all files from S3 continuously and delete them afterwards
 
 ```tql
-from_file "s3://my-bucket/**", watch=true, remove=true
+from_file "s3://my-bucket/**", watch=10s, remove=true
 ```
 
 ### Move files to a directory, preserving filenames

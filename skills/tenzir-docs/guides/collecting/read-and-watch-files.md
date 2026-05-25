@@ -93,10 +93,10 @@ Set up real-time file processing by monitoring directories for changes. These fe
 
 ### Watch for new files
 
-Use the `watch` parameter to monitor a directory for new files:
+Set `watch` to a duration to monitor a directory for new files. The duration specifies the interval between filesystem scans:
 
 ```tql
-from_file "/path/to/directory/*.csv", watch=true
+from_file "/path/to/directory/*.csv", watch=10s
 ```
 
 This sets up continuous monitoring, processing new files as they appear in the directory.
@@ -106,7 +106,7 @@ This sets up continuous monitoring, processing new files as they appear in the d
 Combine watching with automatic file removal using the `remove` parameter:
 
 ```tql
-from_file "/path/to/directory/*.csv", watch=true, remove=true
+from_file "/path/to/directory/*.csv", watch=10s, remove=true
 ```
 
 This approach helps you implement file-based queues where the system should automatically clean up processed files.
@@ -116,7 +116,7 @@ This approach helps you implement file-based queues where the system should auto
 Monitor a log directory and process files as they arrive:
 
 ```tql
-from_file "/var/log/application/*.log", watch=true {
+from_file "/var/log/application/*.log", watch=10s {
   read_lines
 }
 ```

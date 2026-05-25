@@ -102,7 +102,11 @@ Exactly one of `token_file`, `token_endpoint`, or `token` must be specified:
 
 Credentials are automatically refreshed before expiration, with exponential backoff retry logic for transient failures.
 
-\### \`watch = duration (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, \`watch=30s\` polls every 30 seconds. Disabled by default.
+### `watch = duration (optional)`
+
+In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, `watch=30s` polls every 30 seconds.
+
+Disabled by default.
 
 ### `remove = bool (optional)`
 

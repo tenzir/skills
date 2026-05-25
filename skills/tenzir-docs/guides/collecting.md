@@ -25,7 +25,7 @@ from_file "/var/log/app.json"
 
 
 // Watch a directory for new files
-from_file "/incoming/*.csv", watch=true
+from_file "/incoming/*.csv", watch=10s
 
 
 // Cloud storage with glob patterns

@@ -35,7 +35,11 @@ Use anonymous credentials instead of any configured authentication. This only wo
 
 Defaults to `false`.
 
-\### \`watch = duration (optional)\` In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, \`watch=30s\` polls every 30 seconds. Disabled by default.
+### `watch = duration (optional)`
+
+In addition to processing all existing files, this option keeps the operator running, watching for new files that also match the given URL. The duration specifies the interval between filesystem scans. For example, `watch=30s` polls every 30 seconds.
+
+Disabled by default.
 
 ### `remove = bool (optional)`
 
