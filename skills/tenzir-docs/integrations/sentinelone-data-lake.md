@@ -93,10 +93,3 @@ Ingest Costs
 SentinelOne charges per ingested byte in any value, including the unstructured `message`. This means SentinelOne charges for keys, structural elements and whitespace in `message`.
 
 If you already have structured data in Tenzir, prefer sending structured data. SentinelOne will only charge for the values, one byte per key and nothing for the requests structure.
-
-## Contents
-
-- [Suricata](suricata.md)
-- [Velociraptor](velociraptor.md)
-- [Zeek](zeek.md)
-- [Zscaler](zscaler.md)

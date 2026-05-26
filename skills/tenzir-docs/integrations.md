@@ -31,4 +31,4 @@ For some applications, we provide a **dedicated operator** that dramatically sim
 - [Messaging](integrations/amqp.md)
 - [Protocols](integrations/file.md)
 - [Data Tools](integrations/clickhouse.md)
-- [Security Tools](integrations/sentinelone-data-lake.md)
+- [Security Tools](integrations/arcsight.md)

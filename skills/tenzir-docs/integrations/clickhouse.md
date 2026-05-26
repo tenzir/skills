@@ -116,9 +116,7 @@ For more control, you can create the table in ClickHouse first. Use this approac
 ## Contents
 
 - [Elasticsearch](elasticsearch.md)
-- [Graylog](graylog.md)
 - [Mysql](mysql.md)
 - [Opensearch](opensearch.md)
 - [Snowflake](snowflake.md)
 - [Splunk](splunk.md)
-- [Wazuh](wazuh.md)

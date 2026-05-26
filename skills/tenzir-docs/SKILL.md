@@ -725,10 +725,6 @@ ClickHouse is an open-source analytical database. It lets you run real-time anal
 
 Elasticsearch is a search and observability suite for unstructured data. Tenzir can send events to Elasticsearch and emulate a Elasticsearch-compatible Bulk API endpoint.
 
-#### [Graylog](integrations/graylog.md)
-
-Graylog is a log management solution based on top of OpenSearch. Tenzir can send data to and receive data from Graylog.1
-
 #### [MySQL](integrations/mysql.md)
 
 MySQL is an open-source relational database management system widely used for web applications, data warehousing, and enterprise applications.
@@ -745,11 +741,15 @@ Snowflake is a multi-cloud data warehouse. Tenzir can send events from a pipelin
 
 Splunk is a SIEM solution for storing and processing logs. Tenzir can send data to Splunk via HEC.
 
-#### [Wazuh](integrations/wazuh.md)
-
-Wazuh is an open source XDR and SIEM platform. Tenzir can forward events to Wazuh over Syslog and query Wazuh alerts from the Wazuh indexer API.
-
 ### Security Tools
+
+#### [ArcSight](integrations/arcsight.md)
+
+OpenText ArcSight is a SIEM and log management ecosystem. Tenzir integrates with ArcSight through open interfaces such as CEF, Syslog, Kafka, and the ArcSight Logger REST API.
+
+#### [Graylog](integrations/graylog.md)
+
+Graylog is a log management solution based on top of OpenSearch. Tenzir can send data to and receive data from Graylog.1
 
 #### [SentinelOne Data Lake](integrations/sentinelone-data-lake.md)
 
@@ -762,6 +762,10 @@ Suricata is network monitor with a rule matching engine to detect threats. Use T
 #### [Velociraptor](integrations/velociraptor.md)
 
 Velociraptor is a digital forensics and incident response (DFIR) tool for interrogating endpoints.
+
+#### [Wazuh](integrations/wazuh.md)
+
+Wazuh is an open source XDR and SIEM platform. Tenzir can forward events to Wazuh over Syslog and query Wazuh alerts from the Wazuh indexer API.
 
 #### [Zeek](integrations/zeek.md)
 
