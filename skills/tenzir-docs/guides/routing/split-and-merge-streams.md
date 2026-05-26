@@ -127,6 +127,14 @@ subscribe "alerts", "notices", "critical"
 to_kafka "all-priority-events"
 ```
 
+## Shutdown guarantees
+
+On shutdown, Tenzir drains in-flight publish/subscribe data before it stops pipelines. This guarantee is strongest when you use fixed topic names and an acyclic pipeline graph.
+
+Avoid cyclic publish/subscribe topologies. If a pipeline publishes back into a stream that eventually feeds the same pipeline again, Tenzir can’t guarantee a fully graceful drain and may drop data during shutdown.
+
+There is also a small probability of data loss during shutdown when using dynamic topics. In practice, this is likely to happen only for newly started nodes or newly observed topics during shutdown.
+
 ## Combining with fork
 
 Use [`fork`](/reference/operators/fork.md) with [`publish`](/reference/operators/publish.md) to send copies of events while continuing the main pipeline:

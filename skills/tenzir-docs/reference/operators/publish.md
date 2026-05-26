@@ -9,11 +9,13 @@ publish [topic:string]
 
 ## Description
 
-The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribers`](/reference/operators/subscribe.md) of the channel operator receive the events immediately.
+The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribe`](/reference/operators/subscribe.md) operators on that topic receive the events immediately.
 
 Note
 
 The `publish` operator does not guarantee that events stay in their original order.
+
+During shutdown, `subscribe` will wait for `publish` to drain all data before shutting down itself. This prevents data loss, as long as pub/sub do not form cycles and `publish` does not use dynamic topic names.
 
 ### `topic: string (optional)`
 

@@ -13,6 +13,8 @@ The `subscribe` operator subscribes to events from a channel with the specified 
 
 Subscribers propagate back pressure to publishers. If a subscribing pipeline fails to keep up, all publishers will slow down as well to a matching speed to avoid data loss. This mechanism is disabled for pipelines that are not visible on the overview page on [app.tenzir.com](https://app.tenzir.com), which drop data rather than slow down their publishers.
 
+During shutdown, `subscribe` will wait for `publish` to drain all data before shutting down itself. This prevents data loss, as long as pub/sub do not form cycles and `publish` does not use dynamic topic names.
+
 ### `topic: string... (optional)`
 
 Optional channel names to subscribe to. If unspecified, the operator subscribes to the topic `main`.
