@@ -44,7 +44,7 @@ A package is a directory with the following structure:
 
   * package.yaml Package manifest
 
-The `package.yaml` manifest is the only required file. It identifies the directory as a package and contains descriptive fields, external metadata, context definitions, and input specifications.
+The `package.yaml` manifest is the only required file. It identifies the directory as a package and contains descriptive fields, top-level categories, external metadata, context definitions, and input specifications.
 
 ## Package components
 
@@ -54,11 +54,13 @@ The `package.yaml` manifest is the only required file. It identifies the directo
 
 Operators can accept [positional and named arguments](../guides/packages/add-operators.md#add-parameters-to-operators) for flexible, parameterized transformations.
 
+Packages that normalize to OCSF should expose mapping as operators too, usually with a dispatcher such as `vendor::product::ocsf::map` and event-specific operators under `operators/.../ocsf/events/`.
+
 ### Pipelines
 
 **Pipelines** in the `pipelines` directory are complete, deployable TQL programs. Unlike operators, pipelines must have both input and output operators. They run automatically when you install the package (unless disabled).
 
-Pipeline [frontmatter options](../guides/packages/add-pipelines.md#configure-pipeline-behavior) control restart behavior, enable/disable state, and other runtime settings.
+Pipeline [frontmatter options](../guides/packages/add-pipelines.md#configure-pipeline-behavior) control restart behavior, enable/disable state, and other runtime settings. Ship optional operational pipelines with `disabled: true` so installation remains predictable.
 
 ### Contexts
 
@@ -69,6 +71,8 @@ Pipeline [frontmatter options](../guides/packages/add-pipelines.md#configure-pip
 **Examples** in the `examples` directory demonstrate how to use the package. These self-contained snippets appear in the Tenzir Library and help users understand package capabilities.
 
 ### Metadata
+
+Top-level `categories` describe where the package appears in the Tenzir Library. Valid values are `sources`, `destinations`, `mappings`, and `contexts`.
 
 The top-level `metadata` key stores opaque package data for external tools. Tenzir accepts the key in `package.yaml` but does not interpret its contents. Unknown top-level keys outside the package schema still fail validation, so use `metadata` for non-engine data that should travel with the package definition.
 

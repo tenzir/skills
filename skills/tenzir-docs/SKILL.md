@@ -364,7 +364,7 @@ Packages provide a flexible approach for combining operators, pipelines, context
 
 ##### [Create a package](guides/packages/create-a-package.md)
 
-This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, and add runnable examples.
+This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, plan reusable operators, add deployable pipelines, and include runnable examples.
 
 ##### [Test packages](guides/packages/test-packages.md)
 

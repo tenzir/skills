@@ -317,23 +317,17 @@ utils::scale $field, factor=$multiplier
 
 Complex packages benefit from breaking functionality into a hierarchy of operators that call each other. This pattern keeps individual operators focused, enables independent testing, and creates a clear structure that mirrors your directory layout.
 
-Consider a package that normalizes various log formats to OCSF. You can organize the operators into layers:
+Consider a package that normalizes various event types to OCSF. Keep source-specific cleanup, shared OCSF setup, and dispatch in one main mapper, then delegate only event-specific mapping details to leaf operators:
 
-| Operator             | Purpose                                                                 |
-| -------------------- | ----------------------------------------------------------------------- |
-| `acme::parse`        | [Parse](../parsing/parse-delimited-text.md) raw input into events  |
-| `acme::clean`        | [Normalize fields](../normalization/clean-up-values.md), fix types |
-| `acme::ocsf::base`   | Fallback: maps to OCSF Base Event                                       |
-| `acme::ocsf::map`    | Dispatcher: routes to specific mappers                                  |
-| `acme::ocsf::map::*` | Event-specific mapping (dns, http, auth, etc.)                          |
+| Operator                | Purpose                                               |
+| ----------------------- | ----------------------------------------------------- |
+| `acme::ocsf::map`       | Main mapper: cleanup, shared OCSF setup, and dispatch |
+| `acme::ocsf::base`      | Fallback: maps to OCSF Base Event                     |
+| `acme::ocsf::events::*` | Event-specific mapping such as dns, http, or auth     |
 
 This hierarchy maps directly to your directory structure:
 
 * operators/
-
-  * parse.tql
-
-  * clean.tql
 
   * ocsf/
 
@@ -341,33 +335,47 @@ This hierarchy maps directly to your directory structure:
 
     * map.tql
 
-    * map/
+    * events/
 
       * dns.tql
       * http.tql
       * auth.tql
 
-The dispatcher operator routes events to specialized mappers, e.g., based on event type:
+The main mapper keeps source residue in a product-specific `acme` namespace, performs source-specific cleanup, adds shared OCSF fields, routes events to specialized mappers based on a stable event discriminator, and returns the mapped OCSF event:
+
+operators/ocsf/map.tql
 
 ```tql
-from {event_type: "dns"},
-     {event_type: "http"},
-     {event_type: "auth"},
-     {event_type: "other"}
-match event_type {
+this = { acme: this }
+
+
+ocsf.metadata = {
+  product: {
+    name: "ACME Logs",
+    vendor_name: "ACME",
+  },
+  version: "1.8.0",
+}
+ocsf.severity_id = 1
+
+
+match acme.event_type {
   "dns" => {
-    mapper = "dns"
+    acme::ocsf::events::dns
   }
   "http" => {
-    mapper = "http"
+    acme::ocsf::events::http
   }
   "auth" => {
-    mapper = "auth"
+    acme::ocsf::events::auth
   }
   _ => {
-    mapper = "base"
+    acme::ocsf::base
   }
 }
+
+
+this = {...ocsf, unmapped: acme}
 ```
 
 The fallback operator ensures that unrecognized events still conform to OCSF by mapping them to the Base Event class:
@@ -375,47 +383,65 @@ The fallback operator ensures that unrecognized events still conform to OCSF by 
 operators/ocsf/base.tql
 
 ```tql
-// Map unrecognized events to OCSF Base Event (class_uid: 0)
-class_uid = 0
-category_uid = 0
-activity_id = 0
-raw_data = move raw_message
+@name = "ocsf.base_event"
+ocsf.category_uid = 0
+ocsf.class_uid = 0
+ocsf.activity_id = 0
+ocsf.type_uid = 0
+ocsf.severity_id = 0
+ocsf.time = now()
 ```
 
 Each leaf operator handles one specific event type:
 
-operators/ocsf/map/dns.tql
+operators/ocsf/events/dns.tql
 
 ```tql
-// Map DNS logs to OCSF DNS Activity (class_uid: 4003)
-class_uid = 4003
-category_uid = 4
-activity_id = 1
-query.hostname = move query_name
-query.type = move query_type
-answers = move dns_answers
+@name = "ocsf.dns_activity"
+ocsf.category_uid = 4
+ocsf.class_uid = 4003
+ocsf.activity_id = 1
+ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
+
+
+ocsf.query.hostname = move acme.query_name
+ocsf.query.type = move acme.query_type
+ocsf.answers = move acme.dns_answers
 // ... additional field mappings
+```
+
+After the package mapper runs, callers can run the shared OCSF helpers. The mapper should produce minimal OCSF, and [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands it with derived sibling fields before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates the final shape:
+
+```tql
+acme::ocsf::map
+ocsf::derive
+ocsf::cast
 ```
 
 These operators compose into an end-to-end pipeline:
 
 ```tql
-from_file "logs/mixed.json"
-acme::parse
-acme::clean
+from_file "logs/mixed.json" {
+  read_json
+}
 acme::ocsf::map
+ocsf::derive
+ocsf::cast
 publish "ocsf"
 ```
+
+The parser stays with the source operator, while `acme::ocsf::map` owns cleanup, shared OCSF setup, and dispatch.
 
 ### Design principles
 
 When building operator hierarchies, follow these guidelines:
 
-* **Keep operators focused**: Each operator should do one thing well
-* **Use dispatchers for routing**: Route events based on type or other criteria
-* **Mirror directory structure**: Operator names reflect their location
-* **Enable independent testing**: Each layer can be tested in isolation
-* **Provide fallbacks**: Handle unrecognized inputs gracefully
+* **Expose one mapper contract**: Accept parsed source events through a main package mapper, for example `acme::ocsf::map`.
+* **Keep cleanup close to mapping**: Put source-specific normalization and shared OCSF setup in the main mapper before dispatch.
+* **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf::derive`](/reference/operators/ocsf/derive.md) to add derived sibling fields.
+* **Use dispatchers for routing**: Route events based on type or other criteria.
+* **Mirror directory structure**: Operator names reflect their location.
+* **Provide fallbacks**: Handle unrecognized inputs gracefully.
 
 ## See also
 

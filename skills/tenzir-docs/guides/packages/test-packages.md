@@ -120,6 +120,23 @@ tests/normalize.input
 {"@timestamp": "2024-01-15T10:30:00Z", "msg": "test"}
 ```
 
+### Test OCSF mappings
+
+OCSF mapping tests should exercise the package mapper and run the shared OCSF helpers before comparing against a baseline. This verifies both your mapping logic and the final schema shape that downstream pipelines consume.
+
+tests/ocsf/auth.tql
+
+```tql
+from_file env("TENZIR_INPUT") {
+  read_json
+}
+acme::ocsf::map
+ocsf::derive
+ocsf::cast
+```
+
+Use [`ocsf::derive`](/reference/operators/ocsf/derive.md) to populate sibling enum fields and [`ocsf::cast`](/reference/operators/ocsf/cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](/reference/functions/now.md).
+
 ### Test with different arguments
 
 Create separate test files for different argument combinations:

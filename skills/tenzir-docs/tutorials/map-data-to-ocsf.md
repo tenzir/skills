@@ -7,11 +7,11 @@ The diagram above illustrates the data lifecycle and shows where the OCSF mappin
 
 ## OCSF Primer
 
-OCSF is a vendor-agnostic event schema (aka. “taxonomy”) that defines structure and semantics for security events. Here are some key terms you need to know to map events:
+OCSF is a vendor-agnostic event schema, also known as a taxonomy, that defines structure and semantics for security events. Here are some key terms you need to know to map events:
 
-* **Attribute**: a unique identifier for a specific type, e.g., `parent_folder` of type `String` or `observables` of type `Observable Array`.
-* **Event Class**: a description of an event that uses specific attributes, e.g., `HTTP Activity` and `Detection Finding`.
-* **Category**: a group of event classes, e.g., `System Activity` or `Findings`.
+* **Attribute**: a unique identifier for a specific type, such as `parent_folder` of type `String` or `observables` of type `Observable Array`.
+* **Event Class**: a description of an event that uses specific attributes, such as `HTTP Activity` and `Detection Finding`.
+* **Category**: a group of event classes, such as `System Activity` or `Findings`.
 
 The diagram below illustrates how subsets of attributes form an event class:
 
@@ -145,7 +145,7 @@ Now that we have decomposed the data into its atomic values, we can map them to 
 
 ### Step 2: Map to OCSF
 
-To map fields, you must first identify the appropriate OCSF event class. In our example, the corresponding event class in OCSF is [Network Activity](https://schema.ocsf.io/1.6.0/classes/network_activity). We use OCSF v1.6.0 throughout this tutorial.
+To map fields, you must first identify the appropriate OCSF event class. In our example, the corresponding event class in OCSF is [Network Activity](https://schema.ocsf.io/1.8.0/classes/network_activity). We use OCSF v1.8.0 throughout this tutorial.
 
 To make the mapping process more organized, we map per *attribute group*. The schema has four groups:
 
@@ -160,9 +160,7 @@ Here’s a template for the mapping pipeline:
 // --- Preamble ---------------------------------
 
 
-// Move the original event into a dedicated field that we pull our values from.
-// We recommend naming the field so that it represents the respective data
-// source.
+// Keep the source event in a source-specific working namespace.
 this = { zeek: this }
 
 
@@ -174,6 +172,7 @@ this = { zeek: this }
 // --- OCSF: classification attributes ----------
 
 
+@name = "ocsf.network_activity"
 ocsf.category_uid = 4
 ocsf.class_uid = 4001
 ocsf.activity_id = 6
@@ -185,8 +184,10 @@ ocsf.severity_id = 1
 
 
 ocsf.time = move zeek.ts // 👈 remove source field while mapping
-ocsf.duration = move zeek.duration
-ocsf.end_time = ocsf.time + ocsf.duration
+if zeek.duration != null {
+  ocsf.end_time = ocsf.time + zeek.duration
+  ocsf.duration = count_milliseconds(move zeek.duration).round()
+}
 ocsf.start_time = ocsf.time
 // ...fill out remaining occurrence attributes; add timezone_offset if known.
 
@@ -199,9 +200,9 @@ ocsf.metadata = {
     name: "Zeek",
     vendor_name: "Zeek",
   },
-  profiles: [], // 👈 add profiles as needed, e.g., ["host", "network_proxy"]
-  uid: move zeek.uid,
-  version: "1.7.0",
+  profiles: [], // 👈 add profiles as needed, such as ["host", "network_proxy"]
+  original_event_uid: move zeek.uid,
+  version: "1.8.0",
 }
 // ...fill out remaining context attributes.
 
@@ -210,9 +211,14 @@ ocsf.metadata = {
 
 
 ocsf.src_endpoint = {
-  ip: zeek.id.orig_h,
-  port: zeek.id.orig_p,
+  ip: move zeek.id.orig_h,
+  port: move zeek.id.orig_p,
 }
+ocsf.dst_endpoint = {
+  ip: move zeek.id.resp_h,
+  port: move zeek.id.resp_p,
+}
+ocsf.is_src_dst_assignment_known = true
 // ...fill out remaining primary attributes.
 drop zeek.id // 👈 remove source field after mapping
 
@@ -221,38 +227,29 @@ drop zeek.id // 👈 remove source field after mapping
 
 
 // Add profile-specific fields here based on metadata.profiles.
-// E.g., for host profile: ocsf.actor.user, ocsf.device, etc.
+// For the host profile: ocsf.actor.user, ocsf.device, etc.
 // ...
 
 
 // --- Epilogue ---------------------------------
 
 
-// (3) Hoist all `ocsf` attributes into the root and declare the remaining fields in
-// `zeek` as `unmapped`.
+// (3) Return the mapped OCSF event and preserve mapping residue.
 this = {...ocsf, unmapped: zeek}
 
 
-// (4) Minimize nulls in unmapped data.
-drop_null_fields unmapped
-
-
-// (5) Populate sibling fields for completeness.
+// (4) Expand minimal OCSF and validate the final schema shape.
 ocsf::derive
-
-
-// (6) Assign metadata, such as a name for easier filtering downstream.
-@name = "ocsf.network_activity"
+ocsf::cast
 ```
 
 Let’s unpack this:
 
-1. With `this = { zeek: this }` we move the original event into the field `zeek`. This approach also avoids name clashes when we create new fields in the next steps. Because we are mapping Zeek logs, we chose `zeek` as a name to make the subsequent mappings almost self-explanatory.
-2. The main work takes place here. Our approach is structured: for every field in the source event, (1) map it, and (2) remove it. Ideally, use the `move` keyword to perform (1) and (2) together, e.g., `ocsf.x = move source.y`. If a field needs to be used multiple times in the same expression, use the [`drop`](/reference/operators/drop.md) afterwards.
-3. The assignment `this = {...ocsf, unmapped: zeek}` means that we move all fields from the `ocsf` record into the top-level record (`this`), and at the same time add a new field `unmapped` that contains everything that we didn’t map. This is why it’s important to remove the fields from the source as we perform the mapping. If you forget to map a field, it simply lands in the `unmapped` catch-all record and you can tweak your mapping later.
-4. We drop null fields from `unmapped` to keep the output clean.
-5. We keep the mapping terse by only mapping the `*_[u]id` field and relying on [`ocsf::derive`](/reference/operators/ocsf/derive.md) to auto-populate the corresponding sibling fields.
-6. We give the event a new schema name so that we can easily filter by its shape in further pipelines.
+1. With `this = { zeek: this }`, we keep the original event in a source-specific working namespace. This approach avoids name clashes when we create new OCSF fields in the next steps.
+2. The main work takes place here. Our approach is structured: for every field in the source event, (1) map it, and (2) remove it. Ideally, use the `move` keyword to perform (1) and (2) together, for example, `ocsf.x = move zeek.y`. If a field needs to be used multiple times in the same expression, use the [`drop`](/reference/operators/drop.md) afterwards.
+3. Assign `@name` to the target OCSF event class so that downstream pipelines can filter by schema.
+4. The assignment `this = {...ocsf, unmapped: zeek}` returns the mapped OCSF event and stores the remaining source fields as `unmapped` for review.
+5. The mapper intentionally produces minimal OCSF: it maps identifiers and source-derived semantics, but does not hand-write derived sibling fields. [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands the event with fields such as `activity_name`, `category_name`, and `severity` before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates the final event against the OCSF schema.
 
 Now that we have a template, let’s get our hands dirty and go deep into the actual mapping.
 
@@ -272,7 +269,7 @@ ocsf.severity = "Informational"
 ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
 ```
 
-Note that computing the field `type_uid` requires simple arithmetic. You can rely on [`ocsf::derive`](/reference/operators/ocsf/derive.md) to populate sibling fields—an optimization to write more concise mappings. This would simplify the above snippet to:
+Note that computing the field `type_uid` requires simple arithmetic. In package mappers, prefer minimal OCSF: set the IDs and source-derived values, but let [`ocsf::derive`](/reference/operators/ocsf/derive.md) populate sibling fields. This keeps mappings concise and prevents repetitive label assignments. The shorter form is:
 
 ```tql
 ocsf.activity_id = 6
@@ -283,7 +280,7 @@ ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
 ocsf::derive
 ```
 
-The computed sibbling fields for `<field>_id` often have the pattern `<field>_name` or simply `<field>`.
+The computed sibling fields for `<field>_id` often have the pattern `<field>_name` or simply `<field>`. Run [`ocsf::derive`](/reference/operators/ocsf/derive.md) after the mapper returns the minimal OCSF event so downstream pipelines still receive the comprehensive schema shape.
 
 #### Occurrence Attributes
 
@@ -291,12 +288,14 @@ Let’s tackle the occurrence group. These attributes are all about time.
 
 ```tql
 ocsf.time = move zeek.ts
-ocsf.duration = move zeek.duration
-ocsf.end_time = ocsf.time + ocsf.duration
+if zeek.duration != null {
+  ocsf.end_time = ocsf.time + zeek.duration
+  ocsf.duration = count_milliseconds(move zeek.duration).round()
+}
 ocsf.start_time = ocsf.time
 ```
 
-Using `+` with a value of type `time` and `duration` yields a new `time` value, just as you’d expect.
+When Zeek records a connection duration, using `+` with a value of type `time` and `duration` yields a new `time` value, just as you’d expect. The OCSF `duration` attribute itself is an integer millisecond count, so we assign that field only after deriving `end_time`.
 
 #### Context Attributes
 
@@ -311,14 +310,16 @@ ocsf.metadata = {
     vendor_name: "Zeek",
     cpe_name: "cpe:2.3:a:zeek:zeek",
   },
-  uid: move zeek.uid,
-  version: "1.6.0",
+  original_event_uid: move zeek.uid,
+  version: "1.8.0",
 }
 drop zeek._path? // implied in metadata.log_name
-ocsf.app_name = move zeek.service
+ocsf.app_protocol_name = move zeek.service
 ```
 
-We use `?` when accessing fields that are not always present, e.g., `zeek._write_ts?`. If you omit the `?`, the pipeline emits a warning when `_write_ts` is missing.
+We use `?` when accessing fields that are not always present, such as `zeek._write_ts?`. If you omit the `?`, the pipeline emits a warning when `_write_ts` is missing.
+
+Zeek’s `service` field identifies the application-layer protocol, so map it to `app_protocol_name`. Reserve `app_name` for a specific network application, such as an App-ID result.
 
 #### Primary Attributes
 
@@ -326,13 +327,35 @@ The primary attributes define the semantics of the event class itself. This is w
 
 ```tql
 ocsf.src_endpoint = {
-  ip: zeek.id.orig_h,
-  port: zeek.id.orig_p,
+  ip: move zeek.id.orig_h,
+  port: move zeek.id.orig_p,
 }
 ocsf.dst_endpoint = {
-  ip: zeek.id.resp_h,
-  port: zeek.id.resp_p,
+  ip: move zeek.id.resp_h,
+  port: move zeek.id.resp_p,
 }
+ocsf.is_src_dst_assignment_known = true
+ocsf.src_endpoint.mac = move zeek.orig_l2_addr?
+ocsf.dst_endpoint.mac = move zeek.resp_l2_addr?
+if zeek.geo.orig? != null {
+  ocsf.src_endpoint.location = {
+    country: move zeek.geo.orig.country_code?,
+    region: move zeek.geo.orig.region?,
+    city: move zeek.geo.orig.city?,
+    lat: move zeek.geo.orig.latitude?,
+    long: move zeek.geo.orig.longitude?,
+  }
+}
+if zeek.geo.resp? != null {
+  ocsf.dst_endpoint.location = {
+    country: move zeek.geo.resp.country_code?,
+    region: move zeek.geo.resp.region?,
+    city: move zeek.geo.resp.city?,
+    lat: move zeek.geo.resp.latitude?,
+    long: move zeek.geo.resp.longitude?,
+  }
+}
+drop zeek.geo?
 // Here, we use `drop` because we simply want to get rid of the intermediate
 // `id` record that we already mapped above.
 drop zeek.id
@@ -348,8 +371,8 @@ let $proto_nums = {
 ocsf.connection_info = {
   community_uid: move zeek.community_id?,
   protocol_name: move zeek.proto,
-  protocol_num: $proto_nums[zeek.proto]? else -1
 }
+ocsf.connection_info.protocol_num = $proto_nums[ocsf.connection_info.protocol_name]? else -1
 // Use `if` for binary predicates and `match` for finite case dispatch.
 if ocsf.src_endpoint.ip.is_v6() or ocsf.dst_endpoint.ip.is_v6() {
   ocsf.connection_info.protocol_ver_id = 6
@@ -376,25 +399,38 @@ match ({orig: zeek.local_orig, resp: zeek.local_resp}) {
 }
 drop zeek.local_orig, zeek.local_resp
 // The `status` attribute in OCSF is a success indicator. While we could use
-// `zeek.conn_state` to extract success/failure, this would go beyond the
-// tutorial.
+// `zeek.conn_state` to extract success/failure, this would go beyond
+// the tutorial.
 ocsf.status_id = 99
 ocsf.status = "Other"
 ocsf.status_code = move zeek.conn_state
 ocsf.traffic = {
-  bytes_in: zeek.resp_bytes,
-  bytes_out: zeek.orig_bytes,
-  packets_in: zeek.resp_pkts,
-  packets_out: zeek.orig_pkts,
-  total_bytes: zeek.orig_bytes + zeek.resp_bytes,
-  total_packets: zeek.orig_pkts + zeek.resp_pkts,
+  bytes_in: move zeek.resp_bytes,
+  bytes_out: move zeek.orig_bytes,
+  bytes_missed: move zeek.missed_bytes,
+  packets_in: move zeek.resp_pkts,
+  packets_out: move zeek.orig_pkts,
 }
-drop zeek.resp_bytes, zeek.orig_bytes, zeek.resp_pkts, zeek.orig_pkts
+if ocsf.traffic.bytes_out? != null and ocsf.traffic.bytes_in? != null {
+  ocsf.traffic.bytes = ocsf.traffic.bytes_out + ocsf.traffic.bytes_in
+}
+ocsf.traffic.packets = ocsf.traffic.packets_out + ocsf.traffic.packets_in
+if zeek.tunnel_parents? == null {
+  drop zeek.tunnel_parents?
+}
+if zeek.vlan? == null {
+  drop zeek.vlan?
+}
+if zeek.inner_vlan? == null {
+  drop zeek.inner_vlan?
+}
 ```
 
 Here’s what happens here:
 
-* The expression `$proto_nums[zeek.proto]` takes the value of Zeek’s `proto` field (e.g., `tcp`) and uses it as an index into a static record `$proto_nums`. Add a `?` at the end to avoid warnings when the lookup returns `null`, and use the inline `else` expression for the fallback value.
+* The expression `$proto_nums[ocsf.connection_info.protocol_name]` takes the moved Zeek `proto` value and uses it as an index into a static record `$proto_nums`. Add a `?` at the end to avoid warnings when the lookup returns `null`, and use the inline `else` expression for the fallback value.
+* Set `is_src_dst_assignment_known` because Zeek’s `id.orig_*` fields identify the connection initiator and `id.resp_*` fields identify the responder.
+* Move Layer 2 addresses and GeoIP enrichment into endpoint attributes instead of leaving them in `unmapped`.
 * Use [`is_v6`](/reference/functions/is_v6.md) on the connection IPs to identify IPv6 connections.
 
 #### Putting it together
@@ -405,7 +441,7 @@ When we combine all TQL snippets from above, we get the following output:
 {
   activity_id: 6,
   activity_name: "Traffic",
-  app_name: "http",
+  app_protocol_name: "http",
   category_name: "Network Activity",
   category_uid: 4,
   class_name: "Network Activity",
@@ -422,25 +458,42 @@ When we combine all TQL snippets from above, we get the following output:
   },
   dst_endpoint: {
     ip: 198.71.247.91,
+    location: {
+      city: "Ashburn",
+      country: "US",
+      lat: 39.0469,
+      long: -77.4903,
+      region: "VA",
+    },
+    mac: "00:16:3c:f1:fd:6d",
     port: 80,
   },
-  duration: 5.162805s,
+  duration: 5163,
   end_time: 2021-11-17T13:32:48.400686856Z,
+  is_src_dst_assignment_known: true,
   metadata: {
     log_name: "conn.log",
     logged_time: null,
+    original_event_uid: "CZwqhx3td8eTfCSwJb",
     product: {
       cpe_name: "cpe:2.3:a:zeek:zeek",
       name: "Zeek",
       vendor_name: "Zeek",
     },
-    uid: "CZwqhx3td8eTfCSwJb",
-    version: "1.6.0",
+    version: "1.8.0",
   },
   severity: "Informational",
   severity_id: 1,
   src_endpoint: {
     ip: 128.14.134.170,
+    location: {
+      city: "Los Angeles",
+      country: "US",
+      lat: 34.0544,
+      long: -118.2441,
+      region: "CA",
+    },
+    mac: "64:9e:f3:be:db:66",
     port: 57468,
   },
   start_time: 2021-11-17T13:32:43.237881856Z,
@@ -449,40 +502,95 @@ When we combine all TQL snippets from above, we get the following output:
   status_id: 99,
   time: 2021-11-17T13:32:43.237881856Z,
   traffic: {
+    bytes: 483,
     bytes_in: 278,
+    bytes_missed: 0,
     bytes_out: 205,
+    packets: 11,
     packets_in: 5,
     packets_out: 6,
-    total_bytes: 483,
-    total_packets: 11,
   },
   type_name: "Network Activity: Traffic",
   type_uid: 400106,
   unmapped: {
-    missed_bytes: 0,
     orig_ip_bytes: 525,
     resp_ip_bytes: 546,
-    tunnel_parents: null,
-    vlan: null,
-    inner_vlan: null,
-    orig_l2_addr: "64:9e:f3:be:db:66",
-    resp_l2_addr: "00:16:3c:f1:fd:6d",
-    geo: {
-      orig: {
-        country_code: "US",
-        region: "CA",
-        city: "Los Angeles",
-        latitude: 34.0544,
-        longitude: -118.2441,
-      },
-      resp: {
-        country_code: "US",
-        region: "VA",
-        city: "Ashburn",
-        latitude: 39.0469,
-        longitude: -77.4903,
-      },
+  },
+}
+{
+  activity_id: 6,
+  activity_name: "Traffic",
+  app_protocol_name: "dns",
+  category_name: "Network Activity",
+  category_uid: 4,
+  class_name: "Network Activity",
+  class_uid: 4001,
+  connection_info: {
+    community_uid: "1:0nZC/6S/pr+IceCZ04RjDZbX+KI=",
+    direction: "Unknown",
+    direction_id: 0,
+    flag_history: "D",
+    protocol_name: "udp",
+    protocol_num: 17,
+    protocol_ver: "Internet Protocol version 4 (IPv4)",
+    protocol_ver_id: 4,
+  },
+  dst_endpoint: {
+    ip: 198.71.247.91,
+    location: {
+      city: "Ashburn",
+      country: "US",
+      lat: 39.0469,
+      long: -77.4903,
+      region: "VA",
     },
+    mac: "00:16:3c:f1:fd:6d",
+    port: 53,
+  },
+  is_src_dst_assignment_known: true,
+  metadata: {
+    log_name: "conn.log",
+    logged_time: null,
+    original_event_uid: "CnrwFesjfOhI3fuu1",
+    product: {
+      cpe_name: "cpe:2.3:a:zeek:zeek",
+      name: "Zeek",
+      vendor_name: "Zeek",
+    },
+    version: "1.8.0",
+  },
+  severity: "Informational",
+  severity_id: 1,
+  src_endpoint: {
+    ip: 45.137.23.27,
+    location: {
+      city: null,
+      country: "BD",
+      lat: 23.7018,
+      long: 90.3742,
+      region: null,
+    },
+    mac: "64:9e:f3:be:db:66",
+    port: 47958,
+  },
+  start_time: 2021-11-17T14:02:38.165570048Z,
+  status: "Other",
+  status_code: "S0",
+  status_id: 99,
+  time: 2021-11-17T14:02:38.165570048Z,
+  traffic: {
+    bytes_in: null,
+    bytes_missed: 0,
+    bytes_out: null,
+    packets: 1,
+    packets_in: 0,
+    packets_out: 1,
+  },
+  type_name: "Network Activity: Traffic",
+  type_uid: 400106,
+  unmapped: {
+    orig_ip_bytes: 58,
+    resp_ip_bytes: 0,
   },
 }
 ```
@@ -515,11 +623,11 @@ to_stdout
 
 Such a pipeline is impractical because data may arrive via multiple channels: log files, Kafka messages, or via Syslog over the wire. Even the encoding may vary. Zeek TSV is one way you can configure Zeek, but JSON output is another format. Similarly, users may want to consume the data in various ways.
 
-In theory, we’re done now. We have a working mapping. It’s just not yet very (re)usable. For maximum flexibility, we want to split the pipeline into independently usable snippets. The next section describes how to achieve this.
+In theory, we’re done now. We have a working mapping. It’s just not yet very (re)usable. To turn it into a package capability, we split the pipeline into independently usable snippets. The next section describes how to achieve this.
 
 ### Step 3: Package the mapping
 
-To make our OCSF mapping more reusable, we extract it as **user-defined operator** and put it into a [package](../explanations/packages.md). There is an entire [tutorial on writing packages](write-a-package.md), but all you need to know right now that packages are one-click installable bundles that you can flexibly deploy. After installation, you can call the newly introduced mapping operators from any pipeline.
+To make our OCSF mapping more reusable, we extract it as a **user-defined operator** and put it into a [package](../explanations/packages.md). There is an entire [tutorial on writing packages](write-a-package.md), but all you need to know right now is that packages are one-click installable bundles of operators, examples, tests, and deployable pipelines. After installation, you can call the newly introduced mapping operators from any pipeline.
 
 #### Break down complexity with user-defined operators
 
@@ -528,7 +636,9 @@ Let’s work towards a package that comes with a user-defined operator called `z
 ```tql
 from_stdin
 read_zeek_tsv
-zeek::ocsf::map // 👈 Maps Zeek logs to OCSF with a user-defined operator.
+zeek::ocsf::map // 👈 Returns OCSF events with a package UDO.
+ocsf::derive
+ocsf::cast
 to_stdout
 ```
 
@@ -564,25 +674,47 @@ Notice how `zeek::ocsf::map` has two modules that are colon-separated: `zeek` an
 
       * map.tql 👈 Exposes `zeek::ocsf::map` as operator
 
-Since operators fully compose, you can implement `zeek::ocsf::map` as a combination of other operators, e.g., one operator per log type:
+Since operators fully compose, you can implement `zeek::ocsf::map` as one main mapper that performs source-specific cleanup, sets shared fields in the `ocsf` record, and dispatches to event-specific operators for each log type.
 
 zeek/operators/ocsf/map.tql
 
 ```tql
-// Dispatch mappings based on schema name. This assumes that you've taken apart
-// the input logs and added the appropriate @name based on the log type. The
-// read_zeek_tsv operator does this automatically. You could also dispatch based
-// on any other field, such as _path, event_type, etc.
-if @name == "zeek.conn" {
-  // Map "conn.log" events
-  zeek::ocsf::logs::conn
-} else if @name == "zeek.dns" {
-    // Map "dns.log" events
-  zeek::ocsf::logs::dns
-} else {
-  // In the future, raise a warning here or put the event into a DLQ.
-  pass
+// Keep the parsed source event around while event-specific operators move
+// fields into their OCSF homes.
+this = { zeek: this }
+
+
+ocsf.metadata = {
+  product: {
+    name: "Zeek",
+    vendor_name: "Zeek",
+    cpe_name: "cpe:2.3:a:zeek:zeek",
+  },
+  version: "1.8.0",
 }
+
+
+ocsf.severity_id = 1
+
+
+// Dispatch mappings based on schema name. This assumes that you've parsed the
+// input logs and added the appropriate @name based on the log type. The
+// read_zeek_tsv operator does this automatically. You could also dispatch based
+// on any other stable discriminator, such as _path or event_type.
+match @name {
+  "zeek.conn" => {
+    // Map "conn.log" events
+    zeek::ocsf::events::conn
+  }
+  _ => {
+    // Base Event: unknown or unsupported Zeek log type
+    zeek::ocsf::base
+  }
+}
+
+
+// Return the mapped OCSF event from the operator.
+this = {...ocsf, unmapped: zeek}
 ```
 
 In this layout, you’d put the mapping operators in the following directories:
@@ -593,21 +725,24 @@ In this layout, you’d put the mapping operators in the following directories:
 
     * ocsf/
 
-      * logs/ 👈 Exposes `zeek::ocsf::log::*` operators
+      * events/ 👈 Exposes `zeek::ocsf::events::*` operators
 
         * conn.tql
-        * dns.tql
         * …
+
+      * base.tql
 
       * map.tql
 
-#### Write tests for prod-grade reliability
+The mapper keeps intermediate results under `ocsf` internally and returns a minimal OCSF event. Callers then run shared OCSF helpers such as [`ocsf::derive`](/reference/operators/ocsf/derive.md) and [`ocsf::cast`](/reference/operators/ocsf/cast.md) to expand and validate the final shape. This mirrors how larger package mappers handle cleanup, shared fields, fallback Base Event mapping, and event-specific mappings.
+
+#### Write tests for production-grade reliability
 
 To achieve production-grade quality of your mappings, you must ensure that they do what they promise. In practice, this means shipping tests along the mappings: given a mapping, test whether a provided input produces a valid output.
 
 Package writing tutorial
 
-We have an [in-depth tutorial on how to write packages](write-a-package.md). This is just a small excerpt to showcase you you can test your OCSF mappings.
+We have an [in-depth tutorial on how to write packages](write-a-package.md). This is just a small excerpt to showcase how to test your OCSF mappings.
 
 This is where our [test framework](../reference/test-framework.md) comes into play. Put your test scenarios in `tests/` and sample data into `tests/inputs`:
 
@@ -620,9 +755,9 @@ This is where our [test framework](../reference/test-framework.md) comes into pl
       * conn.log
       * …
 
-    * map\_one.tql 👈 test scenario go anywhere else
+    * map\_one.tql 👈 test scenario
 
-    * map\_one.txt 👈 expected output for test scneario
+    * map\_one.txt 👈 expected output for test scenario
 
     * …
 
@@ -635,7 +770,10 @@ from_file f"{env("TENZIR_INPUTS")}/conn.log" {
   read_zeek_tsv
 }
 zeek::ocsf::map
-head 1
+ocsf::derive
+ocsf::cast
+sort time
+head 2
 ```
 
 Now run the test framework in the package directory:
@@ -660,7 +798,7 @@ There is no baseline for the test yet, let’s generate it via `--update`
 uvx tenzir-test --update
 ```
 
-Now there’s a \*.txt file next to the test scenario. Verify it that it has the expected output. Alternatively, use `uvx tenzir-test --passthrough` to print the output to the terminal for inline inspection.
+Now there’s a \*.txt file next to the test scenario. Verify that it has the expected output. Alternatively, use `uvx tenzir-test --passthrough` to print the output to the terminal for inline inspection.
 
 Generated \*.txt test scenario baseline
 
@@ -670,7 +808,7 @@ zeek/tests/map\_one.txt
 {
   activity_id: 6,
   activity_name: "Traffic",
-  app_name: "http",
+  app_protocol_name: "http",
   category_name: "Network Activity",
   category_uid: 4,
   class_name: "Network Activity",
@@ -687,25 +825,42 @@ zeek/tests/map\_one.txt
   },
   dst_endpoint: {
     ip: 198.71.247.91,
+    location: {
+      city: "Ashburn",
+      country: "US",
+      lat: 39.0469,
+      long: -77.4903,
+      region: "VA",
+    },
+    mac: "00:16:3c:f1:fd:6d",
     port: 80,
   },
-  duration: 5.162805s,
+  duration: 5163,
   end_time: 2021-11-17T13:32:48.400686856Z,
+  is_src_dst_assignment_known: true,
   metadata: {
     log_name: "conn.log",
     logged_time: null,
+    original_event_uid: "CZwqhx3td8eTfCSwJb",
     product: {
       cpe_name: "cpe:2.3:a:zeek:zeek",
       name: "Zeek",
       vendor_name: "Zeek",
     },
-    uid: "CZwqhx3td8eTfCSwJb",
-    version: "1.6.0",
+    version: "1.8.0",
   },
   severity: "Informational",
   severity_id: 1,
   src_endpoint: {
     ip: 128.14.134.170,
+    location: {
+      city: "Los Angeles",
+      country: "US",
+      lat: 34.0544,
+      long: -118.2441,
+      region: "CA",
+    },
+    mac: "64:9e:f3:be:db:66",
     port: 57468,
   },
   start_time: 2021-11-17T13:32:43.237881856Z,
@@ -714,40 +869,95 @@ zeek/tests/map\_one.txt
   status_id: 99,
   time: 2021-11-17T13:32:43.237881856Z,
   traffic: {
+    bytes: 483,
     bytes_in: 278,
+    bytes_missed: 0,
     bytes_out: 205,
+    packets: 11,
     packets_in: 5,
     packets_out: 6,
-    total_bytes: 483,
-    total_packets: 11,
   },
   type_name: "Network Activity: Traffic",
   type_uid: 400106,
   unmapped: {
-    missed_bytes: 0,
     orig_ip_bytes: 525,
     resp_ip_bytes: 546,
-    tunnel_parents: null,
-    vlan: null,
-    inner_vlan: null,
-    orig_l2_addr: "64:9e:f3:be:db:66",
-    resp_l2_addr: "00:16:3c:f1:fd:6d",
-    geo: {
-      orig: {
-        country_code: "US",
-        region: "CA",
-        city: "Los Angeles",
-        latitude: 34.0544,
-        longitude: -118.2441,
-      },
-      resp: {
-        country_code: "US",
-        region: "VA",
-        city: "Ashburn",
-        latitude: 39.0469,
-        longitude: -77.4903,
-      },
+  },
+}
+{
+  activity_id: 6,
+  activity_name: "Traffic",
+  app_protocol_name: "dns",
+  category_name: "Network Activity",
+  category_uid: 4,
+  class_name: "Network Activity",
+  class_uid: 4001,
+  connection_info: {
+    community_uid: "1:0nZC/6S/pr+IceCZ04RjDZbX+KI=",
+    direction: "Unknown",
+    direction_id: 0,
+    flag_history: "D",
+    protocol_name: "udp",
+    protocol_num: 17,
+    protocol_ver: "Internet Protocol version 4 (IPv4)",
+    protocol_ver_id: 4,
+  },
+  dst_endpoint: {
+    ip: 198.71.247.91,
+    location: {
+      city: "Ashburn",
+      country: "US",
+      lat: 39.0469,
+      long: -77.4903,
+      region: "VA",
     },
+    mac: "00:16:3c:f1:fd:6d",
+    port: 53,
+  },
+  is_src_dst_assignment_known: true,
+  metadata: {
+    log_name: "conn.log",
+    logged_time: null,
+    original_event_uid: "CnrwFesjfOhI3fuu1",
+    product: {
+      cpe_name: "cpe:2.3:a:zeek:zeek",
+      name: "Zeek",
+      vendor_name: "Zeek",
+    },
+    version: "1.8.0",
+  },
+  severity: "Informational",
+  severity_id: 1,
+  src_endpoint: {
+    ip: 45.137.23.27,
+    location: {
+      city: null,
+      country: "BD",
+      lat: 23.7018,
+      long: 90.3742,
+      region: null,
+    },
+    mac: "64:9e:f3:be:db:66",
+    port: 47958,
+  },
+  start_time: 2021-11-17T14:02:38.165570048Z,
+  status: "Other",
+  status_code: "S0",
+  status_id: 99,
+  time: 2021-11-17T14:02:38.165570048Z,
+  traffic: {
+    bytes_in: null,
+    bytes_missed: 0,
+    bytes_out: null,
+    packets: 1,
+    packets_in: 0,
+    packets_out: 1,
+  },
+  type_name: "Network Activity: Traffic",
+  type_uid: 400106,
+  unmapped: {
+    orig_ip_bytes: 58,
+    resp_ip_bytes: 0,
   },
 }
 ```
@@ -762,7 +972,7 @@ i   1× tenzir (v5.16.0+gc0a0c3ba49)
 i ran 1 test: 1 passed (100%) / 0 failed (0%)
 ```
 
-Perfect. Now proceed with all log types and you have production-grade package.
+Perfect. Now proceed with all log types and you have a production-grade package.
 
 ### Step 4: Install and use the package
 
@@ -781,6 +991,6 @@ This tutorial showed you how to map security data to OCSF using TQL pipelines. Y
 * How to use TQL operators and expressions to transform raw events into OCSF-compliant records
 * How to package your mappings as reusable operators in a Tenzir package
 
-The key to successful OCSF mapping is systematic organization: move your source event into a dedicated field, map attributes group by group while removing source fields as you go, and collect any unmapped fields in a catch-all record. This approach ensures you don’t miss any fields and makes your mappings easy to maintain and extend.
+The key to successful OCSF mapping is systematic organization: keep source residue in `zeek`, map attributes group by group while removing source fields as you go, return the residue as `unmapped`, and produce minimal OCSF that [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates it. This approach keeps mappings maintainable while ensuring downstream pipelines receive the comprehensive schema shape.
 
 For more examples and ready-to-use OCSF mappings, check out the [Tenzir Community Library](https://github.com/tenzir/library).

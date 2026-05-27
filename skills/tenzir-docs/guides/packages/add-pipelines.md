@@ -7,20 +7,23 @@ This guide shows you how to add deployable pipelines to your package. You’ll l
 
 The `pipelines` directory contains fully deployable TQL pipelines. Unlike [user-defined operators (UDOs)](add-operators.md), pipelines are complete units that must begin with an input operator and end with an output operator.
 
-Pipelines typically call UDOs from the same package to transform data:
+Pipelines typically use source operators to fetch and parse data, then call UDOs from the same package to transform the parsed events:
 
 pipelines/fetch-and-normalize.tql
 
 ```tql
 every 1h {
-  from_http "https://api.example.com/events"
+  from_http "https://api.example.com/events" {
+    read_json
+  }
 }
-acme::parse
-acme::ocsf::normalize
-import
+acme::ocsf::map
+ocsf::derive
+ocsf::cast
+publish "normalized-events"
 ```
 
-When you install the package, the node automatically runs any enabled pipelines. The UDOs handle the transformation logic while the pipeline orchestrates the data flow.
+When you install the package, the node automatically runs any enabled pipelines. The source operator handles fetching and parsing, while the package UDO handles cleanup, mapping, and other reusable transformation logic. Use enabled pipelines only when the package should take action as soon as it is installed. Ship optional operational workflows as disabled templates unless automatic execution is the package’s core behavior.
 
 ## Configure pipeline behavior
 
@@ -41,9 +44,10 @@ description: >
 
 
 every 1h {
-  from_http "https://feeds.example.com/iocs.json"
+  from_http "https://feeds.example.com/iocs.json" {
+    read_json
+  }
 }
-acme::parse_indicators
 context::update "threat-intel", key=indicator
 ```
 
@@ -62,7 +66,7 @@ restart-on-error: 5m  # Restart after 5 minutes on failure
 every 1h {
   from_http "https://api.example.com/data"
 }
-import
+publish "raw-data"
 ```
 
 Options:
@@ -75,30 +79,31 @@ Options:
 
 Set to `true` to disable the pipeline. Disabled pipelines don’t run when the package is installed, but users can enable them manually.
 
-pipelines/optional-export.tql
+pipelines/notify-webhook.tql
 
 ```tql
 ---
-name: Export to SIEM
+name: Notify Webhook
 description: >
-  Exports enriched events to an external SIEM. Enable manually if needed.
+  Sends selected security events to a webhook. Enable manually if needed.
 disabled: true
 ---
 
 
-subscribe "enriched-events"
-to_http "https://siem.example.com/ingest"
+subscribe "security-events"
+where severity_id >= 3
+to_http "https://hooks.example.com/security-events"
 ```
 
 Ship disabled by default
 
-For maximum flexibility, add `disabled: true` to pipeline frontmatter. This ships the pipeline as a template that users must explicitly enable, combining the convenience of ready-made pipelines with opt-in execution.
+For opt-in operation, add `disabled: true` to pipeline frontmatter. This ships the pipeline as a template that users must explicitly enable, combining the convenience of ready-made pipelines with predictable installation behavior.
 
 ### `unstoppable`
 
 Set to `true` to make the pipeline run automatically and indefinitely. You cannot pause or stop unstoppable pipelines manually. If they complete, they end up in a failed state. If you enable `restart-on-error`, they restart after the specified duration.
 
-pipelines/critical-ingest.tql
+pipelines/critical-router.tql
 
 ```tql
 ---
@@ -108,7 +113,7 @@ restart-on-error: 1m
 
 
 from_kafka "critical-events"
-import
+publish "critical-events"
 ```
 
 ### Complete example
@@ -157,7 +162,7 @@ Understanding when to use operators versus pipelines helps you design packages t
 * The workflow is complete and self-contained
 * The package should take action upon installation
 
-For maximum flexibility, consider shipping both: operators that provide capabilities and disabled pipelines that demonstrate how to compose them.
+For flexible packages, consider shipping both: operators that provide reusable capabilities and disabled pipelines that demonstrate how to compose them.
 
 ## See also
 

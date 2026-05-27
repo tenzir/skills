@@ -13,7 +13,7 @@ This involves three primary actions:
 2. Extract SHA1 hashes of certificates in OCSF Network Activity events and compare them against the lookup table.
 3. Tag matching events with the OCSF OSINT profile, so that downstream tools can escalate the match into an alert or detection finding.
 
-We’ll begin with the managing the lookup table. But first we need to get the package scaffolding in place.
+We’ll begin by managing the lookup table. But first we need to get the package scaffolding in place.
 
 ## Create the package scaffold
 
@@ -52,6 +52,7 @@ The [`package.yaml`](/packages/sslbl/package.yaml) is the **package manifest**. 
 sslbl/package.yaml
 
 ```yaml
+id: sslbl
 name: SSLBL
 author: Tenzir
 author_icon: https://github.com/tenzir.png
@@ -62,12 +63,15 @@ description: |
   SHA1 hashes of blacklisted certificates for TLS monitoring use cases.
 
 
+categories:
+  - contexts
+
+
 metadata:
   upstream: https://sslbl.abuse.ch/blacklist/sslblacklist.csv
-  category: threat-intelligence
 ```
 
-Tenzir accepts the top-level `metadata` field for external tooling and keeps its contents opaque. Unknown top-level keys outside the package schema still fail validation, so put non-engine data under `metadata`.
+Use top-level `categories` for the Tenzir Library grouping. Valid values are `sources`, `destinations`, `mappings`, and `contexts`. Tenzir accepts the top-level `metadata` field for external tooling and keeps its contents opaque. Unknown top-level keys outside the package schema still fail validation, so put non-engine data under `metadata`.
 
 ### Define the lookup table context
 
@@ -99,7 +103,7 @@ from_http "https://sslbl.abuse.ch/blacklist/sslblacklist.csv" {
 }
 ```
 
-The relative path in the packagage defines the operator name. After installing the package, you can call this operator via `sslbl::fetch`. It will produce events of this shape:
+The relative path in the package defines the operator name. After installing the package, you can call this operator via `sslbl::fetch`. It will produce events of this shape:
 
 ```tql
 {
@@ -109,7 +113,7 @@ The relative path in the packagage defines the operator name. After installing t
 }
 ```
 
-Let’s create another operator to map this data to [OSINT objects](https://schema.ocsf.io/1.6.0/objects/osint)—the standardized representation of an indicators of compromise (IOCs) in OCSF.
+Let’s create another operator to map this data to [OSINT objects](https://schema.ocsf.io/1.6.0/objects/osint), the standardized representation of indicators of compromise (IOCs) in OCSF.
 
 operators/ocsf/to\_osint.tql
 
@@ -154,7 +158,7 @@ This pipeline translates the original feed into this shape:
 
 OCSF Verbosity
 
-You may notice that this shape is a lot more verbose than the original event. Don’t worry, it is absolutely normal when upgrading your raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf::trim`](/reference/operators/ocsf/trim.md) operator or manually by [`drop`](/reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
+You may notice that this shape is a lot more verbose than the original event. This additional structure is normal when upgrading raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf::trim`](/reference/operators/ocsf/trim.md) operator or manually by [`drop`](/reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
 
 We’re not done yet. Let’s create one final operator that wraps a single fetch into an OCSF event that describes a single collection of IoCs: the [OSINT Inventory Info](https://schema.ocsf.io/1.6.0/classes/osint_inventory_info) event.
 
@@ -322,7 +326,7 @@ if _tmp != null {
 publish "ocsf-osint"
 ```
 
-This pipelines hones in on OCSF Network Activity events (`category_uid == 4`) that come with a SHA1 TLS certificate fingerprint (`algorithm_id == 2`). If we have a matche, we add the `osint` profile to the event and publish it to separate topic `ocsf-osint` for further processing.
+This pipeline hones in on OCSF Network Activity events (`category_uid == 4`) that come with a SHA1 TLS certificate fingerprint (`algorithm_id == 2`). If we have a match, we add the `osint` profile to the event and publish it to a separate topic `ocsf-osint` for further processing.
 
 ### Example 3: Show a summary of the dataset
 
@@ -364,7 +368,7 @@ Testing ensures that you always have a working package during development. The e
 
 ### Add tests for your operators
 
-Since our package ships with user-defined operators, we highly recommend to write tests for them:
+Since our package ships with user-defined operators, we recommend writing tests for them:
 
 1. You help users gain confidence in the functionality.
 2. You provide illustrative input-output pairs.
@@ -383,7 +387,7 @@ from_file env("TENZIR_INPUT") {
 sslbl::ocsf::to_osint
 ```
 
-We first watch the terminal output it in passthrough mode:
+We first inspect the terminal output in passthrough mode:
 
 ```sh
 uvx tenzir-test --passthrough
@@ -413,7 +417,7 @@ tests/ocsf/to\_osint.txt
 }
 ```
 
-As expected, a valid OCSF OSINT object. Let’s confirm this as our new baseline:
+As expected, the test produces a valid OCSF OSINT object. Let’s confirm this as our new baseline:
 
 ```sh
 uvx tenzir-test --update
@@ -450,7 +454,7 @@ The interactive wizard guides you through the process. See [Maintain a changelog
 
 ## Share and contribute
 
-Phew, you made it! You now have a reusable package. 🎉
+You now have a reusable package.
 
 Now that you have a package, what’s next?
 

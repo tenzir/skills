@@ -1,7 +1,7 @@
 # Create a package
 
 
-This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, and add runnable examples.
+This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, plan reusable operators, add deployable pipelines, and include runnable examples.
 
 ## Create the package scaffold
 
@@ -37,7 +37,7 @@ The `tests/inputs/` directory holds sample data that the test harness makes avai
 
 ## Add the package manifest
 
-The `package.yaml` file is the **package manifest**. It identifies the directory as a package and contains descriptive fields, external metadata, context definitions, and input specifications.
+The `package.yaml` file is the **package manifest**. It identifies the directory as a package and contains descriptive fields, categories, external metadata, context definitions, and input specifications.
 
 ### Add descriptive metadata
 
@@ -64,11 +64,18 @@ author_icon: https://github.com/yourusername.png
 description: |
   A brief description of what your package does and the use cases it supports.
   You can use **Markdown** formatting here.
+
+
+# User-facing categories for the Tenzir Library.
+# Valid values: sources, destinations, mappings, contexts.
+categories:
+  - sources
+  - mappings
 ```
 
 ### Add external metadata
 
-Use the top-level `metadata` field for data consumed by external tools. Tenzir accepts this field but does not interpret its contents.
+Use top-level `categories` for the Library grouping. Valid values are `sources`, `destinations`, `mappings`, and `contexts`. Use the top-level `metadata` field for data consumed by external tools. Tenzir accepts this field but does not interpret its contents.
 
 package.yaml
 
@@ -76,8 +83,6 @@ package.yaml
 metadata:
   vendor: Acme
   source: https://github.com/acme/tenzir-packages
-  categories:
-    - threat-intelligence
 ```
 
 Unknown top-level keys outside the package schema fail validation. Put non-engine package data under `metadata` instead.
@@ -97,6 +102,16 @@ inputs:
 ```
 
 Reference inputs using `{{ inputs.input-id }}` syntax. See [Configure inputs](configure-inputs.md) for the complete templating guide.
+
+## Plan package capabilities
+
+A package can expose several capabilities at once. Treat user-defined operators as the reusable API, deployable pipelines as operational templates, examples as short usage snippets, and tests as the executable contract.
+
+* Put reusable package capabilities under `operators/`.
+* If the package maps to OCSF, expose a main mapper such as `acme::ocsf::map` that accepts parsed source events, performs source-specific cleanup and shared OCSF setup, produces minimal OCSF, and dispatches to event-specific operators under a local namespace such as `operators/ocsf/events/`.
+* Put complete workflows with an input and output under `pipelines/`. Disable optional operational pipelines by default with `disabled: true`.
+* Put focused snippets under `examples/` so users can quickly try the package after installation.
+* Put deterministic tests under `tests/`, including baselines for every public operator.
 
 ## Add examples
 
