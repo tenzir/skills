@@ -28,9 +28,11 @@ Execute each step in order. Verify the **Results** before moving on.
 ### 1. Understand the package intent
 
 Identify the package's vendor, product, audience, and role in the Tenzir
-Library. Decide whether the package is primarily a source, destination, mapping,
-enrichment, utility, or a combination of these. Inspect similar packages in the
-library before introducing new naming or layout conventions.
+Library. Decide which user-facing Library categories apply (`sources`,
+`destinations`, `mappings`, `contexts`) and whether the package is a source,
+destination, mapping, enrichment, utility, or a combination of these. Inspect
+similar packages in the library before introducing new naming or layout
+conventions.
 
 Use the `tenzir-docs` skill for package, TQL, operator, pipeline, context, and
 test guidance. Use the `tenzir-ocsf` skill only when the package includes OCSF
@@ -39,12 +41,13 @@ mapping.
 **Results:**
 
 - Vendor and product names
-- Package categories and target use cases
+- Valid package categories and target use cases
 - Installation behavior, including which pipelines should run automatically
 - Decision on whether OCSF mapping is in scope
 
 **Resources** (read via `tenzir-docs`):
 
+- `explanations/packages.md`
 - `guides/packages/create-a-package.md`
 - `tutorials/learn-idiomatic-tql.md`
 
@@ -57,10 +60,12 @@ style.
 **Results:**
 
 - `package.yaml` with `id`, `name`, author metadata, icon, Markdown
-  description, categories, inputs, and contexts where needed
+  description, valid categories, opaque `metadata`, inputs, and contexts where
+  needed
 - Standard directories as needed: `operators/`, `examples/`, `pipelines/`,
-  `tests/inputs/`, and `changelog/`
-- Samples stored close to the tests that use them
+  `tests/`, and `changelog/`
+- Test samples stored close to the tests that use them: inline `.input` files
+  for single-test fixtures and local `inputs/` directories for shared fixtures
 
 **Resources** (read via `tenzir-docs`):
 
@@ -98,27 +103,28 @@ large pipelines with embedded transformation logic.
 
 When the package maps events to OCSF, keep the mapping as part of the package's
 operator API. Use a shared mapping operator plus event-specific operators when
-the source has multiple event types. Let the main mapping operator initialize
-shared OCSF fields, preserve raw input when available, collect source residue in
-`unmapped`, normalize common sentinels, and dispatch on a stable discriminator.
+the source has multiple event types. Let the main mapping operator move the
+parsed input into a source-specific working namespace such as `zeek`, `panos`,
+or `event`, initialize shared OCSF fields, normalize common sentinels, dispatch
+on a stable discriminator, and finally return `{...ocsf, unmapped: <source>}`.
 
 Event-specific mapping operators should set the OCSF class, activity, `type_uid`,
-and `@name`, then move source fields from `unmapped` into their OCSF homes. Use
-small lookup records for event-code-to-enum mappings. Leave source fields in
-`unmapped` when they do not have a clean OCSF home, with concise comments for
-non-obvious decisions.
+and `@name`, then move fields from the source namespace into their OCSF homes.
+Use small lookup records for event-code-to-enum mappings. Leave source fields in
+the source namespace when they do not have a clean OCSF home, with concise
+comments for non-obvious decisions.
 
 **Results:**
 
 - Main mapping operator such as `vendor::product::ocsf::map`
 - Event-specific operators under an established local namespace such as
-  `operators/<product>/ocsf/events/`
-- Raw source preserved in `raw_data` and `raw_data_size` when mapping from raw
-  events
+  `operators/.../ocsf/events/`
+- Source residue returned as `unmapped` after mapped fields move out of the
+  source-specific working namespace
 - OCSF metadata, profiles, version, timestamps, product, and device fields set
   consistently
-- Unknown or unsupported events mapped to a clear fallback instead of silently
-  disappearing
+- Unknown or unsupported events mapped to a clear Base Event fallback instead
+  of silently disappearing
 
 **Resources:**
 
@@ -143,7 +149,7 @@ is desirable.
 - Optional operational pipelines marked `disabled: true`
 - Package inputs used for user-specific URLs, credentials, intervals, topics,
   and destinations
-- Pipelines that compose UDOs and publish, import, update contexts, or export
+- Pipelines that compose UDOs and publish, update contexts, or export
   to destinations
 
 **Resources** (read via `tenzir-docs`):
@@ -184,8 +190,8 @@ changelog entry.
 
 - TQL follows idiomatic patterns
 - Tests pass with deterministic baselines
-- OCSF mappings, when present, pass `ocsf::derive` and `ocsf::cast` without
-  warnings
+- OCSF mapping tests, when present, run the mapper followed by `ocsf::derive`
+  and `ocsf::cast`; `ocsf::cast` emits no warnings
 - Package manifest, examples, pipelines, and changelog are ready for review
 
 **Resources** (read via `tenzir-docs`):
