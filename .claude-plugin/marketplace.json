@@ -5,8 +5,7 @@
       "skills": [
         "./skills/tenzir-docs",
         "./skills/tenzir-ocsf",
-        "./skills/tenzir-create-parser-package",
-        "./skills/tenzir-create-ocsf-mapping"
+        "./skills/tenzir-create-package"
       ]
     },
     {

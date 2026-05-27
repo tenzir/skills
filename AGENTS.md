@@ -36,7 +36,7 @@ just because two skills cover related topics.
 
 ### `tenzir-docs` page references in workflow skills
 
-Workflow skills (e.g., `tenzir-create-parser-package`, `tenzir-create-ocsf-mapping`) point to
+Workflow skills (e.g., `tenzir-create-package`) point to
 `tenzir-docs` pages by relative path (e.g., `guides/packages/create-a-package.md`)
 instead of duplicating documentation content. These paths must stay in sync with
 the generated `tenzir-docs` skill tree:
