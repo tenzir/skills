@@ -122,6 +122,7 @@ Useful options:
 * `--fixture-tag`: Select tests that request fixtures with the given tag. Repeatable; tests matching any selected fixture tag or fixture name are selected. When combined with positional TEST paths or `--match` patterns, only tests matching all selectors are run (intersection). Use `--fixture-tag container` to run tests backed by container fixtures, or `--fixture-tag docker-compose` to run tests using the built-in Docker Compose fixture.
 * `--fixture`: Activate fixtures in standalone foreground mode without running tests. Repeatable. Accepts bare names (`--fixture mysql`) or YAML mapping specs (`--fixture 'kafka: {port: 9092}'`). When provided, positional TEST arguments are not allowed. See the [run fixtures](../guides/testing/run-fixtures.md) guide.
 * `--no-hooks`: Disable project hook loading and invocation. Use this when you need to recover from a broken hook or compare behavior without hook side effects.
+* `--disable-inline-dependency-install`: Disable runtime installation for inline Python dependencies declared by tests or fixtures. Use this when another tool provisions the Python environment.
 
 Set `TENZIR_TEST_DEBUG=1` in CI when you want the same diagnostics without passing `--debug` on the command line.
 
@@ -920,6 +921,7 @@ The [fixture guide](../guides/testing/create-fixtures.md#add-fixture-assertions)
 * `TENZIR_KEEP_TMP_DIRS` – Keep per-test scratch directories (equivalent to `--keep`).
 * `TENZIR_TEST_DEBUG` – Enable debug logging and verbose output (equivalent to `--debug`).
 * `TENZIR_TEST_DISABLE_HOOKS` – Disable project hook loading and invocation (equivalent to `--no-hooks`).
+* `TENZIR_TEST_DISABLE_INLINE_DEPENDENCY_INSTALL` – Disable runtime installation for inline Python dependencies declared by tests or fixtures. Equivalent to `--disable-inline-dependency-install`.
 
 ### Binary resolution
 
