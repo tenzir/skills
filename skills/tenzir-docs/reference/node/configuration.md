@@ -46,11 +46,14 @@ tenzir:
     #metrics: 7d
 
 
-    # How long to keep per-operator metrics for. This covers
-    # tenzir.metrics.operator and tenzir.metrics.operator_profile. Set to 0s to
-    # avoid storing these heavy metrics while still making live metrics
-    # available.
+    # How long to keep legacy operator metrics for. Set to 0s to avoid storing
+    # these heavy metrics while still making live metrics available.
     #operator-metrics: 0s
+
+
+    # How long to keep operator profile metrics for. Set to 0s to avoid storing
+    # these heavy metrics while still making live metrics available.
+    #operator-profile-metrics: 1d
 
 
     # How long to keep diagnostics for. Set to 0s to disable diagnostics
