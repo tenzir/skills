@@ -92,3 +92,11 @@ The managed entity that is being acted upon.
 - **Group**: primary
 
 The updated managed entity.
+
+### `updated_entity`
+
+- **Type**: [`managed_entity`](../objects/managed_entity.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The intended state of the `entity` after the update. On `Success`, represents the actual post-update state.

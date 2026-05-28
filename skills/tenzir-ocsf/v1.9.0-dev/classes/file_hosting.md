@@ -180,3 +180,11 @@ The normalized identifier of the share type.
 - **Group**: primary
 
 The endpoint that performed the activity on the target file.
+
+### `updated_file`
+
+- **Type**: [`file`](../objects/file.md)
+- **Requirement**: optional
+- **Group**: context
+
+The intended state of the `file` after the update, including the `Update`, `Rename`, and `Move` activities. On `Success`, represents the actual post-update state.

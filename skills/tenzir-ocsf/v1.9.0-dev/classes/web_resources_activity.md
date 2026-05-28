@@ -84,6 +84,14 @@ Details about the endpoint from which the request originated.
 
 The Transport Layer Security (TLS) attributes, if available.
 
+### `updated_web_resources`
+
+- **Type**: [`web_resource`](../objects/web_resource.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The intended state of the `web_resources` after the update. On `Success`, represents the actual post-update state.
+
 ### `web_resources`
 
 - **Type**: [`web_resource`](../objects/web_resource.md)
