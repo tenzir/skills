@@ -3,14 +3,14 @@
 
 [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) is a managed message queue on AWS. It supports microservices, distributed systems, and serverless applications.
 
-Tenzir can receive messages from SQS queues with [`from_sqs`](/reference/operators/from_sqs.md) and send messages to SQS queues with [`to_sqs`](/reference/operators/to_sqs.md).
+Tenzir can receive messages from SQS queues with [`from_amazon_sqs`](/reference/operators/from_amazon_sqs.md) and send messages to SQS queues with [`to_amazon_sqs`](/reference/operators/to_amazon_sqs.md).
 
 When Tenzir reads from an SQS queue, it emits one event per SQS message. The event uses the `tenzir.sqs` schema and contains the message body in the `message` field together with SQS metadata such as the message ID, receive count, and send time.
 
 By default, Tenzir deletes each received message from the queue after it emits the event. Set `keep_messages=true` to receive messages without deleting them. Combine it with `visibility_timeout` to control when SQS makes the messages visible again:
 
 ```tql
-from_sqs "sqs://my-queue", keep_messages=true, visibility_timeout=30s
+from_amazon_sqs "sqs://my-queue", keep_messages=true, visibility_timeout=30s
 ```
 
 With `keep_messages=true`, SQS makes the message visible again after the queue’s visibility timeout. Use this when you want to inspect or replay messages. It doesn’t make downstream processing transactional.
@@ -24,9 +24,9 @@ The `batch_size` option controls the maximum number of messages that SQS returns
 Pass a queue name, an `sqs://` URL, or a full SQS queue URL:
 
 ```tql
-from_sqs "alerts"
-from_sqs "sqs://alerts"
-from_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/alerts",
+from_amazon_sqs "alerts"
+from_amazon_sqs "sqs://alerts"
+from_amazon_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/alerts",
   aws_region="eu-west-1"
 ```
 
@@ -39,7 +39,7 @@ Follow the [Amazon integration configuration](../amazon.md) to authenticate with
 Alternatively, use the `aws_iam` parameter to provide explicit credentials:
 
 ```tql
-from_sqs "my-queue", aws_iam={
+from_amazon_sqs "my-queue", aws_iam={
   region: "us-east-1",
   access_key_id: secret("aws-key"),
   secret_access_key: secret("aws-secret")
@@ -49,7 +49,7 @@ from_sqs "my-queue", aws_iam={
 You can also use `aws_iam` to assume an IAM role:
 
 ```tql
-from_sqs "my-queue", aws_iam={
+from_amazon_sqs "my-queue", aws_iam={
   region: "eu-west-1",
   assume_role: "arn:aws:iam::123456789012:role/my-sqs-role",
   session_name: "tenzir-session"
@@ -58,12 +58,12 @@ from_sqs "my-queue", aws_iam={
 
 Tenzir needs these SQS permissions:
 
-| Operator                                       | Required permissions                                         |
-| ---------------------------------------------- | ------------------------------------------------------------ |
-| [`from_sqs`](/reference/operators/from_sqs.md) | `sqs:GetQueueUrl`, `sqs:ReceiveMessage`, `sqs:DeleteMessage` |
-| [`to_sqs`](/reference/operators/to_sqs.md)     | `sqs:GetQueueUrl`, `sqs:SendMessage`                         |
+| Operator                                                     | Required permissions                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [`from_amazon_sqs`](/reference/operators/from_amazon_sqs.md) | `sqs:GetQueueUrl`, `sqs:ReceiveMessage`, `sqs:DeleteMessage` |
+| [`to_amazon_sqs`](/reference/operators/to_amazon_sqs.md)     | `sqs:GetQueueUrl`, `sqs:SendMessage`                         |
 
-You don’t need `sqs:GetQueueUrl` when you pass a full queue URL. You also don’t need `sqs:DeleteMessage` for `from_sqs` pipelines that always use `keep_messages=true`.
+You don’t need `sqs:GetQueueUrl` when you pass a full queue URL. You also don’t need `sqs:DeleteMessage` for `from_amazon_sqs` pipelines that always use `keep_messages=true`.
 
 ## Examples
 
@@ -71,13 +71,13 @@ You don’t need `sqs:GetQueueUrl` when you pass a full queue URL. You also don�
 
 ```tql
 from {foo: 42}
-to_sqs "sqs://my-queue", message=this.print_json()
+to_amazon_sqs "sqs://my-queue", message=this.print_json()
 ```
 
 ### Receive messages from an SQS queue
 
 ```tql
-from_sqs "sqs://my-queue", poll_time=5s, batch_size=10
+from_amazon_sqs "sqs://my-queue", poll_time=5s, batch_size=10
 this = message.parse_json()
 ```
 
@@ -88,7 +88,7 @@ this = message.parse_json()
 ### Receive messages without deleting them
 
 ```tql
-from_sqs "sqs://my-queue",
+from_amazon_sqs "sqs://my-queue",
   keep_messages=true,
   poll_time=5s,
   batch_size=10,
@@ -98,7 +98,7 @@ this = message.parse_json()
 
 ## See Also
 
-* [`from_sqs`](/reference/operators/from_sqs.md)
-* [`to_sqs`](/reference/operators/to_sqs.md)
+* [`from_amazon_sqs`](/reference/operators/from_amazon_sqs.md)
+* [`to_amazon_sqs`](/reference/operators/to_amazon_sqs.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)

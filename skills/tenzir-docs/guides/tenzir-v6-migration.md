@@ -156,8 +156,8 @@ Prefer `from_file` and `to_file` for URI-style file access. Use provider-specifi
 | `save_kafka`               | `to_kafka`                 |
 | `load_amqp`                | `from_amqp`                |
 | `save_amqp`                | `to_amqp`                  |
-| `load_sqs`                 | `from_sqs`                 |
-| `save_sqs`                 | `to_sqs`                   |
+| `load_sqs`                 | `from_amazon_sqs`          |
+| `save_sqs`                 | `to_amazon_sqs`            |
 | `load_google_cloud_pubsub` | `from_google_cloud_pubsub` |
 | `save_google_cloud_pubsub` | `to_google_cloud_pubsub`   |
 
@@ -218,7 +218,7 @@ The old `from` operator (no suffix) accepted a URI and dispatched to the appropr
 | `kafka`         | `from_kafka`                |
 | `opensearch`    | `from_opensearch`           |
 | `s3`            | `from_s3`                   |
-| `sqs`           | `from_sqs`                  |
+| `sqs`           | `from_amazon_sqs`           |
 | `tcp`           | `from_tcp` or `accept_tcp`  |
 | `udp`           | `accept_udp`                |
 
@@ -241,7 +241,7 @@ The old `to` operator (no suffix) accepted a URI and dispatched to the appropria
 | `inproc`, `zmq`                    | `to_zmq`                    |
 | `kafka`                            | `to_kafka`                  |
 | `s3`                               | `to_s3`                     |
-| `sqs`                              | `to_sqs`                    |
+| `sqs`                              | `to_amazon_sqs`             |
 | `tcp`                              | `to_tcp` or `serve_tcp`     |
 | `udp`                              | `to_udp`                    |
 | `smtp`, `smtps`, `mailto`, `email` | No replacement — see below. |
@@ -555,6 +555,8 @@ to_google_cloud_pubsub project_id="acme", topic_id="events", message=this.print_
 
 #### SQS
 
+In compatibility mode, the legacy operators keep the names `load_sqs` and `save_sqs`. When you migrate SQS pipelines to the v6 new executor, use the vendor-qualified [`from_amazon_sqs`](/reference/operators/from_amazon_sqs.md) and [`to_amazon_sqs`](/reference/operators/to_amazon_sqs.md) operators.
+
 ##### Consume
 
 Before:
@@ -567,7 +569,7 @@ read_json
 After:
 
 ```tql
-from_sqs "queue"
+from_amazon_sqs "queue"
 this = message.parse_json()
 ```
 
@@ -585,10 +587,10 @@ After:
 
 ```tql
 export
-to_sqs "queue"
+to_amazon_sqs "queue"
 ```
 
-`to_sqs` sends one SQS message per event and serializes it as NDJSON by default.
+`to_amazon_sqs` sends one SQS message per event and serializes it as NDJSON by default.
 
 #### ZMQ
 

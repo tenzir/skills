@@ -102,6 +102,7 @@
 - [accept_udp](operators/accept_udp.md): Receives UDP datagrams and outputs structured events.
 - [accept_zmq](operators/accept_zmq.md): Listens on a ZeroMQ endpoint and receives events.
 - [from_amazon_cloudwatch](operators/from_amazon_cloudwatch.md): Reads events from Amazon CloudWatch.
+- [from_amazon_sqs](operators/from_amazon_sqs.md): Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 - [from_amqp](operators/from_amqp.md): Receives messages from an AMQP queue.
 - [from_azure_blob_storage](operators/from_azure_blob_storage.md): Reads one or multiple files from Azure Blob Storage.
 - [from_file](operators/from_file.md): Reads one or multiple files from a filesystem.
@@ -117,7 +118,6 @@
 - [from_nic](operators/from_nic.md): Captures packets from a network interface and outputs events.
 - [from_s3](operators/from_s3.md): Reads one or multiple files from Amazon S3.
 - [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md): Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
-- [from_sqs](operators/from_sqs.md): Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 - [from_stdin](operators/from_stdin.md): Reads and parses events from standard input.
 - [from_tcp](operators/from_tcp.md): Connects to a remote TCP or TLS endpoint and receives events.
 - [from_velociraptor](operators/from_velociraptor.md): Submits VQL to a Velociraptor server and returns the response as events.
@@ -170,6 +170,7 @@
 - [serve_zmq](operators/serve_zmq.md): Listens on a ZeroMQ endpoint and sends events.
 - [to_amazon_cloudwatch](operators/to_amazon_cloudwatch.md): Sends events to Amazon CloudWatch Logs.
 - [to_amazon_security_lake](operators/to_amazon_security_lake.md): Sends OCSF events to Amazon Security Lake.
+- [to_amazon_sqs](operators/to_amazon_sqs.md): Sends messages to an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 - [to_amqp](operators/to_amqp.md): Sends messages to an AMQP exchange.
 - [to_azure_blob_storage](operators/to_azure_blob_storage.md): Writes events to one or multiple blobs in Azure Blob Storage.
 - [to_azure_log_analytics](operators/to_azure_log_analytics.md): Sends events to the Microsoft Azure Logs Ingestion API.
@@ -191,7 +192,6 @@
 - [to_sentinelone_data_lake](operators/to_sentinelone_data_lake.md): Sends security events to SentinelOne Singularity Data Lake via REST API.
 - [to_snowflake](operators/to_snowflake.md): Sends events to a Snowflake database.
 - [to_splunk](operators/to_splunk.md): Sends events to a Splunk [HTTP Event Collector (HEC)](https://docs.splunk.com/Documentation/Splunk/9.3.1/Data/UsetheHTTPEventCollector).
-- [to_sqs](operators/to_sqs.md): Sends messages to an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 - [to_stdout](operators/to_stdout.md): Writes events to standard output.
 - [to_tcp](operators/to_tcp.md): Connects to a remote TCP or TLS endpoint and sends events.
 - [to_udp](operators/to_udp.md): Sends one UDP datagram per input event.

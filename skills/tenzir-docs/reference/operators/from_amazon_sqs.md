@@ -1,16 +1,17 @@
-# from_sqs
+# from_amazon_sqs
 
 
 Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 
 ```tql
-from_sqs queue:str, [keep_messages=bool, batch_size=int, poll_time=duration,
-                     visibility_timeout=duration, aws_region=str, aws_iam=record]
+from_amazon_sqs queue:str, [keep_messages=bool, batch_size=int, poll_time=duration,
+                            visibility_timeout=duration, aws_region=str,
+                            aws_iam=record]
 ```
 
 ## Description
 
-[Amazon Simple Queue Service (Amazon SQS)](https://docs.aws.amazon.com/sqs/) is a fully managed message queueing service for decoupling distributed systems. The `from_sqs` operator reads messages from an SQS queue and emits one event per message.
+[Amazon Simple Queue Service (Amazon SQS)](https://docs.aws.amazon.com/sqs/) is a fully managed message queueing service for decoupling distributed systems. The `from_amazon_sqs` operator reads messages from an SQS queue and emits one event per message.
 
 The emitted events use the `tenzir.sqs` schema with these fields:
 
@@ -67,7 +68,7 @@ Defaults to `false`.
 Set this option to `true` to keep received messages in the queue:
 
 ```tql
-from_sqs "my-queue", keep_messages=true
+from_amazon_sqs "my-queue", keep_messages=true
 ```
 
 When `keep_messages=true`, SQS hides each received message until the queue’s visibility timeout expires, then makes the message visible again. This option only skips `DeleteMessage`; it doesn’t make downstream processing transactional.
@@ -81,7 +82,7 @@ The value must be between `0s` and `12h`. When omitted, SQS uses the queue’s c
 Use this option with `keep_messages=true` to control when messages become available for redelivery:
 
 ```tql
-from_sqs "my-queue", keep_messages=true, visibility_timeout=30s
+from_amazon_sqs "my-queue", keep_messages=true, visibility_timeout=30s
 ```
 
 ### `aws_region = str (optional)`
@@ -155,20 +156,20 @@ Credentials are automatically refreshed before expiration, with exponential back
 ### Receive messages from a queue
 
 ```tql
-from_sqs "sqs://tenzir"
+from_amazon_sqs "sqs://tenzir"
 ```
 
 ### Parse JSON messages
 
 ```tql
-from_sqs "sqs://alerts", poll_time=5s, batch_size=10
+from_amazon_sqs "sqs://alerts", poll_time=5s, batch_size=10
 this = message.parse_json()
 ```
 
 ### Receive messages without deleting them
 
 ```tql
-from_sqs "sqs://alerts",
+from_amazon_sqs "sqs://alerts",
   keep_messages=true,
   poll_time=5s,
   batch_size=10,
@@ -179,20 +180,20 @@ this = message.parse_json()
 ### Use an explicit region
 
 ```tql
-from_sqs "my-queue", aws_region="us-east-1"
+from_amazon_sqs "my-queue", aws_region="us-east-1"
 ```
 
 ### Pass a queue URL directly
 
 ```tql
-from_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/my-queue",
+from_amazon_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/my-queue",
   aws_region="eu-west-1"
 ```
 
 ### Use explicit credentials
 
 ```tql
-from_sqs "my-queue", aws_iam={
+from_amazon_sqs "my-queue", aws_iam={
   region: "us-east-1",
   access_key_id: secret("aws-key"),
   secret_access_key: secret("aws-secret")
@@ -202,7 +203,7 @@ from_sqs "my-queue", aws_iam={
 ### Assume an IAM role
 
 ```tql
-from_sqs "my-queue", aws_iam={
+from_amazon_sqs "my-queue", aws_iam={
   region: "eu-west-1",
   assume_role: "arn:aws:iam::123456789012:role/my-sqs-role",
   session_name: "tenzir-session"
@@ -211,6 +212,6 @@ from_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`to_sqs`](/reference/operators/to_sqs.md)
+* [`to_amazon_sqs`](/reference/operators/to_amazon_sqs.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [SQS](../../integrations/amazon/sqs.md)

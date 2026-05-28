@@ -94,12 +94,12 @@ The URL structure is `amqp://user:password@host:port/vhost`. Configure additiona
 
 ## Amazon SQS
 
-[Amazon SQS](../../integrations/amazon/sqs.md) is a managed message queue. Use `from_sqs` to receive events from SQS queues.
+[Amazon SQS](../../integrations/amazon/sqs.md) is a managed message queue. Use `from_amazon_sqs` to receive events from SQS queues.
 
 ### Receive from a queue
 
 ```tql
-from_sqs "sqs://my-queue"
+from_amazon_sqs "sqs://my-queue"
 this = message.parse_json()
 ```
 
@@ -108,13 +108,13 @@ this = message.parse_json()
 Use long polling to reduce empty responses, and set `batch_size` to control the maximum number of messages per receive request:
 
 ```tql
-from_sqs "sqs://my-queue", poll_time=5s, batch_size=10
+from_amazon_sqs "sqs://my-queue", poll_time=5s, batch_size=10
 ```
 
 By default, Tenzir deletes each SQS message after emitting it. Set `keep_messages=true` to leave messages in the queue so SQS makes them visible again after the queue’s visibility timeout:
 
 ```tql
-from_sqs "sqs://my-queue", keep_messages=true, visibility_timeout=30s
+from_amazon_sqs "sqs://my-queue", keep_messages=true, visibility_timeout=30s
 ```
 
 ## Google Cloud Pub/Sub

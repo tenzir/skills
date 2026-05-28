@@ -585,6 +585,14 @@ Reads events from Amazon CloudWatch.
 from_amazon_cloudwatch "/aws/lambda/api", mode="search"
 ```
 
+### [from\_amazon\_sqs](operators/from_amazon_sqs.md)
+
+Receives messages from an Amazon SQS queue.
+
+```tql
+from_amazon_sqs "sqs://tenzir", poll_time=5s
+```
+
 ### [from\_amqp](operators/from_amqp.md)
 
 Receives messages from an AMQP queue.
@@ -703,14 +711,6 @@ Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
 
 ```tql
 from_sentinelone_data_lake "https://…", …
-```
-
-### [from\_sqs](operators/from_sqs.md)
-
-Receives messages from an Amazon SQS queue.
-
-```tql
-from_sqs "sqs://tenzir", poll_time=5s
 ```
 
 ### [from\_stdin](operators/from_stdin.md)
@@ -1021,6 +1021,14 @@ Sends OCSF events to Amazon Security Lake.
 to_amazon_security_lake "s3://…"
 ```
 
+### [to\_amazon\_sqs](operators/to_amazon_sqs.md)
+
+Sends messages to an Amazon SQS queue.
+
+```tql
+to_amazon_sqs "sqs://tenzir"
+```
+
 ### [to\_amqp](operators/to_amqp.md)
 
 Sends messages to an AMQP exchange.
@@ -1187,14 +1195,6 @@ Sends events to a Splunk HTTP Event Collector (HEC).
 
 ```tql
 to_splunk "localhost:8088", …
-```
-
-### [to\_sqs](operators/to_sqs.md)
-
-Sends messages to an Amazon SQS queue.
-
-```tql
-to_sqs "sqs://tenzir"
 ```
 
 ### [to\_stdout](operators/to_stdout.md)

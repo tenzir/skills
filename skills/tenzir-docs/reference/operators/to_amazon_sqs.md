@@ -1,17 +1,17 @@
-# to_sqs
+# to_amazon_sqs
 
 
 Sends messages to an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 
 ```tql
-to_sqs queue:str, [message=str|blob, aws_region=str, aws_iam=record]
+to_amazon_sqs queue:str, [message=str|blob, aws_region=str, aws_iam=record]
 ```
 
 ## Description
 
-[Amazon Simple Queue Service (Amazon SQS)](https://docs.aws.amazon.com/sqs/) is a fully managed message queueing service for decoupling distributed systems. The `to_sqs` operator sends one SQS message per input event.
+[Amazon Simple Queue Service (Amazon SQS)](https://docs.aws.amazon.com/sqs/) is a fully managed message queueing service for decoupling distributed systems. The `to_amazon_sqs` operator sends one SQS message per input event.
 
-By default, `to_sqs` serializes each input event as NDJSON. Use the `message` option to send a specific string or blob expression instead. If the expression evaluates to `null` or another type, the operator skips that event and emits a warning.
+By default, `to_amazon_sqs` serializes each input event as NDJSON. Use the `message` option to send a specific string or blob expression instead. If the expression evaluates to `null` or another type, the operator skips that event and emits a warning.
 
 The operator requires the following AWS permissions:
 
@@ -101,29 +101,29 @@ Credentials are automatically refreshed before expiration, with exponential back
 ### Send events to a queue
 
 ```tql
-subscribe "to-sqs"
-to_sqs "sqs://tenzir"
+subscribe "to-amazon-sqs"
+to_amazon_sqs "sqs://tenzir"
 ```
 
 ### Send a specific field as the message body
 
 ```tql
 from {payload: "security event detected"}
-to_sqs "alerts-queue", message=payload
+to_amazon_sqs "alerts-queue", message=payload
 ```
 
 ### Use an explicit region
 
 ```tql
 from {alert: "security event detected"}
-to_sqs "alerts-queue", aws_region="us-east-1"
+to_amazon_sqs "alerts-queue", aws_region="us-east-1"
 ```
 
 ### Pass a queue URL directly
 
 ```tql
 from {alert: "security event detected"}
-to_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/alerts-queue",
+to_amazon_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/alerts-queue",
   aws_region="eu-west-1"
 ```
 
@@ -131,7 +131,7 @@ to_sqs "https://sqs.eu-west-1.amazonaws.com/123456789012/alerts-queue",
 
 ```tql
 from {alert: "security event detected"}
-to_sqs "alerts-queue", aws_iam={
+to_amazon_sqs "alerts-queue", aws_iam={
   region: "us-east-1",
   access_key_id: secret("aws-key"),
   secret_access_key: secret("aws-secret")
@@ -142,7 +142,7 @@ to_sqs "alerts-queue", aws_iam={
 
 ```tql
 subscribe "events"
-to_sqs "my-queue", aws_iam={
+to_amazon_sqs "my-queue", aws_iam={
   region: "eu-west-1",
   assume_role: "arn:aws:iam::123456789012:role/my-sqs-role"
 }
@@ -150,6 +150,6 @@ to_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`from_sqs`](/reference/operators/from_sqs.md)
+* [`from_amazon_sqs`](/reference/operators/from_amazon_sqs.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [SQS](../../integrations/amazon/sqs.md)
