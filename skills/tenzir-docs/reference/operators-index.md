@@ -243,6 +243,7 @@
 - [write_all](operators/write_all.md): Concatenates one field from all input events into a byte stream.
 - [write_bitz](operators/write_bitz.md): Writes events in *BITZ* format.
 - [write_csv](operators/write_csv.md): Transforms event stream to CSV (Comma-Separated Values) byte stream.
+- [write_delimited](operators/write_delimited.md): Frames `string` or `blob` event values as a byte stream with a separator after each value.
 - [write_feather](operators/write_feather.md): Transforms the input event stream to Feather byte stream.
 - [write_json](operators/write_json.md): Transforms the input event stream to a JSON byte stream.
 - [write_kv](operators/write_kv.md): Writes events in a Key-Value format.

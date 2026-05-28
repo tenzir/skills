@@ -1517,6 +1517,14 @@ Transforms event stream to CSV (Comma-Separated Values) byte stream.
 write_csv
 ```
 
+### [write\_delimited](operators/write_delimited.md)
+
+Frames string or blob event values as bytes with a separator after each value.
+
+```tql
+write_delimited data, "|"
+```
+
 ### [write\_feather](operators/write_feather.md)
 
 Transforms the input event stream to Feather byte stream.
