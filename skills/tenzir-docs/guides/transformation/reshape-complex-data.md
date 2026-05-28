@@ -341,6 +341,8 @@ Combine data split across multiple records.
 
 ### Merge records with spread operator
 
+Prefer record spread over [`merge`](/reference/functions/merge.md) when you assemble data from fragments. Spread keeps the resulting record visible and scales naturally beyond two inputs.
+
 ```tql
 from {
   user: {id: 1, name: "Alice"},

@@ -250,7 +250,7 @@ Lists (arrays) contain ordered sequences of values. This guide shows you how to 
 
 ##### [Shape records](guides/transformation/shape-records.md)
 
-Records (objects) contain key-value pairs. This guide shows you how to work with records — accessing fields, extracting keys, merging, and transforming values.
+Records (objects) contain key-value pairs. This guide shows you how to work with records — accessing fields, extracting keys, combining fragments, and transforming values.
 
 ##### [Reshape complex data](guides/transformation/reshape-complex-data.md)
 
