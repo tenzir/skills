@@ -1,63 +1,226 @@
 # Graylog
 
 
-[Graylog](https://graylog.org/) is a log management solution based on top of OpenSearch. Tenzir can send data to and receive data from Graylog.[1](#user-content-fn-1)
+[Graylog](https://graylog.org/) is a log management and SIEM platform that routes messages through inputs, streams, processing pipelines, index sets, destinations, and outputs. Tenzir can receive GELF streams from Graylog, send GELF into Graylog inputs, and access the OpenSearch or Elasticsearch search backend when you need backend-level queries.
 
-## Receive data from Graylog
+## Choose an integration path
 
-To receive data from Graylog with a Tenzir pipeline, you need to configure a new output and setup a stream that sends data to that output. The example below assumes that Graylog sends data in GELF to a TCP endpoint that listens on IP address 1.2.3.4 at port 5678.
+Use GELF when Graylog should ingest, route, index, and alert on the events. Use direct backend access only when you intentionally want to bypass Graylog’s ingestion path.
 
-### Configure a GELF TCP output
+| Goal                 | Graylog side                                                                                                            | Tenzir path                                                                                                                                                        |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Receive messages     | [GELF output](https://go2docs.graylog.org/current/interacting_with_your_log_data/gelf_outputs.htm) attached to a stream | [`accept_tcp`](/reference/operators/accept_tcp.md) + [`read_gelf`](/reference/operators/read_gelf.md)                                                              |
+| Receive over TLS     | GELF output with protocol `TCP+TLS`                                                                                     | [`accept_tcp`](/reference/operators/accept_tcp.md) with `tls` + [`read_gelf`](/reference/operators/read_gelf.md)                                                   |
+| Send over TCP or TLS | [GELF TCP input](https://go2docs.graylog.org/current/getting_in_log_data/gelf.html)                                     | [`to_tcp`](/reference/operators/to_tcp.md) + [`write_delimited`](/reference/operators/write_delimited.md) + [`print_ndjson`](/reference/functions/print_ndjson.md) |
+| Send over UDP        | GELF UDP input                                                                                                          | [`to_udp`](/reference/operators/to_udp.md) + [`print_ndjson`](/reference/functions/print_ndjson.md)                                                                |
+| Send HTTP batches    | GELF HTTP input                                                                                                         | [`every`](/reference/operators/every.md) + [`to_http`](/reference/operators/to_http.md) + [`write_ndjson`](/reference/operators/write_ndjson.md)                   |
+| Query stored events  | OpenSearch or Elasticsearch search backend                                                                              | [`from_http`](/reference/operators/from_http.md)                                                                                                                   |
+| Write backend data   | OpenSearch or Elasticsearch search backend                                                                              | [`to_opensearch`](/reference/operators/to_opensearch.md) or [`to_elasticsearch`](/reference/operators/to_elasticsearch.md)                                         |
 
-1. Navigate to *System/Outputs* in Graylog’s web interface.
+## GELF message format
 
-2. Click *Manage Outputs*.
+GELF is a JSON message format with transport-specific framing. A [GELF message](https://go2docs.graylog.org/current/getting_in_log_data/gelf_format.html) must include `version`, `host`, and `short_message`. The `timestamp` field, when present, is a Unix timestamp in seconds. Custom fields must start with `_`.
 
-3. Select `GELF TCP` as the output type.
-
-4. Configure the output settings:
-
-   * Specify the target server’s address in the `host` field (e.g., `1.2.3.4`).
-   * Enter the port number for the TCP connection (e.g., `5678`).
-   * Optionally adjust other settings like reconnect delay, queue size, and send buffer size.
-
-5. Save the configuration.
-
-Now Graylog will forward messages in GELF format to the specified TCP endpoint.
-
-### Create a Graylog stream
-
-The newly created output still needs to be connected to a stream to produce data. For example, to route all incoming traffic in Graylog to an output:
-
-1. Go to *Streams* in the Graylog web interface.
-2. Create a new stream or edit an existing one.
-3. In the stream’s settings, configure it to match all incoming messages. You can do this by setting up a rule that matches all messages or by leaving the rules empty.
-4. Once the stream is configured, go to the *Outputs* tab in the stream’s settings.
-5. Add the previously configured GELF TCP output to this stream.
-
-This setup will direct all messages that arrive in Graylog to the specified output. Adapt your filters for more fine-grained forwarding.
-
-### Test the connection with a Tenzir pipeline
-
-Now that Graylog is configured, you can test that data is flowing using the following Tenzir pipeline:
+TQL can build the GELF record directly:
 
 ```tql
-accept_tcp "1.2.3.4:5678" {
-  read_gelf
+gelf_timestamp = (timestamp? else now()).since_epoch().count_seconds()
+this = {
+  version: "1.1",
+  host: source_host? else host? else "tenzir-node",
+  short_message: message? else event_name? else "Tenzir event",
+  timestamp: gelf_timestamp,
+  level: syslog_level? else 6,
+  _tenzir_topic: "detections",
 }
 ```
 
-This pipelines opens a listening socket at IP address 1.2.3.4 at port 5678 via [`accept_tcp`](/reference/operators/accept_tcp.md) and then spawns a nested pipeline per accepted connection, each of which reads a stream of GELF messages using [`read_gelf`](/reference/operators/read_gelf.md). Graylog will connect to this socket, based on the reconnect interval that you configured in the output (by default 500ms).
+Use [`print_ndjson`](/reference/functions/print_ndjson.md) to serialize the record as compact JSON. For transport framing, use [`write_delimited`](/reference/operators/write_delimited.md) when a transport requires a delimiter after each message.
 
-Now that data is flowing, you can decide what to do with the Graylog data, e.g., make available the data on an topic using [`publish`](/reference/operators/publish.md):
+## Receive messages from Graylog
+
+Use a Graylog GELF output when you want Graylog to forward messages from one or more streams to a Tenzir pipeline.
+
+Caution
+
+Graylog documents that the classic GELF output does not use the Enterprise Output Framework. If the configured receiver is unavailable, messages can build up in the Graylog output buffer and block writes to the indexer. Keep the Tenzir listener available, or use a journaled Enterprise output with the GELF outbound payload format when that option is available in your Graylog deployment.
+
+### Configure the Graylog output
+
+1. In Graylog, go to **System > Outputs**.
+2. Select **GELF Output** as the output type.
+3. Configure the output host and port to point at the Tenzir node.
+4. Select `TCP` as the protocol. Use `TCP+TLS` if the Tenzir listener requires TLS.
+5. Save the output.
+6. In **Streams**, attach the output to the stream that should forward messages to Tenzir.
+
+The output sends messages only after you attach it to a stream.
+
+### Start the Tenzir receiver
+
+Deploy a pipeline that listens on the host and port configured in the Graylog output. This example accepts GELF over TCP on all interfaces and publishes the parsed events to the `graylog` topic:
 
 ```tql
-accept_tcp "1.2.3.4:5678" {
+accept_tcp "0.0.0.0:12201" {
   read_gelf
 }
 publish "graylog"
 ```
 
-## Footnotes
+If you selected `TCP+TLS` in Graylog, configure TLS on the Tenzir listener:
 
-1. This guide focuses currently focuses only on receiving data to Graylog, although it’s already possible to send data to Graylog. [↩](#user-content-fnref-1)
+```tql
+let $tls = {
+  certfile: "server.pem",
+  keyfile: "server-key.pem",
+}
+
+
+accept_tcp "0.0.0.0:12201", tls=$tls {
+  read_gelf
+}
+publish "graylog"
+```
+
+Replace the certificate paths with files that match the trust configuration of your Graylog output.
+
+## Send events to Graylog
+
+Use a Graylog GELF input when Graylog should index, search, alert on, or route events produced by a Tenzir pipeline.
+
+1. In Graylog, go to **System > Inputs**.
+2. Select a GELF input type, such as **GELF TCP**, **GELF UDP**, or **GELF HTTP**.
+3. Configure the bind address and port. The default GELF port is `12201`.
+4. For GELF TCP, enable null-frame delimiting if your Graylog input exposes that option. If you keep newline delimiting, use `"\n"` instead of `"\x00"` in the TCP examples below.
+5. Start the input.
+
+### Send GELF over TCP
+
+Graylog GELF over TCP expects one compact GELF JSON object followed by a null byte. Build the GELF record in TQL, serialize it with [`print_ndjson`](/reference/functions/print_ndjson.md), and use [`write_delimited`](/reference/operators/write_delimited.md) to append the null-byte frame delimiter.
+
+```tql
+subscribe "detections"
+gelf_timestamp = (timestamp? else now()).since_epoch().count_seconds()
+this = {
+  version: "1.1",
+  host: source_host? else host? else "tenzir-node",
+  short_message: message? else event_name? else "Tenzir event",
+  timestamp: gelf_timestamp,
+  level: syslog_level? else 6,
+  _tenzir_topic: "detections",
+}
+to_tcp "graylog.example.com:12201" {
+  write_delimited this.print_ndjson(strip_null_fields=true), "\x00"
+}
+```
+
+Replace `graylog.example.com` with the Graylog node or load balancer that hosts the GELF TCP input.
+
+If the Graylog input expects TLS, add TLS options to [`to_tcp`](/reference/operators/to_tcp.md):
+
+```tql
+to_tcp "graylog.example.com:12201", tls={} {
+  write_delimited this.print_ndjson(strip_null_fields=true), "\x00"
+}
+```
+
+### Send GELF over UDP
+
+Graylog GELF over UDP expects one GELF message per datagram. Use [`to_udp`](/reference/operators/to_udp.md) when each serialized event fits into one datagram:
+
+```tql
+subscribe "detections"
+gelf_timestamp = (timestamp? else now()).since_epoch().count_seconds()
+this = {
+  version: "1.1",
+  host: source_host? else host? else "tenzir-node",
+  short_message: message? else event_name? else "Tenzir event",
+  timestamp: gelf_timestamp,
+  level: syslog_level? else 6,
+  _tenzir_topic: "detections",
+}
+to_udp "graylog.example.com:12201",
+  message=this.print_ndjson(strip_null_fields=true)
+```
+
+Prefer TCP for reliable delivery. Use UDP only when datagram loss is acceptable and messages remain small enough for your network and Graylog input limits.
+
+### Send GELF over HTTP
+
+The GELF HTTP input accepts one JSON message per request, or newline-delimited JSON when you enable bulk receiving on the Graylog input.
+
+For one HTTP request per event, wrap [`to_http`](/reference/operators/to_http.md) in [`each`](/reference/operators/each.md):
+
+```tql
+let $headers = {"Content-Type": "application/json"}
+
+
+subscribe "detections"
+gelf_timestamp = (timestamp? else now()).since_epoch().count_seconds()
+this = {
+  version: "1.1",
+  host: source_host? else host? else "tenzir-node",
+  short_message: message? else event_name? else "Tenzir event",
+  timestamp: gelf_timestamp,
+  level: syslog_level? else 6,
+  _tenzir_topic: "detections",
+}
+each {
+  from $this
+  to_http "http://graylog.example.com:12201/gelf", headers=$headers {
+    write_json strip_null_fields=true
+  }
+}
+```
+
+For bulk receiving, group events into time-based batches with [`every`](/reference/operators/every.md) and send newline-delimited GELF JSON:
+
+```tql
+let $headers = {"Content-Type": "application/json"}
+
+
+subscribe "detections"
+gelf_timestamp = (timestamp? else now()).since_epoch().count_seconds()
+this = {
+  version: "1.1",
+  host: source_host? else host? else "tenzir-node",
+  short_message: message? else event_name? else "Tenzir event",
+  timestamp: gelf_timestamp,
+  level: syslog_level? else 6,
+  _tenzir_topic: "detections",
+}
+every 30s {
+  to_http "http://graylog.example.com:12201/gelf", headers=$headers {
+    write_ndjson strip_null_fields=true
+  }
+}
+```
+
+Use `https://` and configure TLS options on [`to_http`](/reference/operators/to_http.md) when the input expects TLS.
+
+## Work with the search backend
+
+Graylog stores searchable messages in index sets backed by OpenSearch or Elasticsearch. You can query those indices with [`from_http`](/reference/operators/from_http.md) when you need backfill, historical enrichment, or ad hoc exports.
+
+Use direct writes with [`to_opensearch`](/reference/operators/to_opensearch.md) or [`to_elasticsearch`](/reference/operators/to_elasticsearch.md) only for custom indices that you manage outside Graylog’s ingestion path. Direct writes don’t pass through Graylog inputs, stream routing, processing pipelines, or destination rules.
+
+## See Also
+
+* [`accept_tcp`](/reference/operators/accept_tcp.md)
+* [`each`](/reference/operators/each.md)
+* [`every`](/reference/operators/every.md)
+* [`from_http`](/reference/operators/from_http.md)
+* [`read_gelf`](/reference/operators/read_gelf.md)
+* [`to_elasticsearch`](/reference/operators/to_elasticsearch.md)
+* [`to_http`](/reference/operators/to_http.md)
+* [`to_opensearch`](/reference/operators/to_opensearch.md)
+* [`to_tcp`](/reference/operators/to_tcp.md)
+* [`to_udp`](/reference/operators/to_udp.md)
+* [`write_delimited`](/reference/operators/write_delimited.md)
+* [`write_json`](/reference/operators/write_json.md)
+* [`write_ndjson`](/reference/operators/write_ndjson.md)
+* [`print_ndjson`](/reference/functions/print_ndjson.md)
+* [Elasticsearch](elasticsearch.md)
+* [OpenSearch](opensearch.md)
+* [TCP](tcp.md)
+* [UDP](udp.md)

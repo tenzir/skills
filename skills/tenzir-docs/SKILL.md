@@ -749,7 +749,7 @@ OpenText ArcSight is a SIEM and log management ecosystem. Tenzir integrates with
 
 #### [Graylog](integrations/graylog.md)
 
-Graylog is a log management solution based on top of OpenSearch. Tenzir can send data to and receive data from Graylog.1
+Graylog is a log management and SIEM platform that routes messages through inputs, streams, processing pipelines, index sets, destinations, and outputs. Tenzir can receive GELF streams from Graylog, send GELF into Graylog inputs, and access the OpenSearch or Elasticsearch search backend when you need backend-level queries.
 
 #### [SentinelOne Data Lake](integrations/sentinelone-data-lake.md)
 

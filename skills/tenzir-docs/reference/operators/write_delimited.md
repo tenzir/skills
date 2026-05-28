@@ -81,3 +81,4 @@ ab
 * [`write_all`](/reference/operators/write_all.md)
 * [`write_lines`](/reference/operators/write_lines.md)
 * [`print_ndjson`](/reference/functions/print_ndjson.md)
+* [Graylog](../../integrations/graylog.md)
