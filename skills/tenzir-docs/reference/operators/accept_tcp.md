@@ -125,4 +125,5 @@ Use this mode when you migrate clients from plaintext TCP to TLS and need to kee
 * [`from_tcp`](/reference/operators/from_tcp.md)
 * [`to_tcp`](/reference/operators/to_tcp.md)
 * [`serve_tcp`](/reference/operators/serve_tcp.md)
+* [`accept_unix_socket`](/reference/operators/accept_unix_socket.md)
 * [TCP](../../integrations/tcp.md)

@@ -82,4 +82,5 @@ from_tcp "example.org:4443", tls={cacert: "ca.pem"} {
 * [`to_tcp`](/reference/operators/to_tcp.md)
 * [`accept_tcp`](/reference/operators/accept_tcp.md)
 * [`serve_tcp`](/reference/operators/serve_tcp.md)
+* [`from_unix_socket`](/reference/operators/from_unix_socket.md)
 * [TCP](../../integrations/tcp.md)

@@ -45,25 +45,28 @@ import
 
 ### Read Suricata EVE JSON from a Unix domain socket
 
-Instead of writing to a file, Suricata can also log to a Unix domain socket that Tenzir can then read from. This saves a filesystem round-trip. This requires the following settings in your `suricata.yaml`:
+Instead of writing to a file, Suricata can also connect to a Unix domain socket that Tenzir listens on. This saves a filesystem round-trip. This requires the following settings in your `suricata.yaml`:
 
 ```yaml
 outputs:
   - eve-log:
-    enabled: yes
-    filetype: unix_stream
-    filename: eve.sock
+      enabled: yes
+      filetype: unix_stream
+      filename: /run/suricata/eve.sock
 ```
 
-Suricata creates `eve.sock` upon startup. Thereafter, you can read from the socket:
+Start Tenzir before Suricata so that Tenzir creates the socket and accepts the incoming EVE JSON stream:
 
 ```tql
-from_file "eve.sock" {
+accept_unix_socket "/run/suricata/eve.sock" {
   read_suricata
 }
 ```
 
+Suricata’s `unix-command` socket is separate from EVE output. It is a control socket for tools such as `suricatasc`, not an event stream for [`read_suricata`](/reference/operators/read_suricata.md).
+
 ## See Also
 
 * [`read_json`](/reference/operators/read_json.md)
+* [`accept_unix_socket`](/reference/operators/accept_unix_socket.md)
 * [Suricata](../../integrations/suricata.md)

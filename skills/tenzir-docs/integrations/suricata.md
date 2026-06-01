@@ -1,7 +1,7 @@
 # Suricata
 
 
-[Suricata](https://suricata.io/) is network monitor with a rule matching engine to detect threats. Use Tenzir to acquire, process, and store Suricata logs.
+[Suricata](https://suricata.io/) is a network monitor with a rule matching engine to detect threats. Use Tenzir to acquire, process, and store Suricata logs.
 
 ## Examples
 
@@ -33,10 +33,27 @@ from_file "/path/to/eve.json" {
 publish "suricata"
 ```
 
-If your set `filetype` to `unix_stream`, you need to create a Unix domain socket first, e.g., like this:
+### Ingest EVE JSON from a Unix domain socket
 
-```bash
-nc -U -l /tmp/eve.socket
+Suricata can also send EVE JSON to a Unix stream socket:
+
+suricata.yaml
+
+```yaml
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: unix_stream
+      filename: /run/suricata/eve.sock
 ```
 
-Then use the same pipeline as above; Tenzir automatically detects the file type.
+Start Tenzir before Suricata so that Tenzir creates the socket and accepts the incoming stream:
+
+```tql
+accept_unix_socket "/run/suricata/eve.sock" {
+  read_suricata
+}
+publish "suricata"
+```
+
+This is different from Suricata’s `unix-command` socket. The command socket is for JSON control commands, for example through `suricatasc`; it doesn’t carry EVE events.

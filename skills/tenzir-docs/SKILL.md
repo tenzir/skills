@@ -689,7 +689,7 @@ ZeroMQ (0mq) is a light-weight messaging framework with various socket types. Te
 
 #### [File](integrations/file.md)
 
-Tenzir can read from and write to files. This includes non-regular files such as Unix domain sockets, standard input, standard output, and standard error.
+Tenzir can read from and write to local files, cloud object storage, standard input, standard output, and standard error.
 
 #### [FTP](integrations/ftp.md)
 
@@ -757,7 +757,7 @@ SentinelOne is a cybersecurity platform that provides endpoint protection and th
 
 #### [Suricata](integrations/suricata.md)
 
-Suricata is network monitor with a rule matching engine to detect threats. Use Tenzir to acquire, process, and store Suricata logs.
+Suricata is a network monitor with a rule matching engine to detect threats. Use Tenzir to acquire, process, and store Suricata logs.
 
 #### [Velociraptor](integrations/velociraptor.md)
 

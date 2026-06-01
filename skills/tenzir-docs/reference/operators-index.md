@@ -100,6 +100,7 @@
 - [accept_opensearch](operators/accept_opensearch.md): Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.
 - [accept_tcp](operators/accept_tcp.md): Listens for incoming TCP or TLS connections and receives events.
 - [accept_udp](operators/accept_udp.md): Receives UDP datagrams and outputs structured events.
+- [accept_unix_socket](operators/accept_unix_socket.md): Listens for incoming Unix domain socket connections and receives events.
 - [accept_zmq](operators/accept_zmq.md): Listens on a ZeroMQ endpoint and receives events.
 - [from_amazon_cloudwatch](operators/from_amazon_cloudwatch.md): Reads events from Amazon CloudWatch.
 - [from_amazon_sqs](operators/from_amazon_sqs.md): Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
@@ -120,6 +121,7 @@
 - [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md): Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
 - [from_stdin](operators/from_stdin.md): Reads and parses events from standard input.
 - [from_tcp](operators/from_tcp.md): Connects to a remote TCP or TLS endpoint and receives events.
+- [from_unix_socket](operators/from_unix_socket.md): Connects to a Unix domain socket and receives events.
 - [from_velociraptor](operators/from_velociraptor.md): Submits VQL to a Velociraptor server and returns the response as events.
 - [from_zmq](operators/from_zmq.md): Connects to a remote ZeroMQ publisher and receives events.
 
@@ -195,6 +197,7 @@
 - [to_stdout](operators/to_stdout.md): Writes events to standard output.
 - [to_tcp](operators/to_tcp.md): Connects to a remote TCP or TLS endpoint and sends events.
 - [to_udp](operators/to_udp.md): Sends one UDP datagram per input event.
+- [to_unix_socket](operators/to_unix_socket.md): Connects to a Unix domain socket and sends events.
 - [to_zmq](operators/to_zmq.md): Connects to a remote ZeroMQ subscriber endpoint and sends events.
 
 ## Packages

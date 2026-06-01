@@ -150,6 +150,17 @@ Use the tables below to find the v6-compatible pattern for legacy syntax, operat
 
 Prefer `from_file` and `to_file` for URI-style file access. Use provider-specific operators when you need provider-specific options. Put decompression, parsing, and printing in a subpipeline when automatic format detection is not enough.
 
+### Unix domain sockets
+
+The dedicated Unix domain socket operators replace the previous `uds=true` options on [`from_file`](/reference/operators/from_file.md) and [`to_file`](/reference/operators/to_file.md). Keep [`from_file`](/reference/operators/from_file.md) and [`to_file`](/reference/operators/to_file.md) for regular filesystem and object-storage access.
+
+| Previous v6 syntax                       | Use instead                           |
+| ---------------------------------------- | ------------------------------------- |
+| `from_file "/run/source.sock", uds=true` | `from_unix_socket "/run/source.sock"` |
+| `to_file "/run/sink.sock", uds=true`     | `to_unix_socket "/run/sink.sock"`     |
+
+Use [`from_unix_socket`](/reference/operators/from_unix_socket.md) and [`to_unix_socket`](/reference/operators/to_unix_socket.md) when Tenzir connects to an existing Unix domain socket. Use [`accept_unix_socket`](/reference/operators/accept_unix_socket.md) when Tenzir owns the listening socket path for incoming streams.
+
 ### HTTP and message brokers
 
 | Legacy operator            | Use in v6                  |

@@ -569,6 +569,14 @@ Receives UDP datagrams and outputs structured events.
 accept_udp "0.0.0.0:8090"
 ```
 
+### [accept\_unix\_socket](operators/accept_unix_socket.md)
+
+Accepts incoming Unix domain socket connections and yields events.
+
+```tql
+accept_unix_socket "/run/collector.sock" { read_json }
+```
+
 ### [accept\_zmq](operators/accept_zmq.md)
 
 Listens on a ZeroMQ endpoint and receives events.
@@ -727,6 +735,16 @@ Connects to a remote TCP or TLS endpoint and receives events.
 
 ```tql
 from_tcp "example.org:4000" {
+  read_json
+}
+```
+
+### [from\_unix\_socket](operators/from_unix_socket.md)
+
+Connects to a Unix domain socket and receives events.
+
+```tql
+from_unix_socket "/run/collector.sock" {
   read_json
 }
 ```
@@ -1219,6 +1237,14 @@ Sends one UDP datagram per input event.
 
 ```tql
 to_udp "127.0.0.1:514"
+```
+
+### [to\_unix\_socket](operators/to_unix_socket.md)
+
+Connects to a Unix domain socket and sends events.
+
+```tql
+to_unix_socket "/run/collector.sock" { write_json }
 ```
 
 ### [to\_zmq](operators/to_zmq.md)
