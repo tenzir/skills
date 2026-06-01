@@ -442,7 +442,7 @@ Security is a serious matter for us. We want to ensure and maintain a secure env
 
 ##### [Setup syntax highlighting](guides/development/setup-syntax-highlighting.md)
 
-This guide shows you how to set up TQL syntax highlighting in your editor. You’ll get proper colorization, language detection, and basic language support for `.tql` files.
+This guide shows you how to set up TQL syntax highlighting and language detection in your editor. You’ll get colorization and basic language support for `.tql` files.
 
 ##### [Build from source](guides/development/build-from-source.md)
 
