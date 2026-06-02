@@ -128,7 +128,9 @@ The `--undersized` flag causes Tenzir to rebuild partitions that are under the c
 
 The `--all` flag causes Tenzir to rebuild all partitions.
 
-The `--parallel` options is a performance tuning knob. The parallelism level controls how many sets of partitions to rebuild in parallel. This value defaults to 1 to limit the CPU and memory requirements of the rebuilding process, which grow linearly with the selected parallelism level.
+The `--parallel` option is a performance tuning knob. The parallelism level controls how many sets of partitions to rebuild in parallel. This value defaults to 1 to limit the CPU and memory requirements of the rebuilding process, which grow linearly with the selected parallelism level.
+
+Rebuilds limit how much partition data they load into memory at once. When available memory is low, Tenzir processes fewer partitions in a batch and leaves the remaining partitions for a later rebuild step instead of loading the full selected input set up front.
 
 The `--max-partitions` option allows for setting an upper bound to the number of partitions to rebuild.
 
