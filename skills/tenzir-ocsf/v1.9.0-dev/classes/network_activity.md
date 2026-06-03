@@ -62,6 +62,7 @@ The destination endpoint of the network activity — typically the responder. In
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: context
 
 The endpoint that initiated the network communication, normalized to the caption of `initiator_id`. In the case of `Other`, it is defined by the event source.
 

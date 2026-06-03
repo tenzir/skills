@@ -92,6 +92,7 @@ The network endpoint that observes or inspects network traffic as a third-party 
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: context
 
 Indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity. The value is normalized to the caption of the `observation_point_id`.
 
@@ -99,6 +100,7 @@ Indicates whether the source network endpoint, destination network endpoint, or 
 
 - **Type**: `integer_t`
 - **Requirement**: optional
+- **Group**: context
 - **Sibling**: `observation_point`
 
 #### Enum values

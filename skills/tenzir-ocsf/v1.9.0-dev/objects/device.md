@@ -241,6 +241,13 @@ Organization and org unit related to the device.
 
 The operating system assigned Machine ID. In Windows, this is the value stored at the registry path: `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography\MachineGuid`. In Linux, this is stored in the file: `/etc/machine-id`.
 
+### `peripheral_devices`
+
+- **Type**: [`peripheral_device`](peripheral_device.md)
+- **Requirement**: optional
+
+The peripheral devices that are attached or connected to the device.
+
 ### `region`
 
 - **Type**: `string_t`
