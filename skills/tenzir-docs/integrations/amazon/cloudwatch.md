@@ -7,7 +7,7 @@ CloudWatch stores log data in log groups and log streams. Use Tenzir to live tai
 
 ## Configuration
 
-Follow the [Amazon integration configuration](../amazon.md) to authenticate with AWS credentials. You can also pass credentials or assume an IAM role inline with `aws_iam`:
+See [AWS Authentication](../../reference/aws-authentication.md) for the available AWS authentication mechanisms. You can also pass credentials or assume an IAM role inline with `aws_iam`:
 
 ```tql
 from_amazon_cloudwatch "/aws/lambda/api", mode="search", aws_iam={
@@ -141,4 +141,4 @@ to_amazon_cloudwatch "/tenzir/alerts",
 * [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
-* [Amazon](../amazon.md)
+* [AWS Authentication](../../reference/aws-authentication.md)

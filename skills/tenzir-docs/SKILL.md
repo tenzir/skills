@@ -573,6 +573,12 @@ The `tenzir-test` harness discovers and runs integration tests for pipelines, fi
 
 `tenzir-ship` helps you ship faster with automated release engineering. Manage changelogs, generate release notes, and publish GitHub releases. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guide for maintaining a changelog.
 
+### Authentication
+
+#### [AWS Authentication](reference/aws-authentication.md)
+
+Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by `from_s3`, `to_s3`, `from_sqs`, `to_sqs`, `from_amazon_cloudwatch`, `to_amazon_cloudwatch`, `from_kafka`, and `to_kafka`.
+
 #### Node Index
 
 - [Node Configuration](reference/node/configuration.md)
@@ -597,7 +603,7 @@ Start here to connect Tenzir with Splunk, Elastic, CrowdStrike, etc.
 
 #### [Amazon](integrations/amazon.md)
 
-Tenzir integrates with the services from Amazon Web Services (AWS) listed below.
+Tenzir runs natively on Amazon Web Services (AWS) and connects to the AWS services security teams rely on every day. Stream events through managed Kafka, store and replay them in S3, ship them to CloudWatch or Amazon Security Lake in OCSF, and pull messages from SQS — all from the same pipeline language, using the AWS SDK directly and with first-class IAM integration.
 
 ##### [CloudWatch](integrations/amazon/cloudwatch.md)
 

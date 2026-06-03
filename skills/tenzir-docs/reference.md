@@ -7,3 +7,4 @@ The **reference** has nitty-gritty technical descriptions of how Tenzir works. I
 
 - [Language (TQL)](reference/types.md)
 - [Tools](reference/test-framework.md)
+- [Authentication](reference/aws-authentication.md)

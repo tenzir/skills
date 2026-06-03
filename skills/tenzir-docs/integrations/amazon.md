@@ -1,64 +1,24 @@
 # Overview
 
 
-Tenzir integrates with the services from [Amazon Web Services (AWS)](https://aws.amazon.com) listed below.
+Tenzir runs natively on [Amazon Web Services (AWS)](https://aws.amazon.com) and connects to the AWS services security teams rely on every day. Stream events through managed Kafka, store and replay them in S3, ship them to CloudWatch or Amazon Security Lake in OCSF, and pull messages from SQS — all from the same pipeline language, using the AWS SDK directly and with first-class IAM integration.
 
-## Configuration
+## Supported services
 
-To interact with AWS services, you need to provide appropriate credentials.
+| Service                                                | Operators                                                                                                                                          | Use case                              |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| [CloudWatch](amazon/cloudwatch.md)       | [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md) | Read and write CloudWatch log events. |
+| [MSK](amazon/msk.md)                     | [`from_kafka`](/reference/operators/from_kafka.md), [`to_kafka`](/reference/operators/to_kafka.md)                                                 | Stream events through managed Kafka.  |
+| [S3](amazon/s3.md)                       | [`from_s3`](/reference/operators/from_s3.md), [`to_s3`](/reference/operators/to_s3.md)                                                             | Read and write S3 objects.            |
+| [Security Lake](amazon/security-lake.md) | [`to_amazon_security_lake`](/reference/operators/to_amazon_security_lake.md)                                                                       | Send OCSF events to Security Lake.    |
+| [SQS](amazon/sqs.md)                     | [`from_sqs`](/reference/operators/from_sqs), [`to_sqs`](/reference/operators/to_sqs)                                                               | Receive and send SQS messages.        |
 
-### Inline credentials
+All AWS operators share the same authentication mechanisms. See [AWS Authentication](../reference/aws-authentication.md) for details.
 
-All AWS operators support an `aws_iam` parameter for specifying credentials directly in the pipeline:
+## See Also
 
-```tql
-from_s3 "s3://my-bucket/data.json", aws_iam={
-  region: "us-east-1",
-  access_key_id: "AKIAIOSFODNN7EXAMPLE",
-  secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
-}
-```
-
-You can also use the `aws_iam` parameter to assume an IAM role:
-
-```tql
-from_s3 "s3://my-bucket/data.json", aws_iam={
-  assume_role: "arn:aws:iam::123456789012:role/MyRole",
-  session_name: "tenzir-session"
-}
-```
-
-### Web identity authentication
-
-For cross-cloud authentication, you can use OIDC tokens from external identity providers like Azure, Google Cloud, or custom OIDC endpoints. This approach uses the AWS `AssumeRoleWithWebIdentity` API to exchange an OIDC token for temporary AWS credentials.
-
-```tql
-from_s3 "s3://my-bucket/data.json", aws_iam={
-  region: "us-east-1",
-  assume_role: "arn:aws:iam::123456789012:role/CrossCloudRole",
-  web_identity: {
-    token_file: "/var/run/secrets/tokens/aws-token"
-  }
-}
-```
-
-The `web_identity` option supports three token sources:
-
-* **`token_file`**: Path to a file containing the JWT token. This is standard for Kubernetes workload identity where the platform mounts a service account token into the pod.
-
-* **`token_endpoint`**: Configuration for fetching tokens from an HTTP endpoint. Contains `url`, optional `headers`, and optional `path` for JSON extraction. Use this for Azure IMDS or similar metadata services.
-
-* **`token`**: Direct token value for testing or when tokens come from another source.
-
-Credentials automatically refresh before expiration, making this suitable for long-running pipelines.
-
-### Default credential chain
-
-If no `aws_iam` parameter is specified, operators use AWS’s [default credentials provider chain](https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/credentials.html).
-
-Make sure to configure AWS credentials for the same user account that runs `tenzir` and `tenzir-node`. The AWS CLI creates configuration files for the current user under `~/.aws`, which can only be read by the same user account.
-
-The `tenzir-node` systemd unit by default creates a `tenzir` user and runs as that user, meaning that the AWS credentials must also be configured for that user. The directory `~/.aws` must be readable for the `tenzir` user.
+* [AWS Authentication](../reference/aws-authentication.md)
+* [Deploy a node](../guides/node-setup/deploy-a-node.md)
 
 ## Contents
 

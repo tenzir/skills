@@ -34,9 +34,9 @@ When you pass a queue name or an `sqs://` URL, Tenzir resolves the queue URL wit
 
 ## Configuration
 
-Follow the [Amazon integration configuration](../amazon.md) to authenticate with your AWS credentials.
+See [AWS Authentication](../../reference/aws-authentication.md) for the available AWS authentication mechanisms.
 
-Alternatively, use the `aws_iam` parameter to provide explicit credentials:
+Use the `aws_iam` parameter to provide explicit credentials inline:
 
 ```tql
 from_amazon_sqs "my-queue", aws_iam={
