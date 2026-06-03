@@ -1,0 +1,120 @@
+# Messages
+
+- [UDM](messages/udm.md) (13 fields) - A Unified Data Model event.
+- [Metadata](messages/metadata.md) (22 fields) - General information associated with a UDM event.
+- [Attribute](messages/attribute.md) (6 fields) - Attribute is a container for generic entity attributes including common attributes across core entities (such as, user or asset). For examp...
+- [Network](messages/network.md) (29 fields) - A network event.
+- [ProxyInfo](messages/proxy_info.md) (11 fields) - Proxy information.
+- [Extensions](messages/extensions.md) (10 fields) - Extensions to a UDM event.
+- [Authentication](messages/authentication.md) (4 fields) - The Authentication extension captures details specific to authentication events. General guidelines for authentication events: * Details ab...
+- [LinuxUtmp](messages/linux_utmp.md) (1 fields) - The LinuxUtmp extension captures details specific to Linux Utmp events.
+- [WindowsEventLog](messages/windows_event_log.md) (3 fields) - The WindowsEventLog extension captures details specific to Windows Event Log events.
+- [ResourceUsage](messages/resource_usage.md) (2 fields) - The ResourceUsage extension captures details about what is using a resource.
+- [SystemEventDetails](messages/system_event_details.md) (3 fields) - Captures additional details for system-level events.
+- [OutlookMetadata](messages/outlook_metadata.md) (4 fields) - Microsoft Outlook specific metadata.
+- [Srum](messages/srum.md) (9 fields) - The Srum extension captures details specific to Windows System Resource Usage Monitor (SRUM) events.
+- [UserAssist](messages/user_assist.md) (4 fields) - The UserAssist extension captures details specific to Windows User Assist events.
+- [Vulnerabilities](messages/vulnerabilities.md) (1 fields) - The Vulnerabilities extension captures details on observed/detected vulnerabilities.
+- [Vulnerability](messages/vulnerability.md) (17 fields) - A vulnerability.
+- [Ftp](messages/ftp.md) (1 fields) - FTP info.
+- [Smtp](messages/smtp.md) (7 fields) - SMTP info. See RFC 2821.
+- [Email](messages/email.md) (8 fields) - Email info.
+- [Process](messages/process.md) (23 fields) - Information about a process.
+- [AnalyticsMetadata](messages/analytics_metadata.md) (1 fields) - Stores information about an analytics metric used in a rule.
+- [FindingVariable](messages/finding_variable.md) (17 fields) - A structure that holds the value and associated metadata for values extracted while producing a Finding.
+- [SecurityResult](messages/security_result.md) (48 fields) - Security related metadata for the event. A security result might be something like "virus detected and quarantined," "malicious connection...
+- [SecurityResult.Association](messages/security_result_association.md) (16 fields) - Associations represents different metadata about malware and threat actors involved with an IoC.
+- [SecurityResult.Association.AssociationAlias](messages/security_result_association_association_alias.md) (2 fields) - Association Alias used to represent Mandiant Threat Intelligence.
+- [SecurityResult.Source](messages/security_result_source.md) (7 fields) - Deprecated. Information about the threat intelligence source. These fields are used to model Mandiant sources.
+- [SecurityResult.ProviderMLVerdict](messages/security_result_provider_ml_verdict.md) (6 fields) - Deprecated. MLVerdict result provided from threat providers, like Mandiant. These fields are used to model Mandiant sources.
+- [SecurityResult.AnalystVerdict](messages/security_result_analyst_verdict.md) (3 fields) - Verdict provided by the human analyst. These fields are used to model Mandiant sources.
+- [SecurityResult.IoCStats](messages/security_result_io_c_stats.md) (8 fields) - Information about the threat intelligence source. These fields are used to model Mandiant sources.
+- [SecurityResult.VerdictInfo](messages/security_result_verdict_info.md) (16 fields) - Describes the threat verdict provided by human analysts and machine learning models. These fields are used to model Mandiant sources.
+- [SecurityResult.Verdict](messages/security_result_verdict.md) (5 fields) - Deprecated. Encapsulates the threat verdict provided by human analysts and ML models. These fields are used to model Mandiant sources.
+- [SecurityResult.ThreatCollectionItem](messages/security_result_threat_collection_item.md) (3 fields) - Threat Collection that is either a threat campaign or a threat report.
+- [PeFileMetadata](messages/pe_file_metadata.md) (1 fields) - Metadata about a Microsoft Windows Portable Executable.
+- [FileMetadata](messages/file_metadata.md) (1 fields) - Metadata about a file. Place metadata about different file types here, for example data from the Microsoft Windows VersionInfo block or dig...
+- [File](messages/file.md) (42 fields) - Information about a file.
+- [NtfsFileMetadata](messages/ntfs_file_metadata.md) (6 fields) - NTFS-specific file metadata.
+- [PrefetchFileMetadata](messages/prefetch_file_metadata.md) (2 fields) - Windows Prefetch file metadata.
+- [UsnJournal](messages/usn_journal.md) (6 fields) - Information from the NTFS USN Journal.
+- [AppCompatMetadata](messages/app_compat_metadata.md) (3 fields) - Windows AppCompatCache (Application Compatibility) metadata.
+- [FileMetadataPE](messages/file_metadata_pe.md) (13 fields) - Metadata about the Portable Executable (PE) file.
+- [FileMetadataPeResourceInfo](messages/file_metadata_pe_resource_info.md) (5 fields) - File metadata for PE resource.
+- [SignatureInfo](messages/signature_info.md) (2 fields) - File signature information extracted from different tools.
+- [FileMetadataSignatureInfo](messages/file_metadata_signature_info.md) (5 fields) - Signature information.
+- [SignerInfo](messages/signer_info.md) (4 fields) - File metadata related to the signer information.
+- [FileMetadataCodesign](messages/file_metadata_codesign.md) (4 fields) - File metadata from the codesign utility.
+- [X509](messages/x509.md) (5 fields) - File certificate.
+- [PDFInfo](messages/pdf_info.md) (22 fields) - Information about the PDF file structure. See [https://developers.virustotal.com/reference/pdf_info](https://developers.virustotal.com/refe...
+- [StringToInt64MapEntry](messages/string_to_int64_map_entry.md) (2 fields)
+- [FileMetadataSection](messages/file_metadata_section.md) (5 fields) - File metadata section.
+- [FileMetadataImports](messages/file_metadata_imports.md) (2 fields) - File metadata imports.
+- [ExifInfo](messages/exif_info.md) (6 fields) - Exif information.
+- [Prevalence](messages/prevalence.md) (5 fields) - The prevalence of a resource within the customer's environment. This measures how common it is for assets to access the resource.
+- [Dns](messages/dns.md) (12 fields) - DNS information.
+- [Dns.Question](messages/dns_question.md) (4 fields) - DNS Questions. See RFC1035, section 4.1.2.
+- [Dns.ResourceRecord](messages/dns_resource_record.md) (6 fields) - DNS Resource Records. See RFC1035, section 4.1.3.
+- [Dhcp](messages/dhcp.md) (21 fields) - DHCP information.
+- [Dhcp.Option](messages/dhcp_option.md) (2 fields) - DHCP options.
+- [Certificate](messages/certificate.md) (9 fields) - Certificate information
+- [Tls](messages/tls.md) (9 fields) - Transport Layer Security (TLS) information.
+- [Tls.Client](messages/tls_client.md) (5 fields) - Transport Layer Security (TLS) information associated with the client (for example, Certificate or JA3 hash).
+- [Tls.Server](messages/tls_server.md) (3 fields) - Transport Layer Security (TLS) information associated with the server (for example, Certificate or JA3 hash).
+- [Http](messages/http.md) (4 fields) - Specify the full URL of the HTTP request within "target". Also specify any uploaded or downloaded file information within "source" or "targ...
+- [Browser](messages/browser.md) (16 fields) - Information about an entry in the web browser's local history database.
+- [Browser.Cookie](messages/browser_cookie.md) (11 fields) - Browser cookie.
+- [Hardware](messages/hardware.md) (9 fields) - Hardware specification details for a resource, including both physical and virtual hardware.
+- [PlatformSoftware](messages/platform_software.md) (3 fields) - Platform software information about an operating system.
+- [Software](messages/software.md) (5 fields) - Information about a software package or application.
+- [Asset](messages/asset.md) (24 fields) - Information about a compute asset such as a workstation, laptop, phone, virtual desktop, or VM.
+- [User](messages/user.md) (34 fields) - Information about a user.
+- [TimeOff](messages/time_off.md) (2 fields) - System record for leave/time-off from a Human Capital Management (HCM) system.
+- [Permission](messages/permission.md) (3 fields) - System permission for resource access and modification.
+- [Role](messages/role.md) (3 fields) - System role for resource access and modification.
+- [Group](messages/group.md) (6 fields) - Information about an organizational group.
+- [Registry](messages/registry.md) (5 fields) - Information about a registry key or value.
+- [WmiPersistenceItem](messages/wmi_persistence_item.md) (10 fields) - Information about a WMI persistence item.
+- [Location](messages/location.md) (9 fields) - Information about a location.
+- [ScheduledTask](messages/scheduled_task.md) (7 fields) - Deprecated: use WindowsScheduledTask for Windows scheduled tasks or ScheduledCronTask for cron jobs. Information about a scheduled task.
+- [WindowsScheduledTask](messages/windows_scheduled_task.md) (7 fields) - Information about a Windows scheduled task.
+- [WindowsScheduledTask.TaskAction](messages/windows_scheduled_task_task_action.md) (5 fields) - The task action.
+- [WindowsScheduledTask.TaskTrigger](messages/windows_scheduled_task_task_trigger.md) (4 fields) - The trigger of the scheduled task.
+- [ScheduledCronTask](messages/scheduled_cron_task.md) (9 fields) - Information about a scheduled cron task.
+- [ScheduledAnacronTask](messages/scheduled_anacron_task.md) (5 fields) - Information about a scheduled anacron task.
+- [Volume](messages/volume.md) (6 fields) - Information about a storage volume.
+- [Service](messages/service.md) (5 fields) - Information about a Windows service.
+- [Resource](messages/resource.md) (14 fields) - Information about a resource such as a task, Cloud Storage bucket, database, disk, logical policy, or something similar.
+- [Label](messages/label.md) (4 fields) - Key value labels.
+- [Cloud](messages/cloud.md) (4 fields) - Metadata related to the cloud environment.
+- [Artifact](messages/artifact.md) (19 fields) - Information about an artifact. The artifact can only be an IP.
+- [Tunnels](messages/tunnels.md) (2 fields) - VPN tunnels.
+- [ArtifactClient](messages/artifact_client.md) (2 fields) - Entity or software accessing or utilizing network resources.
+- [Favicon](messages/favicon.md) (2 fields) - Difference hash and MD5 hash of the domain's favicon.
+- [DNSRecord](messages/dns_record.md) (10 fields) - DNS record.
+- [SSLCertificate](messages/ssl_certificate.md) (15 fields) - SSL certificate.
+- [SSLCertificate.CertSignature](messages/ssl_certificate_cert_signature.md) (2 fields) - Certificate's signature and algorithm.
+- [SSLCertificate.AuthorityKeyId](messages/ssl_certificate_authority_key_id.md) (2 fields) - Identifies the public key to be used to verify the signature on this certificate or CRL.
+- [SSLCertificate.Extension](messages/ssl_certificate_extension.md) (14 fields) - Certificate's extensions.
+- [SSLCertificate.Subject](messages/ssl_certificate_subject.md) (6 fields) - Subject data.
+- [SSLCertificate.RSA](messages/ssl_certificate_rsa.md) (3 fields) - RSA public key information.
+- [SSLCertificate.EC](messages/ssl_certificate_ec.md) (2 fields) - EC public key information.
+- [SSLCertificate.PublicKey](messages/ssl_certificate_public_key.md) (2 fields) - Subject public key info.
+- [SSLCertificate.Validity](messages/ssl_certificate_validity.md) (2 fields) - Defines certificate's validity period.
+- [PopularityRank](messages/popularity_rank.md) (3 fields) - Domain's position in popularity ranks for sources such as Alexa, Quantcast, or Statvoo.
+- [Tracker](messages/tracker.md) (4 fields) - URL Tracker.
+- [Url](messages/url.md) (13 fields) - Url.
+- [Domain](messages/domain.md) (32 fields) - Information about a domain.
+- [Noun](messages/noun.md) (38 fields) - The Noun type is used to represent the different entities in an event: principal, src, target, observer, intermediary, and about. It stores...
+- [Investigation](messages/investigation.md) (10 fields) - Represents the aggregated state of an investigation such as categorization, severity, and status. Can be expanded to include analyst assign...
+- [Tags](messages/tags.md) (2 fields) - Tags are event metadata which is set by examining event contents post-parsing. For example, a UDM event may be assigned a tenant_id based o...
+- [AttackDetails](messages/attack_details.md) (3 fields) - MITRE ATT&CK details.
+- [AttackDetails.Tactic](messages/attack_details_tactic.md) (2 fields) - Tactic information related to an attack or threat.
+- [AttackDetails.Technique](messages/attack_details_technique.md) (4 fields) - Technique information related to an attack or threat.
+- [BoolSequence](messages/bool_sequence.md) (1 fields) - BoolSequence represents a sequence of bools.
+- [BytesSequence](messages/bytes_sequence.md) (1 fields) - BytesSequence represents a sequence of bytes.
+- [DoubleSequence](messages/double_sequence.md) (1 fields) - DoubleSequence represents a sequence of doubles.
+- [Int64Sequence](messages/int64_sequence.md) (1 fields) - Int64Sequence represents a sequence of int64s.
+- [Uint64Sequence](messages/uint64_sequence.md) (1 fields) - Uint64Sequence represents a sequence of uint64s.
+- [StringSequence](messages/string_sequence.md) (1 fields) - StringSequence represents a sequence of string.
+- [GroupedFields](messages/grouped_fields.md) (8 fields) - Grouped fields are aliases for groups of related UDM fields. All fields grouped together are of type string.

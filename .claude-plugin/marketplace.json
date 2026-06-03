@@ -4,6 +4,7 @@
       "name": "🛡️ Tenzir Users",
       "skills": [
         "./skills/tenzir-docs",
+        "./skills/tenzir-google-udm",
         "./skills/tenzir-ocsf",
         "./skills/tenzir-create-package"
       ]

@@ -10,6 +10,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 | Skill                          | Description                                                                      |
 | ------------------------------ | -------------------------------------------------------------------------------- |
 | `tenzir-docs`                  | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
+| `tenzir-google-udm`            | Google SecOps UDM schema reference — messages, fields, enums, event types        |
 | `tenzir-ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
 | `tenzir-create-package`        | Create library-quality Tenzir packages with UDOs, tests, examples, and pipelines |
 
@@ -49,6 +50,7 @@ Install a specific skill into the current project, for example:
 npx skills add tenzir/skills@tenzir-commit-changes
 npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir-docs
+npx skills add tenzir/skills@tenzir-google-udm
 npx skills add tenzir/skills@tenzir-ocsf
 ```
 
