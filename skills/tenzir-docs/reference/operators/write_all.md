@@ -57,4 +57,5 @@ to_file "/tmp/payload.bin" {
 * [`read_all`](/reference/operators/read_all.md)
 * [`to_file`](/reference/operators/to_file.md)
 * [`to_stdout`](/reference/operators/to_stdout.md)
+* [`write_chunks`](/reference/operators/write_chunks.md)
 * [`write_lines`](/reference/operators/write_lines.md)

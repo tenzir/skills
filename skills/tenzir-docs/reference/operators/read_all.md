@@ -45,6 +45,7 @@ from_file "data.bin" {
 
 ## See Also
 
+* [`read_chunks`](/reference/operators/read_chunks.md)
 * [`read_delimited`](/reference/operators/read_delimited.md)
 * [`read_delimited_regex`](/reference/operators/read_delimited_regex.md)
 * [`read_lines`](/reference/operators/read_lines.md)
