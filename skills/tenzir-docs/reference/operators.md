@@ -1183,6 +1183,14 @@ Sends events to an OpenSearch-compatible Bulk API.
 to_opensearch "localhost:9200", …
 ```
 
+### [to\_prometheus](operators/to_prometheus.md)
+
+Sends metric events to a Prometheus Remote Write receiver.
+
+```tql
+to_prometheus "https://prometheus.example/api/v1/write"
+```
+
 ### [to\_s3](operators/to_s3.md)
 
 Writes events to one or multiple objects in Amazon S3.

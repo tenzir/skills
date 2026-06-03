@@ -733,6 +733,10 @@ MySQL is an open-source relational database management system widely used for we
 
 OpenSearch is a search and observability suite for unstructured data. Tenzir can send events to OpenSearch and emulate a OpenSearch-compatible Bulk API endpoint.
 
+#### [Prometheus](integrations/prometheus.md)
+
+Prometheus is an open-source monitoring system and time-series database. Tenzir can send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
+
 #### [Snowflake](integrations/snowflake.md)
 
 Snowflake is a multi-cloud data warehouse. Tenzir can send events from a pipeline to Snowflake databases.

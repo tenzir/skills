@@ -118,5 +118,6 @@ For more control, you can create the table in ClickHouse first. Use this approac
 - [Elasticsearch](elasticsearch.md)
 - [Mysql](mysql.md)
 - [Opensearch](opensearch.md)
+- [Prometheus](prometheus.md)
 - [Snowflake](snowflake.md)
 - [Splunk](splunk.md)

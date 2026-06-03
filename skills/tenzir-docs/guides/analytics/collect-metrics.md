@@ -22,7 +22,7 @@ This attaches to incoming metrics feed, renders them as NDJSON, and then writes 
 
 ## Summarize metrics
 
-You can [transform](../transformation/filter-and-select-data.md) metrics like ordinary data, e.g., write aggregations over metrics to compute runtime statistics suitable for reporting or dashboarding:
+You can [transform](../transformation/filter-and-select-data.md) metrics like ordinary data, for example, write aggregations over metrics to compute runtime statistics suitable for reporting or dashboarding:
 
 ```tql
 metrics "operator"
@@ -31,7 +31,7 @@ summarize runtime=sum(duration), pipeline_id
 sort -runtime
 ```
 
-The above example computes the total runtime over all pipelines grouped by their unique ID.
+The previous example computes the total runtime over all pipelines grouped by their unique ID.
 
 ## Inspect pipeline throughput
 
@@ -44,3 +44,14 @@ sort -egress_events
 ```
 
 The `events` fields count records that passed through the pipeline during the metric period. The `bytes` fields approximate the amount of data transferred.
+
+## Send metrics to Prometheus
+
+Use `shape="prometheus"` with [`metrics`](/reference/operators/metrics.md) and [`to_prometheus`](/reference/operators/to_prometheus.md) to send live metrics to a Prometheus-compatible Remote Write receiver:
+
+```tql
+metrics live=true, shape="prometheus"
+to_prometheus "https://prometheus.example/api/v1/write"
+```
+
+The [Prometheus](../../integrations/prometheus.md) integration page covers endpoint setup, authentication headers, and additional examples.

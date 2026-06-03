@@ -190,6 +190,7 @@
 - [to_kafka](operators/to_kafka.md): Sends messages to an Apache Kafka topic.
 - [to_nats](operators/to_nats.md): Publishes messages to a NATS JetStream subject.
 - [to_opensearch](operators/to_opensearch.md): Sends events to a Bulk API compatible with OpenSearch.
+- [to_prometheus](operators/to_prometheus.md): Sends metric events to a Prometheus Remote Write receiver.
 - [to_s3](operators/to_s3.md): Writes events to one or multiple objects in Amazon S3.
 - [to_sentinelone_data_lake](operators/to_sentinelone_data_lake.md): Sends security events to SentinelOne Singularity Data Lake via REST API.
 - [to_snowflake](operators/to_snowflake.md): Sends events to a Snowflake database.
