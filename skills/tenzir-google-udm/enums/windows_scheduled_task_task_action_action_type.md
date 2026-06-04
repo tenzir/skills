@@ -1,4 +1,4 @@
-# WindowsScheduledTask.TaskAction.ActionType
+# ActionType
 
 Enum representing the action type of the task.
 

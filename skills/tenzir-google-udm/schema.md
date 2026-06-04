@@ -7,11 +7,6 @@ Generated from the canonical Google UDM protocol buffer definitions.
   - [backstory/entity.proto](https://github.com/googleapis/googleapis/blob/0db4dc67dd805d20294c6dc34068c37f546d71da/backstory/entity.proto)
 - **Requested ref**: `master`
 - **Resolved commit**: `0db4dc67dd805d20294c6dc34068c37f546d71da`
-- **Package**: `google.backstory`
-- **Messages**: `129`
-- **Enums**: `70`
-- **Fields**: `1030`
-- **Enum values**: `1012`
 
 ## Imports
 

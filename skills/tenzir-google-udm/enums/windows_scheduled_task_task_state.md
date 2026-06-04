@@ -1,4 +1,4 @@
-# WindowsScheduledTask.TaskState
+# TaskState
 
 Enum representing the operation state of the task.
 

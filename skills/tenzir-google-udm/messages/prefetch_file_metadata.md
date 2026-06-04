@@ -2,9 +2,6 @@
 
 Windows Prefetch file metadata.
 
-- **Full name**: `google.backstory.PrefetchFileMetadata`
-- **Fields**: `2`
-
 ## Fields
 
 ### `runCount`

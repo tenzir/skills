@@ -1,4 +1,4 @@
-# Dhcp.OpCode
+# OpCode
 
 BOOTP op code. See RFC951, section 3.
 

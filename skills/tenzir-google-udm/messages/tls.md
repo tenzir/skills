@@ -2,26 +2,17 @@
 
 Transport Layer Security (TLS) information.
 
-- **Full name**: `google.backstory.Tls`
-- **Fields**: `9`
-- **Nested messages**: `2`
-
-## Nested messages
-
-- [Tls.Client](tls_client.md)
-- [Tls.Server](tls_server.md)
-
 ## Fields
 
 ### `client`
 
-- Type: [`Tls.Client`](tls_client.md) (singular)
+- Type: [`Client`](tls_client.md) (singular)
 
 Certificate information for the client certificate.
 
 ### `server`
 
-- Type: [`Tls.Server`](tls_server.md) (singular)
+- Type: [`Server`](tls_server.md) (singular)
 
 Certificate information for the server certificate.
 

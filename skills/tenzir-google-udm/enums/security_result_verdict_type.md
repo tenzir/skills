@@ -1,4 +1,4 @@
-# SecurityResult.VerdictType
+# VerdictType
 
 Category of the verdict.
 

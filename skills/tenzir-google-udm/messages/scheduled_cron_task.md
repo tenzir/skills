@@ -2,9 +2,6 @@
 
 Information about a scheduled cron task.
 
-- **Full name**: `google.backstory.ScheduledCronTask`
-- **Fields**: `9`
-
 ## Fields
 
 ### `minute`

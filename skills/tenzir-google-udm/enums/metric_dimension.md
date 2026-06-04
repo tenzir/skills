@@ -1,4 +1,4 @@
-# Metric.Dimension
+# Dimension
 
 Describes field used as the dimension when grouping data to calculate the aggregate metric.
 

@@ -1,4 +1,4 @@
-# Browser.BrowserType
+# BrowserType
 
 The name of the browser.
 

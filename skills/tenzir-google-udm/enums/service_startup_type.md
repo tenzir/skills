@@ -1,4 +1,4 @@
-# Service.StartupType
+# StartupType
 
 How the service is started.
 

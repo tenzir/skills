@@ -2,14 +2,6 @@
 
 System role for resource access and modification.
 
-- **Full name**: `google.backstory.Role`
-- **Fields**: `3`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [Role.Type](../enums/role_type.md)
-
 ## Fields
 
 ### `name`

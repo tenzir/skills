@@ -1,9 +1,6 @@
-# AttackDetails.Technique
+# Technique
 
 Technique information related to an attack or threat.
-
-- **Full name**: `google.backstory.AttackDetails.Technique`
-- **Fields**: `4`
 
 ## Fields
 

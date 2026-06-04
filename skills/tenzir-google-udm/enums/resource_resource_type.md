@@ -1,4 +1,4 @@
-# Resource.ResourceType
+# ResourceType
 
 The type of resource.
 

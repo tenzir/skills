@@ -1,4 +1,4 @@
-# Permission.PermissionType
+# PermissionType
 
 High level categorizations of permission type.
 

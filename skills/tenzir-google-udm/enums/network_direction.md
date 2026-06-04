@@ -1,4 +1,4 @@
-# Network.Direction
+# Direction
 
 A network traffic direction.
 

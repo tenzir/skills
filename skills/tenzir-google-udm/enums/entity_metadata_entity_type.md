@@ -1,4 +1,4 @@
-# EntityMetadata.EntityType
+# EntityType
 
 Describes the type of entity. An unknown event type.
 

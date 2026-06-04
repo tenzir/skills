@@ -1,9 +1,6 @@
-# SSLCertificate.RSA
+# RSA
 
 RSA public key information.
-
-- **Full name**: `google.backstory.SSLCertificate.RSA`
-- **Fields**: `3`
 
 ## Fields
 

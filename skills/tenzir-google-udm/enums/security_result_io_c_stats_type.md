@@ -1,4 +1,4 @@
-# SecurityResult.IoCStatsType
+# IoCStatsType
 
 Type of IoCStat based on source.
 

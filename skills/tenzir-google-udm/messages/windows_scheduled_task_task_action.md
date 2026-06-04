@@ -1,20 +1,12 @@
-# WindowsScheduledTask.TaskAction
+# TaskAction
 
 The task action.
-
-- **Full name**: `google.backstory.WindowsScheduledTask.TaskAction`
-- **Fields**: `5`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [WindowsScheduledTask.TaskAction.ActionType](../enums/windows_scheduled_task_task_action_action_type.md)
 
 ## Fields
 
 ### `actionType`
 
-- Type: [`WindowsScheduledTask.TaskAction.ActionType`](../enums/windows_scheduled_task_task_action_action_type.md) (singular)
+- Type: [`ActionType`](../enums/windows_scheduled_task_task_action_action_type.md) (singular)
 
 The action type of the task.
 

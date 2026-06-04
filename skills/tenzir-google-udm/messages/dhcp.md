@@ -2,25 +2,11 @@
 
 DHCP information.
 
-- **Full name**: `google.backstory.Dhcp`
-- **Fields**: `21`
-- **Nested messages**: `1`
-- **Nested enums**: `2`
-
-## Nested messages
-
-- [Dhcp.Option](dhcp_option.md)
-
-## Nested enums
-
-- [Dhcp.OpCode](../enums/dhcp_op_code.md)
-- [Dhcp.MessageType](../enums/dhcp_message_type.md)
-
 ## Fields
 
 ### `opcode`
 
-- Type: [`Dhcp.OpCode`](../enums/dhcp_op_code.md) (singular)
+- Type: [`OpCode`](../enums/dhcp_op_code.md) (singular)
 
 The BOOTP op code.
 
@@ -104,13 +90,13 @@ Boot image filename.
 
 ### `options`
 
-- Type: [`Dhcp.Option`](dhcp_option.md) (repeated)
+- Type: [`Option`](dhcp_option.md) (repeated)
 
 List of DHCP options.
 
 ### `type`
 
-- Type: [`Dhcp.MessageType`](../enums/dhcp_message_type.md) (singular)
+- Type: [`MessageType`](../enums/dhcp_message_type.md) (singular)
 
 DHCP message type.
 

@@ -2,9 +2,6 @@
 
 The Srum extension captures details specific to Windows System Resource Usage Monitor (SRUM) events.
 
-- **Full name**: `google.backstory.Srum`
-- **Fields**: `9`
-
 ## Fields
 
 ### `id`

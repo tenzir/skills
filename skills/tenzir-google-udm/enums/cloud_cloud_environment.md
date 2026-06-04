@@ -1,4 +1,4 @@
-# Cloud.CloudEnvironment
+# CloudEnvironment
 
 The service provider environment.
 

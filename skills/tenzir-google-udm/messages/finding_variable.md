@@ -2,14 +2,6 @@
 
 A structure that holds the value and associated metadata for values extracted while producing a Finding.
 
-- **Full name**: `google.backstory.FindingVariable`
-- **Fields**: `17`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [FindingVariable.Type](../enums/finding_variable_type.md)
-
 ## Oneofs
 
 - `typed_value`: `boolVal`, `bytesVal`, `doubleVal`, `int64Val`, `uint64Val`, `stringVal`, `timestampTime`, `nullVal`, `boolSeq`, `bytesSeq`, `doubleSeq`, `int64Seq`, `uint64Seq`, `stringSeq`

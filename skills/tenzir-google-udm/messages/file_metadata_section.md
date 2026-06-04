@@ -2,9 +2,6 @@
 
 File metadata section.
 
-- **Full name**: `google.backstory.FileMetadataSection`
-- **Fields**: `5`
-
 ## Fields
 
 ### `name`

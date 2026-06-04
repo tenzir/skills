@@ -2,9 +2,6 @@
 
 File metadata for PE resource.
 
-- **Full name**: `google.backstory.FileMetadataPeResourceInfo`
-- **Fields**: `5`
-
 ## Fields
 
 ### `sha256Hex`

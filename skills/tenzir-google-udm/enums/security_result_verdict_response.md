@@ -1,4 +1,4 @@
-# SecurityResult.VerdictResponse
+# VerdictResponse
 
 Represents different verdict types. Used to represent Mandiant threat intelligence.
 

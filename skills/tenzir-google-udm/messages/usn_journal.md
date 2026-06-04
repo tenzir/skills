@@ -2,15 +2,6 @@
 
 Information from the NTFS USN Journal.
 
-- **Full name**: `google.backstory.UsnJournal`
-- **Fields**: `6`
-- **Nested enums**: `2`
-
-## Nested enums
-
-- [UsnJournal.Attribute](../enums/usn_journal_attribute.md)
-- [UsnJournal.Reason](../enums/usn_journal_reason.md)
-
 ## Fields
 
 ### `attributesFlag`

@@ -1,4 +1,4 @@
-# User.AccountType
+# AccountType
 
 User Account Type.
 

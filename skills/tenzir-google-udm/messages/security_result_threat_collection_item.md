@@ -1,9 +1,6 @@
-# SecurityResult.ThreatCollectionItem
+# ThreatCollectionItem
 
 Threat Collection that is either a threat campaign or a threat report.
-
-- **Full name**: `google.backstory.SecurityResult.ThreatCollectionItem`
-- **Fields**: `3`
 
 ## Fields
 
@@ -15,7 +12,7 @@ The ID of the threat collection.
 
 ### `type`
 
-- Type: [`SecurityResult.ThreatCollectionType`](../enums/security_result_threat_collection_type.md) (singular)
+- Type: [`ThreatCollectionType`](../enums/security_result_threat_collection_type.md) (singular)
 
 The type of threat collection (e.g., "campaign").
 

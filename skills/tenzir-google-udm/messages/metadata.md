@@ -2,16 +2,6 @@
 
 General information associated with a UDM event.
 
-- **Full name**: `google.backstory.Metadata`
-- **Fields**: `22`
-- **Nested enums**: `3`
-
-## Nested enums
-
-- [Metadata.EventTimestampAttribute](../enums/metadata_event_timestamp_attribute.md)
-- [Metadata.EventType](../enums/metadata_event_type.md)
-- [Metadata.EnrichmentState](../enums/metadata_enrichment_state.md)
-
 ## Fields
 
 ### `id`
@@ -34,7 +24,7 @@ The GMT timestamp when the event was generated.
 
 ### `eventTimestampAttributes`
 
-- Type: [`Metadata.EventTimestampAttribute`](../enums/metadata_event_timestamp_attribute.md) (repeated)
+- Type: [`EventTimestampAttribute`](../enums/metadata_event_timestamp_attribute.md) (repeated)
 
 Attributes associated with eventTimestamp. This field is used to distinguish between different types of timestamps that can be used to represent the eventTimestamp.
 
@@ -52,7 +42,7 @@ The GMT timestamp when the event was ingested (received) by Chronicle.
 
 ### `eventType`
 
-- Type: [`Metadata.EventType`](../enums/metadata_event_type.md) (singular)
+- Type: [`EventType`](../enums/metadata_event_type.md) (singular)
 
 The event type. If an event has multiple possible types, this specifies the most specific type.
 
@@ -112,7 +102,7 @@ Tags added by Chronicle after an event is parsed. It is an error to populate thi
 
 ### `enrichmentState`
 
-- Type: [`Metadata.EnrichmentState`](../enums/metadata_enrichment_state.md) (singular)
+- Type: [`EnrichmentState`](../enums/metadata_enrichment_state.md) (singular)
 
 The enrichment state.
 

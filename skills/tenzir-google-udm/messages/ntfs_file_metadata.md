@@ -2,9 +2,6 @@
 
 NTFS-specific file metadata.
 
-- **Full name**: `google.backstory.NtfsFileMetadata`
-- **Fields**: `6`
-
 ## Fields
 
 ### `changeTime`

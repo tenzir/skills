@@ -2,9 +2,6 @@
 
 The prevalence of a resource within the customer's environment. This measures how common it is for assets to access the resource.
 
-- **Full name**: `google.backstory.Prevalence`
-- **Fields**: `5`
-
 ## Fields
 
 ### `rollingMax`

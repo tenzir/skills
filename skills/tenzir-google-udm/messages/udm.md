@@ -2,9 +2,6 @@
 
 A Unified Data Model event.
 
-- **Full name**: `google.backstory.UDM`
-- **Fields**: `13`
-
 ## Fields
 
 ### `metadata`

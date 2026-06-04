@@ -1,8 +1,5 @@
 # StringToInt64MapEntry
 
-- **Full name**: `google.backstory.StringToInt64MapEntry`
-- **Fields**: `2`
-
 ## Fields
 
 ### `key`

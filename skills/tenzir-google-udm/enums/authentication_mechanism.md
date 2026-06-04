@@ -1,4 +1,4 @@
-# Authentication.Mechanism
+# Mechanism
 
 Mechanism(s) used to authenticate.
 

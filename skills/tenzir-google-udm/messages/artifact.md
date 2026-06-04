@@ -2,9 +2,6 @@
 
 Information about an artifact. The artifact can only be an IP.
 
-- **Full name**: `google.backstory.Artifact`
-- **Fields**: `19`
-
 ## Fields
 
 ### `ip`

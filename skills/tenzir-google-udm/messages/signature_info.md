@@ -2,9 +2,6 @@
 
 File signature information extracted from different tools.
 
-- **Full name**: `google.backstory.SignatureInfo`
-- **Fields**: `2`
-
 ## Fields
 
 ### `sigcheck`

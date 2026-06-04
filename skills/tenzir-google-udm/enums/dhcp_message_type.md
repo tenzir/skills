@@ -1,4 +1,4 @@
-# Dhcp.MessageType
+# MessageType
 
 DHCP message type. See RFC2131, section 3.1.
 

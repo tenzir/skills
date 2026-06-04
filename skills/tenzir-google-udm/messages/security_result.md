@@ -2,36 +2,6 @@
 
 Security related metadata for the event. A security result might be something like "virus detected and quarantined," "malicious connection blocked," or "sensitive data included in document foo.doc." Each security result, of which there may be more than one, may either pertain to the whole event, or to a specific object or device referenced in the event (e.g. a malicious file that was detected, or a sensitive document sent as an email attachment). For security results that apply to a particular object referenced in the event, the security_results message MUST contain details about the implicated object (such as process, user, IP, domain, URL, IP, or email address) in the about field. For security results that apply to the entire event (e.g. SPAM found in this email), the about field must remain empty.
 
-- **Full name**: `google.backstory.SecurityResult`
-- **Fields**: `48`
-- **Nested messages**: `8`
-- **Nested enums**: `11`
-
-## Nested messages
-
-- [SecurityResult.Association](security_result_association.md)
-- [SecurityResult.Source](security_result_source.md)
-- [SecurityResult.ProviderMLVerdict](security_result_provider_ml_verdict.md)
-- [SecurityResult.AnalystVerdict](security_result_analyst_verdict.md)
-- [SecurityResult.IoCStats](security_result_io_c_stats.md)
-- [SecurityResult.VerdictInfo](security_result_verdict_info.md)
-- [SecurityResult.Verdict](security_result_verdict.md)
-- [SecurityResult.ThreatCollectionItem](security_result_threat_collection_item.md)
-
-## Nested enums
-
-- [SecurityResult.VerdictResponse](../enums/security_result_verdict_response.md)
-- [SecurityResult.IoCStatsType](../enums/security_result_io_c_stats_type.md)
-- [SecurityResult.VerdictType](../enums/security_result_verdict_type.md)
-- [SecurityResult.SecurityCategory](../enums/security_result_security_category.md)
-- [SecurityResult.AlertState](../enums/security_result_alert_state.md)
-- [SecurityResult.Action](../enums/security_result_action.md)
-- [SecurityResult.ProductSeverity](../enums/security_result_product_severity.md)
-- [SecurityResult.ProductConfidence](../enums/security_result_product_confidence.md)
-- [SecurityResult.ProductPriority](../enums/security_result_product_priority.md)
-- [SecurityResult.ThreatStatus](../enums/security_result_threat_status.md)
-- [SecurityResult.ThreatCollectionType](../enums/security_result_threat_collection_type.md)
-
 ## Fields
 
 ### `about`
@@ -42,7 +12,7 @@ If the security result is about a specific entity (Noun), add it here. This fiel
 
 ### `category`
 
-- Type: [`SecurityResult.SecurityCategory`](../enums/security_result_security_category.md) (repeated)
+- Type: [`SecurityCategory`](../enums/security_result_security_category.md) (repeated)
 
 The security category. This field is not populated when the SecurityResult appears in a detection.
 
@@ -120,7 +90,7 @@ A list of rule labels that can't be captured by the other fields in security res
 
 ### `alertState`
 
-- Type: [`SecurityResult.AlertState`](../enums/security_result_alert_state.md) (singular)
+- Type: [`AlertState`](../enums/security_result_alert_state.md) (singular)
 
 The alerting types of this security result. This is primarily set for rule-generated detections and alerts.
 
@@ -163,7 +133,7 @@ A human-readable description (e.g. "user password was wrong"). This can be more 
 
 ### `action`
 
-- Type: [`SecurityResult.Action`](../enums/security_result_action.md) (repeated)
+- Type: [`Action`](../enums/security_result_action.md) (repeated)
 
 Actions taken for this event. This field is not populated when the SecurityResult appears in a detection.
 
@@ -175,19 +145,19 @@ The detail of the action taken as provided by the vendor. This field is not popu
 
 ### `severity`
 
-- Type: [`SecurityResult.ProductSeverity`](../enums/security_result_product_severity.md) (singular)
+- Type: [`ProductSeverity`](../enums/security_result_product_severity.md) (singular)
 
 The severity of the result.
 
 ### `confidence`
 
-- Type: [`SecurityResult.ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
+- Type: [`ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
 
 The confidence level of the result as estimated by the product. This field is not populated when the SecurityResult appears in a detection.
 
 ### `priority`
 
-- Type: [`SecurityResult.ProductPriority`](../enums/security_result_product_priority.md) (singular)
+- Type: [`ProductPriority`](../enums/security_result_product_priority.md) (singular)
 
 The priority of the result. This field is not populated when the SecurityResult appears in a detection.
 
@@ -247,13 +217,13 @@ Vendor feed name for a threat indicator feed. This field is not populated when t
 
 ### `threatIdNamespace`
 
-- Type: [`Id.Namespace`](../enums/id_namespace.md) (singular)
+- Type: [`Namespace`](../enums/id_namespace.md) (singular)
 
 The attribute threatIdNamespace qualifies threatId with an id namespace to get an unique id. The attribute threatId by itself is not unique across Chronicle as it is a vendor specific id. This field is not populated when the SecurityResult appears in a detection.
 
 ### `threatStatus`
 
-- Type: [`SecurityResult.ThreatStatus`](../enums/security_result_threat_status.md) (singular)
+- Type: [`ThreatStatus`](../enums/security_result_threat_status.md) (singular)
 
 Current status of the threat This field is not populated when the SecurityResult appears in a detection.
 
@@ -271,7 +241,7 @@ First time the IoC threat was discovered in the provider. This field is not popu
 
 ### `associations`
 
-- Type: [`SecurityResult.Association`](security_result_association.md) (repeated)
+- Type: [`Association`](security_result_association.md) (repeated)
 
 Associations related to the threat.
 
@@ -304,7 +274,7 @@ Last time the IoC threat was updated in the provider. This field is not populate
 
 ### `verdictInfo`
 
-- Type: [`SecurityResult.VerdictInfo`](security_result_verdict_info.md) (repeated)
+- Type: [`VerdictInfo`](security_result_verdict_info.md) (repeated)
 
 Verdict information about the IoC from the provider. This field is not populated when the SecurityResult appears in a detection.
 
@@ -328,7 +298,7 @@ The depth of the detection chain. Applies only to composite detections.
 
 ### `threatCollections`
 
-- Type: [`SecurityResult.ThreatCollectionItem`](security_result_threat_collection_item.md) (repeated)
+- Type: [`ThreatCollectionItem`](security_result_threat_collection_item.md) (repeated)
 
 GTI collections associated with the security result.
 

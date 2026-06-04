@@ -2,9 +2,6 @@
 
 File metadata imports.
 
-- **Full name**: `google.backstory.FileMetadataImports`
-- **Fields**: `2`
-
 ## Fields
 
 ### `library`

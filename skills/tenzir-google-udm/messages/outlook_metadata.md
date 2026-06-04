@@ -2,9 +2,6 @@
 
 Microsoft Outlook specific metadata.
 
-- **Full name**: `google.backstory.OutlookMetadata`
-- **Fields**: `4`
-
 ## Fields
 
 ### `comment`

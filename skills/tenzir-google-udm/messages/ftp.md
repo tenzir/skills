@@ -2,9 +2,6 @@
 
 FTP info.
 
-- **Full name**: `google.backstory.Ftp`
-- **Fields**: `1`
-
 ## Fields
 
 ### `command`

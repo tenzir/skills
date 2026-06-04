@@ -2,9 +2,6 @@
 
 Certificate information
 
-- **Full name**: `google.backstory.Certificate`
-- **Fields**: `9`
-
 ## Fields
 
 ### `version`

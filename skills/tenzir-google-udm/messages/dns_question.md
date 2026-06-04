@@ -1,9 +1,6 @@
-# Dns.Question
+# Question
 
 DNS Questions. See RFC1035, section 4.1.2.
-
-- **Full name**: `google.backstory.Dns.Question`
-- **Fields**: `4`
 
 ## Fields
 

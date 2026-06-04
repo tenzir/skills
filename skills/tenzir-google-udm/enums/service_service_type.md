@@ -1,4 +1,4 @@
-# Service.ServiceType
+# ServiceType
 
 The type of service.
 

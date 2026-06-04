@@ -1,4 +1,4 @@
-# SecurityResult.ProductPriority
+# ProductPriority
 
 A product priority level.
 

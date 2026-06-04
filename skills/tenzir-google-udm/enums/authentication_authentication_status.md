@@ -1,4 +1,4 @@
-# Authentication.AuthenticationStatus
+# AuthenticationStatus
 
 Authentication status, can be used to describe the status of authentication for a user or particular credential.
 

@@ -2,9 +2,6 @@
 
 Deprecated: use WindowsScheduledTask for Windows scheduled tasks or ScheduledCronTask for cron jobs. Information about a scheduled task.
 
-- **Full name**: `google.backstory.ScheduledTask`
-- **Fields**: `7`
-
 ## Fields
 
 ### `minute`

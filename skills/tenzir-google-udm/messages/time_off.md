@@ -2,9 +2,6 @@
 
 System record for leave/time-off from a Human Capital Management (HCM) system.
 
-- **Full name**: `google.backstory.TimeOff`
-- **Fields**: `2`
-
 ## Fields
 
 ### `interval`

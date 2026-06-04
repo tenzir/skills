@@ -2,9 +2,6 @@
 
 Captures additional details for system-level events.
 
-- **Full name**: `google.backstory.SystemEventDetails`
-- **Fields**: `3`
-
 ## Fields
 
 ### `messageType`

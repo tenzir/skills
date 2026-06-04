@@ -1,4 +1,4 @@
-# Browser.VisitSource
+# VisitSource
 
 The source of the visit.
 

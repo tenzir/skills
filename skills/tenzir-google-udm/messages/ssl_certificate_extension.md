@@ -1,9 +1,6 @@
-# SSLCertificate.Extension
+# Extension
 
 Certificate's extensions.
-
-- **Full name**: `google.backstory.SSLCertificate.Extension`
-- **Fields**: `14`
 
 ## Fields
 
@@ -21,7 +18,7 @@ Identifies the public key being certified.
 
 ### `authorityKeyId`
 
-- Type: [`SSLCertificate.AuthorityKeyId`](ssl_certificate_authority_key_id.md) (singular)
+- Type: [`AuthorityKeyId`](ssl_certificate_authority_key_id.md) (singular)
 
 Identifies the public key to be used to verify the signature on this certificate or CRL.
 

@@ -1,9 +1,6 @@
-# SecurityResult.ProviderMLVerdict
+# ProviderMLVerdict
 
 Deprecated. MLVerdict result provided from threat providers, like Mandiant. These fields are used to model Mandiant sources.
-
-- **Full name**: `google.backstory.SecurityResult.ProviderMLVerdict`
-- **Fields**: `6`
 
 ## Fields
 
@@ -33,12 +30,12 @@ Confidence score of the verdict.
 
 ### `mandiantSources`
 
-- Type: [`SecurityResult.Source`](security_result_source.md) (repeated)
+- Type: [`Source`](security_result_source.md) (repeated)
 
 List of mandiant sources from which the verdict was generated.
 
 ### `thirdPartySources`
 
-- Type: [`SecurityResult.Source`](security_result_source.md) (repeated)
+- Type: [`Source`](security_result_source.md) (repeated)
 
 List of third-party sources from which the verdict was generated.

@@ -1,4 +1,4 @@
-# SecurityResult.ThreatStatus
+# ThreatStatus
 
 Vendor-specific information about the status of a threat (ITW).
 

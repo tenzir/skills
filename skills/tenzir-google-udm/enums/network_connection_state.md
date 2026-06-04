@@ -1,4 +1,4 @@
-# Network.ConnectionState
+# ConnectionState
 
 The state of a network connection.
 

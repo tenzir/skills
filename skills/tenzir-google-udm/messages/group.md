@@ -2,9 +2,6 @@
 
 Information about an organizational group.
 
-- **Full name**: `google.backstory.Group`
-- **Fields**: `6`
-
 ## Fields
 
 ### `productObjectId`

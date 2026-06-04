@@ -2,9 +2,6 @@
 
 Extensions to a UDM event.
 
-- **Full name**: `google.backstory.Extensions`
-- **Fields**: `10`
-
 ## Fields
 
 ### `auth`

@@ -2,9 +2,6 @@
 
 Attribute is a container for generic entity attributes including common attributes across core entities (such as, user or asset). For example, Cloud is a generic entity attribute since it can apply to an asset (for example, a VM) or a user (for example, an identity service account).
 
-- **Full name**: `google.backstory.Attribute`
-- **Fields**: `6`
-
 ## Fields
 
 ### `cloud`

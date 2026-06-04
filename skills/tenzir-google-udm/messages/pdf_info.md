@@ -2,9 +2,6 @@
 
 Information about the PDF file structure. See [https://developers.virustotal.com/reference/pdf_info](https://developers.virustotal.com/reference/pdf_info)
 
-- **Full name**: `google.backstory.PDFInfo`
-- **Fields**: `22`
-
 ## Fields
 
 ### `js`

@@ -1,4 +1,4 @@
-# Relation.Directionality
+# Directionality
 
 Describes the relationship model as directed or undirected.
 

@@ -2,14 +2,11 @@
 
 Platform software information about an operating system.
 
-- **Full name**: `google.backstory.PlatformSoftware`
-- **Fields**: `3`
-
 ## Fields
 
 ### `platform`
 
-- Type: [`Noun.Platform`](../enums/noun_platform.md) (singular)
+- Type: [`Platform`](../enums/noun_platform.md) (singular)
 
 The platform operating system.
 

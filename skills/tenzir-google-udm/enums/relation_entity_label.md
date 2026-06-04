@@ -1,4 +1,4 @@
-# Relation.EntityLabel
+# EntityLabel
 
 Entity label of the relation.
 

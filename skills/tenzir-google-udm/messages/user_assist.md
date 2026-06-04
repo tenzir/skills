@@ -2,9 +2,6 @@
 
 The UserAssist extension captures details specific to Windows User Assist events.
 
-- **Full name**: `google.backstory.UserAssist`
-- **Fields**: `4`
-
 ## Fields
 
 ### `applicationFocusCount`

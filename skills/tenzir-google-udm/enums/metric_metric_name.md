@@ -1,4 +1,4 @@
-# Metric.MetricName
+# MetricName
 
 The name of the precomputed analytic.
 

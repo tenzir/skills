@@ -1,4 +1,4 @@
-# Id.Namespace
+# Namespace
 
 Extracted Namespace Component
 

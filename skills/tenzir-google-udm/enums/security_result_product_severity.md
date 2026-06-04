@@ -1,4 +1,4 @@
-# SecurityResult.ProductSeverity
+# ProductSeverity
 
 Defined by the product
 

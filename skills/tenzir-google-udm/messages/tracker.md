@@ -2,9 +2,6 @@
 
 URL Tracker.
 
-- **Full name**: `google.backstory.Tracker`
-- **Fields**: `4`
-
 ## Fields
 
 ### `tracker`

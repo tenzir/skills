@@ -2,17 +2,6 @@
 
 A network event.
 
-- **Full name**: `google.backstory.Network`
-- **Fields**: `29`
-- **Nested enums**: `4`
-
-## Nested enums
-
-- [Network.Direction](../enums/network_direction.md)
-- [Network.IpProtocol](../enums/network_ip_protocol.md)
-- [Network.ApplicationProtocol](../enums/network_application_protocol.md)
-- [Network.ConnectionState](../enums/network_connection_state.md)
-
 ## Fields
 
 ### `sentBytes`
@@ -77,13 +66,13 @@ Community ID network flow value.
 
 ### `direction`
 
-- Type: [`Network.Direction`](../enums/network_direction.md) (singular)
+- Type: [`Direction`](../enums/network_direction.md) (singular)
 
 The direction of network traffic.
 
 ### `ipProtocol`
 
-- Type: [`Network.IpProtocol`](../enums/network_ip_protocol.md) (singular)
+- Type: [`IpProtocol`](../enums/network_ip_protocol.md) (singular)
 
 The IP protocol.
 
@@ -95,7 +84,7 @@ True if IPv6 is used.
 
 ### `applicationProtocol`
 
-- Type: [`Network.ApplicationProtocol`](../enums/network_application_protocol.md) (singular)
+- Type: [`ApplicationProtocol`](../enums/network_application_protocol.md) (singular)
 
 The application protocol.
 
@@ -185,7 +174,7 @@ Proxy information. Only set if isProxy is true.
 
 ### `connectionState`
 
-- Type: [`Network.ConnectionState`](../enums/network_connection_state.md) (singular)
+- Type: [`ConnectionState`](../enums/network_connection_state.md) (singular)
 
 The state of the network connection.
 

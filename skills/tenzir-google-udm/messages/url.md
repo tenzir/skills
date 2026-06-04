@@ -2,9 +2,6 @@
 
 Url.
 
-- **Full name**: `google.backstory.Url`
-- **Fields**: `13`
-
 ## Fields
 
 ### `url`

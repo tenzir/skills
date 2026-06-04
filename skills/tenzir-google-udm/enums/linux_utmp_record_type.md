@@ -1,4 +1,4 @@
-# LinuxUtmp.RecordType
+# RecordType
 
 The type of activity record from the Utmp file.
 

@@ -2,9 +2,6 @@
 
 Information about a domain.
 
-- **Full name**: `google.backstory.Domain`
-- **Fields**: `32`
-
 ## Fields
 
 ### `name`

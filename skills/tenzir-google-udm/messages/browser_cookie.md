@@ -1,14 +1,6 @@
-# Browser.Cookie
+# Cookie
 
 Browser cookie.
-
-- **Full name**: `google.backstory.Browser.Cookie`
-- **Fields**: `11`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [Browser.Cookie.CookieSameSite](../enums/browser_cookie_cookie_same_site.md)
 
 ## Fields
 
@@ -62,7 +54,7 @@ The maximum age of the cookie in seconds.
 
 ### `sameSite`
 
-- Type: [`Browser.Cookie.CookieSameSite`](../enums/browser_cookie_cookie_same_site.md) (singular)
+- Type: [`CookieSameSite`](../enums/browser_cookie_cookie_same_site.md) (singular)
 
 Affects cross-site request behavior.
 

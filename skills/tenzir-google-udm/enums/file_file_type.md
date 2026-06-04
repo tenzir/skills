@@ -1,4 +1,4 @@
-# File.FileType
+# FileType
 
 The file type, for example Microsoft Windows executable.
 

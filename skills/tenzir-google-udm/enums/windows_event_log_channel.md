@@ -1,4 +1,4 @@
-# WindowsEventLog.Channel
+# Channel
 
 The channel specifies the source or category of the event.
 

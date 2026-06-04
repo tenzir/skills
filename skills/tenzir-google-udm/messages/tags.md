@@ -2,9 +2,6 @@
 
 Tags are event metadata which is set by examining event contents post-parsing. For example, a UDM event may be assigned a tenantId based on certain customer-defined parameters.
 
-- **Full name**: `google.backstory.Tags`
-- **Fields**: `2`
-
 ## Fields
 
 ### `tenantId`

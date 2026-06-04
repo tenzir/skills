@@ -2,9 +2,6 @@
 
 Grouped fields are aliases for groups of related UDM fields. All fields grouped together are of type string.
 
-- **Full name**: `google.backstory.GroupedFields`
-- **Fields**: `8`
-
 ## Fields
 
 ### `ip`

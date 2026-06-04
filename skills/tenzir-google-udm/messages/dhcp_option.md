@@ -1,9 +1,6 @@
-# Dhcp.Option
+# Option
 
 DHCP options.
-
-- **Full name**: `google.backstory.Dhcp.Option`
-- **Fields**: `2`
 
 ## Fields
 

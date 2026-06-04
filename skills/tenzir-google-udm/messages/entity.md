@@ -2,9 +2,6 @@
 
 An Entity provides additional context about an item in a UDM event. For example, a PROCESS_LAUNCH event describes that user 'abc@example.corp' launched process 'shady.exe'. The event does not include information that user 'abc@example.com' is a recently terminated employee who administers a server storing finance data. Information stored in one or more Entities can add this additional context.
 
-- **Full name**: `google.backstory.Entity`
-- **Fields**: `6`
-
 ## Fields
 
 ### `metadata`

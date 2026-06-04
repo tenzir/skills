@@ -2,9 +2,6 @@
 
 DNS record.
 
-- **Full name**: `google.backstory.DNSRecord`
-- **Fields**: `10`
-
 ## Fields
 
 ### `type`

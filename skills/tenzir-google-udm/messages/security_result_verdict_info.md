@@ -1,9 +1,6 @@
-# SecurityResult.VerdictInfo
+# VerdictInfo
 
 Describes the threat verdict provided by human analysts and machine learning models. These fields are used to model Mandiant sources.
-
-- **Full name**: `google.backstory.SecurityResult.VerdictInfo`
-- **Fields**: `16`
 
 ## Fields
 
@@ -27,7 +24,7 @@ Describes the near neighbor influence of the verdict.
 
 ### `verdictType`
 
-- Type: [`SecurityResult.VerdictType`](../enums/security_result_verdict_type.md) (singular)
+- Type: [`VerdictType`](../enums/security_result_verdict_type.md) (singular)
 
 Type of verdict.
 
@@ -57,7 +54,7 @@ Confidence score of the verdict.
 
 ### `iocStats`
 
-- Type: [`SecurityResult.IoCStats`](security_result_io_c_stats.md) (repeated)
+- Type: [`IoCStats`](security_result_io_c_stats.md) (repeated)
 
 List of IoCStats from which the verdict was generated.
 
@@ -69,7 +66,7 @@ Timestamp when the verdict was generated.
 
 ### `verdictResponse`
 
-- Type: [`SecurityResult.VerdictResponse`](../enums/security_result_verdict_response.md) (singular)
+- Type: [`VerdictResponse`](../enums/security_result_verdict_response.md) (singular)
 
 Details about the verdict.
 

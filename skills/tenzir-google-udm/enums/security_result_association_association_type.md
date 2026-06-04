@@ -1,4 +1,4 @@
-# SecurityResult.Association.AssociationType
+# AssociationType
 
 Represents different possible Association types. Can be threat or malware. Used to represent Mandiant threat intelligence.
 

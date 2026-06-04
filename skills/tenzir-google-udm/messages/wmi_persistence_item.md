@@ -2,9 +2,6 @@
 
 Information about a WMI persistence item.
 
-- **Full name**: `google.backstory.WmiPersistenceItem`
-- **Fields**: `10`
-
 ## Fields
 
 ### `caption`

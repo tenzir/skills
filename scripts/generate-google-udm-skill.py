@@ -473,7 +473,18 @@ def generated_messages(context: FileContext) -> list[MessageDoc]:
     ]
 
 
+def simple_type_label(context: FileContext, full_name: str) -> str:
+    return relative_name(context.file_proto.package, full_name).rsplit(".", 1)[-1]
+
+
 def type_label(context: FileContext, full_name: str) -> str:
+    simple = simple_type_label(context, full_name)
+    type_names = [
+        *(message.full_name for message in generated_messages(context)),
+        *(enum.full_name for enum in context.enums),
+    ]
+    if sum(simple_type_label(context, name) == simple for name in type_names) == 1:
+        return simple
     return relative_name(context.file_proto.package, full_name)
 
 
@@ -941,40 +952,10 @@ def render_message_page(
         context,
         source_comment(context, message_doc.file_name, message_doc.path),
     )
-    nested_messages = [
-        candidate
-        for candidate in generated_messages(context)
-        if candidate.parent == message_doc.qualified_name
-    ]
-    nested_enums = [
-        enum
-        for enum in context.enums
-        if enum.parent == message_doc.qualified_name
-    ]
-    meta = format_meta(
-        [
-            ("Full name", f"`{message_doc.full_name}`"),
-            ("Fields", f"`{len(message.field)}`"),
-            ("Nested messages", f"`{len(nested_messages)}`" if nested_messages else ""),
-            ("Nested enums", f"`{len(nested_enums)}`" if nested_enums else ""),
-        ]
-    )
 
-    lines = [f"# {message_doc.qualified_name}", ""]
+    lines = [f"# {type_label(context, message_doc.full_name)}", ""]
     if comment:
         lines.extend([comment, ""])
-    if meta:
-        lines.extend([meta, ""])
-    if nested_messages:
-        lines.extend(["## Nested messages", ""])
-        for nested in nested_messages:
-            lines.append(f"- [{nested.qualified_name}]({nested.slug}.md)")
-        lines.append("")
-    if nested_enums:
-        lines.extend(["## Nested enums", ""])
-        for nested in nested_enums:
-            lines.append(f"- [{nested.qualified_name}](../enums/{nested.slug}.md)")
-        lines.append("")
     oneofs = active_oneofs(message)
     if oneofs:
         lines.extend(["## Oneofs", ""])
@@ -1025,7 +1006,7 @@ def render_enum_page(
         context,
         source_comment(context, enum_doc.file_name, enum_doc.path),
     )
-    lines = [f"# {title or enum_doc.qualified_name}", ""]
+    lines = [f"# {title or type_label(context, enum_doc.full_name)}", ""]
     if comment:
         lines.extend([comment, ""])
     if enum.value:
@@ -1706,8 +1687,8 @@ def render_messages_overview(context: FileContext) -> str:
         )
         suffix = f" - {brief_comment(comment)}" if comment else ""
         lines.append(
-            f"- [{message.qualified_name}](messages/{message.slug}.md)"
-            f" ({len(message.descriptor.field)} fields){suffix}"
+            f"- [{type_label(context, message.full_name)}](messages/{message.slug}.md)"
+            f"{suffix}"
         )
     return clean_markdown("\n".join(lines))
 
@@ -1721,8 +1702,8 @@ def render_enums_overview(context: FileContext) -> str:
         )
         suffix = f" - {brief_comment(comment)}" if comment else ""
         lines.append(
-            f"- [{enum.qualified_name}](enums/{enum.slug}.md)"
-            f" ({len(enum.descriptor.value)} values){suffix}"
+            f"- [{type_label(context, enum.full_name)}](enums/{enum.slug}.md)"
+            f"{suffix}"
         )
     return clean_markdown("\n".join(lines))
 
@@ -2016,8 +1997,6 @@ def render_guidance_docs(
 
 def render_schema_page(context: FileContext, source: SourceRef, fetched_files: set[str]) -> str:
     messages = generated_messages(context)
-    fields = sum(len(message.descriptor.field) for message in messages)
-    enum_values = sum(len(enum.descriptor.value) for enum in context.enums)
     roots = [
         ("UDM event", context.message_by_full_name.get(f"{context.file_proto.package}.UDM")),
         ("Entity graph", context.message_by_full_name.get(f"{context.file_proto.package}.Entity")),
@@ -2036,11 +2015,6 @@ def render_schema_page(context: FileContext, source: SourceRef, fetched_files: s
         ],
         f"- **Requested ref**: `{source.ref}`",
         f"- **Resolved commit**: `{source.sha}`",
-        f"- **Package**: `{context.file_proto.package}`",
-        f"- **Messages**: `{len(messages)}`",
-        f"- **Enums**: `{len(context.enums)}`",
-        f"- **Fields**: `{fields}`",
-        f"- **Enum values**: `{enum_values}`",
         "",
         "## Imports",
         "",
@@ -2122,12 +2096,12 @@ def render_skill_markdown(
                 "## File layout",
                 "",
                 "```",
-                "schema.md                  # Proto sources, counts, top-level UDM and Entity fields",
+                "schema.md                  # Proto sources and top-level UDM and Entity fields",
                 "messages.md                # Message index",
-                "messages/{message}.md      # Message fields, nested types, and population guidance",
+                "messages/{message}.md      # Message fields and population guidance",
                 "enums.md                   # Enum index",
                 "enums/{enum}.md            # Enum values",
-                "event-types.md             # Metadata.EventType values and event guidance",
+                "event-types.md             # EventType values and event guidance",
                 "usage.md                   # Guidance source summary and routing",
                 "field-paths.md             # Rules, Detect Engine, and CBN prefixes",
                 "datatypes.md               # Standard datatype notes",

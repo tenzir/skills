@@ -1,19 +1,6 @@
-# SecurityResult.Association
+# Association
 
 Associations represents different metadata about malware and threat actors involved with an IoC.
-
-- **Full name**: `google.backstory.SecurityResult.Association`
-- **Fields**: `16`
-- **Nested messages**: `1`
-- **Nested enums**: `1`
-
-## Nested messages
-
-- [SecurityResult.Association.AssociationAlias](security_result_association_association_alias.md)
-
-## Nested enums
-
-- [SecurityResult.Association.AssociationType](../enums/security_result_association_association_type.md)
 
 ## Fields
 
@@ -31,7 +18,7 @@ Country from which the threat actor/ malware is originated.
 
 ### `type`
 
-- Type: [`SecurityResult.Association.AssociationType`](../enums/security_result_association_association_type.md) (singular)
+- Type: [`AssociationType`](../enums/security_result_association_association_type.md) (singular)
 
 Signifies the type of association.
 
@@ -62,7 +49,7 @@ Name of the country the threat originated from.
 
 ### `alias`
 
-- Type: [`SecurityResult.Association.AssociationAlias`](security_result_association_association_alias.md) (repeated)
+- Type: [`AssociationAlias`](security_result_association_association_alias.md) (repeated)
 
 Different aliases of the threat actor given by different sources.
 
@@ -86,7 +73,7 @@ List of industries the threat actor affects.
 
 ### `associatedActors`
 
-- Type: [`SecurityResult.Association`](security_result_association.md) (repeated)
+- Type: [`Association`](security_result_association.md) (repeated)
 
 List of associated threat actors for a malware. Not applicable for threat actors.
 

@@ -2,9 +2,6 @@
 
 Email info.
 
-- **Full name**: `google.backstory.Email`
-- **Fields**: `8`
-
 ## Fields
 
 ### `from`

@@ -2,9 +2,6 @@
 
 AtiPrioritization contains various fields used to calculate a priority score for an entity identified as a threat.
 
-- **Full name**: `google.backstory.AtiPrioritization`
-- **Fields**: `15`
-
 ## Fields
 
 ### `gtiVerdict`
@@ -87,12 +84,12 @@ Whether the indicator verdict has passed review.
 
 ### `attributedMalware`
 
-- Type: [`SecurityResult.Association`](security_result_association.md) (repeated)
+- Type: [`Association`](security_result_association.md) (repeated)
 
 Malware families associated with this indicator.
 
 ### `attributedThreatActors`
 
-- Type: [`SecurityResult.Association`](security_result_association.md) (repeated)
+- Type: [`Association`](security_result_association.md) (repeated)
 
 Threat actors associated with this indicator.

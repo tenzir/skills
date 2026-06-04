@@ -1,9 +1,6 @@
-# SecurityResult.Source
+# Source
 
 Deprecated. Information about the threat intelligence source. These fields are used to model Mandiant sources.
-
-- **Full name**: `google.backstory.SecurityResult.Source`
-- **Fields**: `7`
 
 ## Fields
 
@@ -27,7 +24,7 @@ Count of responses where this IoC was marked malicious.
 
 ### `quality`
 
-- Type: [`SecurityResult.ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
+- Type: [`ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
 
 Quality of the IoC mapping extracted from the source.
 
@@ -45,6 +42,6 @@ Number of sources from which intelligence was extracted.
 
 ### `threatIntelligenceSources`
 
-- Type: [`SecurityResult.Source`](security_result_source.md) (repeated)
+- Type: [`Source`](security_result_source.md) (repeated)
 
 Different threat intelligence sources from which IoC info was extracted.

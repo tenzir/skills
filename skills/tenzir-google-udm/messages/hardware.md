@@ -2,9 +2,6 @@
 
 Hardware specification details for a resource, including both physical and virtual hardware.
 
-- **Full name**: `google.backstory.Hardware`
-- **Fields**: `9`
-
 ## Fields
 
 ### `serialNumber`

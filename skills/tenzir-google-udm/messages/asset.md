@@ -2,15 +2,6 @@
 
 Information about a compute asset such as a workstation, laptop, phone, virtual desktop, or VM.
 
-- **Full name**: `google.backstory.Asset`
-- **Fields**: `24`
-- **Nested enums**: `2`
-
-## Nested enums
-
-- [Asset.AssetType](../enums/asset_asset_type.md)
-- [Asset.DeploymentStatus](../enums/asset_deployment_status.md)
-
 ## Fields
 
 ### `productObjectId`
@@ -87,7 +78,7 @@ The category of the asset (e.g. "End User Asset", "Workstation", "Server").
 
 ### `type`
 
-- Type: [`Asset.AssetType`](../enums/asset_asset_type.md) (singular)
+- Type: [`AssetType`](../enums/asset_asset_type.md) (singular)
 
 The type of the asset (e.g. workstation or laptop or server).
 
@@ -137,7 +128,7 @@ Metadata labels for the asset. Deprecated: labels should be populated in Attribu
 
 ### `deploymentStatus`
 
-- Type: [`Asset.DeploymentStatus`](../enums/asset_deployment_status.md) (singular)
+- Type: [`DeploymentStatus`](../enums/asset_deployment_status.md) (singular)
 
 The deployment status of the asset for device lifecycle purposes.
 

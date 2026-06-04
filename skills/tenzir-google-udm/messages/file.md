@@ -2,14 +2,6 @@
 
 Information about a file.
 
-- **Full name**: `google.backstory.File`
-- **Fields**: `42`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [File.FileType](../enums/file_file_type.md)
-
 ## Fields
 
 ### `sha256`
@@ -106,7 +98,7 @@ Metadata about the prefetch file.
 
 ### `fileType`
 
-- Type: [`File.FileType`](../enums/file_file_type.md) (singular)
+- Type: [`FileType`](../enums/file_file_type.md) (singular)
 
 FileType field.
 

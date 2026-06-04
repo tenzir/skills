@@ -2,9 +2,6 @@
 
 Information about a storage volume.
 
-- **Full name**: `google.backstory.Volume`
-- **Fields**: `6`
-
 ## Fields
 
 ### `fileSystem`

@@ -2,9 +2,6 @@
 
 VPN tunnels.
 
-- **Full name**: `google.backstory.Tunnels`
-- **Fields**: `2`
-
 ## Fields
 
 ### `provider`

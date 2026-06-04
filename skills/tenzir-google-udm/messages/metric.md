@@ -2,21 +2,6 @@
 
 Stores precomputed aggregated analytic data for an entity.
 
-- **Full name**: `google.backstory.Metric`
-- **Fields**: `11`
-- **Nested messages**: `1`
-- **Nested enums**: `3`
-
-## Nested messages
-
-- [Metric.Measure](metric_measure.md)
-
-## Nested enums
-
-- [Metric.AggregateFunction](../enums/metric_aggregate_function.md)
-- [Metric.MetricName](../enums/metric_metric_name.md)
-- [Metric.Dimension](../enums/metric_dimension.md)
-
 ## Fields
 
 ### `firstSeen`
@@ -33,7 +18,7 @@ Time stamp of the last time last time the entity was seen in the environment.
 
 ### `sumMeasure`
 
-- Type: [`Metric.Measure`](metric_measure.md) (singular)
+- Type: [`Measure`](metric_measure.md) (singular)
 
 Sum of all precomputed measures for the given metric.
 
@@ -45,13 +30,13 @@ Total number of events used to calculate the given precomputed metric.
 
 ### `metricName`
 
-- Type: [`Metric.MetricName`](../enums/metric_metric_name.md) (singular)
+- Type: [`MetricName`](../enums/metric_metric_name.md) (singular)
 
 Name of the analytic.
 
 ### `dimensions`
 
-- Type: [`Metric.Dimension`](../enums/metric_dimension.md) (repeated)
+- Type: [`Dimension`](../enums/metric_dimension.md) (repeated)
 
 All group by clauses used to calculate the metric.
 

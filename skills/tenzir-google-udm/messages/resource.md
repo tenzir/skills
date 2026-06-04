@@ -2,14 +2,6 @@
 
 Information about a resource such as a task, Cloud Storage bucket, database, disk, logical policy, or something similar.
 
-- **Full name**: `google.backstory.Resource`
-- **Fields**: `14`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [Resource.ResourceType](../enums/resource_resource_type.md)
-
 ## Fields
 
 ### `type`
@@ -21,7 +13,7 @@ Deprecated: use resourceType instead.
 
 ### `resourceType`
 
-- Type: [`Resource.ResourceType`](../enums/resource_resource_type.md) (singular)
+- Type: [`ResourceType`](../enums/resource_resource_type.md) (singular)
 
 Resource type.
 

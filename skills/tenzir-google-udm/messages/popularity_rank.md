@@ -2,9 +2,6 @@
 
 Domain's position in popularity ranks for sources such as Alexa, Quantcast, or Statvoo.
 
-- **Full name**: `google.backstory.PopularityRank`
-- **Fields**: `3`
-
 ## Fields
 
 ### `giver`

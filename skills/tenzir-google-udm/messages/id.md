@@ -2,19 +2,11 @@
 
 Identifier to identify a UDM object like a UDM event, Entity, Collection. The full identifier for persistence is created by setting the 32 most significant bits as the Id.Namespace enum This is a convenience wrapper to define the id space enum values and provide an easy interface for RPCs, most persistence use cases should use a denormalized form.
 
-- **Full name**: `google.backstory.Id`
-- **Fields**: `3`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [Id.Namespace](../enums/id_namespace.md)
-
 ## Fields
 
 ### `namespace`
 
-- Type: [`Id.Namespace`](../enums/id_namespace.md) (singular)
+- Type: [`Namespace`](../enums/id_namespace.md) (singular)
 
 Namespace the id belongs to.
 

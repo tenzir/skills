@@ -2,9 +2,6 @@
 
 Windows AppCompatCache (Application Compatibility) metadata.
 
-- **Full name**: `google.backstory.AppCompatMetadata`
-- **Fields**: `3`
-
 ## Fields
 
 ### `sequence`

@@ -2,15 +2,6 @@
 
 Information about a process.
 
-- **Full name**: `google.backstory.Process`
-- **Fields**: `23`
-- **Nested enums**: `2`
-
-## Nested enums
-
-- [Process.TokenElevationType](../enums/process_token_elevation_type.md)
-- [Process.State](../enums/process_state.md)
-
 ## Fields
 
 ### `pid`
@@ -112,7 +103,7 @@ The teletype terminal which the command was executed within.
 
 ### `tokenElevationType`
 
-- Type: [`Process.TokenElevationType`](../enums/process_token_elevation_type.md) (singular)
+- Type: [`TokenElevationType`](../enums/process_token_elevation_type.md) (singular)
 
 The elevation type of the process on Microsoft Windows. This determines if any privileges are removed when UAC is enabled.
 

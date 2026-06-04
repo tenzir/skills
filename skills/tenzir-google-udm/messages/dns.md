@@ -2,15 +2,6 @@
 
 DNS information.
 
-- **Full name**: `google.backstory.Dns`
-- **Fields**: `12`
-- **Nested messages**: `2`
-
-## Nested messages
-
-- [Dns.Question](dns_question.md)
-- [Dns.ResourceRecord](dns_resource_record.md)
-
 ## Fields
 
 ### `id`
@@ -63,25 +54,25 @@ Response code. See RCODE from RFC1035.
 
 ### `questions`
 
-- Type: [`Dns.Question`](dns_question.md) (repeated)
+- Type: [`Question`](dns_question.md) (repeated)
 
 A list of domain protocol message questions.
 
 ### `answers`
 
-- Type: [`Dns.ResourceRecord`](dns_resource_record.md) (repeated)
+- Type: [`ResourceRecord`](dns_resource_record.md) (repeated)
 
 A list of answers to the domain name query.
 
 ### `authority`
 
-- Type: [`Dns.ResourceRecord`](dns_resource_record.md) (repeated)
+- Type: [`ResourceRecord`](dns_resource_record.md) (repeated)
 
 A list of domain name servers which verified the answers to the domain name queries.
 
 ### `additional`
 
-- Type: [`Dns.ResourceRecord`](dns_resource_record.md) (repeated)
+- Type: [`ResourceRecord`](dns_resource_record.md) (repeated)
 
 A list of additional domain name servers that can be used to verify the answer to the domain.
 

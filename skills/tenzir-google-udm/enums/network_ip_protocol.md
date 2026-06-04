@@ -1,4 +1,4 @@
-# Network.IpProtocol
+# IpProtocol
 
 An IP protocol.
 

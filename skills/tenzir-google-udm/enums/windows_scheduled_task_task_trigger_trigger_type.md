@@ -1,4 +1,4 @@
-# WindowsScheduledTask.TaskTrigger.TriggerType
+# TriggerType
 
 Enum representing the trigger type of the task. For more details, see https://learn.microsoft.com/en-us/windows/win32/api/taskschd/ne-taskschd-task_trigger_type2.
 

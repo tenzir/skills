@@ -2,19 +2,11 @@
 
 The WindowsEventLog extension captures details specific to Windows Event Log events.
 
-- **Full name**: `google.backstory.WindowsEventLog`
-- **Fields**: `3`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [WindowsEventLog.Channel](../enums/windows_event_log_channel.md)
-
 ## Fields
 
 ### `channel`
 
-- Type: [`WindowsEventLog.Channel`](../enums/windows_event_log_channel.md) (singular)
+- Type: [`Channel`](../enums/windows_event_log_channel.md) (singular)
 
 The channel of the event.
 

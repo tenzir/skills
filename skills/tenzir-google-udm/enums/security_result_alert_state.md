@@ -1,4 +1,4 @@
-# SecurityResult.AlertState
+# AlertState
 
 The type of alerting set up for a security result.
 

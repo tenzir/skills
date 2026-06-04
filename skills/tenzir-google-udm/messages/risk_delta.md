@@ -2,9 +2,6 @@
 
 Describes the difference in risk score between two points in time.
 
-- **Full name**: `google.backstory.RiskDelta`
-- **Fields**: `4`
-
 ## Fields
 
 ### `previousRangeEndTime`

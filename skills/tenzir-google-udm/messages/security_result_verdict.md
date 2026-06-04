@@ -2,9 +2,6 @@
 
 Deprecated. Encapsulates the threat verdict provided by human analysts and ML models. These fields are used to model Mandiant sources.
 
-- **Full name**: `google.backstory.SecurityResult.Verdict`
-- **Fields**: `5`
-
 ## Fields
 
 ### `sourceCount`
@@ -27,12 +24,12 @@ Describes the neighbour influence of the verdict.
 
 ### `verdict`
 
-- Type: [`SecurityResult.ProviderMLVerdict`](security_result_provider_ml_verdict.md) (singular)
+- Type: [`ProviderMLVerdict`](security_result_provider_ml_verdict.md) (singular)
 
 ML Verdict provided by sources like Mandiant.
 
 ### `analystVerdict`
 
-- Type: [`SecurityResult.AnalystVerdict`](security_result_analyst_verdict.md) (singular)
+- Type: [`AnalystVerdict`](security_result_analyst_verdict.md) (singular)
 
 Human analyst verdict provided by sources like Mandiant.

@@ -2,9 +2,6 @@
 
 File metadata from the codesign utility.
 
-- **Full name**: `google.backstory.FileMetadataCodesign`
-- **Fields**: `4`
-
 ## Fields
 
 ### `id`

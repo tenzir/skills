@@ -2,15 +2,6 @@
 
 Information about the Entity and the product where the entity was created.
 
-- **Full name**: `google.backstory.EntityMetadata`
-- **Fields**: `17`
-- **Nested enums**: `2`
-
-## Nested enums
-
-- [EntityMetadata.EntityType](../enums/entity_metadata_entity_type.md)
-- [EntityMetadata.SourceType](../enums/entity_metadata_source_type.md)
-
 ## Fields
 
 ### `productEntityId`
@@ -63,7 +54,7 @@ Version of the product that produced the entity information.
 
 ### `entityType`
 
-- Type: [`EntityMetadata.EntityType`](../enums/entity_metadata_entity_type.md) (singular)
+- Type: [`EntityType`](../enums/entity_metadata_entity_type.md) (singular)
 
 Entity type. If an entity has multiple possible types, this specifies the most specific type.
 
@@ -81,7 +72,7 @@ Metadata provided by a threat intelligence feed that identified the entity as ma
 
 ### `sourceType`
 
-- Type: [`EntityMetadata.SourceType`](../enums/entity_metadata_source_type.md) (singular)
+- Type: [`SourceType`](../enums/entity_metadata_source_type.md) (singular)
 
 The source of the entity.
 

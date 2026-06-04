@@ -1,4 +1,4 @@
-# EntityMetadata.SourceType
+# SourceType
 
 Describes the source of an entity.
 

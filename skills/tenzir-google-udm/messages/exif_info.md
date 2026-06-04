@@ -2,9 +2,6 @@
 
 Exif information.
 
-- **Full name**: `google.backstory.ExifInfo`
-- **Fields**: `6`
-
 ## Fields
 
 ### `originalFile`

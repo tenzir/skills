@@ -2,9 +2,6 @@
 
 The ResourceUsage extension captures details about what is using a resource.
 
-- **Full name**: `google.backstory.ResourceUsage`
-- **Fields**: `2`
-
 ## Fields
 
 ### `usedEntity`

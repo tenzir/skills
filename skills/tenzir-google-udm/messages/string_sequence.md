@@ -2,9 +2,6 @@
 
 StringSequence represents a sequence of string.
 
-- **Full name**: `google.backstory.StringSequence`
-- **Fields**: `1`
-
 ## Fields
 
 ### `stringVals`

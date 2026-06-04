@@ -2,9 +2,6 @@
 
 Stores information related to the risk score of an entity.
 
-- **Full name**: `google.backstory.EntityRisk`
-- **Fields**: `14`
-
 ## Fields
 
 ### `riskVersion`

@@ -1,4 +1,4 @@
-# SecurityResult.Action
+# Action
 
 Enum representing different possible actions taken by the product that created the event. Google SecOps classifies: - ALLOW and ALLOW_WITH_MODIFICATION actions as "successful". - BLOCK, QUARANTINE, FAIL, and CHALLENGE actions as "failed". This includes all corresponding metrics (for example, AUTH_ATTEMPTS_FAIL, FILE_EXECUTIONS_FAIL, RESOURCE_READ_FAIL, and so on). - UNKNOWN_ACTION actions as neither "successful" nor "failed", because, for example, logs might not provide information whether a login event occurred but some kind of "unknown" error was issued nonetheless.
 

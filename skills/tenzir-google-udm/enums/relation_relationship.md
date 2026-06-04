@@ -1,4 +1,4 @@
-# Relation.Relationship
+# Relationship
 
 Type of relationship between the primary entity (a) and related entity (b).
 

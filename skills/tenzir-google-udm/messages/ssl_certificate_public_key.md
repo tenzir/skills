@@ -1,9 +1,6 @@
-# SSLCertificate.PublicKey
+# PublicKey
 
 Subject public key info.
-
-- **Full name**: `google.backstory.SSLCertificate.PublicKey`
-- **Fields**: `2`
 
 ## Fields
 
@@ -15,6 +12,6 @@ Any of "RSA", "DSA" or "EC". Indicates the algorithm used to generate the certif
 
 ### `rsa`
 
-- Type: [`SSLCertificate.RSA`](ssl_certificate_rsa.md) (singular)
+- Type: [`RSA`](ssl_certificate_rsa.md) (singular)
 
 RSA public key information.

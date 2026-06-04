@@ -2,32 +2,17 @@
 
 SSL certificate.
 
-- **Full name**: `google.backstory.SSLCertificate`
-- **Fields**: `15`
-- **Nested messages**: `8`
-
-## Nested messages
-
-- [SSLCertificate.CertSignature](ssl_certificate_cert_signature.md)
-- [SSLCertificate.AuthorityKeyId](ssl_certificate_authority_key_id.md)
-- [SSLCertificate.Extension](ssl_certificate_extension.md)
-- [SSLCertificate.Subject](ssl_certificate_subject.md)
-- [SSLCertificate.RSA](ssl_certificate_rsa.md)
-- [SSLCertificate.EC](ssl_certificate_ec.md)
-- [SSLCertificate.PublicKey](ssl_certificate_public_key.md)
-- [SSLCertificate.Validity](ssl_certificate_validity.md)
-
 ## Fields
 
 ### `certSignature`
 
-- Type: [`SSLCertificate.CertSignature`](ssl_certificate_cert_signature.md) (singular)
+- Type: [`CertSignature`](ssl_certificate_cert_signature.md) (singular)
 
 Certificate's signature and algorithm.
 
 ### `extension`
 
-- Type: [`SSLCertificate.Extension`](ssl_certificate_extension.md) (singular)
+- Type: [`Extension`](ssl_certificate_extension.md) (singular)
 - Deprecated: `true`
 
 (DEPRECATED) certificate's extension.
@@ -46,13 +31,13 @@ Date the certificate was first retrieved by VirusTotal.
 
 ### `issuer`
 
-- Type: [`SSLCertificate.Subject`](ssl_certificate_subject.md) (singular)
+- Type: [`Subject`](ssl_certificate_subject.md) (singular)
 
 Certificate's issuer data.
 
 ### `ec`
 
-- Type: [`SSLCertificate.EC`](ssl_certificate_ec.md) (singular)
+- Type: [`EC`](ssl_certificate_ec.md) (singular)
 
 EC public key information.
 
@@ -76,7 +61,7 @@ Certificate content length.
 
 ### `subject`
 
-- Type: [`SSLCertificate.Subject`](ssl_certificate_subject.md) (singular)
+- Type: [`Subject`](ssl_certificate_subject.md) (singular)
 
 Certificate's subject data.
 
@@ -94,7 +79,7 @@ Certificate's content SHA256 hash.
 
 ### `validity`
 
-- Type: [`SSLCertificate.Validity`](ssl_certificate_validity.md) (singular)
+- Type: [`Validity`](ssl_certificate_validity.md) (singular)
 
 Certificate's validity period.
 
@@ -106,6 +91,6 @@ Certificate version (typically "V1", "V2" or "V3").
 
 ### `publicKey`
 
-- Type: [`SSLCertificate.PublicKey`](ssl_certificate_public_key.md) (singular)
+- Type: [`PublicKey`](ssl_certificate_public_key.md) (singular)
 
 Public key information.

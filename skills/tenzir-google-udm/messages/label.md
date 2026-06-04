@@ -2,9 +2,6 @@
 
 Key value labels.
 
-- **Full name**: `google.backstory.Label`
-- **Fields**: `4`
-
 ## Fields
 
 ### `key`

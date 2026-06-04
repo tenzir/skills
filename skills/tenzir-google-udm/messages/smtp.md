@@ -2,9 +2,6 @@
 
 SMTP info. See RFC 2821.
 
-- **Full name**: `google.backstory.Smtp`
-- **Fields**: `7`
-
 ## Fields
 
 ### `helo`

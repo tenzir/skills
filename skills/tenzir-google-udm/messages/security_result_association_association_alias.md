@@ -1,9 +1,6 @@
-# SecurityResult.Association.AssociationAlias
+# AssociationAlias
 
 Association Alias used to represent Mandiant Threat Intelligence.
-
-- **Full name**: `google.backstory.SecurityResult.Association.AssociationAlias`
-- **Fields**: `2`
 
 ## Fields
 

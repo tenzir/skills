@@ -1,9 +1,6 @@
-# Dns.ResourceRecord
+# ResourceRecord
 
 DNS Resource Records. See RFC1035, section 4.1.3.
-
-- **Full name**: `google.backstory.Dns.ResourceRecord`
-- **Fields**: `6`
 
 ## Fields
 

@@ -2,14 +2,6 @@
 
 The Noun type is used to represent the different entities in an event: principal, src, target, observer, intermediary, and about. It stores attributes known about the entity. For example, if the entity is a device with multiple IP or MAC addresses, it stores the IP and MAC addresses that are relevant to the event.
 
-- **Full name**: `google.backstory.Noun`
-- **Fields**: `38`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [Noun.Platform](../enums/noun_platform.md)
-
 ## Fields
 
 ### `hostname`
@@ -158,7 +150,7 @@ The name of an application or service. Some SSO solutions only capture the name 
 
 ### `platform`
 
-- Type: [`Noun.Platform`](../enums/noun_platform.md) (singular)
+- Type: [`Platform`](../enums/noun_platform.md) (singular)
 
 Platform.
 

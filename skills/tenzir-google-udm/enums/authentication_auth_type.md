@@ -1,4 +1,4 @@
-# Authentication.AuthType
+# AuthType
 
 Type of system the authentication event is associated with.
 

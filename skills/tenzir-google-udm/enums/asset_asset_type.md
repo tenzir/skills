@@ -1,4 +1,4 @@
-# Asset.AssetType
+# AssetType
 
 The role type of the asset.
 

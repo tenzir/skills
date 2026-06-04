@@ -2,9 +2,6 @@
 
 Information about a software package or application.
 
-- **Full name**: `google.backstory.Software`
-- **Fields**: `5`
-
 ## Fields
 
 ### `name`

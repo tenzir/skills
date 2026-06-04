@@ -1,4 +1,4 @@
-# Browser.UrlVisitType
+# UrlVisitType
 
 The type of visit to a URL.
 

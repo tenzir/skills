@@ -1,4 +1,4 @@
-# Metadata.EventTimestampAttribute
+# EventTimestampAttribute
 
 Enum representing the type of timestamp that the eventTimestamp field represents.
 

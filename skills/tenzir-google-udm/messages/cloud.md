@@ -2,19 +2,11 @@
 
 Metadata related to the cloud environment.
 
-- **Full name**: `google.backstory.Cloud`
-- **Fields**: `4`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [Cloud.CloudEnvironment](../enums/cloud_cloud_environment.md)
-
 ## Fields
 
 ### `environment`
 
-- Type: [`Cloud.CloudEnvironment`](../enums/cloud_cloud_environment.md) (singular)
+- Type: [`CloudEnvironment`](../enums/cloud_cloud_environment.md) (singular)
 
 The Cloud environment.
 

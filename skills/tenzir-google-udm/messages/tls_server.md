@@ -1,9 +1,6 @@
-# Tls.Server
+# Server
 
 Transport Layer Security (TLS) information associated with the server (for example, Certificate or JA3 hash).
-
-- **Full name**: `google.backstory.Tls.Server`
-- **Fields**: `3`
 
 ## Fields
 

@@ -2,9 +2,6 @@
 
 File metadata related to the signer information.
 
-- **Full name**: `google.backstory.SignerInfo`
-- **Fields**: `4`
-
 ## Fields
 
 ### `name`

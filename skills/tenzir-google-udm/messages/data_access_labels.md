@@ -2,9 +2,6 @@
 
 Label used in data access.
 
-- **Full name**: `google.backstory.DataAccessLabels`
-- **Fields**: `6`
-
 ## Fields
 
 ### `logTypes`

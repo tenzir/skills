@@ -1,72 +1,72 @@
 # Enums
 
-- [Metadata.EventTimestampAttribute](enums/metadata_event_timestamp_attribute.md) (71 values) - Enum representing the type of timestamp that the eventTimestamp field represents.
-- [Metadata.EventType](enums/metadata_event_type.md) (105 values) - An event type. Choose event type not based on the product that generated the event but the one that logged the event itself. So, for exampl...
-- [Metadata.EnrichmentState](enums/metadata_enrichment_state.md) (3 values) - An enrichment state.
-- [Network.Direction](enums/network_direction.md) (4 values) - A network traffic direction.
-- [Network.IpProtocol](enums/network_ip_protocol.md) (14 values) - An IP protocol.
-- [Network.ApplicationProtocol](enums/network_application_protocol.md) (84 values) - A network application protocol.
-- [Network.ConnectionState](enums/network_connection_state.md) (11 values) - The state of a network connection.
-- [Authentication.AuthType](enums/authentication_auth_type.md) (6 values) - Type of system the authentication event is associated with.
-- [Authentication.Mechanism](enums/authentication_mechanism.md) (21 values) - Mechanism(s) used to authenticate.
-- [Authentication.AuthenticationStatus](enums/authentication_authentication_status.md) (5 values) - Authentication status, can be used to describe the status of authentication for a user or particular credential.
-- [Authentication.Outcome](enums/authentication_outcome.md) (3 values) - The outcome of the authentication event.
-- [LinuxUtmp.RecordType](enums/linux_utmp_record_type.md) (10 values) - The type of activity record from the Utmp file.
-- [WindowsEventLog.Channel](enums/windows_event_log_channel.md) (7 values) - The channel specifies the source or category of the event.
-- [Vulnerability.Severity](enums/vulnerability_severity.md) (5 values) - Severity of the vulnerability.
-- [Process.TokenElevationType](enums/process_token_elevation_type.md) (4 values) - The elevation type of the process's token. See https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-tokenElevationType
-- [Process.State](enums/process_state.md) (15 values) - The state of the process. See https://psutil.readthedocs.io/en/stable/#process-status-constants.
-- [FindingVariable.Type](enums/finding_variable_type.md) (3 values) - Type options for Finding variables.
-- [SecurityResult.VerdictResponse](enums/security_result_verdict_response.md) (3 values) - Represents different verdict types. Used to represent Mandiant threat intelligence.
-- [SecurityResult.IoCStatsType](enums/security_result_io_c_stats_type.md) (4 values) - Type of IoCStat based on source.
-- [SecurityResult.VerdictType](enums/security_result_verdict_type.md) (3 values) - Category of the verdict.
-- [SecurityResult.SecurityCategory](enums/security_result_security_category.md) (23 values) - SecurityCategory is used to standardize security categories across products so one event is not categorized as "malware" and another as a "...
-- [SecurityResult.AlertState](enums/security_result_alert_state.md) (3 values) - The type of alerting set up for a security result.
-- [SecurityResult.Action](enums/security_result_action.md) (7 values) - Enum representing different possible actions taken by the product that created the event. Google SecOps classifies: - ALLOW and ALLOW_WITH_...
-- [SecurityResult.ProductSeverity](enums/security_result_product_severity.md) (8 values) - Defined by the product
-- [SecurityResult.ProductConfidence](enums/security_result_product_confidence.md) (4 values) - A level of confidence in the result.
-- [SecurityResult.ProductPriority](enums/security_result_product_priority.md) (4 values) - A product priority level.
-- [SecurityResult.ThreatStatus](enums/security_result_threat_status.md) (4 values) - Vendor-specific information about the status of a threat (ITW).
-- [SecurityResult.ThreatCollectionType](enums/security_result_threat_collection_type.md) (3 values) - Different Types of threat collections currently supported.
-- [SecurityResult.Association.AssociationType](enums/security_result_association_association_type.md) (4 values) - Represents different possible Association types. Can be threat or malware. Used to represent Mandiant threat intelligence.
-- [File.FileType](enums/file_file_type.md) (182 values) - The file type, for example Microsoft Windows executable.
-- [UsnJournal.Attribute](enums/usn_journal_attribute.md) (24 values) - File attributes from the USN record (e.g., "READ_ONLY, HIDDEN"). See https://learn.microsoft.com/en-us/windows/win32/fileio/file-attribute-...
-- [UsnJournal.Reason](enums/usn_journal_reason.md) (23 values) - The reason for the USN journal entry.
-- [Dhcp.OpCode](enums/dhcp_op_code.md) (3 values) - BOOTP op code. See RFC951, section 3.
-- [Dhcp.MessageType](enums/dhcp_message_type.md) (11 values) - DHCP message type. See RFC2131, section 3.1.
-- [Browser.BrowserType](enums/browser_browser_type.md) (7 values) - The name of the browser.
-- [Browser.UrlVisitType](enums/browser_url_visit_type.md) (13 values) - The type of visit to a URL.
-- [Browser.VisitSource](enums/browser_visit_source.md) (5 values) - The source of the visit.
-- [Browser.Cookie.CookieSameSite](enums/browser_cookie_cookie_same_site.md) (4 values) - The SameSite attribute of a cookie.
-- [Asset.AssetType](enums/asset_asset_type.md) (10 values) - The role type of the asset.
-- [Asset.DeploymentStatus](enums/asset_deployment_status.md) (4 values) - Deployment status states.
-- [User.AccountType](enums/user_account_type.md) (6 values) - User Account Type.
-- [User.Role](enums/user_role.md) (3 values) - User system roles.
-- [Permission.PermissionType](enums/permission_permission_type.md) (5 values) - High level categorizations of permission type.
-- [Role.Type](enums/role_type.md) (3 values) - Well-known system roles.
-- [Registry.Type](enums/registry_type.md) (13 values) - Type of the registry value. These values are based on the Windows Registry value types: https://learn.microsoft.com/en-us/windows/win32/sys...
-- [WindowsScheduledTask.TaskState](enums/windows_scheduled_task_task_state.md) (5 values) - Enum representing the operation state of the task.
-- [WindowsScheduledTask.TaskLogonType](enums/windows_scheduled_task_task_logon_type.md) (7 values) - Enum representing the logon type of the task.
-- [WindowsScheduledTask.TaskAction.ActionType](enums/windows_scheduled_task_task_action_action_type.md) (5 values) - Enum representing the action type of the task.
-- [WindowsScheduledTask.TaskTrigger.TriggerType](enums/windows_scheduled_task_task_trigger_trigger_type.md) (13 values) - Enum representing the trigger type of the task. For more details, see https://learn.microsoft.com/en-us/windows/win32/api/taskschd/ne-tasks...
-- [Service.ServiceType](enums/service_service_type.md) (8 values) - The type of service.
-- [Service.StartupType](enums/service_startup_type.md) (4 values) - How the service is started.
-- [Service.State](enums/service_state.md) (9 values) - The current status of the service.
-- [Resource.ResourceType](enums/resource_resource_type.md) (37 values) - The type of resource.
-- [Cloud.CloudEnvironment](enums/cloud_cloud_environment.md) (4 values) - The service provider environment.
-- [Noun.Platform](enums/noun_platform.md) (10 values) - Operating system platform.
-- [Verdict](enums/verdict.md) (3 values) - Categorization options for the validity of a finding (for example, whether it reflects an actual security incident).
-- [Reputation](enums/reputation.md) (3 values) - Categorization options for the usefulness of a finding.
-- [Status](enums/status.md) (5 values) - Describes status of a finding.
-- [Priority](enums/priority.md) (6 values) - Priority that is assigned to a Case or Alert.
-- [Reason](enums/reason.md) (4 values) - Reason for closing an Alert or Case in the SOAR product.
-- [ThreatVerdict](enums/threat_verdict.md) (4 values) - GCTI threat verdict levels.
-- [Id.Namespace](enums/id_namespace.md) (9 values) - Extracted Namespace Component
-- [EntityMetadata.EntityType](enums/entity_metadata_entity_type.md) (12 values) - Describes the type of entity. An unknown event type.
-- [EntityMetadata.SourceType](enums/entity_metadata_source_type.md) (4 values) - Describes the source of an entity.
-- [Relation.Relationship](enums/relation_relationship.md) (7 values) - Type of relationship between the primary entity (a) and related entity (b).
-- [Relation.Directionality](enums/relation_directionality.md) (3 values) - Describes the relationship model as directed or undirected.
-- [Relation.EntityLabel](enums/relation_entity_label.md) (8 values) - Entity label of the relation.
-- [Metric.AggregateFunction](enums/metric_aggregate_function.md) (7 values) - Mathematic function used to calculate the value.
-- [Metric.MetricName](enums/metric_metric_name.md) (40 values) - The name of the precomputed analytic.
-- [Metric.Dimension](enums/metric_dimension.md) (38 values) - Describes field used as the dimension when grouping data to calculate the aggregate metric.
+- [EventTimestampAttribute](enums/metadata_event_timestamp_attribute.md) - Enum representing the type of timestamp that the eventTimestamp field represents.
+- [EventType](enums/metadata_event_type.md) - An event type. Choose event type not based on the product that generated the event but the one that logged the event itself. So, for exampl...
+- [EnrichmentState](enums/metadata_enrichment_state.md) - An enrichment state.
+- [Direction](enums/network_direction.md) - A network traffic direction.
+- [IpProtocol](enums/network_ip_protocol.md) - An IP protocol.
+- [ApplicationProtocol](enums/network_application_protocol.md) - A network application protocol.
+- [ConnectionState](enums/network_connection_state.md) - The state of a network connection.
+- [AuthType](enums/authentication_auth_type.md) - Type of system the authentication event is associated with.
+- [Mechanism](enums/authentication_mechanism.md) - Mechanism(s) used to authenticate.
+- [AuthenticationStatus](enums/authentication_authentication_status.md) - Authentication status, can be used to describe the status of authentication for a user or particular credential.
+- [Outcome](enums/authentication_outcome.md) - The outcome of the authentication event.
+- [RecordType](enums/linux_utmp_record_type.md) - The type of activity record from the Utmp file.
+- [Channel](enums/windows_event_log_channel.md) - The channel specifies the source or category of the event.
+- [Severity](enums/vulnerability_severity.md) - Severity of the vulnerability.
+- [TokenElevationType](enums/process_token_elevation_type.md) - The elevation type of the process's token. See https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-tokenElevationType
+- [Process.State](enums/process_state.md) - The state of the process. See https://psutil.readthedocs.io/en/stable/#process-status-constants.
+- [FindingVariable.Type](enums/finding_variable_type.md) - Type options for Finding variables.
+- [VerdictResponse](enums/security_result_verdict_response.md) - Represents different verdict types. Used to represent Mandiant threat intelligence.
+- [IoCStatsType](enums/security_result_io_c_stats_type.md) - Type of IoCStat based on source.
+- [VerdictType](enums/security_result_verdict_type.md) - Category of the verdict.
+- [SecurityCategory](enums/security_result_security_category.md) - SecurityCategory is used to standardize security categories across products so one event is not categorized as "malware" and another as a "...
+- [AlertState](enums/security_result_alert_state.md) - The type of alerting set up for a security result.
+- [Action](enums/security_result_action.md) - Enum representing different possible actions taken by the product that created the event. Google SecOps classifies: - ALLOW and ALLOW_WITH_...
+- [ProductSeverity](enums/security_result_product_severity.md) - Defined by the product
+- [ProductConfidence](enums/security_result_product_confidence.md) - A level of confidence in the result.
+- [ProductPriority](enums/security_result_product_priority.md) - A product priority level.
+- [ThreatStatus](enums/security_result_threat_status.md) - Vendor-specific information about the status of a threat (ITW).
+- [ThreatCollectionType](enums/security_result_threat_collection_type.md) - Different Types of threat collections currently supported.
+- [AssociationType](enums/security_result_association_association_type.md) - Represents different possible Association types. Can be threat or malware. Used to represent Mandiant threat intelligence.
+- [FileType](enums/file_file_type.md) - The file type, for example Microsoft Windows executable.
+- [UsnJournal.Attribute](enums/usn_journal_attribute.md) - File attributes from the USN record (e.g., "READ_ONLY, HIDDEN"). See https://learn.microsoft.com/en-us/windows/win32/fileio/file-attribute-...
+- [UsnJournal.Reason](enums/usn_journal_reason.md) - The reason for the USN journal entry.
+- [OpCode](enums/dhcp_op_code.md) - BOOTP op code. See RFC951, section 3.
+- [MessageType](enums/dhcp_message_type.md) - DHCP message type. See RFC2131, section 3.1.
+- [BrowserType](enums/browser_browser_type.md) - The name of the browser.
+- [UrlVisitType](enums/browser_url_visit_type.md) - The type of visit to a URL.
+- [VisitSource](enums/browser_visit_source.md) - The source of the visit.
+- [CookieSameSite](enums/browser_cookie_cookie_same_site.md) - The SameSite attribute of a cookie.
+- [AssetType](enums/asset_asset_type.md) - The role type of the asset.
+- [DeploymentStatus](enums/asset_deployment_status.md) - Deployment status states.
+- [AccountType](enums/user_account_type.md) - User Account Type.
+- [User.Role](enums/user_role.md) - User system roles.
+- [PermissionType](enums/permission_permission_type.md) - High level categorizations of permission type.
+- [Role.Type](enums/role_type.md) - Well-known system roles.
+- [Registry.Type](enums/registry_type.md) - Type of the registry value. These values are based on the Windows Registry value types: https://learn.microsoft.com/en-us/windows/win32/sys...
+- [TaskState](enums/windows_scheduled_task_task_state.md) - Enum representing the operation state of the task.
+- [TaskLogonType](enums/windows_scheduled_task_task_logon_type.md) - Enum representing the logon type of the task.
+- [ActionType](enums/windows_scheduled_task_task_action_action_type.md) - Enum representing the action type of the task.
+- [TriggerType](enums/windows_scheduled_task_task_trigger_trigger_type.md) - Enum representing the trigger type of the task. For more details, see https://learn.microsoft.com/en-us/windows/win32/api/taskschd/ne-tasks...
+- [ServiceType](enums/service_service_type.md) - The type of service.
+- [StartupType](enums/service_startup_type.md) - How the service is started.
+- [Service.State](enums/service_state.md) - The current status of the service.
+- [ResourceType](enums/resource_resource_type.md) - The type of resource.
+- [CloudEnvironment](enums/cloud_cloud_environment.md) - The service provider environment.
+- [Platform](enums/noun_platform.md) - Operating system platform.
+- [Verdict](enums/verdict.md) - Categorization options for the validity of a finding (for example, whether it reflects an actual security incident).
+- [Reputation](enums/reputation.md) - Categorization options for the usefulness of a finding.
+- [Status](enums/status.md) - Describes status of a finding.
+- [Priority](enums/priority.md) - Priority that is assigned to a Case or Alert.
+- [Reason](enums/reason.md) - Reason for closing an Alert or Case in the SOAR product.
+- [ThreatVerdict](enums/threat_verdict.md) - GCTI threat verdict levels.
+- [Namespace](enums/id_namespace.md) - Extracted Namespace Component
+- [EntityType](enums/entity_metadata_entity_type.md) - Describes the type of entity. An unknown event type.
+- [SourceType](enums/entity_metadata_source_type.md) - Describes the source of an entity.
+- [Relationship](enums/relation_relationship.md) - Type of relationship between the primary entity (a) and related entity (b).
+- [Directionality](enums/relation_directionality.md) - Describes the relationship model as directed or undirected.
+- [EntityLabel](enums/relation_entity_label.md) - Entity label of the relation.
+- [AggregateFunction](enums/metric_aggregate_function.md) - Mathematic function used to calculate the value.
+- [MetricName](enums/metric_metric_name.md) - The name of the precomputed analytic.
+- [Dimension](enums/metric_dimension.md) - Describes field used as the dimension when grouping data to calculate the aggregate metric.

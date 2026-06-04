@@ -1,9 +1,6 @@
-# SSLCertificate.EC
+# EC
 
 EC public key information.
-
-- **Full name**: `google.backstory.SSLCertificate.EC`
-- **Fields**: `2`
 
 ## Fields
 

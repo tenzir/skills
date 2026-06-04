@@ -1,4 +1,4 @@
-# Process.TokenElevationType
+# TokenElevationType
 
 The elevation type of the process's token. See https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-tokenElevationType
 

@@ -1,4 +1,4 @@
-# Authentication.Outcome
+# Outcome
 
 The outcome of the authentication event.
 

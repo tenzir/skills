@@ -1,4 +1,4 @@
-# SecurityResult.SecurityCategory
+# SecurityCategory
 
 SecurityCategory is used to standardize security categories across products so one event is not categorized as "malware" and another as a "virus".
 

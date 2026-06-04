@@ -1,4 +1,4 @@
-# SecurityResult.ProductConfidence
+# ProductConfidence
 
 A level of confidence in the result.
 

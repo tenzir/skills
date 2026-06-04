@@ -2,9 +2,6 @@
 
 Metadata about the Portable Executable (PE) file.
 
-- **Full name**: `google.backstory.FileMetadataPE`
-- **Fields**: `13`
-
 ## Fields
 
 ### `imphash`

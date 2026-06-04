@@ -2,9 +2,6 @@
 
 Signature information.
 
-- **Full name**: `google.backstory.FileMetadataSignatureInfo`
-- **Fields**: `5`
-
 ## Fields
 
 ### `verificationMessage`

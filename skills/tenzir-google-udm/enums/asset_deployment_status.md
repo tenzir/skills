@@ -1,4 +1,4 @@
-# Asset.DeploymentStatus
+# DeploymentStatus
 
 Deployment status states.
 

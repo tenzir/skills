@@ -1,4 +1,4 @@
-# Noun.Platform
+# Platform
 
 Operating system platform.
 

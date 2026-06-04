@@ -2,9 +2,6 @@
 
 Proxy information.
 
-- **Full name**: `google.backstory.ProxyInfo`
-- **Fields**: `11`
-
 ## Fields
 
 ### `anonymous`

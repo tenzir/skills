@@ -1,4 +1,4 @@
-# Network.ApplicationProtocol
+# ApplicationProtocol
 
 A network application protocol.
 

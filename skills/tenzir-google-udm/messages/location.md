@@ -2,9 +2,6 @@
 
 Information about a location.
 
-- **Full name**: `google.backstory.Location`
-- **Fields**: `9`
-
 ## Fields
 
 ### `city`

@@ -1,15 +1,12 @@
-# SecurityResult.IoCStats
+# IoCStats
 
 Information about the threat intelligence source. These fields are used to model Mandiant sources.
-
-- **Full name**: `google.backstory.SecurityResult.IoCStats`
-- **Fields**: `8`
 
 ## Fields
 
 ### `iocStatsType`
 
-- Type: [`SecurityResult.IoCStatsType`](../enums/security_result_io_c_stats_type.md) (singular)
+- Type: [`IoCStatsType`](../enums/security_result_io_c_stats_type.md) (singular)
 
 Describes the source of the IoCStat.
 
@@ -33,7 +30,7 @@ Count of responses where the IoC was identified as benign.
 
 ### `quality`
 
-- Type: [`SecurityResult.ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
+- Type: [`ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
 
 Level of confidence in the IoC mapping extracted from the source.
 

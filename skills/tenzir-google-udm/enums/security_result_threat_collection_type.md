@@ -1,4 +1,4 @@
-# SecurityResult.ThreatCollectionType
+# ThreatCollectionType
 
 Different Types of threat collections currently supported.
 

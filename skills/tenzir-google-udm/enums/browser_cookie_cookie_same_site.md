@@ -1,4 +1,4 @@
-# Browser.Cookie.CookieSameSite
+# CookieSameSite
 
 The SameSite attribute of a cookie.
 

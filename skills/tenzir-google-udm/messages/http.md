@@ -2,9 +2,6 @@
 
 Specify the full URL of the HTTP request within "target". Also specify any uploaded or downloaded file information within "source" or "target".
 
-- **Full name**: `google.backstory.Http`
-- **Fields**: `4`
-
 ## Fields
 
 ### `method`

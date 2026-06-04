@@ -2,9 +2,6 @@
 
 Information about a scheduled anacron task.
 
-- **Full name**: `google.backstory.ScheduledAnacronTask`
-- **Fields**: `5`
-
 ## Fields
 
 ### `period`

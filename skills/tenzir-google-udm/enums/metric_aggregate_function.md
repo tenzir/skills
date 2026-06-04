@@ -1,4 +1,4 @@
-# Metric.AggregateFunction
+# AggregateFunction
 
 Mathematic function used to calculate the value.
 

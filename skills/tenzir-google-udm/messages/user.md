@@ -2,15 +2,6 @@
 
 Information about a user.
 
-- **Full name**: `google.backstory.User`
-- **Fields**: `34`
-- **Nested enums**: `2`
-
-## Nested enums
-
-- [User.AccountType](../enums/user_account_type.md)
-- [User.Role](../enums/user_role.md)
-
 ## Fields
 
 ### `productObjectId`
@@ -75,7 +66,7 @@ The first observed time for a user. The value is calculated on the basis of the 
 
 ### `accountType`
 
-- Type: [`User.AccountType`](../enums/user_account_type.md) (singular)
+- Type: [`AccountType`](../enums/user_account_type.md) (singular)
 
 Type of user account (for example, service, domain, or cloud). This is somewhat aligned to: [https://attack.mitre.org/techniques/T1078/](https://attack.mitre.org/techniques/T1078/)
 
@@ -196,7 +187,7 @@ User last bad password attempt timestamp.
 
 ### `userAuthenticationStatus`
 
-- Type: [`Authentication.AuthenticationStatus`](../enums/authentication_authentication_status.md) (singular)
+- Type: [`AuthenticationStatus`](../enums/authentication_authentication_status.md) (singular)
 
 System authentication status for user.
 

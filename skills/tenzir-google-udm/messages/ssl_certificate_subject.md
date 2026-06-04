@@ -1,9 +1,6 @@
-# SSLCertificate.Subject
+# Subject
 
 Subject data.
-
-- **Full name**: `google.backstory.SSLCertificate.Subject`
-- **Fields**: `6`
 
 ## Fields
 

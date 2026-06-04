@@ -25,12 +25,12 @@ field-path prefixes, datatype notes, and examples.
 ## File layout
 
 ```
-schema.md                  # Proto sources, counts, top-level UDM and Entity fields
+schema.md                  # Proto sources and top-level UDM and Entity fields
 messages.md                # Message index
-messages/{message}.md      # Message fields, nested types, and population guidance
+messages/{message}.md      # Message fields and population guidance
 enums.md                   # Enum index
 enums/{enum}.md            # Enum values
-event-types.md             # Metadata.EventType values and event guidance
+event-types.md             # EventType values and event guidance
 usage.md                   # Guidance source summary and routing
 field-paths.md             # Rules, Detect Engine, and CBN prefixes
 datatypes.md               # Standard datatype notes

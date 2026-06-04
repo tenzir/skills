@@ -1,14 +1,6 @@
-# WindowsScheduledTask.TaskTrigger
+# TaskTrigger
 
 The trigger of the scheduled task.
-
-- **Full name**: `google.backstory.WindowsScheduledTask.TaskTrigger`
-- **Fields**: `4`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [WindowsScheduledTask.TaskTrigger.TriggerType](../enums/windows_scheduled_task_task_trigger_trigger_type.md)
 
 ## Fields
 
@@ -32,6 +24,6 @@ The interval between each repetition of the task. The format for this string is 
 
 ### `triggerType`
 
-- Type: [`WindowsScheduledTask.TaskTrigger.TriggerType`](../enums/windows_scheduled_task_task_trigger_trigger_type.md) (singular)
+- Type: [`TriggerType`](../enums/windows_scheduled_task_task_trigger_trigger_type.md) (singular)
 
 The trigger frequency of the task.

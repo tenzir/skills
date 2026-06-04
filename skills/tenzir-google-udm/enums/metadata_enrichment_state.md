@@ -1,4 +1,4 @@
-# Metadata.EnrichmentState
+# EnrichmentState
 
 An enrichment state.
 

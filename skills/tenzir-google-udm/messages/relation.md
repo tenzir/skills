@@ -2,16 +2,6 @@
 
 Defines the relationship between the entity (a) and another entity (b).
 
-- **Full name**: `google.backstory.Relation`
-- **Fields**: `6`
-- **Nested enums**: `3`
-
-## Nested enums
-
-- [Relation.Relationship](../enums/relation_relationship.md)
-- [Relation.Directionality](../enums/relation_directionality.md)
-- [Relation.EntityLabel](../enums/relation_entity_label.md)
-
 ## Fields
 
 ### `entity`
@@ -22,19 +12,19 @@ Entity (b) that the primary entity (a) is related to.
 
 ### `entityType`
 
-- Type: [`EntityMetadata.EntityType`](../enums/entity_metadata_entity_type.md) (singular)
+- Type: [`EntityType`](../enums/entity_metadata_entity_type.md) (singular)
 
 Type of the related entity (b) in this relationship.
 
 ### `relationship`
 
-- Type: [`Relation.Relationship`](../enums/relation_relationship.md) (singular)
+- Type: [`Relationship`](../enums/relation_relationship.md) (singular)
 
 Type of relationship.
 
 ### `direction`
 
-- Type: [`Relation.Directionality`](../enums/relation_directionality.md) (singular)
+- Type: [`Directionality`](../enums/relation_directionality.md) (singular)
 
 Directionality of relationship between primary entity (a) and the related entity (b).
 
@@ -46,6 +36,6 @@ UID of the relationship.
 
 ### `entityLabel`
 
-- Type: [`Relation.EntityLabel`](../enums/relation_entity_label.md) (singular)
+- Type: [`EntityLabel`](../enums/relation_entity_label.md) (singular)
 
 Label to identify the Noun of the relation.

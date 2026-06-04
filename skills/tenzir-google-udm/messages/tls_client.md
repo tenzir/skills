@@ -1,9 +1,6 @@
-# Tls.Client
+# Client
 
 Transport Layer Security (TLS) information associated with the client (for example, Certificate or JA3 hash).
-
-- **Full name**: `google.backstory.Tls.Client`
-- **Fields**: `5`
 
 ## Fields
 

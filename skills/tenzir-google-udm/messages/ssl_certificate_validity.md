@@ -1,9 +1,6 @@
-# SSLCertificate.Validity
+# Validity
 
 Defines certificate's validity period.
-
-- **Full name**: `google.backstory.SSLCertificate.Validity`
-- **Fields**: `2`
 
 ## Fields
 

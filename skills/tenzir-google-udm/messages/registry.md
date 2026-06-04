@@ -2,14 +2,6 @@
 
 Information about a registry key or value.
 
-- **Full name**: `google.backstory.Registry`
-- **Fields**: `5`
-- **Nested enums**: `1`
-
-## Nested enums
-
-- [Registry.Type](../enums/registry_type.md)
-
 ## Fields
 
 ### `registryKey`

@@ -2,9 +2,6 @@
 
 Represents the aggregated state of an investigation such as categorization, severity, and status. Can be expanded to include analyst assignment details and more.
 
-- **Full name**: `google.backstory.Investigation`
-- **Fields**: `10`
-
 ## Fields
 
 ### `verdict`

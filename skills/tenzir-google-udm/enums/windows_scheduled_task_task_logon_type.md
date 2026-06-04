@@ -1,4 +1,4 @@
-# WindowsScheduledTask.TaskLogonType
+# TaskLogonType
 
 Enum representing the logon type of the task.
 
