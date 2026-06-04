@@ -33,8 +33,6 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 📦 Install
 
-### All skills
-
 Install all skills into the current project:
 
 ```bash
@@ -47,8 +45,6 @@ Or install globally:
 npx skills add -g tenzir/skills
 ```
 
-### Individual skill examples
-
 Install a specific skill into the current project, for example:
 
 ```bash
@@ -58,20 +54,6 @@ npx skills add tenzir/skills@tenzir-docs
 npx skills add tenzir/skills@tenzir-google-udm
 npx skills add tenzir/skills@tenzir-ocsf
 ```
-
-## Generated skills
-
-`tenzir-docs` is generated from the structured Markdown bundle published by
-[`tenzir/docs`](https://github.com/tenzir/docs/releases/tag/latest).
-
-`tenzir-ocsf` is generated directly from the upstream
-[`ocsf-schema`](https://github.com/ocsf/ocsf-schema) and
-[`ocsf-docs`](https://github.com/ocsf/ocsf-docs) repositories.
-
-`tenzir-google-udm` is generated from the upstream
-[`googleapis/googleapis`](https://github.com/googleapis/googleapis) UDM and
-Entity protocol buffers plus targeted Google SecOps documentation guidance for
-field population, required fields, field-path prefixes, datatypes, and examples.
 
 ## 🧩 Dependencies
 
