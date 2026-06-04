@@ -5,13 +5,18 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 🗂️ Skills
 
+### 🧬 Schemas
+
+| Skill                          | Description                                                                      |
+| ------------------------------ | -------------------------------------------------------------------------------- |
+| `tenzir-google-udm`            | Google SecOps UDM schema and normalization guidance — fields, event/entity types |
+| `tenzir-ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
+
 ### 🛡️ Tenzir Users
 
 | Skill                          | Description                                                                      |
 | ------------------------------ | -------------------------------------------------------------------------------- |
 | `tenzir-docs`                  | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
-| `tenzir-google-udm`            | Google SecOps UDM schema and normalization guidance — fields, event/entity types |
-| `tenzir-ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
 | `tenzir-create-package`        | Create library-quality Tenzir packages with UDOs, tests, examples, and pipelines |
 
 ### 🏗️ Tenzir Contributors
