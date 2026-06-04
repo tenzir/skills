@@ -182,7 +182,7 @@ The state of the network connection.
 
 Population guidance from the Google UDM usage guide.
 
-### `Network.application_protocol` / `Network.applicationProtocol`
+### `application_protocol` / `applicationProtocol`
 
 - **Purpose**: Indicates the network application protocol.
 - **Encoding**: Enumerated type.
@@ -271,7 +271,7 @@ Population guidance from the Google UDM usage guide.
   - `X500`
   - `XMPP`
 
-### `Network.direction`
+### `direction`
 
 - **Purpose**: Indicates the direction of network traffic.
 - **Encoding**: Enumerated type.
@@ -281,7 +281,7 @@ Population guidance from the Google UDM usage guide.
   - `OUTBOUND`
   - `BROADCAST`
 
-### `Network.email`
+### `email`
 
 - **Purpose**: Specifies the email address for the sender/recipient.
 - **Encoding**: String.
@@ -291,7 +291,7 @@ Population guidance from the Google UDM usage guide.
 
 - jcheng@company.example.com
 
-### `Network.ip_protocol` / `Network.ipProtocol`
+### `ip_protocol` / `ipProtocol`
 
 - **Purpose**: Indicates the IP protocol.
 - **Encoding**: Enumerated type.
@@ -309,7 +309,7 @@ Population guidance from the Google UDM usage guide.
   - `UDP`: User Datagram Protocol
   - `VRRP`: Virtual Router Redundancy Protocol
 
-### `Network.received_bytes` / `Network.receivedBytes`
+### `received_bytes` / `receivedBytes`
 
 - **Purpose**: Specifies the number of bytes received.
 - **Encoding**: 64-bit unsigned integer.
@@ -319,7 +319,7 @@ Population guidance from the Google UDM usage guide.
 
 - 12,453,654,768
 
-### `Network.sent_bytes` / `Network.sentBytes`
+### `sent_bytes` / `sentBytes`
 
 - **Purpose**: Specifies the number of bytes sent.
 - **Encoding**: 64-bit unsigned integer.
@@ -329,11 +329,11 @@ Population guidance from the Google UDM usage guide.
 
 - 7,654,876
 
-### `Network.session_duration` / `Network.sessionDuration`
+### `session_duration` / `sessionDuration`
 
 - **Purpose**: Stores the network session duration, typically returned in a drop event for the session. To set the duration you can set either `network.session_duration.seconds` = 1, (type int64) or `network.session_duration.nanos` = 1 (type int32).
 
-### `Network.session_id` / `Network.sessionId`
+### `session_id` / `sessionId`
 
 - **Purpose**: Stores the network session identifier.
 - **Encoding**: String.

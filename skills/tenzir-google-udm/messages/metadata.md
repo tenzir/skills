@@ -141,7 +141,7 @@ The version of the parser that generated this UDM event.
 
 Population guidance from the Google UDM usage guide.
 
-### `Metadata.collected_timestamp` / `Metadata.collectedTimestamp`
+### `collected_timestamp` / `collectedTimestamp`
 
 - **Purpose**: Encodes the GMT timestamp when the event was collected by the vendor's local collection infrastructure.
 - **Encoding**: RFC 3339 timestamp.
@@ -151,7 +151,7 @@ Population guidance from the Google UDM usage guide.
 - RFC 3339: '2019-09-10T20:32:31-08:00'
 - timestamp: '2012-04-23T18:25:43.511Z'
 
-### `Metadata.description`
+### `description`
 
 - **Purpose**: Human-readable description of the event.
 - **Encoding**: Alpha-numeric string, punctuation allowed, 1024 bytes maximum
@@ -161,7 +161,7 @@ Population guidance from the Google UDM usage guide.
 
 - File c:\bar\foo.exe blocked from accessing sensitive document c:\documents\earnings.docx.
 
-### `Metadata.event_timestamp` / `Metadata.eventTimestamp`
+### `event_timestamp` / `eventTimestamp`
 
 - **Purpose**: Encodes the GMT timestamp when the event was generated.
 - **Required**: Yes
@@ -172,14 +172,14 @@ Population guidance from the Google UDM usage guide.
 - RFC 3339: 2019-09-10T20:32:31-08:00
 - timestamp: 2012-04-23T18:25:43.511Z
 
-### `Metadata.event_type` / `Metadata.eventType`
+### `event_type` / `eventType`
 
 - **Purpose**: Specifies the type of the event. If an event has multiple possible types, this value must specify the most specific type.
 - **Required**: Yes.
 - **Encoding**: Must be one of the predefined UDM `event_type` enumerated types.
 - **Possible values**: The following lists all of the possible values for `event_type` within the UDM.
 
-### `Metadata.product_event_type` / `Metadata.productEventType`
+### `product_event_type` / `productEventType`
 
 - **Purpose**: Short, descriptive, human-readable, and product-specific event name or type.
 - **Encoding**: Alpha-numeric string, punctuation allowed, 64 bytes maximum.
@@ -191,7 +191,7 @@ Population guidance from the Google UDM usage guide.
 - Privilege Escalation Detected
 - Malware blocked
 
-### `Metadata.product_log_id` / `Metadata.productLogId`
+### `product_log_id` / `productLogId`
 
 - **Purpose**: Encodes a vendor-specific event identifier to uniquely identify the event (a GUID). Users might use this identifier to search the vendor's proprietary console for the event in question.
 - **Encoding**: Case-sensitive, alphanumeric string, punctuation allowed, 256 bytes maximum.
@@ -201,7 +201,7 @@ Population guidance from the Google UDM usage guide.
 
 - ABcd1234-98766
 
-### `Metadata.product_name` / `Metadata.productName`
+### `product_name` / `productName`
 
 - **Purpose**: Specifies the name of the product.
 - **Encoding**: Case-sensitive, alphanumeric string, punctuation allowed, 256 bytes maximum.
@@ -211,7 +211,7 @@ Population guidance from the Google UDM usage guide.
 - Falcon
 - Symantec Endpoint Protection
 
-### `Metadata.product_version` / `Metadata.productVersion`
+### `product_version` / `productVersion`
 
 - **Purpose**: Specifies the version of the product.
 - **Encoding**: Alphanumeric string, periods and dashes allowed, 32 bytes maximum
@@ -221,7 +221,7 @@ Population guidance from the Google UDM usage guide.
 - 1.2.3b
 - 10.3:rev1
 
-### `Metadata.url_back_to_product` / `Metadata.urlBackToProduct`
+### `url_back_to_product` / `urlBackToProduct`
 
 - **Purpose**: URL linking to a relevant website where you can view more information about this specific event (or the general event category).
 - **Encoding**: Valid RFC 3986 URL with optional parameters such as port information, etc. Must have a protocol prefix before the URL (for example, https:// or http://).
@@ -231,7 +231,7 @@ Population guidance from the Google UDM usage guide.
 
 - https://newco.altostrat.com:8080/event_info?event_id=12345
 
-### `Metadata.vendor_name` / `Metadata.vendorName`
+### `vendor_name` / `vendorName`
 
 - **Purpose**: Specifies the product vendor's name.
 - **Encoding**: Case-sensitive, alphanumeric string, punctuation allowed, 256 bytes maximum

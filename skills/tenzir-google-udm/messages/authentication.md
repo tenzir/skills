@@ -32,12 +32,12 @@ The outcome of the authentication event.
 
 Population guidance from the Google UDM usage guide.
 
-### `Authentication.auth_details` / `Authentication.authDetails`
+### `auth_details` / `authDetails`
 
 - **Purpose**: Vendor-defined authentication details.
 - **Encoding**: String.
 
-### `Authentication.Authentication_Status`
+### `Authentication_Status`
 
 - **Purpose**: Describes the authentication status of a user or specific credential.
 - **Encoding**: Enumerated type.
@@ -48,7 +48,7 @@ Population guidance from the Google UDM usage guide.
   - `DELETED`: Authentication method has been deleted
   - `NO_ACTIVE_CREDENTIALS`: Authentication method has no active credentials.
 
-### `Authentication.AuthType`
+### `AuthType`
 
 - **Purpose**: Type of system an authentication event is associated with (Google Security Operations UDM).
 - **Encoding**: Enumerated type.
@@ -60,7 +60,7 @@ Population guidance from the Google UDM usage guide.
   - `TACACS`: TACACS family protocol for authentication of networked systems (for example, TACACS or TACACS+)
   - `VPN`
 
-### `Authentication.Mechanism`
+### `Mechanism`
 
 - **Purpose**: Mechanism(s) used for authentication.
 - **Encoding**: Enumerated type.

@@ -653,8 +653,8 @@ def display_field_path(context: FileContext, field_path: str) -> str:
     if message is None:
         return f"`{field_path}`"
 
-    field_path_parts = [message.qualified_name.rsplit(".", 1)[-1]]
-    ingestion_object_parts = [message.qualified_name.rsplit(".", 1)[-1]]
+    field_path_parts: list[str] = []
+    ingestion_object_parts: list[str] = []
     current_message: MessageDoc | None = message
     for part in parts[1:]:
         if current_message is None:
@@ -676,6 +676,8 @@ def display_field_path(context: FileContext, field_path: str) -> str:
             and nested_message is not None
             else None
         )
+    if not field_path_parts:
+        return field_path_label(field_path, field_path)
     return field_path_label(".".join(field_path_parts), ".".join(ingestion_object_parts))
 
 
@@ -1816,10 +1818,12 @@ def render_field_name_forms_section(context: FileContext) -> list[str]:
         "",
         "`field_path_form` / `ingestionObjectForm`",
         "",
-        "Use the left side in YARA-L, Detect Engine, CBN, and other dotted",
-        "field-path contexts. Use the right side when preparing UDM event or",
-        "entity objects for Google SecOps ingestion. If a heading has only one",
-        "name, both contexts use the same spelling.",
+        "Use the left-side spelling for field names in YARA-L, Detect Engine,",
+        "CBN, and other dotted field-path contexts. Keep the root and prefix",
+        "required by that context, for example `$event.metadata.event_type`.",
+        "Use the right-side spelling when preparing UDM event or entity objects",
+        "for Google SecOps ingestion. If a heading has only one name, both",
+        "contexts use the same spelling.",
         "",
         "Mappings come from protobuf descriptors, not from a case-conversion",
         "rule.",

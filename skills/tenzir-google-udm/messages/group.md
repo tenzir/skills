@@ -45,17 +45,17 @@ Microsoft Windows SID of the group.
 
 Population guidance from the Google UDM usage guide.
 
-### `Group.creation_time` / `Group.creationTime`
+### `creation_time` / `creationTime`
 
 - **Purpose**: Group creation time.
 - **Encoding**: RFC 3339 timestamp.
 
-### `Group.email_addresses` / `Group.emailAddresses`
+### `email_addresses` / `emailAddresses`
 
 - **Purpose**: Group contact information.
 - **Encoding**: Email.
 
-### `Group.group_display_name` / `Group.groupDisplayName`
+### `group_display_name` / `groupDisplayName`
 
 - **Purpose**: Group display name.
 - **Encoding**: String.
@@ -66,12 +66,12 @@ Population guidance from the Google UDM usage guide.
 - HR
 - Marketing
 
-### `Group.product_object_id` / `Group.productObjectId`
+### `product_object_id` / `productObjectId`
 
 - **Purpose**: Globally unique user object identifier for the product, such as an LDAP object identifier.
 - **Encoding**: String.
 
-### `Group.windows_sid` / `Group.windowsSid`
+### `windows_sid` / `windowsSid`
 
 - **Purpose**: Microsoft Windows Security Identifier (SID) group attribute field.
 - **Encoding**: String.

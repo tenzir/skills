@@ -64,7 +64,7 @@ Coordinates for the associated region. See [https://cloud.google.com/vision/docs
 
 Population guidance from the Google UDM usage guide.
 
-### `Location.city`
+### `city`
 
 - **Purpose**: Stores the name of the city.
 - **Encoding**: String.
@@ -75,7 +75,7 @@ Population guidance from the Google UDM usage guide.
 - Chicago
 - Malaga
 
-### `Location.country_or_region` / `Location.countryOrRegion`
+### `country_or_region` / `countryOrRegion`
 
 - **Purpose**: Stores the name of the country or region of the world.
 - **Encoding**: String.
@@ -86,7 +86,7 @@ Population guidance from the Google UDM usage guide.
 - United Kingdom
 - Spain
 
-### `Location.name`
+### `name`
 
 - **Purpose**: Stores the name specific to the enterprise, such as a building or campus.
 - **Encoding**: String.
@@ -96,7 +96,7 @@ Population guidance from the Google UDM usage guide.
 - Campus 7B
 - Building A2
 
-### `Location.state`
+### `state`
 
 - **Purpose**: Stores the name of the state, province, or territory.
 - **Encoding**: String.

@@ -68,7 +68,7 @@ A UserAssist extension. This captures details specific to Windows User Assist ev
 
 Population guidance from the Google UDM usage guide.
 
-### `Extensions.auth`
+### `auth`
 
 - **Purpose**: Extension to the authentication metadata.
 - **Encoding**: String.
@@ -79,7 +79,7 @@ Population guidance from the Google UDM usage guide.
 - Network Access Control (NAC) data.
 - LDAP details about a user (for example, role, organization, etc.).
 
-### `Extensions.auth.auth_details` / `Extensions.auth.authDetails`
+### `auth.auth_details` / `auth.authDetails`
 
 - **Purpose**: Specify the vendor specific details for the authentication type or mechanism. Authentication providers often define types such as via_mfa or via_ad that provide useful information on the authentication type. These types can still be generalized in auth.type or auth.mechanism for usability and cross dataset rule compatibility.
 - **Encoding**: String.
@@ -89,7 +89,7 @@ Population guidance from the Google UDM usage guide.
 
 - via_mfa, via_ad.
 
-### `Extensions.vulns`
+### `vulns`
 
 - **Purpose**: Extension to the vulnerability metadata.
 - **Encoding**: String.

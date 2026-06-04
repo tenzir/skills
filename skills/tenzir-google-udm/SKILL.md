@@ -22,10 +22,12 @@ Generated field headings may show two spellings:
 
 `field_path_form` / `ingestionObjectForm`
 
-Use the left side in YARA-L, Detect Engine, CBN, and other dotted
-field-path contexts. Use the right side when preparing UDM event or
-entity objects for Google SecOps ingestion. If a heading has only one
-name, both contexts use the same spelling.
+Use the left-side spelling for field names in YARA-L, Detect Engine,
+CBN, and other dotted field-path contexts. Keep the root and prefix
+required by that context, for example `$event.metadata.event_type`.
+Use the right-side spelling when preparing UDM event or entity objects
+for Google SecOps ingestion. If a heading has only one name, both
+contexts use the same spelling.
 
 Mappings come from protobuf descriptors, not from a case-conversion
 rule.

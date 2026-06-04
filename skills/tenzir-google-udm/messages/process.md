@@ -148,7 +148,7 @@ The state of the process.
 
 Population guidance from the Google UDM usage guide.
 
-### `Process.command_line` / `Process.commandLine`
+### `command_line` / `commandLine`
 
 - **Purpose**: Stores the command line string for the process.
 - **Encoding**: String.
@@ -158,7 +158,7 @@ Population guidance from the Google UDM usage guide.
 
 - `c:\windows\system32\net.exe` group.
 
-### `Process.file`
+### `file`
 
 - **Purpose**: Stores the filename of the file in use by the process.
 - **Encoding**: String.
@@ -168,12 +168,12 @@ Population guidance from the Google UDM usage guide.
 
 - report.xls
 
-### `Process.parent_process` / `Process.parentProcess`
+### `parent_process` / `parentProcess`
 
 - **Purpose**: Stores the details of the parent process.
 - **Encoding**: Noun (Process)
 
-### `Process.parent_process.product_specific_process_id` / `Process.parentProcess.productSpecificProcessId`
+### `parent_process.product_specific_process_id` / `parentProcess.productSpecificProcessId`
 
 - **Purpose**: Stores the product specific process ID for the parent process.
 - **Encoding**: String.
@@ -183,7 +183,7 @@ Population guidance from the Google UDM usage guide.
 
 - `MySQL:78778` or `CS:90512`
 
-### `Process.pid`
+### `pid`
 
 - **Purpose**: Stores the process ID.
 - **Encoding**: String.
@@ -193,7 +193,7 @@ Population guidance from the Google UDM usage guide.
 - 308
 - 2002
 
-### `Process.product_specific_process_id` / `Process.productSpecificProcessId`
+### `product_specific_process_id` / `productSpecificProcessId`
 
 - **Purpose**: Stores the product specific process ID.
 - **Encoding**: String.

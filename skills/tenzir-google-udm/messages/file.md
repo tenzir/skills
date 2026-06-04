@@ -262,7 +262,7 @@ Windows AppCompatCache (Application Compatibility) metadata.
 
 Population guidance from the Google UDM usage guide.
 
-### `File.file_metadata` / `File.fileMetadata`
+### `file_metadata` / `fileMetadata`
 
 - **Purpose**: Metadata associated with the file.
 - **Encoding**: String.
@@ -274,7 +274,7 @@ Population guidance from the Google UDM usage guide.
 - Version number
 - Date last saved
 
-### `File.full_path` / `File.fullPath`
+### `full_path` / `fullPath`
 
 - **Purpose**: Full path identifying the location of the file on the system.
 - **Encoding**: String.
@@ -284,7 +284,7 @@ Population guidance from the Google UDM usage guide.
 
 - \Program Files\Custom Utilities\Test.exe
 
-### `File.md5`
+### `md5`
 
 - **Purpose**: MD5 hash value for the file.
 - **Encoding**: String, lower-case hexadecimal.
@@ -294,7 +294,7 @@ Population guidance from the Google UDM usage guide.
 
 - 35bf623e7db9bf0d68d0dda764fd9e8c
 
-### `File.mime_type` / `File.mimeType`
+### `mime_type` / `mimeType`
 
 - **Purpose**: Multipurpose Internet Mail Extensions (MIME) type for the file.
 - **Encoding**: String.
@@ -305,7 +305,7 @@ Population guidance from the Google UDM usage guide.
 - PDF
 - powershell script
 
-### `File.sha1`
+### `sha1`
 
 - **Purpose**: SHA-1 hash value for the file.
 - **Encoding**: String, lower-case hexadecimal.
@@ -315,7 +315,7 @@ Population guidance from the Google UDM usage guide.
 
 - eb3520d53b45815912f2391b713011453ed8abcf
 
-### `File.sha256`
+### `sha256`
 
 - **Purpose**: SHA-256 hash value for the file.
 - **Encoding**: String, lower-case hexadecimal.
@@ -325,7 +325,7 @@ Population guidance from the Google UDM usage guide.
 
 - d7173c568b8985e61b4050f81b3fd8e75bc922d2a0843d7079c81ca4b6e36417
 
-### `File.size`
+### `size`
 
 - **Purpose**: Size of the file.
 - **Encoding**: 64-bit unsigned integer.

@@ -306,12 +306,12 @@ GTI collections associated with the security result.
 
 Population guidance from the Google UDM usage guide.
 
-### `SecurityResult.about`
+### `about`
 
 - **Purpose**: Provide a description of the security result.
 - **Encoding**: Noun.
 
-### `SecurityResult.action`
+### `action`
 
 - **Purpose**: Specify a security action.
 - **Encoding**: Enumerated type.
@@ -322,7 +322,7 @@ Population guidance from the Google UDM usage guide.
   - `QUARANTINE`: Store for later analysis (does not mean block).
   - `UNKNOWN_ACTION`
 
-### `SecurityResult.action_details` / `SecurityResult.actionDetails`
+### `action_details` / `actionDetails`
 
 - **Purpose**: Vendor-provided details of the action taken as a result of the security incident. Security actions often best translate into the more general `Security_Result.action` UDM field. However, you might need to write rules for the exact vendor-provided description of the action.
 - **Encoding**: String.
@@ -332,7 +332,7 @@ Population guidance from the Google UDM usage guide.
 
 - drop, block, decrypt, encrypt.
 
-### `SecurityResult.category`
+### `category`
 
 - **Purpose**: Specify a security category.
 - **Encoding**: Enum.
@@ -358,7 +358,7 @@ Population guidance from the Google UDM usage guide.
   - `SOFTWARE_SUSPICIOUS`
   - `UNKNOWN_CATEGORY`
 
-### `SecurityResult.confidence`
+### `confidence`
 
 - **Purpose**: Specify a confidence with regards to a security event as estimated by the product.
 - **Encoding**: Enum.
@@ -368,12 +368,12 @@ Population guidance from the Google UDM usage guide.
   - `MEDIUM_CONFIDENCE`
   - `HIGH_CONFIDENCE`
 
-### `SecurityResult.confidence_details` / `SecurityResult.confidenceDetails`
+### `confidence_details` / `confidenceDetails`
 
 - **Purpose**: Additional detail with regards to the confidence of a security event as estimated by the product vendor.
 - **Encoding**: String.
 
-### `SecurityResult.priority`
+### `priority`
 
 - **Purpose**: Specify a priority with regards to a security event as estimated by the product vendor.
 - **Encoding**: Enum.
@@ -383,12 +383,12 @@ Population guidance from the Google UDM usage guide.
   - `MEDIUM_PRIORITY`
   - `HIGH_PRIORITY`
 
-### `SecurityResult.priority_details` / `SecurityResult.priorityDetails`
+### `priority_details` / `priorityDetails`
 
 - **Purpose**: Vendor-specific information about the security result priority.
 - **Encoding**: String.
 
-### `SecurityResult.rule_id` / `SecurityResult.ruleId`
+### `rule_id` / `ruleId`
 
 - **Purpose**: Identifier for the security rule.
 - **Encoding**: String.
@@ -398,7 +398,7 @@ Population guidance from the Google UDM usage guide.
 - 08123
 - 5d2b44d0-5ef6-40f5-a704-47d61d3babbe
 
-### `SecurityResult.rule_name` / `SecurityResult.ruleName`
+### `rule_name` / `ruleName`
 
 - **Purpose**: Name of the security rule.
 - **Encoding**: String.
@@ -408,7 +408,7 @@ Population guidance from the Google UDM usage guide.
 
 - BlockInboundToOracle.
 
-### `SecurityResult.severity`
+### `severity`
 
 - **Purpose**: Severity of a security event as estimated by the product vendor using values defined by the Google SecOps UDM.
 - **Encoding**: Enum.
@@ -420,12 +420,12 @@ Population guidance from the Google UDM usage guide.
   - `MEDIUM`: Malicious
   - `HIGH`: Malicious
 
-### `SecurityResult.severity_details` / `SecurityResult.severityDetails`
+### `severity_details` / `severityDetails`
 
 - **Purpose**: Severity for a security event as estimated by the product vendor.
 - **Encoding**: String.
 
-### `SecurityResult.threat_name` / `SecurityResult.threatName`
+### `threat_name` / `threatName`
 
 - **Purpose**: Name of the security threat.
 - **Encoding**: String.
@@ -435,7 +435,7 @@ Population guidance from the Google UDM usage guide.
 - W32/File-A
 - Slammer
 
-### `SecurityResult.url_back_to_product` / `SecurityResult.urlBackToProduct`
+### `url_back_to_product` / `urlBackToProduct`
 
 - **Purpose**: URL to direct you to the source product console for this security event.
 - **Encoding**: String.

@@ -216,7 +216,7 @@ System role for user. Deprecated: use attribute.roles.
 
 Population guidance from the Google UDM usage guide.
 
-### `User.email_addresses` / `User.emailAddresses`
+### `email_addresses` / `emailAddresses`
 
 - **Purpose**: Stores the email addresses for the user.
 - **Encoding**: Repeated String.
@@ -226,7 +226,7 @@ Population guidance from the Google UDM usage guide.
 
 - johnlocke@company.example.com
 
-### `User.employee_id` / `User.employeeId`
+### `employee_id` / `employeeId`
 
 - **Purpose**: Stores the human resources employee ID for the user.
 - **Encoding**: String.
@@ -236,7 +236,7 @@ Population guidance from the Google UDM usage guide.
 
 - 11223344.
 
-### `User.first_name` / `User.firstName`
+### `first_name` / `firstName`
 
 - **Purpose**: Stores the first name for the user.
 - **Encoding**: String.
@@ -246,7 +246,7 @@ Population guidance from the Google UDM usage guide.
 
 - John.
 
-### `User.group_identifiers` / `User.groupIdentifiers`
+### `group_identifiers` / `groupIdentifiers`
 
 - **Purpose**: Stores the group ID(s) (a GUID, LDAP OID, or similar) associated with a user.
 - **Encoding**: Repeated String.
@@ -256,7 +256,7 @@ Population guidance from the Google UDM usage guide.
 
 - admin-users.
 
-### `User.last_name` / `User.lastName`
+### `last_name` / `lastName`
 
 - **Purpose**: Stores the last name for the user.
 - **Encoding**: String.
@@ -266,7 +266,7 @@ Population guidance from the Google UDM usage guide.
 
 - Locke.
 
-### `User.middle_name` / `User.middleName`
+### `middle_name` / `middleName`
 
 - **Purpose**: Stores the middle name for the user.
 - **Encoding**: String.
@@ -276,7 +276,7 @@ Population guidance from the Google UDM usage guide.
 
 - Anthony.
 
-### `User.phone_numbers` / `User.phoneNumbers`
+### `phone_numbers` / `phoneNumbers`
 
 - **Purpose**: Stores the phone numbers for the user.
 - **Encoding**: Repeated String.
@@ -286,7 +286,7 @@ Population guidance from the Google UDM usage guide.
 
 - 800-555-0101
 
-### `User.title`
+### `title`
 
 - **Purpose**: Stores the job title for the user.
 - **Encoding**: String.
@@ -296,7 +296,7 @@ Population guidance from the Google UDM usage guide.
 
 - Customer Relationship Manager.
 
-### `User.user_display_name` / `User.userDisplayName`
+### `user_display_name` / `userDisplayName`
 
 - **Purpose**: Stores the display name for the user.
 - **Encoding**: String.
@@ -306,7 +306,7 @@ Population guidance from the Google UDM usage guide.
 
 - John Locke.
 
-### `User.userid`
+### `userid`
 
 - **Purpose**: Stores the user ID.
 - **Encoding**: String.
@@ -316,7 +316,7 @@ Population guidance from the Google UDM usage guide.
 
 - jlocke.
 
-### `User.windows_sid` / `User.windowsSid`
+### `windows_sid` / `windowsSid`
 
 - **Purpose**: Stores the Microsoft Windows security identifier (SID) associated with a user.
 - **Encoding**: String.
