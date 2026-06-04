@@ -1475,9 +1475,14 @@ def parse_event_guidance_section(heading: Tag, blocks: list[Tag]) -> EventGuidan
             text = heading_text(block)
             if "example" in text.lower():
                 current_example_title = text
-                current_kind = None
+                # The usage guide examples are UDM text format, not endpoint
+                # request bodies. Skip them until we can render valid endpoint
+                # examples.
+                current_kind = "example"
             continue
         if block.name == "p":
+            if current_kind == "example":
+                continue
             text = markdown_text(block)
             lowered = text.lower()
             if lowered.startswith("required fields"):
@@ -1490,12 +1495,16 @@ def parse_event_guidance_section(heading: Tag, blocks: list[Tag]) -> EventGuidan
                 notes.append(text)
             continue
         if block.name == "aside":
+            if current_kind == "example":
+                continue
             text = markdown_text(block)
             if text:
                 notes.append(text)
             continue
         pre = block.find("pre") if block.name != "pre" else block
         if isinstance(pre, Tag):
+            if current_kind == "example":
+                continue
             code = normalize_code(pre.get_text("", strip=False))
             if code:
                 examples.append(
@@ -1506,6 +1515,8 @@ def parse_event_guidance_section(heading: Tag, blocks: list[Tag]) -> EventGuidan
                 )
             continue
         if block.name != "ul":
+            continue
+        if current_kind == "example":
             continue
         items = immediate_li_texts(block, markdown=True)
         if current_kind == "required":

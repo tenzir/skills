@@ -178,42 +178,6 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 - `securityResult`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
-#### Notes
-
-- The following example illustrates how an event of type MUTEX_CREATION would be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device and process details.
-- `target`: Information about the mutex.
-
-#### Examples
-
-##### UDM example for MUTEX_CREATION
-
-```text
-metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: MUTEX_CREATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal {
-  hostname: "test.altostrat.com"
-  process {
-    pid: "0xc45"
-    file {
-      full_path: "C:\\Windows\\regedit.exe"
-    }
-  }
-}
-target {
-  resource {
-    type: "MUTEX"
-    name: "test-mutex"
-  }
-}
-```
-
 ### NETWORK_CONNECTION
 
 #### Required Fields
@@ -255,67 +219,6 @@ target {
 #### Notes
 
 - The NETWORK_HTTP event type represents an HTTP network connection from a principal to a target web server.
-- The following example illustrates how a Sophos antivirus event of type NETWORK_HTTP would be converted to the Google SecOps UDM format.
-- The following is the original Sophos antivirus event:
-- Here is how you would format the same information using the Google SecOps UDM syntax:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Security device that detected the event.
-- `target`: Device that received the malicious software.
-- `network`: Network information about the malicious host.
-- `securityResult`: Security details about the malicious software.
-- `additional`: Vendor information outside the scope of the UDM.
-
-#### Examples
-
-##### UDM example for NETWORK_HTTP (1)
-
-```text
-date=2013-08-07 time=13:27:41 timezone="GMT" device_name="CC500ia" device_id= C070123456-ABCDE log_id=030906208001 log_type="Anti-Virus" log_component="HTTP" log_subtype="Virus" status="" priority=Critical fw_rule_id=0 user_name="john.smith" iap=7 av_policy_name="" virus="TR/ElderadoB.A.78" url="altostrat.fr/img/logo.gif" domainname="altostrat.fr" src_ip=10.10.2.10 src_port=60671 src_country_code= dst_ip=203.0.113.31 dst_port=80 dst_country_code=FRA
-```
-
-##### UDM example for NETWORK_HTTP (2)
-
-```text
-metadata {
-  event_timestamp: "2013-08-07T13:27:41+00:00"
-  event_type: NETWORK_HTTP
-  product_name: "Sophos Antivirus"
-  product_log_id: "030906208001"
-}
-
-principal {
-  hostname: "CC500ia"
-  asset_id: "Sophos.AV:C070123456-ABCDE"
-  ip: "10.10.2.10"
-  port: 60671
-  user {  userid: "john.smith" }
-}
-
-target {
-  hostname: "altostrat.fr"
-  ip: "203.0.113.31"
-  port: 80
-  url: "altostrat.fr/img/logo.gif"
-}
-
-network {
-  ip_protocol: TCP
- }
-
-security_result {
-  about {
-    url: "altostrat.fr/img/logo.gif"
-    category: SOFTWARE_MALICIOUS
-    category_details: "Virus"
-    threat_name: "TR/ElderadoB.A.78"
-    severity: HIGH                   # Google Security Operations-normalized severity
-    severity_details: "Critical"    # Vendor-specific severity string
-  }
-}
-
-additional { "dst_country_code" : "FRA", "iap" : "7" "fw_rule_id" : "0" }
-```
 
 ### Process Injection / Launch / Open / Termination / Uncategorized Events
 
@@ -332,38 +235,6 @@ Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERM
 - `securityResult`: Describe the malicious activity detected.
 - `principal.user` and `target.user`: Populate the initiating process (principal) and the target process if the user information is available.
 
-#### Notes
-
-- The following example illustrates how you would format a PROCESS_LAUNCH event using the Google SecOps UDM syntax:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device details.
-- `target`: Process details.
-
-#### Examples
-
-##### UDM example for PROCESS_LAUNCH
-
-```text
-metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: PROCESS_LAUNCH
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal {
-  hostname: "altostrat.com"
-}
-target {
-  process {
-    pid: "0xc45"
-    file {
-      full_path: "C:\\Windows\\regedit.exe"
-    }
-  }
-}
-```
-
 ### PROCESS_MODULE_LOAD
 
 #### Required Fields
@@ -377,41 +248,6 @@ target {
 - `securityResult`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
-#### Notes
-
-- The following example illustrates how you would format a PROCESS_MODULE_LOAD event using the Google SecOps UDM syntax:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Details about the device and the process loading the module.
-- `target`: Process and module details.
-
-#### Examples
-
-##### UDM example for PROCESS_MODULE_LOAD
-
-```text
-metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: PROCESS_MODULE_LOAD
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal {
-  hostname: "example.com"
-  process {
-    pid: "0x123"
-  }
-}
-target {
-  process {
-    pid: "0xc45"
-    file {
-      full_path: "C:\\Windows\\regedit.exe"
-    }
-  }
-}
-```
-
 ### PROCESS_PRIVILEGE_ESCALATION
 
 #### Required Fields
@@ -422,45 +258,6 @@ target {
 #### Optional Fields
 
 - `securityResult`: Describe the malicious activity detected.
-
-#### Notes
-
-- The following example illustrates how you would format a PROCESS_PRIVILEGE_ESCALATION event using the Google SecOps UDM syntax:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Details about the device, the user, and the process loading the module.
-- `target`: Process and module details.
-
-#### Examples
-
-##### UDM example for PROCESS_PRIVILEGE_ESCALATION
-
-```text
-metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: PROCESS_PRIVILEGE_ESCALATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal {
-  hostname: "example.com"
-  process {
-    pid: "0x123"
-  }
-  user {
-    userid: "test"
-    windows_sid: "ABCDEFGH-123456789-1111111-1000"
-  }
-}
-target {
-  process {
-    pid: "0xc45"
-    file {
-      full_path: "C:\\Windows\\regedit.exe"
-    }
-  }
-}
-```
 
 ### Registry Creation / Modification / Deletion Events
 
@@ -476,47 +273,6 @@ Applies to: `REGISTRY_CREATION`, `REGISTRY_MODIFICATION`, `REGISTRY_DELETION`
 
 - `securityResult`: Describe the malicious activity detected. For example, a bad registry key.
 - `principal.user`: Populate if user information is available about the process.
-
-#### Notes
-
-- The following example illustrates how you would format a REGISTRY_MODIFICATION event using the Google SecOps UDM syntax:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device, user, and process details.
-- `target`: Registry entry affected by the modification.
-
-#### Examples
-
-##### UDM example for REGISTRY_MODIFICATION
-
-```text
-metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: REGISTRY_MODIFICATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal {
-  hostname: "test-win"
-  user {
-    userid: "test"
-    windows_sid: "ABCDEFGH-123456789-1111111-1000"
-  }
-  process {
-    pid: "0xc45"
-    file {
-      full_path: "C:\\Windows\\regedit.exe"
-    }
-  }
-}
-target {
-  registry {
-    registry_key: "\\REGISTRY\\USER\\TEST_USER\\Control Panel\\PowerCfg\\PowerPolicy"
-    registry_value_name: "Description"
-    registry_value_data: "For extending battery life."
-  }
-}
-```
 
 ### Scan File / Host / Process / Vuln Host / Vuln Network Events
 
@@ -535,81 +291,6 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 - `target`: User detail about the target object (for example, file creator or process owner) should be captured in `target.user`.
 - `securityResult`: Describe the malicious activity detected.
 
-#### Notes
-
-- The following example illustrates how an event of type SCAN_HOST would be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `target`: Device which received the malicious software.
-- `observer`: Device which observes and reports on the event in question.
-- `securityResult`: Security details about the malicious software.
-- The following example illustrates how an event of type SCAN_VULN_HOST would be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device that received the malicious software.
-- `extensions`: Vulnerability details.
-
-#### Examples
-
-##### UDM example for SCAN_HOST (1)
-
-```text
-metadata: {
-  event_timestamp: {
-    seconds: 1571386978
-  }
-  event_type: SCAN_HOST
-  vendor_name: "vendor"
-  product_name: "product"
-  product_version: "1.0"
-}
-target: {
-  hostname: "testHost"
-  asset_id: "asset"
-  ip: "192.168.200.200"
-}
-observer: {
-  hostname: "testObserver"
-  ip: "192.168.100.100"
-}
-security_result: {
-  severity: LOW
-  confidence: HIGH_CONFIDENCE
-}
-```
-
-##### UDM example for SCAN_VULN_HOST (2)
-
-```text
-metadata: {
-  event_timestamp: "2025-05-09T12:59:52.45298Z",
-  event_type: 18005,
-  product_name: "TestProduct",
-  vendor_name: "TestVendor"
-  },
-principal {
-  asset_id: "TEST:Mwl8ABcd",
-  ip: "127.0.0.3",
-  hostname: "TEST-Localhost",
-  mac: ["02:00:00:00:00:01"]
-  },
-extensions: {
-  vulns: {
-    vulnerabilities: [
-      {
-      cve_id: "CVE-6l9VxQmz",
-      vendor_vulnerability_id: "TEST:7gmCmFWX",
-      name: "CVE pA7DzwPU",
-      severity: 2,
-      vendor: "TestVendor",
-      last_found: "2025-05-09T14:59:52.45300Z",
-      first_found: "2025-05-09T13:59:52.45300Z"
-       }
-      ]
-    }
-  }
-```
-
 ### Scheduled Task Creation / Deletion / Disable / Enable / Modification / Uncategorized Events
 
 Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TASK_DISABLE`, `SCHEDULED_TASK_ENABLE`, `SCHEDULED_TASK_MODIFICATION`, `SCHEDULED_TASK_UNCATEGORIZED`
@@ -623,55 +304,6 @@ Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TAS
 
 - `securityResult`: Describe the malicious activity detected.
 
-#### Notes
-
-- The following example illustrates how an event of type SCHEDULED_TASK_CREATION could be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device that scheduled the suspicious task.
-- `target`: Software targeted by the suspicious task.
-- `intermediary`: Intermediary involved with the suspicious task.
-- `securityResult`: Security details about the suspicious task.
-
-#### Examples
-
-##### UDM example for SCHEDULED_TASK_CREATION
-
-```text
-metadata: {
-  event_timestamp: {
-    seconds: 1577577998
-  }
-  event_type: SCHEDULED_TASK_CREATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal: {
-  hostname: "fake-host.altostrat.com"
-  user: {
-    userid: "TestUser"
-    windows_sid: "AB123CDE"
-  }
-  process {
-    pid: "1234"
-  }
-}
-target: {
-  resource: {
-    type: "TASK"
-    name: "\\Adobe Acrobat Update Task"
-  }
-}
-intermediary: {
-  hostname: "fake-intermediary.altostrat.com"
-}
-security_result: {
-  rule_name: "EventID: 6789"
-  summary: "A scheduled task was created."
-  severity: INFORMATIONAL
-}
-```
-
 ### Setting Uncategorized / Creation / Modification / Deletion Events
 
 Applies to: `SETTING_UNCATEGORIZED`, `SETTING_CREATION`, `SETTING_MODIFICATION`, `SETTING_DELETION`
@@ -680,36 +312,6 @@ Applies to: `SETTING_UNCATEGORIZED`, `SETTING_CREATION`, `SETTING_MODIFICATION`,
 
 - `principal`: Must be present, non-empty, and include a machine identifier.
 - `target`: Must be present, non-empty, and include a resource with its type specified as SETTING
-
-#### Notes
-
-- The following example illustrates how an event of type SETTING_MODIFICATION would be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Information about the device on which the setting modification occurred.
-- `target`: Resource details.
-
-#### Examples
-
-##### UDM example for event type SETTING_MODIFICATION
-
-```text
-metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: SETTING_MODIFICATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal {
-  hostname: "test.win.com"
-}
-target {
-  resource {
-    type: "SETTING"
-    name: "test-setting"
-  }
-}
-```
 
 ### Service Unspecified / Creation / Deletion / Start / Stop Events
 
@@ -720,49 +322,6 @@ Applies to: `SERVICE_UNSPECIFIED`, `SERVICE_CREATION`, `SERVICE_DELETION`, `SERV
 - `target`: Include the user identifier and specify either process or application.
 - `principal`: Include at least one machine identifier (IP or MAC ADDRESS, hostname, or asset identifier).
 
-#### Notes
-
-- The following example illustrates how an event of type SERVICE_UNSPECIFIED would be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device and location details.
-- `target`: Hostname and user identifier.
-- `application`: Application name and resource type.
-
-#### Examples
-
-##### UDM example for SERVICE_UNSPECIFIED
-
-```text
-metadata: {
- event_timestamp: {
-   seconds: 1595656745
-   nanos: 832000000
-    }
- event_type: SERVICE_UNSPECIFIED
-   vendor_name: "Preempt"
-   product_name: "PREEMPT_AUTH"
-   product_event_type: "SERVICE_ACCESS"
-   description: "Remote Procedures (RPC)"
-   }
- principal: {
-   hostname: "XXX-YYY-ZZZ"
-   ip: "10.10.10.10"
-   }
- target: {
-   hostname: "TestHost"
-   user: {
-      userid: "ORG\\User"
-      user_display_name: "user name"
-   }
- application: "application.name"
-   resource: {
-      type: "Service Type"
-      name: "RPC"
-   }
- }
-```
-
 ### Status Heartbeat / Startup / Shutdown / Update Events
 
 Applies to: `STATUS_HEARTBEAT`, `STATUS_STARTUP`, `STATUS_SHUTDOWN`, `STATUS_UPDATE`
@@ -772,45 +331,6 @@ Applies to: `STATUS_HEARTBEAT`, `STATUS_STARTUP`, `STATUS_SHUTDOWN`, `STATUS_UPD
 - `metadata`: Include the required fields.
 - `principal`: At least one machine identifier (IP or MAC ADDRESS, hostname, or asset identifier).
 
-#### Notes
-
-- The following example illustrates how an event of type STATUS_HEARTBEAT would be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device and location details.
-- `intermediary`: Device IP address.
-- `securityResult`: Security result details.
-
-#### Examples
-
-##### UDM example for STATUS_HEARTBEAT
-
-```text
-metadata: {
-  event_timestamp: {
-    seconds: 1588180305
-  }
-  event_type: STATUS_HEARTBEAT
-  vendor_name: "DMP"
-  product_name: "ENTRE"
-}
-principal: {
-  hostname: "testHost"
-  location: {
-    name: "Building 1"
-  }
-}
-intermediary: {
-  ip: "8.8.8.8"
-}
-security_result: {
-  summary: "Event - Locked"
-  description: "description"
-  severity: LOW
-  severity_details: "INFO"
-}
-```
-
 ### System Audit Log Uncategorized / Wipe Events
 
 Applies to: `SYSTEM_AUDIT_LOG_UNCATEGORIZED`, `SYSTEM_AUDIT_LOG_WIPE`
@@ -818,33 +338,6 @@ Applies to: `SYSTEM_AUDIT_LOG_UNCATEGORIZED`, `SYSTEM_AUDIT_LOG_WIPE`
 #### Required Fields
 
 - `principal`: Include a user identifier for the user who performed the operation on the log and a machine identifier for the machine where the log is or was (in the case of wiping) stored.
-
-#### Notes
-
-- The following example illustrates how an event of type SYSTEM_AUDIT_LOG_WIPE would be formatted for the Google SecOps UDM:
-- As shown in this example, the event has been divided into the following UDM categories:
-- `metadata`: Background information about the event.
-- `principal`: Device and user details.
-
-#### Examples
-
-##### UDM example for SYSTEM_AUDIT_LOG_WIPE
-
-```text
-metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: SYSTEM_AUDIT_LOG_WIPE
-  vendor_name: "Microsoft"
-  product_name: "Windows"
-}
-principal {
-  hostname: "altostrat.com"
-  user {
-    userid: "test"
-    windows_sid: "ABCDEFGH-123456789-1111111-1000"
-  }
-}
-```
 
 ### User Change Password / Permissions Events
 
