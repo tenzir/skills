@@ -1,0 +1,10 @@
+created: 2026-06-04
+title: Consolidated package creation and Google UDM skill
+intro: >-
+  This release consolidates Tenzir package development into the new tenzir-create-package
+  skill, replacing the older parser and OCSF mapping workflows with one broader package
+  creation workflow. It also adds a generated Google SecOps UDM skill for schema reference
+  and normalization guidance.
+source:
+  mode: sync-stable-queue
+  previous_stable: v1.0.0
