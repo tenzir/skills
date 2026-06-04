@@ -9,7 +9,7 @@ This guide provides brief guidance on mapping data to schemas other than OCSF. W
 | -------- | --------------------------- | ---------------------------------------------- |
 | **OCSF** | Security data normalization | Vendor-neutral, comprehensive security focus   |
 | **ECS**  | Elasticsearch/Elastic Stack | Tight Elastic integration, good field coverage |
-| **UDM**  | Google SecOps (Chronicle)   | Required for Chronicle, maps well from OCSF    |
+| **UDM**  | Google SecOps               | Required for SecOps, API-oriented UDM shape    |
 | **ASIM** | Microsoft Sentinel          | Required for Sentinel, KQL-optimized           |
 
 Recommended approach
@@ -52,37 +52,6 @@ Common ECS field sets for security data:
 * `user.*` - User information
 * `host.*` - Host/device details
 * `threat.*` - Threat intelligence
-
-## Google Unified Data Model (UDM)
-
-[UDM](https://docs.cloud.google.com/chronicle/docs/event-processing/udm-overview) is Google Chronicle’s (SecOps) event schema. Refer to the [UDM field list](https://cloud.google.com/chronicle/docs/reference/udm-field-list) for a complete reference.
-
-### Key differences from OCSF
-
-* Uses protobuf-style nested structures
-* Strict typing with enums for many fields
-* Event type determines required field sets
-
-### Mapping pattern
-
-```tql
-// From OCSF to UDM
-udm.metadata.event_timestamp = ocsf.time
-udm.metadata.event_type = "NETWORK_CONNECTION"
-udm.principal.ip = [ocsf.src_endpoint.ip]
-udm.principal.port = ocsf.src_endpoint.port
-udm.target.ip = [ocsf.dst_endpoint.ip]
-udm.target.port = ocsf.dst_endpoint.port
-udm.network.ip_protocol = ocsf.connection_info.protocol_name.to_upper()
-```
-
-### UDM entity types
-
-* `principal` - Initiating entity (source)
-* `target` - Target entity (destination)
-* `src` - Alternative source (for multi-party events)
-* `observer` - Monitoring/logging entity
-* `intermediary` - Proxy or middlebox
 
 ## Microsoft ASIM
 
@@ -139,10 +108,6 @@ When values need conversion:
 ```tql
 // OCSF uses integers, ECS might use strings
 ecs.event.severity = ocsf.severity_id.string()
-
-
-// Protocol name case differences
-udm.network.ip_protocol = ocsf.connection_info.protocol_name.to_upper()
 ```
 
 ### Structural transformation
@@ -195,26 +160,15 @@ fork {
   to_opensearch "https://elasticsearch.example.com:9200", action="index", index="ecs"
 }
 fork {
-  // Translate and send to Chronicle
+  // Translate and send to Google SecOps
   ocsf_to_udm
   to_google_secops "..."
 }
 ```
 
-## Best practices
-
-1. **Start with OCSF**: It’s designed for security data and translates well to other schemas.
-
-2. **Document mapping decisions**: Record why you chose specific field mappings, especially for ambiguous cases.
-
-3. **Test with real data**: Each schema has quirks that only surface with production data.
-
-4. **Maintain translator operators**: Package schema translations as reusable operators.
-
-5. **Monitor for schema updates**: All schemas evolve; plan for periodic updates to your mappings.
-
 ## See Also
 
 * [`to_opensearch`](/reference/operators/to_opensearch.md)
 * [Map to OCSF](map-to-ocsf.md)
+* [Map to UDM](map-to-udm.md)
 * [Transform values](../transformation/transform-values.md)

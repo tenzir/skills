@@ -3,6 +3,12 @@
 
 [Google Security Operations (SecOps)](https://cloud.google.com/security/products/security-operations) is Google’s security operations platform. Tenzir can send events to Google SecOps using the [unstructured logs ingestion API](https://cloud.google.com/chronicle/docs/reference/ingestion-api#unstructuredlogentries).
 
+## UDM mapping
+
+Google SecOps stores normalized security data in the Unified Data Model (UDM). Use [Map to UDM](../../guides/normalization/map-to-udm.md) to shape parsed events into API-facing UDM records.
+
+Tenzir’s [`to_google_secops`](/reference/operators/to_google_secops.md) operator currently sends unstructured logs. Structured UDM ingestion support is coming soon.
+
 ## Examples
 
 ### Send an event to Google SecOps

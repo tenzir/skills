@@ -77,12 +77,20 @@ Work through these guides in order for a complete normalization workflow:
 * Handle unmapped fields
 * Validate with `ocsf::cast`
 
+### Map to UDM
+
+[Map to UDM](normalization/map-to-udm.md) — Learn how to map events to Google SecOps UDM records:
+
+* Choose the correct UDM event type
+* Populate metadata and participant nouns
+* Convert source values to UDM enums
+* Preserve unmapped fields in `additional`
+
 ### Map to other schemas
 
 [Map to other schemas](normalization/map-to-other-schemas.md) — Brief guidance on alternative schemas:
 
 * Elastic Common Schema (ECS)
-* Google UDM
 * Microsoft ASIM
 
 ## When to normalize
@@ -108,4 +116,5 @@ Normalizing early ensures all downstream consumers work with consistent data. Av
 
 - [Clean-up-values](normalization/clean-up-values.md)
 - [Map-to-ocsf](normalization/map-to-ocsf.md)
+- [Map-to-udm](normalization/map-to-udm.md)
 - [Map-to-other-schemas](normalization/map-to-other-schemas.md)

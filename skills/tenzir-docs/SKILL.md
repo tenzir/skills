@@ -188,7 +188,7 @@ Build your own AI Workbench by bringing an AI agent and configuring it with Tenz
 
 ##### [Use agent skills](guides/ai-workbench/use-agent-skills.md)
 
-This guide shows you how to install and manage Tenzir’s agent skills. You’ll learn how to add skills globally or per project, install individual skills, and keep them up to date.
+This guide shows you how to install and manage Tenzir’s agent skills. You’ll learn which skills are available, how to add skills globally or per project, install individual skills, and keep them up to date.
 
 ### Work with Data
 
@@ -271,6 +271,10 @@ This guide shows you how to clean and normalize values in your data before mappi
 ##### [Map to OCSF](guides/normalization/map-to-ocsf.md)
 
 This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.
+
+##### [Map to UDM](guides/normalization/map-to-udm.md)
+
+This guide shows you how to map events to Google SecOps Unified Data Model (UDM) records in TQL. You’ll learn how to choose a UDM event type, populate metadata, model participants as UDM nouns, convert enum values, and preserve unmapped source fields.
 
 ##### [Map to other schemas](guides/normalization/map-to-other-schemas.md)
 

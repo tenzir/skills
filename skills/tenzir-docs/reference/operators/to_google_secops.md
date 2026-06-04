@@ -80,4 +80,5 @@ to_google_secops \
 ## See Also
 
 * [`to_google_cloud_logging`](/reference/operators/to_google_cloud_logging.md)
+* [Map to UDM](../../guides/normalization/map-to-udm.md)
 * [SecOps](../../integrations/google/secops.md)
