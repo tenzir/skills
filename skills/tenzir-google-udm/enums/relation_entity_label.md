@@ -2,55 +2,13 @@
 
 Entity label of the relation.
 
-- **Full name**: `google.backstory.Relation.EntityLabel`
-- **Values**: `8`
-
 ## Values
 
-### `ENTITY_LABEL_UNSPECIFIED`
-
-- **Number**: `0`
-
-Default value.
-
-### `PRINCIPAL`
-
-- **Number**: `1`
-
-The Noun represents a principal type object.
-
-### `TARGET`
-
-- **Number**: `2`
-
-The Noun represents a target type object.
-
-### `OBSERVER`
-
-- **Number**: `3`
-
-The Noun represents an observer type object.
-
-### `SRC`
-
-- **Number**: `4`
-
-The Noun represents src type object.
-
-### `NETWORK`
-
-- **Number**: `5`
-
-The Noun represents a network type object.
-
-### `SECURITY_RESULT`
-
-- **Number**: `6`
-
-The Noun represents a SecurityResult object.
-
-### `INTERMEDIARY`
-
-- **Number**: `7`
-
-The Noun represents an intermediary type object.
+0. `ENTITY_LABEL_UNSPECIFIED`: Default value.
+1. `PRINCIPAL`: The Noun represents a principal type object.
+2. `TARGET`: The Noun represents a target type object.
+3. `OBSERVER`: The Noun represents an observer type object.
+4. `SRC`: The Noun represents src type object.
+5. `NETWORK`: The Noun represents a network type object.
+6. `SECURITY_RESULT`: The Noun represents a SecurityResult object.
+7. `INTERMEDIARY`: The Noun represents an intermediary type object.

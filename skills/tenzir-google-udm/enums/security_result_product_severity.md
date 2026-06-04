@@ -2,55 +2,13 @@
 
 Defined by the product
 
-- **Full name**: `google.backstory.SecurityResult.ProductSeverity`
-- **Values**: `8`
-
 ## Values
 
-### `UNKNOWN_SEVERITY`
-
-- **Number**: `0`
-
-The default severity level.
-
-### `INFORMATIONAL`
-
-- **Number**: `100`
-
-Info severity.
-
-### `ERROR`
-
-- **Number**: `150`
-
-An error.
-
-### `NONE`
-
-- **Number**: `101`
-
-No malicious result.
-
-### `LOW`
-
-- **Number**: `200`
-
-Low-severity malicious result.
-
-### `MEDIUM`
-
-- **Number**: `300`
-
-Medium-severity malicious result.
-
-### `HIGH`
-
-- **Number**: `400`
-
-High-severity malicious result.
-
-### `CRITICAL`
-
-- **Number**: `500`
-
-Critical-severity malicious result.
+0. `UNKNOWN_SEVERITY`: The default severity level.
+100. `INFORMATIONAL`: Info severity.
+150. `ERROR`: An error.
+101. `NONE`: No malicious result.
+200. `LOW`: Low-severity malicious result.
+300. `MEDIUM`: Medium-severity malicious result.
+400. `HIGH`: High-severity malicious result.
+500. `CRITICAL`: Critical-severity malicious result.

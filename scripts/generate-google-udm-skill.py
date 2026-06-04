@@ -616,18 +616,12 @@ def render_enum_value(
     value: descriptor_pb2.EnumValueDescriptorProto,
 ) -> str:
     comment = source_comment(context, enum_doc.file_name, (*enum_doc.path, 2, value_idx))
-    meta = format_meta(
-        [
-            ("Number", f"`{value.number}`"),
-            ("Deprecated", "`true`" if value.options.deprecated else ""),
-        ]
-    )
-    lines = [f"### `{value.name}`", ""]
-    if meta:
-        lines.extend([meta, ""])
+    value_name = f"`{value.name}`"
+    if value.options.deprecated:
+        value_name += " (deprecated)"
     if comment:
-        lines.extend([comment, ""])
-    return "\n".join(lines).strip() + "\n"
+        return f"{value.number}. {value_name}: {comment}"
+    return f"{value.number}. {value_name}"
 
 
 def render_enum_page(
@@ -638,17 +632,9 @@ def render_enum_page(
 ) -> str:
     enum = enum_doc.descriptor
     comment = source_comment(context, enum_doc.file_name, enum_doc.path)
-    meta = format_meta(
-        [
-            ("Full name", f"`{enum_doc.full_name}`"),
-            ("Values", f"`{len(enum.value)}`"),
-        ]
-    )
     lines = [f"# {title or enum_doc.qualified_name}", ""]
     if comment:
         lines.extend([comment, ""])
-    if meta:
-        lines.extend([meta, ""])
     if enum.value:
         lines.extend(["## Values", ""])
         for value_idx, value in enumerate(enum.value):

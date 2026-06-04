@@ -2,25 +2,8 @@
 
 BOOTP op code. See RFC951, section 3.
 
-- **Full name**: `google.backstory.Dhcp.OpCode`
-- **Values**: `3`
-
 ## Values
 
-### `UNKNOWN_OPCODE`
-
-- **Number**: `0`
-
-Default opcode.
-
-### `BOOTREQUEST`
-
-- **Number**: `1`
-
-Request.
-
-### `BOOTREPLY`
-
-- **Number**: `2`
-
-Reply.
+0. `UNKNOWN_OPCODE`: Default opcode.
+1. `BOOTREQUEST`: Request.
+2. `BOOTREPLY`: Reply.

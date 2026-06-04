@@ -2,25 +2,8 @@
 
 Different Types of threat collections currently supported.
 
-- **Full name**: `google.backstory.SecurityResult.ThreatCollectionType`
-- **Values**: `3`
-
 ## Values
 
-### `THREAT_COLLECTION_TYPE_UNSPECIFIED`
-
-- **Number**: `0`
-
-Threat collection type is unspecified.
-
-### `CAMPAIGN`
-
-- **Number**: `1`
-
-Threat collection type is campaign.
-
-### `REPORT`
-
-- **Number**: `2`
-
-Threat collection type is report.
+0. `THREAT_COLLECTION_TYPE_UNSPECIFIED`: Threat collection type is unspecified.
+1. `CAMPAIGN`: Threat collection type is campaign.
+2. `REPORT`: Threat collection type is report.

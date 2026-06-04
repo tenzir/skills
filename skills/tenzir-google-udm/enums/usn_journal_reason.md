@@ -2,145 +2,28 @@
 
 The reason for the USN journal entry.
 
-- **Full name**: `google.backstory.UsnJournal.Reason`
-- **Values**: `23`
-
 ## Values
 
-### `REASON_UNSPECIFIED`
-
-- **Number**: `0`
-
-Unspecified reason.
-
-### `DATA_OVERWRITE`
-
-- **Number**: `1`
-
-Data overwrite reason.
-
-### `DATA_EXTEND`
-
-- **Number**: `2`
-
-Data extend reason.
-
-### `DATA_TRUNCATION`
-
-- **Number**: `3`
-
-Data truncation reason.
-
-### `NAMED_DATA_OVERWRITE`
-
-- **Number**: `4`
-
-Named data overwrite reason.
-
-### `NAMED_DATA_EXTEND`
-
-- **Number**: `5`
-
-Named data extend reason.
-
-### `NAMED_DATA_TRUNCATION`
-
-- **Number**: `6`
-
-Named data truncation reason.
-
-### `FILE_CREATE`
-
-- **Number**: `7`
-
-File create reason.
-
-### `FILE_DELETE`
-
-- **Number**: `8`
-
-File delete reason.
-
-### `EA_CHANGE`
-
-- **Number**: `9`
-
-EA change reason.
-
-### `SECURITY_CHANGE`
-
-- **Number**: `10`
-
-Security change reason.
-
-### `RENAME_OLD_NAME`
-
-- **Number**: `11`
-
-Rename old name reason.
-
-### `RENAME_NEW_NAME`
-
-- **Number**: `12`
-
-Rename new name reason.
-
-### `INDEXABLE_CHANGE`
-
-- **Number**: `13`
-
-Indexable change reason.
-
-### `BASIC_INFO_CHANGE`
-
-- **Number**: `14`
-
-Basic info change reason.
-
-### `HARD_LINK_CHANGE`
-
-- **Number**: `15`
-
-Hard link change reason.
-
-### `COMPRESSION_CHANGE`
-
-- **Number**: `16`
-
-Compression change reason.
-
-### `ENCRYPTION_CHANGE`
-
-- **Number**: `17`
-
-Encryption change reason.
-
-### `OBJECT_ID_CHANGE`
-
-- **Number**: `18`
-
-Object ID change reason.
-
-### `REPARSE_POINT_CHANGE`
-
-- **Number**: `19`
-
-Reparse point change reason.
-
-### `STREAM_CHANGE`
-
-- **Number**: `20`
-
-Stream change reason.
-
-### `TRANSACTED_CHANGE`
-
-- **Number**: `21`
-
-Transacted change reason.
-
-### `CLOSE`
-
-- **Number**: `22`
-
-Close reason.
+0. `REASON_UNSPECIFIED`: Unspecified reason.
+1. `DATA_OVERWRITE`: Data overwrite reason.
+2. `DATA_EXTEND`: Data extend reason.
+3. `DATA_TRUNCATION`: Data truncation reason.
+4. `NAMED_DATA_OVERWRITE`: Named data overwrite reason.
+5. `NAMED_DATA_EXTEND`: Named data extend reason.
+6. `NAMED_DATA_TRUNCATION`: Named data truncation reason.
+7. `FILE_CREATE`: File create reason.
+8. `FILE_DELETE`: File delete reason.
+9. `EA_CHANGE`: EA change reason.
+10. `SECURITY_CHANGE`: Security change reason.
+11. `RENAME_OLD_NAME`: Rename old name reason.
+12. `RENAME_NEW_NAME`: Rename new name reason.
+13. `INDEXABLE_CHANGE`: Indexable change reason.
+14. `BASIC_INFO_CHANGE`: Basic info change reason.
+15. `HARD_LINK_CHANGE`: Hard link change reason.
+16. `COMPRESSION_CHANGE`: Compression change reason.
+17. `ENCRYPTION_CHANGE`: Encryption change reason.
+18. `OBJECT_ID_CHANGE`: Object ID change reason.
+19. `REPARSE_POINT_CHANGE`: Reparse point change reason.
+20. `STREAM_CHANGE`: Stream change reason.
+21. `TRANSACTED_CHANGE`: Transacted change reason.
+22. `CLOSE`: Close reason.

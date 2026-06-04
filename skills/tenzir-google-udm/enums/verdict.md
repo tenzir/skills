@@ -2,25 +2,8 @@
 
 Categorization options for the validity of a finding (for example, whether it reflects an actual security incident).
 
-- **Full name**: `google.backstory.Verdict`
-- **Values**: `3`
-
 ## Values
 
-### `VERDICT_UNSPECIFIED`
-
-- **Number**: `0`
-
-An unspecified verdict.
-
-### `TRUE_POSITIVE`
-
-- **Number**: `1`
-
-A categorization of the finding as a "true positive".
-
-### `FALSE_POSITIVE`
-
-- **Number**: `2`
-
-A categorization of the finding as a "false positive".
+0. `VERDICT_UNSPECIFIED`: An unspecified verdict.
+1. `TRUE_POSITIVE`: A categorization of the finding as a "true positive".
+2. `FALSE_POSITIVE`: A categorization of the finding as a "false positive".

@@ -2,31 +2,9 @@
 
 Deployment status states.
 
-- **Full name**: `google.backstory.Asset.DeploymentStatus`
-- **Values**: `4`
-
 ## Values
 
-### `DEPLOYMENT_STATUS_UNSPECIFIED`
-
-- **Number**: `0`
-
-Unspecified deployment status.
-
-### `ACTIVE`
-
-- **Number**: `1`
-
-Asset is active, functional and deployed.
-
-### `PENDING_DECOMISSION`
-
-- **Number**: `2`
-
-Asset is pending decommission and no longer deployed.
-
-### `DECOMISSIONED`
-
-- **Number**: `3`
-
-Asset is decommissioned.
+0. `DEPLOYMENT_STATUS_UNSPECIFIED`: Unspecified deployment status.
+1. `ACTIVE`: Asset is active, functional and deployed.
+2. `PENDING_DECOMISSION`: Asset is pending decommission and no longer deployed.
+3. `DECOMISSIONED`: Asset is decommissioned.

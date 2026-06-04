@@ -2,229 +2,42 @@
 
 The type of resource.
 
-- **Full name**: `google.backstory.Resource.ResourceType`
-- **Values**: `37`
-
 ## Values
 
-### `UNSPECIFIED`
-
-- **Number**: `0`
-
-Default type.
-
-### `MUTEX`
-
-- **Number**: `1`
-
-Mutex.
-
-### `TASK`
-
-- **Number**: `2`
-
-Task.
-
-### `PIPE`
-
-- **Number**: `3`
-
-Named pipe.
-
-### `DEVICE`
-
-- **Number**: `4`
-
-Device.
-
-### `FIREWALL_RULE`
-
-- **Number**: `5`
-
-Firewall rule.
-
-### `MAILBOX_FOLDER`
-
-- **Number**: `6`
-
-Mailbox folder.
-
-### `VPC_NETWORK`
-
-- **Number**: `7`
-
-VPC Network.
-
-### `VIRTUAL_MACHINE`
-
-- **Number**: `8`
-
-Virtual machine.
-
-### `STORAGE_BUCKET`
-
-- **Number**: `9`
-
-Storage bucket.
-
-### `STORAGE_OBJECT`
-
-- **Number**: `10`
-
-Storage object.
-
-### `DATABASE`
-
-- **Number**: `11`
-
-Database.
-
-### `TABLE`
-
-- **Number**: `12`
-
-Data table.
-
-### `CLOUD_PROJECT`
-
-- **Number**: `13`
-
-Cloud project.
-
-### `CLOUD_ORGANIZATION`
-
-- **Number**: `14`
-
-Cloud organization.
-
-### `SERVICE_ACCOUNT`
-
-- **Number**: `15`
-
-Service account.
-
-### `ACCESS_POLICY`
-
-- **Number**: `16`
-
-Access policy.
-
-### `CLUSTER`
-
-- **Number**: `17`
-
-Cluster.
-
-### `SETTING`
-
-- **Number**: `18`
-
-Settings.
-
-### `DATASET`
-
-- **Number**: `19`
-
-Dataset.
-
-### `BACKEND_SERVICE`
-
-- **Number**: `20`
-
-Endpoint that receive traffic from a load balancer or proxy.
-
-### `POD`
-
-- **Number**: `21`
-
-Pod, which is a collection of containers. Often used in Kubernetes.
-
-### `CONTAINER`
-
-- **Number**: `22`
-
-Container.
-
-### `FUNCTION`
-
-- **Number**: `23`
-
-Cloud function.
-
-### `RUNTIME`
-
-- **Number**: `24`
-
-Runtime.
-
-### `IP_ADDRESS`
-
-- **Number**: `25`
-
-IP address.
-
-### `DISK`
-
-- **Number**: `26`
-
-Disk.
-
-### `VOLUME`
-
-- **Number**: `27`
-
-Volume.
-
-### `IMAGE`
-
-- **Number**: `28`
-
-Machine image.
-
-### `SNAPSHOT`
-
-- **Number**: `29`
-
-Snapshot.
-
-### `REPOSITORY`
-
-- **Number**: `30`
-
-Repository.
-
-### `CREDENTIAL`
-
-- **Number**: `31`
-
-Credential, e.g. access keys, ssh keys, tokens, certificates.
-
-### `LOAD_BALANCER`
-
-- **Number**: `32`
-
-Load balancer.
-
-### `GATEWAY`
-
-- **Number**: `33`
-
-Gateway.
-
-### `SUBNET`
-
-- **Number**: `34`
-
-Subnet.
-
-### `USER`
-
-- **Number**: `35`
-
-User.
-
-### `SERVICE`
-
-- **Number**: `36`
-
-Service.
+0. `UNSPECIFIED`: Default type.
+1. `MUTEX`: Mutex.
+2. `TASK`: Task.
+3. `PIPE`: Named pipe.
+4. `DEVICE`: Device.
+5. `FIREWALL_RULE`: Firewall rule.
+6. `MAILBOX_FOLDER`: Mailbox folder.
+7. `VPC_NETWORK`: VPC Network.
+8. `VIRTUAL_MACHINE`: Virtual machine.
+9. `STORAGE_BUCKET`: Storage bucket.
+10. `STORAGE_OBJECT`: Storage object.
+11. `DATABASE`: Database.
+12. `TABLE`: Data table.
+13. `CLOUD_PROJECT`: Cloud project.
+14. `CLOUD_ORGANIZATION`: Cloud organization.
+15. `SERVICE_ACCOUNT`: Service account.
+16. `ACCESS_POLICY`: Access policy.
+17. `CLUSTER`: Cluster.
+18. `SETTING`: Settings.
+19. `DATASET`: Dataset.
+20. `BACKEND_SERVICE`: Endpoint that receive traffic from a load balancer or proxy.
+21. `POD`: Pod, which is a collection of containers. Often used in Kubernetes.
+22. `CONTAINER`: Container.
+23. `FUNCTION`: Cloud function.
+24. `RUNTIME`: Runtime.
+25. `IP_ADDRESS`: IP address.
+26. `DISK`: Disk.
+27. `VOLUME`: Volume.
+28. `IMAGE`: Machine image.
+29. `SNAPSHOT`: Snapshot.
+30. `REPOSITORY`: Repository.
+31. `CREDENTIAL`: Credential, e.g. access keys, ssh keys, tokens, certificates.
+32. `LOAD_BALANCER`: Load balancer.
+33. `GATEWAY`: Gateway.
+34. `SUBNET`: Subnet.
+35. `USER`: User.
+36. `SERVICE`: Service.

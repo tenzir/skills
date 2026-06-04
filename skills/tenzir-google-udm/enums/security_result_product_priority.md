@@ -2,31 +2,9 @@
 
 A product priority level.
 
-- **Full name**: `google.backstory.SecurityResult.ProductPriority`
-- **Values**: `4`
-
 ## Values
 
-### `UNKNOWN_PRIORITY`
-
-- **Number**: `0`
-
-Default priority level.
-
-### `LOW_PRIORITY`
-
-- **Number**: `200`
-
-Low priority.
-
-### `MEDIUM_PRIORITY`
-
-- **Number**: `300`
-
-Medium priority.
-
-### `HIGH_PRIORITY`
-
-- **Number**: `400`
-
-High priority.
+0. `UNKNOWN_PRIORITY`: Default priority level.
+200. `LOW_PRIORITY`: Low priority.
+300. `MEDIUM_PRIORITY`: Medium priority.
+400. `HIGH_PRIORITY`: High priority.

@@ -2,1099 +2,187 @@
 
 The file type, for example Microsoft Windows executable.
 
-- **Full name**: `google.backstory.File.FileType`
-- **Values**: `182`
-
 ## Values
 
-### `FILE_TYPE_UNSPECIFIED`
-
-- **Number**: `0`
-
-File type is UNSPECIFIED.
-
-### `FILE_TYPE_PE_EXE`
-
-- **Number**: `1`
-
-File type is PE_EXE.
-
-### `FILE_TYPE_PE_DLL`
-
-- **Number**: `2`
-
-Although DLLs are actually portable executables, this value enables the file type to be identified separately. File type is PE_DLL.
-
-### `FILE_TYPE_MSI`
-
-- **Number**: `3`
-
-File type is MSI.
-
-### `FILE_TYPE_NE_EXE`
-
-- **Number**: `10`
-
-File type is NE_EXE.
-
-### `FILE_TYPE_NE_DLL`
-
-- **Number**: `11`
-
-File type is NE_DLL.
-
-### `FILE_TYPE_DOS_EXE`
-
-- **Number**: `20`
-
-File type is DOS_EXE.
-
-### `FILE_TYPE_DOS_COM`
-
-- **Number**: `21`
-
-File type is DOS_COM.
-
-### `FILE_TYPE_COFF`
-
-- **Number**: `30`
-
-File type is COFF.
-
-### `FILE_TYPE_ELF`
-
-- **Number**: `31`
-
-File type is ELF.
-
-### `FILE_TYPE_LINUX_KERNEL`
-
-- **Number**: `32`
-
-File type is LINUX_KERNEL.
-
-### `FILE_TYPE_RPM`
-
-- **Number**: `33`
-
-File type is RPM.
-
-### `FILE_TYPE_LINUX`
-
-- **Number**: `34`
-
-File type is LINUX.
-
-### `FILE_TYPE_MACH_O`
-
-- **Number**: `35`
-
-File type is MACH_O.
-
-### `FILE_TYPE_JAVA_BYTECODE`
-
-- **Number**: `36`
-
-File type is JAVA_BYTECODE.
-
-### `FILE_TYPE_DMG`
-
-- **Number**: `37`
-
-File type is DMG.
-
-### `FILE_TYPE_DEB`
-
-- **Number**: `38`
-
-File type is DEB.
-
-### `FILE_TYPE_PKG`
-
-- **Number**: `39`
-
-File type is PKG.
-
-### `FILE_TYPE_PYC`
-
-- **Number**: `40`
-
-File type is PYC.
-
-### `FILE_TYPE_LNK`
-
-- **Number**: `50`
-
-File type is LNK.
-
-### `FILE_TYPE_DESKTOP_ENTRY`
-
-- **Number**: `51`
-
-File type is DESKTOP_ENTRY.
-
-### `FILE_TYPE_JPEG`
-
-- **Number**: `100`
-
-File type is JPEG.
-
-### `FILE_TYPE_TIFF`
-
-- **Number**: `101`
-
-File type is TIFF.
-
-### `FILE_TYPE_GIF`
-
-- **Number**: `102`
-
-File type is GIF.
-
-### `FILE_TYPE_PNG`
-
-- **Number**: `103`
-
-File type is PNG.
-
-### `FILE_TYPE_BMP`
-
-- **Number**: `104`
-
-File type is BMP.
-
-### `FILE_TYPE_GIMP`
-
-- **Number**: `105`
-
-File type is GIMP.
-
-### `FILE_TYPE_IN_DESIGN`
-
-- **Number**: `106`
-
-File type is Adobe InDesign.
-
-### `FILE_TYPE_PSD`
-
-- **Number**: `107`
-
-File type is PSD. Adobe Photoshop.
-
-### `FILE_TYPE_TARGA`
-
-- **Number**: `108`
-
-File type is TARGA.
-
-### `FILE_TYPE_XWD`
-
-- **Number**: `109`
-
-File type is XWD.
-
-### `FILE_TYPE_DIB`
-
-- **Number**: `110`
-
-File type is DIB.
-
-### `FILE_TYPE_JNG`
-
-- **Number**: `111`
-
-File type is JNG.
-
-### `FILE_TYPE_ICO`
-
-- **Number**: `112`
-
-File type is ICO.
-
-### `FILE_TYPE_FPX`
-
-- **Number**: `113`
-
-File type is FPX.
-
-### `FILE_TYPE_EPS`
-
-- **Number**: `114`
-
-File type is EPS.
-
-### `FILE_TYPE_SVG`
-
-- **Number**: `115`
-
-File type is SVG.
-
-### `FILE_TYPE_EMF`
-
-- **Number**: `116`
-
-File type is EMF.
-
-### `FILE_TYPE_WEBP`
-
-- **Number**: `117`
-
-File type is WEBP.
-
-### `FILE_TYPE_DWG`
-
-- **Number**: `118`
-
-File type is DWG.
-
-### `FILE_TYPE_DXF`
-
-- **Number**: `119`
-
-File type is DXF.
-
-### `FILE_TYPE_THREEDS`
-
-- **Number**: `120`
-
-File type is 3DS.
-
-### `FILE_TYPE_OGG`
-
-- **Number**: `150`
-
-File type is OGG.
-
-### `FILE_TYPE_FLC`
-
-- **Number**: `151`
-
-File type is FLC.
-
-### `FILE_TYPE_FLI`
-
-- **Number**: `152`
-
-File type is FLI.
-
-### `FILE_TYPE_MP3`
-
-- **Number**: `153`
-
-File type is MP3.
-
-### `FILE_TYPE_FLAC`
-
-- **Number**: `154`
-
-File type is FLAC.
-
-### `FILE_TYPE_WAV`
-
-- **Number**: `155`
-
-File type is WAV.
-
-### `FILE_TYPE_MIDI`
-
-- **Number**: `156`
-
-File type is MIDI.
-
-### `FILE_TYPE_AVI`
-
-- **Number**: `157`
-
-File type is AVI.
-
-### `FILE_TYPE_MPEG`
-
-- **Number**: `158`
-
-File type is MPEG.
-
-### `FILE_TYPE_QUICKTIME`
-
-- **Number**: `159`
-
-File type is QUICKTIME.
-
-### `FILE_TYPE_ASF`
-
-- **Number**: `160`
-
-File type is ASF.
-
-### `FILE_TYPE_DIVX`
-
-- **Number**: `161`
-
-File type is DIVX.
-
-### `FILE_TYPE_FLV`
-
-- **Number**: `162`
-
-File type is FLV.
-
-### `FILE_TYPE_WMA`
-
-- **Number**: `163`
-
-File type is WMA.
-
-### `FILE_TYPE_WMV`
-
-- **Number**: `164`
-
-File type is WMV.
-
-### `FILE_TYPE_RM`
-
-- **Number**: `165`
-
-File type is RM. RealMedia type.
-
-### `FILE_TYPE_MOV`
-
-- **Number**: `166`
-
-File type is MOV.
-
-### `FILE_TYPE_MP4`
-
-- **Number**: `167`
-
-File type is MP4.
-
-### `FILE_TYPE_T3GP`
-
-- **Number**: `168`
-
-File type is T3GP.
-
-### `FILE_TYPE_WEBM`
-
-- **Number**: `169`
-
-File type is WEBM.
-
-### `FILE_TYPE_MKV`
-
-- **Number**: `170`
-
-File type is MKV.
-
-### `FILE_TYPE_PDF`
-
-- **Number**: `200`
-
-File type is PDF.
-
-### `FILE_TYPE_PS`
-
-- **Number**: `201`
-
-File type is PS.
-
-### `FILE_TYPE_DOC`
-
-- **Number**: `202`
-
-File type is DOC.
-
-### `FILE_TYPE_DOCX`
-
-- **Number**: `203`
-
-File type is DOCX.
-
-### `FILE_TYPE_PPT`
-
-- **Number**: `204`
-
-File type is PPT.
-
-### `FILE_TYPE_PPTX`
-
-- **Number**: `205`
-
-File type is PPTX.
-
-### `FILE_TYPE_XLS`
-
-- **Number**: `206`
-
-File type is XLS.
-
-### `FILE_TYPE_XLSX`
-
-- **Number**: `207`
-
-File type is XLSX.
-
-### `FILE_TYPE_RTF`
-
-- **Number**: `208`
-
-File type is RTF.
-
-### `FILE_TYPE_PPSX`
-
-- **Number**: `209`
-
-File type is PPSX.
-
-### `FILE_TYPE_ODP`
-
-- **Number**: `250`
-
-File type is ODP.
-
-### `FILE_TYPE_ODS`
-
-- **Number**: `251`
-
-File type is ODS.
-
-### `FILE_TYPE_ODT`
-
-- **Number**: `252`
-
-File type is ODT.
-
-### `FILE_TYPE_HWP`
-
-- **Number**: `253`
-
-File type is HWP.
-
-### `FILE_TYPE_GUL`
-
-- **Number**: `254`
-
-File type is GUL.
-
-### `FILE_TYPE_ODF`
-
-- **Number**: `255`
-
-File type is ODF.
-
-### `FILE_TYPE_ODG`
-
-- **Number**: `256`
-
-File type is ODG.
-
-### `FILE_TYPE_ONE_NOTE`
-
-- **Number**: `257`
-
-File type is ONE_NOTE.
-
-### `FILE_TYPE_OOXML`
-
-- **Number**: `258`
-
-File type is OOXML.
-
-### `FILE_TYPE_SLK`
-
-- **Number**: `259`
-
-File type is SLK.
-
-### `FILE_TYPE_EBOOK`
-
-- **Number**: `260`
-
-File type is EBOOK.
-
-### `FILE_TYPE_LATEX`
-
-- **Number**: `261`
-
-File type is LATEX.
-
-### `FILE_TYPE_TTF`
-
-- **Number**: `262`
-
-File type is TTF.
-
-### `FILE_TYPE_EOT`
-
-- **Number**: `263`
-
-File type is EOT.
-
-### `FILE_TYPE_WOFF`
-
-- **Number**: `264`
-
-File type is WOFF.
-
-### `FILE_TYPE_CHM`
-
-- **Number**: `265`
-
-File type is CHM.
-
-### `FILE_TYPE_ZIP`
-
-- **Number**: `300`
-
-File type is ZIP.
-
-### `FILE_TYPE_GZIP`
-
-- **Number**: `301`
-
-File type is GZIP.
-
-### `FILE_TYPE_BZIP`
-
-- **Number**: `302`
-
-File type is BZIP.
-
-### `FILE_TYPE_RZIP`
-
-- **Number**: `303`
-
-File type is RZIP.
-
-### `FILE_TYPE_DZIP`
-
-- **Number**: `304`
-
-File type is DZIP.
-
-### `FILE_TYPE_SEVENZIP`
-
-- **Number**: `305`
-
-File type is SEVENZIP.
-
-### `FILE_TYPE_CAB`
-
-- **Number**: `306`
-
-File type is CAB.
-
-### `FILE_TYPE_JAR`
-
-- **Number**: `307`
-
-File type is JAR.
-
-### `FILE_TYPE_RAR`
-
-- **Number**: `308`
-
-File type is RAR.
-
-### `FILE_TYPE_MSCOMPRESS`
-
-- **Number**: `309`
-
-File type is MSCOMPRESS.
-
-### `FILE_TYPE_ACE`
-
-- **Number**: `310`
-
-File type is ACE.
-
-### `FILE_TYPE_ARC`
-
-- **Number**: `311`
-
-File type is ARC.
-
-### `FILE_TYPE_ARJ`
-
-- **Number**: `312`
-
-File type is ARJ.
-
-### `FILE_TYPE_ASD`
-
-- **Number**: `313`
-
-File type is ASD.
-
-### `FILE_TYPE_BLACKHOLE`
-
-- **Number**: `314`
-
-File type is BLACKHOLE.
-
-### `FILE_TYPE_KGB`
-
-- **Number**: `315`
-
-File type is KGB.
-
-### `FILE_TYPE_ZLIB`
-
-- **Number**: `316`
-
-File type is ZLIB.
-
-### `FILE_TYPE_TAR`
-
-- **Number**: `317`
-
-File type is TAR.
-
-### `FILE_TYPE_ZST`
-
-- **Number**: `318`
-
-File type is ZST.
-
-### `FILE_TYPE_LZFSE`
-
-- **Number**: `319`
-
-File type is LZFSE.
-
-### `FILE_TYPE_PYTHON_WHL`
-
-- **Number**: `320`
-
-File type is PYTHON_WHL.
-
-### `FILE_TYPE_PYTHON_PKG`
-
-- **Number**: `321`
-
-File type is PYTHON_PKG.
-
-### `FILE_TYPE_MSIX`
-
-- **Number**: `322`
-
-File type is MSIX, new Windows app package format.
-
-### `FILE_TYPE_TEXT`
-
-- **Number**: `400`
-
-File type is TEXT.
-
-### `FILE_TYPE_SCRIPT`
-
-- **Number**: `401`
-
-File type is SCRIPT.
-
-### `FILE_TYPE_PHP`
-
-- **Number**: `402`
-
-File type is PHP.
-
-### `FILE_TYPE_PYTHON`
-
-- **Number**: `403`
-
-File type is PYTHON.
-
-### `FILE_TYPE_PERL`
-
-- **Number**: `404`
-
-File type is PERL.
-
-### `FILE_TYPE_RUBY`
-
-- **Number**: `405`
-
-File type is RUBY.
-
-### `FILE_TYPE_C`
-
-- **Number**: `406`
-
-File type is C.
-
-### `FILE_TYPE_CPP`
-
-- **Number**: `407`
-
-File type is CPP.
-
-### `FILE_TYPE_JAVA`
-
-- **Number**: `408`
-
-File type is JAVA.
-
-### `FILE_TYPE_SHELLSCRIPT`
-
-- **Number**: `409`
-
-File type is SHELLSCRIPT.
-
-### `FILE_TYPE_PASCAL`
-
-- **Number**: `410`
-
-File type is PASCAL.
-
-### `FILE_TYPE_AWK`
-
-- **Number**: `411`
-
-File type is AWK.
-
-### `FILE_TYPE_DYALOG`
-
-- **Number**: `412`
-
-File type is DYALOG.
-
-### `FILE_TYPE_FORTRAN`
-
-- **Number**: `413`
-
-File type is FORTRAN.
-
-### `FILE_TYPE_JAVASCRIPT`
-
-- **Number**: `414`
-
-File type is JAVASCRIPT.
-
-### `FILE_TYPE_POWERSHELL`
-
-- **Number**: `415`
-
-File type is POWERSHELL.
-
-### `FILE_TYPE_VBA`
-
-- **Number**: `416`
-
-File type is VBA.
-
-### `FILE_TYPE_M4`
-
-- **Number**: `417`
-
-File type is M4.
-
-### `FILE_TYPE_OBJETIVEC`
-
-- **Number**: `418`
-
-File type is OBJETIVEC.
-
-### `FILE_TYPE_JMOD`
-
-- **Number**: `419`
-
-File type is JMOD.
-
-### `FILE_TYPE_MAKEFILE`
-
-- **Number**: `420`
-
-File type is MAKEFILE.
-
-### `FILE_TYPE_INI`
-
-- **Number**: `421`
-
-File type is INI.
-
-### `FILE_TYPE_CLJ`
-
-- **Number**: `422`
-
-File type is CLJ.
-
-### `FILE_TYPE_PDB`
-
-- **Number**: `425`
-
-File type is PDB.
-
-### `FILE_TYPE_SQL`
-
-- **Number**: `426`
-
-File type is SQL.
-
-### `FILE_TYPE_NEKO`
-
-- **Number**: `427`
-
-File type is NEKO.
-
-### `FILE_TYPE_WER`
-
-- **Number**: `428`
-
-File type is WER.
-
-### `FILE_TYPE_GOLANG`
-
-- **Number**: `429`
-
-File type is GOLANG.
-
-### `FILE_TYPE_M3U`
-
-- **Number**: `430`
-
-File type is M3U.
-
-### `FILE_TYPE_BAT`
-
-- **Number**: `431`
-
-File type is BAT, Windows .bat/.cmd (old files are tagged as SHELLSCRIPT).
-
-### `FILE_TYPE_MSC`
-
-- **Number**: `432`
-
-File type is MSC, Microsoft Management Console (MMC).
-
-### `FILE_TYPE_RDP`
-
-- **Number**: `433`
-
-File type is RDP, Microsoft Remote Desktop Protocol (RDP) file.
-
-### `FILE_TYPE_SYMBIAN`
-
-- **Number**: `500`
-
-File type is SYMBIAN.
-
-### `FILE_TYPE_PALMOS`
-
-- **Number**: `501`
-
-File type is PALMOS.
-
-### `FILE_TYPE_WINCE`
-
-- **Number**: `502`
-
-File type is WINCE.
-
-### `FILE_TYPE_ANDROID`
-
-- **Number**: `503`
-
-File type is ANDROID.
-
-### `FILE_TYPE_IPHONE`
-
-- **Number**: `504`
-
-File type is IPHONE.
-
-### `FILE_TYPE_HTML`
-
-- **Number**: `600`
-
-File type is HTML.
-
-### `FILE_TYPE_XML`
-
-- **Number**: `601`
-
-File type is XML.
-
-### `FILE_TYPE_SWF`
-
-- **Number**: `602`
-
-File type is SWF.
-
-### `FILE_TYPE_FLA`
-
-- **Number**: `603`
-
-File type is FLA.
-
-### `FILE_TYPE_COOKIE`
-
-- **Number**: `604`
-
-File type is COOKIE.
-
-### `FILE_TYPE_TORRENT`
-
-- **Number**: `605`
-
-File type is TORRENT.
-
-### `FILE_TYPE_EMAIL_TYPE`
-
-- **Number**: `606`
-
-File type is EMAIL_TYPE.
-
-### `FILE_TYPE_OUTLOOK`
-
-- **Number**: `607`
-
-File type is OUTLOOK.
-
-### `FILE_TYPE_SGML`
-
-- **Number**: `608`
-
-File type is SGML.
-
-### `FILE_TYPE_JSON`
-
-- **Number**: `609`
-
-File type is JSON.
-
-### `FILE_TYPE_CSV`
-
-- **Number**: `610`
-
-File type is CSV.
-
-### `FILE_TYPE_HTA`
-
-- **Number**: `611`
-
-File type is HTA (HTML Application).
-
-### `FILE_TYPE_INTERNET_SHORTCUT`
-
-- **Number**: `612`
-
-File type is MSHTML .url.
-
-### `FILE_TYPE_CAP`
-
-- **Number**: `700`
-
-File type is CAP.
-
-### `FILE_TYPE_ISOIMAGE`
-
-- **Number**: `800`
-
-File type is ISOIMAGE.
-
-### `FILE_TYPE_SQUASHFS`
-
-- **Number**: `801`
-
-File type is SQUASHFS.
-
-### `FILE_TYPE_VHD`
-
-- **Number**: `802`
-
-File type is VHD.
-
-### `FILE_TYPE_APPLE`
-
-- **Number**: `1000`
-
-File type is APPLE.
-
-### `FILE_TYPE_MACINTOSH`
-
-- **Number**: `1001`
-
-File type is MACINTOSH.
-
-### `FILE_TYPE_APPLESINGLE`
-
-- **Number**: `1002`
-
-File type is APPLESINGLE.
-
-### `FILE_TYPE_APPLEDOUBLE`
-
-- **Number**: `1003`
-
-File type is APPLEDOUBLE.
-
-### `FILE_TYPE_MACINTOSH_HFS`
-
-- **Number**: `1004`
-
-File type is MACINTOSH_HFS.
-
-### `FILE_TYPE_APPLE_PLIST`
-
-- **Number**: `1005`
-
-File type is APPLE_PLIST.
-
-### `FILE_TYPE_MACINTOSH_LIB`
-
-- **Number**: `1006`
-
-File type is MACINTOSH_LIB.
-
-### `FILE_TYPE_APPLESCRIPT`
-
-- **Number**: `1007`
-
-File type is APPLESCRIPT.
-
-### `FILE_TYPE_APPLESCRIPT_COMPILED`
-
-- **Number**: `1008`
-
-File type is APPLESCRIPT_COMPILED .
-
-### `FILE_TYPE_CRX`
-
-- **Number**: `1100`
-
-File type is CRX.
-
-### `FILE_TYPE_XPI`
-
-- **Number**: `1101`
-
-File type is XPI.
-
-### `FILE_TYPE_ROM`
-
-- **Number**: `1200`
-
-File type is ROM.
-
-### `FILE_TYPE_IPS`
-
-- **Number**: `1201`
-
-File type is IPS.
-
-### `FILE_TYPE_PEM`
-
-- **Number**: `1300`
-
-File type is PEM.
-
-### `FILE_TYPE_PGP`
-
-- **Number**: `1301`
-
-File type is PGP.
-
-### `FILE_TYPE_CRT`
-
-- **Number**: `1302`
-
-File type is CRT.
+0. `FILE_TYPE_UNSPECIFIED`: File type is UNSPECIFIED.
+1. `FILE_TYPE_PE_EXE`: File type is PE_EXE.
+2. `FILE_TYPE_PE_DLL`: Although DLLs are actually portable executables, this value enables the file type to be identified separately. File type is PE_DLL.
+3. `FILE_TYPE_MSI`: File type is MSI.
+10. `FILE_TYPE_NE_EXE`: File type is NE_EXE.
+11. `FILE_TYPE_NE_DLL`: File type is NE_DLL.
+20. `FILE_TYPE_DOS_EXE`: File type is DOS_EXE.
+21. `FILE_TYPE_DOS_COM`: File type is DOS_COM.
+30. `FILE_TYPE_COFF`: File type is COFF.
+31. `FILE_TYPE_ELF`: File type is ELF.
+32. `FILE_TYPE_LINUX_KERNEL`: File type is LINUX_KERNEL.
+33. `FILE_TYPE_RPM`: File type is RPM.
+34. `FILE_TYPE_LINUX`: File type is LINUX.
+35. `FILE_TYPE_MACH_O`: File type is MACH_O.
+36. `FILE_TYPE_JAVA_BYTECODE`: File type is JAVA_BYTECODE.
+37. `FILE_TYPE_DMG`: File type is DMG.
+38. `FILE_TYPE_DEB`: File type is DEB.
+39. `FILE_TYPE_PKG`: File type is PKG.
+40. `FILE_TYPE_PYC`: File type is PYC.
+50. `FILE_TYPE_LNK`: File type is LNK.
+51. `FILE_TYPE_DESKTOP_ENTRY`: File type is DESKTOP_ENTRY.
+100. `FILE_TYPE_JPEG`: File type is JPEG.
+101. `FILE_TYPE_TIFF`: File type is TIFF.
+102. `FILE_TYPE_GIF`: File type is GIF.
+103. `FILE_TYPE_PNG`: File type is PNG.
+104. `FILE_TYPE_BMP`: File type is BMP.
+105. `FILE_TYPE_GIMP`: File type is GIMP.
+106. `FILE_TYPE_IN_DESIGN`: File type is Adobe InDesign.
+107. `FILE_TYPE_PSD`: File type is PSD. Adobe Photoshop.
+108. `FILE_TYPE_TARGA`: File type is TARGA.
+109. `FILE_TYPE_XWD`: File type is XWD.
+110. `FILE_TYPE_DIB`: File type is DIB.
+111. `FILE_TYPE_JNG`: File type is JNG.
+112. `FILE_TYPE_ICO`: File type is ICO.
+113. `FILE_TYPE_FPX`: File type is FPX.
+114. `FILE_TYPE_EPS`: File type is EPS.
+115. `FILE_TYPE_SVG`: File type is SVG.
+116. `FILE_TYPE_EMF`: File type is EMF.
+117. `FILE_TYPE_WEBP`: File type is WEBP.
+118. `FILE_TYPE_DWG`: File type is DWG.
+119. `FILE_TYPE_DXF`: File type is DXF.
+120. `FILE_TYPE_THREEDS`: File type is 3DS.
+150. `FILE_TYPE_OGG`: File type is OGG.
+151. `FILE_TYPE_FLC`: File type is FLC.
+152. `FILE_TYPE_FLI`: File type is FLI.
+153. `FILE_TYPE_MP3`: File type is MP3.
+154. `FILE_TYPE_FLAC`: File type is FLAC.
+155. `FILE_TYPE_WAV`: File type is WAV.
+156. `FILE_TYPE_MIDI`: File type is MIDI.
+157. `FILE_TYPE_AVI`: File type is AVI.
+158. `FILE_TYPE_MPEG`: File type is MPEG.
+159. `FILE_TYPE_QUICKTIME`: File type is QUICKTIME.
+160. `FILE_TYPE_ASF`: File type is ASF.
+161. `FILE_TYPE_DIVX`: File type is DIVX.
+162. `FILE_TYPE_FLV`: File type is FLV.
+163. `FILE_TYPE_WMA`: File type is WMA.
+164. `FILE_TYPE_WMV`: File type is WMV.
+165. `FILE_TYPE_RM`: File type is RM. RealMedia type.
+166. `FILE_TYPE_MOV`: File type is MOV.
+167. `FILE_TYPE_MP4`: File type is MP4.
+168. `FILE_TYPE_T3GP`: File type is T3GP.
+169. `FILE_TYPE_WEBM`: File type is WEBM.
+170. `FILE_TYPE_MKV`: File type is MKV.
+200. `FILE_TYPE_PDF`: File type is PDF.
+201. `FILE_TYPE_PS`: File type is PS.
+202. `FILE_TYPE_DOC`: File type is DOC.
+203. `FILE_TYPE_DOCX`: File type is DOCX.
+204. `FILE_TYPE_PPT`: File type is PPT.
+205. `FILE_TYPE_PPTX`: File type is PPTX.
+206. `FILE_TYPE_XLS`: File type is XLS.
+207. `FILE_TYPE_XLSX`: File type is XLSX.
+208. `FILE_TYPE_RTF`: File type is RTF.
+209. `FILE_TYPE_PPSX`: File type is PPSX.
+250. `FILE_TYPE_ODP`: File type is ODP.
+251. `FILE_TYPE_ODS`: File type is ODS.
+252. `FILE_TYPE_ODT`: File type is ODT.
+253. `FILE_TYPE_HWP`: File type is HWP.
+254. `FILE_TYPE_GUL`: File type is GUL.
+255. `FILE_TYPE_ODF`: File type is ODF.
+256. `FILE_TYPE_ODG`: File type is ODG.
+257. `FILE_TYPE_ONE_NOTE`: File type is ONE_NOTE.
+258. `FILE_TYPE_OOXML`: File type is OOXML.
+259. `FILE_TYPE_SLK`: File type is SLK.
+260. `FILE_TYPE_EBOOK`: File type is EBOOK.
+261. `FILE_TYPE_LATEX`: File type is LATEX.
+262. `FILE_TYPE_TTF`: File type is TTF.
+263. `FILE_TYPE_EOT`: File type is EOT.
+264. `FILE_TYPE_WOFF`: File type is WOFF.
+265. `FILE_TYPE_CHM`: File type is CHM.
+300. `FILE_TYPE_ZIP`: File type is ZIP.
+301. `FILE_TYPE_GZIP`: File type is GZIP.
+302. `FILE_TYPE_BZIP`: File type is BZIP.
+303. `FILE_TYPE_RZIP`: File type is RZIP.
+304. `FILE_TYPE_DZIP`: File type is DZIP.
+305. `FILE_TYPE_SEVENZIP`: File type is SEVENZIP.
+306. `FILE_TYPE_CAB`: File type is CAB.
+307. `FILE_TYPE_JAR`: File type is JAR.
+308. `FILE_TYPE_RAR`: File type is RAR.
+309. `FILE_TYPE_MSCOMPRESS`: File type is MSCOMPRESS.
+310. `FILE_TYPE_ACE`: File type is ACE.
+311. `FILE_TYPE_ARC`: File type is ARC.
+312. `FILE_TYPE_ARJ`: File type is ARJ.
+313. `FILE_TYPE_ASD`: File type is ASD.
+314. `FILE_TYPE_BLACKHOLE`: File type is BLACKHOLE.
+315. `FILE_TYPE_KGB`: File type is KGB.
+316. `FILE_TYPE_ZLIB`: File type is ZLIB.
+317. `FILE_TYPE_TAR`: File type is TAR.
+318. `FILE_TYPE_ZST`: File type is ZST.
+319. `FILE_TYPE_LZFSE`: File type is LZFSE.
+320. `FILE_TYPE_PYTHON_WHL`: File type is PYTHON_WHL.
+321. `FILE_TYPE_PYTHON_PKG`: File type is PYTHON_PKG.
+322. `FILE_TYPE_MSIX`: File type is MSIX, new Windows app package format.
+400. `FILE_TYPE_TEXT`: File type is TEXT.
+401. `FILE_TYPE_SCRIPT`: File type is SCRIPT.
+402. `FILE_TYPE_PHP`: File type is PHP.
+403. `FILE_TYPE_PYTHON`: File type is PYTHON.
+404. `FILE_TYPE_PERL`: File type is PERL.
+405. `FILE_TYPE_RUBY`: File type is RUBY.
+406. `FILE_TYPE_C`: File type is C.
+407. `FILE_TYPE_CPP`: File type is CPP.
+408. `FILE_TYPE_JAVA`: File type is JAVA.
+409. `FILE_TYPE_SHELLSCRIPT`: File type is SHELLSCRIPT.
+410. `FILE_TYPE_PASCAL`: File type is PASCAL.
+411. `FILE_TYPE_AWK`: File type is AWK.
+412. `FILE_TYPE_DYALOG`: File type is DYALOG.
+413. `FILE_TYPE_FORTRAN`: File type is FORTRAN.
+414. `FILE_TYPE_JAVASCRIPT`: File type is JAVASCRIPT.
+415. `FILE_TYPE_POWERSHELL`: File type is POWERSHELL.
+416. `FILE_TYPE_VBA`: File type is VBA.
+417. `FILE_TYPE_M4`: File type is M4.
+418. `FILE_TYPE_OBJETIVEC`: File type is OBJETIVEC.
+419. `FILE_TYPE_JMOD`: File type is JMOD.
+420. `FILE_TYPE_MAKEFILE`: File type is MAKEFILE.
+421. `FILE_TYPE_INI`: File type is INI.
+422. `FILE_TYPE_CLJ`: File type is CLJ.
+425. `FILE_TYPE_PDB`: File type is PDB.
+426. `FILE_TYPE_SQL`: File type is SQL.
+427. `FILE_TYPE_NEKO`: File type is NEKO.
+428. `FILE_TYPE_WER`: File type is WER.
+429. `FILE_TYPE_GOLANG`: File type is GOLANG.
+430. `FILE_TYPE_M3U`: File type is M3U.
+431. `FILE_TYPE_BAT`: File type is BAT, Windows .bat/.cmd (old files are tagged as SHELLSCRIPT).
+432. `FILE_TYPE_MSC`: File type is MSC, Microsoft Management Console (MMC).
+433. `FILE_TYPE_RDP`: File type is RDP, Microsoft Remote Desktop Protocol (RDP) file.
+500. `FILE_TYPE_SYMBIAN`: File type is SYMBIAN.
+501. `FILE_TYPE_PALMOS`: File type is PALMOS.
+502. `FILE_TYPE_WINCE`: File type is WINCE.
+503. `FILE_TYPE_ANDROID`: File type is ANDROID.
+504. `FILE_TYPE_IPHONE`: File type is IPHONE.
+600. `FILE_TYPE_HTML`: File type is HTML.
+601. `FILE_TYPE_XML`: File type is XML.
+602. `FILE_TYPE_SWF`: File type is SWF.
+603. `FILE_TYPE_FLA`: File type is FLA.
+604. `FILE_TYPE_COOKIE`: File type is COOKIE.
+605. `FILE_TYPE_TORRENT`: File type is TORRENT.
+606. `FILE_TYPE_EMAIL_TYPE`: File type is EMAIL_TYPE.
+607. `FILE_TYPE_OUTLOOK`: File type is OUTLOOK.
+608. `FILE_TYPE_SGML`: File type is SGML.
+609. `FILE_TYPE_JSON`: File type is JSON.
+610. `FILE_TYPE_CSV`: File type is CSV.
+611. `FILE_TYPE_HTA`: File type is HTA (HTML Application).
+612. `FILE_TYPE_INTERNET_SHORTCUT`: File type is MSHTML .url.
+700. `FILE_TYPE_CAP`: File type is CAP.
+800. `FILE_TYPE_ISOIMAGE`: File type is ISOIMAGE.
+801. `FILE_TYPE_SQUASHFS`: File type is SQUASHFS.
+802. `FILE_TYPE_VHD`: File type is VHD.
+1000. `FILE_TYPE_APPLE`: File type is APPLE.
+1001. `FILE_TYPE_MACINTOSH`: File type is MACINTOSH.
+1002. `FILE_TYPE_APPLESINGLE`: File type is APPLESINGLE.
+1003. `FILE_TYPE_APPLEDOUBLE`: File type is APPLEDOUBLE.
+1004. `FILE_TYPE_MACINTOSH_HFS`: File type is MACINTOSH_HFS.
+1005. `FILE_TYPE_APPLE_PLIST`: File type is APPLE_PLIST.
+1006. `FILE_TYPE_MACINTOSH_LIB`: File type is MACINTOSH_LIB.
+1007. `FILE_TYPE_APPLESCRIPT`: File type is APPLESCRIPT.
+1008. `FILE_TYPE_APPLESCRIPT_COMPILED`: File type is APPLESCRIPT_COMPILED .
+1100. `FILE_TYPE_CRX`: File type is CRX.
+1101. `FILE_TYPE_XPI`: File type is XPI.
+1200. `FILE_TYPE_ROM`: File type is ROM.
+1201. `FILE_TYPE_IPS`: File type is IPS.
+1300. `FILE_TYPE_PEM`: File type is PEM.
+1301. `FILE_TYPE_PGP`: File type is PGP.
+1302. `FILE_TYPE_CRT`: File type is CRT.

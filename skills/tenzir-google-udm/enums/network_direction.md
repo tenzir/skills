@@ -2,31 +2,9 @@
 
 A network traffic direction.
 
-- **Full name**: `google.backstory.Network.Direction`
-- **Values**: `4`
-
 ## Values
 
-### `UNKNOWN_DIRECTION`
-
-- **Number**: `0`
-
-The default direction.
-
-### `INBOUND`
-
-- **Number**: `1`
-
-An inbound request.
-
-### `OUTBOUND`
-
-- **Number**: `2`
-
-An outbound request.
-
-### `BROADCAST`
-
-- **Number**: `3`
-
-A broadcast.
+0. `UNKNOWN_DIRECTION`: The default direction.
+1. `INBOUND`: An inbound request.
+2. `OUTBOUND`: An outbound request.
+3. `BROADCAST`: A broadcast.
