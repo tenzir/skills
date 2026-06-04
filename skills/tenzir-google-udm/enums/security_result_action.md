@@ -4,10 +4,10 @@ Enum representing different possible actions taken by the product that created t
 
 ## Values
 
-0. `UNKNOWN_ACTION`: The default action.
-1. `ALLOW`: Allowed.
-2. `BLOCK`: Blocked.
-3. `ALLOW_WITH_MODIFICATION`: Strip, modify something (e.g. File or email was disinfected or rewritten and still forwarded).
-4. `QUARANTINE`: Put somewhere for later analysis (does NOT imply block).
-5. `FAIL`: Failed (e.g. the event was allowed but failed).
-6. `CHALLENGE`: Challenged (e.g. the user was challenged by a Captcha, 2FA).
+- `UNKNOWN_ACTION` (0): The default action.
+- `ALLOW` (1): Allowed.
+- `BLOCK` (2): Blocked.
+- `ALLOW_WITH_MODIFICATION` (3): Strip, modify something (e.g. File or email was disinfected or rewritten and still forwarded).
+- `QUARANTINE` (4): Put somewhere for later analysis (does NOT imply block).
+- `FAIL` (5): Failed (e.g. the event was allowed but failed).
+- `CHALLENGE` (6): Challenged (e.g. the user was challenged by a Captcha, 2FA).

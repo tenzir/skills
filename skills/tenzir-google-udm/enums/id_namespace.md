@@ -4,12 +4,12 @@ Extracted Namespace Component
 
 ## Values
 
-0. `NORMALIZED_TELEMETRY`: Ingested and Normalized telemetry events
-1. `RAW_TELEMETRY`: Ingested Raw telemetry
-2. `RULE_DETECTIONS`: Chronicle Rules engine
-3. `UPPERCASE`: Uppercase
-4. `MACHINE_INTELLIGENCE`: DSML - Machine Intelligence
-5. `SECURITY_COMMAND_CENTER`: A normalized telemetry event from Google Security Command Center.
-6. `UNSPECIFIED`: Unspecified Namespace
-7. `SOAR_ALERT`: An alert coming from other SIEMs via Chronicle SOAR.
-8. `VIRUS_TOTAL`: VirusTotal.
+- `NORMALIZED_TELEMETRY` (0): Ingested and Normalized telemetry events
+- `RAW_TELEMETRY` (1): Ingested Raw telemetry
+- `RULE_DETECTIONS` (2): Chronicle Rules engine
+- `UPPERCASE` (3): Uppercase
+- `MACHINE_INTELLIGENCE` (4): DSML - Machine Intelligence
+- `SECURITY_COMMAND_CENTER` (5): A normalized telemetry event from Google Security Command Center.
+- `UNSPECIFIED` (6): Unspecified Namespace
+- `SOAR_ALERT` (7): An alert coming from other SIEMs via Chronicle SOAR.
+- `VIRUS_TOTAL` (8): VirusTotal.

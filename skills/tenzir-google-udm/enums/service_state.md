@@ -4,12 +4,12 @@ The current status of the service.
 
 ## Values
 
-0. `STATE_UNSPECIFIED`: Default service status.
-1. `RUNNING`: The service is running.
-2. `STOPPED`: The service is stopped. This is a Windows-specific service status.
-3. `PAUSED`: The service is paused. This is a Windows-specific service status.
-4. `COMPLETED`: The service is completed.
-5. `START_PENDING`: The service is starting.
-6. `STOP_PENDING`: The service is stopping.
-7. `PAUSE_PENDING`: The service is pausing.
-8. `CONTINUE_PENDING`: The service is continuing.
+- `STATE_UNSPECIFIED` (0): Default service status.
+- `RUNNING` (1): The service is running.
+- `STOPPED` (2): The service is stopped. This is a Windows-specific service status.
+- `PAUSED` (3): The service is paused. This is a Windows-specific service status.
+- `COMPLETED` (4): The service is completed.
+- `START_PENDING` (5): The service is starting.
+- `STOP_PENDING` (6): The service is stopping.
+- `PAUSE_PENDING` (7): The service is pausing.
+- `CONTINUE_PENDING` (8): The service is continuing.

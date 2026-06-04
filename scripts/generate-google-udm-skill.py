@@ -870,12 +870,12 @@ def render_enum_value(
     value: descriptor_pb2.EnumValueDescriptorProto,
 ) -> str:
     comment = source_comment(context, enum_doc.file_name, (*enum_doc.path, 2, value_idx))
-    value_name = f"`{value.name}`"
+    value_meta = str(value.number)
     if value.options.deprecated:
-        value_name += " (deprecated)"
+        value_meta += ", deprecated"
     if comment:
-        return f"{value.number}. {value_name}: {comment}"
-    return f"{value.number}. {value_name}"
+        return f"- `{value.name}` ({value_meta}): {comment}"
+    return f"- `{value.name}` ({value_meta})"
 
 
 def render_enum_page(

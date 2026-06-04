@@ -4,6 +4,6 @@ BOOTP op code. See RFC951, section 3.
 
 ## Values
 
-0. `UNKNOWN_OPCODE`: Default opcode.
-1. `BOOTREQUEST`: Request.
-2. `BOOTREPLY`: Reply.
+- `UNKNOWN_OPCODE` (0): Default opcode.
+- `BOOTREQUEST` (1): Request.
+- `BOOTREPLY` (2): Reply.

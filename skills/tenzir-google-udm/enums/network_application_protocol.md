@@ -4,87 +4,87 @@ A network application protocol.
 
 ## Values
 
-0. `UNKNOWN_APPLICATION_PROTOCOL`: The default application protocol.
-1. `AFP`: Apple Filing Protocol.
-2. `APPC`: Advanced Program-to-Program Communication.
-3. `AMQP`: Advanced Message Queuing Protocol.
-4. `ATOM`: Publishing Protocol.
-5. `BEEP`: Block Extensible Exchange Protocol.
-6. `BITCOIN`: Crypto currency protocol.
-7. `BIT_TORRENT`: Peer-to-peer file sharing.
-8. `CFDP`: Coherent File Distribution Protocol.
-67. `CIP`: Common Industrial Protocol.
-9. `COAP`: Constrained Application Protocol.
-68. `COTP`: Connection Oriented Transport Protocol.
-66. `DCERPC`: DCE/RPC.
-10. `DDS`: Data Distribution Service.
-11. `DEVICE_NET`: Automation industry protocol.
-4000. `DHCP`: DHCP.
-69. `DICOM`: Digital Imaging and Communications in Medicine Protocol.
-70. `DNP3`: Distributed Network Protocol 3 (DNP3)
-3000. `DNS`: DNS.
-12. `E_DONKEY`: Classic file sharing protocol.
-13. `ENRP`: Endpoint Handlespace Redundancy Protocol.
-14. `FAST_TRACK`: Filesharing peer-to-peer protocol.
-15. `FINGER`: User Information Protocol.
-16. `FREENET`: Censorship resistant peer-to-peer network.
-17. `FTAM`: File Transfer Access and Management.
-71. `GOOSE`: GOOSE Protocol.
-18. `GOPHER`: Gopher protocol.
-77. `GRPC`: gRPC Remote Procedure Call.
-19. `HL7`: Health Level Seven.
-20. `H323`: Packet-based multimedia communications system.
-2000. `HTTP`: HTTP.
-2001. `HTTPS`: HTTPS.
-72. `IEC104`: IEC 60870-5-104 (IEC 104) Protocol.
-21. `IRCP`: Internet Relay Chat Protocol.
-22. `KADEMLIA`: Peer-to-peer hashtables.
-65. `KRB5`: Kerberos 5.
-23. `LDAP`: Lightweight Directory Access Protocol.
-24. `LPD`: Line Printer Daemon Protocol.
-25. `MIME`: Multipurpose Internet Mail Extensions and Secure MIME.
-73. `MMS`: Multimedia Messaging Service.
-26. `MODBUS`: Serial communications protocol.
-27. `MQTT`: Message Queuing Telemetry Transport.
-28. `NETCONF`: Network Configuration.
-29. `NFS`: Network File System.
-30. `NIS`: Network Information Service.
-31. `NNTP`: Network News Transfer Protocol.
-32. `NTCIP`: National Transportation Communications for Intelligent Transportation System.
-33. `NTP`: Network Time Protocol.
-34. `OSCAR`: AOL Instant Messenger Protocol.
-35. `PNRP`: Peer Name Resolution Protocol.
-74. `PTP`: Precision Time Protocol.
-1000. `QUIC`: QUIC.
-36. `RDP`: Remote Desktop Protocol.
-37. `RELP`: Reliable Event Logging Protocol.
-38. `RIP`: Routing Information Protocol.
-39. `RLOGIN`: Remote Login in UNIX Systems.
-40. `RPC`: Remote Procedure Call.
-41. `RTMP`: Real Time Messaging Protocol.
-42. `RTP`: Real-time Transport Protocol.
-43. `RTPS`: Real Time Publish Subscribe.
-44. `RTSP`: Real Time Streaming Protocol.
-45. `SAP`: Session Announcement Protocol.
-46. `SDP`: Session Description Protocol.
-47. `SIP`: Session Initiation Protocol.
-48. `SLP`: Service Location Protocol.
-49. `SMB`: Server Message Block.
-50. `SMTP`: Simple Mail Transfer Protocol.
-75. `SNMP`: Simple Network Management Protocol.
-51. `SNTP`: Simple Network Time Protocol.
-52. `SSH`: Secure Shell.
-53. `SSMS`: Secure SMS Messaging Protocol.
-54. `STYX`: Styx/9P - Plan 9 from Bell Labs distributed file system protocol.
-76. `SV`: Sampled Values Protocol.
-55. `TCAP`: Transaction Capabilities Application Part.
-56. `TDS`: Tabular Data Stream.
-57. `TOR`: Anonymity network.
-58. `TSP`: Time Stamp Protocol.
-59. `VTP`: Virtual Terminal Protocol.
-60. `WHOIS`: Remote Directory Access Protocol.
-61. `WEB_DAV`: Web Distributed Authoring and Versioning.
-62. `X400`: Message Handling Service Protocol.
-63. `X500`: Directory Access Protocol (DAP).
-64. `XMPP`: Extensible Messaging and Presence Protocol.
-78. `FTP`: File Transfer Protocol.
+- `UNKNOWN_APPLICATION_PROTOCOL` (0): The default application protocol.
+- `AFP` (1): Apple Filing Protocol.
+- `APPC` (2): Advanced Program-to-Program Communication.
+- `AMQP` (3): Advanced Message Queuing Protocol.
+- `ATOM` (4): Publishing Protocol.
+- `BEEP` (5): Block Extensible Exchange Protocol.
+- `BITCOIN` (6): Crypto currency protocol.
+- `BIT_TORRENT` (7): Peer-to-peer file sharing.
+- `CFDP` (8): Coherent File Distribution Protocol.
+- `CIP` (67): Common Industrial Protocol.
+- `COAP` (9): Constrained Application Protocol.
+- `COTP` (68): Connection Oriented Transport Protocol.
+- `DCERPC` (66): DCE/RPC.
+- `DDS` (10): Data Distribution Service.
+- `DEVICE_NET` (11): Automation industry protocol.
+- `DHCP` (4000): DHCP.
+- `DICOM` (69): Digital Imaging and Communications in Medicine Protocol.
+- `DNP3` (70): Distributed Network Protocol 3 (DNP3)
+- `DNS` (3000): DNS.
+- `E_DONKEY` (12): Classic file sharing protocol.
+- `ENRP` (13): Endpoint Handlespace Redundancy Protocol.
+- `FAST_TRACK` (14): Filesharing peer-to-peer protocol.
+- `FINGER` (15): User Information Protocol.
+- `FREENET` (16): Censorship resistant peer-to-peer network.
+- `FTAM` (17): File Transfer Access and Management.
+- `GOOSE` (71): GOOSE Protocol.
+- `GOPHER` (18): Gopher protocol.
+- `GRPC` (77): gRPC Remote Procedure Call.
+- `HL7` (19): Health Level Seven.
+- `H323` (20): Packet-based multimedia communications system.
+- `HTTP` (2000): HTTP.
+- `HTTPS` (2001): HTTPS.
+- `IEC104` (72): IEC 60870-5-104 (IEC 104) Protocol.
+- `IRCP` (21): Internet Relay Chat Protocol.
+- `KADEMLIA` (22): Peer-to-peer hashtables.
+- `KRB5` (65): Kerberos 5.
+- `LDAP` (23): Lightweight Directory Access Protocol.
+- `LPD` (24): Line Printer Daemon Protocol.
+- `MIME` (25): Multipurpose Internet Mail Extensions and Secure MIME.
+- `MMS` (73): Multimedia Messaging Service.
+- `MODBUS` (26): Serial communications protocol.
+- `MQTT` (27): Message Queuing Telemetry Transport.
+- `NETCONF` (28): Network Configuration.
+- `NFS` (29): Network File System.
+- `NIS` (30): Network Information Service.
+- `NNTP` (31): Network News Transfer Protocol.
+- `NTCIP` (32): National Transportation Communications for Intelligent Transportation System.
+- `NTP` (33): Network Time Protocol.
+- `OSCAR` (34): AOL Instant Messenger Protocol.
+- `PNRP` (35): Peer Name Resolution Protocol.
+- `PTP` (74): Precision Time Protocol.
+- `QUIC` (1000): QUIC.
+- `RDP` (36): Remote Desktop Protocol.
+- `RELP` (37): Reliable Event Logging Protocol.
+- `RIP` (38): Routing Information Protocol.
+- `RLOGIN` (39): Remote Login in UNIX Systems.
+- `RPC` (40): Remote Procedure Call.
+- `RTMP` (41): Real Time Messaging Protocol.
+- `RTP` (42): Real-time Transport Protocol.
+- `RTPS` (43): Real Time Publish Subscribe.
+- `RTSP` (44): Real Time Streaming Protocol.
+- `SAP` (45): Session Announcement Protocol.
+- `SDP` (46): Session Description Protocol.
+- `SIP` (47): Session Initiation Protocol.
+- `SLP` (48): Service Location Protocol.
+- `SMB` (49): Server Message Block.
+- `SMTP` (50): Simple Mail Transfer Protocol.
+- `SNMP` (75): Simple Network Management Protocol.
+- `SNTP` (51): Simple Network Time Protocol.
+- `SSH` (52): Secure Shell.
+- `SSMS` (53): Secure SMS Messaging Protocol.
+- `STYX` (54): Styx/9P - Plan 9 from Bell Labs distributed file system protocol.
+- `SV` (76): Sampled Values Protocol.
+- `TCAP` (55): Transaction Capabilities Application Part.
+- `TDS` (56): Tabular Data Stream.
+- `TOR` (57): Anonymity network.
+- `TSP` (58): Time Stamp Protocol.
+- `VTP` (59): Virtual Terminal Protocol.
+- `WHOIS` (60): Remote Directory Access Protocol.
+- `WEB_DAV` (61): Web Distributed Authoring and Versioning.
+- `X400` (62): Message Handling Service Protocol.
+- `X500` (63): Directory Access Protocol (DAP).
+- `XMPP` (64): Extensible Messaging and Presence Protocol.
+- `FTP` (78): File Transfer Protocol.

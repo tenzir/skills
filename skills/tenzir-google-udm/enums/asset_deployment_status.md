@@ -4,7 +4,7 @@ Deployment status states.
 
 ## Values
 
-0. `DEPLOYMENT_STATUS_UNSPECIFIED`: Unspecified deployment status.
-1. `ACTIVE`: Asset is active, functional and deployed.
-2. `PENDING_DECOMISSION`: Asset is pending decommission and no longer deployed.
-3. `DECOMISSIONED`: Asset is decommissioned.
+- `DEPLOYMENT_STATUS_UNSPECIFIED` (0): Unspecified deployment status.
+- `ACTIVE` (1): Asset is active, functional and deployed.
+- `PENDING_DECOMISSION` (2): Asset is pending decommission and no longer deployed.
+- `DECOMISSIONED` (3): Asset is decommissioned.

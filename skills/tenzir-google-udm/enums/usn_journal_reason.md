@@ -4,26 +4,26 @@ The reason for the USN journal entry.
 
 ## Values
 
-0. `REASON_UNSPECIFIED`: Unspecified reason.
-1. `DATA_OVERWRITE`: Data overwrite reason.
-2. `DATA_EXTEND`: Data extend reason.
-3. `DATA_TRUNCATION`: Data truncation reason.
-4. `NAMED_DATA_OVERWRITE`: Named data overwrite reason.
-5. `NAMED_DATA_EXTEND`: Named data extend reason.
-6. `NAMED_DATA_TRUNCATION`: Named data truncation reason.
-7. `FILE_CREATE`: File create reason.
-8. `FILE_DELETE`: File delete reason.
-9. `EA_CHANGE`: EA change reason.
-10. `SECURITY_CHANGE`: Security change reason.
-11. `RENAME_OLD_NAME`: Rename old name reason.
-12. `RENAME_NEW_NAME`: Rename new name reason.
-13. `INDEXABLE_CHANGE`: Indexable change reason.
-14. `BASIC_INFO_CHANGE`: Basic info change reason.
-15. `HARD_LINK_CHANGE`: Hard link change reason.
-16. `COMPRESSION_CHANGE`: Compression change reason.
-17. `ENCRYPTION_CHANGE`: Encryption change reason.
-18. `OBJECT_ID_CHANGE`: Object ID change reason.
-19. `REPARSE_POINT_CHANGE`: Reparse point change reason.
-20. `STREAM_CHANGE`: Stream change reason.
-21. `TRANSACTED_CHANGE`: Transacted change reason.
-22. `CLOSE`: Close reason.
+- `REASON_UNSPECIFIED` (0): Unspecified reason.
+- `DATA_OVERWRITE` (1): Data overwrite reason.
+- `DATA_EXTEND` (2): Data extend reason.
+- `DATA_TRUNCATION` (3): Data truncation reason.
+- `NAMED_DATA_OVERWRITE` (4): Named data overwrite reason.
+- `NAMED_DATA_EXTEND` (5): Named data extend reason.
+- `NAMED_DATA_TRUNCATION` (6): Named data truncation reason.
+- `FILE_CREATE` (7): File create reason.
+- `FILE_DELETE` (8): File delete reason.
+- `EA_CHANGE` (9): EA change reason.
+- `SECURITY_CHANGE` (10): Security change reason.
+- `RENAME_OLD_NAME` (11): Rename old name reason.
+- `RENAME_NEW_NAME` (12): Rename new name reason.
+- `INDEXABLE_CHANGE` (13): Indexable change reason.
+- `BASIC_INFO_CHANGE` (14): Basic info change reason.
+- `HARD_LINK_CHANGE` (15): Hard link change reason.
+- `COMPRESSION_CHANGE` (16): Compression change reason.
+- `ENCRYPTION_CHANGE` (17): Encryption change reason.
+- `OBJECT_ID_CHANGE` (18): Object ID change reason.
+- `REPARSE_POINT_CHANGE` (19): Reparse point change reason.
+- `STREAM_CHANGE` (20): Stream change reason.
+- `TRANSACTED_CHANGE` (21): Transacted change reason.
+- `CLOSE` (22): Close reason.

@@ -4,6 +4,6 @@ Categorization options for the usefulness of a finding.
 
 ## Values
 
-0. `REPUTATION_UNSPECIFIED`: An unspecified reputation.
-1. `USEFUL`: A categorization of the finding as useful.
-2. `NOT_USEFUL`: A categorization of the finding as not useful.
+- `REPUTATION_UNSPECIFIED` (0): An unspecified reputation.
+- `USEFUL` (1): A categorization of the finding as useful.
+- `NOT_USEFUL` (2): A categorization of the finding as not useful.

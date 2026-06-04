@@ -4,7 +4,7 @@ Represents different possible Association types. Can be threat or malware. Used 
 
 ## Values
 
-0. `ASSOCIATION_TYPE_UNSPECIFIED`: The default Association Type.
-1. `THREAT_ACTOR`: Association type Threat actor.
-2. `MALWARE`: Association type Malware.
-3. `SOFTWARE_TOOLKIT`: Association type Software toolkit.
+- `ASSOCIATION_TYPE_UNSPECIFIED` (0): The default Association Type.
+- `THREAT_ACTOR` (1): Association type Threat actor.
+- `MALWARE` (2): Association type Malware.
+- `SOFTWARE_TOOLKIT` (3): Association type Software toolkit.

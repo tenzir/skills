@@ -4,18 +4,18 @@ The state of the process. See https://psutil.readthedocs.io/en/stable/#process-s
 
 ## Values
 
-0. `STATE_UNSPECIFIED`: Undetermined state.
-1. `RUNNING`: Process is running or runnable.
-2. `SLEEPING`: Process is waiting for an event.
-3. `DISK_SLEEP`: Process is in uninterruptible sleep, typically I/O.
-4. `STOPPED`: Process is stopped.
-5. `TRACING_STOP`: Process is stopped by debugger.
-6. `ZOMBIE`: Process is terminated but not reaped by parent.
-7. `DEAD`: Process is terminated.
-8. `WAKE_KILL`: Process is woken to be killed.
-9. `WAKING`: Process is waking from sleep.
-10. `PARKED`: Linux specific: process is parked.
-11. `IDLE`: Linux, macOS, and FreeBSD specific: process is idle.
-12. `LOCKED`: FreeBSD specific: process is locked.
-13. `WAITING`: FreeBSD specific: process is waiting.
-14. `SUSPENDED`: NetBSD specific: process is suspended.
+- `STATE_UNSPECIFIED` (0): Undetermined state.
+- `RUNNING` (1): Process is running or runnable.
+- `SLEEPING` (2): Process is waiting for an event.
+- `DISK_SLEEP` (3): Process is in uninterruptible sleep, typically I/O.
+- `STOPPED` (4): Process is stopped.
+- `TRACING_STOP` (5): Process is stopped by debugger.
+- `ZOMBIE` (6): Process is terminated but not reaped by parent.
+- `DEAD` (7): Process is terminated.
+- `WAKE_KILL` (8): Process is woken to be killed.
+- `WAKING` (9): Process is waking from sleep.
+- `PARKED` (10): Linux specific: process is parked.
+- `IDLE` (11): Linux, macOS, and FreeBSD specific: process is idle.
+- `LOCKED` (12): FreeBSD specific: process is locked.
+- `WAITING` (13): FreeBSD specific: process is waiting.
+- `SUSPENDED` (14): NetBSD specific: process is suspended.

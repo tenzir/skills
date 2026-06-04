@@ -4,7 +4,7 @@ The SameSite attribute of a cookie.
 
 ## Values
 
-0. `COOKIE_SAME_SITE_UNSPECIFIED`: Default value.
-1. `STRICT`: Corresponds to SameSite=Strict.
-2. `LAX`: Corresponds to SameSite=Lax.
-3. `NONE`: Corresponds to SameSite=None.
+- `COOKIE_SAME_SITE_UNSPECIFIED` (0): Default value.
+- `STRICT` (1): Corresponds to SameSite=Strict.
+- `LAX` (2): Corresponds to SameSite=Lax.
+- `NONE` (3): Corresponds to SameSite=None.

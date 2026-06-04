@@ -4,6 +4,6 @@ The outcome of the authentication event.
 
 ## Values
 
-0. `OUTCOME_UNSPECIFIED`: The default outcome.
-1. `SUCCESS`: The authentication was successful.
-2. `FAILURE`: The authentication failed.
+- `OUTCOME_UNSPECIFIED` (0): The default outcome.
+- `SUCCESS` (1): The authentication was successful.
+- `FAILURE` (2): The authentication failed.

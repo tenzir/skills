@@ -4,10 +4,10 @@ Mathematic function used to calculate the value.
 
 ## Values
 
-0. `AGGREGATE_FUNCTION_UNSPECIFIED`: Default value.
-1. `MIN`: Minimum.
-2. `MAX`: Maximum.
-3. `COUNT`: Count.
-4. `SUM`: Sum.
-5. `AVG`: Average.
-6. `STDDEV`: Standard Deviation.
+- `AGGREGATE_FUNCTION_UNSPECIFIED` (0): Default value.
+- `MIN` (1): Minimum.
+- `MAX` (2): Maximum.
+- `COUNT` (3): Count.
+- `SUM` (4): Sum.
+- `AVG` (5): Average.
+- `STDDEV` (6): Standard Deviation.

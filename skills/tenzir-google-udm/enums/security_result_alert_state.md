@@ -4,6 +4,6 @@ The type of alerting set up for a security result.
 
 ## Values
 
-0. `UNSPECIFIED`: The security result type is not known.
-1. `NOT_ALERTING`: The security result is not an alert.
-2. `ALERTING`: The security result is an alert.
+- `UNSPECIFIED` (0): The security result type is not known.
+- `NOT_ALERTING` (1): The security result is not an alert.
+- `ALERTING` (2): The security result is an alert.

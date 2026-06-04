@@ -4,6 +4,6 @@ Type options for Finding variables.
 
 ## Values
 
-0. `TYPE_UNSPECIFIED`: An unspecified variable type.
-1. `MATCH`: A variable coming from the match conditions.
-2. `OUTCOME`: A variable representing significant data that was found in the detection logic.
+- `TYPE_UNSPECIFIED` (0): An unspecified variable type.
+- `MATCH` (1): A variable coming from the match conditions.
+- `OUTCOME` (2): A variable representing significant data that was found in the detection logic.

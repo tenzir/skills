@@ -4,9 +4,9 @@ Priority that is assigned to a Case or Alert.
 
 ## Values
 
-0. `PRIORITY_UNSPECIFIED`: Default priority level.
-100. `PRIORITY_INFO`: Informational priority.
-200. `PRIORITY_LOW`: Low priority.
-300. `PRIORITY_MEDIUM`: Medium priority.
-400. `PRIORITY_HIGH`: High priority.
-500. `PRIORITY_CRITICAL`: Critical priority.
+- `PRIORITY_UNSPECIFIED` (0): Default priority level.
+- `PRIORITY_INFO` (100): Informational priority.
+- `PRIORITY_LOW` (200): Low priority.
+- `PRIORITY_MEDIUM` (300): Medium priority.
+- `PRIORITY_HIGH` (400): High priority.
+- `PRIORITY_CRITICAL` (500): Critical priority.

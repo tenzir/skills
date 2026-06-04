@@ -4,7 +4,7 @@ A network traffic direction.
 
 ## Values
 
-0. `UNKNOWN_DIRECTION`: The default direction.
-1. `INBOUND`: An inbound request.
-2. `OUTBOUND`: An outbound request.
-3. `BROADCAST`: A broadcast.
+- `UNKNOWN_DIRECTION` (0): The default direction.
+- `INBOUND` (1): An inbound request.
+- `OUTBOUND` (2): An outbound request.
+- `BROADCAST` (3): A broadcast.

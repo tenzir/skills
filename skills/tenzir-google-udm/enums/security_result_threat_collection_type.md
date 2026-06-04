@@ -4,6 +4,6 @@ Different Types of threat collections currently supported.
 
 ## Values
 
-0. `THREAT_COLLECTION_TYPE_UNSPECIFIED`: Threat collection type is unspecified.
-1. `CAMPAIGN`: Threat collection type is campaign.
-2. `REPORT`: Threat collection type is report.
+- `THREAT_COLLECTION_TYPE_UNSPECIFIED` (0): Threat collection type is unspecified.
+- `CAMPAIGN` (1): Threat collection type is campaign.
+- `REPORT` (2): Threat collection type is report.

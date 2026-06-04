@@ -4,7 +4,7 @@ A product priority level.
 
 ## Values
 
-0. `UNKNOWN_PRIORITY`: Default priority level.
-200. `LOW_PRIORITY`: Low priority.
-300. `MEDIUM_PRIORITY`: Medium priority.
-400. `HIGH_PRIORITY`: High priority.
+- `UNKNOWN_PRIORITY` (0): Default priority level.
+- `LOW_PRIORITY` (200): Low priority.
+- `MEDIUM_PRIORITY` (300): Medium priority.
+- `HIGH_PRIORITY` (400): High priority.

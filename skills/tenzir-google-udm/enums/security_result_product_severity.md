@@ -4,11 +4,11 @@ Defined by the product
 
 ## Values
 
-0. `UNKNOWN_SEVERITY`: The default severity level.
-100. `INFORMATIONAL`: Info severity.
-150. `ERROR`: An error.
-101. `NONE`: No malicious result.
-200. `LOW`: Low-severity malicious result.
-300. `MEDIUM`: Medium-severity malicious result.
-400. `HIGH`: High-severity malicious result.
-500. `CRITICAL`: Critical-severity malicious result.
+- `UNKNOWN_SEVERITY` (0): The default severity level.
+- `INFORMATIONAL` (100): Info severity.
+- `ERROR` (150): An error.
+- `NONE` (101): No malicious result.
+- `LOW` (200): Low-severity malicious result.
+- `MEDIUM` (300): Medium-severity malicious result.
+- `HIGH` (400): High-severity malicious result.
+- `CRITICAL` (500): Critical-severity malicious result.

@@ -4,7 +4,7 @@ Type of IoCStat based on source.
 
 ## Values
 
-0. `UNSPECIFIED_IOC_STATS_TYPE`: IoCStat source is unidentified.
-1. `MANDIANT_SOURCES`: IoCStat is from a Mandiant Source.
-2. `THIRD_PARTY_SOURCES`: IoCStat is from a third-party source.
-3. `THREAT_INTELLIGENCE_IOC_STATS`: IoCStat is from a threat intelligence feed.
+- `UNSPECIFIED_IOC_STATS_TYPE` (0): IoCStat source is unidentified.
+- `MANDIANT_SOURCES` (1): IoCStat is from a Mandiant Source.
+- `THIRD_PARTY_SOURCES` (2): IoCStat is from a third-party source.
+- `THREAT_INTELLIGENCE_IOC_STATS` (3): IoCStat is from a threat intelligence feed.

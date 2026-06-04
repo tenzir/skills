@@ -4,111 +4,111 @@ An event type. Choose event type not based on the product that generated the eve
 
 ## Values
 
-0. `EVENTTYPE_UNSPECIFIED`: Default event type
-10000. `PROCESS_UNCATEGORIZED`: Activity related to a process which does not match any other event types.
-10001. `PROCESS_LAUNCH`: Process launch.
-10002. `PROCESS_INJECTION`: Process injecting into another process.
-10003. `PROCESS_PRIVILEGE_ESCALATION`: Process privilege escalation.
-10004. `PROCESS_TERMINATION`: Process termination.
-10005. `PROCESS_OPEN`: Process being opened.
-10006. `PROCESS_MODULE_LOAD`: Process loading a module.
-11000. `REGISTRY_UNCATEGORIZED`: Registry event which does not match any of the other event types.
-11001. `REGISTRY_CREATION`: Registry creation.
-11002. `REGISTRY_MODIFICATION`: Registry modification.
-11003. `REGISTRY_DELETION`: Registry deletion.
-12000. `SETTING_UNCATEGORIZED`: Settings-related event which does not match any of the other event types.
-12001. `SETTING_CREATION`: Setting creation.
-12002. `SETTING_MODIFICATION`: Setting modification.
-12003. `SETTING_DELETION`: Setting deletion.
-13000. `MUTEX_UNCATEGORIZED`: Any mutex event other than creation.
-13001. `MUTEX_CREATION`: Mutex creation.
-14000. `FILE_UNCATEGORIZED`: File event which does not match any of the other event types.
-14001. `FILE_CREATION`: File created.
-14002. `FILE_DELETION`: File deleted.
-14003. `FILE_MODIFICATION`: File modified.
-14004. `FILE_READ`: File read.
-14005. `FILE_COPY`: File copied. Used for file copies, for example, to a thumb drive.
-14006. `FILE_OPEN`: File opened.
-14007. `FILE_MOVE`: File moved or renamed.
-14008. `FILE_SYNC`: File synced (for example, Google Drive, Dropbox, backup).
-15000. `USER_UNCATEGORIZED`: User activity which does not match any of the other event types.
-15001. `USER_LOGIN`: User login.
-15002. `USER_LOGOUT`: User logout.
-15003. `USER_CREATION`: User creation.
-15004. `USER_CHANGE_PASSWORD`: User password change event.
-15005. `USER_CHANGE_PERMISSIONS`: Change in user permissions.
-15006. `USER_STATS` (deprecated): Deprecated. Used to update user info for an LDAP dump.
-15007. `USER_BADGE_IN`: User physically badging into a location.
-15008. `USER_DELETION`: User deletion.
-15009. `USER_RESOURCE_CREATION`: User creating a virtual resource. This is equivalent to RESOURCE_CREATION.
-15010. `USER_RESOURCE_UPDATE_CONTENT`: User updating content of a virtual resource. This is equivalent to RESOURCE_WRITTEN.
-15011. `USER_RESOURCE_UPDATE_PERMISSIONS`: User updating permissions of a virtual resource. This is equivalent to RESOURCE_PERMISSIONS_CHANGE.
-15012. `USER_COMMUNICATION`: User initiating communication through a medium (for example, video).
-15013. `USER_RESOURCE_ACCESS`: User accessing a virtual resource. This is equivalent to RESOURCE_READ.
-15014. `USER_RESOURCE_DELETION`: User deleting a virtual resource. This is equivalent to RESOURCE_DELETION.
-23000. `GROUP_UNCATEGORIZED`: A group activity that does not fall into one of the other event types.
-23001. `GROUP_CREATION`: A group creation.
-23002. `GROUP_DELETION`: A group deletion.
-23003. `GROUP_MODIFICATION`: A group modification.
-19000. `EMAIL_UNCATEGORIZED`: Email messages
-19001. `EMAIL_TRANSACTION`: An email transaction.
-19002. `EMAIL_URL_CLICK` (deprecated): Deprecated: use NETWORK_HTTP instead. An email URL click event.
-16000. `NETWORK_UNCATEGORIZED`: A network event that does not fit into one of the other event types.
-16001. `NETWORK_FLOW`: Aggregated flow stats like netflow.
-16002. `NETWORK_CONNECTION`: Network connection details like from a FW.
-16003. `NETWORK_FTP`: FTP telemetry.
-16004. `NETWORK_DHCP`: DHCP payload.
-16005. `NETWORK_DNS`: DNS payload.
-16006. `NETWORK_HTTP`: HTTP telemetry.
-16007. `NETWORK_SMTP`: SMTP telemetry.
-17000. `STATUS_UNCATEGORIZED`: A status message that does not fit into one of the other event types.
-17001. `STATUS_HEARTBEAT`: Heartbeat indicating product is alive.
-17002. `STATUS_STARTUP`: An agent startup.
-17003. `STATUS_SHUTDOWN`: An agent shutdown.
-17004. `STATUS_UPDATE`: A software or fingerprint update.
-18000. `SCAN_UNCATEGORIZED`: Scan item that does not fit into one of the other event types.
-18001. `SCAN_FILE`: A file scan.
-18002. `SCAN_PROCESS_BEHAVIORS` (deprecated): Scan process behaviors. Please use SCAN_PROCESS instead.
-18003. `SCAN_PROCESS`: Scan process.
-18004. `SCAN_HOST`: Scan results from scanning an entire host device for threats/sensitive documents.
-18005. `SCAN_VULN_HOST`: Vulnerability scan logs about host vulnerabilities (e.g., out of date software) and network vulnerabilities (e.g., unprotected service detected via a network scan).
-18006. `SCAN_VULN_NETWORK`: Vulnerability scan logs about network vulnerabilities.
-18007. `SCAN_NETWORK`: Scan network for suspicious activity
-20000. `SCHEDULED_TASK_UNCATEGORIZED`: Scheduled task event that does not fall into one of the other event types.
-20001. `SCHEDULED_TASK_CREATION`: Scheduled task creation.
-20002. `SCHEDULED_TASK_DELETION`: Scheduled task deletion.
-20003. `SCHEDULED_TASK_ENABLE`: Scheduled task being enabled.
-20004. `SCHEDULED_TASK_DISABLE`: Scheduled task being disabled.
-20005. `SCHEDULED_TASK_MODIFICATION`: Scheduled task being modified.
-21000. `SYSTEM_AUDIT_LOG_UNCATEGORIZED`: A system audit log event that is not a wipe.
-21001. `SYSTEM_AUDIT_LOG_WIPE`: A system audit log wipe.
-22000. `SERVICE_UNSPECIFIED`: Service event that does not fit into one of the other event types.
-22001. `SERVICE_CREATION`: A service creation.
-22002. `SERVICE_DELETION`: A service deletion.
-22003. `SERVICE_START`: A service start.
-22004. `SERVICE_STOP`: A service stop.
-22005. `SERVICE_MODIFICATION`: A service modification.
-100000. `GENERIC_EVENT`: Operating system events that are not described by any of the other event types. Might include uncategorized Microsoft Windows event logs.
-1. `RESOURCE_CREATION`: The resource was created/provisioned. This is equivalent to USER_RESOURCE_CREATION.
-2. `RESOURCE_DELETION`: The resource was deleted/deprovisioned. This is equivalent to USER_RESOURCE_DELETION.
-3. `RESOURCE_PERMISSIONS_CHANGE`: The resource had it's permissions or ACLs updated. This is equivalent to USER_RESOURCE_UPDATE_PERMISSIONS.
-4. `RESOURCE_READ`: The resource was read. This is equivalent to USER_RESOURCE_ACCESS.
-5. `RESOURCE_WRITTEN`: The resource was written to. This is equivalent to USER_RESOURCE_UPDATE_CONTENT.
-25000. `DEVICE_FIRMWARE_UPDATE`: Firmware update.
-25001. `DEVICE_CONFIG_UPDATE`: Configuration update.
-25002. `DEVICE_PROGRAM_UPLOAD`: A program or application uploaded to a device.
-25003. `DEVICE_PROGRAM_DOWNLOAD`: A program or application downloaded to a device.
-24000. `ANALYST_UPDATE_VERDICT`: Analyst update about the Verdict (such as true positive, false positive, or disregard) of a finding.
-24001. `ANALYST_UPDATE_REPUTATION`: Analyst update about the Reputation (such as useful or not useful) of a finding.
-24002. `ANALYST_UPDATE_SEVERITY_SCORE`: Analyst update about the Severity score (0-100) of a finding.
-24007. `ANALYST_UPDATE_STATUS`: Analyst update about the finding status.
-24008. `ANALYST_ADD_COMMENT`: Analyst addition of a comment for a finding.
-24009. `ANALYST_UPDATE_PRIORITY`: Analyst update about the priority (such as low, medium, or high) for a finding.
-24010. `ANALYST_UPDATE_ROOT_CAUSE`: Analyst update about the root cause for a finding.
-24011. `ANALYST_UPDATE_REASON`: Analyst update about the reason (such as malicious or not malicious) for a finding.
-24012. `ANALYST_UPDATE_RISK_SCORE`: Analyst update about the risk score (0-100) of a finding.
-26000. `ENTITY_RISK_CHANGE`: An update to an entity risk score. This event type is restricted to events published by Google Securit Operations Risk Analytics.
-27000. `TRIAGE_AGENT_UPDATE_INVESTIGATION`: Triage Agent has investigated the finding.
+- `EVENTTYPE_UNSPECIFIED` (0): Default event type
+- `PROCESS_UNCATEGORIZED` (10000): Activity related to a process which does not match any other event types.
+- `PROCESS_LAUNCH` (10001): Process launch.
+- `PROCESS_INJECTION` (10002): Process injecting into another process.
+- `PROCESS_PRIVILEGE_ESCALATION` (10003): Process privilege escalation.
+- `PROCESS_TERMINATION` (10004): Process termination.
+- `PROCESS_OPEN` (10005): Process being opened.
+- `PROCESS_MODULE_LOAD` (10006): Process loading a module.
+- `REGISTRY_UNCATEGORIZED` (11000): Registry event which does not match any of the other event types.
+- `REGISTRY_CREATION` (11001): Registry creation.
+- `REGISTRY_MODIFICATION` (11002): Registry modification.
+- `REGISTRY_DELETION` (11003): Registry deletion.
+- `SETTING_UNCATEGORIZED` (12000): Settings-related event which does not match any of the other event types.
+- `SETTING_CREATION` (12001): Setting creation.
+- `SETTING_MODIFICATION` (12002): Setting modification.
+- `SETTING_DELETION` (12003): Setting deletion.
+- `MUTEX_UNCATEGORIZED` (13000): Any mutex event other than creation.
+- `MUTEX_CREATION` (13001): Mutex creation.
+- `FILE_UNCATEGORIZED` (14000): File event which does not match any of the other event types.
+- `FILE_CREATION` (14001): File created.
+- `FILE_DELETION` (14002): File deleted.
+- `FILE_MODIFICATION` (14003): File modified.
+- `FILE_READ` (14004): File read.
+- `FILE_COPY` (14005): File copied. Used for file copies, for example, to a thumb drive.
+- `FILE_OPEN` (14006): File opened.
+- `FILE_MOVE` (14007): File moved or renamed.
+- `FILE_SYNC` (14008): File synced (for example, Google Drive, Dropbox, backup).
+- `USER_UNCATEGORIZED` (15000): User activity which does not match any of the other event types.
+- `USER_LOGIN` (15001): User login.
+- `USER_LOGOUT` (15002): User logout.
+- `USER_CREATION` (15003): User creation.
+- `USER_CHANGE_PASSWORD` (15004): User password change event.
+- `USER_CHANGE_PERMISSIONS` (15005): Change in user permissions.
+- `USER_STATS` (15006, deprecated): Deprecated. Used to update user info for an LDAP dump.
+- `USER_BADGE_IN` (15007): User physically badging into a location.
+- `USER_DELETION` (15008): User deletion.
+- `USER_RESOURCE_CREATION` (15009): User creating a virtual resource. This is equivalent to RESOURCE_CREATION.
+- `USER_RESOURCE_UPDATE_CONTENT` (15010): User updating content of a virtual resource. This is equivalent to RESOURCE_WRITTEN.
+- `USER_RESOURCE_UPDATE_PERMISSIONS` (15011): User updating permissions of a virtual resource. This is equivalent to RESOURCE_PERMISSIONS_CHANGE.
+- `USER_COMMUNICATION` (15012): User initiating communication through a medium (for example, video).
+- `USER_RESOURCE_ACCESS` (15013): User accessing a virtual resource. This is equivalent to RESOURCE_READ.
+- `USER_RESOURCE_DELETION` (15014): User deleting a virtual resource. This is equivalent to RESOURCE_DELETION.
+- `GROUP_UNCATEGORIZED` (23000): A group activity that does not fall into one of the other event types.
+- `GROUP_CREATION` (23001): A group creation.
+- `GROUP_DELETION` (23002): A group deletion.
+- `GROUP_MODIFICATION` (23003): A group modification.
+- `EMAIL_UNCATEGORIZED` (19000): Email messages
+- `EMAIL_TRANSACTION` (19001): An email transaction.
+- `EMAIL_URL_CLICK` (19002, deprecated): Deprecated: use NETWORK_HTTP instead. An email URL click event.
+- `NETWORK_UNCATEGORIZED` (16000): A network event that does not fit into one of the other event types.
+- `NETWORK_FLOW` (16001): Aggregated flow stats like netflow.
+- `NETWORK_CONNECTION` (16002): Network connection details like from a FW.
+- `NETWORK_FTP` (16003): FTP telemetry.
+- `NETWORK_DHCP` (16004): DHCP payload.
+- `NETWORK_DNS` (16005): DNS payload.
+- `NETWORK_HTTP` (16006): HTTP telemetry.
+- `NETWORK_SMTP` (16007): SMTP telemetry.
+- `STATUS_UNCATEGORIZED` (17000): A status message that does not fit into one of the other event types.
+- `STATUS_HEARTBEAT` (17001): Heartbeat indicating product is alive.
+- `STATUS_STARTUP` (17002): An agent startup.
+- `STATUS_SHUTDOWN` (17003): An agent shutdown.
+- `STATUS_UPDATE` (17004): A software or fingerprint update.
+- `SCAN_UNCATEGORIZED` (18000): Scan item that does not fit into one of the other event types.
+- `SCAN_FILE` (18001): A file scan.
+- `SCAN_PROCESS_BEHAVIORS` (18002, deprecated): Scan process behaviors. Please use SCAN_PROCESS instead.
+- `SCAN_PROCESS` (18003): Scan process.
+- `SCAN_HOST` (18004): Scan results from scanning an entire host device for threats/sensitive documents.
+- `SCAN_VULN_HOST` (18005): Vulnerability scan logs about host vulnerabilities (e.g., out of date software) and network vulnerabilities (e.g., unprotected service detected via a network scan).
+- `SCAN_VULN_NETWORK` (18006): Vulnerability scan logs about network vulnerabilities.
+- `SCAN_NETWORK` (18007): Scan network for suspicious activity
+- `SCHEDULED_TASK_UNCATEGORIZED` (20000): Scheduled task event that does not fall into one of the other event types.
+- `SCHEDULED_TASK_CREATION` (20001): Scheduled task creation.
+- `SCHEDULED_TASK_DELETION` (20002): Scheduled task deletion.
+- `SCHEDULED_TASK_ENABLE` (20003): Scheduled task being enabled.
+- `SCHEDULED_TASK_DISABLE` (20004): Scheduled task being disabled.
+- `SCHEDULED_TASK_MODIFICATION` (20005): Scheduled task being modified.
+- `SYSTEM_AUDIT_LOG_UNCATEGORIZED` (21000): A system audit log event that is not a wipe.
+- `SYSTEM_AUDIT_LOG_WIPE` (21001): A system audit log wipe.
+- `SERVICE_UNSPECIFIED` (22000): Service event that does not fit into one of the other event types.
+- `SERVICE_CREATION` (22001): A service creation.
+- `SERVICE_DELETION` (22002): A service deletion.
+- `SERVICE_START` (22003): A service start.
+- `SERVICE_STOP` (22004): A service stop.
+- `SERVICE_MODIFICATION` (22005): A service modification.
+- `GENERIC_EVENT` (100000): Operating system events that are not described by any of the other event types. Might include uncategorized Microsoft Windows event logs.
+- `RESOURCE_CREATION` (1): The resource was created/provisioned. This is equivalent to USER_RESOURCE_CREATION.
+- `RESOURCE_DELETION` (2): The resource was deleted/deprovisioned. This is equivalent to USER_RESOURCE_DELETION.
+- `RESOURCE_PERMISSIONS_CHANGE` (3): The resource had it's permissions or ACLs updated. This is equivalent to USER_RESOURCE_UPDATE_PERMISSIONS.
+- `RESOURCE_READ` (4): The resource was read. This is equivalent to USER_RESOURCE_ACCESS.
+- `RESOURCE_WRITTEN` (5): The resource was written to. This is equivalent to USER_RESOURCE_UPDATE_CONTENT.
+- `DEVICE_FIRMWARE_UPDATE` (25000): Firmware update.
+- `DEVICE_CONFIG_UPDATE` (25001): Configuration update.
+- `DEVICE_PROGRAM_UPLOAD` (25002): A program or application uploaded to a device.
+- `DEVICE_PROGRAM_DOWNLOAD` (25003): A program or application downloaded to a device.
+- `ANALYST_UPDATE_VERDICT` (24000): Analyst update about the Verdict (such as true positive, false positive, or disregard) of a finding.
+- `ANALYST_UPDATE_REPUTATION` (24001): Analyst update about the Reputation (such as useful or not useful) of a finding.
+- `ANALYST_UPDATE_SEVERITY_SCORE` (24002): Analyst update about the Severity score (0-100) of a finding.
+- `ANALYST_UPDATE_STATUS` (24007): Analyst update about the finding status.
+- `ANALYST_ADD_COMMENT` (24008): Analyst addition of a comment for a finding.
+- `ANALYST_UPDATE_PRIORITY` (24009): Analyst update about the priority (such as low, medium, or high) for a finding.
+- `ANALYST_UPDATE_ROOT_CAUSE` (24010): Analyst update about the root cause for a finding.
+- `ANALYST_UPDATE_REASON` (24011): Analyst update about the reason (such as malicious or not malicious) for a finding.
+- `ANALYST_UPDATE_RISK_SCORE` (24012): Analyst update about the risk score (0-100) of a finding.
+- `ENTITY_RISK_CHANGE` (26000): An update to an entity risk score. This event type is restricted to events published by Google Securit Operations Risk Analytics.
+- `TRIAGE_AGENT_UPDATE_INVESTIGATION` (27000): Triage Agent has investigated the finding.
 ## Guidance
 
 Population guidance from the [Google UDM usage guide](https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en); Google last updated: `2026-06-03 UTC`.

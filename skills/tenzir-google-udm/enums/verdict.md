@@ -4,6 +4,6 @@ Categorization options for the validity of a finding (for example, whether it re
 
 ## Values
 
-0. `VERDICT_UNSPECIFIED`: An unspecified verdict.
-1. `TRUE_POSITIVE`: A categorization of the finding as a "true positive".
-2. `FALSE_POSITIVE`: A categorization of the finding as a "false positive".
+- `VERDICT_UNSPECIFIED` (0): An unspecified verdict.
+- `TRUE_POSITIVE` (1): A categorization of the finding as a "true positive".
+- `FALSE_POSITIVE` (2): A categorization of the finding as a "false positive".

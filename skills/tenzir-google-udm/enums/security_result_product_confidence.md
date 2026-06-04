@@ -4,7 +4,7 @@ A level of confidence in the result.
 
 ## Values
 
-0. `UNKNOWN_CONFIDENCE`: The default confidence level.
-200. `LOW_CONFIDENCE`: Low confidence.
-300. `MEDIUM_CONFIDENCE`: Medium confidence.
-400. `HIGH_CONFIDENCE`: High confidence.
+- `UNKNOWN_CONFIDENCE` (0): The default confidence level.
+- `LOW_CONFIDENCE` (200): Low confidence.
+- `MEDIUM_CONFIDENCE` (300): Medium confidence.
+- `HIGH_CONFIDENCE` (400): High confidence.

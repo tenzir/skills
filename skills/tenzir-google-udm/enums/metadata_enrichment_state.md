@@ -4,6 +4,6 @@ An enrichment state.
 
 ## Values
 
-0. `ENRICHMENT_STATE_UNSPECIFIED`: Unspecified.
-1. `ENRICHED`: The event has been enriched by Chronicle.
-2. `UNENRICHED`: The event has not been enriched by Chronicle.
+- `ENRICHMENT_STATE_UNSPECIFIED` (0): Unspecified.
+- `ENRICHED` (1): The event has been enriched by Chronicle.
+- `UNENRICHED` (2): The event has not been enriched by Chronicle.

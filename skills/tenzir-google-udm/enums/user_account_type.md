@@ -4,9 +4,9 @@ User Account Type.
 
 ## Values
 
-0. `ACCOUNT_TYPE_UNSPECIFIED`: Default user account type.
-1. `DOMAIN_ACCOUNT_TYPE`: A human account part of some domain in directory services.
-2. `LOCAL_ACCOUNT_TYPE`: A local machine account.
-3. `CLOUD_ACCOUNT_TYPE`: A SaaS service account type (such as Slack or GitHub).
-4. `SERVICE_ACCOUNT_TYPE`: A non-human account for data access.
-5. `DEFAULT_ACCOUNT_TYPE`: A system built in default account.
+- `ACCOUNT_TYPE_UNSPECIFIED` (0): Default user account type.
+- `DOMAIN_ACCOUNT_TYPE` (1): A human account part of some domain in directory services.
+- `LOCAL_ACCOUNT_TYPE` (2): A local machine account.
+- `CLOUD_ACCOUNT_TYPE` (3): A SaaS service account type (such as Slack or GitHub).
+- `SERVICE_ACCOUNT_TYPE` (4): A non-human account for data access.
+- `DEFAULT_ACCOUNT_TYPE` (5): A system built in default account.

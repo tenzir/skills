@@ -4,6 +4,6 @@ Well-known system roles.
 
 ## Values
 
-0. `TYPE_UNSPECIFIED`: Default user role.
-1. `ADMINISTRATOR`: Product administrator with elevated privileges.
-2. `SERVICE_ACCOUNT`: System service account for automated privilege access.
+- `TYPE_UNSPECIFIED` (0): Default user role.
+- `ADMINISTRATOR` (1): Product administrator with elevated privileges.
+- `SERVICE_ACCOUNT` (2): System service account for automated privilege access.
