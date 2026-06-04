@@ -180,7 +180,7 @@ The string value of log type.
 
 - **Number**: `18`
 - **Cardinality**: `singular`
-- **Type**: `google.backstory.DataAccessLabels` (imported)
+- **Type**: [`DataAccessLabels`](data_access_labels.md)
 - **JSON name**: `baseLabels`
 
 Data access labels on the base event.
@@ -189,7 +189,7 @@ Data access labels on the base event.
 
 - **Number**: `19`
 - **Cardinality**: `singular`
-- **Type**: `google.backstory.DataAccessLabels` (imported)
+- **Type**: [`DataAccessLabels`](data_access_labels.md)
 - **JSON name**: `enrichmentLabels`
 
 Data access labels from all the contextual events used to enrich the base event.

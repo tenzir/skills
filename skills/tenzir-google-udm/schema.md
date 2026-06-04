@@ -2,14 +2,14 @@
 
 Generated from the canonical Google UDM protocol buffer definition.
 
-- **Source**: [backstory/udm.proto](https://github.com/googleapis/googleapis/blob/5ff4b410beb15f65d3d0b7a160f52d803bce7c97/backstory/udm.proto)
+- **Source**: [backstory/udm.proto](https://github.com/googleapis/googleapis/blob/0db4dc67dd805d20294c6dc34068c37f546d71da/backstory/udm.proto)
 - **Requested ref**: `master`
-- **Resolved commit**: `5ff4b410beb15f65d3d0b7a160f52d803bce7c97`
+- **Resolved commit**: `0db4dc67dd805d20294c6dc34068c37f546d71da`
 - **Package**: `google.backstory`
-- **Messages**: `118`
-- **Enums**: `61`
-- **Fields**: `944`
-- **Enum values**: `884`
+- **Messages**: `123`
+- **Enums**: `62`
+- **Fields**: `973`
+- **Enum values**: `893`
 
 ## Imports
 

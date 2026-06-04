@@ -118,3 +118,8 @@
 - [Uint64Sequence](messages/uint64_sequence.md) (1 fields) - Uint64Sequence represents a sequence of uint64s.
 - [StringSequence](messages/string_sequence.md) (1 fields) - StringSequence represents a sequence of string.
 - [GroupedFields](messages/grouped_fields.md) (8 fields) - Grouped fields are aliases for groups of related UDM fields. All fields grouped together are of type string.
+- [DataAccessIngestionLabel](messages/data_access_ingestion_label.md) (2 fields) - Label used in data access for ingestion.
+- [DataAccessLabels](messages/data_access_labels.md) (6 fields) - Label used in data access.
+- [EntityRisk](messages/entity_risk.md) (14 fields) - Stores information related to the risk score of an entity.
+- [RiskDelta](messages/risk_delta.md) (4 fields) - Describes the difference in risk score between two points in time.
+- [Id](messages/id.md) (3 fields) - Identifier to identify a UDM object like a UDM event, Entity, Collection. The full identifier for persistence is created by setting the 32...

@@ -61,3 +61,4 @@
 - [Priority](enums/priority.md) (6 values) - Priority that is assigned to a Case or Alert.
 - [Reason](enums/reason.md) (4 values) - Reason for closing an Alert or Case in the SOAR product.
 - [ThreatVerdict](enums/threat_verdict.md) (4 values) - GCTI threat verdict levels.
+- [Id.Namespace](enums/id_namespace.md) (9 values) - Extracted Namespace Component

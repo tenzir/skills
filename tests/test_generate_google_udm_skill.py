@@ -31,6 +31,7 @@ class GenerateGoogleUdmSkillTest(unittest.TestCase):
                         "package google.backstory;",
                         "",
                         'import "google/protobuf/timestamp.proto";',
+                        'import "backstory/id.proto";',
                         "",
                         "// A Unified Data Model event.",
                         "message UDM {",
@@ -42,6 +43,9 @@ class GenerateGoogleUdmSkillTest(unittest.TestCase):
                         "",
                         "  // Related UDM fields that are grouped together.",
                         "  optional GroupedFields grouped = 3;",
+                        "",
+                        "  // Finding object reference.",
+                        "  Id object_reference = 4;",
                         "",
                         '  reserved "udm";',
                         "}",
@@ -88,19 +92,55 @@ class GenerateGoogleUdmSkillTest(unittest.TestCase):
                 ),
             )
 
+            self._write(
+                proto_root / "backstory" / "id.proto",
+                "\n".join(
+                    [
+                        'syntax = "proto3";',
+                        "",
+                        "package google.backstory;",
+                        "",
+                        "// Identifier for a UDM object.",
+                        "message Id {",
+                        "  // Namespace component.",
+                        "  enum Namespace {",
+                        "    // Normalized telemetry.",
+                        "    NORMALIZED_TELEMETRY = 0;",
+                        "  }",
+                        "",
+                        "  // Namespace the id belongs to.",
+                        "  Namespace namespace = 1;",
+                        "",
+                        "  // Full raw ID.",
+                        "  bytes id = 2;",
+                        "}",
+                        "",
+                    ]
+                ),
+            )
+
             descriptor_set = MODULE.compile_descriptor(proto_root)
             file_proto = next(
                 proto for proto in descriptor_set.file if proto.name == "backstory/udm.proto"
             )
-            context = MODULE.collect_messages_and_enums(file_proto)
+            id_proto = next(
+                proto for proto in descriptor_set.file if proto.name == "backstory/id.proto"
+            )
+            context = MODULE.collect_messages_and_enums(file_proto, [id_proto])
             source = MODULE.SourceRef(ref="fixture", sha="abc123")
-            docs = MODULE.build_docs(context, source, {"backstory/udm.proto"})
+            docs = MODULE.build_docs(
+                context,
+                source,
+                {"backstory/udm.proto", "backstory/id.proto"},
+            )
 
         skill_markdown = docs[Path("SKILL.md")]
         schema_markdown = docs[Path("schema.md")]
         udm_page = docs[Path("messages/udm.md")]
         metadata_page = docs[Path("messages/metadata.md")]
         variable_page = docs[Path("messages/finding_variable.md")]
+        id_page = docs[Path("messages/id.md")]
+        namespace_page = docs[Path("enums/id_namespace.md")]
         event_type_page = docs[Path("enums/metadata_event_type.md")]
         dedicated_event_types = docs[Path("event-types.md")]
 
@@ -108,9 +148,12 @@ class GenerateGoogleUdmSkillTest(unittest.TestCase):
         self.assertIn("`abc123`", schema_markdown)
         self.assertIn("[`Metadata`](metadata.md)", udm_page)
         self.assertIn("map<`string`, [`FindingVariable`](finding_variable.md)>", udm_page)
+        self.assertIn("[`Id`](id.md)", udm_page)
         self.assertIn("- **Cardinality**: `optional`", udm_page)
         self.assertIn("`google.protobuf.Timestamp` (imported)", metadata_page)
         self.assertIn("- `typed_value`: `string_value`, `int64_value`", variable_page)
+        self.assertIn("### `NORMALIZED_TELEMETRY`", namespace_page)
+        self.assertIn("[`Id.Namespace`](../enums/id_namespace.md)", id_page)
         self.assertIn("### `OLD_TEST_EVENT`", event_type_page)
         self.assertIn("- **Deprecated**: `true`", event_type_page)
         self.assertIn("# Event Types", dedicated_event_types)

@@ -67,6 +67,7 @@ class SourceRef:
 
 @dataclass(frozen=True, slots=True)
 class MessageDoc:
+    file_name: str
     full_name: str
     qualified_name: str
     slug: str
@@ -77,6 +78,7 @@ class MessageDoc:
 
 @dataclass(frozen=True, slots=True)
 class EnumDoc:
+    file_name: str
     full_name: str
     qualified_name: str
     slug: str
@@ -88,7 +90,8 @@ class EnumDoc:
 @dataclass(slots=True)
 class FileContext:
     file_proto: descriptor_pb2.FileDescriptorProto
-    comments: dict[tuple[int, ...], descriptor_pb2.SourceCodeInfo.Location]
+    file_protos: list[descriptor_pb2.FileDescriptorProto]
+    comments: dict[tuple[str, tuple[int, ...]], descriptor_pb2.SourceCodeInfo.Location]
     messages: list[MessageDoc]
     enums: list[EnumDoc]
     message_by_full_name: dict[str, MessageDoc]
@@ -180,10 +183,11 @@ def compile_descriptor(
 
 
 def source_comment(
-    comments: dict[tuple[int, ...], descriptor_pb2.SourceCodeInfo.Location],
+    context: FileContext,
+    file_name: str,
     path: tuple[int, ...],
 ) -> str:
-    location = comments.get(path)
+    location = context.comments.get((file_name, path))
     if location is None:
         return ""
     return clean_comment(location.leading_comments or location.trailing_comments)
@@ -221,24 +225,31 @@ def relative_name(package: str, full_name: str) -> str:
     return full_name.removeprefix(prefix)
 
 
-def collect_messages_and_enums(file_proto: descriptor_pb2.FileDescriptorProto) -> FileContext:
+def collect_messages_and_enums(
+    file_proto: descriptor_pb2.FileDescriptorProto,
+    extra_file_protos: list[descriptor_pb2.FileDescriptorProto] | None = None,
+) -> FileContext:
     package = file_proto.package
+    file_protos = [file_proto, *(extra_file_protos or [])]
     comments = {
-        tuple(location.path): location
-        for location in file_proto.source_code_info.location
+        (proto.name, tuple(location.path)): location
+        for proto in file_protos
+        for location in proto.source_code_info.location
     }
     messages: list[MessageDoc] = []
     enums: list[EnumDoc] = []
 
     def walk_enum(
+        proto: descriptor_pb2.FileDescriptorProto,
         enum: descriptor_pb2.EnumDescriptorProto,
         qualified_name: str,
         path: tuple[int, ...],
         parent: str | None,
     ) -> None:
-        full_name = f"{package}.{qualified_name}" if package else qualified_name
+        full_name = f"{proto.package}.{qualified_name}" if proto.package else qualified_name
         enums.append(
             EnumDoc(
+                file_name=proto.name,
                 full_name=full_name,
                 qualified_name=qualified_name,
                 slug=entity_slug(qualified_name),
@@ -249,13 +260,15 @@ def collect_messages_and_enums(file_proto: descriptor_pb2.FileDescriptorProto) -
         )
 
     def walk_message(
+        proto: descriptor_pb2.FileDescriptorProto,
         message: descriptor_pb2.DescriptorProto,
         qualified_name: str,
         path: tuple[int, ...],
         parent: str | None,
     ) -> None:
-        full_name = f"{package}.{qualified_name}" if package else qualified_name
+        full_name = f"{proto.package}.{qualified_name}" if proto.package else qualified_name
         message_doc = MessageDoc(
+            file_name=proto.name,
             full_name=full_name,
             qualified_name=qualified_name,
             slug=entity_slug(qualified_name),
@@ -266,6 +279,7 @@ def collect_messages_and_enums(file_proto: descriptor_pb2.FileDescriptorProto) -
         messages.append(message_doc)
         for enum_idx, enum in enumerate(message.enum_type):
             walk_enum(
+                proto,
                 enum,
                 f"{qualified_name}.{enum.name}",
                 (*path, 4, enum_idx),
@@ -273,16 +287,20 @@ def collect_messages_and_enums(file_proto: descriptor_pb2.FileDescriptorProto) -
             )
         for nested_idx, nested in enumerate(message.nested_type):
             walk_message(
+                proto,
                 nested,
                 f"{qualified_name}.{nested.name}",
                 (*path, 3, nested_idx),
                 qualified_name,
             )
 
-    for idx, message in enumerate(file_proto.message_type):
-        walk_message(message, message.name, (4, idx), None)
-    for idx, enum in enumerate(file_proto.enum_type):
-        walk_enum(enum, enum.name, (5, idx), None)
+    for proto in file_protos:
+        if proto.package != package:
+            continue
+        for idx, message in enumerate(proto.message_type):
+            walk_message(proto, message, message.name, (4, idx), None)
+        for idx, enum in enumerate(proto.enum_type):
+            walk_enum(proto, enum, enum.name, (5, idx), None)
 
     message_by_full_name = {
         message.full_name: message
@@ -299,6 +317,7 @@ def collect_messages_and_enums(file_proto: descriptor_pb2.FileDescriptorProto) -
     }
     return FileContext(
         file_proto=file_proto,
+        file_protos=file_protos,
         comments=comments,
         messages=messages,
         enums=enums,
@@ -423,12 +442,12 @@ def format_meta(entries: list[tuple[str, object]]) -> str:
 
 def render_field(
     context: FileContext,
-    message: descriptor_pb2.DescriptorProto,
-    message_path: tuple[int, ...],
+    message_doc: MessageDoc,
     field_idx: int,
 ) -> str:
+    message = message_doc.descriptor
     field = message.field[field_idx]
-    comment = source_comment(context.comments, (*message_path, 2, field_idx))
+    comment = source_comment(context, message_doc.file_name, (*message_doc.path, 2, field_idx))
     meta = format_meta(
         [
             ("Number", f"`{field.number}`"),
@@ -449,7 +468,7 @@ def render_field(
 
 def render_message_page(context: FileContext, message_doc: MessageDoc) -> str:
     message = message_doc.descriptor
-    comment = source_comment(context.comments, message_doc.path)
+    comment = source_comment(context, message_doc.file_name, message_doc.path)
     nested_messages = [
         candidate
         for candidate in generated_messages(context)
@@ -494,7 +513,7 @@ def render_message_page(context: FileContext, message_doc: MessageDoc) -> str:
     if message.field:
         lines.extend(["## Fields", ""])
         for field_idx, _field in enumerate(message.field):
-            lines.append(render_field(context, message, message_doc.path, field_idx))
+            lines.append(render_field(context, message_doc, field_idx))
     else:
         lines.extend(["## Fields", "", "No fields.", ""])
 
@@ -503,11 +522,11 @@ def render_message_page(context: FileContext, message_doc: MessageDoc) -> str:
 
 def render_enum_value(
     context: FileContext,
-    enum_path: tuple[int, ...],
+    enum_doc: EnumDoc,
     value_idx: int,
     value: descriptor_pb2.EnumValueDescriptorProto,
 ) -> str:
-    comment = source_comment(context.comments, (*enum_path, 2, value_idx))
+    comment = source_comment(context, enum_doc.file_name, (*enum_doc.path, 2, value_idx))
     meta = format_meta(
         [
             ("Number", f"`{value.number}`"),
@@ -529,7 +548,7 @@ def render_enum_page(
     title: str | None = None,
 ) -> str:
     enum = enum_doc.descriptor
-    comment = source_comment(context.comments, enum_doc.path)
+    comment = source_comment(context, enum_doc.file_name, enum_doc.path)
     meta = format_meta(
         [
             ("Full name", f"`{enum_doc.full_name}`"),
@@ -544,7 +563,7 @@ def render_enum_page(
     if enum.value:
         lines.extend(["## Values", ""])
         for value_idx, value in enumerate(enum.value):
-            lines.append(render_enum_value(context, enum_doc.path, value_idx, value))
+            lines.append(render_enum_value(context, enum_doc, value_idx, value))
     return clean_markdown("\n".join(lines))
 
 
@@ -562,7 +581,7 @@ def brief_comment(comment: str, limit: int = 140) -> str:
 def render_messages_overview(context: FileContext) -> str:
     lines = ["# Messages", ""]
     for message in generated_messages(context):
-        comment = source_comment(context.comments, message.path)
+        comment = source_comment(context, message.file_name, message.path)
         suffix = f" - {brief_comment(comment)}" if comment else ""
         lines.append(
             f"- [{message.qualified_name}](messages/{message.slug}.md)"
@@ -574,7 +593,7 @@ def render_messages_overview(context: FileContext) -> str:
 def render_enums_overview(context: FileContext) -> str:
     lines = ["# Enums", ""]
     for enum in context.enums:
-        comment = source_comment(context.comments, enum.path)
+        comment = source_comment(context, enum.file_name, enum.path)
         suffix = f" - {brief_comment(comment)}" if comment else ""
         lines.append(
             f"- [{enum.qualified_name}](enums/{enum.slug}.md)"
@@ -625,7 +644,7 @@ def render_schema_page(context: FileContext, source: SourceRef, fetched_files: s
         lines.append("| Field | No. | Cardinality | Type | Description |")
         lines.append("| --- | ---: | --- | --- | --- |")
         for field_idx, field in enumerate(udm.descriptor.field):
-            comment = source_comment(context.comments, (*udm.path, 2, field_idx))
+            comment = source_comment(context, udm.file_name, (*udm.path, 2, field_idx))
             lines.append(
                 "| "
                 f"`{field.name}` | "
@@ -768,7 +787,12 @@ def main() -> None:
         if file_proto is None:
             raise RuntimeError(f"Descriptor set does not contain {UDM_PROTO_PATH}")
 
-        context = collect_messages_and_enums(file_proto)
+        extra_file_protos = [
+            proto
+            for proto in descriptor_set.file
+            if proto.name in fetched_files and proto.name != UDM_PROTO_PATH
+        ]
+        context = collect_messages_and_enums(file_proto, extra_file_protos)
         docs = build_docs(context, source, fetched_files)
         write_docs(output_dir, docs)
     finally:

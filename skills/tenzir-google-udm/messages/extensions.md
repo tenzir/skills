@@ -29,7 +29,7 @@ A vulnerability extension.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.backstory.EntityRisk` (imported)
+- **Type**: [`EntityRisk`](entity_risk.md)
 - **JSON name**: `entityRisk`
 
 An entity risk change extension.

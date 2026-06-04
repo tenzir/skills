@@ -325,7 +325,7 @@ Labels are key-value pairs. For example: key = "env", value = "prod". Deprecated
 
 - **Number**: `25`
 - **Cardinality**: `singular`
-- **Type**: `google.backstory.Id` (imported)
+- **Type**: [`Id`](id.md)
 - **JSON name**: `objectReference`
 
 Finding to which the Analyst updated the feedback.

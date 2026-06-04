@@ -351,7 +351,7 @@ Vendor feed name for a threat indicator feed. This field is not populated when t
 
 - **Number**: `24`
 - **Cardinality**: `singular`
-- **Type**: `google.backstory.Id.Namespace` (imported)
+- **Type**: [`Id.Namespace`](../enums/id_namespace.md)
 - **JSON name**: `threatIdNamespace`
 
 The attribute threat_id_namespace qualifies threat_id with an id namespace to get an unique id. The attribute threat_id by itself is not unique across Chronicle as it is a vendor specific id. This field is not populated when the SecurityResult appears in a detection.

@@ -14,7 +14,7 @@ read. If the generated files do not cover the question, say so.
 
 - [Schema summary](schema.md)
 - Source ref: `master`
-- Resolved commit: `5ff4b410beb15f65d3d0b7a160f52d803bce7c97`
+- Resolved commit: `0db4dc67dd805d20294c6dc34068c37f546d71da`
 
 ## File layout
 
