@@ -6,9 +6,9 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Authentication](../schemas/authentication.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Target user entity as Target |
-| [ProcessEvent](../schemas/process_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Target user entity as Target |
-| [User Management](../schemas/user_management.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Target user entity as Target |
+| [Authentication](../schemas/authentication.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Target user entity as Target |
+| [ProcessEvent](../schemas/process_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Target user entity as Target |
+| [User Management](../schemas/user_management.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Target user entity as Target |
 
 ## Details by schema
 
@@ -19,7 +19,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -32,7 +32,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -45,7 +45,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 

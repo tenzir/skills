@@ -6,8 +6,8 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Dhcp](../schemas/dhcp.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Source user entity as Src |
-| [Dns](../schemas/dns.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Source user entity as Src |
+| [Dhcp](../schemas/dhcp.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Source user entity as Src |
+| [Dns](../schemas/dns.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Source user entity as Src |
 
 ## Details by schema
 
@@ -18,7 +18,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -31,7 +31,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 

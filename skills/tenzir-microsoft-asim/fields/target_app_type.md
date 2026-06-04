@@ -6,9 +6,9 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations/app_type.md) | inherited from Target application entity as Target |
-| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations/app_type.md) | inherited from Target application entity as Target |
-| [FileEvent](../schemas/file_event.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations/app_type.md) | inherited from Target application entity as Target |
+| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations.md#apptype) | inherited from Target application entity as Target |
+| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations.md#apptype) | inherited from Target application entity as Target |
+| [FileEvent](../schemas/file_event.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations.md#apptype) | inherited from Target application entity as Target |
 
 ## Details by schema
 
@@ -19,7 +19,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [AppType](../enumerations/app_type.md)
+- **List of values**: [AppType](../enumerations.md#apptype)
 - **Follows**: [`TargetAppName`](../fields/target_app_name.md)
 
 #### Provenance
@@ -35,7 +35,7 @@ The type of the application.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [AppType](../enumerations/app_type.md)
+- **List of values**: [AppType](../enumerations.md#apptype)
 - **Follows**: [`TargetAppName`](../fields/target_app_name.md)
 
 #### Provenance
@@ -51,7 +51,7 @@ The type of the application.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [AppType](../enumerations/app_type.md)
+- **List of values**: [AppType](../enumerations.md#apptype)
 - **Follows**: [`TargetAppName`](../fields/target_app_name.md)
 
 #### Provenance

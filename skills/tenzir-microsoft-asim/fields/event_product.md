@@ -7,15 +7,15 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [AuditEvent](../schemas/audit_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [Authentication](../schemas/authentication.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [Dhcp](../schemas/dhcp.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [Dns](../schemas/dns.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [FileEvent](../schemas/file_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [Notification](../schemas/notification.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [ProcessEvent](../schemas/process_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [RegistryEvent](../schemas/registry_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
-| [User Management](../schemas/user_management.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
+| [AuditEvent](../schemas/audit_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [Authentication](../schemas/authentication.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [Dhcp](../schemas/dhcp.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [Dns](../schemas/dns.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [FileEvent](../schemas/file_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [Notification](../schemas/notification.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [ProcessEvent](../schemas/process_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [RegistryEvent](../schemas/registry_event.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
+| [User Management](../schemas/user_management.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
 
 ## Raw sources
 
@@ -30,7 +30,7 @@
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -45,7 +45,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -60,7 +60,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -75,7 +75,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -90,7 +90,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -105,7 +105,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -120,7 +120,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -135,7 +135,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -150,7 +150,7 @@ The product generating the event. The value should be one of the values listed i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 

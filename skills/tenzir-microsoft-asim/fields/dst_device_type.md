@@ -6,7 +6,7 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Dns](../schemas/dns.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations/device_type.md) | inherited from Destination system entity as Dst |
+| [Dns](../schemas/dns.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations.md#devicetype) | inherited from Destination system entity as Dst |
 
 ## Details by schema
 
@@ -17,7 +17,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DeviceType](../enumerations/device_type.md)
+- **List of values**: [DeviceType](../enumerations.md#devicetype)
 
 #### Provenance
 

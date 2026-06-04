@@ -38,7 +38,7 @@ The name of the application, including a service, a URL, or a SaaS application.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [AppType](../enumerations/app_type.md)
+- **List of values**: [AppType](../enumerations.md#apptype)
 - **Follows**: [`<<Role>>AppName`](../fields/role_app_name.md)
 
 The type of the application.

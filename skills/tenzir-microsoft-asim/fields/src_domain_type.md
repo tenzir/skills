@@ -6,12 +6,12 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Source system entity as Src |
-| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Source system entity as Src |
-| [Dhcp](../schemas/dhcp.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Source system entity as Src |
-| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Source system entity as Src |
-| [FileEvent](../schemas/file_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Source system entity as Src |
-| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Source system entity as Src |
+| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Source system entity as Src |
+| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Source system entity as Src |
+| [Dhcp](../schemas/dhcp.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Source system entity as Src |
+| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Source system entity as Src |
+| [FileEvent](../schemas/file_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Source system entity as Src |
+| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Source system entity as Src |
 
 ## Details by schema
 
@@ -22,7 +22,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`SrcDomain`](../fields/src_domain.md)
 
 #### Provenance
@@ -38,7 +38,7 @@ The type of the domain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`SrcDomain`](../fields/src_domain.md)
 
 #### Provenance
@@ -54,7 +54,7 @@ The type of the domain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`SrcDomain`](../fields/src_domain.md)
 
 #### Provenance
@@ -70,7 +70,7 @@ The type of the domain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`SrcDomain`](../fields/src_domain.md)
 
 #### Provenance
@@ -86,7 +86,7 @@ The type of the domain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`SrcDomain`](../fields/src_domain.md)
 
 #### Provenance
@@ -102,7 +102,7 @@ The type of the domain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`SrcDomain`](../fields/src_domain.md)
 
 #### Provenance

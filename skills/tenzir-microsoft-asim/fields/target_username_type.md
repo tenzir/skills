@@ -6,9 +6,9 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations/username_type.md) | inherited from Target user entity as Target |
-| [ProcessEvent](../schemas/process_event.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations/username_type.md) | inherited from Target user entity as Target |
-| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations/username_type.md) | inherited from Target user entity as Target |
+| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations.md#usernametype) | inherited from Target user entity as Target |
+| [ProcessEvent](../schemas/process_event.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations.md#usernametype) | inherited from Target user entity as Target |
+| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations.md#usernametype) | inherited from Target user entity as Target |
 
 ## Details by schema
 
@@ -19,7 +19,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UsernameType](../enumerations/username_type.md)
+- **List of values**: [UsernameType](../enumerations.md#usernametype)
 - **Follows**: [`SrcUsername`](../fields/src_username.md)
 
 #### Provenance
@@ -33,7 +33,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UsernameType](../enumerations/username_type.md)
+- **List of values**: [UsernameType](../enumerations.md#usernametype)
 - **Follows**: [`SrcUsername`](../fields/src_username.md)
 
 #### Provenance
@@ -47,7 +47,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UsernameType](../enumerations/username_type.md)
+- **List of values**: [UsernameType](../enumerations.md#usernametype)
 - **Follows**: [`SrcUsername`](../fields/src_username.md)
 
 #### Provenance

@@ -29,7 +29,7 @@ A descriptive text associated with the device.
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DeviceType](../enumerations/device_type.md)
+- **List of values**: [DeviceType](../enumerations.md#devicetype)
 
 The type of the device.
 
@@ -45,7 +45,7 @@ The domain of the device.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`<<Role>>Domain`](../fields/role_domain.md)
 
 The type of the domain.
@@ -62,7 +62,7 @@ The ID of the device.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DvcIdType](../enumerations/dvc_id_type.md)
+- **List of values**: [DvcIdType](../enumerations.md#dvcidtype)
 - **Follows**: [`<<Role>>DvcId`](../fields/role_dvc_id.md)
 
 The type of the DvcId.

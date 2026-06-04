@@ -6,7 +6,7 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Notification](../schemas/notification.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations/app_type.md) | inherited from Application entity |
+| [Notification](../schemas/notification.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations.md#apptype) | inherited from Application entity |
 
 ## Details by schema
 
@@ -17,7 +17,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [AppType](../enumerations/app_type.md)
+- **List of values**: [AppType](../enumerations.md#apptype)
 - **Follows**: [`AppName`](../fields/app_name.md)
 
 #### Provenance

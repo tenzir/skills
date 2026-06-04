@@ -7,13 +7,13 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [AuditEvent](../schemas/audit_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
-| [Authentication](../schemas/authentication.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
-| [FileEvent](../schemas/file_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
-| [Notification](../schemas/notification.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
-| [ProcessEvent](../schemas/process_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
-| [RegistryEvent](../schemas/registry_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
-| [User Management](../schemas/user_management.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
+| [AuditEvent](../schemas/audit_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
+| [Authentication](../schemas/authentication.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
+| [FileEvent](../schemas/file_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
+| [Notification](../schemas/notification.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
+| [ProcessEvent](../schemas/process_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
+| [RegistryEvent](../schemas/registry_event.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
+| [User Management](../schemas/user_management.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
 
 ## Raw sources
 
@@ -28,7 +28,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -41,7 +41,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -54,7 +54,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -67,7 +67,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -80,7 +80,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -93,7 +93,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -106,7 +106,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 

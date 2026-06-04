@@ -6,8 +6,8 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Target system entity as Target |
-| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Target system entity as Target |
+| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Target system entity as Target |
+| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Target system entity as Target |
 
 ## Details by schema
 
@@ -18,7 +18,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`TargetDomain`](../fields/target_domain.md)
 
 #### Provenance
@@ -34,7 +34,7 @@ The type of the domain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`TargetDomain`](../fields/target_domain.md)
 
 #### Provenance

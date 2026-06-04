@@ -56,7 +56,7 @@ The domain of the device on which the event occurred or which reported the event
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 TThe type of DvcDomain.
@@ -88,7 +88,7 @@ The unique ID of the device on which the event occurred or which reported the ev
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DvcIdType](../enumerations/dvc_id_type.md)
+- **List of values**: [DvcIdType](../enumerations.md#dvcidtype)
 - **Follows**: [`SrcDvcId`](../fields/src_dvc_id.md)
 
 The type of DvcId.

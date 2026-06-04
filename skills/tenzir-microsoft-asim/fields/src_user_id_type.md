@@ -6,8 +6,8 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Dhcp](../schemas/dhcp.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations/user_id_type.md) | inherited from Source user entity as Src |
-| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations/user_id_type.md) | inherited from Source user entity as Src |
+| [Dhcp](../schemas/dhcp.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations.md#useridtype) | inherited from Source user entity as Src |
+| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations.md#useridtype) | inherited from Source user entity as Src |
 
 ## Details by schema
 
@@ -18,7 +18,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`SrcUserId`](../fields/src_user_id.md)
 
 #### Provenance
@@ -32,7 +32,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`SrcUserId`](../fields/src_user_id.md)
 
 #### Provenance

@@ -98,7 +98,7 @@ The owner of the event, which is usually the department or subsidiary in which i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 The product generating the event. The value should be one of the values listed in Vendors and Products.
 
@@ -137,7 +137,7 @@ Reason or details for the result reported in the EventResult field. Each schema 
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [Schemas](../enumerations/schemas.md)
+- **List of values**: [Schemas](../enumerations.md#schemas)
 
 The schema the event is normalized to. Each schema documents its schema name.
 
@@ -186,7 +186,7 @@ Describes the operation reported by the record. Each schema documents the list o
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventVendor](../enumerations/event_vendor.md)
+- **List of values**: [EventVendor](../enumerations.md#eventvendor)
 
 The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
 

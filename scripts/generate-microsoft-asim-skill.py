@@ -450,8 +450,12 @@ def field_link(name: str, *, prefix: str = "") -> str:
     return f"[`{name}`]({prefix}fields/{field_slug(name)}.md)"
 
 
+def heading_anchor(value: str) -> str:
+    return re.sub(r"[^a-z0-9 -]", "", value.lower()).replace(" ", "-")
+
+
 def enum_link(name: str, *, prefix: str = "") -> str:
-    return f"[{name}]({prefix}enumerations/{to_slug(name)}.md)"
+    return f"[{name}]({prefix}enumerations.md#{heading_anchor(name)})"
 
 
 def render_reference(value: Any) -> str:
@@ -640,8 +644,7 @@ def render_skill_markdown(reference: AsimReference) -> str:
                 "schemas/{schema}.md               # Resolved schema fields",
                 "fields.md                         # Field index",
                 "fields/{field}.md                 # Field occurrences and aliases",
-                "enumerations.md                   # Enumeration index",
-                "enumerations/{enumeration}.md     # Enumeration values",
+                "enumerations.md                   # Enumeration values",
                 "entities.md                       # Entity fragment index",
                 "entities/{entity}.md              # Raw entity fragment fields",
                 "common.md                         # Common fragment index",
@@ -659,7 +662,7 @@ def render_skill_markdown(reference: AsimReference) -> str:
                 "| What does field X mean? | [Fields](fields.md) -> specific field page |",
                 "| Which field should an alias use? | [Fields](fields.md), then alias and target field pages |",
                 "| How do user/device/process roles map? | [Schema semantics](guidance/schema-semantics.md) and [Entities](entities.md) |",
-                "| Which enum values are allowed? | [Enumerations](enumerations.md) -> specific enumeration page |",
+                "| Which enum values are allowed? | [Enumerations](enumerations.md) |",
                 "| What normalized content uses ASIM? | [Security content](guidance/security-content.md) |",
                 "",
                 "When advising on mappings, prefer the normalized field over an alias for",
@@ -870,59 +873,25 @@ def render_field_page(
     return clean_markdown("\n".join(lines))
 
 
-def render_enumerations_index(reference: AsimReference) -> str:
-    field_refs = fields_by_enumeration(reference)
-    lines = ["# Enumerations", ""]
-    lines.append("| Enumeration | Values | Referenced by fields | Source |")
-    lines.append("| --- | ---: | --- | --- |")
+def render_enumerations_page(reference: AsimReference) -> str:
+    value_count = sum(len(enumeration.values) for enumeration in reference.enumerations)
+    lines = [
+        "# Enumerations",
+        "",
+        f"ASIM defines {len(reference.enumerations)} enumerations with {value_count} values.",
+        "",
+    ]
     for enumeration in sorted(reference.enumerations, key=lambda item: item.name.casefold()):
-        refs = field_refs.get(enumeration.name, set())
-        rendered_refs = ", ".join(field_link(name) for name in sorted(refs, key=str.casefold))
-        lines.append(
-            "| "
-            f"{enum_link(enumeration.name)} | "
-            f"{len(enumeration.values)} | "
-            f"{rendered_refs} | "
-            f"`{enumeration.source_path}` |"
-        )
-    return clean_markdown("\n".join(lines))
-
-
-def fields_by_enumeration(reference: AsimReference) -> dict[str, set[str]]:
-    enum_names = set(enum_by_name(reference))
-    result: dict[str, set[str]] = {}
-    for schema in reference.schemas:
-        for resolved in schema.fields:
-            values = resolved.attrs.get("List of values")
-            if isinstance(values, str) and values in enum_names:
-                result.setdefault(values, set()).add(resolved.name)
-    return result
-
-
-def render_enumeration_page(enumeration: Enumeration, reference: AsimReference) -> str:
-    field_refs = fields_by_enumeration(reference).get(enumeration.name, set())
-    lines = [f"# {enumeration.name}", ""]
-    lines.append(f"- **Source**: [`{enumeration.source_path}`]({blob_url(reference.source.sha, enumeration.source_path)})")
-    lines.append(f"- **Values**: `{len(enumeration.values)}`")
-    if field_refs:
-        fields = ", ".join(field_link(name, prefix="../") for name in sorted(field_refs, key=str.casefold))
-        lines.append(f"- **Referenced by fields**: {fields}")
-    lines.append("")
-    if enumeration.values:
-        lines.extend(["## Values", ""])
-        lines.append("| Value | Description | Examples | Link |")
-        lines.append("| --- | --- | --- | --- |")
+        lines.extend([f"## {enumeration.name}", ""])
         for value in enumeration.values:
-            rendered_value = format_value_link(value.value, reference, prefix="../")
-            examples = ", ".join(f"`{example}`" for example in value.examples)
-            link = f"[source]({value.link})" if value.link else ""
-            lines.append(
-                "| "
-                f"{rendered_value} | "
-                f"{escape_table(value.description)} | "
-                f"{escape_table(examples)} | "
-                f"{link} |"
-            )
+            line = f"- `{value.value}`"
+            if value.description:
+                line += f": {value.description}"
+            examples = [example for example in value.examples if example.casefold() != "tbd"]
+            if examples:
+                line += f" Examples: {', '.join(f'`{example}`' for example in examples)}."
+            lines.append(line)
+        lines.append("")
     return clean_markdown("\n".join(lines))
 
 
@@ -1126,7 +1095,7 @@ def build_docs(reference: AsimReference) -> dict[Path, str]:
         Path("source.md"): render_source_page(reference),
         Path("schemas.md"): render_schemas_index(reference),
         Path("fields.md"): render_fields_index(reference),
-        Path("enumerations.md"): render_enumerations_index(reference),
+        Path("enumerations.md"): render_enumerations_page(reference),
         Path("entities.md"): render_fragment_index(reference, "entity"),
         Path("common.md"): render_fragment_index(reference, "common"),
         Path("guidance.md"): render_guidance_index(),
@@ -1144,12 +1113,6 @@ def build_docs(reference: AsimReference) -> dict[Path, str]:
             name,
             occurrences,
             raw_occurrences.get(name, []),
-            reference,
-        )
-
-    for enumeration in reference.enumerations:
-        docs[Path("enumerations") / f"{to_slug(enumeration.name)}.md"] = render_enumeration_page(
-            enumeration,
             reference,
         )
 

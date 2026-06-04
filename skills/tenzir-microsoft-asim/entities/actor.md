@@ -70,7 +70,7 @@ A machine-readable, alphanumeric, unique representation of the actor.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`ActorUserId`](../fields/actor_user_id.md)
 
 ### `ActorUsername`
@@ -86,7 +86,7 @@ The Actor's username, including domain information when available.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UsernameType](../enumerations/username_type.md)
+- **List of values**: [UsernameType](../enumerations.md#usernametype)
 - **Follows**: [`ActorUsername`](../fields/actor_username.md)
 
 ### `ActorUserSid`
@@ -101,4 +101,4 @@ The Windows user ID (SIDs) of the actor.
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)

@@ -6,9 +6,9 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations/user_id_type.md) | inherited from Target user entity as Target |
-| [ProcessEvent](../schemas/process_event.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations/user_id_type.md) | inherited from Target user entity as Target |
-| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations/user_id_type.md) | inherited from Target user entity as Target |
+| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations.md#useridtype) | inherited from Target user entity as Target |
+| [ProcessEvent](../schemas/process_event.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations.md#useridtype) | inherited from Target user entity as Target |
+| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations.md#useridtype) | inherited from Target user entity as Target |
 
 ## Details by schema
 
@@ -19,7 +19,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`TargetUserId`](../fields/target_user_id.md)
 
 #### Provenance
@@ -33,7 +33,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`TargetUserId`](../fields/target_user_id.md)
 
 #### Provenance
@@ -47,7 +47,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`TargetUserId`](../fields/target_user_id.md)
 
 #### Provenance

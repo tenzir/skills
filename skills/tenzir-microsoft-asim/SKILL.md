@@ -29,8 +29,7 @@ schemas.md                        # Schema index
 schemas/{schema}.md               # Resolved schema fields
 fields.md                         # Field index
 fields/{field}.md                 # Field occurrences and aliases
-enumerations.md                   # Enumeration index
-enumerations/{enumeration}.md     # Enumeration values
+enumerations.md                   # Enumeration values
 entities.md                       # Entity fragment index
 entities/{entity}.md              # Raw entity fragment fields
 common.md                         # Common fragment index
@@ -48,7 +47,7 @@ guidance/{topic}.md               # ASIM semantics and mapping guidance
 | What does field X mean? | [Fields](fields.md) -> specific field page |
 | Which field should an alias use? | [Fields](fields.md), then alias and target field pages |
 | How do user/device/process roles map? | [Schema semantics](guidance/schema-semantics.md) and [Entities](entities.md) |
-| Which enum values are allowed? | [Enumerations](enumerations.md) -> specific enumeration page |
+| Which enum values are allowed? | [Enumerations](enumerations.md) |
 | What normalized content uses ASIM? | [Security content](guidance/security-content.md) |
 
 When advising on mappings, prefer the normalized field over an alias for

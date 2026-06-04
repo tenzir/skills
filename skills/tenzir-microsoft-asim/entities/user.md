@@ -36,7 +36,7 @@ A machine-readable, alphanumeric, unique representation of the user.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`<<Role>>UserId`](../fields/role_user_id.md)
 
 ### `<<Role>>Username`
@@ -52,7 +52,7 @@ The user's username, including domain information when available.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UsernameType](../enumerations/username_type.md)
+- **List of values**: [UsernameType](../enumerations.md#usernametype)
 - **Follows**: [`SrcUsername`](../fields/src_username.md)
 
 ### `<<Role>>UserScope`
@@ -85,7 +85,7 @@ The unique ID of the sign-in session of the user.
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 ### `<<Role>>UserUid`
 

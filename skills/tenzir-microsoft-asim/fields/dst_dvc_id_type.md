@@ -6,7 +6,7 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [DvcIdType](../enumerations/dvc_id_type.md) | inherited from Destination system entity as Dst |
+| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [DvcIdType](../enumerations.md#dvcidtype) | inherited from Destination system entity as Dst |
 
 ## Details by schema
 
@@ -17,7 +17,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DvcIdType](../enumerations/dvc_id_type.md)
+- **List of values**: [DvcIdType](../enumerations.md#dvcidtype)
 - **Follows**: [`DstDvcId`](../fields/dst_dvc_id.md)
 
 #### Provenance

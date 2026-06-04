@@ -7,15 +7,15 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [Dhcp](../schemas/dhcp.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [FileEvent](../schemas/file_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [Notification](../schemas/notification.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [ProcessEvent](../schemas/process_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [RegistryEvent](../schemas/registry_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
-| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
+| [AuditEvent](../schemas/audit_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [Authentication](../schemas/authentication.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [Dhcp](../schemas/dhcp.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [Dns](../schemas/dns.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [FileEvent](../schemas/file_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [Notification](../schemas/notification.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [ProcessEvent](../schemas/process_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [RegistryEvent](../schemas/registry_event.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
+| [User Management](../schemas/user_management.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
 
 ## Raw sources
 
@@ -30,7 +30,7 @@
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -46,7 +46,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -62,7 +62,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -78,7 +78,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -94,7 +94,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -110,7 +110,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -126,7 +126,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -142,7 +142,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -158,7 +158,7 @@ TThe type of DvcDomain.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance

@@ -37,11 +37,11 @@
 | [`ActorSessionId`](../fields/actor_session_id.md) | `Optional` | `string` |  |  | inherited from Actor entity |
 | [`ActorUserAadId`](../fields/actor_user_aad_id.md) | `Optional` | `string` |  |  | inherited from Actor entity |
 | [`ActorUserId`](../fields/actor_user_id.md) | `Optional` | `string` |  |  | inherited from Actor entity |
-| [`ActorUserIdType`](../fields/actor_user_id_type.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations/user_id_type.md) | inherited from Actor entity |
+| [`ActorUserIdType`](../fields/actor_user_id_type.md) | `Conditional` | `string` | `Enumerated` | [UserIdType](../enumerations.md#useridtype) | inherited from Actor entity |
 | [`ActorUsername`](../fields/actor_username.md) | `Recommended` | `string` | `Username` |  | inherited from Actor entity |
-| [`ActorUsernameType`](../fields/actor_username_type.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations/username_type.md) | inherited from Actor entity |
+| [`ActorUsernameType`](../fields/actor_username_type.md) | `Conditional` | `string` | `Enumerated` | [UsernameType](../enumerations.md#usernametype) | inherited from Actor entity |
 | [`ActorUserSid`](../fields/actor_user_sid.md) | `Optional` | `string` |  |  | inherited from Actor entity |
-| [`ActorUserType`](../fields/actor_user_type.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations/user_type.md) | inherited from Actor entity |
+| [`ActorUserType`](../fields/actor_user_type.md) | `Optional` | `string` | `Enumerated` | [UserType](../enumerations.md#usertype) | inherited from Actor entity |
 | [`AdditionalFields`](../fields/additional_fields.md) | `Recommended` | `dynamic` |  |  | inherited from Event Fields |
 | [`Application`](../fields/application.md) | `Alias` | `string` |  |  | local |
 | [`Dst`](../fields/dst.md) | `Recommended` | `string` |  |  | inherited from Event Fields |
@@ -49,11 +49,11 @@
 | [`DvcAction`](../fields/dvc_action.md) | `Recommended` | `string` |  |  | inherited from Dvc |
 | [`DvcDescription`](../fields/dvc_description.md) | `Optional` | `string` |  |  | inherited from Dvc |
 | [`DvcDomain`](../fields/dvc_domain.md) | `Recommended` | `string` |  |  | inherited from Dvc |
-| [`DvcDomainType`](../fields/dvc_domain_type.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Dvc |
+| [`DvcDomainType`](../fields/dvc_domain_type.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Dvc |
 | [`DvcFQDN`](../fields/dvc_fqdn.md) | `Optional` | `string` |  |  | inherited from Dvc |
 | [`DvcHostname`](../fields/dvc_hostname.md) | `Recommended` | `string` | `Hostname` |  | inherited from Dvc |
 | [`DvcId`](../fields/dvc_id.md) | `Optional` | `string` |  |  | inherited from Dvc |
-| [`DvcIdType`](../fields/dvc_id_type.md) | `Conditional` | `string` | `Enumerated` | [DvcIdType](../enumerations/dvc_id_type.md) | inherited from Dvc |
+| [`DvcIdType`](../fields/dvc_id_type.md) | `Conditional` | `string` | `Enumerated` | [DvcIdType](../enumerations.md#dvcidtype) | inherited from Dvc |
 | [`DvcInterface`](../fields/dvc_interface.md) | `Optional` | `string` |  |  | inherited from Dvc |
 | [`DvcIpAddr`](../fields/dvc_ip_addr.md) | `Recommended` | `string` | `IP Address` |  | inherited from Dvc |
 | [`DvcMacAddr`](../fields/dvc_mac_addr.md) | `Optional` | `string` | `MAC address` |  | inherited from Dvc |
@@ -72,7 +72,7 @@
 | [`EventOriginalType`](../fields/event_original_type.md) | `Optional` | `string` |  |  | inherited from Event Fields |
 | [`EventOriginalUid`](../fields/event_original_uid.md) | `Optional` | `string` |  |  | inherited from Event Fields |
 | [`EventOwner`](../fields/event_owner.md) | `Optional` | `string` | `Enumerated` |  | inherited from Event Fields |
-| [`EventProduct`](../fields/event_product.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations/event_product.md) | inherited from Event Fields |
+| [`EventProduct`](../fields/event_product.md) | `Mandatory` | `string` | `Enumerated` | [EventProduct](../enumerations.md#eventproduct) | inherited from Event Fields |
 | [`EventProductVersion`](../fields/event_product_version.md) | `Optional` | `string` |  |  | inherited from Event Fields |
 | [`EventReportUrl`](../fields/event_report_url.md) | `Optional` | `string` | `URL` |  | inherited from Event Fields |
 | [`EventResult`](../fields/event_result.md) | `Mandatory` | `string` | `Enumerated` | `Success`, `Failure`, `Partial`, `NA` | inherited from Event Fields |
@@ -83,7 +83,7 @@
 | [`EventStartTime`](../fields/event_start_time.md) | `Mandatory` | `datetime` |  |  | inherited from Event Fields |
 | [`EventSubType`](../fields/event_sub_type.md) | `Optional` | `string` | `Enumerated` | `Upload`, `Extended`, `Recycle`, `Preview`, `Download`, `Versions`, `Site`, `Recycle`, `Checkin`, `Checkout`, `FolderModified` | local override |
 | [`EventType`](../fields/event_type.md) | `Mandatory` | `string` | `Enumerated` | `FileAccessed`, `FileCreated`, `FileModified`, `FileDeleted`, `FileRenamed`, `FileCopied`, `FileMoved`, `FolderCreated`, `FolderDeleted`, `FolderMoved`, `FolderModified`, `FolderCopied`, `FileCreatedOrModified` | local override |
-| [`EventVendor`](../fields/event_vendor.md) | `Mandatory` | `string` | `Enumerated` | [EventVendor](../enumerations/event_vendor.md) | inherited from Event Fields |
+| [`EventVendor`](../fields/event_vendor.md) | `Mandatory` | `string` | `Enumerated` | [EventVendor](../enumerations.md#eventvendor) | inherited from Event Fields |
 | [`FileName`](../fields/file_name.md) | `Alias` | `string` |  |  | local |
 | [`FilePath`](../fields/file_path.md) | `Alias` | `string` |  |  | local |
 | [`Hash`](../fields/hash.md) | `Alias` | `string` |  |  | local |
@@ -97,11 +97,11 @@
 | [`RuleNumber`](../fields/rule_number.md) | `Optional` | `int` |  |  | inherited from Inspection fields |
 | [`Src`](../fields/src.md) | `Alias` | `string` |  |  | inherited from Source system entity as Src |
 | [`SrcDescription`](../fields/src_description.md) | `Optional` | `string` |  |  | inherited from Source system entity as Src |
-| [`SrcDeviceType`](../fields/src_device_type.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations/device_type.md) | inherited from Source system entity as Src |
+| [`SrcDeviceType`](../fields/src_device_type.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations.md#devicetype) | inherited from Source system entity as Src |
 | [`SrcDomain`](../fields/src_domain.md) | `Optional` | `string` |  |  | inherited from Source system entity as Src |
-| [`SrcDomainType`](../fields/src_domain_type.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations/domain_type.md) | inherited from Source system entity as Src |
+| [`SrcDomainType`](../fields/src_domain_type.md) | `Conditional` | `string` | `Enumerated` | [DomainType](../enumerations.md#domaintype) | inherited from Source system entity as Src |
 | [`SrcDvcId`](../fields/src_dvc_id.md) | `Optional` | `string` |  |  | inherited from Source system entity as Src |
-| [`SrcDvcIdType`](../fields/src_dvc_id_type.md) | `Conditional` | `string` | `Enumerated` | [DvcIdType](../enumerations/dvc_id_type.md) | inherited from Source system entity as Src |
+| [`SrcDvcIdType`](../fields/src_dvc_id_type.md) | `Conditional` | `string` | `Enumerated` | [DvcIdType](../enumerations.md#dvcidtype) | inherited from Source system entity as Src |
 | [`SrcDvcScope`](../fields/src_dvc_scope.md) | `Optional` | `string` |  |  | inherited from Source system entity as Src |
 | [`SrcDvcScopeId`](../fields/src_dvc_scope_id.md) | `Optional` | `string` |  |  | inherited from Source system entity as Src |
 | [`SrcFileCreationTime`](../fields/src_file_creation_time.md) | `Optional` | `datetime` |  |  | local |
@@ -130,7 +130,7 @@
 | [`SrcRiskLevel`](../fields/src_risk_level.md) | `Optional` | `int` |  |  | inherited from Source system entity as Src |
 | [`TargetAppId`](../fields/target_app_id.md) | `Optional` | `string` |  |  | inherited from Target application entity as Target |
 | [`TargetAppName`](../fields/target_app_name.md) | `Optional` | `string` |  |  | inherited from Target application entity as Target |
-| [`TargetAppType`](../fields/target_app_type.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations/app_type.md) | inherited from Target application entity as Target |
+| [`TargetAppType`](../fields/target_app_type.md) | `Conditional` | `string` | `Enumerated` | [AppType](../enumerations.md#apptype) | inherited from Target application entity as Target |
 | [`TargetFileCreationTime`](../fields/target_file_creation_time.md) | `Optional` | `datetime` |  |  | local |
 | [`TargetFileDirectory`](../fields/target_file_directory.md) | `Optional` | `string` |  |  | local |
 | [`TargetFileExtension`](../fields/target_file_extension.md) | `Optional` | `string` |  |  | local |
@@ -303,7 +303,7 @@ A machine-readable, alphanumeric, unique representation of the actor.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserIdType](../enumerations/user_id_type.md)
+- **List of values**: [UserIdType](../enumerations.md#useridtype)
 - **Follows**: [`ActorUserId`](../fields/actor_user_id.md)
 
 #### Provenance
@@ -327,7 +327,7 @@ The Actor's username, including domain information when available.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UsernameType](../enumerations/username_type.md)
+- **List of values**: [UsernameType](../enumerations.md#usernametype)
 - **Follows**: [`ActorUsername`](../fields/actor_username.md)
 
 #### Provenance
@@ -350,7 +350,7 @@ The Windows user ID (SIDs) of the actor.
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [UserType](../enumerations/user_type.md)
+- **List of values**: [UserType](../enumerations.md#usertype)
 
 #### Provenance
 
@@ -438,7 +438,7 @@ The domain of the device on which the event occurred or which reported the event
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`DvcDomain`](../fields/dvc_domain.md)
 
 #### Provenance
@@ -486,7 +486,7 @@ The unique ID of the device on which the event occurred or which reported the ev
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DvcIdType](../enumerations/dvc_id_type.md)
+- **List of values**: [DvcIdType](../enumerations.md#dvcidtype)
 - **Follows**: [`SrcDvcId`](../fields/src_dvc_id.md)
 
 #### Provenance
@@ -702,7 +702,7 @@ The owner of the event, which is usually the department or subsidiary in which i
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventProduct](../enumerations/event_product.md)
+- **List of values**: [EventProduct](../enumerations.md#eventproduct)
 
 #### Provenance
 
@@ -839,7 +839,7 @@ Describes the operation reported by the record. Each schema documents the list o
 - **Class**: `Mandatory`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [EventVendor](../enumerations/event_vendor.md)
+- **List of values**: [EventVendor](../enumerations.md#eventvendor)
 
 #### Provenance
 
@@ -1009,7 +1009,7 @@ A descriptive text associated with the device.
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DeviceType](../enumerations/device_type.md)
+- **List of values**: [DeviceType](../enumerations.md#devicetype)
 
 #### Provenance
 
@@ -1033,7 +1033,7 @@ The domain of the device.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DomainType](../enumerations/domain_type.md)
+- **List of values**: [DomainType](../enumerations.md#domaintype)
 - **Follows**: [`SrcDomain`](../fields/src_domain.md)
 
 #### Provenance
@@ -1058,7 +1058,7 @@ The ID of the device.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DvcIdType](../enumerations/dvc_id_type.md)
+- **List of values**: [DvcIdType](../enumerations.md#dvcidtype)
 - **Follows**: [`SrcDvcId`](../fields/src_dvc_id.md)
 
 #### Provenance
@@ -1414,7 +1414,7 @@ The name of the application, including a service, a URL, or a SaaS application.
 - **Class**: `Conditional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [AppType](../enumerations/app_type.md)
+- **List of values**: [AppType](../enumerations.md#apptype)
 - **Follows**: [`TargetAppName`](../fields/target_app_name.md)
 
 #### Provenance

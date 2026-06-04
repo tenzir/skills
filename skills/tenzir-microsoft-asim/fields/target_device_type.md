@@ -6,8 +6,8 @@
 
 | Schema | Class | Type | Logical type | Values | Provenance |
 | --- | --- | --- | --- | --- | --- |
-| [AuditEvent](../schemas/audit_event.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations/device_type.md) | inherited from Target system entity as Target |
-| [Authentication](../schemas/authentication.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations/device_type.md) | inherited from Target system entity as Target |
+| [AuditEvent](../schemas/audit_event.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations.md#devicetype) | inherited from Target system entity as Target |
+| [Authentication](../schemas/authentication.md) | `Optional` | `string` | `Enumerated` | [DeviceType](../enumerations.md#devicetype) | inherited from Target system entity as Target |
 
 ## Details by schema
 
@@ -18,7 +18,7 @@
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DeviceType](../enumerations/device_type.md)
+- **List of values**: [DeviceType](../enumerations.md#devicetype)
 
 #### Provenance
 
@@ -33,7 +33,7 @@ The type of the device.
 - **Class**: `Optional`
 - **Type**: `string`
 - **Logical type**: `Enumerated`
-- **List of values**: [DeviceType](../enumerations/device_type.md)
+- **List of values**: [DeviceType](../enumerations.md#devicetype)
 
 #### Provenance
 
