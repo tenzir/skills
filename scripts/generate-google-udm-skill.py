@@ -1957,21 +1957,27 @@ def render_datatypes_page(guidance: DocsGuidance) -> str:
         "",
         "Common type labels used in the message field reference.",
         "",
-        "| Type | Meaning |",
-        "| --- | --- |",
-        "| `string` | Text value. |",
-        "| `bool` | Boolean value. |",
-        "| `bytes` | Binary value. |",
-        "| `int32`, `int64`, `uint32`, `uint64` | Integer value. |",
-        "| `float`, `double` | Floating-point numeric value. |",
-        "| `timestamp` | Timestamp value. Check field guidance for the expected format. |",
-        "| `duration` | Duration value. Check field guidance for the expected format. |",
-        "| `object` | Structured object for values that do not fit a specific UDM message. |",
-        "| `interval` | Time interval value. |",
-        "| `latLng` | Geographic latitude and longitude value. |",
-        "| `map<K, V>` | Keyed collection whose keys and values use the listed types. |",
-        "",
     ]
+    if not guidance.datatypes:
+        lines.extend(["No datatype guidance was extracted.", ""])
+        return clean_markdown("\n".join(lines))
+
+    lines.extend(["| Type | Notes | Language mappings |", "| --- | --- | --- |"])
+    for datatype in guidance.datatypes:
+        language_mappings = "<br>".join(
+            f"{language}: `{value}`"
+            for language, value in datatype.language_types
+        )
+        lines.append(
+            "| "
+            f"`{datatype.datatype}`"
+            " | "
+            f"{apply_endpoint_language(datatype.notes) or '-'}"
+            " | "
+            f"{language_mappings or '-'}"
+            " |"
+        )
+    lines.append("")
     return clean_markdown("\n".join(lines))
 
 
