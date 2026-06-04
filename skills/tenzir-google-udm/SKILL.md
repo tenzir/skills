@@ -54,18 +54,6 @@ ingested as entity context through the entity ingestion path.
 | `riskScore` | `optional` | [`EntityRisk`](messages/entity_risk.md) | Stores information related to the entity's risk score. |
 | `metric` | `singular` | [`Metric`](messages/metric.md) | Stores statistical metrics about the entity. Used if metadata.entityType is METRIC. |
 
-## File layout
-
-```
-messages.md                # Message index
-messages/{message}.md      # Message fields and population guidance
-enums.md                   # Enum index
-enums/{enum}.md            # Enum values
-event-types.md             # EventType values and event guidance
-field-paths.md             # Rules, Detect Engine, and CBN prefixes
-datatypes.md               # Standard datatype notes
-```
-
 ## Question routing
 
 | Question pattern | Start here |
@@ -101,12 +89,3 @@ reconciling them.
   requirements.
 - `Noun` carries entity details such as users, assets, processes, files,
   resources, cloud context, and labels.
-
-## Answering principles
-
-- Read before answering. Every field or guidance claim must trace back to
-  a generated file in this skill.
-- Prefer exact field names, enum names, and message names from the reference.
-- Distinguish field structure from mapping policy. Required-field and
-  population rules come from message, event, and entity guidance.
-- Do not invent UDM semantics from memory.
