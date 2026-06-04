@@ -35,7 +35,6 @@ usage.md                   # Guidance source summary and routing
 field-paths.md             # Rules, Detect Engine, and CBN prefixes
 datatypes.md               # Standard datatype notes
 event-guidance/{type}.md   # Required/optional event guidance by event type
-entity-guidance/{type}.md  # Required entity fields by entity type
 ```
 
 ## Question routing
@@ -46,19 +45,19 @@ entity-guidance/{type}.md  # Required entity fields by entity type
 | What values can enum X take? | [Enums](enums.md) -> specific enum page |
 | How should I map this event? | [Event guidance](event-guidance.md), then relevant message pages |
 | Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |
-| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity guidance](entity-guidance.md) |
+| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity](messages/entity.md) |
 | Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |
 | Which field path prefix? | [Field paths](field-paths.md) |
 | What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |
 | What fields exist for network/protocol details? | [Network](messages/network.md) and protocol messages such as DNS/HTTP/TLS/DHCP |
-| What fields exist for entities? | [Entity](messages/entity.md), [EntityMetadata](messages/entity_metadata.md), and [Entity guidance](entity-guidance.md) |
+| What fields exist for entities? | [Entity](messages/entity.md) and [EntityMetadata](messages/entity_metadata.md) |
 | What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |
 
-When a question asks for modeling guidance, read both layers: the
-message, event, or entity guidance for how Google says to populate
-the data and the schema page for the exact field structure. If the two
-layers appear to differ,
-state both facts and identify which source each fact comes from.
+When a question asks for modeling guidance, read both layers.
+Message, event, or entity guidance explains how Google says to
+populate the data; schema pages show the exact field structure.
+If they differ, state both facts and identify which source each
+fact comes from.
 
 ## Domain knowledge
 

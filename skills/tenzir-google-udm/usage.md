@@ -18,7 +18,7 @@ for field existence, types, numbers, JSON names, oneofs, and deprecation.
 - Product-only field notes: `2`
 - Event type categories: `19`
 - Event guidance sections: `25`
-- Entity requirement pages: `8`
+- Entity type guidance entries: `8`
 - Datatype rows: `15`
 
 ## Indexes
@@ -27,7 +27,6 @@ for field existence, types, numbers, JSON names, oneofs, and deprecation.
 - [Datatypes](datatypes.md)
 - [Event type categories](event-type-categories.md)
 - [Event guidance](event-guidance.md)
-- [Entity guidance](entity-guidance.md)
 
 ## Product-Only Field Notes
 

@@ -145,7 +145,13 @@ class EventTypeCategory:
 @dataclass(frozen=True, slots=True)
 class EntityGuidance:
     entity_type: str
-    requirements: tuple[str, ...]
+    requirements: tuple["EntityRequirement", ...]
+
+
+@dataclass(frozen=True, slots=True)
+class EntityRequirement:
+    text: str
+    children: tuple["EntityRequirement", ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -600,10 +606,41 @@ def render_message_guidance(fields: tuple[FieldGuidance, ...]) -> list[str]:
     return lines
 
 
+def render_entity_requirement(
+    requirement: EntityRequirement,
+    *,
+    depth: int = 0,
+) -> list[str]:
+    indent = "  " * depth
+    lines = [f"{indent}- {format_guidance_text(requirement.text)}"]
+    for child in requirement.children:
+        lines.extend(render_entity_requirement(child, depth=depth + 1))
+    return lines
+
+
+def render_entity_type_guidance(entity_guidance: tuple[EntityGuidance, ...]) -> list[str]:
+    if not entity_guidance:
+        return []
+    lines = [
+        "## Entity Type Guidance",
+        "",
+        "Required fields from the Google UDM usage guide. Set",
+        "`metadata.entity_type` to the matching `EntityMetadata.EntityType` value.",
+        "",
+    ]
+    for entity in sorted(entity_guidance, key=lambda item: item.entity_type):
+        lines.extend([f"### `{entity.entity_type}`", ""])
+        for requirement in entity.requirements:
+            lines.extend(render_entity_requirement(requirement))
+        lines.append("")
+    return lines
+
+
 def render_message_page(
     context: FileContext,
     message_doc: MessageDoc,
     guidance_fields: tuple[FieldGuidance, ...] = (),
+    entity_guidance: tuple[EntityGuidance, ...] = (),
 ) -> str:
     message = message_doc.descriptor
     comment = source_comment(context, message_doc.file_name, message_doc.path)
@@ -655,6 +692,8 @@ def render_message_page(
     else:
         lines.extend(["## Fields", "", "No fields.", ""])
     lines.extend(render_message_guidance(guidance_fields))
+    if message_doc.qualified_name == "Entity":
+        lines.extend(render_entity_type_guidance(entity_guidance))
 
     return clean_markdown("\n".join(lines))
 
@@ -1008,6 +1047,22 @@ def parse_usage_field_path_notes(article: Tag) -> tuple[str, ...]:
     return tuple(notes)
 
 
+def parse_entity_requirement(li: Tag) -> EntityRequirement:
+    child_lists = tuple(li.find_all("ul", recursive=False))
+    text = (
+        markdown_text_without_children(li, child_lists)
+        if child_lists
+        else markdown_text(li)
+    )
+    children: list[EntityRequirement] = []
+    for child_list in child_lists:
+        children.extend(
+            parse_entity_requirement(child_li)
+            for child_li in child_list.find_all("li", recursive=False)
+        )
+    return EntityRequirement(text=text, children=tuple(children))
+
+
 def parse_entity_guidance(article: Tag) -> tuple[EntityGuidance, ...]:
     heading = article.find("h2", id="required_and_optional_entity_fields")
     if not isinstance(heading, Tag):
@@ -1021,10 +1076,15 @@ def parse_entity_guidance(article: Tag) -> tuple[EntityGuidance, ...]:
         if len(cells) != 2 or cells[0].name == "th":
             continue
         entity_type = tag_text(cells[0])
-        requirements = tuple(
-            markdown_text(li)
-            for li in cells[1].find_all("li")
-            if markdown_text(li)
+        ul = cells[1].find("ul")
+        requirements = (
+            tuple(
+                parse_entity_requirement(li)
+                for li in ul.find_all("li", recursive=False)
+                if markdown_text(li)
+            )
+            if isinstance(ul, Tag)
+            else ()
         )
         if entity_type and requirements:
             result.append(
@@ -1480,7 +1540,7 @@ def render_usage_page(
             f"- Product-only field notes: `{len(unmatched_field_guidance)}`",
             f"- Event type categories: `{len(guidance.event_type_categories)}`",
             f"- Event guidance sections: `{len(guidance.event_guidance)}`",
-            f"- Entity requirement pages: `{len(guidance.entity_guidance)}`",
+            f"- Entity type guidance entries: `{len(guidance.entity_guidance)}`",
             f"- Datatype rows: `{len(guidance.datatypes)}`",
             "",
             "## Indexes",
@@ -1489,7 +1549,6 @@ def render_usage_page(
             "- [Datatypes](datatypes.md)",
             "- [Event type categories](event-type-categories.md)",
             "- [Event guidance](event-guidance.md)",
-            "- [Entity guidance](entity-guidance.md)",
             "",
         ]
     )
@@ -1685,49 +1744,6 @@ def render_event_guidance_page(
     return clean_markdown("\n".join(lines))
 
 
-def render_entity_guidance_index(guidance: DocsGuidance) -> str:
-    lines = [
-        "# Entity Guidance",
-        "",
-        "Required fields for Google UDM entity types.",
-        "",
-    ]
-    lines.extend(render_source_section((guidance.usage_source,)))
-    lines.extend(["## Entity Types", ""])
-    for entity in sorted(guidance.entity_guidance, key=lambda item: item.entity_type):
-        lines.append(
-            f"- [`{entity.entity_type}`](entity-guidance/{to_snake_case(entity.entity_type)}.md)"
-        )
-    lines.append("")
-    return clean_markdown("\n".join(lines))
-
-
-def render_entity_guidance_page(
-    guidance: DocsGuidance,
-    entity: EntityGuidance,
-) -> str:
-    lines = [
-        f"# {entity.entity_type} Entity Guidance",
-        "",
-    ]
-    lines.extend(render_source_section((guidance.usage_source,)))
-    lines.extend(
-        [
-            "## Schema",
-            "",
-            "- Proto enum: [EntityMetadata.EntityType](../enums/entity_metadata_entity_type.md)",
-            "- Entity root: [Entity](../messages/entity.md)",
-            "",
-            "## Requirements",
-            "",
-        ]
-    )
-    for requirement in entity.requirements:
-        lines.append(f"- {requirement}")
-    lines.append("")
-    return clean_markdown("\n".join(lines))
-
-
 def render_guidance_docs(
     context: FileContext,
     guidance: DocsGuidance,
@@ -1740,7 +1756,6 @@ def render_guidance_docs(
         Path("datatypes.md"): render_datatypes_page(guidance),
         Path("event-type-categories.md"): render_event_type_categories_page(guidance),
         Path("event-guidance.md"): render_event_guidance_index(guidance),
-        Path("entity-guidance.md"): render_entity_guidance_index(guidance),
     }
 
     for section in guidance.event_guidance:
@@ -1748,11 +1763,6 @@ def render_guidance_docs(
             docs[Path("event-guidance") / f"{to_snake_case(event_type)}.md"] = (
                 render_event_guidance_page(guidance, event_type, section)
             )
-
-    for entity in guidance.entity_guidance:
-        docs[Path("entity-guidance") / f"{to_snake_case(entity.entity_type)}.md"] = (
-            render_entity_guidance_page(guidance, entity)
-        )
 
     return docs
 
@@ -1873,7 +1883,6 @@ def render_skill_markdown(
                 "field-paths.md             # Rules, Detect Engine, and CBN prefixes",
                 "datatypes.md               # Standard datatype notes",
                 "event-guidance/{type}.md   # Required/optional event guidance by event type",
-                "entity-guidance/{type}.md  # Required entity fields by entity type",
                 "```",
                 "",
                 "## Question routing",
@@ -1884,19 +1893,19 @@ def render_skill_markdown(
                 "| What values can enum X take? | [Enums](enums.md) -> specific enum page |",
                 "| How should I map this event? | [Event guidance](event-guidance.md), then relevant message pages |",
                 "| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |",
-                "| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity guidance](entity-guidance.md) |",
+                "| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity](messages/entity.md) |",
                 "| Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |",
                 "| Which field path prefix? | [Field paths](field-paths.md) |",
                 "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |",
                 "| What fields exist for network/protocol details? | [Network](messages/network.md) and protocol messages such as DNS/HTTP/TLS/DHCP |",
-                "| What fields exist for entities? | [Entity](messages/entity.md), [EntityMetadata](messages/entity_metadata.md), and [Entity guidance](entity-guidance.md) |",
+                "| What fields exist for entities? | [Entity](messages/entity.md) and [EntityMetadata](messages/entity_metadata.md) |",
                 "| What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |",
                 "",
-                "When a question asks for modeling guidance, read both layers: the",
-                "message, event, or entity guidance for how Google says to populate",
-                "the data and the schema page for the exact field structure. If the two",
-                "layers appear to differ,",
-                "state both facts and identify which source each fact comes from.",
+                "When a question asks for modeling guidance, read both layers.",
+                "Message, event, or entity guidance explains how Google says to",
+                "populate the data; schema pages show the exact field structure.",
+                "If they differ, state both facts and identify which source each",
+                "fact comes from.",
                 "",
                 "## Domain knowledge",
                 "",
@@ -1953,6 +1962,9 @@ def build_docs(
             context,
             message,
             field_guidance_groups.get(message.slug, ()),
+            guidance.entity_guidance
+            if guidance is not None and message.qualified_name == "Entity"
+            else (),
         )
 
     for enum in context.enums:
