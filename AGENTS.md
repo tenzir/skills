@@ -21,6 +21,9 @@ listed below instead, then regenerate or let the sync workflow update this repo.
 - `skills/tenzir-google-udm/`: generated from
   `scripts/generate-google-udm-skill.py` and synced by
   `.github/workflows/sync-google-udm-skill.yaml`.
+- `skills/tenzir-microsoft-asim/`: generated from
+  `scripts/generate-microsoft-asim-skill.py` and synced by
+  `.github/workflows/sync-microsoft-asim-skill.yaml`.
 - `skills/tenzir-ocsf/`: generated from `scripts/generate-ocsf-skill.py` and
   synced by `.github/workflows/sync-ocsf-skill.yaml`.
 - `skills/tenzir-docs/`: generated from

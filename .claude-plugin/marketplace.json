@@ -4,6 +4,7 @@
       "name": "🧬 Schemas",
       "skills": [
         "./skills/tenzir-google-udm",
+        "./skills/tenzir-microsoft-asim",
         "./skills/tenzir-ocsf"
       ]
     },
