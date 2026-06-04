@@ -52,7 +52,7 @@ Represents an observer entity (for example, a packet sniffer or network-based vu
 
 Represents entities referenced by the event that are not otherwise described in principal, src, target, intermediary or observer. For example, it could be used to track email file attachments, domains/URLs/IPs embedded within an email body, and DLLs that are loaded during a PROCESS_LAUNCH event.
 
-### `securityResult`
+### `security_result` / `securityResult`
 
 - Type: [`SecurityResult`](security_result.md) (repeated)
 

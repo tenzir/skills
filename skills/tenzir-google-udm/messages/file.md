@@ -28,32 +28,32 @@ The SHA1 hash of the file, as a hex-encoded string. This field can be used as an
 
 The size of the file in bytes.
 
-### `fullPath`
+### `full_path` / `fullPath`
 
 - Type: `string` (singular)
 
 The full path identifying the location of the file on the system. This field can be used as an entity indicator for file entities.
 
-### `mimeType`
+### `mime_type` / `mimeType`
 
 - Type: `string` (singular)
 
 The MIME (Multipurpose Internet Mail Extensions) type of the file, for example "PE", "PDF", or "powershell script".
 
-### `fileMetadata`
+### `file_metadata` / `fileMetadata`
 
 - Type: [`FileMetadata`](file_metadata.md) (singular)
 - Deprecated: `true`
 
 Metadata associated with the file. Deprecate FileMetadata in favor of using fields in File.
 
-### `securityResult`
+### `security_result` / `securityResult`
 
 - Type: [`SecurityResult`](security_result.md) (singular)
 
 Google Cloud Threat Intelligence (GCTI) security result for the file including threat context and detection metadata.
 
-### `peFile`
+### `pe_file` / `peFile`
 
 - Type: [`FileMetadataPE`](file_metadata_pe.md) (singular)
 
@@ -90,19 +90,19 @@ Authentihash of the file.
 
 SymHash of the file. Used for Mach-O (e.g. MacOS) binaries, to identify similar files based on their symbol table.
 
-### `prefetchFileMetadata`
+### `prefetch_file_metadata` / `prefetchFileMetadata`
 
 - Type: [`PrefetchFileMetadata`](prefetch_file_metadata.md) (singular)
 
 Metadata about the prefetch file.
 
-### `fileType`
+### `file_type` / `fileType`
 
 - Type: [`FileType`](../enums/file_file_type.md) (singular)
 
 FileType field.
 
-### `capabilitiesTags`
+### `capabilities_tags` / `capabilitiesTags`
 
 - Type: `string` (repeated)
 
@@ -120,19 +120,19 @@ Names fields.
 
 Tags for the file.
 
-### `lastModificationTime`
+### `last_modification_time` / `lastModificationTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp when the file was last updated.
 
-### `createTime`
+### `create_time` / `createTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp when the file was created.
 
-### `lastAccessTime`
+### `last_access_time` / `lastAccessTime`
 
 - Type: `timestamp` (singular)
 
@@ -144,103 +144,103 @@ Timestamp when the file was accessed.
 
 Prevalence of the file hash in the customer's environment.
 
-### `firstSeenTime`
+### `first_seen_time` / `firstSeenTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp the file was first seen in the customer's environment.
 
-### `lastSeenTime`
+### `last_seen_time` / `lastSeenTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp the file was last seen in the customer's environment.
 
-### `statMode`
+### `stat_mode` / `statMode`
 
 - Type: `uint64` (singular)
 
 The mode of the file. A bit string indicating the permissions and privileges of the file.
 
-### `statInode`
+### `stat_inode` / `statInode`
 
 - Type: `uint64` (singular)
 
 The file identifier. Unique identifier of object within a file system.
 
-### `statDev`
+### `stat_dev` / `statDev`
 
 - Type: `uint64` (singular)
 
 The file system identifier to which the object belongs.
 
-### `statNlink`
+### `stat_nlink` / `statNlink`
 
 - Type: `uint64` (singular)
 
 Number of links to file.
 
-### `statFlags`
+### `stat_flags` / `statFlags`
 
 - Type: `uint32` (singular)
 
 User defined flags for file.
 
-### `lastAnalysisTime`
+### `last_analysis_time` / `lastAnalysisTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp the file was last analysed.
 
-### `embeddedUrls`
+### `embedded_urls` / `embeddedUrls`
 
 - Type: `string` (repeated)
 
 Embedded urls found in the file.
 
-### `embeddedDomains`
+### `embedded_domains` / `embeddedDomains`
 
 - Type: `string` (repeated)
 
 Embedded domains found in the file.
 
-### `embeddedIps`
+### `embedded_ips` / `embeddedIps`
 
 - Type: `string` (repeated)
 
 Embedded IP addresses found in the file.
 
-### `exifInfo`
+### `exif_info` / `exifInfo`
 
 - Type: [`ExifInfo`](exif_info.md) (singular)
 
 Exif metadata from different file formats extracted by exiftool.
 
-### `signatureInfo`
+### `signature_info` / `signatureInfo`
 
 - Type: [`SignatureInfo`](signature_info.md) (singular)
 
 File signature information extracted from different tools.
 
-### `pdfInfo`
+### `pdf_info` / `pdfInfo`
 
 - Type: [`PDFInfo`](pdf_info.md) (singular)
 
 Information about the PDF file structure.
 
-### `firstSubmissionTime`
+### `first_submission_time` / `firstSubmissionTime`
 
 - Type: `timestamp` (singular)
 
 First submission time of the file.
 
-### `lastSubmissionTime`
+### `last_submission_time` / `lastSubmissionTime`
 
 - Type: `timestamp` (singular)
 
 Last submission time of the file.
 
-### `mainIcon`
+### `main_icon` / `mainIcon`
 
 - Type: [`Favicon`](favicon.md) (singular)
 
@@ -252,7 +252,7 @@ Icon's relevant hashes.
 
 NTFS metadata.
 
-### `appCompatCache`
+### `app_compat_cache` / `appCompatCache`
 
 - Type: [`AppCompatMetadata`](app_compat_metadata.md) (singular)
 
@@ -262,7 +262,7 @@ Windows AppCompatCache (Application Compatibility) metadata.
 
 Population guidance from the Google UDM usage guide.
 
-### `File.fileMetadata`
+### `File.file_metadata` / `File.fileMetadata`
 
 - **Purpose**: Metadata associated with the file.
 - **Encoding**: String.
@@ -274,7 +274,7 @@ Population guidance from the Google UDM usage guide.
 - Version number
 - Date last saved
 
-### `File.fullPath`
+### `File.full_path` / `File.fullPath`
 
 - **Purpose**: Full path identifying the location of the file on the system.
 - **Encoding**: String.
@@ -294,7 +294,7 @@ Population guidance from the Google UDM usage guide.
 
 - 35bf623e7db9bf0d68d0dda764fd9e8c
 
-### `File.mimeType`
+### `File.mime_type` / `File.mimeType`
 
 - **Purpose**: Multipurpose Internet Mail Extensions (MIME) type for the file.
 - **Encoding**: String.

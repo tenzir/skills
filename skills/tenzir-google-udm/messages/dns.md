@@ -34,19 +34,19 @@ Other DNS header flags. See RFC1035, section 4.1.1.
 
 Whether the DNS response was truncated.
 
-### `recursionDesired`
+### `recursion_desired` / `recursionDesired`
 
 - Type: `bool` (singular)
 
 Whether a recursive DNS lookup is desired.
 
-### `recursionAvailable`
+### `recursion_available` / `recursionAvailable`
 
 - Type: `bool` (singular)
 
 Whether a recursive DNS lookup is available.
 
-### `responseCode`
+### `response_code` / `responseCode`
 
 - Type: `uint32` (singular)
 
@@ -111,12 +111,12 @@ Population guidance from the Google UDM usage guide.
 
 - **Purpose**: Stores the domain protocol message questions. See Population of DNS Question metadata.
 
-### `Dns.recursionAvailable`
+### `Dns.recursion_available` / `Dns.recursionAvailable`
 
 - **Purpose**: Set to true if a recursive DNS lookup is available.
 - **Encoding**: Boolean.
 
-### `Dns.recursionDesired`
+### `Dns.recursion_desired` / `Dns.recursionDesired`
 
 - **Purpose**: Set to true if a recursive DNS lookup is requested.
 - **Encoding**: Boolean.
@@ -126,7 +126,7 @@ Population guidance from the Google UDM usage guide.
 - **Purpose**: Set to true if the event is a DNS response.
 - **Encoding**: Boolean.
 
-### `Dns.responseCode`
+### `Dns.response_code` / `Dns.responseCode`
 
 - **Purpose**: Stores the DNS response code as defined by RFC 1035, Domain Names - Implementation and Specification.
 - **Encoding**: 32-bit integer.

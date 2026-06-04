@@ -4,61 +4,61 @@ A network event.
 
 ## Fields
 
-### `sentBytes`
+### `sent_bytes` / `sentBytes`
 
 - Type: `uint64` (singular)
 
 The number of bytes sent.
 
-### `receivedBytes`
+### `received_bytes` / `receivedBytes`
 
 - Type: `uint64` (singular)
 
 The number of bytes received.
 
-### `totalBytes`
+### `total_bytes` / `totalBytes`
 
 - Type: `int64` (singular)
 
 The number of total bytes.
 
-### `sentPackets`
+### `sent_packets` / `sentPackets`
 
 - Type: `int64` (singular)
 
 The number of packets sent.
 
-### `receivedPackets`
+### `received_packets` / `receivedPackets`
 
 - Type: `int64` (singular)
 
 The number of packets received.
 
-### `sessionDuration`
+### `session_duration` / `sessionDuration`
 
 - Type: `duration` (singular)
 
-The duration of the session as the number of seconds and nanoseconds. For seconds, network.sessionDuration.seconds, the type is a 64-bit integer. For nanoseconds, network.sessionDuration.nanos, the type is a 32-bit integer.
+The duration of the session as the number of seconds and nanoseconds. For seconds, network.session_duration.seconds, the type is a 64-bit integer. For nanoseconds, network.session_duration.nanos, the type is a 32-bit integer.
 
-### `sessionId`
+### `session_id` / `sessionId`
 
 - Type: `string` (singular)
 
 The ID of the network session.
 
-### `parentSessionId`
+### `parent_session_id` / `parentSessionId`
 
 - Type: `string` (singular)
 
 The ID of the parent network session.
 
-### `applicationProtocolVersion`
+### `application_protocol_version` / `applicationProtocolVersion`
 
 - Type: `string` (singular)
 
 The version of the application protocol. e.g. "1.1, 2.0"
 
-### `communityId`
+### `community_id` / `communityId`
 
 - Type: `string` (singular)
 
@@ -70,7 +70,7 @@ Community ID network flow value.
 
 The direction of network traffic.
 
-### `ipProtocol`
+### `ip_protocol` / `ipProtocol`
 
 - Type: [`IpProtocol`](../enums/network_ip_protocol.md) (singular)
 
@@ -82,7 +82,7 @@ The IP protocol.
 
 True if IPv6 is used.
 
-### `applicationProtocol`
+### `application_protocol` / `applicationProtocol`
 
 - Type: [`ApplicationProtocol`](../enums/network_application_protocol.md) (singular)
 
@@ -136,43 +136,43 @@ SMTP info. Store fields specific to SMTP not covered by Email.
 
 Autonomous system number.
 
-### `dnsDomain`
+### `dns_domain` / `dnsDomain`
 
 - Type: `string` (singular)
 
 DNS domain name.
 
-### `carrierName`
+### `carrier_name` / `carrierName`
 
 - Type: `string` (singular)
 
 Carrier identification.
 
-### `organizationName`
+### `organization_name` / `organizationName`
 
 - Type: `string` (singular)
 
 Organization name (e.g Google).
 
-### `ipSubnetRange`
+### `ip_subnet_range` / `ipSubnetRange`
 
 - Type: `string` (singular)
 
 Associated human-readable IP subnet range (e.g. 10.1.2.0/24).
 
-### `isProxy`
+### `is_proxy` / `isProxy`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a known proxy.
 
-### `proxyInfo`
+### `proxy_info` / `proxyInfo`
 
 - Type: [`ProxyInfo`](proxy_info.md) (singular)
 
-Proxy information. Only set if isProxy is true.
+Proxy information. Only set if is_proxy is true.
 
-### `connectionState`
+### `connection_state` / `connectionState`
 
 - Type: [`ConnectionState`](../enums/network_connection_state.md) (singular)
 
@@ -182,7 +182,7 @@ The state of the network connection.
 
 Population guidance from the Google UDM usage guide.
 
-### `Network.applicationProtocol`
+### `Network.application_protocol` / `Network.applicationProtocol`
 
 - **Purpose**: Indicates the network application protocol.
 - **Encoding**: Enumerated type.
@@ -291,7 +291,7 @@ Population guidance from the Google UDM usage guide.
 
 - jcheng@company.example.com
 
-### `Network.ipProtocol`
+### `Network.ip_protocol` / `Network.ipProtocol`
 
 - **Purpose**: Indicates the IP protocol.
 - **Encoding**: Enumerated type.
@@ -309,7 +309,7 @@ Population guidance from the Google UDM usage guide.
   - `UDP`: User Datagram Protocol
   - `VRRP`: Virtual Router Redundancy Protocol
 
-### `Network.receivedBytes`
+### `Network.received_bytes` / `Network.receivedBytes`
 
 - **Purpose**: Specifies the number of bytes received.
 - **Encoding**: 64-bit unsigned integer.
@@ -319,7 +319,7 @@ Population guidance from the Google UDM usage guide.
 
 - 12,453,654,768
 
-### `Network.sentBytes`
+### `Network.sent_bytes` / `Network.sentBytes`
 
 - **Purpose**: Specifies the number of bytes sent.
 - **Encoding**: 64-bit unsigned integer.
@@ -329,11 +329,11 @@ Population guidance from the Google UDM usage guide.
 
 - 7,654,876
 
-### `Network.sessionDuration`
+### `Network.session_duration` / `Network.sessionDuration`
 
-- **Purpose**: Stores the network session duration, typically returned in a drop event for the session. To set the duration you can set either `network.sessionDuration.seconds` = 1, (type int64) or `network.sessionDuration.nanos` = 1 (type int32).
+- **Purpose**: Stores the network session duration, typically returned in a drop event for the session. To set the duration you can set either `network.session_duration.seconds` = 1, (type int64) or `network.session_duration.nanos` = 1 (type int32).
 
-### `Network.sessionId`
+### `Network.session_id` / `Network.sessionId`
 
 - **Purpose**: Stores the network session identifier.
 - **Encoding**: String.

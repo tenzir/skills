@@ -16,7 +16,7 @@ The name of the precomputed analytic.
 - `NETWORK_FLOWS_OUTBOUND` (9): Total number of events having non-null sent bytes.
 - `NETWORK_FLOWS_TOTAL` (10): Total events having non-null sent or received bytes.
 - `DNS_QUERIES_SUCCESS` (11): DNS query success count - Number of events with response_code = 0.
-- `DNS_QUERIES_FAIL` (12): Number of events with responseCode != 0.
+- `DNS_QUERIES_FAIL` (12): Number of events with response_code != 0.
 - `DNS_QUERIES_TOTAL` (13): Total number of DNS queries made.
 - `FILE_EXECUTIONS_SUCCESS` (14): Number of successfule file executions.
 - `FILE_EXECUTIONS_FAIL` (15): Number of failed file executions.

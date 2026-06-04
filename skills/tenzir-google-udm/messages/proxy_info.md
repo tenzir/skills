@@ -10,61 +10,61 @@ Proxy information.
 
 Whether the IP address is anonymous.
 
-### `anonymousVpn`
+### `anonymous_vpn` / `anonymousVpn`
 
 - Type: `bool` (singular)
 
 Whether the IP address is an anonymous VPN.
 
-### `publicProxy`
+### `public_proxy` / `publicProxy`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a public proxy.
 
-### `torExitNode`
+### `tor_exit_node` / `torExitNode`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a tor exit node.
 
-### `smartDnsProxy`
+### `smart_dns_proxy` / `smartDnsProxy`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a smart DNS proxy.
 
-### `hostingProvider`
+### `hosting_provider` / `hostingProvider`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a hosting provider.
 
-### `vpnDatacenter`
+### `vpn_datacenter` / `vpnDatacenter`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a VPN datacenter.
 
-### `residentialProxy`
+### `residential_proxy` / `residentialProxy`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a residential proxy.
 
-### `vpnServiceName`
+### `vpn_service_name` / `vpnServiceName`
 
 - Type: `string` (singular)
 
 The name of the VPN service.
 
-### `proxyOverVpn`
+### `proxy_over_vpn` / `proxyOverVpn`
 
 - Type: `bool` (singular)
 
 Whether the IP address is a proxy over VPN.
 
-### `relayProxy`
+### `relay_proxy` / `relayProxy`
 
 - Type: `bool` (singular)
 

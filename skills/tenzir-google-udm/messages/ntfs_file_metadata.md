@@ -4,37 +4,37 @@ NTFS-specific file metadata.
 
 ## Fields
 
-### `changeTime`
+### `change_time` / `changeTime`
 
 - Type: `timestamp` (singular)
 
 NTFS MFT entry changed timestamp.
 
-### `filenameCreateTime`
+### `filename_create_time` / `filenameCreateTime`
 
 - Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute created timestamp.
 
-### `filenameModifyTime`
+### `filename_modify_time` / `filenameModifyTime`
 
 - Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute modified timestamp.
 
-### `filenameAccessTime`
+### `filename_access_time` / `filenameAccessTime`
 
 - Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute accessed timestamp.
 
-### `filenameChangeTime`
+### `filename_change_time` / `filenameChangeTime`
 
 - Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute changed timestamp.
 
-### `usnJournal`
+### `usn_journal` / `usnJournal`
 
 - Type: [`UsnJournal`](usn_journal.md) (repeated)
 

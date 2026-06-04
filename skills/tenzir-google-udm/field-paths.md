@@ -3,6 +3,24 @@
 Use this page to choose the right field-path prefix for rules, Detect Engine,
 and configuration-based normalizer contexts.
 
+## Field Name Forms
+
+Generated field headings may show two spellings:
+
+`field_path_form` / `ingestionObjectForm`
+
+Use the left side in YARA-L, Detect Engine, CBN, and other dotted
+field-path contexts. Use the right side when preparing UDM event or
+entity objects for Google SecOps ingestion. If a heading has only one
+name, both contexts use the same spelling.
+
+Mappings come from protobuf descriptors, not from a case-conversion
+rule.
+
+Current irregular mappings:
+
+- `EntityRisk.DEPRECATED_risk_score` / `EntityRisk.DEPRECATEDRiskScore`
+
 ## Rules Engine Prefix Notes
 
 - UDM field name formats:

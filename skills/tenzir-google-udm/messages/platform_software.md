@@ -10,13 +10,13 @@ Platform software information about an operating system.
 
 The platform operating system.
 
-### `platformVersion`
+### `platform_version` / `platformVersion`
 
 - Type: `string` (singular)
 
 The platform software version ( e.g. "Microsoft Windows 1803").
 
-### `platformPatchLevel`
+### `platform_patch_level` / `platformPatchLevel`
 
 - Type: `string` (singular)
 

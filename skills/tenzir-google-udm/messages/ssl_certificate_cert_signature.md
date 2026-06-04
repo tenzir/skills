@@ -10,7 +10,7 @@ Certificate's signature and algorithm.
 
 Signature.
 
-### `signatureAlgorithm`
+### `signature_algorithm` / `signatureAlgorithm`
 
 - Type: `string` (singular)
 

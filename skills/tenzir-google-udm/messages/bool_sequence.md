@@ -4,7 +4,7 @@ BoolSequence represents a sequence of bools.
 
 ## Fields
 
-### `boolVals`
+### `bool_vals` / `boolVals`
 
 - Type: `bool` (repeated)
 

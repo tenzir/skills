@@ -16,7 +16,7 @@ The ID of the threat collection.
 
 The type of threat collection (e.g., "campaign").
 
-### `altNames`
+### `alt_names` / `altNames`
 
 - Type: `string` (repeated)
 

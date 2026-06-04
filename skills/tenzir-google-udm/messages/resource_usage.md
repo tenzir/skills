@@ -4,13 +4,13 @@ The ResourceUsage extension captures details about what is using a resource.
 
 ## Fields
 
-### `usedEntity`
+### `used_entity` / `usedEntity`
 
 - Type: `string` (singular)
 
 The name of the entity (e.g., process, user) that is using the resource.
 
-### `usedEntityId`
+### `used_entity_id` / `usedEntityId`
 
 - Type: `string` (singular)
 

@@ -34,7 +34,7 @@ Elliptical curve used for a given cipher.
 
 TLS version.
 
-### `versionProtocol`
+### `version_protocol` / `versionProtocol`
 
 - Type: `string` (singular)
 
@@ -46,7 +46,7 @@ Protocol.
 
 Indicates whether the TLS negotiation was successful.
 
-### `nextProtocol`
+### `next_protocol` / `nextProtocol`
 
 - Type: `string` (singular)
 

@@ -22,7 +22,7 @@ The value.
 
 Where the label is derived from.
 
-### `rbacEnabled`
+### `rbac_enabled` / `rbacEnabled`
 
 - Type: `bool` (singular)
 

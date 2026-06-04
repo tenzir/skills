@@ -4,7 +4,7 @@ Difference hash and MD5 hash of the domain's favicon.
 
 ## Fields
 
-### `rawMd5`
+### `raw_md5` / `rawMd5`
 
 - Type: `string` (singular)
 

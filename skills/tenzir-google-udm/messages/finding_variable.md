@@ -4,7 +4,7 @@ A structure that holds the value and associated metadata for values extracted wh
 
 ## Oneofs
 
-- `typed_value`: `boolVal`, `bytesVal`, `doubleVal`, `int64Val`, `uint64Val`, `stringVal`, `timestampTime`, `nullVal`, `boolSeq`, `bytesSeq`, `doubleSeq`, `int64Seq`, `uint64Seq`, `stringSeq`
+- `typed_value`: `bool_val` / `boolVal`, `bytes_val` / `bytesVal`, `double_val` / `doubleVal`, `int64_val` / `int64Val`, `uint64_val` / `uint64Val`, `string_val` / `stringVal`, `timestamp_time` / `timestampTime`, `null_val` / `nullVal`, `bool_seq` / `boolSeq`, `bytes_seq` / `bytesSeq`, `double_seq` / `doubleSeq`, `int64_seq` / `int64Seq`, `uint64_seq` / `uint64Seq`, `string_seq` / `stringSeq`
 
 ## Fields
 
@@ -20,104 +20,104 @@ The type of the variable.
 
 The value in string form.
 
-### `sourcePath`
+### `source_path` / `sourcePath`
 
 - Type: `string` (singular)
 
 The UDM field path for the field which this value was derived from. Example: `principal.user.username`
 
-### `boolVal`
+### `bool_val` / `boolVal`
 
 - Type: `bool` (singular)
 - Oneof: `typed_value`
 
 The value in boolean format.
 
-### `bytesVal`
+### `bytes_val` / `bytesVal`
 
 - Type: `bytes` (singular)
 - Oneof: `typed_value`
 
 The value in bytes format.
 
-### `doubleVal`
+### `double_val` / `doubleVal`
 
 - Type: `double` (singular)
 - Oneof: `typed_value`
 
 The value in double format.
 
-### `int64Val`
+### `int64_val` / `int64Val`
 
 - Type: `int64` (singular)
 - Oneof: `typed_value`
 
 The value in int64 format.
 
-### `uint64Val`
+### `uint64_val` / `uint64Val`
 
 - Type: `uint64` (singular)
 - Oneof: `typed_value`
 
 The value in uint64 format.
 
-### `stringVal`
+### `string_val` / `stringVal`
 
 - Type: `string` (singular)
 - Oneof: `typed_value`
 
 The value in string format. Enum values are returned as strings.
 
-### `timestampTime`
+### `timestamp_time` / `timestampTime`
 
 - Type: `timestamp` (singular)
 - Oneof: `typed_value`
 
 The value in timestamp format.
 
-### `nullVal`
+### `null_val` / `nullVal`
 
 - Type: `bool` (singular)
 - Oneof: `typed_value`
 
 Whether the value is null.
 
-### `boolSeq`
+### `bool_seq` / `boolSeq`
 
 - Type: [`BoolSequence`](bool_sequence.md) (singular)
 - Oneof: `typed_value`
 
 The value in boolsequence format.
 
-### `bytesSeq`
+### `bytes_seq` / `bytesSeq`
 
 - Type: [`BytesSequence`](bytes_sequence.md) (singular)
 - Oneof: `typed_value`
 
 The value in bytessequence format.
 
-### `doubleSeq`
+### `double_seq` / `doubleSeq`
 
 - Type: [`DoubleSequence`](double_sequence.md) (singular)
 - Oneof: `typed_value`
 
 The value in doublesequence format.
 
-### `int64Seq`
+### `int64_seq` / `int64Seq`
 
 - Type: [`Int64Sequence`](int64_sequence.md) (singular)
 - Oneof: `typed_value`
 
 The value in int64sequence format.
 
-### `uint64Seq`
+### `uint64_seq` / `uint64Seq`
 
 - Type: [`Uint64Sequence`](uint64_sequence.md) (singular)
 - Oneof: `typed_value`
 
 The value in uint64sequence format.
 
-### `stringSeq`
+### `string_seq` / `stringSeq`
 
 - Type: [`StringSequence`](string_sequence.md) (singular)
 - Oneof: `typed_value`

@@ -1,6 +1,6 @@
 # Event Type Categories
 
-Usage-guide grouping for choosing `metadata.eventType`.
+Usage-guide grouping for choosing `metadata.event_type` / `metadata.eventType`.
 
 ## Analyst events
 

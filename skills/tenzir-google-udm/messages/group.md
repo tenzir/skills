@@ -4,20 +4,20 @@ Information about an organizational group.
 
 ## Fields
 
-### `productObjectId`
+### `product_object_id` / `productObjectId`
 
 - Type: `string` (singular)
 
 Product globally unique user object identifier, such as an LDAP Object Identifier.
 
-### `creationTime`
+### `creation_time` / `creationTime`
 
 - Type: `timestamp` (singular)
 - Deprecated: `true`
 
-Group creation time. Deprecated: creationTime should be populated in Attribute as generic metadata.
+Group creation time. Deprecated: creation_time should be populated in Attribute as generic metadata.
 
-### `groupDisplayName`
+### `group_display_name` / `groupDisplayName`
 
 - Type: `string` (singular)
 
@@ -29,13 +29,13 @@ Group display name. e.g. "Finance".
 
 Generic entity metadata attributes of the group.
 
-### `emailAddresses`
+### `email_addresses` / `emailAddresses`
 
 - Type: `string` (repeated)
 
 Email addresses of the group.
 
-### `windowsSid`
+### `windows_sid` / `windowsSid`
 
 - Type: `string` (singular)
 
@@ -45,17 +45,17 @@ Microsoft Windows SID of the group.
 
 Population guidance from the Google UDM usage guide.
 
-### `Group.creationTime`
+### `Group.creation_time` / `Group.creationTime`
 
 - **Purpose**: Group creation time.
 - **Encoding**: RFC 3339 timestamp.
 
-### `Group.emailAddresses`
+### `Group.email_addresses` / `Group.emailAddresses`
 
 - **Purpose**: Group contact information.
 - **Encoding**: Email.
 
-### `Group.groupDisplayName`
+### `Group.group_display_name` / `Group.groupDisplayName`
 
 - **Purpose**: Group display name.
 - **Encoding**: String.
@@ -66,12 +66,12 @@ Population guidance from the Google UDM usage guide.
 - HR
 - Marketing
 
-### `Group.productObjectId`
+### `Group.product_object_id` / `Group.productObjectId`
 
 - **Purpose**: Globally unique user object identifier for the product, such as an LDAP object identifier.
 - **Encoding**: String.
 
-### `Group.windowsSid`
+### `Group.windows_sid` / `Group.windowsSid`
 
 - **Purpose**: Microsoft Windows Security Identifier (SID) group attribute field.
 - **Encoding**: String.

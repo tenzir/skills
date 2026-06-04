@@ -4,13 +4,13 @@ Label used in data access.
 
 ## Fields
 
-### `logTypes`
+### `log_types` / `logTypes`
 
 - Type: `string` (repeated)
 
 All the LogType labels.
 
-### `ingestionLabels`
+### `ingestion_labels` / `ingestionLabels`
 
 - Type: `string` (repeated)
 - Deprecated: `true`
@@ -23,19 +23,19 @@ All the ingestion labels.
 
 All the namespaces.
 
-### `customLabels`
+### `custom_labels` / `customLabels`
 
 - Type: `string` (repeated)
 
 All the complex labels (UDM search syntax based).
 
-### `ingestionKvLabels`
+### `ingestion_kv_labels` / `ingestionKvLabels`
 
 - Type: [`DataAccessIngestionLabel`](data_access_ingestion_label.md) (repeated)
 
 All the ingestion labels (key/value pairs).
 
-### `allowScopedAccess`
+### `allow_scoped_access` / `allowScopedAccess`
 
 - Type: `bool` (singular)
 

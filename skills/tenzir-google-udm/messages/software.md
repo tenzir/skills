@@ -28,7 +28,7 @@ System permissions granted to the software. For example, "android.permission.WRI
 
 The description of the software.
 
-### `vendorName`
+### `vendor_name` / `vendorName`
 
 - Type: `string` (singular)
 

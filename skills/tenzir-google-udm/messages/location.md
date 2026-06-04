@@ -16,7 +16,7 @@ The city.
 
 The state.
 
-### `countryOrRegion`
+### `country_or_region` / `countryOrRegion`
 
 - Type: `string` (singular)
 
@@ -28,33 +28,33 @@ The country or region.
 
 Custom location name (e.g. building or site name like "London Office"). For cloud environments, this is the region (e.g. "us-west2").
 
-### `deskName`
+### `desk_name` / `deskName`
 
 - Type: `string` (singular)
 
 Desk name or individual location, typically for an employee in an office. (e.g. "IN-BLR-BCPC-11-1121D").
 
-### `floorName`
+### `floor_name` / `floorName`
 
 - Type: `string` (singular)
 
 Floor name, number or a combination of the two for a building. (e.g. "1-A").
 
-### `regionLatitude`
+### `region_latitude` / `regionLatitude`
 
 - Type: `float` (singular)
 - Deprecated: `true`
 
-Deprecated: use regionCoordinates.
+Deprecated: use region_coordinates.
 
-### `regionLongitude`
+### `region_longitude` / `regionLongitude`
 
 - Type: `float` (singular)
 - Deprecated: `true`
 
-Deprecated: use regionCoordinates.
+Deprecated: use region_coordinates.
 
-### `regionCoordinates`
+### `region_coordinates` / `regionCoordinates`
 
 - Type: `latLng` (singular)
 
@@ -75,7 +75,7 @@ Population guidance from the Google UDM usage guide.
 - Chicago
 - Malaga
 
-### `Location.countryOrRegion`
+### `Location.country_or_region` / `Location.countryOrRegion`
 
 - **Purpose**: Stores the name of the country or region of the world.
 - **Encoding**: String.

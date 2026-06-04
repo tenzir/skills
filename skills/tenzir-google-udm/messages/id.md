@@ -16,7 +16,7 @@ Namespace the id belongs to.
 
 Full raw ID.
 
-### `stringId`
+### `string_id` / `stringId`
 
 - Type: `string` (singular)
 

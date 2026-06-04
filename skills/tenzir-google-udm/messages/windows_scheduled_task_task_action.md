@@ -4,31 +4,31 @@ The task action.
 
 ## Fields
 
-### `actionType`
+### `action_type` / `actionType`
 
 - Type: [`ActionType`](../enums/windows_scheduled_task_task_action_action_type.md) (singular)
 
 The action type of the task.
 
-### `execArguments`
+### `exec_arguments` / `execArguments`
 
 - Type: `string` (repeated)
 
 The arguments of the task. This field is only populated if the task action type is EXEC.
 
-### `execWorkingDirectory`
+### `exec_working_directory` / `execWorkingDirectory`
 
 - Type: `string` (singular)
 
 The executable working directory of the task. This field is only populated if the task action type is EXEC.
 
-### `comClassId`
+### `com_class_id` / `comClassId`
 
 - Type: `string` (singular)
 
 The COM class IF the action is COM handler. This field is only populated if the task action type is COM_HANDLER.
 
-### `comData`
+### `com_data` / `comData`
 
 - Type: `string` (singular)
 

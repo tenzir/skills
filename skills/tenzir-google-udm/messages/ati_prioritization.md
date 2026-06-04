@@ -4,55 +4,55 @@ AtiPrioritization contains various fields used to calculate a priority score for
 
 ## Fields
 
-### `gtiVerdict`
+### `gti_verdict` / `gtiVerdict`
 
 - Type: `int32` (singular)
 
 The confidence score from "GTI verdict" source.
 
-### `gtiSeverity`
+### `gti_severity` / `gtiSeverity`
 
 - Type: `int32` (singular)
 
 The confidence score from "GTI severity" source.
 
-### `gtiThreatScore`
+### `gti_threat_score` / `gtiThreatScore`
 
 - Type: `int32` (singular)
 
 The confidence score from "GTI threat score" source.
 
-### `mandiantAnalystConfidence`
+### `mandiant_analyst_confidence` / `mandiantAnalystConfidence`
 
 - Type: `int32` (singular)
 
 The confidence score from "Mandiant Analyst Intel" source.
 
-### `gtiUpdateTime`
+### `gti_update_time` / `gtiUpdateTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp of the latest update for GTI verdict, severity, or threat score.
 
-### `activeIr`
+### `active_ir` / `activeIr`
 
 - Type: `bool` (singular)
 
 Whether one or more Mandiant incident response customers had this indicator in their environment.
 
-### `activeIrFirstTaggedTime`
+### `active_ir_first_tagged_time` / `activeIrFirstTaggedTime`
 
 - Type: `timestamp` (singular)
 
 The timestamp of the first time an active IR was applied to this entity.
 
-### `globalCustomerCount`
+### `global_customer_count` / `globalCustomerCount`
 
 - Type: `int64` (singular)
 
 Global customer count over the last 30 days
 
-### `globalHitCount`
+### `global_hit_count` / `globalHitCount`
 
 - Type: `int64` (singular)
 
@@ -82,13 +82,13 @@ Whether the indicator is a scanner.
 
 Whether the indicator verdict has passed review.
 
-### `attributedMalware`
+### `attributed_malware` / `attributedMalware`
 
 - Type: [`Association`](security_result_association.md) (repeated)
 
 Malware families associated with this indicator.
 
-### `attributedThreatActors`
+### `attributed_threat_actors` / `attributedThreatActors`
 
 - Type: [`Association`](security_result_association.md) (repeated)
 

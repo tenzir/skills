@@ -10,13 +10,13 @@ The WindowsEventLog extension captures details specific to Windows Event Log eve
 
 The channel of the event.
 
-### `eventId`
+### `event_id` / `eventId`
 
 - Type: `string` (singular)
 
 A unique identifier for a specific type of event.
 
-### `activityId`
+### `activity_id` / `activityId`
 
 - Type: `string` (singular)
 

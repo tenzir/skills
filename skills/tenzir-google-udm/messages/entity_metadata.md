@@ -4,23 +4,23 @@ Information about the Entity and the product where the entity was created.
 
 ## Fields
 
-### `productEntityId`
+### `product_entity_id` / `productEntityId`
 
 - Type: `string` (singular)
 
 A vendor-specific identifier that uniquely identifies the entity (e.g. a GUID, LDAP, OID, or similar).
 
-### `collectedTimestamp`
+### `collected_timestamp` / `collectedTimestamp`
 
 - Type: `timestamp` (singular)
 
 GMT timestamp when the entity information was collected by the vendor's local collection infrastructure.
 
-### `creationTimestamp`
+### `creation_timestamp` / `creationTimestamp`
 
 - Type: `timestamp` (singular)
 
-GMT timestamp when the entity described by the productEntityId was created on the system where data was collected.
+GMT timestamp when the entity described by the product_entity_id was created on the system where data was collected.
 
 ### `interval`
 
@@ -28,13 +28,13 @@ GMT timestamp when the entity described by the productEntityId was created on th
 
 Valid existence time range for the version of the entity represented by this entity data.
 
-### `vendorName`
+### `vendor_name` / `vendorName`
 
 - Type: `string` (singular)
 
 Vendor name of the product that produced the entity information.
 
-### `productName`
+### `product_name` / `productName`
 
 - Type: `string` (singular)
 
@@ -46,13 +46,13 @@ Product name that produced the entity information.
 
 Vendor feed name for a threat indicator feed.
 
-### `productVersion`
+### `product_version` / `productVersion`
 
 - Type: `string` (singular)
 
 Version of the product that produced the entity information.
 
-### `entityType`
+### `entity_type` / `entityType`
 
 - Type: [`EntityType`](../enums/entity_metadata_entity_type.md) (singular)
 
@@ -70,25 +70,25 @@ Human-readable description of the entity.
 
 Metadata provided by a threat intelligence feed that identified the entity as malicious.
 
-### `sourceType`
+### `source_type` / `sourceType`
 
 - Type: [`SourceType`](../enums/entity_metadata_source_type.md) (singular)
 
 The source of the entity.
 
-### `sourceLabels`
+### `source_labels` / `sourceLabels`
 
 - Type: [`Label`](label.md) (repeated)
 
 Entity source metadata labels.
 
-### `eventMetadata`
+### `event_metadata` / `eventMetadata`
 
 - Type: [`Metadata`](metadata.md) (singular)
 
 Metadata field from the event.
 
-### `structuredFields`
+### `structured_fields` / `structuredFields`
 
 - Type: `object` (singular)
 - Deprecated: `true`
@@ -101,7 +101,7 @@ Structured fields extracted from the log.
 
 Flattened fields extracted from the log.
 
-### `atiPrioritization`
+### `ati_prioritization` / `atiPrioritization`
 
 - Type: [`AtiPrioritization`](ati_prioritization.md) (singular)
 

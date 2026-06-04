@@ -16,85 +16,85 @@ If the security result is about a specific entity (Noun), add it here. This fiel
 
 The security category. This field is not populated when the SecurityResult appears in a detection.
 
-### `categoryDetails`
+### `category_details` / `categoryDetails`
 
 - Type: `string` (repeated)
 
 For vendor-specific categories. For web categorization, put type in here such as "gambling" or "porn". This field is not populated when the SecurityResult appears in a detection.
 
-### `threatName`
+### `threat_name` / `threatName`
 
 - Type: `string` (singular)
 
 A vendor-assigned classification common across multiple customers (for example, "W32/File-A", "Slammer"). This field is not populated when the SecurityResult appears in a detection.
 
-### `ruleSet`
+### `rule_set` / `ruleSet`
 
 - Type: `string` (singular)
 
 The curated detection's rule set identifier. (for example, "windows-threats") This is primarily set in rule-generated detections and alerts.
 
-### `ruleSetDisplayName`
+### `rule_set_display_name` / `ruleSetDisplayName`
 
 - Type: `string` (singular)
 
 The curated detections rule set display name. This is primarily set in rule-generated detections and alerts.
 
-### `rulesetCategoryDisplayName`
+### `ruleset_category_display_name` / `rulesetCategoryDisplayName`
 
 - Type: `string` (singular)
 
-The curated detection rule set category display name. (for example, if ruleSetDisplayName is "CDIR SCC Enhanced Exfiltration", the rule_set_category is "Cloud Threats"). This is primarily set in rule-generated detections and alerts.
+The curated detection rule set category display name. (for example, if rule_set_display_name is "CDIR SCC Enhanced Exfiltration", the rule_set_category is "Cloud Threats"). This is primarily set in rule-generated detections and alerts.
 
-### `ruleId`
+### `rule_id` / `ruleId`
 
 - Type: `string` (singular)
 
 A vendor-specific ID for a rule, varying by observer type (e.g. "08123", "5d2b44d0-5ef6-40f5-a704-47d61d3babbe").
 
-### `ruleName`
+### `rule_name` / `ruleName`
 
 - Type: `string` (singular)
 
 Name of the security rule (e.g. "BlockInboundToOracle").
 
-### `displayName`
+### `display_name` / `displayName`
 
 - Type: `string` (singular)
 
 The display name of the security result. This is populated from 'name_override' Outcome Variable, if present. Otherwise, this field is not set.
 
-### `ruleVersion`
+### `rule_version` / `ruleVersion`
 
 - Type: `string` (singular)
 
 Version of the security rule. (e.g. "v1.1", "00001", "1604709794", "2020-11-16T23:04:19+00:00"). Note that rule versions are source-dependant and lexical ordering should not be assumed.
 
-### `ruleType`
+### `rule_type` / `ruleType`
 
 - Type: `string` (singular)
 
 The type of security rule.
 
-### `ruleAuthor`
+### `rule_author` / `ruleAuthor`
 
 - Type: `string` (singular)
 
 Author of the security rule. This field is not populated when the SecurityResult appears in a detection.
 
-### `ruleLabels`
+### `rule_labels` / `ruleLabels`
 
 - Type: [`Label`](label.md) (repeated)
 
 A list of rule labels that can't be captured by the other fields in security result (e.g. "reference : AnotherRule", "contributor : John"). This is primarily set in rule-generated detections and alerts.
 
-### `alertState`
+### `alert_state` / `alertState`
 
 - Type: [`AlertState`](../enums/security_result_alert_state.md) (singular)
 
 The alerting types of this security result. This is primarily set for rule-generated detections and alerts.
 
-### `detectionFields`
+### `detection_fields` / `detectionFields`
 
 - Type: [`Label`](label.md) (repeated)
 
@@ -137,7 +137,7 @@ A human-readable description (e.g. "user password was wrong"). This can be more 
 
 Actions taken for this event. This field is not populated when the SecurityResult appears in a detection.
 
-### `actionDetails`
+### `action_details` / `actionDetails`
 
 - Type: `string` (singular)
 
@@ -161,79 +161,79 @@ The confidence level of the result as estimated by the product. This field is no
 
 The priority of the result. This field is not populated when the SecurityResult appears in a detection.
 
-### `riskScore`
+### `risk_score` / `riskScore`
 
 - Type: `float` (singular)
 
 The risk score of the security result.
 
-### `confidenceScore`
+### `confidence_score` / `confidenceScore`
 
 - Type: `float` (singular)
 
 The confidence score of the security result. This field is not populated when the SecurityResult appears in a detection.
 
-### `analyticsMetadata`
+### `analytics_metadata` / `analyticsMetadata`
 
 - Type: [`AnalyticsMetadata`](analytics_metadata.md) (repeated)
 
 Stores metadata about each risk analytic metric the rule uses. This field is not populated when the SecurityResult appears in a detection.
 
-### `severityDetails`
+### `severity_details` / `severityDetails`
 
 - Type: `string` (singular)
 
 Vendor-specific severity. This field is not populated when the SecurityResult appears in a detection.
 
-### `confidenceDetails`
+### `confidence_details` / `confidenceDetails`
 
 - Type: `string` (singular)
 
 Additional detail with regards to the confidence of a security event as estimated by the product vendor. This field is not populated when the SecurityResult appears in a detection.
 
-### `priorityDetails`
+### `priority_details` / `priorityDetails`
 
 - Type: `string` (singular)
 
 Vendor-specific information about the security result priority. This field is not populated when the SecurityResult appears in a detection.
 
-### `urlBackToProduct`
+### `url_back_to_product` / `urlBackToProduct`
 
 - Type: `string` (singular)
 
 URL that takes the user to the source product console for this event. This field is not populated when the SecurityResult appears in a detection.
 
-### `threatId`
+### `threat_id` / `threatId`
 
 - Type: `string` (singular)
 
 Vendor-specific ID for a threat. This field is not populated when the SecurityResult appears in a detection.
 
-### `threatFeedName`
+### `threat_feed_name` / `threatFeedName`
 
 - Type: `string` (singular)
 
 Vendor feed name for a threat indicator feed. This field is not populated when the SecurityResult appears in a detection.
 
-### `threatIdNamespace`
+### `threat_id_namespace` / `threatIdNamespace`
 
 - Type: [`Namespace`](../enums/id_namespace.md) (singular)
 
-The attribute threatIdNamespace qualifies threatId with an id namespace to get an unique id. The attribute threatId by itself is not unique across Chronicle as it is a vendor specific id. This field is not populated when the SecurityResult appears in a detection.
+The attribute threat_id_namespace qualifies threat_id with an id namespace to get an unique id. The attribute threat_id by itself is not unique across Chronicle as it is a vendor specific id. This field is not populated when the SecurityResult appears in a detection.
 
-### `threatStatus`
+### `threat_status` / `threatStatus`
 
 - Type: [`ThreatStatus`](../enums/security_result_threat_status.md) (singular)
 
 Current status of the threat This field is not populated when the SecurityResult appears in a detection.
 
-### `attackDetails`
+### `attack_details` / `attackDetails`
 
 - Type: [`AttackDetails`](attack_details.md) (singular)
 
 MITRE ATT&CK details. This field is not populated when the SecurityResult appears in a detection.
 
-### `firstDiscoveredTime`
+### `first_discovered_time` / `firstDiscoveredTime`
 
 - Type: `timestamp` (singular)
 
@@ -250,14 +250,14 @@ Associations related to the threat.
 - Type: `string` (repeated)
 - Deprecated: `true`
 
-Campaigns using this IOC threat. This is deprecated. Use threatCollections instead.
+Campaigns using this IOC threat. This is deprecated. Use threat_collections instead.
 
 ### `reports`
 
 - Type: `string` (repeated)
 - Deprecated: `true`
 
-Reports that reference this IOC threat. These are the report IDs. This is deprecated. Use threatCollections instead.
+Reports that reference this IOC threat. These are the report IDs. This is deprecated. Use threat_collections instead.
 
 ### `verdict`
 
@@ -266,37 +266,37 @@ Reports that reference this IOC threat. These are the report IDs. This is deprec
 
 Verdict about the IoC from the provider. This field is now deprecated. Use VerdictInfo instead.
 
-### `lastUpdatedTime`
+### `last_updated_time` / `lastUpdatedTime`
 
 - Type: `timestamp` (singular)
 
 Last time the IoC threat was updated in the provider. This field is not populated when the SecurityResult appears in a detection.
 
-### `verdictInfo`
+### `verdict_info` / `verdictInfo`
 
 - Type: [`VerdictInfo`](security_result_verdict_info.md) (repeated)
 
 Verdict information about the IoC from the provider. This field is not populated when the SecurityResult appears in a detection.
 
-### `threatVerdict`
+### `threat_verdict` / `threatVerdict`
 
 - Type: [`ThreatVerdict`](../enums/threat_verdict.md) (singular)
 
 GCTI threat verdict on the security result entity. This field is not populated when the SecurityResult appears in a detection.
 
-### `lastDiscoveredTime`
+### `last_discovered_time` / `lastDiscoveredTime`
 
 - Type: `timestamp` (singular)
 
 Last time the IoC was seen in the provider data. This field is not populated when the SecurityResult appears in a detection.
 
-### `detectionDepth`
+### `detection_depth` / `detectionDepth`
 
 - Type: `int64` (singular)
 
 The depth of the detection chain. Applies only to composite detections.
 
-### `threatCollections`
+### `threat_collections` / `threatCollections`
 
 - Type: [`ThreatCollectionItem`](security_result_threat_collection_item.md) (repeated)
 
@@ -322,7 +322,7 @@ Population guidance from the Google UDM usage guide.
   - `QUARANTINE`: Store for later analysis (does not mean block).
   - `UNKNOWN_ACTION`
 
-### `SecurityResult.actionDetails`
+### `SecurityResult.action_details` / `SecurityResult.actionDetails`
 
 - **Purpose**: Vendor-provided details of the action taken as a result of the security incident. Security actions often best translate into the more general `Security_Result.action` UDM field. However, you might need to write rules for the exact vendor-provided description of the action.
 - **Encoding**: String.
@@ -368,7 +368,7 @@ Population guidance from the Google UDM usage guide.
   - `MEDIUM_CONFIDENCE`
   - `HIGH_CONFIDENCE`
 
-### `SecurityResult.confidenceDetails`
+### `SecurityResult.confidence_details` / `SecurityResult.confidenceDetails`
 
 - **Purpose**: Additional detail with regards to the confidence of a security event as estimated by the product vendor.
 - **Encoding**: String.
@@ -383,12 +383,12 @@ Population guidance from the Google UDM usage guide.
   - `MEDIUM_PRIORITY`
   - `HIGH_PRIORITY`
 
-### `SecurityResult.priorityDetails`
+### `SecurityResult.priority_details` / `SecurityResult.priorityDetails`
 
 - **Purpose**: Vendor-specific information about the security result priority.
 - **Encoding**: String.
 
-### `SecurityResult.ruleId`
+### `SecurityResult.rule_id` / `SecurityResult.ruleId`
 
 - **Purpose**: Identifier for the security rule.
 - **Encoding**: String.
@@ -398,7 +398,7 @@ Population guidance from the Google UDM usage guide.
 - 08123
 - 5d2b44d0-5ef6-40f5-a704-47d61d3babbe
 
-### `SecurityResult.ruleName`
+### `SecurityResult.rule_name` / `SecurityResult.ruleName`
 
 - **Purpose**: Name of the security rule.
 - **Encoding**: String.
@@ -420,12 +420,12 @@ Population guidance from the Google UDM usage guide.
   - `MEDIUM`: Malicious
   - `HIGH`: Malicious
 
-### `SecurityResult.severityDetails`
+### `SecurityResult.severity_details` / `SecurityResult.severityDetails`
 
 - **Purpose**: Severity for a security event as estimated by the product vendor.
 - **Encoding**: String.
 
-### `SecurityResult.threatName`
+### `SecurityResult.threat_name` / `SecurityResult.threatName`
 
 - **Purpose**: Name of the security threat.
 - **Encoding**: String.
@@ -435,7 +435,7 @@ Population guidance from the Google UDM usage guide.
 - W32/File-A
 - Slammer
 
-### `SecurityResult.urlBackToProduct`
+### `SecurityResult.url_back_to_product` / `SecurityResult.urlBackToProduct`
 
 - **Purpose**: URL to direct you to the source product console for this security event.
 - **Encoding**: String.

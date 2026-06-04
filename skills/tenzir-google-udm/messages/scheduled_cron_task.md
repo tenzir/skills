@@ -16,7 +16,7 @@ Crontab minute field. Value is an integer between 0 and 59 and can also be a ran
 
 Crontab hour field. Value is an integer between 0 and 23, a range or list of values (e.g., "0-6", "*/2", "1,2"), or an asterisk (*) to indicate first-last hours.
 
-### `monthDay`
+### `month_day` / `monthDay`
 
 - Type: `string` (singular)
 
@@ -28,7 +28,7 @@ Crontab day of month field. Value is an integer between 1 and 31, a range or lis
 
 Crontab month field. Value is an integer between 1 and 12 or a 3-letter name (e.g., "Jan"), a range or list of values (e.g., "1-3", "*/2", "1,6"), or an asterisk (*) to indicate first-last months.
 
-### `weekDay`
+### `week_day` / `weekDay`
 
 - Type: `string` (singular)
 

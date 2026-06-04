@@ -16,7 +16,7 @@ The type of authentication.
 
 The authentication mechanism.
 
-### `authDetails`
+### `auth_details` / `authDetails`
 
 - Type: `string` (singular)
 
@@ -32,7 +32,7 @@ The outcome of the authentication event.
 
 Population guidance from the Google UDM usage guide.
 
-### `Authentication.authDetails`
+### `Authentication.auth_details` / `Authentication.authDetails`
 
 - **Purpose**: Vendor-defined authentication details.
 - **Encoding**: String.

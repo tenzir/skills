@@ -1,6 +1,6 @@
 # Enums
 
-- [EventTimestampAttribute](enums/metadata_event_timestamp_attribute.md) - Enum representing the type of timestamp that the eventTimestamp field represents.
+- [EventTimestampAttribute](enums/metadata_event_timestamp_attribute.md) - Enum representing the type of timestamp that the event_timestamp field represents.
 - [EventType](enums/metadata_event_type.md) - An event type. Choose event type not based on the product that generated the event but the one that logged the event itself. So, for exampl...
 - [EnrichmentState](enums/metadata_enrichment_state.md) - An enrichment state.
 - [Direction](enums/network_direction.md) - A network traffic direction.
@@ -14,7 +14,7 @@
 - [RecordType](enums/linux_utmp_record_type.md) - The type of activity record from the Utmp file.
 - [Channel](enums/windows_event_log_channel.md) - The channel specifies the source or category of the event.
 - [Severity](enums/vulnerability_severity.md) - Severity of the vulnerability.
-- [TokenElevationType](enums/process_token_elevation_type.md) - The elevation type of the process's token. See https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-tokenElevationType
+- [TokenElevationType](enums/process_token_elevation_type.md) - The elevation type of the process's token. See https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-token_elevation_type
 - [Process.State](enums/process_state.md) - The state of the process. See https://psutil.readthedocs.io/en/stable/#process-status-constants.
 - [FindingVariable.Type](enums/finding_variable_type.md) - Type options for Finding variables.
 - [VerdictResponse](enums/security_result_verdict_response.md) - Represents different verdict types. Used to represent Mandiant threat intelligence.

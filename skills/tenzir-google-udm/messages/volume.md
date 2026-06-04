@@ -4,31 +4,31 @@ Information about a storage volume.
 
 ## Fields
 
-### `fileSystem`
+### `file_system` / `fileSystem`
 
 - Type: `string` (singular)
 
 The name of the file system on the volume (e.g., "NTFS", "FAT32").
 
-### `mountPoint`
+### `mount_point` / `mountPoint`
 
 - Type: `string` (singular)
 
 The path where the volume is mounted (e.g., "C:", "/mnt/data").
 
-### `devicePath`
+### `device_path` / `devicePath`
 
 - Type: `string` (singular)
 
 The system path to the device (e.g., "\\.\HarddiskVolume1", "/dev/sda1").
 
-### `isMounted`
+### `is_mounted` / `isMounted`
 
 - Type: `bool` (singular)
 
 Indicates whether the volume is currently mounted.
 
-### `isReadOnly`
+### `is_read_only` / `isReadOnly`
 
 - Type: `bool` (singular)
 

@@ -28,13 +28,13 @@ System permissions for IAM entity (human principal, service account, group).
 
 System IAM roles to be assumed by resources to use the role's permissions for access control.
 
-### `creationTime`
+### `creation_time` / `creationTime`
 
 - Type: `timestamp` (singular)
 
 Time the resource or entity was created or provisioned.
 
-### `lastUpdateTime`
+### `last_update_time` / `lastUpdateTime`
 
 - Type: `timestamp` (singular)
 

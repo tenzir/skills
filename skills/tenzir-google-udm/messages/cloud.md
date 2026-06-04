@@ -22,9 +22,9 @@ The cloud environment VPC. Deprecated.
 - Type: [`Resource`](resource.md) (singular)
 - Deprecated: `true`
 
-The cloud environment project information. Deprecated: Use Resource.resourceAncestors
+The cloud environment project information. Deprecated: Use Resource.resource_ancestors
 
-### `availabilityZone`
+### `availability_zone` / `availabilityZone`
 
 - Type: `string` (singular)
 

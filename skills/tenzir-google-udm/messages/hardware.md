@@ -4,7 +4,7 @@ Hardware specification details for a resource, including both physical and virtu
 
 ## Fields
 
-### `serialNumber`
+### `serial_number` / `serialNumber`
 
 - Type: `string` (singular)
 
@@ -22,31 +22,31 @@ Hardware manufacturer.
 
 Hardware model.
 
-### `cpuPlatform`
+### `cpu_platform` / `cpuPlatform`
 
 - Type: `string` (singular)
 
 Platform of the hardware CPU (e.g. "Intel Broadwell").
 
-### `cpuModel`
+### `cpu_model` / `cpuModel`
 
 - Type: `string` (singular)
 
 Model description of the hardware CPU (e.g. "2.8 GHz Quad-Core Intel Core i5").
 
-### `cpuClockSpeed`
+### `cpu_clock_speed` / `cpuClockSpeed`
 
 - Type: `uint64` (singular)
 
 Clock speed of the hardware CPU in MHz.
 
-### `cpuMaxClockSpeed`
+### `cpu_max_clock_speed` / `cpuMaxClockSpeed`
 
 - Type: `uint64` (singular)
 
 Maximum possible clock speed of the hardware CPU in MHz.
 
-### `cpuNumberCores`
+### `cpu_number_cores` / `cpuNumberCores`
 
 - Type: `uint64` (singular)
 

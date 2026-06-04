@@ -34,7 +34,7 @@ The time interval for which the resource record can be cached before the source 
 
 The payload or response to the DNS question for all responses encoded in UTF-8 format
 
-### `binaryData`
+### `binary_data` / `binaryData`
 
 - Type: `bytes` (singular)
 
@@ -44,7 +44,7 @@ The raw bytes of any non-UTF8 strings that might be included as part of a DNS re
 
 Population guidance from the Google UDM usage guide.
 
-### `ResourceRecord.binaryData`
+### `ResourceRecord.binary_data` / `ResourceRecord.binaryData`
 
 - **Purpose**: Stores the raw bytes of any non-UTF8 strings that might be included as part of a DNS response. This field must only be used if the response data returned by the DNS server contains non-UTF8 data. Otherwise, place the DNS response in the data field below. This type of information must be stored here rather than in `ResourceRecord.data`.
 - **Encoding**: Bytes. Note: This field is not specified in RFC 1035 (unlike the other DNS resource record fields), but has been defined by Google SecOps for the UDM.

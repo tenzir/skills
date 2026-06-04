@@ -16,19 +16,19 @@ Name of the section.
 
 Entropy of the section.
 
-### `rawSizeBytes`
+### `raw_size_bytes` / `rawSizeBytes`
 
 - Type: `int64` (singular)
 
 Raw file size in bytes.
 
-### `virtualSizeBytes`
+### `virtual_size_bytes` / `virtualSizeBytes`
 
 - Type: `int64` (singular)
 
 Virtual file size in bytes.
 
-### `md5Hex`
+### `md5_hex` / `md5Hex`
 
 - Type: `string` (singular)
 

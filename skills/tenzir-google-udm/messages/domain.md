@@ -16,13 +16,13 @@ The domain name. This field can be used as an entity indicator for Domain entiti
 
 The prevalence of the domain within the customer's environment.
 
-### `firstSeenTime`
+### `first_seen_time` / `firstSeenTime`
 
 - Type: `timestamp` (singular)
 
 First seen timestamp of the domain in the customer's environment.
 
-### `lastSeenTime`
+### `last_seen_time` / `lastSeenTime`
 
 - Type: `timestamp` (singular)
 
@@ -34,43 +34,43 @@ Last seen timestamp of the domain in the customer's environment.
 
 Registrar name . FOr example, "Wild West Domains, Inc. (R120-LROR)", "GoDaddy.com, LLC", or "PDR LTD. D/B/A PUBLICDOMAINREGISTRY.COM".
 
-### `contactEmail`
+### `contact_email` / `contactEmail`
 
 - Type: `string` (singular)
 
 Contact email address.
 
-### `whoisServer`
+### `whois_server` / `whoisServer`
 
 - Type: `string` (singular)
 
 Whois server name.
 
-### `nameServer`
+### `name_server` / `nameServer`
 
 - Type: `string` (repeated)
 
 Repeated list of name servers.
 
-### `creationTime`
+### `creation_time` / `creationTime`
 
 - Type: `timestamp` (singular)
 
 Domain creation time.
 
-### `updateTime`
+### `update_time` / `updateTime`
 
 - Type: `timestamp` (singular)
 
 Last updated time.
 
-### `expirationTime`
+### `expiration_time` / `expirationTime`
 
 - Type: `timestamp` (singular)
 
 Expiration time.
 
-### `auditUpdateTime`
+### `audit_update_time` / `auditUpdateTime`
 
 - Type: `timestamp` (singular)
 
@@ -112,25 +112,25 @@ Parsed contact information for the billing contact of the domain.
 
 Parsed contact information for the zone.
 
-### `whoisRecordRawText`
+### `whois_record_raw_text` / `whoisRecordRawText`
 
 - Type: `bytes` (singular)
 
 WHOIS raw text.
 
-### `registryDataRawText`
+### `registry_data_raw_text` / `registryDataRawText`
 
 - Type: `bytes` (singular)
 
 Registry Data raw text.
 
-### `ianaRegistrarId`
+### `iana_registrar_id` / `ianaRegistrarId`
 
 - Type: `int32` (singular)
 
 IANA Registrar ID. See [https://www.iana.org/assignments/registrar-ids/registrar-ids.xhtml](https://www.iana.org/assignments/registrar-ids/registrar-ids.xhtml)
 
-### `privateRegistration`
+### `private_registration` / `privateRegistration`
 
 - Type: `bool` (singular)
 
@@ -154,31 +154,31 @@ Includes difference hash and MD5 hash of the domain's favicon.
 
 Domain's JARM hash.
 
-### `lastDnsRecords`
+### `last_dns_records` / `lastDnsRecords`
 
 - Type: [`DNSRecord`](dns_record.md) (repeated)
 
 Domain's DNS records from the last scan.
 
-### `lastDnsRecordsTime`
+### `last_dns_records_time` / `lastDnsRecordsTime`
 
 - Type: `timestamp` (singular)
 
 Date when the DNS records list was retrieved by VirusTotal.
 
-### `lastHttpsCertificate`
+### `last_https_certificate` / `lastHttpsCertificate`
 
 - Type: [`SSLCertificate`](ssl_certificate.md) (singular)
 
 SSL certificate object retrieved last time the domain was analyzed.
 
-### `lastHttpsCertificateTime`
+### `last_https_certificate_time` / `lastHttpsCertificateTime`
 
 - Type: `timestamp` (singular)
 
 When the certificate was retrieved by VirusTotal.
 
-### `popularityRanks`
+### `popularity_ranks` / `popularityRanks`
 
 - Type: [`PopularityRank`](popularity_rank.md) (repeated)
 
@@ -190,7 +190,7 @@ Domain's position in popularity ranks such as Alexa, Quantcast, Statvoo, etc
 
 List of representative attributes.
 
-### `whoisTime`
+### `whois_time` / `whoisTime`
 
 - Type: `timestamp` (singular)
 

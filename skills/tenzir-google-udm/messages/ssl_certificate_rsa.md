@@ -4,7 +4,7 @@ RSA public key information.
 
 ## Fields
 
-### `keySize`
+### `key_size` / `keySize`
 
 - Type: `int64` (singular)
 

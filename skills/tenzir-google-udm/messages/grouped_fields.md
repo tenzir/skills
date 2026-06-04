@@ -34,7 +34,7 @@ Users.
 
 Emails.
 
-### `filePath`
+### `file_path` / `filePath`
 
 - Type: `string` (repeated)
 
@@ -46,7 +46,7 @@ File paths.
 
 File Hashes.
 
-### `processId`
+### `process_id` / `processId`
 
 - Type: `string` (repeated)
 

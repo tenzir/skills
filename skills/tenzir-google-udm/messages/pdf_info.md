@@ -16,19 +16,19 @@ Number of /JS tags found in the PDF file. Should be the same as javascript field
 
 Number of /JavaScript tags found in the PDF file. Should be the same as the js field in normal scenarios.
 
-### `launchActionCount`
+### `launch_action_count` / `launchActionCount`
 
 - Type: `int64` (singular)
 
 Number of /Launch tags found in the PDF file.
 
-### `objectStreamCount`
+### `object_stream_count` / `objectStreamCount`
 
 - Type: `int64` (singular)
 
 Number of object streams.
 
-### `endobjCount`
+### `endobj_count` / `endobjCount`
 
 - Type: `int64` (singular)
 
@@ -52,7 +52,7 @@ Number of /AcroForm tags found in the PDF.
 
 Number of /AA tags found in the PDF.
 
-### `embeddedFile`
+### `embedded_file` / `embeddedFile`
 
 - Type: `int64` (singular)
 
@@ -70,31 +70,31 @@ Whether the document is encrypted or not. This is defined by the /Encrypt tag.
 
 Number of /RichMedia tags found in the PDF.
 
-### `jbig2Compression`
+### `jbig2_compression` / `jbig2Compression`
 
 - Type: `int64` (singular)
 
 Number of /JBIG2Decode tags found in the PDF.
 
-### `objCount`
+### `obj_count` / `objCount`
 
 - Type: `int64` (singular)
 
 Number of objects definitions (obj keyword).
 
-### `endstreamCount`
+### `endstream_count` / `endstreamCount`
 
 - Type: `int64` (singular)
 
 Number of defined stream objects (stream keyword).
 
-### `pageCount`
+### `page_count` / `pageCount`
 
 - Type: `int64` (singular)
 
 Number of pages in the PDF.
 
-### `streamCount`
+### `stream_count` / `streamCount`
 
 - Type: `int64` (singular)
 
@@ -112,7 +112,7 @@ Number of /OpenAction tags found in the PDF.
 
 Number of startxref keywords in the PDF.
 
-### `suspiciousColors`
+### `suspicious_colors` / `suspiciousColors`
 
 - Type: `int64` (singular)
 

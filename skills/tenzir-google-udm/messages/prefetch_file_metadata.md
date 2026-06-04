@@ -4,13 +4,13 @@ Windows Prefetch file metadata.
 
 ## Fields
 
-### `runCount`
+### `run_count` / `runCount`
 
 - Type: `int64` (singular)
 
 The number of times the application has been run.
 
-### `prefetchHash`
+### `prefetch_hash` / `prefetchHash`
 
 - Type: `string` (singular)
 

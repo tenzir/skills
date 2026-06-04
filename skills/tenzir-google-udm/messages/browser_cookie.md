@@ -28,13 +28,13 @@ The domain for which the cookie is valid.
 
 The URL path for which the cookie is valid.
 
-### `expirationTime`
+### `expiration_time` / `expirationTime`
 
 - Type: `timestamp` (singular)
 
 The date and time when the cookie will expire.
 
-### `httpOnly`
+### `http_only` / `httpOnly`
 
 - Type: `bool` (singular)
 
@@ -46,13 +46,13 @@ Indicates if the cookie is inaccessible via client-side scripts (e.g., JavaScrip
 
 Indicates if the cookie should only be sent over secure HTTPS connections.
 
-### `maxAge`
+### `max_age` / `maxAge`
 
 - Type: `int64` (singular)
 
 The maximum age of the cookie in seconds.
 
-### `sameSite`
+### `same_site` / `sameSite`
 
 - Type: [`CookieSameSite`](../enums/browser_cookie_cookie_same_site.md) (singular)
 

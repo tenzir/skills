@@ -46,13 +46,13 @@ The SHA1 hash of the certificate, as a hex-encoded string.
 
 The SHA256 hash of the certificate, as a hex-encoded string.
 
-### `notBefore`
+### `not_before` / `notBefore`
 
 - Type: `timestamp` (singular)
 
 Indicates when the certificate is first valid.
 
-### `notAfter`
+### `not_after` / `notAfter`
 
 - Type: `timestamp` (singular)
 

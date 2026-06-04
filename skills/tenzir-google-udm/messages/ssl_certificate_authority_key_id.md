@@ -10,7 +10,7 @@ Identifies the public key to be used to verify the signature on this certificate
 
 Key hexdump.
 
-### `serialNumber`
+### `serial_number` / `serialNumber`
 
 - Type: `string` (singular)
 

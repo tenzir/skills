@@ -22,7 +22,7 @@ Information about the domain.
 
 Information about an artifact.
 
-### `urlMetadata`
+### `url_metadata` / `urlMetadata`
 
 - Type: [`Url`](url.md) (singular)
 
@@ -34,7 +34,7 @@ Information about the URL.
 
 Information about an entry in the web browser's local history database.
 
-### `assetId`
+### `asset_id` / `assetId`
 
 - Type: `string` (singular)
 
@@ -46,11 +46,11 @@ The asset ID. This field can be used as an entity indicator for asset entities.
 
 Information about the user.
 
-### `userManagementChain`
+### `user_management_chain` / `userManagementChain`
 
 - Type: [`User`](user.md) (repeated)
 
-Information about the user's management chain (reporting hierarchy). Note: userManagementChain is only populated when data is exported to BigQuery since recursive fields (e.g. user.managers) are not supported by BigQuery.
+Information about the user's management chain (reporting hierarchy). Note: user_management_chain is only populated when data is exported to BigQuery since recursive fields (e.g. user.managers) are not supported by BigQuery.
 
 ### `group`
 
@@ -64,11 +64,11 @@ Information about the group.
 
 Information about the process.
 
-### `processAncestors`
+### `process_ancestors` / `processAncestors`
 
 - Type: [`Process`](process.md) (repeated)
 
-Information about the process's ancestors ordered from immediate ancestor (parent process) to root. Note: processAncestors is only populated when data is exported to BigQuery since recursive fields (e.g. process.parentProcess) are not supported by BigQuery.
+Information about the process's ancestors ordered from immediate ancestor (parent process) to root. Note: process_ancestors is only populated when data is exported to BigQuery since recursive fields (e.g. process.parent_process) are not supported by BigQuery.
 
 ### `asset`
 
@@ -82,7 +82,7 @@ Information about the asset.
 
 A list of IP addresses associated with a network connection. This field can be used as an entity indicator for asset entities.
 
-### `natIp`
+### `nat_ip` / `natIp`
 
 - Type: `string` (repeated)
 
@@ -94,7 +94,7 @@ A list of NAT translated IP addresses associated with a network connection.
 
 Source or destination network port number when a specific network connection is described within an event.
 
-### `natPort`
+### `nat_port` / `natPort`
 
 - Type: `int32` (singular)
 
@@ -106,7 +106,7 @@ NAT external network port number when a specific network connection is described
 
 List of MAC addresses associated with a device. This field can be used as an entity indicator for asset entities.
 
-### `administrativeDomain`
+### `administrative_domain` / `administrativeDomain`
 
 - Type: `string` (singular)
 
@@ -134,7 +134,7 @@ Information about the file.
 
 - Type: `string` (singular)
 
-Email address. Only filled in for securityResult.about
+Email address. Only filled in for security_result.about
 
 ### `registry`
 
@@ -154,13 +154,13 @@ The name of an application or service. Some SSO solutions only capture the name 
 
 Platform.
 
-### `platformVersion`
+### `platform_version` / `platformVersion`
 
 - Type: `string` (singular)
 
 Platform version. For example, "Microsoft Windows 1803".
 
-### `platformPatchLevel`
+### `platform_patch_level` / `platformPatchLevel`
 
 - Type: `string` (singular)
 
@@ -179,14 +179,14 @@ Cloud metadata. Deprecated: cloud should be populated in entity Attribute as gen
 
 Physical location. For cloud environments, set the region in location.name.
 
-### `ipLocation`
+### `ip_location` / `ipLocation`
 
 - Type: [`Location`](location.md) (repeated)
 - Deprecated: `true`
 
-Deprecated: use ipGeoArtifact.location instead.
+Deprecated: use ip_geo_artifact.location instead.
 
-### `ipGeoArtifact`
+### `ip_geo_artifact` / `ipGeoArtifact`
 
 - Type: [`Artifact`](artifact.md) (repeated)
 
@@ -198,7 +198,7 @@ Enriched geographic information corresponding to an IP address. Specifically, lo
 
 Information about the resource (e.g. scheduled task, calendar entry). This field should not be used for files, registry, or processes because these objects are already part of Noun.
 
-### `resourceAncestors`
+### `resource_ancestors` / `resourceAncestors`
 
 - Type: [`Resource`](resource.md) (repeated)
 
@@ -211,7 +211,7 @@ Information about the resource's ancestors ordered from immediate ancestor (star
 
 Labels are key-value pairs. For example: key = "env", value = "prod". Deprecated: labels should be populated in entity Attribute as generic metadata (e.g. user.attribute.labels).
 
-### `objectReference`
+### `object_reference` / `objectReference`
 
 - Type: [`Id`](id.md) (singular)
 
@@ -229,7 +229,7 @@ Analyst feedback/investigation for alerts.
 
 Network details, including sub-messages with details on each protocol (for example, DHCP, DNS, or HTTP).
 
-### `securityResult`
+### `security_result` / `securityResult`
 
 - Type: [`SecurityResult`](security_result.md) (repeated)
 
@@ -239,7 +239,7 @@ A list of security results.
 
 Population guidance from the Google UDM usage guide.
 
-### `Noun.administrativeDomain`
+### `Noun.administrative_domain` / `Noun.administrativeDomain`
 
 - **Purpose**: Domain that the device belongs to (for example, the Windows domain).
 - **Encoding**: Valid domain name string (128 characters maximum).
@@ -249,7 +249,7 @@ Population guidance from the Google UDM usage guide.
 
 - corp.altostrat.com
 
-### `Noun.assetId`
+### `Noun.asset_id` / `Noun.assetId`
 
 - **Purpose**: Vendor-specific unique device identifier (for example, a GUID that is generated when installing endpoint security software on a new device that is used to track that unique device over time).
 - **Encoding**: (VendorName or VendorAbbreviation):ID where the VendorName or VendorAbbreviation is a case insensitive vendor name like `Carbon Black` or `CB` and ID is a vendor-specific customer identifier that is globally unique within their customer's environment (for example, a GUID or unique value identifying a unique device). VendorName is alphanumeric and no more than 32 characters long. ID can be a maximum of 128 characters in length and can include alphanumeric characters, dashes, and periods.
@@ -318,7 +318,7 @@ Population guidance from the Google UDM usage guide.
   - `WINDOWS`
   - `UNKNOWN_PLATFORM`
 
-### `Noun.platformPatchLevel`
+### `Noun.platform_patch_level` / `Noun.platformPatchLevel`
 
 - **Purpose**: Platform operating system patch level.
 - **Encoding**: Alphanumeric string with punctuation, 64 characters maximum.
@@ -328,7 +328,7 @@ Population guidance from the Google UDM usage guide.
 
 - Build 17134.48
 
-### `Noun.platformVersion`
+### `Noun.platform_version` / `Noun.platformVersion`
 
 - **Purpose**: Platform operating system version.
 - **Encoding**: Alphanumeric string with punctuation, 64 characters maximum.

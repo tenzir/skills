@@ -133,7 +133,7 @@ Population guidance for choosing event types and required fields.
 #### Notes
 
 - Never populate `principal.email` or `target.email`.
-- Only populate the `email` field in `securityResult.about` or `network.email`.
+- Only populate the `email` field in `security_result.about` or `network.email`.
 - Top level security results generally have a noun set (optional for spam).
 
 ### File Creation / Deletion / Modification / Read / Open Events
@@ -148,7 +148,7 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 ### FILE_COPY
@@ -162,7 +162,7 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 ### MUTEX_CREATION
@@ -175,14 +175,14 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 ### NETWORK_CONNECTION
 
 #### Required Fields
 
-- `metadata`: `eventTimestamp`
+- `metadata`: `event_timestamp`
 - `principal`: Include detail about the machine that initiated the network connection (for example, source).
 - `target`: Include details about the target machine if different from the principal machine.
 - `network`: Capture details about the network connection (ports, protocol, etc.).
@@ -206,7 +206,7 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 #### Optional Fields
 
 - `principal`: Represents the client initiating the web request. Include at least one machine identifier (for example, hostname, IP, MAC, proprietary asset identifier) or a user identifier (for example, username). If a specific network connection is described and a client port number is available, specify only one IP address along with the port number associated with that network connection (although other machine identifiers could be provided to better describe the participant device). If no source port is available, you could specify any and all IP and MAC addresses, asset identifiers, and hostname values describing the principal device.
-- `network`: Include details of the network connection. You must populate the following fields: `network.ipProtocol` `network.applicationProtocol`
+- `network`: Include details of the network connection. You must populate the following fields: `network.ip_protocol` `network.application_protocol`
 - `about`: Represents other entities found in the HTTP transaction (for example, an uploaded or downloaded file).
 - `intermediary`: Represents a proxy server (if different from the principal or target).
 - `metadata`: Populate the other `metadata` fields.
@@ -214,7 +214,7 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 - `network.email`: If the HTTP network connection originated from a URL that appeared in an email message, populate `network.email` with the details.
 - `network.http`: If the HTTP network connection method is present, populate `network.http.method`.
 - `observer`: Represents a passive sniffer (if present).
-- `securityResult`: Add one or more items to the `securityResult` field to represent the malicious activity detected.
+- `security_result`: Add one or more items to the `security_result` field to represent the malicious activity detected.
 
 #### Notes
 
@@ -232,7 +232,7 @@ Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERM
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 - `principal.user` and `target.user`: Populate the initiating process (principal) and the target process if the user information is available.
 
 ### PROCESS_MODULE_LOAD
@@ -245,7 +245,7 @@ Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERM
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 ### PROCESS_PRIVILEGE_ESCALATION
@@ -257,7 +257,7 @@ Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERM
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 
 ### Registry Creation / Modification / Deletion Events
 
@@ -267,11 +267,11 @@ Applies to: `REGISTRY_CREATION`, `REGISTRY_MODIFICATION`, `REGISTRY_DELETION`
 
 - `metadata`: Include the required fields.
 - `principal`: At least one machine identifier. If a user-mode process performs the registry modification, `principal.process` must include information about the process modifying the registry. If a kernel process performs the registry modification, the principal must not include process information.
-- `target`: `target.registry`: If the target registry is remote, target must include at least one identifier for the target machine (for example, an IP address, MAC, hostname, or third party asset identifier). `target.registry.registryKey`: All registry events must include the affected registry key.
+- `target`: `target.registry`: If the target registry is remote, target must include at least one identifier for the target machine (for example, an IP address, MAC, hostname, or third party asset identifier). `target.registry.registry_key`: All registry events must include the affected registry key.
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected. For example, a bad registry key.
+- `security_result`: Describe the malicious activity detected. For example, a bad registry key.
 - `principal.user`: Populate if user information is available about the process.
 
 ### Scan File / Host / Process / Vuln Host / Vuln Network Events
@@ -280,7 +280,7 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 
 #### Required Fields
 
-- `metadata`: `eventTimestamp` and background information about the event.
+- `metadata`: `event_timestamp` and background information about the event.
 - `observer`: Capture information about the scanner itself. If the scanner is remote, the machine details must be captured by the `observer` field. For a local scanner, leave empty.
 - `target`: Capture information about the machine that holds the object being scanned. If a file is being scanned, `target.file` must capture information about the scanned file. If a process is being scanned, `target.process` must capture information about the scanned process.
 - `extensions`: For SCAN_VULN_HOST and SCAN_VULN_NETWORK, define the vulnerability using the `extensions.vuln` field.
@@ -289,7 +289,7 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 
 - `principal`: Represents the device initiating the connection and includes at least one machine identifier (for example, hostname, IP address, MAC address, proprietary asset identifier) or a user identifier.
 - `target`: User detail about the target object (for example, file creator or process owner) should be captured in `target.user`.
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 
 ### Scheduled Task Creation / Deletion / Disable / Enable / Modification / Uncategorized Events
 
@@ -302,7 +302,7 @@ Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TAS
 
 #### Optional Fields
 
-- `securityResult`: Describe the malicious activity detected.
+- `security_result`: Describe the malicious activity detected.
 
 ### Setting Uncategorized / Creation / Modification / Deletion Events
 
@@ -366,7 +366,7 @@ Applies to: `USER_CREATION`, `USER_DELETION`
 
 #### Required Fields
 
-- `metadata`: `eventTimestamp`.
+- `metadata`: `event_timestamp`.
 - `principal`: Include information about the machine where the request to create or delete the user originated from. For a local user creation or deletion, principal must include at least one machine identifier for the originating machine.
 - `target`: Location where the user is being created. Must also include user information (for example, `target.user`).
 
@@ -385,9 +385,9 @@ Applies to: `USER_LOGIN`, `USER_LOGOUT`
 - `principal`: For remote user activity (for example, remote login), populate principal with information about the machine originating the user activity. For local user activity (for example, local login), don't set principal.
 - `target`: Populate `target.user` with information about the user that has logged on or logged off. If principal is not set (for example, local login), target must also include at least one machine identifier identifying the target machine. For machine to machine user activity (for example, remote login, SSO, Cloud Service, VPN), target must include information on either the target application, target machine, or target VPN server.
 - `intermediary`: For SSO logins, intermediary must include at least one machine identifier for the SSO server if available.
-- `network` and `network.http`: If the login occurs over HTTP, you must place all available details in `network.ipProtocol`, `network.applicationProtocol`, and `network.http`.
+- `network` and `network.http`: If the login occurs over HTTP, you must place all available details in `network.ip_protocol`, `network.application_protocol`, and `network.http`.
 - authentication extension: Must identify the type of authentication system that the event is related to (for example, machine, SSO, or VPN) and the mechanism employed (username and password, OTP, etc.).
-- `securityResult`: Add a `securityResult` field to represent the login status if it fails. Specify `securityResult.category` with the AUTH_VIOLATION value if authentication fails.
+- `security_result`: Add a `security_result` field to represent the login status if it fails. Specify `security_result.category` with the AUTH_VIOLATION value if authentication fails.
 
 ### USER_RESOURCE_ACCESS
 
@@ -439,7 +439,7 @@ Applies to: `USER_RESOURCE_CREATION`, `USER_RESOURCE_DELETION`
 
 #### Required Fields
 
-- `metadata`: `eventTimestamp`
+- `metadata`: `event_timestamp`
 - `principal`: Include information about the machine where the request to create or delete the user originated from. For a local user creation or deletion, principal must include at least one machine identifier for the originating machine.
 - `target`: Location where the user is being created. Must also include user information (for example, `target.user`).
 

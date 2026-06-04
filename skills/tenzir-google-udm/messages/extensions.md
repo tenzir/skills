@@ -16,37 +16,37 @@ An authentication extension.
 
 A vulnerability extension.
 
-### `entityRisk`
+### `entity_risk` / `entityRisk`
 
 - Type: [`EntityRisk`](entity_risk.md) (singular)
 
 An entity risk change extension.
 
-### `linuxUtmp`
+### `linux_utmp` / `linuxUtmp`
 
 - Type: [`LinuxUtmp`](linux_utmp.md) (singular)
 
 A Linux Utmp extension. This captures details specific to Linux Utmp events, which record login and logout sessions on a Linux system.
 
-### `windowsEventLog`
+### `windows_event_log` / `windowsEventLog`
 
 - Type: [`WindowsEventLog`](windows_event_log.md) (singular)
 
 A Windows Event Log extension. This captures details specific to Windows Event Log events, providing structured information from various Windows logs.
 
-### `resourceUsage`
+### `resource_usage` / `resourceUsage`
 
 - Type: [`ResourceUsage`](resource_usage.md) (singular)
 
 A resource usage extension. This captures details about what entity (e.g., process, user) is using a specific resource.
 
-### `systemEventDetails`
+### `system_event_details` / `systemEventDetails`
 
 - Type: [`SystemEventDetails`](system_event_details.md) (singular)
 
 A system event details extension. This captures additional details for system-level events, such as message type, sender image ID, and subsystem.
 
-### `outlookMetadata`
+### `outlook_metadata` / `outlookMetadata`
 
 - Type: [`OutlookMetadata`](outlook_metadata.md) (singular)
 
@@ -58,7 +58,7 @@ A Microsoft Outlook specific metadata extension. This includes metadata related 
 
 A SRUM extension. This captures details specific to Windows System Resource Usage Monitor (SRUM) events, providing insights into application resource consumption.
 
-### `userAssist`
+### `user_assist` / `userAssist`
 
 - Type: [`UserAssist`](user_assist.md) (singular)
 
@@ -79,7 +79,7 @@ Population guidance from the Google UDM usage guide.
 - Network Access Control (NAC) data.
 - LDAP details about a user (for example, role, organization, etc.).
 
-### `Extensions.auth.authDetails`
+### `Extensions.auth.auth_details` / `Extensions.auth.authDetails`
 
 - **Purpose**: Specify the vendor specific details for the authentication type or mechanism. Authentication providers often define types such as via_mfa or via_ad that provide useful information on the authentication type. These types can still be generalized in auth.type or auth.mechanism for usability and cross dataset rule compatibility.
 - **Encoding**: String.

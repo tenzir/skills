@@ -4,26 +4,26 @@ Information about a Windows service.
 
 ## Fields
 
-### `displayName`
+### `display_name` / `displayName`
 
 - Type: `string` (singular)
 
 The user-friendly display name of the service.
 
-### `serviceType`
+### `service_type` / `serviceType`
 
 - Type: [`ServiceType`](../enums/service_service_type.md) (singular)
 - Deprecated: `true`
 
-Deprecated: use serviceTypes instead. The type of service.
+Deprecated: use service_types instead. The type of service.
 
-### `serviceTypes`
+### `service_types` / `serviceTypes`
 
 - Type: [`ServiceType`](../enums/service_service_type.md) (repeated)
 
 The list of service types.
 
-### `startupType`
+### `startup_type` / `startupType`
 
 - Type: [`StartupType`](../enums/service_startup_type.md) (singular)
 
