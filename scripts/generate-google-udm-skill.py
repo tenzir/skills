@@ -894,6 +894,7 @@ def render_enum_page(
         for value_idx, value in enumerate(enum.value):
             lines.append(render_enum_value(context, enum_doc, value_idx, value))
     if guidance is not None:
+        lines.append("")
         lines.extend(render_event_type_guidance(guidance))
     return clean_markdown("\n".join(lines))
 

@@ -109,6 +109,7 @@ An event type. Choose event type not based on the product that generated the eve
 - `ANALYST_UPDATE_RISK_SCORE` (24012): Analyst update about the risk score (0-100) of a finding.
 - `ENTITY_RISK_CHANGE` (26000): An update to an entity risk score. This event type is restricted to events published by Google Securit Operations Risk Analytics.
 - `TRIAGE_AGENT_UPDATE_INVESTIGATION` (27000): Triage Agent has investigated the finding.
+
 ## Guidance
 
 Population guidance from the [Google UDM usage guide](https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en); Google last updated: `2026-06-03 UTC`.
