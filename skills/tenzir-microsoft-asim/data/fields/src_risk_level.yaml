@@ -1,0 +1,38 @@
+name: SrcRiskLevel
+summary: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: Authentication
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: Dns
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: UserManagement
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'

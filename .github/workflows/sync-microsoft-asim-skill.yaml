@@ -3,10 +3,10 @@ name: Sync Microsoft ASIM Skill
 on:
   workflow_dispatch:
     inputs:
-      ref:
-        description: "Azure/Azure-Sentinel ref to build from"
+      docs-ref:
+        description: "MicrosoftDocs/defender-docs ref to build from"
         required: false
-        default: "master"
+        default: "public"
         type: string
   schedule:
     - cron: "0 6 * * *"
@@ -42,14 +42,14 @@ jobs:
 
       - name: Rebuild Microsoft ASIM skill
         env:
-          ASIM_REF: ${{ github.event.inputs.ref || 'master' }}
+          ASIM_DOCS_REF: ${{ github.event.inputs['docs-ref'] || 'public' }}
         shell: bash
         run: |
           set -euo pipefail
 
           uv run scripts/generate-microsoft-asim-skill.py \
             --output-dir skills/tenzir-microsoft-asim \
-            --ref "$ASIM_REF"
+            --docs-ref "$ASIM_DOCS_REF"
 
       - name: Validate skills
         shell: bash
@@ -64,7 +64,7 @@ jobs:
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync tenzir-microsoft-asim from upstream schema"
+          commit_message: "Sync tenzir-microsoft-asim from Microsoft Defender docs"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false

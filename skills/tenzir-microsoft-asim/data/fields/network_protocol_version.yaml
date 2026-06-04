@@ -1,0 +1,13 @@
+name: NetworkProtocolVersion
+summary: The version of NetworkProtocol. When using it to distinguish between IP version, use the values IPv4 and IPv6.
+schemas:
+- name: Dns
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The version of NetworkProtocol. When using it to distinguish between IP version, use the values IPv4 and IPv6.
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The version of NetworkProtocol. When using it to distinguish between IP version, use the values IPv4 and IPv6.

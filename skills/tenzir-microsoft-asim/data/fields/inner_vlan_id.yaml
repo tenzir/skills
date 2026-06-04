@@ -1,0 +1,10 @@
+name: InnerVlanId
+summary: InnerVlanId is an alias for SrcVlanId.
+to:
+- SrcVlanId
+schemas:
+- name: NetworkSession
+  role: network
+  class: Alias
+  to:
+  - SrcVlanId

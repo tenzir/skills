@@ -1,0 +1,8 @@
+name: OutputTokensUsed
+summary: The number of output tokens used.
+schemas:
+- name: AgentEvent
+  role: model
+  class: Optional
+  type: long
+  description: The number of output tokens used.

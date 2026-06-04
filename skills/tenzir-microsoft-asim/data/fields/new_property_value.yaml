@@ -1,0 +1,7 @@
+name: NewPropertyValue
+summary: The new value stored in the specified property.
+schemas:
+- name: UserManagement
+  class: Optional
+  type: String
+  description: The new value stored in the specified property.

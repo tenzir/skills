@@ -1,0 +1,10 @@
+name: DstNatIpAddr
+summary: 'The DstNatIpAddr represents either of: - The original address of the destination device if network address translation was used. - The IP address used by the intermediary device for communication with the source.'
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: IP address
+  description: 'The DstNatIpAddr represents either of: - The original address of the destination device if network address translation was used. - The IP address used by the intermediary device for communication with the source.'
+  examples:
+  - 2::1

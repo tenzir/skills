@@ -1,0 +1,8 @@
+name: ToolId
+summary: The unique ID of the tool.
+schemas:
+- name: AgentEvent
+  role: tool
+  class: Optional
+  type: String
+  description: The unique ID of the tool.

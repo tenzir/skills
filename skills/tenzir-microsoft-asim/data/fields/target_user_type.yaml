@@ -1,0 +1,30 @@
+name: TargetUserType
+summary: The type of the Target user. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+schemas:
+- name: Authentication
+  role: target
+  class: Optional
+  type: UserType
+  description: The type of the Target user. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  examples:
+  - Member
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: UserType
+  description: The type of Actor. For a list of allowed values and further information refer to UserType in the Schema Overview article.
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the TargetOriginalUserType field.
+- name: UserManagement
+  role: target
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Regular
+  - Machine
+  - Admin
+  - System
+  - Application
+  - Service Principal
+  - Other
+  description: 'The type of target user. Supported values include: - Regular - Machine - Admin - System - Application - Service Principal - Other'
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the TargetOriginalUserType field.

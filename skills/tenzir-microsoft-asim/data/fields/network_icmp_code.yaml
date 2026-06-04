@@ -1,0 +1,8 @@
+name: NetworkIcmpCode
+summary: For an ICMP message, the ICMP code number as described in RFC 2780 for IPv4 network connections, or in RFC 4443 for IPv6 network connections.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Integer
+  description: For an ICMP message, the ICMP code number as described in RFC 2780 for IPv4 network connections, or in RFC 4443 for IPv6 network connections.

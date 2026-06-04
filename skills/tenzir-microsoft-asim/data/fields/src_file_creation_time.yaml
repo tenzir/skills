@@ -1,0 +1,8 @@
+name: SrcFileCreationTime
+summary: The time at which the source file was created.
+schemas:
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Date/Time
+  description: The time at which the source file was created.

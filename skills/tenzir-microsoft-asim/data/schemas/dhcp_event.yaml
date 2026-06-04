@@ -1,0 +1,531 @@
+name: DhcpEvent
+title: DHCP Activity
+kind: event
+version: 0.1.1
+status: GA
+summary: The DHCP information model is used to describe events reported by a DHCP server, and is used by Microsoft Sentinel to enable source-agnostic analytics. For more information, see Normalization and the Advanced Security Information Model (ASIM).
+fields:
+- name: Dvc
+  role: device
+  class: Mandatory
+  type: '-'
+  description: For DHCP events, device fields refer to the system that reports the DHCP event.
+- name: EventCount
+  role: common
+  class: Mandatory
+- name: EventEndTime
+  role: common
+  class: Mandatory
+- name: EventProduct
+  role: common
+  class: Mandatory
+- name: EventResult
+  role: common
+  class: Mandatory
+- name: EventSchema
+  role: common
+  class: Mandatory
+  type: String
+  value: DhcpEvent
+  description: The name of the schema documented here's DhcpEvent.
+- name: EventSchemaVersion
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.1
+  description: The version of the schema documented here's 0.1.1.
+- name: EventStartTime
+  role: common
+  class: Mandatory
+- name: EventType
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Assign
+  - Renew
+  - Release
+  - DNS Update
+  description: Indicate the operation reported by the record. Possible values are Assign, Renew, Release, and DNS Update.
+  examples:
+  - Assign
+- name: EventVendor
+  role: common
+  class: Mandatory
+- name: SrcHostname
+  role: source
+  class: Mandatory
+  type: Hostname (String)
+  description: The hostname of the device requesting the DHCP lease. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: SrcIpAddr
+  role: source
+  class: Mandatory
+  type: IP Address
+  description: The IP address assigned to the client by the DHCP server.
+  examples:
+  - 192.168.12.1
+- name: SrcMacAddr
+  role: source
+  class: Mandatory
+  type: Mac Address
+  description: The MAC address of the client requesting a DHCP lease.
+  examples:
+  - 06:10:9f:eb:8f:14
+  notes: The Windows DHCP server logs MAC address in a nonstandard way, omitting the colons, which should be inserted by the parser.
+- name: DvcAction
+  role: device
+  class: Recommended
+- name: DvcDomain
+  role: device
+  class: Recommended
+- name: DvcDomainType
+  role: device
+  class: Recommended
+- name: DvcFQDN
+  role: device
+  class: Recommended
+- name: DvcHostname
+  role: device
+  class: Recommended
+- name: DvcId
+  role: device
+  class: Recommended
+- name: DvcIdType
+  role: device
+  class: Recommended
+- name: DvcIpAddr
+  role: device
+  class: Recommended
+- name: EventResultDetails
+  role: common
+  class: Recommended
+- name: EventSeverity
+  role: common
+  class: Recommended
+- name: EventUid
+  role: common
+  class: Recommended
+- name: SrcDomain
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: SrcDomainType
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDomain is used
+  allowed_values:
+  - Windows (such as
+  - FQDN (such as
+  description: 'The type of SrcDomain, if known. Possible values include: - Windows (such as: contoso) - FQDN (such as: microsoft.com) Required if SrcDomain is used.'
+- name: SrcDvcIdType
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDvcId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  description: 'The type of SrcDvcId, if known. Possible values include: - AzureResourceId - MDEid If multiple IDs are available, use the first one from the list above, and store the others in the SrcDvcAzureResourceId and SrcDvcMDEid, respectively.'
+  notes: This field is required if SrcDvcId is used.
+- name: SrcUserIdType
+  role: source
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the SrcUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: SrcUsernameType
+  role: source
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the user name stored in the SrcUsername field. For more information, and list of allowed values, see UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: AdditionalFields
+  role: common
+  class: Optional
+- name: DhcpCircuitId
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP circuit ID, as defined by RFC3046
+- name: DhcpLeaseDuration
+  role: dhcp
+  class: Optional
+  type: Integer
+  description: The length of the lease granted to a client, in seconds.
+- name: DhcpSessionDuration
+  role: dhcp
+  class: Optional
+  type: Integer
+  description: The amount of time, in milliseconds, for the completion of the DHCP session.
+  examples:
+  - '1500'
+- name: DhcpSessionId
+  role: dhcp
+  class: Optional
+  type: string
+  description: The session identifier as reported by the reporting device. For the Windows DHCP server, set this to the TransactionID field.
+  examples:
+  - '2099570186'
+- name: DhcpSrcDHCId
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP client ID, as defined by RFC4701
+- name: DhcpSubscriberId
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP subscriber ID, as defined by RFC3993
+- name: DhcpUserClass
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP User Class, as defined by RFC3004.
+- name: DhcpUserClassId
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP User Class ID, as defined by RFC3004.
+- name: DhcpVendorClass
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP Vendor Class, as defined by RFC3925.
+- name: DhcpVendorClassId
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP Vendor Class Id, as defined by RFC3925.
+- name: DvcDescription
+  role: device
+  class: Optional
+- name: DvcInterface
+  role: device
+  class: Optional
+- name: DvcMacAddr
+  role: device
+  class: Optional
+- name: DvcOriginalAction
+  role: device
+  class: Optional
+- name: DvcOs
+  role: device
+  class: Optional
+- name: DvcOsVersion
+  role: device
+  class: Optional
+- name: DvcScope
+  role: device
+  class: Optional
+- name: DvcScopeId
+  role: device
+  class: Optional
+- name: DvcZone
+  role: device
+  class: Optional
+- name: EventMessage
+  role: common
+  class: Optional
+- name: EventOriginalResultDetails
+  role: common
+  class: Optional
+- name: EventOriginalSeverity
+  role: common
+  class: Optional
+- name: EventOriginalSubType
+  role: common
+  class: Optional
+- name: EventOriginalType
+  role: common
+  class: Optional
+- name: EventOriginalUid
+  role: common
+  class: Optional
+- name: EventOwner
+  role: common
+  class: Optional
+- name: EventProductVersion
+  role: common
+  class: Optional
+- name: EventReportUrl
+  role: common
+  class: Optional
+- name: EventSubType
+  role: common
+  class: Optional
+- name: RequestedIpAddr
+  class: Optional
+  type: IP Address
+  description: The IP address requested by the DHCP client, when available.
+  examples:
+  - 192.168.12.3
+- name: RuleName
+  role: rule
+  class: Optional
+  type: string
+  description: The name or ID of the rule associated with the alert. e.g. Server PSEXEC Execution via Remote Access
+- name: RuleNumber
+  role: rule
+  class: Optional
+  type: int
+  description: The number of the rule associated with the alert. e.g. 123456
+- name: SrcDescription
+  role: source
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: SrcDeviceType
+  role: source
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Computer
+  - Mobile Device
+  - IOT Device
+  - Other
+  description: 'The type of the source device. Possible values include: - Computer - Mobile Device - IOT Device - Other'
+- name: SrcDvcId
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device as reported in the record. For
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: SrcDvcScope
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcDvcScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. SrcDvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcFQDN
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: SrcGeoCity
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: SrcGeoCountry
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: SrcGeoLatitude
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: SrcGeoLongitude
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: SrcGeoRegion
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: SrcOriginalRiskLevel
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: SrcOriginalUserType
+  role: source
+  class: Optional
+  type: String
+  description: The original source user type, if provided by the source.
+- name: SrcPortNumber
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated. Might not be relevant for a session comprising multiple connections.
+  examples:
+  - '2335'
+- name: SrcRiskLevel
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: SrcUserId
+  role: source
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the source user. For more information, and for alternative fields for additional IDs, see The User entity.
+  examples:
+  - S-1-12-1-4141952679-1282074057-627758481-2916039507
+- name: SrcUsername
+  role: source
+  class: Optional
+  type: Username (String)
+  description: The source username, including domain information when available. For more information, see The User entity.
+  examples:
+  - AlbertE
+- name: SrcUserScope
+  role: source
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which SrcUserId and SrcUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+- name: SrcUserScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which SrcUserId and SrcUsername are defined. for more information and list of allowed values, see UserScopeId in the Schema Overview article.
+- name: SrcUserSessionId
+  role: source
+  class: Optional
+  type: String
+  description: The unique ID of the sign-in session of the Actor.
+  examples:
+  - 102pTUgC3p8RIqHvzxLCHnFlg
+- name: SrcUserType
+  role: source
+  class: Optional
+  type: UserType
+  description: The type of the source user. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  examples:
+  - Guest
+- name: ThreatCategory
+  role: threat
+  class: Optional
+  type: String
+  allowed_values:
+  - Malware
+  - Ransomware
+  - Trojan
+  - Virus
+  - Worm
+  - Adware
+  - Spyware
+  - Rootkit
+  - Cryptominor
+  - Phishing
+  - Spam
+  - MaliciousUrl
+  - Spoofing
+  - Security Policy Violation
+  - Unknown
+  description: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominor, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
+- name: ThreatConfidence
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: ThreatFirstReportedTime
+  role: threat
+  class: Optional
+  type: Date/Time
+  description: Date and time when the threat was first reported. e.g. 2024-09-19T10:12:10.0000000Z
+- name: ThreatId
+  role: threat
+  class: Optional
+  type: string
+  description: The ID of the threat or malware identified in the alert. e.g. 1234567891011121314
+- name: ThreatIsActive
+  role: threat
+  class: Optional
+  type: bool
+  allowed_values:
+  - 'True'
+  - 'False'
+  description: 'Indicates whether the threat is currently active. Supported values are: True, False'
+- name: ThreatLastReportedTime
+  role: threat
+  class: Optional
+  type: Date/Time
+  description: Date and time when the threat was last reported. e.g. 2024-09-19T10:12:10.0000000Z
+- name: ThreatName
+  role: threat
+  class: Optional
+  type: string
+  description: The name of the threat or malware identified in the alert. e.g. Init.exe
+- name: ThreatOriginalConfidence
+  role: threat
+  class: Optional
+  type: string
+  description: The confidence level as reported by the originating system.
+- name: ThreatOriginalRiskLevel
+  role: threat
+  class: Optional
+  type: string
+  description: The risk level as reported by the originating system.
+- name: ThreatRiskLevel
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: 'The risk level associated with the threat. The level should be a number between 0 and 100. Note: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.'
+- name: Duration
+  role: network
+  class: Alias
+  to:
+  - DhcpSessionDuration
+- name: Hostname
+  role: device
+  class: Alias
+  to:
+  - SrcHostname
+- name: IpAddr
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: Rule
+  role: rule
+  class: Alias
+  type: string
+  resolution: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: SessionId
+  role: session
+  class: Alias
+  type: String
+  to:
+  - DhcpSessionId
+- name: Src
+  role: source
+  class: Alias
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  resolution: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: User
+  role: user
+  class: Alias
+  to:
+  - SrcUsername

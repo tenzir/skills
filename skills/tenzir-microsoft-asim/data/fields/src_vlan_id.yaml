@@ -1,0 +1,10 @@
+name: SrcVlanId
+summary: The VLAN ID related to the source device.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The VLAN ID related to the source device.
+  examples:
+  - '130'

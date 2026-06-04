@@ -1,0 +1,18 @@
+name: LogonMethod
+summary: 'The method used to perform authentication. Allowed values include: Managed Identity, Service Principal, Username & Password, Multi factor authentication, Passwordless, PKI, PAM, and Other.'
+schemas:
+- name: Authentication
+  class: Optional
+  type: String
+  allowed_values:
+  - Managed Identity
+  - Service Principal
+  - Username & Password
+  - Multi factor authentication
+  - Passwordless
+  - PKI
+  - PAM
+  - Other
+  description: 'The method used to perform authentication. Allowed values include: Managed Identity, Service Principal, Username & Password, Multi factor authentication, Passwordless, PKI, PAM, and Other.'
+  examples:
+  - Managed Identity

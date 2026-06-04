@@ -1,0 +1,10 @@
+name: TargetProcessGuid
+summary: A generated unique identifier (GUID) of the target process. Enables identifying the process across systems.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: GUID (String)
+  description: A generated unique identifier (GUID) of the target process. Enables identifying the process across systems.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00

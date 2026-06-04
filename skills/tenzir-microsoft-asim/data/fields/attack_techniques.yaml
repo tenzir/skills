@@ -1,0 +1,8 @@
+name: AttackTechniques
+summary: 'The attack techniques (name, ID, or both) associated with the alert. Preferred format: e.g: Local Groups (T1069.001), Domain Groups (T1069.002)'
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Recommended
+  type: string
+  description: 'The attack techniques (name, ID, or both) associated with the alert. Preferred format: e.g: Local Groups (T1069.001), Domain Groups (T1069.002)'

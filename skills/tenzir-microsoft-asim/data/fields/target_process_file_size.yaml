@@ -1,0 +1,8 @@
+name: TargetProcessFileSize
+summary: Size of the file that ran the process responsible for the event.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: Long
+  description: Size of the file that ran the process responsible for the event.

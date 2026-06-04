@@ -1,0 +1,8 @@
+name: AssetOriginalPermissions
+summary: The original permission set assigned to the asset as reported by the source system.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: dynamic
+  description: The original permission set assigned to the asset as reported by the source system.

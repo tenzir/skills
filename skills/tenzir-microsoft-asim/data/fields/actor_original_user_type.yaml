@@ -1,0 +1,28 @@
+name: ActorOriginalUserType
+summary: The user type as reported by the reporting device.
+schemas:
+- name: AuditEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The user type as reported by the reporting device.
+- name: Authentication
+  role: actor
+  class: Optional
+  type: String
+  description: The user type as reported by the reporting device.
+- name: FileEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the reporting device.
+- name: ProcessEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the reporting device.
+- name: UserManagement
+  role: actor
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the reporting device.

@@ -1,0 +1,10 @@
+name: TargetProcessTokenElevation
+summary: Token type indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the process that was created or terminated.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: Token type indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the process that was created or terminated.
+  examples:
+  - None

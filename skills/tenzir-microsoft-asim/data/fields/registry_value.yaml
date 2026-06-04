@@ -1,0 +1,15 @@
+name: RegistryValue
+summary: Registry value. e.g. ImagePath
+schemas:
+- name: AlertEvent
+  role: registry
+  class: Optional
+  type: string
+  description: Registry value. e.g. ImagePath
+- name: RegistryEvent
+  role: registry
+  class: Recommended
+  type: String
+  description: The registry value associated with the operation. Registry values are similar to files in file systems. For
+  examples:
+  - Path

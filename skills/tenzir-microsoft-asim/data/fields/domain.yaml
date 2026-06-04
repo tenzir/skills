@@ -1,0 +1,10 @@
+name: Domain
+summary: Domain is an alias for DnsQuery.
+to:
+- DnsQuery
+schemas:
+- name: Dns
+  role: dns
+  class: Alias
+  to:
+  - DnsQuery

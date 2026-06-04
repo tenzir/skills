@@ -1,0 +1,10 @@
+name: ActingProcessFileProduct
+summary: The product name from the version information in the acting process image file.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The product name from the version information in the acting process image file.
+  examples:
+  - Notepad++

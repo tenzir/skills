@@ -1,0 +1,9 @@
+name: SrcFileExtension
+summary: The source file extension.
+schemas:
+- name: FileEvent
+  role: source
+  class: Optional
+  type: String
+  description: The source file extension.
+  notes: A parser can provide this value the value is available in the log source, and does not need to be extracted from the full path.

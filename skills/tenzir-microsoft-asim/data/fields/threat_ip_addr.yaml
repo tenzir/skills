@@ -1,0 +1,23 @@
+name: ThreatIpAddr
+summary: An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents.
+schemas:
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: IP Address
+  description: An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: IP Address
+  description: An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents.
+- name: Dns
+  role: threat
+  class: Optional
+  type: IP Address
+  description: An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents. If a threat is identified in the Domain field, this field should be empty.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: IP Address
+  description: An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents.

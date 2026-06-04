@@ -1,0 +1,8 @@
+name: Object
+summary: The name of the object on which the operation identified by EventType is performed.
+schemas:
+- name: AuditEvent
+  role: object
+  class: Mandatory
+  type: String
+  description: The name of the object on which the operation identified by EventType is performed.

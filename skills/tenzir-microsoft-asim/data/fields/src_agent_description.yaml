@@ -1,0 +1,8 @@
+name: SrcAgentDescription
+summary: A description of the source agent.
+schemas:
+- name: AgentEvent
+  role: source
+  class: Optional
+  type: String
+  description: A description of the source agent.

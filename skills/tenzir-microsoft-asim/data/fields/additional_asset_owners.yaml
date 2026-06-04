@@ -1,0 +1,7 @@
+name: AdditionalAssetOwners
+summary: A dynamic collection of additional owners or co-owners associated with the asset. This must be an array of strings.
+schemas:
+- name: AssetEntity
+  class: Optional
+  type: dynamic
+  description: A dynamic collection of additional owners or co-owners associated with the asset. This must be an array of strings.

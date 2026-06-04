@@ -1,0 +1,10 @@
+name: DstAppId
+summary: The ID of the destination application, as reported by the reporting device. If DstAppType is Process, DstAppId and DstProcessId should have the same value.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The ID of the destination application, as reported by the reporting device. If DstAppType is Process, DstAppId and DstProcessId should have the same value.
+  examples:
+  - '124'

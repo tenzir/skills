@@ -1,0 +1,52 @@
+name: SrcGeoRegion
+summary: The region within a country/region associated with the source IP address.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Region
+  description: The region within a country/region associated with the source IP address.
+  examples:
+  - Vermont
+- name: Authentication
+  role: source
+  class: Optional
+  type: Region
+  description: For more information, see Logical types.
+  examples:
+  - Quebec
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: Dns
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: UserManagement
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont

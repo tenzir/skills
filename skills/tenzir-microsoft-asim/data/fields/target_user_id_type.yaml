@@ -1,0 +1,26 @@
+name: TargetUserIdType
+summary: The type of the user ID stored in the TargetUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+schemas:
+- name: Authentication
+  role: target
+  class: Conditional
+  type: UserIdType
+  description: The type of the user ID stored in the TargetUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+  examples:
+  - SID
+- name: ProcessEvent
+  role: target
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the TargetUserId field. For a list of allowed values and further information refer to UserIdType in the Schema Overview article.
+- name: UserManagement
+  role: target
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SID
+  - UID
+  - AADID
+  - OktaId
+  - AWSId
+  description: The type of the ID stored in the TargetUserId field. Supported values are SID, UID, AADID, OktaId, and AWSId.

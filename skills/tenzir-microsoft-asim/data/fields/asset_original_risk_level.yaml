@@ -1,0 +1,8 @@
+name: AssetOriginalRiskLevel
+summary: The risk level assigned to the asset as reported by the source system, before normalization.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: string
+  description: The risk level assigned to the asset as reported by the source system, before normalization.

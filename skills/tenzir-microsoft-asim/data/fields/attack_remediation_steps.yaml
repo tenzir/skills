@@ -1,0 +1,8 @@
+name: AttackRemediationSteps
+summary: Recommended actions or steps to mitigate or remediate the identified attack or threat. e.g. 1. Make sure the machine is completely updated and all your software has the latest patch. 2. Contact your incident response team.
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Recommended
+  type: string
+  description: Recommended actions or steps to mitigate or remediate the identified attack or threat. e.g. 1. Make sure the machine is completely updated and all your software has the latest patch. 2. Contact your incident response team.

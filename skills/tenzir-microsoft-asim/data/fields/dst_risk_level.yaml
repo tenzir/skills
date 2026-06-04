@@ -1,0 +1,10 @@
+name: DstRiskLevel
+summary: The risk level associated with the destination. The value should be adjusted to a range of 0 to 100, which 0 being benign and 100 being a high risk.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Integer
+  description: The risk level associated with the destination. The value should be adjusted to a range of 0 to 100, which 0 being benign and 100 being a high risk.
+  examples:
+  - '90'

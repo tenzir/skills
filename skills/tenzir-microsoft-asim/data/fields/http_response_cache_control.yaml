@@ -1,0 +1,10 @@
+name: HttpResponseCacheControl
+summary: The content of the HTTP Cache-Control response header, specifying caching directives from the server.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The content of the HTTP Cache-Control response header, specifying caching directives from the server.
+  examples:
+  - max-age=3600, public

@@ -1,0 +1,10 @@
+name: SrcDvcOs
+summary: The OS of the source device.
+schemas:
+- name: Authentication
+  role: source
+  class: Optional
+  type: String
+  description: The OS of the source device.
+  examples:
+  - Windows 10

@@ -1,0 +1,325 @@
+name: AssetEntity
+title: Asset Entity
+kind: entity
+version: 0.1.0
+status: GA
+summary: The Microsoft Sentinel Asset Entity Schema is designed to normalize assets from various products into a standardized format within Microsoft Advanced Security Information Model (ASIM). This schema focuses exclusively on assets in non-Microsoft data sources, ensuring consistent and efficient analysis. An asset is any data resource that an organization stores, processes, or manages, such as a file, or site. Each asset carries security-relevant metadata including ownership, permissions, sensitivity classifications, and risk indicators. Assets can originate from a wide range of platforms, databases, cloud storage services, SaaS applications, and on-premises systems and are collected as either full inventory snapshots or incremental change feeds. By normalizing asset data into a common schema, Microsoft Sentinel enables security teams to analyze and correlate asset information across diverse data sources in a consistent way.
+fields:
+- name: AADTenantId
+  role: entity
+  class: Mandatory
+  type: string
+  description: The Azure Active Directory tenant identifier associated with the asset or entity.
+- name: AssetClassificationLastScanDateTime
+  role: asset
+  class: Mandatory
+  type: datetime
+  description: The timestamp (UTC) of when the asset was last scanned for data classification.
+- name: AssetOriginalDataClassificationType
+  role: asset
+  class: Mandatory
+  type: dynamic
+  description: The original data classification type(s) assigned to the asset as reported by the source system. This must be an array of strings.
+- name: AssetOwnerId
+  role: asset
+  class: Mandatory
+  type: string
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For more information, and for alternative fields for other IDs, see The User entity.
+- name: AssetSensitivityLabel
+  role: asset
+  class: Mandatory
+  type: string
+  allowed_values:
+  - Personal
+  - Public
+  - General
+  - Confidential
+  - Highly Confidential
+  description: 'The sensitivity label applied to the asset. The allowed values are: Personal, Public, General, Confidential, Highly Confidential.'
+- name: AssetType
+  role: asset
+  class: Mandatory
+  type: string
+  allowed_values:
+  - File
+  - Site
+  description: 'The high-level type of the asset. The allowed and supported values are: File, Site.'
+- name: EntityCreatedTime
+  role: entity
+  class: Mandatory
+  type: datetime
+  description: The timestamp (UTC) of when the entity was originally created in the source system.
+- name: EntityFeedType
+  role: entity
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Snapshot
+  - Changefeed
+  description: 'The type or category of the data feed that provided the entity record. The allowed values are: Snapshot or Changefeed.'
+- name: EntityId
+  role: entity
+  class: Mandatory
+  type: string
+  description: The unique identifier of the asset.
+- name: EntityLastModifiedTime
+  role: entity
+  class: Mandatory
+  type: datetime
+  description: The timestamp (UTC) of when the entity was last modified in the source system.
+- name: EntityName
+  role: entity
+  class: Mandatory
+  type: string
+  description: The name of the entity.
+- name: EntityProduct
+  role: entity
+  class: Mandatory
+  type: string
+  description: The product name associated with the source that reported the entity.
+- name: EntitySchema
+  role: entity
+  class: Mandatory
+  type: Enumerated
+  value: Asset
+  description: The schema used for the entity. The schema documented here is Asset.
+- name: EntitySchemaVersion
+  role: entity
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.0
+  description: The version of the schema. The version of the schema documented here is 0.1.0.
+- name: EntitySource
+  role: entity
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Azure
+  - Microsoft365
+  - AWS
+  - GCP
+  - Snowflake
+  - Databricks
+  - Salesforce
+  - Other
+  description: 'The data source or connector that provided the entity record. Support sources include: - Azure - Microsoft365 - AWS - GCP - Snowflake - Databricks - Salesforce - Other Use Other if the source is not listed.'
+- name: EntitySubProduct
+  role: entity
+  class: Mandatory
+  type: string
+  description: The sub-product or component name associated with the source that reported the entity.
+- name: EntityUpdatedTime
+  role: entity
+  class: Mandatory
+  type: datetime
+  description: The timestamp (UTC) of when the Entity was updated or collected at the source.
+- name: EntityVendor
+  role: entity
+  class: Mandatory
+  type: string
+  description: The vendor or provider that reported the entity.
+- name: IdentityDirectoryId
+  role: entity
+  class: Mandatory
+  type: string
+  description: The identifier of the identity directory associated with the entity.
+- name: AssetOriginalType
+  role: asset
+  class: Recommended
+  type: string
+  description: The original name of the high-level type of the asset at the source.
+- name: AssetOwnerIdType
+  role: asset
+  class: Recommended
+  type: string
+  description: The type or format of the asset owner identifier. This is analogous to UserIdType in Event schemas. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: EntityNameType
+  role: entity
+  class: Recommended
+  type: string
+  description: The type of the entity name.
+- name: AdditionalAssetOwners
+  class: Optional
+  type: dynamic
+  description: A dynamic collection of additional owners or co-owners associated with the asset. This must be an array of strings.
+- name: AdditionalFields
+  role: common
+  class: Optional
+  type: dynamic
+  description: Additional information about the entity that is not captured by other fields in the schema.
+- name: AssetIsProtectedByDlp
+  role: asset
+  class: Optional
+  type: bool
+  description: Indicates whether the asset is protected by a Data Loss Prevention (DLP) policy.
+- name: AssetOriginalPermissions
+  role: asset
+  class: Optional
+  type: dynamic
+  description: The original permission set assigned to the asset as reported by the source system.
+- name: AssetOriginalRiskDetails
+  role: asset
+  class: Optional
+  type: dynamic
+  description: The full risk details for the asset as provided by the source system.
+- name: AssetOriginalRiskLevel
+  role: asset
+  class: Optional
+  type: string
+  description: The risk level assigned to the asset as reported by the source system, before normalization.
+- name: AssetOriginalSensitivityLevel
+  role: asset
+  class: Optional
+  type: string
+  description: The sensitivity level as reported by the source system, before normalization.
+- name: AssetOwnerScope
+  role: asset
+  class: Optional
+  type: string
+  description: The organizational or administrative scope to which the asset owner belongs.
+- name: AssetOwnerScopeId
+  role: asset
+  class: Optional
+  type: string
+  description: The identifier of the scope to which the asset owner belongs.
+- name: AssetOwnerType
+  role: asset
+  class: Optional
+  type: string
+  description: The type of the Asset Owner. For more information, and list of allowed values, see UserType in the Schema Overview article.
+- name: AssetRelatedIndicators
+  role: asset
+  class: Optional
+  type: dynamic
+  description: A dynamic collection of threat indicators or signals related to the asset.
+- name: AssetRiskFirstReportedTime
+  role: asset
+  class: Optional
+  type: datetime
+  description: The timestamp (UTC) of when the risk associated with the asset was first reported.
+- name: AssetRiskLastReportedTime
+  role: asset
+  class: Optional
+  type: datetime
+  description: The timestamp (UTC) of when the risk associated with the asset was most recently reported.
+- name: AssetRiskLevel
+  role: asset
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Info
+  - Low
+  - Medium
+  - High
+  - Critical
+  - Other
+  description: 'The normalized risk level assigned to the asset. The allowed values are: Info, Low, Medium, High, Critical, Other.'
+- name: AssetRiskName
+  role: asset
+  class: Optional
+  type: string
+  description: The normalized name of the risk or threat associated with the asset.
+- name: EntityIngestionTime
+  role: entity
+  class: Optional
+  type: datetime
+  description: The timestamp (UTC) of when the ingestion pipeline receives the asset log.
+- name: EntityIsDeleted
+  role: entity
+  class: Optional
+  type: bool
+  description: Indicates whether the entity has been deleted in the source system.
+- name: EntityLastAccessedTime
+  role: entity
+  class: Optional
+  type: datetime
+  description: The timestamp (UTC) of when the entity was last accessed.
+- name: EntityOriginalId
+  role: entity
+  class: Optional
+  type: string
+  description: The unique identifier of the asset at the source if it is different from 'EntityId'.
+- name: EntityOriginalSource
+  role: entity
+  class: Optional
+  type: string
+  description: The original data source or connector that provided the entity record, if the source is currently not supported.
+- name: ExternalUsersCount
+  class: Optional
+  type: int
+  description: The number of external users associated with or having access to the asset.
+- name: FileExtension
+  role: file
+  class: Optional
+  type: string
+  description: The file extension of the file associated with the asset, such as .exe or .pdf.
+- name: FileIsSignatureValid
+  role: file
+  class: Optional
+  type: bool
+  description: Indicates whether the digital signature of the file is valid.
+- name: FileMD5
+  role: file
+  class: Optional
+  type: string
+  description: The MD5 hash of the file associated with the asset.
+- name: FilePath
+  role: file
+  class: Optional
+  type: string
+  description: The full path of the file associated with the asset.
+- name: FileSHA1
+  role: file
+  class: Optional
+  type: string
+  description: The SHA-1 hash of the file associated with the asset.
+- name: FileSHA256
+  role: file
+  class: Optional
+  type: string
+  description: The SHA-256 hash of the file associated with the asset.
+- name: FileSHA512
+  role: file
+  class: Optional
+  type: string
+  description: The SHA-512 hash of the file associated with the asset.
+- name: FileSignatureDetails
+  role: file
+  class: Optional
+  type: string
+  description: Details about the digital signature of the file, such as the signer or certificate information.
+- name: FileSize
+  role: file
+  class: Optional
+  type: long
+  description: The size of the file in bytes.
+- name: IdentityDirectoryName
+  role: entity
+  class: Optional
+  type: string
+  description: The name of the identity directory, such as Azure AD, GCP, AWS, associated with the entity.
+- name: InternalUsersCount
+  class: Optional
+  type: int
+  description: The number of internal users associated with or having access to the asset.
+- name: SitePath
+  class: Optional
+  type: string
+  description: The path of the site or storage location associated with the asset.
+- name: SitePrimaryUri
+  class: Optional
+  type: string
+  description: The primary URI of the site or storage location associated with the asset.
+- name: AssetPath
+  role: asset
+  class: Alias
+  type: string
+  to:
+  - FilePath
+  - SitePath
+- name: User
+  role: user
+  class: Alias
+  type: string
+  to:
+  - AssetOwnerId

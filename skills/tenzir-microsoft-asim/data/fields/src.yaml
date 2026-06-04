@@ -1,0 +1,77 @@
+name: Src
+summary: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+to:
+- SrcDvcId
+- SrcHostname
+- SrcIpAddr
+schemas:
+- name: AuditEvent
+  role: source
+  class: Alias
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  resolution: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: Authentication
+  role: source
+  class: Recommended
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  description: A unique identifier of the source device. This field may alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: DhcpEvent
+  role: source
+  class: Alias
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  resolution: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: Dns
+  role: source
+  class: Alias
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  resolution: A unique identifier of the source device. This field can alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: FileEvent
+  role: source
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: NetworkSession
+  role: source
+  class: Alias
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  resolution: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: UserManagement
+  role: source
+  class: Recommended
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  description: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1

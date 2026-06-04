@@ -1,0 +1,10 @@
+name: ValueType
+summary: The type of the old and new values. Allowed values are - Other
+schemas:
+- name: AuditEvent
+  role: object
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - Other
+  description: The type of the old and new values. Allowed values are - Other

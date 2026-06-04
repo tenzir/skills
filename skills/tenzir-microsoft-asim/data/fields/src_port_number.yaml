@@ -1,0 +1,57 @@
+name: SrcPortNumber
+summary: The port number of the source.
+schemas:
+- name: AgentEvent
+  role: source
+  class: Optional
+  type: int
+  description: The port number of the source.
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated. Might not be relevant for a session comprising multiple connections.
+  examples:
+  - '2335'
+- name: Authentication
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated.
+  examples:
+  - '2335'
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated. Might not be relevant for a session comprising multiple connections.
+  examples:
+  - '2335'
+- name: Dns
+  role: source
+  class: Optional
+  type: Integer
+  description: Source port of the DNS query.
+  examples:
+  - '54312'
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Integer
+  description: When the operation is initiated by a remote system, the port number from which the connection was initiated.
+  examples:
+  - '2335'
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated. Might not be relevant for a session comprising multiple connections.
+  examples:
+  - '2335'
+- name: UserManagement
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated. Might not be relevant for a session comprising multiple connections.
+  examples:
+  - '2335'

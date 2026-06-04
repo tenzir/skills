@@ -1,0 +1,17 @@
+name: TargetDomain
+summary: The domain of the target device.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Domain(String)
+  description: The domain of the target device.
+  examples:
+  - Contoso
+- name: Authentication
+  role: target
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the target device.
+  examples:
+  - Contoso

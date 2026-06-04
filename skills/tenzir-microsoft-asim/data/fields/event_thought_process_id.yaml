@@ -1,0 +1,8 @@
+name: EventThoughtProcessId
+summary: The unique ID of the thought process.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The unique ID of the thought process.

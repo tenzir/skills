@@ -1,0 +1,8 @@
+name: DhcpSubscriberId
+summary: The DHCP subscriber ID, as defined by RFC3993
+schemas:
+- name: DhcpEvent
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP subscriber ID, as defined by RFC3993

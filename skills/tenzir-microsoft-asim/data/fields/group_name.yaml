@@ -1,0 +1,10 @@
+name: GroupName
+summary: 'The group name, including domain information when available, for activities involving a group. Use one of the following formats and in the following order of priority: - Upn/Email: grp@contoso.com - Windows: Contoso\grp - DN: CN=grp,OU=Sales,DC=Fabrikam,DC=COM - Simple: grp. Use the Simple form only if domain information isn''t available. Store the group name type in the GroupNameType field. If other IDs are available, we recommend that you normalize the field names to GroupUpn, GroupNameWindows, and GroupDn.'
+schemas:
+- name: UserManagement
+  role: group
+  class: Optional
+  type: String
+  description: 'The group name, including domain information when available, for activities involving a group. Use one of the following formats and in the following order of priority: - Upn/Email: grp@contoso.com - Windows: Contoso\grp - DN: CN=grp,OU=Sales,DC=Fabrikam,DC=COM - Simple: grp. Use the Simple form only if domain information isn''t available. Store the group name type in the GroupNameType field. If other IDs are available, we recommend that you normalize the field names to GroupUpn, GroupNameWindows, and GroupDn.'
+  examples:
+  - Contoso\Finance

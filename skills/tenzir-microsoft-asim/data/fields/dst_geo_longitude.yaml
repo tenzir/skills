@@ -1,0 +1,17 @@
+name: DstGeoLongitude
+summary: The longitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '73.211944'
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '73.211944'

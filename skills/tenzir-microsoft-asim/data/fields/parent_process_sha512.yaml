@@ -1,0 +1,8 @@
+name: ParentProcessSHA512
+summary: The SHA-512 hash of the parent process image file.
+schemas:
+- name: ProcessEvent
+  role: file
+  class: Optional
+  type: SHA512
+  description: The SHA-512 hash of the parent process image file.

@@ -1,41 +1,40 @@
 # Source
 
-This skill is generated from the Azure Sentinel ASIM YAML files.
+This skill is generated from Microsoft Defender Docs Markdown. The generated YAML files are the primary agent-facing reference; use this page only when provenance or raw source lookup is needed.
 
-- **Requested ref**: `master`
-- **Resolved commit**: `0db4cc9a326a610d44000d6af1b7035432db74ba`
-- **Schema tree**: [ASIM/schemas](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas)
-- **Schemas**: `9`
-- **Common fragments**: `3`
-- **Entity fragments**: `8`
-- **Distinct fields**: `400`
-- **Resolved schema field occurrences**: `1082`
-- **Aliases**: `69`
-- **Enumerations**: `13`
+- **Requested docs ref**: `public`
+- **Resolved Defender Docs commit**: `aa1cca7896f7f220c73c90a0f39883719a9ca885`
+- **Schema catalog source path**: [`sentinel/normalization-about-schemas.md`](sources/defender-docs/sentinel/normalization-about-schemas.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-about-schemas.md))
+- **Event schemas**: `12`
+- **Entity schemas**: `1`
+- **Generated schemas**: `13`
+- **Generated distinct fields**: `539`
+- **Generated schema field records**: `1426`
+- **Alias field records**: `73`
 
-The YAML files are the local source of truth for generated schema, field,
-alias, entity, and enumeration pages. Microsoft Learn guidance pages in this
-skill explain ASIM semantics but do not create additional schema pages.
+Raw Markdown source files are copied under `sources/defender-docs/sentinel/` for audit and parser debugging.
 
-## Source files
+## Schema source paths
 
-- [ASIM/schemas/ASimAuditEvent.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimAuditEvent.yaml)
-- [ASIM/schemas/ASimAuthentication.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimAuthentication.yaml)
-- [ASIM/schemas/ASimDHCPEvent.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimDHCPEvent.yaml)
-- [ASIM/schemas/ASimDns.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimDns.yaml)
-- [ASIM/schemas/ASimFileEvent.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimFileEvent.yaml)
-- [ASIM/schemas/ASimNotification.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimNotification.yaml)
-- [ASIM/schemas/ASimProcessEvent.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimProcessEvent.yaml)
-- [ASIM/schemas/ASimRegistryEvent.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimRegistryEvent.yaml)
-- [ASIM/schemas/ASimUserManagement.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/ASimUserManagement.yaml)
-- [ASIM/schemas/common/ASimEnumerations.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/common/ASimEnumerations.yaml)
-- [ASIM/schemas/common/ASimEventFields.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/common/ASimEventFields.yaml)
-- [ASIM/schemas/common/ASimInspectionFields.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/common/ASimInspectionFields.yaml)
-- [ASIM/schemas/entities/ASimActor.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimActor.yaml)
-- [ASIM/schemas/entities/ASimApp.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimApp.yaml)
-- [ASIM/schemas/entities/ASimDvc.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimDvc.yaml)
-- [ASIM/schemas/entities/ASimExtendedProcess.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimExtendedProcess.yaml)
-- [ASIM/schemas/entities/ASimGroup.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimGroup.yaml)
-- [ASIM/schemas/entities/ASimProcess.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimProcess.yaml)
-- [ASIM/schemas/entities/ASimSystem.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimSystem.yaml)
-- [ASIM/schemas/entities/ASimUser.yaml](https://github.com/Azure/Azure-Sentinel/blob/0db4cc9a326a610d44000d6af1b7035432db74ba/ASIM/schemas/entities/ASimUser.yaml)
+- [AssetEntity](data/schemas/asset_entity.yaml): [`sentinel/normalization-schema-asset.md`](sources/defender-docs/sentinel/normalization-schema-asset.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-asset.md))
+- [AgentEvent](data/schemas/agent_event.yaml): [`sentinel/normalization-schema-agent.md`](sources/defender-docs/sentinel/normalization-schema-agent.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-agent.md))
+- [AlertEvent](data/schemas/alert_event.yaml): [`sentinel/normalization-schema-alert.md`](sources/defender-docs/sentinel/normalization-schema-alert.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-alert.md))
+- [AuditEvent](data/schemas/audit_event.yaml): [`sentinel/normalization-schema-audit.md`](sources/defender-docs/sentinel/normalization-schema-audit.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-audit.md))
+- [Authentication](data/schemas/authentication.yaml): [`sentinel/normalization-schema-authentication.md`](sources/defender-docs/sentinel/normalization-schema-authentication.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-authentication.md))
+- [DhcpEvent](data/schemas/dhcp_event.yaml): [`sentinel/normalization-schema-dhcp.md`](sources/defender-docs/sentinel/normalization-schema-dhcp.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-dhcp.md))
+- [Dns](data/schemas/dns.yaml): [`sentinel/normalization-schema-dns.md`](sources/defender-docs/sentinel/normalization-schema-dns.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-dns.md))
+- [FileEvent](data/schemas/file_event.yaml): [`sentinel/normalization-schema-file-event.md`](sources/defender-docs/sentinel/normalization-schema-file-event.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-file-event.md))
+- [NetworkSession](data/schemas/network_session.yaml): [`sentinel/normalization-schema-network.md`](sources/defender-docs/sentinel/normalization-schema-network.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-network.md))
+- [ProcessEvent](data/schemas/process_event.yaml): [`sentinel/normalization-schema-process-event.md`](sources/defender-docs/sentinel/normalization-schema-process-event.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-process-event.md))
+- [RegistryEvent](data/schemas/registry_event.yaml): [`sentinel/normalization-schema-registry-event.md`](sources/defender-docs/sentinel/normalization-schema-registry-event.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-registry-event.md))
+- [UserManagement](data/schemas/user_management.yaml): [`sentinel/normalization-schema-user-management.md`](sources/defender-docs/sentinel/normalization-schema-user-management.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-user-management.md))
+- [WebSession](data/schemas/web_session.yaml): [`sentinel/normalization-schema-web.md`](sources/defender-docs/sentinel/normalization-schema-web.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-schema-web.md))
+
+## Guidance source paths
+
+- [`sentinel/normalization-about-schemas.md`](sources/defender-docs/sentinel/normalization-about-schemas.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-about-schemas.md))
+- [`sentinel/normalization-common-fields.md`](sources/defender-docs/sentinel/normalization-common-fields.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-common-fields.md))
+- [`sentinel/normalization-content.md`](sources/defender-docs/sentinel/normalization-content.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-content.md))
+- [`sentinel/normalization-entity-application.md`](sources/defender-docs/sentinel/normalization-entity-application.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-entity-application.md))
+- [`sentinel/normalization-entity-device.md`](sources/defender-docs/sentinel/normalization-entity-device.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-entity-device.md))
+- [`sentinel/normalization-entity-user.md`](sources/defender-docs/sentinel/normalization-entity-user.md) ([upstream](https://github.com/MicrosoftDocs/defender-docs/blob/aa1cca7896f7f220c73c90a0f39883719a9ca885/sentinel/normalization-entity-user.md))

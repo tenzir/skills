@@ -1,0 +1,8 @@
+name: HttpHost
+summary: The virtual web server the HTTP request has targeted. This value is typically based on the HTTP Host header.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The virtual web server the HTTP request has targeted. This value is typically based on the HTTP Host header.

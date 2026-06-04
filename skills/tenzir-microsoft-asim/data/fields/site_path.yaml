@@ -1,0 +1,7 @@
+name: SitePath
+summary: The path of the site or storage location associated with the asset.
+schemas:
+- name: AssetEntity
+  class: Optional
+  type: string
+  description: The path of the site or storage location associated with the asset.

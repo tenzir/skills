@@ -1,0 +1,10 @@
+name: ActingProcessTokenElevation
+summary: A token indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the acting process.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: A token indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the acting process.
+  examples:
+  - None

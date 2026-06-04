@@ -1,0 +1,10 @@
+name: HttpRequestBodyBytes
+summary: The size of the HTTP request body in bytes, not including headers.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: Long
+  description: The size of the HTTP request body in bytes, not including headers.
+  examples:
+  - '1024'

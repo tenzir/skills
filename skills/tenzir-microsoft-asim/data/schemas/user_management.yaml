@@ -1,0 +1,669 @@
+name: UserManagement
+title: User Management
+kind: event
+version: 0.1.2
+status: GA
+summary: The Microsoft Sentinel user management normalization schema is used to describe user management activities, such as creating a user or a group, changing user attribute, or adding a user to a group. Such events are reported, for example, by operating systems, directory services, identity management systems, and any other system reporting on its local user management activity. For more information about normalization in Microsoft Sentinel, see Normalization and the Advanced Security Information Model (ASIM).
+fields:
+- name: ActorUsername
+  role: actor
+  class: Mandatory
+  type: Username (String)
+  description: 'The Actor username, including domain information when available. Use one of the following formats and in the following order of priority: - Upn/Email: johndow@contoso.com - Windows: Contoso\johndow - DN: CN=Jeff Smith,OU=Sales,DC=Fabrikam,DC=COM - Simple: johndow. Use the Simple form only if domain information isn''t available. Store the Username type in the ActorUsernameType field. If other IDs are available, we recommend that you normalize the field names to ActorUserUpn, ActorUserWindows, and ActorUserDn. For more information, see The User entity.'
+  examples:
+  - AlbertE
+- name: Dvc
+  role: device
+  class: Mandatory
+  description: For user management events, device fields refer to the system reporting the event. This is usually the system on which the user is managed.
+- name: EventCount
+  role: common
+  class: Mandatory
+- name: EventEndTime
+  role: common
+  class: Mandatory
+- name: EventProduct
+  role: common
+  class: Mandatory
+- name: EventResult
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: While failure is possible, most systems report only successful user management events. The expected value for successful events is Success.
+- name: EventSchema
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: UserManagement
+  description: The name of the schema documented here is UserManagement.
+- name: EventSchemaVersion
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.2
+  description: The version of the schema. The version of the schema documented here is 0.1.2.
+- name: EventSeverity
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: While any valid severity value is allowed, the severity of user management events is typically Informational.
+- name: EventStartTime
+  role: common
+  class: Mandatory
+- name: EventType
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - UserCreated
+  - UserDeleted
+  - UserModified
+  - UserLocked
+  - UserUnlocked
+  - UserDisabled
+  - UserEnabled
+  - PasswordChanged
+  - PasswordReset
+  - GroupCreated
+  - GroupDeleted
+  - GroupModified
+  - UserAddedToGroup
+  - UserRemovedFromGroup
+  - GroupEnumerated
+  - UserRead
+  - GroupRead
+  description: 'Describes the operation reported by the record. For User Management activity, the supported values are: - UserCreated - UserDeleted - UserModified - UserLocked - UserUnlocked - UserDisabled - UserEnabled - PasswordChanged - PasswordReset - GroupCreated - GroupDeleted - GroupModified - UserAddedToGroup - UserRemovedFromGroup - GroupEnumerated - UserRead - GroupRead'
+- name: EventVendor
+  role: common
+  class: Mandatory
+- name: DvcAction
+  role: device
+  class: Recommended
+- name: DvcDomain
+  role: device
+  class: Recommended
+- name: DvcDomainType
+  role: device
+  class: Recommended
+- name: DvcFQDN
+  role: device
+  class: Recommended
+- name: DvcHostname
+  role: device
+  class: Recommended
+- name: DvcId
+  role: device
+  class: Recommended
+- name: DvcIdType
+  role: device
+  class: Recommended
+- name: DvcIpAddr
+  role: device
+  class: Recommended
+- name: EventResultDetails
+  role: common
+  class: Recommended
+  type: Enumerated
+  description: The valid values are NotAuthorized and Other.
+- name: EventUid
+  role: common
+  class: Recommended
+- name: Src
+  role: source
+  class: Recommended
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  description: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: SrcDomain
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: SrcDomainType
+  role: source
+  class: Recommended
+  type: Enumerated
+  required_if:
+  - SrcDomain is used
+  allowed_values:
+  - Windows (such as contoso)
+  - FQDN (such as microsoft.com)
+  description: 'The type of SrcDomain, if known. Possible values include: - Windows (such as contoso) - FQDN (such as microsoft.com) Required if SrcDomain is used.'
+- name: SrcHostname
+  role: source
+  class: Recommended
+  type: String
+  description: The source device hostname, excluding domain information.
+  examples:
+  - DESKTOP-1282V4D
+- name: SrcIpAddr
+  role: source
+  class: Recommended
+  type: IP address
+  required_if:
+  - SrcHostname is specified
+  description: The IP address of the source device. This value is mandatory if SrcHostname is specified.
+  examples:
+  - 77.138.103.108
+- name: ActorUserIdType
+  role: actor
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SID
+  - UID
+  - AADID
+  - OktaId
+  - AWSId
+  description: The type of the ID stored in the ActorUserId field. Supported values include SID, UID, AADID, OktaId, and AWSId.
+- name: ActorUsernameType
+  role: actor
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - UPN
+  - Windows
+  - DN
+  - Simple
+  description: Specifies the type of the username stored in the ActorUsername field. Supported values are UPN, Windows, DN, and Simple. For more information, see The User entity.
+  examples:
+  - Windows
+- name: Rule
+  role: rule
+  class: Conditional
+  type: String
+  description: Either the value of kRuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: SrcDvcIdType
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDvcId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  description: 'The type of SrcDvcId, if known. Possible values include: - AzureResourceId - MDEid If multiple IDs are available, use the first one from the preceding list, and store the others in SrcDvcAzureResourceId and SrcDvcMDEid, respectively.'
+  notes: This field is required if SrcDvcId is used.
+- name: TargetUserIdType
+  role: target
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SID
+  - UID
+  - AADID
+  - OktaId
+  - AWSId
+  description: The type of the ID stored in the TargetUserId field. Supported values are SID, UID, AADID, OktaId, and AWSId.
+- name: TargetUsernameType
+  role: target
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - UPN
+  - Windows
+  - DN
+  - Simple
+  description: Specifies the type of the username stored in the TargetUsername field. Supported values include UPN, Windows, DN, and Simple. For more information, see The User entity.
+  examples:
+  - Windows
+- name: ActingAppId
+  role: acting
+  class: Optional
+  type: String
+  description: The ID of the application used by the actor to perform the activity, including a process, browser, or service. For
+  examples:
+  - '0x12ae8'
+- name: ActingAppName
+  role: acting
+  class: Optional
+  type: String
+  description: The name of the application used by the actor to perform the activity, including a process, browser, or service. For
+  examples:
+  - C:\Windows\System32\svchost.exe
+- name: ActingAppType
+  role: acting
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Process
+  - Browser
+  - Resource
+  - Other
+  description: 'The type of acting application. Supported values include: - Process - Browser - Resource - Other'
+- name: ActingOriginalAppType
+  role: acting
+  class: Optional
+  type: String
+  description: The type of the application that initiated the activity as reported by the reporting device.
+- name: ActorOriginalUserType
+  role: actor
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the reporting device.
+- name: ActorScope
+  role: actor
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which ActorUserId and ActorUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+- name: ActorScopeId
+  role: actor
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which ActorUserId and ActorUsername are defined. or more information and list of allowed values, see UserScopeId in the Schema Overview article.
+- name: ActorSessionId
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the login session of the Actor.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: ActorUserId
+  role: actor
+  class: Optional
+  type: String
+  description: 'A machine-readable, alphanumeric, unique representation of the Actor. Supported formats and types include: - SID (Windows): S-1-5-21-1377283216-344919071-3415362939-500 - UID (Linux): 4578 - AADID (Microsoft Entra ID): 9267d02c-5f76-40a9-a9eb-b686f3ca47aa - OktaId: 00urjk4znu3BcncfY0h7 - AWSId: 72643944673 Store the ID type in the ActorUserIdType field. If other IDs are available, we recommend that you normalize the field names to ActorUserSid, ActorUserUid, ActorUserAadId, ActorUserOktaId, and ActorAwsId, respectively. For more information, see The User entity.'
+  examples:
+  - S-1-12
+- name: ActorUserType
+  role: actor
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Regular
+  - Machine
+  - Admin
+  - System
+  - Application
+  - Service Principal
+  - Other
+  description: 'The type of the Actor. Allowed values are: - Regular - Machine - Admin - System - Application - Service Principal - Other'
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the ActorOriginalUserType field.
+- name: AdditionalFields
+  role: common
+  class: Optional
+- name: DvcDescription
+  role: device
+  class: Optional
+- name: DvcInterface
+  role: device
+  class: Optional
+- name: DvcMacAddr
+  role: device
+  class: Optional
+- name: DvcOriginalAction
+  role: device
+  class: Optional
+- name: DvcOs
+  role: device
+  class: Optional
+- name: DvcOsVersion
+  role: device
+  class: Optional
+- name: DvcScope
+  role: device
+  class: Optional
+- name: DvcScopeId
+  role: device
+  class: Optional
+- name: DvcZone
+  role: device
+  class: Optional
+- name: EventMessage
+  role: common
+  class: Optional
+- name: EventOriginalResultDetails
+  role: common
+  class: Optional
+- name: EventOriginalSeverity
+  role: common
+  class: Optional
+- name: EventOriginalSubType
+  role: common
+  class: Optional
+- name: EventOriginalType
+  role: common
+  class: Optional
+- name: EventOriginalUid
+  role: common
+  class: Optional
+- name: EventOwner
+  role: common
+  class: Optional
+- name: EventProductVersion
+  role: common
+  class: Optional
+- name: EventReportUrl
+  role: common
+  class: Optional
+- name: EventSubType
+  role: common
+  class: Optional
+  type: Enumerated
+  description: 'The following sub-types are supported: - UserRead: Password, Hash - UserCreated, GroupCreated, UserModified, GroupModified. For more information, see UpdatedPropertyName'
+- name: GroupId
+  role: group
+  class: Optional
+  type: String
+  description: 'A machine-readable, alphanumeric, unique representation of the group, for activities involving a group. Supported formats and types include: - SID (Windows): S-1-5-21-1377283216-344919071-3415362939-500 - UID (Linux): 4578 Store the ID type in the GroupIdType field. If other IDs are available, we recommend that you normalize the field names to GroupSid or GroupUid, respectively. For more information, see The User entity.'
+  examples:
+  - S-1-12
+- name: GroupIdType
+  role: group
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - SID
+  - UID
+  description: The type of the ID stored in the GroupId field. Supported values are SID, and UID.
+- name: GroupName
+  role: group
+  class: Optional
+  type: String
+  description: 'The group name, including domain information when available, for activities involving a group. Use one of the following formats and in the following order of priority: - Upn/Email: grp@contoso.com - Windows: Contoso\grp - DN: CN=grp,OU=Sales,DC=Fabrikam,DC=COM - Simple: grp. Use the Simple form only if domain information isn''t available. Store the group name type in the GroupNameType field. If other IDs are available, we recommend that you normalize the field names to GroupUpn, GroupNameWindows, and GroupDn.'
+  examples:
+  - Contoso\Finance
+- name: GroupNameType
+  role: group
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - UPN
+  - Windows
+  - DN
+  - Simple
+  description: Specifies the type of the group name stored in the GroupName field. Supported values include UPN, Windows, DN, and Simple.
+  examples:
+  - Windows
+- name: GroupOriginalType
+  role: group
+  class: Optional
+  type: String
+  description: The original group type, if provided by the source.
+- name: GroupType
+  role: group
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Local Distribution
+  - Local Security Enabled
+  - Global Distribution
+  - Global Security Enabled
+  - Universal Distribution
+  - Universal Security Enabled
+  - Other
+  description: 'The type of the group, for activities involving a group. Supported values include: - Local Distribution - Local Security Enabled - Global Distribution - Global Security Enabled - Universal Distribution - Universal Security Enabled - Other'
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the GroupOriginalType field.
+- name: HttpUserAgent
+  role: http
+  class: Optional
+  type: String
+  description: When authentication is performed over HTTP or HTTPS, this field's value is the user_agent HTTP header provided by the acting application when performing the authentication. For
+  examples:
+  - Mozilla/5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1
+- name: NewPropertyValue
+  class: Optional
+  type: String
+  description: The new value stored in the specified property.
+- name: PreviousPropertyValue
+  class: Optional
+  type: String
+  description: The previous value that was stored in the specified property.
+- name: RuleName
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.
+- name: RuleNumber
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.
+- name: SrcDescription
+  role: source
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: SrcDeviceType
+  role: source
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Computer
+  - Mobile Device
+  - IOT Device
+  - Other
+  description: 'The type of the source device. Possible values include: - Computer - Mobile Device - IOT Device - Other'
+- name: SrcDvcId
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device as reported in the record.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: SrcDvcScope
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcDvcScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. SrcDvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcFQDN
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: SrcGeoCity
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: SrcGeoCountry
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: SrcGeoLatitude
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: SrcGeoLongitude
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: SrcGeoRegion
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: SrcMacAddr
+  role: source
+  class: Optional
+  type: MAC Address (String)
+  description: The MAC address of the network interface from which the connection or session originated.
+  examples:
+  - 06:10:9f:eb:8f:14
+- name: SrcOriginalRiskLevel
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: SrcPortNumber
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated. Might not be relevant for a session comprising multiple connections.
+  examples:
+  - '2335'
+- name: SrcRiskLevel
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: TargetOriginalUserType
+  role: target
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the source.
+- name: TargetUserId
+  role: target
+  class: Optional
+  type: String
+  description: 'A machine-readable, alphanumeric, unique representation of the target user. Supported formats and types include: - SID (Windows): S-1-5-21-1377283216-344919071-3415362939-500 - UID (Linux): 4578 - AADID (Microsoft Entra ID): 9267d02c-5f76-40a9-a9eb-b686f3ca47aa - OktaId: 00urjk4znu3BcncfY0h7 - AWSId: 72643944673 Store the ID type in the TargetUserIdType field. If other IDs are available, we recommend that you normalize the field names to TargetUserSid, TargetUserUid, TargetUserAADID, TargetUserOktaId, and TargetUserAwsId, respectively. For more information, see The User entity.'
+  examples:
+  - S-1-12
+- name: TargetUsername
+  role: target
+  class: Optional
+  type: Username (String)
+  description: 'The target username, including domain information when available. Use one of the following formats and in the following order of priority: - Upn/Email: johndow@contoso.com - Windows: Contoso\johndow - DN: CN=Jeff Smith,OU=Sales,DC=Fabrikam,DC=COM - Simple: johndow. Use the Simple form only if domain information isn''t available. Store the Username type in the TargetUsernameType field. If other IDs are available, we recommend that you normalize the field names to TargetUserUpn, TargetUserWindows, and TargetUserDn. For more information, see The User entity.'
+  examples:
+  - AlbertE
+- name: TargetUserScope
+  role: target
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which TargetUserId and TargetUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+- name: TargetUserScopeId
+  role: target
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which TargetUserId and TargetUsername are defined. for more information and list of allowed values, see UserScopeId in the Schema Overview article.
+- name: TargetUserSessionId
+  role: target
+  class: Optional
+  type: String
+  description: The unique ID of the target user's login session.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: TargetUserType
+  role: target
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Regular
+  - Machine
+  - Admin
+  - System
+  - Application
+  - Service Principal
+  - Other
+  description: 'The type of target user. Supported values include: - Regular - Machine - Admin - System - Application - Service Principal - Other'
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the TargetOriginalUserType field.
+- name: ThreatCategory
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the file activity.
+  examples:
+  - Trojan
+- name: ThreatConfidence
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: ThreatField
+  role: threat
+  class: Optional
+  type: String
+  description: The field for which a threat was identified.
+- name: ThreatFirstReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The first time the IP address or domain were identified as a threat.
+- name: ThreatId
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the file activity.
+- name: ThreatIsActive
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: ThreatLastReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: ThreatName
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the file activity.
+  examples:
+  - EICAR Test File
+- name: ThreatOriginalConfidence
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: ThreatOriginalRiskLevel
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: ThreatRiskLevel
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatOriginalRiskLevel.
+- name: Hostname
+  role: device
+  class: Alias
+  to:
+  - DvcHostname
+- name: IpAddr
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: UpdatedPropertyName
+  role: object
+  class: Alias
+  to:
+  - EventSubType
+  allowed_values:
+  - MultipleProperties
+  - Previous, where is one of the supported values for UpdatedPropertyName
+  - New, where is one of the supported values for UpdatedPropertyName
+- name: User
+  role: user
+  class: Alias
+  to:
+  - ActorUsername

@@ -1,0 +1,10 @@
+name: DstAppType
+summary: The type of the destination application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if DstAppName or DstAppId are used.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: AppType
+  required_if:
+  - DstAppName or DstAppId are used
+  description: The type of the destination application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if DstAppName or DstAppId are used.

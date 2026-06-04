@@ -1,0 +1,8 @@
+name: ParentProcessCreationTime
+summary: The date and time when the parent process was started.
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Optional
+  type: DateTime
+  description: The date and time when the parent process was started.

@@ -1,0 +1,10 @@
+name: DstProcessName
+summary: The file name of the process that terminated the network session. This name is typically considered to be the process name.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The file name of the process that terminated the network session. This name is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe

@@ -1,0 +1,8 @@
+name: TargetAgentBlueprintId
+summary: The blueprint ID of the target agent.
+schemas:
+- name: AgentEvent
+  role: target
+  class: Optional
+  type: String
+  description: The blueprint ID of the target agent.

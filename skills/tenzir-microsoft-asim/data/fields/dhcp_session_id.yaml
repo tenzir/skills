@@ -1,0 +1,10 @@
+name: DhcpSessionId
+summary: The session identifier as reported by the reporting device. For the Windows DHCP server, set this to the TransactionID field.
+schemas:
+- name: DhcpEvent
+  role: dhcp
+  class: Optional
+  type: string
+  description: The session identifier as reported by the reporting device. For the Windows DHCP server, set this to the TransactionID field.
+  examples:
+  - '2099570186'

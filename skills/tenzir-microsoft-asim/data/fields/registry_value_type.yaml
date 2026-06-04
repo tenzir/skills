@@ -1,0 +1,15 @@
+name: RegistryValueType
+summary: Type of the registry value. e.g. Reg_Expand_Sz
+schemas:
+- name: AlertEvent
+  role: registry
+  class: Optional
+  type: Enumerated
+  description: Type of the registry value. e.g. Reg_Expand_Sz
+- name: RegistryEvent
+  role: registry
+  class: Recommended
+  type: String
+  description: The type of registry value, normalized to standard form. For more information, see Value Types. For
+  examples:
+  - Reg_Expand_Sz

@@ -1,0 +1,10 @@
+name: RegistryPreviousValueData
+summary: The original registry data, for operations that modify the registry.
+schemas:
+- name: RegistryEvent
+  role: registry
+  class: Recommended
+  type: String
+  description: The original registry data, for operations that modify the registry.
+  examples:
+  - C:\Windows\system32;C:\Windows;

@@ -1,0 +1,10 @@
+name: TargetProcessCurrentDirectory
+summary: The current directory in which the target process is executed.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The current directory in which the target process is executed.
+  examples:
+  - c:\windows\system32

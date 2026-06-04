@@ -1,0 +1,8 @@
+name: FileSignatureDetails
+summary: Details about the digital signature of the file, such as the signer or certificate information.
+schemas:
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: string
+  description: Details about the digital signature of the file, such as the signer or certificate information.

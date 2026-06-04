@@ -1,0 +1,8 @@
+name: AssetOwnerIdType
+summary: The type or format of the asset owner identifier. This is analogous to UserIdType in Event schemas. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Recommended
+  type: string
+  description: The type or format of the asset owner identifier. This is analogous to UserIdType in Event schemas. For more information and list of allowed values, see UserIdType in the Schema Overview article.

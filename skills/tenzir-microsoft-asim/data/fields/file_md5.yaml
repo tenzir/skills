@@ -1,0 +1,20 @@
+name: FileMD5
+summary: MD5 hash of the file. e.g. j5kl6mn7op8qr9st0uv1wx2yz3ab4c
+schemas:
+- name: AlertEvent
+  role: file
+  class: Optional
+  type: string
+  description: MD5 hash of the file. e.g. j5kl6mn7op8qr9st0uv1wx2yz3ab4c
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: string
+  description: The MD5 hash of the file associated with the asset.
+- name: WebSession
+  role: file
+  class: Optional
+  type: MD5
+  description: For HTTP uploads, the MD5 hash of the uploaded file.
+  examples:
+  - 75a599802f1fa166cdadb360960b1dd0

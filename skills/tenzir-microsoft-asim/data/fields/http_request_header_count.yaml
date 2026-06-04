@@ -1,0 +1,10 @@
+name: HttpRequestHeaderCount
+summary: The number of HTTP headers included in the request.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: Integer
+  description: The number of HTTP headers included in the request.
+  examples:
+  - '12'

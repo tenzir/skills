@@ -1,0 +1,75 @@
+name: EventSchema
+summary: The name of the schema documented here is AgentEvent.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: AgentEvent
+  description: The name of the schema documented here is AgentEvent.
+- name: AlertEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: AlertEvent
+  description: The schema used for the event. The schema documented here is AlertEvent.
+- name: AuditEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: AuditEvent
+  description: The name of the schema documented here is AuditEvent.
+- name: Authentication
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: Authentication
+  description: The name of the schema documented here is Authentication.
+- name: DhcpEvent
+  role: common
+  class: Mandatory
+  type: String
+  value: DhcpEvent
+  description: The name of the schema documented here's DhcpEvent.
+- name: Dns
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: Dns
+  description: The name of the schema documented here is Dns.
+- name: FileEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: FileEvent
+  description: The name of the schema documented here is FileEvent.
+- name: NetworkSession
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: NetworkSession
+  description: The name of the schema documented here is NetworkSession.
+- name: ProcessEvent
+  role: common
+  class: Mandatory
+  type: String
+  value: ProcessEvent
+  description: The name of the schema documented here is ProcessEvent.
+- name: RegistryEvent
+  role: common
+  class: Mandatory
+  type: String
+  value: RegistryEvent
+  description: The name of the schema documented here is RegistryEvent.
+- name: UserManagement
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: UserManagement
+  description: The name of the schema documented here is UserManagement.
+- name: WebSession
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: WebSession
+  description: The name of the schema documented here is WebSession.

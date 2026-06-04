@@ -1,0 +1,41 @@
+name: EventUid
+summary: A machine-readable, alphanumeric string that uniquely identifies an alert within a system. e.g. A1bC2dE3fH4iJ5kL6mN7oP8qR9s
+schemas:
+- name: AgentEvent
+  role: common
+  class: Recommended
+- name: AlertEvent
+  role: common
+  class: Mandatory
+  type: string
+  description: A machine-readable, alphanumeric string that uniquely identifies an alert within a system. e.g. A1bC2dE3fH4iJ5kL6mN7oP8qR9s
+- name: AuditEvent
+  role: common
+  class: Recommended
+- name: Authentication
+  role: common
+  class: Recommended
+- name: DhcpEvent
+  role: common
+  class: Recommended
+- name: Dns
+  role: common
+  class: Recommended
+- name: FileEvent
+  role: common
+  class: Recommended
+- name: NetworkSession
+  role: common
+  class: Recommended
+- name: ProcessEvent
+  role: common
+  class: Recommended
+- name: RegistryEvent
+  role: common
+  class: Recommended
+- name: UserManagement
+  role: common
+  class: Recommended
+- name: WebSession
+  role: common
+  class: Recommended

@@ -1,0 +1,17 @@
+name: TargetDvcIdType
+summary: The type of TargetDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article. Required if TargetDeviceId is used.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - TargetDeviceId is used
+  description: The type of TargetDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article. Required if TargetDeviceId is used.
+- name: Authentication
+  role: target
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - TargetDeviceId is used
+  description: The type of TargetDvcId. For a list of allowed values and further information refer to DvcIdType in the Schema Overview article. Required if TargetDeviceId is used.

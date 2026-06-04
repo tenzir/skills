@@ -1,0 +1,64 @@
+name: SrcFQDN
+summary: The fully qualified domain name of the source.
+schemas:
+- name: AgentEvent
+  role: source
+  class: Optional
+  type: String
+  description: The fully qualified domain name of the source.
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: Authentication
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: Dns
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: FileEvent
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: UserManagement
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.

@@ -1,0 +1,13 @@
+name: AssetPath
+summary: AssetPath is an alias for FilePath, SitePath.
+to:
+- FilePath
+- SitePath
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Alias
+  type: string
+  to:
+  - FilePath
+  - SitePath

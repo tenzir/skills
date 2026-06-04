@@ -1,0 +1,60 @@
+name: ThreatField
+summary: The field for which a threat was identified. The value is either SrcIpAddr or TargetIpAddr.
+schemas:
+- name: AuditEvent
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcIpAddr
+  - TargetIpAddr
+  description: The field for which a threat was identified. The value is either SrcIpAddr or TargetIpAddr.
+- name: Authentication
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcIpAddr
+  - TargetIpAddr
+  description: The field for which a threat was identified. The value is either SrcIpAddr or TargetIpAddr.
+- name: Dns
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcIpAddr
+  - DstIpAddr
+  - Domain
+  - DnsResponseName
+  description: The field for which a threat was identified. The value is either SrcIpAddr, DstIpAddr, Domain, or DnsResponseName.
+- name: FileEvent
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcFilePath
+  - DstFilePath
+  description: The field for which a threat was identified. The value is either SrcFilePath or DstFilePath.
+- name: NetworkSession
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcIpAddr
+  - DstIpAddr
+  description: The field for which a threat was identified. The value is either SrcIpAddr or DstIpAddr.
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The field for which a threat was identified.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The field for which a threat was identified.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: String
+  description: The field for which a threat was identified.

@@ -1,0 +1,10 @@
+name: HttpResponseExpires
+summary: The content of the HTTP Expires response header, indicating when the response content expires.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The content of the HTTP Expires response header, indicating when the response content expires.
+  examples:
+  - Thu, 01 Dec 2024 16:00:00 GMT

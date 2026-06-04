@@ -1,0 +1,8 @@
+name: EventFinishReasons
+summary: The reasons the event finished.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: dynamic
+  description: The reasons the event finished.

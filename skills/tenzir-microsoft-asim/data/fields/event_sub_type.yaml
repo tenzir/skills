@@ -1,0 +1,66 @@
+name: EventSubType
+summary: 'Specifies the subtype or category of the alert event, providing more granular detail within the broader event classification. This field helps distinguish the nature of the detected issue, improving incident prioritization and response strategies. Supported values include: - Threat (Represents a confirmed or highly likely malicious activity that could compromise the system or network) - Suspicious Activity (Flags behavior or events that appear unusual or suspicious, though not yet confirmed as malicious) - Anomaly (Identifies deviations from normal patterns that could indicate a potential security risk or operational issue) - Compliance Violation (Highlights activities that breach regulatory, policy, or compliance standards)'
+schemas:
+- name: AlertEvent
+  role: common
+  class: Recommended
+  type: Enumerated
+  allowed_values:
+  - Threat (Represents a confirmed or highly likely malicious activity that could compromise the system or network)
+  - Suspicious Activity (Flags behavior or events that appear unusual or suspicious, though not yet confirmed as malicious)
+  - Anomaly (Identifies deviations from normal patterns that could indicate a potential security risk or operational issue)
+  - Compliance Violation (Highlights activities that breach regulatory, policy, or compliance standards)
+  description: 'Specifies the subtype or category of the alert event, providing more granular detail within the broader event classification. This field helps distinguish the nature of the detected issue, improving incident prioritization and response strategies. Supported values include: - Threat (Represents a confirmed or highly likely malicious activity that could compromise the system or network) - Suspicious Activity (Flags behavior or events that appear unusual or suspicious, though not yet confirmed as malicious) - Anomaly (Identifies deviations from normal patterns that could indicate a potential security risk or operational issue) - Compliance Violation (Highlights activities that breach regulatory, policy, or compliance standards)'
+- name: AuditEvent
+  role: common
+  class: Optional
+  type: String
+  description: Provides further details, which the normalized value in EventType does not convey.
+- name: Authentication
+  role: common
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - System
+  - Interactive
+  - RemoteInteractive
+  - Service
+  - RemoteService
+  - 'Remote: Use when the type of remote sign-in is unknown'
+  - 'AssumeRole: Typically used when the event type is Elevate'
+  description: 'The sign-in type. Allowed values include: - System - Interactive - RemoteInteractive - Service - RemoteService - Remote - Use when the type of remote sign-in is unknown. - AssumeRole - Typically used when the event type is Elevate. The value may be provided in the source record using different terms, which should be normalized to these values. The original value should be stored in the field EventOriginalSubType.'
+- name: DhcpEvent
+  role: common
+  class: Optional
+- name: Dns
+  role: common
+  class: Optional
+  type: Enumerated
+  description: Either request or response. For most sources, only the responses are logged, and therefore the value is often response.
+- name: FileEvent
+  role: common
+  class: Optional
+  type: Enumerated
+  description: 'Describes details about the operation reported in EventType. Supported values per event type include: - FileCreated - Upload, Checkin - FileModified - Checkin - FileCreatedOrModified - Checkin - FileAccessed - Download, Preview, Checkout, Extended - FileDeleted - Recycled, Versions, Site'
+- name: NetworkSession
+  role: common
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Start
+  - End
+  description: 'Additional description of the event type, if applicable. For Network Session records, supported values include: - Start - End This is field is not relevant for Flow events.'
+- name: ProcessEvent
+  role: common
+  class: Optional
+- name: RegistryEvent
+  role: common
+  class: Optional
+- name: UserManagement
+  role: common
+  class: Optional
+  type: Enumerated
+  description: 'The following sub-types are supported: - UserRead: Password, Hash - UserCreated, GroupCreated, UserModified, GroupModified. For more information, see UpdatedPropertyName'
+- name: WebSession
+  role: common
+  class: Optional

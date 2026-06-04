@@ -1,0 +1,8 @@
+name: AssetIsProtectedByDlp
+summary: Indicates whether the asset is protected by a Data Loss Prevention (DLP) policy.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: bool
+  description: Indicates whether the asset is protected by a Data Loss Prevention (DLP) policy.

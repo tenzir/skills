@@ -1,0 +1,35 @@
+name: ActingAppType
+summary: The type of acting application. For more information, and allowed list of values, see AppType in the Schema Overview article.
+schemas:
+- name: AgentEvent
+  role: acting
+  class: Optional
+  type: AppType
+  description: The type of acting application. For more information, and allowed list of values, see AppType in the Schema Overview article.
+- name: AuditEvent
+  role: acting
+  class: Optional
+  type: AppType
+  description: The type of acting application. For more information, and allowed list of values, see AppType in the Schema Overview article.
+- name: Authentication
+  role: acting
+  class: Optional
+  type: AppType
+  description: The type of acting application. For more information, and allowed list of values, see AppType in the Schema Overview article.
+- name: FileEvent
+  role: acting
+  class: Optional
+  type: AppType
+  required_if:
+  - TargetAppName or TargetAppId are used
+  description: The type of the destination application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if TargetAppName or TargetAppId are used.
+- name: UserManagement
+  role: acting
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Process
+  - Browser
+  - Resource
+  - Other
+  description: 'The type of acting application. Supported values include: - Process - Browser - Resource - Other'

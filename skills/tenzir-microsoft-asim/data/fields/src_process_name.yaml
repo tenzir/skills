@@ -1,0 +1,17 @@
+name: SrcProcessName
+summary: The file name of the process that initiated the DNS request. This name is typically considered to be the process name.
+schemas:
+- name: Dns
+  role: source
+  class: Optional
+  type: String
+  description: The file name of the process that initiated the DNS request. This name is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The file name of the process that initiated the network session. This name is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe

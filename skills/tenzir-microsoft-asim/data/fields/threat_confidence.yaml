@@ -1,0 +1,53 @@
+name: ThreatConfidence
+summary: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: Dns
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.

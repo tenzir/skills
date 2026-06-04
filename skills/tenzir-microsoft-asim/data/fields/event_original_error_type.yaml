@@ -1,0 +1,8 @@
+name: EventOriginalErrorType
+summary: The original error type as reported by the source.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The original error type as reported by the source.

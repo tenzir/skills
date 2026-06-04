@@ -1,0 +1,53 @@
+name: ThreatOriginalConfidence
+summary: The confidence level as reported by the originating system.
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The confidence level as reported by the originating system.
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The confidence level as reported by the originating system.
+- name: Dns
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.

@@ -1,0 +1,20 @@
+name: IndicatorType
+summary: 'The type or category of the indicator Supported values are: -Ip -User -Process -Registry -Url -Host -Cloud Resource -Application -File -Email -Mailbox -Logon Session'
+schemas:
+- name: AlertEvent
+  class: Recommended
+  type: Enumerated
+  allowed_values:
+  - Ip
+  - User
+  - Process
+  - Registry
+  - Url
+  - Host
+  - Cloud Resource
+  - Application
+  - File
+  - Email
+  - Mailbox
+  - Logon Session
+  description: 'The type or category of the indicator Supported values are: -Ip -User -Process -Registry -Url -Host -Cloud Resource -Application -File -Email -Mailbox -Logon Session'

@@ -1,0 +1,10 @@
+name: SrcBytes
+summary: The number of bytes sent from the source to the destination for the connection or session. If the event is aggregated, SrcBytes should be the sum over all aggregated sessions.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Recommended
+  type: Long
+  description: The number of bytes sent from the source to the destination for the connection or session. If the event is aggregated, SrcBytes should be the sum over all aggregated sessions.
+  examples:
+  - '46536'

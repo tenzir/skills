@@ -1,0 +1,8 @@
+name: ParentProcessIsHidden
+summary: An indication of whether the parent process is in hidden mode.
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Optional
+  type: Boolean
+  description: An indication of whether the parent process is in hidden mode.

@@ -1,0 +1,10 @@
+name: IndicatorAssociation
+summary: 'Specifies whether the indicator is linked to or directly impacted by the threat. Supported values are: -Associated -Targeted'
+schemas:
+- name: AlertEvent
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Associated
+  - Targeted
+  description: 'Specifies whether the indicator is linked to or directly impacted by the threat. Supported values are: -Associated -Targeted'

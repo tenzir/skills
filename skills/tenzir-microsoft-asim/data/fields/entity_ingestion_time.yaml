@@ -1,0 +1,8 @@
+name: EntityIngestionTime
+summary: The timestamp (UTC) of when the ingestion pipeline receives the asset log.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Optional
+  type: datetime
+  description: The timestamp (UTC) of when the ingestion pipeline receives the asset log.

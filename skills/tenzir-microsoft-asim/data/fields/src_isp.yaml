@@ -1,0 +1,10 @@
+name: SrcIsp
+summary: The Internet Service Provider (ISP) used by the source device to connect to the internet.
+schemas:
+- name: Authentication
+  role: source
+  class: Optional
+  type: String
+  description: The Internet Service Provider (ISP) used by the source device to connect to the internet.
+  examples:
+  - corpconnect

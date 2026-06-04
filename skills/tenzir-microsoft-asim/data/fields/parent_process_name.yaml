@@ -1,0 +1,17 @@
+name: ParentProcessName
+summary: The name of the parent process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Optional
+  type: string
+  description: The name of the parent process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+  examples:
+  - C:\Windows\explorer.exe
+- name: RegistryEvent
+  role: process
+  class: Optional
+  type: String
+  description: The file name of the parent process image file. This value is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe

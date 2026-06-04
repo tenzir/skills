@@ -1,0 +1,8 @@
+name: UrlOriginal
+summary: The original value of the URL, when the URL was modified by the reporting device and both values are provided.
+schemas:
+- name: WebSession
+  role: web
+  class: Optional
+  type: URL (String)
+  description: The original value of the URL, when the URL was modified by the reporting device and both values are provided.

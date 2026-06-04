@@ -1,0 +1,8 @@
+name: FileExtension
+summary: The file extension of the file associated with the asset, such as .exe or .pdf.
+schemas:
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: string
+  description: The file extension of the file associated with the asset, such as .exe or .pdf.

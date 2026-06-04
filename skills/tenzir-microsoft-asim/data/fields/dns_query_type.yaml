@@ -1,0 +1,10 @@
+name: DnsQueryType
+summary: The DNS Resource Record Type codes.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Integer
+  description: The DNS Resource Record Type codes.
+  examples:
+  - '28'

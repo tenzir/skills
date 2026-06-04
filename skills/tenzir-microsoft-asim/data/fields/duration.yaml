@@ -1,0 +1,22 @@
+name: Duration
+summary: Duration is an alias for DhcpSessionDuration, DnsNetworkDuration, NetworkDuration.
+to:
+- DhcpSessionDuration
+- DnsNetworkDuration
+- NetworkDuration
+schemas:
+- name: DhcpEvent
+  role: network
+  class: Alias
+  to:
+  - DhcpSessionDuration
+- name: Dns
+  role: network
+  class: Alias
+  to:
+  - DnsNetworkDuration
+- name: NetworkSession
+  role: network
+  class: Alias
+  to:
+  - NetworkDuration

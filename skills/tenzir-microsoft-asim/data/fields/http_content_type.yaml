@@ -1,0 +1,11 @@
+name: HttpContentType
+summary: The HTTP Response content type header.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The HTTP Response content type header.
+  examples:
+  - text/html; charset=ISO-8859-4
+  notes: The HttpContentType field may include both the content format and extra parameters, such as the encoding used to get the actual format.

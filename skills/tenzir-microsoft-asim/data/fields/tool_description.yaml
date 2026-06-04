@@ -1,0 +1,8 @@
+name: ToolDescription
+summary: A description of the tool.
+schemas:
+- name: AgentEvent
+  role: tool
+  class: Optional
+  type: String
+  description: A description of the tool.

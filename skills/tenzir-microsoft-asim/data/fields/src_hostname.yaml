@@ -1,0 +1,52 @@
+name: SrcHostname
+summary: The source device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Hostname
+  description: The source device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: Authentication
+  role: source
+  class: Optional
+  type: Hostname
+  description: The source device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: DhcpEvent
+  role: source
+  class: Mandatory
+  type: Hostname (String)
+  description: The hostname of the device requesting the DHCP lease. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: Dns
+  role: source
+  class: Recommended
+  type: Hostname (String)
+  description: The source device hostname, excluding domain information.
+  examples:
+  - DESKTOP-1282V4D
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Hostname (String)
+  description: The source device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: NetworkSession
+  role: source
+  class: Recommended
+  type: Hostname (String)
+  description: The source device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: UserManagement
+  role: source
+  class: Recommended
+  type: String
+  description: The source device hostname, excluding domain information.
+  examples:
+  - DESKTOP-1282V4D

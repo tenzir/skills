@@ -1,0 +1,9 @@
+name: RequestedIpAddr
+summary: The IP address requested by the DHCP client, when available.
+schemas:
+- name: DhcpEvent
+  class: Optional
+  type: IP Address
+  description: The IP address requested by the DHCP client, when available.
+  examples:
+  - 192.168.12.3

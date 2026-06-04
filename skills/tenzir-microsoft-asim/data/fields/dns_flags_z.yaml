@@ -1,0 +1,8 @@
+name: DnsFlagsZ
+summary: The DNS Z flag is a deprecated DNS flag, which might be reported by older DNS systems.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS Z flag is a deprecated DNS flag, which might be reported by older DNS systems.

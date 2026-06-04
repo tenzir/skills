@@ -1,0 +1,24 @@
+name: SrcUsername
+summary: The source username, including domain information when available. For more information, see The User entity.
+schemas:
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Username (String)
+  description: The source username, including domain information when available. For more information, see The User entity.
+  examples:
+  - AlbertE
+- name: Dns
+  role: source
+  class: Optional
+  type: Username (String)
+  description: The source username, including domain information when available. For more information, see The User entity.
+  examples:
+  - AlbertE
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Username (String)
+  description: The source username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the SrcUsernameType field. If other username formats are available, store them in the fields SrcUsername.
+  examples:
+  - AlbertE

@@ -1,0 +1,10 @@
+name: NetworkDuration
+summary: The amount of time, in milliseconds, for the completion of the network session or connection.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Integer
+  description: The amount of time, in milliseconds, for the completion of the network session or connection.
+  examples:
+  - '1500'

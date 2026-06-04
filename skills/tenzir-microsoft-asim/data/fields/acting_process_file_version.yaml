@@ -1,0 +1,10 @@
+name: ActingProcessFileVersion
+summary: The product version from the version information of the acting process image file.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The product version from the version information of the acting process image file.
+  examples:
+  - 7.9.5.0

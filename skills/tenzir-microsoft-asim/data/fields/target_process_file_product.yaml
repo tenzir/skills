@@ -1,0 +1,10 @@
+name: TargetProcessFileProduct
+summary: The product name from the version information in target process image file.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The product name from the version information in target process image file.
+  examples:
+  - Notepad++

@@ -1,0 +1,41 @@
+name: Process
+summary: Process is an alias for ActingProcessName, DstProcessName, SrcProcessName, TargetProcessName.
+to:
+- ActingProcessName
+- DstProcessName
+- SrcProcessName
+- TargetProcessName
+schemas:
+- name: Dns
+  role: process
+  class: Alias
+  to:
+  - SrcProcessName
+  examples:
+  - C:\Windows\System32\rundll32.exe
+- name: FileEvent
+  role: process
+  class: Alias
+  to:
+  - ActingProcessName
+- name: NetworkSession
+  role: process
+  class: Alias
+  to:
+  - DstProcessName
+  examples:
+  - C:\Windows\System32\rundll32.exe
+- name: ProcessEvent
+  role: process
+  class: Alias
+  to:
+  - TargetProcessName
+  examples:
+  - C:\Windows\System32\rundll32.exe
+- name: RegistryEvent
+  role: process
+  class: Alias
+  to:
+  - ActingProcessName
+  examples:
+  - C:\Windows\System32\rundll32.exe

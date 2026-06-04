@@ -1,0 +1,8 @@
+name: TcpFlagsNs
+summary: The TCP NS Flag reported. The nonce sum flag is still an experimental flag used to help protect against accidental malicious concealment of packets from the sender. See RFC 3540 for more details
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP NS Flag reported. The nonce sum flag is still an experimental flag used to help protect against accidental malicious concealment of packets from the sender. See RFC 3540 for more details

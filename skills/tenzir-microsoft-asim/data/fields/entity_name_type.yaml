@@ -1,0 +1,8 @@
+name: EntityNameType
+summary: The type of the entity name.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Recommended
+  type: string
+  description: The type of the entity name.

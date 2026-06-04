@@ -1,0 +1,10 @@
+name: DstZone
+summary: The network zone of the destination, as defined by the reporting device.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The network zone of the destination, as defined by the reporting device.
+  examples:
+  - Dmz

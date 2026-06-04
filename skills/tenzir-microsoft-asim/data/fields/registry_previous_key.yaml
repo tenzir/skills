@@ -1,0 +1,11 @@
+name: RegistryPreviousKey
+summary: For operations that modify the registry, the original registry key, normalized to standard root key naming. For more information, see Root Keys.
+schemas:
+- name: RegistryEvent
+  role: registry
+  class: Recommended
+  type: String
+  description: For operations that modify the registry, the original registry key, normalized to standard root key naming. For more information, see Root Keys.
+  examples:
+  - HKEY_LOCAL_MACHINE\SOFTWARE\MTG
+  notes: If the operation changed other fields, such as the value, but the key remains the same, the RegistryPreviousKey will have the same value as RegistryKey.

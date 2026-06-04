@@ -1,0 +1,13 @@
+name: FileSHA512
+summary: For HTTP uploads, the SHA512 hash of the uploaded file.
+schemas:
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: string
+  description: The SHA-512 hash of the file associated with the asset.
+- name: WebSession
+  role: file
+  class: Optional
+  type: SHA512
+  description: For HTTP uploads, the SHA512 hash of the uploaded file.

@@ -1,0 +1,15 @@
+name: AssetRiskLevel
+summary: 'The normalized risk level assigned to the asset. The allowed values are: Info, Low, Medium, High, Critical, Other.'
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Info
+  - Low
+  - Medium
+  - High
+  - Critical
+  - Other
+  description: 'The normalized risk level assigned to the asset. The allowed values are: Info, Low, Medium, High, Critical, Other.'

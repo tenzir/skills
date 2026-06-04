@@ -1,0 +1,10 @@
+name: ActingProcessFileCompany
+summary: The company that created the acting process image file.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The company that created the acting process image file.
+  examples:
+  - Microsoft

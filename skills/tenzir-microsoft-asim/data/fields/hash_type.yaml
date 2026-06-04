@@ -1,0 +1,53 @@
+name: HashType
+summary: The type of hash stored in the HASH alias field, allowed values are MD5, SHA, SHA256, SHA512 and IMPHASH. Mandatory if Hash is populated.
+to:
+- IMPHASH
+- MD5
+- SHA
+- SHA256
+- SHA512
+schemas:
+- name: FileEvent
+  class: Conditional
+  type: Enumerated
+  to:
+  - IMPHASH
+  - MD5
+  - SHA
+  - SHA256
+  - SHA512
+  required_if:
+  - Hash is populated
+  allowed_values:
+  - MD5
+  - SHA
+  - SHA256
+  - SHA512
+  - IMPHASH
+  - Hash
+  description: The type of hash stored in the HASH alias field, allowed values are MD5, SHA, SHA256, SHA512 and IMPHASH. Mandatory if Hash is populated.
+- name: ProcessEvent
+  class: Conditional
+  type: Enumerated
+  to:
+  - IMPHASH
+  - MD5
+  - SHA
+  - SHA256
+  - SHA512
+  allowed_values:
+  - MD5
+  - SHA
+  - SHA256
+  - SHA512
+  - IMPHASH
+  description: The type of hash stored in the HASH alias field, allowed values are MD5, SHA, SHA256, SHA512 and IMPHASH.
+- name: WebSession
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - MD5
+  - SHA1
+  - SHA256
+  - SHA512
+  description: 'The type of the hash in the Hash field. Possible values include: MD5, SHA1, SHA256, and SHA512.'

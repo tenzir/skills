@@ -1,0 +1,8 @@
+name: DnsFlagsAuthoritative
+summary: The DNS AA flag indicates whether the response from the server was authoritative
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS AA flag indicates whether the response from the server was authoritative

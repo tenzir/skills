@@ -1,0 +1,8 @@
+name: ProcessName
+summary: Name of the process. e.g. C:\Windows\explorer.exe
+schemas:
+- name: AlertEvent
+  role: process
+  class: Optional
+  type: string
+  description: Name of the process. e.g. C:\Windows\explorer.exe

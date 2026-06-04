@@ -1,0 +1,8 @@
+name: ActingProcessInjectedAddress
+summary: The memory address in which the responsible acting process is stored.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The memory address in which the responsible acting process is stored.

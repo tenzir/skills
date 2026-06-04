@@ -1,0 +1,10 @@
+name: CommandLine
+summary: CommandLine is an alias for TargetProcessCommandLine.
+to:
+- TargetProcessCommandLine
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Alias
+  to:
+  - TargetProcessCommandLine

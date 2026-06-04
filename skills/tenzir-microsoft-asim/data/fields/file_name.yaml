@@ -1,0 +1,20 @@
+name: FileName
+summary: Name of the file associated with the alert, without path or a location. e.g. Notepad.exe
+to:
+- TargetFileName
+schemas:
+- name: AlertEvent
+  role: file
+  class: Optional
+  type: string
+  description: Name of the file associated with the alert, without path or a location. e.g. Notepad.exe
+- name: FileEvent
+  role: file
+  class: Alias
+  to:
+  - TargetFileName
+- name: WebSession
+  role: file
+  class: Optional
+  type: String
+  description: For HTTP uploads, the name of the uploaded file.

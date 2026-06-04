@@ -1,0 +1,8 @@
+name: DnsFlagsAuthenticated
+summary: The DNS AD flag, which is related to DNSSEC, indicates in a response that all data included in the answer and authority sections of the response have been verified by the server according to the policies of that server. For more information, see RFC 3655 Section 6.1 for more information.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS AD flag, which is related to DNSSEC, indicates in a response that all data included in the answer and authority sections of the response have been verified by the server according to the policies of that server. For more information, see RFC 3655 Section 6.1 for more information.

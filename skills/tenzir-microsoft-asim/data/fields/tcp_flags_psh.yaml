@@ -1,0 +1,8 @@
+name: TcpFlagsPsh
+summary: The TCP PSH Flag reported. The push flag is similar to the URG flag and tells the receiver to process these packets as they are received instead of buffering them.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP PSH Flag reported. The push flag is similar to the URG flag and tells the receiver to process these packets as they are received instead of buffering them.

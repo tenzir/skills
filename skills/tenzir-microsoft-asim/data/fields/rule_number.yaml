@@ -1,0 +1,50 @@
+name: RuleNumber
+summary: The number of the rule associated with the alert. e.g. 123456
+schemas:
+- name: AlertEvent
+  role: rule
+  class: Optional
+  type: int
+  description: The number of the rule associated with the alert. e.g. 123456
+- name: AuditEvent
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.
+- name: Authentication
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.
+- name: DhcpEvent
+  role: rule
+  class: Optional
+  type: int
+  description: The number of the rule associated with the alert. e.g. 123456
+- name: Dns
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule which identified the threat.
+  examples:
+  - '23'
+- name: FileEvent
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.
+- name: ProcessEvent
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.
+- name: RegistryEvent
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.
+- name: UserManagement
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.

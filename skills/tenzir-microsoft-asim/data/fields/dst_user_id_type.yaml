@@ -1,0 +1,8 @@
+name: DstUserIdType
+summary: The type of the ID stored in the DstUserId field. For a list of allowed values and further information, refer to UserIdType in the Schema Overview article.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the DstUserId field. For a list of allowed values and further information, refer to UserIdType in the Schema Overview article.

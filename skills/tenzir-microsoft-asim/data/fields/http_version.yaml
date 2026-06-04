@@ -1,0 +1,10 @@
+name: HttpVersion
+summary: The HTTP Request Version.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The HTTP Request Version.
+  examples:
+  - '2.0'

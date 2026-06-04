@@ -1,0 +1,17 @@
+name: GroupType
+summary: 'The type of the group, for activities involving a group. Supported values include: - Local Distribution - Local Security Enabled - Global Distribution - Global Security Enabled - Universal Distribution - Universal Security Enabled - Other'
+schemas:
+- name: UserManagement
+  role: group
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Local Distribution
+  - Local Security Enabled
+  - Global Distribution
+  - Global Security Enabled
+  - Universal Distribution
+  - Universal Security Enabled
+  - Other
+  description: 'The type of the group, for activities involving a group. Supported values include: - Local Distribution - Local Security Enabled - Global Distribution - Global Security Enabled - Universal Distribution - Universal Security Enabled - Other'
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the GroupOriginalType field.

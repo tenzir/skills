@@ -1,0 +1,53 @@
+name: ThreatOriginalRiskLevel
+summary: The risk level as reported by the originating system.
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The risk level as reported by the originating system.
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The risk level as reported by the originating system.
+- name: Dns
+  role: threat
+  class: Optional
+  type: String
+  description: The original risk level associated with the threat identified, as reported by the reporting device.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.

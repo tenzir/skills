@@ -1,0 +1,8 @@
+name: ParentProcessIMPHASH
+summary: The Import Hash of all the library DLLs that are used by the parent process.
+schemas:
+- name: ProcessEvent
+  role: file
+  class: Optional
+  type: String
+  description: The Import Hash of all the library DLLs that are used by the parent process.

@@ -1,0 +1,10 @@
+name: SrcFileMD5
+summary: The MD5 hash of the source file.
+schemas:
+- name: FileEvent
+  role: source
+  class: Optional
+  type: MD5
+  description: The MD5 hash of the source file.
+  examples:
+  - 75a599802f1fa166cdadb360960b1dd0

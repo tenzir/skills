@@ -1,0 +1,8 @@
+name: DstUserScopeId
+summary: The scope ID, such as Microsoft Entra Directory ID, in which DstUserId and DstUsername are defined. for more information and list of allowed values, see UserScopeId in the Schema Overview article.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which DstUserId and DstUsername are defined. for more information and list of allowed values, see UserScopeId in the Schema Overview article.

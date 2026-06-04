@@ -1,0 +1,8 @@
+name: EntityIsDeleted
+summary: Indicates whether the entity has been deleted in the source system.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Optional
+  type: bool
+  description: Indicates whether the entity has been deleted in the source system.

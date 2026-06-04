@@ -1,0 +1,17 @@
+name: NetworkProtocol
+summary: The transport protocol used by the network resolution event. The value can be UDP or TCP, and is most commonly set to UDP for DNS.
+schemas:
+- name: Dns
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The transport protocol used by the network resolution event. The value can be UDP or TCP, and is most commonly set to UDP for DNS.
+  examples:
+  - UDP
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The IP protocol used by the connection or session as listed in IANA protocol assignment, which is typically TCP, UDP, or ICMP.
+  examples:
+  - TCP

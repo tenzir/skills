@@ -1,0 +1,17 @@
+name: TargetGeoLatitude
+summary: The latitude of the geographical coordinate associated with the Target IP address.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the Target IP address.
+  examples:
+  - '44.475833'
+- name: Authentication
+  role: target
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the target IP address.
+  examples:
+  - '44.475833'

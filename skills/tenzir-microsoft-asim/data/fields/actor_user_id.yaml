@@ -1,0 +1,52 @@
+name: ActorUserId
+summary: A machine-readable, alphanumeric, unique representation of the Actor. For more information, and for alternative fields for other IDs, see The User entity.
+schemas:
+- name: AgentEvent
+  role: actor
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For more information, and for alternative fields for other IDs, see The User entity.
+  examples:
+  - S-1-12-1-4141952679-1282074057-627758481-2916039507
+- name: AuditEvent
+  role: actor
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For more information, and for alternative fields for other IDs, see The User entity.
+  examples:
+  - S-1-12-1-4141952679-1282074057-627758481-2916039507
+- name: Authentication
+  role: actor
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For more information, and for alternative fields for additional IDs, see The User entity.
+  examples:
+  - S-1-12-1-4141952679-1282074057-627758481-2916039507
+- name: FileEvent
+  role: actor
+  class: Recommended
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12
+- name: ProcessEvent
+  role: actor
+  class: Recommended
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12
+- name: RegistryEvent
+  role: actor
+  class: Recommended
+  type: String
+  description: A unique ID of the Actor. The specific ID depends on the system generating the event. For more information, see The User entity.
+  examples:
+  - S-1-5-18
+- name: UserManagement
+  role: actor
+  class: Optional
+  type: String
+  description: 'A machine-readable, alphanumeric, unique representation of the Actor. Supported formats and types include: - SID (Windows): S-1-5-21-1377283216-344919071-3415362939-500 - UID (Linux): 4578 - AADID (Microsoft Entra ID): 9267d02c-5f76-40a9-a9eb-b686f3ca47aa - OktaId: 00urjk4znu3BcncfY0h7 - AWSId: 72643944673 Store the ID type in the ActorUserIdType field. If other IDs are available, we recommend that you normalize the field names to ActorUserSid, ActorUserUid, ActorUserAadId, ActorUserOktaId, and ActorAwsId, respectively. For more information, see The User entity.'
+  examples:
+  - S-1-12

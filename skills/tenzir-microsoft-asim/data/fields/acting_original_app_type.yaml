@@ -1,0 +1,23 @@
+name: ActingOriginalAppType
+summary: The type of the application that initiated the activity as reported by the reporting device.
+schemas:
+- name: AgentEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The type of the application that initiated the activity as reported by the reporting device.
+- name: AuditEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The type of the application that initiated the activity as reported by the reporting device.
+- name: Authentication
+  role: acting
+  class: Optional
+  type: String
+  description: The type of the acting application as reported by the reporting device.
+- name: UserManagement
+  role: acting
+  class: Optional
+  type: String
+  description: The type of the application that initiated the activity as reported by the reporting device.

@@ -1,0 +1,8 @@
+name: EventRequestSeed
+summary: The seed parameter of the event request.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: long
+  description: The seed parameter of the event request.

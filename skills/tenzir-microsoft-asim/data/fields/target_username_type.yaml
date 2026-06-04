@@ -1,0 +1,27 @@
+name: TargetUsernameType
+summary: Specifies the type of the username stored in the TargetUsername field. For more information and list of allowed values, see UsernameType in the Schema Overview article.
+schemas:
+- name: Authentication
+  role: target
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the username stored in the TargetUsername field. For more information and list of allowed values, see UsernameType in the Schema Overview article.
+- name: ProcessEvent
+  role: target
+  class: Conditional
+  type: Enumerated
+  description: Specifies the type of the user name stored in the TargetUsername field. For a list of allowed values and further information refer to UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: UserManagement
+  role: target
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - UPN
+  - Windows
+  - DN
+  - Simple
+  description: Specifies the type of the username stored in the TargetUsername field. Supported values include UPN, Windows, DN, and Simple. For more information, see The User entity.
+  examples:
+  - Windows

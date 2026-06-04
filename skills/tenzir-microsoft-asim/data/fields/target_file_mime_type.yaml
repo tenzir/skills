@@ -1,0 +1,10 @@
+name: TargetFileMimeType
+summary: The Mime, or Media, type of the target file. Allowed values are listed in the IANA Media Types repository.
+schemas:
+- name: FileEvent
+  role: target
+  class: Optional
+  type: String
+  allowed_values:
+  - listed in the IANA Media Types repository
+  description: The Mime, or Media, type of the target file. Allowed values are listed in the IANA Media Types repository.

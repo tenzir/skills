@@ -1,0 +1,8 @@
+name: ASimMatchingIpAddr
+summary: When a parser uses the ipaddr_has_any_prefix filtering parameters, this field is set with the one of the values SrcIpAddr, DstIpAddr, or Both to reflect the matching fields or fields.
+schemas:
+- name: NetworkSession
+  role: common
+  class: Recommended
+  type: Enumerated
+  description: When a parser uses the ipaddr_has_any_prefix filtering parameters, this field is set with the one of the values SrcIpAddr, DstIpAddr, or Both to reflect the matching fields or fields.

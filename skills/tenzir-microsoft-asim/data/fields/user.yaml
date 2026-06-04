@@ -1,0 +1,79 @@
+name: User
+summary: User is an alias for ActorUsername, AssetOwnerId, DstUsername, SrcUsername, TargetUserId, TargetUsername, Username.
+to:
+- ActorUsername
+- AssetOwnerId
+- DstUsername
+- SrcUsername
+- TargetUserId
+- TargetUsername
+- Username
+schemas:
+- name: AlertEvent
+  role: user
+  class: Alias
+  type: string
+  to:
+  - Username
+- name: AssetEntity
+  role: user
+  class: Alias
+  type: string
+  to:
+  - AssetOwnerId
+- name: AuditEvent
+  role: user
+  class: Alias
+  to:
+  - ActorUsername
+- name: Authentication
+  role: user
+  class: Alias
+  type: Username (String)
+  to:
+  - TargetUserId
+  - TargetUsername
+  resolution: Alias to the TargetUsername or to the TargetUserId if TargetUsername is not defined.
+  examples:
+  - CONTOSO\dadmin
+- name: DhcpEvent
+  role: user
+  class: Alias
+  to:
+  - SrcUsername
+- name: Dns
+  role: user
+  class: Alias
+  to:
+  - SrcUsername
+- name: FileEvent
+  role: user
+  class: Alias
+  to:
+  - ActorUsername
+  examples:
+  - CONTOSO\dadmin
+- name: NetworkSession
+  role: user
+  class: Alias
+  to:
+  - DstUsername
+- name: ProcessEvent
+  role: user
+  class: Alias
+  to:
+  - TargetUsername
+  examples:
+  - CONTOSO\dadmin
+- name: RegistryEvent
+  role: user
+  class: Alias
+  to:
+  - ActorUsername
+  examples:
+  - CONTOSO\ dadmin
+- name: UserManagement
+  role: user
+  class: Alias
+  to:
+  - ActorUsername

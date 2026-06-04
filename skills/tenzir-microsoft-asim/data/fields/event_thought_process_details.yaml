@@ -1,0 +1,8 @@
+name: EventThoughtProcessDetails
+summary: Details about the thought process associated with the event.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: Details about the thought process associated with the event.

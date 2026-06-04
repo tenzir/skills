@@ -1,0 +1,20 @@
+name: TargetAppType
+summary: The type of the application authorizing on behalf of the Actor. For more information, and allowed list of values, see AppType in the Schema Overview article.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Conditional
+  type: AppType
+  description: The type of the application authorizing on behalf of the Actor. For more information, and allowed list of values, see AppType in the Schema Overview article.
+- name: Authentication
+  role: target
+  class: Conditional
+  type: AppType
+  description: The type of the application authorizing on behalf of the Actor. For more information, and allowed list of values, see AppType in the Schema Overview article.
+- name: FileEvent
+  role: target
+  class: Conditional
+  type: AppType
+  required_if:
+  - TargetAppName or TargetAppId are used
+  description: The type of the destination application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if TargetAppName or TargetAppId are used.

@@ -1,0 +1,50 @@
+name: RuleName
+summary: The name or ID of the rule associated with the alert. e.g. Server PSEXEC Execution via Remote Access
+schemas:
+- name: AlertEvent
+  role: rule
+  class: Optional
+  type: string
+  description: The name or ID of the rule associated with the alert. e.g. Server PSEXEC Execution via Remote Access
+- name: AuditEvent
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.
+- name: Authentication
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.
+- name: DhcpEvent
+  role: rule
+  class: Optional
+  type: string
+  description: The name or ID of the rule associated with the alert. e.g. Server PSEXEC Execution via Remote Access
+- name: Dns
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule which identified the threat.
+  examples:
+  - AnyAnyDrop
+- name: FileEvent
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.
+- name: ProcessEvent
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.
+- name: RegistryEvent
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.
+- name: UserManagement
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.

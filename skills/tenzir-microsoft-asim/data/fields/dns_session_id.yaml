@@ -1,0 +1,10 @@
+name: DnsSessionId
+summary: The DNS session identifier as reported by the reporting device. This value is different from TransactionIdHex, the DNS query unique ID as assigned by the DNS client.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: string
+  description: The DNS session identifier as reported by the reporting device. This value is different from TransactionIdHex, the DNS query unique ID as assigned by the DNS client.
+  examples:
+  - EB4BFA28-2EAD-4EF7-BC8A-51DF4FDF5B55

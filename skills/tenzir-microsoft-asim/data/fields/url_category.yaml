@@ -1,0 +1,21 @@
+name: UrlCategory
+summary: A DNS event source may also look up the category of the requested Domains. The field is called UrlCategory to align with the Microsoft Sentinel network schema. DomainCategory is added as an alias that's fitting to DNS.
+to:
+- DNS
+schemas:
+- name: Dns
+  role: web
+  class: Optional
+  type: String
+  to:
+  - DNS
+  description: A DNS event source may also look up the category of the requested Domains. The field is called UrlCategory to align with the Microsoft Sentinel network schema. DomainCategory is added as an alias that's fitting to DNS.
+  examples:
+  - Educational \\ Phishing
+- name: WebSession
+  role: web
+  class: Optional
+  type: String
+  description: The defined grouping of a URL or the domain part of the URL. The category is commonly provided by web security gateways and is based on the content of the site the URL points to.
+  examples:
+  - search engines, adult, news, advertising, and parked domains.

@@ -1,0 +1,17 @@
+name: ParentProcessId
+summary: The process ID (PID) of the parent process.
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Recommended
+  type: String
+  description: The process ID (PID) of the parent process.
+  examples:
+  - '48610176'
+- name: RegistryEvent
+  role: process
+  class: Mandatory
+  type: String
+  description: The process ID (PID) of the parent process.
+  examples:
+  - '48610176'

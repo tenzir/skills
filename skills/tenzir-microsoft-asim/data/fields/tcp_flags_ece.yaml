@@ -1,0 +1,8 @@
+name: TcpFlagsEce
+summary: The TCP ECE Flag reported. This flag is responsible for indicating if the TCP peer is ECN capable. See RFC 3168 for more details.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP ECE Flag reported. This flag is responsible for indicating if the TCP peer is ECN capable. See RFC 3168 for more details.

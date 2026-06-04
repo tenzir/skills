@@ -1,0 +1,8 @@
+name: AssetOwnerScopeId
+summary: The identifier of the scope to which the asset owner belongs.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: string
+  description: The identifier of the scope to which the asset owner belongs.

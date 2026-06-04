@@ -1,0 +1,8 @@
+name: SrcFilePathType
+summary: The type of SrcFilePath. For more information, see Path structure.
+schemas:
+- name: FileEvent
+  role: source
+  class: Recommended
+  type: Enumerated
+  description: The type of SrcFilePath. For more information, see Path structure.

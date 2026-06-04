@@ -1,0 +1,8 @@
+name: EventOriginalRequestDetails
+summary: The original request details as reported by the source.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The original request details as reported by the source.

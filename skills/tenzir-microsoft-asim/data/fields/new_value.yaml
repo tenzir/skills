@@ -1,0 +1,7 @@
+name: NewValue
+summary: The new value of Object after the operation was performed, if applicable.
+schemas:
+- name: AuditEvent
+  class: Recommended
+  type: String
+  description: The new value of Object after the operation was performed, if applicable.

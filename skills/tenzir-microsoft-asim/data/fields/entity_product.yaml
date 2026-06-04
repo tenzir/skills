@@ -1,0 +1,8 @@
+name: EntityProduct
+summary: The product name associated with the source that reported the entity.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: string
+  description: The product name associated with the source that reported the entity.

@@ -1,0 +1,8 @@
+name: DhcpCircuitId
+summary: The DHCP circuit ID, as defined by RFC3046
+schemas:
+- name: DhcpEvent
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP circuit ID, as defined by RFC3046

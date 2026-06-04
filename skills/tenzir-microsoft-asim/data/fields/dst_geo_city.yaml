@@ -1,0 +1,17 @@
+name: DstGeoCity
+summary: The city associated with the destination IP address. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: City
+  description: The city associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Burlington
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: City
+  description: The city associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Burlington

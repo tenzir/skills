@@ -1,0 +1,267 @@
+aliases:
+  AlertDescription:
+    to:
+    - EventMessage
+    schemas:
+    - AlertEvent
+  AlertId:
+    to:
+    - EventUid
+    schemas:
+    - AlertEvent
+  Application:
+    to:
+    - TargetAppName
+    schemas:
+    - AuditEvent
+    - Authentication
+    - FileEvent
+  AssetPath:
+    to:
+    - FilePath
+    - SitePath
+    schemas:
+    - AssetEntity
+  CommandLine:
+    to:
+    - TargetProcessCommandLine
+    schemas:
+    - ProcessEvent
+  DnsResponseCodeName:
+    to:
+    - EventResultDetails
+    schemas:
+    - Dns
+  Domain:
+    to:
+    - DnsQuery
+    schemas:
+    - Dns
+  DomainCategory:
+    to:
+    - UrlCategory
+    schemas:
+    - Dns
+  Dst:
+    to:
+    - DstDvcId
+    - DstHostname
+    - DstIpAddr
+    - TargetAppId
+    - TargetAppName
+    - TargetDvcId
+    - TargetHostname
+    - TargetIpAddr
+    schemas:
+    - AuditEvent
+    - Authentication
+    - Dns
+    - NetworkSession
+    resolution:
+    - schema: AuditEvent
+      rule: A unique identifier of the authentication target. This field may alias the TargetDvcId, TargetHostname, TargetIpAddr, TargetAppId, or TargetAppName fields.
+    - schema: Authentication
+      rule: A unique identifier of the authentication target. This field may alias the TargetDvcId, TargetHostname, TargetIpAddr, TargetAppId, or TargetAppName fields.
+    - schema: Dns
+      rule: A unique identifier of the server that received the DNS request. This field may alias the DstDvcId, DstHostname, or DstIpAddr fields.
+    - schema: NetworkSession
+      rule: A unique identifier of the server receiving the DNS request. This field might alias the DstDvcId, DstHostname, or DstIpAddr fields.
+  Duration:
+    to:
+    - DhcpSessionDuration
+    - DnsNetworkDuration
+    - NetworkDuration
+    schemas:
+    - DhcpEvent
+    - Dns
+    - NetworkSession
+  FileName:
+    to:
+    - TargetFileName
+    schemas:
+    - FileEvent
+  FilePath:
+    to:
+    - TargetFilePath
+    schemas:
+    - FileEvent
+  Hash:
+    schemas:
+    - FileEvent
+    - ProcessEvent
+    - WebSession
+    resolution:
+    - schema: FileEvent
+      rule: Alias to the best available Target File hash.
+    - schema: ProcessEvent
+      rule: Alias to the best available hash for the target process.
+    - schema: WebSession
+      rule: Alias to the available Hash field.
+  Hostname:
+    to:
+    - DstHostname
+    - DvcHostname
+    - RemoteHostname
+    - SrcHostName
+    - SrcHostname
+    schemas:
+    - AlertEvent
+    - DhcpEvent
+    - Dns
+    - NetworkSession
+    - UserManagement
+    resolution:
+    - schema: NetworkSession
+      rule: '- If the event type is NetworkSession, Flow or L2NetworkSession, Hostname is an alias to DstHostname. - If the event type is EndpointNetworkSession, Hostname is an alias to RemoteHostname, which can alias either DstHostname or SrcHostName, depending on NetworkDirection'
+  HttpStatusCode:
+    to:
+    - EventResultDetails
+    schemas:
+    - WebSession
+    resolution:
+    - schema: WebSession
+      rule: The HTTP Status Code. Alias to EventResultDetails.
+  InnerVlanId:
+    to:
+    - SrcVlanId
+    schemas:
+    - NetworkSession
+  IpAddr:
+    to:
+    - DstIpAddr
+    - DvcIpAddr
+    - LocalIpAddr
+    - SrcIpAddr
+    - TargetIpAddr
+    schemas:
+    - AlertEvent
+    - AuditEvent
+    - Authentication
+    - DhcpEvent
+    - Dns
+    - FileEvent
+    - NetworkSession
+    - UserManagement
+    resolution:
+    - schema: AuditEvent
+      rule: Alias to SrcIpAddr, or to TargetIpAddr if SrcIpAddr is not provided.
+    - schema: NetworkSession
+      rule: '- If the event type is NetworkSession, Flow or L2NetworkSession, IpAddr is an alias to SrcIpAddr. - If the event type is EndpointNetworkSession, IpAddr is an alias to LocalIpAddr, which can alias either SrcIpAddr or DstIpAddr, depending on NetworkDirection.'
+  LogonTarget:
+    to:
+    - TargetAppName
+    - TargetHostname
+    - TargetUrl
+    schemas:
+    - Authentication
+  OuterVlanId:
+    to:
+    - DstVlanId
+    schemas:
+    - NetworkSession
+  Process:
+    to:
+    - ActingProcessName
+    - DstProcessName
+    - SrcProcessName
+    - TargetProcessName
+    schemas:
+    - Dns
+    - FileEvent
+    - NetworkSession
+    - ProcessEvent
+    - RegistryEvent
+  Rule:
+    schemas:
+    - AlertEvent
+    - AuditEvent
+    - Authentication
+    - DhcpEvent
+    - Dns
+    - NetworkSession
+    resolution:
+    - schema: AlertEvent
+      rule: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+    - schema: AuditEvent
+      rule: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+    - schema: Authentication
+      rule: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+    - schema: DhcpEvent
+      rule: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+    - schema: Dns
+      rule: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+    - schema: NetworkSession
+      rule: Either the value of NetworkRuleName or the value of NetworkRuleNumber. If the value of NetworkRuleNumber is used, the type should be converted to string.
+  SessionId:
+    to:
+    - DhcpSessionId
+    - DnsSessionId
+    - NetworkSessionId
+    schemas:
+    - DhcpEvent
+    - Dns
+    - NetworkSession
+  Src:
+    to:
+    - SrcDvcId
+    - SrcHostname
+    - SrcIpAddr
+    schemas:
+    - AuditEvent
+    - DhcpEvent
+    - Dns
+    - FileEvent
+    - NetworkSession
+    resolution:
+    - schema: AuditEvent
+      rule: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+    - schema: DhcpEvent
+      rule: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+    - schema: Dns
+      rule: A unique identifier of the source device. This field can alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+    - schema: NetworkSession
+      rule: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  UpdatedPropertyName:
+    to:
+    - EventSubType
+    schemas:
+    - UserManagement
+  Url:
+    to:
+    - TargetUrl
+    schemas:
+    - FileEvent
+  User:
+    to:
+    - ActorUsername
+    - AssetOwnerId
+    - DstUsername
+    - SrcUsername
+    - TargetUserId
+    - TargetUsername
+    - Username
+    schemas:
+    - AlertEvent
+    - AssetEntity
+    - AuditEvent
+    - Authentication
+    - DhcpEvent
+    - Dns
+    - FileEvent
+    - NetworkSession
+    - ProcessEvent
+    - RegistryEvent
+    - UserManagement
+    resolution:
+    - schema: Authentication
+      rule: Alias to the TargetUsername or to the TargetUserId if TargetUsername is not defined.
+  UserAgent:
+    to:
+    - HttpUserAgent
+    schemas:
+    - WebSession
+  Value:
+    to:
+    - NewValue
+    schemas:
+    - AuditEvent

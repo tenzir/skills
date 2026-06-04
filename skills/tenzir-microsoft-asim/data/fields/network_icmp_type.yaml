@@ -1,0 +1,11 @@
+name: NetworkIcmpType
+summary: For an ICMP message, ICMP type name associated with the numerical value, as described in RFC 2780 for IPv4 network connections, or in RFC 4443 for IPv6 network connections.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: String
+  description: For an ICMP message, ICMP type name associated with the numerical value, as described in RFC 2780 for IPv4 network connections, or in RFC 4443 for IPv6 network connections.
+  examples:
+  - Destination Unreachable
+  - '3'

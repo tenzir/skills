@@ -1,0 +1,10 @@
+name: NetworkPackets
+summary: The number of packets sent in both directions. If both PacketsReceived and PacketsSent exist, PacketsTotal should equal their sum. The meaning of a packet is defined by the reporting device. If the event is aggregated, NetworkPackets should be the sum over all aggregated sessions.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Long
+  description: The number of packets sent in both directions. If both PacketsReceived and PacketsSent exist, PacketsTotal should equal their sum. The meaning of a packet is defined by the reporting device. If the event is aggregated, NetworkPackets should be the sum over all aggregated sessions.
+  examples:
+  - '6924'

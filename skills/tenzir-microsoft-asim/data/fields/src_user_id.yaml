@@ -1,0 +1,24 @@
+name: SrcUserId
+summary: A machine-readable, alphanumeric, unique representation of the source user. For more information, and for alternative fields for additional IDs, see The User entity.
+schemas:
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the source user. For more information, and for alternative fields for additional IDs, see The User entity.
+  examples:
+  - S-1-12-1-4141952679-1282074057-627758481-2916039507
+- name: Dns
+  role: source
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the source user. For more information, and for alternative fields for additional IDs, see The User entity.
+  examples:
+  - S-1-12-1-4141952679-1282074057-627758481-2916039507
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the source user. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12

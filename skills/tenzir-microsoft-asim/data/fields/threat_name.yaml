@@ -1,0 +1,63 @@
+name: ThreatName
+summary: The name of the threat or malware identified in the alert. e.g. Init.exe
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The name of the threat or malware identified in the alert. e.g. Init.exe
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the audit activity.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the audit activity.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The name of the threat or malware identified in the alert. e.g. Init.exe
+- name: Dns
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat identified, as reported by the reporting device.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the file activity.
+  examples:
+  - EICAR Test File
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the network session.
+  examples:
+  - EICAR Test File
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the file activity.
+  examples:
+  - EICAR Test File
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the file activity.
+  examples:
+  - EICAR Test File
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the file activity.
+  examples:
+  - EICAR Test File

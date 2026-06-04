@@ -1,0 +1,13 @@
+name: TargetDeviceType
+summary: The type of the target device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Enumerated
+  description: The type of the target device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+- name: Authentication
+  role: target
+  class: Optional
+  type: Enumerated
+  description: The type of the target device. For a list of allowed values and further information refer to DeviceType in the Schema Overview article.

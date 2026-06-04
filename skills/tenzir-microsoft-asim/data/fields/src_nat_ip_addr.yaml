@@ -1,0 +1,10 @@
+name: SrcNatIpAddr
+summary: 'The SrcNatIpAddr represents either of: - The original address of the source device if network address translation was used. - The IP address used by the intermediary device for communication with the destination.'
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: IP address
+  description: 'The SrcNatIpAddr represents either of: - The original address of the source device if network address translation was used. - The IP address used by the intermediary device for communication with the destination.'
+  examples:
+  - 4.3.2.1

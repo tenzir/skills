@@ -1,0 +1,7 @@
+name: SitePrimaryUri
+summary: The primary URI of the site or storage location associated with the asset.
+schemas:
+- name: AssetEntity
+  class: Optional
+  type: string
+  description: The primary URI of the site or storage location associated with the asset.

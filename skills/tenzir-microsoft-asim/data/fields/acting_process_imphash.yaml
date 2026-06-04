@@ -1,0 +1,8 @@
+name: ActingProcessIMPHASH
+summary: The Import Hash of all the library DLLs that are used by the acting process.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The Import Hash of all the library DLLs that are used by the acting process.

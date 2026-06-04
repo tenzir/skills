@@ -1,0 +1,13 @@
+name: DstDvcScope
+summary: The cloud platform scope the device belongs to. DstDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. DstDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. DstDvcScope map to a subscription ID on Azure and to an account ID on AWS.

@@ -1,0 +1,8 @@
+name: RuleDescription
+summary: Description of the rule associated with the alert. e.g. This rule detects remote execution on a server using PSEXEC, which may indicate unauthorized administrative activity or lateral movement within the network
+schemas:
+- name: AlertEvent
+  role: rule
+  class: Optional
+  type: string
+  description: Description of the rule associated with the alert. e.g. This rule detects remote execution on a server using PSEXEC, which may indicate unauthorized administrative activity or lateral movement within the network

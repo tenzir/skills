@@ -1,0 +1,17 @@
+name: TargetGeoCountry
+summary: The country/region associated with the Target IP address.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Country
+  description: The country/region associated with the Target IP address.
+  examples:
+  - USA
+- name: Authentication
+  role: target
+  class: Optional
+  type: Country
+  description: The country/region associated with the target IP address.
+  examples:
+  - USA

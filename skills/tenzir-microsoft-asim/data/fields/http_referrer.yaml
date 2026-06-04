@@ -1,0 +1,11 @@
+name: HttpReferrer
+summary: The HTTP referrer header.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The HTTP referrer header.
+  examples:
+  - https://developer.mozilla.org/docs
+  notes: ASIM, in sync with OSSEM, uses the correct spelling for referrer, and not the original HTTP header spelling.

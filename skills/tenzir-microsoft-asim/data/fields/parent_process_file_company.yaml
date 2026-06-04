@@ -1,0 +1,10 @@
+name: ParentProcessFileCompany
+summary: The name of the company that created the parent process image file.
+schemas:
+- name: ProcessEvent
+  role: file
+  class: Optional
+  type: String
+  description: The name of the company that created the parent process image file.
+  examples:
+  - Microsoft

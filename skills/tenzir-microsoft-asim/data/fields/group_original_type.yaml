@@ -1,0 +1,8 @@
+name: GroupOriginalType
+summary: The original group type, if provided by the source.
+schemas:
+- name: UserManagement
+  role: group
+  class: Optional
+  type: String
+  description: The original group type, if provided by the source.

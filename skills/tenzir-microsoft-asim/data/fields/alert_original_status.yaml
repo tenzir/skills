@@ -1,0 +1,8 @@
+name: AlertOriginalStatus
+summary: The status of the alert as reported by the originating system.
+schemas:
+- name: AlertEvent
+  role: alert
+  class: Optional
+  type: string
+  description: The status of the alert as reported by the originating system.

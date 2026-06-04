@@ -1,0 +1,8 @@
+name: FileIsSignatureValid
+summary: Indicates whether the digital signature of the file is valid.
+schemas:
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: bool
+  description: Indicates whether the digital signature of the file is valid.

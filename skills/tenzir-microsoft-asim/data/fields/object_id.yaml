@@ -1,0 +1,7 @@
+name: ObjectId
+summary: The ID of the object on which the operation identified by EventType is performed.
+schemas:
+- name: AuditEvent
+  class: Optional
+  type: String
+  description: The ID of the object on which the operation identified by EventType is performed.

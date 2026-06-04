@@ -1,0 +1,9 @@
+name: DstUserType
+summary: The type of destination user. For a list of allowed values and further information, refer to UserType in the Schema Overview article.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: UserType
+  description: The type of destination user. For a list of allowed values and further information, refer to UserType in the Schema Overview article.
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the DstOriginalUserType field.

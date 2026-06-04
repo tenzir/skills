@@ -1,0 +1,20 @@
+name: DstIpAddr
+summary: The IP address of the server that received the DNS request. For a regular DNS request, this value would typically be the reporting device, and in most cases set to 127.0.0.1.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: IP Address
+  description: The IP address of the server that received the DNS request. For a regular DNS request, this value would typically be the reporting device, and in most cases set to 127.0.0.1.
+  examples:
+  - 127.0.0.1
+- name: NetworkSession
+  role: destination
+  class: Recommended
+  type: IP address
+  required_if:
+  - DstHostname is specified
+  description: The IP address of the connection or session destination. If the session uses network address translation, DstIpAddr is the publicly visible address, and not the original address of the source, which is stored in DstNatIpAddr
+  examples:
+  - 2001:db8::ff00:42:8329
+  notes: This value is mandatory if DstHostname is specified.

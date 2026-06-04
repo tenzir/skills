@@ -1,0 +1,8 @@
+name: IdentityDirectoryId
+summary: The identifier of the identity directory associated with the entity.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: string
+  description: The identifier of the identity directory associated with the entity.

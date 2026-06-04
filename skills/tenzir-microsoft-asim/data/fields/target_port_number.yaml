@@ -1,0 +1,13 @@
+name: TargetPortNumber
+summary: The port of the target device.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Integer
+  description: The port of the target device.
+- name: Authentication
+  role: target
+  class: Optional
+  type: Integer
+  description: The port of the target device.

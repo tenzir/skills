@@ -1,0 +1,10 @@
+name: DvcOutboundInterface
+summary: If reported by an intermediary device, the network interface used by the NAT device for the connection to the destination device.
+schemas:
+- name: NetworkSession
+  role: device
+  class: Optional
+  type: String
+  description: If reported by an intermediary device, the network interface used by the NAT device for the connection to the destination device.
+  examples:
+  - Ethernet adapter Ethernet 4e

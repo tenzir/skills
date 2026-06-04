@@ -1,0 +1,52 @@
+name: SrcGeoCity
+summary: The city associated with the source IP address.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: Authentication
+  role: source
+  class: Optional
+  type: City
+  description: For more information, see Logical types.
+  examples:
+  - Montreal
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: Dns
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: FileEvent
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: UserManagement
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington

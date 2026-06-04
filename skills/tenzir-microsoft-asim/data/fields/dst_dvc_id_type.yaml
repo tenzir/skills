@@ -1,0 +1,20 @@
+name: DstDvcIdType
+summary: 'The type of DstDvcId, if known. Possible values include: - AzureResourceId - MDEidIf If multiple IDs are available, use the first one from the list above, and store the others in the DstDvcAzureResourceId or DstDvcMDEid fields, respectively. Required if DstDeviceId is used.'
+schemas:
+- name: Dns
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDeviceId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEidIf
+  description: 'The type of DstDvcId, if known. Possible values include: - AzureResourceId - MDEidIf If multiple IDs are available, use the first one from the list above, and store the others in the DstDvcAzureResourceId or DstDvcMDEid fields, respectively. Required if DstDeviceId is used.'
+- name: NetworkSession
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDeviceId is used
+  description: The type of DstDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article. Required if DstDeviceId is used.

@@ -1,0 +1,8 @@
+name: UserType
+summary: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. e.g. Guest
+schemas:
+- name: AlertEvent
+  role: user
+  class: Optional
+  type: UserType
+  description: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. e.g. Guest

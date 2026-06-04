@@ -1,0 +1,8 @@
+name: AlertName
+summary: Title or name of the alert. e.g. Possible use of the Rubeus kerberoasting tool
+schemas:
+- name: AlertEvent
+  role: alert
+  class: Recommended
+  type: string
+  description: Title or name of the alert. e.g. Possible use of the Rubeus kerberoasting tool

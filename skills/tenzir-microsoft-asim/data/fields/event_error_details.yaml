@@ -1,0 +1,8 @@
+name: EventErrorDetails
+summary: Details about the error associated with the event.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: Details about the error associated with the event.

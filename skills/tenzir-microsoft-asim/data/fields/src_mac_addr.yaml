@@ -1,0 +1,25 @@
+name: SrcMacAddr
+summary: The MAC address of the client requesting a DHCP lease.
+schemas:
+- name: DhcpEvent
+  role: source
+  class: Mandatory
+  type: Mac Address
+  description: The MAC address of the client requesting a DHCP lease.
+  examples:
+  - 06:10:9f:eb:8f:14
+  notes: The Windows DHCP server logs MAC address in a nonstandard way, omitting the colons, which should be inserted by the parser.
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: MAC Address (String)
+  description: The MAC address of the network interface from which the connection or session originated.
+  examples:
+  - 06:10:9f:eb:8f:14
+- name: UserManagement
+  role: source
+  class: Optional
+  type: MAC Address (String)
+  description: The MAC address of the network interface from which the connection or session originated.
+  examples:
+  - 06:10:9f:eb:8f:14

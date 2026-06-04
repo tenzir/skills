@@ -1,0 +1,10 @@
+name: SrcAppId
+summary: The ID of the source application, as reported by the reporting device. If SrcAppType is Process, SrcAppId and SrcProcessId should have the same value.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source application, as reported by the reporting device. If SrcAppType is Process, SrcAppId and SrcProcessId should have the same value.
+  examples:
+  - '124'

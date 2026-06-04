@@ -1,0 +1,17 @@
+name: DstGeoRegion
+summary: The region, or state, associated with the destination IP address. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Region
+  description: The region, or state, associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Vermont
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: Region
+  description: The region, or state, associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Vermont

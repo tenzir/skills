@@ -1,0 +1,10 @@
+name: OuterVlanId
+summary: OuterVlanId is an alias for DstVlanId.
+to:
+- DstVlanId
+schemas:
+- name: NetworkSession
+  role: network
+  class: Alias
+  to:
+  - DstVlanId

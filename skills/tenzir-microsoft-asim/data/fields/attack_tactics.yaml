@@ -1,0 +1,8 @@
+name: AttackTactics
+summary: 'The attack tactics (name, ID, or both) associated with the alert. Preferred format: e.g: Persistence, Privilege Escalation'
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Recommended
+  type: string
+  description: 'The attack tactics (name, ID, or both) associated with the alert. Preferred format: e.g: Persistence, Privilege Escalation'

@@ -1,0 +1,42 @@
+name: EventResult
+summary: If the source device does not provide an event result, EventResult should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventResult should be Failure. Otherwise, EventResult should be Success.
+schemas:
+- name: AlertEvent
+  role: common
+  class: Optional
+- name: AuditEvent
+  role: common
+  class: Mandatory
+- name: Authentication
+  role: common
+  class: Mandatory
+- name: DhcpEvent
+  role: common
+  class: Mandatory
+- name: Dns
+  role: common
+  class: Mandatory
+- name: FileEvent
+  role: common
+  class: Mandatory
+- name: NetworkSession
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: If the source device does not provide an event result, EventResult should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventResult should be Failure. Otherwise, EventResult should be Success.
+- name: ProcessEvent
+  role: common
+  class: Mandatory
+- name: RegistryEvent
+  role: common
+  class: Mandatory
+- name: UserManagement
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: While failure is possible, most systems report only successful user management events. The expected value for successful events is Success.
+- name: WebSession
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: 'Describes the event result, normalized to one of the following values: - Success - Partial - Failure - NA (not applicable) For an HTTP session, Success is defined as a status code lower than 400, and Failure is defined as a status code higher than 400. For a list of HTTP status codes, refer to W3 Org. The source may provide only a value for the EventResultDetails field, which must be analyzed to get the EventResult value.'

@@ -1,0 +1,52 @@
+name: SrcDomain
+summary: The domain of the source device.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: Authentication
+  role: source
+  class: Optional
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: DhcpEvent
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: Dns
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: NetworkSession
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: UserManagement
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso

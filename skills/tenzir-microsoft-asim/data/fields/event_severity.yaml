@@ -1,0 +1,40 @@
+name: EventSeverity
+summary: If the source device does not provide an event severity, EventSeverity should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventSeverity should be Low. Otherwise, EventSeverity should be Informational.
+schemas:
+- name: AlertEvent
+  role: common
+  class: Recommended
+- name: AuditEvent
+  role: common
+  class: Recommended
+- name: Authentication
+  role: common
+  class: Recommended
+- name: DhcpEvent
+  role: common
+  class: Recommended
+- name: Dns
+  role: common
+  class: Recommended
+- name: FileEvent
+  role: common
+  class: Recommended
+- name: NetworkSession
+  role: common
+  class: Recommended
+  type: Enumerated
+  description: If the source device does not provide an event severity, EventSeverity should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventSeverity should be Low. Otherwise, EventSeverity should be Informational.
+- name: ProcessEvent
+  role: common
+  class: Recommended
+- name: RegistryEvent
+  role: common
+  class: Recommended
+- name: UserManagement
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: While any valid severity value is allowed, the severity of user management events is typically Informational.
+- name: WebSession
+  role: common
+  class: Recommended

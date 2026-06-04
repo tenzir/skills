@@ -1,0 +1,20 @@
+name: FileSHA256
+summary: SHA256 hash of the file. e.g. a1bc2de3fh4ij5kl6mn7op8qrs2de3
+schemas:
+- name: AlertEvent
+  role: file
+  class: Optional
+  type: string
+  description: SHA256 hash of the file. e.g. a1bc2de3fh4ij5kl6mn7op8qrs2de3
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: string
+  description: The SHA-256 hash of the file associated with the asset.
+- name: WebSession
+  role: file
+  class: Optional
+  type: SHA256
+  description: For HTTP uploads, the SHA256 hash of the uploaded file. 2e1ec8cbb00b22629d2899f7c68da274
+  examples:
+  - e81bb824c4a09a811af17deae22f22dd

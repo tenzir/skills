@@ -1,0 +1,14 @@
+name: UpdatedPropertyName
+summary: UpdatedPropertyName is an alias for EventSubType.
+to:
+- EventSubType
+schemas:
+- name: UserManagement
+  role: object
+  class: Alias
+  to:
+  - EventSubType
+  allowed_values:
+  - MultipleProperties
+  - Previous, where is one of the supported values for UpdatedPropertyName
+  - New, where is one of the supported values for UpdatedPropertyName

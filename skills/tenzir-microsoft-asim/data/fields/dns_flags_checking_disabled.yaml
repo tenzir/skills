@@ -1,0 +1,8 @@
+name: DnsFlagsCheckingDisabled
+summary: The DNS CD flag, which is related to DNSSEC, indicates in a query that non-verified data is acceptable to the system sending the query. For more information, see RFC 3655 Section 6.1 for more information.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS CD flag, which is related to DNSSEC, indicates in a query that non-verified data is acceptable to the system sending the query. For more information, see RFC 3655 Section 6.1 for more information.

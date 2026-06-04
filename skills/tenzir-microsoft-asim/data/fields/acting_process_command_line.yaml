@@ -1,0 +1,17 @@
+name: ActingProcessCommandLine
+summary: The command line used to run the acting process.
+schemas:
+- name: FileEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The command line used to run the acting process.
+  examples:
+  - '"choco.exe" -v'
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The command line used to run the acting process.
+  examples:
+  - '"choco.exe" -v'

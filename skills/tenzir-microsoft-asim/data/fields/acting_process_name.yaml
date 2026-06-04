@@ -1,0 +1,24 @@
+name: ActingProcessName
+summary: The name of the acting process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+schemas:
+- name: FileEvent
+  role: acting
+  class: Optional
+  type: string
+  description: The name of the acting process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+  examples:
+  - C:\Windows\explorer.exe
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: string
+  description: The name of the acting process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+  examples:
+  - C:\Windows\explorer.exe
+- name: RegistryEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The file name of the acting process image file. This name is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe

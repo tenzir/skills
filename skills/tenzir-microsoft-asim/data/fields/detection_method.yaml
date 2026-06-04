@@ -1,0 +1,21 @@
+name: DetectionMethod
+summary: 'Provides detailed information about the specific detection method, technology, or data source that contributed to the generation of the alert. This field offers greater insight into how the alert was detected or triggered, aiding in the understanding of the detection context and reliability. Supported values include: - EDR: Endpoint Detection and Response systems that monitor and analyze endpoint activities to identify threats. - Behavioral Analytics: Techniques that detect abnormal patterns in user, device, or system behavior. - Reputation: Threat detection based on the reputation of IP addresses, domains, or files. - Threat Intelligence: External or internal intelligence feeds providing data on known threats or adversary tactics. - Intrusion Detection: Systems that monitor network traffic or activities for signs of intrusions or attacks. - Automated Investigation: Automated systems that analyze and investigate alerts, reducing manual workload. - Antivirus: Traditional antivirus engines that detect malware based on signatures and heuristics. - Data Loss Prevention: Solutions focused on preventing unauthorized data transfers or leaks. - User Defined Blocked List: Custom lists defined by users to block specific IPs, domains, or files. - Cloud Security Posture Management: Tools that assess and manage security risks in cloud environments. - Cloud Application Security: Solutions that secure cloud applications and data. -Scheduled Alerts: Alerts generated based on predefined schedules or thresholds. - Other: Any other detection method not covered by the above categories.'
+schemas:
+- name: AlertEvent
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - EDR
+  - Behavioral Analytics
+  - Reputation
+  - Threat Intelligence
+  - Intrusion Detection
+  - Automated Investigation
+  - Antivirus
+  - Data Loss Prevention
+  - User Defined Blocked List
+  - Cloud Security Posture Management
+  - Cloud Application Security
+  - Scheduled Alerts
+  - Other
+  description: 'Provides detailed information about the specific detection method, technology, or data source that contributed to the generation of the alert. This field offers greater insight into how the alert was detected or triggered, aiding in the understanding of the detection context and reliability. Supported values include: - EDR: Endpoint Detection and Response systems that monitor and analyze endpoint activities to identify threats. - Behavioral Analytics: Techniques that detect abnormal patterns in user, device, or system behavior. - Reputation: Threat detection based on the reputation of IP addresses, domains, or files. - Threat Intelligence: External or internal intelligence feeds providing data on known threats or adversary tactics. - Intrusion Detection: Systems that monitor network traffic or activities for signs of intrusions or attacks. - Automated Investigation: Automated systems that analyze and investigate alerts, reducing manual workload. - Antivirus: Traditional antivirus engines that detect malware based on signatures and heuristics. - Data Loss Prevention: Solutions focused on preventing unauthorized data transfers or leaks. - User Defined Blocked List: Custom lists defined by users to block specific IPs, domains, or files. - Cloud Security Posture Management: Tools that assess and manage security risks in cloud environments. - Cloud Application Security: Solutions that secure cloud applications and data. -Scheduled Alerts: Alerts generated based on predefined schedules or thresholds. - Other: Any other detection method not covered by the above categories.'

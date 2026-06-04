@@ -1,0 +1,10 @@
+name: SrcAppName
+summary: The name of the source application.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The name of the source application.
+  examples:
+  - filezilla.exe

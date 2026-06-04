@@ -1,0 +1,14 @@
+name: AssetSensitivityLabel
+summary: 'The sensitivity label applied to the asset. The allowed values are: Personal, Public, General, Confidential, Highly Confidential.'
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Mandatory
+  type: string
+  allowed_values:
+  - Personal
+  - Public
+  - General
+  - Confidential
+  - Highly Confidential
+  description: 'The sensitivity label applied to the asset. The allowed values are: Personal, Public, General, Confidential, Highly Confidential.'

@@ -1,0 +1,54 @@
+name: IpAddr
+summary: IpAddr is an alias for DstIpAddr, DvcIpAddr, LocalIpAddr, SrcIpAddr, TargetIpAddr.
+to:
+- DstIpAddr
+- DvcIpAddr
+- LocalIpAddr
+- SrcIpAddr
+- TargetIpAddr
+schemas:
+- name: AlertEvent
+  role: network
+  class: Alias
+  to:
+  - DvcIpAddr
+- name: AuditEvent
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+  - TargetIpAddr
+  resolution: Alias to SrcIpAddr, or to TargetIpAddr if SrcIpAddr is not provided.
+- name: Authentication
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: DhcpEvent
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: Dns
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: FileEvent
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: NetworkSession
+  role: network
+  class: Alias
+  to:
+  - DstIpAddr
+  - LocalIpAddr
+  - SrcIpAddr
+  resolution: '- If the event type is NetworkSession, Flow or L2NetworkSession, IpAddr is an alias to SrcIpAddr. - If the event type is EndpointNetworkSession, IpAddr is an alias to LocalIpAddr, which can alias either SrcIpAddr or DstIpAddr, depending on NetworkDirection.'
+- name: UserManagement
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr

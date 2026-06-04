@@ -1,0 +1,10 @@
+name: DstAppName
+summary: The name of the destination application.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The name of the destination application.
+  examples:
+  - Facebook

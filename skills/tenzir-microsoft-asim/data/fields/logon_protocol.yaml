@@ -1,0 +1,9 @@
+name: LogonProtocol
+summary: The protocol used to perform authentication.
+schemas:
+- name: Authentication
+  class: Optional
+  type: String
+  description: The protocol used to perform authentication.
+  examples:
+  - NTLM

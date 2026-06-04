@@ -1,0 +1,10 @@
+name: HttpRequestMethod
+summary: The HTTP Method. The values are as defined in RFC 7231 and RFC 5789, and include GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, and PATCH.
+schemas:
+- name: WebSession
+  role: http
+  class: Recommended
+  type: Enumerated
+  description: The HTTP Method. The values are as defined in RFC 7231 and RFC 5789, and include GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, and PATCH.
+  examples:
+  - GET

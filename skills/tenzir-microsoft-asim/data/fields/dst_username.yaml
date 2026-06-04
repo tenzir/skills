@@ -1,0 +1,10 @@
+name: DstUsername
+summary: The destination username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the DstUsernameType field. If other username formats are available, store them in the fields DstUsername.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: Username (String)
+  description: The destination username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the DstUsernameType field. If other username formats are available, store them in the fields DstUsername.
+  examples:
+  - AlbertE

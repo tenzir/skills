@@ -1,0 +1,8 @@
+name: DnsResponseName
+summary: The content of the response, as included in the record. The DNS response data is inconsistent across reporting devices, is complex to parse, and has less value for source-agnostic analytics. Therefore the information model doesn't require parsing and normalization, and Microsoft Sentinel uses an auxiliary function to provide response information. For more information, see Handling DNS response.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: String
+  description: The content of the response, as included in the record. The DNS response data is inconsistent across reporting devices, is complex to parse, and has less value for source-agnostic analytics. Therefore the information model doesn't require parsing and normalization, and Microsoft Sentinel uses an auxiliary function to provide response information. For more information, see Handling DNS response.

@@ -1,0 +1,8 @@
+name: TargetProcessStatusCode
+summary: The exit code returned by the target process when terminated. This field is valid only for process termination events. For consistency, the field type is string, even if value provided by the operating system is numeric.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The exit code returned by the target process when terminated. This field is valid only for process termination events. For consistency, the field type is string, even if value provided by the operating system is numeric.

@@ -1,0 +1,10 @@
+name: SrcZone
+summary: The network zone of the source, as defined by the reporting device.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The network zone of the source, as defined by the reporting device.
+  examples:
+  - Internet

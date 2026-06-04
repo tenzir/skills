@@ -1,0 +1,17 @@
+name: DstGeoLatitude
+summary: The latitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '44.475833'
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '44.475833'

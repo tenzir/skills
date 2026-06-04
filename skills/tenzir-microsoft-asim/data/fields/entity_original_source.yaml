@@ -1,0 +1,8 @@
+name: EntityOriginalSource
+summary: The original data source or connector that provided the entity record, if the source is currently not supported.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Optional
+  type: string
+  description: The original data source or connector that provided the entity record, if the source is currently not supported.

@@ -1,0 +1,8 @@
+name: AssetClassificationLastScanDateTime
+summary: The timestamp (UTC) of when the asset was last scanned for data classification.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Mandatory
+  type: datetime
+  description: The timestamp (UTC) of when the asset was last scanned for data classification.

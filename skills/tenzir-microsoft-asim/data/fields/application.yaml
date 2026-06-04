@@ -1,0 +1,20 @@
+name: Application
+summary: Application is an alias for TargetAppName.
+to:
+- TargetAppName
+schemas:
+- name: AuditEvent
+  role: application
+  class: Alias
+  to:
+  - TargetAppName
+- name: Authentication
+  role: application
+  class: Alias
+  to:
+  - TargetAppName
+- name: FileEvent
+  role: application
+  class: Alias
+  to:
+  - TargetAppName

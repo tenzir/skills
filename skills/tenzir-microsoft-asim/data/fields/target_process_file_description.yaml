@@ -1,0 +1,10 @@
+name: TargetProcessFileDescription
+summary: The description from the version information in the target process image file.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The description from the version information in the target process image file.
+  examples:
+  - 'Notepad++ : a free (GPL) source code editor'

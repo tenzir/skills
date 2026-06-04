@@ -1,0 +1,1036 @@
+name: NetworkSession
+title: Network Session
+kind: event
+version: 0.2.7
+status: GA
+summary: The Microsoft Sentinel Network Session normalization schema represents an IP network activity, such as network connections and network sessions. Such events are reported, for example, by operating systems, routers, firewalls, and intrusion prevention systems. The network normalization schema can represent any type of an IP network session but is designed to provide support for common source types, such as Netflow, firewalls, and intrusion prevention systems. For more information about normalization in Microsoft Sentinel, see Normalization and the Advanced Security Information Model (ASIM).
+fields:
+- name: Dvc
+  role: device
+  class: Mandatory
+  description: For Network Session events, device fields refer to the system reporting the Network Session event.
+- name: EventCount
+  role: common
+  class: Mandatory
+  type: Integer
+  description: Netflow sources support aggregation, and the EventCount field should be set to the value of the Netflow FLOWS field. For other sources, the value is typically set to 1.
+- name: EventEndTime
+  role: common
+  class: Mandatory
+- name: EventProduct
+  role: common
+  class: Mandatory
+- name: EventResult
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: If the source device does not provide an event result, EventResult should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventResult should be Failure. Otherwise, EventResult should be Success.
+- name: EventSchema
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: NetworkSession
+  description: The name of the schema documented here is NetworkSession.
+- name: EventSchemaVersion
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.2.7
+  description: The version of the schema. The version of the schema documented here is 0.2.7.
+- name: EventStartTime
+  role: common
+  class: Mandatory
+- name: EventType
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - EndpointNetworkSession
+  - NetworkSession
+  - L2NetworkSession
+  - IDS
+  - Flow
+  description: 'Describes the scenario reported by the record. For Network Session records, the allowed values are: - EndpointNetworkSession - NetworkSession - L2NetworkSession - IDS - Flow For more information on event types, refer to the schema overview'
+- name: EventVendor
+  role: common
+  class: Mandatory
+- name: ASimMatchingHostname
+  role: common
+  class: Recommended
+  type: Enumerated
+  description: When a parser uses the hostname_has_any filtering parameters, this field is set with the one of the values SrcHostname, DstHostname, or Both to reflect the matching fields or fields.
+- name: ASimMatchingIpAddr
+  role: common
+  class: Recommended
+  type: Enumerated
+  description: When a parser uses the ipaddr_has_any_prefix filtering parameters, this field is set with the one of the values SrcIpAddr, DstIpAddr, or Both to reflect the matching fields or fields.
+- name: DstBytes
+  role: destination
+  class: Recommended
+  type: Long
+  description: The number of bytes sent from the destination to the source for the connection or session. If the event is aggregated, DstBytes should be the sum over all aggregated sessions.
+  examples:
+  - '32455'
+- name: DstDomain
+  role: destination
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the destination device.
+  examples:
+  - Contoso
+- name: DstHostname
+  role: destination
+  class: Recommended
+  type: Hostname (String)
+  description: The destination device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: DstIpAddr
+  role: destination
+  class: Recommended
+  type: IP address
+  required_if:
+  - DstHostname is specified
+  description: The IP address of the connection or session destination. If the session uses network address translation, DstIpAddr is the publicly visible address, and not the original address of the source, which is stored in DstNatIpAddr
+  examples:
+  - 2001:db8::ff00:42:8329
+  notes: This value is mandatory if DstHostname is specified.
+- name: DvcAction
+  role: device
+  class: Recommended
+  type: Enumerated
+  allowed_values:
+  - Allow
+  - Deny
+  - Drop
+  - Drop ICMP
+  - Reset
+  - Reset Source
+  - Reset Destination
+  - Encrypt
+  - Decrypt
+  - VPNroute
+  description: 'The action taken on the network session. Supported values are: - Allow - Deny - Drop - Drop ICMP - Reset - Reset Source - Reset Destination - Encrypt - Decrypt - VPNroute'
+  examples:
+  - drop
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. The original value should be stored in the DvcOriginalAction field.
+- name: DvcDomain
+  role: device
+  class: Recommended
+- name: DvcDomainType
+  role: device
+  class: Recommended
+- name: DvcFQDN
+  role: device
+  class: Recommended
+- name: DvcHostname
+  role: device
+  class: Recommended
+- name: DvcId
+  role: device
+  class: Recommended
+- name: DvcIdType
+  role: device
+  class: Recommended
+- name: DvcIpAddr
+  role: device
+  class: Recommended
+- name: EventResultDetails
+  role: common
+  class: Recommended
+  type: Enumerated
+  allowed_values:
+  - Failover
+  - Invalid TCP
+  - Invalid Tunnel
+  - Maximum Retry
+  - Reset
+  - Routing issue
+  - Simulation
+  - Terminated
+  - Timeout
+  - Transient error
+  - Unknown
+  - NA
+  description: 'Reason or details for the result reported in the EventResult field. Supported values are: - Failover - Invalid TCP - Invalid Tunnel - Maximum Retry - Reset - Routing issue - Simulation - Terminated - Timeout - Transient error - Unknown - NA. The original, source specific, value is stored in the EventOriginalResultDetails field.'
+- name: EventSeverity
+  role: common
+  class: Recommended
+  type: Enumerated
+  description: If the source device does not provide an event severity, EventSeverity should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventSeverity should be Low. Otherwise, EventSeverity should be Informational.
+- name: EventUid
+  role: common
+  class: Recommended
+- name: SrcBytes
+  role: source
+  class: Recommended
+  type: Long
+  description: The number of bytes sent from the source to the destination for the connection or session. If the event is aggregated, SrcBytes should be the sum over all aggregated sessions.
+  examples:
+  - '46536'
+- name: SrcDomain
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: SrcHostname
+  role: source
+  class: Recommended
+  type: Hostname (String)
+  description: The source device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: SrcIpAddr
+  role: source
+  class: Recommended
+  type: IP address
+  required_if:
+  - SrcHostname is specified
+  description: The IP address from which the connection or session originated. This value is mandatory if SrcHostname is specified. If the session uses network address translation, SrcIpAddr is the publicly visible address, and not the original address of the source, which is stored in SrcNatIpAddr
+  examples:
+  - 77.138.103.108
+- name: DstDomainType
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDomain is used
+  description: The type of DstDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if DstDomain is used.
+- name: DstDvcIdType
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDeviceId is used
+  description: The type of DstDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article. Required if DstDeviceId is used.
+- name: DstUserIdType
+  role: destination
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the DstUserId field. For a list of allowed values and further information, refer to UserIdType in the Schema Overview article.
+- name: DstUsernameType
+  role: destination
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the username stored in the DstUsername field. For a list of allowed values and further information, refer to UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: SrcDomainType
+  role: source
+  class: Conditional
+  type: DomainType
+  required_if:
+  - SrcDomain is used
+  description: The type of SrcDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if SrcDomain is used.
+- name: SrcDvcIdType
+  role: source
+  class: Conditional
+  type: DvcIdType
+  required_if:
+  - SrcDvcId is used
+  description: The type of SrcDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article.
+  notes: This field is required if SrcDvcId is used.
+- name: SrcUserIdType
+  role: source
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the SrcUserId field. For a list of allowed values and further information, refer to UserIdType in the Schema Overview article.
+- name: SrcUsernameType
+  role: source
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the username stored in the SrcUsername field. For a list of allowed values and further information, refer to UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: ThreatField
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcIpAddr
+  - DstIpAddr
+  description: The field for which a threat was identified. The value is either SrcIpAddr or DstIpAddr.
+- name: AdditionalFields
+  role: common
+  class: Optional
+- name: DstAppId
+  role: destination
+  class: Optional
+  type: String
+  description: The ID of the destination application, as reported by the reporting device. If DstAppType is Process, DstAppId and DstProcessId should have the same value.
+  examples:
+  - '124'
+- name: DstAppName
+  role: destination
+  class: Optional
+  type: String
+  description: The name of the destination application.
+  examples:
+  - Facebook
+- name: DstAppType
+  role: destination
+  class: Optional
+  type: AppType
+  required_if:
+  - DstAppName or DstAppId are used
+  description: The type of the destination application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if DstAppName or DstAppId are used.
+- name: DstDescription
+  role: destination
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: DstDeviceType
+  role: destination
+  class: Optional
+  type: Enumerated
+  description: The type of the destination device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+- name: DstDvcId
+  role: destination
+  class: Optional
+  type: String
+  description: The ID of the destination device. If multiple IDs are available, use the most important one, and store the others in the fields DstDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: DstDvcScope
+  role: destination
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. DstDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: DstDvcScopeId
+  role: destination
+  class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DstDvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
+- name: DstFQDN
+  role: destination
+  class: Optional
+  type: FQDN (String)
+  description: The destination device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DstDomainType reflects the format used.
+- name: DstGeoCity
+  role: destination
+  class: Optional
+  type: City
+  description: The city associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Burlington
+- name: DstGeoCountry
+  role: destination
+  class: Optional
+  type: Country
+  description: The country/region associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - USA
+- name: DstGeoLatitude
+  role: destination
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '44.475833'
+- name: DstGeoLongitude
+  role: destination
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '73.211944'
+- name: DstGeoRegion
+  role: destination
+  class: Optional
+  type: Region
+  description: The region, or state, associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Vermont
+- name: DstInterfaceGuid
+  role: destination
+  class: Optional
+  type: GUID (String)
+  description: The GUID of the network interface used on the destination device. 827c-266030f545a6
+  examples:
+  - 46ad544b-eaf0-47ef-
+- name: DstInterfaceName
+  role: destination
+  class: Optional
+  type: String
+  description: The network interface used for the connection or session by the destination device.
+  examples:
+  - Microsoft Hyper-V Network Adapter
+- name: DstMacAddr
+  role: destination
+  class: Optional
+  type: MAC Address (String)
+  description: The MAC address of the network interface used for the connection or session by the destination device.
+  examples:
+  - 06:10:9f:eb:8f:14
+- name: DstNatIpAddr
+  role: destination
+  class: Optional
+  type: IP address
+  description: 'The DstNatIpAddr represents either of: - The original address of the destination device if network address translation was used. - The IP address used by the intermediary device for communication with the source.'
+  examples:
+  - 2::1
+- name: DstNatPortNumber
+  role: destination
+  class: Optional
+  type: Integer
+  description: If reported by an intermediary NAT device, the port used by the NAT device for communication with the source.
+  examples:
+  - '443'
+- name: DstOriginalUserType
+  role: destination
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the source.
+- name: DstPackets
+  role: destination
+  class: Optional
+  type: Long
+  description: The number of packets sent from the destination to the source for the connection or session. The meaning of a packet is defined by the reporting device. If the event is aggregated, DstPackets should be the sum over all aggregated sessions.
+  examples:
+  - '446'
+- name: DstPortNumber
+  role: destination
+  class: Optional
+  type: Integer
+  description: The destination IP port.
+  examples:
+  - '443'
+- name: DstProcessGuid
+  role: destination
+  class: Optional
+  type: String
+  description: A generated unique identifier (GUID) of the process that terminated the network session.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+- name: DstProcessId
+  role: destination
+  class: Optional
+  type: String
+  description: The process ID (PID) of the process that terminated the network session.
+  examples:
+  - '48610176'
+  notes: The type is defined as string to support varying systems, but on Windows and Linux this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: DstProcessName
+  role: destination
+  class: Optional
+  type: String
+  description: The file name of the process that terminated the network session. This name is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe
+- name: DstUserId
+  role: destination
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the destination user. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12
+- name: DstUsername
+  role: destination
+  class: Optional
+  type: Username (String)
+  description: The destination username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the DstUsernameType field. If other username formats are available, store them in the fields DstUsername.
+  examples:
+  - AlbertE
+- name: DstUserScope
+  role: destination
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which DstUserId and DstUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+- name: DstUserScopeId
+  role: destination
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which DstUserId and DstUsername are defined. for more information and list of allowed values, see UserScopeId in the Schema Overview article.
+- name: DstUserType
+  role: destination
+  class: Optional
+  type: UserType
+  description: The type of destination user. For a list of allowed values and further information, refer to UserType in the Schema Overview article.
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the DstOriginalUserType field.
+- name: DstVlanId
+  role: destination
+  class: Optional
+  type: String
+  description: The VLAN ID related to the destination device.
+  examples:
+  - '130'
+- name: DstZone
+  role: destination
+  class: Optional
+  type: String
+  description: The network zone of the destination, as defined by the reporting device.
+  examples:
+  - Dmz
+- name: DvcDescription
+  role: device
+  class: Optional
+- name: DvcInboundInterface
+  role: device
+  class: Optional
+  type: String
+  description: If reported by an intermediary device, the network interface used by the NAT device for the connection to the source device.
+  examples:
+  - eth0
+- name: DvcInterface
+  role: device
+  class: Optional
+  to:
+  - DvcInboundInterface
+  - DvcOutboundInterface
+  description: The DvcInterface field should alias either the DvcInboundInterface or the DvcOutboundInterface fields.
+- name: DvcMacAddr
+  role: device
+  class: Optional
+- name: DvcOriginalAction
+  role: device
+  class: Optional
+- name: DvcOs
+  role: device
+  class: Optional
+- name: DvcOsVersion
+  role: device
+  class: Optional
+- name: DvcOutboundInterface
+  role: device
+  class: Optional
+  type: String
+  description: If reported by an intermediary device, the network interface used by the NAT device for the connection to the destination device.
+  examples:
+  - Ethernet adapter Ethernet 4e
+- name: DvcScope
+  role: device
+  class: Optional
+- name: DvcScopeId
+  role: device
+  class: Optional
+- name: DvcZone
+  role: device
+  class: Optional
+- name: EventMessage
+  role: common
+  class: Optional
+- name: EventOriginalResultDetails
+  role: common
+  class: Optional
+- name: EventOriginalSeverity
+  role: common
+  class: Optional
+- name: EventOriginalSubType
+  role: common
+  class: Optional
+- name: EventOriginalType
+  role: common
+  class: Optional
+- name: EventOriginalUid
+  role: common
+  class: Optional
+- name: EventOwner
+  role: common
+  class: Optional
+- name: EventProductVersion
+  role: common
+  class: Optional
+- name: EventReportUrl
+  role: common
+  class: Optional
+- name: EventSubType
+  role: common
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Start
+  - End
+  description: 'Additional description of the event type, if applicable. For Network Session records, supported values include: - Start - End This is field is not relevant for Flow events.'
+- name: NetworkApplicationProtocol
+  role: network
+  class: Optional
+  type: String
+  description: The application layer protocol used by the connection or session. The value should be in all uppercase.
+  examples:
+  - FTP
+- name: NetworkBytes
+  role: network
+  class: Optional
+  type: Long
+  description: Number of bytes sent in both directions. If both BytesReceived and BytesSent exist, BytesTotal should equal their sum. If the event is aggregated, NetworkBytes should be the sum over all aggregated sessions.
+  examples:
+  - '78991'
+- name: NetworkConnectionHistory
+  role: network
+  class: Optional
+  type: String
+  description: TCP flags and other potential IP header information.
+- name: NetworkDirection
+  role: network
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Inbound
+  - Outbound
+  - Local
+  - External
+  - NA
+  - For the EventType EndpointNetworkSession, NetworkDirection represents the direction relative to the endpoint. Supported values are Inbound, Outbound, Local (to the system), Listen or NA (Not Applicable). The Listen value indicates that a device has started accepting network connections but isn't actually, necessarily, connected
+  - Listen
+  description: 'The direction of the connection or session: - For the EventType NetworkSession, Flow or L2NetworkSession, NetworkDirection represents the direction relative to the organization or cloud environment boundary. Supported values are Inbound, Outbound, Local (to the organization), External (to the organization) or NA (Not Applicable). - For the EventType EndpointNetworkSession, NetworkDirection represents the direction relative to the endpoint. Supported values are Inbound, Outbound, Local (to the system), Listen or NA (Not Applicable). The Listen value indicates that a device has started accepting network connections but isn''t actually, necessarily, connected.'
+- name: NetworkDuration
+  role: network
+  class: Optional
+  type: Integer
+  description: The amount of time, in milliseconds, for the completion of the network session or connection.
+  examples:
+  - '1500'
+- name: NetworkIcmpCode
+  role: network
+  class: Optional
+  type: Integer
+  description: For an ICMP message, the ICMP code number as described in RFC 2780 for IPv4 network connections, or in RFC 4443 for IPv6 network connections.
+- name: NetworkIcmpType
+  role: network
+  class: Optional
+  type: String
+  description: For an ICMP message, ICMP type name associated with the numerical value, as described in RFC 2780 for IPv4 network connections, or in RFC 4443 for IPv6 network connections.
+  examples:
+  - Destination Unreachable
+  - '3'
+- name: NetworkPackets
+  role: network
+  class: Optional
+  type: Long
+  description: The number of packets sent in both directions. If both PacketsReceived and PacketsSent exist, PacketsTotal should equal their sum. The meaning of a packet is defined by the reporting device. If the event is aggregated, NetworkPackets should be the sum over all aggregated sessions.
+  examples:
+  - '6924'
+- name: NetworkProtocol
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The IP protocol used by the connection or session as listed in IANA protocol assignment, which is typically TCP, UDP, or ICMP.
+  examples:
+  - TCP
+- name: NetworkProtocolVersion
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The version of NetworkProtocol. When using it to distinguish between IP version, use the values IPv4 and IPv6.
+- name: NetworkRuleName
+  role: network
+  class: Optional
+  type: String
+  description: The name or ID of the rule by which DvcAction was decided upon.
+  examples:
+  - AnyAnyDrop
+- name: NetworkRuleNumber
+  role: network
+  class: Optional
+  type: Integer
+  description: The number of the rule by which DvcAction was decided upon.
+  examples:
+  - '23'
+- name: NetworkSessionId
+  role: network
+  class: Optional
+  type: string
+  description: The session identifier as reported by the reporting device.
+  examples:
+  - 172\_12\_53\_32\_4322\_\_123\_64\_207\_1\_80
+- name: SrcAppId
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source application, as reported by the reporting device. If SrcAppType is Process, SrcAppId and SrcProcessId should have the same value.
+  examples:
+  - '124'
+- name: SrcAppName
+  role: source
+  class: Optional
+  type: String
+  description: The name of the source application.
+  examples:
+  - filezilla.exe
+- name: SrcAppType
+  role: source
+  class: Optional
+  type: AppType
+  required_if:
+  - SrcAppName or SrcAppId are used
+  description: The type of the source application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if SrcAppName or SrcAppId are used.
+- name: SrcDescription
+  role: source
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: SrcDeviceType
+  role: source
+  class: Optional
+  type: DeviceType
+  description: The type of the source device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+- name: SrcDvcId
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: SrcDvcScope
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcDvcScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. SrcDvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcFQDN
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: SrcGeoCity
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: SrcGeoCountry
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: SrcGeoLatitude
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: SrcGeoLongitude
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: SrcGeoRegion
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: SrcInterfaceGuid
+  role: source
+  class: Optional
+  type: GUID (String)
+  description: The GUID of the network interface used on the source device. 827c-266030f545a6
+  examples:
+  - 46ad544b-eaf0-47ef-
+- name: SrcInterfaceName
+  role: source
+  class: Optional
+  type: String
+  description: The network interface used for the connection or session by the source device.
+  examples:
+  - eth01
+- name: SrcMacAddr
+  role: source
+  class: Optional
+  type: MAC Address (String)
+  description: The MAC address of the network interface from which the connection or session originated.
+  examples:
+  - 06:10:9f:eb:8f:14
+- name: SrcNatIpAddr
+  role: source
+  class: Optional
+  type: IP address
+  description: 'The SrcNatIpAddr represents either of: - The original address of the source device if network address translation was used. - The IP address used by the intermediary device for communication with the destination.'
+  examples:
+  - 4.3.2.1
+- name: SrcNatPortNumber
+  role: source
+  class: Optional
+  type: Integer
+  description: If reported by an intermediary NAT device, the port used by the NAT device for communication with the destination.
+  examples:
+  - '345'
+- name: SrcOriginalUserType
+  role: source
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the reporting device.
+- name: SrcPackets
+  role: source
+  class: Optional
+  type: Long
+  description: The number of packets sent from the source to the destination for the connection or session. The meaning of a packet is defined by the reporting device. If the event is aggregated, SrcPackets should be the sum over all aggregated sessions.
+  examples:
+  - '6478'
+- name: SrcPortNumber
+  role: source
+  class: Optional
+  type: Integer
+  description: The IP port from which the connection originated. Might not be relevant for a session comprising multiple connections.
+  examples:
+  - '2335'
+- name: SrcProcessGuid
+  role: source
+  class: Optional
+  type: String
+  description: A generated unique identifier (GUID) of the process that initiated the network session.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+- name: SrcProcessId
+  role: source
+  class: Optional
+  type: String
+  description: The process ID (PID) of the process that initiated the network session.
+  examples:
+  - '48610176'
+  notes: The type is defined as string to support varying systems, but on Windows and Linux this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: SrcProcessName
+  role: source
+  class: Optional
+  type: String
+  description: The file name of the process that initiated the network session. This name is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe
+- name: SrcUserId
+  role: source
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the source user. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12
+- name: SrcUsername
+  role: source
+  class: Optional
+  type: Username (String)
+  description: The source username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the SrcUsernameType field. If other username formats are available, store them in the fields SrcUsername.
+  examples:
+  - AlbertE
+- name: SrcUserScope
+  role: source
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which SrcUserId and SrcUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+- name: SrcUserScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which SrcUserId and SrcUsername are defined. for more information and list of allowed values, see UserScopeId in the Schema Overview article.
+- name: SrcUserType
+  role: source
+  class: Optional
+  type: UserType
+  description: The type of source user. For a list of allowed values and further information, refer to UserType in the Schema Overview article.
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the SrcOriginalUserType field.
+- name: SrcVlanId
+  role: source
+  class: Optional
+  type: String
+  description: The VLAN ID related to the source device.
+  examples:
+  - '130'
+- name: SrcZone
+  role: source
+  class: Optional
+  type: String
+  description: The network zone of the source, as defined by the reporting device.
+  examples:
+  - Internet
+- name: TcpFlagsAck
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP ACK Flag reported. The acknowledgment flag is used to acknowledge the successful receipt of a packet. As we can see from the diagram above, the receiver sends an ACK and a SYN in the second step of the three way handshake process to tell the sender that it received its initial packet.
+- name: TcpFlagsCwr
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP CWR Flag reported. The congestion window reduced flag is used by the sending host to indicate it received a packet with the ECE flag set. See RFC 3168 for more details.
+- name: TcpFlagsEce
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP ECE Flag reported. This flag is responsible for indicating if the TCP peer is ECN capable. See RFC 3168 for more details.
+- name: TcpFlagsFin
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP FIN Flag reported. The finished flag means there is no more data from the sender. Therefore, it is used in the last packet sent from the sender.
+- name: TcpFlagsNs
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP NS Flag reported. The nonce sum flag is still an experimental flag used to help protect against accidental malicious concealment of packets from the sender. See RFC 3540 for more details
+- name: TcpFlagsPsh
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP PSH Flag reported. The push flag is similar to the URG flag and tells the receiver to process these packets as they are received instead of buffering them.
+- name: TcpFlagsRst
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP RST Flag reported. The reset flag gets sent from the receiver to the sender when a packet is sent to a particular host that was not expecting it.
+- name: TcpFlagsSyn
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP SYN Flag reported. The synchronization flag is used as a first step in establishing a three way handshake between two hosts. Only the first packet from both the sender and receiver should have this flag set.
+- name: TcpFlagsUrg
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP URG Flag reported. The urgent flag is used to notify the receiver to process the urgent packets before processing all other packets. The receiver will be notified when all known urgent data has been received. See RFC 6093 for more details.
+- name: ThreatCategory
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the network session.
+  examples:
+  - Trojan
+- name: ThreatConfidence
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: ThreatFirstReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The first time the IP address or domain were identified as a threat.
+- name: ThreatId
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the network session.
+  examples:
+  - Tr.124
+- name: ThreatIpAddr
+  role: threat
+  class: Optional
+  type: IP Address
+  description: An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents.
+- name: ThreatIsActive
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: ThreatLastReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: ThreatName
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the network session.
+  examples:
+  - EICAR Test File
+- name: ThreatOriginalConfidence
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: ThreatOriginalRiskLevel
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: ThreatRiskLevel
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the session. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.
+- name: Dst
+  role: destination
+  class: Alias
+  to:
+  - DstDvcId
+  - DstHostname
+  - DstIpAddr
+  resolution: A unique identifier of the server receiving the DNS request. This field might alias the DstDvcId, DstHostname, or DstIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: Duration
+  role: network
+  class: Alias
+  to:
+  - NetworkDuration
+- name: Hostname
+  role: device
+  class: Alias
+  to:
+  - DstHostname
+  - RemoteHostname
+  - SrcHostName
+  resolution: '- If the event type is NetworkSession, Flow or L2NetworkSession, Hostname is an alias to DstHostname. - If the event type is EndpointNetworkSession, Hostname is an alias to RemoteHostname, which can alias either DstHostname or SrcHostName, depending on NetworkDirection'
+- name: InnerVlanId
+  role: network
+  class: Alias
+  to:
+  - SrcVlanId
+- name: IpAddr
+  role: network
+  class: Alias
+  to:
+  - DstIpAddr
+  - LocalIpAddr
+  - SrcIpAddr
+  resolution: '- If the event type is NetworkSession, Flow or L2NetworkSession, IpAddr is an alias to SrcIpAddr. - If the event type is EndpointNetworkSession, IpAddr is an alias to LocalIpAddr, which can alias either SrcIpAddr or DstIpAddr, depending on NetworkDirection.'
+- name: OuterVlanId
+  role: network
+  class: Alias
+  to:
+  - DstVlanId
+- name: Process
+  role: process
+  class: Alias
+  to:
+  - DstProcessName
+  examples:
+  - C:\Windows\System32\rundll32.exe
+- name: Rule
+  role: rule
+  class: Alias
+  type: String
+  resolution: Either the value of NetworkRuleName or the value of NetworkRuleNumber. If the value of NetworkRuleNumber is used, the type should be converted to string.
+- name: SessionId
+  role: session
+  class: Alias
+  type: String
+  to:
+  - NetworkSessionId
+- name: Src
+  role: source
+  class: Alias
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  resolution: A unique identifier of the source device. This field might alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: User
+  role: user
+  class: Alias
+  to:
+  - DstUsername

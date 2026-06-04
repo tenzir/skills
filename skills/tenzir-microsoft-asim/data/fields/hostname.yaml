@@ -1,0 +1,37 @@
+name: Hostname
+summary: Hostname is an alias for DstHostname, DvcHostname, RemoteHostname, SrcHostName, SrcHostname.
+to:
+- DstHostname
+- DvcHostname
+- RemoteHostname
+- SrcHostName
+- SrcHostname
+schemas:
+- name: AlertEvent
+  role: device
+  class: Alias
+  to:
+  - DvcHostname
+- name: DhcpEvent
+  role: device
+  class: Alias
+  to:
+  - SrcHostname
+- name: Dns
+  role: device
+  class: Alias
+  to:
+  - SrcHostname
+- name: NetworkSession
+  role: device
+  class: Alias
+  to:
+  - DstHostname
+  - RemoteHostname
+  - SrcHostName
+  resolution: '- If the event type is NetworkSession, Flow or L2NetworkSession, Hostname is an alias to DstHostname. - If the event type is EndpointNetworkSession, Hostname is an alias to RemoteHostname, which can alias either DstHostname or SrcHostName, depending on NetworkDirection'
+- name: UserManagement
+  role: device
+  class: Alias
+  to:
+  - DvcHostname

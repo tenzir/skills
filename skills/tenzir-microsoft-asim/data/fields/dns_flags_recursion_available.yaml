@@ -1,0 +1,8 @@
+name: DnsFlagsRecursionAvailable
+summary: The DNS RA flag indicates in a response that that server supports recursive queries.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS RA flag indicates in a response that that server supports recursive queries.

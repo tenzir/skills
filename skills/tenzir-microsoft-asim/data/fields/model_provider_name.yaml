@@ -1,0 +1,8 @@
+name: ModelProviderName
+summary: The name of the model provider.
+schemas:
+- name: AgentEvent
+  role: model
+  class: Optional
+  type: String
+  description: The name of the model provider.

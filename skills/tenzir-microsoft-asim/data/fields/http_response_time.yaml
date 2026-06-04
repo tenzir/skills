@@ -1,0 +1,10 @@
+name: HttpResponseTime
+summary: The amount of time, in milliseconds, it took to receive a response in the server, if applicable.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: Integer
+  description: The amount of time, in milliseconds, it took to receive a response in the server, if applicable.
+  examples:
+  - '800'

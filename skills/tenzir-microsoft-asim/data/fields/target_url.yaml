@@ -1,0 +1,24 @@
+name: TargetUrl
+summary: The URL associated with the target application.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: URL
+  description: The URL associated with the target application.
+  examples:
+  - https://console.aws.amazon.com/console/home?fromtb=true&hashArgs=%23&isauthcode=true&nc2=h_ct&src=header-signin&state=hashArgsFromTB_us-east-1_7596bc16c83d260b
+- name: Authentication
+  role: target
+  class: Optional
+  type: URL
+  description: The URL associated with the target application.
+  examples:
+  - https://console.aws.amazon.com/console/home?fromtb=true&hashArgs=%23&isauthcode=true&nc2=h_ct&src=header-signin&state=hashArgsFromTB_us-east-1_7596bc16c83d260b
+- name: FileEvent
+  role: target
+  class: Optional
+  type: URL (String)
+  description: When the operation is initiated using HTTP or HTTPS, the URL used.
+  examples:
+  - https://onedrive.live.com/?authkey=...

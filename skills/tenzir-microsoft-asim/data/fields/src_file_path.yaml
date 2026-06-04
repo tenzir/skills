@@ -1,0 +1,10 @@
+name: SrcFilePath
+summary: The full, normalized path of the source file, including the folder or location, the file name, and the extension. For more information, see Path structure.
+schemas:
+- name: FileEvent
+  role: source
+  class: Recommended
+  type: String
+  description: The full, normalized path of the source file, including the folder or location, the file name, and the extension. For more information, see Path structure.
+  examples:
+  - /etc/init.d/networking

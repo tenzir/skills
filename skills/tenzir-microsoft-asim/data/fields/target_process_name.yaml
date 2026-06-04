@@ -1,0 +1,10 @@
+name: TargetProcessName
+summary: The name of the target process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Mandatory
+  type: string
+  description: The name of the target process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+  examples:
+  - C:\Windows\explorer.exe

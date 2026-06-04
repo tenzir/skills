@@ -1,0 +1,8 @@
+name: TargetFilePathType
+summary: The type of TargetFilePath. For more information, see Path structure.
+schemas:
+- name: FileEvent
+  role: target
+  class: Mandatory
+  type: Enumerated
+  description: The type of TargetFilePath. For more information, see Path structure.

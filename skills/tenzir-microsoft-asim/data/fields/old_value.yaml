@@ -1,0 +1,7 @@
+name: OldValue
+summary: The old value of Object prior to the operation, if applicable.
+schemas:
+- name: AuditEvent
+  class: Optional
+  type: String
+  description: The old value of Object prior to the operation, if applicable.

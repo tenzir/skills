@@ -1,0 +1,8 @@
+name: IdentityDirectoryName
+summary: The name of the identity directory, such as Azure AD, GCP, AWS, associated with the entity.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Optional
+  type: string
+  description: The name of the identity directory, such as Azure AD, GCP, AWS, associated with the entity.

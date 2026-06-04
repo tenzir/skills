@@ -1,0 +1,18 @@
+name: FileSize
+summary: Size of the file in bytes. e.g. 123456
+schemas:
+- name: AlertEvent
+  role: file
+  class: Optional
+  type: long
+  description: Size of the file in bytes. e.g. 123456
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: long
+  description: The size of the file in bytes.
+- name: WebSession
+  role: file
+  class: Optional
+  type: Long
+  description: For HTTP uploads, the size in bytes of the uploaded file.

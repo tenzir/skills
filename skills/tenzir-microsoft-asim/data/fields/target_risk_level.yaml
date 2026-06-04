@@ -1,0 +1,17 @@
+name: TargetRiskLevel
+summary: The risk level associated with the target. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Integer
+  description: The risk level associated with the target. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: Authentication
+  role: target
+  class: Optional
+  type: Integer
+  description: The risk level associated with the target. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'

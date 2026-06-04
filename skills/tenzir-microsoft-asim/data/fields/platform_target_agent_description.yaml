@@ -1,0 +1,8 @@
+name: PlatformTargetAgentDescription
+summary: A description of the platform target agent.
+schemas:
+- name: AgentEvent
+  role: platform
+  class: Optional
+  type: String
+  description: A description of the platform target agent.

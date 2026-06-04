@@ -1,0 +1,41 @@
+name: EventCount
+summary: Netflow sources support aggregation, and the EventCount field should be set to the value of the Netflow FLOWS field. For other sources, the value is typically set to 1.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Mandatory
+- name: AlertEvent
+  role: common
+  class: Mandatory
+- name: AuditEvent
+  role: common
+  class: Mandatory
+- name: Authentication
+  role: common
+  class: Mandatory
+- name: DhcpEvent
+  role: common
+  class: Mandatory
+- name: Dns
+  role: common
+  class: Mandatory
+- name: FileEvent
+  role: common
+  class: Mandatory
+- name: NetworkSession
+  role: common
+  class: Mandatory
+  type: Integer
+  description: Netflow sources support aggregation, and the EventCount field should be set to the value of the Netflow FLOWS field. For other sources, the value is typically set to 1.
+- name: ProcessEvent
+  role: common
+  class: Mandatory
+- name: RegistryEvent
+  role: common
+  class: Mandatory
+- name: UserManagement
+  role: common
+  class: Mandatory
+- name: WebSession
+  role: common
+  class: Mandatory

@@ -1,0 +1,11 @@
+name: DnsQuery
+summary: The domain that the request tries to resolve.
+schemas:
+- name: Dns
+  role: dns
+  class: Mandatory
+  type: String
+  description: The domain that the request tries to resolve.
+  examples:
+  - www.malicious.com
+  notes: '- Some sources send valid FQDN queries in a different format. For example, in the DNS protocol itself, the query includes a dot (.) at the end, which must be removed. - While the DNS protocol limits the type of value in this field to an FQDN, most DNS servers allow any value, and this field is therefore not limited to FQDN values only. Most notably, DNS tunneling attacks may use invalid FQDN values in the query field. - While the DNS protocol allows for multiple queries in a single request, this scenario is rare, if it''s found at all. If the request has multiple queries, store the first one in this field, and then and optionally keep the rest in the AdditionalFields field.'

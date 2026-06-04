@@ -1,0 +1,46 @@
+name: Dvc
+summary: For authentication events, device fields refer to the system reporting the event.
+schemas:
+- name: AuditEvent
+  role: device
+  class: Mandatory
+- name: Authentication
+  role: device
+  class: Mandatory
+  type: '-'
+  description: For authentication events, device fields refer to the system reporting the event.
+- name: DhcpEvent
+  role: device
+  class: Mandatory
+  type: '-'
+  description: For DHCP events, device fields refer to the system that reports the DHCP event.
+- name: Dns
+  role: device
+  class: Mandatory
+  type: '-'
+  description: For DNS events, device fields refer to the system that reports the DNS event.
+- name: FileEvent
+  role: device
+  class: Mandatory
+  type: '-'
+  description: For File activity events, device fields refer to the system on which the file activity occurred.
+- name: NetworkSession
+  role: device
+  class: Mandatory
+  description: For Network Session events, device fields refer to the system reporting the Network Session event.
+- name: ProcessEvent
+  role: device
+  class: Mandatory
+  description: For process activity events, device fields refer to the system on which the process was executed.
+- name: RegistryEvent
+  role: device
+  class: Mandatory
+  description: For registry activity events, device fields refer to the system on which the registry activity occurred.
+- name: UserManagement
+  role: device
+  class: Mandatory
+  description: For user management events, device fields refer to the system reporting the event. This is usually the system on which the user is managed.
+- name: WebSession
+  role: device
+  class: Mandatory
+  description: For Web Session events, device fields refer to the system reporting the Web Session event. This is typically an intermediary device for HTTPSession events, and the destination web or application server for WebServerSession and ApiRequest events.

@@ -1,0 +1,15 @@
+name: Hash
+summary: Alias to the best available Target File hash.
+schemas:
+- name: FileEvent
+  role: file
+  class: Alias
+  resolution: Alias to the best available Target File hash.
+- name: ProcessEvent
+  role: file
+  class: Alias
+  resolution: Alias to the best available hash for the target process.
+- name: WebSession
+  role: file
+  class: Alias
+  resolution: Alias to the available Hash field.

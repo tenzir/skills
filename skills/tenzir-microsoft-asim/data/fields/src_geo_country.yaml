@@ -1,0 +1,52 @@
+name: SrcGeoCountry
+summary: The country/region associated with the source IP address.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: Authentication
+  role: source
+  class: Optional
+  type: Country
+  description: For more information, see Logical types.
+  examples:
+  - Canada
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: Dns
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: UserManagement
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA

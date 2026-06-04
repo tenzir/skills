@@ -1,0 +1,8 @@
+name: AADTenantId
+summary: The Azure Active Directory tenant identifier associated with the asset or entity.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: string
+  description: The Azure Active Directory tenant identifier associated with the asset or entity.

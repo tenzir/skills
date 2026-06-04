@@ -1,0 +1,10 @@
+name: DstMacAddr
+summary: The MAC address of the network interface used for the connection or session by the destination device.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: MAC Address (String)
+  description: The MAC address of the network interface used for the connection or session by the destination device.
+  examples:
+  - 06:10:9f:eb:8f:14

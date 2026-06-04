@@ -1,0 +1,8 @@
+name: AssetOriginalSensitivityLevel
+summary: The sensitivity level as reported by the source system, before normalization.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: string
+  description: The sensitivity level as reported by the source system, before normalization.

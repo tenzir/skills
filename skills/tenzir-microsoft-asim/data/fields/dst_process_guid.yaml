@@ -1,0 +1,10 @@
+name: DstProcessGuid
+summary: A generated unique identifier (GUID) of the process that terminated the network session.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: A generated unique identifier (GUID) of the process that terminated the network session.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00

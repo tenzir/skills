@@ -1,0 +1,43 @@
+name: ActorUserType
+summary: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+schemas:
+- name: AuditEvent
+  role: actor
+  class: Optional
+  type: UserType
+  description: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  examples:
+  - Guest
+- name: Authentication
+  role: actor
+  class: Optional
+  type: UserType
+  description: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  examples:
+  - Guest
+- name: FileEvent
+  role: actor
+  class: Optional
+  type: UserType
+  description: The type of Actor. For a list of allowed values and further information, refer to UserType in the Schema Overview article.
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the ActorOriginalUserType field.
+- name: ProcessEvent
+  role: actor
+  class: Optional
+  type: UserType
+  description: The type of Actor. For a list of allowed values and further information refer to UserType in the Schema Overview article.
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the ActorOriginalUserType field.
+- name: UserManagement
+  role: actor
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Regular
+  - Machine
+  - Admin
+  - System
+  - Application
+  - Service Principal
+  - Other
+  description: 'The type of the Actor. Allowed values are: - Regular - Machine - Admin - System - Application - Service Principal - Other'
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the ActorOriginalUserType field.

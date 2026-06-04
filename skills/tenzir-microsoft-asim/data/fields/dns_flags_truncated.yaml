@@ -1,0 +1,8 @@
+name: DnsFlagsTruncated
+summary: The DNS TC flag indicates that a response was truncated as it exceeded the maximum response size.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS TC flag indicates that a response was truncated as it exceeded the maximum response size.

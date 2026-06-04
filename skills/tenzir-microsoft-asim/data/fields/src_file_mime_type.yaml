@@ -1,0 +1,10 @@
+name: SrcFileMimeType
+summary: The Mime or Media type of the source file. Supported values are listed in the IANA Media Types repository.
+schemas:
+- name: FileEvent
+  role: source
+  class: Optional
+  type: String
+  allowed_values:
+  - listed in the IANA Media Types repository
+  description: The Mime or Media type of the source file. Supported values are listed in the IANA Media Types repository.

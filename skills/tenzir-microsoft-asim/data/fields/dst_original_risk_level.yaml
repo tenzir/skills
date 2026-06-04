@@ -1,0 +1,10 @@
+name: DstOriginalRiskLevel
+summary: The risk level associated with the destination, as reported by the reporting device.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: String
+  description: The risk level associated with the destination, as reported by the reporting device.
+  examples:
+  - Malicious

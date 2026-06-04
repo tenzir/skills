@@ -1,0 +1,57 @@
+name: ActorUsernameType
+summary: Specifies the type of the user name stored in the ActorUsername field. For more information, and list of allowed values, see UsernameType in the Schema Overview article.
+schemas:
+- name: AgentEvent
+  role: actor
+  class: Optional
+  type: String
+  description: Specifies the type of the user name stored in the ActorUsername field. For more information, and list of allowed values, see UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: AuditEvent
+  role: actor
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the user name stored in the ActorUsername field. For more information, and list of allowed values, see UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: Authentication
+  role: actor
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the user name stored in the ActorUsername field. For more information, and list of allowed values, see UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: FileEvent
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: Specifies the type of the user name stored in the ActorUsername field. For a list of allowed values and further information, refer to UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: ProcessEvent
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: Specifies the type of the user name stored in the ActorUsername field. For a list of allowed values and further information refer to UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: RegistryEvent
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: Specifies the type of the user name stored in the ActorUsername field. For more information, see The User entity.
+  examples:
+  - Windows
+- name: UserManagement
+  role: actor
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - UPN
+  - Windows
+  - DN
+  - Simple
+  description: Specifies the type of the username stored in the ActorUsername field. Supported values are UPN, Windows, DN, and Simple. For more information, see The User entity.
+  examples:
+  - Windows

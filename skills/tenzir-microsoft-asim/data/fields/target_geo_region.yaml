@@ -1,0 +1,17 @@
+name: TargetGeoRegion
+summary: The region within a country/region associated with the Target IP address.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Region
+  description: The region within a country/region associated with the Target IP address.
+  examples:
+  - Vermont
+- name: Authentication
+  role: target
+  class: Optional
+  type: Region
+  description: The region associated with the target IP address.
+  examples:
+  - Vermont
