@@ -144,12 +144,12 @@ Population guidance from the Google UDM usage guide.
 ### `Metadata.collectedTimestamp`
 
 - **Purpose**: Encodes the GMT timestamp when the event was collected by the vendor's local collection infrastructure.
-- **Encoding**: RFC 3339 JSON timestamp.
+- **Encoding**: RFC 3339 timestamp.
 
 #### Examples
 
 - RFC 3339: '2019-09-10T20:32:31-08:00'
-- JSON timestamp: '2012-04-23T18:25:43.511Z'
+- timestamp: '2012-04-23T18:25:43.511Z'
 
 ### `Metadata.description`
 
@@ -165,12 +165,12 @@ Population guidance from the Google UDM usage guide.
 
 - **Purpose**: Encodes the GMT timestamp when the event was generated.
 - **Required**: Yes
-- **Encoding**: RFC 3339 JSON timestamp.
+- **Encoding**: RFC 3339 timestamp.
 
 #### Examples
 
 - RFC 3339: 2019-09-10T20:32:31-08:00
-- JSON timestamp: 2012-04-23T18:25:43.511Z
+- timestamp: 2012-04-23T18:25:43.511Z
 
 ### `Metadata.eventType`
 

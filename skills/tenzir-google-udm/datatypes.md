@@ -11,7 +11,7 @@ Common type labels used in the message field reference.
 | `float`, `double` | Floating-point numeric value. |
 | `timestamp` | Timestamp value. Check field guidance for the expected format. |
 | `duration` | Duration value. Check field guidance for the expected format. |
-| `object` | JSON object for structured values that do not fit a specific UDM message. |
+| `object` | Structured object for values that do not fit a specific UDM message. |
 | `interval` | Time interval value. |
 | `latLng` | Geographic latitude and longitude value. |
-| `map<K, V>` | JSON object whose keys and values use the listed types. |
+| `map<K, V>` | Keyed collection whose keys and values use the listed types. |

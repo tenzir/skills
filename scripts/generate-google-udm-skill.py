@@ -581,13 +581,13 @@ def rest_field_name_map(context: FileContext) -> dict[str, str]:
 
 def apply_endpoint_language(text: str) -> str:
     replacements = {
-        "RFC 3339, as appropriate for JSON or Proto3 timestamp format.": "RFC 3339 JSON timestamp.",
-        "as appropriate for JSON or Proto3 timestamp format": "as RFC 3339 JSON timestamp values",
+        "RFC 3339, as appropriate for JSON or Proto3 timestamp format.": "RFC 3339 timestamp.",
+        "as appropriate for JSON or Proto3 timestamp format": "as RFC 3339 timestamp values",
         " in Proto3 using": " using",
         " in Proto3": "",
-        "Proto3 format": "JSON timestamp",
-        "Proto3 timestamp format": "JSON timestamp",
-        "proto3 format": "JSON timestamp",
+        "Proto3 format": "timestamp",
+        "Proto3 timestamp format": "timestamp",
+        "proto3 format": "timestamp",
         "single File proto": "single File message",
         "Unified Data Model schema": "Unified Data Model",
     }
@@ -1875,10 +1875,10 @@ def render_datatypes_page(guidance: DocsGuidance) -> str:
         "| `float`, `double` | Floating-point numeric value. |",
         "| `timestamp` | Timestamp value. Check field guidance for the expected format. |",
         "| `duration` | Duration value. Check field guidance for the expected format. |",
-        "| `object` | JSON object for structured values that do not fit a specific UDM message. |",
+        "| `object` | Structured object for values that do not fit a specific UDM message. |",
         "| `interval` | Time interval value. |",
         "| `latLng` | Geographic latitude and longitude value. |",
-        "| `map<K, V>` | JSON object whose keys and values use the listed types. |",
+        "| `map<K, V>` | Keyed collection whose keys and values use the listed types. |",
         "",
     ]
     return clean_markdown("\n".join(lines))
@@ -1940,9 +1940,12 @@ def render_top_level_structure(context: FileContext) -> list[str]:
     lines = [
         "## Top-level structure",
         "",
-        "UDM uses two top-level JSON shapes: events for telemetry records and",
-        "entities for contextual objects such as users, assets, domains, files,",
-        "URLs, and IP addresses.",
+        "UDM uses two top-level data shapes: event records for telemetry and",
+        "entity records for contextual objects such as users, assets, domains,",
+        "files, URLs, and IP addresses.",
+        "",
+        "The event ingestion path imports UDM events. Entity records are",
+        "ingested as entity context through the entity ingestion path.",
         "",
     ]
     for label, root in roots:
@@ -1976,7 +1979,7 @@ def render_skill_markdown(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or the Google SecOps UDM endpoint.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or Google SecOps ingestion endpoints.",
                 "---",
                 "",
                 "# Google UDM",
@@ -1989,7 +1992,7 @@ def render_skill_markdown(
                 "names and enum values.",
                 "",
                 "Use this skill to answer how a log should map to UDM, which",
-                "event or entity type to choose, which JSON fields to populate,",
+                "event or entity type to choose, which UDM fields to populate,",
                 "and how Google expects values and field paths to be formatted.",
                 "",
                 *render_top_level_structure(context),

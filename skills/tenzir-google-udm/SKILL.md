@@ -1,6 +1,6 @@
 ---
 name: tenzir-google-udm
-description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or the Google SecOps UDM endpoint.
+description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or Google SecOps ingestion endpoints.
 ---
 
 # Google UDM
@@ -13,14 +13,17 @@ security outcomes, and product context with consistent field
 names and enum values.
 
 Use this skill to answer how a log should map to UDM, which
-event or entity type to choose, which JSON fields to populate,
+event or entity type to choose, which UDM fields to populate,
 and how Google expects values and field paths to be formatted.
 
 ## Top-level structure
 
-UDM uses two top-level JSON shapes: events for telemetry records and
-entities for contextual objects such as users, assets, domains, files,
-URLs, and IP addresses.
+UDM uses two top-level data shapes: event records for telemetry and
+entity records for contextual objects such as users, assets, domains,
+files, URLs, and IP addresses.
+
+The event ingestion path imports UDM events. Entity records are
+ingested as entity context through the entity ingestion path.
 
 ### Event
 

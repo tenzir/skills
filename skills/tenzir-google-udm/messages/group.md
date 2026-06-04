@@ -48,7 +48,7 @@ Population guidance from the Google UDM usage guide.
 ### `Group.creationTime`
 
 - **Purpose**: Group creation time.
-- **Encoding**: RFC 3339 JSON timestamp.
+- **Encoding**: RFC 3339 timestamp.
 
 ### `Group.emailAddresses`
 
