@@ -7,29 +7,20 @@ RSA public key information.
 
 ## Fields
 
-### `key_size`
+### `keySize`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `keySize`
+- Type: `int64` (singular)
 
 Key size.
 
 ### `modulus`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `modulus`
+- Type: `string` (singular)
 
 Key modulus hexdump.
 
 ### `exponent`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `exponent`
+- Type: `string` (singular)
 
 Key exponent hexdump.

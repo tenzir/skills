@@ -7,137 +7,92 @@ AtiPrioritization contains various fields used to calculate a priority score for
 
 ## Fields
 
-### `gti_verdict`
+### `gtiVerdict`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `gtiVerdict`
+- Type: `int32` (singular)
 
 The confidence score from "GTI verdict" source.
 
-### `gti_severity`
+### `gtiSeverity`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `gtiSeverity`
+- Type: `int32` (singular)
 
 The confidence score from "GTI severity" source.
 
-### `gti_threat_score`
+### `gtiThreatScore`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `gtiThreatScore`
+- Type: `int32` (singular)
 
 The confidence score from "GTI threat score" source.
 
-### `mandiant_analyst_confidence`
+### `mandiantAnalystConfidence`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `mandiantAnalystConfidence`
+- Type: `int32` (singular)
 
 The confidence score from "Mandiant Analyst Intel" source.
 
-### `gti_update_time`
+### `gtiUpdateTime`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `gtiUpdateTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp of the latest update for GTI verdict, severity, or threat score.
 
-### `active_ir`
+### `activeIr`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `activeIr`
+- Type: `bool` (singular)
 
 Whether one or more Mandiant incident response customers had this indicator in their environment.
 
-### `active_ir_first_tagged_time`
+### `activeIrFirstTaggedTime`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `activeIrFirstTaggedTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 The timestamp of the first time an active IR was applied to this entity.
 
-### `global_customer_count`
+### `globalCustomerCount`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `globalCustomerCount`
+- Type: `int64` (singular)
 
 Global customer count over the last 30 days
 
-### `global_hit_count`
+### `globalHitCount`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `globalHitCount`
+- Type: `int64` (singular)
 
 Global hit count over the last 30 days
 
 ### `exclusive`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `exclusive`
+- Type: `bool` (singular)
 
 Whether the indicator is being used by a maximum of one threat actor.
 
 ### `osint`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `osint`
+- Type: `bool` (singular)
 
 Whether the indicator details are available in open source.
 
 ### `scanner`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `scanner`
+- Type: `bool` (singular)
 
 Whether the indicator is a scanner.
 
 ### `reviewed`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `reviewed`
+- Type: `bool` (singular)
 
 Whether the indicator verdict has passed review.
 
-### `attributed_malware`
+### `attributedMalware`
 
-- **Number**: `14`
-- **Cardinality**: `repeated`
-- **Type**: [`SecurityResult.Association`](security_result_association.md)
-- **JSON name**: `attributedMalware`
+- Type: [`SecurityResult.Association`](security_result_association.md) (repeated)
 
 Malware families associated with this indicator.
 
-### `attributed_threat_actors`
+### `attributedThreatActors`
 
-- **Number**: `15`
-- **Cardinality**: `repeated`
-- **Type**: [`SecurityResult.Association`](security_result_association.md)
-- **JSON name**: `attributedThreatActors`
+- Type: [`SecurityResult.Association`](security_result_association.md) (repeated)
 
 Threat actors associated with this indicator.

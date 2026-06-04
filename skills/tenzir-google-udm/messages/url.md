@@ -9,117 +9,78 @@ Url.
 
 ### `url`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `url`
+- Type: `string` (singular)
 
 URL.
 
 ### `categories`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `categories`
+- Type: `string` (repeated)
 
 Categorisation done by VirusTotal partners.
 
 ### `favicon`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: [`Favicon`](favicon.md)
-- **JSON name**: `favicon`
+- Type: [`Favicon`](favicon.md) (singular)
 
 Difference hash and MD5 hash of the URL's.
 
-### `html_meta`
+### `htmlMeta`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct`
-- **JSON name**: `htmlMeta`
+- Type: `google.protobuf.Struct` (singular)
 
 Meta tags (only for URLs downloading HTML).
 
-### `last_final_url`
+### `lastFinalUrl`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `lastFinalUrl`
+- Type: `string` (singular)
 
 If the original URL redirects, where does it end.
 
-### `last_http_response_code`
+### `lastHttpResponseCode`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `lastHttpResponseCode`
+- Type: `int32` (singular)
 
 HTTP response code of the last response.
 
-### `last_http_response_content_length`
+### `lastHttpResponseContentLength`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `lastHttpResponseContentLength`
+- Type: `int64` (singular)
 
 Length in bytes of the content received.
 
-### `last_http_response_content_sha256`
+### `lastHttpResponseContentSha256`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `lastHttpResponseContentSha256`
+- Type: `string` (singular)
 
 URL response body's SHA256 hash.
 
-### `last_http_response_cookies`
+### `lastHttpResponseCookies`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct`
-- **JSON name**: `lastHttpResponseCookies`
+- Type: `google.protobuf.Struct` (singular)
 
 Website's cookies.
 
-### `last_http_response_headers`
+### `lastHttpResponseHeaders`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct`
-- **JSON name**: `lastHttpResponseHeaders`
+- Type: `google.protobuf.Struct` (singular)
 
 Headers and values of the last HTTP response.
 
 ### `tags`
 
-- **Number**: `11`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `tags`
+- Type: `string` (repeated)
 
 Tags.
 
 ### `title`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `title`
+- Type: `string` (singular)
 
 Webpage title.
 
 ### `trackers`
 
-- **Number**: `13`
-- **Cardinality**: `repeated`
-- **Type**: [`Tracker`](tracker.md)
-- **JSON name**: `trackers`
+- Type: [`Tracker`](tracker.md) (repeated)
 
 Trackers found in the URL in a historical manner.

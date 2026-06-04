@@ -7,11 +7,8 @@ BoolSequence represents a sequence of bools.
 
 ## Fields
 
-### `bool_vals`
+### `boolVals`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `bool`
-- **JSON name**: `boolVals`
+- Type: `bool` (repeated)
 
 bool sequence.

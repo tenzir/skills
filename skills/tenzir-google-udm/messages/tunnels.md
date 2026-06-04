@@ -9,18 +9,12 @@ VPN tunnels.
 
 ### `provider`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `provider`
+- Type: `string` (singular)
 
 The provider of the VPN tunnels being used.
 
 ### `type`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `type`
+- Type: `string` (singular)
 
 The type of the VPN tunnels.

@@ -7,56 +7,38 @@ Exif information.
 
 ## Fields
 
-### `original_file`
+### `originalFile`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `originalFile`
+- Type: `string` (singular)
 
 original file name.
 
 ### `product`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `product`
+- Type: `string` (singular)
 
 product name.
 
 ### `company`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `company`
+- Type: `string` (singular)
 
 company name.
 
-### `file_description`
+### `fileDescription`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `fileDescription`
+- Type: `string` (singular)
 
 description of a file.
 
-### `entry_point`
+### `entryPoint`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `entryPoint`
+- Type: `int64` (singular)
 
 entry point.
 
-### `compilation_time`
+### `compilationTime`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `compilationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Compilation time.

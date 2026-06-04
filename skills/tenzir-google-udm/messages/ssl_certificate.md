@@ -19,138 +19,93 @@ SSL certificate.
 
 ## Fields
 
-### `cert_signature`
+### `certSignature`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.CertSignature`](ssl_certificate_cert_signature.md)
-- **JSON name**: `certSignature`
+- Type: [`SSLCertificate.CertSignature`](ssl_certificate_cert_signature.md) (singular)
 
 Certificate's signature and algorithm.
 
 ### `extension`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.Extension`](ssl_certificate_extension.md)
-- **JSON name**: `extension`
-- **Deprecated**: `true`
+- Type: [`SSLCertificate.Extension`](ssl_certificate_extension.md) (singular)
+- Deprecated: `true`
 
 (DEPRECATED) certificate's extension.
 
-### `cert_extensions`
+### `certExtensions`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct`
-- **JSON name**: `certExtensions`
+- Type: `google.protobuf.Struct` (singular)
 
 Certificate's extensions.
 
-### `first_seen_time`
+### `firstSeenTime`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstSeenTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Date the certificate was first retrieved by VirusTotal.
 
 ### `issuer`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.Subject`](ssl_certificate_subject.md)
-- **JSON name**: `issuer`
+- Type: [`SSLCertificate.Subject`](ssl_certificate_subject.md) (singular)
 
 Certificate's issuer data.
 
 ### `ec`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.EC`](ssl_certificate_ec.md)
-- **JSON name**: `ec`
+- Type: [`SSLCertificate.EC`](ssl_certificate_ec.md) (singular)
 
 EC public key information.
 
-### `serial_number`
+### `serialNumber`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `serialNumber`
+- Type: `string` (singular)
 
 Certificate's serial number hexdump.
 
-### `signature_algorithm`
+### `signatureAlgorithm`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `signatureAlgorithm`
+- Type: `string` (singular)
 
 Algorithm used for the signature (for example, "sha1RSA").
 
 ### `size`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `size`
+- Type: `int64` (singular)
 
 Certificate content length.
 
 ### `subject`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.Subject`](ssl_certificate_subject.md)
-- **JSON name**: `subject`
+- Type: [`SSLCertificate.Subject`](ssl_certificate_subject.md) (singular)
 
 Certificate's subject data.
 
 ### `thumbprint`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `thumbprint`
+- Type: `string` (singular)
 
 Certificate's content SHA1 hash.
 
-### `thumbprint_sha256`
+### `thumbprintSha256`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `thumbprintSha256`
+- Type: `string` (singular)
 
 Certificate's content SHA256 hash.
 
 ### `validity`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.Validity`](ssl_certificate_validity.md)
-- **JSON name**: `validity`
+- Type: [`SSLCertificate.Validity`](ssl_certificate_validity.md) (singular)
 
 Certificate's validity period.
 
 ### `version`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `version`
+- Type: `string` (singular)
 
 Certificate version (typically "V1", "V2" or "V3").
 
-### `public_key`
+### `publicKey`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.PublicKey`](ssl_certificate_public_key.md)
-- **JSON name**: `publicKey`
+- Type: [`SSLCertificate.PublicKey`](ssl_certificate_public_key.md) (singular)
 
 Public key information.

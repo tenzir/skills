@@ -14,27 +14,18 @@ Identifier to identify a UDM object like a UDM event, Entity, Collection. The fu
 
 ### `namespace`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`Id.Namespace`](../enums/id_namespace.md)
-- **JSON name**: `namespace`
+- Type: [`Id.Namespace`](../enums/id_namespace.md) (singular)
 
 Namespace the id belongs to.
 
 ### `id`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `bytes`
-- **JSON name**: `id`
+- Type: `bytes` (singular)
 
 Full raw ID.
 
-### `string_id`
+### `stringId`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `stringId`
+- Type: `string` (singular)
 
 Some ids are stored as strings that are not able to be translated to bytes, so store these separately. Ex. detection id of the form de_aaaaaaaa-aaaa...

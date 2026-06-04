@@ -14,27 +14,18 @@ The WindowsEventLog extension captures details specific to Windows Event Log eve
 
 ### `channel`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`WindowsEventLog.Channel`](../enums/windows_event_log_channel.md)
-- **JSON name**: `channel`
+- Type: [`WindowsEventLog.Channel`](../enums/windows_event_log_channel.md) (singular)
 
 The channel of the event.
 
-### `event_id`
+### `eventId`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `eventId`
+- Type: `string` (singular)
 
 A unique identifier for a specific type of event.
 
-### `activity_id`
+### `activityId`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `activityId`
+- Type: `string` (singular)
 
 A GUID (Globally Unique Identifier) used to link a sequence of related events together.

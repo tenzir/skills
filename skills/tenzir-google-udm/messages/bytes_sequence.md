@@ -7,11 +7,8 @@ BytesSequence represents a sequence of bytes.
 
 ## Fields
 
-### `bytes_vals`
+### `bytesVals`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `bytes`
-- **JSON name**: `bytesVals`
+- Type: `bytes` (repeated)
 
 bytes sequence.

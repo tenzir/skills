@@ -9,37 +9,25 @@ Specify the full URL of the HTTP request within "target". Also specify any uploa
 
 ### `method`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `method`
+- Type: `string` (singular)
 
 The HTTP request method (e.g. "GET", "POST", "PATCH", "DELETE").
 
-### `referral_url`
+### `referralUrl`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `referralUrl`
+- Type: `string` (singular)
 
 The URL for the HTTP referer.
 
-### `user_agent`
+### `userAgent`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `userAgent`
+- Type: `string` (singular)
 
 The User-Agent request header which includes the application type, operating system, software vendor or software version of the requesting software user agent.
 
-### `response_code`
+### `responseCode`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `responseCode`
+- Type: `int32` (singular)
 
 The response status code, for example 200, 302, 404, or 500.
 
@@ -58,7 +46,7 @@ Population guidance from the Google UDM usage guide.
 - HEAD
 - POST
 
-### `Http.referral_url`
+### `Http.referralUrl`
 
 - **Purpose**: Stores the URL for the HTTP referer.
 - **Encoding**: Valid RFC 3986 URL.
@@ -68,7 +56,7 @@ Population guidance from the Google UDM usage guide.
 
 - https://www.altostrat.com
 
-### `Http.response_code`
+### `Http.responseCode`
 
 - **Purpose**: Stores the HTTP response status code, which indicates whether a specific HTTP request has been successfully completed.
 - **Encoding**: 32-bit integer.
@@ -78,7 +66,7 @@ Population guidance from the Google UDM usage guide.
 - 400
 - 404
 
-### `Http.user_agent`
+### `Http.userAgent`
 
 - **Purpose**: Stores the User-Agent request header that includes the application type, operating system, software vendor or software version of the requesting software user agent.
 - **Encoding**: String.

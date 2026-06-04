@@ -7,11 +7,8 @@ Uint64Sequence represents a sequence of uint64s.
 
 ## Fields
 
-### `uint64_vals`
+### `uint64Vals`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `uint64`
-- **JSON name**: `uint64Vals`
+- Type: `uint64` (repeated)
 
 uint64 sequence.

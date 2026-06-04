@@ -9,198 +9,132 @@ Information about the PDF file structure. See [https://developers.virustotal.com
 
 ### `js`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `js`
+- Type: `int64` (singular)
 
 Number of /JS tags found in the PDF file. Should be the same as javascript field in normal scenarios.
 
 ### `javascript`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `javascript`
+- Type: `int64` (singular)
 
 Number of /JavaScript tags found in the PDF file. Should be the same as the js field in normal scenarios.
 
-### `launch_action_count`
+### `launchActionCount`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `launchActionCount`
+- Type: `int64` (singular)
 
 Number of /Launch tags found in the PDF file.
 
-### `object_stream_count`
+### `objectStreamCount`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `objectStreamCount`
+- Type: `int64` (singular)
 
 Number of object streams.
 
-### `endobj_count`
+### `endobjCount`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `endobjCount`
+- Type: `int64` (singular)
 
 Number of object definitions (endobj keyword).
 
 ### `header`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `header`
+- Type: `string` (singular)
 
 PDF version.
 
 ### `acroform`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `acroform`
+- Type: `int64` (singular)
 
 Number of /AcroForm tags found in the PDF.
 
 ### `autoaction`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `autoaction`
+- Type: `int64` (singular)
 
 Number of /AA tags found in the PDF.
 
-### `embedded_file`
+### `embeddedFile`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `embeddedFile`
+- Type: `int64` (singular)
 
 Number of /EmbeddedFile tags found in the PDF.
 
 ### `encrypted`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `encrypted`
+- Type: `int64` (singular)
 
 Whether the document is encrypted or not. This is defined by the /Encrypt tag.
 
 ### `flash`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `flash`
+- Type: `int64` (singular)
 
 Number of /RichMedia tags found in the PDF.
 
-### `jbig2_compression`
+### `jbig2Compression`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `jbig2Compression`
+- Type: `int64` (singular)
 
 Number of /JBIG2Decode tags found in the PDF.
 
-### `obj_count`
+### `objCount`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `objCount`
+- Type: `int64` (singular)
 
 Number of objects definitions (obj keyword).
 
-### `endstream_count`
+### `endstreamCount`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `endstreamCount`
+- Type: `int64` (singular)
 
 Number of defined stream objects (stream keyword).
 
-### `page_count`
+### `pageCount`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `pageCount`
+- Type: `int64` (singular)
 
 Number of pages in the PDF.
 
-### `stream_count`
+### `streamCount`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `streamCount`
+- Type: `int64` (singular)
 
 Number of defined stream objects (stream keyword).
 
 ### `openaction`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `openaction`
+- Type: `int64` (singular)
 
 Number of /OpenAction tags found in the PDF.
 
 ### `startxref`
 
-- **Number**: `18`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `startxref`
+- Type: `int64` (singular)
 
 Number of startxref keywords in the PDF.
 
-### `suspicious_colors`
+### `suspiciousColors`
 
-- **Number**: `19`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `suspiciousColors`
+- Type: `int64` (singular)
 
 Number of colors expressed with more than 3 bytes (CVE-2009-3459).
 
 ### `trailer`
 
-- **Number**: `20`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `trailer`
+- Type: `int64` (singular)
 
 Number of trailer keywords in the PDF.
 
 ### `xfa`
 
-- **Number**: `21`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `xfa`
+- Type: `int64` (singular)
 
 Number of \XFA tags found in the PDF.
 
 ### `xref`
 
-- **Number**: `22`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `xref`
+- Type: `int64` (singular)
 
 Number of xref keywords in the PDF.

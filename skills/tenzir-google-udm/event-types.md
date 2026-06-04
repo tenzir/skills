@@ -133,7 +133,7 @@ Population guidance from the [Google UDM usage guide](https://docs.cloud.google.
 #### Notes
 
 - Never populate `principal.email` or `target.email`.
-- Only populate the `email` field in `security_result.about` or `network.email`.
+- Only populate the `email` field in `securityResult.about` or `network.email`.
 - Top level security results generally have a noun set (optional for spam).
 
 ### File Creation / Deletion / Modification / Read / Open Events
@@ -148,7 +148,7 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 ### FILE_COPY
@@ -162,7 +162,7 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 ### MUTEX_CREATION
@@ -175,7 +175,7 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 #### Notes
@@ -192,17 +192,17 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 ```text
 metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: MUTEX_CREATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventTimestamp: "2020-01-01T13:27:41+00:00"
+  eventType: MUTEX_CREATION
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal {
   hostname: "test.altostrat.com"
   process {
     pid: "0xc45"
     file {
-      full_path: "C:\\Windows\\regedit.exe"
+      fullPath: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -218,7 +218,7 @@ target {
 
 #### Required Fields
 
-- `metadata`: `event_timestamp`
+- `metadata`: `eventTimestamp`
 - `principal`: Include detail about the machine that initiated the network connection (for example, source).
 - `target`: Include details about the target machine if different from the principal machine.
 - `network`: Capture details about the network connection (ports, protocol, etc.).
@@ -242,7 +242,7 @@ target {
 #### Optional Fields
 
 - `principal`: Represents the client initiating the web request. Include at least one machine identifier (for example, hostname, IP, MAC, proprietary asset identifier) or a user identifier (for example, username). If a specific network connection is described and a client port number is available, specify only one IP address along with the port number associated with that network connection (although other machine identifiers could be provided to better describe the participant device). If no source port is available, you could specify any and all IP and MAC addresses, asset identifiers, and hostname values describing the principal device.
-- `network`: Include details of the network connection. You must populate the following fields: `network.ip_protocol` `network.application_protocol`
+- `network`: Include details of the network connection. You must populate the following fields: `network.ipProtocol` `network.applicationProtocol`
 - `about`: Represents other entities found in the HTTP transaction (for example, an uploaded or downloaded file).
 - `intermediary`: Represents a proxy server (if different from the principal or target).
 - `metadata`: Populate the other `metadata` fields.
@@ -250,7 +250,7 @@ target {
 - `network.email`: If the HTTP network connection originated from a URL that appeared in an email message, populate `network.email` with the details.
 - `network.http`: If the HTTP network connection method is present, populate `network.http.method`.
 - `observer`: Represents a passive sniffer (if present).
-- `security_result`: Add one or more items to the `security_result` field to represent the malicious activity detected.
+- `securityResult`: Add one or more items to the `securityResult` field to represent the malicious activity detected.
 
 #### Notes
 
@@ -263,7 +263,7 @@ target {
 - `principal`: Security device that detected the event.
 - `target`: Device that received the malicious software.
 - `network`: Network information about the malicious host.
-- `security_result`: Security details about the malicious software.
+- `securityResult`: Security details about the malicious software.
 - `additional`: Vendor information outside the scope of the UDM.
 
 #### Examples
@@ -278,15 +278,15 @@ date=2013-08-07 time=13:27:41 timezone="GMT" device_name="CC500ia" device_id= C0
 
 ```text
 metadata {
-  event_timestamp: "2013-08-07T13:27:41+00:00"
-  event_type: NETWORK_HTTP
-  product_name: "Sophos Antivirus"
-  product_log_id: "030906208001"
+  eventTimestamp: "2013-08-07T13:27:41+00:00"
+  eventType: NETWORK_HTTP
+  productName: "Sophos Antivirus"
+  productLogId: "030906208001"
 }
 
 principal {
   hostname: "CC500ia"
-  asset_id: "Sophos.AV:C070123456-ABCDE"
+  assetId: "Sophos.AV:C070123456-ABCDE"
   ip: "10.10.2.10"
   port: 60671
   user {  userid: "john.smith" }
@@ -300,17 +300,17 @@ target {
 }
 
 network {
-  ip_protocol: TCP
+  ipProtocol: TCP
  }
 
-security_result {
+securityResult {
   about {
     url: "altostrat.fr/img/logo.gif"
     category: SOFTWARE_MALICIOUS
-    category_details: "Virus"
-    threat_name: "TR/ElderadoB.A.78"
+    categoryDetails: "Virus"
+    threatName: "TR/ElderadoB.A.78"
     severity: HIGH                   # Google Security Operations-normalized severity
-    severity_details: "Critical"    # Vendor-specific severity string
+    severityDetails: "Critical"    # Vendor-specific severity string
   }
 }
 
@@ -329,7 +329,7 @@ Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERM
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 - `principal.user` and `target.user`: Populate the initiating process (principal) and the target process if the user information is available.
 
 #### Notes
@@ -346,10 +346,10 @@ Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERM
 
 ```text
 metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: PROCESS_LAUNCH
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventTimestamp: "2020-01-01T13:27:41+00:00"
+  eventType: PROCESS_LAUNCH
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal {
   hostname: "altostrat.com"
@@ -358,7 +358,7 @@ target {
   process {
     pid: "0xc45"
     file {
-      full_path: "C:\\Windows\\regedit.exe"
+      fullPath: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -374,7 +374,7 @@ target {
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
 #### Notes
@@ -391,10 +391,10 @@ target {
 
 ```text
 metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: PROCESS_MODULE_LOAD
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventTimestamp: "2020-01-01T13:27:41+00:00"
+  eventType: PROCESS_MODULE_LOAD
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal {
   hostname: "example.com"
@@ -406,7 +406,7 @@ target {
   process {
     pid: "0xc45"
     file {
-      full_path: "C:\\Windows\\regedit.exe"
+      fullPath: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -421,7 +421,7 @@ target {
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 
 #### Notes
 
@@ -437,10 +437,10 @@ target {
 
 ```text
 metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: PROCESS_PRIVILEGE_ESCALATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventTimestamp: "2020-01-01T13:27:41+00:00"
+  eventType: PROCESS_PRIVILEGE_ESCALATION
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal {
   hostname: "example.com"
@@ -449,14 +449,14 @@ principal {
   }
   user {
     userid: "test"
-    windows_sid: "ABCDEFGH-123456789-1111111-1000"
+    windowsSid: "ABCDEFGH-123456789-1111111-1000"
   }
 }
 target {
   process {
     pid: "0xc45"
     file {
-      full_path: "C:\\Windows\\regedit.exe"
+      fullPath: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -470,11 +470,11 @@ Applies to: `REGISTRY_CREATION`, `REGISTRY_MODIFICATION`, `REGISTRY_DELETION`
 
 - `metadata`: Include the required fields.
 - `principal`: At least one machine identifier. If a user-mode process performs the registry modification, `principal.process` must include information about the process modifying the registry. If a kernel process performs the registry modification, the principal must not include process information.
-- `target`: `target.registry`: If the target registry is remote, target must include at least one identifier for the target machine (for example, an IP address, MAC, hostname, or third party asset identifier). `target.registry.registry_key`: All registry events must include the affected registry key.
+- `target`: `target.registry`: If the target registry is remote, target must include at least one identifier for the target machine (for example, an IP address, MAC, hostname, or third party asset identifier). `target.registry.registryKey`: All registry events must include the affected registry key.
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected. For example, a bad registry key.
+- `securityResult`: Describe the malicious activity detected. For example, a bad registry key.
 - `principal.user`: Populate if user information is available about the process.
 
 #### Notes
@@ -491,29 +491,29 @@ Applies to: `REGISTRY_CREATION`, `REGISTRY_MODIFICATION`, `REGISTRY_DELETION`
 
 ```text
 metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: REGISTRY_MODIFICATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventTimestamp: "2020-01-01T13:27:41+00:00"
+  eventType: REGISTRY_MODIFICATION
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal {
   hostname: "test-win"
   user {
     userid: "test"
-    windows_sid: "ABCDEFGH-123456789-1111111-1000"
+    windowsSid: "ABCDEFGH-123456789-1111111-1000"
   }
   process {
     pid: "0xc45"
     file {
-      full_path: "C:\\Windows\\regedit.exe"
+      fullPath: "C:\\Windows\\regedit.exe"
     }
   }
 }
 target {
   registry {
-    registry_key: "\\REGISTRY\\USER\\TEST_USER\\Control Panel\\PowerCfg\\PowerPolicy"
-    registry_value_name: "Description"
-    registry_value_data: "For extending battery life."
+    registryKey: "\\REGISTRY\\USER\\TEST_USER\\Control Panel\\PowerCfg\\PowerPolicy"
+    registryValueName: "Description"
+    registryValueData: "For extending battery life."
   }
 }
 ```
@@ -524,7 +524,7 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 
 #### Required Fields
 
-- `metadata`: `event_timestamp` and background information about the event.
+- `metadata`: `eventTimestamp` and background information about the event.
 - `observer`: Capture information about the scanner itself. If the scanner is remote, the machine details must be captured by the `observer` field. For a local scanner, leave empty.
 - `target`: Capture information about the machine that holds the object being scanned. If a file is being scanned, `target.file` must capture information about the scanned file. If a process is being scanned, `target.process` must capture information about the scanned process.
 - `extensions`: For SCAN_VULN_HOST and SCAN_VULN_NETWORK, define the vulnerability using the `extensions.vuln` field.
@@ -533,7 +533,7 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 
 - `principal`: Represents the device initiating the connection and includes at least one machine identifier (for example, hostname, IP address, MAC address, proprietary asset identifier) or a user identifier.
 - `target`: User detail about the target object (for example, file creator or process owner) should be captured in `target.user`.
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 
 #### Notes
 
@@ -542,7 +542,7 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 - `metadata`: Background information about the event.
 - `target`: Device which received the malicious software.
 - `observer`: Device which observes and reports on the event in question.
-- `security_result`: Security details about the malicious software.
+- `securityResult`: Security details about the malicious software.
 - The following example illustrates how an event of type SCAN_VULN_HOST would be formatted for the Google SecOps UDM:
 - As shown in this example, the event has been divided into the following UDM categories:
 - `metadata`: Background information about the event.
@@ -555,24 +555,24 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 
 ```text
 metadata: {
-  event_timestamp: {
+  eventTimestamp: {
     seconds: 1571386978
   }
-  event_type: SCAN_HOST
-  vendor_name: "vendor"
-  product_name: "product"
-  product_version: "1.0"
+  eventType: SCAN_HOST
+  vendorName: "vendor"
+  productName: "product"
+  productVersion: "1.0"
 }
 target: {
   hostname: "testHost"
-  asset_id: "asset"
+  assetId: "asset"
   ip: "192.168.200.200"
 }
 observer: {
   hostname: "testObserver"
   ip: "192.168.100.100"
 }
-security_result: {
+securityResult: {
   severity: LOW
   confidence: HIGH_CONFIDENCE
 }
@@ -582,13 +582,13 @@ security_result: {
 
 ```text
 metadata: {
-  event_timestamp: "2025-05-09T12:59:52.45298Z",
-  event_type: 18005,
-  product_name: "TestProduct",
-  vendor_name: "TestVendor"
+  eventTimestamp: "2025-05-09T12:59:52.45298Z",
+  eventType: 18005,
+  productName: "TestProduct",
+  vendorName: "TestVendor"
   },
 principal {
-  asset_id: "TEST:Mwl8ABcd",
+  assetId: "TEST:Mwl8ABcd",
   ip: "127.0.0.3",
   hostname: "TEST-Localhost",
   mac: ["02:00:00:00:00:01"]
@@ -597,13 +597,13 @@ extensions: {
   vulns: {
     vulnerabilities: [
       {
-      cve_id: "CVE-6l9VxQmz",
-      vendor_vulnerability_id: "TEST:7gmCmFWX",
+      cveId: "CVE-6l9VxQmz",
+      vendorVulnerabilityId: "TEST:7gmCmFWX",
       name: "CVE pA7DzwPU",
       severity: 2,
       vendor: "TestVendor",
-      last_found: "2025-05-09T14:59:52.45300Z",
-      first_found: "2025-05-09T13:59:52.45300Z"
+      lastFound: "2025-05-09T14:59:52.45300Z",
+      firstFound: "2025-05-09T13:59:52.45300Z"
        }
       ]
     }
@@ -621,7 +621,7 @@ Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TAS
 
 #### Optional Fields
 
-- `security_result`: Describe the malicious activity detected.
+- `securityResult`: Describe the malicious activity detected.
 
 #### Notes
 
@@ -631,7 +631,7 @@ Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TAS
 - `principal`: Device that scheduled the suspicious task.
 - `target`: Software targeted by the suspicious task.
 - `intermediary`: Intermediary involved with the suspicious task.
-- `security_result`: Security details about the suspicious task.
+- `securityResult`: Security details about the suspicious task.
 
 #### Examples
 
@@ -639,18 +639,18 @@ Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TAS
 
 ```text
 metadata: {
-  event_timestamp: {
+  eventTimestamp: {
     seconds: 1577577998
   }
-  event_type: SCHEDULED_TASK_CREATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventType: SCHEDULED_TASK_CREATION
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal: {
   hostname: "fake-host.altostrat.com"
   user: {
     userid: "TestUser"
-    windows_sid: "AB123CDE"
+    windowsSid: "AB123CDE"
   }
   process {
     pid: "1234"
@@ -665,8 +665,8 @@ target: {
 intermediary: {
   hostname: "fake-intermediary.altostrat.com"
 }
-security_result: {
-  rule_name: "EventID: 6789"
+securityResult: {
+  ruleName: "EventID: 6789"
   summary: "A scheduled task was created."
   severity: INFORMATIONAL
 }
@@ -695,10 +695,10 @@ Applies to: `SETTING_UNCATEGORIZED`, `SETTING_CREATION`, `SETTING_MODIFICATION`,
 
 ```text
 metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: SETTING_MODIFICATION
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventTimestamp: "2020-01-01T13:27:41+00:00"
+  eventType: SETTING_MODIFICATION
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal {
   hostname: "test.win.com"
@@ -735,14 +735,14 @@ Applies to: `SERVICE_UNSPECIFIED`, `SERVICE_CREATION`, `SERVICE_DELETION`, `SERV
 
 ```text
 metadata: {
- event_timestamp: {
+ eventTimestamp: {
    seconds: 1595656745
    nanos: 832000000
     }
- event_type: SERVICE_UNSPECIFIED
-   vendor_name: "Preempt"
-   product_name: "PREEMPT_AUTH"
-   product_event_type: "SERVICE_ACCESS"
+ eventType: SERVICE_UNSPECIFIED
+   vendorName: "Preempt"
+   productName: "PREEMPT_AUTH"
+   productEventType: "SERVICE_ACCESS"
    description: "Remote Procedures (RPC)"
    }
  principal: {
@@ -753,7 +753,7 @@ metadata: {
    hostname: "TestHost"
    user: {
       userid: "ORG\\User"
-      user_display_name: "user name"
+      userDisplayName: "user name"
    }
  application: "application.name"
    resource: {
@@ -779,7 +779,7 @@ Applies to: `STATUS_HEARTBEAT`, `STATUS_STARTUP`, `STATUS_SHUTDOWN`, `STATUS_UPD
 - `metadata`: Background information about the event.
 - `principal`: Device and location details.
 - `intermediary`: Device IP address.
-- `security_result`: Security result details.
+- `securityResult`: Security result details.
 
 #### Examples
 
@@ -787,12 +787,12 @@ Applies to: `STATUS_HEARTBEAT`, `STATUS_STARTUP`, `STATUS_SHUTDOWN`, `STATUS_UPD
 
 ```text
 metadata: {
-  event_timestamp: {
+  eventTimestamp: {
     seconds: 1588180305
   }
-  event_type: STATUS_HEARTBEAT
-  vendor_name: "DMP"
-  product_name: "ENTRE"
+  eventType: STATUS_HEARTBEAT
+  vendorName: "DMP"
+  productName: "ENTRE"
 }
 principal: {
   hostname: "testHost"
@@ -803,11 +803,11 @@ principal: {
 intermediary: {
   ip: "8.8.8.8"
 }
-security_result: {
+securityResult: {
   summary: "Event - Locked"
   description: "description"
   severity: LOW
-  severity_details: "INFO"
+  severityDetails: "INFO"
 }
 ```
 
@@ -832,16 +832,16 @@ Applies to: `SYSTEM_AUDIT_LOG_UNCATEGORIZED`, `SYSTEM_AUDIT_LOG_WIPE`
 
 ```text
 metadata {
-  event_timestamp: "2020-01-01T13:27:41+00:00"
-  event_type: SYSTEM_AUDIT_LOG_WIPE
-  vendor_name: "Microsoft"
-  product_name: "Windows"
+  eventTimestamp: "2020-01-01T13:27:41+00:00"
+  eventType: SYSTEM_AUDIT_LOG_WIPE
+  vendorName: "Microsoft"
+  productName: "Windows"
 }
 principal {
   hostname: "altostrat.com"
   user {
     userid: "test"
-    windows_sid: "ABCDEFGH-123456789-1111111-1000"
+    windowsSid: "ABCDEFGH-123456789-1111111-1000"
   }
 }
 ```
@@ -873,7 +873,7 @@ Applies to: `USER_CREATION`, `USER_DELETION`
 
 #### Required Fields
 
-- `metadata`: `event_timestamp`.
+- `metadata`: `eventTimestamp`.
 - `principal`: Include information about the machine where the request to create or delete the user originated from. For a local user creation or deletion, principal must include at least one machine identifier for the originating machine.
 - `target`: Location where the user is being created. Must also include user information (for example, `target.user`).
 
@@ -892,9 +892,9 @@ Applies to: `USER_LOGIN`, `USER_LOGOUT`
 - `principal`: For remote user activity (for example, remote login), populate principal with information about the machine originating the user activity. For local user activity (for example, local login), don't set principal.
 - `target`: Populate `target.user` with information about the user that has logged on or logged off. If principal is not set (for example, local login), target must also include at least one machine identifier identifying the target machine. For machine to machine user activity (for example, remote login, SSO, Cloud Service, VPN), target must include information on either the target application, target machine, or target VPN server.
 - `intermediary`: For SSO logins, intermediary must include at least one machine identifier for the SSO server if available.
-- `network` and `network.http`: If the login occurs over HTTP, you must place all available details in `network.ip_protocol`, `network.application_protocol`, and `network.http`.
+- `network` and `network.http`: If the login occurs over HTTP, you must place all available details in `network.ipProtocol`, `network.applicationProtocol`, and `network.http`.
 - authentication extension: Must identify the type of authentication system that the event is related to (for example, machine, SSO, or VPN) and the mechanism employed (username and password, OTP, etc.).
-- `security_result`: Add a `security_result` field to represent the login status if it fails. Specify `security_result.category` with the AUTH_VIOLATION value if authentication fails.
+- `securityResult`: Add a `securityResult` field to represent the login status if it fails. Specify `securityResult.category` with the AUTH_VIOLATION value if authentication fails.
 
 ### USER_RESOURCE_ACCESS
 
@@ -946,7 +946,7 @@ Applies to: `USER_RESOURCE_CREATION`, `USER_RESOURCE_DELETION`
 
 #### Required Fields
 
-- `metadata`: `event_timestamp`
+- `metadata`: `eventTimestamp`
 - `principal`: Include information about the machine where the request to create or delete the user originated from. For a local user creation or deletion, principal must include at least one machine identifier for the originating machine.
 - `target`: Location where the user is being created. Must also include user information (for example, `target.user`).
 

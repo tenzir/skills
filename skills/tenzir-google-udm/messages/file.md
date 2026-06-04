@@ -14,381 +14,255 @@ Information about a file.
 
 ### `sha256`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sha256`
+- Type: `string` (singular)
 
 The SHA256 hash of the file, as a hex-encoded string. This field can be used as an entity indicator for file entities.
 
 ### `md5`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `md5`
+- Type: `string` (singular)
 
 The MD5 hash of the file, as a hex-encoded string. This field can be used as an entity indicator for file entities.
 
 ### `sha1`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sha1`
+- Type: `string` (singular)
 
 The SHA1 hash of the file, as a hex-encoded string. This field can be used as an entity indicator for file entities.
 
 ### `size`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `size`
+- Type: `uint64` (singular)
 
 The size of the file in bytes.
 
-### `full_path`
+### `fullPath`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `fullPath`
+- Type: `string` (singular)
 
 The full path identifying the location of the file on the system. This field can be used as an entity indicator for file entities.
 
-### `mime_type`
+### `mimeType`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `mimeType`
+- Type: `string` (singular)
 
 The MIME (Multipurpose Internet Mail Extensions) type of the file, for example "PE", "PDF", or "powershell script".
 
-### `file_metadata`
+### `fileMetadata`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: [`FileMetadata`](file_metadata.md)
-- **JSON name**: `fileMetadata`
-- **Deprecated**: `true`
+- Type: [`FileMetadata`](file_metadata.md) (singular)
+- Deprecated: `true`
 
 Metadata associated with the file. Deprecate FileMetadata in favor of using fields in File.
 
-### `security_result`
+### `securityResult`
 
-- **Number**: `36`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult`](security_result.md)
-- **JSON name**: `securityResult`
+- Type: [`SecurityResult`](security_result.md) (singular)
 
 Google Cloud Threat Intelligence (GCTI) security result for the file including threat context and detection metadata.
 
-### `pe_file`
+### `peFile`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: [`FileMetadataPE`](file_metadata_pe.md)
-- **JSON name**: `peFile`
+- Type: [`FileMetadataPE`](file_metadata_pe.md) (singular)
 
 Metadata about the Portable Executable (PE) file.
 
 ### `ssdeep`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ssdeep`
+- Type: `string` (singular)
 
 Ssdeep of the file
 
 ### `vhash`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `vhash`
+- Type: `string` (singular)
 
 Vhash of the file.
 
 ### `ahash`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ahash`
-- **Deprecated**: `true`
+- Type: `string` (singular)
+- Deprecated: `true`
 
 Deprecated. Use authentihash instead.
 
 ### `authentihash`
 
-- **Number**: `20`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `authentihash`
+- Type: `string` (singular)
 
 Authentihash of the file.
 
 ### `symhash`
 
-- **Number**: `41`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `symhash`
+- Type: `string` (singular)
 
 SymHash of the file. Used for Mach-O (e.g. MacOS) binaries, to identify similar files based on their symbol table.
 
-### `prefetch_file_metadata`
+### `prefetchFileMetadata`
 
-- **Number**: `43`
-- **Cardinality**: `singular`
-- **Type**: [`PrefetchFileMetadata`](prefetch_file_metadata.md)
-- **JSON name**: `prefetchFileMetadata`
+- Type: [`PrefetchFileMetadata`](prefetch_file_metadata.md) (singular)
 
 Metadata about the prefetch file.
 
-### `file_type`
+### `fileType`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: [`File.FileType`](../enums/file_file_type.md)
-- **JSON name**: `fileType`
+- Type: [`File.FileType`](../enums/file_file_type.md) (singular)
 
 FileType field.
 
-### `capabilities_tags`
+### `capabilitiesTags`
 
-- **Number**: `13`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `capabilitiesTags`
+- Type: `string` (repeated)
 
 Capabilities tags.
 
 ### `names`
 
-- **Number**: `14`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `names`
+- Type: `string` (repeated)
 
 Names fields.
 
 ### `tags`
 
-- **Number**: `27`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `tags`
+- Type: `string` (repeated)
 
 Tags for the file.
 
-### `last_modification_time`
+### `lastModificationTime`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastModificationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp when the file was last updated.
 
-### `create_time`
+### `createTime`
 
-- **Number**: `39`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `createTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp when the file was created.
 
-### `last_access_time`
+### `lastAccessTime`
 
-- **Number**: `40`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastAccessTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp when the file was accessed.
 
 ### `prevalence`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: [`Prevalence`](prevalence.md)
-- **JSON name**: `prevalence`
+- Type: [`Prevalence`](prevalence.md) (singular)
 
 Prevalence of the file hash in the customer's environment.
 
-### `first_seen_time`
+### `firstSeenTime`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstSeenTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp the file was first seen in the customer's environment.
 
-### `last_seen_time`
+### `lastSeenTime`
 
-- **Number**: `18`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastSeenTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp the file was last seen in the customer's environment.
 
-### `stat_mode`
+### `statMode`
 
-- **Number**: `21`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `statMode`
+- Type: `uint64` (singular)
 
 The mode of the file. A bit string indicating the permissions and privileges of the file.
 
-### `stat_inode`
+### `statInode`
 
-- **Number**: `22`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `statInode`
+- Type: `uint64` (singular)
 
 The file identifier. Unique identifier of object within a file system.
 
-### `stat_dev`
+### `statDev`
 
-- **Number**: `23`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `statDev`
+- Type: `uint64` (singular)
 
 The file system identifier to which the object belongs.
 
-### `stat_nlink`
+### `statNlink`
 
-- **Number**: `24`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `statNlink`
+- Type: `uint64` (singular)
 
 Number of links to file.
 
-### `stat_flags`
+### `statFlags`
 
-- **Number**: `25`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `statFlags`
+- Type: `uint32` (singular)
 
 User defined flags for file.
 
-### `last_analysis_time`
+### `lastAnalysisTime`
 
-- **Number**: `26`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastAnalysisTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp the file was last analysed.
 
-### `embedded_urls`
+### `embeddedUrls`
 
-- **Number**: `28`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `embeddedUrls`
+- Type: `string` (repeated)
 
 Embedded urls found in the file.
 
-### `embedded_domains`
+### `embeddedDomains`
 
-- **Number**: `29`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `embeddedDomains`
+- Type: `string` (repeated)
 
 Embedded domains found in the file.
 
-### `embedded_ips`
+### `embeddedIps`
 
-- **Number**: `30`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `embeddedIps`
+- Type: `string` (repeated)
 
 Embedded IP addresses found in the file.
 
-### `exif_info`
+### `exifInfo`
 
-- **Number**: `31`
-- **Cardinality**: `singular`
-- **Type**: [`ExifInfo`](exif_info.md)
-- **JSON name**: `exifInfo`
+- Type: [`ExifInfo`](exif_info.md) (singular)
 
 Exif metadata from different file formats extracted by exiftool.
 
-### `signature_info`
+### `signatureInfo`
 
-- **Number**: `32`
-- **Cardinality**: `singular`
-- **Type**: [`SignatureInfo`](signature_info.md)
-- **JSON name**: `signatureInfo`
+- Type: [`SignatureInfo`](signature_info.md) (singular)
 
 File signature information extracted from different tools.
 
-### `pdf_info`
+### `pdfInfo`
 
-- **Number**: `33`
-- **Cardinality**: `singular`
-- **Type**: [`PDFInfo`](pdf_info.md)
-- **JSON name**: `pdfInfo`
+- Type: [`PDFInfo`](pdf_info.md) (singular)
 
 Information about the PDF file structure.
 
-### `first_submission_time`
+### `firstSubmissionTime`
 
-- **Number**: `34`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstSubmissionTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 First submission time of the file.
 
-### `last_submission_time`
+### `lastSubmissionTime`
 
-- **Number**: `35`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastSubmissionTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Last submission time of the file.
 
-### `main_icon`
+### `mainIcon`
 
-- **Number**: `37`
-- **Cardinality**: `singular`
-- **Type**: [`Favicon`](favicon.md)
-- **JSON name**: `mainIcon`
+- Type: [`Favicon`](favicon.md) (singular)
 
 Icon's relevant hashes.
 
 ### `ntfs`
 
-- **Number**: `38`
-- **Cardinality**: `singular`
-- **Type**: [`NtfsFileMetadata`](ntfs_file_metadata.md)
-- **JSON name**: `ntfs`
+- Type: [`NtfsFileMetadata`](ntfs_file_metadata.md) (singular)
 
 NTFS metadata.
 
-### `app_compat_cache`
+### `appCompatCache`
 
-- **Number**: `42`
-- **Cardinality**: `singular`
-- **Type**: [`AppCompatMetadata`](app_compat_metadata.md)
-- **JSON name**: `appCompatCache`
+- Type: [`AppCompatMetadata`](app_compat_metadata.md) (singular)
 
 Windows AppCompatCache (Application Compatibility) metadata.
 
@@ -396,7 +270,7 @@ Windows AppCompatCache (Application Compatibility) metadata.
 
 Population guidance from the Google UDM usage guide.
 
-### `File.file_metadata`
+### `File.fileMetadata`
 
 - **Purpose**: Metadata associated with the file.
 - **Encoding**: String.
@@ -408,7 +282,7 @@ Population guidance from the Google UDM usage guide.
 - Version number
 - Date last saved
 
-### `File.full_path`
+### `File.fullPath`
 
 - **Purpose**: Full path identifying the location of the file on the system.
 - **Encoding**: String.
@@ -428,7 +302,7 @@ Population guidance from the Google UDM usage guide.
 
 - 35bf623e7db9bf0d68d0dda764fd9e8c
 
-### `File.mime_type`
+### `File.mimeType`
 
 - **Purpose**: Multipurpose Internet Mail Extensions (MIME) type for the file.
 - **Encoding**: String.

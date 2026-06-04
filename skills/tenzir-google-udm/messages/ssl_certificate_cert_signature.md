@@ -9,18 +9,12 @@ Certificate's signature and algorithm.
 
 ### `signature`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `signature`
+- Type: `string` (singular)
 
 Signature.
 
-### `signature_algorithm`
+### `signatureAlgorithm`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `signatureAlgorithm`
+- Type: `string` (singular)
 
 Algorithm.

@@ -7,57 +7,39 @@ Label used in data access.
 
 ## Fields
 
-### `log_types`
+### `logTypes`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `logTypes`
+- Type: `string` (repeated)
 
 All the LogType labels.
 
-### `ingestion_labels`
+### `ingestionLabels`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `ingestionLabels`
-- **Deprecated**: `true`
+- Type: `string` (repeated)
+- Deprecated: `true`
 
 All the ingestion labels.
 
 ### `namespaces`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `namespaces`
+- Type: `string` (repeated)
 
 All the namespaces.
 
-### `custom_labels`
+### `customLabels`
 
-- **Number**: `4`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `customLabels`
+- Type: `string` (repeated)
 
 All the complex labels (UDM search syntax based).
 
-### `ingestion_kv_labels`
+### `ingestionKvLabels`
 
-- **Number**: `5`
-- **Cardinality**: `repeated`
-- **Type**: [`DataAccessIngestionLabel`](data_access_ingestion_label.md)
-- **JSON name**: `ingestionKvLabels`
+- Type: [`DataAccessIngestionLabel`](data_access_ingestion_label.md) (repeated)
 
 All the ingestion labels (key/value pairs).
 
-### `allow_scoped_access`
+### `allowScopedAccess`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `allowScopedAccess`
+- Type: `bool` (singular)
 
 Are the labels ready for scoped access

@@ -7,47 +7,32 @@ The prevalence of a resource within the customer's environment. This measures ho
 
 ## Fields
 
-### `rolling_max`
+### `rollingMax`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `rollingMax`
+- Type: `int32` (singular)
 
-The maximum number of assets per day accessing the resource over the trailing day_count days.
+The maximum number of assets per day accessing the resource over the trailing dayCount days.
 
-### `day_count`
+### `dayCount`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `dayCount`
+- Type: `int32` (singular)
 
-The number of days over which rolling_max is calculated.
+The number of days over which rollingMax is calculated.
 
-### `rolling_max_sub_domains`
+### `rollingMaxSubDomains`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `rollingMaxSubDomains`
+- Type: `int32` (singular)
 
-The maximum number of assets per day accessing the domain along with sub-domains over the trailing day_count days. This field is only valid for domains.
+The maximum number of assets per day accessing the domain along with sub-domains over the trailing dayCount days. This field is only valid for domains.
 
-### `day_max`
+### `dayMax`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `dayMax`
+- Type: `int32` (singular)
 
 The max prevalence score in a day interval window.
 
-### `day_max_sub_domains`
+### `dayMaxSubDomains`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `dayMaxSubDomains`
+- Type: `int32` (singular)
 
 The max prevalence score in a day interval window across sub-domains. This field is only valid for domains.

@@ -1,6 +1,6 @@
 # Event Type Categories
 
-Usage-guide grouping for choosing `metadata.event_type`.
+Usage-guide grouping for choosing `metadata.eventType`.
 
 ## Source
 

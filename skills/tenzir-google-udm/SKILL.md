@@ -1,6 +1,6 @@
 ---
 name: tenzir-google-udm
-description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, security_result, network, Chronicle normalization, or Google SecOps event schema.
+description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or Google SecOps event schema.
 ---
 
 # Google UDM
@@ -8,7 +8,7 @@ description: Answer questions about Google SecOps / Chronicle UDM (Unified Data 
 Look up the generated Google UDM schema and usage references before
 answering. The schema pages are generated from `backstory/udm.proto`
 and `backstory/entity.proto`; they are the ground truth for field
-existence, field numbers, types, JSON names, oneofs, and deprecation.
+existence, REST field keys, types, oneofs, and deprecation.
 The guidance sections are generated from targeted Google documentation;
 they are the source for population policy, required fields,
 field-path prefixes, datatype notes, and examples.
@@ -43,7 +43,7 @@ datatypes.md               # Standard datatype notes
 | What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |
 | What values can enum X take? | [Enums](enums.md) -> specific enum page |
 | How should I map this event? | [Event types](event-types.md), then relevant message pages |
-| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |
+| Which `metadata.eventType` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |
 | Required or forbidden fields? | [Event types](event-types.md), [Entity](messages/entity.md), or relevant message page |
 | Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |
 | Which field path prefix? | [Field paths](field-paths.md) |
@@ -61,13 +61,13 @@ fact comes from.
 ## Domain knowledge
 
 - UDM events center on `metadata`, participant nouns (`principal`, `src`,
-  `target`, `intermediary`, `observer`, `about`), `security_result`,
+  `target`, `intermediary`, `observer`, `about`), `securityResult`,
   `network`, and `extensions`.
 - UDM entities center on `metadata`, an `entity` noun, `relations`,
   optional `risk_score`, and optional `metric` data.
-- `metadata.event_type` classifies the event. It is the first place to look
+- `metadata.eventType` classifies the event. It is the first place to look
   when deciding how an event should be represented.
-- `metadata.entity_type` classifies entity records and drives entity-specific
+- `metadata.entityType` classifies entity records and drives entity-specific
   requirements.
 - `Noun` carries entity details such as users, assets, processes, files,
   resources, cloud context, and labels.

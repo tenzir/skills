@@ -9,72 +9,48 @@ Grouped fields are aliases for groups of related UDM fields. All fields grouped 
 
 ### `ip`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `ip`
+- Type: `string` (repeated)
 
 IP addresses.
 
 ### `domain`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `domain`
+- Type: `string` (repeated)
 
 Domains.
 
 ### `hostname`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `hostname`
+- Type: `string` (repeated)
 
 Hostnames.
 
 ### `user`
 
-- **Number**: `4`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `user`
+- Type: `string` (repeated)
 
 Users.
 
 ### `email`
 
-- **Number**: `5`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `email`
+- Type: `string` (repeated)
 
 Emails.
 
-### `file_path`
+### `filePath`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `filePath`
+- Type: `string` (repeated)
 
 File paths.
 
 ### `hash`
 
-- **Number**: `7`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `hash`
+- Type: `string` (repeated)
 
 File Hashes.
 
-### `process_id`
+### `processId`
 
-- **Number**: `8`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `processId`
+- Type: `string` (repeated)
 
 Process Identifiers.

@@ -9,19 +9,13 @@ DHCP options.
 
 ### `code`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `code`
+- Type: `uint32` (singular)
 
 Code. See RFC1533.
 
 ### `data`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `bytes`
-- **JSON name**: `data`
+- Type: `bytes` (singular)
 
 Data.
 

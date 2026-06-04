@@ -7,56 +7,38 @@ NTFS-specific file metadata.
 
 ## Fields
 
-### `change_time`
+### `changeTime`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `changeTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 NTFS MFT entry changed timestamp.
 
-### `filename_create_time`
+### `filenameCreateTime`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `filenameCreateTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 NTFS $FILE_NAME attribute created timestamp.
 
-### `filename_modify_time`
+### `filenameModifyTime`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `filenameModifyTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 NTFS $FILE_NAME attribute modified timestamp.
 
-### `filename_access_time`
+### `filenameAccessTime`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `filenameAccessTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 NTFS $FILE_NAME attribute accessed timestamp.
 
-### `filename_change_time`
+### `filenameChangeTime`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `filenameChangeTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 NTFS $FILE_NAME attribute changed timestamp.
 
-### `usn_journal`
+### `usnJournal`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: [`UsnJournal`](usn_journal.md)
-- **JSON name**: `usnJournal`
+- Type: [`UsnJournal`](usn_journal.md) (repeated)
 
 NTFS USN journal.

@@ -13,220 +13,148 @@ Information about a compute asset such as a workstation, laptop, phone, virtual 
 
 ## Fields
 
-### `product_object_id`
+### `productObjectId`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `productObjectId`
+- Type: `string` (singular)
 
 A vendor-specific identifier to uniquely identify the entity (a GUID or similar). This field can be used as an entity indicator for asset entities.
 
 ### `hostname`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `hostname`
+- Type: `string` (singular)
 
 Asset hostname or domain name field. This field can be used as an entity indicator for asset entities.
 
-### `asset_id`
+### `assetId`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `assetId`
+- Type: `string` (singular)
 
 The asset ID. Value must contain the ':' character. For example, cs:abcdd23434. This field can be used as an entity indicator for asset entities.
 
 ### `ip`
 
-- **Number**: `4`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `ip`
+- Type: `string` (repeated)
 
 A list of IP addresses associated with an asset. This field can be used as an entity indicator for asset entities.
 
 ### `mac`
 
-- **Number**: `5`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `mac`
+- Type: `string` (repeated)
 
 List of MAC addresses associated with an asset. This field can be used as an entity indicator for asset entities.
 
-### `nat_ip`
+### `natIp`
 
-- **Number**: `22`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `natIp`
+- Type: `string` (repeated)
 
 List of NAT IP addresses associated with an asset.
 
-### `first_seen_time`
+### `firstSeenTime`
 
-- **Number**: `23`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstSeenTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 The first observed time for an asset. The value is calculated on the basis of the first time the identifier was observed.
 
 ### `hardware`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: [`Hardware`](hardware.md)
-- **JSON name**: `hardware`
+- Type: [`Hardware`](hardware.md) (repeated)
 
 The asset hardware specifications.
 
-### `platform_software`
+### `platformSoftware`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: [`PlatformSoftware`](platform_software.md)
-- **JSON name**: `platformSoftware`
+- Type: [`PlatformSoftware`](platform_software.md) (singular)
 
 The asset operating system platform software.
 
 ### `software`
 
-- **Number**: `17`
-- **Cardinality**: `repeated`
-- **Type**: [`Software`](software.md)
-- **JSON name**: `software`
+- Type: [`Software`](software.md) (repeated)
 
 The asset software details.
 
 ### `location`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: [`Location`](location.md)
-- **JSON name**: `location`
+- Type: [`Location`](location.md) (singular)
 
 Location of the asset.
 
 ### `category`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `category`
+- Type: `string` (singular)
 
 The category of the asset (e.g. "End User Asset", "Workstation", "Server").
 
 ### `type`
 
-- **Number**: `18`
-- **Cardinality**: `singular`
-- **Type**: [`Asset.AssetType`](../enums/asset_asset_type.md)
-- **JSON name**: `type`
+- Type: [`Asset.AssetType`](../enums/asset_asset_type.md) (singular)
 
 The type of the asset (e.g. workstation or laptop or server).
 
-### `network_domain`
+### `networkDomain`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `networkDomain`
+- Type: `string` (singular)
 
 The network domain of the asset (e.g. "corp.acme.com")
 
-### `creation_time`
+### `creationTime`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `creationTime`
-- **Deprecated**: `true`
+- Type: `google.protobuf.Timestamp` (singular)
+- Deprecated: `true`
 
-Time the asset was created or provisioned. Deprecate: creation_time should be populated in Attribute as generic metadata.
+Time the asset was created or provisioned. Deprecate: creationTime should be populated in Attribute as generic metadata.
 
-### `first_discover_time`
+### `firstDiscoverTime`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstDiscoverTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Time the asset was first discovered (by asset management/discoverability software).
 
-### `last_discover_time`
+### `lastDiscoverTime`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastDiscoverTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Time the asset was last discovered (by asset management/discoverability software).
 
-### `system_last_update_time`
+### `systemLastUpdateTime`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `systemLastUpdateTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
-Time the asset system or OS was last updated. For all other operations that are not system updates (such as resizing a VM), use Attribute.last_update_time.
+Time the asset system or OS was last updated. For all other operations that are not system updates (such as resizing a VM), use Attribute.lastUpdateTime.
 
-### `last_boot_time`
+### `lastBootTime`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastBootTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Time the asset was last boot started.
 
 ### `labels`
 
-- **Number**: `16`
-- **Cardinality**: `repeated`
-- **Type**: [`Label`](label.md)
-- **JSON name**: `labels`
-- **Deprecated**: `true`
+- Type: [`Label`](label.md) (repeated)
+- Deprecated: `true`
 
 Metadata labels for the asset. Deprecated: labels should be populated in Attribute as generic metadata.
 
-### `deployment_status`
+### `deploymentStatus`
 
-- **Number**: `19`
-- **Cardinality**: `singular`
-- **Type**: [`Asset.DeploymentStatus`](../enums/asset_deployment_status.md)
-- **JSON name**: `deploymentStatus`
+- Type: [`Asset.DeploymentStatus`](../enums/asset_deployment_status.md) (singular)
 
 The deployment status of the asset for device lifecycle purposes.
 
 ### `vulnerabilities`
 
-- **Number**: `21`
-- **Cardinality**: `repeated`
-- **Type**: [`Vulnerability`](vulnerability.md)
-- **JSON name**: `vulnerabilities`
+- Type: [`Vulnerability`](vulnerability.md) (repeated)
 
 Vulnerabilities discovered on asset.
 
 ### `attribute`
 
-- **Number**: `20`
-- **Cardinality**: `singular`
-- **Type**: [`Attribute`](attribute.md)
-- **JSON name**: `attribute`
+- Type: [`Attribute`](attribute.md) (singular)
 
 Generic entity metadata attributes of the asset.
 
-### `wmi_persistence_item`
+### `wmiPersistenceItem`
 
-- **Number**: `24`
-- **Cardinality**: `singular`
-- **Type**: [`WmiPersistenceItem`](wmi_persistence_item.md)
-- **JSON name**: `wmiPersistenceItem`
+- Type: [`WmiPersistenceItem`](wmi_persistence_item.md) (singular)
 
 Information about a WMI persistence item.

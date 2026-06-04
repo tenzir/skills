@@ -9,63 +9,42 @@ Deprecated. Information about the threat intelligence source. These fields are u
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 Name of the IoC source.
 
-### `benign_count`
+### `benignCount`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `benignCount`
+- Type: `int32` (singular)
 
 Count of responses where this IoC was marked benign.
 
-### `malicious_count`
+### `maliciousCount`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `maliciousCount`
+- Type: `int32` (singular)
 
 Count of responses where this IoC was marked malicious.
 
 ### `quality`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.ProductConfidence`](../enums/security_result_product_confidence.md)
-- **JSON name**: `quality`
+- Type: [`SecurityResult.ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
 
 Quality of the IoC mapping extracted from the source.
 
-### `response_count`
+### `responseCount`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `responseCount`
+- Type: `int32` (singular)
 
 Total response count from this source.
 
-### `source_count`
+### `sourceCount`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `sourceCount`
+- Type: `int32` (singular)
 
 Number of sources from which intelligence was extracted.
 
-### `threat_intelligence_sources`
+### `threatIntelligenceSources`
 
-- **Number**: `7`
-- **Cardinality**: `repeated`
-- **Type**: [`SecurityResult.Source`](security_result_source.md)
-- **JSON name**: `threatIntelligenceSources`
+- Type: [`SecurityResult.Source`](security_result_source.md) (repeated)
 
 Different threat intelligence sources from which IoC info was extracted.

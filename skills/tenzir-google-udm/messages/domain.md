@@ -9,288 +9,192 @@ Information about a domain.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 The domain name. This field can be used as an entity indicator for Domain entities.
 
 ### `prevalence`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: [`Prevalence`](prevalence.md)
-- **JSON name**: `prevalence`
+- Type: [`Prevalence`](prevalence.md) (singular)
 
 The prevalence of the domain within the customer's environment.
 
-### `first_seen_time`
+### `firstSeenTime`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstSeenTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 First seen timestamp of the domain in the customer's environment.
 
-### `last_seen_time`
+### `lastSeenTime`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastSeenTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Last seen timestamp of the domain in the customer's environment.
 
 ### `registrar`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `registrar`
+- Type: `string` (singular)
 
 Registrar name . FOr example, "Wild West Domains, Inc. (R120-LROR)", "GoDaddy.com, LLC", or "PDR LTD. D/B/A PUBLICDOMAINREGISTRY.COM".
 
-### `contact_email`
+### `contactEmail`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `contactEmail`
+- Type: `string` (singular)
 
 Contact email address.
 
-### `whois_server`
+### `whoisServer`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `whoisServer`
+- Type: `string` (singular)
 
 Whois server name.
 
-### `name_server`
+### `nameServer`
 
-- **Number**: `8`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `nameServer`
+- Type: `string` (repeated)
 
 Repeated list of name servers.
 
-### `creation_time`
+### `creationTime`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `creationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Domain creation time.
 
-### `update_time`
+### `updateTime`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `updateTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Last updated time.
 
-### `expiration_time`
+### `expirationTime`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `expirationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Expiration time.
 
-### `audit_update_time`
+### `auditUpdateTime`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `auditUpdateTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Audit updated time.
 
 ### `status`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `status`
+- Type: `string` (singular)
 
 Domain status. See [https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en](https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en) for meanings of possible values
 
 ### `registrant`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: [`User`](user.md)
-- **JSON name**: `registrant`
+- Type: [`User`](user.md) (singular)
 
 Parsed contact information for the registrant of the domain.
 
 ### `admin`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: [`User`](user.md)
-- **JSON name**: `admin`
+- Type: [`User`](user.md) (singular)
 
 Parsed contact information for the administrative contact for the domain.
 
 ### `tech`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: [`User`](user.md)
-- **JSON name**: `tech`
+- Type: [`User`](user.md) (singular)
 
 Parsed contact information for the technical contact for the domain
 
 ### `billing`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: [`User`](user.md)
-- **JSON name**: `billing`
+- Type: [`User`](user.md) (singular)
 
 Parsed contact information for the billing contact of the domain.
 
 ### `zone`
 
-- **Number**: `18`
-- **Cardinality**: `singular`
-- **Type**: [`User`](user.md)
-- **JSON name**: `zone`
+- Type: [`User`](user.md) (singular)
 
 Parsed contact information for the zone.
 
-### `whois_record_raw_text`
+### `whoisRecordRawText`
 
-- **Number**: `19`
-- **Cardinality**: `singular`
-- **Type**: `bytes`
-- **JSON name**: `whoisRecordRawText`
+- Type: `bytes` (singular)
 
 WHOIS raw text.
 
-### `registry_data_raw_text`
+### `registryDataRawText`
 
-- **Number**: `20`
-- **Cardinality**: `singular`
-- **Type**: `bytes`
-- **JSON name**: `registryDataRawText`
+- Type: `bytes` (singular)
 
 Registry Data raw text.
 
-### `iana_registrar_id`
+### `ianaRegistrarId`
 
-- **Number**: `21`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `ianaRegistrarId`
+- Type: `int32` (singular)
 
 IANA Registrar ID. See [https://www.iana.org/assignments/registrar-ids/registrar-ids.xhtml](https://www.iana.org/assignments/registrar-ids/registrar-ids.xhtml)
 
-### `private_registration`
+### `privateRegistration`
 
-- **Number**: `22`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `privateRegistration`
+- Type: `bool` (singular)
 
 Indicates whether the domain appears to be using a private registration service to mask the owner's contact information.
 
 ### `categories`
 
-- **Number**: `23`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `categories`
+- Type: `string` (repeated)
 
 Categories assign to the domain as retrieved from VirusTotal.
 
 ### `favicon`
 
-- **Number**: `24`
-- **Cardinality**: `singular`
-- **Type**: [`Favicon`](favicon.md)
-- **JSON name**: `favicon`
+- Type: [`Favicon`](favicon.md) (singular)
 
 Includes difference hash and MD5 hash of the domain's favicon.
 
 ### `jarm`
 
-- **Number**: `25`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `jarm`
+- Type: `string` (singular)
 
 Domain's JARM hash.
 
-### `last_dns_records`
+### `lastDnsRecords`
 
-- **Number**: `26`
-- **Cardinality**: `repeated`
-- **Type**: [`DNSRecord`](dns_record.md)
-- **JSON name**: `lastDnsRecords`
+- Type: [`DNSRecord`](dns_record.md) (repeated)
 
 Domain's DNS records from the last scan.
 
-### `last_dns_records_time`
+### `lastDnsRecordsTime`
 
-- **Number**: `27`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastDnsRecordsTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Date when the DNS records list was retrieved by VirusTotal.
 
-### `last_https_certificate`
+### `lastHttpsCertificate`
 
-- **Number**: `28`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate`](ssl_certificate.md)
-- **JSON name**: `lastHttpsCertificate`
+- Type: [`SSLCertificate`](ssl_certificate.md) (singular)
 
 SSL certificate object retrieved last time the domain was analyzed.
 
-### `last_https_certificate_time`
+### `lastHttpsCertificateTime`
 
-- **Number**: `29`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastHttpsCertificateTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 When the certificate was retrieved by VirusTotal.
 
-### `popularity_ranks`
+### `popularityRanks`
 
-- **Number**: `30`
-- **Cardinality**: `repeated`
-- **Type**: [`PopularityRank`](popularity_rank.md)
-- **JSON name**: `popularityRanks`
+- Type: [`PopularityRank`](popularity_rank.md) (repeated)
 
 Domain's position in popularity ranks such as Alexa, Quantcast, Statvoo, etc
 
 ### `tags`
 
-- **Number**: `31`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `tags`
+- Type: `string` (repeated)
 
 List of representative attributes.
 
-### `whois_time`
+### `whoisTime`
 
-- **Number**: `32`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `whoisTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Date of the last update of the WHOIS record.

@@ -7,56 +7,38 @@ Subject data.
 
 ## Fields
 
-### `country_name`
+### `countryName`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `countryName`
+- Type: `string` (singular)
 
 C: Country name.
 
-### `common_name`
+### `commonName`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `commonName`
+- Type: `string` (singular)
 
 CN: CommonName.
 
 ### `locality`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `locality`
+- Type: `string` (singular)
 
 L: Locality.
 
 ### `organization`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `organization`
+- Type: `string` (singular)
 
 O: Organization.
 
-### `organizational_unit`
+### `organizationalUnit`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `organizationalUnit`
+- Type: `string` (singular)
 
 OU: OrganizationalUnit.
 
-### `state_or_province_name`
+### `stateOrProvinceName`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `stateOrProvinceName`
+- Type: `string` (singular)
 
 ST: StateOrProvinceName.

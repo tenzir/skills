@@ -9,10 +9,7 @@ FTP info.
 
 ### `command`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `command`
+- Type: `string` (singular)
 
 The FTP command.
 

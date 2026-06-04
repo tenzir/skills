@@ -7,11 +7,8 @@ DoubleSequence represents a sequence of doubles.
 
 ## Fields
 
-### `double_vals`
+### `doubleVals`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `double`
-- **JSON name**: `doubleVals`
+- Type: `double` (repeated)
 
 double sequence.

@@ -13,156 +13,105 @@ Information about the Entity and the product where the entity was created.
 
 ## Fields
 
-### `product_entity_id`
+### `productEntityId`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `productEntityId`
+- Type: `string` (singular)
 
 A vendor-specific identifier that uniquely identifies the entity (e.g. a GUID, LDAP, OID, or similar).
 
-### `collected_timestamp`
+### `collectedTimestamp`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `collectedTimestamp`
+- Type: `google.protobuf.Timestamp` (singular)
 
 GMT timestamp when the entity information was collected by the vendor's local collection infrastructure.
 
-### `creation_timestamp`
+### `creationTimestamp`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `creationTimestamp`
+- Type: `google.protobuf.Timestamp` (singular)
 
-GMT timestamp when the entity described by the product_entity_id was created on the system where data was collected.
+GMT timestamp when the entity described by the productEntityId was created on the system where data was collected.
 
 ### `interval`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `google.type.Interval`
-- **JSON name**: `interval`
+- Type: `google.type.Interval` (singular)
 
 Valid existence time range for the version of the entity represented by this entity data.
 
-### `vendor_name`
+### `vendorName`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `vendorName`
+- Type: `string` (singular)
 
 Vendor name of the product that produced the entity information.
 
-### `product_name`
+### `productName`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `productName`
+- Type: `string` (singular)
 
 Product name that produced the entity information.
 
 ### `feed`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `feed`
+- Type: `string` (singular)
 
 Vendor feed name for a threat indicator feed.
 
-### `product_version`
+### `productVersion`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `productVersion`
+- Type: `string` (singular)
 
 Version of the product that produced the entity information.
 
-### `entity_type`
+### `entityType`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: [`EntityMetadata.EntityType`](../enums/entity_metadata_entity_type.md)
-- **JSON name**: `entityType`
+- Type: [`EntityMetadata.EntityType`](../enums/entity_metadata_entity_type.md) (singular)
 
 Entity type. If an entity has multiple possible types, this specifies the most specific type.
 
 ### `description`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `description`
+- Type: `string` (singular)
 
 Human-readable description of the entity.
 
 ### `threat`
 
-- **Number**: `10`
-- **Cardinality**: `repeated`
-- **Type**: [`SecurityResult`](security_result.md)
-- **JSON name**: `threat`
+- Type: [`SecurityResult`](security_result.md) (repeated)
 
 Metadata provided by a threat intelligence feed that identified the entity as malicious.
 
-### `source_type`
+### `sourceType`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: [`EntityMetadata.SourceType`](../enums/entity_metadata_source_type.md)
-- **JSON name**: `sourceType`
+- Type: [`EntityMetadata.SourceType`](../enums/entity_metadata_source_type.md) (singular)
 
 The source of the entity.
 
-### `source_labels`
+### `sourceLabels`
 
-- **Number**: `12`
-- **Cardinality**: `repeated`
-- **Type**: [`Label`](label.md)
-- **JSON name**: `sourceLabels`
+- Type: [`Label`](label.md) (repeated)
 
 Entity source metadata labels.
 
-### `event_metadata`
+### `eventMetadata`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: [`Metadata`](metadata.md)
-- **JSON name**: `eventMetadata`
+- Type: [`Metadata`](metadata.md) (singular)
 
 Metadata field from the event.
 
-### `structured_fields`
+### `structuredFields`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct`
-- **JSON name**: `structuredFields`
-- **Deprecated**: `true`
+- Type: `google.protobuf.Struct` (singular)
+- Deprecated: `true`
 
 Structured fields extracted from the log.
 
 ### `extracted`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct`
-- **JSON name**: `extracted`
+- Type: `google.protobuf.Struct` (singular)
 
 Flattened fields extracted from the log.
 
-### `ati_prioritization`
+### `atiPrioritization`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: [`AtiPrioritization`](ati_prioritization.md)
-- **JSON name**: `atiPrioritization`
+- Type: [`AtiPrioritization`](ati_prioritization.md) (singular)
 
 Prioritization factors used by ATI curated rules.

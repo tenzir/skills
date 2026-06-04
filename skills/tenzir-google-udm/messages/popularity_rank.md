@@ -9,27 +9,18 @@ Domain's position in popularity ranks for sources such as Alexa, Quantcast, or S
 
 ### `giver`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `giver`
+- Type: `string` (singular)
 
 Name of the rank serial number hexdump.
 
 ### `rank`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `rank`
+- Type: `int64` (singular)
 
 Rank position.
 
-### `ingestion_time`
+### `ingestionTime`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `ingestionTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp when the rank was ingested.

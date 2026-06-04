@@ -9,120 +9,81 @@ Metadata about the Portable Executable (PE) file.
 
 ### `imphash`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `imphash`
+- Type: `string` (singular)
 
 Imphash of the file.
 
-### `entry_point`
+### `entryPoint`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `entryPoint`
+- Type: `int64` (singular)
 
 info.pe-entry-point.
 
-### `entry_point_exiftool`
+### `entryPointExiftool`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `entryPointExiftool`
+- Type: `int64` (singular)
 
 info.exiftool.EntryPoint.
 
-### `compilation_time`
+### `compilationTime`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `compilationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 info.pe-timestamp.
 
-### `compilation_exiftool_time`
+### `compilationExiftoolTime`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `compilationExiftoolTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 info.exiftool.TimeStamp.
 
 ### `section`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: [`FileMetadataSection`](file_metadata_section.md)
-- **JSON name**: `section`
+- Type: [`FileMetadataSection`](file_metadata_section.md) (repeated)
 
 FilemetadataSection fields.
 
 ### `imports`
 
-- **Number**: `4`
-- **Cardinality**: `repeated`
-- **Type**: [`FileMetadataImports`](file_metadata_imports.md)
-- **JSON name**: `imports`
+- Type: [`FileMetadataImports`](file_metadata_imports.md) (repeated)
 
 FilemetadataImports fields.
 
 ### `resource`
 
-- **Number**: `5`
-- **Cardinality**: `repeated`
-- **Type**: [`FileMetadataPeResourceInfo`](file_metadata_pe_resource_info.md)
-- **JSON name**: `resource`
+- Type: [`FileMetadataPeResourceInfo`](file_metadata_pe_resource_info.md) (repeated)
 
 FilemetadataPeResourceInfo fields.
 
-### `resources_type_count`
+### `resourcesTypeCount`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: [`StringToInt64MapEntry`](string_to_int64_map_entry.md)
-- **JSON name**: `resourcesTypeCount`
-- **Deprecated**: `true`
+- Type: [`StringToInt64MapEntry`](string_to_int64_map_entry.md) (repeated)
+- Deprecated: `true`
 
-Deprecated: use resources_type_count_str.
+Deprecated: use resourcesTypeCountStr.
 
-### `resources_language_count`
+### `resourcesLanguageCount`
 
-- **Number**: `7`
-- **Cardinality**: `repeated`
-- **Type**: [`StringToInt64MapEntry`](string_to_int64_map_entry.md)
-- **JSON name**: `resourcesLanguageCount`
-- **Deprecated**: `true`
+- Type: [`StringToInt64MapEntry`](string_to_int64_map_entry.md) (repeated)
+- Deprecated: `true`
 
-Deprecated: use resources_language_count_str.
+Deprecated: use resourcesLanguageCountStr.
 
-### `resources_type_count_str`
+### `resourcesTypeCountStr`
 
-- **Number**: `12`
-- **Cardinality**: `repeated`
-- **Type**: [`Label`](label.md)
-- **JSON name**: `resourcesTypeCountStr`
+- Type: [`Label`](label.md) (repeated)
 
 Number of resources by resource type. Example: RT_ICON: 10, RT_DIALOG: 5
 
-### `resources_language_count_str`
+### `resourcesLanguageCountStr`
 
-- **Number**: `13`
-- **Cardinality**: `repeated`
-- **Type**: [`Label`](label.md)
-- **JSON name**: `resourcesLanguageCountStr`
+- Type: [`Label`](label.md) (repeated)
 
 Number of resources by language. Example: NEUTRAL: 20, ENGLISH US: 10
 
-### `signature_info`
+### `signatureInfo`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: [`FileMetadataSignatureInfo`](file_metadata_signature_info.md)
-- **JSON name**: `signatureInfo`
-- **Deprecated**: `true`
+- Type: [`FileMetadataSignatureInfo`](file_metadata_signature_info.md) (singular)
+- Deprecated: `true`
 
-FilemetadataSignatureInfo field. deprecated, user File.signature_info instead.
+FilemetadataSignatureInfo field. deprecated, user File.signatureInfo instead.

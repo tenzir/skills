@@ -9,18 +9,12 @@ Association Alias used to represent Mandiant Threat Intelligence.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 Name of the alias.
 
 ### `company`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `company`
+- Type: `string` (singular)
 
 Name of the provider who gave the association's name.

@@ -9,36 +9,24 @@ URL Tracker.
 
 ### `tracker`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `tracker`
+- Type: `string` (singular)
 
 Tracker name.
 
 ### `id`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `id`
+- Type: `string` (singular)
 
 Tracker ID, if available.
 
 ### `timestamp`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `timestamp`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Tracker ingestion date.
 
 ### `url`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `url`
+- Type: `string` (singular)
 
 Tracker script URL.

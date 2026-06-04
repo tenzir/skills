@@ -9,45 +9,30 @@ Information about a software package or application.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 The name of the software.
 
 ### `version`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `version`
+- Type: `string` (singular)
 
 The version of the software.
 
 ### `permissions`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: [`Permission`](permission.md)
-- **JSON name**: `permissions`
+- Type: [`Permission`](permission.md) (repeated)
 
 System permissions granted to the software. For example, "android.permission.WRITE_EXTERNAL_STORAGE"
 
 ### `description`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `description`
+- Type: `string` (singular)
 
 The description of the software.
 
-### `vendor_name`
+### `vendorName`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `vendorName`
+- Type: `string` (singular)
 
 The name of the software vendor.

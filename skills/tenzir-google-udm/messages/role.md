@@ -14,27 +14,18 @@ System role for resource access and modification.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 System role name for user.
 
 ### `description`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `description`
+- Type: `string` (singular)
 
 System role description for user.
 
 ### `type`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: [`Role.Type`](../enums/role_type.md)
-- **JSON name**: `type`
+- Type: [`Role.Type`](../enums/role_type.md) (singular)
 
 System role type for well known roles.

@@ -15,81 +15,54 @@ Transport Layer Security (TLS) information.
 
 ### `client`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`Tls.Client`](tls_client.md)
-- **JSON name**: `client`
+- Type: [`Tls.Client`](tls_client.md) (singular)
 
 Certificate information for the client certificate.
 
 ### `server`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: [`Tls.Server`](tls_server.md)
-- **JSON name**: `server`
+- Type: [`Tls.Server`](tls_server.md) (singular)
 
 Certificate information for the server certificate.
 
 ### `cipher`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `cipher`
+- Type: `string` (singular)
 
 Cipher used during the connection.
 
 ### `curve`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `curve`
+- Type: `string` (singular)
 
 Elliptical curve used for a given cipher.
 
 ### `version`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `version`
+- Type: `string` (singular)
 
 TLS version.
 
-### `version_protocol`
+### `versionProtocol`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `versionProtocol`
+- Type: `string` (singular)
 
 Protocol.
 
 ### `established`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `established`
+- Type: `bool` (singular)
 
 Indicates whether the TLS negotiation was successful.
 
-### `next_protocol`
+### `nextProtocol`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `nextProtocol`
+- Type: `string` (singular)
 
 Protocol to be used for tunnel.
 
 ### `resumed`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `resumed`
+- Type: `bool` (singular)
 
 Indicates whether the TLS connection was resumed from a previous TLS negotiation.

@@ -9,18 +9,12 @@ Entity or software accessing or utilizing network resources.
 
 ### `behaviors`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `behaviors`
+- Type: `string` (repeated)
 
 The behaviors of the client accessing the network.
 
 ### `proxies`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `proxies`
+- Type: `string` (repeated)
 
 The type of proxies used by the client.

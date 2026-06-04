@@ -7,11 +7,8 @@ StringSequence represents a sequence of string.
 
 ## Fields
 
-### `string_vals`
+### `stringVals`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `stringVals`
+- Type: `string` (repeated)
 
 string sequence.

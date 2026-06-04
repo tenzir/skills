@@ -7,47 +7,32 @@ Deprecated. Encapsulates the threat verdict provided by human analysts and ML mo
 
 ## Fields
 
-### `source_count`
+### `sourceCount`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `sourceCount`
+- Type: `int32` (singular)
 
 Number of sources from which intelligence was extracted.
 
-### `response_count`
+### `responseCount`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `responseCount`
+- Type: `int32` (singular)
 
 Total response count across all sources.
 
-### `neighbour_influence`
+### `neighbourInfluence`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `neighbourInfluence`
+- Type: `string` (singular)
 
 Describes the neighbour influence of the verdict.
 
 ### `verdict`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.ProviderMLVerdict`](security_result_provider_ml_verdict.md)
-- **JSON name**: `verdict`
+- Type: [`SecurityResult.ProviderMLVerdict`](security_result_provider_ml_verdict.md) (singular)
 
 ML Verdict provided by sources like Mandiant.
 
-### `analyst_verdict`
+### `analystVerdict`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.AnalystVerdict`](security_result_analyst_verdict.md)
-- **JSON name**: `analystVerdict`
+- Type: [`SecurityResult.AnalystVerdict`](security_result_analyst_verdict.md) (singular)
 
 Human analyst verdict provided by sources like Mandiant.

@@ -9,18 +9,12 @@ File signature information extracted from different tools.
 
 ### `sigcheck`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`FileMetadataSignatureInfo`](file_metadata_signature_info.md)
-- **JSON name**: `sigcheck`
+- Type: [`FileMetadataSignatureInfo`](file_metadata_signature_info.md) (singular)
 
 Signature information extracted from the sigcheck tool.
 
 ### `codesign`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: [`FileMetadataCodesign`](file_metadata_codesign.md)
-- **JSON name**: `codesign`
+- Type: [`FileMetadataCodesign`](file_metadata_codesign.md) (singular)
 
 Signature information extracted from the codesign utility.

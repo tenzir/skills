@@ -7,11 +7,8 @@ Metadata about a Microsoft Windows Portable Executable.
 
 ## Fields
 
-### `import_hash`
+### `importHash`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `importHash`
+- Type: `string` (singular)
 
 Hash of PE imports.

@@ -7,29 +7,20 @@ Verdict provided by the human analyst. These fields are used to model Mandiant s
 
 ## Fields
 
-### `confidence_score`
+### `confidenceScore`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `confidenceScore`
+- Type: `int32` (singular)
 
 Confidence score of the verdict.
 
-### `verdict_time`
+### `verdictTime`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `verdictTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp at which the verdict was generated.
 
-### `verdict_response`
+### `verdictResponse`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.VerdictResponse`](../enums/security_result_verdict_response.md)
-- **JSON name**: `verdictResponse`
+- Type: [`SecurityResult.VerdictResponse`](../enums/security_result_verdict_response.md) (singular)
 
 Details of the verdict.

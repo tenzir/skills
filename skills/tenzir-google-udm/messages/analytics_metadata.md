@@ -9,9 +9,6 @@ Stores information about an analytics metric used in a rule.
 
 ### `analytic`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `analytic`
+- Type: `string` (singular)
 
 Name of the analytic.

@@ -7,20 +7,14 @@ Windows Prefetch file metadata.
 
 ## Fields
 
-### `run_count`
+### `runCount`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `runCount`
+- Type: `int64` (singular)
 
 The number of times the application has been run.
 
-### `prefetch_hash`
+### `prefetchHash`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `prefetchHash`
+- Type: `string` (singular)
 
 A hash of the executable path used to identify the prefetch file.

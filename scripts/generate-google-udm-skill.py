@@ -546,6 +546,94 @@ def field_cardinality(
     return "singular"
 
 
+def field_display_name(field: descriptor_pb2.FieldDescriptorProto) -> str:
+    return field.json_name or field.name
+
+
+def rest_field_name_map(context: FileContext) -> dict[str, str]:
+    return {
+        field.name: field_display_name(field)
+        for message in generated_messages(context)
+        for field in message.descriptor.field
+        if field.name != field_display_name(field)
+    }
+
+
+def apply_rest_field_names(context: FileContext, text: str) -> str:
+    replacements = rest_field_name_map(context)
+    if not replacements:
+        return text
+    pattern = re.compile(
+        r"(?<![?&/])\b("
+        + "|".join(re.escape(name) for name in sorted(replacements, key=len, reverse=True))
+        + r")\b(?!\s*=)"
+    )
+    return pattern.sub(lambda match: replacements[match.group(0)], text)
+
+
+def code_rest_field_names(context: FileContext, text: str) -> str:
+    field_names = sorted(
+        {
+            value
+            for value in rest_field_name_map(context).values()
+            if re.search(r"[A-Z]", value)
+        },
+        key=len,
+        reverse=True,
+    )
+    if not field_names:
+        return text
+    pattern = re.compile(
+        r"\b(" + "|".join(re.escape(name) for name in field_names) + r")\b"
+    )
+    return "".join(
+        part
+        if part.startswith("`") and part.endswith("`")
+        else pattern.sub(lambda match: code_span(match.group(0)), part)
+        for part in re.split(r"(`[^`]*`)", text)
+    )
+
+
+def find_field_by_name(
+    message: MessageDoc,
+    name: str,
+) -> descriptor_pb2.FieldDescriptorProto | None:
+    for field in message.descriptor.field:
+        if field.name == name or field_display_name(field) == name:
+            return field
+    return None
+
+
+def display_field_path(context: FileContext, field_path: str) -> str:
+    parts = field_path.split(".")
+    if not parts:
+        return field_path
+    message = find_message_by_simple_name(context, parts[0])
+    if message is None:
+        return field_path
+
+    display_parts = [message.qualified_name.rsplit(".", 1)[-1]]
+    current_message: MessageDoc | None = message
+    for part in parts[1:]:
+        if current_message is None:
+            display_parts.append(part)
+            continue
+        field = find_field_by_name(current_message, part)
+        if field is None:
+            display_parts.append(part)
+            current_message = None
+            continue
+        display_parts.append(field_display_name(field))
+        nested_message = context.message_by_full_name.get(field.type_name.lstrip("."))
+        current_message = (
+            nested_message
+            if field.type == descriptor_pb2.FieldDescriptorProto.TYPE_MESSAGE
+            and nested_message is not None
+            else None
+        )
+    return ".".join(display_parts)
+
+
 def oneof_name(
     message: descriptor_pb2.DescriptorProto,
     field: descriptor_pb2.FieldDescriptorProto,
@@ -555,11 +643,13 @@ def oneof_name(
     return message.oneof_decl[field.oneof_index].name
 
 
-def active_oneofs(message: descriptor_pb2.DescriptorProto) -> list[tuple[str, list[str]]]:
-    result: list[tuple[str, list[str]]] = []
+def active_oneofs(
+    message: descriptor_pb2.DescriptorProto,
+) -> list[tuple[str, list[descriptor_pb2.FieldDescriptorProto]]]:
+    result: list[tuple[str, list[descriptor_pb2.FieldDescriptorProto]]] = []
     for idx, oneof in enumerate(message.oneof_decl):
         fields = [
-            field.name
+            field
             for field in message.field
             if field.HasField("oneof_index")
             and field.oneof_index == idx
@@ -578,6 +668,14 @@ def format_meta(entries: list[tuple[str, object]]) -> str:
     )
 
 
+def format_field_meta(entries: list[tuple[str, object]]) -> str:
+    return "\n".join(
+        f"- {label}: {value}"
+        for label, value in entries
+        if value not in (None, "")
+    )
+
+
 def render_field(
     context: FileContext,
     message_doc: MessageDoc,
@@ -585,18 +683,22 @@ def render_field(
 ) -> str:
     message = message_doc.descriptor
     field = message.field[field_idx]
-    comment = source_comment(context, message_doc.file_name, (*message_doc.path, 2, field_idx))
-    meta = format_meta(
+    comment = apply_rest_field_names(
+        context,
+        source_comment(context, message_doc.file_name, (*message_doc.path, 2, field_idx)),
+    )
+    meta = format_field_meta(
         [
-            ("Number", f"`{field.number}`"),
-            ("Cardinality", f"`{field_cardinality(context, field)}`"),
-            ("Type", format_type(context, field, section="messages")),
-            ("JSON name", f"`{field.json_name}`" if field.json_name else ""),
+            (
+                "Type",
+                f"{format_type(context, field, section='messages')} "
+                f"({field_cardinality(context, field)})",
+            ),
             ("Oneof", f"`{oneof_name(message, field)}`" if oneof_name(message, field) else ""),
             ("Deprecated", "`true`" if field.options.deprecated else ""),
         ]
     )
-    lines = [f"### `{field.name}`", ""]
+    lines = [f"### `{field_display_name(field)}`", ""]
     if meta:
         lines.extend([meta, ""])
     if comment:
@@ -604,24 +706,36 @@ def render_field(
     return "\n".join(lines).strip() + "\n"
 
 
-def render_guidance_bullet(item: GuidanceBullet) -> list[str]:
+def render_guidance_bullet(
+    item: GuidanceBullet,
+    context: FileContext | None = None,
+) -> list[str]:
+    def format_text(text: str) -> str:
+        if context is not None:
+            text = apply_rest_field_names(context, text)
+            return code_rest_field_names(context, format_guidance_text(text))
+        return format_guidance_text(text)
+
     if item.values:
         header = f"- **{item.label}**:"
         if item.text:
-            header += f" {format_guidance_text(item.text)}"
+            header += f" {format_text(item.text)}"
         lines = [header]
         for value in item.values:
             value_line = f"  - {code_span(value.value)}"
             if value.description:
-                value_line += f": {format_guidance_text(value.description)}"
+                value_line += f": {format_text(value.description)}"
             lines.append(value_line)
         return lines
     if item.text:
-        return [f"- **{item.label}**: {format_guidance_text(item.text)}"]
+        return [f"- **{item.label}**: {format_text(item.text)}"]
     return [f"- **{item.label}**"]
 
 
-def render_message_guidance(fields: tuple[FieldGuidance, ...]) -> list[str]:
+def render_message_guidance(
+    context: FileContext,
+    fields: tuple[FieldGuidance, ...],
+) -> list[str]:
     if not fields:
         return []
     lines = [
@@ -631,43 +745,48 @@ def render_message_guidance(fields: tuple[FieldGuidance, ...]) -> list[str]:
         "",
     ]
     for field in sorted(fields, key=lambda item: item.field_path.lower()):
-        lines.extend([f"### `{field.field_path}`", ""])
+        lines.extend([f"### `{display_field_path(context, field.field_path)}`", ""])
         for item in field.items:
-            lines.extend(render_guidance_bullet(item))
+            lines.extend(render_guidance_bullet(item, context))
         if field.examples:
             lines.extend(["", "#### Examples", ""])
             for example in field.examples:
-                lines.append(f"- {example}")
+                lines.append(f"- {apply_rest_field_names(context, example)}")
         lines.append("")
     return lines
 
 
 def render_entity_requirement(
+    context: FileContext,
     requirement: EntityRequirement,
     *,
     depth: int = 0,
 ) -> list[str]:
     indent = "  " * depth
-    lines = [f"{indent}- {format_guidance_text(requirement.text)}"]
+    text = apply_rest_field_names(context, requirement.text)
+    lines = [f"{indent}- {code_rest_field_names(context, format_guidance_text(text))}"]
     for child in requirement.children:
-        lines.extend(render_entity_requirement(child, depth=depth + 1))
+        lines.extend(render_entity_requirement(context, child, depth=depth + 1))
     return lines
 
 
-def render_entity_type_guidance(entity_guidance: tuple[EntityGuidance, ...]) -> list[str]:
+def render_entity_type_guidance(
+    context: FileContext,
+    entity_guidance: tuple[EntityGuidance, ...],
+) -> list[str]:
     if not entity_guidance:
         return []
     lines = [
         "## Entity Type Guidance",
         "",
         "Required fields from the Google UDM usage guide. Set",
-        "`metadata.entity_type` to the matching `EntityMetadata.EntityType` value.",
+        "`metadata.entityType` to the matching `EntityMetadata.EntityType` value.",
         "",
     ]
     for entity in sorted(entity_guidance, key=lambda item: item.entity_type):
         lines.extend([f"### `{entity.entity_type}`", ""])
         for requirement in entity.requirements:
-            lines.extend(render_entity_requirement(requirement))
+            lines.extend(render_entity_requirement(context, requirement))
         lines.append("")
     return lines
 
@@ -712,9 +831,12 @@ def event_guidance_heading(section: EventGuidance) -> str:
     return f"{humanize_event_tokens(prefix)} {' / '.join(suffixes)} Events"
 
 
-def format_event_guidance_text(text: str) -> str:
+def format_event_guidance_text(context: FileContext, text: str) -> str:
+    text = apply_rest_field_names(context, text)
+
     def format_fragment(fragment: str) -> str:
         formatted = format_guidance_text(fragment)
+        formatted = code_rest_field_names(context, formatted)
         field_name_alternation = "|".join(
             re.escape(name)
             for name in sorted(GUIDANCE_SIMPLE_FIELD_NAMES, key=len, reverse=True)
@@ -752,17 +874,21 @@ def format_event_guidance_text(text: str) -> str:
     return format_fragment(text)
 
 
-def render_event_guidance_items(title: str, values: tuple[str, ...]) -> list[str]:
+def render_event_guidance_items(
+    context: FileContext,
+    title: str,
+    values: tuple[str, ...],
+) -> list[str]:
     if not values:
         return []
     lines = [f"#### {title}", ""]
     for value in values:
-        lines.append(f"- {format_event_guidance_text(value)}")
+        lines.append(f"- {format_event_guidance_text(context, value)}")
     lines.append("")
     return lines
 
 
-def render_event_type_guidance(guidance: DocsGuidance) -> list[str]:
+def render_event_type_guidance(context: FileContext, guidance: DocsGuidance) -> list[str]:
     if not guidance.event_guidance:
         return []
     lines = [
@@ -778,9 +904,13 @@ def render_event_type_guidance(guidance: DocsGuidance) -> list[str]:
         if len(section.event_types) > 1:
             event_types = ", ".join(code_span(value) for value in section.event_types)
             lines.extend([f"Applies to: {event_types}", ""])
-        lines.extend(render_event_guidance_items("Required Fields", section.required))
-        lines.extend(render_event_guidance_items("Optional Fields", section.optional))
-        lines.extend(render_event_guidance_items("Notes", section.notes))
+        lines.extend(
+            render_event_guidance_items(context, "Required Fields", section.required)
+        )
+        lines.extend(
+            render_event_guidance_items(context, "Optional Fields", section.optional)
+        )
+        lines.extend(render_event_guidance_items(context, "Notes", section.notes))
         if section.examples:
             lines.extend(["#### Examples", ""])
             for example_idx, example in enumerate(section.examples, start=1):
@@ -792,7 +922,7 @@ def render_event_type_guidance(guidance: DocsGuidance) -> list[str]:
                         f"##### {title}",
                         "",
                         "```text",
-                        example.code,
+                        apply_rest_field_names(context, example.code),
                         "```",
                         "",
                     ]
@@ -807,7 +937,10 @@ def render_message_page(
     entity_guidance: tuple[EntityGuidance, ...] = (),
 ) -> str:
     message = message_doc.descriptor
-    comment = source_comment(context, message_doc.file_name, message_doc.path)
+    comment = apply_rest_field_names(
+        context,
+        source_comment(context, message_doc.file_name, message_doc.path),
+    )
     nested_messages = [
         candidate
         for candidate in generated_messages(context)
@@ -846,7 +979,7 @@ def render_message_page(
     if oneofs:
         lines.extend(["## Oneofs", ""])
         for name, fields in oneofs:
-            field_list = ", ".join(f"`{field}`" for field in fields)
+            field_list = ", ".join(f"`{field_display_name(field)}`" for field in fields)
             lines.append(f"- `{name}`: {field_list}")
         lines.append("")
     if message.field:
@@ -855,9 +988,9 @@ def render_message_page(
             lines.append(render_field(context, message_doc, field_idx))
     else:
         lines.extend(["## Fields", "", "No fields.", ""])
-    lines.extend(render_message_guidance(guidance_fields))
+    lines.extend(render_message_guidance(context, guidance_fields))
     if message_doc.qualified_name == "Entity":
-        lines.extend(render_entity_type_guidance(entity_guidance))
+        lines.extend(render_entity_type_guidance(context, entity_guidance))
 
     return clean_markdown("\n".join(lines))
 
@@ -868,7 +1001,10 @@ def render_enum_value(
     value_idx: int,
     value: descriptor_pb2.EnumValueDescriptorProto,
 ) -> str:
-    comment = source_comment(context, enum_doc.file_name, (*enum_doc.path, 2, value_idx))
+    comment = apply_rest_field_names(
+        context,
+        source_comment(context, enum_doc.file_name, (*enum_doc.path, 2, value_idx)),
+    )
     value_meta = str(value.number)
     if value.options.deprecated:
         value_meta += ", deprecated"
@@ -885,7 +1021,10 @@ def render_enum_page(
     guidance: DocsGuidance | None = None,
 ) -> str:
     enum = enum_doc.descriptor
-    comment = source_comment(context, enum_doc.file_name, enum_doc.path)
+    comment = apply_rest_field_names(
+        context,
+        source_comment(context, enum_doc.file_name, enum_doc.path),
+    )
     lines = [f"# {title or enum_doc.qualified_name}", ""]
     if comment:
         lines.extend([comment, ""])
@@ -895,7 +1034,7 @@ def render_enum_page(
             lines.append(render_enum_value(context, enum_doc, value_idx, value))
     if guidance is not None:
         lines.append("")
-        lines.extend(render_event_type_guidance(guidance))
+        lines.extend(render_event_type_guidance(context, guidance))
     return clean_markdown("\n".join(lines))
 
 
@@ -1561,7 +1700,10 @@ def brief_comment(comment: str, limit: int = 140) -> str:
 def render_messages_overview(context: FileContext) -> str:
     lines = ["# Messages", ""]
     for message in generated_messages(context):
-        comment = source_comment(context, message.file_name, message.path)
+        comment = apply_rest_field_names(
+            context,
+            source_comment(context, message.file_name, message.path),
+        )
         suffix = f" - {brief_comment(comment)}" if comment else ""
         lines.append(
             f"- [{message.qualified_name}](messages/{message.slug}.md)"
@@ -1573,7 +1715,10 @@ def render_messages_overview(context: FileContext) -> str:
 def render_enums_overview(context: FileContext) -> str:
     lines = ["# Enums", ""]
     for enum in context.enums:
-        comment = source_comment(context, enum.file_name, enum.path)
+        comment = apply_rest_field_names(
+            context,
+            source_comment(context, enum.file_name, enum.path),
+        )
         suffix = f" - {brief_comment(comment)}" if comment else ""
         lines.append(
             f"- [{enum.qualified_name}](enums/{enum.slug}.md)"
@@ -1719,7 +1864,7 @@ def render_usage_page(
         "Generated from targeted sections of the Google UDM usage guide and field list.",
         "Use these pages for field population policy, required fields, field-path",
         "prefixes, datatype notes, and examples. Use the proto-derived schema pages",
-        "for field existence, types, numbers, JSON names, oneofs, and deprecation.",
+        "for REST field keys, types, oneofs, and deprecation.",
         "",
     ]
     lines.extend(render_source_section((guidance.usage_source, guidance.field_list_source)))
@@ -1829,7 +1974,7 @@ def render_event_type_categories_page(
     lines = [
         "# Event Type Categories",
         "",
-        "Usage-guide grouping for choosing `metadata.event_type`.",
+        "Usage-guide grouping for choosing `metadata.eventType`.",
         "",
     ]
     lines.extend(render_source_section((guidance.usage_source,)))
@@ -1919,14 +2064,16 @@ def render_schema_page(context: FileContext, source: SourceRef, fetched_files: s
         if root is None:
             continue
         lines.extend([f"## Top-level {label} fields", ""])
-        lines.append("| Field | No. | Cardinality | Type | Description |")
-        lines.append("| --- | ---: | --- | --- | --- |")
+        lines.append("| Field | Cardinality | Type | Description |")
+        lines.append("| --- | --- | --- | --- |")
         for field_idx, field in enumerate(root.descriptor.field):
-            comment = source_comment(context, root.file_name, (*root.path, 2, field_idx))
+            comment = apply_rest_field_names(
+                context,
+                source_comment(context, root.file_name, (*root.path, 2, field_idx)),
+            )
             lines.append(
                 "| "
-                f"`{field.name}` | "
-                f"`{field.number}` | "
+                f"`{field_display_name(field)}` | "
                 f"`{field_cardinality(context, field)}` | "
                 f"{format_type(context, field, section='schema')} | "
                 f"{brief_comment(comment, 100)} |"
@@ -1951,7 +2098,7 @@ def render_skill_markdown(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, security_result, network, Chronicle normalization, or Google SecOps event schema.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or Google SecOps event schema.",
                 "---",
                 "",
                 "# Google UDM",
@@ -1959,7 +2106,7 @@ def render_skill_markdown(
                 "Look up the generated Google UDM schema and usage references before",
                 "answering. The schema pages are generated from `backstory/udm.proto`",
                 "and `backstory/entity.proto`; they are the ground truth for field",
-                "existence, field numbers, types, JSON names, oneofs, and deprecation.",
+                "existence, REST field keys, types, oneofs, and deprecation.",
                 "The guidance sections are generated from targeted Google documentation;",
                 "they are the source for population policy, required fields,",
                 "field-path prefixes, datatype notes, and examples.",
@@ -1993,7 +2140,7 @@ def render_skill_markdown(
                 "| What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |",
                 "| What values can enum X take? | [Enums](enums.md) -> specific enum page |",
                 "| How should I map this event? | [Event types](event-types.md), then relevant message pages |",
-                "| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |",
+                "| Which `metadata.eventType` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |",
                 "| Required or forbidden fields? | [Event types](event-types.md), [Entity](messages/entity.md), or relevant message page |",
                 "| Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |",
                 "| Which field path prefix? | [Field paths](field-paths.md) |",
@@ -2011,13 +2158,13 @@ def render_skill_markdown(
                 "## Domain knowledge",
                 "",
                 "- UDM events center on `metadata`, participant nouns (`principal`, `src`,",
-                "  `target`, `intermediary`, `observer`, `about`), `security_result`,",
+                "  `target`, `intermediary`, `observer`, `about`), `securityResult`,",
                 "  `network`, and `extensions`.",
                 "- UDM entities center on `metadata`, an `entity` noun, `relations`,",
                 "  optional `risk_score`, and optional `metric` data.",
-                "- `metadata.event_type` classifies the event. It is the first place to look",
+                "- `metadata.eventType` classifies the event. It is the first place to look",
                 "  when deciding how an event should be represented.",
-                "- `metadata.entity_type` classifies entity records and drives entity-specific",
+                "- `metadata.entityType` classifies entity records and drives entity-specific",
                 "  requirements.",
                 "- `Noun` carries entity details such as users, assets, processes, files,",
                 "  resources, cloud context, and labels.",

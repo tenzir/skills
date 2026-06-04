@@ -9,9 +9,6 @@ The Vulnerabilities extension captures details on observed/detected vulnerabilit
 
 ### `vulnerabilities`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: [`Vulnerability`](vulnerability.md)
-- **JSON name**: `vulnerabilities`
+- Type: [`Vulnerability`](vulnerability.md) (repeated)
 
 A list of vulnerabilities.

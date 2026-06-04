@@ -9,36 +9,24 @@ File metadata from the codesign utility.
 
 ### `id`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `id`
+- Type: `string` (singular)
 
 Code sign identifier.
 
 ### `format`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `format`
+- Type: `string` (singular)
 
 Code sign format.
 
-### `compilation_time`
+### `compilationTime`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `compilationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Code sign timestamp
 
-### `team_id`
+### `teamId`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `teamId`
+- Type: `string` (singular)
 
 The assigned team identifier of the developer who signed the application.

@@ -9,18 +9,12 @@ System record for leave/time-off from a Human Capital Management (HCM) system.
 
 ### `interval`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `google.type.Interval`
-- **JSON name**: `interval`
+- Type: `google.type.Interval` (singular)
 
 Interval duration of the leave.
 
 ### `description`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `description`
+- Type: `string` (singular)
 
 Description of the leave if available (e.g. 'Vacation').

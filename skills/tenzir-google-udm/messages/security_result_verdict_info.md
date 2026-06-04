@@ -7,146 +7,98 @@ Describes the threat verdict provided by human analysts and machine learning mod
 
 ## Fields
 
-### `source_count`
+### `sourceCount`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `sourceCount`
+- Type: `int32` (singular)
 
 Number of sources from which intelligence was extracted.
 
-### `response_count`
+### `responseCount`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `responseCount`
+- Type: `int32` (singular)
 
 Total response count across all sources.
 
-### `neighbour_influence`
+### `neighbourInfluence`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `neighbourInfluence`
+- Type: `string` (singular)
 
 Describes the near neighbor influence of the verdict.
 
-### `verdict_type`
+### `verdictType`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.VerdictType`](../enums/security_result_verdict_type.md)
-- **JSON name**: `verdictType`
+- Type: [`SecurityResult.VerdictType`](../enums/security_result_verdict_type.md) (singular)
 
 Type of verdict.
 
-### `source_provider`
+### `sourceProvider`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sourceProvider`
+- Type: `string` (singular)
 
 Source provider giving the machine learning verdict.
 
-### `benign_count`
+### `benignCount`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `benignCount`
+- Type: `int32` (singular)
 
 Count of responses where this IoC was marked as benign.
 
-### `malicious_count`
+### `maliciousCount`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `maliciousCount`
+- Type: `int32` (singular)
 
 Count of responses where this IoC was marked as malicious.
 
-### `confidence_score`
+### `confidenceScore`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `confidenceScore`
+- Type: `int32` (singular)
 
 Confidence score of the verdict.
 
-### `ioc_stats`
+### `iocStats`
 
-- **Number**: `9`
-- **Cardinality**: `repeated`
-- **Type**: [`SecurityResult.IoCStats`](security_result_io_c_stats.md)
-- **JSON name**: `iocStats`
+- Type: [`SecurityResult.IoCStats`](security_result_io_c_stats.md) (repeated)
 
 List of IoCStats from which the verdict was generated.
 
-### `verdict_time`
+### `verdictTime`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `verdictTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp when the verdict was generated.
 
-### `verdict_response`
+### `verdictResponse`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.VerdictResponse`](../enums/security_result_verdict_response.md)
-- **JSON name**: `verdictResponse`
+- Type: [`SecurityResult.VerdictResponse`](../enums/security_result_verdict_response.md) (singular)
 
 Details about the verdict.
 
-### `global_customer_count`
+### `globalCustomerCount`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `globalCustomerCount`
+- Type: `int32` (singular)
 
 Global customer count over the last 30 days
 
-### `global_hits_count`
+### `globalHitsCount`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `globalHitsCount`
+- Type: `int32` (singular)
 
 Global hit count over the last 30 days.
 
 ### `pwn`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `pwn`
+- Type: `bool` (singular)
 
 Whether one or more Mandiant incident response customers had this indicator in their environment.
 
-### `category_details`
+### `categoryDetails`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `categoryDetails`
+- Type: `string` (singular)
 
 Tags related to the verdict.
 
-### `pwn_first_tagged_time`
+### `pwnFirstTaggedTime`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `pwnFirstTaggedTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 The timestamp of the first time a pwn was associated to this entity.

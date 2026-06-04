@@ -9,36 +9,24 @@ Microsoft Outlook specific metadata.
 
 ### `comment`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `comment`
+- Type: `string` (singular)
 
 A user-defined comment or note associated with the Outlook item.
 
 ### `template`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `template`
+- Type: `string` (singular)
 
 The name of the template file used to create the Outlook item.
 
 ### `title`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `title`
+- Type: `string` (singular)
 
 The title of the Outlook item.
 
-### `security_flags_count`
+### `securityFlagsCount`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `securityFlagsCount`
+- Type: `int32` (singular)
 
 Count of Security-related flags for the message, such as encryption or signing status.

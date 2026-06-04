@@ -9,99 +9,66 @@ Proxy information.
 
 ### `anonymous`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `anonymous`
+- Type: `bool` (singular)
 
 Whether the IP address is anonymous.
 
-### `anonymous_vpn`
+### `anonymousVpn`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `anonymousVpn`
+- Type: `bool` (singular)
 
 Whether the IP address is an anonymous VPN.
 
-### `public_proxy`
+### `publicProxy`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `publicProxy`
+- Type: `bool` (singular)
 
 Whether the IP address is a public proxy.
 
-### `tor_exit_node`
+### `torExitNode`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `torExitNode`
+- Type: `bool` (singular)
 
 Whether the IP address is a tor exit node.
 
-### `smart_dns_proxy`
+### `smartDnsProxy`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `smartDnsProxy`
+- Type: `bool` (singular)
 
 Whether the IP address is a smart DNS proxy.
 
-### `hosting_provider`
+### `hostingProvider`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `hostingProvider`
+- Type: `bool` (singular)
 
 Whether the IP address is a hosting provider.
 
-### `vpn_datacenter`
+### `vpnDatacenter`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `vpnDatacenter`
+- Type: `bool` (singular)
 
 Whether the IP address is a VPN datacenter.
 
-### `residential_proxy`
+### `residentialProxy`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `residentialProxy`
+- Type: `bool` (singular)
 
 Whether the IP address is a residential proxy.
 
-### `vpn_service_name`
+### `vpnServiceName`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `vpnServiceName`
+- Type: `string` (singular)
 
 The name of the VPN service.
 
-### `proxy_over_vpn`
+### `proxyOverVpn`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `proxyOverVpn`
+- Type: `bool` (singular)
 
 Whether the IP address is a proxy over VPN.
 
-### `relay_proxy`
+### `relayProxy`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `relayProxy`
+- Type: `bool` (singular)
 
 Whether the IP address is a relay proxy.

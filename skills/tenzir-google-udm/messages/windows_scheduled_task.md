@@ -21,63 +21,42 @@ Information about a Windows scheduled task.
 
 ### `author`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `author`
+- Type: `string` (singular)
 
 The account name that authored or last modified the scheduled task.
 
-### `virtual_path`
+### `virtualPath`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `virtualPath`
+- Type: `string` (singular)
 
 The task's path in the Task Scheduler library.
 
-### `exit_code`
+### `exitCode`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `exitCode`
+- Type: `int32` (singular)
 
 The result which was returned the last time the registered task was run.
 
 ### `state`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`WindowsScheduledTask.TaskState`](../enums/windows_scheduled_task_task_state.md)
-- **JSON name**: `state`
+- Type: [`WindowsScheduledTask.TaskState`](../enums/windows_scheduled_task_task_state.md) (singular)
 
 The operation state of the task.
 
-### `logon_type`
+### `logonType`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: [`WindowsScheduledTask.TaskLogonType`](../enums/windows_scheduled_task_task_logon_type.md)
-- **JSON name**: `logonType`
+- Type: [`WindowsScheduledTask.TaskLogonType`](../enums/windows_scheduled_task_task_logon_type.md) (singular)
 
 The logon type of the task.
 
-### `task_actions`
+### `taskActions`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: [`WindowsScheduledTask.TaskAction`](windows_scheduled_task_task_action.md)
-- **JSON name**: `taskActions`
+- Type: [`WindowsScheduledTask.TaskAction`](windows_scheduled_task_task_action.md) (repeated)
 
 The actions of the scheduled task.
 
-### `task_triggers`
+### `taskTriggers`
 
-- **Number**: `7`
-- **Cardinality**: `repeated`
-- **Type**: [`WindowsScheduledTask.TaskTrigger`](windows_scheduled_task_task_trigger.md)
-- **JSON name**: `taskTriggers`
+- Type: [`WindowsScheduledTask.TaskTrigger`](windows_scheduled_task_task_trigger.md) (repeated)
 
 The triggers of the scheduled task.

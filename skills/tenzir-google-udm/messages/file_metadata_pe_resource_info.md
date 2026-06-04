@@ -7,47 +7,32 @@ File metadata for PE resource.
 
 ## Fields
 
-### `sha256_hex`
+### `sha256Hex`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sha256Hex`
+- Type: `string` (singular)
 
 SHA256_hex field..
 
-### `filetype_magic`
+### `filetypeMagic`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `filetypeMagic`
+- Type: `string` (singular)
 
 Type of resource content, as identified by the magic Python module.
 
-### `language_code`
+### `languageCode`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `languageCode`
+- Type: `string` (singular)
 
 Human-readable version of the language and sublanguage identifiers, as defined in the Microsoft Windows PE specification.
 
 ### `entropy`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `double`
-- **JSON name**: `entropy`
+- Type: `double` (singular)
 
 Entropy of the resource.
 
-### `file_type`
+### `fileType`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `fileType`
+- Type: `string` (singular)
 
 File type. Note that this value may not match any of the well-known type identifiers defined in the ResourceType enum.

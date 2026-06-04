@@ -14,346 +14,232 @@ The Noun type is used to represent the different entities in an event: principal
 
 ### `hostname`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `hostname`
+- Type: `string` (singular)
 
 Client hostname or domain name field. Hostname also doubles as the domain for remote entities. This field can be used as an entity indicator for asset entities.
 
 ### `domain`
 
-- **Number**: `30`
-- **Cardinality**: `singular`
-- **Type**: [`Domain`](domain.md)
-- **JSON name**: `domain`
+- Type: [`Domain`](domain.md) (singular)
 
 Information about the domain.
 
 ### `artifact`
 
-- **Number**: `32`
-- **Cardinality**: `singular`
-- **Type**: [`Artifact`](artifact.md)
-- **JSON name**: `artifact`
+- Type: [`Artifact`](artifact.md) (singular)
 
 Information about an artifact.
 
-### `url_metadata`
+### `urlMetadata`
 
-- **Number**: `37`
-- **Cardinality**: `singular`
-- **Type**: [`Url`](url.md)
-- **JSON name**: `urlMetadata`
+- Type: [`Url`](url.md) (singular)
 
 Information about the URL.
 
 ### `browser`
 
-- **Number**: `38`
-- **Cardinality**: `singular`
-- **Type**: [`Browser`](browser.md)
-- **JSON name**: `browser`
+- Type: [`Browser`](browser.md) (singular)
 
 Information about an entry in the web browser's local history database.
 
-### `asset_id`
+### `assetId`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `assetId`
+- Type: `string` (singular)
 
 The asset ID. This field can be used as an entity indicator for asset entities.
 
 ### `user`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: [`User`](user.md)
-- **JSON name**: `user`
+- Type: [`User`](user.md) (singular)
 
 Information about the user.
 
-### `user_management_chain`
+### `userManagementChain`
 
-- **Number**: `29`
-- **Cardinality**: `repeated`
-- **Type**: [`User`](user.md)
-- **JSON name**: `userManagementChain`
+- Type: [`User`](user.md) (repeated)
 
-Information about the user's management chain (reporting hierarchy). Note: user_management_chain is only populated when data is exported to BigQuery since recursive fields (e.g. user.managers) are not supported by BigQuery.
+Information about the user's management chain (reporting hierarchy). Note: userManagementChain is only populated when data is exported to BigQuery since recursive fields (e.g. user.managers) are not supported by BigQuery.
 
 ### `group`
 
-- **Number**: `20`
-- **Cardinality**: `singular`
-- **Type**: [`Group`](group.md)
-- **JSON name**: `group`
+- Type: [`Group`](group.md) (singular)
 
 Information about the group.
 
 ### `process`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`Process`](process.md)
-- **JSON name**: `process`
+- Type: [`Process`](process.md) (singular)
 
 Information about the process.
 
-### `process_ancestors`
+### `processAncestors`
 
-- **Number**: `28`
-- **Cardinality**: `repeated`
-- **Type**: [`Process`](process.md)
-- **JSON name**: `processAncestors`
+- Type: [`Process`](process.md) (repeated)
 
-Information about the process's ancestors ordered from immediate ancestor (parent process) to root. Note: process_ancestors is only populated when data is exported to BigQuery since recursive fields (e.g. process.parent_process) are not supported by BigQuery.
+Information about the process's ancestors ordered from immediate ancestor (parent process) to root. Note: processAncestors is only populated when data is exported to BigQuery since recursive fields (e.g. process.parentProcess) are not supported by BigQuery.
 
 ### `asset`
 
-- **Number**: `27`
-- **Cardinality**: `singular`
-- **Type**: [`Asset`](asset.md)
-- **JSON name**: `asset`
+- Type: [`Asset`](asset.md) (singular)
 
 Information about the asset.
 
 ### `ip`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `ip`
+- Type: `string` (repeated)
 
 A list of IP addresses associated with a network connection. This field can be used as an entity indicator for asset entities.
 
-### `nat_ip`
+### `natIp`
 
-- **Number**: `21`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `natIp`
+- Type: `string` (repeated)
 
 A list of NAT translated IP addresses associated with a network connection.
 
 ### `port`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `port`
+- Type: `int32` (singular)
 
 Source or destination network port number when a specific network connection is described within an event.
 
-### `nat_port`
+### `natPort`
 
-- **Number**: `22`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `natPort`
+- Type: `int32` (singular)
 
 NAT external network port number when a specific network connection is described within an event.
 
 ### `mac`
 
-- **Number**: `8`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `mac`
+- Type: `string` (repeated)
 
 List of MAC addresses associated with a device. This field can be used as an entity indicator for asset entities.
 
-### `administrative_domain`
+### `administrativeDomain`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `administrativeDomain`
+- Type: `string` (singular)
 
 Domain which the device belongs to (for example, the Microsoft Windows domain).
 
 ### `namespace`
 
-- **Number**: `19`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `namespace`
+- Type: `string` (singular)
 
 Namespace which the device belongs to, such as "AD forest". Uses for this field include Microsoft Windows AD forest, the name of subsidiary, or the name of acquisition. This field can be used along with an asset indicator to identify an asset.
 
 ### `url`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `url`
+- Type: `string` (singular)
 
 The URL.
 
 ### `file`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: [`File`](file.md)
-- **JSON name**: `file`
+- Type: [`File`](file.md) (singular)
 
 Information about the file.
 
 ### `email`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `email`
+- Type: `string` (singular)
 
-Email address. Only filled in for security_result.about
+Email address. Only filled in for securityResult.about
 
 ### `registry`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: [`Registry`](registry.md)
-- **JSON name**: `registry`
+- Type: [`Registry`](registry.md) (singular)
 
 Registry information.
 
 ### `application`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `application`
+- Type: `string` (singular)
 
 The name of an application or service. Some SSO solutions only capture the name of a target application such as "Atlassian" or "Chronicle".
 
 ### `platform`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: [`Noun.Platform`](../enums/noun_platform.md)
-- **JSON name**: `platform`
+- Type: [`Noun.Platform`](../enums/noun_platform.md) (singular)
 
 Platform.
 
-### `platform_version`
+### `platformVersion`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `platformVersion`
+- Type: `string` (singular)
 
 Platform version. For example, "Microsoft Windows 1803".
 
-### `platform_patch_level`
+### `platformPatchLevel`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `platformPatchLevel`
+- Type: `string` (singular)
 
 Platform patch level. For example, "Build 17134.48"
 
 ### `cloud`
 
-- **Number**: `24`
-- **Cardinality**: `singular`
-- **Type**: [`Cloud`](cloud.md)
-- **JSON name**: `cloud`
-- **Deprecated**: `true`
+- Type: [`Cloud`](cloud.md) (singular)
+- Deprecated: `true`
 
 Cloud metadata. Deprecated: cloud should be populated in entity Attribute as generic metadata (e.g. asset.attribute.cloud).
 
 ### `location`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: [`Location`](location.md)
-- **JSON name**: `location`
+- Type: [`Location`](location.md) (singular)
 
 Physical location. For cloud environments, set the region in location.name.
 
-### `ip_location`
+### `ipLocation`
 
-- **Number**: `34`
-- **Cardinality**: `repeated`
-- **Type**: [`Location`](location.md)
-- **JSON name**: `ipLocation`
-- **Deprecated**: `true`
+- Type: [`Location`](location.md) (repeated)
+- Deprecated: `true`
 
-Deprecated: use ip_geo_artifact.location instead.
+Deprecated: use ipGeoArtifact.location instead.
 
-### `ip_geo_artifact`
+### `ipGeoArtifact`
 
-- **Number**: `35`
-- **Cardinality**: `repeated`
-- **Type**: [`Artifact`](artifact.md)
-- **JSON name**: `ipGeoArtifact`
+- Type: [`Artifact`](artifact.md) (repeated)
 
 Enriched geographic information corresponding to an IP address. Specifically, location and network data.
 
 ### `resource`
 
-- **Number**: `18`
-- **Cardinality**: `singular`
-- **Type**: [`Resource`](resource.md)
-- **JSON name**: `resource`
+- Type: [`Resource`](resource.md) (singular)
 
 Information about the resource (e.g. scheduled task, calendar entry). This field should not be used for files, registry, or processes because these objects are already part of Noun.
 
-### `resource_ancestors`
+### `resourceAncestors`
 
-- **Number**: `31`
-- **Cardinality**: `repeated`
-- **Type**: [`Resource`](resource.md)
-- **JSON name**: `resourceAncestors`
+- Type: [`Resource`](resource.md) (repeated)
 
 Information about the resource's ancestors ordered from immediate ancestor (starting with parent resource).
 
 ### `labels`
 
-- **Number**: `23`
-- **Cardinality**: `repeated`
-- **Type**: [`Label`](label.md)
-- **JSON name**: `labels`
-- **Deprecated**: `true`
+- Type: [`Label`](label.md) (repeated)
+- Deprecated: `true`
 
 Labels are key-value pairs. For example: key = "env", value = "prod". Deprecated: labels should be populated in entity Attribute as generic metadata (e.g. user.attribute.labels).
 
-### `object_reference`
+### `objectReference`
 
-- **Number**: `25`
-- **Cardinality**: `singular`
-- **Type**: [`Id`](id.md)
-- **JSON name**: `objectReference`
+- Type: [`Id`](id.md) (singular)
 
 Finding to which the Analyst updated the feedback.
 
 ### `investigation`
 
-- **Number**: `26`
-- **Cardinality**: `singular`
-- **Type**: [`Investigation`](investigation.md)
-- **JSON name**: `investigation`
+- Type: [`Investigation`](investigation.md) (singular)
 
 Analyst feedback/investigation for alerts.
 
 ### `network`
 
-- **Number**: `33`
-- **Cardinality**: `singular`
-- **Type**: [`Network`](network.md)
-- **JSON name**: `network`
+- Type: [`Network`](network.md) (singular)
 
 Network details, including sub-messages with details on each protocol (for example, DHCP, DNS, or HTTP).
 
-### `security_result`
+### `securityResult`
 
-- **Number**: `36`
-- **Cardinality**: `repeated`
-- **Type**: [`SecurityResult`](security_result.md)
-- **JSON name**: `securityResult`
+- Type: [`SecurityResult`](security_result.md) (repeated)
 
 A list of security results.
 
@@ -361,7 +247,7 @@ A list of security results.
 
 Population guidance from the Google UDM usage guide.
 
-### `Noun.administrative_domain`
+### `Noun.administrativeDomain`
 
 - **Purpose**: Domain that the device belongs to (for example, the Windows domain).
 - **Encoding**: Valid domain name string (128 characters maximum).
@@ -371,7 +257,7 @@ Population guidance from the Google UDM usage guide.
 
 - corp.altostrat.com
 
-### `Noun.asset_id`
+### `Noun.assetId`
 
 - **Purpose**: Vendor-specific unique device identifier (for example, a GUID that is generated when installing endpoint security software on a new device that is used to track that unique device over time).
 - **Encoding**: (VendorName or VendorAbbreviation):ID where the VendorName or VendorAbbreviation is a case insensitive vendor name like `Carbon Black` or `CB` and ID is a vendor-specific customer identifier that is globally unique within their customer's environment (for example, a GUID or unique value identifying a unique device). VendorName is alphanumeric and no more than 32 characters long. ID can be a maximum of 128 characters in length and can include alphanumeric characters, dashes, and periods.
@@ -440,7 +326,7 @@ Population guidance from the Google UDM usage guide.
   - `WINDOWS`
   - `UNKNOWN_PLATFORM`
 
-### `Noun.platform_patch_level`
+### `Noun.platformPatchLevel`
 
 - **Purpose**: Platform operating system patch level.
 - **Encoding**: Alphanumeric string with punctuation, 64 characters maximum.
@@ -450,7 +336,7 @@ Population guidance from the Google UDM usage guide.
 
 - Build 17134.48
 
-### `Noun.platform_version`
+### `Noun.platformVersion`
 
 - **Purpose**: Platform operating system version.
 - **Encoding**: Alphanumeric string with punctuation, 64 characters maximum.

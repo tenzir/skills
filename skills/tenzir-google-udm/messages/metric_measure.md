@@ -9,18 +9,12 @@ Describes the precomputed measure.
 
 ### `value`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `double`
-- **JSON name**: `value`
+- Type: `double` (singular)
 
 Value of the aggregated measure.
 
-### `aggregate_function`
+### `aggregateFunction`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: [`Metric.AggregateFunction`](../enums/metric_aggregate_function.md)
-- **JSON name**: `aggregateFunction`
+- Type: [`Metric.AggregateFunction`](../enums/metric_aggregate_function.md) (singular)
 
 Function used to calculate the aggregated measure.

@@ -9,45 +9,30 @@ Transport Layer Security (TLS) information associated with the client (for examp
 
 ### `certificate`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`Certificate`](certificate.md)
-- **JSON name**: `certificate`
+- Type: [`Certificate`](certificate.md) (singular)
 
 Client certificate.
 
 ### `ja3`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ja3`
+- Type: `string` (singular)
 
 JA3 hash from the TLS ClientHello, as a hex-encoded string.
 
-### `server_name`
+### `serverName`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `serverName`
+- Type: `string` (singular)
 
 Host name of the server, that the client is connecting to.
 
-### `supported_ciphers`
+### `supportedCiphers`
 
-- **Number**: `4`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `supportedCiphers`
+- Type: `string` (repeated)
 
 Ciphers supported by the client during client hello.
 
 ### `ja4`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ja4`
+- Type: `string` (singular)
 
 JA4 hash from the TLS ClientHello, as a hex-encoded string.

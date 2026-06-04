@@ -3,7 +3,7 @@
 Generated from targeted sections of the Google UDM usage guide and field list.
 Use these pages for field population policy, required fields, field-path
 prefixes, datatype notes, and examples. Use the proto-derived schema pages
-for field existence, types, numbers, JSON names, oneofs, and deprecation.
+for REST field keys, types, oneofs, and deprecation.
 
 ## Source
 

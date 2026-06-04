@@ -9,55 +9,37 @@ DNS Resource Records. See RFC1035, section 4.1.3.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 The name of the owner of the resource record.
 
 ### `type`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `type`
+- Type: `uint32` (singular)
 
 The code specifying the type of the resource record.
 
 ### `class`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `class`
+- Type: `uint32` (singular)
 
 The code specifying the class of the resource record.
 
 ### `ttl`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `ttl`
+- Type: `uint32` (singular)
 
 The time interval for which the resource record can be cached before the source of the information should again be queried.
 
 ### `data`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `data`
+- Type: `string` (singular)
 
 The payload or response to the DNS question for all responses encoded in UTF-8 format
 
-### `binary_data`
+### `binaryData`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `bytes`
-- **JSON name**: `binaryData`
+- Type: `bytes` (singular)
 
 The raw bytes of any non-UTF8 strings that might be included as part of a DNS response.
 
@@ -65,7 +47,7 @@ The raw bytes of any non-UTF8 strings that might be included as part of a DNS re
 
 Population guidance from the Google UDM usage guide.
 
-### `ResourceRecord.binary_data`
+### `ResourceRecord.binaryData`
 
 - **Purpose**: Stores the raw bytes of any non-UTF8 strings that might be included as part of a DNS response. This field must only be used if the response data returned by the DNS server contains non-UTF8 data. Otherwise, place the DNS response in the data field below. This type of information must be stored here rather than in `ResourceRecord.data`.
 - **Encoding**: Bytes. Note: This field is not specified in RFC 1035 (unlike the other DNS resource record fields), but has been defined by Google SecOps for the UDM.

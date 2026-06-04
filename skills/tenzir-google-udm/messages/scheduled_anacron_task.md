@@ -9,45 +9,30 @@ Information about a scheduled anacron task.
 
 ### `period`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `period`
+- Type: `string` (singular)
 
 Anacrontab period field. Value is an integer in days, or a string like "@daily", "@weekly", or "@monthly".
 
-### `delay_minutes`
+### `delayMinutes`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `delayMinutes`
+- Type: `int64` (singular)
 
 The delay in minutes before the job is run.
 
-### `job_id`
+### `jobId`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `jobId`
+- Type: `string` (singular)
 
 The unique identifier of the job.
 
 ### `path`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `path`
+- Type: `string` (singular)
 
 The PATH environment variable defined in the anacrontab file.
 
-### `source_line`
+### `sourceLine`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sourceLine`
+- Type: `string` (singular)
 
 The original source line from the anacrontab file.

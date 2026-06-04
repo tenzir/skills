@@ -9,54 +9,36 @@ Attribute is a container for generic entity attributes including common attribut
 
 ### `cloud`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`Cloud`](cloud.md)
-- **JSON name**: `cloud`
+- Type: [`Cloud`](cloud.md) (singular)
 
 Cloud metadata attributes such as project ID, account ID, or organizational hierarchy.
 
 ### `labels`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: [`Label`](label.md)
-- **JSON name**: `labels`
+- Type: [`Label`](label.md) (repeated)
 
 Set of labels for the entity. Should only be used for product labels (for example, Google Cloud resource labels or Azure AD sensitivity labels. Should not be used for arbitrary key-value mappings.
 
 ### `permissions`
 
-- **Number**: `705`
-- **Cardinality**: `repeated`
-- **Type**: [`Permission`](permission.md)
-- **JSON name**: `permissions`
+- Type: [`Permission`](permission.md) (repeated)
 
 System permissions for IAM entity (human principal, service account, group).
 
 ### `roles`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: [`Role`](role.md)
-- **JSON name**: `roles`
+- Type: [`Role`](role.md) (repeated)
 
 System IAM roles to be assumed by resources to use the role's permissions for access control.
 
-### `creation_time`
+### `creationTime`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `creationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Time the resource or entity was created or provisioned.
 
-### `last_update_time`
+### `lastUpdateTime`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastUpdateTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Time the resource or entity was last updated.

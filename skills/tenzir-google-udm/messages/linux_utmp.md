@@ -12,11 +12,8 @@ The LinuxUtmp extension captures details specific to Linux Utmp events.
 
 ## Fields
 
-### `record_type`
+### `recordType`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`LinuxUtmp.RecordType`](../enums/linux_utmp_record_type.md)
-- **JSON name**: `recordType`
+- Type: [`LinuxUtmp.RecordType`](../enums/linux_utmp_record_type.md) (singular)
 
 The activity record type.

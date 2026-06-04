@@ -14,99 +14,66 @@ Browser cookie.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 The unique name identifying the cookie.
 
 ### `value`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `value`
+- Type: `string` (singular)
 
 The data stored within the cookie.
 
 ### `domain`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `domain`
+- Type: `string` (singular)
 
 The domain for which the cookie is valid.
 
 ### `path`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `path`
+- Type: `string` (singular)
 
 The URL path for which the cookie is valid.
 
-### `expiration_time`
+### `expirationTime`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `expirationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 The date and time when the cookie will expire.
 
-### `http_only`
+### `httpOnly`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `httpOnly`
+- Type: `bool` (singular)
 
 Indicates if the cookie is inaccessible via client-side scripts (e.g., JavaScript).
 
 ### `secure`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `secure`
+- Type: `bool` (singular)
 
 Indicates if the cookie should only be sent over secure HTTPS connections.
 
-### `max_age`
+### `maxAge`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `maxAge`
+- Type: `int64` (singular)
 
 The maximum age of the cookie in seconds.
 
-### `same_site`
+### `sameSite`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: [`Browser.Cookie.CookieSameSite`](../enums/browser_cookie_cookie_same_site.md)
-- **JSON name**: `sameSite`
+- Type: [`Browser.Cookie.CookieSameSite`](../enums/browser_cookie_cookie_same_site.md) (singular)
 
 Affects cross-site request behavior.
 
 ### `session`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `session`
+- Type: `bool` (singular)
 
 Indicates if the cookie is persistent.
 
 ### `partitioned`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `partitioned`
+- Type: `bool` (singular)
 
 Shows if the cookies is stored using partitioned storage.

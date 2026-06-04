@@ -13,313 +13,211 @@ Information about a user.
 
 ## Fields
 
-### `product_object_id`
+### `productObjectId`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `productObjectId`
+- Type: `string` (singular)
 
 A vendor-specific identifier to uniquely identify the entity (e.g. a GUID, LDAP, OID, or similar). This field can be used as an entity indicator for user entities.
 
 ### `userid`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `userid`
+- Type: `string` (singular)
 
 The ID of the user. This field can be used as an entity indicator for user entities.
 
-### `user_display_name`
+### `userDisplayName`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `userDisplayName`
+- Type: `string` (singular)
 
 The display name of the user (e.g. "John Locke").
 
-### `first_name`
+### `firstName`
 
-- **Number**: `100`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `firstName`
+- Type: `string` (singular)
 
 First name of the user (e.g. "John").
 
-### `middle_name`
+### `middleName`
 
-- **Number**: `101`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `middleName`
+- Type: `string` (singular)
 
 Middle name of the user.
 
-### `last_name`
+### `lastName`
 
-- **Number**: `102`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `lastName`
+- Type: `string` (singular)
 
 Last name of the user (e.g. "Locke").
 
-### `phone_numbers`
+### `phoneNumbers`
 
-- **Number**: `103`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `phoneNumbers`
+- Type: `string` (repeated)
 
 Phone numbers for the user.
 
-### `personal_address`
+### `personalAddress`
 
-- **Number**: `104`
-- **Cardinality**: `singular`
-- **Type**: [`Location`](location.md)
-- **JSON name**: `personalAddress`
+- Type: [`Location`](location.md) (singular)
 
 Personal address of the user.
 
 ### `attribute`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: [`Attribute`](attribute.md)
-- **JSON name**: `attribute`
+- Type: [`Attribute`](attribute.md) (singular)
 
 Generic entity metadata attributes of the user.
 
-### `first_seen_time`
+### `firstSeenTime`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstSeenTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 The first observed time for a user. The value is calculated on the basis of the first time the identifier was observed.
 
-### `account_type`
+### `accountType`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: [`User.AccountType`](../enums/user_account_type.md)
-- **JSON name**: `accountType`
+- Type: [`User.AccountType`](../enums/user_account_type.md) (singular)
 
 Type of user account (for example, service, domain, or cloud). This is somewhat aligned to: [https://attack.mitre.org/techniques/T1078/](https://attack.mitre.org/techniques/T1078/)
 
 ### `groupid`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `groupid`
-- **Deprecated**: `true`
+- Type: `string` (singular)
+- Deprecated: `true`
 
-The ID of the group that the user belongs to. Deprecated in favor of the repeated group_identifiers field.
+The ID of the group that the user belongs to. Deprecated in favor of the repeated groupIdentifiers field.
 
-### `group_identifiers`
+### `groupIdentifiers`
 
-- **Number**: `200`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `groupIdentifiers`
+- Type: `string` (repeated)
 
 Product object identifiers of the group(s) the user belongs to A vendor-specific identifier to uniquely identify the group(s) the user belongs to (a GUID, LDAP OID, or similar).
 
-### `windows_sid`
+### `windowsSid`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `windowsSid`
+- Type: `string` (singular)
 
 The Microsoft Windows SID of the user. This field can be used as an entity indicator for user entities.
 
-### `email_addresses`
+### `emailAddresses`
 
-- **Number**: `5`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `emailAddresses`
+- Type: `string` (repeated)
 
 Email addresses of the user. This field can be used as an entity indicator for user entities.
 
-### `employee_id`
+### `employeeId`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `employeeId`
+- Type: `string` (singular)
 
 Human capital management identifier. This field can be used as an entity indicator for user entities.
 
 ### `title`
 
-- **Number**: `601`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `title`
+- Type: `string` (singular)
 
 User job title.
 
-### `company_name`
+### `companyName`
 
-- **Number**: `602`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `companyName`
+- Type: `string` (singular)
 
 User job company name.
 
 ### `department`
 
-- **Number**: `603`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `department`
+- Type: `string` (repeated)
 
 User job department
 
-### `office_address`
+### `officeAddress`
 
-- **Number**: `604`
-- **Cardinality**: `singular`
-- **Type**: [`Location`](location.md)
-- **JSON name**: `officeAddress`
+- Type: [`Location`](location.md) (singular)
 
 User job office location.
 
 ### `managers`
 
-- **Number**: `605`
-- **Cardinality**: `repeated`
-- **Type**: [`User`](user.md)
-- **JSON name**: `managers`
+- Type: [`User`](user.md) (repeated)
 
 User job manager(s).
 
-### `hire_date`
+### `hireDate`
 
-- **Number**: `606`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `hireDate`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User job employment hire date.
 
-### `termination_date`
+### `terminationDate`
 
-- **Number**: `607`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `terminationDate`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User job employment termination date.
 
-### `time_off`
+### `timeOff`
 
-- **Number**: `608`
-- **Cardinality**: `repeated`
-- **Type**: [`TimeOff`](time_off.md)
-- **JSON name**: `timeOff`
+- Type: [`TimeOff`](time_off.md) (repeated)
 
 User time off leaves from active work.
 
-### `last_login_time`
+### `lastLoginTime`
 
-- **Number**: `609`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastLoginTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User last login timestamp.
 
-### `last_password_change_time`
+### `lastPasswordChangeTime`
 
-- **Number**: `610`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastPasswordChangeTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User last password change timestamp.
 
-### `password_expiration_time`
+### `passwordExpirationTime`
 
-- **Number**: `611`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `passwordExpirationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User password expiration timestamp.
 
-### `account_expiration_time`
+### `accountExpirationTime`
 
-- **Number**: `612`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `accountExpirationTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User account expiration timestamp.
 
-### `account_lockout_time`
+### `accountLockoutTime`
 
-- **Number**: `613`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `accountLockoutTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User account lockout timestamp.
 
-### `last_bad_password_attempt_time`
+### `lastBadPasswordAttemptTime`
 
-- **Number**: `614`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastBadPasswordAttemptTime`
+- Type: `google.protobuf.Timestamp` (singular)
 
 User last bad password attempt timestamp.
 
-### `user_authentication_status`
+### `userAuthenticationStatus`
 
-- **Number**: `701`
-- **Cardinality**: `singular`
-- **Type**: [`Authentication.AuthenticationStatus`](../enums/authentication_authentication_status.md)
-- **JSON name**: `userAuthenticationStatus`
+- Type: [`Authentication.AuthenticationStatus`](../enums/authentication_authentication_status.md) (singular)
 
 System authentication status for user.
 
-### `role_name`
+### `roleName`
 
-- **Number**: `702`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `roleName`
-- **Deprecated**: `true`
+- Type: `string` (singular)
+- Deprecated: `true`
 
 System role name for user. Deprecated: use attribute.roles.
 
-### `role_description`
+### `roleDescription`
 
-- **Number**: `703`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `roleDescription`
-- **Deprecated**: `true`
+- Type: `string` (singular)
+- Deprecated: `true`
 
 System role description for user. Deprecated: use attribute.roles.
 
-### `user_role`
+### `userRole`
 
-- **Number**: `704`
-- **Cardinality**: `singular`
-- **Type**: [`User.Role`](../enums/user_role.md)
-- **JSON name**: `userRole`
-- **Deprecated**: `true`
+- Type: [`User.Role`](../enums/user_role.md) (singular)
+- Deprecated: `true`
 
 System role for user. Deprecated: use attribute.roles.
 
@@ -327,7 +225,7 @@ System role for user. Deprecated: use attribute.roles.
 
 Population guidance from the Google UDM usage guide.
 
-### `User.email_addresses`
+### `User.emailAddresses`
 
 - **Purpose**: Stores the email addresses for the user.
 - **Encoding**: Repeated String.
@@ -337,7 +235,7 @@ Population guidance from the Google UDM usage guide.
 
 - johnlocke@company.example.com
 
-### `User.employee_id`
+### `User.employeeId`
 
 - **Purpose**: Stores the human resources employee ID for the user.
 - **Encoding**: String.
@@ -347,7 +245,7 @@ Population guidance from the Google UDM usage guide.
 
 - 11223344.
 
-### `User.first_name`
+### `User.firstName`
 
 - **Purpose**: Stores the first name for the user.
 - **Encoding**: String.
@@ -357,7 +255,7 @@ Population guidance from the Google UDM usage guide.
 
 - John.
 
-### `User.group_identifiers`
+### `User.groupIdentifiers`
 
 - **Purpose**: Stores the group ID(s) (a GUID, LDAP OID, or similar) associated with a user.
 - **Encoding**: Repeated String.
@@ -367,7 +265,7 @@ Population guidance from the Google UDM usage guide.
 
 - admin-users.
 
-### `User.last_name`
+### `User.lastName`
 
 - **Purpose**: Stores the last name for the user.
 - **Encoding**: String.
@@ -377,7 +275,7 @@ Population guidance from the Google UDM usage guide.
 
 - Locke.
 
-### `User.middle_name`
+### `User.middleName`
 
 - **Purpose**: Stores the middle name for the user.
 - **Encoding**: String.
@@ -387,7 +285,7 @@ Population guidance from the Google UDM usage guide.
 
 - Anthony.
 
-### `User.phone_numbers`
+### `User.phoneNumbers`
 
 - **Purpose**: Stores the phone numbers for the user.
 - **Encoding**: Repeated String.
@@ -407,7 +305,7 @@ Population guidance from the Google UDM usage guide.
 
 - Customer Relationship Manager.
 
-### `User.user_display_name`
+### `User.userDisplayName`
 
 - **Purpose**: Stores the display name for the user.
 - **Encoding**: String.
@@ -427,7 +325,7 @@ Population guidance from the Google UDM usage guide.
 
 - jlocke.
 
-### `User.windows_sid`
+### `User.windowsSid`
 
 - **Purpose**: Stores the Microsoft Windows security identifier (SID) associated with a user.
 - **Encoding**: String.

@@ -9,63 +9,42 @@ SMTP info. See RFC 2821.
 
 ### `helo`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `helo`
+- Type: `string` (singular)
 
 The client's 'HELO'/'EHLO' string.
 
-### `mail_from`
+### `mailFrom`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `mailFrom`
+- Type: `string` (singular)
 
 The client's 'MAIL FROM' string.
 
-### `rcpt_to`
+### `rcptTo`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `rcptTo`
+- Type: `string` (repeated)
 
 The client's 'RCPT TO' string(s).
 
-### `server_response`
+### `serverResponse`
 
-- **Number**: `4`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `serverResponse`
+- Type: `string` (repeated)
 
 The server's response(s) to the client.
 
-### `message_path`
+### `messagePath`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `messagePath`
+- Type: `string` (singular)
 
 The message's path (extracted from the headers).
 
-### `is_webmail`
+### `isWebmail`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `isWebmail`
+- Type: `bool` (singular)
 
 If the message was sent via a webmail client.
 
-### `is_tls`
+### `isTls`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `isTls`
+- Type: `bool` (singular)
 
 If the connection switched to TLS.

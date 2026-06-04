@@ -9,18 +9,12 @@ EC public key information.
 
 ### `oid`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `oid`
+- Type: `string` (singular)
 
 Curve name.
 
 ### `pub`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `pub`
+- Type: `string` (singular)
 
 Public key hexdump.

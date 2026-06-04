@@ -7,18 +7,12 @@
 
 ### `key`
 
-- **Number**: `1`
-- **Cardinality**: `optional`
-- **Type**: `string`
-- **JSON name**: `key`
+- Type: `string` (optional)
 
 Key field.
 
 ### `value`
 
-- **Number**: `2`
-- **Cardinality**: `optional`
-- **Type**: `int64`
-- **JSON name**: `value`
+- Type: `int64` (optional)
 
 Value field.

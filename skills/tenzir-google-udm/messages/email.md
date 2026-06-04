@@ -9,73 +9,49 @@ Email info.
 
 ### `from`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `from`
+- Type: `string` (singular)
 
 The 'from' address.
 
-### `reply_to`
+### `replyTo`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `replyTo`
+- Type: `string` (singular)
 
 The 'reply to' address.
 
 ### `to`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `to`
+- Type: `string` (repeated)
 
 A list of 'to' addresses.
 
 ### `cc`
 
-- **Number**: `4`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `cc`
+- Type: `string` (repeated)
 
 A list of 'cc' addresses.
 
 ### `bcc`
 
-- **Number**: `5`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `bcc`
+- Type: `string` (repeated)
 
 A list of 'bcc' addresses.
 
-### `mail_id`
+### `mailId`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `mailId`
+- Type: `string` (singular)
 
 The mail (or message) ID.
 
 ### `subject`
 
-- **Number**: `7`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `subject`
+- Type: `string` (repeated)
 
 The subject line(s) of the email.
 
-### `bounce_address`
+### `bounceAddress`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `bounceAddress`
+- Type: `string` (singular)
 
 The envelope from address. [https://en.wikipedia.org/wiki/Bounce_address](https://en.wikipedia.org/wiki/Bounce_address)
 
@@ -98,7 +74,7 @@ Population guidance from the Google UDM usage guide.
 - **Purpose**: Stores the from email address.
 - **Encoding**: String.
 
-### `Email.mail_id`
+### `Email.mailId`
 
 - **Purpose**: Stores the mail (or message) id.
 - **Encoding**: String.
@@ -108,9 +84,9 @@ Population guidance from the Google UDM usage guide.
 
 - 192544.132632@email.example.com
 
-### `Email.reply_to`
+### `Email.replyTo`
 
-- **Purpose**: Stores the reply_to email address.
+- **Purpose**: Stores the `replyTo` email address.
 - **Encoding**: String.
 
 ### `Email.subject`

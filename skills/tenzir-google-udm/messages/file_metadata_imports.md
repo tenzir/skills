@@ -9,18 +9,12 @@ File metadata imports.
 
 ### `library`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `library`
+- Type: `string` (singular)
 
 Library field.
 
 ### `functions`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `functions`
+- Type: `string` (repeated)
 
 Function field.

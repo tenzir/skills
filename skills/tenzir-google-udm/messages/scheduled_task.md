@@ -9,63 +9,42 @@ Deprecated: use WindowsScheduledTask for Windows scheduled tasks or ScheduledCro
 
 ### `minute`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `minute`
+- Type: `int32` (singular)
 
 The minute of the hour (0-59).
 
 ### `hour`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `hour`
+- Type: `int32` (singular)
 
 The hour of the day (0-23).
 
-### `month_day`
+### `monthDay`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `monthDay`
+- Type: `int32` (singular)
 
 The day of the month (1-31).
 
 ### `month`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `month`
+- Type: `int32` (singular)
 
 The month of the year (1-12).
 
-### `week_day`
+### `weekDay`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `weekDay`
+- Type: `int32` (singular)
 
 The day of the week (0-6, Sunday=0).
 
 ### `comment`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `comment`
+- Type: `string` (singular)
 
 A comment or description for the task.
 
 ### `author`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `author`
+- Type: `string` (singular)
 
 The account name that authored or last modified the scheduled task.

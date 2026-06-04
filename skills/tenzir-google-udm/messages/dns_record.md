@@ -9,90 +9,60 @@ DNS record.
 
 ### `type`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `type`
+- Type: `string` (singular)
 
 Type.
 
 ### `value`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `value`
+- Type: `string` (singular)
 
 Value.
 
 ### `ttl`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration`
-- **JSON name**: `ttl`
+- Type: `google.protobuf.Duration` (singular)
 
 Time to live.
 
 ### `priority`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `priority`
+- Type: `int64` (singular)
 
 Priority.
 
 ### `retry`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `retry`
+- Type: `int64` (singular)
 
 Retry.
 
 ### `refresh`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration`
-- **JSON name**: `refresh`
+- Type: `google.protobuf.Duration` (singular)
 
 Refresh.
 
 ### `minimum`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration`
-- **JSON name**: `minimum`
+- Type: `google.protobuf.Duration` (singular)
 
 Minimum.
 
 ### `expire`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration`
-- **JSON name**: `expire`
+- Type: `google.protobuf.Duration` (singular)
 
 Expire.
 
 ### `serial`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `serial`
+- Type: `int64` (singular)
 
 Serial.
 
 ### `rname`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `rname`
+- Type: `string` (singular)
 
 Rname.

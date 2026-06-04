@@ -9,81 +9,54 @@ The Srum extension captures details specific to Windows System Resource Usage Mo
 
 ### `id`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `id`
+- Type: `string` (singular)
 
 A unique identifier for the SRUM record or the application/user being monitored.
 
-### `background_bytes_read`
+### `backgroundBytesRead`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `backgroundBytesRead`
+- Type: `int64` (singular)
 
 The number of bytes read by the application while running in the background.
 
-### `background_bytes_written`
+### `backgroundBytesWritten`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `backgroundBytesWritten`
+- Type: `int64` (singular)
 
 The number of bytes written by the application while running in the background.
 
-### `background_context_switches`
+### `backgroundContextSwitches`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `backgroundContextSwitches`
+- Type: `int64` (singular)
 
 The number of context switches performed by the application's threads while in the background.
 
-### `background_cycle_count`
+### `backgroundCycleCount`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `backgroundCycleCount`
+- Type: `int64` (singular)
 
 The amount of CPU cycle time consumed by the application in the background, measured in clock cycles.
 
-### `background_flushes_count`
+### `backgroundFlushesCount`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `backgroundFlushesCount`
+- Type: `int64` (singular)
 
 The number of flush operations performed by the application in the background.
 
-### `background_read_operations`
+### `backgroundReadOperations`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `backgroundReadOperations`
+- Type: `int64` (singular)
 
 The number of read operations performed by the application in the background.
 
-### `background_write_operations`
+### `backgroundWriteOperations`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `backgroundWriteOperations`
+- Type: `int64` (singular)
 
 The number of write operations performed by the application in the background.
 
-### `interface_luid`
+### `interfaceLuid`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `interfaceLuid`
+- Type: `string` (singular)
 
 The Locally Unique Identifier (LUID) for the network interface used for data transfer.

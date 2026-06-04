@@ -9,45 +9,30 @@ File metadata section.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 Name of the section.
 
 ### `entropy`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `double`
-- **JSON name**: `entropy`
+- Type: `double` (singular)
 
 Entropy of the section.
 
-### `raw_size_bytes`
+### `rawSizeBytes`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `rawSizeBytes`
+- Type: `int64` (singular)
 
 Raw file size in bytes.
 
-### `virtual_size_bytes`
+### `virtualSizeBytes`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `virtualSizeBytes`
+- Type: `int64` (singular)
 
 Virtual file size in bytes.
 
-### `md5_hex`
+### `md5Hex`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `md5Hex`
+- Type: `string` (singular)
 
 MD5 hex of the file.

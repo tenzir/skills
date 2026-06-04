@@ -17,37 +17,25 @@ The Authentication extension captures details specific to authentication events.
 
 ### `type`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`Authentication.AuthType`](../enums/authentication_auth_type.md)
-- **JSON name**: `type`
+- Type: [`Authentication.AuthType`](../enums/authentication_auth_type.md) (singular)
 
 The type of authentication.
 
 ### `mechanism`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: [`Authentication.Mechanism`](../enums/authentication_mechanism.md)
-- **JSON name**: `mechanism`
+- Type: [`Authentication.Mechanism`](../enums/authentication_mechanism.md) (repeated)
 
 The authentication mechanism.
 
-### `auth_details`
+### `authDetails`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `authDetails`
+- Type: `string` (singular)
 
 The vendor defined details of the authentication.
 
 ### `outcome`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`Authentication.Outcome`](../enums/authentication_outcome.md)
-- **JSON name**: `outcome`
+- Type: [`Authentication.Outcome`](../enums/authentication_outcome.md) (singular)
 
 The outcome of the authentication event.
 
@@ -55,7 +43,7 @@ The outcome of the authentication event.
 
 Population guidance from the Google UDM usage guide.
 
-### `Authentication.auth_details`
+### `Authentication.authDetails`
 
 - **Purpose**: Vendor-defined authentication details.
 - **Encoding**: String.

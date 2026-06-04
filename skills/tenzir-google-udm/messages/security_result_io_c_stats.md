@@ -7,74 +7,50 @@ Information about the threat intelligence source. These fields are used to model
 
 ## Fields
 
-### `ioc_stats_type`
+### `iocStatsType`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.IoCStatsType`](../enums/security_result_io_c_stats_type.md)
-- **JSON name**: `iocStatsType`
+- Type: [`SecurityResult.IoCStatsType`](../enums/security_result_io_c_stats_type.md) (singular)
 
 Describes the source of the IoCStat.
 
-### `first_level_source`
+### `firstLevelSource`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `firstLevelSource`
+- Type: `string` (singular)
 
 Name of first level IoC source, for example Mandiant or a third-party.
 
-### `second_level_source`
+### `secondLevelSource`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `secondLevelSource`
+- Type: `string` (singular)
 
 Name of the second-level IoC source, for example Crowdsourced Threat Analysis or Knowledge Graph.
 
-### `benign_count`
+### `benignCount`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `benignCount`
+- Type: `int32` (singular)
 
 Count of responses where the IoC was identified as benign.
 
 ### `quality`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: [`SecurityResult.ProductConfidence`](../enums/security_result_product_confidence.md)
-- **JSON name**: `quality`
+- Type: [`SecurityResult.ProductConfidence`](../enums/security_result_product_confidence.md) (singular)
 
 Level of confidence in the IoC mapping extracted from the source.
 
-### `malicious_count`
+### `maliciousCount`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `maliciousCount`
+- Type: `int32` (singular)
 
 Count of responses where the IoC was identified as malicious.
 
-### `response_count`
+### `responseCount`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `responseCount`
+- Type: `int32` (singular)
 
 Total number of response from the source.
 
-### `source_count`
+### `sourceCount`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `sourceCount`
+- Type: `int32` (singular)
 
 Number of sources from which information was extracted.

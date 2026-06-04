@@ -7,11 +7,8 @@ Int64Sequence represents a sequence of int64s.
 
 ## Fields
 
-### `int64_vals`
+### `int64Vals`
 
-- **Number**: `1`
-- **Cardinality**: `repeated`
-- **Type**: `int64`
-- **JSON name**: `int64Vals`
+- Type: `int64` (repeated)
 
 int64 sequence.

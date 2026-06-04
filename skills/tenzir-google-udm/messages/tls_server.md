@@ -9,27 +9,18 @@ Transport Layer Security (TLS) information associated with the server (for examp
 
 ### `certificate`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`Certificate`](certificate.md)
-- **JSON name**: `certificate`
+- Type: [`Certificate`](certificate.md) (singular)
 
 Server certificate.
 
 ### `ja3s`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ja3s`
+- Type: `string` (singular)
 
 JA3 hash from the TLS ServerHello, as a hex-encoded string.
 
 ### `ja4s`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ja4s`
+- Type: `string` (singular)
 
 JA4 hash from the TLS ServerHello, as a hex-encoded string.

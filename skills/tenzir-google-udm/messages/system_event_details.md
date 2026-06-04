@@ -7,29 +7,20 @@ Captures additional details for system-level events.
 
 ## Fields
 
-### `message_type`
+### `messageType`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `messageType`
+- Type: `string` (singular)
 
 The specific type or category of the message.
 
-### `sender_image_id`
+### `senderImageId`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `senderImageId`
+- Type: `string` (singular)
 
 An identifier for the image associated with the sender of the message.
 
 ### `subsystem`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `subsystem`
+- Type: `string` (singular)
 
 The subsystem or component that generated the event.

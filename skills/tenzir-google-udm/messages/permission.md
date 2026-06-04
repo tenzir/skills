@@ -14,27 +14,18 @@ System permission for resource access and modification.
 
 ### `name`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 Name of the permission (e.g. chronicle.analyst.updateRule).
 
 ### `description`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `description`
+- Type: `string` (singular)
 
 Description of the permission (e.g. 'Ability to update detect rules').
 
 ### `type`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: [`Permission.PermissionType`](../enums/permission_permission_type.md)
-- **JSON name**: `type`
+- Type: [`Permission.PermissionType`](../enums/permission_permission_type.md) (singular)
 
 Type of the permission.

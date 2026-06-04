@@ -9,27 +9,18 @@ Windows AppCompatCache (Application Compatibility) metadata.
 
 ### `sequence`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `int32`
-- **JSON name**: `sequence`
+- Type: `int32` (singular)
 
 Indicates the chronological order in which the entry was added to the cache.
 
 ### `executed`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `executed`
+- Type: `bool` (singular)
 
 Indicates whether the file associated with the entry was executed.
 
-### `control_set`
+### `controlSet`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `controlSet`
+- Type: `string` (singular)
 
 Indicates which registry Control Set the AppCompatCache data belongs to (e.g., "ControlSet001").

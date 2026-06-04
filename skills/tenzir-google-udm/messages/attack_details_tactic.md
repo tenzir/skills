@@ -9,18 +9,12 @@ Tactic information related to an attack or threat.
 
 ### `id`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `id`
+- Type: `string` (singular)
 
 Tactic ID (e.g. "TA0043").
 
 ### `name`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 Tactic Name (e.g. "Reconnaissance")

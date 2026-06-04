@@ -1,6 +1,6 @@
 # Process.TokenElevationType
 
-The elevation type of the process's token. See https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-token_elevation_type
+The elevation type of the process's token. See https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-tokenElevationType
 
 ## Values
 

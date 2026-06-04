@@ -9,90 +9,60 @@ Represents the aggregated state of an investigation such as categorization, seve
 
 ### `verdict`
 
-- **Number**: `2`
-- **Cardinality**: `optional`
-- **Type**: [`Verdict`](../enums/verdict.md)
-- **JSON name**: `verdict`
+- Type: [`Verdict`](../enums/verdict.md) (optional)
 
 Describes reason a finding investigation was resolved.
 
 ### `reputation`
 
-- **Number**: `3`
-- **Cardinality**: `optional`
-- **Type**: [`Reputation`](../enums/reputation.md)
-- **JSON name**: `reputation`
+- Type: [`Reputation`](../enums/reputation.md) (optional)
 
 Describes whether a finding was useful or not-useful.
 
-### `severity_score`
+### `severityScore`
 
-- **Number**: `4`
-- **Cardinality**: `optional`
-- **Type**: `uint32`
-- **JSON name**: `severityScore`
+- Type: `uint32` (optional)
 
 Severity score for a finding set by an analyst.
 
 ### `status`
 
-- **Number**: `5`
-- **Cardinality**: `optional`
-- **Type**: [`Status`](../enums/status.md)
-- **JSON name**: `status`
+- Type: [`Status`](../enums/status.md) (optional)
 
 Describes the workflow status of a finding.
 
 ### `comments`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: `string`
-- **JSON name**: `comments`
+- Type: `string` (repeated)
 
 Comment added by the Analyst.
 
 ### `priority`
 
-- **Number**: `7`
-- **Cardinality**: `optional`
-- **Type**: [`Priority`](../enums/priority.md)
-- **JSON name**: `priority`
+- Type: [`Priority`](../enums/priority.md) (optional)
 
 Priority of the Alert or Finding set by analyst.
 
-### `root_cause`
+### `rootCause`
 
-- **Number**: `8`
-- **Cardinality**: `optional`
-- **Type**: `string`
-- **JSON name**: `rootCause`
+- Type: `string` (optional)
 
 Root cause of the Alert or Finding set by analyst.
 
 ### `reason`
 
-- **Number**: `9`
-- **Cardinality**: `optional`
-- **Type**: [`Reason`](../enums/reason.md)
-- **JSON name**: `reason`
+- Type: [`Reason`](../enums/reason.md) (optional)
 
 Reason for closing the Case or Alert.
 
-### `risk_score`
+### `riskScore`
 
-- **Number**: `10`
-- **Cardinality**: `optional`
-- **Type**: `uint32`
-- **JSON name**: `riskScore`
+- Type: `uint32` (optional)
 
 Risk score for a finding set by an analyst.
 
 ### `id`
 
-- **Number**: `11`
-- **Cardinality**: `optional`
-- **Type**: `string`
-- **JSON name**: `id`
+- Type: `string` (optional)
 
 Identifier for the investigation

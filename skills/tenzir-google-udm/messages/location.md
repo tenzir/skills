@@ -9,84 +9,57 @@ Information about a location.
 
 ### `city`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `city`
+- Type: `string` (singular)
 
 The city.
 
 ### `state`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `state`
+- Type: `string` (singular)
 
 The state.
 
-### `country_or_region`
+### `countryOrRegion`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `countryOrRegion`
+- Type: `string` (singular)
 
 The country or region.
 
 ### `name`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `name`
+- Type: `string` (singular)
 
 Custom location name (e.g. building or site name like "London Office"). For cloud environments, this is the region (e.g. "us-west2").
 
-### `desk_name`
+### `deskName`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `deskName`
+- Type: `string` (singular)
 
 Desk name or individual location, typically for an employee in an office. (e.g. "IN-BLR-BCPC-11-1121D").
 
-### `floor_name`
+### `floorName`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `floorName`
+- Type: `string` (singular)
 
 Floor name, number or a combination of the two for a building. (e.g. "1-A").
 
-### `region_latitude`
+### `regionLatitude`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `float`
-- **JSON name**: `regionLatitude`
-- **Deprecated**: `true`
+- Type: `float` (singular)
+- Deprecated: `true`
 
-Deprecated: use region_coordinates.
+Deprecated: use regionCoordinates.
 
-### `region_longitude`
+### `regionLongitude`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `float`
-- **JSON name**: `regionLongitude`
-- **Deprecated**: `true`
+- Type: `float` (singular)
+- Deprecated: `true`
 
-Deprecated: use region_coordinates.
+Deprecated: use regionCoordinates.
 
-### `region_coordinates`
+### `regionCoordinates`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `google.type.LatLng`
-- **JSON name**: `regionCoordinates`
+- Type: `google.type.LatLng` (singular)
 
 Coordinates for the associated region. See [https://cloud.google.com/vision/docs/reference/rest/v1/LatLng](https://cloud.google.com/vision/docs/reference/rest/v1/LatLng) for a description of the fields.
 
@@ -105,7 +78,7 @@ Population guidance from the Google UDM usage guide.
 - Chicago
 - Malaga
 
-### `Location.country_or_region`
+### `Location.countryOrRegion`
 
 - **Purpose**: Stores the name of the country or region of the world.
 - **Encoding**: String.

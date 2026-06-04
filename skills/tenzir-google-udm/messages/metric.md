@@ -19,101 +19,68 @@ Stores precomputed aggregated analytic data for an entity.
 
 ## Fields
 
-### `first_seen`
+### `firstSeen`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `firstSeen`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Timestamp of the first time the entity was seen in the environment.
 
-### `last_seen`
+### `lastSeen`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `lastSeen`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Time stamp of the last time last time the entity was seen in the environment.
 
-### `sum_measure`
+### `sumMeasure`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: [`Metric.Measure`](metric_measure.md)
-- **JSON name**: `sumMeasure`
+- Type: [`Metric.Measure`](metric_measure.md) (singular)
 
 Sum of all precomputed measures for the given metric.
 
-### `total_events`
+### `totalEvents`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `totalEvents`
+- Type: `int64` (singular)
 
 Total number of events used to calculate the given precomputed metric.
 
-### `metric_name`
+### `metricName`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: [`Metric.MetricName`](../enums/metric_metric_name.md)
-- **JSON name**: `metricName`
+- Type: [`Metric.MetricName`](../enums/metric_metric_name.md) (singular)
 
 Name of the analytic.
 
 ### `dimensions`
 
-- **Number**: `6`
-- **Cardinality**: `repeated`
-- **Type**: [`Metric.Dimension`](../enums/metric_dimension.md)
-- **JSON name**: `dimensions`
+- Type: [`Metric.Dimension`](../enums/metric_dimension.md) (repeated)
 
 All group by clauses used to calculate the metric.
 
-### `export_window`
+### `exportWindow`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `exportWindow`
+- Type: `int64` (singular)
 
 Export window for which the metric was exported.
 
-### `display_name`
+### `displayName`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `displayName`
+- Type: `string` (singular)
 
 Display name of the custom metric. Google-authored metrics do not have a display name.
 
-### `outcome_variables`
+### `outcomeVariables`
 
-- **Number**: `9`
-- **Cardinality**: `repeated`
-- **Type**: [`FindingVariable`](finding_variable.md)
-- **JSON name**: `outcomeVariables`
+- Type: [`FindingVariable`](finding_variable.md) (repeated)
 
 List of outcome variables used in the custom metric.
 
-### `match_variables`
+### `matchVariables`
 
-- **Number**: `10`
-- **Cardinality**: `repeated`
-- **Type**: [`FindingVariable`](finding_variable.md)
-- **JSON name**: `matchVariables`
+- Type: [`FindingVariable`](finding_variable.md) (repeated)
 
 List of match variables used in the custom metric.
 
-### `time_range`
+### `timeRange`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `google.type.Interval`
-- **JSON name**: `timeRange`
+- Type: `google.type.Interval` (singular)
 
 Time range for which the custom metric was calculated.

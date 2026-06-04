@@ -9,18 +9,12 @@ Subject public key info.
 
 ### `algorithm`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `algorithm`
+- Type: `string` (singular)
 
 Any of "RSA", "DSA" or "EC". Indicates the algorithm used to generate the certificate.
 
 ### `rsa`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: [`SSLCertificate.RSA`](ssl_certificate_rsa.md)
-- **JSON name**: `rsa`
+- Type: [`SSLCertificate.RSA`](ssl_certificate_rsa.md) (singular)
 
 RSA public key information.

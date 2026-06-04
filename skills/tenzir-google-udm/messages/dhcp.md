@@ -20,192 +20,129 @@ DHCP information.
 
 ### `opcode`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`Dhcp.OpCode`](../enums/dhcp_op_code.md)
-- **JSON name**: `opcode`
+- Type: [`Dhcp.OpCode`](../enums/dhcp_op_code.md) (singular)
 
 The BOOTP op code.
 
 ### `htype`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `htype`
+- Type: `uint32` (singular)
 
 Hardware address type.
 
 ### `hlen`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `hlen`
+- Type: `uint32` (singular)
 
 Hardware address length.
 
 ### `hops`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `hops`
+- Type: `uint32` (singular)
 
 Hardware ops.
 
-### `transaction_id`
+### `transactionId`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `transactionId`
+- Type: `uint32` (singular)
 
 Transaction ID.
 
 ### `seconds`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `seconds`
+- Type: `uint32` (singular)
 
 Seconds elapsed since client began address acquisition/renewal process.
 
 ### `flags`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `flags`
+- Type: `uint32` (singular)
 
 Flags.
 
 ### `ciaddr`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ciaddr`
+- Type: `string` (singular)
 
 Client IP address (ciaddr).
 
 ### `yiaddr`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `yiaddr`
+- Type: `string` (singular)
 
 Your IP address (yiaddr).
 
 ### `siaddr`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `siaddr`
+- Type: `string` (singular)
 
 IP address of the next bootstrap server.
 
 ### `giaddr`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `giaddr`
+- Type: `string` (singular)
 
 Relay agent IP address (giaddr).
 
 ### `chaddr`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `chaddr`
+- Type: `string` (singular)
 
 Client hardware address (chaddr).
 
 ### `sname`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sname`
+- Type: `string` (singular)
 
 Server name that the client wishes to boot from.
 
 ### `file`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `file`
+- Type: `string` (singular)
 
 Boot image filename.
 
 ### `options`
 
-- **Number**: `15`
-- **Cardinality**: `repeated`
-- **Type**: [`Dhcp.Option`](dhcp_option.md)
-- **JSON name**: `options`
+- Type: [`Dhcp.Option`](dhcp_option.md) (repeated)
 
 List of DHCP options.
 
 ### `type`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: [`Dhcp.MessageType`](../enums/dhcp_message_type.md)
-- **JSON name**: `type`
+- Type: [`Dhcp.MessageType`](../enums/dhcp_message_type.md) (singular)
 
 DHCP message type.
 
-### `lease_time_seconds`
+### `leaseTimeSeconds`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: `uint32`
-- **JSON name**: `leaseTimeSeconds`
+- Type: `uint32` (singular)
 
 Lease time in seconds. See RFC2132, section 9.2.
 
-### `client_hostname`
+### `clientHostname`
 
-- **Number**: `18`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `clientHostname`
+- Type: `string` (singular)
 
 Client hostname. See RFC2132, section 3.14.
 
-### `client_identifier`
+### `clientIdentifier`
 
-- **Number**: `19`
-- **Cardinality**: `singular`
-- **Type**: `bytes`
-- **JSON name**: `clientIdentifier`
+- Type: `bytes` (singular)
 
-Client identifier. See RFC2132, section 9.14. Note: Make sure to update the client_identifier_string field as well if you update this field.
+Client identifier. See RFC2132, section 9.14. Note: Make sure to update the clientIdentifierString field as well if you update this field.
 
-### `requested_address`
+### `requestedAddress`
 
-- **Number**: `20`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `requestedAddress`
+- Type: `string` (singular)
 
 Requested IP address. See RFC2132, section 9.1.
 
-### `client_identifier_string`
+### `clientIdentifierString`
 
-- **Number**: `21`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `clientIdentifierString`
+- Type: `string` (singular)
 
-Client identifier as string. See RFC2132, section 9.14. This field holds the string value of the client_identifier.
+Client identifier as string. See RFC2132, section 9.14. This field holds the string value of the clientIdentifier.
 
 ## Guidance
 
@@ -221,12 +158,12 @@ Population guidance from the Google UDM usage guide.
 - **Purpose**: IP address for the client.
 - **Encoding**: Valid IPv4 or IPv6 address (RFC 5942) encoded in ASCII.
 
-### `Dhcp.client_hostname`
+### `Dhcp.clientHostname`
 
 - **Purpose**: Hostname for the client. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: String.
 
-### `Dhcp.client_identifier`
+### `Dhcp.clientIdentifier`
 
 - **Purpose**: Client identifier. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: Bytes.
@@ -261,7 +198,7 @@ Population guidance from the Google UDM usage guide.
 - **Purpose**: Hardware address type.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.lease_time_seconds`
+### `Dhcp.leaseTimeSeconds`
 
 - **Purpose**: Client-requested lease time for an IP address in seconds. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: 32-bit unsigned integer.
@@ -275,7 +212,7 @@ Population guidance from the Google UDM usage guide.
   - `BOOTREQUEST`
   - `BOOTREPLY`
 
-### `Dhcp.requested_address`
+### `Dhcp.requestedAddress`
 
 - **Purpose**: Client identifier. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: Valid IPv4 or IPv6 address (RFC 5942) encoded in ASCII.
@@ -295,7 +232,7 @@ Population guidance from the Google UDM usage guide.
 - **Purpose**: Name of the server that the client has requested to boot from.
 - **Encoding**: String.
 
-### `Dhcp.transaction_id`
+### `Dhcp.transactionId`
 
 - **Purpose**: Client transaction ID.
 - **Encoding**: 32-bit unsigned integer.

@@ -9,18 +9,12 @@ Identifies the public key to be used to verify the signature on this certificate
 
 ### `keyid`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `keyid`
+- Type: `string` (singular)
 
 Key hexdump.
 
-### `serial_number`
+### `serialNumber`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `serialNumber`
+- Type: `string` (singular)
 
 Serial number hexdump.

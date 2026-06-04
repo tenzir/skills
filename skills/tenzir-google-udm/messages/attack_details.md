@@ -15,27 +15,18 @@ MITRE ATT&CK details.
 
 ### `version`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `version`
+- Type: `string` (singular)
 
 ATT&CK version (e.g. 12.1).
 
 ### `tactics`
 
-- **Number**: `2`
-- **Cardinality**: `repeated`
-- **Type**: [`AttackDetails.Tactic`](attack_details_tactic.md)
-- **JSON name**: `tactics`
+- Type: [`AttackDetails.Tactic`](attack_details_tactic.md) (repeated)
 
 Tactics employed.
 
 ### `techniques`
 
-- **Number**: `3`
-- **Cardinality**: `repeated`
-- **Type**: [`AttackDetails.Technique`](attack_details_technique.md)
-- **JSON name**: `techniques`
+- Type: [`AttackDetails.Technique`](attack_details_technique.md) (repeated)
 
 Techniques employed.

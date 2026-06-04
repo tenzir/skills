@@ -9,18 +9,12 @@ Label used in data access for ingestion.
 
 ### `key`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `key`
+- Type: `string` (singular)
 
 The key.
 
 ### `value`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `value`
+- Type: `string` (singular)
 
 The value.

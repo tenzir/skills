@@ -15,264 +15,177 @@ A network event.
 
 ## Fields
 
-### `sent_bytes`
+### `sentBytes`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `sentBytes`
+- Type: `uint64` (singular)
 
 The number of bytes sent.
 
-### `received_bytes`
+### `receivedBytes`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `receivedBytes`
+- Type: `uint64` (singular)
 
 The number of bytes received.
 
-### `total_bytes`
+### `totalBytes`
 
-- **Number**: `27`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `totalBytes`
+- Type: `int64` (singular)
 
 The number of total bytes.
 
-### `sent_packets`
+### `sentPackets`
 
-- **Number**: `22`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `sentPackets`
+- Type: `int64` (singular)
 
 The number of packets sent.
 
-### `received_packets`
+### `receivedPackets`
 
-- **Number**: `23`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `receivedPackets`
+- Type: `int64` (singular)
 
 The number of packets received.
 
-### `session_duration`
+### `sessionDuration`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration`
-- **JSON name**: `sessionDuration`
+- Type: `google.protobuf.Duration` (singular)
 
-The duration of the session as the number of seconds and nanoseconds. For seconds, network.session_duration.seconds, the type is a 64-bit integer. For nanoseconds, network.session_duration.nanos, the type is a 32-bit integer.
+The duration of the session as the number of seconds and nanoseconds. For seconds, network.sessionDuration.seconds, the type is a 64-bit integer. For nanoseconds, network.sessionDuration.nanos, the type is a 32-bit integer.
 
-### `session_id`
+### `sessionId`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sessionId`
+- Type: `string` (singular)
 
 The ID of the network session.
 
-### `parent_session_id`
+### `parentSessionId`
 
-- **Number**: `20`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `parentSessionId`
+- Type: `string` (singular)
 
 The ID of the parent network session.
 
-### `application_protocol_version`
+### `applicationProtocolVersion`
 
-- **Number**: `21`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `applicationProtocolVersion`
+- Type: `string` (singular)
 
 The version of the application protocol. e.g. "1.1, 2.0"
 
-### `community_id`
+### `communityId`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `communityId`
+- Type: `string` (singular)
 
 Community ID network flow value.
 
 ### `direction`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: [`Network.Direction`](../enums/network_direction.md)
-- **JSON name**: `direction`
+- Type: [`Network.Direction`](../enums/network_direction.md) (singular)
 
 The direction of network traffic.
 
-### `ip_protocol`
+### `ipProtocol`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: [`Network.IpProtocol`](../enums/network_ip_protocol.md)
-- **JSON name**: `ipProtocol`
+- Type: [`Network.IpProtocol`](../enums/network_ip_protocol.md) (singular)
 
 The IP protocol.
 
 ### `ipv6`
 
-- **Number**: `29`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `ipv6`
+- Type: `bool` (singular)
 
 True if IPv6 is used.
 
-### `application_protocol`
+### `applicationProtocol`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: [`Network.ApplicationProtocol`](../enums/network_application_protocol.md)
-- **JSON name**: `applicationProtocol`
+- Type: [`Network.ApplicationProtocol`](../enums/network_application_protocol.md) (singular)
 
 The application protocol.
 
 ### `ftp`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: [`Ftp`](ftp.md)
-- **JSON name**: `ftp`
+- Type: [`Ftp`](ftp.md) (singular)
 
 FTP info.
 
 ### `email`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: [`Email`](email.md)
-- **JSON name**: `email`
+- Type: [`Email`](email.md) (singular)
 
 Email info for the sender/recipient.
 
 ### `dns`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: [`Dns`](dns.md)
-- **JSON name**: `dns`
+- Type: [`Dns`](dns.md) (singular)
 
 DNS info.
 
 ### `dhcp`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: [`Dhcp`](dhcp.md)
-- **JSON name**: `dhcp`
+- Type: [`Dhcp`](dhcp.md) (singular)
 
 DHCP info.
 
 ### `http`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: [`Http`](http.md)
-- **JSON name**: `http`
+- Type: [`Http`](http.md) (singular)
 
 HTTP info.
 
 ### `tls`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: [`Tls`](tls.md)
-- **JSON name**: `tls`
+- Type: [`Tls`](tls.md) (singular)
 
 TLS info.
 
 ### `smtp`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: [`Smtp`](smtp.md)
-- **JSON name**: `smtp`
+- Type: [`Smtp`](smtp.md) (singular)
 
 SMTP info. Store fields specific to SMTP not covered by Email.
 
 ### `asn`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `asn`
+- Type: `string` (singular)
 
 Autonomous system number.
 
-### `dns_domain`
+### `dnsDomain`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `dnsDomain`
+- Type: `string` (singular)
 
 DNS domain name.
 
-### `carrier_name`
+### `carrierName`
 
-- **Number**: `18`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `carrierName`
+- Type: `string` (singular)
 
 Carrier identification.
 
-### `organization_name`
+### `organizationName`
 
-- **Number**: `19`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `organizationName`
+- Type: `string` (singular)
 
 Organization name (e.g Google).
 
-### `ip_subnet_range`
+### `ipSubnetRange`
 
-- **Number**: `24`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `ipSubnetRange`
+- Type: `string` (singular)
 
 Associated human-readable IP subnet range (e.g. 10.1.2.0/24).
 
-### `is_proxy`
+### `isProxy`
 
-- **Number**: `25`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `isProxy`
+- Type: `bool` (singular)
 
 Whether the IP address is a known proxy.
 
-### `proxy_info`
+### `proxyInfo`
 
-- **Number**: `26`
-- **Cardinality**: `singular`
-- **Type**: [`ProxyInfo`](proxy_info.md)
-- **JSON name**: `proxyInfo`
+- Type: [`ProxyInfo`](proxy_info.md) (singular)
 
-Proxy information. Only set if is_proxy is true.
+Proxy information. Only set if isProxy is true.
 
-### `connection_state`
+### `connectionState`
 
-- **Number**: `28`
-- **Cardinality**: `singular`
-- **Type**: [`Network.ConnectionState`](../enums/network_connection_state.md)
-- **JSON name**: `connectionState`
+- Type: [`Network.ConnectionState`](../enums/network_connection_state.md) (singular)
 
 The state of the network connection.
 
@@ -280,7 +193,7 @@ The state of the network connection.
 
 Population guidance from the Google UDM usage guide.
 
-### `Network.application_protocol`
+### `Network.applicationProtocol`
 
 - **Purpose**: Indicates the network application protocol.
 - **Encoding**: Enumerated type.
@@ -389,7 +302,7 @@ Population guidance from the Google UDM usage guide.
 
 - jcheng@company.example.com
 
-### `Network.ip_protocol`
+### `Network.ipProtocol`
 
 - **Purpose**: Indicates the IP protocol.
 - **Encoding**: Enumerated type.
@@ -407,7 +320,7 @@ Population guidance from the Google UDM usage guide.
   - `UDP`: User Datagram Protocol
   - `VRRP`: Virtual Router Redundancy Protocol
 
-### `Network.received_bytes`
+### `Network.receivedBytes`
 
 - **Purpose**: Specifies the number of bytes received.
 - **Encoding**: 64-bit unsigned integer.
@@ -417,7 +330,7 @@ Population guidance from the Google UDM usage guide.
 
 - 12,453,654,768
 
-### `Network.sent_bytes`
+### `Network.sentBytes`
 
 - **Purpose**: Specifies the number of bytes sent.
 - **Encoding**: 64-bit unsigned integer.
@@ -427,11 +340,11 @@ Population guidance from the Google UDM usage guide.
 
 - 7,654,876
 
-### `Network.session_duration`
+### `Network.sessionDuration`
 
-- **Purpose**: Stores the network session duration, typically returned in a drop event for the session. To set the duration you can set either `network.session_duration.seconds` = 1, (type int64) or `network.session_duration.nanos` = 1 (type int32).
+- **Purpose**: Stores the network session duration, typically returned in a drop event for the session. To set the duration you can set either `network.sessionDuration.seconds` = 1, (type int64) or `network.sessionDuration.nanos` = 1 (type int32).
 
-### `Network.session_id`
+### `Network.sessionId`
 
 - **Purpose**: Stores the network session identifier.
 - **Encoding**: String.

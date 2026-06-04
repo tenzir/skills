@@ -12,173 +12,122 @@ A structure that holds the value and associated metadata for values extracted wh
 
 ## Oneofs
 
-- `typed_value`: `bool_val`, `bytes_val`, `double_val`, `int64_val`, `uint64_val`, `string_val`, `timestamp_time`, `null_val`, `bool_seq`, `bytes_seq`, `double_seq`, `int64_seq`, `uint64_seq`, `string_seq`
+- `typed_value`: `boolVal`, `bytesVal`, `doubleVal`, `int64Val`, `uint64Val`, `stringVal`, `timestampTime`, `nullVal`, `boolSeq`, `bytesSeq`, `doubleSeq`, `int64Seq`, `uint64Seq`, `stringSeq`
 
 ## Fields
 
 ### `type`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: [`FindingVariable.Type`](../enums/finding_variable_type.md)
-- **JSON name**: `type`
+- Type: [`FindingVariable.Type`](../enums/finding_variable_type.md) (singular)
 
 The type of the variable.
 
 ### `value`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `value`
+- Type: `string` (singular)
 
 The value in string form.
 
-### `source_path`
+### `sourcePath`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sourcePath`
+- Type: `string` (singular)
 
 The UDM field path for the field which this value was derived from. Example: `principal.user.username`
 
-### `bool_val`
+### `boolVal`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `boolVal`
-- **Oneof**: `typed_value`
+- Type: `bool` (singular)
+- Oneof: `typed_value`
 
 The value in boolean format.
 
-### `bytes_val`
+### `bytesVal`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `bytes`
-- **JSON name**: `bytesVal`
-- **Oneof**: `typed_value`
+- Type: `bytes` (singular)
+- Oneof: `typed_value`
 
 The value in bytes format.
 
-### `double_val`
+### `doubleVal`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `double`
-- **JSON name**: `doubleVal`
-- **Oneof**: `typed_value`
+- Type: `double` (singular)
+- Oneof: `typed_value`
 
 The value in double format.
 
-### `int64_val`
+### `int64Val`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `int64`
-- **JSON name**: `int64Val`
-- **Oneof**: `typed_value`
+- Type: `int64` (singular)
+- Oneof: `typed_value`
 
 The value in int64 format.
 
-### `uint64_val`
+### `uint64Val`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `uint64Val`
-- **Oneof**: `typed_value`
+- Type: `uint64` (singular)
+- Oneof: `typed_value`
 
 The value in uint64 format.
 
-### `string_val`
+### `stringVal`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `stringVal`
-- **Oneof**: `typed_value`
+- Type: `string` (singular)
+- Oneof: `typed_value`
 
 The value in string format. Enum values are returned as strings.
 
-### `timestamp_time`
+### `timestampTime`
 
-- **Number**: `17`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `timestampTime`
-- **Oneof**: `typed_value`
+- Type: `google.protobuf.Timestamp` (singular)
+- Oneof: `typed_value`
 
 The value in timestamp format.
 
-### `null_val`
+### `nullVal`
 
-- **Number**: `10`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `nullVal`
-- **Oneof**: `typed_value`
+- Type: `bool` (singular)
+- Oneof: `typed_value`
 
 Whether the value is null.
 
-### `bool_seq`
+### `boolSeq`
 
-- **Number**: `11`
-- **Cardinality**: `singular`
-- **Type**: [`BoolSequence`](bool_sequence.md)
-- **JSON name**: `boolSeq`
-- **Oneof**: `typed_value`
+- Type: [`BoolSequence`](bool_sequence.md) (singular)
+- Oneof: `typed_value`
 
 The value in boolsequence format.
 
-### `bytes_seq`
+### `bytesSeq`
 
-- **Number**: `12`
-- **Cardinality**: `singular`
-- **Type**: [`BytesSequence`](bytes_sequence.md)
-- **JSON name**: `bytesSeq`
-- **Oneof**: `typed_value`
+- Type: [`BytesSequence`](bytes_sequence.md) (singular)
+- Oneof: `typed_value`
 
 The value in bytessequence format.
 
-### `double_seq`
+### `doubleSeq`
 
-- **Number**: `13`
-- **Cardinality**: `singular`
-- **Type**: [`DoubleSequence`](double_sequence.md)
-- **JSON name**: `doubleSeq`
-- **Oneof**: `typed_value`
+- Type: [`DoubleSequence`](double_sequence.md) (singular)
+- Oneof: `typed_value`
 
 The value in doublesequence format.
 
-### `int64_seq`
+### `int64Seq`
 
-- **Number**: `14`
-- **Cardinality**: `singular`
-- **Type**: [`Int64Sequence`](int64_sequence.md)
-- **JSON name**: `int64Seq`
-- **Oneof**: `typed_value`
+- Type: [`Int64Sequence`](int64_sequence.md) (singular)
+- Oneof: `typed_value`
 
 The value in int64sequence format.
 
-### `uint64_seq`
+### `uint64Seq`
 
-- **Number**: `15`
-- **Cardinality**: `singular`
-- **Type**: [`Uint64Sequence`](uint64_sequence.md)
-- **JSON name**: `uint64Seq`
-- **Oneof**: `typed_value`
+- Type: [`Uint64Sequence`](uint64_sequence.md) (singular)
+- Oneof: `typed_value`
 
 The value in uint64sequence format.
 
-### `string_seq`
+### `stringSeq`
 
-- **Number**: `16`
-- **Cardinality**: `singular`
-- **Type**: [`StringSequence`](string_sequence.md)
-- **JSON name**: `stringSeq`
-- **Oneof**: `typed_value`
+- Type: [`StringSequence`](string_sequence.md) (singular)
+- Oneof: `typed_value`
 
 The value in stringsequence format.

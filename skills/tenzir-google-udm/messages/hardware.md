@@ -7,83 +7,56 @@ Hardware specification details for a resource, including both physical and virtu
 
 ## Fields
 
-### `serial_number`
+### `serialNumber`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `serialNumber`
+- Type: `string` (singular)
 
 Hardware serial number.
 
 ### `manufacturer`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `manufacturer`
+- Type: `string` (singular)
 
 Hardware manufacturer.
 
 ### `model`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `model`
+- Type: `string` (singular)
 
 Hardware model.
 
-### `cpu_platform`
+### `cpuPlatform`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `cpuPlatform`
+- Type: `string` (singular)
 
 Platform of the hardware CPU (e.g. "Intel Broadwell").
 
-### `cpu_model`
+### `cpuModel`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `cpuModel`
+- Type: `string` (singular)
 
 Model description of the hardware CPU (e.g. "2.8 GHz Quad-Core Intel Core i5").
 
-### `cpu_clock_speed`
+### `cpuClockSpeed`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `cpuClockSpeed`
+- Type: `uint64` (singular)
 
 Clock speed of the hardware CPU in MHz.
 
-### `cpu_max_clock_speed`
+### `cpuMaxClockSpeed`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `cpuMaxClockSpeed`
+- Type: `uint64` (singular)
 
 Maximum possible clock speed of the hardware CPU in MHz.
 
-### `cpu_number_cores`
+### `cpuNumberCores`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `cpuNumberCores`
+- Type: `uint64` (singular)
 
 Number of CPU cores.
 
 ### `ram`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `uint64`
-- **JSON name**: `ram`
+- Type: `uint64` (singular)
 
 Amount of the hardware ramdom access memory (RAM) in Mb.

@@ -9,81 +9,54 @@ Certificate information
 
 ### `version`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `version`
+- Type: `string` (singular)
 
 Certificate version.
 
 ### `serial`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `serial`
+- Type: `string` (singular)
 
 Certificate serial number.
 
 ### `subject`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `subject`
+- Type: `string` (singular)
 
 Subject of the certificate.
 
 ### `issuer`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `issuer`
+- Type: `string` (singular)
 
 Issuer of the certificate.
 
 ### `md5`
 
-- **Number**: `5`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `md5`
+- Type: `string` (singular)
 
 The MD5 hash of the certificate, as a hex-encoded string.
 
 ### `sha1`
 
-- **Number**: `6`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sha1`
+- Type: `string` (singular)
 
 The SHA1 hash of the certificate, as a hex-encoded string.
 
 ### `sha256`
 
-- **Number**: `7`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `sha256`
+- Type: `string` (singular)
 
 The SHA256 hash of the certificate, as a hex-encoded string.
 
-### `not_before`
+### `notBefore`
 
-- **Number**: `8`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `notBefore`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Indicates when the certificate is first valid.
 
-### `not_after`
+### `notAfter`
 
-- **Number**: `9`
-- **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp`
-- **JSON name**: `notAfter`
+- Type: `google.protobuf.Timestamp` (singular)
 
 Indicates when the certificate is no longer valid.

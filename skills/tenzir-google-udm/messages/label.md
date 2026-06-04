@@ -9,36 +9,24 @@ Key value labels.
 
 ### `key`
 
-- **Number**: `1`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `key`
+- Type: `string` (singular)
 
 The key.
 
 ### `value`
 
-- **Number**: `2`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `value`
+- Type: `string` (singular)
 
 The value.
 
 ### `source`
 
-- **Number**: `3`
-- **Cardinality**: `singular`
-- **Type**: `string`
-- **JSON name**: `source`
+- Type: `string` (singular)
 
 Where the label is derived from.
 
-### `rbac_enabled`
+### `rbacEnabled`
 
-- **Number**: `4`
-- **Cardinality**: `singular`
-- **Type**: `bool`
-- **JSON name**: `rbacEnabled`
+- Type: `bool` (singular)
 
 Indicates whether this label can be used for Data RBAC
