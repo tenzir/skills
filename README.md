@@ -5,12 +5,18 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 🗂️ Skills
 
+### 🧬 Schemas
+
+| Skill                          | Description                                                                      |
+| ------------------------------ | -------------------------------------------------------------------------------- |
+| `tenzir-google-udm`            | Google SecOps UDM schema and normalization guidance — fields, event/entity types |
+| `tenzir-ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
+
 ### 🛡️ Tenzir Users
 
 | Skill                          | Description                                                                      |
 | ------------------------------ | -------------------------------------------------------------------------------- |
 | `tenzir-docs`                  | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
-| `tenzir-ocsf`                  | OCSF schema reference — event classes, objects, attributes, profiles, extensions |
 | `tenzir-create-package`        | Create library-quality Tenzir packages with UDOs, tests, examples, and pipelines |
 
 ### 🏗️ Tenzir Contributors
@@ -27,8 +33,6 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 📦 Install
 
-### All skills
-
 Install all skills into the current project:
 
 ```bash
@@ -41,25 +45,15 @@ Or install globally:
 npx skills add -g tenzir/skills
 ```
 
-### Individual skill examples
-
 Install a specific skill into the current project, for example:
 
 ```bash
 npx skills add tenzir/skills@tenzir-commit-changes
 npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir-docs
+npx skills add tenzir/skills@tenzir-google-udm
 npx skills add tenzir/skills@tenzir-ocsf
 ```
-
-## Generated skills
-
-`tenzir-docs` is generated from the structured Markdown bundle published by
-[`tenzir/docs`](https://github.com/tenzir/docs/releases/tag/latest).
-
-`tenzir-ocsf` is generated directly from the upstream
-[`ocsf-schema`](https://github.com/ocsf/ocsf-schema) and
-[`ocsf-docs`](https://github.com/ocsf/ocsf-docs) repositories.
 
 ## 🧩 Dependencies
 

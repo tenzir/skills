@@ -1,0 +1,77 @@
+# EventTimestampAttribute
+
+Enum representing the type of timestamp that the eventTimestamp field represents.
+
+## Values
+
+- `EVENT_TIMESTAMP_ATTRIBUTE_UNSPECIFIED` (0): Default event timestamp attribute.
+- `FILE_LAST_ACCESS_TIME` (1, deprecated): Deprecated. Use LAST_ACCESSED instead.
+- `FILE_LAST_MODIFIED_TIME` (2, deprecated): Deprecated. Use LAST_MODIFIED instead.
+- `FILE_METADATA_LAST_CHANGE_TIME` (3, deprecated): Deprecated. Use METADATA_LAST_CHANGED instead.
+- `FILE_CREATION_TIME` (4, deprecated): Deprecated. Use CREATED instead.
+- `COLLECTED_TIME` (5, deprecated): Deprecated. Use COLLECTED instead.
+- `COLLECTED` (6): The time when the event was collected by the vendor's local collection infrastructure.
+- `ACCESSED` (7): The time when the file was accessed.
+- `CHANGED` (8): The time when the file was changed.
+- `CREATED` (9): The time when the file was first created.
+- `FILE_NAME_ACCESSED` (10): The time when the file name was accessed.
+- `FILE_NAME_CHANGED` (11): The time when the file name was changed.
+- `FILE_NAME_CREATED` (12): The time when the file name was created.
+- `FILE_NAME_LAST_ACCESSED` (13): The time when the file name was last accessed.
+- `FILE_NAME_LAST_MODIFIED` (14): The time when the file name was last modified.
+- `FILE_NAME_METADATA_LAST_CHANGED` (15): The time when the file name metadata was last changed.
+- `FILE_NAME_MODIFIED` (16): The time when the file name was modified.
+- `LAST_ACCESSED` (17): The time when the file was last accessed.
+- `LAST_MODIFIED` (18): The time when the file was last modified.
+- `METADATA_LAST_CHANGED` (19): The time when the file metadata was last changed.
+- `MODIFIED` (20): The time when the file was modified.
+- `ADDED` (21): Added Timestamp.
+- `BACKED_UP` (22): Backed Up Timestamp.
+- `LAST_CONNECTED` (23): Last Connected timestamp.
+- `DELETED` (24): Deleted Timestamp.
+- `ENDED` (25): Ended Timestamp.
+- `EXITED` (26): Exited Timestamp.
+- `EXPIRED` (27): Expired Timestamp.
+- `FIRST_ACCESSED` (28): First Accessed Timestamp.
+- `APPEARED` (29): Appeared Timestamp.
+- `INSTALLED` (30): Installed Timestamp.
+- `LAST_ACTIVE` (31): Last Active Timestamp.
+- `LAST_LOGGED_IN` (32): Last Login Timestamp.
+- `LAST_LOGIN_ATTEMPT` (33): Last Login Attempt Timestamp.
+- `LAST_PASSWORD_SET` (34): Last Password Set Timestamp.
+- `LAST_PRINTED` (35): Last Printed Timestamp.
+- `LAST_RESUMED` (36): Last Resumed Timestamp.
+- `LAST_EXECUTED` (37): Last Executed Timestamp.
+- `LAST_SEEN` (38): Last Seen Timestamp.
+- `LAST_SHUTDOWN` (39): Last Shutdown Timestamp.
+- `LAST_UPDATED` (40): Last Updated Timestamp.
+- `LAST_USED` (41): Last Used Timestamp.
+- `LAST_VISITED` (42): Last Visited Timestamp.
+- `LINKED` (43): Linked Timestamp.
+- `METADATA_MODIFIED` (44): Metadata Modified Timestamp.
+- `CONTENT_MODIFIED` (45): Modified Timestamp.
+- `PURCHASED` (46): Purchased Timestamp.
+- `RECORDED` (47): Recorded Timestamp.
+- `REQUEST_RECEIVED` (48): Request Received Timestamp.
+- `RESPONSE_SENT` (49): Response Sent Timestamp.
+- `SCHEDULED_TO_END` (50): Scheduled to End Timestamp.
+- `SCHEDULED_TO_START` (51): Scheduled to Start Timestamp.
+- `SENT` (52): Sent Timestamp.
+- `STARTED` (53): Started Timestamp.
+- `UPDATED` (54): Updated Timestamp.
+- `VALIDATED` (55): Validated Timestamp.
+- `MOST_RECENT_RUN` (56): Most Recent Run Timestamp.
+- `NEXT_RUN` (57): Next Run Timestamp.
+- `VISITED` (58): Visited Timestamp.
+- `TARGET_CREATED` (59): Target Created Timestamp.
+- `VOLUME_CREATED` (60): Volume Created Timestamp.
+- `POST_CHECKED` (61): Post Checked Timestamp.
+- `SYNCHRONIZED` (62): Synchronized Timestamp.
+- `ITEM_CREATED` (63): Item Created Timestamp.
+- `ITEM_MODIFIED` (64): Item Modified Timestamp.
+- `DOCUMENT_LAST_SAVED` (65): Document Last Saved Timestamp.
+- `LAST_REGISTERED` (66): Last Registered Timestamp.
+- `LAUNCHED` (67): Launched Timestamp.
+- `FIRST_VISITED` (68): First Visited Timestamp.
+- `FIRST_SEEN` (69): First Seen Timestamp.
+- `DOWNLOADED` (70): Downloaded Timestamp.

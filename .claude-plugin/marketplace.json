@@ -1,10 +1,16 @@
 {
   "plugins": [
     {
+      "name": "🧬 Schemas",
+      "skills": [
+        "./skills/tenzir-google-udm",
+        "./skills/tenzir-ocsf"
+      ]
+    },
+    {
       "name": "🛡️ Tenzir Users",
       "skills": [
         "./skills/tenzir-docs",
-        "./skills/tenzir-ocsf",
         "./skills/tenzir-create-package"
       ]
     },
