@@ -66,6 +66,42 @@ SCALAR_TYPES = {
     descriptor_pb2.FieldDescriptorProto.TYPE_SINT32: "sint32",
     descriptor_pb2.FieldDescriptorProto.TYPE_SINT64: "sint64",
 }
+GUIDANCE_FIELD_PATH_ROOTS = {
+    "about",
+    "additional",
+    "entity",
+    "extensions",
+    "idm",
+    "intermediary",
+    "metric",
+    "metadata",
+    "network",
+    "observer",
+    "principal",
+    "relations",
+    "security_result",
+    "securityresult",
+    "src",
+    "target",
+}
+GUIDANCE_SIMPLE_FIELD_NAMES = GUIDANCE_FIELD_PATH_ROOTS | {
+    "application",
+    "category",
+    "email",
+    "event_timestamp",
+    "event_type",
+    "file",
+    "ip",
+    "mac",
+    "name",
+    "port",
+    "process",
+    "registry",
+    "resource",
+    "type",
+    "url",
+    "user",
+}
 
 
 @dataclass(frozen=True, slots=True)
@@ -636,6 +672,135 @@ def render_entity_type_guidance(entity_guidance: tuple[EntityGuidance, ...]) -> 
     return lines
 
 
+def event_guidance_anchor(event_type: str) -> str:
+    return to_snake_case(event_type)
+
+
+def event_token_prefix(event_types: tuple[str, ...]) -> tuple[str, ...]:
+    tokenized = [event_type.split("_") for event_type in event_types]
+    if not tokenized:
+        return ()
+    prefix: list[str] = []
+    for idx in range(min(len(tokens) for tokens in tokenized)):
+        token = tokenized[0][idx]
+        if all(tokens[idx] == token for tokens in tokenized):
+            prefix.append(token)
+        else:
+            break
+    return tuple(prefix)
+
+
+def humanize_event_tokens(tokens: tuple[str, ...] | list[str]) -> str:
+    return " ".join(token.capitalize() for token in tokens)
+
+
+def event_guidance_heading(section: EventGuidance) -> str:
+    if len(section.event_types) == 1:
+        return section.event_types[0]
+
+    prefix = event_token_prefix(section.event_types)
+    if not prefix:
+        return section.title
+
+    suffixes = []
+    for event_type in section.event_types:
+        tokens = event_type.split("_")
+        suffix_tokens = tokens[len(prefix):] or tokens
+        suffixes.append(humanize_event_tokens(suffix_tokens))
+    return f"{humanize_event_tokens(prefix)} {' / '.join(suffixes)} Events"
+
+
+def format_event_guidance_text(text: str) -> str:
+    def format_fragment(fragment: str) -> str:
+        formatted = format_guidance_text(fragment)
+        field_name_alternation = "|".join(
+            re.escape(name)
+            for name in sorted(GUIDANCE_SIMPLE_FIELD_NAMES, key=len, reverse=True)
+        )
+        simple_field_pattern = re.compile(
+            rf"\b({field_name_alternation})\b"
+            rf"(?=(?:\s+(?:and|or)\s+(?:{field_name_alternation}))*\s+fields?\b)",
+            flags=re.IGNORECASE,
+        )
+        return "".join(
+            part
+            if part.startswith("`") and part.endswith("`")
+            else simple_field_pattern.sub(lambda match: code_span(match.group(0)), part)
+            for part in re.split(r"(`[^`]*`)", formatted)
+        )
+
+    compound_match = re.match(
+        r"^([a-z][A-Za-z0-9_]*)(\s+and\s+)(`?[^`:]+`?)(:\s*)(.*)$",
+        text,
+    )
+    if compound_match and compound_match.group(1).lower() in GUIDANCE_FIELD_PATH_ROOTS:
+        return (
+            f"{code_span(compound_match.group(1))}"
+            f"{compound_match.group(2)}"
+            f"{format_fragment(compound_match.group(3))}"
+            f"{compound_match.group(4)}"
+            f"{format_fragment(compound_match.group(5))}"
+        )
+    match = re.match(
+        r"^([a-z][A-Za-z0-9_]*(?:\.[A-Za-z][A-Za-z0-9_]*)*)(:\s*)(.*)$",
+        text,
+    )
+    if match:
+        return f"{code_span(match.group(1))}: {format_fragment(match.group(3))}"
+    return format_fragment(text)
+
+
+def render_event_guidance_items(title: str, values: tuple[str, ...]) -> list[str]:
+    if not values:
+        return []
+    lines = [f"#### {title}", ""]
+    for value in values:
+        lines.append(f"- {format_event_guidance_text(value)}")
+    lines.append("")
+    return lines
+
+
+def render_event_type_guidance(guidance: DocsGuidance) -> list[str]:
+    if not guidance.event_guidance:
+        return []
+    lines = [
+        "## Guidance",
+        "",
+        "Population guidance from the "
+        f"[Google UDM usage guide]({guidance.usage_source.url}); "
+        f"Google last updated: `{guidance.usage_source.last_updated}`.",
+        "",
+    ]
+    for section in guidance.event_guidance:
+        for event_type in section.event_types:
+            lines.append(f'<a id="{event_guidance_anchor(event_type)}"></a>')
+        lines.append("")
+        lines.extend([f"### {event_guidance_heading(section)}", ""])
+        if len(section.event_types) > 1:
+            event_types = ", ".join(code_span(value) for value in section.event_types)
+            lines.extend([f"Applies to: {event_types}", ""])
+        lines.extend(render_event_guidance_items("Required Fields", section.required))
+        lines.extend(render_event_guidance_items("Optional Fields", section.optional))
+        lines.extend(render_event_guidance_items("Notes", section.notes))
+        if section.examples:
+            lines.extend(["#### Examples", ""])
+            for example_idx, example in enumerate(section.examples, start=1):
+                title = example.title
+                if len(section.examples) > 1:
+                    title = f"{title} ({example_idx})"
+                lines.extend(
+                    [
+                        f"##### {title}",
+                        "",
+                        "```text",
+                        example.code,
+                        "```",
+                        "",
+                    ]
+                )
+    return lines
+
+
 def render_message_page(
     context: FileContext,
     message_doc: MessageDoc,
@@ -718,6 +883,7 @@ def render_enum_page(
     enum_doc: EnumDoc,
     *,
     title: str | None = None,
+    guidance: DocsGuidance | None = None,
 ) -> str:
     enum = enum_doc.descriptor
     comment = source_comment(context, enum_doc.file_name, enum_doc.path)
@@ -728,6 +894,8 @@ def render_enum_page(
         lines.extend(["## Values", ""])
         for value_idx, value in enumerate(enum.value):
             lines.append(render_enum_value(context, enum_doc, value_idx, value))
+    if guidance is not None:
+        lines.extend(render_event_type_guidance(guidance))
     return clean_markdown("\n".join(lines))
 
 
@@ -785,16 +953,39 @@ def code_span(text: str) -> str:
 def format_guidance_text(text: str) -> str:
     parts = re.split(r"(`[^`]*`)", text)
     pattern = re.compile(r"\b[A-Za-z][A-Za-z0-9_]*(?:\.[A-Za-z][A-Za-z0-9_]*)+\b")
+    standalone_name_alternation = "|".join(
+        re.escape(name)
+        for name in sorted(
+            (name for name in GUIDANCE_SIMPLE_FIELD_NAMES if "_" in name),
+            key=len,
+            reverse=True,
+        )
+    )
+    standalone_field_pattern = re.compile(
+        rf"\b({standalone_name_alternation})\b",
+        flags=re.IGNORECASE,
+    )
 
     def replace(match: re.Match[str]) -> str:
         value = match.group(0)
-        if "_" in value or value[0].isupper():
+        root = value.split(".", 1)[0]
+        if (
+            "_" in value
+            or value[0].isupper()
+            or root.lower() in GUIDANCE_FIELD_PATH_ROOTS
+        ):
             return code_span(value)
         return value
 
-    return "".join(
+    formatted = "".join(
         part if part.startswith("`") and part.endswith("`") else pattern.sub(replace, part)
         for part in parts
+    )
+    return "".join(
+        part
+        if part.startswith("`") and part.endswith("`")
+        else standalone_field_pattern.sub(lambda match: code_span(match.group(0)), part)
+        for part in re.split(r"(`[^`]*`)", formatted)
     )
 
 
@@ -1548,7 +1739,7 @@ def render_usage_page(
             "- [Field paths](field-paths.md)",
             "- [Datatypes](datatypes.md)",
             "- [Event type categories](event-type-categories.md)",
-            "- [Event guidance](event-guidance.md)",
+            "- [Event types and event guidance](event-types.md)",
             "",
         ]
     )
@@ -1654,93 +1845,11 @@ def render_event_type_categories_page(
                 event_type = extract_event_value(value)
                 if event_type in event_guidance_values:
                     lines.append(
-                        f"- [{value}](event-guidance/{to_snake_case(event_type)}.md)"
+                        f"- [{value}](event-types.md#{event_guidance_anchor(event_type)})"
                     )
                 else:
                     lines.append(f"- {value}")
         lines.append("")
-    return clean_markdown("\n".join(lines))
-
-
-def render_event_guidance_index(
-    guidance: DocsGuidance,
-) -> str:
-    lines = [
-        "# Event Guidance",
-        "",
-        "Required fields, optional fields, notes, and examples by",
-        "`Metadata.EventType`. Grouped Google usage-guide sections are rendered as",
-        "one alias page for each event type.",
-        "",
-    ]
-    lines.extend(render_source_section((guidance.usage_source,)))
-    lines.extend(["## Event Types", ""])
-    entries = sorted(
-        (
-            (event_type, section.title)
-            for section in guidance.event_guidance
-            for event_type in section.event_types
-        ),
-        key=lambda item: item[0],
-    )
-    for event_type, title in entries:
-        suffix = f" - section: {title}" if title != event_type else ""
-        lines.append(
-            f"- [`{event_type}`](event-guidance/{to_snake_case(event_type)}.md){suffix}"
-        )
-    lines.append("")
-    return clean_markdown("\n".join(lines))
-
-
-def render_event_guidance_page(
-    guidance: DocsGuidance,
-    event_type: str,
-    section: EventGuidance,
-) -> str:
-    lines = [
-        f"# {event_type} Event Guidance",
-        "",
-    ]
-    lines.extend(render_source_section((guidance.usage_source,)))
-    lines.extend(
-        [
-            "## Applies To",
-            "",
-            "- " + ", ".join(f"`{value}`" for value in section.event_types),
-            f"- Usage-guide section: `{section.title}`",
-            "- Proto enum: [Metadata.EventType](../enums/metadata_event_type.md)",
-            "",
-        ]
-    )
-    sections = [
-        ("## Required Fields", section.required),
-        ("## Optional Fields", section.optional),
-        ("## Notes", section.notes),
-    ]
-    for title, values in sections:
-        lines.extend([title, ""])
-        if values:
-            for value in values:
-                lines.append(f"- {value}")
-        else:
-            lines.append("No entries extracted.")
-        lines.append("")
-    if section.examples:
-        lines.extend(["## Examples", ""])
-        for example_idx, example in enumerate(section.examples, start=1):
-            title = example.title
-            if len(section.examples) > 1:
-                title = f"{title} ({example_idx})"
-            lines.extend(
-                [
-                    f"### {title}",
-                    "",
-                    "```text",
-                    example.code,
-                    "```",
-                    "",
-                ]
-            )
     return clean_markdown("\n".join(lines))
 
 
@@ -1755,14 +1864,7 @@ def render_guidance_docs(
         Path("field-paths.md"): render_field_paths_page(guidance),
         Path("datatypes.md"): render_datatypes_page(guidance),
         Path("event-type-categories.md"): render_event_type_categories_page(guidance),
-        Path("event-guidance.md"): render_event_guidance_index(guidance),
     }
-
-    for section in guidance.event_guidance:
-        for event_type in section.event_types:
-            docs[Path("event-guidance") / f"{to_snake_case(event_type)}.md"] = (
-                render_event_guidance_page(guidance, event_type, section)
-            )
 
     return docs
 
@@ -1878,11 +1980,10 @@ def render_skill_markdown(
                 "messages/{message}.md      # Message fields, nested types, and population guidance",
                 "enums.md                   # Enum index",
                 "enums/{enum}.md            # Enum values",
-                "event-types.md             # Dedicated Metadata.EventType reference",
+                "event-types.md             # Metadata.EventType values and event guidance",
                 "usage.md                   # Guidance source summary and routing",
                 "field-paths.md             # Rules, Detect Engine, and CBN prefixes",
                 "datatypes.md               # Standard datatype notes",
-                "event-guidance/{type}.md   # Required/optional event guidance by event type",
                 "```",
                 "",
                 "## Question routing",
@@ -1891,9 +1992,9 @@ def render_skill_markdown(
                 "| --- | --- |",
                 "| What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |",
                 "| What values can enum X take? | [Enums](enums.md) -> specific enum page |",
-                "| How should I map this event? | [Event guidance](event-guidance.md), then relevant message pages |",
-                "| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |",
-                "| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity](messages/entity.md) |",
+                "| How should I map this event? | [Event types](event-types.md), then relevant message pages |",
+                "| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |",
+                "| Required or forbidden fields? | [Event types](event-types.md), [Entity](messages/entity.md), or relevant message page |",
                 "| Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |",
                 "| Which field path prefix? | [Field paths](field-paths.md) |",
                 "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |",
@@ -1976,6 +2077,7 @@ def build_docs(
             context,
             event_type,
             title="Event Types",
+            guidance=guidance,
         )
 
     if guidance is not None:

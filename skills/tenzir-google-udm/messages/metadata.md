@@ -252,8 +252,8 @@ Population guidance from the Google UDM usage guide.
 
 - **Purpose**: Specifies the type of the event. If an event has multiple possible types, this value must specify the most specific type.
 - **Required**: Yes.
-- **Encoding**: Must be one of the predefined UDM event_type enumerated types.
-- **Possible values**: The following lists all of the possible values for event_type within the UDM.
+- **Encoding**: Must be one of the predefined UDM `event_type` enumerated types.
+- **Possible values**: The following lists all of the possible values for `event_type` within the UDM.
 
 ### `Metadata.product_event_type`
 

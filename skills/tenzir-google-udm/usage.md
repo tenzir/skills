@@ -26,7 +26,7 @@ for field existence, types, numbers, JSON names, oneofs, and deprecation.
 - [Field paths](field-paths.md)
 - [Datatypes](datatypes.md)
 - [Event type categories](event-type-categories.md)
-- [Event guidance](event-guidance.md)
+- [Event types and event guidance](event-types.md)
 
 ## Product-Only Field Notes
 

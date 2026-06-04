@@ -29,7 +29,7 @@ Usage-guide grouping for choosing `metadata.event_type`.
 ## Email events
 
 - EMAIL_UNCATEGORIZED
-- [EMAIL_TRANSACTION](event-guidance/email_transaction.md)
+- [EMAIL_TRANSACTION](event-types.md#email_transaction)
 - EMAIL_URL_CLICK
 
 ## Events that are unspecified
@@ -39,13 +39,13 @@ Usage-guide grouping for choosing `metadata.event_type`.
 ## File events performed on an endpoint
 
 - FILE_UNCATEGORIZED
-- [FILE_COPY (for example, copying a file to a thumb drive)](event-guidance/file_copy.md)
-- [FILE_CREATION](event-guidance/file_creation.md)
-- [FILE_DELETION](event-guidance/file_deletion.md)
-- [FILE_MODIFICATION](event-guidance/file_modification.md)
+- [FILE_COPY (for example, copying a file to a thumb drive)](event-types.md#file_copy)
+- [FILE_CREATION](event-types.md#file_creation)
+- [FILE_DELETION](event-types.md#file_deletion)
+- [FILE_MODIFICATION](event-types.md#file_modification)
 - FILE_MOVE
-- [FILE_OPEN (for example, opening a file might indicate a security breach)](event-guidance/file_open.md)
-- [FILE_READ (for example, reading a password file)](event-guidance/file_read.md)
+- [FILE_OPEN (for example, opening a file might indicate a security breach)](event-types.md#file_open)
+- [FILE_READ (for example, reading a password file)](event-types.md#file_read)
 - FILE_SYNC
 
 ## Events that don't fall into any other category
@@ -64,41 +64,41 @@ Events that don't fall into any other category, including uncategorized Windows 
 ## Mutex events
 
 - MUTEX_UNCATEGORIZED
-- [MUTEX_CREATION](event-guidance/mutex_creation.md)
+- [MUTEX_CREATION](event-types.md#mutex_creation)
 
 ## Network telemetry events
 
 Network telemetry events, which include raw protocol payloads, such as DHCP and DNS, as well as protocol summaries for protocols such as HTTP, SMTP, and FTP and flow and connection events from NetFlow and firewalls:
 
 - NETWORK_UNCATEGORIZED
-- [NETWORK_CONNECTION (for example, network connection details from a firewall)](event-guidance/network_connection.md)
+- [NETWORK_CONNECTION (for example, network connection details from a firewall)](event-types.md#network_connection)
 - NETWORK_DHCP
 - NETWORK_DNS
 - NETWORK_FLOW (for example, aggregated flow statistics from Netflow)
 - NETWORK_FTP
-- [NETWORK_HTTP](event-guidance/network_http.md)
+- [NETWORK_HTTP](event-types.md#network_http)
 - NETWORK_SMTP
 
 ## Process events
 
 Any events pertaining to a process such as a process launch, a process creating something malicious, a process injecting into another process, a change of a registry key, or creating a malicious file on disk:
 
-- [PROCESS_UNCATEGORIZED](event-guidance/process_uncategorized.md)
-- [PROCESS_INJECTION](event-guidance/process_injection.md)
-- [PROCESS_LAUNCH](event-guidance/process_launch.md)
-- [PROCESS_MODULE_LOAD](event-guidance/process_module_load.md)
-- [PROCESS_OPEN](event-guidance/process_open.md)
-- [PROCESS_PRIVILEGE_ESCALATION](event-guidance/process_privilege_escalation.md)
-- [PROCESS_TERMINATION](event-guidance/process_termination.md)
+- [PROCESS_UNCATEGORIZED](event-types.md#process_uncategorized)
+- [PROCESS_INJECTION](event-types.md#process_injection)
+- [PROCESS_LAUNCH](event-types.md#process_launch)
+- [PROCESS_MODULE_LOAD](event-types.md#process_module_load)
+- [PROCESS_OPEN](event-types.md#process_open)
+- [PROCESS_PRIVILEGE_ESCALATION](event-types.md#process_privilege_escalation)
+- [PROCESS_TERMINATION](event-types.md#process_termination)
 
 ## Registry events
 
 Use the following REGISTRY events rather than the SETTING events when dealing with Microsoft Windows-specific registry events:
 
 - REGISTRY_UNCATEGORIZED
-- [REGISTRY_CREATION](event-guidance/registry_creation.md)
-- [REGISTRY_MODIFICATION](event-guidance/registry_modification.md)
-- [REGISTRY_DELETION](event-guidance/registry_deletion.md)
+- [REGISTRY_CREATION](event-types.md#registry_creation)
+- [REGISTRY_MODIFICATION](event-types.md#registry_modification)
+- [REGISTRY_DELETION](event-types.md#registry_deletion)
 
 ## Resource events
 
@@ -115,31 +115,31 @@ Scan-oriented events includes on-demand scans and behavioral detections performe
 Scan-oriented events:
 
 - SCAN_UNCATEGORIZED
-- [SCAN_FILE](event-guidance/scan_file.md)
-- [SCAN_HOST](event-guidance/scan_host.md)
+- [SCAN_FILE](event-types.md#scan_file)
+- [SCAN_HOST](event-types.md#scan_host)
 - SCAN_NETWORK
-- [SCAN_PROCESS](event-guidance/scan_process.md)
+- [SCAN_PROCESS](event-types.md#scan_process)
 - SCAN_PROCESS_BEHAVIORS
-- [SCAN_VULN_HOST](event-guidance/scan_vuln_host.md)
-- [SCAN_VULN_NETWORK](event-guidance/scan_vuln_network.md)
+- [SCAN_VULN_HOST](event-types.md#scan_vuln_host)
+- [SCAN_VULN_NETWORK](event-types.md#scan_vuln_network)
 
 ## Scheduled tasks events (Windows Task Scheduler, cron, etc.)
 
-- [SCHEDULED_TASK_UNCATEGORIZED](event-guidance/scheduled_task_uncategorized.md)
-- [SCHEDULED_TASK_CREATION](event-guidance/scheduled_task_creation.md)
-- [SCHEDULED_TASK_DELETION](event-guidance/scheduled_task_deletion.md)
-- [SCHEDULED_TASK_DISABLE](event-guidance/scheduled_task_disable.md)
-- [SCHEDULED_TASK_ENABLE](event-guidance/scheduled_task_enable.md)
-- [SCHEDULED_TASK_MODIFICATION](event-guidance/scheduled_task_modification.md)
+- [SCHEDULED_TASK_UNCATEGORIZED](event-types.md#scheduled_task_uncategorized)
+- [SCHEDULED_TASK_CREATION](event-types.md#scheduled_task_creation)
+- [SCHEDULED_TASK_DELETION](event-types.md#scheduled_task_deletion)
+- [SCHEDULED_TASK_DISABLE](event-types.md#scheduled_task_disable)
+- [SCHEDULED_TASK_ENABLE](event-types.md#scheduled_task_enable)
+- [SCHEDULED_TASK_MODIFICATION](event-types.md#scheduled_task_modification)
 
 ## Service events
 
-- [SERVICE_UNSPECIFIED](event-guidance/service_unspecified.md)
-- [SERVICE_CREATION](event-guidance/service_creation.md)
-- [SERVICE_DELETION](event-guidance/service_deletion.md)
+- [SERVICE_UNSPECIFIED](event-types.md#service_unspecified)
+- [SERVICE_CREATION](event-types.md#service_creation)
+- [SERVICE_DELETION](event-types.md#service_deletion)
 - SERVICE_MODIFICATION
-- [SERVICE_START](event-guidance/service_start.md)
-- [SERVICE_STOP](event-guidance/service_stop.md)
+- [SERVICE_START](event-types.md#service_start)
+- [SERVICE_STOP](event-types.md#service_stop)
 
 ## Setting events
 
@@ -147,40 +147,40 @@ For setting event requirements, see Settings - required fields.
 
 Setting events, including when a system setting is changed on an endpoint:
 
-- [SETTING_UNCATEGORIZED](event-guidance/setting_uncategorized.md)
-- [SETTING_CREATION](event-guidance/setting_creation.md)
-- [SETTING_DELETION](event-guidance/setting_deletion.md)
-- [SETTING_MODIFICATION](event-guidance/setting_modification.md)
+- [SETTING_UNCATEGORIZED](event-types.md#setting_uncategorized)
+- [SETTING_CREATION](event-types.md#setting_creation)
+- [SETTING_DELETION](event-types.md#setting_deletion)
+- [SETTING_MODIFICATION](event-types.md#setting_modification)
 
 ## Status messages from security products
 
 Status messages from security products to indicate that agents are alive and to send version, fingerprint, or other types of data:
 
 - STATUS_UNCATEGORIZED
-- [STATUS_HEARTBEAT (indicates product is alive)](event-guidance/status_heartbeat.md)
-- [STATUS_STARTUP](event-guidance/status_startup.md)
-- [STATUS_SHUTDOWN](event-guidance/status_shutdown.md)
-- [STATUS_UPDATE (software or fingerprint update)](event-guidance/status_update.md)
+- [STATUS_HEARTBEAT (indicates product is alive)](event-types.md#status_heartbeat)
+- [STATUS_STARTUP](event-types.md#status_startup)
+- [STATUS_SHUTDOWN](event-types.md#status_shutdown)
+- [STATUS_UPDATE (software or fingerprint update)](event-types.md#status_update)
 
 ## System audit log events
 
-- [SYSTEM_AUDIT_LOG_UNCATEGORIZED](event-guidance/system_audit_log_uncategorized.md)
-- [SYSTEM_AUDIT_LOG_WIPE](event-guidance/system_audit_log_wipe.md)
+- [SYSTEM_AUDIT_LOG_UNCATEGORIZED](event-types.md#system_audit_log_uncategorized)
+- [SYSTEM_AUDIT_LOG_WIPE](event-types.md#system_audit_log_wipe)
 
 ## User authentication activity events
 
-- [USER_UNCATEGORIZED](event-guidance/user_uncategorized.md)
+- [USER_UNCATEGORIZED](event-types.md#user_uncategorized)
 - USER_BADGE_IN (for example, when a user physically badges in to a site)
-- [USER_CHANGE_PASSWORD](event-guidance/user_change_password.md)
-- [USER_CHANGE_PERMISSIONS](event-guidance/user_change_permissions.md)
-- [USER_COMMUNICATION](event-guidance/user_communication.md)
-- [USER_CREATION](event-guidance/user_creation.md)
-- [USER_DELETION](event-guidance/user_deletion.md)
-- [USER_LOGIN](event-guidance/user_login.md)
-- [USER_LOGOUT](event-guidance/user_logout.md)
-- [USER_RESOURCE_ACCESS](event-guidance/user_resource_access.md)
-- [USER_RESOURCE_CREATION](event-guidance/user_resource_creation.md)
-- [USER_RESOURCE_DELETION](event-guidance/user_resource_deletion.md)
-- [USER_RESOURCE_UPDATE_CONTENT](event-guidance/user_resource_update_content.md)
-- [USER_RESOURCE_UPDATE_PERMISSIONS](event-guidance/user_resource_update_permissions.md)
+- [USER_CHANGE_PASSWORD](event-types.md#user_change_password)
+- [USER_CHANGE_PERMISSIONS](event-types.md#user_change_permissions)
+- [USER_COMMUNICATION](event-types.md#user_communication)
+- [USER_CREATION](event-types.md#user_creation)
+- [USER_DELETION](event-types.md#user_deletion)
+- [USER_LOGIN](event-types.md#user_login)
+- [USER_LOGOUT](event-types.md#user_logout)
+- [USER_RESOURCE_ACCESS](event-types.md#user_resource_access)
+- [USER_RESOURCE_CREATION](event-types.md#user_resource_creation)
+- [USER_RESOURCE_DELETION](event-types.md#user_resource_deletion)
+- [USER_RESOURCE_UPDATE_CONTENT](event-types.md#user_resource_update_content)
+- [USER_RESOURCE_UPDATE_PERMISSIONS](event-types.md#user_resource_update_permissions)
 - USER_STATS

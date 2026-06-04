@@ -30,11 +30,10 @@ messages.md                # Message index
 messages/{message}.md      # Message fields, nested types, and population guidance
 enums.md                   # Enum index
 enums/{enum}.md            # Enum values
-event-types.md             # Dedicated Metadata.EventType reference
+event-types.md             # Metadata.EventType values and event guidance
 usage.md                   # Guidance source summary and routing
 field-paths.md             # Rules, Detect Engine, and CBN prefixes
 datatypes.md               # Standard datatype notes
-event-guidance/{type}.md   # Required/optional event guidance by event type
 ```
 
 ## Question routing
@@ -43,9 +42,9 @@ event-guidance/{type}.md   # Required/optional event guidance by event type
 | --- | --- |
 | What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |
 | What values can enum X take? | [Enums](enums.md) -> specific enum page |
-| How should I map this event? | [Event guidance](event-guidance.md), then relevant message pages |
-| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |
-| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity](messages/entity.md) |
+| How should I map this event? | [Event types](event-types.md), then relevant message pages |
+| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |
+| Required or forbidden fields? | [Event types](event-types.md), [Entity](messages/entity.md), or relevant message page |
 | Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |
 | Which field path prefix? | [Field paths](field-paths.md) |
 | What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |
