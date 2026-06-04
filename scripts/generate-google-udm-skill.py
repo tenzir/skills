@@ -681,6 +681,50 @@ def display_field_path(context: FileContext, field_path: str) -> str:
     return field_path_label(".".join(field_path_parts), ".".join(ingestion_object_parts))
 
 
+def event_field_path_label(context: FileContext, field_path: str) -> str | None:
+    if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*(?:\.[A-Za-z][A-Za-z0-9_]*)*", field_path):
+        return None
+    root = context.message_by_full_name.get(f"{context.file_proto.package}.UDM")
+    if root is None:
+        return None
+
+    field_path_parts: list[str] = []
+    ingestion_object_parts: list[str] = []
+    current_message: MessageDoc | None = root
+    parts = field_path.split(".")
+    for part_idx, part in enumerate(parts):
+        if current_message is None:
+            field_path_parts.extend(parts[part_idx:])
+            ingestion_object_parts.extend(parts[part_idx:])
+            break
+
+        field = find_field_by_name(current_message, part)
+        if field is None:
+            if part_idx == 0:
+                return None
+            field_path_parts.extend(parts[part_idx:])
+            ingestion_object_parts.extend(parts[part_idx:])
+            break
+
+        field_path_parts.append(field_path_name(field))
+        ingestion_object_parts.append(ingestion_object_name(field))
+        nested_message = context.message_by_full_name.get(field.type_name.lstrip("."))
+        current_message = (
+            nested_message
+            if field.type == descriptor_pb2.FieldDescriptorProto.TYPE_MESSAGE
+            and nested_message is not None
+            else None
+        )
+
+    if not field_path_parts:
+        return None
+    return field_path_label(".".join(field_path_parts), ".".join(ingestion_object_parts))
+
+
+def format_event_path_token(context: FileContext, token: str) -> str:
+    return event_field_path_label(context, token) or code_span(token)
+
+
 def oneof_name(
     message: descriptor_pb2.DescriptorProto,
     field: descriptor_pb2.FieldDescriptorProto,
@@ -883,6 +927,12 @@ def format_event_guidance_text(context: FileContext, text: str) -> str:
 
     def format_fragment(fragment: str) -> str:
         formatted = format_guidance_text(fragment)
+        formatted = "".join(
+            format_event_path_token(context, part[1:-1])
+            if part.startswith("`") and part.endswith("`")
+            else part
+            for part in re.split(r"(`[^`]*`)", formatted)
+        )
         field_name_alternation = "|".join(
             re.escape(name)
             for name in sorted(GUIDANCE_SIMPLE_FIELD_NAMES, key=len, reverse=True)
@@ -905,7 +955,7 @@ def format_event_guidance_text(context: FileContext, text: str) -> str:
     )
     if compound_match and compound_match.group(1).lower() in GUIDANCE_FIELD_PATH_ROOTS:
         return (
-            f"{code_span(compound_match.group(1))}"
+            f"{format_event_path_token(context, compound_match.group(1))}"
             f"{compound_match.group(2)}"
             f"{format_fragment(compound_match.group(3))}"
             f"{compound_match.group(4)}"
@@ -916,7 +966,10 @@ def format_event_guidance_text(context: FileContext, text: str) -> str:
         text,
     )
     if match:
-        return f"{code_span(match.group(1))}: {format_fragment(match.group(3))}"
+        return (
+            f"{format_event_path_token(context, match.group(1))}: "
+            f"{format_fragment(match.group(3))}"
+        )
     return format_fragment(text)
 
 
