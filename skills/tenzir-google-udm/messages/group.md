@@ -61,3 +61,38 @@ Email addresses of the group.
 - **JSON name**: `windowsSid`
 
 Microsoft Windows SID of the group.
+
+## Guidance
+
+Population guidance from the Google UDM usage guide.
+
+### `Group.creation_time`
+
+- **Purpose**: Group creation time.
+- **Encoding**: RFC 3339, as appropriate for JSON or Proto3 timestamp format.
+
+### `Group.email_addresses`
+
+- **Purpose**: Group contact information.
+- **Encoding**: Email.
+
+### `Group.group_display_name`
+
+- **Purpose**: Group display name.
+- **Encoding**: String.
+
+#### Examples
+
+- Finance
+- HR
+- Marketing
+
+### `Group.product_object_id`
+
+- **Purpose**: Globally unique user object identifier for the product, such as an LDAP object identifier.
+- **Encoding**: String.
+
+### `Group.windows_sid`
+
+- **Purpose**: Microsoft Windows Security Identifier (SID) group attribute field.
+- **Encoding**: String.

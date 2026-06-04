@@ -9,8 +9,8 @@ Look up the generated Google UDM schema and usage references before
 answering. The schema pages are generated from `backstory/udm.proto`
 and `backstory/entity.proto`; they are the ground truth for field
 existence, field numbers, types, JSON names, oneofs, and deprecation.
-The guidance pages are generated from targeted Google documentation
-sections; they are the source for population policy, required fields,
+The guidance sections are generated from targeted Google documentation;
+they are the source for population policy, required fields,
 field-path prefixes, datatype notes, and examples.
 
 ## Source
@@ -27,14 +27,13 @@ field-path prefixes, datatype notes, and examples.
 ```
 schema.md                  # Proto sources, counts, top-level UDM and Entity fields
 messages.md                # Message index
-messages/{message}.md      # Message fields and nested types
+messages/{message}.md      # Message fields, nested types, and population guidance
 enums.md                   # Enum index
 enums/{enum}.md            # Enum values
 event-types.md             # Dedicated Metadata.EventType reference
 usage.md                   # Guidance source summary and routing
 field-paths.md             # Rules, Detect Engine, and CBN prefixes
 datatypes.md               # Standard datatype notes
-field-guidance/{family}.md # Field population policy by message family
 event-guidance/{type}.md   # Required/optional event guidance by event type
 entity-guidance/{type}.md  # Required entity fields by entity type
 ```
@@ -45,19 +44,20 @@ entity-guidance/{type}.md  # Required entity fields by entity type
 | --- | --- |
 | What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |
 | What values can enum X take? | [Enums](enums.md) -> specific enum page |
-| How should I map this event? | [Event guidance](event-guidance.md), relevant [field guidance](field-guidance.md), then schema pages |
+| How should I map this event? | [Event guidance](event-guidance.md), then relevant message pages |
 | Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |
 | Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity guidance](entity-guidance.md) |
-| Field formats or examples? | [Field guidance](field-guidance.md) and [Datatypes](datatypes.md) |
+| Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |
 | Which field path prefix? | [Field paths](field-paths.md) |
-| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md), [Noun](messages/noun.md), and Noun field guidance |
-| What fields exist for network/protocol details? | [Network](messages/network.md), protocol messages such as DNS/HTTP/TLS/DHCP, and field guidance |
+| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |
+| What fields exist for network/protocol details? | [Network](messages/network.md) and protocol messages such as DNS/HTTP/TLS/DHCP |
 | What fields exist for entities? | [Entity](messages/entity.md), [EntityMetadata](messages/entity_metadata.md), and [Entity guidance](entity-guidance.md) |
 | What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |
 
 When a question asks for modeling guidance, read both layers: the
-guidance page for how Google says to populate the data and the schema
-page for the exact field structure. If the two layers appear to differ,
+message, event, or entity guidance for how Google says to populate
+the data and the schema page for the exact field structure. If the two
+layers appear to differ,
 state both facts and identify which source each fact comes from.
 
 ## Domain knowledge
@@ -80,5 +80,6 @@ state both facts and identify which source each fact comes from.
   a generated file in this skill.
 - Prefer exact field names, enum names, and message names from the reference.
 - Distinguish proto structure from mapping policy. Required-field and
-  population rules come from guidance pages, not from proto field presence.
+  population rules come from generated guidance sections, not from
+  proto field presence.
 - Do not invent UDM semantics from memory.

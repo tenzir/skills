@@ -119,6 +119,13 @@ class DocSource:
 class GuidanceBullet:
     label: str
     text: str
+    values: tuple["GuidanceValue", ...] = ()
+
+
+@dataclass(frozen=True, slots=True)
+class GuidanceValue:
+    value: str
+    description: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -555,7 +562,49 @@ def render_field(
     return "\n".join(lines).strip() + "\n"
 
 
-def render_message_page(context: FileContext, message_doc: MessageDoc) -> str:
+def render_guidance_bullet(item: GuidanceBullet) -> list[str]:
+    if item.values:
+        header = f"- **{item.label}**:"
+        if item.text:
+            header += f" {format_guidance_text(item.text)}"
+        lines = [header]
+        for value in item.values:
+            value_line = f"  - {code_span(value.value)}"
+            if value.description:
+                value_line += f": {format_guidance_text(value.description)}"
+            lines.append(value_line)
+        return lines
+    if item.text:
+        return [f"- **{item.label}**: {format_guidance_text(item.text)}"]
+    return [f"- **{item.label}**"]
+
+
+def render_message_guidance(fields: tuple[FieldGuidance, ...]) -> list[str]:
+    if not fields:
+        return []
+    lines = [
+        "## Guidance",
+        "",
+        "Population guidance from the Google UDM usage guide.",
+        "",
+    ]
+    for field in sorted(fields, key=lambda item: item.field_path.lower()):
+        lines.extend([f"### `{field.field_path}`", ""])
+        for item in field.items:
+            lines.extend(render_guidance_bullet(item))
+        if field.examples:
+            lines.extend(["", "#### Examples", ""])
+            for example in field.examples:
+                lines.append(f"- {example}")
+        lines.append("")
+    return lines
+
+
+def render_message_page(
+    context: FileContext,
+    message_doc: MessageDoc,
+    guidance_fields: tuple[FieldGuidance, ...] = (),
+) -> str:
     message = message_doc.descriptor
     comment = source_comment(context, message_doc.file_name, message_doc.path)
     nested_messages = [
@@ -605,6 +654,7 @@ def render_message_page(context: FileContext, message_doc: MessageDoc) -> str:
             lines.append(render_field(context, message_doc, field_idx))
     else:
         lines.extend(["## Fields", "", "No fields.", ""])
+    lines.extend(render_message_guidance(guidance_fields))
 
     return clean_markdown("\n".join(lines))
 
@@ -693,8 +743,44 @@ def code_span(text: str) -> str:
     return f"{delimiter} {text} {delimiter}"
 
 
+def format_guidance_text(text: str) -> str:
+    parts = re.split(r"(`[^`]*`)", text)
+    pattern = re.compile(r"\b[A-Za-z][A-Za-z0-9_]*(?:\.[A-Za-z][A-Za-z0-9_]*)+\b")
+
+    def replace(match: re.Match[str]) -> str:
+        value = match.group(0)
+        if "_" in value or value[0].isupper():
+            return code_span(value)
+        return value
+
+    return "".join(
+        part if part.startswith("`") and part.endswith("`") else pattern.sub(replace, part)
+        for part in parts
+    )
+
+
 def markdown_text(tag: Tag) -> str:
     def render_node(node: object) -> str:
+        if isinstance(node, NavigableString):
+            return str(node)
+        if not isinstance(node, Tag):
+            return ""
+        if node.name == "code":
+            text = normalize_code(node.get_text(" ", strip=True))
+            return code_span(text) if text else ""
+        if node.name == "br":
+            return " "
+        return "".join(render_node(child) for child in node.children)
+
+    return normalize_text("".join(render_node(child) for child in tag.children))
+
+
+def markdown_text_without_children(tag: Tag, excluded: tuple[Tag, ...]) -> str:
+    excluded_ids = {id(item) for item in excluded}
+
+    def render_node(node: object) -> str:
+        if id(node) in excluded_ids:
+            return ""
         if isinstance(node, NavigableString):
             return str(node)
         if not isinstance(node, Tag):
@@ -775,23 +861,44 @@ def immediate_li_texts(ul: Tag, *, markdown: bool = False) -> tuple[str, ...]:
     return tuple(items)
 
 
+def parse_guidance_value(li: Tag) -> GuidanceValue:
+    text = normalize_text(li.get_text(" ", strip=True))
+    match = re.fullmatch(r"([A-Z][A-Z0-9_]*)(?:\s*-\s*(.+))?", text)
+    if match:
+        return GuidanceValue(
+            value=match.group(1),
+            description=match.group(2) or "",
+        )
+    return GuidanceValue(value=text, description="")
+
+
 def parse_labeled_list_item(li: Tag) -> tuple[GuidanceBullet, tuple[str, ...]]:
     strong = li.find(["strong", "b"])
-    full_text = markdown_text(li)
+    nested = li.find("ul")
+    full_text = (
+        markdown_text_without_children(li, (nested,))
+        if isinstance(nested, Tag)
+        else markdown_text(li)
+    )
     if isinstance(strong, Tag):
         label = tag_text(strong).rstrip(":")
         text = re.sub(rf"^{re.escape(label)}\s*:?\s*", "", full_text).strip()
     else:
         label = "Note"
         text = full_text
+    values: tuple[GuidanceValue, ...] = ()
     examples: tuple[str, ...] = ()
-    if label.lower() in {"example", "examples"}:
-        nested = li.find("ul")
-        if isinstance(nested, Tag):
+    if isinstance(nested, Tag):
+        if label.lower() == "possible values":
+            values = tuple(
+                parse_guidance_value(nested_li)
+                for nested_li in nested.find_all("li", recursive=False)
+            )
+        elif label.lower() in {"example", "examples"}:
             examples = immediate_li_texts(nested, markdown=True)
-        elif text:
-            examples = (text,)
-    return GuidanceBullet(label=label, text=text), examples
+    elif label.lower() in {"example", "examples"} and text:
+        examples = (text,)
+    return GuidanceBullet(label=label, text=text, values=values), examples
 
 
 def parse_field_guidance(article: Tag) -> tuple[FieldGuidance, ...]:
@@ -820,7 +927,7 @@ def parse_field_guidance(article: Tag) -> tuple[FieldGuidance, ...]:
                 continue
             for li in block.find_all("li", recursive=False):
                 bullet, bullet_examples = parse_labeled_list_item(li)
-                if bullet.text:
+                if bullet.text or bullet.values:
                     items.append(bullet)
                 examples.extend(bullet_examples)
         if items or examples:
@@ -1262,6 +1369,25 @@ def find_message_by_simple_name(context: FileContext, name: str) -> MessageDoc |
     return None
 
 
+def group_field_guidance_by_message(
+    context: FileContext,
+    guidance: DocsGuidance,
+) -> tuple[dict[str, tuple[FieldGuidance, ...]], tuple[FieldGuidance, ...]]:
+    groups: dict[str, list[FieldGuidance]] = defaultdict(list)
+    unmatched: list[FieldGuidance] = []
+    for field in guidance.field_guidance:
+        family = field.field_path.split(".", 1)[0]
+        message = find_message_by_simple_name(context, family)
+        if message is None:
+            unmatched.append(field)
+        else:
+            groups[message.slug].append(field)
+    return (
+        {slug: tuple(fields) for slug, fields in groups.items()},
+        tuple(unmatched),
+    )
+
+
 def validate_guidance_against_schema(context: FileContext, guidance: DocsGuidance) -> None:
     known_event_types = enum_value_names(context, "Metadata.EventType")
     known_entity_types = enum_value_names(context, "EntityMetadata.EntityType")
@@ -1311,7 +1437,31 @@ def validate_guidance_against_schema(context: FileContext, guidance: DocsGuidanc
             )
 
 
-def render_usage_page(guidance: DocsGuidance) -> str:
+def render_unmatched_field_guidance(fields: tuple[FieldGuidance, ...]) -> list[str]:
+    if not fields:
+        return []
+    lines = [
+        "## Product-Only Field Notes",
+        "",
+        "These usage-guide fields do not resolve to proto-derived UDM messages.",
+        "",
+    ]
+    for field in sorted(fields, key=lambda item: item.field_path.lower()):
+        lines.extend([f"### `{field.field_path}`", ""])
+        for item in field.items:
+            lines.extend(render_guidance_bullet(item))
+        if field.examples:
+            lines.extend(["", "#### Examples", ""])
+            for example in field.examples:
+                lines.append(f"- {example}")
+        lines.append("")
+    return lines
+
+
+def render_usage_page(
+    guidance: DocsGuidance,
+    unmatched_field_guidance: tuple[FieldGuidance, ...] = (),
+) -> str:
     lines = [
         "# Google UDM Usage Guidance",
         "",
@@ -1326,8 +1476,8 @@ def render_usage_page(guidance: DocsGuidance) -> str:
         [
             "## Generated Guidance",
             "",
-            f"- Field guidance families: `{len({field.field_path.split('.', 1)[0] for field in guidance.field_guidance})}`",
-            f"- Field guidance entries: `{len(guidance.field_guidance)}`",
+            f"- Message guidance entries: `{len(guidance.field_guidance) - len(unmatched_field_guidance)}`",
+            f"- Product-only field notes: `{len(unmatched_field_guidance)}`",
             f"- Event type categories: `{len(guidance.event_type_categories)}`",
             f"- Event guidance sections: `{len(guidance.event_guidance)}`",
             f"- Entity requirement pages: `{len(guidance.entity_guidance)}`",
@@ -1337,13 +1487,13 @@ def render_usage_page(guidance: DocsGuidance) -> str:
             "",
             "- [Field paths](field-paths.md)",
             "- [Datatypes](datatypes.md)",
-            "- [Field guidance](field-guidance.md)",
             "- [Event type categories](event-type-categories.md)",
             "- [Event guidance](event-guidance.md)",
             "- [Entity guidance](entity-guidance.md)",
             "",
         ]
     )
+    lines.extend(render_unmatched_field_guidance(unmatched_field_guidance))
     return clean_markdown("\n".join(lines))
 
 
@@ -1415,74 +1565,6 @@ def render_datatypes_page(guidance: DocsGuidance) -> str:
         ]
         lines.append("| " + " | ".join(cells) + " |")
     lines.append("")
-    return clean_markdown("\n".join(lines))
-
-
-def render_field_guidance_index(
-    context: FileContext,
-    guidance: DocsGuidance,
-) -> tuple[str, dict[str, list[FieldGuidance]]]:
-    groups: dict[str, list[FieldGuidance]] = defaultdict(list)
-    for field in guidance.field_guidance:
-        groups[field.field_path.split(".", 1)[0]].append(field)
-
-    lines = [
-        "# Field Guidance",
-        "",
-        "Field population guidance from the Google UDM usage guide. These pages",
-        "describe how fields should be populated; use schema pages for exact field",
-        "existence and types.",
-        "",
-    ]
-    lines.extend(render_source_section((guidance.usage_source,)))
-    lines.extend(["## Families", ""])
-    for family in sorted(groups, key=str.lower):
-        message = find_message_by_simple_name(context, family)
-        schema_link = (
-            f" ([schema](messages/{message.slug}.md))"
-            if message is not None
-            else ""
-        )
-        lines.append(
-            f"- [{family}](field-guidance/{to_snake_case(family)}.md)"
-            f" ({len(groups[family])} fields){schema_link}"
-        )
-    lines.append("")
-    return clean_markdown("\n".join(lines)), groups
-
-
-def render_field_guidance_page(
-    context: FileContext,
-    guidance: DocsGuidance,
-    family: str,
-    fields: list[FieldGuidance],
-) -> str:
-    message = find_message_by_simple_name(context, family)
-    lines = [
-        f"# {family} Field Guidance",
-        "",
-    ]
-    lines.extend(render_source_section((guidance.usage_source,)))
-    if message is not None:
-        lines.extend(
-            [
-                "## Schema",
-                "",
-                f"- [{message.qualified_name}](../messages/{message.slug}.md)",
-                "",
-            ]
-        )
-    lines.extend(["## Fields", ""])
-    for field in sorted(fields, key=lambda item: item.field_path.lower()):
-        lines.extend([f"### `{field.field_path}`", ""])
-        for item in field.items:
-            if item.text:
-                lines.append(f"- **{item.label}**: {item.text}")
-        if field.examples:
-            lines.extend(["", "#### Examples", ""])
-            for example in field.examples:
-                lines.append(f"- {example}")
-        lines.append("")
     return clean_markdown("\n".join(lines))
 
 
@@ -1649,23 +1731,17 @@ def render_entity_guidance_page(
 def render_guidance_docs(
     context: FileContext,
     guidance: DocsGuidance,
+    unmatched_field_guidance: tuple[FieldGuidance, ...] = (),
 ) -> dict[Path, str]:
     validate_guidance_against_schema(context, guidance)
     docs: dict[Path, str] = {
-        Path("usage.md"): render_usage_page(guidance),
+        Path("usage.md"): render_usage_page(guidance, unmatched_field_guidance),
         Path("field-paths.md"): render_field_paths_page(guidance),
         Path("datatypes.md"): render_datatypes_page(guidance),
         Path("event-type-categories.md"): render_event_type_categories_page(guidance),
         Path("event-guidance.md"): render_event_guidance_index(guidance),
         Path("entity-guidance.md"): render_entity_guidance_index(guidance),
     }
-
-    field_index, field_groups = render_field_guidance_index(context, guidance)
-    docs[Path("field-guidance.md")] = field_index
-    for family, fields in field_groups.items():
-        docs[Path("field-guidance") / f"{to_snake_case(family)}.md"] = (
-            render_field_guidance_page(context, guidance, family, fields)
-        )
 
     for section in guidance.event_guidance:
         for event_type in section.event_types:
@@ -1772,8 +1848,8 @@ def render_skill_markdown(
                 "answering. The schema pages are generated from `backstory/udm.proto`",
                 "and `backstory/entity.proto`; they are the ground truth for field",
                 "existence, field numbers, types, JSON names, oneofs, and deprecation.",
-                "The guidance pages are generated from targeted Google documentation",
-                "sections; they are the source for population policy, required fields,",
+                "The guidance sections are generated from targeted Google documentation;",
+                "they are the source for population policy, required fields,",
                 "field-path prefixes, datatype notes, and examples.",
                 "",
                 "## Source",
@@ -1789,14 +1865,13 @@ def render_skill_markdown(
                 "```",
                 "schema.md                  # Proto sources, counts, top-level UDM and Entity fields",
                 "messages.md                # Message index",
-                "messages/{message}.md      # Message fields and nested types",
+                "messages/{message}.md      # Message fields, nested types, and population guidance",
                 "enums.md                   # Enum index",
                 "enums/{enum}.md            # Enum values",
                 "event-types.md             # Dedicated Metadata.EventType reference",
                 "usage.md                   # Guidance source summary and routing",
                 "field-paths.md             # Rules, Detect Engine, and CBN prefixes",
                 "datatypes.md               # Standard datatype notes",
-                "field-guidance/{family}.md # Field population policy by message family",
                 "event-guidance/{type}.md   # Required/optional event guidance by event type",
                 "entity-guidance/{type}.md  # Required entity fields by entity type",
                 "```",
@@ -1807,19 +1882,20 @@ def render_skill_markdown(
                 "| --- | --- |",
                 "| What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |",
                 "| What values can enum X take? | [Enums](enums.md) -> specific enum page |",
-                "| How should I map this event? | [Event guidance](event-guidance.md), relevant [field guidance](field-guidance.md), then schema pages |",
+                "| How should I map this event? | [Event guidance](event-guidance.md), then relevant message pages |",
                 "| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |",
                 "| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity guidance](entity-guidance.md) |",
-                "| Field formats or examples? | [Field guidance](field-guidance.md) and [Datatypes](datatypes.md) |",
+                "| Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |",
                 "| Which field path prefix? | [Field paths](field-paths.md) |",
-                "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md), [Noun](messages/noun.md), and Noun field guidance |",
-                "| What fields exist for network/protocol details? | [Network](messages/network.md), protocol messages such as DNS/HTTP/TLS/DHCP, and field guidance |",
+                "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |",
+                "| What fields exist for network/protocol details? | [Network](messages/network.md) and protocol messages such as DNS/HTTP/TLS/DHCP |",
                 "| What fields exist for entities? | [Entity](messages/entity.md), [EntityMetadata](messages/entity_metadata.md), and [Entity guidance](entity-guidance.md) |",
                 "| What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |",
                 "",
                 "When a question asks for modeling guidance, read both layers: the",
-                "guidance page for how Google says to populate the data and the schema",
-                "page for the exact field structure. If the two layers appear to differ,",
+                "message, event, or entity guidance for how Google says to populate",
+                "the data and the schema page for the exact field structure. If the two",
+                "layers appear to differ,",
                 "state both facts and identify which source each fact comes from.",
                 "",
                 "## Domain knowledge",
@@ -1842,7 +1918,8 @@ def render_skill_markdown(
                 "  a generated file in this skill.",
                 "- Prefer exact field names, enum names, and message names from the reference.",
                 "- Distinguish proto structure from mapping policy. Required-field and",
-                "  population rules come from guidance pages, not from proto field presence.",
+                "  population rules come from generated guidance sections, not from",
+                "  proto field presence.",
                 "- Do not invent UDM semantics from memory.",
                 "",
             ]
@@ -1856,6 +1933,14 @@ def build_docs(
     fetched_files: set[str],
     guidance: DocsGuidance | None = None,
 ) -> dict[Path, str]:
+    field_guidance_groups: dict[str, tuple[FieldGuidance, ...]] = {}
+    unmatched_field_guidance: tuple[FieldGuidance, ...] = ()
+    if guidance is not None:
+        field_guidance_groups, unmatched_field_guidance = group_field_guidance_by_message(
+            context,
+            guidance,
+        )
+
     docs: dict[Path, str] = {
         Path("SKILL.md"): render_skill_markdown(context, source, guidance),
         Path("schema.md"): render_schema_page(context, source, fetched_files),
@@ -1864,7 +1949,11 @@ def build_docs(
     }
 
     for message in generated_messages(context):
-        docs[Path("messages") / f"{message.slug}.md"] = render_message_page(context, message)
+        docs[Path("messages") / f"{message.slug}.md"] = render_message_page(
+            context,
+            message,
+            field_guidance_groups.get(message.slug, ()),
+        )
 
     for enum in context.enums:
         docs[Path("enums") / f"{enum.slug}.md"] = render_enum_page(context, enum)
@@ -1878,7 +1967,7 @@ def build_docs(
         )
 
     if guidance is not None:
-        docs.update(render_guidance_docs(context, guidance))
+        docs.update(render_guidance_docs(context, guidance, unmatched_field_guidance))
 
     return docs
 

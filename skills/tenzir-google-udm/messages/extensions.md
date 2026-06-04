@@ -96,3 +96,38 @@ A SRUM extension. This captures details specific to Windows System Resource Usag
 - **JSON name**: `userAssist`
 
 A UserAssist extension. This captures details specific to Windows User Assist events, which track application usage and execution.
+
+## Guidance
+
+Population guidance from the Google UDM usage guide.
+
+### `Extensions.auth`
+
+- **Purpose**: Extension to the authentication metadata.
+- **Encoding**: String.
+
+#### Examples
+
+- Sandbox metadata (all behaviors exhibited by a file, for example, FireEye).
+- Network Access Control (NAC) data.
+- LDAP details about a user (for example, role, organization, etc.).
+
+### `Extensions.auth.auth_details`
+
+- **Purpose**: Specify the vendor specific details for the authentication type or mechanism. Authentication providers often define types such as via_mfa or via_ad that provide useful information on the authentication type. These types can still be generalized in auth.type or auth.mechanism for usability and cross dataset rule compatibility.
+- **Encoding**: String.
+- **Examples**: via_mfa, via_ad.
+
+#### Examples
+
+- via_mfa, via_ad.
+
+### `Extensions.vulns`
+
+- **Purpose**: Extension to the vulnerability metadata.
+- **Encoding**: String.
+- **Example**: Host vulnerability scan data.
+
+#### Examples
+
+- Host vulnerability scan data.

@@ -89,3 +89,50 @@ Deprecated: use region_coordinates.
 - **JSON name**: `regionCoordinates`
 
 Coordinates for the associated region. See [https://cloud.google.com/vision/docs/reference/rest/v1/LatLng](https://cloud.google.com/vision/docs/reference/rest/v1/LatLng) for a description of the fields.
+
+## Guidance
+
+Population guidance from the Google UDM usage guide.
+
+### `Location.city`
+
+- **Purpose**: Stores the name of the city.
+- **Encoding**: String.
+
+#### Examples
+
+- Sunnyvale
+- Chicago
+- Malaga
+
+### `Location.country_or_region`
+
+- **Purpose**: Stores the name of the country or region of the world.
+- **Encoding**: String.
+
+#### Examples
+
+- United States
+- United Kingdom
+- Spain
+
+### `Location.name`
+
+- **Purpose**: Stores the name specific to the enterprise, such as a building or campus.
+- **Encoding**: String.
+
+#### Examples
+
+- Campus 7B
+- Building A2
+
+### `Location.state`
+
+- **Purpose**: Stores the name of the state, province, or territory.
+- **Encoding**: String.
+
+#### Examples
+
+- California
+- Illinois
+- Ontario

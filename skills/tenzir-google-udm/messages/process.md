@@ -221,3 +221,62 @@ The real time spent in the process. This is the sum of the kernel and user time.
 - **JSON name**: `state`
 
 The state of the process.
+
+## Guidance
+
+Population guidance from the Google UDM usage guide.
+
+### `Process.command_line`
+
+- **Purpose**: Stores the command line string for the process.
+- **Encoding**: String.
+- **Example**: `c:\windows\system32\net.exe` group.
+
+#### Examples
+
+- `c:\windows\system32\net.exe` group.
+
+### `Process.file`
+
+- **Purpose**: Stores the filename of the file in use by the process.
+- **Encoding**: String.
+- **Example**: report.xls
+
+#### Examples
+
+- report.xls
+
+### `Process.parent_process`
+
+- **Purpose**: Stores the details of the parent process.
+- **Encoding**: Noun (Process)
+
+### `Process.parent_process.product_specific_process_id`
+
+- **Purpose**: Stores the product specific process ID for the parent process.
+- **Encoding**: String.
+- **Examples**: `MySQL:78778` or `CS:90512`
+
+#### Examples
+
+- `MySQL:78778` or `CS:90512`
+
+### `Process.pid`
+
+- **Purpose**: Stores the process ID.
+- **Encoding**: String.
+
+#### Examples
+
+- 308
+- 2002
+
+### `Process.product_specific_process_id`
+
+- **Purpose**: Stores the product specific process ID.
+- **Encoding**: String.
+- **Examples**: `MySQL:78778` or `CS:90512`
+
+#### Examples
+
+- `MySQL:78778` or `CS:90512`

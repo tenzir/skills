@@ -275,3 +275,168 @@ Proxy information. Only set if is_proxy is true.
 - **JSON name**: `connectionState`
 
 The state of the network connection.
+
+## Guidance
+
+Population guidance from the Google UDM usage guide.
+
+### `Network.application_protocol`
+
+- **Purpose**: Indicates the network application protocol.
+- **Encoding**: Enumerated type.
+- **Possible values**:
+  - `UNKNOWN_APPLICATION_PROTOCOL`
+  - `AFP`
+  - `APPC`
+  - `AMQP`
+  - `ATOM`
+  - `BEEP`
+  - `BITCOIN`
+  - `BIT_TORRENT`
+  - `CFDP`
+  - `CIP`
+  - `COAP`
+  - `COTP`
+  - `DCERPC`
+  - `DDS`
+  - `DEVICE_NET`
+  - `DHCP`
+  - `DICOM`
+  - `DNP3`
+  - `DNS`
+  - `E_DONKEY`
+  - `ENRP`
+  - `FAST_TRACK`
+  - `FINGER`
+  - `FREENET`
+  - `FTAM`
+  - `GOOSE`
+  - `GOPHER`
+  - `GRPC`
+  - `HL7`
+  - `H323`
+  - `HTTP`
+  - `HTTPS`
+  - `IEC104`
+  - `IRCP`
+  - `KADEMLIA`
+  - `KRB5`
+  - `LDAP`
+  - `LPD`
+  - `MIME`
+  - `MMS`
+  - `MODBUS`
+  - `MQTT`
+  - `NETCONF`
+  - `NFS`
+  - `NIS`
+  - `NNTP`
+  - `NTCIP`
+  - `NTP`
+  - `OSCAR`
+  - `PNRP`
+  - `PTP`
+  - `QUIC`
+  - `RDP`
+  - `RELP`
+  - `RIP`
+  - `RLOGIN`
+  - `RPC`
+  - `RTMP`
+  - `RTP`
+  - `RTPS`
+  - `RTSP`
+  - `SAP`
+  - `SDP`
+  - `SIP`
+  - `SLP`
+  - `SMB`
+  - `SMTP`
+  - `SNMP`
+  - `SNTP`
+  - `SSH`
+  - `SSMS`
+  - `STYX`
+  - `SV`
+  - `TCAP`
+  - `TDS`
+  - `TOR`
+  - `TSP`
+  - `VTP`
+  - `WHOIS`
+  - `WEB_DAV`
+  - `X400`
+  - `X500`
+  - `XMPP`
+
+### `Network.direction`
+
+- **Purpose**: Indicates the direction of network traffic.
+- **Encoding**: Enumerated type.
+- **Possible values**:
+  - `UNKNOWN_DIRECTION`
+  - `INBOUND`
+  - `OUTBOUND`
+  - `BROADCAST`
+
+### `Network.email`
+
+- **Purpose**: Specifies the email address for the sender/recipient.
+- **Encoding**: String.
+- **Example**: jcheng@company.example.com
+
+#### Examples
+
+- jcheng@company.example.com
+
+### `Network.ip_protocol`
+
+- **Purpose**: Indicates the IP protocol.
+- **Encoding**: Enumerated type.
+- **Possible values**:
+  - `UNKNOWN_IP_PROTOCOL`
+  - `EIGRP`: Enhanced Interior Gateway Routing Protocol
+  - `ESP`: Encapsulating Security Payload
+  - `ETHERIP`: Ethernet-within-IP Encapsulation
+  - `GRE`: Generic Routing Encapsulation
+  - `ICMP`: Internet Control Message Protocol
+  - `IGMP`: Internet Group Management Protocol
+  - `IP6IN4`: IPv6 Encapsulation
+  - `PIM`: Protocol Independent Multicast
+  - `TCP`: Transmission Control Protocol
+  - `UDP`: User Datagram Protocol
+  - `VRRP`: Virtual Router Redundancy Protocol
+
+### `Network.received_bytes`
+
+- **Purpose**: Specifies the number of bytes received.
+- **Encoding**: 64-bit unsigned integer.
+- **Example**: 12,453,654,768
+
+#### Examples
+
+- 12,453,654,768
+
+### `Network.sent_bytes`
+
+- **Purpose**: Specifies the number of bytes sent.
+- **Encoding**: 64-bit unsigned integer.
+- **Example**: 7,654,876
+
+#### Examples
+
+- 7,654,876
+
+### `Network.session_duration`
+
+- **Purpose**: Stores the network session duration, typically returned in a drop event for the session. To set the duration you can set either `network.session_duration.seconds` = 1, (type int64) or `network.session_duration.nanos` = 1 (type int32).
+
+### `Network.session_id`
+
+- **Purpose**: Stores the network session identifier.
+- **Encoding**: String.
+- **Example**: SID:ANON:www.w3.org:j6oAOxCWZh/CD723LGeXlf-01:34
+
+#### Examples
+
+- SID:ANON:www.w3.org:j6oAOxCWZh/CD723LGeXlf-01:34

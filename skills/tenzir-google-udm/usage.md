@@ -14,8 +14,8 @@ for field existence, types, numbers, JSON names, oneofs, and deprecation.
 
 ## Generated Guidance
 
-- Field guidance families: `22`
-- Field guidance entries: `158`
+- Message guidance entries: `156`
+- Product-only field notes: `2`
 - Event type categories: `19`
 - Event guidance sections: `25`
 - Entity requirement pages: `8`
@@ -25,7 +25,20 @@ for field existence, types, numbers, JSON names, oneofs, and deprecation.
 
 - [Field paths](field-paths.md)
 - [Datatypes](datatypes.md)
-- [Field guidance](field-guidance.md)
 - [Event type categories](event-type-categories.md)
 - [Event guidance](event-guidance.md)
 - [Entity guidance](entity-guidance.md)
+
+## Product-Only Field Notes
+
+These usage-guide fields do not resolve to proto-derived UDM messages.
+
+### `idm.is_alert`
+
+- **Purpose**: Identifies whether the event is an alert.
+- **Encoding**: Boolean.
+
+### `idm.is_significant`
+
+- **Purpose**: Specifies whether to display the alert in Enterprise Insights.
+- **Encoding**: Boolean.
