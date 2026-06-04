@@ -386,7 +386,7 @@ def format_type(
         enum = context.enum_by_full_name.get(full_name)
         if enum is not None:
             return f"[`{type_label(context, full_name)}`]({link_for_enum(enum, section)})"
-        return f"`{full_name}` (imported)"
+        return f"`{full_name}`"
 
     type_name = FIELD_TYPE_NAMES.Name(field.type).removeprefix("TYPE_").lower()
     return f"`{type_name}`"

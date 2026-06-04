@@ -92,7 +92,7 @@ List of IoCStats from which the verdict was generated.
 
 - **Number**: `11`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `verdictTime`
 
 Timestamp when the verdict was generated.
@@ -146,7 +146,7 @@ Tags related to the verdict.
 
 - **Number**: `17`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `pwnFirstTaggedTime`
 
 The timestamp of the first time a pwn was associated to this entity.

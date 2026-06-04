@@ -29,7 +29,7 @@ The prevalence of the artifact within the customer's environment.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstSeenTime`
 
 First seen timestamp of the IP in the customer's environment.
@@ -38,7 +38,7 @@ First seen timestamp of the IP in the customer's environment.
 
 - **Number**: `4`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastSeenTime`
 
 Last seen timestamp of the IP address in the customer's environment.
@@ -101,7 +101,7 @@ SSL certificate information about the IP address.
 
 - **Number**: `11`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastHttpsCertificateDate`
 
 Most recent date for the certificate in VirusTotal.
@@ -137,7 +137,7 @@ WHOIS information as returned from the pertinent WHOIS server.
 
 - **Number**: `15`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `whoisDate`
 
 Date of the last update of the WHOIS record in VirusTotal.

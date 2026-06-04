@@ -41,7 +41,7 @@ The browser version.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstVisitTime`
 
 The timestamp indicating the initial visit to the URL.
@@ -50,7 +50,7 @@ The timestamp indicating the initial visit to the URL.
 
 - **Number**: `4`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastVisitTime`
 
 The timestamp indicating the most recent visit to the URL.
@@ -131,7 +131,7 @@ Represents the textual content of a web page. This field should be kept short. L
 
 - **Number**: `13`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstBookmarkedTime`
 
 The timestamp indicating the first time the URL was bookmarked.

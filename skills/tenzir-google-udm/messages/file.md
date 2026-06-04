@@ -189,7 +189,7 @@ Tags for the file.
 
 - **Number**: `15`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastModificationTime`
 
 Timestamp when the file was last updated.
@@ -198,7 +198,7 @@ Timestamp when the file was last updated.
 
 - **Number**: `39`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `createTime`
 
 Timestamp when the file was created.
@@ -207,7 +207,7 @@ Timestamp when the file was created.
 
 - **Number**: `40`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastAccessTime`
 
 Timestamp when the file was accessed.
@@ -225,7 +225,7 @@ Prevalence of the file hash in the customer's environment.
 
 - **Number**: `17`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstSeenTime`
 
 Timestamp the file was first seen in the customer's environment.
@@ -234,7 +234,7 @@ Timestamp the file was first seen in the customer's environment.
 
 - **Number**: `18`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastSeenTime`
 
 Timestamp the file was last seen in the customer's environment.
@@ -288,7 +288,7 @@ User defined flags for file.
 
 - **Number**: `26`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastAnalysisTime`
 
 Timestamp the file was last analysed.
@@ -351,7 +351,7 @@ Information about the PDF file structure.
 
 - **Number**: `34`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstSubmissionTime`
 
 First submission time of the file.
@@ -360,7 +360,7 @@ First submission time of the file.
 
 - **Number**: `35`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastSubmissionTime`
 
 Last submission time of the file.

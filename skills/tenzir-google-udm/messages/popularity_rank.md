@@ -29,7 +29,7 @@ Rank position.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `ingestionTime`
 
 Timestamp when the rank was ingested.

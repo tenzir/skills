@@ -38,7 +38,7 @@ Difference hash and MD5 hash of the URL's.
 
 - **Number**: `4`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct` (imported)
+- **Type**: `google.protobuf.Struct`
 - **JSON name**: `htmlMeta`
 
 Meta tags (only for URLs downloading HTML).
@@ -83,7 +83,7 @@ URL response body's SHA256 hash.
 
 - **Number**: `9`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct` (imported)
+- **Type**: `google.protobuf.Struct`
 - **JSON name**: `lastHttpResponseCookies`
 
 Website's cookies.
@@ -92,7 +92,7 @@ Website's cookies.
 
 - **Number**: `10`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct` (imported)
+- **Type**: `google.protobuf.Struct`
 - **JSON name**: `lastHttpResponseHeaders`
 
 Headers and values of the last HTTP response.

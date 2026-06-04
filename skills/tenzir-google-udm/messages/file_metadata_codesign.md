@@ -29,7 +29,7 @@ Code sign format.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `compilationTime`
 
 Code sign timestamp

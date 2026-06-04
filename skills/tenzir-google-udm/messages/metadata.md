@@ -36,7 +36,7 @@ A vendor-specific event identifier to uniquely identify the event (e.g. a GUID).
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `eventTimestamp`
 
 The GMT timestamp when the event was generated.
@@ -54,7 +54,7 @@ Attributes associated with event_timestamp. This field is used to distinguish be
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `collectedTimestamp`
 
 The GMT timestamp when the event was collected by the vendor's local collection infrastructure.
@@ -63,7 +63,7 @@ The GMT timestamp when the event was collected by the vendor's local collection 
 
 - **Number**: `11`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `ingestedTimestamp`
 
 The GMT timestamp when the event was ingested (received) by Chronicle.
@@ -198,7 +198,7 @@ Data access labels from all the contextual events used to enrich the base event.
 
 - **Number**: `20`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct` (imported)
+- **Type**: `google.protobuf.Struct`
 - **JSON name**: `structuredFields`
 - **Deprecated**: `true`
 

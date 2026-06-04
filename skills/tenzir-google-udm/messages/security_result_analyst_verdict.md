@@ -20,7 +20,7 @@ Confidence score of the verdict.
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `verdictTime`
 
 Timestamp at which the verdict was generated.

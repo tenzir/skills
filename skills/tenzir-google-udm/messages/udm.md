@@ -20,7 +20,7 @@ Event metadata such as timestamp, source product, etc.
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct` (imported)
+- **Type**: `google.protobuf.Struct`
 - **JSON name**: `additional`
 
 Any important vendor-specific event data that cannot be adequately represented within the formal sections of the UDM model.
@@ -110,7 +110,7 @@ All other first-class, event-specific metadata goes in this message. Do not plac
 
 - **Number**: `12`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct` (imported)
+- **Type**: `google.protobuf.Struct`
 - **JSON name**: `extracted`
 
 Flattened fields extracted from the log.

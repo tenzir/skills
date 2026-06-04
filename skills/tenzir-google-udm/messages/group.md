@@ -20,7 +20,7 @@ Product globally unique user object identifier, such as an LDAP Object Identifie
 
 - **Number**: `100`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `creationTime`
 - **Deprecated**: `true`
 

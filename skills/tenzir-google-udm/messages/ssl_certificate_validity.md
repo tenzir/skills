@@ -11,7 +11,7 @@ Defines certificate's validity period.
 
 - **Number**: `1`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `expiryTime`
 
 Expiry date.
@@ -20,7 +20,7 @@ Expiry date.
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `issueTime`
 
 Issue date.

@@ -29,7 +29,7 @@ Value.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `ttl`
 
 Time to live.
@@ -56,7 +56,7 @@ Retry.
 
 - **Number**: `6`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `refresh`
 
 Refresh.
@@ -65,7 +65,7 @@ Refresh.
 
 - **Number**: `7`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `minimum`
 
 Minimum.
@@ -74,7 +74,7 @@ Minimum.
 
 - **Number**: `8`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `expire`
 
 Expire.

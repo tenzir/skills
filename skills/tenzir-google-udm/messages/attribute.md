@@ -47,7 +47,7 @@ System IAM roles to be assumed by resources to use the role's permissions for ac
 
 - **Number**: `4`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `creationTime`
 
 Time the resource or entity was created or provisioned.
@@ -56,7 +56,7 @@ Time the resource or entity was created or provisioned.
 
 - **Number**: `5`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastUpdateTime`
 
 Time the resource or entity was last updated.

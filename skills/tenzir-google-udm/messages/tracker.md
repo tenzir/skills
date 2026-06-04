@@ -29,7 +29,7 @@ Tracker ID, if available.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `timestamp`
 
 Tracker ingestion date.

@@ -85,7 +85,7 @@ Deprecated: use region_coordinates.
 
 - **Number**: `9`
 - **Cardinality**: `singular`
-- **Type**: `google.type.LatLng` (imported)
+- **Type**: `google.type.LatLng`
 - **JSON name**: `regionCoordinates`
 
 Coordinates for the associated region. See [https://cloud.google.com/vision/docs/reference/rest/v1/LatLng](https://cloud.google.com/vision/docs/reference/rest/v1/LatLng) for a description of the fields.

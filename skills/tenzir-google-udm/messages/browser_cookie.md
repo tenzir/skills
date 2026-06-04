@@ -52,7 +52,7 @@ The URL path for which the cookie is valid.
 
 - **Number**: `5`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `expirationTime`
 
 The date and time when the cookie will expire.

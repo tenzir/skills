@@ -29,7 +29,7 @@ The prevalence of the domain within the customer's environment.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstSeenTime`
 
 First seen timestamp of the domain in the customer's environment.
@@ -38,7 +38,7 @@ First seen timestamp of the domain in the customer's environment.
 
 - **Number**: `4`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastSeenTime`
 
 Last seen timestamp of the domain in the customer's environment.
@@ -83,7 +83,7 @@ Repeated list of name servers.
 
 - **Number**: `9`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `creationTime`
 
 Domain creation time.
@@ -92,7 +92,7 @@ Domain creation time.
 
 - **Number**: `10`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `updateTime`
 
 Last updated time.
@@ -101,7 +101,7 @@ Last updated time.
 
 - **Number**: `11`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `expirationTime`
 
 Expiration time.
@@ -110,7 +110,7 @@ Expiration time.
 
 - **Number**: `12`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `auditUpdateTime`
 
 Audit updated time.
@@ -245,7 +245,7 @@ Domain's DNS records from the last scan.
 
 - **Number**: `27`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastDnsRecordsTime`
 
 Date when the DNS records list was retrieved by VirusTotal.
@@ -263,7 +263,7 @@ SSL certificate object retrieved last time the domain was analyzed.
 
 - **Number**: `29`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastHttpsCertificateTime`
 
 When the certificate was retrieved by VirusTotal.
@@ -290,7 +290,7 @@ List of representative attributes.
 
 - **Number**: `32`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `whoisTime`
 
 Date of the last update of the WHOIS record.

@@ -107,7 +107,7 @@ The value in string format. Enum values are returned as strings.
 
 - **Number**: `17`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `timestampTime`
 - **Oneof**: `typed_value`
 

@@ -42,7 +42,7 @@ Certificate's signature and algorithm.
 
 - **Number**: `14`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Struct` (imported)
+- **Type**: `google.protobuf.Struct`
 - **JSON name**: `certExtensions`
 
 Certificate's extensions.
@@ -51,7 +51,7 @@ Certificate's extensions.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstSeenTime`
 
 Date the certificate was first retrieved by VirusTotal.

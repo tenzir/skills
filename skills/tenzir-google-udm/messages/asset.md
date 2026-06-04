@@ -71,7 +71,7 @@ List of NAT IP addresses associated with an asset.
 
 - **Number**: `23`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstSeenTime`
 
 The first observed time for an asset. The value is calculated on the basis of the first time the identifier was observed.
@@ -143,7 +143,7 @@ The network domain of the asset (e.g. "corp.acme.com")
 
 - **Number**: `11`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `creationTime`
 - **Deprecated**: `true`
 
@@ -153,7 +153,7 @@ Time the asset was created or provisioned. Deprecate: creation_time should be po
 
 - **Number**: `12`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstDiscoverTime`
 
 Time the asset was first discovered (by asset management/discoverability software).
@@ -162,7 +162,7 @@ Time the asset was first discovered (by asset management/discoverability softwar
 
 - **Number**: `13`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastDiscoverTime`
 
 Time the asset was last discovered (by asset management/discoverability software).
@@ -171,7 +171,7 @@ Time the asset was last discovered (by asset management/discoverability software
 
 - **Number**: `14`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `systemLastUpdateTime`
 
 Time the asset system or OS was last updated. For all other operations that are not system updates (such as resizing a VM), use Attribute.last_update_time.
@@ -180,7 +180,7 @@ Time the asset system or OS was last updated. For all other operations that are 
 
 - **Number**: `15`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastBootTime`
 
 Time the asset was last boot started.

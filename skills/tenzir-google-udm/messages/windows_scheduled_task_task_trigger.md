@@ -25,7 +25,7 @@ Indicates whether the task trigger is enabled.
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `duration`
 
 The duration of the task trigger repetition.

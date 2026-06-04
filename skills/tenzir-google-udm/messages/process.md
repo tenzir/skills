@@ -190,7 +190,7 @@ This is used to determine if the process is an IPv6 process.
 
 - **Number**: `20`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `kernelDuration`
 
 The kernel time spent in the process.
@@ -199,7 +199,7 @@ The kernel time spent in the process.
 
 - **Number**: `21`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `userDuration`
 
 The user time spent in the process.
@@ -208,7 +208,7 @@ The user time spent in the process.
 
 - **Number**: `22`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `realDuration`
 
 The real time spent in the process. This is the sum of the kernel and user time.

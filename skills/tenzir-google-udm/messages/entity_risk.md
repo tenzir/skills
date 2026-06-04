@@ -20,7 +20,7 @@ Version of the risk score calculation algorithm.
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.type.Interval` (imported)
+- **Type**: `google.type.Interval`
 - **JSON name**: `riskWindow`
 
 Time window used when computing the risk score for an entity, for example 24 hours or 7 days.
@@ -57,7 +57,7 @@ Number of detections that make up the risk score within the time window.
 
 - **Number**: `6`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstDetectionTime`
 
 Timestamp of the first detection within the specified time window. This field is empty when there are no detections.
@@ -66,7 +66,7 @@ Timestamp of the first detection within the specified time window. This field is
 
 - **Number**: `7`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastDetectionTime`
 
 Timestamp of the last detection within the specified time window. This field is empty when there are no detections.
@@ -93,7 +93,7 @@ Normalized risk score for the entity. This value is between 0-1000.
 
 - **Number**: `10`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `riskWindowSize`
 
 Risk window duration for the entity.
@@ -111,7 +111,7 @@ Represents the change in raw risk score for an entity between the end of the pre
 
 - **Number**: `12`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastResetTime`
 
 Timestamp for UEBA risk score reset based deduplication. Used specifically for risk based meta rules.

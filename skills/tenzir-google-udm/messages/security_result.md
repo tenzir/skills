@@ -378,7 +378,7 @@ MITRE ATT&CK details. This field is not populated when the SecurityResult appear
 
 - **Number**: `33`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstDiscoveredTime`
 
 First time the IoC threat was discovered in the provider. This field is not populated when the SecurityResult appears in a detection.
@@ -426,7 +426,7 @@ Verdict about the IoC from the provider. This field is now deprecated. Use Verdi
 
 - **Number**: `37`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastUpdatedTime`
 
 Last time the IoC threat was updated in the provider. This field is not populated when the SecurityResult appears in a detection.
@@ -453,7 +453,7 @@ GCTI threat verdict on the security result entity. This field is not populated w
 
 - **Number**: `40`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastDiscoveredTime`
 
 Last time the IoC was seen in the provider data. This field is not populated when the SecurityResult appears in a detection.

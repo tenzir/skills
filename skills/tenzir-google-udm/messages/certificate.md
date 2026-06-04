@@ -74,7 +74,7 @@ The SHA256 hash of the certificate, as a hex-encoded string.
 
 - **Number**: `8`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `notBefore`
 
 Indicates when the certificate is first valid.
@@ -83,7 +83,7 @@ Indicates when the certificate is first valid.
 
 - **Number**: `9`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `notAfter`
 
 Indicates when the certificate is no longer valid.

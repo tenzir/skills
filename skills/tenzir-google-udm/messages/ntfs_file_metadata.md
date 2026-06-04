@@ -11,7 +11,7 @@ NTFS-specific file metadata.
 
 - **Number**: `1`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `changeTime`
 
 NTFS MFT entry changed timestamp.
@@ -20,7 +20,7 @@ NTFS MFT entry changed timestamp.
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `filenameCreateTime`
 
 NTFS $FILE_NAME attribute created timestamp.
@@ -29,7 +29,7 @@ NTFS $FILE_NAME attribute created timestamp.
 
 - **Number**: `3`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `filenameModifyTime`
 
 NTFS $FILE_NAME attribute modified timestamp.
@@ -38,7 +38,7 @@ NTFS $FILE_NAME attribute modified timestamp.
 
 - **Number**: `4`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `filenameAccessTime`
 
 NTFS $FILE_NAME attribute accessed timestamp.
@@ -47,7 +47,7 @@ NTFS $FILE_NAME attribute accessed timestamp.
 
 - **Number**: `5`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `filenameChangeTime`
 
 NTFS $FILE_NAME attribute changed timestamp.

@@ -20,7 +20,7 @@ The number of times the application associated with the entry gained focus.
 
 - **Number**: `2`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Duration` (imported)
+- **Type**: `google.protobuf.Duration`
 - **JSON name**: `applicationFocusDuration`
 
 The total duration the application associated with the entry was in focus.

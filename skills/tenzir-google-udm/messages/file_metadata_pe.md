@@ -38,7 +38,7 @@ info.exiftool.EntryPoint.
 
 - **Number**: `10`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `compilationTime`
 
 info.pe-timestamp.
@@ -47,7 +47,7 @@ info.pe-timestamp.
 
 - **Number**: `11`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `compilationExiftoolTime`
 
 info.exiftool.TimeStamp.

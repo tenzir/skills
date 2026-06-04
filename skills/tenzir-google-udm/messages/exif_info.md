@@ -56,7 +56,7 @@ entry point.
 
 - **Number**: `6`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `compilationTime`
 
 Compilation time.

@@ -11,7 +11,7 @@ Describes the difference in risk score between two points in time.
 
 - **Number**: `1`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `previousRangeEndTime`
 
 End time of the previous time window.

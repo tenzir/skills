@@ -98,7 +98,7 @@ Generic entity metadata attributes of the user.
 
 - **Number**: `10`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstSeenTime`
 
 The first observed time for a user. The value is calculated on the basis of the first time the identifier was observed.
@@ -207,7 +207,7 @@ User job manager(s).
 
 - **Number**: `606`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `hireDate`
 
 User job employment hire date.
@@ -216,7 +216,7 @@ User job employment hire date.
 
 - **Number**: `607`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `terminationDate`
 
 User job employment termination date.
@@ -234,7 +234,7 @@ User time off leaves from active work.
 
 - **Number**: `609`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastLoginTime`
 
 User last login timestamp.
@@ -243,7 +243,7 @@ User last login timestamp.
 
 - **Number**: `610`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastPasswordChangeTime`
 
 User last password change timestamp.
@@ -252,7 +252,7 @@ User last password change timestamp.
 
 - **Number**: `611`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `passwordExpirationTime`
 
 User password expiration timestamp.
@@ -261,7 +261,7 @@ User password expiration timestamp.
 
 - **Number**: `612`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `accountExpirationTime`
 
 User account expiration timestamp.
@@ -270,7 +270,7 @@ User account expiration timestamp.
 
 - **Number**: `613`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `accountLockoutTime`
 
 User account lockout timestamp.
@@ -279,7 +279,7 @@ User account lockout timestamp.
 
 - **Number**: `614`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastBadPasswordAttemptTime`
 
 User last bad password attempt timestamp.

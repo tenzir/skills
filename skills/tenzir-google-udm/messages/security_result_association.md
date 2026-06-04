@@ -94,7 +94,7 @@ Different aliases of the threat actor given by different sources.
 
 - **Number**: `9`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `firstReferenceTime`
 
 First time the threat actor was referenced or seen.
@@ -103,7 +103,7 @@ First time the threat actor was referenced or seen.
 
 - **Number**: `10`
 - **Cardinality**: `singular`
-- **Type**: `google.protobuf.Timestamp` (imported)
+- **Type**: `google.protobuf.Timestamp`
 - **JSON name**: `lastReferenceTime`
 
 Last time the threat actor was referenced or seen.
