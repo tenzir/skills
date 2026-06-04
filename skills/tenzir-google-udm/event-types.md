@@ -113,8 +113,6 @@ An event type. Choose event type not based on the product that generated the eve
 
 Population guidance from the [Google UDM usage guide](https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en); Google last updated: `2026-06-03 UTC`.
 
-<a id="email_transaction"></a>
-
 ### EMAIL_TRANSACTION
 
 #### Required Fields
@@ -137,12 +135,6 @@ Population guidance from the [Google UDM usage guide](https://docs.cloud.google.
 - Only populate the `email` field in `security_result.about` or `network.email`.
 - Top level security results generally have a noun set (optional for spam).
 
-<a id="file_creation"></a>
-<a id="file_deletion"></a>
-<a id="file_modification"></a>
-<a id="file_read"></a>
-<a id="file_open"></a>
-
 ### File Creation / Deletion / Modification / Read / Open Events
 
 Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, `FILE_OPEN`
@@ -158,8 +150,6 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 - `security_result`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
 
-<a id="file_copy"></a>
-
 ### FILE_COPY
 
 #### Required Fields
@@ -173,8 +163,6 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 - `security_result`: Describe the malicious activity detected.
 - `principal.user`: Populate if user information is available about the process.
-
-<a id="mutex_creation"></a>
 
 ### MUTEX_CREATION
 
@@ -225,8 +213,6 @@ target {
 }
 ```
 
-<a id="network_connection"></a>
-
 ### NETWORK_CONNECTION
 
 #### Required Fields
@@ -244,8 +230,6 @@ target {
 #### Notes
 
 - Note: For all network events, if the principal or target has a port specified, the `ip` and `mac` fields must include only one value each (if available), that is the IP address and MAC associated with the port. Otherwise, if no port is specified, you can specify any number of IP and MAC addresses associated with the device at the time of the event (no particular order is required).
-
-<a id="network_http"></a>
 
 ### NETWORK_HTTP
 
@@ -332,12 +316,6 @@ security_result {
 additional { "dst_country_code" : "FRA", "iap" : "7" "fw_rule_id" : "0" }
 ```
 
-<a id="process_injection"></a>
-<a id="process_launch"></a>
-<a id="process_open"></a>
-<a id="process_termination"></a>
-<a id="process_uncategorized"></a>
-
 ### Process Injection / Launch / Open / Termination / Uncategorized Events
 
 Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERMINATION`, `PROCESS_UNCATEGORIZED`
@@ -384,8 +362,6 @@ target {
   }
 }
 ```
-
-<a id="process_module_load"></a>
 
 ### PROCESS_MODULE_LOAD
 
@@ -434,8 +410,6 @@ target {
   }
 }
 ```
-
-<a id="process_privilege_escalation"></a>
 
 ### PROCESS_PRIVILEGE_ESCALATION
 
@@ -486,10 +460,6 @@ target {
   }
 }
 ```
-
-<a id="registry_creation"></a>
-<a id="registry_modification"></a>
-<a id="registry_deletion"></a>
 
 ### Registry Creation / Modification / Deletion Events
 
@@ -546,12 +516,6 @@ target {
   }
 }
 ```
-
-<a id="scan_file"></a>
-<a id="scan_host"></a>
-<a id="scan_process"></a>
-<a id="scan_vuln_host"></a>
-<a id="scan_vuln_network"></a>
 
 ### Scan File / Host / Process / Vuln Host / Vuln Network Events
 
@@ -645,13 +609,6 @@ extensions: {
   }
 ```
 
-<a id="scheduled_task_creation"></a>
-<a id="scheduled_task_deletion"></a>
-<a id="scheduled_task_disable"></a>
-<a id="scheduled_task_enable"></a>
-<a id="scheduled_task_modification"></a>
-<a id="scheduled_task_uncategorized"></a>
-
 ### Scheduled Task Creation / Deletion / Disable / Enable / Modification / Uncategorized Events
 
 Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TASK_DISABLE`, `SCHEDULED_TASK_ENABLE`, `SCHEDULED_TASK_MODIFICATION`, `SCHEDULED_TASK_UNCATEGORIZED`
@@ -714,11 +671,6 @@ security_result: {
 }
 ```
 
-<a id="setting_uncategorized"></a>
-<a id="setting_creation"></a>
-<a id="setting_modification"></a>
-<a id="setting_deletion"></a>
-
 ### Setting Uncategorized / Creation / Modification / Deletion Events
 
 Applies to: `SETTING_UNCATEGORIZED`, `SETTING_CREATION`, `SETTING_MODIFICATION`, `SETTING_DELETION`
@@ -757,12 +709,6 @@ target {
   }
 }
 ```
-
-<a id="service_unspecified"></a>
-<a id="service_creation"></a>
-<a id="service_deletion"></a>
-<a id="service_start"></a>
-<a id="service_stop"></a>
 
 ### Service Unspecified / Creation / Deletion / Start / Stop Events
 
@@ -816,11 +762,6 @@ metadata: {
  }
 ```
 
-<a id="status_heartbeat"></a>
-<a id="status_startup"></a>
-<a id="status_shutdown"></a>
-<a id="status_update"></a>
-
 ### Status Heartbeat / Startup / Shutdown / Update Events
 
 Applies to: `STATUS_HEARTBEAT`, `STATUS_STARTUP`, `STATUS_SHUTDOWN`, `STATUS_UPDATE`
@@ -869,9 +810,6 @@ security_result: {
 }
 ```
 
-<a id="system_audit_log_uncategorized"></a>
-<a id="system_audit_log_wipe"></a>
-
 ### System Audit Log Uncategorized / Wipe Events
 
 Applies to: `SYSTEM_AUDIT_LOG_UNCATEGORIZED`, `SYSTEM_AUDIT_LOG_WIPE`
@@ -907,9 +845,6 @@ principal {
 }
 ```
 
-<a id="user_change_password"></a>
-<a id="user_change_permissions"></a>
-
 ### User Change Password / Permissions Events
 
 Applies to: `USER_CHANGE_PASSWORD`, `USER_CHANGE_PERMISSIONS`
@@ -921,8 +856,6 @@ Applies to: `USER_CHANGE_PASSWORD`, `USER_CHANGE_PERMISSIONS`
 - `target`: Populate `target.user` with information about the user that has been modified.
 - `intermediary`: For SSO logins, intermediary must include at least one machine identifier for the SSO server if available.
 
-<a id="user_communication"></a>
-
 ### USER_COMMUNICATION
 
 #### Required Fields
@@ -932,9 +865,6 @@ Applies to: `USER_CHANGE_PASSWORD`, `USER_CHANGE_PERMISSIONS`
 #### Optional Fields
 
 - `target`: (Recommended) Populate the `target.user` field with information about the target user (receiver) of the cloud communication resource. Populate the `target.application` field with information about the target cloud communication application.
-
-<a id="user_creation"></a>
-<a id="user_deletion"></a>
 
 ### User Creation / Deletion Events
 
@@ -951,9 +881,6 @@ Applies to: `USER_CREATION`, `USER_DELETION`
 - `principal`: User and process details for the machine where the user creation or deletion request was initiated.
 - `target`: Information about the target machine (if different than the principal machine).
 
-<a id="user_login"></a>
-<a id="user_logout"></a>
-
 ### User Login / Logout Events
 
 Applies to: `USER_LOGIN`, `USER_LOGOUT`
@@ -968,8 +895,6 @@ Applies to: `USER_LOGIN`, `USER_LOGOUT`
 - authentication extension: Must identify the type of authentication system that the event is related to (for example, machine, SSO, or VPN) and the mechanism employed (username and password, OTP, etc.).
 - `security_result`: Add a `security_result` field to represent the login status if it fails. Specify `security_result.category` with the AUTH_VIOLATION value if authentication fails.
 
-<a id="user_resource_access"></a>
-
 ### USER_RESOURCE_ACCESS
 
 #### Required Fields
@@ -980,9 +905,6 @@ Applies to: `USER_LOGIN`, `USER_LOGOUT`
 #### Optional Fields
 
 - `target.application`: (Recommended) Populate the `target.application` field with information about the target cloud application.
-
-<a id="user_resource_creation"></a>
-<a id="user_resource_deletion"></a>
 
 ### User Resource Creation / Deletion Events
 
@@ -997,8 +919,6 @@ Applies to: `USER_RESOURCE_CREATION`, `USER_RESOURCE_DELETION`
 
 - `target.application`: (Recommended) Populate the `target.application` field with information about the target cloud application.
 
-<a id="user_resource_update_content"></a>
-
 ### USER_RESOURCE_UPDATE_CONTENT
 
 #### Required Fields
@@ -1010,8 +930,6 @@ Applies to: `USER_RESOURCE_CREATION`, `USER_RESOURCE_DELETION`
 
 - `target.application`: (Recommended) Populate the `target.application` field with information about the target cloud application.
 
-<a id="user_resource_update_permissions"></a>
-
 ### USER_RESOURCE_UPDATE_PERMISSIONS
 
 #### Required Fields
@@ -1022,8 +940,6 @@ Applies to: `USER_RESOURCE_CREATION`, `USER_RESOURCE_DELETION`
 #### Optional Fields
 
 - `target.application`: (Recommended) Populate the `target.application` field with information about the target cloud application.
-
-<a id="user_uncategorized"></a>
 
 ### USER_UNCATEGORIZED
 

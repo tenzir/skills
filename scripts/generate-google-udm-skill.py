@@ -672,8 +672,10 @@ def render_entity_type_guidance(entity_guidance: tuple[EntityGuidance, ...]) -> 
     return lines
 
 
-def event_guidance_anchor(event_type: str) -> str:
-    return to_snake_case(event_type)
+def markdown_heading_anchor(text: str) -> str:
+    anchor = normalize_text(text).lower()
+    anchor = re.sub(r"[^\w\s-]", "", anchor)
+    return anchor.replace(" ", "-")
 
 
 def event_token_prefix(event_types: tuple[str, ...]) -> tuple[str, ...]:
@@ -772,9 +774,6 @@ def render_event_type_guidance(guidance: DocsGuidance) -> list[str]:
         "",
     ]
     for section in guidance.event_guidance:
-        for event_type in section.event_types:
-            lines.append(f'<a id="{event_guidance_anchor(event_type)}"></a>')
-        lines.append("")
         lines.extend([f"### {event_guidance_heading(section)}", ""])
         if len(section.event_types) > 1:
             event_types = ", ".join(code_span(value) for value in section.event_types)
@@ -1821,8 +1820,8 @@ def render_datatypes_page(guidance: DocsGuidance) -> str:
 def render_event_type_categories_page(
     guidance: DocsGuidance,
 ) -> str:
-    event_guidance_values = {
-        event_type
+    event_guidance_anchors = {
+        event_type: markdown_heading_anchor(event_guidance_heading(section))
         for section in guidance.event_guidance
         for event_type in section.event_types
     }
@@ -1843,9 +1842,9 @@ def render_event_type_categories_page(
         if category.values:
             for value in category.values:
                 event_type = extract_event_value(value)
-                if event_type in event_guidance_values:
+                if event_type in event_guidance_anchors:
                     lines.append(
-                        f"- [{value}](event-types.md#{event_guidance_anchor(event_type)})"
+                        f"- [{value}](event-types.md#{event_guidance_anchors[event_type]})"
                     )
                 else:
                     lines.append(f"- {value}")

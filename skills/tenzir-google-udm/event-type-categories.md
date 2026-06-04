@@ -40,12 +40,12 @@ Usage-guide grouping for choosing `metadata.event_type`.
 
 - FILE_UNCATEGORIZED
 - [FILE_COPY (for example, copying a file to a thumb drive)](event-types.md#file_copy)
-- [FILE_CREATION](event-types.md#file_creation)
-- [FILE_DELETION](event-types.md#file_deletion)
-- [FILE_MODIFICATION](event-types.md#file_modification)
+- [FILE_CREATION](event-types.md#file-creation--deletion--modification--read--open-events)
+- [FILE_DELETION](event-types.md#file-creation--deletion--modification--read--open-events)
+- [FILE_MODIFICATION](event-types.md#file-creation--deletion--modification--read--open-events)
 - FILE_MOVE
-- [FILE_OPEN (for example, opening a file might indicate a security breach)](event-types.md#file_open)
-- [FILE_READ (for example, reading a password file)](event-types.md#file_read)
+- [FILE_OPEN (for example, opening a file might indicate a security breach)](event-types.md#file-creation--deletion--modification--read--open-events)
+- [FILE_READ (for example, reading a password file)](event-types.md#file-creation--deletion--modification--read--open-events)
 - FILE_SYNC
 
 ## Events that don't fall into any other category
@@ -83,22 +83,22 @@ Network telemetry events, which include raw protocol payloads, such as DHCP and 
 
 Any events pertaining to a process such as a process launch, a process creating something malicious, a process injecting into another process, a change of a registry key, or creating a malicious file on disk:
 
-- [PROCESS_UNCATEGORIZED](event-types.md#process_uncategorized)
-- [PROCESS_INJECTION](event-types.md#process_injection)
-- [PROCESS_LAUNCH](event-types.md#process_launch)
+- [PROCESS_UNCATEGORIZED](event-types.md#process-injection--launch--open--termination--uncategorized-events)
+- [PROCESS_INJECTION](event-types.md#process-injection--launch--open--termination--uncategorized-events)
+- [PROCESS_LAUNCH](event-types.md#process-injection--launch--open--termination--uncategorized-events)
 - [PROCESS_MODULE_LOAD](event-types.md#process_module_load)
-- [PROCESS_OPEN](event-types.md#process_open)
+- [PROCESS_OPEN](event-types.md#process-injection--launch--open--termination--uncategorized-events)
 - [PROCESS_PRIVILEGE_ESCALATION](event-types.md#process_privilege_escalation)
-- [PROCESS_TERMINATION](event-types.md#process_termination)
+- [PROCESS_TERMINATION](event-types.md#process-injection--launch--open--termination--uncategorized-events)
 
 ## Registry events
 
 Use the following REGISTRY events rather than the SETTING events when dealing with Microsoft Windows-specific registry events:
 
 - REGISTRY_UNCATEGORIZED
-- [REGISTRY_CREATION](event-types.md#registry_creation)
-- [REGISTRY_MODIFICATION](event-types.md#registry_modification)
-- [REGISTRY_DELETION](event-types.md#registry_deletion)
+- [REGISTRY_CREATION](event-types.md#registry-creation--modification--deletion-events)
+- [REGISTRY_MODIFICATION](event-types.md#registry-creation--modification--deletion-events)
+- [REGISTRY_DELETION](event-types.md#registry-creation--modification--deletion-events)
 
 ## Resource events
 
@@ -115,31 +115,31 @@ Scan-oriented events includes on-demand scans and behavioral detections performe
 Scan-oriented events:
 
 - SCAN_UNCATEGORIZED
-- [SCAN_FILE](event-types.md#scan_file)
-- [SCAN_HOST](event-types.md#scan_host)
+- [SCAN_FILE](event-types.md#scan-file--host--process--vuln-host--vuln-network-events)
+- [SCAN_HOST](event-types.md#scan-file--host--process--vuln-host--vuln-network-events)
 - SCAN_NETWORK
-- [SCAN_PROCESS](event-types.md#scan_process)
+- [SCAN_PROCESS](event-types.md#scan-file--host--process--vuln-host--vuln-network-events)
 - SCAN_PROCESS_BEHAVIORS
-- [SCAN_VULN_HOST](event-types.md#scan_vuln_host)
-- [SCAN_VULN_NETWORK](event-types.md#scan_vuln_network)
+- [SCAN_VULN_HOST](event-types.md#scan-file--host--process--vuln-host--vuln-network-events)
+- [SCAN_VULN_NETWORK](event-types.md#scan-file--host--process--vuln-host--vuln-network-events)
 
 ## Scheduled tasks events (Windows Task Scheduler, cron, etc.)
 
-- [SCHEDULED_TASK_UNCATEGORIZED](event-types.md#scheduled_task_uncategorized)
-- [SCHEDULED_TASK_CREATION](event-types.md#scheduled_task_creation)
-- [SCHEDULED_TASK_DELETION](event-types.md#scheduled_task_deletion)
-- [SCHEDULED_TASK_DISABLE](event-types.md#scheduled_task_disable)
-- [SCHEDULED_TASK_ENABLE](event-types.md#scheduled_task_enable)
-- [SCHEDULED_TASK_MODIFICATION](event-types.md#scheduled_task_modification)
+- [SCHEDULED_TASK_UNCATEGORIZED](event-types.md#scheduled-task-creation--deletion--disable--enable--modification--uncategorized-events)
+- [SCHEDULED_TASK_CREATION](event-types.md#scheduled-task-creation--deletion--disable--enable--modification--uncategorized-events)
+- [SCHEDULED_TASK_DELETION](event-types.md#scheduled-task-creation--deletion--disable--enable--modification--uncategorized-events)
+- [SCHEDULED_TASK_DISABLE](event-types.md#scheduled-task-creation--deletion--disable--enable--modification--uncategorized-events)
+- [SCHEDULED_TASK_ENABLE](event-types.md#scheduled-task-creation--deletion--disable--enable--modification--uncategorized-events)
+- [SCHEDULED_TASK_MODIFICATION](event-types.md#scheduled-task-creation--deletion--disable--enable--modification--uncategorized-events)
 
 ## Service events
 
-- [SERVICE_UNSPECIFIED](event-types.md#service_unspecified)
-- [SERVICE_CREATION](event-types.md#service_creation)
-- [SERVICE_DELETION](event-types.md#service_deletion)
+- [SERVICE_UNSPECIFIED](event-types.md#service-unspecified--creation--deletion--start--stop-events)
+- [SERVICE_CREATION](event-types.md#service-unspecified--creation--deletion--start--stop-events)
+- [SERVICE_DELETION](event-types.md#service-unspecified--creation--deletion--start--stop-events)
 - SERVICE_MODIFICATION
-- [SERVICE_START](event-types.md#service_start)
-- [SERVICE_STOP](event-types.md#service_stop)
+- [SERVICE_START](event-types.md#service-unspecified--creation--deletion--start--stop-events)
+- [SERVICE_STOP](event-types.md#service-unspecified--creation--deletion--start--stop-events)
 
 ## Setting events
 
@@ -147,40 +147,40 @@ For setting event requirements, see Settings - required fields.
 
 Setting events, including when a system setting is changed on an endpoint:
 
-- [SETTING_UNCATEGORIZED](event-types.md#setting_uncategorized)
-- [SETTING_CREATION](event-types.md#setting_creation)
-- [SETTING_DELETION](event-types.md#setting_deletion)
-- [SETTING_MODIFICATION](event-types.md#setting_modification)
+- [SETTING_UNCATEGORIZED](event-types.md#setting-uncategorized--creation--modification--deletion-events)
+- [SETTING_CREATION](event-types.md#setting-uncategorized--creation--modification--deletion-events)
+- [SETTING_DELETION](event-types.md#setting-uncategorized--creation--modification--deletion-events)
+- [SETTING_MODIFICATION](event-types.md#setting-uncategorized--creation--modification--deletion-events)
 
 ## Status messages from security products
 
 Status messages from security products to indicate that agents are alive and to send version, fingerprint, or other types of data:
 
 - STATUS_UNCATEGORIZED
-- [STATUS_HEARTBEAT (indicates product is alive)](event-types.md#status_heartbeat)
-- [STATUS_STARTUP](event-types.md#status_startup)
-- [STATUS_SHUTDOWN](event-types.md#status_shutdown)
-- [STATUS_UPDATE (software or fingerprint update)](event-types.md#status_update)
+- [STATUS_HEARTBEAT (indicates product is alive)](event-types.md#status-heartbeat--startup--shutdown--update-events)
+- [STATUS_STARTUP](event-types.md#status-heartbeat--startup--shutdown--update-events)
+- [STATUS_SHUTDOWN](event-types.md#status-heartbeat--startup--shutdown--update-events)
+- [STATUS_UPDATE (software or fingerprint update)](event-types.md#status-heartbeat--startup--shutdown--update-events)
 
 ## System audit log events
 
-- [SYSTEM_AUDIT_LOG_UNCATEGORIZED](event-types.md#system_audit_log_uncategorized)
-- [SYSTEM_AUDIT_LOG_WIPE](event-types.md#system_audit_log_wipe)
+- [SYSTEM_AUDIT_LOG_UNCATEGORIZED](event-types.md#system-audit-log-uncategorized--wipe-events)
+- [SYSTEM_AUDIT_LOG_WIPE](event-types.md#system-audit-log-uncategorized--wipe-events)
 
 ## User authentication activity events
 
 - [USER_UNCATEGORIZED](event-types.md#user_uncategorized)
 - USER_BADGE_IN (for example, when a user physically badges in to a site)
-- [USER_CHANGE_PASSWORD](event-types.md#user_change_password)
-- [USER_CHANGE_PERMISSIONS](event-types.md#user_change_permissions)
+- [USER_CHANGE_PASSWORD](event-types.md#user-change-password--permissions-events)
+- [USER_CHANGE_PERMISSIONS](event-types.md#user-change-password--permissions-events)
 - [USER_COMMUNICATION](event-types.md#user_communication)
-- [USER_CREATION](event-types.md#user_creation)
-- [USER_DELETION](event-types.md#user_deletion)
-- [USER_LOGIN](event-types.md#user_login)
-- [USER_LOGOUT](event-types.md#user_logout)
+- [USER_CREATION](event-types.md#user-creation--deletion-events)
+- [USER_DELETION](event-types.md#user-creation--deletion-events)
+- [USER_LOGIN](event-types.md#user-login--logout-events)
+- [USER_LOGOUT](event-types.md#user-login--logout-events)
 - [USER_RESOURCE_ACCESS](event-types.md#user_resource_access)
-- [USER_RESOURCE_CREATION](event-types.md#user_resource_creation)
-- [USER_RESOURCE_DELETION](event-types.md#user_resource_deletion)
+- [USER_RESOURCE_CREATION](event-types.md#user-resource-creation--deletion-events)
+- [USER_RESOURCE_DELETION](event-types.md#user-resource-creation--deletion-events)
 - [USER_RESOURCE_UPDATE_CONTENT](event-types.md#user_resource_update_content)
 - [USER_RESOURCE_UPDATE_PERMISSIONS](event-types.md#user_resource_update_permissions)
 - USER_STATS
