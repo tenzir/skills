@@ -12,7 +12,7 @@ Indicates whether the task trigger is enabled.
 
 ### `duration`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 The duration of the task trigger repetition.
 

@@ -122,19 +122,19 @@ This is used to determine if the process is an IPv6 process.
 
 ### `kernelDuration`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 The kernel time spent in the process.
 
 ### `userDuration`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 The user time spent in the process.
 
 ### `realDuration`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 The real time spent in the process. This is the sum of the kernel and user time.
 

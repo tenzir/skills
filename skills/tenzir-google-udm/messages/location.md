@@ -56,7 +56,7 @@ Deprecated: use regionCoordinates.
 
 ### `regionCoordinates`
 
-- Type: `google.type.LatLng` (singular)
+- Type: `latLng` (singular)
 
 Coordinates for the associated region. See [https://cloud.google.com/vision/docs/reference/rest/v1/LatLng](https://cloud.google.com/vision/docs/reference/rest/v1/LatLng) for a description of the fields.
 

@@ -18,7 +18,7 @@ Tracker ID, if available.
 
 ### `timestamp`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Tracker ingestion date.
 

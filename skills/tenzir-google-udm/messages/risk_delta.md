@@ -6,7 +6,7 @@ Describes the difference in risk score between two points in time.
 
 ### `previousRangeEndTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 End time of the previous time window.
 

@@ -12,7 +12,7 @@ The number of times the application associated with the entry gained focus.
 
 ### `applicationFocusDuration`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 The total duration the application associated with the entry was in focus.
 

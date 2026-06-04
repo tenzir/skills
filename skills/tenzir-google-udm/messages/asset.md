@@ -42,7 +42,7 @@ List of NAT IP addresses associated with an asset.
 
 ### `firstSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The first observed time for an asset. The value is calculated on the basis of the first time the identifier was observed.
 
@@ -90,32 +90,32 @@ The network domain of the asset (e.g. "corp.acme.com")
 
 ### `creationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 - Deprecated: `true`
 
 Time the asset was created or provisioned. Deprecate: creationTime should be populated in Attribute as generic metadata.
 
 ### `firstDiscoverTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Time the asset was first discovered (by asset management/discoverability software).
 
 ### `lastDiscoverTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Time the asset was last discovered (by asset management/discoverability software).
 
 ### `systemLastUpdateTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Time the asset system or OS was last updated. For all other operations that are not system updates (such as resizing a VM), use Attribute.lastUpdateTime.
 
 ### `lastBootTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Time the asset was last boot started.
 

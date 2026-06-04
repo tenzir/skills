@@ -24,13 +24,13 @@ info.exiftool.EntryPoint.
 
 ### `compilationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 info.pe-timestamp.
 
 ### `compilationExiftoolTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 info.exiftool.TimeStamp.
 

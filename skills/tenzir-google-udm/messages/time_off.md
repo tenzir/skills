@@ -6,7 +6,7 @@ System record for leave/time-off from a Human Capital Management (HCM) system.
 
 ### `interval`
 
-- Type: `google.type.Interval` (singular)
+- Type: `interval` (singular)
 
 Interval duration of the leave.
 

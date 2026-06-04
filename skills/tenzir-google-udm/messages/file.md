@@ -122,19 +122,19 @@ Tags for the file.
 
 ### `lastModificationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp when the file was last updated.
 
 ### `createTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp when the file was created.
 
 ### `lastAccessTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp when the file was accessed.
 
@@ -146,13 +146,13 @@ Prevalence of the file hash in the customer's environment.
 
 ### `firstSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp the file was first seen in the customer's environment.
 
 ### `lastSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp the file was last seen in the customer's environment.
 
@@ -188,7 +188,7 @@ User defined flags for file.
 
 ### `lastAnalysisTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp the file was last analysed.
 
@@ -230,13 +230,13 @@ Information about the PDF file structure.
 
 ### `firstSubmissionTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 First submission time of the file.
 
 ### `lastSubmissionTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Last submission time of the file.
 

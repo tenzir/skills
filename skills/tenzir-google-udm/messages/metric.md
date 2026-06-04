@@ -6,13 +6,13 @@ Stores precomputed aggregated analytic data for an entity.
 
 ### `firstSeen`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp of the first time the entity was seen in the environment.
 
 ### `lastSeen`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Time stamp of the last time last time the entity was seen in the environment.
 
@@ -66,6 +66,6 @@ List of match variables used in the custom metric.
 
 ### `timeRange`
 
-- Type: `google.type.Interval` (singular)
+- Type: `interval` (singular)
 
 Time range for which the custom metric was calculated.

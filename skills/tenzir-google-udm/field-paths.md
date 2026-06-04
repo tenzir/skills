@@ -3,19 +3,12 @@
 Use this page to choose the right field-path prefix for rules, Detect Engine,
 and configuration-based normalizer contexts.
 
-## Source
-
-- **UDM usage guide**: https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en
-  - Google last updated: `2026-06-03 UTC`
-- **Unified Data Model field list**: https://docs.cloud.google.com/chronicle/docs/reference/udm-field-list?hl=en
-  - Google last updated: `2026-06-03 UTC`
-
 ## Rules Engine Prefix Notes
 
 - UDM field name formats:
 - For rules engine evaluation, the prefix begins with udm.
 - For configuration-based normalizer (CBN), the prefix begins with event.idm.read_only_udm.
-- This document provides a list of fields available in the Unified Data Model schema. When specifying a field, use the following format: `<prefix>.<field_name1>.<field_name2>.<...>.<field_nameN>=<value>`
+- This document provides a list of fields available in the Unified Data Model. When specifying a field, use the following format: `<prefix>.<field_name1>.<field_name2>.<...>.<field_nameN>=<value>`
 
 ## Detect Engine
 

@@ -36,7 +36,7 @@ The number of packets received.
 
 ### `sessionDuration`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 The duration of the session as the number of seconds and nanoseconds. For seconds, network.sessionDuration.seconds, the type is a 64-bit integer. For nanoseconds, network.sessionDuration.nanos, the type is a 32-bit integer.
 

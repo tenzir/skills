@@ -30,7 +30,7 @@ The confidence score from "Mandiant Analyst Intel" source.
 
 ### `gtiUpdateTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp of the latest update for GTI verdict, severity, or threat score.
 
@@ -42,7 +42,7 @@ Whether one or more Mandiant incident response customers had this indicator in t
 
 ### `activeIrFirstTaggedTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The timestamp of the first time an active IR was applied to this entity.
 

@@ -18,13 +18,13 @@ The prevalence of the artifact within the customer's environment.
 
 ### `firstSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 First seen timestamp of the IP in the customer's environment.
 
 ### `lastSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Last seen timestamp of the IP address in the customer's environment.
 
@@ -66,7 +66,7 @@ SSL certificate information about the IP address.
 
 ### `lastHttpsCertificateDate`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Most recent date for the certificate in VirusTotal.
 
@@ -90,7 +90,7 @@ WHOIS information as returned from the pertinent WHOIS server.
 
 ### `whoisDate`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Date of the last update of the WHOIS record in VirusTotal.
 

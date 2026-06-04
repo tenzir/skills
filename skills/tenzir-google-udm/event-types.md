@@ -112,7 +112,7 @@ An event type. Choose event type not based on the product that generated the eve
 
 ## Guidance
 
-Population guidance from the [Google UDM usage guide](https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en); Google last updated: `2026-06-03 UTC`.
+Population guidance for choosing event types and required fields.
 
 ### EMAIL_TRANSACTION
 
@@ -257,7 +257,7 @@ target {
 - The NETWORK_HTTP event type represents an HTTP network connection from a principal to a target web server.
 - The following example illustrates how a Sophos antivirus event of type NETWORK_HTTP would be converted to the Google SecOps UDM format.
 - The following is the original Sophos antivirus event:
-- Here is how you would format the same information in Proto3 using the Google SecOps UDM syntax:
+- Here is how you would format the same information using the Google SecOps UDM syntax:
 - As shown in this example, the event has been divided into the following UDM categories:
 - `metadata`: Background information about the event.
 - `principal`: Security device that detected the event.
@@ -479,7 +479,7 @@ Applies to: `REGISTRY_CREATION`, `REGISTRY_MODIFICATION`, `REGISTRY_DELETION`
 
 #### Notes
 
-- The following example illustrates how you would format a REGISTRY_MODIFICATION event in Proto3 using the Google SecOps UDM syntax:
+- The following example illustrates how you would format a REGISTRY_MODIFICATION event using the Google SecOps UDM syntax:
 - As shown in this example, the event has been divided into the following UDM categories:
 - `metadata`: Background information about the event.
 - `principal`: Device, user, and process details.

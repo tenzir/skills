@@ -12,7 +12,7 @@ Product globally unique user object identifier, such as an LDAP Object Identifie
 
 ### `creationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 - Deprecated: `true`
 
 Group creation time. Deprecated: creationTime should be populated in Attribute as generic metadata.
@@ -48,7 +48,7 @@ Population guidance from the Google UDM usage guide.
 ### `Group.creationTime`
 
 - **Purpose**: Group creation time.
-- **Encoding**: RFC 3339, as appropriate for JSON or Proto3 timestamp format.
+- **Encoding**: RFC 3339 JSON timestamp.
 
 ### `Group.emailAddresses`
 

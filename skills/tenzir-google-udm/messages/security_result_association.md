@@ -55,13 +55,13 @@ Different aliases of the threat actor given by different sources.
 
 ### `firstReferenceTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 First time the threat actor was referenced or seen.
 
 ### `lastReferenceTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Last time the threat actor was referenced or seen.
 

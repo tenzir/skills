@@ -6,31 +6,31 @@ NTFS-specific file metadata.
 
 ### `changeTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 NTFS MFT entry changed timestamp.
 
 ### `filenameCreateTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute created timestamp.
 
 ### `filenameModifyTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute modified timestamp.
 
 ### `filenameAccessTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute accessed timestamp.
 
 ### `filenameChangeTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 NTFS $FILE_NAME attribute changed timestamp.
 

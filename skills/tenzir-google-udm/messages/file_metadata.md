@@ -9,4 +9,4 @@ Metadata about a file. Place metadata about different file types here, for examp
 - Type: [`PeFileMetadata`](pe_file_metadata.md) (singular)
 - Deprecated: `true`
 
-Metadata for Microsoft Windows PE files. Deprecate PeFileMetadata in favor of single File proto.
+Metadata for Microsoft Windows PE files. Deprecate PeFileMetadata in favor of single File message.

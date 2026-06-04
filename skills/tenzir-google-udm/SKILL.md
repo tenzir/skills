@@ -1,37 +1,64 @@
 ---
 name: tenzir-google-udm
-description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or Google SecOps event schema.
+description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or the Google SecOps UDM endpoint.
 ---
 
 # Google UDM
 
-Look up the generated Google UDM schema and usage references before
-answering. The schema pages are generated from `backstory/udm.proto`
-and `backstory/entity.proto`; they are the ground truth for field
-existence, REST field keys, types, oneofs, and deprecation.
-The guidance sections are generated from targeted Google documentation;
-they are the source for population policy, required fields,
-field-path prefixes, datatype notes, and examples.
+Google UDM (Unified Data Model) is the Google SecOps data model
+for normalized security telemetry. It represents events and
+entities in a common structure so logs from different products
+can describe actors, assets, resources, network activity,
+security outcomes, and product context with consistent field
+names and enum values.
 
-## Source
+Use this skill to answer how a log should map to UDM, which
+event or entity type to choose, which JSON fields to populate,
+and how Google expects values and field paths to be formatted.
 
-- [Schema summary](schema.md)
-- [Usage guidance](usage.md)
-- Source ref: `master`
-- Resolved commit: `0db4dc67dd805d20294c6dc34068c37f546d71da`
-- Usage guide last updated: `2026-06-03 UTC`
-- Field list last updated: `2026-06-03 UTC`
+## Top-level structure
+
+UDM uses two top-level JSON shapes: events for telemetry records and
+entities for contextual objects such as users, assets, domains, files,
+URLs, and IP addresses.
+
+### Event
+
+| Field | Cardinality | Type | Description |
+| --- | --- | --- | --- |
+| `metadata` | `singular` | [`Metadata`](messages/metadata.md) | Event metadata such as timestamp, source product, etc. |
+| `additional` | `singular` | `object` | Any important vendor-specific event data that cannot be adequately represented within the formal se... |
+| `principal` | `singular` | [`Noun`](messages/noun.md) | Represents the acting entity that originates the activity described in the event. The principal mus... |
+| `src` | `singular` | [`Noun`](messages/noun.md) | Represents a source entity being acted upon by the participant along with the device or process con... |
+| `target` | `singular` | [`Noun`](messages/noun.md) | Represents a target entity being referenced by the event or an object on the target entity. For exa... |
+| `intermediary` | `repeated` | [`Noun`](messages/noun.md) | Represents details on one or more intermediate entities processing activity described in the event.... |
+| `observer` | `singular` | [`Noun`](messages/noun.md) | Represents an observer entity (for example, a packet sniffer or network-based vulnerability scanner... |
+| `about` | `repeated` | [`Noun`](messages/noun.md) | Represents entities referenced by the event that are not otherwise described in principal, src, tar... |
+| `securityResult` | `repeated` | [`SecurityResult`](messages/security_result.md) | A list of security results. |
+| `network` | `singular` | [`Network`](messages/network.md) | All network details go here, including sub-messages with details on each protocol (for example, DHC... |
+| `extensions` | `singular` | [`Extensions`](messages/extensions.md) | All other first-class, event-specific metadata goes in this message. Do not place protocol metadata... |
+| `extracted` | `singular` | `object` | Flattened fields extracted from the log. |
+| `grouped` | `optional` | [`GroupedFields`](messages/grouped_fields.md) | Related UDM fields that are grouped together. |
+
+### Entity
+
+| Field | Cardinality | Type | Description |
+| --- | --- | --- | --- |
+| `metadata` | `singular` | [`EntityMetadata`](messages/entity_metadata.md) | Entity metadata such as timestamp, product, etc. |
+| `entity` | `singular` | [`Noun`](messages/noun.md) | Noun in the UDM event that this entity represents. |
+| `relations` | `repeated` | [`Relation`](messages/relation.md) | One or more relationships between the entity (a) and other entities, including the relationship typ... |
+| `additional` | `singular` | `object` | Important entity data that cannot be adequately represented within the formal sections of the Entit... |
+| `riskScore` | `optional` | [`EntityRisk`](messages/entity_risk.md) | Stores information related to the entity's risk score. |
+| `metric` | `singular` | [`Metric`](messages/metric.md) | Stores statistical metrics about the entity. Used if metadata.entityType is METRIC. |
 
 ## File layout
 
 ```
-schema.md                  # Proto sources and top-level UDM and Entity fields
 messages.md                # Message index
 messages/{message}.md      # Message fields and population guidance
 enums.md                   # Enum index
 enums/{enum}.md            # Enum values
 event-types.md             # EventType values and event guidance
-usage.md                   # Guidance source summary and routing
 field-paths.md             # Rules, Detect Engine, and CBN prefixes
 datatypes.md               # Standard datatype notes
 ```
@@ -40,7 +67,7 @@ datatypes.md               # Standard datatype notes
 
 | Question pattern | Start here |
 | --- | --- |
-| What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |
+| What fields exist? | [Messages](messages.md) and the specific message page |
 | What values can enum X take? | [Enums](enums.md) -> specific enum page |
 | How should I map this event? | [Event types](event-types.md), then relevant message pages |
 | Which `metadata.eventType` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |
@@ -50,13 +77,13 @@ datatypes.md               # Standard datatype notes
 | What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |
 | What fields exist for network/protocol details? | [Network](messages/network.md) and protocol messages such as DNS/HTTP/TLS/DHCP |
 | What fields exist for entities? | [Entity](messages/entity.md) and [EntityMetadata](messages/entity_metadata.md) |
-| What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |
+| What is the top-level event shape? | This file, then [UDM](messages/udm.md) |
 
 When a question asks for modeling guidance, read both layers.
 Message, event, or entity guidance explains how Google says to
-populate the data; schema pages show the exact field structure.
-If they differ, state both facts and identify which source each
-fact comes from.
+populate the data; message pages show the exact field structure.
+If they differ, state both facts instead of silently
+reconciling them.
 
 ## Domain knowledge
 
@@ -64,7 +91,7 @@ fact comes from.
   `target`, `intermediary`, `observer`, `about`), `securityResult`,
   `network`, and `extensions`.
 - UDM entities center on `metadata`, an `entity` noun, `relations`,
-  optional `risk_score`, and optional `metric` data.
+  optional `riskScore`, and optional `metric` data.
 - `metadata.eventType` classifies the event. It is the first place to look
   when deciding how an event should be represented.
 - `metadata.entityType` classifies entity records and drives entity-specific
@@ -74,10 +101,9 @@ fact comes from.
 
 ## Answering principles
 
-- Read before answering. Every schema or guidance claim must trace back to
+- Read before answering. Every field or guidance claim must trace back to
   a generated file in this skill.
 - Prefer exact field names, enum names, and message names from the reference.
-- Distinguish proto structure from mapping policy. Required-field and
-  population rules come from generated guidance sections, not from
-  proto field presence.
+- Distinguish field structure from mapping policy. Required-field and
+  population rules come from message, event, and entity guidance.
 - Do not invent UDM semantics from memory.

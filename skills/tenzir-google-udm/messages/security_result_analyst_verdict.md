@@ -12,7 +12,7 @@ Confidence score of the verdict.
 
 ### `verdictTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp at which the verdict was generated.
 

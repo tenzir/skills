@@ -24,7 +24,7 @@ Difference hash and MD5 hash of the URL's.
 
 ### `htmlMeta`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Meta tags (only for URLs downloading HTML).
 
@@ -54,13 +54,13 @@ URL response body's SHA256 hash.
 
 ### `lastHttpResponseCookies`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Website's cookies.
 
 ### `lastHttpResponseHeaders`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Headers and values of the last HTTP response.
 

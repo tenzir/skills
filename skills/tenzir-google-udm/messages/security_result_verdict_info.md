@@ -60,7 +60,7 @@ List of IoCStats from which the verdict was generated.
 
 ### `verdictTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp when the verdict was generated.
 
@@ -96,6 +96,6 @@ Tags related to the verdict.
 
 ### `pwnFirstTaggedTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The timestamp of the first time a pwn was associated to this entity.

@@ -18,13 +18,13 @@ The prevalence of the domain within the customer's environment.
 
 ### `firstSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 First seen timestamp of the domain in the customer's environment.
 
 ### `lastSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Last seen timestamp of the domain in the customer's environment.
 
@@ -54,25 +54,25 @@ Repeated list of name servers.
 
 ### `creationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Domain creation time.
 
 ### `updateTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Last updated time.
 
 ### `expirationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Expiration time.
 
 ### `auditUpdateTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Audit updated time.
 
@@ -162,7 +162,7 @@ Domain's DNS records from the last scan.
 
 ### `lastDnsRecordsTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Date when the DNS records list was retrieved by VirusTotal.
 
@@ -174,7 +174,7 @@ SSL certificate object retrieved last time the domain was analyzed.
 
 ### `lastHttpsCertificateTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 When the certificate was retrieved by VirusTotal.
 
@@ -192,6 +192,6 @@ List of representative attributes.
 
 ### `whoisTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Date of the last update of the WHOIS record.

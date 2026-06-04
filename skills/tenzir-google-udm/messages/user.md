@@ -60,7 +60,7 @@ Generic entity metadata attributes of the user.
 
 ### `firstSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The first observed time for a user. The value is calculated on the basis of the first time the identifier was observed.
 
@@ -133,13 +133,13 @@ User job manager(s).
 
 ### `hireDate`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User job employment hire date.
 
 ### `terminationDate`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User job employment termination date.
 
@@ -151,37 +151,37 @@ User time off leaves from active work.
 
 ### `lastLoginTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User last login timestamp.
 
 ### `lastPasswordChangeTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User last password change timestamp.
 
 ### `passwordExpirationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User password expiration timestamp.
 
 ### `accountExpirationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User account expiration timestamp.
 
 ### `accountLockoutTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User account lockout timestamp.
 
 ### `lastBadPasswordAttemptTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 User last bad password attempt timestamp.
 

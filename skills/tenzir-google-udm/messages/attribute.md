@@ -30,12 +30,12 @@ System IAM roles to be assumed by resources to use the role's permissions for ac
 
 ### `creationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Time the resource or entity was created or provisioned.
 
 ### `lastUpdateTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Time the resource or entity was last updated.

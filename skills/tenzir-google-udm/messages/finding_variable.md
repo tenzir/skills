@@ -70,7 +70,7 @@ The value in string format. Enum values are returned as strings.
 
 ### `timestampTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 - Oneof: `typed_value`
 
 The value in timestamp format.

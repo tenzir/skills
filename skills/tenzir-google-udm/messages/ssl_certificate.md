@@ -19,13 +19,13 @@ Certificate's signature and algorithm.
 
 ### `certExtensions`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Certificate's extensions.
 
 ### `firstSeenTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Date the certificate was first retrieved by VirusTotal.
 

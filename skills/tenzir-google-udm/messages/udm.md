@@ -12,7 +12,7 @@ Event metadata such as timestamp, source product, etc.
 
 ### `additional`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Any important vendor-specific event data that cannot be adequately represented within the formal sections of the UDM model.
 
@@ -72,7 +72,7 @@ All other first-class, event-specific metadata goes in this message. Do not plac
 
 ### `extracted`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Flattened fields extracted from the log.
 

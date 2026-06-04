@@ -18,13 +18,13 @@ The browser version.
 
 ### `firstVisitTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The timestamp indicating the initial visit to the URL.
 
 ### `lastVisitTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The timestamp indicating the most recent visit to the URL.
 
@@ -78,7 +78,7 @@ Represents the textual content of a web page. This field should be kept short. L
 
 ### `firstBookmarkedTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The timestamp indicating the first time the URL was bookmarked.
 

@@ -18,7 +18,7 @@ A vendor-specific event identifier to uniquely identify the event (e.g. a GUID).
 
 ### `eventTimestamp`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The GMT timestamp when the event was generated.
 
@@ -30,13 +30,13 @@ Attributes associated with eventTimestamp. This field is used to distinguish bet
 
 ### `collectedTimestamp`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The GMT timestamp when the event was collected by the vendor's local collection infrastructure.
 
 ### `ingestedTimestamp`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The GMT timestamp when the event was ingested (received) by Chronicle.
 
@@ -126,7 +126,7 @@ Data access labels from all the contextual events used to enrich the base event.
 
 ### `structuredFields`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 - Deprecated: `true`
 
 Flattened fields extracted from the log.
@@ -144,12 +144,12 @@ Population guidance from the Google UDM usage guide.
 ### `Metadata.collectedTimestamp`
 
 - **Purpose**: Encodes the GMT timestamp when the event was collected by the vendor's local collection infrastructure.
-- **Encoding**: RFC 3339, as appropriate for JSON or Proto3 timestamp format.
+- **Encoding**: RFC 3339 JSON timestamp.
 
 #### Examples
 
 - RFC 3339: '2019-09-10T20:32:31-08:00'
-- Proto3 format: '2012-04-23T18:25:43.511Z'
+- JSON timestamp: '2012-04-23T18:25:43.511Z'
 
 ### `Metadata.description`
 
@@ -165,12 +165,12 @@ Population guidance from the Google UDM usage guide.
 
 - **Purpose**: Encodes the GMT timestamp when the event was generated.
 - **Required**: Yes
-- **Encoding**: RFC 3339, as appropriate for JSON or Proto3 timestamp format.
+- **Encoding**: RFC 3339 JSON timestamp.
 
 #### Examples
 
 - RFC 3339: 2019-09-10T20:32:31-08:00
-- Proto3 format: 2012-04-23T18:25:43.511Z
+- JSON timestamp: 2012-04-23T18:25:43.511Z
 
 ### `Metadata.eventType`
 

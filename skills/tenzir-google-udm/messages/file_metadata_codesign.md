@@ -18,7 +18,7 @@ Code sign format.
 
 ### `compilationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Code sign timestamp
 

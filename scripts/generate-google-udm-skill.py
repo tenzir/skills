@@ -66,6 +66,13 @@ SCALAR_TYPES = {
     descriptor_pb2.FieldDescriptorProto.TYPE_SINT32: "sint32",
     descriptor_pb2.FieldDescriptorProto.TYPE_SINT64: "sint64",
 }
+WELL_KNOWN_TYPES = {
+    "google.protobuf.Duration": "duration",
+    "google.protobuf.Struct": "object",
+    "google.protobuf.Timestamp": "timestamp",
+    "google.type.Interval": "interval",
+    "google.type.LatLng": "latLng",
+}
 GUIDANCE_FIELD_PATH_ROOTS = {
     "about",
     "additional",
@@ -529,6 +536,8 @@ def format_type(
         descriptor_pb2.FieldDescriptorProto.TYPE_ENUM,
     ):
         full_name = field.type_name.lstrip(".")
+        if full_name in WELL_KNOWN_TYPES:
+            return f"`{WELL_KNOWN_TYPES[full_name]}`"
         message = context.message_by_full_name.get(full_name)
         if message is not None and not message.descriptor.options.map_entry:
             return f"[`{type_label(context, full_name)}`]({link_for_message(message, section)})"
@@ -570,7 +579,25 @@ def rest_field_name_map(context: FileContext) -> dict[str, str]:
     }
 
 
+def apply_endpoint_language(text: str) -> str:
+    replacements = {
+        "RFC 3339, as appropriate for JSON or Proto3 timestamp format.": "RFC 3339 JSON timestamp.",
+        "as appropriate for JSON or Proto3 timestamp format": "as RFC 3339 JSON timestamp values",
+        " in Proto3 using": " using",
+        " in Proto3": "",
+        "Proto3 format": "JSON timestamp",
+        "Proto3 timestamp format": "JSON timestamp",
+        "proto3 format": "JSON timestamp",
+        "single File proto": "single File message",
+        "Unified Data Model schema": "Unified Data Model",
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    return text
+
+
 def apply_rest_field_names(context: FileContext, text: str) -> str:
+    text = apply_endpoint_language(text)
     replacements = rest_field_name_map(context)
     if not replacements:
         return text
@@ -905,9 +932,7 @@ def render_event_type_guidance(context: FileContext, guidance: DocsGuidance) -> 
     lines = [
         "## Guidance",
         "",
-        "Population guidance from the "
-        f"[Google UDM usage guide]({guidance.usage_source.url}); "
-        f"Google last updated: `{guidance.usage_source.last_updated}`.",
+        "Population guidance for choosing event types and required fields.",
         "",
     ]
     for section in guidance.event_guidance:
@@ -1712,19 +1737,6 @@ def markdown_table_cell(text: str) -> str:
     return text.replace("|", "\\|")
 
 
-def render_source_section(sources: tuple[DocSource, ...]) -> list[str]:
-    lines = ["## Source", ""]
-    for source in sources:
-        lines.extend(
-            [
-                f"- **{source.title}**: {source.url}",
-                f"  - Google last updated: `{source.last_updated}`",
-            ]
-        )
-    lines.append("")
-    return lines
-
-
 def enum_value_names(context: FileContext, qualified_name: str) -> set[str]:
     enum = context.enum_by_full_name.get(f"{context.file_proto.package}.{qualified_name}")
     if enum is None:
@@ -1803,74 +1815,15 @@ def validate_guidance_against_schema(context: FileContext, guidance: DocsGuidanc
         if family == "idm":
             warnings.warn(
                 f"Preserving product-only usage guidance for {field.field_path}; "
-                "it is not a proto message field.",
+                "it is not a UDM message field.",
                 stacklevel=2,
             )
         elif family not in known_messages:
             warnings.warn(
                 f"Preserving usage guidance for {field.field_path}; "
-                f"{family} is not a top-level or nested proto message name.",
+                f"{family} is not a top-level or nested UDM message name.",
                 stacklevel=2,
             )
-
-
-def render_unmatched_field_guidance(fields: tuple[FieldGuidance, ...]) -> list[str]:
-    if not fields:
-        return []
-    lines = [
-        "## Product-Only Field Notes",
-        "",
-        "These usage-guide fields do not resolve to proto-derived UDM messages.",
-        "",
-    ]
-    for field in sorted(fields, key=lambda item: item.field_path.lower()):
-        lines.extend([f"### `{field.field_path}`", ""])
-        for item in field.items:
-            lines.extend(render_guidance_bullet(item))
-        if field.examples:
-            lines.extend(["", "#### Examples", ""])
-            for example in field.examples:
-                lines.append(f"- {example}")
-        lines.append("")
-    return lines
-
-
-def render_usage_page(
-    guidance: DocsGuidance,
-    unmatched_field_guidance: tuple[FieldGuidance, ...] = (),
-) -> str:
-    lines = [
-        "# Google UDM Usage Guidance",
-        "",
-        "Generated from targeted sections of the Google UDM usage guide and field list.",
-        "Use these pages for field population policy, required fields, field-path",
-        "prefixes, datatype notes, and examples. Use the proto-derived schema pages",
-        "for REST field keys, types, oneofs, and deprecation.",
-        "",
-    ]
-    lines.extend(render_source_section((guidance.usage_source, guidance.field_list_source)))
-    lines.extend(
-        [
-            "## Generated Guidance",
-            "",
-            f"- Message guidance entries: `{len(guidance.field_guidance) - len(unmatched_field_guidance)}`",
-            f"- Product-only field notes: `{len(unmatched_field_guidance)}`",
-            f"- Event type categories: `{len(guidance.event_type_categories)}`",
-            f"- Event guidance sections: `{len(guidance.event_guidance)}`",
-            f"- Entity type guidance entries: `{len(guidance.entity_guidance)}`",
-            f"- Datatype rows: `{len(guidance.datatypes)}`",
-            "",
-            "## Indexes",
-            "",
-            "- [Field paths](field-paths.md)",
-            "- [Datatypes](datatypes.md)",
-            "- [Event type categories](event-type-categories.md)",
-            "- [Event types and event guidance](event-types.md)",
-            "",
-        ]
-    )
-    lines.extend(render_unmatched_field_guidance(unmatched_field_guidance))
-    return clean_markdown("\n".join(lines))
 
 
 def render_field_paths_page(guidance: DocsGuidance) -> str:
@@ -1882,7 +1835,6 @@ def render_field_paths_page(guidance: DocsGuidance) -> str:
         "and configuration-based normalizer contexts.",
         "",
     ]
-    lines.extend(render_source_section((guidance.usage_source, guidance.field_list_source)))
     if field_paths is None:
         lines.extend(["No field path guidance was extracted.", ""])
         return clean_markdown("\n".join(lines))
@@ -1897,7 +1849,7 @@ def render_field_paths_page(guidance: DocsGuidance) -> str:
         lines.extend([title, ""])
         if notes:
             for note in notes:
-                lines.append(f"- {note}")
+                lines.append(f"- {apply_endpoint_language(note)}")
         else:
             lines.append("No notes extracted.")
         if examples:
@@ -1910,37 +1862,25 @@ def render_field_paths_page(guidance: DocsGuidance) -> str:
 
 def render_datatypes_page(guidance: DocsGuidance) -> str:
     lines = [
-        "# Standard Datatypes",
+        "# Datatypes",
         "",
-        "Standard datatype notes from the Google UDM field list.",
+        "Common type labels used in the message field reference.",
+        "",
+        "| Type | Meaning |",
+        "| --- | --- |",
+        "| `string` | Text value. |",
+        "| `bool` | Boolean value. |",
+        "| `bytes` | Binary value. |",
+        "| `int32`, `int64`, `uint32`, `uint64` | Integer value. |",
+        "| `float`, `double` | Floating-point numeric value. |",
+        "| `timestamp` | Timestamp value. Check field guidance for the expected format. |",
+        "| `duration` | Duration value. Check field guidance for the expected format. |",
+        "| `object` | JSON object for structured values that do not fit a specific UDM message. |",
+        "| `interval` | Time interval value. |",
+        "| `latLng` | Geographic latitude and longitude value. |",
+        "| `map<K, V>` | JSON object whose keys and values use the listed types. |",
         "",
     ]
-    lines.extend(render_source_section((guidance.field_list_source,)))
-    if not guidance.datatypes:
-        lines.extend(["No datatype guidance was extracted.", ""])
-        return clean_markdown("\n".join(lines))
-
-    languages = sorted(
-        {
-            language
-            for datatype in guidance.datatypes
-            for language, _value in datatype.language_types
-        }
-    )
-    lines.append("| Datatype | Notes | " + " | ".join(languages) + " |")
-    lines.append("| --- | --- | " + " | ".join("---" for _ in languages) + " |")
-    for datatype in guidance.datatypes:
-        language_map = dict(datatype.language_types)
-        cells = [
-            f"`{datatype.datatype}`",
-            markdown_table_cell(datatype.notes),
-            *[
-                markdown_table_cell(language_map.get(language, ""))
-                for language in languages
-            ],
-        ]
-        lines.append("| " + " | ".join(cells) + " |")
-    lines.append("")
     return clean_markdown("\n".join(lines))
 
 
@@ -1958,7 +1898,6 @@ def render_event_type_categories_page(
         "Usage-guide grouping for choosing `metadata.eventType`.",
         "",
     ]
-    lines.extend(render_source_section((guidance.usage_source,)))
     if not guidance.event_type_categories:
         lines.extend(["No event type categories were extracted.", ""])
         return clean_markdown("\n".join(lines))
@@ -1982,11 +1921,9 @@ def render_event_type_categories_page(
 def render_guidance_docs(
     context: FileContext,
     guidance: DocsGuidance,
-    unmatched_field_guidance: tuple[FieldGuidance, ...] = (),
 ) -> dict[Path, str]:
     validate_guidance_against_schema(context, guidance)
     docs: dict[Path, str] = {
-        Path("usage.md"): render_usage_page(guidance, unmatched_field_guidance),
         Path("field-paths.md"): render_field_paths_page(guidance),
         Path("datatypes.md"): render_datatypes_page(guidance),
         Path("event-type-categories.md"): render_event_type_categories_page(guidance),
@@ -1995,49 +1932,23 @@ def render_guidance_docs(
     return docs
 
 
-def render_schema_page(context: FileContext, source: SourceRef, fetched_files: set[str]) -> str:
-    messages = generated_messages(context)
+def render_top_level_structure(context: FileContext) -> list[str]:
     roots = [
-        ("UDM event", context.message_by_full_name.get(f"{context.file_proto.package}.UDM")),
-        ("Entity graph", context.message_by_full_name.get(f"{context.file_proto.package}.Entity")),
+        ("Event", context.message_by_full_name.get(f"{context.file_proto.package}.UDM")),
+        ("Entity", context.message_by_full_name.get(f"{context.file_proto.package}.Entity")),
     ]
-
     lines = [
-        "# Google UDM schema",
+        "## Top-level structure",
         "",
-        "Generated from the canonical Google UDM protocol buffer definitions.",
-        "",
-        "- **Sources**:",
-        *[
-            f"  - [{path}]({GITHUB_BLOB}/{source.sha}/{path})"
-            for path in ROOT_PROTO_PATHS
-            if path in fetched_files or path == UDM_PROTO_PATH
-        ],
-        f"- **Requested ref**: `{source.ref}`",
-        f"- **Resolved commit**: `{source.sha}`",
-        "",
-        "## Imports",
+        "UDM uses two top-level JSON shapes: events for telemetry records and",
+        "entities for contextual objects such as users, assets, domains, files,",
+        "URLs, and IP addresses.",
         "",
     ]
-    for path in sorted(fetched_files):
-        if path != UDM_PROTO_PATH:
-            lines.append(f"- `{path}`")
-    lines.extend(
-        [
-            "",
-            "## Indexes",
-            "",
-            "- [Messages](messages.md)",
-            "- [Enums](enums.md)",
-            "- [Event types](event-types.md)",
-            "- [Usage guidance](usage.md)",
-            "",
-        ]
-    )
     for label, root in roots:
         if root is None:
             continue
-        lines.extend([f"## Top-level {label} fields", ""])
+        lines.extend([f"### {label}", ""])
         lines.append("| Field | Cardinality | Type | Description |")
         lines.append("| --- | --- | --- | --- |")
         for field_idx, field in enumerate(root.descriptor.field):
@@ -2050,59 +1961,46 @@ def render_schema_page(context: FileContext, source: SourceRef, fetched_files: s
                 f"`{field_display_name(field)}` | "
                 f"`{field_cardinality(context, field)}` | "
                 f"{format_type(context, field, section='schema')} | "
-                f"{brief_comment(comment, 100)} |"
+                f"{markdown_table_cell(brief_comment(comment, 100))} |"
             )
         lines.append("")
-    return clean_markdown("\n".join(lines))
+    return lines
 
 
 def render_skill_markdown(
     context: FileContext,
-    source: SourceRef,
     guidance: DocsGuidance | None = None,
 ) -> str:
-    guidance_sources = []
-    if guidance is not None:
-        guidance_sources = [
-            f"- Usage guide last updated: `{guidance.usage_source.last_updated}`",
-            f"- Field list last updated: `{guidance.field_list_source.last_updated}`",
-        ]
     return clean_markdown(
         "\n".join(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or Google SecOps event schema.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or the Google SecOps UDM endpoint.",
                 "---",
                 "",
                 "# Google UDM",
                 "",
-                "Look up the generated Google UDM schema and usage references before",
-                "answering. The schema pages are generated from `backstory/udm.proto`",
-                "and `backstory/entity.proto`; they are the ground truth for field",
-                "existence, REST field keys, types, oneofs, and deprecation.",
-                "The guidance sections are generated from targeted Google documentation;",
-                "they are the source for population policy, required fields,",
-                "field-path prefixes, datatype notes, and examples.",
+                "Google UDM (Unified Data Model) is the Google SecOps data model",
+                "for normalized security telemetry. It represents events and",
+                "entities in a common structure so logs from different products",
+                "can describe actors, assets, resources, network activity,",
+                "security outcomes, and product context with consistent field",
+                "names and enum values.",
                 "",
-                "## Source",
+                "Use this skill to answer how a log should map to UDM, which",
+                "event or entity type to choose, which JSON fields to populate,",
+                "and how Google expects values and field paths to be formatted.",
                 "",
-                "- [Schema summary](schema.md)",
-                "- [Usage guidance](usage.md)",
-                f"- Source ref: `{source.ref}`",
-                f"- Resolved commit: `{source.sha}`",
-                *guidance_sources,
-                "",
+                *render_top_level_structure(context),
                 "## File layout",
                 "",
                 "```",
-                "schema.md                  # Proto sources and top-level UDM and Entity fields",
                 "messages.md                # Message index",
                 "messages/{message}.md      # Message fields and population guidance",
                 "enums.md                   # Enum index",
                 "enums/{enum}.md            # Enum values",
                 "event-types.md             # EventType values and event guidance",
-                "usage.md                   # Guidance source summary and routing",
                 "field-paths.md             # Rules, Detect Engine, and CBN prefixes",
                 "datatypes.md               # Standard datatype notes",
                 "```",
@@ -2111,7 +2009,7 @@ def render_skill_markdown(
                 "",
                 "| Question pattern | Start here |",
                 "| --- | --- |",
-                "| What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |",
+                "| What fields exist? | [Messages](messages.md) and the specific message page |",
                 "| What values can enum X take? | [Enums](enums.md) -> specific enum page |",
                 "| How should I map this event? | [Event types](event-types.md), then relevant message pages |",
                 "| Which `metadata.eventType` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |",
@@ -2121,13 +2019,13 @@ def render_skill_markdown(
                 "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |",
                 "| What fields exist for network/protocol details? | [Network](messages/network.md) and protocol messages such as DNS/HTTP/TLS/DHCP |",
                 "| What fields exist for entities? | [Entity](messages/entity.md) and [EntityMetadata](messages/entity_metadata.md) |",
-                "| What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |",
+                "| What is the top-level event shape? | This file, then [UDM](messages/udm.md) |",
                 "",
                 "When a question asks for modeling guidance, read both layers.",
                 "Message, event, or entity guidance explains how Google says to",
-                "populate the data; schema pages show the exact field structure.",
-                "If they differ, state both facts and identify which source each",
-                "fact comes from.",
+                "populate the data; message pages show the exact field structure.",
+                "If they differ, state both facts instead of silently",
+                "reconciling them.",
                 "",
                 "## Domain knowledge",
                 "",
@@ -2135,7 +2033,7 @@ def render_skill_markdown(
                 "  `target`, `intermediary`, `observer`, `about`), `securityResult`,",
                 "  `network`, and `extensions`.",
                 "- UDM entities center on `metadata`, an `entity` noun, `relations`,",
-                "  optional `risk_score`, and optional `metric` data.",
+                "  optional `riskScore`, and optional `metric` data.",
                 "- `metadata.eventType` classifies the event. It is the first place to look",
                 "  when deciding how an event should be represented.",
                 "- `metadata.entityType` classifies entity records and drives entity-specific",
@@ -2145,12 +2043,11 @@ def render_skill_markdown(
                 "",
                 "## Answering principles",
                 "",
-                "- Read before answering. Every schema or guidance claim must trace back to",
+                "- Read before answering. Every field or guidance claim must trace back to",
                 "  a generated file in this skill.",
                 "- Prefer exact field names, enum names, and message names from the reference.",
-                "- Distinguish proto structure from mapping policy. Required-field and",
-                "  population rules come from generated guidance sections, not from",
-                "  proto field presence.",
+                "- Distinguish field structure from mapping policy. Required-field and",
+                "  population rules come from message, event, and entity guidance.",
                 "- Do not invent UDM semantics from memory.",
                 "",
             ]
@@ -2160,21 +2057,17 @@ def render_skill_markdown(
 
 def build_docs(
     context: FileContext,
-    source: SourceRef,
-    fetched_files: set[str],
     guidance: DocsGuidance | None = None,
 ) -> dict[Path, str]:
     field_guidance_groups: dict[str, tuple[FieldGuidance, ...]] = {}
-    unmatched_field_guidance: tuple[FieldGuidance, ...] = ()
     if guidance is not None:
-        field_guidance_groups, unmatched_field_guidance = group_field_guidance_by_message(
+        field_guidance_groups, _unmatched_field_guidance = group_field_guidance_by_message(
             context,
             guidance,
         )
 
     docs: dict[Path, str] = {
-        Path("SKILL.md"): render_skill_markdown(context, source, guidance),
-        Path("schema.md"): render_schema_page(context, source, fetched_files),
+        Path("SKILL.md"): render_skill_markdown(context, guidance),
         Path("messages.md"): render_messages_overview(context),
         Path("enums.md"): render_enums_overview(context),
     }
@@ -2202,7 +2095,7 @@ def build_docs(
         )
 
     if guidance is not None:
-        docs.update(render_guidance_docs(context, guidance, unmatched_field_guidance))
+        docs.update(render_guidance_docs(context, guidance))
 
     return docs
 
@@ -2239,7 +2132,7 @@ def main() -> None:
             if proto.name in fetched_files and proto.name != UDM_PROTO_PATH
         ]
         context = collect_messages_and_enums(file_proto, extra_file_protos)
-        docs = build_docs(context, source, fetched_files, guidance)
+        docs = build_docs(context, guidance)
         write_docs(output_dir, docs)
     finally:
         shutil.rmtree(temp_root, ignore_errors=True)

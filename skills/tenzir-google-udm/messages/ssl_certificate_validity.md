@@ -6,12 +6,12 @@ Defines certificate's validity period.
 
 ### `expiryTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Expiry date.
 
 ### `issueTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Issue date.

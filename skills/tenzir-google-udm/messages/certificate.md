@@ -48,12 +48,12 @@ The SHA256 hash of the certificate, as a hex-encoded string.
 
 ### `notBefore`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Indicates when the certificate is first valid.
 
 ### `notAfter`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Indicates when the certificate is no longer valid.

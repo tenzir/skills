@@ -12,19 +12,19 @@ A vendor-specific identifier that uniquely identifies the entity (e.g. a GUID, L
 
 ### `collectedTimestamp`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 GMT timestamp when the entity information was collected by the vendor's local collection infrastructure.
 
 ### `creationTimestamp`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 GMT timestamp when the entity described by the productEntityId was created on the system where data was collected.
 
 ### `interval`
 
-- Type: `google.type.Interval` (singular)
+- Type: `interval` (singular)
 
 Valid existence time range for the version of the entity represented by this entity data.
 
@@ -90,14 +90,14 @@ Metadata field from the event.
 
 ### `structuredFields`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 - Deprecated: `true`
 
 Structured fields extracted from the log.
 
 ### `extracted`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Flattened fields extracted from the log.
 

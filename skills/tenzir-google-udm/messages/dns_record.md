@@ -18,7 +18,7 @@ Value.
 
 ### `ttl`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 Time to live.
 
@@ -36,19 +36,19 @@ Retry.
 
 ### `refresh`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 Refresh.
 
 ### `minimum`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 Minimum.
 
 ### `expire`
 
-- Type: `google.protobuf.Duration` (singular)
+- Type: `duration` (singular)
 
 Expire.
 

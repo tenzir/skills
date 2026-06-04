@@ -18,6 +18,6 @@ Rank position.
 
 ### `ingestionTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Timestamp when the rank was ingested.

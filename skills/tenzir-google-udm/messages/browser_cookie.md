@@ -30,7 +30,7 @@ The URL path for which the cookie is valid.
 
 ### `expirationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 The date and time when the cookie will expire.
 

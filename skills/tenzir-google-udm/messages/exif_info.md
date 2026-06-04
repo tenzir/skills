@@ -36,6 +36,6 @@ entry point.
 
 ### `compilationTime`
 
-- Type: `google.protobuf.Timestamp` (singular)
+- Type: `timestamp` (singular)
 
 Compilation time.

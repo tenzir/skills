@@ -24,7 +24,7 @@ One or more relationships between the entity (a) and other entities, including t
 
 ### `additional`
 
-- Type: `google.protobuf.Struct` (singular)
+- Type: `object` (singular)
 
 Important entity data that cannot be adequately represented within the formal sections of the Entity.
 
