@@ -1321,6 +1321,13 @@ def extract_event_value(text: str) -> str | None:
     return match.group(0) if match else None
 
 
+def code_event_type_value(text: str) -> str:
+    event_type = extract_event_value(text)
+    if not event_type:
+        return text
+    return text.replace(event_type, f"`{event_type}`", 1)
+
+
 def extract_event_values(text: str) -> tuple[str, ...]:
     return tuple(dict.fromkeys(re.findall(r"\b[A-Z][A-Z0-9]+(?:_[A-Z0-9]+)+\b", text)))
 
@@ -1908,12 +1915,13 @@ def render_event_type_categories_page(
         if category.values:
             for value in category.values:
                 event_type = extract_event_value(value)
+                label = code_event_type_value(value)
                 if event_type in event_guidance_anchors:
                     lines.append(
-                        f"- [{value}](event-types.md#{event_guidance_anchors[event_type]})"
+                        f"- [{label}](event-types.md#{event_guidance_anchors[event_type]})"
                     )
                 else:
-                    lines.append(f"- {value}")
+                    lines.append(f"- {label}")
         lines.append("")
     return clean_markdown("\n".join(lines))
 
