@@ -18,12 +18,17 @@ The following skills are produced by generator scripts or synced from another
 repository and must not be edited by hand in this repository. Change the source
 listed below instead, then regenerate or let the sync workflow update this repo.
 
-| Skill                       | Source of truth                                | Sync mechanism                                                                     |
-| --------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `skills/tenzir-google-udm/` | `scripts/generate-google-udm-skill.py`         | `.github/workflows/sync-google-udm-skill.yaml`                                     |
-| `skills/tenzir-ocsf/`       | `scripts/generate-ocsf-skill.py`               | `.github/workflows/sync-ocsf-skill.yaml`                                           |
-| `skills/tenzir-docs/`       | `scripts/generate-tenzir-docs-skill.py`        | `.github/workflows/sync-docs-skill.yaml`                                           |
-| `skills/tenzir-ship/`       | `tenzir/ship:skills/tenzir-ship/`              | `tenzir/ship:.github/workflows/sync-skills.yaml` via `.github/workflows/sync.yaml` |
+- `skills/tenzir-google-udm/`: generated from
+  `scripts/generate-google-udm-skill.py` and synced by
+  `.github/workflows/sync-google-udm-skill.yaml`.
+- `skills/tenzir-ocsf/`: generated from `scripts/generate-ocsf-skill.py` and
+  synced by `.github/workflows/sync-ocsf-skill.yaml`.
+- `skills/tenzir-docs/`: generated from
+  `scripts/generate-tenzir-docs-skill.py` and synced by
+  `.github/workflows/sync-docs-skill.yaml`.
+- `skills/tenzir-ship/`: synced from `tenzir/ship:skills/tenzir-ship/` through
+  `tenzir/ship:.github/workflows/sync-skills.yaml` via
+  `.github/workflows/sync.yaml`.
 
 Three places list skills and must stay consistent:
 
