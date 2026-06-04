@@ -92,25 +92,11 @@ https://docs.tenzir.com/guides/ai-workbench/use-agent-skills/.
 
 ## Validation
 
-Run the shared Lefthook quality gate before pushing or after changing anything
-under `skills/`, `.github/workflows/`, `.claude-plugin/`, `changelog/`, or the
-hook configuration:
+Make sure that your clone has 
 
 ```bash
-uvx --from lefthook==2.1.6 lefthook run pre-push --all-files
+uvx lefthook check-install
+uvx lefthook install
 ```
 
-The gate runs `scripts/validate-skills --marketplace`, which verifies every
-local skill with `skills-ref` and checks that `.claude-plugin/marketplace.json`
-lists each skill exactly once. It also validates `changelog/` with
-`tenzir-ship`.
-
-Install the same hook locally with:
-
-```bash
-uvx --from lefthook==2.1.6 lefthook install
-```
-
-The same Lefthook gate runs in `.github/workflows/checks.yaml` for pull requests
-that touch the skill tree, workflow, changelog, or hook setup, and on every push
-to `main`.
+Pushing runs Lefthook quality gate. CI also runs checks through lefthook.
