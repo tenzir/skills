@@ -97,11 +97,10 @@ https://docs.tenzir.com/guides/ai-workbench/use-agent-skills/.
 
 ## Validation
 
-Make sure that your clone has 
+Install Lefthook once per clone:
 
 ```bash
-uvx lefthook check-install
 uvx lefthook install
 ```
 
-Pushing runs Lefthook quality gate. CI also runs checks through lefthook.
+Pushing runs the pre-push quality gate automatically.
