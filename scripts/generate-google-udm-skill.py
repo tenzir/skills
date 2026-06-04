@@ -109,6 +109,23 @@ GUIDANCE_SIMPLE_FIELD_NAMES = GUIDANCE_FIELD_PATH_ROOTS | {
     "url",
     "user",
 }
+MIN_GUIDANCE_COUNTS = {
+    "field population guidance sections": 20,
+    "event type category values": 20,
+    "entity type guidance sections": 5,
+    "entity type requirement bullets": 8,
+    "event guidance sections": 10,
+    "event guidance event type values": 20,
+    "standard datatype rows": 5,
+}
+MIN_FIELD_PATH_COUNTS = {
+    "rules engine prefix notes": 1,
+    "Detect Engine notes": 1,
+    "Detect Engine examples": 2,
+    "CBN notes": 1,
+    "CBN examples": 2,
+    "field path style notes": 2,
+}
 
 
 @dataclass(frozen=True, slots=True)
@@ -958,7 +975,7 @@ def render_event_type_guidance(context: FileContext, guidance: DocsGuidance) -> 
                         f"##### {title}",
                         "",
                         "```text",
-                        apply_rest_field_names(context, example.code),
+                        example.code,
                         "```",
                         "",
                     ]
@@ -1679,6 +1696,60 @@ def parse_field_list_guide(
     return source, parse_field_path_guidance(article), parse_datatypes(article)
 
 
+def count_entity_requirements(requirements: tuple[EntityRequirement, ...]) -> int:
+    return sum(
+        1 + count_entity_requirements(requirement.children)
+        for requirement in requirements
+    )
+
+
+def validate_docs_guidance_extraction(guidance: DocsGuidance) -> None:
+    counts = {
+        "field population guidance sections": len(guidance.field_guidance),
+        "event type category values": sum(
+            len(category.values) for category in guidance.event_type_categories
+        ),
+        "entity type guidance sections": len(guidance.entity_guidance),
+        "entity type requirement bullets": sum(
+            count_entity_requirements(entity.requirements)
+            for entity in guidance.entity_guidance
+        ),
+        "event guidance sections": len(guidance.event_guidance),
+        "event guidance event type values": sum(
+            len(section.event_types) for section in guidance.event_guidance
+        ),
+        "standard datatype rows": len(guidance.datatypes),
+    }
+    failures = [
+        f"{label}: expected at least {minimum}, found {counts[label]}"
+        for label, minimum in MIN_GUIDANCE_COUNTS.items()
+        if counts[label] < minimum
+    ]
+
+    if guidance.field_paths is None:
+        failures.append("field path guidance: expected extracted guidance, found none")
+    else:
+        field_path_counts = {
+            "rules engine prefix notes": len(guidance.field_paths.usage_notes),
+            "Detect Engine notes": len(guidance.field_paths.detect_engine_notes),
+            "Detect Engine examples": len(guidance.field_paths.detect_engine_examples),
+            "CBN notes": len(guidance.field_paths.cbn_notes),
+            "CBN examples": len(guidance.field_paths.cbn_examples),
+            "field path style notes": len(guidance.field_paths.style_notes),
+        }
+        failures.extend(
+            f"{label}: expected at least {minimum}, found {field_path_counts[label]}"
+            for label, minimum in MIN_FIELD_PATH_COUNTS.items()
+            if field_path_counts[label] < minimum
+        )
+
+    if failures:
+        raise RuntimeError(
+            "Google UDM docs guidance extraction failed sanity checks:\n"
+            + "\n".join(f"- {failure}" for failure in failures)
+        )
+
+
 def fetch_docs_guidance(client: httpx.Client) -> DocsGuidance:
     usage_html = fetch_text(client, UDM_USAGE_URL)
     field_list_html = fetch_text(client, UDM_FIELD_LIST_URL)
@@ -1691,7 +1762,7 @@ def fetch_docs_guidance(client: httpx.Client) -> DocsGuidance:
         event_guidance,
     ) = parse_usage_guide(usage_html)
     field_list_source, field_paths, datatypes = parse_field_list_guide(field_list_html)
-    return DocsGuidance(
+    guidance = DocsGuidance(
         usage_source=usage_source,
         field_list_source=field_list_source,
         field_guidance=field_guidance,
@@ -1701,6 +1772,8 @@ def fetch_docs_guidance(client: httpx.Client) -> DocsGuidance:
         field_paths=merge_field_path_guidance(usage_field_path_notes, field_paths),
         datatypes=datatypes,
     )
+    validate_docs_guidance_extraction(guidance)
+    return guidance
 
 
 def brief_comment(comment: str, limit: int = 140) -> str:

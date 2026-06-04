@@ -192,17 +192,17 @@ Applies to: `FILE_CREATION`, `FILE_DELETION`, `FILE_MODIFICATION`, `FILE_READ`, 
 
 ```text
 metadata {
-  eventTimestamp: "2020-01-01T13:27:41+00:00"
-  eventType: MUTEX_CREATION
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_timestamp: "2020-01-01T13:27:41+00:00"
+  event_type: MUTEX_CREATION
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal {
   hostname: "test.altostrat.com"
   process {
     pid: "0xc45"
     file {
-      fullPath: "C:\\Windows\\regedit.exe"
+      full_path: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -278,15 +278,15 @@ date=2013-08-07 time=13:27:41 timezone="GMT" device_name="CC500ia" device_id= C0
 
 ```text
 metadata {
-  eventTimestamp: "2013-08-07T13:27:41+00:00"
-  eventType: NETWORK_HTTP
-  productName: "Sophos Antivirus"
-  productLogId: "030906208001"
+  event_timestamp: "2013-08-07T13:27:41+00:00"
+  event_type: NETWORK_HTTP
+  product_name: "Sophos Antivirus"
+  product_log_id: "030906208001"
 }
 
 principal {
   hostname: "CC500ia"
-  assetId: "Sophos.AV:C070123456-ABCDE"
+  asset_id: "Sophos.AV:C070123456-ABCDE"
   ip: "10.10.2.10"
   port: 60671
   user {  userid: "john.smith" }
@@ -300,17 +300,17 @@ target {
 }
 
 network {
-  ipProtocol: TCP
+  ip_protocol: TCP
  }
 
-securityResult {
+security_result {
   about {
     url: "altostrat.fr/img/logo.gif"
     category: SOFTWARE_MALICIOUS
-    categoryDetails: "Virus"
-    threatName: "TR/ElderadoB.A.78"
+    category_details: "Virus"
+    threat_name: "TR/ElderadoB.A.78"
     severity: HIGH                   # Google Security Operations-normalized severity
-    severityDetails: "Critical"    # Vendor-specific severity string
+    severity_details: "Critical"    # Vendor-specific severity string
   }
 }
 
@@ -346,10 +346,10 @@ Applies to: `PROCESS_INJECTION`, `PROCESS_LAUNCH`, `PROCESS_OPEN`, `PROCESS_TERM
 
 ```text
 metadata {
-  eventTimestamp: "2020-01-01T13:27:41+00:00"
-  eventType: PROCESS_LAUNCH
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_timestamp: "2020-01-01T13:27:41+00:00"
+  event_type: PROCESS_LAUNCH
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal {
   hostname: "altostrat.com"
@@ -358,7 +358,7 @@ target {
   process {
     pid: "0xc45"
     file {
-      fullPath: "C:\\Windows\\regedit.exe"
+      full_path: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -391,10 +391,10 @@ target {
 
 ```text
 metadata {
-  eventTimestamp: "2020-01-01T13:27:41+00:00"
-  eventType: PROCESS_MODULE_LOAD
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_timestamp: "2020-01-01T13:27:41+00:00"
+  event_type: PROCESS_MODULE_LOAD
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal {
   hostname: "example.com"
@@ -406,7 +406,7 @@ target {
   process {
     pid: "0xc45"
     file {
-      fullPath: "C:\\Windows\\regedit.exe"
+      full_path: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -437,10 +437,10 @@ target {
 
 ```text
 metadata {
-  eventTimestamp: "2020-01-01T13:27:41+00:00"
-  eventType: PROCESS_PRIVILEGE_ESCALATION
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_timestamp: "2020-01-01T13:27:41+00:00"
+  event_type: PROCESS_PRIVILEGE_ESCALATION
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal {
   hostname: "example.com"
@@ -449,14 +449,14 @@ principal {
   }
   user {
     userid: "test"
-    windowsSid: "ABCDEFGH-123456789-1111111-1000"
+    windows_sid: "ABCDEFGH-123456789-1111111-1000"
   }
 }
 target {
   process {
     pid: "0xc45"
     file {
-      fullPath: "C:\\Windows\\regedit.exe"
+      full_path: "C:\\Windows\\regedit.exe"
     }
   }
 }
@@ -491,29 +491,29 @@ Applies to: `REGISTRY_CREATION`, `REGISTRY_MODIFICATION`, `REGISTRY_DELETION`
 
 ```text
 metadata {
-  eventTimestamp: "2020-01-01T13:27:41+00:00"
-  eventType: REGISTRY_MODIFICATION
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_timestamp: "2020-01-01T13:27:41+00:00"
+  event_type: REGISTRY_MODIFICATION
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal {
   hostname: "test-win"
   user {
     userid: "test"
-    windowsSid: "ABCDEFGH-123456789-1111111-1000"
+    windows_sid: "ABCDEFGH-123456789-1111111-1000"
   }
   process {
     pid: "0xc45"
     file {
-      fullPath: "C:\\Windows\\regedit.exe"
+      full_path: "C:\\Windows\\regedit.exe"
     }
   }
 }
 target {
   registry {
-    registryKey: "\\REGISTRY\\USER\\TEST_USER\\Control Panel\\PowerCfg\\PowerPolicy"
-    registryValueName: "Description"
-    registryValueData: "For extending battery life."
+    registry_key: "\\REGISTRY\\USER\\TEST_USER\\Control Panel\\PowerCfg\\PowerPolicy"
+    registry_value_name: "Description"
+    registry_value_data: "For extending battery life."
   }
 }
 ```
@@ -555,24 +555,24 @@ Applies to: `SCAN_FILE`, `SCAN_HOST`, `SCAN_PROCESS`, `SCAN_VULN_HOST`, `SCAN_VU
 
 ```text
 metadata: {
-  eventTimestamp: {
+  event_timestamp: {
     seconds: 1571386978
   }
-  eventType: SCAN_HOST
-  vendorName: "vendor"
-  productName: "product"
-  productVersion: "1.0"
+  event_type: SCAN_HOST
+  vendor_name: "vendor"
+  product_name: "product"
+  product_version: "1.0"
 }
 target: {
   hostname: "testHost"
-  assetId: "asset"
+  asset_id: "asset"
   ip: "192.168.200.200"
 }
 observer: {
   hostname: "testObserver"
   ip: "192.168.100.100"
 }
-securityResult: {
+security_result: {
   severity: LOW
   confidence: HIGH_CONFIDENCE
 }
@@ -582,13 +582,13 @@ securityResult: {
 
 ```text
 metadata: {
-  eventTimestamp: "2025-05-09T12:59:52.45298Z",
-  eventType: 18005,
-  productName: "TestProduct",
-  vendorName: "TestVendor"
+  event_timestamp: "2025-05-09T12:59:52.45298Z",
+  event_type: 18005,
+  product_name: "TestProduct",
+  vendor_name: "TestVendor"
   },
 principal {
-  assetId: "TEST:Mwl8ABcd",
+  asset_id: "TEST:Mwl8ABcd",
   ip: "127.0.0.3",
   hostname: "TEST-Localhost",
   mac: ["02:00:00:00:00:01"]
@@ -597,13 +597,13 @@ extensions: {
   vulns: {
     vulnerabilities: [
       {
-      cveId: "CVE-6l9VxQmz",
-      vendorVulnerabilityId: "TEST:7gmCmFWX",
+      cve_id: "CVE-6l9VxQmz",
+      vendor_vulnerability_id: "TEST:7gmCmFWX",
       name: "CVE pA7DzwPU",
       severity: 2,
       vendor: "TestVendor",
-      lastFound: "2025-05-09T14:59:52.45300Z",
-      firstFound: "2025-05-09T13:59:52.45300Z"
+      last_found: "2025-05-09T14:59:52.45300Z",
+      first_found: "2025-05-09T13:59:52.45300Z"
        }
       ]
     }
@@ -639,18 +639,18 @@ Applies to: `SCHEDULED_TASK_CREATION`, `SCHEDULED_TASK_DELETION`, `SCHEDULED_TAS
 
 ```text
 metadata: {
-  eventTimestamp: {
+  event_timestamp: {
     seconds: 1577577998
   }
-  eventType: SCHEDULED_TASK_CREATION
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_type: SCHEDULED_TASK_CREATION
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal: {
   hostname: "fake-host.altostrat.com"
   user: {
     userid: "TestUser"
-    windowsSid: "AB123CDE"
+    windows_sid: "AB123CDE"
   }
   process {
     pid: "1234"
@@ -665,8 +665,8 @@ target: {
 intermediary: {
   hostname: "fake-intermediary.altostrat.com"
 }
-securityResult: {
-  ruleName: "EventID: 6789"
+security_result: {
+  rule_name: "EventID: 6789"
   summary: "A scheduled task was created."
   severity: INFORMATIONAL
 }
@@ -695,10 +695,10 @@ Applies to: `SETTING_UNCATEGORIZED`, `SETTING_CREATION`, `SETTING_MODIFICATION`,
 
 ```text
 metadata {
-  eventTimestamp: "2020-01-01T13:27:41+00:00"
-  eventType: SETTING_MODIFICATION
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_timestamp: "2020-01-01T13:27:41+00:00"
+  event_type: SETTING_MODIFICATION
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal {
   hostname: "test.win.com"
@@ -735,14 +735,14 @@ Applies to: `SERVICE_UNSPECIFIED`, `SERVICE_CREATION`, `SERVICE_DELETION`, `SERV
 
 ```text
 metadata: {
- eventTimestamp: {
+ event_timestamp: {
    seconds: 1595656745
    nanos: 832000000
     }
- eventType: SERVICE_UNSPECIFIED
-   vendorName: "Preempt"
-   productName: "PREEMPT_AUTH"
-   productEventType: "SERVICE_ACCESS"
+ event_type: SERVICE_UNSPECIFIED
+   vendor_name: "Preempt"
+   product_name: "PREEMPT_AUTH"
+   product_event_type: "SERVICE_ACCESS"
    description: "Remote Procedures (RPC)"
    }
  principal: {
@@ -753,7 +753,7 @@ metadata: {
    hostname: "TestHost"
    user: {
       userid: "ORG\\User"
-      userDisplayName: "user name"
+      user_display_name: "user name"
    }
  application: "application.name"
    resource: {
@@ -787,12 +787,12 @@ Applies to: `STATUS_HEARTBEAT`, `STATUS_STARTUP`, `STATUS_SHUTDOWN`, `STATUS_UPD
 
 ```text
 metadata: {
-  eventTimestamp: {
+  event_timestamp: {
     seconds: 1588180305
   }
-  eventType: STATUS_HEARTBEAT
-  vendorName: "DMP"
-  productName: "ENTRE"
+  event_type: STATUS_HEARTBEAT
+  vendor_name: "DMP"
+  product_name: "ENTRE"
 }
 principal: {
   hostname: "testHost"
@@ -803,11 +803,11 @@ principal: {
 intermediary: {
   ip: "8.8.8.8"
 }
-securityResult: {
+security_result: {
   summary: "Event - Locked"
   description: "description"
   severity: LOW
-  severityDetails: "INFO"
+  severity_details: "INFO"
 }
 ```
 
@@ -832,16 +832,16 @@ Applies to: `SYSTEM_AUDIT_LOG_UNCATEGORIZED`, `SYSTEM_AUDIT_LOG_WIPE`
 
 ```text
 metadata {
-  eventTimestamp: "2020-01-01T13:27:41+00:00"
-  eventType: SYSTEM_AUDIT_LOG_WIPE
-  vendorName: "Microsoft"
-  productName: "Windows"
+  event_timestamp: "2020-01-01T13:27:41+00:00"
+  event_type: SYSTEM_AUDIT_LOG_WIPE
+  vendor_name: "Microsoft"
+  product_name: "Windows"
 }
 principal {
   hostname: "altostrat.com"
   user {
     userid: "test"
-    windowsSid: "ABCDEFGH-123456789-1111111-1000"
+    windows_sid: "ABCDEFGH-123456789-1111111-1000"
   }
 }
 ```
