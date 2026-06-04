@@ -1,66 +1,84 @@
 ---
 name: tenzir-google-udm
-description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema. Use whenever the user asks about UDM fields, event types, messages, enums, entity nouns, metadata, security_result, network, Chronicle normalization, or Google SecOps event schema.
+description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, security_result, network, Chronicle normalization, or Google SecOps event schema.
 ---
 
 # Google UDM
 
-Look up the generated Google UDM schema reference and answer from those
-files. The reference is generated from `backstory/udm.proto`, which is
-the ground truth for this skill. Only state schema facts from files you
-read. If the generated files do not cover the question, say so.
+Look up the generated Google UDM schema and usage references before
+answering. The schema pages are generated from `backstory/udm.proto`
+and `backstory/entity.proto`; they are the ground truth for field
+existence, field numbers, types, JSON names, oneofs, and deprecation.
+The guidance pages are generated from targeted Google documentation
+sections; they are the source for population policy, required fields,
+field-path prefixes, datatype notes, and examples.
 
 ## Source
 
 - [Schema summary](schema.md)
+- [Usage guidance](usage.md)
 - Source ref: `master`
 - Resolved commit: `0db4dc67dd805d20294c6dc34068c37f546d71da`
+- Usage guide last updated: `2026-06-03 UTC`
+- Field list last updated: `2026-06-03 UTC`
 
 ## File layout
 
 ```
-schema.md                  # Source, counts, imports, top-level UDM fields
+schema.md                  # Proto sources, counts, top-level UDM and Entity fields
 messages.md                # Message index
 messages/{message}.md      # Message fields and nested types
 enums.md                   # Enum index
 enums/{enum}.md            # Enum values
 event-types.md             # Dedicated Metadata.EventType reference
+usage.md                   # Guidance source summary and routing
+field-paths.md             # Rules, Detect Engine, and CBN prefixes
+datatypes.md               # Standard datatype notes
+field-guidance/{family}.md # Field population policy by message family
+event-guidance/{type}.md   # Required/optional event guidance by event type
+entity-guidance/{type}.md  # Required entity fields by entity type
 ```
 
 ## Question routing
 
 | Question pattern | Start here |
 | --- | --- |
-| What fields does UDM/message X have? | [Messages](messages.md) -> specific message page |
+| What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |
 | What values can enum X take? | [Enums](enums.md) -> specific enum page |
-| Which `metadata.event_type` should I use? | [Event types](event-types.md), then candidate message pages |
-| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |
-| What fields exist for network/protocol details? | [Network](messages/network.md), then protocol messages such as DNS, HTTP, TLS, DHCP |
-| What fields exist for detections or alerts? | [SecurityResult](messages/security_result.md) and related nested enums |
+| How should I map this event? | [Event guidance](event-guidance.md), relevant [field guidance](field-guidance.md), then schema pages |
+| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |
+| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity guidance](entity-guidance.md) |
+| Field formats or examples? | [Field guidance](field-guidance.md) and [Datatypes](datatypes.md) |
+| Which field path prefix? | [Field paths](field-paths.md) |
+| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md), [Noun](messages/noun.md), and Noun field guidance |
+| What fields exist for network/protocol details? | [Network](messages/network.md), protocol messages such as DNS/HTTP/TLS/DHCP, and field guidance |
+| What fields exist for entities? | [Entity](messages/entity.md), [EntityMetadata](messages/entity_metadata.md), and [Entity guidance](entity-guidance.md) |
 | What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |
 
-When a question asks for modeling guidance, read the relevant event type,
-top-level UDM noun fields, and candidate message pages. Explain what the
-proto comments say and call out any requirement that is not represented in
-the generated reference.
+When a question asks for modeling guidance, read both layers: the
+guidance page for how Google says to populate the data and the schema
+page for the exact field structure. If the two layers appear to differ,
+state both facts and identify which source each fact comes from.
 
 ## Domain knowledge
 
 - UDM events center on `metadata`, participant nouns (`principal`, `src`,
   `target`, `intermediary`, `observer`, `about`), `security_result`,
   `network`, and `extensions`.
+- UDM entities center on `metadata`, an `entity` noun, `relations`,
+  optional `risk_score`, and optional `metric` data.
 - `metadata.event_type` classifies the event. It is the first place to look
   when deciding how an event should be represented.
+- `metadata.entity_type` classifies entity records and drives entity-specific
+  requirements.
 - `Noun` carries entity details such as users, assets, processes, files,
   resources, cloud context, and labels.
-- The generated Google UDM field list is derived from the proto. Use this
-  skill's proto-derived files as the local source of truth.
 
 ## Answering principles
 
-- Read before answering. Every schema claim must trace back to a generated
-  file in this skill.
+- Read before answering. Every schema or guidance claim must trace back to
+  a generated file in this skill.
 - Prefer exact field names, enum names, and message names from the reference.
-- Distinguish proto structure from mapping policy. If a required-field or
-  validation rule is not in the generated files, say it is not covered here.
+- Distinguish proto structure from mapping policy. Required-field and
+  population rules come from guidance pages, not from proto field presence.
 - Do not invent UDM semantics from memory.

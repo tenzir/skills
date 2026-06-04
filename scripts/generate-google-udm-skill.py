@@ -2,6 +2,7 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
+#   "beautifulsoup4>=4.12.0",
 #   "grpcio-tools>=1.64.0",
 #   "httpx>=0.28.0",
 #   "protobuf>=5.27.0",
@@ -14,11 +15,15 @@ import argparse
 import re
 import shutil
 import tempfile
+import unicodedata
+import warnings
+from collections import defaultdict
 from dataclasses import dataclass
 from importlib import resources
 from pathlib import Path
 
 import httpx
+from bs4 import BeautifulSoup, Tag
 from google.protobuf import descriptor_pb2
 from grpc_tools import protoc
 
@@ -28,6 +33,14 @@ GITHUB_API = f"https://api.github.com/repos/{GOOGLEAPIS_REPO}"
 GITHUB_RAW = f"https://raw.githubusercontent.com/{GOOGLEAPIS_REPO}"
 GITHUB_BLOB = f"https://github.com/{GOOGLEAPIS_REPO}/blob"
 UDM_PROTO_PATH = "backstory/udm.proto"
+ENTITY_PROTO_PATH = "backstory/entity.proto"
+ROOT_PROTO_PATHS = (UDM_PROTO_PATH, ENTITY_PROTO_PATH)
+UDM_USAGE_URL = "https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en"
+UDM_FIELD_LIST_URL = "https://docs.cloud.google.com/chronicle/docs/reference/udm-field-list?hl=en"
+GOOGLE_DOCS_LICENSE = (
+    "Content licensed under Creative Commons Attribution 4.0; code samples "
+    "licensed under Apache 2.0, as stated in the Google Developers Site Policies."
+)
 HTTP_HEADERS = {
     "User-Agent": "tenzir-google-udm-generator",
     "Accept": "application/vnd.github+json",
@@ -99,6 +112,84 @@ class FileContext:
     map_entry_by_full_name: dict[str, MessageDoc]
 
 
+@dataclass(frozen=True, slots=True)
+class DocSource:
+    title: str
+    url: str
+    last_updated: str
+
+
+@dataclass(frozen=True, slots=True)
+class GuidanceBullet:
+    label: str
+    text: str
+
+
+@dataclass(frozen=True, slots=True)
+class FieldGuidance:
+    field_path: str
+    items: tuple[GuidanceBullet, ...]
+    examples: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class EventTypeCategory:
+    title: str
+    description: tuple[str, ...]
+    values: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class EntityGuidance:
+    entity_type: str
+    requirements: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class GuidanceExample:
+    title: str
+    code: str
+
+
+@dataclass(frozen=True, slots=True)
+class EventGuidance:
+    title: str
+    event_types: tuple[str, ...]
+    required: tuple[str, ...]
+    optional: tuple[str, ...]
+    notes: tuple[str, ...]
+    examples: tuple[GuidanceExample, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class FieldPathGuidance:
+    usage_notes: tuple[str, ...]
+    detect_engine_notes: tuple[str, ...]
+    detect_engine_examples: tuple[str, ...]
+    cbn_notes: tuple[str, ...]
+    cbn_examples: tuple[str, ...]
+    style_notes: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class DatatypeGuidance:
+    datatype: str
+    notes: str
+    language_types: tuple[tuple[str, str], ...]
+
+
+@dataclass(frozen=True, slots=True)
+class DocsGuidance:
+    usage_source: DocSource
+    field_list_source: DocSource
+    field_guidance: tuple[FieldGuidance, ...] = ()
+    event_type_categories: tuple[EventTypeCategory, ...] = ()
+    entity_guidance: tuple[EntityGuidance, ...] = ()
+    event_guidance: tuple[EventGuidance, ...] = ()
+    field_paths: FieldPathGuidance | None = None
+    datatypes: tuple[DatatypeGuidance, ...] = ()
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", required=True)
@@ -140,7 +231,7 @@ def is_bundled_google_protobuf_import(path: str) -> bool:
 
 
 def fetch_proto_tree(client: httpx.Client, source: SourceRef, output_dir: Path) -> set[str]:
-    pending = [UDM_PROTO_PATH]
+    pending = list(ROOT_PROTO_PATHS)
     fetched: set[str] = set()
 
     while pending:
@@ -159,8 +250,10 @@ def fetch_proto_tree(client: httpx.Client, source: SourceRef, output_dir: Path) 
 
 def compile_descriptor(
     proto_root: Path,
-    proto_path: str = UDM_PROTO_PATH,
+    proto_paths: str | tuple[str, ...] | list[str] = ROOT_PROTO_PATHS,
 ) -> descriptor_pb2.FileDescriptorSet:
+    if isinstance(proto_paths, str):
+        proto_paths = (proto_paths,)
     output_path = proto_root / "udm.desc"
     protobuf_include = resources.files("grpc_tools") / "_proto"
     code = protoc.main(
@@ -171,7 +264,7 @@ def compile_descriptor(
             "--include_imports",
             "--include_source_info",
             f"--descriptor_set_out={output_path}",
-            proto_path,
+            *proto_paths,
         ]
     )
     if code != 0:
@@ -571,6 +664,525 @@ def clean_markdown(text: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", text).strip() + "\n"
 
 
+def normalize_text(text: str) -> str:
+    replacements = {
+        "\xa0": " ",
+        "\u2010": "-",
+        "\u2011": "-",
+        "\u2012": "-",
+        "\u2013": "-",
+        "\u2014": "-",
+        "\u2018": "'",
+        "\u2019": "'",
+        "\u201c": '"',
+        "\u201d": '"',
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    text = re.sub(r"\s+", " ", text).strip()
+    return re.sub(r"\s+([:;,.])", r"\1", text)
+
+
+def normalize_code(text: str) -> str:
+    replacements = {
+        "\xa0": " ",
+        "\u2018": "'",
+        "\u2019": "'",
+        "\u201c": '"',
+        "\u201d": '"',
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    return text.strip()
+
+
+def tag_text(tag: Tag) -> str:
+    return normalize_text(tag.get_text(" ", strip=True))
+
+
+def heading_text(tag: Tag) -> str:
+    value = tag.get("data-text")
+    if isinstance(value, str) and value.strip():
+        return normalize_text(value)
+    return tag_text(tag)
+
+
+def heading_level(tag: Tag) -> int | None:
+    if tag.name and re.fullmatch(r"h[1-6]", tag.name):
+        return int(tag.name[1])
+    return None
+
+
+def iter_section_siblings(
+    heading: Tag,
+    *,
+    stop_levels: set[int],
+) -> list[Tag]:
+    result: list[Tag] = []
+    for sibling in heading.next_siblings:
+        if not isinstance(sibling, Tag):
+            continue
+        level = heading_level(sibling)
+        if level in stop_levels:
+            break
+        result.append(sibling)
+    return result
+
+
+def article_from_html(html: str) -> tuple[BeautifulSoup, Tag]:
+    soup = BeautifulSoup(html, "html.parser")
+    article = soup.find("article")
+    if not isinstance(article, Tag):
+        raise RuntimeError("Google documentation page does not contain an <article>")
+    return soup, article
+
+
+def source_from_soup(
+    soup: BeautifulSoup,
+    article: Tag,
+    *,
+    url: str,
+) -> DocSource:
+    title_tag = article.find("h1")
+    title = heading_text(title_tag) if isinstance(title_tag, Tag) else url
+    footer = soup.find("devsite-content-footer")
+    footer_text = tag_text(footer) if isinstance(footer, Tag) else ""
+    match = re.search(r"Last updated\s+([^\.]+UTC)", footer_text)
+    last_updated = match.group(1) if match else "unknown"
+    return DocSource(
+        title=title,
+        url=url,
+        last_updated=last_updated,
+    )
+
+
+def immediate_li_texts(ul: Tag) -> tuple[str, ...]:
+    return tuple(
+        tag_text(li)
+        for li in ul.find_all("li", recursive=False)
+        if tag_text(li)
+    )
+
+
+def parse_labeled_list_item(li: Tag) -> tuple[GuidanceBullet, tuple[str, ...]]:
+    strong = li.find(["strong", "b"])
+    full_text = tag_text(li)
+    if isinstance(strong, Tag):
+        label = tag_text(strong).rstrip(":")
+        text = re.sub(rf"^{re.escape(label)}\s*:?\s*", "", full_text).strip()
+    else:
+        label = "Note"
+        text = full_text
+    examples: tuple[str, ...] = ()
+    if label.lower() in {"example", "examples"}:
+        nested = li.find("ul")
+        if isinstance(nested, Tag):
+            examples = immediate_li_texts(nested)
+        elif text:
+            examples = (text,)
+    return GuidanceBullet(label=label, text=text), examples
+
+
+def parse_field_guidance(article: Tag) -> tuple[FieldGuidance, ...]:
+    result: list[FieldGuidance] = []
+    in_population_section = False
+    for heading in article.find_all(["h2", "h3"]):
+        if not isinstance(heading, Tag):
+            continue
+        level = heading_level(heading)
+        title = heading_text(heading)
+        heading_id = heading.get("id")
+        if level == 2:
+            if heading_id in {
+                "required_and_optional_entity_fields",
+                "required_and_optional_fields",
+            }:
+                break
+            in_population_section = title.startswith("Population of ")
+            continue
+        if level != 3 or not in_population_section or "." not in title:
+            continue
+        items: list[GuidanceBullet] = []
+        examples: list[str] = []
+        for block in iter_section_siblings(heading, stop_levels={2, 3, 4}):
+            if block.name != "ul":
+                continue
+            for li in block.find_all("li", recursive=False):
+                bullet, bullet_examples = parse_labeled_list_item(li)
+                if bullet.text:
+                    items.append(bullet)
+                examples.extend(bullet_examples)
+        if items or examples:
+            result.append(
+                FieldGuidance(
+                    field_path=title,
+                    items=tuple(items),
+                    examples=tuple(examples),
+                )
+            )
+    return tuple(result)
+
+
+def extract_event_value(text: str) -> str | None:
+    match = re.search(r"\b[A-Z][A-Z0-9]+(?:_[A-Z0-9]+)+\b", text)
+    return match.group(0) if match else None
+
+
+def extract_event_values(text: str) -> tuple[str, ...]:
+    return tuple(dict.fromkeys(re.findall(r"\b[A-Z][A-Z0-9]+(?:_[A-Z0-9]+)+\b", text)))
+
+
+def parse_event_type_categories(article: Tag) -> tuple[EventTypeCategory, ...]:
+    heading = article.find("h3", id="metadataevent_type")
+    if not isinstance(heading, Tag):
+        return ()
+
+    categories: list[EventTypeCategory] = []
+    current_title: str | None = None
+    description: list[str] = []
+    values: list[str] = []
+
+    def flush() -> None:
+        nonlocal current_title, description, values
+        if current_title is not None:
+            categories.append(
+                EventTypeCategory(
+                    title=current_title,
+                    description=tuple(description),
+                    values=tuple(values),
+                )
+            )
+        current_title = None
+        description = []
+        values = []
+
+    for block in iter_section_siblings(heading, stop_levels={2, 3}):
+        if block.name == "h4":
+            flush()
+            current_title = heading_text(block)
+            continue
+        if current_title is None:
+            continue
+        if block.name == "p":
+            text = tag_text(block)
+            if text:
+                description.append(text)
+        elif block.name == "ul":
+            values.extend(immediate_li_texts(block))
+    flush()
+    return tuple(categories)
+
+
+def parse_usage_field_path_notes(article: Tag) -> tuple[str, ...]:
+    h1 = article.find("h1")
+    if not isinstance(h1, Tag):
+        return ()
+    notes: list[str] = []
+    capture_next_list = False
+    for block in iter_section_siblings(h1, stop_levels={2}):
+        text = tag_text(block)
+        if capture_next_list and block.name == "ul":
+            notes.extend(immediate_li_texts(block))
+            break
+        elif "UDM field name formats" in text:
+            notes.append(text)
+            capture_next_list = True
+    return tuple(notes)
+
+
+def parse_entity_guidance(article: Tag) -> tuple[EntityGuidance, ...]:
+    heading = article.find("h2", id="required_and_optional_entity_fields")
+    if not isinstance(heading, Tag):
+        return ()
+    table = heading.find_next("table")
+    if not isinstance(table, Tag):
+        return ()
+    result: list[EntityGuidance] = []
+    for row in table.find_all("tr"):
+        cells = row.find_all(["td", "th"], recursive=False)
+        if len(cells) != 2 or cells[0].name == "th":
+            continue
+        entity_type = tag_text(cells[0])
+        requirements = tuple(
+            tag_text(li)
+            for li in cells[1].find_all("li")
+            if tag_text(li)
+        )
+        if entity_type and requirements:
+            result.append(
+                EntityGuidance(
+                    entity_type=entity_type,
+                    requirements=requirements,
+                )
+            )
+    return tuple(result)
+
+
+def parse_event_guidance_section(heading: Tag, blocks: list[Tag]) -> EventGuidance | None:
+    title = heading_text(heading)
+    event_types = extract_event_values(title)
+    if not event_types:
+        return None
+
+    required: list[str] = []
+    optional: list[str] = []
+    notes: list[str] = []
+    examples: list[GuidanceExample] = []
+    current_kind: str | None = None
+    current_example_title: str | None = None
+
+    for block in blocks:
+        level = heading_level(block)
+        if level in {4, 5}:
+            text = heading_text(block)
+            if "example" in text.lower():
+                current_example_title = text
+                current_kind = None
+            continue
+        if block.name == "p":
+            text = tag_text(block)
+            lowered = text.lower()
+            if lowered.startswith("required fields"):
+                current_kind = "required"
+            elif lowered.startswith("optional fields"):
+                current_kind = "optional"
+            elif lowered.startswith("notes"):
+                current_kind = "notes"
+            elif text and current_kind in {None, "notes"}:
+                notes.append(text)
+            continue
+        if block.name == "aside":
+            text = tag_text(block)
+            if text:
+                notes.append(text)
+            continue
+        pre = block.find("pre") if block.name != "pre" else block
+        if isinstance(pre, Tag):
+            code = normalize_code(pre.get_text("", strip=False))
+            if code:
+                examples.append(
+                    GuidanceExample(
+                        title=current_example_title or "Example",
+                        code=code,
+                    )
+                )
+            continue
+        if block.name != "ul":
+            continue
+        items = immediate_li_texts(block)
+        if current_kind == "required":
+            required.extend(items)
+        elif current_kind == "optional":
+            optional.extend(items)
+        else:
+            notes.extend(items)
+
+    return EventGuidance(
+        title=title,
+        event_types=event_types,
+        required=tuple(required),
+        optional=tuple(optional),
+        notes=tuple(notes),
+        examples=tuple(examples),
+    )
+
+
+def parse_event_guidance(article: Tag) -> tuple[EventGuidance, ...]:
+    heading = article.find("h2", id="required_and_optional_fields")
+    if not isinstance(heading, Tag):
+        return ()
+
+    sections: list[EventGuidance] = []
+    current_heading: Tag | None = None
+    current_blocks: list[Tag] = []
+
+    def flush() -> None:
+        nonlocal current_heading, current_blocks
+        if current_heading is not None:
+            section = parse_event_guidance_section(current_heading, current_blocks)
+            if section is not None:
+                sections.append(section)
+        current_heading = None
+        current_blocks = []
+
+    for sibling in heading.next_siblings:
+        if not isinstance(sibling, Tag):
+            continue
+        level = heading_level(sibling)
+        if level == 2:
+            break
+        if level == 3:
+            flush()
+            current_heading = sibling
+            continue
+        if current_heading is not None:
+            current_blocks.append(sibling)
+    flush()
+    return tuple(sections)
+
+
+def parse_usage_guide(
+    html: str,
+) -> tuple[
+    DocSource,
+    tuple[str, ...],
+    tuple[FieldGuidance, ...],
+    tuple[EventTypeCategory, ...],
+    tuple[EntityGuidance, ...],
+    tuple[EventGuidance, ...],
+]:
+    soup, article = article_from_html(html)
+    source = source_from_soup(
+        soup,
+        article,
+        url=UDM_USAGE_URL,
+    )
+    return (
+        source,
+        parse_usage_field_path_notes(article),
+        parse_field_guidance(article),
+        parse_event_type_categories(article),
+        parse_entity_guidance(article),
+        parse_event_guidance(article),
+    )
+
+
+def parse_field_path_guidance(article: Tag) -> FieldPathGuidance:
+    h1 = article.find("h1")
+    if not isinstance(h1, Tag):
+        return FieldPathGuidance((), (), (), (), (), ())
+
+    usage_notes: list[str] = []
+    detect_notes: list[str] = []
+    detect_examples: list[str] = []
+    cbn_notes: list[str] = []
+    cbn_examples: list[str] = []
+    style_notes: list[str] = []
+    current_mode: str | None = None
+
+    for block in iter_section_siblings(h1, stop_levels={2}):
+        if block.name == "p":
+            text = tag_text(block)
+            if not text:
+                continue
+            if "Detect Engine" in text:
+                current_mode = "detect"
+                detect_notes.append(text)
+            elif "configuration-based normalizer" in text:
+                current_mode = "cbn"
+                cbn_notes.append(text)
+            elif "Field name and field type values" in text:
+                current_mode = "style"
+                style_notes.append(text)
+            else:
+                current_mode = None
+                usage_notes.append(text)
+            continue
+        if block.name != "ul":
+            continue
+        items = immediate_li_texts(block)
+        if current_mode == "detect":
+            detect_examples.extend(items)
+        elif current_mode == "cbn":
+            cbn_examples.extend(items)
+        elif current_mode == "style":
+            style_notes.extend(items)
+        else:
+            usage_notes.extend(items)
+
+    return FieldPathGuidance(
+        usage_notes=tuple(usage_notes),
+        detect_engine_notes=tuple(detect_notes),
+        detect_engine_examples=tuple(detect_examples),
+        cbn_notes=tuple(cbn_notes),
+        cbn_examples=tuple(cbn_examples),
+        style_notes=tuple(style_notes),
+    )
+
+
+def merge_field_path_guidance(
+    usage_notes: tuple[str, ...],
+    field_list_guidance: FieldPathGuidance,
+) -> FieldPathGuidance:
+    return FieldPathGuidance(
+        usage_notes=tuple(dict.fromkeys((*usage_notes, *field_list_guidance.usage_notes))),
+        detect_engine_notes=field_list_guidance.detect_engine_notes,
+        detect_engine_examples=field_list_guidance.detect_engine_examples,
+        cbn_notes=field_list_guidance.cbn_notes,
+        cbn_examples=field_list_guidance.cbn_examples,
+        style_notes=field_list_guidance.style_notes,
+    )
+
+
+def parse_datatypes(article: Tag) -> tuple[DatatypeGuidance, ...]:
+    heading = article.find("h2", id="standard_datatypes")
+    if not isinstance(heading, Tag):
+        return ()
+    table = heading.find_next("table")
+    if not isinstance(table, Tag):
+        return ()
+    header_row = table.find("tr")
+    if not isinstance(header_row, Tag):
+        return ()
+    headers = [tag_text(cell) for cell in header_row.find_all("th")]
+    result: list[DatatypeGuidance] = []
+    for row in table.find_all("tr")[1:]:
+        cells = [tag_text(cell) for cell in row.find_all("td", recursive=False)]
+        if len(cells) < 2:
+            continue
+        language_types = tuple(
+            (header, value)
+            for header, value in zip(headers[2:], cells[2:], strict=False)
+            if value
+        )
+        result.append(
+            DatatypeGuidance(
+                datatype=cells[0],
+                notes=cells[1],
+                language_types=language_types,
+            )
+        )
+    return tuple(result)
+
+
+def parse_field_list_guide(
+    html: str,
+) -> tuple[DocSource, FieldPathGuidance, tuple[DatatypeGuidance, ...]]:
+    soup, article = article_from_html(html)
+    source = source_from_soup(
+        soup,
+        article,
+        url=UDM_FIELD_LIST_URL,
+    )
+    return source, parse_field_path_guidance(article), parse_datatypes(article)
+
+
+def fetch_docs_guidance(client: httpx.Client) -> DocsGuidance:
+    usage_html = fetch_text(client, UDM_USAGE_URL)
+    field_list_html = fetch_text(client, UDM_FIELD_LIST_URL)
+    (
+        usage_source,
+        usage_field_path_notes,
+        field_guidance,
+        event_type_categories,
+        entity_guidance,
+        event_guidance,
+    ) = parse_usage_guide(usage_html)
+    field_list_source, field_paths, datatypes = parse_field_list_guide(field_list_html)
+    return DocsGuidance(
+        usage_source=usage_source,
+        field_list_source=field_list_source,
+        field_guidance=field_guidance,
+        event_type_categories=event_type_categories,
+        entity_guidance=entity_guidance,
+        event_guidance=event_guidance,
+        field_paths=merge_field_path_guidance(usage_field_path_notes, field_paths),
+        datatypes=datatypes,
+    )
+
+
 def brief_comment(comment: str, limit: int = 140) -> str:
     first_paragraph = comment.split("\n\n", 1)[0].replace("\n", " ").strip()
     if len(first_paragraph) <= limit:
@@ -602,18 +1214,484 @@ def render_enums_overview(context: FileContext) -> str:
     return clean_markdown("\n".join(lines))
 
 
+def markdown_table_cell(text: str) -> str:
+    return text.replace("|", "\\|")
+
+
+def render_source_section(sources: tuple[DocSource, ...]) -> list[str]:
+    lines = ["## Source", ""]
+    for source in sources:
+        lines.extend(
+            [
+                f"- **{source.title}**: {source.url}",
+                f"  - Google last updated: `{source.last_updated}`",
+            ]
+        )
+    lines.append(f"- **License**: {GOOGLE_DOCS_LICENSE}")
+    lines.append("")
+    return lines
+
+
+def enum_value_names(context: FileContext, qualified_name: str) -> set[str]:
+    enum = context.enum_by_full_name.get(f"{context.file_proto.package}.{qualified_name}")
+    if enum is None:
+        return set()
+    return {value.name for value in enum.descriptor.value}
+
+
+def message_simple_names(context: FileContext) -> set[str]:
+    return {
+        message.qualified_name.rsplit(".", 1)[-1]
+        for message in generated_messages(context)
+    }
+
+
+def find_message_by_simple_name(context: FileContext, name: str) -> MessageDoc | None:
+    for message in generated_messages(context):
+        if message.qualified_name.rsplit(".", 1)[-1].lower() == name.lower():
+            return message
+    return None
+
+
+def validate_guidance_against_schema(context: FileContext, guidance: DocsGuidance) -> None:
+    known_event_types = enum_value_names(context, "Metadata.EventType")
+    known_entity_types = enum_value_names(context, "EntityMetadata.EntityType")
+
+    if known_event_types:
+        unknown_events = sorted(
+            {
+                event_type
+                for section in guidance.event_guidance
+                for event_type in section.event_types
+                if event_type not in known_event_types
+            }
+        )
+        if unknown_events:
+            raise RuntimeError(
+                "Usage guide event requirements reference unknown Metadata.EventType "
+                f"values: {', '.join(unknown_events)}"
+            )
+
+    if known_entity_types:
+        unknown_entities = sorted(
+            entity.entity_type
+            for entity in guidance.entity_guidance
+            if entity.entity_type not in known_entity_types
+        )
+        if unknown_entities:
+            raise RuntimeError(
+                "Usage guide entity requirements reference unknown "
+                "EntityMetadata.EntityType values: "
+                f"{', '.join(unknown_entities)}"
+            )
+
+    known_messages = message_simple_names(context)
+    for field in guidance.field_guidance:
+        family = field.field_path.split(".", 1)[0]
+        if family == "idm":
+            warnings.warn(
+                f"Preserving product-only usage guidance for {field.field_path}; "
+                "it is not a proto message field.",
+                stacklevel=2,
+            )
+        elif family not in known_messages:
+            warnings.warn(
+                f"Preserving usage guidance for {field.field_path}; "
+                f"{family} is not a top-level or nested proto message name.",
+                stacklevel=2,
+            )
+
+
+def render_usage_page(guidance: DocsGuidance) -> str:
+    lines = [
+        "# Google UDM Usage Guidance",
+        "",
+        "Generated from targeted sections of the Google UDM usage guide and field list.",
+        "Use these pages for field population policy, required fields, field-path",
+        "prefixes, datatype notes, and examples. Use the proto-derived schema pages",
+        "for field existence, types, numbers, JSON names, oneofs, and deprecation.",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source, guidance.field_list_source)))
+    lines.extend(
+        [
+            "## Generated Guidance",
+            "",
+            f"- Field guidance families: `{len({field.field_path.split('.', 1)[0] for field in guidance.field_guidance})}`",
+            f"- Field guidance entries: `{len(guidance.field_guidance)}`",
+            f"- Event type categories: `{len(guidance.event_type_categories)}`",
+            f"- Event guidance sections: `{len(guidance.event_guidance)}`",
+            f"- Entity requirement pages: `{len(guidance.entity_guidance)}`",
+            f"- Datatype rows: `{len(guidance.datatypes)}`",
+            "",
+            "## Indexes",
+            "",
+            "- [Field paths](field-paths.md)",
+            "- [Datatypes](datatypes.md)",
+            "- [Field guidance](field-guidance.md)",
+            "- [Event type categories](event-type-categories.md)",
+            "- [Event guidance](event-guidance.md)",
+            "- [Entity guidance](entity-guidance.md)",
+            "",
+        ]
+    )
+    return clean_markdown("\n".join(lines))
+
+
+def render_field_paths_page(guidance: DocsGuidance) -> str:
+    field_paths = guidance.field_paths
+    lines = [
+        "# Field Path Prefixes",
+        "",
+        "Use this page to choose the right field-path prefix for rules, Detect Engine,",
+        "and configuration-based normalizer contexts.",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source, guidance.field_list_source)))
+    if field_paths is None:
+        lines.extend(["No field path guidance was extracted.", ""])
+        return clean_markdown("\n".join(lines))
+
+    sections = [
+        ("## Rules Engine Prefix Notes", field_paths.usage_notes, ()),
+        ("## Detect Engine", field_paths.detect_engine_notes, field_paths.detect_engine_examples),
+        ("## Configuration-Based Normalizer", field_paths.cbn_notes, field_paths.cbn_examples),
+        ("## Style Notes", field_paths.style_notes, ()),
+    ]
+    for title, notes, examples in sections:
+        lines.extend([title, ""])
+        if notes:
+            for note in notes:
+                lines.append(f"- {note}")
+        else:
+            lines.append("No notes extracted.")
+        if examples:
+            lines.extend(["", "### Examples", ""])
+            for example in examples:
+                lines.append(f"- `{example}`")
+        lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_datatypes_page(guidance: DocsGuidance) -> str:
+    lines = [
+        "# Standard Datatypes",
+        "",
+        "Standard datatype notes from the Google UDM field list.",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.field_list_source,)))
+    if not guidance.datatypes:
+        lines.extend(["No datatype guidance was extracted.", ""])
+        return clean_markdown("\n".join(lines))
+
+    languages = sorted(
+        {
+            language
+            for datatype in guidance.datatypes
+            for language, _value in datatype.language_types
+        }
+    )
+    lines.append("| Datatype | Notes | " + " | ".join(languages) + " |")
+    lines.append("| --- | --- | " + " | ".join("---" for _ in languages) + " |")
+    for datatype in guidance.datatypes:
+        language_map = dict(datatype.language_types)
+        cells = [
+            f"`{datatype.datatype}`",
+            markdown_table_cell(datatype.notes),
+            *[
+                markdown_table_cell(language_map.get(language, ""))
+                for language in languages
+            ],
+        ]
+        lines.append("| " + " | ".join(cells) + " |")
+    lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_field_guidance_index(
+    context: FileContext,
+    guidance: DocsGuidance,
+) -> tuple[str, dict[str, list[FieldGuidance]]]:
+    groups: dict[str, list[FieldGuidance]] = defaultdict(list)
+    for field in guidance.field_guidance:
+        groups[field.field_path.split(".", 1)[0]].append(field)
+
+    lines = [
+        "# Field Guidance",
+        "",
+        "Field population guidance from the Google UDM usage guide. These pages",
+        "describe how fields should be populated; use schema pages for exact field",
+        "existence and types.",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source,)))
+    lines.extend(["## Families", ""])
+    for family in sorted(groups, key=str.lower):
+        message = find_message_by_simple_name(context, family)
+        schema_link = (
+            f" ([schema](messages/{message.slug}.md))"
+            if message is not None
+            else ""
+        )
+        lines.append(
+            f"- [{family}](field-guidance/{to_snake_case(family)}.md)"
+            f" ({len(groups[family])} fields){schema_link}"
+        )
+    lines.append("")
+    return clean_markdown("\n".join(lines)), groups
+
+
+def render_field_guidance_page(
+    context: FileContext,
+    guidance: DocsGuidance,
+    family: str,
+    fields: list[FieldGuidance],
+) -> str:
+    message = find_message_by_simple_name(context, family)
+    lines = [
+        f"# {family} Field Guidance",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source,)))
+    if message is not None:
+        lines.extend(
+            [
+                "## Schema",
+                "",
+                f"- [{message.qualified_name}](../messages/{message.slug}.md)",
+                "",
+            ]
+        )
+    lines.extend(["## Fields", ""])
+    for field in sorted(fields, key=lambda item: item.field_path.lower()):
+        lines.extend([f"### `{field.field_path}`", ""])
+        for item in field.items:
+            if item.text:
+                lines.append(f"- **{item.label}**: {item.text}")
+        if field.examples:
+            lines.extend(["", "#### Examples", ""])
+            for example in field.examples:
+                lines.append(f"- {example}")
+        lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_event_type_categories_page(
+    guidance: DocsGuidance,
+) -> str:
+    event_guidance_values = {
+        event_type
+        for section in guidance.event_guidance
+        for event_type in section.event_types
+    }
+    lines = [
+        "# Event Type Categories",
+        "",
+        "Usage-guide grouping for choosing `metadata.event_type`.",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source,)))
+    if not guidance.event_type_categories:
+        lines.extend(["No event type categories were extracted.", ""])
+        return clean_markdown("\n".join(lines))
+    for category in guidance.event_type_categories:
+        lines.extend([f"## {category.title}", ""])
+        for paragraph in category.description:
+            lines.extend([paragraph, ""])
+        if category.values:
+            for value in category.values:
+                event_type = extract_event_value(value)
+                if event_type in event_guidance_values:
+                    lines.append(
+                        f"- [{value}](event-guidance/{to_snake_case(event_type)}.md)"
+                    )
+                else:
+                    lines.append(f"- {value}")
+        lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_event_guidance_index(
+    guidance: DocsGuidance,
+) -> str:
+    lines = [
+        "# Event Guidance",
+        "",
+        "Required fields, optional fields, notes, and examples by",
+        "`Metadata.EventType`. Grouped Google usage-guide sections are rendered as",
+        "one alias page for each event type.",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source,)))
+    lines.extend(["## Event Types", ""])
+    entries = sorted(
+        (
+            (event_type, section.title)
+            for section in guidance.event_guidance
+            for event_type in section.event_types
+        ),
+        key=lambda item: item[0],
+    )
+    for event_type, title in entries:
+        suffix = f" - section: {title}" if title != event_type else ""
+        lines.append(
+            f"- [`{event_type}`](event-guidance/{to_snake_case(event_type)}.md){suffix}"
+        )
+    lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_event_guidance_page(
+    guidance: DocsGuidance,
+    event_type: str,
+    section: EventGuidance,
+) -> str:
+    lines = [
+        f"# {event_type} Event Guidance",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source,)))
+    lines.extend(
+        [
+            "## Applies To",
+            "",
+            "- " + ", ".join(f"`{value}`" for value in section.event_types),
+            f"- Usage-guide section: `{section.title}`",
+            "- Proto enum: [Metadata.EventType](../enums/metadata_event_type.md)",
+            "",
+        ]
+    )
+    sections = [
+        ("## Required Fields", section.required),
+        ("## Optional Fields", section.optional),
+        ("## Notes", section.notes),
+    ]
+    for title, values in sections:
+        lines.extend([title, ""])
+        if values:
+            for value in values:
+                lines.append(f"- {value}")
+        else:
+            lines.append("No entries extracted.")
+        lines.append("")
+    if section.examples:
+        lines.extend(["## Examples", ""])
+        for example_idx, example in enumerate(section.examples, start=1):
+            title = example.title
+            if len(section.examples) > 1:
+                title = f"{title} ({example_idx})"
+            lines.extend(
+                [
+                    f"### {title}",
+                    "",
+                    "```text",
+                    example.code,
+                    "```",
+                    "",
+                ]
+            )
+    return clean_markdown("\n".join(lines))
+
+
+def render_entity_guidance_index(guidance: DocsGuidance) -> str:
+    lines = [
+        "# Entity Guidance",
+        "",
+        "Required fields for Google UDM entity types.",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source,)))
+    lines.extend(["## Entity Types", ""])
+    for entity in sorted(guidance.entity_guidance, key=lambda item: item.entity_type):
+        lines.append(
+            f"- [`{entity.entity_type}`](entity-guidance/{to_snake_case(entity.entity_type)}.md)"
+        )
+    lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_entity_guidance_page(
+    guidance: DocsGuidance,
+    entity: EntityGuidance,
+) -> str:
+    lines = [
+        f"# {entity.entity_type} Entity Guidance",
+        "",
+    ]
+    lines.extend(render_source_section((guidance.usage_source,)))
+    lines.extend(
+        [
+            "## Schema",
+            "",
+            "- Proto enum: [EntityMetadata.EntityType](../enums/entity_metadata_entity_type.md)",
+            "- Entity root: [Entity](../messages/entity.md)",
+            "",
+            "## Requirements",
+            "",
+        ]
+    )
+    for requirement in entity.requirements:
+        lines.append(f"- {requirement}")
+    lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_guidance_docs(
+    context: FileContext,
+    guidance: DocsGuidance,
+) -> dict[Path, str]:
+    validate_guidance_against_schema(context, guidance)
+    docs: dict[Path, str] = {
+        Path("usage.md"): render_usage_page(guidance),
+        Path("field-paths.md"): render_field_paths_page(guidance),
+        Path("datatypes.md"): render_datatypes_page(guidance),
+        Path("event-type-categories.md"): render_event_type_categories_page(guidance),
+        Path("event-guidance.md"): render_event_guidance_index(guidance),
+        Path("entity-guidance.md"): render_entity_guidance_index(guidance),
+    }
+
+    field_index, field_groups = render_field_guidance_index(context, guidance)
+    docs[Path("field-guidance.md")] = field_index
+    for family, fields in field_groups.items():
+        docs[Path("field-guidance") / f"{to_snake_case(family)}.md"] = (
+            render_field_guidance_page(context, guidance, family, fields)
+        )
+
+    for section in guidance.event_guidance:
+        for event_type in section.event_types:
+            docs[Path("event-guidance") / f"{to_snake_case(event_type)}.md"] = (
+                render_event_guidance_page(guidance, event_type, section)
+            )
+
+    for entity in guidance.entity_guidance:
+        docs[Path("entity-guidance") / f"{to_snake_case(entity.entity_type)}.md"] = (
+            render_entity_guidance_page(guidance, entity)
+        )
+
+    return docs
+
+
 def render_schema_page(context: FileContext, source: SourceRef, fetched_files: set[str]) -> str:
     messages = generated_messages(context)
     fields = sum(len(message.descriptor.field) for message in messages)
     enum_values = sum(len(enum.descriptor.value) for enum in context.enums)
-    udm = context.message_by_full_name.get(f"{context.file_proto.package}.UDM")
+    roots = [
+        ("UDM event", context.message_by_full_name.get(f"{context.file_proto.package}.UDM")),
+        ("Entity graph", context.message_by_full_name.get(f"{context.file_proto.package}.Entity")),
+    ]
 
     lines = [
         "# Google UDM schema",
         "",
-        "Generated from the canonical Google UDM protocol buffer definition.",
+        "Generated from the canonical Google UDM protocol buffer definitions.",
         "",
-        f"- **Source**: [{UDM_PROTO_PATH}]({GITHUB_BLOB}/{source.sha}/{UDM_PROTO_PATH})",
+        "- **Sources**:",
+        *[
+            f"  - [{path}]({GITHUB_BLOB}/{source.sha}/{path})"
+            for path in ROOT_PROTO_PATHS
+            if path in fetched_files or path == UDM_PROTO_PATH
+        ],
         f"- **Requested ref**: `{source.ref}`",
         f"- **Resolved commit**: `{source.sha}`",
         f"- **Package**: `{context.file_proto.package}`",
@@ -636,15 +1714,18 @@ def render_schema_page(context: FileContext, source: SourceRef, fetched_files: s
             "- [Messages](messages.md)",
             "- [Enums](enums.md)",
             "- [Event types](event-types.md)",
+            "- [Usage guidance](usage.md)",
             "",
         ]
     )
-    if udm is not None:
-        lines.extend(["## Top-level UDM fields", ""])
+    for label, root in roots:
+        if root is None:
+            continue
+        lines.extend([f"## Top-level {label} fields", ""])
         lines.append("| Field | No. | Cardinality | Type | Description |")
         lines.append("| --- | ---: | --- | --- | --- |")
-        for field_idx, field in enumerate(udm.descriptor.field):
-            comment = source_comment(context, udm.file_name, (*udm.path, 2, field_idx))
+        for field_idx, field in enumerate(root.descriptor.field):
+            comment = source_comment(context, root.file_name, (*root.path, 2, field_idx))
             lines.append(
                 "| "
                 f"`{field.name}` | "
@@ -657,75 +1738,102 @@ def render_schema_page(context: FileContext, source: SourceRef, fetched_files: s
     return clean_markdown("\n".join(lines))
 
 
-def render_skill_markdown(context: FileContext, source: SourceRef) -> str:
+def render_skill_markdown(
+    context: FileContext,
+    source: SourceRef,
+    guidance: DocsGuidance | None = None,
+) -> str:
+    guidance_sources = []
+    if guidance is not None:
+        guidance_sources = [
+            f"- Usage guide last updated: `{guidance.usage_source.last_updated}`",
+            f"- Field list last updated: `{guidance.field_list_source.last_updated}`",
+        ]
     return clean_markdown(
         "\n".join(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema. Use whenever the user asks about UDM fields, event types, messages, enums, entity nouns, metadata, security_result, network, Chronicle normalization, or Google SecOps event schema.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) schema and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes, messages, enums, entity nouns, metadata, security_result, network, Chronicle normalization, or Google SecOps event schema.",
                 "---",
                 "",
                 "# Google UDM",
                 "",
-                "Look up the generated Google UDM schema reference and answer from those",
-                "files. The reference is generated from `backstory/udm.proto`, which is",
-                "the ground truth for this skill. Only state schema facts from files you",
-                "read. If the generated files do not cover the question, say so.",
+                "Look up the generated Google UDM schema and usage references before",
+                "answering. The schema pages are generated from `backstory/udm.proto`",
+                "and `backstory/entity.proto`; they are the ground truth for field",
+                "existence, field numbers, types, JSON names, oneofs, and deprecation.",
+                "The guidance pages are generated from targeted Google documentation",
+                "sections; they are the source for population policy, required fields,",
+                "field-path prefixes, datatype notes, and examples.",
                 "",
                 "## Source",
                 "",
-                f"- [Schema summary](schema.md)",
+                "- [Schema summary](schema.md)",
+                "- [Usage guidance](usage.md)",
                 f"- Source ref: `{source.ref}`",
                 f"- Resolved commit: `{source.sha}`",
+                *guidance_sources,
                 "",
                 "## File layout",
                 "",
                 "```",
-                "schema.md                  # Source, counts, imports, top-level UDM fields",
+                "schema.md                  # Proto sources, counts, top-level UDM and Entity fields",
                 "messages.md                # Message index",
                 "messages/{message}.md      # Message fields and nested types",
                 "enums.md                   # Enum index",
                 "enums/{enum}.md            # Enum values",
                 "event-types.md             # Dedicated Metadata.EventType reference",
+                "usage.md                   # Guidance source summary and routing",
+                "field-paths.md             # Rules, Detect Engine, and CBN prefixes",
+                "datatypes.md               # Standard datatype notes",
+                "field-guidance/{family}.md # Field population policy by message family",
+                "event-guidance/{type}.md   # Required/optional event guidance by event type",
+                "entity-guidance/{type}.md  # Required entity fields by entity type",
                 "```",
                 "",
                 "## Question routing",
                 "",
                 "| Question pattern | Start here |",
                 "| --- | --- |",
-                "| What fields does UDM/message X have? | [Messages](messages.md) -> specific message page |",
+                "| What fields exist? | [Schema](schema.md), [Messages](messages.md), and specific message page |",
                 "| What values can enum X take? | [Enums](enums.md) -> specific enum page |",
-                "| Which `metadata.event_type` should I use? | [Event types](event-types.md), then candidate message pages |",
-                "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |",
-                "| What fields exist for network/protocol details? | [Network](messages/network.md), then protocol messages such as DNS, HTTP, TLS, DHCP |",
-                "| What fields exist for detections or alerts? | [SecurityResult](messages/security_result.md) and related nested enums |",
+                "| How should I map this event? | [Event guidance](event-guidance.md), relevant [field guidance](field-guidance.md), then schema pages |",
+                "| Which `metadata.event_type` should I use? | [Event type categories](event-type-categories.md), [Event types](event-types.md), then event guidance |",
+                "| Required or forbidden fields? | [Event guidance](event-guidance.md) or [Entity guidance](entity-guidance.md) |",
+                "| Field formats or examples? | [Field guidance](field-guidance.md) and [Datatypes](datatypes.md) |",
+                "| Which field path prefix? | [Field paths](field-paths.md) |",
+                "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md), [Noun](messages/noun.md), and Noun field guidance |",
+                "| What fields exist for network/protocol details? | [Network](messages/network.md), protocol messages such as DNS/HTTP/TLS/DHCP, and field guidance |",
+                "| What fields exist for entities? | [Entity](messages/entity.md), [EntityMetadata](messages/entity_metadata.md), and [Entity guidance](entity-guidance.md) |",
                 "| What is the top-level event shape? | [Schema summary](schema.md) and [UDM](messages/udm.md) |",
                 "",
-                "When a question asks for modeling guidance, read the relevant event type,",
-                "top-level UDM noun fields, and candidate message pages. Explain what the",
-                "proto comments say and call out any requirement that is not represented in",
-                "the generated reference.",
+                "When a question asks for modeling guidance, read both layers: the",
+                "guidance page for how Google says to populate the data and the schema",
+                "page for the exact field structure. If the two layers appear to differ,",
+                "state both facts and identify which source each fact comes from.",
                 "",
                 "## Domain knowledge",
                 "",
                 "- UDM events center on `metadata`, participant nouns (`principal`, `src`,",
                 "  `target`, `intermediary`, `observer`, `about`), `security_result`,",
                 "  `network`, and `extensions`.",
+                "- UDM entities center on `metadata`, an `entity` noun, `relations`,",
+                "  optional `risk_score`, and optional `metric` data.",
                 "- `metadata.event_type` classifies the event. It is the first place to look",
                 "  when deciding how an event should be represented.",
+                "- `metadata.entity_type` classifies entity records and drives entity-specific",
+                "  requirements.",
                 "- `Noun` carries entity details such as users, assets, processes, files,",
                 "  resources, cloud context, and labels.",
-                "- The generated Google UDM field list is derived from the proto. Use this",
-                "  skill's proto-derived files as the local source of truth.",
                 "",
                 "## Answering principles",
                 "",
-                "- Read before answering. Every schema claim must trace back to a generated",
-                "  file in this skill.",
+                "- Read before answering. Every schema or guidance claim must trace back to",
+                "  a generated file in this skill.",
                 "- Prefer exact field names, enum names, and message names from the reference.",
-                "- Distinguish proto structure from mapping policy. If a required-field or",
-                "  validation rule is not in the generated files, say it is not covered here.",
+                "- Distinguish proto structure from mapping policy. Required-field and",
+                "  population rules come from guidance pages, not from proto field presence.",
                 "- Do not invent UDM semantics from memory.",
                 "",
             ]
@@ -737,9 +1845,10 @@ def build_docs(
     context: FileContext,
     source: SourceRef,
     fetched_files: set[str],
+    guidance: DocsGuidance | None = None,
 ) -> dict[Path, str]:
     docs: dict[Path, str] = {
-        Path("SKILL.md"): render_skill_markdown(context, source),
+        Path("SKILL.md"): render_skill_markdown(context, source, guidance),
         Path("schema.md"): render_schema_page(context, source, fetched_files),
         Path("messages.md"): render_messages_overview(context),
         Path("enums.md"): render_enums_overview(context),
@@ -758,6 +1867,9 @@ def build_docs(
             event_type,
             title="Event Types",
         )
+
+    if guidance is not None:
+        docs.update(render_guidance_docs(context, guidance))
 
     return docs
 
@@ -778,6 +1890,7 @@ def main() -> None:
         with httpx.Client(headers=HTTP_HEADERS, follow_redirects=True, timeout=30.0) as client:
             source = resolve_ref(client, args.ref)
             fetched_files = fetch_proto_tree(client, source, temp_root)
+            guidance = fetch_docs_guidance(client)
 
         descriptor_set = compile_descriptor(temp_root)
         file_proto = next(
@@ -793,7 +1906,7 @@ def main() -> None:
             if proto.name in fetched_files and proto.name != UDM_PROTO_PATH
         ]
         context = collect_messages_and_enums(file_proto, extra_file_protos)
-        docs = build_docs(context, source, fetched_files)
+        docs = build_docs(context, source, fetched_files, guidance)
         write_docs(output_dir, docs)
     finally:
         shutil.rmtree(temp_root, ignore_errors=True)

@@ -123,3 +123,9 @@
 - [EntityRisk](messages/entity_risk.md) (14 fields) - Stores information related to the risk score of an entity.
 - [RiskDelta](messages/risk_delta.md) (4 fields) - Describes the difference in risk score between two points in time.
 - [Id](messages/id.md) (3 fields) - Identifier to identify a UDM object like a UDM event, Entity, Collection. The full identifier for persistence is created by setting the 32...
+- [EntityMetadata](messages/entity_metadata.md) (17 fields) - Information about the Entity and the product where the entity was created.
+- [AtiPrioritization](messages/ati_prioritization.md) (15 fields) - AtiPrioritization contains various fields used to calculate a priority score for an entity identified as a threat.
+- [Entity](messages/entity.md) (6 fields) - An Entity provides additional context about an item in a UDM event. For example, a PROCESS_LAUNCH event describes that user 'abc@example.co...
+- [Relation](messages/relation.md) (6 fields) - Defines the relationship between the entity (a) and another entity (b).
+- [Metric](messages/metric.md) (11 fields) - Stores precomputed aggregated analytic data for an entity.
+- [Metric.Measure](messages/metric_measure.md) (2 fields) - Describes the precomputed measure.

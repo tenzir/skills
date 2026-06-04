@@ -62,3 +62,11 @@
 - [Reason](enums/reason.md) (4 values) - Reason for closing an Alert or Case in the SOAR product.
 - [ThreatVerdict](enums/threat_verdict.md) (4 values) - GCTI threat verdict levels.
 - [Id.Namespace](enums/id_namespace.md) (9 values) - Extracted Namespace Component
+- [EntityMetadata.EntityType](enums/entity_metadata_entity_type.md) (12 values) - Describes the type of entity. An unknown event type.
+- [EntityMetadata.SourceType](enums/entity_metadata_source_type.md) (4 values) - Describes the source of an entity.
+- [Relation.Relationship](enums/relation_relationship.md) (7 values) - Type of relationship between the primary entity (a) and related entity (b).
+- [Relation.Directionality](enums/relation_directionality.md) (3 values) - Describes the relationship model as directed or undirected.
+- [Relation.EntityLabel](enums/relation_entity_label.md) (8 values) - Entity label of the relation.
+- [Metric.AggregateFunction](enums/metric_aggregate_function.md) (7 values) - Mathematic function used to calculate the value.
+- [Metric.MetricName](enums/metric_metric_name.md) (40 values) - The name of the precomputed analytic.
+- [Metric.Dimension](enums/metric_dimension.md) (38 values) - Describes field used as the dimension when grouping data to calculate the aggregate metric.

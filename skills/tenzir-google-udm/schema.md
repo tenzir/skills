@@ -1,19 +1,22 @@
 # Google UDM schema
 
-Generated from the canonical Google UDM protocol buffer definition.
+Generated from the canonical Google UDM protocol buffer definitions.
 
-- **Source**: [backstory/udm.proto](https://github.com/googleapis/googleapis/blob/0db4dc67dd805d20294c6dc34068c37f546d71da/backstory/udm.proto)
+- **Sources**:
+  - [backstory/udm.proto](https://github.com/googleapis/googleapis/blob/0db4dc67dd805d20294c6dc34068c37f546d71da/backstory/udm.proto)
+  - [backstory/entity.proto](https://github.com/googleapis/googleapis/blob/0db4dc67dd805d20294c6dc34068c37f546d71da/backstory/entity.proto)
 - **Requested ref**: `master`
 - **Resolved commit**: `0db4dc67dd805d20294c6dc34068c37f546d71da`
 - **Package**: `google.backstory`
-- **Messages**: `123`
-- **Enums**: `62`
-- **Fields**: `973`
-- **Enum values**: `893`
+- **Messages**: `129`
+- **Enums**: `70`
+- **Fields**: `1030`
+- **Enum values**: `1012`
 
 ## Imports
 
 - `backstory/data_access.proto`
+- `backstory/entity.proto`
 - `backstory/entity_risk.proto`
 - `backstory/id.proto`
 - `google/type/interval.proto`
@@ -24,8 +27,9 @@ Generated from the canonical Google UDM protocol buffer definition.
 - [Messages](messages.md)
 - [Enums](enums.md)
 - [Event types](event-types.md)
+- [Usage guidance](usage.md)
 
-## Top-level UDM fields
+## Top-level UDM event fields
 
 | Field | No. | Cardinality | Type | Description |
 | --- | ---: | --- | --- | --- |
@@ -42,3 +46,14 @@ Generated from the canonical Google UDM protocol buffer definition.
 | `extensions` | `11` | `singular` | [`Extensions`](messages/extensions.md) | All other first-class, event-specific metadata goes in this message. Do not place protocol metadata... |
 | `extracted` | `12` | `singular` | `google.protobuf.Struct` | Flattened fields extracted from the log. |
 | `grouped` | `13` | `optional` | [`GroupedFields`](messages/grouped_fields.md) | Related UDM fields that are grouped together. |
+
+## Top-level Entity graph fields
+
+| Field | No. | Cardinality | Type | Description |
+| --- | ---: | --- | --- | --- |
+| `metadata` | `1` | `singular` | [`EntityMetadata`](messages/entity_metadata.md) | Entity metadata such as timestamp, product, etc. |
+| `entity` | `2` | `singular` | [`Noun`](messages/noun.md) | Noun in the UDM event that this entity represents. |
+| `relations` | `4` | `repeated` | [`Relation`](messages/relation.md) | One or more relationships between the entity (a) and other entities, including the relationship typ... |
+| `additional` | `3` | `singular` | `google.protobuf.Struct` | Important entity data that cannot be adequately represented within the formal sections of the Entit... |
+| `risk_score` | `5` | `optional` | [`EntityRisk`](messages/entity_risk.md) | Stores information related to the entity's risk score. |
+| `metric` | `6` | `singular` | [`Metric`](messages/metric.md) | Stores statistical metrics about the entity. Used if metadata.entity_type is METRIC. |
