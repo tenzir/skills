@@ -4,7 +4,6 @@
 
 - **UDM usage guide**: https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en
   - Google last updated: `2026-06-03 UTC`
-- **License**: Content licensed under Creative Commons Attribution 4.0; code samples licensed under Apache 2.0, as stated in the Google Developers Site Policies.
 
 ## Schema
 
@@ -25,14 +24,14 @@
 ### `Noun.asset_id`
 
 - **Purpose**: Vendor-specific unique device identifier (for example, a GUID that is generated when installing endpoint security software on a new device that is used to track that unique device over time).
-- **Encoding**: (VendorName or VendorAbbreviation):ID where the VendorName or VendorAbbreviation is a case insensitive vendor name like Carbon Black or CB and ID is a vendor-specific customer identifier that is globally unique within their customer's environment (for example, a GUID or unique value identifying a unique device). VendorName is alphanumeric and no more than 32 characters long. ID can be a maximum of 128 characters in length and can include alphanumeric characters, dashes, and periods.
-- **Example**: CrowdStrike:0bce4259-4ada-48f3-a904-9a526b01311f
-- **Example**: CS:0bce4259-4ada-48f3-a904-9a526b01311f
+- **Encoding**: (VendorName or VendorAbbreviation):ID where the VendorName or VendorAbbreviation is a case insensitive vendor name like `Carbon Black` or `CB` and ID is a vendor-specific customer identifier that is globally unique within their customer's environment (for example, a GUID or unique value identifying a unique device). VendorName is alphanumeric and no more than 32 characters long. ID can be a maximum of 128 characters in length and can include alphanumeric characters, dashes, and periods.
+- **Example**: `CrowdStrike:0bce4259-4ada-48f3-a904-9a526b01311f`
+- **Example**: `CS:0bce4259-4ada-48f3-a904-9a526b01311f`
 
 #### Examples
 
-- CrowdStrike:0bce4259-4ada-48f3-a904-9a526b01311f
-- CS:0bce4259-4ada-48f3-a904-9a526b01311f
+- `CrowdStrike:0bce4259-4ada-48f3-a904-9a526b01311f`
+- `CS:0bce4259-4ada-48f3-a904-9a526b01311f`
 
 ### `Noun.email`
 

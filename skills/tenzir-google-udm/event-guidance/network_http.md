@@ -4,7 +4,6 @@
 
 - **UDM usage guide**: https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en
   - Google last updated: `2026-06-03 UTC`
-- **License**: Content licensed under Creative Commons Attribution 4.0; code samples licensed under Apache 2.0, as stated in the Google Developers Site Policies.
 
 ## Applies To
 
@@ -15,7 +14,7 @@
 ## Required Fields
 
 - metadata: Include the required fields.
-- target: Represents the web server. Include device information and an optional port number. If a target port number is available, specify only one IP address in addition to the port number associated with that network connection (although multiple other machine identifiers could be provided for the target). For target.url, populate with the URL accessed.
+- target: Represents the web server. Include device information and an optional port number. If a target port number is available, specify only one IP address in addition to the port number associated with that network connection (although multiple other machine identifiers could be provided for the target). For `target.url`, populate with the URL accessed.
 
 ## Optional Fields
 
@@ -26,7 +25,7 @@
 - metadata: Populate the other metadata fields.
 - network: Populate other network fields.
 - network.email: If the HTTP network connection originated from a URL that appeared in an email message, populate network.email with the details.
-- network.http: If the HTTP network connection method is present, populate network.http.method.
+- network.http: If the HTTP network connection method is present, populate `network.http.method`.
 - observer: Represents a passive sniffer (if present).
 - security_result: Add one or more items to the security_result field to represent the malicious activity detected.
 

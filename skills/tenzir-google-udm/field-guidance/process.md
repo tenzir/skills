@@ -4,7 +4,6 @@
 
 - **UDM usage guide**: https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en
   - Google last updated: `2026-06-03 UTC`
-- **License**: Content licensed under Creative Commons Attribution 4.0; code samples licensed under Apache 2.0, as stated in the Google Developers Site Policies.
 
 ## Schema
 
@@ -16,11 +15,11 @@
 
 - **Purpose**: Stores the command line string for the process.
 - **Encoding**: String.
-- **Example**: c:\windows\system32\net.exe group.
+- **Example**: `c:\windows\system32\net.exe` group.
 
 #### Examples
 
-- c:\windows\system32\net.exe group.
+- `c:\windows\system32\net.exe` group.
 
 ### `Process.file`
 
@@ -41,11 +40,11 @@
 
 - **Purpose**: Stores the product specific process ID for the parent process.
 - **Encoding**: String.
-- **Examples**: MySQL:78778 or CS:90512
+- **Examples**: `MySQL:78778` or `CS:90512`
 
 #### Examples
 
-- MySQL:78778 or CS:90512
+- `MySQL:78778` or `CS:90512`
 
 ### `Process.pid`
 
@@ -62,8 +61,8 @@
 
 - **Purpose**: Stores the product specific process ID.
 - **Encoding**: String.
-- **Examples**: MySQL:78778 or CS:90512
+- **Examples**: `MySQL:78778` or `CS:90512`
 
 #### Examples
 
-- MySQL:78778 or CS:90512
+- `MySQL:78778` or `CS:90512`

@@ -9,18 +9,17 @@ and configuration-based normalizer contexts.
   - Google last updated: `2026-06-03 UTC`
 - **Unified Data Model field list**: https://docs.cloud.google.com/chronicle/docs/reference/udm-field-list?hl=en
   - Google last updated: `2026-06-03 UTC`
-- **License**: Content licensed under Creative Commons Attribution 4.0; code samples licensed under Apache 2.0, as stated in the Google Developers Site Policies.
 
 ## Rules Engine Prefix Notes
 
 - UDM field name formats:
 - For rules engine evaluation, the prefix begins with udm.
 - For configuration-based normalizer (CBN), the prefix begins with event.idm.read_only_udm.
-- This document provides a list of fields available in the Unified Data Model schema. When specifying a field, use the following format: <prefix>.<field_name1>.<field_name2>.<...>.<field_nameN>=<value>
+- This document provides a list of fields available in the Unified Data Model schema. When specifying a field, use the following format: `<prefix>.<field_name1>.<field_name2>.<...>.<field_nameN>=<value>`
 
 ## Detect Engine
 
-- When writing rules for Detect Engine, use the <prefix> pattern $event for Event fields and $entity for Entity fields. For example:
+- When writing rules for Detect Engine, use the <prefix> pattern `$event` for Event fields and `$entity` for Entity fields. For example:
 
 ### Examples
 
@@ -32,7 +31,7 @@ and configuration-based normalizer contexts.
 
 ## Configuration-Based Normalizer
 
-- When you write configuration-based normalizer (CBN) parsers, use the <prefix> pattern event.idm.read_only_udm for UDM Event fields and event.idm.graph for UDM Entity fields. For example:
+- When you write configuration-based normalizer (CBN) parsers, use the <prefix> pattern `event.idm.read_only_udm` for UDM Event fields and `event.idm.graph` for UDM Entity fields. For example:
 
 ### Examples
 
@@ -45,6 +44,6 @@ and configuration-based normalizer contexts.
 ## Style Notes
 
 - Field name and field type values can look similar. This document uses style conventions to help you identify the differences:
-- Field type values use camelCase characters. For example, platform and eventType.
-- Field name values use lowercase characters. For example, platform and event_type.
+- Field type values use camelCase characters. For example, `platform` and `eventType`.
+- Field name values use lowercase characters. For example, `platform` and `event_type`.
 - Standard datatype values use lowercase characters.

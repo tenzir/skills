@@ -11,7 +11,6 @@ for field existence, types, numbers, JSON names, oneofs, and deprecation.
   - Google last updated: `2026-06-03 UTC`
 - **Unified Data Model field list**: https://docs.cloud.google.com/chronicle/docs/reference/udm-field-list?hl=en
   - Google last updated: `2026-06-03 UTC`
-- **License**: Content licensed under Creative Commons Attribution 4.0; code samples licensed under Apache 2.0, as stated in the Google Developers Site Policies.
 
 ## Generated Guidance
 

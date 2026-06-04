@@ -23,7 +23,7 @@ from importlib import resources
 from pathlib import Path
 
 import httpx
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag
 from google.protobuf import descriptor_pb2
 from grpc_tools import protoc
 
@@ -37,10 +37,6 @@ ENTITY_PROTO_PATH = "backstory/entity.proto"
 ROOT_PROTO_PATHS = (UDM_PROTO_PATH, ENTITY_PROTO_PATH)
 UDM_USAGE_URL = "https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en"
 UDM_FIELD_LIST_URL = "https://docs.cloud.google.com/chronicle/docs/reference/udm-field-list?hl=en"
-GOOGLE_DOCS_LICENSE = (
-    "Content licensed under Creative Commons Attribution 4.0; code samples "
-    "licensed under Apache 2.0, as stated in the Google Developers Site Policies."
-)
 HTTP_HEADERS = {
     "User-Agent": "tenzir-google-udm-generator",
     "Accept": "application/vnd.github+json",
@@ -702,6 +698,31 @@ def tag_text(tag: Tag) -> str:
     return normalize_text(tag.get_text(" ", strip=True))
 
 
+def code_span(text: str) -> str:
+    text = normalize_code(text)
+    if "`" not in text:
+        return f"`{text}`"
+    longest_tick_run = max(len(match.group(0)) for match in re.finditer(r"`+", text))
+    delimiter = "`" * (longest_tick_run + 1)
+    return f"{delimiter} {text} {delimiter}"
+
+
+def markdown_text(tag: Tag) -> str:
+    def render_node(node: object) -> str:
+        if isinstance(node, NavigableString):
+            return str(node)
+        if not isinstance(node, Tag):
+            return ""
+        if node.name == "code":
+            text = normalize_code(node.get_text(" ", strip=True))
+            return code_span(text) if text else ""
+        if node.name == "br":
+            return " "
+        return "".join(render_node(child) for child in node.children)
+
+    return normalize_text("".join(render_node(child) for child in tag.children))
+
+
 def heading_text(tag: Tag) -> str:
     value = tag.get("data-text")
     if isinstance(value, str) and value.strip():
@@ -758,17 +779,19 @@ def source_from_soup(
     )
 
 
-def immediate_li_texts(ul: Tag) -> tuple[str, ...]:
-    return tuple(
-        tag_text(li)
-        for li in ul.find_all("li", recursive=False)
-        if tag_text(li)
-    )
+def immediate_li_texts(ul: Tag, *, markdown: bool = False) -> tuple[str, ...]:
+    extractor = markdown_text if markdown else tag_text
+    items: list[str] = []
+    for li in ul.find_all("li", recursive=False):
+        text = extractor(li)
+        if text:
+            items.append(text)
+    return tuple(items)
 
 
 def parse_labeled_list_item(li: Tag) -> tuple[GuidanceBullet, tuple[str, ...]]:
     strong = li.find(["strong", "b"])
-    full_text = tag_text(li)
+    full_text = markdown_text(li)
     if isinstance(strong, Tag):
         label = tag_text(strong).rstrip(":")
         text = re.sub(rf"^{re.escape(label)}\s*:?\s*", "", full_text).strip()
@@ -779,7 +802,7 @@ def parse_labeled_list_item(li: Tag) -> tuple[GuidanceBullet, tuple[str, ...]]:
     if label.lower() in {"example", "examples"}:
         nested = li.find("ul")
         if isinstance(nested, Tag):
-            examples = immediate_li_texts(nested)
+            examples = immediate_li_texts(nested, markdown=True)
         elif text:
             examples = (text,)
     return GuidanceBullet(label=label, text=text), examples
@@ -866,7 +889,7 @@ def parse_event_type_categories(article: Tag) -> tuple[EventTypeCategory, ...]:
         if current_title is None:
             continue
         if block.name == "p":
-            text = tag_text(block)
+            text = markdown_text(block)
             if text:
                 description.append(text)
         elif block.name == "ul":
@@ -884,10 +907,10 @@ def parse_usage_field_path_notes(article: Tag) -> tuple[str, ...]:
     for block in iter_section_siblings(h1, stop_levels={2}):
         text = tag_text(block)
         if capture_next_list and block.name == "ul":
-            notes.extend(immediate_li_texts(block))
+            notes.extend(immediate_li_texts(block, markdown=True))
             break
         elif "UDM field name formats" in text:
-            notes.append(text)
+            notes.append(markdown_text(block))
             capture_next_list = True
     return tuple(notes)
 
@@ -906,9 +929,9 @@ def parse_entity_guidance(article: Tag) -> tuple[EntityGuidance, ...]:
             continue
         entity_type = tag_text(cells[0])
         requirements = tuple(
-            tag_text(li)
+            markdown_text(li)
             for li in cells[1].find_all("li")
-            if tag_text(li)
+            if markdown_text(li)
         )
         if entity_type and requirements:
             result.append(
@@ -942,7 +965,7 @@ def parse_event_guidance_section(heading: Tag, blocks: list[Tag]) -> EventGuidan
                 current_kind = None
             continue
         if block.name == "p":
-            text = tag_text(block)
+            text = markdown_text(block)
             lowered = text.lower()
             if lowered.startswith("required fields"):
                 current_kind = "required"
@@ -954,7 +977,7 @@ def parse_event_guidance_section(heading: Tag, blocks: list[Tag]) -> EventGuidan
                 notes.append(text)
             continue
         if block.name == "aside":
-            text = tag_text(block)
+            text = markdown_text(block)
             if text:
                 notes.append(text)
             continue
@@ -971,7 +994,7 @@ def parse_event_guidance_section(heading: Tag, blocks: list[Tag]) -> EventGuidan
             continue
         if block.name != "ul":
             continue
-        items = immediate_li_texts(block)
+        items = immediate_li_texts(block, markdown=True)
         if current_kind == "required":
             required.extend(items)
         elif current_kind == "optional":
@@ -1064,7 +1087,7 @@ def parse_field_path_guidance(article: Tag) -> FieldPathGuidance:
 
     for block in iter_section_siblings(h1, stop_levels={2}):
         if block.name == "p":
-            text = tag_text(block)
+            text = markdown_text(block)
             if not text:
                 continue
             if "Detect Engine" in text:
@@ -1082,7 +1105,8 @@ def parse_field_path_guidance(article: Tag) -> FieldPathGuidance:
             continue
         if block.name != "ul":
             continue
-        items = immediate_li_texts(block)
+        examples_are_plain = current_mode in {"detect", "cbn"}
+        items = immediate_li_texts(block, markdown=not examples_are_plain)
         if current_mode == "detect":
             detect_examples.extend(items)
         elif current_mode == "cbn":
@@ -1227,7 +1251,6 @@ def render_source_section(sources: tuple[DocSource, ...]) -> list[str]:
                 f"  - Google last updated: `{source.last_updated}`",
             ]
         )
-    lines.append(f"- **License**: {GOOGLE_DOCS_LICENSE}")
     lines.append("")
     return lines
 
