@@ -15,8 +15,12 @@ metadata:
   requires:
     skills:
       - tenzir-docs
-      - tenzir-google-udm
-      - tenzir-ocsf
+  uses:
+    skills:
+      - name: tenzir-google-udm
+        when: Google UDM mapping or Google SecOps field semantics are in scope.
+      - name: tenzir-ocsf
+        when: OCSF mapping or OCSF schema semantics are in scope.
 ---
 
 # Manage Tenzir Packages
