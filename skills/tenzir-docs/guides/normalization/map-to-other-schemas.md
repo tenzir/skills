@@ -1,7 +1,9 @@
 # Map to other schemas
 
 
-This guide provides brief guidance on mapping data to schemas other than OCSF. While OCSF is the recommended choice for security data, you may need to support Elastic Common Schema (ECS), Google UDM, or Microsoft ASIM for integration with specific platforms.
+This guide provides brief guidance on mapping data to schemas other than OCSF. While OCSF is the recommended choice for security data, you may need to support Elastic Common Schema (ECS), Google UDM, Microsoft ASIM, or another platform-specific schema.
+
+Use [Map to UDM](map-to-udm.md) and [Map to ASIM](map-to-asim.md) for the dedicated Google UDM and Microsoft ASIM workflows.
 
 ## Choosing a schema
 
@@ -55,29 +57,13 @@ Common ECS field sets for security data:
 
 ## Microsoft ASIM
 
-[ASIM](https://learn.microsoft.com/en-us/azure/sentinel/normalization) (Advanced Security Information Model) is Microsoft Sentinel’s normalization schema.
+[ASIM](https://learn.microsoft.com/en-us/azure/sentinel/normalization) (Advanced Security Information Model) is Microsoft Sentinel’s normalization schema. Use [Map to ASIM](map-to-asim.md) for the detailed ASIM mapping workflow.
 
 ### Key differences from OCSF
 
 * Designed for KQL queries
 * Uses specific parser naming conventions
 * Column-oriented naming style
-
-### Mapping pattern
-
-```tql
-// From OCSF to ASIM Network Session
-asim.EventType = "NetworkSession"
-asim.EventProduct = ocsf.metadata.product.name
-asim.EventVendor = ocsf.metadata.product.vendor_name
-asim.TimeGenerated = ocsf.time
-asim.SrcIpAddr = ocsf.src_endpoint.ip
-asim.SrcPortNumber = ocsf.src_endpoint.port
-asim.DstIpAddr = ocsf.dst_endpoint.ip
-asim.DstPortNumber = ocsf.dst_endpoint.port
-asim.NetworkProtocol = ocsf.connection_info.protocol_name
-asim.NetworkBytes = ocsf.traffic.total_bytes
-```
 
 ### ASIM schemas
 
@@ -171,4 +157,5 @@ fork {
 * [`to_opensearch`](/reference/operators/to_opensearch.md)
 * [Map to OCSF](map-to-ocsf.md)
 * [Map to UDM](map-to-udm.md)
+* [Map to ASIM](map-to-asim.md)
 * [Transform values](../transformation/transform-values.md)

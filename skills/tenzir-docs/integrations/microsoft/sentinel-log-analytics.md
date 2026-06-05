@@ -5,6 +5,12 @@ Send security logs and events from Tenzir to Microsoft’s Log Analytics platfor
 
 All logs in Azure land in a [Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview). Microsoft Sentinel and Azure Monitor read from this workspace; they don’t store data themselves.
 
+## ASIM mapping
+
+Microsoft Sentinel uses the Advanced Security Information Model (ASIM) to query normalized security data across products. Use [Map to ASIM](../../guides/normalization/map-to-asim.md) to shape parsed events into ASIM records before you send them to Log Analytics tables.
+
+For agent-assisted work, follow [Use agent skills](../../guides/ai-workbench/use-agent-skills.md#use-the-microsoft-asim-skill) to use the `tenzir-microsoft-asim` skill. The skill helps choose ASIM schemas, inspect fields, resolve aliases, and map source telemetry with canonical field names such as `EventSchema`, `SrcIpAddr`, and `DstIpAddr`.
+
 To get data into a workspace, Azure uses two components:
 
 1. A [Data Collection Endpoint (DCE)](https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-endpoint-overview) receives your data via HTTPS. This is the URL Tenzir sends events to.
@@ -83,4 +89,5 @@ Auxiliary tables store data in Parquet format with retention up to 12 years, mak
 
 * [`from_microsoft_graph`](/reference/operators/from_microsoft_graph.md)
 * [`to_azure_log_analytics`](/reference/operators/to_azure_log_analytics.md)
+* [Map to ASIM](../../guides/normalization/map-to-asim.md)
 * [Graph](graph.md)

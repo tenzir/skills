@@ -86,12 +86,20 @@ Work through these guides in order for a complete normalization workflow:
 * Convert source values to UDM enums
 * Preserve unmapped fields in `additional`
 
+### Map to ASIM
+
+[Map to ASIM](normalization/map-to-asim.md) — Learn how to map events to Microsoft Sentinel ASIM records:
+
+* Choose the correct ASIM event or entity schema
+* Populate schema, product, and event metadata
+* Map role-prefixed source, destination, actor, target, and device fields
+* Preserve unmapped fields in `AdditionalFields`
+
 ### Map to other schemas
 
-[Map to other schemas](normalization/map-to-other-schemas.md) — Brief guidance on alternative schemas:
+[Map to other schemas](normalization/map-to-other-schemas.md) — Brief guidance on alternative schemas that don’t have a dedicated guide:
 
 * Elastic Common Schema (ECS)
-* Microsoft ASIM
 
 ## When to normalize
 
@@ -117,4 +125,5 @@ Normalizing early ensures all downstream consumers work with consistent data. Av
 - [Clean-up-values](normalization/clean-up-values.md)
 - [Map-to-ocsf](normalization/map-to-ocsf.md)
 - [Map-to-udm](normalization/map-to-udm.md)
+- [Map-to-asim](normalization/map-to-asim.md)
 - [Map-to-other-schemas](normalization/map-to-other-schemas.md)
