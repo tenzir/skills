@@ -13,10 +13,6 @@ metadata:
       - tenzir-docs
   uses:
     skills:
-      - name: tenzir-google-udm
-        when: A package-management task touches a Google UDM mapping operator and field semantics are required.
-      - name: tenzir-ocsf
-        when: A package-management task touches an OCSF mapping operator and schema semantics are required.
       - name: tenzir-ship
         when: Package changelog entries, release notes, or publishing workflows are in scope.
 ---
@@ -126,8 +122,8 @@ from one-off pipeline names.
 Add operator frontmatter arguments for configurable fields, URLs, credentials,
 modes, output topics, and destinations. Preserve existing public operator names
 unless a rename is intentional and reflected in examples, pipelines, tests, and
-changelog entries. Use `tenzir-docs` or specialized skills for operator-body
-behavior when the user asks for implementation details.
+changelog entries. Use `tenzir-docs` for operator-body behavior when the user
+asks for implementation details.
 
 **Results:**
 
