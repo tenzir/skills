@@ -173,7 +173,7 @@ def fetch_doc(client: httpx.Client, source: SourceRef, path: str) -> RawDoc:
 
 
 def source_copy_path(path: str) -> Path:
-    return Path("defender-docs") / path
+    return Path("docs") / path
 
 
 def source_copy_link(path: str, *, prefix: str = "") -> str:
@@ -1228,7 +1228,7 @@ def render_source_page(reference: AsimReference) -> str:
         f"- **Generated schema field records**: `{field_count}`",
         f"- **Alias field records**: `{alias_count(reference)}`",
         "",
-        "Raw Markdown source files are copied under `defender-docs/sentinel/` for audit and parser debugging.",
+        "Raw Microsoft Defender Docs Markdown is copied under `docs/sentinel/` for audit and parser debugging.",
         "",
         "## Schema source paths",
         "",
