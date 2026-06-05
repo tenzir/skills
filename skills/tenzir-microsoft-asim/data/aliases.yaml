@@ -102,8 +102,8 @@ aliases:
     - DstHostname
     - DvcHostname
     - RemoteHostname
-    - SrcHostName
     - SrcHostname
+    - SrcHostName
     schemas:
     - AlertEvent
     - DhcpEvent

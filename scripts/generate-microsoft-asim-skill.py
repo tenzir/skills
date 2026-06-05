@@ -29,7 +29,7 @@ GITHUB_API = f"https://api.github.com/repos/{DEFENDER_DOCS_REPO}"
 GITHUB_RAW = f"https://raw.githubusercontent.com/{DEFENDER_DOCS_REPO}"
 GITHUB_BLOB = f"https://github.com/{DEFENDER_DOCS_REPO}/blob"
 SCHEMA_CATALOG_PATH = "sentinel/normalization-about-schemas.md"
-GUIDANCE_SOURCE_PATHS = (
+SUPPORTING_SOURCE_PATHS = (
     "sentinel/normalization-common-fields.md",
     "sentinel/normalization-content.md",
     "sentinel/normalization-entity-user.md",
@@ -118,7 +118,7 @@ class AsimReference:
     source: SourceRef
     catalog: RawDoc
     schemas: tuple[SchemaDoc, ...]
-    guidance_sources: tuple[RawDoc, ...]
+    supporting_sources: tuple[RawDoc, ...]
 
 
 def parse_args() -> argparse.Namespace:
@@ -586,7 +586,7 @@ def build_reference(
     source: SourceRef,
     catalog: RawDoc,
     schema_sources: dict[str, RawDoc],
-    guidance_sources: tuple[RawDoc, ...],
+    supporting_sources: tuple[RawDoc, ...],
 ) -> AsimReference:
     catalog_entries = parse_schema_catalog(catalog)
     schemas = tuple(
@@ -602,7 +602,7 @@ def build_reference(
         source=source,
         catalog=catalog,
         schemas=schemas,
-        guidance_sources=guidance_sources,
+        supporting_sources=supporting_sources,
     )
 
 
@@ -1012,12 +1012,6 @@ def render_catalog_yaml(reference: AsimReference) -> str:
         "indexes": {
             "fields": "data/fields.yaml",
             "aliases": "data/aliases.yaml",
-            "guidance": {
-                "mapping": "data/guidance/mapping.yaml",
-                "common_fields": "data/guidance/common_fields.yaml",
-                "entities": "data/guidance/entities.yaml",
-                "content": "data/guidance/content.yaml",
-            },
         },
     }
     return dump_yaml(data)
@@ -1040,7 +1034,7 @@ def render_schema_yaml(schema: SchemaDoc) -> str:
 
 def render_fields_index_yaml(reference: AsimReference) -> str:
     occurrences = field_occurrences(reference)
-    return dump_yaml({"fields": {name: data_field_path(name) for name in sorted(occurrences, key=str.casefold)}})
+    return dump_yaml({name: data_field_path(name) for name in sorted(occurrences, key=str.casefold)})
 
 
 def render_field_yaml(name: str, occurrences: list[tuple[SchemaDoc, FieldRecord]]) -> str:
@@ -1100,103 +1094,6 @@ def render_aliases_yaml(reference: AsimReference) -> str:
     return dump_yaml({"aliases": aliases})
 
 
-def render_mapping_guidance_yaml(reference: AsimReference) -> str:
-    return dump_yaml(
-        {
-            "schema_selection": [
-                "Start from the activity or entity semantics, then choose the ASIM schema that represents that data.",
-                "After choosing a schema, read its schema YAML for mandatory and recommended fields before mapping optional context.",
-                "Use field YAML files when a field appears in multiple schemas or its meaning depends on the selected schema.",
-            ],
-            "field_classes": {
-                "Mandatory": "Populate the field for normalized records of that schema.",
-                "Recommended": "Populate the field when the source provides enough information because it improves analytic value.",
-                "Conditional": "Populate the field when the condition described by the schema record applies.",
-                "Optional": "Populate the field for useful context when the source provides it.",
-                "Alias": "Use aliases for query convenience; prefer normalized target fields for reusable detections, rules, and workbooks.",
-            },
-            "rules": [
-                "Do not invent ASIM fields, aliases, schema versions, or enum values that are not present in the generated data.",
-                "Prefer canonical normalized fields over aliases when producing reusable content.",
-                "Preserve source-specific values in original fields or AdditionalFields when ASIM has no direct normalized field.",
-                "When a schema defines both a value field and a type field, populate the type field when the identifier format is known.",
-            ],
-        }
-    )
-
-
-def render_common_fields_guidance_yaml() -> str:
-    return dump_yaml(
-        {
-            "purpose": "Common ASIM fields appear across event schemas and describe shared event metadata.",
-            "mapping_order": [
-                "Populate schema-specific mandatory common fields first.",
-                "Use schema-specific guidance for EventType, EventSchema, EventSchemaVersion, EventResult, and EventSeverity.",
-                "Use device fields for the reporting or collecting device unless the schema says otherwise.",
-            ],
-            "fields": [
-                "EventSchema",
-                "EventSchemaVersion",
-                "EventStartTime",
-                "EventEndTime",
-                "EventVendor",
-                "EventProduct",
-                "EventProductVersion",
-                "EventResult",
-                "EventResultDetails",
-                "EventSeverity",
-                "EventUid",
-                "EventOriginalUid",
-                "EventCount",
-                "EventMessage",
-                "Dvc",
-                "DvcHostname",
-                "DvcIpAddr",
-                "DvcId",
-                "DvcAction",
-            ],
-        }
-    )
-
-
-def render_entities_guidance_yaml() -> str:
-    return dump_yaml(
-        {
-            "role_prefixes": {
-                "Src": "The source system, identity, or application that initiates the activity.",
-                "Dst": "The destination system, identity, or application targeted by the activity.",
-                "Actor": "The user or identity performing the operation.",
-                "Target": "The user, system, object, or application affected by the operation.",
-                "Acting": "The process or application acting on behalf of an actor.",
-                "Dvc": "The reporting device or collector, unless a schema defines a more specific role.",
-            },
-            "entity_field_patterns": {
-                "user": ["UserId", "UserIdType", "Username", "UsernameType", "UserType", "UserScope", "UserScopeId"],
-                "device": ["Hostname", "FQDN", "IpAddr", "MacAddr", "DvcId", "DvcIdType", "DeviceType"],
-                "application": ["AppId", "AppName", "AppType"],
-            },
-            "rules": [
-                "Choose the role prefix from the event semantics before choosing the concrete field.",
-                "Populate companion type fields when a schema defines them and the identifier format is known.",
-                "Use AdditionalFields for entity identifiers that do not have a normalized field in the selected schema.",
-            ],
-        }
-    )
-
-
-def render_content_guidance_yaml() -> str:
-    return dump_yaml(
-        {
-            "purpose": "Microsoft Sentinel normalized content includes analytics rules, hunting queries, and workbooks that use ASIM-normalized fields.",
-            "rules": [
-                "Use canonical normalized fields for reusable detections and analytics content.",
-                "Use aliases mainly to explain interactive query convenience or Microsoft-documented alias behavior.",
-                "When adapting normalized content, verify field availability in the selected schema YAML.",
-            ],
-        }
-    )
-
-
 def render_skill_markdown(reference: AsimReference) -> str:
     return clean_markdown(
         "\n".join(
@@ -1217,21 +1114,52 @@ def render_skill_markdown(reference: AsimReference) -> str:
                 "",
                 "- Use [data/catalog.yaml](data/catalog.yaml) to choose a schema and find the schema data file.",
                 "- Use `data/schemas/<schema>.yaml` to map telemetry into one ASIM schema.",
-                "- Use [data/fields.yaml](data/fields.yaml) as a field-name to field-file manifest.",
+                "- Use [data/fields.yaml](data/fields.yaml) directly as the field-name to field-file manifest.",
                 "- Use `data/fields/<field>.yaml` for field meaning across schemas.",
                 "- Use [data/aliases.yaml](data/aliases.yaml) to resolve alias fields and conditional alias rules.",
-                "- Use `data/guidance/*.yaml` for schema selection, common-field, entity-role, and normalized-content guidance.",
+                "",
+                "## Mapping rules",
+                "",
+                "- Start from activity or entity semantics, choose the ASIM schema in [data/catalog.yaml](data/catalog.yaml), then load the schema file.",
+                "- Populate `Mandatory` and useful `Recommended` fields first, then add `Optional` fields when the source provides useful context.",
+                "- Populate `Conditional` fields when the field record's `required_if` condition applies.",
+                "- Prefer canonical normalized fields over aliases for reusable detections, analytics rules, workbooks, and mappings.",
+                "- Use aliases to explain Microsoft-documented query convenience, but resolve them through [data/aliases.yaml](data/aliases.yaml) before mapping.",
+                "- Preserve source-specific values in original fields or `AdditionalFields` when ASIM has no direct normalized field.",
+                "- When a schema defines both a value field and a type field, populate the type field when the identifier format is known.",
+                "- Treat fields with `role: common` as shared event/entity metadata, but obey schema-specific `value`, `allowed_values`, and `required_if` records.",
+                "",
+                "## Field classes",
+                "",
+                "| Class | Meaning |",
+                "| --- | --- |",
+                "| `Mandatory` | Populate for normalized records of that schema. |",
+                "| `Recommended` | Populate when the source provides enough information because it improves analytic value. |",
+                "| `Conditional` | Populate when the field record's condition applies. |",
+                "| `Optional` | Populate for useful context when the source provides it. |",
+                "| `Alias` | Query convenience field; prefer canonical target fields for reusable content. |",
+                "",
+                "## Role prefixes",
+                "",
+                "| Prefix | Role |",
+                "| --- | --- |",
+                "| `Src` | Source system, identity, or application initiating the activity. |",
+                "| `Dst` | Destination system, identity, or application targeted by the activity. |",
+                "| `Actor` | User or identity performing the operation. |",
+                "| `Target` | User, system, object, or application affected by the operation. |",
+                "| `Acting` | Process or application acting on behalf of an actor. |",
+                "| `Dvc` | Reporting device or collector unless the selected schema defines a more specific role. |",
                 "",
                 "## Question routing",
                 "",
                 "| Question pattern | Start here |",
                 "| --- | --- |",
-                "| Which ASIM schema should I map this event or entity to? | [data/guidance/mapping.yaml](data/guidance/mapping.yaml), then [data/catalog.yaml](data/catalog.yaml) |",
+                "| Which ASIM schema should I map this event or entity to? | [data/catalog.yaml](data/catalog.yaml), then the selected schema file |",
                 "| What fields does schema X contain? | `data/schemas/<schema>.yaml` |",
                 "| What does field X mean? | [data/fields.yaml](data/fields.yaml), then `data/fields/<field>.yaml` |",
                 "| Which field should an alias use? | [data/aliases.yaml](data/aliases.yaml), then target field files |",
-                "| How do user/device/application roles map? | [data/guidance/entities.yaml](data/guidance/entities.yaml) and the selected schema file |",
-                "| What normalized content uses ASIM? | [data/guidance/content.yaml](data/guidance/content.yaml) |",
+                "| How do user/device/application roles map? | Role-prefix table above, then the selected schema file |",
+                "| What raw Microsoft source backs this data? | [source.md](source.md) |",
                 "",
                 "For provenance, the pinned Microsoft Defender Docs commit, and raw source copies, use [source.md](source.md) as the last anchor.",
                 "",
@@ -1270,9 +1198,9 @@ def render_source_page(reference: AsimReference) -> str:
             f"- {data_schema_link(schema)}: {source_copy_link(schema.source.path)} "
             f"([upstream]({blob_url(reference.source.sha, schema.source.path)}))"
         )
-    lines.extend(["", "## Guidance source paths", ""])
+    lines.extend(["", "## Supporting source paths", ""])
     lines.append(f"- {source_copy_link(reference.catalog.path)} ([upstream]({blob_url(reference.source.sha, reference.catalog.path)}))")
-    for source in sorted(reference.guidance_sources, key=lambda item: item.path):
+    for source in sorted(reference.supporting_sources, key=lambda item: item.path):
         lines.append(f"- {source_copy_link(source.path)} ([upstream]({blob_url(reference.source.sha, source.path)}))")
     return clean_markdown("\n".join(lines))
 
@@ -1514,128 +1442,6 @@ def render_field_page(
     return clean_markdown("\n".join(lines))
 
 
-def render_guidance_index() -> str:
-    return clean_markdown(
-        "\n".join(
-            [
-                "# Guidance",
-                "",
-                "Use these pages for broad ASIM mapping decisions. Use generated schema",
-                "and field pages for exact field availability, class, type, and alias",
-                "details.",
-                "",
-                "- [Schema semantics](guidance/schema-semantics.md)",
-                "- [Common fields](guidance/common-fields.md)",
-                "- [Entities](guidance/entities.md)",
-                "- [Security content](guidance/security-content.md)",
-                "",
-            ]
-        )
-    )
-
-
-def render_schema_semantics_guidance(reference: AsimReference) -> str:
-    return clean_markdown(
-        "\n".join(
-            [
-                "# Schema Semantics",
-                "",
-                f"Source: {source_copy_link(SCHEMA_CATALOG_PATH, prefix='../')}.",
-                "",
-                "ASIM schemas model activities and entities with a consistent set of field",
-                "names. Start a mapping by identifying the activity or entity type, then",
-                "inspect the generated schema page for mandatory and recommended fields.",
-                "",
-                "## Field classes",
-                "",
-                "- `Mandatory` fields are expected in normalized records for that schema.",
-                "- `Recommended` fields should be normalized when the source provides them.",
-                "- `Optional` fields can remain unnormalized when they are not needed.",
-                "- `Conditional` fields become required when the field they follow is populated.",
-                "- `Alias` fields are conditional convenience fields for analyst queries.",
-                "",
-                "## Generated schemas",
-                "",
-            ]
-            + [
-                f"- {schema_link(schema, prefix='../')} (`{schema.version}`): {schema.title}"
-                for schema in sorted(reference.schemas, key=lambda item: item.name.casefold())
-            ]
-            + [""]
-        )
-    )
-
-
-def render_common_fields_guidance() -> str:
-    return clean_markdown(
-        "\n".join(
-            [
-                "# Common Fields",
-                "",
-                f"Source: {source_copy_link('sentinel/normalization-common-fields.md', prefix='../')}.",
-                "",
-                "Common ASIM fields appear across event schemas. A schema page can add",
-                "schema-specific guidance for common fields, such as the allowed",
-                "`EventType` values or the expected `EventSchemaVersion`.",
-                "",
-                "When mapping telemetry, populate common time, vendor, product, result,",
-                "severity, message, schema, and device fields according to the generated",
-                "schema page first. Use the copied source page when a field requires the",
-                "full common-field explanation.",
-                "",
-            ]
-        )
-    )
-
-
-def render_entities_guidance() -> str:
-    return clean_markdown(
-        "\n".join(
-            [
-                "# Entities",
-                "",
-                "Sources:",
-                "",
-                f"- {source_copy_link('sentinel/normalization-entity-user.md', prefix='../')}",
-                f"- {source_copy_link('sentinel/normalization-entity-device.md', prefix='../')}",
-                f"- {source_copy_link('sentinel/normalization-entity-application.md', prefix='../')}",
-                "",
-                "ASIM event schemas use prefixes to identify entity roles, such as `Src`,",
-                "`Dst`, `Actor`, `Target`, `Acting`, and `Dvc`. Use the schema page to",
-                "confirm which role prefixes are documented for the event, then use the",
-                "entity source pages for user, device, and application naming rules.",
-                "",
-                "When a source has entity identifiers that do not map to normalized fields,",
-                "preserve the source value in its original field or in `AdditionalFields`.",
-                "When an identifier supports multiple formats, populate the matching type",
-                "field when the schema defines one.",
-                "",
-            ]
-        )
-    )
-
-
-def render_security_content_guidance() -> str:
-    return clean_markdown(
-        "\n".join(
-            [
-                "# Security Content",
-                "",
-                f"Source: {source_copy_link('sentinel/normalization-content.md', prefix='../')}.",
-                "",
-                "Microsoft Sentinel normalized content includes analytics rules, hunting",
-                "queries, and workbooks that use ASIM-normalized fields. Prefer canonical",
-                "fields over aliases for reusable detections, analytics rules, and",
-                "workbooks.",
-                "",
-                "The copied source page lists the current built-in ASIM-aware content by",
-                "schema and links to rule or hunting-query sources.",
-                "",
-            ]
-        )
-    )
-
-
 def build_docs(reference: AsimReference) -> dict[Path, str]:
     docs: dict[Path, str] = {
         Path("SKILL.md"): render_skill_markdown(reference),
@@ -1643,10 +1449,6 @@ def build_docs(reference: AsimReference) -> dict[Path, str]:
         Path("data/catalog.yaml"): render_catalog_yaml(reference),
         Path("data/fields.yaml"): render_fields_index_yaml(reference),
         Path("data/aliases.yaml"): render_aliases_yaml(reference),
-        Path("data/guidance/mapping.yaml"): render_mapping_guidance_yaml(reference),
-        Path("data/guidance/common_fields.yaml"): render_common_fields_guidance_yaml(),
-        Path("data/guidance/entities.yaml"): render_entities_guidance_yaml(),
-        Path("data/guidance/content.yaml"): render_content_guidance_yaml(),
     }
     for schema in reference.schemas:
         docs[Path(data_schema_path(schema.name))] = render_schema_yaml(schema)
@@ -1655,7 +1457,7 @@ def build_docs(reference: AsimReference) -> dict[Path, str]:
     copied_sources = {
         reference.catalog.path: reference.catalog.text,
         **{schema.source.path: schema.source.text for schema in reference.schemas},
-        **{source.path: source.text for source in reference.guidance_sources},
+        **{source.path: source.text for source in reference.supporting_sources},
     }
     for path, text in copied_sources.items():
         docs[source_copy_path(path)] = text
@@ -1680,8 +1482,8 @@ def main() -> None:
             path: fetch_doc(client, source, path)
             for path in sorted({entry.path for entry in catalog_entries})
         }
-        guidance_sources = tuple(fetch_doc(client, source, path) for path in GUIDANCE_SOURCE_PATHS)
-    reference = build_reference(source, catalog, schema_sources, guidance_sources)
+        supporting_sources = tuple(fetch_doc(client, source, path) for path in SUPPORTING_SOURCE_PATHS)
+    reference = build_reference(source, catalog, schema_sources, supporting_sources)
     docs = build_docs(reference)
     write_docs(output_dir, docs)
     print(f"Generated Microsoft ASIM skill in {output_dir}")

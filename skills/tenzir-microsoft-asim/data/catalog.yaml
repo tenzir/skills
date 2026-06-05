@@ -80,8 +80,3 @@ schemas:
 indexes:
   fields: data/fields.yaml
   aliases: data/aliases.yaml
-  guidance:
-    mapping: data/guidance/mapping.yaml
-    common_fields: data/guidance/common_fields.yaml
-    entities: data/guidance/entities.yaml
-    content: data/guidance/content.yaml

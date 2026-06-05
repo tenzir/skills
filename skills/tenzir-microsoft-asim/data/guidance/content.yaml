@@ -1,5 +1,0 @@
-purpose: Microsoft Sentinel normalized content includes analytics rules, hunting queries, and workbooks that use ASIM-normalized fields.
-rules:
-- Use canonical normalized fields for reusable detections and analytics content.
-- Use aliases mainly to explain interactive query convenience or Microsoft-documented alias behavior.
-- When adapting normalized content, verify field availability in the selected schema YAML.

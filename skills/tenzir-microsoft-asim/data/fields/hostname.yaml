@@ -1,11 +1,11 @@
 name: Hostname
-summary: Hostname is an alias for DstHostname, DvcHostname, RemoteHostname, SrcHostName, SrcHostname.
+summary: Hostname is an alias for DstHostname, DvcHostname, RemoteHostname, SrcHostname, SrcHostName.
 to:
 - DstHostname
 - DvcHostname
 - RemoteHostname
-- SrcHostName
 - SrcHostname
+- SrcHostName
 schemas:
 - name: AlertEvent
   role: device
