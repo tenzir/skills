@@ -669,6 +669,10 @@ Microsoft Defender offers protection, detection, investigation, and response to 
 
 Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 
+##### [Microsoft SQL Server](integrations/microsoft/sql-server.md)
+
+This guide shows you how to read events from Microsoft SQL Server and Azure SQL Databases with Tenzir.
+
 ##### [Sentinel & Log Analytics](integrations/microsoft/sentinel-log-analytics.md)
 
 Send security logs and events from Tenzir to Microsoft’s Log Analytics platform. You can analyze them with Microsoft Sentinel, create alerts with Azure Monitor, or query them with KQL. To read Microsoft Entra and Microsoft 365 data from Microsoft Graph, use Graph instead.

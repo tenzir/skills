@@ -32,5 +32,6 @@ to_azure_blob_storage "abfs://container/path/to/file.json"
 - [Azure-event-hubs](azure-event-hubs.md)
 - [Defender](defender.md)
 - [Graph](graph.md)
+- [Sql-server](sql-server.md)
 - [Sentinel-log-analytics](sentinel-log-analytics.md)
 - [Windows-event-logs](windows-event-logs.md)

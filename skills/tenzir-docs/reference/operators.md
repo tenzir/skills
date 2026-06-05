@@ -681,6 +681,14 @@ Reads events from a Microsoft Graph collection.
 from_microsoft_graph "auditLogs/signIns", auth={…}
 ```
 
+### [from\_microsoft\_sql](operators/from_microsoft_sql.md)
+
+Reads events from Microsoft SQL Server or Azure SQL Database.
+
+```tql
+from_microsoft_sql table="dbo.events", host="sql.example.com", database="security", tls=true
+```
+
 ### [from\_mysql](operators/from_mysql.md)
 
 Reads events from a MySQL database.

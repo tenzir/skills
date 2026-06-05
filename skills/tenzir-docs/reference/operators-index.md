@@ -114,6 +114,7 @@
 - [from_http](operators/from_http.md): Sends an HTTP/1.1 request and returns the response as events.
 - [from_kafka](operators/from_kafka.md): Receives events from an Apache Kafka topic.
 - [from_microsoft_graph](operators/from_microsoft_graph.md): Reads events from a Microsoft Graph collection.
+- [from_microsoft_sql](operators/from_microsoft_sql.md): Reads events from Microsoft SQL Server or Azure SQL Database.
 - [from_mysql](operators/from_mysql.md): Reads events from a MySQL database.
 - [from_nats](operators/from_nats.md): Consumes messages from a NATS JetStream subject.
 - [from_nic](operators/from_nic.md): Captures packets from a network interface and outputs events.
