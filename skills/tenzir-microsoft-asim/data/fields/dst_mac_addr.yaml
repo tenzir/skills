@@ -8,3 +8,4 @@ schemas:
   description: The MAC address of the network interface used for the connection or session by the destination device.
   examples:
   - 06:10:9f:eb:8f:14
+  - 00:1B:44:11:3A:B7

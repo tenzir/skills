@@ -8,12 +8,22 @@ fields:
 - name: EventCount
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: EventEndTime
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: EventProduct
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: EventSchema
   role: common
   class: Mandatory
@@ -29,6 +39,10 @@ fields:
 - name: EventStartTime
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event started. If the source supports aggregation and the record represents multiple events, the time that the first event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: EventType
   role: common
   class: Mandatory
@@ -44,6 +58,10 @@ fields:
 - name: EventVendor
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: AlertName
   role: alert
   class: Recommended
@@ -67,27 +85,70 @@ fields:
 - name: DvcDomain
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: DvcDomainType
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: DvcFQDN
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: DvcHostname
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: DvcId
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: DvcIdType
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: DvcIpAddr
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: EventSeverity
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: EventSubType
   role: common
   class: Recommended
@@ -161,6 +222,8 @@ fields:
 - name: AdditionalFields
   role: common
   class: Optional
+  type: Dynamic
+  description: If your source provides additional information worth preserving, either keep it with the original field names or create the dynamic AdditionalFields field, and add the extra information as key/value pairs.
 - name: AlertOriginalStatus
   role: alert
   class: Optional
@@ -205,33 +268,65 @@ fields:
 - name: DvcAction
   role: device
   class: Optional
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: DvcDescription
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: DvcInterface
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: DvcMacAddr
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: DvcOriginalAction
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: DvcOs
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: DvcOsVersion
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: DvcScope
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. DvcScope map to a subscription ID on Azure and to an account ID on AWS.
 - name: DvcScopeId
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: DvcZone
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: EmailMessageId
   class: Optional
   type: string
@@ -248,27 +343,53 @@ fields:
 - name: EventOriginalSeverity
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: EventOriginalSubType
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: EventOriginalType
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: EventOriginalUid
   role: common
   class: Optional
+  type: String
+  description: A unique ID of the original record, if provided by the source.
+  examples:
+  - 69f37748-ddcd-4331-bf0f-b137f1ea83b
 - name: EventOwner
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: EventProductVersion
   role: common
   class: Optional
+  type: String
+  description: The version of the product generating the event.
+  examples:
+  - '12.1'
 - name: EventReportUrl
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: EventResult
   role: common
   class: Optional
+  type: Enumerated
+  description: 'One of the following values: Success, Partial, Failure, NA (Not Applicable). The value might be provided in the source record by using different terms, which should be normalized to these values. Alternatively, the source might provide only the EventResultDetails field, which should be analyzed to derive the EventResult value.'
+  examples:
+  - Success
 - name: FileMD5
   role: file
   class: Optional
@@ -325,11 +446,16 @@ fields:
   class: Optional
   type: string
   description: The process ID (PID) associated with the alert. e.g. 12345678
+  examples:
+  - '48610176'
+  notes: The type is defined as string to support varying systems, but on Windows and Linux this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
 - name: ProcessName
   role: process
   class: Optional
   type: string
   description: Name of the process. e.g. C:\Windows\explorer.exe
+  examples:
+  - C:\Windows\explorer.exe
 - name: RegistryKey
   role: registry
   class: Optional
@@ -463,13 +589,17 @@ fields:
 - name: Hostname
   role: device
   class: Alias
+  type: Hostname
   to:
   - DvcHostname
 - name: IpAddr
   role: network
   class: Alias
+  type: IP address
   to:
   - DvcIpAddr
+  examples:
+  - 45.21.42.12
 - name: Rule
   role: rule
   class: Alias

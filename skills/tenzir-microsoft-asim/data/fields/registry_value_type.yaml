@@ -10,6 +10,6 @@ schemas:
   role: registry
   class: Recommended
   type: String
-  description: The type of registry value, normalized to standard form. For more information, see Value Types. For
+  description: The type of registry value, normalized to standard form. For more information, see Value Types.
   examples:
   - Reg_Expand_Sz

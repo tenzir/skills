@@ -6,3 +6,5 @@ schemas:
   class: Optional
   type: string
   description: Name of the process. e.g. C:\Windows\explorer.exe
+  examples:
+  - C:\Windows\explorer.exe

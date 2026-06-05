@@ -1,46 +1,108 @@
 name: Dvc
-summary: For authentication events, device fields refer to the system reporting the event.
+summary: A unique identifier of the device on which the event occurred or which reported the event, depending on the schema. This field might alias the DvcFQDN, DvcId, DvcHostname, or DvcIpAddr fields. For cloud sources, for which there's no apparent device, use the same value as the Event Product field.
+to:
+- DvcFQDN
+- DvcHostname
+- DvcId
+- DvcIpAddr
 schemas:
 - name: AuditEvent
   role: device
   class: Mandatory
+  type: String
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
+  description: A unique identifier of the device on which the event occurred or which reported the event, depending on the schema. This field might alias the DvcFQDN, DvcId, DvcHostname, or DvcIpAddr fields. For cloud sources, for which there's no apparent device, use the same value as the Event Product field.
 - name: Authentication
   role: device
   class: Mandatory
   type: '-'
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For authentication events, device fields refer to the system reporting the event.
 - name: DhcpEvent
   role: device
   class: Mandatory
   type: '-'
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For DHCP events, device fields refer to the system that reports the DHCP event.
 - name: Dns
   role: device
   class: Mandatory
   type: '-'
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For DNS events, device fields refer to the system that reports the DNS event.
 - name: FileEvent
   role: device
   class: Mandatory
   type: '-'
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For File activity events, device fields refer to the system on which the file activity occurred.
 - name: NetworkSession
   role: device
   class: Mandatory
+  type: String
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For Network Session events, device fields refer to the system reporting the Network Session event.
 - name: ProcessEvent
   role: device
   class: Mandatory
+  type: String
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For process activity events, device fields refer to the system on which the process was executed.
 - name: RegistryEvent
   role: device
   class: Mandatory
+  type: String
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For registry activity events, device fields refer to the system on which the registry activity occurred.
 - name: UserManagement
   role: device
   class: Mandatory
+  type: String
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For user management events, device fields refer to the system reporting the event. This is usually the system on which the user is managed.
 - name: WebSession
   role: device
   class: Mandatory
+  type: String
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For Web Session events, device fields refer to the system reporting the Web Session event. This is typically an intermediary device for HTTPSession events, and the destination web or application server for WebServerSession and ApiRequest events.

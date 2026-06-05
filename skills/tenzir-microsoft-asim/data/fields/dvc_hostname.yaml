@@ -1,35 +1,80 @@
 name: DvcHostname
+summary: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
 schemas:
 - name: AlertEvent
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: AuditEvent
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: Authentication
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: Dns
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: FileEvent
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: NetworkSession
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: UserManagement
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: WebSession
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc

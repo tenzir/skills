@@ -8,6 +8,7 @@ schemas:
   description: The OS of the target device.
   examples:
   - Windows 10
+  - Windows
 - name: Authentication
   role: target
   class: Optional
@@ -15,3 +16,4 @@ schemas:
   description: The OS of the target device.
   examples:
   - Windows 10
+  - Windows

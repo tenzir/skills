@@ -1,35 +1,80 @@
 name: DvcId
+summary: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
 schemas:
 - name: AlertEvent
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: AuditEvent
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: Authentication
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: Dns
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: FileEvent
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: NetworkSession
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: UserManagement
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: WebSession
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669

@@ -10,45 +10,69 @@ schemas:
 - name: AlertEvent
   role: network
   class: Alias
+  type: IP address
   to:
   - DvcIpAddr
+  examples:
+  - 45.21.42.12
 - name: AuditEvent
   role: network
   class: Alias
+  type: IP address
   to:
   - SrcIpAddr
   - TargetIpAddr
   resolution: Alias to SrcIpAddr, or to TargetIpAddr if SrcIpAddr is not provided.
+  examples:
+  - 45.21.42.12
 - name: Authentication
   role: network
   class: Alias
+  type: IP address
   to:
   - SrcIpAddr
+  examples:
+  - 45.21.42.12
 - name: DhcpEvent
   role: network
   class: Alias
+  type: IP address
   to:
   - SrcIpAddr
+  examples:
+  - 45.21.42.12
 - name: Dns
   role: network
   class: Alias
+  type: IP address
   to:
   - SrcIpAddr
+  examples:
+  - 45.21.42.12
 - name: FileEvent
   role: network
   class: Alias
+  type: IP address
   to:
   - SrcIpAddr
+  examples:
+  - 45.21.42.12
 - name: NetworkSession
   role: network
   class: Alias
+  type: IP address
   to:
   - DstIpAddr
   - LocalIpAddr
   - SrcIpAddr
   resolution: '- If the event type is NetworkSession, Flow or L2NetworkSession, IpAddr is an alias to SrcIpAddr. - If the event type is EndpointNetworkSession, IpAddr is an alias to LocalIpAddr, which can alias either SrcIpAddr or DstIpAddr, depending on NetworkDirection.'
+  examples:
+  - 45.21.42.12
 - name: UserManagement
   role: network
   class: Alias
+  type: IP address
   to:
   - SrcIpAddr
+  examples:
+  - 45.21.42.12

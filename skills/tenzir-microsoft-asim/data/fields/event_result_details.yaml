@@ -1,9 +1,13 @@
 name: EventResultDetails
-summary: 'The details associated with the event result. This field is typically populated when the result is a failure. Allowed values include: - No such user or password. This value should be used also when the original event reports that there is no such user, without reference to a password. - No such user - Incorrect password - Incorrect key - Account expired - Password expired - User locked - User disabled - Logon violates policy. This value should be used when the original event reports, for - Session expired - Other The value may be provided in the source record using different terms, which should be normalized to these values. The original value should be stored in the field EventOriginalResultDetails'
+summary: Reason or details for the result reported in the EventResult field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalResultDetails field.
 schemas:
 - name: AuditEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: Reason or details for the result reported in the EventResult field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalResultDetails field.
+  examples:
+  - NXDOMAIN
 - name: Authentication
   role: common
   class: Recommended
@@ -20,12 +24,17 @@ schemas:
   - Logon violates policy. This value should be used when the original event reports, for example
   - Session expired
   - Other
-  description: 'The details associated with the event result. This field is typically populated when the result is a failure. Allowed values include: - No such user or password. This value should be used also when the original event reports that there is no such user, without reference to a password. - No such user - Incorrect password - Incorrect key - Account expired - Password expired - User locked - User disabled - Logon violates policy. This value should be used when the original event reports, for - Session expired - Other The value may be provided in the source record using different terms, which should be normalized to these values. The original value should be stored in the field EventOriginalResultDetails'
+  description: 'The details associated with the event result. This field is typically populated when the result is a failure. Allowed values include: - No such user or password. This value should be used also when the original event reports that there is no such user, without reference to a password. - No such user - Incorrect password - Incorrect key - Account expired - Password expired - User locked - User disabled - Logon violates policy. This value should be used when the original event reports, - Session expired - Other The value may be provided in the source record using different terms, which should be normalized to these values. The original value should be stored in the field EventOriginalResultDetails'
   examples:
   - MFA required, log on outside of working hours, conditional access restrictions, or too frequent attempts.
+  - NXDOMAIN
 - name: DhcpEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: Reason or details for the result reported in the EventResult field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalResultDetails field.
+  examples:
+  - NXDOMAIN
 - name: Dns
   role: common
   class: Mandatory
@@ -37,6 +46,10 @@ schemas:
 - name: FileEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: Reason or details for the result reported in the EventResult field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalResultDetails field.
+  examples:
+  - NXDOMAIN
 - name: NetworkSession
   role: common
   class: Recommended
@@ -55,20 +68,34 @@ schemas:
   - Unknown
   - NA
   description: 'Reason or details for the result reported in the EventResult field. Supported values are: - Failover - Invalid TCP - Invalid Tunnel - Maximum Retry - Reset - Routing issue - Simulation - Terminated - Timeout - Transient error - Unknown - NA. The original, source specific, value is stored in the EventOriginalResultDetails field.'
+  examples:
+  - NXDOMAIN
 - name: ProcessEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: Reason or details for the result reported in the EventResult field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalResultDetails field.
+  examples:
+  - NXDOMAIN
 - name: RegistryEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: Reason or details for the result reported in the EventResult field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalResultDetails field.
+  examples:
+  - NXDOMAIN
 - name: UserManagement
   role: common
   class: Recommended
   type: Enumerated
   description: The valid values are NotAuthorized and Other.
+  examples:
+  - NXDOMAIN
 - name: WebSession
   role: common
   class: Recommended
   type: Enumerated
   description: The HTTP status code as defined by The World Wide Web Consortium
+  examples:
+  - NXDOMAIN
   notes: The value may be provided in the source record using different terms, which should be normalized to these values. The original value should be stored in the EventOriginalResultDetails field.

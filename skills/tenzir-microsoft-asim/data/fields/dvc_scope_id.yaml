@@ -1,35 +1,58 @@
 name: DvcScopeId
+summary: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: AuditEvent
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: Authentication
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: DhcpEvent
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: Dns
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: FileEvent
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: NetworkSession
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: ProcessEvent
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: RegistryEvent
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: UserManagement
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: WebSession
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.

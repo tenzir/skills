@@ -6,5 +6,6 @@ schemas:
 - name: Dns
   role: dns
   class: Alias
+  type: String
   to:
   - DnsQuery

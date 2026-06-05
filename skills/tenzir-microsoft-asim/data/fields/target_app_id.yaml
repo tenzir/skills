@@ -8,6 +8,7 @@ schemas:
   description: The ID of the application to which the event applies, including a process, browser, or service.
   examples:
   - '89162'
+  - '124'
 - name: Authentication
   role: target
   class: Optional
@@ -15,8 +16,11 @@ schemas:
   description: The ID of the application to which the authorization is required, often assigned by the reporting device.
   examples:
   - '89162'
+  - '124'
 - name: FileEvent
   role: target
   class: Optional
   type: String
   description: The ID of the destination application, as reported by the reporting device.
+  examples:
+  - '124'

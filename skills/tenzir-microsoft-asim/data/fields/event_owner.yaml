@@ -1,35 +1,58 @@
 name: EventOwner
+summary: The owner of the event, which is usually the department or subsidiary in which it was generated.
 schemas:
 - name: AlertEvent
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: AuditEvent
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: Authentication
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: DhcpEvent
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: Dns
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: FileEvent
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: NetworkSession
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: ProcessEvent
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: RegistryEvent
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: UserManagement
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: WebSession
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.

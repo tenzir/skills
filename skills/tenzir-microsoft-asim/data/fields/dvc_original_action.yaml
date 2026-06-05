@@ -1,35 +1,58 @@
 name: DvcOriginalAction
+summary: The original DvcAction as provided by the reporting device.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: AuditEvent
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: Authentication
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: DhcpEvent
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: Dns
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: FileEvent
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: NetworkSession
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: ProcessEvent
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: RegistryEvent
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: UserManagement
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: WebSession
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.

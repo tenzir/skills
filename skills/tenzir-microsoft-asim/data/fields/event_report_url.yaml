@@ -1,35 +1,58 @@
 name: EventReportUrl
+summary: A URL provided in the event for a resource that provides more information about the event.
 schemas:
 - name: AlertEvent
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: AuditEvent
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: Authentication
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: DhcpEvent
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: Dns
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: FileEvent
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: NetworkSession
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: ProcessEvent
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: RegistryEvent
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: UserManagement
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: WebSession
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.

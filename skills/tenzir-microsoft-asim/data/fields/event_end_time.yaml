@@ -1,38 +1,89 @@
 name: EventEndTime
+summary: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
+to:
+- TimeGenerated
 schemas:
 - name: AgentEvent
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: AlertEvent
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: AuditEvent
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: Authentication
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: DhcpEvent
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: Dns
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: FileEvent
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: NetworkSession
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: ProcessEvent
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: RegistryEvent
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: UserManagement
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: WebSession
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.

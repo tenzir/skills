@@ -163,6 +163,7 @@ aliases:
     to:
     - ActingProcessName
     - DstProcessName
+    - ProcessName
     - SrcProcessName
     - TargetProcessName
     schemas:

@@ -1,24 +1,48 @@
 name: DvcAction
-summary: 'The action taken on the network session. Supported values are: - Allow - Deny - Drop - Drop ICMP - Reset - Reset Source - Reset Destination - Encrypt - Decrypt - VPNroute'
+summary: For reporting security systems, the action taken by the system, if applicable.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: AuditEvent
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: Authentication
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: Dns
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: FileEvent
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: NetworkSession
   role: device
   class: Recommended
@@ -37,16 +61,33 @@ schemas:
   description: 'The action taken on the network session. Supported values are: - Allow - Deny - Drop - Drop ICMP - Reset - Reset Source - Reset Destination - Encrypt - Decrypt - VPNroute'
   examples:
   - drop
+  - Blocked
   notes: The value might be provided in the source record by using different terms, which should be normalized to these values. The original value should be stored in the DvcOriginalAction field.
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: UserManagement
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked
 - name: WebSession
   role: device
   class: Recommended
+  type: String
+  description: For reporting security systems, the action taken by the system, if applicable.
+  examples:
+  - Blocked

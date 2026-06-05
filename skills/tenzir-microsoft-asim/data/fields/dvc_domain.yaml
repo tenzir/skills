@@ -1,35 +1,80 @@
 name: DvcDomain
+summary: The domain of the device on which the event occurred or which reported the event, depending on the schema.
 schemas:
 - name: AlertEvent
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: AuditEvent
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: Authentication
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: Dns
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: FileEvent
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: NetworkSession
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: UserManagement
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: WebSession
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso

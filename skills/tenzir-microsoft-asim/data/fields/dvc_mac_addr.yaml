@@ -1,35 +1,80 @@
 name: DvcMacAddr
+summary: The MAC address of the device on which the event occurred or which reported the event.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: AuditEvent
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: Authentication
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: DhcpEvent
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: Dns
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: FileEvent
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: NetworkSession
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: ProcessEvent
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: RegistryEvent
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: UserManagement
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: WebSession
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7

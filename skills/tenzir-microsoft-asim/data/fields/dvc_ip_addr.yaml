@@ -1,35 +1,80 @@
 name: DvcIpAddr
+summary: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
 schemas:
 - name: AlertEvent
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: AuditEvent
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: Authentication
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: Dns
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: FileEvent
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: NetworkSession
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: UserManagement
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: WebSession
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12

@@ -1,35 +1,91 @@
 name: DvcDomainType
+summary: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
 schemas:
 - name: AlertEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: AuditEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: Authentication
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: Dns
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: FileEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: NetworkSession
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: UserManagement
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: WebSession
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.

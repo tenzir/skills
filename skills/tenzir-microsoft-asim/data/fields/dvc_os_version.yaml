@@ -1,35 +1,80 @@
 name: DvcOsVersion
+summary: The version of the operating system on the device on which the event occurred or which reported the event.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: AuditEvent
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: Authentication
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: DhcpEvent
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: Dns
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: FileEvent
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: NetworkSession
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: ProcessEvent
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: RegistryEvent
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: UserManagement
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: WebSession
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'

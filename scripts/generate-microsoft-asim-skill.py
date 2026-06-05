@@ -15,7 +15,7 @@ import re
 import shutil
 import sys
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import urldefrag
@@ -36,6 +36,22 @@ SUPPORTING_SOURCE_PATHS = (
     "sentinel/normalization-entity-device.md",
     "sentinel/normalization-entity-application.md",
 )
+SUPPORTING_ENTITY_PREFIXES = {
+    "sentinel/normalization-entity-user.md": ("Src", "Dst", "Actor", "Target"),
+    "sentinel/normalization-entity-device.md": ("Dvc", "Src", "Dst", "Target"),
+    "sentinel/normalization-entity-application.md": ("Src", "Dst", "Target", "Acting"),
+}
+DEVICE_BASE_FIELDS = {
+    "Domain",
+    "DomainType",
+    "FQDN",
+    "Hostname",
+    "IpAddr",
+    "MacAddr",
+    "Scope",
+    "ScopeId",
+    "Zone",
+}
 HTTP_HEADERS = {
     "User-Agent": "tenzir-microsoft-asim-generator",
     "Accept": "application/vnd.github+json",
@@ -551,6 +567,72 @@ def parse_fields(source: RawDoc) -> tuple[FieldRecord, ...]:
     return tuple(sorted(records, key=lambda item: (item.name.casefold(), item.source_section.casefold())))
 
 
+def prefixed_supporting_field_name(source_path: str, prefix: str, name: str) -> str:
+    if source_path == "sentinel/normalization-entity-user.md":
+        return f"{prefix}{name}" if "User" in name else ""
+    if source_path == "sentinel/normalization-entity-application.md":
+        return f"{prefix}{name}" if name.startswith(("App", "Process")) else ""
+    if source_path == "sentinel/normalization-entity-device.md":
+        if name in {"Dvc", "Src", "Dst"}:
+            return ""
+        if name in DEVICE_BASE_FIELDS:
+            return f"{prefix}{name}"
+        if name.startswith("Dvc") and prefix in {"Src", "Dst", "Target"}:
+            return f"{prefix}{name}"
+    return ""
+
+
+def supporting_field_name_variants(record: FieldRecord) -> tuple[str, ...]:
+    if record.source_path == "sentinel/normalization-entity-device.md" and record.name in {"Dvc", "Src", "Dst"}:
+        return ()
+    names = [record.name]
+    for prefix in SUPPORTING_ENTITY_PREFIXES.get(record.source_path, ()):
+        name = prefixed_supporting_field_name(record.source_path, prefix, record.name)
+        if name and name not in names:
+            names.append(name)
+    return tuple(names)
+
+
+def supporting_field_records_by_name(sources: Iterable[RawDoc]) -> dict[str, tuple[FieldRecord, ...]]:
+    records: dict[str, list[FieldRecord]] = defaultdict(list)
+    for source in sources:
+        for record in parse_fields(source):
+            for name in supporting_field_name_variants(record):
+                records[name].append(replace(record, name=name))
+    return {name: tuple(values) for name, values in records.items()}
+
+
+def field_record_identity(record: FieldRecord) -> tuple[object, ...]:
+    return (
+        record.name,
+        record.field_class,
+        record.field_type,
+        record.description,
+        record.aliases,
+        record.examples,
+        record.notes,
+        record.source_section,
+        record.source_path,
+    )
+
+
+def augment_schema_fields(
+    fields: tuple[FieldRecord, ...],
+    supporting_records: dict[str, tuple[FieldRecord, ...]],
+) -> tuple[FieldRecord, ...]:
+    schema_field_names = {record.name for record in fields}
+    augmented = list(fields)
+    seen = {field_record_identity(record) for record in augmented}
+    for name in sorted(schema_field_names, key=stable_name_key):
+        for record in supporting_records.get(name, ()):
+            identity = field_record_identity(record)
+            if identity in seen:
+                continue
+            augmented.append(record)
+            seen.add(identity)
+    return tuple(augmented)
+
+
 def extract_overview(source: RawDoc) -> str:
     lines = source.text.splitlines()
     if lines and lines[0].strip() == "---":
@@ -589,11 +671,12 @@ def build_reference(
     supporting_sources: tuple[RawDoc, ...],
 ) -> AsimReference:
     catalog_entries = parse_schema_catalog(catalog)
+    supporting_records = supporting_field_records_by_name(supporting_sources)
     schemas = tuple(
         SchemaDoc(
             catalog=entry,
             source=schema_sources[entry.path],
-            fields=parse_fields(schema_sources[entry.path]),
+            fields=augment_schema_fields(parse_fields(schema_sources[entry.path]), supporting_records),
             overview=extract_overview(schema_sources[entry.path]),
         )
         for entry in catalog_entries
@@ -672,7 +755,7 @@ def clean_data_text(value: str) -> str:
 def clean_description_text(record: FieldRecord) -> str:
     description = record.description
     if record.examples:
-        description = re.sub(r"\s*Example[s]?\s*:\s*.+?(?=\n|$)", "", description, flags=re.IGNORECASE)
+        description = re.sub(r"\s*(?:For\s+)?Example[s]?\s*:\s*.+?(?=\n|$)", "", description, flags=re.IGNORECASE)
     description = clean_data_text(description)
     if is_generic_common_description(description):
         return ""
@@ -680,7 +763,7 @@ def clean_description_text(record: FieldRecord) -> str:
 
 
 def clean_notes_text(value: str) -> str:
-    value = re.sub(r"\s*Example[s]?\s*:\s*.+?(?=\n|$)", "", value, flags=re.IGNORECASE)
+    value = re.sub(r"\s*(?:For\s+)?Example[s]?\s*:\s*.+?(?=\n|$)", "", value, flags=re.IGNORECASE)
     return clean_data_text(value)
 
 
@@ -698,7 +781,12 @@ def first_unique(values: Iterable[str]) -> list[str]:
 
 
 def strongest_field_class(records: Iterable[FieldRecord]) -> str:
-    classes = [record.field_class for record in records if record.field_class]
+    records = tuple(records)
+    classes = [
+        record.field_class
+        for record in records
+        if record.field_class and record.source_path not in SUPPORTING_SOURCE_PATHS
+    ] or [record.field_class for record in records if record.field_class]
     if not classes:
         return ""
     return min(classes, key=lambda item: (FIELD_CLASS_ORDER.get(item.casefold(), 99), item.casefold()))
@@ -896,6 +984,7 @@ def extract_allowed_values(description: str) -> list[str]:
     trigger = re.compile(
         r"(?:"
         r"(?:allowed|supported|possible)(?:\s+and\s+supported)?\s+values?\s+(?:are|include|includes)"
+        r"|(?:the\s+)?list\s+of\s+(?:allowed|supported|possible)\s+values?\s+is"
         r"|support(?:ed)?\s+sources\s+include"
         r"|the\s+value\s+is\s+either"
         r")",

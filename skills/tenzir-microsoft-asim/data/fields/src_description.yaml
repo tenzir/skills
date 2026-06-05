@@ -1,52 +1,52 @@
 name: SrcDescription
-summary: A descriptive text associated with the device. For
+summary: A descriptive text associated with the device.
 schemas:
 - name: AuditEvent
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: Authentication
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: DhcpEvent
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: Dns
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: FileEvent
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: NetworkSession
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: UserManagement
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller

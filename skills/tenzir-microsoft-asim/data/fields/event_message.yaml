@@ -9,30 +9,50 @@ schemas:
 - name: AuditEvent
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: Authentication
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: DhcpEvent
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: Dns
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: FileEvent
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: NetworkSession
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: ProcessEvent
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: RegistryEvent
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: UserManagement
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: WebSession
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.

@@ -8,6 +8,7 @@ schemas:
   description: The name of the application to which event applies, including a service, a URL, or a SaaS application.
   examples:
   - Exchange 365
+  - Facebook
 - name: Authentication
   role: target
   class: Optional
@@ -15,6 +16,7 @@ schemas:
   description: The name of the application to which the authorization is required, including a service, a URL, or a SaaS application.
   examples:
   - Saleforce
+  - Facebook
 - name: FileEvent
   role: target
   class: Optional

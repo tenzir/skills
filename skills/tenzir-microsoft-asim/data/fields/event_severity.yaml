@@ -1,24 +1,36 @@
 name: EventSeverity
-summary: If the source device does not provide an event severity, EventSeverity should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventSeverity should be Low. Otherwise, EventSeverity should be Informational.
+summary: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 schemas:
 - name: AlertEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: AuditEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: Authentication
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: DhcpEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: Dns
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: FileEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: NetworkSession
   role: common
   class: Recommended
@@ -27,9 +39,13 @@ schemas:
 - name: ProcessEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: RegistryEvent
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'
 - name: UserManagement
   role: common
   class: Mandatory
@@ -38,3 +54,5 @@ schemas:
 - name: WebSession
   role: common
   class: Recommended
+  type: Enumerated
+  description: 'The severity of the event. Valid values are: Informational, Low, Medium, or High.'

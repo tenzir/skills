@@ -8,6 +8,12 @@ fields:
 - name: Dvc
   role: device
   class: Mandatory
+  type: String
+  to:
+  - DvcFQDN
+  - DvcHostname
+  - DvcId
+  - DvcIpAddr
   description: For Network Session events, device fields refer to the system reporting the Network Session event.
 - name: EventCount
   role: common
@@ -17,14 +23,24 @@ fields:
 - name: EventEndTime
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: EventProduct
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: EventResult
   role: common
   class: Mandatory
   type: Enumerated
   description: If the source device does not provide an event result, EventResult should be based on the value of DvcAction. If DvcAction is Deny, Drop, Drop ICMP, Reset, Reset Source, or Reset Destination , EventResult should be Failure. Otherwise, EventResult should be Success.
+  examples:
+  - Success
 - name: EventSchema
   role: common
   class: Mandatory
@@ -40,6 +56,10 @@ fields:
 - name: EventStartTime
   role: common
   class: Mandatory
+  type: Date/time
+  to:
+  - TimeGenerated
+  description: The time when the event started. If the source supports aggregation and the record represents multiple events, the time that the first event was generated. If not provided by the source record, this field aliases the TimeGenerated field.
 - name: EventType
   role: common
   class: Mandatory
@@ -54,6 +74,10 @@ fields:
 - name: EventVendor
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: ASimMatchingHostname
   role: common
   class: Recommended
@@ -94,6 +118,7 @@ fields:
   description: The IP address of the connection or session destination. If the session uses network address translation, DstIpAddr is the publicly visible address, and not the original address of the source, which is stored in DstNatIpAddr
   examples:
   - 2001:db8::ff00:42:8329
+  - 45.21.42.12
   notes: This value is mandatory if DstHostname is specified.
 - name: DvcAction
   role: device
@@ -113,28 +138,70 @@ fields:
   description: 'The action taken on the network session. Supported values are: - Allow - Deny - Drop - Drop ICMP - Reset - Reset Source - Reset Destination - Encrypt - Decrypt - VPNroute'
   examples:
   - drop
+  - Blocked
   notes: The value might be provided in the source record by using different terms, which should be normalized to these values. The original value should be stored in the DvcOriginalAction field.
 - name: DvcDomain
   role: device
   class: Recommended
+  type: Domain (String)
+  description: The domain of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso
 - name: DvcDomainType
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcDomain field is used
+  description: The type of DvcDomain. For a list of allowed values and further information, refer to DomainType.
+  notes: This field is required if the DvcDomain field is used.
 - name: DvcFQDN
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: DvcHostname
   role: device
   class: Recommended
+  type: Hostname
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - ContosoDc
 - name: DvcId
   role: device
   class: Recommended
+  type: String
+  description: The unique ID of the device on which the event occurred or which reported the event, depending on the schema. If multiple IDs are available, use the first one from the list, and store the others by using the field names DvcAzureResourceId, DvcMDEid, etc.
+  examples:
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: DvcIdType
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: DvcIpAddr
   role: device
   class: Recommended
+  type: IP address
+  description: The IP address of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - 45.21.42.12
 - name: EventResultDetails
   role: common
   class: Recommended
@@ -153,6 +220,8 @@ fields:
   - Unknown
   - NA
   description: 'Reason or details for the result reported in the EventResult field. Supported values are: - Failover - Invalid TCP - Invalid Tunnel - Maximum Retry - Reset - Routing issue - Simulation - Terminated - Timeout - Transient error - Unknown - NA. The original, source specific, value is stored in the EventOriginalResultDetails field.'
+  examples:
+  - NXDOMAIN
 - name: EventSeverity
   role: common
   class: Recommended
@@ -161,6 +230,8 @@ fields:
 - name: EventUid
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: SrcBytes
   role: source
   class: Recommended
@@ -191,6 +262,7 @@ fields:
   description: The IP address from which the connection or session originated. This value is mandatory if SrcHostname is specified. If the session uses network address translation, SrcIpAddr is the publicly visible address, and not the original address of the source, which is stored in SrcNatIpAddr
   examples:
   - 77.138.103.108
+  - 45.21.42.12
 - name: DstDomainType
   role: destination
   class: Conditional
@@ -255,6 +327,8 @@ fields:
 - name: AdditionalFields
   role: common
   class: Optional
+  type: Dynamic
+  description: If your source provides additional information worth preserving, either keep it with the original field names or create the dynamic AdditionalFields field, and add the extra information as key/value pairs.
 - name: DstAppId
   role: destination
   class: Optional
@@ -280,7 +354,7 @@ fields:
   role: destination
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: DstDeviceType
@@ -295,6 +369,7 @@ fields:
   description: The ID of the destination device. If multiple IDs are available, use the most important one, and store the others in the fields DstDvc.
   examples:
   - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: DstDvcScope
   role: destination
   class: Optional
@@ -369,6 +444,7 @@ fields:
   description: The MAC address of the network interface used for the connection or session by the destination device.
   examples:
   - 06:10:9f:eb:8f:14
+  - 00:1B:44:11:3A:B7
 - name: DstNatIpAddr
   role: destination
   class: Optional
@@ -409,6 +485,7 @@ fields:
   description: A generated unique identifier (GUID) of the process that terminated the network session.
   examples:
   - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+  - 01234567-89AB-CDEF-0123-456789ABCDEF
 - name: DstProcessId
   role: destination
   class: Optional
@@ -471,6 +548,10 @@ fields:
 - name: DvcDescription
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: DvcInboundInterface
   role: device
   class: Optional
@@ -481,6 +562,7 @@ fields:
 - name: DvcInterface
   role: device
   class: Optional
+  type: String
   to:
   - DvcInboundInterface
   - DvcOutboundInterface
@@ -488,15 +570,29 @@ fields:
 - name: DvcMacAddr
   role: device
   class: Optional
+  type: MAC address
+  description: The MAC address of the device on which the event occurred or which reported the event.
+  examples:
+  - 00:1B:44:11:3A:B7
 - name: DvcOriginalAction
   role: device
   class: Optional
+  type: String
+  description: The original DvcAction as provided by the reporting device.
 - name: DvcOs
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: DvcOsVersion
   role: device
   class: Optional
+  type: String
+  description: The version of the operating system on the device on which the event occurred or which reported the event.
+  examples:
+  - '10'
 - name: DvcOutboundInterface
   role: device
   class: Optional
@@ -507,39 +603,73 @@ fields:
 - name: DvcScope
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. DvcScope map to a subscription ID on Azure and to an account ID on AWS.
 - name: DvcScopeId
   role: device
   class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
 - name: DvcZone
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: EventMessage
   role: common
   class: Optional
+  type: String
+  description: A general message or description, either included in or generated from the record.
 - name: EventOriginalResultDetails
   role: common
   class: Optional
+  type: String
+  description: The original result details provided by the source. This value is used to derive EventResultDetails, which should have only one of the values documented for each schema.
 - name: EventOriginalSeverity
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: EventOriginalSubType
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: EventOriginalType
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: EventOriginalUid
   role: common
   class: Optional
+  type: String
+  description: A unique ID of the original record, if provided by the source.
+  examples:
+  - 69f37748-ddcd-4331-bf0f-b137f1ea83b
 - name: EventOwner
   role: common
   class: Optional
+  type: String
+  description: The owner of the event, which is usually the department or subsidiary in which it was generated.
 - name: EventProductVersion
   role: common
   class: Optional
+  type: String
+  description: The version of the product generating the event.
+  examples:
+  - '12.1'
 - name: EventReportUrl
   role: common
   class: Optional
+  type: URL (String)
+  description: A URL provided in the event for a resource that provides more information about the event.
 - name: EventSubType
   role: common
   class: Optional
@@ -653,6 +783,7 @@ fields:
   description: The name of the source application.
   examples:
   - filezilla.exe
+  - Facebook
 - name: SrcAppType
   role: source
   class: Optional
@@ -664,7 +795,7 @@ fields:
   role: source
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: SrcDeviceType
@@ -679,6 +810,7 @@ fields:
   description: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
   examples:
   - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+  - 41502da5-21b7-48ec-81c9-baeea8d7d669
 - name: SrcDvcScope
   role: source
   class: Optional
@@ -753,6 +885,7 @@ fields:
   description: The MAC address of the network interface from which the connection or session originated.
   examples:
   - 06:10:9f:eb:8f:14
+  - 00:1B:44:11:3A:B7
 - name: SrcNatIpAddr
   role: source
   class: Optional
@@ -793,6 +926,7 @@ fields:
   description: A generated unique identifier (GUID) of the process that initiated the network session.
   examples:
   - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+  - 01234567-89AB-CDEF-0123-456789ABCDEF
 - name: SrcProcessId
   role: source
   class: Optional
@@ -852,6 +986,7 @@ fields:
   description: The network zone of the source, as defined by the reporting device.
   examples:
   - Internet
+  - Dmz
 - name: TcpFlagsAck
   role: network
   class: Optional
@@ -977,6 +1112,7 @@ fields:
 - name: Hostname
   role: device
   class: Alias
+  type: Hostname
   to:
   - DstHostname
   - RemoteHostname
@@ -990,11 +1126,14 @@ fields:
 - name: IpAddr
   role: network
   class: Alias
+  type: IP address
   to:
   - DstIpAddr
   - LocalIpAddr
   - SrcIpAddr
   resolution: '- If the event type is NetworkSession, Flow or L2NetworkSession, IpAddr is an alias to SrcIpAddr. - If the event type is EndpointNetworkSession, IpAddr is an alias to LocalIpAddr, which can alias either SrcIpAddr or DstIpAddr, depending on NetworkDirection.'
+  examples:
+  - 45.21.42.12
 - name: OuterVlanId
   role: network
   class: Alias
@@ -1005,6 +1144,7 @@ fields:
   class: Alias
   to:
   - DstProcessName
+  - ProcessName
   examples:
   - C:\Windows\System32\rundll32.exe
 - name: Rule

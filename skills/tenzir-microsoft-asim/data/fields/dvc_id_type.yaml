@@ -1,35 +1,201 @@
 name: DvcIdType
+summary: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
 schemas:
 - name: AlertEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: AuditEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: Authentication
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: Dns
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: FileEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: NetworkSession
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: UserManagement
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.
 - name: WebSession
   role: device
   class: Recommended
+  type: Enumerated
+  required_if:
+  - the DvcId field is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  - MD4IoTid
+  - VMConnectionId
+  - AwsVpcId
+  - VectraId
+  - AppGateId
+  - FQDN
+  - Other
+  description: The type of DvcId. The list of allowed values is AzureResourceId, MDEid, MD4IoTid, VMConnectionId, AwsVpcId, VectraId, AppGateId, FQDN, and Other. Using FQDN as a device ID, implies reusing the hostname. Use it only as a last resort.
+  notes: This field is required if the DvcId field is used.

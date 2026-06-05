@@ -10,6 +10,6 @@ schemas:
   role: registry
   class: Recommended
   type: String
-  description: The registry value associated with the operation. Registry values are similar to files in file systems. For
+  description: The registry value associated with the operation. Registry values are similar to files in file systems.
   examples:
   - Path

@@ -1,38 +1,87 @@
 name: EventVendor
+summary: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
 schemas:
 - name: AgentEvent
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: AlertEvent
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: AuditEvent
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: Authentication
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: DhcpEvent
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: Dns
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: FileEvent
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: NetworkSession
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: ProcessEvent
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: RegistryEvent
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: UserManagement
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft
 - name: WebSession
   role: common
   class: Mandatory
+  type: String
+  description: The vendor of the product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Microsoft

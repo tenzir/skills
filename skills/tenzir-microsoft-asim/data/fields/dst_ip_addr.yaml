@@ -8,6 +8,7 @@ schemas:
   description: The IP address of the server that received the DNS request. For a regular DNS request, this value would typically be the reporting device, and in most cases set to 127.0.0.1.
   examples:
   - 127.0.0.1
+  - 45.21.42.12
 - name: NetworkSession
   role: destination
   class: Recommended
@@ -17,4 +18,5 @@ schemas:
   description: The IP address of the connection or session destination. If the session uses network address translation, DstIpAddr is the publicly visible address, and not the original address of the source, which is stored in DstNatIpAddr
   examples:
   - 2001:db8::ff00:42:8329
+  - 45.21.42.12
   notes: This value is mandatory if DstHostname is specified.

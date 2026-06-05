@@ -1,8 +1,9 @@
 name: Process
-summary: Process is an alias for ActingProcessName, DstProcessName, SrcProcessName, TargetProcessName.
+summary: Process is an alias for ActingProcessName, DstProcessName, ProcessName, SrcProcessName, TargetProcessName.
 to:
 - ActingProcessName
 - DstProcessName
+- ProcessName
 - SrcProcessName
 - TargetProcessName
 schemas:
@@ -10,6 +11,7 @@ schemas:
   role: process
   class: Alias
   to:
+  - ProcessName
   - SrcProcessName
   examples:
   - C:\Windows\System32\rundll32.exe
@@ -18,17 +20,22 @@ schemas:
   class: Alias
   to:
   - ActingProcessName
+  - ProcessName
+  examples:
+  - C:\Windows\System32\rundll32.exe
 - name: NetworkSession
   role: process
   class: Alias
   to:
   - DstProcessName
+  - ProcessName
   examples:
   - C:\Windows\System32\rundll32.exe
 - name: ProcessEvent
   role: process
   class: Alias
   to:
+  - ProcessName
   - TargetProcessName
   examples:
   - C:\Windows\System32\rundll32.exe
@@ -37,5 +44,6 @@ schemas:
   class: Alias
   to:
   - ActingProcessName
+  - ProcessName
   examples:
   - C:\Windows\System32\rundll32.exe

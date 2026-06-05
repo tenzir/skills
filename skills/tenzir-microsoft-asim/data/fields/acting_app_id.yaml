@@ -1,36 +1,42 @@
 name: ActingAppId
-summary: The ID of the application that initiated the activity reported, including a process, browser, or service. For
+summary: The ID of the application that initiated the activity reported, including a process, browser, or service.
 schemas:
 - name: AgentEvent
   role: acting
   class: Optional
   type: String
-  description: The ID of the application that initiated the activity reported, including a process, browser, or service. For
+  description: The ID of the application that initiated the activity reported, including a process, browser, or service.
   examples:
   - '0x12ae8'
+  - '124'
 - name: AuditEvent
   role: acting
   class: Optional
   type: String
-  description: The ID of the application that initiated the activity reported, including a process, browser, or service. For
+  description: The ID of the application that initiated the activity reported, including a process, browser, or service.
   examples:
   - '0x12ae8'
+  - '124'
 - name: Authentication
   role: acting
   class: Optional
   type: String
-  description: The ID of the application authorizing on behalf of the actor, including a process, browser, or service. For
+  description: The ID of the application authorizing on behalf of the actor, including a process, browser, or service.
   examples:
   - '0x12ae8'
+  - '124'
 - name: FileEvent
   role: acting
   class: Optional
   type: String
   description: The ID of the acting application, as reported by the reporting device.
+  examples:
+  - '124'
 - name: UserManagement
   role: acting
   class: Optional
   type: String
-  description: The ID of the application used by the actor to perform the activity, including a process, browser, or service. For
+  description: The ID of the application used by the actor to perform the activity, including a process, browser, or service.
   examples:
   - '0x12ae8'
+  - '124'

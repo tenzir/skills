@@ -1,35 +1,80 @@
 name: DvcZone
+summary: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: AuditEvent
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: Authentication
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: DhcpEvent
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: Dns
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: FileEvent
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: NetworkSession
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: ProcessEvent
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: RegistryEvent
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: UserManagement
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz
 - name: WebSession
   role: device
   class: Optional
+  type: String
+  description: The network on which the event occurred or which reported the event, depending on the schema. The zone is defined by the reporting device.
+  examples:
+  - Dmz

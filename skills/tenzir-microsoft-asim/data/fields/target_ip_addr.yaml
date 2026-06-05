@@ -8,6 +8,7 @@ schemas:
   description: The IP address of the target device.
   examples:
   - 2.2.2.2
+  - 45.21.42.12
 - name: Authentication
   role: target
   class: Optional
@@ -15,3 +16,4 @@ schemas:
   description: The IP address of the target device.
   examples:
   - 2.2.2.2
+  - 45.21.42.12

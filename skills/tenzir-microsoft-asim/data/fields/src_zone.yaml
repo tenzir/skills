@@ -8,3 +8,4 @@ schemas:
   description: The network zone of the source, as defined by the reporting device.
   examples:
   - Internet
+  - Dmz

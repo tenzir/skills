@@ -6,36 +6,82 @@ schemas:
   class: Optional
   type: String
   description: Describes the operation called by the agent that initiated the event. Because this is an evolving space where agents can perform a vast number of actions, we have not enforced a set of enumerations for EventType.
+  examples:
+  - '4624'
 - name: AlertEvent
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: AuditEvent
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: Authentication
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: DhcpEvent
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: Dns
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: FileEvent
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: NetworkSession
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: ProcessEvent
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: RegistryEvent
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: UserManagement
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'
 - name: WebSession
   role: common
   class: Optional
+  type: String
+  description: The original event type or ID, if provided by the source. For example, this field is used to store the original Windows event ID. This value is used to derive EventType, which should have only one of the values documented for each schema.
+  examples:
+  - '4624'

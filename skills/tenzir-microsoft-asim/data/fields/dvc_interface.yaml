@@ -1,5 +1,5 @@
 name: DvcInterface
-summary: The DvcInterface field should alias either the DvcInboundInterface or the DvcOutboundInterface fields.
+summary: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 to:
 - DvcInboundInterface
 - DvcOutboundInterface
@@ -7,24 +7,37 @@ schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: AuditEvent
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: Authentication
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: DhcpEvent
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: Dns
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: FileEvent
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: NetworkSession
   role: device
   class: Optional
+  type: String
   to:
   - DvcInboundInterface
   - DvcOutboundInterface
@@ -32,12 +45,20 @@ schemas:
 - name: ProcessEvent
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: RegistryEvent
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: UserManagement
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.
 - name: WebSession
   role: device
   class: Optional
+  type: String
+  description: The network interface on which data was captured. This field is typically relevant to network related activity, which is captured by an intermediate or tap device.

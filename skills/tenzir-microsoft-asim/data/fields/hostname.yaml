@@ -10,21 +10,25 @@ schemas:
 - name: AlertEvent
   role: device
   class: Alias
+  type: Hostname
   to:
   - DvcHostname
 - name: DhcpEvent
   role: device
   class: Alias
+  type: Hostname
   to:
   - SrcHostname
 - name: Dns
   role: device
   class: Alias
+  type: Hostname
   to:
   - SrcHostname
 - name: NetworkSession
   role: device
   class: Alias
+  type: Hostname
   to:
   - DstHostname
   - RemoteHostname
@@ -33,5 +37,6 @@ schemas:
 - name: UserManagement
   role: device
   class: Alias
+  type: Hostname
   to:
   - DvcHostname

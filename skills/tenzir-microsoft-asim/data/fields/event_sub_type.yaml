@@ -32,6 +32,8 @@ schemas:
 - name: DhcpEvent
   role: common
   class: Optional
+  type: Enumerated
+  description: Describes a subdivision of the operation reported in the EventType field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalSubType field.
 - name: Dns
   role: common
   class: Optional
@@ -53,9 +55,13 @@ schemas:
 - name: ProcessEvent
   role: common
   class: Optional
+  type: Enumerated
+  description: Describes a subdivision of the operation reported in the EventType field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalSubType field.
 - name: RegistryEvent
   role: common
   class: Optional
+  type: Enumerated
+  description: Describes a subdivision of the operation reported in the EventType field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalSubType field.
 - name: UserManagement
   role: common
   class: Optional
@@ -64,3 +70,5 @@ schemas:
 - name: WebSession
   role: common
   class: Optional
+  type: Enumerated
+  description: Describes a subdivision of the operation reported in the EventType field. Each schema documents the list of values valid for this field. The original, source specific, value is stored in the EventOriginalSubType field.

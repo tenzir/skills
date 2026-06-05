@@ -8,3 +8,4 @@ schemas:
   description: The OS of the source device.
   examples:
   - Windows 10
+  - Windows

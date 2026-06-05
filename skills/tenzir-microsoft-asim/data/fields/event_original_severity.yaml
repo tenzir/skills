@@ -1,35 +1,58 @@
 name: EventOriginalSeverity
+summary: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 schemas:
 - name: AlertEvent
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: AuditEvent
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: Authentication
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: DhcpEvent
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: Dns
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: FileEvent
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: NetworkSession
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: ProcessEvent
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: RegistryEvent
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: UserManagement
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.
 - name: WebSession
   role: common
   class: Optional
+  type: String
+  description: The original severity as provided by the reporting device. This value is used to derive EventSeverity.

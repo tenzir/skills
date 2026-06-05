@@ -1,35 +1,80 @@
 name: DvcDescription
+summary: A descriptive text associated with the device.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: AuditEvent
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: Authentication
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: DhcpEvent
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: Dns
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: FileEvent
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: NetworkSession
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: ProcessEvent
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: RegistryEvent
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: UserManagement
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller
 - name: WebSession
   role: device
   class: Optional
+  type: String
+  description: A descriptive text associated with the device.
+  examples:
+  - Primary Domain Controller

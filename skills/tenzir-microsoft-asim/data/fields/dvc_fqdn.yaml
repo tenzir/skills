@@ -1,35 +1,91 @@
 name: DvcFQDN
+summary: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
 schemas:
 - name: AlertEvent
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: AuditEvent
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: Authentication
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: DhcpEvent
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: Dns
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: FileEvent
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: NetworkSession
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: ProcessEvent
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: RegistryEvent
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: UserManagement
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.
 - name: WebSession
   role: device
   class: Recommended
+  type: FQDN (String)
+  description: The hostname of the device on which the event occurred or which reported the event, depending on the schema.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DvcDomainType field reflects the format used.

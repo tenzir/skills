@@ -1,17 +1,17 @@
 name: DstDescription
-summary: A descriptive text associated with the device. For
+summary: A descriptive text associated with the device.
 schemas:
 - name: Dns
   role: destination
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller
 - name: NetworkSession
   role: destination
   class: Optional
   type: String
-  description: A descriptive text associated with the device. For
+  description: A descriptive text associated with the device.
   examples:
   - Primary Domain Controller

@@ -1,35 +1,80 @@
 name: EventOriginalSubType
+summary: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
 schemas:
 - name: AlertEvent
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: AuditEvent
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: Authentication
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: DhcpEvent
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: Dns
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: FileEvent
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: NetworkSession
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: ProcessEvent
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: RegistryEvent
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: UserManagement
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'
 - name: WebSession
   role: common
   class: Optional
+  type: String
+  description: The original event subtype or ID, if provided by the source. For example, this field is used to store the original Windows logon type. This value is used to derive EventSubType, which should have only one of the values documented for each schema.
+  examples:
+  - '2'

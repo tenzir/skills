@@ -1,38 +1,87 @@
 name: EventProduct
+summary: The product generating the event. The value should be one of the values listed in Vendors and Products.
 schemas:
 - name: AgentEvent
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: AlertEvent
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: AuditEvent
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: Authentication
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: DhcpEvent
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: Dns
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: FileEvent
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: NetworkSession
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: ProcessEvent
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: RegistryEvent
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: UserManagement
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon
 - name: WebSession
   role: common
   class: Mandatory
+  type: String
+  description: The product generating the event. The value should be one of the values listed in Vendors and Products.
+  examples:
+  - Sysmon

@@ -1,9 +1,11 @@
 name: EventUid
-summary: A machine-readable, alphanumeric string that uniquely identifies an alert within a system. e.g. A1bC2dE3fH4iJ5kL6mN7oP8qR9s
+summary: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 schemas:
 - name: AgentEvent
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: AlertEvent
   role: common
   class: Mandatory
@@ -12,30 +14,50 @@ schemas:
 - name: AuditEvent
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: Authentication
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: DhcpEvent
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: Dns
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: FileEvent
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: NetworkSession
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: ProcessEvent
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: RegistryEvent
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: UserManagement
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.
 - name: WebSession
   role: common
   class: Recommended
+  type: String
+  description: The unique ID of the record, as assigned by Microsoft Sentinel. This field is typically mapped to the _ItemId Log Analytics field.

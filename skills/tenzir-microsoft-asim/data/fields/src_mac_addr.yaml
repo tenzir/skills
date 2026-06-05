@@ -8,6 +8,7 @@ schemas:
   description: The MAC address of the client requesting a DHCP lease.
   examples:
   - 06:10:9f:eb:8f:14
+  - 00:1B:44:11:3A:B7
   notes: The Windows DHCP server logs MAC address in a nonstandard way, omitting the colons, which should be inserted by the parser.
 - name: NetworkSession
   role: source
@@ -16,6 +17,7 @@ schemas:
   description: The MAC address of the network interface from which the connection or session originated.
   examples:
   - 06:10:9f:eb:8f:14
+  - 00:1B:44:11:3A:B7
 - name: UserManagement
   role: source
   class: Optional
@@ -23,3 +25,4 @@ schemas:
   description: The MAC address of the network interface from which the connection or session originated.
   examples:
   - 06:10:9f:eb:8f:14
+  - 00:1B:44:11:3A:B7

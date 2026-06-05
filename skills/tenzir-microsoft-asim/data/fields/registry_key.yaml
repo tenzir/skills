@@ -10,6 +10,6 @@ schemas:
   role: registry
   class: Mandatory
   type: String
-  description: The registry key associated with the operation, normalized to standard root key naming conventions. For more information, see Root Keys. Registry keys are similar to folders in file systems. For
+  description: The registry key associated with the operation, normalized to standard root key naming conventions. For more information, see Root Keys. Registry keys are similar to folders in file systems.
   examples:
   - HKEY_LOCAL_MACHINE\SOFTWARE\MTG

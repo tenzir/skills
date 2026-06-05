@@ -1,11 +1,11 @@
 name: TargetUserType
-summary: The type of the Target user. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+summary: The type of the Target user. For more information, and list of allowed values, see UserType in the Schema Overview article.
 schemas:
 - name: Authentication
   role: target
   class: Optional
   type: UserType
-  description: The type of the Target user. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  description: The type of the Target user. For more information, and list of allowed values, see UserType in the Schema Overview article.
   examples:
   - Member
 - name: ProcessEvent

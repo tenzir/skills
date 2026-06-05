@@ -1,35 +1,80 @@
 name: DvcOs
+summary: The operating system running on the device on which the event occurred or which reported the event.
 schemas:
 - name: AlertEvent
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: AuditEvent
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: Authentication
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: DhcpEvent
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: Dns
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: FileEvent
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: NetworkSession
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: ProcessEvent
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: RegistryEvent
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: UserManagement
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows
 - name: WebSession
   role: device
   class: Optional
+  type: String
+  description: The operating system running on the device on which the event occurred or which reported the event.
+  examples:
+  - Windows

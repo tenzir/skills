@@ -1,18 +1,18 @@
 name: ActorUserType
-summary: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+summary: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article.
 schemas:
 - name: AuditEvent
   role: actor
   class: Optional
   type: UserType
-  description: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  description: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article.
   examples:
   - Guest
 - name: Authentication
   role: actor
   class: Optional
   type: UserType
-  description: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  description: The type of the Actor. For more information, and list of allowed values, see UserType in the Schema Overview article.
   examples:
   - Guest
 - name: FileEvent

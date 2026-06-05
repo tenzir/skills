@@ -1,27 +1,41 @@
 name: EventCount
-summary: Netflow sources support aggregation, and the EventCount field should be set to the value of the Netflow FLOWS field. For other sources, the value is typically set to 1.
+summary: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 schemas:
 - name: AgentEvent
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: AlertEvent
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: AuditEvent
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: Authentication
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: DhcpEvent
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: Dns
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: FileEvent
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: NetworkSession
   role: common
   class: Mandatory
@@ -30,12 +44,20 @@ schemas:
 - name: ProcessEvent
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: RegistryEvent
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: UserManagement
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.
 - name: WebSession
   role: common
   class: Mandatory
+  type: Integer
+  description: The number of events described by the record. This value is used when the source supports aggregation, and a single record might represent multiple events. For other sources, set to 1.

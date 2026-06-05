@@ -1,27 +1,30 @@
 name: ActingAppName
-summary: The name of the application that initiated the activity reported, including a service, a URL, or a SaaS application. For
+summary: The name of the application that initiated the activity reported, including a service, a URL, or a SaaS application.
 schemas:
 - name: AgentEvent
   role: acting
   class: Optional
   type: String
-  description: The name of the application that initiated the activity reported, including a service, a URL, or a SaaS application. For
+  description: The name of the application that initiated the activity reported, including a service, a URL, or a SaaS application.
   examples:
   - C:\Windows\System32\svchost.exe
+  - Facebook
 - name: AuditEvent
   role: acting
   class: Optional
   type: String
-  description: The name of the application that initiated the activity reported, including a service, a URL, or a SaaS application. For
+  description: The name of the application that initiated the activity reported, including a service, a URL, or a SaaS application.
   examples:
   - C:\Windows\System32\svchost.exe
+  - Facebook
 - name: Authentication
   role: acting
   class: Optional
   type: String
-  description: The name of the application authorizing on behalf of the actor, including a process, browser, or service. For
+  description: The name of the application authorizing on behalf of the actor, including a process, browser, or service.
   examples:
   - C:\Windows\System32\svchost.exe
+  - Facebook
 - name: FileEvent
   role: acting
   class: Optional
@@ -33,6 +36,7 @@ schemas:
   role: acting
   class: Optional
   type: String
-  description: The name of the application used by the actor to perform the activity, including a process, browser, or service. For
+  description: The name of the application used by the actor to perform the activity, including a process, browser, or service.
   examples:
   - C:\Windows\System32\svchost.exe
+  - Facebook

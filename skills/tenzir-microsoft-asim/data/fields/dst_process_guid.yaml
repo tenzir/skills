@@ -8,3 +8,4 @@ schemas:
   description: A generated unique identifier (GUID) of the process that terminated the network session.
   examples:
   - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+  - 01234567-89AB-CDEF-0123-456789ABCDEF
