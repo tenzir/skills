@@ -157,6 +157,16 @@ If the current change completes, corrects, or extends a change that is already
 documented there, merge it into that unreleased entry instead of creating a
 duplicate.
 
+Only merge when the relationship is clear from the user-facing outcome. A
+related entry should describe the same feature, bug, behavior change, or
+release workflow from the user's perspective. Similar file paths, nearby
+implementation work, shared authors, or adjacent PR timing are not enough.
+
+If the relationship is ambiguous, create a separate entry. Do not delete,
+rewrite, or collapse unrelated unreleased entries while adding a changelog
+entry. When merging is appropriate, edit only the related entry being merged
+into; leave all other unreleased files intact.
+
 When merging into an unreleased entry:
 
 - Reconcile the title, type, and description so they describe the combined
