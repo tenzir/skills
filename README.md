@@ -17,7 +17,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 | Skill                          | Description                                                                      |
 | ------------------------------ | -------------------------------------------------------------------------------- |
 | `tenzir-docs`                  | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
-| `tenzir-manage-packages`       | Manage Tenzir packages across manifests, UDOs, tests, examples, and pipelines    |
+| `tenzir-manage-packages`       | Package lifecycle routing for manifests, UDOs, pipelines, tests, and mappings    |
 
 ### 🏗️ Tenzir Contributors
 

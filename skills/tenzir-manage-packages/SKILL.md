@@ -1,29 +1,37 @@
 ---
 name: tenzir-manage-packages
 description: >-
-  Manage library-quality Tenzir packages across the full lifecycle: add new
-  packages, inspect, update, extend, refactor, deprecate, or remove package
-  manifests, user-defined operators, tests, examples, disabled-by-default
-  pipelines, inputs, contexts, and optional OCSF mappings. Use whenever the
-  user wants to build, scaffold, package, parse, normalize, enrich, export, map
-  to OCSF, audit package structure, maintain an existing package, or add
+  Manage Tenzir packages across the full lifecycle: add new packages, inspect
+  existing packages, update manifests, extend or remove package capabilities,
+  refactor user-defined operators, maintain tests and examples, configure
+  inputs and contexts, ship deployable pipelines, publish packages, and map data
+  to schemas such as OCSF, Google UDM, ECS, or ASIM. Use whenever the user wants
+  to build, scaffold, package, parse, normalize, enrich, export, map logs to a
+  schema, audit package structure, maintain a package, update a package, or add
   reusable Tenzir package capabilities, even if they only mention one part such
-  as "build a parser", "add an operator", "update a package", or "map this
-  data to OCSF."
+  as "build a parser", "add an operator", "add UDM mapping", "fix package
+  tests", or "publish this package."
 metadata:
   requires:
     skills:
       - tenzir-docs
+      - tenzir-google-udm
       - tenzir-ocsf
 ---
 
 # Manage Tenzir Packages
 
-Manage a Tenzir package as a complete library-quality unit throughout its
-lifecycle. Package work includes adding new packages, inspecting existing ones,
-adding or changing capabilities, retiring obsolete pieces, and keeping metadata,
-tests, examples, and deployable pipelines consistent. OCSF mapping is one
-optional capability within that package, not a separate workflow.
+Use this skill as the package-lifecycle entry point into the `tenzir-docs`
+skill. The value here is routing: detect what part of a package lifecycle the
+user is working on, load the relevant Tenzir docs guide, and keep the package as
+one coherent artifact while the implementation changes.
+
+Package work can include scaffolding a package, changing a manifest, adding or
+removing UDOs, parsing data, normalizing values, mapping to a target schema,
+adding contexts, wiring deployable pipelines, maintaining examples and tests,
+publishing, or retiring obsolete capabilities. Schema mapping is one package
+capability among others; route schema-specific questions to the right schema
+skill only when the target schema requires it.
 
 ## Workflow
 
@@ -32,16 +40,15 @@ Execute each step in order. Verify the **Results** before moving on.
 ### 1. Understand the package state and intent
 
 Identify the package's vendor, product, audience, and role in the Tenzir
-Library. Decide which user-facing Library categories apply (`sources`,
-`destinations`, `mappings`, `contexts`) and whether the package is a source,
-destination, mapping, enrichment, utility, or a combination of these. For
-existing packages, inspect the current manifest, operators, pipelines, examples,
-tests, changelog, and open work before editing. Inspect similar packages in the
-library before introducing new naming or layout conventions.
+Library. Determine the lifecycle task: add, inspect, update, extend, refactor,
+deprecate, remove, test, publish, or migrate a package capability. Decide which
+user-facing Library categories apply (`sources`, `destinations`, `mappings`,
+`contexts`) and whether the package is a source, destination, mapping,
+enrichment, utility, or a combination of these.
 
-Use the `tenzir-docs` skill for package, TQL, operator, pipeline, context, and
-test guidance. Use the `tenzir-ocsf` skill only when the package includes OCSF
-mapping.
+For existing packages, inspect the current manifest, operators, pipelines,
+examples, tests, changelog, and open work before editing. Inspect similar
+packages in the library before introducing new naming or layout conventions.
 
 **Results:**
 
@@ -51,15 +58,45 @@ mapping.
 - Lifecycle task type: add, inspect, update, extend, refactor, deprecate, or
   remove a package or package capability
 - Installation behavior, including which pipelines should run automatically
-- Decision on whether OCSF mapping is in scope
+- Target schema, destination, context, or integration requirements, when any are
+  in scope
 
-**Resources** (read via `tenzir-docs`):
+### 2. Dispatch to the right docs guides
 
-- `explanations/packages.md`
-- `guides/packages/create-a-package.md`
-- `tutorials/learn-idiomatic-tql.md`
+Use `tenzir-docs` as the primary source for implementation guidance. Read the
+smallest set of pages that covers the task instead of relying on this skill to
+duplicate package documentation.
 
-### 2. Manage the package scaffold
+| Task area | Read via `tenzir-docs` |
+| --- | --- |
+| Package model and design | `explanations/packages.md`, `tutorials/write-a-package.md` |
+| New package or scaffold repair | `guides/packages/create-a-package.md` |
+| Package installation behavior | `guides/packages/install-a-package.md` |
+| Manifest inputs and configuration | `guides/packages/configure-inputs.md` |
+| User-defined operators | `guides/packages/add-operators.md` |
+| Deployable pipelines | `guides/packages/add-pipelines.md` |
+| Package contexts | `guides/packages/add-contexts.md` |
+| Package tests | `guides/packages/test-packages.md`, `guides/testing/run-tests.md`, `guides/testing/write-tests.md` |
+| Changelog and release notes | `guides/packages/maintain-a-changelog.md` |
+| Publishing | `guides/packages/publish-a-package.md` |
+| Parsing raw data | `guides/parsing/parse-delimited-text.md`, `guides/parsing/parse-binary-data.md`, `guides/parsing/parse-string-fields.md` |
+| Data shaping | `guides/transformation/shape-records.md`, `guides/transformation/reshape-complex-data.md` |
+| Normalization workflow | `guides/normalization.md`, `guides/normalization/clean-up-values.md` |
+| OCSF mapping | `guides/normalization/map-to-ocsf.md` |
+| Google UDM mapping | `guides/normalization/map-to-udm.md` |
+| ECS, ASIM, or other schemas | `guides/normalization/map-to-other-schemas.md` |
+| Enrichment and lookup data | `guides/enrichment/work-with-lookup-tables.md`, `guides/enrichment/enrich-with-network-inventory.md`, `guides/enrichment/enrich-with-threat-intel.md` |
+| Collection and destinations | `guides/collecting.md`, `guides/routing/send-to-destinations.md` |
+| Stream routing | `guides/routing/split-and-merge-streams.md`, `guides/routing/fan-out-with-subpipelines.md`, `guides/routing/load-balance-pipelines.md` |
+| Idiomatic TQL | `tutorials/learn-idiomatic-tql.md` |
+
+**Results:**
+
+- Relevant guide paths selected before editing
+- Any schema-specific skill selected only when schema details are needed
+- No copied guide content embedded into package workflow instructions
+
+### 3. Manage package structure as one artifact
 
 Set up or reconcile the package as a complete contribution unit. Keep package
 IDs stable, short, and lowercase. Use the repository's existing package naming
@@ -85,11 +122,12 @@ references that belong to that capability together.
 - `guides/packages/configure-inputs.md`
 - `guides/packages/add-contexts.md`
 
-### 3. Manage the UDO API
+### 4. Manage UDOs and reusable package capabilities
 
 Treat UDOs as the package's reusable public API. Add, update, refactor,
 deprecate, or remove operators for reusable capabilities such as fetching,
-parsing, cleaning, enriching, mapping, casting, or exporting. Choose names from
+parsing, cleaning, enriching, mapping, translating, routing, casting, or
+exporting. Choose names from
 stable user-facing semantics and the package directory structure rather than
 from one-off pipeline names.
 
@@ -108,59 +146,41 @@ embedded transformation logic.
   user-facing behavior changes
 - Tests for each public operator and important argument combination
 
-**Resources** (read via `tenzir-docs`):
+### 5. Route schema mapping work by target schema
 
-- `guides/packages/add-operators.md`
-- `guides/packages/test-packages.md`
-- `guides/parsing/parse-delimited-text.md`
-- `guides/parsing/parse-string-fields.md`
-- `guides/normalization/clean-up-values.md`
+When a package maps events to a schema, keep the mapping as part of the package's
+operator API. Start with `guides/normalization.md` and
+`guides/normalization/clean-up-values.md`, then dispatch by target schema:
 
-### 4. Manage optional OCSF mapping
+| Target schema | Routing |
+| --- | --- |
+| OCSF | Read `guides/normalization/map-to-ocsf.md`, then use the `tenzir-ocsf` skill for classes, objects, attributes, profiles, extensions, and schema-version questions. |
+| Google UDM | Read `guides/normalization/map-to-udm.md`, then use the `tenzir-google-udm` skill for event types, entity types, field structure, enum values, field-name forms, and Google SecOps ingestion shape. |
+| ECS, ASIM, or another schema | Read `guides/normalization/map-to-other-schemas.md`, then use the best available schema reference for the requested target. |
 
-When the package maps events to OCSF, keep the mapping as part of the package's
-operator API. Add or update a shared mapping operator plus event-specific
-operators when the source has multiple event types. Let the main mapping
-operator move the parsed input into a source-specific working namespace such as
-`zeek`, `panos`, or `event`, initialize shared OCSF fields, normalize common
-sentinels, dispatch on a stable discriminator, and finally return
-`{...ocsf, unmapped: <source>}`.
-
-Event-specific mapping operators should set the OCSF class, activity, `type_uid`,
-and `@name`, then move fields from the source namespace into their OCSF homes.
-Use small lookup records for event-code-to-enum mappings. Leave source fields in
-the source namespace when they do not have a clean OCSF home, with concise
-comments for non-obvious decisions. When removing mappings, remove the related
-event-specific operators, tests, examples, and pipeline references together.
+Prefer source namespaces and explicit value conversions for every schema
+mapping. Preserve source residue in the target schema's expected place, such as
+`unmapped` for OCSF or `additional` for UDM. When removing or renaming mappings,
+update the related operators, tests, examples, pipelines, and changelog entries
+together.
 
 **Results:**
 
-- Main mapping operator such as `vendor::product::ocsf::map`
-- Event-specific operators under an established local namespace such as
-  `operators/.../ocsf/events/`
-- Source residue returned as `unmapped` after mapped fields move out of the
-  source-specific working namespace
-- OCSF metadata, profiles, version, timestamps, product, and device fields set
-  consistently
-- Unknown or unsupported events mapped to a clear Base Event fallback instead
-  of silently disappearing
+- Target schema chosen deliberately
+- Schema-specific docs or skills consulted before field and enum decisions
+- Mapping operators, tests, examples, and pipeline references kept in sync
+- Source residue preserved for review in a target-appropriate field
 
-**Resources:**
-
-- Use the `tenzir-ocsf` skill to select event classes, attributes, objects,
-  profiles, and extensions
-- Read via `tenzir-docs`: `guides/normalization/map-to-ocsf.md`
-
-### 5. Manage deployable pipelines
+### 6. Manage deployable pipelines
 
 Use `pipelines/` for complete deployable workflows with an input and an output.
 Pipelines should orchestrate package UDOs instead of embedding reusable
 transformation logic.
 
-Ship ingestion, export, and OCSF publishing pipelines as disabled by default
-unless the package is intentionally an always-on feed or context updater. Use
-`restart-on-error` for long-running or periodic workflows where restart behavior
-is desirable.
+Ship ingestion, export, mapping, enrichment, and publishing pipelines as
+disabled by default unless the package is intentionally an always-on feed or
+context updater. Use `restart-on-error` for long-running or periodic workflows
+where restart behavior is desirable.
 
 **Results:**
 
@@ -178,12 +198,12 @@ is desirable.
 - `guides/packages/configure-inputs.md`
 - `guides/collecting.md`
 
-### 6. Manage examples
+### 7. Manage examples
 
 Use `examples/` for focused runnable snippets that teach users how to use the
 package. Examples should demonstrate one concept at a time, such as ingesting a
-source, invoking a UDO, mapping to OCSF, enriching with a context, or exporting
-to a destination.
+source, invoking a UDO, mapping to a schema, enriching with a context, or
+exporting to a destination.
 
 Examples are not a replacement for tests or deployable pipelines. Keep them
 self-contained and easy to adapt after package installation.
@@ -200,7 +220,7 @@ self-contained and easy to adapt after package installation.
 - `guides/packages/create-a-package.md`
 - `guides/collecting.md`
 
-### 7. Finalize and validate
+### 8. Finalize and validate
 
 Review the package as a user-facing artifact. Ensure the manifest describes the
 package's capabilities, every public UDO has a test, examples are runnable, and
@@ -211,8 +231,8 @@ changelog entry.
 
 - TQL follows idiomatic patterns
 - Tests pass with deterministic baselines
-- OCSF mapping tests, when present, run the mapper followed by `ocsf::derive`
-  and `ocsf::cast`; `ocsf::cast` emits no warnings
+- Schema mapping tests, when present, validate the target schema shape with the
+  relevant docs guidance, operators, or schema-specific skill
 - Package manifest, examples, pipelines, and changelog are ready for review
 
 **Resources** (read via `tenzir-docs`):
