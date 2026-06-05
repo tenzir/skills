@@ -1874,12 +1874,10 @@ def render_field_name_forms_section(context: FileContext) -> list[str]:
         "Use the left-side spelling for field names in YARA-L, Detect Engine,",
         "CBN, and other dotted field-path contexts. Keep the root and prefix",
         "required by that context, for example `$event.metadata.event_type`.",
-        "Use the right-side spelling when preparing UDM event or entity objects",
-        "for Google SecOps ingestion. If a heading has only one name, both",
-        "contexts use the same spelling.",
-        "",
-        "Mappings come from protobuf descriptors, not from a case-conversion",
-        "rule.",
+        "Use the right-side spelling when mapping logs into UDM event or entity",
+        "objects for Google SecOps UDM API ingestion, for example",
+        "`metadata.eventType`. If a heading has only one name, both contexts",
+        "use the same spelling.",
         "",
     ]
     irregularities = irregular_field_name_mappings(context)
@@ -1891,6 +1889,22 @@ def render_field_name_forms_section(context: FileContext) -> list[str]:
             )
         lines.append("")
     return lines
+
+
+def render_field_path_name_section() -> list[str]:
+    return [
+        "## Field path names",
+        "",
+        "This page focuses on the left-side field-path form from generated",
+        "field headings. If a message page shows `event_type` / `eventType`,",
+        "use `event_type` with the prefix required by the rule or normalizer",
+        "context, for example `$event.metadata.event_type`.",
+        "",
+        "Use the right-side form when mapping logs into UDM event or entity",
+        "objects for Google SecOps UDM API ingestion, for example",
+        "`metadata.eventType`.",
+        "",
+    ]
 
 
 def enum_value_names(context: FileContext, qualified_name: str) -> set[str]:
@@ -1990,7 +2004,7 @@ def render_field_paths_page(context: FileContext, guidance: DocsGuidance) -> str
         "Use this page to choose the right field-path prefix for rules, Detect Engine,",
         "and configuration-based normalizer contexts.",
         "",
-        *render_field_name_forms_section(context),
+        *render_field_path_name_section(),
     ]
     if field_paths is None:
         lines.extend(["No field path guidance was extracted.", ""])
@@ -2142,7 +2156,7 @@ def render_skill_markdown(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, or Google SecOps ingestion endpoints.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.",
                 "---",
                 "",
                 "# Google UDM",
@@ -2154,9 +2168,12 @@ def render_skill_markdown(
                 "security outcomes, and product context with consistent field",
                 "names and enum values.",
                 "",
-                "Use this skill to answer how a log should map to UDM, which",
-                "event or entity type to choose, which UDM fields to populate,",
-                "and how Google expects values and field paths to be formatted.",
+                "Use this skill for two primary workflows: mapping logs into",
+                "UDM event or entity objects for Google SecOps UDM API",
+                "ingestion, and referencing UDM fields in YARA-L, Detect",
+                "Engine, CBN, or other dotted field-path contexts. It also",
+                "answers which event or entity type to choose, which fields to",
+                "populate, and how Google expects values to be formatted.",
                 "",
                 *render_field_name_forms_section(context),
                 *render_top_level_structure(context),

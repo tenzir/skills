@@ -3,25 +3,16 @@
 Use this page to choose the right field-path prefix for rules, Detect Engine,
 and configuration-based normalizer contexts.
 
-## Field Name Forms
+## Field path names
 
-Generated field headings may show two spellings:
+This page focuses on the left-side field-path form from generated
+field headings. If a message page shows `event_type` / `eventType`,
+use `event_type` with the prefix required by the rule or normalizer
+context, for example `$event.metadata.event_type`.
 
-`field_path_form` / `ingestionObjectForm`
-
-Use the left-side spelling for field names in YARA-L, Detect Engine,
-CBN, and other dotted field-path contexts. Keep the root and prefix
-required by that context, for example `$event.metadata.event_type`.
-Use the right-side spelling when preparing UDM event or entity objects
-for Google SecOps ingestion. If a heading has only one name, both
-contexts use the same spelling.
-
-Mappings come from protobuf descriptors, not from a case-conversion
-rule.
-
-Current irregular mappings:
-
-- `EntityRisk.DEPRECATED_risk_score` / `EntityRisk.DEPRECATEDRiskScore`
+Use the right-side form when mapping logs into UDM event or entity
+objects for Google SecOps UDM API ingestion, for example
+`metadata.eventType`.
 
 ## Rules Engine Prefix Notes
 

@@ -1,6 +1,6 @@
 ---
 name: tenzir-google-udm
-description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, or Google SecOps ingestion endpoints.
+description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.
 ---
 
 # Google UDM
@@ -12,9 +12,12 @@ can describe actors, assets, resources, network activity,
 security outcomes, and product context with consistent field
 names and enum values.
 
-Use this skill to answer how a log should map to UDM, which
-event or entity type to choose, which UDM fields to populate,
-and how Google expects values and field paths to be formatted.
+Use this skill for two primary workflows: mapping logs into
+UDM event or entity objects for Google SecOps UDM API
+ingestion, and referencing UDM fields in YARA-L, Detect
+Engine, CBN, or other dotted field-path contexts. It also
+answers which event or entity type to choose, which fields to
+populate, and how Google expects values to be formatted.
 
 ## Field Name Forms
 
@@ -25,12 +28,10 @@ Generated field headings may show two spellings:
 Use the left-side spelling for field names in YARA-L, Detect Engine,
 CBN, and other dotted field-path contexts. Keep the root and prefix
 required by that context, for example `$event.metadata.event_type`.
-Use the right-side spelling when preparing UDM event or entity objects
-for Google SecOps ingestion. If a heading has only one name, both
-contexts use the same spelling.
-
-Mappings come from protobuf descriptors, not from a case-conversion
-rule.
+Use the right-side spelling when mapping logs into UDM event or entity
+objects for Google SecOps UDM API ingestion, for example
+`metadata.eventType`. If a heading has only one name, both contexts
+use the same spelling.
 
 Current irregular mappings:
 
