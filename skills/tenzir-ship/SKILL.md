@@ -7,6 +7,18 @@ description: Use when adding changelog entries, creating release notes, cutting 
 
 This skill bundles key release engineering use cases with tenzir-ship.
 
+## Changelog history
+
+Treat released changelog data as published history. Files under
+`changelog/releases/`, including release notes, manifests, and release entry
+files, are immutable once published because they may already exist in GitHub
+releases, package registries, documentation, and downstream copies.
+
+For normal follow-up work, add a new changelog entry on top of the existing
+history. Edit historical release artifacts only for severe publication defects,
+such as legally or operationally unsafe content, and only when the user
+explicitly asks for that correction.
+
 ## Available scripts
 
 - `bash <skill-dir>/scripts/detect-change-scope.sh`: Detects the current

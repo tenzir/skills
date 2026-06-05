@@ -150,6 +150,20 @@ implemented.
 - Are internal-only names absent?
 - Are user-facing technical terms preserved in code font?
 
+## Merge with a related unreleased entry
+
+Before creating a new entry, inspect existing entries in the unreleased queue.
+If the current change completes, corrects, or extends a change that is already
+documented there, merge it into that unreleased entry instead of creating a
+duplicate.
+
+When merging into an unreleased entry:
+
+- Reconcile the title, type, and description so they describe the combined
+  user-facing outcome.
+- Merge list-valued frontmatter such as `authors`, `prs`, and `components`,
+  preserving existing values and appending new distinct values.
+
 ## Create the entry
 
 Begin with writing the description to a temporary file, e.g.,
