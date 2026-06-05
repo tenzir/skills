@@ -1,10 +1,10 @@
-This release consolidates Tenzir package development into the new tenzir-create-package skill, replacing the older parser and OCSF mapping workflows with one broader package creation workflow. It also adds a generated Google SecOps UDM skill for schema reference and normalization guidance.
+This release consolidates Tenzir package development into the new tenzir-manage-packages skill, replacing the older parser and OCSF mapping workflows with one broader package management workflow. It also adds a generated Google SecOps UDM skill for schema reference and normalization guidance.
 
 ## 💥 Breaking changes
 
-### Consolidated Tenzir package creation skill
+### Consolidated Tenzir package management skill
 
-The package creation workflow is now centered on `tenzir-create-package`, a single skill for building library-quality Tenzir packages with UDOs, tests, examples, disabled-by-default pipelines, inputs, contexts, and optional OCSF mappings.
+The package management workflow is now centered on `tenzir-manage-packages`, a single skill for adding, inspecting, updating, extending, refactoring, deprecating, and removing library-quality Tenzir package capabilities with UDOs, tests, examples, disabled-by-default pipelines, inputs, contexts, and optional OCSF mappings.
 
 Before:
 
@@ -16,10 +16,10 @@ npx skills add tenzir/skills@tenzir-create-ocsf-mapping
 After:
 
 ```sh
-npx skills add tenzir/skills@tenzir-create-package
+npx skills add tenzir/skills@tenzir-manage-packages
 ```
 
-Use the new skill for parser package work, OCSF mapping work, and broader package development.
+Use the new skill for parser package work, OCSF mapping work, and broader package lifecycle management.
 
 *By @mavam and @codex.*
 

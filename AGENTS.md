@@ -38,7 +38,7 @@ Three places list skills and must stay consistent:
 
 ### `tenzir-docs` page references in workflow skills
 
-Workflow skills (e.g., `tenzir-create-package`) point to
+Workflow skills (e.g., `tenzir-manage-packages`) point to
 `tenzir-docs` pages by relative path (e.g., `guides/packages/create-a-package.md`)
 instead of duplicating documentation content. These paths must stay in sync with
 the generated `tenzir-docs` skill tree:

@@ -1,12 +1,15 @@
 ---
-name: tenzir-create-package
+name: tenzir-manage-packages
 description: >-
-  Create library-quality Tenzir packages with user-defined operators, tests,
-  examples, disabled-by-default pipelines, inputs, contexts, and optional OCSF
-  mappings. Use whenever the user wants to build, scaffold, package, parse,
-  normalize, enrich, export, map to OCSF, or add reusable Tenzir package
-  capabilities, even if they only mention one part such as "create a parser",
-  "add an operator", "build a package", or "map this data to OCSF."
+  Manage library-quality Tenzir packages across the full lifecycle: add new
+  packages, inspect, update, extend, refactor, deprecate, or remove package
+  manifests, user-defined operators, tests, examples, disabled-by-default
+  pipelines, inputs, contexts, and optional OCSF mappings. Use whenever the
+  user wants to build, scaffold, package, parse, normalize, enrich, export, map
+  to OCSF, audit package structure, maintain an existing package, or add
+  reusable Tenzir package capabilities, even if they only mention one part such
+  as "build a parser", "add an operator", "update a package", or "map this
+  data to OCSF."
 metadata:
   requires:
     skills:
@@ -14,25 +17,27 @@ metadata:
       - tenzir-ocsf
 ---
 
-# Create a Tenzir Package
+# Manage Tenzir Packages
 
-Build a Tenzir package as a complete library-quality unit. A package should
-provide reusable user-defined operators (UDOs), tests, examples, deployable
-pipelines, and clear metadata. OCSF mapping is one optional capability within
-that package, not a separate workflow.
+Manage a Tenzir package as a complete library-quality unit throughout its
+lifecycle. Package work includes adding new packages, inspecting existing ones,
+adding or changing capabilities, retiring obsolete pieces, and keeping metadata,
+tests, examples, and deployable pipelines consistent. OCSF mapping is one
+optional capability within that package, not a separate workflow.
 
 ## Workflow
 
 Execute each step in order. Verify the **Results** before moving on.
 
-### 1. Understand the package intent
+### 1. Understand the package state and intent
 
 Identify the package's vendor, product, audience, and role in the Tenzir
 Library. Decide which user-facing Library categories apply (`sources`,
 `destinations`, `mappings`, `contexts`) and whether the package is a source,
-destination, mapping, enrichment, utility, or a combination of these. Inspect
-similar packages in the library before introducing new naming or layout
-conventions.
+destination, mapping, enrichment, utility, or a combination of these. For
+existing packages, inspect the current manifest, operators, pipelines, examples,
+tests, changelog, and open work before editing. Inspect similar packages in the
+library before introducing new naming or layout conventions.
 
 Use the `tenzir-docs` skill for package, TQL, operator, pipeline, context, and
 test guidance. Use the `tenzir-ocsf` skill only when the package includes OCSF
@@ -42,6 +47,9 @@ mapping.
 
 - Vendor and product names
 - Valid package categories and target use cases
+- Current package state, when the package already exists
+- Lifecycle task type: add, inspect, update, extend, refactor, deprecate, or
+  remove a package or package capability
 - Installation behavior, including which pipelines should run automatically
 - Decision on whether OCSF mapping is in scope
 
@@ -51,11 +59,13 @@ mapping.
 - `guides/packages/create-a-package.md`
 - `tutorials/learn-idiomatic-tql.md`
 
-### 2. Create or update the package scaffold
+### 2. Manage the package scaffold
 
-Set up the package as a complete contribution unit. Keep package IDs stable,
-short, and lowercase. Use the repository's existing package naming and directory
-style.
+Set up or reconcile the package as a complete contribution unit. Keep package
+IDs stable, short, and lowercase. Use the repository's existing package naming
+and directory style. When removing or deprecating capabilities, retire the
+manifest entries, directories, tests, examples, pipelines, and changelog
+references that belong to that capability together.
 
 **Results:**
 
@@ -64,6 +74,8 @@ style.
   needed
 - Standard directories as needed: `operators/`, `examples/`, `pipelines/`,
   `tests/`, and `changelog/`
+- No stale package entries left behind after a capability is renamed, moved, or
+  removed
 - Test samples stored close to the tests that use them: inline `.input` files
   for single-test fixtures and local `inputs/` directories for shared fixtures
 
@@ -73,22 +85,27 @@ style.
 - `guides/packages/configure-inputs.md`
 - `guides/packages/add-contexts.md`
 
-### 3. Design the UDO API
+### 3. Manage the UDO API
 
-Treat UDOs as the package's reusable public API. Add operators for reusable
-capabilities such as fetching, parsing, cleaning, enriching, mapping, casting,
-or exporting. Choose names from stable user-facing semantics and the package
-directory structure rather than from one-off pipeline names.
+Treat UDOs as the package's reusable public API. Add, update, refactor,
+deprecate, or remove operators for reusable capabilities such as fetching,
+parsing, cleaning, enriching, mapping, casting, or exporting. Choose names from
+stable user-facing semantics and the package directory structure rather than
+from one-off pipeline names.
 
 Add operator frontmatter arguments for configurable fields, URLs, credentials,
-modes, output topics, and destinations. Prefer small composable operators over
-large pipelines with embedded transformation logic.
+modes, output topics, and destinations. Preserve existing public operator names
+unless a rename is intentional and reflected in examples, pipelines, tests, and
+changelog entries. Prefer small composable operators over large pipelines with
+embedded transformation logic.
 
 **Results:**
 
 - UDOs under `operators/` with clear names and descriptions
 - Parse and clean operators only when the input format needs them
 - Field and value parameters for reusable behavior
+- Compatibility decisions documented in code, tests, or changelog entries where
+  user-facing behavior changes
 - Tests for each public operator and important argument combination
 
 **Resources** (read via `tenzir-docs`):
@@ -99,20 +116,22 @@ large pipelines with embedded transformation logic.
 - `guides/parsing/parse-string-fields.md`
 - `guides/normalization/clean-up-values.md`
 
-### 4. Add optional OCSF mapping
+### 4. Manage optional OCSF mapping
 
 When the package maps events to OCSF, keep the mapping as part of the package's
-operator API. Use a shared mapping operator plus event-specific operators when
-the source has multiple event types. Let the main mapping operator move the
-parsed input into a source-specific working namespace such as `zeek`, `panos`,
-or `event`, initialize shared OCSF fields, normalize common sentinels, dispatch
-on a stable discriminator, and finally return `{...ocsf, unmapped: <source>}`.
+operator API. Add or update a shared mapping operator plus event-specific
+operators when the source has multiple event types. Let the main mapping
+operator move the parsed input into a source-specific working namespace such as
+`zeek`, `panos`, or `event`, initialize shared OCSF fields, normalize common
+sentinels, dispatch on a stable discriminator, and finally return
+`{...ocsf, unmapped: <source>}`.
 
 Event-specific mapping operators should set the OCSF class, activity, `type_uid`,
 and `@name`, then move fields from the source namespace into their OCSF homes.
 Use small lookup records for event-code-to-enum mappings. Leave source fields in
 the source namespace when they do not have a clean OCSF home, with concise
-comments for non-obvious decisions.
+comments for non-obvious decisions. When removing mappings, remove the related
+event-specific operators, tests, examples, and pipeline references together.
 
 **Results:**
 
@@ -132,7 +151,7 @@ comments for non-obvious decisions.
   profiles, and extensions
 - Read via `tenzir-docs`: `guides/normalization/map-to-ocsf.md`
 
-### 5. Add deployable pipelines
+### 5. Manage deployable pipelines
 
 Use `pipelines/` for complete deployable workflows with an input and an output.
 Pipelines should orchestrate package UDOs instead of embedding reusable
@@ -151,6 +170,7 @@ is desirable.
   and destinations
 - Pipelines that compose UDOs and publish, update contexts, or export
   to destinations
+- Removed or renamed UDOs no longer referenced by deployable pipelines
 
 **Resources** (read via `tenzir-docs`):
 
@@ -158,7 +178,7 @@ is desirable.
 - `guides/packages/configure-inputs.md`
 - `guides/collecting.md`
 
-### 6. Add examples
+### 6. Manage examples
 
 Use `examples/` for focused runnable snippets that teach users how to use the
 package. Examples should demonstrate one concept at a time, such as ingesting a
@@ -173,6 +193,7 @@ self-contained and easy to adapt after package installation.
 - Examples with frontmatter `name` and `description`
 - One primary example for the package's core use case
 - Additional examples for important variants or integrations
+- Examples updated or removed when public package capabilities change
 
 **Resources** (read via `tenzir-docs`):
 
