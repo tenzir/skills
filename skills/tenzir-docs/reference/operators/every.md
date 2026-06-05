@@ -92,6 +92,7 @@ every 1h {
 * [`each`](/reference/operators/each.md)
 * [`to_http`](/reference/operators/to_http.md)
 * [`summarize`](/reference/operators/summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)

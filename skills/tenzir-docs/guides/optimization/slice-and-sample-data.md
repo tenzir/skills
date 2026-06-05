@@ -256,7 +256,7 @@ head 2
 
 * [Filter and select data](../transformation/filter-and-select-data.md)
 * [Deduplicate events](deduplicate-events.md)
-* [Aggregate and summarize data](../analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../analytics/aggregate-event-streams.md)
 
 ## Contents
 

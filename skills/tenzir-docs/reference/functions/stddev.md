@@ -32,4 +32,4 @@ summarize stddev_value=stddev(x)
 
 * [`variance`](/reference/functions/variance.md)
 * [`mean`](/reference/functions/mean.md)
-* [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

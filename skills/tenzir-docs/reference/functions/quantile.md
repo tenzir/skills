@@ -36,4 +36,4 @@ summarize median_value=quantile(x, q=0.5)
 
 * [`median`](/reference/functions/median.md)
 * [`mean`](/reference/functions/mean.md)
-* [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

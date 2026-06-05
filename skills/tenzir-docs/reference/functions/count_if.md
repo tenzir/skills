@@ -35,4 +35,4 @@ summarize total=x.count_if(x => x > 1)
 ## See Also
 
 * [`count`](/reference/functions/count.md)
-* [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

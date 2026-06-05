@@ -7,6 +7,7 @@
 - [sort](operators/sort.md): Sorts events by the given expressions.
 - [summarize](operators/summarize.md): Groups events and applies aggregate functions to each group.
 - [top](operators/top.md): Shows the most common values.
+- [window](operators/window.md): Groups streaming events into event-time windows and runs a subpipeline for each window.
 
 ## Charts
 

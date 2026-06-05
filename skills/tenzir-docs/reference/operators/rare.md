@@ -54,4 +54,4 @@ head 5
 * [`sort`](/reference/operators/sort.md)
 * [`summarize`](/reference/operators/summarize.md)
 * [`top`](/reference/operators/top.md)
-* [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

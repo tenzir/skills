@@ -148,6 +148,6 @@ summarize count(this), severity, options={frequency: 10s, mode: "update"}
 * [`top`](/reference/operators/top.md)
 * [`sum`](/reference/functions/sum.md)
 * [`count`](/reference/functions/count.md)
-* [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

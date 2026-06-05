@@ -336,9 +336,9 @@ This guide shows you how to distribute events across multiple destinations using
 
 #### Analytics
 
-##### [Aggregate and summarize data](guides/analytics/aggregate-and-summarize.md)
+##### [Aggregate event streams](guides/analytics/aggregate-event-streams.md)
 
-Aggregation transforms streams of events into meaningful summaries. Whether you’re calculating statistics, counting occurrences, or finding extremes, the `summarize` operator combined with aggregation functions provides powerful data analysis capabilities.
+This guide shows you how to aggregate event streams with `summarize` and `window`. You’ll learn to count, group, compute statistics, and build bounded event-time detections over streaming data.
 
 ##### [Collect metrics](guides/analytics/collect-metrics.md)
 

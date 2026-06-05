@@ -54,5 +54,5 @@ head 5
 * [`rare`](/reference/operators/rare.md)
 * [`sort`](/reference/operators/sort.md)
 * [`summarize`](/reference/operators/summarize.md)
-* [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

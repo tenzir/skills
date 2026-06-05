@@ -32,4 +32,4 @@ summarize mode_value=mode(x)
 
 * [`median`](/reference/functions/median.md)
 * [`value_counts`](/reference/functions/value_counts.md)
-* [Aggregate and summarize data](../../guides/analytics/aggregate-and-summarize.md)
+* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

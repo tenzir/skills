@@ -45,6 +45,14 @@ Shows the most common values.
 top user
 ```
 
+### [window](operators/window.md)
+
+Groups events into event-time windows and runs a subpipeline per window.
+
+```tql
+window size=1h, on=ts { summarize count() }
+```
+
 ## Charts
 
 ### [chart\_area](operators/chart_area.md)
