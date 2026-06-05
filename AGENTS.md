@@ -38,7 +38,7 @@ Three places list skills and must stay consistent:
 
 ### `tenzir-docs` page references in workflow skills
 
-Workflow skills (e.g., `tenzir-create-package`) point to
+Workflow skills (e.g., `tenzir-manage-packages`) point to
 `tenzir-docs` pages by relative path (e.g., `guides/packages/create-a-package.md`)
 instead of duplicating documentation content. These paths must stay in sync with
 the generated `tenzir-docs` skill tree:
@@ -77,16 +77,19 @@ desired path, so describe the desired path instead of enumerating what to avoid.
 
 ### Cross-references
 
-Skills that compose with other skills must declare the dependency explicitly:
+Skills that compose with other skills must declare the relationship explicitly:
 
-1. **Metadata**: list required skills under `metadata.requires.skills` in the
-   SKILL.md frontmatter so that tooling can resolve the dependency graph.
-2. **Body**: mention the dependent skill by name at the point where delegation
-   happens, so the model knows when and why to load it.
+1. **Metadata**: list hard dependencies under `metadata.requires.skills` in the
+   SKILL.md frontmatter so that tooling can resolve the dependency graph. List
+   conditional delegation targets under `metadata.uses.skills` with a concise
+   `when` condition.
+2. **Body**: mention the dependent or used skill by name at the point where
+   delegation happens, so the model knows when and why to load it.
 
-Keep cross-references minimal. Only declare a dependency when one skill's
-workflow actively delegates a step to another skill. Do not add a dependency
-just because two skills cover related topics.
+Keep cross-references minimal. Only declare `requires` when the skill cannot
+perform its workflow without the other skill. Use `uses` when one skill's
+workflow conditionally delegates a branch to another skill. Do not add a
+relationship just because two skills cover related topics.
 
 ## Documentation
 

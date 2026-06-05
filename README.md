@@ -17,7 +17,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 | Skill                          | Description                                                                      |
 | ------------------------------ | -------------------------------------------------------------------------------- |
 | `tenzir-docs`                  | Tenzir documentation — TQL, operators, functions, integrations, deployment       |
-| `tenzir-create-package`        | Create library-quality Tenzir packages with UDOs, tests, examples, and pipelines |
+| `tenzir-manage-packages`       | Package lifecycle routing for manifests, UDOs, pipelines, tests, and mappings    |
 
 ### 🏗️ Tenzir Contributors
 
@@ -54,33 +54,6 @@ npx skills add tenzir/skills@tenzir-docs
 npx skills add tenzir/skills@tenzir-google-udm
 npx skills add tenzir/skills@tenzir-ocsf
 ```
-
-## 🧩 Dependencies
-
-This repo uses a richer YAML frontmatter metadata structure to express skill
-dependencies between sibling skills.
-
-Use unrolled YAML arrays:
-
-```yaml
----
-name: tenzir-create-pull-requests
-description: Create and update pull requests for Tenzir projects.
-metadata:
-  requires:
-    skills:
-      - tenzir-commit-changes
-      - tenzir-update-docs
----
-```
-
-Notes:
-
-- Use `metadata.requires.skills` for skill-to-skill dependencies.
-- Write the dependency list as YAML bullets, not inline bracket syntax.
-- Dependency names must match the sibling skill `name` fields exactly.
-- Keep dependent skills self-contained; use dependency metadata to express
-  relationships instead of copying sibling workflow instructions inline.
 
 ## 📄 License
 
