@@ -4,13 +4,13 @@ Subject data.
 
 ## Fields
 
-### `countryName`
+### `country_name` / `countryName`
 
 - Type: `string` (singular)
 
 C: Country name.
 
-### `commonName`
+### `common_name` / `commonName`
 
 - Type: `string` (singular)
 
@@ -28,13 +28,13 @@ L: Locality.
 
 O: Organization.
 
-### `organizationalUnit`
+### `organizational_unit` / `organizationalUnit`
 
 - Type: `string` (singular)
 
 OU: OrganizationalUnit.
 
-### `stateOrProvinceName`
+### `state_or_province_name` / `stateOrProvinceName`
 
 - Type: `string` (singular)
 

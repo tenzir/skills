@@ -10,25 +10,25 @@ Metadata about the Portable Executable (PE) file.
 
 Imphash of the file.
 
-### `entryPoint`
+### `entry_point` / `entryPoint`
 
 - Type: `int64` (singular)
 
 info.pe-entry-point.
 
-### `entryPointExiftool`
+### `entry_point_exiftool` / `entryPointExiftool`
 
 - Type: `int64` (singular)
 
 info.exiftool.EntryPoint.
 
-### `compilationTime`
+### `compilation_time` / `compilationTime`
 
 - Type: `timestamp` (singular)
 
 info.pe-timestamp.
 
-### `compilationExiftoolTime`
+### `compilation_exiftool_time` / `compilationExiftoolTime`
 
 - Type: `timestamp` (singular)
 
@@ -52,35 +52,35 @@ FilemetadataImports fields.
 
 FilemetadataPeResourceInfo fields.
 
-### `resourcesTypeCount`
+### `resources_type_count` / `resourcesTypeCount`
 
 - Type: [`StringToInt64MapEntry`](string_to_int64_map_entry.md) (repeated)
 - Deprecated: `true`
 
-Deprecated: use resourcesTypeCountStr.
+Deprecated: use resources_type_count_str.
 
-### `resourcesLanguageCount`
+### `resources_language_count` / `resourcesLanguageCount`
 
 - Type: [`StringToInt64MapEntry`](string_to_int64_map_entry.md) (repeated)
 - Deprecated: `true`
 
-Deprecated: use resourcesLanguageCountStr.
+Deprecated: use resources_language_count_str.
 
-### `resourcesTypeCountStr`
+### `resources_type_count_str` / `resourcesTypeCountStr`
 
 - Type: [`Label`](label.md) (repeated)
 
 Number of resources by resource type. Example: RT_ICON: 10, RT_DIALOG: 5
 
-### `resourcesLanguageCountStr`
+### `resources_language_count_str` / `resourcesLanguageCountStr`
 
 - Type: [`Label`](label.md) (repeated)
 
 Number of resources by language. Example: NEUTRAL: 20, ENGLISH US: 10
 
-### `signatureInfo`
+### `signature_info` / `signatureInfo`
 
 - Type: [`FileMetadataSignatureInfo`](file_metadata_signature_info.md) (singular)
 - Deprecated: `true`
 
-FilemetadataSignatureInfo field. deprecated, user File.signatureInfo instead.
+FilemetadataSignatureInfo field. deprecated, user File.signature_info instead.

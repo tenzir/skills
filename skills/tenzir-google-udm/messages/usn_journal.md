@@ -4,7 +4,7 @@ Information from the NTFS USN Journal.
 
 ## Fields
 
-### `attributesFlag`
+### `attributes_flag` / `attributesFlag`
 
 - Type: `string` (singular)
 
@@ -15,9 +15,9 @@ File attributes flags from the USN record (e.g., "0x20").
 - Type: [`UsnJournal.Attribute`](../enums/usn_journal_attribute.md) (singular)
 - Deprecated: `true`
 
-Deprecated: Use fileAttributes instead. File attributes from the USN record.
+Deprecated: Use file_attributes instead. File attributes from the USN record.
 
-### `fileAttributes`
+### `file_attributes` / `fileAttributes`
 
 - Type: [`UsnJournal.Attribute`](../enums/usn_journal_attribute.md) (repeated)
 

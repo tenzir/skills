@@ -4,7 +4,7 @@ Signature information.
 
 ## Fields
 
-### `verificationMessage`
+### `verification_message` / `verificationMessage`
 
 - Type: `string` (singular)
 

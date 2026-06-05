@@ -10,37 +10,37 @@ SMTP info. See RFC 2821.
 
 The client's 'HELO'/'EHLO' string.
 
-### `mailFrom`
+### `mail_from` / `mailFrom`
 
 - Type: `string` (singular)
 
 The client's 'MAIL FROM' string.
 
-### `rcptTo`
+### `rcpt_to` / `rcptTo`
 
 - Type: `string` (repeated)
 
 The client's 'RCPT TO' string(s).
 
-### `serverResponse`
+### `server_response` / `serverResponse`
 
 - Type: `string` (repeated)
 
 The server's response(s) to the client.
 
-### `messagePath`
+### `message_path` / `messagePath`
 
 - Type: `string` (singular)
 
 The message's path (extracted from the headers).
 
-### `isWebmail`
+### `is_webmail` / `isWebmail`
 
 - Type: `bool` (singular)
 
 If the message was sent via a webmail client.
 
-### `isTls`
+### `is_tls` / `isTls`
 
 - Type: `bool` (singular)
 

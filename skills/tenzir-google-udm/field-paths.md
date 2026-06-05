@@ -3,6 +3,17 @@
 Use this page to choose the right field-path prefix for rules, Detect Engine,
 and configuration-based normalizer contexts.
 
+## Field path names
+
+This page focuses on the left-side field-path form from generated
+field headings. If a message page shows `event_type` / `eventType`,
+use `event_type` with the prefix required by the rule or normalizer
+context, for example `$event.metadata.event_type`.
+
+Use the right-side form when mapping logs into UDM event or entity
+objects for Google SecOps UDM API ingestion, for example
+`metadata.eventType`.
+
 ## Rules Engine Prefix Notes
 
 - UDM field name formats:

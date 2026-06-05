@@ -10,13 +10,13 @@ Deprecated. Information about the threat intelligence source. These fields are u
 
 Name of the IoC source.
 
-### `benignCount`
+### `benign_count` / `benignCount`
 
 - Type: `int32` (singular)
 
 Count of responses where this IoC was marked benign.
 
-### `maliciousCount`
+### `malicious_count` / `maliciousCount`
 
 - Type: `int32` (singular)
 
@@ -28,19 +28,19 @@ Count of responses where this IoC was marked malicious.
 
 Quality of the IoC mapping extracted from the source.
 
-### `responseCount`
+### `response_count` / `responseCount`
 
 - Type: `int32` (singular)
 
 Total response count from this source.
 
-### `sourceCount`
+### `source_count` / `sourceCount`
 
 - Type: `int32` (singular)
 
 Number of sources from which intelligence was extracted.
 
-### `threatIntelligenceSources`
+### `threat_intelligence_sources` / `threatIntelligenceSources`
 
 - Type: [`Source`](security_result_source.md) (repeated)
 

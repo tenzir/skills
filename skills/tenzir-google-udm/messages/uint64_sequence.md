@@ -4,7 +4,7 @@ Uint64Sequence represents a sequence of uint64s.
 
 ## Fields
 
-### `uint64Vals`
+### `uint64_vals` / `uint64Vals`
 
 - Type: `uint64` (repeated)
 

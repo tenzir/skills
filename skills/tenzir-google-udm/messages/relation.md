@@ -10,7 +10,7 @@ Defines the relationship between the entity (a) and another entity (b).
 
 Entity (b) that the primary entity (a) is related to.
 
-### `entityType`
+### `entity_type` / `entityType`
 
 - Type: [`EntityType`](../enums/entity_metadata_entity_type.md) (singular)
 
@@ -34,7 +34,7 @@ Directionality of relationship between primary entity (a) and the related entity
 
 UID of the relationship.
 
-### `entityLabel`
+### `entity_label` / `entityLabel`
 
 - Type: [`EntityLabel`](../enums/relation_entity_label.md) (singular)
 

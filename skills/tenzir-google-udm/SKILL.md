@@ -1,6 +1,6 @@
 ---
 name: tenzir-google-udm
-description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure and normalization guidance. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for rules, Detect Engine, or CBN, messages, enums, entity nouns, metadata, securityResult, network, Chronicle normalization, or Google SecOps ingestion endpoints.
+description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.
 ---
 
 # Google UDM
@@ -12,9 +12,30 @@ can describe actors, assets, resources, network activity,
 security outcomes, and product context with consistent field
 names and enum values.
 
-Use this skill to answer how a log should map to UDM, which
-event or entity type to choose, which UDM fields to populate,
-and how Google expects values and field paths to be formatted.
+Use this skill for two primary workflows: mapping logs into
+UDM event or entity objects for Google SecOps UDM API
+ingestion, and referencing UDM fields in YARA-L, Detect
+Engine, CBN, or other dotted field-path contexts. It also
+answers which event or entity type to choose, which fields to
+populate, and how Google expects values to be formatted.
+
+## Field Name Forms
+
+Generated field headings may show two spellings:
+
+`field_path_form` / `ingestionObjectForm`
+
+Use the left-side spelling for field names in YARA-L, Detect Engine,
+CBN, and other dotted field-path contexts. Keep the root and prefix
+required by that context, for example `$event.metadata.event_type`.
+Use the right-side spelling when mapping logs into UDM event or entity
+objects for Google SecOps UDM API ingestion, for example
+`metadata.eventType`. If a heading has only one name, both contexts
+use the same spelling.
+
+Current irregular mappings:
+
+- `EntityRisk.DEPRECATED_risk_score` / `EntityRisk.DEPRECATEDRiskScore`
 
 ## Top-level structure
 
@@ -37,7 +58,7 @@ ingested as entity context through the entity ingestion path.
 | `intermediary` | `repeated` | [`Noun`](messages/noun.md) | Represents details on one or more intermediate entities processing activity described in the event.... |
 | `observer` | `singular` | [`Noun`](messages/noun.md) | Represents an observer entity (for example, a packet sniffer or network-based vulnerability scanner... |
 | `about` | `repeated` | [`Noun`](messages/noun.md) | Represents entities referenced by the event that are not otherwise described in principal, src, tar... |
-| `securityResult` | `repeated` | [`SecurityResult`](messages/security_result.md) | A list of security results. |
+| `security_result` / `securityResult` | `repeated` | [`SecurityResult`](messages/security_result.md) | A list of security results. |
 | `network` | `singular` | [`Network`](messages/network.md) | All network details go here, including sub-messages with details on each protocol (for example, DHC... |
 | `extensions` | `singular` | [`Extensions`](messages/extensions.md) | All other first-class, event-specific metadata goes in this message. Do not place protocol metadata... |
 | `extracted` | `singular` | `object` | Flattened fields extracted from the log. |
@@ -51,8 +72,8 @@ ingested as entity context through the entity ingestion path.
 | `entity` | `singular` | [`Noun`](messages/noun.md) | Noun in the UDM event that this entity represents. |
 | `relations` | `repeated` | [`Relation`](messages/relation.md) | One or more relationships between the entity (a) and other entities, including the relationship typ... |
 | `additional` | `singular` | `object` | Important entity data that cannot be adequately represented within the formal sections of the Entit... |
-| `riskScore` | `optional` | [`EntityRisk`](messages/entity_risk.md) | Stores information related to the entity's risk score. |
-| `metric` | `singular` | [`Metric`](messages/metric.md) | Stores statistical metrics about the entity. Used if metadata.entityType is METRIC. |
+| `risk_score` / `riskScore` | `optional` | [`EntityRisk`](messages/entity_risk.md) | Stores information related to the entity's risk score. |
+| `metric` | `singular` | [`Metric`](messages/metric.md) | Stores statistical metrics about the entity. Used if metadata.entity_type is METRIC. |
 
 ## Question routing
 
@@ -61,7 +82,7 @@ ingested as entity context through the entity ingestion path.
 | What fields exist? | [Messages](messages.md) and the specific message page |
 | What values can enum X take? | [Enums](enums.md) -> specific enum page |
 | How should I map this event? | [Event types](event-types.md), then relevant message pages |
-| Which `metadata.eventType` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |
+| Which `metadata.event_type` / `metadata.eventType` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |
 | Required or forbidden fields? | [Event types](event-types.md), [Entity](messages/entity.md), or relevant message page |
 | Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |
 | How do I reference UDM fields in rules, Detect Engine, or CBN? | [Field paths](field-paths.md) |
@@ -79,13 +100,13 @@ reconciling them.
 ## Domain knowledge
 
 - UDM events center on `metadata`, participant nouns (`principal`, `src`,
-  `target`, `intermediary`, `observer`, `about`), `securityResult`,
-  `network`, and `extensions`.
+  `target`, `intermediary`, `observer`, `about`), `security_result` /
+  `securityResult`, `network`, and `extensions`.
 - UDM entities center on `metadata`, an `entity` noun, `relations`,
-  optional `riskScore`, and optional `metric` data.
-- `metadata.eventType` classifies the event. It is the first place to look
-  when deciding how an event should be represented.
-- `metadata.entityType` classifies entity records and drives entity-specific
-  requirements.
+  optional `risk_score` / `riskScore`, and optional `metric` data.
+- `metadata.event_type` / `metadata.eventType` classifies the event. It is
+  the first place to look when deciding how an event should be represented.
+- `metadata.entity_type` / `metadata.entityType` classifies entity records
+  and drives entity-specific requirements.
 - `Noun` carries entity details such as users, assets, processes, files,
   resources, cloud context, and labels.

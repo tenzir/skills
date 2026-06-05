@@ -4,25 +4,25 @@ Information about an entry in the web browser's local history database.
 
 ## Fields
 
-### `browserType`
+### `browser_type` / `browserType`
 
 - Type: [`BrowserType`](../enums/browser_browser_type.md) (singular)
 
 The browser that recorded the history entry (e.g. "Chrome", "Firefox", "Safari", etc.).
 
-### `browserVersion`
+### `browser_version` / `browserVersion`
 
 - Type: `string` (singular)
 
 The browser version.
 
-### `firstVisitTime`
+### `first_visit_time` / `firstVisitTime`
 
 - Type: `timestamp` (singular)
 
 The timestamp indicating the initial visit to the URL.
 
-### `lastVisitTime`
+### `last_visit_time` / `lastVisitTime`
 
 - Type: `timestamp` (singular)
 
@@ -40,7 +40,7 @@ The browser profile associated with the history entry.
 
 A boolean value indicating if the URL was typed by the user.
 
-### `visitType`
+### `visit_type` / `visitType`
 
 - Type: [`UrlVisitType`](../enums/browser_url_visit_type.md) (singular)
 
@@ -52,31 +52,31 @@ Describes the type of navigation or visit (e.g., direct, redirect, etc.).
 
 A boolean value indicating if the history entry is hidden.
 
-### `requestOriginUri`
+### `request_origin_uri` / `requestOriginUri`
 
 - Type: `string` (singular)
 
 Indicates the URI from which the current visit originated.
 
-### `visitCount`
+### `visit_count` / `visitCount`
 
 - Type: `int64` (singular)
 
 The total number of times the Url has been visited.
 
-### `visitCountCriteria`
+### `visit_count_criteria` / `visitCountCriteria`
 
 - Type: `string` (singular)
 
-Describes the criteria used to calculate the visitCount.
+Describes the criteria used to calculate the visit_count.
 
-### `indexedContent`
+### `indexed_content` / `indexedContent`
 
 - Type: `string` (singular)
 
 Represents the textual content of a web page. This field should be kept short. Large strings may affect latency and payload sizes.
 
-### `firstBookmarkedTime`
+### `first_bookmarked_time` / `firstBookmarkedTime`
 
 - Type: `timestamp` (singular)
 
@@ -88,13 +88,13 @@ The timestamp indicating the first time the URL was bookmarked.
 
 Information about the cookies.
 
-### `typedCount`
+### `typed_count` / `typedCount`
 
 - Type: `int64` (singular)
 
 The number of times the URL was visited with this specific visit type and visit source.
 
-### `visitSource`
+### `visit_source` / `visitSource`
 
 - Type: [`VisitSource`](../enums/browser_visit_source.md) (singular)
 

@@ -4,7 +4,7 @@ Information about a compute asset such as a workstation, laptop, phone, virtual 
 
 ## Fields
 
-### `productObjectId`
+### `product_object_id` / `productObjectId`
 
 - Type: `string` (singular)
 
@@ -16,7 +16,7 @@ A vendor-specific identifier to uniquely identify the entity (a GUID or similar)
 
 Asset hostname or domain name field. This field can be used as an entity indicator for asset entities.
 
-### `assetId`
+### `asset_id` / `assetId`
 
 - Type: `string` (singular)
 
@@ -34,13 +34,13 @@ A list of IP addresses associated with an asset. This field can be used as an en
 
 List of MAC addresses associated with an asset. This field can be used as an entity indicator for asset entities.
 
-### `natIp`
+### `nat_ip` / `natIp`
 
 - Type: `string` (repeated)
 
 List of NAT IP addresses associated with an asset.
 
-### `firstSeenTime`
+### `first_seen_time` / `firstSeenTime`
 
 - Type: `timestamp` (singular)
 
@@ -52,7 +52,7 @@ The first observed time for an asset. The value is calculated on the basis of th
 
 The asset hardware specifications.
 
-### `platformSoftware`
+### `platform_software` / `platformSoftware`
 
 - Type: [`PlatformSoftware`](platform_software.md) (singular)
 
@@ -82,38 +82,38 @@ The category of the asset (e.g. "End User Asset", "Workstation", "Server").
 
 The type of the asset (e.g. workstation or laptop or server).
 
-### `networkDomain`
+### `network_domain` / `networkDomain`
 
 - Type: `string` (singular)
 
 The network domain of the asset (e.g. "corp.acme.com")
 
-### `creationTime`
+### `creation_time` / `creationTime`
 
 - Type: `timestamp` (singular)
 - Deprecated: `true`
 
-Time the asset was created or provisioned. Deprecate: creationTime should be populated in Attribute as generic metadata.
+Time the asset was created or provisioned. Deprecate: creation_time should be populated in Attribute as generic metadata.
 
-### `firstDiscoverTime`
+### `first_discover_time` / `firstDiscoverTime`
 
 - Type: `timestamp` (singular)
 
 Time the asset was first discovered (by asset management/discoverability software).
 
-### `lastDiscoverTime`
+### `last_discover_time` / `lastDiscoverTime`
 
 - Type: `timestamp` (singular)
 
 Time the asset was last discovered (by asset management/discoverability software).
 
-### `systemLastUpdateTime`
+### `system_last_update_time` / `systemLastUpdateTime`
 
 - Type: `timestamp` (singular)
 
-Time the asset system or OS was last updated. For all other operations that are not system updates (such as resizing a VM), use Attribute.lastUpdateTime.
+Time the asset system or OS was last updated. For all other operations that are not system updates (such as resizing a VM), use Attribute.last_update_time.
 
-### `lastBootTime`
+### `last_boot_time` / `lastBootTime`
 
 - Type: `timestamp` (singular)
 
@@ -126,7 +126,7 @@ Time the asset was last boot started.
 
 Metadata labels for the asset. Deprecated: labels should be populated in Attribute as generic metadata.
 
-### `deploymentStatus`
+### `deployment_status` / `deploymentStatus`
 
 - Type: [`DeploymentStatus`](../enums/asset_deployment_status.md) (singular)
 
@@ -144,7 +144,7 @@ Vulnerabilities discovered on asset.
 
 Generic entity metadata attributes of the asset.
 
-### `wmiPersistenceItem`
+### `wmi_persistence_item` / `wmiPersistenceItem`
 
 - Type: [`WmiPersistenceItem`](wmi_persistence_item.md) (singular)
 

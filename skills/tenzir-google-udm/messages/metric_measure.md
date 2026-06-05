@@ -10,7 +10,7 @@ Describes the precomputed measure.
 
 Value of the aggregated measure.
 
-### `aggregateFunction`
+### `aggregate_function` / `aggregateFunction`
 
 - Type: [`AggregateFunction`](../enums/metric_aggregate_function.md) (singular)
 

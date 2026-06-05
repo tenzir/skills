@@ -34,19 +34,19 @@ Other DNS header flags. See RFC1035, section 4.1.1.
 
 Whether the DNS response was truncated.
 
-### `recursionDesired`
+### `recursion_desired` / `recursionDesired`
 
 - Type: `bool` (singular)
 
 Whether a recursive DNS lookup is desired.
 
-### `recursionAvailable`
+### `recursion_available` / `recursionAvailable`
 
 - Type: `bool` (singular)
 
 Whether a recursive DNS lookup is available.
 
-### `responseCode`
+### `response_code` / `responseCode`
 
 - Type: `uint32` (singular)
 
@@ -80,58 +80,58 @@ A list of additional domain name servers that can be used to verify the answer t
 
 Population guidance from the Google UDM usage guide.
 
-### `Dns.additional`
+### `additional`
 
 - **Purpose**: Stores the additional domain name servers that can be used to verify the answer to the domain. See Population of DNS Resource Record metadata.
 
-### `Dns.answers`
+### `answers`
 
 - **Purpose**: Stores the answer to the domain name query. See Population of DNS Resource Record metadata.
 
-### `Dns.authoritative`
+### `authoritative`
 
 - **Purpose**: Set to true for authoritative DNS servers.
 - **Encoding**: Boolean.
 
-### `Dns.authority`
+### `authority`
 
 - **Purpose**: Stores the domain name servers that verified the answer to the domain name query. See Population of DNS Resource Record metadata.
 
-### `Dns.id`
+### `id`
 
 - **Purpose**: Stores the DNS query identifier.
 - **Encoding**: 32-bit integer.
 
-### `Dns.opcode`
+### `opcode`
 
 - **Purpose**: Stores the DNS OpCode used to specify the type of DNS query (standard, inverse, server status, etc.).
 - **Encoding**: 32-bit integer.
 
-### `Dns.questions`
+### `questions`
 
 - **Purpose**: Stores the domain protocol message questions. See Population of DNS Question metadata.
 
-### `Dns.recursionAvailable`
+### `recursion_available` / `recursionAvailable`
 
 - **Purpose**: Set to true if a recursive DNS lookup is available.
 - **Encoding**: Boolean.
 
-### `Dns.recursionDesired`
+### `recursion_desired` / `recursionDesired`
 
 - **Purpose**: Set to true if a recursive DNS lookup is requested.
 - **Encoding**: Boolean.
 
-### `Dns.response`
+### `response`
 
 - **Purpose**: Set to true if the event is a DNS response.
 - **Encoding**: Boolean.
 
-### `Dns.responseCode`
+### `response_code` / `responseCode`
 
 - **Purpose**: Stores the DNS response code as defined by RFC 1035, Domain Names - Implementation and Specification.
 - **Encoding**: 32-bit integer.
 
-### `Dns.truncated`
+### `truncated`
 
 - **Purpose**: Set to true if this is a truncated DNS response.
 - **Encoding**: Boolean.

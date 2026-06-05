@@ -16,7 +16,7 @@ The minute of the hour (0-59).
 
 The hour of the day (0-23).
 
-### `monthDay`
+### `month_day` / `monthDay`
 
 - Type: `int32` (singular)
 
@@ -28,7 +28,7 @@ The day of the month (1-31).
 
 The month of the year (1-12).
 
-### `weekDay`
+### `week_day` / `weekDay`
 
 - Type: `int32` (singular)
 

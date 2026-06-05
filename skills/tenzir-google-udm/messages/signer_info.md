@@ -16,13 +16,13 @@ Common name of the signers/certificate. The order of the signers matters. Each e
 
 It can say "Valid" or state the problem with the certificate if any (e.g. "This certificate or one of the certificates in the certificate chain is not time valid.").
 
-### `validUsage`
+### `valid_usage` / `validUsage`
 
 - Type: `string` (optional)
 
 Indicates which situations the certificate is valid for (e.g. "Code Signing").
 
-### `certIssuer`
+### `cert_issuer` / `certIssuer`
 
 - Type: `string` (optional)
 

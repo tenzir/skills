@@ -28,7 +28,7 @@ One or more relationships between the entity (a) and other entities, including t
 
 Important entity data that cannot be adequately represented within the formal sections of the Entity.
 
-### `riskScore`
+### `risk_score` / `riskScore`
 
 - Type: [`EntityRisk`](entity_risk.md) (optional)
 
@@ -38,21 +38,22 @@ Stores information related to the entity's risk score.
 
 - Type: [`Metric`](metric.md) (singular)
 
-Stores statistical metrics about the entity. Used if metadata.entityType is METRIC.
+Stores statistical metrics about the entity. Used if metadata.entity_type is METRIC.
 
 ## Entity Type Guidance
 
 Required fields from the Google UDM usage guide. Set
-`metadata.entityType` to the matching `EntityMetadata.EntityType` value.
+`metadata.entity_type` / `metadata.entityType` to the matching
+`EntityMetadata.EntityType` value.
 
 ### `CIDR_BLOCK`
 
-- `entity.network.ipSubnetRange` must be present and include a valid CIDR in the following format: `ip_address/prefix_length`.
+- `entity.network.ip_subnet_range` must be present and include a valid CIDR in the following format: `ip_address/prefix_length`.
 
 ### `DOMAIN_NAME`
 
 - `entity.hostname` must be present and represent a valid hostname.
-- `Optional`: If `entity.domain.whoisServer` is populated, the `entity.domain` message must have no more than 50 fields set.
+- `Optional`: If `entity.domain.whois_server` is populated, the `entity.domain` message must have no more than 50 fields set.
 
 ### `FILE`
 
@@ -65,17 +66,17 @@ Required fields from the Google UDM usage guide. Set
 ### `MUTEX`
 
 - `entity.resource` must be present.
-- `entity.resource.resourceType` must be `MUTEX`.
+- `entity.resource.resource_type` must be `MUTEX`.
 - `entity.resource.name` must be present and not empty.
 
 ### `RESOURCE`
 
 - `entity.resource` must be present.
-- `entity.resource.resourceType` must be either `MUTEX` or `STORAGE_OBJECT`.
-  - If `resourceType` is `MUTEX`: See `MUTEX` requirements above.
-  - If `resourceType` is `STORAGE_OBJECT`:
-    - `entity.resource.resourceSubtype` must be present and not empty.
-    - At least one of the following must be present and not empty: `entity.registry.registryKey` `entity.registry.registryValueData` `entity.registry.registryValueName`
+- `entity.resource.resource_type` must be either `MUTEX` or `STORAGE_OBJECT`.
+  - If `resource_type` is `MUTEX`: See `MUTEX` requirements above.
+  - If `resource_type` is `STORAGE_OBJECT`:
+    - `entity.resource.resource_subtype` must be present and not empty.
+    - At least one of the following must be present and not empty: `entity.registry.registry_key` `entity.registry.registry_value_data` `entity.registry.registry_value_name`
 
 ### `URL`
 

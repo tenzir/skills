@@ -4,7 +4,7 @@ Int64Sequence represents a sequence of int64s.
 
 ## Fields
 
-### `int64Vals`
+### `int64_vals` / `int64Vals`
 
 - Type: `int64` (repeated)
 

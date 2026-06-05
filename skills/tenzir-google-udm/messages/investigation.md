@@ -16,7 +16,7 @@ Describes reason a finding investigation was resolved.
 
 Describes whether a finding was useful or not-useful.
 
-### `severityScore`
+### `severity_score` / `severityScore`
 
 - Type: `uint32` (optional)
 
@@ -40,7 +40,7 @@ Comment added by the Analyst.
 
 Priority of the Alert or Finding set by analyst.
 
-### `rootCause`
+### `root_cause` / `rootCause`
 
 - Type: `string` (optional)
 
@@ -52,7 +52,7 @@ Root cause of the Alert or Finding set by analyst.
 
 Reason for closing the Case or Alert.
 
-### `riskScore`
+### `risk_score` / `riskScore`
 
 - Type: `uint32` (optional)
 

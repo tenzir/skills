@@ -4,19 +4,19 @@ Deprecated. Encapsulates the threat verdict provided by human analysts and ML mo
 
 ## Fields
 
-### `sourceCount`
+### `source_count` / `sourceCount`
 
 - Type: `int32` (singular)
 
 Number of sources from which intelligence was extracted.
 
-### `responseCount`
+### `response_count` / `responseCount`
 
 - Type: `int32` (singular)
 
 Total response count across all sources.
 
-### `neighbourInfluence`
+### `neighbour_influence` / `neighbourInfluence`
 
 - Type: `string` (singular)
 
@@ -28,7 +28,7 @@ Describes the neighbour influence of the verdict.
 
 ML Verdict provided by sources like Mandiant.
 
-### `analystVerdict`
+### `analyst_verdict` / `analystVerdict`
 
 - Type: [`AnalystVerdict`](security_result_analyst_verdict.md) (singular)
 

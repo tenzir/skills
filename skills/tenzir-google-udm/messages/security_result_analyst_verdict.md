@@ -4,19 +4,19 @@ Verdict provided by the human analyst. These fields are used to model Mandiant s
 
 ## Fields
 
-### `confidenceScore`
+### `confidence_score` / `confidenceScore`
 
 - Type: `int32` (singular)
 
 Confidence score of the verdict.
 
-### `verdictTime`
+### `verdict_time` / `verdictTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp at which the verdict was generated.
 
-### `verdictResponse`
+### `verdict_response` / `verdictResponse`
 
 - Type: [`VerdictResponse`](../enums/security_result_verdict_response.md) (singular)
 

@@ -16,13 +16,13 @@ Client certificate.
 
 JA3 hash from the TLS ClientHello, as a hex-encoded string.
 
-### `serverName`
+### `server_name` / `serverName`
 
 - Type: `string` (singular)
 
 Host name of the server, that the client is connecting to.
 
-### `supportedCiphers`
+### `supported_ciphers` / `supportedCiphers`
 
 - Type: `string` (repeated)
 

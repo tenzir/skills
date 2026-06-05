@@ -4,7 +4,7 @@ StringSequence represents a sequence of string.
 
 ## Fields
 
-### `stringVals`
+### `string_vals` / `stringVals`
 
 - Type: `string` (repeated)
 

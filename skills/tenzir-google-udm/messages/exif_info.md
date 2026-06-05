@@ -4,7 +4,7 @@ Exif information.
 
 ## Fields
 
-### `originalFile`
+### `original_file` / `originalFile`
 
 - Type: `string` (singular)
 
@@ -22,19 +22,19 @@ product name.
 
 company name.
 
-### `fileDescription`
+### `file_description` / `fileDescription`
 
 - Type: `string` (singular)
 
 description of a file.
 
-### `entryPoint`
+### `entry_point` / `entryPoint`
 
 - Type: `int64` (singular)
 
 entry point.
 
-### `compilationTime`
+### `compilation_time` / `compilationTime`
 
 - Type: `timestamp` (singular)
 

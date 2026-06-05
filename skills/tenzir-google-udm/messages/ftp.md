@@ -14,7 +14,7 @@ The FTP command.
 
 Population guidance from the Google UDM usage guide.
 
-### `Ftp.command`
+### `command`
 
 - **Purpose**: Stores the FTP command.
 - **Encoding**: String.

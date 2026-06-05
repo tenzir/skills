@@ -22,43 +22,43 @@ Categorisation done by VirusTotal partners.
 
 Difference hash and MD5 hash of the URL's.
 
-### `htmlMeta`
+### `html_meta` / `htmlMeta`
 
 - Type: `object` (singular)
 
 Meta tags (only for URLs downloading HTML).
 
-### `lastFinalUrl`
+### `last_final_url` / `lastFinalUrl`
 
 - Type: `string` (singular)
 
 If the original URL redirects, where does it end.
 
-### `lastHttpResponseCode`
+### `last_http_response_code` / `lastHttpResponseCode`
 
 - Type: `int32` (singular)
 
 HTTP response code of the last response.
 
-### `lastHttpResponseContentLength`
+### `last_http_response_content_length` / `lastHttpResponseContentLength`
 
 - Type: `int64` (singular)
 
 Length in bytes of the content received.
 
-### `lastHttpResponseContentSha256`
+### `last_http_response_content_sha256` / `lastHttpResponseContentSha256`
 
 - Type: `string` (singular)
 
 URL response body's SHA256 hash.
 
-### `lastHttpResponseCookies`
+### `last_http_response_cookies` / `lastHttpResponseCookies`
 
 - Type: `object` (singular)
 
 Website's cookies.
 
-### `lastHttpResponseHeaders`
+### `last_http_response_headers` / `lastHttpResponseHeaders`
 
 - Type: `object` (singular)
 

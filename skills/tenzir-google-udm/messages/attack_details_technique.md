@@ -16,13 +16,13 @@ Technique ID (e.g. "T1595").
 
 Technique Name (e.g. "Active Scanning").
 
-### `subtechniqueId`
+### `subtechnique_id` / `subtechniqueId`
 
 - Type: `string` (singular)
 
 Subtechnique ID (e.g. "T1595.001").
 
-### `subtechniqueName`
+### `subtechnique_name` / `subtechniqueName`
 
 - Type: `string` (singular)
 

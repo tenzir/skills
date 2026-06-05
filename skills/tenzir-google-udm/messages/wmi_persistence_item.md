@@ -16,7 +16,7 @@ A brief title or caption for the WMI object.
 
 The name of the WMI object.
 
-### `settingId`
+### `setting_id` / `settingId`
 
 - Type: `string` (singular)
 
@@ -28,13 +28,13 @@ The identifier for the setting.
 
 The base class from which the WMI class is derived (e.g., CIM_Setting).
 
-### `propertyCount`
+### `property_count` / `propertyCount`
 
 - Type: `int64` (singular)
 
 The number of properties in the WMI object.
 
-### `relPath`
+### `rel_path` / `relPath`
 
 - Type: `string` (singular)
 
@@ -46,13 +46,13 @@ The relative path to the WMI object (e.g., Win32_StartupCommand.Command=''').
 
 The top-level class in the WMI inheritance hierarchy (e.g., CMI_Setting).
 
-### `wmiSuperClass`
+### `wmi_super_class` / `wmiSuperClass`
 
 - Type: `string` (singular)
 
 The immediate parent class in the WMI inheritance hierarchy.
 
-### `wmiClass`
+### `wmi_class` / `wmiClass`
 
 - Type: `string` (singular)
 

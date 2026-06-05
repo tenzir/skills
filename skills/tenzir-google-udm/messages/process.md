@@ -10,14 +10,14 @@ Information about a process.
 
 The process ID. This field can be used as an entity indicator for process entities.
 
-### `parentPid`
+### `parent_pid` / `parentPid`
 
 - Type: `string` (singular)
 - Deprecated: `true`
 
-The ID of the parent process. Deprecated: use parentProcess.pid instead.
+The ID of the parent process. Deprecated: use parent_process.pid instead.
 
-### `parentProcess`
+### `parent_process` / `parentProcess`
 
 - Type: [`Process`](process.md) (singular)
 
@@ -29,31 +29,31 @@ Information about the parent process.
 
 Information about the file in use by the process.
 
-### `commandLine`
+### `command_line` / `commandLine`
 
 - Type: `string` (singular)
 
 The command line command that created the process. This field can be used as an entity indicator for process entities.
 
-### `commandLineHistory`
+### `command_line_history` / `commandLineHistory`
 
 - Type: `string` (repeated)
 
 The command line history of the process.
 
-### `productSpecificProcessId`
+### `product_specific_process_id` / `productSpecificProcessId`
 
 - Type: `string` (singular)
 
 A product specific process id.
 
-### `accessMask`
+### `access_mask` / `accessMask`
 
 - Type: `uint64` (singular)
 
 A bit mask representing the level of access.
 
-### `integrityLevelRid`
+### `integrity_level_rid` / `integrityLevelRid`
 
 - Type: `uint64` (singular)
 
@@ -89,7 +89,7 @@ The real group ID of the process.
 
 The identifier that points to the process group ID leader.
 
-### `sessionLeaderPid`
+### `session_leader_pid` / `sessionLeaderPid`
 
 - Type: `string` (singular)
 
@@ -101,18 +101,18 @@ The process ID of the session leader process.
 
 The teletype terminal which the command was executed within.
 
-### `tokenElevationType`
+### `token_elevation_type` / `tokenElevationType`
 
 - Type: [`TokenElevationType`](../enums/process_token_elevation_type.md) (singular)
 
 The elevation type of the process on Microsoft Windows. This determines if any privileges are removed when UAC is enabled.
 
-### `productSpecificParentProcessId`
+### `product_specific_parent_process_id` / `productSpecificParentProcessId`
 
 - Type: `string` (singular)
 - Deprecated: `true`
 
-A product specific id for the parent process. Please use parentProcess.productSpecificProcessId instead.
+A product specific id for the parent process. Please use parent_process.product_specific_process_id instead.
 
 ### `ipv6`
 
@@ -120,19 +120,19 @@ A product specific id for the parent process. Please use parentProcess.productSp
 
 This is used to determine if the process is an IPv6 process.
 
-### `kernelDuration`
+### `kernel_duration` / `kernelDuration`
 
 - Type: `duration` (singular)
 
 The kernel time spent in the process.
 
-### `userDuration`
+### `user_duration` / `userDuration`
 
 - Type: `duration` (singular)
 
 The user time spent in the process.
 
-### `realDuration`
+### `real_duration` / `realDuration`
 
 - Type: `duration` (singular)
 
@@ -148,7 +148,7 @@ The state of the process.
 
 Population guidance from the Google UDM usage guide.
 
-### `Process.commandLine`
+### `command_line` / `commandLine`
 
 - **Purpose**: Stores the command line string for the process.
 - **Encoding**: String.
@@ -158,7 +158,7 @@ Population guidance from the Google UDM usage guide.
 
 - `c:\windows\system32\net.exe` group.
 
-### `Process.file`
+### `file`
 
 - **Purpose**: Stores the filename of the file in use by the process.
 - **Encoding**: String.
@@ -168,12 +168,12 @@ Population guidance from the Google UDM usage guide.
 
 - report.xls
 
-### `Process.parentProcess`
+### `parent_process` / `parentProcess`
 
 - **Purpose**: Stores the details of the parent process.
 - **Encoding**: Noun (Process)
 
-### `Process.parentProcess.productSpecificProcessId`
+### `parent_process.product_specific_process_id` / `parentProcess.productSpecificProcessId`
 
 - **Purpose**: Stores the product specific process ID for the parent process.
 - **Encoding**: String.
@@ -183,7 +183,7 @@ Population guidance from the Google UDM usage guide.
 
 - `MySQL:78778` or `CS:90512`
 
-### `Process.pid`
+### `pid`
 
 - **Purpose**: Stores the process ID.
 - **Encoding**: String.
@@ -193,7 +193,7 @@ Population guidance from the Google UDM usage guide.
 - 308
 - 2002
 
-### `Process.productSpecificProcessId`
+### `product_specific_process_id` / `productSpecificProcessId`
 
 - **Purpose**: Stores the product specific process ID.
 - **Encoding**: String.

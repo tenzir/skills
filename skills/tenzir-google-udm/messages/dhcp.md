@@ -28,7 +28,7 @@ Hardware address length.
 
 Hardware ops.
 
-### `transactionId`
+### `transaction_id` / `transactionId`
 
 - Type: `uint32` (singular)
 
@@ -100,96 +100,96 @@ List of DHCP options.
 
 DHCP message type.
 
-### `leaseTimeSeconds`
+### `lease_time_seconds` / `leaseTimeSeconds`
 
 - Type: `uint32` (singular)
 
 Lease time in seconds. See RFC2132, section 9.2.
 
-### `clientHostname`
+### `client_hostname` / `clientHostname`
 
 - Type: `string` (singular)
 
 Client hostname. See RFC2132, section 3.14.
 
-### `clientIdentifier`
+### `client_identifier` / `clientIdentifier`
 
 - Type: `bytes` (singular)
 
-Client identifier. See RFC2132, section 9.14. Note: Make sure to update the clientIdentifierString field as well if you update this field.
+Client identifier. See RFC2132, section 9.14. Note: Make sure to update the client_identifier_string field as well if you update this field.
 
-### `requestedAddress`
+### `requested_address` / `requestedAddress`
 
 - Type: `string` (singular)
 
 Requested IP address. See RFC2132, section 9.1.
 
-### `clientIdentifierString`
+### `client_identifier_string` / `clientIdentifierString`
 
 - Type: `string` (singular)
 
-Client identifier as string. See RFC2132, section 9.14. This field holds the string value of the clientIdentifier.
+Client identifier as string. See RFC2132, section 9.14. This field holds the string value of the client_identifier.
 
 ## Guidance
 
 Population guidance from the Google UDM usage guide.
 
-### `Dhcp.chaddr`
+### `chaddr`
 
 - **Purpose**: Hardware address for the client.
 - **Encoding**: MAC address.
 
-### `Dhcp.ciaddr`
+### `ciaddr`
 
 - **Purpose**: IP address for the client.
 - **Encoding**: Valid IPv4 or IPv6 address (RFC 5942) encoded in ASCII.
 
-### `Dhcp.clientHostname`
+### `client_hostname` / `clientHostname`
 
 - **Purpose**: Hostname for the client. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: String.
 
-### `Dhcp.clientIdentifier`
+### `client_identifier` / `clientIdentifier`
 
 - **Purpose**: Client identifier. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: Bytes.
 
-### `Dhcp.file`
+### `file`
 
 - **Purpose**: Filename for the boot image.
 - **Encoding**: String.
 
-### `Dhcp.flags`
+### `flags`
 
 - **Purpose**: Value for the DHCP flags field.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.giaddr`
+### `giaddr`
 
 - **Purpose**: IP address for the relay agent.
 - **Encoding**: Valid IPv4 or IPv6 address (RFC 5942) encoded in ASCII.
 
-### `Dhcp.hlen`
+### `hlen`
 
 - **Purpose**: Hardware address length.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.hops`
+### `hops`
 
 - **Purpose**: DHCP hop count.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.htype`
+### `htype`
 
 - **Purpose**: Hardware address type.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.leaseTimeSeconds`
+### `lease_time_seconds` / `leaseTimeSeconds`
 
 - **Purpose**: Client-requested lease time for an IP address in seconds. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.opcode`
+### `opcode`
 
 - **Purpose**: BOOTP op code (see section 3 of RFC 951).
 - **Encoding**: Enumerated type.
@@ -198,32 +198,32 @@ Population guidance from the Google UDM usage guide.
   - `BOOTREQUEST`
   - `BOOTREPLY`
 
-### `Dhcp.requestedAddress`
+### `requested_address` / `requestedAddress`
 
 - **Purpose**: Client identifier. See RFC 2132, DHCP Options and BOOTP Vendor Extensions, for more information.
 - **Encoding**: Valid IPv4 or IPv6 address (RFC 5942) encoded in ASCII.
 
-### `Dhcp.seconds`
+### `seconds`
 
 - **Purpose**: Seconds elapsed since the client began the address acquisition/renewal process.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.siaddr`
+### `siaddr`
 
 - **Purpose**: IP address for the next bootstrap server.
 - **Encoding**: Valid IPv4 or IPv6 address (RFC 5942) encoded in ASCII.
 
-### `Dhcp.sname`
+### `sname`
 
 - **Purpose**: Name of the server that the client has requested to boot from.
 - **Encoding**: String.
 
-### `Dhcp.transactionId`
+### `transaction_id` / `transactionId`
 
 - **Purpose**: Client transaction ID.
 - **Encoding**: 32-bit unsigned integer.
 
-### `Dhcp.type`
+### `type`
 
 - **Purpose**: DHCP message type. See RFC 1533 for more information.
 - **Encoding**: Enumerated type.
@@ -240,7 +240,7 @@ Population guidance from the Google UDM usage guide.
   - `WIN_DELECTED`
   - `WIN_EXPIRED`
 
-### `Dhcp.yiaddr`
+### `yiaddr`
 
 - **Purpose**: Your IP address.
 - **Encoding**: Valid IPv4 or IPv6 address (RFC 5942) encoded in ASCII.

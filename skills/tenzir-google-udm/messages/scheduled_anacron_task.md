@@ -10,13 +10,13 @@ Information about a scheduled anacron task.
 
 Anacrontab period field. Value is an integer in days, or a string like "@daily", "@weekly", or "@monthly".
 
-### `delayMinutes`
+### `delay_minutes` / `delayMinutes`
 
 - Type: `int64` (singular)
 
 The delay in minutes before the job is run.
 
-### `jobId`
+### `job_id` / `jobId`
 
 - Type: `string` (singular)
 
@@ -28,7 +28,7 @@ The unique identifier of the job.
 
 The PATH environment variable defined in the anacrontab file.
 
-### `sourceLine`
+### `source_line` / `sourceLine`
 
 - Type: `string` (singular)
 

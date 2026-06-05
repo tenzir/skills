@@ -10,13 +10,13 @@ Information about a Windows scheduled task.
 
 The account name that authored or last modified the scheduled task.
 
-### `virtualPath`
+### `virtual_path` / `virtualPath`
 
 - Type: `string` (singular)
 
 The task's path in the Task Scheduler library.
 
-### `exitCode`
+### `exit_code` / `exitCode`
 
 - Type: `int32` (singular)
 
@@ -28,19 +28,19 @@ The result which was returned the last time the registered task was run.
 
 The operation state of the task.
 
-### `logonType`
+### `logon_type` / `logonType`
 
 - Type: [`TaskLogonType`](../enums/windows_scheduled_task_task_logon_type.md) (singular)
 
 The logon type of the task.
 
-### `taskActions`
+### `task_actions` / `taskActions`
 
 - Type: [`TaskAction`](windows_scheduled_task_task_action.md) (repeated)
 
 The actions of the scheduled task.
 
-### `taskTriggers`
+### `task_triggers` / `taskTriggers`
 
 - Type: [`TaskTrigger`](windows_scheduled_task_task_trigger.md) (repeated)
 

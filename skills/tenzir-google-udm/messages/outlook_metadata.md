@@ -22,7 +22,7 @@ The name of the template file used to create the Outlook item.
 
 The title of the Outlook item.
 
-### `securityFlagsCount`
+### `security_flags_count` / `securityFlagsCount`
 
 - Type: `int32` (singular)
 

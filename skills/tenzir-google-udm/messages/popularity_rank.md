@@ -16,7 +16,7 @@ Name of the rank serial number hexdump.
 
 Rank position.
 
-### `ingestionTime`
+### `ingestion_time` / `ingestionTime`
 
 - Type: `timestamp` (singular)
 

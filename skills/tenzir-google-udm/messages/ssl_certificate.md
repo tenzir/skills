@@ -4,7 +4,7 @@ SSL certificate.
 
 ## Fields
 
-### `certSignature`
+### `cert_signature` / `certSignature`
 
 - Type: [`CertSignature`](ssl_certificate_cert_signature.md) (singular)
 
@@ -17,13 +17,13 @@ Certificate's signature and algorithm.
 
 (DEPRECATED) certificate's extension.
 
-### `certExtensions`
+### `cert_extensions` / `certExtensions`
 
 - Type: `object` (singular)
 
 Certificate's extensions.
 
-### `firstSeenTime`
+### `first_seen_time` / `firstSeenTime`
 
 - Type: `timestamp` (singular)
 
@@ -41,13 +41,13 @@ Certificate's issuer data.
 
 EC public key information.
 
-### `serialNumber`
+### `serial_number` / `serialNumber`
 
 - Type: `string` (singular)
 
 Certificate's serial number hexdump.
 
-### `signatureAlgorithm`
+### `signature_algorithm` / `signatureAlgorithm`
 
 - Type: `string` (singular)
 
@@ -71,7 +71,7 @@ Certificate's subject data.
 
 Certificate's content SHA1 hash.
 
-### `thumbprintSha256`
+### `thumbprint_sha256` / `thumbprintSha256`
 
 - Type: `string` (singular)
 
@@ -89,7 +89,7 @@ Certificate's validity period.
 
 Certificate version (typically "V1", "V2" or "V3").
 
-### `publicKey`
+### `public_key` / `publicKey`
 
 - Type: [`PublicKey`](ssl_certificate_public_key.md) (singular)
 

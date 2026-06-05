@@ -16,13 +16,13 @@ Code sign identifier.
 
 Code sign format.
 
-### `compilationTime`
+### `compilation_time` / `compilationTime`
 
 - Type: `timestamp` (singular)
 
 Code sign timestamp
 
-### `teamId`
+### `team_id` / `teamId`
 
 - Type: `string` (singular)
 

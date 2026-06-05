@@ -4,19 +4,19 @@ File metadata for PE resource.
 
 ## Fields
 
-### `sha256Hex`
+### `sha256_hex` / `sha256Hex`
 
 - Type: `string` (singular)
 
 SHA256_hex field..
 
-### `filetypeMagic`
+### `filetype_magic` / `filetypeMagic`
 
 - Type: `string` (singular)
 
 Type of resource content, as identified by the magic Python module.
 
-### `languageCode`
+### `language_code` / `languageCode`
 
 - Type: `string` (singular)
 
@@ -28,7 +28,7 @@ Human-readable version of the language and sublanguage identifiers, as defined i
 
 Entropy of the resource.
 
-### `fileType`
+### `file_type` / `fileType`
 
 - Type: `string` (singular)
 

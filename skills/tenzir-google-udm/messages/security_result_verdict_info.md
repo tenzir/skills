@@ -4,79 +4,79 @@ Describes the threat verdict provided by human analysts and machine learning mod
 
 ## Fields
 
-### `sourceCount`
+### `source_count` / `sourceCount`
 
 - Type: `int32` (singular)
 
 Number of sources from which intelligence was extracted.
 
-### `responseCount`
+### `response_count` / `responseCount`
 
 - Type: `int32` (singular)
 
 Total response count across all sources.
 
-### `neighbourInfluence`
+### `neighbour_influence` / `neighbourInfluence`
 
 - Type: `string` (singular)
 
 Describes the near neighbor influence of the verdict.
 
-### `verdictType`
+### `verdict_type` / `verdictType`
 
 - Type: [`VerdictType`](../enums/security_result_verdict_type.md) (singular)
 
 Type of verdict.
 
-### `sourceProvider`
+### `source_provider` / `sourceProvider`
 
 - Type: `string` (singular)
 
 Source provider giving the machine learning verdict.
 
-### `benignCount`
+### `benign_count` / `benignCount`
 
 - Type: `int32` (singular)
 
 Count of responses where this IoC was marked as benign.
 
-### `maliciousCount`
+### `malicious_count` / `maliciousCount`
 
 - Type: `int32` (singular)
 
 Count of responses where this IoC was marked as malicious.
 
-### `confidenceScore`
+### `confidence_score` / `confidenceScore`
 
 - Type: `int32` (singular)
 
 Confidence score of the verdict.
 
-### `iocStats`
+### `ioc_stats` / `iocStats`
 
 - Type: [`IoCStats`](security_result_io_c_stats.md) (repeated)
 
 List of IoCStats from which the verdict was generated.
 
-### `verdictTime`
+### `verdict_time` / `verdictTime`
 
 - Type: `timestamp` (singular)
 
 Timestamp when the verdict was generated.
 
-### `verdictResponse`
+### `verdict_response` / `verdictResponse`
 
 - Type: [`VerdictResponse`](../enums/security_result_verdict_response.md) (singular)
 
 Details about the verdict.
 
-### `globalCustomerCount`
+### `global_customer_count` / `globalCustomerCount`
 
 - Type: `int32` (singular)
 
 Global customer count over the last 30 days
 
-### `globalHitsCount`
+### `global_hits_count` / `globalHitsCount`
 
 - Type: `int32` (singular)
 
@@ -88,13 +88,13 @@ Global hit count over the last 30 days.
 
 Whether one or more Mandiant incident response customers had this indicator in their environment.
 
-### `categoryDetails`
+### `category_details` / `categoryDetails`
 
 - Type: `string` (singular)
 
 Tags related to the verdict.
 
-### `pwnFirstTaggedTime`
+### `pwn_first_tagged_time` / `pwnFirstTaggedTime`
 
 - Type: `timestamp` (singular)
 

@@ -4,13 +4,13 @@ Captures additional details for system-level events.
 
 ## Fields
 
-### `messageType`
+### `message_type` / `messageType`
 
 - Type: `string` (singular)
 
 The specific type or category of the message.
 
-### `senderImageId`
+### `sender_image_id` / `senderImageId`
 
 - Type: `string` (singular)
 

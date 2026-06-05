@@ -10,7 +10,7 @@ Email info.
 
 The 'from' address.
 
-### `replyTo`
+### `reply_to` / `replyTo`
 
 - Type: `string` (singular)
 
@@ -34,7 +34,7 @@ A list of 'cc' addresses.
 
 A list of 'bcc' addresses.
 
-### `mailId`
+### `mail_id` / `mailId`
 
 - Type: `string` (singular)
 
@@ -46,7 +46,7 @@ The mail (or message) ID.
 
 The subject line(s) of the email.
 
-### `bounceAddress`
+### `bounce_address` / `bounceAddress`
 
 - Type: `string` (singular)
 
@@ -56,22 +56,22 @@ The envelope from address. [https://en.wikipedia.org/wiki/Bounce_address](https:
 
 Population guidance from the Google UDM usage guide.
 
-### `Email.bcc`
+### `bcc`
 
 - **Purpose**: Stores the bcc email addresses.
 - **Encoding**: String.
 
-### `Email.cc`
+### `cc`
 
 - **Purpose**: Stores the cc email addresses.
 - **Encoding**: String.
 
-### `Email.from`
+### `from`
 
 - **Purpose**: Stores the from email address.
 - **Encoding**: String.
 
-### `Email.mailId`
+### `mail_id` / `mailId`
 
 - **Purpose**: Stores the mail (or message) id.
 - **Encoding**: String.
@@ -81,12 +81,12 @@ Population guidance from the Google UDM usage guide.
 
 - 192544.132632@email.example.com
 
-### `Email.replyTo`
+### `reply_to` / `replyTo`
 
-- **Purpose**: Stores the `replyTo` email address.
+- **Purpose**: Stores the reply_to email address.
 - **Encoding**: String.
 
-### `Email.subject`
+### `subject`
 
 - **Purpose**: Stores the email subject line.
 - **Encoding**: String.
@@ -96,7 +96,7 @@ Population guidance from the Google UDM usage guide.
 
 - "Please read this message."
 
-### `Email.to`
+### `to`
 
 - **Purpose**: Stores the to email addresses.
 - **Encoding**: String.

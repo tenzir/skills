@@ -4,7 +4,7 @@ DoubleSequence represents a sequence of doubles.
 
 ## Fields
 
-### `doubleVals`
+### `double_vals` / `doubleVals`
 
 - Type: `double` (repeated)
 

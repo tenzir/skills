@@ -16,7 +16,7 @@ Indicates the chronological order in which the entry was added to the cache.
 
 Indicates whether the file associated with the entry was executed.
 
-### `controlSet`
+### `control_set` / `controlSet`
 
 - Type: `string` (singular)
 

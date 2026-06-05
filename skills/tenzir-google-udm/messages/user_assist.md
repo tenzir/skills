@@ -4,25 +4,25 @@ The UserAssist extension captures details specific to Windows User Assist events
 
 ## Fields
 
-### `applicationFocusCount`
+### `application_focus_count` / `applicationFocusCount`
 
 - Type: `int64` (singular)
 
 The number of times the application associated with the entry gained focus.
 
-### `applicationFocusDuration`
+### `application_focus_duration` / `applicationFocusDuration`
 
 - Type: `duration` (singular)
 
 The total duration the application associated with the entry was in focus.
 
-### `executionsCount`
+### `executions_count` / `executionsCount`
 
 - Type: `int64` (singular)
 
 The number of times the application associated with the entry has been executed.
 
-### `entryIndex`
+### `entry_index` / `entryIndex`
 
 - Type: `int64` (singular)
 

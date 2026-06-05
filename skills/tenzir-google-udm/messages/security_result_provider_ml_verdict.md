@@ -4,37 +4,37 @@ Deprecated. MLVerdict result provided from threat providers, like Mandiant. Thes
 
 ## Fields
 
-### `sourceProvider`
+### `source_provider` / `sourceProvider`
 
 - Type: `string` (singular)
 
 Source provider giving the ML verdict.
 
-### `benignCount`
+### `benign_count` / `benignCount`
 
 - Type: `int32` (singular)
 
 Count of responses where this IoC was marked benign.
 
-### `maliciousCount`
+### `malicious_count` / `maliciousCount`
 
 - Type: `int32` (singular)
 
 Count of responses where this IoC was marked malicious.
 
-### `confidenceScore`
+### `confidence_score` / `confidenceScore`
 
 - Type: `int32` (singular)
 
 Confidence score of the verdict.
 
-### `mandiantSources`
+### `mandiant_sources` / `mandiantSources`
 
 - Type: [`Source`](security_result_source.md) (repeated)
 
 List of mandiant sources from which the verdict was generated.
 
-### `thirdPartySources`
+### `third_party_sources` / `thirdPartySources`
 
 - Type: [`Source`](security_result_source.md) (repeated)
 

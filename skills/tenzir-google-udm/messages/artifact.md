@@ -16,13 +16,13 @@ IP address of the artifact. This field can be used as an entity indicator for an
 
 The prevalence of the artifact within the customer's environment.
 
-### `firstSeenTime`
+### `first_seen_time` / `firstSeenTime`
 
 - Type: `timestamp` (singular)
 
 First seen timestamp of the IP in the customer's environment.
 
-### `lastSeenTime`
+### `last_seen_time` / `lastSeenTime`
 
 - Type: `timestamp` (singular)
 
@@ -40,7 +40,7 @@ Location of the Artifact's IP address.
 
 Network information related to the Artifact's IP address.
 
-### `asOwner`
+### `as_owner` / `asOwner`
 
 - Type: `string` (singular)
 
@@ -58,19 +58,19 @@ Autonomous System Number to which the IP address belongs.
 
 The JARM hash for the IP address. (https://engineering.salesforce.com/easily-identify-malicious-servers-on-the-internet-with-jarm-e095edac525a).
 
-### `lastHttpsCertificate`
+### `last_https_certificate` / `lastHttpsCertificate`
 
 - Type: [`SSLCertificate`](ssl_certificate.md) (singular)
 
 SSL certificate information about the IP address.
 
-### `lastHttpsCertificateDate`
+### `last_https_certificate_date` / `lastHttpsCertificateDate`
 
 - Type: `timestamp` (singular)
 
 Most recent date for the certificate in VirusTotal.
 
-### `regionalInternetRegistry`
+### `regional_internet_registry` / `regionalInternetRegistry`
 
 - Type: `string` (singular)
 
@@ -88,7 +88,7 @@ Identification attributes
 
 WHOIS information as returned from the pertinent WHOIS server.
 
-### `whoisDate`
+### `whois_date` / `whoisDate`
 
 - Type: `timestamp` (singular)
 
@@ -106,7 +106,7 @@ VPN tunnels.
 
 Whether the VPN tunnels are configured for anonymous browsing or not.
 
-### `artifactClient`
+### `artifact_client` / `artifactClient`
 
 - Type: [`ArtifactClient`](artifact_client.md) (singular)
 

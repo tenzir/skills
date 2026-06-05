@@ -4,31 +4,31 @@ The prevalence of a resource within the customer's environment. This measures ho
 
 ## Fields
 
-### `rollingMax`
+### `rolling_max` / `rollingMax`
 
 - Type: `int32` (singular)
 
-The maximum number of assets per day accessing the resource over the trailing dayCount days.
+The maximum number of assets per day accessing the resource over the trailing day_count days.
 
-### `dayCount`
-
-- Type: `int32` (singular)
-
-The number of days over which rollingMax is calculated.
-
-### `rollingMaxSubDomains`
+### `day_count` / `dayCount`
 
 - Type: `int32` (singular)
 
-The maximum number of assets per day accessing the domain along with sub-domains over the trailing dayCount days. This field is only valid for domains.
+The number of days over which rolling_max is calculated.
 
-### `dayMax`
+### `rolling_max_sub_domains` / `rollingMaxSubDomains`
+
+- Type: `int32` (singular)
+
+The maximum number of assets per day accessing the domain along with sub-domains over the trailing day_count days. This field is only valid for domains.
+
+### `day_max` / `dayMax`
 
 - Type: `int32` (singular)
 
 The max prevalence score in a day interval window.
 
-### `dayMaxSubDomains`
+### `day_max_sub_domains` / `dayMaxSubDomains`
 
 - Type: `int32` (singular)
 

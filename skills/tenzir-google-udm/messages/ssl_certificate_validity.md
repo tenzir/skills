@@ -4,13 +4,13 @@ Defines certificate's validity period.
 
 ## Fields
 
-### `expiryTime`
+### `expiry_time` / `expiryTime`
 
 - Type: `timestamp` (singular)
 
 Expiry date.
 
-### `issueTime`
+### `issue_time` / `issueTime`
 
 - Type: `timestamp` (singular)
 

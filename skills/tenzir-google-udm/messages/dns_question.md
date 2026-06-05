@@ -32,17 +32,17 @@ The prevalence of the domain within the customer's environment.
 
 Population guidance from the Google UDM usage guide.
 
-### `Question.class`
+### `class`
 
 - **Purpose**: Stores the code specifying the class of the query.
 - **Encoding**: 32-bit integer.
 
-### `Question.name`
+### `name`
 
 - **Purpose**: Stores the domain name.
 - **Encoding**: String.
 
-### `Question.type`
+### `type`
 
 - **Purpose**: Stores the code specifying the type of the query.
 - **Encoding**: 32-bit integer.

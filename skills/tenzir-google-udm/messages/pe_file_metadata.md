@@ -4,7 +4,7 @@ Metadata about a Microsoft Windows Portable Executable.
 
 ## Fields
 
-### `importHash`
+### `import_hash` / `importHash`
 
 - Type: `string` (singular)
 

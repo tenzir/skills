@@ -4,7 +4,7 @@ BytesSequence represents a sequence of bytes.
 
 ## Fields
 
-### `bytesVals`
+### `bytes_vals` / `bytesVals`
 
 - Type: `bytes` (repeated)
 

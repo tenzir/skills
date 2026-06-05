@@ -4,7 +4,7 @@ Information about a user.
 
 ## Fields
 
-### `productObjectId`
+### `product_object_id` / `productObjectId`
 
 - Type: `string` (singular)
 
@@ -16,37 +16,37 @@ A vendor-specific identifier to uniquely identify the entity (e.g. a GUID, LDAP,
 
 The ID of the user. This field can be used as an entity indicator for user entities.
 
-### `userDisplayName`
+### `user_display_name` / `userDisplayName`
 
 - Type: `string` (singular)
 
 The display name of the user (e.g. "John Locke").
 
-### `firstName`
+### `first_name` / `firstName`
 
 - Type: `string` (singular)
 
 First name of the user (e.g. "John").
 
-### `middleName`
+### `middle_name` / `middleName`
 
 - Type: `string` (singular)
 
 Middle name of the user.
 
-### `lastName`
+### `last_name` / `lastName`
 
 - Type: `string` (singular)
 
 Last name of the user (e.g. "Locke").
 
-### `phoneNumbers`
+### `phone_numbers` / `phoneNumbers`
 
 - Type: `string` (repeated)
 
 Phone numbers for the user.
 
-### `personalAddress`
+### `personal_address` / `personalAddress`
 
 - Type: [`Location`](location.md) (singular)
 
@@ -58,13 +58,13 @@ Personal address of the user.
 
 Generic entity metadata attributes of the user.
 
-### `firstSeenTime`
+### `first_seen_time` / `firstSeenTime`
 
 - Type: `timestamp` (singular)
 
 The first observed time for a user. The value is calculated on the basis of the first time the identifier was observed.
 
-### `accountType`
+### `account_type` / `accountType`
 
 - Type: [`AccountType`](../enums/user_account_type.md) (singular)
 
@@ -75,27 +75,27 @@ Type of user account (for example, service, domain, or cloud). This is somewhat 
 - Type: `string` (singular)
 - Deprecated: `true`
 
-The ID of the group that the user belongs to. Deprecated in favor of the repeated groupIdentifiers field.
+The ID of the group that the user belongs to. Deprecated in favor of the repeated group_identifiers field.
 
-### `groupIdentifiers`
+### `group_identifiers` / `groupIdentifiers`
 
 - Type: `string` (repeated)
 
 Product object identifiers of the group(s) the user belongs to A vendor-specific identifier to uniquely identify the group(s) the user belongs to (a GUID, LDAP OID, or similar).
 
-### `windowsSid`
+### `windows_sid` / `windowsSid`
 
 - Type: `string` (singular)
 
 The Microsoft Windows SID of the user. This field can be used as an entity indicator for user entities.
 
-### `emailAddresses`
+### `email_addresses` / `emailAddresses`
 
 - Type: `string` (repeated)
 
 Email addresses of the user. This field can be used as an entity indicator for user entities.
 
-### `employeeId`
+### `employee_id` / `employeeId`
 
 - Type: `string` (singular)
 
@@ -107,7 +107,7 @@ Human capital management identifier. This field can be used as an entity indicat
 
 User job title.
 
-### `companyName`
+### `company_name` / `companyName`
 
 - Type: `string` (singular)
 
@@ -119,7 +119,7 @@ User job company name.
 
 User job department
 
-### `officeAddress`
+### `office_address` / `officeAddress`
 
 - Type: [`Location`](location.md) (singular)
 
@@ -131,81 +131,81 @@ User job office location.
 
 User job manager(s).
 
-### `hireDate`
+### `hire_date` / `hireDate`
 
 - Type: `timestamp` (singular)
 
 User job employment hire date.
 
-### `terminationDate`
+### `termination_date` / `terminationDate`
 
 - Type: `timestamp` (singular)
 
 User job employment termination date.
 
-### `timeOff`
+### `time_off` / `timeOff`
 
 - Type: [`TimeOff`](time_off.md) (repeated)
 
 User time off leaves from active work.
 
-### `lastLoginTime`
+### `last_login_time` / `lastLoginTime`
 
 - Type: `timestamp` (singular)
 
 User last login timestamp.
 
-### `lastPasswordChangeTime`
+### `last_password_change_time` / `lastPasswordChangeTime`
 
 - Type: `timestamp` (singular)
 
 User last password change timestamp.
 
-### `passwordExpirationTime`
+### `password_expiration_time` / `passwordExpirationTime`
 
 - Type: `timestamp` (singular)
 
 User password expiration timestamp.
 
-### `accountExpirationTime`
+### `account_expiration_time` / `accountExpirationTime`
 
 - Type: `timestamp` (singular)
 
 User account expiration timestamp.
 
-### `accountLockoutTime`
+### `account_lockout_time` / `accountLockoutTime`
 
 - Type: `timestamp` (singular)
 
 User account lockout timestamp.
 
-### `lastBadPasswordAttemptTime`
+### `last_bad_password_attempt_time` / `lastBadPasswordAttemptTime`
 
 - Type: `timestamp` (singular)
 
 User last bad password attempt timestamp.
 
-### `userAuthenticationStatus`
+### `user_authentication_status` / `userAuthenticationStatus`
 
 - Type: [`AuthenticationStatus`](../enums/authentication_authentication_status.md) (singular)
 
 System authentication status for user.
 
-### `roleName`
+### `role_name` / `roleName`
 
 - Type: `string` (singular)
 - Deprecated: `true`
 
 System role name for user. Deprecated: use attribute.roles.
 
-### `roleDescription`
+### `role_description` / `roleDescription`
 
 - Type: `string` (singular)
 - Deprecated: `true`
 
 System role description for user. Deprecated: use attribute.roles.
 
-### `userRole`
+### `user_role` / `userRole`
 
 - Type: [`User.Role`](../enums/user_role.md) (singular)
 - Deprecated: `true`
@@ -216,7 +216,7 @@ System role for user. Deprecated: use attribute.roles.
 
 Population guidance from the Google UDM usage guide.
 
-### `User.emailAddresses`
+### `email_addresses` / `emailAddresses`
 
 - **Purpose**: Stores the email addresses for the user.
 - **Encoding**: Repeated String.
@@ -226,7 +226,7 @@ Population guidance from the Google UDM usage guide.
 
 - johnlocke@company.example.com
 
-### `User.employeeId`
+### `employee_id` / `employeeId`
 
 - **Purpose**: Stores the human resources employee ID for the user.
 - **Encoding**: String.
@@ -236,7 +236,7 @@ Population guidance from the Google UDM usage guide.
 
 - 11223344.
 
-### `User.firstName`
+### `first_name` / `firstName`
 
 - **Purpose**: Stores the first name for the user.
 - **Encoding**: String.
@@ -246,7 +246,7 @@ Population guidance from the Google UDM usage guide.
 
 - John.
 
-### `User.groupIdentifiers`
+### `group_identifiers` / `groupIdentifiers`
 
 - **Purpose**: Stores the group ID(s) (a GUID, LDAP OID, or similar) associated with a user.
 - **Encoding**: Repeated String.
@@ -256,7 +256,7 @@ Population guidance from the Google UDM usage guide.
 
 - admin-users.
 
-### `User.lastName`
+### `last_name` / `lastName`
 
 - **Purpose**: Stores the last name for the user.
 - **Encoding**: String.
@@ -266,7 +266,7 @@ Population guidance from the Google UDM usage guide.
 
 - Locke.
 
-### `User.middleName`
+### `middle_name` / `middleName`
 
 - **Purpose**: Stores the middle name for the user.
 - **Encoding**: String.
@@ -276,7 +276,7 @@ Population guidance from the Google UDM usage guide.
 
 - Anthony.
 
-### `User.phoneNumbers`
+### `phone_numbers` / `phoneNumbers`
 
 - **Purpose**: Stores the phone numbers for the user.
 - **Encoding**: Repeated String.
@@ -286,7 +286,7 @@ Population guidance from the Google UDM usage guide.
 
 - 800-555-0101
 
-### `User.title`
+### `title`
 
 - **Purpose**: Stores the job title for the user.
 - **Encoding**: String.
@@ -296,7 +296,7 @@ Population guidance from the Google UDM usage guide.
 
 - Customer Relationship Manager.
 
-### `User.userDisplayName`
+### `user_display_name` / `userDisplayName`
 
 - **Purpose**: Stores the display name for the user.
 - **Encoding**: String.
@@ -306,7 +306,7 @@ Population guidance from the Google UDM usage guide.
 
 - John Locke.
 
-### `User.userid`
+### `userid`
 
 - **Purpose**: Stores the user ID.
 - **Encoding**: String.
@@ -316,7 +316,7 @@ Population guidance from the Google UDM usage guide.
 
 - jlocke.
 
-### `User.windowsSid`
+### `windows_sid` / `windowsSid`
 
 - **Purpose**: Stores the Microsoft Windows security identifier (SID) associated with a user.
 - **Encoding**: String.
