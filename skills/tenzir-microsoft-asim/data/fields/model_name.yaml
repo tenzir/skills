@@ -1,0 +1,8 @@
+name: ModelName
+summary: The name of the model.
+schemas:
+- name: AgentEvent
+  role: model
+  class: Optional
+  type: String
+  description: The name of the model.

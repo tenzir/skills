@@ -1,0 +1,10 @@
+name: TargetUserSessionGuid
+summary: The unique GUID of the target user's login session, as reported by the reporting device.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The unique GUID of the target user's login session, as reported by the reporting device.
+  examples:
+  - '{12345678-1234-1234-1234-123456789012}'

@@ -1,0 +1,52 @@
+name: ActorUsername
+summary: "The Actor\u2019s username, including domain information when available. For more information, see The User entity."
+schemas:
+- name: AgentEvent
+  role: actor
+  class: Optional
+  type: Username (String)
+  description: "The Actor\u2019s username, including domain information when available. For more information, see The User entity."
+  examples:
+  - AlbertE
+- name: AuditEvent
+  role: actor
+  class: Recommended
+  type: Username (String)
+  description: "The Actor\u2019s username, including domain information when available. For more information, see The User entity."
+  examples:
+  - AlbertE
+- name: Authentication
+  role: actor
+  class: Optional
+  type: Username (String)
+  description: "The Actor\u2019s username, including domain information when available. For more information, see The User entity."
+  examples:
+  - AlbertE
+- name: FileEvent
+  role: actor
+  class: Mandatory
+  type: Username (String)
+  description: The Actor username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the ActorUsernameType field. If other username formats are available, store them in the fields ActorUsername.
+  examples:
+  - AlbertE
+- name: ProcessEvent
+  role: actor
+  class: Mandatory
+  type: Username (String)
+  description: The Actor username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the ActorUsernameType field. If other username formats are available, store them in the fields ActorUsername.
+  examples:
+  - AlbertE
+- name: RegistryEvent
+  role: actor
+  class: Mandatory
+  type: Username (String)
+  description: The user name of the user who initiated the event.
+  examples:
+  - CONTOSO\WIN-GG82ULGC9GO$
+- name: UserManagement
+  role: actor
+  class: Mandatory
+  type: Username (String)
+  description: 'The Actor username, including domain information when available. Use one of the following formats and in the following order of priority: - Upn/Email: johndow@contoso.com - Windows: Contoso\johndow - DN: CN=Jeff Smith,OU=Sales,DC=Fabrikam,DC=COM - Simple: johndow. Use the Simple form only if domain information isn''t available. Store the Username type in the ActorUsernameType field. If other IDs are available, we recommend that you normalize the field names to ActorUserUpn, ActorUserWindows, and ActorUserDn. For more information, see The User entity.'
+  examples:
+  - AlbertE

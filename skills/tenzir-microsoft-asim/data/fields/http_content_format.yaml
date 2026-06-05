@@ -1,0 +1,10 @@
+name: HttpContentFormat
+summary: The content format part of the HttpContentType
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The content format part of the HttpContentType
+  examples:
+  - text/html

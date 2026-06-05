@@ -1,0 +1,17 @@
+name: TargetGeoCity
+summary: The city associated with the Target IP address.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: City
+  description: The city associated with the Target IP address.
+  examples:
+  - Burlington
+- name: Authentication
+  role: target
+  class: Optional
+  type: City
+  description: The city associated with the target IP address.
+  examples:
+  - Burlington

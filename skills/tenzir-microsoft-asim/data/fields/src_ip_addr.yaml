@@ -1,0 +1,61 @@
+name: SrcIpAddr
+summary: The IP address of the source.
+schemas:
+- name: AgentEvent
+  role: source
+  class: Optional
+  type: String
+  description: The IP address of the source.
+- name: AuditEvent
+  role: source
+  class: Recommended
+  type: IP address
+  description: The IP address from which the connection or session originated.
+  examples:
+  - 77.138.103.108
+- name: Authentication
+  role: source
+  class: Recommended
+  type: IP Address
+  description: The IP address of the source device.
+  examples:
+  - 2.2.2.2
+- name: DhcpEvent
+  role: source
+  class: Mandatory
+  type: IP Address
+  description: The IP address assigned to the client by the DHCP server.
+  examples:
+  - 192.168.12.1
+- name: Dns
+  role: source
+  class: Recommended
+  type: IP Address
+  description: The IP address of the client that sent the DNS request. For a recursive DNS request, this value would typically be the reporting device, and in most cases set to 127.0.0.1.
+  examples:
+  - 192.168.12.1
+- name: FileEvent
+  role: source
+  class: Recommended
+  type: IP Address
+  description: When the operation is initiated by a remote system, the IP address of this system.
+  examples:
+  - 185.175.35.214
+- name: NetworkSession
+  role: source
+  class: Recommended
+  type: IP address
+  required_if:
+  - SrcHostname is specified
+  description: The IP address from which the connection or session originated. This value is mandatory if SrcHostname is specified. If the session uses network address translation, SrcIpAddr is the publicly visible address, and not the original address of the source, which is stored in SrcNatIpAddr
+  examples:
+  - 77.138.103.108
+- name: UserManagement
+  role: source
+  class: Recommended
+  type: IP address
+  required_if:
+  - SrcHostname is specified
+  description: The IP address of the source device. This value is mandatory if SrcHostname is specified.
+  examples:
+  - 77.138.103.108

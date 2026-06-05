@@ -1,0 +1,10 @@
+name: HttpRequestXff
+summary: The HTTP X-Forwarded-For header.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: IP Address
+  description: The HTTP X-Forwarded-For header.
+  examples:
+  - 120.12.41.1

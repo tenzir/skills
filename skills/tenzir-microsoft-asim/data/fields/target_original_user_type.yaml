@@ -1,0 +1,18 @@
+name: TargetOriginalUserType
+summary: The user type as reported by the reporting device.
+schemas:
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: The user type as reported by the reporting device.
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the reporting device.
+- name: UserManagement
+  role: target
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the source.

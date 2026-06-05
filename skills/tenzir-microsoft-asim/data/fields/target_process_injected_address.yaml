@@ -1,0 +1,8 @@
+name: TargetProcessInjectedAddress
+summary: The memory address in which the responsible target process is stored.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The memory address in which the responsible target process is stored.

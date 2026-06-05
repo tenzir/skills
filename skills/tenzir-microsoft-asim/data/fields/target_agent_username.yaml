@@ -1,0 +1,8 @@
+name: TargetAgentUsername
+summary: The username of the target agent.
+schemas:
+- name: AgentEvent
+  role: target
+  class: Optional
+  type: String
+  description: The username of the target agent.

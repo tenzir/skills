@@ -1,0 +1,52 @@
+name: SrcDvcId
+summary: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: Authentication
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device as reported in the record. For
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: Dns
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device as reported in the record. For
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: FileEvent
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: UserManagement
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device as reported in the record.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3

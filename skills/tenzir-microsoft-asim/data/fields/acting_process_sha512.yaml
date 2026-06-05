@@ -1,0 +1,8 @@
+name: ActingProcessSHA512
+summary: The SHA-512 hash of the acting process image file.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: SHA512
+  description: The SHA-512 hash of the acting process image file.

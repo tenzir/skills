@@ -1,0 +1,17 @@
+name: SrcUserSessionId
+summary: The unique ID of the sign-in session of the Actor.
+schemas:
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: String
+  description: The unique ID of the sign-in session of the Actor.
+  examples:
+  - 102pTUgC3p8RIqHvzxLCHnFlg
+- name: Dns
+  role: source
+  class: Optional
+  type: String
+  description: The unique ID of the sign-in session of the Actor.
+  examples:
+  - 102pTUgC3p8RIqHvzxLCHnFlg

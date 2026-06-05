@@ -1,0 +1,7 @@
+name: EmailMessageId
+summary: Unique identifier for the email message, associated with the alert. e.g. Request for Invoice Access
+schemas:
+- name: AlertEvent
+  class: Optional
+  type: string
+  description: Unique identifier for the email message, associated with the alert. e.g. Request for Invoice Access

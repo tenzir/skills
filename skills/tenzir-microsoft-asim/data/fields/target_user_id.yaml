@@ -1,0 +1,24 @@
+name: TargetUserId
+summary: A machine-readable, alphanumeric, unique representation of the target user. For more information, and for alternative fields for additional IDs, see The User entity.
+schemas:
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the target user. For more information, and for alternative fields for additional IDs, see The User entity.
+  examples:
+  - 00urjk4znu3BcncfY0h7
+- name: ProcessEvent
+  role: target
+  class: Recommended
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the target user. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12
+- name: UserManagement
+  role: target
+  class: Optional
+  type: String
+  description: 'A machine-readable, alphanumeric, unique representation of the target user. Supported formats and types include: - SID (Windows): S-1-5-21-1377283216-344919071-3415362939-500 - UID (Linux): 4578 - AADID (Microsoft Entra ID): 9267d02c-5f76-40a9-a9eb-b686f3ca47aa - OktaId: 00urjk4znu3BcncfY0h7 - AWSId: 72643944673 Store the ID type in the TargetUserIdType field. If other IDs are available, we recommend that you normalize the field names to TargetUserSid, TargetUserUid, TargetUserAADID, TargetUserOktaId, and TargetUserAwsId, respectively. For more information, see The User entity.'
+  examples:
+  - S-1-12

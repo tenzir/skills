@@ -1,0 +1,8 @@
+name: TargetSessionId
+summary: The sign-in session identifier of the TargetUser on the source device.
+schemas:
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: The sign-in session identifier of the TargetUser on the source device.

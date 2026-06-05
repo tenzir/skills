@@ -1,0 +1,8 @@
+name: UserSessionId
+summary: The unique ID of the user's session associated with the alert. e.g. a1bc2de3-fh4i-j5kl-6mn7-op8qr9st0u
+schemas:
+- name: AlertEvent
+  role: user
+  class: Optional
+  type: string
+  description: The unique ID of the user's session associated with the alert. e.g. a1bc2de3-fh4i-j5kl-6mn7-op8qr9st0u

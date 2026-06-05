@@ -1,0 +1,15 @@
+name: RegistryKey
+summary: The registry key associated with the alert, normalized to standard root key naming conventions. e.g. HKEY_LOCAL_MACHINE\SOFTWARE\MTG
+schemas:
+- name: AlertEvent
+  role: registry
+  class: Optional
+  type: string
+  description: The registry key associated with the alert, normalized to standard root key naming conventions. e.g. HKEY_LOCAL_MACHINE\SOFTWARE\MTG
+- name: RegistryEvent
+  role: registry
+  class: Mandatory
+  type: String
+  description: The registry key associated with the operation, normalized to standard root key naming conventions. For more information, see Root Keys. Registry keys are similar to folders in file systems. For
+  examples:
+  - HKEY_LOCAL_MACHINE\SOFTWARE\MTG

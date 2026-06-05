@@ -1,0 +1,8 @@
+name: ParentProcessInjectedAddress
+summary: The memory address in which the responsible parent process is stored.
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Optional
+  type: String
+  description: The memory address in which the responsible parent process is stored.

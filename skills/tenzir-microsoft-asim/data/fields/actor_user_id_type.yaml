@@ -1,0 +1,46 @@
+name: ActorUserIdType
+summary: The type of the ID stored in the ActorUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+schemas:
+- name: AgentEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The type of the ID stored in the ActorUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: AuditEvent
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: The type of the ID stored in the ActorUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: Authentication
+  role: actor
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the ActorUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: FileEvent
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: The type of the ID stored in the ActorUserId field. For a list of allowed values and further information, refer to UserIdType in the Schema Overview article.
+- name: ProcessEvent
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: The type of the ID stored in the ActorUserId field. For a list of allowed values and further information refer to UserIdType in the Schema Overview article.
+- name: RegistryEvent
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: The type of the ID stored in the ActorUserId field. For more information, see The User entity.
+  examples:
+  - SID
+- name: UserManagement
+  role: actor
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SID
+  - UID
+  - AADID
+  - OktaId
+  - AWSId
+  description: The type of the ID stored in the ActorUserId field. Supported values include SID, UID, AADID, OktaId, and AWSId.

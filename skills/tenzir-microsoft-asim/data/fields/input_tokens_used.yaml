@@ -1,0 +1,8 @@
+name: InputTokensUsed
+summary: The number of input tokens used.
+schemas:
+- name: AgentEvent
+  role: model
+  class: Optional
+  type: long
+  description: The number of input tokens used.

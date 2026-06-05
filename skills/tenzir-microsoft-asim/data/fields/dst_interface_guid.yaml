@@ -1,0 +1,10 @@
+name: DstInterfaceGuid
+summary: The GUID of the network interface used on the destination device. 827c-266030f545a6
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: GUID (String)
+  description: The GUID of the network interface used on the destination device. 827c-266030f545a6
+  examples:
+  - 46ad544b-eaf0-47ef-

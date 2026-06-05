@@ -1,0 +1,10 @@
+name: HttpCookie
+summary: The content of the HTTP cookie header sent from the client to the server, containing name-value pairs of session data.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The content of the HTTP cookie header sent from the client to the server, containing name-value pairs of session data.
+  examples:
+  - session_id=abc123; user_pref=dark_mode

@@ -1,0 +1,52 @@
+name: SrcGeoLongitude
+summary: The longitude of the geographical coordinate associated with the source IP address.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: Authentication
+  role: source
+  class: Optional
+  type: Longitude
+  description: For more information, see Logical types.
+  examples:
+  - '-73.614830'
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: Dns
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: UserManagement
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'

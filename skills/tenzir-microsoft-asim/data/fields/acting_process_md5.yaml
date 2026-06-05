@@ -1,0 +1,10 @@
+name: ActingProcessMD5
+summary: The MD5 hash of the acting process image file.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The MD5 hash of the acting process image file.
+  examples:
+  - 75a599802f1fa166cdadb360960b1dd0

@@ -1,0 +1,49 @@
+name: ActorSessionId
+summary: The unique ID of the sign-in session of the Actor.
+schemas:
+- name: AuditEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the sign-in session of the Actor.
+  examples:
+  - 102pTUgC3p8RIqHvzxLCHnFlg
+- name: Authentication
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the sign-in session of the Actor.
+  examples:
+  - 102pTUgC3p8RIqHvzxLCHnFlg
+- name: FileEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the login session of the Actor.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: ProcessEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the login session of the Actor.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: RegistryEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the login session of the Actor.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows machine and the source sends a different type, make sure to convert the value. For example, if source sends a hexadecimal value, convert it to a decimal value.
+- name: UserManagement
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the login session of the Actor.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.

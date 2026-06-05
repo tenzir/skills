@@ -1,0 +1,52 @@
+name: DvcAction
+summary: 'The action taken on the network session. Supported values are: - Allow - Deny - Drop - Drop ICMP - Reset - Reset Source - Reset Destination - Encrypt - Decrypt - VPNroute'
+schemas:
+- name: AlertEvent
+  role: device
+  class: Optional
+- name: AuditEvent
+  role: device
+  class: Recommended
+- name: Authentication
+  role: device
+  class: Recommended
+- name: DhcpEvent
+  role: device
+  class: Recommended
+- name: Dns
+  role: device
+  class: Recommended
+- name: FileEvent
+  role: device
+  class: Recommended
+- name: NetworkSession
+  role: device
+  class: Recommended
+  type: Enumerated
+  allowed_values:
+  - Allow
+  - Deny
+  - Drop
+  - Drop ICMP
+  - Reset
+  - Reset Source
+  - Reset Destination
+  - Encrypt
+  - Decrypt
+  - VPNroute
+  description: 'The action taken on the network session. Supported values are: - Allow - Deny - Drop - Drop ICMP - Reset - Reset Source - Reset Destination - Encrypt - Decrypt - VPNroute'
+  examples:
+  - drop
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. The original value should be stored in the DvcOriginalAction field.
+- name: ProcessEvent
+  role: device
+  class: Recommended
+- name: RegistryEvent
+  role: device
+  class: Recommended
+- name: UserManagement
+  role: device
+  class: Recommended
+- name: WebSession
+  role: device
+  class: Recommended

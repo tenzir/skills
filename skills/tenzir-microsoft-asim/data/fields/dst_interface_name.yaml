@@ -1,0 +1,10 @@
+name: DstInterfaceName
+summary: The network interface used for the connection or session by the destination device.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The network interface used for the connection or session by the destination device.
+  examples:
+  - Microsoft Hyper-V Network Adapter

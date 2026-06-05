@@ -1,0 +1,7 @@
+name: PreviousPropertyValue
+summary: The previous value that was stored in the specified property.
+schemas:
+- name: UserManagement
+  class: Optional
+  type: String
+  description: The previous value that was stored in the specified property.

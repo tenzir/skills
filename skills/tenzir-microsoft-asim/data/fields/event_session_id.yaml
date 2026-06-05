@@ -1,0 +1,8 @@
+name: EventSessionId
+summary: The unique ID of the event session.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The unique ID of the event session.

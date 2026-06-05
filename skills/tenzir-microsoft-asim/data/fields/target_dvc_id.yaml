@@ -1,0 +1,17 @@
+name: TargetDvcId
+summary: The ID of the target device. If multiple IDs are available, use the most important one, and store the others in the fields TargetDvc.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: String
+  description: The ID of the target device. If multiple IDs are available, use the most important one, and store the others in the fields TargetDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: The ID of the target device. If multiple IDs are available, use the most important one, and store the others in the fields TargetDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3

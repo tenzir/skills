@@ -1,0 +1,19 @@
+name: DstFQDN
+summary: The destination device hostname, including domain information when available.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: FQDN (String)
+  description: The destination device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DstDomainType reflects the format used.
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: FQDN (String)
+  description: The destination device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DstDomainType reflects the format used.

@@ -1,0 +1,8 @@
+name: PlatformTargetAgentId
+summary: The unique ID of the platform target agent.
+schemas:
+- name: AgentEvent
+  role: platform
+  class: Optional
+  type: String
+  description: The unique ID of the platform target agent.

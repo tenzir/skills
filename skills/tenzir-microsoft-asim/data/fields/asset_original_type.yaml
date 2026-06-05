@@ -1,0 +1,8 @@
+name: AssetOriginalType
+summary: The original name of the high-level type of the asset at the source.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Recommended
+  type: string
+  description: The original name of the high-level type of the asset at the source.

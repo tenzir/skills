@@ -1,0 +1,11 @@
+name: EntityFeedType
+summary: 'The type or category of the data feed that provided the entity record. The allowed values are: Snapshot or Changefeed.'
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Snapshot
+  - Changefeed
+  description: 'The type or category of the data feed that provided the entity record. The allowed values are: Snapshot or Changefeed.'

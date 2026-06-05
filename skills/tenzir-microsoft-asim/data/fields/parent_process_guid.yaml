@@ -1,0 +1,17 @@
+name: ParentProcessGuid
+summary: A generated unique identifier (GUID) of the parent process. Enables identifying the process across systems.
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Optional
+  type: String
+  description: A generated unique identifier (GUID) of the parent process. Enables identifying the process across systems.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+- name: RegistryEvent
+  role: process
+  class: Optional
+  type: String
+  description: A generated unique identifier (GUID) of the parent process.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00

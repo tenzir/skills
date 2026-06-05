@@ -1,0 +1,10 @@
+name: DstUserId
+summary: A machine-readable, alphanumeric, unique representation of the destination user. For the supported format for different ID types, refer to the User entity.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the destination user. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12

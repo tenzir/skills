@@ -1,0 +1,20 @@
+name: FilePath
+summary: The full, normalized path of the target file, including the folder or location, the file name, and the extension. e.g. C:\Windows\System32\notepad.exe
+to:
+- TargetFilePath
+schemas:
+- name: AlertEvent
+  role: file
+  class: Optional
+  type: string
+  description: The full, normalized path of the target file, including the folder or location, the file name, and the extension. e.g. C:\Windows\System32\notepad.exe
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: string
+  description: The full path of the file associated with the asset.
+- name: FileEvent
+  role: file
+  class: Alias
+  to:
+  - TargetFilePath

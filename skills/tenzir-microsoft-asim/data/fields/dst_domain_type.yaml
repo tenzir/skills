@@ -1,0 +1,20 @@
+name: DstDomainType
+summary: 'The type of DstDomain, if known. Possible values include: - Windows (contoso\mypc) - FQDN (learn.microsoft.com) Required if DstDomain is used.'
+schemas:
+- name: Dns
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDomain is used
+  allowed_values:
+  - Windows (contoso\mypc)
+  - FQDN (learn.microsoft.com)
+  description: 'The type of DstDomain, if known. Possible values include: - Windows (contoso\mypc) - FQDN (learn.microsoft.com) Required if DstDomain is used.'
+- name: NetworkSession
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDomain is used
+  description: The type of DstDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if DstDomain is used.

@@ -1,0 +1,10 @@
+name: ParentProcessSHA256
+summary: The SHA-256 hash of the parent process image file. 2e1ec8cbb00b22629d2899f7c68da274
+schemas:
+- name: ProcessEvent
+  role: file
+  class: Optional
+  type: SHA256
+  description: The SHA-256 hash of the parent process image file. 2e1ec8cbb00b22629d2899f7c68da274
+  examples:
+  - e81bb824c4a09a811af17deae22f22dd

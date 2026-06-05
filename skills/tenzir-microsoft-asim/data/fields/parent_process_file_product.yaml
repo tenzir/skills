@@ -1,0 +1,10 @@
+name: ParentProcessFileProduct
+summary: The product name from the version information in parent process image file.
+schemas:
+- name: ProcessEvent
+  role: file
+  class: Optional
+  type: String
+  description: The product name from the version information in parent process image file.
+  examples:
+  - Notepad++

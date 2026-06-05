@@ -1,0 +1,8 @@
+name: EntityId
+summary: The unique identifier of the asset.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: string
+  description: The unique identifier of the asset.

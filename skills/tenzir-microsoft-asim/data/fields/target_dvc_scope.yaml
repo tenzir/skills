@@ -1,0 +1,13 @@
+name: TargetDvcScope
+summary: The cloud platform scope the device belongs to. TargetDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. TargetDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. TargetDvcScope map to a subscription ID on Azure and to an account ID on AWS.

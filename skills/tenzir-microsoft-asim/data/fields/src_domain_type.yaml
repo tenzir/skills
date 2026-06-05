@@ -1,0 +1,61 @@
+name: SrcDomainType
+summary: The type of SrcDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if SrcDomain is used.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Conditional
+  type: DomainType
+  required_if:
+  - SrcDomain is used
+  description: The type of SrcDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if SrcDomain is used.
+- name: Authentication
+  role: source
+  class: Conditional
+  type: DomainType
+  required_if:
+  - SrcDomain is used
+  description: The type of SrcDomain. For a list of allowed values and further information refer to DomainType in the Schema Overview article. Required if SrcDomain is used.
+- name: DhcpEvent
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDomain is used
+  allowed_values:
+  - Windows (such as
+  - FQDN (such as
+  description: 'The type of SrcDomain, if known. Possible values include: - Windows (such as: contoso) - FQDN (such as: microsoft.com) Required if SrcDomain is used.'
+- name: Dns
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDomain is used
+  allowed_values:
+  - Windows (such as
+  - FQDN (such as
+  description: 'The type of SrcDomain, if known. Possible values include: - Windows (such as: contoso) - FQDN (such as: microsoft.com) Required if SrcDomain is used.'
+- name: FileEvent
+  role: source
+  class: Conditional
+  type: DomainType
+  required_if:
+  - SrcDomain is used
+  description: The type of SrcDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if SrcDomain is used.
+- name: NetworkSession
+  role: source
+  class: Conditional
+  type: DomainType
+  required_if:
+  - SrcDomain is used
+  description: The type of SrcDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if SrcDomain is used.
+- name: UserManagement
+  role: source
+  class: Recommended
+  type: Enumerated
+  required_if:
+  - SrcDomain is used
+  allowed_values:
+  - Windows (such as contoso)
+  - FQDN (such as microsoft.com)
+  description: 'The type of SrcDomain, if known. Possible values include: - Windows (such as contoso) - FQDN (such as microsoft.com) Required if SrcDomain is used.'

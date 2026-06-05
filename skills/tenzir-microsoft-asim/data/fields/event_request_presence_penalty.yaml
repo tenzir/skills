@@ -1,0 +1,8 @@
+name: EventRequestPresencePenalty
+summary: The presence penalty parameter of the event request.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: double
+  description: The presence penalty parameter of the event request.

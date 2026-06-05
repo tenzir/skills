@@ -1,0 +1,8 @@
+name: EntityLastAccessedTime
+summary: The timestamp (UTC) of when the entity was last accessed.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Optional
+  type: datetime
+  description: The timestamp (UTC) of when the entity was last accessed.

@@ -1,0 +1,10 @@
+name: NetworkRuleNumber
+summary: The number of the rule by which DvcAction was decided upon.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Integer
+  description: The number of the rule by which DvcAction was decided upon.
+  examples:
+  - '23'

@@ -1,0 +1,8 @@
+name: EventRequestFrequencyPenalty
+summary: The frequency penalty parameter of the event request.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: double
+  description: The frequency penalty parameter of the event request.

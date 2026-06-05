@@ -1,0 +1,8 @@
+name: DnsFlagsRecursionDesired
+summary: The DNS RD flag indicates in a request that that client would like the server to use recursive queries.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS RD flag indicates in a request that that client would like the server to use recursive queries.

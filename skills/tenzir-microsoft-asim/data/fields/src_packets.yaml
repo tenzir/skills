@@ -1,0 +1,10 @@
+name: SrcPackets
+summary: The number of packets sent from the source to the destination for the connection or session. The meaning of a packet is defined by the reporting device. If the event is aggregated, SrcPackets should be the sum over all aggregated sessions.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Long
+  description: The number of packets sent from the source to the destination for the connection or session. The meaning of a packet is defined by the reporting device. If the event is aggregated, SrcPackets should be the sum over all aggregated sessions.
+  examples:
+  - '6478'

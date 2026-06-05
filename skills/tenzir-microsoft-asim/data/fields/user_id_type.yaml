@@ -1,0 +1,15 @@
+name: UserIdType
+summary: 'The type of the user ID, such as GUID, SID, or Email. Supported values are: - GUID - SID - Email - Username - Phone - Other'
+schemas:
+- name: AlertEvent
+  role: user
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - GUID
+  - SID
+  - Email
+  - Username
+  - Phone
+  - Other
+  description: 'The type of the user ID, such as GUID, SID, or Email. Supported values are: - GUID - SID - Email - Username - Phone - Other'

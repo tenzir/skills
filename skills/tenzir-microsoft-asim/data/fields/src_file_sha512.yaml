@@ -1,0 +1,8 @@
+name: SrcFileSHA512
+summary: The SHA-512 hash of the source file.
+schemas:
+- name: FileEvent
+  role: source
+  class: Optional
+  type: SHA512
+  description: The SHA-512 hash of the source file.

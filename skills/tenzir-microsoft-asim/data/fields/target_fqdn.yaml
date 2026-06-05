@@ -1,0 +1,19 @@
+name: TargetFQDN
+summary: The target device hostname, including domain information when available.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: FQDN (String)
+  description: The target device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The TargetDomainType reflects the format used.
+- name: Authentication
+  role: target
+  class: Optional
+  type: FQDN (String)
+  description: The target device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The TargetDomainType reflects the format used.

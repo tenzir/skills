@@ -1,0 +1,35 @@
+name: DvcDomainType
+schemas:
+- name: AlertEvent
+  role: device
+  class: Recommended
+- name: AuditEvent
+  role: device
+  class: Recommended
+- name: Authentication
+  role: device
+  class: Recommended
+- name: DhcpEvent
+  role: device
+  class: Recommended
+- name: Dns
+  role: device
+  class: Recommended
+- name: FileEvent
+  role: device
+  class: Recommended
+- name: NetworkSession
+  role: device
+  class: Recommended
+- name: ProcessEvent
+  role: device
+  class: Recommended
+- name: RegistryEvent
+  role: device
+  class: Recommended
+- name: UserManagement
+  role: device
+  class: Recommended
+- name: WebSession
+  role: device
+  class: Recommended

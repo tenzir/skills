@@ -1,0 +1,8 @@
+name: Username
+summary: Name of the user associated with the alert, including domain information when available. e.g. Contoso\JSmith or john.smith@contoso.com
+schemas:
+- name: AlertEvent
+  role: user
+  class: Recommended
+  type: Username (string)
+  description: Name of the user associated with the alert, including domain information when available. e.g. Contoso\JSmith or john.smith@contoso.com

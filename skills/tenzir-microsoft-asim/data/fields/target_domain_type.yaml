@@ -1,0 +1,17 @@
+name: TargetDomainType
+summary: The type of TargetDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if TargetDomain is used.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - TargetDomain is used
+  description: The type of TargetDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if TargetDomain is used.
+- name: Authentication
+  role: target
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - TargetDomain is used
+  description: The type of TargetDomain. For a list of allowed values and further information refer to DomainType in the Schema Overview article. Required if TargetDomain is used.

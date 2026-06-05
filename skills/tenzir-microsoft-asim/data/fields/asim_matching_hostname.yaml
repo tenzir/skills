@@ -1,0 +1,8 @@
+name: ASimMatchingHostname
+summary: When a parser uses the hostname_has_any filtering parameters, this field is set with the one of the values SrcHostname, DstHostname, or Both to reflect the matching fields or fields.
+schemas:
+- name: NetworkSession
+  role: common
+  class: Recommended
+  type: Enumerated
+  description: When a parser uses the hostname_has_any filtering parameters, this field is set with the one of the values SrcHostname, DstHostname, or Both to reflect the matching fields or fields.

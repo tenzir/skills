@@ -1,0 +1,11 @@
+name: TargetFilePath
+summary: The full, normalized path of the target file, including the folder or location, the file name, and the extension. For more information, see Path structure.
+schemas:
+- name: FileEvent
+  role: target
+  class: Mandatory
+  type: String
+  description: The full, normalized path of the target file, including the folder or location, the file name, and the extension. For more information, see Path structure.
+  examples:
+  - C:\Windows\System32\notepad.exe
+  notes: If the record does not include folder or location information, store the filename only here.

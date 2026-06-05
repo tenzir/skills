@@ -1,0 +1,8 @@
+name: UserScopeId
+summary: The scope ID, such as Microsoft Entra Directory ID, in which UserId and Username are defined. e.g. a1bc2de3-fh4i-j5kl-6mn7-op8qrs
+schemas:
+- name: AlertEvent
+  role: user
+  class: Optional
+  type: string
+  description: The scope ID, such as Microsoft Entra Directory ID, in which UserId and Username are defined. e.g. a1bc2de3-fh4i-j5kl-6mn7-op8qrs

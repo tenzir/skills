@@ -1,0 +1,20 @@
+name: FileSHA1
+summary: SHA1 hash of the file. e.g. j5kl6mn7op8qr9st0uv1
+schemas:
+- name: AlertEvent
+  role: file
+  class: Optional
+  type: string
+  description: SHA1 hash of the file. e.g. j5kl6mn7op8qr9st0uv1
+- name: AssetEntity
+  role: file
+  class: Optional
+  type: string
+  description: The SHA-1 hash of the file associated with the asset.
+- name: WebSession
+  role: file
+  class: Optional
+  type: SHA1
+  description: For HTTP uploads, the SHA1 hash of the uploaded file. c801c4665d3338acdab0
+  examples:
+  - d55c5a4df19b46db8c54

@@ -1,0 +1,8 @@
+name: DhcpVendorClassId
+summary: The DHCP Vendor Class Id, as defined by RFC3925.
+schemas:
+- name: DhcpEvent
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP Vendor Class Id, as defined by RFC3925.

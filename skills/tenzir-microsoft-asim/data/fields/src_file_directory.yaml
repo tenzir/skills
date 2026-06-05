@@ -1,0 +1,9 @@
+name: SrcFileDirectory
+summary: The source file folder or location. This field should be similar to the SrcFilePath field, without the final element.
+schemas:
+- name: FileEvent
+  role: source
+  class: Optional
+  type: String
+  description: The source file folder or location. This field should be similar to the SrcFilePath field, without the final element.
+  notes: A parser can provide this value if the value is available in the log source, and does not need to be extracted from the full path.

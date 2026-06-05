@@ -1,0 +1,8 @@
+name: TargetProcessCreationTime
+summary: The product version from the version information of the target process image file.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Recommended
+  type: DateTime
+  description: The product version from the version information of the target process image file.

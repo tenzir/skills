@@ -1,0 +1,10 @@
+name: RegistryPreviousValueType
+summary: For operations that modify the registry, the original value type. If the type was not changed, this field will have the same value as the RegistryValueType field, normalized to the standard form. For more information, see Value types.
+schemas:
+- name: RegistryEvent
+  role: registry
+  class: Recommended
+  type: String
+  description: For operations that modify the registry, the original value type. If the type was not changed, this field will have the same value as the RegistryValueType field, normalized to the standard form. For more information, see Value types.
+  examples:
+  - Reg_Expand_Sz

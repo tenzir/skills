@@ -1,0 +1,8 @@
+name: ProcessCommandLine
+summary: Command line used to start the process. e.g. "choco.exe" -v
+schemas:
+- name: AlertEvent
+  role: process
+  class: Optional
+  type: string
+  description: Command line used to start the process. e.g. "choco.exe" -v

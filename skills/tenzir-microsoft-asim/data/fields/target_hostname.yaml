@@ -1,0 +1,17 @@
+name: TargetHostname
+summary: The target device hostname, excluding domain information.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Recommended
+  type: Hostname
+  description: The target device hostname, excluding domain information.
+  examples:
+  - DESKTOP-1282V4D
+- name: Authentication
+  role: target
+  class: Recommended
+  type: Hostname
+  description: The target device hostname, excluding domain information.
+  examples:
+  - DESKTOP-1282V4D

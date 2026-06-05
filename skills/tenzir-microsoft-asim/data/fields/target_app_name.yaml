@@ -1,0 +1,24 @@
+name: TargetAppName
+summary: The name of the application to which event applies, including a service, a URL, or a SaaS application.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: String
+  description: The name of the application to which event applies, including a service, a URL, or a SaaS application.
+  examples:
+  - Exchange 365
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: The name of the application to which the authorization is required, including a service, a URL, or a SaaS application.
+  examples:
+  - Saleforce
+- name: FileEvent
+  role: target
+  class: Optional
+  type: String
+  description: The name of the destination application.
+  examples:
+  - Facebook

@@ -1,0 +1,15 @@
+name: GroupNameType
+summary: Specifies the type of the group name stored in the GroupName field. Supported values include UPN, Windows, DN, and Simple.
+schemas:
+- name: UserManagement
+  role: group
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - UPN
+  - Windows
+  - DN
+  - Simple
+  description: Specifies the type of the group name stored in the GroupName field. Supported values include UPN, Windows, DN, and Simple.
+  examples:
+  - Windows

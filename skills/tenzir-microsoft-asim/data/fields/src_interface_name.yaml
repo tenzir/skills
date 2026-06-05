@@ -1,0 +1,10 @@
+name: SrcInterfaceName
+summary: The network interface used for the connection or session by the source device.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The network interface used for the connection or session by the source device.
+  examples:
+  - eth01

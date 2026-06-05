@@ -1,0 +1,8 @@
+name: ToolOriginalType
+summary: The original type of the tool.
+schemas:
+- name: AgentEvent
+  role: tool
+  class: Optional
+  type: String
+  description: The original type of the tool.

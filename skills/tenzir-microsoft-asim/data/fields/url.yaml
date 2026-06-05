@@ -1,0 +1,22 @@
+name: Url
+summary: The URL string captured in the alert. e.g. https://contoso.com/fo/?k=v&q=u#f
+to:
+- TargetUrl
+schemas:
+- name: AlertEvent
+  role: web
+  class: Optional
+  type: string
+  description: The URL string captured in the alert. e.g. https://contoso.com/fo/?k=v&q=u#f
+- name: FileEvent
+  role: web
+  class: Alias
+  to:
+  - TargetUrl
+- name: WebSession
+  role: web
+  class: Mandatory
+  type: URL (String)
+  description: The HTTP request URL, including parameters. For HTTPSession events, the URL may include the schema and should include the server name. For WebServerSession and for ApiRequest the URL would typically not include the schema and server, which can be found in the NetworkApplicationProtocol and DstFQDN fields respectively.
+  examples:
+  - https://contoso.com/fo/?k=v&q=u#f

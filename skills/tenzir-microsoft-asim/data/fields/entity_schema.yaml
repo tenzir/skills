@@ -1,0 +1,9 @@
+name: EntitySchema
+summary: The schema used for the entity. The schema documented here is Asset.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: Enumerated
+  value: Asset
+  description: The schema used for the entity. The schema documented here is Asset.

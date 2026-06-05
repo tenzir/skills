@@ -1,0 +1,38 @@
+name: SrcDvcScope
+summary: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: Authentication
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: Dns
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: FileEvent
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: UserManagement
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.

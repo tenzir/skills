@@ -1,0 +1,8 @@
+name: ProcessFileCompany
+summary: Company that created the process image file. e.g. Microsoft
+schemas:
+- name: AlertEvent
+  role: file
+  class: Optional
+  type: string
+  description: Company that created the process image file. e.g. Microsoft

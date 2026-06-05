@@ -1,0 +1,10 @@
+name: ActingProcessFilename
+summary: The file name part of the ActingProcessName, without folder information.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The file name part of the ActingProcessName, without folder information.
+  examples:
+  - explorer.exe

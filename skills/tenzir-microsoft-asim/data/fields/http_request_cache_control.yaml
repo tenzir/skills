@@ -1,0 +1,10 @@
+name: HttpRequestCacheControl
+summary: The content of the HTTP Cache-Control request header, specifying caching directives from the client.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: String
+  description: The content of the HTTP Cache-Control request header, specifying caching directives from the client.
+  examples:
+  - no-cache

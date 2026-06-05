@@ -1,0 +1,8 @@
+name: TargetProcessFileOriginalName
+summary: The product original file name from the version information of the image file of the target process.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The product original file name from the version information of the image file of the target process.

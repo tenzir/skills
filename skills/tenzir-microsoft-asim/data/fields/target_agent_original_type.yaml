@@ -1,0 +1,8 @@
+name: TargetAgentOriginalType
+summary: The original type of the target agent.
+schemas:
+- name: AgentEvent
+  role: target
+  class: Optional
+  type: String
+  description: The original type of the target agent.

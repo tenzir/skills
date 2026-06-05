@@ -1,0 +1,8 @@
+name: NetworkConnectionHistory
+summary: TCP flags and other potential IP header information.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: String
+  description: TCP flags and other potential IP header information.

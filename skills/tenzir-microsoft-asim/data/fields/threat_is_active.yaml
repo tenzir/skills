@@ -1,0 +1,59 @@
+name: ThreatIsActive
+summary: 'Indicates whether the threat is currently active. Supported values are: True, False'
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: bool
+  allowed_values:
+  - 'True'
+  - 'False'
+  description: 'Indicates whether the threat is currently active. Supported values are: True, False'
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: bool
+  allowed_values:
+  - 'True'
+  - 'False'
+  description: 'Indicates whether the threat is currently active. Supported values are: True, False'
+- name: Dns
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.

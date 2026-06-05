@@ -1,0 +1,10 @@
+name: NetworkBytes
+summary: Number of bytes sent in both directions. If both BytesReceived and BytesSent exist, BytesTotal should equal their sum. If the event is aggregated, NetworkBytes should be the sum over all aggregated sessions.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Long
+  description: Number of bytes sent in both directions. If both BytesReceived and BytesSent exist, BytesTotal should equal their sum. If the event is aggregated, NetworkBytes should be the sum over all aggregated sessions.
+  examples:
+  - '78991'

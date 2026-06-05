@@ -1,0 +1,11 @@
+name: AlertDescription
+summary: AlertDescription is an alias for EventMessage.
+to:
+- EventMessage
+schemas:
+- name: AlertEvent
+  role: alert
+  class: Alias
+  type: string
+  to:
+  - EventMessage

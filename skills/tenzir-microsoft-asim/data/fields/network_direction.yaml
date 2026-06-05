@@ -1,0 +1,15 @@
+name: NetworkDirection
+summary: 'The direction of the connection or session: - For the EventType NetworkSession, Flow or L2NetworkSession, NetworkDirection represents the direction relative to the organization or cloud environment boundary. Supported values are Inbound, Outbound, Local (to the organization), External (to the organization) or NA (Not Applicable). - For the EventType EndpointNetworkSession, NetworkDirection represents the direction relative to the endpoint. Supported values are Inbound, Outbound, Local (to the system), Listen or NA (Not Applicable). The Listen value indicates that a device has started accepting network connections but isn''t actually, necessarily, connected.'
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Inbound
+  - Outbound
+  - Local
+  - External
+  - NA
+  - Listen
+  description: 'The direction of the connection or session: - For the EventType NetworkSession, Flow or L2NetworkSession, NetworkDirection represents the direction relative to the organization or cloud environment boundary. Supported values are Inbound, Outbound, Local (to the organization), External (to the organization) or NA (Not Applicable). - For the EventType EndpointNetworkSession, NetworkDirection represents the direction relative to the endpoint. Supported values are Inbound, Outbound, Local (to the system), Listen or NA (Not Applicable). The Listen value indicates that a device has started accepting network connections but isn''t actually, necessarily, connected.'

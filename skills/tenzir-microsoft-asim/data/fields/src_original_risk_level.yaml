@@ -1,0 +1,38 @@
+name: SrcOriginalRiskLevel
+summary: The risk level associated with the source, as reported by the reporting device.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: Authentication
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: Dns
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: UserManagement
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious

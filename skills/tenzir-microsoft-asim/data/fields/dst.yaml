@@ -1,0 +1,59 @@
+name: Dst
+summary: Dst is an alias for DstDvcId, DstHostname, DstIpAddr, TargetAppId, TargetAppName, TargetDvcId, TargetHostname, TargetIpAddr.
+to:
+- DstDvcId
+- DstHostname
+- DstIpAddr
+- TargetAppId
+- TargetAppName
+- TargetDvcId
+- TargetHostname
+- TargetIpAddr
+schemas:
+- name: AuditEvent
+  role: destination
+  class: Alias
+  type: String
+  to:
+  - TargetAppId
+  - TargetAppName
+  - TargetDvcId
+  - TargetHostname
+  - TargetIpAddr
+  resolution: A unique identifier of the authentication target. This field may alias the TargetDvcId, TargetHostname, TargetIpAddr, TargetAppId, or TargetAppName fields.
+  examples:
+  - 192.168.12.1
+- name: Authentication
+  role: destination
+  class: Alias
+  type: String
+  to:
+  - TargetAppId
+  - TargetAppName
+  - TargetDvcId
+  - TargetHostname
+  - TargetIpAddr
+  resolution: A unique identifier of the authentication target. This field may alias the TargetDvcId, TargetHostname, TargetIpAddr, TargetAppId, or TargetAppName fields.
+  examples:
+  - 192.168.12.1
+- name: Dns
+  role: destination
+  class: Alias
+  type: String
+  to:
+  - DstDvcId
+  - DstHostname
+  - DstIpAddr
+  resolution: A unique identifier of the server that received the DNS request. This field may alias the DstDvcId, DstHostname, or DstIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: NetworkSession
+  role: destination
+  class: Alias
+  to:
+  - DstDvcId
+  - DstHostname
+  - DstIpAddr
+  resolution: A unique identifier of the server receiving the DNS request. This field might alias the DstDvcId, DstHostname, or DstIpAddr fields.
+  examples:
+  - 192.168.12.1

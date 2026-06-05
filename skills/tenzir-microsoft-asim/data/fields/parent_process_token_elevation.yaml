@@ -1,0 +1,10 @@
+name: ParentProcessTokenElevation
+summary: A token indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the parent process.
+schemas:
+- name: ProcessEvent
+  role: process
+  class: Optional
+  type: String
+  description: A token indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the parent process.
+  examples:
+  - None

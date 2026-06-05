@@ -1,0 +1,8 @@
+name: ActorUserScopeId
+summary: The scope ID, such as Microsoft Entra Directory ID, in which ActorUserId and ActorUsername are defined. For more information and a list of allowed values, see UserScopeId in the Schema Overview article.
+schemas:
+- name: AgentEvent
+  role: actor
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which ActorUserId and ActorUsername are defined. For more information and a list of allowed values, see UserScopeId in the Schema Overview article.

@@ -1,0 +1,8 @@
+name: TcpFlagsFin
+summary: The TCP FIN Flag reported. The finished flag means there is no more data from the sender. Therefore, it is used in the last packet sent from the sender.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP FIN Flag reported. The finished flag means there is no more data from the sender. Therefore, it is used in the last packet sent from the sender.

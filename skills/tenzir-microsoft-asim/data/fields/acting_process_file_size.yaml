@@ -1,0 +1,8 @@
+name: ActingProcessFileSize
+summary: The size of the file that ran the acting process.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: Long
+  description: The size of the file that ran the acting process.

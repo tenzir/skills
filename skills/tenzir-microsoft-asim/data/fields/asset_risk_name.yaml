@@ -1,0 +1,8 @@
+name: AssetRiskName
+summary: The normalized name of the risk or threat associated with the asset.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: string
+  description: The normalized name of the risk or threat associated with the asset.

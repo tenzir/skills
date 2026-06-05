@@ -1,0 +1,7 @@
+name: OriginalUserType
+summary: The user type as reported by the reporting device.
+schemas:
+- name: AlertEvent
+  class: Optional
+  type: string
+  description: The user type as reported by the reporting device.

@@ -1,0 +1,13 @@
+name: AlertVerdict
+summary: 'The final determination or outcome of the alert, indicating whether the alert was confirmed as a threat, deemed suspicious, or resolved as a false positive. Supported values are: - True Positive (Confirmed as a legitimate threat) - False Positive (Incorrectly identified as a threat) - Benign Positive (when event is determined to be harmless) - Unknown (Uncertain or undetermined status)'
+schemas:
+- name: AlertEvent
+  role: alert
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - True Positive (Confirmed as a legitimate threat)
+  - False Positive (Incorrectly identified as a threat)
+  - Benign Positive (when event is determined to be harmless)
+  - Unknown (Uncertain or undetermined status)
+  description: 'The final determination or outcome of the alert, indicating whether the alert was confirmed as a threat, deemed suspicious, or resolved as a false positive. Supported values are: - True Positive (Confirmed as a legitimate threat) - False Positive (Incorrectly identified as a threat) - Benign Positive (when event is determined to be harmless) - Unknown (Uncertain or undetermined status)'

@@ -1,0 +1,17 @@
+name: NetworkApplicationProtocol
+summary: 'When the operation is initiated by a remote system, this value is the application layer protocol used in the OSI model. While this field is not enumerated, and any value is accepted, preferable values include: HTTP, HTTPS, SMB,FTP, and SSH'
+schemas:
+- name: FileEvent
+  role: network
+  class: Optional
+  type: String
+  description: 'When the operation is initiated by a remote system, this value is the application layer protocol used in the OSI model. While this field is not enumerated, and any value is accepted, preferable values include: HTTP, HTTPS, SMB,FTP, and SSH'
+  examples:
+  - SMB
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: String
+  description: The application layer protocol used by the connection or session. The value should be in all uppercase.
+  examples:
+  - FTP

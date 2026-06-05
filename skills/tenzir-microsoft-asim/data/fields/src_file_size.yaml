@@ -1,0 +1,8 @@
+name: SrcFileSize
+summary: The size of the source file in bytes.
+schemas:
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Long
+  description: The size of the source file in bytes.

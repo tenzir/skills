@@ -1,0 +1,52 @@
+name: SrcGeoLatitude
+summary: The latitude of the geographical coordinate associated with the source IP address.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: Authentication
+  role: source
+  class: Optional
+  type: Latitude
+  description: For more information, see Logical types.
+  examples:
+  - '45.505918'
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: Dns
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: FileEvent
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: UserManagement
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'

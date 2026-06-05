@@ -1,0 +1,8 @@
+name: EventResponseId
+summary: The unique ID of the event response.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The unique ID of the event response.

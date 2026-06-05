@@ -1,0 +1,8 @@
+name: SrcFileName
+summary: The name of the source file, without a path or a location, but with an extension if relevant. This field should be similar to the last element in the SrcFilePath field.
+schemas:
+- name: FileEvent
+  role: source
+  class: Recommended
+  type: String
+  description: The name of the source file, without a path or a location, but with an extension if relevant. This field should be similar to the last element in the SrcFilePath field.

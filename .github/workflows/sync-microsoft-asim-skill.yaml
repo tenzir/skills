@@ -1,0 +1,72 @@
+name: Sync Microsoft ASIM Skill
+
+on:
+  workflow_dispatch:
+    inputs:
+      docs-ref:
+        description: "MicrosoftDocs/defender-docs ref to build from"
+        required: false
+        default: "public"
+        type: string
+  schedule:
+    - cron: "0 6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "sync-microsoft-asim-skill"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Rebuild tenzir-microsoft-asim
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.TENZIR_GITHUB_APP_ID }}
+          private-key: ${{ secrets.TENZIR_GITHUB_APP_PRIVATE_KEY }}
+          owner: tenzir
+
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Rebuild Microsoft ASIM skill
+        env:
+          ASIM_DOCS_REF: ${{ github.event.inputs['docs-ref'] || 'public' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          uv run scripts/generate-microsoft-asim-skill.py \
+            --output-dir skills/tenzir-microsoft-asim \
+            --docs-ref "$ASIM_DOCS_REF"
+
+      - name: Validate skills
+        shell: bash
+        run: scripts/validate-skills
+
+      - name: Stage changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A -- skills/tenzir-microsoft-asim
+
+      - name: Commit changes
+        uses: planetscale/ghcommit-action@v0.2.0
+        with:
+          commit_message: "Sync tenzir-microsoft-asim from Microsoft Defender docs"
+          repo: ${{ github.repository }}
+          branch: ${{ github.ref_name }}
+          empty: false
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}

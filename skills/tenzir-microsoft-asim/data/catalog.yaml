@@ -1,0 +1,82 @@
+schemas:
+  AssetEntity:
+    file: data/schemas/asset_entity.yaml
+    kind: entity
+    title: Asset Entity
+    version: 0.1.0
+    status: GA
+  AgentEvent:
+    file: data/schemas/agent_event.yaml
+    kind: event
+    title: Agent Event
+    version: 0.1.0
+    status: GA
+  AlertEvent:
+    file: data/schemas/alert_event.yaml
+    kind: event
+    title: Alert Event
+    version: '0.1'
+    status: GA
+  AuditEvent:
+    file: data/schemas/audit_event.yaml
+    kind: event
+    title: Audit Event
+    version: 0.1.2
+    status: GA
+  Authentication:
+    file: data/schemas/authentication.yaml
+    kind: event
+    title: Authentication Event
+    version: 0.1.4
+    status: GA
+  DhcpEvent:
+    file: data/schemas/dhcp_event.yaml
+    kind: event
+    title: DHCP Activity
+    version: 0.1.1
+    status: GA
+  Dns:
+    file: data/schemas/dns.yaml
+    kind: event
+    title: DNS Activity
+    version: 0.1.7
+    status: GA
+  FileEvent:
+    file: data/schemas/file_event.yaml
+    kind: event
+    title: File Activity
+    version: 0.2.2
+    status: GA
+  NetworkSession:
+    file: data/schemas/network_session.yaml
+    kind: event
+    title: Network Session
+    version: 0.2.7
+    status: GA
+  ProcessEvent:
+    file: data/schemas/process_event.yaml
+    kind: event
+    title: Process Event
+    version: 0.1.4
+    status: GA
+  RegistryEvent:
+    file: data/schemas/registry_event.yaml
+    kind: event
+    title: Registry Event
+    version: 0.1.3
+    status: GA
+  UserManagement:
+    file: data/schemas/user_management.yaml
+    kind: event
+    title: User Management
+    version: 0.1.2
+    status: GA
+  WebSession:
+    file: data/schemas/web_session.yaml
+    kind: event
+    title: Web Session
+    version: 0.2.7
+    status: GA
+indexes:
+  fields: data/fields.yaml
+  aliases: data/aliases.yaml

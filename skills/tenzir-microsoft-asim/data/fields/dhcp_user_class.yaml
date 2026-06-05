@@ -1,0 +1,8 @@
+name: DhcpUserClass
+summary: The DHCP User Class, as defined by RFC3004.
+schemas:
+- name: DhcpEvent
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP User Class, as defined by RFC3004.

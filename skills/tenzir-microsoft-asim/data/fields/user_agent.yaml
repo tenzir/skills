@@ -1,0 +1,10 @@
+name: UserAgent
+summary: UserAgent is an alias for HttpUserAgent.
+to:
+- HttpUserAgent
+schemas:
+- name: WebSession
+  role: user
+  class: Alias
+  to:
+  - HttpUserAgent

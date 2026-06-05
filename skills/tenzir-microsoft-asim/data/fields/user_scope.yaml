@@ -1,0 +1,8 @@
+name: UserScope
+summary: The scope, such as Microsoft Entra tenant, in which UserId and Username are defined. For more information and list of allowed values, see UserScope in the Schema Overview article. e.g. Contoso Directory
+schemas:
+- name: AlertEvent
+  role: user
+  class: Optional
+  type: string
+  description: The scope, such as Microsoft Entra tenant, in which UserId and Username are defined. For more information and list of allowed values, see UserScope in the Schema Overview article. e.g. Contoso Directory

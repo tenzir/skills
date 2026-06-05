@@ -1,0 +1,8 @@
+name: TargetProcessSHA512
+summary: The SHA-512 hash of the target process image file.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: SHA512
+  description: The SHA-512 hash of the target process image file.

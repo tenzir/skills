@@ -1,0 +1,10 @@
+name: TargetFileSHA1
+summary: The SHA-1 hash of the target file. c801c4665d3338acdab0
+schemas:
+- name: FileEvent
+  role: target
+  class: Optional
+  type: SHA1
+  description: The SHA-1 hash of the target file. c801c4665d3338acdab0
+  examples:
+  - d55c5a4df19b46db8c54

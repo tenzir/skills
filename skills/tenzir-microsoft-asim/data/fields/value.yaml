@@ -1,0 +1,9 @@
+name: Value
+summary: Value is an alias for NewValue.
+to:
+- NewValue
+schemas:
+- name: AuditEvent
+  class: Alias
+  to:
+  - NewValue

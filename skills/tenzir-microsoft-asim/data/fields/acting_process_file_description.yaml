@@ -1,0 +1,10 @@
+name: ActingProcessFileDescription
+summary: The description embedded in the version information of the acting process image file.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The description embedded in the version information of the acting process image file.
+  examples:
+  - 'Notepad++ : a free (GPL) source code editor'

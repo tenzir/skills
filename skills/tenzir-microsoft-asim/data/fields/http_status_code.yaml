@@ -1,0 +1,11 @@
+name: HttpStatusCode
+summary: HttpStatusCode is an alias for EventResultDetails.
+to:
+- EventResultDetails
+schemas:
+- name: WebSession
+  role: http
+  class: Alias
+  to:
+  - EventResultDetails
+  resolution: The HTTP Status Code. Alias to EventResultDetails.

@@ -1,0 +1,10 @@
+name: DstVlanId
+summary: The VLAN ID related to the destination device.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The VLAN ID related to the destination device.
+  examples:
+  - '130'

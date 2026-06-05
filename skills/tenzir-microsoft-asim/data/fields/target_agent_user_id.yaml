@@ -1,0 +1,8 @@
+name: TargetAgentUserId
+summary: The user ID of the target agent.
+schemas:
+- name: AgentEvent
+  role: target
+  class: Optional
+  type: String
+  description: The user ID of the target agent.

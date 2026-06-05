@@ -1,0 +1,8 @@
+name: UserId
+summary: A machine-readable, alphanumeric, unique representation of the user associated with the alert. e.g. A1bC2dE3fH4iJ5kL6mN7o
+schemas:
+- name: AlertEvent
+  role: user
+  class: Optional
+  type: string
+  description: A machine-readable, alphanumeric, unique representation of the user associated with the alert. e.g. A1bC2dE3fH4iJ5kL6mN7o

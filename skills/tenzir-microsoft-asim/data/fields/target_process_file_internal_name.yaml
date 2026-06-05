@@ -1,0 +1,8 @@
+name: TargetProcessFileInternalName
+summary: The product internal file name from the version information of the image file of the target process.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The product internal file name from the version information of the image file of the target process.

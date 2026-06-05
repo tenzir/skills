@@ -1,0 +1,17 @@
+name: DstDomain
+summary: The domain of the destination device.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Domain (String)
+  description: The domain of the destination device.
+  examples:
+  - Contoso
+- name: NetworkSession
+  role: destination
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the destination device.
+  examples:
+  - Contoso

@@ -1,0 +1,8 @@
+name: AssetOwnerScope
+summary: The organizational or administrative scope to which the asset owner belongs.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: string
+  description: The organizational or administrative scope to which the asset owner belongs.

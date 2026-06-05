@@ -1,0 +1,8 @@
+name: ProcessId
+summary: The process ID (PID) associated with the alert. e.g. 12345678
+schemas:
+- name: AlertEvent
+  role: process
+  class: Optional
+  type: string
+  description: The process ID (PID) associated with the alert. e.g. 12345678

@@ -1,0 +1,11 @@
+name: DstProcessId
+summary: The process ID (PID) of the process that terminated the network session.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The process ID (PID) of the process that terminated the network session.
+  examples:
+  - '48610176'
+  notes: The type is defined as string to support varying systems, but on Windows and Linux this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.

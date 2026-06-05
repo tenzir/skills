@@ -1,0 +1,8 @@
+name: DhcpLeaseDuration
+summary: The length of the lease granted to a client, in seconds.
+schemas:
+- name: DhcpEvent
+  role: dhcp
+  class: Optional
+  type: Integer
+  description: The length of the lease granted to a client, in seconds.

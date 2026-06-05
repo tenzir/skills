@@ -1,0 +1,10 @@
+name: TargetProcessFileVersion
+summary: The product version from the version information in the target process image file.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The product version from the version information in the target process image file.
+  examples:
+  - 7.9.5.0

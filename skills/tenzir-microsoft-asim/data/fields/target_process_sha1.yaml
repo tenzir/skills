@@ -1,0 +1,10 @@
+name: TargetProcessSHA1
+summary: The SHA-1 hash of the target process image file.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: SHA1
+  description: The SHA-1 hash of the target process image file.
+  examples:
+  - d55c5a4df19b46db8c54c801c4665d3338acdab0

@@ -1,0 +1,8 @@
+name: EntityOriginalId
+summary: The unique identifier of the asset at the source if it is different from 'EntityId'.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Optional
+  type: string
+  description: The unique identifier of the asset at the source if it is different from 'EntityId'.

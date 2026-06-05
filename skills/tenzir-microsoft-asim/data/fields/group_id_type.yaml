@@ -1,0 +1,11 @@
+name: GroupIdType
+summary: The type of the ID stored in the GroupId field. Supported values are SID, and UID.
+schemas:
+- name: UserManagement
+  role: group
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - SID
+  - UID
+  description: The type of the ID stored in the GroupId field. Supported values are SID, and UID.

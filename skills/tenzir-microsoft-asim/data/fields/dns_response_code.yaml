@@ -1,0 +1,10 @@
+name: DnsResponseCode
+summary: The DNS numerical response code.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Integer
+  description: The DNS numerical response code.
+  examples:
+  - '3'

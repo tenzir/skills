@@ -1,0 +1,8 @@
+name: EventOutputType
+summary: The type of the event output.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The type of the event output.

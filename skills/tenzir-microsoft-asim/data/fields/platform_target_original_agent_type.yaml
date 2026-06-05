@@ -1,0 +1,8 @@
+name: PlatformTargetOriginalAgentType
+summary: The original type of the platform target agent.
+schemas:
+- name: AgentEvent
+  role: platform
+  class: Optional
+  type: String
+  description: The original type of the platform target agent.

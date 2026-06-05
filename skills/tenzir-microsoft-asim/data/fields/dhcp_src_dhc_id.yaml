@@ -1,0 +1,8 @@
+name: DhcpSrcDHCId
+summary: The DHCP client ID, as defined by RFC4701
+schemas:
+- name: DhcpEvent
+  role: dhcp
+  class: Optional
+  type: String
+  description: The DHCP client ID, as defined by RFC4701

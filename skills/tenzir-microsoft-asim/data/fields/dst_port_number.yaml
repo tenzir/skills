@@ -1,0 +1,17 @@
+name: DstPortNumber
+summary: Destination Port number.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Integer
+  description: Destination Port number.
+  examples:
+  - '53'
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: Integer
+  description: The destination IP port.
+  examples:
+  - '443'

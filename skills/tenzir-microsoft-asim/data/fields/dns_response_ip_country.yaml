@@ -1,0 +1,10 @@
+name: DnsResponseIpCountry
+summary: The country/region associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Country
+  description: The country/region associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - USA

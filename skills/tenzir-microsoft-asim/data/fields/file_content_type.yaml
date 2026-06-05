@@ -1,0 +1,8 @@
+name: FileContentType
+summary: For HTTP uploads, the content type of the uploaded file.
+schemas:
+- name: WebSession
+  role: file
+  class: Optional
+  type: String
+  description: For HTTP uploads, the content type of the uploaded file.

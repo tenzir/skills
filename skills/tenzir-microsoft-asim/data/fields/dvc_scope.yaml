@@ -1,0 +1,35 @@
+name: DvcScope
+schemas:
+- name: AlertEvent
+  role: device
+  class: Optional
+- name: AuditEvent
+  role: device
+  class: Optional
+- name: Authentication
+  role: device
+  class: Optional
+- name: DhcpEvent
+  role: device
+  class: Optional
+- name: Dns
+  role: device
+  class: Optional
+- name: FileEvent
+  role: device
+  class: Optional
+- name: NetworkSession
+  role: device
+  class: Optional
+- name: ProcessEvent
+  role: device
+  class: Optional
+- name: RegistryEvent
+  role: device
+  class: Optional
+- name: UserManagement
+  role: device
+  class: Optional
+- name: WebSession
+  role: device
+  class: Optional

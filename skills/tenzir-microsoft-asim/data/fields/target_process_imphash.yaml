@@ -1,0 +1,8 @@
+name: TargetProcessIMPHASH
+summary: The Import Hash of all the library DLLs that are used by the target process.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The Import Hash of all the library DLLs that are used by the target process.

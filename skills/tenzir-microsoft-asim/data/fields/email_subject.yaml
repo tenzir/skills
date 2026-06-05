@@ -1,0 +1,7 @@
+name: EmailSubject
+summary: Subject of the email. e.g. j5kl6mn7-op8q-r9st-0uv1-wx2yz3ab4c
+schemas:
+- name: AlertEvent
+  class: Optional
+  type: string
+  description: Subject of the email. e.g. j5kl6mn7-op8q-r9st-0uv1-wx2yz3ab4c

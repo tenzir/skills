@@ -1,0 +1,8 @@
+name: ActingProcessCreationTime
+summary: The date and time when the acting process was started.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: DateTime
+  description: The date and time when the acting process was started.

@@ -1,0 +1,11 @@
+name: DnsQueryTypeName
+summary: The DNS Resource Record Type names.
+schemas:
+- name: Dns
+  role: dns
+  class: Recommended
+  type: Enumerated
+  description: The DNS Resource Record Type names.
+  examples:
+  - AAAA
+  notes: '- IANA doesn''t define the case for the values, so analytics must normalize the case as needed. - The value ANY is supported for the response code 255. - The value TYPExxxx is supported for unmapped response codes, where xxxx is the numerical value of the response code, as reported by the BIND DNS server. -If the source provides only a numerical query type code and not a query type name, the parser must include a lookup table to enrich with this value.'

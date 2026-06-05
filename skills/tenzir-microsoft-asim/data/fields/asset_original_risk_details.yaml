@@ -1,0 +1,8 @@
+name: AssetOriginalRiskDetails
+summary: The full risk details for the asset as provided by the source system.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: dynamic
+  description: The full risk details for the asset as provided by the source system.

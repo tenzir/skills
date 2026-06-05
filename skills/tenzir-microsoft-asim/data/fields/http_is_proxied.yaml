@@ -1,0 +1,10 @@
+name: HttpIsProxied
+summary: Indicates whether the HTTP request was sent through a proxy server.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: Boolean
+  description: Indicates whether the HTTP request was sent through a proxy server.
+  examples:
+  - 'true'

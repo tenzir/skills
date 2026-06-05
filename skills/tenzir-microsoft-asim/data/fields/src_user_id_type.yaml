@@ -1,0 +1,18 @@
+name: SrcUserIdType
+summary: The type of the ID stored in the SrcUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+schemas:
+- name: DhcpEvent
+  role: source
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the SrcUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: Dns
+  role: source
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the SrcUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: NetworkSession
+  role: source
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the SrcUserId field. For a list of allowed values and further information, refer to UserIdType in the Schema Overview article.

@@ -1,0 +1,10 @@
+name: TargetProcessFilename
+summary: The file name part of the TargetProcessName, without folder information.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The file name part of the TargetProcessName, without folder information.
+  examples:
+  - explorer.exe

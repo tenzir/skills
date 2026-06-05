@@ -1,0 +1,8 @@
+name: DstOriginalUserType
+summary: The original destination user type, if provided by the source.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the source.

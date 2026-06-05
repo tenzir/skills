@@ -1,0 +1,10 @@
+name: ParentProcessMD5
+summary: The MD5 hash of the parent process image file.
+schemas:
+- name: ProcessEvent
+  role: file
+  class: Optional
+  type: MD5
+  description: The MD5 hash of the parent process image file.
+  examples:
+  - 75a599802f1fa166cdadb360960b1dd0

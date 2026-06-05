@@ -1,0 +1,95 @@
+name: ThreatCategory
+summary: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominor, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Recommended
+  type: Enumerated
+  allowed_values:
+  - Malware
+  - Ransomware
+  - Trojan
+  - Virus
+  - Worm
+  - Adware
+  - Spyware
+  - Rootkit
+  - Cryptominor
+  - Phishing
+  - Spam
+  - MaliciousUrl
+  - Spoofing
+  - Security Policy Violation
+  - Unknown
+  description: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominor, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in audit file activity.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in audit file activity.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: String
+  allowed_values:
+  - Malware
+  - Ransomware
+  - Trojan
+  - Virus
+  - Worm
+  - Adware
+  - Spyware
+  - Rootkit
+  - Cryptominor
+  - Phishing
+  - Spam
+  - MaliciousUrl
+  - Spoofing
+  - Security Policy Violation
+  - Unknown
+  description: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominor, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
+- name: Dns
+  role: threat
+  class: Optional
+  type: String
+  description: If a DNS event source also provides DNS security, it may also evaluate the DNS event. For example, it can search for the IP address or domain in a threat intelligence database, and assign the domain or IP address with a Threat Category.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the file activity.
+  examples:
+  - Trojan
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the network session.
+  examples:
+  - Trojan
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the file activity.
+  examples:
+  - Trojan
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the file activity.
+  examples:
+  - Trojan
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the file activity.
+  examples:
+  - Trojan

@@ -1,0 +1,53 @@
+name: Rule
+summary: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+schemas:
+- name: AlertEvent
+  role: rule
+  class: Alias
+  type: string
+  resolution: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: AuditEvent
+  role: rule
+  class: Alias
+  type: String
+  resolution: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: Authentication
+  role: rule
+  class: Alias
+  type: String
+  resolution: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: DhcpEvent
+  role: rule
+  class: Alias
+  type: string
+  resolution: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: Dns
+  role: rule
+  class: Alias
+  type: String
+  resolution: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: FileEvent
+  role: rule
+  class: Conditional
+  type: String
+  description: Either the value of kRuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: NetworkSession
+  role: rule
+  class: Alias
+  type: String
+  resolution: Either the value of NetworkRuleName or the value of NetworkRuleNumber. If the value of NetworkRuleNumber is used, the type should be converted to string.
+- name: ProcessEvent
+  role: rule
+  class: Conditional
+  type: String
+  description: Either the value of kRuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: RegistryEvent
+  role: rule
+  class: Conditional
+  type: String
+  description: Either the value of kRuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: UserManagement
+  role: rule
+  class: Conditional
+  type: String
+  description: Either the value of kRuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.

@@ -1,0 +1,17 @@
+name: TargetIpAddr
+summary: The IP address of the target device.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Recommended
+  type: IP Address
+  description: The IP address of the target device.
+  examples:
+  - 2.2.2.2
+- name: Authentication
+  role: target
+  class: Optional
+  type: IP Address
+  description: The IP address of the target device.
+  examples:
+  - 2.2.2.2

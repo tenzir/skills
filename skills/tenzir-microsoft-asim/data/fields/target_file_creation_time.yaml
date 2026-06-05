@@ -1,0 +1,8 @@
+name: TargetFileCreationTime
+summary: The time at which the target file was created.
+schemas:
+- name: FileEvent
+  role: target
+  class: Optional
+  type: Date/Time
+  description: The time at which the target file was created.

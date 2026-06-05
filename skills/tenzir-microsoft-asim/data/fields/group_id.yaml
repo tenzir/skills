@@ -1,0 +1,10 @@
+name: GroupId
+summary: 'A machine-readable, alphanumeric, unique representation of the group, for activities involving a group. Supported formats and types include: - SID (Windows): S-1-5-21-1377283216-344919071-3415362939-500 - UID (Linux): 4578 Store the ID type in the GroupIdType field. If other IDs are available, we recommend that you normalize the field names to GroupSid or GroupUid, respectively. For more information, see The User entity.'
+schemas:
+- name: UserManagement
+  role: group
+  class: Optional
+  type: String
+  description: 'A machine-readable, alphanumeric, unique representation of the group, for activities involving a group. Supported formats and types include: - SID (Windows): S-1-5-21-1377283216-344919071-3415362939-500 - UID (Linux): 4578 Store the ID type in the GroupIdType field. If other IDs are available, we recommend that you normalize the field names to GroupSid or GroupUid, respectively. For more information, see The User entity.'
+  examples:
+  - S-1-12

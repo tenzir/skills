@@ -1,0 +1,20 @@
+name: DstHostname
+summary: The destination device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Hostname (String)
+  required_if:
+  - DstIpAddr is specified
+  description: The destination device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+  notes: This value is mandatory if DstIpAddr is specified.
+- name: NetworkSession
+  role: destination
+  class: Recommended
+  type: Hostname (String)
+  description: The destination device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D

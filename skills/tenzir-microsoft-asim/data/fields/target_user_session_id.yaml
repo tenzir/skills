@@ -1,0 +1,19 @@
+name: TargetUserSessionId
+summary: The unique ID of the target user's login session.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The unique ID of the target user's login session.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: UserManagement
+  role: target
+  class: Optional
+  type: String
+  description: The unique ID of the target user's login session.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.

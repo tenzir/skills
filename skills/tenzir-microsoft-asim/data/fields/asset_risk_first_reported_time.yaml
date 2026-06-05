@@ -1,0 +1,8 @@
+name: AssetRiskFirstReportedTime
+summary: The timestamp (UTC) of when the risk associated with the asset was first reported.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: datetime
+  description: The timestamp (UTC) of when the risk associated with the asset was first reported.

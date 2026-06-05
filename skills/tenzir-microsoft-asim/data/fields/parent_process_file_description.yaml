@@ -1,0 +1,10 @@
+name: ParentProcessFileDescription
+summary: The description from the version information in the parent process image file.
+schemas:
+- name: ProcessEvent
+  role: file
+  class: Optional
+  type: String
+  description: The description from the version information in the parent process image file.
+  examples:
+  - 'Notepad++ : a free (GPL) source code editor'

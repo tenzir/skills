@@ -1,0 +1,8 @@
+name: AssetOwnerId
+summary: A machine-readable, alphanumeric, unique representation of the Actor. For more information, and for alternative fields for other IDs, see The User entity.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Mandatory
+  type: string
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For more information, and for alternative fields for other IDs, see The User entity.

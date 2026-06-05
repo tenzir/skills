@@ -1,0 +1,711 @@
+name: FileEvent
+title: File Activity
+kind: event
+version: 0.2.2
+status: GA
+summary: The File Event normalization schema is used to describe file activity such as creating, modifying, or deleting files or documents. Such events are reported by operating systems, file storage systems such as Azure Files, and document management systems such as Microsoft SharePoint. For more information about normalization in Microsoft Sentinel, see Normalization and the Advanced Security Information Model (ASIM).
+fields:
+- name: ActorUsername
+  role: actor
+  class: Mandatory
+  type: Username (String)
+  description: The Actor username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the ActorUsernameType field. If other username formats are available, store them in the fields ActorUsername.
+  examples:
+  - AlbertE
+- name: Dvc
+  role: device
+  class: Mandatory
+  type: '-'
+  description: For File activity events, device fields refer to the system on which the file activity occurred.
+- name: EventCount
+  role: common
+  class: Mandatory
+- name: EventEndTime
+  role: common
+  class: Mandatory
+- name: EventProduct
+  role: common
+  class: Mandatory
+- name: EventResult
+  role: common
+  class: Mandatory
+- name: EventSchema
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: FileEvent
+  description: The name of the schema documented here is FileEvent.
+- name: EventSchemaVersion
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.2.2
+  description: The version of the schema. The version of the schema documented here is 0.2.2
+- name: EventStartTime
+  role: common
+  class: Mandatory
+- name: EventType
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - FileAccessed
+  - FileCreated
+  - FileModified
+  - FileDeleted
+  - FileRenamed
+  - FileCopied
+  - FileMoved
+  - FolderCreated
+  - FolderDeleted
+  - FolderMoved
+  - FolderModified
+  - FileCreatedOrModified
+  description: 'Describes the operation reported by the record. Supported values include: - FileAccessed - FileCreated - FileModified - FileDeleted - FileRenamed - FileCopied - FileMoved - FolderCreated - FolderDeleted - FolderMoved - FolderModified - FileCreatedOrModified'
+- name: EventVendor
+  role: common
+  class: Mandatory
+- name: TargetFilePath
+  role: target
+  class: Mandatory
+  type: String
+  description: The full, normalized path of the target file, including the folder or location, the file name, and the extension. For more information, see Path structure.
+  examples:
+  - C:\Windows\System32\notepad.exe
+  notes: If the record does not include folder or location information, store the filename only here.
+- name: TargetFilePathType
+  role: target
+  class: Mandatory
+  type: Enumerated
+  description: The type of TargetFilePath. For more information, see Path structure.
+- name: ActorUserId
+  role: actor
+  class: Recommended
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the Actor. For the supported format for different ID types, refer to the User entity.
+  examples:
+  - S-1-12
+- name: DvcAction
+  role: device
+  class: Recommended
+- name: DvcDomain
+  role: device
+  class: Recommended
+- name: DvcDomainType
+  role: device
+  class: Recommended
+- name: DvcFQDN
+  role: device
+  class: Recommended
+- name: DvcHostname
+  role: device
+  class: Recommended
+- name: DvcId
+  role: device
+  class: Recommended
+- name: DvcIdType
+  role: device
+  class: Recommended
+- name: DvcIpAddr
+  role: device
+  class: Recommended
+- name: EventResultDetails
+  role: common
+  class: Recommended
+- name: EventSeverity
+  role: common
+  class: Recommended
+- name: EventUid
+  role: common
+  class: Recommended
+- name: SrcFileName
+  role: source
+  class: Recommended
+  type: String
+  description: The name of the source file, without a path or a location, but with an extension if relevant. This field should be similar to the last element in the SrcFilePath field.
+- name: SrcFilePath
+  role: source
+  class: Recommended
+  type: String
+  description: The full, normalized path of the source file, including the folder or location, the file name, and the extension. For more information, see Path structure.
+  examples:
+  - /etc/init.d/networking
+- name: SrcFilePathType
+  role: source
+  class: Recommended
+  type: Enumerated
+  description: The type of SrcFilePath. For more information, see Path structure.
+- name: SrcIpAddr
+  role: source
+  class: Recommended
+  type: IP Address
+  description: When the operation is initiated by a remote system, the IP address of this system.
+  examples:
+  - 185.175.35.214
+- name: TargetFileName
+  role: target
+  class: Recommended
+  type: String
+  description: The name of the target file, without a path or a location, but with an extension if relevant. This field should be similar to the final element in the TargetFilePath field.
+- name: ActorUserIdType
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: The type of the ID stored in the ActorUserId field. For a list of allowed values and further information, refer to UserIdType in the Schema Overview article.
+- name: ActorUsernameType
+  role: actor
+  class: Conditional
+  type: Enumerated
+  description: Specifies the type of the user name stored in the ActorUsername field. For a list of allowed values and further information, refer to UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: HashType
+  class: Conditional
+  type: Enumerated
+  to:
+  - IMPHASH
+  - MD5
+  - SHA
+  - SHA256
+  - SHA512
+  required_if:
+  - Hash is populated
+  allowed_values:
+  - MD5
+  - SHA
+  - SHA256
+  - SHA512
+  - IMPHASH
+  - Hash
+  description: The type of hash stored in the HASH alias field, allowed values are MD5, SHA, SHA256, SHA512 and IMPHASH. Mandatory if Hash is populated.
+- name: Rule
+  role: rule
+  class: Conditional
+  type: String
+  description: Either the value of kRuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: SrcDomainType
+  role: source
+  class: Conditional
+  type: DomainType
+  required_if:
+  - SrcDomain is used
+  description: The type of SrcDomain. For a list of allowed values and further information, refer to DomainType in the Schema Overview article. Required if SrcDomain is used.
+- name: SrcDvcIdType
+  role: source
+  class: Conditional
+  type: DvcIdType
+  required_if:
+  - SrcDvcId is used
+  description: The type of SrcDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article.
+  notes: This field is required if SrcDvcId is used.
+- name: TargetAppType
+  role: target
+  class: Conditional
+  type: AppType
+  required_if:
+  - TargetAppName or TargetAppId are used
+  description: The type of the destination application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if TargetAppName or TargetAppId are used.
+- name: ThreatField
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcFilePath
+  - DstFilePath
+  description: The field for which a threat was identified. The value is either SrcFilePath or DstFilePath.
+- name: ActingAppId
+  role: acting
+  class: Optional
+  type: String
+  description: The ID of the acting application, as reported by the reporting device.
+- name: ActingAppName
+  role: acting
+  class: Optional
+  type: String
+  description: The name of the acting application.
+  examples:
+  - Facebook
+- name: ActingAppType
+  role: acting
+  class: Optional
+  type: AppType
+  required_if:
+  - TargetAppName or TargetAppId are used
+  description: The type of the destination application. For a list of allowed values and further information, refer to AppType in the Schema Overview article. This field is mandatory if TargetAppName or TargetAppId are used.
+- name: ActingProcessCommandLine
+  role: acting
+  class: Optional
+  type: String
+  description: The command line used to run the acting process.
+  examples:
+  - '"choco.exe" -v'
+- name: ActingProcessGuid
+  role: acting
+  class: Optional
+  type: GUID (string)
+  description: A generated unique identifier (GUID) of the acting process. Enables identifying the process across systems.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+- name: ActingProcessId
+  role: acting
+  class: Optional
+  type: String
+  description: The process ID (PID) of the acting process.
+  examples:
+  - '48610176'
+  notes: The type is defined as string to support varying systems, but on Windows and Linux this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: ActingProcessName
+  role: acting
+  class: Optional
+  type: string
+  description: The name of the acting process. This name is commonly derived from the image or executable file that's used to define the initial code and data that's mapped into the process' virtual address space.
+  examples:
+  - C:\Windows\explorer.exe
+- name: ActorOriginalUserType
+  role: actor
+  class: Optional
+  type: String
+  description: The original destination user type, if provided by the reporting device.
+- name: ActorScope
+  role: actor
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which ActorUserId and ActorUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+- name: ActorScopeId
+  role: actor
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which ActorUserId and ActorUsername are defined. or more information and list of allowed values, see UserScopeId in the Schema Overview article.
+- name: ActorSessionId
+  role: actor
+  class: Optional
+  type: String
+  description: The unique ID of the login session of the Actor.
+  examples:
+  - '999'
+  notes: The type is defined as string to support varying systems, but on Windows this value must be numeric. If you are using a Windows machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: ActorUserType
+  role: actor
+  class: Optional
+  type: UserType
+  description: The type of Actor. For a list of allowed values and further information, refer to UserType in the Schema Overview article.
+  notes: The value might be provided in the source record by using different terms, which should be normalized to these values. Store the original value in the ActorOriginalUserType field.
+- name: AdditionalFields
+  role: common
+  class: Optional
+- name: DvcDescription
+  role: device
+  class: Optional
+- name: DvcInterface
+  role: device
+  class: Optional
+- name: DvcMacAddr
+  role: device
+  class: Optional
+- name: DvcOriginalAction
+  role: device
+  class: Optional
+- name: DvcOs
+  role: device
+  class: Optional
+- name: DvcOsVersion
+  role: device
+  class: Optional
+- name: DvcScope
+  role: device
+  class: Optional
+- name: DvcScopeId
+  role: device
+  class: Optional
+- name: DvcZone
+  role: device
+  class: Optional
+- name: EventMessage
+  role: common
+  class: Optional
+- name: EventOriginalResultDetails
+  role: common
+  class: Optional
+- name: EventOriginalSeverity
+  role: common
+  class: Optional
+- name: EventOriginalSubType
+  role: common
+  class: Optional
+- name: EventOriginalType
+  role: common
+  class: Optional
+- name: EventOriginalUid
+  role: common
+  class: Optional
+- name: EventOwner
+  role: common
+  class: Optional
+- name: EventProductVersion
+  role: common
+  class: Optional
+- name: EventReportUrl
+  role: common
+  class: Optional
+- name: EventSubType
+  role: common
+  class: Optional
+  type: Enumerated
+  description: 'Describes details about the operation reported in EventType. Supported values per event type include: - FileCreated - Upload, Checkin - FileModified - Checkin - FileCreatedOrModified - Checkin - FileAccessed - Download, Preview, Checkout, Extended - FileDeleted - Recycled, Versions, Site'
+- name: HttpUserAgent
+  role: http
+  class: Optional
+  type: String
+  description: When the operation is initiated by a remote system using HTTP or HTTPS, the user agent used. For AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246
+  examples:
+  - Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+- name: NetworkApplicationProtocol
+  role: network
+  class: Optional
+  type: String
+  description: 'When the operation is initiated by a remote system, this value is the application layer protocol used in the OSI model. While this field is not enumerated, and any value is accepted, preferable values include: HTTP, HTTPS, SMB,FTP, and SSH'
+  examples:
+  - SMB
+- name: RuleName
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule by associated with the inspection results.
+- name: RuleNumber
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule associated with the inspection results.
+- name: SrcDescription
+  role: source
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: SrcDeviceType
+  role: source
+  class: Optional
+  type: DeviceType
+  description: The type of the source device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+- name: SrcDomain
+  role: source
+  class: Optional
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: SrcDvcId
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device. If multiple IDs are available, use the most important one, and store the others in the fields SrcDvc.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: SrcDvcScope
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcDvcScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. SrcDvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcFileCreationTime
+  role: source
+  class: Optional
+  type: Date/Time
+  description: The time at which the source file was created.
+- name: SrcFileDirectory
+  role: source
+  class: Optional
+  type: String
+  description: The source file folder or location. This field should be similar to the SrcFilePath field, without the final element.
+  notes: A parser can provide this value if the value is available in the log source, and does not need to be extracted from the full path.
+- name: SrcFileExtension
+  role: source
+  class: Optional
+  type: String
+  description: The source file extension.
+  notes: A parser can provide this value the value is available in the log source, and does not need to be extracted from the full path.
+- name: SrcFileMD5
+  role: source
+  class: Optional
+  type: MD5
+  description: The MD5 hash of the source file.
+  examples:
+  - 75a599802f1fa166cdadb360960b1dd0
+- name: SrcFileMimeType
+  role: source
+  class: Optional
+  type: String
+  allowed_values:
+  - listed in the IANA Media Types repository
+  description: The Mime or Media type of the source file. Supported values are listed in the IANA Media Types repository.
+- name: SrcFileSHA1
+  role: source
+  class: Optional
+  type: SHA1
+  description: The SHA-1 hash of the source file. c801c4665d3338acdab0
+  examples:
+  - d55c5a4df19b46db8c54
+- name: SrcFileSHA256
+  role: source
+  class: Optional
+  type: SHA256
+  description: The SHA-256 hash of the source file. 2e1ec8cbb00b22629d2899f7c68da274
+  examples:
+  - e81bb824c4a09a811af17deae22f22dd
+- name: SrcFileSHA512
+  role: source
+  class: Optional
+  type: SHA512
+  description: The SHA-512 hash of the source file.
+- name: SrcFileSize
+  role: source
+  class: Optional
+  type: Long
+  description: The size of the source file in bytes.
+- name: SrcFQDN
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: SrcGeoCity
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: SrcGeoCountry
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: SrcGeoLatitude
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: SrcGeoLongitude
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: SrcGeoRegion
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: SrcHostname
+  role: source
+  class: Optional
+  type: Hostname (String)
+  description: The source device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+- name: SrcPortNumber
+  role: source
+  class: Optional
+  type: Integer
+  description: When the operation is initiated by a remote system, the port number from which the connection was initiated.
+  examples:
+  - '2335'
+- name: TargetAppId
+  role: target
+  class: Optional
+  type: String
+  description: The ID of the destination application, as reported by the reporting device.
+- name: TargetAppName
+  role: target
+  class: Optional
+  type: String
+  description: The name of the destination application.
+  examples:
+  - Facebook
+- name: TargetFileCreationTime
+  role: target
+  class: Optional
+  type: Date/Time
+  description: The time at which the target file was created.
+- name: TargetFileDirectory
+  role: target
+  class: Optional
+  type: String
+  description: The target file folder or location. This field should be similar to the TargetFilePath field, without the final element.
+  notes: A parser can provide this value if the value available in the log source and does not need to be extracted from the full path.
+- name: TargetFileExtension
+  role: target
+  class: Optional
+  type: String
+  description: The target file extension.
+  notes: A parser can provide this value if the value available in the log source and does not need to be extracted from the full path.
+- name: TargetFileMD5
+  role: target
+  class: Optional
+  type: MD5
+  description: The MD5 hash of the target file.
+  examples:
+  - 75a599802f1fa166cdadb360960b1dd0
+- name: TargetFileMimeType
+  role: target
+  class: Optional
+  type: String
+  allowed_values:
+  - listed in the IANA Media Types repository
+  description: The Mime, or Media, type of the target file. Allowed values are listed in the IANA Media Types repository.
+- name: TargetFileSHA1
+  role: target
+  class: Optional
+  type: SHA1
+  description: The SHA-1 hash of the target file. c801c4665d3338acdab0
+  examples:
+  - d55c5a4df19b46db8c54
+- name: TargetFileSHA256
+  role: target
+  class: Optional
+  type: SHA256
+  description: The SHA-256 hash of the target file. 2e1ec8cbb00b22629d2899f7c68da274
+  examples:
+  - e81bb824c4a09a811af17deae22f22dd
+- name: TargetFileSHA512
+  role: target
+  class: Optional
+  type: SHA512
+  description: The SHA-512 hash of the source file.
+- name: TargetFileSize
+  role: target
+  class: Optional
+  type: Long
+  description: The size of the target file in bytes.
+- name: TargetOriginalAppType
+  role: target
+  class: Optional
+  type: String
+  description: The type of the destination application as reported by the reporting device.
+- name: TargetUrl
+  role: target
+  class: Optional
+  type: URL (String)
+  description: When the operation is initiated using HTTP or HTTPS, the URL used.
+  examples:
+  - https://onedrive.live.com/?authkey=...
+- name: ThreatCategory
+  role: threat
+  class: Optional
+  type: String
+  description: The category of the threat or malware identified in the file activity.
+  examples:
+  - Trojan
+- name: ThreatConfidence
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: ThreatFilePath
+  role: threat
+  class: Optional
+  type: String
+  description: A file path for which a threat was identified. The field ThreatField contains the name of the field ThreatFilePath represents.
+- name: ThreatFirstReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The first time the IP address or domain were identified as a threat.
+- name: ThreatId
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the file activity.
+- name: ThreatIsActive
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: ThreatLastReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: ThreatName
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat or malware identified in the file activity.
+  examples:
+  - EICAR Test File
+- name: ThreatOriginalConfidence
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: ThreatOriginalRiskLevel
+  role: threat
+  class: Optional
+  type: String
+  description: The risk level as reported by the reporting device.
+- name: ThreatRiskLevel
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatOriginalRiskLevel.
+- name: Application
+  role: application
+  class: Alias
+  to:
+  - TargetAppName
+- name: FileName
+  role: file
+  class: Alias
+  to:
+  - TargetFileName
+- name: FilePath
+  role: file
+  class: Alias
+  to:
+  - TargetFilePath
+- name: Hash
+  role: file
+  class: Alias
+  resolution: Alias to the best available Target File hash.
+- name: IpAddr
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: Process
+  role: process
+  class: Alias
+  to:
+  - ActingProcessName
+- name: Src
+  role: source
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: Url
+  role: web
+  class: Alias
+  to:
+  - TargetUrl
+- name: User
+  role: user
+  class: Alias
+  to:
+  - ActorUsername
+  examples:
+  - CONTOSO\dadmin

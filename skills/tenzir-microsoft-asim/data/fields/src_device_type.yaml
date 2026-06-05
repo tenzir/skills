@@ -1,0 +1,53 @@
+name: SrcDeviceType
+summary: The type of the source device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Optional
+  type: DeviceType
+  description: The type of the source device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+- name: Authentication
+  role: source
+  class: Optional
+  type: DeviceType
+  description: The type of the source device. For a list of allowed values and further information refer to DeviceType in the Schema Overview article.
+- name: DhcpEvent
+  role: source
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Computer
+  - Mobile Device
+  - IOT Device
+  - Other
+  description: 'The type of the source device. Possible values include: - Computer - Mobile Device - IOT Device - Other'
+- name: Dns
+  role: source
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Computer
+  - Mobile Device
+  - IOT Device
+  - Other
+  description: 'The type of the source device. Possible values include: - Computer - Mobile Device - IOT Device - Other'
+- name: FileEvent
+  role: source
+  class: Optional
+  type: DeviceType
+  description: The type of the source device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: DeviceType
+  description: The type of the source device. For a list of allowed values and further information, refer to DeviceType in the Schema Overview article.
+- name: UserManagement
+  role: source
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Computer
+  - Mobile Device
+  - IOT Device
+  - Other
+  description: 'The type of the source device. Possible values include: - Computer - Mobile Device - IOT Device - Other'

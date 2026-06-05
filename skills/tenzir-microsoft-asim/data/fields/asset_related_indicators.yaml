@@ -1,0 +1,8 @@
+name: AssetRelatedIndicators
+summary: A dynamic collection of threat indicators or signals related to the asset.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: dynamic
+  description: A dynamic collection of threat indicators or signals related to the asset.

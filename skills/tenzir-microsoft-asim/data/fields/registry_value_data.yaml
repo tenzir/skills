@@ -1,0 +1,15 @@
+name: RegistryValueData
+summary: Data of the registry value. e.g. C:\Windows\system32;C:\Windows;
+schemas:
+- name: AlertEvent
+  role: registry
+  class: Optional
+  type: string
+  description: Data of the registry value. e.g. C:\Windows\system32;C:\Windows;
+- name: RegistryEvent
+  role: registry
+  class: Recommended
+  type: String
+  description: The data stored in the registry value.
+  examples:
+  - C:\Windows\system32;C:\Windows;

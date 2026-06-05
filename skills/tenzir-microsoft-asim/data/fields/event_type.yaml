@@ -1,0 +1,142 @@
+name: EventType
+summary: The type of the event.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The type of the event.
+- name: AlertEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Alert
+  description: 'Type of the event. Supported values are: -Alert'
+- name: AuditEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Set
+  - Read
+  - Create
+  - Delete
+  - Execute
+  - Install
+  - Clear
+  - Enable
+  - Disable
+  - Initialize
+  - Start
+  - Stop
+  - Other
+  description: 'Describes the operation audited by the event using a normalized value. Use EventSubType to provide further details, which the normalized value does not convey, and Operation. to store the operation as reported by the reporting device. For Audit Event records, the allowed values are: - Set - Read - Create - Delete - Execute - Install - Clear - Enable - Disable - Initialize - Start - Stop - Other Audit events represent a large variety of operations, and the Other value enables mapping operations that have no corresponding EventType. However, the use of Other limits the usability of the event and should be avoided if possible.'
+- name: Authentication
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Logon
+  - Logoff
+  - Elevate
+  description: 'Describes the operation reported by the record. For Authentication records, supported values include: - Logon - Logoff - Elevate'
+- name: DhcpEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - Assign
+  - Renew
+  - Release
+  - DNS Update
+  description: Indicate the operation reported by the record. Possible values are Assign, Renew, Release, and DNS Update.
+  examples:
+  - Assign
+- name: Dns
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: Indicates the operation reported by the record. For DNS records, this value would be the DNS op code.
+  examples:
+  - Query
+- name: FileEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - FileAccessed
+  - FileCreated
+  - FileModified
+  - FileDeleted
+  - FileRenamed
+  - FileCopied
+  - FileMoved
+  - FolderCreated
+  - FolderDeleted
+  - FolderMoved
+  - FolderModified
+  - FileCreatedOrModified
+  description: 'Describes the operation reported by the record. Supported values include: - FileAccessed - FileCreated - FileModified - FileDeleted - FileRenamed - FileCopied - FileMoved - FolderCreated - FolderDeleted - FolderMoved - FolderModified - FileCreatedOrModified'
+- name: NetworkSession
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - EndpointNetworkSession
+  - NetworkSession
+  - L2NetworkSession
+  - IDS
+  - Flow
+  description: 'Describes the scenario reported by the record. For Network Session records, the allowed values are: - EndpointNetworkSession - NetworkSession - L2NetworkSession - IDS - Flow For more information on event types, refer to the schema overview'
+- name: ProcessEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - ProcessCreated
+  - ProcessTerminated
+  description: 'Describes the operation reported by the record. For Process records, supported values include: - ProcessCreated - ProcessTerminated'
+- name: RegistryEvent
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - RegistryKeyCreated
+  - RegistryKeyDeleted
+  - RegistryKeyRenamed
+  - RegistryValueDeleted
+  - RegistryValueSet
+  description: 'Describes the operation reported by the record. For Registry records, supported values include: - RegistryKeyCreated - RegistryKeyDeleted - RegistryKeyRenamed - RegistryValueDeleted - RegistryValueSet'
+- name: UserManagement
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - UserCreated
+  - UserDeleted
+  - UserModified
+  - UserLocked
+  - UserUnlocked
+  - UserDisabled
+  - UserEnabled
+  - PasswordChanged
+  - PasswordReset
+  - GroupCreated
+  - GroupDeleted
+  - GroupModified
+  - UserAddedToGroup
+  - UserRemovedFromGroup
+  - GroupEnumerated
+  - UserRead
+  - GroupRead
+  description: 'Describes the operation reported by the record. For User Management activity, the supported values are: - UserCreated - UserDeleted - UserModified - UserLocked - UserUnlocked - UserDisabled - UserEnabled - PasswordChanged - PasswordReset - GroupCreated - GroupDeleted - GroupModified - UserAddedToGroup - UserRemovedFromGroup - GroupEnumerated - UserRead - GroupRead'
+- name: WebSession
+  role: common
+  class: Mandatory
+  type: Enumerated
+  allowed_values:
+  - HTTPsession
+  - WebServerSession
+  - ApiRequest
+  description: 'Describes the operation reported by the record. Allowed values are: - HTTPsession: Denotes a network session used for HTTP or HTTPS, typically reported by an intermediary device, such as a proxy or a Web security gateway. - WebServerSession: Denotes an HTTP request reported by a web server. Such an event typically has less network related information. The URL reported should not include a schema and a server name, but only the path and parameters part of the URL. - ApiRequest: Denotes an HTTP request reported associated with an API call, typically reported by an application server. Such an event typically has less network related information. When reported by the application server, the URL reported should not include a schema and a server name, but only the path and parameters part of the URL.'

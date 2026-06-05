@@ -1,0 +1,10 @@
+name: DstUsernameType
+summary: Specifies the type of the username stored in the DstUsername field. For a list of allowed values and further information, refer to UsernameType in the Schema Overview article.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the username stored in the DstUsername field. For a list of allowed values and further information, refer to UsernameType in the Schema Overview article.
+  examples:
+  - Windows

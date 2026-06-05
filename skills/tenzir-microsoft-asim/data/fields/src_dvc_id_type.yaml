@@ -1,0 +1,68 @@
+name: SrcDvcIdType
+summary: The type of SrcDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article.
+schemas:
+- name: AuditEvent
+  role: source
+  class: Conditional
+  type: DvcIdType
+  required_if:
+  - SrcDvcId is used
+  description: The type of SrcDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article.
+  notes: This field is required if SrcDvcId is used.
+- name: Authentication
+  role: source
+  class: Conditional
+  type: DvcIdType
+  required_if:
+  - SrcDvcId is used
+  description: The type of SrcDvcId. For a list of allowed values and further information refer to DvcIdType in the Schema Overview article.
+  notes: This field is required if SrcDvcId is used.
+- name: DhcpEvent
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDvcId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  description: 'The type of SrcDvcId, if known. Possible values include: - AzureResourceId - MDEid If multiple IDs are available, use the first one from the list above, and store the others in the SrcDvcAzureResourceId and SrcDvcMDEid, respectively.'
+  notes: This field is required if SrcDvcId is used.
+- name: Dns
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDvcId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  description: 'The type of SrcDvcId, if known. Possible values include: - AzureResourceId - MDEid If multiple IDs are available, use the first one from the list, and store the others in the SrcDvcAzureResourceId and SrcDvcMDEid, respectively.'
+  notes: This field is required if SrcDvcId is used.
+- name: FileEvent
+  role: source
+  class: Conditional
+  type: DvcIdType
+  required_if:
+  - SrcDvcId is used
+  description: The type of SrcDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article.
+  notes: This field is required if SrcDvcId is used.
+- name: NetworkSession
+  role: source
+  class: Conditional
+  type: DvcIdType
+  required_if:
+  - SrcDvcId is used
+  description: The type of SrcDvcId. For a list of allowed values and further information, refer to DvcIdType in the Schema Overview article.
+  notes: This field is required if SrcDvcId is used.
+- name: UserManagement
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDvcId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  description: 'The type of SrcDvcId, if known. Possible values include: - AzureResourceId - MDEid If multiple IDs are available, use the first one from the preceding list, and store the others in SrcDvcAzureResourceId and SrcDvcMDEid, respectively.'
+  notes: This field is required if SrcDvcId is used.

@@ -1,0 +1,10 @@
+name: DstPackets
+summary: The number of packets sent from the destination to the source for the connection or session. The meaning of a packet is defined by the reporting device. If the event is aggregated, DstPackets should be the sum over all aggregated sessions.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: Long
+  description: The number of packets sent from the destination to the source for the connection or session. The meaning of a packet is defined by the reporting device. If the event is aggregated, DstPackets should be the sum over all aggregated sessions.
+  examples:
+  - '446'

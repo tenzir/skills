@@ -1,0 +1,8 @@
+name: DstUserScope
+summary: The scope, such as Microsoft Entra tenant, in which DstUserId and DstUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which DstUserId and DstUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.

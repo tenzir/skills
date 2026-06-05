@@ -1,0 +1,8 @@
+name: AssetOwnerType
+summary: The type of the Asset Owner. For more information, and list of allowed values, see UserType in the Schema Overview article.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Optional
+  type: string
+  description: The type of the Asset Owner. For more information, and list of allowed values, see UserType in the Schema Overview article.

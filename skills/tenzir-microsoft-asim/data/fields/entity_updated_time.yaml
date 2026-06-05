@@ -1,0 +1,8 @@
+name: EntityUpdatedTime
+summary: The timestamp (UTC) of when the Entity was updated or collected at the source.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: datetime
+  description: The timestamp (UTC) of when the Entity was updated or collected at the source.

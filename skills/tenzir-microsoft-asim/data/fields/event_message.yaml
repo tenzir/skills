@@ -1,0 +1,38 @@
+name: EventMessage
+summary: Detailed information about the alert, including its context, cause, and potential impact. e.g. Potential use of the Rubeus tool for kerberoasting, a technique used to extract service account credentials from Kerberos tickets.
+schemas:
+- name: AlertEvent
+  role: common
+  class: Optional
+  type: string
+  description: Detailed information about the alert, including its context, cause, and potential impact. e.g. Potential use of the Rubeus tool for kerberoasting, a technique used to extract service account credentials from Kerberos tickets.
+- name: AuditEvent
+  role: common
+  class: Optional
+- name: Authentication
+  role: common
+  class: Optional
+- name: DhcpEvent
+  role: common
+  class: Optional
+- name: Dns
+  role: common
+  class: Optional
+- name: FileEvent
+  role: common
+  class: Optional
+- name: NetworkSession
+  role: common
+  class: Optional
+- name: ProcessEvent
+  role: common
+  class: Optional
+- name: RegistryEvent
+  role: common
+  class: Optional
+- name: UserManagement
+  role: common
+  class: Optional
+- name: WebSession
+  role: common
+  class: Optional

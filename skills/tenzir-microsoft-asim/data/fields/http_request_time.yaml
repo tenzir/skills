@@ -1,0 +1,10 @@
+name: HttpRequestTime
+summary: The amount of time, in milliseconds, it took to send the request to the server, if applicable.
+schemas:
+- name: WebSession
+  role: http
+  class: Optional
+  type: Integer
+  description: The amount of time, in milliseconds, it took to send the request to the server, if applicable.
+  examples:
+  - '700'

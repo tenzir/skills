@@ -1,0 +1,10 @@
+name: SrcNatPortNumber
+summary: If reported by an intermediary NAT device, the port used by the NAT device for communication with the destination.
+schemas:
+- name: NetworkSession
+  role: source
+  class: Optional
+  type: Integer
+  description: If reported by an intermediary NAT device, the port used by the NAT device for communication with the destination.
+  examples:
+  - '345'

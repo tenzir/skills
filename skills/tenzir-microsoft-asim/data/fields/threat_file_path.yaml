@@ -1,0 +1,8 @@
+name: ThreatFilePath
+summary: A file path for which a threat was identified. The field ThreatField contains the name of the field ThreatFilePath represents.
+schemas:
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: String
+  description: A file path for which a threat was identified. The field ThreatField contains the name of the field ThreatFilePath represents.

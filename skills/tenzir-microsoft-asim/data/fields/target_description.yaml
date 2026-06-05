@@ -1,0 +1,17 @@
+name: TargetDescription
+summary: A descriptive text associated with the device. For
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller

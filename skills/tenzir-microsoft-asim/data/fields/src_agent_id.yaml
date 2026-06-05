@@ -1,0 +1,8 @@
+name: SrcAgentId
+summary: The unique ID of the source agent.
+schemas:
+- name: AgentEvent
+  role: source
+  class: Recommended
+  type: String
+  description: The unique ID of the source agent.

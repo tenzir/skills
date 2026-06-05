@@ -1,0 +1,53 @@
+name: ThreatLastReportedTime
+summary: Date and time when the threat was last reported. e.g. 2024-09-19T10:12:10.0000000Z
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: datetime
+  description: Date and time when the threat was last reported. e.g. 2024-09-19T10:12:10.0000000Z
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: Date/Time
+  description: Date and time when the threat was last reported. e.g. 2024-09-19T10:12:10.0000000Z
+- name: Dns
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.

@@ -1,0 +1,17 @@
+name: TargetGeoLongitude
+summary: The longitude of the geographical coordinate associated with the Target IP address.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the Target IP address.
+  examples:
+  - '73.211944'
+- name: Authentication
+  role: target
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the target IP address.
+  examples:
+  - '73.211944'

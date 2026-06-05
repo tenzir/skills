@@ -1,0 +1,826 @@
+name: Dns
+title: DNS Activity
+kind: event
+version: 0.1.7
+status: GA
+summary: The DNS information model is used to describe events reported by a DNS server or a DNS security system, and is used by Microsoft Sentinel to enable source-agnostic analytics. For more information, see Normalization and the Advanced Security Information Model (ASIM).
+fields:
+- name: DnsQuery
+  role: dns
+  class: Mandatory
+  type: String
+  description: The domain that the request tries to resolve.
+  examples:
+  - www.malicious.com
+  notes: '- Some sources send valid FQDN queries in a different format. For example, in the DNS protocol itself, the query includes a dot (.) at the end, which must be removed. - While the DNS protocol limits the type of value in this field to an FQDN, most DNS servers allow any value, and this field is therefore not limited to FQDN values only. Most notably, DNS tunneling attacks may use invalid FQDN values in the query field. - While the DNS protocol allows for multiple queries in a single request, this scenario is rare, if it''s found at all. If the request has multiple queries, store the first one in this field, and then and optionally keep the rest in the AdditionalFields field.'
+- name: Dvc
+  role: device
+  class: Mandatory
+  type: '-'
+  description: For DNS events, device fields refer to the system that reports the DNS event.
+- name: EventCount
+  role: common
+  class: Mandatory
+- name: EventEndTime
+  role: common
+  class: Mandatory
+- name: EventProduct
+  role: common
+  class: Mandatory
+- name: EventResult
+  role: common
+  class: Mandatory
+- name: EventResultDetails
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: For DNS events, this field provides the DNS response code.
+  examples:
+  - NXDOMAIN
+  notes: '- IANA doesn''t define the case for the values, so analytics must normalize the case. - If the source provides only a numerical response code and not a response code name, the parser must include a lookup table to enrich with this value. - If this record represents a request and not a response, set to NA.'
+- name: EventSchema
+  role: common
+  class: Mandatory
+  type: Enumerated
+  value: Dns
+  description: The name of the schema documented here is Dns.
+- name: EventSchemaVersion
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.7
+  description: The version of the schema documented here is 0.1.7.
+- name: EventStartTime
+  role: common
+  class: Mandatory
+- name: EventType
+  role: common
+  class: Mandatory
+  type: Enumerated
+  description: Indicates the operation reported by the record. For DNS records, this value would be the DNS op code.
+  examples:
+  - Query
+- name: EventVendor
+  role: common
+  class: Mandatory
+- name: DnsQueryClassName
+  role: dns
+  class: Recommended
+  type: DnsQueryClassName (String)
+  description: The DNS class name. In practice, only the IN class (ID 1) is used, and therefore this field is less valuable.
+  examples:
+  - IN
+- name: DnsQueryTypeName
+  role: dns
+  class: Recommended
+  type: Enumerated
+  description: The DNS Resource Record Type names.
+  examples:
+  - AAAA
+  notes: '- IANA doesn''t define the case for the values, so analytics must normalize the case as needed. - The value ANY is supported for the response code 255. - The value TYPExxxx is supported for unmapped response codes, where xxxx is the numerical value of the response code, as reported by the BIND DNS server. -If the source provides only a numerical query type code and not a query type name, the parser must include a lookup table to enrich with this value.'
+- name: DvcAction
+  role: device
+  class: Recommended
+- name: DvcDomain
+  role: device
+  class: Recommended
+- name: DvcDomainType
+  role: device
+  class: Recommended
+- name: DvcFQDN
+  role: device
+  class: Recommended
+- name: DvcHostname
+  role: device
+  class: Recommended
+- name: DvcId
+  role: device
+  class: Recommended
+- name: DvcIdType
+  role: device
+  class: Recommended
+- name: DvcIpAddr
+  role: device
+  class: Recommended
+- name: EventSeverity
+  role: common
+  class: Recommended
+- name: EventUid
+  role: common
+  class: Recommended
+- name: SrcDomain
+  role: source
+  class: Recommended
+  type: Domain (String)
+  description: The domain of the source device.
+  examples:
+  - Contoso
+- name: SrcHostname
+  role: source
+  class: Recommended
+  type: Hostname (String)
+  description: The source device hostname, excluding domain information.
+  examples:
+  - DESKTOP-1282V4D
+- name: SrcIpAddr
+  role: source
+  class: Recommended
+  type: IP Address
+  description: The IP address of the client that sent the DNS request. For a recursive DNS request, this value would typically be the reporting device, and in most cases set to 127.0.0.1.
+  examples:
+  - 192.168.12.1
+- name: TransactionIdHex
+  class: Recommended
+  type: Hexadecimal (String)
+  description: The DNS query unique ID as assigned by the DNS client, in hexadecimal format. Note that this value is part of the DNS protocol and different from DnsSessionId, the network layer session ID, typically assigned by the reporting device.
+- name: DstDomainType
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDomain is used
+  allowed_values:
+  - Windows (contoso\mypc)
+  - FQDN (learn.microsoft.com)
+  description: 'The type of DstDomain, if known. Possible values include: - Windows (contoso\mypc) - FQDN (learn.microsoft.com) Required if DstDomain is used.'
+- name: DstDvcIdType
+  role: destination
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - DstDeviceId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEidIf
+  description: 'The type of DstDvcId, if known. Possible values include: - AzureResourceId - MDEidIf If multiple IDs are available, use the first one from the list above, and store the others in the DstDvcAzureResourceId or DstDvcMDEid fields, respectively. Required if DstDeviceId is used.'
+- name: SrcDomainType
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDomain is used
+  allowed_values:
+  - Windows (such as
+  - FQDN (such as
+  description: 'The type of SrcDomain, if known. Possible values include: - Windows (such as: contoso) - FQDN (such as: microsoft.com) Required if SrcDomain is used.'
+- name: SrcDvcIdType
+  role: source
+  class: Conditional
+  type: Enumerated
+  required_if:
+  - SrcDvcId is used
+  allowed_values:
+  - AzureResourceId
+  - MDEid
+  description: 'The type of SrcDvcId, if known. Possible values include: - AzureResourceId - MDEid If multiple IDs are available, use the first one from the list, and store the others in the SrcDvcAzureResourceId and SrcDvcMDEid, respectively.'
+  notes: This field is required if SrcDvcId is used.
+- name: SrcUserIdType
+  role: source
+  class: Conditional
+  type: UserIdType
+  description: The type of the ID stored in the SrcUserId field. For more information and list of allowed values, see UserIdType in the Schema Overview article.
+- name: SrcUsernameType
+  role: source
+  class: Conditional
+  type: UsernameType
+  description: Specifies the type of the user name stored in the SrcUsername field. For more information, and list of allowed values, see UsernameType in the Schema Overview article.
+  examples:
+  - Windows
+- name: ThreatField
+  role: threat
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - SrcIpAddr
+  - DstIpAddr
+  - Domain
+  - DnsResponseName
+  description: The field for which a threat was identified. The value is either SrcIpAddr, DstIpAddr, Domain, or DnsResponseName.
+- name: AdditionalFields
+  role: common
+  class: Optional
+- name: DnsFlags
+  role: dns
+  class: Optional
+  type: String
+  description: The flags field, as provided by the reporting device. If flag information is provided in multiple fields, concatenate them with comma as a separator. Since DNS flags are complex to parse and are less often used by analytics, parsing, and normalization aren't required. Microsoft Sentinel can use an auxiliary function to provide flags information. For more information, see Handling DNS response.
+  examples:
+  - '["DR"]'
+- name: DnsFlagsAuthenticated
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS AD flag, which is related to DNSSEC, indicates in a response that all data included in the answer and authority sections of the response have been verified by the server according to the policies of that server. For more information, see RFC 3655 Section 6.1 for more information.
+- name: DnsFlagsAuthoritative
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS AA flag indicates whether the response from the server was authoritative
+- name: DnsFlagsCheckingDisabled
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS CD flag, which is related to DNSSEC, indicates in a query that non-verified data is acceptable to the system sending the query. For more information, see RFC 3655 Section 6.1 for more information.
+- name: DnsFlagsRecursionAvailable
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS RA flag indicates in a response that that server supports recursive queries.
+- name: DnsFlagsRecursionDesired
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS RD flag indicates in a request that that client would like the server to use recursive queries.
+- name: DnsFlagsTruncated
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS TC flag indicates that a response was truncated as it exceeded the maximum response size.
+- name: DnsFlagsZ
+  role: dns
+  class: Optional
+  type: Boolean
+  description: The DNS Z flag is a deprecated DNS flag, which might be reported by older DNS systems.
+- name: DnsNetworkDuration
+  role: dns
+  class: Optional
+  type: Integer
+  description: The amount of time, in milliseconds, for the completion of DNS request.
+  examples:
+  - '1500'
+- name: DnsQueryClass
+  role: dns
+  class: Optional
+  type: Integer
+  description: The DNS class ID. In practice, only the IN class (ID 1) is used, and therefore this field is less valuable.
+- name: DnsQueryType
+  role: dns
+  class: Optional
+  type: Integer
+  description: The DNS Resource Record Type codes.
+  examples:
+  - '28'
+- name: DnsResponseCode
+  role: dns
+  class: Optional
+  type: Integer
+  description: The DNS numerical response code.
+  examples:
+  - '3'
+- name: DnsResponseIpCity
+  role: dns
+  class: Optional
+  type: City
+  description: The city associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - Burlington
+- name: DnsResponseIpCountry
+  role: dns
+  class: Optional
+  type: Country
+  description: The country/region associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - USA
+- name: DnsResponseIpLatitude
+  role: dns
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - '44.475833'
+- name: DnsResponseIpLongitude
+  role: dns
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - '73.211944'
+- name: DnsResponseIpRegion
+  role: dns
+  class: Optional
+  type: Region
+  description: The region, or state, associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - Vermont
+- name: DnsResponseName
+  role: dns
+  class: Optional
+  type: String
+  description: The content of the response, as included in the record. The DNS response data is inconsistent across reporting devices, is complex to parse, and has less value for source-agnostic analytics. Therefore the information model doesn't require parsing and normalization, and Microsoft Sentinel uses an auxiliary function to provide response information. For more information, see Handling DNS response.
+- name: DnsSessionId
+  role: dns
+  class: Optional
+  type: string
+  description: The DNS session identifier as reported by the reporting device. This value is different from TransactionIdHex, the DNS query unique ID as assigned by the DNS client.
+  examples:
+  - EB4BFA28-2EAD-4EF7-BC8A-51DF4FDF5B55
+- name: DstDescription
+  role: destination
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: DstDeviceType
+  role: destination
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Computer
+  - Mobile Device
+  - IOT Device
+  - Other
+  description: 'The type of the destination device. Possible values include: - Computer - Mobile Device - IOT Device - Other'
+- name: DstDomain
+  role: destination
+  class: Optional
+  type: Domain (String)
+  description: The domain of the destination device.
+  examples:
+  - Contoso
+- name: DstDvcId
+  role: destination
+  class: Optional
+  type: String
+  description: The ID of the destination device as reported in the record.
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: DstDvcScope
+  role: destination
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. DstDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: DstDvcScopeId
+  role: destination
+  class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. DstDvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
+- name: DstFQDN
+  role: destination
+  class: Optional
+  type: FQDN (String)
+  description: The destination device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The DstDomainType reflects the format used.
+- name: DstGeoCity
+  role: destination
+  class: Optional
+  type: City
+  description: The city associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Burlington
+- name: DstGeoCountry
+  role: destination
+  class: Optional
+  type: Country
+  description: The country/region associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - USA
+- name: DstGeoLatitude
+  role: destination
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '44.475833'
+- name: DstGeoLongitude
+  role: destination
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - '73.211944'
+- name: DstGeoRegion
+  role: destination
+  class: Optional
+  type: Region
+  description: The region, or state, associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - Vermont
+- name: DstHostname
+  role: destination
+  class: Optional
+  type: Hostname (String)
+  required_if:
+  - DstIpAddr is specified
+  description: The destination device hostname, excluding domain information. If no device name is available, store the relevant IP address in this field.
+  examples:
+  - DESKTOP-1282V4D
+  notes: This value is mandatory if DstIpAddr is specified.
+- name: DstIpAddr
+  role: destination
+  class: Optional
+  type: IP Address
+  description: The IP address of the server that received the DNS request. For a regular DNS request, this value would typically be the reporting device, and in most cases set to 127.0.0.1.
+  examples:
+  - 127.0.0.1
+- name: DstOriginalRiskLevel
+  role: destination
+  class: Optional
+  type: String
+  description: The risk level associated with the destination, as reported by the reporting device.
+  examples:
+  - Malicious
+- name: DstPortNumber
+  role: destination
+  class: Optional
+  type: Integer
+  description: Destination Port number.
+  examples:
+  - '53'
+- name: DstRiskLevel
+  role: destination
+  class: Optional
+  type: Integer
+  description: The risk level associated with the destination. The value should be adjusted to a range of 0 to 100, which 0 being benign and 100 being a high risk.
+  examples:
+  - '90'
+- name: DvcDescription
+  role: device
+  class: Optional
+- name: DvcInterface
+  role: device
+  class: Optional
+- name: DvcMacAddr
+  role: device
+  class: Optional
+- name: DvcOriginalAction
+  role: device
+  class: Optional
+- name: DvcOs
+  role: device
+  class: Optional
+- name: DvcOsVersion
+  role: device
+  class: Optional
+- name: DvcScope
+  role: device
+  class: Optional
+- name: DvcScopeId
+  role: device
+  class: Optional
+- name: DvcZone
+  role: device
+  class: Optional
+- name: EventMessage
+  role: common
+  class: Optional
+- name: EventOriginalResultDetails
+  role: common
+  class: Optional
+- name: EventOriginalSeverity
+  role: common
+  class: Optional
+- name: EventOriginalSubType
+  role: common
+  class: Optional
+- name: EventOriginalType
+  role: common
+  class: Optional
+- name: EventOriginalUid
+  role: common
+  class: Optional
+- name: EventOwner
+  role: common
+  class: Optional
+- name: EventProductVersion
+  role: common
+  class: Optional
+- name: EventReportUrl
+  role: common
+  class: Optional
+- name: EventSubType
+  role: common
+  class: Optional
+  type: Enumerated
+  description: Either request or response. For most sources, only the responses are logged, and therefore the value is often response.
+- name: NetworkProtocol
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The transport protocol used by the network resolution event. The value can be UDP or TCP, and is most commonly set to UDP for DNS.
+  examples:
+  - UDP
+- name: NetworkProtocolVersion
+  role: network
+  class: Optional
+  type: Enumerated
+  description: The version of NetworkProtocol. When using it to distinguish between IP version, use the values IPv4 and IPv6.
+- name: RuleName
+  role: rule
+  class: Optional
+  type: String
+  description: The name or ID of the rule which identified the threat.
+  examples:
+  - AnyAnyDrop
+- name: RuleNumber
+  role: rule
+  class: Optional
+  type: Integer
+  description: The number of the rule which identified the threat.
+  examples:
+  - '23'
+- name: SrcDescription
+  role: source
+  class: Optional
+  type: String
+  description: A descriptive text associated with the device. For
+  examples:
+  - Primary Domain Controller
+- name: SrcDeviceType
+  role: source
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Computer
+  - Mobile Device
+  - IOT Device
+  - Other
+  description: 'The type of the source device. Possible values include: - Computer - Mobile Device - IOT Device - Other'
+- name: SrcDvcId
+  role: source
+  class: Optional
+  type: String
+  description: The ID of the source device as reported in the record. For
+  examples:
+  - ac7e9755-8eae-4ffc-8a02-50ed7a2216c3
+- name: SrcDvcScope
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope the device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcDvcScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The cloud platform scope ID the device belongs to. SrcDvcScopeId map to a subscription ID on Azure and to an account ID on AWS.
+- name: SrcFQDN
+  role: source
+  class: Optional
+  type: FQDN (String)
+  description: The source device hostname, including domain information when available.
+  examples:
+  - Contoso\DESKTOP-1282V4D
+  notes: This field supports both traditional FQDN format and Windows domain\hostname format. The SrcDomainType field reflects the format used.
+- name: SrcGeoCity
+  role: source
+  class: Optional
+  type: City
+  description: The city associated with the source IP address.
+  examples:
+  - Burlington
+- name: SrcGeoCountry
+  role: source
+  class: Optional
+  type: Country
+  description: The country/region associated with the source IP address.
+  examples:
+  - USA
+- name: SrcGeoLatitude
+  role: source
+  class: Optional
+  type: Latitude
+  description: The latitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '44.475833'
+- name: SrcGeoLongitude
+  role: source
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with the source IP address.
+  examples:
+  - '73.211944'
+- name: SrcGeoRegion
+  role: source
+  class: Optional
+  type: Region
+  description: The region associated with the source IP address.
+  examples:
+  - Vermont
+- name: SrcOriginalRiskLevel
+  role: source
+  class: Optional
+  type: String
+  description: The risk level associated with the source, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: SrcOriginalUserType
+  role: source
+  class: Optional
+  type: String
+  description: The original source user type, if provided by the source.
+- name: SrcPortNumber
+  role: source
+  class: Optional
+  type: Integer
+  description: Source port of the DNS query.
+  examples:
+  - '54312'
+- name: SrcProcessGuid
+  role: source
+  class: Optional
+  type: GUID (String)
+  description: A generated unique identifier (GUID) of the process that initiated the DNS request.
+  examples:
+  - EF3BD0BD-2B74-60C5-AF5C-010000001E00
+- name: SrcProcessId
+  role: source
+  class: Optional
+  type: String
+  description: The process ID (PID) of the process that initiated the DNS request.
+  examples:
+  - '48610176'
+  notes: The type is defined as string to support varying systems, but on Windows and Linux this value must be numeric. If you are using a Windows or Linux machine and used a different type, make sure to convert the values. For example, if you used a hexadecimal value, convert it to a decimal value.
+- name: SrcProcessName
+  role: source
+  class: Optional
+  type: String
+  description: The file name of the process that initiated the DNS request. This name is typically considered to be the process name.
+  examples:
+  - C:\Windows\explorer.exe
+- name: SrcRiskLevel
+  role: source
+  class: Optional
+  type: Integer
+  description: The risk level associated with the source. The value should be adjusted to a range of 0 to 100, with 0 for benign and 100 for a high risk.
+  examples:
+  - '90'
+- name: SrcUserId
+  role: source
+  class: Optional
+  type: String
+  description: A machine-readable, alphanumeric, unique representation of the source user. For more information, and for alternative fields for additional IDs, see The User entity.
+  examples:
+  - S-1-12-1-4141952679-1282074057-627758481-2916039507
+- name: SrcUsername
+  role: source
+  class: Optional
+  type: Username (String)
+  description: The source username, including domain information when available. For more information, see The User entity.
+  examples:
+  - AlbertE
+- name: SrcUserScope
+  role: source
+  class: Optional
+  type: String
+  description: The scope, such as Microsoft Entra tenant, in which SrcUserId and SrcUsername are defined. or more information and list of allowed values, see UserScope in the Schema Overview article.
+- name: SrcUserScopeId
+  role: source
+  class: Optional
+  type: String
+  description: The scope ID, such as Microsoft Entra Directory ID, in which SrcUserId and SrcUsername are defined. for more information and list of allowed values, see UserScopeId in the Schema Overview article.
+- name: SrcUserSessionId
+  role: source
+  class: Optional
+  type: String
+  description: The unique ID of the sign-in session of the Actor.
+  examples:
+  - 102pTUgC3p8RIqHvzxLCHnFlg
+- name: SrcUserType
+  role: source
+  class: Optional
+  type: UserType
+  description: The type of the source user. For more information, and list of allowed values, see UserType in the Schema Overview article. For
+  examples:
+  - Guest
+- name: ThreatCategory
+  role: threat
+  class: Optional
+  type: String
+  description: If a DNS event source also provides DNS security, it may also evaluate the DNS event. For example, it can search for the IP address or domain in a threat intelligence database, and assign the domain or IP address with a Threat Category.
+- name: ThreatConfidence
+  role: threat
+  class: Optional
+  type: ConfidenceLevel (Integer)
+  description: The confidence level of the threat identified, normalized to a value between 0 and a 100.
+- name: ThreatFirstReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The first time the IP address or domain were identified as a threat.
+- name: ThreatId
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the network session.
+  examples:
+  - Tr.124
+- name: ThreatIpAddr
+  role: threat
+  class: Optional
+  type: IP Address
+  description: An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents. If a threat is identified in the Domain field, this field should be empty.
+- name: ThreatIsActive
+  role: threat
+  class: Optional
+  type: Boolean
+  description: True if the threat identified is considered an active threat.
+- name: ThreatLastReportedTime
+  role: threat
+  class: Optional
+  type: datetime
+  description: The last time the IP address or domain were identified as a threat.
+- name: ThreatName
+  role: threat
+  class: Optional
+  type: String
+  description: The name of the threat identified, as reported by the reporting device.
+- name: ThreatOriginalConfidence
+  role: threat
+  class: Optional
+  type: String
+  description: The original confidence level of the threat identified, as reported by the reporting device.
+- name: ThreatOriginalRiskLevel
+  role: threat
+  class: Optional
+  type: String
+  description: The original risk level associated with the threat identified, as reported by the reporting device.
+- name: ThreatRiskLevel
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the threat identified, normalized to a value between 0 and a 100.
+- name: UrlCategory
+  role: web
+  class: Optional
+  type: String
+  to:
+  - DNS
+  description: A DNS event source may also look up the category of the requested Domains. The field is called UrlCategory to align with the Microsoft Sentinel network schema. DomainCategory is added as an alias that's fitting to DNS.
+  examples:
+  - Educational \\ Phishing
+- name: DnsResponseCodeName
+  role: dns
+  class: Alias
+  to:
+  - EventResultDetails
+- name: Domain
+  role: dns
+  class: Alias
+  to:
+  - DnsQuery
+- name: DomainCategory
+  role: dns
+  class: Alias
+  to:
+  - UrlCategory
+- name: Dst
+  role: destination
+  class: Alias
+  type: String
+  to:
+  - DstDvcId
+  - DstHostname
+  - DstIpAddr
+  resolution: A unique identifier of the server that received the DNS request. This field may alias the DstDvcId, DstHostname, or DstIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: Duration
+  role: network
+  class: Alias
+  to:
+  - DnsNetworkDuration
+- name: Hostname
+  role: device
+  class: Alias
+  to:
+  - SrcHostname
+- name: IpAddr
+  role: network
+  class: Alias
+  to:
+  - SrcIpAddr
+- name: Process
+  role: process
+  class: Alias
+  to:
+  - SrcProcessName
+  examples:
+  - C:\Windows\System32\rundll32.exe
+- name: Rule
+  role: rule
+  class: Alias
+  type: String
+  resolution: Either the value of RuleName or the value of RuleNumber. If the value of RuleNumber is used, the type should be converted to string.
+- name: SessionId
+  role: session
+  class: Alias
+  to:
+  - DnsSessionId
+- name: Src
+  role: source
+  class: Alias
+  type: String
+  to:
+  - SrcDvcId
+  - SrcHostname
+  - SrcIpAddr
+  resolution: A unique identifier of the source device. This field can alias the SrcDvcId, SrcHostname, or SrcIpAddr fields.
+  examples:
+  - 192.168.12.1
+- name: User
+  role: user
+  class: Alias
+  to:
+  - SrcUsername

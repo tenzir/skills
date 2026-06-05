@@ -1,0 +1,8 @@
+name: TargetProcessIntegrityLevel
+summary: 'Every process has an integrity level that is represented in its token. Integrity levels determine the process level of protection or access. Windows defines the following integrity levels: low, medium, high, and system. Standard users receive a medium integrity level and elevated users receive a high integrity level. For more information, see Mandatory Integrity Control - Win32 apps.'
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: 'Every process has an integrity level that is represented in its token. Integrity levels determine the process level of protection or access. Windows defines the following integrity levels: low, medium, high, and system. Standard users receive a medium integrity level and elevated users receive a high integrity level. For more information, see Mandatory Integrity Control - Win32 apps.'

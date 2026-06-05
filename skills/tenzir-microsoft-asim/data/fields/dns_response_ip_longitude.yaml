@@ -1,0 +1,10 @@
+name: DnsResponseIpLongitude
+summary: The longitude of the geographical coordinate associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Longitude
+  description: The longitude of the geographical coordinate associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - '73.211944'

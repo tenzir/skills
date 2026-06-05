@@ -1,0 +1,7 @@
+name: ExternalUsersCount
+summary: The number of external users associated with or having access to the asset.
+schemas:
+- name: AssetEntity
+  class: Optional
+  type: int
+  description: The number of external users associated with or having access to the asset.

@@ -1,0 +1,7 @@
+name: Operation
+summary: The operation audited as reported by the reporting device.
+schemas:
+- name: AuditEvent
+  class: Mandatory
+  type: String
+  description: The operation audited as reported by the reporting device.

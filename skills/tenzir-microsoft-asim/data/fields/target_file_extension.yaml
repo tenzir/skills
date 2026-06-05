@@ -1,0 +1,9 @@
+name: TargetFileExtension
+summary: The target file extension.
+schemas:
+- name: FileEvent
+  role: target
+  class: Optional
+  type: String
+  description: The target file extension.
+  notes: A parser can provide this value if the value available in the log source and does not need to be extracted from the full path.

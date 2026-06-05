@@ -1,0 +1,10 @@
+name: NetworkSessionId
+summary: The session identifier as reported by the reporting device.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: string
+  description: The session identifier as reported by the reporting device.
+  examples:
+  - 172\_12\_53\_32\_4322\_\_123\_64\_207\_1\_80

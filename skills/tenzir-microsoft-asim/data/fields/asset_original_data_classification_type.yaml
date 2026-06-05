@@ -1,0 +1,8 @@
+name: AssetOriginalDataClassificationType
+summary: The original data classification type(s) assigned to the asset as reported by the source system. This must be an array of strings.
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Mandatory
+  type: dynamic
+  description: The original data classification type(s) assigned to the asset as reported by the source system. This must be an array of strings.

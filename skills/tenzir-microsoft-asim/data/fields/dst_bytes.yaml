@@ -1,0 +1,10 @@
+name: DstBytes
+summary: The number of bytes sent from the destination to the source for the connection or session. If the event is aggregated, DstBytes should be the sum over all aggregated sessions.
+schemas:
+- name: NetworkSession
+  role: destination
+  class: Recommended
+  type: Long
+  description: The number of bytes sent from the destination to the source for the connection or session. If the event is aggregated, DstBytes should be the sum over all aggregated sessions.
+  examples:
+  - '32455'

@@ -1,0 +1,24 @@
+name: TargetUsername
+summary: The target user username, including domain information when available. For more information, see The User entity.
+schemas:
+- name: Authentication
+  role: target
+  class: Optional
+  type: Username (String)
+  description: The target user username, including domain information when available. For more information, see The User entity.
+  examples:
+  - MarieC
+- name: ProcessEvent
+  role: target
+  class: Mandatory for process create events.
+  type: Username (String)
+  description: The target username, including domain information when available. For the supported format for different ID types, refer to the User entity. Use the simple form only if domain information isn't available. Store the Username type in the TargetUsernameType field. If other username formats are available, store them in the fields TargetUsername.
+  examples:
+  - AlbertE
+- name: UserManagement
+  role: target
+  class: Optional
+  type: Username (String)
+  description: 'The target username, including domain information when available. Use one of the following formats and in the following order of priority: - Upn/Email: johndow@contoso.com - Windows: Contoso\johndow - DN: CN=Jeff Smith,OU=Sales,DC=Fabrikam,DC=COM - Simple: johndow. Use the Simple form only if domain information isn''t available. Store the Username type in the TargetUsernameType field. If other IDs are available, we recommend that you normalize the field names to TargetUserUpn, TargetUserWindows, and TargetUserDn. For more information, see The User entity.'
+  examples:
+  - AlbertE

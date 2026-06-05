@@ -1,0 +1,75 @@
+name: EventSchemaVersion
+summary: The version of the schema. The version of the schema documented here is 0.1.0.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.0
+  description: The version of the schema. The version of the schema documented here is 0.1.0.
+- name: AlertEvent
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: '0.1'
+  description: The version of the schema. The version of the schema documented here is 0.1.
+- name: AuditEvent
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.2
+  description: The version of the schema. The version of the schema documented here is 0.1.2.
+- name: Authentication
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.4
+  description: The version of the schema. The version of the schema documented here is 0.1.4
+- name: DhcpEvent
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.1
+  description: The version of the schema documented here's 0.1.1.
+- name: Dns
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.7
+  description: The version of the schema documented here is 0.1.7.
+- name: FileEvent
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.2.2
+  description: The version of the schema. The version of the schema documented here is 0.2.2
+- name: NetworkSession
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.2.7
+  description: The version of the schema. The version of the schema documented here is 0.2.7.
+- name: ProcessEvent
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.4
+  description: The version of the schema. The version of the schema documented here is 0.1.4
+- name: RegistryEvent
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.3
+  description: The version of the schema. The version of the schema documented here is 0.1.3
+- name: UserManagement
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.1.2
+  description: The version of the schema. The version of the schema documented here is 0.1.2.
+- name: WebSession
+  role: common
+  class: Mandatory
+  type: SchemaVersion (String)
+  value: 0.2.7
+  description: The version of the schema. The version of the schema documented here is 0.2.7

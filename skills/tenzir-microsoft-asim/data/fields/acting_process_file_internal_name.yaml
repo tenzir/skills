@@ -1,0 +1,8 @@
+name: ActingProcessFileInternalName
+summary: The product internal file name from the version information of the acting process image file.
+schemas:
+- name: ProcessEvent
+  role: acting
+  class: Optional
+  type: String
+  description: The product internal file name from the version information of the acting process image file.

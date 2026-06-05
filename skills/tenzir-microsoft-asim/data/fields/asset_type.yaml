@@ -1,0 +1,11 @@
+name: AssetType
+summary: 'The high-level type of the asset. The allowed and supported values are: File, Site.'
+schemas:
+- name: AssetEntity
+  role: asset
+  class: Mandatory
+  type: string
+  allowed_values:
+  - File
+  - Site
+  description: 'The high-level type of the asset. The allowed and supported values are: File, Site.'

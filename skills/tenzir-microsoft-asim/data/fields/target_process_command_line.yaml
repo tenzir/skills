@@ -1,0 +1,10 @@
+name: TargetProcessCommandLine
+summary: The command line used to run the target process.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Mandatory
+  type: String
+  description: The command line used to run the target process.
+  examples:
+  - '"choco.exe" -v'

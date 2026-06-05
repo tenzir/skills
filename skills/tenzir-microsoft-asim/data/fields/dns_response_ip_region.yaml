@@ -1,0 +1,10 @@
+name: DnsResponseIpRegion
+summary: The region, or state, associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: dns
+  class: Optional
+  type: Region
+  description: The region, or state, associated with one of the IP addresses in the DNS response. For more information, see Logical types.
+  examples:
+  - Vermont

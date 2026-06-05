@@ -1,0 +1,17 @@
+name: TargetDvcOs
+summary: The OS of the target device.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: String
+  description: The OS of the target device.
+  examples:
+  - Windows 10
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: The OS of the target device.
+  examples:
+  - Windows 10

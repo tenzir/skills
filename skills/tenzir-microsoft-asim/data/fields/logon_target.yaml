@@ -1,0 +1,14 @@
+name: LogonTarget
+summary: LogonTarget is an alias for TargetAppName, TargetHostname, TargetUrl.
+to:
+- TargetAppName
+- TargetHostname
+- TargetUrl
+schemas:
+- name: Authentication
+  role: target
+  class: Alias
+  to:
+  - TargetAppName
+  - TargetHostname
+  - TargetUrl

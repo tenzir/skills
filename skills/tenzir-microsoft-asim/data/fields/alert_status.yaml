@@ -1,0 +1,11 @@
+name: AlertStatus
+summary: 'Indicates the current state or progress of the alert. Supported values are: - Active - Closed'
+schemas:
+- name: AlertEvent
+  role: alert
+  class: Optional
+  type: Enumerated
+  allowed_values:
+  - Active
+  - Closed
+  description: 'Indicates the current state or progress of the alert. Supported values are: - Active - Closed'

@@ -1,0 +1,17 @@
+name: ObjectType
+summary: 'The type of Object. Allowed values are: - Cloud Resource - Configuration Atom - Policy Rule - Event Log -Scheduled Task -Service -Directory Service Object -Other'
+schemas:
+- name: AuditEvent
+  role: object
+  class: Conditional
+  type: Enumerated
+  allowed_values:
+  - Cloud Resource
+  - Configuration Atom
+  - Policy Rule
+  - Event Log
+  - Scheduled Task
+  - Service
+  - Directory Service Object
+  - Other
+  description: 'The type of Object. Allowed values are: - Cloud Resource - Configuration Atom - Policy Rule - Event Log -Scheduled Task -Service -Directory Service Object -Other'

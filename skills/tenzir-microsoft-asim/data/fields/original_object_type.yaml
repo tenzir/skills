@@ -1,0 +1,7 @@
+name: OriginalObjectType
+summary: The type of Object as reported by the reporting system
+schemas:
+- name: AuditEvent
+  class: Optional
+  type: String
+  description: The type of Object as reported by the reporting system

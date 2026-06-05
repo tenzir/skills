@@ -1,0 +1,8 @@
+name: TcpFlagsAck
+summary: The TCP ACK Flag reported. The acknowledgment flag is used to acknowledge the successful receipt of a packet. As we can see from the diagram above, the receiver sends an ACK and a SYN in the second step of the three way handshake process to tell the sender that it received its initial packet.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: Boolean
+  description: The TCP ACK Flag reported. The acknowledgment flag is used to acknowledge the successful receipt of a packet. As we can see from the diagram above, the receiver sends an ACK and a SYN in the second step of the three way handshake process to tell the sender that it received its initial packet.

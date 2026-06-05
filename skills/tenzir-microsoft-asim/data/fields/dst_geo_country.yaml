@@ -1,0 +1,17 @@
+name: DstGeoCountry
+summary: The country/region associated with the destination IP address. For more information, see Logical types.
+schemas:
+- name: Dns
+  role: destination
+  class: Optional
+  type: Country
+  description: The country/region associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - USA
+- name: NetworkSession
+  role: destination
+  class: Optional
+  type: Country
+  description: The country/region associated with the destination IP address. For more information, see Logical types.
+  examples:
+  - USA

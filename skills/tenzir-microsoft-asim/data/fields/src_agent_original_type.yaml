@@ -1,0 +1,8 @@
+name: SrcAgentOriginalType
+summary: The original type of the source agent.
+schemas:
+- name: AgentEvent
+  role: source
+  class: Optional
+  type: String
+  description: The original type of the source agent.

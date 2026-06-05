@@ -1,0 +1,17 @@
+name: TargetOriginalRiskLevel
+summary: The risk level associated with the target, as reported by the reporting device.
+schemas:
+- name: AuditEvent
+  role: target
+  class: Optional
+  type: String
+  description: The risk level associated with the target, as reported by the reporting device.
+  examples:
+  - Suspicious
+- name: Authentication
+  role: target
+  class: Optional
+  type: String
+  description: The risk level associated with the target, as reported by the reporting device.
+  examples:
+  - Suspicious

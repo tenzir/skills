@@ -1,0 +1,41 @@
+name: EventOriginalType
+summary: Describes the operation called by the agent that initiated the event. Because this is an evolving space where agents can perform a vast number of actions, we have not enforced a set of enumerations for EventType.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: Describes the operation called by the agent that initiated the event. Because this is an evolving space where agents can perform a vast number of actions, we have not enforced a set of enumerations for EventType.
+- name: AlertEvent
+  role: common
+  class: Optional
+- name: AuditEvent
+  role: common
+  class: Optional
+- name: Authentication
+  role: common
+  class: Optional
+- name: DhcpEvent
+  role: common
+  class: Optional
+- name: Dns
+  role: common
+  class: Optional
+- name: FileEvent
+  role: common
+  class: Optional
+- name: NetworkSession
+  role: common
+  class: Optional
+- name: ProcessEvent
+  role: common
+  class: Optional
+- name: RegistryEvent
+  role: common
+  class: Optional
+- name: UserManagement
+  role: common
+  class: Optional
+- name: WebSession
+  role: common
+  class: Optional

@@ -1,0 +1,10 @@
+name: TargetProcessFileCompany
+summary: The name of the company that created the target process image file.
+schemas:
+- name: ProcessEvent
+  role: target
+  class: Optional
+  type: String
+  description: The name of the company that created the target process image file.
+  examples:
+  - Microsoft

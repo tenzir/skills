@@ -1,0 +1,60 @@
+name: ThreatRiskLevel
+summary: 'The risk level associated with the threat. The level should be a number between 0 and 100. Note: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.'
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: 'The risk level associated with the threat. The level should be a number between 0 and 100. Note: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.'
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: 'The risk level associated with the threat. The level should be a number between 0 and 100. Note: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.'
+- name: Dns
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the threat identified, normalized to a value between 0 and a 100.
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatOriginalRiskLevel.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the session. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatRiskLevelOriginal.
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatOriginalRiskLevel.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatOriginalRiskLevel.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: RiskLevel (Integer)
+  description: The risk level associated with the identified threat. The level should be a number between 0 and 100.
+  notes: The value might be provided in the source record by using a different scale, which should be normalized to this scale. The original value should be stored in ThreatOriginalRiskLevel.

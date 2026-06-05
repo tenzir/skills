@@ -1,0 +1,24 @@
+name: SessionId
+summary: SessionId is an alias for DhcpSessionId, DnsSessionId, NetworkSessionId.
+to:
+- DhcpSessionId
+- DnsSessionId
+- NetworkSessionId
+schemas:
+- name: DhcpEvent
+  role: session
+  class: Alias
+  type: String
+  to:
+  - DhcpSessionId
+- name: Dns
+  role: session
+  class: Alias
+  to:
+  - DnsSessionId
+- name: NetworkSession
+  role: session
+  class: Alias
+  type: String
+  to:
+  - NetworkSessionId

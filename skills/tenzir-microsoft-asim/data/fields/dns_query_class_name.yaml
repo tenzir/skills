@@ -1,0 +1,10 @@
+name: DnsQueryClassName
+summary: The DNS class name. In practice, only the IN class (ID 1) is used, and therefore this field is less valuable.
+schemas:
+- name: Dns
+  role: dns
+  class: Recommended
+  type: DnsQueryClassName (String)
+  description: The DNS class name. In practice, only the IN class (ID 1) is used, and therefore this field is less valuable.
+  examples:
+  - IN

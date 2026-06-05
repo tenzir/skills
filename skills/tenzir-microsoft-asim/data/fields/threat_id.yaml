@@ -1,0 +1,57 @@
+name: ThreatId
+summary: The ID of the threat or malware identified in the alert. e.g. 1234567891011121314
+schemas:
+- name: AlertEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The ID of the threat or malware identified in the alert. e.g. 1234567891011121314
+- name: AuditEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the audit activity.
+- name: Authentication
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the audit activity.
+- name: DhcpEvent
+  role: threat
+  class: Optional
+  type: string
+  description: The ID of the threat or malware identified in the alert. e.g. 1234567891011121314
+- name: Dns
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the network session.
+  examples:
+  - Tr.124
+- name: FileEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the file activity.
+- name: NetworkSession
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the network session.
+  examples:
+  - Tr.124
+- name: ProcessEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the file activity.
+- name: RegistryEvent
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the file activity.
+- name: UserManagement
+  role: threat
+  class: Optional
+  type: String
+  description: The ID of the threat or malware identified in the file activity.

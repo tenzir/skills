@@ -1,0 +1,10 @@
+name: NetworkRuleName
+summary: The name or ID of the rule by which DvcAction was decided upon.
+schemas:
+- name: NetworkSession
+  role: network
+  class: Optional
+  type: String
+  description: The name or ID of the rule by which DvcAction was decided upon.
+  examples:
+  - AnyAnyDrop

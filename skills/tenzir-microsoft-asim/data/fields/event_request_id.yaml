@@ -1,0 +1,8 @@
+name: EventRequestId
+summary: The unique ID of the event request.
+schemas:
+- name: AgentEvent
+  role: common
+  class: Optional
+  type: String
+  description: The unique ID of the event request.
