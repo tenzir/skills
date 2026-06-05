@@ -7,7 +7,13 @@ Structured UDM ingestion is coming soon
 
 Tenzir’s [`to_google_secops`](/reference/operators/to_google_secops.md) operator currently sends unstructured logs to Google SecOps. Use this guide to design and test UDM mapping operators, but don’t send structured UDM records directly with [`to_google_secops`](/reference/operators/to_google_secops.md) until structured UDM ingestion support is available.
 
-The examples use lowerCamelCase UDM JSON field names, such as `metadata.eventType`, to match the API-facing record shape. Google SecOps rule and normalizer field paths may use snake\_case names, such as `metadata.event_type`, in those contexts.
+The TQL examples in this guide build API-facing UDM records, so they use lowerCamelCase ingestion object field names such as `metadata.eventType` and `network.ipProtocol`.
+
+## Use the UDM skill
+
+Install the `tenzir-google-udm` skill when you want an agent to help with UDM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-google-udm-skill) for installation and usage examples.
+
+Ask the agent to use ingestion object field names when it maps logs into UDM event or entity objects for Google SecOps UDM API ingestion. When generated UDM field headings show two forms, choose the right-side lowerCamelCase ingestion object form. For example, use `metadata.eventType` and `network.ipProtocol` in the TQL output. If a heading has one name, use that spelling.
 
 ## Choose the UDM event type
 
