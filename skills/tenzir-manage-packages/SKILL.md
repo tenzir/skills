@@ -7,9 +7,7 @@ description: >-
   inputs and contexts, ship deployable pipelines, publish packages, and map data
   to schemas such as OCSF, Google UDM, ECS, or ASIM. Use when the user is
   working in the context of a Tenzir package or wants to turn exploratory TQL
-  work into package-managed, reusable capabilities. This skill is the package
-  lifecycle entry point; for one-off pipeline experiments without package
-  intent, use the narrower Tenzir docs guidance instead.
+  work into package-managed, reusable capabilities.
 metadata:
   requires:
     skills:
