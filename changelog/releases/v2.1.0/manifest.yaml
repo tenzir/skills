@@ -1,0 +1,9 @@
+created: 2026-06-05
+title: Package workflow and UDM field references
+intro: >-
+  This release improves agent guidance for package lifecycle management and Google
+  SecOps UDM workflows. It helps agents choose the right package surfaces while making
+  UDM field name differences explicit for mapping and detection use cases.
+source:
+  mode: sync-stable-queue
+  previous_stable: v2.0.0
