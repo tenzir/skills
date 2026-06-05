@@ -5,12 +5,11 @@ description: >-
   existing packages, update manifests, extend or remove package capabilities,
   refactor user-defined operators, maintain tests and examples, configure
   inputs and contexts, ship deployable pipelines, publish packages, and map data
-  to schemas such as OCSF, Google UDM, ECS, or ASIM. Use whenever the user wants
-  to build, scaffold, package, parse, normalize, enrich, export, map logs to a
-  schema, audit package structure, maintain a package, update a package, or add
-  reusable Tenzir package capabilities, even if they only mention one part such
-  as "build a parser", "add an operator", "add UDM mapping", "fix package
-  tests", or "publish this package."
+  to schemas such as OCSF, Google UDM, ECS, or ASIM. Use when the user is
+  working in the context of a Tenzir package or wants to turn exploratory TQL
+  work into package-managed, reusable capabilities. This skill is the package
+  lifecycle entry point; for one-off pipeline experiments without package
+  intent, use the narrower Tenzir docs guidance instead.
 metadata:
   requires:
     skills:
