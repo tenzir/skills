@@ -883,6 +883,7 @@ def extract_inline_values(segment: str) -> list[str]:
     if ticked:
         return ticked
     text = strip_markdown(segment)
+    text = text.split(".", 1)[0]
     text = re.sub(r"^(?:are|include|includes|:)\s*", "", text, flags=re.IGNORECASE).strip(" .")
     text = re.sub(r"\s+(?:or|and)\s+", ", ", text, flags=re.IGNORECASE)
     values = [value.strip(" .") for value in text.split(",")]
@@ -909,6 +910,7 @@ def extract_allowed_values(description: str) -> list[str]:
         tail = line[match.end() :].strip()
         if tail and tail not in {":", "."}:
             values.extend(extract_inline_values(tail))
+            continue
         started = False
         for candidate in lines[index + 1 :]:
             stripped = candidate.strip()
@@ -920,6 +922,8 @@ def extract_allowed_values(description: str) -> list[str]:
                 if started:
                     break
                 continue
+            if trigger.search(stripped):
+                break
             started = True
             bullet = extract_bullet_value(stripped)
             if bullet:
