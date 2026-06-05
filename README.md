@@ -55,39 +55,6 @@ npx skills add tenzir/skills@tenzir-google-udm
 npx skills add tenzir/skills@tenzir-ocsf
 ```
 
-## 🧩 Dependencies
-
-This repo uses a richer YAML frontmatter metadata structure to express skill
-dependencies and conditional skill delegation between sibling skills.
-
-Use unrolled YAML arrays:
-
-```yaml
----
-name: tenzir-manage-packages
-description: Manage Tenzir packages across the full lifecycle.
-metadata:
-  requires:
-    skills:
-      - tenzir-docs
-  uses:
-    skills:
-      - name: tenzir-google-udm
-        when: Google UDM mapping or Google SecOps field semantics are in scope.
----
-```
-
-Notes:
-
-- Use `metadata.requires.skills` for hard dependencies that are required for
-  the skill workflow.
-- Use `metadata.uses.skills` for conditional delegation targets that the skill
-  may use for a specific branch of work.
-- Write the dependency list as YAML bullets, not inline bracket syntax.
-- Dependency names must match the sibling skill `name` fields exactly.
-- Keep dependent skills self-contained; use dependency metadata to express
-  relationships instead of copying sibling workflow instructions inline.
-
 ## 📄 License
 
 [Apache-2.0](LICENSE)
