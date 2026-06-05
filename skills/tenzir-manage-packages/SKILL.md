@@ -18,6 +18,8 @@ metadata:
         when: Google UDM mapping or Google SecOps field semantics are in scope.
       - name: tenzir-ocsf
         when: OCSF mapping or OCSF schema semantics are in scope.
+      - name: tenzir-ship
+        when: Package changelog entries, release notes, or publishing workflows are in scope.
 ---
 
 # Manage Tenzir Packages
