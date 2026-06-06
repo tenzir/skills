@@ -1,0 +1,8 @@
+name: additional_answer_count
+used_by:
+- model: Network_Resolution
+  dataset: DNS
+  kind: event
+  source: declared
+  type: number
+  description: Number of entries in the 'additional' section of the DNS message.

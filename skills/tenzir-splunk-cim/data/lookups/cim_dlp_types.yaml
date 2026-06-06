@@ -1,0 +1,11 @@
+name: cim_dlp_types
+columns:
+- dlp_type
+rows:
+- dlp_type: application
+- dlp_type: host
+- dlp_type: network
+- dlp_type: gateway
+transforms:
+- name: cim_dlp_type_lookup
+  filename: cim_dlp_types.csv

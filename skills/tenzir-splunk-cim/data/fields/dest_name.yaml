@@ -1,0 +1,8 @@
+name: dest_name
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: Name of the destination as defined by the Vendor.

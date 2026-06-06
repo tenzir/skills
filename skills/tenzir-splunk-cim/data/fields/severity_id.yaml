@@ -1,0 +1,44 @@
+name: severity_id
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: declared
+  type: string
+  description: The numeric or vendor specific severity indicator corresponding to the event severity.
+- model: DLP
+  dataset: DLP_Incidents
+  kind: event
+  source: declared
+  type: string
+  description: The numeric or vendor specific severity indicator corresponding to the event severity.
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The numeric or vendor specific severity indicator corresponding to the event severity.
+- model: Malware
+  dataset: Malware_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The numeric or vendor specific severity indicator corresponding to the event severity.
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  kind: event
+  source: declared
+  type: string
+  description: The numeric or vendor specific severity indicator corresponding to the event severity.
+- model: Updates
+  dataset: Updates
+  kind: event
+  source: declared
+  type: string
+  description: The numeric or vendor specific severity indicator corresponding to the event severity.
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  kind: event
+  source: declared
+  type: string
+  description: The numeric or vendor specific severity indicator corresponding to the event severity.

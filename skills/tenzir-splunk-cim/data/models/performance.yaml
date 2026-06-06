@@ -1,0 +1,1096 @@
+name: Performance
+description: Performance Data Model
+root_datasets:
+- All_Performance
+datasets:
+  All_Performance:
+    display_name: All Performance
+    kind: event
+    constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
+    fields:
+      _time:
+        source: base
+        defined_in: BaseEvent
+      cim_entity_zone:
+        source: declared
+        defined_in: All_Performance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: calculated
+        defined_in: All_Performance
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        defined_in: All_Performance
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        defined_in: All_Performance
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: declared
+        defined_in: All_Performance
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: declared
+        defined_in: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: declared
+        defined_in: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: base
+        defined_in: BaseEvent
+      hypervisor_id:
+        source: declared
+        defined_in: All_Performance
+        type: string
+        description: The ID of the virtualization hypervisor.
+      resource_type:
+        source: declared
+        defined_in: All_Performance
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      source:
+        source: base
+        defined_in: BaseEvent
+      sourcetype:
+        source: base
+        defined_in: BaseEvent
+      tag:
+        source: declared
+        defined_in: All_Performance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    children:
+    - CPU
+    - Facilities
+    - Memory
+    - Network
+    - OS
+    - Storage
+  CPU:
+    kind: event
+    tags:
+    - performance
+    - cpu
+    constraints:
+    - tag=cpu
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      cpu_load_mhz:
+        source: declared
+        defined_in: CPU
+        type: number
+        description: The amount of CPU load reported by the controller in megahertz.
+      cpu_load_percent:
+        source: declared
+        defined_in: CPU
+        type: number
+        description: The amount of CPU load reported by the controller in percentage points.
+        recommended: true
+      cpu_time:
+        source: declared
+        defined_in: CPU
+        type: number
+        description: The number of CPU seconds consumed by processes.
+      cpu_user_percent:
+        source: declared
+        defined_in: CPU
+        type: number
+        description: Percentage of CPU user time consumed by processes.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The ID of the virtualization hypervisor.
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    - All_Performance
+  Facilities:
+    kind: event
+    tags:
+    - performance
+    - facilities
+    constraints:
+    - tag=facilities
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      fan_speed:
+        source: declared
+        defined_in: Facilities
+        type: number
+        description: The speed of the cooling fan in the facilities resource, in rotations per second.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The ID of the virtualization hypervisor.
+      power:
+        source: declared
+        defined_in: Facilities
+        type: number
+        description: Amount of power consumed by the facilities resource, in kW.
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      temperature:
+        source: declared
+        defined_in: Facilities
+        type: number
+        description: Average temperature of the facilities resource, in degrees Celsius.
+        recommended: true
+    inherits:
+    - BaseEvent
+    - All_Performance
+  Memory:
+    kind: event
+    tags:
+    - performance
+    - memory
+    constraints:
+    - tag=memory
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The ID of the virtualization hypervisor.
+      mem:
+        source: declared
+        defined_in: Memory
+        type: number
+        description: The total amount of memory capacity reported by the resource, in megabytes.
+        recommended: true
+      mem_committed:
+        source: declared
+        defined_in: Memory
+        type: number
+        description: The committed amount of memory reported by the resource, in megabytes.
+      mem_free:
+        source: declared
+        defined_in: Memory
+        type: number
+        description: The free amount of memory reported by the resource, in megabytes.
+        recommended: true
+      mem_used:
+        source: declared
+        defined_in: Memory
+        type: number
+        description: The used amount of memory reported by the resource, in megabytes.
+        recommended: true
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      swap:
+        source: declared
+        defined_in: Memory
+        type: number
+        description: The total swap space size, in megabytes, if applicable.
+      swap_free:
+        source: declared
+        defined_in: Memory
+        type: number
+        description: The free swap space size, in megabytes, if applicable.
+      swap_used:
+        source: declared
+        defined_in: Memory
+        type: number
+        description: The used swap space size, in megabytes, if applicable.
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    - All_Performance
+  Storage:
+    kind: event
+    tags:
+    - performance
+    - storage
+    constraints:
+    - tag=storage
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      array:
+        source: declared
+        defined_in: Storage
+        type: string
+        description: The array that the resource is a member of, if applicable.
+      blocksize:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: Block size used by the storage resource, in kilobytes.
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      cluster:
+        source: declared
+        defined_in: Storage
+        type: string
+        description: The cluster that the resource is a member of, if applicable.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      fd_max:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The maximum number of available file descriptors.
+      fd_used:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The current number of open file descriptors.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The ID of the virtualization hypervisor.
+      latency:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The latency reported by the resource, in milliseconds.
+      mount:
+        source: declared
+        defined_in: Storage
+        type: string
+        description: The mount point of a storage resource.
+      parent:
+        source: declared
+        defined_in: Storage
+        type: string
+        description: A generic indicator of hierarchy. For instance, a disk event might include the array id here.
+      read_blocks:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: Number of blocks read.
+      read_latency:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The latency of read operations, in milliseconds.
+      read_ops:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: Number of read operations.
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      storage:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The total amount of storage capacity reported by the resource, in megabytes.
+      storage_free:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The free amount of storage capacity reported by the resource, in megabytes.
+        recommended: true
+      storage_free_percent:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The percentage of storage capacity reported by the resource that is free.
+        recommended: true
+      storage_used:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The used amount of storage capacity reported by the resource, in megabytes.
+        recommended: true
+      storage_used_percent:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The percentage of storage capacity reported by the resource that is used.
+        recommended: true
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      write_blocks:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The number of blocks written by the resource.
+      write_latency:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The latency of write operations, in milliseconds.
+      write_ops:
+        source: declared
+        defined_in: Storage
+        type: number
+        description: The total number of write operations processed by the resource.
+    inherits:
+    - BaseEvent
+    - All_Performance
+  Network:
+    kind: event
+    tags:
+    - performance
+    - network
+    constraints:
+    - tag=network
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The ID of the virtualization hypervisor.
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      thruput:
+        source: declared
+        defined_in: Network
+        type: string
+        description: The current throughput reported by the service, in bytes.
+        recommended: true
+      thruput_max:
+        source: declared
+        defined_in: Network
+        type: number
+        description: The maximum possible throughput reported by the service, in bytes.
+    inherits:
+    - BaseEvent
+    - All_Performance
+  OS:
+    kind: event
+    tags:
+    - performance
+    - os
+    constraints:
+    - tag=os
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The ID of the virtualization hypervisor.
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      signature:
+        source: declared
+        defined_in: OS
+        type: string
+        description: The event description signature, if available.
+        recommended: true
+      signature_id:
+        source: declared
+        defined_in: OS
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Performance
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: All_Performance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    - All_Performance
+    children:
+    - Timesync
+    - Uptime
+  Timesync:
+    display_name: Time Synchronization
+    kind: event
+    tags:
+    - performance
+    - os
+    - time
+    - synchronize
+    constraints:
+    - tag=time tag=synchronize
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      action:
+        source: calculated
+        defined_in: Timesync
+        type: string
+        description: The result of a time sync event.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: Timesync_fillnull_action
+          type: Eval
+          expression: case(isnotnull(action) AND action!="",action,tag="success","success",tag="failure","failure",1=1,"unknown")
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The ID of the virtualization hypervisor.
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      signature:
+        source: inherited
+        defined_in: OS
+        inherited_from: OS
+        type: string
+        description: The event description signature, if available.
+        recommended: true
+      signature_id:
+        source: inherited
+        defined_in: OS
+        inherited_from: OS
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    - All_Performance
+    - OS
+  Uptime:
+    display_name: System Uptime
+    kind: event
+    tags:
+    - performance
+    - os
+    - uptime
+    constraints:
+    - tag=uptime
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Performance_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The priority of the system where the performance event occurred.
+      dest_should_timesync:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk App for Enterprise Security.
+      dest_should_update:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: boolean
+        description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      hypervisor_id:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The ID of the virtualization hypervisor.
+      resource_type:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: The type of facilities resource involved in the performance event, such as a rack, room, or system.
+      signature:
+        source: inherited
+        defined_in: OS
+        inherited_from: OS
+        type: string
+        description: The event description signature, if available.
+        recommended: true
+      signature_id:
+        source: inherited
+        defined_in: OS
+        inherited_from: OS
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: OS
+      tag:
+        source: inherited
+        defined_in: All_Performance
+        inherited_from: OS
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      uptime:
+        source: calculated
+        defined_in: Uptime
+        type: string
+        description: The uptime of the compute resource, in seconds.
+        recommended: true
+        calculation:
+          id: Uptime_fillnull_uptime
+          type: Eval
+          expression: if(isnull(uptime) OR uptime="","unknown",uptime)
+    inherits:
+    - BaseEvent
+    - All_Performance
+    - OS

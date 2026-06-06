@@ -1,0 +1,70 @@
+name: category
+lookups:
+- name: cam_categories
+  file: data/lookups/cam_categories.yaml
+used_by:
+- model: DLP
+  dataset: DLP_Incidents
+  kind: event
+  source: calculated
+  type: string
+  description: The category of the DLP event.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_category
+    type: Eval
+    expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  kind: event
+  source: calculated
+  type: string
+  description: 'The vendor-provided category of the triggered signature, such as spyware. Note: This field is a string. Use a category_id field for category ID fields that are integer data types (category_id fields are optional, so they are not included in this table).'
+  recommended: true
+  calculation:
+    id: IDS_Attacks_fillnull_category
+    type: Eval
+    expression: if(isnull(category) OR category="","unknown",category)
+- model: Malware
+  dataset: Malware_Attacks
+  kind: event
+  source: calculated
+  type: string
+  description: 'The category of the malware event, such as keylogger or ad-supported program. Note: This is a string value. Use category_id for category ID fields that are integer data types. The category_id field is optional, so it is not included in the data model.'
+  recommended: true
+  calculation:
+    id: Malware_Attacks_fillnull_category
+    type: Eval
+    expression: if(isnull(category) OR category="","unknown",category)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_IDS
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Malware_Attacks
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Vulnerabilities
+  kind: search
+  source: declared
+  type: string
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  kind: event
+  source: calculated
+  type: string
+  description: 'The category of the discovered vulnerability, such as DoS. Note: This field is a string. Use category_id for numeric values. The category_id field is optional and thus is not included in the data model.'
+  recommended: true
+  calculation:
+    id: Vulnerabilities_fillnull_category
+    type: Eval
+    expression: if(isnull(category) OR category="","unknown",category)
+- model: Web
+  dataset: Web
+  kind: event
+  source: declared
+  type: string
+  description: The category of traffic, such as may be provided by a proxy server.

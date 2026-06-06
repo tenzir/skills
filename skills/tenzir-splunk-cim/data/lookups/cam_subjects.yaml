@@ -1,0 +1,57 @@
+name: cam_subjects
+columns:
+- subject
+rows:
+- subject: device
+- subject: endpoint
+- subject: endpoint.workstation
+- subject: endpoint.server
+- subject: endpoint.laptop
+- subject: endpoint.smart-phone
+- subject: endpoint.tablet
+- subject: endpoint.printer
+- subject: endpoint.smart-meter
+- subject: endpoint.pos-terminal
+- subject: endpoint.digital-telephone-handset
+- subject: endpoint.sensor
+- subject: network
+- subject: network.firewall
+- subject: network.router
+- subject: network.capture
+- subject: network.ids
+- subject: network.hub
+- subject: network.bridge
+- subject: network.switch
+- subject: network.modem
+- subject: network.wap
+- subject: network.gateway
+- subject: network.proxy
+- subject: network.nic
+- subject: network.vpn
+- subject: network.guard
+- subject: network.sensor
+- subject: network.hips
+- subject: network.ips
+- subject: network.security_manager
+- subject: network.sense_making
+- subject: process
+- subject: process.vulnerability-scanner
+- subject: process.network-scanner
+- subject: process.connection-scanner
+- subject: process.anti-virus-scanner
+- subject: process.file-scanner
+- subject: process.aaa-server
+- subject: process.virtualization-service
+- subject: process.sandbox
+- subject: process.dns-server
+- subject: process.email-service
+- subject: process.directory-service
+- subject: process.remediation-service
+- subject: process.reputation-service
+- subject: process.location-service
+- subject: splunk.event
+- subject: threat.artifact
+- subject: uba.anomaly
+transforms:
+- name: cam_subject_lookup
+  filename: cam_subjects.csv

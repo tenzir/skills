@@ -1,0 +1,25 @@
+name: query
+used_by:
+- model: Databases
+  dataset: Database_Query
+  kind: event
+  source: declared
+  type: string
+  description: The full database query.
+- model: Network_Resolution
+  dataset: DNS
+  kind: event
+  source: calculated
+  type: string
+  description: The domain which needs to be resolved. Applies to messages of type 'Query'.
+  recommended: true
+  multivalue: true
+  calculation:
+    id: DNS_0fillnull_query
+    type: Eval
+    expression: if(isnull(query) OR query="","unknown",query)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_DNS
+  kind: search
+  source: declared
+  type: string

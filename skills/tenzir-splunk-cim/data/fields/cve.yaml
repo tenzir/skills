@@ -1,0 +1,14 @@
+name: cve
+used_by:
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  kind: event
+  source: calculated
+  type: string
+  description: The identifier provided in the Common Vulnerabilities and Exposures index (searchable at http://cve.mitre.org).
+  recommended: true
+  multivalue: true
+  calculation:
+    id: Vulnerabilities_lower_cve
+    type: Eval
+    expression: if(isnotnull(cve) AND cve!="",lower(cve),null())

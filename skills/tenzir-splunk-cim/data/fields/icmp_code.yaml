@@ -1,0 +1,8 @@
+name: icmp_code
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: string
+  description: The RFC 2780 or RFC 4443 human-readable code value of the traffic, such as Destination Unreachable or Parameter Problem . See the ICMP Type Numbers and the ICMPv6 Type Numbers.

@@ -1,0 +1,56 @@
+name: response_time
+used_by:
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response in the authentication event, in seconds.
+- model: Certificates
+  dataset: All_Certificates
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took, in seconds, to receive a response in the certificate management event, if applicable.
+- model: Databases
+  dataset: All_Databases
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response in the database event, in seconds.
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response in the messaging event, in seconds.
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response, in seconds.
+- model: Network_Resolution
+  dataset: DNS
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response in the network resolution event, in seconds.
+- model: Network_Sessions
+  dataset: All_Sessions
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response in the network session event, in seconds.
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response in the network event, in seconds.
+- model: Web
+  dataset: Web
+  kind: event
+  source: declared
+  type: number
+  description: The amount of time it took to receive a response, if applicable, in milliseconds.

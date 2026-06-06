@@ -1,0 +1,18 @@
+name: rule
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: calculated
+  type: string
+  description: 'The rule name that defines the action that was taken in the event. Note: Use rule_id field for unique ID (often numeric) of the rule.'
+  recommended: true
+  calculation:
+    id: All_Traffic_fillnull_rule
+    type: Eval
+    expression: if(isnull(rule) OR rule="","unknown",rule)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Traffic
+  kind: search
+  source: declared
+  type: string

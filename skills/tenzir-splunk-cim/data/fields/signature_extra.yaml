@@ -1,0 +1,8 @@
+name: signature_extra
+used_by:
+- model: Email
+  dataset: Filtering
+  kind: event
+  source: declared
+  type: string
+  description: Any additional information about the filter.

@@ -1,0 +1,30 @@
+name: http_method
+lookups:
+- name: cim_http_methods
+  file: data/lookups/cim_http_methods.yaml
+used_by:
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Web
+  kind: search
+  source: declared
+  type: string
+- model: Web
+  dataset: Web
+  kind: event
+  source: calculated
+  type: string
+  description: The HTTP method used in the request.
+  expected_values:
+  - GET
+  - PUT
+  - POST
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - CONNECT
+  - TRACE
+  recommended: true
+  calculation:
+    id: Web_fillnull_http_method
+    type: Eval
+    expression: if(isnull(http_method) OR http_method="" OR http_method="-","unknown",http_method)

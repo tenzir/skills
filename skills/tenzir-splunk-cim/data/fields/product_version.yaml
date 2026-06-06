@@ -1,0 +1,9 @@
+name: product_version
+used_by:
+- model: Malware
+  dataset: Malware_Operations
+  kind: search
+  source: declared
+  type: string
+  description: The product version of the malware operations product.
+  recommended: true

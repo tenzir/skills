@@ -1,0 +1,8 @@
+name: sga_library_cache_size
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  kind: event
+  source: declared
+  type: number
+  description: The total library cache size for the database instance, in bytes.

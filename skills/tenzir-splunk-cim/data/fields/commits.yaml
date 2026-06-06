@@ -1,0 +1,8 @@
+name: commits
+used_by:
+- model: Databases
+  dataset: Session_Info
+  kind: event
+  source: declared
+  type: number
+  description: The number of commits per second performed by the user associated with the session.

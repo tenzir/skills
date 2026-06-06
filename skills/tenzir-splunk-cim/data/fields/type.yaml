@@ -1,0 +1,20 @@
+name: type
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: calculated
+  type: string
+  description: The alert event type.
+  expected_values:
+  - alarm
+  - alert
+  - event
+  - task
+  - warning
+  - unknown
+  recommended: true
+  calculation:
+    id: Alerts_fillnull_type
+    type: Eval
+    expression: if(isnull(type) OR type="","unknown",type)

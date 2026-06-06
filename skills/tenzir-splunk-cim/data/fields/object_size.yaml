@@ -1,0 +1,13 @@
+name: object_size
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: calculated
+  type: string
+  description: The size of the modified resource object.
+  recommended: true
+  calculation:
+    id: Data_Access_fillnull_object_size
+    type: Eval
+    expression: if(isnull(object_size) OR object_size="","unknown",object_size)

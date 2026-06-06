@@ -1,0 +1,8 @@
+name: ssl_subject_locality
+used_by:
+- model: Certificates
+  dataset: SSL
+  kind: event
+  source: declared
+  type: string
+  description: The certificate owner's locality.

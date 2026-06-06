@@ -1,0 +1,23 @@
+name: user_type
+lookups:
+- name: cim_endpoint_user_types
+  file: data/lookups/cim_endpoint_user_types.yaml
+used_by:
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: declared
+  type: string
+  description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
+- model: Change
+  dataset: All_Changes
+  kind: event
+  source: declared
+  type: string
+  description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.

@@ -1,0 +1,8 @@
+name: serial
+used_by:
+- model: Compute_Inventory
+  dataset: All_Inventory
+  kind: event
+  source: declared
+  type: string
+  description: The serial number of the resource.

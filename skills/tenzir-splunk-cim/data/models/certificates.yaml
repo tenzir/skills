@@ -1,0 +1,442 @@
+name: Certificates
+description: Certificates Data Model
+root_datasets:
+- All_Certificates
+datasets:
+  All_Certificates:
+    display_name: All Certificates
+    kind: event
+    tags:
+    - certificate
+    constraints:
+    - (`cim_Certificates_indexes`) tag=certificate
+    fields:
+      _time:
+        source: base
+        defined_in: BaseEvent
+      cim_entity_zone:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The target in the certificate management event.
+      dest_bunit:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The business unit of the target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The category of the target, such as email_server or SOX-compliant. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk Enterprise Security.
+        multivalue: true
+      dest_port:
+        source: declared
+        defined_in: All_Certificates
+        type: number
+        description: The port number of the target.
+      dest_priority:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The priority of the target.
+      duration:
+        source: declared
+        defined_in: All_Certificates
+        type: number
+        description: The amount of time for the completion of the certificate management event, in seconds.
+      host:
+        source: base
+        defined_in: BaseEvent
+      response_time:
+        source: declared
+        defined_in: All_Certificates
+        type: number
+        description: The amount of time it took, in seconds, to receive a response in the certificate management event, if applicable.
+      source:
+        source: base
+        defined_in: BaseEvent
+      sourcetype:
+        source: base
+        defined_in: BaseEvent
+      src:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The source involved in the certificate management event. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
+      src_bunit:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The business unit of the certificate management source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The category of the certificate management source, such as email_server or SOX-compliant. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk Enterprise Security.
+        multivalue: true
+      src_port:
+        source: declared
+        defined_in: All_Certificates
+        type: number
+        description: The port number of the source.
+      src_priority:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The priority of the certificate management source.
+      tag:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      transport:
+        source: declared
+        defined_in: All_Certificates
+        type: string
+        description: The transport protocol of the Network Traffic involved with this certificate.
+    inherits:
+    - BaseEvent
+    children:
+    - SSL
+  SSL:
+    display_name: Transport Layer Security
+    kind: event
+    tags:
+    - certificate
+    - ssl
+    constraints:
+    - (tag=ssl OR tag=tls)
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Certificates
+      cim_entity_zone:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The target in the certificate management event.
+      dest_bunit:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The business unit of the target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The category of the target, such as email_server or SOX-compliant. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk Enterprise Security.
+        multivalue: true
+      dest_port:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: number
+        description: The port number of the target.
+      dest_priority:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The priority of the target.
+      duration:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: number
+        description: The amount of time for the completion of the certificate management event, in seconds.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Certificates
+      response_time:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: number
+        description: The amount of time it took, in seconds, to receive a response in the certificate management event, if applicable.
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Certificates
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: All_Certificates
+      src:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The source involved in the certificate management event. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
+      src_bunit:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The business unit of the certificate management source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The category of the certificate management source, such as email_server or SOX-compliant. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk Enterprise Security.
+        multivalue: true
+      src_port:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: number
+        description: The port number of the source.
+      src_priority:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The priority of the certificate management source.
+      ssl_end_time:
+        source: declared
+        defined_in: SSL
+        type: timestamp
+        description: The expiry time of the certificate.
+        recommended: true
+      ssl_engine:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The name of the signature engine that created the certificate.
+      ssl_hash:
+        source: calculated
+        defined_in: SSL
+        type: string
+        description: The hash of the certificate.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: SSL_fillnull_ssl_hash
+          type: Eval
+          expression: if(isnull(ssl_hash) OR ssl_hash="","unknown",ssl_hash)
+      ssl_is_valid:
+        source: calculated
+        defined_in: SSL
+        type: boolean
+        description: Indicator of whether the ssl certificate is valid or not.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+        calculation:
+          id: SSL_1is_valid
+          type: Eval
+          expression: case(match(ssl_is_valid, "^(1|[Tt]|[Tt][Rr][Uu][Ee])$"),1,match(ssl_is_valid, "^(0|[Ff]|[Ff][Aa][Ll][Ss][Ee])$"),0,isnum(ssl_end_time) AND isnum(ssl_start_time) AND _time>=ssl_start_time AND _time<=ssl_end_time,1,isnum(ssl_end_time) AND isnum(ssl_start_time),0,1=1,null())
+      ssl_issuer:
+        source: calculated
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's RFC2253 Distinguished Name.
+        recommended: true
+        calculation:
+          id: SSL_fillnull_ssl_issuer
+          type: Eval
+          expression: if(isnull(ssl_issuer) OR ssl_issuer="","unknown",ssl_issuer)
+      ssl_issuer_common_name:
+        source: calculated
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's common name.
+        recommended: true
+        calculation:
+          id: SSL_fillnull_ssl_issuer_common_name
+          type: Eval
+          expression: if(isnull(ssl_issuer_common_name) OR ssl_issuer_common_name="","unknown",ssl_issuer_common_name)
+      ssl_issuer_email:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's email address.
+      ssl_issuer_email_domain:
+        source: calculated
+        defined_in: SSL
+        type: string
+        description: The domain name contained within the certificate issuer's email address.
+        recommended: true
+        calculation:
+          id: SSL_ssl_issuer_email_domain
+          type: Rex
+          expression: ^.*@(?<ssl_issuer_email_domain>.+)$
+          input_field: ssl_issuer_email
+      ssl_issuer_locality:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's locality.
+      ssl_issuer_organization:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's organization.
+      ssl_issuer_state:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's state of residence.
+      ssl_issuer_street:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's street address.
+      ssl_issuer_unit:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate issuer's organizational unit.
+      ssl_name:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The name of the ssl certificate.
+      ssl_policies:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The Object Identification Numbers of the certificate's policies in a comma separated string.
+      ssl_publickey:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate's public key.
+      ssl_publickey_algorithm:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The algorithm used to create the public key.
+      ssl_serial:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate's serial number.
+        recommended: true
+      ssl_session_id:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The session identifier for this certificate.
+      ssl_signature_algorithm:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The algorithm used by the Certificate Authority to sign the certificate.
+      ssl_start_time:
+        source: declared
+        defined_in: SSL
+        type: timestamp
+        description: This is the start date and time for this certificate's validity.
+        recommended: true
+      ssl_subject:
+        source: calculated
+        defined_in: SSL
+        type: string
+        description: The certificate owner's RFC2253 Distinguished Name.
+        recommended: true
+        calculation:
+          id: SSL_fillnull_ssl_subject
+          type: Eval
+          expression: if(isnull(ssl_subject) OR ssl_subject="","unknown",ssl_subject)
+      ssl_subject_common_name:
+        source: calculated
+        defined_in: SSL
+        type: string
+        description: The certificate subject's common name.
+        recommended: true
+        calculation:
+          id: SSL_fillnull_ssl_subject_common_name
+          type: Eval
+          expression: if(isnull(ssl_subject_common_name) OR ssl_subject_common_name="","unknown",ssl_subject_common_name)
+      ssl_subject_email:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate owner's e-mail address.
+      ssl_subject_email_domain:
+        source: calculated
+        defined_in: SSL
+        type: string
+        description: The domain name contained within the certificate subject's email address.
+        recommended: true
+        calculation:
+          id: SSL_ssl_subject_email_domain
+          type: Rex
+          expression: ^.*@(?<ssl_subject_email_domain>.+)$
+          input_field: ssl_subject_email
+      ssl_subject_locality:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate owner's locality.
+      ssl_subject_organization:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate owner's organization.
+      ssl_subject_state:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate owner's state of residence.
+      ssl_subject_street:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate owner's street address.
+      ssl_subject_unit:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The certificate owner's organizational unit.
+      ssl_validity_window:
+        source: calculated
+        defined_in: SSL
+        type: number
+        description: The length of time, in seconds, for which this certificate is valid.
+        calculation:
+          id: SSL_0validity_window
+          type: Eval
+          expression: if(isnum(ssl_end_time) AND isnum(ssl_start_time),ssl_end_time-ssl_start_time,null())
+      ssl_version:
+        source: declared
+        defined_in: SSL
+        type: string
+        description: The ssl version of this certificate.
+      tag:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      transport:
+        source: inherited
+        defined_in: All_Certificates
+        inherited_from: All_Certificates
+        type: string
+        description: The transport protocol of the Network Traffic involved with this certificate.
+    inherits:
+    - BaseEvent
+    - All_Certificates

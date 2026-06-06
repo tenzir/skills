@@ -1,0 +1,8 @@
+name: shell
+used_by:
+- model: Compute_Inventory
+  dataset: User
+  kind: event
+  source: declared
+  type: string
+  description: Indicates the shell program used by a locally defined account.

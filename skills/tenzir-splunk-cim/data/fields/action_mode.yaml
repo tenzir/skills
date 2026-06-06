@@ -1,0 +1,14 @@
+name: action_mode
+lookups:
+- name: cam_action_modes
+  file: data/lookups/cam_action_modes.yaml
+used_by:
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  kind: event
+  source: declared
+  type: string
+  description: Specifies whether the action was executed as an ad hoc action or from a saved search, based on whether a search_name exists.
+  expected_values:
+  - saved
+  - adhoc

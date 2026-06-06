@@ -1,0 +1,21 @@
+name: cim_dlp_object_categories
+columns:
+- object_category
+rows:
+- object_category: config_setting
+- object_category: directory
+- object_category: directory_entry
+- object_category: file
+- object_category: group
+- object_category: hardware_component
+- object_category: network
+- object_category: policy
+- object_category: process
+- object_category: registry
+- object_category: service
+- object_category: system_object
+- object_category: system_state
+- object_category: user
+transforms:
+- name: cim_dlp_object_category_lookup
+  filename: cim_dlp_object_categories.csv

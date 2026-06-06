@@ -1,0 +1,13 @@
+name: cpu_time_supported
+used_by:
+- model: JVM
+  dataset: Threading
+  kind: event
+  source: declared
+  type: boolean
+  description: Indicates whether the Java virtual machine supports CPU time measurement for the current thread.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'

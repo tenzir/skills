@@ -1,0 +1,8 @@
+name: ssl_name
+used_by:
+- model: Certificates
+  dataset: SSL
+  kind: event
+  source: declared
+  type: string
+  description: The name of the ssl certificate.

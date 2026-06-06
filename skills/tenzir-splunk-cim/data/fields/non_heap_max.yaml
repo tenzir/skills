@@ -1,0 +1,8 @@
+name: non_heap_max
+used_by:
+- model: JVM
+  dataset: Memory
+  kind: event
+  source: declared
+  type: number
+  description: Maximum amount of non-heap memory used by the JVM, in bytes.

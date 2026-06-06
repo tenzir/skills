@@ -1,0 +1,20 @@
+name: name
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  kind: event
+  source: declared
+  type: string
+  description: A name field provided in some data sources.
+  recommended: true
+- model: Network_Resolution
+  dataset: DNS
+  kind: event
+  source: declared
+  type: string
+  description: The name of the DNS event.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network
+  kind: search
+  source: declared
+  type: string

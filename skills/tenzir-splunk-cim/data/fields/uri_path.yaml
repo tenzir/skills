@@ -1,0 +1,8 @@
+name: uri_path
+used_by:
+- model: Web
+  dataset: Web
+  kind: event
+  source: declared
+  type: string
+  description: The path of the resource served by the webserver or proxy.

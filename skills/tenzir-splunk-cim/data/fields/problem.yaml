@@ -1,0 +1,17 @@
+name: problem
+used_by:
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Problem
+  kind: search
+  source: declared
+  type: string
+- model: Ticket_Management
+  dataset: Problem
+  kind: event
+  source: calculated
+  type: string
+  description: When multiple occurrences of related incidents are observed, they are collectively designated with a single problem value. Problem management differs from the process of managing an isolated incident. Often problems are managed by a specific set of staff and through a problem management process.
+  calculation:
+    id: Problem_fillnull_problem
+    type: Eval
+    expression: if(isnull(problem) OR problem="","unknown",problem)

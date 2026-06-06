@@ -1,0 +1,33 @@
+name: user_name
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: calculated
+  type: string
+  description: The user_name of user involved in the alert event.
+  calculation:
+    id: Alerts_fillnull_user_name
+    type: Eval
+    expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+- model: Change
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+  calculation:
+    id: All_Changes_fillnull_user_name
+    type: Eval
+    expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: calculated
+  type: string
+  description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_user_name
+    type: Eval
+    expression: if(isnull(user_name) OR user_name="","unknown",user_name)

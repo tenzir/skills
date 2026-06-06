@@ -1,0 +1,13 @@
+name: cam_tasks
+columns:
+- task
+rows:
+- task: block
+- task: allow
+- task: create
+- task: update
+- task: delete
+- task: scan
+transforms:
+- name: cam_task_lookup
+  filename: cam_tasks.csv

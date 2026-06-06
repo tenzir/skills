@@ -1,0 +1,8 @@
+name: lease_scope
+used_by:
+- model: Network_Sessions
+  dataset: DHCP
+  kind: event
+  source: declared
+  type: string
+  description: The consecutive range of possible IP addresses that the Dynamic Host Configuration Protocol (DHCP) server can lease to clients on a subnet. A lease_scope typically defines a single physical subnet on your network to which DHCP services are offered.

@@ -1,0 +1,8 @@
+name: avg_executions
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  kind: event
+  source: declared
+  type: number
+  description: The average number of executions for the database instance.

@@ -1,0 +1,25 @@
+name: registry_value_type
+used_by:
+- model: Endpoint
+  dataset: Registry
+  kind: search
+  source: calculated
+  type: string
+  description: The type of the registry value.
+  expected_values:
+  - REG_BINARY
+  - REG_DWORD
+  - REG_DWORD_LITTLE_ENDIAN
+  - REG_DWORD_BIG_ENDIAN
+  - REG_EXPAND_SZ
+  - REG_LINK
+  - REG_MULTI_SZ
+  - REG_NONE
+  - REG_QWORD
+  - REG_QWORD_LITTLE_ENDIAN
+  - REG_SZ
+  recommended: true
+  calculation:
+    id: Endpoint_Registry_fillnull_registry_value_type
+    type: Eval
+    expression: if(isnull(registry_value_type) OR registry_value_type="","unknown",registry_value_type)

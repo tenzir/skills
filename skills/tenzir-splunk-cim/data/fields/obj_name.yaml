@@ -1,0 +1,8 @@
+name: obj_name
+used_by:
+- model: Databases
+  dataset: Lock_Info
+  kind: event
+  source: declared
+  type: string
+  description: The name of the locked object.

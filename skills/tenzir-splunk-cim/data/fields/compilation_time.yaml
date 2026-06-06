@@ -1,0 +1,8 @@
+name: compilation_time
+used_by:
+- model: JVM
+  dataset: Compilation
+  kind: event
+  source: declared
+  type: number
+  description: Time taken by JIT compilation, in seconds.

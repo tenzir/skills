@@ -1,0 +1,14 @@
+name: message_id
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The globally-unique message identifier.
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: string
+  description: The message identification.

@@ -1,0 +1,8 @@
+name: src_should_timesync
+used_by:
+- model: Endpoint
+  dataset: Ports
+  kind: search
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.

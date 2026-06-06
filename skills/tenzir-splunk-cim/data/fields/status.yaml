@@ -1,0 +1,213 @@
+name: status
+lookups:
+- name: cim_endpoint_statuses
+  file: data/lookups/cim_endpoint_statuses.yaml
+- name: cim_http_statuses
+  file: data/lookups/cim_http_statuses.yaml
+- name: cim_update_statii
+  file: data/lookups/cim_update_statii.yaml
+used_by:
+- model: Application_State
+  dataset: Services
+  kind: event
+  source: calculated
+  type: string
+  description: The status of the service.
+  expected_values:
+  - critical
+  - started
+  - stopped
+  - warning
+  recommended: true
+  calculation:
+    id: Services_fillnull_status
+    type: Eval
+    expression: if(isnull(status) OR status="","unknown",status)
+- model: Change
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: Status of the update.
+  expected_values:
+  - success
+  - failure
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_status
+    type: Eval
+    expression: if(isnull(status) OR status="","unknown",status)
+- model: Change_Analysis
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: Status of the update.
+  expected_values:
+  - success
+  - failure
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_status
+    type: Eval
+    expression: if(isnull(status) OR status="","unknown",status)
+- model: Compute_Inventory
+  dataset: All_Inventory
+  kind: event
+  source: declared
+  type: string
+  description: The current reported state of the resource.
+- model: Endpoint
+  dataset: Registry
+  kind: search
+  source: declared
+  type: string
+  description: The outcome of the registry action.
+  expected_values:
+  - failure
+  - success
+- model: Endpoint
+  dataset: Services
+  kind: search
+  source: calculated
+  type: string
+  description: The status of the service.
+  expected_values:
+  - critical
+  - started
+  - stopped
+  - warning
+  - installed
+  recommended: true
+  calculation:
+    id: Endpoint_Services_fillnull_status
+    type: Eval
+    expression: if(isnull(status) OR status="","unknown",status)
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: boolean
+  description: The status of the message response.
+  expected_values:
+  - pass
+  - fail
+- model: Splunk_Audit
+  dataset: Scheduler_Activity
+  kind: search
+  source: declared
+  type: string
+  description: The status of the scheduled search.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Endpoint_Changes
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Updates
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Web
+  kind: search
+  source: declared
+  type: string
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  kind: event
+  source: declared
+  type: string
+  description: The relative status of the service request.
+- model: Updates
+  dataset: Updates
+  kind: event
+  source: calculated
+  type: string
+  description: Indicates the status of a given patch requirement.
+  expected_values:
+  - available
+  - installed
+  - invalid
+  - restart required
+  - failure
+  recommended: true
+  calculation:
+    id: Updates_fillnull_status
+    type: Eval
+    expression: if(isnull(status) OR status="","unknown",status)
+- model: Web
+  dataset: Web
+  kind: event
+  source: calculated
+  type: string
+  description: The HTTP response code indicating the status of the proxy request.
+  expected_values:
+  - '100'
+  - '101'
+  - '102'
+  - '200'
+  - '201'
+  - '202'
+  - '203'
+  - '204'
+  - '205'
+  - '206'
+  - '207'
+  - '208'
+  - '226'
+  - '300'
+  - '301'
+  - '302'
+  - '303'
+  - '304'
+  - '305'
+  - '306'
+  - '307'
+  - '308'
+  - '400'
+  - '401'
+  - '402'
+  - '403'
+  - '404'
+  - '405'
+  - '406'
+  - '407'
+  - '408'
+  - '409'
+  - '410'
+  - '411'
+  - '412'
+  - '413'
+  - '414'
+  - '415'
+  - '416'
+  - '417'
+  - '422'
+  - '423'
+  - '424'
+  - '426'
+  - '428'
+  - '429'
+  - '431'
+  - '500'
+  - '501'
+  - '502'
+  - '503'
+  - '504'
+  - '505'
+  - '506'
+  - '507'
+  - '508'
+  - '510'
+  - '511'
+  recommended: true
+  calculation:
+    id: Web_fillnull_status
+    type: Eval
+    expression: if(isnull(status) OR status="" OR status="-","unknown",status)

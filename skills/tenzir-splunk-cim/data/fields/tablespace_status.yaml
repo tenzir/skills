@@ -1,0 +1,12 @@
+name: tablespace_status
+used_by:
+- model: Databases
+  dataset: Tablespace
+  kind: event
+  source: declared
+  type: string
+  description: The status of the tablespace.
+  expected_values:
+  - Offline
+  - Online
+  - Read Only

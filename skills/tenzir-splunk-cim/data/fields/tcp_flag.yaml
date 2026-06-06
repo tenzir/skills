@@ -1,0 +1,16 @@
+name: tcp_flag
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: string
+  description: The TCP flag or multiple flags specified in the event.
+  expected_values:
+  - SYN
+  - ACK
+  - FIN
+  - RST
+  - URG
+  - PSH
+  multivalue: true

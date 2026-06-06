@@ -1,0 +1,13 @@
+name: registry_value_data
+used_by:
+- model: Endpoint
+  dataset: Registry
+  kind: search
+  source: calculated
+  type: string
+  description: The unaltered registry value.
+  recommended: true
+  calculation:
+    id: Endpoint_Registry_fillnull_registry_value_data
+    type: Eval
+    expression: if(isnull(registry_value_data) OR registry_value_data="","unknown",registry_value_data)

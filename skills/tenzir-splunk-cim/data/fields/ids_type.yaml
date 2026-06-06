@@ -1,0 +1,26 @@
+name: ids_type
+lookups:
+- name: cim_ids_types
+  file: data/lookups/cim_ids_types.yaml
+used_by:
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  kind: event
+  source: calculated
+  type: string
+  description: The type of IDS that generated the event.
+  expected_values:
+  - network
+  - host
+  - application
+  - wireless
+  recommended: true
+  calculation:
+    id: IDS_Attacks_fillnull_ids_type
+    type: Eval
+    expression: if(isnull(ids_type) OR ids_type="","unknown",ids_type)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_IDS
+  kind: search
+  source: declared
+  type: string

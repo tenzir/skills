@@ -1,0 +1,8 @@
+name: comments
+used_by:
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  kind: event
+  source: declared
+  type: string
+  description: Comments about the service request.

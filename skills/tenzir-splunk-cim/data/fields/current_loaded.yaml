@@ -1,0 +1,8 @@
+name: current_loaded
+used_by:
+- model: JVM
+  dataset: Classloading
+  kind: event
+  source: declared
+  type: number
+  description: The current count of classes loaded in the JVM.

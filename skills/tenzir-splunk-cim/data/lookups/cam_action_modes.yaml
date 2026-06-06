@@ -1,0 +1,9 @@
+name: cam_action_modes
+columns:
+- action_mode
+rows:
+- action_mode: adhoc
+- action_mode: saved
+transforms:
+- name: cam_action_mode_lookup
+  filename: cam_action_modes.csv

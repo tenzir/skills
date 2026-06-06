@@ -1,0 +1,9 @@
+name: rule_action
+used_by:
+- model: Change
+  dataset: Network_Changes
+  kind: event
+  source: declared
+  type: string
+  description: For network events, this field represents whether to allow or deny traffic.
+  multivalue: true

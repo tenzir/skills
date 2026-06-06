@@ -1,0 +1,8 @@
+name: record_type
+used_by:
+- model: Network_Resolution
+  dataset: DNS
+  kind: event
+  source: declared
+  type: string
+  description: 'The DNS resource record type. For details, see the List of DNS record types on on the IANA web site: https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml'

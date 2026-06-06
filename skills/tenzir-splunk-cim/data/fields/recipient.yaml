@@ -1,0 +1,14 @@
+name: recipient
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: calculated
+  type: string
+  description: The recipient email addresses.
+  recommended: true
+  multivalue: true
+  calculation:
+    id: 0Email_fillnull_recipient
+    type: Eval
+    expression: if(isnull(recipient) OR recipient="","unknown",recipient)

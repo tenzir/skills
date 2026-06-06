@@ -1,0 +1,12 @@
+name: packets
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: calculated
+  type: number
+  description: The total count of packets handled by this device/interface (packets_in + packets_out).
+  calculation:
+    id: All_Traffic_packets
+    type: Eval
+    expression: case(isnum(packets),packets,isnum(packets_in) AND isnum(packets_out),packets_in+packets_out,1=1,null())

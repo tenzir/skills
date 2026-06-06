@@ -1,0 +1,12 @@
+name: search_alias
+used_by:
+- model: Splunk_Audit
+  dataset: Search_Activity
+  kind: event
+  source: calculated
+  type: string
+  description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+  calculation:
+    id: 6Search_Activity_search_alias
+    type: Eval
+    expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())

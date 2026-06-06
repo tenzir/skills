@@ -1,0 +1,13 @@
+name: loaded_file
+used_by:
+- model: Endpoint
+  dataset: Processes
+  kind: search
+  source: calculated
+  type: string
+  description: The file that was loaded.
+  recommended: true
+  calculation:
+    id: Endpoint_Processes_fillnull_loaded_file
+    type: Eval
+    expression: if(isnull(loaded_file) OR loaded_file="","unknown",loaded_file)

@@ -1,0 +1,8 @@
+name: dvc_mac
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: string
+  description: 'The device TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'

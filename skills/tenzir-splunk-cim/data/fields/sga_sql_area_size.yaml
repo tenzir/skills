@@ -1,0 +1,8 @@
+name: sga_sql_area_size
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  kind: event
+  source: declared
+  type: number
+  description: The total size of the SQL area for this database instance, in bytes.

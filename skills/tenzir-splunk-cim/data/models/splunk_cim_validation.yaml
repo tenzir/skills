@@ -1,0 +1,2891 @@
+name: Splunk_CIM_Validation
+display_name: CIM Validation (S.o.S.)
+description: This data model is to help check adoption into the CIM. It provides useful objects for making sure things are tagged appropriately and verify key fields for the different models are not missing.
+root_datasets:
+- Alerts
+- Application_State
+- Authentication
+- Certificates
+- Change_Analysis
+- Compute_Inventory
+- Databases
+- Email
+- Interprocess_Messaging
+- Intrusion_Detection
+- JVM
+- Malware
+- Network_Resolution
+- Network_Sessions
+- Network_Traffic
+- Performance
+- Splunk_Audit
+- Ticket_Management
+- Updates
+- Vulnerabilities
+- Web
+- Untagged_Events
+datasets:
+  Alerts:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Alerts
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Alerts
+        type: string
+      source:
+        source: declared
+        defined_in: Alerts
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Alerts
+        type: string
+    inherits:
+    - BaseSearch
+    search: '| datamodel Alerts Alerts search'
+  Application_State:
+    display_name: Application State
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Application_State
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Application_State
+        type: string
+      source:
+        source: declared
+        defined_in: Application_State
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Application_State
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Ports
+    - Missing_Extractions_Processes
+    - Missing_Extractions_Services
+    search: '| datamodel Application_State All_Application_State search'
+  Missing_Extractions_Ports:
+    display_name: Missing Extractions - Ports
+    kind: search
+    constraints:
+    - All_Application_State.is_Ports=1 AND (dest="unknown" OR dest_port=0 OR transport="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Ports
+        type: string
+      dest_port:
+        source: declared
+        defined_in: Missing_Extractions_Ports
+        type: number
+      host:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      source:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      transport:
+        source: declared
+        defined_in: Missing_Extractions_Ports
+        type: string
+    inherits:
+    - BaseSearch
+    - Application_State
+  Missing_Extractions_Processes:
+    display_name: Missing Extractions - Processes
+    kind: search
+    constraints:
+    - All_Application_State.is_Processes=1 AND (dest="unknown" OR process="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Processes
+        type: string
+      host:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      process:
+        source: declared
+        defined_in: Missing_Extractions_Processes
+        type: string
+      source:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+    inherits:
+    - BaseSearch
+    - Application_State
+  Missing_Extractions_Services:
+    display_name: Missing Extractions - Services
+    kind: search
+    constraints:
+    - All_Application_State.is_Services=1 AND (dest="unknown" OR service="unknown" OR start_mode="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Services
+        type: string
+      host:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      service:
+        source: declared
+        defined_in: Missing_Extractions_Services
+        type: string
+      source:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Application_State
+        inherited_from: Application_State
+        type: string
+      start_mode:
+        source: declared
+        defined_in: Missing_Extractions_Services
+        type: string
+    inherits:
+    - BaseSearch
+    - Application_State
+  Authentication:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Authentication
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Authentication
+        type: string
+      source:
+        source: declared
+        defined_in: Authentication
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Authentication
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Authentication
+    search: '| datamodel Authentication Authentication search'
+  Missing_Extractions_Authentication:
+    display_name: Missing Extractions Authentication
+    kind: search
+    constraints:
+    - (action="unknown" OR app="unknown" OR src="unknown" OR dest="unknown" OR user="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Authentication
+        inherited_from: Authentication
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Authentication
+        type: string
+      app:
+        source: declared
+        defined_in: Missing_Extractions_Authentication
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Authentication
+        type: string
+      host:
+        source: inherited
+        defined_in: Authentication
+        inherited_from: Authentication
+        type: string
+      source:
+        source: inherited
+        defined_in: Authentication
+        inherited_from: Authentication
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Authentication
+        inherited_from: Authentication
+        type: string
+      src:
+        source: declared
+        defined_in: Missing_Extractions_Authentication
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Authentication
+        type: string
+    inherits:
+    - BaseSearch
+    - Authentication
+  Certificates:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Certificates
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Certificates
+        type: string
+      source:
+        source: declared
+        defined_in: Certificates
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Certificates
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Certificates
+    search: '| datamodel Certificates All_Certificates search'
+  Missing_Extractions_Certificates:
+    display_name: Missing Extractions Certificates
+    kind: search
+    constraints:
+    - ssl_hash="unknown" OR ssl_issuer="unknown" OR ssl_subject="unknown"
+    fields:
+      _time:
+        source: inherited
+        defined_in: Certificates
+        inherited_from: Certificates
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Certificates
+        inherited_from: Certificates
+        type: string
+      source:
+        source: inherited
+        defined_in: Certificates
+        inherited_from: Certificates
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Certificates
+        inherited_from: Certificates
+        type: string
+      ssl_hash:
+        source: declared
+        defined_in: Missing_Extractions_Certificates
+        type: string
+      ssl_issuer:
+        source: declared
+        defined_in: Missing_Extractions_Certificates
+        type: string
+      ssl_subject:
+        source: declared
+        defined_in: Missing_Extractions_Certificates
+        type: string
+    inherits:
+    - BaseSearch
+    - Certificates
+  Change_Analysis:
+    display_name: Change Analysis
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Change_Analysis
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Change_Analysis
+        type: string
+      source:
+        source: declared
+        defined_in: Change_Analysis
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Change_Analysis
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Account_Management
+    - Missing_Extractions_Endpoint_Changes
+    - Missing_Extractions_Filesystem_Changes
+    - Missing_Extractions_Network_Changes
+    - Missing_Extractions_Restarts
+    search: '| datamodel Change_Analysis All_Changes search'
+  Missing_Extractions_Account_Management:
+    display_name: Missing Extractions - Account Management
+    kind: search
+    constraints:
+    - All_Changes.is_Account_Management=1 AND (action="unknown" OR command="unknown" OR dest="unknown" OR object_category="unknown" OR src="unknown" OR user="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Account_Management
+        type: string
+      command:
+        source: declared
+        defined_in: Missing_Extractions_Account_Management
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Account_Management
+        type: string
+      host:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      object_category:
+        source: declared
+        defined_in: Missing_Extractions_Account_Management
+        type: string
+      source:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      src:
+        source: declared
+        defined_in: Missing_Extractions_Account_Management
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Account_Management
+        type: string
+    inherits:
+    - BaseSearch
+    - Change_Analysis
+  Missing_Extractions_Endpoint_Changes:
+    display_name: Missing Extractions - Endpoint Changes
+    kind: search
+    constraints:
+    - All_Changes.is_Endpoint_Changes=1 AND (action="unknown" OR dest="unknown" OR object="unknown" OR object_category="unknown" OR object_path="unknown" OR status="unknown" OR user="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Endpoint_Changes
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Endpoint_Changes
+        type: string
+      host:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      object:
+        source: declared
+        defined_in: Missing_Extractions_Endpoint_Changes
+        type: string
+      object_category:
+        source: declared
+        defined_in: Missing_Extractions_Endpoint_Changes
+        type: string
+      object_path:
+        source: declared
+        defined_in: Missing_Extractions_Endpoint_Changes
+        type: string
+      source:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      status:
+        source: declared
+        defined_in: Missing_Extractions_Endpoint_Changes
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Endpoint_Changes
+        type: string
+    inherits:
+    - BaseSearch
+    - Change_Analysis
+  Missing_Extractions_Filesystem_Changes:
+    display_name: Missing Extractions - Filesystem Changes
+    kind: search
+    constraints:
+    - All_Changes.is_Endpoint_Changes=1 AND (object_category=file OR object_category=directory) AND (action="unknown" OR dest="unknown" OR object="unknown" OR object_category="unknown" OR object_path="unknown" OR status="unknown" OR user="unknown" OR file_access_time=0 OR file_create_time=0 OR file_hash="unknown" OR file_modify_time=0 OR file_name="unknown" OR file_path="unknown" OR file_acl="unknown" OR file_size="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      file_access_time:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: number
+      file_acl:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      file_create_time:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: number
+      file_hash:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      file_modify_time:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: number
+      file_name:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      file_path:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      file_size:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: number
+      host:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      object:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      object_category:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      object_path:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      source:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      status:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Filesystem_Changes
+        type: string
+    inherits:
+    - BaseSearch
+    - Change_Analysis
+  Missing_Extractions_Network_Changes:
+    display_name: Missing Extractions - Network Changes
+    kind: search
+    constraints:
+    - All_Changes.is_Network_Changes=1 AND (action="unknown" OR command="unknown" OR dvc="unknown" OR user="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Network_Changes
+        type: string
+      command:
+        source: declared
+        defined_in: Missing_Extractions_Network_Changes
+        type: string
+      dvc:
+        source: declared
+        defined_in: Missing_Extractions_Network_Changes
+        type: string
+      host:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      source:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Network_Changes
+        type: string
+    inherits:
+    - BaseSearch
+    - Change_Analysis
+  Missing_Extractions_Restarts:
+    display_name: Missing Extractions - Restarts
+    kind: search
+    constraints:
+    - All_Changes.is_Network_Changes=1 AND (action="unknown" OR change_type="unknown") AND (reboot* OR restart*) sourcetype!=stash
+    fields:
+      _time:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Restarts
+        type: string
+      command:
+        source: declared
+        defined_in: Missing_Extractions_Restarts
+        type: string
+      dvc:
+        source: declared
+        defined_in: Missing_Extractions_Restarts
+        type: string
+      host:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      source:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Change_Analysis
+        inherited_from: Change_Analysis
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Restarts
+        type: string
+    inherits:
+    - BaseSearch
+    - Change_Analysis
+  Compute_Inventory:
+    display_name: Inventory
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Compute_Inventory
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Compute_Inventory
+        type: string
+      source:
+        source: declared
+        defined_in: Compute_Inventory
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Compute_Inventory
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_CPU
+    - Missing_Extractions_Memory
+    - Missing_Extractions_Network
+    - Missing_Extractions_OS
+    - Missing_Extractions_Storage
+    search: '| datamodel Compute_Inventory All_Inventory search'
+  Missing_Extractions_CPU:
+    display_name: Missing Extractions - CPU
+    kind: search
+    constraints:
+    - All_Inventory.is_CPU=1 AND (dest="unknown" OR NOT (cpu_cores=* OR cpu_count=* OR cpu_mhz=*))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: timestamp
+      cpu_cores:
+        source: declared
+        defined_in: Missing_Extractions_CPU
+        type: number
+      cpu_count:
+        source: declared
+        defined_in: Missing_Extractions_CPU
+        type: number
+      cpu_mhz:
+        source: declared
+        defined_in: Missing_Extractions_CPU
+        type: number
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_CPU
+        type: string
+      host:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      source:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+    inherits:
+    - BaseSearch
+    - Compute_Inventory
+  Missing_Extractions_Memory:
+    display_name: Missing Extractions - Memory
+    kind: search
+    constraints:
+    - All_Inventory.is_Memory=1 AND (dest="unknown" OR NOT (mem=*))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Memory
+        type: string
+      host:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      mem:
+        source: declared
+        defined_in: Missing_Extractions_Memory
+        type: string
+      source:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+    inherits:
+    - BaseSearch
+    - Compute_Inventory
+  Missing_Extractions_Network:
+    display_name: Missing Extractions - Network
+    kind: search
+    constraints:
+    - All_Inventory.is_Network=1 AND (dest="unknown" OR NOT (interface=* OR ip=* OR mac=* OR name=* OR dns=*))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Network
+        type: string
+      dns:
+        source: declared
+        defined_in: Missing_Extractions_Network
+        type: string
+      host:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      interface:
+        source: declared
+        defined_in: Missing_Extractions_Network
+        type: string
+      ip:
+        source: declared
+        defined_in: Missing_Extractions_Network
+        type: string
+      mac:
+        source: declared
+        defined_in: Missing_Extractions_Network
+        type: string
+      name:
+        source: declared
+        defined_in: Missing_Extractions_Network
+        type: string
+      source:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+    inherits:
+    - BaseSearch
+    - Compute_Inventory
+  Missing_Extractions_Storage:
+    display_name: Missing Extractions - Storage
+    kind: search
+    constraints:
+    - All_Inventory.is_Storage=1 AND (dest="unknown" OR NOT (mount=* OR storage=*))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Storage
+        type: string
+      host:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      mount:
+        source: declared
+        defined_in: Missing_Extractions_Storage
+        type: string
+      source:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      storage:
+        source: declared
+        defined_in: Missing_Extractions_Storage
+        type: string
+    inherits:
+    - BaseSearch
+    - Compute_Inventory
+  Missing_Extractions_OS:
+    display_name: Missing Extractions - OS
+    kind: search
+    constraints:
+    - All_Inventory.is_OS=1 AND (dest="unknown" OR NOT (os=* OR version=*))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_OS
+        type: string
+      host:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      os:
+        source: declared
+        defined_in: Missing_Extractions_OS
+        type: string
+      source:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Compute_Inventory
+        inherited_from: Compute_Inventory
+        type: string
+      version:
+        source: declared
+        defined_in: Missing_Extractions_OS
+        type: string
+    inherits:
+    - BaseSearch
+    - Compute_Inventory
+  Databases:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Databases
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Databases
+        type: string
+      source:
+        source: declared
+        defined_in: Databases
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Databases
+        type: string
+    inherits:
+    - BaseSearch
+    search: '| datamodel Databases All_Databases search'
+  Email:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Email
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Email
+        type: string
+      source:
+        source: declared
+        defined_in: Email
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Email
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_All_Email
+    search: '| datamodel Email All_Email search'
+  Missing_Extractions_All_Email:
+    display_name: Missing Extractions - All Email
+    kind: search
+    constraints:
+    - (action="unknown" OR dest="unknown" OR src="unknown" OR src_user="unknown" OR vendor_product="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Email
+        inherited_from: Email
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_All_Email
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_All_Email
+        type: string
+      host:
+        source: inherited
+        defined_in: Email
+        inherited_from: Email
+        type: string
+      source:
+        source: inherited
+        defined_in: Email
+        inherited_from: Email
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Email
+        inherited_from: Email
+        type: string
+      src:
+        source: declared
+        defined_in: Missing_Extractions_All_Email
+        type: string
+      src_user:
+        source: declared
+        defined_in: Missing_Extractions_All_Email
+        type: string
+      vendor_product:
+        source: declared
+        defined_in: Missing_Extractions_All_Email
+        type: string
+    inherits:
+    - BaseSearch
+    - Email
+  Interprocess_Messaging:
+    display_name: Interprocess Messaging
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Interprocess_Messaging
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Interprocess_Messaging
+        type: string
+      source:
+        source: declared
+        defined_in: Interprocess_Messaging
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Interprocess_Messaging
+        type: string
+    inherits:
+    - BaseSearch
+    search: '| datamodel Interprocess_Messaging All_Messaging search'
+  Intrusion_Detection:
+    display_name: Intrusion Detection
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Intrusion_Detection
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Intrusion_Detection
+        type: string
+      source:
+        source: declared
+        defined_in: Intrusion_Detection
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Intrusion_Detection
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_IDS
+    search: '| datamodel Intrusion_Detection IDS_Attacks search'
+  Missing_Extractions_IDS:
+    display_name: Missing Extractions - IDS
+    kind: search
+    constraints:
+    - (dvc="unknown" OR ids_type="unknown" OR category="unknown" OR signature="unknown" OR severity="unknown" OR src="unknown" OR dest="unknown" OR user="unknown" OR vendor_product="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Intrusion_Detection
+        inherited_from: Intrusion_Detection
+        type: timestamp
+      category:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      dvc:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      host:
+        source: inherited
+        defined_in: Intrusion_Detection
+        inherited_from: Intrusion_Detection
+        type: string
+      ids_type:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      severity:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      signature:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      source:
+        source: inherited
+        defined_in: Intrusion_Detection
+        inherited_from: Intrusion_Detection
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Intrusion_Detection
+        inherited_from: Intrusion_Detection
+        type: string
+      src:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+      vendor_product:
+        source: declared
+        defined_in: Missing_Extractions_IDS
+        type: string
+    inherits:
+    - BaseSearch
+    - Intrusion_Detection
+  JVM:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: JVM
+        type: timestamp
+      host:
+        source: declared
+        defined_in: JVM
+        type: string
+      source:
+        source: declared
+        defined_in: JVM
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: JVM
+        type: string
+    inherits:
+    - BaseSearch
+    search: '| datamodel JVM JVM search'
+  Malware:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Malware
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Malware
+        type: string
+      source:
+        source: declared
+        defined_in: Malware
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Malware
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Malware_Attacks
+    - Missing_Extractions_Malware_Operations
+    search: '| datamodel Malware Malware_Attacks search'
+  Missing_Extractions_Malware_Attacks:
+    display_name: Missing Extractions - Malware Attacks
+    kind: search
+    constraints:
+    - (action="unknown" OR category="unknown" OR signature="unknown" OR dest="unknown" OR dest_nt_domain="unknown" OR user="unknown" OR vendor_product="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Attacks
+        type: string
+      category:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Attacks
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Attacks
+        type: string
+      dest_nt_domain:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Attacks
+        type: string
+      host:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: string
+      signature:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Attacks
+        type: string
+      source:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Attacks
+        type: string
+      vendor_product:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Attacks
+        type: string
+    inherits:
+    - BaseSearch
+    - Malware
+  Missing_Extractions_Malware_Operations:
+    display_name: Missing Extractions - Malware Operations
+    kind: search
+    constraints:
+    - dest="unknown" OR dest_nt_domain="unknown" OR product="unknown" OR (NOT (product_version=* OR signature_version=*)) OR vendor="unknown"
+    fields:
+      _time:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Operations
+        type: string
+      dest_nt_domain:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Operations
+        type: string
+      host:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: string
+      product:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Operations
+        type: string
+      source:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Malware
+        inherited_from: Malware
+        type: string
+      vendor:
+        source: declared
+        defined_in: Missing_Extractions_Malware_Operations
+        type: string
+    inherits:
+    - BaseSearch
+    - Malware
+  Network_Resolution:
+    display_name: Network Resolution
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Network_Resolution
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Network_Resolution
+        type: string
+      source:
+        source: declared
+        defined_in: Network_Resolution
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Network_Resolution
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_DNS
+    search: '| datamodel Network_Resolution DNS search'
+  Missing_Extractions_DNS:
+    display_name: Missing Extractions - DNS
+    kind: search
+    constraints:
+    - src="unknown" OR dest="unknown" OR answer="unknown" OR query="unknown" OR message_type="unknown" OR reply_code="unknown"
+    fields:
+      _time:
+        source: inherited
+        defined_in: Network_Resolution
+        inherited_from: Network_Resolution
+        type: timestamp
+      answer:
+        source: declared
+        defined_in: Missing_Extractions_DNS
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_DNS
+        type: string
+      host:
+        source: inherited
+        defined_in: Network_Resolution
+        inherited_from: Network_Resolution
+        type: string
+      message_type:
+        source: declared
+        defined_in: Missing_Extractions_DNS
+        type: string
+      query:
+        source: declared
+        defined_in: Missing_Extractions_DNS
+        type: string
+      reply_code:
+        source: declared
+        defined_in: Missing_Extractions_DNS
+        type: string
+      source:
+        source: inherited
+        defined_in: Network_Resolution
+        inherited_from: Network_Resolution
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Network_Resolution
+        inherited_from: Network_Resolution
+        type: string
+      src:
+        source: declared
+        defined_in: Missing_Extractions_DNS
+        type: string
+    inherits:
+    - BaseSearch
+    - Network_Resolution
+  Network_Sessions:
+    display_name: Network Sessions
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Network_Sessions
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Network_Sessions
+        type: string
+      source:
+        source: declared
+        defined_in: Network_Sessions
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Network_Sessions
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Network_Sessions
+    search: '| datamodel Network_Sessions All_Sessions search'
+  Missing_Extractions_Network_Sessions:
+    display_name: Missing Extractions - Network Sessions
+    kind: search
+    constraints:
+    - (dest_ip="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Network_Sessions
+        inherited_from: Network_Sessions
+        type: timestamp
+      dest_ip:
+        source: declared
+        defined_in: Missing_Extractions_Network_Sessions
+        type: string
+      host:
+        source: inherited
+        defined_in: Network_Sessions
+        inherited_from: Network_Sessions
+        type: string
+      source:
+        source: inherited
+        defined_in: Network_Sessions
+        inherited_from: Network_Sessions
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Network_Sessions
+        inherited_from: Network_Sessions
+        type: string
+    inherits:
+    - BaseSearch
+    - Network_Sessions
+  Network_Traffic:
+    display_name: Network Traffic
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Network_Traffic
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Network_Traffic
+        type: string
+      source:
+        source: declared
+        defined_in: Network_Traffic
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Network_Traffic
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Network_Traffic
+    search: '| datamodel Network_Traffic All_Traffic search'
+  Missing_Extractions_Network_Traffic:
+    display_name: Missing Extractions - Network Traffic
+    kind: search
+    constraints:
+    - (action="unknown" OR dvc="unknown" OR rule="unknown" OR transport="unknown" OR src="unknown" OR src_port=0 OR dest="unknown" OR dest_port=0 OR vendor_product="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Network_Traffic
+        inherited_from: Network_Traffic
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: string
+      dest_port:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: number
+      dvc:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: string
+      host:
+        source: inherited
+        defined_in: Network_Traffic
+        inherited_from: Network_Traffic
+        type: string
+      rule:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: string
+      source:
+        source: inherited
+        defined_in: Network_Traffic
+        inherited_from: Network_Traffic
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Network_Traffic
+        inherited_from: Network_Traffic
+        type: string
+      src:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: string
+      src_port:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: number
+      transport:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: string
+      vendor_product:
+        source: declared
+        defined_in: Missing_Extractions_Network_Traffic
+        type: string
+    inherits:
+    - BaseSearch
+    - Network_Traffic
+  Performance:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Performance
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Performance
+        type: string
+      source:
+        source: declared
+        defined_in: Performance
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Performance
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Perf_CPU
+    - Missing_Extractions_Perf_Facilities
+    - Missing_Extractions_Perf_Memory
+    - Missing_Extractions_Perf_Network
+    - Missing_Extractions_Perf_Storage
+    - Missing_Extractions_Perf_Timesync
+    - Missing_Extractions_Perf_Uptime
+    search: '| datamodel Performance All_Performance search'
+  Missing_Extractions_Perf_CPU:
+    display_name: Missing Extractions - CPU
+    kind: search
+    constraints:
+    - All_Performance.is_CPU=1 AND ((dest="unknown" OR NOT (cpu_load_mhz=* OR cpu_load_percent=* OR cpu_time=* OR cpu_user_percent=*)))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: timestamp
+      cpu_load_mhz:
+        source: declared
+        defined_in: Missing_Extractions_Perf_CPU
+        type: number
+      cpu_load_percent:
+        source: declared
+        defined_in: Missing_Extractions_Perf_CPU
+        type: number
+      cpu_time:
+        source: declared
+        defined_in: Missing_Extractions_Perf_CPU
+        type: number
+      cpu_user_percent:
+        source: declared
+        defined_in: Missing_Extractions_Perf_CPU
+        type: number
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Perf_CPU
+        type: string
+      host:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      source:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+    inherits:
+    - BaseSearch
+    - Performance
+  Missing_Extractions_Perf_Facilities:
+    display_name: Missing Extractions - Facilities
+    kind: search
+    constraints:
+    - All_Performance.is_Facilities=1 AND ((dest="unknown" OR NOT (temperature=* OR power=* OR fan_speed=*)))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Facilities
+        type: string
+      fan_speed:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Facilities
+        type: number
+      host:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      power:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Facilities
+        type: number
+      source:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      temperature:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Facilities
+        type: number
+    inherits:
+    - BaseSearch
+    - Performance
+  Missing_Extractions_Perf_Memory:
+    display_name: Missing Extractions - Memory
+    kind: search
+    constraints:
+    - All_Performance.is_Memory=1 AND ((dest="unknown" OR NOT (mem=* OR mem_committed=* OR mem_free=* OR mem_used=*)))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Memory
+        type: string
+      host:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      mem:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Memory
+        type: number
+      mem_free:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Memory
+        type: number
+      mem_used:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Memory
+        type: number
+      source:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+    inherits:
+    - BaseSearch
+    - Performance
+  Missing_Extractions_Perf_Storage:
+    display_name: Missing Extractions - Storage
+    kind: search
+    constraints:
+    - All_Performance.is_Storage=1 AND ((dest="unknown" OR NOT (mount=* OR storage=* OR storage_free=* OR storage_used=* OR storage_free_percent=* OR storage_used_percent=*)))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Storage
+        type: string
+      host:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      mount:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Storage
+        type: string
+      source:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      storage:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Storage
+        type: number
+      storage_free:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Storage
+        type: number
+      storage_free_percent:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Storage
+        type: number
+      storage_used:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Storage
+        type: number
+      storage_used_percent:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Storage
+        type: number
+    inherits:
+    - BaseSearch
+    - Performance
+  Missing_Extractions_Perf_Network:
+    display_name: Missing Extractions - Network
+    kind: search
+    constraints:
+    - All_Performance.is_Network=1 AND ((dest="unknown" OR NOT (thruput=* OR thruput_max=*)))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Network
+        type: string
+      host:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      source:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      thruput:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Network
+        type: number
+      thruput_max:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Network
+        type: number
+    inherits:
+    - BaseSearch
+    - Performance
+  Missing_Extractions_Perf_Timesync:
+    display_name: Missing Time Synchronization Extractions
+    kind: search
+    constraints:
+    - All_Performance.is_OS=1 AND (tag=time tag=synchronize (dest="unknown" OR action="unknown"))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Timesync
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Timesync
+        type: string
+      host:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      source:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+    inherits:
+    - BaseSearch
+    - Performance
+  Missing_Extractions_Perf_Uptime:
+    display_name: Missing Extractions - Uptime
+    kind: search
+    constraints:
+    - All_Performance.is_OS=1 AND (tag=uptime (dest="unknown" OR uptime="unknown"))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Uptime
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Perf_Uptime
+        type: string
+      host:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      source:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Performance
+        inherited_from: Performance
+        type: string
+    inherits:
+    - BaseSearch
+    - Performance
+  Splunk_Audit:
+    display_name: Splunk Audit
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Splunk_Audit
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Splunk_Audit
+        type: string
+      source:
+        source: declared
+        defined_in: Splunk_Audit
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Splunk_Audit
+        type: string
+    inherits:
+    - BaseSearch
+    search: '| datamodel Splunk_Audit View_Activity search'
+  Ticket_Management:
+    display_name: Ticket Management
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Ticket_Management
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Ticket_Management
+        type: string
+      source:
+        source: declared
+        defined_in: Ticket_Management
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Ticket_Management
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_All_Ticket_Managment
+    - Missing_Extractions_Change
+    - Missing_Extractions_Incident
+    - Missing_Extractions_Problem
+    search: '| datamodel Ticket_Management All_Ticket_Management search'
+  Missing_Extractions_All_Ticket_Managment:
+    display_name: Missing Extractions - All Ticket Management
+    kind: search
+    constraints:
+    - dest="unknown" OR ticket_id="unknown"
+    fields:
+      _time:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_All_Ticket_Managment
+        type: string
+      host:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      source:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      ticket_id:
+        source: declared
+        defined_in: Missing_Extractions_All_Ticket_Managment
+        type: string
+    inherits:
+    - BaseSearch
+    - Ticket_Management
+  Missing_Extractions_Incident:
+    display_name: Missing Extractions - Incident
+    kind: search
+    constraints:
+    - All_Ticket_Management.is_Incident=1 AND (dest="unknown" OR incident="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Incident
+        type: string
+      host:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      incident:
+        source: declared
+        defined_in: Missing_Extractions_Incident
+        type: string
+      source:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+    inherits:
+    - BaseSearch
+    - Ticket_Management
+  Missing_Extractions_Problem:
+    display_name: Missing Extractions - Problem
+    kind: search
+    constraints:
+    - All_Ticket_Management.is_Problem=1 AND (dest="unknown" OR problem="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Problem
+        type: string
+      host:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      problem:
+        source: declared
+        defined_in: Missing_Extractions_Problem
+        type: string
+      source:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+    inherits:
+    - BaseSearch
+    - Ticket_Management
+  Missing_Extractions_Change:
+    display_name: Missing Extractions - Change(S.o.S)
+    kind: search
+    constraints:
+    - All_Ticket_Management.is_Change=1 AND (dest="unknown" OR NOT change="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: timestamp
+      change:
+        source: declared
+        defined_in: Missing_Extractions_Change
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Change
+        type: string
+      host:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      source:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Ticket_Management
+        inherited_from: Ticket_Management
+        type: string
+    inherits:
+    - BaseSearch
+    - Ticket_Management
+  Updates:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Updates
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Updates
+        type: string
+      source:
+        source: declared
+        defined_in: Updates
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Updates
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Updates
+    search: '| datamodel Updates Updates search'
+  Missing_Extractions_Updates:
+    display_name: Missing Extractions
+    kind: search
+    constraints:
+    - (dest="unknown" OR signature="unknown" OR signature_id="unknown" OR status="unknown" OR vendor_product="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Updates
+        inherited_from: Updates
+        type: timestamp
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Updates
+        type: string
+      host:
+        source: inherited
+        defined_in: Updates
+        inherited_from: Updates
+        type: string
+      signature:
+        source: declared
+        defined_in: Missing_Extractions_Updates
+        type: string
+      signature_id:
+        source: declared
+        defined_in: Missing_Extractions_Updates
+        type: string
+      source:
+        source: inherited
+        defined_in: Updates
+        inherited_from: Updates
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Updates
+        inherited_from: Updates
+        type: string
+      status:
+        source: declared
+        defined_in: Missing_Extractions_Updates
+        type: string
+      vendor_product:
+        source: declared
+        defined_in: Missing_Extractions_Updates
+        type: string
+    inherits:
+    - BaseSearch
+    - Updates
+  Vulnerabilities:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Vulnerabilities
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Vulnerabilities
+        type: string
+      source:
+        source: declared
+        defined_in: Vulnerabilities
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Vulnerabilities
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Vulnerabilities
+    search: '| datamodel Vulnerabilities Vulnerabilities search'
+  Missing_Extractions_Vulnerabilities:
+    display_name: Missing Extractions - Vulnerabilities
+    kind: search
+    constraints:
+    - (dvc="unknown" OR category="unknown" OR signature="unknown" OR severity="unknown" OR dest="unknown" OR vendor_product="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Vulnerabilities
+        inherited_from: Vulnerabilities
+        type: timestamp
+      category:
+        source: declared
+        defined_in: Missing_Extractions_Vulnerabilities
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Vulnerabilities
+        type: string
+      dvc:
+        source: declared
+        defined_in: Missing_Extractions_Vulnerabilities
+        type: string
+      host:
+        source: inherited
+        defined_in: Vulnerabilities
+        inherited_from: Vulnerabilities
+        type: string
+      severity:
+        source: declared
+        defined_in: Missing_Extractions_Vulnerabilities
+        type: string
+      signature:
+        source: declared
+        defined_in: Missing_Extractions_Vulnerabilities
+        type: string
+      source:
+        source: inherited
+        defined_in: Vulnerabilities
+        inherited_from: Vulnerabilities
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Vulnerabilities
+        inherited_from: Vulnerabilities
+        type: string
+      vendor_product:
+        source: declared
+        defined_in: Missing_Extractions_Vulnerabilities
+        type: string
+    inherits:
+    - BaseSearch
+    - Vulnerabilities
+  Web:
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Web
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Web
+        type: string
+      source:
+        source: declared
+        defined_in: Web
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Web
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Missing_Extractions_Web
+    search: '| datamodel Web Web search'
+  Missing_Extractions_Web:
+    display_name: Missing Extractions - Web
+    kind: search
+    constraints:
+    - (action="unknown" OR dest="unknown" OR http_content_type="unknown" OR http_method="unknown" OR http_referrer="unknown" OR http_user_agent="unknown" OR src="unknown" OR status="unknown" OR url="unknown" OR user="unknown" OR vendor_product="unknown")
+    fields:
+      _time:
+        source: inherited
+        defined_in: Web
+        inherited_from: Web
+        type: timestamp
+      action:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      dest:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      host:
+        source: inherited
+        defined_in: Web
+        inherited_from: Web
+        type: string
+      http_content_type:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      http_method:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      http_referrer:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      http_user_agent:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      source:
+        source: inherited
+        defined_in: Web
+        inherited_from: Web
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Web
+        inherited_from: Web
+        type: string
+      src:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      status:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      url:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      user:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+      vendor_product:
+        source: declared
+        defined_in: Missing_Extractions_Web
+        type: string
+    inherits:
+    - BaseSearch
+    - Web
+  Untagged_Events:
+    display_name: Untagged Events
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Untagged_Events
+        type: timestamp
+      host:
+        source: declared
+        defined_in: Untagged_Events
+        type: string
+      source:
+        source: declared
+        defined_in: Untagged_Events
+        type: string
+      sourcetype:
+        source: declared
+        defined_in: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    children:
+    - Untagged_Authentication
+    - Untagged_Changes
+    - Untagged_Email
+    - Untagged_Facilities
+    - Untagged_IDS
+    - Untagged_Malware_Attacks
+    - Untagged_Memory
+    - Untagged_Network
+    - Untagged_Network_Resolution
+    - Untagged_Network_Sessions
+    - Untagged_Network_Traffic
+    - Untagged_OS
+    - Untagged_Perf_CPU
+    - Untagged_Ports
+    - Untagged_Processes
+    - Untagged_Services
+    - Untagged_Storage
+    - Untagged_Updates
+    - Untagged_Vulnerabilities
+    - Untagged_Web
+    search: '*'
+  Untagged_Ports:
+    display_name: Untagged Port Data
+    kind: search
+    constraints:
+    - (listen OR listening OR open) (port OR ports) sourcetype!=stash NOT (tag=listening tag=port)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Processes:
+    display_name: Untagged Process Data
+    kind: search
+    constraints:
+    - (process) sourcetype!=stash NOT (tag=process tag=report)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Services:
+    display_name: Untagged Service Data
+    kind: search
+    constraints:
+    - (running OR stopped OR runlevel* OR service) sourcetype!=stash NOT (tag=service tag=report)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Authentication:
+    display_name: Untagged Authentication
+    kind: search
+    constraints:
+    - (login OR "log in" OR authenticated) sourcetype!=stash NOT tag=authentication
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Changes:
+    display_name: Untagged Changes
+    kind: search
+    constraints:
+    - (change OR changed OR modify OR modified OR restart* OR reboot*) sourcetype!=stash NOT tag=change
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Email:
+    display_name: Untagged Email
+    kind: search
+    constraints:
+    - (postfix OR sendmail OR rcpts OR nrcpts OR recipients OR msgid OR message-id) sourcetype!=stash NOT tag=email
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_IDS:
+    display_name: Untagged Intrusion Detection
+    kind: search
+    constraints:
+    - (sourcetype=*idp* OR sourcetype=*ids* OR intrusion OR hip) sourcetype!=stash NOT (tag=ids tag=attack)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Malware_Attacks:
+    display_name: Untagged Malware Attacks
+    kind: search
+    constraints:
+    - (virus OR malware OR infection OR infected) sourcetype!=stash NOT (tag=malware tag=attack)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Network_Resolution:
+    display_name: Untagged Network Resolution
+    kind: search
+    constraints:
+    - (BIND) sourcetype!=stash NOT (tag=network tag=resolution)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Network_Sessions:
+    display_name: Untagged Network Sessions
+    kind: search
+    constraints:
+    - (*dhcp* OR *vpn) sourcetype!=stash NOT (tag=network tag=session)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Network_Traffic:
+    display_name: Untagged Network Traffic
+    kind: search
+    constraints:
+    - (accept OR drop) sourcetype!=stash NOT (tag=network tag=communicate)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Perf_CPU:
+    display_name: Untagged CPU Data
+    kind: search
+    constraints:
+    - (cpu OR cputime OR mhz OR ghz) sourcetype!=stash NOT (tag=performance tag=cpu)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Facilities:
+    display_name: Untagged Facilities Data
+    kind: search
+    constraints:
+    - (power OR temperature) sourcetype!=stash NOT (tag=performance tag=facilities)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Memory:
+    display_name: Untagged Process Data
+    kind: search
+    constraints:
+    - (mem OR memory) sourcetype!=stash NOT (tag=performance tag=memory)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Storage:
+    display_name: Untagged Storage Data
+    kind: search
+    constraints:
+    - (mount OR disk OR df) sourcetype!=stash NOT (tag=performance tag=storage)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Network:
+    display_name: Untagged Network Data
+    kind: search
+    constraints:
+    - (net OR network) sourcetype!=stash NOT (tag=performance tag=network)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_OS:
+    display_name: Untagged OS Data
+    kind: search
+    constraints:
+    - sourcetype!=stash (((uptime OR systemuptime) NOT (tag=performance tag=os tag=uptime)) OR (time sync* NOT (tag=performance tag=os tag=time tag=synchronize)))
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Updates:
+    display_name: Untagged Updates
+    kind: search
+    constraints:
+    - (update OR updates OR installed OR "restart required" OR available OR patch) sourcetype!=stash NOT (tag=update tag=status)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Vulnerabilities:
+    display_name: Untagged Vulnerabilities
+    kind: search
+    constraints:
+    - (sourcetype=*vuln* OR "vulnerability detected" OR CVE) sourcetype!=stash NOT (tag=vulnerability tag=report)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events
+  Untagged_Web:
+    display_name: Untagged Web Data
+    kind: search
+    constraints:
+    - http sourcetype!=stash NOT (tag=web)
+    fields:
+      _time:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: timestamp
+      host:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      source:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+      sourcetype:
+        source: inherited
+        defined_in: Untagged_Events
+        inherited_from: Untagged_Events
+        type: string
+    inherits:
+    - BaseSearch
+    - Untagged_Events

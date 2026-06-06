@@ -1,0 +1,25 @@
+name: mount
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  kind: event
+  source: declared
+  type: string
+  description: The path at which a storage resource is mounted.
+  recommended: true
+- model: Performance
+  dataset: Storage
+  kind: event
+  source: declared
+  type: string
+  description: The mount point of a storage resource.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Storage
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Storage
+  kind: search
+  source: declared
+  type: string

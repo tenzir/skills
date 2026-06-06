@@ -1,0 +1,14 @@
+name: mem_free
+used_by:
+- model: Performance
+  dataset: Memory
+  kind: event
+  source: declared
+  type: number
+  description: The free amount of memory reported by the resource, in megabytes.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Memory
+  kind: search
+  source: declared
+  type: number

@@ -1,0 +1,8 @@
+name: error_code
+used_by:
+- model: Web
+  dataset: Storage
+  kind: event
+  source: declared
+  type: string
+  description: The error code that occurred while accessing the storage account.

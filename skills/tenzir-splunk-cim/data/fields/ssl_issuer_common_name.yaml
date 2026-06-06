@@ -1,0 +1,13 @@
+name: ssl_issuer_common_name
+used_by:
+- model: Certificates
+  dataset: SSL
+  kind: event
+  source: calculated
+  type: string
+  description: The certificate issuer's common name.
+  recommended: true
+  calculation:
+    id: SSL_fillnull_ssl_issuer_common_name
+    type: Eval
+    expression: if(isnull(ssl_issuer_common_name) OR ssl_issuer_common_name="","unknown",ssl_issuer_common_name)

@@ -1,0 +1,19 @@
+name: uptime
+used_by:
+- model: JVM
+  dataset: Runtime
+  kind: event
+  source: declared
+  type: number
+  description: Uptime of the JVM process, in seconds.
+- model: Performance
+  dataset: Uptime
+  kind: event
+  source: calculated
+  type: string
+  description: The uptime of the compute resource, in seconds.
+  recommended: true
+  calculation:
+    id: Uptime_fillnull_uptime
+    type: Eval
+    expression: if(isnull(uptime) OR uptime="","unknown",uptime)

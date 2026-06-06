@@ -1,0 +1,8 @@
+name: rpc_protocol
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: string
+  description: The protocol that the message server uses for remote procedure calls (RPC). Possible values include HTTP REST, SOAP, and EJB.

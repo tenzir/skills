@@ -1,0 +1,10 @@
+name: cim_transport_protocols
+columns:
+- transport
+rows:
+- transport: icmp
+- transport: tcp
+- transport: udp
+transforms:
+- name: cim_transport_protocol_lookup
+  filename: cim_transport_protocols.csv

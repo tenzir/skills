@@ -1,0 +1,8 @@
+name: message_info
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: Additional information about the message.

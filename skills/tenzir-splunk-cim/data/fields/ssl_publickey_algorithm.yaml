@@ -1,0 +1,8 @@
+name: ssl_publickey_algorithm
+used_by:
+- model: Certificates
+  dataset: SSL
+  kind: event
+  source: declared
+  type: string
+  description: The algorithm used to create the public key.

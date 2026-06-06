@@ -1,0 +1,8 @@
+name: message_priority
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: string
+  description: The priority of the message. Important jobs that the message queue should answer no matter what receive a higher message_priority than other jobs, ensuring they are completed before the others.

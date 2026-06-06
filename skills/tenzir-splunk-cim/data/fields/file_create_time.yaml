@@ -1,0 +1,25 @@
+name: file_create_time
+used_by:
+- model: Change_Analysis
+  dataset: Filesystem_Changes
+  kind: event
+  source: calculated
+  type: timestamp
+  description: The time the file (the object of the event) was created.
+  recommended: true
+  calculation:
+    id: Filesystem_Changes_eval_file_create_time
+    type: Eval
+    expression: if(isnull(file_create_time) OR file_create_time="",0,file_create_time)
+- model: Endpoint
+  dataset: Filesystem
+  kind: search
+  source: declared
+  type: timestamp
+  description: The time the file (the object of the event) was created.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  kind: search
+  source: declared
+  type: number

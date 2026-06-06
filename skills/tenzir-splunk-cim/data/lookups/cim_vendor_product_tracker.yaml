@@ -1,0 +1,10 @@
+name: cim_vendor_product_tracker
+columns:
+- model
+- vendor_product
+- firstTime
+- lastTime
+rows: []
+transforms:
+- name: cim_vendor_product_tracker
+  filename: cim_vendor_product_tracker.csv

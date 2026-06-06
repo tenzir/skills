@@ -1,0 +1,14 @@
+name: write_ops
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  kind: event
+  source: declared
+  type: number
+  description: The total number of write operations in the polling period.
+- model: Performance
+  dataset: Storage
+  kind: event
+  source: declared
+  type: number
+  description: The total number of write operations processed by the resource.

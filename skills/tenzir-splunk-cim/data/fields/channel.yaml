@@ -1,0 +1,8 @@
+name: channel
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: number
+  description: The 802.11 channel used by a wireless network.

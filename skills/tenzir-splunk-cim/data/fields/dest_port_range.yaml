@@ -1,0 +1,9 @@
+name: dest_port_range
+used_by:
+- model: Change
+  dataset: Network_Changes
+  kind: event
+  source: declared
+  type: string
+  description: For network events, this field represents destination port or range. For example, 80 or 8000 - 8080 or 80,443
+  multivalue: true

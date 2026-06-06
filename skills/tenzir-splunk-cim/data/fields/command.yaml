@@ -1,0 +1,39 @@
+name: command
+used_by:
+- model: Change
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: The command that initiated the change.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_command
+    type: Eval
+    expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+- model: Change_Analysis
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: The command that initiated the change.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_command
+    type: Eval
+    expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Account_Management
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Changes
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Restarts
+  kind: search
+  source: declared
+  type: string

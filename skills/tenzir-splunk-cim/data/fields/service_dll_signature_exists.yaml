@@ -1,0 +1,8 @@
+name: service_dll_signature_exists
+used_by:
+- model: Endpoint
+  dataset: Services
+  kind: search
+  source: declared
+  type: boolean
+  description: Whether or not the dynamic link library associated with the service has a digitally signed signature.

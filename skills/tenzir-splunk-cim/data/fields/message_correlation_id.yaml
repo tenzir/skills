@@ -1,0 +1,8 @@
+name: message_correlation_id
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: string
+  description: The message correlation identification value.

@@ -1,0 +1,11 @@
+name: cim_email_protocols
+columns:
+- protocol
+rows:
+- protocol: smtp
+- protocol: imap
+- protocol: pop3
+- protocol: mapi
+transforms:
+- name: cim_email_protocol_lookup
+  filename: cim_email_protocols.csv

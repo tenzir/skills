@@ -1,0 +1,8 @@
+name: total_processors
+used_by:
+- model: JVM
+  dataset: OS
+  kind: event
+  source: declared
+  type: number
+  description: Total processor cores available to the OS that the JVM is running on.

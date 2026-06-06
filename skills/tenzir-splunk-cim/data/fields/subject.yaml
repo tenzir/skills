@@ -1,0 +1,17 @@
+name: subject
+lookups:
+- name: cam_subjects
+  file: data/lookups/cam_subjects.yaml
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: declared
+  type: string
+  description: This field is deprecated in favor of 'signature'.
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The subject of the message.

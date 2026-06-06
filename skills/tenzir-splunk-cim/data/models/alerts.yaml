@@ -1,0 +1,234 @@
+name: Alerts
+description: Alerts Data Model
+root_datasets:
+- Alerts
+datasets:
+  Alerts:
+    kind: event
+    tags:
+    - alert
+    constraints:
+    - (`cim_Alerts_indexes`) tag=alert
+    fields:
+      _time:
+        source: base
+        defined_in: BaseEvent
+      app:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: 'The system, service, or application that generated the alert event. Examples include, but are not limited to the following: GuardDuty, SecurityCenter, 3rd party services, win:app:trendmicro, vmware, nagios.'
+        recommended: true
+        calculation:
+          id: Alerts_fillnull_app
+          type: Eval
+          expression: if(isnull(app) OR app="",sourcetype,app)
+      body:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: This field is deprecated in favor of 'description'.
+      cim_entity_zone:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The description of the alert event.
+      dest:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: The object that is the 'target' of the alert event. Examples include an email address, SNMP trap, or virtual machine id. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Alerts_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The business unit associated with the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The category of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The priority of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_type:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The type of the destination object, such as 'instance', 'storage', 'firewall'.
+      host:
+        source: base
+        defined_in: BaseEvent
+      id:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The unique identifier of the alert event.
+      mitre_technique_id:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The MITRE ATT&CK technique ID of the alert event, searchable at https://attack.mitre.org/techniques
+        multivalue: true
+      severity:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: 'The severity of the alert event. Note: This field is a string. Specific values are required. Use the severity_id field for severity ID fields that are integer data types. Use vendor_severity for the vendor''s own human readable strings (such as ''Good'', ''Bad'', ''Really Bad'').'
+        expected_values:
+        - critical
+        - high
+        - medium
+        - low
+        - informational
+        - unknown
+        recommended: true
+        calculation:
+          id: Alerts_fillnull_severity
+          type: Eval
+          expression: if(isnull(severity) OR severity="","unknown",severity)
+      severity_id:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      signature:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The human-friendly title of the alert event, such as 'API GetAccountPasswordPolicy was invoked using root credentials.' Split by signature_id when aggregating alert events by types.
+      signature_id:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: The vendor specific policy or rule that generated the alert event, such as 'Policy:IAMUser/RootCredentialUsage.'
+        recommended: true
+        calculation:
+          id: Alerts_fillnull_signature_id
+          type: Eval
+          expression: if(isnull(signature_id) OR signature_id="","unknown",signature_id)
+      source:
+        source: base
+        defined_in: BaseEvent
+      sourcetype:
+        source: base
+        defined_in: BaseEvent
+      src:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: The object that is the 'actor' of the alert event. You can alias or extract this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: Alerts_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The business unit associated with the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The category of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The priority of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_type:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The type of the source object, such as 'instance', 'storage', 'firewall'.
+      subject:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: This field is deprecated in favor of 'signature'.
+      tag:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      type:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: The alert event type.
+        expected_values:
+        - alarm
+        - alert
+        - event
+        - task
+        - warning
+        - unknown
+        recommended: true
+        calculation:
+          id: Alerts_fillnull_type
+          type: Eval
+          expression: if(isnull(type) OR type="","unknown",type)
+      user:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: The user involved in the alert event.
+        recommended: true
+        calculation:
+          id: Alerts_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The business unit of the user involved in the alert event. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The category of the user involved in the alert event. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: calculated
+        defined_in: Alerts
+        type: string
+        description: The user_name of user involved in the alert event.
+        calculation:
+          id: Alerts_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The priority of the user involved in the alert event. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      vendor_account:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The account associated with the alert event.
+      vendor_region:
+        source: declared
+        defined_in: Alerts
+        type: string
+        description: The data center region involved in the alert event, such as us-west-2.
+    inherits:
+    - BaseEvent

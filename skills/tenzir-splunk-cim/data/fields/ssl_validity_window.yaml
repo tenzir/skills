@@ -1,0 +1,12 @@
+name: ssl_validity_window
+used_by:
+- model: Certificates
+  dataset: SSL
+  kind: event
+  source: calculated
+  type: number
+  description: The length of time, in seconds, for which this certificate is valid.
+  calculation:
+    id: SSL_0validity_window
+    type: Eval
+    expression: if(isnum(ssl_end_time) AND isnum(ssl_start_time),ssl_end_time-ssl_start_time,null())

@@ -1,0 +1,8 @@
+name: last_call_minute
+used_by:
+- model: Databases
+  dataset: Lock_Info
+  kind: event
+  source: declared
+  type: number
+  description: Represents the amount of time elapsed since the session_status changed to its current status. The definition of this field depends on the session_status value. If session_status = ONLINE, the last_call_minute value represents the time elapsed since the session became active. If session_status = OFFLINE, the last_call_minute value represents the time elapsed since the session became inactive.

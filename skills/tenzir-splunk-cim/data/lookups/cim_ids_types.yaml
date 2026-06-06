@@ -1,0 +1,11 @@
+name: cim_ids_types
+columns:
+- ids_type
+rows:
+- ids_type: application
+- ids_type: host
+- ids_type: network
+- ids_type: wireless
+transforms:
+- name: cim_ids_type_lookup
+  filename: cim_ids_types.csv

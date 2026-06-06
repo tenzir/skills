@@ -1,0 +1,9 @@
+name: ssl_start_time
+used_by:
+- model: Certificates
+  dataset: SSL
+  kind: event
+  source: declared
+  type: timestamp
+  description: This is the start date and time for this certificate's validity.
+  recommended: true

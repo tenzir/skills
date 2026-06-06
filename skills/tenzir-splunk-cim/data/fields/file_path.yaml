@@ -1,0 +1,41 @@
+name: file_path
+used_by:
+- model: Change_Analysis
+  dataset: Filesystem_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: The location of the file that is the object of the event, in local file and directory structure terms.
+  recommended: true
+  calculation:
+    id: Filesystem_Changes_eval_file_path
+    type: Eval
+    expression: if(isnull(file_path) OR file_path="","unknown",file_path)
+- model: Endpoint
+  dataset: Filesystem
+  kind: search
+  source: calculated
+  type: string
+  description: The path of the file, such as C:\Windows\System32\notepad.exe.
+  recommended: true
+  calculation:
+    id: Endpoint_Filesystem_eval_file_path
+    type: Eval
+    expression: if(isnull(file_path) OR file_path="","unknown",file_path)
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The path of the file, such as C:\Windows\System32\notepad.exe.
+- model: Malware
+  dataset: Malware_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The full file path of the file with suspected malware.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  kind: search
+  source: declared
+  type: string

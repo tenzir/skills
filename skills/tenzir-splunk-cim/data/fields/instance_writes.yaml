@@ -1,0 +1,8 @@
+name: instance_writes
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  kind: event
+  source: declared
+  type: number
+  description: The total number of writes for the database instance.

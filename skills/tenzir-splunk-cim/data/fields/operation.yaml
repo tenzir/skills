@@ -1,0 +1,8 @@
+name: operation
+used_by:
+- model: Web
+  dataset: Storage
+  kind: event
+  source: declared
+  type: string
+  description: The operation performed on the storage account.

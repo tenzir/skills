@@ -1,0 +1,107 @@
+name: src_category
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: declared
+  type: string
+  description: The category of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: declared
+  type: string
+  description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Certificates
+  dataset: All_Certificates
+  kind: event
+  source: declared
+  type: string
+  description: The category of the certificate management source, such as email_server or SOX-compliant. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk Enterprise Security.
+  multivalue: true
+- model: Change
+  dataset: All_Changes
+  kind: event
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Change_Analysis
+  dataset: All_Changes
+  kind: event
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Databases
+  dataset: All_Databases
+  kind: event
+  source: declared
+  type: string
+  description: The category of the source.
+  multivalue: true
+- model: DLP
+  dataset: DLP_Incidents
+  kind: event
+  source: declared
+  type: string
+  description: The category of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The category of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Endpoint
+  dataset: Ports
+  kind: search
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Malware
+  dataset: Malware_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The category of the source.
+  multivalue: true
+- model: Network_Resolution
+  dataset: DNS
+  kind: event
+  source: declared
+  type: string
+  description: The category of the source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Network_Sessions
+  dataset: All_Sessions
+  kind: event
+  source: declared
+  type: string
+  description: The category of the source.
+  multivalue: true
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: string
+  description: The category of the network traffic source.
+  multivalue: true
+- model: Web
+  dataset: Web
+  kind: event
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true

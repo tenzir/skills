@@ -1,0 +1,8 @@
+name: ssl_session_id
+used_by:
+- model: Certificates
+  dataset: SSL
+  kind: event
+  source: declared
+  type: string
+  description: The session identifier for this certificate.

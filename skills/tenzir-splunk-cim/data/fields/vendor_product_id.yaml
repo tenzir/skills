@@ -1,0 +1,8 @@
+name: vendor_product_id
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: The vendor and product name ID as defined by the vendor.

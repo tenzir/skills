@@ -1,0 +1,8 @@
+name: endpoint
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: string
+  description: The endpoint that the message accessed during the RPC (remote procedure call) transaction.

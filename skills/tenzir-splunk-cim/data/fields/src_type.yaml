@@ -1,0 +1,8 @@
+name: src_type
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: declared
+  type: string
+  description: The type of the source object, such as 'instance', 'storage', 'firewall'.

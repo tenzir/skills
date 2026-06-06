@@ -1,0 +1,13 @@
+name: dest_nt_host
+used_by:
+- model: Network_Sessions
+  dataset: All_Sessions
+  kind: event
+  source: calculated
+  type: string
+  description: The NetBIOS name of the client initializing a network session.
+  recommended: true
+  calculation:
+    id: All_Sessions_fillnull_dest_nt_host
+    type: Eval
+    expression: if(isnull(dest_nt_host) OR dest_nt_host="","unknown",dest_nt_host)

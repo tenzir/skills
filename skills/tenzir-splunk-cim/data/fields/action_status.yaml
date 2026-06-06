@@ -1,0 +1,11 @@
+name: action_status
+lookups:
+- name: cam_action_statuses
+  file: data/lookups/cam_action_statuses.yaml
+used_by:
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  kind: event
+  source: declared
+  type: string
+  description: The status of the action. For example, 'success' or 'failure'.

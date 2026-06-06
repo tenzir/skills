@@ -1,0 +1,11 @@
+name: cim_access_actions
+columns:
+- action
+rows:
+- action: success
+- action: failure
+- action: pending
+- action: error
+transforms:
+- name: cim_access_action_lookup
+  filename: cim_access_actions.csv

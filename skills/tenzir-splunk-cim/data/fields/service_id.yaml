@@ -1,0 +1,24 @@
+name: service_id
+used_by:
+- model: Application_State
+  dataset: Services
+  kind: event
+  source: calculated
+  type: string
+  description: A numeric indicator for a service.
+  recommended: true
+  calculation:
+    id: Services_fillnull_service_id
+    type: Eval
+    expression: if(isnull(service_id) OR service_id="","unknown",service_id)
+- model: Endpoint
+  dataset: Services
+  kind: search
+  source: calculated
+  type: string
+  description: The unique identifier of the service assigned by the operating system..
+  recommended: true
+  calculation:
+    id: Endpoint_Services_fillnull_service_id
+    type: Eval
+    expression: if(isnull(service_id) OR service_id="","unknown",service_id)

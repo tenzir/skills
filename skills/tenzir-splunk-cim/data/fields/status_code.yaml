@@ -1,0 +1,8 @@
+name: status_code
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The status code associated with the message.

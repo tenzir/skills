@@ -1,0 +1,8 @@
+name: dest_url
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: Url of the product, application or object.

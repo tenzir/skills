@@ -1,0 +1,8 @@
+name: request_payload
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: string
+  description: The content of the message request.

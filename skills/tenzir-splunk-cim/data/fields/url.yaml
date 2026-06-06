@@ -1,0 +1,37 @@
+name: url
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The URL associated with the message, if any.
+  multivalue: true
+- model: Malware
+  dataset: Malware_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: A URL containing more information about the vulnerability.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Web
+  kind: search
+  source: declared
+  type: string
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  kind: event
+  source: declared
+  type: string
+  description: The URL involved in the discovered vulnerability.
+- model: Web
+  dataset: Web
+  kind: event
+  source: calculated
+  type: string
+  description: The URL of the requested HTTP resource.
+  recommended: true
+  calculation:
+    id: 0Web_fillnull_url
+    type: Eval
+    expression: if(isnull(url) OR url="" OR url="-","unknown",url)

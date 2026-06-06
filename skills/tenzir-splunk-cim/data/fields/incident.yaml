@@ -1,0 +1,17 @@
+name: incident
+used_by:
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Incident
+  kind: search
+  source: declared
+  type: string
+- model: Ticket_Management
+  dataset: Incident
+  kind: event
+  source: calculated
+  type: string
+  description: The incident that triggered the service request. Can be a rare occurrence, or something that happens more frequently An incident that occurs on a frequent basis can also be classified as a problem.
+  calculation:
+    id: Incident_fillnull_incident
+    type: Eval
+    expression: if(isnull(incident) OR incident="","unknown",incident)

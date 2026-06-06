@@ -1,0 +1,18 @@
+name: direction
+used_by:
+- model: Change
+  dataset: Network_Changes
+  kind: event
+  source: declared
+  type: string
+  description: For network events, this field represents whether the traffic is inbound or outbound.
+  multivalue: true
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: string
+  description: The direction the packet is traveling.
+  expected_values:
+  - inbound
+  - outbound

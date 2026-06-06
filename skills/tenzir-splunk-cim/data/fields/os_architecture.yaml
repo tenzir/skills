@@ -1,0 +1,8 @@
+name: os_architecture
+used_by:
+- model: JVM
+  dataset: OS
+  kind: event
+  source: declared
+  type: string
+  description: OS architecture that the JVM is running on.

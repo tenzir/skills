@@ -1,0 +1,8 @@
+name: orig_dest
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The original destination host of the message. The message destination host can change when a message is relayed or bounced.

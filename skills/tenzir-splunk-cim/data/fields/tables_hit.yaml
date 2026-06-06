@@ -1,0 +1,8 @@
+name: tables_hit
+used_by:
+- model: Databases
+  dataset: Query_Stats
+  kind: event
+  source: declared
+  type: string
+  description: The names of the tables hit by the query.

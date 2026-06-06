@@ -1,0 +1,8 @@
+name: cim_corporate_web_domains
+columns:
+- domain
+rows:
+- domain: '*acmetech.com'
+transforms:
+- name: cim_corporate_web_domain_lookup
+  filename: cim_corporate_web_domains.csv

@@ -1,0 +1,8 @@
+name: message_received_time
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  kind: event
+  source: declared
+  type: timestamp
+  description: The time that the message was received by a message-oriented middleware (MOM) solution.

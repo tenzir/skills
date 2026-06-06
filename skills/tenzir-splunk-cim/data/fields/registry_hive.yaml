@@ -1,0 +1,16 @@
+name: registry_hive
+used_by:
+- model: Endpoint
+  dataset: Registry
+  kind: search
+  source: declared
+  type: string
+  description: The logical grouping of registry keys, subkeys, and values.
+  expected_values:
+  - HKEY_CURRENT_CONFIG
+  - HKEY_CURRENT_USER
+  - HKEY_LOCAL_MACHINE\SAM
+  - HKEY_LOCAL_MACHINE\Security
+  - HKEY_LOCAL_MACHINE\Software
+  - HKEY_LOCAL_MACHINE\System
+  - HKEY_USERS\.DEFAULT

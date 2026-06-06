@@ -1,0 +1,8 @@
+name: state
+used_by:
+- model: Endpoint
+  dataset: Ports
+  kind: search
+  source: declared
+  type: string
+  description: The status of the listening port, such as established, listening, etc.

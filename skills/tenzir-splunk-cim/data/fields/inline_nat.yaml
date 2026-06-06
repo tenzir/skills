@@ -1,0 +1,8 @@
+name: inline_nat
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  kind: event
+  source: declared
+  type: string
+  description: Identifies whether the resource is a network address translation pool.

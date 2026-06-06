@@ -1,0 +1,12 @@
+name: cim_endpoint_severities
+columns:
+- severity
+rows:
+- severity: critical
+- severity: high
+- severity: medium
+- severity: low
+- severity: informational
+transforms:
+- name: cim_endpoint_severity_lookup
+  filename: cim_endpoint_severities.csv

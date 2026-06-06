@@ -1,0 +1,10 @@
+name: cim_update_statii
+columns:
+- status
+rows:
+- status: installed
+- status: restart required
+- status: available
+transforms:
+- name: cim_update_status_lookup
+  filename: cim_update_statii.csv

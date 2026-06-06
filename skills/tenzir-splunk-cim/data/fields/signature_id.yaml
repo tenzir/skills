@@ -1,0 +1,90 @@
+name: signature_id
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: calculated
+  type: string
+  description: The vendor specific policy or rule that generated the alert event, such as 'Policy:IAMUser/RootCredentialUsage.'
+  recommended: true
+  calculation:
+    id: Alerts_fillnull_signature_id
+    type: Eval
+    expression: if(isnull(signature_id) OR signature_id="","unknown",signature_id)
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.
+- model: DLP
+  dataset: DLP_Incidents
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.
+- model: Email
+  dataset: Filtering
+  kind: event
+  source: declared
+  type: string
+  description: The id associated with the filter name.
+- model: Event_Signatures
+  dataset: Signatures
+  kind: event
+  source: declared
+  type: string
+  description: The event name identifier (as supplied by the vendor).
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.
+- model: Malware
+  dataset: Malware_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.
+- model: Network_Sessions
+  dataset: All_Sessions
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.
+- model: Performance
+  dataset: OS
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Updates
+  kind: search
+  source: declared
+  type: string
+- model: Updates
+  dataset: Updates
+  kind: event
+  source: calculated
+  type: string
+  description: 'The ID of the patch requirement detected on the client (the src). Note: Use signature for human-readable signature names.'
+  recommended: true
+  multivalue: true
+  calculation:
+    id: Updates_fillnull_signature_id
+    type: Eval
+    expression: case(isnotnull(signature_id) AND signature_id!="",signature_id,isnotnull(signature) AND signature!="" AND signature!="unknown",signature,1=1,"unknown")
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier or event code of the event signature.

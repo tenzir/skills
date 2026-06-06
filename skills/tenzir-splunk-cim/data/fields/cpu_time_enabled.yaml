@@ -1,0 +1,13 @@
+name: cpu_time_enabled
+used_by:
+- model: JVM
+  dataset: Threading
+  kind: event
+  source: declared
+  type: boolean
+  description: Indicates whether thread CPU time measurement is enabled.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'

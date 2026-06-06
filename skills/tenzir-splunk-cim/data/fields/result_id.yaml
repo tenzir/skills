@@ -1,0 +1,24 @@
+name: result_id
+used_by:
+- model: Change
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: A result indicator for an action status.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_result_id
+    type: Eval
+    expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+- model: Change_Analysis
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: A result indicator for an action status.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_result_id
+    type: Eval
+    expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))

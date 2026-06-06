@@ -1,0 +1,10 @@
+name: cim_dlp_actions
+columns:
+- action
+rows:
+- action: allowed
+- action: blocked
+- action: deferred
+transforms:
+- name: cim_dlp_action_lookup
+  filename: cim_dlp_actions.csv

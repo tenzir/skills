@@ -1,0 +1,8 @@
+name: tos
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: string
+  description: The combination of source and destination IP ToS (type of service) values in the event.

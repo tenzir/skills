@@ -1,0 +1,1610 @@
+name: Splunk_Audit
+display_name: Splunk Audit Logs
+description: Splunk Audit Logs Data Model
+root_datasets:
+- Datamodel_Acceleration
+- Search_Activity
+- Scheduler_Activity
+- View_Activity
+- Web_Service_Errors
+- Modular_Actions
+datasets:
+  Datamodel_Acceleration:
+    display_name: Data Model Acceleration
+    kind: search
+    fields:
+      _time:
+        source: base
+        defined_in: BaseSearch
+      access_count:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: number
+        description: The number of times the data model summary has been accessed since it was created.
+      access_time:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: timestamp
+        description: The timestamp of the most recent access of the data model summary.
+      app:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: string
+        description: The application context in which the data model summary was accessed.
+      buckets:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: number
+        description: The number of index buckets spanned by the data model acceleration summary.
+      buckets_size:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: number
+        description: The total size of the buckets spanned by the data model acceleration summary.
+      complete:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: number
+        description: The percentage of the data model summary that is currently complete.
+      cron:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: string
+        description: The cron expression used to accelerate the data model.
+      datamodel:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: string
+        description: The name of the data model accelerated.
+      digest:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: string
+        description: A hash of the current data model contents.
+      earliest:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: timestamp
+        description: The earliest time that the data model summary was accessed.
+      host:
+        source: base
+        defined_in: BaseSearch
+      is_inprogress:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: boolean
+        description: Indicates whether the data model acceleration is currently in progress.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+      last_error:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: string
+        description: The text of the last error reported during the data model acceleration.
+      last_sid:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: string
+        description: The search id of the last acceleration attempt.
+      latest:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: timestamp
+        description: The most recent acceleration timestamp of the data model.
+      mod_time:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: timestamp
+        description: The timestamp of the most recent modification to the data model acceleration.
+      retention:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: number
+        description: The length of time that data model accelerations are retained, in seconds.
+      size:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: number
+        description: The amount of storage space the data model's acceleration summary takes up, in bytes.
+      source:
+        source: base
+        defined_in: BaseSearch
+      sourcetype:
+        source: base
+        defined_in: BaseSearch
+      summary_id:
+        source: declared
+        defined_in: Datamodel_Acceleration
+        type: string
+        description: The unique id of the data model acceleration summary.
+    inherits:
+    - BaseSearch
+    search: '| `cim_datamodelinfo`'
+  Search_Activity:
+    display_name: Search Activity
+    kind: event
+    constraints:
+    - index=_audit action=search search_id=*
+    fields:
+      _time:
+        source: base
+        defined_in: BaseEvent
+      cim_entity_zone:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      datamodel:
+        source: calculated
+        defined_in: Search_Activity
+        type: string
+        description: The name of the datamodel (for datamodel acceleration searches).
+        calculation:
+          id: 1Search_Activity_datamodel
+          type: Eval
+          expression: case(match(savedsearch_name, "_ACCELERATE_DM_.*"), replace(savedsearch_name, "_ACCELERATE_DM_(.*)_ACCELERATE_", "\1"), match(search, "'?(\|\s+)?summarize.*?id=DM_"), replace(search, "'?(?:\|\s)?summarize.*?id=DM_([^\s]+).*", "\1"), 1=1, null())
+      host:
+        source: base
+        defined_in: BaseEvent
+      info:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: The action of the search (granted, completed, cancelled, failed).
+        multivalue: true
+      savedsearch_name:
+        source: calculated
+        defined_in: Search_Activity
+        type: string
+        description: The name of the saved search.
+        calculation:
+          id: 3Search_Activity_savedsearch_name
+          type: Eval
+          expression: if(savedsearch_name="",null(),savedsearch_name)
+      search:
+        source: calculated
+        defined_in: Search_Activity
+        type: string
+        description: The SPL search syntax.
+        calculation:
+          id: 4Search_Activity_search
+          type: Eval
+          expression: if(isnull(search) OR search="",null(),search)
+      search_alias:
+        source: calculated
+        defined_in: Search_Activity
+        type: string
+        description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+        calculation:
+          id: 6Search_Activity_search_alias
+          type: Eval
+          expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())
+      search_et:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: The earliest time of the search.
+      search_id:
+        source: calculated
+        defined_in: Search_Activity
+        type: string
+        description: The ID of the search.
+        calculation:
+          id: 2Search_Activity_search_id
+          type: Eval
+          expression: trim(search_id, "'")
+      search_lt:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: The latest time of the search.
+      search_type:
+        source: calculated
+        defined_in: Search_Activity
+        type: string
+        description: The type of search.
+        calculation:
+          id: 5Search_Activity_search_type
+          type: Eval
+          expression: case(isnotnull(search_type) AND NOT search_type LIKE "case(%",search_type,savedsearch_name LIKE "_ACCELERATE_DM%", "dm_acceleration", search_id LIKE "scheduler%", "scheduled", search_id LIKE "rt%", "realtime", search_id LIKE "subsearch%", "subsearch", (search_id LIKE "SummaryDirector%" OR search_id LIKE "summarize_SummaryDirector%"), "summary_director", 1=1, "adhoc")
+      source:
+        source: base
+        defined_in: BaseEvent
+      sourcetype:
+        source: base
+        defined_in: BaseEvent
+      total_run_time:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: The total run time of the search.
+      user:
+        source: calculated
+        defined_in: Search_Activity
+        type: string
+        description: The name of the user who ran the search.
+        calculation:
+          id: 0Search_Activity_user
+          type: Rex
+          expression: user=(?<user>[^,]+), action
+          input_field: _raw
+      user_bunit:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: declared
+        defined_in: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseEvent
+    children:
+    - Acceleration_Jobs
+    - Adhoc_Jobs
+    - Failed_Jobs
+    - Realtime_Jobs
+    - Scheduled_Jobs
+    - Subsearch_Jobs
+  Acceleration_Jobs:
+    display_name: Acceleration Jobs
+    kind: event
+    constraints:
+    - search_type="dm_acceleration" OR search_type="summary_director"
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      cim_entity_zone:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      datamodel:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the datamodel (for datamodel acceleration searches).
+        calculation:
+          id: 1Search_Activity_datamodel
+          type: Eval
+          expression: case(match(savedsearch_name, "_ACCELERATE_DM_.*"), replace(savedsearch_name, "_ACCELERATE_DM_(.*)_ACCELERATE_", "\1"), match(search, "'?(\|\s+)?summarize.*?id=DM_"), replace(search, "'?(?:\|\s)?summarize.*?id=DM_([^\s]+).*", "\1"), 1=1, null())
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      info:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The action of the search (granted, completed, cancelled, failed).
+        multivalue: true
+      savedsearch_name:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the saved search.
+        calculation:
+          id: 3Search_Activity_savedsearch_name
+          type: Eval
+          expression: if(savedsearch_name="",null(),savedsearch_name)
+      search:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The SPL search syntax.
+        calculation:
+          id: 4Search_Activity_search
+          type: Eval
+          expression: if(isnull(search) OR search="",null(),search)
+      search_alias:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+        calculation:
+          id: 6Search_Activity_search_alias
+          type: Eval
+          expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())
+      search_et:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The earliest time of the search.
+      search_id:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The ID of the search.
+        calculation:
+          id: 2Search_Activity_search_id
+          type: Eval
+          expression: trim(search_id, "'")
+      search_lt:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The latest time of the search.
+      search_type:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The type of search.
+        calculation:
+          id: 5Search_Activity_search_type
+          type: Eval
+          expression: case(isnotnull(search_type) AND NOT search_type LIKE "case(%",search_type,savedsearch_name LIKE "_ACCELERATE_DM%", "dm_acceleration", search_id LIKE "scheduler%", "scheduled", search_id LIKE "rt%", "realtime", search_id LIKE "subsearch%", "subsearch", (search_id LIKE "SummaryDirector%" OR search_id LIKE "summarize_SummaryDirector%"), "summary_director", 1=1, "adhoc")
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      total_run_time:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The total run time of the search.
+      user:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the user who ran the search.
+        calculation:
+          id: 0Search_Activity_user
+          type: Rex
+          expression: user=(?<user>[^,]+), action
+          input_field: _raw
+      user_bunit:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseEvent
+    - Search_Activity
+  Adhoc_Jobs:
+    display_name: Adhoc Jobs
+    kind: event
+    constraints:
+    - search_type="adhoc"
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      cim_entity_zone:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      datamodel:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the datamodel (for datamodel acceleration searches).
+        calculation:
+          id: 1Search_Activity_datamodel
+          type: Eval
+          expression: case(match(savedsearch_name, "_ACCELERATE_DM_.*"), replace(savedsearch_name, "_ACCELERATE_DM_(.*)_ACCELERATE_", "\1"), match(search, "'?(\|\s+)?summarize.*?id=DM_"), replace(search, "'?(?:\|\s)?summarize.*?id=DM_([^\s]+).*", "\1"), 1=1, null())
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      info:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The action of the search (granted, completed, cancelled, failed).
+        multivalue: true
+      savedsearch_name:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the saved search.
+        calculation:
+          id: 3Search_Activity_savedsearch_name
+          type: Eval
+          expression: if(savedsearch_name="",null(),savedsearch_name)
+      search:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The SPL search syntax.
+        calculation:
+          id: 4Search_Activity_search
+          type: Eval
+          expression: if(isnull(search) OR search="",null(),search)
+      search_alias:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+        calculation:
+          id: 6Search_Activity_search_alias
+          type: Eval
+          expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())
+      search_et:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The earliest time of the search.
+      search_id:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The ID of the search.
+        calculation:
+          id: 2Search_Activity_search_id
+          type: Eval
+          expression: trim(search_id, "'")
+      search_lt:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The latest time of the search.
+      search_type:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The type of search.
+        calculation:
+          id: 5Search_Activity_search_type
+          type: Eval
+          expression: case(isnotnull(search_type) AND NOT search_type LIKE "case(%",search_type,savedsearch_name LIKE "_ACCELERATE_DM%", "dm_acceleration", search_id LIKE "scheduler%", "scheduled", search_id LIKE "rt%", "realtime", search_id LIKE "subsearch%", "subsearch", (search_id LIKE "SummaryDirector%" OR search_id LIKE "summarize_SummaryDirector%"), "summary_director", 1=1, "adhoc")
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      total_run_time:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The total run time of the search.
+      user:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the user who ran the search.
+        calculation:
+          id: 0Search_Activity_user
+          type: Rex
+          expression: user=(?<user>[^,]+), action
+          input_field: _raw
+      user_bunit:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseEvent
+    - Search_Activity
+  Failed_Jobs:
+    display_name: Failed Jobs
+    kind: event
+    constraints:
+    - info="failed"
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      cim_entity_zone:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      datamodel:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the datamodel (for datamodel acceleration searches).
+        calculation:
+          id: 1Search_Activity_datamodel
+          type: Eval
+          expression: case(match(savedsearch_name, "_ACCELERATE_DM_.*"), replace(savedsearch_name, "_ACCELERATE_DM_(.*)_ACCELERATE_", "\1"), match(search, "'?(\|\s+)?summarize.*?id=DM_"), replace(search, "'?(?:\|\s)?summarize.*?id=DM_([^\s]+).*", "\1"), 1=1, null())
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      info:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The action of the search (granted, completed, cancelled, failed).
+        multivalue: true
+      savedsearch_name:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the saved search.
+        calculation:
+          id: 3Search_Activity_savedsearch_name
+          type: Eval
+          expression: if(savedsearch_name="",null(),savedsearch_name)
+      search:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The SPL search syntax.
+        calculation:
+          id: 4Search_Activity_search
+          type: Eval
+          expression: if(isnull(search) OR search="",null(),search)
+      search_alias:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+        calculation:
+          id: 6Search_Activity_search_alias
+          type: Eval
+          expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())
+      search_et:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The earliest time of the search.
+      search_id:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The ID of the search.
+        calculation:
+          id: 2Search_Activity_search_id
+          type: Eval
+          expression: trim(search_id, "'")
+      search_lt:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The latest time of the search.
+      search_type:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The type of search.
+        calculation:
+          id: 5Search_Activity_search_type
+          type: Eval
+          expression: case(isnotnull(search_type) AND NOT search_type LIKE "case(%",search_type,savedsearch_name LIKE "_ACCELERATE_DM%", "dm_acceleration", search_id LIKE "scheduler%", "scheduled", search_id LIKE "rt%", "realtime", search_id LIKE "subsearch%", "subsearch", (search_id LIKE "SummaryDirector%" OR search_id LIKE "summarize_SummaryDirector%"), "summary_director", 1=1, "adhoc")
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      total_run_time:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The total run time of the search.
+      user:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the user who ran the search.
+        calculation:
+          id: 0Search_Activity_user
+          type: Rex
+          expression: user=(?<user>[^,]+), action
+          input_field: _raw
+      user_bunit:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseEvent
+    - Search_Activity
+  Realtime_Jobs:
+    display_name: Real-time Jobs
+    kind: event
+    constraints:
+    - search_type="realtime"
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      cim_entity_zone:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      datamodel:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the datamodel (for datamodel acceleration searches).
+        calculation:
+          id: 1Search_Activity_datamodel
+          type: Eval
+          expression: case(match(savedsearch_name, "_ACCELERATE_DM_.*"), replace(savedsearch_name, "_ACCELERATE_DM_(.*)_ACCELERATE_", "\1"), match(search, "'?(\|\s+)?summarize.*?id=DM_"), replace(search, "'?(?:\|\s)?summarize.*?id=DM_([^\s]+).*", "\1"), 1=1, null())
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      info:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The action of the search (granted, completed, cancelled, failed).
+        multivalue: true
+      savedsearch_name:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the saved search.
+        calculation:
+          id: 3Search_Activity_savedsearch_name
+          type: Eval
+          expression: if(savedsearch_name="",null(),savedsearch_name)
+      search:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The SPL search syntax.
+        calculation:
+          id: 4Search_Activity_search
+          type: Eval
+          expression: if(isnull(search) OR search="",null(),search)
+      search_alias:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+        calculation:
+          id: 6Search_Activity_search_alias
+          type: Eval
+          expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())
+      search_et:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The earliest time of the search.
+      search_id:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The ID of the search.
+        calculation:
+          id: 2Search_Activity_search_id
+          type: Eval
+          expression: trim(search_id, "'")
+      search_lt:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The latest time of the search.
+      search_type:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The type of search.
+        calculation:
+          id: 5Search_Activity_search_type
+          type: Eval
+          expression: case(isnotnull(search_type) AND NOT search_type LIKE "case(%",search_type,savedsearch_name LIKE "_ACCELERATE_DM%", "dm_acceleration", search_id LIKE "scheduler%", "scheduled", search_id LIKE "rt%", "realtime", search_id LIKE "subsearch%", "subsearch", (search_id LIKE "SummaryDirector%" OR search_id LIKE "summarize_SummaryDirector%"), "summary_director", 1=1, "adhoc")
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      total_run_time:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The total run time of the search.
+      user:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the user who ran the search.
+        calculation:
+          id: 0Search_Activity_user
+          type: Rex
+          expression: user=(?<user>[^,]+), action
+          input_field: _raw
+      user_bunit:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseEvent
+    - Search_Activity
+  Scheduled_Jobs:
+    display_name: Scheduled Jobs
+    kind: event
+    constraints:
+    - search_type="scheduled"
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      cim_entity_zone:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      datamodel:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the datamodel (for datamodel acceleration searches).
+        calculation:
+          id: 1Search_Activity_datamodel
+          type: Eval
+          expression: case(match(savedsearch_name, "_ACCELERATE_DM_.*"), replace(savedsearch_name, "_ACCELERATE_DM_(.*)_ACCELERATE_", "\1"), match(search, "'?(\|\s+)?summarize.*?id=DM_"), replace(search, "'?(?:\|\s)?summarize.*?id=DM_([^\s]+).*", "\1"), 1=1, null())
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      info:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The action of the search (granted, completed, cancelled, failed).
+        multivalue: true
+      savedsearch_name:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the saved search.
+        calculation:
+          id: 3Search_Activity_savedsearch_name
+          type: Eval
+          expression: if(savedsearch_name="",null(),savedsearch_name)
+      search:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The SPL search syntax.
+        calculation:
+          id: 4Search_Activity_search
+          type: Eval
+          expression: if(isnull(search) OR search="",null(),search)
+      search_alias:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+        calculation:
+          id: 6Search_Activity_search_alias
+          type: Eval
+          expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())
+      search_et:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The earliest time of the search.
+      search_id:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The ID of the search.
+        calculation:
+          id: 2Search_Activity_search_id
+          type: Eval
+          expression: trim(search_id, "'")
+      search_lt:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The latest time of the search.
+      search_type:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The type of search.
+        calculation:
+          id: 5Search_Activity_search_type
+          type: Eval
+          expression: case(isnotnull(search_type) AND NOT search_type LIKE "case(%",search_type,savedsearch_name LIKE "_ACCELERATE_DM%", "dm_acceleration", search_id LIKE "scheduler%", "scheduled", search_id LIKE "rt%", "realtime", search_id LIKE "subsearch%", "subsearch", (search_id LIKE "SummaryDirector%" OR search_id LIKE "summarize_SummaryDirector%"), "summary_director", 1=1, "adhoc")
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      total_run_time:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The total run time of the search.
+      user:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the user who ran the search.
+        calculation:
+          id: 0Search_Activity_user
+          type: Rex
+          expression: user=(?<user>[^,]+), action
+          input_field: _raw
+      user_bunit:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseEvent
+    - Search_Activity
+  Subsearch_Jobs:
+    display_name: Subsearch Jobs
+    kind: event
+    constraints:
+    - search_type="subsearch"
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      cim_entity_zone:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      datamodel:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the datamodel (for datamodel acceleration searches).
+        calculation:
+          id: 1Search_Activity_datamodel
+          type: Eval
+          expression: case(match(savedsearch_name, "_ACCELERATE_DM_.*"), replace(savedsearch_name, "_ACCELERATE_DM_(.*)_ACCELERATE_", "\1"), match(search, "'?(\|\s+)?summarize.*?id=DM_"), replace(search, "'?(?:\|\s)?summarize.*?id=DM_([^\s]+).*", "\1"), 1=1, null())
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      info:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The action of the search (granted, completed, cancelled, failed).
+        multivalue: true
+      savedsearch_name:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the saved search.
+        calculation:
+          id: 3Search_Activity_savedsearch_name
+          type: Eval
+          expression: if(savedsearch_name="",null(),savedsearch_name)
+      search:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The SPL search syntax.
+        calculation:
+          id: 4Search_Activity_search
+          type: Eval
+          expression: if(isnull(search) OR search="",null(),search)
+      search_alias:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.
+        calculation:
+          id: 6Search_Activity_search_alias
+          type: Eval
+          expression: case(isnotnull(datamodel) AND search_id LIKE "SummaryDirector%",datamodel." Data Model Summary Director",isnotnull(datamodel),datamodel." Data Model Acceleration",isnotnull(savedsearch_name),savedsearch_name,1=1,null())
+      search_et:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The earliest time of the search.
+      search_id:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The ID of the search.
+        calculation:
+          id: 2Search_Activity_search_id
+          type: Eval
+          expression: trim(search_id, "'")
+      search_lt:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The latest time of the search.
+      search_type:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The type of search.
+        calculation:
+          id: 5Search_Activity_search_type
+          type: Eval
+          expression: case(isnotnull(search_type) AND NOT search_type LIKE "case(%",search_type,savedsearch_name LIKE "_ACCELERATE_DM%", "dm_acceleration", search_id LIKE "scheduler%", "scheduled", search_id LIKE "rt%", "realtime", search_id LIKE "subsearch%", "subsearch", (search_id LIKE "SummaryDirector%" OR search_id LIKE "summarize_SummaryDirector%"), "summary_director", 1=1, "adhoc")
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Search_Activity
+      total_run_time:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The total run time of the search.
+      user:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: The name of the user who ran the search.
+        calculation:
+          id: 0Search_Activity_user
+          type: Rex
+          expression: user=(?<user>[^,]+), action
+          input_field: _raw
+      user_bunit:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        defined_in: Search_Activity
+        inherited_from: Search_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseEvent
+    - Search_Activity
+  Scheduler_Activity:
+    display_name: Scheduler Activity
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: timestamp
+        description: The event timestamp expressed in Unix time.
+      app:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The app context in which the scheduled search was run.
+      cim_entity_zone:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The host on which the scheduled search was run.
+      savedsearch_name:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The name of the saved search.
+      sid:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The search id.
+      source:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The source associated with the scheduled search.
+      sourcetype:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The source type associated with the scheduled search.
+      splunk_server:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The Splunk Server on which the scheduled search runs.
+      status:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The status of the scheduled search.
+      user:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: The user who scheduled the search.
+      user_bunit:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: declared
+        defined_in: Scheduler_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+    inherits:
+    - BaseSearch
+    search: index=_internal sourcetype=scheduler
+  View_Activity:
+    display_name: View Activity
+    kind: event
+    constraints:
+    - index=_internal sourcetype=splunk_web_access method=GET status=200
+    fields:
+      _time:
+        source: base
+        defined_in: BaseEvent
+      app:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: The app name which contains the view.
+        required: true
+      cim_entity_zone:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: base
+        defined_in: BaseEvent
+      source:
+        source: base
+        defined_in: BaseEvent
+      sourcetype:
+        source: base
+        defined_in: BaseEvent
+      spent:
+        source: declared
+        defined_in: View_Activity
+        type: number
+        description: The amount of time spent loading the view (in milliseconds).
+      uri:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: The uniform resource identifier of the view activity.
+      user:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: The username of the user who accessed the view.
+      user_bunit:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      view:
+        source: declared
+        defined_in: View_Activity
+        type: string
+        description: The name of the view.
+        required: true
+    inherits:
+    - BaseEvent
+  Web_Service_Errors:
+    display_name: Web Service Errors
+    kind: search
+    fields:
+      _time:
+        source: declared
+        defined_in: Web_Service_Errors
+        type: timestamp
+        description: The event timestamp expressed in Unix time.
+      cim_entity_zone:
+        source: declared
+        defined_in: Web_Service_Errors
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: declared
+        defined_in: Web_Service_Errors
+        type: string
+        description: The host on which the web service error occurred.
+      source:
+        source: declared
+        defined_in: Web_Service_Errors
+        type: string
+        description: The source where the web service error occurred.
+      sourcetype:
+        source: declared
+        defined_in: Web_Service_Errors
+        type: string
+        description: The source type associated with the web service error.
+    inherits:
+    - BaseSearch
+    search: index=_internal sourcetype=splunk_web_service tag=error
+  Modular_Actions:
+    display_name: Modular Actions
+    kind: event
+    tags:
+    - modaction
+    constraints:
+    - tag=modaction
+    fields:
+      _time:
+        source: base
+        defined_in: BaseEvent
+      action_mode:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: Specifies whether the action was executed as an ad hoc action or from a saved search, based on whether a search_name exists.
+        expected_values:
+        - saved
+        - adhoc
+      action_name:
+        source: calculated
+        defined_in: Modular_Actions
+        type: string
+        description: The name of the action.
+        calculation:
+          id: Modular_Actions_fillnull_action_name
+          type: Eval
+          expression: case(isnotnull(action_name) AND action_name!="",action_name,sourcetype="splunkd" AND isnotnull(action) AND action!="",action,1=1,"unknown")
+      action_status:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: The status of the action. For example, 'success' or 'failure'.
+      app:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: The app ID of the app or add-on that owns the action.
+      cim_entity_zone:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      component:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: The component of the modular action script involved in the event. Often used in conjunction with duration.
+      duration:
+        source: declared
+        defined_in: Modular_Actions
+        type: number
+        description: How long the action took to complete, in milliseconds.
+      host:
+        source: base
+        defined_in: BaseEvent
+      orig_rid:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: The rid value of a source action result, automatically added to an event if it is the product of a previously executed action.
+      orig_sid:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: The original sid value of a source action, automatically added to an event if it is the product of a previously executed action.
+      rid:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: The id associated with the result of a specific sid. By default, this is the row number of the search, starting with 0.
+      search_name:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: The name of the correlation search that triggered the action. Blank for ad hoc actions.
+      sid:
+        source: calculated
+        defined_in: Modular_Actions
+        type: string
+        description: The search id, automatically assigned by splunkd.
+        calculation:
+          id: Modular_Actions_fillnull_sid
+          type: Eval
+          expression: if(isnull(sid) OR sid="","unknown",sid)
+      signature:
+        source: calculated
+        defined_in: Modular_Actions
+        type: string
+        description: The logging string associated with alert action introspection events.
+        calculation:
+          id: Modular_Actions_fillnull_signature
+          type: Eval
+          expression: if(isnull(signature) OR signature="","unknown",signature)
+      source:
+        source: base
+        defined_in: BaseEvent
+      sourcetype:
+        source: base
+        defined_in: BaseEvent
+      user:
+        source: calculated
+        defined_in: Modular_Actions
+        type: string
+        description: The user who triggered an ad hoc alert. Not relevant for actions triggered by searches.
+        calculation:
+          id: Modular_Actions_user_or_owner
+          type: Eval
+          expression: if(isnotnull(user) AND user!="",user,owner)
+      user_bunit:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: declared
+        defined_in: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      worker:
+        source: calculated
+        defined_in: Modular_Actions
+        type: string
+        description: The worker performing the action.
+        calculation:
+          id: Modular_Actions_worker
+          type: Eval
+          expression: if(isnotnull(worker) AND worker!="","unknown",worker)
+    inherits:
+    - BaseEvent
+    children:
+    - Modular_Action_Invocations
+  Modular_Action_Invocations:
+    display_name: Modular Action Invocations
+    kind: event
+    tags:
+    - modaction
+    - invocation
+    constraints:
+    - tag=invocation
+    fields:
+      _time:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Modular_Actions
+      action_mode:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: Specifies whether the action was executed as an ad hoc action or from a saved search, based on whether a search_name exists.
+        expected_values:
+        - saved
+        - adhoc
+      action_name:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The name of the action.
+        calculation:
+          id: Modular_Actions_fillnull_action_name
+          type: Eval
+          expression: case(isnotnull(action_name) AND action_name!="",action_name,sourcetype="splunkd" AND isnotnull(action) AND action!="",action,1=1,"unknown")
+      action_status:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The status of the action. For example, 'success' or 'failure'.
+      app:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The app ID of the app or add-on that owns the action.
+      cim_entity_zone:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      component:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The component of the modular action script involved in the event. Often used in conjunction with duration.
+      duration:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: number
+        description: How long the action took to complete, in milliseconds.
+      host:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Modular_Actions
+      orig_rid:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The rid value of a source action result, automatically added to an event if it is the product of a previously executed action.
+      orig_sid:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The original sid value of a source action, automatically added to an event if it is the product of a previously executed action.
+      rid:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The id associated with the result of a specific sid. By default, this is the row number of the search, starting with 0.
+      search_name:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The name of the correlation search that triggered the action. Blank for ad hoc actions.
+      sid:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The search id, automatically assigned by splunkd.
+        calculation:
+          id: Modular_Actions_fillnull_sid
+          type: Eval
+          expression: if(isnull(sid) OR sid="","unknown",sid)
+      signature:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The logging string associated with alert action introspection events.
+        calculation:
+          id: Modular_Actions_fillnull_signature
+          type: Eval
+          expression: if(isnull(signature) OR signature="","unknown",signature)
+      source:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Modular_Actions
+      sourcetype:
+        source: inherited
+        defined_in: BaseEvent
+        inherited_from: Modular_Actions
+      user:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The user who triggered an ad hoc alert. Not relevant for actions triggered by searches.
+        calculation:
+          id: Modular_Actions_user_or_owner
+          type: Eval
+          expression: if(isnotnull(user) AND user!="",user,owner)
+      user_bunit:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      worker:
+        source: inherited
+        defined_in: Modular_Actions
+        inherited_from: Modular_Actions
+        type: string
+        description: The worker performing the action.
+        calculation:
+          id: Modular_Actions_worker
+          type: Eval
+          expression: if(isnotnull(worker) AND worker!="","unknown",worker)
+    inherits:
+    - BaseEvent
+    - Modular_Actions

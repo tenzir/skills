@@ -1,0 +1,8 @@
+name: filter_score
+used_by:
+- model: Email
+  dataset: Filtering
+  kind: event
+  source: declared
+  type: number
+  description: Numeric indicator assigned to specific emails by an email filter.

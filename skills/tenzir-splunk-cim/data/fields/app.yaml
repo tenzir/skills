@@ -1,0 +1,88 @@
+name: app
+lookups:
+- name: splunk_actions
+  file: data/lookups/splunk_actions.yaml
+- name: splunk_src
+  file: data/lookups/splunk_src.yaml
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: calculated
+  type: string
+  description: 'The system, service, or application that generated the alert event. Examples include, but are not limited to the following: GuardDuty, SecurityCenter, 3rd party services, win:app:trendmicro, vmware, nagios.'
+  recommended: true
+  calculation:
+    id: Alerts_fillnull_app
+    type: Eval
+    expression: if(isnull(app) OR app="",sourcetype,app)
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: calculated
+  type: string
+  description: The application involved in the event, such as ssh, splunk, win:local.
+  recommended: true
+  calculation:
+    id: Authentication_fillnull_app
+    type: Eval
+    expression: if(isnull(app) OR app="",sourcetype,app)
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: calculated
+  type: string
+  description: The system, service, or application that generated the data access event. Examples include Onedrive, Sharepoint, drive, AzureActiveDirectory.
+  recommended: true
+  calculation:
+    id: Data_Access_fillnull_app
+    type: Eval
+    expression: if(isnull(app) OR app="",sourcetype,app)
+- model: DLP
+  dataset: DLP_Incidents
+  kind: event
+  source: declared
+  type: string
+  description: The application involved in the event.
+- model: Network_Traffic
+  dataset: All_Traffic
+  kind: event
+  source: declared
+  type: string
+  description: The application protocol of the traffic.
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  kind: search
+  source: declared
+  type: string
+  description: The application context in which the data model summary was accessed.
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  kind: event
+  source: declared
+  type: string
+  description: The app ID of the app or add-on that owns the action.
+- model: Splunk_Audit
+  dataset: Scheduler_Activity
+  kind: search
+  source: declared
+  type: string
+  description: The app context in which the scheduled search was run.
+- model: Splunk_Audit
+  dataset: View_Activity
+  kind: event
+  source: declared
+  type: string
+  description: The app name which contains the view.
+  required: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Authentication
+  kind: search
+  source: declared
+  type: string
+- model: Web
+  dataset: Web
+  kind: event
+  source: declared
+  type: string
+  description: The application detected or hosted by the server/site such as wordpress, splunk, or facebook.

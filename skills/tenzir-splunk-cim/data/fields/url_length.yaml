@@ -1,0 +1,12 @@
+name: url_length
+used_by:
+- model: Web
+  dataset: Web
+  kind: event
+  source: calculated
+  type: number
+  description: The length of the URL.
+  calculation:
+    id: 2Web_url_length
+    type: Eval
+    expression: len(url)

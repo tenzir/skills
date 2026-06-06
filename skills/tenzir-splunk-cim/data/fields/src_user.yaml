@@ -1,0 +1,75 @@
+name: src_user
+used_by:
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: calculated
+  type: string
+  description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
+  recommended: true
+  calculation:
+    id: Authentication_fillnull_src_user
+    type: Eval
+    expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+- model: Change
+  dataset: Account_Management
+  kind: event
+  source: calculated
+  type: string
+  description: For account changes, the user or entity performing the change.
+  recommended: true
+  calculation:
+    id: Account_Management_fillnull_src_user
+    type: Eval
+    expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+- model: Change_Analysis
+  dataset: Account_Management
+  kind: event
+  source: calculated
+  type: string
+  description: For account changes, the user or entity performing the change.
+  recommended: true
+  calculation:
+    id: Account_Management_fillnull_src_user
+    type: Eval
+    expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+- model: DLP
+  dataset: DLP_Incidents
+  kind: event
+  source: calculated
+  type: string
+  description: The source user of the DLP event.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_src_user
+    type: Eval
+    expression: if(isnull(src_user) OR user="","unknown",src_user)
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: calculated
+  type: string
+  description: The email address of the message sender.
+  recommended: true
+  calculation:
+    id: 0Email_fillnull_src_user
+    type: Eval
+    expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+- model: Malware
+  dataset: Malware_Attacks
+  kind: event
+  source: declared
+  type: string
+  description: The reported sender of an email-based attack.
+  multivalue: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_All_Email
+  kind: search
+  source: declared
+  type: string
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  kind: event
+  source: declared
+  type: string
+  description: The user or entity that created or triggered the service request, if applicable.

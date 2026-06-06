@@ -1,0 +1,14 @@
+name: thruput
+used_by:
+- model: Performance
+  dataset: Network
+  kind: event
+  source: declared
+  type: string
+  description: The current throughput reported by the service, in bytes.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Network
+  kind: search
+  source: declared
+  type: number

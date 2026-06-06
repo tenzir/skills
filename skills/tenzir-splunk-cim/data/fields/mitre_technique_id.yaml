@@ -1,0 +1,9 @@
+name: mitre_technique_id
+used_by:
+- model: Alerts
+  dataset: Alerts
+  kind: event
+  source: declared
+  type: string
+  description: The MITRE ATT&CK technique ID of the alert event, searchable at https://attack.mitre.org/techniques
+  multivalue: true

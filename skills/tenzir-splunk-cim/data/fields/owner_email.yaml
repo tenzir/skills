@@ -1,0 +1,8 @@
+name: owner_email
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: Email of the resource owner.

@@ -1,0 +1,14 @@
+name: src_user_domain
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: calculated
+  type: string
+  description: The domain name contained within the email address of the message sender.
+  recommended: true
+  calculation:
+    id: 1Email_src_user_domain
+    type: Rex
+    expression: ^.*@(?<src_user_domain>.+)$
+    input_field: src_user

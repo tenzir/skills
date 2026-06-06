@@ -1,0 +1,11 @@
+name: session_status
+used_by:
+- model: Databases
+  dataset: Session_Info
+  kind: event
+  source: declared
+  type: string
+  description: The current status of the session.
+  expected_values:
+  - Online
+  - Offline

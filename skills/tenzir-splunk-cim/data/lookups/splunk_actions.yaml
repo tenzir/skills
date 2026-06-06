@@ -1,0 +1,24 @@
+name: splunk_actions
+columns:
+- vendor_action
+- action
+- app
+rows:
+- vendor_action: add
+  action: created
+  app: ''
+- vendor_action: delete
+  action: deleted
+  app: ''
+- vendor_action: update
+  action: modified
+  app: ''
+- vendor_action: failed
+  action: failure
+  app: splunk
+- vendor_action: succeeded
+  action: success
+  app: splunk
+transforms:
+- name: splunk_action_lookup
+  filename: splunk_actions.csv

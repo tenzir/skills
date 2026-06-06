@@ -1,0 +1,8 @@
+name: rid
+used_by:
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  kind: event
+  source: declared
+  type: string
+  description: The id associated with the result of a specific sid. By default, this is the row number of the search, starting with 0.

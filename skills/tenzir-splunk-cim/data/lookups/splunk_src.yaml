@@ -1,0 +1,10 @@
+name: splunk_src
+columns:
+- app
+- src
+rows:
+- app: splunk
+  src: unspecified
+transforms:
+- name: splunk_src_lookup
+  filename: splunk_src.csv

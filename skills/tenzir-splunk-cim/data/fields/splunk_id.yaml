@@ -1,0 +1,8 @@
+name: splunk_id
+used_by:
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  kind: event
+  source: declared
+  type: string
+  description: The unique identifier of the service request as it pertains to Splunk. For example, 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@0533eff241db0d892509be46cd3126e30e0f6046.

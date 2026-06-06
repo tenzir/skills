@@ -1,0 +1,14 @@
+name: src_user_type
+used_by:
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: declared
+  type: string
+  description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
+- model: Change
+  dataset: Account_Management
+  kind: event
+  source: declared
+  type: string
+  description: For account management events, this should represent the type of the user changed by the request.

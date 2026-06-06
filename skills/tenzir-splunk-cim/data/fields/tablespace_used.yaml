@@ -1,0 +1,8 @@
+name: tablespace_used
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  kind: event
+  source: declared
+  type: string
+  description: The total amount of tablespace used for the database instance, in bytes.

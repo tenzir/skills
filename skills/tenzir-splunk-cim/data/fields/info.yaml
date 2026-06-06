@@ -1,0 +1,9 @@
+name: info
+used_by:
+- model: Splunk_Audit
+  dataset: Search_Activity
+  kind: event
+  source: declared
+  type: string
+  description: The action of the search (granted, completed, cancelled, failed).
+  multivalue: true

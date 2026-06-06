@@ -1,0 +1,8 @@
+name: lock_session_id
+used_by:
+- model: Databases
+  dataset: Lock_Info
+  kind: event
+  source: declared
+  type: string
+  description: The session identifier of the locked object.

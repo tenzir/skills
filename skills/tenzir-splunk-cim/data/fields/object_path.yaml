@@ -1,0 +1,51 @@
+name: object_path
+used_by:
+- model: Change
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object_path
+    type: Eval
+    expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+- model: Change_Analysis
+  dataset: All_Changes
+  kind: event
+  source: calculated
+  type: string
+  description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object_path
+    type: Eval
+    expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+- model: DLP
+  dataset: DLP_Incidents
+  kind: event
+  source: calculated
+  type: string
+  description: The path of the affected object.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_object_path
+    type: Eval
+    expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Endpoint_Changes
+  kind: search
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  kind: search
+  source: declared
+  type: string

@@ -1,0 +1,8 @@
+name: return_addr
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The return address for the message.

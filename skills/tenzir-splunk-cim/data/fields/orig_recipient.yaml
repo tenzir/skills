@@ -1,0 +1,9 @@
+name: orig_recipient
+used_by:
+- model: Email
+  dataset: All_Email
+  kind: event
+  source: declared
+  type: string
+  description: The original recipient of the message. The message recipient can change when the original email address is an alias and has to be resolved to the actual recipient.
+  multivalue: true

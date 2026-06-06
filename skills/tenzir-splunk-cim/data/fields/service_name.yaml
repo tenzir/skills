@@ -1,0 +1,13 @@
+name: service_name
+used_by:
+- model: Endpoint
+  dataset: Services
+  kind: search
+  source: calculated
+  type: string
+  description: The friendly service name.
+  recommended: true
+  calculation:
+    id: Endpoint_Services_fillnull_service_name
+    type: Eval
+    expression: if(isnull(service_name) OR service_name="","unknown",service_name)

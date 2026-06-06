@@ -1,0 +1,9 @@
+name: authentication_method
+used_by:
+- model: Authentication
+  dataset: Authentication
+  kind: event
+  source: declared
+  type: string
+  description: The method used to authenticate the request such as SAML, FIDO, or MFA.
+  multivalue: true

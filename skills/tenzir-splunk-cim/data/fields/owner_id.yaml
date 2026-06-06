@@ -1,0 +1,8 @@
+name: owner_id
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  kind: event
+  source: declared
+  type: string
+  description: ID of the owner as defined by the vendor.

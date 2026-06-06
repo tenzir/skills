@@ -1,0 +1,12 @@
+name: worker
+used_by:
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  kind: event
+  source: calculated
+  type: string
+  description: The worker performing the action.
+  calculation:
+    id: Modular_Actions_worker
+    type: Eval
+    expression: if(isnotnull(worker) AND worker!="","unknown",worker)

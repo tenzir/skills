@@ -1,0 +1,8 @@
+name: processes
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  kind: event
+  source: declared
+  type: number
+  description: The number of processes currently running for the database instance.

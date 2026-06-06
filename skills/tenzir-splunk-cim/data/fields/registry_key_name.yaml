@@ -1,0 +1,13 @@
+name: registry_key_name
+used_by:
+- model: Endpoint
+  dataset: Registry
+  kind: search
+  source: calculated
+  type: string
+  description: The name of the registry key, such as PrinterDriverData.
+  recommended: true
+  calculation:
+    id: Endpoint_Registry_fillnull_registry_key_name
+    type: Eval
+    expression: if(isnull(registry_key_name) OR registry_key_name="","unknown",registry_key_name)

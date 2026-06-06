@@ -1,0 +1,13 @@
+name: registry_path
+used_by:
+- model: Endpoint
+  dataset: Registry
+  kind: search
+  source: calculated
+  type: string
+  description: The path to the registry value, such as \win\directory\directory2\{676235CD-B656-42D5-B737-49856E97D072}\PrinterDriverData.
+  recommended: true
+  calculation:
+    id: Endpoint_Registry_fillnull_registry_path
+    type: Eval
+    expression: if(isnull(registry_path) OR registry_path="","unknown",registry_path)
