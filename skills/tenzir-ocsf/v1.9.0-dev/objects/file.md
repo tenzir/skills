@@ -81,6 +81,13 @@ The user that created the file.
 
 The description of the file, as returned by file system. For example: the description as returned by the Unix file command or the Windows file type.
 
+### `download_info`
+
+- **Type**: [`download_info`](download_info.md)
+- **Requirement**: optional
+
+Information pertaining to a downloaded file.
+
 ### `drive_type`
 
 - **Type**: `string_t`

@@ -19,3 +19,11 @@ The name of the entity.
 - **Requirement**: recommended
 
 The unique identifier of the entity.
+
+### `uid_numeric`
+
+- **Type**: `long_t`
+- **Requirement**: optional
+
+The `uid` attribute in numeric form where applicable.
+Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.

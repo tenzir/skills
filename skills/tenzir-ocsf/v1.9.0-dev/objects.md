@@ -212,6 +212,7 @@
 - [Additional Restriction](objects/additional_restriction.md)
 - [Advisory](objects/advisory.md)
 - [AI Model](objects/ai_model.md)
+- [Download Info](objects/download_info.md)
 - [GPU Information](objects/gpu_info.md)
 - [IAM Role](objects/iam_role.md)
 - [Job Action](objects/job_action.md)

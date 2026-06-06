@@ -53,6 +53,37 @@ HTTP Activity events report HTTP connection and traffic information.
 - `7`: `Put` - The PUT method replaces all current representations of the target resource with the request payload.
 - `8`: `Trace` - The TRACE method performs a message loop-back test along the path to the target resource.
 - `9`: `Patch` - The PATCH method applies partial modifications to a resource.
+- `10`: `ACL` - The ACL method modifies the access control list of the specified resource.
+- `11`: `Baseline Control` - The BASELINE-CONTROL method places the specified collection resource under baseline control.
+- `12`: `Bind` - The BIND method adds a binding to the specified collection resource.
+- `13`: `Check In` - The CHECKIN method creates a new version from a checked-out version-controlled resource.
+- `14`: `Check Out` - The CHECKOUT method prepares a version-controlled resource for modification.
+- `15`: `Copy` - The COPY method duplicates the specified resource.
+- `16`: `Label` - The LABEL method adds, sets, or removes labels on a version-controlled resource.
+- `17`: `Link` - The LINK method establishes one or more links between resources.
+- `18`: `Lock` - The LOCK method acquires or refreshes a lock on the specified resource.
+- `19`: `Merge` - The MERGE method merges changes from another resource into the specified resource.
+- `20`: `Make Activity` - The MKACTIVITY method creates a new activity resource.
+- `21`: `Make Calendar` - The MKCALENDAR method creates a new calendar collection resource.
+- `22`: `Make Collection` - The MKCOL method creates a new collection resource.
+- `23`: `Make Redirect Reference` - The MKREDIRECTREF method creates a new redirect reference resource.
+- `24`: `Make Workspace` - The MKWORKSPACE method creates a new workspace resource.
+- `25`: `Move` - The MOVE method atomically duplicates and deletes the specified resource.
+- `26`: `Order Patch` - The ORDERPATCH method changes the ordering of members in an ordered collection.
+- `27`: `PRI` - The PRI method appears in the HTTP/2 connection preface to confirm the protocol.
+- `28`: `Property Find` - The PROPFIND method retrieves properties defined on the specified resource.
+- `29`: `Property Patch` - The PROPPATCH method sets and/or removes properties defined on the specified resource.
+- `30`: `Query` - The QUERY method performs a safe query request that can include a request body.
+- `31`: `Rebind` - The REBIND method moves a binding from one collection to another.
+- `32`: `Report` - The REPORT method retrieves a report about the specified resource.
+- `33`: `Search` - The SEARCH method searches a resource or collection using the request payload.
+- `34`: `Unbind` - The UNBIND method removes a binding from the specified collection resource.
+- `35`: `Un-Check Out` - The UNCHECKOUT method cancels a checkout and restores the resource to its previous state.
+- `36`: `Unlink` - The UNLINK method removes one or more links between resources.
+- `37`: `Unlock` - The UNLOCK method releases a lock on the specified resource.
+- `38`: `Update` - The UPDATE method updates a version-controlled resource to match a specified version.
+- `39`: `Update Redirect Reference` - The UPDATEREDIRECTREF method changes the target of a redirect reference resource.
+- `40`: `Version Control` - The VERSION-CONTROL method places the specified resource under version control.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
