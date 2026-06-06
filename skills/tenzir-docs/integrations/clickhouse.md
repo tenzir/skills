@@ -52,7 +52,7 @@ To get started with ClickHouse, follow the [official quick start guide](https://
 
 You can now connect to ClickHouse at `localhost:9000` (native protocol) or `localhost:8123` (HTTP interface).
 
-## Usage Examples
+## Examples
 
 These examples assume that the ClickHouse server is running on the same host as Tenzir and that it allows non-TLS connections (hence using `tls=false` in the pipelines).
 

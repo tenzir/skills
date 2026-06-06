@@ -63,7 +63,7 @@ Live mode initializes the watermark from the current maximum tracking value and 
 
 The integer column to use for watermark tracking in live mode. The operator queries for rows where this column exceeds the last-seen watermark.
 
-When omitted, the operator detects a suitable column from the table metadata. It prefers a single integer identity column and falls back to a single integer primary-key column. Requires `live=true`.
+When omitted, the operator detects a suitable column from the table metadata. It uses a single integer identity column. Set `tracking_column` explicitly for tables that use a different monotonic integer column. Requires `live=true`.
 
 ### `host = string (optional)`
 

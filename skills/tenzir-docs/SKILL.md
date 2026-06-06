@@ -671,7 +671,7 @@ Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and ot
 
 ##### [Microsoft SQL Server](integrations/microsoft/sql-server.md)
 
-This guide shows you how to read events from Microsoft SQL Server and Azure SQL Databases with Tenzir.
+Microsoft SQL Server is a relational database management system. Tenzir can read events from SQL Server and Azure SQL Database.
 
 ##### [Sentinel & Log Analytics](integrations/microsoft/sentinel-log-analytics.md)
 
