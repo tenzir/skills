@@ -17,7 +17,7 @@ The IP address to encrypt.
 
 ### `seed = string (optional)`
 
-A 64-byte seed that describes a hexadecimal value. When the seed is shorter than 64 bytes, the function appends zeros to match the size; when it is longer, it truncates the seed.
+A 64-character seed that describes a hexadecimal value. When the seed is shorter than 64 characters, the function appends zeros to match the size; when it is longer, it truncates the seed.
 
 ## Examples
 
@@ -41,4 +41,5 @@ from {
 ## See Also
 
 * [`community_id`](/reference/functions/community_id.md)
+* [`decrypt_cryptopan`](/reference/functions/decrypt_cryptopan.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

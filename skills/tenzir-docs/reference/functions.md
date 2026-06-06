@@ -616,6 +616,14 @@ Decapsulates packet data at link, network, and transport layer.
 decapsulate(this)
 ```
 
+### [decrypt\_cryptopan](functions/decrypt_cryptopan.md)
+
+Decrypts an IP address via Crypto-PAn.
+
+```tql
+decrypt_cryptopan(1.2.3.4)
+```
+
 ### [encrypt\_cryptopan](functions/encrypt_cryptopan.md)
 
 Encrypts an IP address via Crypto-PAn.

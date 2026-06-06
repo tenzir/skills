@@ -99,6 +99,7 @@
 
 - [community_id](functions/community_id.md): Computes the Community ID for a network connection/flow.
 - [decapsulate](functions/decapsulate.md): Decapsulates packet data at link, network, and transport layer.
+- [decrypt_cryptopan](functions/decrypt_cryptopan.md): Decrypts an IP address via Crypto-PAn.
 - [encrypt_cryptopan](functions/encrypt_cryptopan.md): Encrypts an IP address via Crypto-PAn.
 
 ## OCSF
