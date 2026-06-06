@@ -769,6 +769,10 @@ Splunk is a SIEM solution for storing and processing logs. Tenzir can send data 
 
 OpenText ArcSight is a SIEM and log management ecosystem. Tenzir integrates with ArcSight through open interfaces such as CEF, Syslog, Kafka, and the ArcSight Logger REST API.
 
+#### [CrowdStrike](integrations/crowdstrike.md)
+
+This page shows you how to send events from Tenzir to CrowdStrike Falcon Next-Gen SIEM and collect CrowdStrike Falcon Data Replicator (FDR) events into Tenzir through Amazon SQS and Amazon S3.
+
 #### [Graylog](integrations/graylog.md)
 
 Graylog is a log management and SIEM platform that routes messages through inputs, streams, processing pipelines, index sets, destinations, and outputs. Tenzir can receive GELF streams from Graylog, send GELF into Graylog inputs, and access the OpenSearch or Elasticsearch search backend when you need backend-level queries.
