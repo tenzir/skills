@@ -873,6 +873,14 @@ def render_entity_type_guidance(
         "`metadata.entity_type` / `metadata.entityType` to the matching",
         "`EntityMetadata.EntityType` value.",
         "",
+        "The entity types below are values for the Entity object's",
+        "`metadata.entity_type` / `metadata.entityType`. In an",
+        "`entities.import` request, the surrounding `inlineSource.logType` is",
+        "separate: it names the source log type for the context data, for",
+        "example `AZURE_AD_CONTEXT`, not a UDM entity type such as `USER` or",
+        "`ASSET`. See Google's `entities.import` reference:",
+        "https://docs.cloud.google.com/chronicle/docs/reference/rest/v1beta/projects.locations.instances.entities/import",
+        "",
     ]
     for entity in sorted(entity_guidance, key=lambda item: item.entity_type):
         lines.extend([f"### `{entity.entity_type}`", ""])
