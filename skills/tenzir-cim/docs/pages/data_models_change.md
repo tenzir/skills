@@ -34,15 +34,10 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | All_Changes | change |
-
 | \|____ Auditing_Changes | audit |
-
 | \|____ Endpoint_Changes | endpoint |
-
 | \|____ Network_Changes | network |
-
 | \|____ Account_Management | account |
-
 | \|____ Instance_Changes | instance |
 
 The Endpoint_Changes dataset includes events associated with the administrative changes for configurations, policies, and so on of EDR systems.
@@ -62,70 +57,34 @@ For even more examples, see Change Field Mapping .
 
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
-
--
--
--
-
-| All_Changes | ` action ` | string | The action attempted on the resource, regardless of success or failure. | recommended required for pytest-splunk-addon prescribed values: ` acl_modified ` , ` cleared ` , ` created ` , ` deleted ` , ` modified ` , ` stopped ` , ` lockout ` , ` read ` , ` logoff ` , ` updated ` , ` started ` , ` restarted ` , ` unlocked ` |
-
--
--
-- | All_Changes | ` change_type ` | string | The type of change, such as ` filesystem ` or ` AAA ` (authentication, authorization, and accounting). | recommended required for pytest-splunk-addon prescribed values: NA |
-
--
-- | All_Changes | ` command ` | string | The command that initiated the change. | recommended required for pytest-splunk-addon |
-
--
-- | All_Changes | ` dest ` | string | The resource where change occurred. You can alias this from more specific fields not included in this data model, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | recommended required for pytest-splunk-addon |
+| All_Changes | ` action ` | string | The action attempted on the resource, regardless of success or failure. | - recommended - required for pytest-splunk-addon - prescribed values: ` acl_modified ` , ` cleared ` , ` created ` , ` deleted ` , ` modified ` , ` stopped ` , ` lockout ` , ` read ` , ` logoff ` , ` updated ` , ` started ` , ` restarted ` , ` unlocked ` |
+| All_Changes | ` change_type ` | string | The type of change, such as ` filesystem ` or ` AAA ` (authentication, authorization, and accounting). | - recommended - required for pytest-splunk-addon - prescribed values: NA |
+| All_Changes | ` command ` | string | The command that initiated the change. | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` dest ` | string | The resource where change occurred. You can alias this from more specific fields not included in this data model, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | - recommended - required for pytest-splunk-addon |
 | All_Changes | ` dest_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | All_Changes | ` dest_category ` | string |
 | All_Changes | ` dest_priority ` | string |
-
--
-- | All_Changes | ` dvc ` | string | The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields not included in this data model, such as ` dvc_host ` , ` dvc_ip ` , or ` dvc_name ` . | recommended required for pytest-splunk-addon |
-
--
-- | All_Changes | ` image_id ` | string | For create instance events, this field represents the image ID used for creating the instance such as the OS, applications, installed libraries, and so on. | recommended required for pytest-splunk-addon |
-
--
-- | All_Changes | ` object ` | string | Name of the affected object on the resource (such as a router interface, user account, or server volume). | recommended required for pytest-splunk-addon |
-
--
-- | All_Changes | ` object_attrs ` | string | The object's attributes and their values. The attributes and values can be those that are updated on a resource object, or those that are not updated but are essential attributes. | recommended required for pytest-splunk-addon |
-
--
-- | All_Changes | ` object_category ` | string | Generic name for the class of the updated resource object. Expected values may be specific to an app, for example: registry, directory, file, group, user, bucket, instance. | recommended required for pytest-splunk-addon |
-
--
-- | All_Changes | ` object_id ` | string | The unique updated resource object ID as presented to the system, if applicable (for instance, a SID, UUID, or GUID value). | recommended required for pytest-splunk-addon |
-
--
-- | All_Changes | ` object_path ` | string | The path of the modified resource object, if applicable (such as a file, directory, or volume). | recommended required for pytest-splunk-addon |
-
-- | All_Changes | ` result ` | string | The vendor-specific result of a change, or clarification of an action status. For instance, status=failure may be accompanied by result=blocked by policy or result=disk full. | recommended |
+| All_Changes | ` dvc ` | string | The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields not included in this data model, such as ` dvc_host ` , ` dvc_ip ` , or ` dvc_name ` . | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` image_id ` | string | For create instance events, this field represents the image ID used for creating the instance such as the OS, applications, installed libraries, and so on. | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` object ` | string | Name of the affected object on the resource (such as a router interface, user account, or server volume). | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` object_attrs ` | string | The object's attributes and their values. The attributes and values can be those that are updated on a resource object, or those that are not updated but are essential attributes. | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` object_category ` | string | Generic name for the class of the updated resource object. Expected values may be specific to an app, for example: registry, directory, file, group, user, bucket, instance. | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` object_id ` | string | The unique updated resource object ID as presented to the system, if applicable (for instance, a SID, UUID, or GUID value). | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` object_path ` | string | The path of the modified resource object, if applicable (such as a file, directory, or volume). | - recommended - required for pytest-splunk-addon |
+| All_Changes | ` result ` | string | The vendor-specific result of a change, or clarification of an action status. For instance, status=failure may be accompanied by result=blocked by policy or result=disk full. | - recommended |
 | All_Changes | ` result_id ` | string | A result indicator for an ` action ` status. | recommended |
 | All_Changes | ` src ` | string | The resource where the change was originated. You can alias this from more specific fields not included in the data model, such as ` src_host ` , ` src_ip ` , or ` src_name ` . | recommended |
 | All_Changes | ` src_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | All_Changes | ` src_category ` | string |
 | All_Changes | ` src_priority ` | string |
-
--
--
--
-
-| All_Changes | ` status ` | string | Status of the update. | recommended required for pytest-splunk-addon prescribed values: ` success ` , ` failure ` |
+| All_Changes | ` status ` | string | Status of the update. | - recommended - required for pytest-splunk-addon - prescribed values: ` success ` , ` failure ` |
 | All_Changes | ` tag ` | string | This automatically generated field is used to access tags from within datamodels. Do not define extractions for this field when writing add-ons. |  |
-
--
-- | All_Changes | ` user ` | string | The user or entity performing the change. For account changes, this is the account that was changed. See ` src_user ` for user or entity performing the change. | recommended required for pytest-splunk-addon |
+| All_Changes | ` user ` | string | The user or entity performing the change. For account changes, this is the account that was changed. See ` src_user ` for user or entity performing the change. | - recommended - required for pytest-splunk-addon |
 | All_Changes | ` user_agent ` | string | The user agent through which the request was made, such as ` Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) ` or ` aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4 ` . |  |
 | All_Changes | ` user_name ` | string | The user name of the user or entity performing the change. For account changes, this is the account that was changed (see ` src_user_name ` ). | recommended |
 | All_Changes | ` user_type ` | string | The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request. |  |
 | All_Changes | ` vendor_account ` | string | The account that manages the user that initiated the request. The account represents the organization, or a Cloud customer or a Cloud account. |  |
-
--
-- | All_Changes | ` vendor_product ` | string | The vendor and product or service that detected the change. This field can be automatically populated by ` vendor ` and ` product ` fields in your data. | recommended required for pytest-splunk-addon |
+| All_Changes | ` vendor_product ` | string | The vendor and product or service that detected the change. This field can be automatically populated by ` vendor ` and ` product ` fields in your data. | - recommended - required for pytest-splunk-addon |
 | All_Changes | ` vendor_region ` | string | The data center region where the change occurred, such as us-west-2. |  |
 | Account_Management | ` dest_nt_domain ` | string | The NT domain of the destination, if applicable. | recommended |
 | Account_Management | ` src_nt_domain ` | string | The NT domain of the source, if applicable. | recommended |

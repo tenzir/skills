@@ -110,61 +110,27 @@ Using the login success from GCP as a base sample, and comparing it to a similar
 | Packets example data | Provider field name | CIM field name |
 | Direction example data | Provider field name | CIM field name |
 | Vendor account example data | Provider field name | CIM field name |
-
--
--
-- | GCP ` 10.128.15.212 ` | data.jsonPayload.connection.src_ip | src_ip src dvc if reporter=SRC |
-
--
-- | AWS ` 103.137.144.25 ` | srcaddr | src_ip src |
-
+| GCP ` 10.128.15.212 ` | data.jsonPayload.connection.src_ip | - src_ip - src - dvc if reporter=SRC |
+| AWS ` 103.137.144.25 ` | srcaddr | - src_ip - src |
 | GCP ` 10.128.15.212 ` | data.jsonPayload.connection.src_ip | dvc if reporter=SRC |
-
 | AWS ` eni-099b0af8dd18f05bd ` | interface-id | dvc |
-
 | GCP ` 44114 ` | data.jsonPayload.connection.src_port | src_port |
-
 | AWS ` 443 ` | srcport | src_port |
-
--
--
-- | GCP ` 173.255.116.127 ` | data.jsonPayload.connection.dest_ip | dest_ip dest dvc if reporter=DEST |
-
--
-- | AWS ` 103.137.144.26 ` | dstaddr | dest dest_ip |
-
+| GCP ` 173.255.116.127 ` | data.jsonPayload.connection.dest_ip | - dest_ip - dest - dvc if reporter=DEST |
+| AWS ` 103.137.144.26 ` | dstaddr | - dest - dest_ip |
 | GCP ` 443 ` | data.jsonPayload.connection.dest_port | dest_port |
-
 | AWS ` 22271 ` | dstport | dest_port |
-
 | GCP ` 6 ` | data.jsonPayload.connection.protocol | transport |
-
 | AWS ` 6 ` | protocol | transport |
-
 | GCP ` 2020-05-13T18:10:22.594437852Z ` | data.jsonPayload.start_time | duration, calculated from start_time and end_time |
-
 | AWS ` 1589294114 ` | start | duration, calculated from start_time and end_time |
-
 | GCP ` 2020-05-13T18:10:22.614528620Z ` | data.jsonPayload.end_time | duration, calculated from start_time and end_time |
-
 | AWS ` 1589294114 ` | end | duration, calculated from start_time and end_time |
-
--
--
-- | GCP ` 5300 ` | data.jsonPayload.bytes_sent | bytes_out if reporter=SRC bytes_in bytes |
-
+| GCP ` 5300 ` | data.jsonPayload.bytes_sent | - bytes_out if reporter=SRC - bytes_in - bytes |
 | AWS ` 10984 ` | bytes | bytes |
-
--
--
-- | GCP ` 40 ` | data.jsonPayload.packets_sent | packets_out if reporter=SRC packets_in packets |
-
+| GCP ` 40 ` | data.jsonPayload.packets_sent | - packets_out if reporter=SRC - packets_in - packets |
 | AWS ` 19 ` | packets | packets |
-
 | GCP ` SRC ` | data.jsonPayload.reporter | direction |
-
 | AWS n/a | n/a | n/a |
-
 | GCP ` gsa-project-151018 ` | data.jsonPayload.src_instance.project_id | vendor_account if reporter=SRC |
-
 | AWS ` 772089552793 ` | account-id | vendor_account |

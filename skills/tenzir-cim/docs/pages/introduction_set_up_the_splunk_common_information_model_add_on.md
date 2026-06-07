@@ -61,14 +61,8 @@ Configure the acceleration parameters of the CIM data models in the CIM Setup vi
 | Accelerate until maximum time | When selected, runs the acceleration search until the maximum time is reached. |
 | Max concurrent summarization searches | The maximum number of concurrent acceleration instances for this data model that the scheduler is allowed to run. |
 | Manual rebuilds | When selected, prevents the ` summarize ` command from rebuilding outdated summaries. Admins can manually rebuild a data model in Settings. Select Settings > Data Models and locate the row for the data model. Click Rebuild to rebuild the data model. |
-
--
--
--
-
-| Schedule priority | Raises the scheduling priority of a summary search, as follows: default: No scheduling priority increase. higher: Scheduling priority is higher than other data model searches. highest: Scheduling priority is higher than other searches regardless of scheduling tier, except real-time-scheduled searches with priority = highest always have priority over all other searches. This field is only available in Splunk platform 6.5.x or later. |
+| Schedule priority | Raises the scheduling priority of a summary search, as follows: - default: No scheduling priority increase. - higher: Scheduling priority is higher than other data model searches. - highest: Scheduling priority is higher than other searches regardless of scheduling tier, except real-time-scheduled searches with priority = highest always have priority over all other searches. This field is only available in Splunk platform 6.5.x or later. |
 | Indexes allow list | Restricts the index attribute of the data model to specified index values to improve performance. | Expected format: comma delimited index names. For example: indexA, indexB, indexC |
-
 | Tags allow list | Restricts the ` tag ` attribute of the data model to specified tag values to improve performance. By default, the allow lists for each CIM data model contain the tags used as constraints for the child datasets as well as the tags used in any searches within the model. Do not remove these tags, or data model searches that rely on these tags will fail. You can add additional tags to this allow list to accommodate how you have applied tags to your data. Add additional tags that you need to use to search and filter within searches for a data model. | The tags_allowlist setting is only available in Splunk Enterprise 6.6.0 and above. For organizations running Splunk Enterprise 6.6.4 and above, there is a UI component to manage the tags_allowlist setting via the Splunk Web UI. For organizations running Splunk Enterprise 6.6.0 - 6.6.3, the tags_allowlist setting must be managed manually via conf file access. See ` datamodels.conf.spec ` and Set a tag allowlist for better data model search performance in the Knowledge Manager Manual in the Splunk Enterprise documentation. |
 
 - Click Save .

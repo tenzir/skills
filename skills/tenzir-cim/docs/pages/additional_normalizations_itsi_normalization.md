@@ -26,14 +26,8 @@ The key for using the column titled "Abbreviated list of example values" follows
 | ` itsiInclude ` | string | Boolean indicating whether this alert is automatically brought into ITSI as a Notable Event. If absent, ITSI assumes ` itsiInclude="true" ` . If ` itsiInclude="false" ` , ITSI does not onboard the alert. This is useful for testing or for specifically selecting which raw alerts to onboard as Notable Events. | recommended for ITSI |
 | ` itsi_instruction ` | string | Text or markdown instructions for a human on how to handle this type of alert; can handle a link if encoded as markdown. See https://www.markdownguide.org . | optional for ITSI |
 | ` itsiNotableTitle ` | string | Specifies which fields the Notable Event Title includes. Default is ` "<signature> - <src> (<subcomponent>)" ` . | optional for ITSI |
-
 | ` severity_id ` | string | The numeric or vendor-specific severity indicator corresponding to the event severity. For ITSI, ` severity_id ` is one of the following values: 1 = Info or Unknown 2 = Normal or Cleared 3 = Low 4 = Medium 5 = High 6 = Critical | required for ITSI |
 | ` signature ` | string | The human-friendly title of the alert event, such as 'Device Not Responding,' 'Disk Full,' or 'CPU usage too high.' | required for ITSI |
 | ` src ` | string | The object that is the target, host, or object of the alert event. You can alias this field from existing fields such as ` src_host ` , ` src_ip ` , or ` src_name ` . | required for ITSI |
-
--
--
--
-
-| ` subcomponent ` | string | Sub-component object for this alert. Further defines the ` src ` field. For example, for a "Filesystem Full" alert on "server42" for "/var": signature = "Filesystem Full" src = "server42" subcomponent = "/var" Most alerts will not have a sub-component object. However, if the alert does contain a sub-component object, you must include this field. | recommended for ITSI |
+| ` subcomponent ` | string | Sub-component object for this alert. Further defines the ` src ` field. For example, for a "Filesystem Full" alert on "server42" for "/var": - signature = "Filesystem Full" - src = "server42" - subcomponent = "/var" Most alerts will not have a sub-component object. However, if the alert does contain a sub-component object, you must include this field. | recommended for ITSI |
 | ` vendor_severity ` | string | The original vendor-specific severity/health/status string for this alert, such as up/down/ok/normal/critical/warning/red/green/minor/major. | required by ITSI |

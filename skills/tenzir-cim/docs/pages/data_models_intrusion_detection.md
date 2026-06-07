@@ -41,44 +41,24 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
-
--
--
-
-| IDS_Attacks | ` action ` | string | The action taken by the intrusion detection system (IDS). | required for pytest-splunk-addon prescribed values: ` allowed ` , ` blocked ` |
-
--
-- | IDS_Attacks | ` category ` | string | The vendor-provided category of the triggered signature, such as ` spyware ` . This field is a string. Use a ` category_id ` field (not included in this data model) for category ID fields that are integer data types. | recommended required for pytest-splunk-addon |
+| IDS_Attacks | ` action ` | string | The action taken by the intrusion detection system (IDS). | - required for pytest-splunk-addon - prescribed values: ` allowed ` , ` blocked ` |
+| IDS_Attacks | ` category ` | string | The vendor-provided category of the triggered signature, such as ` spyware ` . This field is a string. Use a ` category_id ` field (not included in this data model) for category ID fields that are integer data types. | - recommended - required for pytest-splunk-addon |
 | IDS_Attacks | ` dest ` | string | The destination of the attack detected by the intrusion detection system (IDS). You can alias this from more specific fields not included in this data model, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | recommended |
 | IDS_Attacks | ` dest_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | IDS_Attacks | ` dest_category ` | string |
 | IDS_Attacks | ` dest_priority ` | string |
 | IDS_Attacks | ` dest_port ` | number | The destination port of the intrusion. |  |
-
--
-- | IDS_Attacks | ` dvc ` | string | The device that detected the intrusion event. You can alias this from more specific fields not included in this data model, such as ` dvc_host ` , ` dvc_ip ` , or ` dvc_name ` . | recommended required for pytest-splunk-addon |
+| IDS_Attacks | ` dvc ` | string | The device that detected the intrusion event. You can alias this from more specific fields not included in this data model, such as ` dvc_host ` , ` dvc_ip ` , or ` dvc_name ` . | - recommended - required for pytest-splunk-addon |
 | IDS_Attacks | ` dvc_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | IDS_Attacks | ` dvc_category ` | string |
 | IDS_Attacks | ` dvc_priority ` | string |
 | IDS_Attacks | ` file_hash ` | string | A cryptographic identifier assigned to the file object affected by the event. |  |
 | IDS_Attacks | ` file_name ` | string | The name of the file, such as ` notepad.exe ` . |  |
 | IDS_Attacks | ` file_path ` | string | The path of the file, such as ` C:\\Windows\\System32\\notepad.exe ` . |  |
-
--
--
--
-
-| IDS_Attacks | ` ids_type ` | string | The type of IDS that generated the event. | recommended required for pytest-splunk-addon prescribed values: ` network ` , ` host ` , ` application ` , ` wireless ` |
-
--
--
--
-
-| IDS_Attacks | ` severity ` | string | The severity of the network protection event. This field is a string. Use a ` severity_id ` field (not included in this data model) for severity ID fields that are integer data types. Also, specific values are required for this field. Use ` vendor_severity ` for the vendor's own human readable severity strings, such as ` Good ` , ` Bad ` , and ` Really Bad ` . | recommended required for pytest-splunk-addon prescribed values: ` critical ` , ` high ` , ` medium ` , ` low ` , ` informational ` |
+| IDS_Attacks | ` ids_type ` | string | The type of IDS that generated the event. | - recommended - required for pytest-splunk-addon - prescribed values: ` network ` , ` host ` , ` application ` , ` wireless ` |
+| IDS_Attacks | ` severity ` | string | The severity of the network protection event. This field is a string. Use a ` severity_id ` field (not included in this data model) for severity ID fields that are integer data types. Also, specific values are required for this field. Use ` vendor_severity ` for the vendor's own human readable severity strings, such as ` Good ` , ` Bad ` , and ` Really Bad ` . | - recommended - required for pytest-splunk-addon - prescribed values: ` critical ` , ` high ` , ` medium ` , ` low ` , ` informational ` |
 | IDS_Attacks | ` severity_id ` | number | The numeric or vendor specific severity indicator corresponding to the event severity. |  |
-
--
-- | IDS_Attacks | ` signature ` | string | The name of the intrusion detected on the client (the ` src ` ), such as ` PlugAndPlay_BO ` and ` JavaScript_Obfuscation_Fre ` . | recommended required for pytest-splunk-addon |
+| IDS_Attacks | ` signature ` | string | The name of the intrusion detected on the client (the ` src ` ), such as ` PlugAndPlay_BO ` and ` JavaScript_Obfuscation_Fre ` . | - recommended - required for pytest-splunk-addon |
 | IDS_Attacks | ` signature_id ` | string | The unique identifier or event code of the event signature. |  |
 | IDS_Attacks | ` src ` | string | The source involved in the attack detected by the IDS. You can alias this from more specific fields not included in this data model, such as ` src_host ` , ` src_ip ` , or ` src_name ` . | recommended |
 | IDS_Attacks | ` src_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
@@ -86,10 +66,7 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | IDS_Attacks | ` src_priority ` | string |
 | IDS_Attacks | ` src_port ` | string | The port number of the source. |
 | IDS_Attacks | ` tag ` | string | This automatically generated field is used to access tags from within datamodels. Do not define extractions for this field when writing add-ons. |  |
-
--
--
-- | IDS_Attacks | ` transport ` | string | The OSI layer 4 (transport) or internet layer protocol of the intrusion, in lower case. | recommended required for pytest-splunk-addon prescribed values: ` icmp ` , ` tcp ` , ` udp ` |
+| IDS_Attacks | ` transport ` | string | The OSI layer 4 (transport) or internet layer protocol of the intrusion, in lower case. | recommended required for pytest-splunk-addon prescribed values: - ` icmp ` , - ` tcp ` , - ` udp ` |
 | IDS_Attacks | ` user ` | string | The user involved with the intrusion detection event. | recommended |
 | IDS_Attacks | ` user_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | IDS_Attacks | ` user_category ` | string |

@@ -33,76 +33,39 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 
 | Dataset name | Field name | Data type | Description | Abbreviated list of example values |
 | --- | --- | --- | --- | --- |
-
--
-- | DLP_Incidents | ` action ` | string | The action taken by the DLP device. | recommended required for pytest-splunk-addon |
+| DLP_Incidents | ` action ` | string | The action taken by the DLP device. | - recommended - required for pytest-splunk-addon |
 | DLP_Incidents | ` app ` | string | The application involved in the event. | required for pytest-splunk-addon |
-
--
-- | DLP_Incidents | ` category ` | string | The category of the DLP event. | recommenderd required for pytest-splunk-addon |
-
--
-- | DLP_Incidents | ` dest ` | string | The target of the DLP event. | recommended required for pytest-splunk-addon |
-
+| DLP_Incidents | ` category ` | string | The category of the DLP event. | - recommenderd - required for pytest-splunk-addon |
+| DLP_Incidents | ` dest ` | string | The target of the DLP event. | - recommended - required for pytest-splunk-addon |
 | DLP_Incidents | ` dest_bunit ` | string | The business unit of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` dest_category ` | string | The category of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` dest_priority ` | string | The priority of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | DLP_Incidents | ` dest_zone ` | string | The zone of the DLP target. |  |
-
--
-- | DLP_Incidents | ` dlp_type ` | string | The type of DLP system that generated the event. | recommended required for pytest-splunk-addon |
-
--
-- | DLP_Incidents | ` dvc ` | string | The device that reported the DLP event. | recommended required for pytest-splunk-addon |
-
+| DLP_Incidents | ` dlp_type ` | string | The type of DLP system that generated the event. | - recommended - required for pytest-splunk-addon |
+| DLP_Incidents | ` dvc ` | string | The device that reported the DLP event. | - recommended - required for pytest-splunk-addon |
 | DLP_Incidents | ` dvc_bunit ` | string | The business unit of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` dvc_category ` | string | The category of the DLP device. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` dvc_priority ` | string | The priority of the DLP device. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | DLP_Incidents | ` dvc_zone ` | string | The zone of the DLP device. |  |
-
--
-- | DLP_Incidents | ` object ` | string | The name of the affected object. | recommended required for pytest-splunk-addon |
-
--
-- | DLP_Incidents | ` object_category ` | string | The category of the affected object. | recommended required for pytest-splunk-addon |
-
--
-- | DLP_Incidents | ` object_path ` | string | The path of the affected object. | recommended required for pytest-splunk-addon |
-
--
-- | DLP_Incidents | ` severity ` | string | The severity of the DLP event. | recommended required for pytest-splunk-addon |
+| DLP_Incidents | ` object ` | string | The name of the affected object. | - recommended - required for pytest-splunk-addon |
+| DLP_Incidents | ` object_category ` | string | The category of the affected object. | - recommended - required for pytest-splunk-addon |
+| DLP_Incidents | ` object_path ` | string | The path of the affected object. | - recommended - required for pytest-splunk-addon |
+| DLP_Incidents | ` severity ` | string | The severity of the DLP event. | - recommended - required for pytest-splunk-addon |
 | DLP_Incidents | ` severity_id ` | number | The numeric or vendor specific severity indicator corresponding to the event severity. |  |
-
--
-- | DLP_Incidents | ` signature ` | string | The name of the DLP event. | recommended required for pytest-splunk-addon |
+| DLP_Incidents | ` signature ` | string | The name of the DLP event. | - recommended - required for pytest-splunk-addon |
 | DLP_Incidents | ` signature_id ` | string | The unique identifier or event code of the event signature. |  |
 | DLP_Incidents | ` src ` | string | The source of the DLP event. | recommended |
-
 | DLP_Incidents | ` src_bunit ` | string | The business unit of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` src_category ` | string | The category of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` src_priority ` | string | The priority of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
--
-- | DLP_Incidents | ` src_user ` | string | The source user of the DLP event. | recommended required for pytest-splunk-addon |
-
+| DLP_Incidents | ` src_user ` | string | The source user of the DLP event. | - recommended - required for pytest-splunk-addon |
 | DLP_Incidents | ` src_user_bunit ` | string | The business unit of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` src_user_category ` | string | The category of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` src_user_priority ` | string | The priority of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | DLP_Incidents | ` src_zone ` | string | The zone of the DLP source. |  |
 | DLP_Incidents | ` tag ` | string | This automatically generated field is used to access tags from within datamodels. Do not define extractions for this field when writing add-ons. |  |
 | DLP_Incidents | ` user ` | string | The target user of the DLP event. | recommended |
-
 | DLP_Incidents | ` user_bunit ` | string | The business unit of the DLP user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` user_category ` | string | The category of the DLP user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | DLP_Incidents | ` user_priority ` | string | The priority of the DLP user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | DLP_Incidents | ` vendor_product ` | string | The vendor and product name of the DLP system. | recommended |

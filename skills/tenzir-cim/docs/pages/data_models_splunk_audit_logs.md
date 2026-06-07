@@ -20,7 +20,6 @@ Although it is not part of the data model shipped in the CIM add-on, the common 
 | Dataset name | Tag name |
 | --- | --- |
 | Modular_Actions | modaction |
-
 | \|____ Modular Action Invocations | invocation |
 
 ## Fields for the event dataset and the search datasets
@@ -46,13 +45,11 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Datamodel_Acceleration | ` app ` | string | The application context in which the data model summary was accessed. |  |
 | Datamodel_Acceleration | ` buckets ` | number | The number of index buckets spanned by the data model acceleration summary. |  |
 | Datamodel_Acceleration | ` buckets_size ` | number | The total size of the bucket(s) spanned by the data model acceleration summary. |  |
-
 | Datamodel_Acceleration | ` complete ` | number | The percentage of the data model summary that is currently complete. | other: ` 0-100 ` |
 | Datamodel_Acceleration | ` cron ` | string | The cron expression used to accelerate the data model. |  |
 | Datamodel_Acceleration | ` datamodel ` | string | The name of the data model accelerated. |  |
 | Datamodel_Acceleration | ` digest ` | string | A hash of the current data model constraints. |  |
 | Datamodel_Acceleration | ` earliest ` | time | The earliest time that the data model summary was accessed. |  |
-
 | Datamodel_Acceleration | ` is_inprogress ` | boolean | Indicates whether the data model acceleration is currently in progress. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
 | Datamodel_Acceleration | ` last_error ` | string | The text of the last error reported during the data model acceleration. |  |
 | Datamodel_Acceleration | ` last_sid ` | string | The search id of the last acceleration attempt. |  |
@@ -86,7 +83,6 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Web_Service_Errors | ` source ` | string | The source where the web service error occurred. |  |
 | Web_Service_Errors | ` sourcetype ` | string | The source type associated with the web service error. |  |
 | Web_Service_Errors | ` event_id ` | string | The unique event_id for the web service error event. |  |
-
 | Modular_Actions | ` action_mode ` | string | Specifies whether the action was executed as an ad hoc action or from a saved search, based on whether a ` search_name ` exists. | prescribed values: ` saved ` , ` adhoc ` |
 | Modular_Actions | ` action_status ` | string | The status of the action. For example, "success", "failure", or "pending". |  |
 | Modular_Actions | ` app ` | string | The app ID of the app or add-on that owns the action. |  |

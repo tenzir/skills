@@ -46,60 +46,31 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
-
--
-- | Alerts | ` app ` | string | The system, service, or application that generated the alert event. Examples include, but are not limited to the following: GuardDuty, SecurityCenter, 3rd party services, win:app:trendmicro, vmware, nagios. | recommended required for pytest-splunk-addon |
+| Alerts | ` app ` | string | The system, service, or application that generated the alert event. Examples include, but are not limited to the following: GuardDuty, SecurityCenter, 3rd party services, win:app:trendmicro, vmware, nagios. | - recommended - required for pytest-splunk-addon |
 | Alerts | cim_entity | string | This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | Alerts | ` description ` | string | The description of the alert event. |  |
-
--
-- | Alerts | ` dest ` | string | The object that is the target of the alert event. Examples include an email address, SNMP trap, or virtual machine id. You can alias this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | recommended required for pytest-splunk-addon |
-
+| Alerts | ` dest ` | string | The object that is the target of the alert event. Examples include an email address, SNMP trap, or virtual machine id. You can alias this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | - recommended - required for pytest-splunk-addon |
 | Alerts | ` dest_bunit ` | string | The business unit associated with the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | Alerts | ` dest_category ` | string | The category of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | Alerts | ` dest_priority ` | string | The priority of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | Alerts | ` dest_type ` | string | The type of the destination object, such as instance, storage, firewall. |  |
 | Alerts | ` id ` | string | The unique identifier of the alert event. | required for pytest-splunk-addon |
 | Alerts | ` mitre_technique_id ` | string | The MITRE ATT&CK technique ID of the alert event, searchable at https://attack.mitre.org/techniques . |  |
-
--
--
--
-
-| Alerts | ` severity ` | string | The severity of the alert event. Note: This field is a string. Specific values are required. Use the ` severity_id ` field for severity ID fields that are integer data types. Specific values are required. Use ` vendor_severity ` for the vendor's own human-readable strings (such as ` Good ` , ` Bad ` , ` Really Bad ` , and so on). | recommended required for pytest-splunk-addon prescribed values: [critical, high, medium, low, informational]. |
+| Alerts | ` severity ` | string | The severity of the alert event. Note: This field is a string. Specific values are required. Use the ` severity_id ` field for severity ID fields that are integer data types. Specific values are required. Use ` vendor_severity ` for the vendor's own human-readable strings (such as ` Good ` , ` Bad ` , ` Really Bad ` , and so on). | - recommended - required for pytest-splunk-addon - prescribed values: [critical, high, medium, low, informational]. |
 | Alerts | ` severity_id ` | number | The numeric or vendor specific severity indicator corresponding to the event severity. |  |
-
--
--
-
-| Alerts | ` signature ` | string | The human-friendly title of the alert event, such as 'API GetAccountPasswordPolicy was invoked using root credentials.' Split by ` signature_id ` when aggregating alert events by types. Following are some examples: Policy:IAMUser/RootCredentialUsage Callback Detectors: High Confidence C&C Server Name Match Note: Split by ` signature_id ` or ` signature ` when aggregating alert events by types. |  |
-
--
-- | Alerts | ` signature_id ` | string | The vendor specific policy or rule that generated the alert event, such as 'Policy:IAMUser/RootCredentialUsage.'For example: Policy:IAMUser/RootCredentialUsage. 0x00011f00 | recommended |
+| Alerts | ` signature ` | string | The human-friendly title of the alert event, such as 'API GetAccountPasswordPolicy was invoked using root credentials.' Split by ` signature_id ` when aggregating alert events by types. Following are some examples: - Policy:IAMUser/RootCredentialUsage - Callback Detectors: High Confidence C&C Server Name Match Note: Split by ` signature_id ` or ` signature ` when aggregating alert events by types. |  |
+| Alerts | ` signature_id ` | string | The vendor specific policy or rule that generated the alert event, such as 'Policy:IAMUser/RootCredentialUsage.'For example: - Policy:IAMUser/RootCredentialUsage. - 0x00011f00 | recommended |
 | Alerts | ` src ` | string | The object that is the actor of the alert event. You can alias this from more specific fields, such as ` src_host ` , ` src_ip ` , or ` src_name ` . | recommended |
-
 | Alerts | ` src_bunit ` | string | The business unit associated with the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | Alerts | ` src_category ` | string | The category of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | Alerts | ` src_priority ` | string | The priority of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | Alerts | ` src_type ` | string | The type of the source object, such as instance, storage, firewall. |  |
 | Alerts | ` tag ` | string | This automatically generated field is used to access tags from within data models. Do not define extractions for this field when writing add-ons. |  |
-
--
--
--
-
-| Alerts | ` type ` | string | The alert event type. | recommended required for pytest-splunk-addon prescribed values: ` alarm ` , ` alert ` , ` event ` , ` task ` , ` warning ` , ` unknown ` |
+| Alerts | ` type ` | string | The alert event type. | - recommended - required for pytest-splunk-addon - prescribed values: ` alarm ` , ` alert ` , ` event ` , ` task ` , ` warning ` , ` unknown ` |
 | Alerts | ` user ` | string | The user involved in the alert event. | recommended |
-
 | Alerts | ` user_bunit ` | string | The business unit of the user involved in the alert event. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | Alerts | ` user_category ` | string | The category of the user involved in the alert event. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | Alerts | ` user_name ` | string | The name of the user involved in the alert event. | recommended |
-
 | Alerts | ` user_priority ` | string | The priority of the user involved in the alert event. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | Alerts | ` vendor_account ` | string | The account associated with the alert event. The account represents the organization, or a Cloud customer or a Cloud account. |  |
 | Alerts | ` vendor_region ` | string | The data center region involved in the alert event, such as us-west-2. |  |

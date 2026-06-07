@@ -18,19 +18,12 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | All_Databases | database |
-
 | \|____ Database_Instance | instance |
-
 | \|____ Instance_Stats | stats |
-
 | \|____ Session_Info | session |
-
 | \|____ Lock_Info | lock |
-
 | \|____ Database_Query | query |
-
 | \|____ Tablespace | tablespace |
-
 | \|____ Query_Stats | stats |
 
 ## Fields for Databases event datasets
@@ -47,36 +40,26 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
 | All_Databases | ` dest ` | string | The destination of the database event. You can alias this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . |  |
-
 | All_Databases | ` dest_bunit ` | string | The business unit of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Databases | ` dest_category ` | string | The category of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Databases | ` dest_priority ` | string | The priority of the destination, if applicable. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Databases | ` duration ` | number | The amount of time for the completion of the database event, in seconds. |  |
 | All_Databases | ` object ` | string | The name of the database object. |  |
 | All_Databases | ` response_time ` | number | The amount of time it took to receive a response in the database event, in seconds. |  |
 | All_Databases | ` src ` | string | The source of the database event. You can alias this from more specific fields, such as ` src_host ` , ` src_ip ` , or ` src_name ` . |  |
-
 | All_Databases | ` src_bunit ` | string | The business unit of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Databases | ` src_category ` | string | The category of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Databases | ` src_priority ` | string | The priority of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Databases | ` tag ` | string | This automatically generated field is used to access tags from within data models. Do not define extractions for this field when writing add-ons. |  |
 | All_Databases | ` user ` | string | Name of the database process user. |  |
-
 | All_Databases | ` user_bunit ` | string | The business unit of the user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Databases | ` user_category ` | string | The category associated with the user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Databases | ` user_priority ` | string | The priority of the user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Databases | ` vendor_product ` | string | The vendor and product name of the database system. This field can be automatically populated by ` vendor ` and ` product ` fields in your data. |  |
 | Database_Instance | ` instance_name ` | string | The name of the database instance. |  |
 | Database_Instance | ` instance_version ` | string | The version of the database instance. |  |
 | Database_Instance | ` process_limit ` | number | The maximum number of processes that the database instance can handle. |  |
 | Database_Instance | ` session_limit ` | number | The maximum number of sessions that the database instance can handle. |  |
-
 | Instance_Stats | ` availability ` | string | The status of the database server. | prescribed values: ` Available ` , ` Not Available ` |
 | Instance_Stats | ` avg_executions ` | number | The average number of executions for the database instance. |  |
 | Instance_Stats | ` dump_area_used ` | string | The amount of the database dump area that has been used. |  |
@@ -107,10 +90,8 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Session_Info | ` physical_reads ` | number | The total number of physical reads performed during the session. |  |
 | Session_Info | ` seconds_in_wait ` | number | The description of ` seconds_in_wait ` depends on the value of ` wait_time ` . If ` wait_time = 0 ` , ` seconds_in_wait ` is the number of seconds spent in the current wait condition. If ` wait_time ` has a nonzero value, ` seconds_in_wait ` is the number of seconds that have elapsed since the start of the last wait. You can get the active seconds that have elapsed since the last wait ended by calculating ` seconds_in_wait - wait_time / 100 ` . |  |
 | Session_Info | ` session_id ` | string | The unique id that identifies the session. |  |
-
 | Session_Info | ` session_status ` | string | The current status of the session. | prescribed values: ` Online ` , ` Offline ` . |
 | Session_Info | ` table_scans ` | number | Number of table scans performed during the session. |  |
-
 | Session_Info | ` wait_state ` | string | Provides the current wait state for the session. Can indicate that the session is currently waiting or provide information about the session's last wait. | prescribed values: ` WAITING ` (the session is currently waiting), ` WAITED UNKNOWN ` (the duration of the last session wait is unknown), ` WAITED SHORT TIME ` (the last session wait was < 1/100th of a second), ` WAITED KNOWN TIME ` (the ` wait_time ` is the duration of the last session wait). |
 | Session_Info | ` wait_time ` | number | When ` wait_time = 0 ` , the session is waiting. When ` wait_time ` has a nonzero value, it is displaying the last wait time for the session. |  |
 | Lock_Info | ` last_call_minute ` | number | Represents the amount of time elapsed since the ` session_status ` changed to its current status. The definition of this field depends on the ` session_status ` value. If ` session_status = ONLINE ` , the ` last_call_minute ` value represents the time elapsed since the session became active. If ` session_status = OFFLINE ` , the ` last_call_minute ` value represents the time elapsed since the session became inactive. |  |
@@ -127,7 +108,6 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Tablespace | ` free_bytes ` | number | The total amount of free space in the tablespace, in bytes. |  |
 | Tablespace | ` tablespace_name ` | string | The name of the tablespace. |  |
 | Tablespace | ` tablespace_reads ` | number | The number of tablespace reads carried out by the query. |  |
-
 | Tablespace | ` tablespace_status ` | string | The status of the tablespace. | prescribed values: ` Offline ` , ` Online ` , ` Read Only ` |
 | Tablespace | ` tablespace_writes ` | number | The number of tablespace writes carried out by the query. |  |
 | Query_Stats | ` indexes_hit ` | string | The names of the indexes hit by the database query. |  |

@@ -111,37 +111,20 @@ Using the user update from AWS as a base sample, and comparing it to a similar e
 | Destination example data | Provider field name | CIM field name |
 | Action example data | Provider field name | CIM field name |
 | Object example data | Provider field name | CIM field name |
-
--
-- | AWS ` AIDA3HRA7T6MUVQJRHPKV ` | userIdentity.principalId | user user_id |
-
--
-- | Azure ` es_csm_change_model@a830edad9050849nda3079.onmicrosoft.com ` | targetResources.userPrincipalName | user user_id |
-
--
-- | AWS ` iam.amazonaws.com ` | eventSource | app dest |
-
-- | Azure ` Core Directory ` | loggedByService | dvc |
-
--
-- | AWS ` UpdateUser ` | eventName | action command |
-
+| AWS ` AIDA3HRA7T6MUVQJRHPKV ` | userIdentity.principalId | - user - user_id |
+| Azure ` es_csm_change_model@a830edad9050849nda3079.onmicrosoft.com ` | targetResources.userPrincipalName | - user - user_id |
+| AWS ` iam.amazonaws.com ` | eventSource | - app - dest |
+| Azure ` Core Directory ` | loggedByService | - dvc |
+| AWS ` UpdateUser ` | eventName | - action - command |
 | Azure ` Update ` | operationType | action |
 
 ```text
 
 ```
 
--
--
--
--
-- | AWS "requestParameters": { "userName": "user_change_dm", "newUserName": "user_change" }, | requestParameters | object object_attrs object_category object_id object_path |
-
+| AWS "requestParameters": { "userName": "user_change_dm", "newUserName": "user_change" }, | requestParameters | - object - object_attrs - object_category - object_id - object_path |
 | Azure ` UserManagement ` | category | object_category |
-
 | Azure ` 93a565f6-d0fc-4ac3-9d2a-8c1de9aeed3c ` | targetResources.id | object_id |
-
 | Azure ` "StrongAuthenticationRequirement\" ` | targetResources.modifiedProperties | object_attrs |
 
 ## Reboot example
@@ -271,52 +254,24 @@ Using the reboot from AWS as a base sample, and comparing it to a similar event 
 | Action example data | Provider field name | CIM field name |
 | Source example data | Provider field name | CIM field name |
 | Object example data | Provider field name | CIM field name |
-
 | AWS ` AIDA3HRA7T6MRJYJZSGXO ` | userIdentity.principalId | user, user_id |
-
--
-- | Azure ` admin@a830edad9050849nda3079.onmicrosoft.com ` | identity.claims. http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name | user src_user |
-
--
-- | AWS ` IAMUser ` | userIdentity.type | user_type src_user_type |
-
+| Azure ` admin@a830edad9050849nda3079.onmicrosoft.com ` | identity.claims. http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name | - user - src_user |
+| AWS ` IAMUser ` | userIdentity.type | - user_type - src_user_type |
 | Azure ` n/a ` | n/a | na/ |
-
--
-- | AWS ` ec2.amazonaws.com ` | eventSource | app dest |
-
-- | Azure ` Microsoft.Compute ` | operationName | app |
-
+| AWS ` ec2.amazonaws.com ` | eventSource | - app - dest |
+| Azure ` Microsoft.Compute ` | operationName | - app |
 | Azure ` ae4ab7c9-dcdf-4427-9729-48e8c7551be9 ` | Subscription ID extracted from resourceID | dest |
-
--
-- | AWS ` RebootInstances ` | eventName | action command |
-
--
-- | Azure ` MICROSOFT.COMPUTE/VIRTUALMACHINES/RESTART/ACTION ` | operationName | action command |
-
--
-- | AWS ` 73.162.147.20 ` | sourceIPAddress | src src_ip |
-
--
-- | Azure ` 174.62.106.48 ` | claims.ipaddr | src src_ip |
+| AWS ` RebootInstances ` | eventName | - action - command |
+| Azure ` MICROSOFT.COMPUTE/VIRTUALMACHINES/RESTART/ACTION ` | operationName | - action - command |
+| AWS ` 73.162.147.20 ` | sourceIPAddress | - src - src_ip |
+| Azure ` 174.62.106.48 ` | claims.ipaddr | - src - src_ip |
 
 ```text
 
 ```
 
--
--
--
--
-- | AWS "requestParameters": { "force": false, "instancesSet": { "items": [{ "instanceId": "i-c103dcc9" }] } }, | requestParameters | object object_attrs object_category object_id object_path |
-
--
--
-
--
-
-| Azure ` /SUBSCRIPTIONS/AE4AB7C9-DCDF-4427-9729-48E8C7551BE9/RESOURCEGROUPS/ES_CSM_CHANGE_MODEL/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINES/ES-CSM-CHNAGE-VM-1 ` | resourceId | object_id object: .../ES_CSM_CHANGE_MODEL-VM-1 object_category: .../VIRTUALMACHINES/... |
+| AWS "requestParameters": { "force": false, "instancesSet": { "items": [{ "instanceId": "i-c103dcc9" }] } }, | requestParameters | - object - object_attrs - object_category - object_id - object_path |
+| Azure ` /SUBSCRIPTIONS/AE4AB7C9-DCDF-4427-9729-48E8C7551BE9/RESOURCEGROUPS/ES_CSM_CHANGE_MODEL/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINES/ES-CSM-CHNAGE-VM-1 ` | resourceId | - object_id - object: .../ES_CSM_CHANGE_MODEL-VM-1 - object_category: .../VIRTUALMACHINES/... |
 
 You must assign `requestParameters `to different `object_* `fields in CIM. The CIM field `object_* `is the object of change, which implies that it is the specific resource object that is reported as changed by the event.
 

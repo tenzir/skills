@@ -18,17 +18,11 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | JVM | jvm |
-
 | \|____ Threading | threading |
-
 | \|____ Runtime | runtime |
-
 | \|____ OS | os |
-
 | \|____ Compilation | compilation |
-
 | \|____ Classloading | classloading |
-
 | \|____ Memory | memory |
 
 ## Fields for JVM event datasets
@@ -46,21 +40,15 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | --- | --- | --- | --- | --- |
 | JVM | ` jvm_description ` | string | A description field provided in some data sources. |  |
 | JVM | ` tag ` | string | This automatically generated field is used to access tags from within datamodels. Add-on builders do not need to populate it. |  |
-
 | Threading | ` cm_enabled ` | boolean | Indicates whether thread contention monitoring is enabled. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
-
 | Threading | ` cm_supported ` | boolean | Indicates whether the JVM supports thread contention monitoring. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
-
 | Threading | ` cpu_time_enabled ` | boolean | Indicates whether thread CPU time measurement is enabled. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
-
 | Threading | ` cpu_time_supported ` | boolean | Indicates whether the Java virtual machine supports CPU time measurement for the current thread. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
 | Threading | ` current_cpu_time ` | number | CPU-space time taken by the JVM, in seconds. |  |
 | Threading | ` current_user_time ` | number | User-space time taken by the JVM, in seconds. |  |
 | Threading | ` daemon_thread_count ` | number | The JVM's current daemon count. |  |
-
 | Threading | ` omu_supported ` | boolean | Indicates whether the JVM supports monitoring of object monitor usage. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
 | Threading | ` peak_thread_count ` | number | The JVM's peak thread count. |  |
-
 | Threading | ` synch_supported ` | boolean | Indicates whether the JVM supports monitoring of ownable synchronizer usage. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
 | Threading | ` thread_count ` | number | The JVM's current thread count. |  |
 | Threading | ` threads_started ` | number | The total number of threads started in the JVM. |  |

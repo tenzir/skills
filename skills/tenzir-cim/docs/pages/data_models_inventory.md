@@ -19,26 +19,16 @@ The following tags act as constraints to identify your events as being relevant 
 | --- | --- |
 | All_Inventory | inventory |
 | cpu OR memory OR network OR storage OR (system, version) OR user OR virtual |
-
 | \|____ CPU | cpu |
-
 | \|____ Memory | memory |
-
 | \|____ Network | network |
-
 | \|____ Storage | storage |
-
 | \|____ OS | system |
 | version |
-
 | \|____ User | user |
-
 | \|____ Default_Accounts | default |
-
 | \|____ Virtual_OS | virtual |
-
 | \|____ Snapshot | snapshot |
-
 | \|____ Tools | tools |
 
 ## Fields for Inventory event datasets
@@ -56,11 +46,8 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | --- | --- | --- | --- | --- |
 | All_Inventory | ` description ` | string | The description of the inventory system. |  |
 | All_Inventory | ` dest ` | string | The system where the data originated, the source of the event. You can alias ' this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . |  |
-
 | All_Inventory | ` dest_bunit ` | string | The business unit of the system where the data is going. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Inventory | ` dest_category ` | string | The category of the system where the data is going, such as ` email_server ` or ` SOX-compliant ` . This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Inventory | ` dest_priority ` | string | The priority of the system where the data is going. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Inventory | ` enabled ` | boolean | Indicates whether the resource is enabled or disabled. |  |
 | All_Inventory | ` family ` | string | The product family of the resource, such as ` 686_64 ` or ` RISC ` . |  |
@@ -105,12 +92,9 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | User | ` password ` | string | Displays the stored password(s) for a locally defined account, if it has any. For instance, an add-on may report the password column from ` /etc/passwd ` in this field. |  |
 | User | ` shell ` | string | Indicates the shell program used by a locally defined account. |  |
 | User | ` user ` | string | The full name of a locally defined account. |  |
-
 | User | ` user_bunit ` | string | The business unit of the locally-defined user account. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | User | ` user_category ` | string | The category of the system where the data originated, such as ` email_server ` or ` SOX-compliant ` . This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | User | ` user_id ` | number | The user identification for a locally defined account. |  |
-
 | User | ` user_priority ` | string | The priority of a locally-defined account. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | Virtual_OS | ` hypervisor ` | string | The hypervisor parent of a virtual guest OS. |  |
 | Snapshot | ` size ` | number | The snapshot file size, in megabytes. |  |

@@ -186,54 +186,26 @@ Using the login success from GCP as a base sample, and comparing it to a similar
 | Vendor account example data | Provider field name | CIM field name |
 | Source example data | Provider field name | CIM field name |
 | User agent data | Provider field name | CIM field name |
-
 | GCP ` name@gmail.com ` | actor.email | user_id |
-
--
--
-- | MS o365 ` df22f023-9e0f-4d78-bdd5-d496688af11e ` ` admin@a830edad9050849NDA3079.onmicrosoft.com ` ` 10037FFE8EC1E08E ` | Id | user_id |
-
--
--
-- | AWS ` example_user ` | userIdentity.userName | user_id user src_user |
-
+| MS o365 - ` df22f023-9e0f-4d78-bdd5-d496688af11e ` - ` admin@a830edad9050849NDA3079.onmicrosoft.com ` - ` 10037FFE8EC1E08E ` | Id | user_id |
+| AWS ` example_user ` | userIdentity.userName | - user_id - user - src_user |
 | GCP ` login_success ` | events.name | action |
-
 | MS o365 ` Succeeded ` | ResultStatus | action |
-
 | AWS ` Success ` | responseElements.ConsoleLogin | action |
-
 | GCP ` login ` | events.type | signature |
-
 | MS o365 ` UserLoggedIn ` | Operation | signature |
-
 | AWS ` ConsoleLogin ` | eventName | signature |
-
--
-- | GCP ` password ` | multiValue events.parameters.name.login_challenge_method | authentication_method |
-
+| GCP ` password ` | - multiValue - events.parameters.name.login_challenge_method | authentication_method |
 | MS o365 ` 1 ` | UserAuthenticationMethod | authentication_method |
-
 | AWS ` No ` | MFAUsed | authentication_method |
-
 | GCP ` C035c27ok ` | id.customerId | vendor_account |
-
 | MS o365 ` 2ed28a74-1f6f-4829-8530-fe359c77d35c ` | OrganizationId | vendor_account |
-
 | AWS ` 772089552793 ` | userIdentity.accountId | vendor_account |
-
--
-- | GCP ` 4.14.104.185 ` | ipAddress | src src_ip |
-
--
-- | MS o365 ` 4.14.104.185 ` | ClientIP | src src_ip |
-
+| GCP ` 4.14.104.185 ` | ipAddress | - src - src_ip |
+| MS o365 ` 4.14.104.185 ` | ClientIP | - src - src_ip |
 | AWS ` 4.14.104.185 ` | sourceIPAddress | src |
-
 | GCP ` admin#reports#activity ` | kind | user_agent |
-
 | MS o365 ` Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36 ` | UserAgent | user_agent |
-
 | AWS ` Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 ` | userAgent | user_agent |
 
 ## Login failure example
@@ -434,59 +406,31 @@ Using the login failure from GCP as a base sample, and comparing it to a similar
 | Source example data | Provider field name | CIM field name |
 | Reason example data | Provider field name | CIM field name |
 | User agent data | Provider field name | CIM field name |
-
 | GCP ` example_user@gmail.com ` | protoPayload.authenticationInfo.principalEmail | user_id |
-
 | MS o365 ` jc3@a830edad9050849NDA3079.onmicrosoft.com ` | UserId | user_id |
-
 | AWS ` example_user ` | userIdentity.userName | user_id |
-
 | MS o365 ` 0 ` | UserType | user_type |
-
 | AWS ` IAMUser ` | userIdentity.type | user_type |
-
 | GCP ` login.googleapis.com ` | protoPayload.serviceName | app |
-
 | MS o365 ` AzureActiveDirectory ` | Workload | app |
-
 | AWS ` signin.amazonaws.com ` | eventSource | app |
-
 | GCP ` NOTICE ` | severity | action |
-
 | MS o365 ` Failed ` | ResultStatus | action |
-
 | AWS ` Failure ` | responseElements.ConsoleLogin | action |
-
 | GCP ` google.login.LoginService.loginFailure ` | protoPayload.methodName | signature |
-
 | MS o365 ` UserLoginFailed ` | Operation | signature |
-
 | AWS ` ConsoleLogin ` | eventName | signature |
-
 | GCP ` login_challenge_method ` | events.parameters.name.login_challenge_method | authentication_method |
-
 | AWS ` No ` | additionalEventData.MFAUsed | authentication_method |
-
 | MS o365 ` 2ed28a74-1f6f-4829-8530-fe359c77d35c ` | OrganizationId | vendor_account |
-
 | AWS ` 772089552793 ` | userIdentity.accountId | vendor_account |
-
--
-- | GCP ` 2601:646:8400:b0:a991:7135:7879:6cea ` | requestMetadata.callerIp | src src_ip |
-
--
-- | MS o365 ` 13.67.186.66 ` | ClientIP | src src_ip |
-
+| GCP ` 2601:646:8400:b0:a991:7135:7879:6cea ` | requestMetadata.callerIp | - src - src_ip |
+| MS o365 ` 13.67.186.66 ` | ClientIP | - src - src_ip |
 | AWS ` 4.14.104.185 ` | sourceIPAddress | src |
-
 | GCP ` password ` | event.parameter.multiStrValue | reason |
-
 | MS o365 ` InvalidUserNameOrPassword ` | LogonError | reason |
-
 | AWS ` Failed authentication ` | errorMessage | reason |
-
 | MS o365 ` python-requests/2.12.4 ` | UserAgent | user_agent |
-
 | AWS ` Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 ` | userAgent | user_agent |
 
 ## Privilege escalation example
@@ -596,23 +540,13 @@ Using the privilege escalation from AWS as a base sample is a good way to see th
 | App, dest example data | Provider field name | CIM field name |
 | Signature example data | Provider field name | CIM field name |
 | User example data | Provider field name | CIM field name |
-
 | AWS ` 671568874969 ` | userIdentity.accountId | vendor_account |
-
 | GCP ` my-project ` | resource.labels.project_id | vendor_account |
-
 | AWS ` example_user@aws.com ` | userIdentity.userName | src_user |
-
 | GCP ` example_user@gmail.com ` | protoPayload.authenticationInfo.principalEmail | src_user |
-
 | AWS ` sts.amazonaws.com ` | eventSource | app, dest |
-
 | GCP ` iamcredentials.googleapis.com ` | protoPayload.serviceName | app, dest |
-
 | AWS ` AssumeRoleWithSAML ` | eventName | signature |
-
 | GCP ` GenerateAccessToken ` | protoPayload.methodName | signature |
-
 | AWS ` arn:aws:sts::671568874969:assumed-role/splunkcloud_account_metadata_read/example_user@aws.com ` | assumedRoleUser.arn | user |
-
 | GCP ` my-service-account@my-project.iam.gserviceaccount.com ` | resource.labels.email_id | user |

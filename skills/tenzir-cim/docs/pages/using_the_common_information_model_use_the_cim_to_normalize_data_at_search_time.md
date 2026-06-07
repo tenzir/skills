@@ -176,9 +176,7 @@ You can use these example searches to check for problems with your source type a
 
 | Normalization | Description |
 | --- | --- |
-
 | Source Type | You can use this example search to check for problems with your source type normalizations. For example, where your source type is a Cisco device, you can search for the following: ` \| datamodel Network_Traffic All_Traffic search \| search sourcetype=cisco:* \| stats count by sourcetype ` If you don't see all the ` sourcetype ` results that you expect, then you may need to revisit the corresponding add-on details. See Supported Add-ons . |
-
 | Field | You can use this example search to check for problems with your field normalizations. For example, where your source type is a Linux Secure device, you can use this example search to check that Linux Secure data maps as expected to the Authentication data model for successful login activities. ` \| datamodel Authentication Successful_Authentication search \| search sourcetype=linux_secure \| table * \| fields - date_* host index punct _raw time* splunk_server sourcetype source eventtype linecount \| fieldsummary ` Here is the result using the example search string above. |
 
 For more information about the datamodel command, see the datamodel in the Search Reference manual.

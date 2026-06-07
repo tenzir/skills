@@ -18,7 +18,6 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | All_Certificates | certificate |
-
 | \|____ SSL | ssl OR tls |
 
 ## Fields for Certificates event datasets
@@ -35,19 +34,14 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
 | All_Certificates | ` dest ` | string | The target in the certificate management event. |  |
-
 | All_Certificates | ` dest_bunit ` | string | The business unit of the target. This field is automatically provided by Asset and Identity correlation features of applications like Splunk Enterprise Security. |  |
-
 | All_Certificates | ` dest_category ` | string | The category of the target. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk Enterprise Security. | other: ` email_server ` , ` SOX-compliant ` |
 | All_Certificates | ` dest_port ` | number | The port number of the target. |  |
 | All_Certificates | ` dest_priority ` | string | The priority of the target. Field is automatically provided by the Asset and Identity correlation features of applications such as Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Certificates | ` duration ` | number | The amount of time for the completion of the certificate management event, in seconds. |  |
 | All_Certificates | ` response_time ` | number | The amount of time it took to receive a response in the certificate management event, if applicable. |  |
-
 | All_Certificates | ` src ` | string | The source involved in the certificate management event. You can alias this from more specific fields, such as ` src_host ` , ` src_ip ` , or ` src_nt_host ` . Note: Do not confuse ` src ` with the event ` source ` or ` sourcetype ` fields. |  |
-
 | All_Certificates | ` src_bunit ` | string | The business unit of the certificate management source. This field is automatically provided by Asset and Identity correlation features of applications like Splunk Enterprise Security. |  |
-
 | All_Certificates | ` src_category ` | string | The category of the certificate management source. This field is automatically provided by Asset and Identity correlation features of applications like the Splunk Enterprise Security. | other: ` email_server ` , ` SOX-compliant ` |
 | All_Certificates | ` src_port ` | number | The port number of the source. |  |
 | All_Certificates | ` src_priority ` | string | The priority of the certificate management source. |  |
@@ -56,14 +50,9 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | SSL | ` ssl_end_time ` | time | The expiry time of the certificate. Needs to be converted to UNIX time for calculations in dashboards. | recommended |
 | SSL | ` ssl_engine ` | string | The name of the signature engine that created the certificate. |  |
 | SSL | ` ssl_hash ` | string | The hash of the certificate. | recommended |
-
 | SSL | ` ssl_is_valid ` | boolean | Indicator of whether the ssl certificate is valid or not. | prescribed values: ` true ` , ` false ` , ` 1 ` , ` 0 ` |
-
--
-- | SSL | ` ssl_issuer ` | string | The certificate issuer's RFC2253 Distinguished Name. | recommended required for pytest-splunk-addon |
-
--
-- | SSL | ` ssl_issuer_common_name ` | string | The certificate issuer's common name. | recommended required for pytest-splunk-addon |
+| SSL | ` ssl_issuer ` | string | The certificate issuer's RFC2253 Distinguished Name. | - recommended - required for pytest-splunk-addon |
+| SSL | ` ssl_issuer_common_name ` | string | The certificate issuer's common name. | - recommended - required for pytest-splunk-addon |
 | SSL | ` ssl_issuer_email ` | string | The certificate issuer's email address. |  |
 | SSL | ` ssl_issuer_email_domain ` | string | The domain name contained within the certificate issuer's email address. | recommended |
 | SSL | ` ssl_issuer_locality ` | string | The certificate issuer's locality. |  |
@@ -75,18 +64,12 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | SSL | ` ssl_policies ` | string | The Object Identification Numbers's of the certificate's policies in a comma separated string. |  |
 | SSL | ` ssl_publickey ` | string | The certificate's public key. |  |
 | SSL | ` ssl_publickey_algorithm ` | string | The algorithm used to create the public key. |  |
-
--
-- | SSL | ` ssl_serial ` | string | The certificate's serial number. | recommended required for pytest-splunk-addon |
+| SSL | ` ssl_serial ` | string | The certificate's serial number. | - recommended - required for pytest-splunk-addon |
 | SSL | ` ssl_session_id ` | string | The session identifier for this certificate. |  |
 | SSL | ` ssl_signature_algorithm ` | string | The algorithm used by the Certificate Authority to sign the certificate. |  |
 | SSL | ` ssl_start_time ` | time | This is the start date and time for this certificate's validity. Needs to be converted to UNIX time for calculations in dashboards. | recommended |
-
--
-- | SSL | ` ssl_subject ` | string | The certificate owner's RFC2253 Distinguished Name. | recommended required for pytest-splunk-addon |
-
--
-- | SSL | ` ssl_subject_common_name ` | string | This certificate owner's common name. | recommended required for pytest-splunk-addon |
+| SSL | ` ssl_subject ` | string | The certificate owner's RFC2253 Distinguished Name. | - recommended - required for pytest-splunk-addon |
+| SSL | ` ssl_subject_common_name ` | string | This certificate owner's common name. | - recommended - required for pytest-splunk-addon |
 | SSL | ` ssl_subject_email ` | string | The certificate owner's e-mail address. |  |
 | SSL | ` ssl_subject_email_domain ` | string | The domain name contained within the certificate subject's email address. | recommended |
 | SSL | ` ssl_subject_locality ` | string | The certificate owner's locality. |  |

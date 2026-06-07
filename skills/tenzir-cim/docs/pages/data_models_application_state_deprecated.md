@@ -20,13 +20,10 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | All_Application_State | (listening, port) OR (process, report) OR (service, report) |
-
 | \|____ Ports | listening |
 | port |
-
 | \|____ Processes | process |
 | report |
-
 | \|____ Services | service |
 | report |
 
@@ -43,7 +40,6 @@ The following table lists the extracted and calculated fields for the event data
 | All_Application_State | ` dest_requires_av ` | boolean |  |  |
 | All_Application_State | ` dest_should_timesync ` | boolean |  |  |
 | All_Application_State | ` dest_should_update ` | boolean |  |  |
-
 | All_Application_State | ` process ` | string | The name of a process or service file, such as ` sqlsrvr.exe ` or ` httpd ` . Note: This field is not appropriate for service or daemon names, such as ` SQL Server ` or ` Apache Web Server ` . Service or daemon names belong to the ` service ` field (see below). | recommended |
 | All_Application_State | ` process_name ` | string | The name of a process. |  |
 | All_Application_State | ` tag ` | string | This automatically generated field is used to access tags from within data models. Do not define extractions for this field when writing add-ons. |  |
@@ -58,10 +54,7 @@ The following table lists the extracted and calculated fields for the event data
 | Processes | ` cpu_load_percent ` | number | CPU Load in percent |  |
 | Processes | ` cpu_time ` | string | CPU Time |  |
 | Processes | ` mem_used ` | number | Memory used in bytes |  |
-
 | Services | ` service ` | string | The name of the service, such as ` SQL Server ` or ` Apache Web Server ` . Note: This field is not appropriate for filenames, such as ` sqlsrvr.exe ` or ` httpd ` . Filenames should belong to the ` process ` field instead. Also, note that field is a string. Use the ` service_id ` field for service ID fields that are integer data types. | recommended |
 | Services | ` service_id ` | string | A numeric indicator for a service. | recommended |
-
 | Services | ` start_mode ` | string | The start mode for the service. | ` disabled ` , ` manual ` , ` auto ` . recommended |
-
 | Services | ` status ` | string | The status of the service. | ` critical ` , ` started ` , ` stopped ` , ` warning ` recommended |

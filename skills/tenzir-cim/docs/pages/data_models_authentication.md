@@ -18,11 +18,8 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | Authentication | authentication |
-
 | \|____ Default_Authentication | default |
-
 | \|____ Insecure_Authentication | cleartext OR insecure |
-
 | \|____ Privileged_Authentication | privileged |
 
 ## Fields for Authentication event datasets
@@ -40,18 +37,13 @@ For even more examples, see Authentication Field Mapping .
 
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
-
 | Authentication | ` action ` | string | The action performed on the resource. | Prescribed values: ` success ` , ` failure ` , ` pending ` , ` error ` Recommended. Also, required for pytest-splunk-addon |
-
 | Authentication | ` app ` | string | The application involved in the event. | ` ssh ` ` splunk ` ` win:local ` ` signin.amazonaws.com ` Recommended. Also, required for pytest-splunk-addon |
 | Authentication | ` authentication_method ` | string | The method used to authenticate the request. | Optional |
-
 | Authentication | ` authentication_service ` | string | The service used to authenticate the request. | ` Okta ` , ` ActiveDirectory ` , ` AzureAD ` Optional |
 | Authentication | ` cim_entity ` | string | This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | Authentication | ` dest ` | string | The target host involved in the authentication. You can alias this from more specific fields. | ` dest_host ` , ` dest_ip ` , ` dest_nt_host ` Recommended |
 | Authentication | ` dest_bunit ` | string | The business unit of the authentication target. | This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
-
 | Authentication | ` dest_category ` | string | The category of the authentication target. | This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. ` email_server ` or ` SOX-compliant ` |
 | Authentication | ` dest_nt_domain ` | string | The name of the Active Directory used by the authentication target, if applicable. |  |
 | Authentication | ` dest_priority ` | string | The priority of the authentication target. | This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
@@ -62,36 +54,26 @@ For even more examples, see Authentication Field Mapping .
 | Authentication | ` result ` | string | The result of the authentication attempt for audittrailv2 sourcetypes. |  |
 | Authentication | ` signature ` | string | A human-readable signature name. |  |
 | Authentication | ` signature_id ` | string | The unique identifier or event code of the event signature. |  |
-
 | Authentication | ` src ` | string | The source involved in the authentication. In the case of endpoint protection authentication the ` src ` is the client. | You can alias this from more specific fields. ` src_host ` , ` src_ip ` , or ` src_nt_host ` . Note: Do not confuse ` src ` with the event ` source ` or ` sourcetype ` fields. Recommended |
 | Authentication | ` src_bunit ` | string | The business unit of the authentication source. | This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
 | Authentication | ` src_category ` | string | The category of the authentication source. | ` email_server ` or ` SOX-compliant ` |
 | Authentication | ` src_nt_domain ` | string | The name of the Active Directory used by the authentication source, if applicable. |  |
 | Authentication | ` src_priority ` | string | The priority of the authentication source. | This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
-
 | Authentication | ` src_user ` | string | In privilege escalation events, ` src_user ` represents the user who initiated the privilege escalation. | This field is unnecessary when an escalation has not been performed. Recommended |
-
 | Authentication | ` src_user_bunit ` | string | The business unit of the user who initiated the privilege escalation. | This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
 | Authentication | ` src_user_category ` | string | The category of the user who initiated the privilege escalation. | This field is unnecessary when an escalation has not been performed.This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
 | Authentication | ` src_user_id ` | string | The unique id of the user who initiated the privilege escalation. | This field is unnecessary when an escalation has not been performed. |
-
 | Authentication | ` src_user_priority ` | string | The priority of the user who initiated the privilege escalation. | This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
 | Authentication | ` src_user_role ` | string | The role of the user who initiated the privilege escalation. | This field is unnecessary when an escalation has not been performed. |
 | Authentication | ` src_user_type ` | string | The type of the user who initiated the privilege escalation. | This field is unnecessary when an escalation has not been performed. |
 | Authentication | ` tag ` | string | This automatically-generated field is used to access tags from within data models. | Do not define extractions for this field when writing add-ons. |
-
 | Authentication | ` user ` | string | The actual string or identifier that a user is logging in with. | This is the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user string or identifier targeted by the escalation. Recommended. Also, required for pytest-splunk-addon |
-
 | Authentication | ` user_agent ` | string | The user agent through which the request was made. ` Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) ` or ` aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4 ` |  |
-
 | Authentication | ` user_bunit ` | string | The business unit of the user involved in the event, or who initiated the event. | For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
-
 | Authentication | ` user_category ` | string | The category of the user involved in the event, or who initiated the event. | For authentication privilege escalation events, this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
 | Authentication | ` user_id ` | string | The unique id of the user involved in the event. | For authentication privilege escalation events, this should represent the user targeted by the escalation. |
-
 | Authentication | ` user_priority ` | string | The priority of the user involved in the event, or who initiated the event. | For authentication privilege escalation events, this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |
 | Authentication | ` user_role ` | string | The role of the user involved in the event, or who initiated the event. | For authentication privilege escalation events, this should represent the user role targeted by the escalation. |
-
 | Authentication | ` user_type ` | string | The type of the user involved in the event or who initiated the event. IAMUser, Admin, or System. | For authentication privilege escalation events, this should represent the user type targeted by the escalation. |
 | Authentication | ` vendor_account ` | string | The account that manages the user that initiated the request. The account represents the organization, a Cloud customer, or a Cloud account. |  |
 | Failed_Authentication | ` Constraint ` | constraint | Constraint includes result field | JSON constraint now includes result field for audittrailv2 support |

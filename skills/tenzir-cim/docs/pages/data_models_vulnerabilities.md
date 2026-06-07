@@ -34,38 +34,23 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
 | Vulnerabilities | ` bugtraq ` | string | Corresponds to an identifier in the vulnerability database provided by the Security Focus website (searchable at http://www.securityfocus.com/ ). |  |
-
--
-- | Vulnerabilities | ` category ` | string | The category of the discovered vulnerability, such as ` DoS ` . Note: This field is a string. Use ` category_id ` for numeric values. The ` category_id ` field is optional and thus is not included in the data model. | recommended required for pytest-splunk-addon |
+| Vulnerabilities | ` category ` | string | The category of the discovered vulnerability, such as ` DoS ` . Note: This field is a string. Use ` category_id ` for numeric values. The ` category_id ` field is optional and thus is not included in the data model. | - recommended - required for pytest-splunk-addon |
 | Vulnerabilities | ` cert ` | string | Corresponds to an identifier in the vulnerability database provided by the US Computer Emergency Readiness Team (US-CERT, searchable at http://www.kb.cert.org/vuls/ ). |  |
-
--
-- | Vulnerabilities | ` cve ` | string | Corresponds to an identifier provided in the Common Vulnerabilities and Exposures index (searchable at http://cve.mitre.org ). | recommended required for pytest-splunk-addon |
+| Vulnerabilities | ` cve ` | string | Corresponds to an identifier provided in the Common Vulnerabilities and Exposures index (searchable at http://cve.mitre.org ). | - recommended - required for pytest-splunk-addon |
 | Vulnerabilities | ` cvss ` | number | Numeric indicator of the common vulnerability scoring system. | required for pytest-splunk-addon |
-
--
-- | Vulnerabilities | ` dest ` | string | The host with the discovered vulnerability. You can alias this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | recommended required for pytest-splunk-addon |
+| Vulnerabilities | ` dest ` | string | The host with the discovered vulnerability. You can alias this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | - recommended - required for pytest-splunk-addon |
 | Vulnerabilities | ` dest_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | Vulnerabilities | ` dest_category ` | string |
 | Vulnerabilities | ` dest_priority ` | string |
-
--
-- | Vulnerabilities | ` dvc ` | string | The system that discovered the vulnerability. You can alias this from more specific fields, such as ` dvc_host ` , ` dvc_ip ` , or ` dvc_name ` . | recommended required for pytest-splunk-addon |
+| Vulnerabilities | ` dvc ` | string | The system that discovered the vulnerability. You can alias this from more specific fields, such as ` dvc_host ` , ` dvc_ip ` , or ` dvc_name ` . | - recommended - required for pytest-splunk-addon |
 | Vulnerabilities | ` dvc_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | Vulnerabilities | ` dvc_category ` | string |
 | Vulnerabilities | ` dvc_priority ` | string |
 | Vulnerabilities | ` msft ` | string | Corresponds to a Microsoft Security Advisory number ( http://technet.microsoft.com/en-us/security/advisory/ ). |  |
 | Vulnerabilities | ` mskb ` | string | Corresponds to a Microsoft Knowledge Base article number ( http://support.microsoft.com/kb/ ). |  |
-
--
--
--
-
-| Vulnerabilities | ` severity ` | string | The severity of the vulnerability detection event. Specific values are required. Use ` vendor_severity ` for the vendor's own human readable strings (such as ` Good ` , ` Bad ` , and ` Really Bad ` ). Note: This field is a string. Use ` severity_id ` for numeric data types. | recommended required for pytest-splunk-addon prescribed values: ` critical ` , ` high ` , ` medium ` , ` informational ` , ` low ` |
+| Vulnerabilities | ` severity ` | string | The severity of the vulnerability detection event. Specific values are required. Use ` vendor_severity ` for the vendor's own human readable strings (such as ` Good ` , ` Bad ` , and ` Really Bad ` ). Note: This field is a string. Use ` severity_id ` for numeric data types. | - recommended - required for pytest-splunk-addon - prescribed values: ` critical ` , ` high ` , ` medium ` , ` informational ` , ` low ` |
 | Vulnerabilities | ` severity_id ` | number | The numeric or vendor specific severity indicator corresponding to the event severity. |  |
-
--
-- | Vulnerabilities | ` signature ` | string | The name of the vulnerability detected on the host, such as ` HPSBMU02785 SSRT100526 rev.2 - HP LoadRunner Running on Windows, Remote Execution of Arbitrary Code, Denial of Service (DoS) ` . Note: This field has a string value. Use ` signature_id ` for numeric indicators. | recommended required for pytest-splunk-addon |
+| Vulnerabilities | ` signature ` | string | The name of the vulnerability detected on the host, such as ` HPSBMU02785 SSRT100526 rev.2 - HP LoadRunner Running on Windows, Remote Execution of Arbitrary Code, Denial of Service (DoS) ` . Note: This field has a string value. Use ` signature_id ` for numeric indicators. | - recommended - required for pytest-splunk-addon |
 | Vulnerabilities | ` signature_id ` | string | The unique identifier or event code of the event signature. |  |
 | Vulnerabilities | ` tag ` | string | This automatically generated field is used to access tags from within data models. Do not define extractions for this field when writing add-ons. |  |
 | Vulnerabilities | ` url ` | string | The URL involved in the discovered vulnerability. |  |

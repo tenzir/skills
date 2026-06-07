@@ -88,7 +88,6 @@ search = sourcetype=ossec severity_id >=6
 | Intrusion Detection | severity | string |
 | Intrusion Detection | src | string |
 | Intrusion Detection | dest | string |
-
 | Intrusion Detection | ids_type Note: ids_type of ` host ` is necessary to include this in the host root model | string |
 
 You can also populate additional CIM fields, if they are available in your data.

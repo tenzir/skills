@@ -19,21 +19,13 @@ The following tags act as constraints to identify your events as being relevant 
 | --- | --- |
 | All_Performance | performance |
 | cpu OR facilities OR memory OR storage OR network OR (os, (uptime OR (time, synchronize))) |
-
 | \|____CPU | cpu |
-
 | \|____Facilities | facilities |
-
 | \|____Memory | memory |
-
 | \|____Storage | storage |
-
 | \|____Network | network |
-
 | \|____OS | os |
-
 | \|____Uptime | uptime |
-
 | \|____Timesync | time |
 | synchronize |
 
@@ -51,14 +43,10 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Object name | Field name | Data type | Description | Abbreviated list of example values |
 | --- | --- | --- | --- | --- |
 | All_Performance | ` dest ` | string | The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields in your event data, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | recommended |
-
 | All_Performance | ` dest_bunit ` | string | The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Performance | ` dest_category ` | string | The category of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Performance | ` dest_priority ` | string | The priority of the system where the performance event occurred. |  |
-
 | All_Performance | ` dest_should_timesync ` | boolean | Indicates whether or not the system where the performance event occurred should time sync. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Performance | ` dest_should_update ` | boolean | Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Performance | ` hypervisor_id ` | string | The ID of the virtualization hypervisor. |  |
 | All_Performance | ` resource_type ` | string | The type of facilities resource involved in the performance event, such as a ` rack ` , ` room ` , or ` system ` . |  |
@@ -100,9 +88,5 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Network | ` thruput_max ` | number | The maximum possible throughput reported by the service, in bytes. |  |
 | OS | ` signature ` | string | The event description signature, if available. | recommended |
 | OS | ` signature_id ` | string | The unique identifier or event code of the event signature. |  |
-
--
--
-
-| Timesync | ` action ` | string | The result of a time sync event. | recommended prescribed values: ` success ` , ` failure ` |
+| Timesync | ` action ` | string | The result of a time sync event. | - recommended - prescribed values: ` success ` , ` failure ` |
 | Uptime | ` uptime ` | number | The uptime of the compute resource, in seconds. | recommended |

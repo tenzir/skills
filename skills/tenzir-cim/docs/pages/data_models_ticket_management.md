@@ -18,11 +18,8 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | All_Ticket_Management | ticketing |
-
 | \|____Change | change |
-
 | \|____Incident | incident |
-
 | \|____Problem | problem |
 
 ## Fields for Ticket Management event datasets
@@ -42,11 +39,8 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | All_Ticket_Management | ` comments ` | string | Comments about the service request. |  |
 | All_Ticket_Management | ` description ` | string | The description of the service request. |  |
 | All_Ticket_Management | ` dest ` | string | The destination of the service request. You can alias this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . |  |
-
 | All_Ticket_Management | ` dest_bunit ` | string | The business unit associated with the destination user or entity of the triggering events, if applicable. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Ticket_Management | ` dest_category ` | string | The category of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Ticket_Management | ` dest_priority ` | string | The priority of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Ticket_Management | ` priority ` | string | The relative priority of the service request. |  |
 | All_Ticket_Management | ` severity ` | string | The relative severity of the service request. |  |
@@ -59,22 +53,16 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | All_Ticket_Management | ` splunk_id ` | string | The unique identifier of the service request as it pertains to Splunk. For example, 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@ 0533eff241db0d892509be46cd3126e30e0f6046 . |  |
 | All_Ticket_Management | ` splunk_realm ` | string | The Splunk application or use case associated with the unique identifier (splunk_id). For example, ` es_notable ` . |  |
 | All_Ticket_Management | ` src_user ` | string | The user or entity creating or triggering the ticket, if applicable. |  |
-
 | All_Ticket_Management | ` src_user_bunit ` | string | The business unit associated with the source user or entity within the triggering events, if applicable. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Ticket_Management | ` src_user_category ` | string | The category associated with the user or entity that triggered the service request. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Ticket_Management | ` src_user_priority ` | string | The priority associated with the user or entity that triggered the service request. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Ticket_Management | ` status ` | string | The relative status of the service request. |  |
 | All_Ticket_Management | ` tag ` | string | This automatically generated field is used to access tags from within data models. Do not define extractions for this field when writing add-ons. |  |
 | All_Ticket_Management | ` ticket_id ` | string | An identification name, code, or number for the service request. |  |
 | All_Ticket_Management | ` time_submitted ` | time | The time that the ` src_user ` submitted the service request. |  |
 | All_Ticket_Management | ` user ` | string | The name of the user or entity that is assigned to the ticket, if applicable. |  |
-
 | All_Ticket_Management | ` user_bunit ` | string | The business unit associated with the user or entity that is carrying out the service request, if applicable. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Ticket_Management | ` user_category ` | string | The category associated with the user or entity that is assigned to carry out the service request, if applicable. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Ticket_Management | ` user_priority ` | string | The priority of the user or entity that is assigned to carry out the service request, if applicable. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | Change | ` change ` | string | Designation for a request for change (RFC) that is raised to modify an IT service to resolve an ` incident ` or ` problem ` . |  |
 | Incident | ` incident ` | string | The incident that triggered the service request. Can be a rare occurrence, or something that happens more frequently. An incident that occurs on a frequent basis can also be classified as a ` problem ` . |  |

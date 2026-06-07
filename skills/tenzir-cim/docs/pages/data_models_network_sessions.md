@@ -19,13 +19,9 @@ The following tags act as constraints to identify your events as being relevant 
 | --- | --- |
 | All_Sessions | network |
 | session |
-
 | \|____ Session_Start | start |
-
 | \|____ Session_End | end |
-
 | \|____ DHCP | dhcp |
-
 | \|____ VPN | vpn |
 
 ## Fields for Network Sessions event datasets
@@ -41,52 +37,29 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 
 | Dataset name | Field name | Data type | Description | Abbreviated list of example values |
 | --- | --- | --- | --- | --- |
-
--
--
-- | All_Sessions | ` action ` | string | The action taken by the reporting device. | Required for pytest-splunk-addon Prescribed values are: started (for VPN session starts, and DHCP lease starts) ended (for VPN session teardowns, and DHCP lease ends) blocked (for the VPN session disallowed start attempts, or failed DHCP leases) |
-
+| All_Sessions | ` action ` | string | The action taken by the reporting device. | Required for pytest-splunk-addon Prescribed values are: - started (for VPN session starts, and DHCP lease starts) - ended (for VPN session teardowns, and DHCP lease ends) - blocked (for the VPN session disallowed start attempts, or failed DHCP leases) |
 | All_Sessions | ` dest_bunit ` | string | The business unit of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Sessions | ` dest_category ` | string | The category of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Sessions | ` dest_dns ` | string | The domain name system address of the destination for a network session event. | recommended |
-
--
-- | All_Sessions | ` dest_ip ` | string | The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client. | recommended required for pytest-splunk-addon |
-
--
-- | All_Sessions | ` dest_mac ` | string | The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session. Note: Always force lower case on this field. Note: Always use colons instead of dashes, spaces, or no separator. | recommended required for pytest-splunk-addon |
+| All_Sessions | ` dest_ip ` | string | The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client. | - recommended - required for pytest-splunk-addon |
+| All_Sessions | ` dest_mac ` | string | The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session. Note: Always force lower case on this field. Note: Always use colons instead of dashes, spaces, or no separator. | - recommended - required for pytest-splunk-addon |
 | All_Sessions | ` dest_nt_host ` | string | The NetBIOS name of the client initializing a network session. | recommended |
-
 | All_Sessions | ` dest_priority ` | string | The priority of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Sessions | ` duration ` | number | The amount of time for the completion of the network session event, in seconds. |  |
 | All_Sessions | ` response_time ` | number | The amount of time it took to receive a response in the network session event, if applicable. |  |
-
 | All_Sessions | ` signature ` | string | An indication of the type of network session event. | required for pytest-splunk-addon For example: DHCPACK, DHCPNAK, DHCPRELEASE, WebVPN session started, etc2. |
 | All_Sessions | ` signature_id ` | string | The unique identifier or event code of the event signature. |  |
-
 | All_Sessions | ` src_bunit ` | string | The business unit of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Sessions | ` src_category ` | string | The category of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Sessions | ` src_dns ` | string | The external domain name of the client initializing a network session. Not applicable for DHCP events. |  |
-
 | All_Sessions | ` src_ip ` | string | The IP address of the client initializing a network session. Not applicable for DHCP events. |  |
-
 | All_Sessions | ` src_mac ` | string | The MAC address of the client initializing a network session. Not applicable for DHCP events. Note: Always force lower case on this field. Note: Always use colons instead of dashes, spaces, or no separator. |  |
-
 | All_Sessions | ` src_nt_host ` | string | The NetBIOS name of the client initializing a network session. Not applicable for DHCP events. |  |
-
 | All_Sessions | ` src_priority ` | string | The priority of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Sessions | ` tag ` | string | This automatically generated field is used to access tags from within data models. Do not define extractions for this field when writing add-ons. |  |
-
--
-- | All_Sessions | ` user ` | string | The user in a network session event, where applicable. For example, a VPN session or an authenticated DHCP event. | recommended required for pytest-splunk-addon |
-
+| All_Sessions | ` user ` | string | The user in a network session event, where applicable. For example, a VPN session or an authenticated DHCP event. | - recommended - required for pytest-splunk-addon |
 | All_Sessions | ` user_bunit ` | string | The business unit associated with the user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Sessions | ` user_category ` | string | The category of the user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Sessions | ` user_priority ` | string | The priority of the user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Sessions | ` vendor_product ` | string | The full name of the DHCP or DNS server involved in this event, including vendor and product name. For example, ` Microsoft DHCP ` or ` ISC BIND ` . Create this field by combining the values of the ` vendor ` and ` product ` fields, if present in the events. | recommended |
 | DHCP | ` lease_duration ` | number | The duration of the DHCP lease, in seconds. |  |

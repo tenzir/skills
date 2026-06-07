@@ -144,42 +144,21 @@ Using the file upload success from Google Drive as a base sample, and comparing 
 | Device example data | Provider field name | CIM field name |
 | Device example data | Provider field name | CIM field name |
 | Device example data | Provider field name | CIM field name |
-
--
-- | Google Drive ` name@example.com ` | actor.email | email user |
-
+| Google Drive ` name@example.com ` | actor.email | - email - user |
 | Box ` name@example.com ` | created_by_login | email |
-
--
-- | Google Drive ` name@example.com ` | actor.email | email user |
-
+| Google Drive ` name@example.com ` | actor.email | - email - user |
 | Box ` Example Name ` | created_by_name | user |
-
 | Google Drive ` 110778908138668363959 ` | actor. profileId | user_id |
-
--
-- | Box ` 15230886095 ` | created_by_id account_id | user_id |
-
+| Box ` 15230886095 ` | - created_by_id - account_id | user_id |
 | Google Drive ` 96.231.134.130 ` | ipAddress | src |
-
 | Box ` 103.226.185.0 ` | ip_address | src |
-
 | Google Drive ` upload ` | name | action |
-
 | Box ` UPLOAD ` | event_type | action |
-
 | Google Drive ` 1s2ww0PVPGuuKXAzdjg6jGgmZtcxGchH7 ` | "name": "doc_id" | object_id |
-
 | Box ` 782729174962 ` | source_item_id | object_id |
-
 | Google Drive ` unknown ` | "name": "doc_type" | object_type |
-
 | Box ` file ` | source_item_type | object_type |
-
 | Google Drive ` quickstart.py ` | "name": "doc_title" | object |
-
 | Box ` Consolidated Quarter-VII-IV Schedule - Participants.xlsx ` | source_item_name | object |
-
 | Google Drive ` name@example.com ` | "name": "owner" | owner |
-
 | Box ` Example Name ` | source_owned_by_name | owner |

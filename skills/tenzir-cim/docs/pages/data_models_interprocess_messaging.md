@@ -37,11 +37,8 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | Dataset name | Field name | Data type | Description | Abbreviated list of example values |
 | --- | --- | --- | --- | --- |
 | All_Interprocess_Messaging | ` dest ` | string | The destination of the message. You can alias this from more specific fields, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . |  |
-
 | All_Interprocess_Messaging | ` dest_bunit ` | string | The business unit of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
-
 | All_Interprocess_Messaging | ` dest_category ` | string | The type of message destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. | prescribed values: ` queue ` , ` topic ` |
-
 | All_Interprocess_Messaging | ` dest_priority ` | string | The priority of the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons. |  |
 | All_Interprocess_Messaging | ` duration ` | number | The number of seconds from message call to message response. Can be derived by getting the difference between the ` request_sent_time ` and the ` message_received_time ` . |  |
 | All_Interprocess_Messaging | ` endpoint ` | string | The endpoint that the message accessed during the RPC (remote procedure call) transaction. |  |
@@ -71,6 +68,5 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 | All_Interprocess_Messaging | ` response_time ` | number | The amount of time it took to receive a response, in seconds. |  |
 | All_Interprocess_Messaging | ` return_message ` | string | The response status message sent by the message server. |  |
 | All_Interprocess_Messaging | ` rpc_protocol ` | string | The protocol that the message server uses for remote procedure calls (RPC). Possible values include ` HTTP REST ` , ` SOAP ` , and ` EJB ` . |  |
-
 | All_Interprocess_Messaging | ` status ` | boolean | The status of the message response. | prescribed values: ` pass ` , ` fail ` |
 | All_Interprocess_Messaging | ` tag ` | string | This automatically generated field is used to access tags from within data models. Do not define extractions for this field when writing add-ons. |  |

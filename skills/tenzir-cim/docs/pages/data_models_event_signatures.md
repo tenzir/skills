@@ -18,7 +18,6 @@ Note: A dataset is a component of a data model. In versions of the Splunk platfo
 | Dataset name | Tag name |
 | --- | --- |
 | Event_Signatures |  |
-
 | \|____ Signatures | track_event_signatures |
 
 The following table lists the extracted and calculated fields for the event datasets in the model. Note that it does not include any inherited fields. For more information, see How to use these reference tables .
@@ -46,7 +45,6 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 
 | Calculation ID | Field name | Data type | Description | Abbreviated list of example values |
 | --- | --- | --- | --- | --- |
-
 | ` Signatures_vendor_product ` | ` vendor_product ` | string | The vendor and product name of the technology that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data. Expression: ` case(isnotnull(vendor_product),vendor_product, ` ` isnotnull(vendor) AND vendor!=\"unknown\" AND isnotnull(product) AND product!=\"unknown\",vendor.\" \".product,isnotnull(vendor) AND vendor!=\"unknown\" AND (isnull(product) OR product=\"unknown\"),vendor.\" unknown\",(isnull(vendor) OR vendor=\"unknown\") AND isnotnull(product) AND product!=\"unknown\",\"unknown \".product,isnotnull(sourcetype),sourcetype, 1=1,\"unknown\")" ` | recommended |
 
 ## Search Example

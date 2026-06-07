@@ -43,9 +43,7 @@ The JSON spec is located at `$SPLUNK_HOME/etc/apps/Splunk_SA_CIM/README/alert_ac
 ```
 
 | drilldown_uri | An optional customized drilldown for the link that appears in the detailed view of a notable event on the Incident Review dashboard in Splunk Enterprise Security. This parameter is only relevant within Splunk Enterprise Security. If you do not want to specify a custom drilldown link, remove this parameter. Do not leave this parameter blank. If the parameter is not included, the default drilldown URL leads to a search for the result events created by this response action. If you want to specify a target in an app outside Enterprise Security, use the format ` ../<app_context>/<viewname>?<additional drilldown parameters> ` . If you are redirecting to a custom view within Enterprise Security, use the format ` /<viewname>?<additional drilldown parameters> ` . | "../my_app/my_view? form.orig_sid=$sid$&form.orig_rid=$rid$" |
-
 | field_name_params | The param or params which represent the name of a result field. This parameter is only relevant within Splunk Enterprise Security. Incident Review uses the specified field name parameters to render a dropdown with field names present in the notable event. | ["param.my_param"] |
-
 | required_params | Parameter(s) required for successful action execution. This parameter is only relevant within Splunk Enterprise Security. Incident Review uses the specified field name parameters to render a ` * ` on the user interface to indicate that the parameter is required. | ["param.my_param"] |
 
 ## Modeling introspection data

@@ -49,11 +49,7 @@ For even more examples, see Data Access Field Mapping .
 
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
-
--
--
-
-| Data_Access | ` action ` | string | The data access action taken by the user. | recommended prescribed values: ` commented ` , ` copied ` , ` created ` , ` deleted ` , ` disabled ` , ` downloaded ` , ` enabled ` , ` granted ` , ` forwarded ` , ` modified ` , ` read ` , ` revoked ` , ` shared ` , ` stopped ` , ` uncommented ` , ` unlocked ` , ` unshared ` , ` updated ` , ` uploaded ` , |
+| Data_Access | ` action ` | string | The data access action taken by the user. | - recommended - prescribed values: ` commented ` , ` copied ` , ` created ` , ` deleted ` , ` disabled ` , ` downloaded ` , ` enabled ` , ` granted ` , ` forwarded ` , ` modified ` , ` read ` , ` revoked ` , ` shared ` , ` stopped ` , ` uncommented ` , ` unlocked ` , ` unshared ` , ` updated ` , ` uploaded ` , |
 | Data_Access | ` app ` | string | The application involved in the event. | recommended |
 | Data_Access | ` app_id ` | string | Application ID as defined by the vendor. |  |
 | Data_Access | ` dest ` | string | The destination where the data resides or where it is being accessed, such as the product or application. You can alias this from more specific fields not included in this data model, such as ` dest_host ` , ` dest_ip ` , ` dest_url ` , or ` dest_name ` . | recommended |
@@ -63,7 +59,6 @@ For even more examples, see Data Access Field Mapping .
 | Data_Access | ` email ` | string | The email address of the user involved in the event, or who initiated the event. |  |
 | Data_Access | ` object ` | string | Resource object name on which the action was performed by a user. | recommended |
 | Data_Access | ` object_attrs ` | string | The object's attributes and their values. The attributes and values can be those that are updated on a resource object, or those that are not updated but are essential attributes. | recommended |
-
 | Data_Access | ` object_category ` | string | Generic name for the class of the updated resource object. Expected values may be specific to an app. For example, ` collaboration ` , ` file ` , ` folder ` , ` comment ` , ` task ` , ` note ` , and so on. | recommended |
 | Data_Access | ` object_id ` | string | The unique updated resource object ID as presented to the system, if applicable. For example, a source_folder_id, doc_id. | recommended |
 | Data_Access | ` object_path ` | string | The path of the modified resource object, if applicable, such as a file, directory, or volume. |  |

@@ -20,13 +20,9 @@ The following tags act as constraints to identify your events as being relevant 
 | Dataset name | Tag name |
 | --- | --- |
 | All_Changes | change |
-
 | \|____ Auditing_Changes | audit |
-
 | \|____ Endpoint_Changes | endpoint |
-
 | \|____ Network_Changes | network |
-
 | \|____ Account_Management | account |
 
 ## Fields for Change Analysis event dataset
@@ -35,9 +31,7 @@ The following table lists the extracted and calculated fields for the event data
 
 | Dataset name | Field name | Data type | Description | Notes |
 | --- | --- | --- | --- | --- |
-
 | All_Changes | ` action ` | string | The action performed on the resource. | Values: ` acl_modified ` , ` cleared ` , ` created ` , ` deleted ` , ` modified ` , ` read ` , ` stopped ` , ` updated ` recommended |
-
 | All_Changes | ` change_type ` | string | The type of change, such as ` filesystem ` or ` AAA ` (authentication, authorization, and accounting). | Values: ` restart ` recommended |
 | All_Changes | ` command ` | string | The command that initiated the change. | recommended |
 | All_Changes | ` dest ` | string | The resource where change occurred. You can alias this from more specific fields not included in this data model, such as ` dest_host ` , ` dest_ip ` , or ` dest_name ` . | recommended |
@@ -47,18 +41,15 @@ The following table lists the extracted and calculated fields for the event data
 | All_Changes | ` dvc ` | string | The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields not included in this data model, such as ` dvc_host ` , ` dvc_ip ` , or ` dvc_name ` . | recommended |
 | All_Changes | ` object ` | string | Name of the affected object on the resource (such as a router interface, user account, or server volume). | recommended |
 | All_Changes | ` object_attrs ` | string | The attributes that were updated on the updated resource object, if applicable. | recommended |
-
 | All_Changes | ` object_category ` | string | Generic name for the class of the updated resource object. Expected values may be specific to an app. | Values: ` directory ` , ` file ` , ` group ` , ` registry ` , ` user ` recommended |
 | All_Changes | ` object_id ` | string | The unique updated resource object ID as presented to the system, if applicable (for instance, a SID, UUID, or GUID value). | recommended |
 | All_Changes | ` object_path ` | string | The path of the modified resource object, if applicable (such as a file, directory, or volume). | recommended |
-
 | All_Changes | ` result ` | string | The vendor-specific result of a change, or clarification of an ` action ` status. For instance, ` status=failure ` may be accompanied by ` result=blocked by policy ` or ` result=disk full ` . ` result ` is a string. Please use a ` msg_severity_id ` field (not included in the data model) for severity ID fields that are integer data types. | Values: ` lockout ` recommended |
 | All_Changes | ` result_id ` | string | A result indicator for an ` action ` status. | recommended |
 | All_Changes | ` src ` | string | The resource where the change was originated. You can alias this from more specific fields not included in the data model, such as ` src_host ` , ` src_ip ` , or ` src_name ` . | recommended |
 | All_Changes | ` src_bunit ` | string | These fields are automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for these fields when writing add-ons. |
 | All_Changes | ` src_category ` | string |
 | All_Changes | ` src_priority ` | string |
-
 | All_Changes | ` status ` | string | Status of the update. | Values: ` success ` , ` failure ` recommended |
 | All_Changes | ` tag ` | string | This automatically generated field is used to access tags from within datamodels. Do not define extractions for this field when writing add-ons. |  |
 | All_Changes | ` user ` | string | The user or entity performing the change. For account changes, this is the account that was changed. See ` src_user ` for user or entity performing the change. | recommended |

@@ -1060,13 +1060,13 @@ class ArticleMarkdownParser(HTMLParser):
             self.heading_level = int(tag[1])
             self.heading_parts = []
         elif tag in {"p", "section", "div"}:
-            self.parts.append("\n\n")
+            self.append("\n\n")
         elif tag == "br":
             self.append("\n")
         elif tag in {"ul", "ol"}:
-            self.parts.append("\n")
+            self.append("\n")
         elif tag == "li":
-            self.parts.append("\n- ")
+            self.append("\n- ")
         elif tag == "code":
             if self.in_pre:
                 return
