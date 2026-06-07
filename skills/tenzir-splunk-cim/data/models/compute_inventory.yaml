@@ -102,6 +102,7 @@ datasets:
     - inventory
     - cpu
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
     - tag=cpu
     fields:
       _time:
@@ -222,6 +223,7 @@ datasets:
     - inventory
     - memory
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
     - tag=memory
     fields:
       _time:
@@ -332,6 +334,7 @@ datasets:
     - inventory
     - network
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
     - tag=network
     fields:
       _time:
@@ -490,6 +493,7 @@ datasets:
     - inventory
     - storage
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
     - tag=storage
     fields:
       _time:
@@ -654,6 +658,7 @@ datasets:
     - system
     - version
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
     - tag=system tag=version
     fields:
       _time:
@@ -768,6 +773,7 @@ datasets:
     - inventory
     - user
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
     - tag=user
     fields:
       _time:
@@ -925,6 +931,8 @@ datasets:
     - inventory
     - user
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=user
     - password=*
     fields:
       _time:
@@ -1089,6 +1097,8 @@ datasets:
     - user
     - default
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=user
     - tag=default
     fields:
       _time:
@@ -1252,6 +1262,7 @@ datasets:
     - inventory
     - virtual
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
     - tag=virtual
     fields:
       _time:
@@ -1366,6 +1377,8 @@ datasets:
     - virtual
     - snapshot
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=virtual
     - tag=snapshot
     fields:
       _time:
@@ -1493,6 +1506,8 @@ datasets:
     - virtual
     - tools
     constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=virtual
     - tag=tools
     fields:
       _time:

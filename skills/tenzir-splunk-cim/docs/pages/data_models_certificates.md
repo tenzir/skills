@@ -101,10 +101,8 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 
 The following is a sample of a certificate event from zeek/corelight:
 
-JSON Copy { "ts": 1586817752.481357, "id": "FBKnzp4LVE2thdglSe", "certificate.version": 3, "certificate.serial": "0B1641AEAE93F5DB71B36C977B7FCF63", "certificate.subject": "CN=Outlook.live.com,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US", "certificate.issuer": "CN=DigiCert Cloud Services CA-1,O=DigiCert Inc,C=US", "certificate.not_valid_before": 1585008000.0, "certificate.not_valid_after": 1648123200.0, "certificate.key_alg": "rsaEncryption", "certificate.sig_alg": "sha256WithRSAEncryption", "certificate.key_type": "rsa", "certificate.key_length": 2048, "certificate.exponent": "65537", "san.dns": ["Outlook.live.com", "outlook-sdf.live.com", "attachment.outlook.office.net", "attachment.outlook.officeppe.net", "hotmail.com", "*.calendar.live.com", "*.hotmail.com", "*.live.com", "*.mail.live.com", "afd-a-acdc-direct.office.com", "live.com", "*.nrb.footprintdns.com", "*.fp.measure.office.com", "premium.outlook.com"], "basic_constraints.ca": false }
-
 ```text
-`{
+{
   "ts": 1586817752.481357,
   "id": "FBKnzp4LVE2thdglSe",
   "certificate.version": 3,
@@ -120,15 +118,13 @@ JSON Copy { "ts": 1586817752.481357, "id": "FBKnzp4LVE2thdglSe", "certificate.ve
   "certificate.exponent": "65537",
   "san.dns": ["Outlook.live.com", "outlook-sdf.live.com", "attachment.outlook.office.net", "attachment.outlook.officeppe.net", "hotmail.com", "*.calendar.live.com", "*.hotmail.com", "*.live.com", "*.mail.live.com", "afd-a-acdc-direct.office.com", "live.com", "*.nrb.footprintdns.com", "*.fp.measure.office.com", "premium.outlook.com"],
   "basic_constraints.ca": false
-}`
+}
 ```
 
 The following are CIM fields extracted from this sample:
 
-CODE Copy "ssl_start_time" = "1585008000" "ssl_end_time" = "1648123200" "ssl_validity_window" = "63115200" "ssl_issuer" = "CN=DigiCert Cloud Services CA-1,O=DigiCert Inc,C=US" "ssl_issuer_common_name" = "DigiCert Cloud Services CA-1" "ssl_issuer_locality" = "Redmond" "ssl_issuer_state" = "Washington "ssl_issuer_organization" = "DigiCert Inc" "ssl_subject" = "CN=Outlook.live.com,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US" "ssl_subject_common_name" = "Outlook.live.com" "ssl_subject_organization" = "Microsoft Corporation" "ssl_subject_locality" = "Redmond" "ssl_subject_state" = "Washington" "ssl_subject_organization" = "Microsoft Corporation" "ssl_is_valid" = "true" "ssl_version" = "3" "ssl_serial" = "0B1641AEAE93F5DB71B36C977B7FCF63" "ssl_publickey_algorithm" = "rsaEncryption" "ssl_signature_algorithm" = "sha256WithRSAEncryption"
-
 ```text
-`"ssl_start_time" = "1585008000"
+"ssl_start_time" = "1585008000"
 "ssl_end_time" = "1648123200"
 "ssl_validity_window" = "63115200"
 "ssl_issuer" = "CN=DigiCert Cloud Services CA-1,O=DigiCert Inc,C=US"
@@ -146,5 +142,5 @@ CODE Copy "ssl_start_time" = "1585008000" "ssl_end_time" = "1648123200" "ssl_val
 "ssl_version" = "3"
 "ssl_serial" = "0B1641AEAE93F5DB71B36C977B7FCF63"
 "ssl_publickey_algorithm" = "rsaEncryption"
-"ssl_signature_algorithm" = "sha256WithRSAEncryption"`
+"ssl_signature_algorithm" = "sha256WithRSAEncryption"
 ```

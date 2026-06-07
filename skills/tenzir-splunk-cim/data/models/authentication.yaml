@@ -241,6 +241,7 @@ datasets:
     tags:
     - authentication
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
     - action="failure" OR result="failure"
     fields:
       _time:
@@ -514,6 +515,7 @@ datasets:
     tags:
     - authentication
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
     - action="success" OR result="success"
     fields:
       _time:
@@ -788,6 +790,7 @@ datasets:
     - authentication
     - default
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
     - tag="default"
     fields:
       _time:
@@ -1065,6 +1068,8 @@ datasets:
     - authentication
     - default
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
+    - tag="default"
     - action="failure"
     fields:
       _time:
@@ -1340,6 +1345,8 @@ datasets:
     - authentication
     - default
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
+    - tag="default"
     - action="success"
     fields:
       _time:
@@ -1615,6 +1622,7 @@ datasets:
     - authentication
     - insecure
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
     - tag="insecure" OR tag="cleartext"
     fields:
       _time:
@@ -1889,6 +1897,7 @@ datasets:
     - authentication
     - privileged
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
     - tag="privileged"
     fields:
       _time:
@@ -2166,6 +2175,8 @@ datasets:
     - authentication
     - privileged
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
+    - tag="privileged"
     - action="failure"
     fields:
       _time:
@@ -2441,6 +2452,8 @@ datasets:
     - authentication
     - privileged
     constraints:
+    - (`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)
+    - tag="privileged"
     - action="success"
     fields:
       _time:

@@ -79,6 +79,7 @@ datasets:
     - performance
     - cpu
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
     - tag=cpu
     fields:
       _time:
@@ -176,6 +177,7 @@ datasets:
     - performance
     - facilities
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
     - tag=facilities
     fields:
       _time:
@@ -269,6 +271,7 @@ datasets:
     - performance
     - memory
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
     - tag=memory
     fields:
       _time:
@@ -380,6 +383,7 @@ datasets:
     - performance
     - storage
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
     - tag=storage
     fields:
       _time:
@@ -540,6 +544,7 @@ datasets:
     - performance
     - network
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
     - tag=network
     fields:
       _time:
@@ -629,6 +634,7 @@ datasets:
     - performance
     - os
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
     - tag=os
     fields:
       _time:
@@ -724,6 +730,8 @@ datasets:
     - time
     - synchronize
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
+    - tag=os
     - tag=time tag=synchronize
     fields:
       _time:
@@ -830,6 +838,8 @@ datasets:
     - os
     - uptime
     constraints:
+    - (`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))
+    - tag=os
     - tag=uptime
     fields:
       _time:

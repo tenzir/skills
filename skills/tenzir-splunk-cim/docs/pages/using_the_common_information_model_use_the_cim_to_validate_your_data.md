@@ -19,10 +19,8 @@ Note: A dataset is a component of a data model. In versions of the Splunk platfo
 
 The following format is expected by the command.
 
-CODE Copy | datamodelsimple type=<models|objects|attributes> datamodel=<model name> object=<dataset name> nodename=<dataset lineage>
-
 ```text
-`| datamodelsimple type=<models|objects|attributes> datamodel=<model name> object=<dataset name> nodename=<dataset lineage>`
+| datamodelsimple type=<models|objects|attributes> datamodel=<model name> object=<dataset name> nodename=<dataset lineage>
 ```
 
 ### Syntax for datamodelsimple

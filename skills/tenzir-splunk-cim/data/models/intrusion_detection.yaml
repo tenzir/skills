@@ -239,6 +239,7 @@ datasets:
     - ids
     - attack
     constraints:
+    - (`cim_Intrusion_Detection_indexes`) tag=ids tag=attack
     - ids_type="application"
     fields:
       _time:
@@ -503,6 +504,7 @@ datasets:
     - ids
     - attack
     constraints:
+    - (`cim_Intrusion_Detection_indexes`) tag=ids tag=attack
     - ids_type="host"
     fields:
       _time:
@@ -767,6 +769,7 @@ datasets:
     - ids
     - attack
     constraints:
+    - (`cim_Intrusion_Detection_indexes`) tag=ids tag=attack
     - ids_type="network"
     fields:
       _time:

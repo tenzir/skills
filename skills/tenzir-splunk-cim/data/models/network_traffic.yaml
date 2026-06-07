@@ -401,6 +401,7 @@ datasets:
     - network
     - communicate
     constraints:
+    - (`cim_Network_Traffic_indexes`) tag=network tag=communicate
     - action=*
     fields:
       _time:
@@ -863,6 +864,8 @@ datasets:
     - network
     - communicate
     constraints:
+    - (`cim_Network_Traffic_indexes`) tag=network tag=communicate
+    - action=*
     - action=allowed
     fields:
       _time:
@@ -1323,6 +1326,8 @@ datasets:
     - network
     - communicate
     constraints:
+    - (`cim_Network_Traffic_indexes`) tag=network tag=communicate
+    - action=*
     - action=blocked
     fields:
       _time:

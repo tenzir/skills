@@ -21,10 +21,8 @@ A sample GCP successful user login follows:
 
 Click expand or collapse to show or hide the example.
 
-JSON Copy { "actor":{ "email":"name@gmail.com", /** ----- user_id "profileId":"104465715494659475645" }, "etag":"\"JDMC8884sebSczDxOtZ17CIssbQ/Pau_EbIGF8FWZWC7W8Ti1uoCfjc\"", "events":[ { "name":"login_success", /** ----- action "parameters":[ { "name":"login_type", "value":"google_password" }, { "multiValue":[ "password" /** ----- authentication_method ], "name":"login_challenge_method" }, { "boolValue":false, "name":"is_suspicious" } ], "type":"login" /** ----- signature } ], "id":{ "applicationName":"login", "customerId":"C035c27ok", /** ----- vendor_account "time":"2020-02-24T23:31:48.090Z", "uniqueQualifier":"529462392776" }, "ipAddress":"4.14.104.185", /** ----- src, src_ip "kind":"admin#reports#activity" /** ----- user_agent }
-
 ```text
-`{
+{
    "actor":{
       "email":"name@gmail.com",                /** -----  user_id
       "profileId":"104465715494659475645"
@@ -60,7 +58,7 @@ JSON Copy { "actor":{ "email":"name@gmail.com", /** ----- user_id "profileId":"1
    },
    "ipAddress":"4.14.104.185",                /** -----  src, src_ip
    "kind":"admin#reports#activity"            /** -----  user_agent
-}`
+}
 ```
 
 ### MS o365 success
@@ -69,10 +67,8 @@ A sample MS o365 successful user login follows:
 
 Click expand or collapse to show or hide the example.
 
-JSON Copy { [-] Actor: [ [-] { [-] ID: df22f023-9e0f-4d78-bdd5-d496688af11e /** ----- user_id Type: 0 } { [-] ID: admin@a830edad9050849NDA3079.onmicrosoft.com /** ----- user_id Type: 5 } { [-] ID: 10037FFE8EC1E08E /** ----- user_id Type: 3 } ] ActorContextId: 2ed28a74-1f6f-4829-8530-fe359c77d35c /** ----- vendor_account ActorIpAddress: 4.14.104.185 /** ----- src, src_ip ApplicationId: c44b4083-3bb0-49c1-b47d-974e53cbdf3c AzureActiveDirectoryEventType: 1 ClientIP: 4.14.104.185 CreationTime: 2020-02-27T00:49:21 ExtendedProperties: [ [-] { [-] Name: UserAgent Value: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36 /** ----- user_agent } { [-] Name: FlowTokenScenario Value: Login } { [-] Name: UserAuthenticationMethod Value: 1 /** ----- authentication_method } { [-] Name: RequestType Value: Login:login } { [-] Name: ResultStatusDetail Value: Success } ] Id: 6c7bb43a-4fc5-403e-9e20-a1e6d4fdc7b3 InterSystemsId: a2c96557-09ee-4be2-9d8a-a13c7326ff0e IntraSystemId: 4bc7a6ba-fabb-4bcc-9663-2a1be0a11a00 ModifiedProperties: [ [-] ] ObjectId: 797f4846-ba00-4fd7-ba43-dac1f8f63013 Operation: UserLoggedIn /** ----- signature OrganizationId: 2ed28a74-1f6f-4829-8530-fe359c77d35c RecordType: 15 ResultStatus: Succeeded /** ----- action SupportTicketId: Target: [ [-] { [-] ID: 797f4846-ba00-4fd7-ba43-dac1f8f63013 Type: 0 } ] TargetContextId: 2ed28a74-1f6f-4829-8530-fe359c77d35c UserId: admin@a830edad9050849NDA3079.onmicrosoft.com UserKey: 10037FFE8EC1E08E@a830edad9050849NDA3079.onmicrosoft.com UserType: 0 Version: 1 Workload: AzureActiveDirectory }
-
 ```text
-`{ [-]
+{ [-]
    Actor: [ [-]
      { [-]
        ID: df22f023-9e0f-4d78-bdd5-d496688af11e         /** -----  user_id
@@ -138,7 +134,7 @@ JSON Copy { [-] Actor: [ [-] { [-] ID: df22f023-9e0f-4d78-bdd5-d496688af11e /** 
    UserType: 0
    Version: 1
    Workload: AzureActiveDirectory
-}`
+}
 ```
 
 ### AWS success
@@ -147,10 +143,8 @@ A sample AWS successful user login follows:
 
 Click expand or collapse to show or hide the example.
 
-JSON Copy { additionalEventData: { LoginTo: https://console.aws.amazon.com/console/home?state=hashArgs%23&isauthcode=true MFAUsed: No /** ----- authentication_method MobileVersion: No } awsRegion: us-east-1 eventID: 040eb5f3-1132-4325-b06b-022e580c44fe eventName: ConsoleLogin /** ----- signature eventSource: signin.amazonaws.com eventTime: 2020-02-21T23:06:26Z eventType: AwsConsoleSignIn eventVersion: 1.05 recipientAccountId: 772089552793 requestParameters: null responseElements: { ConsoleLogin: Success /** ----- action } sourceIPAddress: 4.14.104.185 /** ----- src userAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 /** ----- user_agent userIdentity: { accountId: 772089552793 /** ----- vendor_account arn: arn:aws:iam::772089552793:user/example_user principalId: AIDA3HRA7T6MUVQJRHPKV type: IAMUser userName: example_user /** ----- user_id, user, src_user } }
-
 ```text
-`{
+{
    additionalEventData: {
      LoginTo: https://console.aws.amazon.com/console/home?state=hashArgs%23&isauthcode=true
      MFAUsed: No                             /** -----  authentication_method
@@ -177,7 +171,7 @@ JSON Copy { additionalEventData: { LoginTo: https://console.aws.amazon.com/conso
      type: IAMUser
      userName: example_user                    /** -----  user_id, user, src_user
    }
-}`
+}
 ```
 
 ### Login success field mapping
@@ -252,10 +246,8 @@ A sample GCP failed user login follows:
 
 Click expand or collapse to show or hide the example.
 
-JSON Copy { "protoPayload": { "@type": "type.googleapis.com/google.cloud.audit.AuditLog", "authenticationInfo": { "principalEmail": "example_user@gmail.com" /** ----- user_id }, "requestMetadata": { "callerIp": "2601:646:8400:b0:a991:7135:7879:6cea" /** ----- src, src_ip }, "serviceName": "login.googleapis.com", /** ----- app, dest "methodName": "google.login.LoginService.loginFailure", /** ----- signature "resourceName": "organizations/809036120291", "metadata": { "activityId": { "timeUsec": "1588189783734201", "uniqQualifier": "1023108278221" }, "event": [ { "eventType": "login", "eventName": "login_failure", "parameter": [ { "name": "login_type", "value": "unknown", "label": "LABEL_OPTIONAL", "type": "TYPE_STRING" }, { "name": "login_challenge_method", /** ----- authentication_method "multiStrValue": [ /** ----- reason "password", "password" ], "label": "LABEL_REPEATED", "type": "TYPE_STRING" }, { "name": "dusi", "value": "IMyb8fehs77-gQE", "label": "LABEL_OPTIONAL", "type": "TYPE_STRING" } ] } ], "@type": "type.googleapis.com/ccc_hosted_reporting.ActivityProto" } }, "insertId": "mh9fqkc4a2", "resource": { "type": "audited_resource", "labels": { "method": "google.login.LoginService.loginFailure", "service": "login.googleapis.com" } }, "timestamp": "2020-04-29T19:49:43.734201Z", "severity": "NOTICE", /** ----- action "logName": "organizations/809036120291/logs/cloudaudit.googleapis.com%2Fdata_access", "receiveTimestamp": "2020-04-29T20:43:00.836830467Z" }
-
 ```text
-`{
+{
   "protoPayload": {
     "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
     "authenticationInfo": {
@@ -316,7 +308,7 @@ JSON Copy { "protoPayload": { "@type": "type.googleapis.com/google.cloud.audit.A
   "severity": "NOTICE",                                       /** -----  action
   "logName": "organizations/809036120291/logs/cloudaudit.googleapis.com%2Fdata_access",
   "receiveTimestamp": "2020-04-29T20:43:00.836830467Z"
-}`
+}
 ```
 
 ### MS o365 failure
@@ -325,10 +317,8 @@ A sample MS o365 failed user login follows:
 
 Click expand or collapse to show or hide the example.
 
-JSON Copy { [-] Actor: [ [-] { [-] ID: 1d48684f-70ea-41e7-8459-9a7a24a8690a Type: 0 } { [-] ID: jc3@a830edad9050849NDA3079.onmicrosoft.com /** ----- user_id Type: 5 } { [-] ID: 10030000AEF912F2 Type: 3 } ] ActorContextId: 2ed28a74-1f6f-4829-8530-fe359c77d35c ActorIpAddress: 13.67.186.66 ApplicationId: 00000002-0000-0ff1-ce00-000000000000 AzureActiveDirectoryEventType: 1 ClientIP: 13.67.186.66 /** ----- src_ip, src CreationTime: 2020-02-27T07:46:00 ExtendedProperties: [ [-] { [-] Name: UserAgent /** ----- user_agent Value: python-requests/2.12.4 } { [-] Name: RequestType Value: OrgIdWsTrust2:process } { [-] Name: ResultStatusDetail Value: UserError } ] Id: 8498834c-4ca4-4300-9351-099f917bd2e7 InterSystemsId: 3f3bd815-8d38-48c8-aa71-445216d908de IntraSystemId: c3b22bc6-14c4-4b41-9aee-f4fb7f1e1000 LogonError: InvalidUserNameOrPassword /** ----- reason ModifiedProperties: [ [-] ] ObjectId: Unknown Operation: UserLoginFailed /** ----- signature OrganizationId: 2ed28a74-1f6f-4829-8530-fe359c77d35c /** ----- vendor_account RecordType: 15 ResultStatus: Failed /** ----- action SupportTicketId: Target: [ [-] { [-] ID: Unknown Type: 0 } ] TargetContextId: 2ed28a74-1f6f-4829-8530-fe359c77d35c UserId: jc3@a830edad9050849NDA3079.onmicrosoft.com /** ----- user, user_id UserKey: 10030000AEF912F2@a830edad9050849NDA3079.onmicrosoft.com UserType: 0 /** ----- user_type Version: 1 Workload: AzureActiveDirectory /** ----- app }
-
 ```text
-`{ [-]
+{ [-]
    Actor: [ [-]
      { [-]
        ID: 1d48684f-70ea-41e7-8459-9a7a24a8690a
@@ -387,7 +377,7 @@ JSON Copy { [-] Actor: [ [-] { [-] ID: 1d48684f-70ea-41e7-8459-9a7a24a8690a Type
    UserType: 0                                                         /** -----  user_type
    Version: 1
    Workload: AzureActiveDirectory                                      /** -----  app
-}`
+}
 ```
 
 ### AWS failure
@@ -396,10 +386,8 @@ A sample AWS failed user login follows:
 
 Click expand or collapse to show or hide the example.
 
-JSON Copy { additionalEventData: { LoginTo: https://console.aws.amazon.com/console/home?state=hashArgs%23&isauthcode=true MFAUsed: No /** ----- authentication_method MobileVersion: No } awsRegion: us-east-1 errorMessage: Failed authentication /** ----- reason eventID: 9c6005a8-def1-4075-a1b8-daba01c8150b eventName: ConsoleLogin /** ----- signature eventSource: signin.amazonaws.com /** ----- app, dest eventTime: 2020-02-21T23:06:11Z eventType: AwsConsoleSignIn eventVersion: 1.05 recipientAccountId: 772089552793 requestParameters: null responseElements: { ConsoleLogin: Failure /** ----- action } sourceIPAddress: 4.14.104.185 /** ----- src userAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 /** ----- user_agent userIdentity: { accessKeyId: accountId: 772089552793 /** ----- vendor_account principalId: AIDA3HRA7T6MUVQJRHPKV type: IAMUser /** ----- user_type userName: example_user /** ----- user_id } }
-
 ```text
-`{
+{
    additionalEventData: {
      LoginTo: https://console.aws.amazon.com/console/home?state=hashArgs%23&isauthcode=true
      MFAUsed: No                                               /** -----  authentication_method
@@ -428,7 +416,7 @@ JSON Copy { additionalEventData: { LoginTo: https://console.aws.amazon.com/conso
      type: IAMUser                                             /** -----  user_type
      userName: example_user                                    /** -----  user_id
    }
-}`
+}
 ```
 
 ### Login failure field mapping
@@ -511,10 +499,8 @@ Privilege escalations include scenarios such as when a user, app, or agent logs 
 
 A sample AssumeRoleWithSAML follows:
 
-JSON Copy { "eventVersion": "1.05", "userIdentity": { "type": "SAMLUser", "principalId": "g4RD/xcF3dcnEghdegAhfaPo+ow=:example_user@aws.com", "userName": "example_user@aws.com", /** ----- src_user "identityProvider": "g4RD/xcF3dcnEghdegAhfaPo+ow=" }, "eventTime": "2020-03-02T20:25:30Z", "eventSource": "sts.amazonaws.com", /** ----- app, dest "eventName": "AssumeRoleWithSAML", /** ----- signature "awsRegion": "us-east-1", "sourceIPAddress": "12.26.0.2", "userAgent": "aws-sdk-go/2.0.0-preview.2 (go1.9.6; darwin; amd64)", "requestParameters": { "sAMLAssertionID": "id29525874074479896480891647", "roleSessionName": "example_user@aws.com", "durationSeconds": 43200, "roleArn": "arn:aws:iam::671568874969:role/splunkcloud_account_metadata_read", "principalArn": "arn:aws:iam::671568874969:saml-provider/SplunkcloudOkta" }, "responseElements": { "subjectType": "unspecified", "issuer": "http://www.okta.com/exksfwc0mwQGJQoJ62p6", "credentials": { "accessKeyId": "ASIAZYXE7ZXMXCVFRGMO", "expiration": "Mar 3, 2020 8:25:30 AM", "sessionToken": "FwoGZXIvYXdzEG4aDKrC390jc4wlJW7kpyLnAWpYPA0uT1YdeIogg1iol1J0mdHQkIy1QmETyBa8o8KWXP7ptMeilV1UiPmtPQppTu0iXsMOpUM25WOaPioornDWpHwY3ieOhJl1gVODA9cjlLu3pH8j9q4nFXxelkhieBdguExhUslmDSmGLoI94IPOn27bISDZW8vRJwnj9/7WupIM6g4zOOipstGNbWfgTE4/6fkc4HRxdrfS5c1c7ijFxfSaCoT134vhEA1xxhrKLn896ydbFuiIcxsYggDBe886NHKY+DNq1aYPKEiTrJKfWDLLs97sq0ZTi79fOW7arjtNccyKqyi61/XyBTIrZFsRcfIx6xpsS7cOszFx9wNIBJY8X4BjYCXx7QiCZW3pcKAIYbOcBLavSg==" }, "nameQualifier": "g4RD/xcF3dcnEghdegAhfaPo+ow=", "assumedRoleUser": { "assumedRoleId": "AROAIDCBHGVCTRIEIG2X2:example_user@aws.com", "arn": "arn:aws:sts::671568874969:assumed-role/splunkcloud_account_metadata_read/example_user@aws.com" /** ----- user }, "subject": "example_user@aws.com", "audience": "https://signin.aws.amazon.com/saml" }, "requestID": "7c7ac23a-fc2d-4c76-976e-8e2b40073d7d", "eventID": "84dd288a-bdc0-4708-ad61-cde4f45dcc64", "resources": [ { "ARN": "arn:aws:iam::671568874969:role/splunkcloud_account_metadata_read", "accountId": "671568874969", "type": "AWS::IAM::Role" }, { "ARN": "arn:aws:iam::671568874969:saml-provider/SplunkcloudOkta", "accountId": "671568874969", "type": "AWS::IAM::SAMLProvider" } ], "eventType": "AwsApiCall", "recipientAccountId": "671568874969" }
-
 ```text
-`{
+{
     "eventVersion": "1.05",
     "userIdentity": {
         "type": "SAMLUser",
@@ -567,17 +553,15 @@ JSON Copy { "eventVersion": "1.05", "userIdentity": { "type": "SAMLUser", "princ
     ],
     "eventType": "AwsApiCall",
     "recipientAccountId": "671568874969"
-}`
+}
 ```
 
 ### GCP short-lived credentials
 
 A sample GCP short-lived credentials follows:
 
-JSON Copy { "logName": "projects/my-project/logs/cloudaudit.googleapis.com%2Fdata_access", "protoPayload": { "@type": "type.googleapis.com/google.cloud.audit.AuditLog", "authenticationInfo": { "principalEmail": "example_user@gmail.com" /** ----- src_user }, "methodName": "GenerateAccessToken", /** ----- signature "request": { "@type": "type.googleapis.com/google.iam.credentials.v1.GenerateAccessTokenRequest", "name": "projects/-/serviceAccounts/my-service-account@my-project.iam.gserviceaccount.com" }, "serviceName": "iamcredentials.googleapis.com" /** ----- app, dest }, "resource": { "labels": { "email_id": "my-service-account@my-project.iam.gserviceaccount.com", /** ----- user "project_id": "my-project", /** ----- vendor_account "unique_id": "123456789012345678901" }, "type": "service_account" } }
-
 ```text
-`{
+{
   "logName": "projects/my-project/logs/cloudaudit.googleapis.com%2Fdata_access",
   "protoPayload": {
     "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
@@ -599,7 +583,7 @@ JSON Copy { "logName": "projects/my-project/logs/cloudaudit.googleapis.com%2Fdat
     },
     "type": "service_account"
   }
-}`
+}
 ```
 
 ### Privilege escalation field mapping

@@ -35,14 +35,14 @@ The JSON spec is located at `$SPLUNK_HOME/etc/apps/Splunk_SA_CIM/README/alert_ac
 
 ```
 
-| technology | The technology vendor(s), product(s), and version(s) that the action supports. | JSON Copy { "vendor": "Splunk", "product": "Enterprise", "version": ["6.4.3", "6.5.0"] } ` { "vendor": "Splunk", "product": "Enterprise", "version": ["6.4.3", "6.5.0"] } ` |
+| technology | The technology vendor(s), product(s), and version(s) that the action supports. | { "vendor": "Splunk", "product": "Enterprise", "version": ["6.4.3", "6.5.0"] } |
 | supports_adhoc | Specifies if the action supports ad-hoc invocation from the Actions menu on the Incident Review dashboard in Splunk Enterprise Security. This parameter is only relevant within Splunk Enterprise Security, and defaults to false. See Adaptive Response framework in Splunk ES on the Splunk developer portal. | true |
 
 ```text
 
 ```
 
-| drilldown_uri | An optional customized drilldown for the link that appears in the detailed view of a notable event on the Incident Review dashboard in Splunk Enterprise Security. This parameter is only relevant within Splunk Enterprise Security. If you do not want to specify a custom drilldown link, remove this parameter. Do not leave this parameter blank. If the parameter is not included, the default drilldown URL leads to a search for the result events created by this response action. If you want to specify a target in an app outside Enterprise Security, use the format ` ../<app_context>/<viewname>?<additional drilldown parameters> ` . If you are redirecting to a custom view within Enterprise Security, use the format ` /<viewname>?<additional drilldown parameters> ` . | CODE Copy "../my_app/my_view? form.orig_sid=$sid$&form.orig_rid=$rid$" ` "../my_app/my_view? form.orig_sid=$sid$&form.orig_rid=$rid$" ` |
+| drilldown_uri | An optional customized drilldown for the link that appears in the detailed view of a notable event on the Incident Review dashboard in Splunk Enterprise Security. This parameter is only relevant within Splunk Enterprise Security. If you do not want to specify a custom drilldown link, remove this parameter. Do not leave this parameter blank. If the parameter is not included, the default drilldown URL leads to a search for the result events created by this response action. If you want to specify a target in an app outside Enterprise Security, use the format ` ../<app_context>/<viewname>?<additional drilldown parameters> ` . If you are redirecting to a custom view within Enterprise Security, use the format ` /<viewname>?<additional drilldown parameters> ` . | "../my_app/my_view? form.orig_sid=$sid$&form.orig_rid=$rid$" |
 
 | field_name_params | The param or params which represent the name of a result field. This parameter is only relevant within Splunk Enterprise Security. Incident Review uses the specified field name parameters to render a dropdown with field names present in the notable event. | ["param.my_param"] |
 

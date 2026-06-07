@@ -268,6 +268,7 @@ datasets:
     - change
     - audit
     constraints:
+    - (`cim_Change_indexes`) tag=change
     - tag=audit
     fields:
       _time:
@@ -558,6 +559,7 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_indexes`) tag=change
     - tag=endpoint
     fields:
       _time:
@@ -851,6 +853,8 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=endpoint
     - action=modified change_type=restart
     fields:
       _time:
@@ -1142,6 +1146,8 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=endpoint
     - NOT change_type=restart
     fields:
       _time:
@@ -1433,6 +1439,7 @@ datasets:
     - change
     - network
     constraints:
+    - (`cim_Change_indexes`) tag=change
     - tag=network
     fields:
       _time:
@@ -1760,6 +1767,8 @@ datasets:
     - change
     - network
     constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=network
     - action=modified change_type=restart
     fields:
       _time:
@@ -2093,6 +2102,7 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_indexes`) tag=change
     - tag=account
     fields:
       _time:
@@ -2440,6 +2450,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
     - action="created"
     fields:
       _time:
@@ -2791,6 +2803,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
     - action="deleted"
     fields:
       _time:
@@ -3142,6 +3156,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
     - result="lockout"
     fields:
       _time:
@@ -3493,6 +3509,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
     - action="updated" OR action="modified"
     fields:
       _time:
@@ -3844,6 +3862,7 @@ datasets:
     - change
     - instance
     constraints:
+    - (`cim_Change_indexes`) tag=change
     - tag=instance
     fields:
       _time:

@@ -28,10 +28,8 @@ If the CIM does not contain the specific data that you want to extract for your 
 
 For example, the `CPU `dataset in the `Performance `data model has the following tags associated with it:
 
-CODE Copy tag = performance tag = cpu
-
 ```text
-`tag = performance tag = cpu`
+tag = performance tag = cpu
 ```
 
 - Create an event type.
@@ -102,31 +100,25 @@ If the CIM does not contain the specific data that you want to extract for your 
 
 For example, the `cpu_load_percent `attribute in the `CPU `dataset in the `Performance `data model has the following tags associated with it:
 
-CODE Copy tag = performance tag = cpu
-
 ```text
-`tag = performance tag = cpu`
+tag = performance tag = cpu
 ```
 
 - On the search head, edit or create an `$SPLUNK_HOME/etc/apps/$APPNAME$/local/eventtypes.conf `file, then manually add the event type.
 
 For example:
 
-CODE Copy [cpu_metrics] search = sourcetype=test_cpu_log
-
 ```text
-`[cpu_metrics]
-search = sourcetype=test_cpu_log`
+[cpu_metrics]
+search = sourcetype=test_cpu_log
 ```
 
 - On the search head, edit or create a `$SPLUNK_HOME/etc/apps/$APPNAME$/local/tags.conf `file, then manually add the appropriate tags for the data model dataset. For example:
 
-CODE Copy [eventtype=cpu_metrics] performance = enabled cpu = enabled
-
 ```text
-`[eventtype=cpu_metrics]
+[eventtype=cpu_metrics]
 performance = enabled
-cpu = enabled`
+cpu = enabled
 ```
 
 - Restart the Splunk platform.
@@ -143,28 +135,22 @@ Create field aliases to make fields CIM-compliant, then add search-time field ex
 
 - Create field aliases in `props.conf `. You can create multiple field aliases in a single stanza. Create your field alias by adding the following line to a stanza in the `$SPLUNK_HOME/etc/apps/$APPNAME$/local/props.conf `file.
 
-CODE Copy FIELDALIAS-<class> = <orig_field_name> AS <new_field_name>
-
 ```text
-`FIELDALIAS-<class> = <orig_field_name> AS <new_field_name>`
+FIELDALIAS-<class> = <orig_field_name> AS <new_field_name>
 ```
 
 For example:
 
-CODE Copy [test_cpu_log] FIELDALIAS-cpu_percent = cpu_percent AS cpu_load_percent
-
 ```text
-`[test_cpu_log]
-FIELDALIAS-cpu_percent = cpu_percent AS cpu_load_percent`
+[test_cpu_log]
+FIELDALIAS-cpu_percent = cpu_percent AS cpu_load_percent
 ```
 
 - Restart the Splunk platform for your changes to take effect.
 - Create basic search-time field extractions in `props.conf `by adding an EXTRACT stanza to `$SPLUNK_HOME/etc/apps/$APPNAME$/local/props.conf `:
 
-CODE Copy EXTRACT-<class> = [<regular_expression>|<regular_expression> in <source_field>]
-
 ```text
-`EXTRACT-<class> = [<regular_expression>|<regular_expression> in <source_field>]`
+EXTRACT-<class> = [<regular_expression>|<regular_expression> in <source_field>]
 ```
 
 For more information about field aliases, see Create aliases for fields in the Knowledge Manager Manual .

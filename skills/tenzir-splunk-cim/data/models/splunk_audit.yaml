@@ -219,6 +219,7 @@ datasets:
     display_name: Acceleration Jobs
     kind: event
     constraints:
+    - index=_audit action=search search_id=*
     - search_type="dm_acceleration" OR search_type="summary_director"
     fields:
       _time:
@@ -346,6 +347,7 @@ datasets:
     display_name: Adhoc Jobs
     kind: event
     constraints:
+    - index=_audit action=search search_id=*
     - search_type="adhoc"
     fields:
       _time:
@@ -473,6 +475,7 @@ datasets:
     display_name: Failed Jobs
     kind: event
     constraints:
+    - index=_audit action=search search_id=*
     - info="failed"
     fields:
       _time:
@@ -600,6 +603,7 @@ datasets:
     display_name: Real-time Jobs
     kind: event
     constraints:
+    - index=_audit action=search search_id=*
     - search_type="realtime"
     fields:
       _time:
@@ -727,6 +731,7 @@ datasets:
     display_name: Scheduled Jobs
     kind: event
     constraints:
+    - index=_audit action=search search_id=*
     - search_type="scheduled"
     fields:
       _time:
@@ -854,6 +859,7 @@ datasets:
     display_name: Subsearch Jobs
     kind: event
     constraints:
+    - index=_audit action=search search_id=*
     - search_type="subsearch"
     fields:
       _time:
@@ -1246,6 +1252,7 @@ datasets:
     - modaction
     - invocation
     constraints:
+    - tag=modaction
     - tag=invocation
     fields:
       _time:

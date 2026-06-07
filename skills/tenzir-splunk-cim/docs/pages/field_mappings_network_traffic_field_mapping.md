@@ -21,10 +21,8 @@ A sample GCP source flow follows:
 
 Click expand or collapse to show or hide the example.
 
-JSON Copy { "resource":{ "labels":{ "subnetwork_id":"4884528796030499819", "subnetwork_name":"default", "location":"us-central1-c", "project_id":"gsa-project-151018" }, "type":"gce_subnetwork" }, "timestamp":"2020-05-13T18:10:27.15490124Z", "jsonPayload":{ "src_vpc":{ "subnetwork_name":"default", "vpc_name":"default", "project_id":"gsa-project-151018" }, "dest_location":{ "country":"usa",gce_subnetwork "asn":15169, "continent":"America" }, "src_instance":{ "region":"us-central1", "vm_name":"gke-cluster-1-default-pool-cc3d3622-09nt", "zone":"us-central1-c", "project_id":"gsa-project-151018" /** ----- vendor_account }, "start_time":"2020-05-13T18:10:22.594437852Z", /** ----- duration start time "rtt_msec":"0", /** ----- response_time "bytes_sent":"5300", /** ----- bytes_out, bytes_in, bytes "reporter":"SRC", /** ----- direction "packets_sent":"40", /** ----- packets_out, packets_in, packets "end_time":"2020-05-13T18:10:22.614528620Z", /** ----- duration end time "connection":{ "protocol":6, /** ----- transport "src_port":44114, /** ----- src_port "dest_ip":"173.255.116.127", /** ----- dest_ip, dest, dvc "src_ip":"10.128.15.212", /** ----- src_ip, src, dvc "dest_port":443 /** ----- dest_port } }, "insertId":"atlo5sg16t94yf", "logName":"projects/gsa-project-151018/logs/compute.googleapis.com%2Fvpc_flows", "receiveTimestamp":"2020-05-13T18:10:27.15490124Z" }
-
 ```text
-`{
+{
    "resource":{
       "labels":{
          "subnetwork_id":"4884528796030499819",
@@ -69,7 +67,7 @@ JSON Copy { "resource":{ "labels":{ "subnetwork_id":"4884528796030499819", "subn
    "insertId":"atlo5sg16t94yf",
    "logName":"projects/gsa-project-151018/logs/compute.googleapis.com%2Fvpc_flows",
    "receiveTimestamp":"2020-05-13T18:10:27.15490124Z"
-}`
+}
 ```
 
 ### AWS source flow
@@ -78,10 +76,8 @@ A sample AWS source flow follows:
 
 Click expand or collapse to show or hide the example.
 
-CODE Copy 2 772089552793 /** ----- account-id eni-099b0af8dd18f05bd /** ----- dvc 103.137.144.25 /** ----- src_ip, src 103.137.144.26 /** ----- dest_ip, dest 443 /** ----- src_port 22271 /** ----- dest_port 6 /** ----- transport 19 /** ----- packets 10984 /** ----- bytes 1589294114 /** ----- duration 1589294114 /** ----- duration ACCEPT OK
-
 ```text
-`2
+2
 772089552793            /** -----  account-id
 eni-099b0af8dd18f05bd   /** -----  dvc
 103.137.144.25          /** -----  src_ip, src
@@ -94,7 +90,7 @@ eni-099b0af8dd18f05bd   /** -----  dvc
 1589294114              /** -----  duration
 1589294114              /** -----  duration
 ACCEPT
-OK`
+OK
 ```
 
 ### Source flow field mapping

@@ -32,6 +32,8 @@ HTTP_HEADERS = {
     "User-Agent": "tenzir-splunk-cim-generator",
 }
 DOCS_VERSION_RE = re.compile(r"common-information-model/([0-9]+(?:\.[0-9]+)*)(?:/|$)")
+IGNORED_DOC_TAGS = {"script", "style", "svg", "button", "details", "textarea"}
+IGNORED_DOC_CLASSES = {"code-language-label"}
 
 
 @dataclass(frozen=True, slots=True)
@@ -87,6 +89,17 @@ def stable_key(value: str) -> tuple[str, str]:
 
 def unique_sorted(values: list[str] | tuple[str, ...]) -> list[str]:
     return sorted({value for value in values if value}, key=stable_key)
+
+
+def unique_ordered(values: list[str] | tuple[str, ...]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for value in values:
+        if not value or value in seen:
+            continue
+        seen.add(value)
+        result.append(value)
+    return result
 
 
 def clean_text(value: object) -> str:
@@ -444,6 +457,7 @@ def model_data(
             children_by_parent[parent].append(str(obj.get("objectName")))
 
     effective_cache: dict[str, dict[str, dict[str, Any]]] = {}
+    constraints_cache: dict[str, list[str]] = {}
 
     def field_record(
         field: dict[str, Any],
@@ -516,6 +530,26 @@ def model_data(
         }
         return effective_cache[object_name]
 
+    def local_constraints(object_name: str) -> list[str]:
+        obj = object_by_name[object_name]
+        return [
+            str(item.get("search"))
+            for item in obj.get("constraints") or []
+            if item.get("search")
+        ]
+
+    def effective_constraints(object_name: str) -> list[str]:
+        if object_name in constraints_cache:
+            return constraints_cache[object_name]
+        obj = object_by_name[object_name]
+        parent = str(obj.get("parentName") or "")
+        constraints: list[str] = []
+        if parent in object_by_name:
+            constraints.extend(effective_constraints(parent))
+        constraints.extend(local_constraints(object_name))
+        constraints_cache[object_name] = unique_ordered(constraints)
+        return constraints_cache[object_name]
+
     datasets: dict[str, dict[str, Any]] = {}
     field_occurrences: list[dict[str, Any]] = []
     for obj in objects:
@@ -556,7 +590,7 @@ def model_data(
                 ("kind", kind),
                 ("description", dataset_description(obj)),
                 ("tags", dataset_tags(obj)),
-                ("constraints", [item.get("search") for item in obj.get("constraints") or [] if item.get("search")]),
+                ("constraints", effective_constraints(name)),
                 ("fields", effective_fields(name)),
                 ("inherits", parent_chain(name, object_by_name)),
                 ("children", unique_sorted(children_by_parent.get(name, []))),
@@ -646,6 +680,7 @@ class ArticleMarkdownParser(HTMLParser):
         self.in_row = False
         self.in_cell = False
         self.table_header_written = False
+        self.ignored_depth = 0
         self.cell_parts: list[str] = []
         self.row: list[str] = []
 
@@ -657,6 +692,10 @@ class ArticleMarkdownParser(HTMLParser):
         else:
             self.parts.append(value)
 
+    def should_ignore(self, tag: str, attrs: dict[str, str | None]) -> bool:
+        classes = set((attrs.get("class") or "").split())
+        return tag in IGNORED_DOC_TAGS or bool(classes & IGNORED_DOC_CLASSES)
+
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attrs_dict = dict(attrs)
         if tag == "article" and attrs_dict.get("role") == "article" and not self.capture:
@@ -665,10 +704,14 @@ class ArticleMarkdownParser(HTMLParser):
             return
         if not self.capture:
             return
+        if self.ignored_depth:
+            self.ignored_depth += 1
+            return
+        if self.should_ignore(tag, attrs_dict):
+            self.ignored_depth = 1
+            return
         if tag == "article":
             self.article_depth += 1
-        if tag in {"script", "style", "svg", "button", "details"}:
-            return
         if tag in {"h1", "h2", "h3", "h4", "h5", "h6"}:
             self.heading_level = int(tag[1])
             self.heading_parts = []
@@ -681,6 +724,8 @@ class ArticleMarkdownParser(HTMLParser):
         elif tag == "li":
             self.parts.append("\n- ")
         elif tag == "code":
+            if self.in_pre:
+                return
             self.in_code = True
             self.append("`")
         elif tag == "pre":
@@ -699,6 +744,9 @@ class ArticleMarkdownParser(HTMLParser):
 
     def handle_endtag(self, tag: str) -> None:
         if not self.capture:
+            return
+        if self.ignored_depth:
+            self.ignored_depth -= 1
             return
         if tag == "article":
             self.article_depth -= 1
@@ -735,7 +783,7 @@ class ArticleMarkdownParser(HTMLParser):
             self.parts.append("\n")
 
     def handle_data(self, data: str) -> None:
-        if not self.capture:
+        if not self.capture or self.ignored_depth:
             return
         if self.in_pre:
             self.append(data)
@@ -830,7 +878,16 @@ def fetch_docs(docs_url: str) -> tuple[list[DocsPage], str]:
 def build_skill_markdown(app_version_value: str, docs_version: str) -> str:
     return f"""---
 name: tenzir-splunk-cim
-description: Answer questions about the Splunk Common Information Model (CIM). Use whenever the user asks about Splunk CIM data models, datasets, fields, tags, constraints, lookups, CIM compliance, pytest-splunk-addon expectations, or mapping logs and technical add-ons into CIM.
+description: >-
+  Answer questions and produce mappings for the Splunk Common Information Model
+  (CIM), including CIM Add-on aliases such as Splunk_SA_CIM, SA-CIM,
+  CommonInformationModel, and SA-CommonInformationModel. Use when the user
+  mentions CIM data
+  models/datamodels/DMs, datasets/data model objects, fields, field aliases,
+  calculated/eval fields, tags, constraints, lookups/lookup tables, macros,
+  normalization, mapping logs or events to CIM, CIM compliance,
+  pytest-splunk-addon, technical add-ons/TAs, Splunk Enterprise Security/ES,
+  data model acceleration, pivots, tstats, or datamodel searches.
 ---
 
 # Splunk Common Information Model

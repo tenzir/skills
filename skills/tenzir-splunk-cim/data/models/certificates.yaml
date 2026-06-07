@@ -93,6 +93,7 @@ datasets:
     - certificate
     - ssl
     constraints:
+    - (`cim_Certificates_indexes`) tag=certificate
     - (tag=ssl OR tag=tls)
     fields:
       _time:

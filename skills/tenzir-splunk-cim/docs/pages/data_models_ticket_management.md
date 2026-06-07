@@ -56,7 +56,7 @@ The key for using the column titled "Notes" or "Abbreviated list of example valu
 
 ```
 
-| All_Ticket_Management | ` splunk_id ` | string | The unique identifier of the service request as it pertains to Splunk. For example, CODE Copy 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@ 0533eff241db0d892509be46cd3126e30e0f6046 ` 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@ 0533eff241db0d892509be46cd3126e30e0f6046 ` . |  |
+| All_Ticket_Management | ` splunk_id ` | string | The unique identifier of the service request as it pertains to Splunk. For example, 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@ 0533eff241db0d892509be46cd3126e30e0f6046 . |  |
 | All_Ticket_Management | ` splunk_realm ` | string | The Splunk application or use case associated with the unique identifier (splunk_id). For example, ` es_notable ` . |  |
 | All_Ticket_Management | ` src_user ` | string | The user or entity creating or triggering the ticket, if applicable. |  |
 

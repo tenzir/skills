@@ -29,10 +29,8 @@ To get started, set up a data input in order to get OSSEC data into Splunk Enter
 
 For example:
 
-CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -40,7 +38,7 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    SHOULD_LINEMERGE = false
 
    [source::udp:514]
-   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec`
+   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
 ```
 
 3. Restart the Splunk platform so that it recognizes the add-on and source type you defined.
@@ -57,22 +55,18 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
 
 2. Create the event types to which you can assign tags. To do so, create an event type in the `eventtypes.conf `file that assigns the "ossec_attack" event type to all data with the source type `ossec `and a `severity_id `greater than or equal to 6.
 
-CODE Copy [ossec_attack] search = sourcetype=ossec severity_id >=6 #tags = ids attack
-
 ```text
-`[ossec_attack]
+[ossec_attack]
 search = sourcetype=ossec severity_id >=6
-#tags = ids attack`
+#tags = ids attack
 ```
 
 3. Assign the tags in the `tags.conf `file.
 
-CODE Copy [eventtype=ossec_attack] attack = enabled ids = enabled
-
 ```text
-`[eventtype=ossec_attack]
+[eventtype=ossec_attack]
    attack = enabled
-   ids = enabled`
+   ids = enabled
 ```
 
 ## Step 4: Verify tags
@@ -105,10 +99,8 @@ The severity field includes an integer, while the Common Information Model requi
 
 3. Extract the Location, Message, severity_id, signature and src_ip fields. To do so, edit the `default/transforms.conf `file to add a stanza that extracts the fields you need to the following:
 
-JSON Copy [force_sourcetype_for_ossec] DEST_KEY = MetaData:Sourcetype REGEX = ossec\: FORMAT = sourcetype::ossec [kv_for_ossec] REGEX = Alert Level\:\s+([^;]+)\;\s+Rule\:\s+([^\s]+)\s+- \s+([^\.]+)\.{0,1}\;\s+Location\:\s+([^;]+)\;\s*(srcip\:\s+(\d{1,3} \.\d{1,3}\.\d{1,3}\.\d{1,3})\;){0,1}\s*(user\:\s+([^;]+)\;){0,1}\s*(.*) FORMAT = severity_id::"$1" signature_id::"$2" signature::"$3" Location::"$4" src_ip::"$6" user::"$8" Message::"$9"
-
 ```text
-`[force_sourcetype_for_ossec]
+[force_sourcetype_for_ossec]
    DEST_KEY = MetaData:Sourcetype
    REGEX = ossec\:
    FORMAT = sourcetype::ossec
@@ -118,15 +110,13 @@ JSON Copy [force_sourcetype_for_ossec] DEST_KEY = MetaData:Sourcetype REGEX = os
    \s+([^\.]+)\.{0,1}\;\s+Location\:\s+([^;]+)\;\s*(srcip\:\s+(\d{1,3}
    \.\d{1,3}\.\d{1,3}\.\d{1,3})\;){0,1}\s*(user\:\s+([^;]+)\;){0,1}\s*(.*)
    FORMAT = severity_id::"$1" signature_id::"$2" signature::"$3"
-   Location::"$4" src_ip::"$6" user::"$8" Message::"$9"`
+   Location::"$4" src_ip::"$6" user::"$8" Message::"$9"
 ```
 
 4. Enable the statement in the `default/props.conf `file in your add-on folder.
 
-CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false REPORT-0kv_for_ossec = kv_for_ossec [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -134,15 +124,13 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    REPORT-0kv_for_ossec = kv_for_ossec
 
    [source::udp:514]
-   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec`
+   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
 ```
 
 5. Extract the `dest `field. Some of the fields need additional field extraction to fully match the Common Information Model. The `Location `field includes several separate fields within a single field value. Create the following stanza in the `default/props.conf `file to extract the destination DNS name, destination IP address, and original source address.
 
-JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec [kv_for_ossec] REGEX = Alert Level\:\s+([^;]+)\;\s+Rule\:\s+([^\s]+)\s+- \s+([^\.]+)\.{0,1}\;\s+Location\:\s+([^;]+)\;\s*(srcip\:\s+(\d{1,3 }\.\d{1,3}\.\d{1,3}\.\d{1,3})\;){0,1}\s*(user\:\s+([^;]+)\;){0,1}\s*(.*) FORMAT = severity_id::"$1" signature_id::"$2" signature::"$3" Location::"$4" src_ip::"$6" user::"$8" Message::"$9" [Location_kv_for_ossec] SOURCE_KEY = Location REGEX = (\(([^\)]+)\))*\s*(.*?)(->)(.*) FORMAT = dest_dns::"$2" dest_ip::"$3" orig_source::"$5"
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -161,15 +149,13 @@ JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    [Location_kv_for_ossec]
    SOURCE_KEY = Location
    REGEX = (\(([^\)]+)\))*\s*(.*?)(->)(.*)
-   FORMAT = dest_dns::"$2" dest_ip::"$3" orig_source::"$5"`
+   FORMAT = dest_dns::"$2" dest_ip::"$3" orig_source::"$5"
 ```
 
 6. Enable the statement in the `default/props.conf `file in the add-on folder:
 
-CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false REPORT-0kv_for_ossec = kv_for_ossec, Location_kv_for_ossec [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -177,15 +163,13 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    REPORT-0kv_for_ossec = kv_for_ossec, Location_kv_for_ossec
 
    [source::udp:514]
-   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec`
+   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
 ```
 
 7. The " `Location_kv_for_ossec `" stanza creates two fields that represent the destination (either by the DNS name or destination IP address). You need a single field named " `dest `" that represents the destination. To handle this, add stanzas to `default/transforms.conf `that populate the destination field if the `dest_ip `or `dest_dns `is not empty. Note that the regular expressions below work only if the string has at least one character. This ensures that the destination is not an empty string.
 
-JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec [kv_for_ossec] REGEX = Alert Level\:\s+([^;]+)\;\s+Rule\:\s+([^\s]+)\s+- \s+([^\.]+)\.{0,1}\;\s+Location\:\s+([^;]+)\;\s*(srcip\:\s+(\d{1,3}\.\d{1,3 }\.\d{1,3}\.\d{1,3})\;){0,1}\s*(user\:\s+([^;]+)\;){0,1}\s*(.*) FORMAT = severity_id::"$1" signature_id::"$2" signature::"$3" Location::"$4" src_ip::"$6" user::"$8" Message::"$9" [Location_kv_for_ossec] SOURCE_KEY = Location REGEX = (\(([^\)]+)\))*\s*(.*?)(->)(.*) FORMAT = dest_dns::"$2" dest_ip::"$3" orig_source::"$5" [dest_ip_as_dest] SOURCE_KEY = dest_ip REGEX = (.+) FORMAT = dest::"$1" [dest_dns_as_dest] SOURCE_KEY = dest_dns REGEX = (.+) FORMAT = dest::"$1"
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -214,15 +198,13 @@ JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    [dest_dns_as_dest]
    SOURCE_KEY = dest_dns
    REGEX = (.+)
-   FORMAT = dest::"$1"`
+   FORMAT = dest::"$1"
 ```
 
 8. Enable the field extractions you created in the `default/transforms.conf `file by adding them to the `default/props.conf `file. Set up your field extractions to ensure that you get the DNS name instead of the IP address if both are available. To do so, place the " `dest_dns_as_dest `" transform first; the Splunk platform processes field extractions in order, stopping on the first one that matches.
 
-CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false REPORT-0kv_for_ossec = kv_for_ossec, Location_kv_for_ossec REPORT-dest_for_ossec = dest_dns_as_dest,dest_ip_as_dest [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -231,15 +213,13 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    REPORT-dest_for_ossec = dest_dns_as_dest,dest_ip_as_dest
 
    [source::udp:514]
-   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec`
+   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
 ```
 
 9. Extract the `src `field. You populated the source IP into the field " `src_ip `", but the CIM requires a separate " `src `" field as well. To create the separate field, add a field alias in the `default/props.conf `file that populates the " `src `" field with the value in " `src_ip `".
 
-CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false REPORT-0kv_for_ossec = kv_for_ossec, Location_kv_for_ossec REPORT-dest_for_ossec = dest_dns_as_dest,dest_ip_as_dest FIELDALIAS-src_for_ossec = src_ip as src [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -249,15 +229,13 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    FIELDALIAS-src_for_ossec = src_ip as src
 
    [source::udp:514]
-   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec`
+   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
 ```
 
 10. Normalize the severity field. The OSSEC data includes a field that contains an integer value for the severity. However, the Common Information Model requires a string value for the severity. Therefore, you need to convert the input value to a value that matches the Common Information Model. Do this using a lookup table. Map the " `severity_id `" values to the corresponding severity string, then create a CSV file in `lookups/ossec_severities.csv `.
 
-CODE Copy severity_id,severity 0,informational 1,informational 2,informational 3,informational 4,error 5,error 6,low 7,low 8,low 9,medium 10,medium 11,medium 12,high 13,high 14,high 15,critical
-
 ```text
-`severity_id,severity
+severity_id,severity
    0,informational
    1,informational
    2,informational
@@ -273,15 +251,13 @@ CODE Copy severity_id,severity 0,informational 1,informational 2,informational 3
   12,high
   13,high
   14,high
-  15,critical`
+  15,critical
 ```
 
 11. Add the lookup file definition to the `default/transforms.conf `file.
 
-JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec [kv_for_ossec] REGEX = Alert Level\:\s+([^;]+)\;\s+Rule\:\s+([^\s]+)\s+- \s+([^\.]+)\.{0,1}\;\s+Location\:\s+([^;]+)\;\s*(srcip\:\s+(\d{1,3 }\.\d{1,3}\.\d{1,3}\.\d{1,3})\;){0,1}\s*(user\:\s+([^;]+)\;){0,1}\s*(.*) FORMAT = severity_id::"$1" signature_id::"$2" signature::"$3" Location::"$4" src_ip::"$6" user::"$8" Message::"$9" [Location_kv_for_ossec] SOURCE_KEY = Location REGEX = (\(([^\)]+)\))*\s*(.*?)(->)(.*) FORMAT = dest_dns::"$2" dest_ip::"$3" orig_source::"$5" [dest_ip_as_dest] SOURCE_KEY = dest_ip REGEX = (.+) FORMAT = dest::"$1" [dest_dns_as_dest] SOURCE_KEY = dest_dns REGEX = (.+) FORMAT = dest::"$1" [ossec_severities_lookup] filename = ossec_severities.csv
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -313,15 +289,13 @@ JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    FORMAT = dest::"$1"
 
    [ossec_severities_lookup]
-   filename = ossec_severities.csv`
+   filename = ossec_severities.csv
 ```
 
 12. Add the lookup to `default/props.conf `:
 
-CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false REPORT-0kv_for_ossec = kv_for_ossec, Location_kv_for_ossec REPORT-dest_for_ossec = dest_dns_as_dest,dest_ip_as_dest FIELDALIAS-src_for_ossec = src_ip as src LOOKUP-severity_for_ossec = ossec_severities_lookup severity_id OUTPUT severity [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -332,15 +306,13 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    LOOKUP-severity_for_ossec = ossec_severities_lookup severity_id OUTPUT severity
 
    [source::udp:514]
-   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec`
+   TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec
 ```
 
 13. Define the vendor and product fields. The last fields to populate are the vendor and product fields. To populate these, add stanzas to the `default/transforms.conf `file to statically define them:
 
-JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false [source::udp:514] TRANSFORMS-force_sourcetype_for_ossec_syslog = force_sourcetype_for_ossec [kv_for_ossec] REGEX = Alert Level\:\s+([^;]+)\;\s+Rule\:\s+([^\s]+)\s+- \s+([^\.]+)\.{0,1}\;\s+Location\:\s+([^;]+)\;\s*(srcip\:\s+(\d{1,3}\.\d{1,3}\.\d{1,3 }\.\d{1,3})\;){0,1}\s*(user\:\s+([^;]+)\;){0,1}\s*(.*) FORMAT = severity_id::"$1" signature_id::"$2" signature::"$3" Location::"$4" src_ip::"$6" user::"$8" Message::"$9" [Location_kv_for_ossec] SOURCE_KEY = Location REGEX = (\(([^\)]+)\))*\s*(.*?)(->)(.*) FORMAT = dest_dns::"$2" dest_ip::"$3" orig_source::"$5" [dest_ip_as_dest] SOURCE_KEY = dest_ip REGEX = (.+) FORMAT = dest::"$1" [dest_dns_as_dest] SOURCE_KEY = dest_dns REGEX = (.+) FORMAT = dest::"$1" [ossec_severities_lookup] filename = ossec_severities.csv [product_static_hids] REGEX = (.) FORMAT = product::"HIDS" [vendor_static_open_source_security] REGEX = (.) FORMAT = vendor::"Open Source Security"
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -380,15 +352,13 @@ JSON Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
 
    [vendor_static_open_source_security]
    REGEX = (.)
-   FORMAT = vendor::"Open Source Security"`
+   FORMAT = vendor::"Open Source Security"
 ```
 
 14. Enable the stanzas in the `default/props.conf `file.
 
-CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false REPORT-0kv_for_ossec = kv_for_ossec, Location_kv_for_ossec REPORT-dest_for_ossec = dest_dns_as_dest,dest_ip_as_dest FIELDALIAS-src_for_ossec = src_ip as src LOOKUP-severity_for_ossec = ossec_severities_lookup severity_id OUTPUT severity REPORT-product_for_ossec = product_static_hids REPORT-vendor_for_ossec = vendor_static_open_source_security
-
 ```text
-`[source::....ossec]
+[source::....ossec]
    sourcetype=ossec
 
    [ossec]
@@ -398,7 +368,7 @@ CODE Copy [source::....ossec] sourcetype=ossec [ossec] SHOULD_LINEMERGE = false 
    FIELDALIAS-src_for_ossec = src_ip as src
    LOOKUP-severity_for_ossec = ossec_severities_lookup severity_id OUTPUT severity
    REPORT-product_for_ossec = product_static_hids
-   REPORT-vendor_for_ossec = vendor_static_open_source_security`
+   REPORT-vendor_for_ossec = vendor_static_open_source_security
 ```
 
 ## Step 6: Validate your CIM compliance
@@ -421,10 +391,8 @@ Optional You can further validate using one of the following methods:
 
 1. Create a README file. In the file, include information necessary for others to use the add-on. Create the following `README.txt `file under the root add-on directory.
 
-CODE Copy ===OSSEC add-on=== Author: John Doe Version/Date: 1.3 September 2013 Supported product(s): This add-on supports Open Source Security (OSSEC) IDS 2.5 Source type(s): This add-on will process data that is source typed as "ossec". Input requirements: Syslog data sent to port UDP\514 ===Using this add-on=== Configuration: Automatic Syslog data sent to port UDP\514 will automatically be detected as OSSEC data and processed accordingly. To process data that is sent to another port, configure the data input with a source type of "ossec".
-
 ```text
-`===OSSEC add-on===
+===OSSEC add-on===
 
    Author: John Doe
    Version/Date: 1.3 September 2013
@@ -444,7 +412,7 @@ CODE Copy ===OSSEC add-on=== Author: John Doe Version/Date: 1.3 September 2013 S
    data and processed accordingly.
 
    To process data that is sent to another
-   port, configure the data input with a source type of "ossec".`
+   port, configure the data input with a source type of "ossec".
 ```
 
 2. Package the OSSEC add-on by converting it into a zip archive named `Splunk_TA-ossec.zip `.

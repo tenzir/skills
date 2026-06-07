@@ -187,6 +187,7 @@ datasets:
     - session
     - start
     constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
     - tag=start
     fields:
       _time:
@@ -390,6 +391,7 @@ datasets:
     - session
     - end
     constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
     - tag=end
     fields:
       _time:
@@ -592,6 +594,7 @@ datasets:
     - session
     - dhcp
     constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
     - tag=dhcp
     fields:
       _time:
@@ -802,6 +805,7 @@ datasets:
     - session
     - vpn
     constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
     - tag=vpn
     fields:
       _time:

@@ -246,6 +246,7 @@ datasets:
     - change
     - audit
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
     - tag=audit
     fields:
       _time:
@@ -507,6 +508,7 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
     - tag=endpoint
     fields:
       _time:
@@ -773,6 +775,8 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=endpoint
     - (object_category=file OR object_category=directory)
     fields:
       _time:
@@ -1107,6 +1111,8 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=endpoint
     - object_category=registry
     fields:
       _time:
@@ -1369,6 +1375,8 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=endpoint
     - action=modified change_type=restart
     fields:
       _time:
@@ -1631,6 +1639,8 @@ datasets:
     - change
     - endpoint
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=endpoint
     - NOT (object_category=file OR object_category=directory OR object_category=registry OR change_type=restart)
     fields:
       _time:
@@ -1893,6 +1903,7 @@ datasets:
     - change
     - network
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
     - tag=network
     fields:
       _time:
@@ -2156,6 +2167,8 @@ datasets:
     - change
     - network
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=network
     - action=modified change_type=restart
     fields:
       _time:
@@ -2418,6 +2431,7 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
     - tag=account
     fields:
       _time:
@@ -2724,6 +2738,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=account
     - action="created"
     fields:
       _time:
@@ -3032,6 +3048,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=account
     - action="deleted"
     fields:
       _time:
@@ -3340,6 +3358,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=account
     - result="lockout"
     fields:
       _time:
@@ -3648,6 +3668,8 @@ datasets:
     - change
     - account
     constraints:
+    - (`cim_Change_Analysis_indexes`) tag=change
+    - tag=account
     - action="updated" OR action="modified"
     fields:
       _time:

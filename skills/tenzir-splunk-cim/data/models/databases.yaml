@@ -111,6 +111,7 @@ datasets:
     - database
     - instance
     constraints:
+    - (`cim_Databases_indexes`) tag=database
     - tag=instance
     fields:
       _time:
@@ -254,6 +255,8 @@ datasets:
     - instance
     - stats
     constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=instance
     - tag=stats
     fields:
       _time:
@@ -477,6 +480,8 @@ datasets:
     - instance
     - session
     constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=instance
     - tag=session
     fields:
       _time:
@@ -689,6 +694,8 @@ datasets:
     - instance
     - lock
     constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=instance
     - tag=lock
     fields:
       _time:
@@ -860,6 +867,7 @@ datasets:
     - database
     - query
     constraints:
+    - (`cim_Databases_indexes`) tag=database
     - tag=query
     fields:
       _time:
@@ -1001,6 +1009,8 @@ datasets:
     - query
     - tablespace
     constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=query
     - tag=tablespace
     fields:
       _time:
@@ -1169,6 +1179,8 @@ datasets:
     - query
     - stats
     constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=query
     - tag=stats
     fields:
       _time:

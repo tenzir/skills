@@ -24,7 +24,7 @@ Bundled docs are reference-only prose and do not override app-derived YAML.
 - **Dataset field entries**: `4925`
 - **Declared field definitions**: `1187`
 - **Calculated field definitions**: `287`
-- **Constraints**: `187`
+- **Constraints**: `324`
 - **Lookup files**: `34`
 - **Docs pages**: `50`
 

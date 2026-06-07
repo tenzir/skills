@@ -145,6 +145,7 @@ datasets:
     - ticketing
     - change
     constraints:
+    - (`cim_Ticket_Management_indexes`) tag=ticketing
     - tag=change
     fields:
       _time:
@@ -314,6 +315,7 @@ datasets:
     - ticketing
     - incident
     constraints:
+    - (`cim_Ticket_Management_indexes`) tag=ticketing
     - tag=incident
     fields:
       _time:
@@ -483,6 +485,7 @@ datasets:
     - ticketing
     - problem
     constraints:
+    - (`cim_Ticket_Management_indexes`) tag=ticketing
     - tag=problem
     fields:
       _time:

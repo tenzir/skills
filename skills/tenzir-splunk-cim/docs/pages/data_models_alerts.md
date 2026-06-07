@@ -15,18 +15,14 @@ Events in the Alerts data model are vendor agnostic, which means that they are n
 
 The following example indicates that an event occurred three times. However, this is not a high level event with any new meaning or metadata. It does not pertain to the Alerts data model, but is merely an aggregation of three individual events and is reporting three UDP packets:
 
-CODE Copy [May 11 06:24:18 2020 SE-002 BUSDEV-001: NetScreen device_id=BUSDEV-001 [someadmin]system-alert-00016: Port scan! From 10.0.0.15:31859 to 1.0.0.4:443, proto UDP (zone Untrust int redundant1.3). Occurred 3 times. (2020-05-11 06:24:18)]
-
 ```text
-`[May 11 06:24:18 2020 SE-002 BUSDEV-001: NetScreen device_id=BUSDEV-001 [someadmin]system-alert-00016: Port scan! From 10.0.0.15:31859 to 1.0.0.4:443, proto UDP (zone Untrust int redundant1.3). Occurred 3 times. (2020-05-11 06:24:18)]`
+[May 11 06:24:18 2020 SE-002 BUSDEV-001: NetScreen device_id=BUSDEV-001 [someadmin]system-alert-00016: Port scan! From 10.0.0.15:31859 to 1.0.0.4:443, proto UDP (zone Untrust int redundant1.3). Occurred 3 times. (2020-05-11 06:24:18)]
 ```
 
 Non-security alerts should not be mapped to the Alerts data model such as IT alerts as displayed in the following example from Cisco UCS:
 
-CODE Copy prevSeverity="major",dn="sys/switch-A/slot-1/switch-ether/port-10/rx-stats", occur="5",ack="yes",lc="",type="switch-software",highestSeverity="minor",severity="major",tags="network", created="2020-10-14T10:48:51",rule="equipment-iocard-unsupported-connectivity", changeSet="",descr="FC pool node-wwn-assignment node-default is empty", lastTransition="2020-10-14T10:47:27",cause="default-hostpack-missing-versions",id="31212",code="F0463",origSeverity="major",site="", system_name="ta-factory",address="172.16.107.244"
-
 ```text
-`prevSeverity="major",dn="sys/switch-A/slot-1/switch-ether/port-10/rx-stats", occur="5",ack="yes",lc="",type="switch-software",highestSeverity="minor",severity="major",tags="network", created="2020-10-14T10:48:51",rule="equipment-iocard-unsupported-connectivity", changeSet="",descr="FC pool node-wwn-assignment node-default is empty", lastTransition="2020-10-14T10:47:27",cause="default-hostpack-missing-versions",id="31212",code="F0463",origSeverity="major",site="", system_name="ta-factory",address="172.16.107.244"`
+prevSeverity="major",dn="sys/switch-A/slot-1/switch-ether/port-10/rx-stats", occur="5",ack="yes",lc="",type="switch-software",highestSeverity="minor",severity="major",tags="network", created="2020-10-14T10:48:51",rule="equipment-iocard-unsupported-connectivity", changeSet="",descr="FC pool node-wwn-assignment node-default is empty", lastTransition="2020-10-14T10:47:27",cause="default-hostpack-missing-versions",id="31212",code="F0463",origSeverity="major",site="", system_name="ta-factory",address="172.16.107.244"
 ```
 
 ## Tags used with the Alerts event dataset

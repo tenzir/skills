@@ -46,6 +46,7 @@ datasets:
     - jvm
     - threading
     constraints:
+    - (`cim_JVM_indexes`) tag=jvm
     - tag=threading
     fields:
       _time:
@@ -163,6 +164,7 @@ datasets:
     - jvm
     - runtime
     constraints:
+    - (`cim_JVM_indexes`) tag=jvm
     - tag=runtime
     fields:
       _time:
@@ -226,6 +228,7 @@ datasets:
     - jvm
     - os
     constraints:
+    - (`cim_JVM_indexes`) tag=jvm
     - tag=os
     fields:
       _time:
@@ -317,6 +320,7 @@ datasets:
     - jvm
     - compilation
     constraints:
+    - (`cim_JVM_indexes`) tag=jvm
     - tag=compilation
     fields:
       _time:
@@ -360,6 +364,7 @@ datasets:
     - jvm
     - classloading
     constraints:
+    - (`cim_JVM_indexes`) tag=jvm
     - tag=classloading
     fields:
       _time:
@@ -411,6 +416,7 @@ datasets:
     - jvm
     - memory
     constraints:
+    - (`cim_JVM_indexes`) tag=jvm
     - tag=memory
     fields:
       _time:

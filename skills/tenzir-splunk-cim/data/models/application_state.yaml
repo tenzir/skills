@@ -105,6 +105,7 @@ datasets:
     - listening
     - port
     constraints:
+    - (`cim_Application_State_indexes`) (tag=listening tag=port) OR (tag=process tag=report) OR (tag=service tag=report)
     - tag=listening tag=port
     fields:
       _time:
@@ -245,6 +246,7 @@ datasets:
     - process
     - report
     constraints:
+    - (`cim_Application_State_indexes`) (tag=listening tag=port) OR (tag=process tag=report) OR (tag=service tag=report)
     - tag=process tag=report
     fields:
       _time:
@@ -372,6 +374,7 @@ datasets:
     - service
     - report
     constraints:
+    - (`cim_Application_State_indexes`) (tag=listening tag=port) OR (tag=process tag=report) OR (tag=service tag=report)
     - tag=service tag=report
     fields:
       _time:

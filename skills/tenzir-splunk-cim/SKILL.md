@@ -1,6 +1,15 @@
 ---
 name: tenzir-splunk-cim
-description: Answer questions about the Splunk Common Information Model (CIM). Use whenever the user asks about Splunk CIM data models, datasets, fields, tags, constraints, lookups, CIM compliance, pytest-splunk-addon expectations, or mapping logs and technical add-ons into CIM.
+description: >-
+  Answer questions and produce mappings for the Splunk Common Information Model
+  (CIM), including CIM Add-on aliases such as Splunk_SA_CIM, SA-CIM,
+  CommonInformationModel, and SA-CommonInformationModel. Use when the user
+  mentions CIM data
+  models/datamodels/DMs, datasets/data model objects, fields, field aliases,
+  calculated/eval fields, tags, constraints, lookups/lookup tables, macros,
+  normalization, mapping logs or events to CIM, CIM compliance,
+  pytest-splunk-addon, technical add-ons/TAs, Splunk Enterprise Security/ES,
+  data model acceleration, pivots, tstats, or datamodel searches.
 ---
 
 # Splunk Common Information Model

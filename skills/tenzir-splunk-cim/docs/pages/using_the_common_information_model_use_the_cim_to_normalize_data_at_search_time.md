@@ -56,10 +56,8 @@ Repeat this process for each of the tags needed to map your events to the correc
 
 If you have access to the file system, you can add an event type by editing the local version of the `eventtypes.conf `file directly. You can also add tags for an event type using the file system. Edit the local version of the `tags.conf `file. For example:
 
-CODE Copy [eventtype=nessus] vulnerability = enabled report = enabled
-
 ```text
-`[eventtype=nessus] vulnerability = enabled report = enabled`
+[eventtype=nessus] vulnerability = enabled report = enabled
 ```
 
 The event type and tag modifications that you make are saved in `$SPLUNK_HOME/etc/users/$USERNAME$/$APPNAME$/local/eventtypes.conf `and `$SPLUNK_HOME/etc/users/$USERNAME$/$APPNAME$/local/tags.conf `.

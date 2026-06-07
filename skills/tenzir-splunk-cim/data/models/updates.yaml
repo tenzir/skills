@@ -139,6 +139,7 @@ datasets:
     - update
     - status
     constraints:
+    - (`cim_Updates_indexes`) tag=update tag=status
     - status="available"
     fields:
       _time:
@@ -285,6 +286,7 @@ datasets:
     - update
     - status
     constraints:
+    - (`cim_Updates_indexes`) tag=update tag=status
     - status="installed"
     fields:
       _time:
@@ -431,6 +433,7 @@ datasets:
     - update
     - status
     constraints:
+    - (`cim_Updates_indexes`) tag=update tag=status
     - status="restart_required"
     fields:
       _time:

@@ -360,6 +360,7 @@ datasets:
     - web
     - proxy
     constraints:
+    - (`cim_Web_indexes`) tag=web
     - tag=proxy
     fields:
       _time:
@@ -755,6 +756,7 @@ datasets:
     - web
     - storage
     constraints:
+    - (`cim_Web_indexes`) tag=web
     - tag=storage
     fields:
       _time:

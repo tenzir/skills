@@ -215,6 +215,7 @@ datasets:
     - vulnerability
     - report
     constraints:
+    - (`cim_Vulnerabilities_indexes`) tag=vulnerability tag=report
     - (severity="high" OR severity="critical")
     fields:
       _time:
@@ -450,6 +451,7 @@ datasets:
     - vulnerability
     - report
     constraints:
+    - (`cim_Vulnerabilities_indexes`) tag=vulnerability tag=report
     - severity="medium"
     fields:
       _time:
@@ -685,6 +687,7 @@ datasets:
     - vulnerability
     - report
     constraints:
+    - (`cim_Vulnerabilities_indexes`) tag=vulnerability tag=report
     - (severity="low" OR severity="informational")
     fields:
       _time:
