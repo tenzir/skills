@@ -1,5 +1,5 @@
 ---
-name: tenzir-google-udm
+name: tenzir-udm
 description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) message/record schemas, event and entity modeling, field paths, enums, normalization guidance, and ingestion payloads. Use when the user maps logs to UDM, asks about UDM field names or field-name forms, chooses event_type or entity_type, works with YARA-L, Detect Engine, or CBN references, or mentions common UDM areas such as nouns, security_result, network, extensions, or Entity context.
 ---
 

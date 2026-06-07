@@ -7,14 +7,14 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ### 🧬 Schemas
 
-- `tenzir-google-udm`: Google SecOps UDM schema and normalization guidance —
-  fields, event/entity types
 - `tenzir-asim`: Microsoft Sentinel ASIM reference — schemas, fields,
   aliases, entities, enums
 - `tenzir-cim`: Splunk CIM reference — data models, datasets, fields,
   tags, constraints, lookups
 - `tenzir-ocsf`: OCSF schema reference — event classes, objects, attributes,
   profiles, extensions
+- `tenzir-udm`: Google SecOps UDM schema and normalization guidance —
+  fields, event/entity types
 
 ### 🛡️ Tenzir Users
 
@@ -56,10 +56,10 @@ Install a specific skill into the current project, for example:
 npx skills add tenzir/skills@tenzir-commit-changes
 npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir-docs
-npx skills add tenzir/skills@tenzir-google-udm
 npx skills add tenzir/skills@tenzir-asim
 npx skills add tenzir/skills@tenzir-cim
 npx skills add tenzir/skills@tenzir-ocsf
+npx skills add tenzir/skills@tenzir-udm
 ```
 
 ## 📄 License

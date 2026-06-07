@@ -3,10 +3,10 @@
     {
       "name": "🧬 Schemas",
       "skills": [
-        "./skills/tenzir-google-udm",
         "./skills/tenzir-asim",
         "./skills/tenzir-cim",
-        "./skills/tenzir-ocsf"
+        "./skills/tenzir-ocsf",
+        "./skills/tenzir-udm"
       ]
     },
     {
