@@ -1,4 +1,4 @@
-name: Sync Microsoft ASIM Skill
+name: Sync ASIM Skill
 
 on:
   workflow_dispatch:
@@ -15,12 +15,12 @@ permissions:
   contents: write
 
 concurrency:
-  group: "sync-microsoft-asim-skill"
+  group: "sync-asim-skill"
   cancel-in-progress: false
 
 jobs:
   sync:
-    name: Rebuild tenzir-microsoft-asim
+    name: Rebuild tenzir-asim
     runs-on: ubuntu-latest
 
     steps:
@@ -48,7 +48,7 @@ jobs:
           set -euo pipefail
 
           uv run scripts/generate-microsoft-asim-skill.py \
-            --output-dir skills/tenzir-microsoft-asim \
+            --output-dir skills/tenzir-asim \
             --docs-ref "$ASIM_DOCS_REF"
 
       - name: Validate skills
@@ -59,12 +59,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add -A -- skills/tenzir-microsoft-asim
+          git add -A -- skills/tenzir-asim
 
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync tenzir-microsoft-asim from Microsoft Defender docs"
+          commit_message: "Sync tenzir-asim from Microsoft Defender docs"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false

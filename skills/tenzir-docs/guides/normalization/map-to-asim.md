@@ -5,7 +5,7 @@ This guide shows you how to map events to Microsoft Sentinel Advanced Security I
 
 ## Use the ASIM skill
 
-Install the `tenzir-microsoft-asim` skill when you want an agent to help with ASIM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-microsoft-asim-skill) for installation and usage examples.
+Install the `tenzir-asim` skill when you want an agent to help with ASIM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-microsoft-asim-skill) for installation and usage examples.
 
 Ask the agent to choose the event or entity schema before it maps fields. ASIM fields use Microsoft Sentinel column names such as `EventSchema`, `EventSchemaVersion`, `SrcIpAddr`, and `DstIpAddr`. Prefer canonical fields over aliases when you build reusable mappings, analytics rules, or workbooks.
 

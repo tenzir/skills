@@ -20,7 +20,7 @@ Tenzir publishes the following skills:
 | Skill                   | Description                                                                                   |
 | ----------------------- | --------------------------------------------------------------------------------------------- |
 | `tenzir-google-udm`     | Google SecOps UDM schema and normalization guidance for fields, event types, and entity types |
-| `tenzir-microsoft-asim` | Microsoft Sentinel ASIM schema and mapping guidance for schemas, fields, aliases, and roles   |
+| `tenzir-asim` | Microsoft Sentinel ASIM schema and mapping guidance for schemas, fields, aliases, and roles   |
 | `tenzir-ocsf`           | OCSF schema reference for event classes, objects, attributes, profiles, and extensions        |
 
 ### 🛡️ Tenzir Users
@@ -94,20 +94,20 @@ network connection event. Use field path names.
 Install the Microsoft Sentinel ASIM schema skill when you want an agent to help choose ASIM schemas, map events or entities, inspect normalized fields, or resolve aliases:
 
 ```bash
-npx skills add tenzir/skills@tenzir-microsoft-asim
+npx skills add tenzir/skills@tenzir-asim
 ```
 
-The `tenzir-microsoft-asim` skill is generated from Microsoft Defender Docs and is optimized for schema-first mapping. Ask the agent to choose the ASIM schema before it maps fields, then use canonical ASIM field names such as `EventSchema`, `EventSchemaVersion`, `SrcIpAddr`, and `DstIpAddr`.
+The `tenzir-asim` skill is generated from Microsoft Defender Docs and is optimized for schema-first mapping. Ask the agent to choose the ASIM schema before it maps fields, then use canonical ASIM field names such as `EventSchema`, `EventSchemaVersion`, `SrcIpAddr`, and `DstIpAddr`.
 
 Tell the agent which context you want:
 
 ```text
-Use the tenzir-microsoft-asim skill to map this firewall event to a Microsoft
+Use the tenzir-asim skill to map this firewall event to a Microsoft
 Sentinel ASIM NetworkSession record.
 ```
 
 ```text
-Use the tenzir-microsoft-asim skill to explain the required and recommended
+Use the tenzir-asim skill to explain the required and recommended
 fields for ASIM DNS events.
 ```
 

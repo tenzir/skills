@@ -53,7 +53,7 @@ DEVICE_BASE_FIELDS = {
     "Zone",
 }
 HTTP_HEADERS = {
-    "User-Agent": "tenzir-microsoft-asim-generator",
+    "User-Agent": "tenzir-asim-generator",
     "Accept": "application/vnd.github+json",
 }
 FIELD_CLASS_ORDER = {
@@ -737,11 +737,11 @@ def stable_name_key(value: str) -> tuple[str, str]:
 
 
 def data_schema_path(schema_name: str) -> str:
-    return f"data/schemas/{schema_slug(schema_name)}.yaml"
+    return f"schemas/{schema_slug(schema_name)}.yaml"
 
 
 def data_field_path(field_name: str) -> str:
-    return f"data/fields/{field_slug(field_name)}.yaml"
+    return f"fields/{field_slug(field_name)}.yaml"
 
 
 def data_schema_link(schema: SchemaDoc) -> str:
@@ -1107,8 +1107,8 @@ def render_catalog_yaml(reference: AsimReference) -> str:
             for schema in sorted(reference.schemas, key=lambda item: (item.kind, item.name.casefold()))
         },
         "indexes": {
-            "fields": "data/fields.yaml",
-            "aliases": "data/aliases.yaml",
+            "fields": "fields.yaml",
+            "aliases": "aliases.yaml",
         },
     }
     return dump_yaml(data)
@@ -1196,7 +1196,7 @@ def render_skill_markdown(reference: AsimReference) -> str:
         "\n".join(
             [
                 "---",
-                "name: tenzir-microsoft-asim",
+                "name: tenzir-asim",
                 "description: Answer questions about Microsoft Sentinel ASIM (Advanced Security Information Model). Use whenever the user asks about ASIM schemas, normalized Microsoft Sentinel fields, field classes, aliases, schema mapping, or mapping events and entities into ASIM.",
                 "---",
                 "",
@@ -1232,19 +1232,19 @@ def render_skill_markdown(reference: AsimReference) -> str:
                 "",
                 "## Data files",
                 "",
-                "- Use [data/catalog.yaml](data/catalog.yaml) to choose a schema and find the schema data file.",
-                "- Use `data/schemas/<schema>.yaml` to map telemetry into one ASIM schema.",
-                "- Use [data/fields.yaml](data/fields.yaml) directly as the field-name to field-file manifest.",
-                "- Use `data/fields/<field>.yaml` for field meaning across schemas.",
-                "- Use [data/aliases.yaml](data/aliases.yaml) to resolve alias fields and conditional alias rules.",
+                "- Use [catalog.yaml](catalog.yaml) to choose a schema and find the schema data file.",
+                "- Use `schemas/<schema>.yaml` to map telemetry into one ASIM schema.",
+                "- Use [fields.yaml](fields.yaml) directly as the field-name to field-file manifest.",
+                "- Use `fields/<field>.yaml` for field meaning across schemas.",
+                "- Use [aliases.yaml](aliases.yaml) to resolve alias fields and conditional alias rules.",
                 "",
                 "## Mapping rules",
                 "",
-                "- Start from activity or entity semantics, choose the ASIM schema in [data/catalog.yaml](data/catalog.yaml), then load the schema file.",
+                "- Start from activity or entity semantics, choose the ASIM schema in [catalog.yaml](catalog.yaml), then load the schema file.",
                 "- Populate `Mandatory` and useful `Recommended` fields first, then add `Optional` fields when the source provides useful context.",
                 "- Populate `Conditional` fields when the field record's `required_if` condition applies.",
                 "- Prefer canonical normalized fields over aliases for reusable detections, analytics rules, workbooks, and mappings.",
-                "- Use aliases to explain Microsoft-documented query convenience, but resolve them through [data/aliases.yaml](data/aliases.yaml) before mapping.",
+                "- Use aliases to explain Microsoft-documented query convenience, but resolve them through [aliases.yaml](aliases.yaml) before mapping.",
                 "- Preserve source-specific values in original fields or `AdditionalFields` when ASIM has no direct normalized field.",
                 "- When a schema defines both a value field and a type field, populate the type field when the identifier format is known.",
                 "- Treat fields with `role: common` as shared event/entity metadata, but obey schema-specific `value`, `allowed_values`, and `required_if` records.",
@@ -1274,10 +1274,10 @@ def render_skill_markdown(reference: AsimReference) -> str:
                 "",
                 "| Question pattern | Start here |",
                 "| --- | --- |",
-                "| Which ASIM schema should I map this event or entity to? | [data/catalog.yaml](data/catalog.yaml), then the selected schema file |",
-                "| What fields does schema X contain? | `data/schemas/<schema>.yaml` |",
-                "| What does field X mean? | [data/fields.yaml](data/fields.yaml), then `data/fields/<field>.yaml` |",
-                "| Which field should an alias use? | [data/aliases.yaml](data/aliases.yaml), then target field files |",
+                "| Which ASIM schema should I map this event or entity to? | [catalog.yaml](catalog.yaml), then the selected schema file |",
+                "| What fields does schema X contain? | `schemas/<schema>.yaml` |",
+                "| What does field X mean? | [fields.yaml](fields.yaml), then `fields/<field>.yaml` |",
+                "| Which field should an alias use? | [aliases.yaml](aliases.yaml), then target field files |",
                 "| How do user/device/application roles map? | Role-prefix table above, then the selected schema file |",
                 "| What raw Microsoft source backs this data? | [source.md](source.md) |",
                 "",
@@ -1566,9 +1566,9 @@ def build_docs(reference: AsimReference) -> dict[Path, str]:
     docs: dict[Path, str] = {
         Path("SKILL.md"): render_skill_markdown(reference),
         Path("source.md"): render_source_page(reference),
-        Path("data/catalog.yaml"): render_catalog_yaml(reference),
-        Path("data/fields.yaml"): render_fields_index_yaml(reference),
-        Path("data/aliases.yaml"): render_aliases_yaml(reference),
+        Path("catalog.yaml"): render_catalog_yaml(reference),
+        Path("fields.yaml"): render_fields_index_yaml(reference),
+        Path("aliases.yaml"): render_aliases_yaml(reference),
     }
     for schema in reference.schemas:
         docs[Path(data_schema_path(schema.name))] = render_schema_yaml(schema)
