@@ -2412,7 +2412,7 @@ def render_skill_markdown(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) record fields, UDM messages, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, records, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) message/record schemas, event and entity modeling, field paths, enums, normalization guidance, and ingestion payloads. Use when the user maps logs to UDM, asks about UDM field names or field-name forms, chooses event_type or entity_type, works with YARA-L, Detect Engine, or CBN references, or mentions common UDM areas such as nouns, security_result, network, extensions, or Entity context.",
                 "---",
                 "",
                 "# Google UDM",
