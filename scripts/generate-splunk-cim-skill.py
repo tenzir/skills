@@ -1449,7 +1449,6 @@ generated `data/` file exists.
 
 def build_source_markdown(
     *,
-    app_dir: Path,
     manifest: dict[str, Any],
     app_version_value: str,
     docs_url: str,
@@ -1459,14 +1458,14 @@ def build_source_markdown(
 ) -> str:
     info = manifest.get("info", {})
     app_id = info.get("id", {})
+    app_name = str(app_id.get("name", "") or "Splunk_SA_CIM")
     return f"""# Source
 
 This skill is generated from the Splunk Common Information Model app and current Splunk CIM docs.
 The generated YAML files are the primary agent-facing reference.
 Bundled Markdown docs provide additional workflow and interpretation context and do not override app-derived YAML.
 
-- **App directory**: `{app_dir}`
-- **App name**: `{app_id.get("name", "")}`
+- **App source**: Splunkbase app `{app_name}`
 - **App version**: `{app_version_value}`
 - **App title**: `{info.get("title", "")}`
 - **App author**: `{", ".join(author.get("name", "") for author in info.get("author", []) if isinstance(author, dict))}`
@@ -1558,7 +1557,6 @@ def generate(app_dir: Path, output_dir: Path, docs_url: str) -> None:
     write_file(
         staging_dir / "source.md",
         build_source_markdown(
-            app_dir=app_dir,
             manifest=manifest,
             app_version_value=app_version_value,
             docs_url=docs_url,

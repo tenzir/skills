@@ -4,8 +4,7 @@ This skill is generated from the Splunk Common Information Model app and current
 The generated YAML files are the primary agent-facing reference.
 Bundled Markdown docs provide additional workflow and interpretation context and do not override app-derived YAML.
 
-- **App directory**: `/Users/mavam/Downloads/Splunk_SA_CIM`
-- **App name**: `Splunk_SA_CIM`
+- **App source**: Splunkbase app `Splunk_SA_CIM`
 - **App version**: `8.5.0`
 - **App title**: `Splunk Supporting Common Information Model Add-on`
 - **App author**: `Splunk, Inc.`
