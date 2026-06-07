@@ -1,0 +1,11 @@
+field: file.elf.imports
+fieldset: file
+dashed_name: file-elf-imports
+description: List of imported element names and types.
+flat_name: file.elf.imports
+level: extended
+name: imports
+normalize:
+- array
+original_fieldset: elf
+type: flattened

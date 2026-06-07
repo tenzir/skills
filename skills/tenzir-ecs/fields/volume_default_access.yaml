@@ -1,0 +1,9 @@
+field: volume.default_access
+fieldset: volume
+dashed_name: volume-default-access
+description: Describes the default access(es) of the volume.
+flat_name: volume.default_access
+ignore_above: 1024
+level: extended
+name: default_access
+type: keyword

@@ -1,0 +1,10 @@
+field: agent.version
+fieldset: agent
+dashed_name: agent-version
+description: Version of the agent.
+example: 6.0.0-rc2
+flat_name: agent.version
+ignore_above: 1024
+level: core
+name: version
+type: keyword

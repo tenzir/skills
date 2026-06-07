@@ -1,0 +1,15 @@
+field: url.scheme
+fieldset: url
+dashed_name: url-scheme
+description: 'Scheme of the request, such as "https".
+
+  Note: The `:` is not part of the scheme.'
+example: https
+flat_name: url.scheme
+ignore_above: 1024
+level: extended
+name: scheme
+otel:
+- relation: match
+  stability: stable
+type: keyword

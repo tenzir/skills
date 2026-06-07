@@ -1,0 +1,13 @@
+field: file.x509.alternative_names
+fieldset: file
+dashed_name: file-x509-alternative-names
+description: List of subject alternative names (SAN). Name types vary by certificate authority and certificate type but commonly contain IP addresses, DNS names (and wildcards), and email addresses.
+example: '*.elastic.co'
+flat_name: file.x509.alternative_names
+ignore_above: 1024
+level: extended
+name: alternative_names
+normalize:
+- array
+original_fieldset: x509
+type: keyword

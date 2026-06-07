@@ -1,0 +1,10 @@
+field: process.parent.elf.header.os_abi
+fieldset: process
+dashed_name: process-parent-elf-header-os-abi
+description: Application Binary Interface (ABI) of the Linux OS.
+flat_name: process.parent.elf.header.os_abi
+ignore_above: 1024
+level: extended
+name: header.os_abi
+original_fieldset: elf
+type: keyword

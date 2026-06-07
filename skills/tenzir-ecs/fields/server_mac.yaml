@@ -1,0 +1,13 @@
+field: server.mac
+fieldset: server
+dashed_name: server-mac
+description: 'MAC address of the server.
+
+  The notation format from RFC 7042 is suggested: Each octet (that is, 8-bit byte) is represented by two [uppercase] hexadecimal digits giving the value of the octet as an unsigned integer. Successive octets are separated by a hyphen.'
+example: 00-00-5E-00-53-23
+flat_name: server.mac
+ignore_above: 1024
+level: core
+name: mac
+pattern: ^[A-F0-9]{2}(-[A-F0-9]{2}){5,}$
+type: keyword

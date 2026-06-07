@@ -1,0 +1,13 @@
+field: threat.indicator.registry.data.bytes
+fieldset: threat
+dashed_name: threat-indicator-registry-data-bytes
+description: 'Original bytes written with base64 encoding.
+
+  For Windows registry operations, such as SetValueEx and RegQueryValueEx, this corresponds to the data pointed by `lp_data`. This is optional but provides better recoverability and should be populated for REG_BINARY encoded values.'
+example: ZQBuAC0AVQBTAAAAZQBuAAAAAAA=
+flat_name: threat.indicator.registry.data.bytes
+ignore_above: 1024
+level: extended
+name: data.bytes
+original_fieldset: registry
+type: keyword

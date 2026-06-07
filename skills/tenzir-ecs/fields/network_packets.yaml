@@ -1,0 +1,11 @@
+field: network.packets
+fieldset: network
+dashed_name: network-packets
+description: 'Total packets transferred in both directions.
+
+  If `source.packets` and `destination.packets` are known, `network.packets` is their sum.'
+example: 24
+flat_name: network.packets
+level: core
+name: packets
+type: long

@@ -1,0 +1,12 @@
+field: event.provider
+fieldset: event
+dashed_name: event-provider
+description: 'Source of the event.
+
+  Event transports such as Syslog or the Windows Event Log typically mention the source of an event. It can be the name of the software that generated the event (e.g. Sysmon, httpd), or of a subsystem of the operating system (kernel, Microsoft-Windows-Security-Auditing).'
+example: kernel
+flat_name: event.provider
+ignore_above: 1024
+level: extended
+name: provider
+type: keyword

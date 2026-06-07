@@ -1,0 +1,10 @@
+field: tls.server.x509.not_after
+fieldset: tls
+dashed_name: tls-server-x509-not-after
+description: Time at which the certificate is no longer considered valid.
+example: '2020-07-16T03:15:39Z'
+flat_name: tls.server.x509.not_after
+level: extended
+name: not_after
+original_fieldset: x509
+type: date

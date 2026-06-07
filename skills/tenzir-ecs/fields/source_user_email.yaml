@@ -1,0 +1,10 @@
+field: source.user.email
+fieldset: source
+dashed_name: source-user-email
+description: User email address.
+flat_name: source.user.email
+ignore_above: 1024
+level: extended
+name: email
+original_fieldset: user
+type: keyword

@@ -1,0 +1,11 @@
+field: source.geo.continent_code
+fieldset: source
+dashed_name: source-geo-continent-code
+description: Two-letter code representing continent's name.
+example: NA
+flat_name: source.geo.continent_code
+ignore_above: 1024
+level: core
+name: continent_code
+original_fieldset: geo
+type: keyword

@@ -1,0 +1,9 @@
+field: observer.version
+fieldset: observer
+dashed_name: observer-version
+description: Observer version.
+flat_name: observer.version
+ignore_above: 1024
+level: core
+name: version
+type: keyword

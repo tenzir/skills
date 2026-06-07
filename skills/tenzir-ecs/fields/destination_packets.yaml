@@ -1,0 +1,9 @@
+field: destination.packets
+fieldset: destination
+dashed_name: destination-packets
+description: Packets sent from the destination to the source.
+example: 12
+flat_name: destination.packets
+level: core
+name: packets
+type: long

@@ -1,0 +1,12 @@
+field: orchestrator.entity.relationships.depends_on.entity.id
+fieldset: orchestrator
+dashed_name: orchestrator-entity-relationships-depends-on-entity-id
+description: Identifiers of referenced entities, using the same meaning as root `entity.id` (stable id for correlation within scope).
+flat_name: orchestrator.entity.relationships.depends_on.entity.id
+ignore_above: 1024
+level: extended
+name: entity.id
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

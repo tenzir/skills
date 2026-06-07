@@ -1,0 +1,10 @@
+field: process.parent.code_signature.timestamp
+fieldset: process
+dashed_name: process-parent-code-signature-timestamp
+description: Date and time when the code signature was generated and signed.
+example: '2021-01-01T12:10:30Z'
+flat_name: process.parent.code_signature.timestamp
+level: extended
+name: timestamp
+original_fieldset: code_signature
+type: date

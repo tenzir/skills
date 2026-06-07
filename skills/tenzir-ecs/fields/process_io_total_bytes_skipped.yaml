@@ -1,0 +1,8 @@
+field: process.io.total_bytes_skipped
+fieldset: process
+dashed_name: process-io-total-bytes-skipped
+description: The total number of bytes that were not captured due to implementation restrictions such as buffer size limits. Implementors should strive to ensure this value is always zero
+flat_name: process.io.total_bytes_skipped
+level: extended
+name: io.total_bytes_skipped
+type: long

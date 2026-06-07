@@ -1,0 +1,12 @@
+field: tls.client.not_after
+fieldset: tls
+dashed_name: tls-client-not-after
+description: Date/Time indicating when client certificate is no longer considered valid.
+example: '2021-01-01T00:00:00.000Z'
+flat_name: tls.client.not_after
+level: extended
+name: client.not_after
+otel:
+- relation: match
+  stability: development
+type: date

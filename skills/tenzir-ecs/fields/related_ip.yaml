@@ -1,0 +1,13 @@
+field: related.ip
+fieldset: related
+dashed_name: related-ip
+description: All of the IPs seen on your event.
+flat_name: related.ip
+level: extended
+name: ip
+normalize:
+- array
+otel:
+- relation: na
+synthetic_source_keep: none
+type: ip

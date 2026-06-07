@@ -1,0 +1,10 @@
+field: threat.indicator.file.elf.sections.name
+fieldset: threat
+dashed_name: threat-indicator-file-elf-sections-name
+description: ELF Section List name.
+flat_name: threat.indicator.file.elf.sections.name
+ignore_above: 1024
+level: extended
+name: sections.name
+original_fieldset: elf
+type: keyword

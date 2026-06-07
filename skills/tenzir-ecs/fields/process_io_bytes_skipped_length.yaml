@@ -1,0 +1,8 @@
+field: process.io.bytes_skipped.length
+fieldset: process
+dashed_name: process-io-bytes-skipped-length
+description: The length of bytes skipped.
+flat_name: process.io.bytes_skipped.length
+level: extended
+name: io.bytes_skipped.length
+type: long

@@ -1,0 +1,13 @@
+field: email.from.address
+fieldset: email
+dashed_name: email-from-address
+description: The email address of the sender, typically from the RFC 5322 `From:` header field.
+example: sender@example.com
+flat_name: email.from.address
+ignore_above: 1024
+level: extended
+name: from.address
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

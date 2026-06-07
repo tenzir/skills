@@ -1,0 +1,10 @@
+field: process.parent.uptime
+fieldset: process
+dashed_name: process-parent-uptime
+description: Seconds the process has been up.
+example: 1325
+flat_name: process.parent.uptime
+level: extended
+name: uptime
+original_fieldset: process
+type: long

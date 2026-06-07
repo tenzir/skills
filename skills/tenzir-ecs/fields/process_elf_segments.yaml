@@ -1,0 +1,13 @@
+field: process.elf.segments
+fieldset: process
+dashed_name: process-elf-segments
+description: 'An array containing an object for each segment of the ELF file.
+
+  The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.'
+flat_name: process.elf.segments
+level: extended
+name: segments
+normalize:
+- array
+original_fieldset: elf
+type: nested

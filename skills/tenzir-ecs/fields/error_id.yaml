@@ -1,0 +1,9 @@
+field: error.id
+fieldset: error
+dashed_name: error-id
+description: Unique identifier for the error.
+flat_name: error.id
+ignore_above: 1024
+level: core
+name: id
+type: keyword

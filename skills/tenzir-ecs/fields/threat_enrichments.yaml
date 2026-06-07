@@ -1,0 +1,11 @@
+field: threat.enrichments
+fieldset: threat
+dashed_name: threat-enrichments
+description: A list of associated indicators objects enriching the event, and the context of that association/enrichment.
+flat_name: threat.enrichments
+level: extended
+name: enrichments
+normalize:
+- array
+synthetic_source_keep: none
+type: nested

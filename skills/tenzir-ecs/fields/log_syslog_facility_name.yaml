@@ -1,0 +1,10 @@
+field: log.syslog.facility.name
+fieldset: log
+dashed_name: log-syslog-facility-name
+description: The Syslog text-based facility of the log event, if available.
+example: local7
+flat_name: log.syslog.facility.name
+ignore_above: 1024
+level: extended
+name: syslog.facility.name
+type: keyword

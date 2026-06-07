@@ -1,0 +1,13 @@
+field: tls.client.x509.issuer.locality
+fieldset: tls
+dashed_name: tls-client-x509-issuer-locality
+description: List of locality names (L)
+example: Mountain View
+flat_name: tls.client.x509.issuer.locality
+ignore_above: 1024
+level: extended
+name: issuer.locality
+normalize:
+- array
+original_fieldset: x509
+type: keyword

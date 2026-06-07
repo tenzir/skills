@@ -1,0 +1,91 @@
+fieldset: entity_reference
+alpha: This field set is alpha and subject to change.
+description: A reusable set of identifier fields used to reference other entities in relationship contexts. Each field holds a keyword array of identifiers following the same conventions as the corresponding ECS root field. Only the fields defined in this field set might appear, ad-hoc or integration-specific property names are not allowed.
+group: 2
+name: entity_reference
+prefix: entity_reference.
+reusable:
+  expected:
+  - as: relationships.administers
+    at: entity
+    full: entity.relationships.administers
+    description_override: Entities this entity administers in an IAM or ops sense.
+  - as: relationships.depends_on
+    at: entity
+    full: entity.relationships.depends_on
+    description_override: Entities this entity requires for operation.
+  - as: relationships.owns
+    at: entity
+    full: entity.relationships.owns
+    description_override: Identifiers of assets or identities this entity owns.
+  - as: relationships.supervises
+    at: entity
+    full: entity.relationships.supervises
+    description_override: Identities this entity supervises in a reporting or org-chart sense.
+  top_level: false
+title: Entity Reference
+type: group
+fields:
+- name: entity_reference.entity.id
+  type: keyword
+  description: Identifiers of referenced entities, using the same meaning as root `entity.id` (stable id for correlation within scope).
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.host.id
+  type: keyword
+  description: Referenced host ids.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.host.name
+  type: keyword
+  description: Referenced host names.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.service.id
+  type: keyword
+  description: Referenced service ids.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.service.name
+  type: keyword
+  description: Referenced service names.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names (same semantics as ECS `user.domain`).
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.user.id
+  type: keyword
+  description: Referenced user ids.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: entity_reference.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array

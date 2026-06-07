@@ -1,0 +1,9 @@
+field: process.entry_leader.entry_meta.source.ip
+fieldset: process
+dashed_name: process-entry-leader-entry-meta-source-ip
+description: IP address of the source (IPv4 or IPv6).
+flat_name: process.entry_leader.entry_meta.source.ip
+level: core
+name: ip
+original_fieldset: source
+type: ip

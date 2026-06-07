@@ -1,0 +1,11 @@
+field: observer.os.platform
+fieldset: observer
+dashed_name: observer-os-platform
+description: Operating system platform (such centos, ubuntu, windows).
+example: darwin
+flat_name: observer.os.platform
+ignore_above: 1024
+level: extended
+name: platform
+original_fieldset: os
+type: keyword

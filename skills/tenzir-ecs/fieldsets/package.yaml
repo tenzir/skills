@@ -1,0 +1,47 @@
+fieldset: package
+description: These fields contain information about an installed software package. It contains general information about a package, such as name, version or size. It also contains installation details, such as time or location.
+group: 2
+name: package
+prefix: package.
+title: Package
+type: group
+fields:
+- name: package.architecture
+  type: keyword
+  description: Package architecture.
+- name: package.build_version
+  type: keyword
+  description: Build version information
+- name: package.checksum
+  type: keyword
+  description: Checksum of the installed package for verification.
+- name: package.description
+  type: keyword
+  description: Description of the package.
+- name: package.install_scope
+  type: keyword
+  description: Indicating how the package was installed, e.g. user-local, global.
+- name: package.installed
+  type: date
+  description: Time when package was installed.
+- name: package.license
+  type: keyword
+  description: Package license
+- name: package.name
+  type: keyword
+  description: Package name
+- name: package.path
+  type: keyword
+  description: Path where the package is installed.
+- name: package.reference
+  type: keyword
+  description: Package home page or reference URL
+- name: package.size
+  type: long
+  description: Package size in bytes.
+- name: package.type
+  type: keyword
+  description: Package type
+- name: package.version
+  type: keyword
+  description: Package version

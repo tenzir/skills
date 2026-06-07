@@ -1,0 +1,20 @@
+field: http.version
+fieldset: http
+dashed_name: http-version
+description: HTTP version.
+example: 1.1
+flat_name: http.version
+ignore_above: 1024
+level: extended
+name: version
+otel:
+- attribute: network.protocol.name
+  relation: related
+  stability: stable
+- attribute: network.protocol.version
+  note: 'In OTel SemConv, `network.protocol.version` specifies the HTTP version if the value of `network.protocol.name` is `http`.
+
+    '
+  relation: related
+  stability: stable
+type: keyword

@@ -1,0 +1,10 @@
+field: file.elf.sections.physical_offset
+fieldset: file
+dashed_name: file-elf-sections-physical-offset
+description: ELF Section List offset.
+flat_name: file.elf.sections.physical_offset
+ignore_above: 1024
+level: extended
+name: sections.physical_offset
+original_fieldset: elf
+type: keyword

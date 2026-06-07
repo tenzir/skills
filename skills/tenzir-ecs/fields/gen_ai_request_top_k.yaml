@@ -1,0 +1,13 @@
+field: gen_ai.request.top_k
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-top-k
+description: The top_k sampling setting for the GenAI request.
+example: 1.0
+flat_name: gen_ai.request.top_k
+level: extended
+name: request.top_k
+otel:
+- relation: match
+  stability: development
+type: double

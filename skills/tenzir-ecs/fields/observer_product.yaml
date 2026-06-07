@@ -1,0 +1,10 @@
+field: observer.product
+fieldset: observer
+dashed_name: observer-product
+description: The product name of the observer.
+example: s200
+flat_name: observer.product
+ignore_above: 1024
+level: extended
+name: product
+type: keyword

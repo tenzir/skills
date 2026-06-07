@@ -1,0 +1,10 @@
+field: threat.feed.description
+fieldset: threat
+dashed_name: threat-feed-description
+description: Description of the threat feed in a UI friendly format.
+example: Threat feed from the AlienVault Open Threat eXchange network.
+flat_name: threat.feed.description
+ignore_above: 1024
+level: extended
+name: feed.description
+type: keyword

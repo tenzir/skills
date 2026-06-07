@@ -1,0 +1,10 @@
+field: server.bytes
+fieldset: server
+dashed_name: server-bytes
+description: Bytes sent from the server to the client.
+example: 184
+flat_name: server.bytes
+format: bytes
+level: core
+name: bytes
+type: long

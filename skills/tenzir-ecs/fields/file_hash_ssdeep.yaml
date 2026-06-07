@@ -1,0 +1,10 @@
+field: file.hash.ssdeep
+fieldset: file
+dashed_name: file-hash-ssdeep
+description: SSDEEP hash.
+flat_name: file.hash.ssdeep
+ignore_above: 1024
+level: extended
+name: ssdeep
+original_fieldset: hash
+type: keyword

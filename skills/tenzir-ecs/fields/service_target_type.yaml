@@ -1,0 +1,15 @@
+field: service.target.type
+fieldset: service
+dashed_name: service-target-type
+description: 'The type of the service data is collected from.
+
+  The type can be used to group and correlate logs and metrics from one service type.
+
+  Example: If logs or metrics are collected from Elasticsearch, `service.type` would be `elasticsearch`.'
+example: elasticsearch
+flat_name: service.target.type
+ignore_above: 1024
+level: core
+name: type
+original_fieldset: service
+type: keyword

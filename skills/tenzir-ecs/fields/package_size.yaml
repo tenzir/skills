@@ -1,0 +1,10 @@
+field: package.size
+fieldset: package
+dashed_name: package-size
+description: Package size in bytes.
+example: 62231
+flat_name: package.size
+format: string
+level: extended
+name: size
+type: long

@@ -1,0 +1,10 @@
+field: network.name
+fieldset: network
+dashed_name: network-name
+description: Name given by operators to sections of their network.
+example: Guest Wifi
+flat_name: network.name
+ignore_above: 1024
+level: extended
+name: name
+type: keyword

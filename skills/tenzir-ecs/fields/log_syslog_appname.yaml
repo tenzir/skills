@@ -1,0 +1,10 @@
+field: log.syslog.appname
+fieldset: log
+dashed_name: log-syslog-appname
+description: The device or application that originated the Syslog message, if available.
+example: sshd
+flat_name: log.syslog.appname
+ignore_above: 1024
+level: extended
+name: syslog.appname
+type: keyword

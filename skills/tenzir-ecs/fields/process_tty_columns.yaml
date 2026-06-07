@@ -1,0 +1,11 @@
+field: process.tty.columns
+fieldset: process
+dashed_name: process-tty-columns
+description: 'The number of character columns per line. e.g terminal width
+
+  Terminal sizes can change, so this value reflects the maximum value for a given IO event. i.e. where event.action = ''text_output'''
+example: 80
+flat_name: process.tty.columns
+level: extended
+name: tty.columns
+type: long

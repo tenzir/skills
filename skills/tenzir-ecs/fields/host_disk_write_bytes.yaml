@@ -1,0 +1,12 @@
+field: host.disk.write.bytes
+fieldset: host
+dashed_name: host-disk-write-bytes
+description: The total number of bytes (gauge) written successfully (aggregated from all disks) since the last metric collection.
+flat_name: host.disk.write.bytes
+level: extended
+name: disk.write.bytes
+otel:
+- metric: system.disk.io
+  relation: metric
+  stability: development
+type: long

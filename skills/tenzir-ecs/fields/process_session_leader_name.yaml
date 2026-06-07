@@ -1,0 +1,17 @@
+field: process.session_leader.name
+fieldset: process
+dashed_name: process-session-leader-name
+description: 'Process name.
+
+  Sometimes called program name or similar.'
+example: ssh
+flat_name: process.session_leader.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: process.session_leader.name.text
+  name: text
+  type: match_only_text
+name: name
+original_fieldset: process
+type: keyword

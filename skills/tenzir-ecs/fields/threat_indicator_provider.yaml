@@ -1,0 +1,10 @@
+field: threat.indicator.provider
+fieldset: threat
+dashed_name: threat-indicator-provider
+description: The name of the indicator's provider.
+example: lrz_urlhaus
+flat_name: threat.indicator.provider
+ignore_above: 1024
+level: extended
+name: indicator.provider
+type: keyword

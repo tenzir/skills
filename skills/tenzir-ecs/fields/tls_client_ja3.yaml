@@ -1,0 +1,13 @@
+field: tls.client.ja3
+fieldset: tls
+dashed_name: tls-client-ja3
+description: A hash that identifies clients based on how they perform an SSL/TLS handshake.
+example: d4e5b18d6b55c71272893221c96ba240
+flat_name: tls.client.ja3
+ignore_above: 1024
+level: extended
+name: client.ja3
+otel:
+- relation: match
+  stability: development
+type: keyword

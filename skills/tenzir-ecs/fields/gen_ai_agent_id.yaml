@@ -1,0 +1,14 @@
+field: gen_ai.agent.id
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-agent-id
+description: The unique identifier of the GenAI agent.
+example: asst_5j66UpCpwteGg4YSxUnt7lPY
+flat_name: gen_ai.agent.id
+ignore_above: 1024
+level: extended
+name: agent.id
+otel:
+- relation: match
+  stability: development
+type: keyword

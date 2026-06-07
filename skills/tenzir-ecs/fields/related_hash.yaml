@@ -1,0 +1,14 @@
+field: related.hash
+fieldset: related
+dashed_name: related-hash
+description: All the hashes seen on your event. Populating this field, then using it to search for hashes can help in situations where you're unsure what the hash algorithm is (and therefore which key name to search).
+flat_name: related.hash
+ignore_above: 1024
+level: extended
+name: hash
+normalize:
+- array
+otel:
+- relation: na
+synthetic_source_keep: none
+type: keyword

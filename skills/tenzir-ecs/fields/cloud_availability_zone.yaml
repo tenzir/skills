@@ -1,0 +1,13 @@
+field: cloud.availability_zone
+fieldset: cloud
+dashed_name: cloud-availability-zone
+description: Availability zone in which this host, resource, or service is located.
+example: us-east-1c
+flat_name: cloud.availability_zone
+ignore_above: 1024
+level: extended
+name: availability_zone
+otel:
+- relation: match
+  stability: development
+type: keyword

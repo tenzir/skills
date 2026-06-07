@@ -1,0 +1,15 @@
+field: host.os.name
+fieldset: host
+dashed_name: host-os-name
+description: Operating system name, without the version.
+example: Mac OS X
+flat_name: host.os.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: host.os.name.text
+  name: text
+  type: match_only_text
+name: name
+original_fieldset: os
+type: keyword

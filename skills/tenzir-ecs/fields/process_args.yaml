@@ -1,0 +1,18 @@
+field: process.args
+fieldset: process
+dashed_name: process-args
+description: 'Array of process arguments, starting with the absolute path to the executable.
+
+  May be filtered to protect sensitive information.'
+example: '["/usr/bin/ssh", "-l", "user", "10.0.0.16"]'
+flat_name: process.args
+ignore_above: 1024
+level: extended
+name: args
+normalize:
+- array
+otel:
+- attribute: process.command_args
+  relation: equivalent
+  stability: development
+type: keyword

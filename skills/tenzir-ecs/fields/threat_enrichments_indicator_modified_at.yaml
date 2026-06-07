@@ -1,0 +1,9 @@
+field: threat.enrichments.indicator.modified_at
+fieldset: threat
+dashed_name: threat-enrichments-indicator-modified-at
+description: The date and time when intelligence source last modified information for this indicator.
+example: '2020-11-05T17:25:47.000Z'
+flat_name: threat.enrichments.indicator.modified_at
+level: extended
+name: enrichments.indicator.modified_at
+type: date

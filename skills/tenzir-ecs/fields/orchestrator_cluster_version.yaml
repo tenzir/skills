@@ -1,0 +1,9 @@
+field: orchestrator.cluster.version
+fieldset: orchestrator
+dashed_name: orchestrator-cluster-version
+description: The version of the cluster.
+flat_name: orchestrator.cluster.version
+ignore_above: 1024
+level: extended
+name: cluster.version
+type: keyword

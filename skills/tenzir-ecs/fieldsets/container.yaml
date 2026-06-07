@@ -1,0 +1,56 @@
+fieldset: container
+description: 'Container fields are used for meta information about the specific container that is the source of information.
+
+  These fields help correlate data based containers from any runtime.'
+group: 2
+name: container
+prefix: container.
+title: Container
+type: group
+fields:
+- name: container.cpu.usage
+  type: scaled_float
+  description: Percent CPU used, between 0 and 1.
+- name: container.disk.read.bytes
+  type: long
+  description: The number of bytes read by all disks.
+- name: container.disk.write.bytes
+  type: long
+  description: The number of bytes written on all disks.
+- name: container.id
+  type: keyword
+  description: Unique container id.
+- name: container.image.hash.all
+  type: keyword
+  description: An array of digests of the image the container was built on.
+  normalize:
+  - array
+- name: container.image.name
+  type: keyword
+  description: Name of the image the container was built on.
+- name: container.image.tag
+  type: keyword
+  description: Container image tags.
+  normalize:
+  - array
+- name: container.labels
+  type: object
+  description: Image labels.
+- name: container.memory.usage
+  type: scaled_float
+  description: Percent memory used, between 0 and 1.
+- name: container.name
+  type: keyword
+  description: Container name.
+- name: container.network.egress.bytes
+  type: long
+  description: The number of bytes sent on all network interfaces.
+- name: container.network.ingress.bytes
+  type: long
+  description: The number of bytes received on all network interfaces.
+- name: container.runtime
+  type: keyword
+  description: Runtime managing this container.
+- name: container.security_context.privileged
+  type: boolean
+  description: Indicates whether the container is running in privileged mode.

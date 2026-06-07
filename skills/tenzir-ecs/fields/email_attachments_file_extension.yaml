@@ -1,0 +1,10 @@
+field: email.attachments.file.extension
+fieldset: email
+dashed_name: email-attachments-file-extension
+description: Attachment file extension, excluding the leading dot.
+example: txt
+flat_name: email.attachments.file.extension
+ignore_above: 1024
+level: extended
+name: attachments.file.extension
+type: keyword

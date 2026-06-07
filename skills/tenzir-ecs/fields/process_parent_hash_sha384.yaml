@@ -1,0 +1,10 @@
+field: process.parent.hash.sha384
+fieldset: process
+dashed_name: process-parent-hash-sha384
+description: SHA384 hash.
+flat_name: process.parent.hash.sha384
+ignore_above: 1024
+level: extended
+name: sha384
+original_fieldset: hash
+type: keyword

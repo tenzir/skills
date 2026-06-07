@@ -1,0 +1,10 @@
+field: registry.value
+fieldset: registry
+dashed_name: registry-value
+description: Name of the value written.
+example: Debugger
+flat_name: registry.value
+ignore_above: 1024
+level: core
+name: value
+type: keyword

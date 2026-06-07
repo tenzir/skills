@@ -1,0 +1,16 @@
+field: container.image.tag
+fieldset: container
+dashed_name: container-image-tag
+description: Container image tags.
+flat_name: container.image.tag
+ignore_above: 1024
+level: extended
+name: image.tag
+normalize:
+- array
+otel:
+- attribute: container.image.tags
+  relation: equivalent
+  stability: development
+synthetic_source_keep: none
+type: keyword

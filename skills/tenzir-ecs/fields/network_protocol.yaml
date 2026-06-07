@@ -1,0 +1,16 @@
+field: network.protocol
+fieldset: network
+dashed_name: network-protocol
+description: 'In the OSI Model this would be the Application Layer protocol. For example, `http`, `dns`, or `ssh`.
+
+  The field value must be normalized to lowercase for querying.'
+example: http
+flat_name: network.protocol
+ignore_above: 1024
+level: core
+name: protocol
+otel:
+- attribute: network.protocol.name
+  relation: equivalent
+  stability: stable
+type: keyword

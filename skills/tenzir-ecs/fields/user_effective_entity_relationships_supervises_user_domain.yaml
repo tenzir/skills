@@ -1,0 +1,12 @@
+field: user.effective.entity.relationships.supervises.user.domain
+fieldset: user
+dashed_name: user-effective-entity-relationships-supervises-user-domain
+description: Referenced user directory or AD/LDAP domain names (same semantics as ECS `user.domain`).
+flat_name: user.effective.entity.relationships.supervises.user.domain
+ignore_above: 1024
+level: extended
+name: user.domain
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

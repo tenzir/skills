@@ -1,0 +1,15 @@
+field: server.as.organization.name
+fieldset: server
+dashed_name: server-as-organization-name
+description: Organization name.
+example: Google LLC
+flat_name: server.as.organization.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: server.as.organization.name.text
+  name: text
+  type: match_only_text
+name: organization.name
+original_fieldset: as
+type: keyword

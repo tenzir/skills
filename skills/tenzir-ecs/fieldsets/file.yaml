@@ -1,0 +1,649 @@
+fieldset: file
+description: 'A file is defined as a set of information that has been created on, or has existed on a filesystem.
+
+  File objects can be associated with host events, network events, and/or file events (e.g., those produced by File Integrity Monitoring [FIM] products or services). File fields provide details about the affected file associated with the event or metric.'
+group: 2
+name: file
+nestings:
+- file.code_signature
+- file.elf
+- file.hash
+- file.macho
+- file.pe
+- file.x509
+prefix: file.
+reusable:
+  expected:
+  - as: file
+    at: threat.indicator
+    full: threat.indicator.file
+  - as: file
+    at: threat.enrichments.indicator
+    full: threat.enrichments.indicator.file
+  top_level: true
+reused_here:
+- full: file.hash
+  schema_name: hash
+  description: Hashes, usually file hashes.
+- full: file.pe
+  schema_name: pe
+  description: These fields contain Windows Portable Executable (PE) metadata.
+- full: file.x509
+  schema_name: x509
+  description: These fields contain x509 certificate metadata.
+- full: file.code_signature
+  schema_name: code_signature
+  description: These fields contain information about binary code signatures.
+- full: file.elf
+  schema_name: elf
+  description: These fields contain Linux Executable Linkable Format (ELF) metadata.
+- beta: This field reuse is beta and subject to change.
+  full: file.macho
+  schema_name: macho
+  description: These fields contain Mac OS Mach Object file format (Mach-O) metadata.
+title: File
+type: group
+fields:
+- name: file.accessed
+  type: date
+  description: Last time the file was accessed.
+- name: file.attributes
+  type: keyword
+  description: Array of file attributes.
+  normalize:
+  - array
+- name: file.code_signature.digest_algorithm
+  type: keyword
+  description: Hashing algorithm used to sign the process.
+  original_fieldset: code_signature
+- name: file.code_signature.exists
+  type: boolean
+  description: Boolean to capture if a signature is present.
+  original_fieldset: code_signature
+- name: file.code_signature.flags
+  type: keyword
+  description: Code signing flags of the process
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: file.code_signature.signing_id
+  type: keyword
+  description: The identifier used to sign the process.
+  original_fieldset: code_signature
+- name: file.code_signature.status
+  type: keyword
+  description: Additional information about the certificate status.
+  original_fieldset: code_signature
+- name: file.code_signature.subject_name
+  type: keyword
+  description: Subject name of the code signer
+  original_fieldset: code_signature
+- name: file.code_signature.team_id
+  type: keyword
+  description: The team identifier used to sign the process.
+  original_fieldset: code_signature
+- name: file.code_signature.thumbprint_sha256
+  type: keyword
+  description: SHA256 hash of the certificate.
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: file.code_signature.timestamp
+  type: date
+  description: When the signature was generated and signed.
+  original_fieldset: code_signature
+- name: file.code_signature.trusted
+  type: boolean
+  description: Stores the trust status of the certificate chain.
+  original_fieldset: code_signature
+- name: file.code_signature.valid
+  type: boolean
+  description: Boolean to capture if the digital signature is verified against the binary content.
+  original_fieldset: code_signature
+- name: file.created
+  type: date
+  description: File creation time.
+- name: file.ctime
+  type: date
+  description: Last time the file attributes or metadata changed.
+- name: file.device
+  type: keyword
+  description: Device that is the source of the file.
+- name: file.directory
+  type: keyword
+  description: Directory where the file is located.
+- name: file.drive_letter
+  type: keyword
+  description: Drive letter where the file is located.
+- name: file.elf.architecture
+  type: keyword
+  description: Machine architecture of the ELF file.
+  original_fieldset: elf
+- name: file.elf.byte_order
+  type: keyword
+  description: Byte sequence of ELF file.
+  original_fieldset: elf
+- name: file.elf.cpu_type
+  type: keyword
+  description: CPU type of the ELF file.
+  original_fieldset: elf
+- name: file.elf.creation_date
+  type: date
+  description: Build or compile date.
+  original_fieldset: elf
+- name: file.elf.exports
+  type: flattened
+  description: List of exported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: file.elf.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in an ELF file.
+  original_fieldset: elf
+- name: file.elf.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: elf
+- name: file.elf.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: file.elf.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: file.elf.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: elf
+- name: file.elf.header.abi_version
+  type: keyword
+  description: Version of the ELF Application Binary Interface (ABI).
+  original_fieldset: elf
+- name: file.elf.header.class
+  type: keyword
+  description: Header class of the ELF file.
+  original_fieldset: elf
+- name: file.elf.header.data
+  type: keyword
+  description: Data table of the ELF header.
+  original_fieldset: elf
+- name: file.elf.header.entrypoint
+  type: long
+  description: Header entrypoint of the ELF file.
+  original_fieldset: elf
+- name: file.elf.header.object_version
+  type: keyword
+  description: '"0x1" for original ELF files.'
+  original_fieldset: elf
+- name: file.elf.header.os_abi
+  type: keyword
+  description: Application Binary Interface (ABI) of the Linux OS.
+  original_fieldset: elf
+- name: file.elf.header.type
+  type: keyword
+  description: Header type of the ELF file.
+  original_fieldset: elf
+- name: file.elf.header.version
+  type: keyword
+  description: Version of the ELF header.
+  original_fieldset: elf
+- name: file.elf.import_hash
+  type: keyword
+  description: A hash of the imports in an ELF file.
+  original_fieldset: elf
+- name: file.elf.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: file.elf.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: file.elf.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: file.elf.sections
+  type: nested
+  description: Section information of the ELF file.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: file.elf.sections.chi2
+  type: long
+  description: Chi-square probability distribution of the section.
+  original_fieldset: elf
+- name: file.elf.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: file.elf.sections.flags
+  type: keyword
+  description: ELF Section List flags.
+  original_fieldset: elf
+- name: file.elf.sections.name
+  type: keyword
+  description: ELF Section List name.
+  original_fieldset: elf
+- name: file.elf.sections.physical_offset
+  type: keyword
+  description: ELF Section List offset.
+  original_fieldset: elf
+- name: file.elf.sections.physical_size
+  type: long
+  description: ELF Section List physical size.
+  original_fieldset: elf
+- name: file.elf.sections.type
+  type: keyword
+  description: ELF Section List type.
+  original_fieldset: elf
+- name: file.elf.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: file.elf.sections.virtual_address
+  type: long
+  description: ELF Section List virtual address.
+  original_fieldset: elf
+- name: file.elf.sections.virtual_size
+  type: long
+  description: ELF Section List virtual size.
+  original_fieldset: elf
+- name: file.elf.segments
+  type: nested
+  description: ELF object segment list.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: file.elf.segments.sections
+  type: keyword
+  description: ELF object segment sections.
+  original_fieldset: elf
+- name: file.elf.segments.type
+  type: keyword
+  description: ELF object segment type.
+  original_fieldset: elf
+- name: file.elf.shared_libraries
+  type: keyword
+  description: List of shared libraries used by this ELF object.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: file.elf.telfhash
+  type: keyword
+  description: telfhash hash for ELF file.
+  original_fieldset: elf
+- name: file.extension
+  type: keyword
+  description: File extension, excluding the leading dot.
+- name: file.fork_name
+  type: keyword
+  description: A fork is additional data associated with a filesystem object.
+- name: file.gid
+  type: keyword
+  description: Primary group ID (GID) of the file.
+- name: file.group
+  type: keyword
+  description: Primary group name of the file.
+- name: file.hash.cdhash
+  type: keyword
+  description: The Code Directory (CD) hash of an executable.
+  original_fieldset: hash
+  beta: This field is beta and subject to change.
+- name: file.hash.md5
+  type: keyword
+  description: MD5 hash.
+  original_fieldset: hash
+- name: file.hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  original_fieldset: hash
+- name: file.hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  original_fieldset: hash
+- name: file.hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  original_fieldset: hash
+- name: file.hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  original_fieldset: hash
+- name: file.hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  original_fieldset: hash
+- name: file.hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  original_fieldset: hash
+- name: file.inode
+  type: keyword
+  description: Inode representing the file in the filesystem.
+- name: file.macho.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a Mach-O file.
+  original_fieldset: macho
+- name: file.macho.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: macho
+- name: file.macho.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: macho
+- name: file.macho.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: macho
+- name: file.macho.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: macho
+- name: file.macho.import_hash
+  type: keyword
+  description: A hash of the imports in a Mach-O file.
+  original_fieldset: macho
+- name: file.macho.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: macho
+  normalize:
+  - array
+- name: file.macho.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: macho
+- name: file.macho.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: macho
+- name: file.macho.sections
+  type: nested
+  description: Section information of the Mach-O file.
+  original_fieldset: macho
+  normalize:
+  - array
+- name: file.macho.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: macho
+- name: file.macho.sections.name
+  type: keyword
+  description: Mach-O Section List name.
+  original_fieldset: macho
+- name: file.macho.sections.physical_size
+  type: long
+  description: Mach-O Section List physical size.
+  original_fieldset: macho
+- name: file.macho.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: macho
+- name: file.macho.sections.virtual_size
+  type: long
+  description: Mach-O Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: macho
+- name: file.macho.symhash
+  type: keyword
+  description: A hash of the imports in a Mach-O file.
+  original_fieldset: macho
+- name: file.mime_type
+  type: keyword
+  description: Media type of file, document, or arrangement of bytes.
+- name: file.mode
+  type: keyword
+  description: Mode of the file in octal representation.
+- name: file.mtime
+  type: date
+  description: Last time the file content was modified.
+- name: file.name
+  type: keyword
+  description: Name of the file including the extension, without the directory.
+- name: file.origin_referrer_url
+  type: keyword
+  description: The URL of the webpage that linked to the file.
+  beta: This field is beta and subject to change.
+- name: file.origin_url
+  type: keyword
+  description: The URL where the file is hosted.
+  beta: This field is beta and subject to change.
+- name: file.owner
+  type: keyword
+  description: File owner's username.
+- name: file.path
+  type: keyword
+  description: Full path to the file, including the file name.
+- name: file.pe.architecture
+  type: keyword
+  description: CPU architecture target for the file.
+  original_fieldset: pe
+- name: file.pe.company
+  type: keyword
+  description: Internal company name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: file.pe.description
+  type: keyword
+  description: Internal description of the file, provided at compile-time.
+  original_fieldset: pe
+- name: file.pe.file_version
+  type: keyword
+  description: Process name.
+  original_fieldset: pe
+- name: file.pe.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a PE file.
+  original_fieldset: pe
+- name: file.pe.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: pe
+- name: file.pe.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: file.pe.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: file.pe.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: pe
+- name: file.pe.imphash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: file.pe.import_hash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: file.pe.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: file.pe.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: file.pe.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: file.pe.original_file_name
+  type: keyword
+  description: Internal name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: file.pe.pehash
+  type: keyword
+  description: A hash of the PE header and data from one or more PE sections.
+  original_fieldset: pe
+- name: file.pe.product
+  type: keyword
+  description: Internal product name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: file.pe.sections
+  type: nested
+  description: Section information of the PE file.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: file.pe.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: file.pe.sections.name
+  type: keyword
+  description: PE Section List name.
+  original_fieldset: pe
+- name: file.pe.sections.physical_size
+  type: long
+  description: PE Section List physical size.
+  original_fieldset: pe
+- name: file.pe.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: file.pe.sections.virtual_size
+  type: long
+  description: PE Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: pe
+- name: file.size
+  type: long
+  description: File size in bytes.
+- name: file.target_path
+  type: keyword
+  description: Target path for symlinks.
+- name: file.type
+  type: keyword
+  description: File type (file, dir, or symlink).
+- name: file.uid
+  type: keyword
+  description: The user ID (UID) or security identifier (SID) of the file owner.
+- name: file.x509.alternative_names
+  type: keyword
+  description: List of subject alternative names (SAN).
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.issuer.common_name
+  type: keyword
+  description: List of common name (CN) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.issuer.country
+  type: keyword
+  description: List of country \(C) codes
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.issuer.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of issuing certificate authority.
+  original_fieldset: x509
+- name: file.x509.issuer.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.issuer.organization
+  type: keyword
+  description: List of organizations (O) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.issuer.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.issuer.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.not_after
+  type: date
+  description: Time at which the certificate is no longer considered valid.
+  original_fieldset: x509
+- name: file.x509.not_before
+  type: date
+  description: Time at which the certificate is first considered valid.
+  original_fieldset: x509
+- name: file.x509.public_key_algorithm
+  type: keyword
+  description: Algorithm used to generate the public key.
+  original_fieldset: x509
+- name: file.x509.public_key_curve
+  type: keyword
+  description: The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+  original_fieldset: x509
+- name: file.x509.public_key_exponent
+  type: long
+  description: Exponent used to derive the public key. This is algorithm specific.
+  original_fieldset: x509
+- name: file.x509.public_key_size
+  type: long
+  description: The size of the public key space in bits.
+  original_fieldset: x509
+- name: file.x509.serial_number
+  type: keyword
+  description: Unique serial number issued by the certificate authority.
+  original_fieldset: x509
+- name: file.x509.signature_algorithm
+  type: keyword
+  description: Identifier for certificate signature algorithm.
+  original_fieldset: x509
+- name: file.x509.subject.common_name
+  type: keyword
+  description: List of common names (CN) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.subject.country
+  type: keyword
+  description: List of country \(C) code
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.subject.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of the certificate subject entity.
+  original_fieldset: x509
+- name: file.x509.subject.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.subject.organization
+  type: keyword
+  description: List of organizations (O) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.subject.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.subject.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: file.x509.version_number
+  type: keyword
+  description: Version of x509 format.
+  original_fieldset: x509

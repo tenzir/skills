@@ -1,0 +1,10 @@
+field: process.macho.sections.virtual_size
+fieldset: process
+dashed_name: process-macho-sections-virtual-size
+description: Mach-O Section List virtual size. This is always the same as `physical_size`.
+flat_name: process.macho.sections.virtual_size
+format: string
+level: extended
+name: sections.virtual_size
+original_fieldset: macho
+type: long

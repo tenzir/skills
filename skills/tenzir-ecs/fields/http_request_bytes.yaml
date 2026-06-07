@@ -1,0 +1,14 @@
+field: http.request.bytes
+fieldset: http
+dashed_name: http-request-bytes
+description: Total size in bytes of the request (body and headers).
+example: 1437
+flat_name: http.request.bytes
+format: bytes
+level: extended
+name: request.bytes
+otel:
+- attribute: http.request.size
+  relation: equivalent
+  stability: development
+type: long

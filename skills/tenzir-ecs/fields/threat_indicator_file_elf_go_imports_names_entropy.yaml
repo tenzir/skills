@@ -1,0 +1,10 @@
+field: threat.indicator.file.elf.go_imports_names_entropy
+fieldset: threat
+dashed_name: threat-indicator-file-elf-go-imports-names-entropy
+description: Shannon entropy calculation from the list of Go imports.
+flat_name: threat.indicator.file.elf.go_imports_names_entropy
+format: number
+level: extended
+name: go_imports_names_entropy
+original_fieldset: elf
+type: long

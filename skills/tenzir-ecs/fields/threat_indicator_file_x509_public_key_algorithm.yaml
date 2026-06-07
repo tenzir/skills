@@ -1,0 +1,11 @@
+field: threat.indicator.file.x509.public_key_algorithm
+fieldset: threat
+dashed_name: threat-indicator-file-x509-public-key-algorithm
+description: Algorithm used to generate the public key.
+example: RSA
+flat_name: threat.indicator.file.x509.public_key_algorithm
+ignore_above: 1024
+level: extended
+name: public_key_algorithm
+original_fieldset: x509
+type: keyword

@@ -1,0 +1,13 @@
+field: faas.name
+fieldset: faas
+dashed_name: faas-name
+description: The name of a serverless function.
+example: my-function
+flat_name: faas.name
+ignore_above: 1024
+level: extended
+name: name
+otel:
+- relation: match
+  stability: development
+type: keyword

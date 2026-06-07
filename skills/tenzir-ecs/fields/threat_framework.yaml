@@ -1,0 +1,10 @@
+field: threat.framework
+fieldset: threat
+dashed_name: threat-framework
+description: Name of the threat framework used to further categorize and classify the tactic and technique of the reported threat. Framework classification can be provided by detecting systems, evaluated at ingest time, or retrospectively tagged to events.
+example: MITRE ATT&CK
+flat_name: threat.framework
+ignore_above: 1024
+level: extended
+name: framework
+type: keyword

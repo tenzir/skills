@@ -1,0 +1,10 @@
+field: process.entry_leader.supplemental_groups.id
+fieldset: process
+dashed_name: process-entry-leader-supplemental-groups-id
+description: Unique identifier for the group on the system/platform.
+flat_name: process.entry_leader.supplemental_groups.id
+ignore_above: 1024
+level: extended
+name: id
+original_fieldset: group
+type: keyword

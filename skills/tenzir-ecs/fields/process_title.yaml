@@ -1,0 +1,18 @@
+field: process.title
+fieldset: process
+dashed_name: process-title
+description: 'Process title.
+
+  The proctitle, some times the same as process name. Can also be different: for example a browser setting its title to the web page currently opened.'
+flat_name: process.title
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: process.title.text
+  name: text
+  type: match_only_text
+name: title
+otel:
+- relation: match
+  stability: development
+type: keyword

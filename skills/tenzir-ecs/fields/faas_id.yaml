@@ -1,0 +1,12 @@
+field: faas.id
+fieldset: faas
+dashed_name: faas-id
+description: 'The unique identifier of a serverless function.
+
+  For AWS Lambda it''s the function ARN (Amazon Resource Name) without a version or alias suffix.'
+example: arn:aws:lambda:us-west-2:123456789012:function:my-function
+flat_name: faas.id
+ignore_above: 1024
+level: extended
+name: id
+type: keyword

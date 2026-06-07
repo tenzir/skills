@@ -1,0 +1,11 @@
+field: threat.indicator.file.pe.file_version
+fieldset: threat
+dashed_name: threat-indicator-file-pe-file-version
+description: Internal version of the file, provided at compile-time.
+example: 6.3.9600.17415
+flat_name: threat.indicator.file.pe.file_version
+ignore_above: 1024
+level: extended
+name: file_version
+original_fieldset: pe
+type: keyword

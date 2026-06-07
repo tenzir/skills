@@ -1,0 +1,10 @@
+field: process.parent.macho.imports_names_var_entropy
+fieldset: process
+dashed_name: process-parent-macho-imports-names-var-entropy
+description: Variance for Shannon entropy calculation from the list of imported element names and types.
+flat_name: process.parent.macho.imports_names_var_entropy
+format: number
+level: extended
+name: imports_names_var_entropy
+original_fieldset: macho
+type: long

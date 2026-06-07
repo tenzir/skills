@@ -1,0 +1,10 @@
+field: user.changes.entity.raw
+fieldset: user
+beta: This field is beta and subject to change.
+dashed_name: user-changes-entity-raw
+description: Original, unmodified fields from the source system. Usually flattened field data type. While the attributes field should be used for normalized fields requiring advanced queries, this field preserves all source metadata with basic search capabilities.
+flat_name: user.changes.entity.raw
+level: extended
+name: raw
+original_fieldset: entity
+type: object

@@ -1,0 +1,13 @@
+field: file.x509.issuer.organization
+fieldset: file
+dashed_name: file-x509-issuer-organization
+description: List of organizations (O) of issuing certificate authority.
+example: Example Inc
+flat_name: file.x509.issuer.organization
+ignore_above: 1024
+level: extended
+name: issuer.organization
+normalize:
+- array
+original_fieldset: x509
+type: keyword

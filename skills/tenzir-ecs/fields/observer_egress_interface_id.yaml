@@ -1,0 +1,11 @@
+field: observer.egress.interface.id
+fieldset: observer
+dashed_name: observer-egress-interface-id
+description: Interface ID as reported by an observer (typically SNMP interface ID).
+example: 10
+flat_name: observer.egress.interface.id
+ignore_above: 1024
+level: extended
+name: id
+original_fieldset: interface
+type: keyword

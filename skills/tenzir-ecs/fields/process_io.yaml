@@ -1,0 +1,10 @@
+field: process.io
+fieldset: process
+dashed_name: process-io
+description: 'A chunk of input or output (IO) from a single process.
+
+  This field only appears on the top level process object, which is the process that wrote the output or read the input.'
+flat_name: process.io
+level: extended
+name: io
+type: object

@@ -1,0 +1,10 @@
+field: orchestrator.organization
+fieldset: orchestrator
+dashed_name: orchestrator-organization
+description: Organization affected by the event (for multi-tenant orchestrator setups).
+example: elastic
+flat_name: orchestrator.organization
+ignore_above: 1024
+level: extended
+name: organization
+type: keyword

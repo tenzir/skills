@@ -1,0 +1,11 @@
+field: threat.indicator.file.uid
+fieldset: threat
+dashed_name: threat-indicator-file-uid
+description: The user ID (UID) or security identifier (SID) of the file owner.
+example: '1001'
+flat_name: threat.indicator.file.uid
+ignore_above: 1024
+level: extended
+name: uid
+original_fieldset: file
+type: keyword

@@ -1,0 +1,16 @@
+field: threat.technique.name
+fieldset: threat
+dashed_name: threat-technique-name
+description: The name of technique used by this threat. You can use a MITRE ATT&CK® technique, for example. (ex. https://attack.mitre.org/techniques/T1059/)
+example: Command and Scripting Interpreter
+flat_name: threat.technique.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: threat.technique.name.text
+  name: text
+  type: match_only_text
+name: technique.name
+normalize:
+- array
+type: keyword

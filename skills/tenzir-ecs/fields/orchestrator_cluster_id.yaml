@@ -1,0 +1,9 @@
+field: orchestrator.cluster.id
+fieldset: orchestrator
+dashed_name: orchestrator-cluster-id
+description: Unique ID of the cluster.
+flat_name: orchestrator.cluster.id
+ignore_above: 1024
+level: extended
+name: cluster.id
+type: keyword

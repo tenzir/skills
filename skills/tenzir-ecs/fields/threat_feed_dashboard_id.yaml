@@ -1,0 +1,10 @@
+field: threat.feed.dashboard_id
+fieldset: threat
+dashed_name: threat-feed-dashboard-id
+description: The saved object ID of the dashboard belonging to the threat feed for displaying dashboard links to threat feeds in Kibana.
+example: 5ba16340-72e6-11eb-a3e3-b3cc7c78a70f
+flat_name: threat.feed.dashboard_id
+ignore_above: 1024
+level: extended
+name: feed.dashboard_id
+type: keyword

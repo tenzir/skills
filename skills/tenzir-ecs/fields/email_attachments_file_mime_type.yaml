@@ -1,0 +1,12 @@
+field: email.attachments.file.mime_type
+fieldset: email
+dashed_name: email-attachments-file-mime-type
+description: 'The MIME media type of the attachment.
+
+  This value will typically be extracted from the `Content-Type` MIME header field.'
+example: text/plain
+flat_name: email.attachments.file.mime_type
+ignore_above: 1024
+level: extended
+name: attachments.file.mime_type
+type: keyword

@@ -1,0 +1,13 @@
+field: container.labels
+fieldset: container
+dashed_name: container-labels
+description: Image labels.
+flat_name: container.labels
+level: extended
+name: labels
+object_type: keyword
+otel:
+- attribute: container.label
+  relation: related
+  stability: development
+type: object

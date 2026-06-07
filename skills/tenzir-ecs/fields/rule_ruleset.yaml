@@ -1,0 +1,10 @@
+field: rule.ruleset
+fieldset: rule
+dashed_name: rule-ruleset
+description: Name of the ruleset, policy, group, or parent category in which the rule used to generate this event is a member.
+example: Standard_Protocol_Filters
+flat_name: rule.ruleset
+ignore_above: 1024
+level: extended
+name: ruleset
+type: keyword

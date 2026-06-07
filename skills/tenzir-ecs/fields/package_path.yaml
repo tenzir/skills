@@ -1,0 +1,10 @@
+field: package.path
+fieldset: package
+dashed_name: package-path
+description: Path where the package is installed.
+example: /usr/local/Cellar/go/1.12.9/
+flat_name: package.path
+ignore_above: 1024
+level: extended
+name: path
+type: keyword

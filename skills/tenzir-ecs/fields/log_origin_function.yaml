@@ -1,0 +1,10 @@
+field: log.origin.function
+fieldset: log
+dashed_name: log-origin-function
+description: The name of the function or method which originated the log event.
+example: init
+flat_name: log.origin.function
+ignore_above: 1024
+level: extended
+name: origin.function
+type: keyword

@@ -1,0 +1,14 @@
+field: host.ip
+fieldset: host
+dashed_name: host-ip
+description: Host ip addresses.
+flat_name: host.ip
+level: core
+name: ip
+normalize:
+- array
+otel:
+- relation: match
+  stability: development
+synthetic_source_keep: none
+type: ip

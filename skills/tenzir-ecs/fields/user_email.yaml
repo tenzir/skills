@@ -1,0 +1,12 @@
+field: user.email
+fieldset: user
+dashed_name: user-email
+description: User email address.
+flat_name: user.email
+ignore_above: 1024
+level: extended
+name: email
+otel:
+- relation: match
+  stability: development
+type: keyword

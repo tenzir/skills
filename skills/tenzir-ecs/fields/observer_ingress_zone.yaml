@@ -1,0 +1,10 @@
+field: observer.ingress.zone
+fieldset: observer
+dashed_name: observer-ingress-zone
+description: Network zone of incoming traffic as reported by the observer to categorize the source area of ingress traffic. e.g. internal, External, DMZ, HR, Legal, etc.
+example: DMZ
+flat_name: observer.ingress.zone
+ignore_above: 1024
+level: extended
+name: ingress.zone
+type: keyword

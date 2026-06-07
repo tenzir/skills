@@ -1,0 +1,10 @@
+field: threat.feed.name
+fieldset: threat
+dashed_name: threat-feed-name
+description: The name of the threat feed in UI friendly format.
+example: AlienVault OTX
+flat_name: threat.feed.name
+ignore_above: 1024
+level: extended
+name: feed.name
+type: keyword

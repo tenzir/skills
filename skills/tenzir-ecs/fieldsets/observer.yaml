@@ -1,0 +1,191 @@
+fieldset: observer
+description: 'An observer is defined as a special network, security, or application device used to detect, observe, or create network, security, or application-related events and metrics.
+
+  This could be a custom hardware appliance or a server that has been configured to run special network, security, or application software. Examples include firewalls, web proxies, intrusion detection/prevention systems, network monitoring sensors, web application firewalls, data loss prevention systems, and APM servers. The observer.* fields shall be populated with details of the system, if any, that detects, observes and/or creates a network, security, or application event or metric. Message queues and ETL components used in processing events or metrics are not considered observers in ECS.'
+group: 2
+name: observer
+nestings:
+- observer.egress.interface
+- observer.egress.vlan
+- observer.geo
+- observer.ingress.interface
+- observer.ingress.vlan
+- observer.os
+prefix: observer.
+reused_here:
+- full: observer.geo
+  schema_name: geo
+  description: Fields describing a location.
+- full: observer.ingress.interface
+  schema_name: interface
+  description: Fields to describe observer interface information.
+- full: observer.egress.interface
+  schema_name: interface
+  description: Fields to describe observer interface information.
+- full: observer.os
+  schema_name: os
+  description: OS fields contain information about the operating system.
+- full: observer.ingress.vlan
+  schema_name: vlan
+  description: Fields to describe observed VLAN information.
+- full: observer.egress.vlan
+  schema_name: vlan
+  description: Fields to describe observed VLAN information.
+title: Observer
+type: group
+fields:
+- name: observer.egress
+  type: object
+  description: Object field for egress information
+- name: observer.egress.interface.alias
+  type: keyword
+  description: Interface alias
+  original_fieldset: interface
+- name: observer.egress.interface.id
+  type: keyword
+  description: Interface ID
+  original_fieldset: interface
+- name: observer.egress.interface.name
+  type: keyword
+  description: Interface name
+  original_fieldset: interface
+- name: observer.egress.vlan.id
+  type: keyword
+  description: VLAN ID as reported by the observer.
+  original_fieldset: vlan
+- name: observer.egress.vlan.name
+  type: keyword
+  description: Optional VLAN name as reported by the observer.
+  original_fieldset: vlan
+- name: observer.egress.zone
+  type: keyword
+  description: Observer Egress zone
+- name: observer.geo.city_name
+  type: keyword
+  description: City name.
+  original_fieldset: geo
+- name: observer.geo.continent_code
+  type: keyword
+  description: Continent code.
+  original_fieldset: geo
+- name: observer.geo.continent_name
+  type: keyword
+  description: Name of the continent.
+  original_fieldset: geo
+- name: observer.geo.country_iso_code
+  type: keyword
+  description: Country ISO code.
+  original_fieldset: geo
+- name: observer.geo.country_name
+  type: keyword
+  description: Country name.
+  original_fieldset: geo
+- name: observer.geo.location
+  type: geo_point
+  description: Longitude and latitude.
+  original_fieldset: geo
+- name: observer.geo.name
+  type: keyword
+  description: User-defined description of a location.
+  original_fieldset: geo
+- name: observer.geo.postal_code
+  type: keyword
+  description: Postal code.
+  original_fieldset: geo
+- name: observer.geo.region_iso_code
+  type: keyword
+  description: Region ISO code.
+  original_fieldset: geo
+- name: observer.geo.region_name
+  type: keyword
+  description: Region name.
+  original_fieldset: geo
+- name: observer.geo.timezone
+  type: keyword
+  description: Time zone.
+  original_fieldset: geo
+- name: observer.hostname
+  type: keyword
+  description: Hostname of the observer.
+- name: observer.ingress
+  type: object
+  description: Object field for ingress information
+- name: observer.ingress.interface.alias
+  type: keyword
+  description: Interface alias
+  original_fieldset: interface
+- name: observer.ingress.interface.id
+  type: keyword
+  description: Interface ID
+  original_fieldset: interface
+- name: observer.ingress.interface.name
+  type: keyword
+  description: Interface name
+  original_fieldset: interface
+- name: observer.ingress.vlan.id
+  type: keyword
+  description: VLAN ID as reported by the observer.
+  original_fieldset: vlan
+- name: observer.ingress.vlan.name
+  type: keyword
+  description: Optional VLAN name as reported by the observer.
+  original_fieldset: vlan
+- name: observer.ingress.zone
+  type: keyword
+  description: Observer ingress zone
+- name: observer.ip
+  type: ip
+  description: IP addresses of the observer.
+  normalize:
+  - array
+- name: observer.mac
+  type: keyword
+  description: MAC addresses of the observer.
+  normalize:
+  - array
+- name: observer.name
+  type: keyword
+  description: Custom name of the observer.
+- name: observer.os.family
+  type: keyword
+  description: OS family (such as redhat, debian, freebsd, windows).
+  original_fieldset: os
+- name: observer.os.full
+  type: keyword
+  description: Operating system name, including the version or code name.
+  original_fieldset: os
+- name: observer.os.kernel
+  type: keyword
+  description: Operating system kernel version as a raw string.
+  original_fieldset: os
+- name: observer.os.name
+  type: keyword
+  description: Operating system name, without the version.
+  original_fieldset: os
+- name: observer.os.platform
+  type: keyword
+  description: Operating system platform (such centos, ubuntu, windows).
+  original_fieldset: os
+- name: observer.os.type
+  type: keyword
+  description: 'Which commercial OS family (one of: linux, macos, unix, windows, ios or android).'
+  original_fieldset: os
+- name: observer.os.version
+  type: keyword
+  description: Operating system version as a raw string.
+  original_fieldset: os
+- name: observer.product
+  type: keyword
+  description: The product name of the observer.
+- name: observer.serial_number
+  type: keyword
+  description: Observer serial number.
+- name: observer.type
+  type: keyword
+  description: The type of the observer the data is coming from.
+- name: observer.vendor
+  type: keyword
+  description: Vendor name of the observer.
+- name: observer.version
+  type: keyword
+  description: Observer version.

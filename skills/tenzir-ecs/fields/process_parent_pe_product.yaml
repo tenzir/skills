@@ -1,0 +1,11 @@
+field: process.parent.pe.product
+fieldset: process
+dashed_name: process-parent-pe-product
+description: Internal product name of the file, provided at compile-time.
+example: Microsoft® Windows® Operating System
+flat_name: process.parent.pe.product
+ignore_above: 1024
+level: extended
+name: product
+original_fieldset: pe
+type: keyword

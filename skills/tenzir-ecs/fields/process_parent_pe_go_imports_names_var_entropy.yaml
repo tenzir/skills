@@ -1,0 +1,10 @@
+field: process.parent.pe.go_imports_names_var_entropy
+fieldset: process
+dashed_name: process-parent-pe-go-imports-names-var-entropy
+description: Variance for Shannon entropy calculation from the list of Go imports.
+flat_name: process.parent.pe.go_imports_names_var_entropy
+format: number
+level: extended
+name: go_imports_names_var_entropy
+original_fieldset: pe
+type: long

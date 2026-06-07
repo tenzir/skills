@@ -1,0 +1,13 @@
+field: process.parent.macho.go_import_hash
+fieldset: process
+dashed_name: process-parent-macho-go-import-hash
+description: 'A hash of the Go language imports in a Mach-O file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+  The algorithm used to calculate the Go symbol hash and a reference implementation are available here: https://github.com/elastic/toutoumomoma'
+example: 10bddcb4cee42080f76c88d9ff964491
+flat_name: process.parent.macho.go_import_hash
+ignore_above: 1024
+level: extended
+name: go_import_hash
+original_fieldset: macho
+type: keyword

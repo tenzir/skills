@@ -1,0 +1,15 @@
+field: url.query
+fieldset: url
+dashed_name: url-query
+description: 'The field contains the entire query string, excluding the leading `?` character, such as "q=elasticsearch".
+
+  If a URL contains no `?`, there is no query field. If there is a `?` but no query, the query field exists with an empty string. The `exists` query can be used to differentiate between the two cases.'
+example: q=elasticsearch&sort=desc
+flat_name: url.query
+ignore_above: 2083
+level: extended
+name: query
+otel:
+- relation: match
+  stability: stable
+type: keyword

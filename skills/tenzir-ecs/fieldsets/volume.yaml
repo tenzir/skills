@@ -1,0 +1,56 @@
+fieldset: volume
+description: Fields related to storage volume details.
+group: 2
+name: volume
+prefix: volume.
+title: Volume
+type: group
+fields:
+- name: volume.bus_type
+  type: keyword
+  description: Bus type of the device.
+- name: volume.default_access
+  type: keyword
+  description: Bus type of the device.
+- name: volume.device_name
+  type: keyword
+  description: Device name of the volume.
+- name: volume.device_type
+  type: keyword
+  description: Volume device type.
+- name: volume.dos_name
+  type: keyword
+  description: DOS name of the device.
+- name: volume.file_system_type
+  type: keyword
+  description: Volume device file system type.
+- name: volume.mount_name
+  type: keyword
+  description: Mount name of the volume.
+- name: volume.nt_name
+  type: keyword
+  description: NT name of the device.
+- name: volume.product_id
+  type: keyword
+  description: ProductID of the device.
+- name: volume.product_name
+  type: keyword
+  description: Produce name of the volume.
+- name: volume.removable
+  type: boolean
+  description: Indicates if the volume is removable.
+- name: volume.serial_number
+  type: keyword
+  description: Serial number of the device.
+- name: volume.size
+  type: long
+  description: Size of the volume device in bytes.
+- name: volume.vendor_id
+  type: keyword
+  description: VendorID of the device.
+- name: volume.vendor_name
+  type: keyword
+  description: Vendor name of the device.
+- name: volume.writable
+  type: boolean
+  description: Indicates if the volume is writable.

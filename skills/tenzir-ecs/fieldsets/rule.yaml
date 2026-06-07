@@ -1,0 +1,42 @@
+fieldset: rule
+description: 'Rule fields are used to capture the specifics of any observer or agent rules that generate alerts or other notable events.
+
+  Examples of data sources that would populate the rule fields include: network admission control platforms, network or host IDS/IPS, network firewalls, web application firewalls, url filters, endpoint detection and response (EDR) systems, etc.'
+group: 2
+name: rule
+prefix: rule.
+title: Rule
+type: group
+fields:
+- name: rule.author
+  type: keyword
+  description: Rule author
+  normalize:
+  - array
+- name: rule.category
+  type: keyword
+  description: Rule category
+- name: rule.description
+  type: keyword
+  description: Rule description
+- name: rule.id
+  type: keyword
+  description: Rule ID
+- name: rule.license
+  type: keyword
+  description: Rule license
+- name: rule.name
+  type: keyword
+  description: Rule name
+- name: rule.reference
+  type: keyword
+  description: Rule reference URL
+- name: rule.ruleset
+  type: keyword
+  description: Rule ruleset
+- name: rule.uuid
+  type: keyword
+  description: Rule UUID
+- name: rule.version
+  type: keyword
+  description: Rule version

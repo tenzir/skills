@@ -1,0 +1,10 @@
+field: orchestrator.resource.type
+fieldset: orchestrator
+dashed_name: orchestrator-resource-type
+description: Type of resource being acted upon.
+example: service
+flat_name: orchestrator.resource.type
+ignore_above: 1024
+level: extended
+name: resource.type
+type: keyword

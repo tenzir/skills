@@ -1,0 +1,10 @@
+field: process.parent.elf.header.object_version
+fieldset: process
+dashed_name: process-parent-elf-header-object-version
+description: '"0x1" for original ELF files.'
+flat_name: process.parent.elf.header.object_version
+ignore_above: 1024
+level: extended
+name: header.object_version
+original_fieldset: elf
+type: keyword

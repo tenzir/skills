@@ -1,0 +1,9 @@
+field: threat.enrichments.matched.occurred
+fieldset: threat
+dashed_name: threat-enrichments-matched-occurred
+description: Indicates when the indicator match was generated
+example: '2021-10-05T17:00:58.326Z'
+flat_name: threat.enrichments.matched.occurred
+level: extended
+name: enrichments.matched.occurred
+type: date

@@ -1,0 +1,13 @@
+field: threat.indicator.file.x509.subject.country
+fieldset: threat
+dashed_name: threat-indicator-file-x509-subject-country
+description: List of country \(C) code
+example: US
+flat_name: threat.indicator.file.x509.subject.country
+ignore_above: 1024
+level: extended
+name: subject.country
+normalize:
+- array
+original_fieldset: x509
+type: keyword

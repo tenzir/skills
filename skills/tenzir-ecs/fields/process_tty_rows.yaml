@@ -1,0 +1,11 @@
+field: process.tty.rows
+fieldset: process
+dashed_name: process-tty-rows
+description: 'The number of character rows in the terminal. e.g terminal height
+
+  Terminal sizes can change, so this value reflects the maximum value for a given IO event. i.e. where event.action = ''text_output'''
+example: 24
+flat_name: process.tty.rows
+level: extended
+name: tty.rows
+type: long

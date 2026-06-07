@@ -1,0 +1,97 @@
+fieldset: code_signature
+description: These fields contain information about binary code signatures.
+group: 2
+name: code_signature
+prefix: code_signature.
+reusable:
+  expected:
+  - as: code_signature
+    at: file
+    full: file.code_signature
+  - as: code_signature
+    at: process
+    full: process.code_signature
+  - as: code_signature
+    at: dll
+    full: dll.code_signature
+  top_level: false
+title: Code Signature
+type: group
+fields:
+- name: code_signature.digest_algorithm
+  type: keyword
+  description: 'The hashing algorithm used to sign the process.
+
+    This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.'
+  template_field: true
+  example: sha256
+  ignore_above: 1024
+- name: code_signature.exists
+  type: boolean
+  description: Boolean to capture if a signature is present.
+  template_field: true
+  example: 'true'
+- name: code_signature.flags
+  type: keyword
+  description: The flags used to sign the process.
+  template_field: true
+  example: 570522385
+  ignore_above: 1024
+  beta: This field is beta and subject to change.
+- name: code_signature.signing_id
+  type: keyword
+  description: 'The identifier used to sign the process.
+
+    This is used to identify the application manufactured by a software vendor. The field is relevant to Apple *OS only.'
+  template_field: true
+  example: com.apple.xpc.proxy
+  ignore_above: 1024
+- name: code_signature.status
+  type: keyword
+  description: 'Additional information about the certificate status.
+
+    This is useful for logging cryptographic errors with the certificate validity or trust status. Leave unpopulated if the validity or trust of the certificate was unchecked.'
+  template_field: true
+  example: ERROR_UNTRUSTED_ROOT
+  ignore_above: 1024
+- name: code_signature.subject_name
+  type: keyword
+  description: Subject name of the code signer
+  template_field: true
+  example: Microsoft Corporation
+  ignore_above: 1024
+- name: code_signature.team_id
+  type: keyword
+  description: 'The team identifier used to sign the process.
+
+    This is used to identify the team or vendor of a software product. The field is relevant to Apple *OS only.'
+  template_field: true
+  example: EQHXZ8M8AV
+  ignore_above: 1024
+- name: code_signature.thumbprint_sha256
+  type: keyword
+  description: Certificate SHA256 hash that uniquely identifies the code signer.
+  template_field: true
+  example: c0f23a8eb1cba0ccaa88483b5a234c96e4bdfec719bf458024e68c2a8183476b
+  pattern: ^[0-9a-f]{64}$
+  ignore_above: 64
+  beta: This field is beta and subject to change.
+- name: code_signature.timestamp
+  type: date
+  description: Date and time when the code signature was generated and signed.
+  template_field: true
+  example: '2021-01-01T12:10:30Z'
+- name: code_signature.trusted
+  type: boolean
+  description: 'Stores the trust status of the certificate chain.
+
+    Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.'
+  template_field: true
+  example: 'true'
+- name: code_signature.valid
+  type: boolean
+  description: 'Boolean to capture if the digital signature is verified against the binary content.
+
+    Leave unpopulated if a certificate was unchecked.'
+  template_field: true
+  example: 'true'

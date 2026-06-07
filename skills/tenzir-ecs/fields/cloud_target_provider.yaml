@@ -1,0 +1,11 @@
+field: cloud.target.provider
+fieldset: cloud
+dashed_name: cloud-target-provider
+description: Name of the cloud provider. Example values are aws, azure, gcp, or digitalocean.
+example: aws
+flat_name: cloud.target.provider
+ignore_above: 1024
+level: extended
+name: provider
+original_fieldset: cloud
+type: keyword

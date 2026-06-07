@@ -1,0 +1,15 @@
+field: threat.group.alias
+fieldset: threat
+dashed_name: threat-group-alias
+description: 'The alias(es) of the group for a set of related intrusion activity that are tracked by a common name in the security community.
+
+  While not required, you can use a MITRE ATT&CK® group alias(es).'
+example: '[ "Magecart Group 6" ]'
+flat_name: threat.group.alias
+ignore_above: 1024
+level: extended
+name: group.alias
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

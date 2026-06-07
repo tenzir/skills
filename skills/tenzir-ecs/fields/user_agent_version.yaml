@@ -1,0 +1,13 @@
+field: user_agent.version
+fieldset: user_agent
+dashed_name: user-agent-version
+description: Version of the user agent.
+example: 12.0
+flat_name: user_agent.version
+ignore_above: 1024
+level: extended
+name: version
+otel:
+- relation: match
+  stability: development
+type: keyword

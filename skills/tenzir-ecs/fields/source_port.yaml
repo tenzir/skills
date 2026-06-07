@@ -1,0 +1,12 @@
+field: source.port
+fieldset: source
+dashed_name: source-port
+description: Port of the source.
+flat_name: source.port
+format: string
+level: core
+name: port
+otel:
+- relation: match
+  stability: development
+type: long

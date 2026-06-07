@@ -1,0 +1,10 @@
+field: registry.path
+fieldset: registry
+dashed_name: registry-path
+description: Full path, including hive, key and value
+example: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winword.exe\Debugger
+flat_name: registry.path
+ignore_above: 1024
+level: core
+name: path
+type: keyword

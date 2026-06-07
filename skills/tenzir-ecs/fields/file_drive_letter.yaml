@@ -1,0 +1,12 @@
+field: file.drive_letter
+fieldset: file
+dashed_name: file-drive-letter
+description: 'Drive letter where the file is located. This field is only relevant on Windows.
+
+  The value should be uppercase, and not include the colon.'
+example: C
+flat_name: file.drive_letter
+ignore_above: 1
+level: extended
+name: drive_letter
+type: keyword

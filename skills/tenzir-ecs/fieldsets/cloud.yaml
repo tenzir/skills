@@ -1,0 +1,1090 @@
+fieldset: cloud
+description: Fields related to the cloud or infrastructure the events are coming from.
+footnote: 'Examples: If Metricbeat is running on an EC2 host and fetches data from its host, the cloud info contains the data about this machine. If Metricbeat runs on a remote machine outside the cloud and fetches data from a service running in the cloud, the field contains cloud data from the machine the service is running on.
+
+  The cloud fields may be self-nested under cloud.origin.* and cloud.target.* to describe origin or target service''s cloud information in the context of incoming or outgoing requests, respectively. However, the fieldsets cloud.origin.* and cloud.target.* must not be confused with the root cloud fieldset that is used to describe the cloud context of the actual service under observation. The fieldset cloud.origin.* may only be used in the context of incoming requests or events to provide the originating service''s cloud information. The fieldset cloud.target.* may only be used in the context of outgoing requests or events to describe the target service''s cloud information.'
+group: 2
+name: cloud
+nestings:
+- cloud.entity
+- cloud.origin
+- cloud.target
+prefix: cloud.
+reusable:
+  expected:
+  - as: origin
+    at: cloud
+    full: cloud.origin
+    description_override: Provides the cloud information of the origin entity in case of an incoming request or event.
+  - as: target
+    at: cloud
+    full: cloud.target
+    description_override: Provides the cloud information of the target entity in case of an outgoing request or event.
+  top_level: true
+reused_here:
+- full: cloud.entity
+  schema_name: entity
+  description: Fields to describe various types of entities across IT environments.
+- full: cloud.origin
+  schema_name: cloud
+  description: Provides the cloud information of the origin entity in case of an incoming request or event.
+- full: cloud.target
+  schema_name: cloud
+  description: Provides the cloud information of the target entity in case of an outgoing request or event.
+title: Cloud
+type: group
+fields:
+- name: cloud.account.id
+  type: keyword
+  description: The cloud account or organization id.
+- name: cloud.account.name
+  type: keyword
+  description: The cloud account name.
+- name: cloud.availability_zone
+  type: keyword
+  description: Availability zone in which this host, resource, or service is located.
+- name: cloud.entity.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.entity.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.entity.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.id
+  type: keyword
+  description: Unique identifier for the entity.
+  original_fieldset: entity
+- name: cloud.entity.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.name
+  type: keyword
+  description: The name of the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.entity.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.entity.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.instance.id
+  type: keyword
+  description: Instance ID of the host machine.
+- name: cloud.instance.name
+  type: keyword
+  description: Instance name of the host machine.
+- name: cloud.machine.type
+  type: keyword
+  description: Machine type of the host machine.
+- name: cloud.origin.account.id
+  type: keyword
+  description: The cloud account or organization id.
+  original_fieldset: cloud
+- name: cloud.origin.account.name
+  type: keyword
+  description: The cloud account name.
+  original_fieldset: cloud
+- name: cloud.origin.availability_zone
+  type: keyword
+  description: Availability zone in which this host, resource, or service is located.
+  original_fieldset: cloud
+- name: cloud.origin.entity.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.id
+  type: keyword
+  description: Unique identifier for the entity.
+  original_fieldset: entity
+- name: cloud.origin.entity.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.name
+  type: keyword
+  description: The name of the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.origin.entity.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.origin.entity.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.origin.instance.id
+  type: keyword
+  description: Instance ID of the host machine.
+  original_fieldset: cloud
+- name: cloud.origin.instance.name
+  type: keyword
+  description: Instance name of the host machine.
+  original_fieldset: cloud
+- name: cloud.origin.machine.type
+  type: keyword
+  description: Machine type of the host machine.
+  original_fieldset: cloud
+- name: cloud.origin.project.id
+  type: keyword
+  description: The cloud project id.
+  original_fieldset: cloud
+- name: cloud.origin.project.name
+  type: keyword
+  description: The cloud project name.
+  original_fieldset: cloud
+- name: cloud.origin.provider
+  type: keyword
+  description: Name of the cloud provider.
+  original_fieldset: cloud
+- name: cloud.origin.region
+  type: keyword
+  description: Region in which this host, resource, or service is located.
+  original_fieldset: cloud
+- name: cloud.origin.service.name
+  type: keyword
+  description: The cloud service name.
+  original_fieldset: cloud
+- name: cloud.project.id
+  type: keyword
+  description: The cloud project id.
+- name: cloud.project.name
+  type: keyword
+  description: The cloud project name.
+- name: cloud.provider
+  type: keyword
+  description: Name of the cloud provider.
+- name: cloud.region
+  type: keyword
+  description: Region in which this host, resource, or service is located.
+- name: cloud.service.name
+  type: keyword
+  description: The cloud service name.
+- name: cloud.target.account.id
+  type: keyword
+  description: The cloud account or organization id.
+  original_fieldset: cloud
+- name: cloud.target.account.name
+  type: keyword
+  description: The cloud account name.
+  original_fieldset: cloud
+- name: cloud.target.availability_zone
+  type: keyword
+  description: Availability zone in which this host, resource, or service is located.
+  original_fieldset: cloud
+- name: cloud.target.entity.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.id
+  type: keyword
+  description: Unique identifier for the entity.
+  original_fieldset: entity
+- name: cloud.target.entity.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.name
+  type: keyword
+  description: The name of the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: cloud.target.entity.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: cloud.target.entity.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: cloud.target.instance.id
+  type: keyword
+  description: Instance ID of the host machine.
+  original_fieldset: cloud
+- name: cloud.target.instance.name
+  type: keyword
+  description: Instance name of the host machine.
+  original_fieldset: cloud
+- name: cloud.target.machine.type
+  type: keyword
+  description: Machine type of the host machine.
+  original_fieldset: cloud
+- name: cloud.target.project.id
+  type: keyword
+  description: The cloud project id.
+  original_fieldset: cloud
+- name: cloud.target.project.name
+  type: keyword
+  description: The cloud project name.
+  original_fieldset: cloud
+- name: cloud.target.provider
+  type: keyword
+  description: Name of the cloud provider.
+  original_fieldset: cloud
+- name: cloud.target.region
+  type: keyword
+  description: Region in which this host, resource, or service is located.
+  original_fieldset: cloud
+- name: cloud.target.service.name
+  type: keyword
+  description: The cloud service name.
+  original_fieldset: cloud

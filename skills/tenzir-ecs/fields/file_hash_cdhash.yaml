@@ -1,0 +1,12 @@
+field: file.hash.cdhash
+fieldset: file
+beta: This field is beta and subject to change.
+dashed_name: file-hash-cdhash
+description: Code directory hash, utilized to uniquely identify and authenticate the integrity of the executable code.
+example: 3783b4052fd474dbe30676b45c329e7a6d44acd9
+flat_name: file.hash.cdhash
+ignore_above: 1024
+level: extended
+name: cdhash
+original_fieldset: hash
+type: keyword

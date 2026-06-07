@@ -1,0 +1,13 @@
+field: tls.server.issuer
+fieldset: tls
+dashed_name: tls-server-issuer
+description: Subject of the issuer of the x.509 certificate presented by the server.
+example: CN=Example Root CA, OU=Infrastructure Team, DC=example, DC=com
+flat_name: tls.server.issuer
+ignore_above: 1024
+level: extended
+name: server.issuer
+otel:
+- relation: match
+  stability: development
+type: keyword

@@ -1,0 +1,10 @@
+field: source.bytes
+fieldset: source
+dashed_name: source-bytes
+description: Bytes sent from the source to the destination.
+example: 184
+flat_name: source.bytes
+format: bytes
+level: core
+name: bytes
+type: long

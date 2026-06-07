@@ -1,0 +1,9 @@
+field: orchestrator.cluster.url
+fieldset: orchestrator
+dashed_name: orchestrator-cluster-url
+description: URL of the API used to manage the cluster.
+flat_name: orchestrator.cluster.url
+ignore_above: 1024
+level: extended
+name: cluster.url
+type: keyword

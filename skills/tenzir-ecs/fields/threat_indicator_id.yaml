@@ -1,0 +1,15 @@
+field: threat.indicator.id
+fieldset: threat
+dashed_name: threat-indicator-id
+description: 'The ID of the indicator used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®. This field can have multiple values to allow for the identification of the same indicator across systems that use different ID formats.
+
+  While not required, a common approach is to use a STIX 2.x indicator ID.'
+example: '[indicator--d7008e06-ab86-415a-9803-3c81ce2d3c37]'
+flat_name: threat.indicator.id
+ignore_above: 1024
+level: extended
+name: indicator.id
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

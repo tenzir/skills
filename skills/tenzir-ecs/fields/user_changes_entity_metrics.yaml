@@ -1,0 +1,10 @@
+field: user.changes.entity.metrics
+fieldset: user
+beta: This field is beta and subject to change.
+dashed_name: user-changes-entity-metrics
+description: Field set for any fields containing numeric entity metrics. These use dynamic field data type mapping.
+flat_name: user.changes.entity.metrics
+level: extended
+name: metrics
+original_fieldset: entity
+type: object

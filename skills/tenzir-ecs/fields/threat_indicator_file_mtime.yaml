@@ -1,0 +1,9 @@
+field: threat.indicator.file.mtime
+fieldset: threat
+dashed_name: threat-indicator-file-mtime
+description: Last time the file content was modified.
+flat_name: threat.indicator.file.mtime
+level: extended
+name: mtime
+original_fieldset: file
+type: date

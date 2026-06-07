@@ -1,0 +1,14 @@
+field: gen_ai.response.model
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-response-model
+description: The name of the model that generated the response.
+example: gpt-4-0613
+flat_name: gen_ai.response.model
+ignore_above: 1024
+level: extended
+name: response.model
+otel:
+- relation: match
+  stability: development
+type: keyword

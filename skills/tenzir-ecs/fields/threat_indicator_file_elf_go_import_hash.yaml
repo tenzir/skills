@@ -1,0 +1,13 @@
+field: threat.indicator.file.elf.go_import_hash
+fieldset: threat
+dashed_name: threat-indicator-file-elf-go-import-hash
+description: 'A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+  The algorithm used to calculate the Go symbol hash and a reference implementation are available here: https://github.com/elastic/toutoumomoma'
+example: 10bddcb4cee42080f76c88d9ff964491
+flat_name: threat.indicator.file.elf.go_import_hash
+ignore_above: 1024
+level: extended
+name: go_import_hash
+original_fieldset: elf
+type: keyword

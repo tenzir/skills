@@ -1,0 +1,9 @@
+field: host.target.disk.write.bytes
+fieldset: host
+dashed_name: host-target-disk-write-bytes
+description: The total number of bytes (gauge) written successfully (aggregated from all disks) since the last metric collection.
+flat_name: host.target.disk.write.bytes
+level: extended
+name: disk.write.bytes
+original_fieldset: host
+type: long

@@ -1,0 +1,9 @@
+field: threat.enrichments.indicator.file.elf.creation_date
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-elf-creation-date
+description: Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+flat_name: threat.enrichments.indicator.file.elf.creation_date
+level: extended
+name: creation_date
+original_fieldset: elf
+type: date

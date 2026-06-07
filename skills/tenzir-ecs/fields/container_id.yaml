@@ -1,0 +1,12 @@
+field: container.id
+fieldset: container
+dashed_name: container-id
+description: Unique container id.
+flat_name: container.id
+ignore_above: 1024
+level: core
+name: id
+otel:
+- relation: match
+  stability: development
+type: keyword

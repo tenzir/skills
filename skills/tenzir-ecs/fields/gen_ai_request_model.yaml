@@ -1,0 +1,14 @@
+field: gen_ai.request.model
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-model
+description: The name of the GenAI model a request is being made to.
+example: gpt-4
+flat_name: gen_ai.request.model
+ignore_above: 1024
+level: extended
+name: request.model
+otel:
+- relation: match
+  stability: development
+type: keyword

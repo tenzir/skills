@@ -1,0 +1,44 @@
+fieldset: as
+description: An autonomous system (AS) is a collection of connected Internet Protocol (IP) routing prefixes under the control of one or more network operators on behalf of a single administrative entity or domain that presents a common, clearly defined routing policy to the internet.
+group: 2
+name: as
+prefix: as.
+reusable:
+  expected:
+  - as: as
+    at: client
+    full: client.as
+  - as: as
+    at: destination
+    full: destination.as
+  - as: as
+    at: server
+    full: server.as
+  - as: as
+    at: source
+    full: source.as
+  - as: as
+    at: threat.indicator
+    full: threat.indicator.as
+  - as: as
+    at: threat.enrichments.indicator
+    full: threat.enrichments.indicator.as
+  top_level: false
+title: Autonomous System
+type: group
+fields:
+- name: as.number
+  type: long
+  description: Unique number allocated to the autonomous system. The autonomous system number (ASN) uniquely identifies each network on the Internet.
+  template_field: true
+  example: 15169
+- name: as.organization.name
+  type: keyword
+  description: Organization name.
+  template_field: true
+  example: Google LLC
+  multi_fields:
+  - flat_name: as.organization.name.text
+    name: text
+    type: match_only_text
+  ignore_above: 1024

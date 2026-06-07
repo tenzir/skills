@@ -1,0 +1,10 @@
+field: entity.target.attributes.mfa_enabled
+fieldset: entity
+beta: This field is beta and subject to change.
+dashed_name: entity-target-attributes-mfa-enabled
+description: Indicates whether multi-factor authentication is enabled for this entity. Typically applicable to User entities.
+flat_name: entity.target.attributes.mfa_enabled
+level: extended
+name: attributes.mfa_enabled
+original_fieldset: entity
+type: boolean

@@ -1,0 +1,92 @@
+fieldset: event
+description: 'The event fields are used for context information about the log or metric event itself.
+
+  A log is defined as an event containing details of something that happened. Log events must include the time at which the thing happened. Examples of log events include a process starting on a host, a network packet being sent from a source to a destination, or a network connection between a client and a server being initiated or closed. A metric is defined as an event containing one or more numerical measurements and the time at which the measurement was taken. Examples of metric events include memory pressure measured on a host and device temperature. See the `event.kind` definition in this section for additional details about metric and state events.'
+group: 2
+name: event
+prefix: event.
+title: Event
+type: group
+fields:
+- name: event.action
+  type: keyword
+  description: The action captured by the event.
+- name: event.agent_id_status
+  type: keyword
+  description: Validation status of the event's agent.id field.
+- name: event.category
+  type: keyword
+  description: Event category. The second categorization field in the hierarchy.
+  normalize:
+  - array
+- name: event.code
+  type: keyword
+  description: Identification code for this event.
+- name: event.created
+  type: date
+  description: Time when the event was first read by an agent or by your pipeline.
+- name: event.dataset
+  type: keyword
+  description: Name of the dataset.
+- name: event.duration
+  type: long
+  description: Duration of the event in nanoseconds.
+- name: event.end
+  type: date
+  description: '`event.end` contains the date when the event ended or when the activity was last observed.'
+- name: event.hash
+  type: keyword
+  description: Hash (perhaps logstash fingerprint) of raw field to be able to demonstrate log integrity.
+- name: event.id
+  type: keyword
+  description: Unique ID to describe the event.
+- name: event.ingested
+  type: date
+  description: Timestamp when an event arrived in the central data store.
+- name: event.kind
+  type: keyword
+  description: The kind of the event. The highest categorization field in the hierarchy.
+- name: event.module
+  type: keyword
+  description: Name of the module this data is coming from.
+- name: event.original
+  type: keyword
+  description: Raw text message of entire event.
+- name: event.outcome
+  type: keyword
+  description: The outcome of the event. The lowest level categorization field in the hierarchy.
+- name: event.provider
+  type: keyword
+  description: Source of the event.
+- name: event.reason
+  type: keyword
+  description: Reason why this event happened, according to the source
+- name: event.reference
+  type: keyword
+  description: Event reference URL
+- name: event.risk_score
+  type: float
+  description: Risk score or priority of the event (e.g. security solutions). Use your system's original value here.
+- name: event.risk_score_norm
+  type: float
+  description: Normalized risk score or priority of the event (0-100).
+- name: event.sequence
+  type: long
+  description: Sequence number of the event.
+- name: event.severity
+  type: long
+  description: Numeric severity of the event.
+- name: event.start
+  type: date
+  description: '`event.start` contains the date when the event started or when the activity was first observed.'
+- name: event.timezone
+  type: keyword
+  description: Event time zone.
+- name: event.type
+  type: keyword
+  description: Event type. The third categorization field in the hierarchy.
+  normalize:
+  - array
+- name: event.url
+  type: keyword
+  description: Event investigation URL

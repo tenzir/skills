@@ -1,0 +1,10 @@
+field: file.elf.sections.virtual_address
+fieldset: file
+dashed_name: file-elf-sections-virtual-address
+description: ELF Section List virtual address.
+flat_name: file.elf.sections.virtual_address
+format: string
+level: extended
+name: sections.virtual_address
+original_fieldset: elf
+type: long

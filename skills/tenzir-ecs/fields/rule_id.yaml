@@ -1,0 +1,10 @@
+field: rule.id
+fieldset: rule
+dashed_name: rule-id
+description: A rule ID that is unique within the scope of an agent, observer, or other entity using the rule for detection of this event.
+example: 101
+flat_name: rule.id
+ignore_above: 1024
+level: extended
+name: id
+type: keyword

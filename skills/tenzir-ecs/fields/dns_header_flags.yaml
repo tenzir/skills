@@ -1,0 +1,21 @@
+field: dns.header_flags
+fieldset: dns
+dashed_name: dns-header-flags
+description: Array of 2 letter DNS header flags.
+example: '["RD", "RA"]'
+expected_values:
+- AA
+- TC
+- RD
+- RA
+- AD
+- CD
+- DO
+flat_name: dns.header_flags
+ignore_above: 1024
+level: extended
+name: header_flags
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

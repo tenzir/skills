@@ -1,0 +1,10 @@
+field: log.syslog.version
+fieldset: log
+dashed_name: log-syslog-version
+description: The version of the Syslog protocol specification. Only applicable for RFC 5424 messages.
+example: 1
+flat_name: log.syslog.version
+ignore_above: 1024
+level: extended
+name: syslog.version
+type: keyword

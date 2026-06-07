@@ -1,0 +1,11 @@
+field: entity.target.reference
+fieldset: entity
+beta: This field is beta and subject to change.
+dashed_name: entity-target-reference
+description: A URI, URL, or other direct reference to access or locate the entity in its source system. This could be an API endpoint, web console URL, or other addressable location. Format can vary by entity type and source system.
+flat_name: entity.target.reference
+ignore_above: 1024
+level: extended
+name: reference
+original_fieldset: entity
+type: keyword

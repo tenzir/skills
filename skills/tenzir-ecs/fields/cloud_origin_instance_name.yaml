@@ -1,0 +1,10 @@
+field: cloud.origin.instance.name
+fieldset: cloud
+dashed_name: cloud-origin-instance-name
+description: Instance name of the host machine.
+flat_name: cloud.origin.instance.name
+ignore_above: 1024
+level: extended
+name: instance.name
+original_fieldset: cloud
+type: keyword

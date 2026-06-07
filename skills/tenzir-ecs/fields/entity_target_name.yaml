@@ -1,0 +1,15 @@
+field: entity.target.name
+fieldset: entity
+beta: This field is beta and subject to change.
+dashed_name: entity-target-name
+description: The name of the entity. The keyword field enables exact matches for filtering and aggregations, while the text field enables full-text search. For entities with dedicated field sets (for example, `host`), this field should mirrors the corresponding *.name value.
+flat_name: entity.target.name
+ignore_above: 1024
+level: core
+multi_fields:
+- flat_name: entity.target.name.text
+  name: text
+  type: match_only_text
+name: name
+original_fieldset: entity
+type: keyword

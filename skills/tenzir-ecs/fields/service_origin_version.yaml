@@ -1,0 +1,13 @@
+field: service.origin.version
+fieldset: service
+dashed_name: service-origin-version
+description: 'Version of the service the data was collected from.
+
+  This allows to look at a data set only for a specific version of a service.'
+example: 3.2.4
+flat_name: service.origin.version
+ignore_above: 1024
+level: core
+name: version
+original_fieldset: service
+type: keyword

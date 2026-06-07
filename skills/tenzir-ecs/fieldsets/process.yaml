@@ -1,0 +1,1772 @@
+fieldset: process
+description: 'These fields contain information about a process.
+
+  These fields can help you correlate metrics information with a process id/name from a log message.  The `process.pid` often stays in the metric itself and is copied to the global field for correlation.'
+group: 2
+name: process
+nestings:
+- process.attested_groups
+- process.attested_user
+- process.code_signature
+- process.elf
+- process.entry_leader
+- process.entry_leader.parent
+- process.entry_leader.parent.session_leader
+- process.entry_meta.source
+- process.group
+- process.group_leader
+- process.hash
+- process.macho
+- process.parent
+- process.parent.group_leader
+- process.pe
+- process.previous
+- process.real_group
+- process.real_user
+- process.responsible
+- process.saved_group
+- process.saved_user
+- process.session_leader
+- process.session_leader.parent
+- process.session_leader.parent.session_leader
+- process.supplemental_groups
+- process.user
+prefix: process.
+reusable:
+  expected:
+  - as: parent
+    at: process
+    full: process.parent
+    description_override: Information about the parent process.
+  - as: entry_leader
+    at: process
+    full: process.entry_leader
+    description_override: First process from terminal or remote access via SSH, SSM, etc OR a service directly started by the init process.
+  - as: session_leader
+    at: process
+    full: process.session_leader
+    description_override: Often the same as entry_leader. When it differs, it represents a session started within another session. e.g. using tmux
+  - as: group_leader
+    at: process
+    full: process.group_leader
+    description_override: Information about the process group leader. In some cases this may be the same as the top level process.
+  - as: group_leader
+    at: process.parent
+    full: process.parent.group_leader
+    description_override: Information about the parent's process group leader. Only pid, start and entity_id fields are set.
+  - as: parent
+    at: process.entry_leader
+    full: process.entry_leader.parent
+    description_override: Information about the entry leader's parent process. Only pid, start and entity_id fields are set.
+  - as: parent
+    at: process.session_leader
+    full: process.session_leader.parent
+    description_override: Information about the session leader's parent process. Only pid, start and entity_id fields are set.
+  - as: session_leader
+    at: process.entry_leader.parent
+    full: process.entry_leader.parent.session_leader
+    description_override: Information about the parent session of the entry leader. Only pid, start and entity_id fields are set.
+  - as: session_leader
+    at: process.session_leader.parent
+    full: process.session_leader.parent.session_leader
+    description_override: Information about the parent session of the session leader. Only pid, start and entity_id fields are set.
+  - as: previous
+    at: process
+    full: process.previous
+    normalize:
+    - array
+    description_override: An array of previous executions for the process, including the initial fork. Only executable and args are set.
+  - as: responsible
+    at: process
+    beta: This field is beta and subject to change.
+    full: process.responsible
+    description_override: Responsible process in macOS tracks the originating process of an app, key for understanding permissions and hierarchy.
+  top_level: true
+reused_here:
+- full: process.group
+  schema_name: group
+  description: The effective group (egid).
+- full: process.real_group
+  schema_name: group
+  description: The real group (rgid).
+- full: process.saved_group
+  schema_name: group
+  description: The saved group (sgid).
+- full: process.supplemental_groups
+  normalize:
+  - array
+  schema_name: group
+  description: An array of supplemental groups.
+- beta: Reusing the `group` fields in this location is currently considered beta.
+  full: process.attested_groups
+  normalize:
+  - array
+  schema_name: group
+  description: The externally attested groups based on an external source such as the Kube API.
+- full: process.hash
+  schema_name: hash
+  description: Hashes, usually file hashes.
+- full: process.pe
+  schema_name: pe
+  description: These fields contain Windows Portable Executable (PE) metadata.
+- full: process.code_signature
+  schema_name: code_signature
+  description: These fields contain information about binary code signatures.
+- full: process.elf
+  schema_name: elf
+  description: These fields contain Linux Executable Linkable Format (ELF) metadata.
+- beta: This field reuse is beta and subject to change.
+  full: process.macho
+  schema_name: macho
+  description: These fields contain Mac OS Mach Object file format (Mach-O) metadata.
+- full: process.entry_meta.source
+  schema_name: source
+  description: Remote client information such as ip, port and geo location.
+- full: process.user
+  schema_name: user
+  description: The effective user (euid).
+- full: process.saved_user
+  schema_name: user
+  description: The saved user (suid).
+- full: process.real_user
+  schema_name: user
+  description: The real user (ruid). Identifies the real owner of the process.
+- beta: Reusing the `user` fields in this location is currently considered beta.
+  full: process.attested_user
+  schema_name: user
+  description: The externally attested user based on an external source such as the Kube API.
+- full: process.parent
+  schema_name: process
+  description: Information about the parent process.
+- full: process.entry_leader
+  schema_name: process
+  description: First process from terminal or remote access via SSH, SSM, etc OR a service directly started by the init process.
+- full: process.session_leader
+  schema_name: process
+  description: Often the same as entry_leader. When it differs, it represents a session started within another session. e.g. using tmux
+- full: process.group_leader
+  schema_name: process
+  description: Information about the process group leader. In some cases this may be the same as the top level process.
+- full: process.parent.group_leader
+  schema_name: process
+  description: Information about the parent's process group leader. Only pid, start and entity_id fields are set.
+- full: process.entry_leader.parent
+  schema_name: process
+  description: Information about the entry leader's parent process. Only pid, start and entity_id fields are set.
+- full: process.session_leader.parent
+  schema_name: process
+  description: Information about the session leader's parent process. Only pid, start and entity_id fields are set.
+- full: process.entry_leader.parent.session_leader
+  schema_name: process
+  description: Information about the parent session of the entry leader. Only pid, start and entity_id fields are set.
+- full: process.session_leader.parent.session_leader
+  schema_name: process
+  description: Information about the parent session of the session leader. Only pid, start and entity_id fields are set.
+- full: process.previous
+  normalize:
+  - array
+  schema_name: process
+  description: An array of previous executions for the process, including the initial fork. Only executable and args are set.
+- beta: This field is beta and subject to change.
+  full: process.responsible
+  schema_name: process
+  description: Responsible process in macOS tracks the originating process of an app, key for understanding permissions and hierarchy.
+title: Process
+type: group
+fields:
+- name: process.args
+  type: keyword
+  description: Array of process arguments.
+  normalize:
+  - array
+- name: process.args_count
+  type: long
+  description: Length of the process.args array.
+- name: process.code_signature.digest_algorithm
+  type: keyword
+  description: Hashing algorithm used to sign the process.
+  original_fieldset: code_signature
+- name: process.code_signature.exists
+  type: boolean
+  description: Boolean to capture if a signature is present.
+  original_fieldset: code_signature
+- name: process.code_signature.flags
+  type: keyword
+  description: Code signing flags of the process
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: process.code_signature.signing_id
+  type: keyword
+  description: The identifier used to sign the process.
+  original_fieldset: code_signature
+- name: process.code_signature.status
+  type: keyword
+  description: Additional information about the certificate status.
+  original_fieldset: code_signature
+- name: process.code_signature.subject_name
+  type: keyword
+  description: Subject name of the code signer
+  original_fieldset: code_signature
+- name: process.code_signature.team_id
+  type: keyword
+  description: The team identifier used to sign the process.
+  original_fieldset: code_signature
+- name: process.code_signature.thumbprint_sha256
+  type: keyword
+  description: SHA256 hash of the certificate.
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: process.code_signature.timestamp
+  type: date
+  description: When the signature was generated and signed.
+  original_fieldset: code_signature
+- name: process.code_signature.trusted
+  type: boolean
+  description: Stores the trust status of the certificate chain.
+  original_fieldset: code_signature
+- name: process.code_signature.valid
+  type: boolean
+  description: Boolean to capture if the digital signature is verified against the binary content.
+  original_fieldset: code_signature
+- name: process.command_line
+  type: wildcard
+  description: Full command line that started the process.
+- name: process.elf.architecture
+  type: keyword
+  description: Machine architecture of the ELF file.
+  original_fieldset: elf
+- name: process.elf.byte_order
+  type: keyword
+  description: Byte sequence of ELF file.
+  original_fieldset: elf
+- name: process.elf.cpu_type
+  type: keyword
+  description: CPU type of the ELF file.
+  original_fieldset: elf
+- name: process.elf.creation_date
+  type: date
+  description: Build or compile date.
+  original_fieldset: elf
+- name: process.elf.exports
+  type: flattened
+  description: List of exported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.elf.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in an ELF file.
+  original_fieldset: elf
+- name: process.elf.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: elf
+- name: process.elf.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: process.elf.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: process.elf.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: elf
+- name: process.elf.header.abi_version
+  type: keyword
+  description: Version of the ELF Application Binary Interface (ABI).
+  original_fieldset: elf
+- name: process.elf.header.class
+  type: keyword
+  description: Header class of the ELF file.
+  original_fieldset: elf
+- name: process.elf.header.data
+  type: keyword
+  description: Data table of the ELF header.
+  original_fieldset: elf
+- name: process.elf.header.entrypoint
+  type: long
+  description: Header entrypoint of the ELF file.
+  original_fieldset: elf
+- name: process.elf.header.object_version
+  type: keyword
+  description: '"0x1" for original ELF files.'
+  original_fieldset: elf
+- name: process.elf.header.os_abi
+  type: keyword
+  description: Application Binary Interface (ABI) of the Linux OS.
+  original_fieldset: elf
+- name: process.elf.header.type
+  type: keyword
+  description: Header type of the ELF file.
+  original_fieldset: elf
+- name: process.elf.header.version
+  type: keyword
+  description: Version of the ELF header.
+  original_fieldset: elf
+- name: process.elf.import_hash
+  type: keyword
+  description: A hash of the imports in an ELF file.
+  original_fieldset: elf
+- name: process.elf.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.elf.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: process.elf.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: process.elf.sections
+  type: nested
+  description: Section information of the ELF file.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.elf.sections.chi2
+  type: long
+  description: Chi-square probability distribution of the section.
+  original_fieldset: elf
+- name: process.elf.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: process.elf.sections.flags
+  type: keyword
+  description: ELF Section List flags.
+  original_fieldset: elf
+- name: process.elf.sections.name
+  type: keyword
+  description: ELF Section List name.
+  original_fieldset: elf
+- name: process.elf.sections.physical_offset
+  type: keyword
+  description: ELF Section List offset.
+  original_fieldset: elf
+- name: process.elf.sections.physical_size
+  type: long
+  description: ELF Section List physical size.
+  original_fieldset: elf
+- name: process.elf.sections.type
+  type: keyword
+  description: ELF Section List type.
+  original_fieldset: elf
+- name: process.elf.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: process.elf.sections.virtual_address
+  type: long
+  description: ELF Section List virtual address.
+  original_fieldset: elf
+- name: process.elf.sections.virtual_size
+  type: long
+  description: ELF Section List virtual size.
+  original_fieldset: elf
+- name: process.elf.segments
+  type: nested
+  description: ELF object segment list.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.elf.segments.sections
+  type: keyword
+  description: ELF object segment sections.
+  original_fieldset: elf
+- name: process.elf.segments.type
+  type: keyword
+  description: ELF object segment type.
+  original_fieldset: elf
+- name: process.elf.shared_libraries
+  type: keyword
+  description: List of shared libraries used by this ELF object.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.elf.telfhash
+  type: keyword
+  description: telfhash hash for ELF file.
+  original_fieldset: elf
+- name: process.end
+  type: date
+  description: The time the process ended.
+- name: process.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+- name: process.entry_leader.args
+  type: keyword
+  description: Array of process arguments.
+  original_fieldset: process
+  normalize:
+  - array
+- name: process.entry_leader.args_count
+  type: long
+  description: Length of the process.args array.
+  original_fieldset: process
+- name: process.entry_leader.attested_groups.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.entry_leader.attested_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.entry_leader.attested_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.entry_leader.command_line
+  type: wildcard
+  description: Full command line that started the process.
+  original_fieldset: process
+- name: process.entry_leader.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.entry_leader.entry_meta.source.ip
+  type: ip
+  description: IP address of the source.
+  original_fieldset: source
+- name: process.entry_leader.entry_meta.type
+  type: keyword
+  description: The entry type for the entry session leader.
+  original_fieldset: process
+- name: process.entry_leader.executable
+  type: keyword
+  description: Absolute path to the process executable.
+  original_fieldset: process
+- name: process.entry_leader.group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.entry_leader.group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.entry_leader.interactive
+  type: boolean
+  description: Whether the process is connected to an interactive shell.
+  original_fieldset: process
+- name: process.entry_leader.name
+  type: keyword
+  description: Process name.
+  original_fieldset: process
+- name: process.entry_leader.parent.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.entry_leader.parent.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.entry_leader.parent.session_leader.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.entry_leader.parent.session_leader.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.entry_leader.parent.session_leader.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.entry_leader.parent.session_leader.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.entry_leader.parent.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.entry_leader.parent.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.entry_leader.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.entry_leader.real_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.entry_leader.real_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.entry_leader.real_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.entry_leader.real_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.entry_leader.same_as_process
+  type: boolean
+  description: This boolean is used to identify if a leader process is the same as the top level process.
+  original_fieldset: process
+- name: process.entry_leader.saved_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.entry_leader.saved_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.entry_leader.saved_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.entry_leader.saved_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.entry_leader.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.entry_leader.supplemental_groups.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.entry_leader.supplemental_groups.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.entry_leader.tty
+  type: object
+  description: Information about the controlling TTY device.
+  original_fieldset: process
+- name: process.entry_leader.tty.char_device.major
+  type: long
+  description: The TTY character device's major number.
+  original_fieldset: process
+- name: process.entry_leader.tty.char_device.minor
+  type: long
+  description: The TTY character device's minor number.
+  original_fieldset: process
+- name: process.entry_leader.user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.entry_leader.user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.entry_leader.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.entry_leader.working_directory
+  type: keyword
+  description: The working directory of the process.
+  original_fieldset: process
+- name: process.env_vars
+  type: keyword
+  description: Array of environment variable bindings.
+  normalize:
+  - array
+- name: process.executable
+  type: keyword
+  description: Absolute path to the process executable.
+- name: process.exit_code
+  type: long
+  description: The exit code of the process.
+- name: process.group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.group_leader.args
+  type: keyword
+  description: Array of process arguments.
+  original_fieldset: process
+  normalize:
+  - array
+- name: process.group_leader.args_count
+  type: long
+  description: Length of the process.args array.
+  original_fieldset: process
+- name: process.group_leader.command_line
+  type: wildcard
+  description: Full command line that started the process.
+  original_fieldset: process
+- name: process.group_leader.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.group_leader.executable
+  type: keyword
+  description: Absolute path to the process executable.
+  original_fieldset: process
+- name: process.group_leader.group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.group_leader.group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.group_leader.interactive
+  type: boolean
+  description: Whether the process is connected to an interactive shell.
+  original_fieldset: process
+- name: process.group_leader.name
+  type: keyword
+  description: Process name.
+  original_fieldset: process
+- name: process.group_leader.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.group_leader.real_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.group_leader.real_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.group_leader.real_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.group_leader.real_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.group_leader.same_as_process
+  type: boolean
+  description: This boolean is used to identify if a leader process is the same as the top level process.
+  original_fieldset: process
+- name: process.group_leader.saved_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.group_leader.saved_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.group_leader.saved_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.group_leader.saved_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.group_leader.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.group_leader.supplemental_groups.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.group_leader.supplemental_groups.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.group_leader.tty
+  type: object
+  description: Information about the controlling TTY device.
+  original_fieldset: process
+- name: process.group_leader.tty.char_device.major
+  type: long
+  description: The TTY character device's major number.
+  original_fieldset: process
+- name: process.group_leader.tty.char_device.minor
+  type: long
+  description: The TTY character device's minor number.
+  original_fieldset: process
+- name: process.group_leader.user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.group_leader.user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.group_leader.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.group_leader.working_directory
+  type: keyword
+  description: The working directory of the process.
+  original_fieldset: process
+- name: process.hash.cdhash
+  type: keyword
+  description: The Code Directory (CD) hash of an executable.
+  original_fieldset: hash
+  beta: This field is beta and subject to change.
+- name: process.hash.md5
+  type: keyword
+  description: MD5 hash.
+  original_fieldset: hash
+- name: process.hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  original_fieldset: hash
+- name: process.hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  original_fieldset: hash
+- name: process.hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  original_fieldset: hash
+- name: process.hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  original_fieldset: hash
+- name: process.hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  original_fieldset: hash
+- name: process.hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  original_fieldset: hash
+- name: process.interactive
+  type: boolean
+  description: Whether the process is connected to an interactive shell.
+- name: process.io
+  type: object
+  description: A chunk of input or output (IO) from a single process.
+- name: process.io.bytes_skipped
+  type: object
+  description: An array of byte offsets and lengths denoting where IO data has been skipped.
+  normalize:
+  - array
+- name: process.io.bytes_skipped.length
+  type: long
+  description: The length of bytes skipped.
+- name: process.io.bytes_skipped.offset
+  type: long
+  description: The byte offset into this event's io.text (or io.bytes in the future) where length bytes were skipped.
+- name: process.io.max_bytes_per_process_exceeded
+  type: boolean
+  description: If true, the process producing the output has exceeded the max_kilobytes_per_process configuration setting.
+- name: process.io.text
+  type: wildcard
+  description: A chunk of output or input sanitized to UTF-8.
+- name: process.io.total_bytes_captured
+  type: long
+  description: The total number of bytes captured in this event.
+- name: process.io.total_bytes_skipped
+  type: long
+  description: The total number of bytes that were not captured due to implementation restrictions such as buffer size limits.
+- name: process.io.type
+  type: keyword
+  description: The type of object on which the IO action (read or write) was taken.
+- name: process.macho.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a Mach-O file.
+  original_fieldset: macho
+- name: process.macho.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: macho
+- name: process.macho.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: macho
+- name: process.macho.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: macho
+- name: process.macho.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: macho
+- name: process.macho.import_hash
+  type: keyword
+  description: A hash of the imports in a Mach-O file.
+  original_fieldset: macho
+- name: process.macho.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: macho
+  normalize:
+  - array
+- name: process.macho.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: macho
+- name: process.macho.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: macho
+- name: process.macho.sections
+  type: nested
+  description: Section information of the Mach-O file.
+  original_fieldset: macho
+  normalize:
+  - array
+- name: process.macho.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: macho
+- name: process.macho.sections.name
+  type: keyword
+  description: Mach-O Section List name.
+  original_fieldset: macho
+- name: process.macho.sections.physical_size
+  type: long
+  description: Mach-O Section List physical size.
+  original_fieldset: macho
+- name: process.macho.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: macho
+- name: process.macho.sections.virtual_size
+  type: long
+  description: Mach-O Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: macho
+- name: process.macho.symhash
+  type: keyword
+  description: A hash of the imports in a Mach-O file.
+  original_fieldset: macho
+- name: process.name
+  type: keyword
+  description: Process name.
+- name: process.parent.args
+  type: keyword
+  description: Array of process arguments.
+  original_fieldset: process
+  normalize:
+  - array
+- name: process.parent.args_count
+  type: long
+  description: Length of the process.args array.
+  original_fieldset: process
+- name: process.parent.code_signature.digest_algorithm
+  type: keyword
+  description: Hashing algorithm used to sign the process.
+  original_fieldset: code_signature
+- name: process.parent.code_signature.exists
+  type: boolean
+  description: Boolean to capture if a signature is present.
+  original_fieldset: code_signature
+- name: process.parent.code_signature.flags
+  type: keyword
+  description: Code signing flags of the process
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: process.parent.code_signature.signing_id
+  type: keyword
+  description: The identifier used to sign the process.
+  original_fieldset: code_signature
+- name: process.parent.code_signature.status
+  type: keyword
+  description: Additional information about the certificate status.
+  original_fieldset: code_signature
+- name: process.parent.code_signature.subject_name
+  type: keyword
+  description: Subject name of the code signer
+  original_fieldset: code_signature
+- name: process.parent.code_signature.team_id
+  type: keyword
+  description: The team identifier used to sign the process.
+  original_fieldset: code_signature
+- name: process.parent.code_signature.thumbprint_sha256
+  type: keyword
+  description: SHA256 hash of the certificate.
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: process.parent.code_signature.timestamp
+  type: date
+  description: When the signature was generated and signed.
+  original_fieldset: code_signature
+- name: process.parent.code_signature.trusted
+  type: boolean
+  description: Stores the trust status of the certificate chain.
+  original_fieldset: code_signature
+- name: process.parent.code_signature.valid
+  type: boolean
+  description: Boolean to capture if the digital signature is verified against the binary content.
+  original_fieldset: code_signature
+- name: process.parent.command_line
+  type: wildcard
+  description: Full command line that started the process.
+  original_fieldset: process
+- name: process.parent.elf.architecture
+  type: keyword
+  description: Machine architecture of the ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.byte_order
+  type: keyword
+  description: Byte sequence of ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.cpu_type
+  type: keyword
+  description: CPU type of the ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.creation_date
+  type: date
+  description: Build or compile date.
+  original_fieldset: elf
+- name: process.parent.elf.exports
+  type: flattened
+  description: List of exported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.parent.elf.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in an ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: elf
+- name: process.parent.elf.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: process.parent.elf.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: process.parent.elf.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: elf
+- name: process.parent.elf.header.abi_version
+  type: keyword
+  description: Version of the ELF Application Binary Interface (ABI).
+  original_fieldset: elf
+- name: process.parent.elf.header.class
+  type: keyword
+  description: Header class of the ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.header.data
+  type: keyword
+  description: Data table of the ELF header.
+  original_fieldset: elf
+- name: process.parent.elf.header.entrypoint
+  type: long
+  description: Header entrypoint of the ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.header.object_version
+  type: keyword
+  description: '"0x1" for original ELF files.'
+  original_fieldset: elf
+- name: process.parent.elf.header.os_abi
+  type: keyword
+  description: Application Binary Interface (ABI) of the Linux OS.
+  original_fieldset: elf
+- name: process.parent.elf.header.type
+  type: keyword
+  description: Header type of the ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.header.version
+  type: keyword
+  description: Version of the ELF header.
+  original_fieldset: elf
+- name: process.parent.elf.import_hash
+  type: keyword
+  description: A hash of the imports in an ELF file.
+  original_fieldset: elf
+- name: process.parent.elf.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.parent.elf.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: process.parent.elf.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: process.parent.elf.sections
+  type: nested
+  description: Section information of the ELF file.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.parent.elf.sections.chi2
+  type: long
+  description: Chi-square probability distribution of the section.
+  original_fieldset: elf
+- name: process.parent.elf.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: process.parent.elf.sections.flags
+  type: keyword
+  description: ELF Section List flags.
+  original_fieldset: elf
+- name: process.parent.elf.sections.name
+  type: keyword
+  description: ELF Section List name.
+  original_fieldset: elf
+- name: process.parent.elf.sections.physical_offset
+  type: keyword
+  description: ELF Section List offset.
+  original_fieldset: elf
+- name: process.parent.elf.sections.physical_size
+  type: long
+  description: ELF Section List physical size.
+  original_fieldset: elf
+- name: process.parent.elf.sections.type
+  type: keyword
+  description: ELF Section List type.
+  original_fieldset: elf
+- name: process.parent.elf.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: process.parent.elf.sections.virtual_address
+  type: long
+  description: ELF Section List virtual address.
+  original_fieldset: elf
+- name: process.parent.elf.sections.virtual_size
+  type: long
+  description: ELF Section List virtual size.
+  original_fieldset: elf
+- name: process.parent.elf.segments
+  type: nested
+  description: ELF object segment list.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.parent.elf.segments.sections
+  type: keyword
+  description: ELF object segment sections.
+  original_fieldset: elf
+- name: process.parent.elf.segments.type
+  type: keyword
+  description: ELF object segment type.
+  original_fieldset: elf
+- name: process.parent.elf.shared_libraries
+  type: keyword
+  description: List of shared libraries used by this ELF object.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: process.parent.elf.telfhash
+  type: keyword
+  description: telfhash hash for ELF file.
+  original_fieldset: elf
+- name: process.parent.end
+  type: date
+  description: The time the process ended.
+  original_fieldset: process
+- name: process.parent.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.parent.executable
+  type: keyword
+  description: Absolute path to the process executable.
+  original_fieldset: process
+- name: process.parent.exit_code
+  type: long
+  description: The exit code of the process.
+  original_fieldset: process
+- name: process.parent.group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.parent.group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.parent.group_leader.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.parent.group_leader.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.parent.group_leader.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.parent.group_leader.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.parent.hash.cdhash
+  type: keyword
+  description: The Code Directory (CD) hash of an executable.
+  original_fieldset: hash
+  beta: This field is beta and subject to change.
+- name: process.parent.hash.md5
+  type: keyword
+  description: MD5 hash.
+  original_fieldset: hash
+- name: process.parent.hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  original_fieldset: hash
+- name: process.parent.hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  original_fieldset: hash
+- name: process.parent.hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  original_fieldset: hash
+- name: process.parent.hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  original_fieldset: hash
+- name: process.parent.hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  original_fieldset: hash
+- name: process.parent.hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  original_fieldset: hash
+- name: process.parent.interactive
+  type: boolean
+  description: Whether the process is connected to an interactive shell.
+  original_fieldset: process
+- name: process.parent.macho.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a Mach-O file.
+  original_fieldset: macho
+- name: process.parent.macho.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: macho
+- name: process.parent.macho.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: macho
+- name: process.parent.macho.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: macho
+- name: process.parent.macho.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: macho
+- name: process.parent.macho.import_hash
+  type: keyword
+  description: A hash of the imports in a Mach-O file.
+  original_fieldset: macho
+- name: process.parent.macho.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: macho
+  normalize:
+  - array
+- name: process.parent.macho.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: macho
+- name: process.parent.macho.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: macho
+- name: process.parent.macho.sections
+  type: nested
+  description: Section information of the Mach-O file.
+  original_fieldset: macho
+  normalize:
+  - array
+- name: process.parent.macho.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: macho
+- name: process.parent.macho.sections.name
+  type: keyword
+  description: Mach-O Section List name.
+  original_fieldset: macho
+- name: process.parent.macho.sections.physical_size
+  type: long
+  description: Mach-O Section List physical size.
+  original_fieldset: macho
+- name: process.parent.macho.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: macho
+- name: process.parent.macho.sections.virtual_size
+  type: long
+  description: Mach-O Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: macho
+- name: process.parent.macho.symhash
+  type: keyword
+  description: A hash of the imports in a Mach-O file.
+  original_fieldset: macho
+- name: process.parent.name
+  type: keyword
+  description: Process name.
+  original_fieldset: process
+- name: process.parent.pe.architecture
+  type: keyword
+  description: CPU architecture target for the file.
+  original_fieldset: pe
+- name: process.parent.pe.company
+  type: keyword
+  description: Internal company name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.parent.pe.description
+  type: keyword
+  description: Internal description of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.parent.pe.file_version
+  type: keyword
+  description: Process name.
+  original_fieldset: pe
+- name: process.parent.pe.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a PE file.
+  original_fieldset: pe
+- name: process.parent.pe.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: pe
+- name: process.parent.pe.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: process.parent.pe.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: process.parent.pe.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: pe
+- name: process.parent.pe.imphash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: process.parent.pe.import_hash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: process.parent.pe.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: process.parent.pe.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: process.parent.pe.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: process.parent.pe.original_file_name
+  type: keyword
+  description: Internal name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.parent.pe.pehash
+  type: keyword
+  description: A hash of the PE header and data from one or more PE sections.
+  original_fieldset: pe
+- name: process.parent.pe.product
+  type: keyword
+  description: Internal product name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.parent.pe.sections
+  type: nested
+  description: Section information of the PE file.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: process.parent.pe.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: process.parent.pe.sections.name
+  type: keyword
+  description: PE Section List name.
+  original_fieldset: pe
+- name: process.parent.pe.sections.physical_size
+  type: long
+  description: PE Section List physical size.
+  original_fieldset: pe
+- name: process.parent.pe.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: process.parent.pe.sections.virtual_size
+  type: long
+  description: PE Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: pe
+- name: process.parent.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.parent.real_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.parent.real_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.parent.real_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.parent.real_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.parent.saved_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.parent.saved_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.parent.saved_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.parent.saved_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.parent.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.parent.supplemental_groups.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.parent.supplemental_groups.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.parent.thread.capabilities.effective
+  type: keyword
+  description: Array of capabilities used for permission checks.
+  original_fieldset: process
+  normalize:
+  - array
+- name: process.parent.thread.capabilities.permitted
+  type: keyword
+  description: Array of capabilities a thread could assume.
+  original_fieldset: process
+  normalize:
+  - array
+- name: process.parent.thread.id
+  type: long
+  description: Thread ID.
+  original_fieldset: process
+- name: process.parent.thread.name
+  type: keyword
+  description: Thread name.
+  original_fieldset: process
+- name: process.parent.title
+  type: keyword
+  description: Process title.
+  original_fieldset: process
+- name: process.parent.tty
+  type: object
+  description: Information about the controlling TTY device.
+  original_fieldset: process
+- name: process.parent.tty.char_device.major
+  type: long
+  description: The TTY character device's major number.
+  original_fieldset: process
+- name: process.parent.tty.char_device.minor
+  type: long
+  description: The TTY character device's minor number.
+  original_fieldset: process
+- name: process.parent.uptime
+  type: long
+  description: Seconds the process has been up.
+  original_fieldset: process
+- name: process.parent.user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.parent.user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.parent.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.parent.working_directory
+  type: keyword
+  description: The working directory of the process.
+  original_fieldset: process
+- name: process.pe.architecture
+  type: keyword
+  description: CPU architecture target for the file.
+  original_fieldset: pe
+- name: process.pe.company
+  type: keyword
+  description: Internal company name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.pe.description
+  type: keyword
+  description: Internal description of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.pe.file_version
+  type: keyword
+  description: Process name.
+  original_fieldset: pe
+- name: process.pe.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a PE file.
+  original_fieldset: pe
+- name: process.pe.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: pe
+- name: process.pe.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: process.pe.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: process.pe.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: pe
+- name: process.pe.imphash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: process.pe.import_hash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: process.pe.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: process.pe.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: process.pe.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: process.pe.original_file_name
+  type: keyword
+  description: Internal name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.pe.pehash
+  type: keyword
+  description: A hash of the PE header and data from one or more PE sections.
+  original_fieldset: pe
+- name: process.pe.product
+  type: keyword
+  description: Internal product name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: process.pe.sections
+  type: nested
+  description: Section information of the PE file.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: process.pe.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: process.pe.sections.name
+  type: keyword
+  description: PE Section List name.
+  original_fieldset: pe
+- name: process.pe.sections.physical_size
+  type: long
+  description: PE Section List physical size.
+  original_fieldset: pe
+- name: process.pe.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: process.pe.sections.virtual_size
+  type: long
+  description: PE Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: pe
+- name: process.pid
+  type: long
+  description: Process id.
+- name: process.previous.args
+  type: keyword
+  description: Array of process arguments.
+  original_fieldset: process
+  normalize:
+  - array
+- name: process.previous.args_count
+  type: long
+  description: Length of the process.args array.
+  original_fieldset: process
+- name: process.previous.executable
+  type: keyword
+  description: Absolute path to the process executable.
+  original_fieldset: process
+- name: process.real_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.real_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.real_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.real_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.saved_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.saved_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.saved_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.saved_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.session_leader.args
+  type: keyword
+  description: Array of process arguments.
+  original_fieldset: process
+  normalize:
+  - array
+- name: process.session_leader.args_count
+  type: long
+  description: Length of the process.args array.
+  original_fieldset: process
+- name: process.session_leader.command_line
+  type: wildcard
+  description: Full command line that started the process.
+  original_fieldset: process
+- name: process.session_leader.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.session_leader.executable
+  type: keyword
+  description: Absolute path to the process executable.
+  original_fieldset: process
+- name: process.session_leader.group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.session_leader.group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.session_leader.interactive
+  type: boolean
+  description: Whether the process is connected to an interactive shell.
+  original_fieldset: process
+- name: process.session_leader.name
+  type: keyword
+  description: Process name.
+  original_fieldset: process
+- name: process.session_leader.parent.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.session_leader.parent.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.session_leader.parent.session_leader.entity_id
+  type: keyword
+  description: Unique identifier for the process.
+  original_fieldset: process
+- name: process.session_leader.parent.session_leader.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.session_leader.parent.session_leader.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.session_leader.parent.session_leader.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.session_leader.parent.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.session_leader.parent.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.session_leader.pid
+  type: long
+  description: Process id.
+  original_fieldset: process
+- name: process.session_leader.real_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.session_leader.real_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.session_leader.real_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.session_leader.real_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.session_leader.same_as_process
+  type: boolean
+  description: This boolean is used to identify if a leader process is the same as the top level process.
+  original_fieldset: process
+- name: process.session_leader.saved_group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.session_leader.saved_group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.session_leader.saved_user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.session_leader.saved_user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.session_leader.start
+  type: date
+  description: The time the process started.
+  original_fieldset: process
+- name: process.session_leader.supplemental_groups.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.session_leader.supplemental_groups.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.session_leader.tty
+  type: object
+  description: Information about the controlling TTY device.
+  original_fieldset: process
+- name: process.session_leader.tty.char_device.major
+  type: long
+  description: The TTY character device's major number.
+  original_fieldset: process
+- name: process.session_leader.tty.char_device.minor
+  type: long
+  description: The TTY character device's minor number.
+  original_fieldset: process
+- name: process.session_leader.user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.session_leader.user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.session_leader.vpid
+  type: long
+  description: Virtual process id.
+  original_fieldset: process
+- name: process.session_leader.working_directory
+  type: keyword
+  description: The working directory of the process.
+  original_fieldset: process
+- name: process.start
+  type: date
+  description: The time the process started.
+- name: process.supplemental_groups.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: process.supplemental_groups.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: process.thread.capabilities.effective
+  type: keyword
+  description: Array of capabilities used for permission checks.
+  normalize:
+  - array
+- name: process.thread.capabilities.permitted
+  type: keyword
+  description: Array of capabilities a thread could assume.
+  normalize:
+  - array
+- name: process.thread.id
+  type: long
+  description: Thread ID.
+- name: process.thread.name
+  type: keyword
+  description: Thread name.
+- name: process.title
+  type: keyword
+  description: Process title.
+- name: process.tty
+  type: object
+  description: Information about the controlling TTY device.
+- name: process.tty.char_device.major
+  type: long
+  description: The TTY character device's major number.
+- name: process.tty.char_device.minor
+  type: long
+  description: The TTY character device's minor number.
+- name: process.tty.columns
+  type: long
+  description: The number of character columns per line. e.g terminal width
+- name: process.tty.rows
+  type: long
+  description: The number of character rows in the terminal. e.g terminal height
+- name: process.uptime
+  type: long
+  description: Seconds the process has been up.
+- name: process.user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: process.user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: process.vpid
+  type: long
+  description: Virtual process id.
+- name: process.working_directory
+  type: keyword
+  description: The working directory of the process.

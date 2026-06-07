@@ -1,0 +1,12 @@
+field: package.build_version
+fieldset: package
+dashed_name: package-build-version
+description: 'Additional information about the build version of the installed package.
+
+  For example use the commit SHA of a non-released package.'
+example: 36f4f7e89dd61b0988b12ee000b98966867710cd
+flat_name: package.build_version
+ignore_above: 1024
+level: extended
+name: build_version
+type: keyword

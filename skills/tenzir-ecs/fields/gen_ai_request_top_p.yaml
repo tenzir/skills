@@ -1,0 +1,13 @@
+field: gen_ai.request.top_p
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-top-p
+description: The top_p sampling setting for the GenAI request.
+example: 1.0
+flat_name: gen_ai.request.top_p
+level: extended
+name: request.top_p
+otel:
+- relation: match
+  stability: development
+type: double

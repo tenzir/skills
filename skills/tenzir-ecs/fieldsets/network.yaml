@@ -1,0 +1,72 @@
+fieldset: network
+description: 'The network is defined as the communication path over which a host or network event happens.
+
+  The network.* fields should be populated with details about the network activity associated with an event.'
+group: 2
+name: network
+nestings:
+- network.inner.vlan
+- network.vlan
+prefix: network.
+reused_here:
+- full: network.vlan
+  schema_name: vlan
+  description: Fields to describe observed VLAN information.
+- full: network.inner.vlan
+  schema_name: vlan
+  description: Fields to describe observed VLAN information.
+title: Network
+type: group
+fields:
+- name: network.application
+  type: keyword
+  description: Application level protocol name.
+- name: network.bytes
+  type: long
+  description: Total bytes transferred in both directions.
+- name: network.community_id
+  type: keyword
+  description: A hash of source and destination IPs and ports.
+- name: network.direction
+  type: keyword
+  description: Direction of the network traffic.
+- name: network.forwarded_ip
+  type: ip
+  description: Host IP address when the source IP address is the proxy.
+- name: network.iana_number
+  type: keyword
+  description: IANA Protocol Number.
+- name: network.inner
+  type: object
+  description: Inner VLAN tag information
+- name: network.inner.vlan.id
+  type: keyword
+  description: VLAN ID as reported by the observer.
+  original_fieldset: vlan
+- name: network.inner.vlan.name
+  type: keyword
+  description: Optional VLAN name as reported by the observer.
+  original_fieldset: vlan
+- name: network.name
+  type: keyword
+  description: Name given by operators to sections of their network.
+- name: network.packets
+  type: long
+  description: Total packets transferred in both directions.
+- name: network.protocol
+  type: keyword
+  description: Application protocol name.
+- name: network.transport
+  type: keyword
+  description: Protocol Name corresponding to the field `iana_number`.
+- name: network.type
+  type: keyword
+  description: In the OSI Model this would be the Network Layer. ipv4, ipv6, ipsec, pim, etc
+- name: network.vlan.id
+  type: keyword
+  description: VLAN ID as reported by the observer.
+  original_fieldset: vlan
+- name: network.vlan.name
+  type: keyword
+  description: Optional VLAN name as reported by the observer.
+  original_fieldset: vlan

@@ -1,0 +1,10 @@
+field: package.reference
+fieldset: package
+dashed_name: package-reference
+description: Home page or reference URL of the software in this package, if available.
+example: https://golang.org
+flat_name: package.reference
+ignore_above: 1024
+level: extended
+name: reference
+type: keyword

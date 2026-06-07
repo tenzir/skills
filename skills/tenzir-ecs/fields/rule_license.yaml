@@ -1,0 +1,10 @@
+field: rule.license
+fieldset: rule
+dashed_name: rule-license
+description: Name of the license under which the rule used to generate this event is made available.
+example: Apache 2.0
+flat_name: rule.license
+ignore_above: 1024
+level: extended
+name: license
+type: keyword

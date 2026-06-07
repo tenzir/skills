@@ -1,0 +1,16 @@
+field: threat.technique.subtechnique.name
+fieldset: threat
+dashed_name: threat-technique-subtechnique-name
+description: The name of subtechnique used by this threat. You can use a MITRE ATT&CK® subtechnique, for example. (ex. https://attack.mitre.org/techniques/T1059/001/)
+example: PowerShell
+flat_name: threat.technique.subtechnique.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: threat.technique.subtechnique.name.text
+  name: text
+  type: match_only_text
+name: technique.subtechnique.name
+normalize:
+- array
+type: keyword

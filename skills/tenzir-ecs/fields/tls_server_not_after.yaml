@@ -1,0 +1,12 @@
+field: tls.server.not_after
+fieldset: tls
+dashed_name: tls-server-not-after
+description: Timestamp indicating when server certificate is no longer considered valid.
+example: '2021-01-01T00:00:00.000Z'
+flat_name: tls.server.not_after
+level: extended
+name: server.not_after
+otel:
+- relation: match
+  stability: development
+type: date

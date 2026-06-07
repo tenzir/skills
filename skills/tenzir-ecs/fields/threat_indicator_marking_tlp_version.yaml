@@ -1,0 +1,10 @@
+field: threat.indicator.marking.tlp_version
+fieldset: threat
+dashed_name: threat-indicator-marking-tlp-version
+description: Traffic Light Protocol version.
+example: 2.0
+flat_name: threat.indicator.marking.tlp_version
+ignore_above: 1024
+level: extended
+name: indicator.marking.tlp_version
+type: keyword

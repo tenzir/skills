@@ -1,0 +1,10 @@
+field: volume.bus_type
+fieldset: volume
+dashed_name: volume-bus-type
+description: Bus type of the device, such as `Nvme`, `Usb`, or `FileBackedVirtual`.
+example: FileBackedVirtual
+flat_name: volume.bus_type
+ignore_above: 1024
+level: extended
+name: bus_type
+type: keyword

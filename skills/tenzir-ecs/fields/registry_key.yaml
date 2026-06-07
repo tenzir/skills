@@ -1,0 +1,10 @@
+field: registry.key
+fieldset: registry
+dashed_name: registry-key
+description: Hive-relative path of keys.
+example: SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winword.exe
+flat_name: registry.key
+ignore_above: 1024
+level: core
+name: key
+type: keyword

@@ -1,0 +1,10 @@
+field: source.as.number
+fieldset: source
+dashed_name: source-as-number
+description: Unique number allocated to the autonomous system. The autonomous system number (ASN) uniquely identifies each network on the Internet.
+example: 15169
+flat_name: source.as.number
+level: extended
+name: number
+original_fieldset: as
+type: long

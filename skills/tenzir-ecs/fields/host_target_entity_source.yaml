@@ -1,0 +1,11 @@
+field: host.target.entity.source
+fieldset: host
+beta: This field is beta and subject to change.
+dashed_name: host-target-entity-source
+description: The module or integration that provided this entity data (similar to event.module).
+flat_name: host.target.entity.source
+ignore_above: 1024
+level: core
+name: source
+original_fieldset: entity
+type: keyword

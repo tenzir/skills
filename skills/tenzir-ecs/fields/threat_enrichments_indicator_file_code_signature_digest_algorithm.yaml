@@ -1,0 +1,13 @@
+field: threat.enrichments.indicator.file.code_signature.digest_algorithm
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-code-signature-digest-algorithm
+description: 'The hashing algorithm used to sign the process.
+
+  This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.'
+example: sha256
+flat_name: threat.enrichments.indicator.file.code_signature.digest_algorithm
+ignore_above: 1024
+level: extended
+name: digest_algorithm
+original_fieldset: code_signature
+type: keyword

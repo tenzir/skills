@@ -1,0 +1,10 @@
+field: process.elf.imports_names_entropy
+fieldset: process
+dashed_name: process-elf-imports-names-entropy
+description: Shannon entropy calculation from the list of imported element names and types.
+flat_name: process.elf.imports_names_entropy
+format: number
+level: extended
+name: imports_names_entropy
+original_fieldset: elf
+type: long

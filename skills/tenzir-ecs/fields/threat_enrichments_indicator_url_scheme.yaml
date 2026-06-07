@@ -1,0 +1,13 @@
+field: threat.enrichments.indicator.url.scheme
+fieldset: threat
+dashed_name: threat-enrichments-indicator-url-scheme
+description: 'Scheme of the request, such as "https".
+
+  Note: The `:` is not part of the scheme.'
+example: https
+flat_name: threat.enrichments.indicator.url.scheme
+ignore_above: 1024
+level: extended
+name: scheme
+original_fieldset: url
+type: keyword

@@ -1,0 +1,13 @@
+field: service.target.address
+fieldset: service
+dashed_name: service-target-address
+description: 'Address where data about this service was collected from.
+
+  This should be a URI, network address (ipv4:port or [ipv6]:port) or a resource path (sockets).'
+example: 172.26.0.2:5432
+flat_name: service.target.address
+ignore_above: 1024
+level: extended
+name: address
+original_fieldset: service
+type: keyword

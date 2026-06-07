@@ -1,0 +1,1009 @@
+fields:
+- field: '@timestamp'
+  path: fields/at_timestamp.yaml
+  relations:
+  - otlp_field: time_unix_nano
+    relation: otlp
+    stability: stable
+  - otlp_field: observed_time_unix_nano
+    relation: otlp
+    stability: stable
+  - note: 'On logs, events and metrics, `time_unix_nano` defines the time of the event. For logs, `observed_time_unix_nano` defines the time when the event was observed by the collection system. On spans, `start_time_unix_nano` represents the start time of the span.
+
+      '
+    otlp_field: start_time_unix_nano
+    relation: otlp
+    stability: stable
+- field: client.address
+  path: fields/client_address.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: client.port
+  path: fields/client_port.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: cloud.account.id
+  path: fields/cloud_account_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: cloud.availability_zone
+  path: fields/cloud_availability_zone.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: cloud.provider
+  path: fields/cloud_provider.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: cloud.region
+  path: fields/cloud_region.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: cloud.service.name
+  path: fields/cloud_service_name.yaml
+  relations:
+  - attribute: cloud.platform
+    relation: equivalent
+    stability: development
+- field: container.cpu.usage
+  path: fields/container_cpu_usage.yaml
+  relations:
+  - metric: container.cpu.usage
+    relation: metric
+    stability: development
+- field: container.id
+  path: fields/container_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: container.image.hash.all
+  path: fields/container_image_hash_all.yaml
+  relations:
+  - attribute: container.image.repo_digests
+    relation: equivalent
+    stability: development
+- field: container.image.name
+  path: fields/container_image_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: container.image.tag
+  path: fields/container_image_tag.yaml
+  relations:
+  - attribute: container.image.tags
+    relation: equivalent
+    stability: development
+- field: container.labels
+  path: fields/container_labels.yaml
+  relations:
+  - attribute: container.label
+    relation: related
+    stability: development
+- field: container.memory.usage
+  path: fields/container_memory_usage.yaml
+  relations:
+  - metric: container.memory.usage
+    relation: metric
+    stability: development
+- field: container.name
+  path: fields/container_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: container.runtime
+  path: fields/container_runtime.yaml
+  relations:
+  - attribute: container.runtime.name
+    relation: equivalent
+    stability: development
+- field: data_stream.dataset
+  path: fields/data_stream_dataset.yaml
+  relations:
+  - relation: na
+- field: data_stream.namespace
+  path: fields/data_stream_namespace.yaml
+  relations:
+  - relation: na
+- field: data_stream.type
+  path: fields/data_stream_type.yaml
+  relations:
+  - relation: na
+- field: destination.address
+  path: fields/destination_address.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: destination.port
+  path: fields/destination_port.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: device.id
+  path: fields/device_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: device.manufacturer
+  path: fields/device_manufacturer.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: device.model.identifier
+  path: fields/device_model_identifier.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: device.model.name
+  path: fields/device_model_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: dns.answers
+  path: fields/dns_answers.yaml
+  relations:
+  - attribute: dns.answers
+    relation: related
+    stability: development
+- field: dns.question.name
+  path: fields/dns_question_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: ecs.version
+  path: fields/ecs_version.yaml
+  relations:
+  - relation: na
+- field: error.message
+  path: fields/error_message.yaml
+  relations:
+  - attribute: exception.message
+    relation: equivalent
+    stability: stable
+- field: error.stack_trace
+  path: fields/error_stack_trace.yaml
+  relations:
+  - attribute: exception.stacktrace
+    relation: equivalent
+    stability: stable
+- field: error.type
+  path: fields/error_type.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: faas.coldstart
+  path: fields/faas_coldstart.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: faas.execution
+  path: fields/faas_execution.yaml
+  relations:
+  - attribute: faas.invocation_id
+    relation: equivalent
+    stability: development
+- field: faas.name
+  path: fields/faas_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: faas.trigger.type
+  path: fields/faas_trigger_type.yaml
+  relations:
+  - attribute: faas.trigger
+    relation: equivalent
+    stability: development
+- field: faas.version
+  path: fields/faas_version.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.accessed
+  path: fields/file_accessed.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.attributes
+  path: fields/file_attributes.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.created
+  path: fields/file_created.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.ctime
+  path: fields/file_ctime.yaml
+  relations:
+  - attribute: file.changed
+    relation: equivalent
+    stability: development
+- field: file.directory
+  path: fields/file_directory.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.extension
+  path: fields/file_extension.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.fork_name
+  path: fields/file_fork_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.gid
+  path: fields/file_gid.yaml
+  relations:
+  - attribute: file.group.id
+    relation: equivalent
+    stability: development
+- field: file.group
+  path: fields/file_group.yaml
+  relations:
+  - attribute: file.group.name
+    relation: equivalent
+    stability: development
+- field: file.inode
+  path: fields/file_inode.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.mode
+  path: fields/file_mode.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.mtime
+  path: fields/file_mtime.yaml
+  relations:
+  - attribute: file.modified
+    relation: equivalent
+    stability: development
+- field: file.name
+  path: fields/file_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.owner
+  path: fields/file_owner.yaml
+  relations:
+  - attribute: file.owner.name
+    relation: equivalent
+    stability: development
+- field: file.path
+  path: fields/file_path.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.size
+  path: fields/file_size.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: file.target_path
+  path: fields/file_target_path.yaml
+  relations:
+  - attribute: file.symbolic_link.target_path
+    relation: equivalent
+    stability: development
+- field: file.uid
+  path: fields/file_uid.yaml
+  relations:
+  - attribute: file.owner.id
+    relation: equivalent
+    stability: development
+- field: gen_ai.agent.description
+  path: fields/gen_ai_agent_description.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.agent.id
+  path: fields/gen_ai_agent_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.agent.name
+  path: fields/gen_ai_agent_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.operation.name
+  path: fields/gen_ai_operation_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.output.type
+  path: fields/gen_ai_output_type.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.choice.count
+  path: fields/gen_ai_request_choice_count.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.encoding_formats
+  path: fields/gen_ai_request_encoding_formats.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.frequency_penalty
+  path: fields/gen_ai_request_frequency_penalty.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.max_tokens
+  path: fields/gen_ai_request_max_tokens.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.model
+  path: fields/gen_ai_request_model.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.presence_penalty
+  path: fields/gen_ai_request_presence_penalty.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.seed
+  path: fields/gen_ai_request_seed.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.stop_sequences
+  path: fields/gen_ai_request_stop_sequences.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.temperature
+  path: fields/gen_ai_request_temperature.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.top_k
+  path: fields/gen_ai_request_top_k.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.request.top_p
+  path: fields/gen_ai_request_top_p.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.response.finish_reasons
+  path: fields/gen_ai_response_finish_reasons.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.response.id
+  path: fields/gen_ai_response_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.response.model
+  path: fields/gen_ai_response_model.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.system
+  path: fields/gen_ai_system.yaml
+  relations:
+  - attribute: gen_ai.provider.name
+    relation: equivalent
+    stability: development
+- field: gen_ai.token.type
+  path: fields/gen_ai_token_type.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.tool.call.id
+  path: fields/gen_ai_tool_call_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.tool.name
+  path: fields/gen_ai_tool_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.tool.type
+  path: fields/gen_ai_tool_type.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.usage.input_tokens
+  path: fields/gen_ai_usage_input_tokens.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: gen_ai.usage.output_tokens
+  path: fields/gen_ai_usage_output_tokens.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: host.architecture
+  path: fields/host_architecture.yaml
+  relations:
+  - attribute: host.arch
+    relation: equivalent
+    stability: development
+- field: host.cpu.usage
+  path: fields/host_cpu_usage.yaml
+  relations:
+  - metric: system.cpu.utilization
+    relation: metric
+    stability: development
+- field: host.disk.read.bytes
+  path: fields/host_disk_read_bytes.yaml
+  relations:
+  - metric: system.disk.io
+    relation: metric
+    stability: development
+- field: host.disk.write.bytes
+  path: fields/host_disk_write_bytes.yaml
+  relations:
+  - metric: system.disk.io
+    relation: metric
+    stability: development
+- field: host.id
+  path: fields/host_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: host.ip
+  path: fields/host_ip.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: host.mac
+  path: fields/host_mac.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: host.name
+  path: fields/host_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: host.network.egress.bytes
+  path: fields/host_network_egress_bytes.yaml
+  relations:
+  - metric: system.network.io
+    relation: metric
+    stability: development
+- field: host.network.egress.packets
+  path: fields/host_network_egress_packets.yaml
+  relations:
+  - metric: system.network.packet.count
+    relation: metric
+    stability: development
+- field: host.network.ingress.bytes
+  path: fields/host_network_ingress_bytes.yaml
+  relations:
+  - metric: system.network.io
+    relation: metric
+    stability: development
+- field: host.network.ingress.packets
+  path: fields/host_network_ingress_packets.yaml
+  relations:
+  - metric: system.network.packet.count
+    relation: metric
+    stability: development
+- field: host.type
+  path: fields/host_type.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: host.uptime
+  path: fields/host_uptime.yaml
+  relations:
+  - metric: system.uptime
+    relation: metric
+    stability: development
+- field: http.request.body.bytes
+  path: fields/http_request_body_bytes.yaml
+  relations:
+  - attribute: http.request.body.size
+    relation: equivalent
+    stability: development
+- field: http.request.bytes
+  path: fields/http_request_bytes.yaml
+  relations:
+  - attribute: http.request.size
+    relation: equivalent
+    stability: development
+- field: http.request.method
+  path: fields/http_request_method.yaml
+  relations:
+  - attribute: http.request.method_original
+    relation: equivalent
+    stability: stable
+  - attribute: http.request.method
+    note: '`http.request.method` in SemConv is the known, normalized, upper case value of the request method, other than the ECS'' `http.request.method` that retains casing from the original event.
+
+      '
+    relation: conflict
+    stability: stable
+- field: http.response.body.bytes
+  path: fields/http_response_body_bytes.yaml
+  relations:
+  - attribute: http.response.body.size
+    relation: equivalent
+    stability: development
+- field: http.response.bytes
+  path: fields/http_response_bytes.yaml
+  relations:
+  - attribute: http.response.size
+    relation: equivalent
+    stability: development
+- field: http.response.status_code
+  path: fields/http_response_status_code.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: http.version
+  path: fields/http_version.yaml
+  relations:
+  - attribute: network.protocol.name
+    relation: related
+    stability: stable
+  - attribute: network.protocol.version
+    note: 'In OTel SemConv, `network.protocol.version` specifies the HTTP version if the value of `network.protocol.name` is `http`.
+
+      '
+    relation: related
+    stability: stable
+- field: labels
+  path: fields/labels.yaml
+  relations:
+  - attribute: k8s.pod.label
+    relation: related
+    stability: development
+  - attribute: container.label
+    relation: related
+    stability: development
+- field: log.file.path
+  path: fields/log_file_path.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: log.level
+  path: fields/log_level.yaml
+  relations:
+  - otlp_field: severity_text
+    relation: otlp
+    stability: stable
+- field: message
+  path: fields/message.yaml
+  relations:
+  - note: The `body` in OTLP is of type `Any` and can be either an unstructured log message or a structured event.
+    otlp_field: body
+    relation: otlp
+    stability: stable
+- field: network.protocol
+  path: fields/network_protocol.yaml
+  relations:
+  - attribute: network.protocol.name
+    relation: equivalent
+    stability: stable
+- field: network.transport
+  path: fields/network_transport.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: network.type
+  path: fields/network_type.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: process.args
+  path: fields/process_args.yaml
+  relations:
+  - attribute: process.command_args
+    relation: equivalent
+    stability: development
+- field: process.args_count
+  path: fields/process_args_count.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.command_line
+  path: fields/process_command_line.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.executable
+  path: fields/process_executable.yaml
+  relations:
+  - attribute: process.executable.path
+    relation: equivalent
+    stability: development
+- field: process.group_leader.pid
+  path: fields/process_group_leader_pid.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.interactive
+  path: fields/process_interactive.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.pid
+  path: fields/process_pid.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.real_user.id
+  path: fields/process_real_user_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.real_user.name
+  path: fields/process_real_user_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.saved_user.id
+  path: fields/process_saved_user_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.saved_user.name
+  path: fields/process_saved_user_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.session_leader.pid
+  path: fields/process_session_leader_pid.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.title
+  path: fields/process_title.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.uptime
+  path: fields/process_uptime.yaml
+  relations:
+  - metric: process.uptime
+    relation: metric
+    stability: development
+- field: process.user.id
+  path: fields/process_user_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.user.name
+  path: fields/process_user_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.vpid
+  path: fields/process_vpid.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: process.working_directory
+  path: fields/process_working_directory.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: related.hash
+  path: fields/related_hash.yaml
+  relations:
+  - relation: na
+- field: related.hosts
+  path: fields/related_hosts.yaml
+  relations:
+  - relation: na
+- field: related.ip
+  path: fields/related_ip.yaml
+  relations:
+  - relation: na
+- field: related.user
+  path: fields/related_user.yaml
+  relations:
+  - relation: na
+- field: server.address
+  path: fields/server_address.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: server.port
+  path: fields/server_port.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: service.environment
+  path: fields/service_environment.yaml
+  relations:
+  - attribute: deployment.environment.name
+    relation: equivalent
+    stability: development
+- field: service.name
+  path: fields/service_name.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: service.node.name
+  path: fields/service_node_name.yaml
+  relations:
+  - attribute: service.instance.id
+    relation: equivalent
+    stability: development
+- field: service.version
+  path: fields/service_version.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: source.address
+  path: fields/source_address.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: source.port
+  path: fields/source_port.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: span.id
+  path: fields/span_id.yaml
+  relations:
+  - otlp_field: span_id
+    relation: otlp
+    stability: stable
+- field: tls.cipher
+  path: fields/tls_cipher.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.certificate
+  path: fields/tls_client_certificate.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.certificate_chain
+  path: fields/tls_client_certificate_chain.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.hash.md5
+  path: fields/tls_client_hash_md5.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.hash.sha1
+  path: fields/tls_client_hash_sha1.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.hash.sha256
+  path: fields/tls_client_hash_sha256.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.issuer
+  path: fields/tls_client_issuer.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.ja3
+  path: fields/tls_client_ja3.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.not_after
+  path: fields/tls_client_not_after.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.not_before
+  path: fields/tls_client_not_before.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.subject
+  path: fields/tls_client_subject.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.client.supported_ciphers
+  path: fields/tls_client_supported_ciphers.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.curve
+  path: fields/tls_curve.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.established
+  path: fields/tls_established.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.next_protocol
+  path: fields/tls_next_protocol.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.resumed
+  path: fields/tls_resumed.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.certificate
+  path: fields/tls_server_certificate.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.certificate_chain
+  path: fields/tls_server_certificate_chain.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.hash.md5
+  path: fields/tls_server_hash_md5.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.hash.sha1
+  path: fields/tls_server_hash_sha1.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.hash.sha256
+  path: fields/tls_server_hash_sha256.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.issuer
+  path: fields/tls_server_issuer.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.ja3s
+  path: fields/tls_server_ja3s.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.not_after
+  path: fields/tls_server_not_after.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.not_before
+  path: fields/tls_server_not_before.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: tls.server.subject
+  path: fields/tls_server_subject.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: trace.id
+  path: fields/trace_id.yaml
+  relations:
+  - otlp_field: trace_id
+    relation: otlp
+    stability: stable
+- field: transaction.id
+  path: fields/transaction_id.yaml
+  relations:
+  - relation: na
+- field: url.domain
+  path: fields/url_domain.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: url.extension
+  path: fields/url_extension.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: url.fragment
+  path: fields/url_fragment.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: url.full
+  path: fields/url_full.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: url.original
+  path: fields/url_original.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: url.path
+  path: fields/url_path.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: url.port
+  path: fields/url_port.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: url.query
+  path: fields/url_query.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: url.registered_domain
+  path: fields/url_registered_domain.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: url.scheme
+  path: fields/url_scheme.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: url.subdomain
+  path: fields/url_subdomain.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: url.top_level_domain
+  path: fields/url_top_level_domain.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user.email
+  path: fields/user_email.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user.full_name
+  path: fields/user_full_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user.hash
+  path: fields/user_hash.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user.id
+  path: fields/user_id.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user.name
+  path: fields/user_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user.roles
+  path: fields/user_roles.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user_agent.name
+  path: fields/user_agent_name.yaml
+  relations:
+  - relation: match
+    stability: development
+- field: user_agent.original
+  path: fields/user_agent_original.yaml
+  relations:
+  - relation: match
+    stability: stable
+- field: user_agent.version
+  path: fields/user_agent_version.yaml
+  relations:
+  - relation: match
+    stability: development

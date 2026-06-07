@@ -1,0 +1,15 @@
+field: host.target.os.full
+fieldset: host
+dashed_name: host-target-os-full
+description: Operating system name, including the version or code name.
+example: Mac OS Mojave
+flat_name: host.target.os.full
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: host.target.os.full.text
+  name: text
+  type: match_only_text
+name: full
+original_fieldset: os
+type: keyword

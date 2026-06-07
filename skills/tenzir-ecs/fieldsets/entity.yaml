@@ -1,0 +1,657 @@
+fieldset: entity
+description: The entity fields provide a standardized way to represent and categorize different types of components within an IT environment, including those that don't have dedicated field sets in ECS. An entity represents a discrete, identifiable component that can be described by a set of attributes and maintains its identity over time.
+footnote: The entity fields may be self-nested under entity.target.* to describe the target entity in the context of an action or event. The fieldset entity.target.* must not be confused with the root entity fieldset that is used to describe the primary entity under observation. The fieldset entity.target.* may only be used to describe the targeted entity of an action taken.
+group: 2
+name: entity
+nestings:
+- entity.relationships.administers
+- entity.relationships.depends_on
+- entity.relationships.owns
+- entity.relationships.supervises
+- entity.target
+prefix: entity.
+reusable:
+  expected:
+  - as: entity
+    at: user
+    full: user.entity
+  - as: entity
+    at: cloud
+    full: cloud.entity
+  - as: entity
+    at: host
+    full: host.entity
+  - as: entity
+    at: service
+    full: service.entity
+  - as: entity
+    at: orchestrator
+    full: orchestrator.entity
+  - as: target
+    at: entity
+    full: entity.target
+    description_override: Targeted entity of action taken.
+  top_level: true
+reused_here:
+- full: entity.relationships.administers
+  schema_name: entity_reference
+  description: Entities this entity administers in an IAM or ops sense.
+- full: entity.relationships.depends_on
+  schema_name: entity_reference
+  description: Entities this entity requires for operation.
+- full: entity.relationships.owns
+  schema_name: entity_reference
+  description: Identifiers of assets or identities this entity owns.
+- full: entity.relationships.supervises
+  schema_name: entity_reference
+  description: Identities this entity supervises in a reporting or org-chart sense.
+- full: entity.target
+  schema_name: entity
+  description: Targeted entity of action taken.
+title: Entity
+type: group
+fields:
+- name: entity.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: entity.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  beta: This field is beta and subject to change.
+- name: entity.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  beta: This field is beta and subject to change.
+- name: entity.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  beta: This field is beta and subject to change.
+- name: entity.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: entity.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  beta: This field is beta and subject to change.
+- name: entity.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  beta: This field is beta and subject to change.
+- name: entity.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  beta: This field is beta and subject to change.
+- name: entity.id
+  type: keyword
+  description: Unique identifier for the entity.
+- name: entity.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  beta: This field is beta and subject to change.
+- name: entity.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  beta: This field is beta and subject to change.
+- name: entity.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  beta: This field is beta and subject to change.
+- name: entity.name
+  type: keyword
+  description: The name of the entity.
+  beta: This field is beta and subject to change.
+- name: entity.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  beta: This field is beta and subject to change.
+- name: entity.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  beta: This field is beta and subject to change.
+- name: entity.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  beta: This field is beta and subject to change.
+- name: entity.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  beta: This field is beta and subject to change.
+- name: entity.target.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: entity.target.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: entity.target.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.id
+  type: keyword
+  description: Unique identifier for the entity.
+  original_fieldset: entity
+- name: entity.target.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.name
+  type: keyword
+  description: The name of the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: entity.target.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: entity.target.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: entity.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  normalize:
+  - array
+  beta: This field is beta and subject to change.

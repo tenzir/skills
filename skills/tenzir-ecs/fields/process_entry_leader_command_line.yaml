@@ -1,0 +1,16 @@
+field: process.entry_leader.command_line
+fieldset: process
+dashed_name: process-entry-leader-command-line
+description: 'Full command line that started the process, including the absolute path to the executable, and all arguments.
+
+  Some arguments may be filtered to protect sensitive information.'
+example: /usr/bin/ssh -l user 10.0.0.16
+flat_name: process.entry_leader.command_line
+level: extended
+multi_fields:
+- flat_name: process.entry_leader.command_line.text
+  name: text
+  type: match_only_text
+name: command_line
+original_fieldset: process
+type: wildcard

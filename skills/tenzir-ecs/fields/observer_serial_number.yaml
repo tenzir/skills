@@ -1,0 +1,9 @@
+field: observer.serial_number
+fieldset: observer
+dashed_name: observer-serial-number
+description: Observer serial number.
+flat_name: observer.serial_number
+ignore_above: 1024
+level: extended
+name: serial_number
+type: keyword

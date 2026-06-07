@@ -1,0 +1,12 @@
+field: volume.vendor_name
+fieldset: volume
+dashed_name: volume-vendor-name
+description: 'Vendor name of the volume device.
+
+  The value is provided by the vendor of the device.'
+example: Msft
+flat_name: volume.vendor_name
+ignore_above: 1024
+level: extended
+name: vendor_name
+type: keyword

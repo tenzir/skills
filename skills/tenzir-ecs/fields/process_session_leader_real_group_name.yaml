@@ -1,0 +1,10 @@
+field: process.session_leader.real_group.name
+fieldset: process
+dashed_name: process-session-leader-real-group-name
+description: Name of the group.
+flat_name: process.session_leader.real_group.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

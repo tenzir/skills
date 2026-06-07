@@ -1,0 +1,13 @@
+field: file.macho.sections
+fieldset: file
+dashed_name: file-macho-sections
+description: 'An array containing an object for each section of the Mach-O file.
+
+  The keys that should be present in these objects are defined by sub-fields underneath `macho.sections.*`.'
+flat_name: file.macho.sections
+level: extended
+name: sections
+normalize:
+- array
+original_fieldset: macho
+type: nested

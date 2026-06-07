@@ -1,0 +1,9 @@
+field: group.id
+fieldset: group
+dashed_name: group-id
+description: Unique identifier for the group on the system/platform.
+flat_name: group.id
+ignore_above: 1024
+level: extended
+name: id
+type: keyword

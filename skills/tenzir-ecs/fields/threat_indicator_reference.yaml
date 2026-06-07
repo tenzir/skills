@@ -1,0 +1,10 @@
+field: threat.indicator.reference
+fieldset: threat
+dashed_name: threat-indicator-reference
+description: Reference URL linking to additional information about this indicator.
+example: https://system.example.com/indicator/0001234
+flat_name: threat.indicator.reference
+ignore_above: 1024
+level: extended
+name: indicator.reference
+type: keyword

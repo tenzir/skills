@@ -1,0 +1,11 @@
+field: process.parent.pe.company
+fieldset: process
+dashed_name: process-parent-pe-company
+description: Internal company name of the file, provided at compile-time.
+example: Microsoft Corporation
+flat_name: process.parent.pe.company
+ignore_above: 1024
+level: extended
+name: company
+original_fieldset: pe
+type: keyword

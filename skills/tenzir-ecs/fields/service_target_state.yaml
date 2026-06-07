@@ -1,0 +1,10 @@
+field: service.target.state
+fieldset: service
+dashed_name: service-target-state
+description: Current state of the service.
+flat_name: service.target.state
+ignore_above: 1024
+level: core
+name: state
+original_fieldset: service
+type: keyword

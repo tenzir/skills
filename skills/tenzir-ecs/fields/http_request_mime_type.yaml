@@ -1,0 +1,12 @@
+field: http.request.mime_type
+fieldset: http
+dashed_name: http-request-mime-type
+description: 'Mime type of the body of the request.
+
+  This value must only be populated based on the content of the request body, not on the `Content-Type` header. Comparing the mime type of a request with the request''s Content-Type header can be helpful in detecting threats or misconfigured clients.'
+example: image/gif
+flat_name: http.request.mime_type
+ignore_above: 1024
+level: extended
+name: request.mime_type
+type: keyword

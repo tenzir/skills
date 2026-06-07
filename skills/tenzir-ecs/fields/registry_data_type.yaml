@@ -1,0 +1,10 @@
+field: registry.data.type
+fieldset: registry
+dashed_name: registry-data-type
+description: Standard registry type for encoding contents
+example: REG_SZ
+flat_name: registry.data.type
+ignore_above: 1024
+level: core
+name: data.type
+type: keyword

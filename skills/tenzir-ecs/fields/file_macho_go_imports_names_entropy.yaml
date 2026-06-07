@@ -1,0 +1,10 @@
+field: file.macho.go_imports_names_entropy
+fieldset: file
+dashed_name: file-macho-go-imports-names-entropy
+description: Shannon entropy calculation from the list of Go imports.
+flat_name: file.macho.go_imports_names_entropy
+format: number
+level: extended
+name: go_imports_names_entropy
+original_fieldset: macho
+type: long

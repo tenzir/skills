@@ -1,0 +1,12 @@
+field: container.image.name
+fieldset: container
+dashed_name: container-image-name
+description: Name of the image the container was built on.
+flat_name: container.image.name
+ignore_above: 1024
+level: extended
+name: image.name
+otel:
+- relation: match
+  stability: development
+type: keyword

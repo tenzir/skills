@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.registry.data.type
+fieldset: threat
+dashed_name: threat-enrichments-indicator-registry-data-type
+description: Standard registry type for encoding contents
+example: REG_SZ
+flat_name: threat.enrichments.indicator.registry.data.type
+ignore_above: 1024
+level: core
+name: data.type
+original_fieldset: registry
+type: keyword

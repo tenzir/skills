@@ -1,0 +1,8 @@
+field: log.syslog
+fieldset: log
+dashed_name: log-syslog
+description: The Syslog metadata of the event, if the event was transmitted via Syslog. Please see RFCs 5424 or 3164.
+flat_name: log.syslog
+level: extended
+name: syslog
+type: object

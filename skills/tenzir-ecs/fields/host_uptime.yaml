@@ -1,0 +1,13 @@
+field: host.uptime
+fieldset: host
+dashed_name: host-uptime
+description: Seconds the host has been up.
+example: 1325
+flat_name: host.uptime
+level: extended
+name: uptime
+otel:
+- metric: system.uptime
+  relation: metric
+  stability: development
+type: long

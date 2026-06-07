@@ -1,0 +1,10 @@
+field: file.elf.telfhash
+fieldset: file
+dashed_name: file-elf-telfhash
+description: telfhash symbol hash for ELF file.
+flat_name: file.elf.telfhash
+ignore_above: 1024
+level: extended
+name: telfhash
+original_fieldset: elf
+type: keyword

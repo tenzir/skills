@@ -1,0 +1,10 @@
+field: threat.indicator.description
+fieldset: threat
+dashed_name: threat-indicator-description
+description: Describes the type of action conducted by the threat.
+example: IP x.x.x.x was observed delivering the Angler EK.
+flat_name: threat.indicator.description
+ignore_above: 1024
+level: extended
+name: indicator.description
+type: keyword

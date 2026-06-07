@@ -1,0 +1,13 @@
+field: device.vendor.name
+fieldset: device
+beta: This field is beta and subject to change.
+dashed_name: device-vendor-name
+description: 'The name of the organization or company that manufactured or produced the device. This should be the official registered business name or commonly recognized brand name of the manufacturer.
+
+  The vendor name provides human-readable identification of the device manufacturer and should be consistent with the vendor.id field. This field is useful for reporting, device inventory management, and applying vendor-specific policies or security rules.'
+example: SanDisk
+flat_name: device.vendor.name
+ignore_above: 1024
+level: extended
+name: vendor.name
+type: keyword

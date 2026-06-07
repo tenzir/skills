@@ -1,0 +1,9 @@
+field: threat.indicator.first_seen
+fieldset: threat
+dashed_name: threat-indicator-first-seen
+description: The date and time when intelligence source first reported sighting this indicator.
+example: '2020-11-05T17:25:47.000Z'
+flat_name: threat.indicator.first_seen
+level: extended
+name: indicator.first_seen
+type: date

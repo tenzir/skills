@@ -1,0 +1,10 @@
+field: rule.version
+fieldset: rule
+dashed_name: rule-version
+description: The version / revision of the rule being used for analysis.
+example: 1.1
+flat_name: rule.version
+ignore_above: 1024
+level: extended
+name: version
+type: keyword

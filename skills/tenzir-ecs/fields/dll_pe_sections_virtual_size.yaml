@@ -1,0 +1,10 @@
+field: dll.pe.sections.virtual_size
+fieldset: dll
+dashed_name: dll-pe-sections-virtual-size
+description: PE Section List virtual size. This is always the same as `physical_size`.
+flat_name: dll.pe.sections.virtual_size
+format: string
+level: extended
+name: sections.virtual_size
+original_fieldset: pe
+type: long

@@ -1,0 +1,11 @@
+field: url.path
+fieldset: url
+dashed_name: url-path
+description: Path of the request, such as "/search".
+flat_name: url.path
+level: extended
+name: path
+otel:
+- relation: match
+  stability: stable
+type: wildcard

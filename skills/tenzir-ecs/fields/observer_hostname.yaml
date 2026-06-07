@@ -1,0 +1,9 @@
+field: observer.hostname
+fieldset: observer
+dashed_name: observer-hostname
+description: Hostname of the observer.
+flat_name: observer.hostname
+ignore_above: 1024
+level: core
+name: hostname
+type: keyword

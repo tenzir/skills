@@ -1,0 +1,13 @@
+field: email.reply_to.address
+fieldset: email
+dashed_name: email-reply-to-address
+description: The address that replies should be delivered to based on the value in the RFC 5322 `Reply-To:` header.
+example: reply.here@example.com
+flat_name: email.reply_to.address
+ignore_above: 1024
+level: extended
+name: reply_to.address
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

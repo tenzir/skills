@@ -1,0 +1,10 @@
+field: client.user.group.name
+fieldset: client
+dashed_name: client-user-group-name
+description: Name of the group.
+flat_name: client.user.group.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

@@ -1,0 +1,12 @@
+field: volume.nt_name
+fieldset: volume
+dashed_name: volume-nt-name
+description: 'The NT device name.
+
+  NT device name uses a format of `\Device\HarddiskVolume2`. The field is relevant to Windows systems only.'
+example: \Device\Cdrom1
+flat_name: volume.nt_name
+ignore_above: 1024
+level: extended
+name: nt_name
+type: keyword

@@ -1,0 +1,10 @@
+field: event.id
+fieldset: event
+dashed_name: event-id
+description: Unique ID to describe the event.
+example: 8a4f500d
+flat_name: event.id
+ignore_above: 1024
+level: core
+name: id
+type: keyword

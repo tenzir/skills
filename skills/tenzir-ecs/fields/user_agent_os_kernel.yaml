@@ -1,0 +1,11 @@
+field: user_agent.os.kernel
+fieldset: user_agent
+dashed_name: user-agent-os-kernel
+description: Operating system kernel version as a raw string.
+example: 4.4.0-112-generic
+flat_name: user_agent.os.kernel
+ignore_above: 1024
+level: extended
+name: kernel
+original_fieldset: os
+type: keyword

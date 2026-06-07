@@ -1,0 +1,10 @@
+field: file.pe.sections.entropy
+fieldset: file
+dashed_name: file-pe-sections-entropy
+description: Shannon entropy calculation from the section.
+flat_name: file.pe.sections.entropy
+format: number
+level: extended
+name: sections.entropy
+original_fieldset: pe
+type: long

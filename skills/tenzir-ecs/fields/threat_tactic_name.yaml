@@ -1,0 +1,12 @@
+field: threat.tactic.name
+fieldset: threat
+dashed_name: threat-tactic-name
+description: Name of the type of tactic used by this threat. You can use a MITRE ATT&CK® tactic, for example. (ex. https://attack.mitre.org/tactics/TA0002/)
+example: Execution
+flat_name: threat.tactic.name
+ignore_above: 1024
+level: extended
+name: tactic.name
+normalize:
+- array
+type: keyword

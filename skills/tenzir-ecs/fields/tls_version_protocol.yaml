@@ -1,0 +1,10 @@
+field: tls.version_protocol
+fieldset: tls
+dashed_name: tls-version-protocol
+description: Normalized lowercase protocol name parsed from original string.
+example: tls
+flat_name: tls.version_protocol
+ignore_above: 1024
+level: extended
+name: version_protocol
+type: keyword

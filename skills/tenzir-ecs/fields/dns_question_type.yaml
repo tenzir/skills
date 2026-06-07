@@ -1,0 +1,10 @@
+field: dns.question.type
+fieldset: dns
+dashed_name: dns-question-type
+description: The type of record being queried.
+example: AAAA
+flat_name: dns.question.type
+ignore_above: 1024
+level: extended
+name: question.type
+type: keyword

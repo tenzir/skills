@@ -1,0 +1,16 @@
+field: process.name
+fieldset: process
+dashed_name: process-name
+description: 'Process name.
+
+  Sometimes called program name or similar.'
+example: ssh
+flat_name: process.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: process.name.text
+  name: text
+  type: match_only_text
+name: name
+type: keyword

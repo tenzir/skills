@@ -1,0 +1,12 @@
+field: entity.relationships.owns.user.id
+fieldset: entity
+dashed_name: entity-relationships-owns-user-id
+description: Referenced user ids.
+flat_name: entity.relationships.owns.user.id
+ignore_above: 1024
+level: extended
+name: user.id
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

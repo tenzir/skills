@@ -1,0 +1,13 @@
+field: container.cpu.usage
+fieldset: container
+dashed_name: container-cpu-usage
+description: 'Percent CPU used which is normalized by the number of CPU cores and it ranges from 0 to 1. Scaling factor: 1000.'
+flat_name: container.cpu.usage
+level: extended
+name: cpu.usage
+otel:
+- metric: container.cpu.usage
+  relation: metric
+  stability: development
+scaling_factor: 1000
+type: scaled_float

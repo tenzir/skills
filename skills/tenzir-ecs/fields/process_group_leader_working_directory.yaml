@@ -1,0 +1,15 @@
+field: process.group_leader.working_directory
+fieldset: process
+dashed_name: process-group-leader-working-directory
+description: The working directory of the process.
+example: /home/alice
+flat_name: process.group_leader.working_directory
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: process.group_leader.working_directory.text
+  name: text
+  type: match_only_text
+name: working_directory
+original_fieldset: process
+type: keyword

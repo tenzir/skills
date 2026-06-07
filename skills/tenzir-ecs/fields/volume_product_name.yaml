@@ -1,0 +1,12 @@
+field: volume.product_name
+fieldset: volume
+dashed_name: volume-product-name
+description: 'Product name of the volume.
+
+  The volume device vendor provides this value.'
+example: Virtual DVD-ROM
+flat_name: volume.product_name
+ignore_above: 1024
+level: extended
+name: product_name
+type: keyword

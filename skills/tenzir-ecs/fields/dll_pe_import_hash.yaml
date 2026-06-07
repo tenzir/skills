@@ -1,0 +1,13 @@
+field: dll.pe.import_hash
+fieldset: dll
+dashed_name: dll-pe-import-hash
+description: 'A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+  This is a synonym for imphash.'
+example: d41d8cd98f00b204e9800998ecf8427e
+flat_name: dll.pe.import_hash
+ignore_above: 1024
+level: extended
+name: import_hash
+original_fieldset: pe
+type: keyword

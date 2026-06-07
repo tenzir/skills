@@ -1,0 +1,10 @@
+field: threat.indicator.file.pe.sections.entropy
+fieldset: threat
+dashed_name: threat-indicator-file-pe-sections-entropy
+description: Shannon entropy calculation from the section.
+flat_name: threat.indicator.file.pe.sections.entropy
+format: number
+level: extended
+name: sections.entropy
+original_fieldset: pe
+type: long

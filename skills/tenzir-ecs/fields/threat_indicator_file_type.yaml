@@ -1,0 +1,11 @@
+field: threat.indicator.file.type
+fieldset: threat
+dashed_name: threat-indicator-file-type
+description: File type (file, dir, or symlink).
+example: file
+flat_name: threat.indicator.file.type
+ignore_above: 1024
+level: extended
+name: type
+original_fieldset: file
+type: keyword

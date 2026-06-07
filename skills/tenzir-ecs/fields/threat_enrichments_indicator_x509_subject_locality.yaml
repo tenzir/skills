@@ -1,0 +1,13 @@
+field: threat.enrichments.indicator.x509.subject.locality
+fieldset: threat
+dashed_name: threat-enrichments-indicator-x509-subject-locality
+description: List of locality names (L)
+example: San Francisco
+flat_name: threat.enrichments.indicator.x509.subject.locality
+ignore_above: 1024
+level: extended
+name: subject.locality
+normalize:
+- array
+original_fieldset: x509
+type: keyword

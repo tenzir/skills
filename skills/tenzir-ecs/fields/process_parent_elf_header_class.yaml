@@ -1,0 +1,10 @@
+field: process.parent.elf.header.class
+fieldset: process
+dashed_name: process-parent-elf-header-class
+description: Header class of the ELF file.
+flat_name: process.parent.elf.header.class
+ignore_above: 1024
+level: extended
+name: header.class
+original_fieldset: elf
+type: keyword

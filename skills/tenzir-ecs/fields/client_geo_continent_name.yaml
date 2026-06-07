@@ -1,0 +1,11 @@
+field: client.geo.continent_name
+fieldset: client
+dashed_name: client-geo-continent-name
+description: Name of the continent.
+example: North America
+flat_name: client.geo.continent_name
+ignore_above: 1024
+level: core
+name: continent_name
+original_fieldset: geo
+type: keyword

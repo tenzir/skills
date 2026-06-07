@@ -1,0 +1,10 @@
+field: dll.code_signature.exists
+fieldset: dll
+dashed_name: dll-code-signature-exists
+description: Boolean to capture if a signature is present.
+example: 'true'
+flat_name: dll.code_signature.exists
+level: core
+name: exists
+original_fieldset: code_signature
+type: boolean

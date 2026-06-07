@@ -1,0 +1,10 @@
+field: threat.enrichments.matched.field
+fieldset: threat
+dashed_name: threat-enrichments-matched-field
+description: Identifies the field of the atomic indicator that matched a local environment endpoint or network event.
+example: file.hash.sha256
+flat_name: threat.enrichments.matched.field
+ignore_above: 1024
+level: extended
+name: enrichments.matched.field
+type: keyword

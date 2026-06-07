@@ -1,0 +1,12 @@
+field: network.bytes
+fieldset: network
+dashed_name: network-bytes
+description: 'Total bytes transferred in both directions.
+
+  If `source.bytes` and `destination.bytes` are known, `network.bytes` is their sum.'
+example: 368
+flat_name: network.bytes
+format: bytes
+level: core
+name: bytes
+type: long

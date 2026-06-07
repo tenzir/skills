@@ -1,0 +1,16 @@
+fieldset: organization
+description: 'The organization fields enrich data with information about the company or entity the data is associated with.
+
+  These fields help you arrange or filter data stored in an index by one or multiple organizations.'
+group: 2
+name: organization
+prefix: organization.
+title: Organization
+type: group
+fields:
+- name: organization.id
+  type: keyword
+  description: Unique identifier for the organization.
+- name: organization.name
+  type: keyword
+  description: Organization name.

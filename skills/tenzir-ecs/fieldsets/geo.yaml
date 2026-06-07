@@ -1,0 +1,108 @@
+fieldset: geo
+description: 'Geo fields can carry data about a specific location related to an event.
+
+  This geolocation information can be derived from techniques such as Geo IP, or be user-supplied.'
+group: 2
+name: geo
+prefix: geo.
+reusable:
+  expected:
+  - as: geo
+    at: client
+    full: client.geo
+  - as: geo
+    at: destination
+    full: destination.geo
+  - as: geo
+    at: observer
+    full: observer.geo
+  - as: geo
+    at: host
+    full: host.geo
+  - as: geo
+    at: server
+    full: server.geo
+  - as: geo
+    at: source
+    full: source.geo
+  - as: geo
+    at: threat.indicator
+    full: threat.indicator.geo
+  - as: geo
+    at: threat.enrichments.indicator
+    full: threat.enrichments.indicator.geo
+  top_level: false
+title: Geo
+type: group
+fields:
+- name: geo.city_name
+  type: keyword
+  description: City name.
+  template_field: true
+  example: Montreal
+  ignore_above: 1024
+- name: geo.continent_code
+  type: keyword
+  description: Two-letter code representing continent's name.
+  template_field: true
+  example: NA
+  ignore_above: 1024
+- name: geo.continent_name
+  type: keyword
+  description: Name of the continent.
+  template_field: true
+  example: North America
+  ignore_above: 1024
+- name: geo.country_iso_code
+  type: keyword
+  description: Country ISO code.
+  template_field: true
+  example: CA
+  ignore_above: 1024
+- name: geo.country_name
+  type: keyword
+  description: Country name.
+  template_field: true
+  example: Canada
+  ignore_above: 1024
+- name: geo.location
+  type: geo_point
+  description: Longitude and latitude.
+  template_field: true
+  example: '{ "lon": -73.614830, "lat": 45.505918 }'
+- name: geo.name
+  type: keyword
+  description: 'User-defined description of a location, at the level of granularity they care about.
+
+    Could be the name of their data centers, the floor number, if this describes a local physical entity, city names.
+
+    Not typically used in automated geolocation.'
+  template_field: true
+  example: boston-dc
+  ignore_above: 1024
+- name: geo.postal_code
+  type: keyword
+  description: 'Postal code associated with the location.
+
+    Values appropriate for this field may also be known as a postcode or ZIP code and will vary widely from country to country.'
+  template_field: true
+  example: 94040
+  ignore_above: 1024
+- name: geo.region_iso_code
+  type: keyword
+  description: Region ISO code.
+  template_field: true
+  example: CA-QC
+  ignore_above: 1024
+- name: geo.region_name
+  type: keyword
+  description: Region name.
+  template_field: true
+  example: Quebec
+  ignore_above: 1024
+- name: geo.timezone
+  type: keyword
+  description: The time zone of the location, such as IANA time zone name.
+  template_field: true
+  example: America/Argentina/Buenos_Aires
+  ignore_above: 1024

@@ -1,0 +1,11 @@
+field: tls.server.x509.public_key_curve
+fieldset: tls
+dashed_name: tls-server-x509-public-key-curve
+description: The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+example: nistp521
+flat_name: tls.server.x509.public_key_curve
+ignore_above: 1024
+level: extended
+name: public_key_curve
+original_fieldset: x509
+type: keyword

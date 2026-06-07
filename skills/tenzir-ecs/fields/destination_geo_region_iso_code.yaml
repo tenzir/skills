@@ -1,0 +1,11 @@
+field: destination.geo.region_iso_code
+fieldset: destination
+dashed_name: destination-geo-region-iso-code
+description: Region ISO code.
+example: CA-QC
+flat_name: destination.geo.region_iso_code
+ignore_above: 1024
+level: core
+name: region_iso_code
+original_fieldset: geo
+type: keyword

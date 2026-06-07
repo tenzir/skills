@@ -1,0 +1,16 @@
+field: threat.indicator.file.attributes
+fieldset: threat
+dashed_name: threat-indicator-file-attributes
+description: 'Array of file attributes.
+
+  Attributes names will vary by platform. Here''s a non-exhaustive list of values that are expected in this field: archive, compressed, directory, encrypted, execute, hidden, read, readonly, system, write.'
+example: '["readonly", "system"]'
+flat_name: threat.indicator.file.attributes
+ignore_above: 1024
+level: extended
+name: attributes
+normalize:
+- array
+original_fieldset: file
+synthetic_source_keep: none
+type: keyword

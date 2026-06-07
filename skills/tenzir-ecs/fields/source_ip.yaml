@@ -1,0 +1,8 @@
+field: source.ip
+fieldset: source
+dashed_name: source-ip
+description: IP address of the source (IPv4 or IPv6).
+flat_name: source.ip
+level: core
+name: ip
+type: ip

@@ -1,0 +1,10 @@
+field: client.as.number
+fieldset: client
+dashed_name: client-as-number
+description: Unique number allocated to the autonomous system. The autonomous system number (ASN) uniquely identifies each network on the Internet.
+example: 15169
+flat_name: client.as.number
+level: extended
+name: number
+original_fieldset: as
+type: long

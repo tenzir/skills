@@ -1,0 +1,13 @@
+field: tags
+fieldset: base
+dashed_name: tags
+description: List of keywords used to tag each event.
+example: '["production", "env2"]'
+flat_name: tags
+ignore_above: 1024
+level: core
+name: tags
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

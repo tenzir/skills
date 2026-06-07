@@ -1,0 +1,10 @@
+field: threat.enrichments.indicator.file.pe.sections.physical_size
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-pe-sections-physical-size
+description: PE Section List physical size.
+flat_name: threat.enrichments.indicator.file.pe.sections.physical_size
+format: bytes
+level: extended
+name: sections.physical_size
+original_fieldset: pe
+type: long

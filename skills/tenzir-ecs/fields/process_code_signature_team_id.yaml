@@ -1,0 +1,13 @@
+field: process.code_signature.team_id
+fieldset: process
+dashed_name: process-code-signature-team-id
+description: 'The team identifier used to sign the process.
+
+  This is used to identify the team or vendor of a software product. The field is relevant to Apple *OS only.'
+example: EQHXZ8M8AV
+flat_name: process.code_signature.team_id
+ignore_above: 1024
+level: extended
+name: team_id
+original_fieldset: code_signature
+type: keyword

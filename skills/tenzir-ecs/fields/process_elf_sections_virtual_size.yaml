@@ -1,0 +1,10 @@
+field: process.elf.sections.virtual_size
+fieldset: process
+dashed_name: process-elf-sections-virtual-size
+description: ELF Section List virtual size.
+flat_name: process.elf.sections.virtual_size
+format: string
+level: extended
+name: sections.virtual_size
+original_fieldset: elf
+type: long

@@ -1,0 +1,15 @@
+field: process.previous.executable
+fieldset: process
+dashed_name: process-previous-executable
+description: Absolute path to the process executable.
+example: /usr/bin/ssh
+flat_name: process.previous.executable
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: process.previous.executable.text
+  name: text
+  type: match_only_text
+name: executable
+original_fieldset: process
+type: keyword

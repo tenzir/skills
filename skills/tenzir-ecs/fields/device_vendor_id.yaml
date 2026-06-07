@@ -1,0 +1,15 @@
+field: device.vendor.id
+fieldset: device
+beta: This field is beta and subject to change.
+dashed_name: device-vendor-id
+description: 'A unique identifier assigned to device manufacturers by standards organizations. This is typically a hexadecimal value that uniquely identifies the vendor/manufacturer of the device.
+
+  The vendor ID is assigned by standards bodies and remains consistent across all products from the same manufacturer. For hardware devices, this often corresponds to the Vendor ID (VID) in device descriptors. This identifier enables tracking and policy enforcement at the manufacturer level.
+
+  See https://learn.microsoft.com/en-us/windows-hardware/drivers/install/standard-usb-identifiers for more information on vendor identification standards.'
+example: 4660
+flat_name: device.vendor.id
+ignore_above: 1024
+level: extended
+name: vendor.id
+type: keyword

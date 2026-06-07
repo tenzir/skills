@@ -1,0 +1,14 @@
+field: file.group
+fieldset: file
+dashed_name: file-group
+description: Primary group name of the file.
+example: alice
+flat_name: file.group
+ignore_above: 1024
+level: extended
+name: group
+otel:
+- attribute: file.group.name
+  relation: equivalent
+  stability: development
+type: keyword

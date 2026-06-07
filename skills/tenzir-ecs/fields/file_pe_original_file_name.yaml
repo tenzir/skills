@@ -1,0 +1,11 @@
+field: file.pe.original_file_name
+fieldset: file
+dashed_name: file-pe-original-file-name
+description: Internal name of the file, provided at compile-time.
+example: MSPAINT.EXE
+flat_name: file.pe.original_file_name
+ignore_above: 1024
+level: extended
+name: original_file_name
+original_fieldset: pe
+type: keyword

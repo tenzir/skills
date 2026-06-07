@@ -1,0 +1,15 @@
+field: cloud.origin.entity.display_name
+fieldset: cloud
+beta: This field is beta and subject to change.
+dashed_name: cloud-origin-entity-display-name
+description: An optional field used when a pretty name is desired for entity-centric operations. This field should not be used for correlation with `*.name` fields for entities with dedicated field sets (for example, `host`).
+flat_name: cloud.origin.entity.display_name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: cloud.origin.entity.display_name.text
+  name: text
+  type: match_only_text
+name: display_name
+original_fieldset: entity
+type: keyword

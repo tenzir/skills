@@ -1,0 +1,11 @@
+field: cloud.target.availability_zone
+fieldset: cloud
+dashed_name: cloud-target-availability-zone
+description: Availability zone in which this host, resource, or service is located.
+example: us-east-1c
+flat_name: cloud.target.availability_zone
+ignore_above: 1024
+level: extended
+name: availability_zone
+original_fieldset: cloud
+type: keyword

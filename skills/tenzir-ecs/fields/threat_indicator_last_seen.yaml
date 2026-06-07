@@ -1,0 +1,9 @@
+field: threat.indicator.last_seen
+fieldset: threat
+dashed_name: threat-indicator-last-seen
+description: The date and time when intelligence source last reported sighting this indicator.
+example: '2020-11-05T17:25:47.000Z'
+flat_name: threat.indicator.last_seen
+level: extended
+name: indicator.last_seen
+type: date

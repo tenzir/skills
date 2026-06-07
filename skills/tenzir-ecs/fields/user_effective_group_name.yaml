@@ -1,0 +1,10 @@
+field: user.effective.group.name
+fieldset: user
+dashed_name: user-effective-group-name
+description: Name of the group.
+flat_name: user.effective.group.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

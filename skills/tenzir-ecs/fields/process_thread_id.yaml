@@ -1,0 +1,10 @@
+field: process.thread.id
+fieldset: process
+dashed_name: process-thread-id
+description: Thread ID.
+example: 4242
+flat_name: process.thread.id
+format: string
+level: extended
+name: thread.id
+type: long

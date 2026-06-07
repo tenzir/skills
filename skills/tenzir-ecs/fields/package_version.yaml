@@ -1,0 +1,10 @@
+field: package.version
+fieldset: package
+dashed_name: package-version
+description: Package version
+example: 1.12.9
+flat_name: package.version
+ignore_above: 1024
+level: extended
+name: version
+type: keyword

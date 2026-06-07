@@ -1,0 +1,14 @@
+field: http.response.bytes
+fieldset: http
+dashed_name: http-response-bytes
+description: Total size in bytes of the response (body and headers).
+example: 1437
+flat_name: http.response.bytes
+format: bytes
+level: extended
+name: response.bytes
+otel:
+- attribute: http.response.size
+  relation: equivalent
+  stability: development
+type: long

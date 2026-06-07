@@ -1,0 +1,8 @@
+field: container.network.egress.bytes
+fieldset: container
+dashed_name: container-network-egress-bytes
+description: The number of bytes (gauge) sent out on all network interfaces by the container since the last metric collection.
+flat_name: container.network.egress.bytes
+level: extended
+name: network.egress.bytes
+type: long

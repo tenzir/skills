@@ -1,0 +1,9 @@
+field: group.name
+fieldset: group
+dashed_name: group-name
+description: Name of the group.
+flat_name: group.name
+ignore_above: 1024
+level: extended
+name: name
+type: keyword

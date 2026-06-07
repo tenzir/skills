@@ -1,0 +1,12 @@
+field: log.syslog.priority
+fieldset: log
+dashed_name: log-syslog-priority
+description: 'Syslog numeric priority of the event, if available.
+
+  According to RFCs 5424 and 3164, the priority is 8 * facility + severity. This number is therefore expected to contain a value between 0 and 191.'
+example: 135
+flat_name: log.syslog.priority
+format: string
+level: extended
+name: syslog.priority
+type: long

@@ -1,0 +1,12 @@
+field: agent.id
+fieldset: agent
+dashed_name: agent-id
+description: 'Unique identifier of this agent (if one exists).
+
+  Example: For Beats this would be beat.id.'
+example: 8a4f500d
+flat_name: agent.id
+ignore_above: 1024
+level: core
+name: id
+type: keyword

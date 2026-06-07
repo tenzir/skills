@@ -1,0 +1,987 @@
+fieldset: host
+description: 'A host is defined as a general computing instance.
+
+  ECS host.* fields should be populated with details about the host on which the event happened, or from which the measurement was taken. Host types include hardware, virtual machines, Docker containers, and Kubernetes nodes.'
+group: 2
+name: host
+nestings:
+- host.entity
+- host.geo
+- host.os
+- host.risk
+- host.target
+prefix: host.
+reusable:
+  expected:
+  - as: target
+    at: host
+    full: host.target
+    description_override: Targeted host of action taken.
+  top_level: true
+reused_here:
+- full: host.entity
+  schema_name: entity
+  description: Fields to describe various types of entities across IT environments.
+- full: host.geo
+  schema_name: geo
+  description: Fields describing a location.
+- full: host.os
+  schema_name: os
+  description: OS fields contain information about the operating system.
+- full: host.risk
+  schema_name: risk
+  description: Fields for describing risk score and level.
+- full: host.target
+  schema_name: host
+  description: Targeted host of action taken.
+title: Host
+type: group
+fields:
+- name: host.architecture
+  type: keyword
+  description: Operating system architecture.
+- name: host.boot.id
+  type: keyword
+  description: Linux boot uuid taken from /proc/sys/kernel/random/boot_id
+- name: host.cpu.usage
+  type: scaled_float
+  description: Percent CPU used, between 0 and 1.
+- name: host.disk.read.bytes
+  type: long
+  description: The number of bytes read by all disks.
+- name: host.disk.write.bytes
+  type: long
+  description: The number of bytes written on all disks.
+- name: host.domain
+  type: keyword
+  description: Name of the directory the group is a member of.
+- name: host.entity.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: host.entity.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: host.entity.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.id
+  type: keyword
+  description: Unique identifier for the entity.
+  original_fieldset: entity
+- name: host.entity.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.name
+  type: keyword
+  description: The name of the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.entity.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.entity.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: host.geo.city_name
+  type: keyword
+  description: City name.
+  original_fieldset: geo
+- name: host.geo.continent_code
+  type: keyword
+  description: Continent code.
+  original_fieldset: geo
+- name: host.geo.continent_name
+  type: keyword
+  description: Name of the continent.
+  original_fieldset: geo
+- name: host.geo.country_iso_code
+  type: keyword
+  description: Country ISO code.
+  original_fieldset: geo
+- name: host.geo.country_name
+  type: keyword
+  description: Country name.
+  original_fieldset: geo
+- name: host.geo.location
+  type: geo_point
+  description: Longitude and latitude.
+  original_fieldset: geo
+- name: host.geo.name
+  type: keyword
+  description: User-defined description of a location.
+  original_fieldset: geo
+- name: host.geo.postal_code
+  type: keyword
+  description: Postal code.
+  original_fieldset: geo
+- name: host.geo.region_iso_code
+  type: keyword
+  description: Region ISO code.
+  original_fieldset: geo
+- name: host.geo.region_name
+  type: keyword
+  description: Region name.
+  original_fieldset: geo
+- name: host.geo.timezone
+  type: keyword
+  description: Time zone.
+  original_fieldset: geo
+- name: host.hostname
+  type: keyword
+  description: Hostname of the host.
+- name: host.id
+  type: keyword
+  description: Unique host id.
+- name: host.ip
+  type: ip
+  description: Host ip addresses.
+  normalize:
+  - array
+- name: host.mac
+  type: keyword
+  description: Host MAC addresses.
+  normalize:
+  - array
+- name: host.name
+  type: keyword
+  description: Name of the host.
+- name: host.network.egress.bytes
+  type: long
+  description: The number of bytes sent on all network interfaces.
+- name: host.network.egress.packets
+  type: long
+  description: The number of packets sent on all network interfaces.
+- name: host.network.ingress.bytes
+  type: long
+  description: The number of bytes received on all network interfaces.
+- name: host.network.ingress.packets
+  type: long
+  description: The number of packets received on all network interfaces.
+- name: host.os.family
+  type: keyword
+  description: OS family (such as redhat, debian, freebsd, windows).
+  original_fieldset: os
+- name: host.os.full
+  type: keyword
+  description: Operating system name, including the version or code name.
+  original_fieldset: os
+- name: host.os.kernel
+  type: keyword
+  description: Operating system kernel version as a raw string.
+  original_fieldset: os
+- name: host.os.name
+  type: keyword
+  description: Operating system name, without the version.
+  original_fieldset: os
+- name: host.os.platform
+  type: keyword
+  description: Operating system platform (such centos, ubuntu, windows).
+  original_fieldset: os
+- name: host.os.type
+  type: keyword
+  description: 'Which commercial OS family (one of: linux, macos, unix, windows, ios or android).'
+  original_fieldset: os
+- name: host.os.version
+  type: keyword
+  description: Operating system version as a raw string.
+  original_fieldset: os
+- name: host.pid_ns_ino
+  type: keyword
+  description: Pid namespace inode
+- name: host.risk.calculated_level
+  type: keyword
+  description: A risk classification level calculated by an internal system as part of entity analytics and entity risk scoring.
+  original_fieldset: risk
+- name: host.risk.calculated_score
+  type: float
+  description: A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring.
+  original_fieldset: risk
+- name: host.risk.calculated_score_norm
+  type: float
+  description: A normalized risk score calculated by an internal system.
+  original_fieldset: risk
+- name: host.risk.static_level
+  type: keyword
+  description: A risk classification level obtained from outside the system, such as from some external Threat Intelligence Platform.
+  original_fieldset: risk
+- name: host.risk.static_score
+  type: float
+  description: A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform.
+  original_fieldset: risk
+- name: host.risk.static_score_norm
+  type: float
+  description: A normalized risk score calculated by an external system.
+  original_fieldset: risk
+- name: host.target.architecture
+  type: keyword
+  description: Operating system architecture.
+  original_fieldset: host
+- name: host.target.boot.id
+  type: keyword
+  description: Linux boot uuid taken from /proc/sys/kernel/random/boot_id
+  original_fieldset: host
+- name: host.target.cpu.usage
+  type: scaled_float
+  description: Percent CPU used, between 0 and 1.
+  original_fieldset: host
+- name: host.target.disk.read.bytes
+  type: long
+  description: The number of bytes read by all disks.
+  original_fieldset: host
+- name: host.target.disk.write.bytes
+  type: long
+  description: The number of bytes written on all disks.
+  original_fieldset: host
+- name: host.target.domain
+  type: keyword
+  description: Name of the directory the group is a member of.
+  original_fieldset: host
+- name: host.target.entity.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: host.target.entity.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: host.target.entity.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.id
+  type: keyword
+  description: Unique identifier for the entity.
+  original_fieldset: entity
+- name: host.target.entity.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.name
+  type: keyword
+  description: The name of the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: host.target.entity.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: host.target.entity.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: host.target.geo.city_name
+  type: keyword
+  description: City name.
+  original_fieldset: geo
+- name: host.target.geo.continent_code
+  type: keyword
+  description: Continent code.
+  original_fieldset: geo
+- name: host.target.geo.continent_name
+  type: keyword
+  description: Name of the continent.
+  original_fieldset: geo
+- name: host.target.geo.country_iso_code
+  type: keyword
+  description: Country ISO code.
+  original_fieldset: geo
+- name: host.target.geo.country_name
+  type: keyword
+  description: Country name.
+  original_fieldset: geo
+- name: host.target.geo.location
+  type: geo_point
+  description: Longitude and latitude.
+  original_fieldset: geo
+- name: host.target.geo.name
+  type: keyword
+  description: User-defined description of a location.
+  original_fieldset: geo
+- name: host.target.geo.postal_code
+  type: keyword
+  description: Postal code.
+  original_fieldset: geo
+- name: host.target.geo.region_iso_code
+  type: keyword
+  description: Region ISO code.
+  original_fieldset: geo
+- name: host.target.geo.region_name
+  type: keyword
+  description: Region name.
+  original_fieldset: geo
+- name: host.target.geo.timezone
+  type: keyword
+  description: Time zone.
+  original_fieldset: geo
+- name: host.target.hostname
+  type: keyword
+  description: Hostname of the host.
+  original_fieldset: host
+- name: host.target.id
+  type: keyword
+  description: Unique host id.
+  original_fieldset: host
+- name: host.target.ip
+  type: ip
+  description: Host ip addresses.
+  original_fieldset: host
+  normalize:
+  - array
+- name: host.target.mac
+  type: keyword
+  description: Host MAC addresses.
+  original_fieldset: host
+  normalize:
+  - array
+- name: host.target.name
+  type: keyword
+  description: Name of the host.
+  original_fieldset: host
+- name: host.target.network.egress.bytes
+  type: long
+  description: The number of bytes sent on all network interfaces.
+  original_fieldset: host
+- name: host.target.network.egress.packets
+  type: long
+  description: The number of packets sent on all network interfaces.
+  original_fieldset: host
+- name: host.target.network.ingress.bytes
+  type: long
+  description: The number of bytes received on all network interfaces.
+  original_fieldset: host
+- name: host.target.network.ingress.packets
+  type: long
+  description: The number of packets received on all network interfaces.
+  original_fieldset: host
+- name: host.target.os.family
+  type: keyword
+  description: OS family (such as redhat, debian, freebsd, windows).
+  original_fieldset: os
+- name: host.target.os.full
+  type: keyword
+  description: Operating system name, including the version or code name.
+  original_fieldset: os
+- name: host.target.os.kernel
+  type: keyword
+  description: Operating system kernel version as a raw string.
+  original_fieldset: os
+- name: host.target.os.name
+  type: keyword
+  description: Operating system name, without the version.
+  original_fieldset: os
+- name: host.target.os.platform
+  type: keyword
+  description: Operating system platform (such centos, ubuntu, windows).
+  original_fieldset: os
+- name: host.target.os.type
+  type: keyword
+  description: 'Which commercial OS family (one of: linux, macos, unix, windows, ios or android).'
+  original_fieldset: os
+- name: host.target.os.version
+  type: keyword
+  description: Operating system version as a raw string.
+  original_fieldset: os
+- name: host.target.pid_ns_ino
+  type: keyword
+  description: Pid namespace inode
+  original_fieldset: host
+- name: host.target.risk.calculated_level
+  type: keyword
+  description: A risk classification level calculated by an internal system as part of entity analytics and entity risk scoring.
+  original_fieldset: risk
+- name: host.target.risk.calculated_score
+  type: float
+  description: A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring.
+  original_fieldset: risk
+- name: host.target.risk.calculated_score_norm
+  type: float
+  description: A normalized risk score calculated by an internal system.
+  original_fieldset: risk
+- name: host.target.risk.static_level
+  type: keyword
+  description: A risk classification level obtained from outside the system, such as from some external Threat Intelligence Platform.
+  original_fieldset: risk
+- name: host.target.risk.static_score
+  type: float
+  description: A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform.
+  original_fieldset: risk
+- name: host.target.risk.static_score_norm
+  type: float
+  description: A normalized risk score calculated by an external system.
+  original_fieldset: risk
+- name: host.target.type
+  type: keyword
+  description: Type of host.
+  original_fieldset: host
+- name: host.target.uptime
+  type: long
+  description: Seconds the host has been up.
+  original_fieldset: host
+- name: host.type
+  type: keyword
+  description: Type of host.
+- name: host.uptime
+  type: long
+  description: Seconds the host has been up.

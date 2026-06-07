@@ -1,0 +1,12 @@
+field: file.x509.subject.organizational_unit
+fieldset: file
+dashed_name: file-x509-subject-organizational-unit
+description: List of organizational units (OU) of subject.
+flat_name: file.x509.subject.organizational_unit
+ignore_above: 1024
+level: extended
+name: subject.organizational_unit
+normalize:
+- array
+original_fieldset: x509
+type: keyword

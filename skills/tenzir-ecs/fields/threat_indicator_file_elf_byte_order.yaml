@@ -1,0 +1,11 @@
+field: threat.indicator.file.elf.byte_order
+fieldset: threat
+dashed_name: threat-indicator-file-elf-byte-order
+description: Byte sequence of ELF file.
+example: Little Endian
+flat_name: threat.indicator.file.elf.byte_order
+ignore_above: 1024
+level: extended
+name: byte_order
+original_fieldset: elf
+type: keyword

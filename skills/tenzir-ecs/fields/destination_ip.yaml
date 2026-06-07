@@ -1,0 +1,8 @@
+field: destination.ip
+fieldset: destination
+dashed_name: destination-ip
+description: IP address of the destination (IPv4 or IPv6).
+flat_name: destination.ip
+level: core
+name: ip
+type: ip

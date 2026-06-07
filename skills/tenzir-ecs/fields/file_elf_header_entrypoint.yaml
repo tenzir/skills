@@ -1,0 +1,10 @@
+field: file.elf.header.entrypoint
+fieldset: file
+dashed_name: file-elf-header-entrypoint
+description: Header entrypoint of the ELF file.
+flat_name: file.elf.header.entrypoint
+format: string
+level: extended
+name: header.entrypoint
+original_fieldset: elf
+type: long

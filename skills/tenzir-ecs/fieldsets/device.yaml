@@ -1,0 +1,47 @@
+fieldset: device
+beta: These fields are in beta and are subject to change.
+description: 'Fields that describe a device instance and its characteristics. Data collected for applications and processes running on a (mobile) device can be enriched with these fields to describe the identity, type and other characteristics of the device.
+
+  This field group definition is based on the Device namespace of the OpenTelemetry Semantic Conventions (https://opentelemetry.io/docs/reference/specification/resource/semantic_conventions/device/).'
+group: 2
+name: device
+prefix: device.
+title: Device
+type: group
+fields:
+- name: device.id
+  type: keyword
+  description: The unique identifier of a device.
+- name: device.manufacturer
+  type: keyword
+  description: The vendor name of the device manufacturer.
+- name: device.model.identifier
+  type: keyword
+  description: The machine readable identifier of the device model.
+- name: device.model.name
+  type: keyword
+  description: The human readable marketing name of the device model.
+- name: device.product.id
+  type: keyword
+  description: ProductID of the device
+  beta: This field is beta and subject to change.
+- name: device.product.name
+  type: keyword
+  description: Product name of the device
+  beta: This field is beta and subject to change.
+- name: device.serial_number
+  type: keyword
+  description: Serial Number of the device
+  beta: This field is beta and subject to change.
+- name: device.type
+  type: keyword
+  description: Device type classification
+  beta: This field is beta and subject to change.
+- name: device.vendor.id
+  type: keyword
+  description: VendorID of the device
+  beta: This field is beta and subject to change.
+- name: device.vendor.name
+  type: keyword
+  description: Vendor name of the device
+  beta: This field is beta and subject to change.

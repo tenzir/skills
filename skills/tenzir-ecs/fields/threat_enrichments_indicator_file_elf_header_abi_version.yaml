@@ -1,0 +1,10 @@
+field: threat.enrichments.indicator.file.elf.header.abi_version
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-elf-header-abi-version
+description: Version of the ELF Application Binary Interface (ABI).
+flat_name: threat.enrichments.indicator.file.elf.header.abi_version
+ignore_above: 1024
+level: extended
+name: header.abi_version
+original_fieldset: elf
+type: keyword

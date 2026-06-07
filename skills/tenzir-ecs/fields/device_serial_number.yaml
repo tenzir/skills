@@ -1,0 +1,11 @@
+field: device.serial_number
+fieldset: device
+beta: This field is beta and subject to change.
+dashed_name: device-serial-number
+description: The unique serial number serves as a distinct identifier for each device, aiding in inventory management and device authentication.
+example: DJGAQS4CW5
+flat_name: device.serial_number
+ignore_above: 1024
+level: core
+name: serial_number
+type: keyword

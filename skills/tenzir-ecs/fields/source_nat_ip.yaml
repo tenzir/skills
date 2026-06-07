@@ -1,0 +1,10 @@
+field: source.nat.ip
+fieldset: source
+dashed_name: source-nat-ip
+description: 'Translated ip of source based NAT sessions (e.g. internal client to internet)
+
+  Typically connections traversing load balancers, firewalls, or routers.'
+flat_name: source.nat.ip
+level: extended
+name: nat.ip
+type: ip

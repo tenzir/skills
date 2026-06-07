@@ -1,0 +1,10 @@
+field: threat.enrichments.indicator.file.hash.ssdeep
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-hash-ssdeep
+description: SSDEEP hash.
+flat_name: threat.enrichments.indicator.file.hash.ssdeep
+ignore_above: 1024
+level: extended
+name: ssdeep
+original_fieldset: hash
+type: keyword

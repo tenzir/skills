@@ -1,0 +1,10 @@
+field: user.risk.static_score
+fieldset: user
+dashed_name: user-risk-static-score
+description: A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform.
+example: 830.0
+flat_name: user.risk.static_score
+level: extended
+name: static_score
+original_fieldset: risk
+type: float

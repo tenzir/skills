@@ -1,0 +1,12 @@
+field: observer.type
+fieldset: observer
+dashed_name: observer-type
+description: 'The type of the observer the data is coming from.
+
+  There is no predefined list of observer types. Some examples are `forwarder`, `firewall`, `ids`, `ips`, `proxy`, `poller`, `sensor`, `APM server`.'
+example: firewall
+flat_name: observer.type
+ignore_above: 1024
+level: core
+name: type
+type: keyword

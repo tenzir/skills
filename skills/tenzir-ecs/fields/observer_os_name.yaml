@@ -1,0 +1,15 @@
+field: observer.os.name
+fieldset: observer
+dashed_name: observer-os-name
+description: Operating system name, without the version.
+example: Mac OS X
+flat_name: observer.os.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: observer.os.name.text
+  name: text
+  type: match_only_text
+name: name
+original_fieldset: os
+type: keyword

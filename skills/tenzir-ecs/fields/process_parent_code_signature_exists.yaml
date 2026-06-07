@@ -1,0 +1,10 @@
+field: process.parent.code_signature.exists
+fieldset: process
+dashed_name: process-parent-code-signature-exists
+description: Boolean to capture if a signature is present.
+example: 'true'
+flat_name: process.parent.code_signature.exists
+level: core
+name: exists
+original_fieldset: code_signature
+type: boolean

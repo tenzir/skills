@@ -1,0 +1,11 @@
+field: observer.egress.interface.alias
+fieldset: observer
+dashed_name: observer-egress-interface-alias
+description: Interface alias as reported by the system, typically used in firewall implementations for e.g. inside, outside, or dmz logical interface naming.
+example: outside
+flat_name: observer.egress.interface.alias
+ignore_above: 1024
+level: extended
+name: alias
+original_fieldset: interface
+type: keyword

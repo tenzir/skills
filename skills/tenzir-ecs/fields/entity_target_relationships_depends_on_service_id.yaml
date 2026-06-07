@@ -1,0 +1,12 @@
+field: entity.target.relationships.depends_on.service.id
+fieldset: entity
+dashed_name: entity-target-relationships-depends-on-service-id
+description: Referenced service ids.
+flat_name: entity.target.relationships.depends_on.service.id
+ignore_above: 1024
+level: extended
+name: service.id
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

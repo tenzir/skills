@@ -1,0 +1,12 @@
+field: agent.ephemeral_id
+fieldset: agent
+dashed_name: agent-ephemeral-id
+description: 'Ephemeral identifier of this agent (if one exists).
+
+  This id normally changes across restarts, but `agent.id` does not.'
+example: 8a4f500f
+flat_name: agent.ephemeral_id
+ignore_above: 1024
+level: extended
+name: ephemeral_id
+type: keyword

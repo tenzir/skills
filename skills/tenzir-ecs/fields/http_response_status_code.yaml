@@ -1,0 +1,13 @@
+field: http.response.status_code
+fieldset: http
+dashed_name: http-response-status-code
+description: HTTP response status code.
+example: 404
+flat_name: http.response.status_code
+format: string
+level: extended
+name: response.status_code
+otel:
+- relation: match
+  stability: stable
+type: long

@@ -1,0 +1,11 @@
+field: client.geo.country_iso_code
+fieldset: client
+dashed_name: client-geo-country-iso-code
+description: Country ISO code.
+example: CA
+flat_name: client.geo.country_iso_code
+ignore_above: 1024
+level: core
+name: country_iso_code
+original_fieldset: geo
+type: keyword

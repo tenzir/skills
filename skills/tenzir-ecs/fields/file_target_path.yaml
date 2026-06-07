@@ -1,0 +1,17 @@
+field: file.target_path
+fieldset: file
+dashed_name: file-target-path
+description: Target path for symlinks.
+flat_name: file.target_path
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: file.target_path.text
+  name: text
+  type: match_only_text
+name: target_path
+otel:
+- attribute: file.symbolic_link.target_path
+  relation: equivalent
+  stability: development
+type: keyword

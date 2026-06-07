@@ -1,0 +1,10 @@
+field: process.elf.sections.type
+fieldset: process
+dashed_name: process-elf-sections-type
+description: ELF Section List type.
+flat_name: process.elf.sections.type
+ignore_above: 1024
+level: extended
+name: sections.type
+original_fieldset: elf
+type: keyword

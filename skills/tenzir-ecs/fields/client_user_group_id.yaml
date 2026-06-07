@@ -1,0 +1,10 @@
+field: client.user.group.id
+fieldset: client
+dashed_name: client-user-group-id
+description: Unique identifier for the group on the system/platform.
+flat_name: client.user.group.id
+ignore_above: 1024
+level: extended
+name: id
+original_fieldset: group
+type: keyword

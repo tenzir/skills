@@ -1,0 +1,11 @@
+field: host.target.geo.country_name
+fieldset: host
+dashed_name: host-target-geo-country-name
+description: Country name.
+example: Canada
+flat_name: host.target.geo.country_name
+ignore_above: 1024
+level: core
+name: country_name
+original_fieldset: geo
+type: keyword

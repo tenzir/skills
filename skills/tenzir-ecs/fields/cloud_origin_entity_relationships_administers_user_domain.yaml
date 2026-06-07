@@ -1,0 +1,12 @@
+field: cloud.origin.entity.relationships.administers.user.domain
+fieldset: cloud
+dashed_name: cloud-origin-entity-relationships-administers-user-domain
+description: Referenced user directory or AD/LDAP domain names (same semantics as ECS `user.domain`).
+flat_name: cloud.origin.entity.relationships.administers.user.domain
+ignore_above: 1024
+level: extended
+name: user.domain
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

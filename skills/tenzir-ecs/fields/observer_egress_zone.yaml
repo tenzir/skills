@@ -1,0 +1,10 @@
+field: observer.egress.zone
+fieldset: observer
+dashed_name: observer-egress-zone
+description: Network zone of outbound traffic as reported by the observer to categorize the destination area of egress traffic, e.g. Internal, External, DMZ, HR, Legal, etc.
+example: Public_Internet
+flat_name: observer.egress.zone
+ignore_above: 1024
+level: extended
+name: egress.zone
+type: keyword

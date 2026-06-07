@@ -1,0 +1,12 @@
+field: log.syslog.severity.name
+fieldset: log
+dashed_name: log-syslog-severity-name
+description: 'The Syslog numeric severity of the log event, if available.
+
+  If the event source publishing via Syslog provides a different severity value (e.g. firewall, IDS), your source''s text severity should go to `log.level`. If the event source does not specify a distinct severity, you can optionally copy the Syslog severity to `log.level`.'
+example: Error
+flat_name: log.syslog.severity.name
+ignore_above: 1024
+level: extended
+name: syslog.severity.name
+type: keyword

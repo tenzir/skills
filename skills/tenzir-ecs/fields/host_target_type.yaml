@@ -1,0 +1,12 @@
+field: host.target.type
+fieldset: host
+dashed_name: host-target-type
+description: 'Type of host.
+
+  For Cloud providers this can be the machine type like `t2.medium`. If vm, this could be the container, for example, or other information meaningful in your environment.'
+flat_name: host.target.type
+ignore_above: 1024
+level: core
+name: type
+original_fieldset: host
+type: keyword

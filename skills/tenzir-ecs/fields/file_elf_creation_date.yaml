@@ -1,0 +1,9 @@
+field: file.elf.creation_date
+fieldset: file
+dashed_name: file-elf-creation-date
+description: Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+flat_name: file.elf.creation_date
+level: extended
+name: creation_date
+original_fieldset: elf
+type: date

@@ -1,0 +1,10 @@
+field: http.request.referrer
+fieldset: http
+dashed_name: http-request-referrer
+description: Referrer for this HTTP request.
+example: https://blog.example.com/
+flat_name: http.request.referrer
+ignore_above: 1024
+level: extended
+name: request.referrer
+type: keyword

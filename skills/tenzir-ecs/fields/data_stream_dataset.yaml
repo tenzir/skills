@@ -1,0 +1,11 @@
+field: data_stream.dataset
+fieldset: data_stream
+dashed_name: data-stream-dataset
+description: "The field can contain anything that makes sense to signify the source of the data.\nExamples include `nginx.access`, `prometheus`, `endpoint` etc. For data streams that otherwise fit, but that do not have dataset set we use the value \"generic\" for the dataset value. `event.dataset` should have the same value as `data_stream.dataset`.\nBeyond the Elasticsearch data stream naming criteria noted above, the `dataset` value has additional restrictions:\n  * Must not contain `-`\n  * No longer than 100 characters"
+example: nginx.access
+flat_name: data_stream.dataset
+level: extended
+name: dataset
+otel:
+- relation: na
+type: constant_keyword

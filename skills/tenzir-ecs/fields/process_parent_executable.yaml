@@ -1,0 +1,15 @@
+field: process.parent.executable
+fieldset: process
+dashed_name: process-parent-executable
+description: Absolute path to the process executable.
+example: /usr/bin/ssh
+flat_name: process.parent.executable
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: process.parent.executable.text
+  name: text
+  type: match_only_text
+name: executable
+original_fieldset: process
+type: keyword

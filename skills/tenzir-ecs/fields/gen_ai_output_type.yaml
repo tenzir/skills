@@ -1,0 +1,14 @@
+field: gen_ai.output.type
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-output-type
+description: Represents the content type requested by the client.
+example: text; json; image
+flat_name: gen_ai.output.type
+ignore_above: 1024
+level: extended
+name: output.type
+otel:
+- relation: match
+  stability: development
+type: keyword

@@ -1,0 +1,10 @@
+field: server.user.email
+fieldset: server
+dashed_name: server-user-email
+description: User email address.
+flat_name: server.user.email
+ignore_above: 1024
+level: extended
+name: email
+original_fieldset: user
+type: keyword

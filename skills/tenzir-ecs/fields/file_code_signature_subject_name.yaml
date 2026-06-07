@@ -1,0 +1,11 @@
+field: file.code_signature.subject_name
+fieldset: file
+dashed_name: file-code-signature-subject-name
+description: Subject name of the code signer
+example: Microsoft Corporation
+flat_name: file.code_signature.subject_name
+ignore_above: 1024
+level: core
+name: subject_name
+original_fieldset: code_signature
+type: keyword

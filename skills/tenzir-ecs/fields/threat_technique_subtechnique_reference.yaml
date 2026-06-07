@@ -1,0 +1,12 @@
+field: threat.technique.subtechnique.reference
+fieldset: threat
+dashed_name: threat-technique-subtechnique-reference
+description: The reference url of subtechnique used by this threat. You can use a MITRE ATT&CK® subtechnique, for example. (ex. https://attack.mitre.org/techniques/T1059/001/)
+example: https://attack.mitre.org/techniques/T1059/001/
+flat_name: threat.technique.subtechnique.reference
+ignore_above: 1024
+level: extended
+name: technique.subtechnique.reference
+normalize:
+- array
+type: keyword

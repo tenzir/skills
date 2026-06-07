@@ -1,0 +1,10 @@
+field: process.entry_leader.attested_groups.name
+fieldset: process
+dashed_name: process-entry-leader-attested-groups-name
+description: Name of the group.
+flat_name: process.entry_leader.attested_groups.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

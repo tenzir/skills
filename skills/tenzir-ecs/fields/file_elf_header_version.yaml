@@ -1,0 +1,10 @@
+field: file.elf.header.version
+fieldset: file
+dashed_name: file-elf-header-version
+description: Version of the ELF header.
+flat_name: file.elf.header.version
+ignore_above: 1024
+level: extended
+name: header.version
+original_fieldset: elf
+type: keyword

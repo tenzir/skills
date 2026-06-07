@@ -1,0 +1,15 @@
+field: cloud.account.id
+fieldset: cloud
+dashed_name: cloud-account-id
+description: 'The cloud account or organization id used to identify different entities in a multi-tenant environment.
+
+  Examples: AWS account id, Google Cloud ORG Id, or other unique identifier.'
+example: 666777888999
+flat_name: cloud.account.id
+ignore_above: 1024
+level: extended
+name: account.id
+otel:
+- relation: match
+  stability: development
+type: keyword

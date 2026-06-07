@@ -1,0 +1,10 @@
+field: threat.indicator.file.hash.sha1
+fieldset: threat
+dashed_name: threat-indicator-file-hash-sha1
+description: SHA1 hash.
+flat_name: threat.indicator.file.hash.sha1
+ignore_above: 1024
+level: extended
+name: sha1
+original_fieldset: hash
+type: keyword

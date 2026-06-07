@@ -1,0 +1,14 @@
+field: related.hosts
+fieldset: related
+dashed_name: related-hosts
+description: All hostnames or other host identifiers seen on your event. Example identifiers include FQDNs, domain names, workstation names, or aliases.
+flat_name: related.hosts
+ignore_above: 1024
+level: extended
+name: hosts
+normalize:
+- array
+otel:
+- relation: na
+synthetic_source_keep: none
+type: keyword

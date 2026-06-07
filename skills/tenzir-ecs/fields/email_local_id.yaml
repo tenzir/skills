@@ -1,0 +1,12 @@
+field: email.local_id
+fieldset: email
+dashed_name: email-local-id
+description: 'Unique identifier given to the email by the source that created the event.
+
+  Identifier is not persistent across hops.'
+example: c26dbea0-80d5-463b-b93c-4e8b708219ce
+flat_name: email.local_id
+ignore_above: 1024
+level: extended
+name: local_id
+type: keyword

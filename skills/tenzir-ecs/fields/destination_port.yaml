@@ -1,0 +1,12 @@
+field: destination.port
+fieldset: destination
+dashed_name: destination-port
+description: Port of the destination.
+flat_name: destination.port
+format: string
+level: core
+name: port
+otel:
+- relation: match
+  stability: development
+type: long

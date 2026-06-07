@@ -1,0 +1,10 @@
+field: process.elf.header.version
+fieldset: process
+dashed_name: process-elf-header-version
+description: Version of the ELF header.
+flat_name: process.elf.header.version
+ignore_above: 1024
+level: extended
+name: header.version
+original_fieldset: elf
+type: keyword

@@ -1,0 +1,16 @@
+field: error.stack_trace
+fieldset: error
+dashed_name: error-stack-trace
+description: The stack trace of this error in plain text.
+flat_name: error.stack_trace
+level: extended
+multi_fields:
+- flat_name: error.stack_trace.text
+  name: text
+  type: match_only_text
+name: stack_trace
+otel:
+- attribute: exception.stacktrace
+  relation: equivalent
+  stability: stable
+type: wildcard

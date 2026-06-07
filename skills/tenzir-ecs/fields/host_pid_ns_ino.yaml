@@ -1,0 +1,10 @@
+field: host.pid_ns_ino
+fieldset: host
+dashed_name: host-pid-ns-ino
+description: This is the inode number of the namespace in the namespace file system (nsfs). Unsigned int inum in include/linux/ns_common.h.
+example: 256383
+flat_name: host.pid_ns_ino
+ignore_above: 1024
+level: extended
+name: pid_ns_ino
+type: keyword

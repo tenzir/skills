@@ -1,0 +1,10 @@
+field: file.hash.tlsh
+fieldset: file
+dashed_name: file-hash-tlsh
+description: TLSH hash.
+flat_name: file.hash.tlsh
+ignore_above: 1024
+level: extended
+name: tlsh
+original_fieldset: hash
+type: keyword

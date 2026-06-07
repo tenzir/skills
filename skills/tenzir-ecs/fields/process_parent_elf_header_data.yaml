@@ -1,0 +1,10 @@
+field: process.parent.elf.header.data
+fieldset: process
+dashed_name: process-parent-elf-header-data
+description: Data table of the ELF header.
+flat_name: process.parent.elf.header.data
+ignore_above: 1024
+level: extended
+name: header.data
+original_fieldset: elf
+type: keyword

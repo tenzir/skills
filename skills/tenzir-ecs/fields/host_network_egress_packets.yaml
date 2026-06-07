@@ -1,0 +1,12 @@
+field: host.network.egress.packets
+fieldset: host
+dashed_name: host-network-egress-packets
+description: The number of packets (gauge) sent out on all network interfaces by the host since the last metric collection.
+flat_name: host.network.egress.packets
+level: extended
+name: network.egress.packets
+otel:
+- metric: system.network.packet.count
+  relation: metric
+  stability: development
+type: long

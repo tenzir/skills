@@ -1,0 +1,9 @@
+field: threat.indicator.file.elf.go_imports
+fieldset: threat
+dashed_name: threat-indicator-file-elf-go-imports
+description: List of imported Go language element names and types.
+flat_name: threat.indicator.file.elf.go_imports
+level: extended
+name: go_imports
+original_fieldset: elf
+type: flattened

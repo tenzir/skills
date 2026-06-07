@@ -1,0 +1,13 @@
+field: email.bcc.address
+fieldset: email
+dashed_name: email-bcc-address
+description: The email address of BCC recipient
+example: bcc.user1@example.com
+flat_name: email.bcc.address
+ignore_above: 1024
+level: extended
+name: bcc.address
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

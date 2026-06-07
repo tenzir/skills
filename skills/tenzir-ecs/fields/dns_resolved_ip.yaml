@@ -1,0 +1,13 @@
+field: dns.resolved_ip
+fieldset: dns
+dashed_name: dns-resolved-ip
+description: 'Array containing all IPs seen in `answers.data`.
+
+  The `answers` array can be difficult to use, because of the variety of data formats it can contain. Extracting all IP addresses seen in there to `dns.resolved_ip` makes it possible to index them as IP addresses, and makes them easier to visualize and query for.'
+example: '["10.10.10.10", "10.10.10.11"]'
+flat_name: dns.resolved_ip
+level: extended
+name: resolved_ip
+normalize:
+- array
+type: ip

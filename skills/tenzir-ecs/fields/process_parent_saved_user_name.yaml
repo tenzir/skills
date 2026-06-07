@@ -1,0 +1,15 @@
+field: process.parent.saved_user.name
+fieldset: process
+dashed_name: process-parent-saved-user-name
+description: Short name or login of the user.
+example: a.einstein
+flat_name: process.parent.saved_user.name
+ignore_above: 1024
+level: core
+multi_fields:
+- flat_name: process.parent.saved_user.name.text
+  name: text
+  type: match_only_text
+name: name
+original_fieldset: user
+type: keyword

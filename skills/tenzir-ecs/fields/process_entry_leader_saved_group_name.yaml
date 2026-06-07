@@ -1,0 +1,10 @@
+field: process.entry_leader.saved_group.name
+fieldset: process
+dashed_name: process-entry-leader-saved-group-name
+description: Name of the group.
+flat_name: process.entry_leader.saved_group.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

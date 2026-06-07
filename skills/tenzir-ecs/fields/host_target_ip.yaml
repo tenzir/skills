@@ -1,0 +1,12 @@
+field: host.target.ip
+fieldset: host
+dashed_name: host-target-ip
+description: Host ip addresses.
+flat_name: host.target.ip
+level: core
+name: ip
+normalize:
+- array
+original_fieldset: host
+synthetic_source_keep: none
+type: ip

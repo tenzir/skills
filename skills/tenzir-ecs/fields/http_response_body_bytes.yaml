@@ -1,0 +1,14 @@
+field: http.response.body.bytes
+fieldset: http
+dashed_name: http-response-body-bytes
+description: Size in bytes of the response body.
+example: 887
+flat_name: http.response.body.bytes
+format: bytes
+level: extended
+name: response.body.bytes
+otel:
+- attribute: http.response.body.size
+  relation: equivalent
+  stability: development
+type: long

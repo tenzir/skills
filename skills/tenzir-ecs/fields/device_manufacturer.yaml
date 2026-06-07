@@ -1,0 +1,13 @@
+field: device.manufacturer
+fieldset: device
+dashed_name: device-manufacturer
+description: The vendor name of the device manufacturer.
+example: Samsung
+flat_name: device.manufacturer
+ignore_above: 1024
+level: extended
+name: manufacturer
+otel:
+- relation: match
+  stability: development
+type: keyword

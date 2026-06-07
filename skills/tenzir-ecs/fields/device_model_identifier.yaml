@@ -1,0 +1,13 @@
+field: device.model.identifier
+fieldset: device
+dashed_name: device-model-identifier
+description: The machine readable identifier of the device model.
+example: SM-G920F
+flat_name: device.model.identifier
+ignore_above: 1024
+level: extended
+name: model.identifier
+otel:
+- relation: match
+  stability: development
+type: keyword

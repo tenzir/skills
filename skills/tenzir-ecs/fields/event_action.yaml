@@ -1,0 +1,12 @@
+field: event.action
+fieldset: event
+dashed_name: event-action
+description: 'The action captured by the event.
+
+  This describes the information in the event. It is more specific than `event.category`. Examples are `group-add`, `process-started`, `file-created`. The value is normally defined by the implementer.'
+example: user-password-change
+flat_name: event.action
+ignore_above: 1024
+level: core
+name: action
+type: keyword

@@ -1,0 +1,13 @@
+field: tls.server.subject
+fieldset: tls
+dashed_name: tls-server-subject
+description: Subject of the x.509 certificate presented by the server.
+example: CN=www.example.com, OU=Infrastructure Team, DC=example, DC=com
+flat_name: tls.server.subject
+ignore_above: 1024
+level: extended
+name: server.subject
+otel:
+- relation: match
+  stability: development
+type: keyword

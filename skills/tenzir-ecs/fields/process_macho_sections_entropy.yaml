@@ -1,0 +1,10 @@
+field: process.macho.sections.entropy
+fieldset: process
+dashed_name: process-macho-sections-entropy
+description: Shannon entropy calculation from the section.
+flat_name: process.macho.sections.entropy
+format: number
+level: extended
+name: sections.entropy
+original_fieldset: macho
+type: long

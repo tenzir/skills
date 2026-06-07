@@ -1,0 +1,9 @@
+field: cloud.instance.name
+fieldset: cloud
+dashed_name: cloud-instance-name
+description: Instance name of the host machine.
+flat_name: cloud.instance.name
+ignore_above: 1024
+level: extended
+name: instance.name
+type: keyword

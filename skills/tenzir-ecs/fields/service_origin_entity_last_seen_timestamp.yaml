@@ -1,0 +1,10 @@
+field: service.origin.entity.last_seen_timestamp
+fieldset: service
+beta: This field is beta and subject to change.
+dashed_name: service-origin-entity-last-seen-timestamp
+description: Indicates the date/time when this entity was last "seen," usually based upon the last event/log that is initiated by this entity.
+flat_name: service.origin.entity.last_seen_timestamp
+level: extended
+name: last_seen_timestamp
+original_fieldset: entity
+type: date

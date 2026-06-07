@@ -1,0 +1,10 @@
+field: file.elf.sections.entropy
+fieldset: file
+dashed_name: file-elf-sections-entropy
+description: Shannon entropy calculation from the section.
+flat_name: file.elf.sections.entropy
+format: number
+level: extended
+name: sections.entropy
+original_fieldset: elf
+type: long

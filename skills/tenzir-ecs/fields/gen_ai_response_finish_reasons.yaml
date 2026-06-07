@@ -1,0 +1,13 @@
+field: gen_ai.response.finish_reasons
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-response-finish-reasons
+description: Array of reasons the model stopped generating tokens, corresponding to each generation received.
+example: '["stop", "length"]'
+flat_name: gen_ai.response.finish_reasons
+level: extended
+name: response.finish_reasons
+otel:
+- relation: match
+  stability: development
+type: nested

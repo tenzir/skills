@@ -1,0 +1,18 @@
+field: message
+fieldset: base
+dashed_name: message
+description: 'For log events the message field contains the log message, optimized for viewing in a log viewer.
+
+  For structured logs without an original message field, other fields can be concatenated to form a human-readable summary of the event.
+
+  If multiple messages exist, they can be combined into one message.'
+example: Hello World
+flat_name: message
+level: core
+name: message
+otel:
+- note: The `body` in OTLP is of type `Any` and can be either an unstructured log message or a structured event.
+  otlp_field: body
+  relation: otlp
+  stability: stable
+type: match_only_text

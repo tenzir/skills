@@ -1,0 +1,9 @@
+field: threat.indicator.scanner_stats
+fieldset: threat
+dashed_name: threat-indicator-scanner-stats
+description: Count of AV/EDR vendors that successfully detected malicious file or URL.
+example: 4
+flat_name: threat.indicator.scanner_stats
+level: extended
+name: indicator.scanner_stats
+type: long

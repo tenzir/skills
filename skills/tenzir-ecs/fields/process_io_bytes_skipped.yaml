@@ -1,0 +1,10 @@
+field: process.io.bytes_skipped
+fieldset: process
+dashed_name: process-io-bytes-skipped
+description: An array of byte offsets and lengths denoting where IO data has been skipped.
+flat_name: process.io.bytes_skipped
+level: extended
+name: io.bytes_skipped
+normalize:
+- array
+type: object

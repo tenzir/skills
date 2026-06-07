@@ -1,0 +1,11 @@
+field: destination.geo.city_name
+fieldset: destination
+dashed_name: destination-geo-city-name
+description: City name.
+example: Montreal
+flat_name: destination.geo.city_name
+ignore_above: 1024
+level: core
+name: city_name
+original_fieldset: geo
+type: keyword

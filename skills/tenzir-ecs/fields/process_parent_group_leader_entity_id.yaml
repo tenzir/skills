@@ -1,0 +1,15 @@
+field: process.parent.group_leader.entity_id
+fieldset: process
+dashed_name: process-parent-group-leader-entity-id
+description: 'Unique identifier for the process.
+
+  The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+
+  Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.'
+example: c2c455d9f99375d
+flat_name: process.parent.group_leader.entity_id
+ignore_above: 1024
+level: extended
+name: entity_id
+original_fieldset: process
+type: keyword

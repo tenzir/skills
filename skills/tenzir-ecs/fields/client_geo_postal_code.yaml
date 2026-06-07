@@ -1,0 +1,13 @@
+field: client.geo.postal_code
+fieldset: client
+dashed_name: client-geo-postal-code
+description: 'Postal code associated with the location.
+
+  Values appropriate for this field may also be known as a postcode or ZIP code and will vary widely from country to country.'
+example: 94040
+flat_name: client.geo.postal_code
+ignore_above: 1024
+level: core
+name: postal_code
+original_fieldset: geo
+type: keyword

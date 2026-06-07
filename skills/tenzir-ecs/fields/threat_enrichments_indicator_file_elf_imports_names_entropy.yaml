@@ -1,0 +1,10 @@
+field: threat.enrichments.indicator.file.elf.imports_names_entropy
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-elf-imports-names-entropy
+description: Shannon entropy calculation from the list of imported element names and types.
+flat_name: threat.enrichments.indicator.file.elf.imports_names_entropy
+format: number
+level: extended
+name: imports_names_entropy
+original_fieldset: elf
+type: long

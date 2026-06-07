@@ -1,0 +1,10 @@
+field: event.risk_score_norm
+fieldset: event
+dashed_name: event-risk-score-norm
+description: 'Normalized risk score or priority of the event, on a scale of 0 to 100.
+
+  This is mainly useful if you use more than one system that assigns risk scores, and you want to see a normalized value across all systems.'
+flat_name: event.risk_score_norm
+level: extended
+name: risk_score_norm
+type: float

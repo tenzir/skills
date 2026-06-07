@@ -1,0 +1,13 @@
+field: tls.server.x509.issuer.country
+fieldset: tls
+dashed_name: tls-server-x509-issuer-country
+description: List of country \(C) codes
+example: US
+flat_name: tls.server.x509.issuer.country
+ignore_above: 1024
+level: extended
+name: issuer.country
+normalize:
+- array
+original_fieldset: x509
+type: keyword

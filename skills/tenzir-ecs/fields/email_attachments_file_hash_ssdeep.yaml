@@ -1,0 +1,10 @@
+field: email.attachments.file.hash.ssdeep
+fieldset: email
+dashed_name: email-attachments-file-hash-ssdeep
+description: SSDEEP hash.
+flat_name: email.attachments.file.hash.ssdeep
+ignore_above: 1024
+level: extended
+name: ssdeep
+original_fieldset: hash
+type: keyword

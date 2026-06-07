@@ -1,0 +1,13 @@
+field: device.model.name
+fieldset: device
+dashed_name: device-model-name
+description: The human readable marketing name of the device model.
+example: Samsung Galaxy S6
+flat_name: device.model.name
+ignore_above: 1024
+level: extended
+name: model.name
+otel:
+- relation: match
+  stability: development
+type: keyword

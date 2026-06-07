@@ -1,0 +1,12 @@
+field: threat.technique.subtechnique.id
+fieldset: threat
+dashed_name: threat-technique-subtechnique-id
+description: The full id of subtechnique used by this threat. You can use a MITRE ATT&CK® subtechnique, for example. (ex. https://attack.mitre.org/techniques/T1059/001/)
+example: T1059.001
+flat_name: threat.technique.subtechnique.id
+ignore_above: 1024
+level: extended
+name: technique.subtechnique.id
+normalize:
+- array
+type: keyword

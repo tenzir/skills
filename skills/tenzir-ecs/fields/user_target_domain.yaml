@@ -1,0 +1,12 @@
+field: user.target.domain
+fieldset: user
+dashed_name: user-target-domain
+description: 'Name of the directory the user is a member of.
+
+  For example, an LDAP or Active Directory domain name.'
+flat_name: user.target.domain
+ignore_above: 1024
+level: extended
+name: domain
+original_fieldset: user
+type: keyword

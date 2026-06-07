@@ -1,0 +1,10 @@
+field: dns.response_code
+fieldset: dns
+dashed_name: dns-response-code
+description: The DNS response code.
+example: NOERROR
+flat_name: dns.response_code
+ignore_above: 1024
+level: extended
+name: response_code
+type: keyword

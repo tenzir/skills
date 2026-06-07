@@ -1,0 +1,11 @@
+field: file.elf.cpu_type
+fieldset: file
+dashed_name: file-elf-cpu-type
+description: CPU type of the ELF file.
+example: Intel
+flat_name: file.elf.cpu_type
+ignore_above: 1024
+level: extended
+name: cpu_type
+original_fieldset: elf
+type: keyword

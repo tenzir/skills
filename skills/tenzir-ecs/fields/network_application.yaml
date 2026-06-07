@@ -1,0 +1,14 @@
+field: network.application
+fieldset: network
+dashed_name: network-application
+description: 'When a specific application or service is identified from network connection details (source/dest IPs, ports, certificates, or wire format), this field captures the application''s or service''s name.
+
+  For example, the original event identifies the network connection being from a specific web service in a `https` network connection, like `facebook` or `twitter`.
+
+  The field value must be normalized to lowercase for querying.'
+example: aim
+flat_name: network.application
+ignore_above: 1024
+level: extended
+name: application
+type: keyword

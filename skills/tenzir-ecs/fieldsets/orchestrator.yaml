@@ -1,0 +1,376 @@
+fieldset: orchestrator
+description: Fields that describe the resources which container orchestrators manage or act upon.
+group: 2
+name: orchestrator
+nestings:
+- orchestrator.entity
+prefix: orchestrator.
+reused_here:
+- full: orchestrator.entity
+  schema_name: entity
+  description: Fields to describe various types of entities across IT environments.
+title: Orchestrator
+type: group
+fields:
+- name: orchestrator.api_version
+  type: keyword
+  description: API version being used to carry out the action
+- name: orchestrator.cluster.id
+  type: keyword
+  description: Unique ID of the cluster.
+- name: orchestrator.cluster.name
+  type: keyword
+  description: Name of the cluster.
+- name: orchestrator.cluster.url
+  type: keyword
+  description: URL of the API used to manage the cluster.
+- name: orchestrator.cluster.version
+  type: keyword
+  description: The version of the cluster.
+- name: orchestrator.entity.attributes.known_redirects
+  type: keyword
+  description: Known redirect URIs or URLs associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.attributes.managed
+  type: boolean
+  description: Indicates whether the entity is managed by an external system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.attributes.mfa_enabled
+  type: boolean
+  description: Indicates whether multi-factor authentication is enabled for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.attributes.oauth_consent_restriction
+  type: keyword
+  description: Restriction applied to OAuth consent for this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.attributes.permissions
+  type: keyword
+  description: Action-level permissions associated with this entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.attributes.storage_class
+  type: keyword
+  description: Storage tier or class assigned to an object storage resource.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.behavior
+  type: object
+  description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.display_name
+  type: keyword
+  description: An optional field used when a pretty name is desired for entity-centric operations.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.id
+  type: keyword
+  description: Unique identifier for the entity.
+  original_fieldset: entity
+- name: orchestrator.entity.last_seen_timestamp
+  type: date
+  description: Indicates the date/time when this entity was last "seen."
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.lifecycle.last_activity
+  type: date
+  description: Timestamp of the most recent action performed by or attributed to this entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.metrics
+  type: object
+  description: Field set for any fields containing numeric entity metrics.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.name
+  type: keyword
+  description: The name of the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.raw
+  type: object
+  description: Original, unmodified fields from the source system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.reference
+  type: keyword
+  description: A URI, URL, or other direct reference to access or locate the entity.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.relationships.administers.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.administers.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.depends_on.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.owns.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.entity.id
+  type: keyword
+  description: Identifiers of referenced entities.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.host.id
+  type: keyword
+  description: Referenced host ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.host.name
+  type: keyword
+  description: Referenced host names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.service.id
+  type: keyword
+  description: Referenced service ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.service.name
+  type: keyword
+  description: Referenced service names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.user.domain
+  type: keyword
+  description: Referenced user directory or AD/LDAP domain names.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.user.email
+  type: keyword
+  description: Referenced user email addresses.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.user.id
+  type: keyword
+  description: Referenced user ids.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.relationships.supervises.user.name
+  type: keyword
+  description: Referenced user short names or logins.
+  original_fieldset: entity_reference
+  normalize:
+  - array
+- name: orchestrator.entity.source
+  type: keyword
+  description: Source module or integration that provided the entity data.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.sub_type
+  type: keyword
+  description: The specific type designation for the entity as defined by its provider or system.
+  original_fieldset: entity
+  beta: This field is beta and subject to change.
+- name: orchestrator.entity.type
+  type: keyword
+  description: Standardized high-level classification of the entity.
+  original_fieldset: entity
+  normalize:
+  - array
+  beta: This field is beta and subject to change.
+- name: orchestrator.namespace
+  type: keyword
+  description: Namespace in which the action is taking place.
+- name: orchestrator.organization
+  type: keyword
+  description: Organization affected by the event (for multi-tenant orchestrator setups).
+- name: orchestrator.resource.annotation
+  type: keyword
+  description: The list of annotations added to the resource.
+  normalize:
+  - array
+- name: orchestrator.resource.id
+  type: keyword
+  description: Unique ID of the resource being acted upon.
+- name: orchestrator.resource.ip
+  type: ip
+  description: IP address assigned to the resource associated with the event being observed.
+  normalize:
+  - array
+- name: orchestrator.resource.label
+  type: keyword
+  description: The list of labels added to the resource.
+  normalize:
+  - array
+- name: orchestrator.resource.name
+  type: keyword
+  description: Name of the resource being acted upon.
+- name: orchestrator.resource.parent.type
+  type: keyword
+  description: Type or kind of the parent resource associated with the event being observed.
+- name: orchestrator.resource.type
+  type: keyword
+  description: Type of resource being acted upon.
+- name: orchestrator.type
+  type: keyword
+  description: Orchestrator cluster type (e.g. kubernetes, nomad or cloudfoundry).

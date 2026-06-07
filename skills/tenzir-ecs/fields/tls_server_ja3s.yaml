@@ -1,0 +1,13 @@
+field: tls.server.ja3s
+fieldset: tls
+dashed_name: tls-server-ja3s
+description: A hash that identifies servers based on how they perform an SSL/TLS handshake.
+example: 394441ab65754e2207b1e1b457b3641d
+flat_name: tls.server.ja3s
+ignore_above: 1024
+level: extended
+name: server.ja3s
+otel:
+- relation: match
+  stability: development
+type: keyword

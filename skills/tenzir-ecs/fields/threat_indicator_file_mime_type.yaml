@@ -1,0 +1,10 @@
+field: threat.indicator.file.mime_type
+fieldset: threat
+dashed_name: threat-indicator-file-mime-type
+description: 'MIME type should identify the format of the file or stream of bytes using IANA official types: https://www.iana.org/assignments/media-types/media-types.xhtml, where possible. When more than one type is applicable, the most specific type should be used.'
+flat_name: threat.indicator.file.mime_type
+ignore_above: 1024
+level: extended
+name: mime_type
+original_fieldset: file
+type: keyword

@@ -1,0 +1,10 @@
+field: server.user.group.id
+fieldset: server
+dashed_name: server-user-group-id
+description: Unique identifier for the group on the system/platform.
+flat_name: server.user.group.id
+ignore_above: 1024
+level: extended
+name: id
+original_fieldset: group
+type: keyword

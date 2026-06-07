@@ -1,0 +1,15 @@
+field: threat.software.alias
+fieldset: threat
+dashed_name: threat-software-alias
+description: 'The alias(es) of the software for a set of related intrusion activity that are tracked by a common name in the security community.
+
+  While not required, you can use a MITRE ATT&CK® associated software description.'
+example: '[ "X-Agent" ]'
+flat_name: threat.software.alias
+ignore_above: 1024
+level: extended
+name: software.alias
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

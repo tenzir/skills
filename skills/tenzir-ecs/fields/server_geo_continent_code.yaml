@@ -1,0 +1,11 @@
+field: server.geo.continent_code
+fieldset: server
+dashed_name: server-geo-continent-code
+description: Two-letter code representing continent's name.
+example: NA
+flat_name: server.geo.continent_code
+ignore_above: 1024
+level: core
+name: continent_code
+original_fieldset: geo
+type: keyword

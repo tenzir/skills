@@ -1,0 +1,15 @@
+field: destination.user.name
+fieldset: destination
+dashed_name: destination-user-name
+description: Short name or login of the user.
+example: a.einstein
+flat_name: destination.user.name
+ignore_above: 1024
+level: core
+multi_fields:
+- flat_name: destination.user.name.text
+  name: text
+  type: match_only_text
+name: name
+original_fieldset: user
+type: keyword

@@ -1,0 +1,11 @@
+field: observer.egress.vlan.name
+fieldset: observer
+dashed_name: observer-egress-vlan-name
+description: Optional VLAN name as reported by the observer.
+example: outside
+flat_name: observer.egress.vlan.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: vlan
+type: keyword

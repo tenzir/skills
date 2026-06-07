@@ -1,0 +1,12 @@
+field: process.code_signature.flags
+fieldset: process
+beta: This field is beta and subject to change.
+dashed_name: process-code-signature-flags
+description: The flags used to sign the process.
+example: 570522385
+flat_name: process.code_signature.flags
+ignore_above: 1024
+level: extended
+name: flags
+original_fieldset: code_signature
+type: keyword

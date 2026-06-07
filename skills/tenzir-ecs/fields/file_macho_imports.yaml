@@ -1,0 +1,11 @@
+field: file.macho.imports
+fieldset: file
+dashed_name: file-macho-imports
+description: List of imported element names and types.
+flat_name: file.macho.imports
+level: extended
+name: imports
+normalize:
+- array
+original_fieldset: macho
+type: flattened

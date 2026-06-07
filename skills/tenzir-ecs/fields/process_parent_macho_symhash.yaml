@@ -1,0 +1,13 @@
+field: process.parent.macho.symhash
+fieldset: process
+dashed_name: process-parent-macho-symhash
+description: 'A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+  This is a Mach-O implementation of the Windows PE imphash'
+example: d3ccf195b62a9279c3c19af1080497ec
+flat_name: process.parent.macho.symhash
+ignore_above: 1024
+level: extended
+name: symhash
+original_fieldset: macho
+type: keyword

@@ -1,0 +1,72 @@
+fieldset: os
+description: The OS fields contain information about the operating system.
+group: 2
+name: os
+prefix: os.
+reusable:
+  expected:
+  - as: os
+    at: observer
+    full: observer.os
+  - as: os
+    at: host
+    full: host.os
+  - as: os
+    at: user_agent
+    full: user_agent.os
+  top_level: false
+title: Operating System
+type: group
+fields:
+- name: os.family
+  type: keyword
+  description: OS family (such as redhat, debian, freebsd, windows).
+  template_field: true
+  example: debian
+  ignore_above: 1024
+- name: os.full
+  type: keyword
+  description: Operating system name, including the version or code name.
+  template_field: true
+  example: Mac OS Mojave
+  multi_fields:
+  - flat_name: os.full.text
+    name: text
+    type: match_only_text
+  ignore_above: 1024
+- name: os.kernel
+  type: keyword
+  description: Operating system kernel version as a raw string.
+  template_field: true
+  example: 4.4.0-112-generic
+  ignore_above: 1024
+- name: os.name
+  type: keyword
+  description: Operating system name, without the version.
+  template_field: true
+  example: Mac OS X
+  multi_fields:
+  - flat_name: os.name.text
+    name: text
+    type: match_only_text
+  ignore_above: 1024
+- name: os.platform
+  type: keyword
+  description: Operating system platform (such centos, ubuntu, windows).
+  template_field: true
+  example: darwin
+  ignore_above: 1024
+- name: os.type
+  type: keyword
+  description: 'Use the `os.type` field to categorize the operating system into one of the broad commercial families.
+
+    If the OS you''re dealing with is not listed as an expected value, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.'
+  template_field: true
+  example: macos
+  ignore_above: 1024
+- name: os.version
+  type: keyword
+  description: Operating system version as a raw string.
+  template_field: true
+  example: 10.14.1
+  ignore_above: 1024

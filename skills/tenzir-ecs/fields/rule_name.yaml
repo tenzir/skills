@@ -1,0 +1,10 @@
+field: rule.name
+fieldset: rule
+dashed_name: rule-name
+description: The name of the rule or signature generating the event.
+example: BLOCK_DNS_over_TLS
+flat_name: rule.name
+ignore_above: 1024
+level: extended
+name: name
+type: keyword

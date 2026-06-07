@@ -1,0 +1,10 @@
+field: observer.vendor
+fieldset: observer
+dashed_name: observer-vendor
+description: Vendor name of the observer.
+example: Symantec
+flat_name: observer.vendor
+ignore_above: 1024
+level: core
+name: vendor
+type: keyword

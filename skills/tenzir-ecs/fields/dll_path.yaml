@@ -1,0 +1,10 @@
+field: dll.path
+fieldset: dll
+dashed_name: dll-path
+description: Full file path of the library.
+example: C:\Windows\System32\kernel32.dll
+flat_name: dll.path
+ignore_above: 1024
+level: extended
+name: path
+type: keyword

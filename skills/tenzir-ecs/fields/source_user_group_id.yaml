@@ -1,0 +1,10 @@
+field: source.user.group.id
+fieldset: source
+dashed_name: source-user-group-id
+description: Unique identifier for the group on the system/platform.
+flat_name: source.user.group.id
+ignore_above: 1024
+level: extended
+name: id
+original_fieldset: group
+type: keyword

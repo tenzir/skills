@@ -1,0 +1,10 @@
+field: file.elf.sections.physical_size
+fieldset: file
+dashed_name: file-elf-sections-physical-size
+description: ELF Section List physical size.
+flat_name: file.elf.sections.physical_size
+format: bytes
+level: extended
+name: sections.physical_size
+original_fieldset: elf
+type: long

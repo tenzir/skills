@@ -1,0 +1,11 @@
+field: threat.indicator.url.port
+fieldset: threat
+dashed_name: threat-indicator-url-port
+description: Port of the request, such as 443.
+example: 443
+flat_name: threat.indicator.url.port
+format: string
+level: extended
+name: port
+original_fieldset: url
+type: long
