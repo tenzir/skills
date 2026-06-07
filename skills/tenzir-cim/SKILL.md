@@ -38,8 +38,12 @@ base fields `_time`, `host`, `source`, and `sourcetype`.
 - Use [data/fields.yaml](data/fields.yaml) to find field-specific files.
 - Use `data/fields/<field>.yaml` to inspect lookup links and where a field is declared or calculated across models and datasets.
 - Use [data/lookups.yaml](data/lookups.yaml) and `data/lookups/<lookup>.yaml` for lookup-backed values, translations, and enrichments.
-- Use [docs/index.yaml](docs/index.yaml) and `docs/pages/*.md` for Splunk CIM 8.5 prose guidance.
+- Use [docs/index.md](docs/index.md) and `docs/pages/*.md` for Splunk CIM 8.5 workflow guidance, examples, and explanatory prose.
 - Use [source.md](source.md) for provenance and generation counts.
+
+Treat `docs/` as additional context only. Do not use docs pages as the
+authority for fields, tags, constraints, datasets, or lookup values when a
+generated `data/` file exists.
 
 ## Mapping rules
 
@@ -66,5 +70,5 @@ base fields `_time`, `host`, `source`, and `sourcetype`.
 - What fields does a dataset include? `fields` in `data/models/<model>.yaml`.
 - What does field X mean? [data/fields.yaml](data/fields.yaml), then `data/fields/<field>.yaml`.
 - What values are expected for a field? Field `expected_values`, then [data/lookups.yaml](data/lookups.yaml).
-- What does Splunk say about CIM workflows? [docs/index.yaml](docs/index.yaml).
+- What does Splunk say about CIM workflows? [docs/index.md](docs/index.md).
 - What source produced this skill? [source.md](source.md).

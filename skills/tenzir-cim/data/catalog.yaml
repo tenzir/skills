@@ -216,7 +216,7 @@ base_fields:
 indexes:
   fields: data/fields.yaml
   lookups: data/lookups.yaml
-  docs: docs/index.yaml
+  docs: docs/index.md
 source:
   app_name: Splunk_SA_CIM
   app_version: 8.5.0
