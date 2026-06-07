@@ -1,10 +1,6 @@
 name: cim_endpoint_statuses
-columns:
-- status
-rows:
-- status: success
-- status: failure
-- status: deferred
-transforms:
-- name: cim_endpoint_status_lookup
-  filename: cim_endpoint_statuses.csv
+field: status
+values:
+- success
+- failure
+- deferred

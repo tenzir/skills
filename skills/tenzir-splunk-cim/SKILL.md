@@ -20,8 +20,9 @@ datasets can use the base fields `_time`, `host`, `source`, and `sourcetype`.
   `base`, `declared`, `calculated`, or `inherited`.
 - *Calculated field entries* include a `calculation` block because they create
   or normalize fields at search time.
-- *Lookup files* document many expected value sets, such as actions, protocols,
-  HTTP statuses, DNS reply codes, endpoint statuses, and severities.
+- *Lookup files* document expected values, translations, and enrichments, such
+  as actions, protocols, HTTP statuses, DNS reply codes, endpoint statuses, and
+  severities.
 
 ## Data files
 
@@ -29,7 +30,7 @@ datasets can use the base fields `_time`, `host`, `source`, and `sourcetype`.
 - Use `data/models/<model>.yaml` to inspect datasets, tags, constraints, and the effective `fields` map for one CIM data model.
 - Use [data/fields.yaml](data/fields.yaml) to find field-specific files.
 - Use `data/fields/<field>.yaml` to inspect lookup links and where a field is declared or calculated across models and datasets.
-- Use [data/lookups.yaml](data/lookups.yaml) and `data/lookups/<lookup>.yaml` for lookup-backed value lists.
+- Use [data/lookups.yaml](data/lookups.yaml) and `data/lookups/<lookup>.yaml` for lookup-backed values, translations, and enrichments.
 - Use [docs/index.yaml](docs/index.yaml) and `docs/pages/*.md` for Splunk CIM 8.5 prose guidance.
 - Use [source.md](source.md) for provenance and generation counts.
 
@@ -46,8 +47,8 @@ datasets can use the base fields `_time`, `host`, `source`, and `sourcetype`.
   underlying source fields needed by those calculations when possible.
 - Prefer specific fields such as `src_ip`, `dest_ip`, `user`, `signature`, or
   `vendor_product` over broad fields when the data source provides them.
-- Use lookup files to normalize values when a lookup documents the value set for
-  a field.
+- Use lookup files to normalize, translate, or enrich values when a lookup
+  documents semantics for a field.
 - Preserve source-specific details outside CIM fields when the app-derived
   reference has no normalized CIM field.
 

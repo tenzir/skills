@@ -1,11 +1,6 @@
 name: cim_http_statuses
-columns:
-- status
-- status_action
-- status_description
-- status_reference
-- status_type
-rows:
+key: status
+entries:
 - status: '100'
   status_action: allowed
   status_description: Continue
@@ -621,6 +616,3 @@ rows:
   status_description: Unknown
   status_reference: ''
   status_type: Server Error
-transforms:
-- name: cim_http_status_lookup
-  filename: cim_http_statuses.csv

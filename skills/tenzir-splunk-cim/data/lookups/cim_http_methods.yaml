@@ -1,24 +1,11 @@
 name: cim_http_methods
-columns:
-- http_method
-- is_visible
-rows:
-- http_method: OPTIONS
-  is_visible: 'false'
-- http_method: GET
-  is_visible: 'true'
-- http_method: HEAD
-  is_visible: 'false'
-- http_method: POST
-  is_visible: 'true'
-- http_method: PUT
-  is_visible: 'false'
-- http_method: DELETE
-  is_visible: 'false'
-- http_method: TRACE
-  is_visible: 'false'
-- http_method: CONNECT
-  is_visible: 'false'
-transforms:
-- name: cim_http_method_lookup
-  filename: cim_http_methods.csv
+field: http_method
+values:
+- OPTIONS
+- GET
+- HEAD
+- POST
+- PUT
+- DELETE
+- TRACE
+- CONNECT

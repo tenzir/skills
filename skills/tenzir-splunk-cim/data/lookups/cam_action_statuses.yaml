@@ -1,9 +1,5 @@
 name: cam_action_statuses
-columns:
-- action_status
-rows:
-- action_status: success
-- action_status: failure
-transforms:
-- name: cam_action_status_lookup
-  filename: cam_action_statuses.csv
+field: action_status
+values:
+- success
+- failure

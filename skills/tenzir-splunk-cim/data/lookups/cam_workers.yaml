@@ -1,10 +1,7 @@
 name: cam_workers
-columns:
-- worker_set
-- cam_workers
-rows:
-- worker_set: local
-  cam_workers: '["local"]'
-transforms:
-- name: cam_worker_lookup
-  filename: cam_workers.csv
+key: worker_set
+maps_to: cam_workers
+mappings:
+- from: local
+  to:
+  - local

@@ -133,13 +133,6 @@ def read_splunk_conf(path: Path) -> dict[str, dict[str, object]]:
     return stanzas
 
 
-def normalize_lookup_filename(value: str) -> str:
-    value = Path(value).name
-    if value.endswith(".default"):
-        value = value[: -len(".default")]
-    return value
-
-
 def data_model_path(name: str) -> str:
     return f"data/models/{to_slug(name)}.yaml"
 
@@ -195,19 +188,93 @@ def app_version(app_conf: dict[str, dict[str, object]], manifest: dict[str, Any]
     return str(manifest.get("info", {}).get("id", {}).get("version", ""))
 
 
-def parse_lookup_files(app_dir: Path, transforms: dict[str, dict[str, object]]) -> tuple[list[dict[str, Any]], dict[str, list[dict[str, str]]]]:
-    transform_by_filename: dict[str, list[dict[str, str]]] = defaultdict(list)
-    for name, stanza in transforms.items():
-        filename = stanza.get("filename")
-        if not filename:
+def lookup_value(value: object) -> object:
+    if value is None:
+        return ""
+    value = str(value).strip()
+    if value.casefold() == "true":
+        return True
+    if value.casefold() == "false":
+        return False
+    if value.startswith(("[", "{")):
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            return value
+    return value
+
+
+def lookup_row(row: dict[str, str]) -> dict[str, object]:
+    return {key: lookup_value(value) for key, value in row.items()}
+
+
+def lookup_values(rows: list[dict[str, str]], field: str) -> list[object]:
+    values: list[object] = []
+    seen: set[tuple[str, str]] = set()
+    for row in rows:
+        normalized = lookup_value(row.get(field, ""))
+        if normalized == "":
             continue
-        transform_by_filename[normalize_lookup_filename(str(filename))].append(
-            {
-                "name": name,
-                "filename": normalize_lookup_filename(str(filename)),
-            }
+        key = (type(normalized).__name__, json.dumps(normalized, sort_keys=True))
+        if key in seen:
+            continue
+        seen.add(key)
+        values.append(normalized)
+    return values
+
+
+def lookup_data(record: dict[str, Any]) -> dict[str, Any]:
+    columns = record["columns"]
+    rows = record["rows"]
+    if not columns:
+        return {
+            "name": record["name"],
+        }
+
+    if len(columns) == 1 or (len(columns) == 2 and columns[1] == "is_visible"):
+        field = columns[0]
+        return compact_mapping(
+            (
+                ("name", record["name"]),
+                ("field", field),
+                ("values", lookup_values(rows, field)),
+            )
         )
 
+    key = columns[0]
+    if len(columns) == 2:
+        target = columns[1]
+        mappings = []
+        for row in rows:
+            source_value = lookup_value(row.get(key, ""))
+            if source_value == "":
+                continue
+            mappings.append(
+                {
+                    "from": source_value,
+                    "to": lookup_value(row.get(target, "")),
+                }
+            )
+        return compact_mapping(
+            (
+                ("name", record["name"]),
+                ("key", key),
+                ("maps_to", target),
+                ("mappings", mappings),
+            )
+        )
+
+    return compact_mapping(
+        (
+            ("name", record["name"]),
+            ("key", key),
+            ("fields", columns if not rows else []),
+            ("entries", [lookup_row(row) for row in rows if lookup_value(row.get(key, "")) != ""]),
+        )
+    )
+
+
+def parse_lookup_files(app_dir: Path) -> tuple[list[dict[str, Any]], dict[str, list[dict[str, str]]]]:
     lookup_records: list[dict[str, Any]] = []
     field_to_lookups: dict[str, list[dict[str, str]]] = defaultdict(list)
     for path in sorted((app_dir / "lookups").glob("*"), key=lambda item: item.name.casefold()):
@@ -220,20 +287,17 @@ def parse_lookup_files(app_dir: Path, transforms: dict[str, dict[str, object]]) 
             lookup_name = lookup_name[: -len(".csv.default")]
         elif lookup_name.endswith(".csv"):
             lookup_name = lookup_name[: -len(".csv")]
-        canonical_filename = normalize_lookup_filename(path.name)
         text = path.read_text(encoding="utf-8")
         rows = list(csv.DictReader(text.splitlines())) if text.strip() else []
         columns = list(rows[0].keys()) if rows else []
         if not columns and text.strip():
             reader = csv.reader(text.splitlines())
             columns = next(reader, [])
-        transforms_for_lookup = transform_by_filename.get(canonical_filename, [])
         record = {
             "name": lookup_name,
             "file": data_lookup_path(lookup_name),
             "columns": columns,
             "rows": rows,
-            "transforms": transforms_for_lookup,
         }
         lookup_records.append(record)
         for column in columns:
@@ -786,8 +850,9 @@ datasets can use the base fields `_time`, `host`, `source`, and `sourcetype`.
   `base`, `declared`, `calculated`, or `inherited`.
 - *Calculated field entries* include a `calculation` block because they create
   or normalize fields at search time.
-- *Lookup files* document many expected value sets, such as actions, protocols,
-  HTTP statuses, DNS reply codes, endpoint statuses, and severities.
+- *Lookup files* document expected values, translations, and enrichments, such
+  as actions, protocols, HTTP statuses, DNS reply codes, endpoint statuses, and
+  severities.
 
 ## Data files
 
@@ -795,7 +860,7 @@ datasets can use the base fields `_time`, `host`, `source`, and `sourcetype`.
 - Use `data/models/<model>.yaml` to inspect datasets, tags, constraints, and the effective `fields` map for one CIM data model.
 - Use [data/fields.yaml](data/fields.yaml) to find field-specific files.
 - Use `data/fields/<field>.yaml` to inspect lookup links and where a field is declared or calculated across models and datasets.
-- Use [data/lookups.yaml](data/lookups.yaml) and `data/lookups/<lookup>.yaml` for lookup-backed value lists.
+- Use [data/lookups.yaml](data/lookups.yaml) and `data/lookups/<lookup>.yaml` for lookup-backed values, translations, and enrichments.
 - Use [docs/index.yaml](docs/index.yaml) and `docs/pages/*.md` for Splunk CIM {docs_version or "8.5"} prose guidance.
 - Use [source.md](source.md) for provenance and generation counts.
 
@@ -812,8 +877,8 @@ datasets can use the base fields `_time`, `host`, `source`, and `sourcetype`.
   underlying source fields needed by those calculations when possible.
 - Prefer specific fields such as `src_ip`, `dest_ip`, `user`, `signature`, or
   `vendor_product` over broad fields when the data source provides them.
-- Use lookup files to normalize values when a lookup documents the value set for
-  a field.
+- Use lookup files to normalize, translate, or enrich values when a lookup
+  documents semantics for a field.
 - Preserve source-specific details outside CIM fields when the app-derived
   reference has no normalized CIM field.
 
@@ -878,13 +943,12 @@ Raw app source files are not copied wholesale. The generated files preserve the 
 def generate(app_dir: Path, output_dir: Path, docs_url: str) -> None:
     manifest = read_json(app_dir / "app.manifest")
     app_conf = read_splunk_conf(app_dir / "default" / "app.conf")
-    transforms = read_splunk_conf(app_dir / "default" / "transforms.conf")
     app_version_value = app_version(app_conf, manifest)
 
     docs_pages, manual_pdf_url = fetch_docs(docs_url)
     docs_version = next((page.version for page in docs_pages if page.version), "")
 
-    lookup_records, field_to_lookups = parse_lookup_files(app_dir, transforms)
+    lookup_records, field_to_lookups = parse_lookup_files(app_dir)
 
     model_records: list[dict[str, Any]] = []
     field_occurrences_by_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -1030,13 +1094,7 @@ def generate(app_dir: Path, output_dir: Path, docs_url: str) -> None:
         dump_yaml({record["name"]: record["file"] for record in lookup_records}),
     )
     for record in lookup_records:
-        lookup_data = {
-            "name": record["name"],
-            "columns": record["columns"],
-            "rows": record["rows"],
-            "transforms": record["transforms"],
-        }
-        write_file(staging_dir / record["file"], dump_yaml(lookup_data))
+        write_file(staging_dir / record["file"], dump_yaml(lookup_data(record)))
 
     write_file(
         staging_dir / "docs" / "index.yaml",

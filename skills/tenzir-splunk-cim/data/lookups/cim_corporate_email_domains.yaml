@@ -1,8 +1,4 @@
 name: cim_corporate_email_domains
-columns:
-- domain
-rows:
-- domain: '*acmetech.com'
-transforms:
-- name: cim_corporate_email_domain_lookup
-  filename: cim_corporate_email_domains.csv
+field: domain
+values:
+- '*acmetech.com'

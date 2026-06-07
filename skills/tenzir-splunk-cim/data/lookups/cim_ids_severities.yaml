@@ -1,12 +1,8 @@
 name: cim_ids_severities
-columns:
-- severity
-rows:
-- severity: critical
-- severity: high
-- severity: medium
-- severity: low
-- severity: informational
-transforms:
-- name: cim_ids_severity_lookup
-  filename: cim_ids_severities.csv
+field: severity
+values:
+- critical
+- high
+- medium
+- low
+- informational

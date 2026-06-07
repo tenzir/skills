@@ -1,652 +1,646 @@
 name: cim_dns_reply_codes2
-columns:
-- reply_code_id
-- reply_code
-rows:
-- reply_code_id: '0'
-  reply_code: No Error
-- reply_code_id: NoError
-  reply_code: No Error
-- reply_code_id: No Error
-  reply_code: No Error
-- reply_code_id: '1'
-  reply_code: Format Error
-- reply_code_id: FormErr
-  reply_code: Format Error
-- reply_code_id: Format Error
-  reply_code: Format Error
-- reply_code_id: '2'
-  reply_code: Server Failure
-- reply_code_id: ServFail
-  reply_code: Server Failure
-- reply_code_id: Server Failure
-  reply_code: Server Failure
-- reply_code_id: '3'
-  reply_code: Non-Existent Domain
-- reply_code_id: NXDomain
-  reply_code: Non-Existent Domain
-- reply_code_id: Non-Existent Domain
-  reply_code: Non-Existent Domain
-- reply_code_id: '4'
-  reply_code: Not Implemented
-- reply_code_id: NotImp
-  reply_code: Not Implemented
-- reply_code_id: Not Implemented
-  reply_code: Not Implemented
-- reply_code_id: '5'
-  reply_code: Query Refused
-- reply_code_id: Refused
-  reply_code: Query Refused
-- reply_code_id: Query Refused
-  reply_code: Query Refused
-- reply_code_id: '6'
-  reply_code: Name Exists when it should not
-- reply_code_id: YXDomain
-  reply_code: Name Exists when it should not
-- reply_code_id: Name Exists when it should not
-  reply_code: Name Exists when it should not
-- reply_code_id: '7'
-  reply_code: RR Set Exists when it should not
-- reply_code_id: YXRRSet
-  reply_code: RR Set Exists when it should not
-- reply_code_id: RR Set Exists when it should not
-  reply_code: RR Set Exists when it should not
-- reply_code_id: '8'
-  reply_code: RR Set that should exist does not
-- reply_code_id: NXRRSet
-  reply_code: RR Set that should exist does not
-- reply_code_id: RR Set that should exist does not
-  reply_code: RR Set that should exist does not
-- reply_code_id: '9'
-  reply_code: Not Authorized
-- reply_code_id: NotAuth
-  reply_code: Not Authorized
-- reply_code_id: Not Authorized
-  reply_code: Not Authorized
-- reply_code_id: '10'
-  reply_code: Name not contained in zone
-- reply_code_id: NotZone
-  reply_code: Name not contained in zone
-- reply_code_id: Name not contained in zone
-  reply_code: Name not contained in zone
-- reply_code_id: '11'
-  reply_code: Unassigned
-- reply_code_id: '12'
-  reply_code: Unassigned
-- reply_code_id: '13'
-  reply_code: Unassigned
-- reply_code_id: '14'
-  reply_code: Unassigned
-- reply_code_id: '15'
-  reply_code: Unassigned
-- reply_code_id: Unassigned
-  reply_code: Unassigned
-- reply_code_id: BADVERS
-  reply_code: Bad OPT Version
-- reply_code_id: Bad OPT Version
-  reply_code: Bad OPT Version
-- reply_code_id: '16'
-  reply_code: TSIG Signature Failure
-- reply_code_id: BADSIG
-  reply_code: TSIG Signature Failure
-- reply_code_id: TSIG Signature Failure
-  reply_code: TSIG Signature Failure
-- reply_code_id: '17'
-  reply_code: Key not recognized
-- reply_code_id: BADKEY
-  reply_code: Key not recognized
-- reply_code_id: Key not recognized
-  reply_code: Key not recognized
-- reply_code_id: '18'
-  reply_code: Signature out of time window
-- reply_code_id: BADTIME
-  reply_code: Signature out of time window
-- reply_code_id: Signature out of time window
-  reply_code: Signature out of time window
-- reply_code_id: '19'
-  reply_code: Bad TKEY Mode
-- reply_code_id: BADMODE
-  reply_code: Bad TKEY Mode
-- reply_code_id: Bad TKEY Mode
-  reply_code: Bad TKEY Mode
-- reply_code_id: '20'
-  reply_code: Duplicate key name
-- reply_code_id: BADNAME
-  reply_code: Duplicate key name
-- reply_code_id: Duplicate key name
-  reply_code: Duplicate key name
-- reply_code_id: '21'
-  reply_code: Algorithm not supported
-- reply_code_id: BADALG
-  reply_code: Algorithm not supported
-- reply_code_id: Algorithm not supported
-  reply_code: Algorithm not supported
-- reply_code_id: '22'
-  reply_code: Bad Truncation
-- reply_code_id: BADTRUNC
-  reply_code: Bad Truncation
-- reply_code_id: Bad Truncation
-  reply_code: Bad Truncation
-- reply_code_id: '3841'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3842'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3843'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3844'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3845'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3846'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3847'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3848'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3849'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3850'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3851'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3852'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3853'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3854'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3855'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3856'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3857'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3858'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3859'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3860'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3861'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3862'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3863'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3864'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3865'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3866'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3867'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3868'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3869'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3870'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3871'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3872'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3873'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3874'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3875'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3876'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3877'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3878'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3879'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3880'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3881'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3882'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3883'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3884'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3885'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3886'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3887'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3888'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3889'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3890'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3891'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3892'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3893'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3894'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3895'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3896'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3897'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3898'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3899'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3900'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3901'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3902'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3903'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3904'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3905'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3906'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3907'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3908'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3909'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3910'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3911'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3912'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3913'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3914'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3915'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3916'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3917'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3918'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3919'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3920'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3921'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3922'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3923'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3924'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3925'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3926'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3927'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3928'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3929'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3930'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3931'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3932'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3933'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3934'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3935'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3936'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3937'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3938'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3939'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3940'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3941'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3942'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3943'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3944'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3945'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3946'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3947'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3948'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3949'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3950'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3951'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3952'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3953'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3954'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3955'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3956'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3957'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3958'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3959'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3960'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3961'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3962'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3963'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3964'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3965'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3966'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3967'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3968'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3969'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3970'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3971'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3972'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3973'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3974'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3975'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3976'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3977'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3978'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3979'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3980'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3981'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3982'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3983'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3984'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3985'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3986'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3987'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3988'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3989'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3990'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3991'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3992'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3993'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3994'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3995'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3996'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3997'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3998'
-  reply_code: Reserved for Private Use
-- reply_code_id: '3999'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4000'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4001'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4002'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4003'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4004'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4005'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4006'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4007'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4008'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4009'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4010'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4011'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4012'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4013'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4014'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4015'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4016'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4017'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4018'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4019'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4020'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4021'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4022'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4023'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4024'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4025'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4026'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4027'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4028'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4029'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4030'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4031'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4032'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4033'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4034'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4035'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4036'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4037'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4038'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4039'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4040'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4041'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4042'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4043'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4044'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4045'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4046'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4047'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4048'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4049'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4050'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4051'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4052'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4053'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4054'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4055'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4056'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4057'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4058'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4059'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4060'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4061'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4062'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4063'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4064'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4065'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4066'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4067'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4068'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4069'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4070'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4071'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4072'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4073'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4074'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4075'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4076'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4077'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4078'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4079'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4080'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4081'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4082'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4083'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4084'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4085'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4086'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4087'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4088'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4089'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4090'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4091'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4092'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4093'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4094'
-  reply_code: Reserved for Private Use
-- reply_code_id: '4095'
-  reply_code: Reserved for Private Use
-- reply_code_id: Reserved for Private Use
-  reply_code: Reserved for Private Use
-- reply_code_id: '65535'
-  reply_code: Reserved; can only be allocated by Standards Action
-- reply_code_id: Reserved; can only be allocated by Standards Action
-  reply_code: Reserved; can only be allocated by Standards Action
-- reply_code_id: Reserved; can only be allocated by Standards Action.
-  reply_code: Reserved; can only be allocated by Standards Action
-- reply_code_id: '                          '
-  reply_code: null
-transforms:
-- name: cim_dns_reply_code_lookup
-  filename: cim_dns_reply_codes2.csv
+key: reply_code_id
+maps_to: reply_code
+mappings:
+- from: '0'
+  to: No Error
+- from: NoError
+  to: No Error
+- from: No Error
+  to: No Error
+- from: '1'
+  to: Format Error
+- from: FormErr
+  to: Format Error
+- from: Format Error
+  to: Format Error
+- from: '2'
+  to: Server Failure
+- from: ServFail
+  to: Server Failure
+- from: Server Failure
+  to: Server Failure
+- from: '3'
+  to: Non-Existent Domain
+- from: NXDomain
+  to: Non-Existent Domain
+- from: Non-Existent Domain
+  to: Non-Existent Domain
+- from: '4'
+  to: Not Implemented
+- from: NotImp
+  to: Not Implemented
+- from: Not Implemented
+  to: Not Implemented
+- from: '5'
+  to: Query Refused
+- from: Refused
+  to: Query Refused
+- from: Query Refused
+  to: Query Refused
+- from: '6'
+  to: Name Exists when it should not
+- from: YXDomain
+  to: Name Exists when it should not
+- from: Name Exists when it should not
+  to: Name Exists when it should not
+- from: '7'
+  to: RR Set Exists when it should not
+- from: YXRRSet
+  to: RR Set Exists when it should not
+- from: RR Set Exists when it should not
+  to: RR Set Exists when it should not
+- from: '8'
+  to: RR Set that should exist does not
+- from: NXRRSet
+  to: RR Set that should exist does not
+- from: RR Set that should exist does not
+  to: RR Set that should exist does not
+- from: '9'
+  to: Not Authorized
+- from: NotAuth
+  to: Not Authorized
+- from: Not Authorized
+  to: Not Authorized
+- from: '10'
+  to: Name not contained in zone
+- from: NotZone
+  to: Name not contained in zone
+- from: Name not contained in zone
+  to: Name not contained in zone
+- from: '11'
+  to: Unassigned
+- from: '12'
+  to: Unassigned
+- from: '13'
+  to: Unassigned
+- from: '14'
+  to: Unassigned
+- from: '15'
+  to: Unassigned
+- from: Unassigned
+  to: Unassigned
+- from: BADVERS
+  to: Bad OPT Version
+- from: Bad OPT Version
+  to: Bad OPT Version
+- from: '16'
+  to: TSIG Signature Failure
+- from: BADSIG
+  to: TSIG Signature Failure
+- from: TSIG Signature Failure
+  to: TSIG Signature Failure
+- from: '17'
+  to: Key not recognized
+- from: BADKEY
+  to: Key not recognized
+- from: Key not recognized
+  to: Key not recognized
+- from: '18'
+  to: Signature out of time window
+- from: BADTIME
+  to: Signature out of time window
+- from: Signature out of time window
+  to: Signature out of time window
+- from: '19'
+  to: Bad TKEY Mode
+- from: BADMODE
+  to: Bad TKEY Mode
+- from: Bad TKEY Mode
+  to: Bad TKEY Mode
+- from: '20'
+  to: Duplicate key name
+- from: BADNAME
+  to: Duplicate key name
+- from: Duplicate key name
+  to: Duplicate key name
+- from: '21'
+  to: Algorithm not supported
+- from: BADALG
+  to: Algorithm not supported
+- from: Algorithm not supported
+  to: Algorithm not supported
+- from: '22'
+  to: Bad Truncation
+- from: BADTRUNC
+  to: Bad Truncation
+- from: Bad Truncation
+  to: Bad Truncation
+- from: '3841'
+  to: Reserved for Private Use
+- from: '3842'
+  to: Reserved for Private Use
+- from: '3843'
+  to: Reserved for Private Use
+- from: '3844'
+  to: Reserved for Private Use
+- from: '3845'
+  to: Reserved for Private Use
+- from: '3846'
+  to: Reserved for Private Use
+- from: '3847'
+  to: Reserved for Private Use
+- from: '3848'
+  to: Reserved for Private Use
+- from: '3849'
+  to: Reserved for Private Use
+- from: '3850'
+  to: Reserved for Private Use
+- from: '3851'
+  to: Reserved for Private Use
+- from: '3852'
+  to: Reserved for Private Use
+- from: '3853'
+  to: Reserved for Private Use
+- from: '3854'
+  to: Reserved for Private Use
+- from: '3855'
+  to: Reserved for Private Use
+- from: '3856'
+  to: Reserved for Private Use
+- from: '3857'
+  to: Reserved for Private Use
+- from: '3858'
+  to: Reserved for Private Use
+- from: '3859'
+  to: Reserved for Private Use
+- from: '3860'
+  to: Reserved for Private Use
+- from: '3861'
+  to: Reserved for Private Use
+- from: '3862'
+  to: Reserved for Private Use
+- from: '3863'
+  to: Reserved for Private Use
+- from: '3864'
+  to: Reserved for Private Use
+- from: '3865'
+  to: Reserved for Private Use
+- from: '3866'
+  to: Reserved for Private Use
+- from: '3867'
+  to: Reserved for Private Use
+- from: '3868'
+  to: Reserved for Private Use
+- from: '3869'
+  to: Reserved for Private Use
+- from: '3870'
+  to: Reserved for Private Use
+- from: '3871'
+  to: Reserved for Private Use
+- from: '3872'
+  to: Reserved for Private Use
+- from: '3873'
+  to: Reserved for Private Use
+- from: '3874'
+  to: Reserved for Private Use
+- from: '3875'
+  to: Reserved for Private Use
+- from: '3876'
+  to: Reserved for Private Use
+- from: '3877'
+  to: Reserved for Private Use
+- from: '3878'
+  to: Reserved for Private Use
+- from: '3879'
+  to: Reserved for Private Use
+- from: '3880'
+  to: Reserved for Private Use
+- from: '3881'
+  to: Reserved for Private Use
+- from: '3882'
+  to: Reserved for Private Use
+- from: '3883'
+  to: Reserved for Private Use
+- from: '3884'
+  to: Reserved for Private Use
+- from: '3885'
+  to: Reserved for Private Use
+- from: '3886'
+  to: Reserved for Private Use
+- from: '3887'
+  to: Reserved for Private Use
+- from: '3888'
+  to: Reserved for Private Use
+- from: '3889'
+  to: Reserved for Private Use
+- from: '3890'
+  to: Reserved for Private Use
+- from: '3891'
+  to: Reserved for Private Use
+- from: '3892'
+  to: Reserved for Private Use
+- from: '3893'
+  to: Reserved for Private Use
+- from: '3894'
+  to: Reserved for Private Use
+- from: '3895'
+  to: Reserved for Private Use
+- from: '3896'
+  to: Reserved for Private Use
+- from: '3897'
+  to: Reserved for Private Use
+- from: '3898'
+  to: Reserved for Private Use
+- from: '3899'
+  to: Reserved for Private Use
+- from: '3900'
+  to: Reserved for Private Use
+- from: '3901'
+  to: Reserved for Private Use
+- from: '3902'
+  to: Reserved for Private Use
+- from: '3903'
+  to: Reserved for Private Use
+- from: '3904'
+  to: Reserved for Private Use
+- from: '3905'
+  to: Reserved for Private Use
+- from: '3906'
+  to: Reserved for Private Use
+- from: '3907'
+  to: Reserved for Private Use
+- from: '3908'
+  to: Reserved for Private Use
+- from: '3909'
+  to: Reserved for Private Use
+- from: '3910'
+  to: Reserved for Private Use
+- from: '3911'
+  to: Reserved for Private Use
+- from: '3912'
+  to: Reserved for Private Use
+- from: '3913'
+  to: Reserved for Private Use
+- from: '3914'
+  to: Reserved for Private Use
+- from: '3915'
+  to: Reserved for Private Use
+- from: '3916'
+  to: Reserved for Private Use
+- from: '3917'
+  to: Reserved for Private Use
+- from: '3918'
+  to: Reserved for Private Use
+- from: '3919'
+  to: Reserved for Private Use
+- from: '3920'
+  to: Reserved for Private Use
+- from: '3921'
+  to: Reserved for Private Use
+- from: '3922'
+  to: Reserved for Private Use
+- from: '3923'
+  to: Reserved for Private Use
+- from: '3924'
+  to: Reserved for Private Use
+- from: '3925'
+  to: Reserved for Private Use
+- from: '3926'
+  to: Reserved for Private Use
+- from: '3927'
+  to: Reserved for Private Use
+- from: '3928'
+  to: Reserved for Private Use
+- from: '3929'
+  to: Reserved for Private Use
+- from: '3930'
+  to: Reserved for Private Use
+- from: '3931'
+  to: Reserved for Private Use
+- from: '3932'
+  to: Reserved for Private Use
+- from: '3933'
+  to: Reserved for Private Use
+- from: '3934'
+  to: Reserved for Private Use
+- from: '3935'
+  to: Reserved for Private Use
+- from: '3936'
+  to: Reserved for Private Use
+- from: '3937'
+  to: Reserved for Private Use
+- from: '3938'
+  to: Reserved for Private Use
+- from: '3939'
+  to: Reserved for Private Use
+- from: '3940'
+  to: Reserved for Private Use
+- from: '3941'
+  to: Reserved for Private Use
+- from: '3942'
+  to: Reserved for Private Use
+- from: '3943'
+  to: Reserved for Private Use
+- from: '3944'
+  to: Reserved for Private Use
+- from: '3945'
+  to: Reserved for Private Use
+- from: '3946'
+  to: Reserved for Private Use
+- from: '3947'
+  to: Reserved for Private Use
+- from: '3948'
+  to: Reserved for Private Use
+- from: '3949'
+  to: Reserved for Private Use
+- from: '3950'
+  to: Reserved for Private Use
+- from: '3951'
+  to: Reserved for Private Use
+- from: '3952'
+  to: Reserved for Private Use
+- from: '3953'
+  to: Reserved for Private Use
+- from: '3954'
+  to: Reserved for Private Use
+- from: '3955'
+  to: Reserved for Private Use
+- from: '3956'
+  to: Reserved for Private Use
+- from: '3957'
+  to: Reserved for Private Use
+- from: '3958'
+  to: Reserved for Private Use
+- from: '3959'
+  to: Reserved for Private Use
+- from: '3960'
+  to: Reserved for Private Use
+- from: '3961'
+  to: Reserved for Private Use
+- from: '3962'
+  to: Reserved for Private Use
+- from: '3963'
+  to: Reserved for Private Use
+- from: '3964'
+  to: Reserved for Private Use
+- from: '3965'
+  to: Reserved for Private Use
+- from: '3966'
+  to: Reserved for Private Use
+- from: '3967'
+  to: Reserved for Private Use
+- from: '3968'
+  to: Reserved for Private Use
+- from: '3969'
+  to: Reserved for Private Use
+- from: '3970'
+  to: Reserved for Private Use
+- from: '3971'
+  to: Reserved for Private Use
+- from: '3972'
+  to: Reserved for Private Use
+- from: '3973'
+  to: Reserved for Private Use
+- from: '3974'
+  to: Reserved for Private Use
+- from: '3975'
+  to: Reserved for Private Use
+- from: '3976'
+  to: Reserved for Private Use
+- from: '3977'
+  to: Reserved for Private Use
+- from: '3978'
+  to: Reserved for Private Use
+- from: '3979'
+  to: Reserved for Private Use
+- from: '3980'
+  to: Reserved for Private Use
+- from: '3981'
+  to: Reserved for Private Use
+- from: '3982'
+  to: Reserved for Private Use
+- from: '3983'
+  to: Reserved for Private Use
+- from: '3984'
+  to: Reserved for Private Use
+- from: '3985'
+  to: Reserved for Private Use
+- from: '3986'
+  to: Reserved for Private Use
+- from: '3987'
+  to: Reserved for Private Use
+- from: '3988'
+  to: Reserved for Private Use
+- from: '3989'
+  to: Reserved for Private Use
+- from: '3990'
+  to: Reserved for Private Use
+- from: '3991'
+  to: Reserved for Private Use
+- from: '3992'
+  to: Reserved for Private Use
+- from: '3993'
+  to: Reserved for Private Use
+- from: '3994'
+  to: Reserved for Private Use
+- from: '3995'
+  to: Reserved for Private Use
+- from: '3996'
+  to: Reserved for Private Use
+- from: '3997'
+  to: Reserved for Private Use
+- from: '3998'
+  to: Reserved for Private Use
+- from: '3999'
+  to: Reserved for Private Use
+- from: '4000'
+  to: Reserved for Private Use
+- from: '4001'
+  to: Reserved for Private Use
+- from: '4002'
+  to: Reserved for Private Use
+- from: '4003'
+  to: Reserved for Private Use
+- from: '4004'
+  to: Reserved for Private Use
+- from: '4005'
+  to: Reserved for Private Use
+- from: '4006'
+  to: Reserved for Private Use
+- from: '4007'
+  to: Reserved for Private Use
+- from: '4008'
+  to: Reserved for Private Use
+- from: '4009'
+  to: Reserved for Private Use
+- from: '4010'
+  to: Reserved for Private Use
+- from: '4011'
+  to: Reserved for Private Use
+- from: '4012'
+  to: Reserved for Private Use
+- from: '4013'
+  to: Reserved for Private Use
+- from: '4014'
+  to: Reserved for Private Use
+- from: '4015'
+  to: Reserved for Private Use
+- from: '4016'
+  to: Reserved for Private Use
+- from: '4017'
+  to: Reserved for Private Use
+- from: '4018'
+  to: Reserved for Private Use
+- from: '4019'
+  to: Reserved for Private Use
+- from: '4020'
+  to: Reserved for Private Use
+- from: '4021'
+  to: Reserved for Private Use
+- from: '4022'
+  to: Reserved for Private Use
+- from: '4023'
+  to: Reserved for Private Use
+- from: '4024'
+  to: Reserved for Private Use
+- from: '4025'
+  to: Reserved for Private Use
+- from: '4026'
+  to: Reserved for Private Use
+- from: '4027'
+  to: Reserved for Private Use
+- from: '4028'
+  to: Reserved for Private Use
+- from: '4029'
+  to: Reserved for Private Use
+- from: '4030'
+  to: Reserved for Private Use
+- from: '4031'
+  to: Reserved for Private Use
+- from: '4032'
+  to: Reserved for Private Use
+- from: '4033'
+  to: Reserved for Private Use
+- from: '4034'
+  to: Reserved for Private Use
+- from: '4035'
+  to: Reserved for Private Use
+- from: '4036'
+  to: Reserved for Private Use
+- from: '4037'
+  to: Reserved for Private Use
+- from: '4038'
+  to: Reserved for Private Use
+- from: '4039'
+  to: Reserved for Private Use
+- from: '4040'
+  to: Reserved for Private Use
+- from: '4041'
+  to: Reserved for Private Use
+- from: '4042'
+  to: Reserved for Private Use
+- from: '4043'
+  to: Reserved for Private Use
+- from: '4044'
+  to: Reserved for Private Use
+- from: '4045'
+  to: Reserved for Private Use
+- from: '4046'
+  to: Reserved for Private Use
+- from: '4047'
+  to: Reserved for Private Use
+- from: '4048'
+  to: Reserved for Private Use
+- from: '4049'
+  to: Reserved for Private Use
+- from: '4050'
+  to: Reserved for Private Use
+- from: '4051'
+  to: Reserved for Private Use
+- from: '4052'
+  to: Reserved for Private Use
+- from: '4053'
+  to: Reserved for Private Use
+- from: '4054'
+  to: Reserved for Private Use
+- from: '4055'
+  to: Reserved for Private Use
+- from: '4056'
+  to: Reserved for Private Use
+- from: '4057'
+  to: Reserved for Private Use
+- from: '4058'
+  to: Reserved for Private Use
+- from: '4059'
+  to: Reserved for Private Use
+- from: '4060'
+  to: Reserved for Private Use
+- from: '4061'
+  to: Reserved for Private Use
+- from: '4062'
+  to: Reserved for Private Use
+- from: '4063'
+  to: Reserved for Private Use
+- from: '4064'
+  to: Reserved for Private Use
+- from: '4065'
+  to: Reserved for Private Use
+- from: '4066'
+  to: Reserved for Private Use
+- from: '4067'
+  to: Reserved for Private Use
+- from: '4068'
+  to: Reserved for Private Use
+- from: '4069'
+  to: Reserved for Private Use
+- from: '4070'
+  to: Reserved for Private Use
+- from: '4071'
+  to: Reserved for Private Use
+- from: '4072'
+  to: Reserved for Private Use
+- from: '4073'
+  to: Reserved for Private Use
+- from: '4074'
+  to: Reserved for Private Use
+- from: '4075'
+  to: Reserved for Private Use
+- from: '4076'
+  to: Reserved for Private Use
+- from: '4077'
+  to: Reserved for Private Use
+- from: '4078'
+  to: Reserved for Private Use
+- from: '4079'
+  to: Reserved for Private Use
+- from: '4080'
+  to: Reserved for Private Use
+- from: '4081'
+  to: Reserved for Private Use
+- from: '4082'
+  to: Reserved for Private Use
+- from: '4083'
+  to: Reserved for Private Use
+- from: '4084'
+  to: Reserved for Private Use
+- from: '4085'
+  to: Reserved for Private Use
+- from: '4086'
+  to: Reserved for Private Use
+- from: '4087'
+  to: Reserved for Private Use
+- from: '4088'
+  to: Reserved for Private Use
+- from: '4089'
+  to: Reserved for Private Use
+- from: '4090'
+  to: Reserved for Private Use
+- from: '4091'
+  to: Reserved for Private Use
+- from: '4092'
+  to: Reserved for Private Use
+- from: '4093'
+  to: Reserved for Private Use
+- from: '4094'
+  to: Reserved for Private Use
+- from: '4095'
+  to: Reserved for Private Use
+- from: Reserved for Private Use
+  to: Reserved for Private Use
+- from: '65535'
+  to: Reserved; can only be allocated by Standards Action
+- from: Reserved; can only be allocated by Standards Action
+  to: Reserved; can only be allocated by Standards Action
+- from: Reserved; can only be allocated by Standards Action.
+  to: Reserved; can only be allocated by Standards Action

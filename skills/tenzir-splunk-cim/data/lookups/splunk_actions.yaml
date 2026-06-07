@@ -1,9 +1,6 @@
 name: splunk_actions
-columns:
-- vendor_action
-- action
-- app
-rows:
+key: vendor_action
+entries:
 - vendor_action: add
   action: created
   app: ''
@@ -19,6 +16,3 @@ rows:
 - vendor_action: succeeded
   action: success
   app: splunk
-transforms:
-- name: splunk_action_lookup
-  filename: splunk_actions.csv

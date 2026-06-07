@@ -1,12 +1,8 @@
 name: splunk_object_category
-columns:
-- vendor_object_category
-- object_category
-rows:
-- vendor_object_category: '0'
-  object_category: file
-- vendor_object_category: '1'
-  object_category: directory
-transforms:
-- name: splunk_object_category_lookup
-  filename: splunk_object_category.csv
+key: vendor_object_category
+maps_to: object_category
+mappings:
+- from: '0'
+  to: file
+- from: '1'
+  to: directory

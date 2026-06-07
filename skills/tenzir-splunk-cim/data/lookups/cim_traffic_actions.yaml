@@ -1,10 +1,6 @@
 name: cim_traffic_actions
-columns:
-- action
-rows:
-- action: allowed
-- action: blocked
-- action: teardown
-transforms:
-- name: cim_traffic_action_lookup
-  filename: cim_traffic_actions.csv
+field: action
+values:
+- allowed
+- blocked
+- teardown

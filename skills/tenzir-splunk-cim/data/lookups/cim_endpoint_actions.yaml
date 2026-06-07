@@ -1,11 +1,7 @@
 name: cim_endpoint_actions
-columns:
-- action
-rows:
-- action: created
-- action: deleted
-- action: modified
-- action: state_changed
-transforms:
-- name: cim_endpoint_action_lookup
-  filename: cim_endpoint_actions.csv
+field: action
+values:
+- created
+- deleted
+- modified
+- state_changed

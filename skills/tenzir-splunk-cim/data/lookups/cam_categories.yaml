@@ -1,12 +1,8 @@
 name: cam_categories
-columns:
-- category
-rows:
-- category: Information Conveyance
-- category: Information Gathering
-- category: Information Tracking
-- category: Permissions Control
-- category: Device Control
-transforms:
-- name: cam_category_lookup
-  filename: cam_categories.csv
+field: category
+values:
+- Information Conveyance
+- Information Gathering
+- Information Tracking
+- Permissions Control
+- Device Control

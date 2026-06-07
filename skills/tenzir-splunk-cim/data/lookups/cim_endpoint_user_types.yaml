@@ -1,10 +1,6 @@
 name: cim_endpoint_user_types
-columns:
-- user_type
-rows:
-- user_type: user
-- user_type: process
-- user_type: stored_procedure
-transforms:
-- name: cim_endpoint_user_type_lookup
-  filename: cim_endpoint_user_types.csv
+field: user_type
+values:
+- user
+- process
+- stored_procedure
