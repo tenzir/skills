@@ -35,19 +35,19 @@ Use field files only when you need a cross-schema view of one field.
 
 ## Data files
 
-- Use [data/catalog.yaml](data/catalog.yaml) to choose a schema and find the schema data file.
-- Use `data/schemas/<schema>.yaml` to map telemetry into one ASIM schema.
-- Use [data/fields.yaml](data/fields.yaml) directly as the field-name to field-file manifest.
-- Use `data/fields/<field>.yaml` for field meaning across schemas.
-- Use [data/aliases.yaml](data/aliases.yaml) to resolve alias fields and conditional alias rules.
+- Use [catalog.yaml](catalog.yaml) to choose a schema and find the schema data file.
+- Use `schemas/<schema>.yaml` to map telemetry into one ASIM schema.
+- Use [fields.yaml](fields.yaml) directly as the field-name to field-file manifest.
+- Use `fields/<field>.yaml` for field meaning across schemas.
+- Use [aliases.yaml](aliases.yaml) to resolve alias fields and conditional alias rules.
 
 ## Mapping rules
 
-- Start from activity or entity semantics, choose the ASIM schema in [data/catalog.yaml](data/catalog.yaml), then load the schema file.
+- Start from activity or entity semantics, choose the ASIM schema in [catalog.yaml](catalog.yaml), then load the schema file.
 - Populate `Mandatory` and useful `Recommended` fields first, then add `Optional` fields when the source provides useful context.
 - Populate `Conditional` fields when the field record's `required_if` condition applies.
 - Prefer canonical normalized fields over aliases for reusable detections, analytics rules, workbooks, and mappings.
-- Use aliases to explain Microsoft-documented query convenience, but resolve them through [data/aliases.yaml](data/aliases.yaml) before mapping.
+- Use aliases to explain Microsoft-documented query convenience, but resolve them through [aliases.yaml](aliases.yaml) before mapping.
 - Preserve source-specific values in original fields or `AdditionalFields` when ASIM has no direct normalized field.
 - When a schema defines both a value field and a type field, populate the type field when the identifier format is known.
 - Treat fields with `role: common` as shared event/entity metadata, but obey schema-specific `value`, `allowed_values`, and `required_if` records.
@@ -77,10 +77,10 @@ Use field files only when you need a cross-schema view of one field.
 
 | Question pattern | Start here |
 | --- | --- |
-| Which ASIM schema should I map this event or entity to? | [data/catalog.yaml](data/catalog.yaml), then the selected schema file |
-| What fields does schema X contain? | `data/schemas/<schema>.yaml` |
-| What does field X mean? | [data/fields.yaml](data/fields.yaml), then `data/fields/<field>.yaml` |
-| Which field should an alias use? | [data/aliases.yaml](data/aliases.yaml), then target field files |
+| Which ASIM schema should I map this event or entity to? | [catalog.yaml](catalog.yaml), then the selected schema file |
+| What fields does schema X contain? | `schemas/<schema>.yaml` |
+| What does field X mean? | [fields.yaml](fields.yaml), then `fields/<field>.yaml` |
+| Which field should an alias use? | [aliases.yaml](aliases.yaml), then target field files |
 | How do user/device/application roles map? | Role-prefix table above, then the selected schema file |
 | What raw Microsoft source backs this data? | [source.md](source.md) |
 
