@@ -1,5 +1,5 @@
 ---
-name: tenzir-microsoft-asim
+name: tenzir-asim
 description: Answer questions about Microsoft Sentinel ASIM (Advanced Security Information Model). Use whenever the user asks about ASIM schemas, normalized Microsoft Sentinel fields, field classes, aliases, schema mapping, or mapping events and entities into ASIM.
 ---
 

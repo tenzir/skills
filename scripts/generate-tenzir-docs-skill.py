@@ -69,6 +69,9 @@ EXTRACTED_INDEX_FILES = {
 SKILL_NAME_REWRITES = {
     "tenzir/skills@ocsf": "tenzir/skills@tenzir-ocsf",
     "npx skills remove ocsf": "npx skills remove tenzir-ocsf",
+    "tenzir/skills@tenzir-microsoft-asim": "tenzir/skills@tenzir-asim",
+    "`tenzir-microsoft-asim`": "`tenzir-asim`",
+    "Use the tenzir-microsoft-asim skill": "Use the tenzir-asim skill",
 }
 
 

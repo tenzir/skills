@@ -53,7 +53,7 @@ DEVICE_BASE_FIELDS = {
     "Zone",
 }
 HTTP_HEADERS = {
-    "User-Agent": "tenzir-microsoft-asim-generator",
+    "User-Agent": "tenzir-asim-generator",
     "Accept": "application/vnd.github+json",
 }
 FIELD_CLASS_ORDER = {
@@ -1196,7 +1196,7 @@ def render_skill_markdown(reference: AsimReference) -> str:
         "\n".join(
             [
                 "---",
-                "name: tenzir-microsoft-asim",
+                "name: tenzir-asim",
                 "description: Answer questions about Microsoft Sentinel ASIM (Advanced Security Information Model). Use whenever the user asks about ASIM schemas, normalized Microsoft Sentinel fields, field classes, aliases, schema mapping, or mapping events and entities into ASIM.",
                 "---",
                 "",
