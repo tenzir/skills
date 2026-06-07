@@ -1,6 +1,15 @@
 ---
 name: tenzir-ecs
-description: Answer questions about Elastic Common Schema (ECS), Elastic field names, fieldsets, field types, categorization fields such as event.kind/event.category/event.type/event.outcome, ECS mapping decisions, custom fields, field reuse, and ECS/OpenTelemetry relations. Use whenever the user maps logs, events, security telemetry, network data, IAM activity, threat indicators, cloud/service context, or observability data into ECS, even if they only mention Elastic fields or event categorization.
+description: >-
+  Answer questions and produce mappings for Elastic Common Schema (ECS):
+  Elastic/Elasticsearch fields, fieldsets, data types, allowed values,
+  categorization (`event.kind`, `event.category`, `event.type`,
+  `event.outcome`), custom fields, field reuse, normalization, and
+  OpenTelemetry/OTel/OTLP/SemConv alignment. Use when mapping logs,
+  security telemetry, SIEM detections, network flows, IAM/user activity,
+  cloud/service context, threat intel, or observability metrics/traces
+  into ECS, Elastic Security, Elastic Observability, or Elasticsearch
+  mappings/templates.
 ---
 
 # Elastic Common Schema
@@ -17,13 +26,13 @@ If a field, fieldset, allowed value, or relation is not present in the YAML data
 - Use [fields.yaml](fields.yaml) to find a dotted ECS field and then load the referenced `fields/<field>.yaml` file.
 - Use [fieldsets.yaml](fieldsets.yaml) to choose a fieldset and then load the referenced `fieldsets/<fieldset>.yaml` file.
 - Use [categorization.yaml](categorization.yaml) for `event.kind`, `event.category`, `event.type`, `event.outcome`, allowed values, and expected category/type combinations.
-- Use [otel.yaml](otel.yaml) for ECS-to-OpenTelemetry relation records.
-- Use [source.md](source.md) for release provenance, source artifacts, copied docs, and counts.
+- Use [otel.yaml](otel.yaml) as the compact ECS-keyed crosswalk for OpenTelemetry relations.
+- Use [source.md](source.md) for release provenance, source artifacts, copied docs, referenced upstream docs, and counts.
 
 ## Complementary docs
 
 - Start with [Implementation patterns](docs/implementation-patterns.md), [Design principles](docs/design-principles.md), and [Conventions](docs/conventions.md) for general modeling questions.
-- Use [Categorization fields](docs/categorization-fields.md) and [Using categorization fields](docs/categorization-usage.md) when assigning `event.*` categorization values.
+- Use [categorization.yaml](categorization.yaml) and [Using categorization fields](docs/categorization-usage.md) when assigning `event.*` categorization values.
 - Use [Mapping network events](docs/mapping-network-events.md) for `source`/`destination` versus `client`/`server` decisions.
 - Use [Custom fields](docs/custom-fields.md) when ECS has no suitable field.
 - Use [ECS and OpenTelemetry](docs/opentelemetry.md) together with [otel.yaml](otel.yaml) for OTel alignment questions.
@@ -47,6 +56,6 @@ If a field, fieldset, allowed value, or relation is not present in the YAML data
 - **Which `event.category` or `event.type` should I use?** Start with [categorization.yaml](categorization.yaml), then read [Using categorization fields](docs/categorization-usage.md) for examples.
 - **How should I map a network event?** Read [Mapping network events](docs/mapping-network-events.md), then inspect the relevant fieldsets.
 - **How do I model users, cloud resources, services, or threat indicators?** Read the matching usage doc under `docs/usage/`, then inspect the relevant fieldset YAML.
-- **How does ECS relate to OpenTelemetry?** Use [otel.yaml](otel.yaml) for relation records and [ECS and OpenTelemetry](docs/opentelemetry.md) for conceptual guidance.
+- **How does ECS relate to OpenTelemetry?** Use [otel.yaml](otel.yaml) for the compact field crosswalk and [ECS and OpenTelemetry](docs/opentelemetry.md) for conceptual guidance.
 - **What if ECS has no matching field?** Read [Custom fields](docs/custom-fields.md).
 - **What raw upstream source backs this skill?** Use [source.md](source.md).

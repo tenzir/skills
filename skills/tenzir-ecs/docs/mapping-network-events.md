@@ -127,7 +127,7 @@ Network events are not only limited to using `related.ip`. If hostnames or other
 
 ### Categorization using event fields [_categorization_using_event_fields]
 
-When considering the [event categorization fields](categorization-fields.md), the `category` and `type` fields are populated using their respective allowed values which best classify the source network event.
+When considering the [event categorization fields](https://github.com/elastic/ecs/blob/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/docs/reference/ecs-category-field-values-reference.md), the `category` and `type` fields are populated using their respective allowed values which best classify the source network event.
 
 ```json
   "event": {

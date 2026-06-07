@@ -60,8 +60,6 @@ class SourceDoc:
 
 
 CURATED_DOCS = (
-    SourceDoc("schemas/README.md", Path("docs/schema-format.md"), "Schema format"),
-    SourceDoc("generated/README.md", Path("docs/artifacts.md"), "Generated artifacts"),
     SourceDoc("docs/reference/ecs-principles-design.md", Path("docs/design-principles.md"), "Design principles"),
     SourceDoc(
         "docs/reference/ecs-principles-implementation.md",
@@ -70,11 +68,6 @@ CURATED_DOCS = (
     ),
     SourceDoc("docs/reference/ecs-conventions.md", Path("docs/conventions.md"), "Conventions"),
     SourceDoc("docs/reference/ecs-custom-fields-in-ecs.md", Path("docs/custom-fields.md"), "Custom fields"),
-    SourceDoc(
-        "docs/reference/ecs-category-field-values-reference.md",
-        Path("docs/categorization-fields.md"),
-        "Categorization fields",
-    ),
     SourceDoc(
         "docs/reference/ecs-using-categorization-fields.md",
         Path("docs/categorization-usage.md"),
@@ -90,6 +83,16 @@ CURATED_DOCS = (
     SourceDoc("docs/reference/ecs-service-usage.md", Path("docs/usage/service.md"), "Service usage"),
     SourceDoc("docs/reference/ecs-threat-usage.md", Path("docs/usage/threat.md"), "Threat usage"),
     SourceDoc("docs/reference/ecs-user-usage.md", Path("docs/usage/user.md"), "User usage"),
+)
+
+REFERENCED_DOCS = (
+    SourceDoc("schemas/README.md", Path("docs/schema-format.md"), "Schema format"),
+    SourceDoc("generated/README.md", Path("docs/artifacts.md"), "Generated artifacts"),
+    SourceDoc(
+        "docs/reference/ecs-category-field-values-reference.md",
+        Path("docs/categorization-fields.md"),
+        "Categorization fields",
+    ),
 )
 
 
@@ -486,19 +489,110 @@ def build_categorization(flat: dict[str, dict[str, Any]], field_slugs: dict[str,
     }
 
 
-def build_otel(flat: dict[str, dict[str, Any]], field_slugs: dict[str, str], source: SourceRef) -> dict[Path, str]:
-    fields: list[dict[str, Any]] = []
+def compact_note(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def compact_target_relation(relation: dict[str, Any], source_key: str, output_key: str) -> Any:
+    note = compact_note(relation.get("note"))
+    stability = relation.get("stability")
+    target = relation.get(source_key)
+    extras = {
+        key: value
+        for key, value in relation.items()
+        if key not in {"relation", "stability", "note", source_key}
+    }
+
+    if not note and not extras and relation.get("relation") == "otlp" and stability == "stable":
+        return target
+
+    result: dict[str, Any] = {}
+    if target is not None:
+        result[output_key] = target
+    if stability and not (relation.get("relation") == "otlp" and stability == "stable"):
+        result["stability"] = stability
+    if note:
+        result["note"] = note
+    result.update(extras)
+    return result
+
+
+def compact_relation(relation: dict[str, Any]) -> tuple[str, Any]:
+    kind = relation.get("relation")
+    note = compact_note(relation.get("note"))
+    stability = relation.get("stability")
+
+    if kind == "match":
+        extras = {
+            key: value
+            for key, value in relation.items()
+            if key not in {"relation", "stability", "note"}
+        }
+        if not note and not extras:
+            return "match", stability or True
+        result: dict[str, Any] = {}
+        if stability:
+            result["stability"] = stability
+        if note:
+            result["note"] = note
+        result.update(extras)
+        return "match", result
+
+    if kind == "na":
+        extras = {
+            key: value
+            for key, value in relation.items()
+            if key not in {"relation", "stability", "note"}
+        }
+        if not note and not stability and not extras:
+            return "not_applicable", True
+        result: dict[str, Any] = {}
+        if stability:
+            result["stability"] = stability
+        if note:
+            result["note"] = note
+        result.update(extras)
+        return "not_applicable", result
+
+    if kind == "otlp":
+        return "otlp", compact_target_relation(relation, "otlp_field", "field")
+
+    if kind == "metric":
+        return "metric", compact_target_relation(relation, "metric", "name")
+
+    if kind in {"equivalent", "related", "conflict"}:
+        return kind, compact_target_relation(relation, "attribute", "attribute")
+
+    return str(kind or "unknown"), {
+        key: value for key, value in relation.items() if key != "relation"
+    }
+
+
+def collapse_relation_groups(groups: dict[str, list[Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for kind, values in groups.items():
+        if kind == "otlp":
+            result[kind] = values
+        elif len(values) == 1:
+            result[kind] = values[0]
+        else:
+            result[kind] = values
+    return result
+
+
+def build_otel(flat: dict[str, dict[str, Any]]) -> dict[Path, str]:
+    fields: dict[str, dict[str, Any]] = {}
     for field_name in sorted(flat, key=str.casefold):
         relations = flat[field_name].get("otel") or []
         if not relations:
             continue
-        fields.append(
-            {
-                "field": field_name,
-                "path": field_path(field_slugs[field_name]),
-                "relations": relations,
-            }
-        )
+        groups: dict[str, list[Any]] = {}
+        for relation in relations:
+            kind, value = compact_relation(relation)
+            groups.setdefault(kind, []).append(value)
+        fields[field_name] = collapse_relation_groups(groups)
     return {
         Path("otel.yaml"): dump_yaml(
             {"fields": fields}
@@ -512,7 +606,16 @@ def render_skill_markdown(source: SourceRef) -> str:
             [
                 "---",
                 "name: tenzir-ecs",
-                "description: Answer questions about Elastic Common Schema (ECS), Elastic field names, fieldsets, field types, categorization fields such as event.kind/event.category/event.type/event.outcome, ECS mapping decisions, custom fields, field reuse, and ECS/OpenTelemetry relations. Use whenever the user maps logs, events, security telemetry, network data, IAM activity, threat indicators, cloud/service context, or observability data into ECS, even if they only mention Elastic fields or event categorization.",
+                "description: >-",
+                "  Answer questions and produce mappings for Elastic Common Schema (ECS):",
+                "  Elastic/Elasticsearch fields, fieldsets, data types, allowed values,",
+                "  categorization (`event.kind`, `event.category`, `event.type`,",
+                "  `event.outcome`), custom fields, field reuse, normalization, and",
+                "  OpenTelemetry/OTel/OTLP/SemConv alignment. Use when mapping logs,",
+                "  security telemetry, SIEM detections, network flows, IAM/user activity,",
+                "  cloud/service context, threat intel, or observability metrics/traces",
+                "  into ECS, Elastic Security, Elastic Observability, or Elasticsearch",
+                "  mappings/templates.",
                 "---",
                 "",
                 "# Elastic Common Schema",
@@ -529,13 +632,13 @@ def render_skill_markdown(source: SourceRef) -> str:
                 "- Use [fields.yaml](fields.yaml) to find a dotted ECS field and then load the referenced `fields/<field>.yaml` file.",
                 "- Use [fieldsets.yaml](fieldsets.yaml) to choose a fieldset and then load the referenced `fieldsets/<fieldset>.yaml` file.",
                 "- Use [categorization.yaml](categorization.yaml) for `event.kind`, `event.category`, `event.type`, `event.outcome`, allowed values, and expected category/type combinations.",
-                "- Use [otel.yaml](otel.yaml) for ECS-to-OpenTelemetry relation records.",
-                "- Use [source.md](source.md) for release provenance, source artifacts, copied docs, and counts.",
+                "- Use [otel.yaml](otel.yaml) as the compact ECS-keyed crosswalk for OpenTelemetry relations.",
+                "- Use [source.md](source.md) for release provenance, source artifacts, copied docs, referenced upstream docs, and counts.",
                 "",
                 "## Complementary docs",
                 "",
                 "- Start with [Implementation patterns](docs/implementation-patterns.md), [Design principles](docs/design-principles.md), and [Conventions](docs/conventions.md) for general modeling questions.",
-                "- Use [Categorization fields](docs/categorization-fields.md) and [Using categorization fields](docs/categorization-usage.md) when assigning `event.*` categorization values.",
+                "- Use [categorization.yaml](categorization.yaml) and [Using categorization fields](docs/categorization-usage.md) when assigning `event.*` categorization values.",
                 "- Use [Mapping network events](docs/mapping-network-events.md) for `source`/`destination` versus `client`/`server` decisions.",
                 "- Use [Custom fields](docs/custom-fields.md) when ECS has no suitable field.",
                 "- Use [ECS and OpenTelemetry](docs/opentelemetry.md) together with [otel.yaml](otel.yaml) for OTel alignment questions.",
@@ -559,7 +662,7 @@ def render_skill_markdown(source: SourceRef) -> str:
                 "- **Which `event.category` or `event.type` should I use?** Start with [categorization.yaml](categorization.yaml), then read [Using categorization fields](docs/categorization-usage.md) for examples.",
                 "- **How should I map a network event?** Read [Mapping network events](docs/mapping-network-events.md), then inspect the relevant fieldsets.",
                 "- **How do I model users, cloud resources, services, or threat indicators?** Read the matching usage doc under `docs/usage/`, then inspect the relevant fieldset YAML.",
-                "- **How does ECS relate to OpenTelemetry?** Use [otel.yaml](otel.yaml) for relation records and [ECS and OpenTelemetry](docs/opentelemetry.md) for conceptual guidance.",
+                "- **How does ECS relate to OpenTelemetry?** Use [otel.yaml](otel.yaml) for the compact field crosswalk and [ECS and OpenTelemetry](docs/opentelemetry.md) for conceptual guidance.",
                 "- **What if ECS has no matching field?** Read [Custom fields](docs/custom-fields.md).",
                 "- **What raw upstream source backs this skill?** Use [source.md](source.md).",
                 "",
@@ -607,6 +710,15 @@ def render_source_page(
     )
     for doc in CURATED_DOCS:
         lines.append(f"- {doc.title}: [`{doc.source_path}`]({blob_url(source, doc.source_path)}) -> [{doc.output_path.as_posix()}]({doc.output_path.as_posix()})")
+    lines.extend(
+        [
+            "",
+            "## Referenced upstream docs",
+            "",
+        ]
+    )
+    for doc in REFERENCED_DOCS:
+        lines.append(f"- {doc.title}: [`{doc.source_path}`]({blob_url(source, doc.source_path)})")
     return clean_markdown("\n".join(lines))
 
 
@@ -634,7 +746,7 @@ def build_docs(
     docs.update(field_docs)
     docs.update(fieldset_docs)
     docs.update(build_categorization(flat, field_slugs, source))
-    docs.update(build_otel(flat, field_slugs, source))
+    docs.update(build_otel(flat))
 
     for doc in CURATED_DOCS:
         text = strip_frontmatter(markdown_sources[doc.source_path])
