@@ -1,0 +1,7 @@
+name: dump_area_used
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  source: declared
+  type: string
+  description: The amount of the database dump area that has been used.

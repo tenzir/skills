@@ -1,0 +1,5 @@
+name: cam_action_modes
+field: action_mode
+values:
+- adhoc
+- saved

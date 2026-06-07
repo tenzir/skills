@@ -1,0 +1,177 @@
+name: Interprocess_Messaging
+display_name: Interprocess Messaging
+root_datasets:
+- All_Messaging
+datasets:
+  All_Messaging:
+    display_name: All Interprocess Messaging
+    kind: event
+    tags:
+    - messaging
+    constraints:
+    - (`cim_Interprocess_Messaging_indexes`) tag=messaging
+    fields:
+      _time:
+        source: base
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: calculated
+        type: string
+        description: The destination of the message. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        calculation:
+          id: All_interprocess_messaging_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: declared
+        type: string
+        description: The type of message destination.
+        expected_values:
+        - queue
+        - topic
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: declared
+        type: number
+        description: The number of seconds from message call to message response. Can be derived by getting the difference between the request_sent_time and the message_received_time.
+      endpoint:
+        source: declared
+        type: string
+        description: The endpoint that the message accessed during the RPC (remote procedure call) transaction.
+      endpoint_version:
+        source: declared
+        type: string
+        description: The version of the endpoint accessed during the RPC (remote procedure call) transaction, such as 1.0 or 1.22.
+      host:
+        source: base
+      message:
+        source: declared
+        type: string
+        description: A command or reference that an RPC (remote procedure call) reads or responds to.
+      message_consumed_time:
+        source: declared
+        type: timestamp
+        description: The time that the RPC (remote procedure call) read the message and was prepared to take some sort of action.
+      message_correlation_id:
+        source: declared
+        type: string
+        description: The message correlation identification value.
+      message_delivered_time:
+        source: declared
+        type: timestamp
+        description: The time that the message producer sent the message.
+      message_delivery_mode:
+        source: declared
+        type: string
+        description: The message delivery mode. Possible values depend on the type of message-oriented middleware (MOM) solution in use. They can be words like Transient (meaning the message is stored in memory and is lost if the server dies or restarts) or Persistent (meaning the message is stored both in memory and on disk and is preserved if the server dies or restarts). They can also be numbers like 1, 2, and so on.
+      message_expiration_time:
+        source: declared
+        type: timestamp
+        description: The time that the message expired.
+      message_id:
+        source: declared
+        type: string
+        description: The message identification.
+      message_priority:
+        source: declared
+        type: string
+        description: The priority of the message. Important jobs that the message queue should answer no matter what receive a higher message_priority than other jobs, ensuring they are completed before the others.
+      message_properties:
+        source: declared
+        type: string
+        description: An arbitrary list of message properties. The set of properties displayed depends on the message-oriented middleware (MOM) solution that you are using.
+        multivalue: true
+      message_received_time:
+        source: declared
+        type: timestamp
+        description: The time that the message was received by a message-oriented middleware (MOM) solution.
+      message_redelivered:
+        source: declared
+        type: boolean
+        description: Indicates whether or not the message was redelivered.
+      message_reply_dest:
+        source: declared
+        type: string
+        description: The name of the destination for replies to the message.
+      message_type:
+        source: declared
+        type: string
+        description: The type of message, such as call or reply.
+      parameters:
+        source: declared
+        type: string
+        description: Arguments that have been passed to an endpoint by a REST call or something similar. A sample parameter could be something like foo=bar.
+        multivalue: true
+      payload:
+        source: declared
+        type: string
+        description: The message payload.
+      payload_type:
+        source: declared
+        type: string
+        description: The type of payload in the message. The payload type can be text (such as json, xml, and raw) or binary (such as compressed, object, encrypted, and image).
+      request_payload:
+        source: declared
+        type: string
+        description: The content of the message request.
+      request_payload_type:
+        source: declared
+        type: string
+        description: The type of payload in the message request. The payload type can be text (such as json, xml, and raw) or binary (such as compressed, object, encrypted, and image).
+      request_sent_time:
+        source: declared
+        type: timestamp
+        description: The time that the message request was sent.
+      response_code:
+        source: declared
+        type: string
+        description: The response status code sent by the receiving server. Ranges between 200 and 404.
+      response_payload_type:
+        source: declared
+        type: string
+        description: The type of payload in the message response. The payload type can be text (such as json, xml, and raw) or binary (such as compressed, object, encrypted, and image).
+      response_received_time:
+        source: declared
+        type: timestamp
+        description: The time that the message response was received.
+      response_time:
+        source: declared
+        type: number
+        description: The amount of time it took to receive a response, in seconds.
+      return_message:
+        source: declared
+        type: string
+        description: The response status message sent by the message server.
+      rpc_protocol:
+        source: declared
+        type: string
+        description: The protocol that the message server uses for remote procedure calls (RPC). Possible values include HTTP REST, SOAP, and EJB.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      status:
+        source: declared
+        type: boolean
+        description: The status of the message response.
+        expected_values:
+        - pass
+        - fail
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent

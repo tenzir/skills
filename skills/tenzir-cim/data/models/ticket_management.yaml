@@ -1,0 +1,651 @@
+name: Ticket_Management
+display_name: Ticket Management
+description: Ticket Management Data Model
+root_datasets:
+- All_Ticket_Management
+datasets:
+  All_Ticket_Management:
+    display_name: All Ticket Management
+    kind: event
+    tags:
+    - ticketing
+    constraints:
+    - (`cim_Ticket_Management_indexes`) tag=ticketing
+    fields:
+      _time:
+        source: base
+      affect_dest:
+        source: declared
+        type: string
+        description: Destinations affected by the service request.
+        multivalue: true
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      comments:
+        source: declared
+        type: string
+        description: Comments about the service request.
+      description:
+        source: declared
+        type: string
+        description: The description of the service request.
+      dest:
+        source: calculated
+        type: string
+        description: The destination of the service request. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        calculation:
+          id: All_Ticket_Management_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: declared
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: The priority of the destination.
+      host:
+        source: base
+      priority:
+        source: declared
+        type: string
+        description: The relative priority of the service request.
+      severity:
+        source: declared
+        type: string
+        description: The relative severity of the service request.
+      severity_id:
+        source: declared
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      splunk_id:
+        source: declared
+        type: string
+        description: The unique identifier of the service request as it pertains to Splunk. For example, 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@0533eff241db0d892509be46cd3126e30e0f6046.
+      splunk_realm:
+        source: declared
+        type: string
+        description: The Splunk application or use case associated with the unique identifier (splunk_id). For example, es_notable.
+      src_user:
+        source: declared
+        type: string
+        description: The user or entity that created or triggered the service request, if applicable.
+      src_user_bunit:
+        source: declared
+        type: string
+        description: The business unit associated with the user or entity that triggered the service request.
+      src_user_category:
+        source: declared
+        type: string
+        description: The category associated with the user or entity that triggered the service request.
+        multivalue: true
+      src_user_priority:
+        source: declared
+        type: string
+        description: The priority associated with the user or entity that triggered the service request.
+      status:
+        source: declared
+        type: string
+        description: The relative status of the service request.
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      ticket_id:
+        source: calculated
+        type: string
+        description: An identification name, code, or number for the service request.
+        calculation:
+          id: All_Ticket_Management_fillnull_ticket_id
+          type: Eval
+          expression: if(isnull(ticket_id) OR ticket_id="","unknown",ticket_id)
+      time_submitted:
+        source: declared
+        type: timestamp
+        description: The time that the src_user submitted the service request.
+      user:
+        source: declared
+        type: string
+        description: The name of the user or entity that is assigned to carry out the service request, if applicable.
+      user_bunit:
+        source: declared
+        type: string
+        description: The business unit associated with the user or entity that is assigned to carry out the service request, if applicable.
+      user_category:
+        source: declared
+        type: string
+        description: The category associated with the user or entity that is assigned to carry out the service request, if applicable.
+        multivalue: true
+      user_priority:
+        source: declared
+        type: string
+        description: The priority of the user or entity that is assigned to carry out the service request, if applicable.
+    inherits:
+    - BaseEvent
+    children:
+    - Change
+    - Incident
+    - Problem
+  Change:
+    kind: event
+    tags:
+    - ticketing
+    - change
+    constraints:
+    - (`cim_Ticket_Management_indexes`) tag=ticketing
+    - tag=change
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      affect_dest:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: Destinations affected by the service request.
+        multivalue: true
+      change:
+        source: calculated
+        type: string
+        description: Designation for a request for change (RFC) that is raised to modify an IT service to resolve an incident or problem.
+        calculation:
+          id: Change_fillnull_change
+          type: Eval
+          expression: if(isnull(change) OR change="","unknown",change)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      comments:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: Comments about the service request.
+      description:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The description of the service request.
+      dest:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The destination of the service request. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        calculation:
+          id: All_Ticket_Management_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority of the destination.
+      host:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative priority of the service request.
+      severity:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative severity of the service request.
+      severity_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      source:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      sourcetype:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      splunk_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The unique identifier of the service request as it pertains to Splunk. For example, 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@0533eff241db0d892509be46cd3126e30e0f6046.
+      splunk_realm:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The Splunk application or use case associated with the unique identifier (splunk_id). For example, es_notable.
+      src_user:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The user or entity that created or triggered the service request, if applicable.
+      src_user_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit associated with the user or entity that triggered the service request.
+      src_user_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category associated with the user or entity that triggered the service request.
+        multivalue: true
+      src_user_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority associated with the user or entity that triggered the service request.
+      status:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative status of the service request.
+      tag:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      ticket_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: An identification name, code, or number for the service request.
+        calculation:
+          id: All_Ticket_Management_fillnull_ticket_id
+          type: Eval
+          expression: if(isnull(ticket_id) OR ticket_id="","unknown",ticket_id)
+      time_submitted:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: timestamp
+        description: The time that the src_user submitted the service request.
+      user:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The name of the user or entity that is assigned to carry out the service request, if applicable.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit associated with the user or entity that is assigned to carry out the service request, if applicable.
+      user_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category associated with the user or entity that is assigned to carry out the service request, if applicable.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority of the user or entity that is assigned to carry out the service request, if applicable.
+    inherits:
+    - BaseEvent
+    - All_Ticket_Management
+  Incident:
+    kind: event
+    tags:
+    - ticketing
+    - incident
+    constraints:
+    - (`cim_Ticket_Management_indexes`) tag=ticketing
+    - tag=incident
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      affect_dest:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: Destinations affected by the service request.
+        multivalue: true
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      comments:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: Comments about the service request.
+      description:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The description of the service request.
+      dest:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The destination of the service request. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        calculation:
+          id: All_Ticket_Management_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority of the destination.
+      host:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      incident:
+        source: calculated
+        type: string
+        description: The incident that triggered the service request. Can be a rare occurrence, or something that happens more frequently An incident that occurs on a frequent basis can also be classified as a problem.
+        calculation:
+          id: Incident_fillnull_incident
+          type: Eval
+          expression: if(isnull(incident) OR incident="","unknown",incident)
+      priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative priority of the service request.
+      severity:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative severity of the service request.
+      severity_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      source:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      sourcetype:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      splunk_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The unique identifier of the service request as it pertains to Splunk. For example, 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@0533eff241db0d892509be46cd3126e30e0f6046.
+      splunk_realm:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The Splunk application or use case associated with the unique identifier (splunk_id). For example, es_notable.
+      src_user:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The user or entity that created or triggered the service request, if applicable.
+      src_user_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit associated with the user or entity that triggered the service request.
+      src_user_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category associated with the user or entity that triggered the service request.
+        multivalue: true
+      src_user_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority associated with the user or entity that triggered the service request.
+      status:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative status of the service request.
+      tag:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      ticket_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: An identification name, code, or number for the service request.
+        calculation:
+          id: All_Ticket_Management_fillnull_ticket_id
+          type: Eval
+          expression: if(isnull(ticket_id) OR ticket_id="","unknown",ticket_id)
+      time_submitted:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: timestamp
+        description: The time that the src_user submitted the service request.
+      user:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The name of the user or entity that is assigned to carry out the service request, if applicable.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit associated with the user or entity that is assigned to carry out the service request, if applicable.
+      user_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category associated with the user or entity that is assigned to carry out the service request, if applicable.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority of the user or entity that is assigned to carry out the service request, if applicable.
+    inherits:
+    - BaseEvent
+    - All_Ticket_Management
+  Problem:
+    kind: event
+    tags:
+    - ticketing
+    - problem
+    constraints:
+    - (`cim_Ticket_Management_indexes`) tag=ticketing
+    - tag=problem
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      affect_dest:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: Destinations affected by the service request.
+        multivalue: true
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      comments:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: Comments about the service request.
+      description:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The description of the service request.
+      dest:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The destination of the service request. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        calculation:
+          id: All_Ticket_Management_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority of the destination.
+      host:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative priority of the service request.
+      problem:
+        source: calculated
+        type: string
+        description: When multiple occurrences of related incidents are observed, they are collectively designated with a single problem value. Problem management differs from the process of managing an isolated incident. Often problems are managed by a specific set of staff and through a problem management process.
+        calculation:
+          id: Problem_fillnull_problem
+          type: Eval
+          expression: if(isnull(problem) OR problem="","unknown",problem)
+      severity:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative severity of the service request.
+      severity_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      source:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      sourcetype:
+        source: inherited
+        inherited_from: All_Ticket_Management
+      splunk_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The unique identifier of the service request as it pertains to Splunk. For example, 14DA67E8-6084-4FA8-9568-48D05969C522@@_internal@@0533eff241db0d892509be46cd3126e30e0f6046.
+      splunk_realm:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The Splunk application or use case associated with the unique identifier (splunk_id). For example, es_notable.
+      src_user:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The user or entity that created or triggered the service request, if applicable.
+      src_user_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit associated with the user or entity that triggered the service request.
+      src_user_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category associated with the user or entity that triggered the service request.
+        multivalue: true
+      src_user_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority associated with the user or entity that triggered the service request.
+      status:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The relative status of the service request.
+      tag:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      ticket_id:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: An identification name, code, or number for the service request.
+        calculation:
+          id: All_Ticket_Management_fillnull_ticket_id
+          type: Eval
+          expression: if(isnull(ticket_id) OR ticket_id="","unknown",ticket_id)
+      time_submitted:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: timestamp
+        description: The time that the src_user submitted the service request.
+      user:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The name of the user or entity that is assigned to carry out the service request, if applicable.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The business unit associated with the user or entity that is assigned to carry out the service request, if applicable.
+      user_category:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The category associated with the user or entity that is assigned to carry out the service request, if applicable.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Ticket_Management
+        type: string
+        description: The priority of the user or entity that is assigned to carry out the service request, if applicable.
+    inherits:
+    - BaseEvent
+    - All_Ticket_Management

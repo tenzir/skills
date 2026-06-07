@@ -1,0 +1,12 @@
+name: cached
+used_by:
+- model: Web
+  dataset: Web
+  source: declared
+  type: boolean
+  description: Indicates whether the event data is cached or not.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'

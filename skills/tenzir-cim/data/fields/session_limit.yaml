@@ -1,0 +1,7 @@
+name: session_limit
+used_by:
+- model: Databases
+  dataset: Database_Instance
+  source: declared
+  type: number
+  description: The maximum number of sessions that the database instance can handle.

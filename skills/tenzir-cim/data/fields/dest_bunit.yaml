@@ -1,0 +1,147 @@
+name: dest_bunit
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The business unit associated with the destination. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Application_State
+  dataset: All_Application_State
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Certificates
+  dataset: All_Certificates
+  source: declared
+  type: string
+  description: The business unit of the target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Change
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Change_Analysis
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Compute_Inventory
+  dataset: All_Inventory
+  source: declared
+  type: string
+  description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Databases
+  dataset: All_Databases
+  source: declared
+  type: string
+  description: The business unit of the destination.
+- model: DLP
+  dataset: DLP_Incidents
+  source: declared
+  type: string
+  description: The business unit of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The business unit of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Event_Signatures
+  dataset: Signatures
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: string
+  description: The business unit of the destination.
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Malware
+  dataset: Malware_Attacks
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Malware
+  dataset: Malware_Operations
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: string
+  description: The business unit of the destination.
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: The business unit of the destination.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Performance
+  dataset: All_Performance
+  source: declared
+  type: string
+  description: The business unit of the system where the event occurred. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: string
+  description: The business unit of the destination.
+- model: Updates
+  dataset: Updates
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.

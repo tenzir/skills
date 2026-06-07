@@ -1,0 +1,7 @@
+name: service_exec
+used_by:
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: The executable name of the service.

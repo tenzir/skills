@@ -1,0 +1,12 @@
+name: synch_supported
+used_by:
+- model: JVM
+  dataset: Threading
+  source: declared
+  type: boolean
+  description: Indicates whether the JVM supports monitoring of ownable synchronizer usage.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'

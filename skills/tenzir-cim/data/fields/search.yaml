@@ -1,0 +1,11 @@
+name: search
+used_by:
+- model: Splunk_Audit
+  dataset: Search_Activity
+  source: calculated
+  type: string
+  description: The SPL search syntax.
+  calculation:
+    id: 4Search_Activity_search
+    type: Eval
+    expression: if(isnull(search) OR search="",null(),search)

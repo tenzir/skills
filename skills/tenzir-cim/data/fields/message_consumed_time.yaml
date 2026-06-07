@@ -1,0 +1,7 @@
+name: message_consumed_time
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: timestamp
+  description: The time that the RPC (remote procedure call) read the message and was prepared to take some sort of action.

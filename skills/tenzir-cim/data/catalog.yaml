@@ -1,0 +1,227 @@
+models:
+  Alerts:
+    file: data/models/alerts.yaml
+    description: Alerts Data Model
+    datasets: 1
+    root_datasets:
+    - Alerts
+  Application_State:
+    file: data/models/application_state.yaml
+    display_name: Application State (Deprecated)
+    description: This model has been deprecated
+    deprecated: true
+    datasets: 4
+    root_datasets:
+    - All_Application_State
+  Authentication:
+    file: data/models/authentication.yaml
+    description: Authentication Data Model
+    datasets: 10
+    root_datasets:
+    - Authentication
+  Certificates:
+    file: data/models/certificates.yaml
+    description: Certificates Data Model
+    datasets: 2
+    root_datasets:
+    - All_Certificates
+  Change:
+    file: data/models/change.yaml
+    description: Change Data Model
+    datasets: 13
+    root_datasets:
+    - All_Changes
+  Change_Analysis:
+    file: data/models/change_analysis.yaml
+    display_name: Change Analysis (Deprecated)
+    description: This model has been deprecated.
+    deprecated: true
+    datasets: 14
+    root_datasets:
+    - All_Changes
+  Compute_Inventory:
+    file: data/models/compute_inventory.yaml
+    display_name: Inventory
+    description: Inventory Data Model
+    datasets: 12
+    root_datasets:
+    - All_Inventory
+  Data_Access:
+    file: data/models/data_access.yaml
+    display_name: Data Access
+    description: Data Access Data Model
+    datasets: 1
+    root_datasets:
+    - Data_Access
+  Databases:
+    file: data/models/databases.yaml
+    description: Data Model for all databases
+    datasets: 8
+    root_datasets:
+    - All_Databases
+  DLP:
+    file: data/models/dlp.yaml
+    display_name: Data Loss Prevention
+    description: Data Loss Prevention Data Model
+    datasets: 1
+    root_datasets:
+    - DLP_Incidents
+  Email:
+    file: data/models/email.yaml
+    description: Email Data Model
+    datasets: 4
+    root_datasets:
+    - All_Email
+  Endpoint:
+    file: data/models/endpoint.yaml
+    description: Endpoint Data Model
+    datasets: 5
+    root_datasets:
+    - Ports
+    - Processes
+    - Services
+    - Filesystem
+    - Registry
+  Event_Signatures:
+    file: data/models/event_signatures.yaml
+    display_name: Event Signatures
+    description: Event Signatures Data Model
+    datasets: 1
+    root_datasets:
+    - Signatures
+  Interprocess_Messaging:
+    file: data/models/interprocess_messaging.yaml
+    display_name: Interprocess Messaging
+    datasets: 1
+    root_datasets:
+    - All_Messaging
+  Intrusion_Detection:
+    file: data/models/intrusion_detection.yaml
+    display_name: Intrusion Detection
+    description: Intrusion Detection Data Model
+    datasets: 4
+    root_datasets:
+    - IDS_Attacks
+  JVM:
+    file: data/models/jvm.yaml
+    description: Java Virtual Machine Data Model
+    datasets: 7
+    root_datasets:
+    - JVM
+  Malware:
+    file: data/models/malware.yaml
+    description: Malware Data Model
+    datasets: 5
+    root_datasets:
+    - Malware_Attacks
+    - Malware_Operations
+  Network_Resolution:
+    file: data/models/network_resolution.yaml
+    display_name: Network Resolution (DNS)
+    description: Network Resolution Data Model
+    datasets: 1
+    root_datasets:
+    - DNS
+  Network_Sessions:
+    file: data/models/network_sessions.yaml
+    display_name: Network Sessions
+    description: Network Sessions Data Model
+    datasets: 5
+    root_datasets:
+    - All_Sessions
+  Network_Traffic:
+    file: data/models/network_traffic.yaml
+    display_name: Network Traffic
+    description: Network Traffic Data Model
+    datasets: 4
+    root_datasets:
+    - All_Traffic
+  Performance:
+    file: data/models/performance.yaml
+    description: Performance Data Model
+    datasets: 9
+    root_datasets:
+    - All_Performance
+  Splunk_Audit:
+    file: data/models/splunk_audit.yaml
+    display_name: Splunk Audit Logs
+    description: Splunk Audit Logs Data Model
+    datasets: 13
+    root_datasets:
+    - Datamodel_Acceleration
+    - Search_Activity
+    - Scheduler_Activity
+    - View_Activity
+    - Web_Service_Errors
+    - Modular_Actions
+  Splunk_CIM_Validation:
+    file: data/models/splunk_cim_validation.yaml
+    display_name: CIM Validation (S.o.S.)
+    description: This data model is to help check adoption into the CIM. It provides useful objects for making sure things are tagged appropriately and verify key fields for the different models are not missing.
+    datasets: 78
+    root_datasets:
+    - Alerts
+    - Application_State
+    - Authentication
+    - Certificates
+    - Change_Analysis
+    - Compute_Inventory
+    - Databases
+    - Email
+    - Interprocess_Messaging
+    - Intrusion_Detection
+    - JVM
+    - Malware
+    - Network_Resolution
+    - Network_Sessions
+    - Network_Traffic
+    - Performance
+    - Splunk_Audit
+    - Ticket_Management
+    - Updates
+    - Vulnerabilities
+    - Web
+    - Untagged_Events
+  Ticket_Management:
+    file: data/models/ticket_management.yaml
+    display_name: Ticket Management
+    description: Ticket Management Data Model
+    datasets: 4
+    root_datasets:
+    - All_Ticket_Management
+  Updates:
+    file: data/models/updates.yaml
+    description: Updates Data Model
+    datasets: 5
+    root_datasets:
+    - Updates
+    - Update_Errors
+  Vulnerabilities:
+    file: data/models/vulnerabilities.yaml
+    description: Vulnerabilities Data Model
+    datasets: 4
+    root_datasets:
+    - Vulnerabilities
+  Web:
+    file: data/models/web.yaml
+    description: Web Data Model
+    datasets: 3
+    root_datasets:
+    - Web
+base_fields:
+- _time
+- host
+- source
+- sourcetype
+indexes:
+  fields: data/fields.yaml
+  lookups: data/lookups.yaml
+  docs: docs/index.md
+source:
+  app_name: Splunk_SA_CIM
+  app_version: 8.5.0
+  app_title: Splunk Supporting Common Information Model Add-on
+  splunkbase_url: https://splunkbase.splunk.com/app/1621
+  docs_url: https://help.splunk.com/en/data-management/common-information-model/8.5/introduction/install-the-splunk-common-information-model-add-on
+  docs_version: '8.5'
+  manual_pdf_url: https://help.splunk.com/en/data-management/common-information-model/8.5/cim_user.pdf

@@ -1,0 +1,10 @@
+name: availability
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  source: declared
+  type: string
+  description: The status of the database server.
+  expected_values:
+  - Available
+  - Not Available

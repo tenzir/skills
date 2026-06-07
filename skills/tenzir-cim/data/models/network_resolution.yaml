@@ -1,0 +1,230 @@
+name: Network_Resolution
+display_name: Network Resolution (DNS)
+description: Network Resolution Data Model
+root_datasets:
+- DNS
+datasets:
+  DNS:
+    kind: event
+    tags:
+    - network
+    - resolution
+    - dns
+    constraints:
+    - (`cim_Network_Resolution_indexes`) tag=network tag=resolution tag=dns
+    fields:
+      _time:
+        source: base
+      additional_answer_count:
+        source: declared
+        type: number
+        description: Number of entries in the 'additional' section of the DNS message.
+      answer:
+        source: calculated
+        type: string
+        description: Resolved address for the query.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: DNS_0fillnull_answer
+          type: Eval
+          expression: if(isnull(answer) OR answer="","unknown",answer)
+      answer_count:
+        source: calculated
+        type: number
+        description: Number of entries in the answer section of the DNS message.
+        calculation:
+          id: DNS_answer_count
+          type: Eval
+          expression: case(isnum(answer_count),answer_count,isnotnull(answer),mvcount(answer),1=1,1)
+      authority_answer_count:
+        source: declared
+        type: number
+        description: Number of entries in the 'authority' section of the DNS message.
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: calculated
+        type: string
+        description: The destination of the network resolution event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: DNS_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: declared
+        type: string
+        description: The category of the network resolution target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_ip:
+        source: declared
+        type: string
+        description: The IP address of the destination.
+      dest_port:
+        source: declared
+        type: number
+        description: The destination port number.
+      dest_priority:
+        source: declared
+        type: string
+        description: The priority of the destination, if applicable.
+      duration:
+        source: declared
+        type: number
+        description: The time taken by the network resolution event, in seconds.
+      host:
+        source: base
+      message_type:
+        source: calculated
+        type: string
+        description: Type of DNS message.
+        expected_values:
+        - Query
+        - Response
+        recommended: true
+        calculation:
+          id: DNS_fillnull_message_type
+          type: Eval
+          expression: if(isnull(message_type) OR message_type="","unknown",message_type)
+      name:
+        source: declared
+        type: string
+        description: The name of the DNS event.
+      query:
+        source: calculated
+        type: string
+        description: The domain which needs to be resolved. Applies to messages of type 'Query'.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: DNS_0fillnull_query
+          type: Eval
+          expression: if(isnull(query) OR query="","unknown",query)
+      query_count:
+        source: calculated
+        type: number
+        description: Number of entries that appear in the 'Questions' section of the DNS query.
+        calculation:
+          id: DNS_query_count
+          type: Eval
+          expression: case(isnum(query_count),query_count,isnotnull(query),mvcount(query),1=1,1)
+      query_type:
+        source: declared
+        type: string
+        description: Number of entries that appear in the 'Questions' section of the DNS query.
+        expected_values:
+        - Query
+        - IQuery
+        - Status
+        - Notify
+        - Update
+        - A
+        - MX
+        - NS
+        - PTR
+      record_type:
+        source: declared
+        type: string
+        description: 'The DNS resource record type. For details, see the List of DNS record types on on the IANA web site: https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml'
+      reply_code:
+        source: calculated
+        type: string
+        description: The return code for the response. For details, see the Domain Name System Parameters on the Internet Assigned Numbers Authority (IANA) web site.
+        expected_values:
+        - No Error
+        - Format Error
+        - Server Failure
+        - Non-Existent Domain
+        - etc.
+        recommended: true
+        calculation:
+          id: DNS_reply_code
+          type: Lookup
+      reply_code_id:
+        source: calculated
+        type: string
+        description: The numerical id or name of a return code. For details, see the Domain Name System Parameters on the Internet Assigned Numbers Authority (IANA) web site.
+        expected_values:
+        - '0'
+        - NoError
+        - '1'
+        - FormErr
+        - '2'
+        - ServFail
+        - '3'
+        - NXDomain
+        - etc.
+        recommended: true
+        calculation:
+          id: DNS_0fillnull_reply_code_id
+          type: Eval
+          expression: case(isnotnull(reply_code_id) AND reply_code_id!="",reply_code_id,isnotnull(reply_code) AND reply_code!="",reply_code,1=1,"unknown")
+      response_time:
+        source: declared
+        type: number
+        description: The amount of time it took to receive a response in the network resolution event, in seconds.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      src:
+        source: declared
+        type: string
+        description: The source of the network resolution event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: declared
+        type: string
+        description: The business unit of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: declared
+        type: string
+        description: The category of the source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_ip:
+        source: declared
+        type: string
+        description: The ip address of the source.
+      src_port:
+        source: declared
+        type: number
+        description: The port number of the source.
+        multivalue: true
+      src_priority:
+        source: declared
+        type: string
+        description: The priority of the source.
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      transaction_id:
+        source: declared
+        type: number
+        description: The unique numerical transaction id of the network resolution event.
+      transport:
+        source: declared
+        type: string
+        description: The transport protocol used by the network resolution event.
+      ttl:
+        source: declared
+        type: number
+        description: The time-to-live of the network resolution event, in seconds.
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor product name of the DNS server. The Splunk platform can derive this field from the fields vendor and product in the raw data, if they exist.
+        recommended: true
+        calculation:
+          id: DNS_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent

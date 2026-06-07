@@ -1,0 +1,7 @@
+name: tablespace_reads
+used_by:
+- model: Databases
+  dataset: Tablespace
+  source: declared
+  type: number
+  description: The number of tablespace reads carried out by the query.

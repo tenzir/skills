@@ -1,0 +1,13 @@
+name: http_referrer_domain
+used_by:
+- model: Web
+  dataset: Web
+  source: calculated
+  type: string
+  description: The domain name contained within the HTTP referrer used in the request.
+  recommended: true
+  calculation:
+    id: 1Web_http_referrer_domain
+    type: Rex
+    expression: ^(?:http|https|ftp):\/\/(?:[a-zA-Z0-9\.\-]+(?::[a-zA-Z0-9]+)?@)?(?<http_referrer_domain>[^\/:]+)(?::[0-9]+)?
+    input_field: http_referrer

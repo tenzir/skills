@@ -1,0 +1,1335 @@
+name: Databases
+description: Data Model for all databases
+root_datasets:
+- All_Databases
+datasets:
+  All_Databases:
+    display_name: All Databases
+    kind: event
+    tags:
+    - database
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    fields:
+      _time:
+        source: base
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: declared
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: declared
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: declared
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: declared
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      host:
+        source: base
+      object:
+        source: declared
+        type: string
+        description: The name of the database object.
+      response_time:
+        source: declared
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      src:
+        source: declared
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: declared
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: declared
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: declared
+        type: string
+        description: The priority of the source.
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: declared
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: declared
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: declared
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: declared
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    children:
+    - Database_Instance
+    - Database_Query
+  Database_Instance:
+    display_name: Database Instance
+    kind: event
+    tags:
+    - database
+    - instance
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=instance
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Databases
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: All_Databases
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      host:
+        source: inherited
+        inherited_from: All_Databases
+      instance_name:
+        source: declared
+        type: string
+        description: The name of the database instance.
+      instance_version:
+        source: declared
+        type: string
+        description: The version of the database instance.
+      object:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The name of the database object.
+      process_limit:
+        source: declared
+        type: number
+        description: The maximum number of processes that the database instance can handle.
+      response_time:
+        source: inherited
+        inherited_from: All_Databases
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      session_limit:
+        source: declared
+        type: number
+        description: The maximum number of sessions that the database instance can handle.
+      source:
+        source: inherited
+        inherited_from: All_Databases
+      sourcetype:
+        source: inherited
+        inherited_from: All_Databases
+      src:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The priority of the source.
+      tag:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Databases
+    children:
+    - Instance_Stats
+    - Lock_Info
+    - Session_Info
+  Instance_Stats:
+    display_name: Instance Stats
+    kind: event
+    tags:
+    - database
+    - instance
+    - stats
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=instance
+    - tag=stats
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Database_Instance
+      availability:
+        source: declared
+        type: string
+        description: The status of the database server.
+        expected_values:
+        - Available
+        - Not Available
+      avg_executions:
+        source: declared
+        type: number
+        description: The average number of executions for the database instance.
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the destination.
+      dump_area_used:
+        source: declared
+        type: string
+        description: The amount of the database dump area that has been used.
+      duration:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      host:
+        source: inherited
+        inherited_from: Database_Instance
+      instance_name:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The name of the database instance.
+      instance_reads:
+        source: declared
+        type: number
+        description: The total number of reads for the database instance.
+      instance_version:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The version of the database instance.
+      instance_writes:
+        source: declared
+        type: number
+        description: The total number of writes for the database instance.
+      number_of_users:
+        source: declared
+        type: number
+        description: The total number of users for the database instance.
+      object:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The name of the database object.
+      process_limit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The maximum number of processes that the database instance can handle.
+      processes:
+        source: declared
+        type: number
+        description: The number of processes currently running for the database instance.
+      response_time:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      session_limit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The maximum number of sessions that the database instance can handle.
+      sessions:
+        source: declared
+        type: number
+        description: The total number of sessions currently in use for the database instance.
+      sga_buffer_cache_size:
+        source: declared
+        type: number
+        description: The total size of the buffer cache for the database instance, in bytes.
+      sga_buffer_hit_limit:
+        source: declared
+        type: number
+        description: The maximum number of buffers that can be hit in the database instance without finding a free buffer.
+      sga_data_dict_hit_ratio:
+        source: declared
+        type: number
+        description: The hit-to-miss ratio for the database instance's data dictionary.
+      sga_fixed_area_size:
+        source: declared
+        type: number
+        description: The size of the fixed area (also referred to as the fixed SGA) for the database instance, in bytes.
+      sga_free_memory:
+        source: declared
+        type: number
+        description: The total amount of free memory in the database instance SGA, in bytes.
+      sga_library_cache_size:
+        source: declared
+        type: number
+        description: The total library cache size for the database instance, in bytes.
+      sga_redo_log_buffer_size:
+        source: declared
+        type: number
+        description: The total size of the redo log buffer for the database instance, in bytes.
+      sga_shared_pool_size:
+        source: declared
+        type: number
+        description: The total size of the shared pool for this database instance, in bytes.
+      sga_sql_area_size:
+        source: declared
+        type: number
+        description: The total size of the SQL area for this database instance, in bytes.
+      source:
+        source: inherited
+        inherited_from: Database_Instance
+      sourcetype:
+        source: inherited
+        inherited_from: Database_Instance
+      src:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the source.
+      start_time:
+        source: declared
+        type: timestamp
+        description: The total amount of uptime for the database instance.
+      tablespace_used:
+        source: declared
+        type: string
+        description: The total amount of tablespace used for the database instance, in bytes.
+      tag:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Databases
+    - Database_Instance
+  Session_Info:
+    display_name: Session Info
+    kind: event
+    tags:
+    - database
+    - instance
+    - session
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=instance
+    - tag=session
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Database_Instance
+      buffer_cache_hit_ratio:
+        source: declared
+        type: number
+        description: The percentage of logical reads from the buffer during the session (1-physical reads/session logical reads*100).
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      commits:
+        source: declared
+        type: number
+        description: The number of commits per second performed by the user associated with the session.
+      cpu_used:
+        source: declared
+        type: number
+        description: The number of CPU centiseconds used by the session. Divide this value by 100 to get the CPU seconds.
+      cursor:
+        source: declared
+        type: number
+        description: The number of the cursor currently in use by the session.
+      dest:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      elapsed_time:
+        source: declared
+        type: number
+        description: The total amount of time elapsed since the user started the session by logging into the database server, in seconds.
+      host:
+        source: inherited
+        inherited_from: Database_Instance
+      instance_name:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The name of the database instance.
+      instance_version:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The version of the database instance.
+      logical_reads:
+        source: declared
+        type: number
+        description: The total number of consistent gets and database block gets performed during the session.
+      machine:
+        source: declared
+        type: string
+        description: The name of the logical host associated with the database instance.
+      memory_sorts:
+        source: declared
+        type: number
+        description: The total number of memory sorts performed during the session.
+      object:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The name of the database object.
+      physical_reads:
+        source: declared
+        type: number
+        description: The total number of physical reads performed during the session.
+      process_limit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The maximum number of processes that the database instance can handle.
+      response_time:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      seconds_in_wait:
+        source: declared
+        type: number
+        description: The seconds_in_wait depends on the value of wait_time. If wait_time = 0, seconds_in_wait is the number of seconds spent in the current wait condition. If wait_time has a nonzero value, seconds_in_wait is the number of seconds that have elapsed since the start of the last wait. You can get the active seconds that have elapsed since the last wait ended by calculating seconds_in_wait - wait_time / 100.
+      session_id:
+        source: declared
+        type: string
+        description: The unique id that identifies the session.
+      session_limit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The maximum number of sessions that the database instance can handle.
+      session_status:
+        source: declared
+        type: string
+        description: The current status of the session.
+        expected_values:
+        - Online
+        - Offline
+      source:
+        source: inherited
+        inherited_from: Database_Instance
+      sourcetype:
+        source: inherited
+        inherited_from: Database_Instance
+      src:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the source.
+      table_scans:
+        source: declared
+        type: number
+        description: Number of table scans performed during the session.
+      tag:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      wait_state:
+        source: declared
+        type: string
+        description: Provides the current wait state for the session. Can indicate that the session is currently waiting or provide information about the session's last wait. WAITING indicates the session is currently waiting, WAITED UNKNOWN TIME indicates the duration of the last session wait is unknown, WAITED SHORT TIME indicates the last session wait was < 1/100th of a second, WAITED KNOWN TIME indicates the wait_time is the duration of the last session wait.
+        expected_values:
+        - WAITING
+        - WAITED UNKNOWN
+        - WAITED SHORT TIME
+        - WAITED KNOWN TIME
+      wait_time:
+        source: declared
+        type: number
+        description: When wait_time = 0, the session is waiting. When wait_time has a nonzero value, it is displaying the last wait time for the session.
+    inherits:
+    - BaseEvent
+    - All_Databases
+    - Database_Instance
+  Lock_Info:
+    display_name: Lock Info
+    kind: event
+    tags:
+    - database
+    - instance
+    - lock
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=instance
+    - tag=lock
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Database_Instance
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      host:
+        source: inherited
+        inherited_from: Database_Instance
+      instance_name:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The name of the database instance.
+      instance_version:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The version of the database instance.
+      last_call_minute:
+        source: declared
+        type: number
+        description: Represents the amount of time elapsed since the session_status changed to its current status. The definition of this field depends on the session_status value. If session_status = ONLINE, the last_call_minute value represents the time elapsed since the session became active. If session_status = OFFLINE, the last_call_minute value represents the time elapsed since the session became inactive.
+      lock_mode:
+        source: declared
+        type: string
+        description: The mode of the lock on the object.
+      lock_session_id:
+        source: declared
+        type: string
+        description: The session identifier of the locked object.
+      logon_time:
+        source: declared
+        type: number
+        description: The database logon time for the session.
+      obj_name:
+        source: declared
+        type: string
+        description: The name of the locked object.
+      object:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The name of the database object.
+      os_pid:
+        source: declared
+        type: string
+        description: The process identifier for the operating system.
+      process_limit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The maximum number of processes that the database instance can handle.
+      response_time:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      serial_num:
+        source: declared
+        type: string
+        description: The serial number of the object.
+      session_limit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: number
+        description: The maximum number of sessions that the database instance can handle.
+      source:
+        source: inherited
+        inherited_from: Database_Instance
+      sourcetype:
+        source: inherited
+        inherited_from: Database_Instance
+      src:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the source.
+      tag:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: Database_Instance
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Databases
+    - Database_Instance
+  Database_Query:
+    display_name: Database Query
+    kind: event
+    tags:
+    - database
+    - query
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=query
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Databases
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: All_Databases
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      host:
+        source: inherited
+        inherited_from: All_Databases
+      object:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The name of the database object.
+      query:
+        source: declared
+        type: string
+        description: The full database query.
+      query_id:
+        source: declared
+        type: string
+        description: The identifier for the database query.
+      query_time:
+        source: declared
+        type: timestamp
+        description: The time the system initiated the database query.
+      records_affected:
+        source: declared
+        type: number
+        description: The number of records affected by the database query.
+      response_time:
+        source: inherited
+        inherited_from: All_Databases
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      source:
+        source: inherited
+        inherited_from: All_Databases
+      sourcetype:
+        source: inherited
+        inherited_from: All_Databases
+      src:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The priority of the source.
+      tag:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Databases
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Databases
+    children:
+    - Query_Stats
+    - Tablespace
+  Tablespace:
+    kind: event
+    tags:
+    - database
+    - query
+    - tablespace
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=query
+    - tag=tablespace
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Database_Query
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: Database_Query
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      free_bytes:
+        source: declared
+        type: number
+        description: The total amount of free space in the tablespace, in bytes.
+      host:
+        source: inherited
+        inherited_from: Database_Query
+      object:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The name of the database object.
+      query:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The full database query.
+      query_id:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The identifier for the database query.
+      query_time:
+        source: inherited
+        inherited_from: Database_Query
+        type: timestamp
+        description: The time the system initiated the database query.
+      records_affected:
+        source: inherited
+        inherited_from: Database_Query
+        type: number
+        description: The number of records affected by the database query.
+      response_time:
+        source: inherited
+        inherited_from: Database_Query
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      source:
+        source: inherited
+        inherited_from: Database_Query
+      sourcetype:
+        source: inherited
+        inherited_from: Database_Query
+      src:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The priority of the source.
+      tablespace_name:
+        source: declared
+        type: string
+        description: The name of the tablespace.
+      tablespace_reads:
+        source: declared
+        type: number
+        description: The number of tablespace reads carried out by the query.
+      tablespace_status:
+        source: declared
+        type: string
+        description: The status of the tablespace.
+        expected_values:
+        - Offline
+        - Online
+        - Read Only
+      tablespace_writes:
+        source: declared
+        type: number
+        description: The number of tablespace writes carried out by the query.
+      tag:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Databases
+    - Database_Query
+  Query_Stats:
+    display_name: Query Stats
+    kind: event
+    tags:
+    - database
+    - query
+    - stats
+    constraints:
+    - (`cim_Databases_indexes`) tag=database
+    - tag=query
+    - tag=stats
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Database_Query
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+      dest_bunit:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: Database_Query
+        type: number
+        description: The amount of time for the completion of the database event, in seconds.
+      host:
+        source: inherited
+        inherited_from: Database_Query
+      indexes_hit:
+        source: declared
+        type: string
+        description: The names of the indexes hit by the database query.
+      object:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The name of the database object.
+      query:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The full database query.
+      query_id:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The identifier for the database query.
+      query_plan_hit:
+        source: declared
+        type: string
+        description: The name of the query plan hit by the query.
+      query_time:
+        source: inherited
+        inherited_from: Database_Query
+        type: timestamp
+        description: The time the system initiated the database query.
+      records_affected:
+        source: inherited
+        inherited_from: Database_Query
+        type: number
+        description: The number of records affected by the database query.
+      response_time:
+        source: inherited
+        inherited_from: Database_Query
+        type: number
+        description: The amount of time it took to receive a response in the database event, in seconds.
+      source:
+        source: inherited
+        inherited_from: Database_Query
+      sourcetype:
+        source: inherited
+        inherited_from: Database_Query
+      src:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+      src_bunit:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The priority of the source.
+      stored_procedures_called:
+        source: declared
+        type: string
+        description: The names of the stored procedures called by the query.
+      tables_hit:
+        source: declared
+        type: string
+        description: The names of the tables hit by the query.
+      tag:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: Name of the database process user.
+      user_bunit:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The business unit of the user.
+      user_category:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The category associated with the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: Database_Query
+        type: string
+        description: The vendor and product name of the database system. This field can be automatically populated by vendor and product fields in your data.
+        calculation:
+          id: All_Databases_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Databases
+    - Database_Query

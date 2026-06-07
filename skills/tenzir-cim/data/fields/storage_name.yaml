@@ -1,0 +1,7 @@
+name: storage_name
+used_by:
+- model: Web
+  dataset: Storage
+  source: declared
+  type: string
+  description: The name of the bucket or storage account.

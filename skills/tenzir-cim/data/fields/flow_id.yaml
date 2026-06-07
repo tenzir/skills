@@ -1,0 +1,7 @@
+name: flow_id
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: Unique identifier for this traffic stream, such as a netflow, jflow, or cflow.

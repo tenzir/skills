@@ -1,0 +1,289 @@
+name: Data_Access
+display_name: Data Access
+description: Data Access Data Model
+root_datasets:
+- Data_Access
+datasets:
+  Data_Access:
+    display_name: Data Access
+    kind: event
+    tags:
+    - data
+    - access
+    constraints:
+    - (`cim_Data_Access_indexes`) tag=data tag=access
+    fields:
+      _time:
+        source: base
+      action:
+        source: calculated
+        type: string
+        description: The data access action taken by the user.
+        expected_values:
+        - accepted
+        - commented
+        - copied
+        - created
+        - deleted
+        - disabled
+        - downloaded
+        - enabled
+        - forwarded
+        - granted
+        - invited
+        - locked
+        - modified
+        - moved
+        - read
+        - restarted
+        - revoked
+        - shared
+        - started
+        - stopped
+        - uncommented
+        - undeleted
+        - unlocked
+        - unshared
+        - uploaded
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      app:
+        source: calculated
+        type: string
+        description: The system, service, or application that generated the data access event. Examples include Onedrive, Sharepoint, drive, AzureActiveDirectory.
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_app
+          type: Eval
+          expression: if(isnull(app) OR app="",sourcetype,app)
+      application_id:
+        source: declared
+        type: string
+        description: Application ID of the user
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: calculated
+        type: string
+        description: The destination where the data resides or where it is being accessed, such as the product or application. You can alias this from more specific fields not included in this data model, such as dest_host, dest_ip, dest_url or dest_name.
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_name:
+        source: declared
+        type: string
+        description: Name of the destination as defined by the Vendor.
+      dest_type:
+        source: declared
+        type: string
+        description: The type of the destination object, such as 'instance', 'storage', 'firewall', 'printer'.
+      dest_url:
+        source: declared
+        type: string
+        description: Url of the product, application or object.
+      dvc:
+        source: declared
+        type: string
+        description: The device that reported the data access event.
+      dvc_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      email:
+        source: declared
+        type: string
+        description: The email address of the user involved in the event, or who initiated the event.
+      host:
+        source: base
+      object:
+        source: calculated
+        type: string
+        description: Resource object name on which the action was performed by a user.
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: calculated
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Data_Access_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: calculated
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        expected_values:
+        - collaboration
+        - file
+        - folder
+        - comment
+        - task
+        - note
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: calculated
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a source_folder_id, doc_id.
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: declared
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+      object_size:
+        source: calculated
+        type: string
+        description: The size of the modified resource object.
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_object_size
+          type: Eval
+          expression: if(isnull(object_size) OR object_size="","unknown",object_size)
+      owner:
+        source: declared
+        type: string
+        description: Resource owner.
+      owner_email:
+        source: declared
+        type: string
+        description: Email of the resource owner.
+      owner_id:
+        source: declared
+        type: string
+        description: ID of the owner as defined by the vendor.
+      parent_object:
+        source: declared
+        type: string
+        description: Parent of the object name on which the action was performed by a user.
+      parent_object_category:
+        source: declared
+        type: string
+        description: Object category of the parent object on which action was performed by a user.
+      parent_object_id:
+        source: declared
+        type: string
+        description: Object id of the parent object on which the action was performed by a user.
+      signature:
+        source: declared
+        type: string
+        description: A human-readable signature name.
+        recommended: true
+      signature_id:
+        source: declared
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      src:
+        source: calculated
+        type: string
+        description: The endpoint client host.
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user:
+        source: calculated
+        type: string
+        description: The user involved in the event, or who initiated the event.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: declared
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_email:
+        source: declared
+        type: string
+        description: The email address of the user involved in the event, or who initiated the event.
+      user_group:
+        source: declared
+        type: string
+        description: The group of the user involved in the event, or who initiated the event.
+      user_id:
+        source: declared
+        type: string
+        description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
+      user_name:
+        source: calculated
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_role:
+        source: declared
+        type: string
+        description: The role of the user involved in the event, or who initiated the event.
+      user_type:
+        source: declared
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: calculated
+        type: string
+        description: The account that manages the user that initiated the request.
+        recommended: true
+        calculation:
+          id: Data_Access_fillnull_vendor_account
+          type: Eval
+          expression: if(isnull(vendor_account) OR vendor_account="","unknown",vendor_account)
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor and product name of the vendor.
+        recommended: true
+        calculation:
+          id: Data_Access_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_product_id:
+        source: declared
+        type: string
+        description: The vendor and product name ID as defined by the vendor.
+      vendor_region:
+        source: declared
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent

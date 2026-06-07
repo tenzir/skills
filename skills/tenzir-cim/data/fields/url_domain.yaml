@@ -1,0 +1,13 @@
+name: url_domain
+used_by:
+- model: Web
+  dataset: Web
+  source: calculated
+  type: string
+  description: The domain name contained within the URL of the requested HTTP resource.
+  recommended: true
+  calculation:
+    id: 1Web_url_domain
+    type: Rex
+    expression: ^((?:http|https|ftp):\/\/)*(?:[a-zA-Z0-9\.\-]+(?::[a-zA-Z0-9]+)?@)?(?<url_domain>[^\/:]+)(?::[0-9]+)?
+    input_field: url

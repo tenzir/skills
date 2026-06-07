@@ -1,0 +1,51 @@
+name: cim_cloud_domains
+key: domain
+entries:
+- domain: '*drive.google.com'
+  registrant: Google
+  is_email: false
+  is_storage: true
+- domain: '*gmail.google.com'
+  registrant: Google
+  is_email: true
+  is_storage: false
+- domain: '*gmail.com'
+  registrant: Google
+  is_email: true
+  is_storage: false
+- domain: '*google.com'
+  registrant: Google
+  is_email: false
+  is_storage: false
+- domain: '*ymail.com'
+  registrant: Yahoo Mail
+  is_email: true
+  is_storage: false
+- domain: '*aws.amazon.com'
+  registrant: Amazon Web Services
+  is_email: false
+  is_storage: false
+- domain: '*inbox.com'
+  registrant: Inbox
+  is_email: true
+  is_storage: false
+- domain: '*dropbox.com'
+  registrant: Dropbox
+  is_email: false
+  is_storage: true
+- domain: '*box.com'
+  registrant: Box
+  is_email: false
+  is_storage: true
+- domain: '*rackspace.com'
+  registrant: Rackspace
+  is_email: false
+  is_storage: false
+- domain: '*softlayer.com'
+  registrant: Softlayer
+  is_email: false
+  is_storage: false
+- domain: '*hotmail.com'
+  registrant: Microsoft
+  is_email: true
+  is_storage: false

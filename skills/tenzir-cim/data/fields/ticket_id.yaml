@@ -1,0 +1,15 @@
+name: ticket_id
+used_by:
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_All_Ticket_Managment
+  source: declared
+  type: string
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: calculated
+  type: string
+  description: An identification name, code, or number for the service request.
+  calculation:
+    id: All_Ticket_Management_fillnull_ticket_id
+    type: Eval
+    expression: if(isnull(ticket_id) OR ticket_id="","unknown",ticket_id)

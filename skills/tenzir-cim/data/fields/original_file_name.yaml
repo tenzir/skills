@@ -1,0 +1,12 @@
+name: original_file_name
+used_by:
+- model: Endpoint
+  dataset: Processes
+  source: calculated
+  type: string
+  description: Original name of the file, not including path. Sometimes this field is similar to process name but the two do not always match, such as process_name=pwsh and original_file_name=powershell.exe to detect renamed instances of any process executing.
+  recommended: true
+  calculation:
+    id: Endpoint_Processes_fillnull_original_file_name
+    type: Eval
+    expression: if(isnull(original_file_name) OR original_file_name="","unknown",original_file_name)

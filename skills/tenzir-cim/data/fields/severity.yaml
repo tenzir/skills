@@ -1,0 +1,108 @@
+name: severity
+lookups:
+- name: cim_endpoint_severities
+  file: data/lookups/cim_endpoint_severities.yaml
+- name: cim_ids_severities
+  file: data/lookups/cim_ids_severities.yaml
+- name: cim_vuln_severities
+  file: data/lookups/cim_vuln_severities.yaml
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: calculated
+  type: string
+  description: 'The severity of the alert event. Note: This field is a string. Specific values are required. Use the severity_id field for severity ID fields that are integer data types. Use vendor_severity for the vendor''s own human readable strings (such as ''Good'', ''Bad'', ''Really Bad'').'
+  expected_values:
+  - critical
+  - high
+  - medium
+  - low
+  - informational
+  - unknown
+  recommended: true
+  calculation:
+    id: Alerts_fillnull_severity
+    type: Eval
+    expression: if(isnull(severity) OR severity="","unknown",severity)
+- model: DLP
+  dataset: DLP_Incidents
+  source: calculated
+  type: string
+  description: The severity of the DLP event.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_severity
+    type: Eval
+    expression: if(isnull(severity) OR severity="","unknown",severity)
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: calculated
+  type: string
+  description: 'The severity of the network protection event. Note: This field is a string. Use severity_id for severity ID fields that are integer data types. The severity_id field is optional, so it is not included in the model. Also, specific values are required for this field. Use vendor_severity for the vendor''s own human readable severity strings, such as Good, Bad, and Really Bad.'
+  expected_values:
+  - critical
+  - high
+  - medium
+  - low
+  - informational
+  recommended: true
+  calculation:
+    id: IDS_Attacks_fillnull_severity
+    type: Eval
+    expression: if(isnull(severity) OR severity="","unknown",severity)
+- model: Malware
+  dataset: Malware_Attacks
+  source: calculated
+  type: string
+  description: 'The severity of the network protection event. Note: This field is a string. Use severity_id for severity ID fields that are integer data types. The severity_id field is optional, so it is not included in the model. Also, specific values are required for this field. Use vendor_severity for the vendor''s own human readable severity strings, such as Good, Bad, and Really Bad.'
+  expected_values:
+  - critical
+  - high
+  - medium
+  - low
+  - informational
+  recommended: true
+  calculation:
+    id: Malware_Attacks_fillnull_severity
+    type: Eval
+    expression: if(isnull(severity) OR severity="","unknown",severity)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_IDS
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Vulnerabilities
+  source: declared
+  type: string
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: string
+  description: The relative severity of the service request.
+- model: Updates
+  dataset: Updates
+  source: declared
+  type: string
+  description: The severity associated with the patch event.
+  expected_values:
+  - critical
+  - high
+  - medium
+  - low
+  - informational
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: calculated
+  type: string
+  description: 'The severity of the vulnerability detection event. Specific values are required. Use vendor_severity for the vendor''s own human readable strings (such as Good, Bad, and Really Bad). Note: This field is a string. Use severity_id for numeric data types. The severity_id field is optional and not included in the data model.'
+  expected_values:
+  - critical
+  - high
+  - medium
+  - low
+  - informational
+  recommended: true
+  calculation:
+    id: Vulnerabilities_fillnull_severity
+    type: Eval
+    expression: if(isnull(severity) OR severity="","unknown",severity)

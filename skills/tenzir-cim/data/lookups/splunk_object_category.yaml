@@ -1,0 +1,8 @@
+name: splunk_object_category
+key: vendor_object_category
+maps_to: object_category
+mappings:
+- from: '0'
+  to: file
+- from: '1'
+  to: directory

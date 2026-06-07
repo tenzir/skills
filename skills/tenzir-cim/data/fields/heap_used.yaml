@@ -1,0 +1,7 @@
+name: heap_used
+used_by:
+- model: JVM
+  dataset: Memory
+  source: declared
+  type: number
+  description: Heap memory used by the JVM, in bytes.

@@ -1,0 +1,7 @@
+name: time_submitted
+used_by:
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: timestamp
+  description: The time that the src_user submitted the service request.

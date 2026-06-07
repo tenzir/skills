@@ -1,0 +1,7 @@
+name: total_run_time
+used_by:
+- model: Splunk_Audit
+  dataset: Search_Activity
+  source: declared
+  type: string
+  description: The total run time of the search.

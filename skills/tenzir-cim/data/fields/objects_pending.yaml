@@ -1,0 +1,7 @@
+name: objects_pending
+used_by:
+- model: JVM
+  dataset: Memory
+  source: declared
+  type: number
+  description: Number of objects pending in the JVM.

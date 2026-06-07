@@ -1,0 +1,7 @@
+name: buckets
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: number
+  description: The number of index buckets spanned by the data model acceleration summary.

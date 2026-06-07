@@ -1,0 +1,17 @@
+name: cim_endpoint_object_categories
+field: object_category
+values:
+- config_setting
+- directory
+- directory_entry
+- file
+- group
+- hardware_component
+- network
+- policy
+- process
+- registry
+- service
+- system_object
+- system_state
+- user

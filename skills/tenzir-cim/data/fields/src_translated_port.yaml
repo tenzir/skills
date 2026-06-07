@@ -1,0 +1,7 @@
+name: src_translated_port
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: number
+  description: 'The NATed port from which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'

@@ -1,0 +1,12 @@
+name: omu_supported
+used_by:
+- model: JVM
+  dataset: Threading
+  source: declared
+  type: boolean
+  description: Indicates whether the JVM supports monitoring of object monitor usage.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'

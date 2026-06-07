@@ -1,0 +1,7 @@
+name: ssl_engine
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: declared
+  type: string
+  description: The name of the signature engine that created the certificate.

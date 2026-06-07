@@ -1,0 +1,7 @@
+name: cim_endpoint_actions
+field: action
+values:
+- created
+- deleted
+- modified
+- state_changed

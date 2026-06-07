@@ -1,0 +1,12 @@
+name: read_ops
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  source: declared
+  type: number
+  description: The total number of read operations in the polling period.
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: Number of read operations.

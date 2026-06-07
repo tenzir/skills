@@ -1,0 +1,21 @@
+name: cpu_time
+used_by:
+- model: Application_State
+  dataset: Processes
+  source: declared
+  type: string
+  description: CPU Time.
+- model: JVM
+  dataset: OS
+  source: declared
+  type: number
+  description: Amount of CPU time taken by the JVM, in seconds.
+- model: Performance
+  dataset: CPU
+  source: declared
+  type: number
+  description: The number of CPU seconds consumed by processes.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_CPU
+  source: declared
+  type: number

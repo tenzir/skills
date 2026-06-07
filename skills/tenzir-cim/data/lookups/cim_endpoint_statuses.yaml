@@ -1,0 +1,6 @@
+name: cim_endpoint_statuses
+field: status
+values:
+- success
+- failure
+- deferred

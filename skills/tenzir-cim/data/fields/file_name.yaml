@@ -1,0 +1,47 @@
+name: file_name
+used_by:
+- model: Change_Analysis
+  dataset: Filesystem_Changes
+  source: calculated
+  type: string
+  description: The name of the file that is the object of the event (without location information related to local file or directory structure).
+  recommended: true
+  calculation:
+    id: Filesystem_Changes_eval_file_name
+    type: Eval
+    expression: if(isnull(file_name) OR file_name="","unknown",file_name)
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The names of the files attached to the message, if any exist.
+- model: Endpoint
+  dataset: Filesystem
+  source: calculated
+  type: string
+  description: The name of the file, such as notepad.exe.
+  recommended: true
+  calculation:
+    id: Endpoint_Filesystem_eval_file_name
+    type: Eval
+    expression: if(isnull(file_name) OR file_name="","unknown",file_name)
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: The name of the file, such as notepad.exe.
+- model: Malware
+  dataset: Malware_Attacks
+  source: declared
+  type: string
+  description: The name of the file with suspected malware.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  source: declared
+  type: string
+- model: Updates
+  dataset: Updates
+  source: declared
+  type: string
+  description: The name of the patch package that was installed or attempted.
+  multivalue: true

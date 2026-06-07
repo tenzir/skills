@@ -1,0 +1,7 @@
+name: ssl_issuer_unit
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: declared
+  type: string
+  description: The certificate issuer's organizational unit.

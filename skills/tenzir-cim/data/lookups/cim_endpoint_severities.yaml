@@ -1,0 +1,8 @@
+name: cim_endpoint_severities
+field: severity
+values:
+- critical
+- high
+- medium
+- low
+- informational

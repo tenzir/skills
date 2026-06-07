@@ -1,0 +1,6 @@
+name: product
+used_by:
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Malware_Operations
+  source: declared
+  type: string

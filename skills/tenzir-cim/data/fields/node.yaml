@@ -1,0 +1,7 @@
+name: node
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  source: declared
+  type: string
+  description: Represents a node hit.

@@ -1,0 +1,7 @@
+name: peak_thread_count
+used_by:
+- model: JVM
+  dataset: Threading
+  source: declared
+  type: number
+  description: The JVM's peak thread count.

@@ -1,0 +1,15 @@
+name: process_integrity_level
+used_by:
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: The integrity level of the process.
+  expected_values:
+  - protected process
+  - system
+  - high
+  - medium high
+  - medium
+  - low
+  - untrusted

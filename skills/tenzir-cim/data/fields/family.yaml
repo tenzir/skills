@@ -1,0 +1,7 @@
+name: family
+used_by:
+- model: Compute_Inventory
+  dataset: All_Inventory
+  source: declared
+  type: string
+  description: The product family of the resource, such as 686_64 or RISC.

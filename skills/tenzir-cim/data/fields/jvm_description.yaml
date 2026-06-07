@@ -1,0 +1,7 @@
+name: jvm_description
+used_by:
+- model: JVM
+  dataset: JVM
+  source: declared
+  type: string
+  description: A description field provided in some data sources.

@@ -1,0 +1,7 @@
+name: fd_used
+used_by:
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: The current number of open file descriptors.

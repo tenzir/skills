@@ -1,0 +1,7 @@
+name: query_id
+used_by:
+- model: Databases
+  dataset: Database_Query
+  source: declared
+  type: string
+  description: The identifier for the database query.

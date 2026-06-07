@@ -1,0 +1,4166 @@
+name: Change
+description: Change Data Model
+root_datasets:
+- All_Changes
+datasets:
+  All_Changes:
+    display_name: All Changes
+    kind: event
+    tags:
+    - change
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    fields:
+      _time:
+        source: base
+      action:
+        source: calculated
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: calculated
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: calculated
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: calculated
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: calculated
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: base
+      object:
+        source: calculated
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: calculated
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: calculated
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: calculated
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: calculated
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: calculated
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: calculated
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: base
+      sourcetype:
+        source: base
+      src:
+        source: calculated
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: calculated
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: calculated
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: declared
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: calculated
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: declared
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: declared
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: declared
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    children:
+    - Account_Management
+    - Auditing_Changes
+    - Endpoint_Changes
+    - Instance_Changes
+    - Network_Changes
+  Auditing_Changes:
+    display_name: Auditing Changes
+    kind: event
+    tags:
+    - change
+    - audit
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=audit
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Changes
+      action:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Changes
+      object:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: All_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: All_Changes
+      src:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+  Endpoint_Changes:
+    display_name: Endpoint Changes
+    kind: event
+    tags:
+    - change
+    - endpoint
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=endpoint
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Changes
+      action:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Changes
+      object:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: All_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: All_Changes
+      src:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    children:
+    - Endpoint_Restarts
+    - Other_Endpoint_Changes
+  Endpoint_Restarts:
+    display_name: Endpoint Restarts
+    kind: event
+    tags:
+    - change
+    - endpoint
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=endpoint
+    - action=modified change_type=restart
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      action:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      object:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      src:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    - Endpoint_Changes
+  Other_Endpoint_Changes:
+    display_name: Other Endpoint Changes
+    kind: event
+    tags:
+    - change
+    - endpoint
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=endpoint
+    - NOT change_type=restart
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      action:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      object:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: Endpoint_Changes
+      src:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: Endpoint_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    - Endpoint_Changes
+  Network_Changes:
+    display_name: Network Changes
+    kind: event
+    tags:
+    - change
+    - network
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=network
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Changes
+      action:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_ip_range:
+        source: declared
+        type: string
+        description: For network events, the outgoing traffic for a specific destination IP address range. Specify a single IP address, or an IP address range in CIDR notation (for example, 203.0.113.5/32)
+        multivalue: true
+      dest_port_range:
+        source: declared
+        type: string
+        description: For network events, this field represents destination port or range. For example, 80 or 8000 - 8080 or 80,443
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      direction:
+        source: declared
+        type: string
+        description: For network events, this field represents whether the traffic is inbound or outbound.
+        multivalue: true
+      dvc:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Changes
+      object:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      protocol:
+        source: declared
+        type: string
+        description: This field represents the protocol for the network event rule.
+        multivalue: true
+      result:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      rule_action:
+        source: declared
+        type: string
+        description: For network events, this field represents whether to allow or deny traffic.
+        multivalue: true
+      source:
+        source: inherited
+        inherited_from: All_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: All_Changes
+      src:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_ip_range:
+        source: declared
+        type: string
+        description: For network events, this field represents the incoming traffic from a specific source IP address or range. Specify a single IP address, or an IP address range in CIDR notation (for example, 203.0.113.5/32)
+        multivalue: true
+      src_port_range:
+        source: declared
+        type: string
+        description: For network events, this field represents source port or range. For example, 80 or 8000 - 8080 or 80,443
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    children:
+    - Device_Restarts
+  Device_Restarts:
+    display_name: Device Restarts
+    kind: event
+    tags:
+    - change
+    - network
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=network
+    - action=modified change_type=restart
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Network_Changes
+      action:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_ip_range:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: For network events, the outgoing traffic for a specific destination IP address range. Specify a single IP address, or an IP address range in CIDR notation (for example, 203.0.113.5/32)
+        multivalue: true
+      dest_port_range:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: For network events, this field represents destination port or range. For example, 80 or 8000 - 8080 or 80,443
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      direction:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: For network events, this field represents whether the traffic is inbound or outbound.
+        multivalue: true
+      dvc:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: Network_Changes
+      object:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      protocol:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field represents the protocol for the network event rule.
+        multivalue: true
+      result:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      rule_action:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: For network events, this field represents whether to allow or deny traffic.
+        multivalue: true
+      source:
+        source: inherited
+        inherited_from: Network_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: Network_Changes
+      src:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_ip_range:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: For network events, this field represents the incoming traffic from a specific source IP address or range. Specify a single IP address, or an IP address range in CIDR notation (for example, 203.0.113.5/32)
+        multivalue: true
+      src_port_range:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: For network events, this field represents source port or range. For example, 80 or 8000 - 8080 or 80,443
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: Network_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    - Network_Changes
+  Account_Management:
+    display_name: Account Management
+    kind: event
+    tags:
+    - change
+    - account
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Changes
+      action:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_nt_domain:
+        source: calculated
+        type: string
+        description: The NT domain of the destination, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_dest_nt_domain
+          type: Eval
+          expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+      dest_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Changes
+      object:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: All_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: All_Changes
+      src:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_nt_domain:
+        source: calculated
+        type: string
+        description: The NT domain of the source, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_nt_domain
+          type: Eval
+          expression: if(isnull(src_nt_domain) OR src_nt_domain="","unknown",src_nt_domain)
+      src_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: calculated
+        type: string
+        description: For account changes, the user or entity performing the change.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_name:
+        source: calculated
+        type: string
+        description: For account changes, the user name of the user or entity performing the change.
+        calculation:
+          id: Account_Management_fillnull_src_user_name
+          type: Eval
+          expression: if(isnull(src_user_name) OR src_user_name="","unknown",src_user_name)
+      src_user_priority:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_type:
+        source: declared
+        type: string
+        description: For account management events, this should represent the type of the user changed by the request.
+      status:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    children:
+    - Account_Lockouts
+    - Accounts_Created
+    - Accounts_Deleted
+    - Accounts_Updated
+  Accounts_Created:
+    display_name: Created Accounts
+    kind: event
+    tags:
+    - change
+    - account
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
+    - action="created"
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Account_Management
+      action:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the destination, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_dest_nt_domain
+          type: Eval
+          expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+      dest_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: Account_Management
+      object:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: Account_Management
+      sourcetype:
+        source: inherited
+        inherited_from: Account_Management
+      src:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the source, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_nt_domain
+          type: Eval
+          expression: if(isnull(src_nt_domain) OR src_nt_domain="","unknown",src_nt_domain)
+      src_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user or entity performing the change.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user name of the user or entity performing the change.
+        calculation:
+          id: Account_Management_fillnull_src_user_name
+          type: Eval
+          expression: if(isnull(src_user_name) OR src_user_name="","unknown",src_user_name)
+      src_user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account management events, this should represent the type of the user changed by the request.
+      status:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    - Account_Management
+  Accounts_Deleted:
+    display_name: Deleted Accounts
+    kind: event
+    tags:
+    - change
+    - account
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
+    - action="deleted"
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Account_Management
+      action:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the destination, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_dest_nt_domain
+          type: Eval
+          expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+      dest_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: Account_Management
+      object:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: Account_Management
+      sourcetype:
+        source: inherited
+        inherited_from: Account_Management
+      src:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the source, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_nt_domain
+          type: Eval
+          expression: if(isnull(src_nt_domain) OR src_nt_domain="","unknown",src_nt_domain)
+      src_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user or entity performing the change.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user name of the user or entity performing the change.
+        calculation:
+          id: Account_Management_fillnull_src_user_name
+          type: Eval
+          expression: if(isnull(src_user_name) OR src_user_name="","unknown",src_user_name)
+      src_user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account management events, this should represent the type of the user changed by the request.
+      status:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    - Account_Management
+  Account_Lockouts:
+    display_name: Locked Accounts
+    kind: event
+    tags:
+    - change
+    - account
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
+    - result="lockout"
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Account_Management
+      action:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the destination, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_dest_nt_domain
+          type: Eval
+          expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+      dest_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: Account_Management
+      object:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: Account_Management
+      sourcetype:
+        source: inherited
+        inherited_from: Account_Management
+      src:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the source, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_nt_domain
+          type: Eval
+          expression: if(isnull(src_nt_domain) OR src_nt_domain="","unknown",src_nt_domain)
+      src_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user or entity performing the change.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user name of the user or entity performing the change.
+        calculation:
+          id: Account_Management_fillnull_src_user_name
+          type: Eval
+          expression: if(isnull(src_user_name) OR src_user_name="","unknown",src_user_name)
+      src_user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account management events, this should represent the type of the user changed by the request.
+      status:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    - Account_Management
+  Accounts_Updated:
+    display_name: Updated Accounts
+    kind: event
+    tags:
+    - change
+    - account
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=account
+    - action="updated" OR action="modified"
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Account_Management
+      action:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the destination, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_dest_nt_domain
+          type: Eval
+          expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+      dest_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: Account_Management
+      object:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: Account_Management
+      sourcetype:
+        source: inherited
+        inherited_from: Account_Management
+      src:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_nt_domain:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The NT domain of the source, if applicable.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_nt_domain
+          type: Eval
+          expression: if(isnull(src_nt_domain) OR src_nt_domain="","unknown",src_nt_domain)
+      src_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user or entity performing the change.
+        recommended: true
+        calculation:
+          id: Account_Management_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account changes, the user name of the user or entity performing the change.
+        calculation:
+          id: Account_Management_fillnull_src_user_name
+          type: Eval
+          expression: if(isnull(src_user_name) OR src_user_name="","unknown",src_user_name)
+      src_user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: For account management events, this should represent the type of the user changed by the request.
+      status:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: Account_Management
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes
+    - Account_Management
+  Instance_Changes:
+    display_name: Instance Changes
+    kind: event
+    tags:
+    - change
+    - instance
+    constraints:
+    - (`cim_Change_indexes`) tag=change
+    - tag=instance
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Changes
+      action:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The action attempted on the resource, regardless of success or failure.
+        expected_values:
+        - acl_modified
+        - cleared
+        - created
+        - deleted
+        - modified
+        - stopped
+        - lockout
+        - read
+        - logoff
+        - updated
+        - started
+        - restarted
+        - unlocked
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      change_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_change_type
+          type: Eval
+          expression: if(isnull(change_type) OR change_type="","unknown",change_type)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      command:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The command that initiated the change.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_command
+          type: Eval
+          expression: if(isnull(command) OR command="","unknown",if(sourcetype=="audittrail",Operation." ".ObjectName,command))
+      dest:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Changes
+      image_id:
+        source: calculated
+        type: string
+        description: For create instance events, this field represents the image ID used for creating the instance such as the OS, applications, installed libraries, and more.
+        recommended: true
+        calculation:
+          id: Instance_fillnull_image_id
+          type: Eval
+          expression: if(isnull(image_id) OR image_id="","unknown",image_id)
+      instance_type:
+        source: calculated
+        type: string
+        description: For create instance events, this field represents the type of instance to build such as the combination of CPU, memory, storage, and network capacity.
+        recommended: true
+        calculation:
+          id: Instance_fillnull_instance_type
+          type: Eval
+          expression: if(isnull(instance_type) OR instance_type="","unknown",instance_type)
+      object:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object
+          type: Eval
+          expression: if(isnull(object) OR object="","unknown",object)
+      object_attrs:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The attributes that were updated on the updated resource object, if applicable.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: All_Changes_fillnull_object_attrs
+          type: Eval
+          expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
+      object_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_category
+          type: Eval
+          expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+      object_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_id
+          type: Eval
+          expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+      object_path:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The path of the modified resource object, if applicable, such as a file, directory, or volume.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_object_path
+          type: Eval
+          expression: if(isnull(object_path) OR object_path="","unknown",object_path)
+      result:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result
+          type: Eval
+          expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
+      result_id:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: A result indicator for an action status.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_result_id
+          type: Eval
+          expression: if(isnotnull(result_id) AND result_id!="",result_id,if(isnotnull(signature_id) AND signature_id!="",signature_id,-1))
+      source:
+        source: inherited
+        inherited_from: All_Changes
+      sourcetype:
+        source: inherited
+        inherited_from: All_Changes
+      src:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: Status of the update.
+        expected_values:
+        - success
+        - failure
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user or entity performing the change. For account changes, this is the account that was changed (see src_user for user or entity performing the change).
+        recommended: true
+        calculation:
+          id: All_Changes_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_agent:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_name:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The user name of the user or entity performing the change. For account changes, this is the account that was changed (see src_user_name for user or entity performing the change).
+        calculation:
+          id: All_Changes_fillnull_user_name
+          type: Eval
+          expression: if(isnull(user_name) OR user_name="","unknown",user_name)
+      user_priority:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_type:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For account management events, this should represent the type of the user changed by the request.
+      vendor_account:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The account associated with the change.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The vendor and product or service that detected the change. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Changes_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      vendor_region:
+        source: inherited
+        inherited_from: All_Changes
+        type: string
+        description: The data center region where the change occurred, such as us-west-2.
+    inherits:
+    - BaseEvent
+    - All_Changes

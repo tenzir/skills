@@ -1,0 +1,25 @@
+name: reply_code_id
+lookups:
+- name: cim_dns_reply_codes2
+  file: data/lookups/cim_dns_reply_codes2.yaml
+used_by:
+- model: Network_Resolution
+  dataset: DNS
+  source: calculated
+  type: string
+  description: The numerical id or name of a return code. For details, see the Domain Name System Parameters on the Internet Assigned Numbers Authority (IANA) web site.
+  expected_values:
+  - '0'
+  - NoError
+  - '1'
+  - FormErr
+  - '2'
+  - ServFail
+  - '3'
+  - NXDomain
+  - etc.
+  recommended: true
+  calculation:
+    id: DNS_0fillnull_reply_code_id
+    type: Eval
+    expression: case(isnotnull(reply_code_id) AND reply_code_id!="",reply_code_id,isnotnull(reply_code) AND reply_code!="",reply_code,1=1,"unknown")

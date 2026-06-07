@@ -1,0 +1,26 @@
+name: service
+used_by:
+- model: Application_State
+  dataset: Services
+  source: calculated
+  type: string
+  description: 'The name of the service, such as SQL Server or Apache Web Server. Note: This field is not appropriate for filenames, such as sqlsrvr.exe or httpd. Filenames should belong to the process field instead. Also, note that field is a string. Use the service_id field for service ID fields that are integer data types.'
+  recommended: true
+  calculation:
+    id: Services_fillnull_service
+    type: Eval
+    expression: if(isnull(service) OR service="","unknown",service)
+- model: Endpoint
+  dataset: Services
+  source: calculated
+  type: string
+  description: The full service name.
+  recommended: true
+  calculation:
+    id: Endpoint_Services_fillnull_service
+    type: Eval
+    expression: if(isnull(service) OR service="","unknown",service)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Services
+  source: declared
+  type: string

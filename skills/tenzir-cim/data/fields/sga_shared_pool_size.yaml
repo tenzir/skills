@@ -1,0 +1,7 @@
+name: sga_shared_pool_size
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  source: declared
+  type: number
+  description: The total size of the shared pool for this database instance, in bytes.

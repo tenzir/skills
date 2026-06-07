@@ -1,0 +1,12 @@
+name: storage_used
+used_by:
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: The used amount of storage capacity reported by the resource, in megabytes.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Storage
+  source: declared
+  type: number

@@ -1,0 +1,11 @@
+name: src_user_name
+used_by:
+- model: Change
+  dataset: Account_Management
+  source: calculated
+  type: string
+  description: For account changes, the user name of the user or entity performing the change.
+  calculation:
+    id: Account_Management_fillnull_src_user_name
+    type: Eval
+    expression: if(isnull(src_user_name) OR src_user_name="","unknown",src_user_name)

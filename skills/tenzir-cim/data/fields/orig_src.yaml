@@ -1,0 +1,7 @@
+name: orig_src
+used_by:
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The original source of the message.

@@ -1,0 +1,7 @@
+name: earliest
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: timestamp
+  description: The earliest time that the data model summary was accessed.

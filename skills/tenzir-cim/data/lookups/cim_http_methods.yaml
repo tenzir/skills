@@ -1,0 +1,11 @@
+name: cim_http_methods
+field: http_method
+values:
+- OPTIONS
+- GET
+- HEAD
+- POST
+- PUT
+- DELETE
+- TRACE
+- CONNECT

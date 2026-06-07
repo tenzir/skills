@@ -1,0 +1,8 @@
+name: ssl_serial
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: declared
+  type: string
+  description: The certificate's serial number.
+  recommended: true

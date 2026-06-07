@@ -1,0 +1,18 @@
+name: splunk_actions
+key: vendor_action
+entries:
+- vendor_action: add
+  action: created
+  app: ''
+- vendor_action: delete
+  action: deleted
+  app: ''
+- vendor_action: update
+  action: modified
+  app: ''
+- vendor_action: failed
+  action: failure
+  app: splunk
+- vendor_action: succeeded
+  action: success
+  app: splunk

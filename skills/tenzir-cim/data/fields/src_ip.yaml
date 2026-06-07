@@ -1,0 +1,37 @@
+name: src_ip
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  source: declared
+  type: string
+  description: The IP address for the system from which the data originates.
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: The ip address of the source.
+- model: Malware
+  dataset: Malware_Attacks
+  source: declared
+  type: string
+  description: The ip address of the source.
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: string
+  description: The ip address of the source.
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: The IP address of the client initializing a network session. Not applicable for DHCP events.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The ip address of the source.
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: The ip address of the source.

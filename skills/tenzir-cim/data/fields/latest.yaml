@@ -1,0 +1,7 @@
+name: latest
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: timestamp
+  description: The most recent acceleration timestamp of the data model.

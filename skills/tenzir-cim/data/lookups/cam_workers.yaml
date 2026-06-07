@@ -1,0 +1,7 @@
+name: cam_workers
+key: worker_set
+maps_to: cam_workers
+mappings:
+- from: local
+  to:
+  - local

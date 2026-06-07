@@ -1,0 +1,7 @@
+name: registry_value_text
+used_by:
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: The textual representation of registry_value_data (if applicable).

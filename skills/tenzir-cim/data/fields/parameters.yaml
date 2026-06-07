@@ -1,0 +1,8 @@
+name: parameters
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: string
+  description: Arguments that have been passed to an endpoint by a REST call or something similar. A sample parameter could be something like foo=bar.
+  multivalue: true

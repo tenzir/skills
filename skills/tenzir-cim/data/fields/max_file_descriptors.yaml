@@ -1,0 +1,7 @@
+name: max_file_descriptors
+used_by:
+- model: JVM
+  dataset: OS
+  source: declared
+  type: number
+  description: Maximum file descriptors available to the JVM.

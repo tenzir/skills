@@ -1,0 +1,11 @@
+name: fan_speed
+used_by:
+- model: Performance
+  dataset: Facilities
+  source: declared
+  type: number
+  description: The speed of the cooling fan in the facilities resource, in rotations per second.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Facilities
+  source: declared
+  type: number

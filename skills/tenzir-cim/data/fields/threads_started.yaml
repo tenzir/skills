@@ -1,0 +1,7 @@
+name: threads_started
+used_by:
+- model: JVM
+  dataset: Threading
+  source: declared
+  type: number
+  description: The total number of threads started in the JVM.

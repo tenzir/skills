@@ -1,0 +1,7 @@
+name: swap
+used_by:
+- model: Performance
+  dataset: Memory
+  source: declared
+  type: number
+  description: The total swap space size, in megabytes, if applicable.

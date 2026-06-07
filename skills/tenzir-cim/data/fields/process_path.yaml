@@ -1,0 +1,17 @@
+name: process_path
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: The file path of the process, such as C:\Windows\System32\notepad.exe.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: The file path of the process, such as C:\Windows\System32\notepad.exe.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: The file path of the process, such as C:\Windows\System32\notepad.exe.

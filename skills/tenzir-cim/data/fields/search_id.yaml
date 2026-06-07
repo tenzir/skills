@@ -1,0 +1,11 @@
+name: search_id
+used_by:
+- model: Splunk_Audit
+  dataset: Search_Activity
+  source: calculated
+  type: string
+  description: The ID of the search.
+  calculation:
+    id: 2Search_Activity_search_id
+    type: Eval
+    expression: trim(search_id, "'")

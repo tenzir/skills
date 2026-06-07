@@ -1,0 +1,7 @@
+name: complete
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: number
+  description: The percentage of the data model summary that is currently complete.

@@ -1,0 +1,7 @@
+name: message_delivered_time
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: timestamp
+  description: The time that the message producer sent the message.

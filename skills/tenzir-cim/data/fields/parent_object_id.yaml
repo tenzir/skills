@@ -1,0 +1,7 @@
+name: parent_object_id
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: Object id of the parent object on which the action was performed by a user.

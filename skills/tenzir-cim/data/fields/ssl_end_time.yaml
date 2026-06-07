@@ -1,0 +1,8 @@
+name: ssl_end_time
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: declared
+  type: timestamp
+  description: The expiry time of the certificate.
+  recommended: true

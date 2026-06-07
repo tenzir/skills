@@ -1,0 +1,7 @@
+name: creation_time
+used_by:
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: timestamp
+  description: The time at which the network port started listening on the endpoint.

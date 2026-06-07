@@ -1,0 +1,16 @@
+name: sid
+used_by:
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  source: calculated
+  type: string
+  description: The search id, automatically assigned by splunkd.
+  calculation:
+    id: Modular_Actions_fillnull_sid
+    type: Eval
+    expression: if(isnull(sid) OR sid="","unknown",sid)
+- model: Splunk_Audit
+  dataset: Scheduler_Activity
+  source: declared
+  type: string
+  description: The search id.

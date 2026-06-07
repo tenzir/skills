@@ -1,0 +1,7 @@
+name: wait_time
+used_by:
+- model: Databases
+  dataset: Session_Info
+  source: declared
+  type: number
+  description: When wait_time = 0, the session is waiting. When wait_time has a nonzero value, it is displaying the last wait time for the session.

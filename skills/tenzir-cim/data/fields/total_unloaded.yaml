@@ -1,0 +1,7 @@
+name: total_unloaded
+used_by:
+- model: JVM
+  dataset: Classloading
+  source: declared
+  type: number
+  description: The total count of classes unloaded from the JVM.

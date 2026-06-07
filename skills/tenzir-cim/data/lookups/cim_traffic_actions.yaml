@@ -1,0 +1,6 @@
+name: cim_traffic_actions
+field: action
+values:
+- allowed
+- blocked
+- teardown

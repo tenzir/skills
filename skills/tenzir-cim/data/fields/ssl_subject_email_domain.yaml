@@ -1,0 +1,13 @@
+name: ssl_subject_email_domain
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: calculated
+  type: string
+  description: The domain name contained within the certificate subject's email address.
+  recommended: true
+  calculation:
+    id: SSL_ssl_subject_email_domain
+    type: Rex
+    expression: ^.*@(?<ssl_subject_email_domain>.+)$
+    input_field: ssl_subject_email

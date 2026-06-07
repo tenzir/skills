@@ -1,0 +1,16 @@
+name: http_content_type
+used_by:
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Web
+  source: declared
+  type: string
+- model: Web
+  dataset: Web
+  source: calculated
+  type: string
+  description: The content-type of the requested HTTP resource.
+  recommended: true
+  calculation:
+    id: Web_fillnull_http_content_type
+    type: Eval
+    expression: if(isnull(http_content_type) OR http_content_type="" OR http_content_type="-","unknown",http_content_type)

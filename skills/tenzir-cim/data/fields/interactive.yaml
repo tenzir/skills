@@ -1,0 +1,12 @@
+name: interactive
+used_by:
+- model: Compute_Inventory
+  dataset: User
+  source: calculated
+  type: boolean
+  description: Indicates whether a locally defined account on a resource can be interactively logged in.
+  recommended: true
+  calculation:
+    id: User_interactive
+    type: Eval
+    expression: case(isnotnull(interactive) AND interactive!="",interactive,tag="interactive","true",1=1,"false")

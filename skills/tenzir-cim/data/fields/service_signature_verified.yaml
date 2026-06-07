@@ -1,0 +1,7 @@
+name: service_signature_verified
+used_by:
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: boolean
+  description: Whether or not the service has had it's digitally signed signature verified.

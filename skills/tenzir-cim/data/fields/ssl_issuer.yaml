@@ -1,0 +1,16 @@
+name: ssl_issuer
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: calculated
+  type: string
+  description: The certificate issuer's RFC2253 Distinguished Name.
+  recommended: true
+  calculation:
+    id: SSL_fillnull_ssl_issuer
+    type: Eval
+    expression: if(isnull(ssl_issuer) OR ssl_issuer="","unknown",ssl_issuer)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Certificates
+  source: declared
+  type: string

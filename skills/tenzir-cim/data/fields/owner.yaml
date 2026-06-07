@@ -1,0 +1,7 @@
+name: owner
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: Resource owner.

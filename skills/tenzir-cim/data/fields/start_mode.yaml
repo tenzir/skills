@@ -1,0 +1,34 @@
+name: start_mode
+used_by:
+- model: Application_State
+  dataset: Services
+  source: calculated
+  type: string
+  description: The start mode for the service.
+  expected_values:
+  - disabled
+  - manual
+  - auto
+  recommended: true
+  calculation:
+    id: Services_fillnull_start_mode
+    type: Eval
+    expression: if(isnull(start_mode) OR start_mode="","unknown",start_mode)
+- model: Endpoint
+  dataset: Services
+  source: calculated
+  type: string
+  description: The start mode for the service.
+  expected_values:
+  - disabled
+  - manual
+  - auto
+  recommended: true
+  calculation:
+    id: Endpoint_Services_fillnull_start_mode
+    type: Eval
+    expression: if(isnull(start_mode) OR start_mode="","unknown",start_mode)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Services
+  source: declared
+  type: string

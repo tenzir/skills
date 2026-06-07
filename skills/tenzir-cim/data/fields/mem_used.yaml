@@ -1,0 +1,22 @@
+name: mem_used
+used_by:
+- model: Application_State
+  dataset: Processes
+  source: declared
+  type: number
+  description: Memory used in bytes.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: number
+  description: Memory used by the process (in bytes).
+- model: Performance
+  dataset: Memory
+  source: declared
+  type: number
+  description: The used amount of memory reported by the resource, in megabytes.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Memory
+  source: declared
+  type: number

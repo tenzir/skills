@@ -1,0 +1,16 @@
+name: ssl_is_valid
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: calculated
+  type: boolean
+  description: Indicator of whether the ssl certificate is valid or not.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'
+  calculation:
+    id: SSL_1is_valid
+    type: Eval
+    expression: case(match(ssl_is_valid, "^(1|[Tt]|[Tt][Rr][Uu][Ee])$"),1,match(ssl_is_valid, "^(0|[Ff]|[Ff][Aa][Ll][Ss][Ee])$"),0,isnum(ssl_end_time) AND isnum(ssl_start_time) AND _time>=ssl_start_time AND _time<=ssl_end_time,1,isnum(ssl_end_time) AND isnum(ssl_start_time),0,1=1,null())

@@ -1,0 +1,24 @@
+name: message_type
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: string
+  description: The type of message, such as call or reply.
+- model: Network_Resolution
+  dataset: DNS
+  source: calculated
+  type: string
+  description: Type of DNS message.
+  expected_values:
+  - Query
+  - Response
+  recommended: true
+  calculation:
+    id: DNS_fillnull_message_type
+    type: Eval
+    expression: if(isnull(message_type) OR message_type="","unknown",message_type)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_DNS
+  source: declared
+  type: string

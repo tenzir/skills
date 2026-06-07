@@ -1,0 +1,488 @@
+name: JVM
+description: Java Virtual Machine Data Model
+root_datasets:
+- JVM
+datasets:
+  JVM:
+    kind: event
+    tags:
+    - jvm
+    constraints:
+    - (`cim_JVM_indexes`) tag=jvm
+    fields:
+      _time:
+        source: base
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: base
+      jvm_description:
+        source: declared
+        type: string
+        description: A description field provided in some data sources.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    children:
+    - Classloading
+    - Compilation
+    - Memory
+    - OS
+    - Runtime
+    - Threading
+  Threading:
+    kind: event
+    tags:
+    - jvm
+    - threading
+    constraints:
+    - (`cim_JVM_indexes`) tag=jvm
+    - tag=threading
+    fields:
+      _time:
+        source: inherited
+        inherited_from: JVM
+      cim_entity_zone:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      cm_enabled:
+        source: declared
+        type: boolean
+        description: Indicates whether thread contention monitoring is enabled.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+      cm_supported:
+        source: declared
+        type: boolean
+        description: Indicates whether the JVM supports thread contention monitoring.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+      cpu_time_enabled:
+        source: declared
+        type: boolean
+        description: Indicates whether thread CPU time measurement is enabled.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+      cpu_time_supported:
+        source: declared
+        type: boolean
+        description: Indicates whether the Java virtual machine supports CPU time measurement for the current thread.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+      current_cpu_time:
+        source: declared
+        type: number
+        description: CPU-space time taken by the JVM, in seconds.
+      current_user_time:
+        source: declared
+        type: number
+        description: User-space time taken by the JVM, in seconds.
+      daemon_thread_count:
+        source: declared
+        type: number
+        description: The JVM's current daemon count.
+      host:
+        source: inherited
+        inherited_from: JVM
+      jvm_description:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: A description field provided in some data sources.
+      omu_supported:
+        source: declared
+        type: boolean
+        description: Indicates whether the JVM supports monitoring of object monitor usage.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+      peak_thread_count:
+        source: declared
+        type: number
+        description: The JVM's peak thread count.
+      source:
+        source: inherited
+        inherited_from: JVM
+      sourcetype:
+        source: inherited
+        inherited_from: JVM
+      synch_supported:
+        source: declared
+        type: boolean
+        description: Indicates whether the JVM supports monitoring of ownable synchronizer usage.
+        expected_values:
+        - 'true'
+        - 'false'
+        - '1'
+        - '0'
+      tag:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      thread_count:
+        source: declared
+        type: number
+        description: The JVM's current thread count.
+      threads_started:
+        source: declared
+        type: number
+        description: The total number of threads started in the JVM.
+    inherits:
+    - BaseEvent
+    - JVM
+  Runtime:
+    kind: event
+    tags:
+    - jvm
+    - runtime
+    constraints:
+    - (`cim_JVM_indexes`) tag=jvm
+    - tag=runtime
+    fields:
+      _time:
+        source: inherited
+        inherited_from: JVM
+      cim_entity_zone:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: inherited
+        inherited_from: JVM
+      jvm_description:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: A description field provided in some data sources.
+      process_name:
+        source: declared
+        type: string
+        description: Process name of the JVM process.
+      source:
+        source: inherited
+        inherited_from: JVM
+      sourcetype:
+        source: inherited
+        inherited_from: JVM
+      start_time:
+        source: declared
+        type: timestamp
+        description: Start time of the JVM process.
+      tag:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      uptime:
+        source: declared
+        type: number
+        description: Uptime of the JVM process, in seconds.
+      vendor_product:
+        source: calculated
+        type: string
+        description: The JVM product or service. This field can be automatically populated by the the vendor and product fields in your raw data.
+        calculation:
+          id: Runtime_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: declared
+        type: string
+        description: Version of the JVM.
+    inherits:
+    - BaseEvent
+    - JVM
+  OS:
+    kind: event
+    tags:
+    - jvm
+    - os
+    constraints:
+    - (`cim_JVM_indexes`) tag=jvm
+    - tag=os
+    fields:
+      _time:
+        source: inherited
+        inherited_from: JVM
+      cim_entity_zone:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      committed_memory:
+        source: declared
+        type: number
+        description: Amount of memory committed to the JVM, in bytes.
+      cpu_time:
+        source: declared
+        type: number
+        description: Amount of CPU time taken by the JVM, in seconds.
+      free_physical_memory:
+        source: declared
+        type: number
+        description: Amount of free physical memory remaining to the JVM, in bytes.
+      free_swap:
+        source: declared
+        type: number
+        description: Amount of free swap memory remaining to the JVM, in bytes.
+      host:
+        source: inherited
+        inherited_from: JVM
+      jvm_description:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: A description field provided in some data sources.
+      max_file_descriptors:
+        source: declared
+        type: number
+        description: Maximum file descriptors available to the JVM.
+      open_file_descriptors:
+        source: declared
+        type: number
+        description: Number of file descriptors opened by the JVM.
+      os:
+        source: declared
+        type: string
+        description: OS that the JVM is running on.
+      os_architecture:
+        source: declared
+        type: string
+        description: OS architecture that the JVM is running on.
+      os_version:
+        source: declared
+        type: string
+        description: OS version that the JVM is running on.
+      physical_memory:
+        source: declared
+        type: number
+        description: Physical memory available to the OS that the JVM is running on, in bytes.
+      source:
+        source: inherited
+        inherited_from: JVM
+      sourcetype:
+        source: inherited
+        inherited_from: JVM
+      swap_space:
+        source: declared
+        type: number
+        description: Swap memory space available to the OS that the JVM is running on, in bytes.
+      system_load:
+        source: declared
+        type: number
+        description: System load of the OS that the JVM is running on.
+      tag:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      total_processors:
+        source: declared
+        type: number
+        description: Total processor cores available to the OS that the JVM is running on.
+    inherits:
+    - BaseEvent
+    - JVM
+  Compilation:
+    kind: event
+    tags:
+    - jvm
+    - compilation
+    constraints:
+    - (`cim_JVM_indexes`) tag=jvm
+    - tag=compilation
+    fields:
+      _time:
+        source: inherited
+        inherited_from: JVM
+      cim_entity_zone:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      compilation_time:
+        source: declared
+        type: number
+        description: Time taken by JIT compilation, in seconds.
+      host:
+        source: inherited
+        inherited_from: JVM
+      jvm_description:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: A description field provided in some data sources.
+      source:
+        source: inherited
+        inherited_from: JVM
+      sourcetype:
+        source: inherited
+        inherited_from: JVM
+      tag:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    - JVM
+  Classloading:
+    kind: event
+    tags:
+    - jvm
+    - classloading
+    constraints:
+    - (`cim_JVM_indexes`) tag=jvm
+    - tag=classloading
+    fields:
+      _time:
+        source: inherited
+        inherited_from: JVM
+      cim_entity_zone:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      current_loaded:
+        source: declared
+        type: number
+        description: The current count of classes loaded in the JVM.
+      host:
+        source: inherited
+        inherited_from: JVM
+      jvm_description:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: A description field provided in some data sources.
+      source:
+        source: inherited
+        inherited_from: JVM
+      sourcetype:
+        source: inherited
+        inherited_from: JVM
+      tag:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      total_loaded:
+        source: declared
+        type: number
+        description: The total count of classes loaded in the JVM.
+      total_unloaded:
+        source: declared
+        type: number
+        description: The total count of classes unloaded from the JVM.
+    inherits:
+    - BaseEvent
+    - JVM
+  Memory:
+    kind: event
+    tags:
+    - jvm
+    - memory
+    constraints:
+    - (`cim_JVM_indexes`) tag=jvm
+    - tag=memory
+    fields:
+      _time:
+        source: inherited
+        inherited_from: JVM
+      cim_entity_zone:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      heap_committed:
+        source: declared
+        type: number
+        description: Committed amount of heap memory used by the JVM, in bytes.
+      heap_initial:
+        source: declared
+        type: number
+        description: Initial amount of heap memory used by the JVM, in bytes.
+      heap_max:
+        source: declared
+        type: number
+        description: Maximum amount of heap memory used by the JVM, in bytes.
+      heap_used:
+        source: declared
+        type: number
+        description: Heap memory used by the JVM, in bytes.
+      host:
+        source: inherited
+        inherited_from: JVM
+      jvm_description:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: A description field provided in some data sources.
+      non_heap_committed:
+        source: declared
+        type: number
+        description: Committed amount of non-heap memory used by the JVM, in bytes.
+      non_heap_initial:
+        source: declared
+        type: number
+        description: Initial amount of non-heap memory used by the JVM, in bytes.
+      non_heap_max:
+        source: declared
+        type: number
+        description: Maximum amount of non-heap memory used by the JVM, in bytes.
+      non_heap_used:
+        source: declared
+        type: number
+        description: Non-heap memory used by the JVM, in bytes.
+      objects_pending:
+        source: declared
+        type: number
+        description: Number of objects pending in the JVM.
+      source:
+        source: inherited
+        inherited_from: JVM
+      sourcetype:
+        source: inherited
+        inherited_from: JVM
+      tag:
+        source: inherited
+        inherited_from: JVM
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+    inherits:
+    - BaseEvent
+    - JVM

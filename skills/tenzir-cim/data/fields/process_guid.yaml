@@ -1,0 +1,32 @@
+name: process_guid
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: The globally unique identifier of the process assigned by the vendor_product.
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: The globally unique identifier of the process assigned by the vendor_product.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: The globally unique identifier of the process assigned by the vendor_product.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: The globally unique identifier of the process assigned by the vendor_product.
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: The globally unique identifier of the process assigned by the vendor_product.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The globally unique identifier of the process assigned by the vendor_product.

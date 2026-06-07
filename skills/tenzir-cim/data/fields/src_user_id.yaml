@@ -1,0 +1,7 @@
+name: src_user_id
+used_by:
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.

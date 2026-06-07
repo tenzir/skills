@@ -1,0 +1,7 @@
+name: logical_reads
+used_by:
+- model: Databases
+  dataset: Session_Info
+  source: declared
+  type: number
+  description: The total number of consistent gets and database block gets performed during the session.

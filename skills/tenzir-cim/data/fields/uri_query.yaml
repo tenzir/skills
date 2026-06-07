@@ -1,0 +1,7 @@
+name: uri_query
+used_by:
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: The path of the resource requested by the client.

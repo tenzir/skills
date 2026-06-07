@@ -1,0 +1,7 @@
+name: access_count
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: number
+  description: The number of times the data model summary has been accessed since it was created.

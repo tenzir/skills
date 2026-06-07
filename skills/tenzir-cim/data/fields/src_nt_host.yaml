@@ -1,0 +1,7 @@
+name: src_nt_host
+used_by:
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: The NetBIOS name of the client initializing a network session. Not applicable for DHCP events.

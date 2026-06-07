@@ -1,0 +1,12 @@
+name: cpu_cores
+used_by:
+- model: Compute_Inventory
+  dataset: CPU
+  source: declared
+  type: number
+  description: The number of CPU cores reported by the resource (total, not per CPU).
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_CPU
+  source: declared
+  type: number

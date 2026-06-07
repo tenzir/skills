@@ -1,0 +1,12 @@
+name: start_time
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  source: declared
+  type: timestamp
+  description: The total amount of uptime for the database instance.
+- model: JVM
+  dataset: Runtime
+  source: declared
+  type: timestamp
+  description: Start time of the JVM process.

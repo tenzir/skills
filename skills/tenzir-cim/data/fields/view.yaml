@@ -1,0 +1,8 @@
+name: view
+used_by:
+- model: Splunk_Audit
+  dataset: View_Activity
+  source: declared
+  type: string
+  description: The name of the view.
+  required: true

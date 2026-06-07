@@ -1,0 +1,7 @@
+name: component
+used_by:
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  source: declared
+  type: string
+  description: The component of the modular action script involved in the event. Often used in conjunction with duration.

@@ -1,0 +1,605 @@
+name: Updates
+description: Updates Data Model
+root_datasets:
+- Updates
+- Update_Errors
+datasets:
+  Updates:
+    kind: event
+    tags:
+    - update
+    - status
+    constraints:
+    - (`cim_Updates_indexes`) tag=update tag=status
+    fields:
+      _time:
+        source: base
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: calculated
+        type: string
+        description: The system that is affected by the patch change. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Updates_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_should_update:
+        source: declared
+        type: boolean
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: declared
+        type: string
+        description: The device that detected the patch event, such as a patching or configuration management server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+      file_hash:
+        source: declared
+        type: string
+        description: The checksum of the patch package that was installed or attempted.
+      file_name:
+        source: declared
+        type: string
+        description: The name of the patch package that was installed or attempted.
+        multivalue: true
+      host:
+        source: base
+      severity:
+        source: declared
+        type: string
+        description: The severity associated with the patch event.
+        expected_values:
+        - critical
+        - high
+        - medium
+        - low
+        - informational
+      severity_id:
+        source: declared
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      signature:
+        source: calculated
+        type: string
+        description: 'The name of the patch requirement detected on the client (the dest), such as MS08-067 or RHBA-2013:0739. Note: This is a string value. Use signature_id for numeric or non-human-readable indicators.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature
+          type: Eval
+          expression: case(isnotnull(signature) AND signature!="",signature,isnotnull(signature_id) AND signature_id!="" AND signature_id!="unknown",signature_id,1=1,"unknown")
+      signature_id:
+        source: calculated
+        type: string
+        description: 'The ID of the patch requirement detected on the client (the src). Note: Use signature for human-readable signature names.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature_id
+          type: Eval
+          expression: case(isnotnull(signature_id) AND signature_id!="",signature_id,isnotnull(signature) AND signature!="" AND signature!="unknown",signature,1=1,"unknown")
+      source:
+        source: base
+      sourcetype:
+        source: base
+      status:
+        source: calculated
+        type: string
+        description: Indicates the status of a given patch requirement.
+        expected_values:
+        - available
+        - installed
+        - invalid
+        - restart required
+        - failure
+        recommended: true
+        calculation:
+          id: Updates_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor and product of the patch monitoring product, such as Lumension Patch Manager. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Updates_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    children:
+    - Available_Updates
+    - Installed_Updates
+    - Restart_Required_Updates
+  Available_Updates:
+    display_name: Available Updates
+    kind: event
+    tags:
+    - update
+    - status
+    constraints:
+    - (`cim_Updates_indexes`) tag=update tag=status
+    - status="available"
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Updates
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The system that is affected by the patch change. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Updates_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_should_update:
+        source: inherited
+        inherited_from: Updates
+        type: boolean
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The device that detected the patch event, such as a patching or configuration management server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+      file_hash:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The checksum of the patch package that was installed or attempted.
+      file_name:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The name of the patch package that was installed or attempted.
+        multivalue: true
+      host:
+        source: inherited
+        inherited_from: Updates
+      severity:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The severity associated with the patch event.
+        expected_values:
+        - critical
+        - high
+        - medium
+        - low
+        - informational
+      severity_id:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      signature:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: 'The name of the patch requirement detected on the client (the dest), such as MS08-067 or RHBA-2013:0739. Note: This is a string value. Use signature_id for numeric or non-human-readable indicators.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature
+          type: Eval
+          expression: case(isnotnull(signature) AND signature!="",signature,isnotnull(signature_id) AND signature_id!="" AND signature_id!="unknown",signature_id,1=1,"unknown")
+      signature_id:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: 'The ID of the patch requirement detected on the client (the src). Note: Use signature for human-readable signature names.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature_id
+          type: Eval
+          expression: case(isnotnull(signature_id) AND signature_id!="",signature_id,isnotnull(signature) AND signature!="" AND signature!="unknown",signature,1=1,"unknown")
+      source:
+        source: inherited
+        inherited_from: Updates
+      sourcetype:
+        source: inherited
+        inherited_from: Updates
+      status:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: Indicates the status of a given patch requirement.
+        expected_values:
+        - available
+        - installed
+        - invalid
+        - restart required
+        - failure
+        recommended: true
+        calculation:
+          id: Updates_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The vendor and product of the patch monitoring product, such as Lumension Patch Manager. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Updates_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - Updates
+  Installed_Updates:
+    display_name: Installed Updates
+    kind: event
+    tags:
+    - update
+    - status
+    constraints:
+    - (`cim_Updates_indexes`) tag=update tag=status
+    - status="installed"
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Updates
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The system that is affected by the patch change. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Updates_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_should_update:
+        source: inherited
+        inherited_from: Updates
+        type: boolean
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The device that detected the patch event, such as a patching or configuration management server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+      file_hash:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The checksum of the patch package that was installed or attempted.
+      file_name:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The name of the patch package that was installed or attempted.
+        multivalue: true
+      host:
+        source: inherited
+        inherited_from: Updates
+      severity:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The severity associated with the patch event.
+        expected_values:
+        - critical
+        - high
+        - medium
+        - low
+        - informational
+      severity_id:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      signature:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: 'The name of the patch requirement detected on the client (the dest), such as MS08-067 or RHBA-2013:0739. Note: This is a string value. Use signature_id for numeric or non-human-readable indicators.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature
+          type: Eval
+          expression: case(isnotnull(signature) AND signature!="",signature,isnotnull(signature_id) AND signature_id!="" AND signature_id!="unknown",signature_id,1=1,"unknown")
+      signature_id:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: 'The ID of the patch requirement detected on the client (the src). Note: Use signature for human-readable signature names.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature_id
+          type: Eval
+          expression: case(isnotnull(signature_id) AND signature_id!="",signature_id,isnotnull(signature) AND signature!="" AND signature!="unknown",signature,1=1,"unknown")
+      source:
+        source: inherited
+        inherited_from: Updates
+      sourcetype:
+        source: inherited
+        inherited_from: Updates
+      status:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: Indicates the status of a given patch requirement.
+        expected_values:
+        - available
+        - installed
+        - invalid
+        - restart required
+        - failure
+        recommended: true
+        calculation:
+          id: Updates_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The vendor and product of the patch monitoring product, such as Lumension Patch Manager. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Updates_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - Updates
+  Restart_Required_Updates:
+    display_name: Updates Requiring Restart
+    kind: event
+    tags:
+    - update
+    - status
+    constraints:
+    - (`cim_Updates_indexes`) tag=update tag=status
+    - status="restart_required"
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Updates
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The system that is affected by the patch change. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Updates_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_should_update:
+        source: inherited
+        inherited_from: Updates
+        type: boolean
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dvc:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The device that detected the patch event, such as a patching or configuration management server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+      file_hash:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The checksum of the patch package that was installed or attempted.
+      file_name:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The name of the patch package that was installed or attempted.
+        multivalue: true
+      host:
+        source: inherited
+        inherited_from: Updates
+      severity:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The severity associated with the patch event.
+        expected_values:
+        - critical
+        - high
+        - medium
+        - low
+        - informational
+      severity_id:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The numeric or vendor specific severity indicator corresponding to the event severity.
+      signature:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: 'The name of the patch requirement detected on the client (the dest), such as MS08-067 or RHBA-2013:0739. Note: This is a string value. Use signature_id for numeric or non-human-readable indicators.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature
+          type: Eval
+          expression: case(isnotnull(signature) AND signature!="",signature,isnotnull(signature_id) AND signature_id!="" AND signature_id!="unknown",signature_id,1=1,"unknown")
+      signature_id:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: 'The ID of the patch requirement detected on the client (the src). Note: Use signature for human-readable signature names.'
+        recommended: true
+        multivalue: true
+        calculation:
+          id: Updates_fillnull_signature_id
+          type: Eval
+          expression: case(isnotnull(signature_id) AND signature_id!="",signature_id,isnotnull(signature) AND signature!="" AND signature!="unknown",signature,1=1,"unknown")
+      source:
+        source: inherited
+        inherited_from: Updates
+      sourcetype:
+        source: inherited
+        inherited_from: Updates
+      status:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: Indicates the status of a given patch requirement.
+        expected_values:
+        - available
+        - installed
+        - invalid
+        - restart required
+        - failure
+        recommended: true
+        calculation:
+          id: Updates_fillnull_status
+          type: Eval
+          expression: if(isnull(status) OR status="","unknown",status)
+      tag:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: Updates
+        type: string
+        description: The vendor and product of the patch monitoring product, such as Lumension Patch Manager. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Updates_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - Updates
+  Update_Errors:
+    display_name: Update Errors
+    kind: search
+    tags:
+    - update
+    - error
+    fields:
+      _time:
+        source: declared
+        type: timestamp
+        description: The event timestamp expressed in Unix time.
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: declared
+        type: string
+        description: The host associated with the search.
+      source:
+        source: declared
+        type: string
+        description: The source associated with the search.
+      sourcetype:
+        source: declared
+        type: string
+        description: The source type associated with the search.
+    inherits:
+    - BaseSearch
+    search: (`cim_Updates_indexes`) tag=update tag=error

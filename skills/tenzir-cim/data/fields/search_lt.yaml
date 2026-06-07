@@ -1,0 +1,7 @@
+name: search_lt
+used_by:
+- model: Splunk_Audit
+  dataset: Search_Activity
+  source: declared
+  type: string
+  description: The latest time of the search.

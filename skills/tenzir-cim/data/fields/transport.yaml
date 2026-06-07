@@ -1,0 +1,59 @@
+name: transport
+lookups:
+- name: cim_transport_protocols
+  file: data/lookups/cim_transport_protocols.yaml
+used_by:
+- model: Application_State
+  dataset: Ports
+  source: calculated
+  type: string
+  description: The network ports listened to by the application process, such as tcp, udp, etc.
+  recommended: true
+  multivalue: true
+  calculation:
+    id: Ports_fillnull_transport
+    type: Eval
+    expression: if(isnull(transport) OR transport="","unknown",lower(transport))
+- model: Certificates
+  dataset: All_Certificates
+  source: declared
+  type: string
+  description: The transport protocol of the Network Traffic involved with this certificate.
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: The network transport protocol associated with the listening port, such as tcp, udp, etc.
+  recommended: true
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: The OSI layer 4 (transport) protocol of the intrusion, in lower case.
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: string
+  description: The transport protocol used by the network resolution event.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: calculated
+  type: string
+  description: The OSI layer 4 (transport) protocol of the traffic observed, in lower case.
+  expected_values:
+  - tcp
+  - udp
+  - icmp
+  recommended: true
+  calculation:
+    id: All_Traffic_fillnull_transport
+    type: Eval
+    expression: if(isnull(transport) OR transport="","unknown",lower(transport))
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Traffic
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Ports
+  source: declared
+  type: string

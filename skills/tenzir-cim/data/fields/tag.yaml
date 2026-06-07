@@ -1,0 +1,176 @@
+name: tag
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Application_State
+  dataset: All_Application_State
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Certificates
+  dataset: All_Certificates
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Change
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Change_Analysis
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Compute_Inventory
+  dataset: All_Inventory
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Databases
+  dataset: All_Databases
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: DLP
+  dataset: DLP_Incidents
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Event_Signatures
+  dataset: Signatures
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: JVM
+  dataset: JVM
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Malware
+  dataset: Malware_Attacks
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Malware
+  dataset: Malware_Operations
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Performance
+  dataset: All_Performance
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Updates
+  dataset: Updates
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+  multivalue: true

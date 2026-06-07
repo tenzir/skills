@@ -1,0 +1,7 @@
+name: buffer_cache_hit_ratio
+used_by:
+- model: Databases
+  dataset: Session_Info
+  source: declared
+  type: number
+  description: The percentage of logical reads from the buffer during the session (1-physical reads/session logical reads*100).

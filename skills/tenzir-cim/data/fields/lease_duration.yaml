@@ -1,0 +1,7 @@
+name: lease_duration
+used_by:
+- model: Network_Sessions
+  dataset: DHCP
+  source: declared
+  type: number
+  description: The duration of the Dynamic Host Configuration Protocol (DHCP) lease, in seconds.

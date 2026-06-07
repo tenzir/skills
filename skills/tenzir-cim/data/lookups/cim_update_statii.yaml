@@ -1,0 +1,6 @@
+name: cim_update_statii
+field: status
+values:
+- installed
+- restart required
+- available

@@ -1,0 +1,12 @@
+name: ip
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  source: declared
+  type: string
+  description: The network addresses of the computing resource, such as 192.168.1.1 or E80:0000:0000:0000:0202:B3FF:FE1E:8329.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network
+  source: declared
+  type: string

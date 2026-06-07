@@ -1,0 +1,22 @@
+name: description
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The description of the alert event.
+- model: Compute_Inventory
+  dataset: All_Inventory
+  source: declared
+  type: string
+  description: The description of the inventory system.
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: The description of the service.
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: string
+  description: The description of the service request.

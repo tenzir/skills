@@ -1,0 +1,7 @@
+name: summary_id
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: string
+  description: The unique id of the data model acceleration summary.

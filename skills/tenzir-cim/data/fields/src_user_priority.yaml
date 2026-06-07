@@ -1,0 +1,32 @@
+name: src_user_priority
+used_by:
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Change
+  dataset: Account_Management
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Change_Analysis
+  dataset: Account_Management
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: DLP
+  dataset: DLP_Incidents
+  source: declared
+  type: string
+  description: The priority of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The priority of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: string
+  description: The priority associated with the user or entity that triggered the service request.

@@ -1,0 +1,7 @@
+name: delay
+used_by:
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: number
+  description: Total sending delay in milliseconds.

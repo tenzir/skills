@@ -1,0 +1,7 @@
+name: serial_num
+used_by:
+- model: Databases
+  dataset: Lock_Info
+  source: declared
+  type: string
+  description: The serial number of the object.

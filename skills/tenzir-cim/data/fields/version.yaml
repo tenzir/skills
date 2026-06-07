@@ -1,0 +1,16 @@
+name: version
+used_by:
+- model: Compute_Inventory
+  dataset: All_Inventory
+  source: declared
+  type: string
+  description: The version of a computer resource, such as 2008r2 or 3.0.0.
+- model: JVM
+  dataset: Runtime
+  source: declared
+  type: string
+  description: Version of the JVM.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_OS
+  source: declared
+  type: string

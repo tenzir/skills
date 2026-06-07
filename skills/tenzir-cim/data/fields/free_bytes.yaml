@@ -1,0 +1,7 @@
+name: free_bytes
+used_by:
+- model: Databases
+  dataset: Tablespace
+  source: declared
+  type: number
+  description: The total amount of free space in the tablespace, in bytes.

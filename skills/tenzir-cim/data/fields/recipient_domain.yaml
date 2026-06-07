@@ -1,0 +1,13 @@
+name: recipient_domain
+used_by:
+- model: Email
+  dataset: All_Email
+  source: calculated
+  type: string
+  description: The domain name contained within the recipient email addresses.
+  recommended: true
+  calculation:
+    id: 1Email_recipient_domain
+    type: Rex
+    expression: ^.*@(?<recipient_domain>.+)$
+    input_field: recipient

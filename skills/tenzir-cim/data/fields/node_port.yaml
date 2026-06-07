@@ -1,0 +1,7 @@
+name: node_port
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  source: declared
+  type: number
+  description: The number of the destination port on the server that you requested from.

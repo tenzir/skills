@@ -1,0 +1,7 @@
+name: reason_id
+used_by:
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The reason why logon failed. For example "0xC0000234".

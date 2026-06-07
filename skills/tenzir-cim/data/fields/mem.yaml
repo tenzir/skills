@@ -1,0 +1,22 @@
+name: mem
+used_by:
+- model: Compute_Inventory
+  dataset: Memory
+  source: declared
+  type: number
+  description: The total amount of memory installed in or allocated to the resource, in megabytes.
+  recommended: true
+- model: Performance
+  dataset: Memory
+  source: declared
+  type: number
+  description: The total amount of memory capacity reported by the resource, in megabytes.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Memory
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Memory
+  source: declared
+  type: number

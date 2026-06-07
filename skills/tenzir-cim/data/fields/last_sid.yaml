@@ -1,0 +1,7 @@
+name: last_sid
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: string
+  description: The search id of the last acceleration attempt.

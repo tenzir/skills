@@ -1,0 +1,1003 @@
+name: Network_Sessions
+display_name: Network Sessions
+description: Network Sessions Data Model
+root_datasets:
+- All_Sessions
+datasets:
+  All_Sessions:
+    display_name: All Sessions
+    kind: event
+    tags:
+    - network
+    - session
+    constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
+    fields:
+      _time:
+        source: base
+      action:
+        source: declared
+        type: string
+        description: The action taken by the reporting device.
+        expected_values:
+        - started
+        - blocked
+        - ended
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_bunit:
+        source: declared
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: declared
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_dns:
+        source: calculated
+        type: string
+        description: The domain name system address of the destination for a network session event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_dns
+          type: Eval
+          expression: if(isnull(dest_dns) OR dest_dns="","unknown",dest_dns)
+      dest_ip:
+        source: calculated
+        type: string
+        description: The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_ip
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(yiaddr) AND yiaddr!="",yiaddr,isnull(dest_ip) OR dest_ip="","unknown",1=1,dest_ip)
+      dest_mac:
+        source: calculated
+        type: string
+        description: The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_mac
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(chaddr) AND chaddr!="",chaddr,isnull(dest_mac) OR dest_mac="","unknown",1=1,dest_mac)
+      dest_nt_host:
+        source: calculated
+        type: string
+        description: The NetBIOS name of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_nt_host
+          type: Eval
+          expression: if(isnull(dest_nt_host) OR dest_nt_host="","unknown",dest_nt_host)
+      dest_priority:
+        source: declared
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: declared
+        type: number
+        description: The amount of time for the completion of the network session event, in seconds.
+      dvc:
+        source: calculated
+        type: string
+        description: The device that reported the session event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: base
+      response_time:
+        source: declared
+        type: number
+        description: The amount of time it took to receive a response in the network session event, in seconds.
+      signature:
+        source: declared
+        type: string
+        description: An indication of the type of network session event.
+      signature_id:
+        source: declared
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      src_bunit:
+        source: declared
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: declared
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_dns:
+        source: declared
+        type: string
+        description: The external domain name of the client initializing a network session. Not applicable for DHCP events.
+      src_ip:
+        source: declared
+        type: string
+        description: The IP address of the client initializing a network session. Not applicable for DHCP events.
+      src_mac:
+        source: declared
+        type: string
+        description: The MAC address of the client initializing a network session. Not applicable for DHCP events.
+      src_nt_host:
+        source: declared
+        type: string
+        description: The NetBIOS name of the client initializing a network session. Not applicable for DHCP events.
+      src_priority:
+        source: declared
+        type: string
+        description: The priority of the source.
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: calculated
+        type: string
+        description: The user in a network session event, where applicable. For example, a VPN session or an authenticated DHCP event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: declared
+        type: string
+        description: The business unit associated with the user.
+      user_category:
+        source: declared
+        type: string
+        description: The category of the user.
+        multivalue: true
+      user_priority:
+        source: declared
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: calculated
+        type: string
+        description: The full name of the Dynamic Host Configuration Protocol (DHCP) or DNS server involved in this event including vendor and product name, such as Microsoft DHCP or ISC BIND. This field is generated by combining the values of the vendor and product fields.
+        recommended: true
+        calculation:
+          id: All_Sessions_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    children:
+    - DHCP
+    - Session_End
+    - Session_Start
+    - VPN
+  Session_Start:
+    display_name: Session Start
+    kind: event
+    tags:
+    - network
+    - session
+    - start
+    constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
+    - tag=start
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Sessions
+      action:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The action taken by the reporting device.
+        expected_values:
+        - started
+        - blocked
+        - ended
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The domain name system address of the destination for a network session event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_dns
+          type: Eval
+          expression: if(isnull(dest_dns) OR dest_dns="","unknown",dest_dns)
+      dest_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_ip
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(yiaddr) AND yiaddr!="",yiaddr,isnull(dest_ip) OR dest_ip="","unknown",1=1,dest_ip)
+      dest_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_mac
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(chaddr) AND chaddr!="",chaddr,isnull(dest_mac) OR dest_mac="","unknown",1=1,dest_mac)
+      dest_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_nt_host
+          type: Eval
+          expression: if(isnull(dest_nt_host) OR dest_nt_host="","unknown",dest_nt_host)
+      dest_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time for the completion of the network session event, in seconds.
+      dvc:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The device that reported the session event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Sessions
+      response_time:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time it took to receive a response in the network session event, in seconds.
+      signature:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: An indication of the type of network session event.
+      signature_id:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: inherited
+        inherited_from: All_Sessions
+      sourcetype:
+        source: inherited
+        inherited_from: All_Sessions
+      src_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The external domain name of the client initializing a network session. Not applicable for DHCP events.
+      src_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The IP address of the client initializing a network session. Not applicable for DHCP events.
+      src_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The MAC address of the client initializing a network session. Not applicable for DHCP events.
+      src_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session. Not applicable for DHCP events.
+      src_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the source.
+      tag:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The user in a network session event, where applicable. For example, a VPN session or an authenticated DHCP event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit associated with the user.
+      user_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The full name of the Dynamic Host Configuration Protocol (DHCP) or DNS server involved in this event including vendor and product name, such as Microsoft DHCP or ISC BIND. This field is generated by combining the values of the vendor and product fields.
+        recommended: true
+        calculation:
+          id: All_Sessions_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Sessions
+  Session_End:
+    display_name: Session End
+    kind: event
+    tags:
+    - network
+    - session
+    - end
+    constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
+    - tag=end
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Sessions
+      action:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The action taken by the reporting device.
+        expected_values:
+        - started
+        - blocked
+        - ended
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The domain name system address of the destination for a network session event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_dns
+          type: Eval
+          expression: if(isnull(dest_dns) OR dest_dns="","unknown",dest_dns)
+      dest_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_ip
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(yiaddr) AND yiaddr!="",yiaddr,isnull(dest_ip) OR dest_ip="","unknown",1=1,dest_ip)
+      dest_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_mac
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(chaddr) AND chaddr!="",chaddr,isnull(dest_mac) OR dest_mac="","unknown",1=1,dest_mac)
+      dest_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_nt_host
+          type: Eval
+          expression: if(isnull(dest_nt_host) OR dest_nt_host="","unknown",dest_nt_host)
+      dest_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time for the completion of the network session event, in seconds.
+      dvc:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The device that reported the session event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Sessions
+      response_time:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time it took to receive a response in the network session event, in seconds.
+      signature:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: An indication of the type of network session event.
+      signature_id:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: inherited
+        inherited_from: All_Sessions
+      sourcetype:
+        source: inherited
+        inherited_from: All_Sessions
+      src_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The external domain name of the client initializing a network session. Not applicable for DHCP events.
+      src_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The IP address of the client initializing a network session. Not applicable for DHCP events.
+      src_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The MAC address of the client initializing a network session. Not applicable for DHCP events.
+      src_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session. Not applicable for DHCP events.
+      src_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the source.
+      tag:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The user in a network session event, where applicable. For example, a VPN session or an authenticated DHCP event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit associated with the user.
+      user_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The full name of the Dynamic Host Configuration Protocol (DHCP) or DNS server involved in this event including vendor and product name, such as Microsoft DHCP or ISC BIND. This field is generated by combining the values of the vendor and product fields.
+        recommended: true
+        calculation:
+          id: All_Sessions_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Sessions
+  DHCP:
+    kind: event
+    tags:
+    - network
+    - session
+    - dhcp
+    constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
+    - tag=dhcp
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Sessions
+      action:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The action taken by the reporting device.
+        expected_values:
+        - started
+        - blocked
+        - ended
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The domain name system address of the destination for a network session event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_dns
+          type: Eval
+          expression: if(isnull(dest_dns) OR dest_dns="","unknown",dest_dns)
+      dest_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_ip
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(yiaddr) AND yiaddr!="",yiaddr,isnull(dest_ip) OR dest_ip="","unknown",1=1,dest_ip)
+      dest_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_mac
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(chaddr) AND chaddr!="",chaddr,isnull(dest_mac) OR dest_mac="","unknown",1=1,dest_mac)
+      dest_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_nt_host
+          type: Eval
+          expression: if(isnull(dest_nt_host) OR dest_nt_host="","unknown",dest_nt_host)
+      dest_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time for the completion of the network session event, in seconds.
+      dvc:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The device that reported the session event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Sessions
+      lease_duration:
+        source: declared
+        type: number
+        description: The duration of the Dynamic Host Configuration Protocol (DHCP) lease, in seconds.
+      lease_scope:
+        source: declared
+        type: string
+        description: The consecutive range of possible IP addresses that the Dynamic Host Configuration Protocol (DHCP) server can lease to clients on a subnet. A lease_scope typically defines a single physical subnet on your network to which DHCP services are offered.
+      response_time:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time it took to receive a response in the network session event, in seconds.
+      signature:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: An indication of the type of network session event.
+      signature_id:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: inherited
+        inherited_from: All_Sessions
+      sourcetype:
+        source: inherited
+        inherited_from: All_Sessions
+      src_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The external domain name of the client initializing a network session. Not applicable for DHCP events.
+      src_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The IP address of the client initializing a network session. Not applicable for DHCP events.
+      src_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The MAC address of the client initializing a network session. Not applicable for DHCP events.
+      src_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session. Not applicable for DHCP events.
+      src_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the source.
+      tag:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The user in a network session event, where applicable. For example, a VPN session or an authenticated DHCP event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit associated with the user.
+      user_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The full name of the Dynamic Host Configuration Protocol (DHCP) or DNS server involved in this event including vendor and product name, such as Microsoft DHCP or ISC BIND. This field is generated by combining the values of the vendor and product fields.
+        recommended: true
+        calculation:
+          id: All_Sessions_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Sessions
+  VPN:
+    kind: event
+    tags:
+    - network
+    - session
+    - vpn
+    constraints:
+    - (`cim_Network_Sessions_indexes`) tag=network tag=session
+    - tag=vpn
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Sessions
+      action:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The action taken by the reporting device.
+        expected_values:
+        - started
+        - blocked
+        - ended
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the destination.
+      dest_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the destination.
+        multivalue: true
+      dest_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The domain name system address of the destination for a network session event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_dns
+          type: Eval
+          expression: if(isnull(dest_dns) OR dest_dns="","unknown",dest_dns)
+      dest_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_ip
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(yiaddr) AND yiaddr!="",yiaddr,isnull(dest_ip) OR dest_ip="","unknown",1=1,dest_ip)
+      dest_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_mac
+          type: Eval
+          expression: case(source LIKE "stream%" AND isnotnull(chaddr) AND chaddr!="",chaddr,isnull(dest_mac) OR dest_mac="","unknown",1=1,dest_mac)
+      dest_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dest_nt_host
+          type: Eval
+          expression: if(isnull(dest_nt_host) OR dest_nt_host="","unknown",dest_nt_host)
+      dest_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the destination.
+      duration:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time for the completion of the network session event, in seconds.
+      dvc:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The device that reported the session event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_dvc
+          type: Eval
+          expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+      host:
+        source: inherited
+        inherited_from: All_Sessions
+      response_time:
+        source: inherited
+        inherited_from: All_Sessions
+        type: number
+        description: The amount of time it took to receive a response in the network session event, in seconds.
+      signature:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: An indication of the type of network session event.
+      signature_id:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The unique identifier or event code of the event signature.
+      source:
+        source: inherited
+        inherited_from: All_Sessions
+      sourcetype:
+        source: inherited
+        inherited_from: All_Sessions
+      src_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit of the source.
+      src_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the source.
+        multivalue: true
+      src_dns:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The external domain name of the client initializing a network session. Not applicable for DHCP events.
+      src_ip:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The IP address of the client initializing a network session. Not applicable for DHCP events.
+      src_mac:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The MAC address of the client initializing a network session. Not applicable for DHCP events.
+      src_nt_host:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The NetBIOS name of the client initializing a network session. Not applicable for DHCP events.
+      src_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the source.
+      tag:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The user in a network session event, where applicable. For example, a VPN session or an authenticated DHCP event.
+        recommended: true
+        calculation:
+          id: All_Sessions_fillnull_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The business unit associated with the user.
+      user_category:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The category of the user.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The priority of the user.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Sessions
+        type: string
+        description: The full name of the Dynamic Host Configuration Protocol (DHCP) or DNS server involved in this event including vendor and product name, such as Microsoft DHCP or ISC BIND. This field is generated by combining the values of the vendor and product fields.
+        recommended: true
+        calculation:
+          id: All_Sessions_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent
+    - All_Sessions

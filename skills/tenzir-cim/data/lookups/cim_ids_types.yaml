@@ -1,0 +1,7 @@
+name: cim_ids_types
+field: ids_type
+values:
+- application
+- host
+- network
+- wireless

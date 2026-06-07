@@ -1,0 +1,12 @@
+name: msft
+used_by:
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: calculated
+  type: string
+  description: The Microsoft Security Advisory number (http://technet.microsoft.com/en-us/security/advisory/).
+  multivalue: true
+  calculation:
+    id: Vulnerabilities_lower_msft
+    type: Eval
+    expression: if(isnotnull(msft) AND msft!="",lower(msft),null())

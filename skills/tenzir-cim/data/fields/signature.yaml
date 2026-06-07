@@ -1,0 +1,116 @@
+name: signature
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The human-friendly title of the alert event, such as 'API GetAccountPasswordPolicy was invoked using root credentials.' Split by signature_id when aggregating alert events by types.
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: A human-readable signature name.
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: A human-readable signature name.
+  recommended: true
+- model: DLP
+  dataset: DLP_Incidents
+  source: calculated
+  type: string
+  description: The name of the DLP event.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_signature
+    type: Eval
+    expression: if(isnull(signature) OR signature="","unknown",signature)
+- model: Email
+  dataset: Filtering
+  source: declared
+  type: string
+  description: The name of the filter applied.
+  recommended: true
+- model: Event_Signatures
+  dataset: Signatures
+  source: declared
+  type: string
+  description: The human readable event name.
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: calculated
+  type: string
+  description: The name of the intrusion detected on the client (the src), such as PlugAndPlay_BO and JavaScript_Obfuscation_Fre.
+  recommended: true
+  calculation:
+    id: IDS_Attacks_fillnull_signature
+    type: Eval
+    expression: if(isnull(signature) OR signature="","unknown",signature)
+- model: Malware
+  dataset: Malware_Attacks
+  source: calculated
+  type: string
+  description: 'The name of the malware infection detected on the client (the dest), such as Trojan.Vundo, Spyware.Gaobot, and W32.Nimbda. Note: This is a string value. Use signature_id for signature ID fields that are integer data types. The signature_id field is optional, so it is not included in the data model.'
+  recommended: true
+  calculation:
+    id: Malware_Attacks_fillnull_signature
+    type: Eval
+    expression: if(isnull(signature) OR signature="","unknown",signature)
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: An indication of the type of network session event.
+- model: Performance
+  dataset: OS
+  source: declared
+  type: string
+  description: The event description signature, if available.
+  recommended: true
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  source: calculated
+  type: string
+  description: The logging string associated with alert action introspection events.
+  calculation:
+    id: Modular_Actions_fillnull_signature
+    type: Eval
+    expression: if(isnull(signature) OR signature="","unknown",signature)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_IDS
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Malware_Attacks
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Updates
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Vulnerabilities
+  source: declared
+  type: string
+- model: Updates
+  dataset: Updates
+  source: calculated
+  type: string
+  description: 'The name of the patch requirement detected on the client (the dest), such as MS08-067 or RHBA-2013:0739. Note: This is a string value. Use signature_id for numeric or non-human-readable indicators.'
+  recommended: true
+  multivalue: true
+  calculation:
+    id: Updates_fillnull_signature
+    type: Eval
+    expression: case(isnotnull(signature) AND signature!="",signature,isnotnull(signature_id) AND signature_id!="" AND signature_id!="unknown",signature_id,1=1,"unknown")
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: calculated
+  type: string
+  description: 'The name of the vulnerability detected on the host, such as HPSBMU02785 SSRT100526 rev.2 - HP LoadRunner Running on Windows, Remote Execution of Arbitrary Code, Denial of Service (DoS). Note: This field has a string value. Use signature_id for numeric indicators. The signature_id field is optional and thus is not included in the data model.'
+  recommended: true
+  calculation:
+    id: Vulnerabilities_fillnull_signature
+    type: Eval
+    expression: if(isnull(signature) OR signature="","unknown",signature)

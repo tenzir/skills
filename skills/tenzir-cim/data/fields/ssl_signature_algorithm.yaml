@@ -1,0 +1,7 @@
+name: ssl_signature_algorithm
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: declared
+  type: string
+  description: The algorithm used by the Certificate Authority to sign the certificate.

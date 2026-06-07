@@ -1,0 +1,7 @@
+name: cim_email_protocols
+field: protocol
+values:
+- smtp
+- imap
+- pop3
+- mapi

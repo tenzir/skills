@@ -1,0 +1,8 @@
+name: snapshot
+used_by:
+- model: Compute_Inventory
+  dataset: Snapshot
+  source: declared
+  type: string
+  description: The name of a snapshot file.
+  recommended: true

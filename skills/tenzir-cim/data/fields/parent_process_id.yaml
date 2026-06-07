@@ -1,0 +1,17 @@
+name: parent_process_id
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: number
+  description: The numeric identifier of the parent process assigned by the operating system.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: number
+  description: The numeric identifier of the parent process assigned by the operating system.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: number
+  description: The numeric identifier of the parent process assigned by the operating system.

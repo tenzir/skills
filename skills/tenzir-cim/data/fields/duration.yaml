@@ -1,0 +1,52 @@
+name: duration
+used_by:
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: number
+  description: The amount of time for the completion of the authentication event, in seconds.
+- model: Certificates
+  dataset: All_Certificates
+  source: declared
+  type: number
+  description: The amount of time for the completion of the certificate management event, in seconds.
+- model: Databases
+  dataset: All_Databases
+  source: declared
+  type: number
+  description: The amount of time for the completion of the database event, in seconds.
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: number
+  description: The amount of time for the completion of the messaging event, in seconds.
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: number
+  description: The number of seconds from message call to message response. Can be derived by getting the difference between the request_sent_time and the message_received_time.
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: number
+  description: The time taken by the network resolution event, in seconds.
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: number
+  description: The amount of time for the completion of the network session event, in seconds.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: number
+  description: The amount of time for the completion of the network event, in seconds.
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  source: declared
+  type: number
+  description: How long the action took to complete, in milliseconds.
+- model: Web
+  dataset: Web
+  source: declared
+  type: number
+  description: The time taken by the proxy event, in milliseconds.

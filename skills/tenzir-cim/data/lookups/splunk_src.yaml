@@ -1,0 +1,6 @@
+name: splunk_src
+key: app
+maps_to: src
+mappings:
+- from: splunk
+  to: unspecified

@@ -1,0 +1,7 @@
+name: splunk_server
+used_by:
+- model: Splunk_Audit
+  dataset: Scheduler_Activity
+  source: declared
+  type: string
+  description: The Splunk Server on which the scheduled search runs.

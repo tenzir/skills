@@ -1,0 +1,16 @@
+name: cpu_load_mhz
+used_by:
+- model: Application_State
+  dataset: Processes
+  source: declared
+  type: number
+  description: CPU Load in megahertz.
+- model: Performance
+  dataset: CPU
+  source: declared
+  type: number
+  description: The amount of CPU load reported by the controller in megahertz.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_CPU
+  source: declared
+  type: number

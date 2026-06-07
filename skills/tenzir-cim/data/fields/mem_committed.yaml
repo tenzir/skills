@@ -1,0 +1,7 @@
+name: mem_committed
+used_by:
+- model: Performance
+  dataset: Memory
+  source: declared
+  type: number
+  description: The committed amount of memory reported by the resource, in megabytes.

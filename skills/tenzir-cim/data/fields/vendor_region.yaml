@@ -1,0 +1,17 @@
+name: vendor_region
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The data center region involved in the alert event, such as us-west-2.
+- model: Change
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: The data center region where the change occurred, such as us-west-2.
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: The data center region where the change occurred, such as us-west-2.

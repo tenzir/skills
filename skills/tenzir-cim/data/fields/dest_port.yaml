@@ -1,0 +1,57 @@
+name: dest_port
+used_by:
+- model: Application_State
+  dataset: Ports
+  source: calculated
+  type: number
+  description: Network ports communicated to by the process, such as 53.
+  recommended: true
+  multivalue: true
+  calculation:
+    id: Ports_fillnull_dest_port
+    type: Eval
+    expression: if(isnum(dest_port),dest_port,0)
+- model: Certificates
+  dataset: All_Certificates
+  source: declared
+  type: number
+  description: The port number of the target.
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: number
+  description: Network port listening on the endpoint, such as 53.
+  recommended: true
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: number
+  description: The destination port of the intrusion.
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: number
+  description: The destination port number.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: calculated
+  type: number
+  description: 'The destination port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the dest_svc field.'
+  recommended: true
+  calculation:
+    id: All_Traffic_fillnull_dest_port
+    type: Eval
+    expression: if(isnum(dest_port),dest_port,0)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Traffic
+  source: declared
+  type: number
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Ports
+  source: declared
+  type: number
+- model: Web
+  dataset: Web
+  source: declared
+  type: number
+  description: The destination port of the web traffic.

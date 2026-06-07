@@ -1,0 +1,7 @@
+name: payload_type
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: string
+  description: The type of payload in the message. The payload type can be text (such as json, xml, and raw) or binary (such as compressed, object, encrypted, and image).

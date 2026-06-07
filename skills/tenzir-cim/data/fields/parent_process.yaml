@@ -1,0 +1,30 @@
+name: parent_process
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: calculated
+  type: string
+  description: The full command string of the parent process
+  calculation:
+    id: Endpoint_Filesystem_fillnull_parent_process
+    type: Eval
+    expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)
+- model: Endpoint
+  dataset: Processes
+  source: calculated
+  type: string
+  description: The full command string of the parent process
+  recommended: true
+  calculation:
+    id: Endpoint_Processes_fillnull_parent_process
+    type: Eval
+    expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)
+- model: Endpoint
+  dataset: Registry
+  source: calculated
+  type: string
+  description: The full command string of the parent process
+  calculation:
+    id: Endpoint_Registry_fillnull_parent_process
+    type: Eval
+    expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)

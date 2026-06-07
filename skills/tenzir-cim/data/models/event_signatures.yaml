@@ -1,0 +1,66 @@
+name: Event_Signatures
+display_name: Event Signatures
+description: Event Signatures Data Model
+root_datasets:
+- Signatures
+datasets:
+  Signatures:
+    kind: event
+    tags:
+    - track_event_signatures
+    constraints:
+    - (`cim_Event_Signatures_indexes`) tag=track_event_signatures (signature=* OR signature_id=*)
+    fields:
+      _time:
+        source: base
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest:
+        source: declared
+        type: string
+        description: System affected by the signature.
+      dest_bunit:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      host:
+        source: base
+      signature:
+        source: declared
+        type: string
+        description: The human readable event name.
+      signature_id:
+        source: declared
+        type: string
+        description: The event name identifier (as supplied by the vendor).
+      source:
+        source: base
+      sourcetype:
+        source: base
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor and product name of the technology that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Signatures_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+    inherits:
+    - BaseEvent

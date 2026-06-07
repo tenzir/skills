@@ -1,0 +1,37 @@
+name: process_id
+used_by:
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: number
+  description: The numeric identifier of the process invoked to send the message.
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: The numeric identifier of the process assigned by the operating system.
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: The numeric identifier of the process assigned by the operating system.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: number
+  description: The numeric identifier of the process assigned by the operating system.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: The numeric identifier of the process assigned by the operating system.
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: The numeric identifier of the process assigned by the operating system.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The numeric identifier of the process assigned by the operating system.

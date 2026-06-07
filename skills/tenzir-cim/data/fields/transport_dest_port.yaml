@@ -1,0 +1,17 @@
+name: transport_dest_port
+used_by:
+- model: Application_State
+  dataset: Ports
+  source: calculated
+  type: string
+  description: Calculated as transport/dest_port, such as tcp/53.
+  multivalue: true
+  calculation:
+    id: Ports_transport_dest_port
+    type: Eval
+    expression: if(isnull(transport_dest_port) OR transport_dest_port="",split(replace(mvjoin(mvzip(transport,dest_port),"|"),",","/"),"|"),transport_dest_port)
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: Calculated as transport/dest_port, such as tcp/53.

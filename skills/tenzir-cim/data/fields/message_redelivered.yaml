@@ -1,0 +1,7 @@
+name: message_redelivered
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: boolean
+  description: Indicates whether or not the message was redelivered.

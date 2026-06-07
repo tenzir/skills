@@ -24,6 +24,9 @@ listed below instead, then regenerate or let the sync workflow update this repo.
 - `skills/tenzir-asim/`: generated from
   `scripts/generate-microsoft-asim-skill.py` and synced by
   `.github/workflows/sync-asim-skill.yaml`.
+- `skills/tenzir-cim/`: generated from
+  `scripts/generate-splunk-cim-skill.py` using an unpacked Splunk Common
+  Information Model app directory.
 - `skills/tenzir-ocsf/`: generated from `scripts/generate-ocsf-skill.py` and
   synced by `.github/workflows/sync-ocsf-skill.yaml`.
 - `skills/tenzir-docs/`: generated from

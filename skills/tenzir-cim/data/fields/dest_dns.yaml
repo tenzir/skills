@@ -1,0 +1,12 @@
+name: dest_dns
+used_by:
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: calculated
+  type: string
+  description: The domain name system address of the destination for a network session event.
+  recommended: true
+  calculation:
+    id: All_Sessions_fillnull_dest_dns
+    type: Eval
+    expression: if(isnull(dest_dns) OR dest_dns="","unknown",dest_dns)

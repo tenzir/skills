@@ -1,0 +1,8 @@
+name: vlan
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The virtual local area network (VLAN) specified in the record.
+  multivalue: true

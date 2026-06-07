@@ -1,0 +1,7 @@
+name: cim_dlp_types
+field: dlp_type
+values:
+- application
+- host
+- network
+- gateway

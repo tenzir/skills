@@ -1,0 +1,7 @@
+name: memory_sorts
+used_by:
+- model: Databases
+  dataset: Session_Info
+  source: declared
+  type: number
+  description: The total number of memory sorts performed during the session.

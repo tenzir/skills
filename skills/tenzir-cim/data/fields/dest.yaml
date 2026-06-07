@@ -1,0 +1,393 @@
+name: dest
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: calculated
+  type: string
+  description: The object that is the 'target' of the alert event. Examples include an email address, SNMP trap, or virtual machine id. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: Alerts_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Application_State
+  dataset: All_Application_State
+  source: calculated
+  type: string
+  description: The compute resource where the service is installed. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: All_Application_State_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Authentication
+  dataset: Authentication
+  source: calculated
+  type: string
+  description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
+  recommended: true
+  calculation:
+    id: Authentication_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Certificates
+  dataset: All_Certificates
+  source: declared
+  type: string
+  description: The target in the certificate management event.
+- model: Change
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Change_Analysis
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: The resource where change occurred. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Compute_Inventory
+  dataset: All_Inventory
+  source: calculated
+  type: string
+  description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: All_Inventory_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Data_Access
+  dataset: Data_Access
+  source: calculated
+  type: string
+  description: The destination where the data resides or where it is being accessed, such as the product or application. You can alias this from more specific fields not included in this data model, such as dest_host, dest_ip, dest_url or dest_name.
+  recommended: true
+  calculation:
+    id: Data_Access_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Databases
+  dataset: All_Databases
+  source: declared
+  type: string
+  description: The destination of the database event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+- model: DLP
+  dataset: DLP_Incidents
+  source: calculated
+  type: string
+  description: The target of the DLP event.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Email
+  dataset: All_Email
+  source: calculated
+  type: string
+  description: The endpoint system to which the message was delivered. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: Email_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Endpoint
+  dataset: Filesystem
+  source: calculated
+  type: string
+  description: The endpoint pertaining to the filesystem activity.
+  recommended: true
+  calculation:
+    id: Endpoint_Filesystem_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Endpoint
+  dataset: Ports
+  source: calculated
+  type: string
+  description: The endpoint for which the port is listening on.
+  recommended: true
+  calculation:
+    id: Endpoint_Ports_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Endpoint
+  dataset: Processes
+  source: calculated
+  type: string
+  description: The endpoint for which the process was spawned.
+  recommended: true
+  calculation:
+    id: Endpoint_Processes_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Endpoint
+  dataset: Registry
+  source: calculated
+  type: string
+  description: The endpoint pertaining to the registry events.
+  recommended: true
+  calculation:
+    id: Endpoint_Registry_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Endpoint
+  dataset: Services
+  source: calculated
+  type: string
+  description: The endpoint for which the service is installed.
+  recommended: true
+  calculation:
+    id: Endpoint_Services_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Event_Signatures
+  dataset: Signatures
+  source: declared
+  type: string
+  description: System affected by the signature.
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: calculated
+  type: string
+  description: The destination of the message. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  calculation:
+    id: All_interprocess_messaging_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: calculated
+  type: string
+  description: The destination of the attack detected by the intrusion detection system (IDS). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: IDS_Attacks_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Malware
+  dataset: Malware_Attacks
+  source: calculated
+  type: string
+  description: The system that was affected by the malware event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: Malware_Attacks_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Malware
+  dataset: Malware_Operations
+  source: calculated
+  type: string
+  description: The system where the malware operations event occurred.
+  recommended: true
+  calculation:
+    id: Malware_Operations_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Network_Resolution
+  dataset: DNS
+  source: calculated
+  type: string
+  description: The destination of the network resolution event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: DNS_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: calculated
+  type: string
+  description: The destination of the network traffic (the remote host). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: All_Traffic_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Performance
+  dataset: All_Performance
+  source: calculated
+  type: string
+  description: The system where the event occurred, usually a facilities resource such as a rack or room. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: All_Performance_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Account_Management
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_All_Email
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_All_Ticket_Managment
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Authentication
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Change
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_CPU
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_DNS
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Endpoint_Changes
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_IDS
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Incident
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Malware_Attacks
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Malware_Operations
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Memory
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Traffic
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_OS
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_CPU
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Facilities
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Memory
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Network
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Storage
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Timesync
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Uptime
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Ports
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Problem
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Processes
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Services
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Storage
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Updates
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Vulnerabilities
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Web
+  source: declared
+  type: string
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: calculated
+  type: string
+  description: The destination of the service request. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  calculation:
+    id: All_Ticket_Management_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Updates
+  dataset: Updates
+  source: calculated
+  type: string
+  description: The system that is affected by the patch change. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: Updates_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: calculated
+  type: string
+  description: The host with the discovered vulnerability. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: Vulnerabilities_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="","unknown",dest)
+- model: Web
+  dataset: Web
+  source: calculated
+  type: string
+  description: The destination of the network traffic (the remote host). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+  recommended: true
+  calculation:
+    id: Web_fillnull_dest
+    type: Eval
+    expression: if(isnull(dest) OR dest="" OR dest="-","unknown",dest)

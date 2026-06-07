@@ -1,0 +1,7 @@
+name: thread_count
+used_by:
+- model: JVM
+  dataset: Threading
+  source: declared
+  type: number
+  description: The JVM's current thread count.

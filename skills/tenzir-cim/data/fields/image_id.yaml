@@ -1,0 +1,12 @@
+name: image_id
+used_by:
+- model: Change
+  dataset: Instance_Changes
+  source: calculated
+  type: string
+  description: For create instance events, this field represents the image ID used for creating the instance such as the OS, applications, installed libraries, and more.
+  recommended: true
+  calculation:
+    id: Instance_fillnull_image_id
+    type: Eval
+    expression: if(isnull(image_id) OR image_id="","unknown",image_id)

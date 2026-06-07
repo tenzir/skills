@@ -1,0 +1,26 @@
+name: protocol
+lookups:
+- name: cim_email_protocols
+  file: data/lookups/cim_email_protocols.yaml
+used_by:
+- model: Change
+  dataset: Network_Changes
+  source: declared
+  type: string
+  description: This field represents the protocol for the network event rule.
+  multivalue: true
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The email protocol involved, such as SMTP or RPC.
+  expected_values:
+  - smtp
+  - imap
+  - pop3
+  - mapi
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The OSI layer 3 (network) protocol of the traffic observed, in lower case. For example, ip, appletalk, ipx.

@@ -1,0 +1,7 @@
+name: service_dll_path
+used_by:
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: The file path to the dynamic link library assocatied with the service, such as C:\Windows\System32\comdlg32.dll.

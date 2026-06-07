@@ -1,0 +1,7 @@
+name: enabled
+used_by:
+- model: Compute_Inventory
+  dataset: All_Inventory
+  source: declared
+  type: boolean
+  description: Indicates whether the resource is enabled or disabled.

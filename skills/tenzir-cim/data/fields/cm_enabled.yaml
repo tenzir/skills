@@ -1,0 +1,12 @@
+name: cm_enabled
+used_by:
+- model: JVM
+  dataset: Threading
+  source: declared
+  type: boolean
+  description: Indicates whether thread contention monitoring is enabled.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'

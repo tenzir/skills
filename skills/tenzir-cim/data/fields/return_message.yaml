@@ -1,0 +1,7 @@
+name: return_message
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: string
+  description: The response status message sent by the message server.

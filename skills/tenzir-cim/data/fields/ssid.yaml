@@ -1,0 +1,7 @@
+name: ssid
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The 802.11 service set identifier (ssid) assigned to a wireless session.

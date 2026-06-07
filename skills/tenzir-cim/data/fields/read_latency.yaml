@@ -1,0 +1,12 @@
+name: read_latency
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  source: declared
+  type: number
+  description: For a polling period, the average amount of time elapsed until a read request is filled by the host disks (in ms).
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: The latency of read operations, in milliseconds.

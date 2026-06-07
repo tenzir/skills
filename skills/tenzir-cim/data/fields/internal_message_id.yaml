@@ -1,0 +1,7 @@
+name: internal_message_id
+used_by:
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: Host-specific unique message identifier (such as aid in sendmail, IMI in Domino, Internal-Message-ID in Exchange, and MID in Ironport).

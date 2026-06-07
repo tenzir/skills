@@ -1,0 +1,8 @@
+name: signature_version
+used_by:
+- model: Malware
+  dataset: Malware_Operations
+  source: declared
+  type: string
+  description: The version of the malware signature bundle in a signature update operations event.
+  recommended: true

@@ -1,0 +1,11 @@
+name: parent_user
+used_by:
+- model: Endpoint
+  dataset: Processes
+  source: calculated
+  type: string
+  description: The original user under which the process was created. This field is extracted for example when the process was originally created under one user's account (this CIM field) but a new process is spawned belonging to another user (the "user" CIM field)
+  calculation:
+    id: Endpoint_Processes_fillnull_parent_user
+    type: Eval
+    expression: if(isnull(parent_user) OR parent_user="","unknown",parent_user)

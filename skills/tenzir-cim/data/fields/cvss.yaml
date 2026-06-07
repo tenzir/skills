@@ -1,0 +1,7 @@
+name: cvss
+used_by:
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: declared
+  type: number
+  description: Numeric indicator of the common vulnerability scoring system.

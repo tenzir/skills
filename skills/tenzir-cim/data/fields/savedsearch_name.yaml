@@ -1,0 +1,16 @@
+name: savedsearch_name
+used_by:
+- model: Splunk_Audit
+  dataset: Scheduler_Activity
+  source: declared
+  type: string
+  description: The name of the saved search.
+- model: Splunk_Audit
+  dataset: Search_Activity
+  source: calculated
+  type: string
+  description: The name of the saved search.
+  calculation:
+    id: 3Search_Activity_savedsearch_name
+    type: Eval
+    expression: if(savedsearch_name="",null(),savedsearch_name)

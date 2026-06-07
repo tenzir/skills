@@ -1,0 +1,12 @@
+name: interface
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  source: declared
+  type: string
+  description: The network interfaces of the computing resource, such as eth0, eth1 or Wired Ethernet Connection, Teredo Tunneling Pseudo-Interface.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network
+  source: declared
+  type: string

@@ -1,0 +1,12 @@
+name: dns
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  source: declared
+  type: string
+  description: The domain name server for the resource.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network
+  source: declared
+  type: string

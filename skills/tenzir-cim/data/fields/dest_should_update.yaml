@@ -1,0 +1,42 @@
+name: dest_should_update
+used_by:
+- model: Application_State
+  dataset: All_Application_State
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Performance
+  dataset: All_Performance
+  source: declared
+  type: boolean
+  description: Indicates whether or not the system where the performance event occurred should update. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Updates
+  dataset: Updates
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.

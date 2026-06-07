@@ -1,0 +1,12 @@
+name: date
+used_by:
+- model: Malware
+  dataset: Malware_Attacks
+  source: calculated
+  type: string
+  description: The date of the malware event.
+  recommended: true
+  calculation:
+    id: Malware_Attacks_date
+    type: Eval
+    expression: strftime(_time, "%m-%d-%Y")

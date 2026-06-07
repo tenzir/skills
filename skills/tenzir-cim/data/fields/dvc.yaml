@@ -1,0 +1,102 @@
+name: dvc
+used_by:
+- model: Change
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_dvc
+    type: Eval
+    expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+- model: Change_Analysis
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: The device that reported the change, if applicable, such as a FIP or CIM server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_dvc
+    type: Eval
+    expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: The device that reported the data access event.
+- model: DLP
+  dataset: DLP_Incidents
+  source: calculated
+  type: string
+  description: The device that reported the DLP event.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_dvc
+    type: Eval
+    expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: calculated
+  type: string
+  description: The device that detected the intrusion event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+  recommended: true
+  calculation:
+    id: IDS_Attacks_fillnull_dvc
+    type: Eval
+    expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: calculated
+  type: string
+  description: The device that reported the session event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+  recommended: true
+  calculation:
+    id: All_Sessions_fillnull_dvc
+    type: Eval
+    expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: calculated
+  type: string
+  description: The device that reported the traffic event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+  recommended: true
+  calculation:
+    id: All_Traffic_fillnull_dvc
+    type: Eval
+    expression: if(isnull(dvc) OR dvc="","unknown",dvc)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_IDS
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Changes
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Traffic
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Restarts
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Vulnerabilities
+  source: declared
+  type: string
+- model: Updates
+  dataset: Updates
+  source: declared
+  type: string
+  description: The device that detected the patch event, such as a patching or configuration management server. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: calculated
+  type: string
+  description: The system that discovered the vulnerability. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
+  recommended: true
+  calculation:
+    id: Vulnerabilities_fillnull_dvc
+    type: Eval
+    expression: if(isnull(dvc) OR dvc="","unknown",dvc)

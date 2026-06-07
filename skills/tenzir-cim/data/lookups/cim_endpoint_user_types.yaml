@@ -1,0 +1,6 @@
+name: cim_endpoint_user_types
+field: user_type
+values:
+- user
+- process
+- stored_procedure

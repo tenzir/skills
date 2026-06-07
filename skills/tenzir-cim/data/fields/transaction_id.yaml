@@ -1,0 +1,7 @@
+name: transaction_id
+used_by:
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: number
+  description: The unique numerical transaction id of the network resolution event.

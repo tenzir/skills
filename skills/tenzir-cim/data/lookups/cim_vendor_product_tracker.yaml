@@ -1,0 +1,7 @@
+name: cim_vendor_product_tracker
+key: model
+fields:
+- model
+- vendor_product
+- firstTime
+- lastTime

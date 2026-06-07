@@ -1,0 +1,15 @@
+name: dlp_type
+lookups:
+- name: cim_dlp_types
+  file: data/lookups/cim_dlp_types.yaml
+used_by:
+- model: DLP
+  dataset: DLP_Incidents
+  source: calculated
+  type: string
+  description: The type of DLP system that generated the event.
+  recommended: true
+  calculation:
+    id: DLP_incidents_fillnull_dlp_type
+    type: Eval
+    expression: if(isnull(dlp_type) OR dlp_type="","unknown",dlp_type)

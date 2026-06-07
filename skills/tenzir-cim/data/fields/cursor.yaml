@@ -1,0 +1,7 @@
+name: cursor
+used_by:
+- model: Databases
+  dataset: Session_Info
+  source: declared
+  type: number
+  description: The number of the cursor currently in use by the session.

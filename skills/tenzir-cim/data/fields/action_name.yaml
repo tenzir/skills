@@ -1,0 +1,11 @@
+name: action_name
+used_by:
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  source: calculated
+  type: string
+  description: The name of the action.
+  calculation:
+    id: Modular_Actions_fillnull_action_name
+    type: Eval
+    expression: case(isnotnull(action_name) AND action_name!="",action_name,sourcetype="splunkd" AND isnotnull(action) AND action!="",action,1=1,"unknown")

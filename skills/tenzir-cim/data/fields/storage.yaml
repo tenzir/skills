@@ -1,0 +1,21 @@
+name: storage
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  source: declared
+  type: number
+  description: The amount of storage capacity allocated to the resource, in megabytes.
+  recommended: true
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: The total amount of storage capacity reported by the resource, in megabytes.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Storage
+  source: declared
+  type: number
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Storage
+  source: declared
+  type: string

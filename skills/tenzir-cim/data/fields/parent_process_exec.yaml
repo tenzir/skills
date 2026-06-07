@@ -1,0 +1,17 @@
+name: parent_process_exec
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: The executable name of the parent process.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: The executable name of the parent process.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: The executable name of the parent process.

@@ -1,0 +1,7 @@
+name: protocol_version
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: Version of the OSI layer 3 protocol, in lower case.

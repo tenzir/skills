@@ -1,0 +1,18 @@
+name: size
+used_by:
+- model: Compute_Inventory
+  dataset: Snapshot
+  source: declared
+  type: number
+  description: The snapshot file size, in megabytes.
+  recommended: true
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: number
+  description: The size of the message, in bytes.
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: number
+  description: The amount of storage space the data model's acceleration summary takes up, in bytes.

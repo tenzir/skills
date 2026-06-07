@@ -1,0 +1,51 @@
+name: dest_ip
+used_by:
+- model: Compute_Inventory
+  dataset: Network
+  source: declared
+  type: string
+  description: The IP address for the system that the data is going to.
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: The IP address of the destination.
+- model: Malware
+  dataset: Malware_Attacks
+  source: declared
+  type: string
+  description: The IP address of the destination.
+- model: Malware
+  dataset: Malware_Operations
+  source: declared
+  type: string
+  description: The IP address of the destination.
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: string
+  description: The IP address of the destination.
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: calculated
+  type: string
+  description: The internal IP address allocated to the client initializing a network session. For DHCP and VPN events, this is the IP address leased to the client.
+  recommended: true
+  calculation:
+    id: All_Sessions_fillnull_dest_ip
+    type: Eval
+    expression: case(source LIKE "stream%" AND isnotnull(yiaddr) AND yiaddr!="",yiaddr,isnull(dest_ip) OR dest_ip="","unknown",1=1,dest_ip)
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The IP address of the destination.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Network_Sessions
+  source: declared
+  type: string
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: The IP address of the destination.

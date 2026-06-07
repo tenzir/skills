@@ -1,0 +1,8 @@
+name: service_hash
+used_by:
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: The digest(s) of the service, such as <md5>, <sha1>, etc.
+  multivalue: true

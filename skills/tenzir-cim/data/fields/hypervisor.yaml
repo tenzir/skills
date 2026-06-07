@@ -1,0 +1,8 @@
+name: hypervisor
+used_by:
+- model: Compute_Inventory
+  dataset: Virtual_OS
+  source: declared
+  type: string
+  description: The hypervisor parent of a virtual guest OS.
+  recommended: true

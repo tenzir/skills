@@ -1,0 +1,7 @@
+name: number_of_users
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  source: declared
+  type: number
+  description: The total number of users for the database instance.

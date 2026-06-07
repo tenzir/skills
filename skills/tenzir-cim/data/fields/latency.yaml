@@ -1,0 +1,12 @@
+name: latency
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  source: declared
+  type: number
+  description: The latency reported by the resource, in milliseconds.
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: The latency reported by the resource, in milliseconds.

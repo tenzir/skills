@@ -1,0 +1,9 @@
+name: cam_tasks
+field: task
+values:
+- block
+- allow
+- create
+- update
+- delete
+- scan

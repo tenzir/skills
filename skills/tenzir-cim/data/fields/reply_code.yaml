@@ -1,0 +1,24 @@
+name: reply_code
+lookups:
+- name: cim_dns_reply_codes2
+  file: data/lookups/cim_dns_reply_codes2.yaml
+used_by:
+- model: Network_Resolution
+  dataset: DNS
+  source: calculated
+  type: string
+  description: The return code for the response. For details, see the Domain Name System Parameters on the Internet Assigned Numbers Authority (IANA) web site.
+  expected_values:
+  - No Error
+  - Format Error
+  - Server Failure
+  - Non-Existent Domain
+  - etc.
+  recommended: true
+  calculation:
+    id: DNS_reply_code
+    type: Lookup
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_DNS
+  source: declared
+  type: string

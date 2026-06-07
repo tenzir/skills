@@ -1,0 +1,7 @@
+name: service_dll
+used_by:
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: The dynamic link library associated with the service.

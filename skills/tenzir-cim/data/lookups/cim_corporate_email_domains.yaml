@@ -1,0 +1,4 @@
+name: cim_corporate_email_domains
+field: domain
+values:
+- '*acmetech.com'

@@ -1,0 +1,7 @@
+name: table_scans
+used_by:
+- model: Databases
+  dataset: Session_Info
+  source: declared
+  type: number
+  description: Number of table scans performed during the session.

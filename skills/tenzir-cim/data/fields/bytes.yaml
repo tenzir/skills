@@ -1,0 +1,22 @@
+name: bytes
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: calculated
+  type: number
+  description: Total count of bytes handled by this device/interface (bytes_in + bytes_out).
+  recommended: true
+  calculation:
+    id: All_Traffic_bytes
+    type: Eval
+    expression: case(isnum(bytes),bytes,isnum(bytes_in) AND isnum(bytes_out),bytes_in+bytes_out,1=1,null())
+- model: Web
+  dataset: Web
+  source: calculated
+  type: number
+  description: The total number of bytes transferred (bytes_in + bytes_out).
+  recommended: true
+  calculation:
+    id: Web_bytes
+    type: Eval
+    expression: case(isnum(bytes),bytes,isnum(bytes_in) AND isnum(bytes_out),bytes_in+bytes_out,1=1,null())

@@ -1,0 +1,9 @@
+name: icmp_type
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: number
+  description: The RFC 2780 or RFC 4443 numeric value of the traffic. See the ICMP Type Numbers and the ICMPv6 Type Numbers.
+  expected_values:
+  - 0-254

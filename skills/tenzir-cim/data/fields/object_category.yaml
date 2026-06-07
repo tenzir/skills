@@ -1,0 +1,74 @@
+name: object_category
+lookups:
+- name: cim_dlp_object_categories
+  file: data/lookups/cim_dlp_object_categories.yaml
+- name: cim_endpoint_object_categories
+  file: data/lookups/cim_endpoint_object_categories.yaml
+- name: splunk_object_category
+  file: data/lookups/splunk_object_category.yaml
+used_by:
+- model: Change
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object_category
+    type: Eval
+    expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+- model: Change_Analysis
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+  expected_values:
+  - directory
+  - file
+  - group
+  - registry
+  - user
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object_category
+    type: Eval
+    expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+- model: Data_Access
+  dataset: Data_Access
+  source: calculated
+  type: string
+  description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
+  expected_values:
+  - collaboration
+  - file
+  - folder
+  - comment
+  - task
+  - note
+  recommended: true
+  calculation:
+    id: Data_Access_fillnull_object_category
+    type: Eval
+    expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+- model: DLP
+  dataset: DLP_Incidents
+  source: calculated
+  type: string
+  description: The category of the affected object.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_object_category
+    type: Eval
+    expression: if(isnull(object_category) OR object_category="","unknown",object_category)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Account_Management
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Endpoint_Changes
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  source: declared
+  type: string

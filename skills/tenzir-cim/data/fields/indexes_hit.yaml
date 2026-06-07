@@ -1,0 +1,7 @@
+name: indexes_hit
+used_by:
+- model: Databases
+  dataset: Query_Stats
+  source: declared
+  type: string
+  description: The names of the indexes hit by the database query.

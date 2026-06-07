@@ -1,0 +1,17 @@
+name: ssl_hash
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: calculated
+  type: string
+  description: The hash of the certificate.
+  recommended: true
+  multivalue: true
+  calculation:
+    id: SSL_fillnull_ssl_hash
+    type: Eval
+    expression: if(isnull(ssl_hash) OR ssl_hash="","unknown",ssl_hash)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Certificates
+  source: declared
+  type: string

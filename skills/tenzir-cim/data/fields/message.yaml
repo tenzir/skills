@@ -1,0 +1,7 @@
+name: message
+used_by:
+- model: Interprocess_Messaging
+  dataset: All_Messaging
+  source: declared
+  type: string
+  description: A command or reference that an RPC (remote procedure call) reads or responds to.

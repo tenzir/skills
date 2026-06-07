@@ -1,0 +1,7 @@
+name: stored_procedures_called
+used_by:
+- model: Databases
+  dataset: Query_Stats
+  source: declared
+  type: string
+  description: The names of the stored procedures called by the query.

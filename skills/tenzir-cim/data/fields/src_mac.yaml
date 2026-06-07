@@ -1,0 +1,12 @@
+name: src_mac
+used_by:
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: The MAC address of the client initializing a network session. Not applicable for DHCP events.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: 'The source TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'

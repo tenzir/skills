@@ -1,0 +1,17 @@
+name: parent_process_guid
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: The globally unique identifier of the parent process assigned by the vendor_product.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: The globally unique identifier of the parent process assigned by the vendor_product.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: The globally unique identifier of the parent process assigned by the vendor_product.

@@ -1,0 +1,55 @@
+name: object
+used_by:
+- model: Change
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object
+    type: Eval
+    expression: if(isnull(object) OR object="","unknown",object)
+- model: Change_Analysis
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object
+    type: Eval
+    expression: if(isnull(object) OR object="","unknown",object)
+- model: Data_Access
+  dataset: Data_Access
+  source: calculated
+  type: string
+  description: Resource object name on which the action was performed by a user.
+  recommended: true
+  calculation:
+    id: Data_Access_fillnull_object
+    type: Eval
+    expression: if(isnull(object) OR object="","unknown",object)
+- model: Databases
+  dataset: All_Databases
+  source: declared
+  type: string
+  description: The name of the database object.
+- model: DLP
+  dataset: DLP_Incidents
+  source: calculated
+  type: string
+  description: The name of the affected object.
+  recommended: true
+  calculation:
+    id: DLP_Incidents_fillnull_object
+    type: Eval
+    expression: if(isnull(object) OR object="","unknown",object)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Endpoint_Changes
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  source: declared
+  type: string

@@ -1,0 +1,618 @@
+name: cim_http_statuses
+key: status
+entries:
+- status: '100'
+  status_action: allowed
+  status_description: Continue
+  status_reference: RFC2616
+  status_type: Informational
+- status: 100.*
+  status_action: allowed
+  status_description: Continue
+  status_reference: ''
+  status_type: Informational
+- status: '101'
+  status_action: allowed
+  status_description: Switching Protocols
+  status_reference: RFC2616
+  status_type: Informational
+- status: 101.*
+  status_action: allowed
+  status_description: Switching Protocols
+  status_reference: ''
+  status_type: Informational
+- status: '102'
+  status_action: allowed
+  status_description: Processing
+  status_reference: RFC2518
+  status_type: Informational
+- status: 102.*
+  status_action: allowed
+  status_description: Processing
+  status_reference: ''
+  status_type: Informational
+- status: '200'
+  status_action: allowed
+  status_description: OK
+  status_reference: RFC2616
+  status_type: Success
+- status: 200.*
+  status_action: allowed
+  status_description: OK
+  status_reference: ''
+  status_type: Success
+- status: '201'
+  status_action: allowed
+  status_description: Created
+  status_reference: RFC2616
+  status_type: Success
+- status: 201.*
+  status_action: allowed
+  status_description: Created
+  status_reference: ''
+  status_type: Success
+- status: '202'
+  status_action: allowed
+  status_description: Accepted
+  status_reference: RFC2616
+  status_type: Success
+- status: 202.*
+  status_action: allowed
+  status_description: Accepted
+  status_reference: ''
+  status_type: Success
+- status: '203'
+  status_action: allowed
+  status_description: Non-Authoritative Information
+  status_reference: RFC2616
+  status_type: Success
+- status: 203.*
+  status_action: allowed
+  status_description: Non-Authoritative Information
+  status_reference: ''
+  status_type: Success
+- status: '204'
+  status_action: allowed
+  status_description: No Content
+  status_reference: RFC2616
+  status_type: Success
+- status: 204.*
+  status_action: allowed
+  status_description: No Content
+  status_reference: ''
+  status_type: Success
+- status: '205'
+  status_action: allowed
+  status_description: Reset Content
+  status_reference: RFC2616
+  status_type: Success
+- status: 205.*
+  status_action: allowed
+  status_description: Reset Content
+  status_reference: ''
+  status_type: Success
+- status: '206'
+  status_action: allowed
+  status_description: Partial Content
+  status_reference: RFC2616
+  status_type: Success
+- status: 206.*
+  status_action: allowed
+  status_description: Partial Content
+  status_reference: ''
+  status_type: Success
+- status: '207'
+  status_action: allowed
+  status_description: Multi-Status
+  status_reference: RFC4918
+  status_type: Success
+- status: 207.*
+  status_action: allowed
+  status_description: Multi-Status
+  status_reference: ''
+  status_type: Success
+- status: '208'
+  status_action: allowed
+  status_description: Already Reported
+  status_reference: RFC5842
+  status_type: Success
+- status: 208.*
+  status_action: allowed
+  status_description: Already Reported
+  status_reference: ''
+  status_type: Success
+- status: '226'
+  status_action: allowed
+  status_description: IM Used
+  status_reference: RFC3229
+  status_type: Success
+- status: 226.*
+  status_action: allowed
+  status_description: IM Used
+  status_reference: ''
+  status_type: Success
+- status: '300'
+  status_action: allowed
+  status_description: Multiple Choices
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 300.*
+  status_action: allowed
+  status_description: Multiple Choices
+  status_reference: ''
+  status_type: Redirection
+- status: '301'
+  status_action: allowed
+  status_description: Moved Permanently
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 301.*
+  status_action: allowed
+  status_description: Moved Permanently
+  status_reference: ''
+  status_type: Redirection
+- status: '302'
+  status_action: allowed
+  status_description: Found
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 302.*
+  status_action: allowed
+  status_description: Found
+  status_reference: ''
+  status_type: Redirection
+- status: '303'
+  status_action: allowed
+  status_description: See Other
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 303.*
+  status_action: allowed
+  status_description: See Other
+  status_reference: ''
+  status_type: Redirection
+- status: '304'
+  status_action: allowed
+  status_description: Not Modified
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 304.*
+  status_action: allowed
+  status_description: Not Modified
+  status_reference: ''
+  status_type: Redirection
+- status: '305'
+  status_action: allowed
+  status_description: Use Proxy
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 305.*
+  status_action: allowed
+  status_description: Use Proxy
+  status_reference: ''
+  status_type: Redirection
+- status: '306'
+  status_action: allowed
+  status_description: Reserved
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 306.*
+  status_action: allowed
+  status_description: Reserved
+  status_reference: ''
+  status_type: Redirection
+- status: '307'
+  status_action: allowed
+  status_description: Temporary Redirect
+  status_reference: RFC2616
+  status_type: Redirection
+- status: 307.*
+  status_action: allowed
+  status_description: Temporary Redirect
+  status_reference: ''
+  status_type: Redirection
+- status: '308'
+  status_action: allowed
+  status_description: Permanent Redirect
+  status_reference: RFC-reschke-http-status-308-07
+  status_type: Redirection
+- status: 308.*
+  status_action: allowed
+  status_description: Permanent Redirect
+  status_reference: ''
+  status_type: Redirection
+- status: '400'
+  status_action: blocked
+  status_description: Bad Request
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 400.*
+  status_action: blocked
+  status_description: Bad Request
+  status_reference: ''
+  status_type: Client Error
+- status: '401'
+  status_action: blocked
+  status_description: Unauthorized
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 401.*
+  status_action: blocked
+  status_description: Unauthorized
+  status_reference: ''
+  status_type: Client Error
+- status: '402'
+  status_action: blocked
+  status_description: Payment Required
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 402.*
+  status_action: blocked
+  status_description: Payment Required
+  status_reference: ''
+  status_type: Client Error
+- status: '403'
+  status_action: blocked
+  status_description: Forbidden
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 403.*
+  status_action: blocked
+  status_description: Forbidden
+  status_reference: ''
+  status_type: Client Error
+- status: '404'
+  status_action: blocked
+  status_description: Not Found
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 404.*
+  status_action: blocked
+  status_description: Not Found
+  status_reference: ''
+  status_type: Client Error
+- status: '405'
+  status_action: blocked
+  status_description: Method Not Allowed
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 405.*
+  status_action: blocked
+  status_description: Method Not Allowed
+  status_reference: ''
+  status_type: Client Error
+- status: '406'
+  status_action: blocked
+  status_description: Not Acceptable
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 406.*
+  status_action: blocked
+  status_description: Not Acceptable
+  status_reference: ''
+  status_type: Client Error
+- status: '407'
+  status_action: blocked
+  status_description: Proxy Authentication Required
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 407.*
+  status_action: blocked
+  status_description: Proxy Authentication Required
+  status_reference: ''
+  status_type: Client Error
+- status: '408'
+  status_action: blocked
+  status_description: Request Timeout
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 408.*
+  status_action: blocked
+  status_description: Request Timeout
+  status_reference: ''
+  status_type: Client Error
+- status: '409'
+  status_action: blocked
+  status_description: Conflict
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 409.*
+  status_action: blocked
+  status_description: Conflict
+  status_reference: ''
+  status_type: Client Error
+- status: '410'
+  status_action: blocked
+  status_description: Gone
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 410.*
+  status_action: blocked
+  status_description: Gone
+  status_reference: ''
+  status_type: Client Error
+- status: '411'
+  status_action: blocked
+  status_description: Length Required
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 411.*
+  status_action: blocked
+  status_description: Length Required
+  status_reference: ''
+  status_type: Client Error
+- status: '412'
+  status_action: blocked
+  status_description: Precondition Failed
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 412.*
+  status_action: blocked
+  status_description: Precondition Failed
+  status_reference: ''
+  status_type: Client Error
+- status: '413'
+  status_action: blocked
+  status_description: Request Entity Too Large
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 413.*
+  status_action: blocked
+  status_description: Request Entity Too Large
+  status_reference: ''
+  status_type: Client Error
+- status: '414'
+  status_action: blocked
+  status_description: Request-URI Too Long
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 414.*
+  status_action: blocked
+  status_description: Request-URI Too Long
+  status_reference: ''
+  status_type: Client Error
+- status: '415'
+  status_action: blocked
+  status_description: Unsupported Media Type
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 415.*
+  status_action: blocked
+  status_description: Unsupported Media Type
+  status_reference: ''
+  status_type: Client Error
+- status: '416'
+  status_action: blocked
+  status_description: Requested Range Not Satisfiable
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 416.*
+  status_action: blocked
+  status_description: Requested Range Not Satisfiable
+  status_reference: ''
+  status_type: Client Error
+- status: '417'
+  status_action: blocked
+  status_description: Expectation Failed
+  status_reference: RFC2616
+  status_type: Client Error
+- status: 417.*
+  status_action: blocked
+  status_description: Expectation Failed
+  status_reference: ''
+  status_type: Client Error
+- status: '422'
+  status_action: blocked
+  status_description: Unprocessable Entity
+  status_reference: RFC4918
+  status_type: Client Error
+- status: 422.*
+  status_action: blocked
+  status_description: Unprocessable Entity
+  status_reference: ''
+  status_type: Client Error
+- status: '423'
+  status_action: blocked
+  status_description: Locked
+  status_reference: RFC4918
+  status_type: Client Error
+- status: 423.*
+  status_action: blocked
+  status_description: Locked
+  status_reference: ''
+  status_type: Client Error
+- status: '424'
+  status_action: blocked
+  status_description: Failed Dependency
+  status_reference: RFC4918
+  status_type: Client Error
+- status: 424.*
+  status_action: blocked
+  status_description: Failed Dependency
+  status_reference: ''
+  status_type: Client Error
+- status: '426'
+  status_action: blocked
+  status_description: Upgrade Required
+  status_reference: RFC2817
+  status_type: Client Error
+- status: 426.*
+  status_action: blocked
+  status_description: Upgrade Required
+  status_reference: ''
+  status_type: Client Error
+- status: '428'
+  status_action: blocked
+  status_description: Precondition Required
+  status_reference: RFC6585
+  status_type: Client Error
+- status: 428.*
+  status_action: blocked
+  status_description: Precondition Required
+  status_reference: ''
+  status_type: Client Error
+- status: '429'
+  status_action: blocked
+  status_description: Too Many Requests
+  status_reference: RFC6585
+  status_type: Client Error
+- status: 429.*
+  status_action: blocked
+  status_description: Too Many Requests
+  status_reference: ''
+  status_type: Client Error
+- status: '431'
+  status_action: blocked
+  status_description: Request Header Fields Too Large
+  status_reference: RFC6585
+  status_type: Client Error
+- status: 431.*
+  status_action: blocked
+  status_description: Request Header Fields Too Large
+  status_reference: ''
+  status_type: Client Error
+- status: '500'
+  status_action: blocked
+  status_description: Internal Server Error
+  status_reference: RFC2616
+  status_type: Server Error
+- status: 500.*
+  status_action: blocked
+  status_description: Internal Server Error
+  status_reference: ''
+  status_type: Server Error
+- status: '501'
+  status_action: blocked
+  status_description: Not Implemented
+  status_reference: RFC2616
+  status_type: Server Error
+- status: 501.*
+  status_action: blocked
+  status_description: Not Implemented
+  status_reference: ''
+  status_type: Server Error
+- status: '502'
+  status_action: blocked
+  status_description: Bad Gateway
+  status_reference: RFC2616
+  status_type: Server Error
+- status: 502.*
+  status_action: blocked
+  status_description: Bad Gateway
+  status_reference: ''
+  status_type: Server Error
+- status: '503'
+  status_action: blocked
+  status_description: Service Unavailable
+  status_reference: RFC2616
+  status_type: Server Error
+- status: 503.*
+  status_action: blocked
+  status_description: Service Unavailable
+  status_reference: ''
+  status_type: Server Error
+- status: '504'
+  status_action: blocked
+  status_description: Gateway Timeout
+  status_reference: RFC2616
+  status_type: Server Error
+- status: 504.*
+  status_action: blocked
+  status_description: Gateway Timeout
+  status_reference: ''
+  status_type: Server Error
+- status: '505'
+  status_action: blocked
+  status_description: HTTP Version Not Supported
+  status_reference: RFC2616
+  status_type: Server Error
+- status: 505.*
+  status_action: blocked
+  status_description: HTTP Version Not Supported
+  status_reference: ''
+  status_type: Server Error
+- status: '506'
+  status_action: blocked
+  status_description: Variant Also Negotiates (Experimental)
+  status_reference: RFC2295
+  status_type: Server Error
+- status: 506.*
+  status_action: blocked
+  status_description: Variant Also Negotiates (Experimental)
+  status_reference: ''
+  status_type: Server Error
+- status: '507'
+  status_action: blocked
+  status_description: Insufficient Storage
+  status_reference: RFC4918
+  status_type: Server Error
+- status: 507.*
+  status_action: blocked
+  status_description: Insufficient Storage
+  status_reference: ''
+  status_type: Server Error
+- status: '508'
+  status_action: blocked
+  status_description: Loop Detected
+  status_reference: RFC5842
+  status_type: Server Error
+- status: 508.*
+  status_action: blocked
+  status_description: Loop Detected
+  status_reference: ''
+  status_type: Server Error
+- status: '510'
+  status_action: blocked
+  status_description: Not Extended
+  status_reference: RFC2774
+  status_type: Server Error
+- status: 510.*
+  status_action: blocked
+  status_description: Not Extended
+  status_reference: ''
+  status_type: Server Error
+- status: '511'
+  status_action: blocked
+  status_description: Network Authentication Required
+  status_reference: RFC6585
+  status_type: Server Error
+- status: 511.*
+  status_action: blocked
+  status_description: Network Authentication Required
+  status_reference: ''
+  status_type: Server Error
+- status: '551'
+  status_action: blocked
+  status_description: Option not supported
+  status_reference: ''
+  status_type: Server Error
+- status: 551.*
+  status_action: blocked
+  status_description: Option not supported
+  status_reference: ''
+  status_type: Server Error
+- status: '598'
+  status_action: blocked
+  status_description: Network Read Timeout Error
+  status_reference: ''
+  status_type: Server Error
+- status: 598.*
+  status_action: blocked
+  status_description: Network Read Timeout Error
+  status_reference: ''
+  status_type: Server Error
+- status: '599'
+  status_action: blocked
+  status_description: Network Connection Timeout Error
+  status_reference: ''
+  status_type: Server Error
+- status: 599.*
+  status_action: blocked
+  status_description: Network Connection Timeout Error
+  status_reference: ''
+  status_type: Server Error
+- status: unknown
+  status_action: unknown
+  status_description: Unknown
+  status_reference: ''
+  status_type: Server Error

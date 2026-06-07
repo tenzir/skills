@@ -1,0 +1,12 @@
+name: is_inprogress
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: boolean
+  description: Indicates whether the data model acceleration is currently in progress.
+  expected_values:
+  - 'true'
+  - 'false'
+  - '1'
+  - '0'

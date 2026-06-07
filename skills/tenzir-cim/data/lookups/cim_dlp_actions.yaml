@@ -1,0 +1,6 @@
+name: cim_dlp_actions
+field: action
+values:
+- allowed
+- blocked
+- deferred

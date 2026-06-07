@@ -1,0 +1,11 @@
+name: recipient_count
+used_by:
+- model: Email
+  dataset: All_Email
+  source: calculated
+  type: number
+  description: The total number of intended message recipients.
+  calculation:
+    id: 2Email_recipient_count
+    type: Eval
+    expression: case(isnum(recipient_count),recipient_count,isnotnull(recipient),mvcount(recipient),1=1,1)

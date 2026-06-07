@@ -1,0 +1,7 @@
+name: sga_fixed_area_size
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  source: declared
+  type: number
+  description: The size of the fixed area (also referred to as the fixed SGA) for the database instance, in bytes.

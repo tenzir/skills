@@ -1,0 +1,12 @@
+name: write_blocks
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  source: declared
+  type: number
+  description: The maximum possible number of blocks written per second during a polling period.
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: The number of blocks written by the resource.

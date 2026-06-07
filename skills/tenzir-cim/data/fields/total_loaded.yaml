@@ -1,0 +1,7 @@
+name: total_loaded
+used_by:
+- model: JVM
+  dataset: Classloading
+  source: declared
+  type: number
+  description: The total count of classes loaded in the JVM.

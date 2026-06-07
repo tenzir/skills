@@ -1,0 +1,7 @@
+name: splunk_realm
+used_by:
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: string
+  description: The Splunk application or use case associated with the unique identifier (splunk_id). For example, es_notable.

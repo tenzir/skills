@@ -1,0 +1,8 @@
+name: cam_categories
+field: category
+values:
+- Information Conveyance
+- Information Gathering
+- Information Tracking
+- Permissions Control
+- Device Control

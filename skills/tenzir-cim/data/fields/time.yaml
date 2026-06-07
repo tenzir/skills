@@ -1,0 +1,7 @@
+name: time
+used_by:
+- model: Compute_Inventory
+  dataset: Snapshot
+  source: declared
+  type: timestamp
+  description: The time at which the snapshot was taken.

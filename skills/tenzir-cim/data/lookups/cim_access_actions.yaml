@@ -1,0 +1,7 @@
+name: cim_access_actions
+field: action
+values:
+- success
+- failure
+- pending
+- error

@@ -1,0 +1,7 @@
+name: retries
+used_by:
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: number
+  description: The number of times that the message was automatically resent because it was bounced back, or a similar transmission error condition.

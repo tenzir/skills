@@ -1,0 +1,7 @@
+name: access_time
+used_by:
+- model: Splunk_Audit
+  dataset: Datamodel_Acceleration
+  source: declared
+  type: timestamp
+  description: The timestamp of the most recent access of the data model summary.

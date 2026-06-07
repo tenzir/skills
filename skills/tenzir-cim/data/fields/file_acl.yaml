@@ -1,0 +1,26 @@
+name: file_acl
+used_by:
+- model: Change_Analysis
+  dataset: Filesystem_Changes
+  source: calculated
+  type: string
+  description: Access controls associated with the file affected by the event.
+  recommended: true
+  calculation:
+    id: Filesystem_Changes_eval_file_acl
+    type: Eval
+    expression: if(isnull(file_acl) OR file_acl="","unknown",file_acl)
+- model: Endpoint
+  dataset: Filesystem
+  source: calculated
+  type: string
+  description: Access controls associated with the file affected by the event.
+  recommended: true
+  calculation:
+    id: Endpoint_Filesystem_eval_file_acl
+    type: Eval
+    expression: if(isnull(file_acl) OR file_acl="","unknown",file_acl)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Filesystem_Changes
+  source: declared
+  type: string

@@ -1,0 +1,7 @@
+name: ssl_subject_email
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: declared
+  type: string
+  description: The certificate owner's e-mail address.

@@ -1,0 +1,7 @@
+name: system_load
+used_by:
+- model: JVM
+  dataset: OS
+  source: declared
+  type: number
+  description: System load of the OS that the JVM is running on.

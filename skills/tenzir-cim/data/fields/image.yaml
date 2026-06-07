@@ -1,0 +1,12 @@
+name: image
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: The binary file path or name that is tied to a process ID (PID) in events like process creation or termination.
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: The binary file path or name that is tied to a process ID (PID) in events like process creation or termination.

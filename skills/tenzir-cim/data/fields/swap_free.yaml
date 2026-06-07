@@ -1,0 +1,7 @@
+name: swap_free
+used_by:
+- model: Performance
+  dataset: Memory
+  source: declared
+  type: number
+  description: The free swap space size, in megabytes, if applicable.

@@ -1,0 +1,7 @@
+name: obj_name
+used_by:
+- model: Databases
+  dataset: Lock_Info
+  source: declared
+  type: string
+  description: The name of the locked object.

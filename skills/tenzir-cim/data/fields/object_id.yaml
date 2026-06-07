@@ -1,0 +1,32 @@
+name: object_id
+used_by:
+- model: Change
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object_id
+    type: Eval
+    expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+- model: Change_Analysis
+  dataset: All_Changes
+  source: calculated
+  type: string
+  description: The unique updated resource object ID as presented to the system, if applicable. For example, a SID, UUID, or GUID value.
+  recommended: true
+  calculation:
+    id: All_Changes_fillnull_object_id
+    type: Eval
+    expression: if(isnull(object_id) OR object_id="","unknown",object_id)
+- model: Data_Access
+  dataset: Data_Access
+  source: calculated
+  type: string
+  description: The unique updated resource object ID as presented to the system, if applicable. For example, a source_folder_id, doc_id.
+  recommended: true
+  calculation:
+    id: Data_Access_fillnull_object_id
+    type: Eval
+    expression: if(isnull(object_id) OR object_id="","unknown",object_id)

@@ -1,0 +1,11 @@
+name: http_user_agent_length
+used_by:
+- model: Web
+  dataset: Web
+  source: calculated
+  type: number
+  description: The length of the user agent used in the request.
+  calculation:
+    id: Web_http_user_agent_length
+    type: Eval
+    expression: len(http_user_agent)

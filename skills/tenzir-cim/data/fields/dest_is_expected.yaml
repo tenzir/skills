@@ -1,0 +1,12 @@
+name: dest_is_expected
+used_by:
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: boolean
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.

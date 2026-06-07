@@ -1,0 +1,12 @@
+name: temperature
+used_by:
+- model: Performance
+  dataset: Facilities
+  source: declared
+  type: number
+  description: Average temperature of the facilities resource, in degrees Celsius.
+  recommended: true
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Facilities
+  source: declared
+  type: number

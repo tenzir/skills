@@ -1,0 +1,77 @@
+name: src_priority
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The priority of the source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Certificates
+  dataset: All_Certificates
+  source: declared
+  type: string
+  description: The priority of the certificate management source.
+- model: Change
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Change_Analysis
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Databases
+  dataset: All_Databases
+  source: declared
+  type: string
+  description: The priority of the source.
+- model: DLP
+  dataset: DLP_Incidents
+  source: declared
+  type: string
+  description: The priority of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The priority of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+- model: Malware
+  dataset: Malware_Attacks
+  source: declared
+  type: string
+  description: The priority of the source.
+- model: Network_Resolution
+  dataset: DNS
+  source: declared
+  type: string
+  description: The priority of the source.
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: The priority of the source.
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The priority of the source, if applicable.
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.

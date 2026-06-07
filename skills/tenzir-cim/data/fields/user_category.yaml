@@ -1,0 +1,152 @@
+name: user_category
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The category of the user involved in the alert event. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Application_State
+  dataset: All_Application_State
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Change
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Change_Analysis
+  dataset: All_Changes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Compute_Inventory
+  dataset: User
+  source: declared
+  type: string
+  description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Databases
+  dataset: All_Databases
+  source: declared
+  type: string
+  description: The category associated with the user.
+  multivalue: true
+- model: DLP
+  dataset: DLP_Incidents
+  source: declared
+  type: string
+  description: The category of the DLP user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The category of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Endpoint
+  dataset: Filesystem
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Endpoint
+  dataset: Ports
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Endpoint
+  dataset: Registry
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Endpoint
+  dataset: Services
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Malware
+  dataset: Malware_Attacks
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Network_Sessions
+  dataset: All_Sessions
+  source: declared
+  type: string
+  description: The category of the user.
+  multivalue: true
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Splunk_Audit
+  dataset: Modular_Actions
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Splunk_Audit
+  dataset: Scheduler_Activity
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Splunk_Audit
+  dataset: Search_Activity
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Splunk_Audit
+  dataset: View_Activity
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Ticket_Management
+  dataset: All_Ticket_Management
+  source: declared
+  type: string
+  description: The category associated with the user or entity that is assigned to carry out the service request, if applicable.
+  multivalue: true
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+  multivalue: true

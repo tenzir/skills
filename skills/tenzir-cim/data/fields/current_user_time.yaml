@@ -1,0 +1,7 @@
+name: current_user_time
+used_by:
+- model: JVM
+  dataset: Threading
+  source: declared
+  type: number
+  description: User-space time taken by the JVM, in seconds.

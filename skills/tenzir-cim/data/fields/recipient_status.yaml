@@ -1,0 +1,8 @@
+name: recipient_status
+used_by:
+- model: Email
+  dataset: All_Email
+  source: declared
+  type: string
+  description: The recipient delivery status, if available.
+  multivalue: true

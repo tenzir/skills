@@ -1,0 +1,5 @@
+name: cam_action_statuses
+field: action_status
+values:
+- success
+- failure

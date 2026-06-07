@@ -1,0 +1,7 @@
+name: records_affected
+used_by:
+- model: Databases
+  dataset: Database_Query
+  source: declared
+  type: number
+  description: The number of records affected by the database query.

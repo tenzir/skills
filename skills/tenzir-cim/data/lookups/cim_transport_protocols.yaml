@@ -1,0 +1,6 @@
+name: cim_transport_protocols
+field: transport
+values:
+- icmp
+- tcp
+- udp

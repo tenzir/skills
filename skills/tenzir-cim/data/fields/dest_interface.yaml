@@ -1,0 +1,7 @@
+name: dest_interface
+used_by:
+- model: Network_Traffic
+  dataset: All_Traffic
+  source: declared
+  type: string
+  description: The interface that is listening remotely or receiving packets locally. Can also be referred to as the 'egress interface.'

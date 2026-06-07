@@ -1,0 +1,7 @@
+name: instance_reads
+used_by:
+- model: Databases
+  dataset: Instance_Stats
+  source: declared
+  type: number
+  description: The total number of reads for the database instance.

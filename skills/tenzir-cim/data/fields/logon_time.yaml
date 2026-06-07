@@ -1,0 +1,7 @@
+name: logon_time
+used_by:
+- model: Databases
+  dataset: Lock_Info
+  source: declared
+  type: number
+  description: The database logon time for the session.

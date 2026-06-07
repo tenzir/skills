@@ -1,0 +1,12 @@
+name: mskb
+used_by:
+- model: Vulnerabilities
+  dataset: Vulnerabilities
+  source: calculated
+  type: string
+  description: The Microsoft Knowledge Base article number (http://support.microsoft.com/kb/).
+  multivalue: true
+  calculation:
+    id: Vulnerabilities_lower_mskb
+    type: Eval
+    expression: if(isnotnull(mskb) AND mskb!="",lower(mskb),null())

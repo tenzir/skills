@@ -1,0 +1,7 @@
+name: ssl_version
+used_by:
+- model: Certificates
+  dataset: SSL
+  source: declared
+  type: string
+  description: The ssl version of this certificate.

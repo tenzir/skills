@@ -1,0 +1,12 @@
+name: blocksize
+used_by:
+- model: Compute_Inventory
+  dataset: Storage
+  source: declared
+  type: number
+  description: The block size used by the storage resource, in kilobytes.
+- model: Performance
+  dataset: Storage
+  source: declared
+  type: number
+  description: Block size used by the storage resource, in kilobytes.

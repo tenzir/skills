@@ -1,0 +1,1616 @@
+name: Compute_Inventory
+display_name: Inventory
+description: Inventory Data Model
+root_datasets:
+- All_Inventory
+datasets:
+  All_Inventory:
+    display_name: All Inventory
+    kind: event
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    fields:
+      _time:
+        source: base
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: declared
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: calculated
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: declared
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: declared
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: base
+      hypervisor_id:
+        source: declared
+        type: string
+        description: The hypervisor identifier, if applicable.
+      serial:
+        source: declared
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      status:
+        source: declared
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: declared
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    children:
+    - CPU
+    - Memory
+    - Network
+    - OS
+    - Storage
+    - User
+    - Virtual_OS
+  CPU:
+    kind: event
+    tags:
+    - inventory
+    - cpu
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=cpu
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Inventory
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      cpu_cores:
+        source: declared
+        type: number
+        description: The number of CPU cores reported by the resource (total, not per CPU).
+        recommended: true
+      cpu_count:
+        source: declared
+        type: number
+        description: The number of CPUs reported by the resource.
+        recommended: true
+      cpu_mhz:
+        source: declared
+        type: number
+        description: The maximum speed of the CPU reported by the resource (in megahertz).
+        recommended: true
+      description:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: All_Inventory
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: All_Inventory
+      hypervisor_id:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The hypervisor identifier, if applicable.
+      serial:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: inherited
+        inherited_from: All_Inventory
+      sourcetype:
+        source: inherited
+        inherited_from: All_Inventory
+      status:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+  Memory:
+    kind: event
+    tags:
+    - inventory
+    - memory
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=memory
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Inventory
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: All_Inventory
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: All_Inventory
+      hypervisor_id:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The hypervisor identifier, if applicable.
+      mem:
+        source: declared
+        type: number
+        description: The total amount of memory installed in or allocated to the resource, in megabytes.
+        recommended: true
+      serial:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: inherited
+        inherited_from: All_Inventory
+      sourcetype:
+        source: inherited
+        inherited_from: All_Inventory
+      status:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+  Network:
+    kind: event
+    tags:
+    - inventory
+    - network
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=network
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Inventory
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_ip:
+        source: declared
+        type: string
+        description: The IP address for the system that the data is going to.
+      dest_priority:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The priority of the system where the data originated.
+      dns:
+        source: declared
+        type: string
+        description: The domain name server for the resource.
+        recommended: true
+      enabled:
+        source: inherited
+        inherited_from: All_Inventory
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: All_Inventory
+      hypervisor_id:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The hypervisor identifier, if applicable.
+      inline_nat:
+        source: declared
+        type: string
+        description: Identifies whether the resource is a network address translation pool.
+      interface:
+        source: declared
+        type: string
+        description: The network interfaces of the computing resource, such as eth0, eth1 or Wired Ethernet Connection, Teredo Tunneling Pseudo-Interface.
+        recommended: true
+      ip:
+        source: declared
+        type: string
+        description: The network addresses of the computing resource, such as 192.168.1.1 or E80:0000:0000:0000:0202:B3FF:FE1E:8329.
+        recommended: true
+      lb_method:
+        source: declared
+        type: string
+        description: The load balancing method used by the computing resource such as method, round robin, or least weight.
+      mac:
+        source: declared
+        type: string
+        description: 'A MAC (media access control) address associated with the resource, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
+        recommended: true
+      name:
+        source: declared
+        type: string
+        description: A name field provided in some data sources.
+        recommended: true
+      node:
+        source: declared
+        type: string
+        description: Represents a node hit.
+      node_port:
+        source: declared
+        type: number
+        description: The number of the destination port on the server that you requested from.
+      serial:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: inherited
+        inherited_from: All_Inventory
+      sourcetype:
+        source: inherited
+        inherited_from: All_Inventory
+      src_ip:
+        source: declared
+        type: string
+        description: The IP address for the system from which the data originates.
+      status:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+      vip_port:
+        source: declared
+        type: number
+        description: The port number for the virtual IP address (VIP). A VIP allows multiple MACs to use one IP address. VIPs are often used by load balancers.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+  Storage:
+    kind: event
+    tags:
+    - inventory
+    - storage
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=storage
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Inventory
+      array:
+        source: declared
+        type: string
+        description: The array that the storage resource is a member of, if applicable.
+      blocksize:
+        source: declared
+        type: number
+        description: The block size used by the storage resource, in kilobytes.
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      cluster:
+        source: declared
+        type: string
+        description: The index cluster that the resource is a member of, if applicable.
+      description:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: All_Inventory
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      fd_max:
+        source: declared
+        type: number
+        description: The maximum number of file descriptors available.
+      host:
+        source: inherited
+        inherited_from: All_Inventory
+      hypervisor_id:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The hypervisor identifier, if applicable.
+      latency:
+        source: declared
+        type: number
+        description: The latency reported by the resource, in milliseconds.
+      mount:
+        source: declared
+        type: string
+        description: The path at which a storage resource is mounted.
+        recommended: true
+      parent:
+        source: declared
+        type: string
+        description: A higher level object that this resource is owned by, if applicable.
+      read_blocks:
+        source: declared
+        type: number
+        description: The maximum possible number of blocks read per second during a polling period.
+      read_latency:
+        source: declared
+        type: number
+        description: For a polling period, the average amount of time elapsed until a read request is filled by the host disks (in ms).
+      read_ops:
+        source: declared
+        type: number
+        description: The total number of read operations in the polling period.
+      serial:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: inherited
+        inherited_from: All_Inventory
+      sourcetype:
+        source: inherited
+        inherited_from: All_Inventory
+      status:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The current reported state of the resource.
+      storage:
+        source: declared
+        type: number
+        description: The amount of storage capacity allocated to the resource, in megabytes.
+        recommended: true
+      tag:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+      write_blocks:
+        source: declared
+        type: number
+        description: The maximum possible number of blocks written per second during a polling period.
+      write_latency:
+        source: declared
+        type: number
+        description: For a polling period, the average amount of time elapsed until a write request is filled by the host disks (in ms).
+      write_ops:
+        source: declared
+        type: number
+        description: The total number of write operations in the polling period.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+  OS:
+    kind: event
+    tags:
+    - inventory
+    - system
+    - version
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=system tag=version
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Inventory
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: All_Inventory
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: All_Inventory
+      hypervisor_id:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The hypervisor identifier, if applicable.
+      os:
+        source: calculated
+        type: string
+        description: The operating system of the resource, such as Microsoft Windows Server 2008r2. This field is constructed from vendor_product and version fields.
+        recommended: true
+        calculation:
+          id: OS_os
+          type: Eval
+          expression: if(isnotnull(os) AND os!="",replace(replace(os,"(?:\(R\)|\\\\xA8)",""),"^(?:MS)?\s*Windows","Microsoft Windows"),"unknown")
+      serial:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: inherited
+        inherited_from: All_Inventory
+      sourcetype:
+        source: inherited
+        inherited_from: All_Inventory
+      status:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+  User:
+    kind: event
+    tags:
+    - inventory
+    - user
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=user
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Inventory
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: All_Inventory
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: All_Inventory
+      hypervisor_id:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The hypervisor identifier, if applicable.
+      interactive:
+        source: calculated
+        type: boolean
+        description: Indicates whether a locally defined account on a resource can be interactively logged in.
+        recommended: true
+        calculation:
+          id: User_interactive
+          type: Eval
+          expression: case(isnotnull(interactive) AND interactive!="",interactive,tag="interactive","true",1=1,"false")
+      password:
+        source: calculated
+        type: string
+        description: Displays the stored password(s) for a locally defined account, if it has any. For instance, an add-on may report the password column from /etc/passwd in this field.
+        recommended: true
+        calculation:
+          id: User_password
+          type: Eval
+          expression: if((password=="*" OR password=="x" OR password==""),null(),password)
+      serial:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The serial number of the resource.
+      shell:
+        source: declared
+        type: string
+        description: Indicates the shell program used by a locally defined account.
+      source:
+        source: inherited
+        inherited_from: All_Inventory
+      sourcetype:
+        source: inherited
+        inherited_from: All_Inventory
+      status:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: calculated
+        type: string
+        description: The full name of a locally defined account.
+        recommended: true
+        calculation:
+          id: User_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: declared
+        type: string
+        description: The business unit of the locally-defined user account. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_id:
+        source: declared
+        type: number
+        description: The user identification for a locally defined account.
+      user_priority:
+        source: declared
+        type: string
+        description: The priority of a locally-defined account.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+    children:
+    - Cleartext_Passwords
+    - Default_Accounts
+  Cleartext_Passwords:
+    display_name: Cleartext Passwords
+    kind: event
+    tags:
+    - inventory
+    - user
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=user
+    - password=*
+    fields:
+      _time:
+        source: inherited
+        inherited_from: User
+      cim_entity_zone:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: User
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: User
+      hypervisor_id:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The hypervisor identifier, if applicable.
+      interactive:
+        source: inherited
+        inherited_from: User
+        type: boolean
+        description: Indicates whether a locally defined account on a resource can be interactively logged in.
+        recommended: true
+        calculation:
+          id: User_interactive
+          type: Eval
+          expression: case(isnotnull(interactive) AND interactive!="",interactive,tag="interactive","true",1=1,"false")
+      password:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: Displays the stored password(s) for a locally defined account, if it has any. For instance, an add-on may report the password column from /etc/passwd in this field.
+        recommended: true
+        calculation:
+          id: User_password
+          type: Eval
+          expression: if((password=="*" OR password=="x" OR password==""),null(),password)
+      serial:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The serial number of the resource.
+      shell:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: Indicates the shell program used by a locally defined account.
+      source:
+        source: inherited
+        inherited_from: User
+      sourcetype:
+        source: inherited
+        inherited_from: User
+      status:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The full name of a locally defined account.
+        recommended: true
+        calculation:
+          id: User_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The business unit of the locally-defined user account. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_id:
+        source: inherited
+        inherited_from: User
+        type: number
+        description: The user identification for a locally defined account.
+      user_priority:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The priority of a locally-defined account.
+      vendor_product:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+    - User
+  Default_Accounts:
+    display_name: Default Accounts
+    kind: event
+    tags:
+    - inventory
+    - user
+    - default
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=user
+    - tag=default
+    fields:
+      _time:
+        source: inherited
+        inherited_from: User
+      cim_entity_zone:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: User
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: User
+      hypervisor_id:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The hypervisor identifier, if applicable.
+      interactive:
+        source: inherited
+        inherited_from: User
+        type: boolean
+        description: Indicates whether a locally defined account on a resource can be interactively logged in.
+        recommended: true
+        calculation:
+          id: User_interactive
+          type: Eval
+          expression: case(isnotnull(interactive) AND interactive!="",interactive,tag="interactive","true",1=1,"false")
+      password:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: Displays the stored password(s) for a locally defined account, if it has any. For instance, an add-on may report the password column from /etc/passwd in this field.
+        recommended: true
+        calculation:
+          id: User_password
+          type: Eval
+          expression: if((password=="*" OR password=="x" OR password==""),null(),password)
+      serial:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The serial number of the resource.
+      shell:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: Indicates the shell program used by a locally defined account.
+      source:
+        source: inherited
+        inherited_from: User
+      sourcetype:
+        source: inherited
+        inherited_from: User
+      status:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The full name of a locally defined account.
+        recommended: true
+        calculation:
+          id: User_user
+          type: Eval
+          expression: if(isnull(user) OR user="","unknown",user)
+      user_bunit:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The business unit of the locally-defined user account. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_id:
+        source: inherited
+        inherited_from: User
+        type: number
+        description: The user identification for a locally defined account.
+      user_priority:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The priority of a locally-defined account.
+      vendor_product:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: User
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+    - User
+  Virtual_OS:
+    display_name: Virtual OS
+    kind: event
+    tags:
+    - inventory
+    - virtual
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=virtual
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Inventory
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: All_Inventory
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: All_Inventory
+      hypervisor:
+        source: declared
+        type: string
+        description: The hypervisor parent of a virtual guest OS.
+        recommended: true
+      hypervisor_id:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The hypervisor identifier, if applicable.
+      serial:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: inherited
+        inherited_from: All_Inventory
+      sourcetype:
+        source: inherited
+        inherited_from: All_Inventory
+      status:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: All_Inventory
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+    children:
+    - Snapshot
+    - Tools
+  Snapshot:
+    kind: event
+    tags:
+    - inventory
+    - virtual
+    - snapshot
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=virtual
+    - tag=snapshot
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Virtual_OS
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: Virtual_OS
+      hypervisor:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The hypervisor parent of a virtual guest OS.
+        recommended: true
+      hypervisor_id:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The hypervisor identifier, if applicable.
+      serial:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The serial number of the resource.
+      size:
+        source: declared
+        type: number
+        description: The snapshot file size, in megabytes.
+        recommended: true
+      snapshot:
+        source: declared
+        type: string
+        description: The name of a snapshot file.
+        recommended: true
+      source:
+        source: inherited
+        inherited_from: Virtual_OS
+      sourcetype:
+        source: inherited
+        inherited_from: Virtual_OS
+      status:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      time:
+        source: declared
+        type: timestamp
+        description: The time at which the snapshot was taken.
+      vendor_product:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+    - Virtual_OS
+  Tools:
+    kind: event
+    tags:
+    - inventory
+    - virtual
+    - tools
+    constraints:
+    - (`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)
+    - tag=virtual
+    - tag=tools
+    fields:
+      _time:
+        source: inherited
+        inherited_from: Virtual_OS
+      cim_entity_zone:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      description:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The description of the inventory system.
+      dest:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The system where the data originated, the source of the event. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: All_Inventory_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The business unit of the system where the data originated. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The category of the system where the data originated, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The priority of the system where the data originated.
+      enabled:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: boolean
+        description: Indicates whether the resource is enabled or disabled.
+      family:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The product family of the resource, such as 686_64 or RISC.
+      host:
+        source: inherited
+        inherited_from: Virtual_OS
+      hypervisor:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The hypervisor parent of a virtual guest OS.
+        recommended: true
+      hypervisor_id:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The hypervisor identifier, if applicable.
+      serial:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The serial number of the resource.
+      source:
+        source: inherited
+        inherited_from: Virtual_OS
+      sourcetype:
+        source: inherited
+        inherited_from: Virtual_OS
+      status:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The current reported state of the resource.
+      tag:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      vendor_product:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The vendor and product name of the resource, such as Cisco Catalyst 3850. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: All_Inventory_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      version:
+        source: inherited
+        inherited_from: Virtual_OS
+        type: string
+        description: The version of a computer resource, such as 2008r2 or 3.0.0.
+    inherits:
+    - BaseEvent
+    - All_Inventory
+    - Virtual_OS

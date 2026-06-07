@@ -1,0 +1,22 @@
+name: user_id
+used_by:
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
+- model: Compute_Inventory
+  dataset: User
+  source: declared
+  type: number
+  description: The user identification for a locally defined account.
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
+- model: Endpoint
+  dataset: Processes
+  source: declared
+  type: string
+  description: The unique identifier of the user account which spawned the process.

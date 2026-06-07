@@ -1,0 +1,55 @@
+name: dest_nt_domain
+used_by:
+- model: Authentication
+  dataset: Authentication
+  source: declared
+  type: string
+  description: The name of the Active Directory used by the authentication target, if applicable.
+- model: Change
+  dataset: Account_Management
+  source: calculated
+  type: string
+  description: The NT domain of the destination, if applicable.
+  recommended: true
+  calculation:
+    id: Account_Management_fillnull_dest_nt_domain
+    type: Eval
+    expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+- model: Change_Analysis
+  dataset: Account_Management
+  source: calculated
+  type: string
+  description: The NT domain of the destination, if applicable.
+  recommended: true
+  calculation:
+    id: Account_Management_fillnull_dest_nt_domain
+    type: Eval
+    expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+- model: Malware
+  dataset: Malware_Attacks
+  source: calculated
+  type: string
+  description: The NT domain of the destination, if applicable.
+  recommended: true
+  calculation:
+    id: Malware_Attacks_fillnull_dest_nt_domain
+    type: Eval
+    expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+- model: Malware
+  dataset: Malware_Operations
+  source: calculated
+  type: string
+  description: The NT domain of the dest system, if applicable.
+  recommended: true
+  calculation:
+    id: Malware_Operations_fillnull_dest_nt_domain
+    type: Eval
+    expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Malware_Attacks
+  source: declared
+  type: string
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Malware_Operations
+  source: declared
+  type: string

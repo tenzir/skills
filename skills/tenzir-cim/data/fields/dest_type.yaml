@@ -1,0 +1,17 @@
+name: dest_type
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The type of the destination object, such as 'instance', 'storage', 'firewall'.
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: The type of the destination object, such as 'instance', 'storage', 'firewall', 'printer'.
+- model: Intrusion_Detection
+  dataset: IDS_Attacks
+  source: declared
+  type: string
+  description: The type of the destination object, such as 'instance', 'storage', 'firewall'.

@@ -1,0 +1,4 @@
+name: cim_corporate_web_domains
+field: domain
+values:
+- '*acmetech.com'

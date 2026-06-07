@@ -1,0 +1,7 @@
+name: id
+used_by:
+- model: Alerts
+  dataset: Alerts
+  source: declared
+  type: string
+  description: The unique identifier of the alert event.

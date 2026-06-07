@@ -1,0 +1,7 @@
+name: cookie
+used_by:
+- model: Web
+  dataset: Web
+  source: declared
+  type: string
+  description: The cookie file recorded in the event.

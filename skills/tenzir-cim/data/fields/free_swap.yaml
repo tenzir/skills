@@ -1,0 +1,7 @@
+name: free_swap
+used_by:
+- model: JVM
+  dataset: OS
+  source: declared
+  type: number
+  description: Amount of free swap memory remaining to the JVM, in bytes.

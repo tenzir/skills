@@ -1,0 +1,1295 @@
+name: Email
+description: Email Data Model
+root_datasets:
+- All_Email
+datasets:
+  All_Email:
+    display_name: All Email
+    kind: event
+    tags:
+    - email
+    constraints:
+    - (`cim_Email_indexes`) tag=email
+    fields:
+      _time:
+        source: base
+      action:
+        source: calculated
+        type: string
+        description: Action taken by the reporting device.
+        expected_values:
+        - delivered
+        - blocked
+        - quarantined
+        - deleted
+        recommended: true
+        calculation:
+          id: Email_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      cim_entity_zone:
+        source: declared
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      delay:
+        source: declared
+        type: number
+        description: Total sending delay in milliseconds.
+      dest:
+        source: calculated
+        type: string
+        description: The endpoint system to which the message was delivered. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: declared
+        type: string
+        description: The business unit of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: declared
+        type: string
+        description: The category of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: declared
+        type: string
+        description: The priority of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      duration:
+        source: declared
+        type: number
+        description: The amount of time for the completion of the messaging event, in seconds.
+      file_hash:
+        source: declared
+        type: string
+        description: The hashes for the files attached to the message, if any exist.
+      file_name:
+        source: declared
+        type: string
+        description: The names of the files attached to the message, if any exist.
+      file_size:
+        source: declared
+        type: number
+        description: The size of the files attached the message, in bytes.
+      host:
+        source: base
+      internal_message_id:
+        source: declared
+        type: string
+        description: Host-specific unique message identifier (such as aid in sendmail, IMI in Domino, Internal-Message-ID in Exchange, and MID in Ironport).
+      message_id:
+        source: declared
+        type: string
+        description: The globally-unique message identifier.
+      message_info:
+        source: declared
+        type: string
+        description: Additional information about the message.
+      orig_dest:
+        source: declared
+        type: string
+        description: The original destination host of the message. The message destination host can change when a message is relayed or bounced.
+      orig_recipient:
+        source: declared
+        type: string
+        description: The original recipient of the message. The message recipient can change when the original email address is an alias and has to be resolved to the actual recipient.
+        multivalue: true
+      orig_src:
+        source: declared
+        type: string
+        description: The original source of the message.
+      process:
+        source: declared
+        type: string
+        description: The name of the email executable that carries out the message transaction, such as sendmail, postfix, or the name of an email client.
+      process_id:
+        source: declared
+        type: number
+        description: The numeric identifier of the process invoked to send the message.
+      protocol:
+        source: declared
+        type: string
+        description: The email protocol involved, such as SMTP or RPC.
+        expected_values:
+        - smtp
+        - imap
+        - pop3
+        - mapi
+      recipient:
+        source: calculated
+        type: string
+        description: The recipient email addresses.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: 0Email_fillnull_recipient
+          type: Eval
+          expression: if(isnull(recipient) OR recipient="","unknown",recipient)
+      recipient_count:
+        source: calculated
+        type: number
+        description: The total number of intended message recipients.
+        calculation:
+          id: 2Email_recipient_count
+          type: Eval
+          expression: case(isnum(recipient_count),recipient_count,isnotnull(recipient),mvcount(recipient),1=1,1)
+      recipient_domain:
+        source: calculated
+        type: string
+        description: The domain name contained within the recipient email addresses.
+        recommended: true
+        calculation:
+          id: 1Email_recipient_domain
+          type: Rex
+          expression: ^.*@(?<recipient_domain>.+)$
+          input_field: recipient
+      recipient_status:
+        source: declared
+        type: string
+        description: The recipient delivery status, if available.
+        multivalue: true
+      response_time:
+        source: declared
+        type: number
+        description: The amount of time it took to receive a response in the messaging event, in seconds.
+      retries:
+        source: declared
+        type: number
+        description: The number of times that the message was automatically resent because it was bounced back, or a similar transmission error condition.
+      return_addr:
+        source: declared
+        type: string
+        description: The return address for the message.
+      size:
+        source: declared
+        type: number
+        description: The size of the message, in bytes.
+      source:
+        source: base
+      sourcetype:
+        source: base
+      src:
+        source: calculated
+        type: string
+        description: The system that sent the message. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: declared
+        type: string
+        description: The business unit of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: declared
+        type: string
+        description: The category of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: declared
+        type: string
+        description: The priority of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: calculated
+        type: string
+        description: The email address of the message sender.
+        recommended: true
+        calculation:
+          id: 0Email_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: declared
+        type: string
+        description: The business unit of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: declared
+        type: string
+        description: The category of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_domain:
+        source: calculated
+        type: string
+        description: The domain name contained within the email address of the message sender.
+        recommended: true
+        calculation:
+          id: 1Email_src_user_domain
+          type: Rex
+          expression: ^.*@(?<src_user_domain>.+)$
+          input_field: src_user
+      src_user_priority:
+        source: declared
+        type: string
+        description: The priority of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status_code:
+        source: declared
+        type: string
+        description: The status code associated with the message.
+      subject:
+        source: declared
+        type: string
+        description: The subject of the message.
+      tag:
+        source: declared
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      url:
+        source: declared
+        type: string
+        description: The URL associated with the message, if any.
+        multivalue: true
+      user:
+        source: declared
+        type: string
+        description: The user context for the process. This is not the email address for the sender. For that, use the src_user field.
+      user_bunit:
+        source: declared
+        type: string
+        description: The business unit of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: declared
+        type: string
+        description: The category of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: declared
+        type: string
+        description: The priority of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      vendor_product:
+        source: calculated
+        type: string
+        description: The vendor and product of the email server used for the email transaction. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Email_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      xdelay:
+        source: declared
+        type: string
+        description: Extended delay information for the message transaction. May contain details of all the delays from all the servers in the message transmission chain.
+      xref:
+        source: declared
+        type: string
+        description: An external reference. Can contain message IDs or recipient addresses from related messages.
+    inherits:
+    - BaseEvent
+    children:
+    - Content
+    - Delivery
+    - Filtering
+  Delivery:
+    display_name: Email Delivery
+    kind: event
+    tags:
+    - email
+    - delivery
+    constraints:
+    - (`cim_Email_indexes`) tag=email
+    - tag=delivery
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Email
+      action:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Action taken by the reporting device.
+        expected_values:
+        - delivered
+        - blocked
+        - quarantined
+        - deleted
+        recommended: true
+        calculation:
+          id: Email_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      delay:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: Total sending delay in milliseconds.
+      dest:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The endpoint system to which the message was delivered. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      duration:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The amount of time for the completion of the messaging event, in seconds.
+      file_hash:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The hashes for the files attached to the message, if any exist.
+      file_name:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The names of the files attached to the message, if any exist.
+      file_size:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The size of the files attached the message, in bytes.
+      host:
+        source: inherited
+        inherited_from: All_Email
+      internal_message_id:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Host-specific unique message identifier (such as aid in sendmail, IMI in Domino, Internal-Message-ID in Exchange, and MID in Ironport).
+      message_id:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The globally-unique message identifier.
+      message_info:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Additional information about the message.
+      orig_dest:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original destination host of the message. The message destination host can change when a message is relayed or bounced.
+      orig_recipient:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original recipient of the message. The message recipient can change when the original email address is an alias and has to be resolved to the actual recipient.
+        multivalue: true
+      orig_src:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original source of the message.
+      process:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The name of the email executable that carries out the message transaction, such as sendmail, postfix, or the name of an email client.
+      process_id:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The numeric identifier of the process invoked to send the message.
+      protocol:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The email protocol involved, such as SMTP or RPC.
+        expected_values:
+        - smtp
+        - imap
+        - pop3
+        - mapi
+      recipient:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The recipient email addresses.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: 0Email_fillnull_recipient
+          type: Eval
+          expression: if(isnull(recipient) OR recipient="","unknown",recipient)
+      recipient_count:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The total number of intended message recipients.
+        calculation:
+          id: 2Email_recipient_count
+          type: Eval
+          expression: case(isnum(recipient_count),recipient_count,isnotnull(recipient),mvcount(recipient),1=1,1)
+      recipient_domain:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The domain name contained within the recipient email addresses.
+        recommended: true
+        calculation:
+          id: 1Email_recipient_domain
+          type: Rex
+          expression: ^.*@(?<recipient_domain>.+)$
+          input_field: recipient
+      recipient_status:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The recipient delivery status, if available.
+        multivalue: true
+      response_time:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The amount of time it took to receive a response in the messaging event, in seconds.
+      retries:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The number of times that the message was automatically resent because it was bounced back, or a similar transmission error condition.
+      return_addr:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The return address for the message.
+      size:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The size of the message, in bytes.
+      source:
+        source: inherited
+        inherited_from: All_Email
+      sourcetype:
+        source: inherited
+        inherited_from: All_Email
+      src:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The system that sent the message. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The email address of the message sender.
+        recommended: true
+        calculation:
+          id: 0Email_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_domain:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The domain name contained within the email address of the message sender.
+        recommended: true
+        calculation:
+          id: 1Email_src_user_domain
+          type: Rex
+          expression: ^.*@(?<src_user_domain>.+)$
+          input_field: src_user
+      src_user_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status_code:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The status code associated with the message.
+      subject:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The subject of the message.
+      tag:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      url:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The URL associated with the message, if any.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The user context for the process. This is not the email address for the sender. For that, use the src_user field.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The vendor and product of the email server used for the email transaction. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Email_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      xdelay:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Extended delay information for the message transaction. May contain details of all the delays from all the servers in the message transmission chain.
+      xref:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: An external reference. Can contain message IDs or recipient addresses from related messages.
+    inherits:
+    - BaseEvent
+    - All_Email
+  Content:
+    display_name: Email Content
+    kind: event
+    tags:
+    - email
+    - content
+    constraints:
+    - (`cim_Email_indexes`) tag=email
+    - tag=content
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Email
+      action:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Action taken by the reporting device.
+        expected_values:
+        - delivered
+        - blocked
+        - quarantined
+        - deleted
+        recommended: true
+        calculation:
+          id: Email_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      delay:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: Total sending delay in milliseconds.
+      dest:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The endpoint system to which the message was delivered. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      duration:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The amount of time for the completion of the messaging event, in seconds.
+      file_hash:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The hashes for the files attached to the message, if any exist.
+      file_name:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The names of the files attached to the message, if any exist.
+      file_size:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The size of the files attached the message, in bytes.
+      host:
+        source: inherited
+        inherited_from: All_Email
+      internal_message_id:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Host-specific unique message identifier (such as aid in sendmail, IMI in Domino, Internal-Message-ID in Exchange, and MID in Ironport).
+      message_id:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The globally-unique message identifier.
+      message_info:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Additional information about the message.
+      orig_dest:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original destination host of the message. The message destination host can change when a message is relayed or bounced.
+      orig_recipient:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original recipient of the message. The message recipient can change when the original email address is an alias and has to be resolved to the actual recipient.
+        multivalue: true
+      orig_src:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original source of the message.
+      process:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The name of the email executable that carries out the message transaction, such as sendmail, postfix, or the name of an email client.
+      process_id:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The numeric identifier of the process invoked to send the message.
+      protocol:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The email protocol involved, such as SMTP or RPC.
+        expected_values:
+        - smtp
+        - imap
+        - pop3
+        - mapi
+      recipient:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The recipient email addresses.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: 0Email_fillnull_recipient
+          type: Eval
+          expression: if(isnull(recipient) OR recipient="","unknown",recipient)
+      recipient_count:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The total number of intended message recipients.
+        calculation:
+          id: 2Email_recipient_count
+          type: Eval
+          expression: case(isnum(recipient_count),recipient_count,isnotnull(recipient),mvcount(recipient),1=1,1)
+      recipient_domain:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The domain name contained within the recipient email addresses.
+        recommended: true
+        calculation:
+          id: 1Email_recipient_domain
+          type: Rex
+          expression: ^.*@(?<recipient_domain>.+)$
+          input_field: recipient
+      recipient_status:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The recipient delivery status, if available.
+        multivalue: true
+      response_time:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The amount of time it took to receive a response in the messaging event, in seconds.
+      retries:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The number of times that the message was automatically resent because it was bounced back, or a similar transmission error condition.
+      return_addr:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The return address for the message.
+      size:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The size of the message, in bytes.
+      source:
+        source: inherited
+        inherited_from: All_Email
+      sourcetype:
+        source: inherited
+        inherited_from: All_Email
+      src:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The system that sent the message. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The email address of the message sender.
+        recommended: true
+        calculation:
+          id: 0Email_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_domain:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The domain name contained within the email address of the message sender.
+        recommended: true
+        calculation:
+          id: 1Email_src_user_domain
+          type: Rex
+          expression: ^.*@(?<src_user_domain>.+)$
+          input_field: src_user
+      src_user_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status_code:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The status code associated with the message.
+      subject:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The subject of the message.
+      tag:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      url:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The URL associated with the message, if any.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The user context for the process. This is not the email address for the sender. For that, use the src_user field.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The vendor and product of the email server used for the email transaction. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Email_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      xdelay:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Extended delay information for the message transaction. May contain details of all the delays from all the servers in the message transmission chain.
+      xref:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: An external reference. Can contain message IDs or recipient addresses from related messages.
+    inherits:
+    - BaseEvent
+    - All_Email
+  Filtering:
+    display_name: Email Filtering
+    kind: event
+    tags:
+    - email
+    - filter
+    constraints:
+    - (`cim_Email_indexes`) tag=email
+    - tag=filter
+    fields:
+      _time:
+        source: inherited
+        inherited_from: All_Email
+      action:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Action taken by the reporting device.
+        expected_values:
+        - delivered
+        - blocked
+        - quarantined
+        - deleted
+        recommended: true
+        calculation:
+          id: Email_fillnull_action
+          type: Eval
+          expression: if(isnull(action) OR action="","unknown",action)
+      cim_entity_zone:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      delay:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: Total sending delay in milliseconds.
+      dest:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The endpoint system to which the message was delivered. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_dest
+          type: Eval
+          expression: if(isnull(dest) OR dest="","unknown",dest)
+      dest_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      dest_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      dest_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the endpoint system to which the message was delivered. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      duration:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The amount of time for the completion of the messaging event, in seconds.
+      file_hash:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The hashes for the files attached to the message, if any exist.
+      file_name:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The names of the files attached to the message, if any exist.
+      file_size:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The size of the files attached the message, in bytes.
+      filter_action:
+        source: declared
+        type: string
+        description: The status produced by the filter, such as 'accepted', 'rejected', or 'dropped'.
+      filter_score:
+        source: declared
+        type: number
+        description: Numeric indicator assigned to specific emails by an email filter.
+      host:
+        source: inherited
+        inherited_from: All_Email
+      internal_message_id:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Host-specific unique message identifier (such as aid in sendmail, IMI in Domino, Internal-Message-ID in Exchange, and MID in Ironport).
+      message_id:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The globally-unique message identifier.
+      message_info:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Additional information about the message.
+      orig_dest:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original destination host of the message. The message destination host can change when a message is relayed or bounced.
+      orig_recipient:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original recipient of the message. The message recipient can change when the original email address is an alias and has to be resolved to the actual recipient.
+        multivalue: true
+      orig_src:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The original source of the message.
+      process:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The name of the email executable that carries out the message transaction, such as sendmail, postfix, or the name of an email client.
+      process_id:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The numeric identifier of the process invoked to send the message.
+      protocol:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The email protocol involved, such as SMTP or RPC.
+        expected_values:
+        - smtp
+        - imap
+        - pop3
+        - mapi
+      recipient:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The recipient email addresses.
+        recommended: true
+        multivalue: true
+        calculation:
+          id: 0Email_fillnull_recipient
+          type: Eval
+          expression: if(isnull(recipient) OR recipient="","unknown",recipient)
+      recipient_count:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The total number of intended message recipients.
+        calculation:
+          id: 2Email_recipient_count
+          type: Eval
+          expression: case(isnum(recipient_count),recipient_count,isnotnull(recipient),mvcount(recipient),1=1,1)
+      recipient_domain:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The domain name contained within the recipient email addresses.
+        recommended: true
+        calculation:
+          id: 1Email_recipient_domain
+          type: Rex
+          expression: ^.*@(?<recipient_domain>.+)$
+          input_field: recipient
+      recipient_status:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The recipient delivery status, if available.
+        multivalue: true
+      response_time:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The amount of time it took to receive a response in the messaging event, in seconds.
+      retries:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The number of times that the message was automatically resent because it was bounced back, or a similar transmission error condition.
+      return_addr:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The return address for the message.
+      signature:
+        source: declared
+        type: string
+        description: The name of the filter applied.
+        recommended: true
+      signature_extra:
+        source: declared
+        type: string
+        description: Any additional information about the filter.
+      signature_id:
+        source: declared
+        type: string
+        description: The id associated with the filter name.
+      size:
+        source: inherited
+        inherited_from: All_Email
+        type: number
+        description: The size of the message, in bytes.
+      source:
+        source: inherited
+        inherited_from: All_Email
+      sourcetype:
+        source: inherited
+        inherited_from: All_Email
+      src:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The system that sent the message. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
+        recommended: true
+        calculation:
+          id: Email_fillnull_src
+          type: Eval
+          expression: if(isnull(src) OR src="","unknown",src)
+      src_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the system that sent the message. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The email address of the message sender.
+        recommended: true
+        calculation:
+          id: 0Email_fillnull_src_user
+          type: Eval
+          expression: if(isnull(src_user) OR src_user="","unknown",src_user)
+      src_user_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      src_user_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      src_user_domain:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The domain name contained within the email address of the message sender.
+        recommended: true
+        calculation:
+          id: 1Email_src_user_domain
+          type: Rex
+          expression: ^.*@(?<src_user_domain>.+)$
+          input_field: src_user
+      src_user_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      status_code:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The status code associated with the message.
+      subject:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The subject of the message.
+      tag:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
+        multivalue: true
+      url:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The URL associated with the message, if any.
+        multivalue: true
+      user:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The user context for the process. This is not the email address for the sender. For that, use the src_user field.
+      user_bunit:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The business unit of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      user_category:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The category of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+        multivalue: true
+      user_priority:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The priority of the user context for the process. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
+      vendor_product:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: The vendor and product of the email server used for the email transaction. This field can be automatically populated by vendor and product fields in your data.
+        recommended: true
+        calculation:
+          id: Email_vendor_product
+          type: Eval
+          expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
+      xdelay:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: Extended delay information for the message transaction. May contain details of all the delays from all the servers in the message transmission chain.
+      xref:
+        source: inherited
+        inherited_from: All_Email
+        type: string
+        description: An external reference. Can contain message IDs or recipient addresses from related messages.
+    inherits:
+    - BaseEvent
+    - All_Email

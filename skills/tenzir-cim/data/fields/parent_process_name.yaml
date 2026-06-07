@@ -1,0 +1,30 @@
+name: parent_process_name
+used_by:
+- model: Endpoint
+  dataset: Filesystem
+  source: calculated
+  type: string
+  description: The friendly name of the parent process, such as notepad.exe.
+  calculation:
+    id: Endpoint_Filesystem_fillnull_parent_process_name
+    type: Eval
+    expression: case(isnotnull(parent_process_name) AND parent_process_name!="", parent_process_name, isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
+- model: Endpoint
+  dataset: Processes
+  source: calculated
+  type: string
+  description: The friendly name of the parent process, such as notepad.exe.
+  recommended: true
+  calculation:
+    id: Endpoint_Processes_fillnull_parent_process_name
+    type: Eval
+    expression: case(isnotnull(parent_process_name) AND parent_process_name!="", parent_process_name, isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
+- model: Endpoint
+  dataset: Registry
+  source: calculated
+  type: string
+  description: The friendly name of the parent process, such as notepad.exe.
+  calculation:
+    id: Endpoint_Registry_fillnull_parent_process_name
+    type: Eval
+    expression: case(isnotnull(parent_process_name) AND parent_process_name!="", parent_process_name, isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")

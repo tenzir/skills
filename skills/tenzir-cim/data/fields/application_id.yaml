@@ -1,0 +1,7 @@
+name: application_id
+used_by:
+- model: Data_Access
+  dataset: Data_Access
+  source: declared
+  type: string
+  description: Application ID of the user

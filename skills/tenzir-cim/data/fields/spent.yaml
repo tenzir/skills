@@ -1,0 +1,7 @@
+name: spent
+used_by:
+- model: Splunk_Audit
+  dataset: View_Activity
+  source: declared
+  type: number
+  description: The amount of time spent loading the view (in milliseconds).

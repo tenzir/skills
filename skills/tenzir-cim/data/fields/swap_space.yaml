@@ -1,0 +1,7 @@
+name: swap_space
+used_by:
+- model: JVM
+  dataset: OS
+  source: declared
+  type: number
+  description: Swap memory space available to the OS that the JVM is running on, in bytes.

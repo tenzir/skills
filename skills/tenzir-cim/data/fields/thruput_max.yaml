@@ -1,0 +1,11 @@
+name: thruput_max
+used_by:
+- model: Performance
+  dataset: Network
+  source: declared
+  type: number
+  description: The maximum possible throughput reported by the service, in bytes.
+- model: Splunk_CIM_Validation
+  dataset: Missing_Extractions_Perf_Network
+  source: declared
+  type: number
