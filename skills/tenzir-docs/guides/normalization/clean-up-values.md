@@ -271,5 +271,4 @@ drop_null_fields user
 ## See also
 
 * [Transform values](../transformation/transform-values.md)
-* [Map to OCSF](map-to-ocsf.md)
 * [Manipulate strings](../transformation/manipulate-strings.md)

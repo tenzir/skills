@@ -119,5 +119,6 @@ to_elasticsearch "localhost:9200", action="create", index="main"
 
 * [`accept_elasticsearch`](/reference/operators/accept_elasticsearch.md)
 * [`to_opensearch`](/reference/operators/to_opensearch.md)
+* [Map to ECS](../../guides/normalization/map-to-ecs.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
 * [OpenSearch](../../integrations/opensearch.md)

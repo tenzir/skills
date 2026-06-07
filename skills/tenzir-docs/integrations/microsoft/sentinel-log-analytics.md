@@ -9,7 +9,7 @@ All logs in Azure land in a [Log Analytics Workspace](https://learn.microsoft.co
 
 Microsoft Sentinel uses the Advanced Security Information Model (ASIM) to query normalized security data across products. Use [Map to ASIM](../../guides/normalization/map-to-asim.md) to shape parsed events into ASIM records before you send them to Log Analytics tables.
 
-For agent-assisted work, follow [Use agent skills](../../guides/ai-workbench/use-agent-skills.md#use-the-microsoft-asim-skill) to use the `tenzir-asim` skill. The skill helps choose ASIM schemas, inspect fields, resolve aliases, and map source telemetry with canonical field names such as `EventSchema`, `SrcIpAddr`, and `DstIpAddr`.
+For agent-assisted work, follow [Use agent skills](../../guides/ai-workbench/use-agent-skills.md#use-the-asim-skill) to use the `tenzir-asim` skill. The skill helps choose ASIM schemas, inspect fields, resolve aliases, and map source telemetry with canonical field names such as `EventSchema`, `SrcIpAddr`, and `DstIpAddr`.
 
 To get data into a workspace, Azure uses two components:
 

@@ -11,7 +11,7 @@ The TQL examples in this guide build API-facing UDM records, so they use lowerCa
 
 ## Use the UDM skill
 
-Install the `tenzir-google-udm` skill when you want an agent to help with UDM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-google-udm-skill) for installation and usage examples.
+Install the `tenzir-udm` skill when you want an agent to help with UDM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-udm-skill) for installation and usage examples.
 
 Ask the agent to use ingestion object field names when it maps logs into UDM event or entity objects for Google SecOps UDM API ingestion. When generated UDM field headings show two forms, choose the right-side lowerCamelCase ingestion object form. For example, use `metadata.eventType` and `network.ipProtocol` in the TQL output. If a heading has one name, use that spelling.
 
@@ -86,7 +86,7 @@ udm.target = {
 
 
 udm.network = {
-  ipProtocol: $ip_protocols[fw.proto.to_lower()]? else "UNKNOWN_IP_PROTOCOL",
+  ipProtocol: $ip_protocols[(move fw.proto).to_lower()]? else "UNKNOWN_IP_PROTOCOL",
   sentBytes: move fw.bytes_out,
   receivedBytes: move fw.bytes_in,
 }
@@ -94,12 +94,8 @@ udm.network = {
 
 udm.securityResult = [{
   action: [$actions[fw.action.to_lower()]? else "UNKNOWN_ACTION"],
-  actionDetails: fw.action,
+  actionDetails: move fw.action,
 }]
-
-
-drop fw.action
-drop fw.proto
 
 
 this = {...udm, additional: fw}
@@ -157,7 +153,10 @@ Use the same structure for larger mappings:
 
 * [`to_google_secops`](/reference/operators/to_google_secops.md)
 * [Clean up values](clean-up-values.md)
+* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-udm-skill)
+* [Map to ASIM](map-to-asim.md)
+* [Map to CIM](map-to-cim.md)
+* [Map to ECS](map-to-ecs.md)
 * [Map to OCSF](map-to-ocsf.md)
-* [Map to other schemas](map-to-other-schemas.md)
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)

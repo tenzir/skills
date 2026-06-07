@@ -5,7 +5,7 @@ This guide shows you how to map events to Microsoft Sentinel Advanced Security I
 
 ## Use the ASIM skill
 
-Install the `tenzir-asim` skill when you want an agent to help with ASIM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-microsoft-asim-skill) for installation and usage examples.
+Install the `tenzir-asim` skill when you want an agent to help with ASIM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-asim-skill) for installation and usage examples.
 
 Ask the agent to choose the event or entity schema before it maps fields. ASIM fields use Microsoft Sentinel column names such as `EventSchema`, `EventSchemaVersion`, `SrcIpAddr`, and `DstIpAddr`. Prefer canonical fields over aliases when you build reusable mappings, analytics rules, or workbooks.
 
@@ -71,9 +71,6 @@ let $results = {
 }
 
 
-fw.proto = fw.proto.to_upper()
-
-
 asim.EventSchema = "NetworkSession"
 asim.EventSchemaVersion = "0.2.7"
 asim.EventType = "NetworkSession"
@@ -91,7 +88,7 @@ asim.SrcIpAddr = move fw.src_ip
 asim.SrcPortNumber = move fw.src_port
 asim.DstIpAddr = move fw.dst_ip
 asim.DstPortNumber = move fw.dst_port
-asim.NetworkProtocol = move fw.proto
+asim.NetworkProtocol = (move fw.proto).to_upper()
 asim.SrcBytes = move fw.bytes_out
 asim.DstBytes = move fw.bytes_in
 asim.NetworkBytes = asim.SrcBytes + asim.DstBytes
@@ -142,10 +139,12 @@ Use the same structure for larger mappings:
 ## See Also
 
 * [`to_azure_log_analytics`](/reference/operators/to_azure_log_analytics.md)
-* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-microsoft-asim-skill)
+* [Clean up values](clean-up-values.md)
+* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-asim-skill)
+* [Map to CIM](map-to-cim.md)
+* [Map to ECS](map-to-ecs.md)
 * [Map to OCSF](map-to-ocsf.md)
 * [Map to UDM](map-to-udm.md)
-* [Map to other schemas](map-to-other-schemas.md)
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
 * [Sentinel & Log Analytics](../../integrations/microsoft/sentinel-log-analytics.md)

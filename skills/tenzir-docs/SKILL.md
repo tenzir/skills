@@ -268,6 +268,18 @@ This guide provides an overview of data normalization in TQL. Normalization tran
 
 This guide shows you how to clean and normalize values in your data before mapping to a schema. You’ll learn to handle null placeholders, normalize sentinel values, fix types, and provide defaults.
 
+##### [Map to ASIM](guides/normalization/map-to-asim.md)
+
+This guide shows you how to map events to Microsoft Sentinel Advanced Security Information Model (ASIM) records in TQL. You’ll learn how to choose an ASIM schema, populate schema and product metadata, map role-prefixed fields, normalize event results, and preserve unmapped source fields.
+
+##### [Map to CIM](guides/normalization/map-to-cim.md)
+
+This guide shows you how to map events to Splunk Common Information Model (CIM) fields in TQL. You’ll learn how to choose a CIM data model and dataset, apply dataset tags, populate normalized fields, set Splunk HEC metadata, and preserve source-specific details.
+
+##### [Map to ECS](guides/normalization/map-to-ecs.md)
+
+This guide shows you how to map events to Elastic Common Schema (ECS) in TQL. You’ll learn how to populate required ECS fields, choose event categorization values, map common network fieldsets, preserve source-specific details, and prepare records for Elasticsearch-compatible destinations.
+
 ##### [Map to OCSF](guides/normalization/map-to-ocsf.md)
 
 This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.
@@ -275,14 +287,6 @@ This guide shows you how to write OCSF mapping operators in TQL. You’ll learn 
 ##### [Map to UDM](guides/normalization/map-to-udm.md)
 
 This guide shows you how to map events to Google SecOps Unified Data Model (UDM) records in TQL. You’ll learn how to choose a UDM event type, populate metadata, model participants as UDM nouns, convert enum values, and preserve unmapped source fields.
-
-##### [Map to ASIM](guides/normalization/map-to-asim.md)
-
-This guide shows you how to map events to Microsoft Sentinel Advanced Security Information Model (ASIM) records in TQL. You’ll learn how to choose an ASIM schema, populate schema and product metadata, map role-prefixed fields, normalize event results, and preserve unmapped source fields.
-
-##### [Map to other schemas](guides/normalization/map-to-other-schemas.md)
-
-This guide provides brief guidance on mapping data to schemas other than OCSF. While OCSF is the recommended choice for security data, you may need to support Elastic Common Schema (ECS), Google UDM, Microsoft ASIM, or another platform-specific schema.
 
 #### Enrichment
 

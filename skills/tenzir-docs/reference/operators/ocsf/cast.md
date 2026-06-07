@@ -86,3 +86,4 @@ to_clickhouse table="network_activity"
 
 * [`ocsf::derive`](/reference/operators/ocsf/derive.md)
 * [`ocsf::trim`](/reference/operators/ocsf/trim.md)
+* [Map to OCSF](../../../guides/normalization/map-to-ocsf.md)

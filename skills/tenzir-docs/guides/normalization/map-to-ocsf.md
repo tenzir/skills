@@ -7,6 +7,12 @@ OCSF Tutorial
 
 For an end-to-end walkthrough with Zeek logs, see the [Map data to OCSF tutorial](../../tutorials/map-data-to-ocsf.md).
 
+## Use the OCSF skill
+
+Install the `tenzir-ocsf` skill when you want an agent to help with OCSF schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ocsf-skill) for installation and usage examples.
+
+Ask the agent to choose the OCSF version, event class, and profiles before it maps attributes. OCSF mappings should produce the required classification and occurrence attributes first, then add primary, context, and profile-specific attributes.
+
 ## Write the OCSF mapping
 
 This section uses Palo Alto NGFW traffic logs as a running example. The namespace follows the `vendor::product::` convention, resulting in `paloalto::ngfw::ocsf::map`.
@@ -84,7 +90,7 @@ ocsf.dst_endpoint = {
 
 let $proto_nums = {tcp: 6, udp: 17, icmp: 1}
 ocsf.connection_info = {
-  protocol_name: move panos.proto,
+  protocol_name: (move panos.proto).to_lower(),
 }
 ocsf.connection_info.protocol_num = $proto_nums[ocsf.connection_info.protocol_name]? else -1
 
@@ -237,6 +243,9 @@ Your mapping is complete once [`ocsf::cast`](/reference/operators/ocsf/cast.md) 
 ## See also
 
 * [Clean up values](clean-up-values.md)
+* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ocsf-skill)
+* [Map to ASIM](map-to-asim.md)
+* [Map to CIM](map-to-cim.md)
+* [Map to ECS](map-to-ecs.md)
 * [Map to UDM](map-to-udm.md)
-* [Map to other schemas](map-to-other-schemas.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)
