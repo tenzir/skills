@@ -35,6 +35,12 @@ STABLE_TAG_RE = re.compile(r"^v(\d+)\.(\d+)\.(\d+)$")
 MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)")
 REFERENCE_PAGE_RE = re.compile(r"^/reference/ecs-([a-z0-9_]+)\.md$")
 FIELD_ANCHOR_RE = re.compile(r"^#field-([A-Za-z0-9_-]+)$")
+ECS_GITHUB_MAIN_RE = re.compile(r"^https://github\.com/elastic/ecs/(blob|tree)/main(/.*)$")
+ECS_RAW_MAIN_RE = re.compile(r"^https://raw\.githubusercontent\.com/elastic/ecs/main(/.*)$")
+ELASTIC_PLACEHOLDERS = {
+    "{{es}}": "Elasticsearch",
+    "{{kib}}": "Kibana",
+}
 
 
 class NoAliasSafeDumper(yaml.SafeDumper):
@@ -179,6 +185,27 @@ def upstream_url(source: SourceRef, path: str) -> str:
     return blob_url(source, path) if "." in filename else tree_url(source, path)
 
 
+def public_elastic_doc_url(href_base: str) -> str | None:
+    if not href_base.startswith("elasticsearch://"):
+        return None
+    path = href_base.removeprefix("elasticsearch://")
+    if path.endswith(".md"):
+        path = path.removesuffix(".md")
+    path = path.removesuffix("/index")
+    return f"https://www.elastic.co/docs/{path}"
+
+
+def pin_elastic_ecs_url(source: SourceRef, href_base: str) -> str | None:
+    github_match = ECS_GITHUB_MAIN_RE.fullmatch(href_base)
+    if github_match:
+        kind, path = github_match.groups()
+        return f"https://github.com/{ECS_REPO}/{kind}/{source.sha}{path}"
+    raw_match = ECS_RAW_MAIN_RE.fullmatch(href_base)
+    if raw_match:
+        return f"{GITHUB_RAW}/{source.sha}{raw_match.group(1)}"
+    return None
+
+
 def fetch_text(client: httpx.Client, source: SourceRef, path: str) -> str:
     response = client.get(raw_url(source, path))
     response.raise_for_status()
@@ -194,6 +221,12 @@ def clean_markdown(text: str) -> str:
     text = re.sub(r"[ \t]+$", "", text, flags=re.MULTILINE)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip() + "\n"
+
+
+def normalize_elastic_markdown(text: str) -> str:
+    for placeholder, replacement in ELASTIC_PLACEHOLDERS.items():
+        text = text.replace(placeholder, replacement)
+    return text
 
 
 def strip_frontmatter(text: str) -> str:
@@ -272,10 +305,24 @@ def rewrite_markdown_links(
 ) -> str:
     def replace(match: re.Match[str]) -> str:
         label, href = match.groups()
-        if href.startswith(("http://", "https://", "mailto:", "tel:", "elasticsearch://", "docs-content://", "#")):
+        if href.startswith("#"):
             return match.group(0)
 
         href_base, suffix = split_href(href)
+
+        pinned_url = pin_elastic_ecs_url(source, href_base)
+        if pinned_url:
+            return f"[{label}]({pinned_url}{suffix})"
+
+        elastic_doc_url = public_elastic_doc_url(href_base)
+        if elastic_doc_url:
+            return f"[{label}]({elastic_doc_url}{suffix})"
+
+        if href_base.startswith("docs-content://"):
+            return label
+
+        if href.startswith(("http://", "https://", "mailto:", "tel:")):
+            return match.group(0)
 
         if href_base.startswith("/reference/"):
             source_target = source_relative_path(source_path, href_base)
@@ -759,6 +806,7 @@ def build_docs(
             field_slugs_by_dashed_name=field_slugs_by_dashed_name,
             fieldset_names=fieldset_names,
         )
+        text = normalize_elastic_markdown(text)
         docs[doc.output_path] = clean_markdown(text)
 
     docs[Path("source.md")] = render_source_page(

@@ -321,4 +321,4 @@ Like the other fields in the [related](../../fieldsets/related.yaml) field set, 
 
 ## Mapping examples [ecs-user-usage-mappings]
 
-For examples of mapping events from various sources, you can look at [RFC 0007 in section Source Data](https://github.com/elastic/ecs/blob/main/rfcs/text/0007-multiple-users.md#source-data).
+For examples of mapping events from various sources, you can look at [RFC 0007 in section Source Data](https://github.com/elastic/ecs/blob/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/rfcs/text/0007-multiple-users.md#source-data).

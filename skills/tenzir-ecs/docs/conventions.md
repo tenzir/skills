@@ -16,8 +16,8 @@ Some specific kinds of codes are always integers, like HTTP status codes. If tho
 
 Elasticsearch can index text using datatypes:
 
-* **`text`** Text indexing allows for full text search, or searching arbitrary words that are part of the field. See [Text datatype](elasticsearch://reference/elasticsearch/mapping-reference/text.md) in the {{es}} Reference Guide.
-* **`keyword`** Keyword indexing offers faster exact match filtering, prefix search (like autocomplete), and makes aggregations (like {{kib}} visualizations) possible. See the {{es}} Reference Guide for more information on [exact match filtering](elasticsearch://reference/query-languages/query-dsl/query-dsl-term-query.md), [prefix search](elasticsearch://reference/query-languages/query-dsl/query-dsl-prefix-query.md), or [aggregations](elasticsearch://reference/aggregations/index.md).
+* **`text`** Text indexing allows for full text search, or searching arbitrary words that are part of the field. See [Text datatype](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/text) in the Elasticsearch Reference Guide.
+* **`keyword`** Keyword indexing offers faster exact match filtering, prefix search (like autocomplete), and makes aggregations (like Kibana visualizations) possible. See the Elasticsearch Reference Guide for more information on [exact match filtering](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-term-query), [prefix search](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-prefix-query), or [aggregations](https://www.elastic.co/docs/reference/aggregations).
 
 ## Default Elasticsearch convention for indexing text fields [_default_elasticsearch_convention_for_indexing_text_fields]
 
@@ -34,7 +34,7 @@ ECS flips the above convention around.
 
 For monitoring use cases, `keyword` indexing is needed almost exclusively, with full text search needed on very few fields. Moreover, indexing for full text search on lots of fields, where it’s not expected to be used is wasteful of resources.
 
-Given these two premises, ECS defaults all text indexing to `keyword` datatype (with very few exceptions). Any use case that requires full text search indexing on additional fields can add a [multi-field](elasticsearch://reference/elasticsearch/mapping-reference/multi-fields.md) for full text search. Doing so does not conflict with ECS, as the canonical field name will remain `keyword` indexed.
+Given these two premises, ECS defaults all text indexing to `keyword` datatype (with very few exceptions). Any use case that requires full text search indexing on additional fields can add a [multi-field](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/multi-fields) for full text search. Doing so does not conflict with ECS, as the canonical field name will remain `keyword` indexed.
 
 So the ECS multi-field convention for text is:
 

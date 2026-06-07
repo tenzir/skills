@@ -30,7 +30,7 @@ Use the service fields at the root of an event to describe the service the event
 
 ### Describing external services in an invocation relationship [ecs-service-usage-origin-target]
 
-Multiple services can be in an invocation relationship. Where it is possible to apply [distributed tracing](docs-content://solutions/observability/apps/traces-2.md) on all the involved services describe the individual services [using root-level service fields](#ecs-service-usage-service-at-root) and use the [tracing fields](../../fieldsets/related.yaml) to represent the invocation relationship.
+Multiple services can be in an invocation relationship. Where it is possible to apply distributed tracing on all the involved services describe the individual services [using root-level service fields](#ecs-service-usage-service-at-root) and use the [tracing fields](../../fieldsets/related.yaml) to represent the invocation relationship.
 
 There are situations when distributed tracing cannot be applied on some external services that are in an invocation relationship to an observed service. Let’s consider the example of a service `MyService` being deployed on a cloud provider with an upstream API gateway that passes through requests to `MyService` (with additional context information about the API gateway itself). To describe the API gateway as a service from the perspective of `MyService` one can self-nest the service fields under `service.origin`:
 
