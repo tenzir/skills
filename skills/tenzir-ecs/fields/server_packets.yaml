@@ -1,0 +1,9 @@
+field: server.packets
+fieldset: server
+dashed_name: server-packets
+description: Packets sent from the server to the client.
+example: 12
+flat_name: server.packets
+level: core
+name: packets
+type: long

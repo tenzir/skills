@@ -1,0 +1,13 @@
+field: tls.server.certificate
+fieldset: tls
+dashed_name: tls-server-certificate
+description: PEM-encoded stand-alone certificate offered by the server. This is usually mutually-exclusive of `server.certificate_chain` since this value also exists in that list.
+example: MII...
+flat_name: tls.server.certificate
+ignore_above: 1024
+level: extended
+name: server.certificate
+otel:
+- relation: match
+  stability: development
+type: keyword

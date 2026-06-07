@@ -1,0 +1,18 @@
+field: threat.indicator.url.original
+fieldset: threat
+dashed_name: threat-indicator-url-original
+description: 'Unmodified original url as seen in the event source.
+
+  Note that in network monitoring, the observed URL may be a full URL, whereas in access logs, the URL is often just represented as a path.
+
+  This field is meant to represent the URL as it was observed, complete or not.'
+example: https://www.elastic.co:443/search?q=elasticsearch#top or /search?q=elasticsearch
+flat_name: threat.indicator.url.original
+level: extended
+multi_fields:
+- flat_name: threat.indicator.url.original.text
+  name: text
+  type: match_only_text
+name: original
+original_fieldset: url
+type: wildcard

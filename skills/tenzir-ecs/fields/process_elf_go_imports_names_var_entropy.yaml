@@ -1,0 +1,10 @@
+field: process.elf.go_imports_names_var_entropy
+fieldset: process
+dashed_name: process-elf-go-imports-names-var-entropy
+description: Variance for Shannon entropy calculation from the list of Go imports.
+flat_name: process.elf.go_imports_names_var_entropy
+format: number
+level: extended
+name: go_imports_names_var_entropy
+original_fieldset: elf
+type: long

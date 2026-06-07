@@ -1,0 +1,10 @@
+field: email.attachments.file.hash.sha384
+fieldset: email
+dashed_name: email-attachments-file-hash-sha384
+description: SHA384 hash.
+flat_name: email.attachments.file.hash.sha384
+ignore_above: 1024
+level: extended
+name: sha384
+original_fieldset: hash
+type: keyword

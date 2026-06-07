@@ -1,0 +1,10 @@
+field: process.group_leader.real_group.id
+fieldset: process
+dashed_name: process-group-leader-real-group-id
+description: Unique identifier for the group on the system/platform.
+flat_name: process.group_leader.real_group.id
+ignore_above: 1024
+level: extended
+name: id
+original_fieldset: group
+type: keyword

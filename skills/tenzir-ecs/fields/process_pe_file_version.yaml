@@ -1,0 +1,11 @@
+field: process.pe.file_version
+fieldset: process
+dashed_name: process-pe-file-version
+description: Internal version of the file, provided at compile-time.
+example: 6.3.9600.17415
+flat_name: process.pe.file_version
+ignore_above: 1024
+level: extended
+name: file_version
+original_fieldset: pe
+type: keyword

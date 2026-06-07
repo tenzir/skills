@@ -1,0 +1,35 @@
+fieldset: interface
+description: The interface fields are used to record ingress and egress interface information when reported by an observer (e.g. firewall, router, load balancer) in the context of the observer handling a network connection.  In the case of a single observer interface (e.g. network sensor on a span port) only the observer.ingress information should be populated.
+group: 2
+name: interface
+prefix: interface.
+reusable:
+  expected:
+  - as: interface
+    at: observer.ingress
+    full: observer.ingress.interface
+  - as: interface
+    at: observer.egress
+    full: observer.egress.interface
+  top_level: false
+title: Interface
+type: group
+fields:
+- name: interface.alias
+  type: keyword
+  description: Interface alias as reported by the system, typically used in firewall implementations for e.g. inside, outside, or dmz logical interface naming.
+  template_field: true
+  example: outside
+  ignore_above: 1024
+- name: interface.id
+  type: keyword
+  description: Interface ID as reported by an observer (typically SNMP interface ID).
+  template_field: true
+  example: 10
+  ignore_above: 1024
+- name: interface.name
+  type: keyword
+  description: Interface name as reported by the system.
+  template_field: true
+  example: eth0
+  ignore_above: 1024

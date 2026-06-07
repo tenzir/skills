@@ -1,0 +1,11 @@
+field: process.io.type
+fieldset: process
+dashed_name: process-io-type
+description: 'The type of object on which the IO action (read or write) was taken.
+
+  Currently only ''tty'' is supported. Other types may be added in the future for ''file'' and ''socket'' support.'
+flat_name: process.io.type
+ignore_above: 1024
+level: extended
+name: io.type
+type: keyword

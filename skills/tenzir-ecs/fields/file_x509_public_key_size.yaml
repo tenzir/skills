@@ -1,0 +1,10 @@
+field: file.x509.public_key_size
+fieldset: file
+dashed_name: file-x509-public-key-size
+description: The size of the public key space in bits.
+example: 2048
+flat_name: file.x509.public_key_size
+level: extended
+name: public_key_size
+original_fieldset: x509
+type: long

@@ -1,0 +1,1109 @@
+fieldsets:
+- name: agent
+  path: fieldsets/agent.yaml
+  title: Agent
+  type: group
+  description: Fields about the monitoring agent.
+- name: as
+  path: fieldsets/as.yaml
+  title: Autonomous System
+  type: group
+  description: Fields describing an Autonomous System (Internet routing prefix).
+  reusable:
+    expected:
+    - as: as
+      at: client
+      full: client.as
+    - as: as
+      at: destination
+      full: destination.as
+    - as: as
+      at: server
+      full: server.as
+    - as: as
+      at: source
+      full: source.as
+    - as: as
+      at: threat.indicator
+      full: threat.indicator.as
+    - as: as
+      at: threat.enrichments.indicator
+      full: threat.enrichments.indicator.as
+    top_level: false
+- name: base
+  path: fieldsets/base.yaml
+  title: Base
+  type: group
+  description: All fields defined directly at the root of the events.
+- name: client
+  path: fieldsets/client.yaml
+  title: Client
+  type: group
+  description: Fields about the client side of a network connection, used with server.
+  reused_here:
+  - full: client.as
+    schema_name: as
+    description: Fields describing an Autonomous System (Internet routing prefix).
+  - full: client.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: client.user
+    schema_name: user
+    description: Fields to describe the user relevant to the event.
+  nestings:
+  - client.as
+  - client.geo
+  - client.user
+- name: cloud
+  path: fieldsets/cloud.yaml
+  title: Cloud
+  type: group
+  description: Fields about the cloud resource.
+  reusable:
+    expected:
+    - as: origin
+      at: cloud
+      full: cloud.origin
+      description_override: Provides the cloud information of the origin entity in case of an incoming request or event.
+    - as: target
+      at: cloud
+      full: cloud.target
+      description_override: Provides the cloud information of the target entity in case of an outgoing request or event.
+    top_level: true
+  reused_here:
+  - full: cloud.entity
+    schema_name: entity
+    description: Fields to describe various types of entities across IT environments.
+  - full: cloud.origin
+    schema_name: cloud
+    description: Provides the cloud information of the origin entity in case of an incoming request or event.
+  - full: cloud.target
+    schema_name: cloud
+    description: Provides the cloud information of the target entity in case of an outgoing request or event.
+  nestings:
+  - cloud.entity
+  - cloud.origin
+  - cloud.target
+- name: code_signature
+  path: fieldsets/code_signature.yaml
+  title: Code Signature
+  type: group
+  description: These fields contain information about binary code signatures.
+  reusable:
+    expected:
+    - as: code_signature
+      at: file
+      full: file.code_signature
+    - as: code_signature
+      at: process
+      full: process.code_signature
+    - as: code_signature
+      at: dll
+      full: dll.code_signature
+    top_level: false
+- name: container
+  path: fieldsets/container.yaml
+  title: Container
+  type: group
+  description: Fields describing the container that generated this event.
+- name: data_stream
+  path: fieldsets/data_stream.yaml
+  title: Data Stream
+  type: group
+  description: The data_stream fields take part in defining the new data stream naming scheme.
+  beta: These fields are in beta and are subject to change.
+- name: destination
+  path: fieldsets/destination.yaml
+  title: Destination
+  type: group
+  description: Fields about the destination side of a network connection, used with source.
+  reused_here:
+  - full: destination.as
+    schema_name: as
+    description: Fields describing an Autonomous System (Internet routing prefix).
+  - full: destination.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: destination.user
+    schema_name: user
+    description: Fields to describe the user relevant to the event.
+  nestings:
+  - destination.as
+  - destination.geo
+  - destination.user
+- name: device
+  path: fieldsets/device.yaml
+  title: Device
+  type: group
+  description: Fields characterizing a (mobile) device a process or application is running on.
+  beta: These fields are in beta and are subject to change.
+- name: dll
+  path: fieldsets/dll.yaml
+  title: DLL
+  type: group
+  description: These fields contain information about code libraries dynamically loaded into processes.
+  reused_here:
+  - full: dll.hash
+    schema_name: hash
+    description: Hashes, usually file hashes.
+  - full: dll.pe
+    schema_name: pe
+    description: These fields contain Windows Portable Executable (PE) metadata.
+  - full: dll.code_signature
+    schema_name: code_signature
+    description: These fields contain information about binary code signatures.
+  nestings:
+  - dll.code_signature
+  - dll.hash
+  - dll.pe
+- name: dns
+  path: fieldsets/dns.yaml
+  title: DNS
+  type: group
+  description: Fields describing DNS queries and answers.
+- name: ecs
+  path: fieldsets/ecs.yaml
+  title: ECS
+  type: group
+  description: Meta-information specific to ECS.
+- name: elf
+  path: fieldsets/elf.yaml
+  title: ELF Header
+  type: group
+  description: These fields contain Linux Executable Linkable Format (ELF) metadata.
+  reusable:
+    expected:
+    - as: elf
+      at: file
+      full: file.elf
+    - as: elf
+      at: process
+      full: process.elf
+    top_level: false
+- name: email
+  path: fieldsets/email.yaml
+  title: Email
+  type: group
+  description: Describes an email transaction.
+  reused_here:
+  - full: email.attachments.file.hash
+    schema_name: hash
+    description: Hashes, usually file hashes.
+  nestings:
+  - email.attachments.file.hash
+- name: entity
+  path: fieldsets/entity.yaml
+  title: Entity
+  type: group
+  description: Fields to describe various types of entities across IT environments.
+  reusable:
+    expected:
+    - as: entity
+      at: user
+      full: user.entity
+    - as: entity
+      at: cloud
+      full: cloud.entity
+    - as: entity
+      at: host
+      full: host.entity
+    - as: entity
+      at: service
+      full: service.entity
+    - as: entity
+      at: orchestrator
+      full: orchestrator.entity
+    - as: target
+      at: entity
+      full: entity.target
+      description_override: Targeted entity of action taken.
+    top_level: true
+  reused_here:
+  - full: entity.relationships.administers
+    schema_name: entity_reference
+    description: Entities this entity administers in an IAM or ops sense.
+  - full: entity.relationships.depends_on
+    schema_name: entity_reference
+    description: Entities this entity requires for operation.
+  - full: entity.relationships.owns
+    schema_name: entity_reference
+    description: Identifiers of assets or identities this entity owns.
+  - full: entity.relationships.supervises
+    schema_name: entity_reference
+    description: Identities this entity supervises in a reporting or org-chart sense.
+  - full: entity.target
+    schema_name: entity
+    description: Targeted entity of action taken.
+  nestings:
+  - entity.relationships.administers
+  - entity.relationships.depends_on
+  - entity.relationships.owns
+  - entity.relationships.supervises
+  - entity.target
+- name: entity_reference
+  path: fieldsets/entity_reference.yaml
+  title: Entity Reference
+  type: group
+  description: Identifier fields for referencing other entities in relationships.
+  reusable:
+    expected:
+    - as: relationships.administers
+      at: entity
+      full: entity.relationships.administers
+      description_override: Entities this entity administers in an IAM or ops sense.
+    - as: relationships.depends_on
+      at: entity
+      full: entity.relationships.depends_on
+      description_override: Entities this entity requires for operation.
+    - as: relationships.owns
+      at: entity
+      full: entity.relationships.owns
+      description_override: Identifiers of assets or identities this entity owns.
+    - as: relationships.supervises
+      at: entity
+      full: entity.relationships.supervises
+      description_override: Identities this entity supervises in a reporting or org-chart sense.
+    top_level: false
+  alpha: This field set is alpha and subject to change.
+- name: error
+  path: fieldsets/error.yaml
+  title: Error
+  type: group
+  description: Fields about errors of any kind.
+- name: event
+  path: fieldsets/event.yaml
+  title: Event
+  type: group
+  description: Fields breaking down the event details.
+- name: faas
+  path: fieldsets/faas.yaml
+  title: FaaS
+  type: group
+  description: Fields describing functions as a service.
+- name: file
+  path: fieldsets/file.yaml
+  title: File
+  type: group
+  description: Fields describing files.
+  reusable:
+    expected:
+    - as: file
+      at: threat.indicator
+      full: threat.indicator.file
+    - as: file
+      at: threat.enrichments.indicator
+      full: threat.enrichments.indicator.file
+    top_level: true
+  reused_here:
+  - full: file.hash
+    schema_name: hash
+    description: Hashes, usually file hashes.
+  - full: file.pe
+    schema_name: pe
+    description: These fields contain Windows Portable Executable (PE) metadata.
+  - full: file.x509
+    schema_name: x509
+    description: These fields contain x509 certificate metadata.
+  - full: file.code_signature
+    schema_name: code_signature
+    description: These fields contain information about binary code signatures.
+  - full: file.elf
+    schema_name: elf
+    description: These fields contain Linux Executable Linkable Format (ELF) metadata.
+  - beta: This field reuse is beta and subject to change.
+    full: file.macho
+    schema_name: macho
+    description: These fields contain Mac OS Mach Object file format (Mach-O) metadata.
+  nestings:
+  - file.code_signature
+  - file.elf
+  - file.hash
+  - file.macho
+  - file.pe
+  - file.x509
+- name: gen_ai
+  path: fieldsets/gen_ai.yaml
+  title: Gen AI
+  type: group
+  description: Fields on Generative Artificial Intelligence (GenAI) Models requests and responses
+- name: geo
+  path: fieldsets/geo.yaml
+  title: Geo
+  type: group
+  description: Fields describing a location.
+  reusable:
+    expected:
+    - as: geo
+      at: client
+      full: client.geo
+    - as: geo
+      at: destination
+      full: destination.geo
+    - as: geo
+      at: observer
+      full: observer.geo
+    - as: geo
+      at: host
+      full: host.geo
+    - as: geo
+      at: server
+      full: server.geo
+    - as: geo
+      at: source
+      full: source.geo
+    - as: geo
+      at: threat.indicator
+      full: threat.indicator.geo
+    - as: geo
+      at: threat.enrichments.indicator
+      full: threat.enrichments.indicator.geo
+    top_level: false
+- name: group
+  path: fieldsets/group.yaml
+  title: Group
+  type: group
+  description: User's group relevant to the event.
+  reusable:
+    expected:
+    - as: group
+      at: user
+      full: user.group
+    - as: group
+      at: process
+      full: process.group
+      description_override: The effective group (egid).
+    - as: real_group
+      at: process
+      full: process.real_group
+      description_override: The real group (rgid).
+    - as: saved_group
+      at: process
+      full: process.saved_group
+      description_override: The saved group (sgid).
+    - as: supplemental_groups
+      at: process
+      full: process.supplemental_groups
+      normalize:
+      - array
+      description_override: An array of supplemental groups.
+    - as: attested_groups
+      at: process
+      beta: Reusing the `group` fields in this location is currently considered beta.
+      full: process.attested_groups
+      normalize:
+      - array
+      description_override: The externally attested groups based on an external source such as the Kube API.
+    top_level: true
+- name: hash
+  path: fieldsets/hash.yaml
+  title: Hash
+  type: group
+  description: Hashes, usually file hashes.
+  reusable:
+    expected:
+    - as: hash
+      at: file
+      full: file.hash
+    - as: hash
+      at: process
+      full: process.hash
+    - as: hash
+      at: dll
+      full: dll.hash
+    - as: hash
+      at: email.attachments.file
+      full: email.attachments.file.hash
+    top_level: false
+- name: host
+  path: fieldsets/host.yaml
+  title: Host
+  type: group
+  description: Fields describing the relevant computing instance.
+  reusable:
+    expected:
+    - as: target
+      at: host
+      full: host.target
+      description_override: Targeted host of action taken.
+    top_level: true
+  reused_here:
+  - full: host.entity
+    schema_name: entity
+    description: Fields to describe various types of entities across IT environments.
+  - full: host.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: host.os
+    schema_name: os
+    description: OS fields contain information about the operating system.
+  - full: host.risk
+    schema_name: risk
+    description: Fields for describing risk score and level.
+  - full: host.target
+    schema_name: host
+    description: Targeted host of action taken.
+  nestings:
+  - host.entity
+  - host.geo
+  - host.os
+  - host.risk
+  - host.target
+- name: http
+  path: fieldsets/http.yaml
+  title: HTTP
+  type: group
+  description: Fields describing an HTTP request.
+- name: interface
+  path: fieldsets/interface.yaml
+  title: Interface
+  type: group
+  description: Fields to describe observer interface information.
+  reusable:
+    expected:
+    - as: interface
+      at: observer.ingress
+      full: observer.ingress.interface
+    - as: interface
+      at: observer.egress
+      full: observer.egress.interface
+    top_level: false
+- name: log
+  path: fieldsets/log.yaml
+  title: Log
+  type: group
+  description: Details about the event's logging mechanism.
+- name: macho
+  path: fieldsets/macho.yaml
+  title: Mach-O Header
+  type: group
+  description: These fields contain Mac OS Mach Object file format (Mach-O) metadata.
+  reusable:
+    expected:
+    - as: macho
+      at: file
+      beta: This field reuse is beta and subject to change.
+      full: file.macho
+    - as: macho
+      at: process
+      beta: This field reuse is beta and subject to change.
+      full: process.macho
+    top_level: false
+  beta: These fields are in beta and are subject to change.
+- name: network
+  path: fieldsets/network.yaml
+  title: Network
+  type: group
+  description: Fields describing the communication path over which the event happened.
+  reused_here:
+  - full: network.vlan
+    schema_name: vlan
+    description: Fields to describe observed VLAN information.
+  - full: network.inner.vlan
+    schema_name: vlan
+    description: Fields to describe observed VLAN information.
+  nestings:
+  - network.inner.vlan
+  - network.vlan
+- name: observer
+  path: fieldsets/observer.yaml
+  title: Observer
+  type: group
+  description: Fields describing an entity observing the event from outside the host.
+  reused_here:
+  - full: observer.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: observer.ingress.interface
+    schema_name: interface
+    description: Fields to describe observer interface information.
+  - full: observer.egress.interface
+    schema_name: interface
+    description: Fields to describe observer interface information.
+  - full: observer.os
+    schema_name: os
+    description: OS fields contain information about the operating system.
+  - full: observer.ingress.vlan
+    schema_name: vlan
+    description: Fields to describe observed VLAN information.
+  - full: observer.egress.vlan
+    schema_name: vlan
+    description: Fields to describe observed VLAN information.
+  nestings:
+  - observer.egress.interface
+  - observer.egress.vlan
+  - observer.geo
+  - observer.ingress.interface
+  - observer.ingress.vlan
+  - observer.os
+- name: orchestrator
+  path: fieldsets/orchestrator.yaml
+  title: Orchestrator
+  type: group
+  description: Fields relevant to container orchestrators.
+  reused_here:
+  - full: orchestrator.entity
+    schema_name: entity
+    description: Fields to describe various types of entities across IT environments.
+  nestings:
+  - orchestrator.entity
+- name: organization
+  path: fieldsets/organization.yaml
+  title: Organization
+  type: group
+  description: Fields describing the organization or company the event is associated with.
+- name: os
+  path: fieldsets/os.yaml
+  title: Operating System
+  type: group
+  description: OS fields contain information about the operating system.
+  reusable:
+    expected:
+    - as: os
+      at: observer
+      full: observer.os
+    - as: os
+      at: host
+      full: host.os
+    - as: os
+      at: user_agent
+      full: user_agent.os
+    top_level: false
+- name: package
+  path: fieldsets/package.yaml
+  title: Package
+  type: group
+  description: These fields contain information about an installed software package.
+- name: pe
+  path: fieldsets/pe.yaml
+  title: PE Header
+  type: group
+  description: These fields contain Windows Portable Executable (PE) metadata.
+  reusable:
+    expected:
+    - as: pe
+      at: file
+      full: file.pe
+    - as: pe
+      at: dll
+      full: dll.pe
+    - as: pe
+      at: process
+      full: process.pe
+    top_level: false
+- name: process
+  path: fieldsets/process.yaml
+  title: Process
+  type: group
+  description: These fields contain information about a process.
+  reusable:
+    expected:
+    - as: parent
+      at: process
+      full: process.parent
+      description_override: Information about the parent process.
+    - as: entry_leader
+      at: process
+      full: process.entry_leader
+      description_override: First process from terminal or remote access via SSH, SSM, etc OR a service directly started by the init process.
+    - as: session_leader
+      at: process
+      full: process.session_leader
+      description_override: Often the same as entry_leader. When it differs, it represents a session started within another session. e.g. using tmux
+    - as: group_leader
+      at: process
+      full: process.group_leader
+      description_override: Information about the process group leader. In some cases this may be the same as the top level process.
+    - as: group_leader
+      at: process.parent
+      full: process.parent.group_leader
+      description_override: Information about the parent's process group leader. Only pid, start and entity_id fields are set.
+    - as: parent
+      at: process.entry_leader
+      full: process.entry_leader.parent
+      description_override: Information about the entry leader's parent process. Only pid, start and entity_id fields are set.
+    - as: parent
+      at: process.session_leader
+      full: process.session_leader.parent
+      description_override: Information about the session leader's parent process. Only pid, start and entity_id fields are set.
+    - as: session_leader
+      at: process.entry_leader.parent
+      full: process.entry_leader.parent.session_leader
+      description_override: Information about the parent session of the entry leader. Only pid, start and entity_id fields are set.
+    - as: session_leader
+      at: process.session_leader.parent
+      full: process.session_leader.parent.session_leader
+      description_override: Information about the parent session of the session leader. Only pid, start and entity_id fields are set.
+    - as: previous
+      at: process
+      full: process.previous
+      normalize:
+      - array
+      description_override: An array of previous executions for the process, including the initial fork. Only executable and args are set.
+    - as: responsible
+      at: process
+      beta: This field is beta and subject to change.
+      full: process.responsible
+      description_override: Responsible process in macOS tracks the originating process of an app, key for understanding permissions and hierarchy.
+    top_level: true
+  reused_here:
+  - full: process.group
+    schema_name: group
+    description: The effective group (egid).
+  - full: process.real_group
+    schema_name: group
+    description: The real group (rgid).
+  - full: process.saved_group
+    schema_name: group
+    description: The saved group (sgid).
+  - full: process.supplemental_groups
+    normalize:
+    - array
+    schema_name: group
+    description: An array of supplemental groups.
+  - beta: Reusing the `group` fields in this location is currently considered beta.
+    full: process.attested_groups
+    normalize:
+    - array
+    schema_name: group
+    description: The externally attested groups based on an external source such as the Kube API.
+  - full: process.hash
+    schema_name: hash
+    description: Hashes, usually file hashes.
+  - full: process.pe
+    schema_name: pe
+    description: These fields contain Windows Portable Executable (PE) metadata.
+  - full: process.code_signature
+    schema_name: code_signature
+    description: These fields contain information about binary code signatures.
+  - full: process.elf
+    schema_name: elf
+    description: These fields contain Linux Executable Linkable Format (ELF) metadata.
+  - beta: This field reuse is beta and subject to change.
+    full: process.macho
+    schema_name: macho
+    description: These fields contain Mac OS Mach Object file format (Mach-O) metadata.
+  - full: process.entry_meta.source
+    schema_name: source
+    description: Remote client information such as ip, port and geo location.
+  - full: process.user
+    schema_name: user
+    description: The effective user (euid).
+  - full: process.saved_user
+    schema_name: user
+    description: The saved user (suid).
+  - full: process.real_user
+    schema_name: user
+    description: The real user (ruid). Identifies the real owner of the process.
+  - beta: Reusing the `user` fields in this location is currently considered beta.
+    full: process.attested_user
+    schema_name: user
+    description: The externally attested user based on an external source such as the Kube API.
+  - full: process.parent
+    schema_name: process
+    description: Information about the parent process.
+  - full: process.entry_leader
+    schema_name: process
+    description: First process from terminal or remote access via SSH, SSM, etc OR a service directly started by the init process.
+  - full: process.session_leader
+    schema_name: process
+    description: Often the same as entry_leader. When it differs, it represents a session started within another session. e.g. using tmux
+  - full: process.group_leader
+    schema_name: process
+    description: Information about the process group leader. In some cases this may be the same as the top level process.
+  - full: process.parent.group_leader
+    schema_name: process
+    description: Information about the parent's process group leader. Only pid, start and entity_id fields are set.
+  - full: process.entry_leader.parent
+    schema_name: process
+    description: Information about the entry leader's parent process. Only pid, start and entity_id fields are set.
+  - full: process.session_leader.parent
+    schema_name: process
+    description: Information about the session leader's parent process. Only pid, start and entity_id fields are set.
+  - full: process.entry_leader.parent.session_leader
+    schema_name: process
+    description: Information about the parent session of the entry leader. Only pid, start and entity_id fields are set.
+  - full: process.session_leader.parent.session_leader
+    schema_name: process
+    description: Information about the parent session of the session leader. Only pid, start and entity_id fields are set.
+  - full: process.previous
+    normalize:
+    - array
+    schema_name: process
+    description: An array of previous executions for the process, including the initial fork. Only executable and args are set.
+  - beta: This field is beta and subject to change.
+    full: process.responsible
+    schema_name: process
+    description: Responsible process in macOS tracks the originating process of an app, key for understanding permissions and hierarchy.
+  nestings:
+  - process.attested_groups
+  - process.attested_user
+  - process.code_signature
+  - process.elf
+  - process.entry_leader
+  - process.entry_leader.parent
+  - process.entry_leader.parent.session_leader
+  - process.entry_meta.source
+  - process.group
+  - process.group_leader
+  - process.hash
+  - process.macho
+  - process.parent
+  - process.parent.group_leader
+  - process.pe
+  - process.previous
+  - process.real_group
+  - process.real_user
+  - process.responsible
+  - process.saved_group
+  - process.saved_user
+  - process.session_leader
+  - process.session_leader.parent
+  - process.session_leader.parent.session_leader
+  - process.supplemental_groups
+  - process.user
+- name: registry
+  path: fieldsets/registry.yaml
+  title: Registry
+  type: group
+  description: Fields related to Windows Registry operations.
+  reusable:
+    expected:
+    - as: registry
+      at: threat.indicator
+      full: threat.indicator.registry
+    - as: registry
+      at: threat.enrichments.indicator
+      full: threat.enrichments.indicator.registry
+    top_level: true
+- name: related
+  path: fieldsets/related.yaml
+  title: Related
+  type: group
+  description: Fields meant to facilitate pivoting around a piece of data.
+- name: risk
+  path: fieldsets/risk.yaml
+  title: Risk information
+  type: group
+  description: Fields for describing risk score and level.
+  reusable:
+    expected:
+    - as: risk
+      at: host
+      full: host.risk
+    - as: risk
+      at: user
+      full: user.risk
+    top_level: false
+  beta: These fields are in beta and are subject to change.
+- name: rule
+  path: fieldsets/rule.yaml
+  title: Rule
+  type: group
+  description: Fields to capture details about rules used to generate alerts or other notable events.
+- name: server
+  path: fieldsets/server.yaml
+  title: Server
+  type: group
+  description: Fields about the server side of a network connection, used with client.
+  reused_here:
+  - full: server.as
+    schema_name: as
+    description: Fields describing an Autonomous System (Internet routing prefix).
+  - full: server.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: server.user
+    schema_name: user
+    description: Fields to describe the user relevant to the event.
+  nestings:
+  - server.as
+  - server.geo
+  - server.user
+- name: service
+  path: fieldsets/service.yaml
+  title: Service
+  type: group
+  description: Fields describing the service for or from which the data was collected.
+  reusable:
+    expected:
+    - as: origin
+      at: service
+      beta: Reusing the `service` fields in this location is currently considered beta.
+      full: service.origin
+      description_override: Describes the origin service in case of an incoming request or event.
+    - as: target
+      at: service
+      beta: Reusing the `service` fields in this location is currently considered beta.
+      full: service.target
+      description_override: Describes the target service in case of an outgoing request or event.
+    top_level: true
+  reused_here:
+  - full: service.entity
+    schema_name: entity
+    description: Fields to describe various types of entities across IT environments.
+  - beta: Reusing the `service` fields in this location is currently considered beta.
+    full: service.origin
+    schema_name: service
+    description: Describes the origin service in case of an incoming request or event.
+  - beta: Reusing the `service` fields in this location is currently considered beta.
+    full: service.target
+    schema_name: service
+    description: Describes the target service in case of an outgoing request or event.
+  nestings:
+  - service.entity
+  - service.origin
+  - service.target
+- name: source
+  path: fieldsets/source.yaml
+  title: Source
+  type: group
+  description: Fields about the source side of a network connection, used with destination.
+  reusable:
+    expected:
+    - as: source
+      at: process.entry_meta
+      full: process.entry_meta.source
+      description_override: Remote client information such as ip, port and geo location.
+    top_level: true
+  reused_here:
+  - full: source.as
+    schema_name: as
+    description: Fields describing an Autonomous System (Internet routing prefix).
+  - full: source.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: source.user
+    schema_name: user
+    description: Fields to describe the user relevant to the event.
+  nestings:
+  - source.as
+  - source.geo
+  - source.user
+- name: threat
+  path: fieldsets/threat.yaml
+  title: Threat
+  type: group
+  description: Fields to classify events and alerts according to a threat taxonomy.
+  reused_here:
+  - full: threat.indicator.x509
+    schema_name: x509
+    description: These fields contain x509 certificate metadata.
+  - full: threat.enrichments.indicator.x509
+    schema_name: x509
+    description: These fields contain x509 certificate metadata.
+  - full: threat.indicator.as
+    schema_name: as
+    description: Fields describing an Autonomous System (Internet routing prefix).
+  - full: threat.enrichments.indicator.as
+    schema_name: as
+    description: Fields describing an Autonomous System (Internet routing prefix).
+  - full: threat.indicator.file
+    schema_name: file
+    description: Fields describing files.
+  - full: threat.enrichments.indicator.file
+    schema_name: file
+    description: Fields describing files.
+  - full: threat.indicator.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: threat.enrichments.indicator.geo
+    schema_name: geo
+    description: Fields describing a location.
+  - full: threat.indicator.registry
+    schema_name: registry
+    description: Fields related to Windows Registry operations.
+  - full: threat.enrichments.indicator.registry
+    schema_name: registry
+    description: Fields related to Windows Registry operations.
+  - full: threat.indicator.url
+    schema_name: url
+    description: Fields that let you store URLs in various forms.
+  - full: threat.enrichments.indicator.url
+    schema_name: url
+    description: Fields that let you store URLs in various forms.
+  nestings:
+  - threat.enrichments.indicator.as
+  - threat.enrichments.indicator.file
+  - threat.enrichments.indicator.geo
+  - threat.enrichments.indicator.registry
+  - threat.enrichments.indicator.url
+  - threat.enrichments.indicator.x509
+  - threat.indicator.as
+  - threat.indicator.file
+  - threat.indicator.geo
+  - threat.indicator.registry
+  - threat.indicator.url
+  - threat.indicator.x509
+- name: tls
+  path: fieldsets/tls.yaml
+  title: TLS
+  type: group
+  description: Fields describing a TLS connection.
+  reused_here:
+  - full: tls.client.x509
+    schema_name: x509
+    description: These fields contain x509 certificate metadata.
+  - full: tls.server.x509
+    schema_name: x509
+    description: These fields contain x509 certificate metadata.
+  nestings:
+  - tls.client.x509
+  - tls.server.x509
+- name: tracing
+  path: fieldsets/tracing.yaml
+  title: Tracing
+  type: group
+  description: Fields related to distributed tracing.
+- name: url
+  path: fieldsets/url.yaml
+  title: URL
+  type: group
+  description: Fields that let you store URLs in various forms.
+  reusable:
+    expected:
+    - as: url
+      at: threat.indicator
+      full: threat.indicator.url
+    - as: url
+      at: threat.enrichments.indicator
+      full: threat.enrichments.indicator.url
+    top_level: true
+- name: user
+  path: fieldsets/user.yaml
+  title: User
+  type: group
+  description: Fields to describe the user relevant to the event.
+  reusable:
+    expected:
+    - as: user
+      at: client
+      full: client.user
+    - as: user
+      at: destination
+      full: destination.user
+    - as: user
+      at: server
+      full: server.user
+    - as: user
+      at: source
+      full: source.user
+    - as: target
+      at: user
+      full: user.target
+      description_override: Targeted user of action taken.
+    - as: effective
+      at: user
+      full: user.effective
+      description_override: User whose privileges were assumed.
+    - as: changes
+      at: user
+      full: user.changes
+      description_override: Captures changes made to a user.
+    - as: user
+      at: process
+      full: process.user
+      description_override: The effective user (euid).
+    - as: saved_user
+      at: process
+      full: process.saved_user
+      description_override: The saved user (suid).
+    - as: real_user
+      at: process
+      full: process.real_user
+      description_override: The real user (ruid). Identifies the real owner of the process.
+    - as: attested_user
+      at: process
+      beta: Reusing the `user` fields in this location is currently considered beta.
+      full: process.attested_user
+      description_override: The externally attested user based on an external source such as the Kube API.
+    top_level: true
+  reused_here:
+  - full: user.group
+    schema_name: group
+    description: User's group relevant to the event.
+  - full: user.entity
+    schema_name: entity
+    description: Fields to describe various types of entities across IT environments.
+  - full: user.risk
+    schema_name: risk
+    description: Fields for describing risk score and level.
+  - full: user.target
+    schema_name: user
+    description: Targeted user of action taken.
+  - full: user.effective
+    schema_name: user
+    description: User whose privileges were assumed.
+  - full: user.changes
+    schema_name: user
+    description: Captures changes made to a user.
+  nestings:
+  - user.changes
+  - user.effective
+  - user.entity
+  - user.group
+  - user.risk
+  - user.target
+- name: user_agent
+  path: fieldsets/user_agent.yaml
+  title: User agent
+  type: group
+  description: Fields to describe a browser user_agent string.
+  reused_here:
+  - full: user_agent.os
+    schema_name: os
+    description: OS fields contain information about the operating system.
+  nestings:
+  - user_agent.os
+- name: vlan
+  path: fieldsets/vlan.yaml
+  title: VLAN
+  type: group
+  description: Fields to describe observed VLAN information.
+  reusable:
+    expected:
+    - as: vlan
+      at: observer.ingress
+      full: observer.ingress.vlan
+    - as: vlan
+      at: observer.egress
+      full: observer.egress.vlan
+    - as: vlan
+      at: network
+      full: network.vlan
+    - as: vlan
+      at: network.inner
+      full: network.inner.vlan
+    top_level: false
+- name: volume
+  path: fieldsets/volume.yaml
+  title: Volume
+  type: group
+  description: Fields related to storage volume details.
+- name: vulnerability
+  path: fieldsets/vulnerability.yaml
+  title: Vulnerability
+  type: group
+  description: Fields to describe the vulnerability relevant to an event.
+- name: x509
+  path: fieldsets/x509.yaml
+  title: x509 Certificate
+  type: group
+  description: These fields contain x509 certificate metadata.
+  reusable:
+    expected:
+    - as: x509
+      at: file
+      full: file.x509
+    - as: x509
+      at: threat.indicator
+      full: threat.indicator.x509
+    - as: x509
+      at: threat.enrichments.indicator
+      full: threat.enrichments.indicator.x509
+    - as: x509
+      at: tls.client
+      full: tls.client.x509
+    - as: x509
+      at: tls.server
+      full: tls.server.x509
+    top_level: false

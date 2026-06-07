@@ -1,0 +1,156 @@
+fieldset: client
+description: 'A client is defined as the initiator of a network connection for events regarding sessions, connections, or bidirectional flow records.
+
+  For TCP events, the client is the initiator of the TCP connection that sends the SYN packet(s). For other protocols, the client is generally the initiator or requestor in the network transaction. Some systems use the term "originator" to refer the client in TCP connections. The client fields describe details about the system acting as the client in the network event. Client fields are usually populated in conjunction with server fields. Client fields are generally not populated for packet-level events.
+
+  Client / server representations can add semantic context to an exchange, which is helpful to visualize the data in certain situations. If your context falls in that category, you should still ensure that source and destination are filled appropriately.'
+group: 2
+name: client
+nestings:
+- client.as
+- client.geo
+- client.user
+prefix: client.
+reused_here:
+- full: client.as
+  schema_name: as
+  description: Fields describing an Autonomous System (Internet routing prefix).
+- full: client.geo
+  schema_name: geo
+  description: Fields describing a location.
+- full: client.user
+  schema_name: user
+  description: Fields to describe the user relevant to the event.
+title: Client
+type: group
+fields:
+- name: client.address
+  type: keyword
+  description: Client network address.
+- name: client.as.number
+  type: long
+  description: Unique number allocated to the autonomous system.
+  original_fieldset: as
+- name: client.as.organization.name
+  type: keyword
+  description: Organization name.
+  original_fieldset: as
+- name: client.bytes
+  type: long
+  description: Bytes sent from the client to the server.
+- name: client.domain
+  type: keyword
+  description: The domain name of the client.
+- name: client.geo.city_name
+  type: keyword
+  description: City name.
+  original_fieldset: geo
+- name: client.geo.continent_code
+  type: keyword
+  description: Continent code.
+  original_fieldset: geo
+- name: client.geo.continent_name
+  type: keyword
+  description: Name of the continent.
+  original_fieldset: geo
+- name: client.geo.country_iso_code
+  type: keyword
+  description: Country ISO code.
+  original_fieldset: geo
+- name: client.geo.country_name
+  type: keyword
+  description: Country name.
+  original_fieldset: geo
+- name: client.geo.location
+  type: geo_point
+  description: Longitude and latitude.
+  original_fieldset: geo
+- name: client.geo.name
+  type: keyword
+  description: User-defined description of a location.
+  original_fieldset: geo
+- name: client.geo.postal_code
+  type: keyword
+  description: Postal code.
+  original_fieldset: geo
+- name: client.geo.region_iso_code
+  type: keyword
+  description: Region ISO code.
+  original_fieldset: geo
+- name: client.geo.region_name
+  type: keyword
+  description: Region name.
+  original_fieldset: geo
+- name: client.geo.timezone
+  type: keyword
+  description: Time zone.
+  original_fieldset: geo
+- name: client.ip
+  type: ip
+  description: IP address of the client.
+- name: client.mac
+  type: keyword
+  description: MAC address of the client.
+- name: client.nat.ip
+  type: ip
+  description: Client NAT ip address
+- name: client.nat.port
+  type: long
+  description: Client NAT port
+- name: client.packets
+  type: long
+  description: Packets sent from the client to the server.
+- name: client.port
+  type: long
+  description: Port of the client.
+- name: client.registered_domain
+  type: keyword
+  description: The highest registered client domain, stripped of the subdomain.
+- name: client.subdomain
+  type: keyword
+  description: The subdomain of the domain.
+- name: client.top_level_domain
+  type: keyword
+  description: The effective top level domain (com, org, net, co.uk).
+- name: client.user.domain
+  type: keyword
+  description: Name of the directory the user is a member of.
+  original_fieldset: user
+- name: client.user.email
+  type: keyword
+  description: User email address.
+  original_fieldset: user
+- name: client.user.full_name
+  type: keyword
+  description: User's full name, if available.
+  original_fieldset: user
+- name: client.user.group.domain
+  type: keyword
+  description: Name of the directory the group is a member of.
+  original_fieldset: group
+- name: client.user.group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+  original_fieldset: group
+- name: client.user.group.name
+  type: keyword
+  description: Name of the group.
+  original_fieldset: group
+- name: client.user.hash
+  type: keyword
+  description: Unique user hash to correlate information for a user in anonymized form.
+  original_fieldset: user
+- name: client.user.id
+  type: keyword
+  description: Unique identifier of the user.
+  original_fieldset: user
+- name: client.user.name
+  type: keyword
+  description: Short name or login of the user.
+  original_fieldset: user
+- name: client.user.roles
+  type: keyword
+  description: Array of user roles at the time of the event.
+  original_fieldset: user
+  normalize:
+  - array

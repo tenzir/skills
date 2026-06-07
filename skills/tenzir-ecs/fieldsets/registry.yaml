@@ -1,0 +1,40 @@
+fieldset: registry
+description: Fields related to Windows Registry operations.
+group: 2
+name: registry
+prefix: registry.
+reusable:
+  expected:
+  - as: registry
+    at: threat.indicator
+    full: threat.indicator.registry
+  - as: registry
+    at: threat.enrichments.indicator
+    full: threat.enrichments.indicator.registry
+  top_level: true
+title: Registry
+type: group
+fields:
+- name: registry.data.bytes
+  type: keyword
+  description: Original bytes written with base64 encoding.
+- name: registry.data.strings
+  type: wildcard
+  description: List of strings representing what was written to the registry.
+  normalize:
+  - array
+- name: registry.data.type
+  type: keyword
+  description: Standard registry type for encoding contents
+- name: registry.hive
+  type: keyword
+  description: Abbreviated name for the hive.
+- name: registry.key
+  type: keyword
+  description: Hive-relative path of keys.
+- name: registry.path
+  type: keyword
+  description: Full path, including hive, key and value
+- name: registry.value
+  type: keyword
+  description: Name of the value written.

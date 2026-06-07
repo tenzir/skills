@@ -1,0 +1,15 @@
+field: source.user.name
+fieldset: source
+dashed_name: source-user-name
+description: Short name or login of the user.
+example: a.einstein
+flat_name: source.user.name
+ignore_above: 1024
+level: core
+multi_fields:
+- flat_name: source.user.name.text
+  name: text
+  type: match_only_text
+name: name
+original_fieldset: user
+type: keyword

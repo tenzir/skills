@@ -1,0 +1,15 @@
+field: network.type
+fieldset: network
+dashed_name: network-type
+description: 'In the OSI Model this would be the Network Layer. ipv4, ipv6, ipsec, pim, etc
+
+  The field value must be normalized to lowercase for querying.'
+example: ipv4
+flat_name: network.type
+ignore_above: 1024
+level: core
+name: type
+otel:
+- relation: match
+  stability: stable
+type: keyword

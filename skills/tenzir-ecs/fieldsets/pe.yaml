@@ -1,0 +1,155 @@
+fieldset: pe
+description: These fields contain Windows Portable Executable (PE) metadata.
+group: 2
+name: pe
+prefix: pe.
+reusable:
+  expected:
+  - as: pe
+    at: file
+    full: file.pe
+  - as: pe
+    at: dll
+    full: dll.pe
+  - as: pe
+    at: process
+    full: process.pe
+  top_level: false
+title: PE Header
+type: group
+fields:
+- name: pe.architecture
+  type: keyword
+  description: CPU architecture target for the file.
+  template_field: true
+  example: x64
+  ignore_above: 1024
+- name: pe.company
+  type: keyword
+  description: Internal company name of the file, provided at compile-time.
+  template_field: true
+  example: Microsoft Corporation
+  ignore_above: 1024
+- name: pe.description
+  type: keyword
+  description: Internal description of the file, provided at compile-time.
+  template_field: true
+  example: Paint
+  ignore_above: 1024
+- name: pe.file_version
+  type: keyword
+  description: Internal version of the file, provided at compile-time.
+  template_field: true
+  example: 6.3.9600.17415
+  ignore_above: 1024
+- name: pe.go_import_hash
+  type: keyword
+  description: 'A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+    The algorithm used to calculate the Go symbol hash and a reference implementation are available here: https://github.com/elastic/toutoumomoma'
+  template_field: true
+  example: 10bddcb4cee42080f76c88d9ff964491
+  ignore_above: 1024
+- name: pe.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  template_field: true
+- name: pe.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  template_field: true
+  format: number
+- name: pe.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  template_field: true
+  format: number
+- name: pe.go_stripped
+  type: boolean
+  description: Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+  template_field: true
+- name: pe.imphash
+  type: keyword
+  description: 'A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+    Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.'
+  template_field: true
+  example: 0c6803c4e922103c4dca5963aad36ddf
+  ignore_above: 1024
+- name: pe.import_hash
+  type: keyword
+  description: 'A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+    This is a synonym for imphash.'
+  template_field: true
+  example: d41d8cd98f00b204e9800998ecf8427e
+  ignore_above: 1024
+- name: pe.imports
+  type: flattened
+  description: List of imported element names and types.
+  template_field: true
+  normalize:
+  - array
+- name: pe.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  template_field: true
+  format: number
+- name: pe.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  template_field: true
+  format: number
+- name: pe.original_file_name
+  type: keyword
+  description: Internal name of the file, provided at compile-time.
+  template_field: true
+  example: MSPAINT.EXE
+  ignore_above: 1024
+- name: pe.pehash
+  type: keyword
+  description: 'A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+
+    Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.'
+  template_field: true
+  example: 73ff189b63cd6be375a7ff25179a38d347651975
+  ignore_above: 1024
+- name: pe.product
+  type: keyword
+  description: Internal product name of the file, provided at compile-time.
+  template_field: true
+  example: Microsoft® Windows® Operating System
+  ignore_above: 1024
+- name: pe.sections
+  type: nested
+  description: 'An array containing an object for each section of the PE file.
+
+    The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.'
+  template_field: true
+  normalize:
+  - array
+- name: pe.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  template_field: true
+  format: number
+- name: pe.sections.name
+  type: keyword
+  description: PE Section List name.
+  template_field: true
+  ignore_above: 1024
+- name: pe.sections.physical_size
+  type: long
+  description: PE Section List physical size.
+  template_field: true
+  format: bytes
+- name: pe.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  template_field: true
+  format: number
+- name: pe.sections.virtual_size
+  type: long
+  description: PE Section List virtual size. This is always the same as `physical_size`.
+  template_field: true
+  format: string

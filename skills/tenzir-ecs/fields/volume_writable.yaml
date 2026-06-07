@@ -1,0 +1,8 @@
+field: volume.writable
+fieldset: volume
+dashed_name: volume-writable
+description: Indicates if the volume is writable.
+flat_name: volume.writable
+level: extended
+name: writable
+type: boolean

@@ -1,0 +1,70 @@
+fieldset: dns
+description: 'Fields describing DNS queries and answers.
+
+  DNS events should either represent a single DNS query prior to getting answers (`dns.type:query`) or they should represent a full exchange and contain the query details as well as all of the answers that were provided for this query (`dns.type:answer`).'
+group: 2
+name: dns
+prefix: dns.
+title: DNS
+type: group
+fields:
+- name: dns.answers
+  type: object
+  description: Array of DNS answers.
+  normalize:
+  - array
+- name: dns.answers.class
+  type: keyword
+  description: The class of DNS data contained in this resource record.
+- name: dns.answers.data
+  type: keyword
+  description: The data describing the resource.
+- name: dns.answers.name
+  type: keyword
+  description: The domain name to which this resource record pertains.
+- name: dns.answers.ttl
+  type: long
+  description: The time interval in seconds that this resource record may be cached before it should be discarded.
+- name: dns.answers.type
+  type: keyword
+  description: The type of data contained in this resource record.
+- name: dns.header_flags
+  type: keyword
+  description: Array of DNS header flags.
+  normalize:
+  - array
+- name: dns.id
+  type: keyword
+  description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
+- name: dns.op_code
+  type: keyword
+  description: The DNS operation code that specifies the kind of query in the message.
+- name: dns.question.class
+  type: keyword
+  description: The class of records being queried.
+- name: dns.question.name
+  type: keyword
+  description: The name being queried.
+- name: dns.question.registered_domain
+  type: keyword
+  description: The highest registered domain, stripped of the subdomain.
+- name: dns.question.subdomain
+  type: keyword
+  description: The subdomain of the domain.
+- name: dns.question.top_level_domain
+  type: keyword
+  description: The effective top level domain (com, org, net, co.uk).
+- name: dns.question.type
+  type: keyword
+  description: The type of record being queried.
+- name: dns.resolved_ip
+  type: ip
+  description: Array containing all IPs seen in answers.data
+  normalize:
+  - array
+- name: dns.response_code
+  type: keyword
+  description: The DNS response code.
+- name: dns.type
+  type: keyword
+  description: The type of DNS event captured, query or answer.

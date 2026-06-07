@@ -1,0 +1,15 @@
+field: file.extension
+fieldset: file
+dashed_name: file-extension
+description: 'File extension, excluding the leading dot.
+
+  Note that when the file name has multiple extensions (example.tar.gz), only the last one should be captured ("gz", not "tar.gz").'
+example: png
+flat_name: file.extension
+ignore_above: 1024
+level: extended
+name: extension
+otel:
+- relation: match
+  stability: development
+type: keyword

@@ -1,0 +1,15 @@
+field: threat.software.type
+fieldset: threat
+dashed_name: threat-software-type
+description: 'The type of software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+
+  While not required, you can use a MITRE ATT&CK® software type.'
+example: Tool
+expected_values:
+- Malware
+- Tool
+flat_name: threat.software.type
+ignore_above: 1024
+level: extended
+name: software.type
+type: keyword

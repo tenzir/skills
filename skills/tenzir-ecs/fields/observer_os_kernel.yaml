@@ -1,0 +1,11 @@
+field: observer.os.kernel
+fieldset: observer
+dashed_name: observer-os-kernel
+description: Operating system kernel version as a raw string.
+example: 4.4.0-112-generic
+flat_name: observer.os.kernel
+ignore_above: 1024
+level: extended
+name: kernel
+original_fieldset: os
+type: keyword

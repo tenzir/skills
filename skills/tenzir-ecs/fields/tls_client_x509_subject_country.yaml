@@ -1,0 +1,13 @@
+field: tls.client.x509.subject.country
+fieldset: tls
+dashed_name: tls-client-x509-subject-country
+description: List of country \(C) code
+example: US
+flat_name: tls.client.x509.subject.country
+ignore_above: 1024
+level: extended
+name: subject.country
+normalize:
+- array
+original_fieldset: x509
+type: keyword

@@ -1,0 +1,26 @@
+field: threat.software.platforms
+fieldset: threat
+dashed_name: threat-software-platforms
+description: 'The platforms of the software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+
+  While not required, you can use MITRE ATT&CK® software platform values.'
+example: '[ "Windows" ]'
+expected_values:
+- AWS
+- Azure
+- Azure AD
+- GCP
+- Linux
+- macOS
+- Network
+- Office 365
+- SaaS
+- Windows
+flat_name: threat.software.platforms
+ignore_above: 1024
+level: extended
+name: software.platforms
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

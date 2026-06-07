@@ -1,0 +1,13 @@
+field: gen_ai.request.choice.count
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-choice-count
+description: The target number of candidate completions to return.
+example: 3
+flat_name: gen_ai.request.choice.count
+level: extended
+name: request.choice.count
+otel:
+- relation: match
+  stability: development
+type: integer

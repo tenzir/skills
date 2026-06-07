@@ -1,0 +1,29 @@
+fieldset: agent
+description: 'The agent fields contain the data about the software entity, if any, that collects, detects, or observes events on a host, or takes measurements on a host.
+
+  Examples include Beats. Agents may also run on observers. ECS agent.* fields shall be populated with details of the agent running on the host or observer where the event happened or the measurement was taken.'
+footnote: 'Examples: In the case of Beats for logs, the agent.name is filebeat. For APM, it is the agent running in the app/service. The agent information does not change if data is sent through queuing systems like Kafka, Redis, or processing systems such as Logstash or APM Server.'
+group: 2
+name: agent
+prefix: agent.
+title: Agent
+type: group
+fields:
+- name: agent.build.original
+  type: keyword
+  description: Extended build information for the agent.
+- name: agent.ephemeral_id
+  type: keyword
+  description: Ephemeral identifier of this agent.
+- name: agent.id
+  type: keyword
+  description: Unique identifier of this agent.
+- name: agent.name
+  type: keyword
+  description: Custom name of the agent.
+- name: agent.type
+  type: keyword
+  description: Type of the agent.
+- name: agent.version
+  type: keyword
+  description: Version of the agent.

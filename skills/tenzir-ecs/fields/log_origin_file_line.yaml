@@ -1,0 +1,9 @@
+field: log.origin.file.line
+fieldset: log
+dashed_name: log-origin-file-line
+description: The line number of the file containing the source code which originated the log event.
+example: 42
+flat_name: log.origin.file.line
+level: extended
+name: origin.file.line
+type: long

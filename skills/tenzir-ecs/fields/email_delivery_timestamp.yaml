@@ -1,0 +1,9 @@
+field: email.delivery_timestamp
+fieldset: email
+dashed_name: email-delivery-timestamp
+description: The date and time when the email message was received by the service or client.
+example: '2020-11-10T22:12:34.8196921Z'
+flat_name: email.delivery_timestamp
+level: extended
+name: delivery_timestamp
+type: date

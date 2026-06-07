@@ -1,0 +1,69 @@
+fieldset: hash
+description: 'The hash fields represent different bitwise hash algorithms and their values.
+
+  Field names for common hashes (e.g. MD5, SHA1) are predefined. Add fields for other hashes by lowercasing the hash algorithm name and using underscore separators as appropriate (snake case, e.g. sha3_512).
+
+  Note that this fieldset is used for common hashes that may be computed over a range of generic bytes. Entity-specific hashes such as ja3 or imphash are placed in the fieldsets to which they relate (tls and pe, respectively).'
+group: 2
+name: hash
+prefix: hash.
+reusable:
+  expected:
+  - as: hash
+    at: file
+    full: file.hash
+  - as: hash
+    at: process
+    full: process.hash
+  - as: hash
+    at: dll
+    full: dll.hash
+  - as: hash
+    at: email.attachments.file
+    full: email.attachments.file.hash
+  top_level: false
+title: Hash
+type: group
+fields:
+- name: hash.cdhash
+  type: keyword
+  description: Code directory hash, utilized to uniquely identify and authenticate the integrity of the executable code.
+  template_field: true
+  example: 3783b4052fd474dbe30676b45c329e7a6d44acd9
+  ignore_above: 1024
+  beta: This field is beta and subject to change.
+- name: hash.md5
+  type: keyword
+  description: MD5 hash.
+  template_field: true
+  ignore_above: 1024
+- name: hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  template_field: true
+  ignore_above: 1024
+- name: hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  template_field: true
+  ignore_above: 1024
+- name: hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  template_field: true
+  ignore_above: 1024
+- name: hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  template_field: true
+  ignore_above: 1024
+- name: hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  template_field: true
+  ignore_above: 1024
+- name: hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  template_field: true
+  ignore_above: 1024

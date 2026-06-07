@@ -1,0 +1,10 @@
+field: dll.pe.sections.var_entropy
+fieldset: dll
+dashed_name: dll-pe-sections-var-entropy
+description: Variance for Shannon entropy calculation from the section.
+flat_name: dll.pe.sections.var_entropy
+format: number
+level: extended
+name: sections.var_entropy
+original_fieldset: pe
+type: long

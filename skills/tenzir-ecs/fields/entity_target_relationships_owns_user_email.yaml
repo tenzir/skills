@@ -1,0 +1,12 @@
+field: entity.target.relationships.owns.user.email
+fieldset: entity
+dashed_name: entity-target-relationships-owns-user-email
+description: Referenced user email addresses.
+flat_name: entity.target.relationships.owns.user.email
+ignore_above: 1024
+level: extended
+name: user.email
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

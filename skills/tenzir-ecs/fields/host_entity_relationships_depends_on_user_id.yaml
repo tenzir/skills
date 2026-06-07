@@ -1,0 +1,12 @@
+field: host.entity.relationships.depends_on.user.id
+fieldset: host
+dashed_name: host-entity-relationships-depends-on-user-id
+description: Referenced user ids.
+flat_name: host.entity.relationships.depends_on.user.id
+ignore_above: 1024
+level: extended
+name: user.id
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

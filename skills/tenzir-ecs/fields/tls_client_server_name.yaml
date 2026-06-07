@@ -1,0 +1,10 @@
+field: tls.client.server_name
+fieldset: tls
+dashed_name: tls-client-server-name
+description: Also called an SNI, this tells the server which hostname to which the client is attempting to connect to. When this value is available, it should get copied to `destination.domain`.
+example: www.elastic.co
+flat_name: tls.client.server_name
+ignore_above: 1024
+level: extended
+name: client.server_name
+type: keyword

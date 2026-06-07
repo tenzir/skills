@@ -1,0 +1,10 @@
+field: host.target.uptime
+fieldset: host
+dashed_name: host-target-uptime
+description: Seconds the host has been up.
+example: 1325
+flat_name: host.target.uptime
+level: extended
+name: uptime
+original_fieldset: host
+type: long

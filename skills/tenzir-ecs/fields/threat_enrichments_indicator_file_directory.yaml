@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.file.directory
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-directory
+description: Directory where the file is located. It should include the drive letter, when appropriate.
+example: /home/alice
+flat_name: threat.enrichments.indicator.file.directory
+ignore_above: 1024
+level: extended
+name: directory
+original_fieldset: file
+type: keyword

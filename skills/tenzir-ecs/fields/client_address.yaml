@@ -1,0 +1,14 @@
+field: client.address
+fieldset: client
+dashed_name: client-address
+description: 'Some event client addresses are defined ambiguously. The event will sometimes list an IP, a domain or a unix socket.  You should always store the raw address in the `.address` field.
+
+  Then it should be duplicated to `.ip` or `.domain`, depending on which one it is.'
+flat_name: client.address
+ignore_above: 1024
+level: extended
+name: address
+otel:
+- relation: match
+  stability: stable
+type: keyword

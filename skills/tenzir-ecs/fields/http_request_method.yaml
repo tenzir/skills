@@ -1,0 +1,22 @@
+field: http.request.method
+fieldset: http
+dashed_name: http-request-method
+description: 'HTTP request method.
+
+  The value should retain its casing from the original event. For example, `GET`, `get`, and `GeT` are all considered valid values for this field.'
+example: POST
+flat_name: http.request.method
+ignore_above: 1024
+level: extended
+name: request.method
+otel:
+- attribute: http.request.method_original
+  relation: equivalent
+  stability: stable
+- attribute: http.request.method
+  note: '`http.request.method` in SemConv is the known, normalized, upper case value of the request method, other than the ECS'' `http.request.method` that retains casing from the original event.
+
+    '
+  relation: conflict
+  stability: stable
+type: keyword

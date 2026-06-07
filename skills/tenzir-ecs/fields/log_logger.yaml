@@ -1,0 +1,10 @@
+field: log.logger
+fieldset: log
+dashed_name: log-logger
+description: The name of the logger inside an application. This is usually the name of the class which initialized the logger, or can be a custom name.
+example: org.elasticsearch.bootstrap.Bootstrap
+flat_name: log.logger
+ignore_above: 1024
+level: core
+name: logger
+type: keyword

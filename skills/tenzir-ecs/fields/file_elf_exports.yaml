@@ -1,0 +1,11 @@
+field: file.elf.exports
+fieldset: file
+dashed_name: file-elf-exports
+description: List of exported element names and types.
+flat_name: file.elf.exports
+level: extended
+name: exports
+normalize:
+- array
+original_fieldset: elf
+type: flattened

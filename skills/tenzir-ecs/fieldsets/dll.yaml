@@ -1,0 +1,220 @@
+fieldset: dll
+description: 'These fields contain information about code libraries dynamically loaded into processes.
+
+
+  Many operating systems refer to "shared code libraries" with different names, but this field set refers to all of the following:
+
+  * Dynamic-link library (`.dll`) commonly used on Windows
+
+  * Shared Object (`.so`) commonly used on Unix-like operating systems
+
+  * Dynamic library (`.dylib`) commonly used on macOS'
+group: 2
+name: dll
+nestings:
+- dll.code_signature
+- dll.hash
+- dll.pe
+prefix: dll.
+reused_here:
+- full: dll.hash
+  schema_name: hash
+  description: Hashes, usually file hashes.
+- full: dll.pe
+  schema_name: pe
+  description: These fields contain Windows Portable Executable (PE) metadata.
+- full: dll.code_signature
+  schema_name: code_signature
+  description: These fields contain information about binary code signatures.
+title: DLL
+type: group
+fields:
+- name: dll.code_signature.digest_algorithm
+  type: keyword
+  description: Hashing algorithm used to sign the process.
+  original_fieldset: code_signature
+- name: dll.code_signature.exists
+  type: boolean
+  description: Boolean to capture if a signature is present.
+  original_fieldset: code_signature
+- name: dll.code_signature.flags
+  type: keyword
+  description: Code signing flags of the process
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: dll.code_signature.signing_id
+  type: keyword
+  description: The identifier used to sign the process.
+  original_fieldset: code_signature
+- name: dll.code_signature.status
+  type: keyword
+  description: Additional information about the certificate status.
+  original_fieldset: code_signature
+- name: dll.code_signature.subject_name
+  type: keyword
+  description: Subject name of the code signer
+  original_fieldset: code_signature
+- name: dll.code_signature.team_id
+  type: keyword
+  description: The team identifier used to sign the process.
+  original_fieldset: code_signature
+- name: dll.code_signature.thumbprint_sha256
+  type: keyword
+  description: SHA256 hash of the certificate.
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: dll.code_signature.timestamp
+  type: date
+  description: When the signature was generated and signed.
+  original_fieldset: code_signature
+- name: dll.code_signature.trusted
+  type: boolean
+  description: Stores the trust status of the certificate chain.
+  original_fieldset: code_signature
+- name: dll.code_signature.valid
+  type: boolean
+  description: Boolean to capture if the digital signature is verified against the binary content.
+  original_fieldset: code_signature
+- name: dll.hash.cdhash
+  type: keyword
+  description: The Code Directory (CD) hash of an executable.
+  original_fieldset: hash
+  beta: This field is beta and subject to change.
+- name: dll.hash.md5
+  type: keyword
+  description: MD5 hash.
+  original_fieldset: hash
+- name: dll.hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  original_fieldset: hash
+- name: dll.hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  original_fieldset: hash
+- name: dll.hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  original_fieldset: hash
+- name: dll.hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  original_fieldset: hash
+- name: dll.hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  original_fieldset: hash
+- name: dll.hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  original_fieldset: hash
+- name: dll.name
+  type: keyword
+  description: Name of the library.
+- name: dll.origin_referrer_url
+  type: keyword
+  description: The URL of the webpage that linked to the dll file.
+  beta: This field is beta and subject to change.
+- name: dll.origin_url
+  type: keyword
+  description: The URL where the dll file is hosted.
+  beta: This field is beta and subject to change.
+- name: dll.path
+  type: keyword
+  description: Full file path of the library.
+- name: dll.pe.architecture
+  type: keyword
+  description: CPU architecture target for the file.
+  original_fieldset: pe
+- name: dll.pe.company
+  type: keyword
+  description: Internal company name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: dll.pe.description
+  type: keyword
+  description: Internal description of the file, provided at compile-time.
+  original_fieldset: pe
+- name: dll.pe.file_version
+  type: keyword
+  description: Process name.
+  original_fieldset: pe
+- name: dll.pe.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a PE file.
+  original_fieldset: pe
+- name: dll.pe.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: pe
+- name: dll.pe.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: dll.pe.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: dll.pe.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: pe
+- name: dll.pe.imphash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: dll.pe.import_hash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: dll.pe.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: dll.pe.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: dll.pe.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: dll.pe.original_file_name
+  type: keyword
+  description: Internal name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: dll.pe.pehash
+  type: keyword
+  description: A hash of the PE header and data from one or more PE sections.
+  original_fieldset: pe
+- name: dll.pe.product
+  type: keyword
+  description: Internal product name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: dll.pe.sections
+  type: nested
+  description: Section information of the PE file.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: dll.pe.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: dll.pe.sections.name
+  type: keyword
+  description: PE Section List name.
+  original_fieldset: pe
+- name: dll.pe.sections.physical_size
+  type: long
+  description: PE Section List physical size.
+  original_fieldset: pe
+- name: dll.pe.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: dll.pe.sections.virtual_size
+  type: long
+  description: PE Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: pe

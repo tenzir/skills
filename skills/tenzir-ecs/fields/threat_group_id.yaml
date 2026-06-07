@@ -1,0 +1,12 @@
+field: threat.group.id
+fieldset: threat
+dashed_name: threat-group-id
+description: 'The id of the group for a set of related intrusion activity that are tracked by a common name in the security community.
+
+  While not required, you can use a MITRE ATT&CK® group id.'
+example: G0037
+flat_name: threat.group.id
+ignore_above: 1024
+level: extended
+name: group.id
+type: keyword

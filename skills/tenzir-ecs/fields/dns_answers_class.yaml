@@ -1,0 +1,10 @@
+field: dns.answers.class
+fieldset: dns
+dashed_name: dns-answers-class
+description: The class of DNS data contained in this resource record.
+example: IN
+flat_name: dns.answers.class
+ignore_above: 1024
+level: extended
+name: answers.class
+type: keyword

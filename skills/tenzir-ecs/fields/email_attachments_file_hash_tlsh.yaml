@@ -1,0 +1,10 @@
+field: email.attachments.file.hash.tlsh
+fieldset: email
+dashed_name: email-attachments-file-hash-tlsh
+description: TLSH hash.
+flat_name: email.attachments.file.hash.tlsh
+ignore_above: 1024
+level: extended
+name: tlsh
+original_fieldset: hash
+type: keyword

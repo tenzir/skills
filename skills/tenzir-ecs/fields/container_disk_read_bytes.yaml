@@ -1,0 +1,8 @@
+field: container.disk.read.bytes
+fieldset: container
+dashed_name: container-disk-read-bytes
+description: The total number of bytes (gauge) read successfully (aggregated from all disks) since the last metric collection.
+flat_name: container.disk.read.bytes
+level: extended
+name: disk.read.bytes
+type: long

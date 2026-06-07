@@ -1,0 +1,8 @@
+field: package.installed
+fieldset: package
+dashed_name: package-installed
+description: Time when package was installed.
+flat_name: package.installed
+level: extended
+name: installed
+type: date

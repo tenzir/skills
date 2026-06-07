@@ -1,0 +1,10 @@
+field: network.iana_number
+fieldset: network
+dashed_name: network-iana-number
+description: IANA Protocol Number (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml). Standardized list of protocols. This aligns well with NetFlow and sFlow related logs which use the IANA Protocol Number.
+example: 6
+flat_name: network.iana_number
+ignore_above: 1024
+level: extended
+name: iana_number
+type: keyword

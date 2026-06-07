@@ -1,0 +1,11 @@
+field: event.sequence
+fieldset: event
+dashed_name: event-sequence
+description: 'Sequence number of the event.
+
+  The sequence number is a value published by some event sources, to make the exact ordering of events unambiguous, regardless of the timestamp precision.'
+flat_name: event.sequence
+format: string
+level: extended
+name: sequence
+type: long

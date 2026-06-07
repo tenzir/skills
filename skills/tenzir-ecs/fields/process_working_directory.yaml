@@ -1,0 +1,17 @@
+field: process.working_directory
+fieldset: process
+dashed_name: process-working-directory
+description: The working directory of the process.
+example: /home/alice
+flat_name: process.working_directory
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: process.working_directory.text
+  name: text
+  type: match_only_text
+name: working_directory
+otel:
+- relation: match
+  stability: development
+type: keyword

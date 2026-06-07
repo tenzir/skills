@@ -1,0 +1,17 @@
+field: service.environment
+fieldset: service
+beta: This field is beta and subject to change.
+dashed_name: service-environment
+description: 'Identifies the environment where the service is running.
+
+  If the same service runs in different environments (production, staging, QA, development, etc.), the environment can identify other instances of the same service. Can also group services and applications from the same environment.'
+example: production
+flat_name: service.environment
+ignore_above: 1024
+level: extended
+name: environment
+otel:
+- attribute: deployment.environment.name
+  relation: equivalent
+  stability: development
+type: keyword

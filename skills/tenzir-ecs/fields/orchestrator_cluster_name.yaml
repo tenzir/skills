@@ -1,0 +1,9 @@
+field: orchestrator.cluster.name
+fieldset: orchestrator
+dashed_name: orchestrator-cluster-name
+description: Name of the cluster.
+flat_name: orchestrator.cluster.name
+ignore_above: 1024
+level: extended
+name: cluster.name
+type: keyword

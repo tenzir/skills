@@ -1,0 +1,9 @@
+field: threat.enrichments.indicator.sightings
+fieldset: threat
+dashed_name: threat-enrichments-indicator-sightings
+description: Number of times this indicator was observed conducting threat activity.
+example: 20
+flat_name: threat.enrichments.indicator.sightings
+level: extended
+name: enrichments.indicator.sightings
+type: long

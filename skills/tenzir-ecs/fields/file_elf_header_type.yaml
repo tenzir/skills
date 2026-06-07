@@ -1,0 +1,10 @@
+field: file.elf.header.type
+fieldset: file
+dashed_name: file-elf-header-type
+description: Header type of the ELF file.
+flat_name: file.elf.header.type
+ignore_above: 1024
+level: extended
+name: header.type
+original_fieldset: elf
+type: keyword

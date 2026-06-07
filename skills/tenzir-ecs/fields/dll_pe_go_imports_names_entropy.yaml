@@ -1,0 +1,10 @@
+field: dll.pe.go_imports_names_entropy
+fieldset: dll
+dashed_name: dll-pe-go-imports-names-entropy
+description: Shannon entropy calculation from the list of Go imports.
+flat_name: dll.pe.go_imports_names_entropy
+format: number
+level: extended
+name: go_imports_names_entropy
+original_fieldset: pe
+type: long

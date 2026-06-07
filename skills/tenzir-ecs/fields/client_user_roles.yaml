@@ -1,0 +1,14 @@
+field: client.user.roles
+fieldset: client
+dashed_name: client-user-roles
+description: Array of user roles at the time of the event.
+example: '["kibana_admin", "reporting_user"]'
+flat_name: client.user.roles
+ignore_above: 1024
+level: extended
+name: roles
+normalize:
+- array
+original_fieldset: user
+synthetic_source_keep: none
+type: keyword

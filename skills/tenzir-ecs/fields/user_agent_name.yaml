@@ -1,0 +1,13 @@
+field: user_agent.name
+fieldset: user_agent
+dashed_name: user-agent-name
+description: Name of the user agent.
+example: Safari
+flat_name: user_agent.name
+ignore_above: 1024
+level: extended
+name: name
+otel:
+- relation: match
+  stability: development
+type: keyword

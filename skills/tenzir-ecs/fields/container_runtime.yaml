@@ -1,0 +1,14 @@
+field: container.runtime
+fieldset: container
+dashed_name: container-runtime
+description: Runtime managing this container.
+example: docker
+flat_name: container.runtime
+ignore_above: 1024
+level: extended
+name: runtime
+otel:
+- attribute: container.runtime.name
+  relation: equivalent
+  stability: development
+type: keyword

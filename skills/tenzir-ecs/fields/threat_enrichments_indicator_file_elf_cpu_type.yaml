@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.file.elf.cpu_type
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-elf-cpu-type
+description: CPU type of the ELF file.
+example: Intel
+flat_name: threat.enrichments.indicator.file.elf.cpu_type
+ignore_above: 1024
+level: extended
+name: cpu_type
+original_fieldset: elf
+type: keyword

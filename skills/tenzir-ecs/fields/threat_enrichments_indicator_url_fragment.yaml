@@ -1,0 +1,12 @@
+field: threat.enrichments.indicator.url.fragment
+fieldset: threat
+dashed_name: threat-enrichments-indicator-url-fragment
+description: 'Portion of the url after the `#`, such as "top".
+
+  The `#` is not part of the fragment.'
+flat_name: threat.enrichments.indicator.url.fragment
+ignore_above: 1024
+level: extended
+name: fragment
+original_fieldset: url
+type: keyword

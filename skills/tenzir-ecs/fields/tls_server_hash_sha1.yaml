@@ -1,0 +1,13 @@
+field: tls.server.hash.sha1
+fieldset: tls
+dashed_name: tls-server-hash-sha1
+description: Certificate fingerprint using the SHA1 digest of DER-encoded version of certificate offered by the server. For consistency with other hash values, this value should be formatted as an uppercase hash.
+example: 9E393D93138888D288266C2D915214D1D1CCEB2A
+flat_name: tls.server.hash.sha1
+ignore_above: 1024
+level: extended
+name: server.hash.sha1
+otel:
+- relation: match
+  stability: development
+type: keyword

@@ -1,0 +1,10 @@
+field: host.target.entity.lifecycle.last_activity
+fieldset: host
+beta: This field is beta and subject to change.
+dashed_name: host-target-entity-lifecycle-last-activity
+description: Timestamp of the most recent action performed by or attributed to this entity (active use). Distinct from `entity.last_seen_timestamp`, which records when the entity was last observed in data; `last_activity` implies the entity was active, not only seen. Typically applicable to User, Host, and Service entities.
+flat_name: host.target.entity.lifecycle.last_activity
+level: extended
+name: lifecycle.last_activity
+original_fieldset: entity
+type: date

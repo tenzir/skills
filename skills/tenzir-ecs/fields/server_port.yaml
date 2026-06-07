@@ -1,0 +1,12 @@
+field: server.port
+fieldset: server
+dashed_name: server-port
+description: Port of the server.
+flat_name: server.port
+format: string
+level: core
+name: port
+otel:
+- relation: match
+  stability: stable
+type: long

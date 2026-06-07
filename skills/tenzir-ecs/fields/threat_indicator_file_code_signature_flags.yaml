@@ -1,0 +1,12 @@
+field: threat.indicator.file.code_signature.flags
+fieldset: threat
+beta: This field is beta and subject to change.
+dashed_name: threat-indicator-file-code-signature-flags
+description: The flags used to sign the process.
+example: 570522385
+flat_name: threat.indicator.file.code_signature.flags
+ignore_above: 1024
+level: extended
+name: flags
+original_fieldset: code_signature
+type: keyword

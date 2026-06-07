@@ -1,0 +1,10 @@
+field: file.elf.sections.virtual_size
+fieldset: file
+dashed_name: file-elf-sections-virtual-size
+description: ELF Section List virtual size.
+flat_name: file.elf.sections.virtual_size
+format: string
+level: extended
+name: sections.virtual_size
+original_fieldset: elf
+type: long

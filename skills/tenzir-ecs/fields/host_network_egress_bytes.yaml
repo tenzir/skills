@@ -1,0 +1,12 @@
+field: host.network.egress.bytes
+fieldset: host
+dashed_name: host-network-egress-bytes
+description: The number of bytes (gauge) sent out on all network interfaces by the host since the last metric collection.
+flat_name: host.network.egress.bytes
+level: extended
+name: network.egress.bytes
+otel:
+- metric: system.network.io
+  relation: metric
+  stability: development
+type: long

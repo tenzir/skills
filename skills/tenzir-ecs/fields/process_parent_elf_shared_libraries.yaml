@@ -1,0 +1,12 @@
+field: process.parent.elf.shared_libraries
+fieldset: process
+dashed_name: process-parent-elf-shared-libraries
+description: List of shared libraries used by this ELF object.
+flat_name: process.parent.elf.shared_libraries
+ignore_above: 1024
+level: extended
+name: shared_libraries
+normalize:
+- array
+original_fieldset: elf
+type: keyword

@@ -1,0 +1,10 @@
+field: rule.uuid
+fieldset: rule
+dashed_name: rule-uuid
+description: A rule ID that is unique within the scope of a set or group of agents, observers, or other entities using the rule for detection of this event.
+example: 1100110011
+flat_name: rule.uuid
+ignore_above: 1024
+level: extended
+name: uuid
+type: keyword

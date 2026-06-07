@@ -1,0 +1,10 @@
+field: process.elf.telfhash
+fieldset: process
+dashed_name: process-elf-telfhash
+description: telfhash symbol hash for ELF file.
+flat_name: process.elf.telfhash
+ignore_above: 1024
+level: extended
+name: telfhash
+original_fieldset: elf
+type: keyword

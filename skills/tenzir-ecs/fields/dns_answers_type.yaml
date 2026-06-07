@@ -1,0 +1,10 @@
+field: dns.answers.type
+fieldset: dns
+dashed_name: dns-answers-type
+description: The type of data contained in this resource record.
+example: CNAME
+flat_name: dns.answers.type
+ignore_above: 1024
+level: extended
+name: answers.type
+type: keyword

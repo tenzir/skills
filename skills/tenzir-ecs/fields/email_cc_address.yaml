@@ -1,0 +1,13 @@
+field: email.cc.address
+fieldset: email
+dashed_name: email-cc-address
+description: The email address of CC recipient
+example: cc.user1@example.com
+flat_name: email.cc.address
+ignore_above: 1024
+level: extended
+name: cc.address
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

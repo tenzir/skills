@@ -1,0 +1,10 @@
+field: threat.enrichments.matched.atomic
+fieldset: threat
+dashed_name: threat-enrichments-matched-atomic
+description: Identifies the atomic indicator value that matched a local environment endpoint or network event.
+example: bad-domain.com
+flat_name: threat.enrichments.matched.atomic
+ignore_above: 1024
+level: extended
+name: enrichments.matched.atomic
+type: keyword

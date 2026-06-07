@@ -1,0 +1,21 @@
+field: service.node.roles
+fieldset: service
+dashed_name: service-node-roles
+description: 'Roles of a service node.
+
+  This allows for distinction between different running roles of the same service.
+
+  In the case of Kibana, the `service.node.role` could be `ui` or `background_tasks` or both.
+
+  In the case of Elasticsearch, the `service.node.role` could be `master` or `data` or both.
+
+  Other services could use this to distinguish between a `web` and `worker` role running as part of the service.'
+example: '["ui", "background_tasks"]'
+flat_name: service.node.roles
+ignore_above: 1024
+level: extended
+name: node.roles
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

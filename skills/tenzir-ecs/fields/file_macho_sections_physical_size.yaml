@@ -1,0 +1,10 @@
+field: file.macho.sections.physical_size
+fieldset: file
+dashed_name: file-macho-sections-physical-size
+description: Mach-O Section List physical size.
+flat_name: file.macho.sections.physical_size
+format: bytes
+level: extended
+name: sections.physical_size
+original_fieldset: macho
+type: long

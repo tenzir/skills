@@ -1,0 +1,14 @@
+field: process.group_leader.pid
+fieldset: process
+dashed_name: process-group-leader-pid
+description: Process id.
+example: 4242
+flat_name: process.group_leader.pid
+format: string
+level: core
+name: pid
+original_fieldset: process
+otel:
+- relation: match
+  stability: development
+type: long

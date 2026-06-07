@@ -1,0 +1,10 @@
+field: file.elf.segments.sections
+fieldset: file
+dashed_name: file-elf-segments-sections
+description: ELF object segment sections.
+flat_name: file.elf.segments.sections
+ignore_above: 1024
+level: extended
+name: segments.sections
+original_fieldset: elf
+type: keyword

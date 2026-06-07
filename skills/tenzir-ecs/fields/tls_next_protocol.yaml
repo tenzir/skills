@@ -1,0 +1,13 @@
+field: tls.next_protocol
+fieldset: tls
+dashed_name: tls-next-protocol
+description: String indicating the protocol being tunneled. Per the values in the IANA registry (https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids), this string should be lower case.
+example: http/1.1
+flat_name: tls.next_protocol
+ignore_above: 1024
+level: extended
+name: next_protocol
+otel:
+- relation: match
+  stability: development
+type: keyword

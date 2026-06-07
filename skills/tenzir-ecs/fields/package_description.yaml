@@ -1,0 +1,10 @@
+field: package.description
+fieldset: package
+dashed_name: package-description
+description: Description of the package.
+example: Open source programming language to build simple/reliable/efficient software.
+flat_name: package.description
+ignore_above: 1024
+level: extended
+name: description
+type: keyword

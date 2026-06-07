@@ -1,0 +1,10 @@
+field: cloud.instance.id
+fieldset: cloud
+dashed_name: cloud-instance-id
+description: Instance ID of the host machine.
+example: i-1234567890abcdef0
+flat_name: cloud.instance.id
+ignore_above: 1024
+level: extended
+name: instance.id
+type: keyword

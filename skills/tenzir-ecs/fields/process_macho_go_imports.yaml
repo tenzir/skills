@@ -1,0 +1,9 @@
+field: process.macho.go_imports
+fieldset: process
+dashed_name: process-macho-go-imports
+description: List of imported Go language element names and types.
+flat_name: process.macho.go_imports
+level: extended
+name: go_imports
+original_fieldset: macho
+type: flattened

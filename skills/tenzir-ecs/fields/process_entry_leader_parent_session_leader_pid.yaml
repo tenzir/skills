@@ -1,0 +1,11 @@
+field: process.entry_leader.parent.session_leader.pid
+fieldset: process
+dashed_name: process-entry-leader-parent-session-leader-pid
+description: Process id.
+example: 4242
+flat_name: process.entry_leader.parent.session_leader.pid
+format: string
+level: core
+name: pid
+original_fieldset: process
+type: long

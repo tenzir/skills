@@ -1,0 +1,8 @@
+field: container.security_context.privileged
+fieldset: container
+dashed_name: container-security-context-privileged
+description: Indicates whether the container is running in privileged mode.
+flat_name: container.security_context.privileged
+level: extended
+name: security_context.privileged
+type: boolean

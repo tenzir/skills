@@ -1,0 +1,28 @@
+field: threat.indicator.type
+fieldset: threat
+dashed_name: threat-indicator-type
+description: Type of indicator as represented by Cyber Observable in STIX 2.0.
+example: ipv4-addr
+expected_values:
+- autonomous-system
+- artifact
+- directory
+- domain-name
+- email-addr
+- file
+- ipv4-addr
+- ipv6-addr
+- mac-addr
+- mutex
+- port
+- process
+- software
+- url
+- user-account
+- windows-registry-key
+- x509-certificate
+flat_name: threat.indicator.type
+ignore_above: 1024
+level: extended
+name: indicator.type
+type: keyword

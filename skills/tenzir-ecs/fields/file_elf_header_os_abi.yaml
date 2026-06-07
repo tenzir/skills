@@ -1,0 +1,10 @@
+field: file.elf.header.os_abi
+fieldset: file
+dashed_name: file-elf-header-os-abi
+description: Application Binary Interface (ABI) of the Linux OS.
+flat_name: file.elf.header.os_abi
+ignore_above: 1024
+level: extended
+name: header.os_abi
+original_fieldset: elf
+type: keyword

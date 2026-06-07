@@ -1,0 +1,12 @@
+field: host.disk.read.bytes
+fieldset: host
+dashed_name: host-disk-read-bytes
+description: The total number of bytes (gauge) read successfully (aggregated from all disks) since the last metric collection.
+flat_name: host.disk.read.bytes
+level: extended
+name: disk.read.bytes
+otel:
+- metric: system.disk.io
+  relation: metric
+  stability: development
+type: long

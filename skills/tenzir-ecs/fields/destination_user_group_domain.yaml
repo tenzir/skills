@@ -1,0 +1,12 @@
+field: destination.user.group.domain
+fieldset: destination
+dashed_name: destination-user-group-domain
+description: 'Name of the directory the group is a member of.
+
+  For example, an LDAP or Active Directory domain name.'
+flat_name: destination.user.group.domain
+ignore_above: 1024
+level: extended
+name: domain
+original_fieldset: group
+type: keyword

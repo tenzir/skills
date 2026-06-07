@@ -1,0 +1,12 @@
+field: service.entity.relationships.depends_on.service.name
+fieldset: service
+dashed_name: service-entity-relationships-depends-on-service-name
+description: Referenced service names.
+flat_name: service.entity.relationships.depends_on.service.name
+ignore_above: 1024
+level: extended
+name: service.name
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

@@ -1,0 +1,11 @@
+field: server.geo.city_name
+fieldset: server
+dashed_name: server-geo-city-name
+description: City name.
+example: Montreal
+flat_name: server.geo.city_name
+ignore_above: 1024
+level: core
+name: city_name
+original_fieldset: geo
+type: keyword

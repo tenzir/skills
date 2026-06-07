@@ -1,0 +1,13 @@
+field: threat.enrichments.indicator.file.drive_letter
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-drive-letter
+description: 'Drive letter where the file is located. This field is only relevant on Windows.
+
+  The value should be uppercase, and not include the colon.'
+example: C
+flat_name: threat.enrichments.indicator.file.drive_letter
+ignore_above: 1
+level: extended
+name: drive_letter
+original_fieldset: file
+type: keyword

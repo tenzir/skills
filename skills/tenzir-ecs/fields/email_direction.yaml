@@ -1,0 +1,10 @@
+field: email.direction
+fieldset: email
+dashed_name: email-direction
+description: The direction of the message based on the sending and receiving domains.
+example: inbound
+flat_name: email.direction
+ignore_above: 1024
+level: extended
+name: direction
+type: keyword

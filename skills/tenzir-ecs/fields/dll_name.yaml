@@ -1,0 +1,12 @@
+field: dll.name
+fieldset: dll
+dashed_name: dll-name
+description: 'Name of the library.
+
+  This generally maps to the name of the file on disk.'
+example: kernel32.dll
+flat_name: dll.name
+ignore_above: 1024
+level: core
+name: name
+type: keyword

@@ -1,0 +1,13 @@
+field: http.response.body.content
+fieldset: http
+dashed_name: http-response-body-content
+description: The full HTTP response body.
+example: Hello world
+flat_name: http.response.body.content
+level: extended
+multi_fields:
+- flat_name: http.response.body.content.text
+  name: text
+  type: match_only_text
+name: response.body.content
+type: wildcard

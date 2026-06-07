@@ -1,0 +1,11 @@
+field: server.geo.country_name
+fieldset: server
+dashed_name: server-geo-country-name
+description: Country name.
+example: Canada
+flat_name: server.geo.country_name
+ignore_above: 1024
+level: core
+name: country_name
+original_fieldset: geo
+type: keyword

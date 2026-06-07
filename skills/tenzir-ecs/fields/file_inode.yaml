@@ -1,0 +1,13 @@
+field: file.inode
+fieldset: file
+dashed_name: file-inode
+description: Inode representing the file in the filesystem.
+example: '256383'
+flat_name: file.inode
+ignore_above: 1024
+level: extended
+name: inode
+otel:
+- relation: match
+  stability: development
+type: keyword

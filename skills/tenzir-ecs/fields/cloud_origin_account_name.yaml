@@ -1,0 +1,13 @@
+field: cloud.origin.account.name
+fieldset: cloud
+dashed_name: cloud-origin-account-name
+description: 'The cloud account name or alias used to identify different entities in a multi-tenant environment.
+
+  Examples: AWS account name, Google Cloud ORG display name.'
+example: elastic-dev
+flat_name: cloud.origin.account.name
+ignore_above: 1024
+level: extended
+name: account.name
+original_fieldset: cloud
+type: keyword

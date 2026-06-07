@@ -1,0 +1,13 @@
+field: file.mode
+fieldset: file
+dashed_name: file-mode
+description: Mode of the file in octal representation.
+example: '0640'
+flat_name: file.mode
+ignore_above: 1024
+level: extended
+name: mode
+otel:
+- relation: match
+  stability: development
+type: keyword

@@ -1,0 +1,12 @@
+field: error.message
+fieldset: error
+dashed_name: error-message
+description: Error message.
+flat_name: error.message
+level: core
+name: message
+otel:
+- attribute: exception.message
+  relation: equivalent
+  stability: stable
+type: match_only_text

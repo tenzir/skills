@@ -1,0 +1,10 @@
+field: dns.id
+fieldset: dns
+dashed_name: dns-id
+description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
+example: 62111
+flat_name: dns.id
+ignore_above: 1024
+level: extended
+name: id
+type: keyword

@@ -1,0 +1,8 @@
+field: event.risk_score
+fieldset: event
+dashed_name: event-risk-score
+description: Risk score or priority of the event (e.g. security solutions). Use your system's original value here.
+flat_name: event.risk_score
+level: core
+name: risk_score
+type: float

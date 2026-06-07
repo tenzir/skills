@@ -1,0 +1,10 @@
+field: threat.indicator.geo.location
+fieldset: threat
+dashed_name: threat-indicator-geo-location
+description: Longitude and latitude.
+example: '{ "lon": -73.614830, "lat": 45.505918 }'
+flat_name: threat.indicator.geo.location
+level: core
+name: location
+original_fieldset: geo
+type: geo_point

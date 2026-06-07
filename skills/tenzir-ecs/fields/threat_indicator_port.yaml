@@ -1,0 +1,9 @@
+field: threat.indicator.port
+fieldset: threat
+dashed_name: threat-indicator-port
+description: Identifies a threat indicator as a port number (irrespective of direction).
+example: 443
+flat_name: threat.indicator.port
+level: extended
+name: indicator.port
+type: long

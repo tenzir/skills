@@ -1,0 +1,10 @@
+field: user.target.entity.id
+fieldset: user
+dashed_name: user-target-entity-id
+description: 'A unique identifier for the entity. When multiple identifiers exist, this should be the most stable and commonly used identifier that: 1) persists across the entity''s lifecycle, 2) ensures uniqueness within its scope, 3) is commonly used for queries and correlation, and 4) is readily available in most observations (logs/events). For entities with dedicated field sets (for example, host, user), this value should match the corresponding *.id field. Alternative identifiers (for example, ARNs values in AWS, URLs) can be preserved in the raw field.'
+flat_name: user.target.entity.id
+ignore_above: 1024
+level: core
+name: id
+original_fieldset: entity
+type: keyword

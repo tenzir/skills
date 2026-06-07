@@ -1,0 +1,10 @@
+field: orchestrator.type
+fieldset: orchestrator
+dashed_name: orchestrator-type
+description: Orchestrator cluster type (e.g. kubernetes, nomad or cloudfoundry).
+example: kubernetes
+flat_name: orchestrator.type
+ignore_above: 1024
+level: extended
+name: type
+type: keyword

@@ -1,0 +1,10 @@
+field: user.risk.calculated_score
+fieldset: user
+dashed_name: user-risk-calculated-score
+description: A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring.
+example: 880.73
+flat_name: user.risk.calculated_score
+level: extended
+name: calculated_score
+original_fieldset: risk
+type: float

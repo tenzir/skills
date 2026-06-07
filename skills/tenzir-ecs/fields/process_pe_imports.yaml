@@ -1,0 +1,11 @@
+field: process.pe.imports
+fieldset: process
+dashed_name: process-pe-imports
+description: List of imported element names and types.
+flat_name: process.pe.imports
+level: extended
+name: imports
+normalize:
+- array
+original_fieldset: pe
+type: flattened

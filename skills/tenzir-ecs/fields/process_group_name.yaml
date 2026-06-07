@@ -1,0 +1,10 @@
+field: process.group.name
+fieldset: process
+dashed_name: process-group-name
+description: Name of the group.
+flat_name: process.group.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

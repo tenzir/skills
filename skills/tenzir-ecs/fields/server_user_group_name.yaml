@@ -1,0 +1,10 @@
+field: server.user.group.name
+fieldset: server
+dashed_name: server-user-group-name
+description: Name of the group.
+flat_name: server.user.group.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

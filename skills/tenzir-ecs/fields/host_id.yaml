@@ -1,0 +1,16 @@
+field: host.id
+fieldset: host
+dashed_name: host-id
+description: 'Unique host id.
+
+  As hostname is not always unique, use values that are meaningful in your environment.
+
+  Example: The current usage of `beat.name`.'
+flat_name: host.id
+ignore_above: 1024
+level: core
+name: id
+otel:
+- relation: match
+  stability: development
+type: keyword

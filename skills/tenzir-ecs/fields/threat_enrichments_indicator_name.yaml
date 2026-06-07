@@ -1,0 +1,12 @@
+field: threat.enrichments.indicator.name
+fieldset: threat
+dashed_name: threat-enrichments-indicator-name
+description: 'The display name indicator in an UI friendly format
+
+  URL, IP address, email address, registry key, port number, hash value, or other relevant name can serve as the display name.'
+example: 5.2.75.227
+flat_name: threat.enrichments.indicator.name
+ignore_above: 1024
+level: extended
+name: enrichments.indicator.name
+type: keyword

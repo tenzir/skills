@@ -1,0 +1,11 @@
+field: log.syslog.severity.code
+fieldset: log
+dashed_name: log-syslog-severity-code
+description: 'The Syslog numeric severity of the log event, if available.
+
+  If the event source publishing via Syslog provides a different numeric severity value (e.g. firewall, IDS), your source''s numeric severity should go to `event.severity`. If the event source does not specify a distinct severity, you can optionally copy the Syslog severity to `event.severity`.'
+example: 3
+flat_name: log.syslog.severity.code
+level: extended
+name: syslog.severity.code
+type: long

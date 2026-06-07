@@ -1,0 +1,12 @@
+field: threat.enrichments.indicator.x509.public_key_exponent
+fieldset: threat
+dashed_name: threat-enrichments-indicator-x509-public-key-exponent
+description: Exponent used to derive the public key. This is algorithm specific.
+doc_values: false
+example: 65537
+flat_name: threat.enrichments.indicator.x509.public_key_exponent
+index: false
+level: extended
+name: public_key_exponent
+original_fieldset: x509
+type: long

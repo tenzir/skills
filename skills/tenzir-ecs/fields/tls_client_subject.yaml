@@ -1,0 +1,13 @@
+field: tls.client.subject
+fieldset: tls
+dashed_name: tls-client-subject
+description: Distinguished name of subject of the x.509 certificate presented by the client.
+example: CN=myclient, OU=Documentation Team, DC=example, DC=com
+flat_name: tls.client.subject
+ignore_above: 1024
+level: extended
+name: client.subject
+otel:
+- relation: match
+  stability: development
+type: keyword

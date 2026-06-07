@@ -1,0 +1,223 @@
+fieldset: elf
+description: These fields contain Linux Executable Linkable Format (ELF) metadata.
+group: 2
+name: elf
+prefix: elf.
+reusable:
+  expected:
+  - as: elf
+    at: file
+    full: file.elf
+  - as: elf
+    at: process
+    full: process.elf
+  top_level: false
+title: ELF Header
+type: group
+fields:
+- name: elf.architecture
+  type: keyword
+  description: Machine architecture of the ELF file.
+  template_field: true
+  example: x86-64
+  ignore_above: 1024
+- name: elf.byte_order
+  type: keyword
+  description: Byte sequence of ELF file.
+  template_field: true
+  example: Little Endian
+  ignore_above: 1024
+- name: elf.cpu_type
+  type: keyword
+  description: CPU type of the ELF file.
+  template_field: true
+  example: Intel
+  ignore_above: 1024
+- name: elf.creation_date
+  type: date
+  description: Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+  template_field: true
+- name: elf.exports
+  type: flattened
+  description: List of exported element names and types.
+  template_field: true
+  normalize:
+  - array
+- name: elf.go_import_hash
+  type: keyword
+  description: 'A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+    The algorithm used to calculate the Go symbol hash and a reference implementation are available here: https://github.com/elastic/toutoumomoma'
+  template_field: true
+  example: 10bddcb4cee42080f76c88d9ff964491
+  ignore_above: 1024
+- name: elf.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  template_field: true
+- name: elf.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  template_field: true
+  format: number
+- name: elf.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  template_field: true
+  format: number
+- name: elf.go_stripped
+  type: boolean
+  description: Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+  template_field: true
+- name: elf.header.abi_version
+  type: keyword
+  description: Version of the ELF Application Binary Interface (ABI).
+  template_field: true
+  ignore_above: 1024
+- name: elf.header.class
+  type: keyword
+  description: Header class of the ELF file.
+  template_field: true
+  ignore_above: 1024
+- name: elf.header.data
+  type: keyword
+  description: Data table of the ELF header.
+  template_field: true
+  ignore_above: 1024
+- name: elf.header.entrypoint
+  type: long
+  description: Header entrypoint of the ELF file.
+  template_field: true
+  format: string
+- name: elf.header.object_version
+  type: keyword
+  description: '"0x1" for original ELF files.'
+  template_field: true
+  ignore_above: 1024
+- name: elf.header.os_abi
+  type: keyword
+  description: Application Binary Interface (ABI) of the Linux OS.
+  template_field: true
+  ignore_above: 1024
+- name: elf.header.type
+  type: keyword
+  description: Header type of the ELF file.
+  template_field: true
+  ignore_above: 1024
+- name: elf.header.version
+  type: keyword
+  description: Version of the ELF header.
+  template_field: true
+  ignore_above: 1024
+- name: elf.import_hash
+  type: keyword
+  description: 'A hash of the imports in an ELF file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+
+    This is an ELF implementation of the Windows PE imphash.'
+  template_field: true
+  example: d41d8cd98f00b204e9800998ecf8427e
+  ignore_above: 1024
+- name: elf.imports
+  type: flattened
+  description: List of imported element names and types.
+  template_field: true
+  normalize:
+  - array
+- name: elf.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  template_field: true
+  format: number
+- name: elf.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  template_field: true
+  format: number
+- name: elf.sections
+  type: nested
+  description: 'An array containing an object for each section of the ELF file.
+
+    The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.'
+  template_field: true
+  normalize:
+  - array
+- name: elf.sections.chi2
+  type: long
+  description: Chi-square probability distribution of the section.
+  template_field: true
+  format: number
+- name: elf.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  template_field: true
+  format: number
+- name: elf.sections.flags
+  type: keyword
+  description: ELF Section List flags.
+  template_field: true
+  ignore_above: 1024
+- name: elf.sections.name
+  type: keyword
+  description: ELF Section List name.
+  template_field: true
+  ignore_above: 1024
+- name: elf.sections.physical_offset
+  type: keyword
+  description: ELF Section List offset.
+  template_field: true
+  ignore_above: 1024
+- name: elf.sections.physical_size
+  type: long
+  description: ELF Section List physical size.
+  template_field: true
+  format: bytes
+- name: elf.sections.type
+  type: keyword
+  description: ELF Section List type.
+  template_field: true
+  ignore_above: 1024
+- name: elf.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  template_field: true
+  format: number
+- name: elf.sections.virtual_address
+  type: long
+  description: ELF Section List virtual address.
+  template_field: true
+  format: string
+- name: elf.sections.virtual_size
+  type: long
+  description: ELF Section List virtual size.
+  template_field: true
+  format: string
+- name: elf.segments
+  type: nested
+  description: 'An array containing an object for each segment of the ELF file.
+
+    The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.'
+  template_field: true
+  normalize:
+  - array
+- name: elf.segments.sections
+  type: keyword
+  description: ELF object segment sections.
+  template_field: true
+  ignore_above: 1024
+- name: elf.segments.type
+  type: keyword
+  description: ELF object segment type.
+  template_field: true
+  ignore_above: 1024
+- name: elf.shared_libraries
+  type: keyword
+  description: List of shared libraries used by this ELF object.
+  template_field: true
+  ignore_above: 1024
+  normalize:
+  - array
+- name: elf.telfhash
+  type: keyword
+  description: telfhash symbol hash for ELF file.
+  template_field: true
+  ignore_above: 1024

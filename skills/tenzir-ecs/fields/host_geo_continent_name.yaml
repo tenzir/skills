@@ -1,0 +1,11 @@
+field: host.geo.continent_name
+fieldset: host
+dashed_name: host-geo-continent-name
+description: Name of the continent.
+example: North America
+flat_name: host.geo.continent_name
+ignore_above: 1024
+level: core
+name: continent_name
+original_fieldset: geo
+type: keyword

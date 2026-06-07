@@ -1,0 +1,12 @@
+field: file.code_signature.valid
+fieldset: file
+dashed_name: file-code-signature-valid
+description: 'Boolean to capture if the digital signature is verified against the binary content.
+
+  Leave unpopulated if a certificate was unchecked.'
+example: 'true'
+flat_name: file.code_signature.valid
+level: extended
+name: valid
+original_fieldset: code_signature
+type: boolean

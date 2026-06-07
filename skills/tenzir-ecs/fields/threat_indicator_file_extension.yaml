@@ -1,0 +1,13 @@
+field: threat.indicator.file.extension
+fieldset: threat
+dashed_name: threat-indicator-file-extension
+description: 'File extension, excluding the leading dot.
+
+  Note that when the file name has multiple extensions (example.tar.gz), only the last one should be captured ("gz", not "tar.gz").'
+example: png
+flat_name: threat.indicator.file.extension
+ignore_above: 1024
+level: extended
+name: extension
+original_fieldset: file
+type: keyword

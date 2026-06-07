@@ -1,0 +1,48 @@
+fieldset: group
+description: The group fields are meant to represent groups that are relevant to the event.
+group: 2
+name: group
+prefix: group.
+reusable:
+  expected:
+  - as: group
+    at: user
+    full: user.group
+  - as: group
+    at: process
+    full: process.group
+    description_override: The effective group (egid).
+  - as: real_group
+    at: process
+    full: process.real_group
+    description_override: The real group (rgid).
+  - as: saved_group
+    at: process
+    full: process.saved_group
+    description_override: The saved group (sgid).
+  - as: supplemental_groups
+    at: process
+    full: process.supplemental_groups
+    normalize:
+    - array
+    description_override: An array of supplemental groups.
+  - as: attested_groups
+    at: process
+    beta: Reusing the `group` fields in this location is currently considered beta.
+    full: process.attested_groups
+    normalize:
+    - array
+    description_override: The externally attested groups based on an external source such as the Kube API.
+  top_level: true
+title: Group
+type: group
+fields:
+- name: group.domain
+  type: keyword
+  description: Name of the directory the group is a member of.
+- name: group.id
+  type: keyword
+  description: Unique identifier for the group on the system/platform.
+- name: group.name
+  type: keyword
+  description: Name of the group.

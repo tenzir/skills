@@ -1,0 +1,16 @@
+field: trace.id
+fieldset: trace
+dashed_name: trace-id
+description: 'Unique identifier of the trace.
+
+  A trace groups multiple events like transactions that belong together. For example, a user request handled by multiple inter-connected services.'
+example: 4bf92f3577b34da6a3ce929d0e0e4736
+flat_name: trace.id
+ignore_above: 1024
+level: extended
+name: trace.id
+otel:
+- otlp_field: trace_id
+  relation: otlp
+  stability: stable
+type: keyword

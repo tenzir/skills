@@ -1,0 +1,11 @@
+field: destination.geo.country_iso_code
+fieldset: destination
+dashed_name: destination-geo-country-iso-code
+description: Country ISO code.
+example: CA
+flat_name: destination.geo.country_iso_code
+ignore_above: 1024
+level: core
+name: country_iso_code
+original_fieldset: geo
+type: keyword

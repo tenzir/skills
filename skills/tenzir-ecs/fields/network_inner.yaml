@@ -1,0 +1,8 @@
+field: network.inner
+fieldset: network
+dashed_name: network-inner
+description: Network.inner fields are added in addition to network.vlan fields to describe the innermost VLAN when q-in-q VLAN tagging is present. Allowed fields include vlan.id and vlan.name. Inner vlan fields are typically used when sending traffic with multiple 802.1q encapsulations to a network sensor (e.g. Zeek, Wireshark.)
+flat_name: network.inner
+level: extended
+name: inner
+type: object

@@ -1,0 +1,10 @@
+field: user.changes.email
+fieldset: user
+dashed_name: user-changes-email
+description: User email address.
+flat_name: user.changes.email
+ignore_above: 1024
+level: extended
+name: email
+original_fieldset: user
+type: keyword

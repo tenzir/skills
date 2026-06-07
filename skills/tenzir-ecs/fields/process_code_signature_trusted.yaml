@@ -1,0 +1,12 @@
+field: process.code_signature.trusted
+fieldset: process
+dashed_name: process-code-signature-trusted
+description: 'Stores the trust status of the certificate chain.
+
+  Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.'
+example: 'true'
+flat_name: process.code_signature.trusted
+level: extended
+name: trusted
+original_fieldset: code_signature
+type: boolean

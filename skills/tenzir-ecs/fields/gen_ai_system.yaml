@@ -1,0 +1,15 @@
+field: gen_ai.system
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-system
+description: The Generative AI product as identified by the client or server instrumentation.
+example: openai
+flat_name: gen_ai.system
+ignore_above: 1024
+level: extended
+name: system
+otel:
+- attribute: gen_ai.provider.name
+  relation: equivalent
+  stability: development
+type: keyword

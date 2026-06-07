@@ -1,0 +1,59 @@
+fieldset: url
+description: URL fields provide support for complete or partial URLs, and supports the breaking down into scheme, domain, path, and so on.
+group: 2
+name: url
+prefix: url.
+reusable:
+  expected:
+  - as: url
+    at: threat.indicator
+    full: threat.indicator.url
+  - as: url
+    at: threat.enrichments.indicator
+    full: threat.enrichments.indicator.url
+  top_level: true
+title: URL
+type: group
+fields:
+- name: url.domain
+  type: keyword
+  description: Domain of the url.
+- name: url.extension
+  type: keyword
+  description: File extension from the request url, excluding the leading dot.
+- name: url.fragment
+  type: keyword
+  description: Portion of the url after the `#`.
+- name: url.full
+  type: wildcard
+  description: Full unparsed URL.
+- name: url.original
+  type: wildcard
+  description: Unmodified original url as seen in the event source.
+- name: url.password
+  type: keyword
+  description: Password of the request.
+- name: url.path
+  type: wildcard
+  description: Path of the request, such as "/search".
+- name: url.port
+  type: long
+  description: Port of the request, such as 443.
+- name: url.query
+  type: keyword
+  description: Query string of the request.
+- name: url.registered_domain
+  type: keyword
+  description: The highest registered url domain, stripped of the subdomain.
+- name: url.scheme
+  type: keyword
+  description: Scheme of the url.
+- name: url.subdomain
+  type: keyword
+  description: The subdomain of the domain.
+- name: url.top_level_domain
+  type: keyword
+  description: The effective top level domain (com, org, net, co.uk).
+- name: url.username
+  type: keyword
+  description: Username of the request.

@@ -1,0 +1,8 @@
+field: log.syslog.structured_data
+fieldset: log
+dashed_name: log-syslog-structured-data
+description: Structured data expressed in RFC 5424 messages, if available. These are key-value pairs formed from the structured data portion of the syslog message, as defined in RFC 5424 Section 6.3.
+flat_name: log.syslog.structured_data
+level: extended
+name: syslog.structured_data
+type: flattened

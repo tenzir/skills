@@ -1,0 +1,12 @@
+field: client.port
+fieldset: client
+dashed_name: client-port
+description: Port of the client.
+flat_name: client.port
+format: string
+level: core
+name: port
+otel:
+- relation: match
+  stability: stable
+type: long

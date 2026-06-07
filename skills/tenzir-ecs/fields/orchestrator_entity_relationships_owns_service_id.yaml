@@ -1,0 +1,12 @@
+field: orchestrator.entity.relationships.owns.service.id
+fieldset: orchestrator
+dashed_name: orchestrator-entity-relationships-owns-service-id
+description: Referenced service ids.
+flat_name: orchestrator.entity.relationships.owns.service.id
+ignore_above: 1024
+level: extended
+name: service.id
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

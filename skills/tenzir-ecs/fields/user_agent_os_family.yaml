@@ -1,0 +1,11 @@
+field: user_agent.os.family
+fieldset: user_agent
+dashed_name: user-agent-os-family
+description: OS family (such as redhat, debian, freebsd, windows).
+example: debian
+flat_name: user_agent.os.family
+ignore_above: 1024
+level: extended
+name: family
+original_fieldset: os
+type: keyword

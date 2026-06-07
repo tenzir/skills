@@ -1,0 +1,11 @@
+field: file.origin_referrer_url
+fieldset: file
+beta: This field is beta and subject to change.
+dashed_name: file-origin-referrer-url
+description: The URL of the webpage that linked to the file.
+example: http://example.com/article1.html
+flat_name: file.origin_referrer_url
+ignore_above: 8192
+level: extended
+name: origin_referrer_url
+type: keyword

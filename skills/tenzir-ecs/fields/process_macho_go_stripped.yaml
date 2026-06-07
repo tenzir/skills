@@ -1,0 +1,9 @@
+field: process.macho.go_stripped
+fieldset: process
+dashed_name: process-macho-go-stripped
+description: Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+flat_name: process.macho.go_stripped
+level: extended
+name: go_stripped
+original_fieldset: macho
+type: boolean

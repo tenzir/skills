@@ -1,0 +1,11 @@
+field: observer.ingress.vlan.id
+fieldset: observer
+dashed_name: observer-ingress-vlan-id
+description: VLAN ID as reported by the observer.
+example: 10
+flat_name: observer.ingress.vlan.id
+ignore_above: 1024
+level: extended
+name: id
+original_fieldset: vlan
+type: keyword

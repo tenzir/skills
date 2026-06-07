@@ -1,0 +1,12 @@
+field: dns.answers.name
+fieldset: dns
+dashed_name: dns-answers-name
+description: 'The domain name to which this resource record pertains.
+
+  If a chain of CNAME is being resolved, each answer''s `name` should be the one that corresponds with the answer''s `data`. It should not simply be the original `question.name` repeated.'
+example: www.example.com
+flat_name: dns.answers.name
+ignore_above: 1024
+level: extended
+name: answers.name
+type: keyword

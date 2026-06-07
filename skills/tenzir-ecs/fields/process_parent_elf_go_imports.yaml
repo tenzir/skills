@@ -1,0 +1,9 @@
+field: process.parent.elf.go_imports
+fieldset: process
+dashed_name: process-parent-elf-go-imports
+description: List of imported Go language element names and types.
+flat_name: process.parent.elf.go_imports
+level: extended
+name: go_imports
+original_fieldset: elf
+type: flattened

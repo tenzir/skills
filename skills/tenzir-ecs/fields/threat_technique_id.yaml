@@ -1,0 +1,12 @@
+field: threat.technique.id
+fieldset: threat
+dashed_name: threat-technique-id
+description: The id of technique used by this threat. You can use a MITRE ATT&CK® technique, for example. (ex. https://attack.mitre.org/techniques/T1059/)
+example: T1059
+flat_name: threat.technique.id
+ignore_above: 1024
+level: extended
+name: technique.id
+normalize:
+- array
+type: keyword

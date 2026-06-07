@@ -1,0 +1,14 @@
+field: event.duration
+fieldset: event
+dashed_name: event-duration
+description: 'Duration of the event in nanoseconds.
+
+  If `event.start` and `event.end` are known this value should be the difference between the end and start time.'
+flat_name: event.duration
+format: duration
+input_format: nanoseconds
+level: core
+name: duration
+output_format: asMilliseconds
+output_precision: 1
+type: long

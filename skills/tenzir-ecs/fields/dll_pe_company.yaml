@@ -1,0 +1,11 @@
+field: dll.pe.company
+fieldset: dll
+dashed_name: dll-pe-company
+description: Internal company name of the file, provided at compile-time.
+example: Microsoft Corporation
+flat_name: dll.pe.company
+ignore_above: 1024
+level: extended
+name: company
+original_fieldset: pe
+type: keyword

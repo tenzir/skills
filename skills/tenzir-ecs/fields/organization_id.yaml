@@ -1,0 +1,9 @@
+field: organization.id
+fieldset: organization
+dashed_name: organization-id
+description: Unique identifier for the organization.
+flat_name: organization.id
+ignore_above: 1024
+level: extended
+name: id
+type: keyword

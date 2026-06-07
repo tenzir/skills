@@ -1,0 +1,10 @@
+field: package.architecture
+fieldset: package
+dashed_name: package-architecture
+description: Package architecture.
+example: x86_64
+flat_name: package.architecture
+ignore_above: 1024
+level: extended
+name: architecture
+type: keyword

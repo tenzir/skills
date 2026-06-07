@@ -1,0 +1,15 @@
+field: tls.client.certificate_chain
+fieldset: tls
+dashed_name: tls-client-certificate-chain
+description: Array of PEM-encoded certificates that make up the certificate chain offered by the client. This is usually mutually-exclusive of `client.certificate` since that value should be the first certificate in the chain.
+example: '["MII...", "MII..."]'
+flat_name: tls.client.certificate_chain
+ignore_above: 1024
+level: extended
+name: client.certificate_chain
+normalize:
+- array
+otel:
+- relation: match
+  stability: development
+type: keyword

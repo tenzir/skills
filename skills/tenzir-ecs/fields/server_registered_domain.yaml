@@ -1,0 +1,14 @@
+field: server.registered_domain
+fieldset: server
+dashed_name: server-registered-domain
+description: 'The highest registered server domain, stripped of the subdomain.
+
+  For example, the registered domain for "foo.example.com" is "example.com".
+
+  This value can be determined precisely with a list like the public suffix list (https://publicsuffix.org). Trying to approximate this by simply taking the last two labels will not work well for TLDs such as "co.uk".'
+example: example.com
+flat_name: server.registered_domain
+ignore_above: 1024
+level: extended
+name: registered_domain
+type: keyword

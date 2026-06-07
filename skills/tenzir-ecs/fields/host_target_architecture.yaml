@@ -1,0 +1,11 @@
+field: host.target.architecture
+fieldset: host
+dashed_name: host-target-architecture
+description: Operating system architecture.
+example: x86_64
+flat_name: host.target.architecture
+ignore_above: 1024
+level: core
+name: architecture
+original_fieldset: host
+type: keyword

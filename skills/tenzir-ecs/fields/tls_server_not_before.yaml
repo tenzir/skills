@@ -1,0 +1,12 @@
+field: tls.server.not_before
+fieldset: tls
+dashed_name: tls-server-not-before
+description: Timestamp indicating when server certificate is first considered valid.
+example: '1970-01-01T00:00:00.000Z'
+flat_name: tls.server.not_before
+level: extended
+name: server.not_before
+otel:
+- relation: match
+  stability: development
+type: date

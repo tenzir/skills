@@ -1,0 +1,13 @@
+field: file.code_signature.signing_id
+fieldset: file
+dashed_name: file-code-signature-signing-id
+description: 'The identifier used to sign the process.
+
+  This is used to identify the application manufactured by a software vendor. The field is relevant to Apple *OS only.'
+example: com.apple.xpc.proxy
+flat_name: file.code_signature.signing_id
+ignore_above: 1024
+level: extended
+name: signing_id
+original_fieldset: code_signature
+type: keyword

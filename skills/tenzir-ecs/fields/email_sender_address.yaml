@@ -1,0 +1,10 @@
+field: email.sender.address
+fieldset: email
+dashed_name: email-sender-address
+description: Per RFC 5322, specifies the address responsible for the actual transmission of the message.
+flat_name: email.sender.address
+ignore_above: 1024
+level: extended
+name: sender.address
+synthetic_source_keep: none
+type: keyword

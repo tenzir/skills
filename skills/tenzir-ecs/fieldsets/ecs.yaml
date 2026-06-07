@@ -1,0 +1,12 @@
+fieldset: ecs
+description: Meta-information specific to ECS.
+group: 2
+name: ecs
+prefix: ecs.
+title: ECS
+type: group
+fields:
+- name: ecs.version
+  type: keyword
+  description: ECS version this event conforms to.
+  required: true

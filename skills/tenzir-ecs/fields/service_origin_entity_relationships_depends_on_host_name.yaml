@@ -1,0 +1,12 @@
+field: service.origin.entity.relationships.depends_on.host.name
+fieldset: service
+dashed_name: service-origin-entity-relationships-depends-on-host-name
+description: Referenced host names.
+flat_name: service.origin.entity.relationships.depends_on.host.name
+ignore_above: 1024
+level: extended
+name: host.name
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

@@ -1,0 +1,11 @@
+field: host.target.os.kernel
+fieldset: host
+dashed_name: host-target-os-kernel
+description: Operating system kernel version as a raw string.
+example: 4.4.0-112-generic
+flat_name: host.target.os.kernel
+ignore_above: 1024
+level: extended
+name: kernel
+original_fieldset: os
+type: keyword

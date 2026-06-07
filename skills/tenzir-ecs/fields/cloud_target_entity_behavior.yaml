@@ -1,0 +1,10 @@
+field: cloud.target.entity.behavior
+fieldset: cloud
+beta: This field is beta and subject to change.
+dashed_name: cloud-target-entity-behavior
+description: A set of ephemeral characteristics of the entity, derived from observed behaviors during a specific time period. Usually boolean field data type. Use this field set when you need to capture and track ephemeral characteristics of an entity for advanced searching, correlation of normalized values across different providers/sources and entity types.
+flat_name: cloud.target.entity.behavior
+level: extended
+name: behavior
+original_fieldset: entity
+type: object

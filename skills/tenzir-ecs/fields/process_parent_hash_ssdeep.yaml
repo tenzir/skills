@@ -1,0 +1,10 @@
+field: process.parent.hash.ssdeep
+fieldset: process
+dashed_name: process-parent-hash-ssdeep
+description: SSDEEP hash.
+flat_name: process.parent.hash.ssdeep
+ignore_above: 1024
+level: extended
+name: ssdeep
+original_fieldset: hash
+type: keyword

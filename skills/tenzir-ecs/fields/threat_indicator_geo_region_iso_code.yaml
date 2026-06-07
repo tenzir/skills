@@ -1,0 +1,11 @@
+field: threat.indicator.geo.region_iso_code
+fieldset: threat
+dashed_name: threat-indicator-geo-region-iso-code
+description: Region ISO code.
+example: CA-QC
+flat_name: threat.indicator.geo.region_iso_code
+ignore_above: 1024
+level: core
+name: region_iso_code
+original_fieldset: geo
+type: keyword

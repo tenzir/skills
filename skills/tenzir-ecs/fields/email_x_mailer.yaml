@@ -1,0 +1,10 @@
+field: email.x_mailer
+fieldset: email
+dashed_name: email-x-mailer
+description: The name of the application that was used to draft and send the original email message.
+example: Spambot v2.5
+flat_name: email.x_mailer
+ignore_above: 1024
+level: extended
+name: x_mailer
+type: keyword

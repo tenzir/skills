@@ -1,0 +1,11 @@
+field: observer.ip
+fieldset: observer
+dashed_name: observer-ip
+description: IP addresses of the observer.
+flat_name: observer.ip
+level: core
+name: ip
+normalize:
+- array
+synthetic_source_keep: none
+type: ip

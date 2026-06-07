@@ -1,0 +1,11 @@
+field: event.timezone
+fieldset: event
+dashed_name: event-timezone
+description: 'This field should be populated when the event''s timestamp does not include timezone information already (e.g. default Syslog timestamps). It''s optional otherwise.
+
+  Acceptable timezone formats are: a canonical ID (e.g. "Europe/Amsterdam"), abbreviated (e.g. "EST") or an HH:mm differential (e.g. "-05:00").'
+flat_name: event.timezone
+ignore_above: 1024
+level: extended
+name: timezone
+type: keyword

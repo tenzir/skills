@@ -1,0 +1,10 @@
+field: server.geo.location
+fieldset: server
+dashed_name: server-geo-location
+description: Longitude and latitude.
+example: '{ "lon": -73.614830, "lat": 45.505918 }'
+flat_name: server.geo.location
+level: core
+name: location
+original_fieldset: geo
+type: geo_point

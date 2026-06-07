@@ -1,0 +1,11 @@
+field: volume.device_name
+fieldset: volume
+dashed_name: volume-device-name
+description: 'Full path of the volume device.
+
+  Only populate this field for POSIX system volumes.'
+flat_name: volume.device_name
+ignore_above: 1024
+level: extended
+name: device_name
+type: keyword

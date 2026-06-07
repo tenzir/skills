@@ -1,0 +1,15 @@
+field: device.product.id
+fieldset: device
+beta: This field is beta and subject to change.
+dashed_name: device-product-id
+description: 'A unique identifier assigned by the vendor to distinguish different product models. This is typically a hexadecimal value that, combined with the vendor ID, creates a globally unique device identifier.
+
+  The product ID is assigned by the device manufacturer and should remain consistent across all instances of the same product model. For hardware devices, this often corresponds to the Product ID (PID) in device descriptors.
+
+  See https://learn.microsoft.com/en-us/windows-hardware/drivers/install/standard-usb-identifiers for more details on product identification standards.'
+example: 43981
+flat_name: device.product.id
+ignore_above: 1024
+level: extended
+name: product.id
+type: keyword

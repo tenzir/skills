@@ -1,0 +1,12 @@
+field: volume.device_type
+fieldset: volume
+dashed_name: volume-device-type
+description: 'Volume device type.
+
+  The most frequently seen volume device types are `Disk File System` and `CD-ROM File System`.'
+example: CD-ROM File System
+flat_name: volume.device_type
+ignore_above: 1024
+level: extended
+name: device_type
+type: keyword

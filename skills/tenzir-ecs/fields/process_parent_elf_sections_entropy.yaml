@@ -1,0 +1,10 @@
+field: process.parent.elf.sections.entropy
+fieldset: process
+dashed_name: process-parent-elf-sections-entropy
+description: Shannon entropy calculation from the section.
+flat_name: process.parent.elf.sections.entropy
+format: number
+level: extended
+name: sections.entropy
+original_fieldset: elf
+type: long

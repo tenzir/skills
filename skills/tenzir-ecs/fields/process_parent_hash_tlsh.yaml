@@ -1,0 +1,10 @@
+field: process.parent.hash.tlsh
+fieldset: process
+dashed_name: process-parent-hash-tlsh
+description: TLSH hash.
+flat_name: process.parent.hash.tlsh
+ignore_above: 1024
+level: extended
+name: tlsh
+original_fieldset: hash
+type: keyword

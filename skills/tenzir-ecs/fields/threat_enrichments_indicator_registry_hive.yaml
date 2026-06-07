@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.registry.hive
+fieldset: threat
+dashed_name: threat-enrichments-indicator-registry-hive
+description: Abbreviated name for the hive.
+example: HKLM
+flat_name: threat.enrichments.indicator.registry.hive
+ignore_above: 1024
+level: core
+name: hive
+original_fieldset: registry
+type: keyword

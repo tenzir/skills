@@ -1,0 +1,15 @@
+field: device.type
+fieldset: device
+beta: This field is beta and subject to change.
+dashed_name: device-type
+description: 'A classification of the device based on its primary function or device class. This field categorizes devices into functional groups to enable policy enforcement and monitoring based on device capabilities.
+
+  The classification should follow standard device class definitions where possible, such as "Storage Device", "Human Interface Device", "Audio", "Video", "Network", "Communication", etc. This allows for consistent categorization across different device types and manufacturers.
+
+  See https://www.usb.org/defined-class-codes for standard device class definitions.'
+example: Storage Device
+flat_name: device.type
+ignore_above: 1024
+level: extended
+name: type
+type: keyword

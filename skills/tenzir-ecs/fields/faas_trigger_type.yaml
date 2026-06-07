@@ -1,0 +1,20 @@
+field: faas.trigger.type
+fieldset: faas
+dashed_name: faas-trigger-type
+description: The trigger for the function execution.
+example: http
+expected_values:
+- http
+- pubsub
+- datasource
+- timer
+- other
+flat_name: faas.trigger.type
+ignore_above: 1024
+level: extended
+name: trigger.type
+otel:
+- attribute: faas.trigger
+  relation: equivalent
+  stability: development
+type: keyword

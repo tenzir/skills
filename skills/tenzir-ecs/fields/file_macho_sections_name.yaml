@@ -1,0 +1,10 @@
+field: file.macho.sections.name
+fieldset: file
+dashed_name: file-macho-sections-name
+description: Mach-O Section List name.
+flat_name: file.macho.sections.name
+ignore_above: 1024
+level: extended
+name: sections.name
+original_fieldset: macho
+type: keyword

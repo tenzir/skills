@@ -1,0 +1,10 @@
+field: package.install_scope
+fieldset: package
+dashed_name: package-install-scope
+description: Indicating how the package was installed, e.g. user-local, global.
+example: global
+flat_name: package.install_scope
+ignore_above: 1024
+level: extended
+name: install_scope
+type: keyword

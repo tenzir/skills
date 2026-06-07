@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.geo.country_iso_code
+fieldset: threat
+dashed_name: threat-enrichments-indicator-geo-country-iso-code
+description: Country ISO code.
+example: CA
+flat_name: threat.enrichments.indicator.geo.country_iso_code
+ignore_above: 1024
+level: core
+name: country_iso_code
+original_fieldset: geo
+type: keyword

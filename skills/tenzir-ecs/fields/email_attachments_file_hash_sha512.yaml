@@ -1,0 +1,10 @@
+field: email.attachments.file.hash.sha512
+fieldset: email
+dashed_name: email-attachments-file-hash-sha512
+description: SHA512 hash.
+flat_name: email.attachments.file.hash.sha512
+ignore_above: 1024
+level: extended
+name: sha512
+original_fieldset: hash
+type: keyword

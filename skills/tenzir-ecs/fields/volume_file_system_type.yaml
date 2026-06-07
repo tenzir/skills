@@ -1,0 +1,11 @@
+field: volume.file_system_type
+fieldset: volume
+dashed_name: volume-file-system-type
+description: 'Volume device file system type.
+
+  The most common volume file system types are `NTFS` and `UDF`.'
+flat_name: volume.file_system_type
+ignore_above: 1024
+level: extended
+name: file_system_type
+type: keyword

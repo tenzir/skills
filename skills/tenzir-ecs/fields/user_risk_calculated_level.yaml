@@ -1,0 +1,11 @@
+field: user.risk.calculated_level
+fieldset: user
+dashed_name: user-risk-calculated-level
+description: A risk classification level calculated by an internal system as part of entity analytics and entity risk scoring.
+example: High
+flat_name: user.risk.calculated_level
+ignore_above: 1024
+level: extended
+name: calculated_level
+original_fieldset: risk
+type: keyword

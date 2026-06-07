@@ -1,0 +1,10 @@
+field: orchestrator.resource.name
+fieldset: orchestrator
+dashed_name: orchestrator-resource-name
+description: Name of the resource being acted upon.
+example: test-pod-cdcws
+flat_name: orchestrator.resource.name
+ignore_above: 1024
+level: extended
+name: resource.name
+type: keyword

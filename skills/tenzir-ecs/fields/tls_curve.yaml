@@ -1,0 +1,13 @@
+field: tls.curve
+fieldset: tls
+dashed_name: tls-curve
+description: String indicating the curve used for the given cipher, when applicable.
+example: secp256r1
+flat_name: tls.curve
+ignore_above: 1024
+level: extended
+name: curve
+otel:
+- relation: match
+  stability: development
+type: keyword

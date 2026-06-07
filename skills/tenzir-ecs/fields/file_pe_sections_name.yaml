@@ -1,0 +1,10 @@
+field: file.pe.sections.name
+fieldset: file
+dashed_name: file-pe-sections-name
+description: PE Section List name.
+flat_name: file.pe.sections.name
+ignore_above: 1024
+level: extended
+name: sections.name
+original_fieldset: pe
+type: keyword

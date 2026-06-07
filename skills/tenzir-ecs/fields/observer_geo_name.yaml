@@ -1,0 +1,15 @@
+field: observer.geo.name
+fieldset: observer
+dashed_name: observer-geo-name
+description: 'User-defined description of a location, at the level of granularity they care about.
+
+  Could be the name of their data centers, the floor number, if this describes a local physical entity, city names.
+
+  Not typically used in automated geolocation.'
+example: boston-dc
+flat_name: observer.geo.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: geo
+type: keyword

@@ -1,0 +1,11 @@
+field: volume.vendor_id
+fieldset: volume
+dashed_name: volume-vendor-id
+description: 'VendorID of the volume device.
+
+  The volume device vendor provides this value.'
+flat_name: volume.vendor_id
+ignore_above: 1024
+level: extended
+name: vendor_id
+type: keyword

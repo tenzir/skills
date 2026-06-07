@@ -1,0 +1,13 @@
+field: gen_ai.usage.output_tokens
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-usage-output-tokens
+description: The number of tokens used in the GenAI response (completion).
+example: 180
+flat_name: gen_ai.usage.output_tokens
+level: extended
+name: usage.output_tokens
+otel:
+- relation: match
+  stability: development
+type: integer

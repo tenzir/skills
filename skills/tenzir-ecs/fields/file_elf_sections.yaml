@@ -1,0 +1,13 @@
+field: file.elf.sections
+fieldset: file
+dashed_name: file-elf-sections
+description: 'An array containing an object for each section of the ELF file.
+
+  The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.'
+flat_name: file.elf.sections
+level: extended
+name: sections
+normalize:
+- array
+original_fieldset: elf
+type: nested

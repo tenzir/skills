@@ -1,0 +1,9 @@
+field: threat.indicator.url.path
+fieldset: threat
+dashed_name: threat-indicator-url-path
+description: Path of the request, such as "/search".
+flat_name: threat.indicator.url.path
+level: extended
+name: path
+original_fieldset: url
+type: wildcard

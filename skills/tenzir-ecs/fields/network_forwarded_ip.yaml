@@ -1,0 +1,9 @@
+field: network.forwarded_ip
+fieldset: network
+dashed_name: network-forwarded-ip
+description: Host IP address when the source IP address is the proxy.
+example: 192.1.1.2
+flat_name: network.forwarded_ip
+level: core
+name: forwarded_ip
+type: ip

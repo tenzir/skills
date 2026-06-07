@@ -1,0 +1,15 @@
+field: threat.indicator.file.path
+fieldset: threat
+dashed_name: threat-indicator-file-path
+description: Full path to the file, including the file name. It should include the drive letter, when appropriate.
+example: /home/alice/example.png
+flat_name: threat.indicator.file.path
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: threat.indicator.file.path.text
+  name: text
+  type: match_only_text
+name: path
+original_fieldset: file
+type: keyword

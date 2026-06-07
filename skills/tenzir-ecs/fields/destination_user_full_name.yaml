@@ -1,0 +1,15 @@
+field: destination.user.full_name
+fieldset: destination
+dashed_name: destination-user-full-name
+description: User's full name, if available.
+example: Albert Einstein
+flat_name: destination.user.full_name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: destination.user.full_name.text
+  name: text
+  type: match_only_text
+name: full_name
+original_fieldset: user
+type: keyword

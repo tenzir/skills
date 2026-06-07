@@ -1,0 +1,11 @@
+field: volume.serial_number
+fieldset: volume
+dashed_name: volume-serial-number
+description: 'Serial number identifier for the volume device.
+
+  The serial number is provided by the vendor of the device, if any.'
+flat_name: volume.serial_number
+ignore_above: 1024
+level: extended
+name: serial_number
+type: keyword

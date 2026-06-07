@@ -1,0 +1,11 @@
+field: user_agent.os.platform
+fieldset: user_agent
+dashed_name: user-agent-os-platform
+description: Operating system platform (such centos, ubuntu, windows).
+example: darwin
+flat_name: user_agent.os.platform
+ignore_above: 1024
+level: extended
+name: platform
+original_fieldset: os
+type: keyword

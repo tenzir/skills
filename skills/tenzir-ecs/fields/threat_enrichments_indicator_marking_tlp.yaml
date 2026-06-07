@@ -1,0 +1,17 @@
+field: threat.enrichments.indicator.marking.tlp
+fieldset: threat
+dashed_name: threat-enrichments-indicator-marking-tlp
+description: Traffic Light Protocol sharing markings.
+example: CLEAR
+expected_values:
+- WHITE
+- CLEAR
+- GREEN
+- AMBER
+- AMBER+STRICT
+- RED
+flat_name: threat.enrichments.indicator.marking.tlp
+ignore_above: 1024
+level: extended
+name: enrichments.indicator.marking.tlp
+type: keyword

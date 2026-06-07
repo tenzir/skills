@@ -1,0 +1,12 @@
+field: event.code
+fieldset: event
+dashed_name: event-code
+description: 'Identification code for this event, if one exists.
+
+  Some event sources use event codes to identify messages unambiguously, regardless of message language or wording adjustments over time. An example of this is the Windows Event ID.'
+example: 4648
+flat_name: event.code
+ignore_above: 1024
+level: extended
+name: code
+type: keyword

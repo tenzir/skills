@@ -1,0 +1,8 @@
+field: client.ip
+fieldset: client
+dashed_name: client-ip
+description: IP address of the client (IPv4 or IPv6).
+flat_name: client.ip
+level: core
+name: ip
+type: ip

@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.file.group
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-group
+description: Primary group name of the file.
+example: alice
+flat_name: threat.enrichments.indicator.file.group
+ignore_above: 1024
+level: extended
+name: group
+original_fieldset: file
+type: keyword

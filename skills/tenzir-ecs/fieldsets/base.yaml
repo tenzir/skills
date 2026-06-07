@@ -1,0 +1,24 @@
+fieldset: base
+description: The `base` field set contains all fields which are at the root of the events. These fields are common across all types of events.
+group: 1
+name: base
+prefix: ''
+root: true
+title: Base
+type: group
+fields:
+- name: '@timestamp'
+  type: date
+  description: Date/time when the event originated.
+  required: true
+- name: labels
+  type: object
+  description: Custom key/value pairs.
+- name: message
+  type: match_only_text
+  description: Log message optimized for viewing in a log viewer.
+- name: tags
+  type: keyword
+  description: List of keywords used to tag each event.
+  normalize:
+  - array

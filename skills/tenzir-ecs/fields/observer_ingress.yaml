@@ -1,0 +1,8 @@
+field: observer.ingress
+fieldset: observer
+dashed_name: observer-ingress
+description: Observer.ingress holds information like interface number and name, vlan, and zone information to classify ingress traffic.  Single armed monitoring such as a network sensor on a span port should only use observer.ingress to categorize traffic.
+flat_name: observer.ingress
+level: extended
+name: ingress
+type: object

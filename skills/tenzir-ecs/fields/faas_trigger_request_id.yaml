@@ -1,0 +1,10 @@
+field: faas.trigger.request_id
+fieldset: faas
+dashed_name: faas-trigger-request-id
+description: The ID of the trigger request , message, event, etc.
+example: 123456789
+flat_name: faas.trigger.request_id
+ignore_above: 1024
+level: extended
+name: trigger.request_id
+type: keyword

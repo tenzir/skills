@@ -1,0 +1,11 @@
+field: process.parent.pe.description
+fieldset: process
+dashed_name: process-parent-pe-description
+description: Internal description of the file, provided at compile-time.
+example: Paint
+flat_name: process.parent.pe.description
+ignore_above: 1024
+level: extended
+name: description
+original_fieldset: pe
+type: keyword

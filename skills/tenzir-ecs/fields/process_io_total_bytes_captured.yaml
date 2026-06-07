@@ -1,0 +1,8 @@
+field: process.io.total_bytes_captured
+fieldset: process
+dashed_name: process-io-total-bytes-captured
+description: The total number of bytes captured in this event.
+flat_name: process.io.total_bytes_captured
+level: extended
+name: io.total_bytes_captured
+type: long

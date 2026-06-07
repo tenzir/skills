@@ -1,0 +1,12 @@
+field: threat.software.id
+fieldset: threat
+dashed_name: threat-software-id
+description: 'The id of the software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+
+  While not required, you can use a MITRE ATT&CK® software id.'
+example: S0552
+flat_name: threat.software.id
+ignore_above: 1024
+level: extended
+name: software.id
+type: keyword

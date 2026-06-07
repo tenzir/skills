@@ -1,0 +1,10 @@
+field: orchestrator.namespace
+fieldset: orchestrator
+dashed_name: orchestrator-namespace
+description: Namespace in which the action is taking place.
+example: kube-system
+flat_name: orchestrator.namespace
+ignore_above: 1024
+level: extended
+name: namespace
+type: keyword

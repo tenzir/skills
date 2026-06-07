@@ -1,0 +1,11 @@
+field: cloud.origin.entity.attributes.oauth_consent_restriction
+fieldset: cloud
+beta: This field is beta and subject to change.
+dashed_name: cloud-origin-entity-attributes-oauth-consent-restriction
+description: Restriction applied to OAuth consent for this entity (for example `admin_only`, `verified_only`, `unrestricted`). Typically applicable to Service entities.
+flat_name: cloud.origin.entity.attributes.oauth_consent_restriction
+ignore_above: 1024
+level: extended
+name: attributes.oauth_consent_restriction
+original_fieldset: entity
+type: keyword

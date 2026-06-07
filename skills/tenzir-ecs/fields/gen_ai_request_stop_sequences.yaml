@@ -1,0 +1,13 @@
+field: gen_ai.request.stop_sequences
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-stop-sequences
+description: List of sequences that the model will use to stop generating further tokens.
+example: '["forest", "lived"]'
+flat_name: gen_ai.request.stop_sequences
+level: extended
+name: request.stop_sequences
+otel:
+- relation: match
+  stability: development
+type: nested

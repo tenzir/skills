@@ -1,0 +1,11 @@
+field: process.parent.elf.imports
+fieldset: process
+dashed_name: process-parent-elf-imports
+description: List of imported element names and types.
+flat_name: process.parent.elf.imports
+level: extended
+name: imports
+normalize:
+- array
+original_fieldset: elf
+type: flattened

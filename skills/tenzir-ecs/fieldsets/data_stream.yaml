@@ -1,0 +1,22 @@
+fieldset: data_stream
+beta: These fields are in beta and are subject to change.
+description: 'The data_stream fields take part in defining the new data stream naming scheme.
+
+  In the new data stream naming scheme the value of the data stream fields combine to the name of the actual data stream in the following manner: `{data_stream.type}-{data_stream.dataset}-{data_stream.namespace}`. This means the fields can only contain characters that are valid as part of names of data streams. More details about this can be found in this https://www.elastic.co/blog/an-introduction-to-the-elastic-data-stream-naming-scheme[blog post].
+
+  An Elasticsearch data stream consists of one or more backing indices, and a data stream name forms part of the backing indices names. Due to this convention, data streams must also follow index naming restrictions. For example, data stream names cannot include `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, ` ` (space character), `,`, or `#`. Please see the Elasticsearch reference for additional restrictions: https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html#indices-create-api-path-params.'
+group: 2
+name: data_stream
+prefix: data_stream.
+title: Data Stream
+type: group
+fields:
+- name: data_stream.dataset
+  type: constant_keyword
+  description: The field can contain anything that makes sense to signify the source of the data.
+- name: data_stream.namespace
+  type: constant_keyword
+  description: A user defined namespace. Namespaces are useful to allow grouping of data.
+- name: data_stream.type
+  type: constant_keyword
+  description: An overarching type for the data stream.

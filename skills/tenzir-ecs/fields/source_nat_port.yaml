@@ -1,0 +1,11 @@
+field: source.nat.port
+fieldset: source
+dashed_name: source-nat-port
+description: 'Translated port of source based NAT sessions. (e.g. internal client to internet)
+
+  Typically used with load balancers, firewalls, or routers.'
+flat_name: source.nat.port
+format: string
+level: extended
+name: nat.port
+type: long

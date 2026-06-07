@@ -1,0 +1,10 @@
+field: log.syslog.procid
+fieldset: log
+dashed_name: log-syslog-procid
+description: The process name or ID that originated the Syslog message, if available.
+example: 12345
+flat_name: log.syslog.procid
+ignore_above: 1024
+level: extended
+name: syslog.procid
+type: keyword

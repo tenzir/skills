@@ -1,0 +1,10 @@
+field: dll.hash.tlsh
+fieldset: dll
+dashed_name: dll-hash-tlsh
+description: TLSH hash.
+flat_name: dll.hash.tlsh
+ignore_above: 1024
+level: extended
+name: tlsh
+original_fieldset: hash
+type: keyword

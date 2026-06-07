@@ -1,0 +1,13 @@
+field: organization.name
+fieldset: organization
+dashed_name: organization-name
+description: Organization name.
+flat_name: organization.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: organization.name.text
+  name: text
+  type: match_only_text
+name: name
+type: keyword

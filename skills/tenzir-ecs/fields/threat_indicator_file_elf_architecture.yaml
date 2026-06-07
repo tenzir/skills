@@ -1,0 +1,11 @@
+field: threat.indicator.file.elf.architecture
+fieldset: threat
+dashed_name: threat-indicator-file-elf-architecture
+description: Machine architecture of the ELF file.
+example: x86-64
+flat_name: threat.indicator.file.elf.architecture
+ignore_above: 1024
+level: extended
+name: architecture
+original_fieldset: elf
+type: keyword

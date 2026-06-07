@@ -1,0 +1,10 @@
+field: tls.version
+fieldset: tls
+dashed_name: tls-version
+description: Numeric part of the version parsed from the original string.
+example: '1.2'
+flat_name: tls.version
+ignore_above: 1024
+level: extended
+name: version
+type: keyword

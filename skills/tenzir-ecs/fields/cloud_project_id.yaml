@@ -1,0 +1,12 @@
+field: cloud.project.id
+fieldset: cloud
+dashed_name: cloud-project-id
+description: 'The cloud project identifier.
+
+  Examples: Google Cloud Project id, Azure Project id.'
+example: my-project
+flat_name: cloud.project.id
+ignore_above: 1024
+level: extended
+name: project.id
+type: keyword

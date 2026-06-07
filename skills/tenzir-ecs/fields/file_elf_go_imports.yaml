@@ -1,0 +1,9 @@
+field: file.elf.go_imports
+fieldset: file
+dashed_name: file-elf-go-imports
+description: List of imported Go language element names and types.
+flat_name: file.elf.go_imports
+level: extended
+name: go_imports
+original_fieldset: elf
+type: flattened

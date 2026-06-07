@@ -1,0 +1,10 @@
+field: orchestrator.resource.parent.type
+fieldset: orchestrator
+dashed_name: orchestrator-resource-parent-type
+description: Type or kind of the parent resource associated with the event being observed. In Kubernetes, this will be the name of a built-in workload resource (e.g., Deployment, StatefulSet, DaemonSet).
+example: DaemonSet
+flat_name: orchestrator.resource.parent.type
+ignore_above: 1024
+level: extended
+name: resource.parent.type
+type: keyword

@@ -1,0 +1,10 @@
+field: file.type
+fieldset: file
+dashed_name: file-type
+description: File type (file, dir, or symlink).
+example: file
+flat_name: file.type
+ignore_above: 1024
+level: extended
+name: type
+type: keyword

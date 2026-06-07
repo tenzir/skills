@@ -1,0 +1,14 @@
+field: file.gid
+fieldset: file
+dashed_name: file-gid
+description: Primary group ID (GID) of the file.
+example: '1001'
+flat_name: file.gid
+ignore_above: 1024
+level: extended
+name: gid
+otel:
+- attribute: file.group.id
+  relation: equivalent
+  stability: development
+type: keyword

@@ -19,6 +19,7 @@ not be edited by hand here:
 
 - `skills/tenzir-asim/`
 - `skills/tenzir-cim/`
+- `skills/tenzir-ecs/`
 - `skills/tenzir-docs/`
 - `skills/tenzir-ocsf/`
 - `skills/tenzir-ship/`

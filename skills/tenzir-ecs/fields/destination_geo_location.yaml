@@ -1,0 +1,10 @@
+field: destination.geo.location
+fieldset: destination
+dashed_name: destination-geo-location
+description: Longitude and latitude.
+example: '{ "lon": -73.614830, "lat": 45.505918 }'
+flat_name: destination.geo.location
+level: core
+name: location
+original_fieldset: geo
+type: geo_point

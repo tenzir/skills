@@ -1,0 +1,13 @@
+field: tls.cipher
+fieldset: tls
+dashed_name: tls-cipher
+description: String indicating the cipher used during the current connection.
+example: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+flat_name: tls.cipher
+ignore_above: 1024
+level: extended
+name: cipher
+otel:
+- relation: match
+  stability: development
+type: keyword

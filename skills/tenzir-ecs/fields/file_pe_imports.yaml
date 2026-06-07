@@ -1,0 +1,11 @@
+field: file.pe.imports
+fieldset: file
+dashed_name: file-pe-imports
+description: List of imported element names and types.
+flat_name: file.pe.imports
+level: extended
+name: imports
+normalize:
+- array
+original_fieldset: pe
+type: flattened

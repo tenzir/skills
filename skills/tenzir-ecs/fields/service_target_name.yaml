@@ -1,0 +1,15 @@
+field: service.target.name
+fieldset: service
+dashed_name: service-target-name
+description: 'Name of the service data is collected from.
+
+  The name of the service is normally user given. This allows for distributed services that run on multiple hosts to correlate the related instances based on the name.
+
+  In the case of Elasticsearch the `service.name` could contain the cluster name. For Beats the `service.name` is by default a copy of the `service.type` field if no name is specified.'
+example: elasticsearch-metrics
+flat_name: service.target.name
+ignore_above: 1024
+level: core
+name: name
+original_fieldset: service
+type: keyword

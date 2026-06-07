@@ -1,0 +1,10 @@
+field: threat.feed.reference
+fieldset: threat
+dashed_name: threat-feed-reference
+description: Reference information for the threat feed in a UI friendly format.
+example: https://otx.alienvault.com
+flat_name: threat.feed.reference
+ignore_above: 1024
+level: extended
+name: feed.reference
+type: keyword

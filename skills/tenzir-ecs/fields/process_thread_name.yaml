@@ -1,0 +1,10 @@
+field: process.thread.name
+fieldset: process
+dashed_name: process-thread-name
+description: Thread name.
+example: thread-0
+flat_name: process.thread.name
+ignore_above: 1024
+level: extended
+name: thread.name
+type: keyword

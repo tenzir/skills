@@ -1,0 +1,13 @@
+field: tls.server.x509.subject.state_or_province
+fieldset: tls
+dashed_name: tls-server-x509-subject-state-or-province
+description: List of state or province names (ST, S, or P)
+example: California
+flat_name: tls.server.x509.subject.state_or_province
+ignore_above: 1024
+level: extended
+name: subject.state_or_province
+normalize:
+- array
+original_fieldset: x509
+type: keyword

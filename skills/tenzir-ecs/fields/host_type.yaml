@@ -1,0 +1,14 @@
+field: host.type
+fieldset: host
+dashed_name: host-type
+description: 'Type of host.
+
+  For Cloud providers this can be the machine type like `t2.medium`. If vm, this could be the container, for example, or other information meaningful in your environment.'
+flat_name: host.type
+ignore_above: 1024
+level: core
+name: type
+otel:
+- relation: match
+  stability: development
+type: keyword

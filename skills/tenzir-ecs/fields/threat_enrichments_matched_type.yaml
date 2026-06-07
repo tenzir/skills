@@ -1,0 +1,10 @@
+field: threat.enrichments.matched.type
+fieldset: threat
+dashed_name: threat-enrichments-matched-type
+description: Identifies the type of match that caused the event to be enriched with the given indicator
+example: indicator_match_rule
+flat_name: threat.enrichments.matched.type
+ignore_above: 1024
+level: extended
+name: enrichments.matched.type
+type: keyword

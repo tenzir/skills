@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.file.x509.subject.distinguished_name
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-x509-subject-distinguished-name
+description: Distinguished name (DN) of the certificate subject entity.
+example: C=US, ST=California, L=San Francisco, O=Example, Inc., CN=shared.global.example.net
+flat_name: threat.enrichments.indicator.file.x509.subject.distinguished_name
+ignore_above: 1024
+level: extended
+name: subject.distinguished_name
+original_fieldset: x509
+type: keyword

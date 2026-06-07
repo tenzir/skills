@@ -1,0 +1,13 @@
+field: process.parent.code_signature.status
+fieldset: process
+dashed_name: process-parent-code-signature-status
+description: 'Additional information about the certificate status.
+
+  This is useful for logging cryptographic errors with the certificate validity or trust status. Leave unpopulated if the validity or trust of the certificate was unchecked.'
+example: ERROR_UNTRUSTED_ROOT
+flat_name: process.parent.code_signature.status
+ignore_above: 1024
+level: extended
+name: status
+original_fieldset: code_signature
+type: keyword

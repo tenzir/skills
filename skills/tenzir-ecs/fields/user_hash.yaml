@@ -1,0 +1,14 @@
+field: user.hash
+fieldset: user
+dashed_name: user-hash
+description: 'Unique user hash to correlate information for a user in anonymized form.
+
+  Useful if `user.id` or `user.name` contain confidential information and cannot be used.'
+flat_name: user.hash
+ignore_above: 1024
+level: extended
+name: hash
+otel:
+- relation: match
+  stability: development
+type: keyword

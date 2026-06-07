@@ -1,0 +1,10 @@
+field: destination.as.number
+fieldset: destination
+dashed_name: destination-as-number
+description: Unique number allocated to the autonomous system. The autonomous system number (ASN) uniquely identifies each network on the Internet.
+example: 15169
+flat_name: destination.as.number
+level: extended
+name: number
+original_fieldset: as
+type: long

@@ -1,0 +1,13 @@
+field: container.memory.usage
+fieldset: container
+dashed_name: container-memory-usage
+description: 'Memory usage percentage and it ranges from 0 to 1. Scaling factor: 1000.'
+flat_name: container.memory.usage
+level: extended
+name: memory.usage
+otel:
+- metric: container.memory.usage
+  relation: metric
+  stability: development
+scaling_factor: 1000
+type: scaled_float

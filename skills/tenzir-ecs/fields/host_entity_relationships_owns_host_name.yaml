@@ -1,0 +1,12 @@
+field: host.entity.relationships.owns.host.name
+fieldset: host
+dashed_name: host-entity-relationships-owns-host-name
+description: Referenced host names.
+flat_name: host.entity.relationships.owns.host.name
+ignore_above: 1024
+level: extended
+name: host.name
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

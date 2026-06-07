@@ -1,0 +1,10 @@
+field: user.effective.email
+fieldset: user
+dashed_name: user-effective-email
+description: User email address.
+flat_name: user.effective.email
+ignore_above: 1024
+level: extended
+name: email
+original_fieldset: user
+type: keyword

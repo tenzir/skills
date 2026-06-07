@@ -1,0 +1,11 @@
+field: tls.resumed
+fieldset: tls
+dashed_name: tls-resumed
+description: Boolean flag indicating if this TLS connection was resumed from an existing TLS negotiation.
+flat_name: tls.resumed
+level: extended
+name: resumed
+otel:
+- relation: match
+  stability: development
+type: boolean

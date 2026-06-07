@@ -1,0 +1,12 @@
+field: cloud.project.name
+fieldset: cloud
+dashed_name: cloud-project-name
+description: 'The cloud project name.
+
+  Examples: Google Cloud Project name, Azure Project name.'
+example: my project
+flat_name: cloud.project.name
+ignore_above: 1024
+level: extended
+name: project.name
+type: keyword

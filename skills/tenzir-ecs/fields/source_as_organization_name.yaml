@@ -1,0 +1,15 @@
+field: source.as.organization.name
+fieldset: source
+dashed_name: source-as-organization-name
+description: Organization name.
+example: Google LLC
+flat_name: source.as.organization.name
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: source.as.organization.name.text
+  name: text
+  type: match_only_text
+name: organization.name
+original_fieldset: as
+type: keyword

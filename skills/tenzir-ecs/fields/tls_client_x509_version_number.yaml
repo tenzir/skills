@@ -1,0 +1,11 @@
+field: tls.client.x509.version_number
+fieldset: tls
+dashed_name: tls-client-x509-version-number
+description: Version of x509 format.
+example: 3
+flat_name: tls.client.x509.version_number
+ignore_above: 1024
+level: extended
+name: version_number
+original_fieldset: x509
+type: keyword

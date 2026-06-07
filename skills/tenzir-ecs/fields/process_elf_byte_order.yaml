@@ -1,0 +1,11 @@
+field: process.elf.byte_order
+fieldset: process
+dashed_name: process-elf-byte-order
+description: Byte sequence of ELF file.
+example: Little Endian
+flat_name: process.elf.byte_order
+ignore_above: 1024
+level: extended
+name: byte_order
+original_fieldset: elf
+type: keyword

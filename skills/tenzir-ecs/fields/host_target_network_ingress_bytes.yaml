@@ -1,0 +1,9 @@
+field: host.target.network.ingress.bytes
+fieldset: host
+dashed_name: host-target-network-ingress-bytes
+description: The number of bytes received (gauge) on all network interfaces by the host since the last metric collection.
+flat_name: host.target.network.ingress.bytes
+level: extended
+name: network.ingress.bytes
+original_fieldset: host
+type: long

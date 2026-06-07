@@ -1,0 +1,8 @@
+field: process.tty
+fieldset: process
+dashed_name: process-tty
+description: Information about the controlling TTY device. If set, the process belongs to an interactive session.
+flat_name: process.tty
+level: extended
+name: tty
+type: object

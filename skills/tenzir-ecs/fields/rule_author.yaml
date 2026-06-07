@@ -1,0 +1,13 @@
+field: rule.author
+fieldset: rule
+dashed_name: rule-author
+description: Name, organization, or pseudonym of the author or authors who created the rule used to generate this event.
+example: '["Star-Lord"]'
+flat_name: rule.author
+ignore_above: 1024
+level: extended
+name: author
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

@@ -1,0 +1,10 @@
+field: process.parent.tty.char_device.major
+fieldset: process
+dashed_name: process-parent-tty-char-device-major
+description: The major number identifies the driver associated with the device. The character device's major and minor numbers can be algorithmically combined to produce the more familiar terminal identifiers such as "ttyS0" and "pts/0". For more details, please refer to the Linux kernel documentation.
+example: 4
+flat_name: process.parent.tty.char_device.major
+level: extended
+name: tty.char_device.major
+original_fieldset: process
+type: long

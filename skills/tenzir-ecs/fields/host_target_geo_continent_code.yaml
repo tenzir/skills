@@ -1,0 +1,11 @@
+field: host.target.geo.continent_code
+fieldset: host
+dashed_name: host-target-geo-continent-code
+description: Two-letter code representing continent's name.
+example: NA
+flat_name: host.target.geo.continent_code
+ignore_above: 1024
+level: core
+name: continent_code
+original_fieldset: geo
+type: keyword

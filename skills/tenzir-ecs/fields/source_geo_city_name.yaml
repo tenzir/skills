@@ -1,0 +1,11 @@
+field: source.geo.city_name
+fieldset: source
+dashed_name: source-geo-city-name
+description: City name.
+example: Montreal
+flat_name: source.geo.city_name
+ignore_above: 1024
+level: core
+name: city_name
+original_fieldset: geo
+type: keyword

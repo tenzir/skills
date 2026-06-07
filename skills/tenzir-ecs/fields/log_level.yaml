@@ -1,0 +1,18 @@
+field: log.level
+fieldset: log
+dashed_name: log-level
+description: 'Original log level of the log event.
+
+  If the source of the event provides a log level or textual severity, this is the one that goes in `log.level`. If your source doesn''t specify one, you may put your event transport''s severity here (e.g. Syslog severity).
+
+  Some examples are `warn`, `err`, `i`, `informational`.'
+example: error
+flat_name: log.level
+ignore_above: 1024
+level: core
+name: level
+otel:
+- otlp_field: severity_text
+  relation: otlp
+  stability: stable
+type: keyword

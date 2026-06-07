@@ -1,0 +1,10 @@
+field: log.syslog.msgid
+fieldset: log
+dashed_name: log-syslog-msgid
+description: An identifier for the type of Syslog message, if available. Only applicable for RFC 5424 messages.
+example: ID47
+flat_name: log.syslog.msgid
+ignore_above: 1024
+level: extended
+name: syslog.msgid
+type: keyword

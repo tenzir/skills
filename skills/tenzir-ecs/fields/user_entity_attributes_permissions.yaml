@@ -1,0 +1,13 @@
+field: user.entity.attributes.permissions
+fieldset: user
+beta: This field is beta and subject to change.
+dashed_name: user-entity-attributes-permissions
+description: Action-level permissions associated with this entity (not roles or groups). Typically applicable to User, Host, and Service entities.
+flat_name: user.entity.attributes.permissions
+ignore_above: 1024
+level: extended
+name: attributes.permissions
+normalize:
+- array
+original_fieldset: entity
+type: keyword

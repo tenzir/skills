@@ -1,0 +1,13 @@
+field: gen_ai.usage.input_tokens
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-usage-input-tokens
+description: The number of tokens used in the GenAI input (prompt).
+example: 100
+flat_name: gen_ai.usage.input_tokens
+level: extended
+name: usage.input_tokens
+otel:
+- relation: match
+  stability: development
+type: integer

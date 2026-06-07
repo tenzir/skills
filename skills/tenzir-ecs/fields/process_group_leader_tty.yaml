@@ -1,0 +1,9 @@
+field: process.group_leader.tty
+fieldset: process
+dashed_name: process-group-leader-tty
+description: Information about the controlling TTY device. If set, the process belongs to an interactive session.
+flat_name: process.group_leader.tty
+level: extended
+name: tty
+original_fieldset: process
+type: object

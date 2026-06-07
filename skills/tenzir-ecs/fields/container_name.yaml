@@ -1,0 +1,12 @@
+field: container.name
+fieldset: container
+dashed_name: container-name
+description: Container name.
+flat_name: container.name
+ignore_above: 1024
+level: extended
+name: name
+otel:
+- relation: match
+  stability: development
+type: keyword

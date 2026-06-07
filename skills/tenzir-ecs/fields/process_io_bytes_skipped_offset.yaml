@@ -1,0 +1,8 @@
+field: process.io.bytes_skipped.offset
+fieldset: process
+dashed_name: process-io-bytes-skipped-offset
+description: The byte offset into this event's io.text (or io.bytes in the future) where length bytes were skipped.
+flat_name: process.io.bytes_skipped.offset
+level: extended
+name: io.bytes_skipped.offset
+type: long

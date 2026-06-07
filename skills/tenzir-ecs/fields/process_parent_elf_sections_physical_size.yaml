@@ -1,0 +1,10 @@
+field: process.parent.elf.sections.physical_size
+fieldset: process
+dashed_name: process-parent-elf-sections-physical-size
+description: ELF Section List physical size.
+flat_name: process.parent.elf.sections.physical_size
+format: bytes
+level: extended
+name: sections.physical_size
+original_fieldset: elf
+type: long

@@ -1,0 +1,13 @@
+field: process.pid
+fieldset: process
+dashed_name: process-pid
+description: Process id.
+example: 4242
+flat_name: process.pid
+format: string
+level: core
+name: pid
+otel:
+- relation: match
+  stability: development
+type: long

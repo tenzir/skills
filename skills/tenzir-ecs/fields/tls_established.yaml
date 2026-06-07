@@ -1,0 +1,11 @@
+field: tls.established
+fieldset: tls
+dashed_name: tls-established
+description: Boolean flag indicating if the TLS negotiation was successful and transitioned to an encrypted tunnel.
+flat_name: tls.established
+level: extended
+name: established
+otel:
+- relation: match
+  stability: development
+type: boolean

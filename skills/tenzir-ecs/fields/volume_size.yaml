@@ -1,0 +1,8 @@
+field: volume.size
+fieldset: volume
+dashed_name: volume-size
+description: Size of the volume device in bytes.
+flat_name: volume.size
+level: extended
+name: size
+type: long

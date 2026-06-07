@@ -1,0 +1,8 @@
+field: volume.removable
+fieldset: volume
+dashed_name: volume-removable
+description: Indicates if the volume is removable.
+flat_name: volume.removable
+level: extended
+name: removable
+type: boolean

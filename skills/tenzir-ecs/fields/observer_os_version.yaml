@@ -1,0 +1,11 @@
+field: observer.os.version
+fieldset: observer
+dashed_name: observer-os-version
+description: Operating system version as a raw string.
+example: 10.14.1
+flat_name: observer.os.version
+ignore_above: 1024
+level: extended
+name: version
+original_fieldset: os
+type: keyword

@@ -1,0 +1,11 @@
+field: cloud.origin.machine.type
+fieldset: cloud
+dashed_name: cloud-origin-machine-type
+description: Machine type of the host machine.
+example: t2.medium
+flat_name: cloud.origin.machine.type
+ignore_above: 1024
+level: extended
+name: machine.type
+original_fieldset: cloud
+type: keyword

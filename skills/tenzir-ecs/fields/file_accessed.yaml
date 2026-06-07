@@ -1,0 +1,13 @@
+field: file.accessed
+fieldset: file
+dashed_name: file-accessed
+description: 'Last time the file was accessed.
+
+  Note that not all filesystems keep track of access time.'
+flat_name: file.accessed
+level: extended
+name: accessed
+otel:
+- relation: match
+  stability: development
+type: date

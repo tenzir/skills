@@ -1,0 +1,11 @@
+field: dll.origin_url
+fieldset: dll
+beta: This field is beta and subject to change.
+dashed_name: dll-origin-url
+description: The URL where the dll file is hosted.
+example: http://example.com/files/example.dll
+flat_name: dll.origin_url
+ignore_above: 8192
+level: extended
+name: origin_url
+type: keyword

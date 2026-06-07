@@ -1,0 +1,481 @@
+fields:
+  '@timestamp':
+    otlp:
+    - time_unix_nano
+    - observed_time_unix_nano
+    - field: start_time_unix_nano
+      note: On logs, events and metrics, `time_unix_nano` defines the time of the event. For logs, `observed_time_unix_nano` defines the time when the event was observed by the collection system. On spans, `start_time_unix_nano` represents the start time of the span.
+  client.address:
+    match: stable
+  client.port:
+    match: stable
+  cloud.account.id:
+    match: development
+  cloud.availability_zone:
+    match: development
+  cloud.provider:
+    match: development
+  cloud.region:
+    match: development
+  cloud.service.name:
+    equivalent:
+      attribute: cloud.platform
+      stability: development
+  container.cpu.usage:
+    metric:
+      name: container.cpu.usage
+      stability: development
+  container.id:
+    match: development
+  container.image.hash.all:
+    equivalent:
+      attribute: container.image.repo_digests
+      stability: development
+  container.image.name:
+    match: development
+  container.image.tag:
+    equivalent:
+      attribute: container.image.tags
+      stability: development
+  container.labels:
+    related:
+      attribute: container.label
+      stability: development
+  container.memory.usage:
+    metric:
+      name: container.memory.usage
+      stability: development
+  container.name:
+    match: development
+  container.runtime:
+    equivalent:
+      attribute: container.runtime.name
+      stability: development
+  data_stream.dataset:
+    not_applicable: true
+  data_stream.namespace:
+    not_applicable: true
+  data_stream.type:
+    not_applicable: true
+  destination.address:
+    match: development
+  destination.port:
+    match: development
+  device.id:
+    match: development
+  device.manufacturer:
+    match: development
+  device.model.identifier:
+    match: development
+  device.model.name:
+    match: development
+  dns.answers:
+    related:
+      attribute: dns.answers
+      stability: development
+  dns.question.name:
+    match: development
+  ecs.version:
+    not_applicable: true
+  error.message:
+    equivalent:
+      attribute: exception.message
+      stability: stable
+  error.stack_trace:
+    equivalent:
+      attribute: exception.stacktrace
+      stability: stable
+  error.type:
+    match: stable
+  faas.coldstart:
+    match: development
+  faas.execution:
+    equivalent:
+      attribute: faas.invocation_id
+      stability: development
+  faas.name:
+    match: development
+  faas.trigger.type:
+    equivalent:
+      attribute: faas.trigger
+      stability: development
+  faas.version:
+    match: development
+  file.accessed:
+    match: development
+  file.attributes:
+    match: development
+  file.created:
+    match: development
+  file.ctime:
+    equivalent:
+      attribute: file.changed
+      stability: development
+  file.directory:
+    match: development
+  file.extension:
+    match: development
+  file.fork_name:
+    match: development
+  file.gid:
+    equivalent:
+      attribute: file.group.id
+      stability: development
+  file.group:
+    equivalent:
+      attribute: file.group.name
+      stability: development
+  file.inode:
+    match: development
+  file.mode:
+    match: development
+  file.mtime:
+    equivalent:
+      attribute: file.modified
+      stability: development
+  file.name:
+    match: development
+  file.owner:
+    equivalent:
+      attribute: file.owner.name
+      stability: development
+  file.path:
+    match: development
+  file.size:
+    match: development
+  file.target_path:
+    equivalent:
+      attribute: file.symbolic_link.target_path
+      stability: development
+  file.uid:
+    equivalent:
+      attribute: file.owner.id
+      stability: development
+  gen_ai.agent.description:
+    match: development
+  gen_ai.agent.id:
+    match: development
+  gen_ai.agent.name:
+    match: development
+  gen_ai.operation.name:
+    match: development
+  gen_ai.output.type:
+    match: development
+  gen_ai.request.choice.count:
+    match: development
+  gen_ai.request.encoding_formats:
+    match: development
+  gen_ai.request.frequency_penalty:
+    match: development
+  gen_ai.request.max_tokens:
+    match: development
+  gen_ai.request.model:
+    match: development
+  gen_ai.request.presence_penalty:
+    match: development
+  gen_ai.request.seed:
+    match: development
+  gen_ai.request.stop_sequences:
+    match: development
+  gen_ai.request.temperature:
+    match: development
+  gen_ai.request.top_k:
+    match: development
+  gen_ai.request.top_p:
+    match: development
+  gen_ai.response.finish_reasons:
+    match: development
+  gen_ai.response.id:
+    match: development
+  gen_ai.response.model:
+    match: development
+  gen_ai.system:
+    equivalent:
+      attribute: gen_ai.provider.name
+      stability: development
+  gen_ai.token.type:
+    match: development
+  gen_ai.tool.call.id:
+    match: development
+  gen_ai.tool.name:
+    match: development
+  gen_ai.tool.type:
+    match: development
+  gen_ai.usage.input_tokens:
+    match: development
+  gen_ai.usage.output_tokens:
+    match: development
+  host.architecture:
+    equivalent:
+      attribute: host.arch
+      stability: development
+  host.cpu.usage:
+    metric:
+      name: system.cpu.utilization
+      stability: development
+  host.disk.read.bytes:
+    metric:
+      name: system.disk.io
+      stability: development
+  host.disk.write.bytes:
+    metric:
+      name: system.disk.io
+      stability: development
+  host.id:
+    match: development
+  host.ip:
+    match: development
+  host.mac:
+    match: development
+  host.name:
+    match: development
+  host.network.egress.bytes:
+    metric:
+      name: system.network.io
+      stability: development
+  host.network.egress.packets:
+    metric:
+      name: system.network.packet.count
+      stability: development
+  host.network.ingress.bytes:
+    metric:
+      name: system.network.io
+      stability: development
+  host.network.ingress.packets:
+    metric:
+      name: system.network.packet.count
+      stability: development
+  host.type:
+    match: development
+  host.uptime:
+    metric:
+      name: system.uptime
+      stability: development
+  http.request.body.bytes:
+    equivalent:
+      attribute: http.request.body.size
+      stability: development
+  http.request.bytes:
+    equivalent:
+      attribute: http.request.size
+      stability: development
+  http.request.method:
+    equivalent:
+      attribute: http.request.method_original
+      stability: stable
+    conflict:
+      attribute: http.request.method
+      stability: stable
+      note: '`http.request.method` in SemConv is the known, normalized, upper case value of the request method, other than the ECS'' `http.request.method` that retains casing from the original event.'
+  http.response.body.bytes:
+    equivalent:
+      attribute: http.response.body.size
+      stability: development
+  http.response.bytes:
+    equivalent:
+      attribute: http.response.size
+      stability: development
+  http.response.status_code:
+    match: stable
+  http.version:
+    related:
+    - attribute: network.protocol.name
+      stability: stable
+    - attribute: network.protocol.version
+      stability: stable
+      note: In OTel SemConv, `network.protocol.version` specifies the HTTP version if the value of `network.protocol.name` is `http`.
+  labels:
+    related:
+    - attribute: k8s.pod.label
+      stability: development
+    - attribute: container.label
+      stability: development
+  log.file.path:
+    match: development
+  log.level:
+    otlp:
+    - severity_text
+  message:
+    otlp:
+    - field: body
+      note: The `body` in OTLP is of type `Any` and can be either an unstructured log message or a structured event.
+  network.protocol:
+    equivalent:
+      attribute: network.protocol.name
+      stability: stable
+  network.transport:
+    match: stable
+  network.type:
+    match: stable
+  process.args:
+    equivalent:
+      attribute: process.command_args
+      stability: development
+  process.args_count:
+    match: development
+  process.command_line:
+    match: development
+  process.executable:
+    equivalent:
+      attribute: process.executable.path
+      stability: development
+  process.group_leader.pid:
+    match: development
+  process.interactive:
+    match: development
+  process.pid:
+    match: development
+  process.real_user.id:
+    match: development
+  process.real_user.name:
+    match: development
+  process.saved_user.id:
+    match: development
+  process.saved_user.name:
+    match: development
+  process.session_leader.pid:
+    match: development
+  process.title:
+    match: development
+  process.uptime:
+    metric:
+      name: process.uptime
+      stability: development
+  process.user.id:
+    match: development
+  process.user.name:
+    match: development
+  process.vpid:
+    match: development
+  process.working_directory:
+    match: development
+  related.hash:
+    not_applicable: true
+  related.hosts:
+    not_applicable: true
+  related.ip:
+    not_applicable: true
+  related.user:
+    not_applicable: true
+  server.address:
+    match: stable
+  server.port:
+    match: stable
+  service.environment:
+    equivalent:
+      attribute: deployment.environment.name
+      stability: development
+  service.name:
+    match: stable
+  service.node.name:
+    equivalent:
+      attribute: service.instance.id
+      stability: development
+  service.version:
+    match: stable
+  source.address:
+    match: development
+  source.port:
+    match: development
+  span.id:
+    otlp:
+    - span_id
+  tls.cipher:
+    match: development
+  tls.client.certificate:
+    match: development
+  tls.client.certificate_chain:
+    match: development
+  tls.client.hash.md5:
+    match: development
+  tls.client.hash.sha1:
+    match: development
+  tls.client.hash.sha256:
+    match: development
+  tls.client.issuer:
+    match: development
+  tls.client.ja3:
+    match: development
+  tls.client.not_after:
+    match: development
+  tls.client.not_before:
+    match: development
+  tls.client.subject:
+    match: development
+  tls.client.supported_ciphers:
+    match: development
+  tls.curve:
+    match: development
+  tls.established:
+    match: development
+  tls.next_protocol:
+    match: development
+  tls.resumed:
+    match: development
+  tls.server.certificate:
+    match: development
+  tls.server.certificate_chain:
+    match: development
+  tls.server.hash.md5:
+    match: development
+  tls.server.hash.sha1:
+    match: development
+  tls.server.hash.sha256:
+    match: development
+  tls.server.issuer:
+    match: development
+  tls.server.ja3s:
+    match: development
+  tls.server.not_after:
+    match: development
+  tls.server.not_before:
+    match: development
+  tls.server.subject:
+    match: development
+  trace.id:
+    otlp:
+    - trace_id
+  transaction.id:
+    not_applicable: true
+  url.domain:
+    match: development
+  url.extension:
+    match: development
+  url.fragment:
+    match: stable
+  url.full:
+    match: stable
+  url.original:
+    match: development
+  url.path:
+    match: stable
+  url.port:
+    match: development
+  url.query:
+    match: stable
+  url.registered_domain:
+    match: development
+  url.scheme:
+    match: stable
+  url.subdomain:
+    match: development
+  url.top_level_domain:
+    match: development
+  user.email:
+    match: development
+  user.full_name:
+    match: development
+  user.hash:
+    match: development
+  user.id:
+    match: development
+  user.name:
+    match: development
+  user.roles:
+    match: development
+  user_agent.name:
+    match: development
+  user_agent.original:
+    match: stable
+  user_agent.version:
+    match: development

@@ -1,0 +1,11 @@
+field: dll.pe.architecture
+fieldset: dll
+dashed_name: dll-pe-architecture
+description: CPU architecture target for the file.
+example: x64
+flat_name: dll.pe.architecture
+ignore_above: 1024
+level: extended
+name: architecture
+original_fieldset: pe
+type: keyword

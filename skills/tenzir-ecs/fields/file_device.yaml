@@ -1,0 +1,10 @@
+field: file.device
+fieldset: file
+dashed_name: file-device
+description: Device that is the source of the file.
+example: sda
+flat_name: file.device
+ignore_above: 1024
+level: extended
+name: device
+type: keyword

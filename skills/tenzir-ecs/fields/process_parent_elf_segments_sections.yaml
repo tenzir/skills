@@ -1,0 +1,10 @@
+field: process.parent.elf.segments.sections
+fieldset: process
+dashed_name: process-parent-elf-segments-sections
+description: ELF object segment sections.
+flat_name: process.parent.elf.segments.sections
+ignore_above: 1024
+level: extended
+name: segments.sections
+original_fieldset: elf
+type: keyword

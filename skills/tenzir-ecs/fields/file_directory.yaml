@@ -1,0 +1,13 @@
+field: file.directory
+fieldset: file
+dashed_name: file-directory
+description: Directory where the file is located. It should include the drive letter, when appropriate.
+example: /home/alice
+flat_name: file.directory
+ignore_above: 1024
+level: extended
+name: directory
+otel:
+- relation: match
+  stability: development
+type: keyword

@@ -1,0 +1,13 @@
+field: tls.client.x509.subject.organization
+fieldset: tls
+dashed_name: tls-client-x509-subject-organization
+description: List of organizations (O) of subject.
+example: Example, Inc.
+flat_name: tls.client.x509.subject.organization
+ignore_above: 1024
+level: extended
+name: subject.organization
+normalize:
+- array
+original_fieldset: x509
+type: keyword

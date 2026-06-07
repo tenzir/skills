@@ -1,0 +1,10 @@
+field: threat.enrichments.indicator.file.x509.not_before
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-x509-not-before
+description: Time at which the certificate is first considered valid.
+example: '2019-08-16T01:40:25Z'
+flat_name: threat.enrichments.indicator.file.x509.not_before
+level: extended
+name: not_before
+original_fieldset: x509
+type: date

@@ -1,0 +1,20 @@
+field: observer.os.type
+fieldset: observer
+dashed_name: observer-os-type
+description: 'Use the `os.type` field to categorize the operating system into one of the broad commercial families.
+
+  If the OS you''re dealing with is not listed as an expected value, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.'
+example: macos
+expected_values:
+- linux
+- macos
+- unix
+- windows
+- ios
+- android
+flat_name: observer.os.type
+ignore_above: 1024
+level: extended
+name: type
+original_fieldset: os
+type: keyword

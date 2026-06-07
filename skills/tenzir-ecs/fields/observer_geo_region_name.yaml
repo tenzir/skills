@@ -1,0 +1,11 @@
+field: observer.geo.region_name
+fieldset: observer
+dashed_name: observer-geo-region-name
+description: Region name.
+example: Quebec
+flat_name: observer.geo.region_name
+ignore_above: 1024
+level: core
+name: region_name
+original_fieldset: geo
+type: keyword

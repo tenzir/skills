@@ -1,0 +1,13 @@
+field: file.x509.issuer.state_or_province
+fieldset: file
+dashed_name: file-x509-issuer-state-or-province
+description: List of state or province names (ST, S, or P)
+example: California
+flat_name: file.x509.issuer.state_or_province
+ignore_above: 1024
+level: extended
+name: issuer.state_or_province
+normalize:
+- array
+original_fieldset: x509
+type: keyword

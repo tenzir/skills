@@ -1,0 +1,12 @@
+field: cloud.target.entity.relationships.supervises.host.id
+fieldset: cloud
+dashed_name: cloud-target-entity-relationships-supervises-host-id
+description: Referenced host ids.
+flat_name: cloud.target.entity.relationships.supervises.host.id
+ignore_above: 1024
+level: extended
+name: host.id
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

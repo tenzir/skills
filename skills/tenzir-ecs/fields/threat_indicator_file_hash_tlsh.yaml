@@ -1,0 +1,10 @@
+field: threat.indicator.file.hash.tlsh
+fieldset: threat
+dashed_name: threat-indicator-file-hash-tlsh
+description: TLSH hash.
+flat_name: threat.indicator.file.hash.tlsh
+ignore_above: 1024
+level: extended
+name: tlsh
+original_fieldset: hash
+type: keyword

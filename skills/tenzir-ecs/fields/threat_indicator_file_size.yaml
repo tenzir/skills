@@ -1,0 +1,12 @@
+field: threat.indicator.file.size
+fieldset: threat
+dashed_name: threat-indicator-file-size
+description: 'File size in bytes.
+
+  Only relevant when `file.type` is "file".'
+example: 16384
+flat_name: threat.indicator.file.size
+level: extended
+name: size
+original_fieldset: file
+type: long

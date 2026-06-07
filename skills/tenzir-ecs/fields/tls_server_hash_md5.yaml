@@ -1,0 +1,13 @@
+field: tls.server.hash.md5
+fieldset: tls
+dashed_name: tls-server-hash-md5
+description: Certificate fingerprint using the MD5 digest of DER-encoded version of certificate offered by the server. For consistency with other hash values, this value should be formatted as an uppercase hash.
+example: 0F76C7F2C55BFD7D8E8B8F4BFBF0C9EC
+flat_name: tls.server.hash.md5
+ignore_above: 1024
+level: extended
+name: server.hash.md5
+otel:
+- relation: match
+  stability: development
+type: keyword

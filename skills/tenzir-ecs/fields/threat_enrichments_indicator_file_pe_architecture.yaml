@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.file.pe.architecture
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-pe-architecture
+description: CPU architecture target for the file.
+example: x64
+flat_name: threat.enrichments.indicator.file.pe.architecture
+ignore_above: 1024
+level: extended
+name: architecture
+original_fieldset: pe
+type: keyword

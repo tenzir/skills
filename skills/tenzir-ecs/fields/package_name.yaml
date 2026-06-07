@@ -1,0 +1,10 @@
+field: package.name
+fieldset: package
+dashed_name: package-name
+description: Package name
+example: go
+flat_name: package.name
+ignore_above: 1024
+level: extended
+name: name
+type: keyword

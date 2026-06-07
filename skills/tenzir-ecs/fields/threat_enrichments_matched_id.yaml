@@ -1,0 +1,10 @@
+field: threat.enrichments.matched.id
+fieldset: threat
+dashed_name: threat-enrichments-matched-id
+description: Identifies the _id of the indicator document enriching the event.
+example: ff93aee5-86a1-4a61-b0e6-0cdc313d01b5
+flat_name: threat.enrichments.matched.id
+ignore_above: 1024
+level: extended
+name: enrichments.matched.id
+type: keyword

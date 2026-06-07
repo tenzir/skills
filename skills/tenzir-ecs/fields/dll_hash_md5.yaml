@@ -1,0 +1,10 @@
+field: dll.hash.md5
+fieldset: dll
+dashed_name: dll-hash-md5
+description: MD5 hash.
+flat_name: dll.hash.md5
+ignore_above: 1024
+level: extended
+name: md5
+original_fieldset: hash
+type: keyword

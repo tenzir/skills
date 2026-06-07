@@ -1,0 +1,9 @@
+field: email.origination_timestamp
+fieldset: email
+dashed_name: email-origination-timestamp
+description: The date and time the email message was composed. Many email clients will fill in this value automatically when the message is sent by a user.
+example: '2020-11-10T22:12:34.8196921Z'
+flat_name: email.origination_timestamp
+level: extended
+name: origination_timestamp
+type: date

@@ -1,0 +1,13 @@
+field: url.port
+fieldset: url
+dashed_name: url-port
+description: Port of the request, such as 443.
+example: 443
+flat_name: url.port
+format: string
+level: extended
+name: port
+otel:
+- relation: match
+  stability: development
+type: long

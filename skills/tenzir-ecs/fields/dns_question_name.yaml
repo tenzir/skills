@@ -1,0 +1,15 @@
+field: dns.question.name
+fieldset: dns
+dashed_name: dns-question-name
+description: 'The name being queried.
+
+  If the name field contains non-printable characters (below 32 or above 126), those characters should be represented as escaped base 10 integers (\DDD). Back slashes and quotes should be escaped. Tabs, carriage returns, and line feeds should be converted to \t, \r, and \n respectively.'
+example: www.example.com
+flat_name: dns.question.name
+ignore_above: 1024
+level: extended
+name: question.name
+otel:
+- relation: match
+  stability: development
+type: keyword

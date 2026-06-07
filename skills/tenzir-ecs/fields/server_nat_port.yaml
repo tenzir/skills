@@ -1,0 +1,11 @@
+field: server.nat.port
+fieldset: server
+dashed_name: server-nat-port
+description: 'Translated port of destination based NAT sessions (e.g. internet to private DMZ)
+
+  Typically used with load balancers, firewalls, or routers.'
+flat_name: server.nat.port
+format: string
+level: extended
+name: nat.port
+type: long

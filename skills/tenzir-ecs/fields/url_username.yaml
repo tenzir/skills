@@ -1,0 +1,9 @@
+field: url.username
+fieldset: url
+dashed_name: url-username
+description: Username of the request.
+flat_name: url.username
+ignore_above: 1024
+level: extended
+name: username
+type: keyword

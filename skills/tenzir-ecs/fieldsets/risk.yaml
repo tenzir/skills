@@ -1,0 +1,50 @@
+fieldset: risk
+beta: These fields are in beta and are subject to change.
+description: Fields for describing risk score and risk level of entities such as hosts and users. These fields are not allowed to be nested under `event.*`. Please continue to use `event.risk_score` and `event.risk_score_norm` for event risk.
+group: 2
+name: risk
+prefix: risk.
+reusable:
+  expected:
+  - as: risk
+    at: host
+    full: host.risk
+  - as: risk
+    at: user
+    full: user.risk
+  top_level: false
+title: Risk information
+type: group
+fields:
+- name: risk.calculated_level
+  type: keyword
+  description: A risk classification level calculated by an internal system as part of entity analytics and entity risk scoring.
+  template_field: true
+  example: High
+  ignore_above: 1024
+- name: risk.calculated_score
+  type: float
+  description: A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring.
+  template_field: true
+  example: 880.73
+- name: risk.calculated_score_norm
+  type: float
+  description: A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring, and normalized to a range of 0 to 100.
+  template_field: true
+  example: 88.73
+- name: risk.static_level
+  type: keyword
+  description: A risk classification level obtained from outside the system, such as from some external Threat Intelligence Platform.
+  template_field: true
+  example: High
+  ignore_above: 1024
+- name: risk.static_score
+  type: float
+  description: A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform.
+  template_field: true
+  example: 830.0
+- name: risk.static_score_norm
+  type: float
+  description: A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform, and normalized to a range of 0 to 100.
+  template_field: true
+  example: 83.0

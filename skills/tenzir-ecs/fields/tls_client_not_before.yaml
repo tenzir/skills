@@ -1,0 +1,12 @@
+field: tls.client.not_before
+fieldset: tls
+dashed_name: tls-client-not-before
+description: Date/Time indicating when client certificate is first considered valid.
+example: '1970-01-01T00:00:00.000Z'
+flat_name: tls.client.not_before
+level: extended
+name: client.not_before
+otel:
+- relation: match
+  stability: development
+type: date

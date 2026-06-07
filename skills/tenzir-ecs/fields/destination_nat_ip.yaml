@@ -1,0 +1,10 @@
+field: destination.nat.ip
+fieldset: destination
+dashed_name: destination-nat-ip
+description: 'Translated ip of destination based NAT sessions (e.g. internet to private DMZ)
+
+  Typically used with load balancers, firewalls, or routers.'
+flat_name: destination.nat.ip
+level: extended
+name: nat.ip
+type: ip

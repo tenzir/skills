@@ -1,0 +1,10 @@
+field: file.elf.sections.flags
+fieldset: file
+dashed_name: file-elf-sections-flags
+description: ELF Section List flags.
+flat_name: file.elf.sections.flags
+ignore_above: 1024
+level: extended
+name: sections.flags
+original_fieldset: elf
+type: keyword

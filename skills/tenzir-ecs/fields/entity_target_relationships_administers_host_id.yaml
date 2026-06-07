@@ -1,0 +1,12 @@
+field: entity.target.relationships.administers.host.id
+fieldset: entity
+dashed_name: entity-target-relationships-administers-host-id
+description: Referenced host ids.
+flat_name: entity.target.relationships.administers.host.id
+ignore_above: 1024
+level: extended
+name: host.id
+normalize:
+- array
+original_fieldset: entity_reference
+type: keyword

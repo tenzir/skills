@@ -1,0 +1,12 @@
+field: destination.user.hash
+fieldset: destination
+dashed_name: destination-user-hash
+description: 'Unique user hash to correlate information for a user in anonymized form.
+
+  Useful if `user.id` or `user.name` contain confidential information and cannot be used.'
+flat_name: destination.user.hash
+ignore_above: 1024
+level: extended
+name: hash
+original_fieldset: user
+type: keyword

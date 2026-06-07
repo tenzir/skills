@@ -1,0 +1,14 @@
+field: process.thread.capabilities.permitted
+fieldset: process
+dashed_name: process-thread-capabilities-permitted
+description: This is a limiting superset for the effective capabilities that the thread may assume.
+example: '["CAP_BPF", "CAP_SYS_ADMIN"]'
+flat_name: process.thread.capabilities.permitted
+ignore_above: 1024
+level: extended
+name: thread.capabilities.permitted
+normalize:
+- array
+pattern: ^(CAP_[A-Z_]+|\d+)$
+synthetic_source_keep: none
+type: keyword

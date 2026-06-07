@@ -1,0 +1,14 @@
+field: host.target.cpu.usage
+fieldset: host
+dashed_name: host-target-cpu-usage
+description: 'Percent CPU used which is normalized by the number of CPU cores and it ranges from 0 to 1.
+
+  Scaling factor: 1000.
+
+  For example: For a two core host, this value should be the average of the two cores, between 0 and 1.'
+flat_name: host.target.cpu.usage
+level: extended
+name: cpu.usage
+original_fieldset: host
+scaling_factor: 1000
+type: scaled_float

@@ -1,0 +1,14 @@
+field: host.architecture
+fieldset: host
+dashed_name: host-architecture
+description: Operating system architecture.
+example: x86_64
+flat_name: host.architecture
+ignore_above: 1024
+level: core
+name: architecture
+otel:
+- attribute: host.arch
+  relation: equivalent
+  stability: development
+type: keyword

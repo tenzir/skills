@@ -1,0 +1,12 @@
+field: email.content_type
+fieldset: email
+dashed_name: email-content-type
+description: 'Information about how the message is to be displayed.
+
+  Typically a MIME type.'
+example: text/plain
+flat_name: email.content_type
+ignore_above: 1024
+level: extended
+name: content_type
+type: keyword

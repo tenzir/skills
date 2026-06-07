@@ -1,0 +1,8 @@
+field: event.end
+fieldset: event
+dashed_name: event-end
+description: '`event.end` contains the date when the event ended or when the activity was last observed.'
+flat_name: event.end
+level: extended
+name: end
+type: date

@@ -1,0 +1,12 @@
+field: file.mtime
+fieldset: file
+dashed_name: file-mtime
+description: Last time the file content was modified.
+flat_name: file.mtime
+level: extended
+name: mtime
+otel:
+- attribute: file.modified
+  relation: equivalent
+  stability: development
+type: date

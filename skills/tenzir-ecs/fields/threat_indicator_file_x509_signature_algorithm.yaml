@@ -1,0 +1,11 @@
+field: threat.indicator.file.x509.signature_algorithm
+fieldset: threat
+dashed_name: threat-indicator-file-x509-signature-algorithm
+description: Identifier for certificate signature algorithm. We recommend using names found in Go Lang Crypto library. See https://github.com/golang/go/blob/go1.14/src/crypto/x509/x509.go#L337-L353.
+example: SHA256-RSA
+flat_name: threat.indicator.file.x509.signature_algorithm
+ignore_above: 1024
+level: extended
+name: signature_algorithm
+original_fieldset: x509
+type: keyword

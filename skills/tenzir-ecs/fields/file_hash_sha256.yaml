@@ -1,0 +1,10 @@
+field: file.hash.sha256
+fieldset: file
+dashed_name: file-hash-sha256
+description: SHA256 hash.
+flat_name: file.hash.sha256
+ignore_above: 1024
+level: extended
+name: sha256
+original_fieldset: hash
+type: keyword

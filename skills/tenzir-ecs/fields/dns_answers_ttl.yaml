@@ -1,0 +1,9 @@
+field: dns.answers.ttl
+fieldset: dns
+dashed_name: dns-answers-ttl
+description: The time interval in seconds that this resource record may be cached before it should be discarded. Zero values mean that the data should not be cached.
+example: 180
+flat_name: dns.answers.ttl
+level: extended
+name: answers.ttl
+type: long

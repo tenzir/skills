@@ -1,0 +1,13 @@
+field: tls.server.x509.issuer.common_name
+fieldset: tls
+dashed_name: tls-server-x509-issuer-common-name
+description: List of common name (CN) of issuing certificate authority.
+example: Example SHA2 High Assurance Server CA
+flat_name: tls.server.x509.issuer.common_name
+ignore_above: 1024
+level: extended
+name: issuer.common_name
+normalize:
+- array
+original_fieldset: x509
+type: keyword

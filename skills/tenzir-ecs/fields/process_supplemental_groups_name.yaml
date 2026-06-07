@@ -1,0 +1,10 @@
+field: process.supplemental_groups.name
+fieldset: process
+dashed_name: process-supplemental-groups-name
+description: Name of the group.
+flat_name: process.supplemental_groups.name
+ignore_above: 1024
+level: extended
+name: name
+original_fieldset: group
+type: keyword

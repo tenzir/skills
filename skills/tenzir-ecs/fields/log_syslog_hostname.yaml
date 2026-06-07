@@ -1,0 +1,10 @@
+field: log.syslog.hostname
+fieldset: log
+dashed_name: log-syslog-hostname
+description: The hostname, FQDN, or IP of the machine that originally sent the Syslog message. This is sourced from the hostname field of the syslog header. Depending on the environment, this value may be different from the host that handled the event, especially if the host handling the events is acting as a collector.
+example: example-host
+flat_name: log.syslog.hostname
+ignore_above: 1024
+level: extended
+name: syslog.hostname
+type: keyword

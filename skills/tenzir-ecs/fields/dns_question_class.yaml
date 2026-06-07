@@ -1,0 +1,10 @@
+field: dns.question.class
+fieldset: dns
+dashed_name: dns-question-class
+description: The class of records being queried.
+example: IN
+flat_name: dns.question.class
+ignore_above: 1024
+level: extended
+name: question.class
+type: keyword

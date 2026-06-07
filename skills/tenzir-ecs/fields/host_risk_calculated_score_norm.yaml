@@ -1,0 +1,10 @@
+field: host.risk.calculated_score_norm
+fieldset: host
+dashed_name: host-risk-calculated-score-norm
+description: A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring, and normalized to a range of 0 to 100.
+example: 88.73
+flat_name: host.risk.calculated_score_norm
+level: extended
+name: calculated_score_norm
+original_fieldset: risk
+type: float

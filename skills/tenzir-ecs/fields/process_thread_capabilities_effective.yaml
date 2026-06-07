@@ -1,0 +1,14 @@
+field: process.thread.capabilities.effective
+fieldset: process
+dashed_name: process-thread-capabilities-effective
+description: This is the set of capabilities used by the kernel to perform permission checks for the thread.
+example: '["CAP_BPF", "CAP_SYS_ADMIN"]'
+flat_name: process.thread.capabilities.effective
+ignore_above: 1024
+level: extended
+name: thread.capabilities.effective
+normalize:
+- array
+pattern: ^(CAP_[A-Z_]+|\d+)$
+synthetic_source_keep: none
+type: keyword

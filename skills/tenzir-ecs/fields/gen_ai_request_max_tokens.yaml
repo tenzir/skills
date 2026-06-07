@@ -1,0 +1,13 @@
+field: gen_ai.request.max_tokens
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-max-tokens
+description: The maximum number of tokens the model generates for a request.
+example: 100
+flat_name: gen_ai.request.max_tokens
+level: extended
+name: request.max_tokens
+otel:
+- relation: match
+  stability: development
+type: integer

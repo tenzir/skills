@@ -1,0 +1,11 @@
+field: process.macho.imports
+fieldset: process
+dashed_name: process-macho-imports
+description: List of imported element names and types.
+flat_name: process.macho.imports
+level: extended
+name: imports
+normalize:
+- array
+original_fieldset: macho
+type: flattened

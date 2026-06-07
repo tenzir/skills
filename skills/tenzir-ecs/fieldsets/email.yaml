@@ -1,0 +1,118 @@
+fieldset: email
+description: 'Event details relating to an email transaction.
+
+  This field set focuses on the email message header, body, and attachments. Network protocols that send and receive email messages such as SMTP are outside the scope of the `email.*` fields.'
+group: 2
+name: email
+nestings:
+- email.attachments.file.hash
+prefix: email.
+reused_here:
+- full: email.attachments.file.hash
+  schema_name: hash
+  description: Hashes, usually file hashes.
+title: Email
+type: group
+fields:
+- name: email.attachments
+  type: nested
+  description: List of objects describing the attachments.
+  normalize:
+  - array
+- name: email.attachments.file.extension
+  type: keyword
+  description: Attachment file extension.
+- name: email.attachments.file.hash.cdhash
+  type: keyword
+  description: The Code Directory (CD) hash of an executable.
+  original_fieldset: hash
+  beta: This field is beta and subject to change.
+- name: email.attachments.file.hash.md5
+  type: keyword
+  description: MD5 hash.
+  original_fieldset: hash
+- name: email.attachments.file.hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  original_fieldset: hash
+- name: email.attachments.file.hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  original_fieldset: hash
+- name: email.attachments.file.hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  original_fieldset: hash
+- name: email.attachments.file.hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  original_fieldset: hash
+- name: email.attachments.file.hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  original_fieldset: hash
+- name: email.attachments.file.hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  original_fieldset: hash
+- name: email.attachments.file.mime_type
+  type: keyword
+  description: MIME type of the attachment file.
+- name: email.attachments.file.name
+  type: keyword
+  description: Name of the attachment file.
+- name: email.attachments.file.size
+  type: long
+  description: Attachment file size.
+- name: email.bcc.address
+  type: keyword
+  description: Email address of BCC recipient
+  normalize:
+  - array
+- name: email.cc.address
+  type: keyword
+  description: Email address of CC recipient
+  normalize:
+  - array
+- name: email.content_type
+  type: keyword
+  description: MIME type of the email message.
+- name: email.delivery_timestamp
+  type: date
+  description: Date and time when message was delivered.
+- name: email.direction
+  type: keyword
+  description: Direction of the message.
+- name: email.from.address
+  type: keyword
+  description: The sender's email address.
+  normalize:
+  - array
+- name: email.local_id
+  type: keyword
+  description: Unique identifier given by the source.
+- name: email.message_id
+  type: wildcard
+  description: Value from the Message-ID header.
+- name: email.origination_timestamp
+  type: date
+  description: Date and time the email was composed.
+- name: email.reply_to.address
+  type: keyword
+  description: Address replies should be delivered to.
+  normalize:
+  - array
+- name: email.sender.address
+  type: keyword
+  description: Address of the message sender.
+- name: email.subject
+  type: keyword
+  description: The subject of the email message.
+- name: email.to.address
+  type: keyword
+  description: Email address of recipient
+  normalize:
+  - array
+- name: email.x_mailer
+  type: keyword
+  description: Application that drafted email.

@@ -1,0 +1,14 @@
+field: threat.indicator.file.target_path
+fieldset: threat
+dashed_name: threat-indicator-file-target-path
+description: Target path for symlinks.
+flat_name: threat.indicator.file.target_path
+ignore_above: 1024
+level: extended
+multi_fields:
+- flat_name: threat.indicator.file.target_path.text
+  name: text
+  type: match_only_text
+name: target_path
+original_fieldset: file
+type: keyword

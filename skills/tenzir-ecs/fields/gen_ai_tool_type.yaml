@@ -1,0 +1,14 @@
+field: gen_ai.tool.type
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-tool-type
+description: Type of the tool utilized by the agent
+example: function; extension; datastore
+flat_name: gen_ai.tool.type
+ignore_above: 1024
+level: extended
+name: tool.type
+otel:
+- relation: match
+  stability: development
+type: keyword

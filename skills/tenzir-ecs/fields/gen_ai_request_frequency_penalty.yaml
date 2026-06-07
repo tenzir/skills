@@ -1,0 +1,13 @@
+field: gen_ai.request.frequency_penalty
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-frequency-penalty
+description: The frequency penalty setting for the GenAI request.
+example: 0.1
+flat_name: gen_ai.request.frequency_penalty
+level: extended
+name: request.frequency_penalty
+otel:
+- relation: match
+  stability: development
+type: double

@@ -1,0 +1,10 @@
+field: rule.category
+fieldset: rule
+dashed_name: rule-category
+description: A categorization value keyword used by the entity using the rule for detection of this event.
+example: Attempted Information Leak
+flat_name: rule.category
+ignore_above: 1024
+level: extended
+name: category
+type: keyword

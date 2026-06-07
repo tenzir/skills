@@ -1,0 +1,10 @@
+field: dll.pe.sections.entropy
+fieldset: dll
+dashed_name: dll-pe-sections-entropy
+description: Shannon entropy calculation from the section.
+flat_name: dll.pe.sections.entropy
+format: number
+level: extended
+name: sections.entropy
+original_fieldset: pe
+type: long

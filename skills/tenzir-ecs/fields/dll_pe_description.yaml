@@ -1,0 +1,11 @@
+field: dll.pe.description
+fieldset: dll
+dashed_name: dll-pe-description
+description: Internal description of the file, provided at compile-time.
+example: Paint
+flat_name: dll.pe.description
+ignore_above: 1024
+level: extended
+name: description
+original_fieldset: pe
+type: keyword

@@ -1,0 +1,11 @@
+field: group.domain
+fieldset: group
+dashed_name: group-domain
+description: 'Name of the directory the group is a member of.
+
+  For example, an LDAP or Active Directory domain name.'
+flat_name: group.domain
+ignore_above: 1024
+level: extended
+name: domain
+type: keyword

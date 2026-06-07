@@ -1,0 +1,10 @@
+field: registry.hive
+fieldset: registry
+dashed_name: registry-hive
+description: Abbreviated name for the hive.
+example: HKLM
+flat_name: registry.hive
+ignore_above: 1024
+level: core
+name: hive
+type: keyword

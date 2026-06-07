@@ -1,0 +1,11 @@
+field: volume.product_id
+fieldset: volume
+dashed_name: volume-product-id
+description: 'ProductID of the device.
+
+  The vendor provides the ProductID for the volume, if any.'
+flat_name: volume.product_id
+ignore_above: 1024
+level: extended
+name: product_id
+type: keyword

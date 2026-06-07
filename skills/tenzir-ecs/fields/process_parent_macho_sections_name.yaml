@@ -1,0 +1,10 @@
+field: process.parent.macho.sections.name
+fieldset: process
+dashed_name: process-parent-macho-sections-name
+description: Mach-O Section List name.
+flat_name: process.parent.macho.sections.name
+ignore_above: 1024
+level: extended
+name: sections.name
+original_fieldset: macho
+type: keyword

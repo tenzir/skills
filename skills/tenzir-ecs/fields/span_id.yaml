@@ -1,0 +1,16 @@
+field: span.id
+fieldset: span
+dashed_name: span-id
+description: 'Unique identifier of the span within the scope of its trace.
+
+  A span represents an operation within a transaction, such as a request to another service, or a database query.'
+example: 3ff9a8981b7ccd5a
+flat_name: span.id
+ignore_above: 1024
+level: extended
+name: span.id
+otel:
+- otlp_field: span_id
+  relation: otlp
+  stability: stable
+type: keyword

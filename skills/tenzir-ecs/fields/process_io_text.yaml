@@ -1,0 +1,10 @@
+field: process.io.text
+fieldset: process
+dashed_name: process-io-text
+description: 'A chunk of output or input sanitized to UTF-8.
+
+  Best efforts are made to ensure complete lines are captured in these events. Assumptions should NOT be made that multiple lines will appear in the same event. TTY output may contain terminal control codes such as for cursor movement, so some string queries may not match due to terminal codes inserted between characters of a word.'
+flat_name: process.io.text
+level: extended
+name: io.text
+type: wildcard

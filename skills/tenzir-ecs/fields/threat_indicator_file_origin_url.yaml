@@ -1,0 +1,12 @@
+field: threat.indicator.file.origin_url
+fieldset: threat
+beta: This field is beta and subject to change.
+dashed_name: threat-indicator-file-origin-url
+description: The URL where the file is hosted.
+example: http://example.com/imgs/article1_img1.jpg
+flat_name: threat.indicator.file.origin_url
+ignore_above: 8192
+level: extended
+name: origin_url
+original_fieldset: file
+type: keyword

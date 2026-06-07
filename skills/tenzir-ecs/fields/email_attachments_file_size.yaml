@@ -1,0 +1,9 @@
+field: email.attachments.file.size
+fieldset: email
+dashed_name: email-attachments-file-size
+description: Attachment file size in bytes.
+example: 64329
+flat_name: email.attachments.file.size
+level: extended
+name: attachments.file.size
+type: long

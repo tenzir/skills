@@ -1,0 +1,11 @@
+field: process.parent.group_leader.pid
+fieldset: process
+dashed_name: process-parent-group-leader-pid
+description: Process id.
+example: 4242
+flat_name: process.parent.group_leader.pid
+format: string
+level: core
+name: pid
+original_fieldset: process
+type: long

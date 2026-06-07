@@ -1,0 +1,47 @@
+fieldset: http
+description: Fields related to HTTP activity. Use the `url` field set to store the url of the request.
+group: 2
+name: http
+prefix: http.
+title: HTTP
+type: group
+fields:
+- name: http.request.body.bytes
+  type: long
+  description: Size in bytes of the request body.
+- name: http.request.body.content
+  type: wildcard
+  description: The full HTTP request body.
+- name: http.request.bytes
+  type: long
+  description: Total size in bytes of the request (body and headers).
+- name: http.request.id
+  type: keyword
+  description: HTTP request ID.
+- name: http.request.method
+  type: keyword
+  description: HTTP request method.
+- name: http.request.mime_type
+  type: keyword
+  description: Mime type of the body of the request.
+- name: http.request.referrer
+  type: keyword
+  description: Referrer for this HTTP request.
+- name: http.response.body.bytes
+  type: long
+  description: Size in bytes of the response body.
+- name: http.response.body.content
+  type: wildcard
+  description: The full HTTP response body.
+- name: http.response.bytes
+  type: long
+  description: Total size in bytes of the response (body and headers).
+- name: http.response.mime_type
+  type: keyword
+  description: Mime type of the body of the response.
+- name: http.response.status_code
+  type: long
+  description: HTTP response status code.
+- name: http.version
+  type: keyword
+  description: HTTP version.

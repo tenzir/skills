@@ -1,0 +1,11 @@
+field: threat.indicator.file.owner
+fieldset: threat
+dashed_name: threat-indicator-file-owner
+description: File owner's username.
+example: alice
+flat_name: threat.indicator.file.owner
+ignore_above: 1024
+level: extended
+name: owner
+original_fieldset: file
+type: keyword

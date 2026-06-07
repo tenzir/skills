@@ -1,0 +1,13 @@
+field: file.name
+fieldset: file
+dashed_name: file-name
+description: Name of the file including the extension, without the directory.
+example: example.png
+flat_name: file.name
+ignore_above: 1024
+level: extended
+name: name
+otel:
+- relation: match
+  stability: development
+type: keyword

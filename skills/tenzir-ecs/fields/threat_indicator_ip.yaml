@@ -1,0 +1,9 @@
+field: threat.indicator.ip
+fieldset: threat
+dashed_name: threat-indicator-ip
+description: Identifies a threat indicator as an IP address (irrespective of direction).
+example: 1.2.3.4
+flat_name: threat.indicator.ip
+level: extended
+name: indicator.ip
+type: ip

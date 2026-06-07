@@ -1,0 +1,10 @@
+field: process.parent.hash.sha1
+fieldset: process
+dashed_name: process-parent-hash-sha1
+description: SHA1 hash.
+flat_name: process.parent.hash.sha1
+ignore_above: 1024
+level: extended
+name: sha1
+original_fieldset: hash
+type: keyword

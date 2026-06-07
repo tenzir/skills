@@ -1,0 +1,13 @@
+field: file.x509.issuer.organizational_unit
+fieldset: file
+dashed_name: file-x509-issuer-organizational-unit
+description: List of organizational units (OU) of issuing certificate authority.
+example: www.example.com
+flat_name: file.x509.issuer.organizational_unit
+ignore_above: 1024
+level: extended
+name: issuer.organizational_unit
+normalize:
+- array
+original_fieldset: x509
+type: keyword

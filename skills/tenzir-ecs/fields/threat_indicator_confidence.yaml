@@ -1,0 +1,16 @@
+field: threat.indicator.confidence
+fieldset: threat
+dashed_name: threat-indicator-confidence
+description: Identifies the vendor-neutral confidence rating using the None/Low/Medium/High scale defined in Appendix A of the STIX 2.1 framework. Vendor-specific confidence scales may be added as custom fields.
+example: Medium
+expected_values:
+- Not Specified
+- None
+- Low
+- Medium
+- High
+flat_name: threat.indicator.confidence
+ignore_above: 1024
+level: extended
+name: indicator.confidence
+type: keyword

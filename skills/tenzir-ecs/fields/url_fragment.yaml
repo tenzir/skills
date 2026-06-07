@@ -1,0 +1,14 @@
+field: url.fragment
+fieldset: url
+dashed_name: url-fragment
+description: 'Portion of the url after the `#`, such as "top".
+
+  The `#` is not part of the fragment.'
+flat_name: url.fragment
+ignore_above: 1024
+level: extended
+name: fragment
+otel:
+- relation: match
+  stability: stable
+type: keyword

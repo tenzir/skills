@@ -1,0 +1,12 @@
+field: user.changes.domain
+fieldset: user
+dashed_name: user-changes-domain
+description: 'Name of the directory the user is a member of.
+
+  For example, an LDAP or Active Directory domain name.'
+flat_name: user.changes.domain
+ignore_above: 1024
+level: extended
+name: domain
+original_fieldset: user
+type: keyword

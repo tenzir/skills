@@ -1,0 +1,13 @@
+field: orchestrator.resource.label
+fieldset: orchestrator
+dashed_name: orchestrator-resource-label
+description: The list of labels added to the resource.
+example: '[''key1:value1'', ''key2:value2'', ''key3:value3'']'
+flat_name: orchestrator.resource.label
+ignore_above: 1024
+level: extended
+name: resource.label
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

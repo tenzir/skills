@@ -1,0 +1,11 @@
+field: host.hostname
+fieldset: host
+dashed_name: host-hostname
+description: 'Hostname of the host.
+
+  It normally contains what the `hostname` command returns on the host machine.'
+flat_name: host.hostname
+ignore_above: 1024
+level: core
+name: hostname
+type: keyword

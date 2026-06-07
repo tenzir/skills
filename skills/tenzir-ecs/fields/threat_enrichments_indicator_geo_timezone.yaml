@@ -1,0 +1,11 @@
+field: threat.enrichments.indicator.geo.timezone
+fieldset: threat
+dashed_name: threat-enrichments-indicator-geo-timezone
+description: The time zone of the location, such as IANA time zone name.
+example: America/Argentina/Buenos_Aires
+flat_name: threat.enrichments.indicator.geo.timezone
+ignore_above: 1024
+level: core
+name: timezone
+original_fieldset: geo
+type: keyword

@@ -1,0 +1,13 @@
+field: dll.pe.sections
+fieldset: dll
+dashed_name: dll-pe-sections
+description: 'An array containing an object for each section of the PE file.
+
+  The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.'
+flat_name: dll.pe.sections
+level: extended
+name: sections
+normalize:
+- array
+original_fieldset: pe
+type: nested

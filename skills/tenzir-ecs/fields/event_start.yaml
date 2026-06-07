@@ -1,0 +1,8 @@
+field: event.start
+fieldset: event
+dashed_name: event-start
+description: '`event.start` contains the date when the event started or when the activity was first observed.'
+flat_name: event.start
+level: extended
+name: start
+type: date

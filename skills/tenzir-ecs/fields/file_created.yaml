@@ -1,0 +1,13 @@
+field: file.created
+fieldset: file
+dashed_name: file-created
+description: 'File creation time.
+
+  Note that not all filesystems store the creation time.'
+flat_name: file.created
+level: extended
+name: created
+otel:
+- relation: match
+  stability: development
+type: date

@@ -1,0 +1,10 @@
+field: threat.enrichments.indicator.file.elf.header.entrypoint
+fieldset: threat
+dashed_name: threat-enrichments-indicator-file-elf-header-entrypoint
+description: Header entrypoint of the ELF file.
+flat_name: threat.enrichments.indicator.file.elf.header.entrypoint
+format: string
+level: extended
+name: header.entrypoint
+original_fieldset: elf
+type: long

@@ -1,0 +1,11 @@
+field: host.target.os.platform
+fieldset: host
+dashed_name: host-target-os-platform
+description: Operating system platform (such centos, ubuntu, windows).
+example: darwin
+flat_name: host.target.os.platform
+ignore_above: 1024
+level: extended
+name: platform
+original_fieldset: os
+type: keyword

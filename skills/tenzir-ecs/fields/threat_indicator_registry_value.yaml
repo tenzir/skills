@@ -1,0 +1,11 @@
+field: threat.indicator.registry.value
+fieldset: threat
+dashed_name: threat-indicator-registry-value
+description: Name of the value written.
+example: Debugger
+flat_name: threat.indicator.registry.value
+ignore_above: 1024
+level: core
+name: value
+original_fieldset: registry
+type: keyword

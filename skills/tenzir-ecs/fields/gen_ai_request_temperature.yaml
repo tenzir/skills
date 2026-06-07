@@ -1,0 +1,13 @@
+field: gen_ai.request.temperature
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-request-temperature
+description: The temperature setting for the GenAI request.
+example: 0.0
+flat_name: gen_ai.request.temperature
+level: extended
+name: request.temperature
+otel:
+- relation: match
+  stability: development
+type: double

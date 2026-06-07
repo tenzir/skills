@@ -1,0 +1,10 @@
+field: user_agent.device.name
+fieldset: user_agent
+dashed_name: user-agent-device-name
+description: Name of the device.
+example: iPhone
+flat_name: user_agent.device.name
+ignore_above: 1024
+level: extended
+name: device.name
+type: keyword

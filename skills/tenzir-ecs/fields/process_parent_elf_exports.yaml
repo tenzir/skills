@@ -1,0 +1,11 @@
+field: process.parent.elf.exports
+fieldset: process
+dashed_name: process-parent-elf-exports
+description: List of exported element names and types.
+flat_name: process.parent.elf.exports
+level: extended
+name: exports
+normalize:
+- array
+original_fieldset: elf
+type: flattened

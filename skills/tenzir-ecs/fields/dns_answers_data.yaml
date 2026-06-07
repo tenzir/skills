@@ -1,0 +1,12 @@
+field: dns.answers.data
+fieldset: dns
+dashed_name: dns-answers-data
+description: 'The data describing the resource.
+
+  The meaning of this data depends on the type and class of the resource record.'
+example: 10.10.10.10
+flat_name: dns.answers.data
+ignore_above: 1024
+level: extended
+name: answers.data
+type: keyword

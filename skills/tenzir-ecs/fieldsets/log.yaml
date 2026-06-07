@@ -1,0 +1,66 @@
+fieldset: log
+description: 'Details about the event''s logging mechanism or logging transport.
+
+  The log.* fields are typically populated with details about the logging mechanism used to create and/or transport the event. For example, syslog details belong under `log.syslog.*`.
+
+  The details specific to your event source are typically not logged under `log.*`, but rather in `event.*` or in other ECS fields.'
+group: 2
+name: log
+prefix: log.
+title: Log
+type: group
+fields:
+- name: log.file.path
+  type: keyword
+  description: Full path to the log file this event came from.
+- name: log.level
+  type: keyword
+  description: Log level of the log event.
+- name: log.logger
+  type: keyword
+  description: Name of the logger.
+- name: log.origin.file.line
+  type: long
+  description: The line number of the file which originated the log event.
+- name: log.origin.file.name
+  type: keyword
+  description: The code file which originated the log event.
+- name: log.origin.function
+  type: keyword
+  description: The function which originated the log event.
+- name: log.syslog
+  type: object
+  description: Syslog metadata
+- name: log.syslog.appname
+  type: keyword
+  description: The device or application that originated the Syslog message.
+- name: log.syslog.facility.code
+  type: long
+  description: Syslog numeric facility of the event.
+- name: log.syslog.facility.name
+  type: keyword
+  description: Syslog text-based facility of the event.
+- name: log.syslog.hostname
+  type: keyword
+  description: The host that originated the Syslog message.
+- name: log.syslog.msgid
+  type: keyword
+  description: An identifier for the type of Syslog message.
+- name: log.syslog.priority
+  type: long
+  description: Syslog priority of the event.
+- name: log.syslog.procid
+  type: keyword
+  description: The process name or ID that originated the Syslog message.
+- name: log.syslog.severity.code
+  type: long
+  description: Syslog numeric severity of the event.
+- name: log.syslog.severity.name
+  type: keyword
+  description: Syslog text-based severity of the event.
+- name: log.syslog.structured_data
+  type: flattened
+  description: Structured data expressed in RFC 5424 messages.
+- name: log.syslog.version
+  type: keyword
+  description: Syslog protocol version.

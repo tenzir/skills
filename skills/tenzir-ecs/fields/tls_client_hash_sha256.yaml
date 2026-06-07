@@ -1,0 +1,13 @@
+field: tls.client.hash.sha256
+fieldset: tls
+dashed_name: tls-client-hash-sha256
+description: Certificate fingerprint using the SHA256 digest of DER-encoded version of certificate offered by the client. For consistency with other hash values, this value should be formatted as an uppercase hash.
+example: 0687F666A054EF17A08E2F2162EAB4CBC0D265E1D7875BE74BF3C712CA92DAF0
+flat_name: tls.client.hash.sha256
+ignore_above: 1024
+level: extended
+name: client.hash.sha256
+otel:
+- relation: match
+  stability: development
+type: keyword

@@ -1,0 +1,11 @@
+field: faas.coldstart
+fieldset: faas
+dashed_name: faas-coldstart
+description: Boolean value indicating a cold start of a function.
+flat_name: faas.coldstart
+level: extended
+name: coldstart
+otel:
+- relation: match
+  stability: development
+type: boolean

@@ -1,0 +1,11 @@
+field: host.target.geo.region_name
+fieldset: host
+dashed_name: host-target-geo-region-name
+description: Region name.
+example: Quebec
+flat_name: host.target.geo.region_name
+ignore_above: 1024
+level: core
+name: region_name
+original_fieldset: geo
+type: keyword

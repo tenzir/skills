@@ -1,0 +1,11 @@
+field: threat.indicator.file.code_signature.subject_name
+fieldset: threat
+dashed_name: threat-indicator-file-code-signature-subject-name
+description: Subject name of the code signer
+example: Microsoft Corporation
+flat_name: threat.indicator.file.code_signature.subject_name
+ignore_above: 1024
+level: core
+name: subject_name
+original_fieldset: code_signature
+type: keyword

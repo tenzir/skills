@@ -1,0 +1,13 @@
+field: device.product.name
+fieldset: device
+beta: This field is beta and subject to change.
+dashed_name: device-product-name
+description: 'The human-readable marketing or commercial name of the device as designated by the manufacturer. This name is typically found in product documentation, marketing materials, or device packaging.
+
+  Unlike the product.id which is a technical identifier, this field contains the consumer-facing product name that would be recognizable to end users. The name should be exactly as provided by the manufacturer and may include model numbers, series designations, or other identifying information.'
+example: Extreme V2 SSD
+flat_name: device.product.name
+ignore_above: 1024
+level: extended
+name: product.name
+type: keyword

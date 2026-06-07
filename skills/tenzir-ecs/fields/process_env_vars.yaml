@@ -1,0 +1,15 @@
+field: process.env_vars
+fieldset: process
+dashed_name: process-env-vars
+description: 'Array of environment variable bindings. Captured from a snapshot of the environment at the time of execution.
+
+  May be filtered to protect sensitive information.'
+example: '["PATH=/usr/local/bin:/usr/bin", "USER=ubuntu"]'
+flat_name: process.env_vars
+ignore_above: 1024
+level: extended
+name: env_vars
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

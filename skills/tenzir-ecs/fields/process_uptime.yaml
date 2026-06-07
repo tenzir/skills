@@ -1,0 +1,13 @@
+field: process.uptime
+fieldset: process
+dashed_name: process-uptime
+description: Seconds the process has been up.
+example: 1325
+flat_name: process.uptime
+level: extended
+name: uptime
+otel:
+- metric: process.uptime
+  relation: metric
+  stability: development
+type: long

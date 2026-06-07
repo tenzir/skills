@@ -1,0 +1,9 @@
+field: host.target.network.ingress.packets
+fieldset: host
+dashed_name: host-target-network-ingress-packets
+description: The number of packets (gauge) received on all network interfaces by the host since the last metric collection.
+flat_name: host.target.network.ingress.packets
+level: extended
+name: network.ingress.packets
+original_fieldset: host
+type: long

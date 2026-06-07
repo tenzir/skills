@@ -1,0 +1,21 @@
+field: labels
+fieldset: base
+dashed_name: labels
+description: 'Custom key/value pairs.
+
+  Can be used to add meta information to events. Should not contain nested objects. All values are stored as keyword.
+
+  Example: `docker` and `k8s` labels.'
+example: '{"application": "foo-bar", "env": "production"}'
+flat_name: labels
+level: core
+name: labels
+object_type: keyword
+otel:
+- attribute: k8s.pod.label
+  relation: related
+  stability: development
+- attribute: container.label
+  relation: related
+  stability: development
+type: object

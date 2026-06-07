@@ -1,0 +1,25 @@
+fieldset: error
+description: 'These fields can represent errors of any kind.
+
+  Use them for errors that happen while fetching events or in cases where the event itself contains an error.'
+group: 2
+name: error
+prefix: error.
+title: Error
+type: group
+fields:
+- name: error.code
+  type: keyword
+  description: Error code describing the error.
+- name: error.id
+  type: keyword
+  description: Unique identifier for the error.
+- name: error.message
+  type: match_only_text
+  description: Error message.
+- name: error.stack_trace
+  type: wildcard
+  description: The stack trace of this error in plain text.
+- name: error.type
+  type: keyword
+  description: The type of the error, for example the class name of the exception.

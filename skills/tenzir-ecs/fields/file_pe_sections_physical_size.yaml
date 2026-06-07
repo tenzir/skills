@@ -1,0 +1,10 @@
+field: file.pe.sections.physical_size
+fieldset: file
+dashed_name: file-pe-sections-physical-size
+description: PE Section List physical size.
+flat_name: file.pe.sections.physical_size
+format: bytes
+level: extended
+name: sections.physical_size
+original_fieldset: pe
+type: long

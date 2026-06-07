@@ -1,0 +1,10 @@
+field: process.entry_leader.parent.start
+fieldset: process
+dashed_name: process-entry-leader-parent-start
+description: The time the process started.
+example: '2016-05-23T08:05:34.853Z'
+flat_name: process.entry_leader.parent.start
+level: extended
+name: start
+original_fieldset: process
+type: date

@@ -1,0 +1,11 @@
+field: server.geo.region_name
+fieldset: server
+dashed_name: server-geo-region-name
+description: Region name.
+example: Quebec
+flat_name: server.geo.region_name
+ignore_above: 1024
+level: core
+name: region_name
+original_fieldset: geo
+type: keyword

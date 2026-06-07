@@ -1,0 +1,10 @@
+field: dll.hash.ssdeep
+fieldset: dll
+dashed_name: dll-hash-ssdeep
+description: SSDEEP hash.
+flat_name: dll.hash.ssdeep
+ignore_above: 1024
+level: extended
+name: ssdeep
+original_fieldset: hash
+type: keyword

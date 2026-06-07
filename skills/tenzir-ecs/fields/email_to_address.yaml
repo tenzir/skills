@@ -1,0 +1,13 @@
+field: email.to.address
+fieldset: email
+dashed_name: email-to-address
+description: The email address of recipient
+example: user1@example.com
+flat_name: email.to.address
+ignore_above: 1024
+level: extended
+name: to.address
+normalize:
+- array
+synthetic_source_keep: none
+type: keyword

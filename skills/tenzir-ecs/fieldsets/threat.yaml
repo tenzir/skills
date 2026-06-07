@@ -1,0 +1,1921 @@
+fieldset: threat
+description: 'Fields to classify events and alerts according to a threat taxonomy such as the MITRE ATT&CK® framework.
+
+  These fields are for users to classify alerts from all of their sources (e.g. IDS, NGFW, etc.) within a common taxonomy. The threat.tactic.* fields are meant to capture the high level category of the threat (e.g. "impact"). The threat.technique.* fields are meant to capture which kind of approach is used by this detected threat, to accomplish the goal (e.g. "endpoint denial of service").'
+group: 2
+name: threat
+nestings:
+- threat.enrichments.indicator.as
+- threat.enrichments.indicator.file
+- threat.enrichments.indicator.geo
+- threat.enrichments.indicator.registry
+- threat.enrichments.indicator.url
+- threat.enrichments.indicator.x509
+- threat.indicator.as
+- threat.indicator.file
+- threat.indicator.geo
+- threat.indicator.registry
+- threat.indicator.url
+- threat.indicator.x509
+prefix: threat.
+reused_here:
+- full: threat.indicator.x509
+  schema_name: x509
+  description: These fields contain x509 certificate metadata.
+- full: threat.enrichments.indicator.x509
+  schema_name: x509
+  description: These fields contain x509 certificate metadata.
+- full: threat.indicator.as
+  schema_name: as
+  description: Fields describing an Autonomous System (Internet routing prefix).
+- full: threat.enrichments.indicator.as
+  schema_name: as
+  description: Fields describing an Autonomous System (Internet routing prefix).
+- full: threat.indicator.file
+  schema_name: file
+  description: Fields describing files.
+- full: threat.enrichments.indicator.file
+  schema_name: file
+  description: Fields describing files.
+- full: threat.indicator.geo
+  schema_name: geo
+  description: Fields describing a location.
+- full: threat.enrichments.indicator.geo
+  schema_name: geo
+  description: Fields describing a location.
+- full: threat.indicator.registry
+  schema_name: registry
+  description: Fields related to Windows Registry operations.
+- full: threat.enrichments.indicator.registry
+  schema_name: registry
+  description: Fields related to Windows Registry operations.
+- full: threat.indicator.url
+  schema_name: url
+  description: Fields that let you store URLs in various forms.
+- full: threat.enrichments.indicator.url
+  schema_name: url
+  description: Fields that let you store URLs in various forms.
+title: Threat
+type: group
+fields:
+- name: threat.enrichments
+  type: nested
+  description: List of objects containing indicators enriching the event.
+  normalize:
+  - array
+- name: threat.enrichments.indicator
+  type: object
+  description: Object containing indicators enriching the event.
+- name: threat.enrichments.indicator.as.number
+  type: long
+  description: Unique number allocated to the autonomous system.
+  original_fieldset: as
+- name: threat.enrichments.indicator.as.organization.name
+  type: keyword
+  description: Organization name.
+  original_fieldset: as
+- name: threat.enrichments.indicator.confidence
+  type: keyword
+  description: Indicator confidence rating
+- name: threat.enrichments.indicator.description
+  type: keyword
+  description: Indicator description
+- name: threat.enrichments.indicator.email.address
+  type: keyword
+  description: Indicator email address
+- name: threat.enrichments.indicator.file.accessed
+  type: date
+  description: Last time the file was accessed.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.attributes
+  type: keyword
+  description: Array of file attributes.
+  original_fieldset: file
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.code_signature.digest_algorithm
+  type: keyword
+  description: Hashing algorithm used to sign the process.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.exists
+  type: boolean
+  description: Boolean to capture if a signature is present.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.flags
+  type: keyword
+  description: Code signing flags of the process
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: threat.enrichments.indicator.file.code_signature.signing_id
+  type: keyword
+  description: The identifier used to sign the process.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.status
+  type: keyword
+  description: Additional information about the certificate status.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.subject_name
+  type: keyword
+  description: Subject name of the code signer
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.team_id
+  type: keyword
+  description: The team identifier used to sign the process.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.thumbprint_sha256
+  type: keyword
+  description: SHA256 hash of the certificate.
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: threat.enrichments.indicator.file.code_signature.timestamp
+  type: date
+  description: When the signature was generated and signed.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.trusted
+  type: boolean
+  description: Stores the trust status of the certificate chain.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.code_signature.valid
+  type: boolean
+  description: Boolean to capture if the digital signature is verified against the binary content.
+  original_fieldset: code_signature
+- name: threat.enrichments.indicator.file.created
+  type: date
+  description: File creation time.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.ctime
+  type: date
+  description: Last time the file attributes or metadata changed.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.device
+  type: keyword
+  description: Device that is the source of the file.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.directory
+  type: keyword
+  description: Directory where the file is located.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.drive_letter
+  type: keyword
+  description: Drive letter where the file is located.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.elf.architecture
+  type: keyword
+  description: Machine architecture of the ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.byte_order
+  type: keyword
+  description: Byte sequence of ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.cpu_type
+  type: keyword
+  description: CPU type of the ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.creation_date
+  type: date
+  description: Build or compile date.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.exports
+  type: flattened
+  description: List of exported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.elf.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in an ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.abi_version
+  type: keyword
+  description: Version of the ELF Application Binary Interface (ABI).
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.class
+  type: keyword
+  description: Header class of the ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.data
+  type: keyword
+  description: Data table of the ELF header.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.entrypoint
+  type: long
+  description: Header entrypoint of the ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.object_version
+  type: keyword
+  description: '"0x1" for original ELF files.'
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.os_abi
+  type: keyword
+  description: Application Binary Interface (ABI) of the Linux OS.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.type
+  type: keyword
+  description: Header type of the ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.header.version
+  type: keyword
+  description: Version of the ELF header.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.import_hash
+  type: keyword
+  description: A hash of the imports in an ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.elf.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections
+  type: nested
+  description: Section information of the ELF file.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.elf.sections.chi2
+  type: long
+  description: Chi-square probability distribution of the section.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.flags
+  type: keyword
+  description: ELF Section List flags.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.name
+  type: keyword
+  description: ELF Section List name.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.physical_offset
+  type: keyword
+  description: ELF Section List offset.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.physical_size
+  type: long
+  description: ELF Section List physical size.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.type
+  type: keyword
+  description: ELF Section List type.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.virtual_address
+  type: long
+  description: ELF Section List virtual address.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.sections.virtual_size
+  type: long
+  description: ELF Section List virtual size.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.segments
+  type: nested
+  description: ELF object segment list.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.elf.segments.sections
+  type: keyword
+  description: ELF object segment sections.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.segments.type
+  type: keyword
+  description: ELF object segment type.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.elf.shared_libraries
+  type: keyword
+  description: List of shared libraries used by this ELF object.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.elf.telfhash
+  type: keyword
+  description: telfhash hash for ELF file.
+  original_fieldset: elf
+- name: threat.enrichments.indicator.file.extension
+  type: keyword
+  description: File extension, excluding the leading dot.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.fork_name
+  type: keyword
+  description: A fork is additional data associated with a filesystem object.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.gid
+  type: keyword
+  description: Primary group ID (GID) of the file.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.group
+  type: keyword
+  description: Primary group name of the file.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.hash.cdhash
+  type: keyword
+  description: The Code Directory (CD) hash of an executable.
+  original_fieldset: hash
+  beta: This field is beta and subject to change.
+- name: threat.enrichments.indicator.file.hash.md5
+  type: keyword
+  description: MD5 hash.
+  original_fieldset: hash
+- name: threat.enrichments.indicator.file.hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  original_fieldset: hash
+- name: threat.enrichments.indicator.file.hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  original_fieldset: hash
+- name: threat.enrichments.indicator.file.hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  original_fieldset: hash
+- name: threat.enrichments.indicator.file.hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  original_fieldset: hash
+- name: threat.enrichments.indicator.file.hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  original_fieldset: hash
+- name: threat.enrichments.indicator.file.hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  original_fieldset: hash
+- name: threat.enrichments.indicator.file.inode
+  type: keyword
+  description: Inode representing the file in the filesystem.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.mime_type
+  type: keyword
+  description: Media type of file, document, or arrangement of bytes.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.mode
+  type: keyword
+  description: Mode of the file in octal representation.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.mtime
+  type: date
+  description: Last time the file content was modified.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.name
+  type: keyword
+  description: Name of the file including the extension, without the directory.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.origin_referrer_url
+  type: keyword
+  description: The URL of the webpage that linked to the file.
+  original_fieldset: file
+  beta: This field is beta and subject to change.
+- name: threat.enrichments.indicator.file.origin_url
+  type: keyword
+  description: The URL where the file is hosted.
+  original_fieldset: file
+  beta: This field is beta and subject to change.
+- name: threat.enrichments.indicator.file.owner
+  type: keyword
+  description: File owner's username.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.path
+  type: keyword
+  description: Full path to the file, including the file name.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.pe.architecture
+  type: keyword
+  description: CPU architecture target for the file.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.company
+  type: keyword
+  description: Internal company name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.description
+  type: keyword
+  description: Internal description of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.file_version
+  type: keyword
+  description: Process name.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a PE file.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.imphash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.import_hash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.pe.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.original_file_name
+  type: keyword
+  description: Internal name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.pehash
+  type: keyword
+  description: A hash of the PE header and data from one or more PE sections.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.product
+  type: keyword
+  description: Internal product name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.sections
+  type: nested
+  description: Section information of the PE file.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.pe.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.sections.name
+  type: keyword
+  description: PE Section List name.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.sections.physical_size
+  type: long
+  description: PE Section List physical size.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.pe.sections.virtual_size
+  type: long
+  description: PE Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: pe
+- name: threat.enrichments.indicator.file.size
+  type: long
+  description: File size in bytes.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.target_path
+  type: keyword
+  description: Target path for symlinks.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.type
+  type: keyword
+  description: File type (file, dir, or symlink).
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.uid
+  type: keyword
+  description: The user ID (UID) or security identifier (SID) of the file owner.
+  original_fieldset: file
+- name: threat.enrichments.indicator.file.x509.alternative_names
+  type: keyword
+  description: List of subject alternative names (SAN).
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.issuer.common_name
+  type: keyword
+  description: List of common name (CN) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.issuer.country
+  type: keyword
+  description: List of country \(C) codes
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.issuer.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of issuing certificate authority.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.issuer.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.issuer.organization
+  type: keyword
+  description: List of organizations (O) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.issuer.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.issuer.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.not_after
+  type: date
+  description: Time at which the certificate is no longer considered valid.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.not_before
+  type: date
+  description: Time at which the certificate is first considered valid.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.public_key_algorithm
+  type: keyword
+  description: Algorithm used to generate the public key.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.public_key_curve
+  type: keyword
+  description: The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.public_key_exponent
+  type: long
+  description: Exponent used to derive the public key. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.public_key_size
+  type: long
+  description: The size of the public key space in bits.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.serial_number
+  type: keyword
+  description: Unique serial number issued by the certificate authority.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.signature_algorithm
+  type: keyword
+  description: Identifier for certificate signature algorithm.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.subject.common_name
+  type: keyword
+  description: List of common names (CN) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.subject.country
+  type: keyword
+  description: List of country \(C) code
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.subject.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of the certificate subject entity.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.file.x509.subject.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.subject.organization
+  type: keyword
+  description: List of organizations (O) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.subject.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.subject.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.file.x509.version_number
+  type: keyword
+  description: Version of x509 format.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.first_seen
+  type: date
+  description: Date/time indicator was first reported.
+- name: threat.enrichments.indicator.geo.city_name
+  type: keyword
+  description: City name.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.continent_code
+  type: keyword
+  description: Continent code.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.continent_name
+  type: keyword
+  description: Name of the continent.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.country_iso_code
+  type: keyword
+  description: Country ISO code.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.country_name
+  type: keyword
+  description: Country name.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.location
+  type: geo_point
+  description: Longitude and latitude.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.name
+  type: keyword
+  description: User-defined description of a location.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.postal_code
+  type: keyword
+  description: Postal code.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.region_iso_code
+  type: keyword
+  description: Region ISO code.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.region_name
+  type: keyword
+  description: Region name.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.geo.timezone
+  type: keyword
+  description: Time zone.
+  original_fieldset: geo
+- name: threat.enrichments.indicator.ip
+  type: ip
+  description: Indicator IP address
+- name: threat.enrichments.indicator.last_seen
+  type: date
+  description: Date/time indicator was last reported.
+- name: threat.enrichments.indicator.marking.tlp
+  type: keyword
+  description: Indicator TLP marking
+- name: threat.enrichments.indicator.marking.tlp_version
+  type: keyword
+  description: Indicator TLP version
+- name: threat.enrichments.indicator.modified_at
+  type: date
+  description: Date/time indicator was last updated.
+- name: threat.enrichments.indicator.name
+  type: keyword
+  description: Indicator display name
+- name: threat.enrichments.indicator.port
+  type: long
+  description: Indicator port
+- name: threat.enrichments.indicator.provider
+  type: keyword
+  description: Indicator provider
+- name: threat.enrichments.indicator.reference
+  type: keyword
+  description: Indicator reference URL
+- name: threat.enrichments.indicator.registry.data.bytes
+  type: keyword
+  description: Original bytes written with base64 encoding.
+  original_fieldset: registry
+- name: threat.enrichments.indicator.registry.data.strings
+  type: wildcard
+  description: List of strings representing what was written to the registry.
+  original_fieldset: registry
+  normalize:
+  - array
+- name: threat.enrichments.indicator.registry.data.type
+  type: keyword
+  description: Standard registry type for encoding contents
+  original_fieldset: registry
+- name: threat.enrichments.indicator.registry.hive
+  type: keyword
+  description: Abbreviated name for the hive.
+  original_fieldset: registry
+- name: threat.enrichments.indicator.registry.key
+  type: keyword
+  description: Hive-relative path of keys.
+  original_fieldset: registry
+- name: threat.enrichments.indicator.registry.path
+  type: keyword
+  description: Full path, including hive, key and value
+  original_fieldset: registry
+- name: threat.enrichments.indicator.registry.value
+  type: keyword
+  description: Name of the value written.
+  original_fieldset: registry
+- name: threat.enrichments.indicator.scanner_stats
+  type: long
+  description: Scanner statistics
+- name: threat.enrichments.indicator.sightings
+  type: long
+  description: Number of times indicator observed
+- name: threat.enrichments.indicator.type
+  type: keyword
+  description: Type of indicator
+- name: threat.enrichments.indicator.url.domain
+  type: keyword
+  description: Domain of the url.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.extension
+  type: keyword
+  description: File extension from the request url, excluding the leading dot.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.fragment
+  type: keyword
+  description: Portion of the url after the `#`.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.full
+  type: wildcard
+  description: Full unparsed URL.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.original
+  type: wildcard
+  description: Unmodified original url as seen in the event source.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.password
+  type: keyword
+  description: Password of the request.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.path
+  type: wildcard
+  description: Path of the request, such as "/search".
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.port
+  type: long
+  description: Port of the request, such as 443.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.query
+  type: keyword
+  description: Query string of the request.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.registered_domain
+  type: keyword
+  description: The highest registered url domain, stripped of the subdomain.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.scheme
+  type: keyword
+  description: Scheme of the url.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.subdomain
+  type: keyword
+  description: The subdomain of the domain.
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.top_level_domain
+  type: keyword
+  description: The effective top level domain (com, org, net, co.uk).
+  original_fieldset: url
+- name: threat.enrichments.indicator.url.username
+  type: keyword
+  description: Username of the request.
+  original_fieldset: url
+- name: threat.enrichments.indicator.x509.alternative_names
+  type: keyword
+  description: List of subject alternative names (SAN).
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.issuer.common_name
+  type: keyword
+  description: List of common name (CN) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.issuer.country
+  type: keyword
+  description: List of country \(C) codes
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.issuer.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of issuing certificate authority.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.issuer.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.issuer.organization
+  type: keyword
+  description: List of organizations (O) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.issuer.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.issuer.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.not_after
+  type: date
+  description: Time at which the certificate is no longer considered valid.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.not_before
+  type: date
+  description: Time at which the certificate is first considered valid.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.public_key_algorithm
+  type: keyword
+  description: Algorithm used to generate the public key.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.public_key_curve
+  type: keyword
+  description: The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.public_key_exponent
+  type: long
+  description: Exponent used to derive the public key. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.public_key_size
+  type: long
+  description: The size of the public key space in bits.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.serial_number
+  type: keyword
+  description: Unique serial number issued by the certificate authority.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.signature_algorithm
+  type: keyword
+  description: Identifier for certificate signature algorithm.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.subject.common_name
+  type: keyword
+  description: List of common names (CN) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.subject.country
+  type: keyword
+  description: List of country \(C) code
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.subject.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of the certificate subject entity.
+  original_fieldset: x509
+- name: threat.enrichments.indicator.x509.subject.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.subject.organization
+  type: keyword
+  description: List of organizations (O) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.subject.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.subject.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.enrichments.indicator.x509.version_number
+  type: keyword
+  description: Version of x509 format.
+  original_fieldset: x509
+- name: threat.enrichments.matched.atomic
+  type: keyword
+  description: Matched indicator value
+- name: threat.enrichments.matched.field
+  type: keyword
+  description: Matched indicator field
+- name: threat.enrichments.matched.id
+  type: keyword
+  description: Matched indicator identifier
+- name: threat.enrichments.matched.index
+  type: keyword
+  description: Matched indicator index
+- name: threat.enrichments.matched.occurred
+  type: date
+  description: Date of match
+- name: threat.enrichments.matched.type
+  type: keyword
+  description: Type of indicator match
+- name: threat.feed.dashboard_id
+  type: keyword
+  description: Feed dashboard ID.
+- name: threat.feed.description
+  type: keyword
+  description: Description of the threat feed.
+- name: threat.feed.name
+  type: keyword
+  description: Name of the threat feed.
+- name: threat.feed.reference
+  type: keyword
+  description: Reference for the threat feed.
+- name: threat.framework
+  type: keyword
+  description: Threat classification framework.
+- name: threat.group.alias
+  type: keyword
+  description: Alias of the group.
+  normalize:
+  - array
+- name: threat.group.id
+  type: keyword
+  description: ID of the group.
+- name: threat.group.name
+  type: keyword
+  description: Name of the group.
+- name: threat.group.reference
+  type: keyword
+  description: Reference URL of the group.
+- name: threat.indicator.as.number
+  type: long
+  description: Unique number allocated to the autonomous system.
+  original_fieldset: as
+- name: threat.indicator.as.organization.name
+  type: keyword
+  description: Organization name.
+  original_fieldset: as
+- name: threat.indicator.confidence
+  type: keyword
+  description: Indicator confidence rating
+- name: threat.indicator.description
+  type: keyword
+  description: Indicator description
+- name: threat.indicator.email.address
+  type: keyword
+  description: Indicator email address
+- name: threat.indicator.file.accessed
+  type: date
+  description: Last time the file was accessed.
+  original_fieldset: file
+- name: threat.indicator.file.attributes
+  type: keyword
+  description: Array of file attributes.
+  original_fieldset: file
+  normalize:
+  - array
+- name: threat.indicator.file.code_signature.digest_algorithm
+  type: keyword
+  description: Hashing algorithm used to sign the process.
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.exists
+  type: boolean
+  description: Boolean to capture if a signature is present.
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.flags
+  type: keyword
+  description: Code signing flags of the process
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: threat.indicator.file.code_signature.signing_id
+  type: keyword
+  description: The identifier used to sign the process.
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.status
+  type: keyword
+  description: Additional information about the certificate status.
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.subject_name
+  type: keyword
+  description: Subject name of the code signer
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.team_id
+  type: keyword
+  description: The team identifier used to sign the process.
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.thumbprint_sha256
+  type: keyword
+  description: SHA256 hash of the certificate.
+  original_fieldset: code_signature
+  beta: This field is beta and subject to change.
+- name: threat.indicator.file.code_signature.timestamp
+  type: date
+  description: When the signature was generated and signed.
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.trusted
+  type: boolean
+  description: Stores the trust status of the certificate chain.
+  original_fieldset: code_signature
+- name: threat.indicator.file.code_signature.valid
+  type: boolean
+  description: Boolean to capture if the digital signature is verified against the binary content.
+  original_fieldset: code_signature
+- name: threat.indicator.file.created
+  type: date
+  description: File creation time.
+  original_fieldset: file
+- name: threat.indicator.file.ctime
+  type: date
+  description: Last time the file attributes or metadata changed.
+  original_fieldset: file
+- name: threat.indicator.file.device
+  type: keyword
+  description: Device that is the source of the file.
+  original_fieldset: file
+- name: threat.indicator.file.directory
+  type: keyword
+  description: Directory where the file is located.
+  original_fieldset: file
+- name: threat.indicator.file.drive_letter
+  type: keyword
+  description: Drive letter where the file is located.
+  original_fieldset: file
+- name: threat.indicator.file.elf.architecture
+  type: keyword
+  description: Machine architecture of the ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.byte_order
+  type: keyword
+  description: Byte sequence of ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.cpu_type
+  type: keyword
+  description: CPU type of the ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.creation_date
+  type: date
+  description: Build or compile date.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.exports
+  type: flattened
+  description: List of exported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.indicator.file.elf.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in an ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.abi_version
+  type: keyword
+  description: Version of the ELF Application Binary Interface (ABI).
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.class
+  type: keyword
+  description: Header class of the ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.data
+  type: keyword
+  description: Data table of the ELF header.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.entrypoint
+  type: long
+  description: Header entrypoint of the ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.object_version
+  type: keyword
+  description: '"0x1" for original ELF files.'
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.os_abi
+  type: keyword
+  description: Application Binary Interface (ABI) of the Linux OS.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.type
+  type: keyword
+  description: Header type of the ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.header.version
+  type: keyword
+  description: Version of the ELF header.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.import_hash
+  type: keyword
+  description: A hash of the imports in an ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.indicator.file.elf.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections
+  type: nested
+  description: Section information of the ELF file.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.indicator.file.elf.sections.chi2
+  type: long
+  description: Chi-square probability distribution of the section.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.flags
+  type: keyword
+  description: ELF Section List flags.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.name
+  type: keyword
+  description: ELF Section List name.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.physical_offset
+  type: keyword
+  description: ELF Section List offset.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.physical_size
+  type: long
+  description: ELF Section List physical size.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.type
+  type: keyword
+  description: ELF Section List type.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.virtual_address
+  type: long
+  description: ELF Section List virtual address.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.sections.virtual_size
+  type: long
+  description: ELF Section List virtual size.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.segments
+  type: nested
+  description: ELF object segment list.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.indicator.file.elf.segments.sections
+  type: keyword
+  description: ELF object segment sections.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.segments.type
+  type: keyword
+  description: ELF object segment type.
+  original_fieldset: elf
+- name: threat.indicator.file.elf.shared_libraries
+  type: keyword
+  description: List of shared libraries used by this ELF object.
+  original_fieldset: elf
+  normalize:
+  - array
+- name: threat.indicator.file.elf.telfhash
+  type: keyword
+  description: telfhash hash for ELF file.
+  original_fieldset: elf
+- name: threat.indicator.file.extension
+  type: keyword
+  description: File extension, excluding the leading dot.
+  original_fieldset: file
+- name: threat.indicator.file.fork_name
+  type: keyword
+  description: A fork is additional data associated with a filesystem object.
+  original_fieldset: file
+- name: threat.indicator.file.gid
+  type: keyword
+  description: Primary group ID (GID) of the file.
+  original_fieldset: file
+- name: threat.indicator.file.group
+  type: keyword
+  description: Primary group name of the file.
+  original_fieldset: file
+- name: threat.indicator.file.hash.cdhash
+  type: keyword
+  description: The Code Directory (CD) hash of an executable.
+  original_fieldset: hash
+  beta: This field is beta and subject to change.
+- name: threat.indicator.file.hash.md5
+  type: keyword
+  description: MD5 hash.
+  original_fieldset: hash
+- name: threat.indicator.file.hash.sha1
+  type: keyword
+  description: SHA1 hash.
+  original_fieldset: hash
+- name: threat.indicator.file.hash.sha256
+  type: keyword
+  description: SHA256 hash.
+  original_fieldset: hash
+- name: threat.indicator.file.hash.sha384
+  type: keyword
+  description: SHA384 hash.
+  original_fieldset: hash
+- name: threat.indicator.file.hash.sha512
+  type: keyword
+  description: SHA512 hash.
+  original_fieldset: hash
+- name: threat.indicator.file.hash.ssdeep
+  type: keyword
+  description: SSDEEP hash.
+  original_fieldset: hash
+- name: threat.indicator.file.hash.tlsh
+  type: keyword
+  description: TLSH hash.
+  original_fieldset: hash
+- name: threat.indicator.file.inode
+  type: keyword
+  description: Inode representing the file in the filesystem.
+  original_fieldset: file
+- name: threat.indicator.file.mime_type
+  type: keyword
+  description: Media type of file, document, or arrangement of bytes.
+  original_fieldset: file
+- name: threat.indicator.file.mode
+  type: keyword
+  description: Mode of the file in octal representation.
+  original_fieldset: file
+- name: threat.indicator.file.mtime
+  type: date
+  description: Last time the file content was modified.
+  original_fieldset: file
+- name: threat.indicator.file.name
+  type: keyword
+  description: Name of the file including the extension, without the directory.
+  original_fieldset: file
+- name: threat.indicator.file.origin_referrer_url
+  type: keyword
+  description: The URL of the webpage that linked to the file.
+  original_fieldset: file
+  beta: This field is beta and subject to change.
+- name: threat.indicator.file.origin_url
+  type: keyword
+  description: The URL where the file is hosted.
+  original_fieldset: file
+  beta: This field is beta and subject to change.
+- name: threat.indicator.file.owner
+  type: keyword
+  description: File owner's username.
+  original_fieldset: file
+- name: threat.indicator.file.path
+  type: keyword
+  description: Full path to the file, including the file name.
+  original_fieldset: file
+- name: threat.indicator.file.pe.architecture
+  type: keyword
+  description: CPU architecture target for the file.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.company
+  type: keyword
+  description: Internal company name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.description
+  type: keyword
+  description: Internal description of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.file_version
+  type: keyword
+  description: Process name.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.go_import_hash
+  type: keyword
+  description: A hash of the Go language imports in a PE file.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.go_imports
+  type: flattened
+  description: List of imported Go language element names and types.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.go_imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.go_imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of Go imports.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.go_stripped
+  type: boolean
+  description: Whether the file is a stripped or obfuscated Go executable.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.imphash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.import_hash
+  type: keyword
+  description: A hash of the imports in a PE file.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.imports
+  type: flattened
+  description: List of imported element names and types.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: threat.indicator.file.pe.imports_names_entropy
+  type: long
+  description: Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.imports_names_var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the list of imported element names and types.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.original_file_name
+  type: keyword
+  description: Internal name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.pehash
+  type: keyword
+  description: A hash of the PE header and data from one or more PE sections.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.product
+  type: keyword
+  description: Internal product name of the file, provided at compile-time.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.sections
+  type: nested
+  description: Section information of the PE file.
+  original_fieldset: pe
+  normalize:
+  - array
+- name: threat.indicator.file.pe.sections.entropy
+  type: long
+  description: Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.sections.name
+  type: keyword
+  description: PE Section List name.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.sections.physical_size
+  type: long
+  description: PE Section List physical size.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.sections.var_entropy
+  type: long
+  description: Variance for Shannon entropy calculation from the section.
+  original_fieldset: pe
+- name: threat.indicator.file.pe.sections.virtual_size
+  type: long
+  description: PE Section List virtual size. This is always the same as `physical_size`.
+  original_fieldset: pe
+- name: threat.indicator.file.size
+  type: long
+  description: File size in bytes.
+  original_fieldset: file
+- name: threat.indicator.file.target_path
+  type: keyword
+  description: Target path for symlinks.
+  original_fieldset: file
+- name: threat.indicator.file.type
+  type: keyword
+  description: File type (file, dir, or symlink).
+  original_fieldset: file
+- name: threat.indicator.file.uid
+  type: keyword
+  description: The user ID (UID) or security identifier (SID) of the file owner.
+  original_fieldset: file
+- name: threat.indicator.file.x509.alternative_names
+  type: keyword
+  description: List of subject alternative names (SAN).
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.issuer.common_name
+  type: keyword
+  description: List of common name (CN) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.issuer.country
+  type: keyword
+  description: List of country \(C) codes
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.issuer.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of issuing certificate authority.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.issuer.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.issuer.organization
+  type: keyword
+  description: List of organizations (O) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.issuer.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.issuer.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.not_after
+  type: date
+  description: Time at which the certificate is no longer considered valid.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.not_before
+  type: date
+  description: Time at which the certificate is first considered valid.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.public_key_algorithm
+  type: keyword
+  description: Algorithm used to generate the public key.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.public_key_curve
+  type: keyword
+  description: The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.public_key_exponent
+  type: long
+  description: Exponent used to derive the public key. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.public_key_size
+  type: long
+  description: The size of the public key space in bits.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.serial_number
+  type: keyword
+  description: Unique serial number issued by the certificate authority.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.signature_algorithm
+  type: keyword
+  description: Identifier for certificate signature algorithm.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.subject.common_name
+  type: keyword
+  description: List of common names (CN) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.subject.country
+  type: keyword
+  description: List of country \(C) code
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.subject.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of the certificate subject entity.
+  original_fieldset: x509
+- name: threat.indicator.file.x509.subject.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.subject.organization
+  type: keyword
+  description: List of organizations (O) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.subject.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.subject.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.file.x509.version_number
+  type: keyword
+  description: Version of x509 format.
+  original_fieldset: x509
+- name: threat.indicator.first_seen
+  type: date
+  description: Date/time indicator was first reported.
+- name: threat.indicator.geo.city_name
+  type: keyword
+  description: City name.
+  original_fieldset: geo
+- name: threat.indicator.geo.continent_code
+  type: keyword
+  description: Continent code.
+  original_fieldset: geo
+- name: threat.indicator.geo.continent_name
+  type: keyword
+  description: Name of the continent.
+  original_fieldset: geo
+- name: threat.indicator.geo.country_iso_code
+  type: keyword
+  description: Country ISO code.
+  original_fieldset: geo
+- name: threat.indicator.geo.country_name
+  type: keyword
+  description: Country name.
+  original_fieldset: geo
+- name: threat.indicator.geo.location
+  type: geo_point
+  description: Longitude and latitude.
+  original_fieldset: geo
+- name: threat.indicator.geo.name
+  type: keyword
+  description: User-defined description of a location.
+  original_fieldset: geo
+- name: threat.indicator.geo.postal_code
+  type: keyword
+  description: Postal code.
+  original_fieldset: geo
+- name: threat.indicator.geo.region_iso_code
+  type: keyword
+  description: Region ISO code.
+  original_fieldset: geo
+- name: threat.indicator.geo.region_name
+  type: keyword
+  description: Region name.
+  original_fieldset: geo
+- name: threat.indicator.geo.timezone
+  type: keyword
+  description: Time zone.
+  original_fieldset: geo
+- name: threat.indicator.id
+  type: keyword
+  description: ID of the indicator
+  normalize:
+  - array
+- name: threat.indicator.ip
+  type: ip
+  description: Indicator IP address
+- name: threat.indicator.last_seen
+  type: date
+  description: Date/time indicator was last reported.
+- name: threat.indicator.marking.tlp
+  type: keyword
+  description: Indicator TLP marking
+- name: threat.indicator.marking.tlp_version
+  type: keyword
+  description: Indicator TLP version
+- name: threat.indicator.modified_at
+  type: date
+  description: Date/time indicator was last updated.
+- name: threat.indicator.name
+  type: keyword
+  description: Indicator display name
+- name: threat.indicator.port
+  type: long
+  description: Indicator port
+- name: threat.indicator.provider
+  type: keyword
+  description: Indicator provider
+- name: threat.indicator.reference
+  type: keyword
+  description: Indicator reference URL
+- name: threat.indicator.registry.data.bytes
+  type: keyword
+  description: Original bytes written with base64 encoding.
+  original_fieldset: registry
+- name: threat.indicator.registry.data.strings
+  type: wildcard
+  description: List of strings representing what was written to the registry.
+  original_fieldset: registry
+  normalize:
+  - array
+- name: threat.indicator.registry.data.type
+  type: keyword
+  description: Standard registry type for encoding contents
+  original_fieldset: registry
+- name: threat.indicator.registry.hive
+  type: keyword
+  description: Abbreviated name for the hive.
+  original_fieldset: registry
+- name: threat.indicator.registry.key
+  type: keyword
+  description: Hive-relative path of keys.
+  original_fieldset: registry
+- name: threat.indicator.registry.path
+  type: keyword
+  description: Full path, including hive, key and value
+  original_fieldset: registry
+- name: threat.indicator.registry.value
+  type: keyword
+  description: Name of the value written.
+  original_fieldset: registry
+- name: threat.indicator.scanner_stats
+  type: long
+  description: Scanner statistics
+- name: threat.indicator.sightings
+  type: long
+  description: Number of times indicator observed
+- name: threat.indicator.type
+  type: keyword
+  description: Type of indicator
+- name: threat.indicator.url.domain
+  type: keyword
+  description: Domain of the url.
+  original_fieldset: url
+- name: threat.indicator.url.extension
+  type: keyword
+  description: File extension from the request url, excluding the leading dot.
+  original_fieldset: url
+- name: threat.indicator.url.fragment
+  type: keyword
+  description: Portion of the url after the `#`.
+  original_fieldset: url
+- name: threat.indicator.url.full
+  type: wildcard
+  description: Full unparsed URL.
+  original_fieldset: url
+- name: threat.indicator.url.original
+  type: wildcard
+  description: Unmodified original url as seen in the event source.
+  original_fieldset: url
+- name: threat.indicator.url.password
+  type: keyword
+  description: Password of the request.
+  original_fieldset: url
+- name: threat.indicator.url.path
+  type: wildcard
+  description: Path of the request, such as "/search".
+  original_fieldset: url
+- name: threat.indicator.url.port
+  type: long
+  description: Port of the request, such as 443.
+  original_fieldset: url
+- name: threat.indicator.url.query
+  type: keyword
+  description: Query string of the request.
+  original_fieldset: url
+- name: threat.indicator.url.registered_domain
+  type: keyword
+  description: The highest registered url domain, stripped of the subdomain.
+  original_fieldset: url
+- name: threat.indicator.url.scheme
+  type: keyword
+  description: Scheme of the url.
+  original_fieldset: url
+- name: threat.indicator.url.subdomain
+  type: keyword
+  description: The subdomain of the domain.
+  original_fieldset: url
+- name: threat.indicator.url.top_level_domain
+  type: keyword
+  description: The effective top level domain (com, org, net, co.uk).
+  original_fieldset: url
+- name: threat.indicator.url.username
+  type: keyword
+  description: Username of the request.
+  original_fieldset: url
+- name: threat.indicator.x509.alternative_names
+  type: keyword
+  description: List of subject alternative names (SAN).
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.issuer.common_name
+  type: keyword
+  description: List of common name (CN) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.issuer.country
+  type: keyword
+  description: List of country \(C) codes
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.issuer.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of issuing certificate authority.
+  original_fieldset: x509
+- name: threat.indicator.x509.issuer.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.issuer.organization
+  type: keyword
+  description: List of organizations (O) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.issuer.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of issuing certificate authority.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.issuer.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.not_after
+  type: date
+  description: Time at which the certificate is no longer considered valid.
+  original_fieldset: x509
+- name: threat.indicator.x509.not_before
+  type: date
+  description: Time at which the certificate is first considered valid.
+  original_fieldset: x509
+- name: threat.indicator.x509.public_key_algorithm
+  type: keyword
+  description: Algorithm used to generate the public key.
+  original_fieldset: x509
+- name: threat.indicator.x509.public_key_curve
+  type: keyword
+  description: The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.indicator.x509.public_key_exponent
+  type: long
+  description: Exponent used to derive the public key. This is algorithm specific.
+  original_fieldset: x509
+- name: threat.indicator.x509.public_key_size
+  type: long
+  description: The size of the public key space in bits.
+  original_fieldset: x509
+- name: threat.indicator.x509.serial_number
+  type: keyword
+  description: Unique serial number issued by the certificate authority.
+  original_fieldset: x509
+- name: threat.indicator.x509.signature_algorithm
+  type: keyword
+  description: Identifier for certificate signature algorithm.
+  original_fieldset: x509
+- name: threat.indicator.x509.subject.common_name
+  type: keyword
+  description: List of common names (CN) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.subject.country
+  type: keyword
+  description: List of country \(C) code
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.subject.distinguished_name
+  type: keyword
+  description: Distinguished name (DN) of the certificate subject entity.
+  original_fieldset: x509
+- name: threat.indicator.x509.subject.locality
+  type: keyword
+  description: List of locality names (L)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.subject.organization
+  type: keyword
+  description: List of organizations (O) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.subject.organizational_unit
+  type: keyword
+  description: List of organizational units (OU) of subject.
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.subject.state_or_province
+  type: keyword
+  description: List of state or province names (ST, S, or P)
+  original_fieldset: x509
+  normalize:
+  - array
+- name: threat.indicator.x509.version_number
+  type: keyword
+  description: Version of x509 format.
+  original_fieldset: x509
+- name: threat.software.alias
+  type: keyword
+  description: Alias of the software
+  normalize:
+  - array
+- name: threat.software.id
+  type: keyword
+  description: ID of the software
+- name: threat.software.name
+  type: keyword
+  description: Name of the software.
+- name: threat.software.platforms
+  type: keyword
+  description: Platforms of the software.
+  normalize:
+  - array
+- name: threat.software.reference
+  type: keyword
+  description: Software reference URL.
+- name: threat.software.type
+  type: keyword
+  description: Software type.
+- name: threat.tactic.id
+  type: keyword
+  description: Threat tactic id.
+  normalize:
+  - array
+- name: threat.tactic.name
+  type: keyword
+  description: Threat tactic.
+  normalize:
+  - array
+- name: threat.tactic.reference
+  type: keyword
+  description: Threat tactic URL reference.
+  normalize:
+  - array
+- name: threat.technique.id
+  type: keyword
+  description: Threat technique id.
+  normalize:
+  - array
+- name: threat.technique.name
+  type: keyword
+  description: Threat technique name.
+  normalize:
+  - array
+- name: threat.technique.reference
+  type: keyword
+  description: Threat technique URL reference.
+  normalize:
+  - array
+- name: threat.technique.subtechnique.id
+  type: keyword
+  description: Threat subtechnique id.
+  normalize:
+  - array
+- name: threat.technique.subtechnique.name
+  type: keyword
+  description: Threat subtechnique name.
+  normalize:
+  - array
+- name: threat.technique.subtechnique.reference
+  type: keyword
+  description: Threat subtechnique URL reference.
+  normalize:
+  - array

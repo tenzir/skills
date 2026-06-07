@@ -1,0 +1,10 @@
+field: dll.code_signature.timestamp
+fieldset: dll
+dashed_name: dll-code-signature-timestamp
+description: Date and time when the code signature was generated and signed.
+example: '2021-01-01T12:10:30Z'
+flat_name: dll.code_signature.timestamp
+level: extended
+name: timestamp
+original_fieldset: code_signature
+type: date

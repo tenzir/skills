@@ -1,0 +1,13 @@
+field: process.session_leader.vpid
+fieldset: process
+dashed_name: process-session-leader-vpid
+description: 'Virtual process id.
+
+  The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.'
+example: 4242
+flat_name: process.session_leader.vpid
+format: string
+level: core
+name: vpid
+original_fieldset: process
+type: long

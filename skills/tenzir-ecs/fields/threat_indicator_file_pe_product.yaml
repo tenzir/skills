@@ -1,0 +1,11 @@
+field: threat.indicator.file.pe.product
+fieldset: threat
+dashed_name: threat-indicator-file-pe-product
+description: Internal product name of the file, provided at compile-time.
+example: Microsoft® Windows® Operating System
+flat_name: threat.indicator.file.pe.product
+ignore_above: 1024
+level: extended
+name: product
+original_fieldset: pe
+type: keyword
