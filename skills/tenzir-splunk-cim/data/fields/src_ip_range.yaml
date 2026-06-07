@@ -2,7 +2,6 @@ name: src_ip_range
 used_by:
 - model: Change
   dataset: Network_Changes
-  kind: event
   source: declared
   type: string
   description: For network events, this field represents the incoming traffic from a specific source IP address or range. Specify a single IP address, or an IP address range in CIDR notation (for example, 203.0.113.5/32)

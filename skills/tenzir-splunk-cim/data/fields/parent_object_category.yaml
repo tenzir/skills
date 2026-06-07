@@ -2,7 +2,6 @@ name: parent_object_category
 used_by:
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: declared
   type: string
   description: Object category of the parent object on which action was performed by a user.

@@ -2,7 +2,6 @@ name: query_type
 used_by:
 - model: Network_Resolution
   dataset: DNS
-  kind: event
   source: declared
   type: string
   description: Number of entries that appear in the 'Questions' section of the DNS query.

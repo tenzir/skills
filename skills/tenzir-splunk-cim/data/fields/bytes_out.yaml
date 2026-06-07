@@ -2,7 +2,6 @@ name: bytes_out
 used_by:
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: calculated
   type: number
   description: How many bytes this device/interface transmitted.
@@ -13,7 +12,6 @@ used_by:
     expression: case(isnum(bytes_out),bytes_out,isnum(bytes) AND isnum(bytes_in),bytes-bytes_in,1=1,null())
 - model: Web
   dataset: Web
-  kind: event
   source: calculated
   type: number
   description: The number of outbound bytes transferred.

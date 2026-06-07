@@ -2,7 +2,6 @@ name: filter_action
 used_by:
 - model: Email
   dataset: Filtering
-  kind: event
   source: declared
   type: string
   description: The status produced by the filter, such as 'accepted', 'rejected', or 'dropped'.

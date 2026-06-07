@@ -5,7 +5,6 @@ lookups:
 used_by:
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: calculated
   type: string
   description: The type of DLP system that generated the event.

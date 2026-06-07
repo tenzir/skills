@@ -5,7 +5,6 @@ lookups:
 used_by:
 - model: Network_Resolution
   dataset: DNS
-  kind: event
   source: calculated
   type: string
   description: The numerical id or name of a return code. For details, see the Domain Name System Parameters on the Internet Assigned Numbers Authority (IANA) web site.

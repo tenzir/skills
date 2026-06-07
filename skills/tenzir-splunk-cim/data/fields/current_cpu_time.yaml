@@ -2,7 +2,6 @@ name: current_cpu_time
 used_by:
 - model: JVM
   dataset: Threading
-  kind: event
   source: declared
   type: number
   description: CPU-space time taken by the JVM, in seconds.

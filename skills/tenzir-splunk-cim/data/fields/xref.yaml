@@ -2,13 +2,11 @@ name: xref
 used_by:
 - model: Email
   dataset: All_Email
-  kind: event
   source: declared
   type: string
   description: An external reference. Can contain message IDs or recipient addresses from related messages.
 - model: Vulnerabilities
   dataset: Vulnerabilities
-  kind: event
   source: calculated
   type: string
   description: A cross-reference identifier associated with the vulnerability. In most cases, the xref field contains both the short name of the database being cross-referenced and the unique identifier used in the external database.

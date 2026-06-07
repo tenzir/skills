@@ -2,7 +2,6 @@ name: heap_committed
 used_by:
 - model: JVM
   dataset: Memory
-  kind: event
   source: declared
   type: number
   description: Committed amount of heap memory used by the JVM, in bytes.

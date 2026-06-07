@@ -2,19 +2,16 @@ name: user_agent
 used_by:
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: declared
   type: string
   description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
 - model: Change
   dataset: All_Changes
-  kind: event
   source: declared
   type: string
   description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: declared
   type: string
   description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.

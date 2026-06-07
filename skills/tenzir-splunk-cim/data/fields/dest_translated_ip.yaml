@@ -2,7 +2,6 @@ name: dest_translated_ip
 used_by:
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: The NATed IPv4 or IPv6 address to which a packet has been sent.

@@ -2,7 +2,6 @@ name: transport_dest_port
 used_by:
 - model: Application_State
   dataset: Ports
-  kind: event
   source: calculated
   type: string
   description: Calculated as transport/dest_port, such as tcp/53.
@@ -13,7 +12,6 @@ used_by:
     expression: if(isnull(transport_dest_port) OR transport_dest_port="",split(replace(mvjoin(mvzip(transport,dest_port),"|"),",","/"),"|"),transport_dest_port)
 - model: Endpoint
   dataset: Ports
-  kind: search
   source: declared
   type: string
   description: Calculated as transport/dest_port, such as tcp/53.

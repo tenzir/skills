@@ -2,7 +2,6 @@ name: url_domain
 used_by:
 - model: Web
   dataset: Web
-  kind: event
   source: calculated
   type: string
   description: The domain name contained within the URL of the requested HTTP resource.

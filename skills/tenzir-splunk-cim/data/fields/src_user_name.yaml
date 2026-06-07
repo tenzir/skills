@@ -2,7 +2,6 @@ name: src_user_name
 used_by:
 - model: Change
   dataset: Account_Management
-  kind: event
   source: calculated
   type: string
   description: For account changes, the user name of the user or entity performing the change.

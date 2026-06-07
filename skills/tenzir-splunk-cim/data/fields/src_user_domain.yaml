@@ -2,7 +2,6 @@ name: src_user_domain
 used_by:
 - model: Email
   dataset: All_Email
-  kind: event
   source: calculated
   type: string
   description: The domain name contained within the email address of the message sender.

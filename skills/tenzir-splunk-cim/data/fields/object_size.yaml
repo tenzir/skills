@@ -2,7 +2,6 @@ name: object_size
 used_by:
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: calculated
   type: string
   description: The size of the modified resource object.

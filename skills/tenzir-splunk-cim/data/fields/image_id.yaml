@@ -2,7 +2,6 @@ name: image_id
 used_by:
 - model: Change
   dataset: Instance_Changes
-  kind: event
   source: calculated
   type: string
   description: For create instance events, this field represents the image ID used for creating the instance such as the OS, applications, installed libraries, and more.

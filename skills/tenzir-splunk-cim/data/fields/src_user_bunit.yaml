@@ -2,37 +2,31 @@ name: src_user_bunit
 used_by:
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: declared
   type: string
   description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: Change
   dataset: Account_Management
-  kind: event
   source: declared
   type: string
   description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: Change_Analysis
   dataset: Account_Management
-  kind: event
   source: declared
   type: string
   description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: declared
   type: string
   description: The business unit of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: Email
   dataset: All_Email
-  kind: event
   source: declared
   type: string
   description: The business unit of the message sender. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: Ticket_Management
   dataset: All_Ticket_Management
-  kind: event
   source: declared
   type: string
   description: The business unit associated with the user or entity that triggered the service request.

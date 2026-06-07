@@ -2,7 +2,6 @@ name: message_properties
 used_by:
 - model: Interprocess_Messaging
   dataset: All_Messaging
-  kind: event
   source: declared
   type: string
   description: An arbitrary list of message properties. The set of properties displayed depends on the message-oriented middleware (MOM) solution that you are using.

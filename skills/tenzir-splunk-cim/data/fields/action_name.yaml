@@ -2,7 +2,6 @@ name: action_name
 used_by:
 - model: Splunk_Audit
   dataset: Modular_Actions
-  kind: event
   source: calculated
   type: string
   description: The name of the action.

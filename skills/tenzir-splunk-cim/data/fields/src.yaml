@@ -5,7 +5,6 @@ lookups:
 used_by:
 - model: Alerts
   dataset: Alerts
-  kind: event
   source: calculated
   type: string
   description: The object that is the 'actor' of the alert event. You can alias or extract this from more specific fields, such as src_host, src_ip, or src_name.
@@ -16,7 +15,6 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: calculated
   type: string
   description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -27,13 +25,11 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Certificates
   dataset: All_Certificates
-  kind: event
   source: declared
   type: string
   description: The source involved in the certificate management event. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -44,7 +40,6 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The resource where the change was originated. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -55,7 +50,6 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: calculated
   type: string
   description: The endpoint client host.
@@ -66,13 +60,11 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Databases
   dataset: All_Databases
-  kind: event
   source: declared
   type: string
   description: The source of the database event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: calculated
   type: string
   description: The source of the DLP event.
@@ -83,7 +75,6 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Email
   dataset: All_Email
-  kind: event
   source: calculated
   type: string
   description: The system that sent the message. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -94,7 +85,6 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Endpoint
   dataset: Ports
-  kind: search
   source: calculated
   type: string
   description: The "remote" system connected to the listening port (if applicable).
@@ -105,7 +95,6 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Intrusion_Detection
   dataset: IDS_Attacks
-  kind: event
   source: calculated
   type: string
   description: The source involved in the attack detected by the IDS. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -116,19 +105,16 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Malware
   dataset: Malware_Attacks
-  kind: event
   source: declared
   type: string
   description: The source of the endpoint event, such as a DAT file relay server. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
 - model: Network_Resolution
   dataset: DNS
-  kind: event
   source: declared
   type: string
   description: The source of the network resolution event. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: calculated
   type: string
   description: The source of the network traffic (the client requesting the connection). You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -139,42 +125,34 @@ used_by:
     expression: if(isnull(src) OR src="","unknown",src)
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Account_Management
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_All_Email
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Authentication
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_DNS
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_IDS
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Network_Traffic
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Web
-  kind: search
   source: declared
   type: string
 - model: Web
   dataset: Web
-  kind: event
   source: calculated
   type: string
   description: The source of the network traffic (the client requesting the connection).

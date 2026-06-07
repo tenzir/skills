@@ -2,7 +2,6 @@ name: body
 used_by:
 - model: Alerts
   dataset: Alerts
-  kind: event
   source: declared
   type: string
   description: This field is deprecated in favor of 'description'.

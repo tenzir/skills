@@ -2,7 +2,6 @@ name: search_alias
 used_by:
 - model: Splunk_Audit
   dataset: Search_Activity
-  kind: event
   source: calculated
   type: string
   description: Short description of the type of search being run, such as the name of the search or the name of the data model being accelerated.

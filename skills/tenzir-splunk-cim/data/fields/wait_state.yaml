@@ -2,7 +2,6 @@ name: wait_state
 used_by:
 - model: Databases
   dataset: Session_Info
-  kind: event
   source: declared
   type: string
   description: Provides the current wait state for the session. Can indicate that the session is currently waiting or provide information about the session's last wait. WAITING indicates the session is currently waiting, WAITED UNKNOWN TIME indicates the duration of the last session wait is unknown, WAITED SHORT TIME indicates the last session wait was < 1/100th of a second, WAITED KNOWN TIME indicates the wait_time is the duration of the last session wait.

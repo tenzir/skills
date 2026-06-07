@@ -2,7 +2,6 @@ name: os
 used_by:
 - model: Compute_Inventory
   dataset: OS
-  kind: event
   source: calculated
   type: string
   description: The operating system of the resource, such as Microsoft Windows Server 2008r2. This field is constructed from vendor_product and version fields.
@@ -13,18 +12,15 @@ used_by:
     expression: if(isnotnull(os) AND os!="",replace(replace(os,"(?:\(R\)|\\\\xA8)",""),"^(?:MS)?\s*Windows","Microsoft Windows"),"unknown")
 - model: Endpoint
   dataset: Processes
-  kind: search
   source: declared
   type: string
   description: The operating system of the resource, such as Microsoft Windows Server 2008r2.
 - model: JVM
   dataset: OS
-  kind: event
   source: declared
   type: string
   description: OS that the JVM is running on.
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_OS
-  kind: search
   source: declared
   type: string

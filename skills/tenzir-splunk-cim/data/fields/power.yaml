@@ -2,12 +2,10 @@ name: power
 used_by:
 - model: Performance
   dataset: Facilities
-  kind: event
   source: declared
   type: number
   description: Amount of power consumed by the facilities resource, in kW.
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Perf_Facilities
-  kind: search
   source: declared
   type: number

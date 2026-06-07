@@ -2,7 +2,6 @@ name: object
 used_by:
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
@@ -13,7 +12,6 @@ used_by:
     expression: if(isnull(object) OR object="","unknown",object)
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: Name of the affected object on the resource, such as a router interface, user account, or server volume.
@@ -24,7 +22,6 @@ used_by:
     expression: if(isnull(object) OR object="","unknown",object)
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: calculated
   type: string
   description: Resource object name on which the action was performed by a user.
@@ -35,13 +32,11 @@ used_by:
     expression: if(isnull(object) OR object="","unknown",object)
 - model: Databases
   dataset: All_Databases
-  kind: event
   source: declared
   type: string
   description: The name of the database object.
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: calculated
   type: string
   description: The name of the affected object.
@@ -52,11 +47,9 @@ used_by:
     expression: if(isnull(object) OR object="","unknown",object)
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Endpoint_Changes
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Filesystem_Changes
-  kind: search
   source: declared
   type: string

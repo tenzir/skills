@@ -2,7 +2,6 @@ name: orig_rid
 used_by:
 - model: Splunk_Audit
   dataset: Modular_Actions
-  kind: event
   source: declared
   type: string
   description: The rid value of a source action result, automatically added to an event if it is the product of a previously executed action.

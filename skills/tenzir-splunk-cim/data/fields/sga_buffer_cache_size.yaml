@@ -2,7 +2,6 @@ name: sga_buffer_cache_size
 used_by:
 - model: Databases
   dataset: Instance_Stats
-  kind: event
   source: declared
   type: number
   description: The total size of the buffer cache for the database instance, in bytes.

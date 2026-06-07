@@ -2,7 +2,6 @@ name: lb_method
 used_by:
 - model: Compute_Inventory
   dataset: Network
-  kind: event
   source: declared
   type: string
   description: The load balancing method used by the computing resource such as method, round robin, or least weight.

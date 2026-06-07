@@ -2,7 +2,6 @@ name: result
 used_by:
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: calculated
   type: string
   description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -12,7 +11,6 @@ used_by:
     expression: if(isnull(result) OR result="","unknown",result)
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full.
@@ -23,7 +21,6 @@ used_by:
     expression: if(isnotnull(result) AND result!="",result,if(isnotnull(signature) AND signature!="",signature,"unknown"))
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: 'The vendor-specific result of a change, or clarification of an action status. For example, status=failure may be accompanied by result=blocked by policy or result=disk full. Note: result is a string. Use msg_severity_id for severity ID fields that are integer data types.'

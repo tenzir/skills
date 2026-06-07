@@ -2,13 +2,11 @@ name: user_role
 used_by:
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: declared
   type: string
   description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: declared
   type: string
   description: The role of the user involved in the event, or who initiated the event.

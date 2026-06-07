@@ -2,7 +2,6 @@ name: elapsed_time
 used_by:
 - model: Databases
   dataset: Session_Info
-  kind: event
   source: declared
   type: number
   description: The total amount of time elapsed since the user started the session by logging into the database server, in seconds.

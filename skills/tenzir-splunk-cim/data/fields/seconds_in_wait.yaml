@@ -2,7 +2,6 @@ name: seconds_in_wait
 used_by:
 - model: Databases
   dataset: Session_Info
-  kind: event
   source: declared
   type: number
   description: The seconds_in_wait depends on the value of wait_time. If wait_time = 0, seconds_in_wait is the number of seconds spent in the current wait condition. If wait_time has a nonzero value, seconds_in_wait is the number of seconds that have elapsed since the start of the last wait. You can get the active seconds that have elapsed since the last wait ended by calculating seconds_in_wait - wait_time / 100.

@@ -2,7 +2,6 @@ name: packets
 used_by:
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: calculated
   type: number
   description: The total count of packets handled by this device/interface (packets_in + packets_out).

@@ -9,7 +9,6 @@ lookups:
 used_by:
 - model: Application_State
   dataset: Services
-  kind: event
   source: calculated
   type: string
   description: The status of the service.
@@ -25,7 +24,6 @@ used_by:
     expression: if(isnull(status) OR status="","unknown",status)
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: Status of the update.
@@ -39,7 +37,6 @@ used_by:
     expression: if(isnull(status) OR status="","unknown",status)
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: Status of the update.
@@ -53,13 +50,11 @@ used_by:
     expression: if(isnull(status) OR status="","unknown",status)
 - model: Compute_Inventory
   dataset: All_Inventory
-  kind: event
   source: declared
   type: string
   description: The current reported state of the resource.
 - model: Endpoint
   dataset: Registry
-  kind: search
   source: declared
   type: string
   description: The outcome of the registry action.
@@ -68,7 +63,6 @@ used_by:
   - success
 - model: Endpoint
   dataset: Services
-  kind: search
   source: calculated
   type: string
   description: The status of the service.
@@ -85,7 +79,6 @@ used_by:
     expression: if(isnull(status) OR status="","unknown",status)
 - model: Interprocess_Messaging
   dataset: All_Messaging
-  kind: event
   source: declared
   type: boolean
   description: The status of the message response.
@@ -94,39 +87,32 @@ used_by:
   - fail
 - model: Splunk_Audit
   dataset: Scheduler_Activity
-  kind: search
   source: declared
   type: string
   description: The status of the scheduled search.
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Endpoint_Changes
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Filesystem_Changes
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Updates
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Web
-  kind: search
   source: declared
   type: string
 - model: Ticket_Management
   dataset: All_Ticket_Management
-  kind: event
   source: declared
   type: string
   description: The relative status of the service request.
 - model: Updates
   dataset: Updates
-  kind: event
   source: calculated
   type: string
   description: Indicates the status of a given patch requirement.
@@ -143,7 +129,6 @@ used_by:
     expression: if(isnull(status) OR status="","unknown",status)
 - model: Web
   dataset: Web
-  kind: event
   source: calculated
   type: string
   description: The HTTP response code indicating the status of the proxy request.

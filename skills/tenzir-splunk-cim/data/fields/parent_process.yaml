@@ -2,7 +2,6 @@ name: parent_process
 used_by:
 - model: Endpoint
   dataset: Filesystem
-  kind: search
   source: calculated
   type: string
   description: The full command string of the parent process
@@ -12,7 +11,6 @@ used_by:
     expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)
 - model: Endpoint
   dataset: Processes
-  kind: search
   source: calculated
   type: string
   description: The full command string of the parent process
@@ -23,7 +21,6 @@ used_by:
     expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)
 - model: Endpoint
   dataset: Registry
-  kind: search
   source: calculated
   type: string
   description: The full command string of the parent process

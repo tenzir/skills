@@ -2,7 +2,6 @@ name: process_name
 used_by:
 - model: Application_State
   dataset: All_Application_State
-  kind: event
   source: calculated
   type: string
   description: The name of a process.
@@ -13,7 +12,6 @@ used_by:
     input_field: process
 - model: Endpoint
   dataset: Filesystem
-  kind: search
   source: calculated
   type: string
   description: The friendly name of the process, such as notepad.exe.
@@ -24,7 +22,6 @@ used_by:
     expression: case(isnotnull(process_name) AND process_name!="", process_name, isnotnull(process) AND process!="" AND match(process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(process) AND process!="" AND match(process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
 - model: Endpoint
   dataset: Processes
-  kind: search
   source: calculated
   type: string
   description: The friendly name of the process, such as notepad.exe.
@@ -35,7 +32,6 @@ used_by:
     expression: case(isnotnull(process_name) AND process_name!="", process_name, isnotnull(process) AND process!="" AND match(process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(process) AND process!="" AND match(process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
 - model: Endpoint
   dataset: Registry
-  kind: search
   source: calculated
   type: string
   description: The friendly name of the process, such as notepad.exe.
@@ -46,7 +42,6 @@ used_by:
     expression: case(isnotnull(process_name) AND process_name!="", process_name, isnotnull(process) AND process!="" AND match(process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(process) AND process!="" AND match(process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
 - model: JVM
   dataset: Runtime
-  kind: event
   source: declared
   type: string
   description: Process name of the JVM process.

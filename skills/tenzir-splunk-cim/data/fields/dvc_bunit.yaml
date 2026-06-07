@@ -2,31 +2,26 @@ name: dvc_bunit
 used_by:
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: declared
   type: string
   description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: declared
   type: string
   description: The business unit of the DLP device. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: Intrusion_Detection
   dataset: IDS_Attacks
-  kind: event
   source: declared
   type: string
   description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
 - model: Vulnerabilities
   dataset: Vulnerabilities
-  kind: event
   source: declared
   type: string
   description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.

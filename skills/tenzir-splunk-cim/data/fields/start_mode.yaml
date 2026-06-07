@@ -2,7 +2,6 @@ name: start_mode
 used_by:
 - model: Application_State
   dataset: Services
-  kind: event
   source: calculated
   type: string
   description: The start mode for the service.
@@ -17,7 +16,6 @@ used_by:
     expression: if(isnull(start_mode) OR start_mode="","unknown",start_mode)
 - model: Endpoint
   dataset: Services
-  kind: search
   source: calculated
   type: string
   description: The start mode for the service.
@@ -32,6 +30,5 @@ used_by:
     expression: if(isnull(start_mode) OR start_mode="","unknown",start_mode)
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Services
-  kind: search
   source: declared
   type: string

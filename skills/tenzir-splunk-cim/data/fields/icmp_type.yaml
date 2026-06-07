@@ -2,7 +2,6 @@ name: icmp_type
 used_by:
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: number
   description: The RFC 2780 or RFC 4443 numeric value of the traffic. See the ICMP Type Numbers and the ICMPv6 Type Numbers.

@@ -2,7 +2,6 @@ name: dest_nt_host
 used_by:
 - model: Network_Sessions
   dataset: All_Sessions
-  kind: event
   source: calculated
   type: string
   description: The NetBIOS name of the client initializing a network session.

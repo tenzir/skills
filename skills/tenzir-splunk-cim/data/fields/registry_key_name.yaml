@@ -2,7 +2,6 @@ name: registry_key_name
 used_by:
 - model: Endpoint
   dataset: Registry
-  kind: search
   source: calculated
   type: string
   description: The name of the registry key, such as PrinterDriverData.

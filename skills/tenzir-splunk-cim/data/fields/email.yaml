@@ -2,7 +2,6 @@ name: email
 used_by:
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: declared
   type: string
   description: The email address of the user involved in the event, or who initiated the event.

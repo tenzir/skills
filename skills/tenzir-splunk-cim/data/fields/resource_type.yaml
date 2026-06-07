@@ -2,7 +2,6 @@ name: resource_type
 used_by:
 - model: Performance
   dataset: All_Performance
-  kind: event
   source: declared
   type: string
   description: The type of facilities resource involved in the performance event, such as a rack, room, or system.

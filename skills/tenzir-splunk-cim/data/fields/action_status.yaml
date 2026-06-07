@@ -5,7 +5,6 @@ lookups:
 used_by:
 - model: Splunk_Audit
   dataset: Modular_Actions
-  kind: event
   source: declared
   type: string
   description: The status of the action. For example, 'success' or 'failure'.

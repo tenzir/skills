@@ -2,7 +2,6 @@ name: bugtraq
 used_by:
 - model: Vulnerabilities
   dataset: Vulnerabilities
-  kind: event
   source: calculated
   type: string
   description: The identifier in the vulnerability database provided by the Security Focus website (searchable at http://www.securityfocus.com/).

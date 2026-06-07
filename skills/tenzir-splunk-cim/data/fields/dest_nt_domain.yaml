@@ -2,13 +2,11 @@ name: dest_nt_domain
 used_by:
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: declared
   type: string
   description: The name of the Active Directory used by the authentication target, if applicable.
 - model: Change
   dataset: Account_Management
-  kind: event
   source: calculated
   type: string
   description: The NT domain of the destination, if applicable.
@@ -19,7 +17,6 @@ used_by:
     expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
 - model: Change_Analysis
   dataset: Account_Management
-  kind: event
   source: calculated
   type: string
   description: The NT domain of the destination, if applicable.
@@ -30,7 +27,6 @@ used_by:
     expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
 - model: Malware
   dataset: Malware_Attacks
-  kind: event
   source: calculated
   type: string
   description: The NT domain of the destination, if applicable.
@@ -41,7 +37,6 @@ used_by:
     expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
 - model: Malware
   dataset: Malware_Operations
-  kind: search
   source: calculated
   type: string
   description: The NT domain of the dest system, if applicable.
@@ -52,11 +47,9 @@ used_by:
     expression: if(isnull(dest_nt_domain) OR dest_nt_domain="","unknown",dest_nt_domain)
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Malware_Attacks
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Malware_Operations
-  kind: search
   source: declared
   type: string

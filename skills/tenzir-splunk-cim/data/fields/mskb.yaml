@@ -2,7 +2,6 @@ name: mskb
 used_by:
 - model: Vulnerabilities
   dataset: Vulnerabilities
-  kind: event
   source: calculated
   type: string
   description: The Microsoft Knowledge Base article number (http://support.microsoft.com/kb/).

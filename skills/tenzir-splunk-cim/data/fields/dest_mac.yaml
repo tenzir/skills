@@ -2,7 +2,6 @@ name: dest_mac
 used_by:
 - model: Network_Sessions
   dataset: All_Sessions
-  kind: event
   source: calculated
   type: string
   description: The internal MAC address of the network session client. For DHCP events, this is the MAC address of the client acquiring an IP address lease. For VPN events, this is the MAC address of the client initializing a network session.
@@ -13,7 +12,6 @@ used_by:
     expression: case(source LIKE "stream%" AND isnotnull(chaddr) AND chaddr!="",chaddr,isnull(dest_mac) OR dest_mac="","unknown",1=1,dest_mac)
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: 'The destination TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'

@@ -2,7 +2,6 @@ name: ssl_publickey
 used_by:
 - model: Certificates
   dataset: SSL
-  kind: event
   source: declared
   type: string
   description: The certificate's public key.

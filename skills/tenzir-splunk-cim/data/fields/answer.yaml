@@ -2,7 +2,6 @@ name: answer
 used_by:
 - model: Network_Resolution
   dataset: DNS
-  kind: event
   source: calculated
   type: string
   description: Resolved address for the query.
@@ -14,6 +13,5 @@ used_by:
     expression: if(isnull(answer) OR answer="","unknown",answer)
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_DNS
-  kind: search
   source: declared
   type: string

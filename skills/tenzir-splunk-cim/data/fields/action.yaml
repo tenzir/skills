@@ -15,7 +15,6 @@ lookups:
 used_by:
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: calculated
   type: string
   description: The action performed on the resource.
@@ -31,7 +30,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The action attempted on the resource, regardless of success or failure.
@@ -56,7 +54,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The action performed on the resource.
@@ -76,7 +73,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: calculated
   type: string
   description: The data access action taken by the user.
@@ -113,7 +109,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: calculated
   type: string
   description: The action taken by the DLP device.
@@ -124,7 +119,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Email
   dataset: All_Email
-  kind: event
   source: calculated
   type: string
   description: Action taken by the reporting device.
@@ -140,7 +134,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Endpoint
   dataset: Filesystem
-  kind: search
   source: calculated
   type: string
   description: The action performed on the resource.
@@ -157,13 +150,11 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Endpoint
   dataset: Processes
-  kind: search
   source: declared
   type: string
   description: The action taken by the endpoint.
 - model: Endpoint
   dataset: Registry
-  kind: search
   source: calculated
   type: string
   description: The action performed on the resource.
@@ -179,7 +170,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Intrusion_Detection
   dataset: IDS_Attacks
-  kind: event
   source: declared
   type: string
   description: The action taken by the intrusion detection system (IDS).
@@ -188,7 +178,6 @@ used_by:
   - blocked
 - model: Malware
   dataset: Malware_Attacks
-  kind: event
   source: calculated
   type: string
   description: The action taken by the reporting device.
@@ -203,7 +192,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Network_Sessions
   dataset: All_Sessions
-  kind: event
   source: declared
   type: string
   description: The action taken by the reporting device.
@@ -213,7 +201,6 @@ used_by:
   - ended
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: calculated
   type: string
   description: The action taken by the network device.
@@ -228,7 +215,6 @@ used_by:
     expression: if(isnull(action) OR action="","unknown",action)
 - model: Performance
   dataset: Timesync
-  kind: event
   source: calculated
   type: string
   description: The result of a time sync event.
@@ -242,67 +228,54 @@ used_by:
     expression: case(isnotnull(action) AND action!="",action,tag="success","success",tag="failure","failure",1=1,"unknown")
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Account_Management
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_All_Email
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Authentication
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Endpoint_Changes
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Filesystem_Changes
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Malware_Attacks
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Network_Changes
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Network_Traffic
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Perf_Timesync
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Perf_Uptime
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Restarts
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Web
-  kind: search
   source: declared
   type: string
 - model: Web
   dataset: Web
-  kind: event
   source: calculated
   type: string
   description: The action taken by the server or proxy.

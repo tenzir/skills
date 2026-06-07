@@ -2,7 +2,6 @@ name: node
 used_by:
 - model: Compute_Inventory
   dataset: Network
-  kind: event
   source: declared
   type: string
   description: Represents a node hit.

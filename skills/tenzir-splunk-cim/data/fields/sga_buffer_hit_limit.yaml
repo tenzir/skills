@@ -2,7 +2,6 @@ name: sga_buffer_hit_limit
 used_by:
 - model: Databases
   dataset: Instance_Stats
-  kind: event
   source: declared
   type: number
   description: The maximum number of buffers that can be hit in the database instance without finding a free buffer.

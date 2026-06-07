@@ -2,25 +2,21 @@ name: cpu_load_percent
 used_by:
 - model: Application_State
   dataset: Processes
-  kind: event
   source: declared
   type: number
   description: CPU Load in percent.
 - model: Endpoint
   dataset: Processes
-  kind: search
   source: declared
   type: number
   description: CPU load consumed by the process (in percent).
 - model: Performance
   dataset: CPU
-  kind: event
   source: declared
   type: number
   description: The amount of CPU load reported by the controller in percentage points.
   recommended: true
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Perf_CPU
-  kind: search
   source: declared
   type: number

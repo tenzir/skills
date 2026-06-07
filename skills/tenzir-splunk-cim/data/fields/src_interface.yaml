@@ -2,7 +2,6 @@ name: src_interface
 used_by:
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: The interface that is listening locally or sending packets remotely. Can also be referred to as the 'ingress interface.'

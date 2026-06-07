@@ -2,7 +2,6 @@ name: vip_port
 used_by:
 - model: Compute_Inventory
   dataset: Network
-  kind: event
   source: declared
   type: number
   description: The port number for the virtual IP address (VIP). A VIP allows multiple MACs to use one IP address. VIPs are often used by load balancers.

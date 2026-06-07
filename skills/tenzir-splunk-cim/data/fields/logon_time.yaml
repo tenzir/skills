@@ -2,7 +2,6 @@ name: logon_time
 used_by:
 - model: Databases
   dataset: Lock_Info
-  kind: event
   source: declared
   type: number
   description: The database logon time for the session.

@@ -293,7 +293,6 @@ def field_occurrence(
     *,
     model: str,
     dataset: str,
-    kind: str,
     source: str,
     calculation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -304,7 +303,6 @@ def field_occurrence(
             ("name", name),
             ("model", model),
             ("dataset", dataset),
-            ("kind", kind),
             ("source", source),
             *details.items(),
         )
@@ -468,7 +466,6 @@ def model_data(
                     field,
                     model=model_name,
                     dataset=name,
-                    kind=kind,
                     source="declared",
                 )
             )
@@ -483,7 +480,6 @@ def model_data(
                         field,
                         model=model_name,
                         dataset=name,
-                        kind=kind,
                         source="calculated",
                         calculation=calculation,
                     )

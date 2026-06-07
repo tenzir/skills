@@ -2,7 +2,6 @@ name: os_pid
 used_by:
 - model: Databases
   dataset: Lock_Info
-  kind: event
   source: declared
   type: string
   description: The process identifier for the operating system.

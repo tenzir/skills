@@ -2,7 +2,6 @@ name: priority
 used_by:
 - model: Ticket_Management
   dataset: All_Ticket_Management
-  kind: event
   source: declared
   type: string
   description: The relative priority of the service request.

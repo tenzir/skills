@@ -2,7 +2,6 @@ name: worker
 used_by:
 - model: Splunk_Audit
   dataset: Modular_Actions
-  kind: event
   source: calculated
   type: string
   description: The worker performing the action.

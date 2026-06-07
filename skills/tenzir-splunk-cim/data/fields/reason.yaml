@@ -2,7 +2,6 @@ name: reason
 used_by:
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: declared
   type: string
   description: The human-readable message associated with the authentication action (success or failure).

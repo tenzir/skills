@@ -2,7 +2,6 @@ name: date
 used_by:
 - model: Malware
   dataset: Malware_Attacks
-  kind: event
   source: calculated
   type: string
   description: The date of the malware event.

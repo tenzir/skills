@@ -2,7 +2,6 @@ name: search_type
 used_by:
 - model: Splunk_Audit
   dataset: Search_Activity
-  kind: event
   source: calculated
   type: string
   description: The type of search.

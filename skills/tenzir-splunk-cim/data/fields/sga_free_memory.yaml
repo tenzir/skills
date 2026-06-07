@@ -2,7 +2,6 @@ name: sga_free_memory
 used_by:
 - model: Databases
   dataset: Instance_Stats
-  kind: event
   source: declared
   type: number
   description: The total amount of free memory in the database instance SGA, in bytes.

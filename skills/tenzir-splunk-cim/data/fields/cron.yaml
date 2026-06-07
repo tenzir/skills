@@ -2,7 +2,6 @@ name: cron
 used_by:
 - model: Splunk_Audit
   dataset: Datamodel_Acceleration
-  kind: search
   source: declared
   type: string
   description: The cron expression used to accelerate the data model.

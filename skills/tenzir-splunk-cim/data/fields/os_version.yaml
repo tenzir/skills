@@ -2,7 +2,6 @@ name: os_version
 used_by:
 - model: JVM
   dataset: OS
-  kind: event
   source: declared
   type: string
   description: OS version that the JVM is running on.

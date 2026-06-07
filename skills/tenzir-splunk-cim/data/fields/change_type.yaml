@@ -2,7 +2,6 @@ name: change_type
 used_by:
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).
@@ -13,7 +12,6 @@ used_by:
     expression: if(isnull(change_type) OR change_type="","unknown",change_type)
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The type of change, such as filesystem or AAA (authentication, authorization, and accounting).

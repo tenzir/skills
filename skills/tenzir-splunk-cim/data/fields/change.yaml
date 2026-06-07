@@ -2,12 +2,10 @@ name: change
 used_by:
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Change
-  kind: search
   source: declared
   type: string
 - model: Ticket_Management
   dataset: Change
-  kind: event
   source: calculated
   type: string
   description: Designation for a request for change (RFC) that is raised to modify an IT service to resolve an incident or problem.

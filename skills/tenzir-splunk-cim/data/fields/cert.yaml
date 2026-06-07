@@ -2,7 +2,6 @@ name: cert
 used_by:
 - model: Vulnerabilities
   dataset: Vulnerabilities
-  kind: event
   source: calculated
   type: string
   description: The identifier in the vulnerability database provided by the US Computer Emergency Readiness Team (US-CERT, searchable at http://www.kb.cert.org/vuls/).

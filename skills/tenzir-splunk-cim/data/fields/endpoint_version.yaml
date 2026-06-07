@@ -2,7 +2,6 @@ name: endpoint_version
 used_by:
 - model: Interprocess_Messaging
   dataset: All_Messaging
-  kind: event
   source: declared
   type: string
   description: The version of the endpoint accessed during the RPC (remote procedure call) transaction, such as 1.0 or 1.22.

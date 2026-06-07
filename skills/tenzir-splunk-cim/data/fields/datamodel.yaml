@@ -2,13 +2,11 @@ name: datamodel
 used_by:
 - model: Splunk_Audit
   dataset: Datamodel_Acceleration
-  kind: search
   source: declared
   type: string
   description: The name of the data model accelerated.
 - model: Splunk_Audit
   dataset: Search_Activity
-  kind: event
   source: calculated
   type: string
   description: The name of the datamodel (for datamodel acceleration searches).

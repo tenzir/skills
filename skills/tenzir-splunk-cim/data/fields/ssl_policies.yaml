@@ -2,7 +2,6 @@ name: ssl_policies
 used_by:
 - model: Certificates
   dataset: SSL
-  kind: event
   source: declared
   type: string
   description: The Object Identification Numbers of the certificate's policies in a comma separated string.

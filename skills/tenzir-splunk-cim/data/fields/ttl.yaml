@@ -2,13 +2,11 @@ name: ttl
 used_by:
 - model: Network_Resolution
   dataset: DNS
-  kind: event
   source: declared
   type: number
   description: The time-to-live of the network resolution event, in seconds.
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: number
   description: The 'time to live' of a packet or diagram, in seconds.

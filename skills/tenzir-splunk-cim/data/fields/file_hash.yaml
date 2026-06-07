@@ -2,7 +2,6 @@ name: file_hash
 used_by:
 - model: Change_Analysis
   dataset: Filesystem_Changes
-  kind: event
   source: calculated
   type: string
   description: A cryptographic identifier assigned to the file object affected by the event.
@@ -13,13 +12,11 @@ used_by:
     expression: if(isnull(file_hash) OR file_hash="","unknown",file_hash)
 - model: Email
   dataset: All_Email
-  kind: event
   source: declared
   type: string
   description: The hashes for the files attached to the message, if any exist.
 - model: Endpoint
   dataset: Filesystem
-  kind: search
   source: calculated
   type: string
   description: A cryptographic identifier assigned to the file object affected by the event.
@@ -30,24 +27,20 @@ used_by:
     expression: if(isnull(file_hash) OR file_hash="","unknown",file_hash)
 - model: Intrusion_Detection
   dataset: IDS_Attacks
-  kind: event
   source: declared
   type: string
   description: A cryptographic identifier assigned to the file object affected by the event.
 - model: Malware
   dataset: Malware_Attacks
-  kind: event
   source: declared
   type: string
   description: The hash of the file with suspected malware.
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Filesystem_Changes
-  kind: search
   source: declared
   type: string
 - model: Updates
   dataset: Updates
-  kind: event
   source: declared
   type: string
   description: The checksum of the patch package that was installed or attempted.

@@ -2,13 +2,11 @@ name: mac
 used_by:
 - model: Compute_Inventory
   dataset: Network
-  kind: event
   source: declared
   type: string
   description: 'A MAC (media access control) address associated with the resource, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
   recommended: true
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Network
-  kind: search
   source: declared
   type: string

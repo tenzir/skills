@@ -2,7 +2,6 @@ name: process
 used_by:
 - model: Application_State
   dataset: All_Application_State
-  kind: event
   source: calculated
   type: string
   description: 'The name of a process or service file, such as sqlsrvr.exe or httpd. Note: This field is not appropriate for service or daemon names, such as SQL Server or Apache Web Server. Service or daemon names belong to the service field.'
@@ -13,19 +12,16 @@ used_by:
     expression: if(isnull(process) OR process="","unknown",process)
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: declared
   type: string
   description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
 - model: Email
   dataset: All_Email
-  kind: event
   source: declared
   type: string
   description: The name of the email executable that carries out the message transaction, such as sendmail, postfix, or the name of an email client.
 - model: Endpoint
   dataset: Filesystem
-  kind: search
   source: calculated
   type: string
   description: The full command string of the spawned process. Such as C:\WINDOWS\system32\cmd.exe /c ""C:\Program Files\SplunkUniversalForwarder\etc\system\bin\powershell.cmd" --scheme"
@@ -36,7 +32,6 @@ used_by:
     expression: if(isnull(process) OR process="","unknown",process)
 - model: Endpoint
   dataset: Processes
-  kind: search
   source: calculated
   type: string
   description: The full command string of the spawned process. Such as C:\WINDOWS\system32\cmd.exe /c ""C:\Program Files\SplunkUniversalForwarder\etc\system\bin\powershell.cmd" --scheme"
@@ -47,7 +42,6 @@ used_by:
     expression: if(isnull(process) OR process="","unknown",process)
 - model: Endpoint
   dataset: Registry
-  kind: search
   source: calculated
   type: string
   description: The full command string of the spawned process. Such as C:\WINDOWS\system32\cmd.exe /c ""C:\Program Files\SplunkUniversalForwarder\etc\system\bin\powershell.cmd" --scheme"
@@ -58,6 +52,5 @@ used_by:
     expression: if(isnull(process) OR process="","unknown",process)
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Processes
-  kind: search
   source: declared
   type: string

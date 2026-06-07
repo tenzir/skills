@@ -9,7 +9,6 @@ lookups:
 used_by:
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
@@ -20,7 +19,6 @@ used_by:
     expression: if(isnull(object_category) OR object_category="","unknown",object_category)
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
@@ -37,7 +35,6 @@ used_by:
     expression: if(isnull(object_category) OR object_category="","unknown",object_category)
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: calculated
   type: string
   description: Generic name for the class of the updated resource object. Expected values may be specific to an app.
@@ -55,7 +52,6 @@ used_by:
     expression: if(isnull(object_category) OR object_category="","unknown",object_category)
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: calculated
   type: string
   description: The category of the affected object.
@@ -66,16 +62,13 @@ used_by:
     expression: if(isnull(object_category) OR object_category="","unknown",object_category)
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Account_Management
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Endpoint_Changes
-  kind: search
   source: declared
   type: string
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Filesystem_Changes
-  kind: search
   source: declared
   type: string

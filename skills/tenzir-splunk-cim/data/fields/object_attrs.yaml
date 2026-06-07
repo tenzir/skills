@@ -2,7 +2,6 @@ name: object_attrs
 used_by:
 - model: Change
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The attributes that were updated on the updated resource object, if applicable.
@@ -14,7 +13,6 @@ used_by:
     expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
 - model: Change_Analysis
   dataset: All_Changes
-  kind: event
   source: calculated
   type: string
   description: The attributes that were updated on the updated resource object, if applicable.
@@ -26,7 +24,6 @@ used_by:
     expression: if(isnull(object_attrs) OR object_attrs="","unknown",object_attrs)
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: calculated
   type: string
   description: The attributes that were updated on the updated resource object, if applicable.

@@ -2,13 +2,11 @@ name: hypervisor_id
 used_by:
 - model: Compute_Inventory
   dataset: All_Inventory
-  kind: event
   source: declared
   type: string
   description: The hypervisor identifier, if applicable.
 - model: Performance
   dataset: All_Performance
-  kind: event
   source: declared
   type: string
   description: The ID of the virtualization hypervisor.

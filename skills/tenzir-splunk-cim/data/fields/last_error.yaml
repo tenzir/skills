@@ -2,7 +2,6 @@ name: last_error
 used_by:
 - model: Splunk_Audit
   dataset: Datamodel_Acceleration
-  kind: search
   source: declared
   type: string
   description: The text of the last error reported during the data model acceleration.

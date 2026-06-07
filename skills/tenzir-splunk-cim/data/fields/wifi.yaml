@@ -2,7 +2,6 @@ name: wifi
 used_by:
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: The wireless standard(s) in use, such as 802.11a, 802.11b, 802.11g, or 802.11n.

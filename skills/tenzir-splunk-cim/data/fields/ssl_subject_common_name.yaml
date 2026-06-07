@@ -2,7 +2,6 @@ name: ssl_subject_common_name
 used_by:
 - model: Certificates
   dataset: SSL
-  kind: event
   source: calculated
   type: string
   description: The certificate subject's common name.

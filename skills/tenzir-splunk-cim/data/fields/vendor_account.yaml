@@ -2,25 +2,21 @@ name: vendor_account
 used_by:
 - model: Alerts
   dataset: Alerts
-  kind: event
   source: declared
   type: string
   description: The account associated with the alert event.
 - model: Authentication
   dataset: Authentication
-  kind: event
   source: declared
   type: string
   description: The account that manages the user that initiated the request.
 - model: Change
   dataset: All_Changes
-  kind: event
   source: declared
   type: string
   description: The account associated with the change.
 - model: Data_Access
   dataset: Data_Access
-  kind: event
   source: calculated
   type: string
   description: The account that manages the user that initiated the request.
@@ -31,7 +27,6 @@ used_by:
     expression: if(isnull(vendor_account) OR vendor_account="","unknown",vendor_account)
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: The account associated with the network traffic.

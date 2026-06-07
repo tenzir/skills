@@ -2,7 +2,6 @@ name: swap
 used_by:
 - model: Performance
   dataset: Memory
-  kind: event
   source: declared
   type: number
   description: The total swap space size, in megabytes, if applicable.

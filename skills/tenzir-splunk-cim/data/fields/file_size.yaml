@@ -2,7 +2,6 @@ name: file_size
 used_by:
 - model: Change_Analysis
   dataset: Filesystem_Changes
-  kind: event
   source: calculated
   type: number
   description: The size of the file that is the object of the event, in kilobytes.
@@ -13,13 +12,11 @@ used_by:
     expression: if(isnum(file_size),file_size,null())
 - model: Email
   dataset: All_Email
-  kind: event
   source: declared
   type: number
   description: The size of the files attached the message, in bytes.
 - model: Endpoint
   dataset: Filesystem
-  kind: search
   source: calculated
   type: number
   description: The size of the file that is the object of the event, in kilobytes.
@@ -30,6 +27,5 @@ used_by:
     expression: if(isnum(file_size),file_size,null())
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Filesystem_Changes
-  kind: search
   source: declared
   type: number

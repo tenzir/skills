@@ -2,7 +2,6 @@ name: search
 used_by:
 - model: Splunk_Audit
   dataset: Search_Activity
-  kind: event
   source: calculated
   type: string
   description: The SPL search syntax.

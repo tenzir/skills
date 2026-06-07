@@ -2,7 +2,6 @@ name: interactive
 used_by:
 - model: Compute_Inventory
   dataset: User
-  kind: event
   source: calculated
   type: boolean
   description: Indicates whether a locally defined account on a resource can be interactively logged in.

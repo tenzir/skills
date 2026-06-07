@@ -2,7 +2,6 @@ name: registry_value_data
 used_by:
 - model: Endpoint
   dataset: Registry
-  kind: search
   source: calculated
   type: string
   description: The unaltered registry value.

@@ -2,7 +2,6 @@ name: site
 used_by:
 - model: Web
   dataset: Web
-  kind: event
   source: declared
   type: string
   description: The virtual site which services the request, if applicable.

@@ -2,7 +2,6 @@ name: message_delivery_mode
 used_by:
 - model: Interprocess_Messaging
   dataset: All_Messaging
-  kind: event
   source: declared
   type: string
   description: The message delivery mode. Possible values depend on the type of message-oriented middleware (MOM) solution in use. They can be words like Transient (meaning the message is stored in memory and is lost if the server dies or restarts) or Persistent (meaning the message is stored both in memory and on disk and is preserved if the server dies or restarts). They can also be numbers like 1, 2, and so on.

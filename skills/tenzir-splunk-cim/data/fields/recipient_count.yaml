@@ -2,7 +2,6 @@ name: recipient_count
 used_by:
 - model: Email
   dataset: All_Email
-  kind: event
   source: calculated
   type: number
   description: The total number of intended message recipients.

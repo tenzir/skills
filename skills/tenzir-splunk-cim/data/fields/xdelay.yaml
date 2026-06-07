@@ -2,7 +2,6 @@ name: xdelay
 used_by:
 - model: Email
   dataset: All_Email
-  kind: event
   source: declared
   type: string
   description: Extended delay information for the message transaction. May contain details of all the delays from all the servers in the message transmission chain.

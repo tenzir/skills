@@ -5,14 +5,12 @@ lookups:
 used_by:
 - model: Change
   dataset: Network_Changes
-  kind: event
   source: declared
   type: string
   description: This field represents the protocol for the network event rule.
   multivalue: true
 - model: Email
   dataset: All_Email
-  kind: event
   source: declared
   type: string
   description: The email protocol involved, such as SMTP or RPC.
@@ -23,7 +21,6 @@ used_by:
   - mapi
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: The OSI layer 3 (network) protocol of the traffic observed, in lower case. For example, ip, appletalk, ipx.

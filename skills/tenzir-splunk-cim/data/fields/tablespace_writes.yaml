@@ -2,7 +2,6 @@ name: tablespace_writes
 used_by:
 - model: Databases
   dataset: Tablespace
-  kind: event
   source: declared
   type: number
   description: The number of tablespace writes carried out by the query.

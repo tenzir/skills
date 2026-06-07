@@ -2,13 +2,11 @@ name: dns
 used_by:
 - model: Compute_Inventory
   dataset: Network
-  kind: event
   source: declared
   type: string
   description: The domain name server for the resource.
   recommended: true
 - model: Splunk_CIM_Validation
   dataset: Missing_Extractions_Network
-  kind: search
   source: declared
   type: string

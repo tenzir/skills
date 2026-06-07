@@ -2,7 +2,6 @@ name: physical_memory
 used_by:
 - model: JVM
   dataset: OS
-  kind: event
   source: declared
   type: number
   description: Physical memory available to the OS that the JVM is running on, in bytes.

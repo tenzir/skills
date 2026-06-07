@@ -2,13 +2,11 @@ name: dest_zone
 used_by:
 - model: DLP
   dataset: DLP_Incidents
-  kind: event
   source: declared
   type: string
   description: The zone of the DLP target.
 - model: Network_Traffic
   dataset: All_Traffic
-  kind: event
   source: declared
   type: string
   description: The network zone of the destination.

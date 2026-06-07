@@ -2,7 +2,6 @@ name: service_exec
 used_by:
 - model: Endpoint
   dataset: Services
-  kind: search
   source: declared
   type: string
   description: The executable name of the service.
