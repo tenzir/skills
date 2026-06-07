@@ -11,7 +11,7 @@ The TQL examples in this guide build API-facing UDM records, so they use lowerCa
 
 ## Use the UDM skill
 
-Install the `tenzir-google-udm` skill when you want an agent to help with UDM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-google-udm-skill) for installation and usage examples.
+Install the `tenzir-udm` skill when you want an agent to help with UDM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-google-udm-skill) for installation and usage examples.
 
 Ask the agent to use ingestion object field names when it maps logs into UDM event or entity objects for Google SecOps UDM API ingestion. When generated UDM field headings show two forms, choose the right-side lowerCamelCase ingestion object form. For example, use `metadata.eventType` and `network.ipProtocol` in the TQL output. If a heading has one name, use that spelling.
 

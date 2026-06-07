@@ -14,27 +14,15 @@ groups. This is for `npx skills` to pick this up and _not_ a claude-only
 mechanism. Every skill directory in `skills/` (that is, every directory
 containing a `SKILL.md`) must be referenced exactly once in this file.
 
-The following skills are produced by generator scripts or synced from another
-repository and must not be edited by hand in this repository. Change the source
-listed below instead, then regenerate or let the sync workflow update this repo.
+The following skills are generated or synced from another repository and must
+not be edited by hand here:
 
-- `skills/tenzir-google-udm/`: generated from
-  `scripts/generate-google-udm-skill.py` and synced by
-  `.github/workflows/sync-google-udm-skill.yaml`.
-- `skills/tenzir-asim/`: generated from
-  `scripts/generate-microsoft-asim-skill.py` and synced by
-  `.github/workflows/sync-asim-skill.yaml`.
-- `skills/tenzir-cim/`: generated from
-  `scripts/generate-splunk-cim-skill.py` using an unpacked Splunk Common
-  Information Model app directory.
-- `skills/tenzir-ocsf/`: generated from `scripts/generate-ocsf-skill.py` and
-  synced by `.github/workflows/sync-ocsf-skill.yaml`.
-- `skills/tenzir-docs/`: generated from
-  `scripts/generate-tenzir-docs-skill.py` and synced by
-  `.github/workflows/sync-docs-skill.yaml`.
-- `skills/tenzir-ship/`: synced from `tenzir/ship:skills/tenzir-ship/` through
-  `tenzir/ship:.github/workflows/sync-skills.yaml` via
-  `.github/workflows/sync.yaml`.
+- `skills/tenzir-asim/`
+- `skills/tenzir-cim/`
+- `skills/tenzir-docs/`
+- `skills/tenzir-ocsf/`
+- `skills/tenzir-ship/`
+- `skills/tenzir-udm/`
 
 Three places list skills and must stay consistent:
 

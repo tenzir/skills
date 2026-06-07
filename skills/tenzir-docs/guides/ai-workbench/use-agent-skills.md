@@ -19,9 +19,10 @@ Tenzir publishes the following skills:
 
 | Skill                   | Description                                                                                   |
 | ----------------------- | --------------------------------------------------------------------------------------------- |
-| `tenzir-google-udm`     | Google SecOps UDM schema and normalization guidance for fields, event types, and entity types |
-| `tenzir-asim` | Microsoft Sentinel ASIM schema and mapping guidance for schemas, fields, aliases, and roles   |
-| `tenzir-ocsf`           | OCSF schema reference for event classes, objects, attributes, profiles, and extensions        |
+| `tenzir-asim` | Microsoft Sentinel ASIM schema and mapping guidance for schemas, fields, aliases, and roles  |
+| `tenzir-cim`  | Splunk CIM schema and mapping guidance for data models, datasets, fields, and lookups        |
+| `tenzir-ocsf` | OCSF schema reference for event classes, objects, attributes, profiles, and extensions       |
+| `tenzir-udm`  | Google SecOps UDM schema and normalization guidance for fields, event types, and entity types |
 
 ### 🛡️ Tenzir Users
 
@@ -69,10 +70,10 @@ npx skills add tenzir/skills@<skill-name>
 Install the Google SecOps UDM schema skill when you want an agent to help generate UDM API ingestion payloads or write detection logic:
 
 ```bash
-npx skills add tenzir/skills@tenzir-google-udm
+npx skills add tenzir/skills@tenzir-udm
 ```
 
-The `tenzir-google-udm` skill supports two primary workflows. Generated UDM field headings can show two forms, for example `event_type / eventType`:
+The `tenzir-udm` skill supports two primary workflows. Generated UDM field headings can show two forms, for example `event_type / eventType`:
 
 * Use the right-side ingestion object form when the agent maps logs into UDM event or entity objects for Google SecOps UDM API ingestion, including TQL mapping output such as `metadata.eventType`.
 * Use the left-side field path form when the agent writes YARA-L, Detect Engine, CBN, or other dotted paths, such as `$event.metadata.event_type`.
@@ -80,12 +81,12 @@ The `tenzir-google-udm` skill supports two primary workflows. Generated UDM fiel
 Tell the agent which context you want:
 
 ```text
-Use the tenzir-google-udm skill to map this firewall event to a UDM event
+Use the tenzir-udm skill to map this firewall event to a UDM event
 object. Use ingestion object field names in the TQL output.
 ```
 
 ```text
-Use the tenzir-google-udm skill to write YARA-L detection logic for a UDM
+Use the tenzir-udm skill to write YARA-L detection logic for a UDM
 network connection event. Use field path names.
 ```
 

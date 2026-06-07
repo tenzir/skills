@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   sync:
-    name: Rebuild tenzir-google-udm
+    name: Rebuild tenzir-udm
     runs-on: ubuntu-latest
 
     steps:
@@ -48,7 +48,7 @@ jobs:
           set -euo pipefail
 
           uv run scripts/generate-google-udm-skill.py \
-            --output-dir skills/tenzir-google-udm \
+            --output-dir skills/tenzir-udm \
             --ref "$UDM_REF"
 
       - name: Validate skills
@@ -59,12 +59,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add -A -- skills/tenzir-google-udm
+          git add -A -- skills/tenzir-udm
 
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync tenzir-google-udm from upstream schema"
+          commit_message: "Sync tenzir-udm from upstream schema"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false

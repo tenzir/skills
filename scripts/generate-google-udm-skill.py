@@ -41,7 +41,7 @@ ROOT_PROTO_PATHS = (UDM_PROTO_PATH, ENTITY_PROTO_PATH)
 UDM_USAGE_URL = "https://docs.cloud.google.com/chronicle/docs/unified-data-model/udm-usage?hl=en"
 UDM_FIELD_LIST_URL = "https://docs.cloud.google.com/chronicle/docs/reference/udm-field-list?hl=en"
 HTTP_HEADERS = {
-    "User-Agent": "tenzir-google-udm-generator",
+    "User-Agent": "tenzir-udm-generator",
     "Accept": "application/vnd.github+json",
 }
 IMPORT_RE = re.compile(
@@ -2411,7 +2411,7 @@ def render_skill_markdown(
         "\n".join(
             [
                 "---",
-                "name: tenzir-google-udm",
+                "name: tenzir-udm",
                 "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) message/record schemas, event and entity modeling, field paths, enums, normalization guidance, and ingestion payloads. Use when the user maps logs to UDM, asks about UDM field names or field-name forms, chooses event_type or entity_type, works with YARA-L, Detect Engine, or CBN references, or mentions common UDM areas such as nouns, security_result, network, extensions, or Entity context.",
                 "---",
                 "",
