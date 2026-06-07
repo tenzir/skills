@@ -1,0 +1,9 @@
+summary: Describes the precomputed measure.
+fields:
+  value:
+    type: double
+    description: Value of the aggregated measure.
+  aggregate_function:
+    type: AggregateFunction
+    ingestion_name: aggregateFunction
+    description: Function used to calculate the aggregated measure.

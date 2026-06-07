@@ -1,0 +1,18 @@
+summary: Information about a software package or application.
+fields:
+  name:
+    type: string
+    description: The name of the software.
+  version:
+    type: string
+    description: The version of the software.
+  permissions:
+    type: list<Permission>
+    description: System permissions granted to the software. For example, "android.permission.WRITE_EXTERNAL_STORAGE"
+  description:
+    type: string
+    description: The description of the software.
+  vendor_name:
+    type: string
+    ingestion_name: vendorName
+    description: The name of the software vendor.

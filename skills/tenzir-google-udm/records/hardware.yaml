@@ -1,0 +1,35 @@
+summary: Hardware specification details for a resource, including both physical and virtual hardware.
+fields:
+  serial_number:
+    type: string
+    ingestion_name: serialNumber
+    description: Hardware serial number.
+  manufacturer:
+    type: string
+    description: Hardware manufacturer.
+  model:
+    type: string
+    description: Hardware model.
+  cpu_platform:
+    type: string
+    ingestion_name: cpuPlatform
+    description: Platform of the hardware CPU (e.g. "Intel Broadwell").
+  cpu_model:
+    type: string
+    ingestion_name: cpuModel
+    description: Model description of the hardware CPU (e.g. "2.8 GHz Quad-Core Intel Core i5").
+  cpu_clock_speed:
+    type: uint64
+    ingestion_name: cpuClockSpeed
+    description: Clock speed of the hardware CPU in MHz.
+  cpu_max_clock_speed:
+    type: uint64
+    ingestion_name: cpuMaxClockSpeed
+    description: Maximum possible clock speed of the hardware CPU in MHz.
+  cpu_number_cores:
+    type: uint64
+    ingestion_name: cpuNumberCores
+    description: Number of CPU cores.
+  ram:
+    type: uint64
+    description: Amount of the hardware ramdom access memory (RAM) in Mb.

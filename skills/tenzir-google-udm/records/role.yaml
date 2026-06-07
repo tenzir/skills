@@ -1,0 +1,11 @@
+summary: System role for resource access and modification.
+fields:
+  name:
+    type: string
+    description: System role name for user.
+  description:
+    type: string
+    description: System role description for user.
+  type:
+    type: Role.Type
+    description: System role type for well known roles.

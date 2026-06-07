@@ -1,0 +1,11 @@
+summary: System permission for resource access and modification.
+fields:
+  name:
+    type: string
+    description: Name of the permission (e.g. chronicle.analyst.updateRule).
+  description:
+    type: string
+    description: Description of the permission (e.g. 'Ability to update detect rules').
+  type:
+    type: PermissionType
+    description: Type of the permission.

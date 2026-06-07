@@ -1,0 +1,99 @@
+summary: A record that holds the value and associated metadata for values extracted while producing a Finding.
+unions:
+  typed_value:
+    fields:
+    - bool_val
+    - bytes_val
+    - double_val
+    - int64_val
+    - uint64_val
+    - string_val
+    - timestamp_time
+    - null_val
+    - bool_seq
+    - bytes_seq
+    - double_seq
+    - int64_seq
+    - uint64_seq
+    - string_seq
+fields:
+  type:
+    type: FindingVariable.Type
+    description: The type of the variable.
+  value:
+    type: string
+    description: The value in string form.
+  source_path:
+    type: string
+    ingestion_name: sourcePath
+    description: 'The UDM field path for the field which this value was derived from. Example: `principal.user.username`'
+  bool_val:
+    type: bool
+    ingestion_name: boolVal
+    union: typed_value
+    description: The value in boolean format.
+  bytes_val:
+    type: bytes
+    ingestion_name: bytesVal
+    union: typed_value
+    description: The value in bytes format.
+  double_val:
+    type: double
+    ingestion_name: doubleVal
+    union: typed_value
+    description: The value in double format.
+  int64_val:
+    type: int64
+    ingestion_name: int64Val
+    union: typed_value
+    description: The value in int64 format.
+  uint64_val:
+    type: uint64
+    ingestion_name: uint64Val
+    union: typed_value
+    description: The value in uint64 format.
+  string_val:
+    type: string
+    ingestion_name: stringVal
+    union: typed_value
+    description: The value in string format. Enum values are returned as strings.
+  timestamp_time:
+    type: timestamp
+    ingestion_name: timestampTime
+    union: typed_value
+    description: The value in timestamp format.
+  null_val:
+    type: bool
+    ingestion_name: nullVal
+    union: typed_value
+    description: Whether the value is null.
+  bool_seq:
+    type: BoolSequence
+    ingestion_name: boolSeq
+    union: typed_value
+    description: The value in boolsequence format.
+  bytes_seq:
+    type: BytesSequence
+    ingestion_name: bytesSeq
+    union: typed_value
+    description: The value in bytessequence format.
+  double_seq:
+    type: DoubleSequence
+    ingestion_name: doubleSeq
+    union: typed_value
+    description: The value in doublesequence format.
+  int64_seq:
+    type: Int64Sequence
+    ingestion_name: int64Seq
+    union: typed_value
+    description: The value in int64sequence format.
+  uint64_seq:
+    type: Uint64Sequence
+    ingestion_name: uint64Seq
+    union: typed_value
+    description: The value in uint64sequence format.
+  string_seq:
+    type: StringSequence
+    ingestion_name: stringSeq
+    union: typed_value
+    description: The value in stringsequence format.

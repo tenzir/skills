@@ -1,0 +1,8 @@
+summary: Association Alias used to represent Mandiant Threat Intelligence.
+fields:
+  name:
+    type: string
+    description: Name of the alias.
+  company:
+    type: string
+    description: Name of the provider who gave the association's name.

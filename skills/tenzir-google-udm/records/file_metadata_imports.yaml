@@ -1,0 +1,8 @@
+summary: File metadata imports.
+fields:
+  library:
+    type: string
+    description: Library field.
+  functions:
+    type: list<string>
+    description: Function field.

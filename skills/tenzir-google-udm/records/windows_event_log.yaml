@@ -1,0 +1,13 @@
+summary: The WindowsEventLog extension captures details specific to Windows Event Log events.
+fields:
+  channel:
+    type: Channel
+    description: The channel of the event.
+  event_id:
+    type: string
+    ingestion_name: eventId
+    description: A unique identifier for a specific type of event.
+  activity_id:
+    type: string
+    ingestion_name: activityId
+    description: A GUID (Globally Unique Identifier) used to link a sequence of related events together.

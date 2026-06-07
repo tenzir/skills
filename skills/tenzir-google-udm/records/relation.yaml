@@ -1,0 +1,22 @@
+summary: Defines the relationship between the entity (a) and another entity (b).
+fields:
+  entity:
+    type: Noun
+    description: Entity (b) that the primary entity (a) is related to.
+  entity_type:
+    type: EntityType
+    ingestion_name: entityType
+    description: Type of the related entity (b) in this relationship.
+  relationship:
+    type: Relationship
+    description: Type of relationship.
+  direction:
+    type: Directionality
+    description: Directionality of relationship between primary entity (a) and the related entity (b).
+  uid:
+    type: bytes
+    description: UID of the relationship.
+  entity_label:
+    type: EntityLabel
+    ingestion_name: entityLabel
+    description: Label to identify the Noun of the relation.

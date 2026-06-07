@@ -1,0 +1,6 @@
+summary: Metadata about a Microsoft Windows Portable Executable.
+fields:
+  import_hash:
+    type: string
+    ingestion_name: importHash
+    description: Hash of PE imports.

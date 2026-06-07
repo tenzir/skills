@@ -1,0 +1,12 @@
+summary: RSA public key information.
+fields:
+  key_size:
+    type: int64
+    ingestion_name: keySize
+    description: Key size.
+  modulus:
+    type: string
+    description: Key modulus hexdump.
+  exponent:
+    type: string
+    description: Key exponent hexdump.

@@ -1,0 +1,166 @@
+summary: Information about a file.
+fields:
+  sha256:
+    type: string
+    description: The SHA256 hash of the file, as a hex-encoded string. This field can be used as an entity indicator for file
+      entities.
+  md5:
+    type: string
+    description: The MD5 hash of the file, as a hex-encoded string. This field can be used as an entity indicator for file
+      entities.
+  sha1:
+    type: string
+    description: The SHA1 hash of the file, as a hex-encoded string. This field can be used as an entity indicator for file
+      entities.
+  size:
+    type: uint64
+    description: The size of the file in bytes.
+  full_path:
+    type: string
+    ingestion_name: fullPath
+    description: The full path identifying the location of the file on the system. This field can be used as an entity indicator
+      for file entities.
+  mime_type:
+    type: string
+    ingestion_name: mimeType
+    description: The MIME (Multipurpose Internet Mail Extensions) type of the file, for example "PE", "PDF", or "powershell
+      script".
+  file_metadata:
+    type: FileMetadata
+    ingestion_name: fileMetadata
+    deprecated: true
+    description: Metadata associated with the file. Deprecate FileMetadata in favor of using fields in File.
+  security_result:
+    type: SecurityResult
+    ingestion_name: securityResult
+    description: Google Cloud Threat Intelligence (GCTI) security result for the file including threat context and detection
+      metadata.
+  pe_file:
+    type: FileMetadataPE
+    ingestion_name: peFile
+    description: Metadata about the Portable Executable (PE) file.
+  ssdeep:
+    type: string
+    description: Ssdeep of the file
+  vhash:
+    type: string
+    description: Vhash of the file.
+  ahash:
+    type: string
+    deprecated: true
+    description: Deprecated. Use authentihash instead.
+  authentihash:
+    type: string
+    description: Authentihash of the file.
+  symhash:
+    type: string
+    description: SymHash of the file. Used for Mach-O (e.g. MacOS) binaries, to identify similar files based on their symbol
+      table.
+  prefetch_file_metadata:
+    type: PrefetchFileMetadata
+    ingestion_name: prefetchFileMetadata
+    description: Metadata about the prefetch file.
+  file_type:
+    type: FileType
+    ingestion_name: fileType
+    description: FileType field.
+  capabilities_tags:
+    type: list<string>
+    ingestion_name: capabilitiesTags
+    description: Capabilities tags.
+  names:
+    type: list<string>
+    description: Names fields.
+  tags:
+    type: list<string>
+    description: Tags for the file.
+  last_modification_time:
+    type: timestamp
+    ingestion_name: lastModificationTime
+    description: Timestamp when the file was last updated.
+  create_time:
+    type: timestamp
+    ingestion_name: createTime
+    description: Timestamp when the file was created.
+  last_access_time:
+    type: timestamp
+    ingestion_name: lastAccessTime
+    description: Timestamp when the file was accessed.
+  prevalence:
+    type: Prevalence
+    description: Prevalence of the file hash in the customer's environment.
+  first_seen_time:
+    type: timestamp
+    ingestion_name: firstSeenTime
+    description: Timestamp the file was first seen in the customer's environment.
+  last_seen_time:
+    type: timestamp
+    ingestion_name: lastSeenTime
+    description: Timestamp the file was last seen in the customer's environment.
+  stat_mode:
+    type: uint64
+    ingestion_name: statMode
+    description: The mode of the file. A bit string indicating the permissions and privileges of the file.
+  stat_inode:
+    type: uint64
+    ingestion_name: statInode
+    description: The file identifier. Unique identifier of object within a file system.
+  stat_dev:
+    type: uint64
+    ingestion_name: statDev
+    description: The file system identifier to which the object belongs.
+  stat_nlink:
+    type: uint64
+    ingestion_name: statNlink
+    description: Number of links to file.
+  stat_flags:
+    type: uint32
+    ingestion_name: statFlags
+    description: User defined flags for file.
+  last_analysis_time:
+    type: timestamp
+    ingestion_name: lastAnalysisTime
+    description: Timestamp the file was last analysed.
+  embedded_urls:
+    type: list<string>
+    ingestion_name: embeddedUrls
+    description: Embedded urls found in the file.
+  embedded_domains:
+    type: list<string>
+    ingestion_name: embeddedDomains
+    description: Embedded domains found in the file.
+  embedded_ips:
+    type: list<string>
+    ingestion_name: embeddedIps
+    description: Embedded IP addresses found in the file.
+  exif_info:
+    type: ExifInfo
+    ingestion_name: exifInfo
+    description: Exif metadata from different file formats extracted by exiftool.
+  signature_info:
+    type: SignatureInfo
+    ingestion_name: signatureInfo
+    description: File signature information extracted from different tools.
+  pdf_info:
+    type: PDFInfo
+    ingestion_name: pdfInfo
+    description: Information about the PDF file structure.
+  first_submission_time:
+    type: timestamp
+    ingestion_name: firstSubmissionTime
+    description: First submission time of the file.
+  last_submission_time:
+    type: timestamp
+    ingestion_name: lastSubmissionTime
+    description: Last submission time of the file.
+  main_icon:
+    type: Favicon
+    ingestion_name: mainIcon
+    description: Icon's relevant hashes.
+  ntfs:
+    type: NtfsFileMetadata
+    description: NTFS metadata.
+  app_compat_cache:
+    type: AppCompatMetadata
+    ingestion_name: appCompatCache
+    description: Windows AppCompatCache (Application Compatibility) metadata.

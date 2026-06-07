@@ -1,0 +1,9 @@
+summary: Difference hash and MD5 hash of the domain's favicon.
+fields:
+  raw_md5:
+    type: string
+    ingestion_name: rawMd5
+    description: Favicon's MD5 hash.
+  dhash:
+    type: string
+    description: Difference hash.

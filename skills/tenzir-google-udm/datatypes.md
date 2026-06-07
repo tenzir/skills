@@ -1,6 +1,6 @@
 # Datatypes
 
-Common type labels used in the message field reference.
+Common type labels used in the record field reference.
 
 | Type | Notes | Language mappings |
 | --- | --- | --- |

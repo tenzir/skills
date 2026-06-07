@@ -1,0 +1,6 @@
+summary: Uint64Sequence represents a sequence of uint64s.
+fields:
+  uint64_vals:
+    type: list<uint64>
+    ingestion_name: uint64Vals
+    description: uint64 sequence.

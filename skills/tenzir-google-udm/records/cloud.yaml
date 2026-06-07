@@ -1,0 +1,17 @@
+summary: Metadata related to the cloud environment.
+fields:
+  environment:
+    type: CloudEnvironment
+    description: The Cloud environment.
+  vpc:
+    type: Resource
+    deprecated: true
+    description: The cloud environment VPC. Deprecated.
+  project:
+    type: Resource
+    deprecated: true
+    description: 'The cloud environment project information. Deprecated: Use Resource.resource_ancestors'
+  availability_zone:
+    type: string
+    ingestion_name: availabilityZone
+    description: The cloud environment availability zone (different from region which is location.name).

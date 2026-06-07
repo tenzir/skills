@@ -1,0 +1,67 @@
+summary: Information about the Entity and the product where the entity was created.
+fields:
+  product_entity_id:
+    type: string
+    ingestion_name: productEntityId
+    description: A vendor-specific identifier that uniquely identifies the entity (e.g. a GUID, LDAP, OID, or similar).
+  collected_timestamp:
+    type: timestamp
+    ingestion_name: collectedTimestamp
+    description: GMT timestamp when the entity information was collected by the vendor's local collection infrastructure.
+  creation_timestamp:
+    type: timestamp
+    ingestion_name: creationTimestamp
+    description: GMT timestamp when the entity described by the product_entity_id was created on the system where data was
+      collected.
+  interval:
+    type: interval
+    description: Valid existence time range for the version of the entity represented by this entity data.
+  vendor_name:
+    type: string
+    ingestion_name: vendorName
+    description: Vendor name of the product that produced the entity information.
+  product_name:
+    type: string
+    ingestion_name: productName
+    description: Product name that produced the entity information.
+  feed:
+    type: string
+    description: Vendor feed name for a threat indicator feed.
+  product_version:
+    type: string
+    ingestion_name: productVersion
+    description: Version of the product that produced the entity information.
+  entity_type:
+    type: EntityType
+    ingestion_name: entityType
+    description: Entity type. If an entity has multiple possible types, this specifies the most specific type.
+  description:
+    type: string
+    description: Human-readable description of the entity.
+  threat:
+    type: list<SecurityResult>
+    description: Metadata provided by a threat intelligence feed that identified the entity as malicious.
+  source_type:
+    type: SourceType
+    ingestion_name: sourceType
+    description: The source of the entity.
+  source_labels:
+    type: list<Label>
+    ingestion_name: sourceLabels
+    description: Entity source metadata labels.
+  event_metadata:
+    type: Metadata
+    ingestion_name: eventMetadata
+    description: Metadata field from the event.
+  structured_fields:
+    type: variant
+    ingestion_name: structuredFields
+    deprecated: true
+    description: Structured fields extracted from the log.
+  extracted:
+    type: variant
+    description: Flattened fields extracted from the log.
+  ati_prioritization:
+    type: AtiPrioritization
+    ingestion_name: atiPrioritization
+    description: Prioritization factors used by ATI curated rules.

@@ -1,0 +1,39 @@
+summary: Information about a location.
+fields:
+  city:
+    type: string
+    description: The city.
+  state:
+    type: string
+    description: The state.
+  country_or_region:
+    type: string
+    ingestion_name: countryOrRegion
+    description: The country or region.
+  name:
+    type: string
+    description: Custom location name (e.g. building or site name like "London Office"). For cloud environments, this is the
+      region (e.g. "us-west2").
+  desk_name:
+    type: string
+    ingestion_name: deskName
+    description: Desk name or individual location, typically for an employee in an office. (e.g. "IN-BLR-BCPC-11-1121D").
+  floor_name:
+    type: string
+    ingestion_name: floorName
+    description: Floor name, number or a combination of the two for a building. (e.g. "1-A").
+  region_latitude:
+    type: float
+    ingestion_name: regionLatitude
+    deprecated: true
+    description: 'Deprecated: use region_coordinates.'
+  region_longitude:
+    type: float
+    ingestion_name: regionLongitude
+    deprecated: true
+    description: 'Deprecated: use region_coordinates.'
+  region_coordinates:
+    type: latLng
+    ingestion_name: regionCoordinates
+    description: Coordinates for the associated region. See [https://cloud.google.com/vision/docs/reference/rest/v1/LatLng](https://cloud.google.com/vision/docs/reference/rest/v1/LatLng)
+      for a description of the fields.

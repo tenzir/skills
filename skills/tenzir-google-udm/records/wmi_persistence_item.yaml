@@ -1,0 +1,37 @@
+summary: Information about a WMI persistence item.
+fields:
+  caption:
+    type: string
+    description: A brief title or caption for the WMI object.
+  name:
+    type: string
+    description: The name of the WMI object.
+  setting_id:
+    type: string
+    ingestion_name: settingId
+    description: The identifier for the setting.
+  derivation:
+    type: string
+    description: The base class from which the WMI class is derived (e.g., CIM_Setting).
+  property_count:
+    type: int64
+    ingestion_name: propertyCount
+    description: The number of properties in the WMI object.
+  rel_path:
+    type: string
+    ingestion_name: relPath
+    description: The relative path to the WMI object (e.g., Win32_StartupCommand.Command=''').
+  dynasty:
+    type: string
+    description: The top-level class in the WMI inheritance hierarchy (e.g., CMI_Setting).
+  wmi_super_class:
+    type: string
+    ingestion_name: wmiSuperClass
+    description: The immediate parent class in the WMI inheritance hierarchy.
+  wmi_class:
+    type: string
+    ingestion_name: wmiClass
+    description: The name of the WMI class.
+  genus:
+    type: int64
+    description: An integer representing the type or version of the WMI object.

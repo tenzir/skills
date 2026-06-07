@@ -1,0 +1,26 @@
+summary: Information about an organizational group.
+fields:
+  product_object_id:
+    type: string
+    ingestion_name: productObjectId
+    description: Product globally unique user object identifier, such as an LDAP Object Identifier.
+  creation_time:
+    type: timestamp
+    ingestion_name: creationTime
+    deprecated: true
+    description: 'Group creation time. Deprecated: creation_time should be populated in Attribute as generic metadata.'
+  group_display_name:
+    type: string
+    ingestion_name: groupDisplayName
+    description: Group display name. e.g. "Finance".
+  attribute:
+    type: Attribute
+    description: Generic entity metadata attributes of the group.
+  email_addresses:
+    type: list<string>
+    ingestion_name: emailAddresses
+    description: Email addresses of the group.
+  windows_sid:
+    type: string
+    ingestion_name: windowsSid
+    description: Microsoft Windows SID of the group.

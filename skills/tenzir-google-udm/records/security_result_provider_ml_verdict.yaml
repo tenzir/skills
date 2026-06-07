@@ -1,0 +1,27 @@
+summary: Deprecated. MLVerdict result provided from threat providers, like Mandiant. These fields are used to model Mandiant
+  sources.
+fields:
+  source_provider:
+    type: string
+    ingestion_name: sourceProvider
+    description: Source provider giving the ML verdict.
+  benign_count:
+    type: int32
+    ingestion_name: benignCount
+    description: Count of responses where this IoC was marked benign.
+  malicious_count:
+    type: int32
+    ingestion_name: maliciousCount
+    description: Count of responses where this IoC was marked malicious.
+  confidence_score:
+    type: int32
+    ingestion_name: confidenceScore
+    description: Confidence score of the verdict.
+  mandiant_sources:
+    type: list<Source>
+    ingestion_name: mandiantSources
+    description: List of mandiant sources from which the verdict was generated.
+  third_party_sources:
+    type: list<Source>
+    ingestion_name: thirdPartySources
+    description: List of third-party sources from which the verdict was generated.

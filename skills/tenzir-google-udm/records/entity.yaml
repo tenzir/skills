@@ -1,0 +1,25 @@
+summary: An Entity provides additional context about an item in a UDM event. For example, a PROCESS_LAUNCH event describes
+  that user 'abc@example.corp' launched process 'shady.exe'. The event does not include information that user 'abc@example.com'
+  is a recently terminated employee who administers a server storing finance data. Information stored in one or more Entities
+  can add this additional context.
+fields:
+  metadata:
+    type: EntityMetadata
+    description: Entity metadata such as timestamp, product, etc.
+  entity:
+    type: Noun
+    description: Noun in the UDM event that this entity represents.
+  relations:
+    type: list<Relation>
+    description: One or more relationships between the entity (a) and other entities, including the relationship type and
+      related entity.
+  additional:
+    type: variant
+    description: Important entity data that cannot be adequately represented within the formal sections of the Entity.
+  risk_score:
+    type: optional<EntityRisk>
+    ingestion_name: riskScore
+    description: Stores information related to the entity's risk score.
+  metric:
+    type: Metric
+    description: Stores statistical metrics about the entity. Used if metadata.entity_type is METRIC.

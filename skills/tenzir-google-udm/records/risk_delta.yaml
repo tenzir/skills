@@ -1,0 +1,18 @@
+summary: Describes the difference in risk score between two points in time.
+fields:
+  previous_range_end_time:
+    type: timestamp
+    ingestion_name: previousRangeEndTime
+    description: End time of the previous time window.
+  risk_score_delta:
+    type: int32
+    ingestion_name: riskScoreDelta
+    description: Difference in the normalized risk score from the previous recorded value.
+  previous_risk_score:
+    type: int32
+    ingestion_name: previousRiskScore
+    description: Risk score from previous risk window
+  risk_score_numeric_delta:
+    type: int32
+    ingestion_name: riskScoreNumericDelta
+    description: Numeric change between current and previous risk score

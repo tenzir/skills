@@ -1,0 +1,28 @@
+summary: Information about a Windows scheduled task.
+fields:
+  author:
+    type: string
+    description: The account name that authored or last modified the scheduled task.
+  virtual_path:
+    type: string
+    ingestion_name: virtualPath
+    description: The task's path in the Task Scheduler library.
+  exit_code:
+    type: int32
+    ingestion_name: exitCode
+    description: The result which was returned the last time the registered task was run.
+  state:
+    type: TaskState
+    description: The operation state of the task.
+  logon_type:
+    type: TaskLogonType
+    ingestion_name: logonType
+    description: The logon type of the task.
+  task_actions:
+    type: list<TaskAction>
+    ingestion_name: taskActions
+    description: The actions of the scheduled task.
+  task_triggers:
+    type: list<TaskTrigger>
+    ingestion_name: taskTriggers
+    description: The triggers of the scheduled task.

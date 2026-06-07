@@ -1,0 +1,8 @@
+summary: VPN tunnels.
+fields:
+  provider:
+    type: string
+    description: The provider of the VPN tunnels being used.
+  type:
+    type: string
+    description: The type of the VPN tunnels.

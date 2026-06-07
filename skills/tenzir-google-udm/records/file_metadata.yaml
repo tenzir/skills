@@ -1,0 +1,7 @@
+summary: Metadata about a file. Place metadata about different file types here, for example data from the Microsoft Windows
+  VersionInfo block or digital signer details. Use a different nested record per file type.
+fields:
+  pe:
+    type: PeFileMetadata
+    deprecated: true
+    description: Metadata for Microsoft Windows PE files. Deprecate PeFileMetadata in favor of single File record.

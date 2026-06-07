@@ -1,0 +1,145 @@
+summary: 'The Noun type is used to represent the different entities in an event: principal, src, target, observer, intermediary,
+  and about. It stores attributes known about the entity. For example, if the entity is a device with multiple IP or MAC addresses,
+  it stores the IP and MAC addresses that are relevant to the event.'
+fields:
+  hostname:
+    type: string
+    description: Client hostname or domain name field. Hostname also doubles as the domain for remote entities. This field
+      can be used as an entity indicator for asset entities.
+  domain:
+    type: Domain
+    description: Information about the domain.
+  artifact:
+    type: Artifact
+    description: Information about an artifact.
+  url_metadata:
+    type: Url
+    ingestion_name: urlMetadata
+    description: Information about the URL.
+  browser:
+    type: Browser
+    description: Information about an entry in the web browser's local history database.
+  asset_id:
+    type: string
+    ingestion_name: assetId
+    description: The asset ID. This field can be used as an entity indicator for asset entities.
+  user:
+    type: User
+    description: Information about the user.
+  user_management_chain:
+    type: list<User>
+    ingestion_name: userManagementChain
+    description: 'Information about the user''s management chain (reporting hierarchy). Note: user_management_chain is only
+      populated when data is exported to BigQuery since recursive fields (e.g. user.managers) are not supported by BigQuery.'
+  group:
+    type: Group
+    description: Information about the group.
+  process:
+    type: Process
+    description: Information about the process.
+  process_ancestors:
+    type: list<Process>
+    ingestion_name: processAncestors
+    description: 'Information about the process''s ancestors ordered from immediate ancestor (parent process) to root. Note:
+      process_ancestors is only populated when data is exported to BigQuery since recursive fields (e.g. process.parent_process)
+      are not supported by BigQuery.'
+  asset:
+    type: Asset
+    description: Information about the asset.
+  ip:
+    type: list<string>
+    description: A list of IP addresses associated with a network connection. This field can be used as an entity indicator
+      for asset entities.
+  nat_ip:
+    type: list<string>
+    ingestion_name: natIp
+    description: A list of NAT translated IP addresses associated with a network connection.
+  port:
+    type: int32
+    description: Source or destination network port number when a specific network connection is described within an event.
+  nat_port:
+    type: int32
+    ingestion_name: natPort
+    description: NAT external network port number when a specific network connection is described within an event.
+  mac:
+    type: list<string>
+    description: List of MAC addresses associated with a device. This field can be used as an entity indicator for asset entities.
+  administrative_domain:
+    type: string
+    ingestion_name: administrativeDomain
+    description: Domain which the device belongs to (for example, the Microsoft Windows domain).
+  namespace:
+    type: string
+    description: Namespace which the device belongs to, such as "AD forest". Uses for this field include Microsoft Windows
+      AD forest, the name of subsidiary, or the name of acquisition. This field can be used along with an asset indicator
+      to identify an asset.
+  url:
+    type: string
+    description: The URL.
+  file:
+    type: File
+    description: Information about the file.
+  email:
+    type: string
+    description: Email address. Only filled in for security_result.about
+  registry:
+    type: Registry
+    description: Registry information.
+  application:
+    type: string
+    description: The name of an application or service. Some SSO solutions only capture the name of a target application such
+      as "Atlassian" or "Chronicle".
+  platform:
+    type: Platform
+    description: Platform.
+  platform_version:
+    type: string
+    ingestion_name: platformVersion
+    description: Platform version. For example, "Microsoft Windows 1803".
+  platform_patch_level:
+    type: string
+    ingestion_name: platformPatchLevel
+    description: Platform patch level. For example, "Build 17134.48"
+  cloud:
+    type: Cloud
+    deprecated: true
+    description: 'Cloud metadata. Deprecated: cloud should be populated in entity Attribute as generic metadata (e.g. asset.attribute.cloud).'
+  location:
+    type: Location
+    description: Physical location. For cloud environments, set the region in location.name.
+  ip_location:
+    type: list<Location>
+    ingestion_name: ipLocation
+    deprecated: true
+    description: 'Deprecated: use ip_geo_artifact.location instead.'
+  ip_geo_artifact:
+    type: list<Artifact>
+    ingestion_name: ipGeoArtifact
+    description: Enriched geographic information corresponding to an IP address. Specifically, location and network data.
+  resource:
+    type: Resource
+    description: Information about the resource (e.g. scheduled task, calendar entry). This field should not be used for files,
+      registry, or processes because these objects are already part of Noun.
+  resource_ancestors:
+    type: list<Resource>
+    ingestion_name: resourceAncestors
+    description: Information about the resource's ancestors ordered from immediate ancestor (starting with parent resource).
+  labels:
+    type: list<Label>
+    deprecated: true
+    description: 'Labels are key-value pairs. For example: key = "env", value = "prod". Deprecated: labels should be populated
+      in entity Attribute as generic metadata (e.g. user.attribute.labels).'
+  object_reference:
+    type: Id
+    ingestion_name: objectReference
+    description: Finding to which the Analyst updated the feedback.
+  investigation:
+    type: Investigation
+    description: Analyst feedback/investigation for alerts.
+  network:
+    type: Network
+    description: Network details, including nested records with details on each protocol (for example, DHCP, DNS, or HTTP).
+  security_result:
+    type: list<SecurityResult>
+    ingestion_name: securityResult
+    description: A list of security results.

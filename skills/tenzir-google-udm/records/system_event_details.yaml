@@ -1,0 +1,13 @@
+summary: Captures additional details for system-level events.
+fields:
+  message_type:
+    type: string
+    ingestion_name: messageType
+    description: The specific type or category of the message.
+  sender_image_id:
+    type: string
+    ingestion_name: senderImageId
+    description: An identifier for the image associated with the sender of the message.
+  subsystem:
+    type: string
+    description: The subsystem or component that generated the event.

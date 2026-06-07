@@ -1,0 +1,24 @@
+summary: Exif information.
+fields:
+  original_file:
+    type: string
+    ingestion_name: originalFile
+    description: original file name.
+  product:
+    type: string
+    description: product name.
+  company:
+    type: string
+    description: company name.
+  file_description:
+    type: string
+    ingestion_name: fileDescription
+    description: description of a file.
+  entry_point:
+    type: int64
+    ingestion_name: entryPoint
+    description: entry point.
+  compilation_time:
+    type: timestamp
+    ingestion_name: compilationTime
+    description: Compilation time.

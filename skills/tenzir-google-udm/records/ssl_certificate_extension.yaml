@@ -1,0 +1,61 @@
+summary: Certificate's extensions.
+fields:
+  ca:
+    type: bool
+    description: Whether the subject acts as a certificate authority (CA) or not.
+  subject_key_id:
+    type: string
+    ingestion_name: subjectKeyId
+    description: Identifies the public key being certified.
+  authority_key_id:
+    type: AuthorityKeyId
+    ingestion_name: authorityKeyId
+    description: Identifies the public key to be used to verify the signature on this certificate or CRL.
+  key_usage:
+    type: string
+    ingestion_name: keyUsage
+    description: The purpose for which the certified public key is used.
+  ca_info_access:
+    type: string
+    ingestion_name: caInfoAccess
+    description: Authority information access locations are URLs that are added to a certificate in its authority information
+      access extension.
+  crl_distribution_points:
+    type: string
+    ingestion_name: crlDistributionPoints
+    description: CRL distribution points to which a certificate user should refer to ascertain if the certificate has been
+      revoked.
+  extended_key_usage:
+    type: string
+    ingestion_name: extendedKeyUsage
+    description: One or more purposes for which the certified public key may be used, in addition to or in place of the basic
+      purposes indicated in the key usage extension field.
+  subject_alternative_name:
+    type: string
+    ingestion_name: subjectAlternativeName
+    description: Contains one or more alternative names, using any of a variety of name forms, for the entity that is bound
+      by the CA to the certified public key.
+  certificate_policies:
+    type: string
+    ingestion_name: certificatePolicies
+    description: Different certificate policies will relate to different applications which may use the certified key.
+  netscape_cert_comment:
+    type: string
+    ingestion_name: netscapeCertComment
+    description: Used to include free-form text comments inside certificates.
+  cert_template_name_dc:
+    type: string
+    ingestion_name: certTemplateNameDc
+    description: BMP data value "DomainController". See MS Q291010.
+  netscape_certificate:
+    type: bool
+    ingestion_name: netscapeCertificate
+    description: Identify whether the certificate subject is an SSL client, an SSL server, or a CA.
+  pe_logotype:
+    type: bool
+    ingestion_name: peLogotype
+    description: Whether the certificate includes a logotype.
+  old_authority_key_id:
+    type: bool
+    ingestion_name: oldAuthorityKeyId
+    description: Whether the certificate has an old authority key identifier extension.

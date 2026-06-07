@@ -1,0 +1,36 @@
+summary: Represents the aggregated state of an investigation such as categorization, severity, and status. Can be expanded
+  to include analyst assignment details and more.
+fields:
+  verdict:
+    type: optional<Verdict>
+    description: Describes reason a finding investigation was resolved.
+  reputation:
+    type: optional<Reputation>
+    description: Describes whether a finding was useful or not-useful.
+  severity_score:
+    type: optional<uint32>
+    ingestion_name: severityScore
+    description: Severity score for a finding set by an analyst.
+  status:
+    type: optional<Status>
+    description: Describes the workflow status of a finding.
+  comments:
+    type: list<string>
+    description: Comment added by the Analyst.
+  priority:
+    type: optional<Priority>
+    description: Priority of the Alert or Finding set by analyst.
+  root_cause:
+    type: optional<string>
+    ingestion_name: rootCause
+    description: Root cause of the Alert or Finding set by analyst.
+  reason:
+    type: optional<Reason>
+    description: Reason for closing the Case or Alert.
+  risk_score:
+    type: optional<uint32>
+    ingestion_name: riskScore
+    description: Risk score for a finding set by an analyst.
+  id:
+    type: optional<string>
+    description: Identifier for the investigation

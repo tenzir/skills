@@ -1,0 +1,9 @@
+summary: Identifies the public key to be used to verify the signature on this certificate or CRL.
+fields:
+  keyid:
+    type: string
+    description: Key hexdump.
+  serial_number:
+    type: string
+    ingestion_name: serialNumber
+    description: Serial number hexdump.

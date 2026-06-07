@@ -1,0 +1,8 @@
+summary: Label used in data access for ingestion.
+fields:
+  key:
+    type: string
+    description: The key.
+  value:
+    type: string
+    description: The value.

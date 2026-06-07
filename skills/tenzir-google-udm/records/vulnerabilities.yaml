@@ -1,0 +1,5 @@
+summary: The Vulnerabilities extension captures details on observed/detected vulnerabilities.
+fields:
+  vulnerabilities:
+    type: list<Vulnerability>
+    description: A list of vulnerabilities.

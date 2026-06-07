@@ -1,0 +1,6 @@
+summary: BytesSequence represents a sequence of bytes.
+fields:
+  bytes_vals:
+    type: list<bytes>
+    ingestion_name: bytesVals
+    description: bytes sequence.

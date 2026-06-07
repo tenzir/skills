@@ -1,0 +1,109 @@
+summary: A network event.
+fields:
+  sent_bytes:
+    type: uint64
+    ingestion_name: sentBytes
+    description: The number of bytes sent.
+  received_bytes:
+    type: uint64
+    ingestion_name: receivedBytes
+    description: The number of bytes received.
+  total_bytes:
+    type: int64
+    ingestion_name: totalBytes
+    description: The number of total bytes.
+  sent_packets:
+    type: int64
+    ingestion_name: sentPackets
+    description: The number of packets sent.
+  received_packets:
+    type: int64
+    ingestion_name: receivedPackets
+    description: The number of packets received.
+  session_duration:
+    type: duration
+    ingestion_name: sessionDuration
+    description: The duration of the session as the number of seconds and nanoseconds. For seconds, network.session_duration.seconds,
+      the type is a 64-bit integer. For nanoseconds, network.session_duration.nanos, the type is a 32-bit integer.
+  session_id:
+    type: string
+    ingestion_name: sessionId
+    description: The ID of the network session.
+  parent_session_id:
+    type: string
+    ingestion_name: parentSessionId
+    description: The ID of the parent network session.
+  application_protocol_version:
+    type: string
+    ingestion_name: applicationProtocolVersion
+    description: The version of the application protocol. e.g. "1.1, 2.0"
+  community_id:
+    type: string
+    ingestion_name: communityId
+    description: Community ID network flow value.
+  direction:
+    type: Direction
+    description: The direction of network traffic.
+  ip_protocol:
+    type: IpProtocol
+    ingestion_name: ipProtocol
+    description: The IP protocol.
+  ipv6:
+    type: bool
+    description: True if IPv6 is used.
+  application_protocol:
+    type: ApplicationProtocol
+    ingestion_name: applicationProtocol
+    description: The application protocol.
+  ftp:
+    type: Ftp
+    description: FTP info.
+  email:
+    type: Email
+    description: Email info for the sender/recipient.
+  dns:
+    type: Dns
+    description: DNS info.
+  dhcp:
+    type: Dhcp
+    description: DHCP info.
+  http:
+    type: Http
+    description: HTTP info.
+  tls:
+    type: Tls
+    description: TLS info.
+  smtp:
+    type: Smtp
+    description: SMTP info. Store fields specific to SMTP not covered by Email.
+  asn:
+    type: string
+    description: Autonomous system number.
+  dns_domain:
+    type: string
+    ingestion_name: dnsDomain
+    description: DNS domain name.
+  carrier_name:
+    type: string
+    ingestion_name: carrierName
+    description: Carrier identification.
+  organization_name:
+    type: string
+    ingestion_name: organizationName
+    description: Organization name (e.g Google).
+  ip_subnet_range:
+    type: string
+    ingestion_name: ipSubnetRange
+    description: Associated human-readable IP subnet range (e.g. 10.1.2.0/24).
+  is_proxy:
+    type: bool
+    ingestion_name: isProxy
+    description: Whether the IP address is a known proxy.
+  proxy_info:
+    type: ProxyInfo
+    ingestion_name: proxyInfo
+    description: Proxy information. Only set if is_proxy is true.
+  connection_state:
+    type: ConnectionState
+    ingestion_name: connectionState
+    description: The state of the network connection.

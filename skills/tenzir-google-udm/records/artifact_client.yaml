@@ -1,0 +1,8 @@
+summary: Entity or software accessing or utilizing network resources.
+fields:
+  behaviors:
+    type: list<string>
+    description: The behaviors of the client accessing the network.
+  proxies:
+    type: list<string>
+    description: The type of proxies used by the client.

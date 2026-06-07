@@ -1,0 +1,32 @@
+summary: DNS record.
+fields:
+  type:
+    type: string
+    description: Type.
+  value:
+    type: string
+    description: Value.
+  ttl:
+    type: duration
+    description: Time to live.
+  priority:
+    type: int64
+    description: Priority.
+  retry:
+    type: int64
+    description: Retry.
+  refresh:
+    type: duration
+    description: Refresh.
+  minimum:
+    type: duration
+    description: Minimum.
+  expire:
+    type: duration
+    description: Expire.
+  serial:
+    type: int64
+    description: Serial.
+  rname:
+    type: string
+    description: Rname.

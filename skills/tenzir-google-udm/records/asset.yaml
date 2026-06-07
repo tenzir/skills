@@ -1,0 +1,95 @@
+summary: Information about a compute asset such as a workstation, laptop, phone, virtual desktop, or VM.
+fields:
+  product_object_id:
+    type: string
+    ingestion_name: productObjectId
+    description: A vendor-specific identifier to uniquely identify the entity (a GUID or similar). This field can be used
+      as an entity indicator for asset entities.
+  hostname:
+    type: string
+    description: Asset hostname or domain name field. This field can be used as an entity indicator for asset entities.
+  asset_id:
+    type: string
+    ingestion_name: assetId
+    description: The asset ID. Value must contain the ':' character. For example, cs:abcdd23434. This field can be used as
+      an entity indicator for asset entities.
+  ip:
+    type: list<string>
+    description: A list of IP addresses associated with an asset. This field can be used as an entity indicator for asset
+      entities.
+  mac:
+    type: list<string>
+    description: List of MAC addresses associated with an asset. This field can be used as an entity indicator for asset entities.
+  nat_ip:
+    type: list<string>
+    ingestion_name: natIp
+    description: List of NAT IP addresses associated with an asset.
+  first_seen_time:
+    type: timestamp
+    ingestion_name: firstSeenTime
+    description: The first observed time for an asset. The value is calculated on the basis of the first time the identifier
+      was observed.
+  hardware:
+    type: list<Hardware>
+    description: The asset hardware specifications.
+  platform_software:
+    type: PlatformSoftware
+    ingestion_name: platformSoftware
+    description: The asset operating system platform software.
+  software:
+    type: list<Software>
+    description: The asset software details.
+  location:
+    type: Location
+    description: Location of the asset.
+  category:
+    type: string
+    description: The category of the asset (e.g. "End User Asset", "Workstation", "Server").
+  type:
+    type: AssetType
+    description: The type of the asset (e.g. workstation or laptop or server).
+  network_domain:
+    type: string
+    ingestion_name: networkDomain
+    description: The network domain of the asset (e.g. "corp.acme.com")
+  creation_time:
+    type: timestamp
+    ingestion_name: creationTime
+    deprecated: true
+    description: 'Time the asset was created or provisioned. Deprecate: creation_time should be populated in Attribute as
+      generic metadata.'
+  first_discover_time:
+    type: timestamp
+    ingestion_name: firstDiscoverTime
+    description: Time the asset was first discovered (by asset management/discoverability software).
+  last_discover_time:
+    type: timestamp
+    ingestion_name: lastDiscoverTime
+    description: Time the asset was last discovered (by asset management/discoverability software).
+  system_last_update_time:
+    type: timestamp
+    ingestion_name: systemLastUpdateTime
+    description: Time the asset system or OS was last updated. For all other operations that are not system updates (such
+      as resizing a VM), use Attribute.last_update_time.
+  last_boot_time:
+    type: timestamp
+    ingestion_name: lastBootTime
+    description: Time the asset was last boot started.
+  labels:
+    type: list<Label>
+    deprecated: true
+    description: 'Metadata labels for the asset. Deprecated: labels should be populated in Attribute as generic metadata.'
+  deployment_status:
+    type: DeploymentStatus
+    ingestion_name: deploymentStatus
+    description: The deployment status of the asset for device lifecycle purposes.
+  vulnerabilities:
+    type: list<Vulnerability>
+    description: Vulnerabilities discovered on asset.
+  attribute:
+    type: Attribute
+    description: Generic entity metadata attributes of the asset.
+  wmi_persistence_item:
+    type: WmiPersistenceItem
+    ingestion_name: wmiPersistenceItem
+    description: Information about a WMI persistence item.

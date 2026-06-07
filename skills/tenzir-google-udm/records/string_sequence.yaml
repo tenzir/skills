@@ -1,0 +1,6 @@
+summary: StringSequence represents a sequence of string.
+fields:
+  string_vals:
+    type: list<string>
+    ingestion_name: stringVals
+    description: string sequence.

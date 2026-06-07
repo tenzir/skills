@@ -1,0 +1,19 @@
+summary: File certificate.
+fields:
+  name:
+    type: string
+    description: Certificate name.
+  algorithm:
+    type: string
+    description: Certificate algorithm.
+  thumbprint:
+    type: string
+    description: Certificate thumbprint.
+  cert_issuer:
+    type: string
+    ingestion_name: certIssuer
+    description: Issuer of the certificate.
+  serial_number:
+    type: string
+    ingestion_name: serialNumber
+    description: Certificate serial number.

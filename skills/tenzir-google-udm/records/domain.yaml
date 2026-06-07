@@ -1,0 +1,120 @@
+summary: Information about a domain.
+fields:
+  name:
+    type: string
+    description: The domain name. This field can be used as an entity indicator for Domain entities.
+  prevalence:
+    type: Prevalence
+    description: The prevalence of the domain within the customer's environment.
+  first_seen_time:
+    type: timestamp
+    ingestion_name: firstSeenTime
+    description: First seen timestamp of the domain in the customer's environment.
+  last_seen_time:
+    type: timestamp
+    ingestion_name: lastSeenTime
+    description: Last seen timestamp of the domain in the customer's environment.
+  registrar:
+    type: string
+    description: Registrar name . FOr example, "Wild West Domains, Inc. (R120-LROR)", "GoDaddy.com, LLC", or "PDR LTD. D/B/A
+      PUBLICDOMAINREGISTRY.COM".
+  contact_email:
+    type: string
+    ingestion_name: contactEmail
+    description: Contact email address.
+  whois_server:
+    type: string
+    ingestion_name: whoisServer
+    description: Whois server name.
+  name_server:
+    type: list<string>
+    ingestion_name: nameServer
+    description: Repeated list of name servers.
+  creation_time:
+    type: timestamp
+    ingestion_name: creationTime
+    description: Domain creation time.
+  update_time:
+    type: timestamp
+    ingestion_name: updateTime
+    description: Last updated time.
+  expiration_time:
+    type: timestamp
+    ingestion_name: expirationTime
+    description: Expiration time.
+  audit_update_time:
+    type: timestamp
+    ingestion_name: auditUpdateTime
+    description: Audit updated time.
+  status:
+    type: string
+    description: Domain status. See [https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en](https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en)
+      for meanings of possible values
+  registrant:
+    type: User
+    description: Parsed contact information for the registrant of the domain.
+  admin:
+    type: User
+    description: Parsed contact information for the administrative contact for the domain.
+  tech:
+    type: User
+    description: Parsed contact information for the technical contact for the domain
+  billing:
+    type: User
+    description: Parsed contact information for the billing contact of the domain.
+  zone:
+    type: User
+    description: Parsed contact information for the zone.
+  whois_record_raw_text:
+    type: bytes
+    ingestion_name: whoisRecordRawText
+    description: WHOIS raw text.
+  registry_data_raw_text:
+    type: bytes
+    ingestion_name: registryDataRawText
+    description: Registry Data raw text.
+  iana_registrar_id:
+    type: int32
+    ingestion_name: ianaRegistrarId
+    description: IANA Registrar ID. See [https://www.iana.org/assignments/registrar-ids/registrar-ids.xhtml](https://www.iana.org/assignments/registrar-ids/registrar-ids.xhtml)
+  private_registration:
+    type: bool
+    ingestion_name: privateRegistration
+    description: Indicates whether the domain appears to be using a private registration service to mask the owner's contact
+      information.
+  categories:
+    type: list<string>
+    description: Categories assign to the domain as retrieved from VirusTotal.
+  favicon:
+    type: Favicon
+    description: Includes difference hash and MD5 hash of the domain's favicon.
+  jarm:
+    type: string
+    description: Domain's JARM hash.
+  last_dns_records:
+    type: list<DNSRecord>
+    ingestion_name: lastDnsRecords
+    description: Domain's DNS records from the last scan.
+  last_dns_records_time:
+    type: timestamp
+    ingestion_name: lastDnsRecordsTime
+    description: Date when the DNS records list was retrieved by VirusTotal.
+  last_https_certificate:
+    type: SSLCertificate
+    ingestion_name: lastHttpsCertificate
+    description: SSL certificate object retrieved last time the domain was analyzed.
+  last_https_certificate_time:
+    type: timestamp
+    ingestion_name: lastHttpsCertificateTime
+    description: When the certificate was retrieved by VirusTotal.
+  popularity_ranks:
+    type: list<PopularityRank>
+    ingestion_name: popularityRanks
+    description: Domain's position in popularity ranks such as Alexa, Quantcast, Statvoo, etc
+  tags:
+    type: list<string>
+    description: List of representative attributes.
+  whois_time:
+    type: timestamp
+    ingestion_name: whoisTime
+    description: Date of the last update of the WHOIS record.

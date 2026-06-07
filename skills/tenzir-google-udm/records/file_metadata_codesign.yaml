@@ -1,0 +1,16 @@
+summary: File metadata from the codesign utility.
+fields:
+  id:
+    type: string
+    description: Code sign identifier.
+  format:
+    type: string
+    description: Code sign format.
+  compilation_time:
+    type: timestamp
+    ingestion_name: compilationTime
+    description: Code sign timestamp
+  team_id:
+    type: string
+    ingestion_name: teamId
+    description: The assigned team identifier of the developer who signed the application.

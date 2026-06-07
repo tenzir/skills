@@ -1,0 +1,11 @@
+summary: Tags are event metadata which is set by examining event contents post-parsing. For example, a UDM event may be assigned
+  a tenant_id based on certain customer-defined parameters.
+fields:
+  tenant_id:
+    type: list<bytes>
+    ingestion_name: tenantId
+    description: A list of subtenant ids that this event belongs to.
+  data_tap_config_name:
+    type: list<string>
+    ingestion_name: dataTapConfigName
+    description: A list of sink name values defined in DataTap configurations.

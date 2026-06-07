@@ -1,0 +1,88 @@
+summary: Information about a process.
+fields:
+  pid:
+    type: string
+    description: The process ID. This field can be used as an entity indicator for process entities.
+  parent_pid:
+    type: string
+    ingestion_name: parentPid
+    deprecated: true
+    description: 'The ID of the parent process. Deprecated: use parent_process.pid instead.'
+  parent_process:
+    type: Process
+    ingestion_name: parentProcess
+    description: Information about the parent process.
+  file:
+    type: File
+    description: Information about the file in use by the process.
+  command_line:
+    type: string
+    ingestion_name: commandLine
+    description: The command line command that created the process. This field can be used as an entity indicator for process
+      entities.
+  command_line_history:
+    type: list<string>
+    ingestion_name: commandLineHistory
+    description: The command line history of the process.
+  product_specific_process_id:
+    type: string
+    ingestion_name: productSpecificProcessId
+    description: A product specific process id.
+  access_mask:
+    type: uint64
+    ingestion_name: accessMask
+    description: A bit mask representing the level of access.
+  integrity_level_rid:
+    type: uint64
+    ingestion_name: integrityLevelRid
+    description: The Microsoft Windows integrity level relative ID (RID) of the process.
+  euid:
+    type: string
+    description: The effective user ID of the process.
+  ruid:
+    type: string
+    description: The real user ID of the process.
+  egid:
+    type: string
+    description: The effective group ID of the process.
+  rgid:
+    type: string
+    description: The real group ID of the process.
+  pgid:
+    type: string
+    description: The identifier that points to the process group ID leader.
+  session_leader_pid:
+    type: string
+    ingestion_name: sessionLeaderPid
+    description: The process ID of the session leader process.
+  tty:
+    type: string
+    description: The teletype terminal which the command was executed within.
+  token_elevation_type:
+    type: TokenElevationType
+    ingestion_name: tokenElevationType
+    description: The elevation type of the process on Microsoft Windows. This determines if any privileges are removed when
+      UAC is enabled.
+  product_specific_parent_process_id:
+    type: string
+    ingestion_name: productSpecificParentProcessId
+    deprecated: true
+    description: A product specific id for the parent process. Please use parent_process.product_specific_process_id instead.
+  ipv6:
+    type: bool
+    description: This is used to determine if the process is an IPv6 process.
+  kernel_duration:
+    type: duration
+    ingestion_name: kernelDuration
+    description: The kernel time spent in the process.
+  user_duration:
+    type: duration
+    ingestion_name: userDuration
+    description: The user time spent in the process.
+  real_duration:
+    type: duration
+    ingestion_name: realDuration
+    description: The real time spent in the process. This is the sum of the kernel and user time.
+  state:
+    type: Process.State
+    description: The state of the process.

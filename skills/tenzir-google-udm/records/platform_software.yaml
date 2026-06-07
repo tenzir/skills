@@ -1,0 +1,13 @@
+summary: Platform software information about an operating system.
+fields:
+  platform:
+    type: Platform
+    description: The platform operating system.
+  platform_version:
+    type: string
+    ingestion_name: platformVersion
+    description: The platform software version ( e.g. "Microsoft Windows 1803").
+  platform_patch_level:
+    type: string
+    ingestion_name: platformPatchLevel
+    description: The platform software patch level ( e.g. "Build 17134.48", "SP1").

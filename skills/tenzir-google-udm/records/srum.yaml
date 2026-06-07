@@ -1,0 +1,37 @@
+summary: The Srum extension captures details specific to Windows System Resource Usage Monitor (SRUM) events.
+fields:
+  id:
+    type: string
+    description: A unique identifier for the SRUM record or the application/user being monitored.
+  background_bytes_read:
+    type: int64
+    ingestion_name: backgroundBytesRead
+    description: The number of bytes read by the application while running in the background.
+  background_bytes_written:
+    type: int64
+    ingestion_name: backgroundBytesWritten
+    description: The number of bytes written by the application while running in the background.
+  background_context_switches:
+    type: int64
+    ingestion_name: backgroundContextSwitches
+    description: The number of context switches performed by the application's threads while in the background.
+  background_cycle_count:
+    type: int64
+    ingestion_name: backgroundCycleCount
+    description: The amount of CPU cycle time consumed by the application in the background, measured in clock cycles.
+  background_flushes_count:
+    type: int64
+    ingestion_name: backgroundFlushesCount
+    description: The number of flush operations performed by the application in the background.
+  background_read_operations:
+    type: int64
+    ingestion_name: backgroundReadOperations
+    description: The number of read operations performed by the application in the background.
+  background_write_operations:
+    type: int64
+    ingestion_name: backgroundWriteOperations
+    description: The number of write operations performed by the application in the background.
+  interface_luid:
+    type: string
+    ingestion_name: interfaceLuid
+    description: The Locally Unique Identifier (LUID) for the network interface used for data transfer.

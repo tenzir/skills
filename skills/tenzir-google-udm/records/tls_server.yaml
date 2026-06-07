@@ -1,0 +1,11 @@
+summary: Transport Layer Security (TLS) information associated with the server (for example, Certificate or JA3 hash).
+fields:
+  certificate:
+    type: Certificate
+    description: Server certificate.
+  ja3s:
+    type: string
+    description: JA3 hash from the TLS ServerHello, as a hex-encoded string.
+  ja4s:
+    type: string
+    description: JA4 hash from the TLS ServerHello, as a hex-encoded string.

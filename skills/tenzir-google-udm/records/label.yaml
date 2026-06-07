@@ -1,0 +1,15 @@
+summary: Key value labels.
+fields:
+  key:
+    type: string
+    description: The key.
+  value:
+    type: string
+    description: The value.
+  source:
+    type: string
+    description: Where the label is derived from.
+  rbac_enabled:
+    type: bool
+    ingestion_name: rbacEnabled
+    description: Indicates whether this label can be used for Data RBAC

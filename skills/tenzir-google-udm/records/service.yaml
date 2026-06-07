@@ -1,0 +1,22 @@
+summary: Information about a Windows service.
+fields:
+  display_name:
+    type: string
+    ingestion_name: displayName
+    description: The user-friendly display name of the service.
+  service_type:
+    type: ServiceType
+    ingestion_name: serviceType
+    deprecated: true
+    description: 'Deprecated: use service_types instead. The type of service.'
+  service_types:
+    type: list<ServiceType>
+    ingestion_name: serviceTypes
+    description: The list of service types.
+  startup_type:
+    type: StartupType
+    ingestion_name: startupType
+    description: The startup type of the service.
+  state:
+    type: Service.State
+    description: The status of the service.

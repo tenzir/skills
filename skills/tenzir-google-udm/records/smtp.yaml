@@ -1,0 +1,29 @@
+summary: SMTP info. See RFC 2821.
+fields:
+  helo:
+    type: string
+    description: The client's 'HELO'/'EHLO' string.
+  mail_from:
+    type: string
+    ingestion_name: mailFrom
+    description: The client's 'MAIL FROM' string.
+  rcpt_to:
+    type: list<string>
+    ingestion_name: rcptTo
+    description: The client's 'RCPT TO' string(s).
+  server_response:
+    type: list<string>
+    ingestion_name: serverResponse
+    description: The server's response(s) to the client.
+  message_path:
+    type: string
+    ingestion_name: messagePath
+    description: The message's path (extracted from the headers).
+  is_webmail:
+    type: bool
+    ingestion_name: isWebmail
+    description: If the message was sent via a webmail client.
+  is_tls:
+    type: bool
+    ingestion_name: isTls
+    description: If the connection switched to TLS.

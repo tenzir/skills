@@ -1,0 +1,25 @@
+summary: Information from the NTFS USN Journal.
+fields:
+  attributes_flag:
+    type: string
+    ingestion_name: attributesFlag
+    description: File attributes flags from the USN record (e.g., "0x20").
+  attributes:
+    type: UsnJournal.Attribute
+    deprecated: true
+    description: 'Deprecated: Use file_attributes instead. File attributes from the USN record.'
+  file_attributes:
+    type: list<UsnJournal.Attribute>
+    ingestion_name: fileAttributes
+    description: File attributes from the USN record.
+  allocated:
+    type: bool
+    description: Indicates whether the file is allocated in the Master File Table (MFT).
+  reason:
+    type: UsnJournal.Reason
+    deprecated: true
+    description: 'Deprecated: Use reasons instead. Human-readable string describing the reason for the USN journal entry.
+      (e.g., "USN_REASON_FILE_CREATE").'
+  reasons:
+    type: list<UsnJournal.Reason>
+    description: Human-readable string describing the reasons for the USN journal entry (e.g., "USN_REASON_FILE_CREATE").

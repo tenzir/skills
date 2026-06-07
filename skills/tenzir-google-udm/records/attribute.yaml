@@ -1,0 +1,25 @@
+summary: Attribute is a container for generic entity attributes including common attributes across core entities (such as,
+  user or asset). For example, Cloud is a generic entity attribute since it can apply to an asset (for example, a VM) or a
+  user (for example, an identity service account).
+fields:
+  cloud:
+    type: Cloud
+    description: Cloud metadata attributes such as project ID, account ID, or organizational hierarchy.
+  labels:
+    type: list<Label>
+    description: Set of labels for the entity. Should only be used for product labels (for example, Google Cloud resource
+      labels or Azure AD sensitivity labels. Should not be used for arbitrary key-value mappings.
+  permissions:
+    type: list<Permission>
+    description: System permissions for IAM entity (human principal, service account, group).
+  roles:
+    type: list<Role>
+    description: System IAM roles to be assumed by resources to use the role's permissions for access control.
+  creation_time:
+    type: timestamp
+    ingestion_name: creationTime
+    description: Time the resource or entity was created or provisioned.
+  last_update_time:
+    type: timestamp
+    ingestion_name: lastUpdateTime
+    description: Time the resource or entity was last updated.

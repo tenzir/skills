@@ -1,0 +1,6 @@
+summary: BoolSequence represents a sequence of bools.
+fields:
+  bool_vals:
+    type: list<bool>
+    ingestion_name: boolVals
+    description: bool sequence.

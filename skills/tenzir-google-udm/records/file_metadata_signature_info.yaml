@@ -1,0 +1,21 @@
+summary: Signature information.
+fields:
+  verification_message:
+    type: string
+    ingestion_name: verificationMessage
+    description: Status of the certificate. Valid values are "Signed", "Unsigned" or a description of the certificate anomaly,
+      if found.
+  verified:
+    type: bool
+    description: True if verification_message == "Signed"
+  signer:
+    type: list<string>
+    deprecated: true
+    description: 'Deprecated: use signers field.'
+  signers:
+    type: list<SignerInfo>
+    description: File metadata signer information. The order of the signers matters. Each element is a higher level authority,
+      being the last the root authority.
+  x509:
+    type: list<X509>
+    description: List of certificates.

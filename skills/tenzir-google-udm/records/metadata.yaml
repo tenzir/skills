@@ -1,0 +1,90 @@
+summary: General information associated with a UDM event.
+fields:
+  id:
+    type: bytes
+    description: ID of the UDM event. Can be used for raw and normalized event retrieval.
+  product_log_id:
+    type: string
+    ingestion_name: productLogId
+    description: A vendor-specific event identifier to uniquely identify the event (e.g. a GUID).
+  event_timestamp:
+    type: timestamp
+    ingestion_name: eventTimestamp
+    description: The GMT timestamp when the event was generated.
+  event_timestamp_attributes:
+    type: list<EventTimestampAttribute>
+    ingestion_name: eventTimestampAttributes
+    description: Attributes associated with event_timestamp. This field is used to distinguish between different types of
+      timestamps that can be used to represent the event_timestamp.
+  collected_timestamp:
+    type: timestamp
+    ingestion_name: collectedTimestamp
+    description: The GMT timestamp when the event was collected by the vendor's local collection infrastructure.
+  ingested_timestamp:
+    type: timestamp
+    ingestion_name: ingestedTimestamp
+    description: The GMT timestamp when the event was ingested (received) by Chronicle.
+  event_type:
+    type: EventType
+    ingestion_name: eventType
+    description: The event type. If an event has multiple possible types, this specifies the most specific type.
+  vendor_name:
+    type: string
+    ingestion_name: vendorName
+    description: The name of the product vendor.
+  product_name:
+    type: string
+    ingestion_name: productName
+    description: The name of the product.
+  product_version:
+    type: string
+    ingestion_name: productVersion
+    description: The version of the product.
+  product_event_type:
+    type: string
+    ingestion_name: productEventType
+    description: A short, descriptive, human-readable, product-specific event name or type (e.g. "Scanned X", "User account
+      created", "process_start").
+  product_deployment_id:
+    type: string
+    ingestion_name: productDeploymentId
+    description: The deployment identifier assigned by the vendor for a product deployment.
+  description:
+    type: string
+    description: A human-readable unparsable description of the event.
+  url_back_to_product:
+    type: string
+    ingestion_name: urlBackToProduct
+    description: A URL that takes the user to the source product console for this event.
+  ingestion_labels:
+    type: list<Label>
+    ingestion_name: ingestionLabels
+    description: User-configured ingestion metadata labels.
+  tags:
+    type: Tags
+    description: Tags added by Chronicle after an event is parsed. It is an error to populate this field from within a parser.
+  enrichment_state:
+    type: EnrichmentState
+    ingestion_name: enrichmentState
+    description: The enrichment state.
+  log_type:
+    type: string
+    ingestion_name: logType
+    description: The string value of log type.
+  base_labels:
+    type: DataAccessLabels
+    ingestion_name: baseLabels
+    description: Data access labels on the base event.
+  enrichment_labels:
+    type: DataAccessLabels
+    ingestion_name: enrichmentLabels
+    description: Data access labels from all the contextual events used to enrich the base event.
+  structured_fields:
+    type: variant
+    ingestion_name: structuredFields
+    deprecated: true
+    description: Flattened fields extracted from the log.
+  parser_version:
+    type: string
+    ingestion_name: parserVersion
+    description: The version of the parser that generated this UDM event.

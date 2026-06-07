@@ -1,0 +1,46 @@
+summary: Extensions to a UDM event.
+fields:
+  auth:
+    type: Authentication
+    description: An authentication extension.
+  vulns:
+    type: Vulnerabilities
+    description: A vulnerability extension.
+  entity_risk:
+    type: EntityRisk
+    ingestion_name: entityRisk
+    description: An entity risk change extension.
+  linux_utmp:
+    type: LinuxUtmp
+    ingestion_name: linuxUtmp
+    description: A Linux Utmp extension. This captures details specific to Linux Utmp events, which record login and logout
+      sessions on a Linux system.
+  windows_event_log:
+    type: WindowsEventLog
+    ingestion_name: windowsEventLog
+    description: A Windows Event Log extension. This captures details specific to Windows Event Log events, providing structured
+      information from various Windows logs.
+  resource_usage:
+    type: ResourceUsage
+    ingestion_name: resourceUsage
+    description: A resource usage extension. This captures details about what entity (e.g., process, user) is using a specific
+      resource.
+  system_event_details:
+    type: SystemEventDetails
+    ingestion_name: systemEventDetails
+    description: A system event details extension. This captures additional details for system-level events, such as message
+      type, sender image ID, and subsystem.
+  outlook_metadata:
+    type: OutlookMetadata
+    ingestion_name: outlookMetadata
+    description: A Microsoft Outlook specific metadata extension. This includes metadata related to Outlook items, such as
+      comments, templates, and security flags.
+  srum:
+    type: Srum
+    description: A SRUM extension. This captures details specific to Windows System Resource Usage Monitor (SRUM) events,
+      providing insights into application resource consumption.
+  user_assist:
+    type: UserAssist
+    ingestion_name: userAssist
+    description: A UserAssist extension. This captures details specific to Windows User Assist events, which track application
+      usage and execution.

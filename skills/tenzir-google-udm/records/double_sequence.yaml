@@ -1,0 +1,6 @@
+summary: DoubleSequence represents a sequence of doubles.
+fields:
+  double_vals:
+    type: list<double>
+    ingestion_name: doubleVals
+    description: double sequence.

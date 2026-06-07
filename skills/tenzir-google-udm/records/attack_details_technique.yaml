@@ -1,0 +1,16 @@
+summary: Technique information related to an attack or threat.
+fields:
+  id:
+    type: string
+    description: Technique ID (e.g. "T1595").
+  name:
+    type: string
+    description: Technique Name (e.g. "Active Scanning").
+  subtechnique_id:
+    type: string
+    ingestion_name: subtechniqueId
+    description: Subtechnique ID (e.g. "T1595.001").
+  subtechnique_name:
+    type: string
+    ingestion_name: subtechniqueName
+    description: Subtechnique Name (e.g. "Scanning IP Blocks").
