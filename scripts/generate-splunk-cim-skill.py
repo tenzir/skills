@@ -387,25 +387,20 @@ def model_data(
         field: dict[str, Any],
         *,
         source: str,
-        defined_in: str,
-        inherited_from: str | None = None,
         calculation: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         details = field_from_json(field, calculation=calculation, include_name=False)
         return compact_mapping(
             (
                 ("source", source),
-                ("defined_in", defined_in),
-                ("inherited_from", inherited_from),
                 *details.items(),
             )
         )
 
-    def base_fields(base_name: str) -> dict[str, dict[str, Any]]:
+    def base_fields() -> dict[str, dict[str, Any]]:
         return {
             field_name: {
                 "source": "base",
-                "defined_in": base_name,
             }
             for field_name in BASE_FIELDS
         }
@@ -414,12 +409,11 @@ def model_data(
         return compact_mapping(
             (
                 ("source", "inherited"),
-                ("defined_in", record.get("defined_in")),
                 ("inherited_from", inherited_from),
                 *(
                     (key, value)
                     for key, value in record.items()
-                    if key not in {"source", "defined_in", "inherited_from"}
+                    if key not in {"source", "inherited_from"}
                 ),
             )
         )
@@ -438,12 +432,12 @@ def model_data(
                 }
             )
         elif parent in {"BaseEvent", "BaseSearch"}:
-            fields.update(base_fields(parent))
+            fields.update(base_fields())
         for field in obj.get("fields") or []:
             field_name = str(field.get("fieldName") or "")
             if not field_name:
                 continue
-            fields[field_name] = field_record(field, source="declared", defined_in=object_name)
+            fields[field_name] = field_record(field, source="declared")
         for calculation in obj.get("calculations") or []:
             for field in calculation.get("outputFields") or []:
                 field_name = str(field.get("fieldName") or "")
@@ -452,7 +446,6 @@ def model_data(
                 fields[field_name] = field_record(
                     field,
                     source="calculated",
-                    defined_in=object_name,
                     calculation=calculation,
                 )
         effective_cache[object_name] = {

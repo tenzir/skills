@@ -13,10 +13,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseEvent
       bugtraq:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the Security Focus website (searchable at http://www.securityfocus.com/).
         multivalue: true
@@ -26,7 +24,6 @@ datasets:
           expression: if(isnotnull(bugtraq) AND bugtraq!="",lower(bugtraq),null())
       category:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: 'The category of the discovered vulnerability, such as DoS. Note: This field is a string. Use category_id for numeric values. The category_id field is optional and thus is not included in the data model.'
         recommended: true
@@ -36,7 +33,6 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cert:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the US Computer Emergency Readiness Team (US-CERT, searchable at http://www.kb.cert.org/vuls/).
         multivalue: true
@@ -46,12 +42,10 @@ datasets:
           expression: if(isnotnull(cert) AND cert!="",lower(cert),null())
       cim_entity_zone:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       cve:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The identifier provided in the Common Vulnerabilities and Exposures index (searchable at http://cve.mitre.org).
         recommended: true
@@ -62,12 +56,10 @@ datasets:
           expression: if(isnotnull(cve) AND cve!="",lower(cve),null())
       cvss:
         source: declared
-        defined_in: Vulnerabilities
         type: number
         description: Numeric indicator of the common vulnerability scoring system.
       dest:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The host with the discovered vulnerability. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
         recommended: true
@@ -77,23 +69,19 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The system that discovered the vulnerability. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
         recommended: true
@@ -103,26 +91,21 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: base
-        defined_in: BaseEvent
       msft:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The Microsoft Security Advisory number (http://technet.microsoft.com/en-us/security/advisory/).
         multivalue: true
@@ -132,7 +115,6 @@ datasets:
           expression: if(isnotnull(msft) AND msft!="",lower(msft),null())
       mskb:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The Microsoft Knowledge Base article number (http://support.microsoft.com/kb/).
         multivalue: true
@@ -142,7 +124,6 @@ datasets:
           expression: if(isnotnull(mskb) AND mskb!="",lower(mskb),null())
       severity:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: 'The severity of the vulnerability detection event. Specific values are required. Use vendor_severity for the vendor''s own human readable strings (such as Good, Bad, and Really Bad). Note: This field is a string. Use severity_id for numeric data types. The severity_id field is optional and not included in the data model.'
         expected_values:
@@ -158,12 +139,10 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: 'The name of the vulnerability detected on the host, such as HPSBMU02785 SSRT100526 rev.2 - HP LoadRunner Running on Windows, Remote Execution of Arbitrary Code, Denial of Service (DoS). Note: This field has a string value. Use signature_id for numeric indicators. The signature_id field is optional and thus is not included in the data model.'
         recommended: true
@@ -173,50 +152,40 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: base
-        defined_in: BaseEvent
       sourcetype:
         source: base
-        defined_in: BaseEvent
       tag:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       url:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: The URL involved in the discovered vulnerability.
       user:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: The user involved in the discovered vulnerability.
       user_bunit:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: The vendor and product that detected the vulnerability. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
@@ -226,7 +195,6 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       xref:
         source: calculated
-        defined_in: Vulnerabilities
         type: string
         description: A cross-reference identifier associated with the vulnerability. In most cases, the xref field contains both the short name of the database being cross-referenced and the unique identifier used in the external database.
         multivalue: true
@@ -251,11 +219,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       bugtraq:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the Security Focus website (searchable at http://www.securityfocus.com/).
@@ -266,7 +232,6 @@ datasets:
           expression: if(isnotnull(bugtraq) AND bugtraq!="",lower(bugtraq),null())
       category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The category of the discovered vulnerability, such as DoS. Note: This field is a string. Use category_id for numeric values. The category_id field is optional and thus is not included in the data model.'
@@ -277,7 +242,6 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cert:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the US Computer Emergency Readiness Team (US-CERT, searchable at http://www.kb.cert.org/vuls/).
@@ -288,13 +252,11 @@ datasets:
           expression: if(isnotnull(cert) AND cert!="",lower(cert),null())
       cim_entity_zone:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       cve:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier provided in the Common Vulnerabilities and Exposures index (searchable at http://cve.mitre.org).
@@ -306,13 +268,11 @@ datasets:
           expression: if(isnotnull(cve) AND cve!="",lower(cve),null())
       cvss:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: number
         description: Numeric indicator of the common vulnerability scoring system.
       dest:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The host with the discovered vulnerability. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -323,26 +283,22 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The system that discovered the vulnerability. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -353,30 +309,25 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       msft:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The Microsoft Security Advisory number (http://technet.microsoft.com/en-us/security/advisory/).
@@ -387,7 +338,6 @@ datasets:
           expression: if(isnotnull(msft) AND msft!="",lower(msft),null())
       mskb:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The Microsoft Knowledge Base article number (http://support.microsoft.com/kb/).
@@ -398,7 +348,6 @@ datasets:
           expression: if(isnotnull(mskb) AND mskb!="",lower(mskb),null())
       severity:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The severity of the vulnerability detection event. Specific values are required. Use vendor_severity for the vendor''s own human readable strings (such as Good, Bad, and Really Bad). Note: This field is a string. Use severity_id for numeric data types. The severity_id field is optional and not included in the data model.'
@@ -415,13 +364,11 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The name of the vulnerability detected on the host, such as HPSBMU02785 SSRT100526 rev.2 - HP LoadRunner Running on Windows, Remote Execution of Arbitrary Code, Denial of Service (DoS). Note: This field has a string value. Use signature_id for numeric indicators. The signature_id field is optional and thus is not included in the data model.'
@@ -432,59 +379,49 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       tag:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       url:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The URL involved in the discovered vulnerability.
       user:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The user involved in the discovered vulnerability.
       user_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The vendor and product that detected the vulnerability. This field can be automatically populated by vendor and product fields in your data.
@@ -495,7 +432,6 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       xref:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: A cross-reference identifier associated with the vulnerability. In most cases, the xref field contains both the short name of the database being cross-referenced and the unique identifier used in the external database.
@@ -518,11 +454,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       bugtraq:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the Security Focus website (searchable at http://www.securityfocus.com/).
@@ -533,7 +467,6 @@ datasets:
           expression: if(isnotnull(bugtraq) AND bugtraq!="",lower(bugtraq),null())
       category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The category of the discovered vulnerability, such as DoS. Note: This field is a string. Use category_id for numeric values. The category_id field is optional and thus is not included in the data model.'
@@ -544,7 +477,6 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cert:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the US Computer Emergency Readiness Team (US-CERT, searchable at http://www.kb.cert.org/vuls/).
@@ -555,13 +487,11 @@ datasets:
           expression: if(isnotnull(cert) AND cert!="",lower(cert),null())
       cim_entity_zone:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       cve:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier provided in the Common Vulnerabilities and Exposures index (searchable at http://cve.mitre.org).
@@ -573,13 +503,11 @@ datasets:
           expression: if(isnotnull(cve) AND cve!="",lower(cve),null())
       cvss:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: number
         description: Numeric indicator of the common vulnerability scoring system.
       dest:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The host with the discovered vulnerability. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -590,26 +518,22 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The system that discovered the vulnerability. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -620,30 +544,25 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       msft:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The Microsoft Security Advisory number (http://technet.microsoft.com/en-us/security/advisory/).
@@ -654,7 +573,6 @@ datasets:
           expression: if(isnotnull(msft) AND msft!="",lower(msft),null())
       mskb:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The Microsoft Knowledge Base article number (http://support.microsoft.com/kb/).
@@ -665,7 +583,6 @@ datasets:
           expression: if(isnotnull(mskb) AND mskb!="",lower(mskb),null())
       severity:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The severity of the vulnerability detection event. Specific values are required. Use vendor_severity for the vendor''s own human readable strings (such as Good, Bad, and Really Bad). Note: This field is a string. Use severity_id for numeric data types. The severity_id field is optional and not included in the data model.'
@@ -682,13 +599,11 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The name of the vulnerability detected on the host, such as HPSBMU02785 SSRT100526 rev.2 - HP LoadRunner Running on Windows, Remote Execution of Arbitrary Code, Denial of Service (DoS). Note: This field has a string value. Use signature_id for numeric indicators. The signature_id field is optional and thus is not included in the data model.'
@@ -699,59 +614,49 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       tag:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       url:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The URL involved in the discovered vulnerability.
       user:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The user involved in the discovered vulnerability.
       user_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The vendor and product that detected the vulnerability. This field can be automatically populated by vendor and product fields in your data.
@@ -762,7 +667,6 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       xref:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: A cross-reference identifier associated with the vulnerability. In most cases, the xref field contains both the short name of the database being cross-referenced and the unique identifier used in the external database.
@@ -785,11 +689,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       bugtraq:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the Security Focus website (searchable at http://www.securityfocus.com/).
@@ -800,7 +702,6 @@ datasets:
           expression: if(isnotnull(bugtraq) AND bugtraq!="",lower(bugtraq),null())
       category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The category of the discovered vulnerability, such as DoS. Note: This field is a string. Use category_id for numeric values. The category_id field is optional and thus is not included in the data model.'
@@ -811,7 +712,6 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cert:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier in the vulnerability database provided by the US Computer Emergency Readiness Team (US-CERT, searchable at http://www.kb.cert.org/vuls/).
@@ -822,13 +722,11 @@ datasets:
           expression: if(isnotnull(cert) AND cert!="",lower(cert),null())
       cim_entity_zone:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       cve:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The identifier provided in the Common Vulnerabilities and Exposures index (searchable at http://cve.mitre.org).
@@ -840,13 +738,11 @@ datasets:
           expression: if(isnotnull(cve) AND cve!="",lower(cve),null())
       cvss:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: number
         description: Numeric indicator of the common vulnerability scoring system.
       dest:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The host with the discovered vulnerability. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -857,26 +753,22 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The system that discovered the vulnerability. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -887,30 +779,25 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       msft:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The Microsoft Security Advisory number (http://technet.microsoft.com/en-us/security/advisory/).
@@ -921,7 +808,6 @@ datasets:
           expression: if(isnotnull(msft) AND msft!="",lower(msft),null())
       mskb:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The Microsoft Knowledge Base article number (http://support.microsoft.com/kb/).
@@ -932,7 +818,6 @@ datasets:
           expression: if(isnotnull(mskb) AND mskb!="",lower(mskb),null())
       severity:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The severity of the vulnerability detection event. Specific values are required. Use vendor_severity for the vendor''s own human readable strings (such as Good, Bad, and Really Bad). Note: This field is a string. Use severity_id for numeric data types. The severity_id field is optional and not included in the data model.'
@@ -949,13 +834,11 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: 'The name of the vulnerability detected on the host, such as HPSBMU02785 SSRT100526 rev.2 - HP LoadRunner Running on Windows, Remote Execution of Arbitrary Code, Denial of Service (DoS). Note: This field has a string value. Use signature_id for numeric indicators. The signature_id field is optional and thus is not included in the data model.'
@@ -966,59 +849,49 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Vulnerabilities
       tag:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       url:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The URL involved in the discovered vulnerability.
       user:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The user involved in the discovered vulnerability.
       user_bunit:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: The vendor and product that detected the vulnerability. This field can be automatically populated by vendor and product fields in your data.
@@ -1029,7 +902,6 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       xref:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
         description: A cross-reference identifier associated with the vulnerability. In most cases, the xref field contains both the short name of the database being cross-referenced and the unique identifier used in the external database.

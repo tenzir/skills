@@ -15,10 +15,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseEvent
       action:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The action taken by the DLP device.
         recommended: true
@@ -28,12 +26,10 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The application involved in the event.
       category:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The category of the DLP event.
         recommended: true
@@ -43,12 +39,10 @@ datasets:
           expression: if(isnull(object_category) OR object_category="","unknown",object_category)
       cim_entity_zone:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The target of the DLP event.
         recommended: true
@@ -58,28 +52,23 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The business unit of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The category of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The priority of the DLP target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_zone:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The zone of the DLP target.
       dlp_type:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The type of DLP system that generated the event.
         recommended: true
@@ -89,7 +78,6 @@ datasets:
           expression: if(isnull(dlp_type) OR dlp_type="","unknown",dlp_type)
       dvc:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The device that reported the DLP event.
         recommended: true
@@ -99,31 +87,25 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The business unit of the DLP device. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The category of the DLP device. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The priority of the DLP device. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_zone:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The zone of the DLP device.
       host:
         source: base
-        defined_in: BaseEvent
       object:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The name of the affected object.
         recommended: true
@@ -133,7 +115,6 @@ datasets:
           expression: if(isnull(object) OR object="","unknown",object)
       object_category:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The category of the affected object.
         recommended: true
@@ -143,7 +124,6 @@ datasets:
           expression: if(isnull(object_category) OR object_category="","unknown",object_category)
       object_path:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The path of the affected object.
         recommended: true
@@ -153,7 +133,6 @@ datasets:
           expression: if(isnull(object_path) OR object_path="","unknown",object_path)
       severity:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The severity of the DLP event.
         recommended: true
@@ -163,12 +142,10 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The name of the DLP event.
         recommended: true
@@ -178,18 +155,14 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: base
-        defined_in: BaseEvent
       sourcetype:
         source: base
-        defined_in: BaseEvent
       src:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The source of the DLP event.
         recommended: true
@@ -199,23 +172,19 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The business unit of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The category of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_priority:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The priority of the DLP source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The source user of the DLP event.
         recommended: true
@@ -225,34 +194,28 @@ datasets:
           expression: if(isnull(src_user) OR user="","unknown",src_user)
       src_user_bunit:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The business unit of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The category of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_priority:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The priority of the DLP source user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_zone:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The zone of the DLP source.
       tag:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The target user of the DLP event.
         recommended: true
@@ -262,23 +225,19 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The business unit of the DLP user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The category of the DLP user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: DLP_Incidents
         type: string
         description: The priority of the DLP user. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: DLP_Incidents
         type: string
         description: The vendor and product name of the DLP system.
         recommended: true

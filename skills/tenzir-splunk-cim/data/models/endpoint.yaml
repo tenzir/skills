@@ -15,20 +15,16 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseSearch
       cim_entity_zone:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       creation_time:
         source: declared
-        defined_in: Ports
         type: timestamp
         description: The time at which the network port started listening on the endpoint.
       dest:
         source: calculated
-        defined_in: Ports
         type: string
         description: The endpoint for which the port is listening on.
         recommended: true
@@ -38,63 +34,50 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_port:
         source: declared
-        defined_in: Ports
         type: number
         description: Network port listening on the endpoint, such as 53.
         recommended: true
       dest_priority:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: declared
-        defined_in: Ports
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: declared
-        defined_in: Ports
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: declared
-        defined_in: Ports
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: base
-        defined_in: BaseSearch
       process_guid:
         source: declared
-        defined_in: Ports
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_id:
         source: declared
-        defined_in: Ports
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       source:
         source: base
-        defined_in: BaseSearch
       sourcetype:
         source: base
-        defined_in: BaseSearch
       src:
         source: calculated
-        defined_in: Ports
         type: string
         description: The "remote" system connected to the listening port (if applicable).
         recommended: true
@@ -104,18 +87,15 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_port:
         source: calculated
-        defined_in: Ports
         type: number
         description: The "remote" port connected to the listening port (if applicable).
         recommended: true
@@ -125,49 +105,40 @@ datasets:
           expression: if(isnum(src_port),src_port,0)
       src_priority:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_requires_av:
         source: declared
-        defined_in: Ports
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_should_timesync:
         source: declared
-        defined_in: Ports
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_should_update:
         source: declared
-        defined_in: Ports
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       state:
         source: declared
-        defined_in: Ports
         type: string
         description: The status of the listening port, such as established, listening, etc.
       tag:
         source: declared
-        defined_in: Ports
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       transport:
         source: declared
-        defined_in: Ports
         type: string
         description: The network transport protocol associated with the listening port, such as tcp, udp, etc.
         recommended: true
       transport_dest_port:
         source: declared
-        defined_in: Ports
         type: string
         description: Calculated as transport/dest_port, such as tcp/53.
       user:
         source: calculated
-        defined_in: Ports
         type: string
         description: The user account associated with the listening port.
         recommended: true
@@ -177,23 +148,19 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: Ports
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: Ports
         type: string
         description: The vendor and product name of the Endpoint solution that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
@@ -212,25 +179,20 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseSearch
       action:
         source: declared
-        defined_in: Processes
         type: string
         description: The action taken by the endpoint.
       cim_entity_zone:
         source: declared
-        defined_in: Processes
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       cpu_load_percent:
         source: declared
-        defined_in: Processes
         type: number
         description: CPU load consumed by the process (in percent).
       dest:
         source: calculated
-        defined_in: Processes
         type: string
         description: The endpoint for which the process was spawned.
         recommended: true
@@ -240,46 +202,37 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: Processes
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Processes
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_is_expected:
         source: declared
-        defined_in: Processes
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_priority:
         source: declared
-        defined_in: Processes
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: declared
-        defined_in: Processes
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: declared
-        defined_in: Processes
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: declared
-        defined_in: Processes
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: base
-        defined_in: BaseSearch
       loaded_file:
         source: calculated
-        defined_in: Processes
         type: string
         description: The file that was loaded.
         recommended: true
@@ -289,12 +242,10 @@ datasets:
           expression: if(isnull(loaded_file) OR loaded_file="","unknown",loaded_file)
       mem_used:
         source: declared
-        defined_in: Processes
         type: number
         description: Memory used by the process (in bytes).
       original_file_name:
         source: calculated
-        defined_in: Processes
         type: string
         description: Original name of the file, not including path. Sometimes this field is similar to process name but the two do not always match, such as process_name=pwsh and original_file_name=powershell.exe to detect renamed instances of any process executing.
         recommended: true
@@ -304,12 +255,10 @@ datasets:
           expression: if(isnull(original_file_name) OR original_file_name="","unknown",original_file_name)
       os:
         source: declared
-        defined_in: Processes
         type: string
         description: The operating system of the resource, such as Microsoft Windows Server 2008r2.
       parent_process:
         source: calculated
-        defined_in: Processes
         type: string
         description: The full command string of the parent process
         recommended: true
@@ -319,28 +268,23 @@ datasets:
           expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)
       parent_process_exec:
         source: declared
-        defined_in: Processes
         type: string
         description: The executable name of the parent process.
       parent_process_guid:
         source: declared
-        defined_in: Processes
         type: string
         description: The globally unique identifier of the parent process assigned by the vendor_product.
       parent_process_hash:
         source: declared
-        defined_in: Processes
         type: string
         description: The digest(s) of the parent process, such as <md5>, <sha1>, etc.
         multivalue: true
       parent_process_id:
         source: declared
-        defined_in: Processes
         type: number
         description: The numeric identifier of the parent process assigned by the operating system.
       parent_process_name:
         source: calculated
-        defined_in: Processes
         type: string
         description: The friendly name of the parent process, such as notepad.exe.
         recommended: true
@@ -350,12 +294,10 @@ datasets:
           expression: case(isnotnull(parent_process_name) AND parent_process_name!="", parent_process_name, isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
       parent_process_path:
         source: declared
-        defined_in: Processes
         type: string
         description: The file path of the parent process, such as C:\Windows\System32\notepad.exe.
       parent_user:
         source: calculated
-        defined_in: Processes
         type: string
         description: The original user under which the process was created. This field is extracted for example when the process was originally created under one user's account (this CIM field) but a new process is spawned belonging to another user (the "user" CIM field)
         calculation:
@@ -364,7 +306,6 @@ datasets:
           expression: if(isnull(parent_user) OR parent_user="","unknown",parent_user)
       process:
         source: calculated
-        defined_in: Processes
         type: string
         description: The full command string of the spawned process. Such as C:\WINDOWS\system32\cmd.exe /c ""C:\Program Files\SplunkUniversalForwarder\etc\system\bin\powershell.cmd" --scheme"
         recommended: true
@@ -374,33 +315,27 @@ datasets:
           expression: if(isnull(process) OR process="","unknown",process)
       process_current_directory:
         source: declared
-        defined_in: Processes
         type: string
         description: The current working directory used to spawn the process.
       process_exec:
         source: declared
-        defined_in: Processes
         type: string
         description: The executable name of the process.
       process_guid:
         source: declared
-        defined_in: Processes
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_hash:
         source: declared
-        defined_in: Processes
         type: string
         description: The digest(s) of the process, such as <md5>, <sha1>, etc.
         multivalue: true
       process_id:
         source: declared
-        defined_in: Processes
         type: number
         description: The numeric identifier of the process assigned by the operating system.
       process_integrity_level:
         source: declared
-        defined_in: Processes
         type: string
         description: The integrity level of the process.
         expected_values:
@@ -413,7 +348,6 @@ datasets:
         - untrusted
       process_name:
         source: calculated
-        defined_in: Processes
         type: string
         description: The friendly name of the process, such as notepad.exe.
         recommended: true
@@ -423,24 +357,19 @@ datasets:
           expression: case(isnotnull(process_name) AND process_name!="", process_name, isnotnull(process) AND process!="" AND match(process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(process) AND process!="" AND match(process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
       process_path:
         source: declared
-        defined_in: Processes
         type: string
         description: The file path of the process, such as C:\Windows\System32\notepad.exe.
       source:
         source: base
-        defined_in: BaseSearch
       sourcetype:
         source: base
-        defined_in: BaseSearch
       tag:
         source: declared
-        defined_in: Processes
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: calculated
-        defined_in: Processes
         type: string
         description: The current user linked to the running process.
         recommended: true
@@ -450,28 +379,23 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: Processes
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: Processes
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: declared
-        defined_in: Processes
         type: string
         description: The unique identifier of the user account which spawned the process.
       user_priority:
         source: declared
-        defined_in: Processes
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: Processes
         type: string
         description: The vendor and product name of the Endpoint solution that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
@@ -490,20 +414,16 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseSearch
       cim_entity_zone:
         source: declared
-        defined_in: Services
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       description:
         source: declared
-        defined_in: Services
         type: string
         description: The description of the service.
       dest:
         source: calculated
-        defined_in: Services
         type: string
         description: The endpoint for which the service is installed.
         recommended: true
@@ -513,56 +433,45 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: Services
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Services
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_is_expected:
         source: declared
-        defined_in: Services
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_priority:
         source: declared
-        defined_in: Services
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: declared
-        defined_in: Services
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: declared
-        defined_in: Services
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: declared
-        defined_in: Services
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: base
-        defined_in: BaseSearch
       process_guid:
         source: declared
-        defined_in: Services
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_id:
         source: declared
-        defined_in: Services
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       service:
         source: calculated
-        defined_in: Services
         type: string
         description: The full service name.
         recommended: true
@@ -572,44 +481,36 @@ datasets:
           expression: if(isnull(service) OR service="","unknown",service)
       service_dll:
         source: declared
-        defined_in: Services
         type: string
         description: The dynamic link library associated with the service.
       service_dll_hash:
         source: declared
-        defined_in: Services
         type: string
         description: The digest(s) of the dynamic link library associated with the service, such as <md5>, <sha1>, etc.
         multivalue: true
       service_dll_path:
         source: declared
-        defined_in: Services
         type: string
         description: The file path to the dynamic link library assocatied with the service, such as C:\Windows\System32\comdlg32.dll.
       service_dll_signature_exists:
         source: declared
-        defined_in: Services
         type: boolean
         description: Whether or not the dynamic link library associated with the service has a digitally signed signature.
       service_dll_signature_verified:
         source: declared
-        defined_in: Services
         type: boolean
         description: Whether or not the dynamic link library associated with the service has had it's digitally signed signature verified.
       service_exec:
         source: declared
-        defined_in: Services
         type: string
         description: The executable name of the service.
       service_hash:
         source: declared
-        defined_in: Services
         type: string
         description: The digest(s) of the service, such as <md5>, <sha1>, etc.
         multivalue: true
       service_id:
         source: calculated
-        defined_in: Services
         type: string
         description: The unique identifier of the service assigned by the operating system..
         recommended: true
@@ -619,7 +520,6 @@ datasets:
           expression: if(isnull(service_id) OR service_id="","unknown",service_id)
       service_name:
         source: calculated
-        defined_in: Services
         type: string
         description: The friendly service name.
         recommended: true
@@ -629,28 +529,22 @@ datasets:
           expression: if(isnull(service_name) OR service_name="","unknown",service_name)
       service_path:
         source: declared
-        defined_in: Services
         type: string
         description: The file path of the service, such as C:\WINDOWS\system32\svchost.exe.
       service_signature_exists:
         source: declared
-        defined_in: Services
         type: boolean
         description: Whether or not the service has a digitally signed signature.
       service_signature_verified:
         source: declared
-        defined_in: Services
         type: boolean
         description: Whether or not the service has had it's digitally signed signature verified.
       source:
         source: base
-        defined_in: BaseSearch
       sourcetype:
         source: base
-        defined_in: BaseSearch
       start_mode:
         source: calculated
-        defined_in: Services
         type: string
         description: The start mode for the service.
         expected_values:
@@ -664,7 +558,6 @@ datasets:
           expression: if(isnull(start_mode) OR start_mode="","unknown",start_mode)
       status:
         source: calculated
-        defined_in: Services
         type: string
         description: The status of the service.
         expected_values:
@@ -680,13 +573,11 @@ datasets:
           expression: if(isnull(status) OR status="","unknown",status)
       tag:
         source: declared
-        defined_in: Services
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: calculated
-        defined_in: Services
         type: string
         description: The user account associated with the service.
         recommended: true
@@ -696,23 +587,19 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: Services
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: Services
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: Services
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: Services
         type: string
         description: The vendor and product name of the Endpoint solution that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
@@ -731,10 +618,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseSearch
       action:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The action performed on the resource.
         expected_values:
@@ -750,12 +635,10 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       cim_entity_zone:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The endpoint pertaining to the filesystem activity.
         recommended: true
@@ -765,44 +648,36 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: declared
-        defined_in: Filesystem
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: declared
-        defined_in: Filesystem
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: declared
-        defined_in: Filesystem
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       file_access_time:
         source: declared
-        defined_in: Filesystem
         type: timestamp
         description: The time the file (the object of the event) was accessed.
         recommended: true
       file_acl:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: Access controls associated with the file affected by the event.
         recommended: true
@@ -812,13 +687,11 @@ datasets:
           expression: if(isnull(file_acl) OR file_acl="","unknown",file_acl)
       file_create_time:
         source: declared
-        defined_in: Filesystem
         type: timestamp
         description: The time the file (the object of the event) was created.
         recommended: true
       file_hash:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: A cryptographic identifier assigned to the file object affected by the event.
         recommended: true
@@ -828,13 +701,11 @@ datasets:
           expression: if(isnull(file_hash) OR file_hash="","unknown",file_hash)
       file_modify_time:
         source: declared
-        defined_in: Filesystem
         type: timestamp
         description: The time the file (the object of the event) was altered.
         recommended: true
       file_name:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The name of the file, such as notepad.exe.
         recommended: true
@@ -844,7 +715,6 @@ datasets:
           expression: if(isnull(file_name) OR file_name="","unknown",file_name)
       file_path:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The path of the file, such as C:\Windows\System32\notepad.exe.
         recommended: true
@@ -854,7 +724,6 @@ datasets:
           expression: if(isnull(file_path) OR file_path="","unknown",file_path)
       file_size:
         source: calculated
-        defined_in: Filesystem
         type: number
         description: The size of the file that is the object of the event, in kilobytes.
         recommended: true
@@ -864,15 +733,12 @@ datasets:
           expression: if(isnum(file_size),file_size,null())
       host:
         source: base
-        defined_in: BaseSearch
       image:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The binary file path or name that is tied to a process ID (PID) in events like process creation or termination.
       parent_process:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The full command string of the parent process
         calculation:
@@ -881,28 +747,23 @@ datasets:
           expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)
       parent_process_exec:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The executable name of the parent process.
       parent_process_guid:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The globally unique identifier of the parent process assigned by the vendor_product.
       parent_process_hash:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The digest(s) of the parent process, such as <md5>, <sha1>, etc.
         multivalue: true
       parent_process_id:
         source: declared
-        defined_in: Filesystem
         type: number
         description: The numeric identifier of the parent process assigned by the operating system.
       parent_process_name:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The friendly name of the parent process, such as notepad.exe.
         calculation:
@@ -911,12 +772,10 @@ datasets:
           expression: case(isnotnull(parent_process_name) AND parent_process_name!="", parent_process_name, isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
       parent_process_path:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The file path of the parent process, such as C:\Windows\System32\notepad.exe.
       process:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The full command string of the spawned process. Such as C:\WINDOWS\system32\cmd.exe /c ""C:\Program Files\SplunkUniversalForwarder\etc\system\bin\powershell.cmd" --scheme"
         recommended: true
@@ -926,28 +785,23 @@ datasets:
           expression: if(isnull(process) OR process="","unknown",process)
       process_exec:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The executable name of the process.
       process_guid:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_hash:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The digest(s) of the process, such as <md5>, <sha1>, etc.
         multivalue: true
       process_id:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       process_name:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The friendly name of the process, such as notepad.exe.
         recommended: true
@@ -957,24 +811,19 @@ datasets:
           expression: case(isnotnull(process_name) AND process_name!="", process_name, isnotnull(process) AND process!="" AND match(process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(process) AND process!="" AND match(process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
       process_path:
         source: declared
-        defined_in: Filesystem
         type: string
         description: The file path of the process, such as C:\Windows\System32\notepad.exe.
       source:
         source: base
-        defined_in: BaseSearch
       sourcetype:
         source: base
-        defined_in: BaseSearch
       tag:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The user account associated with the filesystem access.
         recommended: true
@@ -984,23 +833,19 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: Filesystem
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: Filesystem
         type: string
         description: The vendor and product name of the Endpoint solution that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
@@ -1019,10 +864,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseSearch
       action:
         source: calculated
-        defined_in: Registry
         type: string
         description: The action performed on the resource.
         expected_values:
@@ -1037,12 +880,10 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       cim_entity_zone:
         source: declared
-        defined_in: Registry
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: calculated
-        defined_in: Registry
         type: string
         description: The endpoint pertaining to the registry events.
         recommended: true
@@ -1052,46 +893,37 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: Registry
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Registry
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: declared
-        defined_in: Registry
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: declared
-        defined_in: Registry
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: declared
-        defined_in: Registry
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: declared
-        defined_in: Registry
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: base
-        defined_in: BaseSearch
       image:
         source: declared
-        defined_in: Registry
         type: string
         description: The binary file path or name that is tied to a process ID (PID) in events like process creation or termination.
       parent_process:
         source: calculated
-        defined_in: Registry
         type: string
         description: The full command string of the parent process
         calculation:
@@ -1100,28 +932,23 @@ datasets:
           expression: if(isnull(parent_process) OR parent_process="","unknown",parent_process)
       parent_process_exec:
         source: declared
-        defined_in: Registry
         type: string
         description: The executable name of the parent process.
       parent_process_guid:
         source: declared
-        defined_in: Registry
         type: string
         description: The globally unique identifier of the parent process assigned by the vendor_product.
       parent_process_hash:
         source: declared
-        defined_in: Registry
         type: string
         description: The digest(s) of the parent process, such as <md5>, <sha1>, etc.
         multivalue: true
       parent_process_id:
         source: declared
-        defined_in: Registry
         type: number
         description: The numeric identifier of the parent process assigned by the operating system.
       parent_process_name:
         source: calculated
-        defined_in: Registry
         type: string
         description: The friendly name of the parent process, such as notepad.exe.
         calculation:
@@ -1130,12 +957,10 @@ datasets:
           expression: case(isnotnull(parent_process_name) AND parent_process_name!="", parent_process_name, isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( parent_process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(parent_process) AND parent_process!="" AND match(parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( parent_process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
       parent_process_path:
         source: declared
-        defined_in: Registry
         type: string
         description: The file path of the parent process, such as C:\Windows\System32\notepad.exe.
       process:
         source: calculated
-        defined_in: Registry
         type: string
         description: The full command string of the spawned process. Such as C:\WINDOWS\system32\cmd.exe /c ""C:\Program Files\SplunkUniversalForwarder\etc\system\bin\powershell.cmd" --scheme"
         recommended: true
@@ -1145,28 +970,23 @@ datasets:
           expression: if(isnull(process) OR process="","unknown",process)
       process_exec:
         source: declared
-        defined_in: Registry
         type: string
         description: The executable name of the process.
       process_guid:
         source: declared
-        defined_in: Registry
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_hash:
         source: declared
-        defined_in: Registry
         type: string
         description: The digest(s) of the process, such as <md5>, <sha1>, etc.
         multivalue: true
       process_id:
         source: declared
-        defined_in: Registry
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       process_name:
         source: calculated
-        defined_in: Registry
         type: string
         description: The friendly name of the process, such as notepad.exe.
         recommended: true
@@ -1176,12 +996,10 @@ datasets:
           expression: case(isnotnull(process_name) AND process_name!="", process_name, isnotnull(process) AND process!="" AND match(process, "^\s*(?:\"..*\\\([^\"]+)\").*"), replace( process, "^\s*(?:\"..*\\\([^\"]+)\").*", "\1" ), isnotnull(process) AND process!="" AND match(process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*"), replace( process, "^(?:..*\\\)?([^\s\"]+)(?=\s|$).*", "\1" ), 1=1, "unknown")
       process_path:
         source: declared
-        defined_in: Registry
         type: string
         description: The file path of the process, such as C:\Windows\System32\notepad.exe.
       registry_hive:
         source: declared
-        defined_in: Registry
         type: string
         description: The logical grouping of registry keys, subkeys, and values.
         expected_values:
@@ -1194,7 +1012,6 @@ datasets:
         - HKEY_USERS\.DEFAULT
       registry_key_name:
         source: calculated
-        defined_in: Registry
         type: string
         description: The name of the registry key, such as PrinterDriverData.
         recommended: true
@@ -1204,7 +1021,6 @@ datasets:
           expression: if(isnull(registry_key_name) OR registry_key_name="","unknown",registry_key_name)
       registry_path:
         source: calculated
-        defined_in: Registry
         type: string
         description: The path to the registry value, such as \win\directory\directory2\{676235CD-B656-42D5-B737-49856E97D072}\PrinterDriverData.
         recommended: true
@@ -1214,7 +1030,6 @@ datasets:
           expression: if(isnull(registry_path) OR registry_path="","unknown",registry_path)
       registry_value_data:
         source: calculated
-        defined_in: Registry
         type: string
         description: The unaltered registry value.
         recommended: true
@@ -1224,7 +1039,6 @@ datasets:
           expression: if(isnull(registry_value_data) OR registry_value_data="","unknown",registry_value_data)
       registry_value_name:
         source: calculated
-        defined_in: Registry
         type: string
         description: The name of the registry value.
         recommended: true
@@ -1234,12 +1048,10 @@ datasets:
           expression: if(isnull(registry_value_name) OR registry_value_name="","unknown",registry_value_name)
       registry_value_text:
         source: declared
-        defined_in: Registry
         type: string
         description: The textual representation of registry_value_data (if applicable).
       registry_value_type:
         source: calculated
-        defined_in: Registry
         type: string
         description: The type of the registry value.
         expected_values:
@@ -1261,13 +1073,10 @@ datasets:
           expression: if(isnull(registry_value_type) OR registry_value_type="","unknown",registry_value_type)
       source:
         source: base
-        defined_in: BaseSearch
       sourcetype:
         source: base
-        defined_in: BaseSearch
       status:
         source: declared
-        defined_in: Registry
         type: string
         description: The outcome of the registry action.
         expected_values:
@@ -1275,13 +1084,11 @@ datasets:
         - success
       tag:
         source: declared
-        defined_in: Registry
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: calculated
-        defined_in: Registry
         type: string
         description: The user account associated with the registry access.
         recommended: true
@@ -1291,23 +1098,19 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: Registry
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: Registry
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: Registry
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: Registry
         type: string
         description: The vendor and product name of the Endpoint solution that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data.
         recommended: true

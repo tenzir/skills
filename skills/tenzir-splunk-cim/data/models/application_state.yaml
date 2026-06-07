@@ -13,10 +13,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseEvent
       dest:
         source: calculated
-        defined_in: All_Application_State
         type: string
         description: The compute resource where the service is installed. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
         recommended: true
@@ -26,41 +24,33 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: declared
-        defined_in: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: declared
-        defined_in: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: declared
-        defined_in: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: base
-        defined_in: BaseEvent
       process:
         source: calculated
-        defined_in: All_Application_State
         type: string
         description: 'The name of a process or service file, such as sqlsrvr.exe or httpd. Note: This field is not appropriate for service or daemon names, such as SQL Server or Apache Web Server. Service or daemon names belong to the service field.'
         recommended: true
@@ -70,7 +60,6 @@ datasets:
           expression: if(isnull(process) OR process="","unknown",process)
       process_name:
         source: calculated
-        defined_in: All_Application_State
         type: string
         description: The name of a process.
         calculation:
@@ -80,35 +69,28 @@ datasets:
           input_field: process
       source:
         source: base
-        defined_in: BaseEvent
       sourcetype:
         source: base
-        defined_in: BaseEvent
       tag:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: The user account the service is running as, such as System or httpdsvc.
       user_bunit:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
     inherits:
@@ -127,11 +109,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       dest:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The compute resource where the service is installed. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -142,20 +122,17 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_port:
         source: calculated
-        defined_in: Ports
         type: number
         description: Network ports communicated to by the process, such as 53.
         recommended: true
@@ -166,35 +143,29 @@ datasets:
           expression: if(isnum(dest_port),dest_port,0)
       dest_priority:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       process:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: 'The name of a process or service file, such as sqlsrvr.exe or httpd. Note: This field is not appropriate for service or daemon names, such as SQL Server or Apache Web Server. Service or daemon names belong to the service field.'
@@ -205,7 +176,6 @@ datasets:
           expression: if(isnull(process) OR process="","unknown",process)
       process_name:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The name of a process.
@@ -216,22 +186,18 @@ datasets:
           input_field: process
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       tag:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       transport:
         source: calculated
-        defined_in: Ports
         type: string
         description: The network ports listened to by the application process, such as tcp, udp, etc.
         recommended: true
@@ -242,7 +208,6 @@ datasets:
           expression: if(isnull(transport) OR transport="","unknown",lower(transport))
       transport_dest_port:
         source: calculated
-        defined_in: Ports
         type: string
         description: Calculated as transport/dest_port, such as tcp/53.
         multivalue: true
@@ -252,26 +217,22 @@ datasets:
           expression: if(isnull(transport_dest_port) OR transport_dest_port="",split(replace(mvjoin(mvzip(transport,dest_port),"|"),",","/"),"|"),transport_dest_port)
       user:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The user account the service is running as, such as System or httpdsvc.
       user_bunit:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
@@ -288,26 +249,21 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       cpu_load_mhz:
         source: declared
-        defined_in: Processes
         type: number
         description: CPU Load in megahertz.
       cpu_load_percent:
         source: declared
-        defined_in: Processes
         type: number
         description: CPU Load in percent.
       cpu_time:
         source: declared
-        defined_in: Processes
         type: string
         description: CPU Time.
       dest:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The compute resource where the service is installed. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -318,53 +274,44 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       mem_used:
         source: declared
-        defined_in: Processes
         type: number
         description: Memory used in bytes.
       process:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: 'The name of a process or service file, such as sqlsrvr.exe or httpd. Note: This field is not appropriate for service or daemon names, such as SQL Server or Apache Web Server. Service or daemon names belong to the service field.'
@@ -375,7 +322,6 @@ datasets:
           expression: if(isnull(process) OR process="","unknown",process)
       process_name:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The name of a process.
@@ -386,41 +332,34 @@ datasets:
           input_field: process
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       tag:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The user account the service is running as, such as System or httpdsvc.
       user_bunit:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
@@ -437,11 +376,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       dest:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The compute resource where the service is installed. You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -452,48 +389,40 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_requires_av:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_timesync:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_should_update:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: boolean
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       process:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: 'The name of a process or service file, such as sqlsrvr.exe or httpd. Note: This field is not appropriate for service or daemon names, such as SQL Server or Apache Web Server. Service or daemon names belong to the service field.'
@@ -504,7 +433,6 @@ datasets:
           expression: if(isnull(process) OR process="","unknown",process)
       process_name:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The name of a process.
@@ -515,7 +443,6 @@ datasets:
           input_field: process
       service:
         source: calculated
-        defined_in: Services
         type: string
         description: 'The name of the service, such as SQL Server or Apache Web Server. Note: This field is not appropriate for filenames, such as sqlsrvr.exe or httpd. Filenames should belong to the process field instead. Also, note that field is a string. Use the service_id field for service ID fields that are integer data types.'
         recommended: true
@@ -525,7 +452,6 @@ datasets:
           expression: if(isnull(service) OR service="","unknown",service)
       service_id:
         source: calculated
-        defined_in: Services
         type: string
         description: A numeric indicator for a service.
         recommended: true
@@ -535,15 +461,12 @@ datasets:
           expression: if(isnull(service_id) OR service_id="","unknown",service_id)
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Application_State
       start_mode:
         source: calculated
-        defined_in: Services
         type: string
         description: The start mode for the service.
         expected_values:
@@ -557,7 +480,6 @@ datasets:
           expression: if(isnull(start_mode) OR start_mode="","unknown",start_mode)
       status:
         source: calculated
-        defined_in: Services
         type: string
         description: The status of the service.
         expected_values:
@@ -572,33 +494,28 @@ datasets:
           expression: if(isnull(status) OR status="","unknown",status)
       tag:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: The user account the service is running as, such as System or httpdsvc.
       user_bunit:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: All_Application_State
         inherited_from: All_Application_State
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.

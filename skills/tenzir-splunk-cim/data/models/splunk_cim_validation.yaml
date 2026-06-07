@@ -30,19 +30,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Alerts
         type: timestamp
       host:
         source: declared
-        defined_in: Alerts
         type: string
       source:
         source: declared
-        defined_in: Alerts
         type: string
       sourcetype:
         source: declared
-        defined_in: Alerts
         type: string
     inherits:
     - BaseSearch
@@ -53,19 +49,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Application_State
         type: timestamp
       host:
         source: declared
-        defined_in: Application_State
         type: string
       source:
         source: declared
-        defined_in: Application_State
         type: string
       sourcetype:
         source: declared
-        defined_in: Application_State
         type: string
     inherits:
     - BaseSearch
@@ -82,35 +74,28 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Ports
         type: string
       dest_port:
         source: declared
-        defined_in: Missing_Extractions_Ports
         type: number
       host:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       source:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       sourcetype:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       transport:
         source: declared
-        defined_in: Missing_Extractions_Ports
         type: string
     inherits:
     - BaseSearch
@@ -123,30 +108,24 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Processes
         type: string
       host:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       process:
         source: declared
-        defined_in: Missing_Extractions_Processes
         type: string
       source:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       sourcetype:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
     inherits:
@@ -160,35 +139,28 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Services
         type: string
       host:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       service:
         source: declared
-        defined_in: Missing_Extractions_Services
         type: string
       source:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       sourcetype:
         source: inherited
-        defined_in: Application_State
         inherited_from: Application_State
         type: string
       start_mode:
         source: declared
-        defined_in: Missing_Extractions_Services
         type: string
     inherits:
     - BaseSearch
@@ -198,19 +170,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Authentication
         type: timestamp
       host:
         source: declared
-        defined_in: Authentication
         type: string
       source:
         source: declared
-        defined_in: Authentication
         type: string
       sourcetype:
         source: declared
-        defined_in: Authentication
         type: string
     inherits:
     - BaseSearch
@@ -225,43 +193,34 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Authentication
         type: string
       app:
         source: declared
-        defined_in: Missing_Extractions_Authentication
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Authentication
         type: string
       host:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
       source:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
       sourcetype:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
       src:
         source: declared
-        defined_in: Missing_Extractions_Authentication
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Authentication
         type: string
     inherits:
     - BaseSearch
@@ -271,19 +230,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Certificates
         type: timestamp
       host:
         source: declared
-        defined_in: Certificates
         type: string
       source:
         source: declared
-        defined_in: Certificates
         type: string
       sourcetype:
         source: declared
-        defined_in: Certificates
         type: string
     inherits:
     - BaseSearch
@@ -298,35 +253,28 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Certificates
         inherited_from: Certificates
         type: timestamp
       host:
         source: inherited
-        defined_in: Certificates
         inherited_from: Certificates
         type: string
       source:
         source: inherited
-        defined_in: Certificates
         inherited_from: Certificates
         type: string
       sourcetype:
         source: inherited
-        defined_in: Certificates
         inherited_from: Certificates
         type: string
       ssl_hash:
         source: declared
-        defined_in: Missing_Extractions_Certificates
         type: string
       ssl_issuer:
         source: declared
-        defined_in: Missing_Extractions_Certificates
         type: string
       ssl_subject:
         source: declared
-        defined_in: Missing_Extractions_Certificates
         type: string
     inherits:
     - BaseSearch
@@ -337,19 +285,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Change_Analysis
         type: timestamp
       host:
         source: declared
-        defined_in: Change_Analysis
         type: string
       source:
         source: declared
-        defined_in: Change_Analysis
         type: string
       sourcetype:
         source: declared
-        defined_in: Change_Analysis
         type: string
     inherits:
     - BaseSearch
@@ -368,47 +312,37 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Account_Management
         type: string
       command:
         source: declared
-        defined_in: Missing_Extractions_Account_Management
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Account_Management
         type: string
       host:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       object_category:
         source: declared
-        defined_in: Missing_Extractions_Account_Management
         type: string
       source:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       sourcetype:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       src:
         source: declared
-        defined_in: Missing_Extractions_Account_Management
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Account_Management
         type: string
     inherits:
     - BaseSearch
@@ -421,51 +355,40 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Endpoint_Changes
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Endpoint_Changes
         type: string
       host:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       object:
         source: declared
-        defined_in: Missing_Extractions_Endpoint_Changes
         type: string
       object_category:
         source: declared
-        defined_in: Missing_Extractions_Endpoint_Changes
         type: string
       object_path:
         source: declared
-        defined_in: Missing_Extractions_Endpoint_Changes
         type: string
       source:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       sourcetype:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       status:
         source: declared
-        defined_in: Missing_Extractions_Endpoint_Changes
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Endpoint_Changes
         type: string
     inherits:
     - BaseSearch
@@ -478,83 +401,64 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       file_access_time:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: number
       file_acl:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       file_create_time:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: number
       file_hash:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       file_modify_time:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: number
       file_name:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       file_path:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       file_size:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: number
       host:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       object:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       object_category:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       object_path:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       source:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       sourcetype:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       status:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Filesystem_Changes
         type: string
     inherits:
     - BaseSearch
@@ -567,39 +471,31 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Network_Changes
         type: string
       command:
         source: declared
-        defined_in: Missing_Extractions_Network_Changes
         type: string
       dvc:
         source: declared
-        defined_in: Missing_Extractions_Network_Changes
         type: string
       host:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       source:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       sourcetype:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Network_Changes
         type: string
     inherits:
     - BaseSearch
@@ -612,39 +508,31 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Restarts
         type: string
       command:
         source: declared
-        defined_in: Missing_Extractions_Restarts
         type: string
       dvc:
         source: declared
-        defined_in: Missing_Extractions_Restarts
         type: string
       host:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       source:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       sourcetype:
         source: inherited
-        defined_in: Change_Analysis
         inherited_from: Change_Analysis
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Restarts
         type: string
     inherits:
     - BaseSearch
@@ -655,19 +543,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Compute_Inventory
         type: timestamp
       host:
         source: declared
-        defined_in: Compute_Inventory
         type: string
       source:
         source: declared
-        defined_in: Compute_Inventory
         type: string
       sourcetype:
         source: declared
-        defined_in: Compute_Inventory
         type: string
     inherits:
     - BaseSearch
@@ -686,38 +570,30 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: timestamp
       cpu_cores:
         source: declared
-        defined_in: Missing_Extractions_CPU
         type: number
       cpu_count:
         source: declared
-        defined_in: Missing_Extractions_CPU
         type: number
       cpu_mhz:
         source: declared
-        defined_in: Missing_Extractions_CPU
         type: number
       dest:
         source: declared
-        defined_in: Missing_Extractions_CPU
         type: string
       host:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       source:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       sourcetype:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
     inherits:
@@ -731,30 +607,24 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Memory
         type: string
       host:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       mem:
         source: declared
-        defined_in: Missing_Extractions_Memory
         type: string
       source:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       sourcetype:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
     inherits:
@@ -768,46 +638,36 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Network
         type: string
       dns:
         source: declared
-        defined_in: Missing_Extractions_Network
         type: string
       host:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       interface:
         source: declared
-        defined_in: Missing_Extractions_Network
         type: string
       ip:
         source: declared
-        defined_in: Missing_Extractions_Network
         type: string
       mac:
         source: declared
-        defined_in: Missing_Extractions_Network
         type: string
       name:
         source: declared
-        defined_in: Missing_Extractions_Network
         type: string
       source:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       sourcetype:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
     inherits:
@@ -821,35 +681,28 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Storage
         type: string
       host:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       mount:
         source: declared
-        defined_in: Missing_Extractions_Storage
         type: string
       source:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       sourcetype:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       storage:
         source: declared
-        defined_in: Missing_Extractions_Storage
         type: string
     inherits:
     - BaseSearch
@@ -862,35 +715,28 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_OS
         type: string
       host:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       os:
         source: declared
-        defined_in: Missing_Extractions_OS
         type: string
       source:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       sourcetype:
         source: inherited
-        defined_in: Compute_Inventory
         inherited_from: Compute_Inventory
         type: string
       version:
         source: declared
-        defined_in: Missing_Extractions_OS
         type: string
     inherits:
     - BaseSearch
@@ -900,19 +746,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Databases
         type: timestamp
       host:
         source: declared
-        defined_in: Databases
         type: string
       source:
         source: declared
-        defined_in: Databases
         type: string
       sourcetype:
         source: declared
-        defined_in: Databases
         type: string
     inherits:
     - BaseSearch
@@ -922,19 +764,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Email
         type: timestamp
       host:
         source: declared
-        defined_in: Email
         type: string
       source:
         source: declared
-        defined_in: Email
         type: string
       sourcetype:
         source: declared
-        defined_in: Email
         type: string
     inherits:
     - BaseSearch
@@ -949,43 +787,34 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Email
         inherited_from: Email
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_All_Email
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_All_Email
         type: string
       host:
         source: inherited
-        defined_in: Email
         inherited_from: Email
         type: string
       source:
         source: inherited
-        defined_in: Email
         inherited_from: Email
         type: string
       sourcetype:
         source: inherited
-        defined_in: Email
         inherited_from: Email
         type: string
       src:
         source: declared
-        defined_in: Missing_Extractions_All_Email
         type: string
       src_user:
         source: declared
-        defined_in: Missing_Extractions_All_Email
         type: string
       vendor_product:
         source: declared
-        defined_in: Missing_Extractions_All_Email
         type: string
     inherits:
     - BaseSearch
@@ -996,19 +825,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Interprocess_Messaging
         type: timestamp
       host:
         source: declared
-        defined_in: Interprocess_Messaging
         type: string
       source:
         source: declared
-        defined_in: Interprocess_Messaging
         type: string
       sourcetype:
         source: declared
-        defined_in: Interprocess_Messaging
         type: string
     inherits:
     - BaseSearch
@@ -1019,19 +844,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Intrusion_Detection
         type: timestamp
       host:
         source: declared
-        defined_in: Intrusion_Detection
         type: string
       source:
         source: declared
-        defined_in: Intrusion_Detection
         type: string
       sourcetype:
         source: declared
-        defined_in: Intrusion_Detection
         type: string
     inherits:
     - BaseSearch
@@ -1046,59 +867,46 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Intrusion_Detection
         inherited_from: Intrusion_Detection
         type: timestamp
       category:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       dvc:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       host:
         source: inherited
-        defined_in: Intrusion_Detection
         inherited_from: Intrusion_Detection
         type: string
       ids_type:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       severity:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       signature:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       source:
         source: inherited
-        defined_in: Intrusion_Detection
         inherited_from: Intrusion_Detection
         type: string
       sourcetype:
         source: inherited
-        defined_in: Intrusion_Detection
         inherited_from: Intrusion_Detection
         type: string
       src:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
       vendor_product:
         source: declared
-        defined_in: Missing_Extractions_IDS
         type: string
     inherits:
     - BaseSearch
@@ -1108,19 +916,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: JVM
         type: timestamp
       host:
         source: declared
-        defined_in: JVM
         type: string
       source:
         source: declared
-        defined_in: JVM
         type: string
       sourcetype:
         source: declared
-        defined_in: JVM
         type: string
     inherits:
     - BaseSearch
@@ -1130,19 +934,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Malware
         type: timestamp
       host:
         source: declared
-        defined_in: Malware
         type: string
       source:
         source: declared
-        defined_in: Malware
         type: string
       sourcetype:
         source: declared
-        defined_in: Malware
         type: string
     inherits:
     - BaseSearch
@@ -1158,51 +958,40 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Malware_Attacks
         type: string
       category:
         source: declared
-        defined_in: Missing_Extractions_Malware_Attacks
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Malware_Attacks
         type: string
       dest_nt_domain:
         source: declared
-        defined_in: Missing_Extractions_Malware_Attacks
         type: string
       host:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: string
       signature:
         source: declared
-        defined_in: Missing_Extractions_Malware_Attacks
         type: string
       source:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: string
       sourcetype:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Malware_Attacks
         type: string
       vendor_product:
         source: declared
-        defined_in: Missing_Extractions_Malware_Attacks
         type: string
     inherits:
     - BaseSearch
@@ -1215,39 +1004,31 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Malware_Operations
         type: string
       dest_nt_domain:
         source: declared
-        defined_in: Missing_Extractions_Malware_Operations
         type: string
       host:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: string
       product:
         source: declared
-        defined_in: Missing_Extractions_Malware_Operations
         type: string
       source:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: string
       sourcetype:
         source: inherited
-        defined_in: Malware
         inherited_from: Malware
         type: string
       vendor:
         source: declared
-        defined_in: Missing_Extractions_Malware_Operations
         type: string
     inherits:
     - BaseSearch
@@ -1258,19 +1039,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Network_Resolution
         type: timestamp
       host:
         source: declared
-        defined_in: Network_Resolution
         type: string
       source:
         source: declared
-        defined_in: Network_Resolution
         type: string
       sourcetype:
         source: declared
-        defined_in: Network_Resolution
         type: string
     inherits:
     - BaseSearch
@@ -1285,47 +1062,37 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Network_Resolution
         inherited_from: Network_Resolution
         type: timestamp
       answer:
         source: declared
-        defined_in: Missing_Extractions_DNS
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_DNS
         type: string
       host:
         source: inherited
-        defined_in: Network_Resolution
         inherited_from: Network_Resolution
         type: string
       message_type:
         source: declared
-        defined_in: Missing_Extractions_DNS
         type: string
       query:
         source: declared
-        defined_in: Missing_Extractions_DNS
         type: string
       reply_code:
         source: declared
-        defined_in: Missing_Extractions_DNS
         type: string
       source:
         source: inherited
-        defined_in: Network_Resolution
         inherited_from: Network_Resolution
         type: string
       sourcetype:
         source: inherited
-        defined_in: Network_Resolution
         inherited_from: Network_Resolution
         type: string
       src:
         source: declared
-        defined_in: Missing_Extractions_DNS
         type: string
     inherits:
     - BaseSearch
@@ -1336,19 +1103,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Network_Sessions
         type: timestamp
       host:
         source: declared
-        defined_in: Network_Sessions
         type: string
       source:
         source: declared
-        defined_in: Network_Sessions
         type: string
       sourcetype:
         source: declared
-        defined_in: Network_Sessions
         type: string
     inherits:
     - BaseSearch
@@ -1363,26 +1126,21 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Network_Sessions
         inherited_from: Network_Sessions
         type: timestamp
       dest_ip:
         source: declared
-        defined_in: Missing_Extractions_Network_Sessions
         type: string
       host:
         source: inherited
-        defined_in: Network_Sessions
         inherited_from: Network_Sessions
         type: string
       source:
         source: inherited
-        defined_in: Network_Sessions
         inherited_from: Network_Sessions
         type: string
       sourcetype:
         source: inherited
-        defined_in: Network_Sessions
         inherited_from: Network_Sessions
         type: string
     inherits:
@@ -1394,19 +1152,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Network_Traffic
         type: timestamp
       host:
         source: declared
-        defined_in: Network_Traffic
         type: string
       source:
         source: declared
-        defined_in: Network_Traffic
         type: string
       sourcetype:
         source: declared
-        defined_in: Network_Traffic
         type: string
     inherits:
     - BaseSearch
@@ -1421,59 +1175,46 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Network_Traffic
         inherited_from: Network_Traffic
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: string
       dest_port:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: number
       dvc:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: string
       host:
         source: inherited
-        defined_in: Network_Traffic
         inherited_from: Network_Traffic
         type: string
       rule:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: string
       source:
         source: inherited
-        defined_in: Network_Traffic
         inherited_from: Network_Traffic
         type: string
       sourcetype:
         source: inherited
-        defined_in: Network_Traffic
         inherited_from: Network_Traffic
         type: string
       src:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: string
       src_port:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: number
       transport:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: string
       vendor_product:
         source: declared
-        defined_in: Missing_Extractions_Network_Traffic
         type: string
     inherits:
     - BaseSearch
@@ -1483,19 +1224,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Performance
         type: timestamp
       host:
         source: declared
-        defined_in: Performance
         type: string
       source:
         source: declared
-        defined_in: Performance
         type: string
       sourcetype:
         source: declared
-        defined_in: Performance
         type: string
     inherits:
     - BaseSearch
@@ -1516,42 +1253,33 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: timestamp
       cpu_load_mhz:
         source: declared
-        defined_in: Missing_Extractions_Perf_CPU
         type: number
       cpu_load_percent:
         source: declared
-        defined_in: Missing_Extractions_Perf_CPU
         type: number
       cpu_time:
         source: declared
-        defined_in: Missing_Extractions_Perf_CPU
         type: number
       cpu_user_percent:
         source: declared
-        defined_in: Missing_Extractions_Perf_CPU
         type: number
       dest:
         source: declared
-        defined_in: Missing_Extractions_Perf_CPU
         type: string
       host:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       source:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       sourcetype:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
     inherits:
@@ -1565,39 +1293,31 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Perf_Facilities
         type: string
       fan_speed:
         source: declared
-        defined_in: Missing_Extractions_Perf_Facilities
         type: number
       host:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       power:
         source: declared
-        defined_in: Missing_Extractions_Perf_Facilities
         type: number
       source:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       sourcetype:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       temperature:
         source: declared
-        defined_in: Missing_Extractions_Perf_Facilities
         type: number
     inherits:
     - BaseSearch
@@ -1610,38 +1330,30 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Perf_Memory
         type: string
       host:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       mem:
         source: declared
-        defined_in: Missing_Extractions_Perf_Memory
         type: number
       mem_free:
         source: declared
-        defined_in: Missing_Extractions_Perf_Memory
         type: number
       mem_used:
         source: declared
-        defined_in: Missing_Extractions_Perf_Memory
         type: number
       source:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       sourcetype:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
     inherits:
@@ -1655,51 +1367,40 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Perf_Storage
         type: string
       host:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       mount:
         source: declared
-        defined_in: Missing_Extractions_Perf_Storage
         type: string
       source:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       sourcetype:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       storage:
         source: declared
-        defined_in: Missing_Extractions_Perf_Storage
         type: number
       storage_free:
         source: declared
-        defined_in: Missing_Extractions_Perf_Storage
         type: number
       storage_free_percent:
         source: declared
-        defined_in: Missing_Extractions_Perf_Storage
         type: number
       storage_used:
         source: declared
-        defined_in: Missing_Extractions_Perf_Storage
         type: number
       storage_used_percent:
         source: declared
-        defined_in: Missing_Extractions_Perf_Storage
         type: number
     inherits:
     - BaseSearch
@@ -1712,35 +1413,28 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Perf_Network
         type: string
       host:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       source:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       sourcetype:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       thruput:
         source: declared
-        defined_in: Missing_Extractions_Perf_Network
         type: number
       thruput_max:
         source: declared
-        defined_in: Missing_Extractions_Perf_Network
         type: number
     inherits:
     - BaseSearch
@@ -1753,30 +1447,24 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Perf_Timesync
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Perf_Timesync
         type: string
       host:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       source:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       sourcetype:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
     inherits:
@@ -1790,30 +1478,24 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Perf_Uptime
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Perf_Uptime
         type: string
       host:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       source:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
       sourcetype:
         source: inherited
-        defined_in: Performance
         inherited_from: Performance
         type: string
     inherits:
@@ -1825,19 +1507,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Splunk_Audit
         type: timestamp
       host:
         source: declared
-        defined_in: Splunk_Audit
         type: string
       source:
         source: declared
-        defined_in: Splunk_Audit
         type: string
       sourcetype:
         source: declared
-        defined_in: Splunk_Audit
         type: string
     inherits:
     - BaseSearch
@@ -1848,19 +1526,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Ticket_Management
         type: timestamp
       host:
         source: declared
-        defined_in: Ticket_Management
         type: string
       source:
         source: declared
-        defined_in: Ticket_Management
         type: string
       sourcetype:
         source: declared
-        defined_in: Ticket_Management
         type: string
     inherits:
     - BaseSearch
@@ -1878,31 +1552,25 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_All_Ticket_Managment
         type: string
       host:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       source:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       sourcetype:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       ticket_id:
         source: declared
-        defined_in: Missing_Extractions_All_Ticket_Managment
         type: string
     inherits:
     - BaseSearch
@@ -1915,30 +1583,24 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Incident
         type: string
       host:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       incident:
         source: declared
-        defined_in: Missing_Extractions_Incident
         type: string
       source:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       sourcetype:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
     inherits:
@@ -1952,30 +1614,24 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Problem
         type: string
       host:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       problem:
         source: declared
-        defined_in: Missing_Extractions_Problem
         type: string
       source:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       sourcetype:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
     inherits:
@@ -1989,30 +1645,24 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: timestamp
       change:
         source: declared
-        defined_in: Missing_Extractions_Change
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Change
         type: string
       host:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       source:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
       sourcetype:
         source: inherited
-        defined_in: Ticket_Management
         inherited_from: Ticket_Management
         type: string
     inherits:
@@ -2023,19 +1673,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Updates
         type: timestamp
       host:
         source: declared
-        defined_in: Updates
         type: string
       source:
         source: declared
-        defined_in: Updates
         type: string
       sourcetype:
         source: declared
-        defined_in: Updates
         type: string
     inherits:
     - BaseSearch
@@ -2050,43 +1696,34 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Updates
         inherited_from: Updates
         type: timestamp
       dest:
         source: declared
-        defined_in: Missing_Extractions_Updates
         type: string
       host:
         source: inherited
-        defined_in: Updates
         inherited_from: Updates
         type: string
       signature:
         source: declared
-        defined_in: Missing_Extractions_Updates
         type: string
       signature_id:
         source: declared
-        defined_in: Missing_Extractions_Updates
         type: string
       source:
         source: inherited
-        defined_in: Updates
         inherited_from: Updates
         type: string
       sourcetype:
         source: inherited
-        defined_in: Updates
         inherited_from: Updates
         type: string
       status:
         source: declared
-        defined_in: Missing_Extractions_Updates
         type: string
       vendor_product:
         source: declared
-        defined_in: Missing_Extractions_Updates
         type: string
     inherits:
     - BaseSearch
@@ -2096,19 +1733,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Vulnerabilities
         type: timestamp
       host:
         source: declared
-        defined_in: Vulnerabilities
         type: string
       source:
         source: declared
-        defined_in: Vulnerabilities
         type: string
       sourcetype:
         source: declared
-        defined_in: Vulnerabilities
         type: string
     inherits:
     - BaseSearch
@@ -2123,47 +1756,37 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: timestamp
       category:
         source: declared
-        defined_in: Missing_Extractions_Vulnerabilities
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Vulnerabilities
         type: string
       dvc:
         source: declared
-        defined_in: Missing_Extractions_Vulnerabilities
         type: string
       host:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
       severity:
         source: declared
-        defined_in: Missing_Extractions_Vulnerabilities
         type: string
       signature:
         source: declared
-        defined_in: Missing_Extractions_Vulnerabilities
         type: string
       source:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
       sourcetype:
         source: inherited
-        defined_in: Vulnerabilities
         inherited_from: Vulnerabilities
         type: string
       vendor_product:
         source: declared
-        defined_in: Missing_Extractions_Vulnerabilities
         type: string
     inherits:
     - BaseSearch
@@ -2173,19 +1796,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Web
         type: timestamp
       host:
         source: declared
-        defined_in: Web
         type: string
       source:
         source: declared
-        defined_in: Web
         type: string
       sourcetype:
         source: declared
-        defined_in: Web
         type: string
     inherits:
     - BaseSearch
@@ -2200,67 +1819,52 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Web
         inherited_from: Web
         type: timestamp
       action:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       dest:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       host:
         source: inherited
-        defined_in: Web
         inherited_from: Web
         type: string
       http_content_type:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       http_method:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       http_referrer:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       http_user_agent:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       source:
         source: inherited
-        defined_in: Web
         inherited_from: Web
         type: string
       sourcetype:
         source: inherited
-        defined_in: Web
         inherited_from: Web
         type: string
       src:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       status:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       url:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       user:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
       vendor_product:
         source: declared
-        defined_in: Missing_Extractions_Web
         type: string
     inherits:
     - BaseSearch
@@ -2271,19 +1875,15 @@ datasets:
     fields:
       _time:
         source: declared
-        defined_in: Untagged_Events
         type: timestamp
       host:
         source: declared
-        defined_in: Untagged_Events
         type: string
       source:
         source: declared
-        defined_in: Untagged_Events
         type: string
       sourcetype:
         source: declared
-        defined_in: Untagged_Events
         type: string
     inherits:
     - BaseSearch
@@ -2317,22 +1917,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2346,22 +1942,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2375,22 +1967,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2404,22 +1992,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2433,22 +2017,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2462,22 +2042,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2491,22 +2067,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2520,22 +2092,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2549,22 +2117,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2578,22 +2142,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2607,22 +2167,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2636,22 +2192,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2665,22 +2217,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2694,22 +2242,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2723,22 +2267,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2752,22 +2292,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2781,22 +2317,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2810,22 +2342,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2839,22 +2367,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:
@@ -2868,22 +2392,18 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: timestamp
       host:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       source:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
       sourcetype:
         source: inherited
-        defined_in: Untagged_Events
         inherited_from: Untagged_Events
         type: string
     inherits:

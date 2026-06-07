@@ -15,10 +15,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseEvent
       action:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The action taken by the intrusion detection system (IDS).
         expected_values:
@@ -26,7 +24,6 @@ datasets:
         - blocked
       category:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: 'The vendor-provided category of the triggered signature, such as spyware. Note: This field is a string. Use a category_id field for category ID fields that are integer data types (category_id fields are optional, so they are not included in this table).'
         recommended: true
@@ -36,12 +33,10 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cim_entity_zone:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: The destination of the attack detected by the intrusion detection system (IDS). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
         recommended: true
@@ -51,38 +46,31 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_ip:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The IP address of the destination.
       dest_port:
         source: declared
-        defined_in: IDS_Attacks
         type: number
         description: The destination port of the intrusion.
       dest_priority:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_type:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The type of the destination object, such as 'instance', 'storage', 'firewall'.
       dvc:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: The device that detected the intrusion event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
         recommended: true
@@ -92,41 +80,33 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       file_hash:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: A cryptographic identifier assigned to the file object affected by the event.
       file_name:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The name of the file, such as notepad.exe.
       file_path:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The path of the file, such as C:\Windows\System32\notepad.exe.
       host:
         source: base
-        defined_in: BaseEvent
       ids_type:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: The type of IDS that generated the event.
         expected_values:
@@ -141,7 +121,6 @@ datasets:
           expression: if(isnull(ids_type) OR ids_type="","unknown",ids_type)
       severity:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: 'The severity of the network protection event. Note: This field is a string. Use severity_id for severity ID fields that are integer data types. The severity_id field is optional, so it is not included in the model. Also, specific values are required for this field. Use vendor_severity for the vendor''s own human readable severity strings, such as Good, Bad, and Really Bad.'
         expected_values:
@@ -157,12 +136,10 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: The name of the intrusion detected on the client (the src), such as PlugAndPlay_BO and JavaScript_Obfuscation_Fre.
         recommended: true
@@ -172,18 +149,14 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: base
-        defined_in: BaseEvent
       sourcetype:
         source: base
-        defined_in: BaseEvent
       src:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: The source involved in the attack detected by the IDS. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
         recommended: true
@@ -193,45 +166,37 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_ip:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The ip address of the source.
       src_port:
         source: declared
-        defined_in: IDS_Attacks
         type: number
         description: The port number of the source.
         multivalue: true
       src_priority:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       tag:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       transport:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: The OSI layer 4 (transport) protocol of the intrusion, in lower case.
       user:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: The user involved with the intrusion detection event.
         recommended: true
@@ -241,23 +206,19 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: calculated
-        defined_in: IDS_Attacks
         type: string
         description: The vendor and product name of the IDS or IPS system that detected the vulnerability, such as HP Tipping Point. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
@@ -282,11 +243,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       action:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The action taken by the intrusion detection system (IDS).
@@ -295,7 +254,6 @@ datasets:
         - blocked
       category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: 'The vendor-provided category of the triggered signature, such as spyware. Note: This field is a string. Use a category_id field for category ID fields that are integer data types (category_id fields are optional, so they are not included in this table).'
@@ -306,13 +264,11 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cim_entity_zone:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The destination of the attack detected by the intrusion detection system (IDS). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -323,44 +279,37 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_ip:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The IP address of the destination.
       dest_port:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: number
         description: The destination port of the intrusion.
       dest_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_type:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The type of the destination object, such as 'instance', 'storage', 'firewall'.
       dvc:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The device that detected the intrusion event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -371,48 +320,40 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       file_hash:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: A cryptographic identifier assigned to the file object affected by the event.
       file_name:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The name of the file, such as notepad.exe.
       file_path:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The path of the file, such as C:\Windows\System32\notepad.exe.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       ids_type:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The type of IDS that generated the event.
@@ -428,7 +369,6 @@ datasets:
           expression: if(isnull(ids_type) OR ids_type="","unknown",ids_type)
       severity:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: 'The severity of the network protection event. Note: This field is a string. Use severity_id for severity ID fields that are integer data types. The severity_id field is optional, so it is not included in the model. Also, specific values are required for this field. Use vendor_severity for the vendor''s own human readable severity strings, such as Good, Bad, and Really Bad.'
@@ -445,13 +385,11 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The name of the intrusion detected on the client (the src), such as PlugAndPlay_BO and JavaScript_Obfuscation_Fre.
@@ -462,21 +400,17 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       src:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The source involved in the attack detected by the IDS. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -487,52 +421,44 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_ip:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The ip address of the source.
       src_port:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: number
         description: The port number of the source.
         multivalue: true
       src_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       tag:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       transport:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The OSI layer 4 (transport) protocol of the intrusion, in lower case.
       user:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The user involved with the intrusion detection event.
@@ -543,26 +469,22 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The vendor and product name of the IDS or IPS system that detected the vulnerability, such as HP Tipping Point. This field can be automatically populated by vendor and product fields in your data.
@@ -585,11 +507,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       action:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The action taken by the intrusion detection system (IDS).
@@ -598,7 +518,6 @@ datasets:
         - blocked
       category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: 'The vendor-provided category of the triggered signature, such as spyware. Note: This field is a string. Use a category_id field for category ID fields that are integer data types (category_id fields are optional, so they are not included in this table).'
@@ -609,13 +528,11 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cim_entity_zone:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The destination of the attack detected by the intrusion detection system (IDS). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -626,44 +543,37 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_ip:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The IP address of the destination.
       dest_port:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: number
         description: The destination port of the intrusion.
       dest_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_type:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The type of the destination object, such as 'instance', 'storage', 'firewall'.
       dvc:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The device that detected the intrusion event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -674,48 +584,40 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       file_hash:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: A cryptographic identifier assigned to the file object affected by the event.
       file_name:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The name of the file, such as notepad.exe.
       file_path:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The path of the file, such as C:\Windows\System32\notepad.exe.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       ids_type:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The type of IDS that generated the event.
@@ -731,7 +633,6 @@ datasets:
           expression: if(isnull(ids_type) OR ids_type="","unknown",ids_type)
       severity:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: 'The severity of the network protection event. Note: This field is a string. Use severity_id for severity ID fields that are integer data types. The severity_id field is optional, so it is not included in the model. Also, specific values are required for this field. Use vendor_severity for the vendor''s own human readable severity strings, such as Good, Bad, and Really Bad.'
@@ -748,13 +649,11 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The name of the intrusion detected on the client (the src), such as PlugAndPlay_BO and JavaScript_Obfuscation_Fre.
@@ -765,21 +664,17 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       src:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The source involved in the attack detected by the IDS. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -790,52 +685,44 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_ip:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The ip address of the source.
       src_port:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: number
         description: The port number of the source.
         multivalue: true
       src_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       tag:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       transport:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The OSI layer 4 (transport) protocol of the intrusion, in lower case.
       user:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The user involved with the intrusion detection event.
@@ -846,26 +733,22 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The vendor and product name of the IDS or IPS system that detected the vulnerability, such as HP Tipping Point. This field can be automatically populated by vendor and product fields in your data.
@@ -888,11 +771,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       action:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The action taken by the intrusion detection system (IDS).
@@ -901,7 +782,6 @@ datasets:
         - blocked
       category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: 'The vendor-provided category of the triggered signature, such as spyware. Note: This field is a string. Use a category_id field for category ID fields that are integer data types (category_id fields are optional, so they are not included in this table).'
@@ -912,13 +792,11 @@ datasets:
           expression: if(isnull(category) OR category="","unknown",category)
       cim_entity_zone:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The destination of the attack detected by the intrusion detection system (IDS). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -929,44 +807,37 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_ip:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The IP address of the destination.
       dest_port:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: number
         description: The destination port of the intrusion.
       dest_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_type:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The type of the destination object, such as 'instance', 'storage', 'firewall'.
       dvc:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The device that detected the intrusion event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -977,48 +848,40 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       file_hash:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: A cryptographic identifier assigned to the file object affected by the event.
       file_name:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The name of the file, such as notepad.exe.
       file_path:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The path of the file, such as C:\Windows\System32\notepad.exe.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       ids_type:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The type of IDS that generated the event.
@@ -1034,7 +897,6 @@ datasets:
           expression: if(isnull(ids_type) OR ids_type="","unknown",ids_type)
       severity:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: 'The severity of the network protection event. Note: This field is a string. Use severity_id for severity ID fields that are integer data types. The severity_id field is optional, so it is not included in the model. Also, specific values are required for this field. Use vendor_severity for the vendor''s own human readable severity strings, such as Good, Bad, and Really Bad.'
@@ -1051,13 +913,11 @@ datasets:
           expression: if(isnull(severity) OR severity="","unknown",severity)
       severity_id:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The numeric or vendor specific severity indicator corresponding to the event severity.
       signature:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The name of the intrusion detected on the client (the src), such as PlugAndPlay_BO and JavaScript_Obfuscation_Fre.
@@ -1068,21 +928,17 @@ datasets:
           expression: if(isnull(signature) OR signature="","unknown",signature)
       signature_id:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: IDS_Attacks
       src:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The source involved in the attack detected by the IDS. You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -1093,52 +949,44 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_ip:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The ip address of the source.
       src_port:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: number
         description: The port number of the source.
         multivalue: true
       src_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       tag:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       transport:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The OSI layer 4 (transport) protocol of the intrusion, in lower case.
       user:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The user involved with the intrusion detection event.
@@ -1149,26 +997,22 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_product:
         source: inherited
-        defined_in: IDS_Attacks
         inherited_from: IDS_Attacks
         type: string
         description: The vendor and product name of the IDS or IPS system that detected the vulnerability, such as HP Tipping Point. This field can be automatically populated by vendor and product fields in your data.

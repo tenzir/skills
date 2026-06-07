@@ -15,10 +15,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseEvent
       action:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: The action taken by the network device.
         expected_values:
@@ -32,12 +30,10 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The application protocol of the traffic.
       bytes:
         source: calculated
-        defined_in: All_Traffic
         type: number
         description: Total count of bytes handled by this device/interface (bytes_in + bytes_out).
         recommended: true
@@ -47,7 +43,6 @@ datasets:
           expression: case(isnum(bytes),bytes,isnum(bytes_in) AND isnum(bytes_out),bytes_in+bytes_out,1=1,null())
       bytes_in:
         source: calculated
-        defined_in: All_Traffic
         type: number
         description: How many bytes this device/interface received.
         recommended: true
@@ -57,7 +52,6 @@ datasets:
           expression: case(isnum(bytes_in),bytes_in,isnum(bytes) AND isnum(bytes_out),bytes-bytes_out,1=1,null())
       bytes_out:
         source: calculated
-        defined_in: All_Traffic
         type: number
         description: How many bytes this device/interface transmitted.
         recommended: true
@@ -67,17 +61,14 @@ datasets:
           expression: case(isnum(bytes_out),bytes_out,isnum(bytes) AND isnum(bytes_in),bytes-bytes_in,1=1,null())
       channel:
         source: declared
-        defined_in: All_Traffic
         type: number
         description: The 802.11 channel used by a wireless network.
       cim_entity_zone:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: The destination of the network traffic (the remote host). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
         recommended: true
@@ -87,33 +78,27 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_interface:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The interface that is listening remotely or receiving packets locally. Can also be referred to as the 'egress interface.'
       dest_ip:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The IP address of the destination.
       dest_mac:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: 'The destination TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dest_port:
         source: calculated
-        defined_in: All_Traffic
         type: number
         description: 'The destination port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the dest_svc field.'
         recommended: true
@@ -123,27 +108,22 @@ datasets:
           expression: if(isnum(dest_port),dest_port,0)
       dest_priority:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The destination priority, if applicable.
       dest_translated_ip:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The NATed IPv4 or IPv6 address to which a packet has been sent.
       dest_translated_port:
         source: declared
-        defined_in: All_Traffic
         type: number
         description: 'The NATed port to which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       dest_zone:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The network zone of the destination.
       direction:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The direction the packet is traveling.
         expected_values:
@@ -151,12 +131,10 @@ datasets:
         - outbound
       duration:
         source: declared
-        defined_in: All_Traffic
         type: number
         description: The amount of time for the completion of the network event, in seconds.
       dvc:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: The device that reported the traffic event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
         recommended: true
@@ -166,58 +144,47 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_ip:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The ip address of the device.
       dvc_mac:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: 'The device TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dvc_priority:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_zone:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The network zone of the device.
       flow_id:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: Unique identifier for this traffic stream, such as a netflow, jflow, or cflow.
       host:
         source: base
-        defined_in: BaseEvent
       icmp_code:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The RFC 2780 or RFC 4443 human-readable code value of the traffic, such as Destination Unreachable or Parameter Problem . See the ICMP Type Numbers and the ICMPv6 Type Numbers.
       icmp_type:
         source: declared
-        defined_in: All_Traffic
         type: number
         description: The RFC 2780 or RFC 4443 numeric value of the traffic. See the ICMP Type Numbers and the ICMPv6 Type Numbers.
         expected_values:
         - 0-254
       packets:
         source: calculated
-        defined_in: All_Traffic
         type: number
         description: The total count of packets handled by this device/interface (packets_in + packets_out).
         calculation:
@@ -226,7 +193,6 @@ datasets:
           expression: case(isnum(packets),packets,isnum(packets_in) AND isnum(packets_out),packets_in+packets_out,1=1,null())
       packets_in:
         source: calculated
-        defined_in: All_Traffic
         type: number
         description: The total count of packets received by this device/interface.
         calculation:
@@ -235,7 +201,6 @@ datasets:
           expression: case(isnum(packets_in),packets_in,isnum(packets) AND isnum(packets_out),packets-packets_out,1=1,null())
       packets_out:
         source: calculated
-        defined_in: All_Traffic
         type: number
         description: The total count of packets transmitted by this device/interface.
         calculation:
@@ -244,32 +209,26 @@ datasets:
           expression: case(isnum(packets_out),packets_out,isnum(packets) AND isnum(packets_in),packets-packets_in,1=1,null())
       process_guid:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_id:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       protocol:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The OSI layer 3 (network) protocol of the traffic observed, in lower case. For example, ip, appletalk, ipx.
       protocol_version:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: Version of the OSI layer 3 protocol, in lower case.
       response_time:
         source: declared
-        defined_in: All_Traffic
         type: number
         description: The amount of time it took to receive a response in the network event, in seconds.
       rule:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: 'The rule name that defines the action that was taken in the event. Note: Use rule_id field for unique ID (often numeric) of the rule.'
         recommended: true
@@ -279,23 +238,18 @@ datasets:
           expression: if(isnull(rule) OR rule="","unknown",rule)
       rule_id:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: 'The vendor-specific unique identifier of the rule. Examples: 0x00011f0000011f00, 0x00011f00-syn_flood.'
       session_id:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The session identifier. Multiple transactions build a session.
       source:
         source: base
-        defined_in: BaseEvent
       sourcetype:
         source: base
-        defined_in: BaseEvent
       src:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: The source of the network traffic (the client requesting the connection). You can alias this from more specific fields, such as src_host, src_ip, or src_name.
         recommended: true
@@ -305,33 +259,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The business unit of the network traffic source.
       src_category:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The category of the network traffic source.
         multivalue: true
       src_interface:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The interface that is listening locally or sending packets remotely. Can also be referred to as the 'ingress interface.'
       src_ip:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The ip address of the source.
       src_mac:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: 'The source TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       src_port:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: 'The source port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the src_svc field.'
         recommended: true
@@ -341,38 +289,31 @@ datasets:
           expression: if(isnum(src_port),src_port,0)
       src_priority:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The priority of the source, if applicable.
       src_translated_ip:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The NATed IPv4 or IPv6 address from which a packet has been sent.
       src_translated_port:
         source: declared
-        defined_in: All_Traffic
         type: number
         description: 'The NATed port from which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       src_zone:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The network zone of the source.
       ssid:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The 802.11 service set identifier (ssid) assigned to a wireless session.
       tag:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       tcp_flag:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The TCP flag or multiple flags specified in the event.
         expected_values:
@@ -385,12 +326,10 @@ datasets:
         multivalue: true
       tos:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The combination of source and destination IP ToS (type of service) values in the event.
       transport:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: The OSI layer 4 (transport) protocol of the traffic observed, in lower case.
         expected_values:
@@ -404,12 +343,10 @@ datasets:
           expression: if(isnull(transport) OR transport="","unknown",lower(transport))
       ttl:
         source: declared
-        defined_in: All_Traffic
         type: number
         description: The 'time to live' of a packet or diagram, in seconds.
       user:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: The user that requested the traffic flow.
         recommended: true
@@ -419,28 +356,23 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_account:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The account associated with the network traffic.
       vendor_product:
         source: calculated
-        defined_in: All_Traffic
         type: string
         description: The vendor and product of the device generating the network event. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
@@ -450,13 +382,11 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       vlan:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The virtual local area network (VLAN) specified in the record.
         multivalue: true
       wifi:
         source: declared
-        defined_in: All_Traffic
         type: string
         description: The wireless standard(s) in use, such as 802.11a, 802.11b, 802.11g, or 802.11n.
         multivalue: true
@@ -475,11 +405,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Traffic
       action:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The action taken by the network device.
@@ -494,13 +422,11 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The application protocol of the traffic.
       bytes:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: Total count of bytes handled by this device/interface (bytes_in + bytes_out).
@@ -511,7 +437,6 @@ datasets:
           expression: case(isnum(bytes),bytes,isnum(bytes_in) AND isnum(bytes_out),bytes_in+bytes_out,1=1,null())
       bytes_in:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: How many bytes this device/interface received.
@@ -522,7 +447,6 @@ datasets:
           expression: case(isnum(bytes_in),bytes_in,isnum(bytes) AND isnum(bytes_out),bytes-bytes_out,1=1,null())
       bytes_out:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: How many bytes this device/interface transmitted.
@@ -533,19 +457,16 @@ datasets:
           expression: case(isnum(bytes_out),bytes_out,isnum(bytes) AND isnum(bytes_in),bytes-bytes_in,1=1,null())
       channel:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The 802.11 channel used by a wireless network.
       cim_entity_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The destination of the network traffic (the remote host). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -556,38 +477,32 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_interface:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The interface that is listening remotely or receiving packets locally. Can also be referred to as the 'egress interface.'
       dest_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The IP address of the destination.
       dest_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: 'The destination TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dest_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: 'The destination port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the dest_svc field.'
@@ -598,31 +513,26 @@ datasets:
           expression: if(isnum(dest_port),dest_port,0)
       dest_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The destination priority, if applicable.
       dest_translated_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The NATed IPv4 or IPv6 address to which a packet has been sent.
       dest_translated_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: 'The NATed port to which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       dest_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The network zone of the destination.
       direction:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The direction the packet is traveling.
@@ -631,13 +541,11 @@ datasets:
         - outbound
       duration:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The amount of time for the completion of the network event, in seconds.
       dvc:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The device that reported the traffic event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -648,60 +556,50 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The ip address of the device.
       dvc_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: 'The device TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dvc_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The network zone of the device.
       flow_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: Unique identifier for this traffic stream, such as a netflow, jflow, or cflow.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Traffic
       icmp_code:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The RFC 2780 or RFC 4443 human-readable code value of the traffic, such as Destination Unreachable or Parameter Problem . See the ICMP Type Numbers and the ICMPv6 Type Numbers.
       icmp_type:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The RFC 2780 or RFC 4443 numeric value of the traffic. See the ICMP Type Numbers and the ICMPv6 Type Numbers.
@@ -709,7 +607,6 @@ datasets:
         - 0-254
       packets:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The total count of packets handled by this device/interface (packets_in + packets_out).
@@ -719,7 +616,6 @@ datasets:
           expression: case(isnum(packets),packets,isnum(packets_in) AND isnum(packets_out),packets_in+packets_out,1=1,null())
       packets_in:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The total count of packets received by this device/interface.
@@ -729,7 +625,6 @@ datasets:
           expression: case(isnum(packets_in),packets_in,isnum(packets) AND isnum(packets_out),packets-packets_out,1=1,null())
       packets_out:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The total count of packets transmitted by this device/interface.
@@ -739,37 +634,31 @@ datasets:
           expression: case(isnum(packets_out),packets_out,isnum(packets) AND isnum(packets_in),packets-packets_in,1=1,null())
       process_guid:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       protocol:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The OSI layer 3 (network) protocol of the traffic observed, in lower case. For example, ip, appletalk, ipx.
       protocol_version:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: Version of the OSI layer 3 protocol, in lower case.
       response_time:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The amount of time it took to receive a response in the network event, in seconds.
       rule:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: 'The rule name that defines the action that was taken in the event. Note: Use rule_id field for unique ID (often numeric) of the rule.'
@@ -780,27 +669,22 @@ datasets:
           expression: if(isnull(rule) OR rule="","unknown",rule)
       rule_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: 'The vendor-specific unique identifier of the rule. Examples: 0x00011f0000011f00, 0x00011f00-syn_flood.'
       session_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The session identifier. Multiple transactions build a session.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Traffic
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: All_Traffic
       src:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The source of the network traffic (the client requesting the connection). You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -811,38 +695,32 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The business unit of the network traffic source.
       src_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The category of the network traffic source.
         multivalue: true
       src_interface:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The interface that is listening locally or sending packets remotely. Can also be referred to as the 'ingress interface.'
       src_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The ip address of the source.
       src_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: 'The source TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       src_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: 'The source port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the src_svc field.'
@@ -853,44 +731,37 @@ datasets:
           expression: if(isnum(src_port),src_port,0)
       src_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The priority of the source, if applicable.
       src_translated_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The NATed IPv4 or IPv6 address from which a packet has been sent.
       src_translated_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: 'The NATed port from which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       src_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The network zone of the source.
       ssid:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The 802.11 service set identifier (ssid) assigned to a wireless session.
       tag:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       tcp_flag:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The TCP flag or multiple flags specified in the event.
@@ -904,13 +775,11 @@ datasets:
         multivalue: true
       tos:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The combination of source and destination IP ToS (type of service) values in the event.
       transport:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The OSI layer 4 (transport) protocol of the traffic observed, in lower case.
@@ -925,13 +794,11 @@ datasets:
           expression: if(isnull(transport) OR transport="","unknown",lower(transport))
       ttl:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: number
         description: The 'time to live' of a packet or diagram, in seconds.
       user:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The user that requested the traffic flow.
@@ -942,32 +809,27 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_account:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The account associated with the network traffic.
       vendor_product:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The vendor and product of the device generating the network event. This field can be automatically populated by vendor and product fields in your data.
@@ -978,14 +840,12 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       vlan:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The virtual local area network (VLAN) specified in the record.
         multivalue: true
       wifi:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: All_Traffic
         type: string
         description: The wireless standard(s) in use, such as 802.11a, 802.11b, 802.11g, or 802.11n.
@@ -1007,11 +867,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       action:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The action taken by the network device.
@@ -1026,13 +884,11 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The application protocol of the traffic.
       bytes:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: Total count of bytes handled by this device/interface (bytes_in + bytes_out).
@@ -1043,7 +899,6 @@ datasets:
           expression: case(isnum(bytes),bytes,isnum(bytes_in) AND isnum(bytes_out),bytes_in+bytes_out,1=1,null())
       bytes_in:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: How many bytes this device/interface received.
@@ -1054,7 +909,6 @@ datasets:
           expression: case(isnum(bytes_in),bytes_in,isnum(bytes) AND isnum(bytes_out),bytes-bytes_out,1=1,null())
       bytes_out:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: How many bytes this device/interface transmitted.
@@ -1065,19 +919,16 @@ datasets:
           expression: case(isnum(bytes_out),bytes_out,isnum(bytes) AND isnum(bytes_in),bytes-bytes_in,1=1,null())
       channel:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The 802.11 channel used by a wireless network.
       cim_entity_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The destination of the network traffic (the remote host). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -1088,38 +939,32 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_interface:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The interface that is listening remotely or receiving packets locally. Can also be referred to as the 'egress interface.'
       dest_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The IP address of the destination.
       dest_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The destination TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dest_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: 'The destination port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the dest_svc field.'
@@ -1130,31 +975,26 @@ datasets:
           expression: if(isnum(dest_port),dest_port,0)
       dest_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The destination priority, if applicable.
       dest_translated_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The NATed IPv4 or IPv6 address to which a packet has been sent.
       dest_translated_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: 'The NATed port to which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       dest_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The network zone of the destination.
       direction:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The direction the packet is traveling.
@@ -1163,13 +1003,11 @@ datasets:
         - outbound
       duration:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The amount of time for the completion of the network event, in seconds.
       dvc:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The device that reported the traffic event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -1180,60 +1018,50 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The ip address of the device.
       dvc_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The device TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dvc_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The network zone of the device.
       flow_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: Unique identifier for this traffic stream, such as a netflow, jflow, or cflow.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       icmp_code:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The RFC 2780 or RFC 4443 human-readable code value of the traffic, such as Destination Unreachable or Parameter Problem . See the ICMP Type Numbers and the ICMPv6 Type Numbers.
       icmp_type:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The RFC 2780 or RFC 4443 numeric value of the traffic. See the ICMP Type Numbers and the ICMPv6 Type Numbers.
@@ -1241,7 +1069,6 @@ datasets:
         - 0-254
       packets:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The total count of packets handled by this device/interface (packets_in + packets_out).
@@ -1251,7 +1078,6 @@ datasets:
           expression: case(isnum(packets),packets,isnum(packets_in) AND isnum(packets_out),packets_in+packets_out,1=1,null())
       packets_in:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The total count of packets received by this device/interface.
@@ -1261,7 +1087,6 @@ datasets:
           expression: case(isnum(packets_in),packets_in,isnum(packets) AND isnum(packets_out),packets-packets_out,1=1,null())
       packets_out:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The total count of packets transmitted by this device/interface.
@@ -1271,37 +1096,31 @@ datasets:
           expression: case(isnum(packets_out),packets_out,isnum(packets) AND isnum(packets_in),packets-packets_in,1=1,null())
       process_guid:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       protocol:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The OSI layer 3 (network) protocol of the traffic observed, in lower case. For example, ip, appletalk, ipx.
       protocol_version:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: Version of the OSI layer 3 protocol, in lower case.
       response_time:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The amount of time it took to receive a response in the network event, in seconds.
       rule:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The rule name that defines the action that was taken in the event. Note: Use rule_id field for unique ID (often numeric) of the rule.'
@@ -1312,27 +1131,22 @@ datasets:
           expression: if(isnull(rule) OR rule="","unknown",rule)
       rule_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The vendor-specific unique identifier of the rule. Examples: 0x00011f0000011f00, 0x00011f00-syn_flood.'
       session_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The session identifier. Multiple transactions build a session.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       src:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The source of the network traffic (the client requesting the connection). You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -1343,38 +1157,32 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The business unit of the network traffic source.
       src_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The category of the network traffic source.
         multivalue: true
       src_interface:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The interface that is listening locally or sending packets remotely. Can also be referred to as the 'ingress interface.'
       src_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The ip address of the source.
       src_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The source TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       src_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The source port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the src_svc field.'
@@ -1385,44 +1193,37 @@ datasets:
           expression: if(isnum(src_port),src_port,0)
       src_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The priority of the source, if applicable.
       src_translated_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The NATed IPv4 or IPv6 address from which a packet has been sent.
       src_translated_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: 'The NATed port from which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       src_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The network zone of the source.
       ssid:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The 802.11 service set identifier (ssid) assigned to a wireless session.
       tag:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       tcp_flag:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The TCP flag or multiple flags specified in the event.
@@ -1436,13 +1237,11 @@ datasets:
         multivalue: true
       tos:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The combination of source and destination IP ToS (type of service) values in the event.
       transport:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The OSI layer 4 (transport) protocol of the traffic observed, in lower case.
@@ -1457,13 +1256,11 @@ datasets:
           expression: if(isnull(transport) OR transport="","unknown",lower(transport))
       ttl:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The 'time to live' of a packet or diagram, in seconds.
       user:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The user that requested the traffic flow.
@@ -1474,32 +1271,27 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_account:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The account associated with the network traffic.
       vendor_product:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The vendor and product of the device generating the network event. This field can be automatically populated by vendor and product fields in your data.
@@ -1510,14 +1302,12 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       vlan:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The virtual local area network (VLAN) specified in the record.
         multivalue: true
       wifi:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The wireless standard(s) in use, such as 802.11a, 802.11b, 802.11g, or 802.11n.
@@ -1537,11 +1327,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       action:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The action taken by the network device.
@@ -1556,13 +1344,11 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The application protocol of the traffic.
       bytes:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: Total count of bytes handled by this device/interface (bytes_in + bytes_out).
@@ -1573,7 +1359,6 @@ datasets:
           expression: case(isnum(bytes),bytes,isnum(bytes_in) AND isnum(bytes_out),bytes_in+bytes_out,1=1,null())
       bytes_in:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: How many bytes this device/interface received.
@@ -1584,7 +1369,6 @@ datasets:
           expression: case(isnum(bytes_in),bytes_in,isnum(bytes) AND isnum(bytes_out),bytes-bytes_out,1=1,null())
       bytes_out:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: How many bytes this device/interface transmitted.
@@ -1595,19 +1379,16 @@ datasets:
           expression: case(isnum(bytes_out),bytes_out,isnum(bytes) AND isnum(bytes_in),bytes-bytes_in,1=1,null())
       channel:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The 802.11 channel used by a wireless network.
       cim_entity_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The destination of the network traffic (the remote host). You can alias this from more specific fields, such as dest_host, dest_ip, or dest_name.
@@ -1618,38 +1399,32 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_interface:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The interface that is listening remotely or receiving packets locally. Can also be referred to as the 'egress interface.'
       dest_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The IP address of the destination.
       dest_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The destination TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dest_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: 'The destination port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the dest_svc field.'
@@ -1660,31 +1435,26 @@ datasets:
           expression: if(isnum(dest_port),dest_port,0)
       dest_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The destination priority, if applicable.
       dest_translated_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The NATed IPv4 or IPv6 address to which a packet has been sent.
       dest_translated_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: 'The NATed port to which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       dest_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The network zone of the destination.
       direction:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The direction the packet is traveling.
@@ -1693,13 +1463,11 @@ datasets:
         - outbound
       duration:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The amount of time for the completion of the network event, in seconds.
       dvc:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The device that reported the traffic event. You can alias this from more specific fields, such as dvc_host, dvc_ip, or dvc_name.
@@ -1710,60 +1478,50 @@ datasets:
           expression: if(isnull(dvc) OR dvc="","unknown",dvc)
       dvc_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dvc_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The ip address of the device.
       dvc_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The device TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       dvc_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dvc_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The network zone of the device.
       flow_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: Unique identifier for this traffic stream, such as a netflow, jflow, or cflow.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       icmp_code:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The RFC 2780 or RFC 4443 human-readable code value of the traffic, such as Destination Unreachable or Parameter Problem . See the ICMP Type Numbers and the ICMPv6 Type Numbers.
       icmp_type:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The RFC 2780 or RFC 4443 numeric value of the traffic. See the ICMP Type Numbers and the ICMPv6 Type Numbers.
@@ -1771,7 +1529,6 @@ datasets:
         - 0-254
       packets:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The total count of packets handled by this device/interface (packets_in + packets_out).
@@ -1781,7 +1538,6 @@ datasets:
           expression: case(isnum(packets),packets,isnum(packets_in) AND isnum(packets_out),packets_in+packets_out,1=1,null())
       packets_in:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The total count of packets received by this device/interface.
@@ -1791,7 +1547,6 @@ datasets:
           expression: case(isnum(packets_in),packets_in,isnum(packets) AND isnum(packets_out),packets-packets_out,1=1,null())
       packets_out:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The total count of packets transmitted by this device/interface.
@@ -1801,37 +1556,31 @@ datasets:
           expression: case(isnum(packets_out),packets_out,isnum(packets) AND isnum(packets_in),packets-packets_in,1=1,null())
       process_guid:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The globally unique identifier of the process assigned by the vendor_product.
       process_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The numeric identifier of the process assigned by the operating system.
       protocol:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The OSI layer 3 (network) protocol of the traffic observed, in lower case. For example, ip, appletalk, ipx.
       protocol_version:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: Version of the OSI layer 3 protocol, in lower case.
       response_time:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The amount of time it took to receive a response in the network event, in seconds.
       rule:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The rule name that defines the action that was taken in the event. Note: Use rule_id field for unique ID (often numeric) of the rule.'
@@ -1842,27 +1591,22 @@ datasets:
           expression: if(isnull(rule) OR rule="","unknown",rule)
       rule_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The vendor-specific unique identifier of the rule. Examples: 0x00011f0000011f00, 0x00011f00-syn_flood.'
       session_id:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The session identifier. Multiple transactions build a session.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Traffic_By_Action
       src:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The source of the network traffic (the client requesting the connection). You can alias this from more specific fields, such as src_host, src_ip, or src_name.
@@ -1873,38 +1617,32 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The business unit of the network traffic source.
       src_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The category of the network traffic source.
         multivalue: true
       src_interface:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The interface that is listening locally or sending packets remotely. Can also be referred to as the 'ingress interface.'
       src_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The ip address of the source.
       src_mac:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The source TCP/IP layer 2 Media Access Control (MAC) address of a packet''s destination, such as 06:10:9f:eb:8f:14. Note: Always force lower case on this field and use colons instead of dashes, spaces, or no separator.'
       src_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: 'The source port of the network traffic. Note: Do not translate the value of this field to a string (tcp/80 is 80, not http). You can set up the corresponding string value in the src_svc field.'
@@ -1915,44 +1653,37 @@ datasets:
           expression: if(isnum(src_port),src_port,0)
       src_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The priority of the source, if applicable.
       src_translated_ip:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The NATed IPv4 or IPv6 address from which a packet has been sent.
       src_translated_port:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: 'The NATed port from which a packet has been sent. Note: Do not translate the values of this field to strings (tcp/80 is 80, not http).'
       src_zone:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The network zone of the source.
       ssid:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The 802.11 service set identifier (ssid) assigned to a wireless session.
       tag:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       tcp_flag:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The TCP flag or multiple flags specified in the event.
@@ -1966,13 +1697,11 @@ datasets:
         multivalue: true
       tos:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The combination of source and destination IP ToS (type of service) values in the event.
       transport:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The OSI layer 4 (transport) protocol of the traffic observed, in lower case.
@@ -1987,13 +1716,11 @@ datasets:
           expression: if(isnull(transport) OR transport="","unknown",lower(transport))
       ttl:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: number
         description: The 'time to live' of a packet or diagram, in seconds.
       user:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The user that requested the traffic flow.
@@ -2004,32 +1731,27 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_bunit:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_priority:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       vendor_account:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The account associated with the network traffic.
       vendor_product:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The vendor and product of the device generating the network event. This field can be automatically populated by vendor and product fields in your data.
@@ -2040,14 +1762,12 @@ datasets:
           expression: case(isnotnull(vendor_product),vendor_product,isnotnull(vendor) AND vendor!="unknown" AND isnotnull(product) AND product!="unknown",vendor." ".product,isnotnull(vendor) AND vendor!="unknown" AND (isnull(product) OR product="unknown"),vendor." unknown",(isnull(vendor) OR vendor="unknown") AND isnotnull(product) AND product!="unknown","unknown ".product,isnotnull(sourcetype),sourcetype,1=1,"unknown")
       vlan:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The virtual local area network (VLAN) specified in the record.
         multivalue: true
       wifi:
         source: inherited
-        defined_in: All_Traffic
         inherited_from: Traffic_By_Action
         type: string
         description: The wireless standard(s) in use, such as 802.11a, 802.11b, 802.11g, or 802.11n.

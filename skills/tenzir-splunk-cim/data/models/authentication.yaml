@@ -12,10 +12,8 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseEvent
       action:
         source: calculated
-        defined_in: Authentication
         type: string
         description: The action performed on the resource.
         expected_values:
@@ -30,7 +28,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: calculated
-        defined_in: Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
         recommended: true
@@ -40,23 +37,19 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: declared
-        defined_in: Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: declared
-        defined_in: Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: declared
-        defined_in: Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: calculated
-        defined_in: Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
         recommended: true
@@ -66,56 +59,45 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: declared
-        defined_in: Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: declared
-        defined_in: Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: declared
-        defined_in: Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: declared
-        defined_in: Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: base
-        defined_in: BaseEvent
       process:
         source: declared
-        defined_in: Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: declared
-        defined_in: Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: declared
-        defined_in: Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: declared
-        defined_in: Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: calculated
-        defined_in: Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
         calculation:
@@ -124,28 +106,22 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: declared
-        defined_in: Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: declared
-        defined_in: Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: declared
-        defined_in: Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: base
-        defined_in: BaseEvent
       sourcetype:
         source: base
-        defined_in: BaseEvent
       src:
         source: calculated
-        defined_in: Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
         recommended: true
@@ -155,28 +131,23 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: declared
-        defined_in: Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: declared
-        defined_in: Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: declared
-        defined_in: Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: declared
-        defined_in: Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: calculated
-        defined_in: Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
         recommended: true
@@ -186,44 +157,36 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: declared
-        defined_in: Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: declared
-        defined_in: Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: declared
-        defined_in: Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: declared
-        defined_in: Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: declared
-        defined_in: Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: declared
-        defined_in: Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: declared
-        defined_in: Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: calculated
-        defined_in: Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
         recommended: true
@@ -233,43 +196,35 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: declared
-        defined_in: Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: declared
-        defined_in: Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: declared
-        defined_in: Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: declared
-        defined_in: Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: declared
-        defined_in: Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: declared
-        defined_in: Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: declared
-        defined_in: Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: declared
-        defined_in: Authentication
         type: string
         description: The account that manages the user that initiated the request.
     inherits:
@@ -290,11 +245,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The action performed on the resource.
@@ -310,7 +263,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -321,26 +273,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -351,66 +299,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -420,33 +357,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -457,32 +388,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -493,51 +419,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -548,50 +466,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -608,11 +518,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The action performed on the resource.
@@ -628,7 +536,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -639,26 +546,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -669,66 +572,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -738,33 +630,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -775,32 +661,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -811,51 +692,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -866,50 +739,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -927,11 +792,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The action performed on the resource.
@@ -947,7 +810,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -958,26 +820,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -988,66 +846,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -1057,33 +904,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -1094,32 +935,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -1130,51 +966,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -1185,50 +1013,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -1249,11 +1069,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The action performed on the resource.
@@ -1269,7 +1087,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -1280,26 +1097,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -1310,66 +1123,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -1379,33 +1181,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -1416,32 +1212,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -1452,51 +1243,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -1507,50 +1290,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -1569,11 +1344,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The action performed on the resource.
@@ -1589,7 +1362,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -1600,26 +1372,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -1630,66 +1398,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -1699,33 +1456,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Default_Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -1736,32 +1487,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -1772,51 +1518,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -1827,50 +1565,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Default_Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -1889,11 +1619,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The action performed on the resource.
@@ -1909,7 +1637,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -1920,26 +1647,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -1950,66 +1673,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -2019,33 +1731,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -2056,32 +1762,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -2092,51 +1793,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -2147,50 +1840,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -2208,11 +1893,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The action performed on the resource.
@@ -2228,7 +1911,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -2239,26 +1921,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -2269,66 +1947,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -2338,33 +2005,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -2375,32 +2036,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -2411,51 +2067,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -2466,50 +2114,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -2530,11 +2170,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The action performed on the resource.
@@ -2550,7 +2188,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -2561,26 +2198,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -2591,66 +2224,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -2660,33 +2282,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -2697,32 +2313,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -2733,51 +2344,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -2788,50 +2391,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The account that manages the user that initiated the request.
@@ -2850,11 +2445,9 @@ datasets:
     fields:
       _time:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       action:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The action performed on the resource.
@@ -2870,7 +2463,6 @@ datasets:
           expression: if(isnull(action) OR action="","unknown",action)
       app:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The application involved in the event, such as ssh, splunk, win:local.
@@ -2881,26 +2473,22 @@ datasets:
           expression: if(isnull(app) OR app="",sourcetype,app)
       authentication_method:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The method used to authenticate the request such as SAML, FIDO, or MFA.
         multivalue: true
       authentication_service:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The service used to authenticate the request such as Okta, or ActiveDirectory
       cim_entity_zone:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The target involved in the authentication. You can alias this from more specific fields, such as dest_host, dest_ip, dest_mac, or dest_nt_host.
@@ -2911,66 +2499,55 @@ datasets:
           expression: if(isnull(dest) OR dest="","unknown",dest)
       dest_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the authentication target, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The name of the Active Directory used by the authentication target, if applicable.
       dest_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the authentication target. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       duration:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: number
         description: The amount of time for the completion of the authentication event, in seconds.
       host:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       process:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: Full path and the name of the executable for the process that attempted the logon. For example, it is a "Process Name" in Windows such as `C:\Windows\System32\svchost.exe`.
       reason:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The human-readable message associated with the authentication action (success or failure).
       reason_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The reason why logon failed. For example "0xC0000234".
       response_time:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: number
         description: The amount of time it took to receive a response in the authentication event, in seconds.
       result:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The result of the authentication attempt for audittrailv2 sourcetypes.
@@ -2980,33 +2557,27 @@ datasets:
           expression: if(isnull(result) OR result="","unknown",result)
       session_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique identifier assigned to the login session.
       signature:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: A human-readable signature name.
       signature_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique identifier or event code of the event signature.
       source:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       sourcetype:
         source: inherited
-        defined_in: BaseEvent
         inherited_from: Privileged_Authentication
       src:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The source involved in the authentication. In the case of endpoint protection authentication the src is the client. You can alias this from more specific fields, such as src_host, src_ip, or src_nt_host.
@@ -3017,32 +2588,27 @@ datasets:
           expression: if(isnull(src) OR src="","unknown",src)
       src_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the authentication source, such as email_server or SOX-compliant. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_nt_domain:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The name of the Active Directory used by the authentication source, if applicable.
       src_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the authentication source. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: In privilege escalation events, src_user represents the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
@@ -3053,51 +2619,43 @@ datasets:
           expression: if(isnull(src_user) OR src_user="","unknown",src_user)
       src_user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       src_user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique id of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       src_user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The role of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       src_user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The type of the user who initiated the privilege escalation. This field is unnecessary when an escalation has not been performed.
       tag:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       user:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The name of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation.
@@ -3108,50 +2666,42 @@ datasets:
           expression: if(isnull(user) OR user="","unknown",user)
       user_agent:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The user agent through which the request was made, such as Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) or aws-cli/2.0.0 Python/3.7.4 Darwin/18.7.0 botocore/2.0.0dev4.
       user_bunit:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The business unit of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_category:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The category of the user involved in the event, or who initiated the event. For authentication privilege escalation events this should represent the user targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       user_id:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The unique id of the user involved in the event. For authentication privilege escalation events, this should represent the user targeted by the escalation.
       user_priority:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The priority of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user priority targeted by the escalation. This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       user_role:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The role of the user involved in the event, or who initiated the event. For authentication privilege escalation events, this should represent the user role targeted by the escalation.
       user_type:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The type of the user involved in the event or who initiated the event, such as IAMUser, Admin, or System. For authentication privilege escalation events, this should represent the user type targeted by the escalation.
       vendor_account:
         source: inherited
-        defined_in: Authentication
         inherited_from: Privileged_Authentication
         type: string
         description: The account that manages the user that initiated the request.

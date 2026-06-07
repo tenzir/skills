@@ -13,61 +13,48 @@ datasets:
     fields:
       _time:
         source: base
-        defined_in: BaseEvent
       cim_entity_zone:
         source: declared
-        defined_in: Signatures
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest:
         source: declared
-        defined_in: Signatures
         type: string
         description: System affected by the signature.
       dest_bunit:
         source: declared
-        defined_in: Signatures
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       dest_category:
         source: declared
-        defined_in: Signatures
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
         multivalue: true
       dest_priority:
         source: declared
-        defined_in: Signatures
         type: string
         description: This field is automatically provided by asset and identity correlation features of applications like Splunk Enterprise Security. Do not define extractions for this field when writing add-ons.
       host:
         source: base
-        defined_in: BaseEvent
       signature:
         source: declared
-        defined_in: Signatures
         type: string
         description: The human readable event name.
       signature_id:
         source: declared
-        defined_in: Signatures
         type: string
         description: The event name identifier (as supplied by the vendor).
       source:
         source: base
-        defined_in: BaseEvent
       sourcetype:
         source: base
-        defined_in: BaseEvent
       tag:
         source: declared
-        defined_in: Signatures
         type: string
         description: This automatically generated field is used to access tags from within data models. Add-on builders do not need to populate it.
         multivalue: true
       vendor_product:
         source: calculated
-        defined_in: Signatures
         type: string
         description: The vendor and product name of the technology that reported the event, such as Carbon Black Cb Response. This field can be automatically populated by vendor and product fields in your data.
         recommended: true
