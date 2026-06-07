@@ -880,9 +880,8 @@ def build_skill_markdown(app_version_value: str, docs_version: str) -> str:
 name: tenzir-cim
 description: >-
   Answer questions and produce mappings for the Splunk Common Information Model
-  (CIM), including CIM Add-on aliases such as Splunk_SA_CIM, SA-CIM,
-  CommonInformationModel, and SA-CommonInformationModel. Use when the user
-  mentions CIM data
+  (CIM), including CIM Add-on aliases such as SA-CIM, CommonInformationModel,
+  and SA-CommonInformationModel. Use when the user mentions CIM data
   models/datamodels/DMs, datasets/data model objects, fields, field aliases,
   calculated/eval fields, tags, constraints, lookups/lookup tables, macros,
   normalization, mapping logs or events to CIM, CIM compliance,
@@ -892,14 +891,13 @@ description: >-
 
 # Splunk Common Information Model
 
-Version: `{app_version_value}`.
+Version: {app_version_value}
 
-The Splunk Common Information Model (CIM) is a normalization model for Splunk
-data. CIM is organized around *data models*. Each data model contains
-*datasets*, historically called data model objects. Datasets inherit fields and
-constraints from parent datasets. Event datasets ultimately inherit from
-`BaseEvent`; search datasets inherit from `BaseSearch`. All Splunk data model
-datasets can use the base fields `_time`, `host`, `source`, and `sourcetype`.
+CIM is organized around *data models*. Each data model contains *datasets*,
+historically called data model objects. Datasets inherit fields and constraints
+from parent datasets. Event datasets ultimately inherit from `BaseEvent`; search
+datasets inherit from `BaseSearch`. All Splunk data model datasets can use the
+base fields `_time`, `host`, `source`, and `sourcetype`.
 
 - *Tags* and constraints decide which events belong in a dataset.
 - *Fields* describe the effective normalized shape that searches, dashboards,
