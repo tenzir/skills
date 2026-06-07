@@ -2049,6 +2049,34 @@ def render_field_name_forms_section(context: FileContext) -> list[str]:
     return lines
 
 
+def render_nomenclature_section() -> list[str]:
+    return [
+        "## Nomenclature",
+        "",
+        "Google's UDM documentation is derived from protobuf terminology.",
+        "Users may ask about UDM messages, sub-messages, oneofs, repeated",
+        "fields, or objects. Treat those as equivalent to the data-centric",
+        "terms used by this skill:",
+        "",
+        "| Google UDM / protobuf term | Skill term | Meaning |",
+        "| --- | --- | --- |",
+        "| message | record | A schema-defined UDM data shape with named fields. |",
+        "| sub-message | nested record | A record stored inside another record. |",
+        "| repeated field | `list<T>` | Zero or more values of type `T`. |",
+        "| optional field | `optional<T>` | A value of type `T` that may be absent. |",
+        "| map field | `map<K, V>` | A lookup with data-defined keys of type `K` and values of type `V`. |",
+        "| `google.protobuf.Struct`, object, or free-form object | `variant` | A value whose runtime shape is not fixed by UDM. |",
+        "| oneof | union | A mutually exclusive field group; set at most one listed field. |",
+        "",
+        "When a user uses Google UDM terminology, translate it to the skill",
+        "term while preserving the original UDM meaning. For example, a",
+        "question about the `SecurityResult` message should route to the",
+        "[`SecurityResult` record](records/security_result.yaml), and a",
+        "question about a oneof should route to a `union` in the YAML.",
+        "",
+    ]
+
+
 def render_field_path_name_section() -> list[str]:
     return [
         "## Field path names",
@@ -2384,7 +2412,7 @@ def render_skill_markdown(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) record fields, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, records, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) record fields, UDM messages, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, records, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.",
                 "---",
                 "",
                 "# Google UDM",
@@ -2403,6 +2431,7 @@ def render_skill_markdown(
                 "answers which event or entity type to choose, which fields to",
                 "populate, and how Google expects values to be formatted.",
                 "",
+                *render_nomenclature_section(),
                 *render_field_name_forms_section(context),
                 *render_top_level_structure(context),
                 "## Question routing",
