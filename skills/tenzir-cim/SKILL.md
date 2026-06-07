@@ -1,5 +1,5 @@
 ---
-name: tenzir-splunk-cim
+name: tenzir-cim
 description: >-
   Answer questions and produce mappings for the Splunk Common Information Model
   (CIM), including CIM Add-on aliases such as Splunk_SA_CIM, SA-CIM,

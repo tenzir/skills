@@ -29,7 +29,7 @@ import yaml
 BASE_FIELDS = ("_time", "host", "source", "sourcetype")
 SPLUNKBASE_URL = "https://splunkbase.splunk.com/app/1621"
 HTTP_HEADERS = {
-    "User-Agent": "tenzir-splunk-cim-generator",
+    "User-Agent": "tenzir-cim-generator",
 }
 DOCS_VERSION_RE = re.compile(r"common-information-model/([0-9]+(?:\.[0-9]+)*)(?:/|$)")
 IGNORED_DOC_TAGS = {"script", "style", "svg", "button", "details", "textarea"}
@@ -877,7 +877,7 @@ def fetch_docs(docs_url: str) -> tuple[list[DocsPage], str]:
 
 def build_skill_markdown(app_version_value: str, docs_version: str) -> str:
     return f"""---
-name: tenzir-splunk-cim
+name: tenzir-cim
 description: >-
   Answer questions and produce mappings for the Splunk Common Information Model
   (CIM), including CIM Add-on aliases such as Splunk_SA_CIM, SA-CIM,

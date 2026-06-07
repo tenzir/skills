@@ -11,7 +11,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
   fields, event/entity types
 - `tenzir-asim`: Microsoft Sentinel ASIM reference — schemas, fields,
   aliases, entities, enums
-- `tenzir-splunk-cim`: Splunk CIM reference — data models, datasets, fields,
+- `tenzir-cim`: Splunk CIM reference — data models, datasets, fields,
   tags, constraints, lookups
 - `tenzir-ocsf`: OCSF schema reference — event classes, objects, attributes,
   profiles, extensions
@@ -58,7 +58,7 @@ npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir-docs
 npx skills add tenzir/skills@tenzir-google-udm
 npx skills add tenzir/skills@tenzir-asim
-npx skills add tenzir/skills@tenzir-splunk-cim
+npx skills add tenzir/skills@tenzir-cim
 npx skills add tenzir/skills@tenzir-ocsf
 ```
 

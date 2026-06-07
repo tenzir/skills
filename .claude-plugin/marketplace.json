@@ -5,7 +5,7 @@
       "skills": [
         "./skills/tenzir-google-udm",
         "./skills/tenzir-asim",
-        "./skills/tenzir-splunk-cim",
+        "./skills/tenzir-cim",
         "./skills/tenzir-ocsf"
       ]
     },
