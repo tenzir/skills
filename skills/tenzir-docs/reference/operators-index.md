@@ -141,6 +141,7 @@
 
 ## Modify
 
+- [ai::prompt](operators/ai/prompt.md): Sends each input event to an OpenAI-compatible Responses API endpoint and adds the model response to the event.
 - [dns_lookup](operators/dns_lookup.md): Performs DNS lookups to resolve IP addresses to hostnames or hostnames to IP addresses.
 - [drop](operators/drop.md): Removes fields from the event.
 - [drop_null_fields](operators/drop_null_fields.md): Removes fields containing null values from the event.

@@ -40,7 +40,7 @@ Defaults to `set`.
 The style of the enriched value:
 
 * `plain`: formats the enrichment as retrieved from the context.
-* `ocsf`: formats the enrichment as an [OCSF Enrichment](https://schema.ocsf.io/1.4.0-dev/objects/enrichment?extensions=) object with fields `data`, `provider`, `type`, and `value`.
+* `ocsf`: formats the enrichment as an [OCSF Enrichment](https://schema.ocsf.io/1.4.0-dev/objects/enrichment?extensions=) object with fields `created_time`, `data`, `name`, `provider`, and `value`.
 
 Defaults to `plain`.
 
@@ -90,9 +90,10 @@ context::enrich "ctx", key=x, format="ocsf"
   x: 1,
   ctx: {
     created_time: 2024-11-18T16:35:48.069981,
-    name: "x",
-    value: 1,
     data: "a",
+    name: "x",
+    provider: "ctx",
+    value: 1,
   }
 }
 ```
@@ -130,8 +131,8 @@ context::enrich "ctx", key=x, into=enrichments, mode="append"
 * [`context::reset`](/reference/operators/context/reset.md)
 * [`context::save`](/reference/operators/context/save.md)
 * [`context::update`](/reference/operators/context/update.md)
-* [Work with lookup tables](../../../guides/enrichment/work-with-lookup-tables.md)
+* [Use lookup tables](../../../guides/enrichment/use-lookup-tables.md)
 * [Enrich with threat intel](../../../guides/enrichment/enrich-with-threat-intel.md)
-* [Enrich with network inventory](../../../guides/enrichment/enrich-with-network-inventory.md)
+* [Enrich with asset inventory](../../../guides/enrichment/enrich-with-asset-inventory.md)
 * [Learn idiomatic TQL](../../../tutorials/learn-idiomatic-tql.md)
 * [Enrichment](../../../explanations/enrichment.md)

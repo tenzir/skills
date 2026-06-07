@@ -290,21 +290,25 @@ This guide shows you how to map events to Google SecOps Unified Data Model (UDM)
 
 #### Enrichment
 
-##### [Work with lookup tables](guides/enrichment/work-with-lookup-tables.md)
+##### [Use lookup tables](guides/enrichment/use-lookup-tables.md)
 
-A lookup table is a specific type of context in Tenzir’s enrichment framework. It has “two ends” in that you can use pipelines to update it, as well as pipelines to perform lookups and attach the results to events. Lookup tables live in a node and multiple pipelines can safely use the same lookup table. All update operations propagate to disk, persisting the changes and making them resilient against node restarts.
+This guide shows you how to use lookup tables in Tenzir to store reference data and apply it to OCSF events. Use lookup tables when you have data keyed by an event value, such as a user ID, hostname, IP address, subnet, file hash, or cloud resource ID.
 
-##### [Enrich with network inventory](guides/enrichment/enrich-with-network-inventory.md)
+##### [Enrich with asset inventory](guides/enrichment/enrich-with-asset-inventory.md)
 
-Tenzir’s enrichment framework features lookup tables that you can use to enrich data in your pipelines. Lookup tables have a unique property that makes them attractive for tracking information associated with CIDR subnets: when you use `subnet` values as keys, you can probe the lookup table with `ip` values and will get a longest-prefix match.
+This guide shows you how to enrich OCSF events with asset inventory data from lookup tables. Use this pattern when you have CMDB exports, endpoint inventory, DHCP leases, cloud inventory, or network segment ownership data that should become part of the OCSF event.
 
 ##### [Enrich with threat intel](guides/enrichment/enrich-with-threat-intel.md)
 
-Tenzir has a powerful enrichment framework for real-time contextualization. The heart of the framework is a context—a stateful object that can be managed and used with pipelines.
+This guide shows you how to enrich OCSF events with threat intelligence from lookup tables. Use this pattern when you ingest indicators of compromise, reputation scores, malware names, campaign context, or OSINT from external feeds.
+
+##### [Enrich events with AI](guides/enrichment/enrich-events-with-ai.md)
+
+This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using `ai::prompt`.
 
 ##### [Execute Sigma rules](guides/enrichment/execute-sigma-rules.md)
 
-Tenzir supports executing Sigma rules using the `sigma` operator. This allows you to run your Sigma rules in the pipeline. The operator transpiles the provided rules into an expression, and wraps matching events into a sighting record along with the matched rule.
+This guide shows you how to run Sigma rules on parsed security telemetry with the `sigma` operator. Use this pattern to turn Windows Event Logs and other normalized records into Sigma sightings without leaving the Tenzir pipeline.
 
 #### Optimization
 

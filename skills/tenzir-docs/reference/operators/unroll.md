@@ -55,4 +55,4 @@ unroll y
 
 * [`flatten`](/reference/functions/flatten.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
-* [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
+* [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)

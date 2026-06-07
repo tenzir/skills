@@ -163,6 +163,6 @@ Each test can depend on state left by previous tests in the suite.
 * [Add operators](add-operators.md)
 * [Add pipelines](add-pipelines.md)
 * [Test packages](test-packages.md)
-* [Work with lookup tables](../enrichment/work-with-lookup-tables.md)
+* [Use lookup tables](../enrichment/use-lookup-tables.md)
 * [Enrichment](../../explanations/enrichment.md)
 * [Write a package](../../tutorials/write-a-package.md)

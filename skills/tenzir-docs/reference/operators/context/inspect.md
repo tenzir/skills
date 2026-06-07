@@ -51,4 +51,4 @@ context::inspect "ctx"
 * [`context::reset`](/reference/operators/context/reset.md)
 * [`context::save`](/reference/operators/context/save.md)
 * [`context::update`](/reference/operators/context/update.md)
-* [Work with lookup tables](../../../guides/enrichment/work-with-lookup-tables.md)
+* [Use lookup tables](../../../guides/enrichment/use-lookup-tables.md)

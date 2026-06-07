@@ -95,5 +95,5 @@ every 1h {
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
-* [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
+* [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
 * [Write a package](../../tutorials/write-a-package.md)

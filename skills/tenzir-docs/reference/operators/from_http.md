@@ -354,5 +354,5 @@ This retries transient transport failures and HTTP `429` and `5xx` responses up 
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
-* [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
+* [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
 * [HTTP(S)](../../integrations/http.md)

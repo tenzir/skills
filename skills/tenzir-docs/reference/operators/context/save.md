@@ -37,4 +37,4 @@ to_file "snapshot.mmdb"
 * [`context::remove`](/reference/operators/context/remove.md)
 * [`context::reset`](/reference/operators/context/reset.md)
 * [`context::update`](/reference/operators/context/update.md)
-* [Work with lookup tables](../../../guides/enrichment/work-with-lookup-tables.md)
+* [Use lookup tables](../../../guides/enrichment/use-lookup-tables.md)

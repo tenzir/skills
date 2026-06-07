@@ -109,7 +109,7 @@ from_file "/logs/*.json", max_age=1h
 
 * [`from_file`](/reference/operators/from_file.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
-* [Enrich with network inventory](../../guides/enrichment/enrich-with-network-inventory.md)
-* [Work with lookup tables](../../guides/enrichment/work-with-lookup-tables.md)
+* [Enrich with asset inventory](../../guides/enrichment/enrich-with-asset-inventory.md)
+* [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
 * [Import into a node](../../guides/edge-storage/import-into-a-node.md)
 * [File](../../integrations/file.md)

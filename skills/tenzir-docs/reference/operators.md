@@ -857,6 +857,14 @@ unordered { read_ndjson }
 
 ## Modify
 
+### [ai::prompt](operators/ai/prompt.md)
+
+Sends events to an OpenAI-compatible Responses API endpoint and adds the model response.
+
+```tql
+ai::prompt model="qwen3"
+```
+
 ### [dns\_lookup](operators/dns_lookup.md)
 
 Performs DNS lookups to resolve IP addresses to hostnames or hostnames to IP addresses.
