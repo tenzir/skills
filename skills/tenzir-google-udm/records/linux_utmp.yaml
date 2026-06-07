@@ -1,0 +1,6 @@
+summary: The LinuxUtmp extension captures details specific to Linux Utmp events.
+fields:
+  record_type:
+    type: RecordType
+    ingestion_name: recordType
+    description: The activity record type.

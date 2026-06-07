@@ -1,0 +1,11 @@
+summary: MITRE ATT&CK details.
+fields:
+  version:
+    type: string
+    description: ATT&CK version (e.g. 12.1).
+  tactics:
+    type: list<Tactic>
+    description: Tactics employed.
+  techniques:
+    type: list<Technique>
+    description: Techniques employed.

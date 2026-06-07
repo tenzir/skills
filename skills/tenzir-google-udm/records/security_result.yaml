@@ -1,0 +1,227 @@
+summary: Security related metadata for the event. A security result might be something like "virus detected and quarantined,"
+  "malicious connection blocked," or "sensitive data included in document foo.doc." Each security result, of which there may
+  be more than one, may either pertain to the whole event, or to a specific object or device referenced in the event (e.g.
+  a malicious file that was detected, or a sensitive document sent as an email attachment). For security results that apply
+  to a particular object referenced in the event, the security_results record must contain details about the implicated object
+  (such as process, user, IP, domain, URL, IP, or email address) in the about field. For security results that apply to the
+  entire event (e.g. SPAM found in this email), the about field must remain empty.
+fields:
+  about:
+    type: Noun
+    description: If the security result is about a specific entity (Noun), add it here. This field is not populated when the
+      SecurityResult appears in a detection.
+  category:
+    type: list<SecurityCategory>
+    description: The security category. This field is not populated when the SecurityResult appears in a detection.
+  category_details:
+    type: list<string>
+    ingestion_name: categoryDetails
+    description: For vendor-specific categories. For web categorization, put type in here such as "gambling" or "porn". This
+      field is not populated when the SecurityResult appears in a detection.
+  threat_name:
+    type: string
+    ingestion_name: threatName
+    description: A vendor-assigned classification common across multiple customers (for example, "W32/File-A", "Slammer").
+      This field is not populated when the SecurityResult appears in a detection.
+  rule_set:
+    type: string
+    ingestion_name: ruleSet
+    description: The curated detection's rule set identifier. (for example, "windows-threats") This is primarily set in rule-generated
+      detections and alerts.
+  rule_set_display_name:
+    type: string
+    ingestion_name: ruleSetDisplayName
+    description: The curated detections rule set display name. This is primarily set in rule-generated detections and alerts.
+  ruleset_category_display_name:
+    type: string
+    ingestion_name: rulesetCategoryDisplayName
+    description: The curated detection rule set category display name. (for example, if rule_set_display_name is "CDIR SCC
+      Enhanced Exfiltration", the rule_set_category is "Cloud Threats"). This is primarily set in rule-generated detections
+      and alerts.
+  rule_id:
+    type: string
+    ingestion_name: ruleId
+    description: A vendor-specific ID for a rule, varying by observer type (e.g. "08123", "5d2b44d0-5ef6-40f5-a704-47d61d3babbe").
+  rule_name:
+    type: string
+    ingestion_name: ruleName
+    description: Name of the security rule (e.g. "BlockInboundToOracle").
+  display_name:
+    type: string
+    ingestion_name: displayName
+    description: The display name of the security result. This is populated from 'name_override' Outcome Variable, if present.
+      Otherwise, this field is not set.
+  rule_version:
+    type: string
+    ingestion_name: ruleVersion
+    description: Version of the security rule. (e.g. "v1.1", "00001", "1604709794", "2020-11-16T23:04:19+00:00"). Note that
+      rule versions are source-dependant and lexical ordering should not be assumed.
+  rule_type:
+    type: string
+    ingestion_name: ruleType
+    description: The type of security rule.
+  rule_author:
+    type: string
+    ingestion_name: ruleAuthor
+    description: Author of the security rule. This field is not populated when the SecurityResult appears in a detection.
+  rule_labels:
+    type: list<Label>
+    ingestion_name: ruleLabels
+    description: 'A list of rule labels that can''t be captured by the other fields in security result (e.g. "reference :
+      AnotherRule", "contributor : John"). This is primarily set in rule-generated detections and alerts.'
+  alert_state:
+    type: AlertState
+    ingestion_name: alertState
+    description: The alerting types of this security result. This is primarily set for rule-generated detections and alerts.
+  detection_fields:
+    type: list<Label>
+    ingestion_name: detectionFields
+    description: 'An ordered list of values, that represent fields in detections for a security finding. This list represents
+      mapping of names of requested entities to their values (the security result matched variables).
+
+
+      For Collection SecurityResults, prefer variables instead.'
+  outcomes:
+    type: list<Label>
+    deprecated: true
+    description: 'A list of outcomes that represent the results of this security finding. This list represents a mapping of
+      names of the requested outcomes, to a stringified version of their values.
+
+
+      This is only populated when the SecurityResult appears in a detection. This is deprecated. Use variables instead.'
+  variables:
+    type: map<string, FindingVariable>
+    description: 'A list of outcomes and match variables that represent the results of this security finding. This list represents
+      a mapping of names of the requested outcomes or match variables, to their values.
+
+
+      This is only populated when the SecurityResult appears in a detection.'
+  summary:
+    type: string
+    description: A short human-readable summary (e.g. "failed login occurred")
+  description:
+    type: string
+    description: A human-readable description (e.g. "user password was wrong"). This can be more detailed than the summary.
+  action:
+    type: list<Action>
+    description: Actions taken for this event. This field is not populated when the SecurityResult appears in a detection.
+  action_details:
+    type: string
+    ingestion_name: actionDetails
+    description: The detail of the action taken as provided by the vendor. This field is not populated when the SecurityResult
+      appears in a detection.
+  severity:
+    type: ProductSeverity
+    description: The severity of the result.
+  confidence:
+    type: ProductConfidence
+    description: The confidence level of the result as estimated by the product. This field is not populated when the SecurityResult
+      appears in a detection.
+  priority:
+    type: ProductPriority
+    description: The priority of the result. This field is not populated when the SecurityResult appears in a detection.
+  risk_score:
+    type: float
+    ingestion_name: riskScore
+    description: The risk score of the security result.
+  confidence_score:
+    type: float
+    ingestion_name: confidenceScore
+    description: The confidence score of the security result. This field is not populated when the SecurityResult appears
+      in a detection.
+  analytics_metadata:
+    type: list<AnalyticsMetadata>
+    ingestion_name: analyticsMetadata
+    description: Stores metadata about each risk analytic metric the rule uses. This field is not populated when the SecurityResult
+      appears in a detection.
+  severity_details:
+    type: string
+    ingestion_name: severityDetails
+    description: Vendor-specific severity. This field is not populated when the SecurityResult appears in a detection.
+  confidence_details:
+    type: string
+    ingestion_name: confidenceDetails
+    description: Additional detail with regards to the confidence of a security event as estimated by the product vendor.
+      This field is not populated when the SecurityResult appears in a detection.
+  priority_details:
+    type: string
+    ingestion_name: priorityDetails
+    description: Vendor-specific information about the security result priority. This field is not populated when the SecurityResult
+      appears in a detection.
+  url_back_to_product:
+    type: string
+    ingestion_name: urlBackToProduct
+    description: URL that takes the user to the source product console for this event. This field is not populated when the
+      SecurityResult appears in a detection.
+  threat_id:
+    type: string
+    ingestion_name: threatId
+    description: Vendor-specific ID for a threat. This field is not populated when the SecurityResult appears in a detection.
+  threat_feed_name:
+    type: string
+    ingestion_name: threatFeedName
+    description: Vendor feed name for a threat indicator feed. This field is not populated when the SecurityResult appears
+      in a detection.
+  threat_id_namespace:
+    type: Namespace
+    ingestion_name: threatIdNamespace
+    description: The attribute threat_id_namespace qualifies threat_id with an id namespace to get an unique id. The attribute
+      threat_id by itself is not unique across Chronicle as it is a vendor specific id. This field is not populated when the
+      SecurityResult appears in a detection.
+  threat_status:
+    type: ThreatStatus
+    ingestion_name: threatStatus
+    description: Current status of the threat This field is not populated when the SecurityResult appears in a detection.
+  attack_details:
+    type: AttackDetails
+    ingestion_name: attackDetails
+    description: MITRE ATT&CK details. This field is not populated when the SecurityResult appears in a detection.
+  first_discovered_time:
+    type: timestamp
+    ingestion_name: firstDiscoveredTime
+    description: First time the IoC threat was discovered in the provider. This field is not populated when the SecurityResult
+      appears in a detection.
+  associations:
+    type: list<Association>
+    description: Associations related to the threat.
+  campaigns:
+    type: list<string>
+    deprecated: true
+    description: Campaigns using this IOC threat. This is deprecated. Use threat_collections instead.
+  reports:
+    type: list<string>
+    deprecated: true
+    description: Reports that reference this IOC threat. These are the report IDs. This is deprecated. Use threat_collections
+      instead.
+  verdict:
+    type: SecurityResult.Verdict
+    deprecated: true
+    description: Verdict about the IoC from the provider. This field is now deprecated. Use VerdictInfo instead.
+  last_updated_time:
+    type: timestamp
+    ingestion_name: lastUpdatedTime
+    description: Last time the IoC threat was updated in the provider. This field is not populated when the SecurityResult
+      appears in a detection.
+  verdict_info:
+    type: list<VerdictInfo>
+    ingestion_name: verdictInfo
+    description: Verdict information about the IoC from the provider. This field is not populated when the SecurityResult
+      appears in a detection.
+  threat_verdict:
+    type: ThreatVerdict
+    ingestion_name: threatVerdict
+    description: GCTI threat verdict on the security result entity. This field is not populated when the SecurityResult appears
+      in a detection.
+  last_discovered_time:
+    type: timestamp
+    ingestion_name: lastDiscoveredTime
+    description: Last time the IoC was seen in the provider data. This field is not populated when the SecurityResult appears
+      in a detection.
+  detection_depth:
+    type: int64
+    ingestion_name: detectionDepth
+    description: The depth of the detection chain. Applies only to composite detections.
+  threat_collections:
+    type: list<ThreatCollectionItem>
+    ingestion_name: threatCollections
+    description: GTI collections associated with the security result.

@@ -1,0 +1,29 @@
+summary: Email info.
+fields:
+  from:
+    type: string
+    description: The 'from' address.
+  reply_to:
+    type: string
+    ingestion_name: replyTo
+    description: The 'reply to' address.
+  to:
+    type: list<string>
+    description: A list of 'to' addresses.
+  cc:
+    type: list<string>
+    description: A list of 'cc' addresses.
+  bcc:
+    type: list<string>
+    description: A list of 'bcc' addresses.
+  mail_id:
+    type: string
+    ingestion_name: mailId
+    description: The mail (or message) ID.
+  subject:
+    type: list<string>
+    description: The subject line(s) of the email.
+  bounce_address:
+    type: string
+    ingestion_name: bounceAddress
+    description: The envelope from address. [https://en.wikipedia.org/wiki/Bounce_address](https://en.wikipedia.org/wiki/Bounce_address)

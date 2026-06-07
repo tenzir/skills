@@ -1,0 +1,5 @@
+summary: FTP info.
+fields:
+  command:
+    type: string
+    description: The FTP command.

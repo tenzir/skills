@@ -1,0 +1,23 @@
+summary: Information about a registry key or value.
+fields:
+  registry_key:
+    type: string
+    ingestion_name: registryKey
+    description: Registry key associated with an application or system component (e.g., HKEY_, HKCU\Environment...).
+  registry_value_name:
+    type: string
+    ingestion_name: registryValueName
+    description: Name of the registry value associated with an application or system component (e.g. TEMP).
+  registry_value_data:
+    type: string
+    ingestion_name: registryValueData
+    description: Data associated with a registry value (e.g. %USERPROFILE%\Local Settings\Temp).
+  registry_value_type:
+    type: Registry.Type
+    ingestion_name: registryValueType
+    description: Type of the registry value.
+  registry_value_binary_data:
+    type: bytes
+    ingestion_name: registryValueBinaryData
+    description: Binary data associated with a registry value. This field is only populated if the registry value type is
+      BINARY. This field is not populated for other registry value types.

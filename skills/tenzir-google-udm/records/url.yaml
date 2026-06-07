@@ -1,0 +1,48 @@
+summary: Url.
+fields:
+  url:
+    type: string
+    description: URL.
+  categories:
+    type: list<string>
+    description: Categorisation done by VirusTotal partners.
+  favicon:
+    type: Favicon
+    description: Difference hash and MD5 hash of the URL's.
+  html_meta:
+    type: variant
+    ingestion_name: htmlMeta
+    description: Meta tags (only for URLs downloading HTML).
+  last_final_url:
+    type: string
+    ingestion_name: lastFinalUrl
+    description: If the original URL redirects, where does it end.
+  last_http_response_code:
+    type: int32
+    ingestion_name: lastHttpResponseCode
+    description: HTTP response code of the last response.
+  last_http_response_content_length:
+    type: int64
+    ingestion_name: lastHttpResponseContentLength
+    description: Length in bytes of the content received.
+  last_http_response_content_sha256:
+    type: string
+    ingestion_name: lastHttpResponseContentSha256
+    description: URL response body's SHA256 hash.
+  last_http_response_cookies:
+    type: variant
+    ingestion_name: lastHttpResponseCookies
+    description: Website's cookies.
+  last_http_response_headers:
+    type: variant
+    ingestion_name: lastHttpResponseHeaders
+    description: Headers and values of the last HTTP response.
+  tags:
+    type: list<string>
+    description: Tags.
+  title:
+    type: string
+    description: Webpage title.
+  trackers:
+    type: list<Tracker>
+    description: Trackers found in the URL in a historical manner.

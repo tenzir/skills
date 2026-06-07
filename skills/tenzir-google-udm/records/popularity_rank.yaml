@@ -1,0 +1,12 @@
+summary: Domain's position in popularity ranks for sources such as Alexa, Quantcast, or Statvoo.
+fields:
+  giver:
+    type: string
+    description: Name of the rank serial number hexdump.
+  rank:
+    type: int64
+    description: Rank position.
+  ingestion_time:
+    type: timestamp
+    ingestion_name: ingestionTime
+    description: Timestamp when the rank was ingested.

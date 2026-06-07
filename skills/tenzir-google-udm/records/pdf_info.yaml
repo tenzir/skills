@@ -1,0 +1,78 @@
+summary: Information about the PDF file structure. See [https://developers.virustotal.com/reference/pdf_info](https://developers.virustotal.com/reference/pdf_info)
+fields:
+  js:
+    type: int64
+    description: Number of /JS tags found in the PDF file. Should be the same as javascript field in normal scenarios.
+  javascript:
+    type: int64
+    description: Number of /JavaScript tags found in the PDF file. Should be the same as the js field in normal scenarios.
+  launch_action_count:
+    type: int64
+    ingestion_name: launchActionCount
+    description: Number of /Launch tags found in the PDF file.
+  object_stream_count:
+    type: int64
+    ingestion_name: objectStreamCount
+    description: Number of object streams.
+  endobj_count:
+    type: int64
+    ingestion_name: endobjCount
+    description: Number of object definitions (endobj keyword).
+  header:
+    type: string
+    description: PDF version.
+  acroform:
+    type: int64
+    description: Number of /AcroForm tags found in the PDF.
+  autoaction:
+    type: int64
+    description: Number of /AA tags found in the PDF.
+  embedded_file:
+    type: int64
+    ingestion_name: embeddedFile
+    description: Number of /EmbeddedFile tags found in the PDF.
+  encrypted:
+    type: int64
+    description: Whether the document is encrypted or not. This is defined by the /Encrypt tag.
+  flash:
+    type: int64
+    description: Number of /RichMedia tags found in the PDF.
+  jbig2_compression:
+    type: int64
+    ingestion_name: jbig2Compression
+    description: Number of /JBIG2Decode tags found in the PDF.
+  obj_count:
+    type: int64
+    ingestion_name: objCount
+    description: Number of objects definitions (obj keyword).
+  endstream_count:
+    type: int64
+    ingestion_name: endstreamCount
+    description: Number of defined stream objects (stream keyword).
+  page_count:
+    type: int64
+    ingestion_name: pageCount
+    description: Number of pages in the PDF.
+  stream_count:
+    type: int64
+    ingestion_name: streamCount
+    description: Number of defined stream objects (stream keyword).
+  openaction:
+    type: int64
+    description: Number of /OpenAction tags found in the PDF.
+  startxref:
+    type: int64
+    description: Number of startxref keywords in the PDF.
+  suspicious_colors:
+    type: int64
+    ingestion_name: suspiciousColors
+    description: Number of colors expressed with more than 3 bytes (CVE-2009-3459).
+  trailer:
+    type: int64
+    description: Number of trailer keywords in the PDF.
+  xfa:
+    type: int64
+    description: Number of \XFA tags found in the PDF.
+  xref:
+    type: int64
+    description: Number of xref keywords in the PDF.

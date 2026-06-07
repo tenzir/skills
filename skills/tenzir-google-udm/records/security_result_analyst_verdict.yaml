@@ -1,0 +1,14 @@
+summary: Verdict provided by the human analyst. These fields are used to model Mandiant sources.
+fields:
+  confidence_score:
+    type: int32
+    ingestion_name: confidenceScore
+    description: Confidence score of the verdict.
+  verdict_time:
+    type: timestamp
+    ingestion_name: verdictTime
+    description: Timestamp at which the verdict was generated.
+  verdict_response:
+    type: VerdictResponse
+    ingestion_name: verdictResponse
+    description: Details of the verdict.

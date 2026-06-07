@@ -1,0 +1,14 @@
+summary: DNS Questions. See RFC1035, section 4.1.2.
+fields:
+  name:
+    type: string
+    description: The domain name.
+  type:
+    type: uint32
+    description: The code specifying the type of the query.
+  class:
+    type: uint32
+    description: The code specifying the class of the query.
+  prevalence:
+    type: Prevalence
+    description: The prevalence of the domain within the customer's environment.

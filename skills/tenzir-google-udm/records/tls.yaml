@@ -1,0 +1,31 @@
+summary: Transport Layer Security (TLS) information.
+fields:
+  client:
+    type: Client
+    description: Certificate information for the client certificate.
+  server:
+    type: Server
+    description: Certificate information for the server certificate.
+  cipher:
+    type: string
+    description: Cipher used during the connection.
+  curve:
+    type: string
+    description: Elliptical curve used for a given cipher.
+  version:
+    type: string
+    description: TLS version.
+  version_protocol:
+    type: string
+    ingestion_name: versionProtocol
+    description: Protocol.
+  established:
+    type: bool
+    description: Indicates whether the TLS negotiation was successful.
+  next_protocol:
+    type: string
+    ingestion_name: nextProtocol
+    description: Protocol to be used for tunnel.
+  resumed:
+    type: bool
+    description: Indicates whether the TLS connection was resumed from a previous TLS negotiation.

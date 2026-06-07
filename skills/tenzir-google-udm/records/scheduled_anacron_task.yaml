@@ -1,0 +1,20 @@
+summary: Information about a scheduled anacron task.
+fields:
+  period:
+    type: string
+    description: Anacrontab period field. Value is an integer in days, or a string like "@daily", "@weekly", or "@monthly".
+  delay_minutes:
+    type: int64
+    ingestion_name: delayMinutes
+    description: The delay in minutes before the job is run.
+  job_id:
+    type: string
+    ingestion_name: jobId
+    description: The unique identifier of the job.
+  path:
+    type: string
+    description: The PATH environment variable defined in the anacrontab file.
+  source_line:
+    type: string
+    ingestion_name: sourceLine
+    description: The original source line from the anacrontab file.

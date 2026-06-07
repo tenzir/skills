@@ -1,0 +1,20 @@
+summary: File metadata section.
+fields:
+  name:
+    type: string
+    description: Name of the section.
+  entropy:
+    type: double
+    description: Entropy of the section.
+  raw_size_bytes:
+    type: int64
+    ingestion_name: rawSizeBytes
+    description: Raw file size in bytes.
+  virtual_size_bytes:
+    type: int64
+    ingestion_name: virtualSizeBytes
+    description: Virtual file size in bytes.
+  md5_hex:
+    type: string
+    ingestion_name: md5Hex
+    description: MD5 hex of the file.

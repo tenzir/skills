@@ -1,0 +1,22 @@
+summary: The task action.
+fields:
+  action_type:
+    type: ActionType
+    ingestion_name: actionType
+    description: The action type of the task.
+  exec_arguments:
+    type: list<string>
+    ingestion_name: execArguments
+    description: The arguments of the task. This field is only populated if the task action type is EXEC.
+  exec_working_directory:
+    type: string
+    ingestion_name: execWorkingDirectory
+    description: The executable working directory of the task. This field is only populated if the task action type is EXEC.
+  com_class_id:
+    type: string
+    ingestion_name: comClassId
+    description: The COM class IF the action is COM handler. This field is only populated if the task action type is COM_HANDLER.
+  com_data:
+    type: string
+    ingestion_name: comData
+    description: The data of the task. This field is only populated if the task action type is COM_HANDLER.

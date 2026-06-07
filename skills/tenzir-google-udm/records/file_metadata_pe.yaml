@@ -1,0 +1,53 @@
+summary: Metadata about the Portable Executable (PE) file.
+fields:
+  imphash:
+    type: string
+    description: Imphash of the file.
+  entry_point:
+    type: int64
+    ingestion_name: entryPoint
+    description: info.pe-entry-point.
+  entry_point_exiftool:
+    type: int64
+    ingestion_name: entryPointExiftool
+    description: info.exiftool.EntryPoint.
+  compilation_time:
+    type: timestamp
+    ingestion_name: compilationTime
+    description: info.pe-timestamp.
+  compilation_exiftool_time:
+    type: timestamp
+    ingestion_name: compilationExiftoolTime
+    description: info.exiftool.TimeStamp.
+  section:
+    type: list<FileMetadataSection>
+    description: FilemetadataSection fields.
+  imports:
+    type: list<FileMetadataImports>
+    description: FilemetadataImports fields.
+  resource:
+    type: list<FileMetadataPeResourceInfo>
+    description: FilemetadataPeResourceInfo fields.
+  resources_type_count:
+    type: list<StringToInt64MapEntry>
+    ingestion_name: resourcesTypeCount
+    deprecated: true
+    description: 'Deprecated: use resources_type_count_str.'
+  resources_language_count:
+    type: list<StringToInt64MapEntry>
+    ingestion_name: resourcesLanguageCount
+    deprecated: true
+    description: 'Deprecated: use resources_language_count_str.'
+  resources_type_count_str:
+    type: list<Label>
+    ingestion_name: resourcesTypeCountStr
+    description: 'Number of resources by resource type. Example: RT_ICON: 10, RT_DIALOG: 5'
+  resources_language_count_str:
+    type: list<Label>
+    ingestion_name: resourcesLanguageCountStr
+    description: 'Number of resources by language. Example: NEUTRAL: 20, ENGLISH US: 10'
+  signature_info:
+    type: FileMetadataSignatureInfo
+    ingestion_name: signatureInfo
+    deprecated: true
+    description: FilemetadataSignatureInfo field. deprecated, user File.signature_info instead.

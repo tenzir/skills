@@ -1,0 +1,8 @@
+summary: Tactic information related to an attack or threat.
+fields:
+  id:
+    type: string
+    description: Tactic ID (e.g. "TA0043").
+  name:
+    type: string
+    description: Tactic Name (e.g. "Reconnaissance")

@@ -1,0 +1,45 @@
+summary: Proxy information.
+fields:
+  anonymous:
+    type: bool
+    description: Whether the IP address is anonymous.
+  anonymous_vpn:
+    type: bool
+    ingestion_name: anonymousVpn
+    description: Whether the IP address is an anonymous VPN.
+  public_proxy:
+    type: bool
+    ingestion_name: publicProxy
+    description: Whether the IP address is a public proxy.
+  tor_exit_node:
+    type: bool
+    ingestion_name: torExitNode
+    description: Whether the IP address is a tor exit node.
+  smart_dns_proxy:
+    type: bool
+    ingestion_name: smartDnsProxy
+    description: Whether the IP address is a smart DNS proxy.
+  hosting_provider:
+    type: bool
+    ingestion_name: hostingProvider
+    description: Whether the IP address is a hosting provider.
+  vpn_datacenter:
+    type: bool
+    ingestion_name: vpnDatacenter
+    description: Whether the IP address is a VPN datacenter.
+  residential_proxy:
+    type: bool
+    ingestion_name: residentialProxy
+    description: Whether the IP address is a residential proxy.
+  vpn_service_name:
+    type: string
+    ingestion_name: vpnServiceName
+    description: The name of the VPN service.
+  proxy_over_vpn:
+    type: bool
+    ingestion_name: proxyOverVpn
+    description: Whether the IP address is a proxy over VPN.
+  relay_proxy:
+    type: bool
+    ingestion_name: relayProxy
+    description: Whether the IP address is a relay proxy.

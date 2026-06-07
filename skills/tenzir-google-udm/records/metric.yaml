@@ -1,0 +1,45 @@
+summary: Stores precomputed aggregated analytic data for an entity.
+fields:
+  first_seen:
+    type: timestamp
+    ingestion_name: firstSeen
+    description: Timestamp of the first time the entity was seen in the environment.
+  last_seen:
+    type: timestamp
+    ingestion_name: lastSeen
+    description: Time stamp of the last time last time the entity was seen in the environment.
+  sum_measure:
+    type: Measure
+    ingestion_name: sumMeasure
+    description: Sum of all precomputed measures for the given metric.
+  total_events:
+    type: int64
+    ingestion_name: totalEvents
+    description: Total number of events used to calculate the given precomputed metric.
+  metric_name:
+    type: MetricName
+    ingestion_name: metricName
+    description: Name of the analytic.
+  dimensions:
+    type: list<Dimension>
+    description: All group by clauses used to calculate the metric.
+  export_window:
+    type: int64
+    ingestion_name: exportWindow
+    description: Export window for which the metric was exported.
+  display_name:
+    type: string
+    ingestion_name: displayName
+    description: Display name of the custom metric. Google-authored metrics do not have a display name.
+  outcome_variables:
+    type: list<FindingVariable>
+    ingestion_name: outcomeVariables
+    description: List of outcome variables used in the custom metric.
+  match_variables:
+    type: list<FindingVariable>
+    ingestion_name: matchVariables
+    description: List of match variables used in the custom metric.
+  time_range:
+    type: interval
+    ingestion_name: timeRange
+    description: Time range for which the custom metric was calculated.

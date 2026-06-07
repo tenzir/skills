@@ -1,0 +1,8 @@
+summary: Subject public key info.
+fields:
+  algorithm:
+    type: string
+    description: Any of "RSA", "DSA" or "EC". Indicates the algorithm used to generate the certificate.
+  rsa:
+    type: RSA
+    description: RSA public key information.

@@ -1,0 +1,9 @@
+summary: Certificate's signature and algorithm.
+fields:
+  signature:
+    type: string
+    description: Signature.
+  signature_algorithm:
+    type: string
+    ingestion_name: signatureAlgorithm
+    description: Algorithm.

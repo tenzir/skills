@@ -1,0 +1,26 @@
+summary: Label used in data access.
+fields:
+  log_types:
+    type: list<string>
+    ingestion_name: logTypes
+    description: All the LogType labels.
+  ingestion_labels:
+    type: list<string>
+    ingestion_name: ingestionLabels
+    deprecated: true
+    description: All the ingestion labels.
+  namespaces:
+    type: list<string>
+    description: All the namespaces.
+  custom_labels:
+    type: list<string>
+    ingestion_name: customLabels
+    description: All the complex labels (UDM search syntax based).
+  ingestion_kv_labels:
+    type: list<DataAccessIngestionLabel>
+    ingestion_name: ingestionKvLabels
+    description: All the ingestion labels (key/value pairs).
+  allow_scoped_access:
+    type: bool
+    ingestion_name: allowScopedAccess
+    description: Are the labels ready for scoped access

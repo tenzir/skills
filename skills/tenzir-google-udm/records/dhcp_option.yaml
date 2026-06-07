@@ -1,0 +1,8 @@
+summary: DHCP options.
+fields:
+  code:
+    type: uint32
+    description: Code. See RFC1533.
+  data:
+    type: bytes
+    description: Data.

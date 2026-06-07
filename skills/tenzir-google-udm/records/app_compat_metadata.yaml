@@ -1,0 +1,12 @@
+summary: Windows AppCompatCache (Application Compatibility) metadata.
+fields:
+  sequence:
+    type: int32
+    description: Indicates the chronological order in which the entry was added to the cache.
+  executed:
+    type: bool
+    description: Indicates whether the file associated with the entry was executed.
+  control_set:
+    type: string
+    ingestion_name: controlSet
+    description: Indicates which registry Control Set the AppCompatCache data belongs to (e.g., "ControlSet001").

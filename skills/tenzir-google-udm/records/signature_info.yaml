@@ -1,0 +1,8 @@
+summary: File signature information extracted from different tools.
+fields:
+  sigcheck:
+    type: FileMetadataSignatureInfo
+    description: Signature information extracted from the sigcheck tool.
+  codesign:
+    type: FileMetadataCodesign
+    description: Signature information extracted from the codesign utility.

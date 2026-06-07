@@ -1,0 +1,12 @@
+summary: Threat Collection that is either a threat campaign or a threat report.
+fields:
+  id:
+    type: string
+    description: The ID of the threat collection.
+  type:
+    type: ThreatCollectionType
+    description: The type of threat collection (e.g., "campaign").
+  alt_names:
+    type: list<string>
+    ingestion_name: altNames
+    description: The name of the threat collection.

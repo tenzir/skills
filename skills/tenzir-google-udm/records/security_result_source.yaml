@@ -1,0 +1,28 @@
+summary: Deprecated. Information about the threat intelligence source. These fields are used to model Mandiant sources.
+fields:
+  name:
+    type: string
+    description: Name of the IoC source.
+  benign_count:
+    type: int32
+    ingestion_name: benignCount
+    description: Count of responses where this IoC was marked benign.
+  malicious_count:
+    type: int32
+    ingestion_name: maliciousCount
+    description: Count of responses where this IoC was marked malicious.
+  quality:
+    type: ProductConfidence
+    description: Quality of the IoC mapping extracted from the source.
+  response_count:
+    type: int32
+    ingestion_name: responseCount
+    description: Total response count from this source.
+  source_count:
+    type: int32
+    ingestion_name: sourceCount
+    description: Number of sources from which intelligence was extracted.
+  threat_intelligence_sources:
+    type: list<Source>
+    ingestion_name: threatIntelligenceSources
+    description: Different threat intelligence sources from which IoC info was extracted.

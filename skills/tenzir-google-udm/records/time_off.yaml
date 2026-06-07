@@ -1,0 +1,8 @@
+summary: System record for leave/time-off from a Human Capital Management (HCM) system.
+fields:
+  interval:
+    type: interval
+    description: Interval duration of the leave.
+  description:
+    type: string
+    description: Description of the leave if available (e.g. 'Vacation').

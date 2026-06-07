@@ -1,0 +1,139 @@
+summary: Information about a user.
+fields:
+  product_object_id:
+    type: string
+    ingestion_name: productObjectId
+    description: A vendor-specific identifier to uniquely identify the entity (e.g. a GUID, LDAP, OID, or similar). This field
+      can be used as an entity indicator for user entities.
+  userid:
+    type: string
+    description: The ID of the user. This field can be used as an entity indicator for user entities.
+  user_display_name:
+    type: string
+    ingestion_name: userDisplayName
+    description: The display name of the user (e.g. "John Locke").
+  first_name:
+    type: string
+    ingestion_name: firstName
+    description: First name of the user (e.g. "John").
+  middle_name:
+    type: string
+    ingestion_name: middleName
+    description: Middle name of the user.
+  last_name:
+    type: string
+    ingestion_name: lastName
+    description: Last name of the user (e.g. "Locke").
+  phone_numbers:
+    type: list<string>
+    ingestion_name: phoneNumbers
+    description: Phone numbers for the user.
+  personal_address:
+    type: Location
+    ingestion_name: personalAddress
+    description: Personal address of the user.
+  attribute:
+    type: Attribute
+    description: Generic entity metadata attributes of the user.
+  first_seen_time:
+    type: timestamp
+    ingestion_name: firstSeenTime
+    description: The first observed time for a user. The value is calculated on the basis of the first time the identifier
+      was observed.
+  account_type:
+    type: AccountType
+    ingestion_name: accountType
+    description: 'Type of user account (for example, service, domain, or cloud). This is somewhat aligned to: [https://attack.mitre.org/techniques/T1078/](https://attack.mitre.org/techniques/T1078/)'
+  groupid:
+    type: string
+    deprecated: true
+    description: The ID of the group that the user belongs to. Deprecated in favor of the repeated group_identifiers field.
+  group_identifiers:
+    type: list<string>
+    ingestion_name: groupIdentifiers
+    description: Product object identifiers of the group(s) the user belongs to A vendor-specific identifier to uniquely identify
+      the group(s) the user belongs to (a GUID, LDAP OID, or similar).
+  windows_sid:
+    type: string
+    ingestion_name: windowsSid
+    description: The Microsoft Windows SID of the user. This field can be used as an entity indicator for user entities.
+  email_addresses:
+    type: list<string>
+    ingestion_name: emailAddresses
+    description: Email addresses of the user. This field can be used as an entity indicator for user entities.
+  employee_id:
+    type: string
+    ingestion_name: employeeId
+    description: Human capital management identifier. This field can be used as an entity indicator for user entities.
+  title:
+    type: string
+    description: User job title.
+  company_name:
+    type: string
+    ingestion_name: companyName
+    description: User job company name.
+  department:
+    type: list<string>
+    description: User job department
+  office_address:
+    type: Location
+    ingestion_name: officeAddress
+    description: User job office location.
+  managers:
+    type: list<User>
+    description: User job manager(s).
+  hire_date:
+    type: timestamp
+    ingestion_name: hireDate
+    description: User job employment hire date.
+  termination_date:
+    type: timestamp
+    ingestion_name: terminationDate
+    description: User job employment termination date.
+  time_off:
+    type: list<TimeOff>
+    ingestion_name: timeOff
+    description: User time off leaves from active work.
+  last_login_time:
+    type: timestamp
+    ingestion_name: lastLoginTime
+    description: User last login timestamp.
+  last_password_change_time:
+    type: timestamp
+    ingestion_name: lastPasswordChangeTime
+    description: User last password change timestamp.
+  password_expiration_time:
+    type: timestamp
+    ingestion_name: passwordExpirationTime
+    description: User password expiration timestamp.
+  account_expiration_time:
+    type: timestamp
+    ingestion_name: accountExpirationTime
+    description: User account expiration timestamp.
+  account_lockout_time:
+    type: timestamp
+    ingestion_name: accountLockoutTime
+    description: User account lockout timestamp.
+  last_bad_password_attempt_time:
+    type: timestamp
+    ingestion_name: lastBadPasswordAttemptTime
+    description: User last bad password attempt timestamp.
+  user_authentication_status:
+    type: AuthenticationStatus
+    ingestion_name: userAuthenticationStatus
+    description: System authentication status for user.
+  role_name:
+    type: string
+    ingestion_name: roleName
+    deprecated: true
+    description: 'System role name for user. Deprecated: use attribute.roles.'
+  role_description:
+    type: string
+    ingestion_name: roleDescription
+    deprecated: true
+    description: 'System role description for user. Deprecated: use attribute.roles.'
+  user_role:
+    type: User.Role
+    ingestion_name: userRole
+    deprecated: true
+    description: 'System role for user. Deprecated: use attribute.roles.'

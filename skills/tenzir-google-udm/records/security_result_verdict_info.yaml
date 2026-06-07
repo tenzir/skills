@@ -1,0 +1,66 @@
+summary: Describes the threat verdict provided by human analysts and machine learning models. These fields are used to model
+  Mandiant sources.
+fields:
+  source_count:
+    type: int32
+    ingestion_name: sourceCount
+    description: Number of sources from which intelligence was extracted.
+  response_count:
+    type: int32
+    ingestion_name: responseCount
+    description: Total response count across all sources.
+  neighbour_influence:
+    type: string
+    ingestion_name: neighbourInfluence
+    description: Describes the near neighbor influence of the verdict.
+  verdict_type:
+    type: VerdictType
+    ingestion_name: verdictType
+    description: Type of verdict.
+  source_provider:
+    type: string
+    ingestion_name: sourceProvider
+    description: Source provider giving the machine learning verdict.
+  benign_count:
+    type: int32
+    ingestion_name: benignCount
+    description: Count of responses where this IoC was marked as benign.
+  malicious_count:
+    type: int32
+    ingestion_name: maliciousCount
+    description: Count of responses where this IoC was marked as malicious.
+  confidence_score:
+    type: int32
+    ingestion_name: confidenceScore
+    description: Confidence score of the verdict.
+  ioc_stats:
+    type: list<IoCStats>
+    ingestion_name: iocStats
+    description: List of IoCStats from which the verdict was generated.
+  verdict_time:
+    type: timestamp
+    ingestion_name: verdictTime
+    description: Timestamp when the verdict was generated.
+  verdict_response:
+    type: VerdictResponse
+    ingestion_name: verdictResponse
+    description: Details about the verdict.
+  global_customer_count:
+    type: int32
+    ingestion_name: globalCustomerCount
+    description: Global customer count over the last 30 days
+  global_hits_count:
+    type: int32
+    ingestion_name: globalHitsCount
+    description: Global hit count over the last 30 days.
+  pwn:
+    type: bool
+    description: Whether one or more Mandiant incident response customers had this indicator in their environment.
+  category_details:
+    type: string
+    ingestion_name: categoryDetails
+    description: Tags related to the verdict.
+  pwn_first_tagged_time:
+    type: timestamp
+    ingestion_name: pwnFirstTaggedTime
+    description: The timestamp of the first time a pwn was associated to this entity.

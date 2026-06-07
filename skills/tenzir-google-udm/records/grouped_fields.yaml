@@ -1,0 +1,28 @@
+summary: Grouped fields are aliases for groups of related UDM fields. All fields grouped together are of type string.
+fields:
+  ip:
+    type: list<string>
+    description: IP addresses.
+  domain:
+    type: list<string>
+    description: Domains.
+  hostname:
+    type: list<string>
+    description: Hostnames.
+  user:
+    type: list<string>
+    description: Users.
+  email:
+    type: list<string>
+    description: Emails.
+  file_path:
+    type: list<string>
+    ingestion_name: filePath
+    description: File paths.
+  hash:
+    type: list<string>
+    description: File Hashes.
+  process_id:
+    type: list<string>
+    ingestion_name: processId
+    description: Process Identifiers.

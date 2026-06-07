@@ -1,0 +1,6 @@
+summary: Int64Sequence represents a sequence of int64s.
+fields:
+  int64_vals:
+    type: list<int64>
+    ingestion_name: int64Vals
+    description: int64 sequence.

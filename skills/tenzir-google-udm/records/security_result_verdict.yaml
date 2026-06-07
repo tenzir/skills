@@ -1,0 +1,22 @@
+summary: Deprecated. Encapsulates the threat verdict provided by human analysts and ML models. These fields are used to model
+  Mandiant sources.
+fields:
+  source_count:
+    type: int32
+    ingestion_name: sourceCount
+    description: Number of sources from which intelligence was extracted.
+  response_count:
+    type: int32
+    ingestion_name: responseCount
+    description: Total response count across all sources.
+  neighbour_influence:
+    type: string
+    ingestion_name: neighbourInfluence
+    description: Describes the neighbour influence of the verdict.
+  verdict:
+    type: ProviderMLVerdict
+    description: ML Verdict provided by sources like Mandiant.
+  analyst_verdict:
+    type: AnalystVerdict
+    ingestion_name: analystVerdict
+    description: Human analyst verdict provided by sources like Mandiant.

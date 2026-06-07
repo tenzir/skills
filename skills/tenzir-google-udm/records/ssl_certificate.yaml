@@ -1,0 +1,55 @@
+summary: SSL certificate.
+fields:
+  cert_signature:
+    type: CertSignature
+    ingestion_name: certSignature
+    description: Certificate's signature and algorithm.
+  extension:
+    type: Extension
+    deprecated: true
+    description: (DEPRECATED) certificate's extension.
+  cert_extensions:
+    type: variant
+    ingestion_name: certExtensions
+    description: Certificate's extensions.
+  first_seen_time:
+    type: timestamp
+    ingestion_name: firstSeenTime
+    description: Date the certificate was first retrieved by VirusTotal.
+  issuer:
+    type: Subject
+    description: Certificate's issuer data.
+  ec:
+    type: EC
+    description: EC public key information.
+  serial_number:
+    type: string
+    ingestion_name: serialNumber
+    description: Certificate's serial number hexdump.
+  signature_algorithm:
+    type: string
+    ingestion_name: signatureAlgorithm
+    description: Algorithm used for the signature (for example, "sha1RSA").
+  size:
+    type: int64
+    description: Certificate content length.
+  subject:
+    type: Subject
+    description: Certificate's subject data.
+  thumbprint:
+    type: string
+    description: Certificate's content SHA1 hash.
+  thumbprint_sha256:
+    type: string
+    ingestion_name: thumbprintSha256
+    description: Certificate's content SHA256 hash.
+  validity:
+    type: Validity
+    description: Certificate's validity period.
+  version:
+    type: string
+    description: Certificate version (typically "V1", "V2" or "V3").
+  public_key:
+    type: PublicKey
+    ingestion_name: publicKey
+    description: Public key information.

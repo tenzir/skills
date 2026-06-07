@@ -1,0 +1,26 @@
+summary: NTFS-specific file metadata.
+fields:
+  change_time:
+    type: timestamp
+    ingestion_name: changeTime
+    description: NTFS MFT entry changed timestamp.
+  filename_create_time:
+    type: timestamp
+    ingestion_name: filenameCreateTime
+    description: NTFS $FILE_NAME attribute created timestamp.
+  filename_modify_time:
+    type: timestamp
+    ingestion_name: filenameModifyTime
+    description: NTFS $FILE_NAME attribute modified timestamp.
+  filename_access_time:
+    type: timestamp
+    ingestion_name: filenameAccessTime
+    description: NTFS $FILE_NAME attribute accessed timestamp.
+  filename_change_time:
+    type: timestamp
+    ingestion_name: filenameChangeTime
+    description: NTFS $FILE_NAME attribute changed timestamp.
+  usn_journal:
+    type: list<UsnJournal>
+    ingestion_name: usnJournal
+    description: NTFS USN journal.

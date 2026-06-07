@@ -1,0 +1,14 @@
+summary: URL Tracker.
+fields:
+  tracker:
+    type: string
+    description: Tracker name.
+  id:
+    type: string
+    description: Tracker ID, if available.
+  timestamp:
+    type: timestamp
+    description: Tracker ingestion date.
+  url:
+    type: string
+    description: Tracker script URL.

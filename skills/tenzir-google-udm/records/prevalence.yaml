@@ -1,0 +1,24 @@
+summary: The prevalence of a resource within the customer's environment. This measures how common it is for assets to access
+  the resource.
+fields:
+  rolling_max:
+    type: int32
+    ingestion_name: rollingMax
+    description: The maximum number of assets per day accessing the resource over the trailing day_count days.
+  day_count:
+    type: int32
+    ingestion_name: dayCount
+    description: The number of days over which rolling_max is calculated.
+  rolling_max_sub_domains:
+    type: int32
+    ingestion_name: rollingMaxSubDomains
+    description: The maximum number of assets per day accessing the domain along with sub-domains over the trailing day_count
+      days. This field is only valid for domains.
+  day_max:
+    type: int32
+    ingestion_name: dayMax
+    description: The max prevalence score in a day interval window.
+  day_max_sub_domains:
+    type: int32
+    ingestion_name: dayMaxSubDomains
+    description: The max prevalence score in a day interval window across sub-domains. This field is only valid for domains.

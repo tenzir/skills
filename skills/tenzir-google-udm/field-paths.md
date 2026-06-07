@@ -5,13 +5,14 @@ and configuration-based normalizer contexts.
 
 ## Field path names
 
-This page focuses on the left-side field-path form from generated
-field headings. If a message page shows `event_type` / `eventType`,
-use `event_type` with the prefix required by the rule or normalizer
-context, for example `$event.metadata.event_type`.
+This page focuses on the field-path form from generated record YAML.
+If a record YAML field key is `event_type` and its field record has
+`ingestion_name: eventType`, use `event_type` with the prefix
+required by the rule or normalizer context, for example
+`$event.metadata.event_type`.
 
-Use the right-side form when mapping logs into UDM event or entity
-objects for Google SecOps UDM API ingestion, for example
+Use `ingestion_name` values when mapping logs into UDM event or
+entity records for Google SecOps UDM API ingestion, for example
 `metadata.eventType`.
 
 ## Rules Engine Prefix Notes

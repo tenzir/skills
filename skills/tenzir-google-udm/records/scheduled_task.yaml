@@ -1,0 +1,26 @@
+summary: 'Deprecated: use WindowsScheduledTask for Windows scheduled tasks or ScheduledCronTask for cron jobs. Information
+  about a scheduled task.'
+fields:
+  minute:
+    type: int32
+    description: The minute of the hour (0-59).
+  hour:
+    type: int32
+    description: The hour of the day (0-23).
+  month_day:
+    type: int32
+    ingestion_name: monthDay
+    description: The day of the month (1-31).
+  month:
+    type: int32
+    description: The month of the year (1-12).
+  week_day:
+    type: int32
+    ingestion_name: weekDay
+    description: The day of the week (0-6, Sunday=0).
+  comment:
+    type: string
+    description: A comment or description for the task.
+  author:
+    type: string
+    description: The account name that authored or last modified the scheduled task.

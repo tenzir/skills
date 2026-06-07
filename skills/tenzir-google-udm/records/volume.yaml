@@ -1,0 +1,25 @@
+summary: Information about a storage volume.
+fields:
+  file_system:
+    type: string
+    ingestion_name: fileSystem
+    description: The name of the file system on the volume (e.g., "NTFS", "FAT32").
+  mount_point:
+    type: string
+    ingestion_name: mountPoint
+    description: The path where the volume is mounted (e.g., "C:", "/mnt/data").
+  device_path:
+    type: string
+    ingestion_name: devicePath
+    description: The system path to the device (e.g., "\\.\HarddiskVolume1", "/dev/sda1").
+  is_mounted:
+    type: bool
+    ingestion_name: isMounted
+    description: Indicates whether the volume is currently mounted.
+  is_read_only:
+    type: bool
+    ingestion_name: isReadOnly
+    description: Indicates whether the volume is mounted as read-only.
+  name:
+    type: string
+    description: The user-assigned label or name for the volume.

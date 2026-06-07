@@ -1,0 +1,15 @@
+summary: Microsoft Outlook specific metadata.
+fields:
+  comment:
+    type: string
+    description: A user-defined comment or note associated with the Outlook item.
+  template:
+    type: string
+    description: The name of the template file used to create the Outlook item.
+  title:
+    type: string
+    description: The title of the Outlook item.
+  security_flags_count:
+    type: int32
+    ingestion_name: securityFlagsCount
+    description: Count of Security-related flags for the message, such as encryption or signing status.

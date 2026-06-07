@@ -1,0 +1,7 @@
+fields:
+  key:
+    type: optional<string>
+    description: Key field.
+  value:
+    type: optional<int64>
+    description: Value field.

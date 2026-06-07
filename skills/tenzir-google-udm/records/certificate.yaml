@@ -1,0 +1,31 @@
+summary: Certificate information
+fields:
+  version:
+    type: string
+    description: Certificate version.
+  serial:
+    type: string
+    description: Certificate serial number.
+  subject:
+    type: string
+    description: Subject of the certificate.
+  issuer:
+    type: string
+    description: Issuer of the certificate.
+  md5:
+    type: string
+    description: The MD5 hash of the certificate, as a hex-encoded string.
+  sha1:
+    type: string
+    description: The SHA1 hash of the certificate, as a hex-encoded string.
+  sha256:
+    type: string
+    description: The SHA256 hash of the certificate, as a hex-encoded string.
+  not_before:
+    type: timestamp
+    ingestion_name: notBefore
+    description: Indicates when the certificate is first valid.
+  not_after:
+    type: timestamp
+    ingestion_name: notAfter
+    description: Indicates when the certificate is no longer valid.

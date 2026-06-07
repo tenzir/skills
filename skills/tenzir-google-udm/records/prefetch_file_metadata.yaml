@@ -1,0 +1,10 @@
+summary: Windows Prefetch file metadata.
+fields:
+  run_count:
+    type: int64
+    ingestion_name: runCount
+    description: The number of times the application has been run.
+  prefetch_hash:
+    type: string
+    ingestion_name: prefetchHash
+    description: A hash of the executable path used to identify the prefetch file.

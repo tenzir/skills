@@ -1,0 +1,23 @@
+summary: File metadata for PE resource.
+fields:
+  sha256_hex:
+    type: string
+    ingestion_name: sha256Hex
+    description: SHA256_hex field..
+  filetype_magic:
+    type: string
+    ingestion_name: filetypeMagic
+    description: Type of resource content, as identified by the magic Python module.
+  language_code:
+    type: string
+    ingestion_name: languageCode
+    description: Human-readable version of the language and sublanguage identifiers, as defined in the Microsoft Windows PE
+      specification.
+  entropy:
+    type: double
+    description: Entropy of the resource.
+  file_type:
+    type: string
+    ingestion_name: fileType
+    description: File type. Note that this value may not match any of the well-known type identifiers defined in the ResourceType
+      enum.

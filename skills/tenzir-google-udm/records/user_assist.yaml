@@ -1,0 +1,18 @@
+summary: The UserAssist extension captures details specific to Windows User Assist events.
+fields:
+  application_focus_count:
+    type: int64
+    ingestion_name: applicationFocusCount
+    description: The number of times the application associated with the entry gained focus.
+  application_focus_duration:
+    type: duration
+    ingestion_name: applicationFocusDuration
+    description: The total duration the application associated with the entry was in focus.
+  executions_count:
+    type: int64
+    ingestion_name: executionsCount
+    description: The number of times the application associated with the entry has been executed.
+  entry_index:
+    type: int64
+    ingestion_name: entryIndex
+    description: The index or identifier of the user assist entry, unique per user.

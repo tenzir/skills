@@ -1,0 +1,8 @@
+summary: EC public key information.
+fields:
+  oid:
+    type: string
+    description: Curve name.
+  pub:
+    type: string
+    description: Public key hexdump.

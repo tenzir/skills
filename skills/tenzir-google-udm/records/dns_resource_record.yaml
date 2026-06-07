@@ -1,0 +1,22 @@
+summary: DNS Resource Records. See RFC1035, section 4.1.3.
+fields:
+  name:
+    type: string
+    description: The name of the owner of the resource record.
+  type:
+    type: uint32
+    description: The code specifying the type of the resource record.
+  class:
+    type: uint32
+    description: The code specifying the class of the resource record.
+  ttl:
+    type: uint32
+    description: The time interval for which the resource record can be cached before the source of the information should
+      again be queried.
+  data:
+    type: string
+    description: The payload or response to the DNS question for all responses encoded in UTF-8 format
+  binary_data:
+    type: bytes
+    ingestion_name: binaryData
+    description: The raw bytes of any non-UTF8 strings that might be included as part of a DNS response.

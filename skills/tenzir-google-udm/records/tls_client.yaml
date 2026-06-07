@@ -1,0 +1,19 @@
+summary: Transport Layer Security (TLS) information associated with the client (for example, Certificate or JA3 hash).
+fields:
+  certificate:
+    type: Certificate
+    description: Client certificate.
+  ja3:
+    type: string
+    description: JA3 hash from the TLS ClientHello, as a hex-encoded string.
+  server_name:
+    type: string
+    ingestion_name: serverName
+    description: Host name of the server, that the client is connecting to.
+  supported_ciphers:
+    type: list<string>
+    ingestion_name: supportedCiphers
+    description: Ciphers supported by the client during client hello.
+  ja4:
+    type: string
+    description: JA4 hash from the TLS ClientHello, as a hex-encoded string.

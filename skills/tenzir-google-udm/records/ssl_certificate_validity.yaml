@@ -1,0 +1,10 @@
+summary: Defines certificate's validity period.
+fields:
+  expiry_time:
+    type: timestamp
+    ingestion_name: expiryTime
+    description: Expiry date.
+  issue_time:
+    type: timestamp
+    ingestion_name: issueTime
+    description: Issue date.

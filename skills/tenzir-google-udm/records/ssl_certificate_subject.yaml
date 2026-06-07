@@ -1,0 +1,24 @@
+summary: Subject data.
+fields:
+  country_name:
+    type: string
+    ingestion_name: countryName
+    description: 'C: Country name.'
+  common_name:
+    type: string
+    ingestion_name: commonName
+    description: 'CN: CommonName.'
+  locality:
+    type: string
+    description: 'L: Locality.'
+  organization:
+    type: string
+    description: 'O: Organization.'
+  organizational_unit:
+    type: string
+    ingestion_name: organizationalUnit
+    description: 'OU: OrganizationalUnit.'
+  state_or_province_name:
+    type: string
+    ingestion_name: stateOrProvinceName
+    description: 'ST: StateOrProvinceName.'

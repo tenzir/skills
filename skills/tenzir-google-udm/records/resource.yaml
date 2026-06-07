@@ -1,0 +1,59 @@
+summary: Information about a resource such as a task, Cloud Storage bucket, database, disk, logical policy, or something similar.
+fields:
+  type:
+    type: string
+    deprecated: true
+    description: 'Deprecated: use resource_type instead.'
+  resource_type:
+    type: ResourceType
+    ingestion_name: resourceType
+    description: Resource type.
+  resource_subtype:
+    type: string
+    ingestion_name: resourceSubtype
+    description: Resource sub-type (e.g. "BigQuery", "Bigtable").
+  id:
+    type: string
+    deprecated: true
+    description: 'Deprecated: Use resource.name or resource.product_object_id.'
+  name:
+    type: string
+    description: 'The full name of the resource. For example, Google Cloud: //cloudresourcemanager.googleapis.com/projects/wombat-123,
+      and AWS: arn:aws:iam::123456789012:user/johndoe.'
+  parent:
+    type: string
+    deprecated: true
+    description: 'The parent of the resource. For a database table, the parent is the database. For a storage object, the
+      bucket name. Deprecated: use resource_ancestors.name.'
+  product_object_id:
+    type: string
+    ingestion_name: productObjectId
+    description: A vendor-specific identifier to uniquely identify the entity (a GUID, OID, or similar) This field can be
+      used as an entity indicator for a Resource entity.
+  attribute:
+    type: Attribute
+    description: Generic entity metadata attributes of the resource.
+  scheduled_task:
+    type: ScheduledTask
+    ingestion_name: scheduledTask
+    deprecated: true
+    description: 'DEPRECATED: use windows_scheduled_task for Windows scheduled tasks or scheduled_cron_task for cron jobs.
+      Information about a scheduled task associated with the resource.'
+  scheduled_cron_task:
+    type: ScheduledCronTask
+    ingestion_name: scheduledCronTask
+    description: Information about a scheduled cron task associated with the resource.
+  scheduled_anacron_task:
+    type: ScheduledAnacronTask
+    ingestion_name: scheduledAnacronTask
+    description: Information about a scheduled anacron task associated with the resource.
+  windows_scheduled_task:
+    type: WindowsScheduledTask
+    ingestion_name: windowsScheduledTask
+    description: Information about a Windows scheduled task associated with the resource.
+  volume:
+    type: Volume
+    description: Information about a storage volume associated with the resource.
+  service:
+    type: Service
+    description: Information about a Windows service associated with the resource.

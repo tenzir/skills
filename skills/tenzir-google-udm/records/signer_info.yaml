@@ -1,0 +1,18 @@
+summary: File metadata related to the signer information.
+fields:
+  name:
+    type: optional<string>
+    description: Common name of the signers/certificate. The order of the signers matters. Each element is a higher level
+      authority, the last being the root authority.
+  status:
+    type: optional<string>
+    description: It can say "Valid" or state the problem with the certificate if any (e.g. "This certificate or one of the
+      certificates in the certificate chain is not time valid.").
+  valid_usage:
+    type: optional<string>
+    ingestion_name: validUsage
+    description: Indicates which situations the certificate is valid for (e.g. "Code Signing").
+  cert_issuer:
+    type: optional<string>
+    ingestion_name: certIssuer
+    description: Company that issued the certificate.

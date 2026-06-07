@@ -6,6 +6,7 @@
 #   "grpcio-tools>=1.64.0",
 #   "httpx>=0.28.0",
 #   "protobuf>=5.27.0",
+#   "pyyaml>=6.0.0",
 # ]
 # ///
 
@@ -21,8 +22,10 @@ from collections import defaultdict
 from dataclasses import dataclass
 from importlib import resources
 from pathlib import Path
+from typing import Any
 
 import httpx
+import yaml
 from bs4 import BeautifulSoup, NavigableString, Tag
 from google.protobuf import descriptor_pb2
 from grpc_tools import protoc
@@ -68,7 +71,7 @@ SCALAR_TYPES = {
 }
 WELL_KNOWN_TYPES = {
     "google.protobuf.Duration": "duration",
-    "google.protobuf.Struct": "object",
+    "google.protobuf.Struct": "variant",
     "google.protobuf.Timestamp": "timestamp",
     "google.type.Interval": "interval",
     "google.type.LatLng": "latLng",
@@ -513,13 +516,13 @@ def type_label(context: FileContext, full_name: str) -> str:
 
 
 def link_for_message(message: MessageDoc, section: str) -> str:
-    if section == "messages":
-        return f"{message.slug}.md"
-    return f"messages/{message.slug}.md"
+    if section in {"messages", "records"}:
+        return f"{message.slug}.yaml"
+    return f"records/{message.slug}.yaml"
 
 
 def link_for_enum(enum: EnumDoc, section: str) -> str:
-    if section == "messages":
+    if section in {"messages", "records"}:
         return f"../enums/{enum.slug}.md"
     if section == "enums":
         return f"{enum.slug}.md"
@@ -587,22 +590,22 @@ def field_path_name(field: descriptor_pb2.FieldDescriptorProto) -> str:
     return field.name
 
 
-def ingestion_object_name(field: descriptor_pb2.FieldDescriptorProto) -> str:
+def ingestion_name(field: descriptor_pb2.FieldDescriptorProto) -> str:
     return field.json_name or field.name
 
 
 def field_name_label(field: descriptor_pb2.FieldDescriptorProto) -> str:
     field_path = field_path_name(field)
-    ingestion_object = ingestion_object_name(field)
-    if field_path == ingestion_object:
+    ingestion = ingestion_name(field)
+    if field_path == ingestion:
         return f"`{field_path}`"
-    return f"`{field_path}` / `{ingestion_object}`"
+    return f"`{field_path}` / `{ingestion}`"
 
 
-def field_path_label(field_path: str, ingestion_object_path: str) -> str:
-    if field_path == ingestion_object_path:
+def field_path_label(field_path: str, ingestion_path: str) -> str:
+    if field_path == ingestion_path:
         return f"`{field_path}`"
-    return f"`{field_path}` / `{ingestion_object_path}`"
+    return f"`{field_path}` / `{ingestion_path}`"
 
 
 def irregular_field_name_mappings(
@@ -612,9 +615,9 @@ def irregular_field_name_mappings(
     for message in generated_messages(context):
         for field in message.descriptor.field:
             field_path = field_path_name(field)
-            ingestion_object = ingestion_object_name(field)
-            if field_path != ingestion_object and to_snake_case(ingestion_object) != field_path:
-                irregularities.append((message.qualified_name, field_path, ingestion_object))
+            ingestion = ingestion_name(field)
+            if field_path != ingestion and to_snake_case(ingestion) != field_path:
+                irregularities.append((message.qualified_name, field_path, ingestion))
     return sorted(irregularities)
 
 
@@ -627,7 +630,13 @@ def apply_endpoint_language(text: str) -> str:
         "Proto3 format": "timestamp",
         "Proto3 timestamp format": "timestamp",
         "proto3 format": "timestamp",
-        "single File proto": "single File message",
+        "single File proto": "single File record",
+        "sub-messages": "nested records",
+        "sub-message": "nested record",
+        "security_results message MUST": "security_results record must",
+        "entity.domain message must": "entity.domain record must",
+        "goes in this message": "goes in this record",
+        "A structure that holds": "A record that holds",
         "Unified Data Model schema": "Unified Data Model",
     }
     for old, new in replacements.items():
@@ -640,7 +649,7 @@ def find_field_by_name(
     name: str,
 ) -> descriptor_pb2.FieldDescriptorProto | None:
     for field in message.descriptor.field:
-        if field_path_name(field) == name or ingestion_object_name(field) == name:
+        if field_path_name(field) == name or ingestion_name(field) == name:
             return field
     return None
 
@@ -654,21 +663,21 @@ def display_field_path(context: FileContext, field_path: str) -> str:
         return f"`{field_path}`"
 
     field_path_parts: list[str] = []
-    ingestion_object_parts: list[str] = []
+    ingestion_parts: list[str] = []
     current_message: MessageDoc | None = message
     for part in parts[1:]:
         if current_message is None:
             field_path_parts.append(part)
-            ingestion_object_parts.append(part)
+            ingestion_parts.append(part)
             continue
         field = find_field_by_name(current_message, part)
         if field is None:
             field_path_parts.append(part)
-            ingestion_object_parts.append(part)
+            ingestion_parts.append(part)
             current_message = None
             continue
         field_path_parts.append(field_path_name(field))
-        ingestion_object_parts.append(ingestion_object_name(field))
+        ingestion_parts.append(ingestion_name(field))
         nested_message = context.message_by_full_name.get(field.type_name.lstrip("."))
         current_message = (
             nested_message
@@ -678,7 +687,7 @@ def display_field_path(context: FileContext, field_path: str) -> str:
         )
     if not field_path_parts:
         return field_path_label(field_path, field_path)
-    return field_path_label(".".join(field_path_parts), ".".join(ingestion_object_parts))
+    return field_path_label(".".join(field_path_parts), ".".join(ingestion_parts))
 
 
 def event_field_path_label(context: FileContext, field_path: str) -> str | None:
@@ -689,13 +698,13 @@ def event_field_path_label(context: FileContext, field_path: str) -> str | None:
         return None
 
     field_path_parts: list[str] = []
-    ingestion_object_parts: list[str] = []
+    ingestion_parts: list[str] = []
     current_message: MessageDoc | None = root
     parts = field_path.split(".")
     for part_idx, part in enumerate(parts):
         if current_message is None:
             field_path_parts.extend(parts[part_idx:])
-            ingestion_object_parts.extend(parts[part_idx:])
+            ingestion_parts.extend(parts[part_idx:])
             break
 
         field = find_field_by_name(current_message, part)
@@ -703,11 +712,11 @@ def event_field_path_label(context: FileContext, field_path: str) -> str | None:
             if part_idx == 0:
                 return None
             field_path_parts.extend(parts[part_idx:])
-            ingestion_object_parts.extend(parts[part_idx:])
+            ingestion_parts.extend(parts[part_idx:])
             break
 
         field_path_parts.append(field_path_name(field))
-        ingestion_object_parts.append(ingestion_object_name(field))
+        ingestion_parts.append(ingestion_name(field))
         nested_message = context.message_by_full_name.get(field.type_name.lstrip("."))
         current_message = (
             nested_message
@@ -718,7 +727,7 @@ def event_field_path_label(context: FileContext, field_path: str) -> str | None:
 
     if not field_path_parts:
         return None
-    return field_path_label(".".join(field_path_parts), ".".join(ingestion_object_parts))
+    return field_path_label(".".join(field_path_parts), ".".join(ingestion_parts))
 
 
 def format_event_path_token(context: FileContext, token: str) -> str:
@@ -781,10 +790,10 @@ def render_field(
         [
             (
                 "Type",
-                f"{format_type(context, field, section='messages')} "
+                f"{format_type(context, field, section='records')} "
                 f"({field_cardinality(context, field)})",
             ),
-            ("Oneof", f"`{oneof_name(message, field)}`" if oneof_name(message, field) else ""),
+            ("Union", f"`{oneof_name(message, field)}`" if oneof_name(message, field) else ""),
             ("Deprecated", "`true`" if field.options.deprecated else ""),
         ]
     )
@@ -834,12 +843,25 @@ def render_message_guidance(
         "Population guidance from the Google UDM usage guide.",
         "",
     ]
+    lines.extend(render_message_guidance_fields(context, fields, heading_level=3))
+    return lines
+
+
+def render_message_guidance_fields(
+    context: FileContext,
+    fields: tuple[FieldGuidance, ...],
+    *,
+    heading_level: int,
+) -> list[str]:
+    lines: list[str] = []
+    heading = "#" * heading_level
+    example_heading = "#" * (heading_level + 1)
     for field in sorted(fields, key=lambda item: item.field_path.lower()):
-        lines.extend([f"### {display_field_path(context, field.field_path)}", ""])
+        lines.extend([f"{heading} {display_field_path(context, field.field_path)}", ""])
         for item in field.items:
             lines.extend(render_guidance_bullet(item, context))
         if field.examples:
-            lines.extend(["", "#### Examples", ""])
+            lines.extend(["", f"{example_heading} Examples", ""])
             for example in field.examples:
                 lines.append(f"- {apply_endpoint_language(example)}")
         lines.append("")
@@ -873,7 +895,7 @@ def render_entity_type_guidance(
         "`metadata.entity_type` / `metadata.entityType` to the matching",
         "`EntityMetadata.EntityType` value.",
         "",
-        "The entity types below are values for the Entity object's",
+        "The entity types below are values for the Entity record's",
         "`metadata.entity_type` / `metadata.entityType`. In an",
         "`entities.import` request, the surrounding `inlineSource.logType` is",
         "separate: it names the source log type for the context data, for",
@@ -1051,7 +1073,7 @@ def render_message_page(
         lines.extend([comment, ""])
     oneofs = active_oneofs(message)
     if oneofs:
-        lines.extend(["## Oneofs", ""])
+        lines.extend(["## Unions", ""])
         for name, fields in oneofs:
             field_list = ", ".join(field_name_label(field) for field in fields)
             lines.append(f"- `{name}`: {field_list}")
@@ -1067,6 +1089,103 @@ def render_message_page(
         lines.extend(render_entity_type_guidance(context, entity_guidance))
 
     return clean_markdown("\n".join(lines))
+
+
+def yaml_base_type(
+    context: FileContext,
+    field: descriptor_pb2.FieldDescriptorProto,
+) -> str:
+    if (
+        field.type == descriptor_pb2.FieldDescriptorProto.TYPE_MESSAGE
+        and field.type_name.lstrip(".") in context.map_entry_by_full_name
+    ):
+        entry = context.map_entry_by_full_name[field.type_name.lstrip(".")]
+        key, value = entry.descriptor.field
+        return f"map<{yaml_base_type(context, key)}, {yaml_base_type(context, value)}>"
+
+    if field.type in SCALAR_TYPES:
+        return SCALAR_TYPES[field.type]
+
+    if field.type in (
+        descriptor_pb2.FieldDescriptorProto.TYPE_MESSAGE,
+        descriptor_pb2.FieldDescriptorProto.TYPE_ENUM,
+    ):
+        full_name = field.type_name.lstrip(".")
+        if full_name in WELL_KNOWN_TYPES:
+            return WELL_KNOWN_TYPES[full_name]
+        message = context.message_by_full_name.get(full_name)
+        if message is not None and not message.descriptor.options.map_entry:
+            return type_label(context, full_name)
+        enum = context.enum_by_full_name.get(full_name)
+        if enum is not None:
+            return type_label(context, full_name)
+        return full_name
+
+    return FIELD_TYPE_NAMES.Name(field.type).removeprefix("TYPE_").lower()
+
+
+def yaml_field_type(
+    context: FileContext,
+    field: descriptor_pb2.FieldDescriptorProto,
+) -> str:
+    base_type = yaml_base_type(context, field)
+    cardinality = field_cardinality(context, field)
+    if cardinality == "map":
+        return base_type
+    if cardinality == "repeated":
+        return f"list<{base_type}>"
+    if cardinality == "optional":
+        return f"optional<{base_type}>"
+    return base_type
+
+
+def render_message_yaml(
+    context: FileContext,
+    message_doc: MessageDoc,
+) -> str:
+    message = message_doc.descriptor
+    comment = apply_endpoint_language(
+        source_comment(context, message_doc.file_name, message_doc.path)
+    )
+    data: dict[str, Any] = {}
+    if comment:
+        data["summary"] = comment
+
+    oneofs = active_oneofs(message)
+    if oneofs:
+        data["unions"] = {
+            name: {
+                "fields": [field_path_name(field) for field in fields],
+            }
+            for name, fields in oneofs
+        }
+
+    fields: dict[str, Any] = {}
+    for field_idx, field in enumerate(message.field):
+        field_comment = apply_endpoint_language(
+            source_comment(context, message_doc.file_name, (*message_doc.path, 2, field_idx))
+        )
+        field_data: dict[str, Any] = {
+            "type": yaml_field_type(context, field),
+        }
+        if ingestion_name(field) != field_path_name(field):
+            field_data["ingestion_name"] = ingestion_name(field)
+        field_oneof = oneof_name(message, field)
+        if field_oneof:
+            field_data["union"] = field_oneof
+        if field.options.deprecated:
+            field_data["deprecated"] = True
+        if field_comment:
+            field_data["description"] = field_comment
+        fields[field_path_name(field)] = field_data
+    data["fields"] = fields
+
+    return yaml.safe_dump(
+        data,
+        sort_keys=False,
+        allow_unicode=False,
+        width=120,
+    )
 
 
 def render_enum_value(
@@ -1843,13 +1962,42 @@ def brief_comment(comment: str, limit: int = 140) -> str:
     return first_paragraph[: limit - 1].rstrip() + "..."
 
 
-def render_messages_overview(context: FileContext) -> str:
-    lines = ["# Messages", ""]
+def render_records_overview(context: FileContext) -> str:
+    lines = [
+        "# Records",
+        "",
+        "Record detail files are YAML leaves because UDM records have fixed",
+        "fields, type shapes, unions, maps, deprecation, and dual field-name",
+        "forms.",
+        "",
+        "## Type Syntax",
+        "",
+        "Each record YAML field key is the field-path name. The `type` value",
+        "uses a compact shape language:",
+        "",
+        "- `T`: one scalar, enum, or record value of type `T`, for example",
+        "  `string`, `EventType`, or `SecurityResult`.",
+        "- `list<T>`: repeated values of `T`.",
+        "- `optional<T>`: optional value of `T`; the field may be absent.",
+        "- `map<K, V>`: lookup with data-defined keys of type `K` and values",
+        "  of type `V`.",
+        "- `variant`: value whose runtime shape is not fixed by the UDM schema.",
+        "",
+        "Named record types are listed below. Enum values are listed in",
+        "[Enums](enums.md). `ingestion_name` appears only when Google SecOps",
+        "UDM ingestion uses a different field name than the YAML field key.",
+        "A `union` is a mutually exclusive field group; set at most one field",
+        "from the group. A record has schema-defined fields; a map has keys",
+        "supplied by the data.",
+        "",
+        "## Record Index",
+        "",
+    ]
     for message in generated_messages(context):
         comment = apply_endpoint_language(source_comment(context, message.file_name, message.path))
         suffix = f" - {brief_comment(comment)}" if comment else ""
         lines.append(
-            f"- [{type_label(context, message.full_name)}](messages/{message.slug}.md)"
+            f"- [{type_label(context, message.full_name)}](records/{message.slug}.yaml)"
             f"{suffix}"
         )
     return clean_markdown("\n".join(lines))
@@ -1875,25 +2023,27 @@ def render_field_name_forms_section(context: FileContext) -> list[str]:
     lines = [
         "## Field Name Forms",
         "",
-        "Generated field headings may show two spellings:",
+        "Record YAML files use field keys as the dotted field-path form.",
+        "When Google SecOps ingestion uses a different field name, the field",
+        "record adds an `ingestion_name` value:",
         "",
-        "`field_path_form` / `ingestionObjectForm`",
+        "`event_type: { ingestion_name: eventType, ... }`",
         "",
-        "Use the left-side spelling for field names in YARA-L, Detect Engine,",
-        "CBN, and other dotted field-path contexts. Keep the root and prefix",
+        "Use the YAML field key for field names in YARA-L, Detect Engine, CBN,",
+        "and other dotted field-path contexts. Keep the root and prefix",
         "required by that context, for example `$event.metadata.event_type`.",
-        "Use the right-side spelling when mapping logs into UDM event or entity",
-        "objects for Google SecOps UDM API ingestion, for example",
-        "`metadata.eventType`. If a heading has only one name, both contexts",
-        "use the same spelling.",
+        "Use `ingestion_name` when mapping logs into UDM event or entity",
+        "records for Google SecOps UDM API ingestion, for example",
+        "`metadata.eventType`. If `ingestion_name` is absent, both contexts",
+        "use the YAML field key.",
         "",
     ]
     irregularities = irregular_field_name_mappings(context)
     if irregularities:
         lines.extend(["Current irregular mappings:", ""])
-        for message, field_path, ingestion_object in irregularities:
+        for message, field_path, ingestion in irregularities:
             lines.append(
-                f"- `{message}.{field_path}` / `{message}.{ingestion_object}`"
+                f"- `{message}.{field_path}` / `{message}.{ingestion}`"
             )
         lines.append("")
     return lines
@@ -1903,13 +2053,14 @@ def render_field_path_name_section() -> list[str]:
     return [
         "## Field path names",
         "",
-        "This page focuses on the left-side field-path form from generated",
-        "field headings. If a message page shows `event_type` / `eventType`,",
-        "use `event_type` with the prefix required by the rule or normalizer",
-        "context, for example `$event.metadata.event_type`.",
+        "This page focuses on the field-path form from generated record YAML.",
+        "If a record YAML field key is `event_type` and its field record has",
+        "`ingestion_name: eventType`, use `event_type` with the prefix",
+        "required by the rule or normalizer context, for example",
+        "`$event.metadata.event_type`.",
         "",
-        "Use the right-side form when mapping logs into UDM event or entity",
-        "objects for Google SecOps UDM API ingestion, for example",
+        "Use `ingestion_name` values when mapping logs into UDM event or",
+        "entity records for Google SecOps UDM API ingestion, for example",
         "`metadata.eventType`.",
         "",
     ]
@@ -1993,13 +2144,13 @@ def validate_guidance_against_schema(context: FileContext, guidance: DocsGuidanc
         if family == "idm":
             warnings.warn(
                 f"Preserving product-only usage guidance for {field.field_path}; "
-                "it is not a UDM message field.",
+                "it is not a UDM record field.",
                 stacklevel=2,
             )
         elif family not in known_messages:
             warnings.warn(
                 f"Preserving usage guidance for {field.field_path}; "
-                f"{family} is not a top-level or nested UDM message name.",
+                f"{family} is not a top-level or nested UDM record name.",
                 stacklevel=2,
             )
 
@@ -2043,7 +2194,7 @@ def render_datatypes_page(guidance: DocsGuidance) -> str:
     lines = [
         "# Datatypes",
         "",
-        "Common type labels used in the message field reference.",
+        "Common type labels used in the record field reference.",
         "",
     ]
     if not guidance.datatypes:
@@ -2113,9 +2264,78 @@ def render_guidance_docs(
         Path("field-paths.md"): render_field_paths_page(context, guidance),
         Path("datatypes.md"): render_datatypes_page(guidance),
         Path("event-type-categories.md"): render_event_type_categories_page(guidance),
+        Path("entity-types.md"): render_entity_types_page(context, guidance),
+        Path("record-guidance.md"): render_message_guidance_page(context, guidance),
     }
 
     return docs
+
+
+def render_entity_types_page(context: FileContext, guidance: DocsGuidance) -> str:
+    lines = [
+        "# Entity Types",
+        "",
+        "Required fields from the Google UDM usage guide. Set",
+        "`metadata.entity_type` / `metadata.entityType` to the matching",
+        "[`EntityMetadata.EntityType`](enums/entity_metadata_entity_type.md) value.",
+        "",
+        "The entity types below are values for the Entity record's",
+        "`metadata.entity_type` / `metadata.entityType`. In an",
+        "`entities.import` request, the surrounding `inlineSource.logType` is",
+        "separate: it names the source log type for the context data, for",
+        "example `AZURE_AD_CONTEXT`, not a UDM entity type such as `USER` or",
+        "`ASSET`. See Google's `entities.import` reference:",
+        "https://docs.cloud.google.com/chronicle/docs/reference/rest/v1beta/projects.locations.instances.entities/import",
+        "",
+    ]
+    if not guidance.entity_guidance:
+        lines.extend(["No entity type guidance was extracted.", ""])
+        return clean_markdown("\n".join(lines))
+
+    for entity in sorted(guidance.entity_guidance, key=lambda item: item.entity_type):
+        lines.extend([f"## `{entity.entity_type}`", ""])
+        for requirement in entity.requirements:
+            lines.extend(render_entity_requirement(context, requirement))
+        lines.append("")
+    return clean_markdown("\n".join(lines))
+
+
+def render_message_guidance_page(context: FileContext, guidance: DocsGuidance) -> str:
+    groups, unmatched = group_field_guidance_by_message(context, guidance)
+    lines = [
+        "# Record Field Guidance",
+        "",
+        "Population guidance from the Google UDM usage guide for specific record fields.",
+        "Use this page for prose guidance and the linked YAML leaves for exact",
+        "record fields.",
+        "",
+    ]
+    wrote_section = False
+    for message in generated_messages(context):
+        fields = groups.get(message.slug, ())
+        if not fields:
+            continue
+        wrote_section = True
+        label = type_label(context, message.full_name)
+        lines.extend(
+            [
+                f"## {label}",
+                "",
+                f"Record: [records/{message.slug}.yaml](records/{message.slug}.yaml)",
+                "",
+            ]
+        )
+        lines.extend(render_message_guidance_fields(context, fields, heading_level=3))
+
+    if unmatched:
+        wrote_section = True
+        lines.extend(["## Other Guidance", ""])
+        lines.extend(render_message_guidance_fields(context, unmatched, heading_level=3))
+
+    if not wrote_section:
+        lines.extend(["No record field guidance was extracted.", ""])
+
+    return clean_markdown("\n".join(lines))
 
 
 def render_top_level_structure(context: FileContext) -> list[str]:
@@ -2124,7 +2344,7 @@ def render_top_level_structure(context: FileContext) -> list[str]:
         ("Entity", context.message_by_full_name.get(f"{context.file_proto.package}.Entity")),
     ]
     lines = [
-        "## Top-level structure",
+        "## Top-level Records",
         "",
         "UDM uses two top-level data shapes: event records for telemetry and",
         "entity records for contextual objects such as users, assets, domains,",
@@ -2164,14 +2384,14 @@ def render_skill_markdown(
             [
                 "---",
                 "name: tenzir-google-udm",
-                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) field structure, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, messages, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.",
+                "description: Answer questions about Google SecOps / Chronicle UDM (Unified Data Model) record fields, normalization guidance, mapping logs to UDM event or entity objects, and generating UDM API ingestion payloads. Use whenever the user asks about UDM fields, event types, entity types, required fields, field formats, field-path prefixes for YARA-L, rules, Detect Engine, or CBN, records, enums, entity nouns, metadata.event_type / metadata.eventType, security_result / securityResult, network, Chronicle normalization, UDM API payloads, or Google SecOps ingestion endpoints.",
                 "---",
                 "",
                 "# Google UDM",
                 "",
                 "Google UDM (Unified Data Model) is the Google SecOps data model",
                 "for normalized security telemetry. It represents events and",
-                "entities in a common structure so logs from different products",
+                "entities as common records so logs from different products",
                 "can describe actors, assets, resources, network activity,",
                 "security outcomes, and product context with consistent field",
                 "names and enum values.",
@@ -2189,21 +2409,21 @@ def render_skill_markdown(
                 "",
                 "| Question pattern | Start here |",
                 "| --- | --- |",
-                "| What fields exist? | [Messages](messages.md) and the specific message page |",
+                "| What fields exist? | [Records](records.md) and the specific record YAML leaf |",
                 "| What values can enum X take? | [Enums](enums.md) -> specific enum page |",
-                "| How should I map this event? | [Event types](event-types.md), then relevant message pages |",
+                "| How should I map this event? | [Event types](event-types.md), [Record field guidance](record-guidance.md), then relevant record YAML leaves |",
                 "| Which `metadata.event_type` / `metadata.eventType` should I use? | [Event type categories](event-type-categories.md), then [Event types](event-types.md) |",
-                "| Required or forbidden fields? | [Event types](event-types.md), [Entity](messages/entity.md), or relevant message page |",
-                "| Field formats or examples? | Relevant message page guidance and [Datatypes](datatypes.md) |",
+                "| Required or forbidden fields? | [Event types](event-types.md), [Entity types](entity-types.md), and [Record field guidance](record-guidance.md) |",
+                "| Field formats or examples? | [Record field guidance](record-guidance.md) and [Datatypes](datatypes.md) |",
                 "| How do I reference UDM fields in rules, Detect Engine, or CBN? | [Field paths](field-paths.md) |",
-                "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM message](messages/udm.md) and [Noun](messages/noun.md) |",
-                "| What fields exist for network/protocol details? | [Network](messages/network.md) and protocol messages such as DNS/HTTP/TLS/DHCP |",
-                "| What fields exist for entities? | [Entity](messages/entity.md) and [EntityMetadata](messages/entity_metadata.md) |",
-                "| What is the top-level event shape? | This file, then [UDM](messages/udm.md) |",
+                "| What are `principal`, `src`, `target`, `observer`, `intermediary`, or `about`? | [UDM record](records/udm.yaml) and [Noun](records/noun.yaml) |",
+                "| What fields exist for network/protocol details? | [Network](records/network.yaml) and protocol records such as DNS/HTTP/TLS/DHCP |",
+                "| What fields exist for entities? | [Entity](records/entity.yaml), [Entity types](entity-types.md), and [EntityMetadata](records/entity_metadata.yaml) |",
+                "| What is the top-level event record? | This file, then [UDM](records/udm.yaml) |",
                 "",
                 "When a question asks for modeling guidance, read both layers.",
-                "Message, event, or entity guidance explains how Google says to",
-                "populate the data; message pages show the exact field structure.",
+                "Event, entity, and record guidance explains how Google says to",
+                "populate the data; record YAML leaves show the exact fields.",
                 "If they differ, state both facts instead of silently",
                 "reconciling them.",
                 "",
@@ -2230,27 +2450,16 @@ def build_docs(
     context: FileContext,
     guidance: DocsGuidance | None = None,
 ) -> dict[Path, str]:
-    field_guidance_groups: dict[str, tuple[FieldGuidance, ...]] = {}
-    if guidance is not None:
-        field_guidance_groups, _unmatched_field_guidance = group_field_guidance_by_message(
-            context,
-            guidance,
-        )
-
     docs: dict[Path, str] = {
         Path("SKILL.md"): render_skill_markdown(context, guidance),
-        Path("messages.md"): render_messages_overview(context),
+        Path("records.md"): render_records_overview(context),
         Path("enums.md"): render_enums_overview(context),
     }
 
     for message in generated_messages(context):
-        docs[Path("messages") / f"{message.slug}.md"] = render_message_page(
+        docs[Path("records") / f"{message.slug}.yaml"] = render_message_yaml(
             context,
             message,
-            field_guidance_groups.get(message.slug, ()),
-            guidance.entity_guidance
-            if guidance is not None and message.qualified_name == "Entity"
-            else (),
         )
 
     for enum in context.enums:

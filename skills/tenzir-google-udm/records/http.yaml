@@ -1,0 +1,19 @@
+summary: Specify the full URL of the HTTP request within "target". Also specify any uploaded or downloaded file information
+  within "source" or "target".
+fields:
+  method:
+    type: string
+    description: The HTTP request method (e.g. "GET", "POST", "PATCH", "DELETE").
+  referral_url:
+    type: string
+    ingestion_name: referralUrl
+    description: The URL for the HTTP referer.
+  user_agent:
+    type: string
+    ingestion_name: userAgent
+    description: The User-Agent request header which includes the application type, operating system, software vendor or software
+      version of the requesting software user agent.
+  response_code:
+    type: int32
+    ingestion_name: responseCode
+    description: The response status code, for example 200, 302, 404, or 500.
