@@ -11,6 +11,8 @@ append(xs:list, x:any) -> list
 
 The `append` function returns the list `xs` with `x` inserted at the end. The expression `xs.append(x)` is equivalent to `[...xs, x]`.
 
+If `xs` is `null`, it is treated like an empty list, so `null.append(x)` returns `[x]`.
+
 ## Examples
 
 ### Append a number to a list
@@ -22,6 +24,21 @@ xs = xs.append(3)
 
 ```tql
 {xs: [1, 2, 3]}
+```
+
+### Append to a nullable list
+
+```tql
+from {xs: null}
+xs = xs.append(3)
+```
+
+```tql
+{
+  xs: [
+    3,
+  ],
+}
 ```
 
 ## See Also

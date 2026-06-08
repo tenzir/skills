@@ -92,29 +92,32 @@ service = {
 }
 ```
 
-Use `else {}` when a record fragment may be missing:
+Use optional access when a record fragment may be missing. If the spread expression evaluates to `null`, it contributes no fields, so an explicit `else {}` fallback is not necessary:
 
 ```tql
-from {base: {id: 1, name: "Alice"}}
+from {account: {id: 1, name: "Alice"}}
 user = {
-  ...base,
-  ...(profile? else {}),
+  ...account,
+  ...account.profile?,
   active: true,
 }
 ```
 
 ```tql
 {
-  base: {id: 1, name: "Alice"},
+  account: {
+    id: 1,
+    name: "Alice",
+  },
   user: {
     id: 1,
     name: "Alice",
-    active: true
-  }
+    active: true,
+  },
 }
 ```
 
-The [`merge`](/reference/functions/merge.md) function returns the same result for two records, but prefer spread in transformation code when you construct the resulting record.
+The [`merge`](/reference/functions/merge.md) function returns the same result for two records, including `null` fragments, but prefer spread in transformation code when you construct the resulting record.
 
 ## Transform record values
 

@@ -381,9 +381,46 @@ from {
 The spread operator `...` expands lists into other lists:
 
 ```tql
-let $base = [1, 2]
-let $extended = [...$base, 3]  // Results in [1, 2, 3]
+from {base: [1, 2]}
+extended = [...base, 3]
 ```
+
+```tql
+{
+  base: [
+    1,
+    2,
+  ],
+  extended: [
+    1,
+    2,
+    3,
+  ],
+}
+```
+
+Spreading `null` contributes no elements and emits no warning. Spreading any other non-list value emits a warning and contributes no elements.
+
+```tql
+from {xs: [1, 2], ys: null}
+zs = [...xs, ...ys]
+```
+
+```tql
+{
+  xs: [
+    1,
+    2,
+  ],
+  ys: null,
+  zs: [
+    1,
+    2,
+  ],
+}
+```
+
+Use optional access on the access expression, for example `...x.ys?`, when the list field might be missing.
 
 ### Records
 
@@ -422,6 +459,8 @@ this = {type: type, ...context}
 ```
 
 Fields must be unique, and later values overwrite earlier ones.
+
+Spreading `null` contributes no fields and emits no warning. Spreading any other non-record value emits a warning and contributes no fields.
 
 The spread operator `...` expands records:
 

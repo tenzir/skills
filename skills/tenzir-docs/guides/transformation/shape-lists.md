@@ -73,28 +73,47 @@ with_value = [...list1, 10, ...list2]
 }
 ```
 
-Use `else []` when a list fragment may be missing:
+Use optional access when a list fragment may be missing. If the spread expression evaluates to `null`, it contributes no elements, so an explicit `else []` fallback is not necessary:
 
 ```tql
 from {
-  custom_tags: ["vip"],
-  system_tags: ["imported", "reviewed"],
+  event: {},
 }
 labels = [
-  ...(custom_tags? else []),
-  ...(system_tags? else []),
+  "production",
+  ...event.tags?,
 ]
 ```
 
 ```tql
 {
-  custom_tags: ["vip"],
-  system_tags: ["imported", "reviewed"],
-  labels: ["vip", "imported", "reviewed"]
+  event: {},
+  labels: [
+    "production",
+  ],
 }
 ```
 
-The [`concatenate`](/reference/functions/concatenate.md) function returns the same result for two lists, but prefer spread in transformation code when you construct the resulting list.
+This also works when a nullable list is transformed before spreading. If [`map`](/reference/functions/map.md) receives `null`, it returns `null`, and the spread contributes no elements:
+
+```tql
+from {xs: null}
+ys = [
+  ...xs.map(x => x + 1),
+  0,
+]
+```
+
+```tql
+{
+  xs: null,
+  ys: [
+    0,
+  ],
+}
+```
+
+The [`concatenate`](/reference/functions/concatenate.md) function returns the same result for two lists, including `null` fragments, but prefer spread in transformation code when you construct the resulting list.
 
 ## Transform list elements
 

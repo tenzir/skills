@@ -135,6 +135,17 @@ from {status: 200, path: "/api"},
      {status: 404, path: "/missing"}  // No comma here
 ```
 
+```tql
+{
+  status: 200,
+  path: "/api",
+}
+{
+  status: 404,
+  path: "/missing",
+}
+```
+
 Quick rule
 
 Trailing commas are only allowed in contexts with parentheses (’()’), brackets (’\[]’), or braces ('').
@@ -344,6 +355,21 @@ match action {
 }
 ```
 
+```tql
+{
+  action: "allow",
+  verdict: "allowed",
+}
+{
+  action: "deny",
+  verdict: "blocked",
+}
+{
+  action: "reset",
+  verdict: "unknown",
+}
+```
+
 Use guarded arms when the case also depends on another field:
 
 ```tql
@@ -364,6 +390,29 @@ match status {
   _ => {
     action = "ignore"
   }
+}
+```
+
+```tql
+{
+  status: 503,
+  retries: 1,
+  action: "retry",
+}
+{
+  status: 503,
+  retries: 0,
+  action: "page",
+}
+{
+  status: 429,
+  retries: 0,
+  action: "throttle",
+}
+{
+  status: 404,
+  retries: 0,
+  action: "ignore",
 }
 ```
 
@@ -441,11 +490,30 @@ For records, later fields overwrite earlier fields. Put defaults first and overr
 ❌ Nested function calls hide the target shape:
 
 ```tql
+from {
+  defaults: {host: "localhost", port: 80},
+  overrides: {port: 443},
+  base_tags: ["prod"],
+  extra_tags: ["api"],
+}
+
+
 service = merge(merge(defaults, overrides), {tls: true})
 tags = concatenate(concatenate(base_tags, ["monitored"]), extra_tags)
 ```
 
-When a fragment may be missing, use `...(record? else {})` for records and `...(list? else [])` for lists.
+```tql
+{
+  defaults: {host: "localhost", port: 80},
+  overrides: {port: 443},
+  base_tags: ["prod"],
+  extra_tags: ["api"],
+  service: {host: "localhost", port: 443, tls: true},
+  tags: ["prod", "monitored", "api"]
+}
+```
+
+When a fragment may be missing, use optional access such as `...profile?` or `...custom_tags?`.
 
 Keep [`merge`](/reference/functions/merge.md) and [`concatenate`](/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
 
@@ -514,6 +582,20 @@ replace content.field, what="-", with=null
 drop_null_fields content
 ```
 
+```tql
+{
+  content: {},
+}
+{
+  content: {},
+}
+{
+  content: {
+    field: "value",
+  },
+}
+```
+
 ❌ Complex conditional logic:
 
 ```tql
@@ -524,6 +606,20 @@ if content.has("field") {
   if content.field == "-" or content.field == null {
     drop content.field
   }
+}
+```
+
+```tql
+{
+  content: {},
+}
+{
+  content: {},
+}
+{
+  content: {
+    field: "value",
+  },
 }
 ```
 
@@ -1112,6 +1208,39 @@ match http_status {
   _ => {
     ocsf.status_id = 0  // Unknown
   }
+}
+```
+
+```tql
+{
+  http_status: 200,
+  ocsf: {
+    status_id: 1,
+  },
+}
+{
+  http_status: 302,
+  ocsf: {
+    status_id: 1,
+  },
+}
+{
+  http_status: 404,
+  ocsf: {
+    status_id: 2,
+  },
+}
+{
+  http_status: 503,
+  ocsf: {
+    status_id: 2,
+  },
+}
+{
+  http_status: 100,
+  ocsf: {
+    status_id: 0,
+  },
 }
 ```
 

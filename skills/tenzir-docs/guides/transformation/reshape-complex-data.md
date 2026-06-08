@@ -381,6 +381,8 @@ merged = {
 }
 ```
 
+Optional fragments compose the same way: use `...user.profile?` when a fragment may be missing. If the spread expression evaluates to `null`, it contributes no fields.
+
 ## Handle dynamic schemas
 
 Work with data that has varying structures.
