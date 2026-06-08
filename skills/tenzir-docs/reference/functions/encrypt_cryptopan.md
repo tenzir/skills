@@ -24,7 +24,7 @@ A 64-character seed that describes a hexadecimal value. When the seed is shorter
 ### Encrypt IP address fields
 
 ```tql
-let $seed = "deadbeef" // use secret() function in practice
+let $seed = "deadbeef"
 from {
   src: encrypt_cryptopan(114.13.11.35, seed=$seed),
   dst: encrypt_cryptopan(114.56.11.200, seed=$seed),
@@ -43,3 +43,4 @@ from {
 * [`community_id`](/reference/functions/community_id.md)
 * [`decrypt_cryptopan`](/reference/functions/decrypt_cryptopan.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

@@ -36,3 +36,4 @@ from {x: hash_sha256("foo")}
 * [`hash_sha3_512`](/reference/functions/hash_sha3_512.md)
 * [`hash_xxh3`](/reference/functions/hash_xxh3.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

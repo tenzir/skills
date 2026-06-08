@@ -68,3 +68,4 @@ from {
 * [`community_id`](/reference/functions/community_id.md)
 * [`encrypt_cryptopan`](/reference/functions/encrypt_cryptopan.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

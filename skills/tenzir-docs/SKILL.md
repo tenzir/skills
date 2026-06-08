@@ -260,6 +260,10 @@ Real-world data is rarely flat. It contains nested structures, arrays of objects
 
 Data comes in many formats. Converting between formats is essential for integration, export, and interoperability. This guide shows you how to transform data between JSON, CSV, YAML, and other common formats using TQL’s print functions.
 
+##### [Mask sensitive data](guides/transformation/mask-sensitive-data.md)
+
+This guide shows you how to mask sensitive fields such as IP addresses, email addresses, account identifiers, and credentials. You’ll learn when to anonymize, hash, redact, or partially reveal a value, and how to combine TQL functions to apply each pattern consistently across your pipelines.
+
 #### [Normalization](guides/normalization.md)
 
 This guide provides an overview of data normalization in TQL. Normalization transforms raw, inconsistent data into a clean, standardized format that’s ready for analysis, storage, and sharing.

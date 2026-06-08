@@ -63,3 +63,4 @@ from {x: "hello world".pad_start(5)}
 * [`trim`](/reference/functions/trim.md)
 * [`trim_start`](/reference/functions/trim_start.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

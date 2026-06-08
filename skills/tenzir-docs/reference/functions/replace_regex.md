@@ -55,3 +55,4 @@ from {x: replace_regex("hellolo", "l+", "y", max=1)}
 
 * [`replace`](/reference/functions/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)
