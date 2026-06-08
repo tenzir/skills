@@ -227,6 +227,8 @@ This approach is useful when you import a rule set that already follows a field 
 
 ## Transpile a process rule to OCSF TQL
 
+You can also implement a Sigma detection in TQL directly, without going through the [`sigma`](/reference/operators/sigma.md) operator. This keeps your events in their canonical shape — useful when you’ve normalized to a schema such as OCSF and don’t want to rename fields back to Sigma’s Windows-style selectors only to satisfy a rule.
+
 A recent upstream Sigma process-creation rule, `proc_creation_win_print_dump_sensitive_files.yml` (`Sensitive File Dump Via Print.EXE`, April 28, 2026), detects `print.exe` abuse for copying sensitive Windows credential stores such as `SAM`, `SECURITY`, `SYSTEM`, and `ntds.dit`.
 
 The relevant source YAML is:
