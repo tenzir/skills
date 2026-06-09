@@ -47,6 +47,14 @@ DNS Activity events report DNS queries and answers as seen on the network.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
+### `response_additional`
+
+- **Type**: [`dns_section`](../objects/dns_section.md)
+- **Requirement**: optional
+- **Group**: context
+
+The Additional section of the DNS response message sent by the server, containing supplementary resource records and an optional TSIG record. A DNS message has at most one TSIG record; for a transaction with both query and response, the query TSIG is in `query_additional.tsig` and the response TSIG is in `response_additional.tsig`.
+
 ### `answers`
 
 - **Type**: [`dns_answer`](../objects/dns_answer.md)
@@ -54,6 +62,14 @@ The normalized identifier of the activity that triggered the event. Each event c
 - **Group**: primary
 
 The Domain Name System (DNS) answers.
+
+### `authority`
+
+- **Type**: [`dns_resource_record`](../objects/dns_resource_record.md)
+- **Requirement**: optional
+- **Group**: context
+
+The DNS Authority section resource records. Contains NS records pointing to authoritative name servers, or a SOA record for negative responses (NXDOMAIN).
 
 ### `connection_info`
 
@@ -70,6 +86,59 @@ The network connection information.
 
 The network destination endpoint.
 
+### `flag_ids`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Group**: primary
+- **Sibling**: `flags`
+
+#### Enum values
+
+- `1`: `Authoritative Answer` - The responding server is authoritative for the domain. Set by the server in responses only.
+- `2`: `Truncated Response` - The response was truncated because it exceeded the maximum UDP message size.
+- `3`: `Recursion Desired` - The client requests that the server perform recursive resolution. Set by the client and echoed in the response.
+- `4`: `Recursion Available` - The server supports recursive resolution. Set by the server in responses.
+- `5`: `Authentic Data` - All data in the response has been cryptographically verified (DNSSEC). Set by the server.
+- `6`: `Checking Disabled` - The client requests that the server disable DNSSEC validation. Set by the client and echoed in the response.
+
+The list of DNS message header flag IDs. For Query events, populated from the query header (RD, CD). For Response and Traffic events, populated from the response header, which is the complete and authoritative source as it echoes all client-set flags and adds server-set flags.
+
+### `flags`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: context
+
+The list of DNS message header flags, normalized to the captions of the `flag_ids` values.
+
+### `opcode`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: context
+
+The DNS opcode specifies the type of the query message.
+
+### `opcode_id`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Group**: primary
+
+#### Enum values
+
+- `0`: `Query` - Standard query
+- `1`: `Inverse Query` - Inverse query, obsolete
+- `2`: `Status` - Server status request
+- `3`: `Reserved` - Reserved, not used
+- `4`: `Notify` - Zone change notification
+- `5`: `Update` - Dynamic DNS update
+- `6`: `DSO Message` - DNS Stateful Operations (DSO)
+- `99`: `Other` - The DNS Opcode is not defined by the RFC. See the `opcode` attribute, which contains a data source specific value.
+
+The DNS opcode ID specifies the normalized query message type as defined in RFC 5395.
+
 ### `query`
 
 - **Type**: [`dns_query`](../objects/dns_query.md)
@@ -77,6 +146,14 @@ The network destination endpoint.
 - **Group**: primary
 
 The Domain Name System (DNS) query.
+
+### `query_additional`
+
+- **Type**: [`dns_section`](../objects/dns_section.md)
+- **Requirement**: optional
+- **Group**: context
+
+The Additional section of the DNS query message sent by the client, containing supplementary resource records and an optional TSIG record. A DNS message has at most one TSIG record; for a transaction with both query and response, the query TSIG is in `query_additional.tsig` and the response TSIG is in `response_additional.tsig`.
 
 ### `query_time`
 
@@ -115,7 +192,7 @@ The DNS server response code, normalized to the caption of the rcode_id value. I
 - `9`: `NotAuth` - Not Authorized or Server Not Authoritative for zone.
 - `10`: `NotZone` - Name not contained in zone.
 - `11`: `DSOTYPENI` - DSO-TYPE Not Implemented.
-- `16`: `BADSIG_VERS` - TSIG Signature Failure or Bad OPT Version.
+- `16`: `BADVERS` - Bad EDNS OPT Version. Indicates that the client requested an EDNS version that the server does not support.
 - `17`: `BADKEY` - Key not recognized.
 - `18`: `BADTIME` - Signature out of time window.
 - `19`: `BADMODE` - Bad TKEY Mode.
@@ -127,7 +204,7 @@ The DNS server response code, normalized to the caption of the rcode_id value. I
 - `25`: `Reserved` - The codes deemed to be reserved by the RFC (codes: 3841-4095, 65535).
 - `99`: `Other` - The dns response code is not defined by the RFC.
 
-The normalized identifier of the DNS server response code. See [RFC-6895](https://datatracker.ietf.org/doc/html/rfc6895).
+The normalized identifier of the DNS server response code. See RFC 6895.
 
 ### `response_time`
 
@@ -144,3 +221,11 @@ The Domain Name System (DNS) response time.
 - **Group**: context
 
 The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.
+
+### `transaction_id`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Group**: primary
+
+The 16-bit DNS transaction identifier assigned by the client and echoed unchanged in the server response. This value is the same for both the query and response messages.

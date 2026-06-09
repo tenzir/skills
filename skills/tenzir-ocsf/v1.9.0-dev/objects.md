@@ -10,7 +10,6 @@
 
 - [Autonomous System](objects/autonomous_system.md)
 - [DCE/RPC](objects/dce_rpc.md)
-- [DNS](objects/_dns.md)
 - [DNS Answer](objects/dns_answer.md)
 - [DNS Query](objects/dns_query.md)
 - [Endpoint](objects/endpoint.md)
@@ -212,6 +211,8 @@
 - [Additional Restriction](objects/additional_restriction.md)
 - [Advisory](objects/advisory.md)
 - [AI Model](objects/ai_model.md)
+- [DNS Resource Record](objects/dns_resource_record.md)
+- [DNS Section](objects/dns_section.md)
 - [Download Info](objects/download_info.md)
 - [GPU Information](objects/gpu_info.md)
 - [IAM Role](objects/iam_role.md)
@@ -225,3 +226,4 @@
 - [Service Privilege Analysis](objects/service_privilege_analysis.md)
 - [Time Span](objects/timespan.md)
 - [Token](objects/token.md)
+- [TSIG](objects/tsig.md)
