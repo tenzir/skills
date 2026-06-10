@@ -18,6 +18,7 @@ The following skills are generated or synced from another repository and must
 not be edited by hand here:
 
 - `skills/tenzir-asim/`
+- `skills/tenzir-cef/`
 - `skills/tenzir-cim/`
 - `skills/tenzir-ecs/`
 - `skills/tenzir-edm/`

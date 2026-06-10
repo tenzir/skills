@@ -1,0 +1,98 @@
+esm_version: '7.9'
+source: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Data_Fields.htm
+description: ArcSight ESM event schema groups. Every processed event is a flat record of data
+  fields; each group page documents the fields of one schema area. Use the script alias, not
+  the label, in filters, rules, and CEF full names. Data types are copied verbatim from the
+  OpenText pages. The geographical and resource attribute suffixes that expand fields like
+  attackerGeo* are documented in docs/field-suffixes.md.
+groups:
+- name: attacker
+  title: Attacker Group
+  file: groups/attacker.yaml
+  fields: 42
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Attacker_Group.htm
+- name: connector
+  title: Connector Group
+  file: groups/connector.yaml
+  fields: 32
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Connector_Group.htm
+- name: category
+  title: Category Group
+  file: groups/category.yaml
+  fields: 10
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Category_Group.htm
+- name: destination
+  title: Destination Group
+  file: groups/destination.yaml
+  fields: 42
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Destination_Group.htm
+- name: device
+  title: Device Group
+  file: groups/device.yaml
+  fields: 43
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Device_Group.htm
+- name: device_custom
+  title: Device Custom Group
+  file: groups/device_custom.yaml
+  fields: 38
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Device_Custom_Group.htm
+- name: event
+  title: Event Group
+  file: groups/event.yaml
+  fields: 47
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Event_Group.htm
+- name: event_annotation
+  title: Event Annotation Group
+  file: groups/event_annotation.yaml
+  fields: 31
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Event_Annotation_Group.htm
+- name: file
+  title: File Group
+  file: groups/file.yaml
+  fields: 9
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/File_Group.htm
+- name: final_device
+  title: Final Device Group
+  file: groups/final_device.yaml
+  fields: 34
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Final_Device_Group.htm
+- name: flex
+  title: Flex Group
+  file: groups/flex.yaml
+  fields: 10
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Flex_Group.htm
+- name: manager
+  title: Manager Group
+  file: groups/manager.yaml
+  fields: 1
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Manager_Group.htm
+- name: old_file
+  title: Old File Group
+  file: groups/old_file.yaml
+  fields: 9
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Old_File_Group.htm
+- name: original_connector
+  title: Original Connector Group
+  file: groups/original_connector.yaml
+  fields: 30
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Original_Connector_Group.htm
+- name: request
+  title: Request Group
+  file: groups/request.yaml
+  fields: 12
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Request_Group.htm
+- name: source
+  title: Source Group
+  file: groups/source.yaml
+  fields: 42
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Source_Group.htm
+- name: target
+  title: Target Group
+  file: groups/target.yaml
+  fields: 42
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Target_Group.htm
+- name: threat
+  title: Threat Group
+  file: groups/threat.yaml
+  fields: 5
+  source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Threat_Group.htm

@@ -1,0 +1,237 @@
+name: target
+title: Target Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Target_Group.htm
+description: ''
+notes:
+- |-
+  Note about Geo fields:
+
+  Not all IPv6 addresses are mapped to Geo fields described below. In such cases, the corresponding Geo information for the IPv6 address will be blank on the Viewer panel.
+fields:
+- label: Address
+  alias: targetAddress
+  type: IP address
+  turbo_level: 1
+  description: |-
+    The IP address of the device hosting the attacker.
+
+    **Note:** For older versions of ESM, see [Device Custom Group](../groups/device_custom.yaml) for IPv6 address data type.
+- label: Asset ID
+  alias: targetAssetId
+  type: Resource
+  turbo_level: 2
+  description: The asset that represents the attacked device's host.
+- label: Asset Name
+  alias: targetAssetName
+  type: String
+  turbo_level: 2
+  description: The name of the device.
+- label: Asset Resource
+  alias: targetAssetResource
+  type: Resource
+  turbo_level: 2
+  description: See the common set of resource attributes.
+- label: DNS Domain
+  alias: targetDnsDomain
+  type: String
+  turbo_level: 2
+  description: The Domain Name Service domain name associated with the attacked device.
+- label: FQDN
+  alias: targetFqdn
+  type: String
+  turbo_level: 2
+  description: The fully qualified domain name associated with the attacked device.
+- label: Geo
+  alias: targetGeo
+  type: GeoDescriptor
+  turbo_level: 1
+  description: The geographical information
+- label: Geo Country Code
+  alias: targetGeoCountryCode
+  type: String
+  turbo_level: 1
+  description: The identifier for the national-political state in which a device resides.
+- label: Geo Country Flag URL
+  alias: targetGeoCountryFlagUrl
+  type: String
+  turbo_level: 1
+  description: The URL of an image of the flag of the national-political state in which the
+    device resides.
+- label: Geo Country Name
+  alias: targetGeoCountryName
+  type: String
+  turbo_level: 1
+  description: The name of the national-political state where a device resides.
+- label: Geo Descriptor ID
+  alias: targetGeoDescriptorId
+  type: ID
+  turbo_level: 1
+  description: The internal ID of the geographical reference.
+- label: Geo Latitude
+  alias: targetGeoLatitude
+  type: Double
+  turbo_level: 1
+  description: The latitude of a device.
+- label: Geo Location Info
+  alias: targetGeoLocationInfo
+  type: String
+  turbo_level: 1
+  description: Other, free-form text information about the device's location.
+- label: Geo Longitude
+  alias: targetGeoLongitude
+  type: Double
+  turbo_level: 1
+  description: The Longitude of a device.
+- label: Geo Postal Code
+  alias: targetGeoPostalCode
+  type: String
+  turbo_level: 1
+  description: The postal code of the device's location, as assigned by the national-political
+    state where it resides.
+- label: Geo Region Code
+  alias: targetGeoRegionCode
+  type: String
+  turbo_level: 1
+  description: The identifier of the sub-region of the national-political state where a device
+    resides. The style of the identifier varies with the host country.
+- label: Host Name
+  alias: targetHostName
+  type: String
+  turbo_level: 2
+  description: The name of the attacked device
+- label: MAC Address
+  alias: targetMacAddress
+  type: MAC address
+  turbo_level: 2
+  description: The MAC address associated with the target of the attack (which may or may
+    not be the MAC address of the host device).
+- label: NT Domain
+  alias: targetNtDomain
+  type: String
+  turbo_level: 2
+  description: The Windows NT domain associated with the attacked device.
+- label: Port
+  alias: targetPort
+  type: Integer
+  turbo_level: 1
+  description: The network port associated with the target of the attack.
+- label: Process ID
+  alias: targetProcessId
+  type: Integer
+  turbo_level: 2
+  description: The ID of the process associated with the attack's target.
+- label: Process Name
+  alias: targetProcessName
+  type: String
+  turbo_level: 2
+  description: The name of the process associated with the attack's target.
+- label: Service Name
+  alias: targetServiceName
+  type: String
+  turbo_level: 2
+  description: The name of service associated with the attack's target.
+- label: Translated Address
+  alias: targetTranslatedAddress
+  type: IP address
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated IP address
+    of the attacked device.
+- label: Translated Port
+  alias: targetTranslatedPort
+  type: Integer
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated port associated
+    with the attack.
+- label: Translated Zone
+  alias: targetTranslatedZone
+  type: Zone
+  turbo_level: 1
+  description: If network address translation is an issue, this is the network zone associated
+    with the translated IP address of the targeted device.
+- label: Translated Zone External ID
+  alias: targetTranslatedZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: targetTranslatedZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: targetTranslatedZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Translated Zone Reference ID
+  alias: targetTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Translated Zone Resource
+  alias: targetTranslatedZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: targetTranslatedZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: User ID
+  alias: targetUserId
+  type: String
+  turbo_level: 2
+  description: The OS- or application-based identifier associated with the attacker, at the
+    target of the attack.
+- label: User Name
+  alias: targetUserName
+  type: String
+  turbo_level: 2
+  description: The OS- or application-based name associated with the attacker, at the target
+    of the attack.
+- label: User Privileges
+  alias: targetUserPrivileges
+  type: String
+  turbo_level: 2
+  description: The privileges afforded the attacker, at the target of the attack.
+- label: Zone
+  alias: targetZone
+  type: Zone
+  turbo_level: 1
+  description: The network zone in which the attacked device resides.
+- label: Zone External ID
+  alias: targetZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: targetZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: targetZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: targetZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Zone Resource
+  alias: targetZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: targetZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.

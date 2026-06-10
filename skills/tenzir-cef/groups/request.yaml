@@ -1,0 +1,70 @@
+name: request
+title: Request Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Request_Group.htm
+description: ''
+fields:
+- label: Client Application
+  alias: requestClientApplication
+  type: String
+  turbo_level: 2
+  description: The client application (such as a web browser) used to issue the request.
+- label: Client Application
+  alias: requestClientApplication
+  type: String
+  turbo_level: 2
+  description: A description of the client application used to initiate this request, for
+    example, the HTTP User connector.
+- label: Context
+  alias: requestContext
+  type: String
+  turbo_level: 2
+  description: A description of the content from which the request originated, for example,
+    the HTTP Referrer.
+- label: Cookies
+  alias: requestCookies
+  type: String
+  turbo_level: 2
+  description: Cookie data offered by the client application as part of the request.
+- label: Method
+  alias: requestMethod
+  type: String
+  turbo_level: 2
+  description: The style of the request, that is, for an HTTP request this could be PUT or
+    GET.
+- label: Protocol
+  alias: requestProtocol
+  type: String
+  turbo_level: 2
+  description: The communication protocol used when issuing the request.
+- label: URL
+  alias: requestUrl
+  type: String
+  turbo_level: 2
+  description: A universal resource locator associated with the event.
+- label: URL Authority
+  alias: requestUrlAuthority
+  type: String
+  turbo_level: 2
+  description: The URL component used for authentication and authorization.
+- label: URL File Name
+  alias: requestUrlFileName
+  type: String
+  turbo_level: 2
+  description: The URL component that refers to the file containing the resource.
+- label: URL Host
+  alias: requestUrlHost
+  type: String
+  turbo_level: 2
+  description: The URL component that specifies the host device where the resource resides.
+- label: URL Port
+  alias: requestUrlPort
+  type: Integer
+  turbo_level: 2
+  description: The URL component that specifies the port to contact on the host device where
+    the resource resides.
+- label: URL Query
+  alias: requestUrlQuery
+  type: String
+  turbo_level: 2
+  description: The URL component that specifies the query to use to request the resource.

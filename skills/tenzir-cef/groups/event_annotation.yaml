@@ -1,0 +1,173 @@
+name: event_annotation
+title: Event Annotation Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Event_Annotation_Group.htm
+description: ''
+fields:
+- label: Audit Trail
+  alias: eventAnnotationAuditTrail
+  type: String
+  turbo_level: 2
+  description: The text log of annotation changes. Changes are recorded as sets of comma-separated-value
+    entries.
+- label: Comment
+  alias: eventAnnotationComment
+  type: String
+  turbo_level: 2
+  description: A text description of the event or associated information.
+- label: End Time
+  alias: eventAnnotationEndTime
+  type: DateTime
+  turbo_level: 2
+  description: The timestamp for an event annotation.
+- label: Event ID
+  alias: eventAnnotationEventId
+  type: ID
+  turbo_level: 2
+  description: The event ID for the annotation event.
+- label: Flags
+  alias: eventAnnotationFlags
+  type: FlagsValueSet
+  turbo_level: 2
+  description: |-
+    The state of the collaboration flags.
+
+    **Note:** The following event fields: isReviewed, Closed, Hidden, Correlated, inCase, hasAction, and Forwarded, are derived from eventAnnotationFlags. You cannot add those individual event fields into a field set, but you can add the eventAnnotationFlags fields instead, then use a local or global variable to specify the desired field. See Field Set Editor: Local Variables Tab and Global Variables.
+- label: Manager Receipt Time
+  alias: eventAnnotationManagerReceiptTime
+  type: DateTime
+  turbo_level: 2
+  description: The time the Manager received the event annotation.
+- label: Modification Time
+  alias: eventAnnotationModificationTime
+  type: DateTime
+  turbo_level: 2
+  description: The time the annotation was modified.
+- label: Modified By
+  alias: eventAnnotationModifiedBy
+  type: User
+  turbo_level: 2
+  description: The user ID of the person who last edited this annotation.
+- label: Modified By External ID
+  alias: eventAnnotationModifiedByExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Modified By ID
+  alias: eventAnnotationModifiedByID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Modified By Name
+  alias: eventAnnotationModifiedByName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI (the last field of the URI).
+- label: Modified By Reference ID
+  alias: eventAnnotationModifiedByReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Modified By Resource
+  alias: eventAnnotationModifiedByResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Modified By URI
+  alias: eventAnnotationModifiedByURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.
+- label: Stage
+  alias: eventAnnotationStage
+  type: Stage
+  turbo_level: 2
+  description: The current disposition of the event. This enables annotation workflow.
+- label: Stage Event ID
+  alias: eventAnnotationStageEventId
+  type: ID
+  turbo_level: 2
+  description: The reference to an internal identifier for another event. It is used by 'Mark
+    Similar'.
+- label: Stage External ID
+  alias: eventAnnotationStageExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Stage ID
+  alias: eventAnnotationStageID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Stage Name
+  alias: eventAnnotationStageName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Stage Reference ID
+  alias: eventAnnotationStageReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference is stored and uniquely identified in the database.
+- label: Stage Resource
+  alias: eventAnnotationStageResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Stage Update Time
+  alias: eventAnnotationStageUpdateTime
+  type: ID
+  turbo_level: 2
+  description: The time of the last stage change (in UTC).
+- label: Stage URI
+  alias: eventAnnotationStageURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.
+- label: Stage User
+  alias: eventAnnotationStageUser
+  type: User
+  turbo_level: 2
+  description: The user associated with the current stage. This implements assignment within
+    workflow.
+- label: Stage User External ID
+  alias: eventAnnotationStageUserExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Stage User ID
+  alias: eventAnnotationStageUserID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Stage User Name
+  alias: eventAnnotationStageUserName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Stage User Reference ID
+  alias: eventAnnotationStageUserReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference is stored and uniquely identified in the database.
+- label: Stage User Resource
+  alias: eventAnnotationStageUserResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Stage User URI
+  alias: eventAnnotationStageUserURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.
+- label: Version
+  alias: eventAnnotationVersion
+  type: Integer
+  turbo_level: 2
+  description: The editing version number which increments with each change. This enables
+    optimistic locking.

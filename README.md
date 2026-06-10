@@ -9,6 +9,8 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 - `tenzir-asim`: Microsoft Sentinel ASIM reference — schemas, fields,
   aliases, entities, enums
+- `tenzir-cef`: ArcSight CEF reference — headers, extension dictionary,
+  ESM event schema, timestamps
 - `tenzir-cim`: Splunk CIM reference — data models, datasets, fields,
   tags, constraints, lookups
 - `tenzir-ecs`: Elastic Common Schema reference — fields, fieldsets,
@@ -63,6 +65,7 @@ npx skills add tenzir/skills@tenzir-commit-changes
 npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir-docs
 npx skills add tenzir/skills@tenzir-asim
+npx skills add tenzir/skills@tenzir-cef
 npx skills add tenzir/skills@tenzir-cim
 npx skills add tenzir/skills@tenzir-ecs
 npx skills add tenzir/skills@tenzir-edm

@@ -1,0 +1,58 @@
+name: category
+title: Category Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Category_Group.htm
+description: ''
+fields:
+- label: Behavior
+  alias: categoryBehavior
+  type: String
+  turbo_level: 1
+  description: Describes the action taken with or by the object.
+- label: Custom Format Field
+  alias: categoryCustomFormatField
+  type: String
+  turbo_level: 1
+  description: Describes the content of a custom formatted field, if present.
+- label: Descriptor ID
+  alias: categoryDescriptorId
+  type: ID
+  turbo_level: 1
+  description: The unique ID for the sensor that reported the event
+- label: Device Group
+  alias: categoryDeviceGroup
+  type: String
+  turbo_level: 1
+  description: The type of event. For example, logging into a firewall is an Operating System
+    type of event.
+- label: Device Type
+  alias: categoryDeviceType
+  type: String
+  turbo_level: 2
+  description: The type of device. For example, logging into a firewall, would show the Device
+    Type as Firewall.
+- label: Object
+  alias: categoryObject
+  type: String
+  turbo_level: 1
+  description: Describes the physical or virtual object that was the focus of the event
+- label: Outcome
+  alias: categoryOutcome
+  type: String
+  turbo_level: 1
+  description: Indicates whether the action was successfully applied to the object.
+- label: Significance
+  alias: categorySignificance
+  type: String
+  turbo_level: 1
+  description: Characterizes the event from a network-intrusion-detection perspective.
+- label: Technique
+  alias: categoryTechnique
+  type: String
+  turbo_level: 1
+  description: Describes the method used to apply the action to the object.
+- label: Tuple Description
+  alias: categoryTupleDescription
+  type: String
+  turbo_level: 1
+  description: The prose description of the event category, assembled from the category components.

@@ -1,0 +1,236 @@
+name: destination
+title: Destination Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Destination_Group.htm
+description: ''
+notes:
+- |-
+  Note about Geo fields:
+
+  Not all IPv6 addresses are mapped to Geo fields described below. In such cases, the corresponding Geo information for the IPv6 address will be blank on the Viewer panel.
+fields:
+- label: Address
+  alias: destinationAddress
+  type: IP address
+  turbo_level: 1
+  description: |-
+    The IP address of the destination device.
+
+    **Note:** For older versions of ESM, see [Device Custom Group](../groups/device_custom.yaml) for IPv6 address data type.
+- label: Asset ID
+  alias: destinationAssetId
+  type: Resource
+  turbo_level: 2
+  description: The asset that represents the device that was the network traffic's destination.
+- label: Asset Name
+  alias: destinationAssetName
+  type: String
+  turbo_level: 2
+  description: The name of the device.
+- label: Asset Resource
+  alias: destinationAssetResource
+  type: Resource
+  turbo_level: 2
+  description: See the common set of resource attributes.
+- label: DNS Domain
+  alias: destinationDnsDomain
+  type: String
+  turbo_level: 2
+  description: The Domain Name Service domain name associated with the user at the destination
+    device.
+- label: FQDN
+  alias: destinationFqdn
+  type: String
+  turbo_level: 2
+  description: The fully qualified domain name associated with the destination device.
+- label: Geo
+  alias: destinationGeo
+  type: GeoDescriptor
+  turbo_level: 1
+  description: See the common set of geographical attributes.
+- label: Geo Country Code
+  alias: destinationGeoCountryCode
+  type: String
+  turbo_level: 1
+  description: The identifier for the national-political state in which a device resides.
+- label: Geo Country Flag URL
+  alias: destinationGeoCountryFlagUrl
+  type: String
+  turbo_level: 1
+  description: The URL of an image of the flag of the national-political state in which the
+    device resides.
+- label: Geo Country Name
+  alias: destinationGeoCountryName
+  type: String
+  turbo_level: 1
+  description: The name of the national-political state where a device resides.
+- label: Geo Descriptor ID
+  alias: destinationGeoDescriptorId
+  type: ID
+  turbo_level: 1
+  description: The internal ID of the geographical reference.
+- label: Geo Latitude
+  alias: destinationGeoLatitude
+  type: Double
+  turbo_level: 1
+  description: The destination latitude of the device.
+- label: Geo Location Info
+  alias: destinationGeoLocationInfo
+  type: String
+  turbo_level: 1
+  description: Other, free-form text information about the device's location.
+- label: Geo Longitude
+  alias: destinationGeoLongitude
+  type: Double
+  turbo_level: 1
+  description: The destination longitude.
+- label: Geo Postal Code
+  alias: destinationGeoPostalCode
+  type: String
+  turbo_level: 1
+  description: The postal code of the device's location, as assigned by the national-political
+    state where it resides.
+- label: Geo Region Code
+  alias: destinationGeoRegionCode
+  type: String
+  turbo_level: 1
+  description: The identifier of the sub-region of the national-political state where a device
+    resides. The style of the identifier varies with the host country.
+- label: Host Name
+  alias: destinationHostName
+  type: String
+  turbo_level: 2
+  description: The name of the destination device.
+- label: MAC Address
+  alias: destinationMacAddress
+  type: MAC address
+  turbo_level: 2
+  description: The MAC address associated with the network traffic's destination (which may
+    or may not be the MAC address of the host device).
+- label: NT Domain
+  alias: destinationNtDomain
+  type: String
+  turbo_level: 2
+  description: The Windows NT domain associated with the destination device.
+- label: Port
+  alias: destinationPort
+  type: Integer
+  turbo_level: 1
+  description: The network port associated with the network traffic's destination.
+- label: Process ID
+  alias: destinationProcessId
+  type: Integer
+  turbo_level: 2
+  description: The ID of the process associated with the network traffic's destination.
+- label: Process Name
+  alias: destinationProcessName
+  type: String
+  turbo_level: 2
+  description: The name of the process associated with the network traffic's destination.
+- label: Service Name
+  alias: destinationServiceName
+  type: String
+  turbo_level: 2
+  description: The name of service associated with the network traffic's destination.
+- label: Translated Address
+  alias: destinationTranslatedAddress
+  type: IP address
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated IP address
+    of the device that was the network traffic's destination.
+- label: Translated Port
+  alias: destinationTranslatedPort
+  type: Integer
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated source port
+    associated with the attack.
+- label: Translated Zone
+  alias: destinationTranslatedZone
+  type: Zone
+  turbo_level: 1
+  description: If network address translation is an issue, this is the network zone associated
+    with the translated IP address of the device at the network's traffic's destination.
+- label: Translated Zone External ID
+  alias: destinationTranslatedZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: destinationTranslatedZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: destinationTranslatedZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Translated Zone Reference
+  alias: destinationTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: See the common set of resource attributes.
+- label: Translated Zone Resource
+  alias: destinationTranslatedZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: destinationTranslatedZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: User ID
+  alias: destinationUserId
+  type: String
+  turbo_level: 2
+  description: The OS- or application-based identifier associated with the user at the network
+    traffic's destination.
+- label: User Name
+  alias: destinationUserName
+  type: String
+  turbo_level: 2
+  description: The name associated with the user at the network traffic's destination.
+- label: User Privileges
+  alias: destinationUserPrivileges
+  type: String
+  turbo_level: 2
+  description: The privileges accorded the user at the network traffic destination.
+- label: Zone
+  alias: destinationZone
+  type: Zone
+  turbo_level: 1
+  description: The network zone in which the destination device resides.
+- label: Zone External ID
+  alias: destinationZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: destinationZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: destinationZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: destinationZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Zone Resource
+  alias: destinationZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: destinationZoneURI
+  type: String
+  turbo_level: 1
+  description: See the common set of resource attributes.
