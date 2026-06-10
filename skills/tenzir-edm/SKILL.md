@@ -23,6 +23,7 @@ Each data model's `summary` names example event types that follow it; the full e
 An event attribute is a typed name contract: the same attribute keeps its name, type, and meaning across all data models that use it.
 Attribute types use a small vocabulary: `DATE`, `double`, `IP`, `string`, `uchar`, `uint16`, `uint32`, `uint64`.
 Type values in the YAML data are copied verbatim from the Fortinet pages, which contain occasional case variants and errors; treat case-insensitive matches as the same type.
+A few attributes have empty type, display name, and description cells upstream; when a type is missing, use the documented `src` or `dest` counterpart attribute, such as `srcVLAN` for `destVLAN`, as the guide.
 Attribute names are camelCase and use role prefixes: `src` for the source of the activity, `dest` for its destination, `host` for the host the event refers to, and `ph` for attributes set by the FortiSIEM (Phoenix) framework itself, such as `phRecvTime` and `phEventCategory`.
 Display names are the human-readable labels shown in the FortiSIEM GUI; use attribute names, not display names, in parsers and queries.
 Some data models group attributes into named sections, recorded per attribute in the `section` key.
