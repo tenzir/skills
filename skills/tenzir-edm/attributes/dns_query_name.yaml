@@ -1,7 +1,6 @@
 name: dnsQueryName
 summary: This is the name the dns client queried the DNS server to resolve.
-types:
-- string
+type: string
 display_names:
 - DNS Query Name
 models:

@@ -1,7 +1,6 @@
 name: deviceTime
 summary: This is the timestamp as seen in the raw log. This is converted and stored as epoch seconds. Note that the deviceTime, or event occur time, is different than the event receive time by the SIEM.
-types:
-- DATE
+type: DATE
 display_names:
 - Device Time
 models:

@@ -1,7 +1,6 @@
 name: cpuUtil
 summary: CPU Util (0-100)
-types:
-- double
+type: double
 display_names:
 - CPU Util
 models:

@@ -1,7 +1,6 @@
 name: isSelfSigned
 summary: 0 means not self-signed, 1 means self-signed
-types:
-- uchar
+type: uchar
 display_names:
 - Is Self Signed
 models:

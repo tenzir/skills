@@ -1,7 +1,6 @@
 name: sysUpTime
 summary: System Uptime (seconds)
-types:
-- uint32
+type: uint32
 display_names:
 - System Uptime
 models:

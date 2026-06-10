@@ -1,7 +1,6 @@
 name: dnsQueryClass
 summary: DNS Query Class
-types:
-- string
+type: string
 display_names:
 - DNS Query Class
 models:

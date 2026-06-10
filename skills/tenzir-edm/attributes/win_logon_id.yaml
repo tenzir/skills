@@ -1,7 +1,6 @@
 name: winLogonId
 summary: Windows Logon Id
-types:
-- string
+type: string
 display_names:
 - Win Logon Id
 models:

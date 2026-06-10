@@ -1,7 +1,6 @@
 name: incidentFirstSeen
 summary: The first time an Incident happened.
-types:
-- DATE
+type: DATE
 display_names:
 - Incident First Occurrence Time
 models:

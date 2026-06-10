@@ -1,7 +1,6 @@
 name: newSVNVersion
 summary: New SVN version of monitored File
-types:
-- string
+type: string
 display_names:
 - New SVN Version
 models:

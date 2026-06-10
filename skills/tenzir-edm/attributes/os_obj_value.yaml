@@ -1,7 +1,6 @@
 name: osObjValue
 summary: Value of edited configutarion object
-types:
-- string
+type: string
 display_names:
 - OS Object Value
 models:

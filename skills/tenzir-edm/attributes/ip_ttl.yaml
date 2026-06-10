@@ -1,7 +1,6 @@
 name: ipTtl
 summary: IP Time to Live (TTL) field found in IP header
-types:
-- uint16
+type: uint16
 display_names:
 - IP TTL
 models:

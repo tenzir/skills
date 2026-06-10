@@ -1,7 +1,6 @@
 name: hashCode
 summary: Hash of process binary
-types:
-- string
+type: string
 display_names:
 - Hash Code
 models:

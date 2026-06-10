@@ -1,7 +1,6 @@
 name: incidentLastSeen
 summary: The last time an Incident happened. When an Incident with the same parameter occurs, the count variable is updated and the Incident Last Occurrence time is advanced.
-types:
-- DATE
+type: DATE
 display_names:
 - Incident Last Occurrence Time
 models:

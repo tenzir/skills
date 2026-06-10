@@ -1,7 +1,6 @@
 name: inIntfPktDiscardedPct
 summary: Ratio of inIntfPktDiscarded on an interface to the total number of received packets on that interface
-types:
-- double
+type: double
 display_names:
 - Recv Packet Discard Pct
 models:

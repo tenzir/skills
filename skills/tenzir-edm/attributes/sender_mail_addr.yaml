@@ -1,7 +1,6 @@
 name: senderMailAddr
 summary: Sender mail address
-types:
-- string
+type: string
 display_names:
 - Mail Sender
 models:

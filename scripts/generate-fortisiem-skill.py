@@ -700,11 +700,14 @@ def render_attributes_index_yaml(occurrences: dict[str, list[tuple[ModelDoc, Att
 
 def render_attribute_yaml(name: str, occurrences: list[tuple[ModelDoc, AttributeRecord]]) -> str:
     ordered = sorted(occurrences, key=lambda item: item[0].name)
+    types = first_unique(record.attribute_type for _, record in ordered)
+    if len(types) > 1:
+        raise RuntimeError(f"attribute {name!r} has conflicting types: {types!r}")
     data = compact_mapping(
         (
             ("name", name),
             ("summary", most_common(record.description for _, record in ordered)),
-            ("types", first_unique(record.attribute_type for _, record in ordered)),
+            ("type", types[0] if types else ""),
             ("display_names", first_unique(record.display_name for _, record in ordered)),
             (
                 "models",

@@ -1,7 +1,6 @@
 name: srcASNum32
 summary: The Autonomous System Number (ASN) to which Source IP belongs. ASN is a unique identifier that is globally available and allows its autonomous system to exchange routing information with other systems. This attribute is generally present in Netflow.
-types:
-- uint32
+type: uint32
 display_names:
 - Source Autonomous System Number32
 models:

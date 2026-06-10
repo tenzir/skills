@@ -1,7 +1,6 @@
 name: webFilterAction
 summary: Action taken by the Web Filter module
-types:
-- string
+type: string
 display_names:
 - Web Filter Action
 models:

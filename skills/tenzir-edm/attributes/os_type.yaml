@@ -1,7 +1,6 @@
 name: osType
 summary: Operating system type
-types:
-- string
+type: string
 display_names:
 - Operating System Type
 models:

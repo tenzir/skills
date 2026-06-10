@@ -1,7 +1,6 @@
 name: incidentTagName
 summary: The Tag assigned to an Incident from the GUI.
-types:
-- string
+type: string
 display_names:
 - Incident Tag Name
 models:

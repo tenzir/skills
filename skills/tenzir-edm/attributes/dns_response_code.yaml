@@ -1,6 +1,5 @@
 name: dnsResponseCode
-types:
-- uint16
+type: uint16
 display_names:
 - DNS Response Code
 models:

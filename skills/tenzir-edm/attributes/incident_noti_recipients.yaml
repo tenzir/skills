@@ -1,7 +1,6 @@
 name: incidentNotiRecipients
 summary: If an Incident notification is sent out via email, then the email recipients are recorded in this field.
-types:
-- string
+type: string
 display_names:
 - Incident Notification Recipients
 models:

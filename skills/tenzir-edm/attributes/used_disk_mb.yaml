@@ -1,7 +1,6 @@
 name: usedDiskMB
 summary: Used Disk MB
-types:
-- uint32
+type: uint32
 display_names:
 - Used Disk MB
 models:

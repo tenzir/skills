@@ -1,7 +1,6 @@
 name: intfAdminStatus
 summary: "Interface Administrative Status \u2013 Up or Down"
-types:
-- string
+type: string
 display_names:
 - Interface Admin Status
 models:

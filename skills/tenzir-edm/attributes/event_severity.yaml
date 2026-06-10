@@ -1,7 +1,6 @@
 name: eventSeverity
 summary: This is the severity of the event. It takes values between 1-10; 1 being lowest severity and 10 being the highest.
-types:
-- uint16
+type: uint16
 display_names:
 - Event Severity
 models:

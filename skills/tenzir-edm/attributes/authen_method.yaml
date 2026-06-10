@@ -1,7 +1,6 @@
 name: authenMethod
 summary: Windows Authentication method
-types:
-- string
+type: string
 display_names:
 - Authentication Method
 models:

@@ -1,7 +1,6 @@
 name: diskWriteReqPerSec
 summary: Disk Write Rate in requests/sec
-types:
-- double
+type: double
 display_names:
 - Disk Write Rate req/sec
 models:

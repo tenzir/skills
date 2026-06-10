@@ -1,7 +1,6 @@
 name: incidentNotiStatus
 summary: This field repsents the status of incident notification (Success or Failed). When an Incident triggers, notification can happen via email, HTTPS, external ticketing system etc.
-types:
-- string
+type: string
 display_names:
 - Incident Notification Status
 models:

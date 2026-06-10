@@ -1,7 +1,6 @@
 name: hashSHA512
 summary: SHA512 Hash Value
-types:
-- string
+type: string
 display_names:
 - SHA512 Hash
 models:

@@ -1,7 +1,6 @@
 name: ccMailAddr
 summary: Mail addresses in CC list
-types:
-- string
+type: string
 display_names:
 - Mail CC
 models:

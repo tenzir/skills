@@ -1,7 +1,6 @@
 name: parentProcName
 summary: Parent Process Name (full path)
-types:
-- string
+type: string
 display_names:
 - Parent Process Name
 models:

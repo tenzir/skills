@@ -1,7 +1,6 @@
 name: httpMethod
 summary: HTTP Method
-types:
-- string
+type: string
 display_names:
 - HTTP Method
 models:

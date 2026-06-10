@@ -1,7 +1,6 @@
 name: cacheMemKB
 summary: Linux Cache memory in KB
-types:
-- uint32
+type: uint32
 display_names:
 - Cache Memory
 models:

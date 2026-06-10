@@ -1,7 +1,6 @@
 name: dstTos
 summary: Destination Type of Service (ToS) field present in the IPv4 header. Typically present in Netflow. It provides an indication of the quality of service desired.
-types:
-- uchar
+type: uchar
 display_names:
 - Destination TOS
 models:

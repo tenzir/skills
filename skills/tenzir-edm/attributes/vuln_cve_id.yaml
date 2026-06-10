@@ -1,7 +1,6 @@
 name: vulnCVEId
 summary: CVE ID
-types:
-- string
+type: string
 display_names:
 - Vulnerability CVE Id
 models:

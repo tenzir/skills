@@ -1,7 +1,6 @@
 name: receiverMailAddr
 summary: Receive mail address
-types:
-- string
+type: string
 display_names:
 - Mail Receiver
 models:

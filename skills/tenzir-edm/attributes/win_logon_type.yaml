@@ -1,7 +1,6 @@
 name: winLogonType
 summary: "Windows Logon Type, e.g. 2: Interactive - Console Llogon 3: Network \u2013 Logon 4: Batch Logon 5: Service Logon 7: User unlocks a locked workstation 9: New Credentials 10: Remote Desktop Logon 11: Cached Domaon Credential Logon"
-types:
-- uint16
+type: uint16
 display_names:
 - Win Logon Type
 models:

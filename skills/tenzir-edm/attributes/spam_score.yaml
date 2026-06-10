@@ -1,7 +1,6 @@
 name: spamScore
 summary: Spam Score
-types:
-- string
+type: string
 display_names:
 - Spam Score
 models:

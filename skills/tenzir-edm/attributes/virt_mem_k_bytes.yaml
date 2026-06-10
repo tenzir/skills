@@ -1,7 +1,6 @@
 name: virtMemKBytes
 summary: Virtual Memory used
-types:
-- uint32
+type: uint32
 display_names:
 - Virtual Memory KB
 models:

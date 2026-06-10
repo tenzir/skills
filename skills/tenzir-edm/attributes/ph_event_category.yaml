@@ -1,7 +1,6 @@
 name: phEventCategory
 summary: 'This is the category of log event. (Values: 0 - External, 1 - Incidents, 2 - Audit, 3 - System, 4 - Traffic Flow, 5- Internal Health Incident, 6 - Performance).'
-types:
-- uint16
+type: uint16
 display_names:
 - System Event Category
 models:

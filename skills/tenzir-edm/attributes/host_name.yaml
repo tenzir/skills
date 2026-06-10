@@ -1,7 +1,6 @@
 name: hostName
 summary: Host where event occurs
-types:
-- string
+type: string
 display_names:
 - Host Name
 models:

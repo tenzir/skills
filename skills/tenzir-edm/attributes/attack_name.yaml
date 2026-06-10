@@ -1,7 +1,6 @@
 name: attackName
 summary: Attack Name
-types:
-- string
+type: string
 display_names:
 - Attack Name
 models:

@@ -1,7 +1,6 @@
 name: swParam
 summary: Arguments with which the process runs
-types:
-- string
+type: string
 display_names:
 - Software Param
 models:

@@ -1,7 +1,6 @@
 name: httpVersion
 summary: HTTP Proto Version
-types:
-- string
+type: string
 display_names:
 - HTTP Proto Version
 models:

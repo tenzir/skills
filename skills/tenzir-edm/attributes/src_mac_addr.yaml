@@ -1,7 +1,6 @@
 name: srcMACAddr
 summary: Source MAC address in the event
-types:
-- Source MAC
+type: Source MAC
 display_names:
 - Source MAC
 models:

@@ -1,7 +1,6 @@
 name: realMemPeakKBytes
 summary: Real Memory used
-types:
-- uint32
+type: uint32
 display_names:
 - Real Peak Memory KB
 models:

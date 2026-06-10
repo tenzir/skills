@@ -1,7 +1,6 @@
 name: incidentRptIp
 summary: This field captures the reporting IP of the events that triggered an Incident. In the case there are multiple reporting IPs, only 1 is chosen.
-types:
-- IP
+type: IP
 display_names:
 - Incident Reporting IP
 models:

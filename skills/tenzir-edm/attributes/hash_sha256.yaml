@@ -1,7 +1,6 @@
 name: hashSHA256
 summary: SHA256 Hash Value
-types:
-- string
+type: string
 display_names:
 - SHA256 Hash
 models:

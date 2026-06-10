@@ -1,7 +1,6 @@
 name: osObjAction
 summary: Added or Removed
-types:
-- string
+type: string
 display_names:
 - Object Action
 models:

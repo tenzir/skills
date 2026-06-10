@@ -1,7 +1,6 @@
 name: rawEventMsg
 summary: This is the raw, unmodified UTF-8 message as received by FortiSIEM from a log source.
-types:
-- string
+type: string
 display_names:
 - Raw Event Log
 models:

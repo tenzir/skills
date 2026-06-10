@@ -1,7 +1,6 @@
 name: validFrom
 summary: Time since when certificate is valid
-types:
-- DATE
+type: DATE
 display_names:
 - Valid From
 models:

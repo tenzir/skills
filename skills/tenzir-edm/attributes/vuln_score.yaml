@@ -1,7 +1,6 @@
 name: vulnScore
 summary: Normalized vulnerability score (0-10) across CVSS V2 and V3
-types:
-- uint32
+type: uint32
 display_names:
 - Vulnerability Score
 models:

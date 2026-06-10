@@ -1,7 +1,6 @@
 name: destMACAddr
 summary: Destination Layer 2 MAC Address in the log
-types:
-- string
+type: string
 display_names:
 - Destination MAC
 models:

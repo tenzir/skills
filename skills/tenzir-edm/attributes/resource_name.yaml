@@ -1,7 +1,6 @@
 name: resourceName
 summary: Resource involved in File Activity
-types:
-- string
+type: string
 display_names:
 - Resource Name
 models:

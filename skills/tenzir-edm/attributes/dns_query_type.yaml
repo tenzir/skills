@@ -1,7 +1,6 @@
 name: dnsQueryType
 summary: This is the DNS query record type such as A, AAA, PTR, etc.
-types:
-- string
+type: string
 display_names:
 - DNS Query Type
 models:

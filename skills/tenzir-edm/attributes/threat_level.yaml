@@ -1,7 +1,6 @@
 name: threatLevel
 summary: Threat Level
-types:
-- string
+type: string
 display_names:
 - Threat Level
 models:

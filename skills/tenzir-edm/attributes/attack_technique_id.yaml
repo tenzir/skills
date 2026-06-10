@@ -1,7 +1,6 @@
 name: attackTechniqueId
 summary: MITRE ATTACK Technique Id
-types:
-- string
+type: string
 display_names:
 - Attack Technique Id
 models:

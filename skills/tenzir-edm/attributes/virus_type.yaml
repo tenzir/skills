@@ -1,7 +1,6 @@
 name: virusType
 summary: Malware Type
-types:
-- string
+type: string
 display_names:
 - Malware Type
 models:

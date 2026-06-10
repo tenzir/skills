@@ -1,7 +1,6 @@
 name: attackTechnique
 summary: MITRE ATTACK Technique Description
-types:
-- string
+type: string
 display_names:
 - Attack Technique
 models:

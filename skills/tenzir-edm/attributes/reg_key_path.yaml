@@ -1,7 +1,6 @@
 name: regKeyPath
 summary: Registry Key
-types:
-- string
+type: string
 display_names:
 - Registry Key Path
 models:

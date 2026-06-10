@@ -1,6 +1,5 @@
 name: imageFile
-types:
-- string
+type: string
 display_names:
 - Image File
 models:

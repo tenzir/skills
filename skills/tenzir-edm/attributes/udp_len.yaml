@@ -1,7 +1,6 @@
 name: udpLen
 summary: UDP length field in UDP header
-types:
-- uint32
+type: uint32
 display_names:
 - UDP Length
 models:

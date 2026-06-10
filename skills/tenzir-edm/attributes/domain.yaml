@@ -1,7 +1,6 @@
 name: domain
 summary: Windows domain
-types:
-- string
+type: string
 display_names:
 - Domain
 models:

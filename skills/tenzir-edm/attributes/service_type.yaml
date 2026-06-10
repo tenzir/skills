@@ -1,7 +1,6 @@
 name: serviceType
 summary: Values such as KernelDriver, FileSystemDriver
-types:
-- string
+type: string
 display_names:
 - Service Type
 models:

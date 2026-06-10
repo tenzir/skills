@@ -1,7 +1,6 @@
 name: diskType
 summary: Disk Type
-types:
-- string
+type: string
 display_names:
 - Disk Type
 models:

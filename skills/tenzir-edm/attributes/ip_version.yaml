@@ -1,7 +1,6 @@
 name: ipVersion
 summary: IP Version found in IP header
-types:
-- uint16
+type: uint16
 display_names:
 - IP Version
 models:

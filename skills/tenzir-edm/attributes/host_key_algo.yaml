@@ -1,7 +1,6 @@
 name: hostKeyAlgo
 summary: Algorithm used to create the certificates
-types:
-- string
+type: string
 display_names:
 - Key Algorithm
 models:

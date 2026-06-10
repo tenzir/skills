@@ -1,7 +1,6 @@
 name: reptDevName
 summary: This is the hostname of the device that originated the log or event packet.
-types:
-- string
+type: string
 display_names:
 - Reporting Device
 models:

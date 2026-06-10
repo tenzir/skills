@@ -1,7 +1,6 @@
 name: hostIpAddr
 summary: IP address of hostName
-types:
-- IP
+type: IP
 display_names:
 - Host IP
 models:

@@ -1,7 +1,6 @@
 name: durationMSec
 summary: Duration of a connection (in msec)
-types:
-- uint32
+type: uint32
 display_names:
 - Duration
 models:

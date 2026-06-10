@@ -1,7 +1,6 @@
 name: procId
 summary: Process Id
-types:
-- string
+type: string
 display_names:
 - Process Id
 models:

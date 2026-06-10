@@ -1,7 +1,6 @@
 name: sysCpuUtil
 summary: Linux System CPU Util (0-100)
-types:
-- double
+type: double
 display_names:
 - System CPU Util
 models:

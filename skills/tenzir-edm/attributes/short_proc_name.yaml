@@ -1,7 +1,6 @@
 name: shortProcName
 summary: Process binary only
-types:
-- string
+type: string
 display_names:
 - Short Process Name
 models:

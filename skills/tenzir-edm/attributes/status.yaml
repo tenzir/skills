@@ -1,7 +1,6 @@
 name: status
 summary: 'Verdict: Malicious, Safe'
-types:
-- string
+type: string
 display_names:
 - Status
 models:

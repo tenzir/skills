@@ -1,7 +1,6 @@
 name: parserName
 summary: The name of parser that parsed the event
-types:
-- string
+type: string
 display_names:
 - Event Parser Name
 models:

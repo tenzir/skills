@@ -1,7 +1,6 @@
 name: httpSubStatusCode
 summary: HTTP Sub-status
-types:
-- string
+type: string
 display_names:
 - HTTP Sub-status
 models:

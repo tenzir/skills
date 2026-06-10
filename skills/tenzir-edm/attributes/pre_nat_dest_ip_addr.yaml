@@ -1,7 +1,6 @@
 name: preNATDestIpAddr
 summary: The Destination IP before Firewall Inbound Network Address Translation (NAT) - often present in Firewall Address translation log
-types:
-- IP
+type: IP
 display_names:
 - Pre-NAT Destination IP
 models:

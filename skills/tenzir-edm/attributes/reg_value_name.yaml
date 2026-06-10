@@ -1,7 +1,6 @@
 name: regValueName
 summary: Registry Value
-types:
-- string
+type: string
 display_names:
 - Registry Value Name
 models:

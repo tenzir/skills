@@ -1,7 +1,6 @@
 name: fwAction
 summary: Action taken by the network appliance
-types:
-- string
+type: string
 display_names:
 - Firewall Action
 models:

@@ -1,7 +1,6 @@
 name: httpStatusCode
 summary: HTTP Status
-types:
-- string
+type: string
 display_names:
 - HTTP Status
 models:

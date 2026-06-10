@@ -1,7 +1,6 @@
 name: winLogonProc
 summary: The Windows process handling Windows logon
-types:
-- string
+type: string
 display_names:
 - Windows Logon Process
 models:

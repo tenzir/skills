@@ -1,7 +1,6 @@
 name: mailSubject
 summary: Mail Subject
-types:
-- string
+type: string
 display_names:
 - Mail Subject
 models:

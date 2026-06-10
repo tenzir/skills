@@ -1,7 +1,6 @@
 name: vulnDesc
 summary: Vulnerability Description
-types:
-- string
+type: string
 display_names:
 - Vulnerability Description
 models:

@@ -1,7 +1,6 @@
 name: targetUserGrp
 summary: Group that was created/deleted
-types:
-- string
+type: string
 display_names:
 - Target User Group
 models:

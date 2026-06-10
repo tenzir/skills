@@ -1,7 +1,6 @@
 name: httpCookie
 summary: Http Cookie
-types:
-- string
+type: string
 display_names:
 - Http Cookie
 models:

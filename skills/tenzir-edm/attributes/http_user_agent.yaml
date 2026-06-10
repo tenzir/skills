@@ -1,7 +1,6 @@
 name: httpUserAgent
 summary: HTTP User Agent
-types:
-- string
+type: string
 display_names:
 - HTTP User Agent
 models:

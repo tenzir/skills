@@ -1,7 +1,6 @@
 name: diskUtil
 summary: Disk Capacity Util (0-100)
-types:
-- double
+type: double
 display_names:
 - Disk Capacity Util
 models:

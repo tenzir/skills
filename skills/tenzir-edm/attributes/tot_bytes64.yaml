@@ -1,7 +1,6 @@
 name: totBytes64
 summary: Total number of sent and received bytes by a host. This has 64bit resolution.
-types:
-- uint64
+type: uint64
 display_names:
 - Total Bytes64
 - Total Bytes in 64 bit precision

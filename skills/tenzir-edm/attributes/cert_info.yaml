@@ -1,7 +1,6 @@
 name: certInfo
 summary: Certificate Common Name
-types:
-- string
+type: string
 display_names:
 - Certificate
 models:

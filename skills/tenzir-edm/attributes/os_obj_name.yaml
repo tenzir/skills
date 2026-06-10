@@ -1,7 +1,6 @@
 name: osObjName
 summary: Configuration Object that was edited
-types:
-- string
+type: string
 display_names:
 - OS Object Name
 models:

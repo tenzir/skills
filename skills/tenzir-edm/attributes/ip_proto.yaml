@@ -1,7 +1,6 @@
 name: ipProto
 summary: IP Protocol, e.g. TCP, UDP, ICMP etc as defined in IP RFPs
-types:
-- uint16
+type: uint16
 display_names:
 - IP Protocol
 models:

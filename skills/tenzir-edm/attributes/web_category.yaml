@@ -1,7 +1,6 @@
 name: webCategory
 summary: External mail domain category
-types:
-- string
+type: string
 display_names:
 - Website Category
 - Website category

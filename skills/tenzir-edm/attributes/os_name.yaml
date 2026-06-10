@@ -1,7 +1,6 @@
 name: osName
 summary: Operating system of host where vulnerability is found
-types:
-- string
+type: string
 display_names:
 - Operating System Name
 models:

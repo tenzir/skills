@@ -1,7 +1,6 @@
 name: destName
 summary: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
-types:
-- string
+type: string
 display_names:
 - Destination Host Name
 models:

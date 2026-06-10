@@ -1,7 +1,6 @@
 name: vulnSolution
 summary: Vulnerability Remediation
-types:
-- string
+type: string
 display_names:
 - Vuln Solution
 models:

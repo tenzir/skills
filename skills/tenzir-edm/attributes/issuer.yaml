@@ -1,7 +1,6 @@
 name: issuer
 summary: Certificate Issuer
-types:
-- string
+type: string
 display_names:
 - Issuer
 models:

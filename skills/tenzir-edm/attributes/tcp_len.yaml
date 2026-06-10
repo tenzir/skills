@@ -1,7 +1,6 @@
 name: tcpLen
 summary: TCP length field in TCP header
-types:
-- uint32
+type: uint32
 display_names:
 - TCP Length
 models:

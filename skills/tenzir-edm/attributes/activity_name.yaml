@@ -1,7 +1,6 @@
 name: activityName
 summary: File Activity Name (read, write etc)
-types:
-- string
+type: string
 display_names:
 - Activity Name
 models:

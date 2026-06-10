@@ -1,7 +1,6 @@
 name: seqNum
 summary: TCP Sequence number field in TCP header.
-types:
-- uint64
+type: uint64
 display_names:
 - Sequence Number
 models:

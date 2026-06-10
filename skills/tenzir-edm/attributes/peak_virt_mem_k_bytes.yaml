@@ -1,7 +1,6 @@
 name: peakVirtMemKBytes
 summary: Peak Virtual Memory used
-types:
-- uint32
+type: uint32
 display_names:
 - Peak Virtual Memory KB
 models:

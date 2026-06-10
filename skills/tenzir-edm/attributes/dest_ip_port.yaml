@@ -1,7 +1,6 @@
 name: destIpPort
 summary: This is the destination TCP or UDP port as identified in the event
-types:
-- uint16
+type: uint16
 display_names:
 - Destination TCP/UDP Port
 models:

@@ -1,7 +1,6 @@
 name: appVersion
 summary: Installed/Uninstalled Application version
-types:
-- string
+type: string
 display_names:
 - Application Version
 models:

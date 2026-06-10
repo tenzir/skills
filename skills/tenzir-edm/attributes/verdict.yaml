@@ -1,7 +1,6 @@
 name: verdict
 summary: Verdict about the Malware
-types:
-- string
+type: string
 display_names:
 - Verdict
 models:

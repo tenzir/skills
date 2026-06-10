@@ -1,7 +1,6 @@
 name: icmpCode
 summary: ICMP Code for each Type. This attribute is generally present in ICMP Traffic log and Netflow.
-types:
-- uint16
+type: uint16
 display_names:
 - ICMP Code
 models:

@@ -1,7 +1,6 @@
 name: hostKeyStrength
 summary: size of the hostKey in bits
-types:
-- Uint32
+type: Uint32
 display_names:
 - Key Strength
 models:

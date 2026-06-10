@@ -1,7 +1,6 @@
 name: eventId
 summary: Unique Id for an event
-types:
-- uint64
+type: uint64
 display_names:
 - Event Id
 models:

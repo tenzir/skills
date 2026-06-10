@@ -1,7 +1,6 @@
 name: infoURL
 summary: Information about a threat
-types:
-- string
+type: string
 display_names:
 - Informational URL
 models:

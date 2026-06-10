@@ -1,7 +1,6 @@
 name: threatCategory
 summary: Threat Category
-types:
-- string
+type: string
 display_names:
 - Threat Category
 models:

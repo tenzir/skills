@@ -1,7 +1,6 @@
 name: eventSeverityCat
 summary: 'This is set by Parser from Event Severity: 1-4: Low, 5-8: Medium, 9-10: High'
-types:
-- string
+type: string
 display_names:
 - Event Severity Category
 models:

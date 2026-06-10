@@ -1,7 +1,6 @@
 name: sysUpTimePct
 summary: System Uptime Pct (0-100)
-types:
-- double
+type: double
 display_names:
 - System Uptime Pct
 models:

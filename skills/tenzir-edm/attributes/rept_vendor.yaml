@@ -1,7 +1,6 @@
 name: reptVendor
 summary: This field captures the vendor of the reported event
-types:
-- string
+type: string
 display_names:
 - Reporting Vendor
 models:

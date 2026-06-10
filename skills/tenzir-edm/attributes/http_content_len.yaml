@@ -1,7 +1,6 @@
 name: httpContentLen
 summary: HTTP Content Length
-types:
-- uint16
+type: uint16
 display_names:
 - HTTP Content Length
 models:

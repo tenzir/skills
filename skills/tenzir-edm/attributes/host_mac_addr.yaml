@@ -1,7 +1,6 @@
 name: hostMACAddr
 summary: MAC of host requesting IP
-types:
-- string
+type: string
 display_names:
 - Host MAC
 models:

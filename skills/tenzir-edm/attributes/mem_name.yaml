@@ -1,7 +1,6 @@
 name: memName
 summary: Physical Memory, Virtual Memory etc
-types:
-- string
+type: string
 display_names:
 - Memory Name
 models:

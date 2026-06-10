@@ -1,7 +1,6 @@
 name: memUtil
 summary: Memory Util (0-100)
-types:
-- double
+type: double
 display_names:
 - Memory Util
 models:

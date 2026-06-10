@@ -1,7 +1,6 @@
 name: srcIpAddr
 summary: Source IP of a device as identified in the event.
-types:
-- IP
+type: IP
 display_names:
 - Source IP
 models:

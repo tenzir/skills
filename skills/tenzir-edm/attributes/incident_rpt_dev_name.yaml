@@ -1,7 +1,6 @@
 name: incidentRptDevName
 summary: The reporting device name of the events that triggered an Incident. In the case there are multiple reporting IPs, only 1 is chosen.
-types:
-- string
+type: string
 display_names:
 - Incident Reporting Device
 models:

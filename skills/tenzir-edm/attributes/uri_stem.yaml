@@ -1,7 +1,6 @@
 name: uriStem
 summary: URI Stem
-types:
-- string
+type: string
 display_names:
 - URI Stem
 models:

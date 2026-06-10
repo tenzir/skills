@@ -1,7 +1,6 @@
 name: user
 summary: User trying to login
-types:
-- string
+type: string
 display_names:
 - User
 models:

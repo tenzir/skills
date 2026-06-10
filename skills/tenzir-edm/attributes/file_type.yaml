@@ -1,7 +1,6 @@
 name: fileType
 summary: File Type
-types:
-- string
+type: string
 display_names:
 - File Type
 models:

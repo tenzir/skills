@@ -1,7 +1,6 @@
 name: isHostIntfCritical
 summary: Yes if the interface is Critical; no if it is not.
-types:
-- string
+type: string
 display_names:
 - Host Interface Critical
 models:

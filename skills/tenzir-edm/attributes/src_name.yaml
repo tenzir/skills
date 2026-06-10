@@ -1,7 +1,6 @@
 name: srcName
 summary: Source device's hostname as identified in the log, can also be enriched using reverse lookup of the source IP address.
-types:
-- string
+type: string
 display_names:
 - Source Host Name
 models:

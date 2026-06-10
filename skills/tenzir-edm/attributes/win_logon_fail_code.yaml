@@ -1,7 +1,6 @@
 name: winLogonFailCode
 summary: Windows Logon Failure Codes in numerical format
-types:
-- uint64
+type: uint64
 display_names:
 - Win Logon Fail Code
 models:

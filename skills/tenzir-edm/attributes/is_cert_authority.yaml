@@ -1,7 +1,6 @@
 name: isCertAuthority
 summary: 0 means not certificate authority, 1 means certificate authority
-types:
-- uchar
+type: uchar
 display_names:
 - Is Certificate Authority
 models:

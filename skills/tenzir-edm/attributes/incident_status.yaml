@@ -1,7 +1,6 @@
 name: incidentStatus
 summary: 'Incident management status is recorded. 0: Active, 1: Auto Cleared, 2:Manually Cleared. When an Incident is triggered, it becomes Active. An Incident can be cleared by the System, when the clearing condition in the rule is met or at the end of day for non-security Incidents. A user can also clear an Incident from GUI.'
-types:
-- uint16
+type: uint16
 display_names:
 - Incident Status
 models:

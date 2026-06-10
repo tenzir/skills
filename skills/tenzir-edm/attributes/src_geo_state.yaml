@@ -1,7 +1,6 @@
 name: srcGeoState
 summary: The State in the country in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
-types:
-- string
+type: string
 display_names:
 - Source State
 models:

@@ -1,7 +1,6 @@
 name: intfOperStatus
 summary: "Interface Operational Status \u2013 Up or Down"
-types:
-- string
+type: string
 display_names:
 - Interface Operational Status
 models:

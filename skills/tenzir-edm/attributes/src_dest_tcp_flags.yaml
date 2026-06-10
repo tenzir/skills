@@ -1,7 +1,6 @@
 name: srcDestTCPFlags
 summary: 'TCP flags sent from Source to Destination, as found in a packet reported by Netflow. The various combinations of SYN, URG, ACK, PSH, FIN, and RST are presented in logical OR; e.g. 3: SYN FIN, 11: SYN FIN PSH etc'
-types:
-- uchar
+type: uchar
 display_names:
 - Sent TCP flags
 models:

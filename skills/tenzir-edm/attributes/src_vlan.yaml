@@ -1,7 +1,6 @@
 name: srcVLAN
 summary: The VLAN to which the Source Network Interface belongs. Source network interface through which a packet enters a network device.
-types:
-- uint16
+type: uint16
 display_names:
 - Source VLAN
 models:

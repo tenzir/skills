@@ -1,7 +1,6 @@
 name: folder
 summary: Folder where the specific Windows store that the cert is in
-types:
-- string
+type: string
 display_names:
 - Folder
 models:

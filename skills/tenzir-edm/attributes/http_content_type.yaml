@@ -1,7 +1,6 @@
 name: httpContentType
 summary: HTTP Content Type
-types:
-- string
+type: string
 display_names:
 - HTTP Content Type
 models:

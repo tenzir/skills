@@ -1,7 +1,6 @@
 name: command
 summary: Command to execute process including full path and arguments
-types:
-- string
+type: string
 display_names:
 - Command
 models:

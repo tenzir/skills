@@ -1,7 +1,6 @@
 name: inIntfPktErr
 summary: Number of received packets that had errors. The networking stack discards these packets.
-types:
-- uint32
+type: uint32
 display_names:
 - Recv Packet Errors
 models:

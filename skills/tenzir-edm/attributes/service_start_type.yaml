@@ -1,7 +1,6 @@
 name: serviceStartType
 summary: Auto or Manual
-types:
-- string
+type: string
 display_names:
 - Service Start Type
 models:

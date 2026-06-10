@@ -1,7 +1,6 @@
 name: vulnCvssScore
 summary: CVSS Score
-types:
-- double
+type: double
 display_names:
 - Vulnerability Cvss Score
 models:

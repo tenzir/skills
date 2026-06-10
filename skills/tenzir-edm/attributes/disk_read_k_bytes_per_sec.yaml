@@ -1,7 +1,6 @@
 name: diskReadKBytesPerSec
 summary: Disk Read Volume in KBps
-types:
-- double
+type: double
 display_names:
 - Disk Read Rate KBps
 models:

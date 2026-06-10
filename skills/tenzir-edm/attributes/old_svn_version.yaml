@@ -1,7 +1,6 @@
 name: oldSVNVersion
 summary: Previous SVN version of monitored File
-types:
-- string
+type: string
 display_names:
 - Old SVN version
 models:

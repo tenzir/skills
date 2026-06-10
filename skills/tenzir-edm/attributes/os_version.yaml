@@ -1,7 +1,6 @@
 name: osVersion
 summary: Operating system version of host where vulnerability is found
-types:
-- string
+type: string
 display_names:
 - Operating System Version
 models:

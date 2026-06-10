@@ -1,7 +1,6 @@
 name: deletedItem
 summary: Item that was removed from config
-types:
-- string
+type: string
 display_names:
 - Deleted Item
 models:

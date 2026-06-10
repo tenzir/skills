@@ -1,7 +1,6 @@
 name: customer
 summary: This is the FortiSIEM Organization Name, which is unique to each tenant. It identifies the tenant this event belongs to. In Enterprise case, customer = Super.
-types:
-- string
+type: string
 display_names:
 - Organization Name
 models:

@@ -1,7 +1,6 @@
 name: serialNumber
 summary: Ceritificate Serial Number
-types:
-- string
+type: string
 display_names:
 - Serial Number
 models:

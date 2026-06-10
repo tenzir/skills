@@ -1,7 +1,6 @@
 name: incidentTicketId
 summary: This is the ID of a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident.
-types:
-- string
+type: string
 display_names:
 - Incident Ticket ID
 models:

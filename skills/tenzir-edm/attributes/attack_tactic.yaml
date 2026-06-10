@@ -1,7 +1,6 @@
 name: attackTactic
 summary: MITRE ATTACK Tactic
-types:
-- string
+type: string
 display_names:
 - Attack Tactic
 models:

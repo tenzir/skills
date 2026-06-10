@@ -1,7 +1,6 @@
 name: bufMemKB
 summary: Linux Buffer memory in KB
-types:
-- uint32
+type: uint32
 display_names:
 - Buffer Memory
 models:

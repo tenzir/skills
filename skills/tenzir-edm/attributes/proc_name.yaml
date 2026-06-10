@@ -1,7 +1,6 @@
 name: procName
 summary: Process binary with full path
-types:
-- string
+type: string
 display_names:
 - Process Name
 models:

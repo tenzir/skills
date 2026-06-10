@@ -1,7 +1,6 @@
 name: httpReferrer
 summary: HTTP Referrer
-types:
-- string
+type: string
 display_names:
 - HTTP Referrer
 models:

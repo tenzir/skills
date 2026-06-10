@@ -1,7 +1,6 @@
 name: tcpOffset
 summary: TCP Data Offset field in TCP header
-types:
-- uint32
+type: uint32
 display_names:
 - TCP Offset
 models:

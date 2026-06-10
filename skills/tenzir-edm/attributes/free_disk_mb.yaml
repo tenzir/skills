@@ -1,7 +1,6 @@
 name: freeDiskMB
 summary: Free Disk MB
-types:
-- uint32
+type: uint32
 display_names:
 - Free Disk MB
 models:

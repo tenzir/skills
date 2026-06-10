@@ -1,7 +1,6 @@
 name: outIntfPktErrPct
 summary: Ratio of outIntfPktErr and the total number of received packets in an onterval
-types:
-- double
+type: double
 display_names:
 - Sent Packet Error Pct
 models:

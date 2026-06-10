@@ -1,7 +1,6 @@
 name: recvBytes64
 summary: Number of bytes received by a host. This has 64bit resolution.
-types:
-- uint64
+type: uint64
 display_names:
 - Received Bytes64
 - Received Bytes in 64 bit precision

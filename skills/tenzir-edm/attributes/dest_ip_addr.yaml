@@ -1,7 +1,6 @@
 name: destIpAddr
 summary: Destination IP of a device as identified in the event.
-types:
-- IP
+type: IP
 display_names:
 - Destination IP
 models:

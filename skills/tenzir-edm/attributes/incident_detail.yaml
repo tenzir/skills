@@ -1,7 +1,6 @@
 name: incidentDetail
 summary: This field collects the remaining Incident fields that are neither Incident Source nor Incident Target
-types:
-- string
+type: string
 display_names:
 - Incident Detail
 models:

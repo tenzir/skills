@@ -1,7 +1,6 @@
 name: serviceName
 summary: Name of the service
-types:
-- string
+type: string
 display_names:
 - Service Name
 models:

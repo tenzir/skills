@@ -1,7 +1,6 @@
 name: configValue
 summary: Latest configuration value
-types:
-- string
+type: string
 display_names:
 - Configuration Value
 models:

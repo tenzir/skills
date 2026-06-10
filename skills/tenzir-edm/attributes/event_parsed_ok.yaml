@@ -1,7 +1,6 @@
 name: eventParsedOk
 summary: 'Whether event was fully parsed: 0 means not fully parsed, 1 means fully parsed'
-types:
-- uchar
+type: uchar
 display_names:
 - Event Parse Status
 models:

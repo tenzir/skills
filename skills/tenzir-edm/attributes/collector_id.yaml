@@ -1,7 +1,6 @@
 name: collectorId
 summary: ID of FortiSIEM Collector receiving the event. This is assigned by FortiSIEM when a collector is defined.
-types:
-- uint32
+type: uint32
 display_names:
 - Collector ID
 models:

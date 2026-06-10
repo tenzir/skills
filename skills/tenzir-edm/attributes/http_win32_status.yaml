@@ -1,7 +1,6 @@
 name: httpWin32Status
 summary: HTTP Win32 Status
-types:
-- string
+type: string
 display_names:
 - HTTP Win32 Status
 models:

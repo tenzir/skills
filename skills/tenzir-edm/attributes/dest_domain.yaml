@@ -1,7 +1,6 @@
 name: destDomain
 summary: Receiver mail domain
-types:
-- string
+type: string
 display_names:
 - Destination Domain
 models:

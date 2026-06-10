@@ -1,7 +1,6 @@
 name: reptModel
 summary: This field captures the model of the reporting device vendor
-types:
-- string
+type: string
 display_names:
 - Reporting Model
 models:

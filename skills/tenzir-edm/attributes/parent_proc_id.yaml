@@ -1,7 +1,6 @@
 name: parentProcId
 summary: Parent Process Id
-types:
-- string
+type: string
 display_names:
 - Parent Process Id
 models:

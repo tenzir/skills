@@ -1,7 +1,6 @@
 name: ipsSignatureId
 summary: IPS Signature id
-types:
-- uint64
+type: uint64
 display_names:
 - IPS Signature Id
 models:

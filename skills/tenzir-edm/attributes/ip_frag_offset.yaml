@@ -1,7 +1,6 @@
 name: ipFragOffset
 summary: IP Fragment Offset found in IP header
-types:
-- uint16
+type: uint16
 display_names:
 - IP Fragment Offset
 models:

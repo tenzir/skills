@@ -1,7 +1,6 @@
 name: diskTfrKBytesPerSec
 summary: Disk Transfer Volume in KBps
-types:
-- double
+type: double
 display_names:
 - Disk Transfer Rate KBps
 models:

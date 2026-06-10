@@ -1,7 +1,6 @@
 name: incidentTarget
 summary: 'This field collects a set of Incident fields that can be considered as a Target: destIpAddr, destName, hostIpAddr, hostName, user, targetUser. They are recorded as comma separated Attribute:Value format.'
-types:
-- string
+type: string
 display_names:
 - Incident Target
 models:

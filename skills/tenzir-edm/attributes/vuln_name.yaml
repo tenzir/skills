@@ -1,7 +1,6 @@
 name: vulnName
 summary: Vulnerability name
-types:
-- string
+type: string
 display_names:
 - Vulnerability Name
 models:

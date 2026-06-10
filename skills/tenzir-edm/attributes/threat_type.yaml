@@ -1,7 +1,6 @@
 name: threatType
 summary: Threat Type
-types:
-- string
+type: string
 display_names:
 - Threat Type
 models:

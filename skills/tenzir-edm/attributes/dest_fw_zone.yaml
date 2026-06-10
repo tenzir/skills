@@ -1,7 +1,6 @@
 name: destFwZone
 summary: DestinationFirewall Zone found in Firewall logs
-types:
-- string
+type: string
 display_names:
 - Destination Firewall Zone
 models:

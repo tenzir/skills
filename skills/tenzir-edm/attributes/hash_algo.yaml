@@ -1,7 +1,6 @@
 name: hashAlgo
 summary: Algorithm for hashCode
-types:
-- string
+type: string
 display_names:
 - Hash Algorithm
 models:

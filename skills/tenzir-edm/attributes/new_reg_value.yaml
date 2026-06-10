@@ -1,7 +1,6 @@
 name: newRegValue
 summary: New Registry Value
-types:
-- string
+type: string
 display_names:
 - New Registry Value
 models:

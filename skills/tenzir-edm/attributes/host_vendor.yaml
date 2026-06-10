@@ -1,6 +1,5 @@
 name: hostVendor
-types:
-- string
+type: string
 display_names:
 - Host Vendor
 models:

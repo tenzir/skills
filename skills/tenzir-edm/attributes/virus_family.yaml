@@ -1,7 +1,6 @@
 name: virusFamily
 summary: Malware Family
-types:
-- string
+type: string
 display_names:
 - Malware Family
 models:

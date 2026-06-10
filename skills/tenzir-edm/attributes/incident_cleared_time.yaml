@@ -1,7 +1,6 @@
 name: incidentClearedTime
 summary: When an Incident is cleared, then the Incident clearing time is recorded in this field.
-types:
-- DATE
+type: DATE
 display_names:
 - Incident Cleared Time
 models:

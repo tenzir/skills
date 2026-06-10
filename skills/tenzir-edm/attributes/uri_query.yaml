@@ -1,7 +1,6 @@
 name: uriQuery
 summary: URI Query
-types:
-- string
+type: string
 display_names:
 - URI Query
 models:

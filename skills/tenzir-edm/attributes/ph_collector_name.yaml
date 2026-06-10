@@ -1,7 +1,6 @@
 name: phCollectorName
 summary: Name of the FortiSIEM Collector receiving the event. This is defined in GUI.
-types:
-- string
+type: string
 display_names:
 - Collector Name
 models:

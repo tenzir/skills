@@ -1,7 +1,6 @@
 name: fingerprintId
 summary: Certificate fingerprint
-types:
-- string
+type: string
 display_names:
 - Fingerprint
 models:

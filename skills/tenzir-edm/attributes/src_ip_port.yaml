@@ -1,7 +1,6 @@
 name: srcIpPort
 summary: This is the source TCP or UDP port as identified in the event
-types:
-- uint16
+type: uint16
 display_names:
 - Source TCP/UDP Port
 models:

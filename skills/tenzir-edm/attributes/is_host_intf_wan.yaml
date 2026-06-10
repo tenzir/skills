@@ -1,7 +1,6 @@
 name: isHostIntfWAN
 summary: Yes if the interface is WAN interface; no if it is not.
-types:
-- string
+type: string
 display_names:
 - Interface WAN Flag
 models:

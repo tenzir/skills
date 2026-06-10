@@ -1,7 +1,6 @@
 name: rawEventSize
 summary: Size of the raw message
-types:
-- uint32
+type: uint32
 display_names:
 - Raw Event Log Size
 models:

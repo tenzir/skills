@@ -1,7 +1,6 @@
 name: srcDomain
 summary: Sender mail domain
-types:
-- string
+type: string
 display_names:
 - Source Domain
 models:

@@ -1,7 +1,6 @@
 name: shortParentProcName
 summary: Short parent process name (without full path)
-types:
-- string
+type: string
 display_names:
 - Short Parent Process Name
 models:

@@ -1,7 +1,6 @@
 name: phRecvTime
 summary: This is the timestamp (epoch seconds ) recorded by the parser module when an event is ingested. FortiSIEM uses this time in all its analytics. This time is obtained from NTP.
-types:
-- DATE
+type: DATE
 display_names:
 - Event Receive Time
 models:

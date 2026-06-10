@@ -1,7 +1,6 @@
 name: srcFwZone
 summary: Source Firewall Zone found in Firewall logs
-types:
-- string
+type: string
 display_names:
 - Source Firewall Zone
 models:

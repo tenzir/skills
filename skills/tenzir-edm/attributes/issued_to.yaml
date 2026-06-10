@@ -1,7 +1,6 @@
 name: issuedTo
 summary: Certificate Issued to
-types:
-- string
+type: string
 display_names:
 - Issued To
 models:

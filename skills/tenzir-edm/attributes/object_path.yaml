@@ -1,7 +1,6 @@
 name: objectPath
 summary: Configuration Object Path
-types:
-- string
+type: string
 display_names:
 - OS Object Path
 models:

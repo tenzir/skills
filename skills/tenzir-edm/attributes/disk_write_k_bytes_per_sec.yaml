@@ -1,7 +1,6 @@
 name: diskWriteKBytesPerSec
 summary: Disk Write Volume in KBps
-types:
-- double
+type: double
 display_names:
 - Disk Write Rate KBps
 models:

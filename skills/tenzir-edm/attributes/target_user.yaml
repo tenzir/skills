@@ -1,7 +1,6 @@
 name: targetUser
 summary: Affected User whose account was created/deleted/modified
-types:
-- string
+type: string
 display_names:
 - Target User
 models:

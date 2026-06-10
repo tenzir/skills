@@ -1,7 +1,6 @@
 name: totalDiskMB
 summary: Total Disk MB
-types:
-- uint32
+type: uint32
 display_names:
 - Total Disk MB
 models:

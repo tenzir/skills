@@ -1,7 +1,6 @@
 name: downloadURL
 summary: URL found in mail
-types:
-- string
+type: string
 display_names:
 - Download URL
 models:

@@ -1,7 +1,6 @@
 name: addedItem
 summary: Item that was added to config
-types:
-- string
+type: string
 display_names:
 - Added Item
 models:

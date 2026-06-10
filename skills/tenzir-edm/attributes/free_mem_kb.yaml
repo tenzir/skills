@@ -1,7 +1,6 @@
 name: freeMemKB
 summary: Free Memory in KB
-types:
-- uint32
+type: uint32
 display_names:
 - Free Memory
 models:

@@ -1,7 +1,6 @@
 name: action
 summary: 'Mail Inspection Action: Quarantine, Delete, Clean'
-types:
-- string
+type: string
 display_names:
 - Action
 models:

@@ -1,7 +1,6 @@
 name: eventName
 summary: Short event description
-types:
-- string
+type: string
 display_names:
 - Event Name
 models:

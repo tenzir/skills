@@ -1,7 +1,6 @@
 name: appVendor
 summary: Installed/Uninstalled Application vendor name
-types:
-- string
+type: string
 display_names:
 - Application Vendor
 models:

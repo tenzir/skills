@@ -1,7 +1,6 @@
 name: fwRule
 summary: Firewall/IPS Policy that triggered the event
-types:
-- string
+type: string
 display_names:
 - Firewall Rule
 models:

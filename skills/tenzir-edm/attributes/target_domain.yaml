@@ -1,7 +1,6 @@
 name: targetDomain
 summary: Domain of targetUser
-types:
-- string
+type: string
 display_names:
 - Target User Domain
 models:

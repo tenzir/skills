@@ -1,7 +1,6 @@
 name: hashMD5
 summary: MD5 hash
-types:
-- string
+type: string
 display_names:
 - MD5 hash
 models:

@@ -1,7 +1,6 @@
 name: intfName
 summary: Name of a network interface in a host.
-types:
-- string
+type: string
 display_names:
 - Host Interface Name
 models:

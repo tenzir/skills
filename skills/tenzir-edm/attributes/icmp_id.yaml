@@ -1,7 +1,6 @@
 name: icmpId
 summary: ICMP Id in the ICMP header after the IPv4 header
-types:
-- uint64
+type: uint64
 display_names:
 - ICMP Id
 models:

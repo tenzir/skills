@@ -1,7 +1,6 @@
 name: preNATDestIpPort
 summary: The Destination TCP/UDP Port before Firewall Inbound Network Address Translation (NAT) - often present in Firewall Address translation log
-types:
-- uint16
+type: uint16
 display_names:
 - Pre-NAT Destination Port
 models:

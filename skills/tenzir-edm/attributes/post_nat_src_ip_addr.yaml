@@ -1,7 +1,6 @@
 name: postNATSrcIpAddr
 summary: The Source IP after Firewall Outbound Network Address Translation (NAT). This is often present in Firewall Address translation logs
-types:
-- IP
+type: IP
 display_names:
 - Post-NAT Source IP
 models:

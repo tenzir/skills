@@ -1,7 +1,6 @@
 name: oldRegValue
 summary: Old Registry Value
-types:
-- string
+type: string
 display_names:
 - Old Registry Value
 models:
