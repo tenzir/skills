@@ -1,0 +1,11 @@
+name: srcIntfName
+summary: Name of the network interface through which a packet enters a network device. This information is typically present in Firewall logs.
+types:
+- string
+display_names:
+- Source Interface Name
+models:
+- name: network_traffic
+  type: string
+  display_name: Source Interface Name
+  description: Name of the network interface through which a packet enters a network device. This information is typically present in Firewall logs.

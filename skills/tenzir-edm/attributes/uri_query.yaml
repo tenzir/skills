@@ -1,0 +1,11 @@
+name: uriQuery
+summary: URI Query
+types:
+- string
+display_names:
+- URI Query
+models:
+- name: web_activity
+  type: string
+  display_name: URI Query
+  description: URI Query

@@ -1,0 +1,15 @@
+name: osType
+summary: Operating system type
+types:
+- string
+display_names:
+- Operating System Type
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Operating System Type
+  description: Operating system type
+- name: vulnerability_detection
+  type: string
+  display_name: Operating System Type
+  description: Operating system type of host where vulnerability is found

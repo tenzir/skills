@@ -1,0 +1,11 @@
+name: incidentSrc
+summary: 'This field collects a set of Incident fields that can be considered as a source: srcIpAddr, srcName,srcUser. They are recorded as comma separated Attribute:Value format.'
+types:
+- string
+display_names:
+- Incident Source
+models:
+- name: incident
+  type: string
+  display_name: Incident Source
+  description: 'This field collects a set of Incident fields that can be considered as a source: srcIpAddr, srcName,srcUser. They are recorded as comma separated Attribute:Value format.'

@@ -1,0 +1,11 @@
+name: httpContentType
+summary: HTTP Content Type
+types:
+- string
+display_names:
+- HTTP Content Type
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP Content Type
+  description: HTTP Content Type

@@ -1,0 +1,11 @@
+name: httpMethod
+summary: HTTP Method
+types:
+- string
+display_names:
+- HTTP Method
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP Method
+  description: HTTP Method

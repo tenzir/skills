@@ -1,0 +1,15 @@
+name: newSVNVersion
+summary: New SVN version of monitored File
+types:
+- string
+display_names:
+- New SVN Version
+models:
+- name: file_activity
+  type: string
+  display_name: New SVN Version
+  description: New SVN version of monitored File
+- name: system_configuration_change
+  type: string
+  display_name: New SVN Version
+  description: New SVN version of Network Device Config File

@@ -1,0 +1,51 @@
+name: file_activity
+title: File Activity Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/218396/file-activity-data-model
+doc: docs/file-activity-data-model.md
+summary: 'This describes file read/write/create/delete/move/permission change / content change activity. Events from Windows Sysmon via Windows Agent: Win-Sysmon-11-FileCreate, Win-Sysmon-11-FileDelete, Win-Sysmon-11-FileDelete-archived. Events from Windows Agent UEBA: FINS-Windows-file-created, FINS-Windows-file-deleted, FINS-Windows-file-moved, FINS-Windows-file-read, FINS-Windows-file-renamed, FINS-Windows-file-written. Events from Windows Agent FIM via Windows Agent: AO-WUA-FileMon-Added: A windows file or directory created, AO-WUA-FileMon-Modified: A windows file or directory modified, AO-WUA-FileMon-Removed: A windows file or directory deleted, AO-WUA-FileMon-ArchivedBitChange: A windows file archive bit changed, AO-WUA-FileMon-OwnershipChange: A windows file or directory ownership changed, AO-WUA-FileMon-PermissionChange: A windows file or directory permission changed, AO-WUA-FileMon-Renamed-New-Name: A windows file or directory renamed: shows new name, AO-WUA-FileMon-Renamed-Old-Name: A windows file or directory renamed: shows old name, AO-WUA-FileMon-BaselineChange: A Windows file baseline changed. Events from Linux Agent FIM via Linux Agent: FSM_LINUX_FILE_ACCESS, FSM_LINUX_FILE_OPEN, FSM_LINUX_FILE_CREATE, FSM_LINUX_FILE_DELETE, FSM_LINUX_FILE_MODIFY, FSM_LINUX_FILE_CLOSE, FSM_LINUX_FILE_UNMOUNT, FSM_LINUX_FILE_MOVED, FSM_LINUX_FILE_MOVED_FROM, FSM_LINUX_FILE_MOVED_TO, FSM_LINUX_FILE_ATTRIB_CHANGE. Events from File Content Monitoring via Windows/Linux Agent: PH_DEV_MON_FILE_CONTENT_CHANGE. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: user
+  type: string
+  display_name: User
+  description: User doing file activity
+- name: domain
+  type: string
+  display_name: Domain
+  description: "User\u2019s Windows\u2019s domain"
+- name: fileName
+  type: string
+  display_name: File Name
+  description: File Name
+- name: fileType
+  type: string
+  display_name: File Type
+  description: File Type
+- name: procName
+  type: string
+  display_name: Process Name
+  description: Process doing file activity
+- name: activityName
+  type: string
+  display_name: Activity Name
+  description: File Activity Name (read, write etc)
+- name: resourceName
+  type: string
+  display_name: Resource Name
+  description: Resource involved in File Activity
+- name: oldSVNVersion
+  type: string
+  display_name: Old SVN version
+  description: Previous SVN version of monitored File
+- name: newSVNVersion
+  type: string
+  display_name: New SVN Version
+  description: New SVN version of monitored File

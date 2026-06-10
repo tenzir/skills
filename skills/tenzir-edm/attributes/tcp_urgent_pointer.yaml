@@ -1,0 +1,11 @@
+name: tcpUrgentPointer
+summary: TCP Urgent Pointer field in TCP header
+types:
+- uint32
+display_names:
+- TCP URGENT Pointer
+models:
+- name: network_traffic
+  type: uint32
+  display_name: TCP URGENT Pointer
+  description: TCP Urgent Pointer field in TCP header

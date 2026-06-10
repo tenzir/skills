@@ -1,0 +1,15 @@
+name: virusType
+summary: Malware Type
+types:
+- string
+display_names:
+- Malware Type
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Malware Type
+  description: Malware Type
+- name: network_security_finding
+  type: string
+  display_name: Malware Type
+  description: Malware Type

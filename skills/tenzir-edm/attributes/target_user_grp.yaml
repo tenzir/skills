@@ -1,0 +1,11 @@
+name: targetUserGrp
+summary: Group that was created/deleted
+types:
+- string
+display_names:
+- Target User Group
+models:
+- name: user_account_change
+  type: string
+  display_name: Target User Group
+  description: Group that was created/deleted

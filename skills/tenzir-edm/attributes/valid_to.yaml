@@ -1,0 +1,11 @@
+name: validTo
+summary: Time upto which certificate is valid
+types:
+- DATE
+display_names:
+- Valid To
+models:
+- name: certificate_monitoring
+  type: DATE
+  display_name: Valid To
+  description: Time upto which certificate is valid

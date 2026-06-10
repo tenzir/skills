@@ -1,0 +1,15 @@
+name: shortParentProcName
+summary: Short parent process name (without full path)
+types:
+- string
+display_names:
+- Short Parent Process Name
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Short Parent Process Name
+  description: Short parent process name (without full path)
+- name: process_creation
+  type: string
+  display_name: Short Parent Process Name
+  description: Short parent process name (without full path)

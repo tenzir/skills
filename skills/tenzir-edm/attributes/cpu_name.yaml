@@ -1,0 +1,12 @@
+name: cpuName
+summary: CPU name (CPU-1, CPU-2) etc for multi-CPU monitoring
+types:
+- string
+display_names:
+- CPU Name
+models:
+- name: system_performance
+  type: string
+  display_name: CPU Name
+  description: CPU name (CPU-1, CPU-2) etc for multi-CPU monitoring
+  section: CPU Monitoring

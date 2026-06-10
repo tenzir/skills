@@ -1,0 +1,78 @@
+name: process_creation
+title: Process Creation Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/892201/process-creation-data-model
+doc: docs/process-creation-data-model.md
+summary: 'This includes process creation in Windows and Linux hosts. Event from Windows Sysmon via Windows Agent: Win-Sysmon-1-Create-Process. Event from Linux Agent: LINUX_PROCESS_EXEC. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: user
+  type: string
+  display_name: User
+  description: User creating the process
+- name: procName
+  type: string
+  display_name: Process Name
+  description: Process name (Full path)
+- name: shortProcName
+  type: string
+  display_name: Short Process Name
+  description: Short process name (without full path)
+- name: procId
+  type: string
+  display_name: Process Id
+  description: Process Id
+- name: parentProcName
+  type: string
+  display_name: Parent Process Name
+  description: Parent Process Name (full path)
+- name: shortParentProcName
+  type: string
+  display_name: Short Parent Process Name
+  description: Short parent process name (without full path)
+- name: parentProcId
+  type: string
+  display_name: Parent Process Id
+  description: Parent Process Id
+- name: imageFile
+  type: string
+  display_name: Image File
+- name: command
+  type: string
+  display_name: Command
+  description: Full Command executed to create process
+- name: hashAlgo
+  type: string
+  display_name: Hash Algorithm
+  description: Hash Algorithm
+- name: hashCode
+  type: string
+  display_name: Hash Code
+  description: Hash Code
+- name: hashSHA256
+  type: string
+  display_name: SHA256 Hash
+  description: SHA256 Hash Value
+- name: hashSHA512
+  type: string
+  display_name: SHA512 Hash
+  description: SHA512 Hash Value
+- name: hashIMP
+  type: string
+  display_name: IMP Hash
+  description: "Import hash Value \u2013 IMP Hash remains consistent even if the malware is slightly modified or repacked, making it effective for identifying related threat actor tools."
+- name: hashSHA1
+  type: string
+  display_name: SHA1 hash
+  description: SHA1 hash
+- name: hashMD5
+  type: string
+  display_name: MD5 hash
+  description: MD5 hash

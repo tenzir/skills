@@ -1,0 +1,15 @@
+name: vulnCVEId
+summary: CVE ID
+types:
+- string
+display_names:
+- Vulnerability CVE Id
+models:
+- name: network_security_finding
+  type: string
+  display_name: Vulnerability CVE Id
+  description: CVE ID
+- name: vulnerability_detection
+  type: string
+  display_name: Vulnerability CVE Id
+  description: CVE ID of the vulnerability

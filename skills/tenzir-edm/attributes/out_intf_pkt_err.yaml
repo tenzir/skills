@@ -1,0 +1,12 @@
+name: outIntfPktErr
+summary: Number of sent packets that had errors. he networking stack discards these packets.
+types:
+- uint32
+display_names:
+- Sent Packet Errors
+models:
+- name: system_performance
+  type: uint32
+  display_name: Sent Packet Errors
+  description: Number of sent packets that had errors. he networking stack discards these packets.
+  section: Network Interface Monitoring

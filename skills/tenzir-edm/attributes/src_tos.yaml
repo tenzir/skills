@@ -1,0 +1,11 @@
+name: srcTos
+summary: Source Type of Service (ToS) field present in the IPv4 header. Typically present in Netflow. It provides an indication of the quality of service desired.
+types:
+- uchar
+display_names:
+- Source TOS
+models:
+- name: network_traffic
+  type: uchar
+  display_name: Source TOS
+  description: Source Type of Service (ToS) field present in the IPv4 header. Typically present in Netflow. It provides an indication of the quality of service desired.

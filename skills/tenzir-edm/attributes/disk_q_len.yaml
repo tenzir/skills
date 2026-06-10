@@ -1,0 +1,12 @@
+name: diskQLen
+summary: Disk Queue Length
+types:
+- uint32
+display_names:
+- Disk Queue Length
+models:
+- name: system_performance
+  type: uint32
+  display_name: Disk Queue Length
+  description: Disk Queue Length
+  section: Disk I/O Monitoring

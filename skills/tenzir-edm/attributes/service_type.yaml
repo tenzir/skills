@@ -1,0 +1,11 @@
+name: serviceType
+summary: Values such as KernelDriver, FileSystemDriver
+types:
+- string
+display_names:
+- Service Type
+models:
+- name: service_install_start_stop
+  type: string
+  display_name: Service Type
+  description: Values such as KernelDriver, FileSystemDriver

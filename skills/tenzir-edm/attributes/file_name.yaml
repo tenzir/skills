@@ -1,0 +1,19 @@
+name: fileName
+summary: File Name
+types:
+- string
+display_names:
+- File Name
+models:
+- name: file_activity
+  type: string
+  display_name: File Name
+  description: File Name
+- name: mail_activity
+  type: string
+  display_name: File Name
+  description: File attachment
+- name: network_security_finding
+  type: string
+  display_name: File Name
+  description: File name involved in the event

@@ -1,0 +1,11 @@
+name: oldRegValue
+summary: Old Registry Value
+types:
+- string
+display_names:
+- Old Registry Value
+models:
+- name: windows_registry_activity
+  type: string
+  display_name: Old Registry Value
+  description: Old Registry Value

@@ -1,0 +1,15 @@
+name: virusFamily
+summary: Malware Family
+types:
+- string
+display_names:
+- Malware Family
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Malware Family
+  description: Malware Family
+- name: network_security_finding
+  type: string
+  display_name: Malware Family
+  description: Malware Family

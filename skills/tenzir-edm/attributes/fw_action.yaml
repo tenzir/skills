@@ -1,0 +1,17 @@
+name: fwAction
+summary: Action taken by the network appliance
+types:
+- string
+display_names:
+- Firewall Action
+models:
+- name: endpoint_security_finding
+  type: string
+  description: Action taken by the Endpoint
+- name: network_security_finding
+  type: string
+  display_name: Firewall Action
+  description: Action taken by the network appliance
+- name: network_traffic
+  type: string
+  description: Action taken by the network appliance

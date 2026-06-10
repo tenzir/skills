@@ -1,0 +1,119 @@
+name: network_security_finding
+title: Network Security Finding Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/965962/network-security-finding-data-model
+doc: docs/network-security-finding-data-model.md
+summary: 'This data model describes Host IPS / Endpoint Detection Events such as Network IPS Events, Web Gateway Detection Events, Email Security Detection Events, Honeypot Events. Example events: FortiGate-ips-signature-109314060 (SMTP.X-LINK2STATE.Buffer.Overflow), FortiWeb-20000008 (FortiWeb Exploit Signature Detected), Cisco_IPS-1044/8 (Metasploit Shellcode Encoder), PAN-IDP-30012 (Internet Explorer Vector Markup Language Buffer Overflow). In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: srcIpAddr
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: srcName
+  type: string
+  display_name: Source Host Name
+  description: Source device's hostname as identified in the log, can also be enriched using reverse lookup of the source IP address.
+- name: destIpAddr
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: destName
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: ipProto
+  type: uint16
+  display_name: IP Protocol
+  description: IP Protocol, e.g. TCP, UDP, ICMP etc as defined in IP RFPs
+- name: srcIpPort
+  type: uint16
+  display_name: Source TCP/UDP Port
+  description: This is the source TCP or UDP port as identified in the event
+- name: destIpPort
+  type: uint16
+  display_name: Destination TCP/UDP Port
+  description: This is the destination TCP or UDP port as identified in the event
+- name: appName
+  type: string
+  display_name: Application Name
+  description: Application name if application detection is enabled
+- name: user
+  type: string
+  display_name: User
+  description: User associated with network session
+- name: fwRule
+  type: string
+  display_name: Firewall Rule
+  description: Firewall/IPS Policy that triggered the event
+- name: fwAction
+  type: string
+  display_name: Firewall Action
+  description: Action taken by the network appliance
+- name: webFilterAction
+  type: string
+  display_name: Web Filter Action
+  description: Action taken by the Web Filter module
+- name: ipsSignatureId
+  type: uint64
+  display_name: IPS Signature Id
+  description: IPS Signature id
+- name: attackName
+  type: string
+  display_name: Attack Name
+  description: Attack Name
+- name: attackTactic
+  type: string
+  display_name: Attack Tactic
+  description: MITRE ATTACK Tactic
+- name: attackTechniqueId
+  type: string
+  display_name: Attack Technique Id
+  description: MITRE ATTACK Technique Id
+- name: attackTechnique
+  type: string
+  display_name: Attack Technique
+  description: MITRE ATTACK Technique Description
+- name: fileName
+  type: string
+  display_name: File Name
+  description: File name involved in the event
+- name: vulnCVEId
+  type: string
+  display_name: Vulnerability CVE Id
+  description: CVE ID
+- name: webCategory
+  type: string
+  display_name: Website category
+  description: Website category typically reported by Web Filters
+- name: infoURL
+  type: string
+  display_name: Informational URL
+  description: Link to more information about the event
+- name: downloadURL
+  type: string
+  display_name: Download URL
+  description: URL involved in the event
+- name: hashCode
+  type: string
+  display_name: Hash Code
+  description: Hash of process binary
+- name: hashAlgo
+  type: string
+  display_name: Hash Algorithm
+  description: Algorithm for hashCode
+- name: virusName
+  type: string
+  display_name: Malware Name
+  description: Malware Name
+- name: virusType
+  type: string
+  display_name: Malware Type
+  description: Malware Type
+- name: virusFamily
+  type: string
+  display_name: Malware Family
+  description: Malware Family
+- name: verdict
+  type: string
+  display_name: Verdict
+  description: Verdict about the malware

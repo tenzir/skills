@@ -1,0 +1,11 @@
+name: destDevPort
+summary: Name of the network port through which a packet exits a network device. This information is typically present in Firewall logs.
+types:
+- string
+display_names:
+- Destination Device Port
+models:
+- name: network_traffic
+  type: string
+  display_name: Destination Device Port
+  description: Name of the network port through which a packet exits a network device. This information is typically present in Firewall logs.

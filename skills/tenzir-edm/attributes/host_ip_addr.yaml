@@ -1,0 +1,85 @@
+name: hostIpAddr
+summary: IP address of hostName
+types:
+- IP
+display_names:
+- Host IP
+models:
+- name: certificate_monitoring
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: dhcp_activity
+  type: IP
+  display_name: Host IP
+  description: Assigned IP
+- name: endpoint_security_finding
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: file_activity
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: process_creation
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: service_install_start_stop
+  type: IP
+  display_name: Host IP
+  description: IP of the host
+- name: software_install_uninstall
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: system_configuration_change
+  type: IP
+  display_name: Host IP
+  description: IP of the device where the change was made
+- name: system_performance
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: CPU Monitoring
+- name: system_performance
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Disk I/O Monitoring
+- name: system_performance
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Disk Space Monitoring
+- name: system_performance
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Memory Monitoring
+- name: system_performance
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Network Interface Monitoring
+- name: system_performance
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Uptime Monitoring
+- name: system_process_performance
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: user_account_change
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: vulnerability_detection
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: windows_registry_activity
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName

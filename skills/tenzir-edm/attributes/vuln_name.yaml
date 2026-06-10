@@ -1,0 +1,11 @@
+name: vulnName
+summary: Vulnerability name
+types:
+- string
+display_names:
+- Vulnerability Name
+models:
+- name: vulnerability_detection
+  type: string
+  display_name: Vulnerability Name
+  description: Vulnerability name

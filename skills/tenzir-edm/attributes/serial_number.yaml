@@ -1,0 +1,11 @@
+name: serialNumber
+summary: Ceritificate Serial Number
+types:
+- string
+display_names:
+- Serial Number
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Serial Number
+  description: Ceritificate Serial Number

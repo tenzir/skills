@@ -1,0 +1,11 @@
+name: uriStem
+summary: URI Stem
+types:
+- string
+display_names:
+- URI Stem
+models:
+- name: web_activity
+  type: string
+  display_name: URI Stem
+  description: URI Stem

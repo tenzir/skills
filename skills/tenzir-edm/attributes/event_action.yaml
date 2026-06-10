@@ -1,0 +1,12 @@
+name: eventAction
+summary: This is an unsigned integer boolean. 0 means permitted, 1 means blocked. It is used by various parsers to indicate success / failure or permit/deny for network traffic.
+types:
+- uint16
+display_names:
+- Event Action
+models:
+- name: base_event
+  type: uint16
+  display_name: Event Action
+  description: This is an unsigned integer boolean. 0 means permitted, 1 means blocked. It is used by various parsers to indicate success / failure or permit/deny for network traffic.
+  section: Base Attributes that need to be set within Parser

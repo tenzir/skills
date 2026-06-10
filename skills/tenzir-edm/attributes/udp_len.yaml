@@ -1,0 +1,11 @@
+name: udpLen
+summary: UDP length field in UDP header
+types:
+- uint32
+display_names:
+- UDP Length
+models:
+- name: network_traffic
+  type: uint32
+  display_name: UDP Length
+  description: UDP length field in UDP header

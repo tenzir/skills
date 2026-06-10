@@ -1,0 +1,11 @@
+name: folder
+summary: Folder where the specific Windows store that the cert is in
+types:
+- string
+display_names:
+- Folder
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Folder
+  description: Folder where the specific Windows store that the cert is in

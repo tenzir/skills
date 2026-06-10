@@ -1,0 +1,15 @@
+name: srcGeoLongitude
+summary: The longitude on which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+types:
+- string
+display_names:
+- Source Longitude
+models:
+- name: network_traffic
+  type: string
+  display_name: Source Longitude
+  description: The longitude on which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: web_activity
+  type: string
+  display_name: Source Longitude
+  description: The longitude on which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.

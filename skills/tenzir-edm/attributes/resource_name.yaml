@@ -1,0 +1,11 @@
+name: resourceName
+summary: Resource involved in File Activity
+types:
+- string
+display_names:
+- Resource Name
+models:
+- name: file_activity
+  type: string
+  display_name: Resource Name
+  description: Resource involved in File Activity

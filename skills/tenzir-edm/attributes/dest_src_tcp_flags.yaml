@@ -1,0 +1,11 @@
+name: destSrcTCPFlags
+summary: 'TCP flags sent from Destination to Source as found in a packet reported by Netflow. The various combinations of SYN, URG, ACK, PSH, FIN, and RST are presented in logical OR; e.g. 3: SYN FIN, 11: SYN FIN PSH etc'
+types:
+- uchar
+display_names:
+- Received TCP flags
+models:
+- name: network_traffic
+  type: uchar
+  display_name: Received TCP flags
+  description: 'TCP flags sent from Destination to Source as found in a packet reported by Netflow. The various combinations of SYN, URG, ACK, PSH, FIN, and RST are presented in logical OR; e.g. 3: SYN FIN, 11: SYN FIN PSH etc'

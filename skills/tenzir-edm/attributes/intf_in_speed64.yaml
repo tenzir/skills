@@ -1,0 +1,12 @@
+name: intfInSpeed64
+summary: High Speed Network Interface Speed (bits/sec).
+types:
+- uint64
+display_names:
+- Recv Interface Speed bps
+models:
+- name: system_performance
+  type: uint64
+  display_name: Recv Interface Speed bps
+  description: High Speed Network Interface Speed (bits/sec).
+  section: Network Interface Monitoring

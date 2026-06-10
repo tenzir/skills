@@ -1,0 +1,11 @@
+name: destDomain
+summary: Receiver mail domain
+types:
+- string
+display_names:
+- Destination Domain
+models:
+- name: mail_activity
+  type: string
+  display_name: Destination Domain
+  description: Receiver mail domain

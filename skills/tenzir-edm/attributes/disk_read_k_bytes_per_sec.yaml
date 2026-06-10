@@ -1,0 +1,16 @@
+name: diskReadKBytesPerSec
+summary: Disk Read Volume in KBps
+types:
+- double
+display_names:
+- Disk Read Rate KBps
+models:
+- name: system_performance
+  type: double
+  display_name: Disk Read Rate KBps
+  description: Disk Read Volume in KBps
+  section: Disk I/O Monitoring
+- name: system_process_performance
+  type: double
+  display_name: Disk Read Rate KBps
+  description: Disk Read Volume in KBps

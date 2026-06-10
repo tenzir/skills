@@ -1,0 +1,15 @@
+name: verdict
+summary: Verdict about the Malware
+types:
+- string
+display_names:
+- Verdict
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Verdict
+  description: Verdict about the Malware
+- name: network_security_finding
+  type: string
+  display_name: Verdict
+  description: Verdict about the malware

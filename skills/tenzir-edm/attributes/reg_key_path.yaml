@@ -1,0 +1,11 @@
+name: regKeyPath
+summary: Registry Key
+types:
+- string
+display_names:
+- Registry Key Path
+models:
+- name: windows_registry_activity
+  type: string
+  display_name: Registry Key Path
+  description: Registry Key

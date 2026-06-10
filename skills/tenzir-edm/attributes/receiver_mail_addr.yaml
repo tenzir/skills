@@ -1,0 +1,11 @@
+name: receiverMailAddr
+summary: Receive mail address
+types:
+- string
+display_names:
+- Mail Receiver
+models:
+- name: mail_activity
+  type: string
+  display_name: Mail Receiver
+  description: Receive mail address

@@ -1,0 +1,11 @@
+name: osVersion
+summary: Operating system version of host where vulnerability is found
+types:
+- string
+display_names:
+- Operating System Version
+models:
+- name: vulnerability_detection
+  type: string
+  display_name: Operating System Version
+  description: Operating system version of host where vulnerability is found

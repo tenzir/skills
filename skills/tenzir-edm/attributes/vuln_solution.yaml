@@ -1,0 +1,11 @@
+name: vulnSolution
+summary: Vulnerability Remediation
+types:
+- string
+display_names:
+- Vuln Solution
+models:
+- name: vulnerability_detection
+  type: string
+  display_name: Vuln Solution
+  description: Vulnerability Remediation

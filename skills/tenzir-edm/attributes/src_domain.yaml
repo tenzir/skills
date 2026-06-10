@@ -1,0 +1,11 @@
+name: srcDomain
+summary: Sender mail domain
+types:
+- string
+display_names:
+- Source Domain
+models:
+- name: mail_activity
+  type: string
+  display_name: Source Domain
+  description: Sender mail domain

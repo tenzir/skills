@@ -1,0 +1,11 @@
+name: phIncidentCategory
+summary: This is defined in a Rule and copied over from the Rule that triggered the Incident.
+types:
+- string
+display_names:
+- Incident Category
+models:
+- name: incident
+  type: string
+  display_name: Incident Category
+  description: This is defined in a Rule and copied over from the Rule that triggered the Incident.

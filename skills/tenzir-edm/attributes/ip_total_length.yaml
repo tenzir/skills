@@ -1,0 +1,11 @@
+name: ipTotalLength
+summary: IP Total Length found in IP header
+types:
+- uint16
+display_names:
+- IP Total Length
+models:
+- name: network_traffic
+  type: uint16
+  display_name: IP Total Length
+  description: IP Total Length found in IP header

@@ -1,0 +1,11 @@
+name: hostKeyStrength
+summary: size of the hostKey in bits
+types:
+- Uint32
+display_names:
+- Key Strength
+models:
+- name: certificate_monitoring
+  type: Uint32
+  display_name: Key Strength
+  description: size of the hostKey in bits

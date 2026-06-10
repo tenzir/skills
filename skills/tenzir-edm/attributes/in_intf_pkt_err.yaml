@@ -1,0 +1,12 @@
+name: inIntfPktErr
+summary: Number of received packets that had errors. The networking stack discards these packets.
+types:
+- uint32
+display_names:
+- Recv Packet Errors
+models:
+- name: system_performance
+  type: uint32
+  display_name: Recv Packet Errors
+  description: Number of received packets that had errors. The networking stack discards these packets.
+  section: Network Interface Monitoring

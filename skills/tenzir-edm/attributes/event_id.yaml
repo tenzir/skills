@@ -1,0 +1,12 @@
+name: eventId
+summary: Unique Id for an event
+types:
+- uint64
+display_names:
+- Event Id
+models:
+- name: base_event
+  type: uint64
+  display_name: Event Id
+  description: Unique Id for an event
+  section: Base Attributes automatically set by Parser

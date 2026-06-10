@@ -1,0 +1,47 @@
+name: user
+summary: User trying to login
+types:
+- string
+display_names:
+- User
+models:
+- name: authentication
+  type: string
+  display_name: User
+  description: User trying to login
+- name: dhcp_activity
+  type: string
+  display_name: User
+  description: Logged on user on the workstation
+- name: endpoint_security_finding
+  type: string
+  display_name: User
+  description: User executing command
+- name: file_activity
+  type: string
+  display_name: User
+  description: User doing file activity
+- name: network_security_finding
+  type: string
+  display_name: User
+  description: User associated with network session
+- name: process_creation
+  type: string
+  display_name: User
+  description: User creating the process
+- name: system_configuration_change
+  type: string
+  display_name: User
+  description: User who made the change
+- name: user_account_change
+  type: string
+  display_name: User
+  description: User whose took action
+- name: web_activity
+  type: string
+  display_name: User
+  description: User making the request
+- name: windows_registry_activity
+  type: string
+  display_name: User
+  description: User who performed registry action

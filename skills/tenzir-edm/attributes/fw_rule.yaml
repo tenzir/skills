@@ -1,0 +1,14 @@
+name: fwRule
+summary: Firewall/IPS Policy that triggered the event
+types:
+- string
+display_names:
+- Firewall Rule
+models:
+- name: network_security_finding
+  type: string
+  display_name: Firewall Rule
+  description: Firewall/IPS Policy that triggered the event
+- name: network_traffic
+  type: string
+  description: Firewall Policy that triggered the event

@@ -1,0 +1,15 @@
+name: shortProcName
+summary: Process binary only
+types:
+- string
+display_names:
+- Short Process Name
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Short Process Name
+  description: Process binary only
+- name: process_creation
+  type: string
+  display_name: Short Process Name
+  description: Short process name (without full path)

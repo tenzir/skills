@@ -1,0 +1,11 @@
+name: fileType
+summary: File Type
+types:
+- string
+display_names:
+- File Type
+models:
+- name: file_activity
+  type: string
+  display_name: File Type
+  description: File Type

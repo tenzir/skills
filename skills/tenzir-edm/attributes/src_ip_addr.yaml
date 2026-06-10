@@ -1,0 +1,31 @@
+name: srcIpAddr
+summary: Source IP of a device as identified in the event.
+types:
+- IP
+display_names:
+- Source IP
+models:
+- name: authentication
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: dns_activity
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: network_security_finding
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: network_traffic
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: system_configuration_change
+  type: IP
+  display_name: Source IP
+  description: Source IP of from where the change was made
+- name: web_activity
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.

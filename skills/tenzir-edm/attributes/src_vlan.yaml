@@ -1,0 +1,11 @@
+name: srcVLAN
+summary: The VLAN to which the Source Network Interface belongs. Source network interface through which a packet enters a network device.
+types:
+- uint16
+display_names:
+- Source VLAN
+models:
+- name: network_traffic
+  type: uint16
+  display_name: Source VLAN
+  description: The VLAN to which the Source Network Interface belongs. Source network interface through which a packet enters a network device.

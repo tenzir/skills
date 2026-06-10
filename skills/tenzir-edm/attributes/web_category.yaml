@@ -1,0 +1,16 @@
+name: webCategory
+summary: External mail domain category
+types:
+- string
+display_names:
+- Website Category
+- Website category
+models:
+- name: mail_activity
+  type: string
+  display_name: Website Category
+  description: External mail domain category
+- name: network_security_finding
+  type: string
+  display_name: Website category
+  description: Website category typically reported by Web Filters

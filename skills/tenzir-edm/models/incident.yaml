@@ -1,0 +1,103 @@
+name: incident
+title: Incident Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/165396/incident-data-model
+doc: docs/incident-data-model.md
+summary: 'The following data model describes a FortiSIEM Incident. Each Incident is also an event with phEventCategory = 1. In addition to attributes in Base Event Data Model, the following attributes are present in Incident Data Model. These attributes must not be set for an event. Note : Do NOT set these attributes in custom parsers.'
+attributes:
+- name: incidentId
+  type: uint64
+  display_name: Incident ID
+  description: Unique ID of a FortiSIEM Incident
+- name: incidentTitle
+  type: string
+  display_name: Incident Title
+  description: This is defined in a Rule and copied over from the Rule that triggered the Incident.
+- name: phIncidentCategory
+  type: string
+  display_name: Incident Category
+  description: This is defined in a Rule and copied over from the Rule that triggered the Incident.
+- name: phSubIncidentCategory
+  type: string
+  display_name: Incident Subcategory
+  description: This is defined in a Rule and copied over from the Rule that triggered the Incident.
+- name: incidentFirstSeen
+  type: DATE
+  display_name: Incident First Occurrence Time
+  description: The first time an Incident happened.
+- name: incidentLastSeen
+  type: DATE
+  display_name: Incident Last Occurrence Time
+  description: The last time an Incident happened. When an Incident with the same parameter occurs, the count variable is updated and the Incident Last Occurrence time is advanced.
+- name: incidentSrc
+  type: string
+  display_name: Incident Source
+  description: 'This field collects a set of Incident fields that can be considered as a source: srcIpAddr, srcName,srcUser. They are recorded as comma separated Attribute:Value format.'
+- name: incidentTarget
+  type: string
+  display_name: Incident Target
+  description: 'This field collects a set of Incident fields that can be considered as a Target: destIpAddr, destName, hostIpAddr, hostName, user, targetUser. They are recorded as comma separated Attribute:Value format.'
+- name: incidentDetail
+  type: string
+  display_name: Incident Detail
+  description: This field collects the remaining Incident fields that are neither Incident Source nor Incident Target
+- name: incidentRptIp
+  type: IP
+  display_name: Incident Reporting IP
+  description: This field captures the reporting IP of the events that triggered an Incident. In the case there are multiple reporting IPs, only 1 is chosen.
+- name: incidentRptDevName
+  type: string
+  display_name: Incident Reporting Device
+  description: The reporting device name of the events that triggered an Incident. In the case there are multiple reporting IPs, only 1 is chosen.
+- name: incidentRptDevStatus
+  type: uint16
+  display_name: Incident Reporting Device Status
+  description: 'This fields records the CMDB status of an Incident Reporting device. 1: Pending, 2: Approved, 3: Unmanaged'
+- name: incidentStatus
+  type: uint16
+  display_name: Incident Status
+  description: 'Incident management status is recorded. 0: Active, 1: Auto Cleared, 2:Manually Cleared. When an Incident is triggered, it becomes Active. An Incident can be cleared by the System, when the clearing condition in the rule is met or at the end of day for non-security Incidents. A user can also clear an Incident from GUI.'
+- name: incidentTagName
+  type: string
+  display_name: Incident Tag Name
+  description: The Tag assigned to an Incident from the GUI.
+- name: attackTactic
+  type: string
+  display_name: Attack Tactic
+  description: MITRE Attack Tactic. This is defined in a Rule and copied over from the Rule that triggered the Incident.
+- name: attackTechnique
+  type: string
+  display_name: Attack Technique
+  description: MITRE Attack Technique. This is defined in a Rule and copied over from the Rule that triggered the Incident.
+- name: incidentClearedTime
+  type: DATE
+  display_name: Incident Cleared Time
+  description: When an Incident is cleared, then the Incident clearing time is recorded in this field.
+- name: incidentClearedUser
+  type: string
+  display_name: Incident Cleared User
+  description: When an Incident is cleared, then the user clearing the Incident is recorded in this field.
+- name: incidentClearedReason
+  type: string
+  display_name: Incident Cleared Reason
+  description: When an Incident is cleared, then the reason for clearing the Incident is recorded in this field. The reason is entered via GUI.
+- name: incidentNotiStatus
+  type: string
+  display_name: Incident Notification Status
+  description: This field repsents the status of incident notification (Success or Failed). When an Incident triggers, notification can happen via email, HTTPS, external ticketing system etc.
+- name: incidentNotiRecipients
+  type: string
+  display_name: Incident Notification Recipients
+  description: If an Incident notification is sent out via email, then the email recipients are recorded in this field.
+- name: incidentTicketId
+  type: string
+  display_name: Incident Ticket ID
+  description: This is the ID of a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident.
+- name: incidentTicketStatus
+  type: uint16
+  display_name: Incident Ticket Status
+  description: 'This is the status of a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident. Possible values are 0: New, 1: Assigned, 2:Closed, 3: InProgress, 4: Reopened, 5: OverDue, 6: None'
+- name: incidentTicketUser
+  type: string
+  display_name: Incident Ticket User
+  description: This is the user who is assigned a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident.

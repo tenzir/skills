@@ -1,0 +1,12 @@
+name: phCollectorName
+summary: Name of the FortiSIEM Collector receiving the event. This is defined in GUI.
+types:
+- string
+display_names:
+- Collector Name
+models:
+- name: base_event
+  type: string
+  display_name: Collector Name
+  description: Name of the FortiSIEM Collector receiving the event. This is defined in GUI.
+  section: Base Attributes automatically set by Parser

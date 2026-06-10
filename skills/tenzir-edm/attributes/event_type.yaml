@@ -1,0 +1,12 @@
+name: eventType
+summary: This is the unique log name, identifying the product and type of log. This is a key attribute for most queries.
+types:
+- string
+display_names:
+- Event Type
+models:
+- name: base_event
+  type: string
+  display_name: Event Type
+  description: This is the unique log name, identifying the product and type of log. This is a key attribute for most queries.
+  section: Base Attributes that need to be set within Parser

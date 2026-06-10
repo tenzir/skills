@@ -1,0 +1,11 @@
+name: regValueName
+summary: Registry Value
+types:
+- string
+display_names:
+- Registry Value Name
+models:
+- name: windows_registry_activity
+  type: string
+  display_name: Registry Value Name
+  description: Registry Value

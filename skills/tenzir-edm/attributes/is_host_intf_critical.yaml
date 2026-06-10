@@ -1,0 +1,12 @@
+name: isHostIntfCritical
+summary: Yes if the interface is Critical; no if it is not.
+types:
+- string
+display_names:
+- Host Interface Critical
+models:
+- name: system_performance
+  type: string
+  display_name: Host Interface Critical
+  description: Yes if the interface is Critical; no if it is not.
+  section: Network Interface Monitoring

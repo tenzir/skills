@@ -1,0 +1,11 @@
+name: vulnCvssScore
+summary: CVSS Score
+types:
+- double
+display_names:
+- Vulnerability Cvss Score
+models:
+- name: vulnerability_detection
+  type: double
+  display_name: Vulnerability Cvss Score
+  description: CVSS Score

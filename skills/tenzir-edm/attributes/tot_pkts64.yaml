@@ -1,0 +1,11 @@
+name: totPkts64
+summary: Total number of sent and received packets by a host. This is 64bit version.
+types:
+- uint64
+display_names:
+- Total Packets in 64 bit precision
+models:
+- name: network_traffic
+  type: uint64
+  display_name: Total Packets in 64 bit precision
+  description: Total number of sent and received packets by a host. This is 64bit version.

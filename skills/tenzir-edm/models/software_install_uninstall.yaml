@@ -1,0 +1,31 @@
+name: software_install_uninstall
+title: Software Install / Uninstall Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/475067/software-install-uninstall-data-model
+doc: docs/software-install-uninstall-data-model.md
+summary: 'This data model describes software installation/removal activity. Example events via Windows Agent: AO-WUA-InstSw-Added, AO-WUA-InstSw-Removed. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where software was installed or uninstalled
+- name: appName
+  type: string
+  display_name: Application Name
+  description: Installed/Uninstalled Application name
+- name: appVendor
+  type: string
+  display_name: Application Vendor
+  description: Installed/Uninstalled Application vendor name
+- name: appVersion
+  type: string
+  display_name: Application Version
+  description: Installed/Uninstalled Application version
+- name: osObjAction
+  type: string
+  display_name: Object Action
+  description: Added or Removed

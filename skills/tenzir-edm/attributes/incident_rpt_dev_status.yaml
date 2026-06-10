@@ -1,0 +1,11 @@
+name: incidentRptDevStatus
+summary: 'This fields records the CMDB status of an Incident Reporting device. 1: Pending, 2: Approved, 3: Unmanaged'
+types:
+- uint16
+display_names:
+- Incident Reporting Device Status
+models:
+- name: incident
+  type: uint16
+  display_name: Incident Reporting Device Status
+  description: 'This fields records the CMDB status of an Incident Reporting device. 1: Pending, 2: Approved, 3: Unmanaged'

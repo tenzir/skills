@@ -1,0 +1,11 @@
+name: attackName
+summary: Attack Name
+types:
+- string
+display_names:
+- Attack Name
+models:
+- name: network_security_finding
+  type: string
+  display_name: Attack Name
+  description: Attack Name

@@ -1,0 +1,12 @@
+name: diskWriteReqPerSec
+summary: Disk Write Rate in requests/sec
+types:
+- double
+display_names:
+- Disk Write Rate req/sec
+models:
+- name: system_performance
+  type: double
+  display_name: Disk Write Rate req/sec
+  description: Disk Write Rate in requests/sec
+  section: Disk I/O Monitoring

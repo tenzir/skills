@@ -1,0 +1,11 @@
+name: serviceName
+summary: Name of the service
+types:
+- string
+display_names:
+- Service Name
+models:
+- name: service_install_start_stop
+  type: string
+  display_name: Service Name
+  description: Name of the service

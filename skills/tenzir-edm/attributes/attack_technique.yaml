@@ -1,0 +1,19 @@
+name: attackTechnique
+summary: MITRE ATTACK Technique Description
+types:
+- string
+display_names:
+- Attack Technique
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Attack Technique
+  description: MITRE ATTACK Technique Description
+- name: incident
+  type: string
+  display_name: Attack Technique
+  description: MITRE Attack Technique. This is defined in a Rule and copied over from the Rule that triggered the Incident.
+- name: network_security_finding
+  type: string
+  display_name: Attack Technique
+  description: MITRE ATTACK Technique Description

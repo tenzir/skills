@@ -1,0 +1,277 @@
+name: system_performance
+title: System Performance Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/326870/system-performance-data-model
+doc: docs/system-performance-data-model.md
+summary: "This data model describes system performance monitoring metrics collected by FortiSIEM's own device monitoring. The following events follow this data model \u2013 covers all device types: Windows, Linux and network devices: PH_DEV_MON_SYS_UPTIME (Uptime monitoring), PH_DEV_MON_SYS_CPU_UTIL (CPU monitoring), PH_DEV_MON_SYS_PER_CPU_UTIL (CPU monitoring for each CPU), PH_DEV_MON_SYS_MEM_UTIL (memory monitoring), PH_DEV_MON_SYS_VIRT_MEM_UTIL (virtual memory monitoring), PH_DEV_MON_SYS_DISK_UTIL (disk space monitoring), PH_DEV_MON_DISK_IO_UTIL (Disk I/O Monitoring), PH_DEV_MON_SYS_PAGEFILE_USAGE (windows page file monitoring), PH_DEV_MON_NET_INTF_UTIL (Network interface utilization monitoring). In addition to the base event attributes, the following attributes are relevant and may be populated in this data model."
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: CPU Monitoring
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: CPU Monitoring
+- name: cpuName
+  type: string
+  display_name: CPU Name
+  description: CPU name (CPU-1, CPU-2) etc for multi-CPU monitoring
+  section: CPU Monitoring
+- name: cpuUtil
+  type: double
+  display_name: CPU Util
+  description: CPU Util (0-100)
+  section: CPU Monitoring
+- name: sysCpuUtil
+  type: double
+  display_name: System CPU Util
+  description: Linux System CPU Util (0-100)
+  section: CPU Monitoring
+- name: userCpuUtil
+  type: double
+  display_name: User CPU Util
+  description: Linux User CPU Util (0-100)
+  section: CPU Monitoring
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Disk I/O Monitoring
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Disk I/O Monitoring
+- name: diskName
+  type: string
+  display_name: Disk Name
+  description: Disk name
+  section: Disk I/O Monitoring
+- name: diskType
+  type: string
+  display_name: Disk Type
+  description: Disk Type
+  section: Disk I/O Monitoring
+- name: diskIOUtil
+  type: double
+  display_name: Disk Capacity Util
+  description: Disk Capacity Util (0-100)
+  section: Disk I/O Monitoring
+- name: diskQLen
+  type: uint32
+  display_name: Disk Queue Length
+  description: Disk Queue Length
+  section: Disk I/O Monitoring
+- name: diskReadReqPerSec
+  type: double
+  display_name: Disk Read Rate req/sec
+  description: Disk Read Rate in requests/sec
+  section: Disk I/O Monitoring
+- name: diskWriteReqPerSec
+  type: double
+  display_name: Disk Write Rate req/sec
+  description: Disk Write Rate in requests/sec
+  section: Disk I/O Monitoring
+- name: diskReadKBytesPerSec
+  type: double
+  display_name: Disk Read Rate KBps
+  description: Disk Read Volume in KBps
+  section: Disk I/O Monitoring
+- name: diskWriteKBytesPerSec
+  type: double
+  display_name: Disk Write Rate KBps
+  description: Disk Write Volume in KBps
+  section: Disk I/O Monitoring
+- name: diskTfrKBytesPerSec
+  type: double
+  display_name: Disk Transfer Rate KBps
+  description: Disk Transfer Volume in KBps
+  section: Disk I/O Monitoring
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Disk Space Monitoring
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Disk Space Monitoring
+- name: diskName
+  type: string
+  display_name: Disk Name
+  description: Disk name
+  section: Disk Space Monitoring
+- name: diskUtil
+  type: double
+  display_name: Disk Capacity Util
+  description: Disk Capacity Util (0-100)
+  section: Disk Space Monitoring
+- name: totalDiskMB
+  type: uint32
+  display_name: Total Disk MB
+  description: Total Disk MB
+  section: Disk Space Monitoring
+- name: freeDiskMB
+  type: uint32
+  display_name: Free Disk MB
+  description: Free Disk MB
+  section: Disk Space Monitoring
+- name: usedDiskMB
+  type: uint32
+  display_name: Used Disk MB
+  description: Used Disk MB
+  section: Disk Space Monitoring
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Memory Monitoring
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Memory Monitoring
+- name: memName
+  type: string
+  display_name: Memory Name
+  description: Physical Memory, Virtual Memory etc
+  section: Memory Monitoring
+- name: memUtil
+  type: double
+  display_name: Memory Util
+  description: Memory Util (0-100)
+  section: Memory Monitoring
+- name: freeMemKB
+  type: uint32
+  display_name: Free Memory
+  description: Free Memory in KB
+  section: Memory Monitoring
+- name: bufMemKB
+  type: uint32
+  display_name: Buffer Memory
+  description: Linux Buffer memory in KB
+  section: Memory Monitoring
+- name: cacheMemKB
+  type: uint32
+  display_name: Cache Memory
+  description: Linux Cache memory in KB
+  section: Memory Monitoring
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Network Interface Monitoring
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Network Interface Monitoring
+- name: intfName
+  type: string
+  display_name: Host Interface Name
+  description: Name of a network interface in a host.
+  section: Network Interface Monitoring
+- name: isHostIntfCritical
+  type: string
+  display_name: Host Interface Critical
+  description: Yes if the interface is Critical; no if it is not.
+  section: Network Interface Monitoring
+- name: isHostIntfWAN
+  type: string
+  display_name: Interface WAN Flag
+  description: Yes if the interface is WAN interface; no if it is not.
+  section: Network Interface Monitoring
+- name: intfInSpeed64
+  type: uint64
+  display_name: Recv Interface Speed bps
+  description: High Speed Network Interface Speed (bits/sec).
+  section: Network Interface Monitoring
+- name: intfOutSpeed64
+  type: uint64
+  display_name: Sent Interface Speed bps
+  description: High Speed Network Interface Speed (bits/sec).
+  section: Network Interface Monitoring
+- name: intfAdminStatus
+  type: string
+  display_name: Interface Admin Status
+  description: "Interface Administrative Status \u2013 Up or Down"
+  section: Network Interface Monitoring
+- name: intfOperStatus
+  type: string
+  display_name: Interface Operational Status
+  description: "Interface Operational Status \u2013 Up or Down"
+  section: Network Interface Monitoring
+- name: inIntfUtil
+  type: double
+  display_name: Recv Interface Util
+  description: Ratio of Received Bits per second (derived from recvBytes) to the received network interface speed
+  section: Network Interface Monitoring
+- name: outIntfUtil
+  type: double
+  display_name: Sent Interface Util
+  description: Ratio of Sent Bits per second (derived from sentBytes) to the sent network interface speed
+  section: Network Interface Monitoring
+- name: inIntfPktErr
+  type: uint32
+  display_name: Recv Packet Errors
+  description: Number of received packets that had errors. The networking stack discards these packets.
+  section: Network Interface Monitoring
+- name: outIntfPktErr
+  type: uint32
+  display_name: Sent Packet Errors
+  description: Number of sent packets that had errors. he networking stack discards these packets.
+  section: Network Interface Monitoring
+- name: inIntfPktErrPct
+  type: double
+  display_name: Recv Packet Error Pct
+  description: Ratio of inIntfPktErr and the total number of received packets in an onterval
+  section: Network Interface Monitoring
+- name: outIntfPktErrPct
+  type: double
+  display_name: Sent Packet Error Pct
+  description: Ratio of outIntfPktErr and the total number of received packets in an onterval
+  section: Network Interface Monitoring
+- name: inIntfPktDiscarded
+  type: uint32
+  display_name: Recv Packet Discards
+  description: Total number of received packets that were discarded by the networking stack.
+  section: Network Interface Monitoring
+- name: outIntfPktDiscarded
+  type: uint32
+  display_name: Sent Packet Discards
+  description: Total number of sent packets that were discarded by the networking stack.
+  section: Network Interface Monitoring
+- name: inIntfPktDiscardedPct
+  type: double
+  display_name: Recv Packet Discard Pct
+  description: Ratio of inIntfPktDiscarded on an interface to the total number of received packets on that interface
+  section: Network Interface Monitoring
+- name: outIntfPktDiscardedPct
+  type: double
+  display_name: Sent Packet Discard Pct
+  description: Ratio of outIntfPktDiscarded on an interface to the total number of sent packets on that interface
+  section: Network Interface Monitoring
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+  section: Uptime Monitoring
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Uptime Monitoring
+- name: sysUpTime
+  type: uint32
+  display_name: System Uptime
+  description: System Uptime (seconds)
+  section: Uptime Monitoring
+- name: sysUpTimePct
+  type: double
+  display_name: System Uptime Pct
+  description: System Uptime Pct (0-100)
+  section: Uptime Monitoring

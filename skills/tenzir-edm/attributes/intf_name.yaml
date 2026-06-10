@@ -1,0 +1,12 @@
+name: intfName
+summary: Name of a network interface in a host.
+types:
+- string
+display_names:
+- Host Interface Name
+models:
+- name: system_performance
+  type: string
+  display_name: Host Interface Name
+  description: Name of a network interface in a host.
+  section: Network Interface Monitoring

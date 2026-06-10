@@ -1,0 +1,12 @@
+name: outIntfUtil
+summary: Ratio of Sent Bits per second (derived from sentBytes) to the sent network interface speed
+types:
+- double
+display_names:
+- Sent Interface Util
+models:
+- name: system_performance
+  type: double
+  display_name: Sent Interface Util
+  description: Ratio of Sent Bits per second (derived from sentBytes) to the sent network interface speed
+  section: Network Interface Monitoring

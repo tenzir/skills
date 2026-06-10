@@ -1,0 +1,12 @@
+name: diskReadReqPerSec
+summary: Disk Read Rate in requests/sec
+types:
+- double
+display_names:
+- Disk Read Rate req/sec
+models:
+- name: system_performance
+  type: double
+  display_name: Disk Read Rate req/sec
+  description: Disk Read Rate in requests/sec
+  section: Disk I/O Monitoring

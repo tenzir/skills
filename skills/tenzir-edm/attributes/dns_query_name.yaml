@@ -1,0 +1,11 @@
+name: dnsQueryName
+summary: This is the name the dns client queried the DNS server to resolve.
+types:
+- string
+display_names:
+- DNS Query Name
+models:
+- name: dns_activity
+  type: string
+  display_name: DNS Query Name
+  description: This is the name the dns client queried the DNS server to resolve.

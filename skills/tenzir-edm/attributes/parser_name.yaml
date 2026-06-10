@@ -1,0 +1,12 @@
+name: parserName
+summary: The name of parser that parsed the event
+types:
+- string
+display_names:
+- Event Parser Name
+models:
+- name: base_event
+  type: string
+  display_name: Event Parser Name
+  description: The name of parser that parsed the event
+  section: Base Attributes automatically set by Parser

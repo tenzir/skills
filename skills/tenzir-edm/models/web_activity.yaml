@@ -1,0 +1,113 @@
+name: web_activity
+title: Web Activity Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/525169/web-activity-data-model
+doc: docs/web-activity-data-model.md
+summary: "This data model can be used to describe web traffic \u2013 both from the point of view of a Web Server or a network gateway or a firewall. Examples from Apache: Apache-Web-Request-Success, Apache-Web-Bad-Request, Apache-Web-Client-Access-Denied. Examples from nginx: Nginx-Web-Request-Success, Nginx-Web-Forbidden-Access-Denied, Nginx-Web-Client-Access-Denied, Nginx-Web-Bad-Request. Examples from IIS Web Server: IIS-Web-Request-Success, IIS-Web-Bad-Request, IIS-Web-Client-Access-Denied, IIS-Web-Client-Error, IIS-Web-Forbidden-Access-Denied, IIS-Web-Length-Reqd-Access-Denied, IIS-Web-Request-Redirect. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model."
+attributes:
+- name: srcIpAddr
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: srcGeoCountry
+  type: string
+  display_name: Source Country
+  description: The Country in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoState
+  type: string
+  display_name: Source State
+  description: The State in the country in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoCity
+  type: string
+  display_name: Source City
+  description: The City in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoLatitude
+  type: string
+  display_name: Source Latitude
+  description: The latitude on which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoLongitude
+  type: string
+  display_name: Source Longitude
+  description: The longitude on which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destIpAddr
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: destName
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: sentBytes64
+  type: uint64
+  display_name: Sent Bytes64
+  description: Number of bytes sent by a host. This has 64bit resolution.
+- name: recvBytes64
+  type: uint64
+  display_name: Received Bytes64
+  description: Number of bytes received by the web server. This has 64bit resolution.
+- name: totBytes64
+  type: uint64
+  display_name: Total Bytes64
+  description: Total number of sent and received bytes in the connection. This has 64bit resolution.
+- name: durationMSec
+  type: uint32
+  display_name: Duration
+  description: Duration of a connection (in msec)
+- name: httpCookie
+  type: string
+  display_name: Http Cookie
+  description: Http Cookie
+- name: httpVersion
+  type: string
+  display_name: HTTP Proto Version
+  description: HTTP Proto Version
+- name: httpUserAgent
+  type: string
+  display_name: HTTP User Agent
+  description: HTTP User Agent
+- name: httpReferrer
+  type: string
+  display_name: HTTP Referrer
+  description: HTTP Referrer
+- name: httpMethod
+  type: string
+  display_name: HTTP Method
+  description: HTTP Method
+- name: httpStatusCode
+  type: string
+  display_name: HTTP Status
+  description: HTTP Status
+- name: httpSubStatusCode
+  type: string
+  display_name: HTTP Sub-status
+  description: HTTP Sub-status
+- name: httpWin32Status
+  type: string
+  display_name: HTTP Win32 Status
+  description: HTTP Win32 Status
+- name: httpContentLen
+  type: uint16
+  display_name: HTTP Content Length
+  description: HTTP Content Length
+- name: httpContentType
+  type: string
+  display_name: HTTP Content Type
+  description: HTTP Content Type
+- name: user
+  type: string
+  display_name: User
+  description: User making the request
+- name: uriStem
+  type: string
+  display_name: URI Stem
+  description: URI Stem
+- name: uriQuery
+  type: string
+  display_name: URI Query
+  description: URI Query
+- name: downloadURL
+  type: string
+  display_name: Download URL
+- name: infoURL
+  type: string
+  display_name: Informational URL

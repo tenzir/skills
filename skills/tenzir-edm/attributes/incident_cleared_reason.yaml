@@ -1,0 +1,11 @@
+name: incidentClearedReason
+summary: When an Incident is cleared, then the reason for clearing the Incident is recorded in this field. The reason is entered via GUI.
+types:
+- string
+display_names:
+- Incident Cleared Reason
+models:
+- name: incident
+  type: string
+  display_name: Incident Cleared Reason
+  description: When an Incident is cleared, then the reason for clearing the Incident is recorded in this field. The reason is entered via GUI.

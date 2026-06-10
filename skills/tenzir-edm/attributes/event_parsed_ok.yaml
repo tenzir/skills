@@ -1,0 +1,12 @@
+name: eventParsedOk
+summary: 'Whether event was fully parsed: 0 means not fully parsed, 1 means fully parsed'
+types:
+- uchar
+display_names:
+- Event Parse Status
+models:
+- name: base_event
+  type: uchar
+  display_name: Event Parse Status
+  description: 'Whether event was fully parsed: 0 means not fully parsed, 1 means fully parsed'
+  section: Base Attributes automatically set by Parser

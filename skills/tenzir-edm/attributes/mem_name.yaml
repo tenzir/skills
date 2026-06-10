@@ -1,0 +1,12 @@
+name: memName
+summary: Physical Memory, Virtual Memory etc
+types:
+- string
+display_names:
+- Memory Name
+models:
+- name: system_performance
+  type: string
+  display_name: Memory Name
+  description: Physical Memory, Virtual Memory etc
+  section: Memory Monitoring

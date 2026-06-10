@@ -1,0 +1,11 @@
+name: hostMACAddr
+summary: MAC of host requesting IP
+types:
+- string
+display_names:
+- Host MAC
+models:
+- name: dhcp_activity
+  type: string
+  display_name: Host MAC
+  description: MAC of host requesting IP

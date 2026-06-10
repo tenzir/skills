@@ -1,0 +1,12 @@
+name: rawEventSize
+summary: Size of the raw message
+types:
+- uint32
+display_names:
+- Raw Event Log Size
+models:
+- name: base_event
+  type: uint32
+  display_name: Raw Event Log Size
+  description: Size of the raw message
+  section: Base Attributes automatically set by Parser

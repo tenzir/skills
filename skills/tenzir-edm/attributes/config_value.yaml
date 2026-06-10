@@ -1,0 +1,11 @@
+name: configValue
+summary: Latest configuration value
+types:
+- string
+display_names:
+- Configuration Value
+models:
+- name: system_configuration_change
+  type: string
+  display_name: Configuration Value
+  description: Latest configuration value

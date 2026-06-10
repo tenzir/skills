@@ -1,0 +1,11 @@
+name: vulnScore
+summary: Normalized vulnerability score (0-10) across CVSS V2 and V3
+types:
+- uint32
+display_names:
+- Vulnerability Score
+models:
+- name: vulnerability_detection
+  type: uint32
+  display_name: Vulnerability Score
+  description: Normalized vulnerability score (0-10) across CVSS V2 and V3

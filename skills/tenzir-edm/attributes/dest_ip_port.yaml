@@ -1,0 +1,15 @@
+name: destIpPort
+summary: This is the destination TCP or UDP port as identified in the event
+types:
+- uint16
+display_names:
+- Destination TCP/UDP Port
+models:
+- name: network_security_finding
+  type: uint16
+  display_name: Destination TCP/UDP Port
+  description: This is the destination TCP or UDP port as identified in the event
+- name: network_traffic
+  type: uint16
+  display_name: Destination TCP/UDP Port
+  description: This is the destination TCP or UDP port as identified in the event

@@ -1,0 +1,11 @@
+name: threatType
+summary: Threat Type
+types:
+- string
+display_names:
+- Threat Type
+models:
+- name: mail_activity
+  type: string
+  display_name: Threat Type
+  description: Threat Type

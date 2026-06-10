@@ -1,0 +1,9 @@
+name: imageFile
+types:
+- string
+display_names:
+- Image File
+models:
+- name: process_creation
+  type: string
+  display_name: Image File

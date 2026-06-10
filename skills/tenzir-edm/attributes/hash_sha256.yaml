@@ -1,0 +1,11 @@
+name: hashSHA256
+summary: SHA256 Hash Value
+types:
+- string
+display_names:
+- SHA256 Hash
+models:
+- name: process_creation
+  type: string
+  display_name: SHA256 Hash
+  description: SHA256 Hash Value

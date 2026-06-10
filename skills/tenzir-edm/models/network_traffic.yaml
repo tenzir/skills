@@ -1,0 +1,280 @@
+name: network_traffic
+title: Network Traffic Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/261556/network-traffic-data-model
+doc: docs/network-traffic-data-model.md
+summary: 'This model describes network traffic. Examples of Event Types from Network Devices: FortiGate-traffic-allowed, IOS-NETFLOW-BI, FortiGate-NetFlow, FortiProxy-NetFlow, ASA-Built-Conn, PAN-OS-TRAFFIC-end-allow, PAN-OS-TRAFFIC-start-allow. Examples of Event Types from hosts: Win-Sysmon-3-Network-Connect-IPv4, Win-Sysmon-3-Network-Connect-IPv6, Win-Security-5156. The full list is available in Resources > Event Types > Regular Traffic > Permit Traffic : Permitted Network Traffic, Permitted BiNetflow, Permitted Netflow. In addition to attributes in Base Event Data Model, the following attributes are present in Network Traffic Data Model.'
+attributes:
+- name: srcIpAddr
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: srcName
+  type: string
+  display_name: Source Host Name
+  description: Source device's hostname as identified in the log, can also be enriched using reverse lookup of the source IP address.
+- name: destIpAddr
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: destName
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: srcMACAddr
+  type: Source MAC
+  display_name: Source MAC
+  description: Source MAC address in the event
+- name: destMACAddr
+  type: string
+  display_name: Destination MAC
+  description: Destination Layer 2 MAC Address in the log
+- name: ipProto
+  type: uint16
+  display_name: IP Protocol
+  description: IP Protocol, e.g. TCP, UDP, ICMP etc as defined in IP RFPs
+- name: srcIpPort
+  type: uint16
+  display_name: Source TCP/UDP Port
+  description: This is the source TCP or UDP port as identified in the event
+- name: destIpPort
+  type: uint16
+  display_name: Destination TCP/UDP Port
+  description: This is the destination TCP or UDP port as identified in the event
+- name: postNATSrcIpAddr
+  type: IP
+  display_name: Post-NAT Source IP
+  description: The Source IP after Firewall Outbound Network Address Translation (NAT). This is often present in Firewall Address translation logs
+- name: preNATDestIpAddr
+  type: IP
+  display_name: Pre-NAT Destination IP
+  description: The Destination IP before Firewall Inbound Network Address Translation (NAT) - often present in Firewall Address translation log
+- name: postNATSrcIpPort
+  type: uint16
+  display_name: Post-NAT Source Port
+  description: The Source TCP/UDP Port after Firewall Outbound Network Address Translation (NAT) - often present in Firewall Address translation log
+- name: preNATDestIpPort
+  type: uint16
+  display_name: Pre-NAT Destination Port
+  description: The Destination TCP/UDP Port before Firewall Inbound Network Address Translation (NAT) - often present in Firewall Address translation log
+- name: fwRule
+  type: string
+  description: Firewall Policy that triggered the event
+- name: fwAction
+  type: string
+  description: Action taken by the network appliance
+- name: icmpId
+  type: uint64
+  display_name: ICMP Id
+  description: ICMP Id in the ICMP header after the IPv4 header
+- name: icmpType
+  type: uint16
+  display_name: ICMP Type
+  description: ICMP Type as defined in RFP, e.g. Echo Reply, Echo Response, Destination Unreachable etc. This attribute is generally present in ICMP Traffic log and Netflow.
+- name: icmpCode
+  type: uint16
+  display_name: ICMP Code
+  description: ICMP Code for each Type. This attribute is generally present in ICMP Traffic log and Netflow.
+- name: tcpFlags
+- name: srcASNum32
+  type: uint32
+  display_name: Source Autonomous System Number32
+  description: The Autonomous System Number (ASN) to which Source IP belongs. ASN is a unique identifier that is globally available and allows its autonomous system to exchange routing information with other systems. This attribute is generally present in Netflow.
+- name: destASNum32
+  type: uint32
+  display_name: Destination Autonomous System Number32
+  description: The Autonomous System Number (ASN) to which Destination IP belongs. ASN is a unique identifier that is globally available and allows its autonomous system to exchange routing information with other systems. This attribute is generally present in Netflow.
+- name: srcVLAN
+  type: uint16
+  display_name: Source VLAN
+  description: The VLAN to which the Source Network Interface belongs. Source network interface through which a packet enters a network device.
+- name: destVLAN
+- name: srcIntfName
+  type: string
+  display_name: Source Interface Name
+  description: Name of the network interface through which a packet enters a network device. This information is typically present in Firewall logs.
+- name: destIntfName
+- name: srcDevPort
+  type: string
+  display_name: Source Device Port
+  description: Name of the network port through which a packet enters a network device. This information is typically present in Firewall logs.
+- name: destDevPort
+  type: string
+  display_name: Destination Device Port
+  description: Name of the network port through which a packet exits a network device. This information is typically present in Firewall logs.
+- name: srcSnmpIntfIndex
+  type: uint16
+  display_name: Source Interface SNMP Index
+  description: SNMP index of the network interface through which a packet enters a network device. This information is typically present in Firewall logs.
+- name: destSnmpIntfIndex
+  type: uint16
+  display_name: Destination Interface SNMP Index
+  description: SNMP index of the network interface through which a packet exits a network device. This information is typically present in Firewall logs.
+- name: srcDestTCPFlags
+  type: uchar
+  display_name: Sent TCP flags
+  description: 'TCP flags sent from Source to Destination, as found in a packet reported by Netflow. The various combinations of SYN, URG, ACK, PSH, FIN, and RST are presented in logical OR; e.g. 3: SYN FIN, 11: SYN FIN PSH etc'
+- name: destSrcTCPFlags
+  type: uchar
+  display_name: Received TCP flags
+  description: 'TCP flags sent from Destination to Source as found in a packet reported by Netflow. The various combinations of SYN, URG, ACK, PSH, FIN, and RST are presented in logical OR; e.g. 3: SYN FIN, 11: SYN FIN PSH etc'
+- name: srcFwZone
+  type: string
+  display_name: Source Firewall Zone
+  description: Source Firewall Zone found in Firewall logs
+- name: destFwZone
+  type: string
+  display_name: Destination Firewall Zone
+  description: DestinationFirewall Zone found in Firewall logs
+- name: sentPkts64
+  type: uint64
+  display_name: Sent Packets in 64 bit precision
+  description: Number of packets sent by a host. This is 64bit version.
+- name: recvPkts64
+  type: uint64
+  display_name: Received Packets in 64 bit precision
+  description: Number of packets received by a host. This is 64bit version.
+- name: totPkts64
+  type: uint64
+  display_name: Total Packets in 64 bit precision
+  description: Total number of sent and received packets by a host. This is 64bit version.
+- name: sentBytes64
+  type: uint64
+  display_name: Sent Bytes in 64 bit precision
+  description: Number of bytes sent by a host. This has 64bit resolution.
+- name: recvBytes64
+  type: uint64
+  display_name: Received Bytes in 64 bit precision
+  description: Number of bytes received by a host. This has 64bit resolution.
+- name: totBytes64
+  type: uint64
+  display_name: Total Bytes in 64 bit precision
+  description: Total number of sent and received bytes by a host. This has 64bit resolution
+- name: srcGeoCountry
+  type: string
+  display_name: Source Country
+  description: The Country in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destGeoCountry
+  type: string
+  display_name: Destination Country
+  description: The Country in which the Destination IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoState
+  type: string
+  display_name: Source State
+  description: The State in the country in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destGeoState
+  type: string
+  display_name: Destination State
+  description: The State in the Country in which the Destination IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoCity
+  type: string
+  display_name: Source City
+  description: The City in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destGeoCity
+  type: string
+  display_name: Destination City
+  description: The City in which the Destination IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoLatitude
+  type: string
+  display_name: Source Latitude
+  description: The latitude on which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destGeoLatitude
+  type: string
+  display_name: Destination Latitude
+  description: The latitude on which the Destination IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoLongitude
+  type: string
+  display_name: Source Longitude
+  description: The longitude on which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destGeoLongitude
+  type: string
+  display_name: Destination Longitude
+  description: The longitude on which the Destination IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoOrg
+  type: string
+  display_name: Source Organization
+  description: The Organization to which the Source IP in event belongs. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destGeoOrg
+  type: string
+  display_name: Destination Organization
+  description: The Organization to which the Destination IP in event belongs. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcGeoCountryCodeStr
+  type: string
+  display_name: Source Country Code
+  description: The Country Code in which the Source IP is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: destGeoCountryCodeStr
+  type: string
+  display_name: Destination Country Code
+  description: The Country Code in which the Destination IP is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: srcTos
+  type: uchar
+  display_name: Source TOS
+  description: Source Type of Service (ToS) field present in the IPv4 header. Typically present in Netflow. It provides an indication of the quality of service desired.
+- name: dstTos
+  type: uchar
+  display_name: Destination TOS
+  description: Destination Type of Service (ToS) field present in the IPv4 header. Typically present in Netflow. It provides an indication of the quality of service desired.
+- name: seqNum
+  type: uint64
+  display_name: Sequence Number
+  description: TCP Sequence number field in TCP header.
+- name: tcpAckNum
+  type: uint64
+  display_name: TCP ACK Number
+  description: TCP Acknowledgement number field in TCP header.
+- name: tcpOffset
+  type: uint32
+  display_name: TCP Offset
+  description: TCP Data Offset field in TCP header
+- name: tcpReserved
+  type: uint32
+  display_name: TCP Reserved
+  description: TCP Reserved field in TCP header
+- name: tcpWindow
+  type: uint32
+  display_name: TCP Window
+  description: TCP Window field in TCP header
+- name: tcpUrgentPointer
+  type: uint32
+  display_name: TCP URGENT Pointer
+  description: TCP Urgent Pointer field in TCP header
+- name: tcpLen
+  type: uint32
+  display_name: TCP Length
+  description: TCP length field in TCP header
+- name: udpLen
+  type: uint32
+  display_name: UDP Length
+  description: UDP length field in UDP header
+- name: ipVersion
+  type: uint16
+  display_name: IP Version
+  description: IP Version found in IP header
+- name: ipHeaderLength
+  type: uint16
+  display_name: IP Header Length
+  description: IP Header Length found in IP header
+- name: ipTotalLength
+  type: uint16
+  display_name: IP Total Length
+  description: IP Total Length found in IP header
+- name: ipId
+  type: uint16
+  display_name: IP ID
+  description: IP ID found in IP header
+- name: ipFlags
+  type: uint16
+  display_name: IP Flags
+  description: IP Flags found in IP header
+- name: ipFragOffset
+  type: uint16
+  display_name: IP Fragment Offset
+  description: IP Fragment Offset found in IP header
+- name: ipTtl
+  type: uint16
+  display_name: IP TTL
+  description: IP Time to Live (TTL) field found in IP header
+- name: ipChecksum
+  type: uint16
+  display_name: IP Checksum
+  description: IP Checksum found in IP header

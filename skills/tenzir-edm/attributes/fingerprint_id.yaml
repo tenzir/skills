@@ -1,0 +1,11 @@
+name: fingerprintId
+summary: Certificate fingerprint
+types:
+- string
+display_names:
+- Fingerprint
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Fingerprint
+  description: Certificate fingerprint

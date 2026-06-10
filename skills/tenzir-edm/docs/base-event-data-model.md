@@ -1,0 +1,40 @@
+<!-- Source: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/649866/base-event-data-model -->
+
+# Base Event Data Model
+
+These attributes are present in every FortiSIEM event.
+
+- Base Attributes automatically set by Parser
+- Base Attributes that need to be set within Parser
+
+## Base Attributes automatically set by Parser
+
+| Event Attribute | Type | Display Name | Description |
+| --- | --- | --- | --- |
+| eventId | uint64 | Event Id | Unique Id for an event |
+| phRecvTime | DATE | Event Receive Time | This is the timestamp (epoch seconds ) recorded by the parser module when an event is ingested. FortiSIEM uses this time in all its analytics. This time is obtained from NTP. |
+| reptDevName | string | Reporting Device | This is the hostname of the device that originated the log or event packet. |
+| reptDevIpAddr | IP | Reporting IP | This is the device that originated the log or event packet, also known as the reporting device. |
+| reptVendor | string | Reporting Vendor | This field captures the vendor of the reported event |
+| reptModel | string | Reporting Model | This field captures the model of the reporting device vendor |
+| phCustId | uint32 | Organization ID | This is the FortiSIEM organization ID unique to each tenant. In Enterprise license, phCustId = 1. |
+| customer | string | Organization Name | This is the FortiSIEM Organization Name, which is unique to each tenant. It identifies the tenant this event belongs to. In Enterprise case, customer = Super. |
+| collectorId | uint32 | Collector ID | ID of FortiSIEM Collector receiving the event. This is assigned by FortiSIEM when a collector is defined. |
+| phCollectorName | string | Collector Name | Name of the FortiSIEM Collector receiving the event. This is defined in GUI. |
+| parserName | string | Event Parser Name | The name of parser that parsed the event |
+| eventParsedOk | uchar | Event Parse Status | Whether event was fully parsed: 0 means not fully parsed, 1 means fully parsed |
+| phEventCategory | uint16 | System Event Category | This is the category of log event. (Values: 0 - External, 1 - Incidents, 2 - Audit, 3 - System, 4 - Traffic Flow, 5- Internal Health Incident, 6 - Performance). |
+| eventSeverityCat | string | Event Severity Category | This is set by Parser from Event Severity: 1-4: Low, 5-8: Medium, 9-10: High |
+| rawEventMsg | string | Raw Event Log | This is the raw, unmodified UTF-8 message as received by FortiSIEM from a log source. |
+| rawEventSize | uint32 | Raw Event Log Size | Size of the raw message |
+
+## Base Attributes that need to be set within Parser
+
+| Event Attribute | Type | Display Name | Description |
+| --- | --- | --- | --- |
+| eventType | string | Event Type | This is the unique log name, identifying the product and type of log. This is a key attribute for most queries. |
+| eventName | string | Event Name | Short event description |
+| eventSeverity | uint16 | Event Severity | This is the severity of the event. It takes values between 1-10; 1 being lowest severity and 10 being the highest. |
+| eventAction | uint16 | Event Action | This is an unsigned integer boolean. 0 means permitted, 1 means blocked. It is used by various parsers to indicate success / failure or permit/deny for network traffic. |
+| deviceTime | DATE | Device Time | This is the timestamp as seen in the raw log. This is converted and stored as epoch seconds. Note that the deviceTime, or event occur time, is different than the event receive time by the SIEM. |
+| eventAction | uint16 | Event Action | This is an unsigned integer boolean. 0 means permitted, 1 means blocked. It is used by various parsers to indicate success / failure or permit/deny for network traffic. |

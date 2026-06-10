@@ -1,0 +1,19 @@
+name: domain
+summary: Windows domain
+types:
+- string
+display_names:
+- Domain
+models:
+- name: authentication
+  type: string
+  display_name: Domain
+  description: Windows domain
+- name: file_activity
+  type: string
+  display_name: Domain
+  description: "User\u2019s Windows\u2019s domain"
+- name: user_account_change
+  type: string
+  display_name: Domain
+  description: Domain of User

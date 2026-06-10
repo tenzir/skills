@@ -1,0 +1,12 @@
+name: bufMemKB
+summary: Linux Buffer memory in KB
+types:
+- uint32
+display_names:
+- Buffer Memory
+models:
+- name: system_performance
+  type: uint32
+  display_name: Buffer Memory
+  description: Linux Buffer memory in KB
+  section: Memory Monitoring

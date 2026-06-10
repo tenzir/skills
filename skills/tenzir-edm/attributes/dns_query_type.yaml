@@ -1,0 +1,11 @@
+name: dnsQueryType
+summary: This is the DNS query record type such as A, AAA, PTR, etc.
+types:
+- string
+display_names:
+- DNS Query Type
+models:
+- name: dns_activity
+  type: string
+  display_name: DNS Query Type
+  description: This is the DNS query record type such as A, AAA, PTR, etc.

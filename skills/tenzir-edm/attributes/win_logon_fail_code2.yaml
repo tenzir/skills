@@ -1,0 +1,11 @@
+name: winLogonFailCode2
+summary: 'Windows Logon Failure Codes in string format, e.g. 0xC000006E: Unknown user name or bad password'
+types:
+- string
+display_names:
+- Win Logon Fail Code String
+models:
+- name: authentication
+  type: string
+  display_name: Win Logon Fail Code String
+  description: 'Windows Logon Failure Codes in string format, e.g. 0xC000006E: Unknown user name or bad password'

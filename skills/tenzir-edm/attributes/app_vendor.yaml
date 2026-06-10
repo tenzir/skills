@@ -1,0 +1,11 @@
+name: appVendor
+summary: Installed/Uninstalled Application vendor name
+types:
+- string
+display_names:
+- Application Vendor
+models:
+- name: software_install_uninstall
+  type: string
+  display_name: Application Vendor
+  description: Installed/Uninstalled Application vendor name

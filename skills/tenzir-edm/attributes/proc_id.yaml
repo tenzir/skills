@@ -1,0 +1,14 @@
+name: procId
+summary: Process Id
+types:
+- string
+display_names:
+- Process Id
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Process Id
+- name: process_creation
+  type: string
+  display_name: Process Id
+  description: Process Id

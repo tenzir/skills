@@ -1,0 +1,11 @@
+name: incidentTicketUser
+summary: This is the user who is assigned a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident.
+types:
+- string
+display_names:
+- Incident Ticket User
+models:
+- name: incident
+  type: string
+  display_name: Incident Ticket User
+  description: This is the user who is assigned a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident.

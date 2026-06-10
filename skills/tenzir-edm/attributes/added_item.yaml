@@ -1,0 +1,11 @@
+name: addedItem
+summary: Item that was added to config
+types:
+- string
+display_names:
+- Added Item
+models:
+- name: system_configuration_change
+  type: string
+  display_name: Added Item
+  description: Item that was added to config

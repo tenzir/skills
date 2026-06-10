@@ -1,0 +1,51 @@
+name: authentication
+title: Authentication Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/754816/authentication-data-model
+doc: docs/authentication-data-model.md
+summary: "This group includes authentication events (successful ot failed) to a host, network device, an application or a cloud service. Examples of event types following this data model: Windows/Linux login: Win-Security-4624- logon success, Win-Security-4625 \u2013 login failed, Generic_Unix_Successful_SSH_Login, Generic_Unix_Failed_SSH_Login. Network device login: FortiGate-sslvpn-logon-success. Application Login: ORADB_Logon_Success, MYSQL_Logon_Success, Win-App-MSSQLSERVER-18454, Win-App-MSSQLSERVER-18453. Cloud Service Login: AWS-CloudTrail-SIGNIN-ConsoleLogin-Success, MS_OFFICE365_EntraID_StsLogon_UserLoggedIn, Oracle-OCI-identitysignon-federatedloginrequest-success. The full list is available from Resources > Event Types > Security > Logon Success . In addition to the base event attributes, the following attributes are relevant and may be populated in this data model."
+attributes:
+- name: srcIpAddr
+  type: IP
+  display_name: Source IP
+  description: Source IP of a device as identified in the event.
+- name: destIpAddr
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: destName
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: user
+  type: string
+  display_name: User
+  description: User trying to login
+- name: domain
+  type: string
+  display_name: Domain
+  description: Windows domain
+- name: winLogonType
+  type: uint16
+  display_name: Win Logon Type
+  description: "Windows Logon Type, e.g. 2: Interactive - Console Llogon 3: Network \u2013 Logon 4: Batch Logon 5: Service Logon 7: User unlocks a locked workstation 9: New Credentials 10: Remote Desktop Logon 11: Cached Domaon Credential Logon"
+- name: winLogonId
+  type: string
+  display_name: Win Logon Id
+  description: Windows Logon Id
+- name: winLogonProc
+  type: string
+  display_name: Windows Logon Process
+  description: The Windows process handling Windows logon
+- name: authenMethod
+  type: string
+  display_name: Authentication Method
+  description: Windows Authentication method
+- name: winLogonFailCode
+  type: uint64
+  display_name: Win Logon Fail Code
+  description: Windows Logon Failure Codes in numerical format
+- name: winLogonFailCode2
+  type: string
+  display_name: Win Logon Fail Code String
+  description: 'Windows Logon Failure Codes in string format, e.g. 0xC000006E: Unknown user name or bad password'

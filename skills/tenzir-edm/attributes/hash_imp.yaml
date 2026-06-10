@@ -1,0 +1,11 @@
+name: hashIMP
+summary: "Import hash Value \u2013 IMP Hash remains consistent even if the malware is slightly modified or repacked, making it effective for identifying related threat actor tools."
+types:
+- string
+display_names:
+- IMP Hash
+models:
+- name: process_creation
+  type: string
+  display_name: IMP Hash
+  description: "Import hash Value \u2013 IMP Hash remains consistent even if the malware is slightly modified or repacked, making it effective for identifying related threat actor tools."

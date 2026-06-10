@@ -1,0 +1,11 @@
+name: srcMACAddr
+summary: Source MAC address in the event
+types:
+- Source MAC
+display_names:
+- Source MAC
+models:
+- name: network_traffic
+  type: Source MAC
+  display_name: Source MAC
+  description: Source MAC address in the event

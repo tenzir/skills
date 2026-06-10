@@ -1,0 +1,11 @@
+name: tcpReserved
+summary: TCP Reserved field in TCP header
+types:
+- uint32
+display_names:
+- TCP Reserved
+models:
+- name: network_traffic
+  type: uint32
+  display_name: TCP Reserved
+  description: TCP Reserved field in TCP header

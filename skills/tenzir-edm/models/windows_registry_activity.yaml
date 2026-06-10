@@ -1,0 +1,35 @@
+name: windows_registry_activity
+title: Windows Registry Activity Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/977589/windows-registry-activity-data-model
+doc: docs/windows-registry-activity-data-model.md
+summary: 'This data model describes activities around windows registry entries Example of Events from Registry monitoring via Windows Agent: AO-WUA-Registry-Added, AO-WUA-Registry-Modified, AO-WUA-Registry-Removed. Example of Events from Sysmon Registry monitoring: Win-Sysmon-12-Registry-DeleteValue, Win-Sysmon-12-Registry-DeleteKey, Win-Sysmon-12-Registry-CreateValue, Win-Sysmon-12-Registry-CreateKey, Win-Sysmon-13-Registry-SetValue, Win-Sysmon-14-Registry-RenameValue, Win-Sysmon-14-Registry-RenameKey. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: user
+  type: string
+  display_name: User
+  description: User who performed registry action
+- name: regKeyPath
+  type: string
+  display_name: Registry Key Path
+  description: Registry Key
+- name: regValueName
+  type: string
+  display_name: Registry Value Name
+  description: Registry Value
+- name: oldRegValue
+  type: string
+  display_name: Old Registry Value
+  description: Old Registry Value
+- name: newRegValue
+  type: string
+  display_name: New Registry Value
+  description: New Registry Value

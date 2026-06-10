@@ -1,0 +1,11 @@
+name: httpVersion
+summary: HTTP Proto Version
+types:
+- string
+display_names:
+- HTTP Proto Version
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP Proto Version
+  description: HTTP Proto Version

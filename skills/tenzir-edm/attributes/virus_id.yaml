@@ -1,0 +1,11 @@
+name: virusId
+summary: Malware id (found in mail)
+types:
+- string
+display_names:
+- Virus/Malware Id
+models:
+- name: mail_activity
+  type: string
+  display_name: Virus/Malware Id
+  description: Malware id (found in mail)

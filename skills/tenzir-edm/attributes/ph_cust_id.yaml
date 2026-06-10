@@ -1,0 +1,12 @@
+name: phCustId
+summary: This is the FortiSIEM organization ID unique to each tenant. In Enterprise license, phCustId = 1.
+types:
+- uint32
+display_names:
+- Organization ID
+models:
+- name: base_event
+  type: uint32
+  display_name: Organization ID
+  description: This is the FortiSIEM organization ID unique to each tenant. In Enterprise license, phCustId = 1.
+  section: Base Attributes automatically set by Parser

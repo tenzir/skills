@@ -1,0 +1,11 @@
+name: deletedItem
+summary: Item that was removed from config
+types:
+- string
+display_names:
+- Deleted Item
+models:
+- name: system_configuration_change
+  type: string
+  display_name: Deleted Item
+  description: Item that was removed from config

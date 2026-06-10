@@ -1,0 +1,35 @@
+name: service_install_start_stop
+title: Service Install / Start / Stop Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/586301/service-install-start-stop-data-model
+doc: docs/service-install-start-stop-data-model.md
+summary: "This includes services installed in Windows and Linux Systems. Events from Windows System Logs: Win-System-Service-Control-Manager-7045 \u2013 new service installed, Win-System-Service-Control-Manager-7036-Start \u2013 service started, Win-System-Service-Control-Manager-7036-Stop \u2013 service stopped, Win-System-Service-Control-Manager-7040 \u2013 service start type changed, Win-System-Service-Control-Manager-7034 \u2013 service terminated unexpectedly. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model."
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP of the host
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Hostname of the device
+- name: serviceName
+  type: string
+  display_name: Service Name
+  description: Name of the service
+- name: serviceFileName
+  type: string
+  display_name: Service File Name
+  description: Name of the service file name
+- name: serviceType
+  type: string
+  display_name: Service Type
+  description: Values such as KernelDriver, FileSystemDriver
+- name: serviceStartType
+  type: string
+  display_name: Service Start Type
+  description: Auto or Manual
+- name: serviceAccount
+  type: string
+  display_name: Service Account
+  description: The account that owns this service

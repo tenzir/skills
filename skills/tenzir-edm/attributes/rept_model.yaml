@@ -1,0 +1,12 @@
+name: reptModel
+summary: This field captures the model of the reporting device vendor
+types:
+- string
+display_names:
+- Reporting Model
+models:
+- name: base_event
+  type: string
+  display_name: Reporting Model
+  description: This field captures the model of the reporting device vendor
+  section: Base Attributes automatically set by Parser

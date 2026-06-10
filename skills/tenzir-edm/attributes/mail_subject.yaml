@@ -1,0 +1,11 @@
+name: mailSubject
+summary: Mail Subject
+types:
+- string
+display_names:
+- Mail Subject
+models:
+- name: mail_activity
+  type: string
+  display_name: Mail Subject
+  description: Mail Subject

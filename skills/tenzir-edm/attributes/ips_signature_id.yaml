@@ -1,0 +1,11 @@
+name: ipsSignatureId
+summary: IPS Signature id
+types:
+- uint64
+display_names:
+- IPS Signature Id
+models:
+- name: network_security_finding
+  type: uint64
+  display_name: IPS Signature Id
+  description: IPS Signature id

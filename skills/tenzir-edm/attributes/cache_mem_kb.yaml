@@ -1,0 +1,12 @@
+name: cacheMemKB
+summary: Linux Cache memory in KB
+types:
+- uint32
+display_names:
+- Cache Memory
+models:
+- name: system_performance
+  type: uint32
+  display_name: Cache Memory
+  description: Linux Cache memory in KB
+  section: Memory Monitoring

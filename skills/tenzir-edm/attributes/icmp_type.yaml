@@ -1,0 +1,11 @@
+name: icmpType
+summary: ICMP Type as defined in RFP, e.g. Echo Reply, Echo Response, Destination Unreachable etc. This attribute is generally present in ICMP Traffic log and Netflow.
+types:
+- uint16
+display_names:
+- ICMP Type
+models:
+- name: network_traffic
+  type: uint16
+  display_name: ICMP Type
+  description: ICMP Type as defined in RFP, e.g. Echo Reply, Echo Response, Destination Unreachable etc. This attribute is generally present in ICMP Traffic log and Netflow.

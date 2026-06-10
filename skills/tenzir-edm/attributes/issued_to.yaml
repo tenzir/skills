@@ -1,0 +1,11 @@
+name: issuedTo
+summary: Certificate Issued to
+types:
+- string
+display_names:
+- Issued To
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Issued To
+  description: Certificate Issued to
