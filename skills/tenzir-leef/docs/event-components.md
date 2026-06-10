@@ -10,22 +10,22 @@ RFC 3164 header format:
 
 > **Note:** The priority tag is optional for QRadar.
 
-<priority tag><timestamp> <IP address or hostname>
+\<priority tag>\<timestamp> \<IP address or hostname>
 
-The priority tag, if present, must be 1 - 3 digits and must be enclosed in angle brackets. For example, <13>.
+The priority tag, if present, must be 1 - 3 digits and must be enclosed in angle brackets. For example, \<13>.
 
 Examples of RFC 3164 header:
 
-- <13>Jan 18 11:07:53 192.168.1.1
+- \<13>Jan 18 11:07:53 192.168.1.1
 - Jan 18 11:07:53 myhostname
 
 RFC 5424 header format:
 
 > **Note:** The priority tag is required.
 
-<priority tag>1 <timestamp> <IP address or hostname>
+\<priority tag>1 \<timestamp> \<IP address or hostname>
 
-The priority tag must be 1 - 3 digits and must be enclosed in angle brackets. For example, <13>. The timestamp must be in the format: yyyy-MM-ddTHH:mm:ss.SSSZ.
+The priority tag must be 1 - 3 digits and must be enclosed in angle brackets. For example, \<13>. The timestamp must be in the format: yyyy-MM-ddTHH:mm:ss.SSSZ.
 
 > **Note:**
 > - The 'T' must be a literal T character.
@@ -33,8 +33,8 @@ The priority tag must be 1 - 3 digits and must be enclosed in angle brackets. Fo
 
 Examples of RFC 5424 header:
 
-- <13>1 2019-01-18T11:07:53.520Z 192.168.1.1
-- <133>1 2019-01-18T11:07:53.520+07:00 myhostname
+- \<13>1 2019-01-18T11:07:53.520Z 192.168.1.1
+- \<133>1 2019-01-18T11:07:53.520+07:00 myhostname
 
 ## LEEF header
 
@@ -51,7 +51,7 @@ Examples:
 The event attributes identify the payload information of the event that is produced by your appliance or software. Every event attribute is a key and value pair with a tab that separates individual payload events. The LEEF format contains a number of predefined event attributes, which allow QRadar to categorize and display the event.
 
 > **Example:**
-> - key=value<tab>key=value<tab>key=value<tab>key=value<tab>.
+> - key=value\<tab>key=value\<tab>key=value\<tab>key=value\<tab>.
 > - src=192.0.2.0 dst=172.50.123.1 sev=5 cat=anomaly srcPort=81 dstPort=21 usrName=joe.black
 
 Use the `DelimiterCharacter` in the LEEF 2.0 header to specify an alternate delimiter to the attributes. You can use a single character or the hex value for that character. The hex value can be represented by the prefix 0x or x, followed by a series of 1-4 characters (0-9A-Fa-f).

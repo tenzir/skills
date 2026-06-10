@@ -80,6 +80,15 @@ ATTRIBUTE_NOTES = {
     ),
 }
 
+# Quirks in the rendered docs pages, outside the attribute table.
+DOC_NOTES = {
+    "docs/event-components.md": (
+        "IBM's delimiter table labels the hex value x7c as a broken vertical "
+        "bar (¦), but 0x7C is the regular pipe (|); the broken bar is "
+        "0xA6. The error is IBM's and is preserved verbatim."
+    ),
+}
+
 EXPECTED_KEYS = {"cat", "devTime", "devTimeFormat", "proto", "sev", "src", "dst", "usrName"}
 MINIMUM_ATTRIBUTE_COUNT = 40
 
@@ -184,6 +193,13 @@ def collapse_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def escape_angle_brackets(text: str) -> str:
+    # Bare placeholders like <timestamp> parse as raw HTML open tags in GFM
+    # and vanish from rendered output; code spans and fenced blocks bypass
+    # this escaping.
+    return text.replace("<", "\\<")
+
+
 # --- HTML to Markdown -------------------------------------------------------
 
 
@@ -216,7 +232,7 @@ class RenderContext:
 
 def render_inline(node: Node | str, ctx: RenderContext) -> str:
     if isinstance(node, str):
-        return node
+        return escape_angle_brackets(node)
     if node.tag in SKIP_TAGS:
         return ""
     if node.tag in {"code", "samp", "kbd", "tt", "var"} or (
@@ -265,7 +281,7 @@ def render_blocks(node: Node, ctx: RenderContext) -> list[str]:
 
     for child in node.children:
         if isinstance(child, str):
-            buffer.append(child)
+            buffer.append(escape_angle_brackets(child))
             continue
         if child.tag in SKIP_TAGS:
             continue
@@ -675,6 +691,8 @@ def render_source_page(attributes: list[dict[str, Any]]) -> str:
     )
     for key in sorted(ATTRIBUTE_NOTES):
         lines.append(f"- `{key}`: {ATTRIBUTE_NOTES[key]}")
+    for path in sorted(DOC_NOTES):
+        lines.append(f"- [{path}]({path}): {DOC_NOTES[path]}")
     return clean_markdown("\n".join(lines))
 
 

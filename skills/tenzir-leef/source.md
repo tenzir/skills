@@ -20,3 +20,4 @@ This skill is generated from the IBM QRadar LEEF Version 2 format guide, fetched
 
 - `identHostName`: IBM's table lists "Key" instead of "Yes" or "No" in the normalized column, in both the web guide and the PDF, so normalized is null.
 - `identSecondlp`: The published key name contains an IBM documentation typo (likely intended identSecondIp). Both the web guide and the PDF spell it identSecondlp; use the key verbatim.
+- [docs/event-components.md](docs/event-components.md): IBM's delimiter table labels the hex value x7c as a broken vertical bar (¦), but 0x7C is the regular pipe (|); the broken bar is 0xA6. The error is IBM's and is preserved verbatim.

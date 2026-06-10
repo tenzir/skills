@@ -8,7 +8,7 @@ The following list contains custom key and value general guidelines:
 
 - Use alphanumeric (A-Z, a-z, and 0-9) characters, but avoid tab, pipe, or caret delimiters in your event payload keys and values (key=value).
   - `Correct` - usrName=Joe.Smith
-  - `Incorrect` - usrName=Joe<tab>Smith
+  - `Incorrect` - usrName=Joe\<tab>Smith
 
 - Contain a single word for the key attribute (key=value).
   - `Correct` - file name=pic07720.gif
