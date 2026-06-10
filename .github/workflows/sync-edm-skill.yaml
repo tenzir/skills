@@ -6,7 +6,7 @@ on:
       version:
         description: "FortiSIEM Event Data Model document version to build from"
         required: false
-        default: "7.5.0"
+        default: ""
         type: string
   schedule:
     - cron: "0 6 * * *"
@@ -42,14 +42,17 @@ jobs:
 
       - name: Rebuild EDM skill
         env:
-          FORTISIEM_VERSION: ${{ github.event.inputs['version'] || '7.5.0' }}
+          FORTISIEM_VERSION: ${{ github.event.inputs.version || '' }}
         shell: bash
         run: |
           set -euo pipefail
 
-          uv run scripts/generate-fortisiem-skill.py \
-            --output-dir skills/tenzir-edm \
-            --version "$FORTISIEM_VERSION"
+          args=(--output-dir skills/tenzir-edm)
+          if [[ -n "$FORTISIEM_VERSION" ]]; then
+            args+=(--version "$FORTISIEM_VERSION")
+          fi
+
+          uv run scripts/generate-fortisiem-skill.py "${args[@]}"
 
       - name: Validate skills
         shell: bash
