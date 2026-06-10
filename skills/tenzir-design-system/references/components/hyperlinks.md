@@ -30,13 +30,13 @@ Hyperlinks use an underline style that changes on hover.
 ```css
 /* Hyperlink Default */
 .hyperlink {
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
   text-decoration: none;
-  border-bottom: 1px solid var(--neutral-300);
+  border-bottom: 1px solid var(--tnz-neutral-300);
 }
 
 .hyperlink:hover {
-  border-bottom-color: var(--neutral-400);
+  border-bottom-color: var(--tnz-neutral-400);
 }
 ```
 
@@ -44,8 +44,8 @@ Hyperlinks use an underline style that changes on hover.
 
 ```css
 :root {
-  --hyperlink-underline-default: var(--neutral-300);
-  --hyperlink-underline-hover: var(--neutral-400);
+  --hyperlink-underline-default: var(--tnz-neutral-300);
+  --hyperlink-underline-hover: var(--tnz-neutral-400);
 }
 ```
 

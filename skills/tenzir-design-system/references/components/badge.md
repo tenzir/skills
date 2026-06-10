@@ -80,101 +80,101 @@ Each color has a solid variant (300-level border) and transparent variant (12% o
 
 /* Blue badge */
 .badge--blue {
-  border-color: var(--primary-300);
-  color: var(--primary-500);
+  border-color: var(--tnz-primary-300);
+  color: var(--tnz-primary-500);
 }
 
 .badge--blue-transparent {
   border-color: rgba(0, 67, 224, 0.12);
-  color: var(--primary-400);
+  color: var(--tnz-primary-400);
 }
 
 /* Lightblue badge */
 .badge--lightblue {
-  border-color: var(--lightblue-300);
-  color: var(--lightblue-500);
+  border-color: var(--tnz-lightblue-300);
+  color: var(--tnz-lightblue-500);
 }
 
 .badge--lightblue-transparent {
   border-color: rgba(0, 150, 224, 0.12);
-  color: var(--lightblue-400);
+  color: var(--tnz-lightblue-400);
 }
 
 /* Purple badge */
 .badge--purple {
-  border-color: var(--purple-300);
-  color: var(--purple-500);
+  border-color: var(--tnz-purple-300);
+  color: var(--tnz-purple-500);
 }
 
 .badge--purple-transparent {
   border-color: rgba(180, 0, 224, 0.12);
-  color: var(--purple-400);
+  color: var(--tnz-purple-400);
 }
 
 /* Pink badge */
 .badge--pink {
-  border-color: var(--pink-300);
-  color: var(--pink-500);
+  border-color: var(--tnz-pink-300);
+  color: var(--tnz-pink-500);
 }
 
 .badge--pink-transparent {
   border-color: rgba(224, 0, 142, 0.12);
-  color: var(--pink-400);
+  color: var(--tnz-pink-400);
 }
 
 /* Orange badge */
 .badge--orange {
-  border-color: var(--orange-300);
-  color: var(--orange-500);
+  border-color: var(--tnz-orange-300);
+  color: var(--tnz-orange-500);
 }
 
 .badge--orange-transparent {
   border-color: rgba(224, 75, 0, 0.12);
-  color: var(--orange-400);
+  color: var(--tnz-orange-400);
 }
 
 /* Yellow badge */
 .badge--yellow {
-  border-color: var(--yellow-300);
-  color: var(--yellow-500);
+  border-color: var(--tnz-yellow-300);
+  color: var(--tnz-yellow-500);
 }
 
 .badge--yellow-transparent {
   border-color: rgba(208, 150, 17, 0.12);
-  color: var(--yellow-400);
+  color: var(--tnz-yellow-400);
 }
 
 /* Red badge */
 .badge--red {
-  border-color: var(--red-300);
-  color: var(--red-500);
+  border-color: var(--tnz-red-300);
+  color: var(--tnz-red-500);
 }
 
 .badge--red-transparent {
   border-color: rgba(224, 0, 37, 0.12);
-  color: var(--red-400);
+  color: var(--tnz-red-400);
 }
 
 /* Green badge */
 .badge--green {
-  border-color: var(--green-300);
-  color: var(--green-500);
+  border-color: var(--tnz-green-300);
+  color: var(--tnz-green-500);
 }
 
 .badge--green-transparent {
   border-color: rgba(28, 196, 90, 0.12);
-  color: var(--green-400);
+  color: var(--tnz-green-400);
 }
 
 /* Grey badge */
 .badge--grey {
-  border-color: var(--neutral-300);
-  color: var(--neutral-500);
+  border-color: var(--tnz-neutral-300);
+  color: var(--tnz-neutral-500);
 }
 
 .badge--grey-transparent {
   border-color: rgba(65, 75, 98, 0.12);
-  color: var(--neutral-400);
+  color: var(--tnz-neutral-400);
 }
 ```
 

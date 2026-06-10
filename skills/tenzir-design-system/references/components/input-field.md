@@ -106,7 +106,7 @@ Text input component with optional title, description, and various states.
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
 }
 
 /* Title - Size S */
@@ -115,7 +115,7 @@ Text input component with optional title, description, and various states.
   font-size: 10px;
   font-weight: 500;
   line-height: 14px;
-  color: var(--neutral-500);
+  color: var(--tnz-neutral-500);
 }
 
 /* Description */
@@ -124,7 +124,7 @@ Text input component with optional title, description, and various states.
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
-  color: var(--neutral-600);
+  color: var(--tnz-neutral-600);
 }
 
 /* Input Base */
@@ -133,14 +133,14 @@ Text input component with optional title, description, and various states.
   align-items: center;
   gap: 4px;
   width: 100%;
-  background: var(--neutral-100);
-  border: 1px solid var(--neutral-200);
+  background: var(--tnz-neutral-100);
+  border: 1px solid var(--tnz-neutral-200);
   border-radius: 5px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
   overflow: hidden;
 }
 
@@ -166,40 +166,40 @@ Text input component with optional title, description, and various states.
 
 /* Placeholder */
 .input-field__input::placeholder {
-  color: var(--neutral-500);
+  color: var(--tnz-neutral-500);
 }
 
 /* Hover */
 .input-field__input:hover {
-  border-color: var(--neutral-250);
+  border-color: var(--tnz-neutral-250);
 }
 
 /* Active/Focus */
 .input-field__input:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px var(--primary-200);
+  border-color: var(--tnz-primary-500);
+  box-shadow: 0 0 0 3px var(--tnz-primary-200);
   outline: none;
 }
 
 /* Error */
 .input-field__input--error {
-  border-color: var(--red-500);
+  border-color: var(--tnz-red-500);
 }
 
 .input-field__input--error:focus {
-  border-color: var(--red-500);
+  border-color: var(--tnz-red-500);
   box-shadow: none;
 }
 
 /* Disabled */
 .input-field__input:disabled {
-  border-color: var(--neutral-200);
-  color: var(--neutral-300);
+  border-color: var(--tnz-neutral-200);
+  color: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 
 .input-field__input:disabled::placeholder {
-  color: var(--neutral-300);
+  color: var(--tnz-neutral-300);
 }
 
 /* Right icon */
@@ -207,7 +207,7 @@ Text input component with optional title, description, and various states.
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
 }
 
 /* Error message */
@@ -222,7 +222,7 @@ Text input component with optional title, description, and various states.
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  color: var(--red-600);
+  color: var(--tnz-red-600);
 }
 
 .input-field__error-text {
@@ -230,7 +230,7 @@ Text input component with optional title, description, and various states.
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
-  color: var(--red-600);
+  color: var(--tnz-red-600);
 }
 ```
 
@@ -247,17 +247,17 @@ Text input component with optional title, description, and various states.
   --input-radius: 5px;
 
   /* Input field colors */
-  --input-bg: var(--neutral-100);
-  --input-border: var(--neutral-200);
-  --input-border-hover: var(--neutral-250);
-  --input-border-focus: var(--primary-500);
-  --input-border-error: var(--red-500);
-  --input-focus-ring: var(--primary-200);
+  --input-bg: var(--tnz-neutral-100);
+  --input-border: var(--tnz-neutral-200);
+  --input-border-hover: var(--tnz-neutral-250);
+  --input-border-focus: var(--tnz-primary-500);
+  --input-border-error: var(--tnz-red-500);
+  --input-focus-ring: var(--tnz-primary-200);
 
   /* Input field text */
-  --input-text: var(--neutral-800);
-  --input-placeholder: var(--neutral-500);
-  --input-disabled: var(--neutral-300);
+  --input-text: var(--tnz-neutral-800);
+  --input-placeholder: var(--tnz-neutral-500);
+  --input-disabled: var(--tnz-neutral-300);
 
   /* Title */
   --input-title-m-size: 14px;
@@ -266,7 +266,7 @@ Text input component with optional title, description, and various states.
   --input-title-s-lh: 14px;
 
   /* Error */
-  --input-error-color: var(--red-600);
+  --input-error-color: var(--tnz-red-600);
 }
 ```
 

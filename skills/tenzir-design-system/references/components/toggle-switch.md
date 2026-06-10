@@ -63,53 +63,53 @@ Binary switch control for on/off states.
   height: 20px;
   border-radius: 35px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background var(--tnz-duration-base) var(--tnz-ease-standard);
 }
 
 /* Inactive - Default */
 .toggle--inactive {
-  background: var(--neutral-300);
+  background: var(--tnz-neutral-300);
 }
 
 /* Inactive - Hover */
 .toggle--inactive:hover {
-  background: var(--neutral-400);
+  background: var(--tnz-neutral-400);
 }
 
 /* Inactive - Focus */
 .toggle--inactive:focus-visible {
-  background: var(--neutral-300);
+  background: var(--tnz-neutral-300);
   border-radius: 45px;
-  box-shadow: 0 0 0 2px var(--primary-200);
+  box-shadow: 0 0 0 2px var(--tnz-primary-200);
   outline: none;
 }
 
 /* Inactive - Disabled */
 .toggle--inactive:disabled {
-  background: var(--neutral-200);
+  background: var(--tnz-neutral-200);
   cursor: not-allowed;
 }
 
 /* Active - Default */
 .toggle--active {
-  background: var(--primary-500);
+  background: var(--tnz-primary-500);
 }
 
 /* Active - Hover */
 .toggle--active:hover {
-  background: var(--primary-600);
+  background: var(--tnz-primary-600);
 }
 
 /* Active - Focus */
 .toggle--active:focus-visible {
-  background: var(--primary-500);
-  border: 2px solid var(--primary-300);
+  background: var(--tnz-primary-500);
+  border: 2px solid var(--tnz-primary-300);
   outline: none;
 }
 
 /* Active - Disabled */
 .toggle--active:disabled {
-  background: var(--neutral-300);
+  background: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 
@@ -120,8 +120,8 @@ Binary switch control for on/off states.
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--neutral-50);
-  transition: left 0.2s ease;
+  background: var(--tnz-neutral-50);
+  transition: left var(--tnz-duration-base) var(--tnz-ease-standard);
 }
 
 /* Knob positions */
@@ -146,21 +146,21 @@ Binary switch control for on/off states.
   --toggle-knob-inset: 2px;
 
   /* Toggle inactive */
-  --toggle-inactive-bg: var(--neutral-300);
-  --toggle-inactive-bg-hover: var(--neutral-400);
-  --toggle-inactive-bg-disabled: var(--neutral-200);
+  --toggle-inactive-bg: var(--tnz-neutral-300);
+  --toggle-inactive-bg-hover: var(--tnz-neutral-400);
+  --toggle-inactive-bg-disabled: var(--tnz-neutral-200);
 
   /* Toggle active */
-  --toggle-active-bg: var(--primary-500);
-  --toggle-active-bg-hover: var(--primary-600);
-  --toggle-active-bg-disabled: var(--neutral-300);
-  --toggle-active-focus-border: var(--primary-300);
+  --toggle-active-bg: var(--tnz-primary-500);
+  --toggle-active-bg-hover: var(--tnz-primary-600);
+  --toggle-active-bg-disabled: var(--tnz-neutral-300);
+  --toggle-active-focus-border: var(--tnz-primary-300);
 
   /* Knob */
-  --toggle-knob-color: var(--neutral-50);
+  --toggle-knob-color: var(--tnz-neutral-50);
 
   /* Focus ring */
-  --toggle-focus-ring: var(--primary-200);
+  --toggle-focus-ring: var(--tnz-primary-200);
 }
 ```
 
@@ -184,7 +184,7 @@ Binary switch control for on/off states.
 4. **Behavior**:
    - Changes should take effect immediately
    - Consider showing loading state for async changes
-   - Animate the knob transition (0.2s)
+   - Animate the knob transition with the base duration (200ms)
 
 5. **Accessibility**:
    - Use `role="switch"` and `aria-checked`

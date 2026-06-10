@@ -47,24 +47,24 @@ Solid blue background for primary actions.
 
 ```css
 .btn-primary {
-  background: var(--blue-500);
-  color: var(--neutral-50);
+  background: var(--tnz-blue-500);
+  color: var(--tnz-neutral-50);
   border: none;
   border-radius: 5px;
 }
 
 .btn-primary:hover {
-  background: var(--blue-600);
+  background: var(--tnz-blue-600);
 }
 
 .btn-primary:focus-visible {
-  background: var(--blue-600);
-  outline: 3px solid var(--blue-300);
+  background: var(--tnz-blue-600);
+  outline: 3px solid var(--tnz-blue-300);
   outline-offset: 0;
 }
 
 .btn-primary:disabled {
-  background: var(--neutral-300);
+  background: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 ```
@@ -84,26 +84,26 @@ Outlined button for secondary actions.
 ```css
 .btn-secondary {
   background: transparent;
-  color: var(--neutral-800);
-  border: 1px solid var(--neutral-250);
+  color: var(--tnz-neutral-800);
+  border: 1px solid var(--tnz-neutral-250);
   border-radius: 5px;
 }
 
 .btn-secondary:hover {
-  background: var(--blue-100);
-  color: var(--blue-500);
-  border-color: var(--blue-300);
+  background: var(--tnz-blue-100);
+  color: var(--tnz-blue-500);
+  border-color: var(--tnz-blue-300);
 }
 
 .btn-secondary:focus-visible {
-  background: var(--blue-100);
-  color: var(--blue-500);
-  outline: 3px solid var(--blue-300);
+  background: var(--tnz-blue-100);
+  color: var(--tnz-blue-500);
+  outline: 3px solid var(--tnz-blue-300);
   outline-offset: 0;
 }
 
 .btn-secondary:disabled {
-  color: var(--neutral-400);
+  color: var(--tnz-neutral-400);
   cursor: not-allowed;
 }
 ```
@@ -123,22 +123,22 @@ Text-only button for low-emphasis actions.
 ```css
 .btn-tertiary {
   background: transparent;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
   border: none;
   border-radius: 5px;
 }
 
 .btn-tertiary:hover {
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
 }
 
 .btn-tertiary:focus-visible {
-  outline: 3px solid var(--blue-300);
+  outline: 3px solid var(--tnz-blue-300);
   outline-offset: 0;
 }
 
 .btn-tertiary:disabled {
-  color: var(--neutral-400);
+  color: var(--tnz-neutral-400);
   cursor: not-allowed;
 }
 ```
@@ -184,30 +184,30 @@ Solid red background for primary destructive actions.
 
 ```css
 .btn-delete-primary {
-  background: var(--red-500);
-  color: var(--neutral-50);
+  background: var(--tnz-red-500);
+  color: var(--tnz-neutral-50);
   border: none;
   border-radius: 5px;
 }
 
 .btn-delete-primary:hover {
-  background: var(--red-600);
+  background: var(--tnz-red-600);
 }
 
 .btn-delete-primary:active {
   background:
     linear-gradient(rgba(14, 16, 23, 0.2), rgba(14, 16, 23, 0.2)),
-    var(--red-600);
+    var(--tnz-red-600);
 }
 
 .btn-delete-primary:focus-visible {
-  background: var(--red-600);
-  outline: 3px solid var(--red-200);
+  background: var(--tnz-red-600);
+  outline: 3px solid var(--tnz-red-200);
   outline-offset: 0;
 }
 
 .btn-delete-primary:disabled {
-  background: var(--neutral-300);
+  background: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 ```
@@ -227,30 +227,30 @@ Outlined button with red border for secondary destructive actions.
 ```css
 .btn-delete-secondary {
   background: transparent;
-  color: var(--red-500);
-  border: 1px solid var(--red-200);
+  color: var(--tnz-red-500);
+  border: 1px solid var(--tnz-red-200);
   border-radius: 5px;
 }
 
 .btn-delete-secondary:hover {
-  background: var(--red-100);
-  border-color: var(--red-300);
+  background: var(--tnz-red-100);
+  border-color: var(--tnz-red-300);
 }
 
 .btn-delete-secondary:active {
-  background: var(--red-200);
-  color: var(--red-600);
-  border-color: var(--red-400);
+  background: var(--tnz-red-200);
+  color: var(--tnz-red-600);
+  border-color: var(--tnz-red-400);
 }
 
 .btn-delete-secondary:focus-visible {
-  background: var(--red-100);
-  box-shadow: 0 0 0 2px var(--red-200);
+  background: var(--tnz-red-100);
+  box-shadow: 0 0 0 2px var(--tnz-red-200);
 }
 
 .btn-delete-secondary:disabled {
-  color: var(--neutral-300);
-  border-color: var(--neutral-200);
+  color: var(--tnz-neutral-300);
+  border-color: var(--tnz-neutral-200);
   cursor: not-allowed;
 }
 ```
@@ -270,28 +270,28 @@ Text-only button for low-emphasis destructive actions.
 ```css
 .btn-delete-tertiary {
   background: transparent;
-  color: var(--red-500);
+  color: var(--tnz-red-500);
   border: none;
   border-radius: 5px;
 }
 
 .btn-delete-tertiary:hover {
-  background: var(--red-100);
+  background: var(--tnz-red-100);
 }
 
 .btn-delete-tertiary:active {
-  background: var(--red-200);
-  color: var(--red-600);
+  background: var(--tnz-red-200);
+  color: var(--tnz-red-600);
 }
 
 .btn-delete-tertiary:focus-visible {
-  background: var(--red-100);
-  outline: 2px solid var(--red-200);
+  background: var(--tnz-red-100);
+  outline: 2px solid var(--tnz-red-200);
   outline-offset: 0;
 }
 
 .btn-delete-tertiary:disabled {
-  color: var(--neutral-300);
+  color: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 ```
@@ -345,13 +345,13 @@ Icon button groups that float over content with elevated shadow styling.
 ```css
 /* Outside placement */
 box-shadow:
-  0px 3px 6px -3px rgba(14, 18, 23, 0.2),
-  0px 8px 16px -8px rgba(14, 18, 23, 0.2);
+  0px 3px 6px -3px rgba(14, 16, 23, 0.2),
+  0px 8px 16px -8px rgba(14, 16, 23, 0.2);
 
 /* Inside placement */
 box-shadow:
-  0px 3px 6px -3px rgba(14, 18, 23, 0.1),
-  0px 8px 16px -8px rgba(14, 18, 23, 0.1);
+  0px 3px 6px -3px rgba(14, 16, 23, 0.1),
+  0px 8px 16px -8px rgba(14, 16, 23, 0.1);
 ```
 
 ### State Specifications
@@ -368,16 +368,16 @@ box-shadow:
   display: flex;
   align-items: center;
   height: 28px;
-  background: var(--neutral-50);
-  border: 1px solid var(--neutral-200);
+  background: var(--tnz-neutral-50);
+  border: 1px solid var(--tnz-neutral-200);
   border-radius: 5px;
-  box-shadow: var(--shadow-s);
+  box-shadow: var(--tnz-shadow-s);
 }
 
 .floating-button--inside {
   box-shadow:
-    0px 3px 6px -3px rgba(14, 18, 23, 0.1),
-    0px 8px 16px -8px rgba(14, 18, 23, 0.1);
+    0px 3px 6px -3px rgba(14, 16, 23, 0.1),
+    0px 8px 16px -8px rgba(14, 16, 23, 0.1);
 }
 
 .floating-button__icon {
@@ -385,21 +385,21 @@ box-shadow:
   align-items: center;
   justify-content: center;
   padding: 2px 4px;
-  background: var(--neutral-50);
+  background: var(--tnz-neutral-50);
   border-radius: 5px;
 }
 
 .floating-button__icon:hover {
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
 }
 
 .floating-button__icon:active {
-  background: var(--neutral-200);
+  background: var(--tnz-neutral-200);
 }
 
 .floating-button__icon--disabled {
-  background: var(--neutral-50);
-  color: var(--neutral-300);
+  background: var(--tnz-neutral-50);
+  color: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 
@@ -411,7 +411,7 @@ box-shadow:
 .floating-button__divider {
   width: 1px;
   height: 100%;
-  background: var(--neutral-200);
+  background: var(--tnz-neutral-200);
 }
 ```
 
@@ -442,13 +442,13 @@ box-shadow:
 
   /* Focus ring */
   --btn-focus-ring-width: 3px;
-  --btn-focus-ring-color: var(--blue-300);
+  --btn-focus-ring-color: var(--tnz-blue-300);
 
   /* Delete button colors */
-  --btn-delete-bg: var(--red-500);
-  --btn-delete-bg-hover: var(--red-600);
-  --btn-delete-text: var(--neutral-50);
-  --btn-delete-focus-ring: var(--red-200);
+  --btn-delete-bg: var(--tnz-red-500);
+  --btn-delete-bg-hover: var(--tnz-red-600);
+  --btn-delete-text: var(--tnz-neutral-50);
+  --btn-delete-focus-ring: var(--tnz-red-200);
 
   /* Floating button */
   --floating-btn-height: 28px;
@@ -456,10 +456,10 @@ box-shadow:
   --floating-btn-padding-x: 4px;
   --floating-btn-padding-y: 2px;
   --floating-btn-radius: 5px;
-  --floating-btn-border: var(--neutral-200);
-  --floating-btn-bg: var(--neutral-50);
-  --floating-btn-bg-hover: var(--neutral-100);
-  --floating-btn-bg-pressed: var(--neutral-200);
+  --floating-btn-border: var(--tnz-neutral-200);
+  --floating-btn-bg: var(--tnz-neutral-50);
+  --floating-btn-bg-hover: var(--tnz-neutral-100);
+  --floating-btn-bg-pressed: var(--tnz-neutral-200);
 }
 ```
 

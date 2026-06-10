@@ -126,10 +126,10 @@ Notification component for displaying transient messages, confirmations, and err
   gap: 16px;
   min-height: 48px;
   padding: 12px 16px;
-  background: var(--neutral-50);
-  border: 1px solid var(--neutral-200);
+  background: var(--tnz-neutral-50);
+  border: 1px solid var(--tnz-neutral-200);
   border-radius: 5px;
-  box-shadow: var(--shadow-s);
+  box-shadow: var(--tnz-shadow-s);
   position: relative;
   overflow: hidden;
 }
@@ -142,11 +142,11 @@ Notification component for displaying transient messages, confirmations, and err
 }
 
 .toast__icon--success {
-  color: var(--green-600);
+  color: var(--tnz-green-600);
 }
 
 .toast__icon--error {
-  color: var(--red-600);
+  color: var(--tnz-red-600);
 }
 
 /* Toast Text Container */
@@ -163,7 +163,7 @@ Notification component for displaying transient messages, confirmations, and err
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
   white-space: nowrap;
 }
 
@@ -173,7 +173,7 @@ Notification component for displaying transient messages, confirmations, and err
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
-  color: var(--neutral-500);
+  color: var(--tnz-neutral-500);
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -185,14 +185,14 @@ Notification component for displaying transient messages, confirmations, and err
   align-items: center;
   justify-content: center;
   padding: 3px 8px;
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
   border: none;
   border-radius: 5px;
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -204,11 +204,11 @@ Notification component for displaying transient messages, confirmations, and err
   left: 0;
   height: 2px;
   background: #d9d9d9;
-  border: 1px solid var(--primary-400);
+  border: 1px solid var(--tnz-primary-400);
 }
 
 .toast__progress--error {
-  border-color: var(--red-400);
+  border-color: var(--tnz-red-400);
 }
 ```
 
@@ -225,21 +225,21 @@ Notification component for displaying transient messages, confirmations, and err
   --toast-icon-size: 24px;
 
   /* Toast colors */
-  --toast-bg: var(--neutral-50);
-  --toast-border: var(--neutral-200);
-  --toast-title-color: var(--neutral-800);
-  --toast-subtitle-color: var(--neutral-500);
+  --toast-bg: var(--tnz-neutral-50);
+  --toast-border: var(--tnz-neutral-200);
+  --toast-title-color: var(--tnz-neutral-800);
+  --toast-subtitle-color: var(--tnz-neutral-500);
 
   /* Toast button */
-  --toast-button-bg: var(--neutral-100);
+  --toast-button-bg: var(--tnz-neutral-100);
   --toast-button-padding-x: 8px;
   --toast-button-padding-y: 3px;
   --toast-button-radius: 5px;
 
   /* Toast progress bar */
   --toast-progress-height: 2px;
-  --toast-progress-default: var(--primary-400);
-  --toast-progress-error: var(--red-400);
+  --toast-progress-default: var(--tnz-primary-400);
+  --toast-progress-error: var(--tnz-red-400);
 }
 ```
 

@@ -49,50 +49,50 @@ Circular selection control for single choice from multiple options.
 
 /* Unchecked - Default */
 .radio--unchecked {
-  background: var(--neutral-50);
-  border: 1px solid var(--neutral-300);
+  background: var(--tnz-neutral-50);
+  border: 1px solid var(--tnz-neutral-300);
 }
 
 /* Unchecked - Hover */
 .radio--unchecked:hover {
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
 }
 
 /* Unchecked - Focus */
 .radio--unchecked:focus-visible {
-  background: var(--neutral-50);
-  box-shadow: 0 0 0 2px var(--primary-200);
+  background: var(--tnz-neutral-50);
+  box-shadow: 0 0 0 2px var(--tnz-primary-200);
   outline: none;
 }
 
 /* Unchecked - Disabled */
 .radio--unchecked:disabled {
-  background: var(--neutral-100);
-  border-color: var(--neutral-250);
+  background: var(--tnz-neutral-100);
+  border-color: var(--tnz-neutral-250);
   cursor: not-allowed;
 }
 
 /* Checked - Default */
 .radio--checked {
-  background: var(--primary-500);
+  background: var(--tnz-primary-500);
   border: none;
 }
 
 /* Checked - Hover */
 .radio--checked:hover {
-  background: var(--primary-600);
+  background: var(--tnz-primary-600);
 }
 
 /* Checked - Focus */
 .radio--checked:focus-visible {
-  background: var(--primary-500);
-  border: 2px solid var(--primary-300);
+  background: var(--tnz-primary-500);
+  border: 2px solid var(--tnz-primary-300);
   outline: none;
 }
 
 /* Checked - Disabled */
 .radio--checked:disabled {
-  background: var(--neutral-300);
+  background: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 
@@ -103,7 +103,7 @@ Circular selection control for single choice from multiple options.
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--neutral-50);
+  color: var(--tnz-neutral-50);
 }
 
 .radio__indicator svg {
@@ -121,20 +121,20 @@ Circular selection control for single choice from multiple options.
   --radio-radius: 10px;
 
   /* Radio unchecked */
-  --radio-unchecked-bg: var(--neutral-50);
-  --radio-unchecked-bg-hover: var(--neutral-100);
-  --radio-unchecked-border: var(--neutral-300);
-  --radio-unchecked-border-disabled: var(--neutral-250);
+  --radio-unchecked-bg: var(--tnz-neutral-50);
+  --radio-unchecked-bg-hover: var(--tnz-neutral-100);
+  --radio-unchecked-border: var(--tnz-neutral-300);
+  --radio-unchecked-border-disabled: var(--tnz-neutral-250);
 
   /* Radio checked */
-  --radio-checked-bg: var(--primary-500);
-  --radio-checked-bg-hover: var(--primary-600);
-  --radio-checked-bg-disabled: var(--neutral-300);
-  --radio-checked-focus-border: var(--primary-300);
-  --radio-indicator: var(--neutral-50);
+  --radio-checked-bg: var(--tnz-primary-500);
+  --radio-checked-bg-hover: var(--tnz-primary-600);
+  --radio-checked-bg-disabled: var(--tnz-neutral-300);
+  --radio-checked-focus-border: var(--tnz-primary-300);
+  --radio-indicator: var(--tnz-neutral-50);
 
   /* Focus ring */
-  --radio-focus-ring: var(--primary-200);
+  --radio-focus-ring: var(--tnz-primary-200);
 }
 ```
 

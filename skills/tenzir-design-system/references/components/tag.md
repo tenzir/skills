@@ -106,133 +106,133 @@ Each color has a 200-level background, transparent border (default), solid 300-l
 
 /* Blue tag */
 .tag--blue {
-  background: var(--primary-200);
+  background: var(--tnz-primary-200);
   border-color: rgba(0, 67, 224, 0.12);
-  color: var(--primary-600);
+  color: var(--tnz-primary-600);
 }
 
 .tag--blue:hover {
-  border-color: var(--primary-300);
+  border-color: var(--tnz-primary-300);
 }
 
 /* Lightblue tag */
 .tag--lightblue {
-  background: var(--lightblue-200);
+  background: var(--tnz-lightblue-200);
   border-color: rgba(0, 150, 224, 0.12);
-  color: var(--lightblue-600);
+  color: var(--tnz-lightblue-600);
 }
 
 .tag--lightblue:hover {
-  border-color: var(--lightblue-300);
+  border-color: var(--tnz-lightblue-300);
 }
 
 /* Purple tag */
 .tag--purple {
-  background: var(--purple-200);
+  background: var(--tnz-purple-200);
   border-color: rgba(180, 0, 224, 0.12);
-  color: var(--purple-600);
+  color: var(--tnz-purple-600);
 }
 
 .tag--purple:hover {
-  border-color: var(--purple-300);
+  border-color: var(--tnz-purple-300);
 }
 
 /* Pink tag */
 .tag--pink {
-  background: var(--pink-200);
+  background: var(--tnz-pink-200);
   border-color: rgba(224, 0, 142, 0.12);
-  color: var(--pink-600);
+  color: var(--tnz-pink-600);
 }
 
 .tag--pink:hover {
-  border-color: var(--pink-300);
+  border-color: var(--tnz-pink-300);
 }
 
 /* Orange tag */
 .tag--orange {
-  background: var(--orange-200);
+  background: var(--tnz-orange-200);
   border-color: rgba(224, 75, 0, 0.12);
-  color: var(--orange-600);
+  color: var(--tnz-orange-600);
 }
 
 .tag--orange:hover {
-  border-color: var(--orange-300);
+  border-color: var(--tnz-orange-300);
 }
 
 /* Yellow tag */
 .tag--yellow {
-  background: var(--yellow-200);
+  background: var(--tnz-yellow-200);
   border-color: rgba(208, 150, 17, 0.12);
-  color: var(--yellow-600);
+  color: var(--tnz-yellow-600);
 }
 
 .tag--yellow:hover {
-  border-color: var(--yellow-300);
+  border-color: var(--tnz-yellow-300);
 }
 
 /* Red tag */
 .tag--red {
-  background: var(--red-200);
+  background: var(--tnz-red-200);
   border-color: rgba(224, 0, 37, 0.12);
-  color: var(--red-600);
+  color: var(--tnz-red-600);
 }
 
 .tag--red:hover {
-  border-color: var(--red-300);
+  border-color: var(--tnz-red-300);
 }
 
 /* Green tag */
 .tag--green {
-  background: var(--green-200);
+  background: var(--tnz-green-200);
   border-color: rgba(28, 196, 90, 0.12);
-  color: var(--green-600);
+  color: var(--tnz-green-600);
 }
 
 .tag--green:hover {
-  border-color: var(--green-300);
+  border-color: var(--tnz-green-300);
 }
 
 /* Grey tag */
 .tag--grey {
-  background: var(--neutral-200);
+  background: var(--tnz-neutral-200);
   border-color: rgba(65, 75, 98, 0.12);
-  color: var(--neutral-600);
+  color: var(--tnz-neutral-600);
 }
 
 .tag--grey:hover {
-  border-color: var(--neutral-300);
+  border-color: var(--tnz-neutral-300);
 }
 
 /* No color tag */
 .tag--no-color {
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
   border-color: rgba(65, 75, 98, 0.12);
-  color: var(--neutral-600);
+  color: var(--tnz-neutral-600);
 }
 
 .tag--no-color:hover {
-  border-color: var(--neutral-300);
+  border-color: var(--tnz-neutral-300);
 }
 
 /* None tag (placeholder) */
 .tag--none {
-  background: var(--neutral-50);
-  border-color: var(--neutral-200);
-  color: var(--neutral-400);
+  background: var(--tnz-neutral-50);
+  border-color: var(--tnz-neutral-200);
+  color: var(--tnz-neutral-400);
 }
 
 /* Included state */
 .tag--included {
-  background: var(--primary-200);
+  background: var(--tnz-primary-200);
   border-color: rgba(0, 67, 224, 0.12);
-  color: var(--primary-500);
+  color: var(--tnz-primary-500);
 }
 
 /* Excluded state */
 .tag--excluded {
-  background: var(--red-200);
+  background: var(--tnz-red-200);
   border-color: rgba(224, 0, 37, 0.12);
-  color: var(--red-500);
+  color: var(--tnz-red-500);
 }
 ```
 

@@ -48,14 +48,14 @@ Specialized input for search functionality with optional search icon and clear b
   gap: 8px;
   height: 32px;
   padding: 6px 8px;
-  background: var(--neutral-100);
-  border: 1px solid var(--neutral-200);
+  background: var(--tnz-neutral-100);
+  border: 1px solid var(--tnz-neutral-200);
   border-radius: 5px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
 }
 
 /* Icons */
@@ -63,7 +63,7 @@ Specialized input for search functionality with optional search icon and clear b
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
 }
 
 /* Input text */
@@ -78,7 +78,7 @@ Specialized input for search functionality with optional search icon and clear b
 }
 
 .search-input__text::placeholder {
-  color: var(--neutral-500);
+  color: var(--tnz-neutral-500);
 }
 
 /* Clear button */
@@ -90,7 +90,7 @@ Specialized input for search functionality with optional search icon and clear b
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
 }
 
 .search-input--filled .search-input__clear,
@@ -102,17 +102,17 @@ Specialized input for search functionality with optional search icon and clear b
 
 /* Hover */
 .search-input:hover {
-  border-color: var(--neutral-300);
+  border-color: var(--tnz-neutral-300);
 }
 
 .search-input:hover .search-input__text::placeholder {
-  color: var(--neutral-400);
+  color: var(--tnz-neutral-400);
 }
 
 /* Active/Focus */
 .search-input:focus-within {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px var(--primary-200);
+  border-color: var(--tnz-primary-500);
+  box-shadow: 0 0 0 3px var(--tnz-primary-200);
 }
 ```
 
@@ -128,11 +128,11 @@ Specialized input for search functionality with optional search icon and clear b
   --search-icon-size: 20px;
 
   /* Search colors */
-  --search-bg: var(--neutral-100);
-  --search-border: var(--neutral-200);
-  --search-border-hover: var(--neutral-300);
-  --search-border-focus: var(--primary-500);
-  --search-focus-ring: var(--primary-200);
+  --search-bg: var(--tnz-neutral-100);
+  --search-border: var(--tnz-neutral-200);
+  --search-border-hover: var(--tnz-neutral-300);
+  --search-border-focus: var(--tnz-primary-500);
+  --search-focus-ring: var(--tnz-primary-200);
 }
 ```
 

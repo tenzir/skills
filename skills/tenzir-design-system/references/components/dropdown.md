@@ -74,7 +74,7 @@ When the dropdown is open (active state):
   padding: 4px;
   border-radius: 5px;
   background: transparent;
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -84,7 +84,7 @@ When the dropdown is open (active state):
 
 /* With border variant */
 .dropdown--border {
-  border: 1px solid var(--neutral-250);
+  border: 1px solid var(--tnz-neutral-250);
   padding: 2px 8px;
   font-weight: 500;
 }
@@ -108,28 +108,28 @@ When the dropdown is open (active state):
 
 /* Hover */
 .dropdown:hover {
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
 }
 
 /* Active (open) */
 .dropdown--active {
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
 }
 
 .dropdown--active:hover {
-  background: var(--neutral-200);
+  background: var(--tnz-neutral-200);
 }
 
 /* Pressed */
 .dropdown:active {
-  background: var(--neutral-200);
+  background: var(--tnz-neutral-200);
 }
 
 /* Focus */
 .dropdown:focus-visible {
-  background: var(--neutral-100);
-  border: 1px solid var(--neutral-200);
-  box-shadow: 0 0 0 3px var(--neutral-250);
+  background: var(--tnz-neutral-100);
+  border: 1px solid var(--tnz-neutral-200);
+  box-shadow: 0 0 0 3px var(--tnz-neutral-250);
   outline: none;
 }
 
@@ -137,7 +137,7 @@ When the dropdown is open (active state):
 .dropdown__chevron {
   width: 20px;
   height: 20px;
-  transition: transform 0.2s ease;
+  transition: transform var(--tnz-duration-base) var(--tnz-ease-standard);
 }
 
 .dropdown--active .dropdown__chevron {
@@ -173,11 +173,11 @@ When the dropdown is open (active state):
 
   /* Dropdown colors */
   --dropdown-bg: transparent;
-  --dropdown-bg-hover: var(--neutral-100);
-  --dropdown-bg-active: var(--neutral-100);
-  --dropdown-bg-pressed: var(--neutral-200);
-  --dropdown-border: var(--neutral-250);
-  --dropdown-focus-ring: var(--neutral-250);
+  --dropdown-bg-hover: var(--tnz-neutral-100);
+  --dropdown-bg-active: var(--tnz-neutral-100);
+  --dropdown-bg-pressed: var(--tnz-neutral-200);
+  --dropdown-border: var(--tnz-neutral-250);
+  --dropdown-focus-ring: var(--tnz-neutral-250);
 }
 ```
 

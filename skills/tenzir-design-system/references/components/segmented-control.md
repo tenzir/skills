@@ -55,7 +55,7 @@ A toggle component for switching between mutually exclusive options, available i
 | ------------- | --------------------------------------- |
 | Background    | `neutral-50` (#fdfdfe)                  |
 | Border radius | 3px                                     |
-| Shadow        | `0px 1px 4px 0px rgba(14, 18, 23, 0.2)` |
+| Shadow        | `0px 1px 4px 0px rgba(14, 16, 23, 0.2)` |
 | Text color    | `neutral-800` (#0e1017)                 |
 | Icon color    | `neutral-800` (#0e1017)                 |
 
@@ -85,8 +85,8 @@ A toggle component for switching between mutually exclusive options, available i
   align-items: center;
   gap: 0;
   padding: 2px;
-  background: var(--neutral-100);
-  border: 1px solid var(--neutral-200);
+  background: var(--tnz-neutral-100);
+  border: 1px solid var(--tnz-neutral-200);
   border-radius: 5px;
 }
 
@@ -107,15 +107,15 @@ A toggle component for switching between mutually exclusive options, available i
   border-radius: 4px;
   cursor: pointer;
   transition:
-    background 0.15s ease,
-    box-shadow 0.15s ease;
+    background var(--tnz-duration-fast) var(--tnz-ease-standard),
+    box-shadow var(--tnz-duration-fast) var(--tnz-ease-standard);
 }
 
 /* Active button */
 .segmented-control__button--active {
-  background: var(--neutral-50);
+  background: var(--tnz-neutral-50);
   border-radius: 3px;
-  box-shadow: 0px 1px 4px 0px rgba(14, 18, 23, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(14, 16, 23, 0.2);
 }
 
 /* Icon button - M size */
@@ -153,21 +153,21 @@ A toggle component for switching between mutually exclusive options, available i
 
 /* Inactive text color */
 .segmented-control__button:not(.segmented-control__button--active) {
-  color: var(--neutral-500);
+  color: var(--tnz-neutral-500);
 }
 
 /* Inactive icon color */
 .segmented-control__button:not(.segmented-control__button--active) svg {
-  color: var(--neutral-600);
+  color: var(--tnz-neutral-600);
 }
 
 /* Active text/icon color */
 .segmented-control__button--active {
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
 }
 
 .segmented-control__button--active svg {
-  color: var(--neutral-800);
+  color: var(--tnz-neutral-800);
 }
 ```
 
@@ -176,22 +176,22 @@ A toggle component for switching between mutually exclusive options, available i
 ```css
 :root {
   /* Segmented control container */
-  --segmented-control-bg: var(--neutral-100);
-  --segmented-control-border: var(--neutral-200);
+  --segmented-control-bg: var(--tnz-neutral-100);
+  --segmented-control-border: var(--tnz-neutral-200);
   --segmented-control-radius: 5px;
   --segmented-control-padding: 2px;
   --segmented-control-gap: 2px;
 
   /* Active button */
-  --segmented-control-active-bg: var(--neutral-50);
+  --segmented-control-active-bg: var(--tnz-neutral-50);
   --segmented-control-active-radius: 3px;
-  --segmented-control-active-shadow: 0px 1px 4px 0px rgba(14, 18, 23, 0.2);
-  --segmented-control-active-color: var(--neutral-800);
+  --segmented-control-active-shadow: 0px 1px 4px 0px rgba(14, 16, 23, 0.2);
+  --segmented-control-active-color: var(--tnz-neutral-800);
 
   /* Inactive button */
   --segmented-control-inactive-radius: 4px;
-  --segmented-control-inactive-color: var(--neutral-500);
-  --segmented-control-inactive-icon-color: var(--neutral-600);
+  --segmented-control-inactive-color: var(--tnz-neutral-500);
+  --segmented-control-inactive-icon-color: var(--tnz-neutral-600);
 
   /* Sizes - Icon M */
   --segmented-control-icon-m-width: 32px;

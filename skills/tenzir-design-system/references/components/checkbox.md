@@ -50,50 +50,50 @@ Square selection control for multiple choice options.
 
 /* Unchecked - Default */
 .checkbox--unchecked {
-  background: var(--neutral-50);
-  border: 1px solid var(--neutral-300);
+  background: var(--tnz-neutral-50);
+  border: 1px solid var(--tnz-neutral-300);
 }
 
 /* Unchecked - Hover */
 .checkbox--unchecked:hover {
-  background: var(--neutral-100);
+  background: var(--tnz-neutral-100);
 }
 
 /* Unchecked - Focus */
 .checkbox--unchecked:focus-visible {
-  background: var(--neutral-50);
-  box-shadow: 0 0 0 2px var(--primary-200);
+  background: var(--tnz-neutral-50);
+  box-shadow: 0 0 0 2px var(--tnz-primary-200);
   outline: none;
 }
 
 /* Unchecked - Disabled */
 .checkbox--unchecked:disabled {
-  background: var(--neutral-100);
-  border-color: var(--neutral-250);
+  background: var(--tnz-neutral-100);
+  border-color: var(--tnz-neutral-250);
   cursor: not-allowed;
 }
 
 /* Checked - Default */
 .checkbox--checked {
-  background: var(--primary-500);
+  background: var(--tnz-primary-500);
   border: none;
 }
 
 /* Checked - Hover */
 .checkbox--checked:hover {
-  background: var(--primary-600);
+  background: var(--tnz-primary-600);
 }
 
 /* Checked - Focus */
 .checkbox--checked:focus-visible {
-  background: var(--primary-500);
-  border: 2px solid var(--primary-300);
+  background: var(--tnz-primary-500);
+  border: 2px solid var(--tnz-primary-300);
   outline: none;
 }
 
 /* Checked - Disabled */
 .checkbox--checked:disabled {
-  background: var(--neutral-300);
+  background: var(--tnz-neutral-300);
   cursor: not-allowed;
 }
 
@@ -104,7 +104,7 @@ Square selection control for multiple choice options.
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--neutral-50);
+  color: var(--tnz-neutral-50);
 }
 
 .checkbox__checkmark svg {
@@ -122,20 +122,20 @@ Square selection control for multiple choice options.
   --checkbox-radius: 5px;
 
   /* Checkbox unchecked */
-  --checkbox-unchecked-bg: var(--neutral-50);
-  --checkbox-unchecked-bg-hover: var(--neutral-100);
-  --checkbox-unchecked-border: var(--neutral-300);
-  --checkbox-unchecked-border-disabled: var(--neutral-250);
+  --checkbox-unchecked-bg: var(--tnz-neutral-50);
+  --checkbox-unchecked-bg-hover: var(--tnz-neutral-100);
+  --checkbox-unchecked-border: var(--tnz-neutral-300);
+  --checkbox-unchecked-border-disabled: var(--tnz-neutral-250);
 
   /* Checkbox checked */
-  --checkbox-checked-bg: var(--primary-500);
-  --checkbox-checked-bg-hover: var(--primary-600);
-  --checkbox-checked-bg-disabled: var(--neutral-300);
-  --checkbox-checked-focus-border: var(--primary-300);
-  --checkbox-checkmark: var(--neutral-50);
+  --checkbox-checked-bg: var(--tnz-primary-500);
+  --checkbox-checked-bg-hover: var(--tnz-primary-600);
+  --checkbox-checked-bg-disabled: var(--tnz-neutral-300);
+  --checkbox-checked-focus-border: var(--tnz-primary-300);
+  --checkbox-checkmark: var(--tnz-neutral-50);
 
   /* Focus ring */
-  --checkbox-focus-ring: var(--primary-200);
+  --checkbox-focus-ring: var(--tnz-primary-200);
 }
 ```
 
