@@ -15,6 +15,7 @@ The attributes including disposition that represent the outcome of a security co
 - Authentication
 - Authorize Session
 - Base Event
+- Clipboard Activity
 - Cloud Resources Inventory Info
 - Compliance Finding
 - Data Security Finding
@@ -23,6 +24,7 @@ The attributes including disposition that represent the outcome of a security co
 - Device Config State
 - Device Config State Change
 - Device Inventory Info
+- Device Power State Activity
 - DHCP Activity
 - Discovery
 - Discovery Result

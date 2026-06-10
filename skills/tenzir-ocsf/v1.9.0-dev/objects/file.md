@@ -349,7 +349,9 @@ The volume on the storage device where the file is located.
 - **Type**: [`object`](object.md)
 - **Requirement**: optional
 
-An unordered collection of zero or more name/value pairs where each pair represents a file or folder extended attribute.For example: Windows alternate data stream attributes (ADS stream name, ADS size, etc.), user-defined or application-defined attributes, ACL, owner, primary group, etc. Examples from DCS:
+An unordered collection of zero or more name/value pairs where each pair represents a file or folder extended attribute.
+
+For example: Windows alternate data stream attributes (ADS stream name, ADS size, etc.), user-defined or application-defined attributes, ACL, owner, primary group, etc. Examples from DCS:
 
 - ads_name
 - ads_size

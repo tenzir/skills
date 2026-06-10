@@ -129,3 +129,5 @@ The working directory of a process.
 - **Requirement**: optional
 
 An unordered collection of zero or more name/value pairs that represent a process extended attribute.
+
+For example: process security context attributes, process resource limits, container-specific attributes, or platform-specific process metadata not covered by standard OCSF attributes.

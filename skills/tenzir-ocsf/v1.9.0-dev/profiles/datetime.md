@@ -16,6 +16,7 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 - Authentication
 - Authorize Session
 - Base Event
+- Clipboard Activity
 - Cloud Resources Inventory Info
 - Compliance Finding
 - Data Security Finding
@@ -24,6 +25,7 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 - Device Config State
 - Device Config State Change
 - Device Inventory Info
+- Device Power State Activity
 - DHCP Activity
 - Discovery
 - Discovery Result

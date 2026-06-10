@@ -265,4 +265,6 @@ The event/finding type ID. It identifies the event's semantics and structure. Pr
 - **Requirement**: optional
 - **Group**: context
 
-A container for source-specific attributes that do not map to any defined OCSF attribute. Use this to preserve valuable source data that would otherwise be lost during normalization. The keys and values are specific to the event source. Consumers should not rely on a stable structure within this field.
+A container for source-specific attributes that do not map to any defined OCSF attribute. Use this to preserve valuable source data that would otherwise be lost during normalization. The keys and values are specific to the event source.
+
+Note: Consumers should not rely on a stable structure within this field. The preferred approach to unmapped attributes is to create a custom extension with the desired structure.

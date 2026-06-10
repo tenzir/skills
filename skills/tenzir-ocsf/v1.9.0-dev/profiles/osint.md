@@ -15,6 +15,7 @@ The OSINT (Open Source Intelligence) profile contains one or more indicators and
 - Authentication
 - Authorize Session
 - Base Event
+- Clipboard Activity
 - Cloud Resources Inventory Info
 - Compliance Finding
 - Data Security Finding
@@ -23,6 +24,7 @@ The OSINT (Open Source Intelligence) profile contains one or more indicators and
 - Device Config State
 - Device Config State Change
 - Device Inventory Info
+- Device Power State Activity
 - DHCP Activity
 - Discovery
 - Discovery Result
