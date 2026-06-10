@@ -111,7 +111,10 @@ uvx tenzir-ship release create \
 ```
 
 If an outstanding RC exists, this promotes the latest candidate to its matching
-stable release automatically.
+stable release automatically. Promotion is cumulative: entries added to the
+unreleased queue after the last candidate snapshot are folded into the stable
+release and consumed from the queue, just as a follow-up candidate would
+include them.
 
 To override the inferred base, prefer a manual bump flag, for example
 `release create --rc --minor`. Pass a stable version only when the user needs

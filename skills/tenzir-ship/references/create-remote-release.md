@@ -60,7 +60,9 @@ Do not specify a version bump unless explicitly requested. The workflow will
 pick the appropriate bump according to the changelog entry types. If an
 outstanding release candidate exists, this same version-less invocation
 promotes the latest RC to its matching stable release automatically. This is
-the only promotion path for the active RC.
+the only promotion path for the active RC. Promotion is cumulative: entries
+added to the unreleased queue after the last candidate snapshot are folded
+into the stable release and consumed from the queue.
 
 ### Stable release with manual bump
 
