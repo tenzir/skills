@@ -266,6 +266,8 @@ The RC workflow has three outcomes only:
 * Run `release create` without a version or bump flag to promote the active RC.
 * Run `release create <new-version>` or a manual bump flag to leave the RC cycle and ship a different stable release instead.
 
+Promotion is cumulative: entries added to `unreleased/` after the last candidate snapshot are folded into the stable release and consumed from the queue, just as a follow-up candidate would include them.
+
 Promoting to stable closes the RC cycle and removes that cycle’s `vX.Y.Z-rc.N` manifests from `releases/`. An explicit version matching the active RC base is rejected, and manual bump flags never promote the active RC.
 
 ### Export release notes

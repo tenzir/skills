@@ -312,7 +312,7 @@ When you are ready to ship the stable release, rerun the normal stable command w
 tenzir-ship release create --yes
 ```
 
-If an outstanding RC exists, this promotes the latest candidate automatically.
+If an outstanding RC exists, this promotes the latest candidate automatically. Promotion is cumulative: entries added to `unreleased/` after the last candidate snapshot are folded into the stable release and consumed from the queue, just as a follow-up candidate would include them.
 
 #### After an RC exists
 
