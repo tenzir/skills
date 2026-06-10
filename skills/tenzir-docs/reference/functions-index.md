@@ -143,6 +143,7 @@
 ## Record
 
 - [drop_matching](functions/drop_matching.md): Removes top-level fields from a record when their names match a regular expression.
+- [drop_null_fields](functions/drop_null_fields.md): Returns a record with fields whose value is `null` removed.
 - [get](functions/get.md): Gets a field from a record or an element from a list.
 - [has](functions/has.md): Checks whether a record has a specified field.
 - [keys](functions/keys.md): Retrieves a list of field names from a record.

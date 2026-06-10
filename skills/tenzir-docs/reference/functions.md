@@ -880,6 +880,14 @@ Removes top-level fields from a record when their names match a regular expressi
 record.drop_matching("^debug_")
 ```
 
+### [drop\_null\_fields](functions/drop_null_fields.md)
+
+Removes fields whose value is null from a record.
+
+```tql
+drop_null_fields({a: null, b: 1})
+```
+
 ### [get](functions/get.md)
 
 Gets a field from a record or an element from a list
