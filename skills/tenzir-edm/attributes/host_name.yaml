@@ -1,0 +1,84 @@
+name: hostName
+summary: Host where event occurs
+type: string
+display_names:
+- Host Name
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: dhcp_activity
+  type: string
+  display_name: Host Name
+  description: Host requesting IP
+- name: endpoint_security_finding
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: file_activity
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: process_creation
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: service_install_start_stop
+  type: string
+  display_name: Host Name
+  description: Hostname of the device
+- name: software_install_uninstall
+  type: string
+  display_name: Host Name
+  description: Host where software was installed or uninstalled
+- name: system_configuration_change
+  type: string
+  display_name: Host Name
+  description: "Host IP\u2019s host name"
+- name: system_performance
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: CPU Monitoring
+- name: system_performance
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Disk I/O Monitoring
+- name: system_performance
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Disk Space Monitoring
+- name: system_performance
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Memory Monitoring
+- name: system_performance
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Network Interface Monitoring
+- name: system_performance
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+  section: Uptime Monitoring
+- name: system_process_performance
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: user_account_change
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: vulnerability_detection
+  type: string
+  display_name: Host Name
+  description: Host where vulnerability is found
+- name: windows_registry_activity
+  type: string
+  display_name: Host Name
+  description: Host where event occurs

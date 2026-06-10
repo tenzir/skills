@@ -1,0 +1,14 @@
+name: command
+summary: Command to execute process including full path and arguments
+type: string
+display_names:
+- Command
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Command
+  description: Command to execute process including full path and arguments
+- name: process_creation
+  type: string
+  display_name: Command
+  description: Full Command executed to create process

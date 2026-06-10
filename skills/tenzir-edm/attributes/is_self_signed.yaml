@@ -1,0 +1,10 @@
+name: isSelfSigned
+summary: 0 means not self-signed, 1 means self-signed
+type: uchar
+display_names:
+- Is Self Signed
+models:
+- name: certificate_monitoring
+  type: uchar
+  display_name: Is Self Signed
+  description: 0 means not self-signed, 1 means self-signed

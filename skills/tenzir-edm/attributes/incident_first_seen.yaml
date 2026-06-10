@@ -1,0 +1,10 @@
+name: incidentFirstSeen
+summary: The first time an Incident happened.
+type: DATE
+display_names:
+- Incident First Occurrence Time
+models:
+- name: incident
+  type: DATE
+  display_name: Incident First Occurrence Time
+  description: The first time an Incident happened.

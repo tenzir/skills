@@ -1,0 +1,10 @@
+name: tcpWindow
+summary: TCP Window field in TCP header
+type: uint32
+display_names:
+- TCP Window
+models:
+- name: network_traffic
+  type: uint32
+  display_name: TCP Window
+  description: TCP Window field in TCP header

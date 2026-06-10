@@ -1,0 +1,14 @@
+name: ipProto
+summary: IP Protocol, e.g. TCP, UDP, ICMP etc as defined in IP RFPs
+type: uint16
+display_names:
+- IP Protocol
+models:
+- name: network_security_finding
+  type: uint16
+  display_name: IP Protocol
+  description: IP Protocol, e.g. TCP, UDP, ICMP etc as defined in IP RFPs
+- name: network_traffic
+  type: uint16
+  display_name: IP Protocol
+  description: IP Protocol, e.g. TCP, UDP, ICMP etc as defined in IP RFPs

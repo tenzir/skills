@@ -1,0 +1,10 @@
+name: preNATDestIpAddr
+summary: The Destination IP before Firewall Inbound Network Address Translation (NAT) - often present in Firewall Address translation log
+type: IP
+display_names:
+- Pre-NAT Destination IP
+models:
+- name: network_traffic
+  type: IP
+  display_name: Pre-NAT Destination IP
+  description: The Destination IP before Firewall Inbound Network Address Translation (NAT) - often present in Firewall Address translation log

@@ -1,0 +1,18 @@
+name: virusName
+summary: Malware Name
+type: string
+display_names:
+- Malware Name
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Malware Name
+  description: Malware Name
+- name: mail_activity
+  type: string
+  display_name: Malware Name
+  description: Malware name (found in mail)
+- name: network_security_finding
+  type: string
+  display_name: Malware Name
+  description: Malware Name

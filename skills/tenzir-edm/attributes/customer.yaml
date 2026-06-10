@@ -1,0 +1,11 @@
+name: customer
+summary: This is the FortiSIEM Organization Name, which is unique to each tenant. It identifies the tenant this event belongs to. In Enterprise case, customer = Super.
+type: string
+display_names:
+- Organization Name
+models:
+- name: base_event
+  type: string
+  display_name: Organization Name
+  description: This is the FortiSIEM Organization Name, which is unique to each tenant. It identifies the tenant this event belongs to. In Enterprise case, customer = Super.
+  section: Base Attributes automatically set by Parser

@@ -1,0 +1,11 @@
+name: outIntfPktDiscarded
+summary: Total number of sent packets that were discarded by the networking stack.
+type: uint32
+display_names:
+- Sent Packet Discards
+models:
+- name: system_performance
+  type: uint32
+  display_name: Sent Packet Discards
+  description: Total number of sent packets that were discarded by the networking stack.
+  section: Network Interface Monitoring

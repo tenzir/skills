@@ -1,0 +1,10 @@
+name: validFrom
+summary: Time since when certificate is valid
+type: DATE
+display_names:
+- Valid From
+models:
+- name: certificate_monitoring
+  type: DATE
+  display_name: Valid From
+  description: Time since when certificate is valid

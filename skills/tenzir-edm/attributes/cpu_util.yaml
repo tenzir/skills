@@ -1,0 +1,15 @@
+name: cpuUtil
+summary: CPU Util (0-100)
+type: double
+display_names:
+- CPU Util
+models:
+- name: system_performance
+  type: double
+  display_name: CPU Util
+  description: CPU Util (0-100)
+  section: CPU Monitoring
+- name: system_process_performance
+  type: double
+  display_name: CPU Util
+  description: CPU Utilization 0-100

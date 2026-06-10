@@ -1,0 +1,10 @@
+name: httpContentLen
+summary: HTTP Content Length
+type: uint16
+display_names:
+- HTTP Content Length
+models:
+- name: web_activity
+  type: uint16
+  display_name: HTTP Content Length
+  description: HTTP Content Length

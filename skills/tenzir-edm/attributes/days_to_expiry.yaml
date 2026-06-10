@@ -1,0 +1,10 @@
+name: daysToExpiry
+summary: Days to certiciate expirt (derived from Valid To field)
+type: uint32
+display_names:
+- Days To Expiry
+models:
+- name: certificate_monitoring
+  type: uint32
+  display_name: Days To Expiry
+  description: Days to certiciate expirt (derived from Valid To field)

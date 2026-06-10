@@ -1,0 +1,10 @@
+name: httpWin32Status
+summary: HTTP Win32 Status
+type: string
+display_names:
+- HTTP Win32 Status
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP Win32 Status
+  description: HTTP Win32 Status

@@ -13,6 +13,8 @@ Skills for coding agents in the Tenzir ecosystem, built on the
   tags, constraints, lookups
 - `tenzir-ecs`: Elastic Common Schema reference — fields, fieldsets,
   categorization, mapping guidance
+- `tenzir-edm`: FortiSIEM Event Data Model reference — data models,
+  event attributes, types, display names
 - `tenzir-leef`: IBM QRadar LEEF reference — headers, delimiters, predefined
   event attributes, timestamps
 - `tenzir-ocsf`: OCSF schema reference — event classes, objects, attributes,
@@ -63,6 +65,7 @@ npx skills add tenzir/skills@tenzir-docs
 npx skills add tenzir/skills@tenzir-asim
 npx skills add tenzir/skills@tenzir-cim
 npx skills add tenzir/skills@tenzir-ecs
+npx skills add tenzir/skills@tenzir-edm
 npx skills add tenzir/skills@tenzir-leef
 npx skills add tenzir/skills@tenzir-ocsf
 npx skills add tenzir/skills@tenzir-udm

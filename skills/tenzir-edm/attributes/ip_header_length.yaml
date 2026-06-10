@@ -1,0 +1,10 @@
+name: ipHeaderLength
+summary: IP Header Length found in IP header
+type: uint16
+display_names:
+- IP Header Length
+models:
+- name: network_traffic
+  type: uint16
+  display_name: IP Header Length
+  description: IP Header Length found in IP header

@@ -1,0 +1,8 @@
+name: hostModel
+type: string
+display_names:
+- Host Model
+models:
+- name: vulnerability_detection
+  type: string
+  display_name: Host Model

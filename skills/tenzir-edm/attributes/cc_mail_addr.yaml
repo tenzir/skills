@@ -1,0 +1,10 @@
+name: ccMailAddr
+summary: Mail addresses in CC list
+type: string
+display_names:
+- Mail CC
+models:
+- name: mail_activity
+  type: string
+  display_name: Mail CC
+  description: Mail addresses in CC list

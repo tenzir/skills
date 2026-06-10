@@ -1,0 +1,10 @@
+name: riskScore
+summary: Risk Score
+type: string
+display_names:
+- Risk Score
+models:
+- name: mail_activity
+  type: string
+  display_name: Risk Score
+  description: Risk Score

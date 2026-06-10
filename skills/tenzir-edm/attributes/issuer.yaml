@@ -1,0 +1,10 @@
+name: issuer
+summary: Certificate Issuer
+type: string
+display_names:
+- Issuer
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Issuer
+  description: Certificate Issuer

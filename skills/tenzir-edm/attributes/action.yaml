@@ -1,0 +1,10 @@
+name: action
+summary: 'Mail Inspection Action: Quarantine, Delete, Clean'
+type: string
+display_names:
+- Action
+models:
+- name: mail_activity
+  type: string
+  display_name: Action
+  description: 'Mail Inspection Action: Quarantine, Delete, Clean'

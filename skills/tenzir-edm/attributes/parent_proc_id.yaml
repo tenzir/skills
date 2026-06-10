@@ -1,0 +1,14 @@
+name: parentProcId
+summary: Parent Process Id
+type: string
+display_names:
+- Parent Process Id
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Parent Process Id
+  description: Parent Process Id
+- name: process_creation
+  type: string
+  display_name: Parent Process Id
+  description: Parent Process Id

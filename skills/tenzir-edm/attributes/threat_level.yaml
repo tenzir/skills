@@ -1,0 +1,10 @@
+name: threatLevel
+summary: Threat Level
+type: string
+display_names:
+- Threat Level
+models:
+- name: mail_activity
+  type: string
+  display_name: Threat Level
+  description: Threat Level

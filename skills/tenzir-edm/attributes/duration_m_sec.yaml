@@ -1,0 +1,10 @@
+name: durationMSec
+summary: Duration of a connection (in msec)
+type: uint32
+display_names:
+- Duration
+models:
+- name: web_activity
+  type: uint32
+  display_name: Duration
+  description: Duration of a connection (in msec)

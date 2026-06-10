@@ -1,0 +1,30 @@
+name: destName
+summary: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+type: string
+display_names:
+- Destination Host Name
+models:
+- name: authentication
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: dns_activity
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: network_security_finding
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: network_traffic
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.
+- name: system_configuration_change
+  type: string
+  display_name: Destination Host Name
+  description: "Destination IP\u2019s host name"
+- name: web_activity
+  type: string
+  display_name: Destination Host Name
+  description: Destination device's hostname as identified in the log, can also be enriched using reverse lookup of the destination IP address.

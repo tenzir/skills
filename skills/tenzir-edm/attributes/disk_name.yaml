@@ -1,0 +1,16 @@
+name: diskName
+summary: Disk name
+type: string
+display_names:
+- Disk Name
+models:
+- name: system_performance
+  type: string
+  display_name: Disk Name
+  description: Disk name
+  section: Disk I/O Monitoring
+- name: system_performance
+  type: string
+  display_name: Disk Name
+  description: Disk name
+  section: Disk Space Monitoring

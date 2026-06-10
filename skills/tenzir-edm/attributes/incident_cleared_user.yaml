@@ -1,0 +1,10 @@
+name: incidentClearedUser
+summary: When an Incident is cleared, then the user clearing the Incident is recorded in this field.
+type: string
+display_names:
+- Incident Cleared User
+models:
+- name: incident
+  type: string
+  display_name: Incident Cleared User
+  description: When an Incident is cleared, then the user clearing the Incident is recorded in this field.

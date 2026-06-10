@@ -1,0 +1,27 @@
+name: dhcp_activity
+title: DHCP Activity Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/171395/dhcp-activity-data-model
+doc: docs/dhcp-activity-data-model.md
+summary: 'This includes DHCP IP Address Assignment / Release / Renew activity Examples from Windows DHCP using Agent: AO-WUA-DHCP-IP-ASSIGN, AO-WUA-DHCP-IP-LEASE-RENEW, AO-WUA-DHCP-DNS-LEASE-DENY. Examples from Linux DHCP: Linux_DHCPREQUEST, Linux_DHCPOFFER, Linux_DHCPRELEASE. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host requesting IP
+- name: hostMACAddr
+  type: string
+  display_name: Host MAC
+  description: MAC of host requesting IP
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: Assigned IP
+- name: user
+  type: string
+  display_name: User
+  description: Logged on user on the workstation
+- name: dhcpLeaseTime
+  type: uint32
+  display_name: DHCP Lease Time
+  description: DHCP Lease Time

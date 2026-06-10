@@ -1,0 +1,10 @@
+name: ipTtl
+summary: IP Time to Live (TTL) field found in IP header
+type: uint16
+display_names:
+- IP TTL
+models:
+- name: network_traffic
+  type: uint16
+  display_name: IP TTL
+  description: IP Time to Live (TTL) field found in IP header

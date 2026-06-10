@@ -1,0 +1,15 @@
+name: sysUpTime
+summary: System Uptime (seconds)
+type: uint32
+display_names:
+- System Uptime
+models:
+- name: system_performance
+  type: uint32
+  display_name: System Uptime
+  description: System Uptime (seconds)
+  section: Uptime Monitoring
+- name: system_process_performance
+  type: uint32
+  display_name: System Uptime
+  description: Process Uptime

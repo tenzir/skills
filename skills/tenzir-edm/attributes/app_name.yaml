@@ -1,0 +1,18 @@
+name: appName
+summary: Application name if application detection is enabled
+type: string
+display_names:
+- Application Name
+models:
+- name: network_security_finding
+  type: string
+  display_name: Application Name
+  description: Application name if application detection is enabled
+- name: software_install_uninstall
+  type: string
+  display_name: Application Name
+  description: Installed/Uninstalled Application name
+- name: system_process_performance
+  type: string
+  display_name: Application Name
+  description: Application to which the process belongs

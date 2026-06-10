@@ -1,0 +1,10 @@
+name: osObjAction
+summary: Added or Removed
+type: string
+display_names:
+- Object Action
+models:
+- name: software_install_uninstall
+  type: string
+  display_name: Object Action
+  description: Added or Removed

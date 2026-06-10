@@ -1,0 +1,10 @@
+name: status
+summary: 'Verdict: Malicious, Safe'
+type: string
+display_names:
+- Status
+models:
+- name: mail_activity
+  type: string
+  display_name: Status
+  description: 'Verdict: Malicious, Safe'

@@ -1,0 +1,10 @@
+name: postNATSrcIpPort
+summary: The Source TCP/UDP Port after Firewall Outbound Network Address Translation (NAT) - often present in Firewall Address translation log
+type: uint16
+display_names:
+- Post-NAT Source Port
+models:
+- name: network_traffic
+  type: uint16
+  display_name: Post-NAT Source Port
+  description: The Source TCP/UDP Port after Firewall Outbound Network Address Translation (NAT) - often present in Firewall Address translation log

@@ -1,0 +1,120 @@
+version: 7.5.0
+source: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/
+models:
+  authentication:
+    file: models/authentication.yaml
+    title: Authentication Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/754816/authentication-data-model
+    attributes: 11
+  base_event:
+    file: models/base_event.yaml
+    title: Base Event Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/649866/base-event-data-model
+    attributes: 21
+    sections:
+    - Base Attributes automatically set by Parser
+    - Base Attributes that need to be set within Parser
+  certificate_monitoring:
+    file: models/certificate_monitoring.yaml
+    title: Certificate Monitoring Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/368849/certificate-monitoring-data-model
+    attributes: 17
+  dhcp_activity:
+    file: models/dhcp_activity.yaml
+    title: DHCP Activity Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/171395/dhcp-activity-data-model
+    attributes: 5
+  dns_activity:
+    file: models/dns_activity.yaml
+    title: DNS Activity Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/773915/dns-activity-data-model
+    attributes: 10
+  endpoint_security_finding:
+    file: models/endpoint_security_finding.yaml
+    title: Endpoint Security Finding Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/827272/endpoint-security-finding-data-model
+    attributes: 21
+  file_activity:
+    file: models/file_activity.yaml
+    title: File Activity Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/218396/file-activity-data-model
+    attributes: 11
+  incident:
+    file: models/incident.yaml
+    title: Incident Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/165396/incident-data-model
+    attributes: 24
+  mail_activity:
+    file: models/mail_activity.yaml
+    title: Mail Activity Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/847020/mail-activity-data-model
+    attributes: 19
+  network_security_finding:
+    file: models/network_security_finding.yaml
+    title: Network Security Finding Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/965962/network-security-finding-data-model
+    attributes: 28
+  network_traffic:
+    file: models/network_traffic.yaml
+    title: Network Traffic Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/261556/network-traffic-data-model
+    attributes: 71
+  process_creation:
+    file: models/process_creation.yaml
+    title: Process Creation Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/892201/process-creation-data-model
+    attributes: 18
+  service_install_start_stop:
+    file: models/service_install_start_stop.yaml
+    title: Service Install / Start / Stop Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/586301/service-install-start-stop-data-model
+    attributes: 7
+  software_install_uninstall:
+    file: models/software_install_uninstall.yaml
+    title: Software Install / Uninstall Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/475067/software-install-uninstall-data-model
+    attributes: 6
+  system_configuration_change:
+    file: models/system_configuration_change.yaml
+    title: System Configuration Change Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/887813/system-configuration-change-data-model
+    attributes: 15
+  system_performance:
+    file: models/system_performance.yaml
+    title: System Performance Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/326870/system-performance-data-model
+    attributes: 54
+    sections:
+    - CPU Monitoring
+    - Disk I/O Monitoring
+    - Disk Space Monitoring
+    - Memory Monitoring
+    - Network Interface Monitoring
+    - Uptime Monitoring
+  system_process_performance:
+    file: models/system_process_performance.yaml
+    title: System Process Performance Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/745682/system-process-performance-data-model
+    attributes: 13
+  user_account_change:
+    file: models/user_account_change.yaml
+    title: User Account Change Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/165823/user-account-change-data-model
+    attributes: 7
+  vulnerability_detection:
+    file: models/vulnerability_detection.yaml
+    title: Vulnerability Detection Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/297283/vulnerability-detection-data-model
+    attributes: 14
+  web_activity:
+    file: models/web_activity.yaml
+    title: Web Activity Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/525169/web-activity-data-model
+    attributes: 27
+  windows_registry_activity:
+    file: models/windows_registry_activity.yaml
+    title: Windows Registry Activity Data Model
+    source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/977589/windows-registry-activity-data-model
+    attributes: 7
+indexes:
+  attributes: attributes.yaml

@@ -1,0 +1,10 @@
+name: destGeoLatitude
+summary: The latitude on which the Destination IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+type: string
+display_names:
+- Destination Latitude
+models:
+- name: network_traffic
+  type: string
+  display_name: Destination Latitude
+  description: The latitude on which the Destination IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.

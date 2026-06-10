@@ -1,0 +1,11 @@
+name: reptVendor
+summary: This field captures the vendor of the reported event
+type: string
+display_names:
+- Reporting Vendor
+models:
+- name: base_event
+  type: string
+  display_name: Reporting Vendor
+  description: This field captures the vendor of the reported event
+  section: Base Attributes automatically set by Parser

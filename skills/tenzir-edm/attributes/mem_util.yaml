@@ -1,0 +1,15 @@
+name: memUtil
+summary: Memory Util (0-100)
+type: double
+display_names:
+- Memory Util
+models:
+- name: system_performance
+  type: double
+  display_name: Memory Util
+  description: Memory Util (0-100)
+  section: Memory Monitoring
+- name: system_process_performance
+  type: double
+  display_name: Memory Util
+  description: Memory Utilization 0-100

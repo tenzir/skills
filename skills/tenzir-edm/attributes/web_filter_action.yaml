@@ -1,0 +1,10 @@
+name: webFilterAction
+summary: Action taken by the Web Filter module
+type: string
+display_names:
+- Web Filter Action
+models:
+- name: network_security_finding
+  type: string
+  display_name: Web Filter Action
+  description: Action taken by the Web Filter module

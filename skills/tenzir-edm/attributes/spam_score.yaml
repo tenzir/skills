@@ -1,0 +1,10 @@
+name: spamScore
+summary: Spam Score
+type: string
+display_names:
+- Spam Score
+models:
+- name: mail_activity
+  type: string
+  display_name: Spam Score
+  description: Spam Score

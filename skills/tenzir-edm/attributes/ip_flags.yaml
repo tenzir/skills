@@ -1,0 +1,10 @@
+name: ipFlags
+summary: IP Flags found in IP header
+type: uint16
+display_names:
+- IP Flags
+models:
+- name: network_traffic
+  type: uint16
+  display_name: IP Flags
+  description: IP Flags found in IP header

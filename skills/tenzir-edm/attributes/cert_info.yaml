@@ -1,0 +1,10 @@
+name: certInfo
+summary: Certificate Common Name
+type: string
+display_names:
+- Certificate
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Certificate
+  description: Certificate Common Name

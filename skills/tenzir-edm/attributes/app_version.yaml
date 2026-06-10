@@ -1,0 +1,10 @@
+name: appVersion
+summary: Installed/Uninstalled Application version
+type: string
+display_names:
+- Application Version
+models:
+- name: software_install_uninstall
+  type: string
+  display_name: Application Version
+  description: Installed/Uninstalled Application version

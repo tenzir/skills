@@ -1,0 +1,59 @@
+name: system_process_performance
+title: System Process Performance Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/745682/system-process-performance-data-model
+doc: docs/system-process-performance-data-model.md
+summary: "This data model describes system process level performance monitoring metrics collected by FortiSIEM\u2019s own device monitoring. The following events follow this data model \u2013 covers all device types: Windows, Linux and network devices. PH_DEV_MON_PROC_RESOURCE_UTIL."
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: procName
+  type: string
+  display_name: Process Name
+  description: Name of the process
+- name: appName
+  type: string
+  display_name: Application Name
+  description: Application to which the process belongs
+- name: swParam
+  type: string
+  display_name: Software Param
+  description: Arguments with which the process runs
+- name: sysUpTime
+  type: uint32
+  display_name: System Uptime
+  description: Process Uptime
+- name: cpuUtil
+  type: double
+  display_name: CPU Util
+  description: CPU Utilization 0-100
+- name: memUtil
+  type: double
+  display_name: Memory Util
+  description: Memory Utilization 0-100
+- name: realMemPeakKBytes
+  type: uint32
+  display_name: Real Peak Memory KB
+  description: Real Memory used
+- name: virtMemKBytes
+  type: uint32
+  display_name: Virtual Memory KB
+  description: Virtual Memory used
+- name: peakVirtMemKBytes
+  type: uint32
+  display_name: Peak Virtual Memory KB
+  description: Peak Virtual Memory used
+- name: diskReadKBytesPerSec
+  type: double
+  display_name: Disk Read Rate KBps
+  description: Disk Read Volume in KBps
+- name: diskWriteKBytesPerSec
+  type: double
+  display_name: Disk Write Rate KBps
+  description: Disk Write Volume in KBps

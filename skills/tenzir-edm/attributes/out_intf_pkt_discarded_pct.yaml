@@ -1,0 +1,11 @@
+name: outIntfPktDiscardedPct
+summary: Ratio of outIntfPktDiscarded on an interface to the total number of sent packets on that interface
+type: double
+display_names:
+- Sent Packet Discard Pct
+models:
+- name: system_performance
+  type: double
+  display_name: Sent Packet Discard Pct
+  description: Ratio of outIntfPktDiscarded on an interface to the total number of sent packets on that interface
+  section: Network Interface Monitoring

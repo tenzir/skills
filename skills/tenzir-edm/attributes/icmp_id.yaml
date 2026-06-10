@@ -1,0 +1,10 @@
+name: icmpId
+summary: ICMP Id in the ICMP header after the IPv4 header
+type: uint64
+display_names:
+- ICMP Id
+models:
+- name: network_traffic
+  type: uint64
+  display_name: ICMP Id
+  description: ICMP Id in the ICMP header after the IPv4 header

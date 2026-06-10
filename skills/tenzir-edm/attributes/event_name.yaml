@@ -1,0 +1,11 @@
+name: eventName
+summary: Short event description
+type: string
+display_names:
+- Event Name
+models:
+- name: base_event
+  type: string
+  display_name: Event Name
+  description: Short event description
+  section: Base Attributes that need to be set within Parser

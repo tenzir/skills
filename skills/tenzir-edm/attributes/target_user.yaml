@@ -1,0 +1,10 @@
+name: targetUser
+summary: Affected User whose account was created/deleted/modified
+type: string
+display_names:
+- Target User
+models:
+- name: user_account_change
+  type: string
+  display_name: Target User
+  description: Affected User whose account was created/deleted/modified

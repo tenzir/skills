@@ -1,0 +1,11 @@
+name: diskType
+summary: Disk Type
+type: string
+display_names:
+- Disk Type
+models:
+- name: system_performance
+  type: string
+  display_name: Disk Type
+  description: Disk Type
+  section: Disk I/O Monitoring

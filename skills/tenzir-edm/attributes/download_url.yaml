@@ -1,0 +1,17 @@
+name: downloadURL
+summary: URL found in mail
+type: string
+display_names:
+- Download URL
+models:
+- name: mail_activity
+  type: string
+  display_name: Download URL
+  description: URL found in mail
+- name: network_security_finding
+  type: string
+  display_name: Download URL
+  description: URL involved in the event
+- name: web_activity
+  type: string
+  display_name: Download URL

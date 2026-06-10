@@ -1,0 +1,11 @@
+name: freeDiskMB
+summary: Free Disk MB
+type: uint32
+display_names:
+- Free Disk MB
+models:
+- name: system_performance
+  type: uint32
+  display_name: Free Disk MB
+  description: Free Disk MB
+  section: Disk Space Monitoring

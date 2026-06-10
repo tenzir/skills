@@ -1,0 +1,10 @@
+name: srcDevPort
+summary: Name of the network port through which a packet enters a network device. This information is typically present in Firewall logs.
+type: string
+display_names:
+- Source Device Port
+models:
+- name: network_traffic
+  type: string
+  display_name: Source Device Port
+  description: Name of the network port through which a packet enters a network device. This information is typically present in Firewall logs.

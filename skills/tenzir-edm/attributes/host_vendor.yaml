@@ -1,0 +1,8 @@
+name: hostVendor
+type: string
+display_names:
+- Host Vendor
+models:
+- name: vulnerability_detection
+  type: string
+  display_name: Host Vendor

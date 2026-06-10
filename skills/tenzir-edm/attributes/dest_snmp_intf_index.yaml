@@ -1,0 +1,10 @@
+name: destSnmpIntfIndex
+summary: SNMP index of the network interface through which a packet exits a network device. This information is typically present in Firewall logs.
+type: uint16
+display_names:
+- Destination Interface SNMP Index
+models:
+- name: network_traffic
+  type: uint16
+  display_name: Destination Interface SNMP Index
+  description: SNMP index of the network interface through which a packet exits a network device. This information is typically present in Firewall logs.

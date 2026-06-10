@@ -1,0 +1,10 @@
+name: srcGeoOrg
+summary: The Organization to which the Source IP in event belongs. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+type: string
+display_names:
+- Source Organization
+models:
+- name: network_traffic
+  type: string
+  display_name: Source Organization
+  description: The Organization to which the Source IP in event belongs. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.

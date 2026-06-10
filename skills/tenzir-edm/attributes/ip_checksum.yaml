@@ -1,0 +1,10 @@
+name: ipChecksum
+summary: IP Checksum found in IP header
+type: uint16
+display_names:
+- IP Checksum
+models:
+- name: network_traffic
+  type: uint16
+  display_name: IP Checksum
+  description: IP Checksum found in IP header

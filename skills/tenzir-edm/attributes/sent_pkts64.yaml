@@ -1,0 +1,10 @@
+name: sentPkts64
+summary: Number of packets sent by a host. This is 64bit version.
+type: uint64
+display_names:
+- Sent Packets in 64 bit precision
+models:
+- name: network_traffic
+  type: uint64
+  display_name: Sent Packets in 64 bit precision
+  description: Number of packets sent by a host. This is 64bit version.

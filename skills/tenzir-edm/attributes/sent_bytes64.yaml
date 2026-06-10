@@ -1,0 +1,19 @@
+name: sentBytes64
+summary: Number of bytes sent by a host. This has 64bit resolution.
+type: uint64
+display_names:
+- Sent Bytes64
+- Sent Bytes in 64 bit precision
+models:
+- name: dns_activity
+  type: uint64
+  display_name: Sent Bytes64
+  description: Number of bytes sent by a host. This has 64bit resolution.
+- name: network_traffic
+  type: uint64
+  display_name: Sent Bytes in 64 bit precision
+  description: Number of bytes sent by a host. This has 64bit resolution.
+- name: web_activity
+  type: uint64
+  display_name: Sent Bytes64
+  description: Number of bytes sent by a host. This has 64bit resolution.

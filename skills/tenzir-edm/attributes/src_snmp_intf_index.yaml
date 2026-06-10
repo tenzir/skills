@@ -1,0 +1,10 @@
+name: srcSnmpIntfIndex
+summary: SNMP index of the network interface through which a packet enters a network device. This information is typically present in Firewall logs.
+type: uint16
+display_names:
+- Source Interface SNMP Index
+models:
+- name: network_traffic
+  type: uint16
+  display_name: Source Interface SNMP Index
+  description: SNMP index of the network interface through which a packet enters a network device. This information is typically present in Firewall logs.

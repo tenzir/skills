@@ -1,0 +1,14 @@
+name: oldSVNVersion
+summary: Previous SVN version of monitored File
+type: string
+display_names:
+- Old SVN version
+models:
+- name: file_activity
+  type: string
+  display_name: Old SVN version
+  description: Previous SVN version of monitored File
+- name: system_configuration_change
+  type: string
+  display_name: Old SVN version
+  description: Previous SVN version of Network Device Config File

@@ -1,0 +1,10 @@
+name: winLogonId
+summary: Windows Logon Id
+type: string
+display_names:
+- Win Logon Id
+models:
+- name: authentication
+  type: string
+  display_name: Win Logon Id
+  description: Windows Logon Id

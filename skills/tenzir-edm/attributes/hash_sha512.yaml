@@ -1,0 +1,10 @@
+name: hashSHA512
+summary: SHA512 Hash Value
+type: string
+display_names:
+- SHA512 Hash
+models:
+- name: process_creation
+  type: string
+  display_name: SHA512 Hash
+  description: SHA512 Hash Value

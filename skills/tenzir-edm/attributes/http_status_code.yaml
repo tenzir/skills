@@ -1,0 +1,10 @@
+name: httpStatusCode
+summary: HTTP Status
+type: string
+display_names:
+- HTTP Status
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP Status
+  description: HTTP Status

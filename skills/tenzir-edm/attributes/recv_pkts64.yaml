@@ -1,0 +1,10 @@
+name: recvPkts64
+summary: Number of packets received by a host. This is 64bit version.
+type: uint64
+display_names:
+- Received Packets in 64 bit precision
+models:
+- name: network_traffic
+  type: uint64
+  display_name: Received Packets in 64 bit precision
+  description: Number of packets received by a host. This is 64bit version.

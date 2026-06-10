@@ -1,0 +1,11 @@
+name: diskTfrKBytesPerSec
+summary: Disk Transfer Volume in KBps
+type: double
+display_names:
+- Disk Transfer Rate KBps
+models:
+- name: system_performance
+  type: double
+  display_name: Disk Transfer Rate KBps
+  description: Disk Transfer Volume in KBps
+  section: Disk I/O Monitoring

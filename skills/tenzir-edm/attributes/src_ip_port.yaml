@@ -1,0 +1,14 @@
+name: srcIpPort
+summary: This is the source TCP or UDP port as identified in the event
+type: uint16
+display_names:
+- Source TCP/UDP Port
+models:
+- name: network_security_finding
+  type: uint16
+  display_name: Source TCP/UDP Port
+  description: This is the source TCP or UDP port as identified in the event
+- name: network_traffic
+  type: uint16
+  display_name: Source TCP/UDP Port
+  description: This is the source TCP or UDP port as identified in the event

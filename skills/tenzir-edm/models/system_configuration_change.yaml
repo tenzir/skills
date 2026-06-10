@@ -1,0 +1,67 @@
+name: system_configuration_change
+title: System Configuration Change Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/887813/system-configuration-change-data-model
+doc: docs/system-configuration-change-data-model.md
+summary: 'This data model describes host or user level configuration changes such as Network Device Configuration Changes, Host system or user settings changes, Cloud system or user level settings changes. Example events: FortiGate-event-config-change, FortiWeb-20201 (A FortiWeb administrator configured a connection to a Syslog server), Win-Security-5448 (Windows Filtering Platform provider has been changed), Win-Security-4950 (A Windows Firewall setting has changed), MS_OFFICE365_EntraID_Set_MFA_registration_policy, Win-Firewall-AS-2004 (A rule has been added to the Windows Defender Firewall exception list). In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: srcIpAddr
+  type: IP
+  display_name: Source IP
+  description: Source IP of from where the change was made
+- name: srcName
+  type: string
+  display_name: Source Host Name
+  description: "Source IP\u2019s hostname"
+- name: destIpAddr
+  type: IP
+  display_name: Destination IP
+  description: IP of the device where the change was made
+- name: destName
+  type: string
+  display_name: Destination Host Name
+  description: "Destination IP\u2019s host name"
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP of the device where the change was made
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: "Host IP\u2019s host name"
+- name: user
+  type: string
+  display_name: User
+  description: User who made the change
+- name: addedItem
+  type: string
+  display_name: Added Item
+  description: Item that was added to config
+- name: deletedItem
+  type: string
+  display_name: Deleted Item
+  description: Item that was removed from config
+- name: configValue
+  type: string
+  display_name: Configuration Value
+  description: Latest configuration value
+- name: osObjName
+  type: string
+  display_name: OS Object Name
+  description: Configuration Object that was edited
+- name: objectPath
+  type: string
+  display_name: OS Object Path
+  description: Configuration Object Path
+- name: osObjValue
+  type: string
+  display_name: OS Object Value
+  description: Value of edited configutarion object
+- name: oldSVNVersion
+  type: string
+  display_name: Old SVN version
+  description: Previous SVN version of Network Device Config File
+- name: newSVNVersion
+  type: string
+  display_name: New SVN Version
+  description: New SVN version of Network Device Config File

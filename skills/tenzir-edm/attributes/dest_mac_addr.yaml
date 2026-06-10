@@ -1,0 +1,10 @@
+name: destMACAddr
+summary: Destination Layer 2 MAC Address in the log
+type: string
+display_names:
+- Destination MAC
+models:
+- name: network_traffic
+  type: string
+  display_name: Destination MAC
+  description: Destination Layer 2 MAC Address in the log

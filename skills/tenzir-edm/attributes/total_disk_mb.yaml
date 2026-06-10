@@ -1,0 +1,11 @@
+name: totalDiskMB
+summary: Total Disk MB
+type: uint32
+display_names:
+- Total Disk MB
+models:
+- name: system_performance
+  type: uint32
+  display_name: Total Disk MB
+  description: Total Disk MB
+  section: Disk Space Monitoring

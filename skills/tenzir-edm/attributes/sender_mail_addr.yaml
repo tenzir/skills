@@ -1,0 +1,10 @@
+name: senderMailAddr
+summary: Sender mail address
+type: string
+display_names:
+- Mail Sender
+models:
+- name: mail_activity
+  type: string
+  display_name: Mail Sender
+  description: Sender mail address

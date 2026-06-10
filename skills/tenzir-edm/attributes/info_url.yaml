@@ -1,0 +1,17 @@
+name: infoURL
+summary: Information about a threat
+type: string
+display_names:
+- Informational URL
+models:
+- name: mail_activity
+  type: string
+  display_name: Informational URL
+  description: Information about a threat
+- name: network_security_finding
+  type: string
+  display_name: Informational URL
+  description: Link to more information about the event
+- name: web_activity
+  type: string
+  display_name: Informational URL

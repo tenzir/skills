@@ -1,0 +1,10 @@
+name: hostKeyAlgo
+summary: Algorithm used to create the certificates
+type: string
+display_names:
+- Key Algorithm
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Key Algorithm
+  description: Algorithm used to create the certificates

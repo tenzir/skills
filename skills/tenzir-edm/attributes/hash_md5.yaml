@@ -1,0 +1,10 @@
+name: hashMD5
+summary: MD5 hash
+type: string
+display_names:
+- MD5 hash
+models:
+- name: process_creation
+  type: string
+  display_name: MD5 hash
+  description: MD5 hash

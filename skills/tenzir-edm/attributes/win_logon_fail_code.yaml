@@ -1,0 +1,10 @@
+name: winLogonFailCode
+summary: Windows Logon Failure Codes in numerical format
+type: uint64
+display_names:
+- Win Logon Fail Code
+models:
+- name: authentication
+  type: uint64
+  display_name: Win Logon Fail Code
+  description: Windows Logon Failure Codes in numerical format

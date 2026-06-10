@@ -1,0 +1,11 @@
+name: inIntfUtil
+summary: Ratio of Received Bits per second (derived from recvBytes) to the received network interface speed
+type: double
+display_names:
+- Recv Interface Util
+models:
+- name: system_performance
+  type: double
+  display_name: Recv Interface Util
+  description: Ratio of Received Bits per second (derived from recvBytes) to the received network interface speed
+  section: Network Interface Monitoring

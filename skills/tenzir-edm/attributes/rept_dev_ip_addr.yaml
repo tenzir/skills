@@ -1,0 +1,11 @@
+name: reptDevIpAddr
+summary: This is the device that originated the log or event packet, also known as the reporting device.
+type: IP
+display_names:
+- Reporting IP
+models:
+- name: base_event
+  type: IP
+  display_name: Reporting IP
+  description: This is the device that originated the log or event packet, also known as the reporting device.
+  section: Base Attributes automatically set by Parser

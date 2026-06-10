@@ -1,0 +1,14 @@
+name: srcGeoCity
+summary: The City in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+type: string
+display_names:
+- Source City
+models:
+- name: network_traffic
+  type: string
+  display_name: Source City
+  description: The City in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.
+- name: web_activity
+  type: string
+  display_name: Source City
+  description: The City in which the Source IP in event is located. This information is collected by doing a IP GeoDB lookup for external IPs, and CMDB lookup for internal IPs. The latter requires users to add CMDB Device location information in FortiSIEM GUI.

@@ -1,0 +1,10 @@
+name: dhcpLeaseTime
+summary: DHCP Lease Time
+type: uint32
+display_names:
+- DHCP Lease Time
+models:
+- name: dhcp_activity
+  type: uint32
+  display_name: DHCP Lease Time
+  description: DHCP Lease Time

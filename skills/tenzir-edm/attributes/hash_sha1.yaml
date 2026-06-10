@@ -1,0 +1,10 @@
+name: hashSHA1
+summary: SHA1 hash
+type: string
+display_names:
+- SHA1 hash
+models:
+- name: process_creation
+  type: string
+  display_name: SHA1 hash
+  description: SHA1 hash

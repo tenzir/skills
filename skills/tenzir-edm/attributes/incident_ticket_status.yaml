@@ -1,0 +1,10 @@
+name: incidentTicketStatus
+summary: 'This is the status of a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident. Possible values are 0: New, 1: Assigned, 2:Closed, 3: InProgress, 4: Reopened, 5: OverDue, 6: None'
+type: uint16
+display_names:
+- Incident Ticket Status
+models:
+- name: incident
+  type: uint16
+  display_name: Incident Ticket Status
+  description: 'This is the status of a Ticket/Case in FortiSIEM. A Ticket/Case can be opened from a FortiSIEM Incident. Possible values are 0: New, 1: Assigned, 2:Closed, 3: InProgress, 4: Reopened, 5: OverDue, 6: None'

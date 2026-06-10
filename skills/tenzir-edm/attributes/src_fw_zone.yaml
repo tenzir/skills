@@ -1,0 +1,10 @@
+name: srcFwZone
+summary: Source Firewall Zone found in Firewall logs
+type: string
+display_names:
+- Source Firewall Zone
+models:
+- name: network_traffic
+  type: string
+  display_name: Source Firewall Zone
+  description: Source Firewall Zone found in Firewall logs

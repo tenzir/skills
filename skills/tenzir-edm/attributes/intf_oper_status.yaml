@@ -1,0 +1,11 @@
+name: intfOperStatus
+summary: "Interface Operational Status \u2013 Up or Down"
+type: string
+display_names:
+- Interface Operational Status
+models:
+- name: system_performance
+  type: string
+  display_name: Interface Operational Status
+  description: "Interface Operational Status \u2013 Up or Down"
+  section: Network Interface Monitoring

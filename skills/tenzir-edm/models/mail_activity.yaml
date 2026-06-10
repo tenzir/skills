@@ -1,0 +1,83 @@
+name: mail_activity
+title: Mail Activity Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/847020/mail-activity-data-model
+doc: docs/mail-activity-data-model.md
+summary: 'This data model can be used to describe mail traffic handling. Example Event Types from Cisco Email Security Appliance (ESA): Cisco-IronPort-Mail-DeliveryComplete, Cisco-IronPort-Mail-Aborted, Cisco-IronPort-Mail-AVPositive-Dropped, Cisco-IronPort-Mail-FilterDrop, Cisco-IronPort-Mail-Drop, Cisco-IronPort-Mail-HardBounce, Cisco-IronPort-Mail-SoftBounce, Cisco-IronPort-Mail-SpamQuarantine-Complete. Example Event Types from Office365 Exchange Online MS_OFFICE365_ThreatIntel_TIMailData_DeliveredAsSpam, MS_OFFICE365_ThreatIntel_TIUrlClickData_BlockPage. Example Event Types from Mimecast: Mimecast_delivery_external_success, Mimecast_delivery_inbound_success, Mimecast_delivery_outbound_failed, Mimecast_delivery_inbound_failed, Mimecast_attachmentLogs_malicious, Mimecast_spam_email_found, Mimecast_attachment_protect, Mimecast_clickLogs_allow, Mimecast_clickLogs_block. Example Event Types from Proofpoint: Proofpoint-messagesDelivered-malicious, Proofpoint-messagesDelivered-clean, Proofpoint-messagesBlocked-clean, Proofpoint-messagesBlocked-malicious, Proofpoint-clicksBlocked, Proofpoint-clicksPermitted. Example Event Types from FortiMail: FortiMail-Antispam-malicious-attachment-file, FortiMail-Antispam-malicious-attachment-url, FortiMail-Antivirus-virus-infected. Example Event Types from FortiMail Workspace: FortiMail-Workspace-Scan-email-mal-delivered, FortiMail-Workspace-Scan-email-mal-quarantine, FortiMail-Workspace-Scan-email-mal-quarantine_by_microsoft. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: senderMailAddr
+  type: string
+  display_name: Mail Sender
+  description: Sender mail address
+- name: receiverMailAddr
+  type: string
+  display_name: Mail Receiver
+  description: Receive mail address
+- name: ccMailAddr
+  type: string
+  display_name: Mail CC
+  description: Mail addresses in CC list
+- name: mailSubject
+  type: string
+  display_name: Mail Subject
+  description: Mail Subject
+- name: srcDomain
+  type: string
+  display_name: Source Domain
+  description: Sender mail domain
+- name: destDomain
+  type: string
+  display_name: Destination Domain
+  description: Receiver mail domain
+- name: fileName
+  type: string
+  display_name: File Name
+  description: File attachment
+- name: downloadURL
+  type: string
+  display_name: Download URL
+  description: URL found in mail
+- name: virusId
+  type: string
+  display_name: Virus/Malware Id
+  description: Malware id (found in mail)
+- name: virusName
+  type: string
+  display_name: Malware Name
+  description: Malware name (found in mail)
+- name: webCategory
+  type: string
+  display_name: Website Category
+  description: External mail domain category
+- name: action
+  type: string
+  display_name: Action
+  description: 'Mail Inspection Action: Quarantine, Delete, Clean'
+- name: status
+  type: string
+  display_name: Status
+  description: 'Verdict: Malicious, Safe'
+- name: threatLevel
+  type: string
+  display_name: Threat Level
+  description: Threat Level
+- name: threatType
+  type: string
+  display_name: Threat Type
+  description: Threat Type
+- name: threatCategory
+  type: string
+  display_name: Threat Category
+  description: Threat Category
+- name: riskScore
+  type: string
+  display_name: Risk Score
+  description: Risk Score
+- name: spamScore
+  type: string
+  display_name: Spam Score
+  description: Spam Score
+- name: infoURL
+  type: string
+  display_name: Informational URL
+  description: Information about a threat

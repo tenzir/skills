@@ -1,0 +1,11 @@
+name: inIntfPktDiscarded
+summary: Total number of received packets that were discarded by the networking stack.
+type: uint32
+display_names:
+- Recv Packet Discards
+models:
+- name: system_performance
+  type: uint32
+  display_name: Recv Packet Discards
+  description: Total number of received packets that were discarded by the networking stack.
+  section: Network Interface Monitoring

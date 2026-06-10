@@ -1,0 +1,10 @@
+name: ipFragOffset
+summary: IP Fragment Offset found in IP header
+type: uint16
+display_names:
+- IP Fragment Offset
+models:
+- name: network_traffic
+  type: uint16
+  display_name: IP Fragment Offset
+  description: IP Fragment Offset found in IP header

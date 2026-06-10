@@ -1,0 +1,22 @@
+name: procName
+summary: Process binary with full path
+type: string
+display_names:
+- Process Name
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Process Name
+  description: Process binary with full path
+- name: file_activity
+  type: string
+  display_name: Process Name
+  description: Process doing file activity
+- name: process_creation
+  type: string
+  display_name: Process Name
+  description: Process name (Full path)
+- name: system_process_performance
+  type: string
+  display_name: Process Name
+  description: Name of the process

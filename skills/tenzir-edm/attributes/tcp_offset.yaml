@@ -1,0 +1,10 @@
+name: tcpOffset
+summary: TCP Data Offset field in TCP header
+type: uint32
+display_names:
+- TCP Offset
+models:
+- name: network_traffic
+  type: uint32
+  display_name: TCP Offset
+  description: TCP Data Offset field in TCP header

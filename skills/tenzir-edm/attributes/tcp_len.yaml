@@ -1,0 +1,10 @@
+name: tcpLen
+summary: TCP length field in TCP header
+type: uint32
+display_names:
+- TCP Length
+models:
+- name: network_traffic
+  type: uint32
+  display_name: TCP Length
+  description: TCP length field in TCP header

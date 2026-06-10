@@ -1,0 +1,10 @@
+name: threatCategory
+summary: Threat Category
+type: string
+display_names:
+- Threat Category
+models:
+- name: mail_activity
+  type: string
+  display_name: Threat Category
+  description: Threat Category

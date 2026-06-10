@@ -1,0 +1,10 @@
+name: swParam
+summary: Arguments with which the process runs
+type: string
+display_names:
+- Software Param
+models:
+- name: system_process_performance
+  type: string
+  display_name: Software Param
+  description: Arguments with which the process runs

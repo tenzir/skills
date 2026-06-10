@@ -1,0 +1,10 @@
+name: targetDomain
+summary: Domain of targetUser
+type: string
+display_names:
+- Target User Domain
+models:
+- name: user_account_change
+  type: string
+  display_name: Target User Domain
+  description: Domain of targetUser

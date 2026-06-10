@@ -1,0 +1,11 @@
+name: inIntfPktErrPct
+summary: Ratio of inIntfPktErr and the total number of received packets in an onterval
+type: double
+display_names:
+- Recv Packet Error Pct
+models:
+- name: system_performance
+  type: double
+  display_name: Recv Packet Error Pct
+  description: Ratio of inIntfPktErr and the total number of received packets in an onterval
+  section: Network Interface Monitoring

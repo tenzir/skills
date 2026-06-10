@@ -1,0 +1,11 @@
+name: intfOutSpeed64
+summary: High Speed Network Interface Speed (bits/sec).
+type: uint64
+display_names:
+- Sent Interface Speed bps
+models:
+- name: system_performance
+  type: uint64
+  display_name: Sent Interface Speed bps
+  description: High Speed Network Interface Speed (bits/sec).
+  section: Network Interface Monitoring

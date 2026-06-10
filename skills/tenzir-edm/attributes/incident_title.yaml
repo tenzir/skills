@@ -1,0 +1,10 @@
+name: incidentTitle
+summary: This is defined in a Rule and copied over from the Rule that triggered the Incident.
+type: string
+display_names:
+- Incident Title
+models:
+- name: incident
+  type: string
+  display_name: Incident Title
+  description: This is defined in a Rule and copied over from the Rule that triggered the Incident.

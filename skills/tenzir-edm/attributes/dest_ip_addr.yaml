@@ -1,0 +1,30 @@
+name: destIpAddr
+summary: Destination IP of a device as identified in the event.
+type: IP
+display_names:
+- Destination IP
+models:
+- name: authentication
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: dns_activity
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: network_security_finding
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: network_traffic
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.
+- name: system_configuration_change
+  type: IP
+  display_name: Destination IP
+  description: IP of the device where the change was made
+- name: web_activity
+  type: IP
+  display_name: Destination IP
+  description: Destination IP of a device as identified in the event.

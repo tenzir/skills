@@ -1,0 +1,11 @@
+name: outIntfPktErrPct
+summary: Ratio of outIntfPktErr and the total number of received packets in an onterval
+type: double
+display_names:
+- Sent Packet Error Pct
+models:
+- name: system_performance
+  type: double
+  display_name: Sent Packet Error Pct
+  description: Ratio of outIntfPktErr and the total number of received packets in an onterval
+  section: Network Interface Monitoring

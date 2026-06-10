@@ -1,0 +1,10 @@
+name: incidentDetail
+summary: This field collects the remaining Incident fields that are neither Incident Source nor Incident Target
+type: string
+display_names:
+- Incident Detail
+models:
+- name: incident
+  type: string
+  display_name: Incident Detail
+  description: This field collects the remaining Incident fields that are neither Incident Source nor Incident Target

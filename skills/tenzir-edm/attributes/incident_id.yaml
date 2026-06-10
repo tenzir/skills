@@ -1,0 +1,10 @@
+name: incidentId
+summary: Unique ID of a FortiSIEM Incident
+type: uint64
+display_names:
+- Incident ID
+models:
+- name: incident
+  type: uint64
+  display_name: Incident ID
+  description: Unique ID of a FortiSIEM Incident

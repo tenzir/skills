@@ -1,0 +1,10 @@
+name: realMemPeakKBytes
+summary: Real Memory used
+type: uint32
+display_names:
+- Real Peak Memory KB
+models:
+- name: system_process_performance
+  type: uint32
+  display_name: Real Peak Memory KB
+  description: Real Memory used

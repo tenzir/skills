@@ -1,0 +1,10 @@
+name: httpCookie
+summary: Http Cookie
+type: string
+display_names:
+- Http Cookie
+models:
+- name: web_activity
+  type: string
+  display_name: Http Cookie
+  description: Http Cookie

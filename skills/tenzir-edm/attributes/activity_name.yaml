@@ -1,0 +1,10 @@
+name: activityName
+summary: File Activity Name (read, write etc)
+type: string
+display_names:
+- Activity Name
+models:
+- name: file_activity
+  type: string
+  display_name: Activity Name
+  description: File Activity Name (read, write etc)

@@ -1,0 +1,14 @@
+name: parentProcName
+summary: Parent Process Name (full path)
+type: string
+display_names:
+- Parent Process Name
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Parent Process Name
+  description: Parent Process Name (full path)
+- name: process_creation
+  type: string
+  display_name: Parent Process Name
+  description: Parent Process Name (full path)

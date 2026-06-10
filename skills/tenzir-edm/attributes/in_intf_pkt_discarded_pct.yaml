@@ -1,0 +1,11 @@
+name: inIntfPktDiscardedPct
+summary: Ratio of inIntfPktDiscarded on an interface to the total number of received packets on that interface
+type: double
+display_names:
+- Recv Packet Discard Pct
+models:
+- name: system_performance
+  type: double
+  display_name: Recv Packet Discard Pct
+  description: Ratio of inIntfPktDiscarded on an interface to the total number of received packets on that interface
+  section: Network Interface Monitoring

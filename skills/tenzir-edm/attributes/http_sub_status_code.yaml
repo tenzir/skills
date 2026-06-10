@@ -1,0 +1,10 @@
+name: httpSubStatusCode
+summary: HTTP Sub-status
+type: string
+display_names:
+- HTTP Sub-status
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP Sub-status
+  description: HTTP Sub-status

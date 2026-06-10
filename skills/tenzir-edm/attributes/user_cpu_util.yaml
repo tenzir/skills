@@ -1,0 +1,11 @@
+name: userCpuUtil
+summary: Linux User CPU Util (0-100)
+type: double
+display_names:
+- User CPU Util
+models:
+- name: system_performance
+  type: double
+  display_name: User CPU Util
+  description: Linux User CPU Util (0-100)
+  section: CPU Monitoring

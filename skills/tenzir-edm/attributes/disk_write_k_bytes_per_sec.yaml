@@ -1,0 +1,15 @@
+name: diskWriteKBytesPerSec
+summary: Disk Write Volume in KBps
+type: double
+display_names:
+- Disk Write Rate KBps
+models:
+- name: system_performance
+  type: double
+  display_name: Disk Write Rate KBps
+  description: Disk Write Volume in KBps
+  section: Disk I/O Monitoring
+- name: system_process_performance
+  type: double
+  display_name: Disk Write Rate KBps
+  description: Disk Write Volume in KBps

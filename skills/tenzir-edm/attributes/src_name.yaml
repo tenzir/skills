@@ -1,0 +1,18 @@
+name: srcName
+summary: Source device's hostname as identified in the log, can also be enriched using reverse lookup of the source IP address.
+type: string
+display_names:
+- Source Host Name
+models:
+- name: network_security_finding
+  type: string
+  display_name: Source Host Name
+  description: Source device's hostname as identified in the log, can also be enriched using reverse lookup of the source IP address.
+- name: network_traffic
+  type: string
+  display_name: Source Host Name
+  description: Source device's hostname as identified in the log, can also be enriched using reverse lookup of the source IP address.
+- name: system_configuration_change
+  type: string
+  display_name: Source Host Name
+  description: "Source IP\u2019s hostname"

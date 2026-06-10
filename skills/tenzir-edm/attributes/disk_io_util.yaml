@@ -1,0 +1,11 @@
+name: diskIOUtil
+summary: Disk Capacity Util (0-100)
+type: double
+display_names:
+- Disk Capacity Util
+models:
+- name: system_performance
+  type: double
+  display_name: Disk Capacity Util
+  description: Disk Capacity Util (0-100)
+  section: Disk I/O Monitoring

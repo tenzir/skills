@@ -1,0 +1,10 @@
+name: destFwZone
+summary: DestinationFirewall Zone found in Firewall logs
+type: string
+display_names:
+- Destination Firewall Zone
+models:
+- name: network_traffic
+  type: string
+  display_name: Destination Firewall Zone
+  description: DestinationFirewall Zone found in Firewall logs

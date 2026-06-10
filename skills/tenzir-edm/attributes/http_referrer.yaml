@@ -1,0 +1,10 @@
+name: httpReferrer
+summary: HTTP Referrer
+type: string
+display_names:
+- HTTP Referrer
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP Referrer
+  description: HTTP Referrer

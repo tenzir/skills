@@ -1,0 +1,10 @@
+name: osObjName
+summary: Configuration Object that was edited
+type: string
+display_names:
+- OS Object Name
+models:
+- name: system_configuration_change
+  type: string
+  display_name: OS Object Name
+  description: Configuration Object that was edited

@@ -1,0 +1,89 @@
+name: endpoint_security_finding
+title: Endpoint Security Finding Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/827272/endpoint-security-finding-data-model
+doc: docs/endpoint-security-finding-data-model.md
+summary: 'This data model describes Host IPS / Endpoint Detection Events such as Malware Found, Suspicious Process Activity. Example events: Crowdstrike-Falcon-EppDetectionSummaryEvent-Known-Malware, FortiClient-antiransomware-suspicious-process, FortiEDR-Security-PUP-Block, FortiEDR-Security-Suspicious-Blocked, MSDefenderXDR-Alert-Execution-new, SentinelOne-EPP-Threat_Mark_As_Threat, S1-Singularity-Activity-4104 (STAR Manual Response Marked Event As Malicious), FireAMP_Cloud_Executed_malware. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: procName
+  type: string
+  display_name: Process Name
+  description: Process binary with full path
+- name: shortProcName
+  type: string
+  display_name: Short Process Name
+  description: Process binary only
+- name: procId
+  type: string
+  display_name: Process Id
+- name: command
+  type: string
+  display_name: Command
+  description: Command to execute process including full path and arguments
+- name: parentProcName
+  type: string
+  display_name: Parent Process Name
+  description: Parent Process Name (full path)
+- name: shortParentProcName
+  type: string
+  display_name: Short Parent Process Name
+  description: Short parent process name (without full path)
+- name: parentProcId
+  type: string
+  display_name: Parent Process Id
+  description: Parent Process Id
+- name: user
+  type: string
+  display_name: User
+  description: User executing command
+- name: fwAction
+  type: string
+  description: Action taken by the Endpoint
+- name: osType
+  type: string
+  display_name: Operating System Type
+  description: Operating system type
+- name: hashCode
+  type: string
+  display_name: Hash Code
+  description: Hash of process binary
+- name: hashAlgo
+  type: string
+  display_name: Hash Algorithm
+  description: Algorithm for hashCode
+- name: virusName
+  type: string
+  display_name: Malware Name
+  description: Malware Name
+- name: virusType
+  type: string
+  display_name: Malware Type
+  description: Malware Type
+- name: virusFamily
+  type: string
+  display_name: Malware Family
+  description: Malware Family
+- name: attackTactic
+  type: string
+  display_name: Attack Tactic
+  description: MITRE ATTACK Tactic
+- name: attackTechniqueId
+  type: string
+  display_name: Attack Technique Id
+  description: MITRE ATTACK Technique Id
+- name: attackTechnique
+  type: string
+  display_name: Attack Technique
+  description: MITRE ATTACK Technique Description
+- name: verdict
+  type: string
+  display_name: Verdict
+  description: Verdict about the Malware

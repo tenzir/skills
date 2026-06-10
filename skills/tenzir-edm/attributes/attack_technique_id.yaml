@@ -1,0 +1,14 @@
+name: attackTechniqueId
+summary: MITRE ATTACK Technique Id
+type: string
+display_names:
+- Attack Technique Id
+models:
+- name: endpoint_security_finding
+  type: string
+  display_name: Attack Technique Id
+  description: MITRE ATTACK Technique Id
+- name: network_security_finding
+  type: string
+  display_name: Attack Technique Id
+  description: MITRE ATTACK Technique Id

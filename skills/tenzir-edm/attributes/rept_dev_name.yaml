@@ -1,0 +1,11 @@
+name: reptDevName
+summary: This is the hostname of the device that originated the log or event packet.
+type: string
+display_names:
+- Reporting Device
+models:
+- name: base_event
+  type: string
+  display_name: Reporting Device
+  description: This is the hostname of the device that originated the log or event packet.
+  section: Base Attributes automatically set by Parser

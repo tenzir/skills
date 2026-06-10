@@ -1,0 +1,8 @@
+name: dnsResponseCode
+type: uint16
+display_names:
+- DNS Response Code
+models:
+- name: dns_activity
+  type: uint16
+  display_name: DNS Response Code

@@ -1,0 +1,10 @@
+name: peakVirtMemKBytes
+summary: Peak Virtual Memory used
+type: uint32
+display_names:
+- Peak Virtual Memory KB
+models:
+- name: system_process_performance
+  type: uint32
+  display_name: Peak Virtual Memory KB
+  description: Peak Virtual Memory used

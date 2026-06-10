@@ -1,0 +1,10 @@
+name: authenMethod
+summary: Windows Authentication method
+type: string
+display_names:
+- Authentication Method
+models:
+- name: authentication
+  type: string
+  display_name: Authentication Method
+  description: Windows Authentication method

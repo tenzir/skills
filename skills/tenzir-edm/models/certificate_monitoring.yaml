@@ -1,0 +1,75 @@
+name: certificate_monitoring
+title: Certificate Monitoring Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/368849/certificate-monitoring-data-model
+doc: docs/certificate-monitoring-data-model.md
+summary: 'This data model describes certificate added/removed/expired activity. Example events via Windows Agent: AO-WUA-Certificate-Added: A Windows certificate was added, AO-WUA-Certificate-Removed: A Windows certificate was removed, AO-WUA-Certificate-Expired: A Windows certificate was expired, AO-WUA-Certificate-Expiring: A Windows certificate is expiring. In addition to the base event attributes, the following attributes are relevant and may be populated in this data model.'
+attributes:
+- name: hostIpAddr
+  type: IP
+  display_name: Host IP
+  description: IP address of hostName
+- name: hostName
+  type: string
+  display_name: Host Name
+  description: Host where event occurs
+- name: certInfo
+  type: string
+  display_name: Certificate
+  description: Certificate Common Name
+- name: fingerprintId
+  type: string
+  display_name: Fingerprint
+  description: Certificate fingerprint
+- name: folder
+  type: string
+  display_name: Folder
+  description: Folder where the specific Windows store that the cert is in
+- name: issuer
+  type: string
+  display_name: Issuer
+  description: Certificate Issuer
+- name: issuedTo
+  type: string
+  display_name: Issued To
+  description: Certificate Issued to
+- name: isSelfSigned
+  type: uchar
+  display_name: Is Self Signed
+  description: 0 means not self-signed, 1 means self-signed
+- name: isCertAuthority
+  type: uchar
+  display_name: Is Certificate Authority
+  description: 0 means not certificate authority, 1 means certificate authority
+- name: validFrom
+  type: DATE
+  display_name: Valid From
+  description: Time since when certificate is valid
+- name: validTo
+  type: DATE
+  display_name: Valid To
+  description: Time upto which certificate is valid
+- name: daysToExpiry
+  type: uint32
+  display_name: Days To Expiry
+  description: Days to certiciate expirt (derived from Valid To field)
+- name: serialNumber
+  type: string
+  display_name: Serial Number
+  description: Ceritificate Serial Number
+- name: hostKeyAlgo
+  type: string
+  display_name: Key Algorithm
+  description: Algorithm used to create the certificates
+- name: hostKeyStrength
+  type: Uint32
+  display_name: Key Strength
+  description: size of the hostKey in bits
+- name: hashCode
+  type: string
+  display_name: Hash Code
+  description: Certificate fingerprint
+- name: hashAlgo
+  type: string
+  display_name: Hash Algorithm
+  description: Algorithm used to create the certificates fingerprint

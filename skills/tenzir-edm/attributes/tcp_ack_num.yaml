@@ -1,0 +1,10 @@
+name: tcpAckNum
+summary: TCP Acknowledgement number field in TCP header.
+type: uint64
+display_names:
+- TCP ACK Number
+models:
+- name: network_traffic
+  type: uint64
+  display_name: TCP ACK Number
+  description: TCP Acknowledgement number field in TCP header.

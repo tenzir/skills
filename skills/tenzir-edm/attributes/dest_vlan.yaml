@@ -1,0 +1,3 @@
+name: destVLAN
+models:
+- name: network_traffic

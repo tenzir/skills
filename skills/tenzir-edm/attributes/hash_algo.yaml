@@ -1,0 +1,22 @@
+name: hashAlgo
+summary: Algorithm for hashCode
+type: string
+display_names:
+- Hash Algorithm
+models:
+- name: certificate_monitoring
+  type: string
+  display_name: Hash Algorithm
+  description: Algorithm used to create the certificates fingerprint
+- name: endpoint_security_finding
+  type: string
+  display_name: Hash Algorithm
+  description: Algorithm for hashCode
+- name: network_security_finding
+  type: string
+  display_name: Hash Algorithm
+  description: Algorithm for hashCode
+- name: process_creation
+  type: string
+  display_name: Hash Algorithm
+  description: Hash Algorithm

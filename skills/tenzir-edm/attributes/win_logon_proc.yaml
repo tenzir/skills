@@ -1,0 +1,10 @@
+name: winLogonProc
+summary: The Windows process handling Windows logon
+type: string
+display_names:
+- Windows Logon Process
+models:
+- name: authentication
+  type: string
+  display_name: Windows Logon Process
+  description: The Windows process handling Windows logon

@@ -1,0 +1,11 @@
+name: isHostIntfWAN
+summary: Yes if the interface is WAN interface; no if it is not.
+type: string
+display_names:
+- Interface WAN Flag
+models:
+- name: system_performance
+  type: string
+  display_name: Interface WAN Flag
+  description: Yes if the interface is WAN interface; no if it is not.
+  section: Network Interface Monitoring

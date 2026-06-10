@@ -1,0 +1,11 @@
+name: collectorId
+summary: ID of FortiSIEM Collector receiving the event. This is assigned by FortiSIEM when a collector is defined.
+type: uint32
+display_names:
+- Collector ID
+models:
+- name: base_event
+  type: uint32
+  display_name: Collector ID
+  description: ID of FortiSIEM Collector receiving the event. This is assigned by FortiSIEM when a collector is defined.
+  section: Base Attributes automatically set by Parser

@@ -1,0 +1,11 @@
+name: freeMemKB
+summary: Free Memory in KB
+type: uint32
+display_names:
+- Free Memory
+models:
+- name: system_performance
+  type: uint32
+  display_name: Free Memory
+  description: Free Memory in KB
+  section: Memory Monitoring

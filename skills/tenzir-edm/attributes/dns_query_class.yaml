@@ -1,0 +1,10 @@
+name: dnsQueryClass
+summary: DNS Query Class
+type: string
+display_names:
+- DNS Query Class
+models:
+- name: dns_activity
+  type: string
+  display_name: DNS Query Class
+  description: DNS Query Class

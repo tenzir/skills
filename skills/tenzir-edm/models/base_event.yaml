@@ -1,0 +1,112 @@
+name: base_event
+title: Base Event Data Model
+version: 7.5.0
+source_url: https://docs.fortinet.com/document/fortisiem/7.5.0/fortisiem-event-data-model/649866/base-event-data-model
+doc: docs/base-event-data-model.md
+summary: These attributes are present in every FortiSIEM event.
+attributes:
+- name: eventId
+  type: uint64
+  display_name: Event Id
+  description: Unique Id for an event
+  section: Base Attributes automatically set by Parser
+- name: phRecvTime
+  type: DATE
+  display_name: Event Receive Time
+  description: This is the timestamp (epoch seconds ) recorded by the parser module when an event is ingested. FortiSIEM uses this time in all its analytics. This time is obtained from NTP.
+  section: Base Attributes automatically set by Parser
+- name: reptDevName
+  type: string
+  display_name: Reporting Device
+  description: This is the hostname of the device that originated the log or event packet.
+  section: Base Attributes automatically set by Parser
+- name: reptDevIpAddr
+  type: IP
+  display_name: Reporting IP
+  description: This is the device that originated the log or event packet, also known as the reporting device.
+  section: Base Attributes automatically set by Parser
+- name: reptVendor
+  type: string
+  display_name: Reporting Vendor
+  description: This field captures the vendor of the reported event
+  section: Base Attributes automatically set by Parser
+- name: reptModel
+  type: string
+  display_name: Reporting Model
+  description: This field captures the model of the reporting device vendor
+  section: Base Attributes automatically set by Parser
+- name: phCustId
+  type: uint32
+  display_name: Organization ID
+  description: This is the FortiSIEM organization ID unique to each tenant. In Enterprise license, phCustId = 1.
+  section: Base Attributes automatically set by Parser
+- name: customer
+  type: string
+  display_name: Organization Name
+  description: This is the FortiSIEM Organization Name, which is unique to each tenant. It identifies the tenant this event belongs to. In Enterprise case, customer = Super.
+  section: Base Attributes automatically set by Parser
+- name: collectorId
+  type: uint32
+  display_name: Collector ID
+  description: ID of FortiSIEM Collector receiving the event. This is assigned by FortiSIEM when a collector is defined.
+  section: Base Attributes automatically set by Parser
+- name: phCollectorName
+  type: string
+  display_name: Collector Name
+  description: Name of the FortiSIEM Collector receiving the event. This is defined in GUI.
+  section: Base Attributes automatically set by Parser
+- name: parserName
+  type: string
+  display_name: Event Parser Name
+  description: The name of parser that parsed the event
+  section: Base Attributes automatically set by Parser
+- name: eventParsedOk
+  type: uchar
+  display_name: Event Parse Status
+  description: 'Whether event was fully parsed: 0 means not fully parsed, 1 means fully parsed'
+  section: Base Attributes automatically set by Parser
+- name: phEventCategory
+  type: uint16
+  display_name: System Event Category
+  description: 'This is the category of log event. (Values: 0 - External, 1 - Incidents, 2 - Audit, 3 - System, 4 - Traffic Flow, 5- Internal Health Incident, 6 - Performance).'
+  section: Base Attributes automatically set by Parser
+- name: eventSeverityCat
+  type: string
+  display_name: Event Severity Category
+  description: 'This is set by Parser from Event Severity: 1-4: Low, 5-8: Medium, 9-10: High'
+  section: Base Attributes automatically set by Parser
+- name: rawEventMsg
+  type: string
+  display_name: Raw Event Log
+  description: This is the raw, unmodified UTF-8 message as received by FortiSIEM from a log source.
+  section: Base Attributes automatically set by Parser
+- name: rawEventSize
+  type: uint32
+  display_name: Raw Event Log Size
+  description: Size of the raw message
+  section: Base Attributes automatically set by Parser
+- name: eventType
+  type: string
+  display_name: Event Type
+  description: This is the unique log name, identifying the product and type of log. This is a key attribute for most queries.
+  section: Base Attributes that need to be set within Parser
+- name: eventName
+  type: string
+  display_name: Event Name
+  description: Short event description
+  section: Base Attributes that need to be set within Parser
+- name: eventSeverity
+  type: uint16
+  display_name: Event Severity
+  description: This is the severity of the event. It takes values between 1-10; 1 being lowest severity and 10 being the highest.
+  section: Base Attributes that need to be set within Parser
+- name: eventAction
+  type: uint16
+  display_name: Event Action
+  description: This is an unsigned integer boolean. 0 means permitted, 1 means blocked. It is used by various parsers to indicate success / failure or permit/deny for network traffic.
+  section: Base Attributes that need to be set within Parser
+- name: deviceTime
+  type: DATE
+  display_name: Device Time
+  description: This is the timestamp as seen in the raw log. This is converted and stored as epoch seconds. Note that the deviceTime, or event occur time, is different than the event receive time by the SIEM.
+  section: Base Attributes that need to be set within Parser

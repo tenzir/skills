@@ -1,0 +1,10 @@
+name: httpUserAgent
+summary: HTTP User Agent
+type: string
+display_names:
+- HTTP User Agent
+models:
+- name: web_activity
+  type: string
+  display_name: HTTP User Agent
+  description: HTTP User Agent

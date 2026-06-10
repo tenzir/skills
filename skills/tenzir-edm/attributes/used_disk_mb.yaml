@@ -1,0 +1,11 @@
+name: usedDiskMB
+summary: Used Disk MB
+type: uint32
+display_names:
+- Used Disk MB
+models:
+- name: system_performance
+  type: uint32
+  display_name: Used Disk MB
+  description: Used Disk MB
+  section: Disk Space Monitoring
