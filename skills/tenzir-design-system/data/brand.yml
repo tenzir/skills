@@ -1,0 +1,182 @@
+# Tenzir brand definition following Quarto's brand.yml schema
+# (https://posit-dev.github.io/brand-yml/).
+#
+# This file is the canonical source for Tenzir brand colors, typography, and
+# logos. Tools that understand brand.yml (Quarto, Shiny, Typst via Quarto) can
+# consume it directly; everything beyond the brand.yml schema lives in
+# tokens.yml next to this file.
+
+meta:
+  name: Tenzir
+  link:
+    home: https://tenzir.com
+    docs: https://docs.tenzir.com
+    github: https://github.com/tenzir
+
+logo:
+  # Variant names describe the artwork color: "dark" artwork goes on light
+  # backgrounds, "light" artwork goes on dark backgrounds.
+  images:
+    logo-dark:
+      path: ../assets/logos/logo-dark.svg
+      alt: Tenzir logo
+    logo-light:
+      path: ../assets/logos/logo-light.svg
+      alt: Tenzir logo
+    logomark-dark:
+      path: ../assets/logos/logomark-dark.svg
+      alt: Tenzir logomark
+    logomark-light:
+      path: ../assets/logos/logomark-light.svg
+      alt: Tenzir logomark
+  small:
+    light: logomark-dark
+    dark: logomark-light
+  medium:
+    light: logo-dark
+    dark: logo-light
+  large:
+    light: logo-dark
+    dark: logo-light
+
+color:
+  palette:
+    neutral-800: "#0E1017"
+    neutral-700: "#262E40"
+    neutral-600: "#414B62"
+    neutral-500: "#68738D"
+    neutral-400: "#959DB1"
+    neutral-300: "#CED3DE"
+    neutral-250: "#E3E6ED"
+    neutral-200: "#F0F1F5"
+    neutral-100: "#F7F8FA"
+    neutral-50: "#FDFDFE"
+
+    blue-600: "#0043E0"
+    blue-500: "#0A54FF"
+    blue-400: "#477EFF"
+    blue-300: "#ADC6FF"
+    blue-200: "#E0EAFF"
+    blue-100: "#F0F4FF"
+    blue-50: "#F8F9FC"
+
+    green-600: "#1AB252"
+    green-500: "#29E06C"
+    green-400: "#5EE891"
+    green-300: "#B8F5CE"
+    green-200: "#E4FBEC"
+    green-100: "#F2FDF6"
+
+    lightblue-600: "#0096E0"
+    lightblue-500: "#0AADFF"
+    lightblue-400: "#47C2FF"
+    lightblue-300: "#ADE4FF"
+    lightblue-200: "#E0F5FF"
+    lightblue-100: "#F0FAFF"
+
+    purple-600: "#B400E0"
+    purple-500: "#CF0AFF"
+    purple-400: "#DB47FF"
+    purple-300: "#EFADFF"
+    purple-200: "#F9E0FF"
+    purple-100: "#FCF0FF"
+
+    pink-600: "#E0008E"
+    pink-500: "#FF0AA5"
+    pink-400: "#FF47BC"
+    pink-300: "#FFADE1"
+    pink-200: "#FFE0F4"
+    pink-100: "#FFF0F9"
+
+    orange-600: "#E04B00"
+    orange-500: "#FF5C0A"
+    orange-400: "#FF8547"
+    orange-300: "#FFC9AD"
+    orange-200: "#FFEBE0"
+    orange-100: "#FFF5F0"
+
+    yellow-600: "#D09611"
+    yellow-500: "#EDAE1D"
+    yellow-400: "#F1C255"
+    yellow-300: "#F9E4B4"
+    yellow-200: "#FEF6E1"
+    yellow-100: "#FFF9F0"
+
+    red-600: "#E00025"
+    red-500: "#FF0A33"
+    red-400: "#FF4766"
+    red-300: "#FFADBB"
+    red-200: "#FFE0E5"
+    red-100: "#FFF0F2"
+
+    white: neutral-50
+    black: neutral-800
+    blue: blue-500
+    green: green-500
+    cyan: lightblue-500
+    purple: purple-500
+    pink: pink-500
+    orange: orange-500
+    yellow: yellow-500
+    red: red-500
+
+    brand-blue: blue-500
+    brand-green: green-500
+    graph-1: blue-500
+    graph-2: lightblue-500
+    graph-3: purple-500
+    graph-4: pink-500
+    graph-5: orange-500
+    graph-6: yellow-500
+
+  foreground: neutral-800
+  background: neutral-50
+  primary: blue-500
+  secondary: neutral-600
+  tertiary: neutral-500
+  success: green-600
+  info: lightblue-600
+  warning: yellow-600
+  danger: red-500
+  light: neutral-50
+  dark: neutral-800
+
+typography:
+  # Both families are open source and available on Google Fonts. Consumers
+  # that need offline or file-based fonts (e.g., Typst rendering) can override
+  # the source with local font files.
+  fonts:
+    - family: Inter
+      source: google
+      weight: [400, 500, 600]
+      style: [normal, italic]
+    - family: JetBrains Mono
+      source: google
+      weight: [400, 500, 600]
+      style: [normal, italic]
+  base:
+    family: Inter
+    weight: 400
+    size: 16px
+    line-height: 1.5
+  headings:
+    family: Inter
+    weight: 600
+    line-height: 1.2
+    color: foreground
+  monospace:
+    family: JetBrains Mono
+    weight: 400
+    size: 0.875rem
+  monospace-inline:
+    family: JetBrains Mono
+    color: neutral-700
+    background-color: neutral-100
+  monospace-block:
+    family: JetBrains Mono
+    color: neutral-700
+    background-color: neutral-100
+    line-height: 1.4
+  link:
+    color: primary
+    weight: 500

@@ -38,7 +38,8 @@ Skills for coding agents in the Tenzir ecosystem, built on the
   PRs
 - `tenzir-review-changes`: Code review with severity ratings and structured
   findings
-- `tenzir-design-system`: Frontend design tokens, components, and brand assets
+- `tenzir-design-system`: Brand tokens, design invariants, logos, and
+  per-tool guides for web UIs, documents, slides, and diagrams
 - `tenzir-ship`: Changelog entries, release notes, and GitHub releases
 - `tenzir-update-docs`: Coordinate docs.tenzir.com updates alongside code changes
 - `tenzir-technical-writing`: Technical documentation style following Google's

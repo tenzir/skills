@@ -1,63 +1,80 @@
 ---
 name: tenzir-design-system
 description: >-
-  Tenzir frontend design system tokens, component specifications, and brand
-  assets. Use when building or styling Tenzir UI, choosing colors or
-  typography, implementing standard controls, or using official logos. Also use
-  when implementing any web UI that should look like a Tenzir product, or when
-  the user asks about Tenzir brand colors, fonts, or component patterns.
+  Tenzir design system: brand tokens (colors, typography, spacing, shadows,
+  motion), design invariants, official logos, and per-tool integration
+  guides. Use when styling anything Tenzir-branded: web UIs (shadcn/ui,
+  Tailwind, plain CSS, or any frontend framework), Quarto documents and
+  reports, slide decks, or diagrams (Mermaid, Graphviz). Also use when the
+  user asks about Tenzir brand colors, fonts, logos, gradients, dark mode,
+  or how to make output look like a Tenzir product.
 ---
 
 # Tenzir Design System
 
-Use the shared Tenzir design system when implementing frontend UI.
+Canonical home of the Tenzir design system: machine-readable tokens,
+component specifications, brand assets, and integration guides for the tools
+that consume them.
 
-## Start Here
+**The YAML data files are authoritative for all values.** Markdown
+references explain how to choose and apply tokens; when a markdown snippet
+and the YAML disagree, the YAML wins.
 
-1. Identify whether the task needs design tokens, a standard component, or a
-   logo asset.
-2. Load only the reference files needed for the current component or styling
-   problem.
-3. Prefer design tokens and existing component patterns over bespoke styling.
+## Data Files
 
-## Design Tokens
+- [data/brand.yml](data/brand.yml) — color palette, semantic roles
+  (primary/success/warning/…), graph colors, typography, and logos.
+  Follows Quarto's [brand.yml](https://posit-dev.github.io/brand-yml/)
+  schema, so Quarto/Shiny can consume it directly.
+- [data/tokens.yml](data/tokens.yml) — everything beyond that schema, under
+  the `tenzir:` key: spacing, radius, type scale, shadows, opacity and
+  tints, motion, z-index, breakpoints, and the dark-mode mapping.
+- [source.md](source.md) — how this skill relates to downstream consumers
+  and what is out of scope.
 
-Load these references as needed:
+## Question Routing
 
-- [typography](references/typography.md)
-- [colors](references/colors.md)
-- [spacing](references/spacing.md)
-- [shadows](references/shadows.md)
-- [border radius](references/border-radius.md)
+| Question | Load |
+| --- | --- |
+| What's the hex/value of a token? | [data/brand.yml](data/brand.yml), [data/tokens.yml](data/tokens.yml) |
+| Which color/font/size should I use? | [references/colors.md](references/colors.md), [references/typography.md](references/typography.md) |
+| Spacing, radius, breakpoints, z-index? | [references/layout.md](references/layout.md) |
+| Shadows, overlays, surface stacking? | [references/elevation.md](references/elevation.md) |
+| Animation durations and easing? | [references/motion.md](references/motion.md) |
+| Which icon set/style? | [references/iconography.md](references/iconography.md) |
+| Build UI components? | shadcn/ui on the theme: [references/tools/shadcn.md](references/tools/shadcn.md) |
+| Write the CSS variables / theme plain CSS? | [references/tools/css.md](references/tools/css.md) |
+| Configure Tailwind? | [references/tools/tailwind.md](references/tools/tailwind.md) |
+| Theme a shadcn/ui project? | [references/tools/shadcn.md](references/tools/shadcn.md) |
+| Brand a Quarto doc or report? | [references/tools/quarto.md](references/tools/quarto.md) |
+| Style a Mermaid/Graphviz diagram? | [references/tools/diagrams.md](references/tools/diagrams.md) |
+| Build a branded slide deck? | [references/tools/slides.md](references/tools/slides.md) |
+| How does this relate to other repos? | [source.md](source.md) |
 
-Use the `--tnz-` CSS custom-property prefix for design-system tokens.
+Load only the files the current task needs. Prefer design tokens and
+existing component patterns over bespoke styling.
 
-## Component References
+## Components
 
-Load the relevant reference before implementing the component:
+There are no Tenzir component specs: shadcn/ui on the theme
+([references/tools/shadcn.md](references/tools/shadcn.md)) is the
+component layer. The system contributes the invariants — tokens, flat
+surfaces, elevation, gradients, iconography — not component anatomy.
 
-- [buttons](references/buttons.md)
-- [dropdown](references/dropdown.md)
-- [hyperlinks](references/hyperlinks.md)
-- [segmented control](references/segmented-control.md)
-- [input field](references/input-field.md)
-- [search input](references/search-input.md)
-- [checkbox](references/checkbox.md)
-- [radio button](references/radio-button.md)
-- [toggle switch](references/toggle-switch.md)
-- [tag](references/tag.md)
-- [badge](references/badge.md)
-- [tab bar](references/tab-bar.md)
-- [toast](references/toast.md)
+## Conventions
+
+- CSS custom properties use the `--tnz-` prefix
+  ([references/tools/css.md](references/tools/css.md) has the full block).
+- Dark mode remaps semantic roles only; the palette is shared between light
+  and dark.
 
 ## Assets
 
-Official logo files live in `assets/logos/`:
+Official logos live in `assets/logos/`. Variant names describe the artwork
+color — **dark artwork goes on light backgrounds**:
 
-- `logo.svg`
-- `logo-white.svg`
-- `logomark.svg`
-- `logomark-white.svg`
+- `logo-dark.svg`, `logomark-dark.svg` — for light backgrounds
+- `logo-light.svg`, `logomark-light.svg` — for dark backgrounds
 
-Use these assets for Tenzir products and integrations that should follow the
-official brand system.
+The logomark is the icon-only mark; use it where the full logo has already
+appeared or space is tight.

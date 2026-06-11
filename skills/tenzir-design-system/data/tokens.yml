@@ -1,0 +1,209 @@
+# Tenzir design-system tokens beyond Quarto's brand.yml schema.
+#
+# Color values reference palette entries in brand.yml by name (e.g.,
+# neutral-800). Values are unitless unless a section says otherwise; format
+# adapters convert them to the target output units.
+
+tenzir:
+  spacing:
+    unit: px
+
+    # Tenzir follows a compact 4px spacing scale with half steps for dense
+    # inline UI. Use 0-2 for tight internals, icon gaps, badges, and metadata;
+    # 3-4 for ordinary component padding; 5-8 for larger content groups; and
+    # 10-20 for page-level separation.
+    scale:
+      space_0: 0
+      space_0_5: 2
+      space_1: 4
+      space_1_5: 6
+      space_2: 8
+      space_3: 12
+      space_4: 16
+      space_5: 20
+      space_6: 24
+      space_7: 28
+      space_8: 32
+      space_10: 40
+      space_16: 64
+      space_20: 80
+
+  radius:
+    unit: px
+
+    # Use the default radius for standard rectangular components. Use tight
+    # for small inline components and dense badges. Use pill only for controls
+    # or labels that are intentionally capsule-shaped — the value is large
+    # enough to fully round any control height. Circular controls (radio
+    # buttons) use 50% instead of a token.
+    default: 5
+    tight: 3
+    pill: 9999
+
+  typography:
+    unit: px
+
+    # Use regular for body text, medium for labels and emphasis, and semibold
+    # for headings or important UI elements.
+    weight:
+      regular: 400
+      medium: 500
+      semibold: 600
+
+    # Use text_base as the default body size in roomy layouts. Use text_xxs and
+    # text_xs for captions, footers, metadata, and dense sidebars; text_sm and
+    # text_lg for compact body copy and subheads; text_2xl and above for major
+    # titles. Use text_capitalized for uppercase labels and category markers.
+    # Tracking is in em units.
+    text:
+      text_xxs:
+        size: 10
+        line_height: 14
+        tracking: 0
+      text_xs:
+        size: 12
+        line_height: 18
+        tracking: 0
+      text_sm:
+        size: 14
+        line_height: 20
+        tracking: 0
+      text_base:
+        size: 16
+        line_height: 24
+        tracking: 0
+      text_lg:
+        size: 18
+        line_height: 28
+        tracking: 0
+      text_xl:
+        size: 20
+        line_height: 28
+        tracking: 0
+      text_2xl:
+        size: 24
+        line_height: 32
+        tracking: -0.005
+      text_3xl:
+        size: 30
+        line_height: 36
+        tracking: -0.01
+      text_4xl:
+        size: 36
+        line_height: 40
+        tracking: -0.015
+      text_5xl:
+        size: 48
+        line_height: 56
+        tracking: -0.02
+      text_capitalized:
+        size: 12
+        line_height: 16
+        tracking: 0.05
+
+    # Italic emphasis variants for monospace text (JetBrains Mono only).
+    mono_emphasis:
+      text_xs_em:
+        size: 12
+        line_height: 18
+        tracking: -0.04
+        style: italic
+      text_sm_em:
+        size: 14
+        line_height: 20
+        tracking: -0.04
+        style: italic
+
+  shadow:
+    unit: px
+    color: neutral-800
+
+    # Use smaller shadows for inline overlays and compact surfaces, medium
+    # shadows for floating panels, and large shadows only for prominent modal
+    # or elevated page-level surfaces.
+    shadow_l:
+      - {x: 0, y: 20, blur: 40, spread: -16, opacity: 0.2}
+      - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.2}
+    shadow_m:
+      - {x: 0, y: 10, blur: 20, spread: -8, opacity: 0.2}
+      - {x: 0, y: 4, blur: 8, spread: -6, opacity: 0.2}
+    shadow_s:
+      - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.2}
+      - {x: 0, y: 3, blur: 6, spread: -3, opacity: 0.2}
+    shadow_xs:
+      - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.1}
+      - {x: 0, y: 3, blur: 6, spread: -3, opacity: 0.1}
+
+  opacity:
+    # Dim overlays darken with neutral-800 at the given alpha; lighten
+    # overlays brighten with neutral-50. Use opacity tokens for muted overlays
+    # or de-emphasis. Prefer explicit colors when the element has semantic
+    # meaning or needs contrast guarantees.
+    dim_50: 0.5
+    dim_20: 0.2
+    dim_8: 0.08
+    lighten_20: 0.2
+    lighten_8: 0.08
+
+    # Tint: any palette color at this alpha makes an outline-style fill
+    # (outline tags, outline badges, shortcut hints) where a solid background
+    # would be too heavy.
+    tint_12: 0.12
+
+  motion:
+    # Durations in ms. Pair fast/standard for hover and focus transitions,
+    # base/decelerate for entering elements, fast/accelerate for exiting
+    # elements, and slow for large surfaces such as panels and modals.
+    duration:
+      instant: 0
+      fast: 150
+      base: 200
+      slow: 300
+      slower: 500
+    easing:
+      standard: cubic-bezier(0.4, 0, 0.2, 1)
+      decelerate: cubic-bezier(0, 0, 0.2, 1)
+      accelerate: cubic-bezier(0.4, 0, 1, 1)
+      linear: linear
+
+  z_index:
+    # Steps of 100 leave room for application-specific layers in between.
+    # The overlay layer pairs with opacity dim_50 for full-page dims.
+    base: 0
+    sticky: 100
+    dropdown: 200
+    overlay: 300
+    sidepanel: 400
+    modal: 500
+    popover: 600
+    toast: 700
+    tooltip: 800
+
+  breakpoint:
+    # Matches Tailwind defaults so Tailwind consumers need no configuration.
+    unit: px
+    sm: 640
+    md: 768
+    lg: 1024
+    xl: 1280
+    xxl: 1536
+
+  dark:
+    # Dark mode remaps semantic roles onto the existing palette; the palette
+    # shades themselves are shared between light and dark. Like light mode,
+    # surfaces are flat: cards and panels share the neutral-800 background
+    # and separate via neutral-700 hairline borders. neutral-700 is also the
+    # well/hover layer. Status hues step one level lighter (400) to keep
+    # contrast on dark surfaces.
+    foreground: neutral-50
+    background: neutral-800
+    surface: neutral-800
+    muted: neutral-700
+    border: neutral-700
+    text_secondary: neutral-300
+    text_tertiary: neutral-400
+    primary: blue-400
+    success: green-400
+    info: lightblue-400
+    warning: yellow-400
+    danger: red-400
