@@ -23,8 +23,8 @@ To inspect the theme visually, open the [tweakcn
 editor](https://tweakcn.com/editor/theme), choose **Import** (Paste CSS),
 and paste the contents of
 [assets/shadcn-theme.css](../../assets/shadcn-theme.css). The file carries
-the full variable set tweakcn renders — colors, fonts, radius, and
-shadows — for both light and dark mode. Going the other way, theme tweaks
+the full variable set tweakcn renders — colors, fonts, and radius — for
+both light and dark mode. Going the other way, theme tweaks
 made in tweakcn export as the same CSS format; fold accepted changes back
 into the YAML first, then regenerate the asset.
 
@@ -40,10 +40,14 @@ into the YAML first, then regenerate the asset.
 | `--accent` | `neutral-100` (dark: `neutral-600`) | Hover fill on cards/menus |
 | `--destructive` | `red-500` (dark: `red-400`) | Danger role |
 | `--border` / `--input` | `neutral-200` / `neutral-250` | Dividers; control outlines |
-| `--ring` | `blue-200` (dark: `blue-400`) | Focus ring |
+| `--ring` | `blue-500` (dark: `blue-400`) | Active borders are primary |
 | `--chart-1..5` | `graph-1..5` | Chart sequence; `yellow-500` is the sixth series |
 | `--radius` | `radius` (5px) | shadcn derives `rounded-md` = 3px = `radius-tight` |
-| `--shadow-*` | `shadow-xs/s/m/l` | Dual-layer Tenzir elevation mapped onto shadcn's scale |
+
+Shadows are deliberately not overridden — shadcn's defaults are subtle and
+fit the system; mapping the four Tenzir shadow tokens onto shadcn's
+eight-level scale reads as too heavy. The Tenzir shadow tokens remain the
+reference for hand-built components ([elevation.md](../elevation.md)).
 
 Dark mode follows `tenzir.dark` in tokens.yml: shared palette, surfaces on
 `neutral-700`/`neutral-800`, status hues one step lighter (400-level) with

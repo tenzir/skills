@@ -36,7 +36,7 @@
   /* Lines and focus */
   --border: #f0f1f5; /* neutral-200 */
   --input: #e3e6ed; /* neutral-250 control outlines */
-  --ring: #e0eaff; /* blue-200 focus ring */
+  --ring: #0a54ff; /* blue-500 — active borders are primary */
 
   /* Charts: graph-1..5; use yellow-500 #edae1d for a sixth series */
   --chart-1: #0a54ff;
@@ -53,7 +53,7 @@
   --sidebar-accent: #f0f1f5;
   --sidebar-accent-foreground: #0e1017;
   --sidebar-border: #f0f1f5;
-  --sidebar-ring: #e0eaff;
+  --sidebar-ring: #0a54ff;
 
   /* Typography */
   --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
@@ -63,15 +63,7 @@
   /* radius (5px) makes rounded-md = 3px = radius-tight */
   --radius: 0.3125rem;
 
-  /* Elevation: Tenzir dual-layer shadows (xs/s/m/l) on neutral-800 */
-  --shadow-2xs: 0px 8px 16px -8px #0e10171a, 0px 3px 6px -3px #0e10171a;
-  --shadow-xs: 0px 8px 16px -8px #0e10171a, 0px 3px 6px -3px #0e10171a;
-  --shadow-sm: 0px 8px 16px -8px #0e101733, 0px 3px 6px -3px #0e101733;
-  --shadow: 0px 8px 16px -8px #0e101733, 0px 3px 6px -3px #0e101733;
-  --shadow-md: 0px 10px 20px -8px #0e101733, 0px 4px 8px -6px #0e101733;
-  --shadow-lg: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
-  --shadow-xl: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
-  --shadow-2xl: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
+  /* Shadows are deliberately not overridden: shadcn's defaults stay. */
 }
 
 /* Dark mode: semantic remapping from tenzir.dark — shared palette,
