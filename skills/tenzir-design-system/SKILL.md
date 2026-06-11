@@ -27,10 +27,10 @@ and the YAML disagree, the YAML wins.
   Follows Quarto's [brand.yml](https://posit-dev.github.io/brand-yml/)
   schema, so Quarto/Shiny can consume it directly.
 - [data/tokens.yml](data/tokens.yml) — everything beyond that schema, under
-  the `tenzir:` key: spacing, radius, type scale, shadows, opacity, alpha
+  the `tenzir:` key: spacing, radius, type scale, shadows, opacity and
   tints, motion, z-index, breakpoints, and the dark-mode mapping.
-- [source.md](source.md) — provenance: which tokens are Figma-sourced and
-  which are proposed derived defaults.
+- [source.md](source.md) — how this skill relates to downstream consumers
+  and what is out of scope.
 
 ## Question Routing
 
@@ -47,7 +47,7 @@ and the YAML disagree, the YAML wins.
 | Brand a Quarto doc or report? | [references/tools/quarto.md](references/tools/quarto.md) |
 | Style a Mermaid/Graphviz diagram? | [references/tools/diagrams.md](references/tools/diagrams.md) |
 | Build a branded slide deck? | [references/tools/slides.md](references/tools/slides.md) |
-| Is this token official or proposed? | [source.md](source.md) |
+| How does this relate to other repos? | [source.md](source.md) |
 
 Load only the files the current task needs. Prefer design tokens and
 existing component patterns over bespoke styling.

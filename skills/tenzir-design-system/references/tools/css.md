@@ -121,28 +121,13 @@ use their token name (`--tnz-space-4`, `--tnz-shadow-m`,
   --tnz-color-surface: var(--tnz-neutral-50);
   --tnz-color-border: var(--tnz-neutral-200);
 
-  /* 12% alpha tints (outline fills) */
-  --tnz-alpha-neutral-600: rgb(from var(--tnz-neutral-600) r g b / 12%);
-  --tnz-alpha-neutral-400: rgb(from var(--tnz-neutral-400) r g b / 12%);
-  --tnz-alpha-blue-500: rgb(from var(--tnz-blue-500) r g b / 12%);
-  --tnz-alpha-blue-400: rgb(from var(--tnz-blue-400) r g b / 12%);
-  --tnz-alpha-green-600: rgb(from var(--tnz-green-600) r g b / 12%);
-  --tnz-alpha-lightblue-600: rgb(from var(--tnz-lightblue-600) r g b / 12%);
-  --tnz-alpha-purple-600: rgb(from var(--tnz-purple-600) r g b / 12%);
-  --tnz-alpha-pink-600: rgb(from var(--tnz-pink-600) r g b / 12%);
-  --tnz-alpha-orange-600: rgb(from var(--tnz-orange-600) r g b / 12%);
-  --tnz-alpha-yellow-600: rgb(from var(--tnz-yellow-600) r g b / 12%);
-  --tnz-alpha-red-500: rgb(from var(--tnz-red-500) r g b / 12%);
-  --tnz-alpha-red-400: rgb(from var(--tnz-red-400) r g b / 12%);
-
-  /* Overlay opacities */
+  /* Opacities: overlays and the outline-fill tint */
   --tnz-dim-50: 0.5;
   --tnz-dim-20: 0.2;
   --tnz-dim-8: 0.08;
-  --tnz-dim-5: 0.05;
-  --tnz-dim-4: 0.04;
   --tnz-lighten-20: 0.2;
   --tnz-lighten-8: 0.08;
+  --tnz-tint-12: 0.12;
 
   /* Font families */
   --tnz-font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
@@ -196,7 +181,7 @@ use their token name (`--tnz-space-4`, `--tnz-shadow-m`,
   /* Border radius */
   --tnz-radius: 5px;
   --tnz-radius-tight: 3px;
-  --tnz-radius-pill: 35px;
+  --tnz-radius-pill: 9999px;
 
   /* Shadows (two layers each — both required) */
   --tnz-shadow-l: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
@@ -231,11 +216,20 @@ Breakpoints cannot be expressed as custom properties (media queries don't
 resolve `var()`); use the values from `tenzir.breakpoint` directly:
 `640px`, `768px`, `1024px`, `1280px`, `1536px`.
 
+Outline-style fills tint any palette color at 12% alpha:
+
+```css
+.tag--outline {
+  background: rgb(from var(--tnz-blue-500) r g b / var(--tnz-tint-12));
+  color: var(--tnz-blue-500);
+}
+```
+
 ## Dark Mode
 
 Dark mode remaps only the semantic aliases — component CSS that uses
 `--tnz-color-*` adapts automatically (mapping from `tenzir.dark` in
-tokens.yml; proposed):
+tokens.yml):
 
 ```css
 [data-theme="dark"] {

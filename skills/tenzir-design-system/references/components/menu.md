@@ -1,8 +1,5 @@
 # Menu
 
-> **Derived spec** — proposed for consistency with the design system; not
-> Figma-sourced. See [source.md](../../source.md).
-
 Floating list of actions, opened from a trigger (context menu, overflow menu,
 command menu). Complements [dropdown.md](dropdown.md), which is the form
 control for selecting a value.

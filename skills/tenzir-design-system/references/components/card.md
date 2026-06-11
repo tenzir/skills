@@ -1,8 +1,5 @@
 # Card
 
-> **Derived spec** — proposed for consistency with the design system; not
-> Figma-sourced. See [source.md](../../source.md).
-
 Contained surface that groups related content on the app background.
 
 ## Props

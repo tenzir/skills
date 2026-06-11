@@ -36,7 +36,6 @@ with `neutral-50`:
 | `dim-50`     | Full-page backdrop behind modals/sidepanels  |
 | `dim-20`     | Pressed state on filled (primary/error) buttons |
 | `dim-8`      | Subtle darkening                             |
-| `dim-5` / `dim-4` | Subtlest outlines (e.g., heat-map boxes) |
 | `lighten-20` / `lighten-8` | Shortcut hints on filled buttons |
 
 ## Pairing with Z-Index

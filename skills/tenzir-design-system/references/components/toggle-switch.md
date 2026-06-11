@@ -15,7 +15,7 @@ Binary switch control for on/off states.
 | ------------- | ----- |
 | Width         | 32px  |
 | Height        | 20px  |
-| Border radius | 35px  |
+| Border radius | pill (9999px) |
 | Knob size     | 16px  |
 | Knob inset    | 2px   |
 
@@ -61,7 +61,7 @@ Binary switch control for on/off states.
   position: relative;
   width: 32px;
   height: 20px;
-  border-radius: 35px;
+  border-radius: var(--tnz-radius-pill);
   cursor: pointer;
   transition: background var(--tnz-duration-base) var(--tnz-ease-standard);
 }
@@ -79,7 +79,6 @@ Binary switch control for on/off states.
 /* Inactive - Focus */
 .toggle--inactive:focus-visible {
   background: var(--tnz-neutral-300);
-  border-radius: 45px;
   box-shadow: 0 0 0 2px var(--tnz-primary-200);
   outline: none;
 }
@@ -141,7 +140,7 @@ Binary switch control for on/off states.
   /* Toggle switch */
   --toggle-width: 32px;
   --toggle-height: 20px;
-  --toggle-radius: 35px;
+  --toggle-radius: var(--tnz-radius-pill);
   --toggle-knob-size: 16px;
   --toggle-knob-inset: 2px;
 

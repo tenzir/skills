@@ -1,8 +1,5 @@
 # Tooltip
 
-> **Derived spec** — proposed for consistency with the design system; not
-> Figma-sourced. See [source.md](../../source.md).
-
 Small inverted-color popup that labels or explains the element under the
 pointer or keyboard focus.
 

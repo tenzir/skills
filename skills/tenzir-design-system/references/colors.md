@@ -68,12 +68,11 @@ background: linear-gradient(to right, var(--tnz-blue-500), var(--tnz-green-500))
 
 ## Alpha Tints and Overlays
 
-- 12% alpha tints of palette colors (`tenzir.color.alpha` in tokens.yml)
-  fill outline-style tags, badges, and shortcut hints where a solid tint
+- Any palette color at 12% alpha (`tint-12`) makes an outline-style fill —
+  used for outline tags, badges, and shortcut hints where a solid tint
   would be too heavy.
 - Dim overlays darken with `neutral-800` at `dim-50` (full-page behind
-  modals), `dim-20` (pressed fills), down to `dim-4`/`dim-5` for the
-  subtlest outlines.
+  modals), `dim-20` (pressed fills), or `dim-8` (subtle darkening).
 - Lighten overlays brighten with `neutral-50` at `lighten-20`/`lighten-8`,
   e.g. for shortcut hints on filled buttons.
 
@@ -86,8 +85,8 @@ area fills.
 
 ## Dark Mode
 
-Dark mode (proposed — see [source.md](../source.md)) remaps semantic roles
-onto the same palette instead of introducing new colors: background
+Dark mode remaps semantic roles onto the same palette instead of
+introducing new colors: background
 `neutral-800`, surfaces `neutral-700`, text `neutral-50`, and status hues
 one step lighter (400-level) to keep contrast. The mapping lives in
 `tenzir.dark` in [data/tokens.yml](../data/tokens.yml); see

@@ -114,10 +114,9 @@ colors, fonts, radius, shadows, and z-index need configuration.
   --color-warning: var(--color-yellow-600);
   --color-error: var(--color-red-500);
 
-  /* Border radius */
+  /* Border radius (capsule shapes use the built-in rounded-full) */
   --radius-DEFAULT: 5px;
   --radius-tight: 3px;
-  --radius-pill: 35px;
 
   /* Shadows (two layers each — both required) */
   --shadow-l: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
@@ -166,8 +165,7 @@ module.exports = {
       none: "0",
       tight: "3px",
       DEFAULT: "5px",
-      pill: "35px",
-      full: "9999px",
+      full: "9999px", // capsule shapes (radius-pill)
     },
     boxShadow: {
       l: "0px 20px 40px -16px #0E101733, 0px 8px 16px -8px #0E101733",

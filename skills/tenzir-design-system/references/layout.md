@@ -29,15 +29,13 @@ Guidelines:
   inputs, dropdowns, tags, toasts, cards, modals, tooltips.
 - `radius-tight` (3px) — small inline components: badges, shortcut badges,
   buttons nested inside a 5px container (segmented controls, menu items).
-- `radius-pill` (35px) — intentionally capsule-shaped controls only (toggle
-  switches).
+- `radius-pill` (9999px) — intentionally capsule-shaped controls only
+  (toggle switches); the value fully rounds any control height.
 - Radio buttons are circular: `border-radius: 50%`.
 
 Always reference the token instead of hardcoding the pixel value.
 
 ## Breakpoints
-
-> Proposed tokens — see [source.md](../source.md).
 
 `sm` 640 / `md` 768 / `lg` 1024 / `xl` 1280 / `xxl` 1536 (px, min-width).
 These match Tailwind's defaults, so Tailwind consumers need no
@@ -45,8 +43,6 @@ configuration. Design desktop-first toward `lg`; the product UIs are
 data-dense and not optimized below `md`.
 
 ## Z-Index Layering
-
-> Proposed tokens — see [source.md](../source.md).
 
 Layers step by 100 so applications can slot custom layers in between:
 

@@ -1,32 +1,10 @@
-# Source and Provenance
+# Source and Scope
 
-This skill is the canonical home of the Tenzir design system tokens. The YAML
-files under [data/](data/) are authoritative for all values; the markdown
-references explain how to choose and apply them.
-
-## Provenance markers
-
-Sections in [data/tokens.yml](data/tokens.yml) carry one of two markers:
-
-- **figma** — sourced from the official Tenzir design system in Figma. These
-  values are settled; change them only when the Figma source changes.
-- **proposed** — derived defaults added for completeness and consistency with
-  the Figma-sourced tokens. They fill gaps the Figma system does not cover
-  yet: motion, z-index layering, breakpoints, and dark mode. Treat them as
-  the recommended defaults, but expect them to be refined when the design
-  team formalizes these areas.
-
-Component references under [references/components/](references/components/)
-follow the same convention: specs without a banner are Figma-sourced; specs
-opening with a "Derived spec" banner (tooltip, modal, card, menu) are
-proposed.
-
-## Notable normalizations
-
-- The Figma `green-transparent` tint uses the off-palette base `#1CC45A`;
-  the skill normalizes it to `green-600` (`#1AB252`) at 12% alpha.
-- Earlier versions of this skill contained shadow snippets with the typo
-  `#0E1217`; the correct shadow base is `neutral-800` (`#0E1017`).
+This skill is the canonical home of the Tenzir design system. The YAML files
+under [data/](data/) are authoritative for all values; the markdown
+references explain how to choose and apply them. Evolve the system here —
+change the YAML first, then update any markdown or downstream consumer that
+depends on the changed values.
 
 ## Relationship to other repositories
 
@@ -44,8 +22,8 @@ should override the font source locally.
 ## Non-goals
 
 - **Component specs** for tables, avatars, pagination, progress indicators,
-  and skeletons: nothing in the Figma system implies them, so the skill does
-  not invent them.
+  and skeletons: the system does not cover them yet; add specs here when a
+  real need appears rather than inventing them speculatively.
 - **Icon library**: the content repository's `brand/assets/icons/` are
   website content, not design-system assets. This skill ships only the
   official logos.

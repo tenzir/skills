@@ -1,9 +1,5 @@
 # Motion
 
-> Proposed tokens — derived defaults, not Figma-sourced; the `fast` and
-> `base` durations match what the Figma-sourced component specs already use.
-> See [source.md](../source.md).
-
 Durations and easing curves. Values live in
 [data/tokens.yml](../data/tokens.yml) (`tenzir.motion`); this file explains
 when and how to animate.

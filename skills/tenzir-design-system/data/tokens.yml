@@ -3,15 +3,9 @@
 # Color values reference palette entries in brand.yml by name (e.g.,
 # neutral-800). Values are unitless unless a section says otherwise; format
 # adapters convert them to the target output units.
-#
-# Provenance markers:
-#   figma    — sourced from the official Figma design system.
-#   proposed — derived default for consistency; not Figma-sourced. See
-#              source.md for the full provenance story.
 
 tenzir:
   spacing:
-    # Provenance: figma
     unit: px
 
     # Tenzir follows a compact 4px spacing scale with half steps for dense
@@ -35,19 +29,18 @@ tenzir:
       space_20: 80
 
   radius:
-    # Provenance: figma
     unit: px
 
     # Use the default radius for standard rectangular components. Use tight
     # for small inline components and dense badges. Use pill only for controls
-    # or labels that are intentionally capsule-shaped. Circular controls
-    # (radio buttons) use 50% instead of a token.
+    # or labels that are intentionally capsule-shaped — the value is large
+    # enough to fully round any control height. Circular controls (radio
+    # buttons) use 50% instead of a token.
     default: 5
     tight: 3
-    pill: 35
+    pill: 9999
 
   typography:
-    # Provenance: figma
     unit: px
 
     # Use regular for body text, medium for labels and emphasis, and semibold
@@ -122,7 +115,6 @@ tenzir:
         style: italic
 
   shadow:
-    # Provenance: figma
     unit: px
     color: neutral-800
 
@@ -143,7 +135,6 @@ tenzir:
       - {x: 0, y: 3, blur: 6, spread: -3, opacity: 0.1}
 
   opacity:
-    # Provenance: figma
     # Dim overlays darken with neutral-800 at the given alpha; lighten
     # overlays brighten with neutral-50. Use opacity tokens for muted overlays
     # or de-emphasis. Prefer explicit colors when the element has semantic
@@ -151,39 +142,18 @@ tenzir:
     dim_50: 0.5
     dim_20: 0.2
     dim_8: 0.08
-    dim_5: 0.05
-    dim_4: 0.04
     lighten_20: 0.2
     lighten_8: 0.08
 
-  color:
-    # Provenance: figma
-    # 12% alpha tints of palette colors, used for outline fills (outline tags,
-    # outline badges, shortcut hints) where a solid background would be too
-    # heavy. Render as the base color at the given alpha.
-    alpha:
-      neutral_600: {base: neutral-600, alpha: 0.12}
-      neutral_400: {base: neutral-400, alpha: 0.12}
-      blue_500: {base: blue-500, alpha: 0.12}
-      blue_400: {base: blue-400, alpha: 0.12}
-      # Figma original uses off-palette #1CC45A as the base; normalized to the
-      # nearest palette shade.
-      green_600: {base: green-600, alpha: 0.12}
-      lightblue_600: {base: lightblue-600, alpha: 0.12}
-      purple_600: {base: purple-600, alpha: 0.12}
-      pink_600: {base: pink-600, alpha: 0.12}
-      orange_600: {base: orange-600, alpha: 0.12}
-      yellow_600: {base: yellow-600, alpha: 0.12}
-      red_500: {base: red-500, alpha: 0.12}
-      red_400: {base: red-400, alpha: 0.12}
+    # Tint: any palette color at this alpha makes an outline-style fill
+    # (outline tags, outline badges, shortcut hints) where a solid background
+    # would be too heavy.
+    tint_12: 0.12
 
   motion:
-    # Provenance: proposed (derived default, not Figma-sourced)
     # Durations in ms. Pair fast/standard for hover and focus transitions,
     # base/decelerate for entering elements, fast/accelerate for exiting
     # elements, and slow for large surfaces such as panels and modals.
-    # fast and base match the transition durations the Figma-sourced
-    # component specs already use (0.15s and 0.2s).
     duration:
       instant: 0
       fast: 150
@@ -197,7 +167,6 @@ tenzir:
       linear: linear
 
   z_index:
-    # Provenance: proposed (derived default, not Figma-sourced)
     # Steps of 100 leave room for application-specific layers in between.
     # The overlay layer pairs with opacity dim_50 for full-page dims.
     base: 0
@@ -211,7 +180,6 @@ tenzir:
     tooltip: 800
 
   breakpoint:
-    # Provenance: proposed (derived default, not Figma-sourced)
     # Matches Tailwind defaults so Tailwind consumers need no configuration.
     unit: px
     sm: 640
@@ -221,7 +189,6 @@ tenzir:
     xxl: 1536
 
   dark:
-    # Provenance: proposed (derived default, not Figma-sourced)
     # Dark mode remaps semantic roles onto the existing palette; the palette
     # shades themselves are shared between light and dark. Status hues step
     # one level lighter (400) to keep contrast on dark surfaces.

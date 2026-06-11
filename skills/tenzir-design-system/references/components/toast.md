@@ -154,7 +154,7 @@ Notification component for displaying transient messages, confirmations, and err
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 267px;
+  max-width: 280px;
 }
 
 /* Toast Title */
@@ -253,7 +253,7 @@ Notification component for displaying transient messages, confirmations, and err
 2. **Content structure**:
    - **Title only** - Brief, single-line messages
    - **Title + Subtitle** - Additional context or details
-   - Max subtitle width: ~267px (truncate with ellipsis)
+   - Max subtitle width: ~280px (truncate with ellipsis)
 
 3. **Button usage**:
    - Use for actionable toasts (e.g., "View", "Undo", "Revert")

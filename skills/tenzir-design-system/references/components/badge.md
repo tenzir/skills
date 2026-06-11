@@ -34,11 +34,11 @@ Small uppercase label for status indicators and feature flags.
 | Property       | Value           |
 | -------------- | --------------- |
 | Font family    | Inter           |
-| Font size      | 8px             |
+| Font size      | `text-xxs` (10px) |
 | Font weight    | Semi Bold (600) |
 | Line height    | 14px            |
 | Text transform | uppercase       |
-| Letter spacing | 0.4px           |
+| Letter spacing | 0.05em          |
 
 ## Color Specifications
 
@@ -53,7 +53,7 @@ Each color has a solid variant (300-level border) and transparent variant (12% o
 | Orange    | `orange-300` (#ffc9ad)    | rgba(224, 75, 0, 0.12)   | `orange-500` (#ff5c0a)    | `orange-400` (#ff8547)    |
 | Yellow    | `yellow-300` (#f9e4b4)    | rgba(208, 150, 17, 0.12) | `yellow-500` (#edae1d)    | `yellow-400` (#f1c255)    |
 | Red       | `red-300` (#ffadbb)       | rgba(224, 0, 37, 0.12)   | `red-500` (#ff0a33)       | `red-400` (#ff4766)       |
-| Green     | `green-300` (#b8f5ce)     | rgba(28, 196, 90, 0.12)  | `green-500` (#29e06c)     | `green-400` (#5ee891)     |
+| Green     | `green-300` (#b8f5ce)     | rgba(26, 178, 82, 0.12)  | `green-500` (#29e06c)     | `green-400` (#5ee891)     |
 | Grey      | `neutral-300` (#ced3de)   | rgba(65, 75, 98, 0.12)   | `neutral-500` (#68738d)   | `neutral-400` (#959db1)   |
 
 ## CSS Implementation
@@ -67,12 +67,12 @@ Each color has a solid variant (300-level border) and transparent variant (12% o
   padding: 1px 4px;
   border-radius: 3px;
   border: 1px solid;
-  font-family: "Inter", sans-serif;
-  font-size: 8px;
-  font-weight: 600;
-  line-height: 14px;
+  font-family: var(--tnz-font-sans);
+  font-size: var(--tnz-text-xxs);
+  font-weight: var(--tnz-font-semibold);
+  line-height: var(--tnz-leading-xxs);
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.05em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -162,7 +162,7 @@ Each color has a solid variant (300-level border) and transparent variant (12% o
 }
 
 .badge--green-transparent {
-  border-color: rgba(28, 196, 90, 0.12);
+  border-color: rgba(26, 178, 82, 0.12);
   color: var(--tnz-green-400);
 }
 
@@ -189,10 +189,10 @@ Each color has a solid variant (300-level border) and transparent variant (12% o
   --badge-radius: 3px;
 
   /* Badge typography */
-  --badge-font-size: 8px;
+  --badge-font-size: var(--tnz-text-xxs);
   --badge-font-weight: 600;
-  --badge-line-height: 14px;
-  --badge-letter-spacing: 0.4px;
+  --badge-line-height: var(--tnz-leading-xxs);
+  --badge-letter-spacing: 0.05em;
 }
 ```
 

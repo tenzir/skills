@@ -55,7 +55,7 @@ Each color has a 200-level background, transparent border (default), solid 300-l
 | Orange    | `orange-200` (#ffebe0)    | rgba(224, 75, 0, 0.12)   | `orange-300` (#ffc9ad)    | `orange-600` (#e04b00)    |
 | Yellow    | `yellow-200` (#fef6e1)    | rgba(208, 150, 17, 0.12) | `yellow-300` (#f9e4b4)    | `yellow-600` (#d09611)    |
 | Red       | `red-200` (#ffe0e5)       | rgba(224, 0, 37, 0.12)   | `red-300` (#ffadbb)       | `red-600` (#e00025)       |
-| Green     | `green-200` (#e4fbec)     | rgba(28, 196, 90, 0.12)  | `green-300` (#b8f5ce)     | `green-600` (#1ab252)     |
+| Green     | `green-200` (#e4fbec)     | rgba(26, 178, 82, 0.12)  | `green-300` (#b8f5ce)     | `green-600` (#1ab252)     |
 | Grey      | `neutral-200` (#f0f1f5)   | rgba(65, 75, 98, 0.12)   | `neutral-300` (#ced3de)   | `neutral-600` (#414b62)   |
 | No color  | `neutral-100` (#f7f8fa)   | rgba(65, 75, 98, 0.12)   | `neutral-300` (#ced3de)   | `neutral-600` (#414b62)   |
 | None      | `neutral-50` (#fdfdfe)    | `neutral-200` (#f0f1f5)  | -                         | `neutral-400` (#959db1)   |
@@ -84,7 +84,7 @@ Each color has a 200-level background, transparent border (default), solid 300-l
   padding: 3px 6px;
   border-radius: 5px;
   border: 1px solid;
-  font-family: "Inter", sans-serif;
+  font-family: var(--tnz-font-sans);
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -184,7 +184,7 @@ Each color has a 200-level background, transparent border (default), solid 300-l
 /* Green tag */
 .tag--green {
   background: var(--tnz-green-200);
-  border-color: rgba(28, 196, 90, 0.12);
+  border-color: rgba(26, 178, 82, 0.12);
   color: var(--tnz-green-600);
 }
 

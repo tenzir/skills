@@ -1,8 +1,5 @@
 # Modal
 
-> **Derived spec** — proposed for consistency with the design system; not
-> Figma-sourced. See [source.md](../../source.md).
-
 Blocking overlay surface for focused tasks. Comes in two variants: a centered
 dialog and an edge-anchored sidepanel.
 
