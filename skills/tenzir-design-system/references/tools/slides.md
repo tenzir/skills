@@ -18,9 +18,10 @@ the YAML, the YAML wins.
 - Accents: `blue-500` for emphasis, links, and highlights. The blue→green
   brand gradient is the display accent: hero/title text, section
   kickers, and highlighted stat figures — never body content.
-- Content slides follow the kicker pattern: a small `text-capitalized`
-  or gradient overline, a large semibold heading, and a `neutral-500`
-  subtitle.
+- Content slides follow the kicker pattern: a sentence-case gradient-text
+  kicker at `text-lg`/medium (the production style), a large semibold
+  heading, and a `neutral-500` subtitle. The uppercase `text-capitalized`
+  overline is the quieter variant for dense or document-like contexts.
 - Secondary text (speaker names, footers, captions): `neutral-500`.
 - Content cards on light slides are flat: `neutral-50` with a 1px
   `neutral-200` border, optionally led by an icon tile (`blue-100`

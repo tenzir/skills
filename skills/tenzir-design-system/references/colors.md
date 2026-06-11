@@ -69,6 +69,15 @@ Use it for hero headlines, section kickers/overlines, and highlighted stat
 figures — applied as a text gradient. Never use it for body text, UI
 controls, or large fills.
 
+Two rules for gradient text:
+
+- **The gradient spans the glyphs, not the container.** Size the element
+  to its content (`display: inline-block` / `width: fit-content`);
+  otherwise short labels sample only the blue end of the ramp.
+- **Each element runs the full ramp.** Three stat figures side by side
+  each go blue→green individually — they don't share one gradient across
+  the row.
+
 ## Contrast
 
 - On white/light backgrounds, 500-level hues only pass WCAG AA for large
@@ -76,6 +85,9 @@ controls, or large fills.
 - `neutral-500` is the minimum text grey on `neutral-50`/`neutral-100`;
   anything lighter is decorative only.
 - On color-500 fills (e.g., primary buttons), use `neutral-50` text.
+- On dark (`neutral-800`) backgrounds, body text is `neutral-300` or
+  lighter — `neutral-400` is for captions only. Lead-ins and emphasized
+  phrases step up to semibold `neutral-50`.
 - Never encode meaning by color alone — pair status colors with icons or
   text.
 
