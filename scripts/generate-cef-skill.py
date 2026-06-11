@@ -793,8 +793,11 @@ def parse_group_page(
         "name": slug,
         "title": title,
         "source_url": esm_page_url(page),
-        "description": "\n\n".join(description_blocks),
     }
+    # Most group pages carry no narrative between the heading and the table.
+    description = "\n\n".join(description_blocks)
+    if description:
+        group["description"] = description
     if notes:
         group["notes"] = notes
     group["fields"] = fields

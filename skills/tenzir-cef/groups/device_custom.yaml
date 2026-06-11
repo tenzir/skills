@@ -2,7 +2,6 @@ name: device_custom
 title: Device Custom Group
 esm_version: '7.9'
 source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Device_Custom_Group.htm
-description: ''
 notes:
 - |-
   **Note:** For versions prior to ESM 6.11.0, the following device custom fields are still available to support IPv6 addresses. The IPv6 address is stored in the database in its full form, and ESM displays it in a simplified format, if applicable. If you used the following fields for IPv4 addresses, they are displayed as IPv6-embedded IPv4 addresses.

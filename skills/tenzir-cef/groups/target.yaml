@@ -2,7 +2,6 @@ name: target
 title: Target Group
 esm_version: '7.9'
 source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Target_Group.htm
-description: ''
 notes:
 - |-
   Note about Geo fields:

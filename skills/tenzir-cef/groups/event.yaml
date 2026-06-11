@@ -2,7 +2,6 @@ name: event
 title: Event Group
 esm_version: '7.9'
 source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Event_Group.htm
-description: ''
 fields:
 - label: Additional Data
   alias: additionalData

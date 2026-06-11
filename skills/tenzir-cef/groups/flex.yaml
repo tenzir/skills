@@ -2,7 +2,6 @@ name: flex
 title: Flex Group
 esm_version: '7.9'
 source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Flex_Group.htm
-description: ''
 fields:
 - label: Date1
   alias: flexDate1
