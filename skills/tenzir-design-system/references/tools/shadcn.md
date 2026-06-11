@@ -36,6 +36,9 @@ Notes:
   rules ([elevation.md](../elevation.md)).
 - Fonts: set `--font-sans`/`--font-mono` to Inter and JetBrains Mono in
   `@theme` (or via `next/font`).
+- Marketing CTAs (website nav, heroes) size up to 44px height with 24px
+  horizontal padding and 16px semibold text — shadcn's dense app sizes
+  read as cramped outside product UI.
 - Extra status colors follow the `name`/`name-foreground` convention with
   values from [colors.md](../colors.md), e.g. `--success: #1ab252` /
   dark `#5ee891`.

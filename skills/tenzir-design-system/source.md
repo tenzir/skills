@@ -15,9 +15,8 @@ needing file-based fonts (offline/Typst) override locally.
 
 ## Non-goals
 
-- Component specs for standard overlays and widgets (tooltips, modals,
-  menus, tables, pagination, …): a themed component library plus the token
-  and elevation rules covers them.
+- Component specs: shadcn/ui on the theme is the component layer; the
+  system contributes tokens and invariants, not component anatomy.
 - Icon assets: the system specifies the icon style
   ([references/iconography.md](references/iconography.md)), not a bundled
   set. Only the official logos ship here.

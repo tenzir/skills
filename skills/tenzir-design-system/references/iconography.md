@@ -15,9 +15,11 @@ chunkier. If too faint below ~16px, step up to weight 300 — never lower
 the optical size.
 
 Sizes: 16px inline/dense, 20px default UI, 22–24px feature tiles. Icons
-inherit their context's text color; status icons use the 600-level hue;
-icon tiles are `blue-500` on `blue-100` (see
-[components/card.md](components/card.md)).
+inherit their context's text color; status icons use the 600-level hue.
+
+Feature/use-case cards lead with an **icon tile**: a 44px square,
+`blue-100` fill, 1px `blue-200` border, default radius, with a `blue-500`
+glyph centered in it.
 
 Source: [Google Fonts](https://fonts.google.com/icons) (npm
 `material-symbols`); export SVGs at weight 200/Rounded for non-web use.

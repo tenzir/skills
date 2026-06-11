@@ -2,11 +2,11 @@
 name: tenzir-design-system
 description: >-
   Tenzir design system: brand tokens (colors, typography, spacing, shadows,
-  motion), component specifications, official logos, and per-tool integration
-  guides. Use when styling anything Tenzir-branded: web UIs (plain CSS, CSS
-  variables, Tailwind, shadcn/ui, or any frontend framework), Quarto
-  documents and reports, slide decks, or diagrams (Mermaid, Graphviz). Also
-  use when the user asks about Tenzir brand colors, fonts, logos, dark mode,
+  motion), design invariants, official logos, and per-tool integration
+  guides. Use when styling anything Tenzir-branded: web UIs (shadcn/ui,
+  Tailwind, plain CSS, or any frontend framework), Quarto documents and
+  reports, slide decks, or diagrams (Mermaid, Graphviz). Also use when the
+  user asks about Tenzir brand colors, fonts, logos, gradients, dark mode,
   or how to make output look like a Tenzir product.
 ---
 
@@ -42,7 +42,7 @@ and the YAML disagree, the YAML wins.
 | Shadows, overlays, surface stacking? | [references/elevation.md](references/elevation.md) |
 | Animation durations and easing? | [references/motion.md](references/motion.md) |
 | Which icon set/style? | [references/iconography.md](references/iconography.md) |
-| Implement a button, input, tag, …? | [references/components/](references/components/) — one file per component |
+| Build UI components? | shadcn/ui on the theme: [references/tools/shadcn.md](references/tools/shadcn.md) |
 | Write the CSS variables / theme plain CSS? | [references/tools/css.md](references/tools/css.md) |
 | Configure Tailwind? | [references/tools/tailwind.md](references/tools/tailwind.md) |
 | Theme a shadcn/ui project? | [references/tools/shadcn.md](references/tools/shadcn.md) |
@@ -56,13 +56,10 @@ existing component patterns over bespoke styling.
 
 ## Components
 
-Specs in [references/components/](references/components/): buttons,
-input-field, search-input, dropdown, checkbox, radio-button, toggle-switch,
-segmented-control, tag, badge, tab-bar, toast, hyperlinks, card. Anything
-beyond these (tooltips, modals, menus, …) needs no Tenzir spec — use a
-themed component library
-([references/tools/shadcn.md](references/tools/shadcn.md)) plus the
-elevation and layout rules.
+There are no Tenzir component specs: shadcn/ui on the theme
+([references/tools/shadcn.md](references/tools/shadcn.md)) is the
+component layer. The system contributes the invariants — tokens, flat
+surfaces, elevation, gradients, iconography — not component anatomy.
 
 ## Conventions
 
