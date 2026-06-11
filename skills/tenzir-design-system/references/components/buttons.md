@@ -32,6 +32,12 @@ All buttons use `border-radius: 5px` and `font-weight: 600` (Semi Bold).
 | `s`  | 28px   | 12px      | 4px       | 14px      | 20px        | 16px      |
 | `m`  | 32px   | 12px      | 6px       | 14px      | 20px        | 20px      |
 | `l`  | 36px   | 16px      | 8px       | 14px      | 20px        | 20px      |
+| `xl` | 44px   | 24px      | 10px      | 16px      | 24px        | 20px      |
+
+`xs`–`l` are the app sizes. `xl` is the marketing CTA size (website nav
+and hero buttons): generous horizontal padding — roughly 1.5× the text
+height — is what makes a CTA read as a deliberate action rather than a
+cramped control. Don't use `xl` inside dense product UI.
 
 ### Primary Button
 
