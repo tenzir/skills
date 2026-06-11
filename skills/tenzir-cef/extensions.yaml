@@ -1,0 +1,1564 @@
+cef_document_version: '27'
+source: https://www.microfocus.com/documentation/arcsight/arcsight-smartconnectors-25.1/cef-implementation-standard/Content/CEF/Chapter%202%20ArcSight%20Extension.htm
+description: 'Predefined CEF extension keys from the ArcSight extension dictionary. Use these
+  keys in the extension field whenever they match the data; add user-defined extensions only
+  when no predefined key fits. audience: producer keys are set by devices and connectors that
+  emit CEF; audience: consumer keys are set by ArcSight after ingestion and must not be set
+  by event producers; audience: both marks the CEF 1.2 additions listed in both upstream tables.
+  full_name is the expanded ArcSight field name; esm_groups names the ESM event schema groups
+  (see catalog.yaml) that carry the field. since is the CEF specification version that introduced
+  the key.'
+extensions:
+- key: act
+  full_name: deviceAction
+  type: string
+  length: 63
+  audience: producer
+  since: '0.1'
+  description: Action taken by the device.
+  esm_groups:
+  - device
+- key: app
+  full_name: applicationProtocol
+  type: string
+  length: 31
+  audience: producer
+  since: '0.1'
+  description: 'Application level protocol, example: HTTP, HTTPS, SSHv2, Telnet, POP, IMPA,
+    IMAPS, and so on.'
+  esm_groups:
+  - event
+- key: c6a1
+  full_name: deviceCustomIPv6Address1
+  type: ipv6_address
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the four IPv6 address fields available to map fields that do not apply to any other in this dictionary.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: c6a1Label
+  full_name: deviceCustomIPv6Address1Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: c6a3
+  full_name: deviceCustomIPv6Address3
+  type: ipv6_address
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the four IPv6 address fields available to map fields that do not apply to any other in this dictionary.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: c6a3Label
+  full_name: deviceCustomIPv6Address3Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: c6a4
+  full_name: deviceCustomIPv6Address4
+  type: ipv6_address
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the four IPv6 address fields available to map fields that do not apply to any other in this dictionary.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: c6a4Label
+  full_name: deviceCustomIPv6Address4Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cat
+  full_name: deviceEventCategory
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'Represents the category assigned by the originating device. Devices often
+    use their own categorization schema to classify event. Example: “/Monitor/Disk/Read”'
+  esm_groups:
+  - device
+- key: cfp1
+  full_name: deviceCustomFloatingPoint1
+  type: double
+  audience: producer
+  since: '0.1'
+  description: One of our floating point fields available to map fields that do not apply
+    to any other in this dictionary.
+  esm_groups:
+  - device_custom
+- key: cfp1Label
+  full_name: deviceCustomFloatingPoint1Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cfp2
+  full_name: deviceCustomFloatingPoint2
+  type: double
+  audience: producer
+  since: '0.1'
+  description: One of the four floating point fields available to map fields that do not apply
+    to any other in this dictionary.
+  esm_groups:
+  - device_custom
+- key: cfp2Label
+  full_name: deviceCustomFloatingPoint2Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cfp3
+  full_name: deviceCustomFloatingPoint3
+  type: double
+  audience: producer
+  since: '0.1'
+  description: One of the four floating point fields available to map fields that do not apply
+    to any other in this dictionary.
+  esm_groups:
+  - device_custom
+- key: cfp3Label
+  full_name: deviceCustomFloatingPoint3Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cfp4
+  full_name: deviceCustomFloatingPoint4
+  type: double
+  audience: producer
+  since: '0.1'
+  description: One of the four floating point fields available to map fields that do not apply
+    to any other in this dictionary.
+  esm_groups:
+  - device_custom
+- key: cfp4Label
+  full_name: deviceCustomFloatingPoint4Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cn1
+  full_name: deviceCustomNumber1
+  type: long
+  audience: producer
+  since: '0.1'
+  description: One of the three number fields available to map fields that do not apply to
+    any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied
+    field when possible.
+  esm_groups:
+  - device_custom
+- key: cn1Label
+  full_name: deviceCustomNumber1Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cn2
+  full_name: deviceCustomNumber2
+  type: long
+  audience: producer
+  since: '0.1'
+  description: One of the three number fields available to map fields that do not apply to
+    any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied
+    field when possible.
+  esm_groups:
+  - device_custom
+- key: cn2Label
+  full_name: deviceCustomNumber2Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cn3
+  full_name: deviceCustomNumber3
+  type: long
+  audience: producer
+  since: '0.1'
+  description: One of the three number fields available to map fields that do not apply to
+    any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied
+    field when possible.
+  esm_groups:
+  - device_custom
+- key: cn3Label
+  full_name: deviceCustomNumber3Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cnt
+  full_name: baseEventCount
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: A count associated with this event. How many times was this same event observed?
+    Count can be omitted if it is 1.
+- key: cs1
+  full_name: deviceCustomString1
+  type: string
+  length: 4000
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the six strings available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: cs1Label
+  full_name: deviceCustomString1Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cs2
+  full_name: deviceCustomString2
+  type: string
+  length: 4000
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the six strings available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: cs2Label
+  full_name: deviceCustomString2Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cs3
+  full_name: deviceCustomString3
+  type: string
+  length: 4000
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the six strings available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: cs3Label
+  full_name: deviceCustomString3Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cs4
+  full_name: deviceCustomString4
+  type: string
+  length: 4000
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the six strings available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: cs4Label
+  full_name: deviceCustomString4Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cs5
+  full_name: deviceCustomString5
+  type: string
+  length: 4000
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of six strings available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: cs5Label
+  full_name: deviceCustomString5Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: cs6
+  full_name: deviceCustomString6
+  type: string
+  length: 4000
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of six strings available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: cs6Label
+  full_name: deviceCustomString6Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: destinationDnsDomain
+  full_name: destinationDnsDomain
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: The DNS domain part of the complete fully qualified domain name (FQDN).
+  esm_groups:
+  - destination
+- key: destinationServiceName
+  full_name: destinationServiceName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'The service targeted by this event. Example: “sshd”'
+  esm_groups:
+  - destination
+- key: destinationTranslatedAddress
+  full_name: destinationTranslatedAddress
+  type: ipv4_address
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the translated destination that the event refers to in an IP network.
+    The format is an IPv4 address. Example: “192.168.10.1”'
+  esm_groups:
+  - destination
+- key: destinationTranslatedPort
+  full_name: destinationTranslatedPort
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: Port after it was translated; for example, a firewall. Valid port numbers are
+    0 to 65535.
+  esm_groups:
+  - destination
+- key: deviceCustomDate1
+  full_name: deviceCustomDate1
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of two timestamp fields available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: deviceCustomDate1Label
+  full_name: deviceCustomDate1Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: deviceCustomDate2
+  full_name: deviceCustomDate2
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: |-
+    One of the two timestamp fields available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible.
+
+    > **TIP**: For tips on using these fields, see the guidelines defined under [User-Defined Extensions](docs/user-defined-extensions.md).
+  esm_groups:
+  - device_custom
+- key: deviceCustomDate2Label
+  full_name: deviceCustomDate2Label
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: All custom fields have a corresponding label field. Each of these fields is
+    a string and describes the purpose of the custom field.
+  esm_groups:
+  - device_custom
+- key: deviceDirection
+  full_name: deviceDirection
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: 'Any information about what direction the observed communication has taken.
+    The following values are supported: “0” for inbound or “1” for outbound'
+  esm_groups:
+  - device
+- key: deviceDnsDomain
+  full_name: deviceDnsDomain
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: The DNS domain part of the complete fully qualified domain name (FQDN).
+  esm_groups:
+  - device
+- key: deviceExternalId
+  full_name: deviceExternalId
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: A name that uniquely identifies the device generating this event.
+  esm_groups:
+  - device
+- key: deviceFacility
+  full_name: deviceFacility
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: The facility generating this event. For example, Syslog has an explicit facility
+    associated with every event.
+  esm_groups:
+  - device
+- key: deviceInboundInterface
+  full_name: deviceInboundInterface
+  type: string
+  length: 128
+  audience: producer
+  since: '0.1'
+  description: Interface on which the packet or data entered the device.
+  esm_groups:
+  - device
+- key: deviceNtDomain
+  full_name: deviceNtDomain
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: The Windows domain name of the device address.
+  esm_groups:
+  - device
+- key: deviceOutboundInterface
+  full_name: deviceOutboundInterface
+  type: string
+  length: 128
+  audience: producer
+  since: '0.1'
+  description: Interface on which the packet or data left the device.
+  esm_groups:
+  - device
+- key: devicePayloadId
+  full_name: devicePayloadId
+  type: string
+  length: 128
+  audience: producer
+  since: '0.1'
+  description: Unique identifier for the payload associated with the event.
+  esm_groups:
+  - device
+- key: deviceProcessName
+  full_name: deviceProcessName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Process name associated with the event. An example might be the process generating
+    the syslog entry in UNIX.
+  esm_groups:
+  - device
+- key: deviceTranslatedAddress
+  full_name: deviceTranslatedAddress
+  type: ipv4_address
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the translated device address that the event refers to in an IP
+    network. The format is an IPv4 address. Example: “192.168.10.1”'
+  esm_groups:
+  - device
+- key: dhost
+  full_name: destinationHostName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the destination that an event refers to in an IP network. The format
+    must be a fully qualified domain name (FQDN) associated with the destination node, when
+    a node is available. Examples: “host.domain.com” or “host”.'
+  esm_groups:
+  - destination
+- key: dmac
+  full_name: deviceMacAddress
+  type: mac_address
+  audience: producer
+  since: '0.1'
+  description: 'Six colon-separated hexadecimal numbers. Example: “00:0D:60:AF:1B:61”'
+  notes: The upstream producer table lists dmac twice, in rows that differ only by a spelling
+    fix in the description; the corrected row is kept.
+  esm_groups:
+  - device
+- key: dntdom
+  full_name: destinationNtDomain
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: The Windows domain name of the destination address.
+  esm_groups:
+  - destination
+- key: dpid
+  full_name: destinationProcessId
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: Provides the ID of the destination process associated with the event. For example,
+    if an event contains process ID 105, “105” is the process ID.
+  esm_groups:
+  - destination
+- key: dpriv
+  full_name: destinationUserPrivileges
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: The typical values are “Administrator”, “User”, and “Guest”. This identifies
+    the destination user’s privileges. In UNIX, for example, activity executed on the root
+    user would be identified with destinationUser Privileges of “Administrator”.
+  esm_groups:
+  - destination
+- key: dproc
+  full_name: destinationProcessName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'The name of the event’s destination process. Example: “telnetd” or “sshd”.'
+  esm_groups:
+  - destination
+- key: dpt
+  full_name: destinationPort
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: The valid port numbers are between 0 and 65535.
+  esm_groups:
+  - destination
+- key: dst
+  full_name: destinationAddress
+  type: ipv4_address
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the destination address that the event refers to in an IP network.
+    The format is an IPv4 address. Example: “192.168.10.1”'
+  esm_groups:
+  - destination
+- key: dtz
+  full_name: deviceTimeZone
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: The timezone for the device generating the event.
+  esm_groups:
+  - device
+- key: duid
+  full_name: destinationUserId
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Identifies the destination user by ID. For example, in UNIX, the root user
+    is generally associated with user ID 0.
+  esm_groups:
+  - destination
+- key: duser
+  full_name: destinationUserName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Identifies the destination user by name. This is the user associated with the
+    event’s destination. Email addresses are often mapped into the UserName fields. The recipient
+    is a candidate to put into this field.
+  esm_groups:
+  - destination
+- key: dvc
+  full_name: deviceAddress
+  type: ipv4_address
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the device address that an event refers to in an IP network. The
+    format is an IPv4 address. Example: “192.168.10.1”.'
+  esm_groups:
+  - device
+- key: dvchost
+  full_name: deviceHostName
+  type: string
+  length: 100
+  audience: producer
+  since: '0.1'
+  description: 'The format should be a fully qualified domain name (FQDN) associated with
+    the device node, when a node is available. Example: “host.domain.com” or “host”.'
+  esm_groups:
+  - device
+- key: dvcpid
+  full_name: deviceProcessId
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: Provides the ID of the process on the device generating the event.
+  esm_groups:
+  - device
+- key: end
+  full_name: endTime
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: The time at which the activity related to the event ended. The format is MMM
+    dd yyyy HH:mm:ss or milliseconds since epoch (Jan 1st1970). An example would be reporting
+    the end of a session.
+  esm_groups:
+  - event
+- key: externalId
+  full_name: externalId
+  type: string
+  length: 40
+  audience: producer
+  since: '0.1'
+  description: The ID used by an originating device. They are usually increasing numbers,
+    associated with events.
+  esm_groups:
+  - event
+- key: fileCreateTime
+  full_name: fileCreateTime
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: Time when the file was created.
+  esm_groups:
+  - file
+- key: fileHash
+  full_name: fileHash
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: Hash of a file.
+  esm_groups:
+  - file
+- key: fileId
+  full_name: fileId
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: An ID associated with a file could be the inode.
+  esm_groups:
+  - file
+- key: fileModificationTime
+  full_name: fileModificationTime
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: Time when the file was last modified.
+  esm_groups:
+  - file
+- key: filePath
+  full_name: filePath
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'Full path to the file, including file name itself. Example: C:\Program Files
+    \WindowsNT\Accessories\ wordpad.exe or /usr/bin/zip'
+  esm_groups:
+  - file
+- key: filePermission
+  full_name: filePermission
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Permissions of the file.
+  esm_groups:
+  - file
+- key: fileType
+  full_name: fileType
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Type of file (pipe, socket, etc.)
+  esm_groups:
+  - file
+- key: flexDate1
+  full_name: flexDate1
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: A timestamp field available to map a timestamp that does not apply to any other
+    defined timestamp field in this dictionary. Use all flex fields sparingly and seek a more
+    specific, dictionary supplied field when possible. These fields are typically reserved
+    for customer use and should not be set by vendors unless necessary.
+  esm_groups:
+  - flex
+- key: flexDate1Label
+  full_name: flexDate1Label
+  type: string
+  length: 128
+  audience: producer
+  since: '0.1'
+  description: The label field is a string and describes the purpose of the flex field.
+  esm_groups:
+  - flex
+- key: flexString1
+  full_name: flexString1
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: One of four floating point fields available to map fields that do not apply
+    to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied
+    field when possible. These fields are typically reserved for customer use and should not
+    be set by vendors unless necessary.
+  esm_groups:
+  - flex
+- key: flexString1Label
+  full_name: flexString2Label
+  type: string
+  length: 128
+  audience: producer
+  since: '0.1'
+  description: The label field is a string and describes the purpose of the flex field.
+  esm_groups:
+  - flex
+- key: flexString2
+  full_name: flexString2
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: One of four floating point fields available to map fields that do not apply
+    to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied
+    field when possible. These fields are typically reserved for customer use and should not
+    be set by vendors unless necessary.
+  esm_groups:
+  - flex
+- key: flexString2Label
+  full_name: flexString2Label
+  type: string
+  length: 128
+  audience: producer
+  since: '0.1'
+  description: The label field is a string and describes the purpose of the flex field.
+  esm_groups:
+  - flex
+- key: fname
+  full_name: filename
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Name of the file only (without its path).
+- key: fsize
+  full_name: fileSize
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: Size of the file.
+  esm_groups:
+  - file
+- key: in
+  full_name: bytesIn
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: Number of bytes transferred inbound, relative to the source to destination
+    relationship, meaning that data was flowing from source to destination.
+  esm_groups:
+  - event
+- key: msg
+  full_name: message
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: An arbitrary message giving more details about the event. Multi-line entries
+    can be produced by using \n as the new line separator.
+  esm_groups:
+  - event
+- key: oldFileCreateTime
+  full_name: oldFileCreateTime
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: Time when old file was created.
+  esm_groups:
+  - old_file
+- key: oldFileHash
+  full_name: oldFileHash
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: Hash of the old file.
+  esm_groups:
+  - old_file
+- key: oldFileId
+  full_name: oldFileId
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: An ID associated with the old file could be the inode.
+  esm_groups:
+  - old_file
+- key: oldFileModificationTime
+  full_name: oldFileModificationTime
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: Time when old file was last modified.
+  esm_groups:
+  - old_file
+- key: oldFileName
+  full_name: oldFileName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Name of the old file.
+  esm_groups:
+  - old_file
+- key: oldFilePath
+  full_name: oldFilePath
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'Full path to the old file, including the file name itself. Examples: c:\Program
+    Files\ WindowsNT\Accessories \wordpad.exe or /usr/bin/zip'
+  esm_groups:
+  - old_file
+- key: oldFilePermission
+  full_name: oldFilePermission
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Permissions of the old file.
+  esm_groups:
+  - old_file
+- key: oldFileSize
+  full_name: oldFileSize
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: Size of the old file.
+  esm_groups:
+  - old_file
+- key: oldFileType
+  full_name: oldFileType
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Type of the old file (pipe, socket, etc.)
+  esm_groups:
+  - old_file
+- key: out
+  full_name: bytesOut
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: Number of bytes transferred outbound relative to the source to destination
+    relationship. For example, the byte number of data flowing from the destination to the
+    source.
+  esm_groups:
+  - event
+- key: outcome
+  full_name: eventOutcome
+  type: string
+  length: 63
+  audience: producer
+  since: '0.1'
+  description: Displays the outcome, usually as ‘success’ or ‘failure’.
+  esm_groups:
+  - event
+- key: proto
+  full_name: transportProtocol
+  type: string
+  length: 31
+  audience: producer
+  since: '0.1'
+  description: Identifies the Layer-4 protocol used. The possible values are protocols such
+    as TCP or UDP.
+  esm_groups:
+  - event
+- key: reason
+  full_name: reason
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'The reason an audit event was generated. For example “badd password” or “unknown
+    user”. This could also be an error or return code. Example: “0x1234”'
+  esm_groups:
+  - event
+- key: request
+  full_name: requestUrl
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'In the case of an HTTP request, this field contains the URL accessed. The
+    URL should contain the protocol as well. Example: “http://www/secure.com”'
+  esm_groups:
+  - request
+- key: requestClientApplication
+  full_name: requestClientApplication
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: The User-Agent associated with the request.
+  esm_groups:
+  - request
+  - request
+- key: requestContext
+  full_name: requestContext
+  type: string
+  length: 2048
+  audience: producer
+  since: '0.1'
+  description: Description of the content from which the request originated (for example,
+    HTTP Referrer)
+  esm_groups:
+  - request
+- key: requestCookies
+  full_name: requestCookies
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Cookies associated with the request.
+  esm_groups:
+  - request
+- key: requestMethod
+  full_name: requestMethod
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'The method used to access a URL. Possible values: “POST”, “GET”, etc.'
+  esm_groups:
+  - request
+- key: rt
+  full_name: deviceReceiptTime
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: The time at which the event related to the activity was received. The format
+    is MMM dd yyyy HH:mm:ss or milliseconds since epoch (Jan 1st 1970)
+  esm_groups:
+  - device
+- key: shost
+  full_name: sourceHostName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the source that an event refers to in an IP network. The format
+    should be a fully qualified domain name (DQDN) associated with the source node, when a
+    mode is available. Examples: “host” or “host.domain.com”.'
+  esm_groups:
+  - source
+- key: smac
+  full_name: sourceMacAddress
+  type: mac_address
+  audience: producer
+  since: '0.1'
+  description: 'Six colon-separated hexadecimal numbers. Example: “00:0D:60:AF:1B:61”'
+  esm_groups:
+  - source
+- key: sntdom
+  full_name: sourceNtDomain
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: The Windows domain name for the source address.
+  esm_groups:
+  - source
+- key: sourceDnsDomain
+  full_name: sourceDnsDomain
+  type: string
+  length: 255
+  audience: producer
+  since: '0.1'
+  description: The DNS domain part of the complete fully qualified domain name (FQDN).
+  esm_groups:
+  - source
+- key: sourceServiceName
+  full_name: sourceServiceName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: The service that is responsible for generating this event.
+  esm_groups:
+  - source
+- key: sourceTranslatedAddress
+  full_name: sourceTranslatedAddress
+  type: ipv4_address
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the translated source that the event refers to in an IP network.
+    The format is an IPv4 address. Example: “192.168.10.1”.'
+  esm_groups:
+  - source
+- key: sourceTranslatedPort
+  full_name: sourceTranslatedPort
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: A port number after being translated by, for example, a firewall. Valid port
+    numbers are 0 to 65535.
+  esm_groups:
+  - source
+- key: spid
+  full_name: sourceProcessId
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: The ID of the source process associated with the event.
+  esm_groups:
+  - source
+- key: spriv
+  full_name: sourceUserPrivileges
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: The typical values are “Administrator”, “User”, and “Guest”. It identifies
+    the source user’s privileges. In UNIX, for example, activity executed by the root user
+    would be identified with “Administrator”.
+  esm_groups:
+  - source
+- key: sproc
+  full_name: sourceProcessName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: The name of the event’s source process.
+  esm_groups:
+  - source
+- key: spt
+  full_name: sourcePort
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: The valid port numbers are 0 to 65535.
+  esm_groups:
+  - source
+- key: src
+  full_name: sourceAddress
+  type: ipv4_address
+  audience: producer
+  since: '0.1'
+  description: 'Identifies the source that an event refers to in an IP network. The format
+    is an IPv4 address. Example: “192.168.10.1”.'
+  esm_groups:
+  - source
+- key: start
+  full_name: startTime
+  type: timestamp
+  audience: producer
+  since: '0.1'
+  description: The time when the activity the event referred to started. The format is MMM
+    dd yyyy HH:mm:ss or milliseconds since epoch (Jan 1st 1970)
+  esm_groups:
+  - event
+- key: suid
+  full_name: sourceUserId
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Identifies the source user by ID. This is the user associated with the source
+    of the event. For example, in UNIX, the root user is generally associated with user ID
+    0.
+  esm_groups:
+  - source
+- key: suser
+  full_name: sourceUserName
+  type: string
+  length: 1023
+  audience: producer
+  since: '0.1'
+  description: Identifies the source user by name. Email addresses are also mapped into the
+    UserName fields. The sender is a candidate to put into this field.
+  esm_groups:
+  - source
+- key: type
+  full_name: type
+  type: integer
+  audience: producer
+  since: '0.1'
+  description: 0 means base event, 1 means aggregated, 2 means correlation, and 3 means action.
+    This field can be omitted for base events (type 0).
+  esm_groups:
+  - event
+- key: agentTranslatedZoneKey
+  full_name: Agent Translated Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of an agentTranslatedZone resource reference.
+- key: agentZoneKey
+  full_name: Agent Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of an agentZone resource reference.
+- key: customerKey
+  full_name: Customer Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of a customer resource reference.
+- key: dTranslatedZoneKey
+  full_name: Destination Translated Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of a destinationTranslatedZone resource reference.
+- key: dZoneKey
+  full_name: Destination Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of a destinationZone resource reference.
+- key: deviceTranslatedZoneKey
+  full_name: Device Translated Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of a deviceTranslatedZone resource reference.
+- key: deviceZoneKey
+  full_name: Device Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of a deviceZone resource reference.
+- key: sTranslatedZoneKey
+  full_name: Source Translated Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of a sourceTranslatedZone resource reference.
+- key: sZoneKey
+  full_name: Source Zone Key
+  type: integer
+  length: 64-bit
+  audience: both
+  since: '1.2'
+  description: ID of a sourceZone resource reference.
+- key: reportedDuration
+  full_name: Reported Duration
+  type: string
+  length: 64-bit signed
+  audience: both
+  since: '1.2'
+  description: Elapsed time in milliseconds of the action or entity the event represents.
+- key: reportedResourceGroupName
+  full_name: Reported Resource Group Name
+  type: string
+  length: 128
+  audience: both
+  since: '1.2'
+  description: Name of a group containing the resource in the system that sent the event.
+- key: reportedResourceID
+  full_name: Reported Resource ID
+  type: string
+  length: 256
+  audience: both
+  since: '1.2'
+  description: Name of a group containing the resource in the system that sent the event.
+- key: reportedResourceName
+  full_name: Reported Resource Name
+  type: string
+  length: 64
+  audience: both
+  since: '1.2'
+  description: Name of the affected resource in the system that sent the event.
+- key: reportedResourceType
+  full_name: Reported Resource Type
+  type: string
+  length: 64
+  audience: both
+  since: '1.2'
+  description: Type of the affected resource in the system that sent the event.
+- key: frameworkName
+  full_name: Framework Name
+  type: string
+  length: 256
+  audience: both
+  since: '1.2'
+  description: The name of the framework used for threatAttackID.
+- key: threatActor
+  full_name: Threat actor
+  type: string
+  length: 40
+  audience: both
+  since: '1.2'
+  description: Threat actor associated with the event.
+- key: threatAttackID
+  full_name: Threat Attack ID
+  type: string
+  length: 32
+  audience: both
+  since: '1.2'
+  description: A full ID of a threat or attack as defined in the security framework in frameworkName.
+- key: agentDnsDomain
+  full_name: agentDnsDomain
+  type: string
+  length: 255
+  audience: consumer
+  since: '0.1'
+  description: The DNS domain name of the ArcSight connector that processed the event.
+- key: agentNtDomain
+  full_name: agentNtDomain
+  type: string
+  length: 255
+  audience: consumer
+  since: '0.1'
+- key: agentTranslatedAddress
+  full_name: agentTranslatedAddress
+  type: ip_address
+  audience: consumer
+  since: '0.1'
+- key: agentTranslatedZoneExternalID
+  full_name: agentTranslatedZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+- key: agentTranslatedZoneURI
+  full_name: agentTranslatedZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+- key: agentZoneExternalID
+  full_name: agentZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+- key: agentZoneURI
+  full_name: agentZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+- key: agt
+  full_name: agentAddress
+  type: ip_address
+  audience: consumer
+  since: '0.1'
+  description: The IP address of the ArcSight connector that processed the event.
+- key: ahost
+  full_name: agentHostName
+  type: string
+  length: 1023
+  audience: consumer
+  since: '0.1'
+  description: The hostname of the ArcSight connector that processed the event.
+- key: aid
+  full_name: agentId
+  type: string
+  length: 40
+  audience: consumer
+  since: '0.1'
+  description: The agent ID of the ArcSight connector that processed the event.
+- key: amac
+  full_name: agentMacAddress
+  type: mac_address
+  audience: consumer
+  since: '0.1'
+  description: The MAC address of the ArcSight connector that processed the event.
+- key: art
+  full_name: agentReceiptTime
+  type: timestamp
+  audience: consumer
+  since: '0.1'
+  description: The time at which information about the event was received by the ArcSight
+    connector.
+- key: at
+  full_name: agentType
+  type: string
+  length: 63
+  audience: consumer
+  since: '0.1'
+  description: The agent type of the ArcSight connector that processed the event
+- key: atz
+  full_name: agentTimeZone
+  type: string
+  length: 255
+  audience: consumer
+  since: '0.1'
+  description: The agent time zone of the ArcSight connector that processed the event.
+- key: av
+  full_name: agentVersion
+  type: string
+  length: 31
+  audience: consumer
+  since: '0.1'
+  description: The version of the ArcSight connector that processed the event.
+- key: customerExternalID
+  full_name: customerExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - event
+- key: customerURI
+  full_name: customerURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - event
+- key: destinationTranslatedZoneExternalID
+  full_name: destinationTranslatedZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - destination
+- key: destinationTranslatedZoneURI
+  full_name: destinationTranslatedZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+  description: The URI for the Translated Zone that the destination asset has been assigned
+    to in ArcSight.
+  esm_groups:
+  - destination
+- key: destinationZoneExternalID
+  full_name: destinationZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - destination
+- key: destinationZoneURI
+  full_name: destinationZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+  description: The URI for the Zone that the destination asset has been assigned to in ArcSight.
+  esm_groups:
+  - destination
+- key: deviceTranslatedZoneExternalID
+  full_name: deviceTranslatedZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - device
+- key: deviceTranslatedZoneURI
+  full_name: deviceTranslatedZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+  description: The URI for the Translated Zone that the device asset has been assigned to
+    in ArcSight.
+  esm_groups:
+  - device
+- key: deviceZoneExternalID
+  full_name: deviceZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - device
+- key: deviceZoneURI
+  full_name: deviceZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+  description: Thee URI for the Zone that the device asset has been assigned to in ArcSight.
+  esm_groups:
+  - device
+- key: dlat
+  full_name: destinationGeoLatitude
+  type: double
+  audience: consumer
+  since: '0.1'
+  description: The latitudinal value from which the destination’s IP address belongs.
+  esm_groups:
+  - destination
+- key: dlong
+  full_name: destinationGeoLongitude
+  type: double
+  audience: consumer
+  since: '0.1'
+  description: The longitudinal value from which the destination’s IP address belongs.
+  esm_groups:
+  - destination
+- key: eventId
+  full_name: eventId
+  type: long
+  audience: consumer
+  since: '0.1'
+  description: This is a unique ID that ArcSight assigns to each event.
+  esm_groups:
+  - event
+- key: rawEvent
+  full_name: rawEvent
+  type: string
+  length: 4000
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - event
+- key: slat
+  full_name: sourceGeoLatitude
+  type: double
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - source
+- key: slong
+  full_name: sourceGeoLongitude
+  type: double
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - source
+- key: sourceTranslatedZoneExternalID
+  full_name: sourceTranslatedZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - source
+- key: sourceTranslatedZoneURI
+  full_name: sourceTranslatedZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+  description: The URI for the Translated Zone that the destination asset has been assigned
+    to in ArcSight.
+  esm_groups:
+  - source
+- key: sourceZoneExternalID
+  full_name: sourceZoneExternalID
+  type: string
+  length: 200
+  audience: consumer
+  since: '0.1'
+  esm_groups:
+  - source
+- key: sourceZoneURI
+  full_name: sourceZoneURI
+  type: string
+  length: 2048
+  audience: consumer
+  since: '0.1'
+  description: The URI for the Zone that the source asset has been assigned to in ArcSight.
+  esm_groups:
+  - source

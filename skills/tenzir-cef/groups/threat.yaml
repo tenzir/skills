@@ -1,0 +1,37 @@
+name: threat
+title: Threat Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Threat_Group.htm
+fields:
+- label: Asset Criticality
+  alias: assetCriticality
+  type: Integer
+  turbo_level: 2
+  description: The relative measure of the importance of the targeted device, on a scale of
+    0 to 10.
+- label: Model Confidence
+  alias: modelConfidence
+  type: Integer
+  turbo_level: 2
+  description: The relative measure of ArcSight's confidence in its model of the attacked
+    device, on a scale of 0 to 10.
+- label: Priority
+  alias: priority
+  type: Integer
+  turbo_level: 1
+  description: The relative measure of importance of investigating this event on a scale of
+    0 to 10. This field incorporates Model Confidence.
+- label: Relevance
+  alias: relevance
+  type: Integer
+  turbo_level: 2
+  description: The relative measure of likelihood that this event succeeded, on a scale of
+    0 to 10.
+- label: Severity
+  alias: severity
+  type: Integer
+  turbo_level: 2
+  description: The relative measure of possible damage to network security represented by
+    the event on a scale of 0 to 10. It may be noted that **event severity** is supplied by
+    the device; **connector severity** is supplied by the SmartConnector; and **attack severity**
+    is supplied by the threat evaluation process.

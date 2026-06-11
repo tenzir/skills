@@ -1,0 +1,178 @@
+name: original_connector
+title: Original Connector Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Original_Connector_Group.htm
+description: This category falls into the device-to-Manager information chain. The chain begins
+  at **Device**, the actual network hardware that senses an event. Where data is concentrated
+  or otherwise pre-processed, it may be passed to a trusted reporting **Final Device** before
+  reaching an **Original Connector**. Although the **Original Connector** is usually the only
+  connector, if the data passes up through a Manager hierarchy, the chain includes handling
+  by **Connector** stages that are the Forwarding Connectors that facilitate Manager-to-Manager
+  connections.
+fields:
+- label: Address
+  alias: originalConnectorAddress
+  type: IP address
+  turbo_level: 2
+  description: |-
+    The IP address of the device hosting the first reporting SmartConnector.
+
+    **Note:** For older versions of ESM, see [Device Custom Group](../groups/device_custom.yaml) for IPv6 address data type.
+- label: Asset ID
+  alias: originalConnectorAssetID
+  type: Resource
+  turbo_level: 2
+  description: The asset that represents the device hosting the first reporting SmartConnector.
+- label: Asset Name
+  alias: originalConnectorAssetName
+  type: String
+  turbo_level: 2
+  description: The first reporting connector's asset name.
+- label: Asset Resource
+  alias: originalConnectorAssetResource
+  type: Resource
+  turbo_level: 2
+  description: The first reporting connector's resource.
+- label: Descriptor ID
+  alias: originalConnectorDescriptorId
+  type: ID
+  turbo_level: 2
+  description: The first reporting connector's descriptor.
+- label: DNS Domain
+  alias: originalConnectorDnsDomain
+  type: String
+  turbo_level: 2
+  description: The Domain Name Service domain name associated with the device hosting the
+    first reporting SmartConnector.
+- label: Host Name
+  alias: originalConnectorHostName
+  type: String
+  turbo_level: 2
+  description: The name of the device hosting the first reporting SmartConnector.
+- label: ID
+  alias: originalConnectorId
+  type: String
+  turbo_level: 2
+  description: The ID of the connector. The format is connectorId(1)|connectorId(2)|...
+- label: MAC address
+  alias: originalconnectorMacAddress
+  type: MAC address
+  turbo_level: 2
+  description: The MAC address associated with the first reporting SmartConnector (which may
+    or may not be the MAC address of the host device.)
+- label: Name
+  alias: originalconnectorName
+  type: String
+  turbo_level: 2
+  description: User-supplied name of the first reporting connector.
+- label: NT Domain
+  alias: originalconnectorNtDomain
+  type: String
+  turbo_level: 2
+  description: The Windows NT domain associated with the device hosting the first reporting
+    SmartConnector.
+- label: Time Zone
+  alias: originalconnectorTimeZone
+  type: String
+  turbo_level: 2
+  description: The time zone reported by the device hosting the first reporting SmartConnector.
+- label: Time Zone Offset
+  alias: originalconnectorTimeZoneOffset
+  type: Integer
+  turbo_level: 2
+  description: Returns the raw time-zone offset for the first reporting connector's time zone.
+    Note that device and connector times may not be reliably accurate.
+- label: Translated Address
+  alias: originalconnectorTranslatedAddress
+  type: IP address
+  turbo_level: 2
+  description: If network address translation is an issue, this is the translated IP address
+    of the device hosting the first reporting SmartConnector.
+- label: Translated Zone
+  alias: originalconnectorTranslatedZone
+  type: Zone
+  turbo_level: 2
+  description: If network address translation is an issue, this is the Network Zone associated
+    with the translated IP address of the device hosting the first reporting SmartConnector.
+- label: Translated Zone External ID
+  alias: originalconnectorTranslatedZoneExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: originalconnectorTranslatedZoneID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: originalconnectorTranslatedZoneName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Translated Zone Reference ID
+  alias: originalconnectorTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Translated Zone Resource
+  alias: originalconnectorTranslatedZoneResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: originalconnectorTranslatedZoneURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.
+- label: Type
+  alias: originalconnectorType
+  type: String
+  turbo_level: 2
+  description: A string that describes the type of the first reporting connector. This is
+    not the same as the device type.
+- label: Version
+  alias: originalconnectorVersion
+  type: String
+  turbo_level: 2
+  description: The software revision number of the SmartConnector that first reported the
+    event.
+- label: Zone
+  alias: originalconnectorZone
+  type: Zone
+  turbo_level: 2
+  description: The network zone in which the device hosting the first reporting SmartConnector
+    resides.
+- label: Zone External ID
+  alias: originalconnectorZoneExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: originalconnectorZoneID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: originalconnectorZoneName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: originalconnectorZoneReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and is uniquely identified in the database.
+- label: Zone Resource
+  alias: originalconnectorZoneResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: originalconnectorZoneURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.

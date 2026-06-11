@@ -1,0 +1,247 @@
+name: device
+title: Device Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Device_Group.htm
+description: This category falls into the device-to-Manager information chain. The chain begins
+  at **Device**, which is the actual network hardware that senses an event. In cases where
+  data is concentrated or otherwise pre-processed, it may be passed to a trusted reporting
+  **Final Device** before reaching an **Original Connector**. Although the **Original Connector**
+  is usually the only connector, if the data passes up through a Manager hierarchy the chain
+  includes handling by **Connector** stages that are the Manager SmartConnectors that facilitate
+  Manager-to-Manager connections.
+fields:
+- label: Action
+  alias: deviceAction
+  type: String
+  turbo_level: 2
+  description: The device-specific description of some activity associated with the event
+- label: Address
+  alias: deviceAddress
+  type: IP address
+  turbo_level: 1
+  description: |-
+    The IP address of the device hosting the sensor.
+
+    **Note:** For older versions of ESM, see [Device Custom Group](../groups/device_custom.yaml) for IPv6 address data type.
+- label: Asset ID
+  alias: deviceAssetId
+  type: Resource
+  turbo_level: 1
+  description: The asset that represents the device hosting the sensor.
+- label: Asset Name
+  alias: deviceAssetName
+  type: String
+  turbo_level: 1
+  description: The name of the device.
+- label: Asset Resource
+  alias: deviceAssetResource
+  type: Resource
+  turbo_level: 1
+  description: The resource the asset represents.
+- label: Descriptor ID
+  alias: deviceDescriptorId
+  type: ID
+  turbo_level: 1
+  description: The asset's descriptor ID.
+- label: Direction
+  alias: deviceDirection
+  type: Device Direction Enumeration
+  turbo_level: 2
+  description: Whether the traffic was inbound or outbound.
+- label: DNS Domain
+  alias: deviceDnsDomain
+  type: String
+  turbo_level: 1
+  description: The Domain Name Service domain name associated with the device hosting the
+    sensor.
+- label: Domain
+  alias: deviceDomain
+  type: String
+  turbo_level: 2
+  description: The specific domain containing the sensor device associated with the event
+- label: Event Category
+  alias: deviceEventCategory
+  type: String
+  turbo_level: 2
+  description: The category description included with the event as reported by the device.
+- label: Event Class ID
+  alias: deviceEventClassId
+  type: String
+  turbo_level: 2
+  description: |-
+    The device-specific identifier associated with this type of event
+
+    **Note:** A generic UNIX syslog parser displays the ID in this format: **arcsight:** ***x:x***
+- label: External ID
+  alias: deviceExternalId
+  type: String
+  turbo_level: 1
+  description: The external identifier associated with this sensor device, if provided by
+    the vendor.
+- label: Facility
+  alias: deviceFacility
+  type: String
+  turbo_level: 1
+  description: The sensor submodule that reported the event
+- label: Host Name
+  alias: deviceHostName
+  type: String
+  turbo_level: 1
+  description: The name of the device hosting the sensor.
+- label: Inbound Interface
+  alias: deviceInboundInterface
+  type: String
+  turbo_level: 1
+  description: The NIC card on the sensor device that received the network traffic associated
+    with the event.
+- label: MAC Address
+  alias: deviceMacAddress
+  type: MAC address
+  turbo_level: 1
+  description: The MAC address associated with the source of the attack (which may or may
+    not be the MAC address of the host device).
+- label: NT Domain
+  alias: deviceNtDomain
+  type: String
+  turbo_level: 1
+  description: The Windows NT domain associated with the device hosting the sensor.
+- label: Outbound Interface
+  alias: deviceOutboundInterface
+  type: String
+  turbo_level: 1
+  description: The NIC card on the sensor device that transmitted the network traffic associated
+    with the event.
+- label: Payload ID
+  alias: devicePayloadId
+  type: String
+  turbo_level: 2
+  description: The internal identifier associated with a payload object associated with this
+    event.
+- label: Process ID
+  alias: deviceProcessId
+  type: Integer
+  turbo_level: 2
+  description: The ID of the sensor device process that reported the event.
+- label: Process Name
+  alias: deviceProcessName
+  type: String
+  turbo_level: 1
+  description: The name of the sensor device process that reported the event.
+- label: Product
+  alias: deviceProduct
+  type: String
+  turbo_level: 1
+  description: The product name of the sensor device.
+- label: Receipt Time
+  alias: deviceReceiptTime
+  type: DateTime
+  turbo_level: 2
+  description: The time when the sensor device observed the event.
+- label: Severity
+  alias: deviceSeverity
+  type: String
+  turbo_level: 2
+  description: The device-specific assessment of event severity. This assessment varies with
+    the device involved.
+- label: Time Zone
+  alias: deviceTimeZone
+  type: String
+  turbo_level: 1
+  description: The time zone reported by the device hosting the sensor device (shown as TLA).
+- label: Time Zone Offset
+  alias: deviceTimeZoneOffset
+  type: Integer
+  turbo_level: 1
+  description: The time zone reported by the device hosting this sensor device (shown as an
+    offset from UTC).
+- label: Translated Address
+  alias: deviceTranslatedAddress
+  type: IP address
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated IP address
+    of the device hosting the sensor.
+- label: Translated Zone
+  alias: deviceTranslatedZone
+  type: Zone
+  turbo_level: 1
+  description: If network address translation is an issue, this is the network zone associated
+    with the translated IP address of the device hosting the sensor.
+- label: Translated Zone External ID
+  alias: deviceTranslatedZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: deviceTranslatedZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: deviceTranslatedZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Translated Zone Reference ID
+  alias: deviceTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Translated Zone Resource
+  alias: deviceTranslatedZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: deviceTranslatedZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: Vendor
+  alias: deviceVendor
+  type: String
+  turbo_level: 1
+  description: The vendor who manufactured or sold the sensor device.
+- label: Version
+  alias: deviceVersion
+  type: String
+  turbo_level: 1
+  description: The software revision number of the sensor device.
+- label: Zone
+  alias: deviceZone
+  type: Zone
+  turbo_level: 1
+  description: The network zone in which the sensor's device resides.
+- label: Zone External ID
+  alias: deviceZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: deviceZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: deviceZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: deviceZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been persisted and given a unique database identifier.
+- label: Zone Resource
+  alias: deviceZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: deviceZoneURI
+  type: String
+  turbo_level: 1
+  description: See the common set of resource attributes.

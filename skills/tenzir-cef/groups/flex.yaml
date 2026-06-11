@@ -1,0 +1,55 @@
+name: flex
+title: Flex Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Flex_Group.htm
+fields:
+- label: Date1
+  alias: flexDate1
+  type: DateTime
+  turbo_level: 2
+  description: First flex Date.
+- label: Date1 Label
+  alias: flexDate1Label
+  type: String
+  turbo_level: 2
+  description: Label of first flex Date.
+- label: Number1
+  alias: flexNumber1
+  type: Long
+  turbo_level: 2
+  description: First flex Number.
+- label: Number1 Label
+  alias: flexNumber1Label
+  type: String
+  turbo_level: 2
+  description: Label of the first Flex Number.
+- label: Number2
+  alias: flexNumber2
+  type: Long
+  turbo_level: 2
+  description: Second flex Number.
+- label: Number2 Label
+  alias: flexNumber2Label
+  type: String
+  turbo_level: 2
+  description: Label of the second Flex Number.
+- label: String1
+  alias: flexString1
+  type: String
+  turbo_level: 2
+  description: First flex String
+- label: String1 Label
+  alias: flexString1Label
+  type: String
+  turbo_level: 2
+  description: Label of the first Flex String.
+- label: String2
+  alias: flexString2
+  type: String
+  turbo_level: 2
+  description: Second flex String.
+- label: String2 Label
+  alias: flexString2Label
+  type: String
+  turbo_level: 2
+  description: Label of the second Flex String.

@@ -1,0 +1,10 @@
+name: manager
+title: Manager Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Manager_Group.htm
+fields:
+- label: Receipt Time
+  alias: managerReceiptTime
+  type: DateTime
+  turbo_level: 1
+  description: The time at which the Manager first received the event.

@@ -1,0 +1,200 @@
+name: device_custom
+title: Device Custom Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Device_Custom_Group.htm
+notes:
+- |-
+  **Note:** For versions prior to ESM 6.11.0, the following device custom fields are still available to support IPv6 addresses. The IPv6 address is stored in the database in its full form, and ESM displays it in a simplified format, if applicable. If you used the following fields for IPv4 addresses, they are displayed as IPv6-embedded IPv4 addresses.
+
+  You should also check your SmartConnector version and accompanying documentation. Old connectors will continue to use these fields for IPv6 addresses. Updated connectors will send IPv6 addresses to the appropriate address fields.
+fields:
+- label: Date1
+  alias: deviceCustomDate1
+  type: DateTime
+  turbo_level: 2
+  description: First customDate
+- label: Date1 Label
+  alias: deviceCustomDate1Label
+  type: String
+  turbo_level: 2
+  description: First customDate label
+- label: Date2
+  alias: deviceCustomDate2
+  type: DateTime
+  turbo_level: 2
+  description: Second customDate
+- label: Date2 Label
+  alias: deviceCustomDate2Label
+  type: String
+  turbo_level: 2
+  description: Second customDate label
+- label: Number1
+  alias: deviceCustomNumber1
+  type: Long
+  turbo_level: 2
+  description: First customNumber
+- label: Number1 Label
+  alias: deviceCustomNumber1Label
+  type: String
+  turbo_level: 2
+  description: First customNumber label
+- label: Number2
+  alias: deviceCustomNumber2
+  type: Long
+  turbo_level: 2
+  description: Second customNumber
+- label: Number2 Label
+  alias: deviceCustomNumber2Label
+  type: String
+  turbo_level: 2
+  description: Second customNumber label
+- label: Number3
+  alias: deviceCustomNumber3
+  type: Long
+  turbo_level: 2
+  description: Third customNumber
+- label: Number3 Label
+  alias: deviceCustomNumber3Label
+  type: String
+  turbo_level: 2
+  description: Third customNumber label
+- label: String1
+  alias: deviceCustomString1
+  type: String
+  turbo_level: 2
+  description: First customString
+- label: String1 Label
+  alias: deviceCustomString1Label
+  type: String
+  turbo_level: 2
+  description: First customString label
+- label: String2
+  alias: deviceCustomString2
+  type: String
+  turbo_level: 2
+  description: Second customString
+- label: String2 Label
+  alias: deviceCustomString2Label
+  type: String
+  turbo_level: 2
+  description: Second customString label
+- label: String3
+  alias: deviceCustomString3
+  type: String
+  turbo_level: 2
+  description: Third customString
+- label: String3 Label
+  alias: deviceCustomString3Label
+  type: String
+  turbo_level: 2
+  description: Third customString label
+- label: String4
+  alias: deviceCustomString4
+  type: String
+  turbo_level: 2
+  description: Fourth customString
+- label: String4 Label
+  alias: deviceCustomString4Label
+  type: String
+  turbo_level: 2
+  description: Fourth customString label
+- label: String5
+  alias: deviceCustomString5
+  type: String
+  turbo_level: 2
+  description: Fifth customString
+- label: String5 Label
+  alias: deviceCustomString5Label
+  type: String
+  turbo_level: 2
+  description: Fifth customString label
+- label: String6
+  alias: deviceCustomString6
+  type: String
+  turbo_level: 2
+  description: Sixth customString
+- label: String6 Label
+  alias: deviceCustomString6Label
+  type: String
+  turbo_level: 2
+  description: Sixth customString label
+- label: Floating Point1
+  alias: deviceCustomFloatingPoint1
+  type: String
+  turbo_level: 2
+  description: First custom floating point
+- label: Floating Point1 Label
+  alias: deviceCustomFloatingPoint1Label
+  type: Double
+  turbo_level: 2
+  description: First custom floating point label
+- label: Floating Point2
+  alias: deviceCustomFloatingPoint2
+  type: String
+  turbo_level: 2
+  description: Second custom floating point
+- label: Floating Point2 Label
+  alias: deviceCustomFloatingPoint2Label
+  type: Double
+  turbo_level: 2
+  description: Second custom floating point label
+- label: Floating Point3
+  alias: deviceCustomFloatingPoint3
+  type: String
+  turbo_level: 2
+  description: Third custom floating point
+- label: Floating Point3
+  alias: deviceCustomFloatingPoint3Label
+  type: Double
+  turbo_level: 2
+  description: Third custom floating point label
+- label: Floating Point4
+  alias: deviceCustomFloatingPoint4
+  type: String
+  turbo_level: 2
+  description: Fourth custom floating point
+- label: Floating Point4 Label
+  alias: deviceCustomFloatingPoint4Label
+  type: Double
+  turbo_level: 2
+  description: Fourth custom floating point label
+- label: IPV6 Address1
+  alias: deviceCustomIPv6Address1
+  type: IPv6 address
+  turbo_level: 2
+  description: First custom IPV6 address
+- label: IPV6 Address1 Label
+  alias: deviceCustomIPv6Address1Label
+  type: String
+  turbo_level: 2
+  description: First custom IPV6 address label
+- label: IPV6 Address2
+  alias: deviceCustomIPv6Address2
+  type: IPv6 address
+  turbo_level: 2
+  description: Second custom IPV6 address
+- label: IPV6 Address2 Label
+  alias: deviceCustomIPv6Address2Label
+  type: String
+  turbo_level: 2
+  description: Second custom IPV6 address label
+- label: IPV6 Address3
+  alias: deviceCustomIPv6Address3
+  type: IPv6 address
+  turbo_level: 2
+  description: Third custom IPV6 address
+- label: IPV6 Address3 Label
+  alias: deviceCustomIPv6Address3Label
+  type: String
+  turbo_level: 2
+  description: Third custom IPV6 address label
+- label: IPV6 Address4
+  alias: deviceCustomIPv6Address4
+  type: IPv6 address
+  turbo_level: 2
+  description: Fourth custom IPV6 address
+- label: IPV6 Address4 Label
+  alias: deviceCustomIPv6Address4Label
+  type: String
+  turbo_level: 2
+  description: Fourth custom IPV6 address label

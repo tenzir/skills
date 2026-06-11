@@ -1,0 +1,238 @@
+name: source
+title: Source Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Source_Group.htm
+notes:
+- |-
+  Note about Geo fields:
+
+  Not all IPv6 addresses are mapped to Geo fields described below. In such cases, the corresponding Geo information for the IPv6 address will be blank on the Viewer panel.
+fields:
+- label: Address
+  alias: sourceAddress
+  type: IP address
+  turbo_level: 1
+  description: |-
+    The IP address of the source device.
+
+    **Note:** For older versions of ESM, see [Device Custom Group](../groups/device_custom.yaml) for IPv6 address data type.
+- label: Asset ID
+  alias: sourceAssetId
+  type: Resource
+  turbo_level: 2
+  description: The asset that represents the device that was the network traffic's source.
+- label: Asset Name
+  alias: sourceAssetName
+  type: String
+  turbo_level: 2
+  description: The name of the device.
+- label: Asset Resource
+  alias: sourceAssetResource
+  type: Resource
+  turbo_level: 2
+  description: See the common set of resource attributes.
+- label: DNS Domain
+  alias: sourceDnsDomain
+  type: String
+  turbo_level: 2
+  description: The Domain Name Service domain name associated with the user at the source
+    device.
+- label: FQDN
+  alias: sourceFqdn
+  type: String
+  turbo_level: 2
+  description: The fully qualified domain name associated with the source device. This has
+    no value if either the host name or DNS domain are without a value.
+- label: Geo
+  alias: sourceGeo
+  type: GeoDescriptor
+  turbo_level: 1
+  description: The geographical information.
+- label: Geo Country Code
+  alias: sourceGeoCountryCode
+  type: String
+  turbo_level: 1
+  description: The identifier for the national-political state in which a device resides.
+- label: Geo Country Flag URL
+  alias: sourceGeoCountryFlagUrl
+  type: String
+  turbo_level: 1
+  description: The URL of an image of the flag of the national-political state in which the
+    device resides.
+- label: Geo Country Name
+  alias: sourceGeoCountryName
+  type: String
+  turbo_level: 1
+  description: The name of the national-political state where a device resides.
+- label: Geo Descriptor ID
+  alias: sourceGeoDescriptorId
+  type: ID
+  turbo_level: 1
+  description: The internal ID of the geographical reference.
+- label: Geo Latitude
+  alias: sourceGeoLatitude
+  type: Double
+  turbo_level: 1
+  description: The latitude of a device.
+- label: Geo Location Info
+  alias: sourceGeoLocationInfo
+  type: String
+  turbo_level: 1
+  description: Other, free-form text information about the device's location.
+- label: Geo Longitude
+  alias: sourceGeoLongitude
+  type: Double
+  turbo_level: 1
+  description: The Longitude of a device.
+- label: Geo Postal Code
+  alias: sourceGeoPostalCode
+  type: String
+  turbo_level: 1
+  description: The postal code of the device's location, as assigned by the national-political
+    state where it resides.
+- label: Geo Region Code
+  alias: sourceGeoRegionCode
+  type: String
+  turbo_level: 1
+  description: The identifier of the sub-region of the national-political state where a device
+    resides. The style of the identifier varies with the host country.
+- label: Host Name
+  alias: sourceHostName
+  type: String
+  turbo_level: 2
+  description: The name of the source device.
+- label: MAC Address
+  alias: sourceMacAddress
+  type: MAC address
+  turbo_level: 2
+  description: The MAC address associated with the network traffic's source (which may or
+    may not be the MAC address of the host device).
+- label: NT Domain
+  alias: sourceNtDomain
+  type: String
+  turbo_level: 2
+  description: The Windows NT domain associated with the source device.
+- label: Port
+  alias: sourcePort
+  type: Integer
+  turbo_level: 1
+  description: The network port associated with the network traffic's source.
+- label: Process ID
+  alias: sourceProcessId
+  type: Integer
+  turbo_level: 2
+  description: The ID of the process associated with the source of the network traffic.
+- label: Process Name
+  alias: sourceProcessName
+  type: String
+  turbo_level: 2
+  description: The name of the process associated with the source of the network traffic.
+- label: Service Name
+  alias: sourceServiceName
+  type: String
+  turbo_level: 2
+  description: The name of the service associated with the network traffic's source.
+- label: Translated Address
+  alias: sourceTranslatedAddress
+  type: IP address
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated IP address
+    of the device that was the network traffic's source.
+- label: Translated Port
+  alias: sourceTranslatedPort
+  type: Integer
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated source port
+    associated with the attack.
+- label: Translated Zone
+  alias: sourceTranslatedZone
+  type: Zone
+  turbo_level: 1
+  description: If network address translation is an issue, this is the network zone associated
+    with the translated IP address of the device that was the network traffic's source.
+- label: Translated Zone External ID
+  alias: sourceTranslatedZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: sourceTranslatedZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: sourceTranslatedZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Translated Zone Reference ID
+  alias: sourceTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Translated Zone Resource
+  alias: sourceTranslatedZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: sourceTranslatedZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: User ID
+  alias: sourceUserId
+  type: String
+  turbo_level: 2
+  description: The OS- or application-based identifier associated with the user at the network
+    traffic's source.
+- label: User Name
+  alias: sourceUserName
+  type: String
+  turbo_level: 2
+  description: The OS- or application-based name associated with the user at the network traffic's
+    source.
+- label: User Privileges
+  alias: sourceUserPrivileges
+  type: String
+  turbo_level: 2
+  description: The privileges afforded the user at the network traffic's source.
+- label: Zone
+  alias: sourceZone
+  type: Zone
+  turbo_level: 1
+  description: The network zone where the source device resides.
+- label: Zone External ID
+  alias: sourceZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: sourceZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: sourceZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: sourceZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Zone Resource
+  alias: sourceZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: sourceZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.

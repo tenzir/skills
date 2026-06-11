@@ -1,0 +1,284 @@
+name: event
+title: Event Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Event_Group.htm
+fields:
+- label: Additional Data
+  alias: additionalData
+  type: AdditionalData
+  turbo_level: 3
+  description: Reference to additional data.
+- label: Aggregated Event Count
+  alias: (notapplicable)
+  type: (not applicable)
+  turbo_level: N/A
+  description: A derived field that reports the number of actual events collectively represented
+    by the event in question.
+- label: Application Protocol
+  alias: applicationProtocol
+  type: String
+  turbo_level: 2
+  description: A description of the application layer protocol. May be set, but defaults to
+    Target Port lookup (FTP).
+- label: Base Event IDs
+  alias: baseEventIds
+  type: ID
+  turbo_level: 2
+  description: The array of event IDs that contributed to generating this correlation event.
+    This is populated only in correlated events.
+- label: Bytes In
+  alias: bytesIn
+  type: Integer
+  turbo_level: 2
+  description: Number of bytes transferred into the device during this transaction (this would
+    typically be associated with entries in HTTP logs).
+- label: Bytes Out
+  alias: bytesOut
+  type: Integer
+  turbo_level: 2
+  description: Number of bytes transferred out of the device during this transaction (this
+    would typically be associated with entries in HTTP logs).
+- label: Concentrator Connectors
+  alias: concentratorConnectors
+  type: ConnectorDescriptor
+  turbo_level: 2
+  description: The chain of concentrators that forwarded the event This is not yet exposed
+    in the user interface.
+- label: Concentrator Devices
+  alias: concentratorDevices
+  type: DeviceDescriptor
+  turbo_level: 2
+  description: The list of devices that concentrate events, if applicable. This is not exposed
+    in the user interface.
+- label: Correlated Event Count
+  alias: (notapplicable)
+  type: (not applicable)
+  turbo_level: N/A
+  description: A derived field that reports the number of actual events that had to occur
+    to cause a correlation event to occur.
+- label: Crypto Signature
+  alias: cryptoSignature
+  type: String
+  turbo_level: 2
+  description: The signature of the event object (meaning in this alert, as opposed to the
+    occurrence represented by the event). Not yet supported.
+- label: Customer
+  alias: customer
+  type: Customer
+  turbo_level: 1
+  description: The "customer" resource reference. This is used in MSSP environments to describe
+    the client or divisional entity to whom the event applies.
+- label: Customer External ID
+  alias: customerExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Customer ID
+  alias: customerID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Customer Name
+  alias: customerName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Customer Reference ID
+  alias: customerReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Customer Resource
+  alias: customerResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Customer URI
+  alias: customerURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: End Time
+  alias: endTime
+  type: DateTime
+  turbo_level: 1
+  description: Event ends (defaults to deviceReceiptTime).
+- label: Event ID
+  alias: eventId
+  type: ID
+  turbo_level: 1
+  description: |-
+    Long 64-bit value identifying an event. A negative event ID is normal.
+
+    The less significant 48 bits are assigned to a newly received event by the receiving Manager; these bits uniquely identify the event in the database of that Manager. The more-significant 16 bits are used to store forwarding information. When an event ID with `1` in the topmost bit is represented as Java long value, the event ID value is interpreted as a negative number according to JVM rules. When displayed, such an event ID appears as a decimal number with a - (minus) sign in front of it.
+- label: Event Outcome
+  alias: eventOutcome
+  type: String
+  turbo_level: 2
+  description: The outcome of the event as reported by the device (when applicable). For example,
+    Windows reports an event as audit_success or audit_failure.
+- label: External ID
+  alias: externalId
+  type: String
+  turbo_level: 2
+  description: A reference to the ID used by an external device. This is useful for tracking
+    devices that create events that contain references to these IDs (for example, ManHunt).
+- label: Generator
+  alias: generator
+  type: 'null'
+  turbo_level: 1
+  description: The "generator" resource reference (the resource that generated the event.
+    This is the subcomponent in the connector that generates the event.
+- label: Generator External ID
+  alias: generatorExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Generator ID
+  alias: generatorID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Generator Name
+  alias: generatorName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Generator Reference ID
+  alias: generatorReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Generator Resource
+  alias: generatorResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Generator URI
+  alias: generatorURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: Locality
+  alias: locality
+  type: LocalityEnumeration
+  turbo_level: 2
+  description: |-
+    The locality associated with the event. Possible values:
+
+    `Local = 0`: Events were sent to a Manager from SmartConnectors
+
+    `Forwarded = 1`: Events were sent to a Manager from a Forwarding Connector.
+
+    `Remote = 2`: Events were fetched from a remote Manager (to display a rule chain, for example)
+
+    `ESMPassThrough = 3`: Event is processed by ESM.
+
+    `DirectPassToLogger = 4`: Event is not processed by ESM and is passed to Logger or any other product.
+- label: Message
+  alias: message
+  type: String
+  turbo_level: 2
+  description: A brief comment associated with this event.
+- label: Name
+  alias: name
+  type: String
+  turbo_level: 1
+  description: An arbitrary string that describes this type of event. Event details included
+    in other parts of an event shouldn't be used in the event name.
+- label: Originator
+  alias: originator
+  type: OriginatorEnumeration
+  turbo_level: 1
+  description: Holds the value of Source|Destination. This determines whether source and destination
+    should be translated to attacker and target or they should be reversed.
+- label: Persistence
+  alias: persistence
+  type: PersistenceEnumeration
+  turbo_level: 2
+  description: 'There are two states: Persisted or Transient. Events default to being Transient
+    and are marked as Persisted as soon as they reach the Batch Alert Persister or when they
+    are loaded by the Alert Broker.'
+- label: Raw Event
+  alias: rawEvent
+  type: String
+  turbo_level: 1
+  description: The original log entry reported by the sensor (synthesized when the sensor
+    does not log to a file or text stream).
+- label: Reason
+  alias: reason
+  type: String
+  turbo_level: 2
+  description: The cause of the event when applicable. For example, Invalid Password
+- label: Rule Thread ID
+  alias: ruleThreadId
+  type: String
+  turbo_level: 2
+  description: A single rule can issue many events, based on several triggers, starting with
+    On First Event and ending with On Threshold Timeout. All such events for a single Rule
+    and a single Group By tuple is marked with the same identifier using this attribute.
+- label: Session ID
+  alias: sessionId
+  type: Long
+  turbo_level: 2
+  description: Tags for events created by a correlation simulation, as part of a particular
+    simulation.
+- label: Start Time
+  alias: startTime
+  type: DateTime
+  turbo_level: 1
+  description: Event begins (defaults to deviceReceiptTime).
+- label: Transport Protocol
+  alias: transportProtocol
+  type: String
+  turbo_level: 1
+  description: The format of the transmitted data associated with the event from a network
+    transport perspective (for example, TCP, UDP).
+- label: Type
+  alias: type
+  type: TypeEnumeration
+  turbo_level: 1
+  description: 'One of the event types: Base, Correlation, Aggregated, or Action.'
+- label: Vulnerability
+  alias: vulnerability
+  type: Vulnerability
+  turbo_level: 2
+  description: The vulnerability resource that represents the vulnerability or exposure that
+    may be exploited by this event and is present on the targeted device according to our
+    network model.
+- label: Vulnerability External ID
+  alias: vulnerabilityExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Vulnerability ID
+  alias: vulnerabilityID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Vulnerability Name
+  alias: vulnerabilityName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Vulnerability Reference ID
+  alias: vulnerabilityReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Vulnerability Resource
+  alias: vulnerabilityResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Vulnerability URI
+  alias: vulnerabilityURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.

@@ -1,0 +1,194 @@
+name: final_device
+title: Final Device Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Final_Device_Group.htm
+description: This category falls into the device-to-Manager information chain. The chain begins
+  at **Device**, which is the actual network hardware that senses an event. In cases where
+  data is concentrated or otherwise pre-processed, it may be passed to a trusted reporting
+  **Final Device** before reaching an **Original Connector**. Although the **Original Connector**
+  is usually the only connector, if the data passes up through a Manager hierarchy the chain
+  includes handling by **Connector** stages that are the Manager SmartConnectors that facilitate
+  Manager-to-Manager connections.
+fields:
+- label: Address
+  alias: finalDeviceAddress
+  type: IP address
+  turbo_level: 2
+  description: |-
+    The IP address of the trusted reporting device.
+
+    **Note:** For older versions of ESM, see [Device Custom Group](../groups/device_custom.yaml) for IPv6 address data type.
+- label: Asset ID
+  alias: finalDeviceAssetId
+  type: Resource
+  turbo_level: 2
+  description: The asset that represents the trusted reporting device.
+- label: Asset Name
+  alias: finalDeviceAssetName
+  type: String
+  turbo_level: 2
+  description: The name of the trusted reporting device.
+- label: Asset Resource
+  alias: finalDeviceAssetResource
+  type: Resource
+  turbo_level: 2
+  description: The resource represented by the trusted reporting device.
+- label: Descriptor ID
+  alias: finalDeviceDescriptorId
+  type: ID
+  turbo_level: 2
+  description: The descriptor ID of the trusted reporting device.
+- label: DNS Domain
+  alias: finalDeviceDnsDomain
+  type: String
+  turbo_level: 2
+  description: The Domain Name Service domain name associated with the trusted reporting device.
+- label: External ID
+  alias: finalDeviceExternalId
+  type: String
+  turbo_level: 2
+  description: The external ID for the trusted reporting device, if provided by the vendor.
+- label: Facility
+  alias: finalDeviceFacility
+  type: String
+  turbo_level: 2
+  description: A facility or capability of a device. This accommodates concentrators (for
+    example, like syslog, which has a concept of device logging for "parts" of a device).
+- label: Host Name
+  alias: finalDeviceHostName
+  type: String
+  turbo_level: 2
+  description: The host name of the trusted reporting device.
+- label: Inbound Interface
+  alias: finalDeviceInboundInterface
+  type: String
+  turbo_level: 2
+  description: The NIC card on the sensor device that received the network traffic associated
+    with the event.
+- label: MAC address
+  alias: finalDeviceMacAddress
+  type: MAC address
+  turbo_level: 2
+  description: The MAC address associated with the trusted reporting device.
+- label: NT Domain
+  alias: finalDeviceNtDomain
+  type: String
+  turbo_level: 2
+  description: The Windows NT domain associated with the trusted reporting device.
+- label: Outbound Interface
+  alias: finalDeviceOutboundInterface
+  type: String
+  turbo_level: 2
+  description: The NIC card on the trusted reporting device.
+- label: Process Name
+  alias: finalDeviceProcessName
+  type: String
+  turbo_level: 2
+  description: The process name of the trusted reporting device.
+- label: Product
+  alias: finalDeviceProduct
+  type: String
+  turbo_level: 2
+  description: The product name of the trusted reporting device.
+- label: Time Zone
+  alias: finalDeviceTimeZone
+  type: String
+  turbo_level: 2
+  description: The time zone reported by the trusted reporting device.
+- label: Time Zone Offset
+  alias: finalDeviceTimeZoneOffset
+  type: Integer
+  turbo_level: 2
+  description: Returns the raw time-zone offset for the trusted reporting device. Note that
+    connector and device times are not always reliably accurate.
+- label: Translated Address
+  alias: finalDeviceTranslatedAddress
+  type: IP address
+  turbo_level: 2
+  description: If network address translation is an issue, this is the translated IP address
+    of the trusted reporting device.
+- label: Translated Zone
+  alias: finalDeviceTranslatedZone
+  type: Zone
+  turbo_level: 2
+  description: If network address translation is an issue, this is the network zone associated
+    with the translated IP address of the trusted reporting device.
+- label: Translated Zone External ID
+  alias: finalDeviceTranslatedZoneExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: finalDeviceTranslatedZoneID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: finalDeviceTranslatedZoneName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Translated Zone Reference ID
+  alias: finalDeviceTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Translated Zone Resource
+  alias: finalDeviceTranslatedZoneResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: finalDeviceTranslatedZoneURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.
+- label: Vendor
+  alias: finalDeviceVendor
+  type: String
+  turbo_level: 2
+  description: Device vendor.
+- label: Version
+  alias: finalDeviceVersion
+  type: String
+  turbo_level: 2
+  description: The software revision number of the trusted reporting device.
+- label: Zone
+  alias: finalDeviceZone
+  type: Zone
+  turbo_level: 2
+  description: The network zone in which the trusted reporting device resides.
+- label: Zone External ID
+  alias: finalDeviceZoneExternalID
+  type: String
+  turbo_level: 2
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: finalDeviceZoneID
+  type: String
+  turbo_level: 2
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: finalDeviceZoneName
+  type: String
+  turbo_level: 2
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: finalDeviceZoneReferenceID
+  type: ID
+  turbo_level: 2
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Zone Resource
+  alias: finalDeviceZoneResource
+  type: Resource
+  turbo_level: 2
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: finalDeviceZoneURI
+  type: String
+  turbo_level: 2
+  description: Returns the URI for this reference.

@@ -1,0 +1,236 @@
+name: attacker
+title: Attacker Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Attacker_Group.htm
+notes:
+- |-
+  Note about Geo fields:
+
+  Not all IPv6 addresses are mapped to Geo fields described below. In such cases, the corresponding Geo information for the IPv6 address will be blank on the Viewer panel.
+fields:
+- label: Address
+  alias: attackerAddress
+  type: IP address
+  turbo_level: 1
+  description: |-
+    The IP address of the device hosting the attacker.
+
+    **Note:** For older versions of ESM, see [Device Custom Group](../groups/device_custom.yaml) for IPv6 address data type.
+- label: Asset ID
+  alias: attackerAssetId
+  type: Resource
+  turbo_level: 2
+  description: The asset that represents the device hosting the attacker.
+- label: Asset Name
+  alias: attackerAssetName
+  type: String
+  turbo_level: 2
+  description: The name of the asset that represents the device hosting the attacker.
+- label: Asset Resource
+  alias: attackerAssetResource
+  type: Resource
+  turbo_level: 2
+  description: The Resource of the asset that represents the device hosting the attacker.
+- label: DNS Domain
+  alias: attackerDnsDomain
+  type: String
+  turbo_level: 2
+  description: The Domain Name Service domain name associated with the device hosting the
+    attacker.
+- label: FQDN
+  alias: attackerFqdn
+  type: String
+  turbo_level: 2
+  description: The fully qualified domain name associated with the device hosting the attacker.
+- label: Geo
+  alias: attackerGeo
+  type: GeoDescriptor
+  turbo_level: 1
+  description: The geographical information.
+- label: Geo Country Code
+  alias: attackerGeoCountryCode
+  type: String
+  turbo_level: 1
+  description: The identifier for the national-political state in which a device resides.
+- label: Geo Country Flag URL
+  alias: attackerGeoCountryFlagUrl
+  type: String
+  turbo_level: 1
+  description: The URL of an image of the flag of the national-political state in which the
+    device resides.
+- label: Geo Country Name
+  alias: attackerGeoCountryName
+  type: String
+  turbo_level: 1
+  description: The name of the national-political state where a device resides.
+- label: Geo Descriptor ID
+  alias: attackerGeoDescriptorId
+  type: ID
+  turbo_level: 1
+  description: The internal ID of the geographical reference.
+- label: Geo Latitude
+  alias: attackerGeoLatitude
+  type: Double
+  turbo_level: 1
+  description: The latitude of a device.
+- label: Geo Location Info
+  alias: attackerGeoLocationInfo
+  type: String
+  turbo_level: 2
+  description: Other, free-form text information about the device's location.
+- label: Geo Longitude
+  alias: attackerGeoLongitude
+  type: Double
+  turbo_level: 1
+  description: The Longitude of a device.
+- label: Geo Postal Code
+  alias: attackerGeoPostalCode
+  type: String
+  turbo_level: 1
+  description: The postal code of the device's location, as assigned by the national-political
+    state where it resides.
+- label: Geo Region Code
+  alias: attackerGeoRegionCode
+  type: String
+  turbo_level: 1
+  description: The identifier of the sub-region of the national-political state where a device
+    resides. The style of the identifier varies with the host country.
+- label: Host Name
+  alias: attackerHostName
+  type: String
+  turbo_level: 2
+  description: The name of the device hosting the attacker.
+- label: MAC Address
+  alias: attackerMacAddress
+  type: MAC address
+  turbo_level: 2
+  description: The MAC address associated with the source of the attack (which may or may
+    not be the MAC address of the host device).
+- label: NT Domain
+  alias: attackerNtDomain
+  type: String
+  turbo_level: 2
+  description: The Windows NT domain associated with the device hosting the attacker.
+- label: Port
+  alias: attackerPort
+  type: Integer
+  turbo_level: 1
+  description: The network port associated with the source of the attack.
+- label: Process ID
+  alias: attackerProcessId
+  type: Integer
+  turbo_level: 2
+  description: The ID of the process associated with the source of the attack.
+- label: Process Name
+  alias: attackerProcessName
+  type: String
+  turbo_level: 2
+  description: The name of process associated with the source of the attack.
+- label: Service Name
+  alias: attackerServiceName
+  type: String
+  turbo_level: 2
+  description: The name of service associated with the source of the attack.
+- label: Translated Address
+  alias: attackerTranslatedAddress
+  type: IP address
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated IP address
+    of the device hosting the attacker.
+- label: Translated Port
+  alias: attackerTranslatedPort
+  type: Integer
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated source port
+    associated with the attack. This can happen in a NAT environment.
+- label: Translated Zone
+  alias: attackerTranslatedZone
+  type: Zone
+  turbo_level: 1
+  description: If network address translation is an issue, this is the network zone associated
+    with the translated IP address of the device hosting the attacker.
+- label: Translated Zone External ID
+  alias: attackerTranslatedZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: attackerTranslatedZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: attackerTranslatedZoneName
+  type: String
+  turbo_level: 1
+  description: See the common set of resource attributes. It is assumed that the name is always
+    the last field of the URI.
+- label: Translated Zone Reference ID
+  alias: attackerTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Translated Zone Resource
+  alias: attackerTranslatedZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: attackerTranslatedZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: User ID
+  alias: attackerUserId
+  type: String
+  turbo_level: 2
+  description: The identifier associated with the OS or application of the attacker, at the
+    source of the attack.
+- label: User Name
+  alias: attackerUserName
+  type: String
+  turbo_level: 2
+  description: The name associated with the attacker, at the source of the attack.
+- label: User Privileges
+  alias: attackerUserPrivileges
+  type: String
+  turbo_level: 2
+  description: The user-privilege associated with the attacker, at the source of the attack.
+- label: Zone
+  alias: attackerZone
+  type: Zone
+  turbo_level: 1
+  description: The network zone in which the attacker's device resides.
+- label: Zone External ID
+  alias: attackerZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: attackerZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: attackerZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: attackerZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Zone Resource
+  alias: attackerZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: attackerZoneURI
+  type: String
+  turbo_level: 1
+  description: See the common set of resource attributes.

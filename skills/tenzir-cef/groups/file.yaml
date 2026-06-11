@@ -1,0 +1,50 @@
+name: file
+title: File Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/File_Group.htm
+fields:
+- label: Create Time
+  alias: fileCreateTime
+  type: DateTime
+  turbo_level: 2
+  description: The time the file was created (in UTC).
+- label: Hash
+  alias: fileHash
+  type: String
+  turbo_level: 2
+  description: The hash code associated with the file's contents (for example, MD5).
+- label: ID
+  alias: fileId
+  type: String
+  turbo_level: 2
+  description: The external identifier associated with the file.
+- label: Modification Time
+  alias: fileModificationTime
+  type: DateTime
+  turbo_level: 2
+  description: The time the file was last changed (in UTC).
+- label: Name
+  alias: fileName
+  type: String
+  turbo_level: 2
+  description: The name of the file.
+- label: Path
+  alias: filePath
+  type: String
+  turbo_level: 2
+  description: The directory path to the file in the file system.
+- label: Permission
+  alias: filePermission
+  type: String
+  turbo_level: 2
+  description: The user permissions associated with the file (sensor specific).
+- label: Size
+  alias: fileSize
+  type: Long
+  turbo_level: 2
+  description: The size of the file's contents (typically in bytes; sensor specific).
+- label: Type
+  alias: fileType
+  type: String
+  turbo_level: 2
+  description: The type of file contents (sensor specific).

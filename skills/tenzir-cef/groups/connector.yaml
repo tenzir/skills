@@ -1,0 +1,179 @@
+name: connector
+title: Connector Group
+esm_version: '7.9'
+source_url: https://www.microfocus.com/documentation/arcsight/arcsight-esm-7.9/ESM_ArcSightConsole_UserGuide/Content/ESM_UserGuide/Connector_Group.htm
+description: |-
+  This group category falls into the device-to-Manager information chain. The chain begins at **Device**, which is the actual network hardware that senses an event. In cases where data is concentrated or otherwise pre-processed, it may be passed to a trusted reporting Final Device before reaching an **Original Connector**. Although the **Original Connector** is usually the only connector, if the data passes up through a Manager hierarchy, the chain includes handling by **Connector** stages that are the ArcSight Forwarding Connectors that facilitate Manager-to-Manager connections.
+
+  > **Note:** Since connectors are not registered to the local Manager, the Original Agent is not known and all the Original Agent fields are therefore blank and do not need to be displayed.
+fields:
+- label: Address
+  alias: connectorAddress
+  type: IP address
+  turbo_level: 1
+  description: The IP address of the device hosting the SmartConnector.
+- label: Asset ID
+  alias: connectorAssetId
+  type: Resource
+  turbo_level: 1
+  description: The asset that represents the device hosting the SmartConnector.
+- label: Asset Name
+  alias: connectorAssetName
+  type: String
+  turbo_level: 1
+  description: The connector's asset name.
+- label: Asset Resource
+  alias: connectorAssetResource
+  type: Resource
+  turbo_level: 1
+  description: The connector resource.
+- label: Descriptor ID
+  alias: connectorDescriptorId
+  type: ID
+  turbo_level: 1
+  description: The connector descriptor.
+- label: DNS Domain
+  alias: connectorDnsDomain
+  type: String
+  turbo_level: 1
+  description: The Domain Name Service domain name associated with the device hosting the
+    SmartConnector.
+- label: Host Name
+  alias: connectorHostName
+  type: String
+  turbo_level: 1
+  description: The name of the device hosting the SmartConnector.
+- label: ID
+  alias: connectorId
+  type: String
+  turbo_level: 1
+  description: The identifier associated with the SmartConnector configuration resource. The
+    format is connectorID(1) | connectorID(2) | …
+- label: MAC Address
+  alias: connectorMacAddress
+  type: MacAddress
+  turbo_level: 1
+  description: The MAC address associated with the SmartConnector (which may or may not be
+    the MAC address of the host device.)
+- label: Name
+  alias: connectorName
+  type: String
+  turbo_level: 1
+  description: The user-supplied name of the associated SmartConnector configuration resource.
+- label: NT Domain
+  alias: connectorNtDomain
+  type: String
+  turbo_level: 1
+  description: The Windows NT domain associated with the device hosting the SmartConnector.
+- label: Receipt Time
+  alias: connectorReceiptTime
+  type: DateTime
+  turbo_level: 2
+  description: The time the event arrived at the SmartConnector.
+- label: Severity
+  alias: connectorSeverity
+  type: ConnectorSeverityEnumeration
+  turbo_level: 1
+  description: The normalized ArcSight form of the event severity value provided by the SmartConnector.
+- label: Time Zone
+  alias: connectorTimeZone
+  type: String
+  turbo_level: 1
+  description: The time zone reported by the device hosting the SmartConnector (as TLA).
+- label: Time Zone Offset
+  alias: connectorTimeZoneOffset
+  type: Integer
+  turbo_level: 1
+  description: The time zone reported by the device hosting the SmartConnector (shown as a
+    UTC offset). Note that device times may be less accurate than other sources.
+- label: Translated Address
+  alias: connectorTranslatedAddress
+  type: IP address
+  turbo_level: 1
+  description: If network address translation is an issue, this is the translated IP address
+    of the device hosting the SmartConnector.
+- label: Translated Zone
+  alias: connectorTranslatedZone
+  type: Zone
+  turbo_level: 1
+  description: If network address translation is an issue, this is the Network Zone associated
+    with the translated IP address of the device hosting the SmartConnector.
+- label: Translated Zone External ID
+  alias: connectorTranslatedZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Translated Zone ID
+  alias: connectorTranslatedZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Translated Zone Name
+  alias: connectorTranslatedZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI. It assumes that the name is always the last
+    field of the URI.
+- label: Translated Zone Reference ID
+  alias: connectorTranslatedZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference is stored and uniquely identified in the database.
+- label: Translated Zone Resource
+  alias: connectorTranslatedZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Translated Zone URI
+  alias: connectorTranslatedZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
+- label: Type
+  alias: connectorType
+  type: String
+  turbo_level: 1
+  description: A description of the type of SmartConnector that reported the event.
+- label: Version
+  alias: connectorVersion
+  type: String
+  turbo_level: 1
+  description: The software revision number of the SmartConnector that reported the event
+- label: Zone
+  alias: connectorZone
+  type: Zone
+  turbo_level: 1
+  description: The network zone in which the device hosting this SmartConnector resides.
+- label: Zone External ID
+  alias: connectorZoneExternalID
+  type: String
+  turbo_level: 1
+  description: Returns the external ID for this reference.
+- label: Zone ID
+  alias: connectorZoneID
+  type: String
+  turbo_level: 1
+  description: Returns the ID for the resource in this resource reference.
+- label: Zone Name
+  alias: connectorZoneName
+  type: String
+  turbo_level: 1
+  description: Returns the name from the URI, which is always assumed to be the last field
+    of the URI.
+- label: Zone Reference ID
+  alias: connectorZoneReferenceID
+  type: ID
+  turbo_level: 1
+  description: Returns the unique descriptor ID for this reference. This is populated only
+    if this reference has been stored and uniquely identified in the database.
+- label: Zone Resource
+  alias: connectorZoneResource
+  type: Resource
+  turbo_level: 1
+  description: Locates the resource described by this reference.
+- label: Zone URI
+  alias: connectorZoneURI
+  type: String
+  turbo_level: 1
+  description: Returns the URI for this reference.
