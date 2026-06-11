@@ -68,30 +68,32 @@
   /* Shadows are deliberately not overridden: shadcn's defaults stay. */
 }
 
-/* Dark mode: semantic remapping from tenzir.dark — shared palette,
-   status hues one step lighter (400-level) with dark foregrounds. */
+/* Dark mode mirrors the flat light model: cards and panels share the
+   neutral-800 background and separate via neutral-700 hairline borders.
+   neutral-700 is also the well/hover layer. Status hues step one level
+   lighter (400) with dark foregrounds. */
 .dark {
   --background: #0e1017; /* neutral-800 */
   --foreground: #fdfdfe;
-  --card: #262e40; /* neutral-700 */
+  --card: #0e1017;
   --card-foreground: #fdfdfe;
-  --popover: #262e40;
+  --popover: #0e1017;
   --popover-foreground: #fdfdfe;
 
   --primary: #477eff; /* blue-400 */
   --primary-foreground: #0e1017;
-  --secondary: #414b62; /* neutral-600 */
+  --secondary: #262e40; /* neutral-700 */
   --secondary-foreground: #fdfdfe;
   --destructive: #ff4766; /* red-400 */
   --destructive-foreground: #0e1017;
 
-  --muted: #262e40; /* neutral-700 */
+  --muted: #262e40; /* neutral-700 wells */
   --muted-foreground: #959db1; /* neutral-400 */
-  --accent: #414b62; /* neutral-600 */
+  --accent: #262e40; /* neutral-700 hover fill */
   --accent-foreground: #fdfdfe;
 
-  --border: #414b62; /* neutral-600 */
-  --input: #414b62;
+  --border: #262e40; /* neutral-700 hairlines */
+  --input: #262e40;
   --ring: #477eff; /* blue-400 */
 
   /* Chart hues are shared between light and dark */
@@ -107,6 +109,6 @@
   --sidebar-primary-foreground: #0e1017;
   --sidebar-accent: #262e40;
   --sidebar-accent-foreground: #fdfdfe;
-  --sidebar-border: #414b62;
+  --sidebar-border: #262e40;
   --sidebar-ring: #477eff;
 }

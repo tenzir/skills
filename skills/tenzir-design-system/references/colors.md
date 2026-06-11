@@ -103,14 +103,39 @@ genuinely independent series.
 
 ## Dark Mode
 
-Dark sections in production sit on exactly `neutral-800`. Marketing
-surfaces (website hero panels, stat cards) stay near the background —
-panels barely lighter than `neutral-800` with `lighten-8` hairline borders
-and no shadows — while app dark surfaces step up to `neutral-700`.
+Dark sections in production sit on exactly `neutral-800`, and the flat
+surface model carries over: cards and panels share the `neutral-800`
+background, separated by `neutral-700` hairline borders, with no shadows.
+`neutral-700` is also the well and hover layer — the dark counterpart of
+`neutral-100`. Avoid lifting whole surfaces to `neutral-700`: its blue
+cast reads as heavy navy slabs against the near-black page.
+
+### Ambient Brand Glow
+
+What makes production dark surfaces feel alive is not lighter panels but
+**ambient glow**: large, soft radial gradients of the brand colors bleeding
+in from the edges of the section, fading into `neutral-800`. Blue (toward
+lightblue at the hot core) anchors one side, green the other:
+
+```css
+.dark-hero {
+  background:
+    radial-gradient(50% 70% at 0% 100%,
+      rgb(from var(--tnz-blue-500) r g b / 35%), transparent 70%),
+    radial-gradient(50% 70% at 100% 100%,
+      rgb(from var(--tnz-green-500) r g b / 30%), transparent 70%),
+    var(--tnz-neutral-800);
+}
+```
+
+A quieter variant for section tops is a single deep navy wash —
+`blue-500` at ~20% fading downward into the background. Use glows for
+hero and CTA moments, not behind dense UI or data displays.
 
 Dark mode remaps semantic roles onto the same palette instead of
 introducing new colors: background
-`neutral-800`, surfaces `neutral-700`, text `neutral-50`, and status hues
-one step lighter (400-level) to keep contrast. The mapping lives in
-`tenzir.dark` in [data/tokens.yml](../data/tokens.yml); see
-[tools/css.md](tools/css.md) for the implementation pattern.
+and surfaces `neutral-800`, wells and borders `neutral-700`, text
+`neutral-50`, and status hues one step lighter (400-level) to keep
+contrast. The mapping lives in `tenzir.dark` in
+[data/tokens.yml](../data/tokens.yml); see [tools/css.md](tools/css.md)
+for the implementation pattern.

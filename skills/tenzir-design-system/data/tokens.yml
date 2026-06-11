@@ -190,12 +190,16 @@ tenzir:
 
   dark:
     # Dark mode remaps semantic roles onto the existing palette; the palette
-    # shades themselves are shared between light and dark. Status hues step
-    # one level lighter (400) to keep contrast on dark surfaces.
+    # shades themselves are shared between light and dark. Like light mode,
+    # surfaces are flat: cards and panels share the neutral-800 background
+    # and separate via neutral-700 hairline borders. neutral-700 is also the
+    # well/hover layer. Status hues step one level lighter (400) to keep
+    # contrast on dark surfaces.
     foreground: neutral-50
     background: neutral-800
-    surface: neutral-700
-    border: neutral-600
+    surface: neutral-800
+    muted: neutral-700
+    border: neutral-700
     text_secondary: neutral-300
     text_tertiary: neutral-400
     primary: blue-400

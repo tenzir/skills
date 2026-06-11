@@ -32,13 +32,13 @@ into the YAML first, then regenerate the asset.
 
 | shadcn variable | Tenzir token | Why |
 | --- | --- | --- |
-| `--background` / `--foreground` | `neutral-50` / `neutral-800` | Surfaces are flat: page and cards share neutral-50 |
-| `--card`, `--popover` | `neutral-50` | Same surface; 1px `neutral-200` borders do the separation |
+| `--background` / `--foreground` | `neutral-50` / `neutral-800` (dark: `neutral-800` / `neutral-50`) | Surfaces are flat: page and cards share the background |
+| `--card`, `--popover` | `neutral-50` (dark: `neutral-800`) | Same surface; hairline borders do the separation |
 | `--primary` | `blue-500` (dark: `blue-400`) | Brand primary; dark mode steps one level lighter |
-| `--secondary`, `--muted`, `--accent` | `neutral-100` (dark: `neutral-600`/`neutral-700`) | Subtle fills, wells, and hover states |
+| `--secondary`, `--muted`, `--accent` | `neutral-100` (dark: `neutral-700`) | Subtle fills, wells, and hover states |
 | `--muted-foreground` | `neutral-500` (dark: `neutral-400`) | Tertiary text |
 | `--destructive` | `red-500` (dark: `red-400`) | Danger role |
-| `--border` / `--input` | `neutral-200` / `neutral-250` | Dividers; control outlines |
+| `--border` / `--input` | `neutral-200` / `neutral-250` (dark: `neutral-700`) | Dividers; control outlines |
 | `--ring` | `blue-300` (dark: `blue-400`) | Soft focus ring — shadcn also draws it on buttons |
 | `--chart-1..5` | `graph-1..5` | Chart sequence; `yellow-500` is the sixth series |
 | `--radius` | `radius` (5px) | shadcn derives `rounded-md` = 3px = `radius-tight` |

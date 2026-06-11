@@ -24,8 +24,8 @@ Guidelines:
   interactive surfaces only.
 - Don't mix shadow sizes within the same component category.
 - Shadows are tuned for `neutral-50` surfaces on light backgrounds; in dark
-  mode, rely on surface color steps (`neutral-700` on `neutral-800`) rather
-  than shadows.
+  mode, rely on `neutral-700` hairline borders rather than shadows —
+  surfaces stay on `neutral-800`.
 - Interactive elevation moves one step (e.g., a card from `shadow-xs` to
   `shadow-s` on hover), never more.
 

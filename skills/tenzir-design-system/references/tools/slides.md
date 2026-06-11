@@ -12,7 +12,9 @@ the YAML, the YAML wins.
 - Section dividers / title slides may invert: `neutral-800` background,
   `neutral-50` text — use the light logo variant there. Panels on dark
   slides stay near-background (barely lighter than `neutral-800`) with
-  `lighten-8` hairline borders and no shadows.
+  `lighten-8` hairline borders and no shadows. Give dark hero/CTA slides
+  the ambient brand glow — soft blue and green radial washes from the
+  edges (see the recipe in [colors.md](../colors.md#ambient-brand-glow)).
 - Accents: `blue-500` for emphasis, links, and highlights. The blue→green
   brand gradient is the display accent: hero/title text, section
   kickers, and highlighted stat figures — never body content.

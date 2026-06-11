@@ -238,9 +238,9 @@ tokens.yml):
   --tnz-color-text-secondary: var(--tnz-neutral-300);
   --tnz-color-text-tertiary: var(--tnz-neutral-400);
   --tnz-color-background: var(--tnz-neutral-800);
-  --tnz-color-surface: var(--tnz-neutral-700);
+  --tnz-color-surface: var(--tnz-neutral-800);
   --tnz-color-muted: var(--tnz-neutral-700);
-  --tnz-color-border: var(--tnz-neutral-600);
+  --tnz-color-border: var(--tnz-neutral-700);
   --tnz-color-primary: var(--tnz-blue-400);
   --tnz-color-success: var(--tnz-green-400);
   --tnz-color-info: var(--tnz-lightblue-400);
