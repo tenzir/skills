@@ -17,6 +17,9 @@ needing file-based fonts (offline/Typst) override locally.
 
 - Component specs: shadcn/ui on the theme is the component layer; the
   system contributes tokens and invariants, not component anatomy.
+- Page-level marketing composition (section rhythms, footers, logo
+  walls, illustrations): exchangeable by design — only the core brand
+  lives here.
 - Icon assets: the system specifies the icon style
   ([references/iconography.md](references/iconography.md)), not a bundled
   set. Only the official logos ship here.
