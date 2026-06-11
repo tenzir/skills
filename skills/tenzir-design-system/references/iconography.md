@@ -1,6 +1,6 @@
 # Iconography
 
-Tenzir uses **Material Symbols Rounded** at **light weight (300)**, outlined
+Tenzir uses **Material Symbols Rounded** at **light weight (200)**, outlined
 (no fill) — soft, rounded strokes that match Inter's geometry. This is the
 icon family across product and website; don't mix in other icon sets.
 
@@ -12,9 +12,15 @@ The Tenzir axis settings:
 
 ```css
 .tnz-icon {
-  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 48;
 }
 ```
+
+The **optical size axis is the key to the look**: strokes thin as `opsz`
+grows. Pinning `opsz` at 48 — deliberately higher than the render size —
+is what produces the soft hairline strokes; at `opsz` 24 the same weight
+renders visibly chunkier. If 200/48 gets too faint below ~16px, step up
+to weight 300 rather than lowering the optical size.
 
 ```html
 <span class="material-symbols-rounded tnz-icon">filter_alt</span>
