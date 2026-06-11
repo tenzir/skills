@@ -41,6 +41,7 @@ and the YAML disagree, the YAML wins.
 | Spacing, radius, breakpoints, z-index? | [references/layout.md](references/layout.md) |
 | Shadows, overlays, surface stacking? | [references/elevation.md](references/elevation.md) |
 | Animation durations and easing? | [references/motion.md](references/motion.md) |
+| Which icon set/style? | [references/iconography.md](references/iconography.md) |
 | Implement a button, input, modal, …? | [references/components/](references/components/) — one file per component |
 | Write the CSS variables / theme plain CSS? | [references/tools/css.md](references/tools/css.md) |
 | Configure Tailwind? | [references/tools/tailwind.md](references/tools/tailwind.md) |

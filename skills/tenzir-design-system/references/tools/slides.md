@@ -25,7 +25,8 @@ the YAML, the YAML wins.
 - Secondary text (speaker names, footers, captions): `neutral-500`.
 - Content cards on light slides are flat: `neutral-50` with a 1px
   `neutral-200` border, optionally led by an icon tile (`blue-100`
-  square, `blue-600` icon).
+  square, 1px `blue-200` border, `blue-500` Material Symbols Rounded
+  glyph — see [iconography.md](../iconography.md)).
 
 ## Typography
 

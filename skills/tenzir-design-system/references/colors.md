@@ -144,6 +144,18 @@ A quieter variant for section tops is a single deep navy wash —
 `blue-500` at ~20% fading downward into the background. Use glows for
 hero and CTA moments, not behind dense UI or data displays.
 
+Two rules keep glows clean:
+
+- **Edges**: bleed the glow off the section edge only when the section
+  ends the page (a closing CTA). Mid-page sections anchor the radial
+  centers inside the section and fade to transparent before the edge — a
+  clipped glow leaves a visible seam, especially against dark-mode pages.
+- **Theming**: glowing hero/CTA sections are pinned dark. They stay
+  `neutral-800` in both light and dark mode, and the gradient ramp stays
+  `blue-500`→`green-500` — production uses the identical ramp on dark.
+  In dark mode the glow, not a luminance flip, is what sets the section
+  apart from the surrounding page.
+
 Dark mode remaps semantic roles onto the same palette instead of
 introducing new colors: background
 and surfaces `neutral-800`, wells and borders `neutral-700`, text

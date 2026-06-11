@@ -70,14 +70,17 @@ Contained surface that groups related content on the app background.
   color: var(--tnz-neutral-600);
 }
 
-/* Icon tile: feature/use-case cards lead with a tinted icon square */
+/* Icon tile: feature/use-case cards lead with a tinted, hairline-bordered
+   icon square. The glyph is a Material Symbols Rounded icon at light
+   weight — see ../iconography.md. */
 .card__icon-tile {
   display: grid;
   place-items: center;
-  width: var(--tnz-space-10);
-  height: var(--tnz-space-10);
+  width: 44px;
+  height: 44px;
   background: var(--tnz-blue-100);
-  color: var(--tnz-blue-600);
+  border: 1px solid var(--tnz-blue-200);
+  color: var(--tnz-blue-500);
   border-radius: var(--tnz-radius);
 }
 ```
