@@ -13,10 +13,10 @@ Contained surface that groups related content on the app background.
 
 | Property        | Value                                       |
 | --------------- | ------------------------------------------- |
-| Background      | `neutral-50` on a `neutral-100` page        |
+| Background      | `neutral-50`, same as the page — the border does the separation |
 | Border          | 1px `neutral-200`                           |
 | Border radius   | `radius` (5px)                              |
-| Shadow          | `shadow-xs`; `shadow-s` on hover if interactive |
+| Shadow          | none (flat); `shadow-xs` → `shadow-s` on hover if interactive |
 | Padding default | `space-4` (16px)                            |
 | Padding compact | `space-3` (12px)                            |
 | Content gap     | `space-2` (8px)                             |
@@ -28,7 +28,6 @@ Contained surface that groups related content on the app background.
   background: var(--tnz-neutral-50);
   border: 1px solid var(--tnz-neutral-200);
   border-radius: var(--tnz-radius);
-  box-shadow: var(--tnz-shadow-xs);
   padding: var(--tnz-space-4);
 }
 
@@ -40,6 +39,10 @@ Contained surface that groups related content on the app background.
 .card--interactive {
   cursor: pointer;
   transition: box-shadow var(--tnz-duration-fast) var(--tnz-ease-standard);
+}
+
+.card--interactive {
+  box-shadow: var(--tnz-shadow-xs);
 }
 
 .card--interactive:hover {
@@ -66,17 +69,31 @@ Contained surface that groups related content on the app background.
   line-height: var(--tnz-leading-sm);
   color: var(--tnz-neutral-600);
 }
+
+/* Icon tile: feature/use-case cards lead with a tinted icon square */
+.card__icon-tile {
+  display: grid;
+  place-items: center;
+  width: var(--tnz-space-10);
+  height: var(--tnz-space-10);
+  background: var(--tnz-blue-100);
+  color: var(--tnz-blue-600);
+  border-radius: var(--tnz-radius);
+}
 ```
 
 ## Usage Guidelines
 
 1. **Surfaces**:
-   - Cards sit on the `neutral-100` app background; do not nest cards
+   - Cards share the `neutral-50` page background; the 1px `neutral-200`
+     border alone separates them — do not nest cards
    - For sections inside a card, separate with 1px `neutral-200` dividers
+   - Use `neutral-100` for recessed wells inside a card, not for the card
+     itself
 
 2. **Elevation**:
-   - Static cards stay at `shadow-xs`; only interactive cards elevate on
-     hover
+   - Static cards are flat; only interactive cards carry `shadow-xs` and
+     elevate to `shadow-s` on hover
 
 3. **Accessibility**:
    - An interactive card is a single link or button semantically; avoid

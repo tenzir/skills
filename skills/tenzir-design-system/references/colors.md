@@ -25,11 +25,16 @@ The `neutral-50`…`neutral-800` ramp is the workhorse:
   for text** on light backgrounds
 - `neutral-400` / `neutral-300` — disabled states, subtle icons
 - `neutral-250` / `neutral-200` — borders, dividers, control outlines
-- `neutral-100` — app background, hover fills, input fills
-- `neutral-50` — white, elevated surfaces, text on filled controls
+- `neutral-100` — wells and fills: filled inputs, hover fills, nav strips,
+  heatmap cells
+- `neutral-50` — white: the page background, surfaces, text on filled
+  controls
 
-Surfaces stack as: `neutral-100` page → `neutral-50` surface → 1px
-`neutral-200` borders between them.
+Surfaces are flat: the page is `neutral-50`, and content regions and cards
+sit on the same `neutral-50`, separated by 1px `neutral-200` borders or
+hairline dividers rather than background shifts. `neutral-100` marks
+recessed wells inside a surface, not the page itself. Shadows are reserved
+for floating surfaces (menus, modals, toasts).
 
 ## Brand and Semantic Roles
 
@@ -47,14 +52,22 @@ defined in brand.yml):
 The pattern generalizes: **600 for icons and small text, 500 for fills and
 large elements, 200 for tinted backgrounds, 100 for the faintest wash.**
 
+Status count chips and stat-trend chips follow it directly: a 100–200-level
+tint background with 600-level text of the same hue (e.g. a running count
+on `blue-100` in `blue-600`, a trend delta on `blue-100` in `blue-600`).
+
 ### Brand Gradient
 
-Reserve the blue→green gradient for brand moments (hero elements, accents),
-not for everyday UI:
+The blue→green gradient is the signature display accent, on light and dark
+backgrounds alike:
 
 ```css
 background: linear-gradient(to right, var(--tnz-blue-500), var(--tnz-green-500));
 ```
+
+Use it for hero headlines, section kickers/overlines, and highlighted stat
+figures — applied as a text gradient. Never use it for body text, UI
+controls, or large fills.
 
 ## Contrast
 
@@ -83,7 +96,17 @@ blue, lightblue, purple, pink, orange, yellow (all 500-level). Single-series
 charts use `blue-500` alone. Use the 300-level of the same hue for hover or
 area fills.
 
+For **paired series** — two facets of the same measure, like
+ingress/egress or read/write — use one hue at two shades (`blue-500` +
+`blue-300`) instead of two hues. Reserve the multi-hue sequence for
+genuinely independent series.
+
 ## Dark Mode
+
+Dark sections in production sit on exactly `neutral-800`. Marketing
+surfaces (website hero panels, stat cards) stay near the background —
+panels barely lighter than `neutral-800` with `lighten-8` hairline borders
+and no shadows — while app dark surfaces step up to `neutral-700`.
 
 Dark mode remaps semantic roles onto the same palette instead of
 introducing new colors: background

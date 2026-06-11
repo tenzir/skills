@@ -10,10 +10,19 @@ the YAML, the YAML wins.
 - Default slides: `neutral-50` (#FDFDFE) background, `neutral-800`
   (#0E1017) text.
 - Section dividers / title slides may invert: `neutral-800` background,
-  `neutral-50` text — use the light logo variant there.
-- Accents: `blue-500` for emphasis, links, and highlights; the blue→green
-  brand gradient only for hero/title moments, never body content.
+  `neutral-50` text — use the light logo variant there. Panels on dark
+  slides stay near-background (barely lighter than `neutral-800`) with
+  `lighten-8` hairline borders and no shadows.
+- Accents: `blue-500` for emphasis, links, and highlights. The blue→green
+  brand gradient is the display accent: hero/title text, section
+  kickers, and highlighted stat figures — never body content.
+- Content slides follow the kicker pattern: a small `text-capitalized`
+  or gradient overline, a large semibold heading, and a `neutral-500`
+  subtitle.
 - Secondary text (speaker names, footers, captions): `neutral-500`.
+- Content cards on light slides are flat: `neutral-50` with a 1px
+  `neutral-200` border, optionally led by an icon tile (`blue-100`
+  square, `blue-600` icon).
 
 ## Typography
 

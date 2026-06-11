@@ -11,8 +11,9 @@
  */
 
 :root {
-  /* Surfaces: neutral-100 page, neutral-50 cards/popovers */
-  --background: #f7f8fa;
+  /* Surfaces are flat: page, cards, and popovers share neutral-50;
+     1px neutral-200 borders do the separation. */
+  --background: #fdfdfe;
   --foreground: #0e1017;
   --card: #fdfdfe;
   --card-foreground: #0e1017;
@@ -22,21 +23,22 @@
   /* Actions */
   --primary: #0a54ff; /* blue-500 */
   --primary-foreground: #fdfdfe;
-  --secondary: #f0f1f5; /* neutral-200 */
+  --secondary: #f7f8fa; /* neutral-100 */
   --secondary-foreground: #0e1017;
   --destructive: #ff0a33; /* red-500 */
   --destructive-foreground: #fdfdfe;
 
   /* States */
-  --muted: #f0f1f5; /* neutral-200 */
+  --muted: #f7f8fa; /* neutral-100 wells */
   --muted-foreground: #68738d; /* neutral-500 */
-  --accent: #f7f8fa; /* neutral-100 hover fill on cards */
+  --accent: #f7f8fa; /* neutral-100 hover fill */
   --accent-foreground: #0e1017;
 
-  /* Lines and focus */
+  /* Lines and focus. The ring stays soft (blue-300) because shadcn also
+     renders it on buttons; text inputs take a primary border on focus. */
   --border: #f0f1f5; /* neutral-200 */
   --input: #e3e6ed; /* neutral-250 control outlines */
-  --ring: #0a54ff; /* blue-500 — active borders are primary */
+  --ring: #adc6ff; /* blue-300 */
 
   /* Charts: graph-1..5; use yellow-500 #edae1d for a sixth series */
   --chart-1: #0a54ff;
@@ -53,7 +55,7 @@
   --sidebar-accent: #f0f1f5;
   --sidebar-accent-foreground: #0e1017;
   --sidebar-border: #f0f1f5;
-  --sidebar-ring: #0a54ff;
+  --sidebar-ring: #adc6ff;
 
   /* Typography */
   --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;

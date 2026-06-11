@@ -15,10 +15,13 @@ surface:
 | `shadow-l`  | Modals and sidepanels — highest elevation    |
 | `shadow-m`  | Popups: menus, popovers, dropdown listboxes  |
 | `shadow-s`  | Tooltips and toasts                          |
-| `shadow-xs` | Subtle elevation: cards, segmented-control thumbs |
+| `shadow-xs` | Subtle elevation: interactive cards, segmented-control thumbs |
 
 Guidelines:
 
+- Static surfaces are flat: cards and content regions separate via 1px
+  `neutral-200` borders, not shadows. Shadows mark floating or
+  interactive surfaces only.
 - Don't mix shadow sizes within the same component category.
 - Shadows are tuned for `neutral-50` surfaces on light backgrounds; in dark
   mode, rely on surface color steps (`neutral-700` on `neutral-800`) rather

@@ -32,17 +32,25 @@ into the YAML first, then regenerate the asset.
 
 | shadcn variable | Tenzir token | Why |
 | --- | --- | --- |
-| `--background` / `--foreground` | `neutral-100` / `neutral-800` | App background; default text |
-| `--card`, `--popover` | `neutral-50` | Elevated surfaces on the neutral-100 page |
+| `--background` / `--foreground` | `neutral-50` / `neutral-800` | Surfaces are flat: page and cards share neutral-50 |
+| `--card`, `--popover` | `neutral-50` | Same surface; 1px `neutral-200` borders do the separation |
 | `--primary` | `blue-500` (dark: `blue-400`) | Brand primary; dark mode steps one level lighter |
-| `--secondary`, `--muted` | `neutral-200` (dark: `neutral-600`/`neutral-700`) | Subtle fills |
+| `--secondary`, `--muted`, `--accent` | `neutral-100` (dark: `neutral-600`/`neutral-700`) | Subtle fills, wells, and hover states |
 | `--muted-foreground` | `neutral-500` (dark: `neutral-400`) | Tertiary text |
-| `--accent` | `neutral-100` (dark: `neutral-600`) | Hover fill on cards/menus |
 | `--destructive` | `red-500` (dark: `red-400`) | Danger role |
 | `--border` / `--input` | `neutral-200` / `neutral-250` | Dividers; control outlines |
-| `--ring` | `blue-500` (dark: `blue-400`) | Active borders are primary |
+| `--ring` | `blue-300` (dark: `blue-400`) | Soft focus ring — shadcn also draws it on buttons |
 | `--chart-1..5` | `graph-1..5` | Chart sequence; `yellow-500` is the sixth series |
 | `--radius` | `radius` (5px) | shadcn derives `rounded-md` = 3px = `radius-tight` |
+
+The ring is deliberately not primary: shadcn applies `--ring` to buttons as
+well, where a `blue-500` ring reads as a broken double border on primary
+buttons. To reproduce the product's focused-input treatment (primary border
+plus soft glow), add the border on the Input component instead:
+
+```tsx
+<Input className="focus-visible:border-primary" />
+```
 
 Shadows are deliberately not overridden — shadcn's defaults are subtle and
 fit the system; mapping the four Tenzir shadow tokens onto shadcn's
