@@ -165,28 +165,5 @@ Binary switch control for on/off states.
 
 ## Usage Guidelines
 
-1. **When to use toggles**:
-   - Immediate on/off settings
-   - Binary choices that take effect immediately
-   - Settings that don't require form submission
-
-2. **When to use checkbox instead**:
-   - Form fields that require submission
-   - Multiple selections
-   - Yes/no questions in forms
-
-3. **Labeling**:
-   - Place label to the left or right of toggle
-   - Label should describe the "on" state
-   - Consider showing current state text (On/Off)
-
-4. **Behavior**:
-   - Changes should take effect immediately
-   - Consider showing loading state for async changes
+1. **Behavior**:
    - Animate the knob transition with the base duration (200ms)
-
-5. **Accessibility**:
-   - Use `role="switch"` and `aria-checked`
-   - Support keyboard activation (Space)
-   - Ensure visible focus state
-   - Consider announcing state changes to screen readers

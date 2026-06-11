@@ -42,7 +42,7 @@ and the YAML disagree, the YAML wins.
 | Shadows, overlays, surface stacking? | [references/elevation.md](references/elevation.md) |
 | Animation durations and easing? | [references/motion.md](references/motion.md) |
 | Which icon set/style? | [references/iconography.md](references/iconography.md) |
-| Implement a button, input, modal, …? | [references/components/](references/components/) — one file per component |
+| Implement a button, input, tag, …? | [references/components/](references/components/) — one file per component |
 | Write the CSS variables / theme plain CSS? | [references/tools/css.md](references/tools/css.md) |
 | Configure Tailwind? | [references/tools/tailwind.md](references/tools/tailwind.md) |
 | Theme a shadcn/ui project? | [references/tools/shadcn.md](references/tools/shadcn.md) |
@@ -58,9 +58,11 @@ existing component patterns over bespoke styling.
 
 Specs in [references/components/](references/components/): buttons,
 input-field, search-input, dropdown, checkbox, radio-button, toggle-switch,
-segmented-control, tag, badge, tab-bar, toast, hyperlinks, tooltip, modal,
-card, menu. Each covers sizes, states, and a CSS implementation using
-`--tnz-` custom properties.
+segmented-control, tag, badge, tab-bar, toast, hyperlinks, card. Anything
+beyond these (tooltips, modals, menus, …) needs no Tenzir spec — use a
+themed component library
+([references/tools/shadcn.md](references/tools/shadcn.md)) plus the
+elevation and layout rules.
 
 ## Conventions
 

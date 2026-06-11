@@ -135,26 +135,3 @@ Specialized input for search functionality with optional search icon and clear b
   --search-focus-ring: var(--tnz-primary-200);
 }
 ```
-
-## Usage Guidelines
-
-1. **Icon placement**:
-   - Search icon on left (optional) - helps users identify search field
-   - Clear button on right - appears when input has value
-
-2. **Search icon**:
-   - Include when search field is not obviously identifiable
-   - Can omit in search-focused contexts (e.g., search page)
-
-3. **Clear button**:
-   - Only show when input has content
-   - Clears input and typically refocuses
-
-4. **Placeholder text**:
-   - Use "Search..." as default
-   - Can be more specific: "Search users...", "Search files..."
-
-5. **Accessibility**:
-   - Include `role="search"` on containing element
-   - Use `aria-label` if no visible label
-   - Clear button needs accessible name

@@ -137,103 +137,11 @@ Durations: use Tailwind's arbitrary values or built-ins matching the motion
 tokens — `duration-150` (fast), `duration-200` (base), `duration-300`
 (slow), `duration-500` (slower).
 
-## Tailwind v3 (`tailwind.config.js`)
+## Tailwind v3
 
-```js
-module.exports = {
-  theme: {
-    fontFamily: {
-      sans: ['"Inter Variable"', "Inter", "system-ui", "sans-serif"],
-      mono: ['"JetBrains Mono Variable"', '"JetBrains Mono"', "monospace"],
-    },
-    fontSize: {
-      xxs: ["0.625rem", { lineHeight: "0.875rem" }],
-      xs: ["0.75rem", { lineHeight: "1.125rem" }],
-      sm: ["0.875rem", { lineHeight: "1.25rem" }],
-      base: ["1rem", { lineHeight: "1.5rem" }],
-      lg: ["1.125rem", { lineHeight: "1.75rem" }],
-      xl: ["1.25rem", { lineHeight: "1.75rem" }],
-      "2xl": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.005em" }],
-      "3xl": ["1.875rem", { lineHeight: "2.25rem", letterSpacing: "-0.01em" }],
-      "4xl": ["2.25rem", { lineHeight: "2.5rem", letterSpacing: "-0.015em" }],
-      "5xl": ["3rem", { lineHeight: "3.5rem", letterSpacing: "-0.02em" }],
-    },
-    fontWeight: {
-      normal: "400",
-      medium: "500",
-      semibold: "600",
-    },
-    borderRadius: {
-      none: "0",
-      tight: "3px",
-      DEFAULT: "5px",
-      full: "9999px", // capsule shapes (radius-pill)
-    },
-    boxShadow: {
-      l: "0px 20px 40px -16px #0E101733, 0px 8px 16px -8px #0E101733",
-      m: "0px 10px 20px -8px #0E101733, 0px 4px 8px -6px #0E101733",
-      s: "0px 8px 16px -8px #0E101733, 0px 3px 6px -3px #0E101733",
-      xs: "0px 8px 16px -8px #0E10171A, 0px 3px 6px -3px #0E10171A",
-      none: "none",
-    },
-    extend: {
-      colors: {
-        neutral: {
-          50: "#FDFDFE", 100: "#F7F8FA", 200: "#F0F1F5", 250: "#E3E6ED",
-          300: "#CED3DE", 400: "#959DB1", 500: "#68738D", 600: "#414B62",
-          700: "#262E40", 800: "#0E1017",
-        },
-        blue: {
-          50: "#F8F9FC", 100: "#F0F4FF", 200: "#E0EAFF", 300: "#ADC6FF",
-          400: "#477EFF", 500: "#0A54FF", 600: "#0043E0",
-        },
-        green: {
-          100: "#F2FDF6", 200: "#E4FBEC", 300: "#B8F5CE", 400: "#5EE891",
-          500: "#29E06C", 600: "#1AB252",
-        },
-        lightblue: {
-          100: "#F0FAFF", 200: "#E0F5FF", 300: "#ADE4FF", 400: "#47C2FF",
-          500: "#0AADFF", 600: "#0096E0",
-        },
-        purple: {
-          100: "#FCF0FF", 200: "#F9E0FF", 300: "#EFADFF", 400: "#DB47FF",
-          500: "#CF0AFF", 600: "#B400E0",
-        },
-        pink: {
-          100: "#FFF0F9", 200: "#FFE0F4", 300: "#FFADE1", 400: "#FF47BC",
-          500: "#FF0AA5", 600: "#E0008E",
-        },
-        orange: {
-          100: "#FFF5F0", 200: "#FFEBE0", 300: "#FFC9AD", 400: "#FF8547",
-          500: "#FF5C0A", 600: "#E04B00",
-        },
-        yellow: {
-          100: "#FFF9F0", 200: "#FEF6E1", 300: "#F9E4B4", 400: "#F1C255",
-          500: "#EDAE1D", 600: "#D09611",
-        },
-        red: {
-          100: "#FFF0F2", 200: "#FFE0E5", 300: "#FFADBB", 400: "#FF4766",
-          500: "#FF0A33", 600: "#E00025",
-        },
-        primary: "#0A54FF",
-        success: "#1AB252",
-        info: "#0096E0",
-        warning: "#D09611",
-        error: "#FF0A33",
-      },
-      transitionTimingFunction: {
-        standard: "cubic-bezier(0.4, 0, 0.2, 1)",
-        decelerate: "cubic-bezier(0, 0, 0.2, 1)",
-        accelerate: "cubic-bezier(0.4, 0, 1, 1)",
-      },
-      zIndex: {
-        sticky: "100", dropdown: "200", overlay: "300", sidepanel: "400",
-        modal: "500", popover: "600", toast: "700", tooltip: "800",
-      },
-    },
-  },
-};
-```
+For legacy v3 projects, translate the `@theme` values above into
+`tailwind.config.js` (`theme.fontSize`, `colors`, `borderRadius`,
+`boxShadow`); the YAML data files hold every value.
 
 ## Notes
 

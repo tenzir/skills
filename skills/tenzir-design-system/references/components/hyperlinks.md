@@ -51,7 +51,5 @@ Hyperlinks use an underline style that changes on hover.
 
 ## Usage Guidelines
 
-1. **Use consistent sizing** - Match the hyperlink font size to the surrounding text
-2. **Underline style** - Use bottom border (not text-decoration) for consistent styling
-3. **Color changes on hover** - Only the underline color changes, text remains `neutral-800`
-4. **Accessibility** - Ensure sufficient contrast between link and surrounding text
+1. **Underline style** - Use bottom border (not text-decoration) for consistent styling
+2. **Color changes on hover** - Only the underline color changes, text remains `neutral-800`

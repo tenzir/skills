@@ -2,15 +2,6 @@
 
 A toggle component for switching between mutually exclusive options, available in icon and text variants.
 
-## Contents
-
-- [Props](#props)
-- [Container Specifications](#container-specifications)
-- [Size Specifications](#size-specifications)
-- [Button States](#button-states)
-- [CSS Implementation](#css-implementation)
-- [Usage Guidelines](#usage-guidelines)
-
 ## Props
 
 | Prop     | Values                              |
@@ -218,28 +209,7 @@ A toggle component for switching between mutually exclusive options, available i
    - **Icon** - Use for switching between view modes (e.g., grid/list, table/chart)
    - **Text** - Use for time ranges, categories, or labeled options
 
-2. **Amount**:
-   - **Two** - Binary choices (e.g., On/Off, Grid/List)
-   - **Three** - Common for time ranges (e.g., 1D/1W/1M)
-   - **Four** - Extended options (e.g., 1D/1W/1M/1Y)
-
-3. **Size selection**:
-   - **XS (24px)** - Compact UI, embedded in headers
-   - **S (28px)** - Default for most use cases
-   - **M (32px)** - Icon variants, more prominent controls
-
-4. **Active state**:
-   - Only one option can be active at a time
-   - Active button has elevated appearance (shadow + white background)
-   - Inactive buttons remain flat and muted
-   - **No hover/focus states** - transition happens only on click/selection
-
-5. **Accessibility**:
-   - Use `role="group"` on container with `aria-label`
-   - Use `role="radio"` on buttons with `aria-checked`
-   - Ensure keyboard navigation (arrow keys to move, Enter/Space to select)
-
-6. **Common patterns**:
+2. **Common patterns**:
    - View switchers: Grid | List | Table
    - Time filters: 1D | 1W | 1M | 1Y
    - Data views: Chart | Table | Raw

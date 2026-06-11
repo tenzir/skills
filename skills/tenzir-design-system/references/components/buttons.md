@@ -2,14 +2,6 @@
 
 Tenzir's button system provides standard, destructive, and floating button variants across multiple sizes with consistent styling for all interactive states.
 
-## Contents
-
-- [Standard Buttons](#standard-buttons)
-- [Delete Buttons](#delete-buttons-destructive)
-- [Floating Buttons](#floating-buttons)
-- [CSS Custom Properties](#css-custom-properties)
-- [Usage Guidelines](#usage-guidelines)
-
 ## Standard Buttons
 
 ### Props
@@ -473,41 +465,9 @@ box-shadow:
 
 ## Usage Guidelines
 
-### Choosing a Variant
-
-1. **Standard buttons:**
-   - **Primary** - Main action, one per section (e.g., "Save", "Submit")
-   - **Secondary** - Alternative actions (e.g., "Cancel", "Export")
-   - **Tertiary** - Low-emphasis actions (e.g., "Learn more", "Skip")
-
-2. **Delete buttons:**
-   - Use sparingly for truly destructive actions
-   - Require confirmation for irreversible actions
-   - Use clear, specific labels (e.g., "Delete project" not just "Delete")
-   - Prefer secondary/tertiary for less critical destructive actions
-
-3. **Floating buttons:**
+1. **Floating buttons:**
    - **Outside** - Buttons floating over content areas (cards, images)
    - **Inside** - Buttons within containers that already have elevation
    - **Single** - Copy button, action button
    - **Double** - Common pairs like Copy + Run
    - **Triple** - Related action sets
-
-### Choosing a Size
-
-- **XS (24px)** - Inline actions, compact UI
-- **S (28px)** - Secondary UI, toolbars
-- **M (32px)** - Default size, most common
-- **L (36px)** - Hero sections, prominent CTAs
-
-### Icon Usage
-
-- Leading icons clarify the action (e.g., download, add, delete)
-- Icon-only buttons need accessible labels (`aria-label`)
-- Use 16px icons for XS/S sizes, 20px for M/L sizes
-
-### Accessibility
-
-- Always include `aria-label` for icon-only buttons
-- Avoid disabling without explanation
-- Consider showing tooltips explaining why an action is unavailable

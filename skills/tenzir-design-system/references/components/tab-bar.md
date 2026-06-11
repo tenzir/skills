@@ -218,28 +218,6 @@ Horizontal navigation component for switching between content sections.
 
 ## Usage Guidelines
 
-1. **Tab count**:
-   - **Two** - Binary choices (e.g., Input/Output)
-   - **Three-Four** - Common for main navigation sections
-   - **Five-Six** - Use sparingly; consider overflow handling
-
-2. **Active indicator**:
-   - 2px bottom border in primary-500 (blue)
-   - Only one tab can be active at a time
-
-3. **Notification counter**:
-   - Use to show counts (e.g., unread items, results)
-   - Keep numbers concise (use abbreviations for large numbers)
-   - Counter inherits hover state from parent tab
-
-4. **Behavior**:
+1. **Behavior**:
    - Tabs should be clickable across their full height
-   - Hover state applies to text container only
    - Active state overrides hover styling
-
-5. **Accessibility**:
-   - Use `role="tablist"` on container
-   - Use `role="tab"` on each tab
-   - Use `aria-selected` for active state
-   - Use `aria-disabled` for disabled tabs
-   - Support keyboard navigation (arrow keys)

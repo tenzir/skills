@@ -1,69 +1,37 @@
 # Elevation
 
-Shadows and overlay dims. Values live in
-[data/tokens.yml](../data/tokens.yml) (`tenzir.shadow`, `tenzir.opacity`);
-this file explains how surfaces stack.
+Shadow values live in [data/tokens.yml](../data/tokens.yml)
+(`tenzir.shadow`, `tenzir.opacity`).
 
 ## Shadows Are the Last Resort
 
-Tenzir surfaces separate by **border, backdrop, or color — shadows come
-last**, and only where nothing else does the job:
+Surfaces separate by **border, backdrop, or color — not shadows**:
 
-- Static surfaces (cards, panels, content regions): flat, separated by
-  1px `neutral-200` borders. No shadow.
-- Modals and sidepanels: the `dim-50` backdrop is the separator. No
-  shadow needed.
-- Tooltips: the inverted `neutral-800` surface separates itself. No
-  shadow needed.
-- **Popups that float over same-colored content** — menus, popovers,
-  dropdown listboxes, toasts — are the one place a shadow earns its
-  keep: use `shadow-m` (toasts: `shadow-s`).
-- Interactive nuance (an active segmented-control thumb, a hovering
-  interactive card) may carry `shadow-xs`/`shadow-s`.
+- Static surfaces (cards, panels, regions): flat, 1px `neutral-200`
+  borders.
+- Modals and sidepanels: the `dim-50` backdrop separates. No shadow.
+- Tooltips: the inverted `neutral-800` surface separates. No shadow.
+- **Popups floating over same-colored content** are the exception:
+  menus, popovers, listboxes use `shadow-m`; toasts `shadow-s`.
+- Interactive nuance (active thumbs, hovering cards) may use
+  `shadow-xs` → `shadow-s`, one step max.
 
-## Shadow Scale
+Component libraries like shadcn/ui already behave this way — keep their
+default shadows, add none. In dark mode, skip shadows entirely: surfaces
+stay `neutral-800` with `neutral-700` hairline borders.
 
-When a shadow is warranted, every shadow is **two layers** of
-`neutral-800` at varying opacity — both layers are required for the
-correct depth effect:
+When used, every shadow is **two layers** of `neutral-800` (see
+tokens.yml) — both layers required.
 
-| Token       | Use                                          |
-| ----------- | -------------------------------------------- |
-| `shadow-m`  | Popups: menus, popovers, dropdown listboxes  |
-| `shadow-s`  | Toasts; hover state of interactive cards     |
-| `shadow-xs` | Subtle interactive nuance (thumbs, cards)    |
-| `shadow-l`  | Reserved: page-level emphasis where a backdrop is unavailable |
-
-Guidelines:
-
-- Don't mix shadow sizes within the same component category.
-- Shadows are tuned for `neutral-50` surfaces on light backgrounds; in dark
-  mode, rely on `neutral-700` hairline borders rather than shadows —
-  surfaces stay on `neutral-800`.
-- Interactive elevation moves one step (e.g., a card from `shadow-xs` to
-  `shadow-s` on hover), never more.
-- This matches component libraries like shadcn/ui out of the box: their
-  default shadows on overlay components are fine; don't add more.
-
-## Dim and Lighten Overlays
-
-Dims darken with `neutral-800` at the `dim-*` opacities; lightens brighten
-with `neutral-50`:
+## Overlay Dims
 
 | Token        | Use                                          |
 | ------------ | -------------------------------------------- |
 | `dim-50`     | Full-page backdrop behind modals/sidepanels  |
-| `dim-20`     | Pressed state on filled (primary/error) buttons |
+| `dim-20`     | Pressed state on filled buttons              |
 | `dim-8`      | Subtle darkening                             |
 | `lighten-20` / `lighten-8` | Shortcut hints on filled buttons |
 
-## Pairing with Z-Index
-
-Elevated surfaces combine a **z-index layer** ([layout.md](layout.md))
-with whichever separator fits:
-
-- Modal: `z-modal` + `dim-50` backdrop at `z-overlay`
-- Sidepanel: `z-sidepanel` + `dim-50` backdrop
-- Menu/popover: `z-popover` + `shadow-m`, no backdrop
-- Toast: `z-toast` + `shadow-s`
-- Tooltip: `z-tooltip`, inverted surface, no shadow
+Layering: modal `z-modal` + backdrop at `z-overlay`; sidepanel
+`z-sidepanel` + backdrop; menu/popover `z-popover`; toast `z-toast`;
+tooltip `z-tooltip` (see [layout.md](layout.md)).

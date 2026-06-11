@@ -138,26 +138,3 @@ Square selection control for multiple choice options.
   --checkbox-focus-ring: var(--tnz-primary-200);
 }
 ```
-
-## Usage Guidelines
-
-1. **When to use checkboxes**:
-   - Multiple selections from a list
-   - Binary yes/no choices
-   - Terms and conditions acceptance
-
-2. **Labeling**:
-   - Always pair with a visible label
-   - Label should be clickable to toggle state
-   - Keep labels concise
-
-3. **Grouping**:
-   - Group related checkboxes vertically
-   - Use fieldset and legend for groups
-   - Consider "Select all" for long lists
-
-4. **Accessibility**:
-   - Use native `<input type="checkbox">` when possible
-   - Include `aria-checked` for custom implementations
-   - Ensure focus is visible (2px primary-200 ring)
-   - Support keyboard activation (Space)

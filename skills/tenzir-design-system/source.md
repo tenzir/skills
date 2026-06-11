@@ -1,29 +1,23 @@
 # Source and Scope
 
-This skill is the canonical home of the Tenzir design system. The YAML files
-under [data/](data/) are authoritative for all values; the markdown
-references explain how to choose and apply them. Evolve the system here —
-change the YAML first, then update any markdown or downstream consumer that
-depends on the changed values.
+The YAML files under [data/](data/) are authoritative for all values; the
+markdown explains how to choose and apply them. Change the YAML first, then
+update dependent markdown and downstream consumers.
 
-## Relationship to other repositories
+## Downstream
 
-`tenzir/content` (`brand/_brand.yml`, `brand/_tenzir.yml`) currently carries
-its own copy of these definitions for Quarto/Typst rendering. Follow-up:
-repoint that repository to consume this skill's [data/](data/) files so the
-values exist in exactly one place. Until then, treat this skill as the source
-of truth and propagate changes downstream.
+`tenzir/content` (`brand/_brand.yml`, `brand/_tenzir.yml`) carries its own
+copy of these definitions for Quarto/Typst rendering. Follow-up: repoint it
+to this skill's [data/](data/) files. Until then, propagate changes there.
 
-Unlike the content repository, this skill references fonts via Google Fonts
-(`source: google` in [data/brand.yml](data/brand.yml)) instead of vendoring
-TTF files. Consumers that need file-based fonts (offline rendering, Typst)
-should override the font source locally.
+This skill references fonts via Google Fonts (`source: google`); consumers
+needing file-based fonts (offline/Typst) override locally.
 
 ## Non-goals
 
-- **Component specs** for tables, avatars, pagination, progress indicators,
-  and skeletons: the system does not cover them yet; add specs here when a
-  real need appears rather than inventing them speculatively.
-- **Icon library**: the content repository's `brand/assets/icons/` are
-  website content, not design-system assets. This skill ships only the
-  official logos.
+- Component specs for standard overlays and widgets (tooltips, modals,
+  menus, tables, pagination, …): a themed component library plus the token
+  and elevation rules covers them.
+- Icon assets: the system specifies the icon style
+  ([references/iconography.md](references/iconography.md)), not a bundled
+  set. Only the official logos ship here.

@@ -35,16 +35,5 @@ fast/accelerate, large surfaces = slow/decelerate.
 
 ## Reduced Motion
 
-Always honor the user preference — disable non-essential transitions:
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-```
+Always honor `prefers-reduced-motion: reduce` by disabling non-essential
+transitions and animations.

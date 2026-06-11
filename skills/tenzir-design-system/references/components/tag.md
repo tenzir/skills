@@ -2,16 +2,6 @@
 
 Colored label component for categorization, filtering, and metadata display.
 
-## Contents
-
-- [Props](#props)
-- [Size Specifications](#size-specifications)
-- [Typography](#typography)
-- [Color Specifications](#color-specifications)
-- [Special States](#special-states-no-color-variant-only)
-- [CSS Implementation](#css-implementation)
-- [Usage Guidelines](#usage-guidelines)
-
 ## Props
 
 | Prop      | Values                                                                                    |
@@ -256,27 +246,15 @@ Each color has a 200-level background, transparent border (default), solid 300-l
 
 ## Usage Guidelines
 
-1. **Color selection**:
-   - Use colors consistently for categories (e.g., blue for types, green for status)
-   - Grey for neutral/uncategorized items
-   - None for placeholder "No tag" state
-
-2. **Variant usage**:
+1. **Variant usage**:
    - **Default** - Display-only tag
    - **Add** - Shows + icon on hover for adding tags
    - **Remove** - Shows x icon on hover for removing tags
 
-3. **State usage**:
-   - **Default** - Normal display
-   - **Hover** - More visible border on interaction
+2. **State usage**:
    - **Included** - Filter is active (blue highlight)
    - **Excluded** - Filter is negated (red highlight)
 
-4. **Icon behavior**:
+3. **Icon behavior**:
    - Icons only appear on hover for Add/Remove variants
    - Icon color matches text color
-
-5. **Accessibility**:
-   - Use `role="button"` for interactive tags
-   - Include `aria-label` describing the action
-   - For filter tags, use `aria-pressed` to indicate state

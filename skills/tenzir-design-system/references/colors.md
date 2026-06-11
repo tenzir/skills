@@ -1,165 +1,103 @@
 # Colors
 
-How to choose Tenzir colors. All values live in
-[data/brand.yml](../data/brand.yml) (palette and semantic roles) and
-[data/tokens.yml](../data/tokens.yml) (alpha tints, overlays, dark mode);
-this file explains how to pick among them.
+Values live in [data/brand.yml](../data/brand.yml) (palette, semantic
+roles) and [data/tokens.yml](../data/tokens.yml) (tints, overlays, dark
+mode); this file explains how to choose.
 
-## Design Philosophy
+## Neutral-First
 
-Tenzir UIs are neutral-first: shades of grey carry the layout, and brighter
-colors appear sparingly for emphasis, status, and data. Blue and green are
-the brand pair — they convey trustworthiness, freshness, safety, and balance
-for the security domain.
+Shades of grey carry the layout; color appears only where it encodes
+meaning — a primary action, a status, a data series. Blue and green are
+the brand pair.
 
-When in doubt: build the screen entirely from neutrals, then add color only
-where it encodes meaning (a primary action, a status, a data series).
+- `neutral-800` — black: default text, icons
+- `neutral-700`/`neutral-600` — secondary text, inactive navigation
+- `neutral-500` — tertiary text, placeholders; the lightest text grey
+- `neutral-400`/`neutral-300` — disabled states, subtle icons
+- `neutral-250`/`neutral-200` — borders, dividers, control outlines
+- `neutral-100` — wells: filled inputs, hover fills, nav strips
+- `neutral-50` — white: page, surfaces, text on filled controls
 
-## Neutrals
+Surfaces are flat: page, regions, and cards all sit on `neutral-50`,
+separated by 1px `neutral-200` borders — `neutral-100` marks recessed
+wells, never the page. Shadows are reserved for floating surfaces
+([elevation.md](elevation.md)).
 
-The `neutral-50`…`neutral-800` ramp is the workhorse:
+## Roles
 
-- `neutral-800` — black, default text, icons
-- `neutral-700` / `neutral-600` — secondary text, inactive navigation
-- `neutral-500` — tertiary text, placeholders; the **lightest grey allowed
-  for text** on light backgrounds
-- `neutral-400` / `neutral-300` — disabled states, subtle icons
-- `neutral-250` / `neutral-200` — borders, dividers, control outlines
-- `neutral-100` — wells and fills: filled inputs, hover fills, nav strips,
-  heatmap cells
-- `neutral-50` — white: the page background, surfaces, text on filled
-  controls
+| Role      | Icon/text       | Subtle background |
+| --------- | --------------- | ----------------- |
+| `primary` | `blue-500`      | `blue-200`        |
+| `success` | `green-600`     | `green-200`       |
+| `info`    | `lightblue-600` | `lightblue-200`   |
+| `warning` | `yellow-600`    | `yellow-200`      |
+| `danger`  | `red-500`       | `red-200`         |
 
-Surfaces are flat: the page is `neutral-50`, and content regions and cards
-sit on the same `neutral-50`, separated by 1px `neutral-200` borders or
-hairline dividers rather than background shifts. `neutral-100` marks
-recessed wells inside a surface, not the page itself. Shadows are reserved
-for floating surfaces (menus, modals, toasts).
+The pattern generalizes: **600 for icons and small text, 500 for fills,
+200 for tinted backgrounds, 100 for the faintest wash.** Status and trend
+chips apply it directly: 100/200-level tint background, 600-level text of
+the same hue.
 
-## Brand and Semantic Roles
+## Contrast
 
-Use semantic role names rather than raw hues where possible (roles are
-defined in brand.yml):
+- 500-level hues on light backgrounds pass only for large text/icons; use
+  600-level for small text. `neutral-500` is the minimum text grey.
+- On color-500 fills, use `neutral-50` text.
+- On `neutral-800`, body text is `neutral-300` or lighter (`neutral-400`
+  for captions only); lead-ins are semibold `neutral-50`.
+- Never encode meaning by color alone.
 
-| Role        | Token (icon/text)  | Subtle background |
-| ----------- | ------------------ | ----------------- |
-| `primary`   | `blue-500`         | `blue-200`        |
-| `success`   | `green-600`        | `green-200`       |
-| `info`      | `lightblue-600`    | `lightblue-200`   |
-| `warning`   | `yellow-600`       | `yellow-200`      |
-| `danger`    | `red-500`          | `red-200`         |
-
-The pattern generalizes: **600 for icons and small text, 500 for fills and
-large elements, 200 for tinted backgrounds, 100 for the faintest wash.**
-
-Status count chips and stat-trend chips follow it directly: a 100–200-level
-tint background with 600-level text of the same hue (e.g. a running count
-on `blue-100` in `blue-600`, a trend delta on `blue-100` in `blue-600`).
-
-### Brand Gradient
-
-The blue→green gradient is the signature display accent, on light and dark
-backgrounds alike:
+## Brand Gradient
 
 ```css
 background: linear-gradient(to right, var(--tnz-blue-500), var(--tnz-green-500));
 ```
 
-Use it for hero headlines, section kickers/overlines, and highlighted stat
-figures — applied as a text gradient. Never use it for body text, UI
-controls, or large fills.
+The display accent — hero headlines, section kickers, stat figures — as
+text, on light and dark alike (the ramp never changes). Never body text,
+controls, or fills. Size gradient text to its content
+(`width: fit-content`) so each element runs the full ramp; a short label
+on a container-wide gradient samples only blue.
 
-Two rules for gradient text:
+## Tints and Overlays
 
-- **The gradient spans the glyphs, not the container.** Size the element
-  to its content (`display: inline-block` / `width: fit-content`);
-  otherwise short labels sample only the blue end of the ramp.
-- **Each element runs the full ramp.** Three stat figures side by side
-  each go blue→green individually — they don't share one gradient across
-  the row.
-
-## Contrast
-
-- On white/light backgrounds, 500-level hues only pass WCAG AA for large
-  text and icons; use the **600 level for small text** (links, labels).
-- `neutral-500` is the minimum text grey on `neutral-50`/`neutral-100`;
-  anything lighter is decorative only.
-- On color-500 fills (e.g., primary buttons), use `neutral-50` text.
-- On dark (`neutral-800`) backgrounds, body text is `neutral-300` or
-  lighter — `neutral-400` is for captions only. Lead-ins and emphasized
-  phrases step up to semibold `neutral-50`.
-- Never encode meaning by color alone — pair status colors with icons or
-  text.
-
-## Alpha Tints and Overlays
-
-- Any palette color at 12% alpha (`tint-12`) makes an outline-style fill —
-  used for outline tags, badges, and shortcut hints where a solid tint
-  would be too heavy.
-- Dim overlays darken with `neutral-800` at `dim-50` (full-page behind
-  modals), `dim-20` (pressed fills), or `dim-8` (subtle darkening).
-- Lighten overlays brighten with `neutral-50` at `lighten-20`/`lighten-8`,
-  e.g. for shortcut hints on filled buttons.
+- Any palette color at 12% alpha (`tint-12`) makes an outline-style fill
+  (outline tags, badges, shortcut hints).
+- Dims darken with `neutral-800` (`dim-50` page backdrop, `dim-20`
+  pressed fills, `dim-8` subtle); lightens brighten with `neutral-50`.
 
 ## Graph Colors
 
-For multi-series charts, use the `graph-1`…`graph-6` sequence in order:
-blue, lightblue, purple, pink, orange, yellow (all 500-level). Single-series
-charts use `blue-500` alone. Use the 300-level of the same hue for hover or
-area fills.
-
-For **paired series** — two facets of the same measure, like
-ingress/egress or read/write — use one hue at two shades (`blue-500` +
-`blue-300`) instead of two hues. Reserve the multi-hue sequence for
-genuinely independent series.
+Multi-series charts use `graph-1`…`graph-6` in order: blue, lightblue,
+purple, pink, orange, yellow (500-level). Single series: `blue-500`.
+Paired series (ingress/egress) use one hue at two shades (`blue-500` +
+`blue-300`) instead of two hues. 300-level for hover/area fills.
 
 ## Dark Mode
 
-Dark sections in production sit on exactly `neutral-800`, and the flat
-surface model carries over: cards and panels share the `neutral-800`
-background, separated by `neutral-700` hairline borders, with no shadows.
-`neutral-700` is also the well and hover layer — the dark counterpart of
-`neutral-100`. Avoid lifting whole surfaces to `neutral-700`: its blue
-cast reads as heavy navy slabs against the near-black page.
+Dark mode remaps roles onto the same palette (`tenzir.dark` in
+tokens.yml): background and surfaces `neutral-800`, wells and borders
+`neutral-700`, text `neutral-50`, status hues one step lighter
+(400-level). Surfaces stay flat — lifting them to `neutral-700` reads as
+heavy navy slabs.
 
 ### Ambient Brand Glow
 
-What makes production dark surfaces feel alive is not lighter panels but
-**ambient glow**: large, soft radial gradients of the brand colors bleeding
-in from the edges of the section, fading into `neutral-800`. Blue (toward
-lightblue at the hot core) anchors one side, green the other:
+Dark hero/CTA sections come alive through glow, not lighter panels: large
+soft radial gradients of brand blue and green bleeding in from the edges
+of `neutral-800`.
 
 ```css
-.dark-hero {
-  background:
-    radial-gradient(50% 70% at 0% 100%,
-      rgb(from var(--tnz-blue-500) r g b / 35%), transparent 70%),
-    radial-gradient(50% 70% at 100% 100%,
-      rgb(from var(--tnz-green-500) r g b / 30%), transparent 70%),
-    var(--tnz-neutral-800);
-}
+background:
+  radial-gradient(45% 55% at 12% 75%,
+    rgb(from var(--tnz-blue-500) r g b / 30%), transparent 70%),
+  radial-gradient(45% 55% at 88% 75%,
+    rgb(from var(--tnz-green-500) r g b / 25%), transparent 70%),
+  var(--tnz-neutral-800);
 ```
 
-A quieter variant for section tops is a single deep navy wash —
-`blue-500` at ~20% fading downward into the background. Use glows for
-hero and CTA moments, not behind dense UI or data displays.
-
-Two rules keep glows clean:
-
-- **Edges**: bleed the glow off the section edge only when the section
-  ends the page (a closing CTA). Mid-page sections anchor the radial
-  centers inside the section and fade to transparent before the edge — a
-  clipped glow leaves a visible seam, especially against dark-mode pages.
-- **Theming**: glowing hero/CTA sections are pinned dark. They stay
-  `neutral-800` in both light and dark mode, and the gradient ramp stays
-  `blue-500`→`green-500` — production uses the identical ramp on dark.
-  In dark mode the glow, not a luminance flip, is what sets the section
-  apart from the surrounding page.
-
-Dark mode remaps semantic roles onto the same palette instead of
-introducing new colors: background
-and surfaces `neutral-800`, wells and borders `neutral-700`, text
-`neutral-50`, and status hues one step lighter (400-level) to keep
-contrast. The mapping lives in `tenzir.dark` in
-[data/tokens.yml](../data/tokens.yml); see [tools/css.md](tools/css.md)
-for the implementation pattern.
+Anchor the radial centers inside the section so the glow dissolves before
+the edges (a clipped glow seams against dark pages); bleed off the edge
+only when the section ends the page. These sections are pinned dark in
+both themes — the glow, not a luminance flip, sets them apart. Keep glows
+away from dense UI and data displays.

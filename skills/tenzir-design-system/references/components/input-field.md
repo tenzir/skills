@@ -2,16 +2,6 @@
 
 Text input component with optional title, description, and various states.
 
-## Contents
-
-- [Props](#props)
-- [Size Specifications](#size-specifications)
-- [Base Styling](#base-styling)
-- [State Specifications](#state-specifications)
-- [Title Specifications](#title-specifications)
-- [CSS Implementation](#css-implementation)
-- [Usage Guidelines](#usage-guidelines)
-
 ## Props
 
 | Prop          | Values                                                      |
@@ -269,32 +259,3 @@ Text input component with optional title, description, and various states.
   --input-error-color: var(--tnz-red-600);
 }
 ```
-
-## Usage Guidelines
-
-1. **Title selection**:
-   - **Size M** - Default for most form fields
-   - **Size S** - Compact forms, inline editing
-
-2. **Description**:
-   - Use for additional context or instructions
-   - Keep concise (one line preferred)
-
-3. **Size selection**:
-   - **M (32px)** - Default for most use cases
-   - **L (36px)** - Forms with more breathing room
-
-4. **Right icons**:
-   - Calendar icon for date inputs
-   - Chevron for dropdown triggers
-   - Keep icon size at 20px
-
-5. **Error handling**:
-   - Show error message below input
-   - Include error icon for visibility
-   - Error border takes precedence over focus ring
-
-6. **Accessibility**:
-   - Always include labels (title)
-   - Use `aria-describedby` to link description/error
-   - Use `aria-invalid="true"` for error state

@@ -2,16 +2,6 @@
 
 Small uppercase label for status indicators and feature flags.
 
-## Contents
-
-- [Props](#props)
-- [Size Specifications](#size-specifications)
-- [Typography](#typography)
-- [Color Specifications](#color-specifications)
-- [CSS Implementation](#css-implementation)
-- [CSS Custom Properties](#css-custom-properties)
-- [Usage Guidelines](#usage-guidelines)
-
 ## Props
 
 | Prop           | Values                                                                            |
@@ -207,22 +197,3 @@ Each color has a solid variant (300-level border) and transparent variant (12% o
 2. **Transparency selection**:
    - **Solid border** - More prominent, use for important badges
    - **Transparent border** - Subtle, use inline with other elements
-
-3. **Color selection** (same palette as tags):
-   - **Blue** - Primary/informational badges
-   - **Lightblue** - Secondary informational
-   - **Purple** - Special/unique items
-   - **Pink** - Accent/highlight
-   - **Orange** - Caution/attention
-   - **Yellow** - Warning/pending
-   - **Red** - Error/disabled states
-   - **Green** - Success/active states
-   - **Grey** - Neutral/inactive
-
-4. **Placement**:
-   - Typically next to feature names or in headers
-   - Keep badges short (1-4 characters ideal)
-
-5. **Accessibility**:
-   - Badges are decorative; ensure meaning is also conveyed in context
-   - Don't rely solely on color to convey meaning
