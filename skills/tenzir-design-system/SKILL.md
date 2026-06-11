@@ -4,10 +4,10 @@ description: >-
   Tenzir design system: brand tokens (colors, typography, spacing, shadows,
   motion), component specifications, official logos, and per-tool integration
   guides. Use when styling anything Tenzir-branded: web UIs (plain CSS, CSS
-  variables, Tailwind, or any frontend framework), Quarto documents and
-  reports, slide decks, or diagrams (Mermaid, Graphviz). Also use when the
-  user asks about Tenzir brand colors, fonts, logos, dark mode, or how to
-  make output look like a Tenzir product.
+  variables, Tailwind, shadcn/ui, or any frontend framework), Quarto
+  documents and reports, slide decks, or diagrams (Mermaid, Graphviz). Also
+  use when the user asks about Tenzir brand colors, fonts, logos, dark mode,
+  or how to make output look like a Tenzir product.
 ---
 
 # Tenzir Design System
@@ -44,6 +44,7 @@ and the YAML disagree, the YAML wins.
 | Implement a button, input, modal, …? | [references/components/](references/components/) — one file per component |
 | Write the CSS variables / theme plain CSS? | [references/tools/css.md](references/tools/css.md) |
 | Configure Tailwind? | [references/tools/tailwind.md](references/tools/tailwind.md) |
+| Theme a shadcn/ui project? | [references/tools/shadcn.md](references/tools/shadcn.md) |
 | Brand a Quarto doc or report? | [references/tools/quarto.md](references/tools/quarto.md) |
 | Style a Mermaid/Graphviz diagram? | [references/tools/diagrams.md](references/tools/diagrams.md) |
 | Build a branded slide deck? | [references/tools/slides.md](references/tools/slides.md) |

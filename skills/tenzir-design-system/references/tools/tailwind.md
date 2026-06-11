@@ -6,7 +6,9 @@ Tenzir theme configuration for Tailwind. All values derive from
 the YAML, the YAML wins.
 
 Spacing and breakpoints intentionally match Tailwind's defaults, so only
-colors, fonts, radius, shadows, and z-index need configuration.
+colors, fonts, radius, shadows, and z-index need configuration. For
+projects built on shadcn/ui, use [shadcn.md](shadcn.md) instead — it maps
+the tokens onto shadcn's semantic theme variables.
 
 ## Tailwind v4 (`@theme`)
 
