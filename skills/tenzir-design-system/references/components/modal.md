@@ -17,7 +17,7 @@ dialog and an edge-anchored sidepanel.
 | Property   | Value                                        |
 | ---------- | -------------------------------------------- |
 | Surface    | `neutral-50`                                 |
-| Shadow     | `shadow-l`                                   |
+| Shadow     | none — the dim backdrop separates            |
 | Backdrop   | `neutral-800` at `dim-50`, `z-overlay`       |
 | Layer      | dialog `z-modal`, sidepanel `z-sidepanel`    |
 | Header     | `text-lg` semibold, `neutral-800`            |
@@ -56,7 +56,6 @@ dialog and an edge-anchored sidepanel.
   position: fixed;
   background: var(--tnz-neutral-50);
   border-radius: var(--tnz-radius);
-  box-shadow: var(--tnz-shadow-l);
   z-index: var(--tnz-z-modal);
   display: flex;
   flex-direction: column;

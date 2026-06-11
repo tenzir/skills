@@ -17,7 +17,7 @@ pointer or keyboard focus.
 | Text          | `neutral-50`, `text-xs`, regular |
 | Padding       | `space-1` / `space-2` (4px 8px)  |
 | Border radius | `radius` (5px)                   |
-| Shadow        | `shadow-s`                       |
+| Shadow        | none — the inverted surface separates itself |
 | Max width     | 280px                            |
 | Offset        | `space-1` (4px) from the anchor  |
 | Layer         | `z-tooltip`                      |
@@ -32,7 +32,6 @@ pointer or keyboard focus.
   line-height: var(--tnz-leading-xs);
   padding: var(--tnz-space-1) var(--tnz-space-2);
   border-radius: var(--tnz-radius);
-  box-shadow: var(--tnz-shadow-s);
   max-width: 280px;
   z-index: var(--tnz-z-tooltip);
 }
