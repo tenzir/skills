@@ -1,127 +1,60 @@
 # shadcn/ui
 
-Tenzir theme for shadcn/ui projects. All values derive from
-[data/brand.yml](../../data/brand.yml) and
-[data/tokens.yml](../../data/tokens.yml); if anything here disagrees with
-the YAML, the YAML wins.
+Tenzir theme for shadcn/ui projects. The ready-to-use theme lives in
+[assets/shadcn-theme.css](../../assets/shadcn-theme.css); its values derive
+from [data/brand.yml](../../data/brand.yml) and
+[data/tokens.yml](../../data/tokens.yml) — if anything disagrees, the YAML
+wins.
+
+## Applying the Theme
 
 shadcn/ui components reference semantic CSS variables (`--primary`,
-`--muted-foreground`, …) defined in `:root` (light) and `.dark`. To apply
-the Tenzir theme, replace the variable values in the project's global CSS
-file (the `tailwindCssFile` from `npx shadcn@latest info`) and keep the
+`--muted-foreground`, …) defined in `:root` (light) and `.dark`. Replace
+the variable values in the project's global CSS file (the `tailwindCssFile`
+from `npx shadcn@latest info`) with the blocks from
+[assets/shadcn-theme.css](../../assets/shadcn-theme.css), and keep the
 generated `@theme inline` registration as is. Values are the canonical
 Tenzir hexes rather than oklch conversions, so they stay byte-identical to
 the YAML.
 
-## Theme
+## Previewing with tweakcn
 
-```css
-:root {
-  /* Surfaces: neutral-100 page, neutral-50 cards/popovers */
-  --background: #f7f8fa;
-  --foreground: #0e1017;
-  --card: #fdfdfe;
-  --card-foreground: #0e1017;
-  --popover: #fdfdfe;
-  --popover-foreground: #0e1017;
+To inspect the theme visually, open the [tweakcn
+editor](https://tweakcn.com/editor/theme), choose **Import** (Paste CSS),
+and paste the contents of
+[assets/shadcn-theme.css](../../assets/shadcn-theme.css). The file carries
+the full variable set tweakcn renders — colors, fonts, radius, and
+shadows — for both light and dark mode. Going the other way, theme tweaks
+made in tweakcn export as the same CSS format; fold accepted changes back
+into the YAML first, then regenerate the asset.
 
-  /* Actions */
-  --primary: #0a54ff; /* blue-500 */
-  --primary-foreground: #fdfdfe;
-  --secondary: #f0f1f5; /* neutral-200 */
-  --secondary-foreground: #0e1017;
-  --destructive: #ff0a33; /* red-500 */
-  --destructive-foreground: #fdfdfe;
+## Mapping Rationale
 
-  /* States */
-  --muted: #f0f1f5; /* neutral-200 */
-  --muted-foreground: #68738d; /* neutral-500 */
-  --accent: #f7f8fa; /* neutral-100 hover fill on cards */
-  --accent-foreground: #0e1017;
+| shadcn variable | Tenzir token | Why |
+| --- | --- | --- |
+| `--background` / `--foreground` | `neutral-100` / `neutral-800` | App background; default text |
+| `--card`, `--popover` | `neutral-50` | Elevated surfaces on the neutral-100 page |
+| `--primary` | `blue-500` (dark: `blue-400`) | Brand primary; dark mode steps one level lighter |
+| `--secondary`, `--muted` | `neutral-200` (dark: `neutral-600`/`neutral-700`) | Subtle fills |
+| `--muted-foreground` | `neutral-500` (dark: `neutral-400`) | Tertiary text |
+| `--accent` | `neutral-100` (dark: `neutral-600`) | Hover fill on cards/menus |
+| `--destructive` | `red-500` (dark: `red-400`) | Danger role |
+| `--border` / `--input` | `neutral-200` / `neutral-250` | Dividers; control outlines |
+| `--ring` | `blue-200` (dark: `blue-400`) | Focus ring |
+| `--chart-1..5` | `graph-1..5` | Chart sequence; `yellow-500` is the sixth series |
+| `--radius` | `radius` (5px) | shadcn derives `rounded-md` = 3px = `radius-tight` |
+| `--shadow-*` | `shadow-xs/s/m/l` | Dual-layer Tenzir elevation mapped onto shadcn's scale |
 
-  /* Lines and focus */
-  --border: #f0f1f5; /* neutral-200 */
-  --input: #e3e6ed; /* neutral-250 control outlines */
-  --ring: #e0eaff; /* blue-200 focus ring */
-
-  /* Charts: graph-1..5; use yellow-500 #edae1d for a sixth series */
-  --chart-1: #0a54ff;
-  --chart-2: #0aadff;
-  --chart-3: #cf0aff;
-  --chart-4: #ff0aa5;
-  --chart-5: #ff5c0a;
-
-  /* Sidebar */
-  --sidebar: #f7f8fa;
-  --sidebar-foreground: #0e1017;
-  --sidebar-primary: #0a54ff;
-  --sidebar-primary-foreground: #fdfdfe;
-  --sidebar-accent: #f0f1f5;
-  --sidebar-accent-foreground: #0e1017;
-  --sidebar-border: #f0f1f5;
-  --sidebar-ring: #e0eaff;
-
-  /* radius (5px) makes rounded-md = 3px = radius-tight */
-  --radius: 0.3125rem;
-}
-
-/* Dark mode: semantic remapping from tenzir.dark — shared palette,
-   status hues one step lighter (400-level) with dark foregrounds. */
-.dark {
-  --background: #0e1017; /* neutral-800 */
-  --foreground: #fdfdfe;
-  --card: #262e40; /* neutral-700 */
-  --card-foreground: #fdfdfe;
-  --popover: #262e40;
-  --popover-foreground: #fdfdfe;
-
-  --primary: #477eff; /* blue-400 */
-  --primary-foreground: #0e1017;
-  --secondary: #414b62; /* neutral-600 */
-  --secondary-foreground: #fdfdfe;
-  --destructive: #ff4766; /* red-400 */
-  --destructive-foreground: #0e1017;
-
-  --muted: #262e40; /* neutral-700 */
-  --muted-foreground: #959db1; /* neutral-400 */
-  --accent: #414b62; /* neutral-600 */
-  --accent-foreground: #fdfdfe;
-
-  --border: #414b62; /* neutral-600 */
-  --input: #414b62;
-  --ring: #477eff; /* blue-400 */
-
-  /* Chart hues are shared between light and dark */
-  --chart-1: #0a54ff;
-  --chart-2: #0aadff;
-  --chart-3: #cf0aff;
-  --chart-4: #ff0aa5;
-  --chart-5: #ff5c0a;
-
-  --sidebar: #0e1017;
-  --sidebar-foreground: #fdfdfe;
-  --sidebar-primary: #477eff;
-  --sidebar-primary-foreground: #0e1017;
-  --sidebar-accent: #262e40;
-  --sidebar-accent-foreground: #fdfdfe;
-  --sidebar-border: #414b62;
-  --sidebar-ring: #477eff;
-}
-```
+Dark mode follows `tenzir.dark` in tokens.yml: shared palette, surfaces on
+`neutral-700`/`neutral-800`, status hues one step lighter (400-level) with
+dark foregrounds.
 
 ## Fonts
 
-Register the brand families in the `@theme inline` block (Tailwind v4):
-
-```css
-@theme inline {
-  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", monospace;
-}
-```
-
-In Next.js, prefer `next/font` with Inter and JetBrains Mono and wire the
-resulting variables into `--font-sans`/`--font-mono`.
+The theme sets `--font-sans` and `--font-mono` to Inter and JetBrains Mono
+(see [typography.md](../typography.md) for sourcing). In Next.js, prefer
+`next/font` and wire the resulting variables into `--font-sans`/
+`--font-mono`.
 
 ## Usage Rules
 
@@ -137,6 +70,3 @@ resulting variables into `--font-sans`/`--font-mono`.
   the values from [colors.md](../colors.md): e.g. `--success: #1ab252`
   (green-600) with `--success-foreground: #fdfdfe`, dark
   `--success: #5ee891` (green-400) with `--success-foreground: #0e1017`.
-- Shadows: shadcn components ship with Tailwind's default shadows; for
-  pixel-faithful Tenzir elevation, override `--shadow-*` per
-  [tailwind.md](tailwind.md).

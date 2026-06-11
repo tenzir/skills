@@ -1,0 +1,118 @@
+/*
+ * Tenzir theme for shadcn/ui.
+ *
+ * Values derive from data/brand.yml and data/tokens.yml; the YAML wins on
+ * any disagreement. Hex values are the canonical Tenzir palette entries.
+ *
+ * Usage: replace the :root and .dark variable values in your project's
+ * global CSS file (the tailwindCssFile from `npx shadcn@latest info`).
+ * Preview: paste this file into the tweakcn editor at
+ * https://tweakcn.com/editor/theme (Import > Paste CSS).
+ */
+
+:root {
+  /* Surfaces: neutral-100 page, neutral-50 cards/popovers */
+  --background: #f7f8fa;
+  --foreground: #0e1017;
+  --card: #fdfdfe;
+  --card-foreground: #0e1017;
+  --popover: #fdfdfe;
+  --popover-foreground: #0e1017;
+
+  /* Actions */
+  --primary: #0a54ff; /* blue-500 */
+  --primary-foreground: #fdfdfe;
+  --secondary: #f0f1f5; /* neutral-200 */
+  --secondary-foreground: #0e1017;
+  --destructive: #ff0a33; /* red-500 */
+  --destructive-foreground: #fdfdfe;
+
+  /* States */
+  --muted: #f0f1f5; /* neutral-200 */
+  --muted-foreground: #68738d; /* neutral-500 */
+  --accent: #f7f8fa; /* neutral-100 hover fill on cards */
+  --accent-foreground: #0e1017;
+
+  /* Lines and focus */
+  --border: #f0f1f5; /* neutral-200 */
+  --input: #e3e6ed; /* neutral-250 control outlines */
+  --ring: #e0eaff; /* blue-200 focus ring */
+
+  /* Charts: graph-1..5; use yellow-500 #edae1d for a sixth series */
+  --chart-1: #0a54ff;
+  --chart-2: #0aadff;
+  --chart-3: #cf0aff;
+  --chart-4: #ff0aa5;
+  --chart-5: #ff5c0a;
+
+  /* Sidebar */
+  --sidebar: #f7f8fa;
+  --sidebar-foreground: #0e1017;
+  --sidebar-primary: #0a54ff;
+  --sidebar-primary-foreground: #fdfdfe;
+  --sidebar-accent: #f0f1f5;
+  --sidebar-accent-foreground: #0e1017;
+  --sidebar-border: #f0f1f5;
+  --sidebar-ring: #e0eaff;
+
+  /* Typography */
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-serif: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+
+  /* radius (5px) makes rounded-md = 3px = radius-tight */
+  --radius: 0.3125rem;
+
+  /* Elevation: Tenzir dual-layer shadows (xs/s/m/l) on neutral-800 */
+  --shadow-2xs: 0px 8px 16px -8px #0e10171a, 0px 3px 6px -3px #0e10171a;
+  --shadow-xs: 0px 8px 16px -8px #0e10171a, 0px 3px 6px -3px #0e10171a;
+  --shadow-sm: 0px 8px 16px -8px #0e101733, 0px 3px 6px -3px #0e101733;
+  --shadow: 0px 8px 16px -8px #0e101733, 0px 3px 6px -3px #0e101733;
+  --shadow-md: 0px 10px 20px -8px #0e101733, 0px 4px 8px -6px #0e101733;
+  --shadow-lg: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
+  --shadow-xl: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
+  --shadow-2xl: 0px 20px 40px -16px #0e101733, 0px 8px 16px -8px #0e101733;
+}
+
+/* Dark mode: semantic remapping from tenzir.dark — shared palette,
+   status hues one step lighter (400-level) with dark foregrounds. */
+.dark {
+  --background: #0e1017; /* neutral-800 */
+  --foreground: #fdfdfe;
+  --card: #262e40; /* neutral-700 */
+  --card-foreground: #fdfdfe;
+  --popover: #262e40;
+  --popover-foreground: #fdfdfe;
+
+  --primary: #477eff; /* blue-400 */
+  --primary-foreground: #0e1017;
+  --secondary: #414b62; /* neutral-600 */
+  --secondary-foreground: #fdfdfe;
+  --destructive: #ff4766; /* red-400 */
+  --destructive-foreground: #0e1017;
+
+  --muted: #262e40; /* neutral-700 */
+  --muted-foreground: #959db1; /* neutral-400 */
+  --accent: #414b62; /* neutral-600 */
+  --accent-foreground: #fdfdfe;
+
+  --border: #414b62; /* neutral-600 */
+  --input: #414b62;
+  --ring: #477eff; /* blue-400 */
+
+  /* Chart hues are shared between light and dark */
+  --chart-1: #0a54ff;
+  --chart-2: #0aadff;
+  --chart-3: #cf0aff;
+  --chart-4: #ff0aa5;
+  --chart-5: #ff5c0a;
+
+  --sidebar: #0e1017;
+  --sidebar-foreground: #fdfdfe;
+  --sidebar-primary: #477eff;
+  --sidebar-primary-foreground: #0e1017;
+  --sidebar-accent: #262e40;
+  --sidebar-accent-foreground: #fdfdfe;
+  --sidebar-border: #414b62;
+  --sidebar-ring: #477eff;
+}
