@@ -33,13 +33,15 @@ Each consumed message is produced as an event with the following schema:
 
 The Kafka topic to consume from.
 
+If the topic starts with `^`, `from_kafka` treats it as a regular expression and subscribes to all matching topics. The regular expression must match the complete topic name, so use patterns like `^tenant-.*\.alerts$`.
+
 ### `count = int (optional)`
 
 Exit successfully after having consumed `count` messages.
 
 ### `exit = bool (optional)`
 
-Exit successfully after having received the last message from all partitions.
+Exit successfully after having received the last message from all partitions. This option isn’t supported with regular expression topic subscriptions.
 
 Without this option, the operator waits for new messages after consuming the last one.
 
@@ -123,6 +125,12 @@ from_kafka "events", count=100, offset="beginning"
 
 ```tql
 from_kafka "alerts", exit=true
+```
+
+### Consume from topics that match a regular expression
+
+```tql
+from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 ```
 
 ## See Also

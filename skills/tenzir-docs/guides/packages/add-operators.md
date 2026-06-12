@@ -220,6 +220,45 @@ acme::double_value count
 {count: 10, score: 10}
 ```
 
+To update a child field of the selected target, access it like any other field. Use dot syntax for ordinary field names, string-literal bracket syntax for names with punctuation, or an index expression that resolves to a field name:
+
+operators/tag\_nested.tql
+
+```tql
+---
+args:
+  positional:
+    - name: target
+      type: field
+    - name: name
+      type: string
+    - name: value
+      type: string
+---
+
+
+$target.status = $value
+$target["mapped-status"] = $value
+$target[$name] = $value
+```
+
+Using the operator:
+
+```tql
+from {event: {}}
+acme::tag_nested event, "dynamic-status", "ok"
+```
+
+```tql
+{
+  event: {
+    status: "ok",
+    "mapped-status": "ok",
+    "dynamic-status": "ok",
+  },
+}
+```
+
 ### Detect whether an argument was provided
 
 Any typed parameter supports `default: null`, making it optional without requiring a concrete fallback value. Inside the operator body, compare the parameter against `null` to check whether the caller provided it.

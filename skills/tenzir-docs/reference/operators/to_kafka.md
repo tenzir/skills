@@ -21,7 +21,7 @@ The operator injects the following default librdkafka configuration values in ca
 
 ### `topic: string`
 
-The Kafka topic to send messages to.
+The exact Kafka topic to send messages to. Regular expressions aren’t supported for producers.
 
 ### `message = blob|string (optional)`
 
