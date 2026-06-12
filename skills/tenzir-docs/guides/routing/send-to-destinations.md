@@ -9,7 +9,7 @@ TQL provides `to_*` operators for sending events to various destinations. These 
 
 ### Message brokers
 
-Send events to message brokers like [Kafka](../../integrations/kafka.md) and [NATS](../../integrations/nats.md).
+Send events to message brokers like [Kafka](../../integrations/kafka.md), [Amazon Kinesis Data Streams](../../integrations/amazon/kinesis.md), and [NATS](../../integrations/nats.md).
 
 Send to Kafka with automatic JSON formatting:
 
@@ -35,6 +35,13 @@ to_nats "alerts"
 ```
 
 The NATS server must have a JetStream stream that captures the subject you publish to.
+
+Send to Kinesis with the default NDJSON serialization:
+
+```tql
+subscribe "security-events"
+to_amazon_kinesis "security-events"
+```
 
 ### Analytics platforms
 
@@ -163,6 +170,7 @@ to_kafka f"events.{event_type}"
 
 * [`fork`](/reference/operators/fork.md)
 * [`to_kafka`](/reference/operators/to_kafka.md)
+* [`to_amazon_kinesis`](/reference/operators/to_amazon_kinesis.md)
 * [`to_opensearch`](/reference/operators/to_opensearch.md)
 * [`to_splunk`](/reference/operators/to_splunk.md)
 * [`to_tcp`](/reference/operators/to_tcp.md)

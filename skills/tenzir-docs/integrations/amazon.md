@@ -23,6 +23,7 @@ All AWS operators share the same authentication mechanisms. See [AWS Authenticat
 ## Contents
 
 - [Cloudwatch](amazon/cloudwatch.md)
+- [Kinesis](amazon/kinesis.md)
 - [Msk](amazon/msk.md)
 - [S3](amazon/s3.md)
 - [Security-lake](amazon/security-lake.md)

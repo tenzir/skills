@@ -601,6 +601,14 @@ Reads events from Amazon CloudWatch.
 from_amazon_cloudwatch "/aws/lambda/api", mode="search"
 ```
 
+### [from\_amazon\_kinesis](operators/from_amazon_kinesis.md)
+
+Receives records from an Amazon Kinesis data stream.
+
+```tql
+from_amazon_kinesis "security-events"
+```
+
 ### [from\_amazon\_sqs](operators/from_amazon_sqs.md)
 
 Receives messages from an Amazon SQS queue.
@@ -1053,6 +1061,14 @@ Sends events to Amazon CloudWatch.
 
 ```tql
 to_amazon_cloudwatch "/tenzir/events", stream="default"
+```
+
+### [to\_amazon\_kinesis](operators/to_amazon_kinesis.md)
+
+Sends records to an Amazon Kinesis data stream.
+
+```tql
+to_amazon_kinesis "security-events"
 ```
 
 ### [to\_amazon\_security\_lake](operators/to_amazon_security_lake.md)

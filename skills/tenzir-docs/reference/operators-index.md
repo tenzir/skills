@@ -104,6 +104,7 @@
 - [accept_unix_socket](operators/accept_unix_socket.md): Listens for incoming Unix domain socket connections and receives events.
 - [accept_zmq](operators/accept_zmq.md): Listens on a ZeroMQ endpoint and receives events.
 - [from_amazon_cloudwatch](operators/from_amazon_cloudwatch.md): Reads events from Amazon CloudWatch.
+- [from_amazon_kinesis](operators/from_amazon_kinesis.md): Receives records from an [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) stream.
 - [from_amazon_sqs](operators/from_amazon_sqs.md): Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 - [from_amqp](operators/from_amqp.md): Receives messages from an AMQP queue.
 - [from_azure_blob_storage](operators/from_azure_blob_storage.md): Reads one or multiple files from Azure Blob Storage.
@@ -174,6 +175,7 @@
 - [serve_tcp](operators/serve_tcp.md): Listens for incoming TCP connections and sends events to all connected clients.
 - [serve_zmq](operators/serve_zmq.md): Listens on a ZeroMQ endpoint and sends events.
 - [to_amazon_cloudwatch](operators/to_amazon_cloudwatch.md): Sends events to Amazon CloudWatch Logs.
+- [to_amazon_kinesis](operators/to_amazon_kinesis.md): Sends records to an [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) stream.
 - [to_amazon_security_lake](operators/to_amazon_security_lake.md): Sends OCSF events to Amazon Security Lake.
 - [to_amazon_sqs](operators/to_amazon_sqs.md): Sends messages to an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 - [to_amqp](operators/to_amqp.md): Sends messages to an AMQP exchange.

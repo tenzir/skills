@@ -206,7 +206,7 @@ This guide shows you how to interact with HTTP APIs using `from_http` and `to_ht
 
 ##### [Read from message brokers](guides/collecting/read-from-message-brokers.md)
 
-This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
+This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
 
 ##### [Get data from the network](guides/collecting/get-data-from-the-network.md)
 
@@ -628,6 +628,10 @@ Tenzir runs natively on Amazon Web Services (AWS) and connects to the AWS servic
 ##### [CloudWatch](integrations/amazon/cloudwatch.md)
 
 Amazon CloudWatch is a monitoring and observability service in AWS. Tenzir can read CloudWatch events with `from_amazon_cloudwatch` and write events with `to_amazon_cloudwatch`.
+
+##### [Kinesis](integrations/amazon/kinesis.md)
+
+Amazon Kinesis Data Streams is a managed streaming data service on AWS.
 
 ##### [MSK](integrations/amazon/msk.md)
 
