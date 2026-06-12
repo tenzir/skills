@@ -1,7 +1,7 @@
 # SecOps
 
 
-[Google Security Operations (SecOps)](https://cloud.google.com/security/products/security-operations) is Google’s security operations platform. Tenzir can send events to Google SecOps using the [unstructured logs ingestion API](https://cloud.google.com/chronicle/docs/reference/ingestion-api#unstructuredlogentries).
+[Google Security Operations (SecOps)](https://cloud.google.com/security/products/security-operations) is Google’s security operations platform. Tenzir can send raw logs, UDM events, and entity records to Google SecOps using Chronicle import APIs.
 
 ## UDM mapping
 
@@ -9,19 +9,121 @@ Google SecOps stores normalized security data in the Unified Data Model (UDM). U
 
 For agent-assisted work, follow [Use agent skills](../../guides/ai-workbench/use-agent-skills.md#use-the-udm-skill) to use the `tenzir-udm` skill. The skill helps map logs into UDM API ingestion payloads with names such as `metadata.eventType`, and write YARA-L or rule field paths with names such as `metadata.event_type`.
 
-Tenzir’s [`to_google_secops`](/reference/operators/to_google_secops.md) operator currently sends unstructured logs. Structured UDM ingestion support is coming soon.
+Tenzir’s [`to_google_secops`](/reference/operators/to_google_secops.md) operator can send raw logs, UDM events, and entities. Use `mode="udm_event"` after shaping events into SecOps UDM records. The operator forwards UDM and entity rows as-is, so build them with the ingestion field names before sending them.
+
+## Authentication
+
+[`to_google_secops`](/reference/operators/to_google_secops.md) targets a SecOps instance with `project`, `region`, and `instance`. Provide service-account JSON with `service_credentials`, or omit it to use Google Application Default Credentials.
 
 ## Examples
 
-### Send an event to Google SecOps
+### Send Raw Logs
 
 ```tql
 from {log: "31-Mar-2025 01:35:02.187 client 0.0.0.0#4238: query: tenzir.com IN A + (255.255.255.255)"}
 to_google_secops \
-  customer_id="00000000-0000-0000-00000000000000000",
-  private_key=secret("my_secops_key"),
-  client_email="somebody@example.com",
+  mode="raw_log",
+  project="my-project",
+  region="us",
+  instance="my-secops-instance",
+  service_credentials=secret("my_secops_service_account"),
   log_text=log,
   log_type="BIND_DNS",
-  region="europe"
+  log_entry_time=2026-01-01T00:00:00,
+  collection_time=2026-01-01T00:00:01,
+  labels={tenant: {value: "acme", rbac_enabled: true}},
+  forwarder="forwarder-1",
+  hint="bind-dns",
+  source_filename="named.log"
+```
+
+### Send UDM Events
+
+```tql
+from {
+  metadata: {
+    eventTimestamp: 2026-01-01T00:00:00,
+    collectedTimestamp: 2026-01-01T00:00:01,
+    eventType: "NETWORK_CONNECTION",
+    vendorName: "Tenzir",
+    productName: "Tenzir Pipeline",
+    productVersion: "dev",
+    productEventType: "connection",
+    productLogId: "tenzir-udm-001",
+    description: "Network connection observed by Tenzir",
+  },
+  principal: {
+    hostname: "host.example",
+    ip: ["192.0.2.10"],
+    user: {
+      userid: "alice",
+      emailAddresses: ["alice@example.com"],
+    },
+  },
+  target: {
+    hostname: "service.example",
+    ip: ["198.51.100.20"],
+    port: 443,
+  },
+  network: {
+    applicationProtocol: "HTTPS",
+    ipProtocol: "TCP",
+    sentBytes: 1250,
+    receivedBytes: 4096,
+  },
+  securityResult: [{
+    action: ["ALLOW"],
+    severity: "LOW",
+  }],
+  additional: {
+    fields: {
+      sourcePipeline: {stringValue: "to_google_secops-example"},
+      marker: {stringValue: "tenzir-udm-rich"},
+    },
+  },
+}
+to_google_secops \
+  mode="udm_event",
+  project="my-project",
+  region="us",
+  instance="my-secops-instance",
+  service_credentials=secret("my_secops_service_account")
+```
+
+### Send Entities
+
+```tql
+from {
+  metadata: {
+    collectedTimestamp: 2026-01-01T00:00:01,
+    vendorName: "Tenzir",
+    productName: "Tenzir Pipeline",
+    entityType: "USER",
+  },
+  entity: {
+    user: {
+      userid: "alice@example.com",
+      productObjectId: "alice-0001",
+      userDisplayName: "Alice Example",
+      emailAddresses: ["alice@example.com", "alice@corp.example"],
+      employeeId: "E0001",
+      title: "Security Analyst",
+      companyName: "Example Corp",
+      department: "Security Operations",
+    },
+  },
+  additional: {
+    fields: {
+      sourcePipeline: {stringValue: "to_google_secops-example"},
+      marker: {stringValue: "tenzir-entity-rich"},
+    },
+  },
+}
+to_google_secops \
+  mode="udm_entity",
+  project="my-project",
+  region="us",
+  instance="my-secops-instance",
+  service_credentials=secret("my_secops_service_account"),
+  log_type="AZURE_AD_CONTEXT"
 ```

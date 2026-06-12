@@ -1177,7 +1177,7 @@ to_google_cloud_storage "gs://my-bucket/data/{uuid}.json" { write_ndjson }
 
 ### [to\_google\_secops](operators/to_google_secops.md)
 
-Sends unstructured events to a Google SecOps Chronicle instance.
+Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.
 
 ```tql
 to_google_secops …

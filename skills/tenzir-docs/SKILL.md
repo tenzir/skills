@@ -665,7 +665,7 @@ Google Cloud Pub/Sub ingests events for streaming into BigQuery, data lakes, or 
 
 ##### [SecOps](integrations/google/secops.md)
 
-Google Security Operations (SecOps) is Google’s security operations platform. Tenzir can send events to Google SecOps using the unstructured logs ingestion API.
+Google Security Operations (SecOps) is Google’s security operations platform. Tenzir can send raw logs, UDM events, and entity records to Google SecOps using Chronicle import APIs.
 
 #### Microsoft
 

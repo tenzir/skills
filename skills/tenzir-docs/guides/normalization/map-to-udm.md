@@ -3,9 +3,9 @@
 
 This guide shows you how to map events to Google SecOps Unified Data Model (UDM) records in TQL. You’ll learn how to choose a UDM event type, populate metadata, model participants as UDM nouns, convert enum values, and preserve unmapped source fields.
 
-Structured UDM ingestion is coming soon
+Send structured UDM records
 
-Tenzir’s [`to_google_secops`](/reference/operators/to_google_secops.md) operator currently sends unstructured logs to Google SecOps. Use this guide to design and test UDM mapping operators, but don’t send structured UDM records directly with [`to_google_secops`](/reference/operators/to_google_secops.md) until structured UDM ingestion support is available.
+Tenzir’s [`to_google_secops`](/reference/operators/to_google_secops.md) operator can send structured UDM records to Google SecOps. Use `mode="udm_event"` for UDM event rows, or `mode="udm_entity"` for UDM entity rows.
 
 The TQL examples in this guide build API-facing UDM records, so they use lowerCamelCase ingestion object field names such as `metadata.eventType` and `network.ipProtocol`.
 
