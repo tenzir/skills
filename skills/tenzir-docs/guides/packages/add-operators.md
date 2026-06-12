@@ -50,20 +50,20 @@ Each parameter supports the following fields:
 
 The `type` field constrains what values the parameter accepts. It uses TQL type definition syntax:
 
-| Type       | Description                                                           |
-| ---------- | --------------------------------------------------------------------- |
-| `field`    | A field selector (for example, `name`). Cannot have non-null defaults |
-| `string`   | A string literal or expression                                        |
-| `int`      | A signed integer value                                                |
-| `uint`     | An unsigned integer value                                             |
-| `float`    | A floating-point value                                                |
-| `bool`     | A boolean value                                                       |
-| `duration` | A duration value                                                      |
-| `time`     | A timestamp value                                                     |
-| `ip`       | An IP address                                                         |
-| `subnet`   | A subnet value                                                        |
-| `blob`     | A blob value                                                          |
-| `secret`   | A secret string (accepts string literals)                             |
+| Type       | Description                                                                   |
+| ---------- | ----------------------------------------------------------------------------- |
+| `field`    | A field selector (for example, `name`). Defaults must be `null` or a selector |
+| `string`   | A string literal or expression                                                |
+| `int`      | A signed integer value                                                        |
+| `uint`     | An unsigned integer value                                                     |
+| `float`    | A floating-point value                                                        |
+| `bool`     | A boolean value                                                               |
+| `duration` | A duration value                                                              |
+| `time`     | A timestamp value                                                             |
+| `ip`       | An IP address                                                                 |
+| `subnet`   | A subnet value                                                                |
+| `blob`     | A blob value                                                                  |
+| `secret`   | A secret string (accepts string literals)                                     |
 
 If you omit the `type` field, the parameter accepts any value.
 
@@ -259,11 +259,58 @@ acme::tag_nested event, "dynamic-status", "ok"
 }
 ```
 
+### Default to a selector
+
+Field parameters accept a selector as default value, such as `this`, `this.name`, or `foo.bar`. This makes it easy to write operators that work on the entire event by default but can be scoped to a specific field on demand:
+
+operators/wrap.tql
+
+```tql
+---
+args:
+  named:
+    - name: field
+      type: field
+      default: this
+---
+
+
+this = {wrapped: $field}
+```
+
+Calling the operator without arguments wraps the whole event:
+
+```tql
+from {name: "Alice"}
+acme::wrap
+```
+
+```tql
+{
+  wrapped: {
+    name: "Alice",
+  },
+}
+```
+
+Passing an explicit selector wraps just that field:
+
+```tql
+from {name: "Alice"}
+acme::wrap field=name
+```
+
+```tql
+{
+  wrapped: "Alice",
+}
+```
+
 ### Detect whether an argument was provided
 
 Any typed parameter supports `default: null`, making it optional without requiring a concrete fallback value. Inside the operator body, compare the parameter against `null` to check whether the caller provided it.
 
-This is especially useful for `field` parameters, which cannot have non-null defaults because a field selector is not a constant value:
+This is especially useful for `field` parameters whose behavior should change entirely depending on whether the caller selected a field:
 
 operators/redact.tql
 
