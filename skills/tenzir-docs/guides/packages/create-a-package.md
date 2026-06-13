@@ -108,7 +108,8 @@ Reference inputs using `{{ inputs.input-id }}` syntax. See [Configure inputs](co
 A package can expose several capabilities at once. Treat user-defined operators as the reusable API, deployable pipelines as operational templates, examples as short usage snippets, and tests as the executable contract.
 
 * Put reusable package capabilities under `operators/`.
-* If the package maps to OCSF, expose a main mapper such as `acme::ocsf::map` that accepts parsed source events, performs source-specific cleanup and shared OCSF setup, produces minimal OCSF, and dispatches to event-specific operators under a local namespace such as `operators/ocsf/events/`.
+* If the package maps to OCSF, expose a main mapper such as `acme::ocsf::map` that accepts a named `event` field argument with `default: this`, creates a source namespace and an OCSF target namespace with an initial spread, performs source-specific cleanup and shared OCSF setup inside `$event`, produces minimal OCSF, and dispatches to event-specific operators under a local namespace such as `operators/ocsf/events/`.
+* If the package maps between normalized schemas, put the target schema before the source schema in the operator namespace, for example `acme::cim::ocsf::map` for OCSF-to-CIM mapping.
 * Put complete workflows with an input and output under `pipelines/`. Disable optional operational pipelines by default with `disabled: true`.
 * Put focused snippets under `examples/` so users can quickly try the package after installation.
 * Put deterministic tests under `tests/`, including baselines for every public operator.

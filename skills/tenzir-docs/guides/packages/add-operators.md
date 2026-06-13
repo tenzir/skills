@@ -437,36 +437,46 @@ The main mapper keeps source residue in a product-specific `acme` namespace, per
 operators/ocsf/map.tql
 
 ```tql
-this = { acme: this }
+---
+args:
+  named:
+    - name: event
+      description: The field that holds the event to map.
+      type: field
+      default: this
+---
 
 
-ocsf.metadata = {
+$event = {...$event, acme: $event, ocsf: {}}
+
+
+$event.ocsf.metadata = {
   product: {
     name: "ACME Logs",
     vendor_name: "ACME",
   },
   version: "1.8.0",
 }
-ocsf.severity_id = 1
+$event.ocsf.severity_id = 1
 
 
-match acme.event_type {
+match $event.acme.event_type {
   "dns" => {
-    acme::ocsf::events::dns
+    acme::ocsf::events::dns event=$event
   }
   "http" => {
-    acme::ocsf::events::http
+    acme::ocsf::events::http event=$event
   }
   "auth" => {
-    acme::ocsf::events::auth
+    acme::ocsf::events::auth event=$event
   }
   _ => {
-    acme::ocsf::base
+    acme::ocsf::base event=$event
   }
 }
 
 
-this = {...ocsf, unmapped: acme}
+$event = {...$event.ocsf, unmapped: $event.acme}
 ```
 
 The fallback operator ensures that unrecognized events still conform to OCSF by mapping them to the Base Event class:
@@ -474,13 +484,22 @@ The fallback operator ensures that unrecognized events still conform to OCSF by 
 operators/ocsf/base.tql
 
 ```tql
+---
+args:
+  named:
+    - name: event
+      description: The field that holds the event to map.
+      type: field
+---
+
+
 @name = "ocsf.base_event"
-ocsf.category_uid = 0
-ocsf.class_uid = 0
-ocsf.activity_id = 0
-ocsf.type_uid = 0
-ocsf.severity_id = 0
-ocsf.time = now()
+$event.ocsf.category_uid = 0
+$event.ocsf.class_uid = 0
+$event.ocsf.activity_id = 0
+$event.ocsf.type_uid = 0
+$event.ocsf.severity_id = 0
+$event.ocsf.time = now()
 ```
 
 Each leaf operator handles one specific event type:
@@ -488,20 +507,29 @@ Each leaf operator handles one specific event type:
 operators/ocsf/events/dns.tql
 
 ```tql
+---
+args:
+  named:
+    - name: event
+      description: The field that holds the event to map.
+      type: field
+---
+
+
 @name = "ocsf.dns_activity"
-ocsf.category_uid = 4
-ocsf.class_uid = 4003
-ocsf.activity_id = 1
-ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
+$event.ocsf.category_uid = 4
+$event.ocsf.class_uid = 4003
+$event.ocsf.activity_id = 1
+$event.ocsf.type_uid = $event.ocsf.class_uid * 100 + $event.ocsf.activity_id
 
 
-ocsf.query.hostname = move acme.query_name
-ocsf.query.type = move acme.query_type
-ocsf.answers = move acme.dns_answers
+$event.ocsf.query.hostname = move $event.acme.query_name
+$event.ocsf.query.type = move $event.acme.query_type
+$event.ocsf.answers = move $event.acme.dns_answers
 // ... additional field mappings
 ```
 
-After the package mapper runs, callers can run the shared OCSF helpers. The mapper should produce minimal OCSF, and [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands it with derived sibling fields before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates the final shape:
+After the package mapper runs, callers can run the shared OCSF helpers. Public mappers should accept a named `event` field argument with `default: this`. Internal mappers receive the current mapping scope explicitly via `event=$event`. The mapper should produce minimal OCSF, and [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands it with derived sibling fields before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates the final shape:
 
 ```tql
 acme::ocsf::map
@@ -523,12 +551,16 @@ publish "ocsf"
 
 The parser stays with the source operator, while `acme::ocsf::map` owns cleanup, shared OCSF setup, and dispatch.
 
+This explicit event scope is a package convention while TQL has user-defined operators but not user-defined functions. Passing `event` gives each mapper one mutable record scope, keeps internal helper operators from touching unrelated fields, and lets callers map a parsed record that lives in a field.
+
 ### Design principles
 
 When building operator hierarchies, follow these guidelines:
 
-* **Expose one mapper contract**: Accept parsed source events through a main package mapper, for example `acme::ocsf::map`.
+* **Expose one mapper contract**: Accept parsed source events through a main package mapper, for example `acme::ocsf::map`, with `event=this` as the default scope.
+* **Name the target schema first**: Put the target namespace before any source schema namespace. For example, use `acme::ocsf::map` for source-to-OCSF mapping and `acme::cim::ocsf::map` for OCSF-to-CIM mapping.
 * **Keep cleanup close to mapping**: Put source-specific normalization and shared OCSF setup in the main mapper before dispatch.
+* **Stay inside `$event`**: Use an initial spread to create source and target namespaces, then only mutate fields below `$event` inside mapping UDOs.
 * **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf::derive`](/reference/operators/ocsf/derive.md) to add derived sibling fields.
 * **Use dispatchers for routing**: Route events based on type or other criteria.
 * **Mirror directory structure**: Operator names reflect their location.

@@ -24,32 +24,42 @@ Use this annotated template as a starting point for creating a [user-defined ope
 We recommend organizing fields by OCSF attribute groups: classification, occurrence, context, primary.
 
 ```tql
+---
+args:
+  named:
+    - name: event
+      description: The field that holds the event to map.
+      type: field
+      default: this
+---
+
+
 // --- Preamble ---------------------------------
 
 
-// Keep source data in a source-specific working namespace.
-this = { panos: this }
+// Keep all mapping work inside the explicit event scope.
+$event = {...$event, panos: $event, ocsf: {}}
 
 
 // --- OCSF: classification attributes ----------
 
 
 @name = "ocsf.network_activity"
-ocsf.category_uid = 4
-ocsf.class_uid = 4001
-ocsf.activity_id = 6
-ocsf.severity_id = 1
-ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
+$event.ocsf.category_uid = 4
+$event.ocsf.class_uid = 4001
+$event.ocsf.activity_id = 6
+$event.ocsf.severity_id = 1
+$event.ocsf.type_uid = $event.ocsf.class_uid * 100 + $event.ocsf.activity_id
 
 
 // --- OCSF: occurrence attributes --------------
 
 
-ocsf.time = move panos.time_generated
-ocsf.start_time = move panos.start
-if panos.elapsed != null {
-  ocsf.end_time = ocsf.start_time + panos.elapsed
-  ocsf.duration = count_milliseconds(move panos.elapsed).round()
+$event.ocsf.time = move $event.panos.time_generated
+$event.ocsf.start_time = move $event.panos.start
+if $event.panos.elapsed != null {
+  $event.ocsf.end_time = $event.ocsf.start_time + $event.panos.elapsed
+  $event.ocsf.duration = count_milliseconds(move $event.panos.elapsed).round()
 }
 
 
@@ -57,17 +67,17 @@ if panos.elapsed != null {
 
 
 // Metadata about the event source.
-ocsf.metadata = {
+$event.ocsf.metadata = {
   log_name: "traffic",
   product: {
     cpe_name: "cpe:/a:paloaltonetworks:pan-os",
     name: "NGFW",
     vendor_name: "Palo Alto Networks",
   },
-  original_event_uid: move panos.sessionid,
+  original_event_uid: move $event.panos.sessionid,
   version: "1.8.0",
 }
-ocsf.app_name = move panos.app
+$event.ocsf.app_name = move $event.panos.app
 
 
 // --- OCSF: primary attributes -----------------
@@ -76,23 +86,23 @@ ocsf.app_name = move panos.app
 // Primary attributes reflect the core semantic meaning of the event.
 
 
-ocsf.src_endpoint = {
-  ip: move panos.src,
-  port: move panos.sport,
+$event.ocsf.src_endpoint = {
+  ip: move $event.panos.src,
+  port: move $event.panos.sport,
 }
 
 
-ocsf.dst_endpoint = {
-  ip: move panos.dst,
-  port: move panos.dport,
+$event.ocsf.dst_endpoint = {
+  ip: move $event.panos.dst,
+  port: move $event.panos.dport,
 }
 
 
 let $proto_nums = {tcp: 6, udp: 17, icmp: 1}
-ocsf.connection_info = {
-  protocol_name: (move panos.proto).to_lower(),
+$event.ocsf.connection_info = {
+  protocol_name: (move $event.panos.proto).to_lower(),
 }
-ocsf.connection_info.protocol_num = $proto_nums[ocsf.connection_info.protocol_name]? else -1
+$event.ocsf.connection_info.protocol_num = $proto_nums[$event.ocsf.connection_info.protocol_name]? else -1
 
 
 // --- OCSF: profile-specific attributes --------
@@ -107,22 +117,22 @@ ocsf.connection_info.protocol_num = $proto_nums[ocsf.connection_info.protocol_na
 
 
 // Return the mapped OCSF event and preserve mapping residue.
-this = {...ocsf, unmapped: panos}
-
-
-// Derive sibling fields and validate the final shape.
-ocsf::derive
-ocsf::cast
+$event = {...$event.ocsf, unmapped: $event.panos}
 ```
 
 ### Key principles
 
-* **Use a source namespace**: Move the input under a short descriptor such as `panos`, `zeek`, `okta`, or the generic `event` before mapping. This prevents name clashes with OCSF fields and keeps the remaining source fields ready for `unmapped`.
-* **Use `move`**: Transfer fields with `move` to simultaneously assign and remove from source, for example `ocsf.time = move panos.time_generated`.
+* **Use the event scope**: Mapping UDOs accept a named `event` field argument that defaults to `this`. Start with a spread such as `$event = {...$event, panos: $event, ocsf: {}}`, then mutate only fields under `$event`.
+* **Use a source namespace**: Keep the input under a short descriptor such as `panos`, `zeek`, `okta`, or the generic `event`. This prevents name clashes with OCSF fields and keeps the remaining source fields ready for `unmapped`.
+* **Use `move`**: Transfer fields with `move` to simultaneously assign and remove from source, for example `$event.ocsf.time = move $event.panos.time_generated`.
 * **Only use `drop` for multi-use fields**: When a field appears in multiple mappings, drop it after the last use. Prefer `move` and single assignments.
 * **Keep unmapped residue**: Fields left under the source namespace still need review or an intentional decision to preserve source-specific data.
 * **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf::derive`](/reference/operators/ocsf/derive.md) expand the minimal event before validation.
 * **Validate the result**: Run [`ocsf::derive`](/reference/operators/ocsf/derive.md) and [`ocsf::cast`](/reference/operators/ocsf/cast.md) after the mapper returns the OCSF event.
+
+Why use `$event`?
+
+TQL has user-defined operators, but not user-defined functions yet. The explicit `event` field argument gives each mapping operator one mutable record scope that callers can pass explicitly when the parsed source event lives in a field. Keep all mapper state below `$event` until TQL has function-like abstractions for record-to-record mappings.
 
 Think in graphs
 
@@ -131,6 +141,8 @@ OCSF mapping is a bipartite graph transformation: source fields form one vertex 
 ### Package structure
 
 Organize OCSF mappings as a package with a dispatcher and per-event-type operators:
+
+Put the target schema first in mapping namespaces. Source-to-OCSF packages use `paloalto::ngfw::ocsf::map`. Cross-schema mappings keep the same rule, for example `paloalto::ngfw::asim::ocsf::map` for OCSF-to-ASIM mapping.
 
 * paloalto/
 
@@ -184,10 +196,20 @@ Organize OCSF mappings as a package with a dispatcher and per-event-type operato
 Your package should include one main mapping operator. This operator performs source-specific cleanup and shared OCSF setup, dispatches events based on the event type, and returns the mapped OCSF event:
 
 ```tql
-this = { panos: this }
+---
+args:
+  named:
+    - name: event
+      description: The field that holds the event to map.
+      type: field
+      default: this
+---
 
 
-ocsf.metadata = {
+$event = {...$event, panos: $event, ocsf: {}}
+
+
+$event.ocsf.metadata = {
   product: {
     cpe_name: "cpe:/a:paloaltonetworks:pan-os",
     name: "NGFW",
@@ -195,26 +217,26 @@ ocsf.metadata = {
   },
   version: "1.8.0",
 }
-ocsf.severity_id = 1
+$event.ocsf.severity_id = 1
 
 
-match panos.type {
+match $event.panos.type {
   "TRAFFIC" => {
-    paloalto::ngfw::ocsf::events::network
+    paloalto::ngfw::ocsf::events::network event=$event
   }
   "DNS" => {
-    paloalto::ngfw::ocsf::events::dns
+    paloalto::ngfw::ocsf::events::dns event=$event
   }
   "THREAT" => {
-    paloalto::ngfw::ocsf::events::threat
+    paloalto::ngfw::ocsf::events::threat event=$event
   }
   _ => {
-    paloalto::ngfw::ocsf::base
+    paloalto::ngfw::ocsf::base event=$event
   }
 }
 
 
-this = {...ocsf, unmapped: panos}
+$event = {...$event.ocsf, unmapped: $event.panos}
 ```
 
 If the parser package does not set a type field, dispatch on a different field in the log that differentiates the event types.
@@ -233,6 +255,21 @@ ocsf::cast
 ```
 
 This requires that your test file has a sibling `.input` file that the [test framework](../testing/write-tests.md) exposes through `TENZIR_INPUT`. Use the reader that matches your fixture format.
+
+When a caller parses into a nested field or wants to add raw data after mapping, pass the mapping scope explicitly and add the additional attributes after the mapper returns:
+
+```tql
+from_file env("TENZIR_INPUT") {
+  read_lines
+}
+panos = line.parse_json()
+paloalto::ngfw::ocsf::map event=panos
+panos.raw_data = move line
+panos.raw_data_size = panos.raw_data.length_bytes()
+this = panos
+ocsf::derive
+ocsf::cast
+```
 
 ### Validation gate
 

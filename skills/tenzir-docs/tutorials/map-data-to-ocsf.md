@@ -642,6 +642,8 @@ ocsf::cast
 to_stdout
 ```
 
+Public mapping operators accept a named `event` field argument that defaults to `this`, so `zeek::ocsf::map` maps the current event in this pipeline. When a pipeline keeps the parsed source event in a field, call the mapper with `event=<field>` and add additional attributes after the mapper returns.
+
 All you have to do to get there is create a package with following directory structure:
 
 * zeek/
@@ -674,17 +676,27 @@ Notice how `zeek::ocsf::map` has two modules that are colon-separated: `zeek` an
 
       * map.tql 👈 Exposes `zeek::ocsf::map` as operator
 
-Since operators fully compose, you can implement `zeek::ocsf::map` as one main mapper that performs source-specific cleanup, sets shared fields in the `ocsf` record, and dispatches to event-specific operators for each log type.
+Since operators fully compose, you can implement `zeek::ocsf::map` as one main mapper that performs source-specific cleanup, creates source and OCSF target namespaces inside `$event`, sets shared fields in `$event.ocsf`, and dispatches to event-specific operators for each log type.
 
 zeek/operators/ocsf/map.tql
 
 ```tql
+---
+args:
+  named:
+    - name: event
+      description: The field that holds the event to map.
+      type: field
+      default: this
+---
+
+
 // Keep the parsed source event around while event-specific operators move
 // fields into their OCSF homes.
-this = { zeek: this }
+$event = {...$event, zeek: $event, ocsf: {}}
 
 
-ocsf.metadata = {
+$event.ocsf.metadata = {
   product: {
     name: "Zeek",
     vendor_name: "Zeek",
@@ -694,27 +706,31 @@ ocsf.metadata = {
 }
 
 
-ocsf.severity_id = 1
+$event.ocsf.severity_id = 1
 
 
 // Dispatch mappings based on schema name. This assumes that you've parsed the
 // input logs and added the appropriate @name based on the log type. The
 // read_zeek_tsv operator does this automatically. You could also dispatch based
 // on any other stable discriminator, such as _path or event_type.
-match @name {
+match $event.zeek._path? else @name {
+  "conn" => {
+    // Map "conn.log" events
+    zeek::ocsf::events::conn event=$event
+  }
   "zeek.conn" => {
     // Map "conn.log" events
-    zeek::ocsf::events::conn
+    zeek::ocsf::events::conn event=$event
   }
   _ => {
     // Base Event: unknown or unsupported Zeek log type
-    zeek::ocsf::base
+    zeek::ocsf::base event=$event
   }
 }
 
 
 // Return the mapped OCSF event from the operator.
-this = {...ocsf, unmapped: zeek}
+$event = {...$event.ocsf, unmapped: $event.zeek}
 ```
 
 In this layout, you’d put the mapping operators in the following directories:
@@ -734,7 +750,7 @@ In this layout, you’d put the mapping operators in the following directories:
 
       * map.tql
 
-The mapper keeps intermediate results under `ocsf` internally and returns a minimal OCSF event. Callers then run shared OCSF helpers such as [`ocsf::derive`](/reference/operators/ocsf/derive.md) and [`ocsf::cast`](/reference/operators/ocsf/cast.md) to expand and validate the final shape. This mirrors how larger package mappers handle cleanup, shared fields, fallback Base Event mapping, and event-specific mappings.
+The mapper keeps intermediate results under `$event.ocsf` internally and returns a minimal OCSF event. Callers then run shared OCSF helpers such as [`ocsf::derive`](/reference/operators/ocsf/derive.md) and [`ocsf::cast`](/reference/operators/ocsf/cast.md) to expand and validate the final shape. This mirrors how larger package mappers handle cleanup, shared fields, fallback Base Event mapping, and event-specific mappings.
 
 #### Write tests for production-grade reliability
 
