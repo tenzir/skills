@@ -39,8 +39,8 @@ Group Management events report lifecycle management of a group, as well as privi
 
 - `1`: `Assign Privileges` - Assign privileges to the group. Use `privileges` as privileges to be assigned.
 - `2`: `Revoke Privileges` - Revoke privileges from the group. Use `privileges` as privileges to be revoked.
-- `3`: `Add User` - Add user to the group. Use `user` as the user to be added.
-- `4`: `Remove User` - Remove user from the group. Use `user` as the user to be removed.
+- `3`: `Add User` - Add a user or users to the group. Use `users` for the users to be added.
+- `4`: `Remove User` - Remove a user or users from the group. Use `users` for the users to be removed.
 - `5`: `Delete` - Delete the group.
 - `6`: `Create` - Create a group. Populate the `group` object with details of the group to be created.
 - `7`: `Add Subgroup` - Add a subgroup to the group. Use `sub_group` as the subgroup to be added.
@@ -124,3 +124,11 @@ The intended state of the `group` after the update. On `Success`, represents the
 - **Group**: primary
 
 A user that was added to or removed from `group`.
+
+### `users`
+
+- **Type**: [`user`](../objects/user.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+Users that were added to or removed from `group`.
