@@ -1,7 +1,7 @@
 name: AssetEntity
 title: Asset Entity
 kind: entity
-version: 0.1.0
+version: 1.0.0
 status: GA
 summary: The Microsoft Sentinel Asset Entity Schema is designed to normalize assets from various products into a standardized format within Microsoft Advanced Security Information Model (ASIM). This schema focuses exclusively on assets in non-Microsoft data sources, ensuring consistent and efficient analysis. An asset is any data resource that an organization stores, processes, or manages, such as a file, or site. Each asset carries security-relevant metadata including ownership, permissions, sensitivity classifications, and risk indicators. Assets can originate from a wide range of platforms, databases, cloud storage services, SaaS applications, and on-premises systems and are collected as either full inventory snapshots or incremental change feeds. By normalizing asset data into a common schema, Microsoft Sentinel enables security teams to analyze and correlate asset information across diverse data sources in a consistent way.
 fields:
@@ -62,6 +62,11 @@ fields:
   class: Mandatory
   type: string
   description: The unique identifier of the asset.
+- name: EntityIdType
+  role: entity
+  class: Mandatory
+  type: string
+  description: The type or format of the entity identifier.
 - name: EntityLastModifiedTime
   role: entity
   class: Mandatory
@@ -87,8 +92,8 @@ fields:
   role: entity
   class: Mandatory
   type: SchemaVersion (String)
-  value: 0.1.0
-  description: The version of the schema. The version of the schema documented here is 0.1.0.
+  value: 1.0.0
+  description: The version of the schema. The version of the schema documented here is 1.0.0.
 - name: EntitySource
   role: entity
   class: Mandatory
@@ -229,6 +234,11 @@ fields:
   class: Optional
   type: bool
   description: Indicates whether the entity has been deleted in the source system.
+- name: EntityKey
+  role: entity
+  class: Optional
+  type: string
+  description: The unique identifier of the entity, used for correlation across schemas.
 - name: EntityLastAccessedTime
   role: entity
   class: Optional
@@ -244,6 +254,11 @@ fields:
   class: Optional
   type: string
   description: The original data source or connector that provided the entity record, if the source is currently not supported.
+- name: EntitySnapshotId
+  role: entity
+  class: Optional
+  type: string
+  description: The identifier of the snapshot to which the current record belongs.
 - name: ExternalUsersCount
   class: Optional
   type: int

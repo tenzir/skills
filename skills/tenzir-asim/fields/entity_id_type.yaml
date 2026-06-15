@@ -1,0 +1,8 @@
+name: EntityIdType
+summary: The type or format of the entity identifier.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Mandatory
+  type: string
+  description: The type or format of the entity identifier.

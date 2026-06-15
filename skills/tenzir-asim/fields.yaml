@@ -177,8 +177,10 @@ EmailSubject: fields/email_subject.yaml
 EntityCreatedTime: fields/entity_created_time.yaml
 EntityFeedType: fields/entity_feed_type.yaml
 EntityId: fields/entity_id.yaml
+EntityIdType: fields/entity_id_type.yaml
 EntityIngestionTime: fields/entity_ingestion_time.yaml
 EntityIsDeleted: fields/entity_is_deleted.yaml
+EntityKey: fields/entity_key.yaml
 EntityLastAccessedTime: fields/entity_last_accessed_time.yaml
 EntityLastModifiedTime: fields/entity_last_modified_time.yaml
 EntityName: fields/entity_name.yaml
@@ -188,6 +190,7 @@ EntityOriginalSource: fields/entity_original_source.yaml
 EntityProduct: fields/entity_product.yaml
 EntitySchema: fields/entity_schema.yaml
 EntitySchemaVersion: fields/entity_schema_version.yaml
+EntitySnapshotId: fields/entity_snapshot_id.yaml
 EntitySource: fields/entity_source.yaml
 EntitySubProduct: fields/entity_sub_product.yaml
 EntityUpdatedTime: fields/entity_updated_time.yaml

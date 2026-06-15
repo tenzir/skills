@@ -3,7 +3,7 @@ schemas:
     file: schemas/asset_entity.yaml
     kind: entity
     title: Asset Entity
-    version: 0.1.0
+    version: 1.0.0
     status: GA
   AgentEvent:
     file: schemas/agent_event.yaml

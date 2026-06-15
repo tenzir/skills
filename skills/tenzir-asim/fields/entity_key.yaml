@@ -1,0 +1,8 @@
+name: EntityKey
+summary: The unique identifier of the entity, used for correlation across schemas.
+schemas:
+- name: AssetEntity
+  role: entity
+  class: Optional
+  type: string
+  description: The unique identifier of the entity, used for correlation across schemas.
