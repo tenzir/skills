@@ -1,0 +1,10 @@
+created: 2026-06-15
+title: Security schema reference skills
+intro: >-
+  This release adds generated reference skills for major security schema and event
+  formats, including Microsoft Sentinel ASIM, Splunk CIM, Elastic ECS, ArcSight CEF,
+  IBM QRadar LEEF, FortiSIEM EDM, and Google SecOps UDM. It also expands the Tenzir
+  design system skill with machine-readable tokens and per-tool styling guidance.
+source:
+  mode: sync-stable-queue
+  previous_stable: v2.1.0
