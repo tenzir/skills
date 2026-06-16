@@ -215,6 +215,7 @@
 ## Parsing
 
 - [read_all](operators/read_all.md): Parses an incoming bytes stream into a single event.
+- [read_auto](operators/read_auto.md): Detects the input format of a byte stream and selects a matching reader.
 - [read_bitz](operators/read_bitz.md): Parses bytes as *BITZ* format.
 - [read_cef](operators/read_cef.md): Parses an incoming Common Event Format (CEF) stream into events.
 - [read_csv](operators/read_csv.md): Read CSV (Comma-Separated Values) from a byte stream.

@@ -39,6 +39,16 @@ from_file "/path/to/file.log" {
 
 The parsing pipeline runs on the file content and must return events.
 
+When file names or extensions don’t identify the format reliably, use [`read_auto`](/reference/operators/read_auto.md) to detect the format from the file content:
+
+```tql
+from_file "/dropzone/**" {
+  read_auto fallback="lines"
+}
+```
+
+This pattern helps with upload directories, partner file drops, and rapid prototyping with mixed sample files. Keep `fallback="none"` if unknown formats should fail instead of becoming line-oriented text.
+
 ## Directory processing
 
 You can process multiple files efficiently using glob patterns. This section covers batch processing and recursive directory operations.

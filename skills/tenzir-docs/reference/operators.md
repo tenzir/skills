@@ -1339,6 +1339,14 @@ Parses an incoming bytes stream into a single event.
 read_all binary=true
 ```
 
+### [read\_auto](operators/read_auto.md)
+
+Detects the input format of a byte stream and selects a matching reader.
+
+```tql
+read_auto fallback="lines"
+```
+
 ### [read\_bitz](operators/read_bitz.md)
 
 Parses bytes as *BITZ* format.

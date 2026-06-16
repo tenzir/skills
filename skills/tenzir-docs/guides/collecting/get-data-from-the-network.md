@@ -19,6 +19,18 @@ accept_tcp "0.0.0.0:9000" {
 
 This listens on all interfaces (`0.0.0.0`) on port 9000. Specify a parsing pipeline to convert incoming bytes to events. Inside the nested pipeline, `$peer.ip` and `$peer.port` identify the connecting client. Set `resolve_hostnames=true` to also expose `$peer.hostname` from reverse DNS.
 
+### Accept multiple input formats
+
+Use [`read_auto`](/reference/operators/read_auto.md) when a TCP endpoint receives data from producers that don’t all use the same format:
+
+```tql
+accept_tcp "0.0.0.0:9000" {
+  read_auto fallback="lines", max_probe_bytes=16Ki
+}
+```
+
+The detector runs once per connection, so one client can send NDJSON while another sends CSV, Syslog, or another supported format. This pattern is useful for rapid prototyping, shared intake endpoints, and package pipelines where you want to normalize different producer formats after parsing. If most clients send long-lived plain-text streams, use [`read_lines`](/reference/operators/read_lines.md) directly instead of waiting for [`read_auto`](/reference/operators/read_auto.md) to finish probing.
+
 ### Connect to a remote server
 
 Use [`from_tcp`](/reference/operators/from_tcp.md) to connect to an existing server:
@@ -205,6 +217,10 @@ select
 
 ## See also
 
+* [`accept_tcp`](/reference/operators/accept_tcp.md)
+* [`accept_udp`](/reference/operators/accept_udp.md)
+* [`from_nic`](/reference/operators/from_nic.md)
+* [`read_auto`](/reference/operators/read_auto.md)
 * [TCP](../../integrations/tcp.md)
 * [UDP](../../integrations/udp.md)
 * [Network Interface](../../integrations/nic.md)

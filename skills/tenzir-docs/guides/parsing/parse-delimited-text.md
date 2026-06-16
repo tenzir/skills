@@ -5,6 +5,18 @@ This guide shows you how to parse text streams into structured events. You’ll 
 
 The examples use [`from_file`](/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
 
+## Auto-detect structured text
+
+Use [`read_auto`](/reference/operators/read_auto.md) when you don’t know the text format yet, or when you want to prototype against sample files before choosing a concrete reader. It detects common structured text formats such as NDJSON, CSV, TSV, key-value text, YAML, Syslog, CEF, and LEEF from the first bytes of the stream:
+
+```tql
+from_file "sample.log" {
+  read_auto fallback="lines"
+}
+```
+
+With `fallback="lines"`, unsupported UTF-8 input still becomes one event per line. Keep the default `fallback="none"` when unknown formats should fail fast. After you know the exact format, switch to the concrete reader when you need format-specific options.
+
 ## Split on newlines
 
 Use [`read_lines`](/reference/operators/read_lines.md) to split a byte stream on newline characters. Given this input file:
@@ -254,6 +266,7 @@ from_file "syslog.txt" {
 
 ## See also
 
+* [`read_auto`](/reference/operators/read_auto.md)
 * [Parse binary data](parse-binary-data.md)
 * [Parse string fields](parse-string-fields.md)
 * [Read and watch files](../collecting/read-and-watch-files.md)
