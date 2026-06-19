@@ -188,7 +188,7 @@ This auto-bumps the version from the unreleased entry types, creates `releases/<
 
 The `--patch`, `--minor`, and `--major` shortcuts resolve from the latest stable release. The same stable-only rule applies to `show latest`, and `release version`. In contrast, `release publish` without a version targets the latest release, including release candidates.
 
-By default, `release create` also updates common package-manager version files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`) when present in the changelog root or, for `changelog/` projects, in the parent directory. For advanced repositories with custom release scripts, disable built-in bumps in `config.yaml`:
+By default, `release create` also updates common package-manager version files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`) when present in the changelog root or, for `changelog/` projects, in the parent directory. When `package.json` has a sibling `package-lock.json`, the lockfile’s root package version metadata is updated as part of the same release step. When `pyproject.toml` has a sibling `uv.lock`, `release create` runs `uv lock` after updating the manifest so uv regenerates the lockfile metadata. For advanced repositories with custom release scripts, disable built-in bumps in `config.yaml`:
 
 ```yaml
 release:
