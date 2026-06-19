@@ -602,6 +602,7 @@ Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default cre
 #### Node Index
 
 - [Node Configuration](reference/node/configuration.md)
+- [Helm chart](reference/node/helm-chart.md)
 
 #### Platform Index
 
