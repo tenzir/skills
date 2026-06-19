@@ -354,7 +354,7 @@ Once you’ve completed the configuration, click the *Create* button. Your node 
 
 ## Kubernetes
 
-Deploy one or more `tenzir-node` instances on a Kubernetes cluster with the Tenzir Helm chart. The chart deploys nodes only — it does not deploy the Tenzir Platform. Each node connects out to a Platform you have already provisioned, either cloud-hosted at `app.tenzir.com` or self-hosted through the Sovereign Edition. Each entry in the chart’s `nodes` list renders as its own `StatefulSet` with a persistent volume and a Kubernetes `Service`. See [Helm chart](../../reference/node/helm-chart.md) for the full option surface.
+Deploy one or more `tenzir-node` instances on a Kubernetes cluster with the [Tenzir Helm chart](../../reference/node/helm-chart.md). The chart deploys nodes only — it does not deploy the Tenzir Platform. Each node connects out to a Platform you have already provisioned, either cloud-hosted at `app.tenzir.com` or self-hosted through the Sovereign Edition. Each entry in the chart’s `nodes` list renders as its own `StatefulSet` with a persistent volume and a Kubernetes `Service`.
 
 The chart is distributed as an OCI artifact at `oci://ghcr.io/tenzir/charts/tenzir-node`. You need Kubernetes 1.27 or later and Helm 3.8 or later.
 
