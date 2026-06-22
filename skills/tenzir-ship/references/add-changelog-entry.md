@@ -9,7 +9,7 @@ the change.
 
 This script prints the files and diff command for the changes in scope.
 
-## Determine key entry details
+## Determine entry metadata
 
 Infer the following details from the change context:
 
@@ -38,6 +38,29 @@ Examples:
 
 - Good: `OAuth support for authentication`
 - Bad: `Add OAuth authentication`
+
+### Authors
+
+The primary author gets automatically inferred when `gh` is logged in. For
+self-authored PRs, do not specify `--author` explicitly unless you get an error.
+When adding changelog entries for external contributions, add the GitHub
+username of the contributor.
+
+### PR numbers
+
+If your branch already has an open pull request, the existing PR number will be
+auto-inferred and you don't have to do anything.
+
+When you are adding one or more changelog entries before creating a pull
+request, manually add the PR number to the entries after having filed the PR and
+obtained a definite number, e.g.:
+
+```yaml
+prs:
+  - 42
+```
+
+In CI, explicitly use the PR number from `$GITHUB_EVENT_PATH`.
 
 ### Description
 
@@ -144,18 +167,16 @@ implemented.
 
 #### Review checklist
 
-- Would someone unfamiliar with the codebase understand it?
 - Does it describe outcomes rather than implementation?
 - Is a usage example shown for new or changed capabilities?
-- Are internal-only names absent?
-- Are user-facing technical terms preserved in code font?
+- Are internal-only mechanics absent?
+- Are user-facing technical terms preserved in code markup?
 
 ## Merge with a related unreleased entry
 
-Before creating a new entry, inspect existing entries in the unreleased queue.
-If the current change completes, corrects, or extends a change that is already
-documented there, merge it into that unreleased entry instead of creating a
-duplicate.
+Before creating a new entry, inspect existing unreleased entries. If the current
+change completes, corrects, or extends a change that is already documented
+there, merge it into that unreleased entry instead of creating a duplicate.
 
 Only merge when the relationship is clear from the user-facing outcome. A
 related entry should describe the same feature, bug, behavior change, or
@@ -174,6 +195,9 @@ When merging into an unreleased entry:
 - Merge list-valued frontmatter such as `authors`, `prs`, and `components`,
   preserving existing values and appending new distinct values.
 
+Never touch already-released changelog entries outside the `unreleased`
+directory.
+
 ## Create the entry
 
 Begin with writing the description to a temporary file, e.g.,
@@ -186,7 +210,6 @@ uvx tenzir-ship add \
   --title "<title>" \
   --type <type> \
   --description-file /tmp/description.md \
-  --pr <number> \
   --co-author <github-username>
 ```
 
@@ -198,11 +221,11 @@ Notes:
   when you are ready to create the first entry.
 - Pass `--root <path/to/changelog>` to `tenzir-ship` when the changelog is
   not in the top-level directory.
-- In CI, include `--pr <number>` when PR number is known from `$GITHUB_EVENT_PATH`.
-- Locally, omit `--pr` when auto-inference via `gh` context is available.
+- Add `--pr <number>` only when the PR number is already known, such as in CI.
+  Otherwise rely on auto-inference or update `prs` after filing the PR.
 - Set `--co-author <github-username>` only to a real GitHub username for
   agent-authored entries, e.g., `claude` or `codex`.
-- For OpenAI Codex or ChatGPT-assisted work, use the GitHub username `codex`;
-  do not use product or model names such as `chatgpt`, `gpt-5`, or `openai`.
+- For OpenAI-assisted work, use the GitHub username `codex`. For
+  Anthropic-assisted work, use `claude`. Do not use product or model names.
 
 On success, remove the temporary description file.
