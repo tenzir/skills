@@ -52,12 +52,26 @@ Number of tokens in the model's response/completion for this message.
 
 The name or identifier of the message context. In AI systems, this could be the conversation ID, session name, thread identifier, or interaction name (e.g., 'user-session-123', 'conversation-abc', 'chat-thread-456').
 
+### `prompt_text`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The text of the input prompt provided to the model for this message. This is the verbatim instruction, query, or context supplied to the AI system that drove the operation.
+
 ### `prompt_tokens`
 
 - **Type**: `integer_t`
 - **Requirement**: optional
 
 Number of tokens in the input prompt for this message.
+
+### `response_text`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The text of the model's response generated for this message. For agent-mediated operations, this is the content returned by the assistant, tool, or agent.
 
 ### `service`
 
