@@ -34,4 +34,5 @@ from_mysql table="events", live=true, host="localhost", database="mydb"
 
 ## See Also
 
+* [Read from data stores](../guides/collecting/read-from-data-stores.md)
 * [`from_mysql`](http://docs.tenzir.com/reference/operators/from_mysql.md)

@@ -108,6 +108,7 @@
 - [from_amazon_sqs](operators/from_amazon_sqs.md): Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 - [from_amqp](operators/from_amqp.md): Receives messages from an AMQP queue.
 - [from_azure_blob_storage](operators/from_azure_blob_storage.md): Reads one or multiple files from Azure Blob Storage.
+- [from_clickhouse](operators/from_clickhouse.md): Fetches data from a ClickHouse server.
 - [from_file](operators/from_file.md): Reads one or multiple files from a filesystem.
 - [from_fluent_bit](operators/from_fluent_bit.md): Receives events via Fluent Bit.
 - [from_ftp](operators/from_ftp.md): Downloads bytes via FTP or FTPS and parses them with a subpipeline.

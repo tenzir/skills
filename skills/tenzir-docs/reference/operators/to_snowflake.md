@@ -77,4 +77,5 @@ to_snowflake \
 
 ## See Also
 
+* [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [Snowflake](../../integrations/snowflake.md)

@@ -216,5 +216,6 @@ from_mysql table="events", live=true, tracking_column="event_id",
 
 ## See Also
 
+* [Read from data stores](../../guides/collecting/read-from-data-stores.md)
 * [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)
 * [MySQL](../../integrations/mysql.md)

@@ -1,117 +1,193 @@
 # ClickHouse
 
 
-[ClickHouse](https://clickhouse.com/clickhouse) is an open-source analytical database. It lets you run real-time analytics with SQL queries.
+This page shows you how to use ClickHouse as an analytical store for Tenzir pipelines: write normalized security telemetry to ClickHouse with [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) and read tables or SQL query results back into Tenzir with [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md).
 
-## How Tenzir Connects to ClickHouse
+[ClickHouse](https://clickhouse.com/clickhouse) is an open-source analytical database built for fast SQL over large event volumes. Tenzir sits in front of ClickHouse as a programmable security data pipeline: it collects telemetry, parses source formats, maps events to OCSF, enriches or reduces volume, and writes structured tables that analysts and detection systems can query.
 
-Tenzir connects to ClickHouse over the network using the native ClickHouse TCP protocol using the official [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) library. Tenzir communicates with ClickHouse via the host and port you specify in the [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) operator. This means:
+With [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md), ClickHouse can also feed later pipeline stages. Use this path to backfill historical events, export query results, materialize detection outputs, or route subsets to another tool without adding another ingestion path.
 
-* **Network**: Tenzir and ClickHouse can run on the same machine (using `localhost`) or on different machines in the same network. You just need to make sure that Tenzir can reach the ClickHouse server.
-* **IPC**: There is no direct inter-process communication (IPC) mechanism; all communication uses ClickHouse’s network protocol.
-* **Co-deployment**: For best performance and security, deploy Tenzir and ClickHouse in the same trusted network or use secure tunnels if needed.
+## Choose an integration path
 
-## Setting Up ClickHouse
+Use the path that matches the role ClickHouse plays in your deployment:
 
-To get started with ClickHouse, follow the [official quick start guide](https://clickhouse.com/docs/getting-started/quick-start/oss):
+| Goal                                   | ClickHouse role                                                                        | Tenzir building blocks                                                                                                                                                                                                                            |
+| -------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Build a security data lake             | Destination for OCSF-normalized telemetry                                              | [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md), [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)                                                                                           |
+| Keep a schema you manage in ClickHouse | Existing MergeTree table with explicit types, TTLs, projections, or materialized views | [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) with `mode="append"`                                                                                                                                               |
+| Query retained telemetry               | Source table or SQL query result                                                       | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md)                                                                                                                                                                |
+| Run lake-backed hunts or detections    | SQL engine for filtering, grouping, and sorting large event sets                       | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md), [`where`](http://docs.tenzir.com/reference/operators/where.md), [`publish`](http://docs.tenzir.com/reference/operators/publish.md)                            |
+| Export or fan out query results        | Query result source for downstream tools or object storage                             | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md), output operators such as [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md) or [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) |
+| Inspect available tables and schemas   | `SHOW`, `DESCRIBE`, or `system.*` metadata queries                                     | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md) with `sql=...`                                                                                                                                                 |
 
-### Native Binary
+## Connect to ClickHouse
 
-1. Download the binary:
+Tenzir connects to ClickHouse through the native ClickHouse TCP protocol using the official [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) client library. The operators don’t use ClickHouse’s HTTP interface or a local IPC mechanism.
 
-   ```sh
-   curl https://clickhouse.com/ | sh
-   ```
+Use either a ClickHouse URI or explicit connection arguments:
 
-2. Start the server:
+```tql
+from_clickhouse uri="clickhouse://default:secret@localhost:9000/security",
+                table="events",
+                tls=false
+```
 
-   ```sh
-   ./clickhouse server
-   ```
+You can also pass the connection details as separate arguments:
 
-   This downloads the ClickHouse binary and starts the server. You can then connect to ClickHouse at `localhost:9000` (native protocol) or `localhost:8123` (HTTP interface).
+```tql
+from_clickhouse table="security.events",
+                host="localhost",
+                port=9000,
+                user="default",
+                password=secret("CLICKHOUSE_PASSWORD"),
+                tls=false
+```
 
-3. (Optionally) Start CLI client:
+Use the same connection arguments with [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md). If a URI selects a database and `table` is unqualified, Tenzir uses that database. In create modes, [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) also creates the selected database if it doesn’t exist.
 
-   ```sh
-   ./clickhouse client
-   ```
+## Set up ClickHouse
 
-   With this client, you can now run SQL queries on your ClickHouse server.
+Start with ClickHouse Cloud
 
-### Docker
+Use ClickHouse Cloud when you want ClickHouse managed separately from Tenzir but still reachable through the native protocol. Create a service with the [ClickHouse Cloud quick start](https://clickhouse.com/docs/getting-started/quick-start/cloud), copy the native endpoint, port, user, and database from the connection details, and keep TLS enabled.
 
-1. Run Docker:
+Store the password in Tenzir’s secret store and pass the Cloud connection details to either ClickHouse operator:
 
-   ```sh
-   docker run -d --name clickhouse-server --ulimit nofile=262144:262144 \
-     -p 9000:9000 -p 8123:8123 clickhouse/clickhouse-server
-   ```
+```tql
+from_clickhouse table="security.events",
+                host="abc123.us-east-1.aws.clickhouse.cloud",
+                port=9440,
+                password=secret("CLICKHOUSE_PASSWORD")
+```
 
-***
+The examples later use `tls=false` only because they assume a local self-managed ClickHouse server without TLS.
 
-You can now connect to ClickHouse at `localhost:9000` (native protocol) or `localhost:8123` (HTTP interface).
+If you need a local or self-managed ClickHouse deployment, start with the [ClickHouse OSS quick start](https://clickhouse.com/docs/getting-started/quick-start/oss). Tenzir connects to a self-managed server the same way, using the native host and port you configure in [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md) and [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md).
 
 ## Examples
 
-These examples assume that the ClickHouse server is running on the same host as Tenzir and that it allows non-TLS connections (hence using `tls=false` in the pipelines).
+These examples assume that ClickHouse runs on the same host as Tenzir and allows non-TLS connections, which is why the pipelines use `tls=false`. For ClickHouse Cloud, use your service endpoint and credentials, and keep TLS enabled.
 
-You can find out more about how to configure TLS on the [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) documentation and the [Clickhouse SSL-TLS configuration guide](https://clickhouse.com/docs/guides/sre/configuring-ssl)
+### Land OCSF telemetry in ClickHouse
 
-### 1. Easy Mode: Automatic table creation
-
-Tenzir can automatically create tables in ClickHouse based on the incoming data schema. For example, to ingest OCSF network activity data:
+Use this path when ClickHouse is your security data lake. Tenzir can create tables from incoming events, and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) keeps the ClickHouse schema stable by casting events to the selected OCSF class, encoding variant fields, and filling missing fields with typed nulls.
 
 ```tql
 from_file "ocsf_network_activity.json"
 ocsf::cast encode_variants=true, null_fill=true
-to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time, tls=false
+to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}",
+              primary=time,
+              tls=false
 ```
 
-When creating a table, the [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. You must take care that there are no untyped nulls in this event, as the operator cannot transmit those.
+When creating a table, the [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Make sure the first event doesn’t contain untyped nulls or empty records. [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) helps because it gives expected OCSF fields explicit types before the table is created.
 
-In this example, we use the [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) operator, which will automatically align events with the correct OCSF schema, giving all fields the correct types and adding all fields that should be in `ocsf.Network_Activity`. This ensures that we create a complete table without missing or incorrectly typed columns.
-
-You can now query the data in ClickHouse, e.g.:
+After the data lands, query it directly in ClickHouse:
 
 ```sql
-SELECT median(traffic.bytes_in), median(traffic.bytes_out)
+SELECT
+  dst_endpoint.ip,
+  count() AS events,
+  median(traffic.bytes_in) AS median_bytes_in
 FROM ocsf.Network_Activity
-GROUP BY *
+WHERE time > now() - INTERVAL 1 DAY
+GROUP BY dst_endpoint.ip
+ORDER BY events DESC
+LIMIT 20;
 ```
 
-### 2. Advanced: Explicit Table Creation
+### Append to a table you manage
 
-For more control, you can create the table in ClickHouse first. Use this approach when you know the full schema of your table, but not all events contain all fields and as such the operator would not create the correct table.
+Create the ClickHouse table first when you need explicit types, table engines, TTL policies, projections, materialized views, or partitioning that should stay under ClickHouse control.
 
 1. Create the table in ClickHouse:
 
    ```sql
-   CREATE TABLE my_table (
-     id Int64,
-     name String,
-     mice_caught Nullable(Int64)
-   ) ENGINE = MergeTree() ORDER BY id;
+   CREATE DATABASE IF NOT EXISTS security;
+
+
+   CREATE TABLE security.alerts (
+     time DateTime64(9),
+     rule_name String,
+     severity Int64,
+     src_ip Nullable(IPv6),
+     message String
+   ) ENGINE = MergeTree()
+   ORDER BY (time, rule_name);
    ```
 
 2. Ingest data from Tenzir:
 
-   my\_file.csv
-
-   ```csv
-   id,name,mice_caught
-   0,Jerry,
-   1,Tom,0
-   ```
-
    ```tql
-   from_file "my_file.csv"
-   to_clickhouse table="my_table", mode="append", tls=false
+   from {
+     time: 2026-06-01T12:00:00Z,
+     rule_name: "failed-login-burst",
+     severity: 5,
+     src_ip: 10.0.1.12,
+     message: "More than 20 failed logons from one source in 5 minutes",
+   }
+   to_clickhouse table="security.alerts", mode="append", tls=false
    ```
 
-   We use the explicit `mode="append"` to ensure that the table already exists.
+   `mode="append"` makes the pipeline fail if the table doesn’t already exist, so ClickHouse remains the source of truth for the schema.
 
-   In this example *Jerry*, being a mouse, has no value for `mice_caught`. Since we created a table with the expected type, this is not an issue.
+### Read data from ClickHouse
+
+Use table mode when you want Tenzir to read a ClickHouse table as structured events.
+
+```tql
+from_clickhouse table="ocsf.Network_Activity", tls=false
+where time > now() - 1d and severity_id >= 3
+publish "clickhouse-network-activity"
+```
+
+Use SQL mode when ClickHouse should project, aggregate, sort, or otherwise shape the result before Tenzir receives it:
+
+```tql
+from_clickhouse sql="SELECT time, host, severity, message FROM security.events WHERE severity >= 3 ORDER BY time DESC",
+                tls=false
+publish "clickhouse-findings"
+```
+
+### Inspect tables and schemas
+
+Use SQL mode for ClickHouse metadata queries:
+
+```tql
+from_clickhouse sql="SHOW TABLES FROM ocsf", tls=false
+```
+
+To inspect columns for a specific table, run `DESCRIBE TABLE`:
+
+```tql
+from_clickhouse sql="DESCRIBE TABLE ocsf.Network_Activity", tls=false
+```
+
+### Export query results
+
+Because [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md) turns query results into regular Tenzir events, you can route them to any supported destination. For example, export a seven-day slice to S3 as Parquet:
+
+```tql
+from_clickhouse sql="SELECT * FROM ocsf.Network_Activity WHERE time >= now() - INTERVAL 7 DAY",
+                tls=false
+to_s3 "s3://security-exports/clickhouse/network_activity_{uuid}.parquet" {
+  write_parquet
+}
+```
+
+## See Also
+
+* [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md)
+* [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
+* [`publish`](http://docs.tenzir.com/reference/operators/publish.md)
+* [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)
+* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
+* [`where`](http://docs.tenzir.com/reference/operators/where.md)
+* [`write_parquet`](http://docs.tenzir.com/reference/operators/write_parquet.md)
+* [Read from data stores](../guides/collecting/read-from-data-stores.md)
+* [Send to destinations](../guides/routing/send-to-destinations.md)
+* [Secrets](../explanations/secrets.md)
 
 ## Contents
 

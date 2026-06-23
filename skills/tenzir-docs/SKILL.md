@@ -208,6 +208,10 @@ This guide shows you how to interact with HTTP APIs using `from_http` and `to_ht
 
 This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
 
+##### [Read from data stores](guides/collecting/read-from-data-stores.md)
+
+This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows from MySQL.
+
 ##### [Get data from the network](guides/collecting/get-data-from-the-network.md)
 
 This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets for incoming data and capture raw packets from network interfaces.
@@ -328,7 +332,7 @@ The `deduplicate` operator provides a powerful mechanism to remove duplicate eve
 
 ##### [Send to destinations](guides/routing/send-to-destinations.md)
 
-This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about destination operators, file output patterns, and expression-based serialization.
+This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about message destinations, data stores, file output patterns, and expression-based serialization.
 
 ##### [Expose data as a server](guides/routing/expose-data-as-server.md)
 
@@ -754,7 +758,7 @@ The User Datagram Protocol (UDP) is a connection-less protocol to send messages 
 
 #### [ClickHouse](integrations/clickhouse.md)
 
-ClickHouse is an open-source analytical database. It lets you run real-time analytics with SQL queries.
+This page shows you how to use ClickHouse as an analytical store for Tenzir pipelines: write normalized security telemetry to ClickHouse with `to_clickhouse` and read tables or SQL query results back into Tenzir with `from_clickhouse`.
 
 #### [Elasticsearch](integrations/elasticsearch.md)
 

@@ -633,6 +633,14 @@ Reads one or multiple files from Azure Blob Storage.
 from_azure_blob_storage "abfs://container/data/**.json"
 ```
 
+### [from\_clickhouse](operators/from_clickhouse.md)
+
+Reads rows or metadata from ClickHouse.
+
+```tql
+from_clickhouse table="my_table"
+```
+
 ### [from\_file](operators/from_file.md)
 
 Reads one or multiple files from a filesystem.

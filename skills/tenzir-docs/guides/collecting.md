@@ -62,6 +62,16 @@ this = string(message).parse_json()
 
 See the [message broker guide](collecting/read-from-message-brokers.md) for broker-specific configurations.
 
+### Data stores
+
+Query external data stores such as MySQL and ClickHouse:
+
+```tql
+from_clickhouse sql="SELECT * FROM events WHERE severity >= 3", tls=false
+```
+
+See the [data store guide](collecting/read-from-data-stores.md) for table reads, SQL pushdown, metadata inspection, and live MySQL polling.
+
 ### Network data
 
 Receive data over TCP or UDP sockets, or capture packets from network interfaces:
@@ -88,6 +98,7 @@ For routing data to outputs, see the [Routing guides](routing/send-to-destinatio
 * [Read and watch files](collecting/read-and-watch-files.md)
 * [Fetch via HTTP and APIs](collecting/fetch-via-http-and-apis.md)
 * [Read from message brokers](collecting/read-from-message-brokers.md)
+* [Read from data stores](collecting/read-from-data-stores.md)
 * [Get data from the network](collecting/get-data-from-the-network.md)
 * [Send to destinations](routing/send-to-destinations.md)
 
@@ -96,4 +107,5 @@ For routing data to outputs, see the [Routing guides](routing/send-to-destinatio
 - [Read-and-watch-files](collecting/read-and-watch-files.md)
 - [Fetch-via-http-and-apis](collecting/fetch-via-http-and-apis.md)
 - [Read-from-message-brokers](collecting/read-from-message-brokers.md)
+- [Read-from-data-stores](collecting/read-from-data-stores.md)
 - [Get-data-from-the-network](collecting/get-data-from-the-network.md)

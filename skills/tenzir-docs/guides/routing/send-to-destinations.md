@@ -1,11 +1,11 @@
 # Send to destinations
 
 
-This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about destination operators, file output patterns, and expression-based serialization.
+This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about message destinations, data stores, file output patterns, and expression-based serialization.
 
 ## Destination operators
 
-TQL provides `to_*` operators for sending events to various destinations. These operators accept expressions for flexible serialization.
+TQL provides `to_*` operators for sending events to various destinations. Message-oriented operators accept expressions for flexible serialization, while data store operators write structured rows directly.
 
 ### Message brokers
 
@@ -43,6 +43,32 @@ subscribe "security-events"
 to_amazon_kinesis "security-events"
 ```
 
+### Data stores
+
+Send events to data stores like [ClickHouse](../../integrations/clickhouse.md) and [Snowflake](../../integrations/snowflake.md).
+
+Send structured events to ClickHouse:
+
+```tql
+subscribe "security-events"
+to_clickhouse table="alerts", primary=time, mode="create_append", tls=false
+```
+
+Write batches to Snowflake with bulk ingestion:
+
+```tql
+export
+to_snowflake \
+  account_identifier="org-account",
+  user_name="tenzir_user",
+  password=secret("SNOWFLAKE_PASSWORD"),
+  database="SECURITY",
+  schema="PUBLIC",
+  table="EVENTS"
+```
+
+These operators preserve event structure instead of requiring a `message` expression.
+
 ### Analytics platforms
 
 Send data to platforms like [Splunk](../../integrations/splunk.md), [OpenSearch](../../integrations/opensearch.md), and [Elasticsearch](../../integrations/elasticsearch.md).
@@ -66,7 +92,7 @@ to_opensearch "https://opensearch.example.com:9200",
 
 ### Cloud services
 
-Route events to cloud destinations like [SQS](../../integrations/amazon/sqs.md) and [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md).
+Route events to cloud destinations like [Amazon SQS](../../integrations/amazon/sqs.md) and [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md).
 
 Send to SQS:
 
@@ -79,7 +105,9 @@ Send to Pub/Sub:
 
 ```tql
 subscribe "events"
-to_google_cloud_pubsub project_id="my-project", topic_id="events", message=this.print_ndjson()
+to_google_cloud_pubsub project_id="my-project",
+  topic_id="events",
+  message=this.print_json()
 ```
 
 ## File output
@@ -126,9 +154,9 @@ to_tcp "collector.example.com:12201" {
 }
 ```
 
-## Expression-based serialization
+## Expression-based serialization for message destinations
 
-Destination operators use expressions for flexible message formatting:
+Message-oriented destination operators use expressions for flexible message formatting:
 
 ### Serialize the entire event
 
@@ -166,7 +194,7 @@ Route events to different destinations based on content:
 to_kafka f"events.{event_type}"
 ```
 
-## See Also
+## See also
 
 * [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
 * [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
@@ -177,8 +205,11 @@ to_kafka f"events.{event_type}"
 * [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md)
 * [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md)
 * [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md)
+* [Read from data stores](../collecting/read-from-data-stores.md)
 * [Load-balance pipelines](load-balance-pipelines.md)
 * [Split and merge streams](split-and-merge-streams.md)
+* [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)
+* [`to_snowflake`](http://docs.tenzir.com/reference/operators/to_snowflake.md)
 
 ## Contents
 

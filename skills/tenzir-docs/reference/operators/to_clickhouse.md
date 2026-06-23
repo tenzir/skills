@@ -4,9 +4,9 @@
 Sends events to a ClickHouse table.
 
 ```tql
-to_clickhouse table=string, [host=string, port=int, user=string, password=string,
-                             mode=string, primary=field, database=string,
-                             tls=record]
+to_clickhouse table=string,
+              [uri=string | (host=string, port=int, user=string, password=string)],
+              [mode=string, primary=field, tls=bool|record]
 ```
 
 ## Description
@@ -17,7 +17,21 @@ The name of the table you want to write to.
 
 This can be a dynamic expression, allowing you to automatically write to different tables based on the data.
 
-The `<database>.<table>` notation can be used to also specify a table. If no `<database>`, is provided, `"default"` will be used.
+The `<database>.<table>` notation can be used to also specify a table. If no `<database>` is provided, Tenzir writes to the database selected by the URI, if any, or the server default.
+
+### `uri = string (optional)`
+
+A ClickHouse connection URI in the format:
+
+```text
+clickhouse://[user[:password]@]host[:port][/database]
+```
+
+When present, the URI supplies the connection endpoint and optionally the current database.
+
+If the URI includes `/database` and `table` is unqualified, Tenzir writes to that database. In `mode="create"` and `mode="create_append"`, Tenzir also creates the selected database if it does not exist yet.
+
+Use `tls` separately to control TLS.
 
 ### `host = string (optional)`
 
@@ -25,11 +39,15 @@ The hostname for the ClickHouse server.
 
 Defaults to `"localhost"`.
 
+Mutually exclusive with `uri`.
+
 ### `port = int (optional)`
 
 The port for the ClickHouse server.
 
 Defaults to `9000` without TLS and `9440` with TLS.
+
+Mutually exclusive with `uri`.
 
 ### `user = string (optional)`
 
@@ -37,11 +55,15 @@ The user to use for authentication.
 
 Defaults to `"default"`.
 
+Mutually exclusive with `uri`.
+
 ### `password = string (optional)`
 
 The password for the given user.
 
 Defaults to `""`.
+
+Mutually exclusive with `uri`.
 
 ### `mode = string (optional)`
 
@@ -86,7 +108,7 @@ Tenzir uses ClickHouse’s [clickhouse-cpp](https://github.com/ClickHouse/clickh
 
 | Tenzir     | ClickHouse                     | Comment                                                                                           |
 | :--------- | :----------------------------- | :------------------------------------------------------------------------------------------------ |
-| `bool`     | `UInt8`                        |                                                                                                   |
+| `bool`     | `Bool`                         |                                                                                                   |
 | `int64`    | `Int64`                        |                                                                                                   |
 | `uint64`   | `UInt64`                       |                                                                                                   |
 | `double`   | `Float64`                      |                                                                                                   |
@@ -153,6 +175,18 @@ from_file "my_file.csv"
 to_clickhouse table="my_table", tls=false
 ```
 
+### Use a connection URI
+
+```tql
+from_file "my_file.csv"
+to_clickhouse uri="clickhouse://default:secret@clickhouse.example.com:9000/security",
+              table="alerts",
+              primary=time,
+              tls=false
+```
+
+This writes to `security.alerts`.
+
 ### Send OCSF data to ClickHouse
 
 When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md). This allows us to encode the `unmapped` field as JSON and fill any missing fields with `null`, ensuring a single schema.
@@ -176,7 +210,7 @@ This creates the following table:
    ┌─name─┬─type────────────────────┐
 1. │ i    │ Int64                   │
 2. │ d    │ Nullable(Float64)       │
-3. │ b    │ Nullable(UInt8)         │
+3. │ b    │ Nullable(Bool)          │
 4. │ l    │ Array(Nullable(Int64))  │
 5. │ r    │ Tuple(                 ↴│
    │      │↳    s Nullable(String)) │
@@ -185,5 +219,7 @@ This creates the following table:
 
 ## See Also
 
+* [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md)
 * [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
+* [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [ClickHouse](../../integrations/clickhouse.md)
