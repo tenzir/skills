@@ -25,8 +25,8 @@ from {x: "hello world".to_title()}
 
 ## See Also
 
-* [`capitalize`](/reference/functions/capitalize.md)
-* [`is_title`](/reference/functions/is_title.md)
-* [`to_lower`](/reference/functions/to_lower.md)
-* [`to_upper`](/reference/functions/to_upper.md)
+* [`capitalize`](http://docs.tenzir.com/reference/functions/capitalize.md)
+* [`is_title`](http://docs.tenzir.com/reference/functions/is_title.md)
+* [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md)
+* [`to_upper`](http://docs.tenzir.com/reference/functions/to_upper.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -48,6 +48,6 @@ assert @name == "ocsf.network_activity"
 
 ## See Also
 
-* [`assert_throughput`](/reference/operators/assert_throughput.md)
-* [`where`](/reference/operators/where.md)
+* [`assert_throughput`](http://docs.tenzir.com/reference/operators/assert_throughput.md)
+* [`where`](http://docs.tenzir.com/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

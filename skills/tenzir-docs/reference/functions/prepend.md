@@ -43,8 +43,8 @@ xs = xs.prepend(3)
 
 ## See Also
 
-* [`add`](/reference/functions/add.md)
-* [`append`](/reference/functions/append.md)
-* [`concatenate`](/reference/functions/concatenate.md)
-* [`remove`](/reference/functions/remove.md)
+* [`add`](http://docs.tenzir.com/reference/functions/add.md)
+* [`append`](http://docs.tenzir.com/reference/functions/append.md)
+* [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md)
+* [`remove`](http://docs.tenzir.com/reference/functions/remove.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

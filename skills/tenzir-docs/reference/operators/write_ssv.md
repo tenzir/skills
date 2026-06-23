@@ -43,9 +43,9 @@ x y z
 
 ## See Also
 
-* [`print_ssv`](/reference/functions/print_ssv.md)
-* [`read_ssv`](/reference/operators/read_ssv.md)
-* [`write_csv`](/reference/operators/write_csv.md)
-* [`write_lines`](/reference/operators/write_lines.md)
-* [`write_tsv`](/reference/operators/write_tsv.md)
-* [`write_xsv`](/reference/operators/write_xsv.md)
+* [`print_ssv`](http://docs.tenzir.com/reference/functions/print_ssv.md)
+* [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md)
+* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
+* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)
+* [`write_tsv`](http://docs.tenzir.com/reference/operators/write_tsv.md)
+* [`write_xsv`](http://docs.tenzir.com/reference/operators/write_xsv.md)

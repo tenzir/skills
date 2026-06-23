@@ -388,9 +388,9 @@ Keeping one table per OCSF object and indicator type prevents ambiguous values, 
 
 ## See Also
 
-* [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md)
-* [`context::update`](/reference/operators/context/update.md)
-* [`context::enrich`](/reference/operators/context/enrich.md)
+* [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md)
+* [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md)
+* [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md)
 * [Use lookup tables](use-lookup-tables.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

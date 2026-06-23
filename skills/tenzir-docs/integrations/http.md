@@ -7,23 +7,23 @@
 
 When retrieving data from an API or website, you prepare your HTTP request and get back the HTTP response body as your pipeline data:
 
-Use [`from_http`](/reference/operators/from_http.md) to issue a one-shot HTTP request and stream the response body chunks into its parser sub-pipeline as they arrive. The operator automatically infers the response format from the URL extension or `Content-Type` header.
+Use [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) to issue a one-shot HTTP request and stream the response body chunks into its parser sub-pipeline as they arrive. The operator automatically infers the response format from the URL extension or `Content-Type` header.
 
 See the [Fetch via HTTP and APIs](../guides/collecting/fetch-via-http-and-apis.md) guide for practical examples covering authentication, pagination, error handling, and data enrichment.
 
 ## Sending data to webhooks and APIs
 
-Use [`to_http`](/reference/operators/to_http.md) to send events to a webhook or API endpoint as a single HTTP request per operator invocation. A printer sub-pipeline turns the input events into the request body bytes, which Tenzir streams directly into the outgoing request. This is useful for pushing alerts to webhooks, forwarding events to SIEMs, or sending periodic batches to external APIs.
+Use [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) to send events to a webhook or API endpoint as a single HTTP request per operator invocation. A printer sub-pipeline turns the input events into the request body bytes, which Tenzir streams directly into the outgoing request. This is useful for pushing alerts to webhooks, forwarding events to SIEMs, or sending periodic batches to external APIs.
 
 ## Streaming data to HTTP clients
 
-Use [`serve_http`](/reference/operators/serve_http.md) to start an HTTP server that streams the bytes produced by a nested pipeline to connected clients. For example, use [`write_ndjson`](/reference/operators/write_ndjson.md) when you want NDJSON over HTTP or [`write_lines`](/reference/operators/write_lines.md) when you want plain text.
+Use [`serve_http`](http://docs.tenzir.com/reference/operators/serve_http.md) to start an HTTP server that streams the bytes produced by a nested pipeline to connected clients. For example, use [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md) when you want NDJSON over HTTP or [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md) when you want plain text.
 
 See the [Expose data as a server](../guides/routing/expose-data-as-server.md) guide for practical examples covering serialization, connection limits, and TLS.
 
 ## Accepting incoming requests
 
-Use [`accept_http`](/reference/operators/accept_http.md) to spin up an HTTP server that turns incoming requests into pipeline events. This is useful for receiving webhooks, building custom API endpoints, or ingesting data pushed by external systems.
+Use [`accept_http`](http://docs.tenzir.com/reference/operators/accept_http.md) to spin up an HTTP server that turns incoming requests into pipeline events. This is useful for receiving webhooks, building custom API endpoints, or ingesting data pushed by external systems.
 
 ## SSL/TLS
 

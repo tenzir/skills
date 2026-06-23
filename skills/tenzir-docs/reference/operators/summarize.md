@@ -143,11 +143,11 @@ summarize count(this), severity, options={frequency: 10s, mode: "update"}
 
 ## See Also
 
-* [`group`](/reference/operators/group.md)
-* [`rare`](/reference/operators/rare.md)
-* [`top`](/reference/operators/top.md)
-* [`sum`](/reference/functions/sum.md)
-* [`count`](/reference/functions/count.md)
+* [`group`](http://docs.tenzir.com/reference/operators/group.md)
+* [`rare`](http://docs.tenzir.com/reference/operators/rare.md)
+* [`top`](http://docs.tenzir.com/reference/operators/top.md)
+* [`sum`](http://docs.tenzir.com/reference/functions/sum.md)
+* [`count`](http://docs.tenzir.com/reference/functions/count.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

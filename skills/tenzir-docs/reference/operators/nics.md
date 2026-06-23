@@ -50,4 +50,4 @@ where status.connected
 
 ## See Also
 
-* [`from_nic`](/reference/operators/from_nic.md)
+* [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md)

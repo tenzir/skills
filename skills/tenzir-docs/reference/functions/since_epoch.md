@@ -25,6 +25,6 @@ from { x: since_epoch(2021-02-24) }
 
 ## See Also
 
-* [`from_epoch`](/reference/functions/from_epoch.md)
-* [`now`](/reference/functions/now.md)
+* [`from_epoch`](http://docs.tenzir.com/reference/functions/from_epoch.md)
+* [`now`](http://docs.tenzir.com/reference/functions/now.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

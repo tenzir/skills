@@ -73,6 +73,6 @@ top key
 
 ## See Also
 
-* [`has`](/reference/functions/has.md)
-* [`get`](/reference/functions/get.md)
+* [`has`](http://docs.tenzir.com/reference/functions/has.md)
+* [`get`](http://docs.tenzir.com/reference/functions/get.md)
 * [Shape records](../../guides/transformation/shape-records.md)

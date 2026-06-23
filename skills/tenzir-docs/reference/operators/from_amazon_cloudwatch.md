@@ -163,5 +163,5 @@ from_amazon_cloudwatch "/aws/lambda/api",
 
 ## See Also
 
-* [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md)
+* [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md)
 * [CloudWatch](../../integrations/amazon/cloudwatch.md)

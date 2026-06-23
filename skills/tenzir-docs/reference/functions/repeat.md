@@ -43,7 +43,7 @@ from {message: "na".repeat(0)}
 
 ## See Also
 
-* [`pad_end`](/reference/functions/pad_end.md)
-* [`pad_start`](/reference/functions/pad_start.md)
-* [`replace`](/reference/functions/replace.md)
+* [`pad_end`](http://docs.tenzir.com/reference/functions/pad_end.md)
+* [`pad_start`](http://docs.tenzir.com/reference/functions/pad_start.md)
+* [`replace`](http://docs.tenzir.com/reference/functions/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

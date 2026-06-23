@@ -30,4 +30,4 @@ to_file "eve.json" {
 
 ## See Also
 
-* [`remote`](/reference/operators/remote.md)
+* [`remote`](http://docs.tenzir.com/reference/operators/remote.md)

@@ -56,9 +56,9 @@ xs = xs.add("hello")
 
 ## See Also
 
-* [`append`](/reference/functions/append.md)
-* [`distinct`](/reference/functions/distinct.md)
-* [`prepend`](/reference/functions/prepend.md)
-* [`remove`](/reference/functions/remove.md)
+* [`append`](http://docs.tenzir.com/reference/functions/append.md)
+* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
+* [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md)
+* [`remove`](http://docs.tenzir.com/reference/functions/remove.md)
 * [Enrich events with AI](../../guides/enrichment/enrich-events-with-ai.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

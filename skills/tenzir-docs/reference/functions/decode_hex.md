@@ -41,5 +41,5 @@ decoded = bytes.decode_hex()
 
 ## See Also
 
-* [`encode_hex`](/reference/functions/encode_hex.md)
+* [`encode_hex`](http://docs.tenzir.com/reference/functions/encode_hex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

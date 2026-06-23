@@ -52,9 +52,9 @@ right = concatenate(xs, [2])
 
 ## See Also
 
-* [`append`](/reference/functions/append.md)
-* [`merge`](/reference/functions/merge.md)
-* [`prepend`](/reference/functions/prepend.md)
-* [`zip`](/reference/functions/zip.md)
+* [`append`](http://docs.tenzir.com/reference/functions/append.md)
+* [`merge`](http://docs.tenzir.com/reference/functions/merge.md)
+* [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md)
+* [`zip`](http://docs.tenzir.com/reference/functions/zip.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

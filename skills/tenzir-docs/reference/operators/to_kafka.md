@@ -110,6 +110,6 @@ to_kafka "metrics", message=this.print_ndjson(), key="server-01"
 
 ## See Also
 
-* [`from_kafka`](/reference/operators/from_kafka.md)
+* [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)

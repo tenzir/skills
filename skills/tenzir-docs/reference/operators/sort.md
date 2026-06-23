@@ -53,7 +53,7 @@ sort src_ip, -dest_ip
 
 ## See Also
 
-* [`rare`](/reference/operators/rare.md)
-* [`reverse`](/reference/operators/reverse.md)
-* [`top`](/reference/operators/top.md)
+* [`rare`](http://docs.tenzir.com/reference/operators/rare.md)
+* [`reverse`](http://docs.tenzir.com/reference/operators/reverse.md)
+* [`top`](http://docs.tenzir.com/reference/operators/top.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

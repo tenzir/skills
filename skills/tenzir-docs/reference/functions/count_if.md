@@ -34,5 +34,5 @@ summarize total=x.count_if(x => x > 1)
 
 ## See Also
 
-* [`count`](/reference/functions/count.md)
+* [`count`](http://docs.tenzir.com/reference/functions/count.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

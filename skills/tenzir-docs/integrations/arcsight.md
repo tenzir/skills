@@ -9,20 +9,20 @@ ArcSight products also have proprietary interfaces, including SmartMessage and E
 
 Use the interface that matches where ArcSight sits in your deployment:
 
-| Goal                                                 | ArcSight interface              | Tenzir operators and functions                                                                                                                                                                                                                                 |
-| ---------------------------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Send events to Logger or a CEF Syslog SmartConnector | CEF or Syslog receiver over TCP | [`print_cef`](/reference/functions/print_cef.md), [`write_syslog`](/reference/operators/write_syslog.md), [`to_tcp`](/reference/operators/to_tcp.md)                                                                                                           |
-| Send CEF datagrams to Logger                         | CEF UDP receiver                | [`print_cef`](/reference/functions/print_cef.md), [`to_udp`](/reference/operators/to_udp.md)                                                                                                                                                                   |
-| Publish events to Transformation Hub                 | Kafka topic `th-cef`            | [`print_cef`](/reference/functions/print_cef.md), [`to_kafka`](/reference/operators/to_kafka.md)                                                                                                                                                               |
-| Receive forwarded ArcSight events                    | CEF or Syslog over TCP or UDP   | [`accept_tcp`](/reference/operators/accept_tcp.md), [`accept_udp`](/reference/operators/accept_udp.md), [`read_cef`](/reference/operators/read_cef.md), [`read_syslog`](/reference/operators/read_syslog.md), [`parse_cef`](/reference/functions/parse_cef.md) |
-| Read from Transformation Hub                         | Kafka topic `th-cef`            | [`from_kafka`](/reference/operators/from_kafka.md), [`parse_cef`](/reference/functions/parse_cef.md)                                                                                                                                                           |
-| Query stored Logger events                           | Logger REST search service      | [`from_http`](/reference/operators/from_http.md)                                                                                                                                                                                                               |
+| Goal                                                 | ArcSight interface              | Tenzir operators and functions                                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Send events to Logger or a CEF Syslog SmartConnector | CEF or Syslog receiver over TCP | [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md), [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md), [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)                                                                                                                                                       |
+| Send CEF datagrams to Logger                         | CEF UDP receiver                | [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md), [`to_udp`](http://docs.tenzir.com/reference/operators/to_udp.md)                                                                                                                                                                                                                                     |
+| Publish events to Transformation Hub                 | Kafka topic `th-cef`            | [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md), [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)                                                                                                                                                                                                                                 |
+| Receive forwarded ArcSight events                    | CEF or Syslog over TCP or UDP   | [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md), [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md), [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md), [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md), [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md) |
+| Read from Transformation Hub                         | Kafka topic `th-cef`            | [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md), [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md)                                                                                                                                                                                                                             |
+| Query stored Logger events                           | Logger REST search service      | [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)                                                                                                                                                                                                                                                                                                       |
 
 See the ArcSight documentation for [Logger receivers](https://www.microfocus.com/documentation/arcsight/logger-7.2.2/Logger-Admin-Guide/Content/Logger_AdminGuide/Configuration/Receivers.htm), [SmartConnector destinations](https://www.microfocus.com/documentation/arcsight/logger-7.2.2/Logger-Admin-Guide/Content/Logger_AdminGuide/Using_SmartConnectors_to_Collect_Events/Configuring_a_SmartConnector_to_Send_Events_to_Logger.htm), [CEF](https://www.microfocus.com/documentation/arcsight/arcsight-smartconnectors-8.3/cef-implementation-standard/Content/CEF/Chapter%201%20What%20is%20CEF.htm), [Transformation Hub Kafka topics](https://www.microfocus.com/documentation/arcsight/arcsight-smartconnectors-8.3/AS_smartconn_install/Content/Installinfo/smartconn_cef_kafka.htm), [Logger forwarding](https://www.microfocus.com/documentation/arcsight/logger-7.2.2/Logger-Admin-Guide/Content/Logger_AdminGuide/Overview/Forwarder_Configuration.htm), and [Logger REST search](https://www.microfocus.com/documentation/arcsight/logger-7.2.2/Logger-WebServices-API/Content/Logger_WebServicesAPI/RESTful_Search_Service/REST_SearchService.htm).
 
 ## Send events to ArcSight Logger
 
-ArcSight Logger can receive events through receivers such as CEF TCP, CEF UDP, and SmartMessage. If you want ArcSight to parse Tenzir events as CEF, format the event with [`print_cef`](/reference/functions/print_cef.md) first.
+ArcSight Logger can receive events through receivers such as CEF TCP, CEF UDP, and SmartMessage. If you want ArcSight to parse Tenzir events as CEF, format the event with [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md) first.
 
 For a TCP receiver, wrap the CEF payload in Syslog and connect to the Logger or SmartConnector endpoint:
 
@@ -47,7 +47,7 @@ to_tcp "arcsight-logger.example.com:515" {
 }
 ```
 
-Replace `arcsight-logger.example.com:515` with the host and port of your Logger receiver or SmartConnector destination. Use TLS options on [`to_tcp`](/reference/operators/to_tcp.md) if the receiver expects TLS.
+Replace `arcsight-logger.example.com:515` with the host and port of your Logger receiver or SmartConnector destination. Use TLS options on [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md) if the receiver expects TLS.
 
 If you configured a CEF UDP receiver, send one CEF message per datagram:
 
@@ -69,7 +69,7 @@ Prefer TCP when you need delivery feedback, connection-level TLS, or receiver ba
 
 ## Publish CEF to Transformation Hub
 
-ArcSight Transformation Hub is Kafka-based. SmartConnectors use the `th-cef` topic for CEF events, so Tenzir can publish CEF messages with [`to_kafka`](/reference/operators/to_kafka.md):
+ArcSight Transformation Hub is Kafka-based. SmartConnectors use the `th-cef` topic for CEF events, so Tenzir can publish CEF messages with [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md):
 
 ```tql
 let $options = {
@@ -98,7 +98,7 @@ Adapt the `options` record to match the Kafka settings of your Transformation Hu
 
 Use Tenzir as a CEF or Syslog receiver when a SmartConnector, Logger forwarder, or another ArcSight component sends events to a network destination.
 
-For raw CEF over TCP, listen with [`accept_tcp`](/reference/operators/accept_tcp.md) and parse the byte stream with [`read_cef`](/reference/operators/read_cef.md):
+For raw CEF over TCP, listen with [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md) and parse the byte stream with [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md):
 
 ```tql
 accept_tcp "0.0.0.0:1514" {
@@ -128,7 +128,7 @@ publish "arcsight"
 
 ## Read from Transformation Hub
 
-Consume CEF messages from the `th-cef` topic with [`from_kafka`](/reference/operators/from_kafka.md) and parse each Kafka message with [`parse_cef`](/reference/functions/parse_cef.md):
+Consume CEF messages from the `th-cef` topic with [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md) and parse each Kafka message with [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md):
 
 ```tql
 let $options = {
@@ -149,7 +149,7 @@ ArcSight can also use an Avro topic for normalized events. Tenzir does not have 
 
 ArcSight Logger exposes a REST search service for stored events. The API is session-oriented: log in, create a search session, fetch results, close the search session, and log out. Use this path for scheduled backfill or targeted queries, not for live forwarding.
 
-After you have a Logger user session and search session, use [`from_http`](/reference/operators/from_http.md) to fetch events:
+After you have a Logger user session and search session, use [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) to fetch events:
 
 ```tql
 let $logger = "https://logger.example.com:9000"
@@ -180,18 +180,18 @@ The response includes the Logger result metadata and event rows for the selected
 
 ## See Also
 
-* [`accept_tcp`](/reference/operators/accept_tcp.md)
-* [`accept_udp`](/reference/operators/accept_udp.md)
-* [`from_http`](/reference/operators/from_http.md)
-* [`from_kafka`](/reference/operators/from_kafka.md)
-* [`read_cef`](/reference/operators/read_cef.md)
-* [`read_syslog`](/reference/operators/read_syslog.md)
-* [`to_kafka`](/reference/operators/to_kafka.md)
-* [`to_tcp`](/reference/operators/to_tcp.md)
-* [`to_udp`](/reference/operators/to_udp.md)
-* [`write_syslog`](/reference/operators/write_syslog.md)
-* [`parse_cef`](/reference/functions/parse_cef.md)
-* [`print_cef`](/reference/functions/print_cef.md)
+* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
+* [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md)
+* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
+* [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md)
+* [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md)
+* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
+* [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
+* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
+* [`to_udp`](http://docs.tenzir.com/reference/operators/to_udp.md)
+* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
+* [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md)
+* [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md)
 * [Kafka](kafka.md)
 * [Syslog](syslog.md)
 

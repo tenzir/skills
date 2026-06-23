@@ -190,7 +190,7 @@ Quick rule
 
 ### Extract bulky arguments before subpipelines
 
-Operators that take a subpipeline often also take record or list arguments. When those arguments span multiple lines, the record braces and subpipeline braces can be hard to distinguish. Move bulky configuration values into `let` bindings so the operator call stays compact and the subpipeline remains visually clear. This pattern is common with [`from_http`](/reference/operators/from_http.md), where request records can sit directly before a parsing subpipeline such as [`read_json`](/reference/operators/read_json.md).
+Operators that take a subpipeline often also take record or list arguments. When those arguments span multiple lines, the record braces and subpipeline braces can be hard to distinguish. Move bulky configuration values into `let` bindings so the operator call stays compact and the subpipeline remains visually clear. This pattern is common with [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md), where request records can sit directly before a parsing subpipeline such as [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md).
 
 ❌ Hard to scan:
 
@@ -515,7 +515,7 @@ tags = concatenate(concatenate(base_tags, ["monitored"]), extra_tags)
 
 When a fragment may be missing, use optional access such as `...profile?` or `...custom_tags?`.
 
-Keep [`merge`](/reference/functions/merge.md) and [`concatenate`](/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
+Keep [`merge`](http://docs.tenzir.com/reference/functions/merge.md) and [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
 
 ## Field management
 
@@ -570,7 +570,7 @@ When normalizing data (e.g., to OCSF format):
 
 ### Use `replace` to normalize placeholder values
 
-When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
+When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](http://docs.tenzir.com/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
 
 ✅ Clear and composable approach:
 
@@ -641,7 +641,7 @@ drop_null_fields
 
 Operator vs. function
 
-Don’t confuse the [`replace`](/reference/operators/replace.md) operator with the [`replace`](/reference/functions/replace.md) function:
+Don’t confuse the [`replace`](http://docs.tenzir.com/reference/operators/replace.md) operator with the [`replace`](http://docs.tenzir.com/reference/functions/replace.md) function:
 
 * **Operator**: Replaces entire values across all fields in events (e.g., replace all `"-"` with `null`)
 * **Function**: Replaces substrings within a string (e.g., `"hello".replace("l", "r")` → `"herro"`)
@@ -751,7 +751,7 @@ where result > threshold        // Filter after expensive operation
 
 ### Put the stream clock outside keyed aggregations
 
-When you aggregate keys inside event-time windows, put [`window`](/reference/operators/window.md) outside [`group`](/reference/operators/group.md) if one stream-wide event-time clock should close all buckets. This keeps sparse keys from holding their own windows open until another event for the same key arrives, `idle_timeout` fires, or the input ends.
+When you aggregate keys inside event-time windows, put [`window`](http://docs.tenzir.com/reference/operators/window.md) outside [`group`](http://docs.tenzir.com/reference/operators/group.md) if one stream-wide event-time clock should close all buckets. This keeps sparse keys from holding their own windows open until another event for the same key arrives, `idle_timeout` fires, or the input ends.
 
 ✅ Prefer a single window clock for stream-wide detections:
 
@@ -783,7 +783,7 @@ group user {
 }
 ```
 
-Use [`group`](/reference/operators/group.md) around [`window`](/reference/operators/window.md) only when each key needs an independent event-time clock. For most stream detections, the outer [`window`](/reference/operators/window.md) bounds state more predictably.
+Use [`group`](http://docs.tenzir.com/reference/operators/group.md) around [`window`](http://docs.tenzir.com/reference/operators/window.md) only when each key needs an independent event-time clock. For most stream detections, the outer [`window`](http://docs.tenzir.com/reference/operators/window.md) bounds state more predictably.
 
 ## Composition patterns
 
@@ -1098,7 +1098,7 @@ Performance
 
 ### Treat warnings as errors with `strict`
 
-The [`strict`](/reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
+The [`strict`](http://docs.tenzir.com/reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
 
 ✅ Use `strict` for critical data processing:
 

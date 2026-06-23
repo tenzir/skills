@@ -89,5 +89,5 @@ from {
 
 ## See Also
 
-* [`has`](/reference/functions/has.md)
-* [`length`](/reference/functions/length.md)
+* [`has`](http://docs.tenzir.com/reference/functions/has.md)
+* [`length`](http://docs.tenzir.com/reference/functions/length.md)

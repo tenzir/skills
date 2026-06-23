@@ -15,11 +15,11 @@ The `read_xsv` operator transforms a byte stream into a event stream by parsing 
 
 The following table lists existing XSV configurations:
 
-| Format                                    | Field Separator | List Separator | Null Value |
-| ----------------------------------------- | :-------------: | :------------: | :--------: |
-| [`csv`](/reference/operators/read_csv.md) |       `,`       |       `;`      |    empty   |
-| [`ssv`](/reference/operators/read_ssv.md) |    `<space>`    |       `,`      |     `-`    |
-| [`tsv`](/reference/operators/read_tsv.md) |       `\t`      |       `,`      |     `-`    |
+| Format                                                          | Field Separator | List Separator | Null Value |
+| --------------------------------------------------------------- | :-------------: | :------------: | :--------: |
+| [`csv`](http://docs.tenzir.com/reference/operators/read_csv.md) |       `,`       |       `;`      |    empty   |
+| [`ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md) |    `<space>`    |       `,`      |     `-`    |
+| [`tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md) |       `\t`      |       `,`      |     `-`    |
 
 ### `field_separator = string`
 
@@ -166,7 +166,7 @@ Type Conflict
 
 ## See Also
 
-* [`read_csv`](/reference/operators/read_csv.md)
-* [`read_ssv`](/reference/operators/read_ssv.md)
-* [`read_tsv`](/reference/operators/read_tsv.md)
-* [`parse_xsv`](/reference/functions/parse_xsv.md)
+* [`read_csv`](http://docs.tenzir.com/reference/operators/read_csv.md)
+* [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md)
+* [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md)
+* [`parse_xsv`](http://docs.tenzir.com/reference/functions/parse_xsv.md)

@@ -171,6 +171,6 @@ from_amazon_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`to_amazon_sqs`](/reference/operators/to_amazon_sqs.md)
+* [`to_amazon_sqs`](http://docs.tenzir.com/reference/operators/to_amazon_sqs.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [SQS](../../integrations/amazon/sqs.md)

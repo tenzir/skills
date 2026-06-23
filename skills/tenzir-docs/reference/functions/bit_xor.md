@@ -33,8 +33,8 @@ from {x: bit_xor(5, 3)}
 
 ## See Also
 
-* [`bit_and`](/reference/functions/bit_and.md)
-* [`bit_not`](/reference/functions/bit_not.md)
-* [`bit_or`](/reference/functions/bit_or.md)
-* [`shift_left`](/reference/functions/shift_left.md)
-* [`shift_right`](/reference/functions/shift_right.md)
+* [`bit_and`](http://docs.tenzir.com/reference/functions/bit_and.md)
+* [`bit_not`](http://docs.tenzir.com/reference/functions/bit_not.md)
+* [`bit_or`](http://docs.tenzir.com/reference/functions/bit_or.md)
+* [`shift_left`](http://docs.tenzir.com/reference/functions/shift_left.md)
+* [`shift_right`](http://docs.tenzir.com/reference/functions/shift_right.md)

@@ -38,5 +38,5 @@ xs = xs.where(x => x > 3)
 
 ## See Also
 
-* [`map`](/reference/functions/map.md)
+* [`map`](http://docs.tenzir.com/reference/functions/map.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

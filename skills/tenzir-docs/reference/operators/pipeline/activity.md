@@ -89,4 +89,4 @@ pipeline::activity range=20s, interval=20s
 
 ## See Also
 
-* [`pipeline::list`](/reference/operators/pipeline/list.md)
+* [`pipeline::list`](http://docs.tenzir.com/reference/operators/pipeline/list.md)

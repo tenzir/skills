@@ -30,5 +30,5 @@ encoded = bytes.encode_hex()
 
 ## See Also
 
-* [`decode_hex`](/reference/functions/decode_hex.md)
+* [`decode_hex`](http://docs.tenzir.com/reference/functions/decode_hex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

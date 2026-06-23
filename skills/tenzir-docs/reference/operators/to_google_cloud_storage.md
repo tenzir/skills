@@ -54,7 +54,7 @@ Defaults to `5min`.
 
 A list of fields used to partition events into separate files. For every distinct combination of partition-field values, a separate file (or group of rotated files) is written. The URL must contain a `**` placeholder, which is replaced by the hive-style path `field1=value1/field2=value2/…`.
 
-Unlike [`to_hive`](/reference/operators/to_hive.md), the partitioning fields are **not** stripped from the written events — they remain in each record.
+Unlike [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md), the partitioning fields are **not** stripped from the written events — they remain in each record.
 
 ### `{ … }`
 
@@ -93,8 +93,8 @@ to_google_cloud_storage "gs://my-bucket/logs/events_{uuid}.json.gz",
 
 ## See Also
 
-* [`from_google_cloud_storage`](/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](/reference/operators/to_google_cloud_storage.md)
-* [`to_file`](/reference/operators/to_file.md)
-* [`to_hive`](/reference/operators/to_hive.md)
+* [`from_google_cloud_storage`](http://docs.tenzir.com/reference/operators/from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](http://docs.tenzir.com/reference/operators/to_google_cloud_storage.md)
+* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
+* [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md)
 * [Cloud Storage](../../integrations/google/cloud-storage.md)

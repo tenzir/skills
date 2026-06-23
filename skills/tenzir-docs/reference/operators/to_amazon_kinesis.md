@@ -152,6 +152,6 @@ to_amazon_kinesis "security-events",
 
 ## See Also
 
-* [`from_amazon_kinesis`](/reference/operators/from_amazon_kinesis.md)
+* [`from_amazon_kinesis`](http://docs.tenzir.com/reference/operators/from_amazon_kinesis.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [Kinesis](../../integrations/amazon/kinesis.md)

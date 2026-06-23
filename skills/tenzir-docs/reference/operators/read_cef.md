@@ -159,7 +159,7 @@ Type Conflict
 
 ## See Also
 
-* [`read_leef`](/reference/operators/read_leef.md)
-* [`parse_cef`](/reference/functions/parse_cef.md)
-* [`print_cef`](/reference/functions/print_cef.md)
+* [`read_leef`](http://docs.tenzir.com/reference/operators/read_leef.md)
+* [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md)
+* [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md)
 * [Syslog](../../integrations/syslog.md)

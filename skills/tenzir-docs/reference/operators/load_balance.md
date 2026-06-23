@@ -64,8 +64,8 @@ load_balance $cfg {
 
 ## See Also
 
-* [`fork`](/reference/operators/fork.md)
-* [`group`](/reference/operators/group.md)
-* [`publish`](/reference/operators/publish.md)
+* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
+* [`group`](http://docs.tenzir.com/reference/operators/group.md)
+* [`publish`](http://docs.tenzir.com/reference/operators/publish.md)
 * [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)
 * [Load-balance pipelines](../../guides/routing/load-balance-pipelines.md)

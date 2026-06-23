@@ -3,7 +3,7 @@
 
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server) is a relational database management system. Tenzir can read events from SQL Server and Azure SQL Database.
 
-Use [`from_microsoft_sql`](/reference/operators/from_microsoft_sql.md) to connect to SQL Server-compatible databases over the Tabular Data Stream (TDS) protocol. The operator can read a table, execute a custom SQL query, list table metadata, or poll a table for newly inserted rows.
+Use [`from_microsoft_sql`](http://docs.tenzir.com/reference/operators/from_microsoft_sql.md) to connect to SQL Server-compatible databases over the Tabular Data Stream (TDS) protocol. The operator can read a table, execute a custom SQL query, list table metadata, or poll a table for newly inserted rows.
 
 Tenzir connects to SQL Server over the network via the host and port you specify in the operator. This means:
 
@@ -81,4 +81,4 @@ The operator currently supports SQL authentication. Microsoft Entra authenticati
 
 ## See Also
 
-* [`from_microsoft_sql`](/reference/operators/from_microsoft_sql.md)
+* [`from_microsoft_sql`](http://docs.tenzir.com/reference/operators/from_microsoft_sql.md)

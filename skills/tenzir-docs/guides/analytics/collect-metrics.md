@@ -3,7 +3,7 @@
 
 Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.
 
-Metrics are stored as internal events in the node’s storage engine, allowing you to work with metrics just like regular data. Use the [`metrics`](/reference/operators/metrics.md) input operator to access the metrics. The operator documentation lists [all available metrics](../../reference/operators/metrics.md#schemas) in detail.
+Metrics are stored as internal events in the node’s storage engine, allowing you to work with metrics just like regular data. Use the [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md) input operator to access the metrics. The operator documentation lists [all available metrics](../../reference/operators/metrics.md#schemas) in detail.
 
 The `metrics` operator provides a *copy* of existing metrics. You can use it multiple time to reference the same metrics feed.
 
@@ -47,7 +47,7 @@ The `events` fields count records that passed through the pipeline during the me
 
 ## Send metrics to Prometheus
 
-Use `shape="prometheus"` with [`metrics`](/reference/operators/metrics.md) and [`to_prometheus`](/reference/operators/to_prometheus.md) to send live metrics to a Prometheus-compatible Remote Write receiver:
+Use `shape="prometheus"` with [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md) and [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md) to send live metrics to a Prometheus-compatible Remote Write receiver:
 
 ```tql
 metrics live=true, shape="prometheus"

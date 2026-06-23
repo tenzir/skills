@@ -342,6 +342,6 @@ where System.EventID in [4624, 4625]
 
 ## See Also
 
-* [`parse_xml`](/reference/functions/parse_xml.md)
-* [`parse_syslog`](/reference/functions/parse_syslog.md)
+* [`parse_xml`](http://docs.tenzir.com/reference/functions/parse_xml.md)
+* [`parse_syslog`](http://docs.tenzir.com/reference/functions/parse_syslog.md)
 * [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)

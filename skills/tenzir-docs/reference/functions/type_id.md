@@ -25,4 +25,4 @@ from {x: type_id(1 + 3.2)}
 
 ## See Also
 
-* [`type_of`](/reference/functions/type_of.md)
+* [`type_of`](http://docs.tenzir.com/reference/functions/type_of.md)

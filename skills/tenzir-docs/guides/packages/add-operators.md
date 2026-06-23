@@ -529,7 +529,7 @@ $event.ocsf.answers = move $event.acme.dns_answers
 // ... additional field mappings
 ```
 
-After the package mapper runs, callers can run the shared OCSF helpers. Public mappers should accept a named `event` field argument with `default: this`. Internal mappers receive the current mapping scope explicitly via `event=$event`. The mapper should produce minimal OCSF, and [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands it with derived sibling fields before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates the final shape:
+After the package mapper runs, callers can run the shared OCSF helpers. Public mappers should accept a named `event` field argument with `default: this`. Internal mappers receive the current mapping scope explicitly via `event=$event`. The mapper should produce minimal OCSF, and [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) expands it with derived sibling fields before [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) validates the final shape:
 
 ```tql
 acme::ocsf::map
@@ -561,7 +561,7 @@ When building operator hierarchies, follow these guidelines:
 * **Name the target schema first**: Put the target namespace before any source schema namespace. For example, use `acme::ocsf::map` for source-to-OCSF mapping and `acme::cim::ocsf::map` for OCSF-to-CIM mapping.
 * **Keep cleanup close to mapping**: Put source-specific normalization and shared OCSF setup in the main mapper before dispatch.
 * **Stay inside `$event`**: Use an initial spread to create source and target namespaces, then only mutate fields below `$event` inside mapping UDOs.
-* **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf::derive`](/reference/operators/ocsf/derive.md) to add derived sibling fields.
+* **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) to add derived sibling fields.
 * **Use dispatchers for routing**: Route events based on type or other criteria.
 * **Mirror directory structure**: Operator names reflect their location.
 * **Provide fallbacks**: Handle unrecognized inputs gracefully.

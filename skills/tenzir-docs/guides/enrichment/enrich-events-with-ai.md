@@ -3,11 +3,11 @@
 > Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
 
 
-This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai::prompt`](/reference/operators/ai/prompt.md).
+This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai::prompt`](http://docs.tenzir.com/reference/operators/ai/prompt.md).
 
-The [`ai::prompt`](/reference/operators/ai/prompt.md) operator sends one request per input event to an OpenAI-compatible Responses API endpoint. Use it when a deterministic rule or lookup table is too rigid, and keep the prompt payload small and explicit. The examples use compact OCSF-style records as `from {...}` starting points so you can focus on the enrichment pattern.
+The [`ai::prompt`](http://docs.tenzir.com/reference/operators/ai/prompt.md) operator sends one request per input event to an OpenAI-compatible Responses API endpoint. Use it when a deterministic rule or lookup table is too rigid, and keep the prompt payload small and explicit. The examples use compact OCSF-style records as `from {...}` starting points so you can focus on the enrichment pattern.
 
-OCSF events have an `enrichments` field for inline enrichment data associated with an event or finding. The examples write the model result to a temporary field, use [`add`](/reference/functions/add.md) to add an OCSF `enrichment` object to `enrichments`, and then remove the temporary field.
+OCSF events have an `enrichments` field for inline enrichment data associated with an event or finding. The examples write the model result to a temporary field, use [`add`](http://docs.tenzir.com/reference/functions/add.md) to add an OCSF `enrichment` object to `enrichments`, and then remove the temporary field.
 
 ## Summarize a detection finding
 
@@ -207,6 +207,6 @@ Model calls can send sensitive event data to another process or service. Prefer 
 
 ## See Also
 
-* [`ai::prompt`](/reference/operators/ai/prompt.md)
+* [`ai::prompt`](http://docs.tenzir.com/reference/operators/ai/prompt.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)

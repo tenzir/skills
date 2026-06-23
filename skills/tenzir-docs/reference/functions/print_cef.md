@@ -104,8 +104,8 @@ write_syslog
 
 ## See Also
 
-* [`parse_cef`](/reference/functions/parse_cef.md)
-* [`read_cef`](/reference/operators/read_cef.md)
-* [`read_syslog`](/reference/operators/read_syslog.md)
-* [`write_syslog`](/reference/operators/write_syslog.md)
+* [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md)
+* [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md)
+* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
+* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

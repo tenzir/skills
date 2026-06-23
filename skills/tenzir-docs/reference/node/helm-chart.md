@@ -8,7 +8,7 @@ The Tenzir Helm chart deploys one or more `tenzir-node` instances on a Kubernete
 | OCI registry             | `oci://ghcr.io/tenzir/charts/tenzir-node`                                                                     |
 | Source                   | [`tenzir/helm-charts/charts/tenzir-node`](https://github.com/tenzir/helm-charts/tree/main/charts/tenzir-node) |
 | Values reference         | [README → Values](https://github.com/tenzir/helm-charts/tree/main/charts/tenzir-node#values)                  |
-| Installation walkthrough | [Deploy a node](../../guides/node-setup/deploy-a-node.md#kubernetes)                                               |
+| Installation walkthrough | [Deploy a node](../../guides/node-setup/deploy-a-node.md#kubernetes)                         |
 
 ## Resources rendered
 

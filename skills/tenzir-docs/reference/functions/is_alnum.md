@@ -25,7 +25,7 @@ from {x: "hello123".is_alnum()}
 
 ## See Also
 
-* [`is_alpha`](/reference/functions/is_alpha.md)
-* [`is_numeric`](/reference/functions/is_numeric.md)
-* [`is_printable`](/reference/functions/is_printable.md)
+* [`is_alpha`](http://docs.tenzir.com/reference/functions/is_alpha.md)
+* [`is_numeric`](http://docs.tenzir.com/reference/functions/is_numeric.md)
+* [`is_printable`](http://docs.tenzir.com/reference/functions/is_printable.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -25,7 +25,7 @@ from {x: "hello".is_lower()}
 
 ## See Also
 
-* [`is_alpha`](/reference/functions/is_alpha.md)
-* [`is_upper`](/reference/functions/is_upper.md)
-* [`to_lower`](/reference/functions/to_lower.md)
+* [`is_alpha`](http://docs.tenzir.com/reference/functions/is_alpha.md)
+* [`is_upper`](http://docs.tenzir.com/reference/functions/is_upper.md)
+* [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

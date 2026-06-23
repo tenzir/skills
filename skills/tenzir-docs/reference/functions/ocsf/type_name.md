@@ -15,4 +15,4 @@ The `type_uid` for which `type_name` should be returned.
 
 ## See Also
 
-* [`ocsf::type_uid`](/reference/functions/ocsf/type_uid.md)
+* [`ocsf::type_uid`](http://docs.tenzir.com/reference/functions/ocsf/type_uid.md)

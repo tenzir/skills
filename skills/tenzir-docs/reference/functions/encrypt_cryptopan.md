@@ -40,7 +40,7 @@ from {
 
 ## See Also
 
-* [`community_id`](/reference/functions/community_id.md)
-* [`decrypt_cryptopan`](/reference/functions/decrypt_cryptopan.md)
+* [`community_id`](http://docs.tenzir.com/reference/functions/community_id.md)
+* [`decrypt_cryptopan`](http://docs.tenzir.com/reference/functions/decrypt_cryptopan.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

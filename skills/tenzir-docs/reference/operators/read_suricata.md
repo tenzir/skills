@@ -11,7 +11,7 @@ read_suricata [schema_only=bool, raw=bool]
 
 The [Suricata](https://suricata.io) network security monitor converts network traffic into a stream of metadata events and provides a rule matching engine to generate alerts. Suricata emits events in the [EVE JSON](https://suricata.readthedocs.io/en/latest/output/eve/eve-json-output.html) format. The output is a single stream of events where the `event_type` field disambiguates the event type.
 
-Tenzir’s [`JSON`](/reference/operators/read_json.md) can handle EVE JSON correctly, but for the schema names to match the value from the `event_type` field, you need to pass the option `selector=event_type:suricata`. The `suricata` parser does this by default.
+Tenzir’s [`JSON`](http://docs.tenzir.com/reference/operators/read_json.md) can handle EVE JSON correctly, but for the schema names to match the value from the `event_type` field, you need to pass the option `selector=event_type:suricata`. The `suricata` parser does this by default.
 
 ### `schema_only = bool (optional)`
 
@@ -63,10 +63,10 @@ accept_unix_socket "/run/suricata/eve.sock" {
 }
 ```
 
-Suricata’s `unix-command` socket is separate from EVE output. It is a control socket for tools such as `suricatasc`, not an event stream for [`read_suricata`](/reference/operators/read_suricata.md).
+Suricata’s `unix-command` socket is separate from EVE output. It is a control socket for tools such as `suricatasc`, not an event stream for [`read_suricata`](http://docs.tenzir.com/reference/operators/read_suricata.md).
 
 ## See Also
 
-* [`read_json`](/reference/operators/read_json.md)
-* [`accept_unix_socket`](/reference/operators/accept_unix_socket.md)
+* [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md)
+* [`accept_unix_socket`](http://docs.tenzir.com/reference/operators/accept_unix_socket.md)
 * [Suricata](../../integrations/suricata.md)

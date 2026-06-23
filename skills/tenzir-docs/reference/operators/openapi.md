@@ -22,4 +22,4 @@ write_yaml
 
 ## See Also
 
-* [`api`](/reference/operators/api.md)
+* [`api`](http://docs.tenzir.com/reference/operators/api.md)

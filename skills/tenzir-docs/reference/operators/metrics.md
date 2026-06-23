@@ -55,7 +55,7 @@ Work on persisted diagnostic events (first), even when `live` is given.
 
 Controls the output shape. The default is `"raw"`, which preserves the native `tenzir.metrics.*` schemas listed below.
 
-Set `shape="prometheus"` to transform metrics into canonical records that are compatible with Prometheus-oriented pipelines. You can send this shape directly to [`to_prometheus`](/reference/operators/to_prometheus.md).
+Set `shape="prometheus"` to transform metrics into canonical records that are compatible with Prometheus-oriented pipelines. You can send this shape directly to [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md).
 
 ```tql
 {
@@ -738,8 +738,8 @@ select timestamp, port, handle, reads, bytes
 
 ## See Also
 
-* [`diagnostics`](/reference/operators/diagnostics.md)
-* [`to_prometheus`](/reference/operators/to_prometheus.md)
+* [`diagnostics`](http://docs.tenzir.com/reference/operators/diagnostics.md)
+* [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md)
 * [Collect metrics](../../guides/analytics/collect-metrics.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Prometheus](../../integrations/prometheus.md)

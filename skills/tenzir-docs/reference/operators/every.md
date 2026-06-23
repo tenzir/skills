@@ -17,7 +17,7 @@ The sub-pipeline either emits events—which are forwarded as the operator’s o
 
 Source sub-pipelines must terminate on their own
 
-`every` stops inputs to a sub-pipeline but cannot stop operators that produce data indefinitely on their own. Source operators like [`subscribe`](/reference/operators/subscribe.md) inside an `every` block will prevent the next iteration from starting.
+`every` stops inputs to a sub-pipeline but cannot stop operators that produce data indefinitely on their own. Source operators like [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) inside an `every` block will prevent the next iteration from starting.
 
 ## Examples
 
@@ -49,7 +49,7 @@ every 30s {
 }
 ```
 
-Events flow into the sub-pipeline continuously. Every 30 seconds, `every` stops the input, causing [`to_http`](/reference/operators/to_http.md) to finish the request and wait for the response. Then a new sub-pipeline starts.
+Events flow into the sub-pipeline continuously. Every 30 seconds, `every` stops the input, causing [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) to finish the request and wait for the response. Then a new sub-pipeline starts.
 
 ### Aggregate metrics periodically with `summarize`
 
@@ -60,7 +60,7 @@ every 5min {
 }
 ```
 
-When the interval elapses, `every` stops the input, which causes [`summarize`](/reference/operators/summarize.md) to emit its result. Then the sub-pipeline restarts for the next interval.
+When the interval elapses, `every` stops the input, which causes [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md) to emit its result. Then the sub-pipeline restarts for the next interval.
 
 ### Fetch the results from an API every 10 minutes
 
@@ -88,10 +88,10 @@ every 1h {
 
 ## See Also
 
-* [`cron`](/reference/operators/cron.md)
-* [`each`](/reference/operators/each.md)
-* [`to_http`](/reference/operators/to_http.md)
-* [`summarize`](/reference/operators/summarize.md)
+* [`cron`](http://docs.tenzir.com/reference/operators/cron.md)
+* [`each`](http://docs.tenzir.com/reference/operators/each.md)
+* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

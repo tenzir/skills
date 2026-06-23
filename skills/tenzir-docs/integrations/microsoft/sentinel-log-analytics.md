@@ -48,7 +48,7 @@ Microsoft’s [Logs Ingestion API tutorial](https://learn.microsoft.com/en-us/az
 
 ### Send Suricata Alerts as OCSF to Sentinel
 
-Use [`to_azure_log_analytics`](/reference/operators/to_azure_log_analytics.md) to forward Suricata alerts as OCSF Detection Findings for correlation in Sentinel:
+Use [`to_azure_log_analytics`](http://docs.tenzir.com/reference/operators/to_azure_log_analytics.md) to forward Suricata alerts as OCSF Detection Findings for correlation in Sentinel:
 
 ```tql
 from_file "/var/log/suricata/eve.json", follow=true
@@ -87,7 +87,7 @@ Auxiliary tables store data in Parquet format with retention up to 12 years, mak
 
 ## See Also
 
-* [`from_microsoft_graph`](/reference/operators/from_microsoft_graph.md)
-* [`to_azure_log_analytics`](/reference/operators/to_azure_log_analytics.md)
+* [`from_microsoft_graph`](http://docs.tenzir.com/reference/operators/from_microsoft_graph.md)
+* [`to_azure_log_analytics`](http://docs.tenzir.com/reference/operators/to_azure_log_analytics.md)
 * [Map to ASIM](../../guides/normalization/map-to-asim.md)
 * [Graph](graph.md)

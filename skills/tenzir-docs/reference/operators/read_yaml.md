@@ -161,6 +161,6 @@ from_file "input.yaml" {
 
 ## See Also
 
-* [`write_yaml`](/reference/operators/write_yaml.md)
-* [`parse_yaml`](/reference/functions/parse_yaml.md)
-* [`print_yaml`](/reference/functions/print_yaml.md)
+* [`write_yaml`](http://docs.tenzir.com/reference/operators/write_yaml.md)
+* [`parse_yaml`](http://docs.tenzir.com/reference/functions/parse_yaml.md)
+* [`print_yaml`](http://docs.tenzir.com/reference/functions/print_yaml.md)

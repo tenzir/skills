@@ -73,6 +73,6 @@ slice end=-5, stride=-1
 
 ## See Also
 
-* [`head`](/reference/operators/head.md)
-* [`tail`](/reference/operators/tail.md)
+* [`head`](http://docs.tenzir.com/reference/operators/head.md)
+* [`tail`](http://docs.tenzir.com/reference/operators/tail.md)
 * [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)

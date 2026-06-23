@@ -180,5 +180,5 @@ The first event has a count of `0`. When the next event with `x: 1` is emitted a
 
 ## See Also
 
-* [`sample`](/reference/operators/sample.md)
+* [`sample`](http://docs.tenzir.com/reference/operators/sample.md)
 * [Deduplicate events](../../guides/optimization/deduplicate-events.md)

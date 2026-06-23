@@ -56,4 +56,4 @@ this = type_of(this)
 
 ## See Also
 
-* [`type_id`](/reference/functions/type_id.md)
+* [`type_id`](http://docs.tenzir.com/reference/functions/type_id.md)

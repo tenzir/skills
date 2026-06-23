@@ -3,15 +3,15 @@
 
 Tenzir supports capturing packets from a network interface card (NIC).
 
-Use [`from_nic`](/reference/operators/from_nic.md) to capture live packets as events:
+Use [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md) to capture live packets as events:
 
-`from_nic` uses [`read_pcap`](/reference/operators/read_pcap.md) by default.
+`from_nic` uses [`read_pcap`](http://docs.tenzir.com/reference/operators/read_pcap.md) by default.
 
 ## Examples
 
 ### List active network interfaces
 
-If you don’t know what interface to read from, use the [`nics`](/reference/operators/nics.md) operator to identify suitable candidates:
+If you don’t know what interface to read from, use the [`nics`](http://docs.tenzir.com/reference/operators/nics.md) operator to identify suitable candidates:
 
 ```tql
 nics
@@ -81,7 +81,7 @@ head 3
 
 ### Decapsulate packets
 
-After you have structured data in the form of PCAP events, you can use the [`decapsulate`](/reference/functions/decapsulate.md) function to decode the binary `data`:
+After you have structured data in the form of PCAP events, you can use the [`decapsulate`](http://docs.tenzir.com/reference/functions/decapsulate.md) function to decode the binary `data`:
 
 ```tql
 from_nic "eth0"
@@ -110,4 +110,4 @@ head 1
   }
 ```
 
-Decapsulation automatically computes a [Community ID](https://github.com/corelight/community-id-spec) for correlation in the `community_id` field. You could also use the [`community_id`](/reference/functions/community_id.md) function to compute this value manually for different events.
+Decapsulation automatically computes a [Community ID](https://github.com/corelight/community-id-spec) for correlation in the `community_id` field. You could also use the [`community_id`](http://docs.tenzir.com/reference/functions/community_id.md) function to compute this value manually for different events.

@@ -51,6 +51,6 @@ summarize normalized_entropy=entropy(x, normalize=true)
 
 ## See Also
 
-* [`mode`](/reference/functions/mode.md)
-* [`value_counts`](/reference/functions/value_counts.md)
+* [`mode`](http://docs.tenzir.com/reference/functions/mode.md)
+* [`value_counts`](http://docs.tenzir.com/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

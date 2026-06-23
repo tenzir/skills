@@ -55,5 +55,5 @@ timeshift ts, start=1984-01-01, speed=0.01
 
 ## See Also
 
-* [`delay`](/reference/operators/delay.md)
+* [`delay`](http://docs.tenzir.com/reference/operators/delay.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

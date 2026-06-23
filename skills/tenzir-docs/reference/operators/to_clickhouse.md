@@ -155,7 +155,7 @@ to_clickhouse table="my_table", tls=false
 
 ### Send OCSF data to ClickHouse
 
-When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](/reference/operators/ocsf/cast.md). This allows us to encode the `unmapped` field as JSON and fill any missing fields with `null`, ensuring a single schema.
+When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md). This allows us to encode the `unmapped` field as JSON and fill any missing fields with `null`, ensuring a single schema.
 
 ```tql
 subscribe "ocsf"
@@ -185,5 +185,5 @@ This creates the following table:
 
 ## See Also
 
-* [`ocsf::cast`](/reference/operators/ocsf/cast.md)
+* [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
 * [ClickHouse](../../integrations/clickhouse.md)

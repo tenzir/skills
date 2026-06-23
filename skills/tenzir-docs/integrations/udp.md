@@ -7,7 +7,7 @@ Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
 ## Examples
 
-Use [`accept_udp`](/reference/operators/accept_udp.md) to receive UDP datagrams as structured events containing message data and peer information. Use [`to_udp`](/reference/operators/to_udp.md) to send one UDP datagram per event directly from structured data.
+Use [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md) to receive UDP datagrams as structured events containing message data and peer information. Use [`to_udp`](http://docs.tenzir.com/reference/operators/to_udp.md) to send one UDP datagram per event directly from structured data.
 
 ### Receive syslog messages over UDP
 

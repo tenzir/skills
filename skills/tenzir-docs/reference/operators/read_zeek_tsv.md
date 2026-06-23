@@ -51,8 +51,8 @@ from_file "/tmp/conn.log" {
 
 ## See Also
 
-* [`read_zeek_json`](/reference/operators/read_zeek_json.md)
-* [`write_zeek_tsv`](/reference/operators/write_zeek_tsv.md)
+* [`read_zeek_json`](http://docs.tenzir.com/reference/operators/read_zeek_json.md)
+* [`write_zeek_tsv`](http://docs.tenzir.com/reference/operators/write_zeek_tsv.md)
 * [Import into a node](../../guides/edge-storage/import-into-a-node.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)
 * [Zeek](../../integrations/zeek.md)

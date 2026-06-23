@@ -50,5 +50,5 @@ from {x: secret("geheim")}
 
 ## See Also
 
-* [`config`](/reference/functions/config.md)
-* [`env`](/reference/functions/env.md)
+* [`config`](http://docs.tenzir.com/reference/functions/config.md)
+* [`env`](http://docs.tenzir.com/reference/functions/env.md)

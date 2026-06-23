@@ -40,5 +40,5 @@ buffer 10M, policy="drop"
 
 ## See Also
 
-* [`cache`](/reference/operators/cache.md)
+* [`cache`](http://docs.tenzir.com/reference/operators/cache.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)

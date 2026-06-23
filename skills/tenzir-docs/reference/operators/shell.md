@@ -34,4 +34,4 @@ read_json
 
 ## See Also
 
-* [`python`](/reference/operators/python.md)
+* [`python`](http://docs.tenzir.com/reference/operators/python.md)

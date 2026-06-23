@@ -9,11 +9,11 @@ Google SecOps stores normalized security data in the Unified Data Model (UDM). U
 
 For agent-assisted work, follow [Use agent skills](../../guides/ai-workbench/use-agent-skills.md#use-the-udm-skill) to use the `tenzir-udm` skill. The skill helps map logs into UDM API ingestion payloads with names such as `metadata.eventType`, and write YARA-L or rule field paths with names such as `metadata.event_type`.
 
-Tenzir’s [`to_google_secops`](/reference/operators/to_google_secops.md) operator can send raw logs, UDM events, and entities. Use `mode="udm_event"` after shaping events into SecOps UDM records. The operator forwards UDM and entity rows as-is, so build them with the ingestion field names before sending them.
+Tenzir’s [`to_google_secops`](http://docs.tenzir.com/reference/operators/to_google_secops.md) operator can send raw logs, UDM events, and entities. Use `mode="udm_event"` after shaping events into SecOps UDM records. The operator forwards UDM and entity rows as-is, so build them with the ingestion field names before sending them.
 
 ## Authentication
 
-[`to_google_secops`](/reference/operators/to_google_secops.md) targets a SecOps instance with `project`, `region`, and `instance`. Provide service-account JSON with `service_credentials`, or omit it to use Google Application Default Credentials.
+[`to_google_secops`](http://docs.tenzir.com/reference/operators/to_google_secops.md) targets a SecOps instance with `project`, `region`, and `instance`. Provide service-account JSON with `service_credentials`, or omit it to use Google Application Default Credentials.
 
 ## Examples
 

@@ -30,10 +30,10 @@ summarize n=sum(x)
 
 ## See Also
 
-* [`collect`](/reference/functions/collect.md)
-* [`max`](/reference/functions/max.md)
-* [`mean`](/reference/functions/mean.md)
-* [`min`](/reference/functions/min.md)
+* [`collect`](http://docs.tenzir.com/reference/functions/collect.md)
+* [`max`](http://docs.tenzir.com/reference/functions/max.md)
+* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
+* [`min`](http://docs.tenzir.com/reference/functions/min.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

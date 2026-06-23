@@ -201,6 +201,6 @@ this = { ...input.parse_kv() }
 
 ## See Also
 
-* [`print_kv`](/reference/functions/print_kv.md)
-* [`read_kv`](/reference/operators/read_kv.md)
+* [`print_kv`](http://docs.tenzir.com/reference/functions/print_kv.md)
+* [`read_kv`](http://docs.tenzir.com/reference/operators/read_kv.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

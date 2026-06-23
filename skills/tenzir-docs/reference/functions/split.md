@@ -55,6 +55,6 @@ from {xs: split("a-b-c", "-", max=1)}
 
 ## See Also
 
-* [`split_regex`](/reference/functions/split_regex.md)
-* [`join`](/reference/functions/join.md)
+* [`split_regex`](http://docs.tenzir.com/reference/functions/split_regex.md)
+* [`join`](http://docs.tenzir.com/reference/functions/join.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

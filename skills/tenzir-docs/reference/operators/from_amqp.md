@@ -155,6 +155,6 @@ from_amqp "amqp://broker/vhost",
 
 ## See Also
 
-* [`to_amqp`](/reference/operators/to_amqp.md)
+* [`to_amqp`](http://docs.tenzir.com/reference/operators/to_amqp.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [AMQP](../../integrations/amqp.md)

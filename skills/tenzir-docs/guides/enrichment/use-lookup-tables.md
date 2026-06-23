@@ -5,11 +5,11 @@
 
 This guide shows you how to use lookup tables in Tenzir to store reference data and apply it to OCSF events. Use lookup tables when you have data keyed by an event value, such as a user ID, hostname, IP address, subnet, file hash, or cloud resource ID.
 
-A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context::enrich`](/reference/operators/context/enrich.md). This guide covers the basic lookup table lifecycle first, then shows where lookup results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the lookup result describes a specific OCSF object, enrich that object instead.
+A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md). This guide covers the basic lookup table lifecycle first, then shows where lookup results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the lookup result describes a specific OCSF object, enrich that object instead.
 
 ## Set up lookup tables
 
-Create lookup tables in separate setup pipelines with [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md), or define them as code by adding them to `tenzir.contexts` in `tenzir.yaml`:
+Create lookup tables in separate setup pipelines with [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md), or define them as code by adding them to `tenzir.contexts` in `tenzir.yaml`:
 
 \<prefix>/etc/tenzir/tenzir.yaml
 
@@ -26,7 +26,7 @@ You can also create lookup tables from the **Contexts** tab in the platform.
 
 ## Add entries
 
-Use [`context::update`](/reference/operators/context/update.md) to add or replace lookup-table entries. This example stores user role metadata keyed by the OCSF user UID:
+Use [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md) to add or replace lookup-table entries. This example stores user role metadata keyed by the OCSF user UID:
 
 ```tql
 from {
@@ -329,26 +329,26 @@ Compound keys keep the lookup deterministic when a single event field isn’t se
 
 ## Manage table entries
 
-Use [`context::inspect`](/reference/operators/context/inspect.md) to view entries:
+Use [`context::inspect`](http://docs.tenzir.com/reference/operators/context/inspect.md) to view entries:
 
 ```tql
 context::inspect "user_roles"
 ```
 
-Use [`context::erase`](/reference/operators/context/erase.md) to remove one entry:
+Use [`context::erase`](http://docs.tenzir.com/reference/operators/context/erase.md) to remove one entry:
 
 ```tql
 from {user_uid: "S-1-5-21-1001"}
 context::erase "user_roles", key=user_uid
 ```
 
-Use [`context::remove`](/reference/operators/context/remove.md) to delete the lookup table and its persisted data:
+Use [`context::remove`](http://docs.tenzir.com/reference/operators/context/remove.md) to delete the lookup table and its persisted data:
 
 ```tql
 context::remove "user_roles"
 ```
 
-Use [`context::save`](/reference/operators/context/save.md) and [`context::load`](/reference/operators/context/load.md) to export and import a lookup table.
+Use [`context::save`](http://docs.tenzir.com/reference/operators/context/save.md) and [`context::load`](http://docs.tenzir.com/reference/operators/context/load.md) to export and import a lookup table.
 
 Export a lookup table to a file:
 
@@ -370,7 +370,7 @@ Loading replaces the entire lookup table state. Save the current table first if 
 
 ## Expire stale entries
 
-Set timeouts on [`context::update`](/reference/operators/context/update.md) when the lookup table contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
+Set timeouts on [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md) when the lookup table contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
 
 ```tql
 from {
@@ -393,13 +393,13 @@ context::update "active_indicators",
 
 ## See Also
 
-* [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md)
-* [`context::update`](/reference/operators/context/update.md)
-* [`context::enrich`](/reference/operators/context/enrich.md)
-* [`context::inspect`](/reference/operators/context/inspect.md)
-* [`context::erase`](/reference/operators/context/erase.md)
-* [`context::save`](/reference/operators/context/save.md)
-* [`context::load`](/reference/operators/context/load.md)
+* [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md)
+* [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md)
+* [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md)
+* [`context::inspect`](http://docs.tenzir.com/reference/operators/context/inspect.md)
+* [`context::erase`](http://docs.tenzir.com/reference/operators/context/erase.md)
+* [`context::save`](http://docs.tenzir.com/reference/operators/context/save.md)
+* [`context::load`](http://docs.tenzir.com/reference/operators/context/load.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

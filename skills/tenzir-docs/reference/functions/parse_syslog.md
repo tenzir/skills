@@ -279,6 +279,6 @@ If the leading brackets don’t contain valid structured data, the parser leaves
 
 ## See Also
 
-* [`read_syslog`](/reference/operators/read_syslog.md)
-* [`write_syslog`](/reference/operators/write_syslog.md)
+* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
+* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

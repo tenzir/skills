@@ -152,7 +152,7 @@ ocsf::derive
 ocsf::cast
 ```
 
-Use [`ocsf::derive`](/reference/operators/ocsf/derive.md) to populate sibling enum fields and [`ocsf::cast`](/reference/operators/ocsf/cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](/reference/functions/now.md).
+Use [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) to populate sibling enum fields and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](http://docs.tenzir.com/reference/functions/now.md).
 
 ### Test with different arguments
 

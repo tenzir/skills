@@ -32,7 +32,7 @@ hello world
 
 ### Copy a binary file
 
-Use [`read_all`](/reference/operators/read_all.md) with `binary=true` to read a file into a `blob` field, then write that field back as raw bytes.
+Use [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md) with `binary=true` to read a file into a `blob` field, then write that field back as raw bytes.
 
 ```tql
 from_file "/tmp/report.pdf" {
@@ -54,8 +54,8 @@ to_file "/tmp/payload.bin" {
 
 ## See Also
 
-* [`read_all`](/reference/operators/read_all.md)
-* [`to_file`](/reference/operators/to_file.md)
-* [`to_stdout`](/reference/operators/to_stdout.md)
-* [`write_chunks`](/reference/operators/write_chunks.md)
-* [`write_lines`](/reference/operators/write_lines.md)
+* [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md)
+* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
+* [`to_stdout`](http://docs.tenzir.com/reference/operators/to_stdout.md)
+* [`write_chunks`](http://docs.tenzir.com/reference/operators/write_chunks.md)
+* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)

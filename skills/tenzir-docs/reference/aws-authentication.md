@@ -1,7 +1,7 @@
 # AWS Authentication
 
 
-Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](/reference/operators/from_s3.md), [`to_s3`](/reference/operators/to_s3.md), [`from_sqs`](/reference/operators/from_sqs), [`to_sqs`](/reference/operators/to_sqs), [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md), [`from_kafka`](/reference/operators/from_kafka.md), and [`to_kafka`](/reference/operators/to_kafka.md).
+Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md), [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md), [`from_sqs`](http://docs.tenzir.com/reference/operators/from_sqs), [`to_sqs`](http://docs.tenzir.com/reference/operators/to_sqs), [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md), [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md), and [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md).
 
 ## Local usage with the AWS CLI
 
@@ -83,7 +83,7 @@ Tenzir refreshes credentials automatically before expiration, with exponential b
 
 ## Static credentials
 
-Pass an access key and secret directly. The `access_key_id` and `secret_access_key` options must be specified together. Wrap secrets with [`secret`](/reference/functions/secret.md) to keep them out of pipeline definitions:
+Pass an access key and secret directly. The `access_key_id` and `secret_access_key` options must be specified together. Wrap secrets with [`secret`](http://docs.tenzir.com/reference/functions/secret.md) to keep them out of pipeline definitions:
 
 ```tql
 from_s3 "s3://my-bucket/data.json", aws_iam={
@@ -107,15 +107,15 @@ The role’s trust policy must allow your active principal (for example an EC2 i
 
 ## See Also
 
-* [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md)
-* [`from_kafka`](/reference/operators/from_kafka.md)
-* [`from_s3`](/reference/operators/from_s3.md)
-* [`from_sqs`](/reference/operators/from_sqs)
-* [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md)
-* [`to_amazon_security_lake`](/reference/operators/to_amazon_security_lake.md)
-* [`to_kafka`](/reference/operators/to_kafka.md)
-* [`to_s3`](/reference/operators/to_s3.md)
-* [`to_sqs`](/reference/operators/to_sqs)
+* [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md)
+* [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md)
+* [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md)
+* [`from_sqs`](http://docs.tenzir.com/reference/operators/from_sqs)
+* [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md)
+* [`to_amazon_security_lake`](http://docs.tenzir.com/reference/operators/to_amazon_security_lake.md)
+* [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
+* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
+* [`to_sqs`](http://docs.tenzir.com/reference/operators/to_sqs)
 * [CloudWatch](../integrations/amazon/cloudwatch.md)
 * [MSK](../integrations/amazon/msk.md)
 * [S3](../integrations/amazon/s3.md)

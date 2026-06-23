@@ -118,7 +118,7 @@ Send newline-delimited JSON over [TCP](../../integrations/tcp.md):
 to_tcp "collector.example.com:5044" { write_ndjson }
 ```
 
-For protocols that expect a delimiter after every message, print the event to a string and use [`write_delimited`](/reference/operators/write_delimited.md) for the byte-stream framing:
+For protocols that expect a delimiter after every message, print the event to a string and use [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md) for the byte-stream framing:
 
 ```tql
 to_tcp "collector.example.com:12201" {
@@ -168,15 +168,15 @@ to_kafka f"events.{event_type}"
 
 ## See Also
 
-* [`fork`](/reference/operators/fork.md)
-* [`to_kafka`](/reference/operators/to_kafka.md)
-* [`to_amazon_kinesis`](/reference/operators/to_amazon_kinesis.md)
-* [`to_opensearch`](/reference/operators/to_opensearch.md)
-* [`to_splunk`](/reference/operators/to_splunk.md)
-* [`to_tcp`](/reference/operators/to_tcp.md)
-* [`write_delimited`](/reference/operators/write_delimited.md)
-* [`write_ndjson`](/reference/operators/write_ndjson.md)
-* [`print_ndjson`](/reference/functions/print_ndjson.md)
+* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
+* [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
+* [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)
+* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
+* [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md)
+* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
+* [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md)
+* [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md)
+* [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md)
 * [Load-balance pipelines](load-balance-pipelines.md)
 * [Split and merge streams](split-and-merge-streams.md)
 

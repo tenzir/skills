@@ -94,7 +94,7 @@ l = l.map(str => str.parse_grok($pattern))
 
 ### Map a nullable list before spreading
 
-If the input list is `null`, [`map`](/reference/functions/map.md) returns `null`, and list spread contributes no elements:
+If the input list is `null`, [`map`](http://docs.tenzir.com/reference/functions/map.md) returns `null`, and list spread contributes no elements:
 
 ```tql
 from {xs: null}
@@ -142,6 +142,6 @@ l = l.map(str => str.parse_json())
 
 ## See Also
 
-* [`where`](/reference/functions/where.md)
-* [`zip`](/reference/functions/zip.md)
+* [`where`](http://docs.tenzir.com/reference/functions/where.md)
+* [`zip`](http://docs.tenzir.com/reference/functions/zip.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

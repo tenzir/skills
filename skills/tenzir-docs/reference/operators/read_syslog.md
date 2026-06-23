@@ -374,6 +374,6 @@ from_file "/var/log/auth.log" {
 
 ## See Also
 
-* [`write_syslog`](/reference/operators/write_syslog.md)
-* [`parse_syslog`](/reference/functions/parse_syslog.md)
+* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
+* [`parse_syslog`](http://docs.tenzir.com/reference/functions/parse_syslog.md)
 * [Syslog](../../integrations/syslog.md)

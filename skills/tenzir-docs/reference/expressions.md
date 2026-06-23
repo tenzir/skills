@@ -318,7 +318,7 @@ from {
 
 [Secrets](../explanations/secrets.md) protect sensitive values like authentication tokens and passwords. The `secret` type contains only a secret’s name, not its actual value, which is resolved asynchronously when needed.
 
-Create secrets using the [`secret`](/reference/functions/secret.md) function or pass string literals directly to operators that accept secrets:
+Create secrets using the [`secret`](http://docs.tenzir.com/reference/functions/secret.md) function or pass string literals directly to operators that accept secrets:
 
 ```tql
 // Using managed secret
@@ -683,7 +683,7 @@ new_field = old_field
 drop old_field
 ```
 
-In addition to the `move` keyword, there exists a [`move`](/reference/operators/move.md) operator that is a convenient alternative when relocating multiple fields. For example, this sequence of assignments with the `move` keyword:
+In addition to the `move` keyword, there exists a [`move`](http://docs.tenzir.com/reference/operators/move.md) operator that is a convenient alternative when relocating multiple fields. For example, this sequence of assignments with the `move` keyword:
 
 ```tql
 x = move foo
@@ -691,7 +691,7 @@ y = move bar
 z = move baz
 ```
 
-can be rewritten succinctly with the [`move`](/reference/operators/move.md) operator:
+can be rewritten succinctly with the [`move`](http://docs.tenzir.com/reference/operators/move.md) operator:
 
 ```tql
 move x=foo, y=bar, z=baz
@@ -701,7 +701,7 @@ Key points
 
 * Only usable in expression position (right side of `=`)
 * Only works with fields, not arbitrary expressions
-* Different from the [`move`](/reference/operators/move.md) operator that is a statement
+* Different from the [`move`](http://docs.tenzir.com/reference/operators/move.md) operator that is a statement
 
 ### Metadata
 
@@ -879,7 +879,7 @@ Expressions like `1 - 2 * 3 + 4` follow these precedence and associativity rules
 
 ## Conditional Expressions
 
-Use conditional expressions when one value depends on a predicate. If you need to route events through different statements based on literal values, use the [`match` statement](/reference/statements.md#match).
+Use conditional expressions when one value depends on a predicate. If you need to route events through different statements based on literal values, use the [`match` statement](http://docs.tenzir.com/reference/statements.md#match).
 
 ### Python-style Conditionals
 
@@ -1090,7 +1090,7 @@ If the pipeline expression is the last argument, omit the preceding comma. Brace
 
 ### Let Substitution
 
-Reference previously defined [`let`](/reference/statements.md#let) bindings using `$`-prefixed names:
+Reference previously defined [`let`](http://docs.tenzir.com/reference/statements.md#let) bindings using `$`-prefixed names:
 
 ```tql
 let $pi = 3.14159

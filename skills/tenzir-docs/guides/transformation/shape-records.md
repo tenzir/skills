@@ -117,7 +117,7 @@ user = {
 }
 ```
 
-The [`merge`](/reference/functions/merge.md) function returns the same result for two records, including `null` fragments, but prefer spread in transformation code when you construct the resulting record.
+The [`merge`](http://docs.tenzir.com/reference/functions/merge.md) function returns the same result for two records, including `null` fragments, but prefer spread in transformation code when you construct the resulting record.
 
 ## Transform record values
 
@@ -141,7 +141,7 @@ with_tax = {
 
 ## Filter record fields
 
-Keep explicit fields by constructing a new record. Use [`select_matching`](/reference/functions/select_matching.md) and [`drop_matching`](/reference/functions/drop_matching.md) when field names follow a pattern:
+Keep explicit fields by constructing a new record. Use [`select_matching`](http://docs.tenzir.com/reference/functions/select_matching.md) and [`drop_matching`](http://docs.tenzir.com/reference/functions/drop_matching.md) when field names follow a pattern:
 
 ```tql
 from {
@@ -200,10 +200,10 @@ The matching functions inspect only top-level field names on the record you call
 
 ## See Also
 
-* [`drop_matching`](/reference/functions/drop_matching.md)
-* [`keys`](/reference/functions/keys.md)
-* [`merge`](/reference/functions/merge.md)
-* [`select_matching`](/reference/functions/select_matching.md)
+* [`drop_matching`](http://docs.tenzir.com/reference/functions/drop_matching.md)
+* [`keys`](http://docs.tenzir.com/reference/functions/keys.md)
+* [`merge`](http://docs.tenzir.com/reference/functions/merge.md)
+* [`select_matching`](http://docs.tenzir.com/reference/functions/select_matching.md)
 * [Shape lists](shape-lists.md)
 * [Filter and select data](filter-and-select-data.md)
 * [Transform values](transform-values.md)

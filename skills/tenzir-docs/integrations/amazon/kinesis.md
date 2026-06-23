@@ -5,7 +5,7 @@
 
 Tenzir can receive records from Kinesis streams with
 
-[`from_amazon_kinesis`](/reference/operators/from_amazon_kinesis.md) and send records to Kinesis streams with [`to_amazon_kinesis`](/reference/operators/to_amazon_kinesis.md).
+[`from_amazon_kinesis`](http://docs.tenzir.com/reference/operators/from_amazon_kinesis.md) and send records to Kinesis streams with [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md).
 
 When Tenzir reads from Kinesis, it emits one event per Kinesis record. The event uses the `tenzir.amazon_kinesis` schema and contains the raw record payload in the `message` field as a `blob`, together with metadata such as the stream, shard, sequence number, partition key, arrival time, and lag.
 
@@ -54,10 +54,10 @@ When `endpoint` is omitted, Tenzir checks `AWS_ENDPOINT_URL_KINESIS` first, then
 
 Tenzir needs these Kinesis permissions:
 
-| Operator                                                             | Required permissions                                                   |
-| -------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [`from_amazon_kinesis`](/reference/operators/from_amazon_kinesis.md) | `kinesis:ListShards`, `kinesis:GetShardIterator`, `kinesis:GetRecords` |
-| [`to_amazon_kinesis`](/reference/operators/to_amazon_kinesis.md)     | `kinesis:PutRecords`                                                   |
+| Operator                                                                                   | Required permissions                                                   |
+| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| [`from_amazon_kinesis`](http://docs.tenzir.com/reference/operators/from_amazon_kinesis.md) | `kinesis:ListShards`, `kinesis:GetShardIterator`, `kinesis:GetRecords` |
+| [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)     | `kinesis:PutRecords`                                                   |
 
 ## Examples
 
@@ -99,8 +99,8 @@ from_amazon_kinesis "security-events", start=2026-01-01T00:00:00Z
 
 ## See Also
 
-* [`from_amazon_kinesis`](/reference/operators/from_amazon_kinesis.md)
-* [`to_amazon_kinesis`](/reference/operators/to_amazon_kinesis.md)
+* [`from_amazon_kinesis`](http://docs.tenzir.com/reference/operators/from_amazon_kinesis.md)
+* [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [SQS](sqs.md)

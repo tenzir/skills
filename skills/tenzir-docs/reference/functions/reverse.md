@@ -27,6 +27,6 @@ from {x: reverse("hello")}
 
 ## See Also
 
-* [`slice`](/reference/functions/slice.md)
-* [`length_chars`](/reference/functions/length_chars.md)
+* [`slice`](http://docs.tenzir.com/reference/functions/slice.md)
+* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -23,6 +23,6 @@ assert_throughput 1k, within=1s, retries=30
 
 ## See Also
 
-* [`accept_udp`](/reference/operators/accept_udp.md)
-* [`assert`](/reference/operators/assert.md)
-* [`throttle`](/reference/operators/throttle.md)
+* [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md)
+* [`assert`](http://docs.tenzir.com/reference/operators/assert.md)
+* [`throttle`](http://docs.tenzir.com/reference/operators/throttle.md)

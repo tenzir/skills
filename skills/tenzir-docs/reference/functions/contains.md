@@ -188,5 +188,5 @@ exact_subnet = contains(subnet, 10.0.0.0/8, exact=true)
 
 ## See Also
 
-* [`has`](/reference/functions/has.md)
-* [`match_regex`](/reference/functions/match_regex.md)
+* [`has`](http://docs.tenzir.com/reference/functions/has.md)
+* [`match_regex`](http://docs.tenzir.com/reference/functions/match_regex.md)

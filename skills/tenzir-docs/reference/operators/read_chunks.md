@@ -9,7 +9,7 @@ read_chunks
 
 ## Description
 
-The `read_chunks` operator turns each incoming byte chunk into a single event with a field called `data` of type `blob`. Unlike [`read_all`](/reference/operators/read_all.md), which buffers the entire input and produces one event, `read_chunks` emits events as data arrives.
+The `read_chunks` operator turns each incoming byte chunk into a single event with a field called `data` of type `blob`. Unlike [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md), which buffers the entire input and produces one event, `read_chunks` emits events as data arrives.
 
 This is useful for piping binary data out `from_` operators, that can only emit events.
 
@@ -40,6 +40,6 @@ to_file "output.bin" {
 
 ## See Also
 
-* [`read_all`](/reference/operators/read_all.md)
-* [`read_delimited`](/reference/operators/read_delimited.md)
-* [`write_chunks`](/reference/operators/write_chunks.md)
+* [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md)
+* [`read_delimited`](http://docs.tenzir.com/reference/operators/read_delimited.md)
+* [`write_chunks`](http://docs.tenzir.com/reference/operators/write_chunks.md)

@@ -7,14 +7,14 @@ Filtering and selecting are fundamental operations when working with data stream
 
 Before we dive in, it’s important to understand a key distinction in TQL:
 
-* **Operators** like [`where`](/reference/operators/where.md), [`select`](/reference/operators/select.md), and [`drop`](/reference/operators/drop.md) work on entire event streams.
-* **Functions** like [`starts_with`](/reference/functions/starts_with.md) or mathematical comparisons work on individual values within events.
+* **Operators** like [`where`](http://docs.tenzir.com/reference/operators/where.md), [`select`](http://docs.tenzir.com/reference/operators/select.md), and [`drop`](http://docs.tenzir.com/reference/operators/drop.md) work on entire event streams.
+* **Functions** like [`starts_with`](http://docs.tenzir.com/reference/functions/starts_with.md) or mathematical comparisons work on individual values within events.
 
 You’ll see both in action throughout this guide.
 
 ## Filter events with conditions
 
-Use the [`where`](/reference/operators/where.md) operator to keep only events that match specific conditions.
+Use the [`where`](http://docs.tenzir.com/reference/operators/where.md) operator to keep only events that match specific conditions.
 
 ### Basic filtering
 
@@ -50,7 +50,7 @@ where status == 200 and size > 1000
 {status: 200, path: "/home", size: 2048}
 ```
 
-You can also use `or` and `not` with functions like [`starts_with`](/reference/functions/starts_with.md):
+You can also use `or` and `not` with functions like [`starts_with`](http://docs.tenzir.com/reference/functions/starts_with.md):
 
 ```tql
 from {status: 200, path: "/api/users"},
@@ -66,7 +66,7 @@ where status == 200 or not path.starts_with("/api/m")
 
 ### Using functions in filters
 
-Functions work on values to create more sophisticated filters. For example, [`ends_with`](/reference/functions/ends_with.md) checks string suffixes:
+Functions work on values to create more sophisticated filters. For example, [`ends_with`](http://docs.tenzir.com/reference/functions/ends_with.md) checks string suffixes:
 
 ```tql
 from {user: "alice", email: "alice@example.com"},
@@ -82,7 +82,7 @@ where email.ends_with("example.com")
 
 ### Filtering with patterns
 
-Match patterns using regular expressions with [`match_regex`](/reference/functions/match_regex.md):
+Match patterns using regular expressions with [`match_regex`](http://docs.tenzir.com/reference/functions/match_regex.md):
 
 ```tql
 from {log: "Error: Connection timeout"},
@@ -98,7 +98,7 @@ where log.match_regex("Error:")
 
 ## Select specific fields
 
-The [`select`](/reference/operators/select.md) operator lets you pick which fields to keep in your output.
+The [`select`](http://docs.tenzir.com/reference/operators/select.md) operator lets you pick which fields to keep in your output.
 
 ### Basic field selection
 
@@ -132,7 +132,7 @@ select name=first_name, age=years
 
 Here `first_name` becomes `name` and `years` becomes `age` in the output.
 
-Note that `select` restricts the output to only the listed fields. If you want to rename fields while keeping everything else, use an assignment with [`move`](/reference/expressions.md#moving-fields) instead.
+Note that `select` restricts the output to only the listed fields. If you want to rename fields while keeping everything else, use an assignment with [`move`](http://docs.tenzir.com/reference/expressions.md#moving-fields) instead.
 
 ### Computing new fields
 
@@ -151,7 +151,7 @@ select price, tax=price * tax_rate, total=price * (1 + tax_rate)
 
 ### Selecting fields by name pattern
 
-The [`select`](/reference/operators/select.md) operator requires explicit field names. When you need to shape a record value by matching field names, use [`select_matching`](/reference/functions/select_matching.md):
+The [`select`](http://docs.tenzir.com/reference/operators/select.md) operator requires explicit field names. When you need to shape a record value by matching field names, use [`select_matching`](http://docs.tenzir.com/reference/functions/select_matching.md):
 
 ```tql
 from {
@@ -173,7 +173,7 @@ select identifiers = this.select_matching("_id$")
 
 ## Remove unwanted fields
 
-The [`drop`](/reference/operators/drop.md) operator removes specified fields, keeping everything else.
+The [`drop`](http://docs.tenzir.com/reference/operators/drop.md) operator removes specified fields, keeping everything else.
 
 ### Basic field removal
 
@@ -207,7 +207,7 @@ drop internal_id, debug
 
 ### Dropping fields by name pattern
 
-Use [`drop_matching`](/reference/functions/drop_matching.md) when you want to remove top-level fields from a record based on a regular expression:
+Use [`drop_matching`](http://docs.tenzir.com/reference/functions/drop_matching.md) when you want to remove top-level fields from a record based on a regular expression:
 
 ```tql
 from {
@@ -230,11 +230,11 @@ select cleaned = this.drop_matching("^debug_")
 
 ## Add computed fields
 
-Use the [`set`](/reference/operators/set.md) operator to override existing fields and add new fields without removing existing ones.
+Use the [`set`](http://docs.tenzir.com/reference/operators/set.md) operator to override existing fields and add new fields without removing existing ones.
 
 Implied operator
 
-The [`set`](/reference/operators/set.md) operator is *implied*, i.e., you can omit it to keep your pipeline definitions terse. In other words, it suffices to write an assignment in the form `x = y` instead of `set x = y`.
+The [`set`](http://docs.tenzir.com/reference/operators/set.md) operator is *implied*, i.e., you can omit it to keep your pipeline definitions terse. In other words, it suffices to write an assignment in the form `x = y` instead of `set x = y`.
 
 ### Adding simple fields
 
@@ -289,7 +289,7 @@ Because the second event had no `score` field, the `else` keyword filled in a de
 
 ## Rename fields
 
-TQL has no dedicated `rename` operator. Instead, use the [`move`](/reference/expressions.md#moving-fields) keyword in an assignment to relocate a value from one field to another, removing the original:
+TQL has no dedicated `rename` operator. Instead, use the [`move`](http://docs.tenzir.com/reference/expressions.md#moving-fields) keyword in an assignment to relocate a value from one field to another, removing the original:
 
 ```tql
 from {first_name: "alice", years: 30, city: "NYC"},
@@ -303,7 +303,7 @@ age = move years
 {city: "SF", name: "bob", age: 25}
 ```
 
-Unlike [`select`](/reference/operators/select.md), which restricts the output to only the listed fields, an assignment with `move` preserves all other fields.
+Unlike [`select`](http://docs.tenzir.com/reference/operators/select.md), which restricts the output to only the listed fields, an assignment with `move` preserves all other fields.
 
 ### Renaming into nested fields
 
@@ -338,23 +338,23 @@ select method, path, duration = duration_ms.milliseconds()
 
 ## Best practices
 
-1. **Filter early**: Apply [`where`](/reference/operators/where.md) conditions as early as possible to reduce the amount of data flowing through your pipeline.
+1. **Filter early**: Apply [`where`](http://docs.tenzir.com/reference/operators/where.md) conditions as early as possible to reduce the amount of data flowing through your pipeline.
 
-2. **Select only what you need**: Use [`select`](/reference/operators/select.md) to keep only necessary fields, especially when dealing with large events.
+2. **Select only what you need**: Use [`select`](http://docs.tenzir.com/reference/operators/select.md) to keep only necessary fields, especially when dealing with large events.
 
 3. **Choose the right operator**:
 
-   * Use [`select`](/reference/operators/select.md) when you want to restrict the output to specific fields.
-   * Use [`drop`](/reference/operators/drop.md) when you want to remove a few fields from many.
-   * Use [`set`](/reference/operators/set.md) when you want to add/override fields without changing existing ones.
+   * Use [`select`](http://docs.tenzir.com/reference/operators/select.md) when you want to restrict the output to specific fields.
+   * Use [`drop`](http://docs.tenzir.com/reference/operators/drop.md) when you want to remove a few fields from many.
+   * Use [`set`](http://docs.tenzir.com/reference/operators/set.md) when you want to add/override fields without changing existing ones.
    * Use an assignment with `move` when you want to rename fields without affecting the rest of the event.
 
-4. **Understand null handling**: The [`where`](/reference/operators/where.md) operator skips events where the condition evaluates to null or false. Use the question mark operator (`?`) to suppress warnings when accessing fields that may not exist.
+4. **Understand null handling**: The [`where`](http://docs.tenzir.com/reference/operators/where.md) operator skips events where the condition evaluates to null or false. Use the question mark operator (`?`) to suppress warnings when accessing fields that may not exist.
 
 ## See also
 
-* [`drop_matching`](/reference/functions/drop_matching.md)
-* [`select_matching`](/reference/functions/select_matching.md)
+* [`drop_matching`](http://docs.tenzir.com/reference/functions/drop_matching.md)
+* [`select_matching`](http://docs.tenzir.com/reference/functions/select_matching.md)
 * [Transform values](transform-values.md)
 * [Slice and sample data](../optimization/slice-and-sample-data.md)
 * [Reshape complex data](reshape-complex-data.md)

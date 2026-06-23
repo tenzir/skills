@@ -30,7 +30,7 @@ summarize median_value=median(x)
 
 ## See Also
 
-* [`mean`](/reference/functions/mean.md)
-* [`mode`](/reference/functions/mode.md)
-* [`quantile`](/reference/functions/quantile.md)
+* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
+* [`mode`](http://docs.tenzir.com/reference/functions/mode.md)
+* [`quantile`](http://docs.tenzir.com/reference/functions/quantile.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

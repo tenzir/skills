@@ -25,5 +25,5 @@ from {x: file_name("/path/to/log.json")}
 
 ## See Also
 
-* [`parent_dir`](/reference/functions/parent_dir.md)
+* [`parent_dir`](http://docs.tenzir.com/reference/functions/parent_dir.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

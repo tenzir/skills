@@ -31,11 +31,11 @@ from {
 
 ## See Also
 
-* [`ip_category`](/reference/functions/ip_category.md)
-* [`is_global`](/reference/functions/is_global.md)
-* [`is_link_local`](/reference/functions/is_link_local.md)
-* [`is_loopback`](/reference/functions/is_loopback.md)
-* [`is_multicast`](/reference/functions/is_multicast.md)
-* [`is_private`](/reference/functions/is_private.md)
-* [`is_v4`](/reference/functions/is_v4.md)
+* [`ip_category`](http://docs.tenzir.com/reference/functions/ip_category.md)
+* [`is_global`](http://docs.tenzir.com/reference/functions/is_global.md)
+* [`is_link_local`](http://docs.tenzir.com/reference/functions/is_link_local.md)
+* [`is_loopback`](http://docs.tenzir.com/reference/functions/is_loopback.md)
+* [`is_multicast`](http://docs.tenzir.com/reference/functions/is_multicast.md)
+* [`is_private`](http://docs.tenzir.com/reference/functions/is_private.md)
+* [`is_v4`](http://docs.tenzir.com/reference/functions/is_v4.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)

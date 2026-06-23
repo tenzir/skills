@@ -347,9 +347,9 @@ Use separate lookup tables for endpoint and user objects so each table can follo
 
 ## See Also
 
-* [`context::create_lookup_table`](/reference/operators/context/create_lookup_table.md)
-* [`context::update`](/reference/operators/context/update.md)
-* [`context::enrich`](/reference/operators/context/enrich.md)
+* [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md)
+* [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md)
+* [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md)
 * [Use lookup tables](use-lookup-tables.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

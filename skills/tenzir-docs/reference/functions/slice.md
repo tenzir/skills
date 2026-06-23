@@ -110,9 +110,9 @@ xs = xs.slice(stride=-1)
 
 ## See Also
 
-* [`sort`](/reference/functions/sort.md)
-* [`split`](/reference/functions/split.md)
-* [`length_chars`](/reference/functions/length_chars.md)
+* [`sort`](http://docs.tenzir.com/reference/functions/sort.md)
+* [`split`](http://docs.tenzir.com/reference/functions/split.md)
+* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

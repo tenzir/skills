@@ -31,7 +31,7 @@ Index notation:
 
 ## Add elements to lists
 
-Use [`append`](/reference/functions/append.md) and [`prepend`](/reference/functions/prepend.md):
+Use [`append`](http://docs.tenzir.com/reference/functions/append.md) and [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md):
 
 ```tql
 from {colors: ["red", "green"]}
@@ -94,7 +94,7 @@ labels = [
 }
 ```
 
-This also works when a nullable list is transformed before spreading. If [`map`](/reference/functions/map.md) receives `null`, it returns `null`, and the spread contributes no elements:
+This also works when a nullable list is transformed before spreading. If [`map`](http://docs.tenzir.com/reference/functions/map.md) receives `null`, it returns `null`, and the spread contributes no elements:
 
 ```tql
 from {xs: null}
@@ -113,11 +113,11 @@ ys = [
 }
 ```
 
-The [`concatenate`](/reference/functions/concatenate.md) function returns the same result for two lists, including `null` fragments, but prefer spread in transformation code when you construct the resulting list.
+The [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md) function returns the same result for two lists, including `null` fragments, but prefer spread in transformation code when you construct the resulting list.
 
 ## Transform list elements
 
-Apply functions to each element with [`map`](/reference/functions/map.md):
+Apply functions to each element with [`map`](http://docs.tenzir.com/reference/functions/map.md):
 
 ```tql
 from {
@@ -141,7 +141,7 @@ squared = prices.map(x => x * x)
 
 ## Filter list elements
 
-Keep only elements that match a condition with [`where`](/reference/functions/where.md):
+Keep only elements that match a condition with [`where`](http://docs.tenzir.com/reference/functions/where.md):
 
 ```tql
 from {
@@ -167,7 +167,7 @@ a_names = users.where(u => u.starts_with("a"))
 
 ## Sort lists
 
-Order elements with [`sort`](/reference/functions/sort.md):
+Order elements with [`sort`](http://docs.tenzir.com/reference/functions/sort.md):
 
 ```tql
 from {
@@ -234,7 +234,7 @@ by_name = users.sort(cmp=(a, b) => a.name < b.name)
 
 ## Slice lists
 
-Extract portions of a list with [`slice`](/reference/functions/slice.md):
+Extract portions of a list with [`slice`](http://docs.tenzir.com/reference/functions/slice.md):
 
 Get the first N elements:
 
@@ -293,7 +293,7 @@ every_other = xs.slice(stride=2)
 
 ## Top-k and bottom-k
 
-Chain [`sort`](/reference/functions/sort.md) and [`slice`](/reference/functions/slice.md) to implement a top-k query over list elements:
+Chain [`sort`](http://docs.tenzir.com/reference/functions/sort.md) and [`slice`](http://docs.tenzir.com/reference/functions/slice.md) to implement a top-k query over list elements:
 
 ```tql
 from {scores: [72, 95, 88, 61, 83, 97, 56]}
@@ -311,7 +311,7 @@ bottom_3 = scores.sort().slice(end=3)
 
 ## Get unique values
 
-Remove duplicates with [`distinct`](/reference/functions/distinct.md):
+Remove duplicates with [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md):
 
 ```tql
 from {
@@ -333,7 +333,7 @@ unique_nums = distinct(numbers).sort()
 
 ## Use lists as sets
 
-Use [`add`](/reference/functions/add.md) for set-insertion (append only if absent) and [`remove`](/reference/functions/remove.md) to delete all occurrences:
+Use [`add`](http://docs.tenzir.com/reference/functions/add.md) for set-insertion (append only if absent) and [`remove`](http://docs.tenzir.com/reference/functions/remove.md) to delete all occurrences:
 
 ```tql
 from {tags: ["info", "warning", "info"]}
@@ -351,7 +351,7 @@ without_info = tags.remove("info")
 }
 ```
 
-Combine `add()` with [`distinct`](/reference/functions/distinct.md) when you need a deduplicated collection:
+Combine `add()` with [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md) when you need a deduplicated collection:
 
 ```tql
 from {xs: [1, 2, 2, 3]}
@@ -371,7 +371,7 @@ with_2 = unique.add(2)
 
 ## Flatten nested lists
 
-Note: Direct list flattening is not currently supported in TQL. The [`flatten`](/reference/functions/flatten.md) function is designed for flattening records, not lists. To work with nested lists, you would need to process them element by element.
+Note: Direct list flattening is not currently supported in TQL. The [`flatten`](http://docs.tenzir.com/reference/functions/flatten.md) function is designed for flattening records, not lists. To work with nested lists, you would need to process them element by element.
 
 ## Combine lists and records
 
@@ -410,7 +410,7 @@ avg_age = users.map(u => u.age).sum() / users.length()
 
 ### Zip lists together
 
-Combine parallel lists with [`zip`](/reference/functions/zip.md):
+Combine parallel lists with [`zip`](http://docs.tenzir.com/reference/functions/zip.md):
 
 ```tql
 from {
@@ -531,7 +531,7 @@ This pattern is particularly useful when:
 
 ### Enumerate with indices
 
-Add row numbers to your data using the [`enumerate`](/reference/operators/enumerate.md) operator:
+Add row numbers to your data using the [`enumerate`](http://docs.tenzir.com/reference/operators/enumerate.md) operator:
 
 ```tql
 from {item: "apple"}, {item: "banana"}, {item: "cherry"}
@@ -624,8 +624,8 @@ expensive = items.where(item => item.price > 15)
 
 ## See Also
 
-* [`sort`](/reference/functions/sort.md)
-* [`slice`](/reference/functions/slice.md)
+* [`sort`](http://docs.tenzir.com/reference/functions/sort.md)
+* [`slice`](http://docs.tenzir.com/reference/functions/slice.md)
 * [Shape records](shape-records.md)
 * [Filter and select data](filter-and-select-data.md)
 * [Transform values](transform-values.md)

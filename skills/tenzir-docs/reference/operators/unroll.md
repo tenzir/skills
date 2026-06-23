@@ -53,6 +53,6 @@ unroll y
 
 ## See Also
 
-* [`flatten`](/reference/functions/flatten.md)
+* [`flatten`](http://docs.tenzir.com/reference/functions/flatten.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)

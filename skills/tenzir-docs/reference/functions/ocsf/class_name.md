@@ -15,4 +15,4 @@ The `class_uid` for which `class_name` should be returned.
 
 ## See Also
 
-* [`ocsf::class_uid`](/reference/functions/ocsf/class_uid.md)
+* [`ocsf::class_uid`](http://docs.tenzir.com/reference/functions/ocsf/class_uid.md)

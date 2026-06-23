@@ -37,6 +37,6 @@ this = {
 
 ## See Also
 
-* [`is_empty`](/reference/functions/is_empty.md)
-* [`keys`](/reference/functions/keys.md)
+* [`is_empty`](http://docs.tenzir.com/reference/functions/is_empty.md)
+* [`keys`](http://docs.tenzir.com/reference/functions/keys.md)
 * [Shape records](../../guides/transformation/shape-records.md)

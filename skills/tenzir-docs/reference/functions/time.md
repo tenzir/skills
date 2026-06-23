@@ -59,7 +59,7 @@ Prefix a Unix epoch value with `@`:
 | Future offset | `now + 1h`, `in 2d`       |
 | Past offset   | `now - 30min`, `5min ago` |
 
-For timestamps in non-standard formats, use [`parse_time`](/reference/functions/parse_time.md) with an explicit format string.
+For timestamps in non-standard formats, use [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md) with an explicit format string.
 
 ## Examples
 
@@ -168,13 +168,13 @@ timestamp = timestamp.time()
 
 ## See Also
 
-* [`format_time`](/reference/functions/format_time.md)
-* [`parse_time`](/reference/functions/parse_time.md)
-* [`duration`](/reference/functions/duration.md)
-* [`float`](/reference/functions/float.md)
-* [`int`](/reference/functions/int.md)
-* [`ip`](/reference/functions/ip.md)
-* [`string`](/reference/functions/string.md)
-* [`subnet`](/reference/functions/subnet.md)
-* [`uint`](/reference/functions/uint.md)
+* [`format_time`](http://docs.tenzir.com/reference/functions/format_time.md)
+* [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md)
+* [`duration`](http://docs.tenzir.com/reference/functions/duration.md)
+* [`float`](http://docs.tenzir.com/reference/functions/float.md)
+* [`int`](http://docs.tenzir.com/reference/functions/int.md)
+* [`ip`](http://docs.tenzir.com/reference/functions/ip.md)
+* [`string`](http://docs.tenzir.com/reference/functions/string.md)
+* [`subnet`](http://docs.tenzir.com/reference/functions/subnet.md)
+* [`uint`](http://docs.tenzir.com/reference/functions/uint.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

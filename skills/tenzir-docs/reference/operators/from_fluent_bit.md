@@ -27,7 +27,7 @@ from_fluent_bit "plugin", options={key1: value1, key2: value2, …}
 
 Output to Fluent Bit
 
-You can output events to Fluent Bit using the [`to_fluent_bit`](/reference/operators/to_fluent_bit.md) operator.
+You can output events to Fluent Bit using the [`to_fluent_bit`](http://docs.tenzir.com/reference/operators/to_fluent_bit.md) operator.
 
 ### `plugin: string`
 
@@ -219,5 +219,5 @@ from_fluent_bit "splunk", options={port: 8088}
 
 ## See Also
 
-* [`to_fluent_bit`](/reference/operators/to_fluent_bit.md)
+* [`to_fluent_bit`](http://docs.tenzir.com/reference/operators/to_fluent_bit.md)
 * [Fluent Bit](../../integrations/fluent-bit.md)

@@ -3,7 +3,7 @@
 
 [Microsoft Defender](https://learn.microsoft.com/en-us/defender-xdr/microsoft-365-defender-portal) offers protection, detection, investigation, and response to threats. Defender comes in multiple editions, [Defender for Office 365](https://learn.microsoft.com/en-us/defender-office-365/mdo-about), [Defender for Endpoint](https://learn.microsoft.com/en-us/defender-endpoint/), [Defender for IoT](https://learn.microsoft.com/en-us/defender-for-iot/microsoft-defender-iot), [Defender for Identity](https://learn.microsoft.com/en-us/defender-for-identity/what-is), and [Defender for Cloud](https://learn.microsoft.com/en-us/defender-xdr/microsoft-365-security-center-defender-cloud). All Defender products can stream events in real time to Tenzir using [Azure Event Hubs](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about).
 
-For Microsoft Defender and Microsoft 365 data that is exposed as Microsoft Graph collections, use [Graph](graph.md) with [`from_microsoft_graph`](/reference/operators/from_microsoft_graph.md). Use Azure Event Hubs for real-time Defender streaming. For the Microsoft API surface, see the [Microsoft Graph Security API reference](https://learn.microsoft.com/en-us/graph/api/resources/security-api-overview) and the [Microsoft Defender XDR API reference](https://learn.microsoft.com/en-us/defender-xdr/api-overview).
+For Microsoft Defender and Microsoft 365 data that is exposed as Microsoft Graph collections, use [Graph](graph.md) with [`from_microsoft_graph`](http://docs.tenzir.com/reference/operators/from_microsoft_graph.md). Use Azure Event Hubs for real-time Defender streaming. For the Microsoft API surface, see the [Microsoft Graph Security API reference](https://learn.microsoft.com/en-us/graph/api/resources/security-api-overview) and the [Microsoft Defender XDR API reference](https://learn.microsoft.com/en-us/defender-xdr/api-overview).
 
 Microsoft Defender Setup
 
@@ -19,6 +19,6 @@ For detailed instructions on setting up Azure Event Hubs and consuming events wi
 
 ## See Also
 
-* [`from_microsoft_graph`](/reference/operators/from_microsoft_graph.md)
+* [`from_microsoft_graph`](http://docs.tenzir.com/reference/operators/from_microsoft_graph.md)
 * [Graph](graph.md)
 * [Azure Event Hubs](azure-event-hubs.md)

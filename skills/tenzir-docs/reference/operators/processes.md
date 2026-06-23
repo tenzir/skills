@@ -58,5 +58,5 @@ head 5
 
 ## See Also
 
-* [`files`](/reference/operators/files.md)
-* [`sockets`](/reference/operators/sockets.md)
+* [`files`](http://docs.tenzir.com/reference/operators/files.md)
+* [`sockets`](http://docs.tenzir.com/reference/operators/sockets.md)

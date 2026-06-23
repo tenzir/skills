@@ -155,9 +155,9 @@ group {user: user, src_ip: src_ip} {
 
 ## See Also
 
-* [`group`](/reference/operators/group.md)
-* [`summarize`](/reference/operators/summarize.md)
-* [`every`](/reference/operators/every.md)
+* [`group`](http://docs.tenzir.com/reference/operators/group.md)
+* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
+* [`every`](http://docs.tenzir.com/reference/operators/every.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

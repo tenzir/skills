@@ -30,6 +30,6 @@ summarize mode_value=mode(x)
 
 ## See Also
 
-* [`median`](/reference/functions/median.md)
-* [`value_counts`](/reference/functions/value_counts.md)
+* [`median`](http://docs.tenzir.com/reference/functions/median.md)
+* [`value_counts`](http://docs.tenzir.com/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

@@ -53,6 +53,6 @@ from {x: replace_regex("hellolo", "l+", "y", max=1)}
 
 ## See Also
 
-* [`replace`](/reference/functions/replace.md)
+* [`replace`](http://docs.tenzir.com/reference/functions/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

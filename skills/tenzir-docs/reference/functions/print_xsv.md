@@ -13,11 +13,11 @@ The `parse_xsv` function prints a record’s values as delimiter separated strin
 
 The following table lists existing XSV configurations:
 
-| Format                                     | Field Separator | List Separator | Null Value |
-| ------------------------------------------ | :-------------: | :------------: | :--------: |
-| [`csv`](/reference/functions/print_csv.md) |       `,`       |       `;`      |    empty   |
-| [`ssv`](/reference/functions/print_ssv.md) |    `<space>`    |       `,`      |     `-`    |
-| [`tsv`](/reference/functions/print_tsv.md) |       `\t`      |       `,`      |     `-`    |
+| Format                                                           | Field Separator | List Separator | Null Value |
+| ---------------------------------------------------------------- | :-------------: | :------------: | :--------: |
+| [`csv`](http://docs.tenzir.com/reference/functions/print_csv.md) |       `,`       |       `;`      |    empty   |
+| [`ssv`](http://docs.tenzir.com/reference/functions/print_ssv.md) |    `<space>`    |       `,`      |     `-`    |
+| [`tsv`](http://docs.tenzir.com/reference/functions/print_tsv.md) |       `\t`      |       `,`      |     `-`    |
 
 ### `field_separator = str`
 
@@ -56,5 +56,5 @@ output = this.print_xsv(
 
 ## See Also
 
-* [`parse_xsv`](/reference/functions/parse_xsv.md)
-* [`write_xsv`](/reference/operators/write_xsv.md)
+* [`parse_xsv`](http://docs.tenzir.com/reference/functions/parse_xsv.md)
+* [`write_xsv`](http://docs.tenzir.com/reference/operators/write_xsv.md)

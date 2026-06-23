@@ -108,6 +108,6 @@ to_nats "alerts",
 
 ## See Also
 
-* [`from_nats`](/reference/operators/from_nats.md)
+* [`from_nats`](http://docs.tenzir.com/reference/operators/from_nats.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [NATS](../../integrations/nats.md)

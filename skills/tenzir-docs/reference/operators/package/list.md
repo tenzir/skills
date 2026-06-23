@@ -89,8 +89,8 @@ package::list
 
 ## See Also
 
-* [`package::add`](/reference/operators/package/add.md)
-* [`package::remove`](/reference/operators/package/remove.md)
-* [`pipeline::list`](/reference/operators/pipeline/list.md)
+* [`package::add`](http://docs.tenzir.com/reference/operators/package/add.md)
+* [`package::remove`](http://docs.tenzir.com/reference/operators/package/remove.md)
+* [`pipeline::list`](http://docs.tenzir.com/reference/operators/pipeline/list.md)
 * [Install a package](../../../guides/packages/install-a-package.md)
 * [Write a package](../../../tutorials/write-a-package.md)

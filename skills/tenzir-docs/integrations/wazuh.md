@@ -33,7 +33,7 @@ See Wazuh’s [Syslog server documentation](https://documentation.wazuh.com/curr
 
 ### Send events to Wazuh over Syslog
 
-Use [`to_tcp`](/reference/operators/to_tcp.md) with [`write_syslog`](/reference/operators/write_syslog.md) to forward events to the Wazuh manager. This keeps Wazuh in the analysis path, so Wazuh decoders and rules can process the event stream.
+Use [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md) with [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md) to forward events to the Wazuh manager. This keeps Wazuh in the analysis path, so Wazuh decoders and rules can process the event stream.
 
 ```tql
 subscribe "detections"
@@ -52,7 +52,7 @@ Wazuh alerting and dashboards depend on matching decoders and rules. When you se
 
 ### Query Wazuh alerts from the indexer
 
-Wazuh stores alerts in `wazuh-alerts-*` indices and, when archives are enabled, raw archived events in `wazuh-archives-*` indices. You can query these indices through the Wazuh indexer API with [`from_http`](/reference/operators/from_http.md):
+Wazuh stores alerts in `wazuh-alerts-*` indices and, when archives are enabled, raw archived events in `wazuh-archives-*` indices. You can query these indices through the Wazuh indexer API with [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md):
 
 ```tql
 let $auth = f"{secret("WAZUH_INDEXER_USER")}:{secret("WAZUH_INDEXER_PASSWORD")}"
@@ -109,11 +109,11 @@ unroll hits.hits
 this = hits.hits._source
 ```
 
-Keep `unroll` after [`from_http`](/reference/operators/from_http.md) so the pagination lambda can inspect the whole search response. Follow-up requests inherit the `POST` method and headers from the first request and replace only the request body.
+Keep `unroll` after [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) so the pagination lambda can inspect the whole search response. Follow-up requests inherit the `POST` method and headers from the first request and replace only the request body.
 
 ### Write directly to the Wazuh indexer
 
-The Wazuh indexer exposes an OpenSearch-compatible API. You can use [`to_opensearch`](/reference/operators/to_opensearch.md) to write already-shaped documents to a custom index:
+The Wazuh indexer exposes an OpenSearch-compatible API. You can use [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md) to write already-shaped documents to a custom index:
 
 ```tql
 subscribe "detections"
@@ -128,10 +128,10 @@ Use this path for custom index storage or other indexer-specific workflows. It b
 
 ## See Also
 
-* [`from_http`](/reference/operators/from_http.md)
-* [`to_opensearch`](/reference/operators/to_opensearch.md)
-* [`to_tcp`](/reference/operators/to_tcp.md)
-* [`write_syslog`](/reference/operators/write_syslog.md)
+* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
+* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
+* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
+* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
 * [Fetch via HTTP and APIs](../guides/collecting/fetch-via-http-and-apis.md)
 * [OpenSearch](opensearch.md)
 * [Syslog](syslog.md)

@@ -109,6 +109,6 @@ to_amazon_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`from_amazon_sqs`](/reference/operators/from_amazon_sqs.md)
+* [`from_amazon_sqs`](http://docs.tenzir.com/reference/operators/from_amazon_sqs.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [SQS](../../integrations/amazon/sqs.md)

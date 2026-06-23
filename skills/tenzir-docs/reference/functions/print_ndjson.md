@@ -93,6 +93,6 @@ result = this.print_ndjson(strip_null_fields=true)
 
 ## See Also
 
-* [`write_ndjson`](/reference/operators/write_ndjson.md)
-* [`parse_json`](/reference/functions/parse_json.md)
-* [`print_json`](/reference/functions/print_json.md)
+* [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md)
+* [`parse_json`](http://docs.tenzir.com/reference/functions/parse_json.md)
+* [`print_json`](http://docs.tenzir.com/reference/functions/print_json.md)

@@ -53,5 +53,5 @@ from {
 
 ## See Also
 
-* [`ceil`](/reference/functions/ceil.md)
-* [`round`](/reference/functions/round.md)
+* [`ceil`](http://docs.tenzir.com/reference/functions/ceil.md)
+* [`round`](http://docs.tenzir.com/reference/functions/round.md)

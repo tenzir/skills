@@ -3,7 +3,7 @@
 
 [MySQL](https://www.mysql.com/) is an open-source relational database management system widely used for web applications, data warehousing, and enterprise applications.
 
-Tenzir connects to MySQL over the network using the MySQL wire protocol. Tenzir communicates with MySQL via the host and port you specify in the [`from_mysql`](/reference/operators/from_mysql.md) operator. This means:
+Tenzir connects to MySQL over the network using the MySQL wire protocol. Tenzir communicates with MySQL via the host and port you specify in the [`from_mysql`](http://docs.tenzir.com/reference/operators/from_mysql.md) operator. This means:
 
 * **Network**: Tenzir and MySQL can run on the same machine (using `localhost`) or on different machines in the same network. You just need to make sure that Tenzir can reach the MySQL server.
 * **IPC**: There is no direct inter-process communication (IPC) mechanism; all communication uses MySQL’s network protocol.
@@ -34,4 +34,4 @@ from_mysql table="events", live=true, host="localhost", database="mydb"
 
 ## See Also
 
-* [`from_mysql`](/reference/operators/from_mysql.md)
+* [`from_mysql`](http://docs.tenzir.com/reference/operators/from_mysql.md)

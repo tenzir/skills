@@ -30,5 +30,5 @@ summarize result=all(x)
 
 ## See Also
 
-* [`any`](/reference/functions/any.md)
+* [`any`](http://docs.tenzir.com/reference/functions/any.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

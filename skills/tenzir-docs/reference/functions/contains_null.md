@@ -55,6 +55,6 @@ contains_null = this.contains_null()
 
 ## See Also
 
-* [`contains`](/reference/functions/contains.md)
-* [`has`](/reference/functions/has.md)
-* [`is_empty`](/reference/functions/is_empty.md)
+* [`contains`](http://docs.tenzir.com/reference/functions/contains.md)
+* [`has`](http://docs.tenzir.com/reference/functions/has.md)
+* [`is_empty`](http://docs.tenzir.com/reference/functions/is_empty.md)

@@ -7,15 +7,15 @@
 
 Use GELF when Graylog should ingest, route, index, and alert on the events. Use direct backend access only when you intentionally want to bypass Graylog’s ingestion path.
 
-| Goal                 | Graylog side                                                                                                            | Tenzir path                                                                                                                                                        |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Receive messages     | [GELF output](https://go2docs.graylog.org/current/interacting_with_your_log_data/gelf_outputs.htm) attached to a stream | [`accept_tcp`](/reference/operators/accept_tcp.md) + [`read_gelf`](/reference/operators/read_gelf.md)                                                              |
-| Receive over TLS     | GELF output with protocol `TCP+TLS`                                                                                     | [`accept_tcp`](/reference/operators/accept_tcp.md) with `tls` + [`read_gelf`](/reference/operators/read_gelf.md)                                                   |
-| Send over TCP or TLS | [GELF TCP input](https://go2docs.graylog.org/current/getting_in_log_data/gelf.html)                                     | [`to_tcp`](/reference/operators/to_tcp.md) + [`write_delimited`](/reference/operators/write_delimited.md) + [`print_ndjson`](/reference/functions/print_ndjson.md) |
-| Send over UDP        | GELF UDP input                                                                                                          | [`to_udp`](/reference/operators/to_udp.md) + [`print_ndjson`](/reference/functions/print_ndjson.md)                                                                |
-| Send HTTP batches    | GELF HTTP input                                                                                                         | [`every`](/reference/operators/every.md) + [`to_http`](/reference/operators/to_http.md) + [`write_ndjson`](/reference/operators/write_ndjson.md)                   |
-| Query stored events  | OpenSearch or Elasticsearch search backend                                                                              | [`from_http`](/reference/operators/from_http.md)                                                                                                                   |
-| Write backend data   | OpenSearch or Elasticsearch search backend                                                                              | [`to_opensearch`](/reference/operators/to_opensearch.md) or [`to_elasticsearch`](/reference/operators/to_elasticsearch.md)                                         |
+| Goal                 | Graylog side                                                                                                            | Tenzir path                                                                                                                                                                                                                          |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Receive messages     | [GELF output](https://go2docs.graylog.org/current/interacting_with_your_log_data/gelf_outputs.htm) attached to a stream | [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md) + [`read_gelf`](http://docs.tenzir.com/reference/operators/read_gelf.md)                                                                                    |
+| Receive over TLS     | GELF output with protocol `TCP+TLS`                                                                                     | [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md) with `tls` + [`read_gelf`](http://docs.tenzir.com/reference/operators/read_gelf.md)                                                                         |
+| Send over TCP or TLS | [GELF TCP input](https://go2docs.graylog.org/current/getting_in_log_data/gelf.html)                                     | [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md) + [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md) + [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md) |
+| Send over UDP        | GELF UDP input                                                                                                          | [`to_udp`](http://docs.tenzir.com/reference/operators/to_udp.md) + [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md)                                                                                      |
+| Send HTTP batches    | GELF HTTP input                                                                                                         | [`every`](http://docs.tenzir.com/reference/operators/every.md) + [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) + [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md)                   |
+| Query stored events  | OpenSearch or Elasticsearch search backend                                                                              | [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)                                                                                                                                                               |
+| Write backend data   | OpenSearch or Elasticsearch search backend                                                                              | [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md) or [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md)                                                               |
 
 ## GELF message format
 
@@ -35,7 +35,7 @@ this = {
 }
 ```
 
-Use [`print_ndjson`](/reference/functions/print_ndjson.md) to serialize the record as compact JSON. For transport framing, use [`write_delimited`](/reference/operators/write_delimited.md) when a transport requires a delimiter after each message.
+Use [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md) to serialize the record as compact JSON. For transport framing, use [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md) when a transport requires a delimiter after each message.
 
 ## Receive messages from Graylog
 
@@ -96,7 +96,7 @@ Use a Graylog GELF input when Graylog should index, search, alert on, or route e
 
 ### Send GELF over TCP
 
-Graylog GELF over TCP expects one compact GELF JSON object followed by a null byte. Build the GELF record in TQL, serialize it with [`print_ndjson`](/reference/functions/print_ndjson.md), and use [`write_delimited`](/reference/operators/write_delimited.md) to append the null-byte frame delimiter.
+Graylog GELF over TCP expects one compact GELF JSON object followed by a null byte. Build the GELF record in TQL, serialize it with [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md), and use [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md) to append the null-byte frame delimiter.
 
 ```tql
 subscribe "detections"
@@ -116,7 +116,7 @@ to_tcp "graylog.example.com:12201" {
 
 Replace `graylog.example.com` with the Graylog node or load balancer that hosts the GELF TCP input.
 
-If the Graylog input expects TLS, add TLS options to [`to_tcp`](/reference/operators/to_tcp.md):
+If the Graylog input expects TLS, add TLS options to [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md):
 
 ```tql
 to_tcp "graylog.example.com:12201", tls={} {
@@ -126,7 +126,7 @@ to_tcp "graylog.example.com:12201", tls={} {
 
 ### Send GELF over UDP
 
-Graylog GELF over UDP expects one GELF message per datagram. Use [`to_udp`](/reference/operators/to_udp.md) when each serialized event fits into one datagram:
+Graylog GELF over UDP expects one GELF message per datagram. Use [`to_udp`](http://docs.tenzir.com/reference/operators/to_udp.md) when each serialized event fits into one datagram:
 
 ```tql
 subscribe "detections"
@@ -149,7 +149,7 @@ Prefer TCP for reliable delivery. Use UDP only when datagram loss is acceptable 
 
 The GELF HTTP input accepts one JSON message per request, or newline-delimited JSON when you enable bulk receiving on the Graylog input.
 
-For one HTTP request per event, wrap [`to_http`](/reference/operators/to_http.md) in [`each`](/reference/operators/each.md):
+For one HTTP request per event, wrap [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) in [`each`](http://docs.tenzir.com/reference/operators/each.md):
 
 ```tql
 let $headers = {"Content-Type": "application/json"}
@@ -173,7 +173,7 @@ each {
 }
 ```
 
-For bulk receiving, group events into time-based batches with [`every`](/reference/operators/every.md) and send newline-delimited GELF JSON:
+For bulk receiving, group events into time-based batches with [`every`](http://docs.tenzir.com/reference/operators/every.md) and send newline-delimited GELF JSON:
 
 ```tql
 let $headers = {"Content-Type": "application/json"}
@@ -196,30 +196,30 @@ every 30s {
 }
 ```
 
-Use `https://` and configure TLS options on [`to_http`](/reference/operators/to_http.md) when the input expects TLS.
+Use `https://` and configure TLS options on [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) when the input expects TLS.
 
 ## Work with the search backend
 
-Graylog stores searchable messages in index sets backed by OpenSearch or Elasticsearch. You can query those indices with [`from_http`](/reference/operators/from_http.md) when you need backfill, historical enrichment, or ad hoc exports.
+Graylog stores searchable messages in index sets backed by OpenSearch or Elasticsearch. You can query those indices with [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) when you need backfill, historical enrichment, or ad hoc exports.
 
-Use direct writes with [`to_opensearch`](/reference/operators/to_opensearch.md) or [`to_elasticsearch`](/reference/operators/to_elasticsearch.md) only for custom indices that you manage outside Graylog’s ingestion path. Direct writes don’t pass through Graylog inputs, stream routing, processing pipelines, or destination rules.
+Use direct writes with [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md) or [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md) only for custom indices that you manage outside Graylog’s ingestion path. Direct writes don’t pass through Graylog inputs, stream routing, processing pipelines, or destination rules.
 
 ## See Also
 
-* [`accept_tcp`](/reference/operators/accept_tcp.md)
-* [`each`](/reference/operators/each.md)
-* [`every`](/reference/operators/every.md)
-* [`from_http`](/reference/operators/from_http.md)
-* [`read_gelf`](/reference/operators/read_gelf.md)
-* [`to_elasticsearch`](/reference/operators/to_elasticsearch.md)
-* [`to_http`](/reference/operators/to_http.md)
-* [`to_opensearch`](/reference/operators/to_opensearch.md)
-* [`to_tcp`](/reference/operators/to_tcp.md)
-* [`to_udp`](/reference/operators/to_udp.md)
-* [`write_delimited`](/reference/operators/write_delimited.md)
-* [`write_json`](/reference/operators/write_json.md)
-* [`write_ndjson`](/reference/operators/write_ndjson.md)
-* [`print_ndjson`](/reference/functions/print_ndjson.md)
+* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
+* [`each`](http://docs.tenzir.com/reference/operators/each.md)
+* [`every`](http://docs.tenzir.com/reference/operators/every.md)
+* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
+* [`read_gelf`](http://docs.tenzir.com/reference/operators/read_gelf.md)
+* [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md)
+* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
+* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
+* [`to_udp`](http://docs.tenzir.com/reference/operators/to_udp.md)
+* [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md)
+* [`write_json`](http://docs.tenzir.com/reference/operators/write_json.md)
+* [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md)
+* [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md)
 * [Elasticsearch](elasticsearch.md)
 * [OpenSearch](opensearch.md)
 * [TCP](tcp.md)

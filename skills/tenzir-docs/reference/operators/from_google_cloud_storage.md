@@ -117,6 +117,6 @@ from_google_cloud_storage "gs://security-logs/suricata/**.json" {
 
 ## See Also
 
-* [`from_google_cloud_storage`](/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](/reference/operators/to_google_cloud_storage.md)
+* [`from_google_cloud_storage`](http://docs.tenzir.com/reference/operators/from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](http://docs.tenzir.com/reference/operators/to_google_cloud_storage.md)
 * [Cloud Storage](../../integrations/google/cloud-storage.md)

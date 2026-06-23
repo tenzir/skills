@@ -48,5 +48,5 @@ to_stdout
 
 ## See Also
 
-* [`from_stdin`](/reference/operators/from_stdin.md)
-* [`to_file`](/reference/operators/to_file.md)
+* [`from_stdin`](http://docs.tenzir.com/reference/operators/from_stdin.md)
+* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)

@@ -47,9 +47,9 @@ from {x: uint("0x42", base=16)}
 
 ## See Also
 
-* [`float`](/reference/functions/float.md)
-* [`int`](/reference/functions/int.md)
-* [`ip`](/reference/functions/ip.md)
-* [`string`](/reference/functions/string.md)
-* [`subnet`](/reference/functions/subnet.md)
-* [`time`](/reference/functions/time.md)
+* [`float`](http://docs.tenzir.com/reference/functions/float.md)
+* [`int`](http://docs.tenzir.com/reference/functions/int.md)
+* [`ip`](http://docs.tenzir.com/reference/functions/ip.md)
+* [`string`](http://docs.tenzir.com/reference/functions/string.md)
+* [`subnet`](http://docs.tenzir.com/reference/functions/subnet.md)
+* [`time`](http://docs.tenzir.com/reference/functions/time.md)

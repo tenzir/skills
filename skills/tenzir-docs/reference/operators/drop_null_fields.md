@@ -156,8 +156,8 @@ In this example:
 
 ## See Also
 
-* [`drop_null_fields`](/reference/functions/drop_null_fields.md)
-* [`drop`](/reference/operators/drop.md)
-* [`select`](/reference/operators/select.md)
-* [`where`](/reference/operators/where.md)
+* [`drop_null_fields`](http://docs.tenzir.com/reference/functions/drop_null_fields.md)
+* [`drop`](http://docs.tenzir.com/reference/operators/drop.md)
+* [`select`](http://docs.tenzir.com/reference/operators/select.md)
+* [`where`](http://docs.tenzir.com/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

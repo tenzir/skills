@@ -127,7 +127,7 @@ from_azure_blob_storage "abfs://data/**.json" {
 
 ## See Also
 
-* [`from_file`](/reference/operators/from_file.md)
-* [`from_azure_blob_storage`](/reference/operators/from_azure_blob_storage.md)
-* [`to_azure_blob_storage`](/reference/operators/to_azure_blob_storage.md)
+* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
+* [`from_azure_blob_storage`](http://docs.tenzir.com/reference/operators/from_azure_blob_storage.md)
+* [`to_azure_blob_storage`](http://docs.tenzir.com/reference/operators/to_azure_blob_storage.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

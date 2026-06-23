@@ -3,15 +3,15 @@
 > Run Sigma detection rules on parsed Windows Event Logs and OCSF process events
 
 
-This guide shows you how to run [Sigma rules](https://github.com/SigmaHQ/sigma) on parsed security telemetry with the [`sigma`](/reference/operators/sigma.md) operator. Use this pattern to turn Windows Event Logs and other normalized records into Sigma sightings without leaving the Tenzir pipeline.
+This guide shows you how to run [Sigma rules](https://github.com/SigmaHQ/sigma) on parsed security telemetry with the [`sigma`](http://docs.tenzir.com/reference/operators/sigma.md) operator. Use this pattern to turn Windows Event Logs and other normalized records into Sigma sightings without leaving the Tenzir pipeline.
 
-The `sigma` operator transpiles rule YAML into a TQL expression. Semantically, you can think of it as applying [`where`](/reference/operators/where.md) to the input: non-matching events are discarded, and matching events become `tenzir.sigma` records that include the original event and the matched rule.
+The `sigma` operator transpiles rule YAML into a TQL expression. Semantically, you can think of it as applying [`where`](http://docs.tenzir.com/reference/operators/where.md) to the input: non-matching events are discarded, and matching events become `tenzir.sigma` records that include the original event and the matched rule.
 
 At a high level, the translation process looks as follows:
 
 Field names
 
-The `sigma` operator does not normalize Sigma field names automatically. A rule key such as `EventData.CommandLine` or `process.cmd_line` must match the field path in the input event. Either write rules for your Tenzir field paths or map incoming records to the field names used by your rule set before running [`sigma`](/reference/operators/sigma.md).
+The `sigma` operator does not normalize Sigma field names automatically. A rule key such as `EventData.CommandLine` or `process.cmd_line` must match the field path in the input event. Either write rules for your Tenzir field paths or map incoming records to the field names used by your rule set before running [`sigma`](http://docs.tenzir.com/reference/operators/sigma.md).
 
 ## Detect encoded PowerShell in Windows Event Logs
 
@@ -46,7 +46,7 @@ fields:
 level: high
 ```
 
-If your collector sends native Windows Event Log XML, parse each event with [`parse_winlog`](/reference/functions/parse_winlog.md) and then run the rule:
+If your collector sends native Windows Event Log XML, parse each event with [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md) and then run the rule:
 
 ```tql
 from_file "windows-security.xml" {
@@ -129,7 +129,7 @@ See [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md) for
 
 ## Map parsed events to existing rule fields
 
-Many public Sigma rules use generic Windows field names such as `EventID`, `Image`, `CommandLine`, `ParentImage`, and `User`. You can either edit the rule to use `System.*` and `EventData.*` paths, or map the parsed Windows event to those field names before [`sigma`](/reference/operators/sigma.md):
+Many public Sigma rules use generic Windows field names such as `EventID`, `Image`, `CommandLine`, `ParentImage`, and `User`. You can either edit the rule to use `System.*` and `EventData.*` paths, or map the parsed Windows event to those field names before [`sigma`](http://docs.tenzir.com/reference/operators/sigma.md):
 
 ```tql
 from_file "windows-security.xml" {
@@ -227,7 +227,7 @@ This approach is useful when you import a rule set that already follows a field 
 
 ## Transpile a process rule to OCSF TQL
 
-You can also implement a Sigma detection in TQL directly, without going through the [`sigma`](/reference/operators/sigma.md) operator. This keeps your events in their canonical shape — useful when you’ve normalized to a schema such as OCSF and don’t want to rename fields back to Sigma’s Windows-style selectors only to satisfy a rule.
+You can also implement a Sigma detection in TQL directly, without going through the [`sigma`](http://docs.tenzir.com/reference/operators/sigma.md) operator. This keeps your events in their canonical shape — useful when you’ve normalized to a schema such as OCSF and don’t want to rename fields back to Sigma’s Windows-style selectors only to satisfy a rule.
 
 A recent upstream Sigma process-creation rule, `proc_creation_win_print_dump_sensitive_files.yml` (`Sensitive File Dump Via Print.EXE`, April 28, 2026), detects `print.exe` abuse for copying sensitive Windows credential stores such as `SAM`, `SECURITY`, `SYSTEM`, and `ntds.dit`.
 
@@ -395,11 +395,11 @@ For the two detection records from the earlier fixture, the windowed pipeline em
 
 ## See Also
 
-* [`sigma`](/reference/operators/sigma.md)
-* [`select`](/reference/operators/select.md)
-* [`where`](/reference/operators/where.md)
-* [`summarize`](/reference/operators/summarize.md)
-* [`distinct`](/reference/functions/distinct.md)
-* [`parse_winlog`](/reference/functions/parse_winlog.md)
+* [`sigma`](http://docs.tenzir.com/reference/operators/sigma.md)
+* [`select`](http://docs.tenzir.com/reference/operators/select.md)
+* [`where`](http://docs.tenzir.com/reference/operators/where.md)
+* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
+* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
+* [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md)
 * [Add operators](../packages/add-operators.md)
 * [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)

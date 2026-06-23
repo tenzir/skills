@@ -60,8 +60,8 @@ to_file "out.gzip" {
 
 ## See Also
 
-* [`compress_brotli`](/reference/operators/compress_brotli.md)
-* [`compress_bz2`](/reference/operators/compress_bz2.md)
-* [`compress_lz4`](/reference/operators/compress_lz4.md)
-* [`compress_zstd`](/reference/operators/compress_zstd.md)
-* [`decompress_gzip`](/reference/operators/decompress_gzip.md)
+* [`compress_brotli`](http://docs.tenzir.com/reference/operators/compress_brotli.md)
+* [`compress_bz2`](http://docs.tenzir.com/reference/operators/compress_bz2.md)
+* [`compress_lz4`](http://docs.tenzir.com/reference/operators/compress_lz4.md)
+* [`compress_zstd`](http://docs.tenzir.com/reference/operators/compress_zstd.md)
+* [`decompress_gzip`](http://docs.tenzir.com/reference/operators/decompress_gzip.md)

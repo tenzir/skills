@@ -172,5 +172,5 @@ to_amazon_cloudwatch "/tenzir/events",
 
 ## See Also
 
-* [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md)
+* [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md)
 * [CloudWatch](../../integrations/amazon/cloudwatch.md)

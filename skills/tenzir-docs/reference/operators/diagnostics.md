@@ -82,4 +82,4 @@ where severity == "error"
 
 ## See Also
 
-* [`metrics`](/reference/operators/metrics.md)
+* [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md)

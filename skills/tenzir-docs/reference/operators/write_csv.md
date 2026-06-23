@@ -43,11 +43,11 @@ x,y,z
 
 ## See Also
 
-* [`parse_csv`](/reference/functions/parse_csv.md)
-* [`print_csv`](/reference/functions/print_csv.md)
-* [`read_csv`](/reference/operators/read_csv.md)
-* [`write_lines`](/reference/operators/write_lines.md)
-* [`write_ssv`](/reference/operators/write_ssv.md)
-* [`write_tsv`](/reference/operators/write_tsv.md)
-* [`write_xsv`](/reference/operators/write_xsv.md)
+* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)
+* [`print_csv`](http://docs.tenzir.com/reference/functions/print_csv.md)
+* [`read_csv`](http://docs.tenzir.com/reference/operators/read_csv.md)
+* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)
+* [`write_ssv`](http://docs.tenzir.com/reference/operators/write_ssv.md)
+* [`write_tsv`](http://docs.tenzir.com/reference/operators/write_tsv.md)
+* [`write_xsv`](http://docs.tenzir.com/reference/operators/write_xsv.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

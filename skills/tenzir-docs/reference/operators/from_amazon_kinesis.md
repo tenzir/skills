@@ -163,6 +163,6 @@ from_amazon_kinesis "security-events",
 
 ## See Also
 
-* [`to_amazon_kinesis`](/reference/operators/to_amazon_kinesis.md)
+* [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [Kinesis](../../integrations/amazon/kinesis.md)

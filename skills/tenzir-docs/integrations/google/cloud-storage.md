@@ -9,7 +9,7 @@ You need to configure appropriate credentials using Google’s [Application Defa
 
 ## Examples
 
-Use [`from_google_cloud_storage`](/reference/operators/from_google_cloud_storage.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`to_google_cloud_storage`](/reference/operators/to_google_cloud_storage.md) with a print operator.
+Use [`from_google_cloud_storage`](http://docs.tenzir.com/reference/operators/from_google_cloud_storage.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`to_google_cloud_storage`](http://docs.tenzir.com/reference/operators/to_google_cloud_storage.md) with a print operator.
 
 ### Read events from a file in a bucket
 

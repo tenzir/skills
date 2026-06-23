@@ -35,6 +35,6 @@ from {x: join(["a", "b", "c"], "-")}
 
 ## See Also
 
-* [`split`](/reference/functions/split.md)
-* [`split_regex`](/reference/functions/split_regex.md)
+* [`split`](http://docs.tenzir.com/reference/functions/split.md)
+* [`split_regex`](http://docs.tenzir.com/reference/functions/split_regex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -59,8 +59,8 @@ from {x: "hello world".pad_start(5)}
 
 ## See Also
 
-* [`pad_end`](/reference/functions/pad_end.md)
-* [`trim`](/reference/functions/trim.md)
-* [`trim_start`](/reference/functions/trim_start.md)
+* [`pad_end`](http://docs.tenzir.com/reference/functions/pad_end.md)
+* [`trim`](http://docs.tenzir.com/reference/functions/trim.md)
+* [`trim_start`](http://docs.tenzir.com/reference/functions/trim_start.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

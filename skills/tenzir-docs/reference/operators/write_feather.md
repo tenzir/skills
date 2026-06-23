@@ -48,8 +48,8 @@ to_file "output.feather" {
 
 ## See Also
 
-* [`read_bitz`](/reference/operators/read_bitz.md)
-* [`read_feather`](/reference/operators/read_feather.md)
-* [`to_hive`](/reference/operators/to_hive.md)
-* [`write_bitz`](/reference/operators/write_bitz.md)
-* [`write_parquet`](/reference/operators/write_parquet.md)
+* [`read_bitz`](http://docs.tenzir.com/reference/operators/read_bitz.md)
+* [`read_feather`](http://docs.tenzir.com/reference/operators/read_feather.md)
+* [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md)
+* [`write_bitz`](http://docs.tenzir.com/reference/operators/write_bitz.md)
+* [`write_parquet`](http://docs.tenzir.com/reference/operators/write_parquet.md)

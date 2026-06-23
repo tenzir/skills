@@ -33,5 +33,5 @@ decoded = input.decode_url()
 
 ## See Also
 
-* [`encode_url`](/reference/functions/encode_url.md)
+* [`encode_url`](http://docs.tenzir.com/reference/functions/encode_url.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

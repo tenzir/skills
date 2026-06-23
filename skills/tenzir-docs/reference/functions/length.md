@@ -25,7 +25,7 @@ from {n: [1, 2, 3].length()}
 
 ## See Also
 
-* [`is_empty`](/reference/functions/is_empty.md)
-* [`length_bytes`](/reference/functions/length_bytes.md)
-* [`length_chars`](/reference/functions/length_chars.md)
+* [`is_empty`](http://docs.tenzir.com/reference/functions/is_empty.md)
+* [`length_bytes`](http://docs.tenzir.com/reference/functions/length_bytes.md)
+* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

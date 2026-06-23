@@ -80,7 +80,7 @@ Defaults to `5min`.
 
 A list of fields used to partition events into separate files. For every distinct combination of partition-field values, a separate file (or group of rotated files) is written. The URL must contain a `**` placeholder, which is replaced by the hive-style path `field1=value1/field2=value2/…`.
 
-Unlike [`to_hive`](/reference/operators/to_hive.md), the partitioning fields are **not** stripped from the written events — they remain in each record.
+Unlike [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md), the partitioning fields are **not** stripped from the written events — they remain in each record.
 
 ### `{ … }`
 
@@ -140,8 +140,8 @@ to_s3 "s3://my-bucket/logs/events_{uuid}.json.gz", max_size=10M {
 
 ## See Also
 
-* [`from_s3`](/reference/operators/from_s3.md)
-* [`to_s3`](/reference/operators/to_s3.md)
-* [`to_file`](/reference/operators/to_file.md)
-* [`to_hive`](/reference/operators/to_hive.md)
+* [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md)
+* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
+* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
+* [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md)
 * [S3](../../integrations/amazon/s3.md)

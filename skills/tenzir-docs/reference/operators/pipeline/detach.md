@@ -37,5 +37,5 @@ pipeline::detach {
 
 ## See Also
 
-* [`pipeline::list`](/reference/operators/pipeline/list.md)
-* [`pipeline::run`](/reference/operators/pipeline/run.md)
+* [`pipeline::list`](http://docs.tenzir.com/reference/operators/pipeline/list.md)
+* [`pipeline::run`](http://docs.tenzir.com/reference/operators/pipeline/run.md)

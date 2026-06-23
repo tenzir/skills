@@ -9,7 +9,7 @@ pipeline::list
 
 ## Description
 
-The `pipeline::list` operator returns the list of all managed pipelines. Managed pipelines are pipelines created through the [`/pipeline` API](/reference/node/api), which includes all pipelines run through the Tenzir Platform.
+The `pipeline::list` operator returns the list of all managed pipelines. Managed pipelines are pipelines created through the [`/pipeline` API](http://docs.tenzir.com/reference/node/api), which includes all pipelines run through the Tenzir Platform.
 
 ## Examples
 
@@ -56,6 +56,6 @@ summarize package, names=collect(name)
 
 ## See Also
 
-* [`package::list`](/reference/operators/package/list.md)
-* [`pipeline::detach`](/reference/operators/pipeline/detach.md)
-* [`pipeline::run`](/reference/operators/pipeline/run.md)
+* [`package::list`](http://docs.tenzir.com/reference/operators/package/list.md)
+* [`pipeline::detach`](http://docs.tenzir.com/reference/operators/pipeline/detach.md)
+* [`pipeline::run`](http://docs.tenzir.com/reference/operators/pipeline/run.md)

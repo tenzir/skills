@@ -25,5 +25,5 @@ from {x: env("PATH")}
 
 ## See Also
 
-* [`config`](/reference/functions/config.md)
-* [`secret`](/reference/functions/secret.md)
+* [`config`](http://docs.tenzir.com/reference/functions/config.md)
+* [`secret`](http://docs.tenzir.com/reference/functions/secret.md)

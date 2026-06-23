@@ -24,7 +24,7 @@ Under the hood, core integrations use a C++ plugin abstraction to provide an [op
 
 Dedicated operators
 
-For some applications, we provide a **dedicated operator** that dramatically simplifies the user experience. For example, [`to_splunk`](/reference/operators/to_splunk.md) and [`accept_opensearch`](/reference/operators/accept_opensearch.md) offer a streamlined interface compared to composing generic HTTP or protocol operators.
+For some applications, we provide a **dedicated operator** that dramatically simplifies the user experience. For example, [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md) and [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md) offer a streamlined interface compared to composing generic HTTP or protocol operators.
 
 ## Contents
 

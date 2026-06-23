@@ -59,4 +59,4 @@ from {guid: uuid(version="nil")}
 
 ## See Also
 
-* [`random`](/reference/functions/random.md)
+* [`random`](http://docs.tenzir.com/reference/functions/random.md)

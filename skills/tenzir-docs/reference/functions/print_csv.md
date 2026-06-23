@@ -49,5 +49,5 @@ output = this.print_csv()
 
 ## See Also
 
-* [`write_csv`](/reference/operators/write_csv.md)
-* [`parse_csv`](/reference/functions/parse_csv.md)
+* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
+* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)

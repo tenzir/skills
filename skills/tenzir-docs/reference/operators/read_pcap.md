@@ -19,7 +19,7 @@ The current implementation does *not* support [PCAPNG](https://www.ietf.org/arch
 
 Emit a `pcap.file_header` event that represents the PCAP file header. If present, the parser injects this additional event before the subsequent stream of packets.
 
-Emitting this extra event makes it possible to seed [`write_pcap`](/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
+Emitting this extra event makes it possible to seed [`write_pcap`](http://docs.tenzir.com/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
 
 When the parser processes a concatenated stream of PCAP files, `emit_file_headers=true` also re-emits every intermediate file header as a separate event.
 
@@ -75,6 +75,6 @@ from_nic "en1" {
 
 ## See Also
 
-* [`from_nic`](/reference/operators/from_nic.md)
-* [`write_pcap`](/reference/operators/write_pcap.md)
-* [`decapsulate`](/reference/functions/decapsulate.md)
+* [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md)
+* [`write_pcap`](http://docs.tenzir.com/reference/operators/write_pcap.md)
+* [`decapsulate`](http://docs.tenzir.com/reference/functions/decapsulate.md)

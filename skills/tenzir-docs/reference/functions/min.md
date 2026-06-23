@@ -30,7 +30,7 @@ summarize min_value=min(x)
 
 ## See Also
 
-* [`max`](/reference/functions/max.md)
-* [`mean`](/reference/functions/mean.md)
-* [`sum`](/reference/functions/sum.md)
+* [`max`](http://docs.tenzir.com/reference/functions/max.md)
+* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
+* [`sum`](http://docs.tenzir.com/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

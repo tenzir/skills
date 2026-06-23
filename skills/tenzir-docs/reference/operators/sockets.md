@@ -41,5 +41,5 @@ select pid, local_addr, remote_addr
 
 ## See Also
 
-* [`files`](/reference/operators/files.md)
-* [`processes`](/reference/operators/processes.md)
+* [`files`](http://docs.tenzir.com/reference/operators/files.md)
+* [`processes`](http://docs.tenzir.com/reference/operators/processes.md)

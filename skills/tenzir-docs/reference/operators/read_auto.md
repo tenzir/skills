@@ -17,18 +17,18 @@ The `read_auto` operator buffers the first bytes of its input as a probe and ask
 
 Detection works in two layers:
 
-1. **Capability**: Every reader dry-runs its actual parser on the probe. For example, YAML detection runs the YAML parser and requires a map document that [`read_yaml`](/reference/operators/read_yaml.md) would turn into an event, and CSV detection tokenizes complete lines with the reader’s quoting rules and requires a stable number of fields. A reader only becomes a candidate when it would accept the probed input.
+1. **Capability**: Every reader dry-runs its actual parser on the probe. For example, YAML detection runs the YAML parser and requires a map document that [`read_yaml`](http://docs.tenzir.com/reference/operators/read_yaml.md) would turn into an event, and CSV detection tokenizes complete lines with the reader’s quoting rules and requires a stable number of fields. A reader only becomes a candidate when it would accept the probed input.
 2. **Specificity**: When several readers are capable of parsing the same bytes, the most specific format wins. Magic-byte formats such as PCAP or Parquet rank above JSON dialects such as Suricata EVE or GELF, which rank above generic NDJSON, which ranks above key-value, delimited, Syslog, and YAML input. For example, a GELF stream is also valid NDJSON, but the GELF reader wins because it describes the input more precisely.
 
 Detection is strict by default. If no reader is capable, or if two formats with equal specificity match the same probe, `read_auto` emits an error instead of guessing. A reader that needs more evidence delays the decision until more input arrives, the input ends, or the probe reaches `max_probe_bytes`. Once a single best candidate exists, `read_auto` starts that reader, replays the buffered bytes, and forwards the rest of the stream unchanged.
 
-The built-in detectors cover common JSON, delimited text, security log, and magic-byte formats, including NDJSON, JSON objects, JSON arrays of objects, CSV, TSV, key-value text, YAML, Syslog, CEF, LEEF, Zeek TSV, Suricata EVE JSON, Zeek JSON, GELF, PCAP, Feather, BITZ, and Parquet. Formats that accept nearly arbitrary text never participate in detection: space-separated values look like prose, so select [`read_ssv`](/reference/operators/read_ssv.md) explicitly, and Syslog messages without a `<PRI>` prefix look like free-form text, so they only match via `fallback`.
+The built-in detectors cover common JSON, delimited text, security log, and magic-byte formats, including NDJSON, JSON objects, JSON arrays of objects, CSV, TSV, key-value text, YAML, Syslog, CEF, LEEF, Zeek TSV, Suricata EVE JSON, Zeek JSON, GELF, PCAP, Feather, BITZ, and Parquet. Formats that accept nearly arbitrary text never participate in detection: space-separated values look like prose, so select [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md) explicitly, and Syslog messages without a `<PRI>` prefix look like free-form text, so they only match via `fallback`.
 
-The output uses the schema name that the selected reader would normally assign. For example, detected CSV input produces the same schema name as [`read_csv`](/reference/operators/read_csv.md), and detected NDJSON input produces the same schema name as [`read_ndjson`](/reference/operators/read_ndjson.md). Inspect `@name` to see the schema name. `read_auto` does not add a separate field with the detected format.
+The output uses the schema name that the selected reader would normally assign. For example, detected CSV input produces the same schema name as [`read_csv`](http://docs.tenzir.com/reference/operators/read_csv.md), and detected NDJSON input produces the same schema name as [`read_ndjson`](http://docs.tenzir.com/reference/operators/read_ndjson.md). Inspect `@name` to see the schema name. `read_auto` does not add a separate field with the detected format.
 
-Use `read_auto` for exploratory pipelines where you want to try sample data quickly, for file drops where names don’t reliably encode the format, and for multi-format ingestion endpoints. For example, [`accept_tcp`](/reference/operators/accept_tcp.md) can run `read_auto` per connection so one client sends NDJSON while another sends CSV, Syslog, or another supported format.
+Use `read_auto` for exploratory pipelines where you want to try sample data quickly, for file drops where names don’t reliably encode the format, and for multi-format ingestion endpoints. For example, [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md) can run `read_auto` per connection so one client sends NDJSON while another sends CSV, Syslog, or another supported format.
 
-Prefer a concrete reader when you already know the format or need reader-specific options such as `unflatten_separator` for [`read_ndjson`](/reference/operators/read_ndjson.md). `read_auto` selects the reader once for each byte stream and expects the remaining bytes in that stream to use the same format.
+Prefer a concrete reader when you already know the format or need reader-specific options such as `unflatten_separator` for [`read_ndjson`](http://docs.tenzir.com/reference/operators/read_ndjson.md). `read_auto` selects the reader once for each byte stream and expects the remaining bytes in that stream to use the same format.
 
 ### `fallback = string (optional)`
 
@@ -37,10 +37,10 @@ Controls what happens when no detector matches.
 Valid values are:
 
 * `"none"`: Emit an error. This is the default.
-* `"lines"`: Use [`read_lines`](/reference/operators/read_lines.md). The input must be valid UTF-8.
-* `"all"`: Use [`read_all`](/reference/operators/read_all.md). `read_auto` uses the current probe to choose between text and binary output: valid UTF-8 probe bytes select `read_all`, while invalid probe bytes select `read_all binary=true`. If binary input can start with a valid UTF-8 prefix longer than `max_probe_bytes`, use a larger probe limit or [`read_all`](/reference/operators/read_all.md) with `binary=true` directly.
+* `"lines"`: Use [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md). The input must be valid UTF-8.
+* `"all"`: Use [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md). `read_auto` uses the current probe to choose between text and binary output: valid UTF-8 probe bytes select `read_all`, while invalid probe bytes select `read_all binary=true`. If binary input can start with a valid UTF-8 prefix longer than `max_probe_bytes`, use a larger probe limit or [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md) with `binary=true` directly.
 
-`read_auto` uses a fallback only after the probe is final, either because the input ended or because the probe reached `max_probe_bytes`. For long-lived streams with unknown plain-text input, lower `max_probe_bytes` to reduce startup latency or use [`read_lines`](/reference/operators/read_lines.md) directly.
+`read_auto` uses a fallback only after the probe is final, either because the input ended or because the probe reached `max_probe_bytes`. For long-lived streams with unknown plain-text input, lower `max_probe_bytes` to reduce startup latency or use [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md) directly.
 
 ### `max_probe_bytes = uint (optional)`
 
@@ -122,15 +122,15 @@ The detector runs separately for each connection. This makes the pattern useful 
 
 ## See Also
 
-* [`accept_tcp`](/reference/operators/accept_tcp.md)
-* [`from_file`](/reference/operators/from_file.md)
-* [`read_all`](/reference/operators/read_all.md)
-* [`read_csv`](/reference/operators/read_csv.md)
-* [`read_json`](/reference/operators/read_json.md)
-* [`read_lines`](/reference/operators/read_lines.md)
-* [`read_ndjson`](/reference/operators/read_ndjson.md)
-* [`read_syslog`](/reference/operators/read_syslog.md)
-* [`read_yaml`](/reference/operators/read_yaml.md)
+* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
+* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
+* [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md)
+* [`read_csv`](http://docs.tenzir.com/reference/operators/read_csv.md)
+* [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md)
+* [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md)
+* [`read_ndjson`](http://docs.tenzir.com/reference/operators/read_ndjson.md)
+* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
+* [`read_yaml`](http://docs.tenzir.com/reference/operators/read_yaml.md)
 * [Get data from the network](../../guides/collecting/get-data-from-the-network.md)
 * [Read and watch files](../../guides/collecting/read-and-watch-files.md)
 * [Parse delimited text](../../guides/parsing/parse-delimited-text.md)

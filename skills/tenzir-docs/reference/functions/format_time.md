@@ -76,7 +76,7 @@ x = x.format_time("%d.%m.%Y")
 
 ## See Also
 
-* [`parse_time`](/reference/functions/parse_time.md)
-* [`time`](/reference/functions/time.md)
+* [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md)
+* [`time`](http://docs.tenzir.com/reference/functions/time.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

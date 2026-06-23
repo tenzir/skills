@@ -31,6 +31,6 @@ from {hostname: file_contents("/etc/hostname")}
 
 ## See Also
 
-* [`file_name`](/reference/functions/file_name.md)
-* [`parent_dir`](/reference/functions/parent_dir.md)
+* [`file_name`](http://docs.tenzir.com/reference/functions/file_name.md)
+* [`parent_dir`](http://docs.tenzir.com/reference/functions/parent_dir.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

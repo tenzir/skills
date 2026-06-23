@@ -13,7 +13,7 @@ The `sigma` operator executes [Sigma rules](https://github.com/SigmaHQ/sigma) on
 
 Transpilation Process
 
-For each rule, the operator transpiles the YAML into an [expression](../expressions.md) and instantiates a [`where`](/reference/operators/where.md) operator, followed by assignments to generate an output. Here’s how the transpilation works. The Sigma rule YAML format requires a `detection` attribute that includes a map of named sub-expression called *search identifiers*. In addition, `detection` must include a final `condition` that combines search identifiers using boolean algebra (AND, OR, and NOT) or syntactic sugar to reference groups of search expressions, e.g., using the `1/all of *` or plain wildcard syntax. Consider the following `detection` embedded in a rule:
+For each rule, the operator transpiles the YAML into an [expression](../expressions.md) and instantiates a [`where`](http://docs.tenzir.com/reference/operators/where.md) operator, followed by assignments to generate an output. Here’s how the transpilation works. The Sigma rule YAML format requires a `detection` attribute that includes a map of named sub-expression called *search identifiers*. In addition, `detection` must include a final `condition` that combines search identifiers using boolean algebra (AND, OR, and NOT) or syntactic sugar to reference groups of search expressions, e.g., using the `1/all of *` or plain wildcard syntax. Consider the following `detection` embedded in a rule:
 
 ```yaml
 detection:
@@ -77,7 +77,7 @@ Defaults to `5s`.
 
 ### Apply a Sigma rule to Windows Event Log XML
 
-Use [`parse_winlog`](/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before you run Windows Sigma rules:
+Use [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before you run Windows Sigma rules:
 
 ```tql
 from_file "windows-security.xml" {
@@ -112,7 +112,7 @@ When you add a new file to `/tmp/rules`, the `sigma` operator transpiles it and 
 
 ## See Also
 
-* [`where`](/reference/operators/where.md)
-* [`parse_winlog`](/reference/functions/parse_winlog.md)
+* [`where`](http://docs.tenzir.com/reference/operators/where.md)
+* [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md)
 * [Execute Sigma rules](../../guides/enrichment/execute-sigma-rules.md)
 * [Expressions](../expressions.md)

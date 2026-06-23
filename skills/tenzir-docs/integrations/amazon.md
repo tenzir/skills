@@ -5,13 +5,13 @@ Tenzir runs natively on [Amazon Web Services (AWS)](https://aws.amazon.com) and 
 
 ## Supported services
 
-| Service                                                | Operators                                                                                                                                          | Use case                              |
-| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| [CloudWatch](amazon/cloudwatch.md)       | [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md) | Read and write CloudWatch log events. |
-| [MSK](amazon/msk.md)                     | [`from_kafka`](/reference/operators/from_kafka.md), [`to_kafka`](/reference/operators/to_kafka.md)                                                 | Stream events through managed Kafka.  |
-| [S3](amazon/s3.md)                       | [`from_s3`](/reference/operators/from_s3.md), [`to_s3`](/reference/operators/to_s3.md)                                                             | Read and write S3 objects.            |
-| [Security Lake](amazon/security-lake.md) | [`to_amazon_security_lake`](/reference/operators/to_amazon_security_lake.md)                                                                       | Send OCSF events to Security Lake.    |
-| [SQS](amazon/sqs.md)                     | [`from_sqs`](/reference/operators/from_sqs), [`to_sqs`](/reference/operators/to_sqs)                                                               | Receive and send SQS messages.        |
+| Service                                                                      | Operators                                                                                                                                                                                      | Use case                              |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| [CloudWatch](amazon/cloudwatch.md)       | [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md) | Read and write CloudWatch log events. |
+| [MSK](amazon/msk.md)                     | [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md), [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)                                                 | Stream events through managed Kafka.  |
+| [S3](amazon/s3.md)                       | [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md), [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)                                                             | Read and write S3 objects.            |
+| [Security Lake](amazon/security-lake.md) | [`to_amazon_security_lake`](http://docs.tenzir.com/reference/operators/to_amazon_security_lake.md)                                                                                             | Send OCSF events to Security Lake.    |
+| [SQS](amazon/sqs.md)                     | [`from_sqs`](http://docs.tenzir.com/reference/operators/from_sqs), [`to_sqs`](http://docs.tenzir.com/reference/operators/to_sqs)                                                               | Receive and send SQS messages.        |
 
 All AWS operators share the same authentication mechanisms. See [AWS Authentication](../reference/aws-authentication.md) for details.
 

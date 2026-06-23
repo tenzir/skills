@@ -74,7 +74,7 @@ select result = merge(x, y)
 
 ## See Also
 
-* [`concatenate`](/reference/functions/concatenate.md)
+* [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md)
 * [Reshape complex data](../../guides/transformation/reshape-complex-data.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

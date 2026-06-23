@@ -361,7 +361,7 @@ output = xml.parse_xml(xpath="/record", key_attr="name")
 
 ## See Also
 
-* [`parse_winlog`](/reference/functions/parse_winlog.md)
-* [`parse_json`](/reference/functions/parse_json.md)
-* [`parse_yaml`](/reference/functions/parse_yaml.md)
+* [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md)
+* [`parse_json`](http://docs.tenzir.com/reference/functions/parse_json.md)
+* [`parse_yaml`](http://docs.tenzir.com/reference/functions/parse_yaml.md)
 * [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)

@@ -3,7 +3,7 @@
 
 [NATS](https://nats.io/) is a messaging system for services, edge deployments, and cloud-native applications. Tenzir integrates with NATS JetStream to consume messages from subjects and publish events back to subjects.
 
-Use [`from_nats`](/reference/operators/from_nats.md) to consume JetStream messages and [`to_nats`](/reference/operators/to_nats.md) to publish messages.
+Use [`from_nats`](http://docs.tenzir.com/reference/operators/from_nats.md) to consume JetStream messages and [`to_nats`](http://docs.tenzir.com/reference/operators/to_nats.md) to publish messages.
 
 ## Examples
 
@@ -23,7 +23,7 @@ subscribe "alerts"
 to_nats "alerts"
 ```
 
-By default, [`to_nats`](/reference/operators/to_nats.md) serializes each event with `this.print_ndjson()`.
+By default, [`to_nats`](http://docs.tenzir.com/reference/operators/to_nats.md) serializes each event with `this.print_ndjson()`.
 
 ### Connect to a secured NATS server
 
@@ -37,7 +37,7 @@ this = string(message).parse_json()
 
 ## See Also
 
-* [`from_nats`](/reference/operators/from_nats.md)
-* [`to_nats`](/reference/operators/to_nats.md)
+* [`from_nats`](http://docs.tenzir.com/reference/operators/from_nats.md)
+* [`to_nats`](http://docs.tenzir.com/reference/operators/to_nats.md)
 * [Read from message brokers](../guides/collecting/read-from-message-brokers.md)
 * [Send to destinations](../guides/routing/send-to-destinations.md)

@@ -98,7 +98,7 @@ where type == "fifo"
 
 ## See Also
 
-* [`from_file`](/reference/operators/from_file.md)
-* [`processes`](/reference/operators/processes.md)
-* [`to_file`](/reference/operators/to_file.md)
-* [`sockets`](/reference/operators/sockets.md)
+* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
+* [`processes`](http://docs.tenzir.com/reference/operators/processes.md)
+* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
+* [`sockets`](http://docs.tenzir.com/reference/operators/sockets.md)

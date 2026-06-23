@@ -135,6 +135,6 @@ from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 
 ## See Also
 
-* [`to_kafka`](/reference/operators/to_kafka.md)
+* [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)

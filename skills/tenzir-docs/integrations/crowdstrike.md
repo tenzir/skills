@@ -31,7 +31,7 @@ In the Falcon console, create a data connection under **Next-Gen SIEM > Data onb
 
 Use HTTP directly
 
-Although CrowdStrike uses HEC terminology, this connector is not the Splunk HEC contract that [`to_splunk`](/reference/operators/to_splunk.md) implements. Use [`to_http`](/reference/operators/to_http.md) so the pipeline controls the generated Falcon API URL, Bearer authorization header, and parser-specific request body directly.
+Although CrowdStrike uses HEC terminology, this connector is not the Splunk HEC contract that [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md) implements. Use [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) so the pipeline controls the generated Falcon API URL, Bearer authorization header, and parser-specific request body directly.
 
 CrowdStrike integrations commonly use one of two HEC shapes:
 
@@ -149,20 +149,20 @@ Replace the queue URL and region with the values from your FDR feed.
 
 Shared FDR queues
 
-By default, [`from_sqs`](/reference/operators/from_sqs) deletes notifications after it emits them. Add `keep_messages=true` only when Tenzir shares an existing queue or you want to replay notifications during testing. In that mode, downstream pipelines should deduplicate events by `crowdstrike.fdr.s3_url`, event ID, or native event time.
+By default, [`from_sqs`](http://docs.tenzir.com/reference/operators/from_sqs) deletes notifications after it emits them. Add `keep_messages=true` only when Tenzir shares an existing queue or you want to replay notifications during testing. In that mode, downstream pipelines should deduplicate events by `crowdstrike.fdr.s3_url`, event ID, or native event time.
 
 ## See Also
 
-* [`accept_tcp`](/reference/operators/accept_tcp.md)
-* [`to_http`](/reference/operators/to_http.md)
-* [`from_sqs`](/reference/operators/from_sqs)
-* [`from_s3`](/reference/operators/from_s3.md)
-* [`each`](/reference/operators/each.md)
-* [`read_syslog`](/reference/operators/read_syslog.md)
-* [`write_delimited`](/reference/operators/write_delimited.md)
-* [`write_ndjson`](/reference/operators/write_ndjson.md)
-* [`parse_json`](/reference/functions/parse_json.md)
-* [`decode_url`](/reference/functions/decode_url.md)
+* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
+* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`from_sqs`](http://docs.tenzir.com/reference/operators/from_sqs)
+* [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md)
+* [`each`](http://docs.tenzir.com/reference/operators/each.md)
+* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
+* [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md)
+* [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md)
+* [`parse_json`](http://docs.tenzir.com/reference/functions/parse_json.md)
+* [`decode_url`](http://docs.tenzir.com/reference/functions/decode_url.md)
 * [Read from message brokers](../guides/collecting/read-from-message-brokers.md)
 * [Send to destinations](../guides/routing/send-to-destinations.md)
 * [Secrets](../explanations/secrets.md)

@@ -11,7 +11,7 @@ write_pcap
 
 The `write_pcap` operator transforms packet events into a [PCAP](https://datatracker.ietf.org/doc/id/draft-gharris-opsawg-pcap-00.html) byte stream.
 
-The operator accepts `pcap.packet` events. When present, it also uses `pcap.file_header` events emitted by [`read_pcap`](/reference/operators/read_pcap.md) to preserve the original timestamp precision and byte order.
+The operator accepts `pcap.packet` events. When present, it also uses `pcap.file_header` events emitted by [`read_pcap`](http://docs.tenzir.com/reference/operators/read_pcap.md) to preserve the original timestamp precision and byte order.
 
 If no `pcap.file_header` event is present, `write_pcap` generates a file header from the first packet’s `linktype` and writes timestamps with nanosecond precision.
 
@@ -55,5 +55,5 @@ to_file "/tmp/trace-copy.pcap" {
 
 ## See Also
 
-* [`from_nic`](/reference/operators/from_nic.md)
-* [`read_pcap`](/reference/operators/read_pcap.md)
+* [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md)
+* [`read_pcap`](http://docs.tenzir.com/reference/operators/read_pcap.md)

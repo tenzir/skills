@@ -3,11 +3,11 @@
 
 This guide shows you how to parse text streams into structured events. You’ll learn to split byte streams on newlines or custom delimiters, and parse line-based formats like JSON lines, CSV, TSV, key-value pairs, Syslog, and CEF.
 
-The examples use [`from_file`](/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
+The examples use [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
 
 ## Auto-detect structured text
 
-Use [`read_auto`](/reference/operators/read_auto.md) when you don’t know the text format yet, or when you want to prototype against sample files before choosing a concrete reader. It detects common structured text formats such as NDJSON, CSV, TSV, key-value text, YAML, Syslog, CEF, and LEEF from the first bytes of the stream:
+Use [`read_auto`](http://docs.tenzir.com/reference/operators/read_auto.md) when you don’t know the text format yet, or when you want to prototype against sample files before choosing a concrete reader. It detects common structured text formats such as NDJSON, CSV, TSV, key-value text, YAML, Syslog, CEF, and LEEF from the first bytes of the stream:
 
 ```tql
 from_file "sample.log" {
@@ -19,7 +19,7 @@ With `fallback="lines"`, unsupported UTF-8 input still becomes one event per lin
 
 ## Split on newlines
 
-Use [`read_lines`](/reference/operators/read_lines.md) to split a byte stream on newline characters. Given this input file:
+Use [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md) to split a byte stream on newline characters. Given this input file:
 
 app.log
 
@@ -51,7 +51,7 @@ accept_tcp "0.0.0.0:9000" {
 
 ## Split on custom delimiters
 
-Use [`read_delimited`](/reference/operators/read_delimited.md) when records use separators other than newlines. Given this input file:
+Use [`read_delimited`](http://docs.tenzir.com/reference/operators/read_delimited.md) when records use separators other than newlines. Given this input file:
 
 records.dat
 
@@ -144,7 +144,7 @@ conn.jsonl
 {"ts": "2024-01-15T10:30:46Z", "id.orig_h": "192.168.1.101", "id.orig_p": 52312, "id.resp_h": "93.184.216.34", "id.resp_p": 80}
 ```
 
-Use [`read_ndjson`](/reference/operators/read_ndjson.md) with `unflatten_separator` to convert dotted keys into nested records:
+Use [`read_ndjson`](http://docs.tenzir.com/reference/operators/read_ndjson.md) with `unflatten_separator` to convert dotted keys into nested records:
 
 ```tql
 from_file "conn.jsonl" {
@@ -157,7 +157,7 @@ from_file "conn.jsonl" {
 {ts: 2024-01-15T10:30:46Z, id: {orig_h: 192.168.1.101, orig_p: 52312, resp_h: 93.184.216.34, resp_p: 80}}
 ```
 
-For regular JSON arrays or objects, use [`read_json`](/reference/operators/read_json.md) instead.
+For regular JSON arrays or objects, use [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md) instead.
 
 ### CSV / TSV / SSV / XSV
 
@@ -172,7 +172,7 @@ id,name,email,role
 3,carol,carol@example.com,user
 ```
 
-Use [`read_csv`](/reference/operators/read_csv.md) to parse the file with automatic header detection:
+Use [`read_csv`](http://docs.tenzir.com/reference/operators/read_csv.md) to parse the file with automatic header detection:
 
 ```tql
 from_file "users.csv" {
@@ -186,7 +186,7 @@ from_file "users.csv" {
 {id: 3, name: "carol", email: "carol@example.com", role: "user"}
 ```
 
-For tab-separated or space-separated data, use [`read_tsv`](/reference/operators/read_tsv.md) or [`read_ssv`](/reference/operators/read_ssv.md). For custom delimiters, use [`read_xsv`](/reference/operators/read_xsv.md).
+For tab-separated or space-separated data, use [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md) or [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md). For custom delimiters, use [`read_xsv`](http://docs.tenzir.com/reference/operators/read_xsv.md).
 
 ### Key-value pairs (KV)
 
@@ -200,7 +200,7 @@ name=bob age=25
 name=carol age=35
 ```
 
-Use [`read_kv`](/reference/operators/read_kv.md) to parse each line as key-value pairs:
+Use [`read_kv`](http://docs.tenzir.com/reference/operators/read_kv.md) to parse each line as key-value pairs:
 
 ```tql
 from_file "records.txt" {
@@ -225,7 +225,7 @@ CEF:0|Security|IDS|1.0|100|Intrusion detected|7|src=192.168.1.100 dst=10.0.0.1 s
 CEF:0|Security|IDS|1.0|101|Malware found|9|src=192.168.1.101 dst=10.0.0.2 spt=12345 dpt=80
 ```
 
-Use [`read_cef`](/reference/operators/read_cef.md) to parse security events:
+Use [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md) to parse security events:
 
 ```tql
 from_file "events.cef" {
@@ -238,7 +238,7 @@ from_file "events.cef" {
 {cef_version: 0, device_vendor: "Security", device_product: "IDS", device_version: "1.0", signature_id: "101", name: "Malware found", severity: "9", extension: {src: 192.168.1.101, dst: 10.0.0.2, spt: 12345, dpt: 80}}
 ```
 
-For IBM QRadar logs, use [`read_leef`](/reference/operators/read_leef.md).
+For IBM QRadar logs, use [`read_leef`](http://docs.tenzir.com/reference/operators/read_leef.md).
 
 ### Syslog messages
 
@@ -251,7 +251,7 @@ syslog.txt
 <11>Jan 15 10:30:46 myhost app[1234]: Error occurred
 ```
 
-Use [`read_syslog`](/reference/operators/read_syslog.md) to parse each line:
+Use [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md) to parse each line:
 
 ```tql
 from_file "syslog.txt" {
@@ -266,7 +266,7 @@ from_file "syslog.txt" {
 
 ## See also
 
-* [`read_auto`](/reference/operators/read_auto.md)
+* [`read_auto`](http://docs.tenzir.com/reference/operators/read_auto.md)
 * [Parse binary data](parse-binary-data.md)
 * [Parse string fields](parse-string-fields.md)
 * [Read and watch files](../collecting/read-and-watch-files.md)

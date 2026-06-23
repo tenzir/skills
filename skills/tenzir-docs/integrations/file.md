@@ -5,7 +5,7 @@ Tenzir can read from and write to local files, cloud object storage, standard in
 
 When `~` is the first character in the file path, the operator substitutes it with the `$HOME` environment variable.
 
-Use [`from_file`](/reference/operators/from_file.md) to read files with glob patterns, automatic format detection, and file monitoring. For writing, use [`to_file`](/reference/operators/to_file.md) with a print operator.
+Use [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) to read files with glob patterns, automatic format detection, and file monitoring. For writing, use [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md) with a print operator.
 
 ## Examples
 
@@ -71,7 +71,7 @@ to_file "/tmp/event.csv", append=true {
 
 ### Read or write a Unix domain socket
 
-Use the dedicated Unix domain socket operators for local socket streams. When Tenzir connects to an existing socket, use [`from_unix_socket`](/reference/operators/from_unix_socket.md) or [`to_unix_socket`](/reference/operators/to_unix_socket.md):
+Use the dedicated Unix domain socket operators for local socket streams. When Tenzir connects to an existing socket, use [`from_unix_socket`](http://docs.tenzir.com/reference/operators/from_unix_socket.md) or [`to_unix_socket`](http://docs.tenzir.com/reference/operators/to_unix_socket.md):
 
 ```tql
 from_unix_socket "/tmp/socket" {
@@ -85,7 +85,7 @@ to_unix_socket "/tmp/socket" {
 }
 ```
 
-When Tenzir owns the listening socket path, use [`accept_unix_socket`](/reference/operators/accept_unix_socket.md):
+When Tenzir owns the listening socket path, use [`accept_unix_socket`](http://docs.tenzir.com/reference/operators/accept_unix_socket.md):
 
 ```tql
 accept_unix_socket "/tmp/socket" {

@@ -152,12 +152,12 @@ to_elasticsearch "https://elasticsearch.example.com:9200",
   index="ecs-events"
 ```
 
-Use [`to_opensearch`](/reference/operators/to_opensearch.md) instead when the destination is OpenSearch.
+Use [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md) instead when the destination is OpenSearch.
 
 ## See Also
 
-* [`to_elasticsearch`](/reference/operators/to_elasticsearch.md)
-* [`to_opensearch`](/reference/operators/to_opensearch.md)
+* [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md)
+* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
 * [Clean up values](clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ecs-skill)
 * [Map to ASIM](map-to-asim.md)

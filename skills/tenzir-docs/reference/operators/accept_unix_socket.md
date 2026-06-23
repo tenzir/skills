@@ -41,7 +41,7 @@ accept_unix_socket "/run/collector.sock" {
 
 ## See Also
 
-* [`from_unix_socket`](/reference/operators/from_unix_socket.md)
-* [`to_unix_socket`](/reference/operators/to_unix_socket.md)
-* [`accept_tcp`](/reference/operators/accept_tcp.md)
+* [`from_unix_socket`](http://docs.tenzir.com/reference/operators/from_unix_socket.md)
+* [`to_unix_socket`](http://docs.tenzir.com/reference/operators/to_unix_socket.md)
+* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
 * [File](../../integrations/file.md)

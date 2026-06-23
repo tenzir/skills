@@ -7,15 +7,15 @@ When sending data to Elasticsearch, Tenzir uses the [Bulk API](https://www.elast
 
 Use `to_elasticsearch` to send events to Elasticsearch Bulk API endpoints.
 
-For more details, see the documentation for the [`to_elasticsearch`](/reference/operators/to_elasticsearch.md) operator.
+For more details, see the documentation for the [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md) operator.
 
-Tenzir can also present a Elasticsearch-compatible REST API via the [`accept_elasticsearch`](/reference/operators/accept_elasticsearch.md) operator.
+Tenzir can also present a Elasticsearch-compatible REST API via the [`accept_elasticsearch`](http://docs.tenzir.com/reference/operators/accept_elasticsearch.md) operator.
 
 ## Examples
 
 ### Query documents from a Elasticsearch index
 
-Use [`from_http`](/reference/operators/from_http.md) to query the [Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html). The Search API supports `GET` and `POST` requests to `/{index}/_search`. When you provide a request body, `from_http` uses `post` by default.
+Use [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) to query the [Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html). The Search API supports `GET` and `POST` requests to `/{index}/_search`. When you provide a request body, `from_http` uses `post` by default.
 
 ```tql
 from_http "https://localhost:9200/main/_search",

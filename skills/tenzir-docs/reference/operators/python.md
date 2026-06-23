@@ -85,4 +85,4 @@ python r#"
 
 ## See Also
 
-* [`shell`](/reference/operators/shell.md)
+* [`shell`](http://docs.tenzir.com/reference/operators/shell.md)

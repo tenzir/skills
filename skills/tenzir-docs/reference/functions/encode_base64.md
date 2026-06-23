@@ -30,5 +30,5 @@ encoded = bytes.encode_base64()
 
 ## See Also
 
-* [`decode_base64`](/reference/functions/decode_base64.md)
+* [`decode_base64`](http://docs.tenzir.com/reference/functions/decode_base64.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -26,7 +26,7 @@ to_fluent_bit "plugin", options={key1: value1, key2:value2, …}
 
 Read from Fluent Bit
 
-You can acquire events from Fluent Bit using the [`from_fluent_bit`](/reference/operators/from_fluent_bit.md) operator.
+You can acquire events from Fluent Bit using the [`from_fluent_bit`](http://docs.tenzir.com/reference/operators/from_fluent_bit.md) operator.
 
 ### `plugin: string`
 
@@ -92,5 +92,5 @@ to_fluent_bit "slack", options={webhook: $slack_hook}
 
 ## See Also
 
-* [`from_fluent_bit`](/reference/operators/from_fluent_bit.md)
+* [`from_fluent_bit`](http://docs.tenzir.com/reference/operators/from_fluent_bit.md)
 * [Fluent Bit](../../integrations/fluent-bit.md)

@@ -161,7 +161,7 @@ from_s3 "s3://public-bucket/zeek/**.log", anonymous=true {
 
 ## See Also
 
-* [`from_file`](/reference/operators/from_file.md)
-* [`from_s3`](/reference/operators/from_s3.md)
-* [`to_s3`](/reference/operators/to_s3.md)
+* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
+* [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md)
+* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
 * [S3](../../integrations/amazon/s3.md)

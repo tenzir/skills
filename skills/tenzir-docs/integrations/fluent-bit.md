@@ -1,7 +1,7 @@
 # Fluent Bit
 
 
-[Fluent Bit](https://fluentbit.io) is an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its [inputs](https://docs.fluentbit.io/manual/pipeline/inputs) via [`from_fluent_bit`](/reference/operators/from_fluent_bit.md) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs) via [`to_fluent_bit`](/reference/operators/to_fluent_bit.md)
+[Fluent Bit](https://fluentbit.io) is an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its [inputs](https://docs.fluentbit.io/manual/pipeline/inputs) via [`from_fluent_bit`](http://docs.tenzir.com/reference/operators/from_fluent_bit.md) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs) via [`to_fluent_bit`](http://docs.tenzir.com/reference/operators/to_fluent_bit.md)
 
 This makes Tenzir effectively a superset of Fluent Bit.
 
@@ -17,13 +17,13 @@ An invocation of the `fluent-bit` commandline utility
 fluent-bit -o input_plugin -p key1=value1 -p key2=value2 -p…
 ```
 
-translates to Tenzir’s [`from_fluent_bit`](/reference/operators/from_fluent_bit.md) operator as follows:
+translates to Tenzir’s [`from_fluent_bit`](http://docs.tenzir.com/reference/operators/from_fluent_bit.md) operator as follows:
 
 ```tql
 from_fluent_bit "input_plugin", options={key1: value1, key2: value2, …}
 ```
 
-with the [`to_fluent_bit`](/reference/operators/to_fluent_bit.md) operator working exactly analogous.
+with the [`to_fluent_bit`](http://docs.tenzir.com/reference/operators/to_fluent_bit.md) operator working exactly analogous.
 
 ## Examples
 
@@ -51,7 +51,7 @@ from_fluent_bit "splunk", options = {port: 8088}
 
 Tip
 
-Use the dedicated [`to_splunk`](/reference/operators/to_splunk.md) operator to send events to a Splunk HEC.
+Use the dedicated [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md) operator to send events to a Splunk HEC.
 
 ### Collect host metrics
 

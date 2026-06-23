@@ -11,9 +11,9 @@ accept_zmq endpoint:string, [prefix=string, keep_prefix=bool, { … }]
 
 Binds a ZeroMQ `SUB` socket to the specified endpoint and receives messages that match the configured subscription prefix.
 
-Use `accept_zmq` when Tenzir should own the listening endpoint. This matches the naming used by other transport operators such as [`accept_tcp`](/reference/operators/accept_tcp.md), even though ZeroMQ itself calls this binding rather than accepting.
+Use `accept_zmq` when Tenzir should own the listening endpoint. This matches the naming used by other transport operators such as [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md), even though ZeroMQ itself calls this binding rather than accepting.
 
-As with [`from_zmq`](/reference/operators/from_zmq.md), the `prefix` option uses ZeroMQ’s raw subscription filtering. When `keep_prefix=false`, the operator strips the matched prefix before handing the remaining bytes to the nested pipeline.
+As with [`from_zmq`](http://docs.tenzir.com/reference/operators/from_zmq.md), the `prefix` option uses ZeroMQ’s raw subscription filtering. When `keep_prefix=false`, the operator strips the matched prefix before handing the remaining bytes to the nested pipeline.
 
 ### `endpoint: string`
 
@@ -59,8 +59,8 @@ accept_zmq "tcp://0.0.0.0:5555", prefix="suricata/" {
 
 ## See Also
 
-* [`from_zmq`](/reference/operators/from_zmq.md)
-* [`to_zmq`](/reference/operators/to_zmq.md)
-* [`serve_zmq`](/reference/operators/serve_zmq.md)
-* [`from_zmq`](/reference/operators/from_zmq.md)
+* [`from_zmq`](http://docs.tenzir.com/reference/operators/from_zmq.md)
+* [`to_zmq`](http://docs.tenzir.com/reference/operators/to_zmq.md)
+* [`serve_zmq`](http://docs.tenzir.com/reference/operators/serve_zmq.md)
+* [`from_zmq`](http://docs.tenzir.com/reference/operators/from_zmq.md)
 * [ZeroMQ](../../integrations/zeromq.md)

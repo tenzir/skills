@@ -76,9 +76,9 @@ digest = hmac(message, "my-secret-key")
 
 ## See Also
 
-* [`hash_sha256`](/reference/functions/hash_sha256.md)
-* [`hash_sha512`](/reference/functions/hash_sha512.md)
-* [`hash_sha384`](/reference/functions/hash_sha384.md)
-* [`hash_sha1`](/reference/functions/hash_sha1.md)
-* [`hash_md5`](/reference/functions/hash_md5.md)
+* [`hash_sha256`](http://docs.tenzir.com/reference/functions/hash_sha256.md)
+* [`hash_sha512`](http://docs.tenzir.com/reference/functions/hash_sha512.md)
+* [`hash_sha384`](http://docs.tenzir.com/reference/functions/hash_sha384.md)
+* [`hash_sha1`](http://docs.tenzir.com/reference/functions/hash_sha1.md)
+* [`hash_md5`](http://docs.tenzir.com/reference/functions/hash_md5.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

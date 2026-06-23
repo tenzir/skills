@@ -76,7 +76,7 @@ serve_tcp "0.0.0.0:8443", tls={certfile: "cert.pem", keyfile: "key.pem"} {
 
 ## See Also
 
-* [`accept_tcp`](/reference/operators/accept_tcp.md)
-* [`from_tcp`](/reference/operators/from_tcp.md)
-* [`to_tcp`](/reference/operators/to_tcp.md)
+* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
+* [`from_tcp`](http://docs.tenzir.com/reference/operators/from_tcp.md)
+* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
 * [TCP](../../integrations/tcp.md)

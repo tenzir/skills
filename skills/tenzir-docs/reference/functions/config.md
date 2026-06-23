@@ -43,5 +43,5 @@ select flag = $flags.get(country, "unknown")
 
 ## See Also
 
-* [`env`](/reference/functions/env.md)
-* [`secret`](/reference/functions/secret.md)
+* [`env`](http://docs.tenzir.com/reference/functions/env.md)
+* [`secret`](http://docs.tenzir.com/reference/functions/secret.md)

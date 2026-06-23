@@ -25,8 +25,8 @@ import
 
 ## See Also
 
-* [`compress_brotli`](/reference/operators/compress_brotli.md)
-* [`decompress_bz2`](/reference/operators/decompress_bz2.md)
-* [`decompress_gzip`](/reference/operators/decompress_gzip.md)
-* [`decompress_lz4`](/reference/operators/decompress_lz4.md)
-* [`decompress_zstd`](/reference/operators/decompress_zstd.md)
+* [`compress_brotli`](http://docs.tenzir.com/reference/operators/compress_brotli.md)
+* [`decompress_bz2`](http://docs.tenzir.com/reference/operators/decompress_bz2.md)
+* [`decompress_gzip`](http://docs.tenzir.com/reference/operators/decompress_gzip.md)
+* [`decompress_lz4`](http://docs.tenzir.com/reference/operators/decompress_lz4.md)
+* [`decompress_zstd`](http://docs.tenzir.com/reference/operators/decompress_zstd.md)

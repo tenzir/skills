@@ -16,7 +16,7 @@ summarize x, count=count()
 sort -count
 ```
 
-This operator is the dual to [`rare`](/reference/operators/rare.md).
+This operator is the dual to [`rare`](http://docs.tenzir.com/reference/operators/rare.md).
 
 Potentially High Memory Usage
 
@@ -51,8 +51,8 @@ head 5
 
 ## See Also
 
-* [`rare`](/reference/operators/rare.md)
-* [`sort`](/reference/operators/sort.md)
-* [`summarize`](/reference/operators/summarize.md)
+* [`rare`](http://docs.tenzir.com/reference/operators/rare.md)
+* [`sort`](http://docs.tenzir.com/reference/operators/sort.md)
+* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

@@ -126,7 +126,7 @@ Use the same structure for larger mappings:
 
 ## Send CIM events to Splunk
 
-When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](/reference/operators/to_splunk.md) options:
+When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md) options:
 
 ```tql
 my_source::cim::map
@@ -155,7 +155,7 @@ Use the `index` option when the destination index differs per event.
 
 ## See Also
 
-* [`to_splunk`](/reference/operators/to_splunk.md)
+* [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md)
 * [Clean up values](clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-cim-skill)
 * [Map to ASIM](map-to-asim.md)

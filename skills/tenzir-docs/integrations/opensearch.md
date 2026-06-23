@@ -7,15 +7,15 @@ When sending data to OpenSearch, Tenzir uses the [Bulk API](https://opensearch.o
 
 Use `to_opensearch` to send events to OpenSearch Bulk API endpoints.
 
-For more details, see the documentation for the [`to_opensearch`](/reference/operators/to_opensearch.md) operator.
+For more details, see the documentation for the [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md) operator.
 
-Tenzir can also present a OpenSearch-compatible REST API via the [`accept_opensearch`](/reference/operators/accept_opensearch.md) operator.
+Tenzir can also present a OpenSearch-compatible REST API via the [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md) operator.
 
 ## Examples
 
 ### Query documents from a OpenSearch index
 
-Use [`from_http`](/reference/operators/from_http.md) to query the [Search API](https://docs.opensearch.org/latest/api-reference/search-apis/search/). The Search API supports `GET` and `POST` requests to `/{index}/_search`. When you provide a request body, `from_http` uses `post` by default.
+Use [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) to query the [Search API](https://docs.opensearch.org/latest/api-reference/search-apis/search/). The Search API supports `GET` and `POST` requests to `/{index}/_search`. When you provide a request body, `from_http` uses `post` by default.
 
 ```tql
 from_http "https://localhost:9200/main/_search",

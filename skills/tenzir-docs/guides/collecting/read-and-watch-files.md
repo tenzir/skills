@@ -1,15 +1,15 @@
 # Read and watch files
 
 
-This guide shows you how to read files and monitor directories using the [`from_file`](/reference/operators/from_file.md) operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
+This guide shows you how to read files and monitor directories using the [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
 
 ## Basic file reading
 
-The [`from_file`](/reference/operators/from_file.md) operator handles various file types and formats. Start with these fundamental patterns for reading individual files.
+The [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) operator handles various file types and formats. Start with these fundamental patterns for reading individual files.
 
 ### Single files
 
-To read a single file, specify the path to the [`from_file`](/reference/operators/from_file.md) operator:
+To read a single file, specify the path to the [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) operator:
 
 ```tql
 from_file "/path/to/file.json"
@@ -39,7 +39,7 @@ from_file "/path/to/file.log" {
 
 The parsing pipeline runs on the file content and must return events.
 
-When file names or extensions don’t identify the format reliably, use [`read_auto`](/reference/operators/read_auto.md) to detect the format from the file content:
+When file names or extensions don’t identify the format reliably, use [`read_auto`](http://docs.tenzir.com/reference/operators/read_auto.md) to detect the format from the file content:
 
 ```tql
 from_file "/dropzone/**" {

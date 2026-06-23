@@ -80,7 +80,7 @@ flattened = {
 
 ## Unflatten data
 
-Reconstruct hierarchical structures from flattened data using [`unflatten`](/reference/functions/unflatten.md):
+Reconstruct hierarchical structures from flattened data using [`unflatten`](http://docs.tenzir.com/reference/functions/unflatten.md):
 
 ### Basic unflattening
 
@@ -341,7 +341,7 @@ Combine data split across multiple records.
 
 ### Merge records with spread operator
 
-Prefer record spread over [`merge`](/reference/functions/merge.md) when you assemble data from fragments. Spread keeps the resulting record visible and scales naturally beyond two inputs.
+Prefer record spread over [`merge`](http://docs.tenzir.com/reference/functions/merge.md) when you assemble data from fragments. Spread keeps the resulting record visible and scales naturally beyond two inputs.
 
 ```tql
 from {
@@ -451,7 +451,7 @@ select normalized = events.map(e => {
 
 ### Unroll arrays to individual events
 
-Some data sources aggregate multiple events into a single record. Use [`unroll`](/reference/operators/unroll.md) to expand these into individual events:
+Some data sources aggregate multiple events into a single record. Use [`unroll`](http://docs.tenzir.com/reference/operators/unroll.md) to expand these into individual events:
 
 Expanding aggregated message types
 

@@ -37,6 +37,6 @@ from {x: "👻".length_bytes()}
 
 ## See Also
 
-* [`length`](/reference/functions/length.md)
-* [`length_chars`](/reference/functions/length_chars.md)
+* [`length`](http://docs.tenzir.com/reference/functions/length.md)
+* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

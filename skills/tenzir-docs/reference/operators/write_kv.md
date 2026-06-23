@@ -71,7 +71,7 @@ x.y.z=0 y.y2=42 a=string
 
 ## See Also
 
-* [`parse_kv`](/reference/functions/parse_kv.md)
-* [`print_kv`](/reference/functions/print_kv.md)
-* [`read_kv`](/reference/operators/read_kv.md)
-* [`write_lines`](/reference/operators/write_lines.md)
+* [`parse_kv`](http://docs.tenzir.com/reference/functions/parse_kv.md)
+* [`print_kv`](http://docs.tenzir.com/reference/functions/print_kv.md)
+* [`read_kv`](http://docs.tenzir.com/reference/operators/read_kv.md)
+* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)

@@ -37,4 +37,4 @@ move z=y, w.x=x
 
 ## See Also
 
-* [`set`](/reference/operators/set.md)
+* [`set`](http://docs.tenzir.com/reference/operators/set.md)

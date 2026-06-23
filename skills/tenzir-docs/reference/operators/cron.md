@@ -60,5 +60,5 @@ publish "api"
 
 ## See Also
 
-* [`each`](/reference/operators/each.md)
-* [`every`](/reference/operators/every.md)
+* [`each`](http://docs.tenzir.com/reference/operators/each.md)
+* [`every`](http://docs.tenzir.com/reference/operators/every.md)

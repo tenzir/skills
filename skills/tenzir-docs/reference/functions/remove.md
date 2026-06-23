@@ -56,8 +56,8 @@ xs = xs.remove("apple")
 
 ## See Also
 
-* [`add`](/reference/functions/add.md)
-* [`append`](/reference/functions/append.md)
-* [`distinct`](/reference/functions/distinct.md)
-* [`prepend`](/reference/functions/prepend.md)
+* [`add`](http://docs.tenzir.com/reference/functions/add.md)
+* [`append`](http://docs.tenzir.com/reference/functions/append.md)
+* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
+* [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

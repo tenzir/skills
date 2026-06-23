@@ -35,13 +35,13 @@ Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP 
 
 ## Destination
 
-An pipeline ending with an [output](#output) operator preceded by a [`subscribe`](/reference/operators/subscribe.md) input operator.
+An pipeline ending with an [output](#output) operator preceded by a [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) input operator.
 
 * Learn more about [pipelines](pipeline.md)
 
 ## Edge Storage
 
-The indexed storage that pipelines can use at the [node](#node). Every node has a light-weight storage engine for importing and exporting events. You must mount the storage into the node such that it can be used from [pipelines](#pipeline) using the [`import`](/reference/operators/import.md) and [`export`](/reference/operators/export.md) [operators](#operator). The storage cengine comes with a [catalog](#catalog) that tracks [partitions](#partition) and keeps sparse [indexes](#index) to accelerate historical queries.
+The indexed storage that pipelines can use at the [node](#node). Every node has a light-weight storage engine for importing and exporting events. You must mount the storage into the node such that it can be used from [pipelines](#pipeline) using the [`import`](http://docs.tenzir.com/reference/operators/import.md) and [`export`](http://docs.tenzir.com/reference/operators/export.md) [operators](#operator). The storage cengine comes with a [catalog](#catalog) that tracks [partitions](#partition) and keeps sparse [indexes](#index) to accelerate historical queries.
 
 * [Ingest data into the node’s edge storage](../guides/edge-storage/import-into-a-node.md)
 * [Query the node’s edge storage](../guides/edge-storage/export-from-a-node.md)
@@ -213,7 +213,7 @@ A top-level record type of an event.
 
 ## Source
 
-An pipeline starting with an [input](#input) operator followed by a [`publish`](/reference/operators/publish.md) output operator.
+An pipeline starting with an [input](#input) operator followed by a [`publish`](http://docs.tenzir.com/reference/operators/publish.md) output operator.
 
 * Learn more about [pipelines](pipeline.md)
 

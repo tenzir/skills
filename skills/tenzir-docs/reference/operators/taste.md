@@ -37,6 +37,6 @@ taste 1
 
 ## See Also
 
-* [`export`](/reference/operators/export.md)
-* [`head`](/reference/operators/head.md)
+* [`export`](http://docs.tenzir.com/reference/operators/export.md)
+* [`head`](http://docs.tenzir.com/reference/operators/head.md)
 * [Quickstart](../../guides/quickstart.md)

@@ -79,5 +79,5 @@ delay ts, start=now()+2h
 
 ## See Also
 
-* [`timeshift`](/reference/operators/timeshift.md)
+* [`timeshift`](http://docs.tenzir.com/reference/operators/timeshift.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

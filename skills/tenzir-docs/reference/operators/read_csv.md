@@ -199,10 +199,10 @@ read_csv header="message,count,ip"
 
 ## See Also
 
-* [`parse_csv`](/reference/functions/parse_csv.md)
-* [`print_csv`](/reference/functions/print_csv.md)
-* [`read_ssv`](/reference/operators/read_ssv.md)
-* [`read_tsv`](/reference/operators/read_tsv.md)
-* [`read_xsv`](/reference/operators/read_xsv.md)
-* [`write_csv`](/reference/operators/write_csv.md)
+* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)
+* [`print_csv`](http://docs.tenzir.com/reference/functions/print_csv.md)
+* [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md)
+* [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md)
+* [`read_xsv`](http://docs.tenzir.com/reference/operators/read_xsv.md)
+* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

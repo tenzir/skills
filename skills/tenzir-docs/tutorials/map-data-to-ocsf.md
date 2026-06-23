@@ -45,11 +45,11 @@ conn.log (TSV)
 1637229399.549141 CBTne9tomX1ktuCQa 10.4.21.101 53824 107.23.103.216 587 - - tcp smtp 606.747526 975904 11950 SF - - 0 ShAdDaTtTfF 1786 1069118 1070 55168 - - - 00:08:02:1c:47:ae 20:e5:2a:b6:93:f1 - - - - - US VA Ashburn 39.0469 -77.4903 1:I6VoTvbCqaKvPrlFnNbRRbjlMsc=
 ```
 
-You can also [download this sample](https://docs.tenzir.com/packages/zeek/tests/inputs/conn.log.md) to avoid dealing with tabs and spaces in the snippet above.
+You can also [download this sample](https://docs.tenzir.com/packages/zeek/tests/inputs/conn.log) to avoid dealing with tabs and spaces in the snippet above.
 
 ### Step 1: Parse the input
 
-We first parse the log file into a structured form so that we can work with the individual fields. The [`read_zeek_tsv`](/reference/operators/read_zeek_tsv.md) operator parses the above structure out of the box:
+We first parse the log file into a structured form so that we can work with the individual fields. The [`read_zeek_tsv`](http://docs.tenzir.com/reference/operators/read_zeek_tsv.md) operator parses the above structure out of the box:
 
 ```sh
 tenzir 'read_zeek_tsv' < conn.log
@@ -246,10 +246,10 @@ ocsf::cast
 Let’s unpack this:
 
 1. With `this = { zeek: this }`, we keep the original event in a source-specific working namespace. This approach avoids name clashes when we create new OCSF fields in the next steps.
-2. The main work takes place here. Our approach is structured: for every field in the source event, (1) map it, and (2) remove it. Ideally, use the `move` keyword to perform (1) and (2) together, for example, `ocsf.x = move zeek.y`. If a field needs to be used multiple times in the same expression, use the [`drop`](/reference/operators/drop.md) afterwards.
+2. The main work takes place here. Our approach is structured: for every field in the source event, (1) map it, and (2) remove it. Ideally, use the `move` keyword to perform (1) and (2) together, for example, `ocsf.x = move zeek.y`. If a field needs to be used multiple times in the same expression, use the [`drop`](http://docs.tenzir.com/reference/operators/drop.md) afterwards.
 3. Assign `@name` to the target OCSF event class so that downstream pipelines can filter by schema.
 4. The assignment `this = {...ocsf, unmapped: zeek}` returns the mapped OCSF event and stores the remaining source fields as `unmapped` for review.
-5. The mapper intentionally produces minimal OCSF: it maps identifiers and source-derived semantics, but does not hand-write derived sibling fields. [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands the event with fields such as `activity_name`, `category_name`, and `severity` before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates the final event against the OCSF schema.
+5. The mapper intentionally produces minimal OCSF: it maps identifiers and source-derived semantics, but does not hand-write derived sibling fields. [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) expands the event with fields such as `activity_name`, `category_name`, and `severity` before [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) validates the final event against the OCSF schema.
 
 Now that we have a template, let’s get our hands dirty and go deep into the actual mapping.
 
@@ -269,7 +269,7 @@ ocsf.severity = "Informational"
 ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
 ```
 
-Note that computing the field `type_uid` requires simple arithmetic. In package mappers, prefer minimal OCSF: set the IDs and source-derived values, but let [`ocsf::derive`](/reference/operators/ocsf/derive.md) populate sibling fields. This keeps mappings concise and prevents repetitive label assignments. The shorter form is:
+Note that computing the field `type_uid` requires simple arithmetic. In package mappers, prefer minimal OCSF: set the IDs and source-derived values, but let [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) populate sibling fields. This keeps mappings concise and prevents repetitive label assignments. The shorter form is:
 
 ```tql
 ocsf.activity_id = 6
@@ -280,7 +280,7 @@ ocsf.type_uid = ocsf.class_uid * 100 + ocsf.activity_id
 ocsf::derive
 ```
 
-The computed sibling fields for `<field>_id` often have the pattern `<field>_name` or simply `<field>`. Run [`ocsf::derive`](/reference/operators/ocsf/derive.md) after the mapper returns the minimal OCSF event so downstream pipelines still receive the comprehensive schema shape.
+The computed sibling fields for `<field>_id` often have the pattern `<field>_name` or simply `<field>`. Run [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) after the mapper returns the minimal OCSF event so downstream pipelines still receive the comprehensive schema shape.
 
 #### Occurrence Attributes
 
@@ -431,7 +431,7 @@ Here’s what happens here:
 * The expression `$proto_nums[ocsf.connection_info.protocol_name]` takes the moved Zeek `proto` value and uses it as an index into a static record `$proto_nums`. Add a `?` at the end to avoid warnings when the lookup returns `null`, and use the inline `else` expression for the fallback value.
 * Set `is_src_dst_assignment_known` because Zeek’s `id.orig_*` fields identify the connection initiator and `id.resp_*` fields identify the responder.
 * Move Layer 2 addresses and GeoIP enrichment into endpoint attributes instead of leaving them in `unmapped`.
-* Use [`is_v6`](/reference/functions/is_v6.md) on the connection IPs to identify IPv6 connections.
+* Use [`is_v6`](http://docs.tenzir.com/reference/functions/is_v6.md) on the connection IPs to identify IPv6 connections.
 
 #### Putting it together
 
@@ -601,7 +601,7 @@ There are still several fields that we can map to the schema, but we’ll leave 
 
 Most pipelines (1) onboard data from a source, (2) transform it, and (3) send it somewhere. This tutorial focuses on the middle piece, with transformation being the mapping to OCSF.
 
-We’ve addressed data *onboarding* by reading a log file and decomposing the unstructured Zeek TSV contents into a structured record. The built-in [`read_zeek_tsv`](/reference/operators/read_zeek_tsv.md) operator made this trivial. But it often requires a lot more elbow grease to get there. Check out our extensive [guide on parsing string fields](../guides/parsing/parse-string-fields.md) for more details. We haven’t yet addressed the other end of the pipeline: data *offboarding*. Our examples run `tenzir` on the command line, relying on an implicit output operator that writes the result of the last transformation to the terminal.
+We’ve addressed data *onboarding* by reading a log file and decomposing the unstructured Zeek TSV contents into a structured record. The built-in [`read_zeek_tsv`](http://docs.tenzir.com/reference/operators/read_zeek_tsv.md) operator made this trivial. But it often requires a lot more elbow grease to get there. Check out our extensive [guide on parsing string fields](../guides/parsing/parse-string-fields.md) for more details. We haven’t yet addressed the other end of the pipeline: data *offboarding*. Our examples run `tenzir` on the command line, relying on an implicit output operator that writes the result of the last transformation to the terminal.
 
 In other words, we have a sandwich structure in our pipeline. To make it explicit:
 
@@ -750,7 +750,7 @@ In this layout, you’d put the mapping operators in the following directories:
 
       * map.tql
 
-The mapper keeps intermediate results under `$event.ocsf` internally and returns a minimal OCSF event. Callers then run shared OCSF helpers such as [`ocsf::derive`](/reference/operators/ocsf/derive.md) and [`ocsf::cast`](/reference/operators/ocsf/cast.md) to expand and validate the final shape. This mirrors how larger package mappers handle cleanup, shared fields, fallback Base Event mapping, and event-specific mappings.
+The mapper keeps intermediate results under `$event.ocsf` internally and returns a minimal OCSF event. Callers then run shared OCSF helpers such as [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) to expand and validate the final shape. This mirrors how larger package mappers handle cleanup, shared fields, fallback Base Event mapping, and event-specific mappings.
 
 #### Write tests for production-grade reliability
 
@@ -992,7 +992,7 @@ Perfect. Now proceed with all log types and you have a production-grade package.
 
 ### Step 4: Install and use the package
 
-After you have fleshed out the complete package, [install it](../guides/packages/install-a-package.md), either interactively via [`package::add`](/reference/operators/package/add.md), or IaC-style by putting it into a git repo and pointing the config option `tenzir.package-dirs` to it.
+After you have fleshed out the complete package, [install it](../guides/packages/install-a-package.md), either interactively via [`package::add`](http://docs.tenzir.com/reference/operators/package/add.md), or IaC-style by putting it into a git repo and pointing the config option `tenzir.package-dirs` to it.
 
 Tenzir Community Library
 
@@ -1007,6 +1007,6 @@ This tutorial showed you how to map security data to OCSF using TQL pipelines. Y
 * How to use TQL operators and expressions to transform raw events into OCSF-compliant records
 * How to package your mappings as reusable operators in a Tenzir package
 
-The key to successful OCSF mapping is systematic organization: keep source residue in `zeek`, map attributes group by group while removing source fields as you go, return the residue as `unmapped`, and produce minimal OCSF that [`ocsf::derive`](/reference/operators/ocsf/derive.md) expands before [`ocsf::cast`](/reference/operators/ocsf/cast.md) validates it. This approach keeps mappings maintainable while ensuring downstream pipelines receive the comprehensive schema shape.
+The key to successful OCSF mapping is systematic organization: keep source residue in `zeek`, map attributes group by group while removing source fields as you go, return the residue as `unmapped`, and produce minimal OCSF that [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) expands before [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) validates it. This approach keeps mappings maintainable while ensuring downstream pipelines receive the comprehensive schema shape.
 
 For more examples and ready-to-use OCSF mappings, check out the [Tenzir Community Library](https://github.com/tenzir/library).

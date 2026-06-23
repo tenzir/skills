@@ -25,6 +25,6 @@ from {x: "hello".is_printable()}
 
 ## See Also
 
-* [`is_alnum`](/reference/functions/is_alnum.md)
-* [`is_alpha`](/reference/functions/is_alpha.md)
+* [`is_alnum`](http://docs.tenzir.com/reference/functions/is_alnum.md)
+* [`is_alpha`](http://docs.tenzir.com/reference/functions/is_alpha.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

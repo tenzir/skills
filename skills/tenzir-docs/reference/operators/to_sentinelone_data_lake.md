@@ -121,5 +121,5 @@ If you already have structured data in Tenzir, prefer sending structured data, a
 
 ## See Also
 
-* [`from_sentinelone_data_lake`](/reference/operators/from_sentinelone_data_lake.md)
+* [`from_sentinelone_data_lake`](http://docs.tenzir.com/reference/operators/from_sentinelone_data_lake.md)
 * [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)

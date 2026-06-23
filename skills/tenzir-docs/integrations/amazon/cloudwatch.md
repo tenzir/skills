@@ -1,7 +1,7 @@
 # CloudWatch
 
 
-[Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) is a monitoring and observability service in AWS. Tenzir can read CloudWatch events with [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md) and write events with [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md).
+[Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) is a monitoring and observability service in AWS. Tenzir can read CloudWatch events with [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md) and write events with [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md).
 
 CloudWatch stores log data in log groups and log streams. Use Tenzir to live tail new logs, search historical logs with filter patterns, replay one log stream, or forward pipeline output into an existing log stream.
 
@@ -16,22 +16,22 @@ from_amazon_cloudwatch "/aws/lambda/api", mode="search", aws_iam={
 }
 ```
 
-The [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md) operator expects the target log group and log stream to exist before the pipeline writes to them.
+The [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md) operator expects the target log group and log stream to exist before the pipeline writes to them.
 
 For AWS IAM-authenticated CloudWatch API calls, Tenzir needs these CloudWatch permissions:
 
-| Use case                                                                                          | Required permissions   |
-| ------------------------------------------------------------------------------------------------- | ---------------------- |
-| Live tail with [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md)         | `logs:StartLiveTail`   |
-| Historical search with [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md) | `logs:FilterLogEvents` |
-| Stream replay with [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md)     | `logs:GetLogEvents`    |
-| Write with [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md) `method="put"`  | `logs:PutLogEvents`    |
+| Use case                                                                                                                | Required permissions   |
+| ----------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| Live tail with [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md)         | `logs:StartLiveTail`   |
+| Historical search with [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md) | `logs:FilterLogEvents` |
+| Stream replay with [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md)     | `logs:GetLogEvents`    |
+| Write with [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md) `method="put"`  | `logs:PutLogEvents`    |
 
-If you set `unmask=true` for historical reads, the principal also needs `logs:Unmask`. HTTP ingestion writes with [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md) can use a bearer token instead of AWS IAM.
+If you set `unmask=true` for historical reads, the principal also needs `logs:Unmask`. HTTP ingestion writes with [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md) can use a bearer token instead of AWS IAM.
 
 ## Read from CloudWatch
 
-The [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md) operator has three read modes. Choose the mode based on whether you need a continuous subscription, a historical search, or an exact replay of one stream:
+The [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md) operator has three read modes. Choose the mode based on whether you need a continuous subscription, a historical search, or an exact replay of one stream:
 
 | Mode     | AWS API           | Best for                                                                   |
 | -------- | ----------------- | -------------------------------------------------------------------------- |
@@ -98,7 +98,7 @@ Replay mode requires exactly one `stream`. It doesn’t accept `filter` or `stre
 
 ## Send to CloudWatch
 
-Use [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md) to write events to an existing log group and log stream. The default `method="put"` uses the AWS `PutLogEvents` API. The `payload` option computes the CloudWatch log payload, and the `timestamp` option computes the CloudWatch event timestamp:
+Use [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md) to write events to an existing log group and log stream. The default `method="put"` uses the AWS `PutLogEvents` API. The `payload` option computes the CloudWatch log payload, and the `timestamp` option computes the CloudWatch event timestamp:
 
 ```tql
 from {
@@ -137,8 +137,8 @@ to_amazon_cloudwatch "/tenzir/alerts",
 
 ## See Also
 
-* [`from_amazon_cloudwatch`](/reference/operators/from_amazon_cloudwatch.md)
-* [`to_amazon_cloudwatch`](/reference/operators/to_amazon_cloudwatch.md)
+* [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md)
+* [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [AWS Authentication](../../reference/aws-authentication.md)

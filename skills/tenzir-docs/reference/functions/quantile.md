@@ -34,6 +34,6 @@ summarize median_value=quantile(x, q=0.5)
 
 ## See Also
 
-* [`median`](/reference/functions/median.md)
-* [`mean`](/reference/functions/mean.md)
+* [`median`](http://docs.tenzir.com/reference/functions/median.md)
+* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

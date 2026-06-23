@@ -39,7 +39,7 @@ select ts=now()
 
 ## See Also
 
-* [`from_epoch`](/reference/functions/from_epoch.md)
-* [`since_epoch`](/reference/functions/since_epoch.md)
+* [`from_epoch`](http://docs.tenzir.com/reference/functions/from_epoch.md)
+* [`since_epoch`](http://docs.tenzir.com/reference/functions/since_epoch.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

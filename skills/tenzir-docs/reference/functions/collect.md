@@ -30,6 +30,6 @@ summarize values=collect(x)
 
 ## See Also
 
-* [`distinct`](/reference/functions/distinct.md)
-* [`sum`](/reference/functions/sum.md)
+* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
+* [`sum`](http://docs.tenzir.com/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

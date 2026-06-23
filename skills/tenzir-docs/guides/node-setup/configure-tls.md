@@ -21,14 +21,14 @@ tenzir:
 
 These settings apply automatically to operators that use TLS, including:
 
-* [`from_http`](/reference/operators/from_http.md)
-* [`accept_tcp`](/reference/operators/accept_tcp.md)
-* [`from_tcp`](/reference/operators/from_tcp.md)
-* [`serve_tcp`](/reference/operators/serve_tcp.md)
-* [`to_opensearch`](/reference/operators/to_opensearch.md)
-* [`accept_opensearch`](/reference/operators/accept_opensearch.md)
-* [`to_splunk`](/reference/operators/to_splunk.md)
-* [`to_fluent_bit`](/reference/operators/to_fluent_bit.md)
+* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
+* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
+* [`from_tcp`](http://docs.tenzir.com/reference/operators/from_tcp.md)
+* [`serve_tcp`](http://docs.tenzir.com/reference/operators/serve_tcp.md)
+* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
+* [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md)
+* [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md)
+* [`to_fluent_bit`](http://docs.tenzir.com/reference/operators/to_fluent_bit.md)
 
 ### Available options
 

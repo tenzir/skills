@@ -25,4 +25,4 @@ remote {
 
 ## See Also
 
-* [`local`](/reference/operators/local.md)
+* [`local`](http://docs.tenzir.com/reference/operators/local.md)
