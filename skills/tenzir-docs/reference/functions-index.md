@@ -197,7 +197,7 @@
 
 ## Utility
 
-- [contains](functions/contains.md): Searches for a value within data structures recursively.
+- [contains](functions/contains.md): Searches recursively for a value within data structures.
 - [contains_null](functions/contains_null.md): Checks whether the input contains any `null` values.
 - [is_empty](functions/is_empty.md): Checks whether a value is empty.
 - [random](functions/random.md): Generates a random number in *\[0,1]*.
@@ -208,7 +208,8 @@
 - [file_contents](functions/file_contents.md): Reads a file’s contents.
 - [file_name](functions/file_name.md): Extracts the file name from a file path.
 - [parent_dir](functions/parent_dir.md): Extracts the parent directory from a file path.
-- [ends_with](functions/ends_with.md): Checks if a string ends with a specified substring.
+- [ends_with](functions/ends_with.md): Checks whether a string ends with a specified substring.
+- [equals](functions/equals.md): Checks whether two strings are equal.
 - [is_alnum](functions/is_alnum.md): Checks if a string is alphanumeric.
 - [is_alpha](functions/is_alpha.md): Checks if a string contains only alphabetic characters.
 - [is_lower](functions/is_lower.md): Checks if a string is in lowercase.
@@ -220,12 +221,12 @@
 - [length_chars](functions/length_chars.md): Returns the length of a string in characters.
 - [match_regex](functions/match_regex.md): Checks if a string partially matches a regular expression.
 - [slice](functions/slice.md): Slices a string or list with offsets and strides.
-- [starts_with](functions/starts_with.md): Checks if a string starts with a specified substring.
+- [starts_with](functions/starts_with.md): Checks whether a string starts with a specified substring.
 - [capitalize](functions/capitalize.md): Capitalizes the first character of a string.
 - [join](functions/join.md): Joins a list of strings into a single string using a separator.
 - [pad_end](functions/pad_end.md): Pads a string at the end to a specified length.
 - [pad_start](functions/pad_start.md): Pads a string at the start to a specified length.
-- [replace](functions/replace.md): Replaces characters within a string.
+- [replace](functions/replace.md): Replaces literal substrings within a string.
 - [replace_regex](functions/replace_regex.md): Replaces characters within a string based on a regular expression.
 - [repeat](functions/repeat.md): Repeats a string a specified number of times.
 - [reverse](functions/reverse.md): Reverses the characters of a string.

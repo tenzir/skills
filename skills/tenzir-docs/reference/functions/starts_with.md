@@ -1,15 +1,17 @@
 # starts_with
 
 
-Checks if a string starts with a specified substring.
+Checks whether a string starts with a specified substring.
 
 ```tql
-starts_with(x:string, prefix:string) -> bool
+starts_with(x:string, prefix:string, [ignore_case=bool]) -> bool
 ```
 
 ## Description
 
 The `starts_with` function returns `true` if `x` starts with `prefix` and `false` otherwise.
+
+Set `ignore_case=true` to compare using full Unicode case folding instead of case-sensitive matching.
 
 ## Examples
 
@@ -21,6 +23,22 @@ from {x: "hello".starts_with("he")}
 
 ```tql
 {x: true}
+```
+
+### Compare case-insensitively
+
+```tql
+from {
+  ascii: "Get".starts_with("get", ignore_case=true),
+  unicode: "STRASSE".starts_with("straße", ignore_case=true),
+}
+```
+
+```tql
+{
+  ascii: true,
+  unicode: true,
+}
 ```
 
 ## See Also

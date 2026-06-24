@@ -1,10 +1,10 @@
 # contains
 
 
-Searches for a value within data structures recursively.
+Searches recursively for a value within data structures.
 
 ```tql
-contains(input:any, target:any, [exact:bool]) -> bool
+contains(input:any, target:any, [exact=bool], [ignore_case=bool]) -> bool
 ```
 
 ## Description
@@ -12,6 +12,8 @@ contains(input:any, target:any, [exact:bool]) -> bool
 The `contains` function returns `true` if the `target` value is found anywhere within the `input` data structure, and `false` otherwise. The search is performed recursively, meaning it will look inside nested records, lists, and other compound data structures.
 
 By default, strings match via substring search and subnets use containment checks. When `exact` is set to `true`, only exact matches are considered.
+
+Set `ignore_case=true` to compare strings using full Unicode case folding instead of case-sensitive matching.
 
 ### `input: any`
 
@@ -27,6 +29,12 @@ Controls the matching behavior:
 
 * When `false` (default): strings match via substring search, and subnets/IPs use containment checks
 * When `true`: only exact equality matches are considered
+
+### `ignore_case: bool` (optional)
+
+If `true`, string comparisons use full Unicode case folding.
+
+Defaults to `false`.
 
 ## Examples
 
@@ -168,6 +176,30 @@ exact_no_match = contains(message, "Hello, World", exact=true)
 }
 ```
 
+### Search case-insensitively
+
+```tql
+from {
+  record: {host: "HOST-A"},
+  value: "STRASSE",
+}
+record_match = contains(record, "host-a", ignore_case=true)
+value_match = contains(value, "straße", ignore_case=true)
+exact_match = contains(value, "straße", exact=true, ignore_case=true)
+```
+
+```tql
+{
+  record: {
+    host: "HOST-A",
+  },
+  value: "STRASSE",
+  record_match: true,
+  value_match: true,
+  exact_match: true,
+}
+```
+
 ### Subnet and IP containment
 
 ```tql
@@ -188,5 +220,7 @@ exact_subnet = contains(subnet, 10.0.0.0/8, exact=true)
 
 ## See Also
 
+* [`equals`](http://docs.tenzir.com/reference/functions/equals.md)
 * [`has`](http://docs.tenzir.com/reference/functions/has.md)
 * [`match_regex`](http://docs.tenzir.com/reference/functions/match_regex.md)
+* [Manipulate strings](../../guides/transformation/manipulate-strings.md)

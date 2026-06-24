@@ -204,6 +204,37 @@ Pattern matching functions:
 * [`starts_with`](http://docs.tenzir.com/reference/functions/starts_with.md) - Check string prefix
 * [`ends_with`](http://docs.tenzir.com/reference/functions/ends_with.md) - Check string suffix
 
+## Match case-insensitively
+
+Many string functions accept an `ignore_case` argument so you can match without first normalizing case with [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md). Comparison uses full Unicode case folding, so it handles cases like the German `ß` folding to `ss`:
+
+```tql
+from {
+  is_get: "Get".starts_with("get", ignore_case=true),
+  same_host: "Example.COM".equals("example.com", ignore_case=true),
+  has_strasse: "STRASSE".contains("straße", ignore_case=true),
+}
+```
+
+```tql
+{
+  is_get: true,
+  same_host: true,
+  has_strasse: true,
+}
+```
+
+Functions that support `ignore_case`:
+
+* [`starts_with`](http://docs.tenzir.com/reference/functions/starts_with.md) - Check string prefix
+* [`ends_with`](http://docs.tenzir.com/reference/functions/ends_with.md) - Check string suffix
+* [`contains`](http://docs.tenzir.com/reference/functions/contains.md) - Search for a substring
+* [`equals`](http://docs.tenzir.com/reference/functions/equals.md) - Compare two strings for equality
+* [`replace`](http://docs.tenzir.com/reference/functions/replace.md) - Replace a literal substring
+* [`split`](http://docs.tenzir.com/reference/functions/split.md) - Split on a literal delimiter
+
+The argument defaults to `false`, preserving case-sensitive matching. For regex functions such as [`match_regex`](http://docs.tenzir.com/reference/functions/match_regex.md), [`replace_regex`](http://docs.tenzir.com/reference/functions/replace_regex.md), and [`split_regex`](http://docs.tenzir.com/reference/functions/split_regex.md), use the inline `(?i)` flag instead.
+
 ## Validate string content
 
 Check what type of characters a string contains:

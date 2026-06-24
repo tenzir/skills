@@ -1302,6 +1302,14 @@ Checks if a string ends with a specified substring.
 "hello".ends_with("lo")
 ```
 
+### [equals](functions/equals.md)
+
+Checks whether two strings are equal.
+
+```tql
+equals("Get", "GET", ignore_case=true)
+```
+
 ### [is\_alnum](functions/is_alnum.md)
 
 Checks if a string is alphanumeric.
