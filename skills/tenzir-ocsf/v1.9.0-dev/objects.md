@@ -213,6 +213,7 @@
 - [AI Model](objects/ai_model.md)
 - [Clipboard](objects/clipboard.md)
 - [Clipboard Item](objects/clipboard_item.md)
+- [CPU Information](objects/cpu_info.md)
 - [DNS Resource Record](objects/dns_resource_record.md)
 - [DNS Section](objects/dns_section.md)
 - [Download Info](objects/download_info.md)

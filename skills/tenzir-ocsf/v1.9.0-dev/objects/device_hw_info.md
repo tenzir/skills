@@ -34,6 +34,13 @@ The BIOS version. For example: `LENOVO G5ETA2WW (2.62)`.
 
 The chassis type describes the system enclosure or physical form factor. Such as the following examples for Windows [Windows Chassis Types](https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemenclosure)
 
+### `cores`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+
+The total number of processor cores across all installed CPUs on the system. For per-CPU core detail, use `cpu_info_list`.
+
 ### `cpu_architecture`
 
 - **Type**: `string_t`
@@ -76,7 +83,14 @@ The number of processor cores in all installed processors. For Example: `42`.
 - **Type**: `integer_t`
 - **Requirement**: optional
 
-The number of physical processors on a system. For example: `1`.
+The number of physical processors on a system. For per-CPU detail, use `cpu_info_list`.
+
+### `cpu_info_list`
+
+- **Type**: [`cpu_info`](cpu_info.md)
+- **Requirement**: optional
+
+A list of `cpu_info` objects, each describing a physical CPU package installed in the device. Use with `cpu_count`.
 
 ### `cpu_speed`
 
@@ -104,14 +118,14 @@ The desktop display affiliated with the event
 - **Type**: `integer_t`
 - **Requirement**: optional
 
-The number of GPU's on a system. For example: `1`.
+The number of graphics processors on a system. For per-GPU detail, use `gpu_info_list`.
 
 ### `gpu_info_list`
 
 - **Type**: [`gpu_info`](gpu_info.md)
 - **Requirement**: optional
 
-A list of GPU objects describing the hardware properties of each graphics processor installed on the device.
+A list of GPU objects describing the hardware properties of each graphics processor installed on the device. Use with `gpu_count`.
 
 ### `keyboard_info`
 
