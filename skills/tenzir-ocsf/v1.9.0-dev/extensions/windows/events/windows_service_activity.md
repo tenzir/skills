@@ -42,15 +42,24 @@ Windows Service Activity events report when a process interacts with the Service
 
 #### Enum values
 
-- `1`: `Create` - A service is created, for example by calling `CreateService`. Refer to the `win_service` attribute for details.
-- `2`: `Reconfigure` - A service is reconfigured, for example by calling `ChangeServiceConfig` or `ChangeServiceConfig2`. Refer to the `win_service` attribute for details.
-- `3`: `Start` - A stopped service is started, for example by calling `StartService`. Refer to the `service` attribute for details.
-- `4`: `Stop` - A running or paused service is stopped, for example by calling `ControlService` or `ControlServiceEx`. Refer to the `win_service` attribute for details.
-- `5`: `Pause` - A running service is paused, for example by calling `ControlService` or `ControlServiceEx`. Refer to the `win_service` attribute for details.
-- `6`: `Continue` - A paused service is continued, for example by calling `ControlService` or `ControlServiceEx`. Refer to the `win_service` attribute for details.
-- `7`: `Delete` - A service is deleted, for example by calling `DeleteService`. Refer to the `win_service` attribute for details.
+- `1`: `Create` - A service is created, for example by calling the CreateService API.
+- `2`: `Reconfigure` - A service is reconfigured, for example by calling the ChangeServiceConfig or ChangeServiceConfig2 API. Refer to `prev_win_service` and `win_service` attributes for details.
+- `3`: `Start` - A stopped service is started, for example by calling the StartService API.
+- `4`: `Stop` - A running or paused service is stopped, for example by calling the ControlService or ControlServiceEx API.
+- `5`: `Pause` - A running service is paused, for example by calling the ControlService or ControlServiceEx API.
+- `6`: `Continue` - A paused service is continued, for example by calling the ControlService or ControlServiceEx API.
+- `7`: `Delete` - A service is deleted, for example by calling the DeleteService API.
 
-The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
+The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use 0 (Unknown) when the activity cannot be determined. Use 99 (Other) when the activity does not match any defined value, in which case activity_name must be populated with the source-specific label.
+Refer to the `win_service` attribute for details, unless any other attribute is mentioned.
+
+### `prev_win_service`
+
+- **Type**: [`win_service`](../objects/win_service.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The Windows service before the mutation.
 
 ### `win_service`
 
@@ -58,4 +67,4 @@ The normalized identifier of the activity that triggered the event. Each event c
 - **Requirement**: required
 - **Group**: primary
 
-The Windows service.
+The current Windows service. On failed or unknown status of `Reconfigure` action may be populated with the intended state.
