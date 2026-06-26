@@ -122,11 +122,3 @@ File content differences used for change detection. For example, a common use ca
 - **Group**: primary
 
 The resulting file object when the activity was allowed and successful.
-
-### `updated_file`
-
-- **Type**: [`file`](../objects/file.md)
-- **Requirement**: recommended
-- **Group**: primary
-
-The intended state of the `file` after the update, including the `Update`, `Rename`, `Set Attributes` and `Set Security` activities. On `Success`, represents the actual post-update state.
