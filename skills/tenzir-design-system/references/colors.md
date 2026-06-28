@@ -7,20 +7,20 @@ mode); this file explains how to choose.
 ## Neutral-First
 
 Shades of grey carry the layout; color appears only where it encodes
-meaning — a primary action, a status, a data series. Blue and green are
-the brand pair.
+meaning: a primary action, a status, a data series. Blue and green are the
+brand pair.
 
-- `neutral-800` — black: default text, icons
-- `neutral-700`/`neutral-600` — secondary text, inactive navigation
-- `neutral-500` — tertiary text, placeholders; the lightest text grey
-- `neutral-400`/`neutral-300` — disabled states, subtle icons
-- `neutral-250`/`neutral-200` — borders, dividers, control outlines
-- `neutral-100` — wells: filled inputs, hover fills, nav strips
-- `neutral-50` — white: page, surfaces, text on filled controls
+- `neutral-800` (black): default text, icons
+- `neutral-700`/`neutral-600`: secondary text, inactive navigation
+- `neutral-500`: tertiary text, placeholders; the lightest text grey
+- `neutral-400`/`neutral-300`: disabled states, subtle icons
+- `neutral-250`/`neutral-200`: borders, dividers, control outlines
+- `neutral-100` (wells): filled inputs, hover fills, nav strips
+- `neutral-50` (white): page, surfaces, text on filled controls
 
 Surfaces are flat: page, regions, and cards all sit on `neutral-50`,
-separated by 1px `neutral-200` borders — `neutral-100` marks recessed
-wells, never the page. Shadows are reserved for floating surfaces
+separated by 1px `neutral-200` borders; `neutral-100` marks recessed wells,
+never the page. Shadows are reserved for floating surfaces
 ([elevation.md](elevation.md)).
 
 ## Roles
@@ -38,6 +38,12 @@ The pattern generalizes: **600 for icons and small text, 500 for fills,
 chips apply it directly: 100/200-level tint background, 600-level text of
 the same hue.
 
+**Two status forms.** The table above is the **600-level accent** for icons
+and small text. Filled status chips (badges, callouts) instead use a softer
+**300-level soft fill** with `neutral-800` text. Both are valid; pick by
+context: accent for marks, soft fill for chips. `danger`/`error` stays at 500
+(light) / 400 (dark) rather than softening.
+
 ## Contrast
 
 - 500-level hues on light backgrounds pass only for large text/icons; use
@@ -49,15 +55,13 @@ the same hue.
 
 ## Brand Gradient
 
-```css
-background: linear-gradient(to right, var(--tnz-blue-500), var(--tnz-green-500));
-```
-
-The display accent — hero headlines, section kickers, stat figures — as
-text, on light and dark alike (the ramp never changes). Never body text,
-controls, or fills. Size gradient text to its content
-(`width: fit-content`) so each element runs the full ramp; a short label
-on a container-wide gradient samples only blue.
+A left-to-right `blue-500` → `green-500` linear gradient, used two ways: as a
+**border** to accentuate an element beyond what the primary color can carry,
+and as **display text** (hero headlines, section kickers, stat figures). It
+reads the same on light and dark (the ramp never changes). Never body text,
+controls, or fills. Size gradient text to its content so each element runs the
+full ramp; a short label on a container-wide gradient samples only blue. See
+[branded-effects.md](branded-effects.md).
 
 ## Tints and Overlays
 
@@ -73,31 +77,19 @@ purple, pink, orange, yellow (500-level). Single series: `blue-500`.
 Paired series (ingress/egress) use one hue at two shades (`blue-500` +
 `blue-300`) instead of two hues. 300-level for hover/area fills.
 
+## Diagrams
+
+Diagram nodes stay neutral-first: `neutral-50`/`neutral-100` fills,
+`neutral-300` borders, `neutral-800` text; lines and arrows `neutral-400`.
+Emphasis nodes take a `blue-500` border or `blue-200` fill. Color multiple
+categories with the graph order above. Labels use Inter; code-like node
+content uses JetBrains Mono.
+
 ## Dark Mode
 
-Dark mode remaps roles onto the same palette (`tenzir.dark` in
-tokens.yml): background and surfaces `neutral-800`, wells and borders
-`neutral-700`, text `neutral-50`, status hues one step lighter
-(400-level). Surfaces stay flat — lifting them to `neutral-700` reads as
-heavy navy slabs.
-
-### Ambient Brand Glow
-
-Dark hero/CTA sections come alive through glow, not lighter panels: large
-soft radial gradients of brand blue and green bleeding in from the edges
-of `neutral-800`.
-
-```css
-background:
-  radial-gradient(45% 55% at 12% 75%,
-    rgb(from var(--tnz-blue-500) r g b / 30%), transparent 70%),
-  radial-gradient(45% 55% at 88% 75%,
-    rgb(from var(--tnz-green-500) r g b / 25%), transparent 70%),
-  var(--tnz-neutral-800);
-```
-
-Anchor the radial centers inside the section so the glow dissolves before
-the edges (a clipped glow seams against dark pages); bleed off the edge
-only when the section ends the page. These sections are pinned dark in
-both themes — the glow, not a luminance flip, sets them apart. Keep glows
-away from dense UI and data displays.
+Light and dark are both first-class, strict modes; keep background noise
+minimal, with no large washes or glows behind content. Dark mode remaps roles
+onto the same palette (`tenzir.dark` in tokens.yml): background and surfaces
+`neutral-800`, wells and borders `neutral-700`, text `neutral-50`, status hues
+one step lighter (400-level). Surfaces stay flat; lifting them to `neutral-700`
+reads as heavy navy slabs.

@@ -6,7 +6,7 @@ when and how to animate.
 
 ## When to Animate
 
-Animate state changes that benefit from continuity — appearing overlays,
+Animate state changes that benefit from continuity: appearing overlays,
 toggles, expanding panels. Don't animate initial page render, large layout
 shifts, or anything on the data path (tables, charts updating with live
 data).
