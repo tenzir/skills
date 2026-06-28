@@ -5,7 +5,8 @@ Shadow values live in [data/tokens.yml](../data/tokens.yml)
 
 ## Shadows Are the Last Resort
 
-Surfaces separate by **border, backdrop, or color — not shadows**:
+Avoid drop shadows whenever possible. Surfaces separate by **border, backdrop,
+or color, not shadows**:
 
 - Static surfaces (cards, panels, regions): flat, 1px `neutral-200`
   borders.
@@ -15,13 +16,17 @@ Surfaces separate by **border, backdrop, or color — not shadows**:
   menus, popovers, listboxes use `shadow-m`; toasts `shadow-s`.
 - Interactive nuance (active thumbs, hovering cards) may use
   `shadow-xs` → `shadow-s`, one step max.
+- **Controls carry no resting shadow.** Buttons, inputs, and form fields sit
+  flat on the surface; a resting drop shadow on a control reads as
+  inconsistent against its flat siblings. Keep focus rings. Some component
+  libraries bake a subtle control shadow by default; zero it.
 
-Component libraries like shadcn/ui already behave this way — keep their
+Component libraries like shadcn/ui already behave this way; keep their
 default shadows, add none. In dark mode, skip shadows entirely: surfaces
 stay `neutral-800` with `neutral-700` hairline borders.
 
 When used, every shadow is **two layers** of `neutral-800` (see
-tokens.yml) — both layers required.
+tokens.yml); both layers required.
 
 ## Overlay Dims
 

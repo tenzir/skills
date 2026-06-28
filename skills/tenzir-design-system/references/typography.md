@@ -7,9 +7,9 @@ explains how to choose.
 
 ## Families
 
-- **Inter** — everything except code. The corporate font for UI, documents,
+- **Inter**: everything except code. The corporate font for UI, documents,
   and slides.
-- **JetBrains Mono** — code and anywhere a monospace font is required
+- **JetBrains Mono**: code and anywhere a monospace font is required
   (pipelines, identifiers, log excerpts).
 
 Both are open source and available from Google Fonts; for self-hosting use
@@ -27,15 +27,16 @@ font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
 The scale runs `text-xxs` (10px) through `text-5xl` (48px), each with a
 paired line height (see `tenzir.typography.text` in tokens.yml):
 
-- `text-base` (16px) — default body size in roomy layouts
-- `text-sm` (14px) — compact body copy, dense UI, and the **default code
+- `text-base` (16px): default body size in roomy layouts
+- `text-sm` (14px): compact body copy, dense UI, and the **default code
   size**
-- `text-xxs` / `text-xs` — captions, metadata, footers, dense sidebars
-- `text-lg` / `text-xl` — subheads
-- `text-2xl` and above — titles; these sizes carry built-in negative
+- `text-xxs` / `text-xs`: captions, metadata, footers, dense sidebars
+- `text-lg` / `text-xl`: subheads
+- `text-2xl` and above: titles; these sizes carry built-in negative
   tracking, so apply the paired letter-spacing
-- `text-capitalized` (12px, +5% tracking) — uppercase labels and category
-  markers; always uppercase
+- `text-capitalized` (12px, +5% tracking): uppercase labels and category
+  markers; always uppercase. The monospaced variant of this is the brand
+  **kicker** ([branded-effects.md](branded-effects.md))
 
 JetBrains Mono uses the same scale but only `text-xxs` through `text-xl`.
 
@@ -52,10 +53,5 @@ Bolder weights than 600 are not part of the system.
 ## Monospace Emphasis
 
 For emphasis inside code, use the italic `-em` variants (`text-xs-em`,
-`text-sm-em`, −0.04em tracking) instead of bolding — see
+`text-sm-em`, −0.04em tracking) instead of bolding; see
 `tenzir.typography.mono_emphasis` in tokens.yml.
-
-## Per-Tool Setup
-
-Tool-specific configuration (CSS custom properties, Tailwind `fontSize`
-tuples, Quarto typography) lives in the [tools/](tools/) guides.

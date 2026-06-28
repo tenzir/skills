@@ -33,9 +33,13 @@ tenzir:
 
     # Use the default radius for standard rectangular components. Use tight
     # for small inline components and dense badges. Use pill only for controls
-    # or labels that are intentionally capsule-shaped — the value is large
+    # or labels that are intentionally capsule-shaped: the value is large
     # enough to fully round any control height. Circular controls (radio
     # buttons) use 50% instead of a token.
+    #
+    # 9999 is the web semantic: it fully rounds any control height. Fixed-size
+    # output (print/PDF) can't rely on a giant radius and uses an absolute
+    # value instead.
     default: 5
     tight: 3
     pill: 9999
@@ -113,6 +117,16 @@ tenzir:
         line_height: 20
         tracking: -0.04
         style: italic
+
+  svg:
+    # Diagram/SVG assets sometimes embed non-brand fonts. Renderers that
+    # rasterize or re-typeset SVGs (e.g., Typst) can normalize those to the
+    # brand families so exported diagrams match the rest of the system.
+    fonts:
+      normalize:
+        Comic Shanns:
+          family: JetBrains Mono
+          stretch: 0.88
 
   shadow:
     unit: px

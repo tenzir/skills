@@ -25,11 +25,12 @@ Guidelines:
 
 ## Border Radius
 
-- `radius` (5px) — the default for all rectangular components: buttons,
-  inputs, dropdowns, tags, toasts, cards, modals, tooltips.
-- `radius-tight` (3px) — small inline components: badges, shortcut badges,
-  buttons nested inside a 5px container (segmented controls, menu items).
-- `radius-pill` (9999px) — intentionally capsule-shaped controls only
+- `radius` (5px): the default for all rectangular components such as buttons,
+  inputs, dropdowns, tags, toasts, cards, modals, and tooltips.
+- `radius-tight` (3px): small inline components such as badges, shortcut
+  badges, and buttons nested inside a 5px container (segmented controls, menu
+  items).
+- `radius-pill` (9999px): intentionally capsule-shaped controls only
   (toggle switches); the value fully rounds any control height.
 - Radio buttons are circular: `border-radius: 50%`.
 
@@ -56,6 +57,6 @@ Layers step by 100 so applications can slot custom layers in between:
 | `z-modal`     | 500   | Modal dialogs                            |
 | `z-popover`   | 600   | Menus/popovers (may open above modals)   |
 | `z-toast`     | 700   | Toasts                                   |
-| `z-tooltip`   | 800   | Tooltips — always on top                 |
+| `z-tooltip`   | 800   | Tooltips, always on top                  |
 
 See [elevation.md](elevation.md) for pairing layers with shadows and dims.
