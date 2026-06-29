@@ -248,4 +248,5 @@ inputs:
 
 * [Create a package](create-a-package.md)
 * [Install a package](install-a-package.md)
+* [Add constants](add-constants.md)
 * [Write a package](../../tutorials/write-a-package.md)

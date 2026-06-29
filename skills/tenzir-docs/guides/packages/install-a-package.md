@@ -133,6 +133,7 @@ inputs:
 - [Add-operators](add-operators.md)
 - [Add-pipelines](add-pipelines.md)
 - [Add-contexts](add-contexts.md)
+- [Add-constants](add-constants.md)
 - [Configure-inputs](configure-inputs.md)
 - [Maintain-a-changelog](maintain-a-changelog.md)
 - [Publish-a-package](publish-a-package.md)

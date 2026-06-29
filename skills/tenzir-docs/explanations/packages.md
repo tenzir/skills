@@ -42,6 +42,8 @@ A package is a directory with the following structure:
 
       * …
 
+  * constants.tql Package-level constants
+
   * package.yaml Package manifest
 
 The `package.yaml` manifest is the only required file. It identifies the directory as a package and contains descriptive fields, top-level categories, external metadata, context definitions, and input specifications.
@@ -65,6 +67,10 @@ Pipeline [frontmatter options](../guides/packages/add-pipelines.md#configure-pip
 ### Contexts
 
 **Contexts** defined in the manifest provide stateful enrichment capabilities. The node creates these contexts when you install the package, making them available for lookup and enrichment operations.
+
+### Constants
+
+**Constants** in the `constants.tql` file are package-level `let` bindings that Tenzir evaluates once when it loads the package. Reference them as `pkg::$name` from the package’s own operators and pipelines or from any external pipeline. Use them to share lookup tables, enumerations, and fixed thresholds that would otherwise be duplicated across files.
 
 ### Examples
 
@@ -105,7 +111,7 @@ Write tests for operators and contexts early. The Test Framework makes testing s
 ## Package lifecycle
 
 1. **Create**: Set up the package structure and manifest
-2. **Develop**: Add operators, pipelines, contexts, and examples
+2. **Develop**: Add operators, pipelines, contexts, constants, and examples
 3. **Test**: Validate behavior with the Test Framework
 4. **Install**: Deploy locally or through the Tenzir Library
 5. **Maintain**: Update the changelog and publish releases
@@ -117,5 +123,6 @@ Write tests for operators and contexts early. The Test Framework makes testing s
 * [Add operators](../guides/packages/add-operators.md)
 * [Add pipelines](../guides/packages/add-pipelines.md)
 * [Add contexts](../guides/packages/add-contexts.md)
+* [Add constants](../guides/packages/add-constants.md)
 * [Maintain a changelog](../guides/packages/maintain-a-changelog.md)
 * [Write a package](../tutorials/write-a-package.md)

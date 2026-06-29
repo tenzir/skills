@@ -406,6 +406,10 @@ This guide shows you how to add deployable pipelines to your package. You’ll l
 
 This guide shows you how to add enrichment contexts to your package. You’ll learn how to define contexts in the manifest, populate them with data, and test context interactions.
 
+##### [Add constants](guides/packages/add-constants.md)
+
+This guide shows you how to define package-wide constants in a `constants.tql` file and reference them as `pkg::$name` from the package’s own operators and pipelines, as well as from any pipeline that uses the package. You’ll learn the `let` syntax, how bindings build on one another, the rules each binding must satisfy, and when to use a constant instead of an input.
+
 ##### [Configure inputs](guides/packages/configure-inputs.md)
 
 This guide shows you how to make packages configurable with inputs. You’ll learn how to define input variables, use templating syntax, and provide values during installation.

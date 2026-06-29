@@ -570,5 +570,6 @@ When building operator hierarchies, follow these guidelines:
 
 * [Create a package](create-a-package.md)
 * [Add pipelines](add-pipelines.md)
+* [Add constants](add-constants.md)
 * [Test packages](test-packages.md)
 * [Write a package](../../tutorials/write-a-package.md)

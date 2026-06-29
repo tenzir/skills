@@ -153,6 +153,7 @@ If your package uses enrichment contexts, add a `contexts` key to the manifest. 
 * [Configure inputs](configure-inputs.md)
 * [Add operators](add-operators.md)
 * [Add pipelines](add-pipelines.md)
+* [Add constants](add-constants.md)
 * [Maintain a changelog](maintain-a-changelog.md)
 * [Write a package](../../tutorials/write-a-package.md)
 * [Packages](../../explanations/packages.md)
