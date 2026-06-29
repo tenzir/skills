@@ -15,6 +15,8 @@ tenzir.yaml
 tenzir:
   # The token that is offered when connecting to the Tenzir Platform.
   # It is used to identify the node and assign it to the correct workspace.
+  # Platform tokens may include the control endpoint. In that case,
+  # `platform-control-endpoint` is only needed to override the token value.
   # This setting is ignored in the open-source edition of Tenzir, which does
   # not contain the platform plugin.
   token: tnz_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -348,9 +350,10 @@ tenzir:
   # zstd-compression-level: <default>
 
 
-  # The URL of the control endpoint when connecting to a self-hosted
-  # instance of the Tenzir Platform.
-  platform-control-endpoint: wss://ws.tenzir.app/production
+  # Override the control endpoint when connecting to a self-hosted instance of
+  # the Tenzir Platform. This takes precedence over endpoints embedded in
+  # platform tokens.
+  #platform-control-endpoint: wss://ws.tenzir.app/production
 
 
   # Whether to undermine the security of the TLS connection to the
