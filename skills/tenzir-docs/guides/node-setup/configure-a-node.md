@@ -21,6 +21,23 @@ Pipelines that run in a node can be partially moved to a subprocess for improved
 
 Learn more about [pipeline subprocesses](../../explanations/node.md#pipeline-subprocesses) and their trade-offs.
 
+## Route outbound traffic through an HTTP proxy
+
+Configure `tenzir.http-proxy` and `tenzir.https-proxy` when outbound operators must reach external services through a proxy:
+
+\<configdir>/tenzir/tenzir.yaml
+
+```yaml
+tenzir:
+  http-proxy: http://proxy.example.com:3128
+  https-proxy: http://proxy.example.com:3128
+  no-proxy: .internal,10.0.0.0/8
+```
+
+The proxy URL must include an explicit port. Use `tenzir.no-proxy` to bypass the proxy for internal hosts or IP ranges.
+
+See [Configuration](../../explanations/configuration.md#outbound-proxy-configuration) for the full precedence rules, environment variable fallbacks, and how proxy settings apply.
+
 ## Configure the platform TLS connection
 
 By default, the platform connection uses TLS and picks up the settings from the `tenzir.tls` config block. To configure TLS specifically for the platform connection, see [Platform connection TLS](configure-tls.md#platform-connection-tls).

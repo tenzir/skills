@@ -25,6 +25,10 @@ See the [Expose data as a server](../guides/routing/expose-data-as-server.md) gu
 
 Use [`accept_http`](http://docs.tenzir.com/reference/operators/accept_http.md) to spin up an HTTP server that turns incoming requests into pipeline events. This is useful for receiving webhooks, building custom API endpoints, or ingesting data pushed by external systems.
 
+## Proxies
+
+Outbound HTTP requests from [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) and [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) use the node-level HTTP proxy settings. See [Configuration](../explanations/configuration.md#outbound-proxy-configuration) to configure proxy URLs, bypass rules, and environment variable fallbacks.
+
 ## SSL/TLS
 
 All HTTP operators support TLS. Pass `tls={}` to enable TLS with defaults, or provide a record with specific options like `certfile` and `keyfile`.
