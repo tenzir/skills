@@ -6,7 +6,7 @@ Sends events to a ClickHouse table.
 ```tql
 to_clickhouse table=string,
               [uri=string | (host=string, port=int, user=string, password=string)],
-              [mode=string, primary=field, tls=bool|record]
+              [mode=string, primary=field, json=field|[field], tls=bool|record]
 ```
 
 ## Description
@@ -77,6 +77,12 @@ Defaults to `"create_append"`.
 
 The primary key to use when creating a table. Required for `mode = "create"` as well as for `mode = "create_append"` if the table does not yet exist.
 
+### `json = field|[field] (optional)`
+
+When using `mode = "create"` or `mode = "create_append"`, the operator creates the columns listed in the `json` argument as the ClickHouse `JSON` type instead of inferring them from the first event. The operator creates a listed field as a `JSON` column even when the event omits it. Because `json` only affects table creation, combining it with `mode = "append"` is an error.
+
+This is useful when sending heterogeneous data, such as for OCSF `unmapped`.
+
 ### `tls = record (optional)`
 
 TLS configuration. Provide an empty record (`tls={}`) to enable TLS with defaults or set fields to customize it.
@@ -120,7 +126,13 @@ Tenzir uses ClickHouse’s [clickhouse-cpp](https://github.com/ClickHouse/clickh
 | `list<T>`  | `Array(T)`                     |                                                                                                   |
 | `blob`     | `Array(UInt8)`                 | Blobs that are `null` will be represented by an empty array                                       |
 
+### Nullable
+
 Tenzir also supports `Nullable` versions of the above types (or their nested types). If a `list` itself is `null`, it will be represented by an empty `Array`. If a `record` is `null`, all elements of the `Tuple` will be null, if possible. Otherwise the event will be dropped.
+
+### Clickhouse JSON
+
+[`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) can also write records to the ClickHouse JSON type for columns that already have this type in the table. By default, [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
 
 ### Table Creation
 
@@ -189,12 +201,12 @@ This writes to `security.alerts`.
 
 ### Send OCSF data to ClickHouse
 
-When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md). This allows us to encode the `unmapped` field as JSON and fill any missing fields with `null`, ensuring a single schema.
+When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md). This fills any missing fields with `null`, ensuring a single schema.
 
 ```tql
 subscribe "ocsf"
-ocsf::cast encode_variants=true, null_fill=true
-to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time
+ocsf::cast null_fill=true
+to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time, json=unmapped
 ```
 
 ### Create a new table with multiple fields

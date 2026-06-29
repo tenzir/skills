@@ -70,17 +70,19 @@ These examples assume that ClickHouse runs on the same host as Tenzir and allows
 
 ### Land OCSF telemetry in ClickHouse
 
-Use this path when ClickHouse is your security data lake. Tenzir can create tables from incoming events, and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) keeps the ClickHouse schema stable by casting events to the selected OCSF class, encoding variant fields, and filling missing fields with typed nulls.
+Use this path when ClickHouse is your security data lake. Tenzir can create tables from incoming events, and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) keeps the ClickHouse schema stable by casting events to the selected OCSF class and filling missing fields with typed nulls.
 
 ```tql
 from_file "ocsf_network_activity.json"
-ocsf::cast encode_variants=true, null_fill=true
+ocsf::cast null_fill=true
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}",
-              primary=time,
+              primary=time, json=unmapped,
               tls=false
 ```
 
 When creating a table, the [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Make sure the first event doesn’t contain untyped nulls or empty records. [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) helps because it gives expected OCSF fields explicit types before the table is created.
+
+The `json=unmapped` option creates the OCSF `unmapped` field as a ClickHouse `JSON` column, preserving its nested structure so you can query into its fields directly.
 
 After the data lands, query it directly in ClickHouse:
 
