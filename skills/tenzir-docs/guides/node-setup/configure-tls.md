@@ -19,16 +19,12 @@ tenzir:
     cacert: "/etc/ssl/certs/ca-certificates.crt"
 ```
 
-These settings apply automatically to operators that use TLS, including:
+These settings apply automatically to operators that use node-level TLS, including:
 
 * [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
-* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
-* [`from_tcp`](http://docs.tenzir.com/reference/operators/from_tcp.md)
-* [`serve_tcp`](http://docs.tenzir.com/reference/operators/serve_tcp.md)
 * [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
 * [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md)
 * [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md)
-* [`to_fluent_bit`](http://docs.tenzir.com/reference/operators/to_fluent_bit.md)
 
 ### Available options
 
@@ -39,6 +35,7 @@ These settings apply automatically to operators that use TLS, including:
 | `cacert`                 | Path to a CA certificate bundle for server verification             |
 | `certfile`               | Path to a client certificate file                                   |
 | `keyfile`                | Path to a client private key file                                   |
+| `password`               | Password to decrypt the private key in `keyfile`                    |
 | `tls-min-version`        | Minimum TLS protocol version: `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` |
 | `tls-ciphers`            | OpenSSL cipher list string                                          |
 
@@ -67,34 +64,31 @@ tenzir:
     certfile: "/etc/tenzir/server.crt"
     keyfile: "/etc/tenzir/server.key"
     tls-client-ca: "/etc/tenzir/client-ca.crt"
-    tls-require-client-cert: true
+    require-client-cert: true
 ```
 
-| Option                    | Description                                                           |
-| ------------------------- | --------------------------------------------------------------------- |
-| `tls-client-ca`           | Path to a CA certificate for validating client certificates           |
-| `tls-require-client-cert` | Require clients to present valid certificates signed by the client CA |
+| Option                | Description                                                           |
+| --------------------- | --------------------------------------------------------------------- |
+| `tls-client-ca`       | Path to a CA certificate for validating client certificates           |
+| `require-client-cert` | Require clients to present valid certificates signed by the client CA |
 
-When `tls-require-client-cert` is enabled, connections from clients without valid certificates are rejected.
+When `require-client-cert` is enabled, connections from clients without valid certificates are rejected.
 
 ## Platform connection TLS
 
-When connecting a node to the Tenzir Platform, you can configure TLS settings specifically for this connection under `plugins.platform`. All options have the same semantics as the [node-level TLS config](#node-level-tls-configuration), but only apply to the node ↔ platform connection.
+When connecting a node to the Tenzir Platform, you can configure outbound-client TLS settings specifically for this connection under `plugins.platform`. These options have the same semantics as the matching [node-level TLS config](#node-level-tls-configuration), but only apply to the node ↔ platform connection.
 
 tenzir.yaml
 
 ```yaml
 plugins:
   platform:
-    enable: true
     skip-peer-verification: false
     cacert: "/etc/ssl/certs/ca-certificates.crt"
     certfile: "/etc/tenzir/platform-client.crt"
     keyfile: "/etc/tenzir/platform-client.key"
     tls-min-version: "1.2"
     tls-ciphers: "HIGH:!aNULL:!MD5"
-    tls-client-ca: "/etc/tenzir/platform-ca.crt"
-    tls-require-client-cert: false
 ```
 
 Any option specified here overrides the corresponding node-level `tenzir.tls` setting.
