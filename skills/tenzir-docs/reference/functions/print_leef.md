@@ -93,8 +93,9 @@ write_syslog
 
 ## See Also
 
-* [`parse_leef`](http://docs.tenzir.com/reference/functions/parse_leef.md)
 * [`read_leef`](http://docs.tenzir.com/reference/operators/read_leef.md)
 * [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
 * [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
+* [`parse_leef`](http://docs.tenzir.com/reference/functions/parse_leef.md)
+* [IBM QRadar](../../integrations/qradar.md)
 * [Syslog](../../integrations/syslog.md)

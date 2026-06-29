@@ -199,6 +199,7 @@ The response includes the Logger result metadata and event rows for the selected
 
 - [Crowdstrike](crowdstrike.md)
 - [Graylog](graylog.md)
+- [Qradar](qradar.md)
 - [Sentinelone-data-lake](sentinelone-data-lake.md)
 - [Suricata](suricata.md)
 - [Velociraptor](velociraptor.md)

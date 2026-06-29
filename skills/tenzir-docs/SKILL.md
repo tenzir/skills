@@ -798,6 +798,10 @@ This page shows you how to send events from Tenzir to CrowdStrike Falcon Next-Ge
 
 Graylog is a log management and SIEM platform that routes messages through inputs, streams, processing pipelines, index sets, destinations, and outputs. Tenzir can receive GELF streams from Graylog, send GELF into Graylog inputs, and access the OpenSearch or Elasticsearch search backend when you need backend-level queries.
 
+#### [IBM QRadar](integrations/qradar.md)
+
+IBM QRadar SIEM is a security information and event management platform. Tenzir can send events to QRadar as Log Event Extended Format (LEEF) over Syslog, write LEEF files for batch import, receive QRadar-compatible LEEF streams, and query QRadar APIs for targeted backfill.
+
 #### [SentinelOne Data Lake](integrations/sentinelone-data-lake.md)
 
 SentinelOne is a cybersecurity platform that provides endpoint protection and threat detection. The SentinelOne Singularity Data Lake allows you to store and analyze security events at scale. Tenzir provides bidirectional integration with the SentinelOne Data Lake via its REST API.

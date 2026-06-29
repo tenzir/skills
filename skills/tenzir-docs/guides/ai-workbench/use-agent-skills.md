@@ -203,7 +203,7 @@ Install the IBM QRadar LEEF skill when you want an agent to generate, parse, or 
 npx skills add tenzir/skills@tenzir-leef
 ```
 
-The `tenzir-leef` skill is generated from the official IBM LEEF Version 2 format guide. It documents the LEEF 1.0 and 2.0 headers, delimiter rules, all 45 predefined event attributes with types and limits, custom event key guidelines, and `devTime`/`devTimeFormat` timestamp patterns.
+The `tenzir-leef` skill is generated from the official IBM LEEF Version 2 format guide. It documents the LEEF 1.0 and 2.0 headers, delimiter rules, all 45 predefined event attributes with types and limits, custom event key guidelines, and `devTime`/`devTimeFormat` timestamp patterns. For QRadar-specific delivery examples, see [IBM QRadar](../../integrations/qradar.md).
 
 Tell the agent which context you want:
 
