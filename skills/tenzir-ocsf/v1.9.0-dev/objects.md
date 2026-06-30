@@ -210,6 +210,7 @@
 
 - [Additional Restriction](objects/additional_restriction.md)
 - [Advisory](objects/advisory.md)
+- [AI Agent](objects/ai_agent.md)
 - [AI Model](objects/ai_model.md)
 - [Clipboard](objects/clipboard.md)
 - [Clipboard Item](objects/clipboard_item.md)

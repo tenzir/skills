@@ -1,6 +1,6 @@
 # Actor (actor)
 
-The Actor object contains details about the user, role, application, service, or process that initiated or performed a specific activity. Note that Actor is not the threat actor of a campaign but may be part of a campaign.
+The Actor object contains details about the user, role, application, service, or process that initiated or performed a specific activity. Note that Actor is not the threat actor of a campaign but may be part of a campaign. When the initiator of the activity is an autonomous AI agent, apply the `ai_operation` profile and populate `ai_operation.ai_agent` rather than describing the agent here.
 
 - **Extends**: [Object (object)](object.md)
 

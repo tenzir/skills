@@ -130,7 +130,7 @@ The unique identifier assigned to the event in its original logging system befor
 - **Type**: `string_t`
 - **Requirement**: recommended
 
-The original event time as reported by the event source, preserved as a pass-through string in its native format (e.g., Syslog timestamp, Windows event time). This is not normalized to `timestamp_t` — the normalized equivalent is the base event `time` attribute. Omit if the event is generated rather than collected via logs.
+The original event time as reported by the event source, preserved as a pass-through string in its native format (e.g., Syslog timestamp, Windows event time). This is not normalized to `timestamp_t` - the normalized equivalent is the base event `time` attribute. Omit if the event is generated rather than collected via logs.
 
 ### `processed_time`
 

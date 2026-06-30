@@ -4,11 +4,60 @@ AI-specific attributes for model operations, retrieval systems, and agent activi
 
 ## Applies to
 
+- Account Change
 - API Activity
+- Application Activity
+- Application Error
+- Application Lifecycle
+- Authentication
+- Authorize Session
+- Clipboard Activity
 - Datastore Activity
+- Device Power State Activity
+- DHCP Activity
+- DNS Activity
+- Email Activity
+- Entity Management
+- Event Log Activity
+- File Hosting Activity
+- File System Activity
+- FTP Activity
+- Group Management
+- HTTP Activity
+- Identity & Access Management
+- Kernel Activity
+- Kernel Extension Activity
+- Memory Activity
+- Module Activity
+- Network
+- Network Activity
+- Network File Activity
+- NTP Activity
+- Peripheral Activity
 - Process Activity
+- RDP Activity
+- Role Management
+- Scan Activity
+- Scheduled Job Activity
+- Script Activity
+- SMB Activity
+- SSH Activity
+- System Activity
+- Tunnel Activity
+- User Access Management
+- User Management
+- Web Resource Access Activity
+- Web Resources Activity
 
 ## Attributes
+
+### `ai_agent`
+
+- **Type**: [`ai_agent`](../objects/ai_agent.md)
+- **Requirement**: optional
+- **Group**: context
+
+The autonomous AI agent that performed this operation. Carries model identity via `ai_agent.ai_model`. Populate when the action was performed by an agent rather than a direct model call.
 
 ### `ai_model`
 
@@ -16,7 +65,7 @@ AI-specific attributes for model operations, retrieval systems, and agent activi
 - **Requirement**: recommended
 - **Group**: context
 
-The AI Model object describes the characteristics of an AI/ML model. Examples include language models like GPT-4, embedding models like text-embedding-ada-002, and computer vision models like CLIP.
+The AI model involved in this operation. Use for direct model invocations where no autonomous agent is involved. For agent-mediated operations, model identity is carried within `ai_agent.ai_model` instead.
 
 ### `message_context`
 

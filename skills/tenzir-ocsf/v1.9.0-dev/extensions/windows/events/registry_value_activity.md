@@ -5,7 +5,7 @@ Registry Value Activity events reports when a process performs an action on a Wi
 - **Event UID**: `2`
 - **Category**: System Activity
 - **Extends**: [System Activity (system)](../../../classes/system.md)
-- **Profiles**: [Cloud](../../../profiles/cloud.md), [Date/Time](../../../profiles/datetime.md), [Host](../../../profiles/host.md), [OSINT](../../../profiles/osint.md), [Security Control](../../../profiles/security_control.md)
+- **Profiles**: [AI Operation](../../../profiles/ai_operation.md), [Cloud](../../../profiles/cloud.md), [Date/Time](../../../profiles/datetime.md), [Host](../../../profiles/host.md), [OSINT](../../../profiles/osint.md), [Security Control](../../../profiles/security_control.md)
 
 ## Associations
 

@@ -5,7 +5,7 @@ HTTP Activity events report HTTP connection and traffic information.
 - **Class UID**: `4002`
 - **Category**: Network Activity
 - **Extends**: [Network (network)](network.md)
-- **Profiles**: [Trace](../profiles/trace.md), [Network Proxy](../profiles/network_proxy.md), [Load Balancer](../profiles/load_balancer.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
+- **Profiles**: [Trace](../profiles/trace.md), [Network Proxy](../profiles/network_proxy.md), [Load Balancer](../profiles/load_balancer.md), [AI Operation](../profiles/ai_operation.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
 
 ## Constraints
 

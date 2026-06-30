@@ -5,7 +5,7 @@ Windows Service Activity events report when a process interacts with the Service
 - **Event UID**: `4`
 - **Category**: System Activity
 - **Extends**: [System Activity (system)](../../../classes/system.md)
-- **Profiles**: [Cloud](../../../profiles/cloud.md), [Date/Time](../../../profiles/datetime.md), [Host](../../../profiles/host.md), [OSINT](../../../profiles/osint.md), [Security Control](../../../profiles/security_control.md)
+- **Profiles**: [AI Operation](../../../profiles/ai_operation.md), [Cloud](../../../profiles/cloud.md), [Date/Time](../../../profiles/datetime.md), [Host](../../../profiles/host.md), [OSINT](../../../profiles/osint.md), [Security Control](../../../profiles/security_control.md)
 
 ## Associations
 

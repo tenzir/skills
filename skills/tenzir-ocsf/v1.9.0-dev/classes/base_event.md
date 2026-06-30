@@ -132,7 +132,7 @@ The observables array surfaces key indicators and entities from the event or fin
 - **Requirement**: optional
 - **Group**: context
 
-The original event/finding data as received from the source, before normalization into OCSF. Populate this with the verbatim log line, JSON payload, or other native format for forensic and debugging purposes. This field is not intended for structured querying &mdash; use the normalized OCSF attributes instead.
+The original event/finding data as received from the source, before normalization into OCSF. Populate this with the verbatim log line, JSON payload, or other native format for forensic and debugging purposes. This field is not intended for structured querying - use the normalized OCSF attributes instead.
 
 ### `raw_data_hash`
 
