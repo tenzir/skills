@@ -25,13 +25,12 @@ This attaches to incoming metrics feed, renders them as NDJSON, and then writes 
 You can [transform](../transformation/filter-and-select-data.md) metrics like ordinary data, for example, write aggregations over metrics to compute runtime statistics suitable for reporting or dashboarding:
 
 ```tql
-metrics "operator"
-where sink == true
-summarize runtime=sum(duration), pipeline_id
-sort -runtime
+metrics "operator_profile"
+summarize cpu=sum(cpu), pipeline_id
+sort -cpu
 ```
 
-The previous example computes the total runtime over all pipelines grouped by their unique ID.
+The previous example sums the per-second CPU usage of each operator, grouped by pipeline ID, to surface the most CPU-intensive pipelines.
 
 ## Inspect pipeline throughput
 
