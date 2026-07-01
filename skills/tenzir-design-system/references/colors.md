@@ -10,8 +10,9 @@ Shades of grey carry the layout; color appears only where it encodes
 meaning: a primary action, a status, a data series. Blue and green are the
 brand pair.
 
-- `neutral-800` (black): default text, icons
-- `neutral-700`/`neutral-600`: secondary text, inactive navigation
+- `neutral-800` (black): emphasis text, headings, active text, icons
+- `neutral-700`: body text on light surfaces
+- `neutral-600`: secondary text, inactive navigation
 - `neutral-500`: tertiary text, placeholders; the lightest text grey
 - `neutral-400`/`neutral-300`: disabled states, subtle icons
 - `neutral-250`/`neutral-200`: borders, dividers, control outlines
@@ -46,8 +47,12 @@ context: accent for marks, soft fill for chips. `danger`/`error` stays at 500
 
 ## Contrast
 
+- On `neutral-50`, body text is `neutral-700`; headings, active text, icons,
+  and other emphasis use `neutral-800`. Use `neutral-600` for secondary UI
+  text. `neutral-500` is the minimum text grey and belongs to tertiary text,
+  placeholders, and captions.
 - 500-level hues on light backgrounds pass only for large text/icons; use
-  600-level for small text. `neutral-500` is the minimum text grey.
+  600-level for small text.
 - On color-500 fills, use `neutral-50` text.
 - On `neutral-800`, body text is `neutral-300` or lighter (`neutral-400`
   for captions only); lead-ins are semibold `neutral-50`.
@@ -90,6 +95,7 @@ content uses JetBrains Mono.
 Light and dark are both first-class, strict modes; keep background noise
 minimal, with no large washes or glows behind content. Dark mode remaps roles
 onto the same palette (`tenzir.dark` in tokens.yml): background and surfaces
-`neutral-800`, wells and borders `neutral-700`, text `neutral-50`, status hues
-one step lighter (400-level). Surfaces stay flat; lifting them to `neutral-700`
-reads as heavy navy slabs.
+`neutral-800`, wells and borders `neutral-700`, emphasis text `neutral-50`,
+body text `neutral-300`, and captions/tertiary text `neutral-400`. Status hues
+move one step lighter (400-level). Surfaces stay flat; lifting them to
+`neutral-700` reads as heavy navy slabs.
