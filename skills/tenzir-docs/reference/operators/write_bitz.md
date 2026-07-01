@@ -18,7 +18,6 @@ Internally, BITZ uses Arrow’s IPC format for serialization and deserialization
 ## See Also
 
 * [`read_bitz`](http://docs.tenzir.com/reference/operators/read_bitz.md)
-* [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md)
 * [`write_feather`](http://docs.tenzir.com/reference/operators/write_feather.md)
 * [`write_parquet`](http://docs.tenzir.com/reference/operators/write_parquet.md)
 * [Parse binary data](../../guides/parsing/parse-binary-data.md)

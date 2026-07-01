@@ -40,6 +40,5 @@ write_parquet
 
 * [`read_bitz`](http://docs.tenzir.com/reference/operators/read_bitz.md)
 * [`read_parquet`](http://docs.tenzir.com/reference/operators/read_parquet.md)
-* [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md)
 * [`write_bitz`](http://docs.tenzir.com/reference/operators/write_bitz.md)
 * [`write_feather`](http://docs.tenzir.com/reference/operators/write_feather.md)

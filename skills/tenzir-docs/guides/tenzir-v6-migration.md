@@ -147,8 +147,9 @@ Use the tables below to find the v6-compatible pattern for legacy syntax, operat
 | `save_s3`                 | `to_file` or `to_s3`                       |
 | `save_gcs`                | `to_file` or `to_google_cloud_storage`     |
 | `save_azure_blob_storage` | `to_file` or `to_azure_blob_storage`       |
+| `to_hive`                 | `to_file` or `to_s3` with `partition_by`   |
 
-Prefer `from_file` and `to_file` for URI-style file access. Use provider-specific operators when you need provider-specific options. Put decompression, parsing, and printing in a subpipeline when automatic format detection is not enough.
+Prefer `from_file` and `to_file` for URI-style file access. Use provider-specific operators when you need provider-specific options. Put decompression, parsing, and printing in a subpipeline when automatic format detection is not enough. The former `to_hive` operator is gone; write hive-partitioned output by passing `partition_by` to `to_file` or an object-storage sink together with a `**` placeholder in the URL.
 
 ### Unix domain sockets
 

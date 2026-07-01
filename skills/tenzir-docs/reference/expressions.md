@@ -1082,7 +1082,9 @@ every 10s {
   select id, data
 }
 fork {
-  to_hive "s3://bucket/path/", partition_by=[id], format="json"
+  to_s3 "s3://bucket/path/**/data_{uuid}.json", partition_by=[id] {
+    write_json
+  }
 }
 ```
 

@@ -50,6 +50,5 @@ to_file "output.feather" {
 
 * [`read_bitz`](http://docs.tenzir.com/reference/operators/read_bitz.md)
 * [`read_feather`](http://docs.tenzir.com/reference/operators/read_feather.md)
-* [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md)
 * [`write_bitz`](http://docs.tenzir.com/reference/operators/write_bitz.md)
 * [`write_parquet`](http://docs.tenzir.com/reference/operators/write_parquet.md)

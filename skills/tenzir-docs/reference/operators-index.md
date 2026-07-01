@@ -191,7 +191,6 @@
 - [to_google_cloud_pubsub](operators/to_google_cloud_pubsub.md): Publishes events to a Google Cloud Pub/Sub topic.
 - [to_google_cloud_storage](operators/to_google_cloud_storage.md): Writes events to one or multiple objects in Google Cloud Storage.
 - [to_google_secops](operators/to_google_secops.md): Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.
-- [to_hive](operators/to_hive.md): Writes events to a URI using hive partitioning.
 - [to_http](operators/to_http.md): Sends events as a single HTTP request to a webhook or API endpoint.
 - [to_kafka](operators/to_kafka.md): Sends messages to an Apache Kafka topic.
 - [to_nats](operators/to_nats.md): Publishes messages to a NATS JetStream subject.

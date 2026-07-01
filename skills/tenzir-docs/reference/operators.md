@@ -1191,14 +1191,6 @@ Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.
 to_google_secops …
 ```
 
-### [to\_hive](operators/to_hive.md)
-
-Writes events to a URI using hive partitioning.
-
-```tql
-to_hive "s3://…", partition_by=[x]
-```
-
 ### [to\_http](operators/to_http.md)
 
 Sends events as a single HTTP request to a webhook or API endpoint.

@@ -39,7 +39,7 @@ Defaults to `5min`.
 
 A list of fields used to partition events into separate files. For every distinct combination of partition-field values, a separate file (or group of rotated files) is written. The URL must contain a `**` placeholder, which is replaced by the hive-style path `field1=value1/field2=value2/…`.
 
-Unlike [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md), the partitioning fields are **not** stripped from the written events — they remain in each record.
+The partitioning fields are **not** stripped from the written events — they remain in each record.
 
 ### `{ … }`
 
@@ -109,6 +109,5 @@ to_file "/tmp/logs/events_{uuid}.json", timeout=1min {
 
 * [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
 * [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
-* [`to_hive`](http://docs.tenzir.com/reference/operators/to_hive.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [File](../../integrations/file.md)
