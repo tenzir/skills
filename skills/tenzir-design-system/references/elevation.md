@@ -25,10 +25,16 @@ required. Component libraries often ship broader shadow defaults; keep only
 the menu, popover, and toast shadows and zero the rest.
 
 In dark mode, skip shadows entirely: a `neutral-800` shadow has nothing to
-darken on the near-black `neutral-800` background, and lightening surfaces
-to fake elevation is ruled out by the flat-surface invariant. Floating
-surfaces stay `neutral-800` and separate with `neutral-700` hairline
-borders instead.
+darken on the near-black `neutral-800` background, and the common
+workarounds are off the table — lightening surfaces to fake elevation
+violates the flat-surface invariant, and a light "shadow" reads as glow,
+signaling emission rather than depth. Floating surfaces stay `neutral-800`
+and separate with `neutral-700` hairline borders instead.
+
+The principle behind the asymmetry: **each mode uses the cheapest
+sufficient separator.** Borders are always the first choice; light mode
+falls back to a shadow only where a border cannot separate white from
+white, while on dark the `neutral-700` hairline covers every case.
 
 ## Overlay Dims
 
