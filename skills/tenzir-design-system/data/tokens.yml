@@ -132,21 +132,17 @@ tenzir:
     unit: px
     color: neutral-800
 
-    # Use smaller shadows for inline overlays and compact surfaces, medium
-    # shadows for floating panels, and large shadows only for prominent modal
-    # or elevated page-level surfaces.
-    shadow_l:
-      - {x: 0, y: 20, blur: 40, spread: -16, opacity: 0.2}
-      - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.2}
+    # Shadows are rare: the system is flat and separates surfaces by border,
+    # backdrop, or color (see references/elevation.md). The one sanctioned
+    # use is a light-mode surface floating over same-colored content: menus,
+    # popovers, and listboxes use shadow_m, toasts shadow_s. Dark mode uses
+    # no shadows at all. Apply both layers of a shadow together.
     shadow_m:
       - {x: 0, y: 10, blur: 20, spread: -8, opacity: 0.2}
       - {x: 0, y: 4, blur: 8, spread: -6, opacity: 0.2}
     shadow_s:
       - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.2}
       - {x: 0, y: 3, blur: 6, spread: -3, opacity: 0.2}
-    shadow_xs:
-      - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.1}
-      - {x: 0, y: 3, blur: 6, spread: -3, opacity: 0.1}
 
   opacity:
     # Dim overlays darken with neutral-800 at the given alpha; lighten
@@ -209,12 +205,19 @@ tenzir:
     # and separate via neutral-700 hairline borders. neutral-700 is also the
     # well/hover layer. Status hues step one level lighter (400) to keep
     # contrast on dark surfaces.
-    foreground: neutral-50
+    #
+    # Text mirrors the light-mode hierarchy: foreground is body text, and
+    # text_emphasis (headings, active text, icons) is neutral-50, the dark
+    # counterpart of light's neutral-800. Secondary and tertiary share
+    # neutral-400, the minimum text grey on dark (neutral-500 fails small-
+    # text contrast on neutral-800).
+    foreground: neutral-300
+    text_emphasis: neutral-50
     background: neutral-800
     surface: neutral-800
     muted: neutral-700
     border: neutral-700
-    text_secondary: neutral-300
+    text_secondary: neutral-400
     text_tertiary: neutral-400
     primary: blue-400
     success: green-400
