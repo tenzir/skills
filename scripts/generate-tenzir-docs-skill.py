@@ -907,9 +907,6 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     skill_md = generate_skill_markdown(input_dir, sitemap_root, available_source_paths)
-    # The sitemap carries a per-build timestamp; dropping it keeps daily syncs
-    # from committing when nothing else changed.
-    skill_md = re.sub(r"^> Last updated:.*\n\n?", "", skill_md, flags=re.MULTILINE)
     (output_dir / "SKILL.md").write_text(skill_md, encoding="utf-8")
     copied = write_skill_files(input_dir, output_dir, markdown_files)
 
