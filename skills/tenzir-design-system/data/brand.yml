@@ -129,7 +129,10 @@ color:
     graph-5: orange-500
     graph-6: yellow-500
 
-  foreground: neutral-800
+  # foreground is body text. Emphasis text (headings, active text, icons)
+  # uses the mode's strongest neutral: neutral-800 on light, neutral-50 on
+  # dark. secondary and tertiary are the muted text tiers.
+  foreground: neutral-700
   background: neutral-50
   primary: blue-500
   secondary: neutral-600
@@ -163,7 +166,7 @@ typography:
     family: Inter
     weight: 600
     line-height: 1.2
-    color: foreground
+    color: neutral-800
   monospace:
     family: JetBrains Mono
     weight: 400
