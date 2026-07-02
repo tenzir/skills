@@ -76,10 +76,10 @@ For Linear, use its magic words explicitly in that footer:
 - Use separate lines only when the relationship differs, for example one line
   for `closes` and another for `references`.
 - When there is a companion docs PR, add a plain line such as
-  `📚 Docs PR: tenzir/docs#261` to the same footer block rather than creating
+  `📚 Docs PR: tenzir/content#261` to the same footer block rather than creating
   a dedicated section.
 - When linking GitHub PRs in that footer, use GitHub shorthand such as
-  `tenzir/tenzir#5999` or `tenzir/docs#261` instead of full URLs. Use a full
+  `tenzir/tenzir#5999` or `tenzir/content#261` instead of full URLs. Use a full
   URL only for deep links that shorthand cannot express, such as a specific
   issue comment.
 
@@ -87,7 +87,7 @@ Example footer:
 
 ```markdown
 <sub>
-📚 Docs PR: tenzir/docs#261<br>
+📚 Docs PR: tenzir/content#261<br>
 ✅ Closes TNZ-150, TNZ-151<br>
 🎫 References TNZ-152<br>
 📎 Related: tenzir/tenzir#5999

@@ -7,7 +7,7 @@ content.
 
 - **Accuracy.** Docs must match actual behavior. When a function's signature,
   default value, or return type changes, every doc that references it becomes a
-  potential lie. Trace the change through docstrings, README, and `.docs/`.
+  potential lie. Trace the change through docstrings, README, and the docs in `.docs/` (a clone of `tenzir/content`).
 - **Completeness.** New user-facing behavior needs documentation where users
   will look for it. A new CLI flag without a `--help` entry, a new operator
   without a docs page, or a new config option without a comment in the example

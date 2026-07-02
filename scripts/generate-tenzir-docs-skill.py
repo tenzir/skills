@@ -18,7 +18,14 @@ from pathlib import Path
 from markdown_it import MarkdownIt
 
 
-DOCS_URL_PREFIX = re.compile(r"^https?://docs\.tenzir\.com")
+# Strip the site origin so absolute documentation links resolve within the
+# skill tree: docs pages live under /docs/ on tenzir.com but at the tree
+# root here; integration pages keep their /integrations/ prefix. The
+# retired docs.tenzir.com origin stays supported for links in older
+# content.
+DOCS_URL_PREFIX = re.compile(
+    r"^https?://(?:docs\.tenzir\.com|tenzir\.com/docs(?=/)|tenzir\.com(?=/integrations/))"
+)
 EXCLUDED_SOURCE_PATHS = frozenset(
     {
         "changelog.md",
@@ -140,7 +147,7 @@ def build_available_source_paths(source_paths: list[str]) -> set[str]:
     return {
         source_path
         for source_path in source_paths
-        if source_path != "sitemap.md" and not is_excluded_source_path(source_path)
+        if not is_excluded_source_path(source_path)
     }
 
 
@@ -802,14 +809,14 @@ def create_skill_frontmatter() -> str:
 
 def generate_skill_markdown(
     input_dir: Path,
-    sitemap_root: Node,
+    docs_map_root: Node,
     available_source_paths: set[str],
 ) -> str:
     title_node = next(
-        (child for child in sitemap_root.children if child.level == 1), None
+        (child for child in docs_map_root.children if child.level == 1), None
     )
     if title_node is None:
-        raise ValueError("Could not find the sitemap title in sitemap.md.")
+        raise ValueError("Could not find the title in the docs map.")
 
     # Build the navigation and examples sections that precede the doc map.
     preamble: list[Node] = [create_navigation_node(), create_examples_node()]
@@ -873,6 +880,7 @@ def generate_skill_markdown(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input-dir", required=True)
+    parser.add_argument("--docs-map", required=True)
     parser.add_argument("--output-dir", required=True)
     return parser.parse_args()
 
@@ -880,26 +888,22 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     input_dir = Path(args.input_dir)
+    docs_map_path = Path(args.docs_map)
     output_dir = Path(args.output_dir)
-    sitemap_path = input_dir / "sitemap.md"
 
     if not input_dir.exists():
         raise FileNotFoundError(f"Input directory not found: {input_dir}")
-    if not sitemap_path.exists():
-        raise FileNotFoundError(f"Missing sitemap.md in {input_dir}")
+    if not docs_map_path.is_file():
+        raise FileNotFoundError(f"Docs map not found: {docs_map_path}")
 
-    sitemap_root = parse_heading_tree(sitemap_path.read_text(encoding="utf-8"))
-    markdown_files = [
-        file_path
-        for file_path in collect_markdown_files(input_dir)
-        if file_path != "sitemap.md"
-    ]
+    docs_map_root = parse_heading_tree(docs_map_path.read_text(encoding="utf-8"))
+    markdown_files = collect_markdown_files(input_dir)
     available_source_paths = build_available_source_paths(markdown_files)
 
     shutil.rmtree(output_dir, ignore_errors=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    skill_md = generate_skill_markdown(input_dir, sitemap_root, available_source_paths)
+    skill_md = generate_skill_markdown(input_dir, docs_map_root, available_source_paths)
     (output_dir / "SKILL.md").write_text(skill_md, encoding="utf-8")
     copied = write_skill_files(input_dir, output_dir, markdown_files)
 
