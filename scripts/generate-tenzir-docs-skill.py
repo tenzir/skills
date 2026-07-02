@@ -18,7 +18,14 @@ from pathlib import Path
 from markdown_it import MarkdownIt
 
 
-DOCS_URL_PREFIX = re.compile(r"^https?://docs\.tenzir\.com")
+# Strip the site origin so absolute documentation links resolve within the
+# skill tree: docs pages live under /docs/ on tenzir.com but at the tree
+# root here; integration pages keep their /integrations/ prefix. The
+# retired docs.tenzir.com origin stays supported for links in older
+# content.
+DOCS_URL_PREFIX = re.compile(
+    r"^https?://(?:docs\.tenzir\.com|tenzir\.com/docs(?=/)|tenzir\.com(?=/integrations/))"
+)
 EXCLUDED_SOURCE_PATHS = frozenset(
     {
         "changelog.md",
@@ -900,6 +907,9 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     skill_md = generate_skill_markdown(input_dir, sitemap_root, available_source_paths)
+    # The sitemap carries a per-build timestamp; dropping it keeps daily syncs
+    # from committing when nothing else changed.
+    skill_md = re.sub(r"^> Last updated:.*\n\n?", "", skill_md, flags=re.MULTILINE)
     (output_dir / "SKILL.md").write_text(skill_md, encoding="utf-8")
     copied = write_skill_files(input_dir, output_dir, markdown_files)
 

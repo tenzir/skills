@@ -1,12 +1,12 @@
 ---
 name: tenzir-update-docs
 description: >-
-  Coordinate docs.tenzir.com updates alongside code changes. Use when preparing
+  Coordinate documentation updates alongside code changes. Use when preparing
   the `.docs/` checkout, creating a matching docs branch, opening a
-  `tenzir/docs` pull request, or cross-linking docs and code PRs. Also use when
-  the user mentions "update the docs", "docs PR", ".docs/", or when a code
-  change affects user-facing behavior that should be reflected on
-  docs.tenzir.com.
+  `tenzir/content` documentation pull request, or cross-linking docs and code
+  PRs. Also use when the user mentions "update the docs", "docs PR", ".docs/",
+  or when a code change affects user-facing behavior that should be reflected
+  in the documentation on tenzir.com.
 metadata:
   requires:
     skills:
@@ -15,28 +15,32 @@ metadata:
 
 # Update Documentation
 
-Handle the operational workflow around docs.tenzir.com changes.
+Handle the operational workflow around documentation changes. The docs live in
+the `tenzir/content` repository (which also hosts the tenzir.com website)
+under `website/src/content/docs/`.
 
 ## Workflow
 
-All docs changes take place in `.docs/`, which is a clone of `tenzir/docs`.
+All docs changes take place in `.docs/`, which is a clone of `tenzir/content`.
 Clone `.docs` if it doesn't exist. Otherwise fetch the latest refs from origin.
 
 1. Create or check out a topic branch in `.docs/` that matches the parent repo
    branch name.
-2. Author the content update in `.docs/` using the docs repository's own
-   documentation guidance and conventions.
-3. Run relevant documentation checks if the docs repository provides them.
-4. File a `tenzir/docs` pull request from `.docs/`.
+2. Author the content update under `website/src/content/docs/` using the
+   repository's own documentation guidance and conventions (read its
+   `website/README.md` first).
+3. Run relevant documentation checks if the repository provides them
+   (`bun run check` in `website/`).
+4. File a `tenzir/content` pull request from `.docs/`.
 5. Cross-link the pull requests using one shared compact footer pattern:
    - In the docs PR, append a final `<sub>...</sub>` footer block that links
      the code PR and references the same Linear issue(s), for example
      `⚙️ Code PR: tenzir/tenzir#6048<br>🎫 References TNZ-150, TNZ-151`.
    - In the code PR, append or extend the final `<sub>...</sub>` footer with
-     `📚 Docs PR: tenzir/docs#261`.
+     `📚 Docs PR: tenzir/content#261`.
    - Use GitHub shorthand for PR links in both directions, such as
-     `tenzir/tenzir#6048` or `tenzir/docs#261`, instead of full URLs. Use full
-     URLs only for deep links that shorthand cannot express, such as a
+     `tenzir/tenzir#6048` or `tenzir/content#261`, instead of full URLs. Use
+     full URLs only for deep links that shorthand cannot express, such as a
      specific comment.
    - If a footer already exists, add another `<br>`-separated line instead of
      creating a second footer.
@@ -70,7 +74,7 @@ Code PR example:
 
 ```markdown
 <sub>
-📚 Docs PR: tenzir/docs#261<br>
+📚 Docs PR: tenzir/content#261<br>
 ✅ Closes TNZ-150, TNZ-151<br>
 📎 Related: tenzir/tenzir#5999
 </sub>
