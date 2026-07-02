@@ -1,0 +1,10 @@
+created: 2026-07-02
+title: Simpler design system guidance
+intro: >-
+  This release tightens the Tenzir design system into a simpler, implementation-agnostic
+  source of truth. It clarifies the light and dark text hierarchy, unifies brand-gradient
+  usage, and removes default shadows so downstream implementations can apply the system
+  consistently.
+source:
+  mode: sync-stable-queue
+  previous_stable: v2.2.0
