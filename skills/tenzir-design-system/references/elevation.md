@@ -24,8 +24,11 @@ shadow is **two layers** of `neutral-800` (see tokens.yml); both layers
 required. Component libraries often ship broader shadow defaults; keep only
 the menu, popover, and toast shadows and zero the rest.
 
-In dark mode, skip shadows entirely: floating surfaces stay `neutral-800`
-and separate with `neutral-700` hairline borders.
+In dark mode, skip shadows entirely: a `neutral-800` shadow has nothing to
+darken on the near-black `neutral-800` background, and lightening surfaces
+to fake elevation is ruled out by the flat-surface invariant. Floating
+surfaces stay `neutral-800` and separate with `neutral-700` hairline
+borders instead.
 
 ## Overlay Dims
 
