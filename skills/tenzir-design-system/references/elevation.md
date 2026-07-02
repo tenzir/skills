@@ -3,31 +3,29 @@
 Shadow values live in [data/tokens.yml](../data/tokens.yml)
 (`tenzir.shadow`, `tenzir.opacity`).
 
-## Shadows Are the Last Resort
+## No Shadows by Default
 
-Avoid drop shadows whenever possible. Surfaces separate by **border, backdrop,
+The system is flat: shadows are not part of the resting visual language and
+appear only in rare circumstances. Surfaces separate by **border, backdrop,
 or color, not shadows**:
 
 - Static surfaces (cards, panels, regions): flat, 1px `neutral-200`
   borders.
+- Controls (buttons, inputs, form fields): flat, with no resting or hover
+  shadow; hover and active states change color or border instead. Keep focus
+  rings. Zero any control shadow a component library bakes in by default.
 - Modals and sidepanels: the `dim-50` backdrop separates. No shadow.
 - Tooltips: the inverted `neutral-800` surface separates. No shadow.
-- **Popups floating over same-colored content** are the exception:
-  menus, popovers, listboxes use `shadow-m`; toasts `shadow-s`.
-- Interactive nuance (active thumbs, hovering cards) may use
-  `shadow-xs` → `shadow-s`, one step max.
-- **Controls carry no resting shadow.** Buttons, inputs, and form fields sit
-  flat on the surface; a resting drop shadow on a control reads as
-  inconsistent against its flat siblings. Keep focus rings. Some component
-  libraries bake a subtle control shadow by default; zero it.
 
-Component libraries like shadcn/ui already reserve shadows for floating
-surfaces; keep those defaults, zero any resting control shadows, and add
-nothing beyond them. In dark mode, skip shadows entirely: surfaces stay
-`neutral-800` with `neutral-700` hairline borders.
+The one sanctioned exception is a **light-mode surface floating over
+same-colored content**, where neither a border nor a backdrop can separate:
+menus, popovers, and listboxes use `shadow-m`; toasts use `shadow-s`. Every
+shadow is **two layers** of `neutral-800` (see tokens.yml); both layers
+required. Component libraries often ship broader shadow defaults; keep only
+the menu, popover, and toast shadows and zero the rest.
 
-When used, every shadow is **two layers** of `neutral-800` (see
-tokens.yml); both layers required.
+In dark mode, skip shadows entirely: floating surfaces stay `neutral-800`
+and separate with `neutral-700` hairline borders.
 
 ## Overlay Dims
 

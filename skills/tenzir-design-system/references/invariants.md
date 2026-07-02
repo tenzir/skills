@@ -7,10 +7,12 @@ realized.
   stray colors can't leak in.
 - **Surfaces are flat.** Separate by 1px border, backdrop dim, or color, not by
   shadow.
-- **Avoid shadows.** Use them only for surfaces that float over same-colored
-  content (menus, popovers, toasts), never as a resting style on controls or
-  static surfaces ([elevation.md](elevation.md)). When a shadow is used, it is
-  two layers ([data/tokens.yml](../data/tokens.yml)).
+- **Shadows are rare.** The system carries no shadows by default; the one
+  sanctioned use is a light-mode surface floating over same-colored content
+  (menus, popovers, toasts), never a resting or hover style on controls,
+  cards, or static surfaces ([elevation.md](elevation.md)). When a shadow is
+  used, it is two layers ([data/tokens.yml](../data/tokens.yml)); dark mode
+  uses none at all.
 - **Strict light and dark.** Both modes are first-class and clean; keep
   background noise minimal, with no large washes or glows behind content.
 - **Gradient is an accent, not a fill.** The blue→green ramp appears as a

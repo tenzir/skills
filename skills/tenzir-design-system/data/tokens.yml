@@ -132,23 +132,17 @@ tenzir:
     unit: px
     color: neutral-800
 
-    # Shadows are a last resort, reserved for surfaces floating over
-    # same-colored content: menus and popovers use shadow_m, toasts shadow_s,
-    # and interactive nuance shadow_xs to shadow_s. shadow_l is reserved for
-    # rare page-level elevated surfaces; modals and sidepanels separate with
-    # the dim backdrop instead (see references/elevation.md).
-    shadow_l:
-      - {x: 0, y: 20, blur: 40, spread: -16, opacity: 0.2}
-      - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.2}
+    # Shadows are rare: the system is flat and separates surfaces by border,
+    # backdrop, or color (see references/elevation.md). The one sanctioned
+    # use is a light-mode surface floating over same-colored content: menus,
+    # popovers, and listboxes use shadow_m, toasts shadow_s. Dark mode uses
+    # no shadows at all. Apply both layers of a shadow together.
     shadow_m:
       - {x: 0, y: 10, blur: 20, spread: -8, opacity: 0.2}
       - {x: 0, y: 4, blur: 8, spread: -6, opacity: 0.2}
     shadow_s:
       - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.2}
       - {x: 0, y: 3, blur: 6, spread: -3, opacity: 0.2}
-    shadow_xs:
-      - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.1}
-      - {x: 0, y: 3, blur: 6, spread: -3, opacity: 0.1}
 
   opacity:
     # Dim overlays darken with neutral-800 at the given alpha; lighten

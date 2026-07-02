@@ -16,7 +16,7 @@ data).
 | Token             | Value | Use for                                  |
 | ----------------- | ----- | ---------------------------------------- |
 | `duration-instant`| 0ms   | Opt-out; state changes that must feel immediate |
-| `duration-fast`   | 150ms | Hover/focus color and shadow transitions |
+| `duration-fast`   | 150ms | Hover/focus color and border transitions |
 | `duration-base`   | 200ms | Default UI transitions: toggles, chevrons, fades |
 | `duration-slow`   | 300ms | Larger surfaces: panels, modals, accordions |
 | `duration-slower` | 500ms | Page-level or deliberate emphasis (rare) |
