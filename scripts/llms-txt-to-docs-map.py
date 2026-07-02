@@ -6,8 +6,8 @@
 
 The tenzir.com llms.txt indexes the whole site as flat link lists under
 ``## Docs``, ``## Integrations``, etc. The skill generator
-(generate-tenzir-docs-skill.py) instead expects the heading-tree manifest the
-retired docs.tenzir.com served as sitemap.md: ``## Guides`` sections with
+(generate-tenzir-docs-skill.py) instead navigates a heading-tree docs map:
+``## Guides`` sections with
 ``### <group>`` subsections, ``#### [Page](url)`` entries carrying
 descriptions and outline bullets, and ``##### [child]`` entries for catalog
 items (operators, functions, API endpoints). This script bridges the two so
@@ -116,7 +116,7 @@ def format_subsection(subsection: Subsection) -> list[str]:
     lines = [f"### {subsection.label}", ""]
     # A page nested below an earlier page of the same subsection is a catalog
     # item (operator, function, API endpoint): render it as a compact child
-    # entry, like the old sitemap did.
+    # entry to keep the map compact.
     roots: list[str] = []
     for page in subsection.pages:
         stem = page.url.removesuffix(".md")

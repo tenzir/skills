@@ -54,14 +54,14 @@ jobs:
           curl -fsSL --retry 3 --retry-all-errors -o /tmp/llms.txt "$base/llms.txt"
 
           # llms.txt is the manifest: every documentation page appears as a
-          # markdown link. The generator expects the docs-map heading tree
-          # the old docs site served as sitemap.md, so convert first. Docs
-          # pages live under /docs/ on the website but at the tree root for
-          # the skill generator; integration pages keep their integrations/
-          # prefix. Skip the changelog and pages outside the docs tree.
-          uv run scripts/llms-txt-to-docs-map.py /tmp/llms.txt /tmp/tenzir-docs/sitemap.md
+          # markdown link. The generator navigates a docs-map heading tree,
+          # so convert first. Docs pages live under /docs/ on the website but
+          # at the tree root for the skill generator; integration pages keep
+          # their integrations/ prefix. Skip the changelog and pages outside
+          # the docs tree.
+          uv run scripts/llms-txt-to-docs-map.py /tmp/llms.txt /tmp/docs-map.md
 
-          grep -oE "$base/[A-Za-z0-9./_-]+\.md" /tmp/tenzir-docs/sitemap.md \
+          grep -oE "$base/[A-Za-z0-9./_-]+\.md" /tmp/docs-map.md \
             | sort -u > /tmp/urls.txt
 
           download() {
@@ -88,6 +88,7 @@ jobs:
           set -euo pipefail
           uv run scripts/generate-tenzir-docs-skill.py \
             --input-dir /tmp/tenzir-docs \
+            --docs-map /tmp/docs-map.md \
             --output-dir skills/tenzir-docs
 
       - name: Validate skills
