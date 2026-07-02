@@ -132,9 +132,11 @@ tenzir:
     unit: px
     color: neutral-800
 
-    # Use smaller shadows for inline overlays and compact surfaces, medium
-    # shadows for floating panels, and large shadows only for prominent modal
-    # or elevated page-level surfaces.
+    # Shadows are a last resort, reserved for surfaces floating over
+    # same-colored content: menus and popovers use shadow_m, toasts shadow_s,
+    # and interactive nuance shadow_xs to shadow_s. shadow_l is reserved for
+    # rare page-level elevated surfaces; modals and sidepanels separate with
+    # the dim backdrop instead (see references/elevation.md).
     shadow_l:
       - {x: 0, y: 20, blur: 40, spread: -16, opacity: 0.2}
       - {x: 0, y: 8, blur: 16, spread: -8, opacity: 0.2}
@@ -211,11 +213,12 @@ tenzir:
     # contrast on dark surfaces.
     #
     # Text mirrors the light-mode hierarchy: foreground is body text, and
-    # emphasis text (headings, active text, icons) uses neutral-50, the
-    # dark counterpart of light's neutral-800. Secondary and tertiary share
+    # text_emphasis (headings, active text, icons) is neutral-50, the dark
+    # counterpart of light's neutral-800. Secondary and tertiary share
     # neutral-400, the minimum text grey on dark (neutral-500 fails small-
     # text contrast on neutral-800).
     foreground: neutral-300
+    text_emphasis: neutral-50
     background: neutral-800
     surface: neutral-800
     muted: neutral-700

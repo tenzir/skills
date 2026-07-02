@@ -35,8 +35,9 @@ paired line height (see `tenzir.typography.text` in tokens.yml):
 - `text-2xl` and above: titles; these sizes carry built-in negative
   tracking, so apply the paired letter-spacing
 - `text-capitalized` (12px, +5% tracking): uppercase labels and category
-  markers; always uppercase. The monospaced variant of this is the brand
-  **kicker** ([branded-effects.md](branded-effects.md))
+  markers; always uppercase. The brand **kicker** applies the same
+  uppercase, +5% tracking treatment in JetBrains Mono at `text-sm`/`text-xs`
+  ([branded-effects.md](branded-effects.md))
 
 JetBrains Mono uses the same scale but only `text-xxs` through `text-xl`.
 

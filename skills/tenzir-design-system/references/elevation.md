@@ -21,9 +21,10 @@ or color, not shadows**:
   inconsistent against its flat siblings. Keep focus rings. Some component
   libraries bake a subtle control shadow by default; zero it.
 
-Component libraries like shadcn/ui already behave this way; keep their
-default shadows, add none. In dark mode, skip shadows entirely: surfaces
-stay `neutral-800` with `neutral-700` hairline borders.
+Component libraries like shadcn/ui already reserve shadows for floating
+surfaces; keep those defaults, zero any resting control shadows, and add
+nothing beyond them. In dark mode, skip shadows entirely: surfaces stay
+`neutral-800` with `neutral-700` hairline borders.
 
 When used, every shadow is **two layers** of `neutral-800` (see
 tokens.yml); both layers required.

@@ -10,7 +10,7 @@ and [data/brand.yml](../data/brand.yml).
 ## Gradient border
 
 The primary way to push an element past the emphasis the primary color can
-give: a thin gradient ring in the blue→light-blue→green ramp on the element's
+give: a thin ring of the brand's blue→green ramp on the element's
 edge. Use it to lift a key interactive card or a featured surface above its
 neighbors, and keep it rare so it stays special. It may animate (a slow
 rotation on hover or focus); honor `prefers-reduced-motion` by dropping the
@@ -34,8 +34,9 @@ brand gradient above, or muted. See [typography.md](typography.md).
 ## Article prose
 
 Long-form body typography for rendered markdown (blog posts), keyed to tokens:
-body `text-lg` at 1.75 line height; generous heading rhythm (h2 `text-2xl` with
-its paired tracking, h3 `text-xl`); links in `blue-500` with a 3px underline
+body `text-lg` at 1.75 line height (a deliberate long-form exception to the
+paired line height); generous heading rhythm (h2 `text-2xl` with its paired
+tracking, h3 `text-xl`); links in the `primary` hue with a 3px underline
 offset on hover; blockquotes with a `blue-300` inline-start rule, italic and
 muted; inline code in the muted well at `radius-tight`. Hand-rolled against
 tokens rather than a typography plugin, since the palette carries only Tenzir
