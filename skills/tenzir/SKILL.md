@@ -1,5 +1,5 @@
 ---
-name: tenzir-docs
+name: tenzir
 description: >-
   Answer questions using the Tenzir documentation. Use whenever the user asks
   about TQL syntax, pipeline operators, functions, data parsing or
@@ -9,7 +9,9 @@ description: >-
   Tenzir feature. Also use when the user asks how to collect, route, filter,
   aggregate, or export security data with Tenzir, or needs help writing or
   debugging TQL pipelines, even if they don't mention 'Tenzir' explicitly but
-  are clearly working in a Tenzir context.
+  are clearly working in a Tenzir context. Also use for questions about
+  Tenzir the company or product, release notes and changelog, blog posts,
+  and solution use cases.
 ---
 
 # Tenzir Documentation Map
@@ -24,13 +26,26 @@ Navigate the documentation based on the type of question:
 |---|---|
 | "How do I…" tasks | [Guides](guides.md) — step-by-step instructions organized by task |
 | Operator or function syntax | [Operator Index](reference/operators-index.md) or [Function Index](reference/functions-index.md), then the specific page |
-| Integration setup (Splunk, Kafka, S3…) | [Integrations](integrations.md) — per-product setup and pipeline examples |
+| Integration setup (Splunk, Kafka, S3…) | [Integrations](#integrations) — per-product setup and pipeline examples |
 | Concepts (nodes, pipelines, deployment) | [Explanations](explanations.md) — architecture and design |
 | Learning from scratch | [Tutorials](tutorials.md) — guided lessons |
 | TQL language rules | [Language](explanations/language.md), [Expressions](reference/expressions.md), [Statements](reference/statements.md) |
 
 Always read the relevant page before answering. Prefer TQL examples from the
 documentation over inventing syntax.
+
+## Beyond the docs
+
+This skill bundles only the documentation. For anything else about
+Tenzir, fetch these live pages on demand instead of answering from
+memory:
+
+| Topic | Where to look |
+|---|---|
+| Release notes, "when was X added/changed" | <https://tenzir.com/changelog.md> |
+| Blog posts and announcements | <https://tenzir.com/blog.md> |
+| Solution use cases | <https://tenzir.com/solutions.md> |
+| Company, product, events, everything else | <https://tenzir.com/llms.txt> — the full site index with per-page Markdown links |
 
 ## Answer patterns
 
@@ -424,10 +439,6 @@ Security is a serious matter for us.
 #### [Setup syntax highlighting](guides/development/setup-syntax-highlighting.md)
 
 Install TQL language extensions for syntax highlighting in your editor
-
-#### [Write a node plugin](guides/development/write-a-node-plugin.md)
-
-This guide shows you how to extend Tenzir with custom operators, formats, or connectors by writing a C++ plugin.
 
 ## [Tutorials](tutorials.md)
 

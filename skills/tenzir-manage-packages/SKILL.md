@@ -10,7 +10,7 @@ description: >-
 metadata:
   requires:
     skills:
-      - tenzir-docs
+      - tenzir
   uses:
     skills:
       - name: tenzir-ship
@@ -19,7 +19,7 @@ metadata:
 
 # Manage Tenzir packages
 
-Use this skill as the package-lifecycle entry point into the `tenzir-docs`
+Use this skill as the package-lifecycle entry point into the `tenzir`
 skill. Start by identifying the lifecycle task, load the relevant docs set, and
 select the branches that match the user's request. Keep package changes coherent
 across manifest entries, operators, pipelines, examples, tests, contexts, and
@@ -35,7 +35,7 @@ Identify the package's purpose, intended users, and reusable capabilities.
 Determine the lifecycle task: add, inspect, update, extend, refactor,
 deprecate, remove, test, publish, or migrate a package capability.
 
-Use `tenzir-docs` as the primary source for implementation guidance. Read the
+Use `tenzir` as the primary source for implementation guidance. Read the
 relevant set of package pages that covers the selected lifecycle branches.
 
 Routing:
@@ -122,7 +122,7 @@ from one-off pipeline names.
 Add operator frontmatter arguments for configurable fields, URLs, credentials,
 modes, output topics, and destinations. Preserve existing public operator names
 unless a rename is intentional and reflected in examples, pipelines, tests, and
-changelog entries. Use `tenzir-docs` for operator-body behavior when the user
+changelog entries. Use `tenzir` for operator-body behavior when the user
 asks for implementation details.
 
 **Results:**

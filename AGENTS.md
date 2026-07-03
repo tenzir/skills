@@ -22,7 +22,7 @@ not be edited by hand here:
 - `skills/tenzir-cim/`
 - `skills/tenzir-ecs/`
 - `skills/tenzir-edm/`
-- `skills/tenzir-docs/`
+- `skills/tenzir/`
 - `skills/tenzir-leef/`
 - `skills/tenzir-ocsf/`
 - `skills/tenzir-ship/`
@@ -34,19 +34,19 @@ Three places list skills and must stay consistent:
 2. `.claude-plugin/marketplace.json` — validated by CI
 3. `README.md` skills table — update manually when adding or removing skills
 
-### `tenzir-docs` page references in workflow skills
+### `tenzir` page references in workflow skills
 
 Workflow skills (e.g., `tenzir-manage-packages`) point to
-`tenzir-docs` pages by relative path (e.g., `guides/packages/create-a-package.md`)
+`tenzir` pages by relative path (e.g., `guides/packages/create-a-package.md`)
 instead of duplicating documentation content. These paths must stay in sync with
-the generated `tenzir-docs` skill tree:
+the generated `tenzir` skill tree:
 
-- After regenerating `tenzir-docs`, verify that every path referenced in a
-  workflow skill still resolves to a file under `skills/tenzir-docs/`.
-- When renaming or removing a `tenzir-docs` page, search workflow skills for
+- After regenerating `tenzir`, verify that every path referenced in a
+  workflow skill still resolves to a file under `skills/tenzir/`.
+- When renaming or removing a `tenzir` page, search workflow skills for
   the old path and update it.
 - Never copy guide or tutorial content into a workflow skill. The skill provides
-  the workflow structure (steps, results, ordering); `tenzir-docs` provides the
+  the workflow structure (steps, results, ordering); `tenzir` provides the
   domain knowledge.
 
 ## Skill authoring guidelines

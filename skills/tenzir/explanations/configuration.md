@@ -196,8 +196,8 @@ tenzir:
     - .
     - /opt/foo/lib
   plugins:
-    - example
-    - /opt/bar/lib/libtenzir-plugin-example.so
+    - acme
+    - /opt/bar/lib/libtenzir-plugin-acme.so
 ```
 
 Before executing plugin code, Tenzir loads the specified plugins via `dlopen(3)` and attempts to initialize them as plugins. Part of the initialization is passing configuration options to the plugin. To this end, Tenzir looks for a YAML dictionary under `plugins.<name>` in the `tenzir.yaml` file. For example:
@@ -206,13 +206,13 @@ Before executing plugin code, Tenzir loads the specified plugins via `dlopen(3)`
 
 ```yaml
 plugins:
-  example:
+  acme:
     option: 42
 ```
 
 Alternatively, you can specify a `plugin/<plugin>.yaml` file. The example configurations above and below are equivalent. This makes plugin deployments easier, as plugins can be installed and uninstalled alongside their respective configuration.
 
-\<configdir>/tenzir/plugin/example.yaml
+\<configdir>/tenzir/plugin/acme.yaml
 
 ```yaml
 option: 42

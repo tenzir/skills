@@ -291,8 +291,7 @@ tenzir:
   # The plugins to load at startup. For relative paths, Tenzir tries to find
   # the files in the specified `tenzir.plugin-dirs`. The special values
   # 'bundled' and 'all' enable autoloading of bundled and all plugins
-  # respectively. Note: Add `example` or `/path/to/libtenzir-plugin-example.so`
-  # to load the example plugin.
+  # respectively.
   plugins: []
 
 

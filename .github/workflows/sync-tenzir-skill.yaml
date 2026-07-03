@@ -1,4 +1,4 @@
-name: Sync Tenzir Docs Skill
+name: Sync Tenzir Skill
 
 on:
   schedule:
@@ -17,12 +17,12 @@ permissions:
   contents: write
 
 concurrency:
-  group: "sync-docs-skill"
+  group: "sync-tenzir-skill"
   cancel-in-progress: false
 
 jobs:
   sync:
-    name: Rebuild tenzir-docs
+    name: Rebuild tenzir
     runs-on: ubuntu-latest
 
     steps:
@@ -50,7 +50,7 @@ jobs:
           set -euo pipefail
 
           base="${BASE_URL%/}"
-          mkdir -p /tmp/tenzir-docs
+          mkdir -p /tmp/tenzir-skill
           curl -fsSL --retry 3 --retry-all-errors -o /tmp/llms.txt "$base/llms.txt"
 
           # llms.txt is the manifest: every documentation page appears as a
@@ -72,24 +72,24 @@ jobs:
               integrations/*) ;;
               *) return 0 ;;
             esac
-            mkdir -p "/tmp/tenzir-docs/$(dirname "$path")"
+            mkdir -p "/tmp/tenzir-skill/$(dirname "$path")"
             curl -fsSL --retry 3 --retry-all-errors \
-              -o "/tmp/tenzir-docs/$path" "$url"
+              -o "/tmp/tenzir-skill/$path" "$url"
           }
           export -f download
           export base
 
           xargs -P 8 -n 1 -I {} bash -c 'download "$@"' _ {} < /tmp/urls.txt
-          echo "Downloaded $(find /tmp/tenzir-docs -name '*.md' | wc -l) pages"
+          echo "Downloaded $(find /tmp/tenzir-skill -name '*.md' | wc -l) pages"
 
-      - name: Rebuild tenzir-docs skill
+      - name: Rebuild tenzir skill
         shell: bash
         run: |
           set -euo pipefail
-          uv run scripts/generate-tenzir-docs-skill.py \
-            --input-dir /tmp/tenzir-docs \
+          uv run scripts/generate-tenzir-skill.py \
+            --input-dir /tmp/tenzir-skill \
             --docs-map /tmp/docs-map.md \
-            --output-dir skills/tenzir-docs
+            --output-dir skills/tenzir
 
       - name: Validate skills
         shell: bash
@@ -99,12 +99,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add -A -- skills/tenzir-docs
+          git add -A -- skills/tenzir
 
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync tenzir-docs from ${{ inputs.base_url || 'https://tenzir.com' }}"
+          commit_message: "Sync tenzir skill from ${{ inputs.base_url || 'https://tenzir.com' }}"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false
