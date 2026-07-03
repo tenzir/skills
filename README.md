@@ -26,8 +26,8 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ### 🛡️ Tenzir Users
 
-- `tenzir-docs`: Tenzir documentation — TQL, operators, functions, integrations,
-  deployment
+- `tenzir`: Tenzir documentation — TQL, operators, functions, integrations,
+  deployment — plus entry points to the changelog, blog, and product pages
 - `tenzir-manage-packages`: Package lifecycle routing for manifests, UDOs,
   pipelines, tests, and mappings
 
@@ -64,7 +64,7 @@ Install a specific skill into the current project, for example:
 ```bash
 npx skills add tenzir/skills@tenzir-commit-changes
 npx skills add tenzir/skills@tenzir-technical-writing
-npx skills add tenzir/skills@tenzir-docs
+npx skills add tenzir/skills@tenzir
 npx skills add tenzir/skills@tenzir-asim
 npx skills add tenzir/skills@tenzir-cef
 npx skills add tenzir/skills@tenzir-cim

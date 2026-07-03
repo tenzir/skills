@@ -471,13 +471,37 @@ def create_navigation_node() -> Node:
             "|---|---|",
             '| "How do I…" tasks | [Guides](guides.md) — step-by-step instructions organized by task |',
             "| Operator or function syntax | [Operator Index](reference/operators-index.md) or [Function Index](reference/functions-index.md), then the specific page |",
-            "| Integration setup (Splunk, Kafka, S3…) | [Integrations](integrations.md) — per-product setup and pipeline examples |",
+            "| Integration setup (Splunk, Kafka, S3…) | [Integrations](#integrations) — per-product setup and pipeline examples |",
             "| Concepts (nodes, pipelines, deployment) | [Explanations](explanations.md) — architecture and design |",
             "| Learning from scratch | [Tutorials](tutorials.md) — guided lessons |",
             "| TQL language rules | [Language](explanations/language.md), [Expressions](reference/expressions.md), [Statements](reference/statements.md) |",
             "",
             "Always read the relevant page before answering. Prefer TQL examples from the",
             "documentation over inventing syntax.",
+        ],
+    )
+
+
+def create_beyond_docs_node() -> Node:
+    """Create the live-site entry points section for SKILL.md.
+
+    The skill bundles only the documentation; everything else on tenzir.com
+    stays live-only so the skill and the website never drift apart."""
+    return Node(
+        heading="## Beyond the docs",
+        level=2,
+        content_lines=[
+            "",
+            "This skill bundles only the documentation. For anything else about",
+            "Tenzir, fetch these live pages on demand instead of answering from",
+            "memory:",
+            "",
+            "| Topic | Where to look |",
+            "|---|---|",
+            "| Release notes, \"when was X added/changed\" | <https://tenzir.com/changelog.md> |",
+            "| Blog posts and announcements | <https://tenzir.com/blog.md> |",
+            "| Solution use cases | <https://tenzir.com/solutions.md> |",
+            "| Company, product, events, everything else | <https://tenzir.com/llms.txt> — the full site index with per-page Markdown links |",
         ],
     )
 
@@ -792,7 +816,7 @@ def write_skill_files(
 def create_skill_frontmatter() -> str:
     return (
         "---\n"
-        "name: tenzir-docs\n"
+        "name: tenzir\n"
         "description: >-\n"
         "  Answer questions using the Tenzir documentation. Use whenever the user asks\n"
         "  about TQL syntax, pipeline operators, functions, data parsing or\n"
@@ -802,7 +826,9 @@ def create_skill_frontmatter() -> str:
         "  Tenzir feature. Also use when the user asks how to collect, route, filter,\n"
         "  aggregate, or export security data with Tenzir, or needs help writing or\n"
         "  debugging TQL pipelines, even if they don't mention 'Tenzir' explicitly but\n"
-        "  are clearly working in a Tenzir context.\n"
+        "  are clearly working in a Tenzir context. Also use for questions about\n"
+        "  Tenzir the company or product, release notes and changelog, blog posts,\n"
+        "  and solution use cases.\n"
         "---\n\n"
     )
 
@@ -819,7 +845,11 @@ def generate_skill_markdown(
         raise ValueError("Could not find the title in the docs map.")
 
     # Build the navigation and examples sections that precede the doc map.
-    preamble: list[Node] = [create_navigation_node(), create_examples_node()]
+    preamble: list[Node] = [
+        create_navigation_node(),
+        create_beyond_docs_node(),
+        create_examples_node(),
+    ]
 
     filtered_children: list[Node] = []
     for section in title_node.children:

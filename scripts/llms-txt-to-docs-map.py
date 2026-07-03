@@ -6,7 +6,7 @@
 
 The tenzir.com llms.txt indexes the whole site as flat link lists under
 ``## Docs``, ``## Integrations``, etc. The skill generator
-(generate-tenzir-docs-skill.py) instead navigates a heading-tree docs map:
+(generate-tenzir-skill.py) instead navigates a heading-tree docs map:
 ``## Guides`` sections with
 ``### <group>`` subsections, ``#### [Page](url)`` entries carrying
 descriptions and outline bullets, and ``##### [child]`` entries for catalog
