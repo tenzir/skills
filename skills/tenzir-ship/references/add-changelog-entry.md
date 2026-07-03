@@ -46,10 +46,24 @@ self-authored PRs, do not specify `--author` explicitly unless you get an error.
 When adding changelog entries for external contributions, add the GitHub
 username of the contributor.
 
+If the project config sets `omit_author: true`, do not record authors at
+all—neither via `--author`/`--co-author` flags nor by writing `authors` into
+the entry frontmatter. Validation rejects entries that carry `authors`
+metadata in such projects. Check the changelog's `config.yaml` for this
+option, or the `package.yaml` next to the changelog directory when no
+`config.yaml` exists.
+
 ### PR numbers
 
-If your branch already has an open pull request, the existing PR number will be
-auto-inferred and you don't have to do anything.
+If the project config sets `omit_pr: true`, do not record PR numbers at
+all—neither via `--pr` nor by writing `prs` into the entry frontmatter.
+Validation rejects entries that carry `prs` metadata in such projects. Check
+the changelog's `config.yaml` for this option, or the `package.yaml` next to
+the changelog directory when no `config.yaml` exists. Skip the rest of this
+section.
+
+Otherwise: if your branch already has an open pull request, the existing PR
+number will be auto-inferred and you don't have to do anything.
 
 When you are adding one or more changelog entries before creating a pull
 request, manually add the PR number to the entries after having filed the PR and
@@ -222,10 +236,24 @@ Notes:
 - Pass `--root <path/to/changelog>` to `tenzir-ship` when the changelog is
   not in the top-level directory.
 - Add `--pr <number>` only when the PR number is already known, such as in CI.
-  Otherwise rely on auto-inference or update `prs` after filing the PR.
+  Otherwise rely on auto-inference or update `prs` after filing the PR. Skip
+  PR numbers entirely when the config sets `omit_pr: true`.
 - Set `--co-author <github-username>` only to a real GitHub username for
   agent-authored entries, e.g., `claude` or `codex`.
 - For OpenAI-assisted work, use the GitHub username `codex`. For
   Anthropic-assisted work, use `claude`. Do not use product or model names.
 
 On success, remove the temporary description file.
+
+## Validate
+
+After creating or editing an entry, run validation to catch issues such as
+malformed metadata or fields the project's config forbids (`omit_pr`,
+`omit_author`):
+
+```sh
+uvx tenzir-ship validate
+```
+
+Pass the same `--root <path/to/changelog>` you used for `add`. Fix any
+reported issues before committing the entry.
