@@ -57,10 +57,18 @@ option, or the `package.yaml` next to the changelog directory when no
 
 If the project config sets `omit_pr: true`, do not record PR numbers at
 all—neither via `--pr` nor by writing `prs` into the entry frontmatter.
-Validation rejects entries that carry `prs` metadata in such projects. Check
-the changelog's `config.yaml` for this option, or the `package.yaml` next to
-the changelog directory when no `config.yaml` exists. Skip the rest of this
-section.
+The `add` command ignores explicit `--pr` values with a warning in these
+projects. Check the changelog's `config.yaml` for this option, or the
+`package.yaml` next to the changelog directory when no `config.yaml` exists.
+Skip the rest of this section.
+
+If the project config sets `require_pr: true`, every unreleased entry must
+carry `prs` metadata. Plain `validate` fails when unreleased entries are missing
+PR numbers.
+`validate --lenient` demotes only missing-PR issues to warnings so pre-push
+hooks can pass before the first pull request exists. When you see that warning,
+add the pull request number to the entry immediately after creating the pull
+request.
 
 Otherwise: if your branch already has an open pull request, the existing PR
 number will be auto-inferred and you don't have to do anything.
