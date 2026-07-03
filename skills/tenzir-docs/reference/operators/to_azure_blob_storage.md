@@ -1,5 +1,6 @@
 # to_azure_blob_storage
 
+> Writes events to one or multiple blobs in Azure Blob Storage.
 
 Writes events to one or multiple blobs in Azure Blob Storage.
 
@@ -63,7 +64,7 @@ Defaults to `5min`.
 
 A list of fields used to partition events into separate files. For every distinct combination of partition-field values, a separate file (or group of rotated files) is written. The URL must contain a `**` placeholder, which is replaced by the hive-style path `field1=value1/field2=value2/…`.
 
-The partitioning fields are **not** stripped from the written events — they remain in each record.
+The partitioning fields are **not** stripped from the written events - they remain in each record.
 
 ### `{ … }`
 
@@ -110,7 +111,7 @@ to_azure_blob_storage "abfs://my-container/logs/events_{uuid}.json",
 
 ## See Also
 
-* [`from_azure_blob_storage`](http://docs.tenzir.com/reference/operators/from_azure_blob_storage.md)
-* [`to_azure_blob_storage`](http://docs.tenzir.com/reference/operators/to_azure_blob_storage.md)
-* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
+* [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
+* [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md)
+* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

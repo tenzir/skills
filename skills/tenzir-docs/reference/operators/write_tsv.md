@@ -1,5 +1,6 @@
 # write_tsv
 
+> Transforms event stream to TSV (Tab-Separated Values) byte stream.
 
 Transforms event stream to TSV (Tab-Separated Values) byte stream.
 
@@ -43,7 +44,7 @@ x  y  z
 
 ## See Also
 
-* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
-* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)
-* [`write_ssv`](http://docs.tenzir.com/reference/operators/write_ssv.md)
-* [`write_xsv`](http://docs.tenzir.com/reference/operators/write_xsv.md)
+* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
+* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
+* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
+* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)

@@ -1,5 +1,6 @@
 # replace
 
+> Replaces literal substrings within a string.
 
 Replaces literal substrings within a string.
 
@@ -77,6 +78,6 @@ from {
 
 ## See Also
 
-* [`replace_regex`](http://docs.tenzir.com/reference/functions/replace_regex.md)
-* [`replace`](http://docs.tenzir.com/reference/operators/replace.md)
+* [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md)
+* [`replace`](https://tenzir.com/docs/reference/operators/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

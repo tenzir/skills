@@ -1,5 +1,6 @@
 # to_prometheus
 
+> Sends metric events to a Prometheus Remote Write receiver.
 
 Sends metric events to a Prometheus Remote Write receiver.
 
@@ -40,7 +41,7 @@ The default input shape is:
 
 You can use expression options such as `name=metric_name` or `labels={tenant: tenant_id}` to send existing schemas without reshaping them first.
 
-The [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md) operator can produce the default input shape with `shape="prometheus"`.
+The [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) operator can produce the default input shape with `shape="prometheus"`.
 
 The operator writes the metric-name expression as the reserved Prometheus `__name__` label. The expression defaults to the `metric` field. Providing `labels.__name__` is invalid. Samples with the same label set are batched into one time series per request, and samples in each time series are sorted by timestamp before serialization.
 
@@ -261,7 +262,7 @@ The operator currently supports scalar samples only. It does not support native 
 
 ## See Also
 
-* [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md)
-* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
 * [Collect metrics](../../guides/analytics/collect-metrics.md)
 * [Prometheus](../../integrations/prometheus.md)

@@ -1,5 +1,6 @@
 # print_cef
 
+> Prints records as Common Event Format (CEF) messages
 
 Prints records as Common Event Format (CEF) messages
 
@@ -104,8 +105,8 @@ write_syslog
 
 ## See Also
 
-* [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md)
-* [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md)
-* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
-* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
+* [`parse_cef`](https://tenzir.com/docs/reference/functions/parse_cef.md)
+* [`read_cef`](https://tenzir.com/docs/reference/operators/read_cef.md)
+* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

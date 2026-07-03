@@ -1,5 +1,6 @@
 # move
 
+> Moves values from one field to another, removing the original field.
 
 Moves values from one field to another, removing the original field.
 
@@ -37,4 +38,4 @@ move z=y, w.x=x
 
 ## See Also
 
-* [`set`](http://docs.tenzir.com/reference/operators/set.md)
+* [`set`](https://tenzir.com/docs/reference/operators/set.md)

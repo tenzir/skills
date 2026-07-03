@@ -1,5 +1,6 @@
 # Configure inputs
 
+> This guide shows you how to make packages configurable with inputs. You’ll learn how to define input variables, use templating syntax, and provide values during installation.
 
 This guide shows you how to make packages configurable with inputs. You’ll learn how to define input variables, use templating syntax, and provide values during installation.
 
@@ -49,7 +50,7 @@ Each input supports the following fields:
 | `description` | No       | Explanation of what the input controls            |
 | `default`     | No       | Default value if not provided during installation |
 
-Inputs without a default value are required—users must provide a value during installation.
+Inputs without a default value are required - users must provide a value during installation.
 
 ## Use inputs in TQL files
 
@@ -134,7 +135,7 @@ The Library shows input names, descriptions, and default values to guide users.
 
 ### package::add operator
 
-Use the [`package::add`](http://docs.tenzir.com/reference/operators/package/add.md) operator with an `inputs` record:
+Use the [`package::add`](https://tenzir.com/docs/reference/operators/package/add.md) operator with an `inputs` record:
 
 ```tql
 package::add "/path/to/package", inputs={

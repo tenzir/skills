@@ -1,9 +1,10 @@
 # Node
 
+> A node is a running process that manages and executes pipelines.
 
 A **node** is a running process that manages and executes pipelines.
 
-When a node starts, it will automatically attempt to connect to the [platform](platform.md), giving you a seamless way to manage and deploy pipelines through a web interface. However, using the platform is optional—you can also be manually manage pipelines via the node’s [REST API](https://docs.tenzir.com/reference/node/api).
+When a node starts, it will automatically attempt to connect to the [platform](platform.md), giving you a seamless way to manage and deploy pipelines through a web interface. However, using the platform is optional - you can also be manually manage pipelines via the node’s [REST API](../reference/operators/openapi.md).
 
 ## Standalone vs. Managed Pipeline Execution
 
@@ -23,6 +24,6 @@ A node can execute pipelines in two different modes: as separate subprocesses or
 
 When pipelines run as separate subprocesses, they don’t share fate with each other. If one pipeline crashes, it won’t affect other running pipelines, which improves overall reliability. This isolation also enables better scaling across available CPU cores since each pipeline can utilize cores independently. Vertically scaling a node becomes more efficient as this approach reduces pressure on the node’s internal scheduler and improves overall system responsiveness. However, subprocess execution comes with costs: each process requires its own memory space and system resources, and the system must serialize data when crossing process boundaries.
 
-In contrast, when pipelines run within the same `tenzir-node` process, they operate with less OS pressure due to running as a single process with a fixed number of threads and efficient user-level task scheduling. Pipelines can pass data directly without serialization at their boundaries, which can noticeably lower overall resource consumption. The trade-off here involves shared fate—a critical error in one pipeline could potentially affect the entire node process. Additionally, all pipelines must share the same process resources, which can create bottlenecks under heavy load and limit parallelism.
+In contrast, when pipelines run within the same `tenzir-node` process, they operate with less OS pressure due to running as a single process with a fixed number of threads and efficient user-level task scheduling. Pipelines can pass data directly without serialization at their boundaries, which can noticeably lower overall resource consumption. The trade-off here involves shared fate - a critical error in one pipeline could potentially affect the entire node process. Additionally, all pipelines must share the same process resources, which can create bottlenecks under heavy load and limit parallelism.
 
 Choose between subprocess and in-process execution based on your specific requirements for reliability, performance, and resource efficiency. You can [configure this behavior](../guides/node-setup/configure-a-node.md#configure-pipeline-subprocesses) in your node settings.

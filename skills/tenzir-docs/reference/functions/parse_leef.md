@@ -1,5 +1,6 @@
 # parse_leef
 
+> Parses a string as a LEEF message
 
 Parses a string as a LEEF message
 
@@ -144,11 +145,11 @@ output = input.parse_leef()
 
 ## See Also
 
-* [`read_leef`](http://docs.tenzir.com/reference/operators/read_leef.md)
-* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
-* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
-* [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md)
-* [`print_leef`](http://docs.tenzir.com/reference/functions/print_leef.md)
+* [`read_leef`](https://tenzir.com/docs/reference/operators/read_leef.md)
+* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
+* [`parse_cef`](https://tenzir.com/docs/reference/functions/parse_cef.md)
+* [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)
 * [IBM QRadar](../../integrations/qradar.md)
 * [Syslog](../../integrations/syslog.md)

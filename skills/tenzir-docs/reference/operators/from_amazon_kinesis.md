@@ -1,5 +1,6 @@
 # from_amazon_kinesis
 
+> Receives records from an Amazon Kinesis Data Streams stream.
 
 Receives records from an [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) stream.
 
@@ -96,7 +97,7 @@ If omitted, the operator uses `AWS_ENDPOINT_URL_KINESIS` when set, then `AWS_END
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -163,6 +164,6 @@ from_amazon_kinesis "security-events",
 
 ## See Also
 
-* [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)
+* [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
-* [Kinesis](../../integrations/amazon/kinesis.md)
+* [Amazon Kinesis](../../integrations/amazon/kinesis.md)

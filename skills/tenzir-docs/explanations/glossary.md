@@ -1,23 +1,24 @@
 # Glossary
 
+> This page defines central terms in the Tenzir ecosystem.
 
 This page defines central terms in the Tenzir ecosystem.
 
 Missing term?
 
-If you are missing a term, please open a [GitHub Discussion](https://github.com/orgs/tenzir/discussions/new?category=questions-answers) or ping us in our [Discord server](https://docs.tenzir.com/discord).
+If you are missing a term, please open a [GitHub Discussion](https://github.com/orgs/tenzir/discussions/new?category=questions-answers) or ping us in our [Discord server](https://discord.tenzir.com).
 
 ## App
 
-Web user interface to access [platform](#platform) at [app.tenzir.com](https://app.tenzir.com).
+Web user interface to access [platform](glossary.md#platform) at [app.tenzir.com](https://app.tenzir.com).
 
 The app is a web application that partially runs in the user’s browser. It is written in [Svelte](https://svelte.dev/).
 
 ## Catalog
 
-Maintains [partition](#partition) ownership and metadata.
+Maintains [partition](glossary.md#partition) ownership and metadata.
 
-The catalog is a component in the [node](#node) that owns the [partitions](#partition), keeps metadata about them, and maintains a set of sparse secondary indexes to identify relevant partitions for a given query. It offers a transactional interface for adding and removing partitions.
+The catalog is a component in the [node](glossary.md#node) that owns the [partitions](glossary.md#partition), keeps metadata about them, and maintains a set of sparse secondary indexes to identify relevant partitions for a given query. It offers a transactional interface for adding and removing partitions.
 
 ## Connector
 
@@ -35,20 +36,20 @@ Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP 
 
 ## Destination
 
-An pipeline ending with an [output](#output) operator preceded by a [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) input operator.
+An pipeline ending with an [output](glossary.md#output) operator preceded by a [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) input operator.
 
 * Learn more about [pipelines](pipeline.md)
 
 ## Edge Storage
 
-The indexed storage that pipelines can use at the [node](#node). Every node has a light-weight storage engine for importing and exporting events. You must mount the storage into the node such that it can be used from [pipelines](#pipeline) using the [`import`](http://docs.tenzir.com/reference/operators/import.md) and [`export`](http://docs.tenzir.com/reference/operators/export.md) [operators](#operator). The storage cengine comes with a [catalog](#catalog) that tracks [partitions](#partition) and keeps sparse [indexes](#index) to accelerate historical queries.
+The indexed storage that pipelines can use at the [node](glossary.md#node). Every node has a light-weight storage engine for importing and exporting events. You must mount the storage into the node such that it can be used from [pipelines](glossary.md#pipeline) using the [`import`](https://tenzir.com/docs/reference/operators/import.md) and [`export`](https://tenzir.com/docs/reference/operators/export.md) [operators](glossary.md#operator). The storage cengine comes with a [catalog](glossary.md#catalog) that tracks [partitions](glossary.md#partition) and keeps sparse [indexes](glossary.md#index) to accelerate historical queries.
 
 * [Ingest data into the node’s edge storage](../guides/edge-storage/import-into-a-node.md)
 * [Query the node’s edge storage](../guides/edge-storage/export-from-a-node.md)
 
 ## Event
 
-A record of typed data. Think of events as JSON objects, but with a richer [type system](../reference/types.md) that also has timestamps, durations, IP addresses, and more. Events have fields and can contain numerous shapes that describe its types (= the [schema](#schema)).
+A record of typed data. Think of events as JSON objects, but with a richer [type system](../reference/types.md) that also has timestamps, durations, IP addresses, and more. Events have fields and can contain numerous shapes that describe its types (= the [schema](glossary.md#schema)).
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -65,21 +66,21 @@ A format is either supported by a *parser* that converts bytes to events, or a *
 
 ## Function
 
-Computes something over a value in an [event](#event). Unlike operators that work on streams of events, functions can only act on single values.
+Computes something over a value in an [event](glossary.md#event). Unlike operators that work on streams of events, functions can only act on single values.
 
 * See available [functions](../reference/functions.md)
 
 ## Index
 
-Optional data structures for accelerating queries involving the node’s [edge storage](#edge-storage).
+Optional data structures for accelerating queries involving the node’s [edge storage](glossary.md#edge-storage).
 
-Tenzir featres in-memory *sparse* indexes that point to [partitions](#partition).
+Tenzir featres in-memory *sparse* indexes that point to [partitions](glossary.md#partition).
 
 * [Configure the catalog](../guides/node-setup/tune-performance.md#configure-the-catalog)
 
 ## Input
 
-An [operator](#operator) that only producing data, without consuming anything.
+An [operator](glossary.md#operator) that only producing data, without consuming anything.
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -89,12 +90,12 @@ A set of pipelines to integrate with a third-party product.
 
 An integration describes use cases in combination with a specific product or tool. Based on the depth of the configuration, this may require configuration on either end.
 
-* List of [all integrations](../integrations.md)
+* List of [all integrations](https://tenzir.com/integrations)
 * [Does Tenzir have an integration for *X*?](faqs.md#do-you-have-an-integration-for-x)
 
 ## Library
 
-A collection of [packages](#package).
+A collection of [packages](glossary.md#package).
 
 Our community library is [freely available at GitHub](https://github.com/tenzir/library).
 
@@ -102,18 +103,18 @@ Our community library is [freely available at GitHub](https://github.com/tenzir/
 
 An operator that reads from an external resource.
 
-A source is the dual to a [sink](#sink). It has no input and emits events or bytes into the pipeline.
+A source is the dual to a [sink](glossary.md#sink). It has no input and emits events or bytes into the pipeline.
 
 * Learn more about [pipelines](pipeline.md)
 
 ## Node
 
-A host for [pipelines](#pipeline) and storage reachable over the network.
+A host for [pipelines](glossary.md#pipeline) and storage reachable over the network.
 
 The `tenzir-node` binary starts a node in a dedicated server process that listens on TCP port 5158.
 
 * [Deploy a node](../guides/node-setup/provision-a-node.md)
-* Use the [REST API](https://docs.tenzir.com/reference/node/api) to manage a node
+* Use the [REST API](../reference/operators/openapi.md) to manage a node
 * [Import into a node](../guides/edge-storage/import-into-a-node.md)
 * [Export from a node](../guides/edge-storage/export-from-a-node.md)
 
@@ -125,21 +126,21 @@ Runtime statistics about the node and pipeline execution.
 
 ## OCSF
 
-The [Open Cybersecurity Schema Framework (OCSF)](https://schema.ocsf.io) is a cross-vendor schema for security event data. Our [community library](#library) contains packages that map data sources to OCSF.
+The [Open Cybersecurity Schema Framework (OCSF)](https://schema.ocsf.io) is a cross-vendor schema for security event data. Our [community library](glossary.md#library) contains packages that map data sources to OCSF.
 
 * [Map data to OCSF](../tutorials/map-data-to-ocsf.md)
 
 ## Operator
 
-The building block of a [pipeline](#pipeline).
+The building block of a [pipeline](glossary.md#pipeline).
 
-An operator is an [input](#input), a [transformation](#transformation), or an [output](#output).
+An operator is an [input](glossary.md#input), a [transformation](glossary.md#transformation), or an [output](glossary.md#output).
 
 * See all available [operators](../reference/operators.md)
 
 ## Output
 
-An [operator](#operator) consuming data, without producing anything.
+An [operator](glossary.md#operator) consuming data, without producing anything.
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -151,7 +152,7 @@ The acronym PaC stands for *Pipelines as Code*. It is meant as an adaptation of 
 
 ## Package
 
-A collection of [pipelines](#pipeline) and [contexts](#context).
+A collection of [pipelines](glossary.md#pipeline) and [contexts](glossary.md#context).
 
 * Read more about [packages](packages.md)
 * [Learn how to write a package](../tutorials/write-a-package.md)
@@ -160,7 +161,7 @@ A collection of [pipelines](#pipeline) and [contexts](#context).
 
 A bytes-to-events operator.
 
-A parser is the dual to a [printer](#printer). You use parsers via the `read_*` operators. There exist also [functions](#function) for applying parsers to string values.
+A parser is the dual to a [printer](glossary.md#printer). You use parsers via the `read_*` operators. There exist also [functions](glossary.md#function) for applying parsers to string values.
 
 * Learn more about [pipelines](pipeline.md)
 * See available [operators for parsing](../reference/operators.md#parsing)
@@ -168,13 +169,13 @@ A parser is the dual to a [printer](#printer). You use parsers via the `read_*` 
 
 ## Partition
 
-The horizontal scaling unit of the storage attached to a [node](#node).
+The horizontal scaling unit of the storage attached to a [node](glossary.md#node).
 
 A partition contains the raw data and optionally a set of indexes. Supported formats are [Parquet](https://parquet.apache.org) or [Feather](https://arrow.apache.org/docs/python/feather.html).
 
 ## Pipeline
 
-Combines a set of [operators](#operator) into a dataflow graph.
+Combines a set of [operators](glossary.md#operator) into a dataflow graph.
 
 * Learn more about [pipelines](pipeline.md)
 * [Run a pipeline](../guides/basic-usage/run-pipelines.md)
@@ -189,9 +190,9 @@ The control plane for nodes and pipelines, accessible at [app.tenzir.com](https:
 
 An events-to-bytes operator.
 
-A [format](#format) that translates events into bytes.
+A [format](glossary.md#format) that translates events into bytes.
 
-A printer is the dual to a [parser](#parser). Use printers via the `write_*` operators or as printing subpipelines in output operators.
+A printer is the dual to a [parser](glossary.md#parser). Use printers via the `write_*` operators or as printing subpipelines in output operators.
 
 * Learn more about [pipelines](pipeline.md)
 * See available [operators for printing](../reference/operators.md#printing)
@@ -201,7 +202,7 @@ A printer is the dual to a [parser](#parser). Use printers via the `write_*` ope
 
 An operator that writes to an external resource.
 
-A sink is the dual to a [source](#source). It consumes events or bytes from the pipeline and has no output.
+A sink is the dual to a [source](glossary.md#source). It consumes events or bytes from the pipeline and has no output.
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -213,7 +214,7 @@ A top-level record type of an event.
 
 ## Source
 
-An pipeline starting with an [input](#input) operator followed by a [`publish`](http://docs.tenzir.com/reference/operators/publish.md) output operator.
+An pipeline starting with an [input](glossary.md#input) operator followed by a [`publish`](https://tenzir.com/docs/reference/operators/publish.md) output operator.
 
 * Learn more about [pipelines](pipeline.md)
 
@@ -221,16 +222,12 @@ An pipeline starting with an [input](#input) operator followed by a [`publish`](
 
 An acronym for *Tenzir Query Language*.
 
-TQL is the language in which users write [pipelines](#pipeline).
+TQL is the language in which users write [pipelines](glossary.md#pipeline).
 
 * Learn more about the [language](language.md)
 
 ## Transformation
 
-An [operator](#operator) consuming both input and producing output.
+An [operator](glossary.md#operator) consuming both input and producing output.
 
 * Learn more about [pipelines](pipeline.md)
-
-## Contents
-
-- [Faqs](faqs.md)

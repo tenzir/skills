@@ -1,5 +1,6 @@
 # to_amqp
 
+> Sends messages to an AMQP exchange.
 
 Sends messages to an AMQP exchange.
 
@@ -111,6 +112,6 @@ to_amqp "amqp://broker/vhost", message=payload, options={
 
 ## See Also
 
-* [`from_amqp`](http://docs.tenzir.com/reference/operators/from_amqp.md)
+* [`from_amqp`](https://tenzir.com/docs/reference/operators/from_amqp.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [AMQP](../../integrations/amqp.md)

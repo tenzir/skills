@@ -1,7 +1,8 @@
 # Deduplicate events
 
+> The deduplicate operator provides a powerful mechanism to remove duplicate events in a pipeline.
 
-The [`deduplicate`](http://docs.tenzir.com/reference/operators/deduplicate.md) operator provides a powerful mechanism to remove duplicate events in a pipeline.
+The [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) operator provides a powerful mechanism to remove duplicate events in a pipeline.
 
 There are numerous use cases for deduplication, such as reducing noise, optimizing costs and making threat detection and response more efficient.
 
@@ -176,7 +177,7 @@ A high suppression count indicates persistent activity from a specific source, s
 
 1. **Choose fields carefully**: Deduplicate on fields that truly identify unique events for your use case. Too few fields may drop important events; too many may not deduplicate effectively.
 
-2. **Consider order**: The [`deduplicate`](http://docs.tenzir.com/reference/operators/deduplicate.md) operator keeps the *first* occurrence. If you need the latest, consider using [`reverse`](http://docs.tenzir.com/reference/operators/reverse.md) first:
+2. **Consider order**: The [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) operator keeps the *first* occurrence. If you need the latest, consider using [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md) first:
 
    ```tql
    reverse | deduplicate user | reverse
@@ -184,7 +185,7 @@ A high suppression count indicates persistent activity from a specific source, s
 
 3. **Use timeout wisely**: For streaming data, `create_timeout` prevents memory from growing indefinitely while still reducing noise. Choose durations based on your threat detection windows.
 
-4. **Combine with other operators**: Often you’ll want to filter ([`where`](http://docs.tenzir.com/reference/operators/where.md)) or transform ([`set`](http://docs.tenzir.com/reference/operators/set.md)) data before deduplication to normalize keys:
+4. **Combine with other operators**: Often you’ll want to filter ([`where`](https://tenzir.com/docs/reference/operators/where.md)) or transform ([`set`](https://tenzir.com/docs/reference/operators/set.md)) data before deduplication to normalize keys:
 
    ```tql
    normalized_ip = src_ip.string()
@@ -209,7 +210,7 @@ If you’re familiar with [Cribl’s Suppress function](https://docs.cribl.io/st
 
 Tenzir’s `deduplicate` offers several advantages:
 
-* **Flexible deduplication modes**: Beyond time-based windows, Tenzir supports position-based deduplication via `distance`—useful when event order matters more than wall-clock time.
+* **Flexible deduplication modes**: Beyond time-based windows, Tenzir supports position-based deduplication via `distance` - useful when event order matters more than wall-clock time.
 * **Precise timeout control**: Three distinct timeout types (`create_timeout`, `write_timeout`, `read_timeout`) give you fine-grained control over when suppression state resets.
 * **No arbitrary defaults**: Tenzir doesn’t impose a default timeout, letting you choose the right behavior for your use case rather than inheriting a 30-second window you might not want.
 * **Explicit is better**: The `count_field` parameter makes suppression tracking opt-in, keeping your schema clean when you don’t need it.

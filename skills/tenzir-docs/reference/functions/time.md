@@ -1,5 +1,6 @@
 # time
 
+> Casts an expression to a time value.
 
 Casts an expression to a time value.
 
@@ -20,7 +21,7 @@ The function accepts timestamps in the following formats:
 The general form is `YYYY-MM-DD`, optionally followed by a time component:
 
 | Component        | Format                    | Example                      |
-| :--------------- | :------------------------ | :--------------------------- |
+| ---------------- | ------------------------- | ---------------------------- |
 | Date             | `YYYY-MM-DD`              | `2024-01-15`                 |
 | Year and month   | `YYYY-MM`                 | `2024-01`                    |
 | Date and hour    | `YYYY-MM-DD⊔HH`           | `2024-01-15T10`              |
@@ -36,7 +37,7 @@ The date-time separator `⊔` can be `T`, a space, or `+`. Missing time componen
 Timestamps can end with a timezone offset:
 
 | Format     | Example            |
-| :--------- | :----------------- |
+| ---------- | ------------------ |
 | UTC        | `Z`                |
 | With colon | `+02:00`, `-05:30` |
 | Without    | `+0200`, `-0530`   |
@@ -47,19 +48,19 @@ Timestamps can end with a timezone offset:
 Prefix a Unix epoch value with `@`:
 
 | Format     | Example           |
-| :--------- | :---------------- |
+| ---------- | ----------------- |
 | Seconds    | `@1705316445`     |
 | Fractional | `@1705316445.123` |
 
 #### Relative time expressions
 
 | Format        | Example                   |
-| :------------ | :------------------------ |
+| ------------- | ------------------------- |
 | Current time  | `now`                     |
 | Future offset | `now + 1h`, `in 2d`       |
 | Past offset   | `now - 30min`, `5min ago` |
 
-For timestamps in non-standard formats, use [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md) with an explicit format string.
+For timestamps in non-standard formats, use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with an explicit format string.
 
 ## Examples
 
@@ -168,13 +169,13 @@ timestamp = timestamp.time()
 
 ## See Also
 
-* [`format_time`](http://docs.tenzir.com/reference/functions/format_time.md)
-* [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md)
-* [`duration`](http://docs.tenzir.com/reference/functions/duration.md)
-* [`float`](http://docs.tenzir.com/reference/functions/float.md)
-* [`int`](http://docs.tenzir.com/reference/functions/int.md)
-* [`ip`](http://docs.tenzir.com/reference/functions/ip.md)
-* [`string`](http://docs.tenzir.com/reference/functions/string.md)
-* [`subnet`](http://docs.tenzir.com/reference/functions/subnet.md)
-* [`uint`](http://docs.tenzir.com/reference/functions/uint.md)
+* [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md)
+* [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)
+* [`duration`](https://tenzir.com/docs/reference/functions/duration.md)
+* [`float`](https://tenzir.com/docs/reference/functions/float.md)
+* [`int`](https://tenzir.com/docs/reference/functions/int.md)
+* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
+* [`string`](https://tenzir.com/docs/reference/functions/string.md)
+* [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
+* [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

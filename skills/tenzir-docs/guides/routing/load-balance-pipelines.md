@@ -1,7 +1,8 @@
 # Load-balance pipelines
 
+> This guide shows you how to distribute events across multiple destinations using the loadbalance operator. You’ll learn to route events to multiple endpoints for high availability and throughput.
 
-This guide shows you how to distribute events across multiple destinations using the [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md) operator. You’ll learn to route events to multiple endpoints for high availability and throughput.
+This guide shows you how to distribute events across multiple destinations using the [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md) operator. You’ll learn to route events to multiple endpoints for high availability and throughput.
 
 ## How load balancing works
 
@@ -97,11 +98,11 @@ Use `load_balance` when you need to:
 
 ### Comparison with other operators
 
-| Operator                                                                     | Behavior                        | Use case                       |
-| ---------------------------------------------------------------------------- | ------------------------------- | ------------------------------ |
-| [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md) | Events go to exactly one target | Throughput scaling, HA         |
-| [`fork`](http://docs.tenzir.com/reference/operators/fork.md)                 | Events copied to all targets    | Parallel processing, archiving |
-| [`publish`](http://docs.tenzir.com/reference/operators/publish.md)           | Events go to all subscribers    | Fan-out to pipelines           |
+| Operator                                                                      | Behavior                        | Use case                       |
+| ----------------------------------------------------------------------------- | ------------------------------- | ------------------------------ |
+| [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md) | Events go to exactly one target | Throughput scaling, HA         |
+| [`fork`](https://tenzir.com/docs/reference/operators/fork.md)                 | Events copied to all targets    | Parallel processing, archiving |
+| [`publish`](https://tenzir.com/docs/reference/operators/publish.md)           | Events go to all subscribers    | Fan-out to pipelines           |
 
 ## Requirements
 
@@ -111,5 +112,5 @@ The nested pipeline inside `load_balance` must end with a sink operator. The con
 
 * [Send to destinations](send-to-destinations.md)
 * [Split and merge streams](split-and-merge-streams.md)
-* [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md)
-* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
+* [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)

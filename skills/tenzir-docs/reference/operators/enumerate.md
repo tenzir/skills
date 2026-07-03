@@ -1,5 +1,6 @@
 # enumerate
 
+> Add a field with the number of preceding events.
 
 Add a field with the number of preceding events.
 

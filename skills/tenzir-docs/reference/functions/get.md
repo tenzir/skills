@@ -1,5 +1,6 @@
 # get
 
+> Gets a field from a record or an element from a list.
 
 Gets a field from a record or an element from a list.
 
@@ -60,5 +61,5 @@ select x = this.get("x", -1), y = this.get("y", -1)
 
 ## See Also
 
-* [`keys`](http://docs.tenzir.com/reference/functions/keys.md)
+* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

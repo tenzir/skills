@@ -2,7 +2,6 @@
 
 > Learn how to migrate legacy TQL pipelines to Tenzir v6, adopt the new execution patterns, and use temporary compatibility controls while you update.
 
-
 This guide shows you how to migrate legacy TQL pipelines to Tenzir v6. For most pipelines, the upgrade is small: many pipelines keep working as-is, and others need only a few local updates to sources and sinks. The sections that follow help you find the pipelines that do need attention and update them without changing the intent of your data flow.
 
 Starting with the Tenzir v6 release candidate, the new engine is the default for pipelines. The legacy engine is still available during a temporary migration window, but it is deprecated in v6 and will be removed after the window closes.
@@ -74,7 +73,7 @@ The most important migration change is the move away from old byte-stream source
 
 #### Sources
 
-Message brokers now use event-based source operators. For example, [`from_amqp`](http://docs.tenzir.com/reference/operators/from_amqp.md) emits one event per Kafka message with the message payload in the `message` field:
+Message brokers now use event-based source operators. For example, [`from_amqp`](https://tenzir.com/docs/reference/operators/from_amqp.md) emits one event per Kafka message with the message payload in the `message` field:
 
 ```tql
 from_amqp "amqp://broker/vhost"
@@ -97,7 +96,7 @@ This differs from `save_amqp`, which expected a byte stream that it would send a
 
 ### Parsing and printing subpipelines
 
-Operators that read or write bytes use subpipelines to keep transport and data format separate. Source operators such as [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) and [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) receive bytes and use a parsing subpipeline:
+Operators that read or write bytes use subpipelines to keep transport and data format separate. Source operators such as [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) and [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) receive bytes and use a parsing subpipeline:
 
 ```tql
 from_http "https://example.com/events.json.gz" {
@@ -106,7 +105,7 @@ from_http "https://example.com/events.json.gz" {
 }
 ```
 
-Sink operators such as [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md) and [`serve_tcp`](http://docs.tenzir.com/reference/operators/serve_tcp.md) receive events and use a printing subpipeline:
+Sink operators such as [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md) and [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md) receive events and use a printing subpipeline:
 
 ```tql
 export
@@ -117,7 +116,7 @@ to_tcp "collector.example.com:5044" {
 
 ### Per-event subpipelines
 
-Use [`each`](http://docs.tenzir.com/reference/operators/each.md) when every incoming event describes a separate job. The current input event is available as `$this`, and the nested pipeline starts with its own source:
+Use [`each`](https://tenzir.com/docs/reference/operators/each.md) when every incoming event describes a separate job. The current input event is available as `$this`, and the nested pipeline starts with its own source:
 
 ```tql
 from {url: "https://example.com/a.json"},
@@ -153,14 +152,14 @@ Prefer `from_file` and `to_file` for URI-style file access. Use provider-specifi
 
 ### Unix domain sockets
 
-The dedicated Unix domain socket operators replace the previous `uds=true` options on [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) and [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md). Keep [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) and [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md) for regular filesystem and object-storage access.
+The dedicated Unix domain socket operators replace the previous `uds=true` options on [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) and [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md). Keep [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) and [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md) for regular filesystem and object-storage access.
 
 | Previous v6 syntax                       | Use instead                           |
 | ---------------------------------------- | ------------------------------------- |
 | `from_file "/run/source.sock", uds=true` | `from_unix_socket "/run/source.sock"` |
 | `to_file "/run/sink.sock", uds=true`     | `to_unix_socket "/run/sink.sock"`     |
 
-Use [`from_unix_socket`](http://docs.tenzir.com/reference/operators/from_unix_socket.md) and [`to_unix_socket`](http://docs.tenzir.com/reference/operators/to_unix_socket.md) when Tenzir connects to an existing Unix domain socket. Use [`accept_unix_socket`](http://docs.tenzir.com/reference/operators/accept_unix_socket.md) when Tenzir owns the listening socket path for incoming streams.
+Use [`from_unix_socket`](https://tenzir.com/docs/reference/operators/from_unix_socket.md) and [`to_unix_socket`](https://tenzir.com/docs/reference/operators/to_unix_socket.md) when Tenzir connects to an existing Unix domain socket. Use [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md) when Tenzir owns the listening socket path for incoming streams.
 
 ### HTTP and message brokers
 
@@ -260,7 +259,7 @@ The old `to` operator (no suffix) accepted a URI and dispatched to the appropria
 | `sqs`                              | `to_amazon_sqs`             |
 | `tcp`                              | `to_tcp` or `serve_tcp`     |
 | `udp`                              | `to_udp`                    |
-| `smtp`, `smtps`, `mailto`, `email` | No replacement — see below. |
+| `smtp`, `smtps`, `mailto`, `email` | No replacement - see below. |
 
 Move any printing steps that preceded the old `to` call into a printing subpipeline on the new operator. For TCP, use `to_tcp` when connecting to a remote endpoint and `serve_tcp` when clients connect to receive output. Email schemes (`smtp`, `smtps`, `mailto`, `email`) have no direct replacement; use the `python` or `shell` operator to send email instead.
 
@@ -571,7 +570,7 @@ to_google_cloud_pubsub project_id="acme", topic_id="events", message=this.print_
 
 #### SQS
 
-In compatibility mode, the legacy operators keep the names `load_sqs` and `save_sqs`. When you migrate SQS pipelines to the v6 new executor, use the vendor-qualified [`from_amazon_sqs`](http://docs.tenzir.com/reference/operators/from_amazon_sqs.md) and [`to_amazon_sqs`](http://docs.tenzir.com/reference/operators/to_amazon_sqs.md) operators.
+In compatibility mode, the legacy operators keep the names `load_sqs` and `save_sqs`. When you migrate SQS pipelines to the v6 new executor, use the vendor-qualified [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md) and [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md) operators.
 
 ##### Consume
 
@@ -780,12 +779,12 @@ to_http "https://collector.example.com/events" {
 
 ## See Also
 
-* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
-* [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md)
-* [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
-* [`each`](http://docs.tenzir.com/reference/operators/each.md)
-* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
-* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
+* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
+* [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)
+* [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
+* [`each`](https://tenzir.com/docs/reference/operators/each.md)
+* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
 * [Fetch via HTTP and APIs](collecting/fetch-via-http-and-apis.md)
 * [Read from message brokers](collecting/read-from-message-brokers.md)
 * [Read and watch files](collecting/read-and-watch-files.md)

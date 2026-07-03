@@ -1,5 +1,6 @@
 # write_syslog
 
+> Writes events as syslog.
 
 Writes events as syslog.
 
@@ -81,6 +82,6 @@ write_syslog
 
 ## See Also
 
-* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
-* [`parse_syslog`](http://docs.tenzir.com/reference/functions/parse_syslog.md)
+* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
+* [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md)
 * [Syslog](../../integrations/syslog.md)

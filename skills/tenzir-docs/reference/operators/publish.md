@@ -1,5 +1,6 @@
 # publish
 
+> Publishes events to a channel with a topic.
 
 Publishes events to a channel with a topic.
 
@@ -9,7 +10,7 @@ publish [topic:string]
 
 ## Description
 
-The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) operators on that topic receive the events immediately.
+The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operators on that topic receive the events immediately.
 
 Note
 
@@ -44,8 +45,8 @@ publish f"suricata.{event_type}"
 
 ## See Also
 
-* [`import`](http://docs.tenzir.com/reference/operators/import.md)
-* [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md)
+* [`import`](https://tenzir.com/docs/reference/operators/import.md)
+* [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/routing/split-and-merge-streams.md)
 * [Write a package](../../tutorials/write-a-package.md)

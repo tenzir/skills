@@ -1,5 +1,6 @@
 # encode_hex
 
+> Encodes bytes into their hexadecimal representation.
 
 Encodes bytes into their hexadecimal representation.
 
@@ -30,5 +31,5 @@ encoded = bytes.encode_hex()
 
 ## See Also
 
-* [`decode_hex`](http://docs.tenzir.com/reference/functions/decode_hex.md)
+* [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

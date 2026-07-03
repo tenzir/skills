@@ -1,5 +1,6 @@
 # parse_xml
 
+> Parses a string as XML and extracts elements matching an XPath expression.
 
 Parses a string as XML and extracts elements matching an XPath expression.
 
@@ -26,12 +27,12 @@ Defaults to `"/*"`, which selects all immediate children of the root element.
 
 Common XPath patterns:
 
-* `"//book"` — selects all `<book>` elements anywhere in the document
-* `"/catalog/book"` — selects `<book>` elements that are direct children of `<catalog>`
-* `"//book[1]"` — selects the first `<book>` element
-* `"//book[last()]"` — selects the last `<book>` element
-* `"//book[@category]"` — selects `<book>` elements that have a `category` attribute
-* `"//book[@category='fiction']"` — selects `<book>` elements with a specific attribute value
+* `"//book"` - selects all `<book>` elements anywhere in the document
+* `"/catalog/book"` - selects `<book>` elements that are direct children of `<catalog>`
+* `"//book[1]"` - selects the first `<book>` element
+* `"//book[last()]"` - selects the last `<book>` element
+* `"//book[@category]"` - selects `<book>` elements that have a `category` attribute
+* `"//book[@category='fiction']"` - selects `<book>` elements with a specific attribute value
 
 ### `attr_prefix = string (optional)`
 
@@ -96,8 +97,8 @@ Controls how XML namespace prefixes are handled.
 
 Defaults to `"strip"`.
 
-* `"strip"` — removes namespace prefixes from element and attribute names
-* `"keep"` — preserves namespace prefixes in names
+* `"strip"` - removes namespace prefixes from element and attribute names
+* `"keep"` - preserves namespace prefixes in names
 
 ### `raw = bool (optional)`
 
@@ -361,7 +362,7 @@ output = xml.parse_xml(xpath="/record", key_attr="name")
 
 ## See Also
 
-* [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md)
-* [`parse_json`](http://docs.tenzir.com/reference/functions/parse_json.md)
-* [`parse_yaml`](http://docs.tenzir.com/reference/functions/parse_yaml.md)
-* [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
+* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
+* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
+* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)

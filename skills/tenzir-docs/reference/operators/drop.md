@@ -1,5 +1,6 @@
 # drop
 
+> Removes fields from the event.
 
 Removes fields from the event.
 
@@ -40,7 +41,7 @@ drop role, info.id
 
 ## See Also
 
-* [`select`](http://docs.tenzir.com/reference/operators/select.md)
-* [`where`](http://docs.tenzir.com/reference/operators/where.md)
+* [`select`](https://tenzir.com/docs/reference/operators/select.md)
+* [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

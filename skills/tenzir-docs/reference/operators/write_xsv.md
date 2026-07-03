@@ -1,5 +1,6 @@
 # write_xsv
 
+> Transforms event stream to XSV byte stream.
 
 Transforms event stream to XSV byte stream.
 
@@ -13,11 +14,11 @@ The [`xsv`](https://en.wikipedia.org/wiki/Delimiter-separated_values) format is 
 
 The following table lists existing XSV configurations:
 
-| Format                                                           | Field Separator | List Separator | Null Value |
-| ---------------------------------------------------------------- | :-------------: | :------------: | :--------: |
-| [`csv`](http://docs.tenzir.com/reference/operators/write_csv.md) |       `,`       |       `;`      |    empty   |
-| [`ssv`](http://docs.tenzir.com/reference/operators/write_ssv.md) |    `<space>`    |       `,`      |     `-`    |
-| [`tsv`](http://docs.tenzir.com/reference/operators/write_tsv.md) |       `\t`      |       `,`      |     `-`    |
+| Format                                                            | Field Separator | List Separator | Null Value |
+| ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
+| [`csv`](https://tenzir.com/docs/reference/operators/write_csv.md) | `,`             | `;`            | empty      |
+| [`ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md) | `<space>`       | `,`            | `-`        |
+| [`tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md) | `\t`            | `,`            | `-`        |
 
 Note that nested records have dot-separated field names.
 
@@ -51,8 +52,8 @@ x/y/z
 
 ## See Also
 
-* [`print_xsv`](http://docs.tenzir.com/reference/functions/print_xsv.md)
-* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
-* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)
-* [`write_ssv`](http://docs.tenzir.com/reference/operators/write_ssv.md)
-* [`write_tsv`](http://docs.tenzir.com/reference/operators/write_tsv.md)
+* [`print_xsv`](https://tenzir.com/docs/reference/functions/print_xsv.md)
+* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
+* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
+* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
+* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)

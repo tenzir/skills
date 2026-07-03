@@ -1,5 +1,6 @@
 # accept_tcp
 
+> Listens for incoming TCP or TLS connections and receives events.
 
 Listens for incoming TCP or TLS connections and receives events.
 
@@ -68,7 +69,7 @@ The pipeline to run for each individual TCP connection. If none is specified, no
 Inside the pipeline, the `$peer` variable is available as a record with the following fields:
 
 | Field      | Type     | Description                                     |
-| :--------- | :------- | :---------------------------------------------- |
+| ---------- | -------- | ----------------------------------------------- |
 | `ip`       | `ip`     | The IP address of the connected peer.           |
 | `port`     | `int64`  | The port number of the connected peer.          |
 | `hostname` | `string` | The reverse-DNS hostname of the connected peer. |
@@ -122,8 +123,8 @@ Use this mode when you migrate clients from plaintext TCP to TLS and need to kee
 
 ## See Also
 
-* [`from_tcp`](http://docs.tenzir.com/reference/operators/from_tcp.md)
-* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
-* [`serve_tcp`](http://docs.tenzir.com/reference/operators/serve_tcp.md)
-* [`accept_unix_socket`](http://docs.tenzir.com/reference/operators/accept_unix_socket.md)
+* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md)
+* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
+* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
+* [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md)
 * [TCP](../../integrations/tcp.md)

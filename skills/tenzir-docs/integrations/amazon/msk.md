@@ -1,17 +1,18 @@
-# MSK
+# Amazon MSK integration
 
+> Publish and subscribe to Amazon's managed Kafka service.
 
 [Amazon Managed Streaming for Apache Kafka (Amazon MSK)](https://aws.amazon.com/msk/) is a managed Kafka service on AWS. It handles infrastructure and operations, making it easier to run Kafka applications and Kafka Connect connectors without becoming a Kafka expert.
 
 ## Sending and Receiving
 
-Tenzir’s Kafka operators [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md) and [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md) can send and receive events from Amazon MSK Clusters.
+Tenzir’s Kafka operators [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) and [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md) can send and receive events from Amazon MSK Clusters.
 
 ## Authentication
 
 Provisioned MSK Clusters support different authentication mechanisms such as mTLS, SASL/SCRAM, IAM etc. However Serverless MSK instances currently only support IAM Authentication.
 
-The [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md) and [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md) operators can authenticate with MSK using AWS IAM by simply specifying the `aws_iam` option with a record of configuration values such as:
+The [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) and [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md) operators can authenticate with MSK using AWS IAM by simply specifying the `aws_iam` option with a record of configuration values such as:
 
 ```tql
 from_kafka "kafkaesque-data", aws_iam={region: "eu-west-1"}, options={

@@ -1,5 +1,6 @@
 # match_regex
 
+> Checks if a string partially matches a regular expression.
 
 Checks if a string partially matches a regular expression.
 
@@ -57,8 +58,8 @@ output = input.match_regex("^[E|e]xample[!]?$")
 
 ## See Also
 
-* [`replace_regex`](http://docs.tenzir.com/reference/functions/replace_regex.md)
-* [`split_regex`](http://docs.tenzir.com/reference/functions/split_regex.md)
-* [`starts_with`](http://docs.tenzir.com/reference/functions/starts_with.md)
-* [`ends_with`](http://docs.tenzir.com/reference/functions/ends_with.md)
+* [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md)
+* [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md)
+* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
+* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

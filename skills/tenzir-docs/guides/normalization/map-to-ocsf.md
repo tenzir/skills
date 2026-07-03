@@ -1,5 +1,6 @@
 # Map to OCSF
 
+> This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.
 
 This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.
 
@@ -127,8 +128,8 @@ $event = {...$event.ocsf, unmapped: $event.panos}
 * **Use `move`**: Transfer fields with `move` to simultaneously assign and remove from source, for example `$event.ocsf.time = move $event.panos.time_generated`.
 * **Only use `drop` for multi-use fields**: When a field appears in multiple mappings, drop it after the last use. Prefer `move` and single assignments.
 * **Keep unmapped residue**: Fields left under the source namespace still need review or an intentional decision to preserve source-specific data.
-* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) expand the minimal event before validation.
-* **Validate the result**: Run [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) after the mapper returns the OCSF event.
+* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) expand the minimal event before validation.
+* **Validate the result**: Run [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) and [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) after the mapper returns the OCSF event.
 
 Why use `$event`?
 
@@ -273,9 +274,9 @@ ocsf::cast
 
 ### Validation gate
 
-The [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) operator is the primary schema validation gate. It ensures that your mapping produces schema-compliant output.
+The [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) operator is the primary schema validation gate. It ensures that your mapping produces schema-compliant output.
 
-Your mapping is complete once [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) no longer emits warnings.
+Your mapping is complete once [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) no longer emits warnings.
 
 ## See also
 

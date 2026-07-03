@@ -1,5 +1,6 @@
 # from_velociraptor
 
+> Submits VQL to a Velociraptor server and returns the response as events.
 
 Submits VQL to a Velociraptor server and returns the response as events.
 

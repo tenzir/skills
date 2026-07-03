@@ -1,5 +1,6 @@
 # print_tsv
 
+> Prints a record as a tab-separated string of values.
 
 Prints a record as a tab-separated string of values.
 
@@ -9,7 +10,7 @@ print_tsv(input:record, [list_separator=str, null_value=str]) -> string
 
 ## Description
 
-The `print_tsv` function prints a record's values as a tab separated string.
+The `print_tsv` function prints a record’s values as a tab separated string.
 
 ### `input: record`
 
@@ -19,13 +20,13 @@ The record you want to print.
 
 The string separating the elements in list fields.
 
-Defaults to `","`.
+Defaults to `“,”`.
 
 ### `null_value = str (optional)`
 
 The string denoting an absent value.
 
-Defaults to `"-"`.
+Defaults to `“-”`.
 
 ## Examples
 
@@ -49,5 +50,5 @@ output = this.print_tsv()
 
 ## See Also
 
-* [`write_tsv`](http://docs.tenzir.com/reference/operators/write_tsv.md)
-* [`parse_tsv`](http://docs.tenzir.com/reference/functions/parse_tsv.md)
+* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
+* [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md)

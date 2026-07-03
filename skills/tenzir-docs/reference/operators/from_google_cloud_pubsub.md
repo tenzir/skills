@@ -1,5 +1,6 @@
 # from_google_cloud_pubsub
 
+> Subscribes to a Google Cloud Pub/Sub subscription and yields events.
 
 Subscribes to a Google Cloud Pub/Sub subscription and yields events.
 
@@ -65,5 +66,5 @@ from_google_cloud_pubsub project_id="amazing-project-123456", subscription_id="m
 
 ## See Also
 
-* [`to_google_cloud_pubsub`](http://docs.tenzir.com/reference/operators/to_google_cloud_pubsub.md)
-* [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+* [`to_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub.md)
+* [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

@@ -1,5 +1,6 @@
-# Node Configuration
+# Configuration
 
+> The below example configuration ships with every Tenzir package. Head over to the explanation of the configuration for details on how the various settings work.
 
 The below example configuration ships with every Tenzir package. Head over to the [explanation of the configuration](../../explanations/configuration.md) for details on how the various settings work.
 
@@ -746,7 +747,3 @@ caf:
     # Colon-separated list of OpenSSL cipher strings to use.
     cipher-list:
 ```
-
-## Contents
-
-- [Helm-chart](helm-chart.md)

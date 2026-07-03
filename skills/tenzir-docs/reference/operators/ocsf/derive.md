@@ -1,5 +1,6 @@
 # ocsf::derive
 
+> Automatically assigns enum strings from their integer counterparts and vice versa.
 
 Automatically assigns enum strings from their integer counterparts and vice versa.
 
@@ -116,7 +117,7 @@ warning: found inconsistency between `activity_id` and `activity_name`
 
 ## See Also
 
-* [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
-* [`ocsf::trim`](http://docs.tenzir.com/reference/operators/ocsf/trim.md)
+* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md)
 * [Map to OCSF](../../../guides/normalization/map-to-ocsf.md)
 * [Map data to OCSF](../../../tutorials/map-data-to-ocsf.md)

@@ -1,7 +1,8 @@
 # Run tests
 
+> This guide shows you how to run existing integration tests with the tenzir-test framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
 
-This guide shows you how to run existing integration tests with the [`tenzir-test`](http://docs.tenzir.com/reference/test-framework.md) framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
+This guide shows you how to run existing integration tests with the [`tenzir-test`](https://tenzir.com/docs/reference/test-framework.md) framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
 
 When you’re ready to create your own tests, see the [write tests](write-tests.md) guide.
 
@@ -61,7 +62,7 @@ Use `--match` to select tests whose relative path contains a given substring:
 uvx tenzir-test --match context
 ```
 
-Bare strings without glob metacharacters perform a **substring match** against the test’s relative POSIX path from the project root. For example, `--match mysql` matches any test whose path contains `mysql`, such as `tests/mysql/connect.tql`. This means you no longer need to wrap the keyword in wildcards---`--match mysql` works the same as `--match "*mysql*"`.
+Bare strings without glob metacharacters perform a **substring match** against the test’s relative POSIX path from the project root. For example, `--match mysql` matches any test whose path contains `mysql`, such as `tests/mysql/connect.tql`. This means you no longer need to wrap the keyword in wildcards—`--match mysql` works the same as `--match "*mysql*"`.
 
 Patterns containing `*`, `?`, or `[` still use [fnmatch](https://docs.python.org/3/library/fnmatch.html) glob syntax with case-sensitive comparison, so existing glob patterns continue to work:
 
@@ -69,7 +70,7 @@ Patterns containing `*`, `?`, or `[` still use [fnmatch](https://docs.python.org
 uvx tenzir-test --match 'tests/*/connect.tql'
 ```
 
-Multiple patterns act as an OR filter---a test runs if it matches any pattern:
+Multiple patterns act as an OR filter—a test runs if it matches any pattern:
 
 ```sh
 uvx tenzir-test --match create --match update
@@ -141,7 +142,7 @@ Pass `--run-skipped` to bypass all skip configuration unconditionally and force 
 uvx tenzir-test --run-skipped
 ```
 
-Both static skips (`skip: reason`) and conditional skips (`skip: {on: fixture-unavailable}`) are bypassed. This is the sledgehammer approach---useful when you want to verify that every skipped test still works.
+Both static skips (`skip: reason`) and conditional skips (`skip: {on: fixture-unavailable}`) are bypassed. This is the sledgehammer approach—useful when you want to verify that every skipped test still works.
 
 ### Filter by skip reason
 
@@ -154,7 +155,7 @@ uvx tenzir-test --run-skipped-reason '*docker*'
 
 Bare strings match as substrings, and patterns containing `*`, `?`, or `[` use fnmatch syntax. The match applies to the final displayed skip reason, which includes the `fixture unavailable:` prefix for conditional skips. For example, a suite with `skip: {on: fixture-unavailable, reason: requires docker}` produces the displayed reason `fixture unavailable: requires docker`, and `--run-skipped-reason docker` matches it as a substring.
 
-The flag is repeatable---a skipped test runs if its reason matches any provided pattern:
+The flag is repeatable—a skipped test runs if its reason matches any provided pattern:
 
 ```sh
 uvx tenzir-test --run-skipped-reason maintenance --run-skipped-reason '*docker*'
@@ -189,11 +190,3 @@ Here `example-library` contains multiple packages, so the harness loads them all
 ## Automate runs
 
 Once the suite passes locally, integrate it into your CI pipeline. Configure the job to install Python 3.12, install `tenzir-test`, provision or download the required Tenzir binaries, and execute `uvx tenzir-test --root .`. For reproducible results, keep your datasets small and deterministic, and prefer fixtures that wipe state between runs.
-
-## Contents
-
-- [Write-tests](write-tests.md)
-- [Run-fixtures](run-fixtures.md)
-- [Create-fixtures](create-fixtures.md)
-- [Add-custom-runners](add-custom-runners.md)
-- [Configure-project-hooks](configure-project-hooks.md)

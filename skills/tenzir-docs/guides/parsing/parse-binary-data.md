@@ -1,9 +1,10 @@
 # Parse binary data
 
+> This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
 
 This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
 
-The examples use [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
+The examples use [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
 
 ## Parquet
 
@@ -27,11 +28,11 @@ Parquet files often come from cloud storage:
 from_file "s3://datalake/events/*.parquet"
 ```
 
-The [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) operator automatically detects Parquet format from the file extension.
+The [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) operator automatically detects Parquet format from the file extension.
 
 ## Feather
 
-[Apache Feather](https://arrow.apache.org/docs/python/feather.html) is Parquet’s little brother—a lightweight columnar format optimized for fast I/O:
+[Apache Feather](https://arrow.apache.org/docs/python/feather.html) is Parquet’s little brother - a lightweight columnar format optimized for fast I/O:
 
 ```tql
 from_file "data.feather" {
@@ -39,11 +40,11 @@ from_file "data.feather" {
 }
 ```
 
-Use [`read_feather`](http://docs.tenzir.com/reference/operators/read_feather.md) to parse Feather files.
+Use [`read_feather`](https://tenzir.com/docs/reference/operators/read_feather.md) to parse Feather files.
 
 ## PCAP
 
-[PCAP](https://wiki.wireshark.org/Development/LibpcapFileFormat) is the standard format for packet captures. Use [`read_pcap`](http://docs.tenzir.com/reference/operators/read_pcap.md) to parse captured packets:
+[PCAP](https://wiki.wireshark.org/Development/LibpcapFileFormat) is the standard format for packet captures. Use [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) to parse captured packets:
 
 ```tql
 from_file "capture.pcap" {
@@ -55,7 +56,7 @@ from_file "capture.pcap" {
 {linktype: 1, timestamp: 2024-01-15T10:30:45.123456Z, captured_packet_length: 74, original_packet_length: 74, data: "ABY88f1tZJ7zvttmCABFAAA8..."}
 ```
 
-Use [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md) to parse directly from a live interface. TQL also includes lightweight packet processing functions. For example, you can extract protocol headers from raw packet data using the [`decapsulate`](http://docs.tenzir.com/reference/functions/decapsulate.md) function:
+Use [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md) to parse directly from a live interface. TQL also includes lightweight packet processing functions. For example, you can extract protocol headers from raw packet data using the [`decapsulate`](https://tenzir.com/docs/reference/functions/decapsulate.md) function:
 
 ```tql
 from_file "capture.pcap" {
@@ -70,7 +71,7 @@ packet = decapsulate(this)
 
 ## BITZ
 
-BITZ, short for **Bi**nary **T**en**z**ir, is Tenzir’s native columnar format, optimized for schema-rich security data. Use [`read_bitz`](http://docs.tenzir.com/reference/operators/read_bitz.md) to parse it. Use [`write_bitz`](http://docs.tenzir.com/reference/operators/write_bitz.md) to serialize events into the same format for later reuse:
+BITZ, short for **Bi**nary **T**en**z**ir, is Tenzir’s native columnar format, optimized for schema-rich security data. Use [`read_bitz`](https://tenzir.com/docs/reference/operators/read_bitz.md) to parse it. Use [`write_bitz`](https://tenzir.com/docs/reference/operators/write_bitz.md) to serialize events into the same format for later reuse:
 
 ```tql
 from_file "archive.bitz" {
@@ -80,7 +81,7 @@ from_file "archive.bitz" {
 
 ## Compressed data
 
-Binary formats often come compressed. The [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) operator automatically detects compression based on file extensions like `.gz`, `.zst`, `.bz2`, `.lz4`, and `.br`:
+Binary formats often come compressed. The [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) operator automatically detects compression based on file extensions like `.gz`, `.zst`, `.bz2`, `.lz4`, and `.br`:
 
 ```tql
 from_file "data.parquet.gz"      // Auto-detects gzip
@@ -89,13 +90,13 @@ from_file "logs.json.zst"        // Auto-detects zstd
 
 When automatic detection doesn’t apply (e.g., custom extensions or chained formats), use explicit decompression operators in the parsing subpipeline. These are bytes-to-bytes operators, so they must appear before the parser:
 
-| Format    | Operator                                                                               |
-| --------- | -------------------------------------------------------------------------------------- |
-| Gzip      | [`decompress_gzip`](http://docs.tenzir.com/reference/operators/decompress_gzip.md)     |
-| Zstandard | [`decompress_zstd`](http://docs.tenzir.com/reference/operators/decompress_zstd.md)     |
-| Bzip2     | [`decompress_bz2`](http://docs.tenzir.com/reference/operators/decompress_bz2.md)       |
-| LZ4       | [`decompress_lz4`](http://docs.tenzir.com/reference/operators/decompress_lz4.md)       |
-| Brotli    | [`decompress_brotli`](http://docs.tenzir.com/reference/operators/decompress_brotli.md) |
+| Format    | Operator                                                                                |
+| --------- | --------------------------------------------------------------------------------------- |
+| Gzip      | [`decompress_gzip`](https://tenzir.com/docs/reference/operators/decompress_gzip.md)     |
+| Zstandard | [`decompress_zstd`](https://tenzir.com/docs/reference/operators/decompress_zstd.md)     |
+| Bzip2     | [`decompress_bz2`](https://tenzir.com/docs/reference/operators/decompress_bz2.md)       |
+| LZ4       | [`decompress_lz4`](https://tenzir.com/docs/reference/operators/decompress_lz4.md)       |
+| Brotli    | [`decompress_brotli`](https://tenzir.com/docs/reference/operators/decompress_brotli.md) |
 
 Example with explicit decompression:
 

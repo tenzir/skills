@@ -1,5 +1,6 @@
 # append
 
+> Inserts an element at the back of a list.
 
 Inserts an element at the back of a list.
 
@@ -43,8 +44,8 @@ xs = xs.append(3)
 
 ## See Also
 
-* [`add`](http://docs.tenzir.com/reference/functions/add.md)
-* [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md)
-* [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md)
-* [`remove`](http://docs.tenzir.com/reference/functions/remove.md)
+* [`add`](https://tenzir.com/docs/reference/functions/add.md)
+* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
+* [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md)
+* [`remove`](https://tenzir.com/docs/reference/functions/remove.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

@@ -1,5 +1,6 @@
 # second
 
+> Extracts the second component from a timestamp with subsecond precision.
 
 Extracts the second component from a timestamp with subsecond precision.
 
@@ -51,9 +52,9 @@ full_second = ts.second().floor()
 
 ## See Also
 
-* [`year`](http://docs.tenzir.com/reference/functions/year.md)
-* [`month`](http://docs.tenzir.com/reference/functions/month.md)
-* [`day`](http://docs.tenzir.com/reference/functions/day.md)
-* [`hour`](http://docs.tenzir.com/reference/functions/hour.md)
-* [`minute`](http://docs.tenzir.com/reference/functions/minute.md)
+* [`year`](https://tenzir.com/docs/reference/functions/year.md)
+* [`month`](https://tenzir.com/docs/reference/functions/month.md)
+* [`day`](https://tenzir.com/docs/reference/functions/day.md)
+* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
+* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

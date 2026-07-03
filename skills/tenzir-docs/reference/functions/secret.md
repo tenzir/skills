@@ -1,5 +1,6 @@
 # secret
 
+> Use the value of a secret.
 
 Use the value of a secret.
 
@@ -50,5 +51,5 @@ from {x: secret("geheim")}
 
 ## See Also
 
-* [`config`](http://docs.tenzir.com/reference/functions/config.md)
-* [`env`](http://docs.tenzir.com/reference/functions/env.md)
+* [`config`](https://tenzir.com/docs/reference/functions/config.md)
+* [`env`](https://tenzir.com/docs/reference/functions/env.md)

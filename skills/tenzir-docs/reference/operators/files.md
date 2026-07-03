@@ -1,5 +1,6 @@
 # files
 
+> Shows file information for a given directory.
 
 Shows file information for a given directory.
 
@@ -40,7 +41,7 @@ Tenzir emits file information with the following schema.
 Contains detailed information about the file.
 
 | Field             | Type     | Description                              |
-| :---------------- | :------- | :--------------------------------------- |
+| ----------------- | -------- | ---------------------------------------- |
 | `path`            | `string` | The file path.                           |
 | `type`            | `string` | The type of the file (see below).        |
 | `permissions`     | `record` | The permissions of the file (see below). |
@@ -53,7 +54,7 @@ Contains detailed information about the file.
 The `type` field can have one of the following values:
 
 | Value       | Description                     |
-| :---------- | :------------------------------ |
+| ----------- | ------------------------------- |
 | `regular`   | The file is a regular file.     |
 | `directory` | The file is a directory.        |
 | `symlink`   | The file is a symbolic link.    |
@@ -67,7 +68,7 @@ The `type` field can have one of the following values:
 The `permissions` record contains the following fields:
 
 | Field    | Type     | Description                         |
-| :------- | :------- | :---------------------------------- |
+| -------- | -------- | ----------------------------------- |
 | `owner`  | `record` | The file permissions for the owner. |
 | `group`  | `record` | The file permissions for the group. |
 | `others` | `record` | The file permissions for others.    |
@@ -75,7 +76,7 @@ The `permissions` record contains the following fields:
 The `owner`, `group`, and `others` records contain the following fields:
 
 | Field     | Type   | Description                     |
-| :-------- | :----- | :------------------------------ |
+| --------- | ------ | ------------------------------- |
 | `read`    | `bool` | Whether the file is readable.   |
 | `write`   | `bool` | Whether the file is writeable.  |
 | `execute` | `bool` | Whether the file is executable. |
@@ -98,7 +99,7 @@ where type == "fifo"
 
 ## See Also
 
-* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
-* [`processes`](http://docs.tenzir.com/reference/operators/processes.md)
-* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
-* [`sockets`](http://docs.tenzir.com/reference/operators/sockets.md)
+* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`processes`](https://tenzir.com/docs/reference/operators/processes.md)
+* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
+* [`sockets`](https://tenzir.com/docs/reference/operators/sockets.md)

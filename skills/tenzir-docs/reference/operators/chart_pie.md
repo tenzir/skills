@@ -1,5 +1,6 @@
 # chart_pie
 
+> Plots events on an pie chart.
 
 Plots events on an pie chart.
 
@@ -15,7 +16,7 @@ Visualizes events with an pie chart on the [Tenzir Platform](https://app.tenzir.
 
 Name of each slice on the chart.
 
-String, IP, subnet, and `null` labels use the order in which they first appear in the input. Use [`sort`](http://docs.tenzir.com/reference/operators/sort.md) before [`chart_pie`](http://docs.tenzir.com/reference/operators/chart_pie.md) to control the order of categorical slices.
+String, IP, subnet, and `null` labels use the order in which they first appear in the input. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) before [`chart_pie`](https://tenzir.com/docs/reference/operators/chart_pie.md) to control the order of categorical slices.
 
 Numeric, duration, and timestamp labels are sorted by value.
 
@@ -25,7 +26,7 @@ Value of each slice on the chart. Multiple data points for the same group can be
 
 Multiple `y` values and their labels can be specified by using the record syntax: `{name: value, ...}`.
 
-For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](http://docs.tenzir.com/reference/functions/mean.md) of the `load` field and labels it as `Avg. Load`.
+For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](https://tenzir.com/docs/reference/functions/mean.md) of the `load` field and labels it as `Avg. Load`.
 
 ### `group = any (optional)`
 
@@ -43,7 +44,7 @@ chart_pie label=schema, value=sum(events)
 
 ## See Also
 
-* [`chart_area`](http://docs.tenzir.com/reference/operators/chart_area.md)
-* [`chart_bar`](http://docs.tenzir.com/reference/operators/chart_bar.md)
-* [`chart_line`](http://docs.tenzir.com/reference/operators/chart_line.md)
+* [`chart_area`](https://tenzir.com/docs/reference/operators/chart_area.md)
+* [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md)
+* [`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

@@ -1,5 +1,6 @@
 # ocsf::cast
 
+> Casts incoming events to their OCSF type.
 
 Casts incoming events to their OCSF type.
 
@@ -18,7 +19,7 @@ The operator performs these steps:
 * Encodes free-form objects (such as `unmapped`) using their JSON representation
 * Assigns `@name` based on the class name, for example: `ocsf.dns_activity`
 
-OCSF defines logical types like `timestamp_t` and `subnet_t` that map to physical base types—here `Long` and `String`. Encodings without native support for a logical type should use the base type for maximum compatibility. Tenzir has native types for many OCSF logical types (for example, `time` for `timestamp_t`), but you may still need the physical base type when working with downstream tools. The operator provides control knobs like `timestamp_to_ms` to convert values to their base type representation. This option converts timestamp values to milliseconds (a number type) even though Tenzir natively supports timestamps.
+OCSF defines logical types like `timestamp_t` and `subnet_t` that map to physical base types - here `Long` and `String`. Encodings without native support for a logical type should use the base type for maximum compatibility. Tenzir has native types for many OCSF logical types (for example, `time` for `timestamp_t`), but you may still need the physical base type when working with downstream tools. The operator provides control knobs like `timestamp_to_ms` to convert values to their base type representation. This option converts timestamp values to milliseconds (a number type) even though Tenzir natively supports timestamps.
 
 Fields that are part of recursive object relationships exhibit one level of recursion. For example, you can work with `process.parent_process`, but the nested object `process.parent_process.parent_process` does not exist.
 
@@ -84,6 +85,6 @@ to_clickhouse table="network_activity"
 
 ## See Also
 
-* [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md)
-* [`ocsf::trim`](http://docs.tenzir.com/reference/operators/ocsf/trim.md)
+* [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md)
+* [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md)
 * [Map to OCSF](../../../guides/normalization/map-to-ocsf.md)

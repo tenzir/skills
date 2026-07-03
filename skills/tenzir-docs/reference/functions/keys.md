@@ -1,5 +1,6 @@
 # keys
 
+> Retrieves a list of field names from a record.
 
 Retrieves a list of field names from a record.
 
@@ -73,6 +74,6 @@ top key
 
 ## See Also
 
-* [`has`](http://docs.tenzir.com/reference/functions/has.md)
-* [`get`](http://docs.tenzir.com/reference/functions/get.md)
+* [`has`](https://tenzir.com/docs/reference/functions/has.md)
+* [`get`](https://tenzir.com/docs/reference/functions/get.md)
 * [Shape records](../../guides/transformation/shape-records.md)

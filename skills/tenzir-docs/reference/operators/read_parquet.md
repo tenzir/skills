@@ -1,5 +1,6 @@
 # read_parquet
 
+> Reads events from a Parquet byte stream.
 
 Reads events from a Parquet byte stream.
 
@@ -15,7 +16,7 @@ Reads events from a [Parquet](https://parquet.apache.org/) byte stream.
 
 MMAP Parsing
 
-When using theis with the [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) operator, we recommend passing the `mmap=true` option to `from_file` to give the parser full control over the reads, which leads to better performance and memory usage.
+When using theis with the [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) operator, we recommend passing the `mmap=true` option to `from_file` to give the parser full control over the reads, which leads to better performance and memory usage.
 
 Limitation
 
@@ -33,5 +34,5 @@ from_file "/tmp/data.prq", mmap=true {
 
 ## See Also
 
-* [`read_feather`](http://docs.tenzir.com/reference/operators/read_feather.md)
-* [`write_parquet`](http://docs.tenzir.com/reference/operators/write_parquet.md)
+* [`read_feather`](https://tenzir.com/docs/reference/operators/read_feather.md)
+* [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)

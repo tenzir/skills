@@ -1,5 +1,6 @@
 # reverse
 
+> Reverses the characters of a string.
 
 Reverses the characters of a string.
 
@@ -27,6 +28,6 @@ from {x: reverse("hello")}
 
 ## See Also
 
-* [`slice`](http://docs.tenzir.com/reference/functions/slice.md)
-* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
+* [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
+* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -1,5 +1,6 @@
 # to_stdout
 
+> Writes events to standard output.
 
 Writes events to standard output.
 
@@ -48,5 +49,5 @@ to_stdout
 
 ## See Also
 
-* [`from_stdin`](http://docs.tenzir.com/reference/operators/from_stdin.md)
-* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
+* [`from_stdin`](https://tenzir.com/docs/reference/operators/from_stdin.md)
+* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)

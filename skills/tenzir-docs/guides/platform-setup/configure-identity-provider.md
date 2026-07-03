@@ -1,5 +1,6 @@
 # Configure identity provider
 
+> The identity provider (IdP) handles authentication for the Tenzir Platform. When you click the Login button in the Tenzir UI, the system redirects you to your chosen identity provider, which creates a signed token that certifies your identity.
 
 The identity provider (IdP) handles authentication for the Tenzir Platform. When you click the *Login* button in the Tenzir UI, the system redirects you to your chosen identity provider, which creates a signed token that certifies your identity.
 

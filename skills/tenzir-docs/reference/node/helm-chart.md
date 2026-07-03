@@ -1,14 +1,15 @@
 # Helm chart
 
+> The Tenzir Helm chart deploys one or more tenzir-node instances on a Kubernetes cluster. It deploys nodes only - it does not deploy the Tenzir Platform. Nodes installed through the chart connect to a Platform you have already provisioned, either cloud-hosted at app.tenzir.com or self-hosted through the Sovereign Edition.
 
-The Tenzir Helm chart deploys one or more `tenzir-node` instances on a Kubernetes cluster. It deploys nodes only — it does not deploy the Tenzir Platform. Nodes installed through the chart connect to a Platform you have already provisioned, either cloud-hosted at `app.tenzir.com` or self-hosted through the Sovereign Edition.
+The Tenzir Helm chart deploys one or more `tenzir-node` instances on a Kubernetes cluster. It deploys nodes only - it does not deploy the Tenzir Platform. Nodes installed through the chart connect to a Platform you have already provisioned, either cloud-hosted at `app.tenzir.com` or self-hosted through the Sovereign Edition.
 
 |                          |                                                                                                               |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | OCI registry             | `oci://ghcr.io/tenzir/charts/tenzir-node`                                                                     |
 | Source                   | [`tenzir/helm-charts/charts/tenzir-node`](https://github.com/tenzir/helm-charts/tree/main/charts/tenzir-node) |
 | Values reference         | [README → Values](https://github.com/tenzir/helm-charts/tree/main/charts/tenzir-node#values)                  |
-| Installation walkthrough | [Deploy a node](../../guides/node-setup/deploy-a-node.md#kubernetes)                         |
+| Installation walkthrough | [Deploy a node](../../guides/node-setup/deploy-a-node.md#kubernetes)                        |
 
 ## Resources rendered
 
@@ -161,7 +162,7 @@ image:
   tag: v6.2.0
 ```
 
-See the Tenzir changelog for available releases.
+See the [Tenzir changelog](https://tenzir.com/changelog/tenzir/) for available releases.
 
 ## See also
 

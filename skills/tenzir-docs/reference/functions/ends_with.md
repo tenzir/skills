@@ -1,5 +1,6 @@
 # ends_with
 
+> Checks whether a string ends with a specified substring.
 
 Checks whether a string ends with a specified substring.
 
@@ -43,6 +44,6 @@ from {
 
 ## See Also
 
-* [`starts_with`](http://docs.tenzir.com/reference/functions/starts_with.md)
+* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

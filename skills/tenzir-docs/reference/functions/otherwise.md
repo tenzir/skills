@@ -1,5 +1,6 @@
 # otherwise
 
+> Returns a fallback value if primary is null.
 
 Returns a `fallback` value if `primary` is `null`.
 

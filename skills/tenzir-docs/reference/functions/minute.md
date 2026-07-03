@@ -1,5 +1,6 @@
 # minute
 
+> Extracts the minute component from a timestamp.
 
 Extracts the minute component from a timestamp.
 
@@ -35,9 +36,9 @@ minute = ts.minute()
 
 ## See Also
 
-* [`year`](http://docs.tenzir.com/reference/functions/year.md)
-* [`month`](http://docs.tenzir.com/reference/functions/month.md)
-* [`day`](http://docs.tenzir.com/reference/functions/day.md)
-* [`hour`](http://docs.tenzir.com/reference/functions/hour.md)
-* [`second`](http://docs.tenzir.com/reference/functions/second.md)
+* [`year`](https://tenzir.com/docs/reference/functions/year.md)
+* [`month`](https://tenzir.com/docs/reference/functions/month.md)
+* [`day`](https://tenzir.com/docs/reference/functions/day.md)
+* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
+* [`second`](https://tenzir.com/docs/reference/functions/second.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

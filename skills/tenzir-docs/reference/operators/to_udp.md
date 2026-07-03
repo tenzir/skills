@@ -1,5 +1,6 @@
 # to_udp
 
+> Sends one UDP datagram per input event.
 
 Sends one UDP datagram per input event.
 
@@ -48,5 +49,5 @@ to_udp "127.0.0.1:514"
 
 ## See Also
 
-* [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md)
+* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
 * [UDP](../../integrations/udp.md)

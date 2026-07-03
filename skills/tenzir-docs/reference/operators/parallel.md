@@ -1,5 +1,6 @@
 # parallel
 
+> Runs a subpipeline across multiple parallel workers.
 
 Runs a subpipeline across multiple parallel workers.
 
@@ -9,7 +10,7 @@ parallel [jobs:int] [, route_by=any] { … }
 
 ## Description
 
-The [`parallel`](http://docs.tenzir.com/reference/operators/parallel.md) operator distributes incoming events across multiple parallel instances of a subpipeline. Each event is processed by exactly one worker.
+The [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) operator distributes incoming events across multiple parallel instances of a subpipeline. Each event is processed by exactly one worker.
 
 Use this operator to parallelize CPU-intensive transformations or I/O-bound operations that would otherwise bottleneck on a single thread.
 
@@ -29,7 +30,7 @@ The number of parallel workers to spawn. Must be greater than zero. Defaults to 
 
 ### `route_by = any (optional)`
 
-An expression evaluated per event to determine which worker processes it. Events with the same `route_by` value are always sent to the same worker. This guarantees that related events are grouped together, which is required for stateful subpipelines like [`deduplicate`](http://docs.tenzir.com/reference/operators/deduplicate.md) or [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md).
+An expression evaluated per event to determine which worker processes it. Events with the same `route_by` value are always sent to the same worker. This guarantees that related events are grouped together, which is required for stateful subpipelines like [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md).
 
 Cannot be used when `parallel` is used as a source operator.
 
@@ -84,7 +85,7 @@ parallel 4 {
 
 ## See Also
 
-* [`each`](http://docs.tenzir.com/reference/operators/each.md)
-* [`group`](http://docs.tenzir.com/reference/operators/group.md)
-* [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md)
+* [`each`](https://tenzir.com/docs/reference/operators/each.md)
+* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
 * [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)

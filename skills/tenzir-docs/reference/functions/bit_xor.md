@@ -1,5 +1,6 @@
 # bit_xor
 
+> Computes the bit-wise XOR of its arguments.
 
 Computes the bit-wise XOR of its arguments.
 
@@ -33,8 +34,8 @@ from {x: bit_xor(5, 3)}
 
 ## See Also
 
-* [`bit_and`](http://docs.tenzir.com/reference/functions/bit_and.md)
-* [`bit_not`](http://docs.tenzir.com/reference/functions/bit_not.md)
-* [`bit_or`](http://docs.tenzir.com/reference/functions/bit_or.md)
-* [`shift_left`](http://docs.tenzir.com/reference/functions/shift_left.md)
-* [`shift_right`](http://docs.tenzir.com/reference/functions/shift_right.md)
+* [`bit_and`](https://tenzir.com/docs/reference/functions/bit_and.md)
+* [`bit_not`](https://tenzir.com/docs/reference/functions/bit_not.md)
+* [`bit_or`](https://tenzir.com/docs/reference/functions/bit_or.md)
+* [`shift_left`](https://tenzir.com/docs/reference/functions/shift_left.md)
+* [`shift_right`](https://tenzir.com/docs/reference/functions/shift_right.md)

@@ -1,5 +1,6 @@
 # read_ndjson
 
+> Parses an incoming NDJSON (newline-delimited JSON) stream into events.
 
 Parses an incoming NDJSON (newline-delimited JSON) stream into events.
 
@@ -157,4 +158,4 @@ from_file "versions.json" {
 
 ## See Also
 
-* [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md)
+* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)

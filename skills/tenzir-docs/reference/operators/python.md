@@ -1,5 +1,6 @@
 # python
 
+> Executes Python code against each event of the input.
 
 Executes Python code against each event of the input.
 
@@ -85,4 +86,4 @@ python r#"
 
 ## See Also
 
-* [`shell`](http://docs.tenzir.com/reference/operators/shell.md)
+* [`shell`](https://tenzir.com/docs/reference/operators/shell.md)

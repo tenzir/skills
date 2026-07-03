@@ -1,7 +1,8 @@
 # Provision a node
 
+> Provisioning a node means creating one in the platform in your workspace. After provisioning, you can download configuration file with an authentication token - ready to then deploy the node.
 
-Provisioning a node means creating one in the [platform](../../explanations/platform.md) in your workspace. After provisioning, you can download configuration file with an authentication token—ready to then deploy the node.
+Provisioning a node means creating one in the [platform](../../explanations/platform.md) in your workspace. After provisioning, you can download configuration file with an authentication token - ready to then deploy the node.
 
 When you start out with a new Tenzir account, you have an empty workspace without any nodes:
 

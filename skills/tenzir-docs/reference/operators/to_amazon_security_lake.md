@@ -1,5 +1,6 @@
 # to_amazon_security_lake
 
+> Sends OCSF events to Amazon Security Lake.
 
 Sends OCSF events to Amazon Security Lake.
 
@@ -12,7 +13,7 @@ to_amazon_security_lake s3_uri:string, region=string, account_id=string,
 
 The `to_amazon_security_lake` operator sends OCSF events to [Amazon Security Lake](https://aws.amazon.com/security-lake/), AWS’s centralized security data repository that normalizes and stores security data from multiple sources.
 
-The operator automatically handles Amazon Security Lake’s partitioning requirements and file size constraints, but does not validate the OCSF schema of the events. Consider [`ocsf::apply`](http://docs.tenzir.com/reference/operators/ocsf/apply.md) in your pipeline to ensure schema compliance.
+The operator automatically handles Amazon Security Lake’s partitioning requirements and file size constraints, but does not validate the OCSF schema of the events. Consider [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md) in your pipeline to ensure schema compliance.
 
 For a list of OCSF event classes supported by Amazon Security Lake, see the [AWS documentation](https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html#ocsf-eventclass). The operator generates random UUID (v7) file names with a `.parquet` extension.
 
@@ -101,6 +102,6 @@ to_amazon_security_lake $s3_uri,
 
 ## See Also
 
-* [`ocsf::apply`](http://docs.tenzir.com/reference/operators/ocsf/apply.md)
-* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
-* [Security Lake](../../integrations/amazon/security-lake.md)
+* [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md)
+* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
+* [Amazon Security Lake](../../integrations/amazon/security-lake.md)

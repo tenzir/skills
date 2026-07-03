@@ -1,5 +1,6 @@
 # throttle
 
+> Limits the throughput of events in a pipeline.
 
 Limits the throughput of events in a pipeline.
 
@@ -110,6 +111,6 @@ throttle rate=500, drop=true
 
 ## See Also
 
-* [`assert_throughput`](http://docs.tenzir.com/reference/operators/assert_throughput.md)
-* [`batch`](http://docs.tenzir.com/reference/operators/batch.md)
-* [`buffer`](http://docs.tenzir.com/reference/operators/buffer.md)
+* [`assert_throughput`](https://tenzir.com/docs/reference/operators/assert_throughput.md)
+* [`batch`](https://tenzir.com/docs/reference/operators/batch.md)
+* [`buffer`](https://tenzir.com/docs/reference/operators/buffer.md)

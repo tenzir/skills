@@ -1,5 +1,6 @@
 # zip
 
+> Combines two lists into a list of pairs.
 
 Combines two lists into a list of pairs.
 
@@ -33,6 +34,6 @@ select zs = zip(xs, ys)
 
 ## See Also
 
-* [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md)
-* [`map`](http://docs.tenzir.com/reference/functions/map.md)
+* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
+* [`map`](https://tenzir.com/docs/reference/functions/map.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

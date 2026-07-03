@@ -1,5 +1,6 @@
 # cron
 
+> Runs a pipeline periodically according to a cron expression.
 
 Runs a pipeline periodically according to a cron expression.
 
@@ -60,5 +61,5 @@ publish "api"
 
 ## See Also
 
-* [`each`](http://docs.tenzir.com/reference/operators/each.md)
-* [`every`](http://docs.tenzir.com/reference/operators/every.md)
+* [`each`](https://tenzir.com/docs/reference/operators/each.md)
+* [`every`](https://tenzir.com/docs/reference/operators/every.md)

@@ -1,5 +1,6 @@
 # parse_ssv
 
+> Parses a string as space separated values.
 
 Parses a string as space separated values.
 
@@ -168,7 +169,7 @@ output = input.parse_ssv(header=["a","b","c"])
 
 ## See Also
 
-* [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md)
-* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)
-* [`parse_tsv`](http://docs.tenzir.com/reference/functions/parse_tsv.md)
-* [`parse_xsv`](http://docs.tenzir.com/reference/functions/parse_xsv.md)
+* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
+* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
+* [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md)
+* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)

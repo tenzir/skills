@@ -1,5 +1,6 @@
 # write_zeek_tsv
 
+> Transforms event stream into Zeek Tab-Separated Value byte stream.
 
 Transforms event stream into Zeek Tab-Separated Value byte stream.
 
@@ -51,6 +52,6 @@ to_file "filtered_conn.log" {
 
 ## See Also
 
-* [`read_zeek_json`](http://docs.tenzir.com/reference/operators/read_zeek_json.md)
-* [`read_zeek_tsv`](http://docs.tenzir.com/reference/operators/read_zeek_tsv.md)
+* [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md)
+* [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md)
 * [Zeek](../../integrations/zeek.md)

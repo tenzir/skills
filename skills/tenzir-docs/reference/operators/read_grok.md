@@ -1,5 +1,6 @@
 # read_grok
 
+> Parses lines of input with a grok pattern.
 
 Parses lines of input with a grok pattern.
 
@@ -187,4 +188,4 @@ read_grok $pattern
 
 ## See Also
 
-* [`parse_grok`](http://docs.tenzir.com/reference/functions/parse_grok.md)
+* [`parse_grok`](https://tenzir.com/docs/reference/functions/parse_grok.md)

@@ -1,5 +1,6 @@
 # equals
 
+> Checks whether two strings are equal.
 
 Checks whether two strings are equal.
 
@@ -63,7 +64,7 @@ from {
 
 ## See Also
 
-* [`contains`](http://docs.tenzir.com/reference/functions/contains.md)
-* [`ends_with`](http://docs.tenzir.com/reference/functions/ends_with.md)
-* [`starts_with`](http://docs.tenzir.com/reference/functions/starts_with.md)
+* [`contains`](https://tenzir.com/docs/reference/functions/contains.md)
+* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
+* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

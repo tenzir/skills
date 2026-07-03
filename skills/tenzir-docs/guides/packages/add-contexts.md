@@ -1,5 +1,6 @@
 # Add contexts
 
+> This guide shows you how to add enrichment contexts to your package. You’ll learn how to define contexts in the manifest, populate them with data, and test context interactions.
 
 This guide shows you how to add enrichment contexts to your package. You’ll learn how to define contexts in the manifest, populate them with data, and test context interactions.
 
@@ -47,7 +48,7 @@ Changes to context arguments only apply when the context is first created. Updat
 
 ## Populate contexts with data
 
-Use the [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md) operator to populate a context. This typically happens in a pipeline that fetches data from an external source:
+Use the [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md) operator to populate a context. This typically happens in a pipeline that fetches data from an external source:
 
 pipelines/update-lookup-table.tql
 
@@ -71,7 +72,7 @@ The `key` parameter specifies which field to use as the lookup key. The entire e
 
 ## Use contexts for enrichment
 
-Use the [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md) operator to look up values and add context data to events:
+Use the [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md) operator to look up values and add context data to events:
 
 ```tql
 subscribe "network-events"

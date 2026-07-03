@@ -1,5 +1,6 @@
 # read_leef
 
+> Parses an incoming LEEF stream into events.
 
 Parses an incoming [LEEF](https://www.ibm.com/docs/en/dsm?topic=overview-leef-event-components) stream into events.
 
@@ -171,10 +172,10 @@ Type Conflict
 
 ## See Also
 
-* [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md)
-* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
-* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
-* [`parse_leef`](http://docs.tenzir.com/reference/functions/parse_leef.md)
-* [`print_leef`](http://docs.tenzir.com/reference/functions/print_leef.md)
+* [`read_cef`](https://tenzir.com/docs/reference/operators/read_cef.md)
+* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
+* [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md)
+* [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md)
 * [IBM QRadar](../../integrations/qradar.md)
 * [Syslog](../../integrations/syslog.md)

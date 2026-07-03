@@ -1,24 +1,25 @@
-# ClickHouse
+# ClickHouse integration
 
+> Send structured events to ClickHouse tables.
 
-This page shows you how to use ClickHouse as an analytical store for Tenzir pipelines: write normalized security telemetry to ClickHouse with [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) and read tables or SQL query results back into Tenzir with [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md).
+This page shows you how to use ClickHouse as an analytical store for Tenzir pipelines: write normalized security telemetry to ClickHouse with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) and read tables or SQL query results back into Tenzir with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md).
 
 [ClickHouse](https://clickhouse.com/clickhouse) is an open-source analytical database built for fast SQL over large event volumes. Tenzir sits in front of ClickHouse as a programmable security data pipeline: it collects telemetry, parses source formats, maps events to OCSF, enriches or reduces volume, and writes structured tables that analysts and detection systems can query.
 
-With [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md), ClickHouse can also feed later pipeline stages. Use this path to backfill historical events, export query results, materialize detection outputs, or route subsets to another tool without adding another ingestion path.
+With [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), ClickHouse can also feed later pipeline stages. Use this path to backfill historical events, export query results, materialize detection outputs, or route subsets to another tool without adding another ingestion path.
 
 ## Choose an integration path
 
 Use the path that matches the role ClickHouse plays in your deployment:
 
-| Goal                                   | ClickHouse role                                                                        | Tenzir building blocks                                                                                                                                                                                                                            |
-| -------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Build a security data lake             | Destination for OCSF-normalized telemetry                                              | [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md), [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)                                                                                           |
-| Keep a schema you manage in ClickHouse | Existing MergeTree table with explicit types, TTLs, projections, or materialized views | [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) with `mode="append"`                                                                                                                                               |
-| Query retained telemetry               | Source table or SQL query result                                                       | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md)                                                                                                                                                                |
-| Run lake-backed hunts or detections    | SQL engine for filtering, grouping, and sorting large event sets                       | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md), [`where`](http://docs.tenzir.com/reference/operators/where.md), [`publish`](http://docs.tenzir.com/reference/operators/publish.md)                            |
-| Export or fan out query results        | Query result source for downstream tools or object storage                             | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md), output operators such as [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md) or [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md) |
-| Inspect available tables and schemas   | `SHOW`, `DESCRIBE`, or `system.*` metadata queries                                     | [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md) with `sql=...`                                                                                                                                                 |
+| Goal                                   | ClickHouse role                                                                        | Tenzir building blocks                                                                                                                                                                                                                               |
+| -------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Build a security data lake             | Destination for OCSF-normalized telemetry                                              | [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md), [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)                                                                                            |
+| Keep a schema you manage in ClickHouse | Existing MergeTree table with explicit types, TTLs, projections, or materialized views | [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) with `mode="append"`                                                                                                                                                 |
+| Query retained telemetry               | Source table or SQL query result                                                       | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)                                                                                                                                                                  |
+| Run lake-backed hunts or detections    | SQL engine for filtering, grouping, and sorting large event sets                       | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), [`where`](https://tenzir.com/docs/reference/operators/where.md), [`publish`](https://tenzir.com/docs/reference/operators/publish.md)                            |
+| Export or fan out query results        | Query result source for downstream tools or object storage                             | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), output operators such as [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md) or [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md) |
+| Inspect available tables and schemas   | `SHOW`, `DESCRIBE`, or `system.*` metadata queries                                     | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) with `sql=...`                                                                                                                                                   |
 
 ## Connect to ClickHouse
 
@@ -43,7 +44,7 @@ from_clickhouse table="security.events",
                 tls=false
 ```
 
-Use the same connection arguments with [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md). If a URI selects a database and `table` is unqualified, Tenzir uses that database. In create modes, [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) also creates the selected database if it doesn’t exist.
+Use the same connection arguments with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md). If a URI selects a database and `table` is unqualified, Tenzir uses that database. In create modes, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) also creates the selected database if it doesn’t exist.
 
 ## Set up ClickHouse
 
@@ -62,7 +63,7 @@ from_clickhouse table="security.events",
 
 The examples later use `tls=false` only because they assume a local self-managed ClickHouse server without TLS.
 
-If you need a local or self-managed ClickHouse deployment, start with the [ClickHouse OSS quick start](https://clickhouse.com/docs/getting-started/quick-start/oss). Tenzir connects to a self-managed server the same way, using the native host and port you configure in [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md) and [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md).
+If you need a local or self-managed ClickHouse deployment, start with the [ClickHouse OSS quick start](https://clickhouse.com/docs/getting-started/quick-start/oss). Tenzir connects to a self-managed server the same way, using the native host and port you configure in [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) and [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md).
 
 ## Examples
 
@@ -70,7 +71,7 @@ These examples assume that ClickHouse runs on the same host as Tenzir and allows
 
 ### Land OCSF telemetry in ClickHouse
 
-Use this path when ClickHouse is your security data lake. Tenzir can create tables from incoming events, and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) keeps the ClickHouse schema stable by casting events to the selected OCSF class and filling missing fields with typed nulls.
+Use this path when ClickHouse is your security data lake. Tenzir can create tables from incoming events, and [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) keeps the ClickHouse schema stable by casting events to the selected OCSF class and filling missing fields with typed nulls.
 
 ```tql
 from_file "ocsf_network_activity.json"
@@ -80,7 +81,7 @@ to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}",
               tls=false
 ```
 
-When creating a table, the [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Make sure the first event doesn’t contain untyped nulls or empty records. [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) helps because it gives expected OCSF fields explicit types before the table is created.
+When creating a table, the [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Make sure the first event doesn’t contain untyped nulls or empty records. [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) helps because it gives expected OCSF fields explicit types before the table is created.
 
 The `json=unmapped` option creates the OCSF `unmapped` field as a ClickHouse `JSON` column, preserving its nested structure so you can query into its fields directly.
 
@@ -167,7 +168,7 @@ from_clickhouse sql="DESCRIBE TABLE ocsf.Network_Activity", tls=false
 
 ### Export query results
 
-Because [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md) turns query results into regular Tenzir events, you can route them to any supported destination. For example, export a seven-day slice to S3 as Parquet:
+Because [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) turns query results into regular Tenzir events, you can route them to any supported destination. For example, export a seven-day slice to S3 as Parquet:
 
 ```tql
 from_clickhouse sql="SELECT * FROM ocsf.Network_Activity WHERE time >= now() - INTERVAL 7 DAY",
@@ -179,23 +180,14 @@ to_s3 "s3://security-exports/clickhouse/network_activity_{uuid}.parquet" {
 
 ## See Also
 
-* [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md)
-* [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
-* [`publish`](http://docs.tenzir.com/reference/operators/publish.md)
-* [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)
-* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
-* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
-* [`where`](http://docs.tenzir.com/reference/operators/where.md)
-* [`write_parquet`](http://docs.tenzir.com/reference/operators/write_parquet.md)
+* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
+* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
+* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
+* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
+* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)
 * [Read from data stores](../guides/collecting/read-from-data-stores.md)
 * [Send to destinations](../guides/routing/send-to-destinations.md)
 * [Secrets](../explanations/secrets.md)
-
-## Contents
-
-- [Elasticsearch](elasticsearch.md)
-- [Mysql](mysql.md)
-- [Opensearch](opensearch.md)
-- [Prometheus](prometheus.md)
-- [Snowflake](snowflake.md)
-- [Splunk](splunk.md)

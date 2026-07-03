@@ -1,5 +1,6 @@
 # measure
 
+> Replaces the input with metrics describing the input.
 
 Replaces the input with metrics describing the input.
 

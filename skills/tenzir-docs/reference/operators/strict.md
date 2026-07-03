@@ -1,5 +1,6 @@
 # strict
 
+> Treats all warnings as errors.
 
 Treats all warnings as errors.
 
@@ -24,5 +25,5 @@ strict {
 
 ## See Also
 
-* [`assert`](http://docs.tenzir.com/reference/operators/assert.md)
+* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

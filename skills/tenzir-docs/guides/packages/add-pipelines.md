@@ -1,5 +1,6 @@
 # Add pipelines
 
+> This guide shows you how to add deployable pipelines to your package. You’ll learn about pipeline frontmatter options and when to use pipelines versus operators.
 
 This guide shows you how to add deployable pipelines to your package. You’ll learn about pipeline frontmatter options and when to use pipelines versus operators.
 

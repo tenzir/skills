@@ -1,5 +1,6 @@
 # where
 
+> Keeps only events for which the given predicate is true.
 
 Keeps only events for which the given predicate is true.
 
@@ -33,8 +34,8 @@ where src_ip in 10.10.5.0/25 and (orig_bytes > 1Mi or duration > 30min)
 
 ## See Also
 
-* [`assert`](http://docs.tenzir.com/reference/operators/assert.md)
-* [`drop`](http://docs.tenzir.com/reference/operators/drop.md)
-* [`select`](http://docs.tenzir.com/reference/operators/select.md)
+* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
+* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
+* [`select`](https://tenzir.com/docs/reference/operators/select.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

@@ -1,5 +1,6 @@
 # Configure dashboards
 
+> You can pre-define dashboards for your static workspaces. This practice provides users with ready-to-use visualizations when they access the workspace.
 
 You can pre-define dashboards for your [static workspaces](configure-workspaces.md#define-static-workspaces). This practice provides users with ready-to-use visualizations when they access the workspace.
 

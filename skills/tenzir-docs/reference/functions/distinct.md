@@ -1,5 +1,6 @@
 # distinct
 
+> Creates a sorted list without duplicates of non-null grouped values.
 
 Creates a sorted list without duplicates of non-null grouped values.
 
@@ -30,7 +31,7 @@ summarize unique=distinct(x)
 
 ## See Also
 
-* [`collect`](http://docs.tenzir.com/reference/functions/collect.md)
-* [`count_distinct`](http://docs.tenzir.com/reference/functions/count_distinct.md)
-* [`value_counts`](http://docs.tenzir.com/reference/functions/value_counts.md)
+* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
+* [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md)
+* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

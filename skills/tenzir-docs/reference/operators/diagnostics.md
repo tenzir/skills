@@ -1,5 +1,6 @@
 # diagnostics
 
+> Retrieves diagnostic events from a Tenzir node.
 
 Retrieves diagnostic events from a Tenzir node.
 
@@ -38,7 +39,7 @@ Tenzir emits diagnostic information with the following schema:
 Contains detailed information about the diagnostic.
 
 | Field         | Type           | Description                                                                                |
-| :------------ | :------------- | :----------------------------------------------------------------------------------------- |
+| ------------- | -------------- | ------------------------------------------------------------------------------------------ |
 | `pipeline_id` | `string`       | The ID of the pipeline that created the diagnostic.                                        |
 | `hidden`      | `bool`         | Indicates whether the corresponding pipeline is hidden from the list of managed pipelines. |
 | `run`         | `uint64`       | The number of the run, starting at 1 for the first run.                                    |
@@ -52,14 +53,14 @@ Contains detailed information about the diagnostic.
 The records in `notes` have the following schema:
 
 | Field     | Type     | Description                                                   |
-| :-------- | :------- | :------------------------------------------------------------ |
+| --------- | -------- | ------------------------------------------------------------- |
 | `kind`    | `string` | The kind of note, which is `note`, `usage`, `hint` or `docs`. |
 | `message` | `string` | The message of this note.                                     |
 
 The records in `annotations` have the following schema:
 
 | Field     | Type     | Description                                                                                                  |
-| :-------- | :------- | :----------------------------------------------------------------------------------------------------------- |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------ |
 | `primary` | `bool`   | True if the `source` represents the underlying reason for the diagnostic, false if it is only related to it. |
 | `text`    | `string` | A message for explanations. Can be empty.                                                                    |
 | `source`  | `string` | The character range in the pipeline string that this annotation is associated to.                            |
@@ -82,4 +83,4 @@ where severity == "error"
 
 ## See Also
 
-* [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md)
+* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)

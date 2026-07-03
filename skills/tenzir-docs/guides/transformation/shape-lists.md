@@ -1,7 +1,8 @@
 # Shape lists
 
+> Lists (arrays) contain ordered sequences of values. This guide shows you how to work with lists - accessing elements, sorting and slicing, transforming values, and combining data structures.
 
-Lists (arrays) contain ordered sequences of values. This guide shows you how to work with lists — accessing elements, sorting and slicing, transforming values, and combining data structures.
+Lists (arrays) contain ordered sequences of values. This guide shows you how to work with lists - accessing elements, sorting and slicing, transforming values, and combining data structures.
 
 ## Access list elements
 
@@ -31,7 +32,7 @@ Index notation:
 
 ## Add elements to lists
 
-Use [`append`](http://docs.tenzir.com/reference/functions/append.md) and [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md):
+Use [`append`](https://tenzir.com/docs/reference/functions/append.md) and [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md):
 
 ```tql
 from {colors: ["red", "green"]}
@@ -94,7 +95,7 @@ labels = [
 }
 ```
 
-This also works when a nullable list is transformed before spreading. If [`map`](http://docs.tenzir.com/reference/functions/map.md) receives `null`, it returns `null`, and the spread contributes no elements:
+This also works when a nullable list is transformed before spreading. If [`map`](https://tenzir.com/docs/reference/functions/map.md) receives `null`, it returns `null`, and the spread contributes no elements:
 
 ```tql
 from {xs: null}
@@ -113,11 +114,11 @@ ys = [
 }
 ```
 
-The [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md) function returns the same result for two lists, including `null` fragments, but prefer spread in transformation code when you construct the resulting list.
+The [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md) function returns the same result for two lists, including `null` fragments, but prefer spread in transformation code when you construct the resulting list.
 
 ## Transform list elements
 
-Apply functions to each element with [`map`](http://docs.tenzir.com/reference/functions/map.md):
+Apply functions to each element with [`map`](https://tenzir.com/docs/reference/functions/map.md):
 
 ```tql
 from {
@@ -141,7 +142,7 @@ squared = prices.map(x => x * x)
 
 ## Filter list elements
 
-Keep only elements that match a condition with [`where`](http://docs.tenzir.com/reference/functions/where.md):
+Keep only elements that match a condition with [`where`](https://tenzir.com/docs/reference/functions/where.md):
 
 ```tql
 from {
@@ -167,7 +168,7 @@ a_names = users.where(u => u.starts_with("a"))
 
 ## Sort lists
 
-Order elements with [`sort`](http://docs.tenzir.com/reference/functions/sort.md):
+Order elements with [`sort`](https://tenzir.com/docs/reference/functions/sort.md):
 
 ```tql
 from {
@@ -234,7 +235,7 @@ by_name = users.sort(cmp=(a, b) => a.name < b.name)
 
 ## Slice lists
 
-Extract portions of a list with [`slice`](http://docs.tenzir.com/reference/functions/slice.md):
+Extract portions of a list with [`slice`](https://tenzir.com/docs/reference/functions/slice.md):
 
 Get the first N elements:
 
@@ -293,7 +294,7 @@ every_other = xs.slice(stride=2)
 
 ## Top-k and bottom-k
 
-Chain [`sort`](http://docs.tenzir.com/reference/functions/sort.md) and [`slice`](http://docs.tenzir.com/reference/functions/slice.md) to implement a top-k query over list elements:
+Chain [`sort`](https://tenzir.com/docs/reference/functions/sort.md) and [`slice`](https://tenzir.com/docs/reference/functions/slice.md) to implement a top-k query over list elements:
 
 ```tql
 from {scores: [72, 95, 88, 61, 83, 97, 56]}
@@ -311,7 +312,7 @@ bottom_3 = scores.sort().slice(end=3)
 
 ## Get unique values
 
-Remove duplicates with [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md):
+Remove duplicates with [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md):
 
 ```tql
 from {
@@ -333,7 +334,7 @@ unique_nums = distinct(numbers).sort()
 
 ## Use lists as sets
 
-Use [`add`](http://docs.tenzir.com/reference/functions/add.md) for set-insertion (append only if absent) and [`remove`](http://docs.tenzir.com/reference/functions/remove.md) to delete all occurrences:
+Use [`add`](https://tenzir.com/docs/reference/functions/add.md) for set-insertion (append only if absent) and [`remove`](https://tenzir.com/docs/reference/functions/remove.md) to delete all occurrences:
 
 ```tql
 from {tags: ["info", "warning", "info"]}
@@ -351,7 +352,7 @@ without_info = tags.remove("info")
 }
 ```
 
-Combine `add()` with [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md) when you need a deduplicated collection:
+Combine `add()` with [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md) when you need a deduplicated collection:
 
 ```tql
 from {xs: [1, 2, 2, 3]}
@@ -371,7 +372,7 @@ with_2 = unique.add(2)
 
 ## Flatten nested lists
 
-Note: Direct list flattening is not currently supported in TQL. The [`flatten`](http://docs.tenzir.com/reference/functions/flatten.md) function is designed for flattening records, not lists. To work with nested lists, you would need to process them element by element.
+Note: Direct list flattening is not currently supported in TQL. The [`flatten`](https://tenzir.com/docs/reference/functions/flatten.md) function is designed for flattening records, not lists. To work with nested lists, you would need to process them element by element.
 
 ## Combine lists and records
 
@@ -410,7 +411,7 @@ avg_age = users.map(u => u.age).sum() / users.length()
 
 ### Zip lists together
 
-Combine parallel lists with [`zip`](http://docs.tenzir.com/reference/functions/zip.md):
+Combine parallel lists with [`zip`](https://tenzir.com/docs/reference/functions/zip.md):
 
 ```tql
 from {
@@ -531,7 +532,7 @@ This pattern is particularly useful when:
 
 ### Enumerate with indices
 
-Add row numbers to your data using the [`enumerate`](http://docs.tenzir.com/reference/operators/enumerate.md) operator:
+Add row numbers to your data using the [`enumerate`](https://tenzir.com/docs/reference/operators/enumerate.md) operator:
 
 ```tql
 from {item: "apple"}, {item: "banana"}, {item: "cherry"}
@@ -624,8 +625,8 @@ expensive = items.where(item => item.price > 15)
 
 ## See Also
 
-* [`sort`](http://docs.tenzir.com/reference/functions/sort.md)
-* [`slice`](http://docs.tenzir.com/reference/functions/slice.md)
+* [`sort`](https://tenzir.com/docs/reference/functions/sort.md)
+* [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
 * [Shape records](shape-records.md)
 * [Filter and select data](filter-and-select-data.md)
 * [Transform values](transform-values.md)

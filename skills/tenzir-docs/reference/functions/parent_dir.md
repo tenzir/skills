@@ -1,5 +1,6 @@
 # parent_dir
 
+> Extracts the parent directory from a file path.
 
 Extracts the parent directory from a file path.
 
@@ -25,5 +26,5 @@ from {x: parent_dir("/path/to/log.json")}
 
 ## See Also
 
-* [`file_name`](http://docs.tenzir.com/reference/functions/file_name.md)
+* [`file_name`](https://tenzir.com/docs/reference/functions/file_name.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

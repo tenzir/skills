@@ -1,5 +1,6 @@
 # Configure project hooks
 
+> This guide shows you how to configure tenzir-test project hooks for setup and cleanup tasks that belong next to your tests. You’ll learn how to select local Tenzir binaries before discovery, set project-scoped environment variables, and collect artifacts from failed tests.
 
 This guide shows you how to configure `tenzir-test` project hooks for setup and cleanup tasks that belong next to your tests. You’ll learn how to select local Tenzir binaries before discovery, set project-scoped environment variables, and collect artifacts from failed tests.
 
@@ -31,8 +32,6 @@ from pathlib import Path
 
 
 from tenzir_test import hooks
-
-
 
 
 @hooks.startup
@@ -93,8 +92,6 @@ Use `project_start` for environment values that should apply only to tests in th
 from tenzir_test import hooks
 
 
-
-
 @hooks.project_start
 def configure_project(ctx):
     ctx.env["TENZIR_TEST_DATASET"] = ctx.project.root.name
@@ -111,8 +108,6 @@ import shutil
 
 
 from tenzir_test import hooks
-
-
 
 
 @hooks.test_failure

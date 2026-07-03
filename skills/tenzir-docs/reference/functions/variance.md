@@ -1,5 +1,6 @@
 # variance
 
+> Computes the variance of all grouped values.
 
 Computes the variance of all grouped values.
 
@@ -30,6 +31,6 @@ summarize variance_value=variance(x)
 
 ## See Also
 
-* [`stddev`](http://docs.tenzir.com/reference/functions/stddev.md)
-* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
+* [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
+* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

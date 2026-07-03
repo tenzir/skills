@@ -1,5 +1,6 @@
 # shell
 
+> Executes a system command and hooks its stdin and stdout into the pipeline.
 
 Executes a system command and hooks its stdin and stdout into the pipeline.
 
@@ -34,4 +35,4 @@ read_json
 
 ## See Also
 
-* [`python`](http://docs.tenzir.com/reference/operators/python.md)
+* [`python`](https://tenzir.com/docs/reference/operators/python.md)

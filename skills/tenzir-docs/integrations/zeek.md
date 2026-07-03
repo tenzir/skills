@@ -1,5 +1,6 @@
-# Zeek
+# Zeek integration
 
+> Inspect, log, and analyze network traffic for security and operational insights.
 
 The [Zeek](https://zeek.org) network monitor translates raw packets into structured logs. Tenzir supports various Zeek use cases, such as continuous ingestion, ad-hoc log file processing, and even generating Zeek logs.
 
@@ -137,7 +138,7 @@ Zeek ships with a helper utility `zeek-cut` that operators on Zeek’s tab-separ
 zeek-cut id.orig_h id.resp_h < conn.log
 ```
 
-The list of arguments to `zeek-cut` are the column names of the log. The [`select`](http://docs.tenzir.com/reference/operators/select.md) operator performs the equivalent in Tenzir after we parse the logs as Zeek TSV:
+The list of arguments to `zeek-cut` are the column names of the log. The [`select`](https://tenzir.com/docs/reference/operators/select.md) operator performs the equivalent in Tenzir after we parse the logs as Zeek TSV:
 
 ```bash
 tenzir 'read_zeek_tsv | select id.orig_h id.resp_h' < conn.log
@@ -151,7 +152,7 @@ cat *.log | tenzir 'read_zeek_tsv | select id.orig_h id.resp_h'
 
 ### Generate Zeek TSV from arbitrary data
 
-You can render any data as Zeek TSV log using [`write_zeek_tsv`](http://docs.tenzir.com/reference/operators/write_zeek_tsv.md):
+You can render any data as Zeek TSV log using [`write_zeek_tsv`](https://tenzir.com/docs/reference/operators/write_zeek_tsv.md):
 
 For example, this is how you create a filtered version of a Zeek conn.log:
 

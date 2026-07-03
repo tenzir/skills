@@ -1,5 +1,6 @@
 # to_amazon_sqs
 
+> Sends messages to an Amazon SQS queue.
 
 Sends messages to an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 
@@ -38,7 +39,7 @@ If omitted, the operator uses the region from `aws_iam` when present. Otherwise,
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -109,6 +110,6 @@ to_amazon_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`from_amazon_sqs`](http://docs.tenzir.com/reference/operators/from_amazon_sqs.md)
+* [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
-* [SQS](../../integrations/amazon/sqs.md)
+* [Amazon SQS](../../integrations/amazon/sqs.md)

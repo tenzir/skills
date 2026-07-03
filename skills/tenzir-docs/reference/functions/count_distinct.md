@@ -1,5 +1,6 @@
 # count_distinct
 
+> Counts all distinct non-null grouped values.
 
 Counts all distinct non-null grouped values.
 
@@ -30,6 +31,6 @@ summarize unique=count_distinct(x)
 
 ## See Also
 
-* [`count`](http://docs.tenzir.com/reference/functions/count.md)
-* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
+* [`count`](https://tenzir.com/docs/reference/functions/count.md)
+* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

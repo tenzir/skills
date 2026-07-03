@@ -1,5 +1,6 @@
 # write_yaml
 
+> Transforms the input event stream to YAML byte stream.
 
 Transforms the input event stream to YAML byte stream.
 
@@ -26,6 +27,6 @@ to_file "output.yaml" {
 
 ## See Also
 
-* [`parse_yaml`](http://docs.tenzir.com/reference/functions/parse_yaml.md)
-* [`print_yaml`](http://docs.tenzir.com/reference/functions/print_yaml.md)
-* [`read_yaml`](http://docs.tenzir.com/reference/operators/read_yaml.md)
+* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
+* [`print_yaml`](https://tenzir.com/docs/reference/functions/print_yaml.md)
+* [`read_yaml`](https://tenzir.com/docs/reference/operators/read_yaml.md)

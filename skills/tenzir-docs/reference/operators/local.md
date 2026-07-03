@@ -1,5 +1,6 @@
 # local
 
+> Forces a pipeline to run locally.
 
 Forces a pipeline to run locally.
 
@@ -30,4 +31,4 @@ to_file "eve.json" {
 
 ## See Also
 
-* [`remote`](http://docs.tenzir.com/reference/operators/remote.md)
+* [`remote`](https://tenzir.com/docs/reference/operators/remote.md)

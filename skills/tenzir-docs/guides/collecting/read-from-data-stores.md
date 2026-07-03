@@ -1,9 +1,10 @@
 # Read from data stores
 
+> This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows from MySQL.
 
 This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows from MySQL.
 
-Today, this guide focuses on [`from_mysql`](http://docs.tenzir.com/reference/operators/from_mysql.md) and [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md). As Tenzir adds more data store integrations, the same patterns will apply.
+Today, this guide focuses on [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) and [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md). As Tenzir adds more data store integrations, the same patterns will apply.
 
 ## Read a full table
 
@@ -128,7 +129,7 @@ This lets you treat database rows like any other event stream in Tenzir.
 * [Read from message brokers](read-from-message-brokers.md)
 * [Filter and select data](../transformation/filter-and-select-data.md)
 * [Send to destinations](../routing/send-to-destinations.md)
-* [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md)
-* [`from_mysql`](http://docs.tenzir.com/reference/operators/from_mysql.md)
+* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
+* [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)
 * [ClickHouse](../../integrations/clickhouse.md)
 * [MySQL](../../integrations/mysql.md)

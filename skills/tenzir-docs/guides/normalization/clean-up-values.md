@@ -1,5 +1,6 @@
 # Clean up values
 
+> This guide shows you how to clean and normalize values in your data before mapping to a schema. You’ll learn to handle null placeholders, normalize sentinel values, fix types, and provide defaults.
 
 This guide shows you how to clean and normalize values in your data before mapping to a schema. You’ll learn to handle null placeholders, normalize sentinel values, fix types, and provide defaults.
 
@@ -9,7 +10,7 @@ Many data sources use string placeholders instead of actual null values. Common 
 
 ### Normalize across all fields
 
-Use [`replace`](http://docs.tenzir.com/reference/operators/replace.md) to convert placeholders to null across all string fields:
+Use [`replace`](https://tenzir.com/docs/reference/operators/replace.md) to convert placeholders to null across all string fields:
 
 ```tql
 from {status: "active", error: "None"},

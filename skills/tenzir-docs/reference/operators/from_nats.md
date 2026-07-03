@@ -1,5 +1,6 @@
 # from_nats
 
+> Consumes messages from a NATS JetStream subject.
 
 Consumes messages from a NATS JetStream subject.
 
@@ -42,7 +43,7 @@ The field that receives a record with NATS message metadata.
 The metadata record contains these fields:
 
 | Field               | Type     | Description                                         |
-| :------------------ | :------- | :-------------------------------------------------- |
+| ------------------- | -------- | --------------------------------------------------- |
 | `subject`           | `string` | The message subject.                                |
 | `reply`             | `string` | The reply subject, or `null` when absent.           |
 | `headers`           | `record` | NATS headers as `list<string>` values.              |
@@ -139,6 +140,6 @@ this = string(message).parse_json()
 
 ## See Also
 
-* [`to_nats`](http://docs.tenzir.com/reference/operators/to_nats.md)
+* [`to_nats`](https://tenzir.com/docs/reference/operators/to_nats.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [NATS](../../integrations/nats.md)

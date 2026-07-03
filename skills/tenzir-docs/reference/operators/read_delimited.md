@@ -1,5 +1,6 @@
 # read_delimited
 
+> Parses an incoming bytes stream into events using a string as delimiter.
 
 Parses an incoming bytes stream into events using a string as delimiter.
 
@@ -81,9 +82,9 @@ from_file "binary.dat" {
 
 ## See Also
 
-* [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md)
-* [`read_delimited_regex`](http://docs.tenzir.com/reference/operators/read_delimited_regex.md)
-* [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md)
-* [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md)
-* [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md)
-* [`read_xsv`](http://docs.tenzir.com/reference/operators/read_xsv.md)
+* [`read_all`](https://tenzir.com/docs/reference/operators/read_all.md)
+* [`read_delimited_regex`](https://tenzir.com/docs/reference/operators/read_delimited_regex.md)
+* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
+* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
+* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
+* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)

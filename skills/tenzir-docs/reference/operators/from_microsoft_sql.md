@@ -1,5 +1,6 @@
 # from_microsoft_sql
 
+> Reads events from Microsoft SQL Server or Azure SQL Database.
 
 Reads events from Microsoft SQL Server or Azure SQL Database.
 
@@ -119,7 +120,7 @@ The operator currently supports SQL authentication. Microsoft Entra authenticati
 The operator maps Microsoft SQL Server types to [Type System](../types.md) as follows:
 
 | SQL Server type                     | Tenzir type | Notes                       |
-| :---------------------------------- | :---------- | :-------------------------- |
+| ----------------------------------- | ----------- | --------------------------- |
 | `tinyint`                           | `uint64`    |                             |
 | `smallint`, `int`, `bigint`         | `int64`     |                             |
 | `bit`                               | `bool`      |                             |

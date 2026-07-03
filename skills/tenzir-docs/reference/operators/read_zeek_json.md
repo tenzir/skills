@@ -1,5 +1,6 @@
 # read_zeek_json
 
+> Parse an incoming Zeek JSON stream into events.
 
 Parse an incoming Zeek JSON stream into events.
 
@@ -89,6 +90,6 @@ read_zeek_json
 
 ## See Also
 
-* [`read_zeek_tsv`](http://docs.tenzir.com/reference/operators/read_zeek_tsv.md)
-* [`write_zeek_tsv`](http://docs.tenzir.com/reference/operators/write_zeek_tsv.md)
+* [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md)
+* [`write_zeek_tsv`](https://tenzir.com/docs/reference/operators/write_zeek_tsv.md)
 * [Zeek](../../integrations/zeek.md)

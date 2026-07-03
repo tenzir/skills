@@ -1,5 +1,6 @@
 # length
 
+> Retrieves the length of a list.
 
 Retrieves the length of a list.
 
@@ -25,7 +26,7 @@ from {n: [1, 2, 3].length()}
 
 ## See Also
 
-* [`is_empty`](http://docs.tenzir.com/reference/functions/is_empty.md)
-* [`length_bytes`](http://docs.tenzir.com/reference/functions/length_bytes.md)
-* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
+* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
+* [`length_bytes`](https://tenzir.com/docs/reference/functions/length_bytes.md)
+* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

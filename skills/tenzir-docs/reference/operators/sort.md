@@ -1,5 +1,6 @@
 # sort
 
+> Sorts events by the given expressions.
 
 Sorts events by the given expressions.
 
@@ -53,7 +54,7 @@ sort src_ip, -dest_ip
 
 ## See Also
 
-* [`rare`](http://docs.tenzir.com/reference/operators/rare.md)
-* [`reverse`](http://docs.tenzir.com/reference/operators/reverse.md)
-* [`top`](http://docs.tenzir.com/reference/operators/top.md)
+* [`rare`](https://tenzir.com/docs/reference/operators/rare.md)
+* [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md)
+* [`top`](https://tenzir.com/docs/reference/operators/top.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

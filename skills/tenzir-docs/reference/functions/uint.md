@@ -1,5 +1,6 @@
 # uint
 
+> Casts an expression to an unsigned integer.
 
 Casts an expression to an unsigned integer.
 
@@ -47,9 +48,9 @@ from {x: uint("0x42", base=16)}
 
 ## See Also
 
-* [`float`](http://docs.tenzir.com/reference/functions/float.md)
-* [`int`](http://docs.tenzir.com/reference/functions/int.md)
-* [`ip`](http://docs.tenzir.com/reference/functions/ip.md)
-* [`string`](http://docs.tenzir.com/reference/functions/string.md)
-* [`subnet`](http://docs.tenzir.com/reference/functions/subnet.md)
-* [`time`](http://docs.tenzir.com/reference/functions/time.md)
+* [`float`](https://tenzir.com/docs/reference/functions/float.md)
+* [`int`](https://tenzir.com/docs/reference/functions/int.md)
+* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
+* [`string`](https://tenzir.com/docs/reference/functions/string.md)
+* [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
+* [`time`](https://tenzir.com/docs/reference/functions/time.md)

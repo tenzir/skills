@@ -1,5 +1,6 @@
 # bit_not
 
+> Computes the bit-wise NOT of its argument.
 
 Computes the bit-wise NOT of its argument.
 
@@ -29,8 +30,8 @@ from {x: bit_not(5)}
 
 ## See Also
 
-* [`bit_and`](http://docs.tenzir.com/reference/functions/bit_and.md)
-* [`bit_or`](http://docs.tenzir.com/reference/functions/bit_or.md)
-* [`bit_xor`](http://docs.tenzir.com/reference/functions/bit_xor.md)
-* [`shift_left`](http://docs.tenzir.com/reference/functions/shift_left.md)
-* [`shift_right`](http://docs.tenzir.com/reference/functions/shift_right.md)
+* [`bit_and`](https://tenzir.com/docs/reference/functions/bit_and.md)
+* [`bit_or`](https://tenzir.com/docs/reference/functions/bit_or.md)
+* [`bit_xor`](https://tenzir.com/docs/reference/functions/bit_xor.md)
+* [`shift_left`](https://tenzir.com/docs/reference/functions/shift_left.md)
+* [`shift_right`](https://tenzir.com/docs/reference/functions/shift_right.md)

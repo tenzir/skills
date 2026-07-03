@@ -1,5 +1,6 @@
 # has
 
+> Checks whether a record has a specified field.
 
 Checks whether a record has a specified field.
 
@@ -37,6 +38,6 @@ this = {
 
 ## See Also
 
-* [`is_empty`](http://docs.tenzir.com/reference/functions/is_empty.md)
-* [`keys`](http://docs.tenzir.com/reference/functions/keys.md)
+* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
+* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
 * [Shape records](../../guides/transformation/shape-records.md)

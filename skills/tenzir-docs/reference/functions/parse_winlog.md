@@ -1,5 +1,6 @@
 # parse_winlog
 
+> Parses a string as a Windows Event Log XML record.
 
 Parses a string as a Windows Event Log XML record.
 
@@ -14,16 +15,16 @@ The `parse_winlog` function parses a string containing Windows Event Log XML and
 
 The function handles the following Windows Event XML sections:
 
-* **System** — Core event metadata (Provider, EventID, Level, TimeCreated, etc.)
+* **System** - Core event metadata (Provider, EventID, Level, TimeCreated, etc.)
 
-* **EventData** — Event-specific data, formatted based on content:
+* **EventData** - Event-specific data, formatted based on content:
 
   * Named `<Data Name="...">` elements become record fields
   * Unnamed `<Data>` elements become a list
 
-* **UserData** — Alternative event data section (preserved as nested structure)
+* **UserData** - Alternative event data section (preserved as nested structure)
 
-* **RenderingInfo** — Human-readable rendered strings
+* **RenderingInfo** - Human-readable rendered strings
 
 ### `input: string`
 
@@ -342,6 +343,6 @@ where System.EventID in [4624, 4625]
 
 ## See Also
 
-* [`parse_xml`](http://docs.tenzir.com/reference/functions/parse_xml.md)
-* [`parse_syslog`](http://docs.tenzir.com/reference/functions/parse_syslog.md)
-* [Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [`parse_xml`](https://tenzir.com/docs/reference/functions/parse_xml.md)
+* [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md)
+* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)

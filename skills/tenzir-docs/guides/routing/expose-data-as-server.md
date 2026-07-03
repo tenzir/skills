@@ -1,11 +1,12 @@
 # Expose data as a server
 
+> This guide shows you how to make pipeline data available to external consumers by starting an HTTP server. You’ll learn how to stream serialized pipeline output to HTTP clients, pick a wire format, and configure connection limits and TLS.
 
 This guide shows you how to make pipeline data available to external consumers by starting an HTTP server. You’ll learn how to stream serialized pipeline output to HTTP clients, pick a wire format, and configure connection limits and TLS.
 
 ## Spin up an HTTP server
 
-Use [`serve_http`](http://docs.tenzir.com/reference/operators/serve_http.md) at the end of a pipeline to start an HTTP server. The nested pipeline chooses how to serialize your events:
+Use [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md) at the end of a pipeline to start an HTTP server. The nested pipeline chooses how to serialize your events:
 
 ```tql
 from_file "example.yaml"
@@ -29,7 +30,7 @@ Multiple clients can connect simultaneously. Each connected client receives a co
 
 ### Choose a wire format
 
-Use the nested pipeline to control the response body format and content type. For example, use [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md) to stream plain text instead of NDJSON:
+Use the nested pipeline to control the response body format and content type. For example, use [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md) to stream plain text instead of NDJSON:
 
 ```tql
 from_file "alerts.txt"
@@ -84,6 +85,6 @@ serve_http "0.0.0.0:8443",
 
 ## See Also
 
-* [`serve_http`](http://docs.tenzir.com/reference/operators/serve_http.md)
-* [`serve_tcp`](http://docs.tenzir.com/reference/operators/serve_tcp.md)
-* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md)
+* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
+* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)

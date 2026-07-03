@@ -1,5 +1,6 @@
 # is_v4
 
+> Checks whether an IP address has version number 4.
 
 Checks whether an IP address has version number 4.
 
@@ -31,10 +32,10 @@ from {
 
 ## See Also
 
-* [`ip_category`](http://docs.tenzir.com/reference/functions/ip_category.md)
-* [`is_global`](http://docs.tenzir.com/reference/functions/is_global.md)
-* [`is_link_local`](http://docs.tenzir.com/reference/functions/is_link_local.md)
-* [`is_loopback`](http://docs.tenzir.com/reference/functions/is_loopback.md)
-* [`is_multicast`](http://docs.tenzir.com/reference/functions/is_multicast.md)
-* [`is_private`](http://docs.tenzir.com/reference/functions/is_private.md)
-* [`is_v6`](http://docs.tenzir.com/reference/functions/is_v6.md)
+* [`ip_category`](https://tenzir.com/docs/reference/functions/ip_category.md)
+* [`is_global`](https://tenzir.com/docs/reference/functions/is_global.md)
+* [`is_link_local`](https://tenzir.com/docs/reference/functions/is_link_local.md)
+* [`is_loopback`](https://tenzir.com/docs/reference/functions/is_loopback.md)
+* [`is_multicast`](https://tenzir.com/docs/reference/functions/is_multicast.md)
+* [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md)
+* [`is_v6`](https://tenzir.com/docs/reference/functions/is_v6.md)

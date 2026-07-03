@@ -1,5 +1,6 @@
 # from_ftp
 
+> Downloads bytes via FTP or FTPS and parses them with a subpipeline.
 
 Downloads bytes via FTP or FTPS and parses them with a subpipeline.
 
@@ -48,13 +49,13 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 A required parsing subpipeline.
 
-The subpipeline receives the downloaded body as bytes and must return events. For example, use [`read_ndjson`](http://docs.tenzir.com/reference/operators/read_ndjson.md) to parse newline-delimited JSON.
+The subpipeline receives the downloaded body as bytes and must return events. For example, use [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md) to parse newline-delimited JSON.
 
 ## Examples
 
 ### Download NDJSON from an FTP server
 
-Use [`read_ndjson`](http://docs.tenzir.com/reference/operators/read_ndjson.md) when the remote file already contains newline-delimited JSON.
+Use [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md) when the remote file already contains newline-delimited JSON.
 
 ```tql
 from_ftp "ftp://user:pass@ftp.example.org/events.ndjson" {
@@ -75,5 +76,5 @@ from_ftp "ftp://user:pass@ftp.example.org/events.json.gz" {
 
 ## See Also
 
-* [`to_ftp`](http://docs.tenzir.com/reference/operators/to_ftp.md)
+* [`to_ftp`](https://tenzir.com/docs/reference/operators/to_ftp.md)
 * [FTP](../../integrations/ftp.md)

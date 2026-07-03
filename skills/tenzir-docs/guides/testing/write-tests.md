@@ -1,7 +1,8 @@
 # Write tests
 
+> This guide shows you how to create integration tests with the tenzir-test framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the run tests guide.
 
-This guide shows you how to create integration tests with the [`tenzir-test`](http://docs.tenzir.com/reference/test-framework.md) framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the [run tests](run-tests.md) guide.
+This guide shows you how to create integration tests with the [`tenzir-test`](https://tenzir.com/docs/reference/test-framework.md) framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the [run tests](run-tests.md) guide.
 
 ## Prerequisites
 
@@ -121,7 +122,7 @@ Run the test with `--update` to capture the baseline:
 uvx tenzir-test --update tests/parsing/csv.tql
 ```
 
-The harness pipes the CSV data to tenzir’s stdin, so `read_csv` processes it directly. This is an alternative to using `.input` files with `from_file env("TENZIR_INPUT")`—choose whichever fits your test better.
+The harness pipes the CSV data to tenzir’s stdin, so `read_csv` processes it directly. This is an alternative to using `.input` files with `from_file env("TENZIR_INPUT")` - choose whichever fits your test better.
 
 ### Shell scripts with stdin
 

@@ -1,5 +1,6 @@
 # read_feather
 
+> Parses an incoming Feather byte stream into events.
 
 Parses an incoming Feather byte stream into events.
 
@@ -24,5 +25,5 @@ publish "log"
 
 ## See Also
 
-* [`read_parquet`](http://docs.tenzir.com/reference/operators/read_parquet.md)
-* [`write_feather`](http://docs.tenzir.com/reference/operators/write_feather.md)
+* [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)
+* [`write_feather`](https://tenzir.com/docs/reference/operators/write_feather.md)

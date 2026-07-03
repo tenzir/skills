@@ -1,83 +1,22 @@
 # Size a node
 
+> This guide helps you determine the CPU, RAM, and storage resources needed for a Tenzir node. Use the calculator below to get concrete estimates based on your deployment scenario.
 
-This guide helps you determine the CPU, RAM, and storage resources needed for a Tenzir node. Use the [calculator](#calculator) below to get concrete estimates based on your deployment scenario.
+This guide helps you determine the CPU, RAM, and storage resources needed for a Tenzir node. Use the [calculator](size-a-node.md#calculator) below to get concrete estimates based on your deployment scenario.
 
 ## Calculator
 
 Adjust the sliders to match your expected workload:
 
-<!-- Data Volume Section -->
+Ingest100100 GB/daySources55Destinations22Retention33 months
 
-Data Volume
+\[x]Normalization\[ ]Enrichment\[ ]Detection
 
-GB/day EPS
+CPU**2 cores**
 
-432.0 GB/day 232 EPS
+RAM**2.0 GB**
 
-<!-- GB/day mode inputs (shown by default) -->
-
-Ingest GB
-
-10 10
-
-Bytes/event
-
-500 500
-
-<!-- EPS mode inputs (hidden by default) -->
-
-Events/sec
-
-10000 10,000
-
-Bytes/event
-
-500 500
-
-***
-
-<!-- Sources Row -->
-
-Sources
-
-1 1
-
-<!-- Destinations Row -->
-
-Destinations
-
-1 1
-
-<!-- Edge Storage Row -->
-
-Edge Storage
-
-3 3 months
-
-***
-
-<!-- Workloads Row -->
-
-Workloads
-
-\[x] Normalization \[ ] Enrichment \[ ] Detection
-
-<!-- Context Size Row (conditional) -->
-
-Context Size
-
-2 2 GB
-
-***
-
-<!-- Output Cards -->
-
-CPU 2 cores
-
-RAM 1.0 GB
-
-Storage 0.09 TB
+Storage**0.09 TB**
 
 ## Input factors
 

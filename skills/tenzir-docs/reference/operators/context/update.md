@@ -1,5 +1,6 @@
 # context::update
 
+> Updates a context with new data.
 
 Updates a context with new data.
 
@@ -13,7 +14,7 @@ context::update name:string, key=any,
 
 The `context::update` operator adds new data to a specified context.
 
-Use the `key` argument to specify the field in the input that should be associated with the context. The [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md) operator uses this key to access the context. For contexts that support assigning a value with a given key, you can provide an expression to customize what’s being associated with the given key.
+Use the `key` argument to specify the field in the input that should be associated with the context. The [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md) operator uses this key to access the context. For contexts that support assigning a value with a given key, you can provide an expression to customize what’s being associated with the given key.
 
 The three arguments `create_timeout`, `write_timeout`, and `read_timeout` only work with lookup tables and set the respective timeouts per table entry.
 
@@ -87,17 +88,17 @@ context::update "ctx", key=x, value=x*x
 
 ## See Also
 
-* [`context::create_bloom_filter`](http://docs.tenzir.com/reference/operators/context/create_bloom_filter.md)
-* [`context::create_geoip`](http://docs.tenzir.com/reference/operators/context/create_geoip.md)
-* [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md)
-* [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md)
-* [`context::erase`](http://docs.tenzir.com/reference/operators/context/erase.md)
-* [`context::inspect`](http://docs.tenzir.com/reference/operators/context/inspect.md)
-* [`context::list`](http://docs.tenzir.com/reference/operators/context/list.md)
-* [`context::load`](http://docs.tenzir.com/reference/operators/context/load.md)
-* [`context::remove`](http://docs.tenzir.com/reference/operators/context/remove.md)
-* [`context::reset`](http://docs.tenzir.com/reference/operators/context/reset.md)
-* [`context::save`](http://docs.tenzir.com/reference/operators/context/save.md)
+* [`context::create_bloom_filter`](https://tenzir.com/docs/reference/operators/context/create_bloom_filter.md)
+* [`context::create_geoip`](https://tenzir.com/docs/reference/operators/context/create_geoip.md)
+* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
+* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
+* [`context::erase`](https://tenzir.com/docs/reference/operators/context/erase.md)
+* [`context::inspect`](https://tenzir.com/docs/reference/operators/context/inspect.md)
+* [`context::list`](https://tenzir.com/docs/reference/operators/context/list.md)
+* [`context::load`](https://tenzir.com/docs/reference/operators/context/load.md)
+* [`context::remove`](https://tenzir.com/docs/reference/operators/context/remove.md)
+* [`context::reset`](https://tenzir.com/docs/reference/operators/context/reset.md)
+* [`context::save`](https://tenzir.com/docs/reference/operators/context/save.md)
 * [Use lookup tables](../../../guides/enrichment/use-lookup-tables.md)
 * [Enrich with threat intel](../../../guides/enrichment/enrich-with-threat-intel.md)
 * [Enrich with asset inventory](../../../guides/enrichment/enrich-with-asset-inventory.md)

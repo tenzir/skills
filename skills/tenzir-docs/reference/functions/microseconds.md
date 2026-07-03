@@ -1,5 +1,6 @@
 # microseconds
 
+> Converts a number to equivalent microseconds.
 
 Converts a number to equivalent microseconds.
 
@@ -17,4 +18,4 @@ The number to convert.
 
 ## See Also
 
-[`years`](http://docs.tenzir.com/reference/functions/years.md), [`months`](http://docs.tenzir.com/reference/functions/months.md), [`weeks`](http://docs.tenzir.com/reference/functions/weeks.md), [`days`](http://docs.tenzir.com/reference/functions/days.md), [`hours`](http://docs.tenzir.com/reference/functions/hours.md), [`minutes`](http://docs.tenzir.com/reference/functions/minutes.md), [`seconds`](http://docs.tenzir.com/reference/functions/seconds.md), [`milliseconds`](http://docs.tenzir.com/reference/functions/milliseconds.md), [`microseconds`](http://docs.tenzir.com/reference/functions/microseconds.md), [`nanoseconds`](http://docs.tenzir.com/reference/functions/nanoseconds.md)
+[`years`](https://tenzir.com/docs/reference/functions/years.md), [`months`](https://tenzir.com/docs/reference/functions/months.md), [`weeks`](https://tenzir.com/docs/reference/functions/weeks.md), [`days`](https://tenzir.com/docs/reference/functions/days.md), [`hours`](https://tenzir.com/docs/reference/functions/hours.md), [`minutes`](https://tenzir.com/docs/reference/functions/minutes.md), [`seconds`](https://tenzir.com/docs/reference/functions/seconds.md), [`milliseconds`](https://tenzir.com/docs/reference/functions/milliseconds.md), [`microseconds`](https://tenzir.com/docs/reference/functions/microseconds.md), [`nanoseconds`](https://tenzir.com/docs/reference/functions/nanoseconds.md)

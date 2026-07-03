@@ -1,5 +1,6 @@
 # parse_grok
 
+> Parses a string according to a grok pattern.
 
 Parses a string according to a grok pattern.
 
@@ -186,5 +187,5 @@ output.dur = output.dur * 1s
 
 ## See Also
 
-* [`read_grok`](http://docs.tenzir.com/reference/operators/read_grok.md)
+* [`read_grok`](https://tenzir.com/docs/reference/operators/read_grok.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

@@ -1,5 +1,6 @@
 # partitions
 
+> Retrieves metadata about events stored at a node.
 
 Retrieves metadata about events stored at a node.
 
@@ -24,7 +25,7 @@ Tenzir emits partition information with the following schema:
 Contains detailed information about a partition.
 
 | Field             | Type     | Description                                                                          |
-| :---------------- | :------- | :----------------------------------------------------------------------------------- |
+| ----------------- | -------- | ------------------------------------------------------------------------------------ |
 | `uuid`            | `string` | The unique ID of the partition in the UUIDv4 format.                                 |
 | `memusage`        | `uint64` | The memory usage of the partition in bytes.                                          |
 | `diskusage`       | `uint64` | The disk usage of the partition in bytes.                                            |
@@ -41,7 +42,7 @@ Contains detailed information about a partition.
 The records `store`, `indexes`, and `sketches` have the following schema:
 
 | Field  | Type     | Description               |
-| :----- | :------- | :------------------------ |
+| ------ | -------- | ------------------------- |
 | `url`  | `string` | The URL of the resource.  |
 | `size` | `uint64` | The size of the resource. |
 

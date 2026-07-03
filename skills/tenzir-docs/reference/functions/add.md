@@ -1,5 +1,6 @@
 # add
 
+> Adds an element into a list if it doesn’t already exist (set-insertion).
 
 Adds an element into a list if it doesn’t already exist (set-insertion).
 
@@ -56,9 +57,9 @@ xs = xs.add("hello")
 
 ## See Also
 
-* [`append`](http://docs.tenzir.com/reference/functions/append.md)
-* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
-* [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md)
-* [`remove`](http://docs.tenzir.com/reference/functions/remove.md)
+* [`append`](https://tenzir.com/docs/reference/functions/append.md)
+* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
+* [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md)
+* [`remove`](https://tenzir.com/docs/reference/functions/remove.md)
 * [Enrich events with AI](../../guides/enrichment/enrich-events-with-ai.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

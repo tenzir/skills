@@ -1,5 +1,6 @@
 # discard
 
+> Discards all incoming events.
 
 Discards all incoming events.
 

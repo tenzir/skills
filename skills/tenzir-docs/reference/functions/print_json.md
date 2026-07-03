@@ -1,5 +1,6 @@
 # print_json
 
+> Transforms a value into a JSON string.
 
 Transforms a value into a JSON string.
 
@@ -79,6 +80,6 @@ x = x.print_json(strip_null_fields=true)
 
 ## See Also
 
-* [`write_json`](http://docs.tenzir.com/reference/operators/write_json.md)
-* [`parse_json`](http://docs.tenzir.com/reference/functions/parse_json.md)
-* [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md)
+* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
+* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
+* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)

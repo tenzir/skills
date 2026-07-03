@@ -1,5 +1,6 @@
 # duration
 
+> Casts an expression to a duration value.
 
 Casts an expression to a duration value.
 
@@ -26,5 +27,5 @@ dur = duration(str)
 
 ## See Also
 
-* [`time`](http://docs.tenzir.com/reference/functions/time.md)
+* [`time`](https://tenzir.com/docs/reference/functions/time.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

@@ -1,5 +1,6 @@
 # read_csv
 
+> Read CSV (Comma-Separated Values) from a byte stream.
 
 Read CSV (Comma-Separated Values) from a byte stream.
 
@@ -23,7 +24,7 @@ Silently fill missing trailing values in a row with `null` instead of emitting a
 
 ### `comments = bool (optional)`
 
-Treat lines beginning with ”#” as comments.
+Treat lines beginning with “#” as comments.
 
 ### `header = list<string>|string (optional)`
 
@@ -199,10 +200,10 @@ read_csv header="message,count,ip"
 
 ## See Also
 
-* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)
-* [`print_csv`](http://docs.tenzir.com/reference/functions/print_csv.md)
-* [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md)
-* [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md)
-* [`read_xsv`](http://docs.tenzir.com/reference/operators/read_xsv.md)
-* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
+* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
+* [`print_csv`](https://tenzir.com/docs/reference/functions/print_csv.md)
+* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
+* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
+* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
+* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

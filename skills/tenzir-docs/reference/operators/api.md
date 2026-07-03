@@ -1,5 +1,6 @@
 # api
 
+> Use Tenzir’s REST API directly from a pipeline.
 
 Use Tenzir’s REST API directly from a pipeline.
 
@@ -15,7 +16,7 @@ The `api` operator interacts with Tenzir’s REST API without needing to spin up
 
 The endpoint to request, e.g., `/pipeline/list` to list all managed pipelines.
 
-Tenzir’s [REST API specification](https://docs.tenzir.com/reference/node/api) lists all available endpoints.
+Tenzir’s [REST API specification](openapi.md) lists all available endpoints.
 
 ### `request_body: string (optional)`
 
@@ -41,4 +42,4 @@ api "/pipeline/create", {
 
 ## See Also
 
-* [`openapi`](http://docs.tenzir.com/reference/operators/openapi.md)
+* [`openapi`](https://tenzir.com/docs/reference/operators/openapi.md)

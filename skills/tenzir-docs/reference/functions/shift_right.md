@@ -1,5 +1,6 @@
 # shift_right
 
+> Performs a bit-wise right shift.
 
 Performs a bit-wise right shift.
 
@@ -33,8 +34,8 @@ from {x: shift_right(20, 2)}
 
 ## See Also
 
-* [`bit_and`](http://docs.tenzir.com/reference/functions/bit_and.md)
-* [`bit_not`](http://docs.tenzir.com/reference/functions/bit_not.md)
-* [`bit_or`](http://docs.tenzir.com/reference/functions/bit_or.md)
-* [`bit_xor`](http://docs.tenzir.com/reference/functions/bit_xor.md)
-* [`shift_left`](http://docs.tenzir.com/reference/functions/shift_left.md)
+* [`bit_and`](https://tenzir.com/docs/reference/functions/bit_and.md)
+* [`bit_not`](https://tenzir.com/docs/reference/functions/bit_not.md)
+* [`bit_or`](https://tenzir.com/docs/reference/functions/bit_or.md)
+* [`bit_xor`](https://tenzir.com/docs/reference/functions/bit_xor.md)
+* [`shift_left`](https://tenzir.com/docs/reference/functions/shift_left.md)

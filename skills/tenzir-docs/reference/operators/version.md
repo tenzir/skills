@@ -1,5 +1,6 @@
 # version
 
+> Shows the current version.
 
 Shows the current version.
 
@@ -20,7 +21,7 @@ Tenzir emits version information with the following schema.
 Contains detailed information about the process version.
 
 | Field          | Type           | Description                                                                        |
-| :------------- | :------------- | :--------------------------------------------------------------------------------- |
+| -------------- | -------------- | ---------------------------------------------------------------------------------- |
 | `version`      | `string`       | The formatted version string.                                                      |
 | `tag`          | `string`       | An optional identifier of the build.                                               |
 | `major`        | `uint64`       | The major release version.                                                         |
@@ -33,7 +34,7 @@ Contains detailed information about the process version.
 The `build` record contains the following fields:
 
 | Field        | Type     | Description                                                                |
-| :----------- | :------- | :------------------------------------------------------------------------- |
+| ------------ | -------- | -------------------------------------------------------------------------- |
 | `type`       | `string` | The configured build type. One of `Release`, `Debug`, or `RelWithDebInfo`. |
 | `tree_hash`  | `string` | A hash of all files in the source directory.                               |
 | `assertions` | `bool`   | Whether potentially expensive run-time checks are enabled.                 |
@@ -42,14 +43,14 @@ The `build` record contains the following fields:
 The `build.sanitzers` record contains the following fields:
 
 | Field                | Type   | Description                                          |
-| :------------------- | :----- | :--------------------------------------------------- |
+| -------------------- | ------ | ---------------------------------------------------- |
 | `address`            | `bool` | Whether the address sanitizer is enabled.            |
 | `undefined_behavior` | `bool` | Whether the undefined behavior sanitizer is enabled. |
 
 The `dependencies` record contains the following fields:
 
 | Field     | Type     | Description                    |
-| :-------- | :------- | :----------------------------- |
+| --------- | -------- | ------------------------------ |
 | `name`    | `string` | The name of the dependency.    |
 | `version` | `string` | THe version of the dependency. |
 

@@ -1,5 +1,6 @@
 # Send to destinations
 
+> This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about message destinations, data stores, file output patterns, and expression-based serialization.
 
 This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about message destinations, data stores, file output patterns, and expression-based serialization.
 
@@ -132,7 +133,7 @@ to_file "archive.parquet.zst" {
 }
 ```
 
-Write JSON Lines to [S3](../../integrations/amazon/s3.md):
+Write JSON Lines to [Amazon S3](../../integrations/amazon/s3.md):
 
 ```tql
 to_file "s3://bucket/logs/events.jsonl" {
@@ -146,7 +147,7 @@ Send newline-delimited JSON over [TCP](../../integrations/tcp.md):
 to_tcp "collector.example.com:5044" { write_ndjson }
 ```
 
-For protocols that expect a delimiter after every message, print the event to a string and use [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md) for the byte-stream framing:
+For protocols that expect a delimiter after every message, print the event to a string and use [`write_delimited`](https://tenzir.com/docs/reference/operators/write_delimited.md) for the byte-stream framing:
 
 ```tql
 to_tcp "collector.example.com:12201" {
@@ -196,24 +197,17 @@ to_kafka f"events.{event_type}"
 
 ## See also
 
-* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
-* [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
-* [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)
-* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
-* [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md)
-* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
-* [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md)
-* [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md)
-* [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
+* [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md)
+* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
+* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
+* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
+* [`write_delimited`](https://tenzir.com/docs/reference/operators/write_delimited.md)
+* [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md)
+* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
 * [Read from data stores](../collecting/read-from-data-stores.md)
 * [Load-balance pipelines](load-balance-pipelines.md)
 * [Split and merge streams](split-and-merge-streams.md)
-* [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)
-* [`to_snowflake`](http://docs.tenzir.com/reference/operators/to_snowflake.md)
-
-## Contents
-
-- [Expose-data-as-server](expose-data-as-server.md)
-- [Split-and-merge-streams](split-and-merge-streams.md)
-- [Fan-out-with-subpipelines](fan-out-with-subpipelines.md)
-- [Load-balance-pipelines](load-balance-pipelines.md)
+* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
+* [`to_snowflake`](https://tenzir.com/docs/reference/operators/to_snowflake.md)

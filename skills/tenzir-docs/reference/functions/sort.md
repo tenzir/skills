@@ -1,5 +1,6 @@
 # sort
 
+> Sorts lists and record fields.
 
 Sorts lists and record fields.
 
@@ -79,5 +80,5 @@ xs = xs.sort(cmp=(a, b) => a.v < b.v)
 
 ## See Also
 
-* [`slice`](http://docs.tenzir.com/reference/functions/slice.md)
+* [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

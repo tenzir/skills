@@ -1,5 +1,6 @@
 # mode
 
+> Takes the most common non-null grouped value.
 
 Takes the most common non-null grouped value.
 
@@ -30,6 +31,6 @@ summarize mode_value=mode(x)
 
 ## See Also
 
-* [`median`](http://docs.tenzir.com/reference/functions/median.md)
-* [`value_counts`](http://docs.tenzir.com/reference/functions/value_counts.md)
+* [`median`](https://tenzir.com/docs/reference/functions/median.md)
+* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

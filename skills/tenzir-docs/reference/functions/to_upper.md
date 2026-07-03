@@ -1,5 +1,6 @@
 # to_upper
 
+> Converts a string to uppercase.
 
 Converts a string to uppercase.
 
@@ -25,8 +26,8 @@ from {x: "hello".to_upper()}
 
 ## See Also
 
-* [`capitalize`](http://docs.tenzir.com/reference/functions/capitalize.md)
-* [`is_upper`](http://docs.tenzir.com/reference/functions/is_upper.md)
-* [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md)
-* [`to_title`](http://docs.tenzir.com/reference/functions/to_title.md)
+* [`capitalize`](https://tenzir.com/docs/reference/functions/capitalize.md)
+* [`is_upper`](https://tenzir.com/docs/reference/functions/is_upper.md)
+* [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md)
+* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

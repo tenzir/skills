@@ -1,5 +1,6 @@
 # ocsf::apply
 
+> Casts incoming events to their OCSF type.
 
 Casts incoming events to their OCSF type.
 
@@ -9,7 +10,7 @@ ocsf::apply [preserve_variants=bool]
 
 Deprecated
 
-The `ocsf::apply` operator is deprecated. Use [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) instead.
+The `ocsf::apply` operator is deprecated. Use [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) instead.
 
 ## Description
 
@@ -99,6 +100,6 @@ to_clickhouse table="network_activity"
 
 ## See Also
 
-* [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
-* [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md)
-* [`ocsf::trim`](http://docs.tenzir.com/reference/operators/ocsf/trim.md)
+* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md)
+* [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md)

@@ -1,5 +1,6 @@
 # unordered
 
+> Removes ordering assumptions from a pipeline.
 
 Removes ordering assumptions from a pipeline.
 

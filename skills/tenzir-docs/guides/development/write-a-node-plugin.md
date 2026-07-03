@@ -1,15 +1,16 @@
 # Write a node plugin
 
+> This guide shows you how to extend Tenzir with custom operators, formats, or connectors by writing a C++ plugin. The implementation requires the following steps:
 
 This guide shows you how to extend Tenzir with custom operators, formats, or connectors by writing a C++ plugin. The implementation requires the following steps:
 
-1. [Setup the scaffolding](#setup-the-scaffolding)
-2. [Choose a plugin type](#choose-a-plugin-type)
-3. [Implement the plugin interface](#implement-the-plugin-interface)
-4. [Process configuration options](#process-configuration-options)
-5. [Compile the source code](#compile-the-source-code)
-6. [Add unit and integration tests](#add-unit-and-integration-tests)
-7. [Package it](#package-it)
+1. [Setup the scaffolding](write-a-node-plugin.md#setup-the-scaffolding)
+2. [Choose a plugin type](write-a-node-plugin.md#choose-a-plugin-type)
+3. [Implement the plugin interface](write-a-node-plugin.md#implement-the-plugin-interface)
+4. [Process configuration options](write-a-node-plugin.md#process-configuration-options)
+5. [Compile the source code](write-a-node-plugin.md#compile-the-source-code)
+6. [Add unit and integration tests](write-a-node-plugin.md#add-unit-and-integration-tests)
+7. [Package it](write-a-node-plugin.md#package-it)
 
 Next, we’ll discuss each step in more detail.
 
@@ -178,4 +179,4 @@ If you plan to publish your plugin, you may want to create a GitHub repository. 
 
 Contribute Upstream
 
-If you think your plugin provides key functionality beneficial to all Tenzir users, feel free to [submit a pull request](https://github.com/tenzir/tenzir/pulls) to the main repository. But please consider swinging by our [community chat](https://docs.tenzir.com/discord) or starting a [GitHub Discussion](https://github.com/tenzir/tenzir/discussions) to ensure that your contribution becomes a fruitful addition. 🙏
+If you think your plugin provides key functionality beneficial to all Tenzir users, feel free to [submit a pull request](https://github.com/tenzir/tenzir/pulls) to the main repository. But please consider swinging by our [community chat](https://discord.tenzir.com) or starting a [GitHub Discussion](https://github.com/tenzir/tenzir/discussions) to ensure that your contribution becomes a fruitful addition. 🙏

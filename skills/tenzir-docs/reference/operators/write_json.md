@@ -1,5 +1,6 @@
 # write_json
 
+> Transforms the input event stream to a JSON byte stream.
 
 Transforms the input event stream to a JSON byte stream.
 
@@ -15,7 +16,7 @@ Transforms the input event stream to a JSON byte stream.
 
 Newline-Delimited JSON (NDJSON)
 
-Use [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md) operator to write Newline-Delimited JSON.
+Use [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) operator to write Newline-Delimited JSON.
 
 ### `strip = bool (optional)`
 
@@ -87,8 +88,8 @@ write_json strip_null_fields=true
 
 ## See Also
 
-* [`parse_json`](http://docs.tenzir.com/reference/functions/parse_json.md)
-* [`print_json`](http://docs.tenzir.com/reference/functions/print_json.md)
-* [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md)
-* [`write_tql`](http://docs.tenzir.com/reference/operators/write_tql.md)
+* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
+* [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md)
+* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
+* [`write_tql`](https://tenzir.com/docs/reference/operators/write_tql.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

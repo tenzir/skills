@@ -1,11 +1,12 @@
 # Manage organizations
 
+> This guide shows you how to create, configure, and delete organizations in the Tenzir Platform. You’ll learn how to perform these tasks through both the web and the CLI.
 
 This guide shows you how to create, configure, and delete organizations in the Tenzir Platform. You’ll learn how to perform these tasks through both the web and the CLI.
 
 Availability
 
-As a feature preview, organizations are currently available to all users. In the future, they will require the **Professional Edition** or higher. See [tenzir.com/pricing](https://tenzir.com/pricing) for details.
+As a feature preview, organizations are currently available to all users. In the future, they will require the **Professional Edition** or higher. See [tenzir.com/pricing](https://tenzir.com/pricing.md) for details.
 
 ## Create an organization
 
@@ -72,11 +73,3 @@ Only admins can delete an organization.
 * [Manage organization members](manage-organization-members.md)
 * [Manage organization workspaces](manage-organization-workspaces.md)
 * [Platform](../../explanations/platform.md)
-
-## Contents
-
-- [Manage-organization-members](manage-organization-members.md)
-- [Manage-organization-workspaces](manage-organization-workspaces.md)
-- [Configure-workspaces](configure-workspaces.md)
-- [Configure-dashboards](configure-dashboards.md)
-- [Use-ephemeral-nodes](use-ephemeral-nodes.md)

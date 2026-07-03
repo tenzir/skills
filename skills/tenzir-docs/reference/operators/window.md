@@ -1,5 +1,6 @@
 # window
 
+> Groups streaming events into event-time windows and runs a subpipeline for each window.
 
 Groups streaming events into event-time windows and runs a subpipeline for each window.
 
@@ -9,13 +10,13 @@ window size=duration, on=expr, [every=duration, tolerance=duration, idle_timeout
 
 ## Description
 
-The `window` operator splits an event stream into bounded time ranges. Each window has its own subpipeline. Events are streamed directly into the subpipeline rather than buffered and replayed when the window closes, so a subpipeline that only filters or transforms forwards events as they arrive. The subpipeline either emits events—which are forwarded as the operator’s output—or ends with a sink, in which case `window` itself becomes a sink. The subpipeline must not produce bytes.
+The `window` operator splits an event stream into bounded time ranges. Each window has its own subpipeline. Events are streamed directly into the subpipeline rather than buffered and replayed when the window closes, so a subpipeline that only filters or transforms forwards events as they arrive. The subpipeline either emits events - which are forwarded as the operator’s output - or ends with a sink, in which case `window` itself becomes a sink. The subpipeline must not produce bytes.
 
 Unlike `every`, which reruns a subpipeline on a wall-clock schedule, `window` operates on event time: it assigns each event to windows by the timestamp that `on` evaluates to. Use `summarize` without `window` to aggregate the complete input, or `summarize` with `options={frequency: ...}` for processing-time periodic emission when you don’t need event-time windows or late-event handling.
 
 `window` creates **fixed windows** of width `size`. These include tumbling windows (non-overlapping) and hopping windows (overlapping). Fixed windows use left-closed, right-open intervals: `[start, end)`. An event whose timestamp equals the window end belongs to the next window. Window boundaries are aligned to the Unix epoch.
 
-`window` has no built-in partition key. To maintain independent windows per entity—per user, host, or source IP address—wrap `window` in an outer `group` operator. The grouping key is then available inside the subpipeline as `$group`. Each key advances its own event-time clock, so sparse keys may close their windows late, or not until the input ends, unless `idle_timeout` is set.
+`window` has no built-in partition key. To maintain independent windows per entity - per user, host, or source IP address - wrap `window` in an outer `group` operator. The grouping key is then available inside the subpipeline as `$group`. Each key advances its own event-time clock, so sparse keys may close their windows late, or not until the input ends, unless `idle_timeout` is set.
 
 ### The event-time clock
 
@@ -28,7 +29,7 @@ A window closes once the clock reaches its end plus `tolerance`. The window’s 
 
 Output is streamed directly out of each window. Windows are usually closed in window-time order, but `window` makes no ordering guarantees about its output.
 
-Events are processed in stream order, independent of how they are grouped into batches: an event is late when an earlier event already advanced the clock to the close point of its window. Late events—those for a window that has already closed—are dropped with a warning. With overlapping windows an event is still delivered to whichever of its target windows are open; it is only reported as dropped when *all* of its target windows have already closed. The operator does not emit empty windows.
+Events are processed in stream order, independent of how they are grouped into batches: an event is late when an earlier event already advanced the clock to the close point of its window. Late events - those for a window that has already closed - are dropped with a warning. With overlapping windows an event is still delivered to whichever of its target windows are open; it is only reported as dropped when *all* of its target windows have already closed. The operator does not emit empty windows.
 
 ### `size = duration`
 
@@ -155,9 +156,9 @@ group {user: user, src_ip: src_ip} {
 
 ## See Also
 
-* [`group`](http://docs.tenzir.com/reference/operators/group.md)
-* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
-* [`every`](http://docs.tenzir.com/reference/operators/every.md)
+* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`every`](https://tenzir.com/docs/reference/operators/every.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

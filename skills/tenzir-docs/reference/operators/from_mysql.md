@@ -1,5 +1,6 @@
 # from_mysql
 
+> Reads events from a MySQL database.
 
 Reads events from a MySQL database.
 
@@ -115,7 +116,7 @@ Use `tls=true` to enable TLS with default settings and certificate verification,
 The operator maps MySQL types to [Type System](../types.md) as follows:
 
 | MySQL Type                    | Tenzir Type   | Notes                  |
-| :---------------------------- | :------------ | :--------------------- |
+| ----------------------------- | ------------- | ---------------------- |
 | `TINYINT(1)`                  | `bool`        | Boolean representation |
 | `TINYINT`, `SMALLINT`, `INT`  | `int64`       |                        |
 | `BIGINT`                      | `int64`       |                        |
@@ -217,5 +218,5 @@ from_mysql table="events", live=true, tracking_column="event_id",
 ## See Also
 
 * [Read from data stores](../../guides/collecting/read-from-data-stores.md)
-* [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)
+* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
 * [MySQL](../../integrations/mysql.md)

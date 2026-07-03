@@ -1,5 +1,6 @@
 # read_pcap
 
+> Parses PCAP byte streams into packet events.
 
 Parses PCAP byte streams into packet events.
 
@@ -19,7 +20,7 @@ The current implementation does *not* support [PCAPNG](https://www.ietf.org/arch
 
 Emit a `pcap.file_header` event that represents the PCAP file header. If present, the parser injects this additional event before the subsequent stream of packets.
 
-Emitting this extra event makes it possible to seed [`write_pcap`](http://docs.tenzir.com/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
+Emitting this extra event makes it possible to seed [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
 
 When the parser processes a concatenated stream of PCAP files, `emit_file_headers=true` also re-emits every intermediate file header as a separate event.
 
@@ -34,7 +35,7 @@ The operator emits events with the following schemas.
 Contains the global header for one PCAP trace.
 
 | Field           | Type     | Description                                 |
-| :-------------- | :------- | :------------------------------------------ |
+| --------------- | -------- | ------------------------------------------- |
 | `magic_number`  | `uint64` | The PCAP magic number.                      |
 | `major_version` | `uint64` | The major PCAP format version.              |
 | `minor_version` | `uint64` | The minor PCAP format version.              |
@@ -48,7 +49,7 @@ Contains the global header for one PCAP trace.
 Contains one captured packet from the trace.
 
 | Field                    | Type     | Description                            |
-| :----------------------- | :------- | :------------------------------------- |
+| ------------------------ | -------- | -------------------------------------- |
 | `timestamp`              | `time`   | The time when the packet was captured. |
 | `linktype`               | `uint64` | The link-layer type of the packet.     |
 | `original_packet_length` | `uint64` | The length of the original packet.     |
@@ -75,6 +76,6 @@ from_nic "en1" {
 
 ## See Also
 
-* [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md)
-* [`write_pcap`](http://docs.tenzir.com/reference/operators/write_pcap.md)
-* [`decapsulate`](http://docs.tenzir.com/reference/functions/decapsulate.md)
+* [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)
+* [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md)
+* [`decapsulate`](https://tenzir.com/docs/reference/functions/decapsulate.md)

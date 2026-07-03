@@ -1,5 +1,6 @@
 # Create account
 
+> The Tenzir Platform is a web interface for managing pipelines and nodes. Create an account to get started:
 
 The [Tenzir Platform](https://app.tenzir.com) is a web interface for managing pipelines and nodes. Create an account to get started:
 
@@ -15,7 +16,7 @@ You don’t need an account to run pipelines locally. See [Install Tenzir](../in
 
 4. If you created an account with us, you’ll receive an email with a link to verify your email address. Click the link to complete the registration process.
 
-Congratulations, you now have an account and can can freely use the Tenzir [Community Edition](https://tenzir.com/pricing).
+Congratulations, you now have an account and can can freely use the Tenzir [Community Edition](https://tenzir.com/pricing.md).
 
 ## Delete an Account
 

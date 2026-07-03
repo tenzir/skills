@@ -1,5 +1,6 @@
 # decrypt_cryptopan
 
+> Decrypts an IP address via Crypto-PAn.
 
 Decrypts an IP address via Crypto-PAn.
 
@@ -9,9 +10,9 @@ decrypt_cryptopan(address:ip, [seed=string], [family=string])
 
 ## Description
 
-The `decrypt_cryptopan` function decrypts an IP `address` that was encrypted with [`encrypt_cryptopan`](http://docs.tenzir.com/reference/functions/encrypt_cryptopan.md) and the same seed.
+The `decrypt_cryptopan` function decrypts an IP `address` that was encrypted with [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) and the same seed.
 
-Tenzir represents IPv4 addresses as IPv4-mapped IPv6 addresses with the `::ffff/96` prefix. [`encrypt_cryptopan`](http://docs.tenzir.com/reference/functions/encrypt_cryptopan.md) preserves this prefix for IPv4 addresses and permutes only the final 32 bits. For IPv6 addresses, it permutes the full 128-bit address.
+Tenzir represents IPv4 addresses as IPv4-mapped IPv6 addresses with the `::ffff/96` prefix. [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) preserves this prefix for IPv4 addresses and permutes only the final 32 bits. For IPv6 addresses, it permutes the full 128-bit address.
 
 By default, `decrypt_cryptopan` infers the address family from the ciphertext: addresses under `::ffff/96` decrypt as IPv4, and all other addresses decrypt as IPv6. A true IPv6 ciphertext can still land under `::ffff/96`, but this requires the first 96 encrypted bits to match the IPv4-mapped prefix exactly. The probability is therefore `2^-96`, or about `1.26e-29`.
 
@@ -65,7 +66,7 @@ from {
 
 ## See Also
 
-* [`community_id`](http://docs.tenzir.com/reference/functions/community_id.md)
-* [`encrypt_cryptopan`](http://docs.tenzir.com/reference/functions/encrypt_cryptopan.md)
+* [`community_id`](https://tenzir.com/docs/reference/functions/community_id.md)
+* [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

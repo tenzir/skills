@@ -1,5 +1,6 @@
 # to_title
 
+> Converts a string to title case.
 
 Converts a string to title case.
 
@@ -25,8 +26,8 @@ from {x: "hello world".to_title()}
 
 ## See Also
 
-* [`capitalize`](http://docs.tenzir.com/reference/functions/capitalize.md)
-* [`is_title`](http://docs.tenzir.com/reference/functions/is_title.md)
-* [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md)
-* [`to_upper`](http://docs.tenzir.com/reference/functions/to_upper.md)
+* [`capitalize`](https://tenzir.com/docs/reference/functions/capitalize.md)
+* [`is_title`](https://tenzir.com/docs/reference/functions/is_title.md)
+* [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md)
+* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

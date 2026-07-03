@@ -1,5 +1,6 @@
 # dns_lookup
 
+> Performs DNS lookups to resolve IP addresses to hostnames or hostnames to IP addresses.
 
 Performs DNS lookups to resolve IP addresses to hostnames or hostnames to IP addresses.
 
@@ -142,4 +143,4 @@ dns_lookup destination, result=dest_ips
 
 ## See Also
 
-* [`set`](http://docs.tenzir.com/reference/operators/set.md)
+* [`set`](https://tenzir.com/docs/reference/operators/set.md)

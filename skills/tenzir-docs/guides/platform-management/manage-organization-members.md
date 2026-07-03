@@ -1,5 +1,6 @@
 # Manage organization members
 
+> This guide shows you how to invite people to your organization, manage existing members, and understand the role-based permission model. You’ll learn how to use both the web and the CLI for these tasks.
 
 This guide shows you how to invite people to your organization, manage existing members, and understand the role-based permission model. You’ll learn how to use both the web and the CLI for these tasks.
 
@@ -8,16 +9,16 @@ This guide shows you how to invite people to your organization, manage existing 
 Organizations have two roles:
 
 | Capability                     | Admin | Member |
-| ------------------------------ | :---: | :----: |
-| View organization details      |   ✓   |    ✓   |
-| Access organization workspaces |   ✓   |    ✓   |
-| Create invitations             |   ✓   |        |
-| Manage invitations             |   ✓   |        |
-| Add or remove members          |   ✓   |        |
-| Change member roles            |   ✓   |        |
-| Create or delete workspaces    |   ✓   |        |
-| Update organization settings   |   ✓   |        |
-| Delete organization            |   ✓   |        |
+| ------------------------------ | ----- | ------ |
+| View organization details      | ✓     | ✓      |
+| Access organization workspaces | ✓     | ✓      |
+| Create invitations             | ✓     |        |
+| Manage invitations             | ✓     |        |
+| Add or remove members          | ✓     |        |
+| Change member roles            | ✓     |        |
+| Create or delete workspaces    | ✓     |        |
+| Update organization settings   | ✓     |        |
+| Delete organization            | ✓     |        |
 
 An organization must always have at least one admin. You cannot demote or remove the last remaining admin.
 

@@ -1,9 +1,10 @@
-# SQS
+# Amazon SQS integration
 
+> Send, receive, and manage messages between distributed applications.
 
 [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) is a managed message queue on AWS. It supports microservices, distributed systems, and serverless applications.
 
-Tenzir can receive messages from SQS queues with [`from_amazon_sqs`](http://docs.tenzir.com/reference/operators/from_amazon_sqs.md) and send messages to SQS queues with [`to_amazon_sqs`](http://docs.tenzir.com/reference/operators/to_amazon_sqs.md).
+Tenzir can receive messages from SQS queues with [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md) and send messages to SQS queues with [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md).
 
 When Tenzir reads from an SQS queue, it emits one event per SQS message. The event uses the `tenzir.sqs` schema and contains the message body in the `message` field together with SQS metadata such as the message ID, receive count, and send time.
 
@@ -58,10 +59,10 @@ from_amazon_sqs "my-queue", aws_iam={
 
 Tenzir needs these SQS permissions:
 
-| Operator                                                                           | Required permissions                                         |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [`from_amazon_sqs`](http://docs.tenzir.com/reference/operators/from_amazon_sqs.md) | `sqs:GetQueueUrl`, `sqs:ReceiveMessage`, `sqs:DeleteMessage` |
-| [`to_amazon_sqs`](http://docs.tenzir.com/reference/operators/to_amazon_sqs.md)     | `sqs:GetQueueUrl`, `sqs:SendMessage`                         |
+| Operator                                                                            | Required permissions                                         |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md) | `sqs:GetQueueUrl`, `sqs:ReceiveMessage`, `sqs:DeleteMessage` |
+| [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)     | `sqs:GetQueueUrl`, `sqs:SendMessage`                         |
 
 You don’t need `sqs:GetQueueUrl` when you pass a full queue URL. You also don’t need `sqs:DeleteMessage` for `from_amazon_sqs` pipelines that always use `keep_messages=true`.
 
@@ -98,7 +99,7 @@ this = message.parse_json()
 
 ## See Also
 
-* [`from_amazon_sqs`](http://docs.tenzir.com/reference/operators/from_amazon_sqs.md)
-* [`to_amazon_sqs`](http://docs.tenzir.com/reference/operators/to_amazon_sqs.md)
+* [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md)
+* [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)

@@ -1,5 +1,6 @@
 # from_amazon_sqs
 
+> Receives messages from an Amazon SQS queue.
 
 Receives messages from an [Amazon SQS](https://docs.aws.amazon.com/sqs/) queue.
 
@@ -93,7 +94,7 @@ If omitted, the operator uses the region from `aws_iam` when present. Otherwise,
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -171,6 +172,6 @@ from_amazon_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`to_amazon_sqs`](http://docs.tenzir.com/reference/operators/to_amazon_sqs.md)
+* [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
-* [SQS](../../integrations/amazon/sqs.md)
+* [Amazon SQS](../../integrations/amazon/sqs.md)

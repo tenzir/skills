@@ -1,5 +1,6 @@
 # where
 
+> Filters list elements based on a predicate.
 
 Filters list elements based on a predicate.
 
@@ -38,5 +39,5 @@ xs = xs.where(x => x > 3)
 
 ## See Also
 
-* [`map`](http://docs.tenzir.com/reference/functions/map.md)
+* [`map`](https://tenzir.com/docs/reference/functions/map.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

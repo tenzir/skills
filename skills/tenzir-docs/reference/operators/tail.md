@@ -1,5 +1,6 @@
 # tail
 
+> Limits the input to the last n events.
 
 Limits the input to the last `n` events.
 
@@ -11,7 +12,7 @@ tail [n:int]
 
 Forwards the last `n` events and discards the rest.
 
-`tail n` is a shorthand notation for [`slice begin=-n`](http://docs.tenzir.com/reference/operators/slice.md).
+`tail n` is a shorthand notation for [`slice begin=-n`](https://tenzir.com/docs/reference/operators/slice.md).
 
 ### `n: int (optional)`
 
@@ -37,6 +38,6 @@ tail 5
 
 ## See Also
 
-* [`head`](http://docs.tenzir.com/reference/operators/head.md)
-* [`slice`](http://docs.tenzir.com/reference/operators/slice.md)
+* [`head`](https://tenzir.com/docs/reference/operators/head.md)
+* [`slice`](https://tenzir.com/docs/reference/operators/slice.md)
 * [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)

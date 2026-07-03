@@ -1,5 +1,6 @@
 # rare
 
+> Shows the least common values.
 
 Shows the least common values.
 
@@ -11,7 +12,7 @@ rare x:field
 
 Shows the least common values for a given field. For each unique value, a new event containing its count will be produced. In general, `rare x` is equivalent to:
 
-This operator is the dual to [`top`](http://docs.tenzir.com/reference/operators/top.md).
+This operator is the dual to [`top`](https://tenzir.com/docs/reference/operators/top.md).
 
 ```tql
 summarize x, count=count()
@@ -51,7 +52,7 @@ head 5
 
 ## See Also
 
-* [`sort`](http://docs.tenzir.com/reference/operators/sort.md)
-* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
-* [`top`](http://docs.tenzir.com/reference/operators/top.md)
+* [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`top`](https://tenzir.com/docs/reference/operators/top.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

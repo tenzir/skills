@@ -1,5 +1,6 @@
 # from_unix_socket
 
+> Connects to a Unix domain socket and receives events.
 
 Connects to a Unix domain socket and receives events.
 
@@ -35,7 +36,7 @@ from_unix_socket "/run/collector.sock" {
 
 ## See Also
 
-* [`to_unix_socket`](http://docs.tenzir.com/reference/operators/to_unix_socket.md)
-* [`accept_unix_socket`](http://docs.tenzir.com/reference/operators/accept_unix_socket.md)
-* [`from_tcp`](http://docs.tenzir.com/reference/operators/from_tcp.md)
+* [`to_unix_socket`](https://tenzir.com/docs/reference/operators/to_unix_socket.md)
+* [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md)
+* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md)
 * [File](../../integrations/file.md)

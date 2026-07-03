@@ -1,5 +1,6 @@
-# Cloud Storage
+# Google Cloud Storage integration
 
+> Store, retrieve, and manage data objects across a scalable, cloud-based environment.
 
 [Cloud Storage](https://cloud.google.com/storage) is Google’s object storage service. Tenzir can treat it like a local filesystem to read and write files.
 
@@ -9,7 +10,7 @@ You need to configure appropriate credentials using Google’s [Application Defa
 
 ## Examples
 
-Use [`from_google_cloud_storage`](http://docs.tenzir.com/reference/operators/from_google_cloud_storage.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`to_google_cloud_storage`](http://docs.tenzir.com/reference/operators/to_google_cloud_storage.md) with a print operator.
+Use [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md) to read files from Cloud Storage. It supports glob patterns and automatic format detection. For writing, use [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md) with a print operator.
 
 ### Read events from a file in a bucket
 

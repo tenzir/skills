@@ -1,5 +1,6 @@
 # read_yaml
 
+> Parses an incoming YAML stream into events.
 
 Parses an incoming YAML stream into events.
 
@@ -161,6 +162,6 @@ from_file "input.yaml" {
 
 ## See Also
 
-* [`write_yaml`](http://docs.tenzir.com/reference/operators/write_yaml.md)
-* [`parse_yaml`](http://docs.tenzir.com/reference/functions/parse_yaml.md)
-* [`print_yaml`](http://docs.tenzir.com/reference/functions/print_yaml.md)
+* [`write_yaml`](https://tenzir.com/docs/reference/operators/write_yaml.md)
+* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
+* [`print_yaml`](https://tenzir.com/docs/reference/functions/print_yaml.md)

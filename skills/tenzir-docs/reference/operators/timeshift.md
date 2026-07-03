@@ -1,5 +1,6 @@
 # timeshift
 
+> Adjusts timestamps relative to a given start time, with an optional speedup.
 
 Adjusts timestamps relative to a given start time, with an optional speedup.
 
@@ -55,5 +56,5 @@ timeshift ts, start=1984-01-01, speed=0.01
 
 ## See Also
 
-* [`delay`](http://docs.tenzir.com/reference/operators/delay.md)
+* [`delay`](https://tenzir.com/docs/reference/operators/delay.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

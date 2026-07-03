@@ -1,21 +1,20 @@
-# OpenSearch
+# OpenSearch integration
 
+> Search, analyze, and visualize data with a distributed, open-source platform.
 
 [OpenSearch](https://opensearch.org) is a search and observability suite for unstructured data. Tenzir can send events to OpenSearch and emulate a OpenSearch-compatible Bulk API endpoint.
 
-When sending data to OpenSearch, Tenzir uses the [Bulk API](https://opensearch.org/docs/latest/api-reference/document-apis/bulk/) and attempts to maximally batch events for throughput, accumulating multiple events before shipping them within a single API call. You can control batching behavior with the `max_content_length` and `buffer_timeout` options.
+When sending data to OpenSearch, Tenzir uses the [Bulk API](https://opensearch.org/docs/latest/api-reference/document-apis/bulk/)and attempts to maximally batch events for throughput, accumulating multiple events before shipping them within a single API call. You can control batching behavior with the `max_content_length` and`buffer_timeout` options.
 
-Use `to_opensearch` to send events to OpenSearch Bulk API endpoints.
+Use `to_opensearch` to send events to OpenSearch Bulk API endpoints. For more details, see the documentation for the [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md) operator.
 
-For more details, see the documentation for the [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md) operator.
-
-Tenzir can also present a OpenSearch-compatible REST API via the [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md) operator.
+Tenzir can also present a OpenSearch-compatible REST API via the [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md) operator.
 
 ## Examples
 
 ### Query documents from a OpenSearch index
 
-Use [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) to query the [Search API](https://docs.opensearch.org/latest/api-reference/search-apis/search/). The Search API supports `GET` and `POST` requests to `/{index}/_search`. When you provide a request body, `from_http` uses `post` by default.
+Use [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)to query the [Search API](https://docs.opensearch.org/latest/api-reference/search-apis/search/). The Search API supports`GET` and `POST` requests to`/{index}/_search`. When you provide a request body,`from_http` uses `post` by default.
 
 ```tql
 from_http "https://localhost:9200/main/_search",
@@ -63,7 +62,7 @@ Add an `Authorization` header if your OpenSearch cluster requires authentication
 
 ### Export large result sets with scroll
 
-Use the [Scroll API](https://docs.opensearch.org/latest/api-reference/search-apis/scroll/) when you need a server-side search context for a long-running export. Start with a search request that includes a `scroll` query parameter, then return a request record that switches the next URL to `/_search/scroll` and sends the latest `_scroll_id` in the body:
+Use the [Scroll API](https://docs.opensearch.org/latest/api-reference/search-apis/scroll/) when you need a server-side search context for a long-running export. Start with a search request that includes a `scroll` query parameter, then return a request record that switches the next URL to `/_search/scroll` and sends the latest`_scroll_id` in the body.
 
 ```tql
 let $search = "https://localhost:9200/main/_search?scroll=10m"
@@ -88,7 +87,7 @@ unroll hits.hits
 this = hits.hits._source
 ```
 
-The paginated request inherits the `POST` method from the initial request because the initial request has a body. It also keeps the configured headers. Close the scroll context when the export is complete, because OpenSearch keeps the search context alive until the scroll timeout expires.
+The paginated request inherits the `POST` method from the initial request because the initial request has a body. It also keeps the configured headers. Close the scroll context when the export is complete, because OpenSearchkeeps the search context alive until the scroll timeout expires.
 
 ### Send events to a OpenSearch index
 
@@ -110,56 +109,14 @@ The above example updates the document with ID `XXX` with the contents from the 
 
 ### Accept data by emulating OpenSearch
 
-Tenzir can act as a drop-in replacement for OpenSearch by accepting data via a Bulk API endpoint. This allows you to point your [Logstash](https://opensearch.org/docs/latest/tools/logstash/index/) or Beats instances to Tenzir instead.
+Tenzir can act as a drop-in replacement for OpenSearch by accepting data via a Bulk API endpoint. This allows you to point your [Logstash](https://opensearch.org/docs/latest/tools/logstash/index/)or Beats instances to Tenzir instead.
 
 ```tql
 accept_opensearch "0.0.0.0:9200", keep_actions=true
 publish "opensearch"
 ```
 
-This pipeline accepts data on port 9200 and publishes all received events on the `opensearch` topic for further processing by other pipelines.
-
-Use `accept_opensearch` for new pipelines that receive bulk ingestion data.
-
-Setting `keep_actions=true` causes action objects to remain in the stream, like this:
-
-```tql
-{create:{_index:"filebeat-8.17.3"}} // 👈 action object
-{"@timestamp":2025-03-31T13:42:28.068Z,log:{offset:1,file:{path:"/mounted/logfile"}},message:"hello",input:{type:"log"},host:{name:"eb21"},agent:{id:"682cfcf4-f251-4576-abcb-6c8bcadfda08",name:"eb21",type:"filebeat",version:"8.17.3",ephemeral_id:"17f74f6e-36f0-4045-93e6-c549874716df"},ecs:{version:"8.0.0"}}
-{create:{_index:"filebeat-8.17.3"}} // 👈 action object
-{"@timestamp":2025-03-31T13:42:28.068Z,log:{offset:7,file:{path:"/mounted/logfile"}},message:"this",input:{type:"log"},host:{name:"eb21"},agent:{id:"682cfcf4-f251-4576-abcb-6c8bcadfda08",name:"eb21",type:"filebeat",version:"8.17.3",ephemeral_id:"17f74f6e-36f0-4045-93e6-c549874716df"},ecs:{version:"8.0.0"}}
-```
-
-#### Ship data via Filebeat
-
-Configure [Filebeat](https://www.elastic.co/beats/filebeat) as follows to ship data to Tenzir:
-
-filebeat.yml
-
-```yaml
-output.elasticsearch:
-  hosts: ["localhost:9200"]
-```
-
-Set `hosts` to the endpoint of the Tenzir pipeline accepting data.
-
-#### Ship data via Logstash
-
-Configure [Logstash](https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/) with the
-
-`opensearch` output plugin to ship data to Tenzir:
-
-pipeline.conf
-
-```javascript
-output {
-  opensearch {
-    hosts => "https://localhost:9200"
-  }
-}
-```
-
-Set `hosts` to the endpoint of the Tenzir pipeline accepting data.
+You can now configure a [Logstash output](https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/) to use the emulated Bulk API endpoint.
 
 ## See Also
 

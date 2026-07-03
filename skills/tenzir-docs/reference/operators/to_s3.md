@@ -1,5 +1,6 @@
 # to_s3
 
+> Writes events to one or multiple objects in Amazon S3.
 
 Writes events to one or multiple objects in Amazon S3.
 
@@ -47,7 +48,7 @@ Defaults to `false`.
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -80,7 +81,7 @@ Defaults to `5min`.
 
 A list of fields used to partition events into separate files. For every distinct combination of partition-field values, a separate file (or group of rotated files) is written. The URL must contain a `**` placeholder, which is replaced by the hive-style path `field1=value1/field2=value2/…`.
 
-The partitioning fields are **not** stripped from the written events — they remain in each record.
+The partitioning fields are **not** stripped from the written events - they remain in each record.
 
 ### `{ … }`
 
@@ -140,7 +141,7 @@ to_s3 "s3://my-bucket/logs/events_{uuid}.json.gz", max_size=10M {
 
 ## See Also
 
-* [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md)
-* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
-* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
-* [S3](../../integrations/amazon/s3.md)
+* [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
+* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
+* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
+* [Amazon S3](../../integrations/amazon/s3.md)

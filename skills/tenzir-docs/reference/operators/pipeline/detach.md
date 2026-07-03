@@ -1,5 +1,6 @@
 # pipeline::detach
 
+> Starts a pipeline in the node.
 
 Starts a pipeline in the node.
 
@@ -37,5 +38,5 @@ pipeline::detach {
 
 ## See Also
 
-* [`pipeline::list`](http://docs.tenzir.com/reference/operators/pipeline/list.md)
-* [`pipeline::run`](http://docs.tenzir.com/reference/operators/pipeline/run.md)
+* [`pipeline::list`](https://tenzir.com/docs/reference/operators/pipeline/list.md)
+* [`pipeline::run`](https://tenzir.com/docs/reference/operators/pipeline/run.md)

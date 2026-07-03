@@ -2,7 +2,6 @@
 
 > Add threat intelligence to OCSF enrichments, observables, and OSINT fields
 
-
 This guide shows you how to enrich OCSF events with threat intelligence from lookup tables. Use this pattern when you ingest indicators of compromise, reputation scores, malware names, campaign context, or OSINT from external feeds.
 
 Start with the OCSF `enrichments` array when you want to attach the source record as inline context. For production mappings, prefer one lookup table per OCSF object and place the result in semantic fields such as `observables`, `osint`, or nested `reputation` objects. This keeps threat intelligence queryable without requiring every downstream consumer to understand a provider-specific `enrichment` payload.
@@ -388,9 +387,9 @@ Keeping one table per OCSF object and indicator type prevents ambiguous values, 
 
 ## See Also
 
-* [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md)
-* [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md)
-* [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md)
+* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
+* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
+* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
 * [Use lookup tables](use-lookup-tables.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

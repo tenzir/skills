@@ -1,5 +1,6 @@
 # config
 
+> Reads Tenzir’s configuration file.
 
 Reads Tenzir’s configuration file.
 
@@ -43,5 +44,5 @@ select flag = $flags.get(country, "unknown")
 
 ## See Also
 
-* [`env`](http://docs.tenzir.com/reference/functions/env.md)
-* [`secret`](http://docs.tenzir.com/reference/functions/secret.md)
+* [`env`](https://tenzir.com/docs/reference/functions/env.md)
+* [`secret`](https://tenzir.com/docs/reference/functions/secret.md)

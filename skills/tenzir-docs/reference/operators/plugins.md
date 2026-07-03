@@ -1,5 +1,6 @@
 # plugins
 
+> Shows all available plugins and built-ins.
 
 Shows all available plugins and built-ins.
 
@@ -22,7 +23,7 @@ Tenzir emits plugin information with the following schema.
 Contains detailed information about the available plugins.
 
 | Field          | Type           | Description                                                                                 |
-| :------------- | :------------- | :------------------------------------------------------------------------------------------ |
+| -------------- | -------------- | ------------------------------------------------------------------------------------------- |
 | `name`         | `string`       | The unique, case-insensitive name of the plugin.                                            |
 | `version`      | `string`       | The version identifier of the plugin, or `bundled` if the plugin has no version of its own. |
 | `kind`         | `string`       | The kind of plugin. One of `builtin`, `static`, or `dynamic`.                               |

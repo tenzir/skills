@@ -1,5 +1,6 @@
 # uuid
 
+> Generates a Universally Unique Identifier (UUID) string.
 
 Generates a Universally Unique Identifier (UUID) string.
 
@@ -59,4 +60,4 @@ from {guid: uuid(version="nil")}
 
 ## See Also
 
-* [`random`](http://docs.tenzir.com/reference/functions/random.md)
+* [`random`](https://tenzir.com/docs/reference/functions/random.md)

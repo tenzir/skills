@@ -1,5 +1,6 @@
 # random
 
+> Generates a random number in \[0,1].
 
 Generates a random number in *\[0,1]*.
 
@@ -25,5 +26,5 @@ from {x: random()}
 
 ## See Also
 
-* [`uuid`](http://docs.tenzir.com/reference/functions/uuid.md)
+* [`uuid`](https://tenzir.com/docs/reference/functions/uuid.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

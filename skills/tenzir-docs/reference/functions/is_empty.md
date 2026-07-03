@@ -1,5 +1,6 @@
 # is_empty
 
+> Checks whether a value is empty.
 
 Checks whether a value is empty.
 
@@ -89,5 +90,5 @@ from {
 
 ## See Also
 
-* [`has`](http://docs.tenzir.com/reference/functions/has.md)
-* [`length`](http://docs.tenzir.com/reference/functions/length.md)
+* [`has`](https://tenzir.com/docs/reference/functions/has.md)
+* [`length`](https://tenzir.com/docs/reference/functions/length.md)

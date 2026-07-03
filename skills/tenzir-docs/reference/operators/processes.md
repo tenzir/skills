@@ -1,5 +1,6 @@
 # processes
 
+> Shows a snapshot of running processes.
 
 Shows a snapshot of running processes.
 
@@ -20,7 +21,7 @@ Tenzir emits process information with the following schema.
 Contains detailed information about the process.
 
 | Field          | Type           | Description                                                  |
-| :------------- | :------------- | :----------------------------------------------------------- |
+| -------------- | -------------- | ------------------------------------------------------------ |
 | `name`         | `string`       | The process name.                                            |
 | `command_line` | `list<string>` | The command line of the process.                             |
 | `pid`          | `uint64`       | The process identifier.                                      |
@@ -58,5 +59,5 @@ head 5
 
 ## See Also
 
-* [`files`](http://docs.tenzir.com/reference/operators/files.md)
-* [`sockets`](http://docs.tenzir.com/reference/operators/sockets.md)
+* [`files`](https://tenzir.com/docs/reference/operators/files.md)
+* [`sockets`](https://tenzir.com/docs/reference/operators/sockets.md)

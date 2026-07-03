@@ -1,6 +1,7 @@
 # from_opensearch
 
+> The fromopensearch operator is no longer available.
 
 The `from_opensearch` operator is no longer available.
 
-Use [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md) instead.
+Use [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md) instead.

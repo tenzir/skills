@@ -1,15 +1,16 @@
 # Overview
 
+> This guide provides an overview of data collection in TQL. You’ll learn about the different approaches for ingesting data from various sources.
 
 This guide provides an overview of data collection in TQL. You’ll learn about the different approaches for ingesting data from various sources.
 
 TQL provides two types of input operators:
 
-* **`from_*` operators** like [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) and
+* **`from_*` operators** like [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) and
 
-  [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
+  [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
 
-* **Direct event operators** like [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md) and [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md) produce structured events directly without an intermediate byte stream.
+* **Direct event operators** like [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) and [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) produce structured events directly without an intermediate byte stream.
 
 ## Collection patterns
 
@@ -101,11 +102,3 @@ For routing data to outputs, see the [Routing guides](routing/send-to-destinatio
 * [Read from data stores](collecting/read-from-data-stores.md)
 * [Get data from the network](collecting/get-data-from-the-network.md)
 * [Send to destinations](routing/send-to-destinations.md)
-
-## Contents
-
-- [Read-and-watch-files](collecting/read-and-watch-files.md)
-- [Fetch-via-http-and-apis](collecting/fetch-via-http-and-apis.md)
-- [Read-from-message-brokers](collecting/read-from-message-brokers.md)
-- [Read-from-data-stores](collecting/read-from-data-stores.md)
-- [Get-data-from-the-network](collecting/get-data-from-the-network.md)

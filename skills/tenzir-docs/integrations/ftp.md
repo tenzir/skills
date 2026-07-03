@@ -1,7 +1,8 @@
-# FTP
+# FTP integration
 
+> Transfer files between a client and a server using a reliable, connection-based protocol.
 
-Tenzir supports the [File Transfer Protocol (FTP)](https://en.wikipedia.org/wiki/File_Transfer_Protocol), both downloading and uploading files. Use [`from_ftp`](http://docs.tenzir.com/reference/operators/from_ftp.md) to download bytes and parse them with a subpipeline, and use [`to_ftp`](http://docs.tenzir.com/reference/operators/to_ftp.md) to print events with a subpipeline and upload the result.
+Tenzir supports the [File Transfer Protocol (FTP)](https://en.wikipedia.org/wiki/File_Transfer_Protocol), both downloading and uploading files. Use [`from_ftp`](https://tenzir.com/docs/reference/operators/from_ftp.md) to download bytes and parse them with a subpipeline, and use [`to_ftp`](https://tenzir.com/docs/reference/operators/to_ftp.md) to print events with a subpipeline and upload the result.
 
 FTP consists of two separate TCP connections, one control and one data connection. This can be tricky for some firewalls and may require special attention.
 
@@ -11,7 +12,7 @@ These examples use the direct FTP operators with explicit parsing and printing s
 
 ### Download and parse a file from an FTP server
 
-Use [`from_ftp`](http://docs.tenzir.com/reference/operators/from_ftp.md) with [`read_ndjson`](http://docs.tenzir.com/reference/operators/read_ndjson.md) to turn the downloaded bytes into events.
+Use [`from_ftp`](https://tenzir.com/docs/reference/operators/from_ftp.md) with [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md) to turn the downloaded bytes into events.
 
 ```tql
 from_ftp "ftp://user:pass@ftp.example.org/path/to/file.ndjson" {
@@ -21,7 +22,7 @@ from_ftp "ftp://user:pass@ftp.example.org/path/to/file.ndjson" {
 
 ### Upload events to an FTP server
 
-Use [`to_ftp`](http://docs.tenzir.com/reference/operators/to_ftp.md) with [`write_ndjson`](http://docs.tenzir.com/reference/operators/write_ndjson.md) to serialize events before uploading them.
+Use [`to_ftp`](https://tenzir.com/docs/reference/operators/to_ftp.md) with [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) to serialize events before uploading them.
 
 ```tql
 from {

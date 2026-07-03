@@ -1,5 +1,6 @@
 # Read from message brokers
 
+> This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
 
 This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
 
@@ -150,6 +151,6 @@ The operator produces events with a `message` field containing the raw message c
 * [Kafka](../../integrations/kafka.md)
 * [NATS](../../integrations/nats.md)
 * [AMQP](../../integrations/amqp.md)
-* [Kinesis](../../integrations/amazon/kinesis.md)
-* [SQS](../../integrations/amazon/sqs.md)
-* [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+* [Amazon Kinesis](../../integrations/amazon/kinesis.md)
+* [Amazon SQS](../../integrations/amazon/sqs.md)
+* [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

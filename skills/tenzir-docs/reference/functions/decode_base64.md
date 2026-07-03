@@ -1,5 +1,6 @@
 # decode_base64
 
+> Decodes bytes as Base64.
 
 Decodes bytes as Base64.
 
@@ -30,5 +31,5 @@ decoded = bytes.decode_base64()
 
 ## See Also
 
-* [`encode_base64`](http://docs.tenzir.com/reference/functions/encode_base64.md)
+* [`encode_base64`](https://tenzir.com/docs/reference/functions/encode_base64.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

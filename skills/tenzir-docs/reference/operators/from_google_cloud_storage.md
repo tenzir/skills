@@ -1,5 +1,6 @@
 # from_google_cloud_storage
 
+> Reads one or multiple files from Google Cloud Storage.
 
 Reads one or multiple files from Google Cloud Storage.
 
@@ -65,7 +66,10 @@ Pipeline to use for parsing the file. By default, this pipeline is derived from 
 
 Inside the subpipeline, the `$file` variable is available as a record with the following fields:
 
-\| Field | Type | Description | | :------ | :------- | :--------------------------------------- | | `path` | `string` | The absolute path of the file being read | | `mtime` | `time` | The last modification time of the file |
+| Field   | Type     | Description                              |
+| ------- | -------- | ---------------------------------------- |
+| `path`  | `string` | The absolute path of the file being read |
+| `mtime` | `time`   | The last modification time of the file   |
 
 For example, to attach the source path to each event:
 
@@ -117,6 +121,6 @@ from_google_cloud_storage "gs://security-logs/suricata/**.json" {
 
 ## See Also
 
-* [`from_google_cloud_storage`](http://docs.tenzir.com/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](http://docs.tenzir.com/reference/operators/to_google_cloud_storage.md)
-* [Cloud Storage](../../integrations/google/cloud-storage.md)
+* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md)
+* [Google Cloud Storage](../../integrations/google/cloud-storage.md)

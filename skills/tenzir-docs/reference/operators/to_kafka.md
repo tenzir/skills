@@ -1,5 +1,6 @@
 # to_kafka
 
+> Sends messages to an Apache Kafka topic.
 
 Sends messages to an Apache Kafka topic.
 
@@ -47,7 +48,7 @@ We recommend factoring these options into the plugin-specific `kafka.yaml` so th
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -110,6 +111,6 @@ to_kafka "metrics", message=this.print_ndjson(), key="server-01"
 
 ## See Also
 
-* [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md)
+* [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)

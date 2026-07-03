@@ -1,5 +1,6 @@
 # read_cef
 
+> Parses an incoming Common Event Format (CEF) stream into events.
 
 Parses an incoming Common Event Format (CEF) stream into events.
 
@@ -159,7 +160,7 @@ Type Conflict
 
 ## See Also
 
-* [`read_leef`](http://docs.tenzir.com/reference/operators/read_leef.md)
-* [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md)
-* [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md)
+* [`read_leef`](https://tenzir.com/docs/reference/operators/read_leef.md)
+* [`parse_cef`](https://tenzir.com/docs/reference/functions/parse_cef.md)
+* [`print_cef`](https://tenzir.com/docs/reference/functions/print_cef.md)
 * [Syslog](../../integrations/syslog.md)

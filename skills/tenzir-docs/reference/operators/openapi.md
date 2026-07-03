@@ -1,5 +1,6 @@
 # openapi
 
+> Shows the node’s OpenAPI specification.
 
 Shows the node’s OpenAPI specification.
 
@@ -9,7 +10,7 @@ openapi
 
 ## Description
 
-The `openapi` operator shows the current Tenzir node’s [OpenAPI specification](https://docs.tenzir.com/reference/node/api) for all available REST endpoint plugins.
+The `openapi` operator shows the current Tenzir node’s [OpenAPI specification](openapi.md) for all available REST endpoint plugins.
 
 ## Examples
 
@@ -22,4 +23,4 @@ write_yaml
 
 ## See Also
 
-* [`api`](http://docs.tenzir.com/reference/operators/api.md)
+* [`api`](https://tenzir.com/docs/reference/operators/api.md)

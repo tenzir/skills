@@ -1,5 +1,6 @@
 # read_kv
 
+> Read Key-Value pairs from a byte stream.
 
 Read Key-Value pairs from a byte stream.
 
@@ -238,5 +239,5 @@ read_kv
 
 ## See Also
 
-* [`write_kv`](http://docs.tenzir.com/reference/operators/write_kv.md)
-* [`parse_kv`](http://docs.tenzir.com/reference/functions/parse_kv.md)
+* [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md)
+* [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md)

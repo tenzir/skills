@@ -1,5 +1,6 @@
 # read_zeek_tsv
 
+> Parses an incoming Zeek TSV stream into events.
 
 Parses an incoming `Zeek TSV` stream into events.
 
@@ -51,8 +52,8 @@ from_file "/tmp/conn.log" {
 
 ## See Also
 
-* [`read_zeek_json`](http://docs.tenzir.com/reference/operators/read_zeek_json.md)
-* [`write_zeek_tsv`](http://docs.tenzir.com/reference/operators/write_zeek_tsv.md)
+* [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md)
+* [`write_zeek_tsv`](https://tenzir.com/docs/reference/operators/write_zeek_tsv.md)
 * [Import into a node](../../guides/edge-storage/import-into-a-node.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)
 * [Zeek](../../integrations/zeek.md)

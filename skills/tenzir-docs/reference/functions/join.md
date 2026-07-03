@@ -1,5 +1,6 @@
 # join
 
+> Joins a list of strings into a single string using a separator.
 
 Joins a list of strings into a single string using a separator.
 
@@ -35,6 +36,6 @@ from {x: join(["a", "b", "c"], "-")}
 
 ## See Also
 
-* [`split`](http://docs.tenzir.com/reference/functions/split.md)
-* [`split_regex`](http://docs.tenzir.com/reference/functions/split_regex.md)
+* [`split`](https://tenzir.com/docs/reference/functions/split.md)
+* [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

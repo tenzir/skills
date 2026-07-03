@@ -1,5 +1,6 @@
 # hour
 
+> Extracts the hour component from a timestamp.
 
 Extracts the hour component from a timestamp.
 
@@ -35,9 +36,9 @@ hour = ts.hour()
 
 ## See Also
 
-* [`year`](http://docs.tenzir.com/reference/functions/year.md)
-* [`month`](http://docs.tenzir.com/reference/functions/month.md)
-* [`day`](http://docs.tenzir.com/reference/functions/day.md)
-* [`minute`](http://docs.tenzir.com/reference/functions/minute.md)
-* [`second`](http://docs.tenzir.com/reference/functions/second.md)
+* [`year`](https://tenzir.com/docs/reference/functions/year.md)
+* [`month`](https://tenzir.com/docs/reference/functions/month.md)
+* [`day`](https://tenzir.com/docs/reference/functions/day.md)
+* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
+* [`second`](https://tenzir.com/docs/reference/functions/second.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

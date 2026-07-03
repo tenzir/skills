@@ -1,5 +1,6 @@
 # prepend
 
+> Inserts an element at the start of a list.
 
 Inserts an element at the start of a list.
 
@@ -43,8 +44,8 @@ xs = xs.prepend(3)
 
 ## See Also
 
-* [`add`](http://docs.tenzir.com/reference/functions/add.md)
-* [`append`](http://docs.tenzir.com/reference/functions/append.md)
-* [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md)
-* [`remove`](http://docs.tenzir.com/reference/functions/remove.md)
+* [`add`](https://tenzir.com/docs/reference/functions/add.md)
+* [`append`](https://tenzir.com/docs/reference/functions/append.md)
+* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
+* [`remove`](https://tenzir.com/docs/reference/functions/remove.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

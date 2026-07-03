@@ -1,5 +1,6 @@
 # last
 
+> Takes the last non-null grouped value.
 
 Takes the last non-null grouped value.
 
@@ -30,5 +31,5 @@ summarize last_value=last(x)
 
 ## See Also
 
-* [`first`](http://docs.tenzir.com/reference/functions/first.md)
+* [`first`](https://tenzir.com/docs/reference/functions/first.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

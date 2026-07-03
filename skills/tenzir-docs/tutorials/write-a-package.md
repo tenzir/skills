@@ -1,5 +1,6 @@
 # Write a package
 
+> This tutorial teaches you how packages bundle pipelines, operators, contexts, and examples. You’ll build a package for an SSL blacklist that detects malicious certificates. You can then install packages from the Tenzir Library or deploy them as code.
 
 This tutorial teaches you how packages bundle pipelines, operators, contexts, and examples. You’ll build a package for an SSL blacklist that detects malicious certificates. You can then [install packages](../guides/packages/install-a-package.md) from the [Tenzir Library](https://app.tenzir.com/library) or deploy them as code.
 
@@ -45,7 +46,7 @@ Create a directory named `sslbl` and add the standard package layout:
 
 ## Add the package manifest
 
-The [`package.yaml`](http://docs.tenzir.com/packages/sslbl/package.yaml) is the **package manifest**. It contains descriptive fields, metadata for external tools, and the definitions of contexts and inputs, as we shall see below.
+The [`package.yaml`](https://tenzir.com/packages/sslbl/package.yaml) is the **package manifest**. It contains descriptive fields, metadata for external tools, and the definitions of contexts and inputs, as we shall see below.
 
 ### Add descriptive metadata
 
@@ -158,7 +159,7 @@ This pipeline translates the original feed into this shape:
 
 OCSF Verbosity
 
-You may notice that this shape is a lot more verbose than the original event. This additional structure is normal when upgrading raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf::trim`](http://docs.tenzir.com/reference/operators/ocsf/trim.md) operator or manually by [`drop`](http://docs.tenzir.com/reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
+You may notice that this shape is a lot more verbose than the original event. This additional structure is normal when upgrading raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md) operator or manually by [`drop`](https://tenzir.com/docs/reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
 
 We’re not done yet. Let’s create one final operator that wraps a single fetch into an OCSF event that describes a single collection of IoCs: the [OSINT Inventory Info](https://schema.ocsf.io/1.6.0/classes/osint_inventory_info) event.
 
@@ -210,7 +211,7 @@ Mapping data to OCSF can feel like a daunting task. Check out our [dedicated tut
 
 ### Add arguments to your operators
 
-So far, our operators are static—they always do the same thing. You can make them more flexible with parameterized operators that accept positional and named arguments, just like built-in operators.
+So far, our operators are static - they always do the same thing. You can make them more flexible with parameterized operators that accept positional and named arguments, just like built-in operators.
 
 For example, an operator that tags events with threat metadata could accept a configurable confidence level and source name. See [Add operators](../guides/packages/add-operators.md) for the full parameter reference, including supported types and examples.
 
@@ -218,7 +219,7 @@ For example, an operator that tags events with threat metadata could accept a co
 
 With our operators in place, we can now create deployable pipelines. Packages that include pipelines execute on installation, which is useful for background tasks like periodic data fetching. To ship a pipeline as a template that users must explicitly enable, add `disabled: true` to the frontmatter. See [Add pipelines](../guides/packages/add-pipelines.md) for all frontmatter options.
 
-The `sslbl::fetch` operator just downloads the blacklist entries once. But the remote data source changes periodically, and we want to always work with the latest version. So we turn the one-shot download into a continuous data feed using the [`every`](http://docs.tenzir.com/reference/operators/every.md) operator:
+The `sslbl::fetch` operator just downloads the blacklist entries once. But the remote data source changes periodically, and we want to always work with the latest version. So we turn the one-shot download into a continuous data feed using the [`every`](https://tenzir.com/docs/reference/operators/every.md) operator:
 
 sslbl/pipelines/publish-as-ocsf.tql
 
@@ -240,7 +241,7 @@ sslbl::ocsf::to_osint_inventory_info
 publish "ocsf"
 ```
 
-This is a closed pipeline, meaning, it has an input operator ([`every`](http://docs.tenzir.com/reference/operators/every.md)) and an output operator ([`publish`](http://docs.tenzir.com/reference/operators/publish.md)). The pipeline produces a new OCSF Inventory Info event every hour and publishes it to the `ocsf` topic so that other pipelines in the same node can consume it. This is a best-practice design pattern to expose data that you may reuse multiple times.
+This is a closed pipeline, meaning, it has an input operator ([`every`](https://tenzir.com/docs/reference/operators/every.md)) and an output operator ([`publish`](https://tenzir.com/docs/reference/operators/publish.md)). The pipeline produces a new OCSF Inventory Info event every hour and publishes it to the `ocsf` topic so that other pipelines in the same node can consume it. This is a best-practice design pattern to expose data that you may reuse multiple times.
 
 But instead of publishing the data as OCSF events and subscribing to it afterwards, we can directly update the lookup table from the plain OSINT objects:
 
@@ -423,7 +424,7 @@ As expected, the test produces a valid OCSF OSINT object. Let’s confirm this a
 uvx tenzir-test --update
 ```
 
-This created a [`to_osint.txt`](http://docs.tenzir.com/packages/sslbl/tests/ocsf/to_osint.txt) file next to the [`to_osint.tql`](http://docs.tenzir.com/packages/sslbl/tests/ocsf/to_osint.tql) file. Future runs will use this baseline for comparisons.
+This created a [`to_osint.txt`](https://tenzir.com/packages/sslbl/tests/ocsf/to_osint.txt) file next to the [`to_osint.tql`](https://tenzir.com/packages/sslbl/tests/ocsf/to_osint.tql) file. Future runs will use this baseline for comparisons.
 
 Continue to test the remaining operators, or add additional tests for some examples.
 
@@ -444,7 +445,7 @@ The suite updates the lookup table and verifies the expected values. See [Test p
 
 Creating a package is rarely a one-time act. Vendors make upstream changes, you find corner cases, and users request new features. Do your users a favor and maintain a changelog!
 
-From the package directory, create a new entry with [`tenzir-ship`](http://docs.tenzir.com/reference/ship-framework.md):
+From the package directory, create a new entry with [`tenzir-ship`](https://tenzir.com/docs/reference/ship-framework.md):
 
 ```sh
 uvx tenzir-ship add
@@ -458,7 +459,7 @@ You now have a reusable package.
 
 Now that you have a package, what’s next?
 
-1. Join our [Discord server](https://docs.tenzir.com/discord) and showcase the package in the `show-and-tell` channel to gather feedback.
+1. Join our [Discord server](https://discord.tenzir.com) and showcase the package in the `show-and-tell` channel to gather feedback.
 2. If you deem it useful for everyone, open a pull request in our [Community Library on GitHub](https://github.com/tenzir/library). Packages from this library appear automatically in the [Tenzir Library](https://app.tenzir.com/library).
 3. Spread the word on social media and tag us so we can amplify it.
 

@@ -1,5 +1,6 @@
 # select_matching
 
+> Selects top-level fields from a record when their names match a regular expression.
 
 Selects top-level fields from a record when their names match a regular expression.
 
@@ -71,8 +72,8 @@ select identifiers = this.select_matching("_id$")
 
 ## See Also
 
-* [`select`](http://docs.tenzir.com/reference/operators/select.md)
-* [`drop_matching`](http://docs.tenzir.com/reference/functions/drop_matching.md)
-* [`match_regex`](http://docs.tenzir.com/reference/functions/match_regex.md)
+* [`select`](https://tenzir.com/docs/reference/operators/select.md)
+* [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md)
+* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)

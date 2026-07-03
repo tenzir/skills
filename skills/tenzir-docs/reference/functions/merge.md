@@ -1,5 +1,6 @@
 # merge
 
+> Combines two records into a single record by merging their fields.
 
 Combines two records into a single record by merging their fields.
 
@@ -74,7 +75,7 @@ select result = merge(x, y)
 
 ## See Also
 
-* [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md)
+* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
 * [Reshape complex data](../../guides/transformation/reshape-complex-data.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

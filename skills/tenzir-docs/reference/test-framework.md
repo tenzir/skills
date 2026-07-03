@@ -1,5 +1,6 @@
 # Test Framework
 
+> The tenzir-test harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for running tests, writing tests, creating fixtures, adding custom runners, and configuring project hooks.
 
 The [`tenzir-test`](https://github.com/tenzir/test) harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for [running tests](../guides/testing/run-tests.md), [writing tests](../guides/testing/write-tests.md), [creating fixtures](../guides/testing/create-fixtures.md), [adding custom runners](../guides/testing/add-custom-runners.md), and [configuring project hooks](../guides/testing/configure-project-hooks.md).
 
@@ -114,8 +115,8 @@ Useful options:
 * `--diff-stat/--no-diff-stat`: Show (or suppress) the per-file change counter, which summarises additions and deletions even when the diff body is hidden.
 * `--passthrough`: Stream raw stdout/stderr to the terminal instead of comparing against reference artifacts. The harness forces single-job execution (overriding `--jobs` when necessary) and ignores `--update` while passthrough is active. Passthrough mode automatically enables verbose output.
 * `--verbose`: Print individual test results as they complete. By default (quiet mode) the harness only shows failures and a compact summary, significantly reducing noise for large test suites. Verbose mode displays passing and skipped tests alongside failures. Use `--summary` together with `--verbose` to include the tree summary at the end of the run.
-* `--run-skipped`: Run all skipped tests unconditionally. Both static skips (`skip: reason`) and conditional skips (`skip: {on: fixture-unavailable}`) are bypassed. When a fixture raises `FixtureUnavailable` and `--run-skipped` is active, the exception propagates as a hard failure instead of being caught. This is the sledgehammer approach---use it when you want to force every skipped test to execute regardless of its skip reason.
-* `--run-skipped-reason`: Selectively run skipped tests whose reason matches a substring or glob pattern. Bare strings match as substrings; patterns containing `*`, `?`, or `[` use fnmatch syntax---the same matching semantics as `--match`. Repeatable; a test runs if its skip reason matches any provided pattern. The match applies to the final displayed reason, including the `fixture unavailable:` prefix for conditional skips. When both `--run-skipped` and `--run-skipped-reason` are provided, `--run-skipped` takes precedence and all skipped tests run. When no skipped tests match the reason filters, the harness prints a diagnostic message.
+* `--run-skipped`: Run all skipped tests unconditionally. Both static skips (`skip: reason`) and conditional skips (`skip: {on: fixture-unavailable}`) are bypassed. When a fixture raises `FixtureUnavailable` and `--run-skipped` is active, the exception propagates as a hard failure instead of being caught. This is the sledgehammer approach—use it when you want to force every skipped test to execute regardless of its skip reason.
+* `--run-skipped-reason`: Selectively run skipped tests whose reason matches a substring or glob pattern. Bare strings match as substrings; patterns containing `*`, `?`, or `[` use fnmatch syntax—the same matching semantics as `--match`. Repeatable; a test runs if its skip reason matches any provided pattern. The match applies to the final displayed reason, including the `fixture unavailable:` prefix for conditional skips. When both `--run-skipped` and `--run-skipped-reason` are provided, `--run-skipped` takes precedence and all skipped tests run. When no skipped tests match the reason filters, the harness prints a diagnostic message.
 * `--all-projects`: Run the root project together with any satellites provided on the command line.
 * `--match`: Select tests whose relative path matches a substring or glob pattern. Bare strings (without `*`, `?`, or `[`) match as substrings, so `--match mysql` selects any test with “mysql” anywhere in its path. Patterns containing glob metacharacters use fnmatch syntax. Repeatable; tests matching any pattern are selected. When combined with positional TEST paths, only tests matching both are run (intersection).
 * `--fixture-name`: Select tests that request a fixture with the given name. Matching is case-sensitive and uses the configured fixture name, not fixture options. Repeatable; tests matching any selected fixture name or fixture tag are selected.
@@ -164,7 +165,7 @@ Suites let you run several tests under one shared fixture lifecycle. Declare a s
 The `suite` key accepts a plain string or a mapping with `name` and `mode`:
 
 ```yaml
-# tests/http/test.yaml — sequential (default)
+# tests/http/test.yaml  -  sequential (default)
 suite: smoke-http
 fixtures: [http]
 timeout: 45
@@ -173,7 +174,7 @@ timeout: 45
 The mapping form adds a `mode` field:
 
 ```yaml
-# tests/pubsub/test.yaml — parallel execution
+# tests/pubsub/test.yaml  -  parallel execution
 suite:
   name: parallel-pubsub
   mode: parallel
@@ -184,7 +185,7 @@ timeout: 30
 Adding `min_jobs` ensures the suite only starts when enough workers are available:
 
 ```yaml
-# tests/pubsub/test.yaml — parallel with minimum worker requirement
+# tests/pubsub/test.yaml  -  parallel with minimum worker requirement
 suite:
   name: parallel-pubsub
   mode: parallel
@@ -323,7 +324,7 @@ echo "from TENZIR_INPUT:"
 cat "$TENZIR_INPUT"
 ```
 
-The harness sets `TENZIR_STDIN` only when a matching `.stdin` file exists. TQL tests can also combine both mechanisms—start with a parser for stdin data while using `env("TENZIR_INPUT")` to reference additional files.
+The harness sets `TENZIR_STDIN` only when a matching `.stdin` file exists. TQL tests can also combine both mechanisms - start with a parser for stdin data while using `env("TENZIR_INPUT")` to reference additional files.
 
 ## Run a subset of tests
 
@@ -412,8 +413,6 @@ The harness infers tags from tagged fixture abstractions. Fixtures that use `ten
 from tenzir_test import fixture
 
 
-
-
 @fixture(name="localstack", tags=("container", "localstack"))
 def localstack():
     ...
@@ -450,7 +449,7 @@ Key rules:
 * The root project provides the baseline configuration (fixtures, runners, `test.yaml` defaults, inputs). Satellites layer their own fixtures and runners on top; duplicate names raise an error so conflicts surface early.
 * Paths printed in the CLI summary are relative to the working directory. The harness announces each project before running it and lists the runner mix per project for quick insight.
 * You can target subsets inside each project with additional positional arguments (`tenzir-test --root main --all-projects secondary tests/smoke`). When you skip `--root` entirely and only list satellite directories, the harness runs those satellites in isolation.
-* Satellites keep their own `tests/`, `inputs/`, `fixtures/`, and `runners/` folders. A root project can host shared assets that satellites reuse without duplication—for example, the example repository includes an `example-satellite/` directory that consumes the `xxd` runner exported by the root project while defining a satellite-specific fixture.
+* Satellites keep their own `tests/`, `inputs/`, `fixtures/`, and `runners/` folders. A root project can host shared assets that satellites reuse without duplication - for example, the example repository includes an `example-satellite/` directory that consumes the `xxd` runner exported by the root project while defining a satellite-specific fixture.
 
 To regenerate baselines while targeting a specific binary and project root:
 
@@ -522,18 +521,18 @@ The harness cycles between three internal modes:
 
 Common frontmatter keys:
 
-| Key            | Type            | Default   | Description                                                                                             |
-| -------------- | --------------- | --------- | ------------------------------------------------------------------------------------------------------- |
-| `runner`       | string          | by suffix | Runner name (`tenzir`, `python`, `shell`, custom).                                                      |
-| `fixtures`     | list            | `[]`      | Requested fixtures. Accepts bare names and structured options mappings.                                 |
-| `timeout`      | integer (s)     | `30`      | Command timeout. (`--coverage` multiplies it by five.)                                                  |
-| `error`        | boolean         | `false`   | Expect a non-zero exit code.                                                                            |
-| `skip`         | string or dict  | unset     | Mark tests as skipped. See [skip configuration](#skip-configuration).                                   |
-| `requires`     | mapping         | unset     | Capability requirements. See [capability requirements](#capability-requirements). Directory-level only. |
-| `inputs`       | string          | project   | Override `TENZIR_INPUTS` for this directory or test.                                                    |
-| `assertions`   | mapping         | `{}`      | Post-test assertion payloads. See [assertions](#assertions).                                            |
-| `retry`        | integer         | `1`       | Total attempt budget for flaky tests (see below).                                                       |
-| `package-dirs` | list of strings | inherit   | Directory-only; extra packages merged with CLI `--package-dirs`.                                        |
+| Key            | Type            | Default   | Description                                                                                                                                                |
+| -------------- | --------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `runner`       | string          | by suffix | Runner name (`tenzir`, `python`, `shell`, custom).                                                                                                         |
+| `fixtures`     | list            | `[]`      | Requested fixtures. Accepts bare names and structured options mappings.                                                                                    |
+| `timeout`      | integer (s)     | `30`      | Command timeout. (`--coverage` multiplies it by five.)                                                                                                     |
+| `error`        | boolean         | `false`   | Expect a non-zero exit code.                                                                                                                               |
+| `skip`         | string or dict  | unset     | Mark tests as skipped. See [skip configuration](test-framework.md#skip-configuration).                                   |
+| `requires`     | mapping         | unset     | Capability requirements. See [capability requirements](test-framework.md#capability-requirements). Directory-level only. |
+| `inputs`       | string          | project   | Override `TENZIR_INPUTS` for this directory or test.                                                                                                       |
+| `assertions`   | mapping         | `{}`      | Post-test assertion payloads. See [assertions](test-framework.md#assertions).                                            |
+| `retry`        | integer         | `1`       | Total attempt budget for flaky tests (see below).                                                                                                          |
+| `package-dirs` | list of strings | inherit   | Directory-only; extra packages merged with CLI `--package-dirs`.                                                                                           |
 
 `test.yaml` files accept the same keys and apply recursively to child directories. A relative `inputs:` value resolves against the file that defines it, so `inputs: ../data` inside `tests/alerts/test.yaml` points at `tests/data/`. Frontmatter values follow the same rule and win over directory defaults. Adjacent `tenzir.yaml` files still configure the Tenzir binary; the harness appends `--config=<file>` automatically. The lookup keeps working even when you point the CLI at extra directories on the command line.
 
@@ -558,8 +557,8 @@ skip:
 
 The `on` field accepts the following values:
 
-* `fixture-unavailable` — skip when a fixture raises `FixtureUnavailable` during initialization. See [Fixture unavailability](#fixture-unavailability).
-* `capability-unavailable` — skip when a required capability (declared via [`requires`](#capability-requirements)) is missing from the runtime environment. This value is only valid in directory-level `test.yaml` files.
+* `fixture-unavailable` - skip when a fixture raises `FixtureUnavailable` during initialization. See [Fixture unavailability](test-framework.md#fixture-unavailability).
+* `capability-unavailable` - skip when a required capability (declared via [`requires`](https://tenzir.com/docs/reference/test-framework.md#capability-requirements)) is missing from the runtime environment. This value is only valid in directory-level `test.yaml` files.
 
 `fixture-unavailable` follows fixture activation scope. If a fixture is selected by one test, put `skip: {on: fixture-unavailable}` in that test’s frontmatter or inherit it from a directory-level `test.yaml`; only that test is skipped when the fixture is unavailable. If a suite fixture is selected in `test.yaml`, put the skip opt-in in the suite’s directory-level configuration; suite setup happens before any member test runs, so member frontmatter cannot control a suite fixture failure.
 
@@ -598,7 +597,7 @@ Capability probes are runner-aware. Each runner implements its own `check_requir
 ### Tenzir configuration files
 
 * The harness inspects the directory that owns each test. If it finds `tenzir.yaml`, it appends `--config=<path>` to every invocation of the bundled `tenzir`/`tql`/`diff` runners. The path also seeds `TENZIR_CONFIG` unless you set that variable yourself. Custom runners that call the Tenzir binary should either use `run.get_test_env_and_config_args(test)` or honour the exported environment variables explicitly.
-* The built-in `node` fixture uses the same discovery process and starts `tenzir-node` from the directory that owns the test file, so relative paths inside `tenzir-node.yaml` resolve against the test location. See the [built-in node fixture](#built-in-node-fixture) section for precedence rules.
+* The built-in `node` fixture uses the same discovery process and starts `tenzir-node` from the directory that owns the test file, so relative paths inside `tenzir-node.yaml` resolve against the test location. See the [built-in node fixture](test-framework.md#built-in-node-fixture) section for precedence rules.
 * This lets you keep one config for CLI-driven scenarios while passing a different config to the embedded node, for example to tweak endpoints or data directories independently.
 
 ## Fixtures
@@ -863,7 +862,7 @@ skip:
   reason: "needs container runtime"
 ```
 
-When the fixture raises `FixtureUnavailable` and the suite carries this configuration, the harness marks every test in the suite as skipped (exit code 0) and logs the combined reason. Without the opt-in configuration the exception surfaces as a regular failure. See [skip configuration](#skip-configuration) for the full syntax of the `skip` key.
+When the fixture raises `FixtureUnavailable` and the suite carries this configuration, the harness marks every test in the suite as skipped (exit code 0) and logs the combined reason. Without the opt-in configuration the exception surfaces as a regular failure. See [skip configuration](test-framework.md#skip-configuration) for the full syntax of the `skip` key.
 
 For fixtures that are selected by individual tests, use the same skip mapping in test frontmatter:
 
@@ -963,7 +962,3 @@ uvx tenzir-test --update
 * [Create fixtures](../guides/testing/create-fixtures.md)
 * [Add custom runners](../guides/testing/add-custom-runners.md)
 * [Run fixtures](../guides/testing/run-fixtures.md)
-
-## Contents
-
-- [Ship Framework](ship-framework.md)

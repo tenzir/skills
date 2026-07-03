@@ -1,5 +1,6 @@
 # encrypt_cryptopan
 
+> Encrypts an IP address via Crypto-PAn.
 
 Encrypts an IP address via Crypto-PAn.
 
@@ -40,7 +41,7 @@ from {
 
 ## See Also
 
-* [`community_id`](http://docs.tenzir.com/reference/functions/community_id.md)
-* [`decrypt_cryptopan`](http://docs.tenzir.com/reference/functions/decrypt_cryptopan.md)
+* [`community_id`](https://tenzir.com/docs/reference/functions/community_id.md)
+* [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

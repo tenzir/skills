@@ -1,5 +1,6 @@
 # unroll
 
+> Returns a new event for each member of a list or a record in an event, duplicating the surrounding event.
 
 Returns a new event for each member of a list or a record in an event, duplicating the surrounding event.
 
@@ -53,6 +54,6 @@ unroll y
 
 ## See Also
 
-* [`flatten`](http://docs.tenzir.com/reference/functions/flatten.md)
+* [`flatten`](https://tenzir.com/docs/reference/functions/flatten.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)

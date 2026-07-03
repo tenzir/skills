@@ -1,5 +1,6 @@
 # mean
 
+> Computes the mean of all grouped values.
 
 Computes the mean of all grouped values.
 
@@ -30,13 +31,13 @@ summarize avg=mean(x)
 
 ## See Also
 
-* [`max`](http://docs.tenzir.com/reference/functions/max.md)
-* [`median`](http://docs.tenzir.com/reference/functions/median.md)
-* [`min`](http://docs.tenzir.com/reference/functions/min.md)
-* [`quantile`](http://docs.tenzir.com/reference/functions/quantile.md)
-* [`stddev`](http://docs.tenzir.com/reference/functions/stddev.md)
-* [`sum`](http://docs.tenzir.com/reference/functions/sum.md)
-* [`variance`](http://docs.tenzir.com/reference/functions/variance.md)
+* [`max`](https://tenzir.com/docs/reference/functions/max.md)
+* [`median`](https://tenzir.com/docs/reference/functions/median.md)
+* [`min`](https://tenzir.com/docs/reference/functions/min.md)
+* [`quantile`](https://tenzir.com/docs/reference/functions/quantile.md)
+* [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
+* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
+* [`variance`](https://tenzir.com/docs/reference/functions/variance.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

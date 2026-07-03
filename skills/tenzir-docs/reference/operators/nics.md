@@ -1,5 +1,6 @@
 # nics
 
+> Shows a snapshot of available network interfaces.
 
 Shows a snapshot of available network interfaces.
 
@@ -20,7 +21,7 @@ Tenzir emits network interface card information with the following schema.
 Contains detailed information about the network interface.
 
 | Field         | Type     | Description                                                                  |
-| :------------ | :------- | :--------------------------------------------------------------------------- |
+| ------------- | -------- | ---------------------------------------------------------------------------- |
 | `name`        | `string` | The name of the network interface.                                           |
 | `description` | `string` | A brief note or explanation about the network interface.                     |
 | `addresses`   | `list`   | A list of IP addresses assigned to the network interface.                    |
@@ -33,7 +34,7 @@ Contains detailed information about the network interface.
 The record `status` has the following schema:
 
 | Field            | Type   | Description                                           |
-| :--------------- | :----- | :---------------------------------------------------- |
+| ---------------- | ------ | ----------------------------------------------------- |
 | `unknown`        | `bool` | Indicates if the network interface status is unknown. |
 | `connected`      | `bool` | Indicates if the network interface is connected.      |
 | `disconnected`   | `bool` | Indicates if the network interface is disconnected.   |
@@ -50,4 +51,4 @@ where status.connected
 
 ## See Also
 
-* [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md)
+* [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)

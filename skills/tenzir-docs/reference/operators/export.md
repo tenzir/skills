@@ -1,5 +1,6 @@
 # export
 
+> Retrieves events from a Tenzir node.
 
 Retrieves events from a Tenzir node.
 
@@ -11,13 +12,13 @@ export [live=bool, retro=bool, internal=bool, parallel=int]
 
 The `export` operator retrieves events from a Tenzir node.
 
-This operator is the dual to [`import`](http://docs.tenzir.com/reference/operators/import.md).
+This operator is the dual to [`import`](https://tenzir.com/docs/reference/operators/import.md).
 
 ### `live = bool (optional)`
 
 Work on all events that are imported with `import` operators in real-time instead of on events persisted at a Tenzir node.
 
-Note that live exports may drop events if the following pipeline fails to keep up. To connect pipelines with back pressure, use the [`publish`](http://docs.tenzir.com/reference/operators/publish.md) and [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) operators.
+Note that live exports may drop events if the following pipeline fails to keep up. To connect pipelines with back pressure, use the [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operators.
 
 ### `retro = bool (optional)`
 
@@ -54,7 +55,7 @@ head 20
 
 ## See Also
 
-* [`import`](http://docs.tenzir.com/reference/operators/import.md)
-* [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md)
+* [`import`](https://tenzir.com/docs/reference/operators/import.md)
+* [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
 * [Export from a node](../../guides/edge-storage/export-from-a-node.md)
 * [Quickstart](../../guides/quickstart.md)

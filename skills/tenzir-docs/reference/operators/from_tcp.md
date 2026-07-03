@@ -1,5 +1,6 @@
 # from_tcp
 
+> Connects to a remote TCP or TLS endpoint and receives events.
 
 Connects to a remote TCP or TLS endpoint and receives events.
 
@@ -47,7 +48,7 @@ The pipeline to run for the TCP connection. Use this to parse the incoming byte 
 Inside the pipeline, the `$peer` variable is available as a record with the following fields:
 
 | Field  | Type    | Description                        |
-| :----- | :------ | :--------------------------------- |
+| ------ | ------- | ---------------------------------- |
 | `ip`   | `ip`    | The IP address of the remote peer  |
 | `port` | `int64` | The port number of the remote peer |
 
@@ -79,8 +80,8 @@ from_tcp "example.org:4443", tls={cacert: "ca.pem"} {
 
 ## See Also
 
-* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
-* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
-* [`serve_tcp`](http://docs.tenzir.com/reference/operators/serve_tcp.md)
-* [`from_unix_socket`](http://docs.tenzir.com/reference/operators/from_unix_socket.md)
+* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
+* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
+* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
+* [`from_unix_socket`](https://tenzir.com/docs/reference/operators/from_unix_socket.md)
 * [TCP](../../integrations/tcp.md)

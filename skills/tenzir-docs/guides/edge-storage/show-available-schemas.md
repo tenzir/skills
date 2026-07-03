@@ -1,11 +1,12 @@
 # Show available schemas
 
+> When you write a pipeline, you often reference field names. If you do not know the shape of your data, you can look up available schemas, i.e., the record types describing top-level events.
 
 When you write a pipeline, you often reference field names. If you do not know the shape of your data, you can look up available schemas, i.e., the record types describing top-level events.
 
 Many SQL databases have a `SHOW TABLES` command to show all available table names, and `SHOW COLUMNS` to display the individual fiels of a given table.
 
-In Tenzir, the [`fields`](http://docs.tenzir.com/reference/operators/fields.md) operator offers the ability for detailed schema introspection. Use it to display all schema fields; each event represents a single field.
+In Tenzir, the [`fields`](https://tenzir.com/docs/reference/operators/fields.md) operator offers the ability for detailed schema introspection. Use it to display all schema fields; each event represents a single field.
 
 ```tql
 fields

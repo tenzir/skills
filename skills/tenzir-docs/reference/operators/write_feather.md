@@ -1,5 +1,6 @@
 # write_feather
 
+> Transforms the input event stream to Feather byte stream.
 
 Transforms the input event stream to Feather byte stream.
 
@@ -48,7 +49,7 @@ to_file "output.feather" {
 
 ## See Also
 
-* [`read_bitz`](http://docs.tenzir.com/reference/operators/read_bitz.md)
-* [`read_feather`](http://docs.tenzir.com/reference/operators/read_feather.md)
-* [`write_bitz`](http://docs.tenzir.com/reference/operators/write_bitz.md)
-* [`write_parquet`](http://docs.tenzir.com/reference/operators/write_parquet.md)
+* [`read_bitz`](https://tenzir.com/docs/reference/operators/read_bitz.md)
+* [`read_feather`](https://tenzir.com/docs/reference/operators/read_feather.md)
+* [`write_bitz`](https://tenzir.com/docs/reference/operators/write_bitz.md)
+* [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)

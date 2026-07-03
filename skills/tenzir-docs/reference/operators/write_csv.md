@@ -1,5 +1,6 @@
 # write_csv
 
+> Transforms event stream to CSV (Comma-Separated Values) byte stream.
 
 Transforms event stream to CSV (Comma-Separated Values) byte stream.
 
@@ -43,11 +44,11 @@ x,y,z
 
 ## See Also
 
-* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)
-* [`print_csv`](http://docs.tenzir.com/reference/functions/print_csv.md)
-* [`read_csv`](http://docs.tenzir.com/reference/operators/read_csv.md)
-* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)
-* [`write_ssv`](http://docs.tenzir.com/reference/operators/write_ssv.md)
-* [`write_tsv`](http://docs.tenzir.com/reference/operators/write_tsv.md)
-* [`write_xsv`](http://docs.tenzir.com/reference/operators/write_xsv.md)
+* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
+* [`print_csv`](https://tenzir.com/docs/reference/functions/print_csv.md)
+* [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md)
+* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
+* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
+* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
+* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
 * [Convert data formats](../../guides/transformation/convert-data-formats.md)

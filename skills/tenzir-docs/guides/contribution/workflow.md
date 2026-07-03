@@ -1,5 +1,6 @@
 # Git and GitHub Workflow
 
+> The following diagram visualizes our branching model:
 
 The following diagram visualizes our branching model:
 

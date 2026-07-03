@@ -1,5 +1,6 @@
 # Configure reverse proxy
 
+> This guide shows you how to configure a reverse proxy for the Tenzir Platform. The proxy terminates TLS and routes traffic to these four entry points:
 
 This guide shows you how to configure a reverse proxy for the Tenzir Platform. The proxy terminates TLS and routes traffic to these four entry points:
 

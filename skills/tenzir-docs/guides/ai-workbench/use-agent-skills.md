@@ -2,7 +2,6 @@
 
 > Install Tenzir agent skills for documentation, schemas, and workflow automation
 
-
 This guide shows you how to install and manage Tenzir’s agent skills. You’ll learn which skills are available, how to add skills globally or per project, install individual skills, and keep them up to date.
 
 Tenzir publishes agent skills in the [`tenzir/skills`](https://github.com/tenzir/skills) repository.

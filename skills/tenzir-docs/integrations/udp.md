@@ -1,5 +1,6 @@
-# UDP
+# UDP integration
 
+> Send and receive lightweight, connectionless datagrams over IP networks.
 
 The [User Datagram Protocol (UDP)](https://en.wikipedia.org/wiki/User_Datagram_Protocol) is a connection-less protocol to send messages on an IP network. Tenzir supports writing to and reading from UDP sockets, both in server (listening) and client (connect) mode.
 
@@ -7,7 +8,7 @@ Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
 ## Examples
 
-Use [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md) to receive UDP datagrams as structured events containing message data and peer information. Use [`to_udp`](http://docs.tenzir.com/reference/operators/to_udp.md) to send one UDP datagram per event directly from structured data.
+Use [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) to receive UDP datagrams as structured events containing message data and peer information. Use [`to_udp`](https://tenzir.com/docs/reference/operators/to_udp.md) to send one UDP datagram per event directly from structured data.
 
 ### Receive syslog messages over UDP
 

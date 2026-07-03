@@ -1,5 +1,6 @@
 # Configure internal services
 
+> This guide shows you how to configure the three internal Tenzir services: the UI, Gateway, and Platform API. You’ll set environment variables that control authentication, connectivity, and feature settings.
 
 This guide shows you how to configure the three internal Tenzir services: the UI, Gateway, and Platform API. You’ll set environment variables that control authentication, connectivity, and feature settings.
 
@@ -118,7 +119,7 @@ For more information about external JWT configuration, see the [external JWT aut
 
 ### CORS
 
-When the Tenzir UI frontend connects directly to the Tenzir Gateway from the browser—the default when `TENZIR_PLATFORM_USE_INTERNAL_WS_PROXY` is `false`— and the UI and gateway are served from different origins (for example, on different ports or domains), the browser enforces Cross-Origin Resource Sharing (CORS) restrictions. You must explicitly allow the UI’s origin by setting `CORS_ALLOWED_ORIGINS` on the `websocket-gateway` service in your `docker-compose.yaml`:
+When the Tenzir UI frontend connects directly to the Tenzir Gateway from the browser - the default when `TENZIR_PLATFORM_USE_INTERNAL_WS_PROXY` is `false` - and the UI and gateway are served from different origins (for example, on different ports or domains), the browser enforces Cross-Origin Resource Sharing (CORS) restrictions. You must explicitly allow the UI’s origin by setting `CORS_ALLOWED_ORIGINS` on the `websocket-gateway` service in your `docker-compose.yaml`:
 
 ```yaml
 services:

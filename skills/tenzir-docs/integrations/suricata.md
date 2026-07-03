@@ -1,5 +1,6 @@
-# Suricata
+# Suricata integration
 
+> Detect, log, and analyze network traffic for intrusion detection, prevention, and monitoring.
 
 [Suricata](https://suricata.io/) is a network monitor with a rule matching engine to detect threats. Use Tenzir to acquire, process, and store Suricata logs.
 
@@ -24,7 +25,7 @@ outputs:
 
 The `filetype` setting determines how you’d process the log file and defaults to `regular`.
 
-Onboard Suricata EVE JSON logs via the [`read_suricata`](http://docs.tenzir.com/reference/operators/read_suricata.md) operator as follows:
+Onboard Suricata EVE JSON logs via the [`read_suricata`](https://tenzir.com/docs/reference/operators/read_suricata.md) operator as follows:
 
 ```tql
 from_file "/path/to/eve.json" {

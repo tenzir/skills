@@ -1,5 +1,6 @@
 # to_google_cloud_pubsub
 
+> Publishes events to a Google Cloud Pub/Sub topic.
 
 Publishes events to a Google Cloud Pub/Sub topic.
 
@@ -41,5 +42,5 @@ to_google_cloud_pubsub project_id="amazing-project-123456", topic_id="alerts-top
 
 ## See Also
 
-* [`from_google_cloud_pubsub`](http://docs.tenzir.com/reference/operators/from_google_cloud_pubsub.md)
-* [Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+* [`from_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub.md)
+* [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)

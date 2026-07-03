@@ -1,5 +1,6 @@
 # day
 
+> Extracts the day component from a timestamp.
 
 Extracts the day component from a timestamp.
 
@@ -35,9 +36,9 @@ day = ts.day()
 
 ## See Also
 
-* [`year`](http://docs.tenzir.com/reference/functions/year.md)
-* [`month`](http://docs.tenzir.com/reference/functions/month.md)
-* [`hour`](http://docs.tenzir.com/reference/functions/hour.md)
-* [`minute`](http://docs.tenzir.com/reference/functions/minute.md)
-* [`second`](http://docs.tenzir.com/reference/functions/second.md)
+* [`year`](https://tenzir.com/docs/reference/functions/year.md)
+* [`month`](https://tenzir.com/docs/reference/functions/month.md)
+* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
+* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
+* [`second`](https://tenzir.com/docs/reference/functions/second.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

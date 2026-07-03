@@ -1,5 +1,6 @@
 # trim_start
 
+> Trims whitespace or specified characters from the start of a string.
 
 Trims whitespace or specified characters from the start of a string.
 
@@ -57,6 +58,6 @@ from {x: "/-/hello".trim_start("/-")}
 
 ## See Also
 
-* [`trim`](http://docs.tenzir.com/reference/functions/trim.md)
-* [`trim_end`](http://docs.tenzir.com/reference/functions/trim_end.md)
+* [`trim`](https://tenzir.com/docs/reference/functions/trim.md)
+* [`trim_end`](https://tenzir.com/docs/reference/functions/trim_end.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

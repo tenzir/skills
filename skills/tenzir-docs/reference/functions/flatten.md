@@ -1,5 +1,6 @@
 # flatten
 
+> Flattens nested data.
 
 Flattens nested data.
 
@@ -138,6 +139,6 @@ this = flatten(this)
 
 ## See Also
 
-* [`unflatten`](http://docs.tenzir.com/reference/functions/unflatten.md)
+* [`unflatten`](https://tenzir.com/docs/reference/functions/unflatten.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Reshape complex data](../../guides/transformation/reshape-complex-data.md)

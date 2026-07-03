@@ -1,5 +1,6 @@
 # any
 
+> Computes the disjunction (OR) of all grouped boolean values.
 
 Computes the disjunction (OR) of all grouped boolean values.
 
@@ -30,5 +31,5 @@ summarize result=any(x)
 
 ## See Also
 
-* [`all`](http://docs.tenzir.com/reference/functions/all.md)
+* [`all`](https://tenzir.com/docs/reference/functions/all.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

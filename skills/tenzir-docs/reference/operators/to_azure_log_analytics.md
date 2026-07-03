@@ -1,5 +1,6 @@
 # to_azure_log_analytics
 
+> Sends events to the Microsoft Azure Logs Ingestion API.
 
 Sends events to the Microsoft Azure Logs Ingestion API.
 

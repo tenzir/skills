@@ -1,5 +1,6 @@
 # print_yaml
 
+> Prints a value as a YAML document.
 
 Prints a value as a YAML document.
 
@@ -37,5 +38,5 @@ x = x.print_yaml()
 
 ## See Also
 
-* [`parse_yaml`](http://docs.tenzir.com/reference/functions/parse_yaml.md)
-* [`write_yaml`](http://docs.tenzir.com/reference/operators/write_yaml.md)
+* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
+* [`write_yaml`](https://tenzir.com/docs/reference/operators/write_yaml.md)

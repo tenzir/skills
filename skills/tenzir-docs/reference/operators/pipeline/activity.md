@@ -1,5 +1,6 @@
 # pipeline::activity
 
+> Summarizes the activity of pipelines.
 
 Summarizes the activity of pipelines.
 
@@ -26,7 +27,7 @@ The interval used to summarize the individual throughout rates. Needs to be a mu
 ### `tenzir.activity`
 
 | Field       | Type           | Description                                               |
-| :---------- | :------------- | :-------------------------------------------------------- |
+| ----------- | -------------- | --------------------------------------------------------- |
 | `first`     | `time`         | The time of the first throughput rate in the lists below. |
 | `last`      | `time`         | The time of the last throughput rate in the lists below.  |
 | `pipelines` | `list<record>` | The activity for individual pipelines.                    |
@@ -34,7 +35,7 @@ The interval used to summarize the individual throughout rates. Needs to be a mu
 The records in `pipelines` have the following schema:
 
 | Field     | Type     | Description                                                        |
-| :-------- | :------- | :----------------------------------------------------------------- |
+| --------- | -------- | ------------------------------------------------------------------ |
 | `id`      | `string` | The ID uniquely identifying the pipeline this activity belongs to. |
 | `ingress` | `record` | The activity at the source of the pipeline.                        |
 | `egress`  | `record` | The activity at the destination of the pipeline.                   |
@@ -42,7 +43,7 @@ The records in `pipelines` have the following schema:
 The records `ingress` and `egress` have the following schema:
 
 | Field      | Type           | Description                                              |
-| :--------- | :------------- | :------------------------------------------------------- |
+| ---------- | -------------- | -------------------------------------------------------- |
 | `internal` | `bool`         | Whether this end of the pipeline is considered internal. |
 | `bytes`    | `uint64`       | The total number of bytes over the range.                |
 | `rates`    | `list<uint64>` | The throughput in bytes/second over time.                |
@@ -89,4 +90,4 @@ pipeline::activity range=20s, interval=20s
 
 ## See Also
 
-* [`pipeline::list`](http://docs.tenzir.com/reference/operators/pipeline/list.md)
+* [`pipeline::list`](https://tenzir.com/docs/reference/operators/pipeline/list.md)

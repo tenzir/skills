@@ -1,5 +1,6 @@
 # pipeline::run
 
+> Starts a pipeline in the node and waits for it to complete.
 
 Starts a pipeline in the node and waits for it to complete.
 
@@ -43,5 +44,5 @@ pipeline::run {
 
 ## See Also
 
-* [`pipeline::detach`](http://docs.tenzir.com/reference/operators/pipeline/detach.md)
-* [`pipeline::list`](http://docs.tenzir.com/reference/operators/pipeline/list.md)
+* [`pipeline::detach`](https://tenzir.com/docs/reference/operators/pipeline/detach.md)
+* [`pipeline::list`](https://tenzir.com/docs/reference/operators/pipeline/list.md)

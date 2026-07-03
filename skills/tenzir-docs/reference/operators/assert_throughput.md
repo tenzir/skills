@@ -1,5 +1,6 @@
 # assert_throughput
 
+> Emits a warning if the pipeline does not have the expected throughput
 
 Emits a warning if the pipeline does not have the expected throughput
 
@@ -23,6 +24,6 @@ assert_throughput 1k, within=1s, retries=30
 
 ## See Also
 
-* [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md)
-* [`assert`](http://docs.tenzir.com/reference/operators/assert.md)
-* [`throttle`](http://docs.tenzir.com/reference/operators/throttle.md)
+* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
+* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
+* [`throttle`](https://tenzir.com/docs/reference/operators/throttle.md)

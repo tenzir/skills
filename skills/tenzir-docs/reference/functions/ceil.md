@@ -1,5 +1,6 @@
 # ceil
 
+> Computes the ceiling of a number or a time/duration with a specified unit.
 
 Computes the ceiling of a number or a time/duration with a specified unit.
 
@@ -53,5 +54,5 @@ from {
 
 ## See Also
 
-* [`floor`](http://docs.tenzir.com/reference/functions/floor.md)
-* [`round`](http://docs.tenzir.com/reference/functions/round.md)
+* [`floor`](https://tenzir.com/docs/reference/functions/floor.md)
+* [`round`](https://tenzir.com/docs/reference/functions/round.md)

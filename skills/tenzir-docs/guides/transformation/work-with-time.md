@@ -1,5 +1,6 @@
 # Work with time
 
+> Time is fundamental in data analysis. Whether you’re analyzing logs, tracking events, or monitoring systems, you need to parse timestamps, calculate durations, and format dates. This guide shows you how to work with time values in TQL.
 
 Time is fundamental in data analysis. Whether you’re analyzing logs, tracking events, or monitoring systems, you need to parse timestamps, calculate durations, and format dates. This guide shows you how to work with time values in TQL.
 
@@ -30,7 +31,7 @@ earlier = timestamp - 2h
 
 ## Get the current time
 
-Use [`now`](http://docs.tenzir.com/reference/functions/now.md) to get the current timestamp:
+Use [`now`](https://tenzir.com/docs/reference/functions/now.md) to get the current timestamp:
 
 ```tql
 from {
@@ -50,11 +51,11 @@ today = current_time.round(1d)
 
 TQL offers two functions for parsing timestamps from strings:
 
-[`time`](http://docs.tenzir.com/reference/functions/time.md) for automatic format detection and [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md) for custom formats.
+[`time`](https://tenzir.com/docs/reference/functions/time.md) for automatic format detection and [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) for custom formats.
 
 ### Automatic parsing with `time()`
 
-The [`time`](http://docs.tenzir.com/reference/functions/time.md) function automatically recognizes many common timestamp formats:
+The [`time`](https://tenzir.com/docs/reference/functions/time.md) function automatically recognizes many common timestamp formats:
 
 ```tql
 from {
@@ -78,7 +79,7 @@ unix_epoch = unix_epoch.time()
 }
 ```
 
-The [`time`](http://docs.tenzir.com/reference/functions/time.md) function also supports relative time expressions:
+The [`time`](https://tenzir.com/docs/reference/functions/time.md) function also supports relative time expressions:
 
 ```tql
 from {
@@ -91,7 +92,7 @@ from {
 
 ### Custom formats with `parse_time()`
 
-For timestamps in non-standard formats, use [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md) with an explicit format string:
+For timestamps in non-standard formats, use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with an explicit format string:
 
 ```tql
 from {
@@ -124,12 +125,12 @@ Common format specifiers:
 
 ### When to use which
 
-* **[`time`](http://docs.tenzir.com/reference/functions/time.md)**: Use for ISO 8601 timestamps, Unix epochs (with `@` prefix), or relative time expressions. No format string needed.
-* **[`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md)**: Use for custom formats like Apache logs, US date formats, or any non-standard timestamp layout.
+* **[`time`](https://tenzir.com/docs/reference/functions/time.md)**: Use for ISO 8601 timestamps, Unix epochs (with `@` prefix), or relative time expressions. No format string needed.
+* **[`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)**: Use for custom formats like Apache logs, US date formats, or any non-standard timestamp layout.
 
 ## Format time to strings
 
-Convert timestamps to custom string formats with [`format_time`](http://docs.tenzir.com/reference/functions/format_time.md):
+Convert timestamps to custom string formats with [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md):
 
 ```tql
 from {event_time: 2024-01-15T10:30:45.123456}
@@ -151,7 +152,7 @@ log_format = event_time.format_time("%d/%b/%Y:%H:%M:%S")
 
 ## Extract time components
 
-Get individual parts of a timestamp using [`year`](http://docs.tenzir.com/reference/functions/year.md), [`month`](http://docs.tenzir.com/reference/functions/month.md), [`day`](http://docs.tenzir.com/reference/functions/day.md), [`hour`](http://docs.tenzir.com/reference/functions/hour.md), [`minute`](http://docs.tenzir.com/reference/functions/minute.md), and [`second`](http://docs.tenzir.com/reference/functions/second.md):
+Get individual parts of a timestamp using [`year`](https://tenzir.com/docs/reference/functions/year.md), [`month`](https://tenzir.com/docs/reference/functions/month.md), [`day`](https://tenzir.com/docs/reference/functions/day.md), [`hour`](https://tenzir.com/docs/reference/functions/hour.md), [`minute`](https://tenzir.com/docs/reference/functions/minute.md), and [`second`](https://tenzir.com/docs/reference/functions/second.md):
 
 ```tql
 from {timestamp: 2024-01-15T10:30:45.123456}
@@ -239,7 +240,7 @@ nanoseconds = duration.count_nanoseconds()
 
 ### Convert between time units
 
-Use [`months`](http://docs.tenzir.com/reference/functions/months.md) to create month-based durations:
+Use [`months`](https://tenzir.com/docs/reference/functions/months.md) to create month-based durations:
 
 ```tql
 from {
@@ -373,7 +374,7 @@ Unix timestamps represent time as seconds (or fractions) since January 1, 1970. 
 
 ### Parse Unix timestamps
 
-For string inputs, use [`time`](http://docs.tenzir.com/reference/functions/time.md) with the `@` prefix:
+For string inputs, use [`time`](https://tenzir.com/docs/reference/functions/time.md) with the `@` prefix:
 
 ```tql
 from {
@@ -395,7 +396,7 @@ parsed_fractional = unix_fractional.time()
 
 ### Convert numeric timestamps
 
-For numeric inputs, use [`from_epoch`](http://docs.tenzir.com/reference/functions/from_epoch.md) with the appropriate time unit:
+For numeric inputs, use [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md) with the appropriate time unit:
 
 ```tql
 from {
@@ -421,7 +422,7 @@ from_micros = unix_micros.microseconds().from_epoch()
 
 ### Convert back to Unix timestamp
 
-Use [`since_epoch`](http://docs.tenzir.com/reference/functions/since_epoch.md) to get the duration since the Unix epoch:
+Use [`since_epoch`](https://tenzir.com/docs/reference/functions/since_epoch.md) to get the duration since the Unix epoch:
 
 ```tql
 from {timestamp: 2024-01-15T11:00:45Z}
@@ -536,7 +537,7 @@ syslog_time = f"2024 {syslog}".parse_time("%Y %b %d %H:%M:%S")
 
 ## Replay and adjust time series
 
-When working with historical data, you often need to replay events with their original timing or adjust timestamps for analysis. TQL provides two operators for this: [`delay`](http://docs.tenzir.com/reference/operators/delay.md) and [`timeshift`](http://docs.tenzir.com/reference/operators/timeshift.md).
+When working with historical data, you often need to replay events with their original timing or adjust timestamps for analysis. TQL provides two operators for this: [`delay`](https://tenzir.com/docs/reference/operators/delay.md) and [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md).
 
 ### Adjust timestamps with timeshift
 
@@ -603,7 +604,7 @@ This replays the logs with real-world inter-arrival times. If an event occurred 
 
 ### Combine with periodic generation
 
-Use [`every`](http://docs.tenzir.com/reference/operators/every.md) to generate events periodically, then replay them with modified timing:
+Use [`every`](https://tenzir.com/docs/reference/operators/every.md) to generate events periodically, then replay them with modified timing:
 
 ```tql
 every 1s {

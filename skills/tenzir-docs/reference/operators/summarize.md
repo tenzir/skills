@@ -1,5 +1,6 @@
 # summarize
 
+> Groups events and applies aggregate functions to each group.
 
 Groups events and applies aggregate functions to each group.
 
@@ -143,11 +144,11 @@ summarize count(this), severity, options={frequency: 10s, mode: "update"}
 
 ## See Also
 
-* [`group`](http://docs.tenzir.com/reference/operators/group.md)
-* [`rare`](http://docs.tenzir.com/reference/operators/rare.md)
-* [`top`](http://docs.tenzir.com/reference/operators/top.md)
-* [`sum`](http://docs.tenzir.com/reference/functions/sum.md)
-* [`count`](http://docs.tenzir.com/reference/functions/count.md)
+* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`rare`](https://tenzir.com/docs/reference/operators/rare.md)
+* [`top`](https://tenzir.com/docs/reference/operators/top.md)
+* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
+* [`count`](https://tenzir.com/docs/reference/functions/count.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

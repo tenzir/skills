@@ -1,5 +1,6 @@
 # type_of
 
+> Retrieves the type definition of an expression.
 
 Retrieves the type definition of an expression.
 
@@ -56,4 +57,4 @@ this = type_of(this)
 
 ## See Also
 
-* [`type_id`](http://docs.tenzir.com/reference/functions/type_id.md)
+* [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md)

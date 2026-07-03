@@ -1,5 +1,6 @@
 # repeat
 
+> Repeats the input a number of times.
 
 Repeats the input a number of times.
 

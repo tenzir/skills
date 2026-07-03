@@ -1,5 +1,6 @@
 # from_http
 
+> Sends an HTTP/1.1 request and returns the response as events.
 
 Sends an HTTP/1.1 request and returns the response as events.
 
@@ -114,7 +115,7 @@ If the lambda returns a record, Tenzir patches the next request. The record supp
 
 Each request record is a patch against the request that produced the current page. Setting `body` does not change the method. Set `method` explicitly if the next request must use a different method. If `body` is a record, the `encode` option also applies to paginated request bodies.
 
-This request-record pagination behavior applies to [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) only. It does not change [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md), [`accept_http`](http://docs.tenzir.com/reference/operators/accept_http.md), or [`serve_http`](http://docs.tenzir.com/reference/operators/serve_http.md).
+This request-record pagination behavior applies to [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) only. It does not change [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md), [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md), or [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md).
 
 **Link mode**: The string `"link"` to automatically follow pagination links in the HTTP `Link` response header as defined in [RFC 8288](https://datatracker.ietf.org/doc/html/rfc8288). Tenzir follows the `rel=next` relation until the response no longer contains one.
 
@@ -159,7 +160,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ### Migration from `server=true`
 
-The `server=true` flag is no longer supported. Use [`accept_http`](http://docs.tenzir.com/reference/operators/accept_http.md) to listen for incoming HTTP requests.
+The `server=true` flag is no longer supported. Use [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md) to listen for incoming HTTP requests.
 
 ### `{ … } (optional)`
 
@@ -170,7 +171,7 @@ Tenzir feeds the pipeline incrementally as response chunks arrive, so parsers ca
 Inside the pipeline, the `$response` variable is available as a record with the following fields:
 
 | Field     | Type     | Description                           |
-| :-------- | :------- | :------------------------------------ |
+| --------- | -------- | ------------------------------------- |
 | `code`    | `uint64` | The HTTP status code of the response. |
 | `headers` | `record` | The response headers.                 |
 
@@ -332,7 +333,7 @@ unroll hits.hits
 this = hits.hits._source
 ```
 
-Keep operators such as [`unroll`](http://docs.tenzir.com/reference/operators/unroll.md) after [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) for these pagination styles. The pagination lambda receives the parsed page envelope, so the parsing subpipeline must emit one event for the whole response.
+Keep operators such as [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md) after [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) for these pagination styles. The pagination lambda receives the parsed page envelope, so the parsing subpipeline must emit one event for the whole response.
 
 ### Retry Failed Requests
 
@@ -348,11 +349,11 @@ This retries transient transport failures and HTTP `429` and `5xx` responses up 
 
 ## See Also
 
-* [`accept_http`](http://docs.tenzir.com/reference/operators/accept_http.md)
-* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
-* [`serve_http`](http://docs.tenzir.com/reference/operators/serve_http.md)
+* [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md)
+* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
+* [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
-* [HTTP(S)](../../integrations/http.md)
+* [HTTP](../../integrations/http.md)

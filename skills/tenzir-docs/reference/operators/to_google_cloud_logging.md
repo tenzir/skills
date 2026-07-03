@@ -1,5 +1,6 @@
 # to_google_cloud_logging
 
+> Sends events to Google Cloud Logging.
 
 Sends events to Google Cloud Logging.
 
@@ -108,5 +109,5 @@ to_google_cloud_logging log_id="LOG_ID", project="PROJECT_ID"
 
 ## See Also
 
-* [`to_google_secops`](http://docs.tenzir.com/reference/operators/to_google_secops.md)
-* [Cloud Logging](../../integrations/google/cloud-logging.md)
+* [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
+* [Google Cloud Logging](../../integrations/google/cloud-logging.md)

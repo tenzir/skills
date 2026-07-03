@@ -1,5 +1,6 @@
 # sum
 
+> Computes the sum of all values.
 
 Computes the sum of all values.
 
@@ -30,10 +31,10 @@ summarize n=sum(x)
 
 ## See Also
 
-* [`collect`](http://docs.tenzir.com/reference/functions/collect.md)
-* [`max`](http://docs.tenzir.com/reference/functions/max.md)
-* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
-* [`min`](http://docs.tenzir.com/reference/functions/min.md)
+* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
+* [`max`](https://tenzir.com/docs/reference/functions/max.md)
+* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
+* [`min`](https://tenzir.com/docs/reference/functions/min.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

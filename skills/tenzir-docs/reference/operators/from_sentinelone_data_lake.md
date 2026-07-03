@@ -1,5 +1,6 @@
 # from_sentinelone_data_lake
 
+> Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
 
 Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
 
@@ -74,5 +75,5 @@ from_sentinelone_data_lake "https://xdr.eu1.sentinelone.net",
 
 ## See Also
 
-* [`to_sentinelone_data_lake`](http://docs.tenzir.com/reference/operators/to_sentinelone_data_lake.md)
+* [`to_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md)
 * [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)

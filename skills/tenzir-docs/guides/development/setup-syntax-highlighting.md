@@ -2,7 +2,6 @@
 
 > Install TQL language extensions for syntax highlighting in your editor
 
-
 This guide shows you how to set up TQL syntax highlighting and language detection in your editor. You’ll get colorization and basic language support for `.tql` files.
 
 TQL editor integrations use the [Tree-sitter TQL grammar](https://github.com/tenzir/tree-sitter-tql) for incremental parsing. The grammar repository also ships Tree-sitter queries for highlights, indentation, folds, injections, and local variables.
@@ -75,8 +74,3 @@ return {
 ```
 
 After you update your Neovim plugins, open a `.tql` file and run `:InspectTree` to confirm that Neovim uses the TQL parser.
-
-## Contents
-
-- [Build-from-source](build-from-source.md)
-- [Write-a-node-plugin](write-a-node-plugin.md)

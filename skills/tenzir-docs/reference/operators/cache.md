@@ -1,5 +1,6 @@
 # cache
 
+> An in-memory cache shared between pipelines.
 
 An in-memory cache shared between pipelines.
 
@@ -93,4 +94,4 @@ summarize src_ip, total=sum(total), destinations=count(dest_ip)
 
 ## See Also
 
-* [`buffer`](http://docs.tenzir.com/reference/operators/buffer.md)
+* [`buffer`](https://tenzir.com/docs/reference/operators/buffer.md)

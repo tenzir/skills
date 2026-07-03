@@ -1,5 +1,6 @@
 # Normalize data
 
+> This guide provides an overview of data normalization in TQL. Normalization transforms raw, inconsistent data into a clean, standardized format that’s ready for analysis, storage, and sharing.
 
 This guide provides an overview of data normalization in TQL. Normalization transforms raw, inconsistent data into a clean, standardized format that’s ready for analysis, storage, and sharing.
 
@@ -67,7 +68,7 @@ Start with cleanup, then choose the schema guide for your target platform. Schem
 
 ### Clean up values
 
-[Clean up values](normalization/clean-up-values.md) — Start by fixing data quality issues:
+[Clean up values](normalization/clean-up-values.md) - Start by fixing data quality issues:
 
 * Replace null placeholders (`"None"`, `"N/A"`, `"-"`)
 * Normalize sentinel values
@@ -76,7 +77,7 @@ Start with cleanup, then choose the schema guide for your target platform. Schem
 
 ### Map to ASIM
 
-[Map to ASIM](normalization/map-to-asim.md) — Learn how to map events to Microsoft Sentinel ASIM records:
+[Map to ASIM](normalization/map-to-asim.md) - Learn how to map events to Microsoft Sentinel ASIM records:
 
 * Choose the correct ASIM event or entity schema
 * Populate schema, product, and event metadata
@@ -85,7 +86,7 @@ Start with cleanup, then choose the schema guide for your target platform. Schem
 
 ### Map to CIM
 
-[Map to CIM](normalization/map-to-cim.md) — Learn how to map events to Splunk CIM fields:
+[Map to CIM](normalization/map-to-cim.md) - Learn how to map events to Splunk CIM fields:
 
 * Choose the correct CIM data model and dataset
 * Apply dataset tags and constraints
@@ -94,7 +95,7 @@ Start with cleanup, then choose the schema guide for your target platform. Schem
 
 ### Map to ECS
 
-[Map to ECS](normalization/map-to-ecs.md) — Learn how to map events to Elastic Common Schema fields:
+[Map to ECS](normalization/map-to-ecs.md) - Learn how to map events to Elastic Common Schema fields:
 
 * Populate `@timestamp` and `ecs.version`
 * Choose `event.kind`, `event.category`, and `event.type`
@@ -103,7 +104,7 @@ Start with cleanup, then choose the schema guide for your target platform. Schem
 
 ### Map to OCSF
 
-[Map to OCSF](normalization/map-to-ocsf.md) — Learn the comprehensive approach to OCSF mapping:
+[Map to OCSF](normalization/map-to-ocsf.md) - Learn the comprehensive approach to OCSF mapping:
 
 * Identify the correct event class
 * Map fields by attribute group
@@ -112,7 +113,7 @@ Start with cleanup, then choose the schema guide for your target platform. Schem
 
 ### Map to UDM
 
-[Map to UDM](normalization/map-to-udm.md) — Learn how to map events to Google SecOps UDM records:
+[Map to UDM](normalization/map-to-udm.md) - Learn how to map events to Google SecOps UDM records:
 
 * Choose the correct UDM event type
 * Populate metadata and participant nouns
@@ -137,12 +138,3 @@ Normalizing early ensures all downstream consumers work with consistent data. Av
 * [Create a package](packages/create-a-package.md)
 * [Write tests](testing/write-tests.md)
 * [Map data to OCSF](../tutorials/map-data-to-ocsf.md)
-
-## Contents
-
-- [Clean-up-values](normalization/clean-up-values.md)
-- [Map-to-asim](normalization/map-to-asim.md)
-- [Map-to-cim](normalization/map-to-cim.md)
-- [Map-to-ecs](normalization/map-to-ecs.md)
-- [Map-to-ocsf](normalization/map-to-ocsf.md)
-- [Map-to-udm](normalization/map-to-udm.md)

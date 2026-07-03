@@ -1,5 +1,6 @@
 # Deploy a node
 
+> Deploying a node means spinning it up in one of the supported runtimes. The primary choice is between a containerized with Docker or a native deployment with our static binary that runs on amd64 and arm64 architectures.
 
 Deploying a node means spinning it up in one of the supported runtimes. The primary choice is between a containerized with Docker or a native deployment with our static binary that runs on amd64 and arm64 architectures.
 
@@ -176,7 +177,7 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   Deploy a Tenzir node using our CloudFormation template for automated setup. Click the button below to launch the CloudFormation console with our template pre-loaded:
 
-  [Launch CloudFormation Stack ](https://console.aws.amazon.com/cloudformation/home?#/stacks/create?templateURL=https://s3.amazonaws.com/tenzir-marketplace-resources/single-node-container.yaml)
+  [Launch CloudFormation Stack](https://console.aws.amazon.com/cloudformation/home?#/stacks/create?templateURL=https://s3.amazonaws.com/tenzir-marketplace-resources/single-node-container.yaml)
 
   After clicking the button above, follow these steps in the AWS console:
 
@@ -205,7 +206,7 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
   709825985650.dkr.ecr.us-east-1.amazonaws.com/tenzir/tenzir-node:v<MAJOR>.<MINOR>.<PATCH>
   ```
 
-  Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version (e.g., `v4.30.3`). Check our changelog for the latest version.
+  Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version (e.g., `v4.30.3`). Check our [changelog](https://tenzir.com/changelog.md) for the latest version.
 
   * Console
 
@@ -304,7 +305,7 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
      709825985650.dkr.ecr.us-east-1.amazonaws.com/tenzir/tenzir-node:v<MAJOR>.<MINOR>.<PATCH>
      ```
 
-     Each node version has its own image tag. Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version. Check the changelog for the latest version.
+     Each node version has its own image tag. Replace `v<MAJOR>.<MINOR>.<PATCH>` with the desired version. Check the [changelog](https://tenzir.com/changelog.md) for the latest version.
 
   4. Return to your cluster, navigate to the *Tasks* tab, and click *Run new task*. Select the task definition you just created.
 
@@ -354,7 +355,9 @@ Once you’ve completed the configuration, click the *Create* button. Your node 
 
 ## Kubernetes
 
-Deploy one or more `tenzir-node` instances on a Kubernetes cluster with the [Tenzir Helm chart](../../reference/node/helm-chart.md). The chart deploys nodes only — it does not deploy the Tenzir Platform. Each node connects out to a Platform you have already provisioned, either cloud-hosted at `app.tenzir.com` or self-hosted through the Sovereign Edition. Each entry in the chart’s `nodes` list renders as its own `StatefulSet` with a persistent volume and a Kubernetes `Service`.
+Deploy one or more `tenzir-node` instances on a Kubernetes cluster with the [Tenzir Helm chart](../../reference/node/helm-chart.md). The chart deploys nodes only
+
+* it does not deploy the Tenzir Platform. Each node connects out to a Platform you have already provisioned, either cloud-hosted at `app.tenzir.com` or self-hosted through the Sovereign Edition. Each entry in the chart’s `nodes` list renders as its own `StatefulSet` with a persistent volume and a Kubernetes `Service`.
 
 The chart is distributed as an OCI artifact at `oci://ghcr.io/tenzir/charts/tenzir-node`. You need Kubernetes 1.27 or later and Helm 3.8 or later.
 
@@ -405,7 +408,7 @@ image:
   tag: v6.2.0
 ```
 
-See the Tenzir changelog for the list of available releases. Bumping the tag and re-running `helm upgrade` becomes your version-bump workflow. To roll back, set the previous tag and `helm upgrade` again.
+See the [Tenzir changelog](https://tenzir.com/changelog/tenzir/) for the list of available releases. Bumping the tag and re-running `helm upgrade` becomes your version-bump workflow. To roll back, set the previous tag and `helm upgrade` again.
 
 ### Update a node
 
@@ -436,7 +439,7 @@ kubectl delete namespace tenzir
 
 ### Verify the chart signature
 
-The chart is signed with [Cosign](https://docs.sigstore.dev/cosign/overview/) keyless via the GitHub Actions OIDC token, the same scheme used for the [`tenzir` container image](#verify-container-image-signatures). Verify a specific version with:
+The chart is signed with [Cosign](https://docs.sigstore.dev/cosign/overview/) keyless via the GitHub Actions OIDC token, the same scheme used for the [`tenzir` container image](https://tenzir.com/docs/guides/node-setup/deploy-a-node.md#verify-container-image-signatures). Verify a specific version with:
 
 ```bash
 cosign verify \
@@ -447,9 +450,9 @@ cosign verify \
 
 ## macOS
 
-Looking for a native macOS package? We’re not quite there yet—but you can still run Tenzir smoothly on macOS using [Docker](deploy-a-node.md#docker).
+Looking for a native macOS package? We’re not quite there yet - but you can still run Tenzir smoothly on macOS using [Docker](deploy-a-node.md#docker).
 
-Want to see a native macOS build? Let us know! Drop your vote in our [Discord community](https://docs.tenzir.com/discord)—we prioritize what our users need most.
+Want to see a native macOS build? Let us know! Drop your vote in our [Discord community](https://discord.tenzir.com) - we prioritize what our users need most.
 
 Tenzir *does* run well on macOS under the hood. Docker just bridges the gap for now.
 
@@ -479,7 +482,7 @@ This example playbook shows how to run a Tenzir service on the machine `example_
 
 #### `tenzir_config_dir` (required)
 
-A path to directory containing a [`tenzir.yaml`](http://docs.tenzir.com/reference/node/configuration.md) relative to the playbook.
+A path to directory containing a [`tenzir.yaml`](https://tenzir.com/docs/reference/node/configuration.md) relative to the playbook.
 
 #### `tenzir_read_write_paths`
 

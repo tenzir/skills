@@ -1,5 +1,6 @@
 # is_lower
 
+> Checks if a string is in lowercase.
 
 Checks if a string is in lowercase.
 
@@ -25,7 +26,7 @@ from {x: "hello".is_lower()}
 
 ## See Also
 
-* [`is_alpha`](http://docs.tenzir.com/reference/functions/is_alpha.md)
-* [`is_upper`](http://docs.tenzir.com/reference/functions/is_upper.md)
-* [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md)
+* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
+* [`is_upper`](https://tenzir.com/docs/reference/functions/is_upper.md)
+* [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

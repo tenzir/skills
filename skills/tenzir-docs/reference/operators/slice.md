@@ -1,5 +1,6 @@
 # slice
 
+> Keeps a range of events within the interval [begin, end) stepping by stride.
 
 Keeps a range of events within the interval `[begin, end)` stepping by `stride`.
 
@@ -73,6 +74,6 @@ slice end=-5, stride=-1
 
 ## See Also
 
-* [`head`](http://docs.tenzir.com/reference/operators/head.md)
-* [`tail`](http://docs.tenzir.com/reference/operators/tail.md)
+* [`head`](https://tenzir.com/docs/reference/operators/head.md)
+* [`tail`](https://tenzir.com/docs/reference/operators/tail.md)
 * [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)

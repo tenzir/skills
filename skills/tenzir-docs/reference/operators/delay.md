@@ -1,5 +1,6 @@
 # delay
 
+> Delays events relative to a given start time, with an optional speedup.
 
 Delays events relative to a given start time, with an optional speedup.
 
@@ -79,5 +80,5 @@ delay ts, start=now()+2h
 
 ## See Also
 
-* [`timeshift`](http://docs.tenzir.com/reference/operators/timeshift.md)
+* [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

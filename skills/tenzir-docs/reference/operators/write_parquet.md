@@ -1,5 +1,6 @@
 # write_parquet
 
+> Transforms event stream to a Parquet byte stream.
 
 Transforms event stream to a Parquet byte stream.
 
@@ -38,7 +39,7 @@ write_parquet
 
 ## See Also
 
-* [`read_bitz`](http://docs.tenzir.com/reference/operators/read_bitz.md)
-* [`read_parquet`](http://docs.tenzir.com/reference/operators/read_parquet.md)
-* [`write_bitz`](http://docs.tenzir.com/reference/operators/write_bitz.md)
-* [`write_feather`](http://docs.tenzir.com/reference/operators/write_feather.md)
+* [`read_bitz`](https://tenzir.com/docs/reference/operators/read_bitz.md)
+* [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)
+* [`write_bitz`](https://tenzir.com/docs/reference/operators/write_bitz.md)
+* [`write_feather`](https://tenzir.com/docs/reference/operators/write_feather.md)

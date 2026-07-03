@@ -1,5 +1,6 @@
 # Use ephemeral nodes
 
+> An ephemeral node is ideal for temporary or auto-scaling deployments. It is a temporary node that you do not have to provision manually first, and it disappears from the workspace when the connection to the platform ends.
 
 An **ephemeral node** is ideal for temporary or auto-scaling deployments. It is a temporary node that you do not have to provision manually first, and it disappears from the workspace when the connection to the platform ends.
 

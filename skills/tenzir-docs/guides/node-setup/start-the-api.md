@@ -1,7 +1,8 @@
 # Start the API
 
+> The node offers a REST API for CRUD-style pipeline management. By default, the API is not accessible from the outside. Only the platform can access it internaly through the existing node-to-platform connection. To enable the API for direct access, you need to configure the built in web server that exposes the API.
 
-The node offers a [REST API](https://docs.tenzir.com/reference/node/api) for CRUD-style pipeline management. By default, the API is not accessible from the outside. Only the platform can access it internaly through the existing node-to-platform connection. To enable the API for direct access, you need to configure the built in web server that exposes the API.
+The node offers a [REST API](../../reference/operators/openapi.md) for CRUD-style pipeline management. By default, the API is not accessible from the outside. Only the platform can access it internaly through the existing node-to-platform connection. To enable the API for direct access, you need to configure the built in web server that exposes the API.
 
 ## Expose the REST API
 
@@ -19,7 +20,7 @@ tenzir:
         --mode=MODE
 ```
 
-Replace `MODE` with the TLS mode that best suits your deployment, as [explained below](#choose-a-tls-deployment-mode).
+Replace `MODE` with the TLS mode that best suits your deployment, as [explained below](start-the-api.md#choose-a-tls-deployment-mode).
 
 The YAML configuration is equivalent to the following command-line invocation:
 
@@ -37,7 +38,7 @@ Clients must authenticate all requests with a valid token. The token is a short 
 tenzir-ctl web generate-token
 ```
 
-For local testing and development, generating suitable certificates and tokens can be a hassle. For this scenario, you can start the server in [developer mode](#developer-mode) where it accepts plain HTTP connections are does not perform token authentication.
+For local testing and development, generating suitable certificates and tokens can be a hassle. For this scenario, you can start the server in [developer mode](start-the-api.md#developer-mode) where it accepts plain HTTP connections are does not perform token authentication.
 
 ## Choose a TLS deployment mode
 

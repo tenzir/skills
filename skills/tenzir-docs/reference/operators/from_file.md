@@ -1,5 +1,6 @@
 # from_file
 
+> Reads one or multiple files from a filesystem.
 
 Reads one or multiple files from a filesystem.
 
@@ -50,7 +51,10 @@ Pipeline to use for parsing the file. By default, this pipeline is derived from 
 
 Inside the subpipeline, the `$file` variable is available as a record with the following fields:
 
-\| Field | Type | Description | | :------ | :------- | :--------------------------------------- | | `path` | `string` | The absolute path of the file being read | | `mtime` | `time` | The last modification time of the file |
+| Field   | Type     | Description                              |
+| ------- | -------- | ---------------------------------------- |
+| `path`  | `string` | The absolute path of the file being read |
+| `mtime` | `time`   | The last modification time of the file   |
 
 For example, to attach the source path to each event:
 
@@ -107,7 +111,7 @@ from_file "/logs/*.json", max_age=1h
 
 ## See Also
 
-* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
+* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Enrich with asset inventory](../../guides/enrichment/enrich-with-asset-inventory.md)
 * [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)

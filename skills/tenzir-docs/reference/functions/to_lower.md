@@ -1,5 +1,6 @@
 # to_lower
 
+> Converts a string to lowercase.
 
 Converts a string to lowercase.
 
@@ -25,8 +26,8 @@ from {x: "HELLO".to_lower()}
 
 ## See Also
 
-* [`capitalize`](http://docs.tenzir.com/reference/functions/capitalize.md)
-* [`is_lower`](http://docs.tenzir.com/reference/functions/is_lower.md)
-* [`to_title`](http://docs.tenzir.com/reference/functions/to_title.md)
-* [`to_upper`](http://docs.tenzir.com/reference/functions/to_upper.md)
+* [`capitalize`](https://tenzir.com/docs/reference/functions/capitalize.md)
+* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
+* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
+* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

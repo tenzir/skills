@@ -1,11 +1,12 @@
-# Azure Blob Storage
+# Azure Blob Storage integration
 
+> Store, retrieve, and manage unstructured data at scale.
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) is Azure’s object storage service. Tenzir can treat it like a local filesystem to read and write files.
 
 ## Examples
 
-Use [`from_azure_blob_storage`](http://docs.tenzir.com/reference/operators/from_azure_blob_storage.md) to read files from Azure Blob Storage. It supports glob patterns and automatic format detection. For writing, use [`to_azure_blob_storage`](http://docs.tenzir.com/reference/operators/to_azure_blob_storage.md) with a print operator.
+Use [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md) to read files from Azure Blob Storage. It supports glob patterns and automatic format detection. For writing, use [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md) with a print operator.
 
 ### Read events from a file in a container
 
@@ -26,12 +27,3 @@ from {foo: 42}
 print_json
 to_azure_blob_storage "abfs://container/path/to/file.json"
 ```
-
-## Contents
-
-- [Azure-event-hubs](azure-event-hubs.md)
-- [Defender](defender.md)
-- [Graph](graph.md)
-- [Sql-server](sql-server.md)
-- [Sentinel-log-analytics](sentinel-log-analytics.md)
-- [Windows-event-logs](windows-event-logs.md)

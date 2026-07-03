@@ -1,25 +1,26 @@
 # Fan out with subpipelines
 
+> This guide shows you how to fan out an event stream into subpipelines with each and group. You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like fork, parallel, and loadbalance.
 
-This guide shows you how to fan out an event stream into subpipelines with [`each`](http://docs.tenzir.com/reference/operators/each.md) and [`group`](http://docs.tenzir.com/reference/operators/group.md). You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like [`fork`](http://docs.tenzir.com/reference/operators/fork.md), [`parallel`](http://docs.tenzir.com/reference/operators/parallel.md), and [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md).
+This guide shows you how to fan out an event stream into subpipelines with [`each`](https://tenzir.com/docs/reference/operators/each.md) and [`group`](https://tenzir.com/docs/reference/operators/group.md). You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like [`fork`](https://tenzir.com/docs/reference/operators/fork.md), [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md), and [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md).
 
 ## Choose a fan-out pattern
 
 Tenzir has several operators that send events into subpipelines. Choose the operator based on how many subpipelines you need and how events should flow into them:
 
-| Operator                                                                     | Subpipelines                          | Event flow                                                         | Use case                                                      |
-| ---------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- |
-| [`fork`](http://docs.tenzir.com/reference/operators/fork.md)                 | One fixed side branch                 | Every event goes to the main pipeline and the side branch          | Archive or publish a copy while continuing processing         |
-| [`parallel`](http://docs.tenzir.com/reference/operators/parallel.md)         | A fixed number of workers             | Each event goes to one worker running the same subpipeline         | Speed up CPU-heavy or I/O-heavy work                          |
-| [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md) | One branch per configured target      | Each event goes to one target                                      | Distribute load across equivalent sinks                       |
-| [`each`](http://docs.tenzir.com/reference/operators/each.md)                 | One fresh subpipeline per input event | The input event is available as `$this`; it is not passed as input | Run a per-event job, such as a lookup or export               |
-| [`group`](http://docs.tenzir.com/reference/operators/group.md)               | One subpipeline per key               | Matching events are passed to the same keyed subpipeline           | Keep per-tenant, per-host, or per-session processing isolated |
+| Operator                                                                      | Subpipelines                          | Event flow                                                         | Use case                                                      |
+| ----------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- |
+| [`fork`](https://tenzir.com/docs/reference/operators/fork.md)                 | One fixed side branch                 | Every event goes to the main pipeline and the side branch          | Archive or publish a copy while continuing processing         |
+| [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)         | A fixed number of workers             | Each event goes to one worker running the same subpipeline         | Speed up CPU-heavy or I/O-heavy work                          |
+| [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md) | One branch per configured target      | Each event goes to one target                                      | Distribute load across equivalent sinks                       |
+| [`each`](https://tenzir.com/docs/reference/operators/each.md)                 | One fresh subpipeline per input event | The input event is available as `$this`; it is not passed as input | Run a per-event job, such as a lookup or export               |
+| [`group`](https://tenzir.com/docs/reference/operators/group.md)               | One subpipeline per key               | Matching events are passed to the same keyed subpipeline           | Keep per-tenant, per-host, or per-session processing isolated |
 
 Use regular transformations when every event can flow through the same linear pipeline. Use subpipeline fan-out when the pipeline structure itself depends on each event or key.
 
 ## Run one subpipeline per event
 
-Use [`each`](http://docs.tenzir.com/reference/operators/each.md) when every input event describes a job to run. The nested pipeline must start with a source because `each` does not pass the input event into the subpipeline. Instead, it binds the current event record to `$this`.
+Use [`each`](https://tenzir.com/docs/reference/operators/each.md) when every input event describes a job to run. The nested pipeline must start with a source because `each` does not pass the input event into the subpipeline. Instead, it binds the current event record to `$this`.
 
 The following pipeline treats incoming cases as lookup requests. Each case queries the same historical dataset for matching source IPs and annotates the matches with the case ID:
 
@@ -55,7 +56,7 @@ The `parallel` option limits how many per-event jobs run at the same time. When 
 
 ## Keep one subpipeline per key
 
-Use [`group`](http://docs.tenzir.com/reference/operators/group.md) when events with the same key must go through the same subpipeline. Unlike `each`, the nested pipeline receives input: Tenzir sends all matching events for a key to that key’s subpipeline. The key is available as `$group` inside the subpipeline.
+Use [`group`](https://tenzir.com/docs/reference/operators/group.md) when events with the same key must go through the same subpipeline. Unlike `each`, the nested pipeline receives input: Tenzir sends all matching events for a key to that key’s subpipeline. The key is available as `$group` inside the subpipeline.
 
 The following pipeline keeps tenant streams separate and computes a summary per tenant:
 
@@ -83,7 +84,7 @@ sort tenant
 }
 ```
 
-For a pure aggregation, [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md) is usually shorter. Use `group` when the per-key subpipeline does more than aggregate, such as keeping state, applying a keyed transformation, or writing to a key-specific sink.
+For a pure aggregation, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) is usually shorter. Use `group` when the per-key subpipeline does more than aggregate, such as keeping state, applying a keyed transformation, or writing to a key-specific sink.
 
 ## Write separate outputs per key
 
@@ -104,21 +105,21 @@ This creates one subpipeline per tenant and writes matching events to that subpi
 
 ## Avoid common mistakes
 
-* Don’t use `each` for ordinary per-event transformations. Use regular TQL statements or [`parallel`](http://docs.tenzir.com/reference/operators/parallel.md) when every event follows the same processing steps.
-* Don’t use `group` only to calculate grouped totals. Use [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md) unless you need a full subpipeline per key.
+* Don’t use `each` for ordinary per-event transformations. Use regular TQL statements or [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) when every event follows the same processing steps.
+* Don’t use `group` only to calculate grouped totals. Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) unless you need a full subpipeline per key.
 * Don’t leave `each` unbounded for external systems. Set `parallel` to match the concurrency that the downstream service can handle.
 * Remember that `each` subpipelines must start with a source, while `group` subpipelines receive the grouped input stream.
 * Neither `each` nor `group` can use subpipelines that produce bytes as output.
 
 ## See Also
 
-* [`each`](http://docs.tenzir.com/reference/operators/each.md)
-* [`group`](http://docs.tenzir.com/reference/operators/group.md)
-* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
-* [`parallel`](http://docs.tenzir.com/reference/operators/parallel.md)
-* [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md)
-* [`publish`](http://docs.tenzir.com/reference/operators/publish.md)
-* [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md)
-* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
+* [`each`](https://tenzir.com/docs/reference/operators/each.md)
+* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
+* [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
+* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [Split and merge streams](split-and-merge-streams.md)
 * [Load-balance pipelines](load-balance-pipelines.md)

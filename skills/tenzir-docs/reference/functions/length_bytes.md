@@ -1,5 +1,6 @@
 # length_bytes
 
+> Returns the length of a string in bytes.
 
 Returns the length of a string in bytes.
 
@@ -37,6 +38,6 @@ from {x: "👻".length_bytes()}
 
 ## See Also
 
-* [`length`](http://docs.tenzir.com/reference/functions/length.md)
-* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
+* [`length`](https://tenzir.com/docs/reference/functions/length.md)
+* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

@@ -1,5 +1,6 @@
 # load_balance
 
+> Routes the data to one of multiple subpipelines.
 
 Routes the data to one of multiple subpipelines.
 
@@ -64,8 +65,8 @@ load_balance $cfg {
 
 ## See Also
 
-* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
-* [`group`](http://docs.tenzir.com/reference/operators/group.md)
-* [`publish`](http://docs.tenzir.com/reference/operators/publish.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
 * [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)
 * [Load-balance pipelines](../../guides/routing/load-balance-pipelines.md)

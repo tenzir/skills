@@ -1,5 +1,6 @@
 # drop_null_fields
 
+> Removes fields containing null values from the event.
 
 Removes fields containing null values from the event.
 
@@ -156,8 +157,8 @@ In this example:
 
 ## See Also
 
-* [`drop_null_fields`](http://docs.tenzir.com/reference/functions/drop_null_fields.md)
-* [`drop`](http://docs.tenzir.com/reference/operators/drop.md)
-* [`select`](http://docs.tenzir.com/reference/operators/select.md)
-* [`where`](http://docs.tenzir.com/reference/operators/where.md)
+* [`drop_null_fields`](https://tenzir.com/docs/reference/functions/drop_null_fields.md)
+* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
+* [`select`](https://tenzir.com/docs/reference/operators/select.md)
+* [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

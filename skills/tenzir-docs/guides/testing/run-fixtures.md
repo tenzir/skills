@@ -1,5 +1,6 @@
 # Run fixtures
 
+> This guide shows you how to start fixtures in standalone mode without running tests. You’ll learn how to use the --fixture CLI option to bring up managed services, inspect their environment variables, and tear them down cleanly.
 
 This guide shows you how to start fixtures in standalone mode without running tests. You’ll learn how to use the `--fixture` CLI option to bring up managed services, inspect their environment variables, and tear them down cleanly.
 

@@ -1,5 +1,6 @@
 # Transform data at rest
 
+> This guide shows you how to transform data already stored in a node. You’ll learn to apply compaction, manage storage quotas, and run retroactive pipelines.
 
 This guide shows you how to transform data already stored in a node. You’ll learn to apply compaction, manage storage quotas, and run retroactive pipelines.
 

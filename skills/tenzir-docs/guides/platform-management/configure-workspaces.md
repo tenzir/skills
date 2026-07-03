@@ -1,5 +1,6 @@
 # Configure workspaces
 
+> Workspaces in the platform logically group nodes, secrets, and dashboards.
 
 Workspaces in the [platform](../../explanations/platform.md) logically group nodes, secrets, and dashboards.
 
@@ -14,9 +15,9 @@ The Tenzir Platform CLI allows administrators to create, modify, and delete work
 
 On-premise setup required
 
-This CLI functionality requires an on-premise platform deployment, available with the [Sovereign Edition](https://tenzir.com/pricing).
+This CLI functionality requires an on-premise platform deployment, available with the [Sovereign Edition](https://tenzir.com/pricing.md).
 
-Only local platform administrators can manage workspaces dynamically. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](http://docs.tenzir.com/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
+Only local platform administrators can manage workspaces dynamically. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](https://tenzir.com/docs/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
 
 ### Creating and managing workspaces
 

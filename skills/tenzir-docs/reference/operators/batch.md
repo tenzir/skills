@@ -1,5 +1,6 @@
 # batch
 
+> The batch operator controls the batch size of events.
 
 The `batch` operator controls the batch size of events.
 

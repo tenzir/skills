@@ -1,5 +1,6 @@
 # write_lines
 
+> Writes events as key-value pairsthe values of an event.
 
 Writes events as key-value pairsthe *values* of an event.
 
@@ -9,7 +10,7 @@ write_lines
 
 Tip
 
-Use [`write_kv`](http://docs.tenzir.com/reference/operators/write_kv.md) operator if you also want to write the *key*s.
+Use [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md) operator if you also want to write the *key*s.
 
 ## Description
 
@@ -34,9 +35,9 @@ write_lines
 
 ## See Also
 
-* [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md)
-* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
-* [`write_kv`](http://docs.tenzir.com/reference/operators/write_kv.md)
-* [`write_ssv`](http://docs.tenzir.com/reference/operators/write_ssv.md)
-* [`write_tsv`](http://docs.tenzir.com/reference/operators/write_tsv.md)
-* [`write_xsv`](http://docs.tenzir.com/reference/operators/write_xsv.md)
+* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
+* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
+* [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md)
+* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
+* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
+* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)

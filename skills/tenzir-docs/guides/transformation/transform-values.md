@@ -1,5 +1,6 @@
 # Transform values
 
+> Transforming values is a fundamental part of data processing. This guide shows you how to convert between different data types, perform basic calculations, and manipulate simple values within your events.
 
 Transforming values is a fundamental part of data processing. This guide shows you how to convert between different data types, perform basic calculations, and manipulate simple values within your events.
 
@@ -9,7 +10,7 @@ TQL provides functions to convert values between different types. This is essent
 
 ### Convert to numbers
 
-Use [`int`](http://docs.tenzir.com/reference/functions/int.md) and [`float`](http://docs.tenzir.com/reference/functions/float.md) to convert values to numeric types:
+Use [`int`](https://tenzir.com/docs/reference/functions/int.md) and [`float`](https://tenzir.com/docs/reference/functions/float.md) to convert values to numeric types:
 
 ```tql
 from {price: "42", quantity: "3.5"},
@@ -25,7 +26,7 @@ quantity = quantity.float()
 
 ### Convert to strings
 
-Use format strings to build strings from values. TQL formats each embedded expression as if you had called [`string`](http://docs.tenzir.com/reference/functions/string.md):
+Use format strings to build strings from values. TQL formats each embedded expression as if you had called [`string`](https://tenzir.com/docs/reference/functions/string.md):
 
 ```tql
 from {status: 200, ratio: 0.95},
@@ -40,7 +41,7 @@ message = f"{status} - {ratio * 100}%"
 
 ### Parse times and durations
 
-Convert strings to time values with [`time`](http://docs.tenzir.com/reference/functions/time.md):
+Convert strings to time values with [`time`](https://tenzir.com/docs/reference/functions/time.md):
 
 ```tql
 from {timestamp: "2024-01-15"},
@@ -53,7 +54,7 @@ parsed_time = timestamp.time()
 {timestamp: "2024-02-20", parsed_time: 2024-02-20T00:00:00Z}
 ```
 
-Convert strings to durations with [`duration`](http://docs.tenzir.com/reference/functions/duration.md):
+Convert strings to durations with [`duration`](https://tenzir.com/docs/reference/functions/duration.md):
 
 ```tql
 from {interval: "5s"},
@@ -68,7 +69,7 @@ parsed_duration = interval.duration()
 
 ### Convert to unsigned integers
 
-Use [`uint`](http://docs.tenzir.com/reference/functions/uint.md) for non-negative integers:
+Use [`uint`](https://tenzir.com/docs/reference/functions/uint.md) for non-negative integers:
 
 ```tql
 from {count: "42", ratio: 3.7},
@@ -95,7 +96,7 @@ warning: `uint` failed to convert some string
 
 ### Work with IP addresses and subnets
 
-TQL supports IP address and subnet literals directly. You can also parse them from strings using [`ip`](http://docs.tenzir.com/reference/functions/ip.md) and [`subnet`](http://docs.tenzir.com/reference/functions/subnet.md):
+TQL supports IP address and subnet literals directly. You can also parse them from strings using [`ip`](https://tenzir.com/docs/reference/functions/ip.md) and [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md):
 
 ```tql
 from {direct_ip: 192.168.1.1, direct_subnet: 10.0.0.0/24},
@@ -146,7 +147,7 @@ Analyze and categorize IP addresses with inspection functions:
 
 ### Check IP address types
 
-Use IP inspection functions like [`is_v4`](http://docs.tenzir.com/reference/functions/is_v4.md), [`is_v6`](http://docs.tenzir.com/reference/functions/is_v6.md), [`is_private`](http://docs.tenzir.com/reference/functions/is_private.md), [`is_global`](http://docs.tenzir.com/reference/functions/is_global.md), [`is_loopback`](http://docs.tenzir.com/reference/functions/is_loopback.md), and [`is_multicast`](http://docs.tenzir.com/reference/functions/is_multicast.md) to analyze addresses:
+Use IP inspection functions like [`is_v4`](https://tenzir.com/docs/reference/functions/is_v4.md), [`is_v6`](https://tenzir.com/docs/reference/functions/is_v6.md), [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md), [`is_global`](https://tenzir.com/docs/reference/functions/is_global.md), [`is_loopback`](https://tenzir.com/docs/reference/functions/is_loopback.md), and [`is_multicast`](https://tenzir.com/docs/reference/functions/is_multicast.md) to analyze addresses:
 
 ```tql
 from {ip1: 192.168.1.1, ip2: 8.8.8.8, ip3: ::1},
@@ -186,7 +187,7 @@ is_multicast = ip2.is_multicast()
 
 ### Categorize IP addresses
 
-Get detailed IP address classification with [`ip_category`](http://docs.tenzir.com/reference/functions/ip_category.md):
+Get detailed IP address classification with [`ip_category`](https://tenzir.com/docs/reference/functions/ip_category.md):
 
 ```tql
 from {client: "192.168.1.100", server: "8.8.8.8", local: "127.0.0.1"},
@@ -217,7 +218,7 @@ local_category = local.ip().ip_category()
 
 ### Check link-local addresses
 
-Identify link-local addresses with [`is_link_local`](http://docs.tenzir.com/reference/functions/is_link_local.md):
+Identify link-local addresses with [`is_link_local`](https://tenzir.com/docs/reference/functions/is_link_local.md):
 
 ```tql
 from {addr1: 169.254.1.1, addr2: fe80::1, addr3: 192.168.1.1},
@@ -248,7 +249,7 @@ link_local3 = addr3.is_link_local()
 
 ## Classify values with `match`
 
-Use [`match`](http://docs.tenzir.com/reference/statements.md#match) when a transformation depends on a small set of cases. A `match` statement checks patterns from top to bottom and runs the first matching branch. Patterns can be constants, alternatives, ranges, or the wildcard `_`. Guards add boolean conditions to matching branches.
+Use [`match`](https://tenzir.com/docs/reference/statements.md#match) when a transformation depends on a small set of cases. A `match` statement checks patterns from top to bottom and runs the first matching branch. Patterns can be constants, alternatives, ranges, or the wildcard `_`. Guards add boolean conditions to matching branches.
 
 ### Normalize firewall actions
 
@@ -549,7 +550,7 @@ floor_val = value.floor()
 
 ### Mathematical functions
 
-Use [`abs`](http://docs.tenzir.com/reference/functions/abs.md) for absolute values and [`sqrt`](http://docs.tenzir.com/reference/functions/sqrt.md) for square roots:
+Use [`abs`](https://tenzir.com/docs/reference/functions/abs.md) for absolute values and [`sqrt`](https://tenzir.com/docs/reference/functions/sqrt.md) for square roots:
 
 ```tql
 from {x: -5, y: 16},
@@ -597,7 +598,7 @@ status = status? else "unknown"
 
 ### Normalize sentinel values
 
-Many data sources use string placeholders like `"None"`, `"N/A"`, `"-"`, or empty strings to represent missing values. Use [`replace`](http://docs.tenzir.com/reference/operators/replace.md) to normalize these to actual `null`:
+Many data sources use string placeholders like `"None"`, `"N/A"`, `"-"`, or empty strings to represent missing values. Use [`replace`](https://tenzir.com/docs/reference/operators/replace.md) to normalize these to actual `null`:
 
 ```tql
 from {status: "active", error: "None"},
@@ -635,7 +636,7 @@ Generate new values using built-in functions:
 
 ### Generate unique identifiers
 
-Use [`uuid`](http://docs.tenzir.com/reference/functions/uuid.md) to create unique identifiers:
+Use [`uuid`](https://tenzir.com/docs/reference/functions/uuid.md) to create unique identifiers:
 
 ```tql
 from {user: "alice", action: "login"},
@@ -661,7 +662,7 @@ session_id = uuid()
 
 ### Generate random numbers
 
-Use [`random`](http://docs.tenzir.com/reference/functions/random.md) to generate random values:
+Use [`random`](https://tenzir.com/docs/reference/functions/random.md) to generate random values:
 
 ```tql
 from {
@@ -685,7 +686,7 @@ Retrieve values from external sources like the environment, configuration, or fi
 
 ### Read environment variables
 
-Use [`env`](http://docs.tenzir.com/reference/functions/env.md) to access environment variables:
+Use [`env`](https://tenzir.com/docs/reference/functions/env.md) to access environment variables:
 
 ```tql
 from {
@@ -705,7 +706,7 @@ from {
 
 ### Access configuration
 
-Use [`config`](http://docs.tenzir.com/reference/functions/config.md) to read Tenzir’s configuration:
+Use [`config`](https://tenzir.com/docs/reference/functions/config.md) to read Tenzir’s configuration:
 
 ```tql
 from {
@@ -715,7 +716,7 @@ from {
 
 ### Read file contents
 
-Use [`file_contents`](http://docs.tenzir.com/reference/functions/file_contents.md) to read files:
+Use [`file_contents`](https://tenzir.com/docs/reference/functions/file_contents.md) to read files:
 
 ```tql
 from {
@@ -725,7 +726,7 @@ from {
 
 ### Access secrets
 
-Use [`secret`](http://docs.tenzir.com/reference/functions/secret.md) to retrieve [secrets](../../explanations/secrets.md):
+Use [`secret`](https://tenzir.com/docs/reference/functions/secret.md) to retrieve [secrets](../../explanations/secrets.md):
 
 ```tql
 from {
@@ -739,7 +740,7 @@ Examine data types at runtime:
 
 ### Get type information
 
-Use [`type_of`](http://docs.tenzir.com/reference/functions/type_of.md) to inspect value types. Note that this function returns detailed type information as objects:
+Use [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md) to inspect value types. Note that this function returns detailed type information as objects:
 
 ```tql
 from {
@@ -777,7 +778,7 @@ obj_type = obj.type_of()
 
 ### Get type identifiers
 
-Use [`type_id`](http://docs.tenzir.com/reference/functions/type_id.md) for type comparison:
+Use [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md) for type comparison:
 
 ```tql
 from {value1: "text", value2: 123, value3: "456"}

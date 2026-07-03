@@ -1,5 +1,6 @@
 # parse_syslog
 
+> Parses a string as a Syslog message.
 
 Parses a string as a Syslog message.
 
@@ -279,6 +280,6 @@ If the leading brackets don’t contain valid structured data, the parser leaves
 
 ## See Also
 
-* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
-* [`write_syslog`](http://docs.tenzir.com/reference/operators/write_syslog.md)
+* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

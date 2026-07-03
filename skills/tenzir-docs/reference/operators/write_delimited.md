@@ -1,5 +1,6 @@
 # write_delimited
 
+> Frames string or blob event values as a byte stream with a separator after each value.
 
 Frames `string` or `blob` event values as a byte stream with a separator after each value.
 
@@ -19,7 +20,7 @@ Note
 
 `write_delimited` writes a trailing separator after the last non-null value. Streaming protocols often need a terminator for the last message even when the input stream ends.
 
-`write_delimited` doesn’t escape, quote, serialize JSON, or add newlines. Use a printer function such as [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md) when you need a formatted string before framing it.
+`write_delimited` doesn’t escape, quote, serialize JSON, or add newlines. Use a printer function such as [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md) when you need a formatted string before framing it.
 
 ## Examples
 
@@ -38,7 +39,7 @@ a|b|
 
 ### Send GELF JSON over TCP
 
-Graylog GELF over TCP expects one compact GELF JSON object followed by a null byte. Build the GELF record in TQL, serialize it with [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md), and use `write_delimited` for the TCP framing.
+Graylog GELF over TCP expects one compact GELF JSON object followed by a null byte. Build the GELF record in TQL, serialize it with [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md), and use `write_delimited` for the TCP framing.
 
 ```tql
 export
@@ -74,11 +75,11 @@ ab
 
 ## See Also
 
-* [`read_delimited`](http://docs.tenzir.com/reference/operators/read_delimited.md)
-* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
-* [`to_stdout`](http://docs.tenzir.com/reference/operators/to_stdout.md)
-* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
-* [`write_all`](http://docs.tenzir.com/reference/operators/write_all.md)
-* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)
-* [`print_ndjson`](http://docs.tenzir.com/reference/functions/print_ndjson.md)
+* [`read_delimited`](https://tenzir.com/docs/reference/operators/read_delimited.md)
+* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
+* [`to_stdout`](https://tenzir.com/docs/reference/operators/to_stdout.md)
+* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
+* [`write_all`](https://tenzir.com/docs/reference/operators/write_all.md)
+* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
+* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
 * [Graylog](../../integrations/graylog.md)

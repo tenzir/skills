@@ -1,5 +1,6 @@
 # type_id
 
+> Retrieves the type id of an expression.
 
 Retrieves the type id of an expression.
 
@@ -25,4 +26,4 @@ from {x: type_id(1 + 3.2)}
 
 ## See Also
 
-* [`type_of`](http://docs.tenzir.com/reference/functions/type_of.md)
+* [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)

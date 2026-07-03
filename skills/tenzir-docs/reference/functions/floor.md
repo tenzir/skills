@@ -1,5 +1,6 @@
 # floor
 
+> Computes the floor of a number or a time/duration with a specified unit.
 
 Computes the floor of a number or a time/duration with a specified unit.
 
@@ -53,5 +54,5 @@ from {
 
 ## See Also
 
-* [`ceil`](http://docs.tenzir.com/reference/functions/ceil.md)
-* [`round`](http://docs.tenzir.com/reference/functions/round.md)
+* [`ceil`](https://tenzir.com/docs/reference/functions/ceil.md)
+* [`round`](https://tenzir.com/docs/reference/functions/round.md)

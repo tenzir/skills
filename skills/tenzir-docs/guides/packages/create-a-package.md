@@ -1,5 +1,6 @@
 # Create a package
 
+> This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, plan reusable operators, add deployable pipelines, and include runnable examples.
 
 This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, plan reusable operators, add deployable pipelines, and include runnable examples.
 

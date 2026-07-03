@@ -1,5 +1,6 @@
 # read_all
 
+> Parses an incoming bytes stream into a single event.
 
 Parses an incoming bytes stream into a single event.
 
@@ -45,7 +46,7 @@ from_file "data.bin" {
 
 ## See Also
 
-* [`read_chunks`](http://docs.tenzir.com/reference/operators/read_chunks.md)
-* [`read_delimited`](http://docs.tenzir.com/reference/operators/read_delimited.md)
-* [`read_delimited_regex`](http://docs.tenzir.com/reference/operators/read_delimited_regex.md)
-* [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md)
+* [`read_chunks`](https://tenzir.com/docs/reference/operators/read_chunks.md)
+* [`read_delimited`](https://tenzir.com/docs/reference/operators/read_delimited.md)
+* [`read_delimited_regex`](https://tenzir.com/docs/reference/operators/read_delimited_regex.md)
+* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)

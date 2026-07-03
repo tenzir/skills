@@ -1,5 +1,6 @@
 # Map to ECS
 
+> This guide shows you how to map events to Elastic Common Schema (ECS) in TQL. You’ll learn how to populate required ECS fields, choose event categorization values, map common network fieldsets, preserve source-specific details, and prepare records for Elasticsearch-compatible destinations.
 
 This guide shows you how to map events to Elastic Common Schema (ECS) in TQL. You’ll learn how to populate required ECS fields, choose event categorization values, map common network fieldsets, preserve source-specific details, and prepare records for Elasticsearch-compatible destinations.
 
@@ -152,12 +153,12 @@ to_elasticsearch "https://elasticsearch.example.com:9200",
   index="ecs-events"
 ```
 
-Use [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md) instead when the destination is OpenSearch.
+Use [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md) instead when the destination is OpenSearch.
 
 ## See Also
 
-* [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md)
-* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
+* [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
+* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
 * [Clean up values](clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ecs-skill)
 * [Map to ASIM](map-to-asim.md)

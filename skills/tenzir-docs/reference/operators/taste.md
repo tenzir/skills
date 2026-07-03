@@ -1,5 +1,6 @@
 # taste
 
+> Limits the input to n events per unique schema.
 
 Limits the input to `n` events per unique schema.
 
@@ -37,6 +38,6 @@ taste 1
 
 ## See Also
 
-* [`export`](http://docs.tenzir.com/reference/operators/export.md)
-* [`head`](http://docs.tenzir.com/reference/operators/head.md)
+* [`export`](https://tenzir.com/docs/reference/operators/export.md)
+* [`head`](https://tenzir.com/docs/reference/operators/head.md)
 * [Quickstart](../../guides/quickstart.md)

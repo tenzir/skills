@@ -1,5 +1,6 @@
 # FAQs
 
+> This page answers frequently asked questions about Tenzir.
 
 This page answers frequently asked questions about Tenzir.
 
@@ -21,7 +22,7 @@ There exist three moving parts:
 
 You can either [build the open source version](../guides/development/build-from-source.md) yourself and [add your own plugins](deployment.md), or use our compiled binary packages that include the command line tool and the node. We offer the platform as Docker Compose files. We host one platform instance at [app.tenzir.com](https://app.tenzir.com).
 
-Tenzir comes in severals editions, including a free [Community Edition](https://tenzir.com/pricing). If you have any questions, don’t hesitate to [reach out](https://tenzir.com/contact) what best suits your needs.
+Tenzir comes in severals editions, including a free [Community Edition](https://tenzir.com/pricing.md). If you have any questions, don’t hesitate to [reach out](https://tenzir.com/contact.md) what best suits your needs.
 
 ## Can Tenzir see my data?
 
@@ -29,17 +30,17 @@ Tenzir comes in severals editions, including a free [Community Edition](https://
 
 A Tenzir deployment consists of *nodes* that you manage, and a *platform* available as SaaS from us or operated by you. The *app* runs in your browser to access the platform. All computation and storage takes place at your nodes. The platform acts as rendezvous point that connects two TLS-encrypted channels, one from the node to the platform, and one from the browser to the platform:
 
-We connect these two channels at the platform. Therefore, whoever operates the platform *could* interpose on data that travels from the nodes to the app. In the [Professional Edition](https://tenzir.com/pricing) and [Enterprise Edition](https://tenzir.com/pricing), we run the platform. However, we emphasize that data privacy is of utmost importance to us and our customers. As a mission-driven company with strong ethics, our engineering follows state-of-the-art infrastructure-as-code practices and we are performing security audits to ensure that our code quality meets the highest standards.
+We connect these two channels at the platform. Therefore, whoever operates the platform *could* interpose on data that travels from the nodes to the app. In the [Professional Edition](https://tenzir.com/pricing.md) and [Enterprise Edition](https://tenzir.com/pricing.md), we run the platform. However, we emphasize that data privacy is of utmost importance to us and our customers. As a mission-driven company with strong ethics, our engineering follows state-of-the-art infrastructure-as-code practices and we are performing security audits to ensure that our code quality meets the highest standards.
 
 We have plans to make this a single, end-to-end encrypted channel, so that we no longer have the theoretical ability to interpose on the data transfer between app and node.
 
-If you have more stringent requirements, you can also run the platform yourself with the [Sovereign Edition](https://tenzir.com/pricing).
+If you have more stringent requirements, you can also run the platform yourself with the [Sovereign Edition](https://tenzir.com/pricing.md).
 
 ## Does Tenzir run on-premise?
 
-Yes, Tenzir can run on premise and supports fully air-gapped environments. The [Sovereign Edition](https://tenzir.com/pricing) allows you to [deploy the entire platform](../guides/platform-setup.md) in a Dockerized environment.
+Yes, Tenzir can run on premise and supports fully air-gapped environments. The [Sovereign Edition](https://tenzir.com/pricing.md) allows you to [deploy the entire platform](../guides/platform-setup.md) in a Dockerized environment.
 
-The [Community Edition](https://tenzir.com/pricing), [Professional Edition](https://tenzir.com/pricing) and [Enterprise Edition](https://tenzir.com/pricing) are backed by a Tenzir-hosted instance of the platform in the public cloud (AWS in Europe).
+The [Community Edition](https://tenzir.com/pricing.md), [Professional Edition](https://tenzir.com/pricing.md) and [Enterprise Edition](https://tenzir.com/pricing.md) are backed by a Tenzir-hosted instance of the platform in the public cloud (AWS in Europe).
 
 Read more on [how Tenzir works](deployment.md) to understand what component of Tenzir runs where.
 
@@ -51,7 +52,7 @@ However, we offer a cloud-native *demo node* that you can deploy as part of ever
 
 ## Why Did You Create a New Query Language? Why Not SQL?
 
-We opted for our own language—the [**Tenzir Query Language**](language.md) or **TQL**— for several reasons that we outline below.
+We opted for our own language - the [**Tenzir Query Language**](language.md) or **TQL** - for several reasons that we outline below.
 
 At Tenzir, we have a clear target audience: security practitioners. They are rarely data engineers fluent in SQL or experienced with lower-level data tools. Rather, they identify as blue/purple teamers, incident responders, threat hunters, detection engineers, threat intelligence analysts, and other domain experts.
 
@@ -89,7 +90,7 @@ Our decision to develop a new language was not taken lightly. We aimed to build 
 
 Tenzir does not rely on a third-party database.
 
-Tenzir nodes include a light-weight storage engine on top of Feather or Parquet files, accessible via the [`import`](http://docs.tenzir.com/reference/operators/import.md) and [`export`](http://docs.tenzir.com/reference/operators/export.md) operators.
+Tenzir nodes include a light-weight storage engine on top of Feather or Parquet files, accessible via the [`import`](https://tenzir.com/docs/reference/operators/import.md) and [`export`](https://tenzir.com/docs/reference/operators/export.md) operators.
 
 The storage engine comes with a catalog that tracks schema meta data and a thin layer of indexing to accelerate queries.
 
@@ -99,18 +100,18 @@ Our [tuning guide](../guides/node-setup/tune-performance.md) has further details
 
 We support the platforms that we mention in our [deployment instructions](../guides/node-setup/provision-a-node.md).
 
-For any other platform, the answer is most likely *no*. Please [talk to us](https://docs.tenzir.com/discord) to let us know what is missing, or dive right in by contributing to our [open source repository](https://github.com/tenzir/tenzir).
+For any other platform, the answer is most likely *no*. Please [talk to us](https://discord.tenzir.com) to let us know what is missing, or dive right in by contributing to our [open source repository](https://github.com/tenzir/tenzir).
 
 ## Do you have an integration for *X*?
 
-Tenzir has multiple layers where integrations can occur. If you cannot find *X* in the list of [existing integration](../integrations.md), .
+Tenzir has multiple layers where integrations can occur. If you cannot find *X* in the list of [existing integration](https://tenzir.com/integrations), .
 
 1. **Application**. If *X* does not require a built-in integration, our [Community Library](https://github.com/tenzir/library) may contain a package for it. Many integration to specific tools are just thin API wrappers that only require composing a few operators.
 2. **Format**. If your *X* is a wire format, either text-based like JSON or binary like PCAP, then look for [parsing operators](../reference/operators.md#parsing) and [printing operators](../reference/operators.md#printing). Those start with `read_*` and `write_*`, respectively. Similarly, there exist [parsing functions](../reference/functions.md#parsing) and [printing functions](../reference/functions.md#printing) that start with `parse_*` and `print_*`.
-3. **Fluent Bit**. Sometimes we can compensate for the lack of an existing integration by going through one level of indirection. Tenzir ships with all of Fluent Bit’s [inputs](https://docs.fluentbit.io/manual/pipeline/inputs/) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs/), because the Fluent Bit library is baked into every Tenzir binary. Use Fluent Bit with [`from_fluent_bit`](http://docs.tenzir.com/reference/operators/from_fluent_bit.md) to get events in and [`to_fluent_bit`](http://docs.tenzir.com/reference/operators/to_fluent_bit.md) to send events out.
-4. **Escape Hatches**. As last resort, you can bring in Shell and Python scripts to make up for native support for *X*. Use [`shell`](http://docs.tenzir.com/reference/operators/shell.md) to bring byte streams via standard input and output into a pipeline, and use [`python`](http://docs.tenzir.com/reference/operators/python.md) for arbitrary event-to-event transformation in Python.
-5. **Community**. Still unlucky? Then please let us know in our friendly [Discord server](https://docs.tenzir.com/discord). Perhaps we are already working on an integration for *X* or it is somewhere on the roadmap. If you’re feeling adventurous and want to contribute to our open source core, let us know beforehand! We’re happy to guide you such that your contribution gets successfully into our code base.
+3. **Fluent Bit**. Sometimes we can compensate for the lack of an existing integration by going through one level of indirection. Tenzir ships with all of Fluent Bit’s [inputs](https://docs.fluentbit.io/manual/pipeline/inputs/) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs/), because the Fluent Bit library is baked into every Tenzir binary. Use Fluent Bit with [`from_fluent_bit`](https://tenzir.com/docs/reference/operators/from_fluent_bit.md) to get events in and [`to_fluent_bit`](https://tenzir.com/docs/reference/operators/to_fluent_bit.md) to send events out.
+4. **Escape Hatches**. As last resort, you can bring in Shell and Python scripts to make up for native support for *X*. Use [`shell`](https://tenzir.com/docs/reference/operators/shell.md) to bring byte streams via standard input and output into a pipeline, and use [`python`](https://tenzir.com/docs/reference/operators/python.md) for arbitrary event-to-event transformation in Python.
+5. **Community**. Still unlucky? Then please let us know in our friendly [Discord server](https://discord.tenzir.com). Perhaps we are already working on an integration for *X* or it is somewhere on the roadmap. If you’re feeling adventurous and want to contribute to our open source core, let us know beforehand! We’re happy to guide you such that your contribution gets successfully into our code base.
 
 Don’t be shy!
 
-Please do not hesitate to reach out to us if you think something is missing, by [opening a GitHub Discussion](https://github.com/orgs/tenzir/discussions/new/choose) or asking us directly in our [Discord server](https://docs.tenzir.com/discord). All questions are welcome.
+Please do not hesitate to reach out to us if you think something is missing, by [opening a GitHub Discussion](https://github.com/orgs/tenzir/discussions/new/choose) or asking us directly in our [Discord server](https://discord.tenzir.com). All questions are welcome.

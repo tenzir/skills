@@ -1,5 +1,6 @@
 # sigma
 
+> Filter the input with Sigma rules and output matching events.
 
 Filter the input with Sigma rules and output matching events.
 
@@ -13,7 +14,7 @@ The `sigma` operator executes [Sigma rules](https://github.com/SigmaHQ/sigma) on
 
 Transpilation Process
 
-For each rule, the operator transpiles the YAML into an [expression](../expressions.md) and instantiates a [`where`](http://docs.tenzir.com/reference/operators/where.md) operator, followed by assignments to generate an output. Here’s how the transpilation works. The Sigma rule YAML format requires a `detection` attribute that includes a map of named sub-expression called *search identifiers*. In addition, `detection` must include a final `condition` that combines search identifiers using boolean algebra (AND, OR, and NOT) or syntactic sugar to reference groups of search expressions, e.g., using the `1/all of *` or plain wildcard syntax. Consider the following `detection` embedded in a rule:
+For each rule, the operator transpiles the YAML into an [expression](../expressions.md) and instantiates a [`where`](https://tenzir.com/docs/reference/operators/where.md) operator, followed by assignments to generate an output. Here’s how the transpilation works. The Sigma rule YAML format requires a `detection` attribute that includes a map of named sub-expression called *search identifiers*. In addition, `detection` must include a final `condition` that combines search identifiers using boolean algebra (AND, OR, and NOT) or syntactic sugar to reference groups of search expressions, e.g., using the `1/all of *` or plain wildcard syntax. Consider the following `detection` embedded in a rule:
 
 ```yaml
 detection:
@@ -41,23 +42,23 @@ We parse the YAML string values according to Tenzir’s richer data model, e.g.,
 Sigma uses [value modifiers](https://github.com/SigmaHQ/sigma-specification/blob/main/Sigma_specification.md#value-modifiers) to select a concrete relational operator for given search predicate. Without a modifier, Sigma uses equality comparison (`==`) of field and value. For example, the `contains` modifier changes the relational operator to substring search, and the `re` modifier switches to a regular expression match. The table below shows what modifiers the `sigma` operator supports, where ✅ means implemented, 🚧 not yet implemented but possible, and ❌ not yet supported:
 
 | Modifier         | Use                                                      | sigmac | Tenzir |
-| ---------------- | -------------------------------------------------------- | :----: | :----: |
-| `contains`       | perform a substring search with the value                |    ✅   |    ✅   |
-| `startswith`     | match the value as a prefix                              |    ✅   |    ✅   |
-| `endswith`       | match the value as a suffix                              |    ✅   |    ✅   |
-| `base64`         | encode the value with Base64                             |    ✅   |    ✅   |
-| `base64offset`   | encode value as all three possible Base64 variants       |    ✅   |    ✅   |
-| `utf16le`/`wide` | transform the value to UTF16 little endian               |    ✅   |   🚧   |
-| `utf16be`        | transform the value to UTF16 big endian                  |    ✅   |   🚧   |
-| `utf16`          | transform the value to UTF16                             |    ✅   |   🚧   |
-| `re`             | interpret the value as regular expression                |    ✅   |    ✅   |
-| `cidr`           | interpret the value as a IP CIDR                         |    ❌   |    ✅   |
-| `all`            | changes the expression logic from OR to AND              |    ✅   |    ✅   |
-| `lt`             | compare less than (`<`) the value                        |    ❌   |    ✅   |
-| `lte`            | compare less than or equal to (`<=`) the value           |    ❌   |    ✅   |
-| `gt`             | compare greater than (`>`) the value                     |    ❌   |    ✅   |
-| `gte`            | compare greater than or equal to (`>=`) the value        |    ❌   |    ✅   |
-| `expand`         | expand value to placeholder strings, e.g., `%something%` |    ❌   |    ❌   |
+| ---------------- | -------------------------------------------------------- | ------ | ------ |
+| `contains`       | perform a substring search with the value                | ✅      | ✅      |
+| `startswith`     | match the value as a prefix                              | ✅      | ✅      |
+| `endswith`       | match the value as a suffix                              | ✅      | ✅      |
+| `base64`         | encode the value with Base64                             | ✅      | ✅      |
+| `base64offset`   | encode value as all three possible Base64 variants       | ✅      | ✅      |
+| `utf16le`/`wide` | transform the value to UTF16 little endian               | ✅      | 🚧     |
+| `utf16be`        | transform the value to UTF16 big endian                  | ✅      | 🚧     |
+| `utf16`          | transform the value to UTF16                             | ✅      | 🚧     |
+| `re`             | interpret the value as regular expression                | ✅      | ✅      |
+| `cidr`           | interpret the value as a IP CIDR                         | ❌      | ✅      |
+| `all`            | changes the expression logic from OR to AND              | ✅      | ✅      |
+| `lt`             | compare less than (`<`) the value                        | ❌      | ✅      |
+| `lte`            | compare less than or equal to (`<=`) the value           | ❌      | ✅      |
+| `gt`             | compare greater than (`>`) the value                     | ❌      | ✅      |
+| `gte`            | compare greater than or equal to (`>=`) the value        | ❌      | ✅      |
+| `expand`         | expand value to placeholder strings, e.g., `%something%` | ❌      | ❌      |
 
 ### `path: string`
 
@@ -77,7 +78,7 @@ Defaults to `5s`.
 
 ### Apply a Sigma rule to Windows Event Log XML
 
-Use [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before you run Windows Sigma rules:
+Use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before you run Windows Sigma rules:
 
 ```tql
 from_file "windows-security.xml" {
@@ -112,7 +113,7 @@ When you add a new file to `/tmp/rules`, the `sigma` operator transpiles it and 
 
 ## See Also
 
-* [`where`](http://docs.tenzir.com/reference/operators/where.md)
-* [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md)
+* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
 * [Execute Sigma rules](../../guides/enrichment/execute-sigma-rules.md)
 * [Expressions](../expressions.md)

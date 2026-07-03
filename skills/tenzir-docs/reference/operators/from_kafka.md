@@ -1,5 +1,6 @@
 # from_kafka
 
+> Receives events from an Apache Kafka topic.
 
 Receives events from an Apache Kafka topic.
 
@@ -77,7 +78,7 @@ The operator supports [Amazon MSK](../../integrations/amazon/msk.md) with IAM au
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -135,6 +136,6 @@ from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 
 ## See Also
 
-* [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md)
+* [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)

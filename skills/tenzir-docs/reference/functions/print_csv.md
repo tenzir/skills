@@ -1,5 +1,6 @@
 # print_csv
 
+> Prints a record as a comma-separated string of values.
 
 Prints a record as a comma-separated string of values.
 
@@ -9,7 +10,7 @@ print_csv(input:record, [list_separator=str, null_value=str]) -> string
 
 ## Description
 
-The `print_csv` function prints a record's values as a comma separated string.
+The `print_csv` function prints a record’s values as a comma separated string.
 
 ### `input: record`
 
@@ -19,13 +20,13 @@ The record you want to print.
 
 The string separating the elements in list fields.
 
-Defaults to `";"`.
+Defaults to `“;”`.
 
 ### `null_value = str (optional)`
 
 The string denoting an absent value.
 
-Defaults to `""`.
+Defaults to `“”`.
 
 ## Examples
 
@@ -49,5 +50,5 @@ output = this.print_csv()
 
 ## See Also
 
-* [`write_csv`](http://docs.tenzir.com/reference/operators/write_csv.md)
-* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)
+* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
+* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)

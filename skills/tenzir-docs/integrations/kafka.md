@@ -1,5 +1,6 @@
-# Kafka
+# Kafka integration
 
+> Publish, subscribe, store, and process streams of records in a distributed messaging system.
 
 [Apache Kafka](https://kafka.apache.org) is a distributed open-source message broker. The Tenzir integration can publish (send messages to a topic) or subscribe (receive) messages from a topic.
 
@@ -7,7 +8,7 @@ Internally, we use Confluent’s official [librdkafka](https://github.com/conflu
 
 ## Examples
 
-Use [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md) and [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md) to receive and send messages.
+Use [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) and [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md) to receive and send messages.
 
 ### Subscribe to a topic
 
@@ -32,4 +33,4 @@ from {
 to_kafka "topic"
 ```
 
-You can control the message encoding with the `message` argument in [`to_kafka`](http://docs.tenzir.com/reference/operators/to_kafka.md) that defaults to `this.print_ndjson()`.
+You can control the message encoding with the `message` argument in [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md) that defaults to `this.print_ndjson()`.

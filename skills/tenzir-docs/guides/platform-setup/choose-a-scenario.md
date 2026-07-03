@@ -1,5 +1,6 @@
 # Choose a scenario
 
+> We provide several examples of possible platform deployment scenarios. Pick one that best suits your needs.
 
 We provide several examples of possible platform deployment scenarios. Pick one that best suits your needs.
 

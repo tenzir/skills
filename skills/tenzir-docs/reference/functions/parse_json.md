@@ -1,5 +1,6 @@
 # parse_json
 
+> Parses a string as a JSON value.
 
 Parses a string as a JSON value.
 
@@ -152,5 +153,5 @@ output = input.parse_json()
 
 ## See Also
 
-* [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md)
+* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

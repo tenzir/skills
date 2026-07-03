@@ -1,5 +1,6 @@
 # Security Policy
 
+> Security is a serious matter for us. We want to ensure and maintain a secure environment for our customers and the open-source community.
 
 Security is a serious matter for us. We want to ensure and maintain a secure environment for our customers and the open-source community.
 

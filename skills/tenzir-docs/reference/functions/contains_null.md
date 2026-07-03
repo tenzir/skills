@@ -1,5 +1,6 @@
 # contains_null
 
+> Checks whether the input contains any null values.
 
 Checks whether the input contains any `null` values.
 
@@ -55,6 +56,6 @@ contains_null = this.contains_null()
 
 ## See Also
 
-* [`contains`](http://docs.tenzir.com/reference/functions/contains.md)
-* [`has`](http://docs.tenzir.com/reference/functions/has.md)
-* [`is_empty`](http://docs.tenzir.com/reference/functions/is_empty.md)
+* [`contains`](https://tenzir.com/docs/reference/functions/contains.md)
+* [`has`](https://tenzir.com/docs/reference/functions/has.md)
+* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)

@@ -1,7 +1,8 @@
 # Maintain a changelog
 
+> This guide shows you how to manage changelog entries and publish releases with tenzir-ship. You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
 
-This guide shows you how to manage changelog entries and publish releases with [`tenzir-ship`](http://docs.tenzir.com/reference/ship-framework.md). You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
+This guide shows you how to manage changelog entries and publish releases with [`tenzir-ship`](https://tenzir.com/docs/reference/ship-framework.md). You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
 
 ## Prerequisites
 
@@ -52,7 +53,7 @@ uvx tenzir-ship add \
   --pr 101
 ```
 
-Pass flags for authors, projects, and descriptions to avoid interactive prompts, or provide the details interactively when prompted—there is no GitHub auto-detection.
+Pass flags for authors, projects, and descriptions to avoid interactive prompts, or provide the details interactively when prompted - there is no GitHub auto-detection.
 
 ## Daily development workflow
 
@@ -570,7 +571,7 @@ uvx tenzir-ship add \
   --pr 101
 ```
 
-The first `add` invocation scaffolds the project automatically, creating a `changelog/` subdirectory—no manual config editing needed. After the command completes, inspect `changelog/config.yaml` (or update `package.yaml` if you’re using the package layout):
+The first `add` invocation scaffolds the project automatically, creating a `changelog/` subdirectory - no manual config editing needed. After the command completes, inspect `changelog/config.yaml` (or update `package.yaml` if you’re using the package layout):
 
 ```yaml
 id: my-project

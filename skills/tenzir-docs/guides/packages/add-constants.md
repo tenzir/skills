@@ -1,5 +1,6 @@
 # Add constants
 
+> This guide shows you how to define package-wide constants in a constants.tql file and reference them as pkg::$name from the package’s own operators and pipelines, as well as from any pipeline that uses the package. You’ll learn the let syntax, how bindings build on one another, the rules each binding must satisfy, and when to use a constant instead of an input.
 
 This guide shows you how to define package-wide constants in a `constants.tql` file and reference them as `pkg::$name` from the package’s own operators and pipelines, as well as from any pipeline that uses the package. You’ll learn the `let` syntax, how bindings build on one another, the rules each binding must satisfy, and when to use a constant instead of an input.
 
@@ -14,7 +15,7 @@ let $threshold = 8
 let $severities = {low: 2, medium: 3, high: 4, critical: 5}
 ```
 
-A constant can be any value—a number, string, list, or record—which makes `constants.tql` a natural home for the lookup tables and magic numbers that would otherwise be copy-pasted across your operators.
+A constant can be any value - a number, string, list, or record - which makes `constants.tql` a natural home for the lookup tables and magic numbers that would otherwise be copy-pasted across your operators.
 
 ## Reference constants
 

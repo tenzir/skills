@@ -1,5 +1,6 @@
 # Add custom runners
 
+> Runners tell tenzir-test how to execute a discovered file. This guide shows you how to register the XXD runner from the example project so you can compare binary artifacts by dumping their hexadecimal representation with xxd.
 
 Runners tell `tenzir-test` how to execute a discovered file. This guide shows you how to register the XXD runner from the example project so you can compare binary artifacts by dumping their hexadecimal representation with `xxd`.
 
@@ -33,8 +34,6 @@ from pathlib import Path
 
 from tenzir_test import runners
 from tenzir_test.runners._utils import get_run_module
-
-
 
 
 class XxdRunner(runners.ExtRunner):
@@ -106,8 +105,6 @@ class XxdRunner(runners.ExtRunner):
 
         run_mod.success(test)
         return True
-
-
 
 
 runners.register(XxdRunner())

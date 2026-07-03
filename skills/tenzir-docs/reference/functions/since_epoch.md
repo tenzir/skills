@@ -1,5 +1,6 @@
 # since_epoch
 
+> Interprets a time value as duration since the Unix epoch.
 
 Interprets a time value as duration since the Unix epoch.
 
@@ -25,6 +26,6 @@ from { x: since_epoch(2021-02-24) }
 
 ## See Also
 
-* [`from_epoch`](http://docs.tenzir.com/reference/functions/from_epoch.md)
-* [`now`](http://docs.tenzir.com/reference/functions/now.md)
+* [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md)
+* [`now`](https://tenzir.com/docs/reference/functions/now.md)
 * [Work with time](../../guides/transformation/work-with-time.md)

@@ -1,5 +1,6 @@
 # split_regex
 
+> Splits a string into substrings with a regex.
 
 Splits a string into substrings with a regex.
 
@@ -55,6 +56,6 @@ from {xs: split_regex("a1b2c3", r"\d", max=1)}
 
 ## See Also
 
-* [`split`](http://docs.tenzir.com/reference/functions/split.md)
-* [`join`](http://docs.tenzir.com/reference/functions/join.md)
+* [`split`](https://tenzir.com/docs/reference/functions/split.md)
+* [`join`](https://tenzir.com/docs/reference/functions/join.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

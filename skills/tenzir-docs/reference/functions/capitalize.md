@@ -1,5 +1,6 @@
 # capitalize
 
+> Capitalizes the first character of a string.
 
 Capitalizes the first character of a string.
 
@@ -25,7 +26,7 @@ from {x: "hello world".capitalize()}
 
 ## See Also
 
-* [`to_upper`](http://docs.tenzir.com/reference/functions/to_upper.md)
-* [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md)
-* [`to_title`](http://docs.tenzir.com/reference/functions/to_title.md)
+* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
+* [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md)
+* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

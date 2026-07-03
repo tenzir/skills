@@ -1,5 +1,6 @@
 # to_clickhouse
 
+> Sends events to a ClickHouse table.
 
 Sends events to a ClickHouse table.
 
@@ -113,7 +114,7 @@ Path to the key for the client certificate.
 Tenzir uses ClickHouse’s [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) client library to communicate with ClickHouse. The below table explains the translation from Tenzir’s types to ClickHouse:
 
 | Tenzir     | ClickHouse                     | Comment                                                                                           |
-| :--------- | :----------------------------- | :------------------------------------------------------------------------------------------------ |
+| ---------- | ------------------------------ | ------------------------------------------------------------------------------------------------- |
 | `bool`     | `Bool`                         |                                                                                                   |
 | `int64`    | `Int64`                        |                                                                                                   |
 | `uint64`   | `UInt64`                       |                                                                                                   |
@@ -132,7 +133,7 @@ Tenzir also supports `Nullable` versions of the above types (or their nested typ
 
 ### Clickhouse JSON
 
-[`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) can also write records to the ClickHouse JSON type for columns that already have this type in the table. By default, [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
+[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can also write records to the ClickHouse JSON type for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
 
 ### Table Creation
 
@@ -201,7 +202,7 @@ This writes to `security.alerts`.
 
 ### Send OCSF data to ClickHouse
 
-When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md). This fills any missing fields with `null`, ensuring a single schema.
+When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md). This fills any missing fields with `null`, ensuring a single schema.
 
 ```tql
 subscribe "ocsf"
@@ -231,7 +232,7 @@ This creates the following table:
 
 ## See Also
 
-* [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md)
-* [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
+* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
+* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [ClickHouse](../../integrations/clickhouse.md)

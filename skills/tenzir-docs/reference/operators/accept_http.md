@@ -1,5 +1,6 @@
 # accept_http
 
+> Accepts incoming HTTP requests and forwards them as events.
 
 Accepts incoming HTTP requests and forwards them as events.
 
@@ -76,7 +77,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 The pipeline to run for each incoming HTTP request. Inside the pipeline, the `$request` variable is available as a record with the following fields:
 
 | Field      | Type     | Description                                                |
-| :--------- | :------- | :--------------------------------------------------------- |
+| ---------- | -------- | ---------------------------------------------------------- |
 | `headers`  | `record` | The request headers.                                       |
 | `query`    | `record` | The query parameters of the request.                       |
 | `path`     | `string` | The path requested.                                        |
@@ -155,8 +156,8 @@ accept_http "0.0.0.0:8443" {
 
 ## See Also
 
-* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
-* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
-* [`serve_http`](http://docs.tenzir.com/reference/operators/serve_http.md)
+* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
+* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
+* [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
-* [HTTP(S)](../../integrations/http.md)
+* [HTTP](../../integrations/http.md)

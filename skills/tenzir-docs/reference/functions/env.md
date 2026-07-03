@@ -1,5 +1,6 @@
 # env
 
+> Reads an environment variable.
 
 Reads an environment variable.
 
@@ -25,5 +26,5 @@ from {x: env("PATH")}
 
 ## See Also
 
-* [`config`](http://docs.tenzir.com/reference/functions/config.md)
-* [`secret`](http://docs.tenzir.com/reference/functions/secret.md)
+* [`config`](https://tenzir.com/docs/reference/functions/config.md)
+* [`secret`](https://tenzir.com/docs/reference/functions/secret.md)

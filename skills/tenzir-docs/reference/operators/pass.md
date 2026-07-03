@@ -1,5 +1,6 @@
 # pass
 
+> Does nothing with the input.
 
 Does nothing with the input.
 

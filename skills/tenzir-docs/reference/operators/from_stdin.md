@@ -1,5 +1,6 @@
 # from_stdin
 
+> Reads and parses events from standard input.
 
 Reads and parses events from standard input.
 
@@ -61,4 +62,4 @@ from_stdin {
 
 ## See Also
 
-* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
+* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)

@@ -1,5 +1,6 @@
 # assert
 
+> Drops events and emits a warning if the invariant is violated.
 
 Drops events and emits a warning if the invariant is violated.
 
@@ -48,6 +49,6 @@ assert @name == "ocsf.network_activity"
 
 ## See Also
 
-* [`assert_throughput`](http://docs.tenzir.com/reference/operators/assert_throughput.md)
-* [`where`](http://docs.tenzir.com/reference/operators/where.md)
+* [`assert_throughput`](https://tenzir.com/docs/reference/operators/assert_throughput.md)
+* [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

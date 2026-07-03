@@ -1,5 +1,6 @@
 # context::remove
 
+> Deletes a context.
 
 Deletes a context.
 
@@ -25,15 +26,15 @@ context::delete "ctx"
 
 ## See Also
 
-* [`context::create_bloom_filter`](http://docs.tenzir.com/reference/operators/context/create_bloom_filter.md)
-* [`context::create_geoip`](http://docs.tenzir.com/reference/operators/context/create_geoip.md)
-* [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md)
-* [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md)
-* [`context::erase`](http://docs.tenzir.com/reference/operators/context/erase.md)
-* [`context::inspect`](http://docs.tenzir.com/reference/operators/context/inspect.md)
-* [`context::list`](http://docs.tenzir.com/reference/operators/context/list.md)
-* [`context::load`](http://docs.tenzir.com/reference/operators/context/load.md)
-* [`context::reset`](http://docs.tenzir.com/reference/operators/context/reset.md)
-* [`context::save`](http://docs.tenzir.com/reference/operators/context/save.md)
-* [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md)
+* [`context::create_bloom_filter`](https://tenzir.com/docs/reference/operators/context/create_bloom_filter.md)
+* [`context::create_geoip`](https://tenzir.com/docs/reference/operators/context/create_geoip.md)
+* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
+* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
+* [`context::erase`](https://tenzir.com/docs/reference/operators/context/erase.md)
+* [`context::inspect`](https://tenzir.com/docs/reference/operators/context/inspect.md)
+* [`context::list`](https://tenzir.com/docs/reference/operators/context/list.md)
+* [`context::load`](https://tenzir.com/docs/reference/operators/context/load.md)
+* [`context::reset`](https://tenzir.com/docs/reference/operators/context/reset.md)
+* [`context::save`](https://tenzir.com/docs/reference/operators/context/save.md)
+* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
 * [Use lookup tables](../../../guides/enrichment/use-lookup-tables.md)

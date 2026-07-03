@@ -1,5 +1,6 @@
 # read_ssv
 
+> Read SSV (Space-Separated Values) from a byte stream.
 
 Read SSV (Space-Separated Values) from a byte stream.
 
@@ -23,7 +24,7 @@ Silently fill missing trailing values in a row with `null` instead of emitting a
 
 ### `comments = bool (optional)`
 
-Treat lines beginning with ”#” as comments.
+Treat lines beginning with “#” as comments.
 
 ### `header = list<string>|string (optional)`
 
@@ -180,7 +181,7 @@ read_ssv
 
 ## See Also
 
-* [`read_csv`](http://docs.tenzir.com/reference/operators/read_csv.md)
-* [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md)
-* [`read_xsv`](http://docs.tenzir.com/reference/operators/read_xsv.md)
-* [`parse_ssv`](http://docs.tenzir.com/reference/functions/parse_ssv.md)
+* [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md)
+* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
+* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
+* [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md)

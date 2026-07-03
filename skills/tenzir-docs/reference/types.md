@@ -1,5 +1,6 @@
 # Type System
 
+> This page explains TQL’s type system, which provides strong typing with automatic inference. You get type safety without requiring explicit declarations. Key characteristics include:
 
 This page explains TQL’s type system, which provides strong typing with automatic inference. You get type safety without requiring explicit declarations. Key characteristics include:
 
@@ -44,7 +45,7 @@ Basic types are stateless types with a static structure. The following basic typ
 
 #### Secrets
 
-The `secret` type is a special type created by the [`secret`](http://docs.tenzir.com/reference/functions/secret.md) function. Secrets can only be used as arguments for operators that accept them and only support a limited set of operations, such as concatenation.
+The `secret` type is a special type created by the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function. Secrets can only be used as arguments for operators that accept them and only support a limited set of operations, such as concatenation.
 
 See the [explanation page for secrets](../explanations/secrets.md) for more details.
 
@@ -105,7 +106,7 @@ from {
 
 ### Why IP address types?
 
-IP addresses aren’t just strings—they have structure and semantics:
+IP addresses aren’t just strings - they have structure and semantics:
 
 ✅ Native IP type operations:
 
@@ -223,11 +224,3 @@ The secret type ensures sensitive data is never accidentally exposed in logs, ou
 All Tenzir types have a lossless mapping to [Arrow](http://arrow.apache.org) types, however, not all Arrow types have a Tenzir equivalent. As a result, it is currently not yet possible to import arbitrary Arrow data. In the future, we plan to extend our support for Arrow-native types and also offer conversion options for seamless data handover.
 
 Tenzir has a few domain-specific types that map to Arrow [extension types](https://arrow.apache.org/docs/format/Columnar.html#extension-types). These are currently `enum`, `ip`, and `subnet`. Tenzir and Arrow attach type metadata to different entities: Tenzir attaches metadata to a type instance, whereas Arrow attaches metadata to a schema or record field.
-
-## Contents
-
-- [Expressions](expressions.md)
-- [Statements](statements.md)
-- [Programs](programs.md)
-- [Operators](operators.md)
-- [Functions](functions.md)

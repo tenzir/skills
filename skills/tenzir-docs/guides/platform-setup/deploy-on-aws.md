@@ -1,5 +1,6 @@
 # Deploy on AWS
 
+> This guide walks you through deploying the Tenzir Platform Sovereign Edition on AWS using CloudFormation. The template automates the setup of all required infrastructure components.
 
 This guide walks you through deploying the Tenzir Platform Sovereign Edition on AWS using CloudFormation. The template automates the setup of all required infrastructure components.
 
@@ -24,7 +25,7 @@ The architecture consists of:
 
 Deployment architecture
 
-This deployment mirrors our setup at [app.tenzir.com](https://app.tenzir.com) and includes publicly-accessible UI and nodes endpoints. OIDC login protects these endpoints. For a fully VPC-private deployment, contact us—we’ll help you set it up.
+This deployment mirrors our setup at [app.tenzir.com](https://app.tenzir.com) and includes publicly-accessible UI and nodes endpoints. OIDC login protects these endpoints. For a fully VPC-private deployment, contact us - we’ll help you set it up.
 
 ## Prerequisites
 

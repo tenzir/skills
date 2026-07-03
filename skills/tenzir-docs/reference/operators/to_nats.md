@@ -1,5 +1,6 @@
 # to_nats
 
+> Publishes messages to a NATS JetStream subject.
 
 Publishes messages to a NATS JetStream subject.
 
@@ -108,6 +109,6 @@ to_nats "alerts",
 
 ## See Also
 
-* [`from_nats`](http://docs.tenzir.com/reference/operators/from_nats.md)
+* [`from_nats`](https://tenzir.com/docs/reference/operators/from_nats.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [NATS](../../integrations/nats.md)

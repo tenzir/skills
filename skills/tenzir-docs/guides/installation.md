@@ -1,5 +1,6 @@
 # Overview
 
+> This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node. The package includes two binaries:
 
 This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node. The package includes two binaries:
 
@@ -124,7 +125,3 @@ You can also [build from source](development/build-from-source.md). Note that th
 * [Run pipelines](basic-usage/run-pipelines.md): Execute TQL pipelines from the CLI
 * [Deploy a node](node-setup/deploy-a-node.md): Run a persistent node for continuous operation
 * [Configuration](../explanations/configuration.md): Learn how to configure Tenzir with files and environment variables
-
-## Contents
-
-- [Create-account](installation/create-account.md)

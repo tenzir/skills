@@ -1,5 +1,6 @@
 # group
 
+> Routes events with the same key through the same subpipeline.
 
 Routes events with the same key through the same subpipeline.
 
@@ -11,9 +12,9 @@ group over:expr { … }
 
 The `group` operator evaluates `over` for every incoming event and creates one subpipeline for every distinct key. Events with the same key are sent to the same subpipeline. Inside the subpipeline, `$group` refers to the key for that subpipeline.
 
-The subpipeline receives grouped events as input. It either emits events—which are forwarded as the operator’s output—or ends with a sink, in which case `group` itself becomes a sink. The subpipeline must not produce bytes.
+The subpipeline receives grouped events as input. It either emits events - which are forwarded as the operator’s output - or ends with a sink, in which case `group` itself becomes a sink. The subpipeline must not produce bytes.
 
-Use `group` when you need a full keyed subpipeline, such as a per-tenant sink or a per-session stateful transformation. For grouped aggregations only, use [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md) instead.
+Use `group` when you need a full keyed subpipeline, such as a per-tenant sink or a per-session stateful transformation. For grouped aggregations only, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) instead.
 
 ### `over: expr`
 
@@ -68,10 +69,10 @@ group tenant {
 
 ## See Also
 
-* [`each`](http://docs.tenzir.com/reference/operators/each.md)
-* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
-* [`load_balance`](http://docs.tenzir.com/reference/operators/load_balance.md)
-* [`parallel`](http://docs.tenzir.com/reference/operators/parallel.md)
-* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md)
+* [`each`](https://tenzir.com/docs/reference/operators/each.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
+* [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

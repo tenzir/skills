@@ -1,5 +1,6 @@
 # from_azure_blob_storage
 
+> Reads one or multiple files from Azure Blob Storage.
 
 Reads one or multiple files from Azure Blob Storage.
 
@@ -76,7 +77,10 @@ Pipeline to use for parsing the file. By default, this pipeline is derived from 
 
 Inside the subpipeline, the `$file` variable is available as a record with the following fields:
 
-\| Field | Type | Description | | :------ | :------- | :--------------------------------------- | | `path` | `string` | The absolute path of the file being read | | `mtime` | `time` | The last modification time of the file |
+| Field   | Type     | Description                              |
+| ------- | -------- | ---------------------------------------- |
+| `path`  | `string` | The absolute path of the file being read |
+| `mtime` | `time`   | The last modification time of the file   |
 
 For example, to attach the source path to each event:
 
@@ -127,7 +131,7 @@ from_azure_blob_storage "abfs://data/**.json" {
 
 ## See Also
 
-* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
-* [`from_azure_blob_storage`](http://docs.tenzir.com/reference/operators/from_azure_blob_storage.md)
-* [`to_azure_blob_storage`](http://docs.tenzir.com/reference/operators/to_azure_blob_storage.md)
+* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
+* [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

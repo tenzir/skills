@@ -1,5 +1,6 @@
 # parse_cef
 
+> Parses a string as a CEF message
 
 Parses a string as a CEF message
 
@@ -141,8 +142,8 @@ y = x.parse_cef()
 
 ## See Also
 
-* [`print_cef`](http://docs.tenzir.com/reference/functions/print_cef.md)
-* [`read_cef`](http://docs.tenzir.com/reference/operators/read_cef.md)
-* [`read_syslog`](http://docs.tenzir.com/reference/operators/read_syslog.md)
+* [`print_cef`](https://tenzir.com/docs/reference/functions/print_cef.md)
+* [`read_cef`](https://tenzir.com/docs/reference/operators/read_cef.md)
+* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)
 * [Syslog](../../integrations/syslog.md)

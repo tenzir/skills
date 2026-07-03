@@ -2,7 +2,6 @@
 
 > Set up TLS encryption for operators and platform connections
 
-
 Tenzir supports Transport Layer Security (TLS) for encrypting network connections. You can configure TLS settings centrally in `tenzir.yaml` so they apply to all compatible operators, or override them per-operator as needed.
 
 ## Node-level TLS configuration
@@ -21,10 +20,10 @@ tenzir:
 
 These settings apply automatically to operators that use node-level TLS, including:
 
-* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
-* [`to_opensearch`](http://docs.tenzir.com/reference/operators/to_opensearch.md)
-* [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md)
-* [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md)
+* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
+* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
+* [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
+* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
 
 ### Available options
 
@@ -76,7 +75,7 @@ When `require-client-cert` is enabled, connections from clients without valid ce
 
 ## Platform connection TLS
 
-When connecting a node to the Tenzir Platform, you can configure outbound-client TLS settings specifically for this connection under `plugins.platform`. These options have the same semantics as the matching [node-level TLS config](#node-level-tls-configuration), but only apply to the node ↔ platform connection.
+When connecting a node to the Tenzir Platform, you can configure outbound-client TLS settings specifically for this connection under `plugins.platform`. These options have the same semantics as the matching [node-level TLS config](configure-tls.md#node-level-tls-configuration), but only apply to the node ↔ platform connection.
 
 tenzir.yaml
 

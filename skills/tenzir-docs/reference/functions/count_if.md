@@ -1,5 +1,6 @@
 # count_if
 
+> Counts the events or non-null grouped values matching a given predicate.
 
 Counts the events or non-null grouped values matching a given predicate.
 
@@ -34,5 +35,5 @@ summarize total=x.count_if(x => x > 1)
 
 ## See Also
 
-* [`count`](http://docs.tenzir.com/reference/functions/count.md)
+* [`count`](https://tenzir.com/docs/reference/functions/count.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

@@ -1,5 +1,6 @@
 # is_alpha
 
+> Checks if a string contains only alphabetic characters.
 
 Checks if a string contains only alphabetic characters.
 
@@ -25,9 +26,9 @@ from {x: "hello".is_alpha()}
 
 ## See Also
 
-* [`is_alnum`](http://docs.tenzir.com/reference/functions/is_alnum.md)
-* [`is_lower`](http://docs.tenzir.com/reference/functions/is_lower.md)
-* [`is_numeric`](http://docs.tenzir.com/reference/functions/is_numeric.md)
-* [`is_printable`](http://docs.tenzir.com/reference/functions/is_printable.md)
-* [`is_upper`](http://docs.tenzir.com/reference/functions/is_upper.md)
+* [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md)
+* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
+* [`is_numeric`](https://tenzir.com/docs/reference/functions/is_numeric.md)
+* [`is_printable`](https://tenzir.com/docs/reference/functions/is_printable.md)
+* [`is_upper`](https://tenzir.com/docs/reference/functions/is_upper.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

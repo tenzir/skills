@@ -1,5 +1,6 @@
 # Map to CIM
 
+> This guide shows you how to map events to Splunk Common Information Model (CIM) fields in TQL. You’ll learn how to choose a CIM data model and dataset, apply dataset tags, populate normalized fields, set Splunk HEC metadata, and preserve source-specific details.
 
 This guide shows you how to map events to Splunk Common Information Model (CIM) fields in TQL. You’ll learn how to choose a CIM data model and dataset, apply dataset tags, populate normalized fields, set Splunk HEC metadata, and preserve source-specific details.
 
@@ -126,7 +127,7 @@ Use the same structure for larger mappings:
 
 ## Send CIM events to Splunk
 
-When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md) options:
+When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) options:
 
 ```tql
 my_source::cim::map
@@ -155,7 +156,7 @@ Use the `index` option when the destination index differs per event.
 
 ## See Also
 
-* [`to_splunk`](http://docs.tenzir.com/reference/operators/to_splunk.md)
+* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
 * [Clean up values](clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-cim-skill)
 * [Map to ASIM](map-to-asim.md)

@@ -1,5 +1,6 @@
 # replace_regex
 
+> Replaces characters within a string based on a regular expression.
 
 Replaces characters within a string based on a regular expression.
 
@@ -53,6 +54,6 @@ from {x: replace_regex("hellolo", "l+", "y", max=1)}
 
 ## See Also
 
-* [`replace`](http://docs.tenzir.com/reference/functions/replace.md)
+* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

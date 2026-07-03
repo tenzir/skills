@@ -1,5 +1,6 @@
 # replace
 
+> Replaces all occurrences of a value with another value.
 
 Replaces all occurrences of a value with another value.
 
@@ -88,5 +89,5 @@ replace what=192.168.1.1, with="REDACTED"
 
 ## See Also
 
-* [`replace`](http://docs.tenzir.com/reference/functions/replace.md)
+* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

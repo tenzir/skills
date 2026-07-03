@@ -1,5 +1,6 @@
-# Sentinel & Log Analytics
+# Sentinel & Log Analytics integration
 
+> A rapidly growing cloud-native SIEM, tightly integrated with the Azure ecosystem and a strategic destination for Microsoft-centric organizations.
 
 Send security logs and events from Tenzir to Microsoft’s Log Analytics platform. You can analyze them with [Microsoft Sentinel](https://learn.microsoft.com/en-us/azure/sentinel/overview), create alerts with [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview), or query them with [KQL](https://learn.microsoft.com/en-us/kusto/query/). To read Microsoft Entra and Microsoft 365 data from Microsoft Graph, use [Graph](graph.md) instead.
 
@@ -48,7 +49,7 @@ Microsoft’s [Logs Ingestion API tutorial](https://learn.microsoft.com/en-us/az
 
 ### Send Suricata Alerts as OCSF to Sentinel
 
-Use [`to_azure_log_analytics`](http://docs.tenzir.com/reference/operators/to_azure_log_analytics.md) to forward Suricata alerts as OCSF Detection Findings for correlation in Sentinel:
+Use [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md) to forward Suricata alerts as OCSF Detection Findings for correlation in Sentinel:
 
 ```tql
 from_file "/var/log/suricata/eve.json", follow=true
@@ -87,7 +88,7 @@ Auxiliary tables store data in Parquet format with retention up to 12 years, mak
 
 ## See Also
 
-* [`from_microsoft_graph`](http://docs.tenzir.com/reference/operators/from_microsoft_graph.md)
-* [`to_azure_log_analytics`](http://docs.tenzir.com/reference/operators/to_azure_log_analytics.md)
+* [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md)
+* [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md)
 * [Map to ASIM](../../guides/normalization/map-to-asim.md)
 * [Graph](graph.md)

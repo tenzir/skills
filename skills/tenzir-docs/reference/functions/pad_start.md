@@ -1,5 +1,6 @@
 # pad_start
 
+> Pads a string at the start to a specified length.
 
 Pads a string at the start to a specified length.
 
@@ -59,8 +60,8 @@ from {x: "hello world".pad_start(5)}
 
 ## See Also
 
-* [`pad_end`](http://docs.tenzir.com/reference/functions/pad_end.md)
-* [`trim`](http://docs.tenzir.com/reference/functions/trim.md)
-* [`trim_start`](http://docs.tenzir.com/reference/functions/trim_start.md)
+* [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md)
+* [`trim`](https://tenzir.com/docs/reference/functions/trim.md)
+* [`trim_start`](https://tenzir.com/docs/reference/functions/trim_start.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

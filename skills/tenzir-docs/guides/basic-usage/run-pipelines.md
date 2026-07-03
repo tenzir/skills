@@ -1,5 +1,6 @@
 # Run pipelines
 
+> You can run a pipeline via the platform, on the command line using the tenzir binary, or as code via the configuration file.
 
 You can run a [pipeline](../../explanations/pipeline.md) via the [platform](https://app.tenzir.com), on the command line using the `tenzir` binary, or as code via the configuration file.
 
@@ -136,7 +137,3 @@ tenzir:
       # duration.
       unstoppable: true
 ```
-
-## Contents
-
-- [Manage-a-pipeline](manage-a-pipeline.md)

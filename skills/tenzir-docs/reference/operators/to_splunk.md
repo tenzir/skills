@@ -1,5 +1,6 @@
 # to_splunk
 
+> Sends events to a Splunk HTTP Event Collector (HEC).
 
 Sends events to a Splunk [HTTP Event Collector (HEC)](https://docs.splunk.com/Documentation/Splunk/9.3.1/Data/UsetheHTTPEventCollector).
 

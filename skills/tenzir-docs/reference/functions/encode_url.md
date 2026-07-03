@@ -1,5 +1,6 @@
 # encode_url
 
+> Encodes strings using URL encoding.
 
 Encodes strings using URL encoding.
 
@@ -33,5 +34,5 @@ encoded = input.encode_url()
 
 ## See Also
 
-* [`decode_url`](http://docs.tenzir.com/reference/functions/decode_url.md)
+* [`decode_url`](https://tenzir.com/docs/reference/functions/decode_url.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

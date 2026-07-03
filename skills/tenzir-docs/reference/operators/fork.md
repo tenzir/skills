@@ -1,5 +1,6 @@
 # fork
 
+> Executes a subpipeline with a copy of the input.
 
 Executes a subpipeline with a copy of the input.
 

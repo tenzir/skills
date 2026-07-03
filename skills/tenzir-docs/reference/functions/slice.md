@@ -1,5 +1,6 @@
 # slice
 
+> Slices a string or list with offsets and strides.
 
 Slices a string or list with offsets and strides.
 
@@ -110,9 +111,9 @@ xs = xs.slice(stride=-1)
 
 ## See Also
 
-* [`sort`](http://docs.tenzir.com/reference/functions/sort.md)
-* [`split`](http://docs.tenzir.com/reference/functions/split.md)
-* [`length_chars`](http://docs.tenzir.com/reference/functions/length_chars.md)
+* [`sort`](https://tenzir.com/docs/reference/functions/sort.md)
+* [`split`](https://tenzir.com/docs/reference/functions/split.md)
+* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)

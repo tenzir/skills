@@ -1,7 +1,8 @@
 # Quickstart
 
+> Drowning in logs, alerts, and rigid tools? Meet Tenzir - your engine for taming security data. In just a few minutes, you’ll be ingesting, transforming, and enriching data on your terms, with full control. Here’s what you’ll accomplish:
 
-Drowning in logs, alerts, and rigid tools? Meet **Tenzir**—your engine for taming security data. In just a few minutes, you’ll be ingesting, transforming, and enriching data on your terms, with full control. Here’s what you’ll accomplish:
+Drowning in logs, alerts, and rigid tools? Meet **Tenzir** - your engine for taming security data. In just a few minutes, you’ll be ingesting, transforming, and enriching data on your terms, with full control. Here’s what you’ll accomplish:
 
 1. Use Tenzir instantly
 2. Deploy your first pipeline
@@ -9,7 +10,7 @@ Drowning in logs, alerts, and rigid tools? Meet **Tenzir**—your engine for tam
 
 ## Prerequisites
 
-You need zero infrastructure to get started—just a browser and access to [app.tenzir.com](https://app.tenzir.com).
+You need zero infrastructure to get started - just a browser and access to [app.tenzir.com](https://app.tenzir.com).
 
 It helps if you have basic familiarity with logs or security telemetry, but it’s not required.
 
@@ -54,7 +55,7 @@ export
 taste
 ```
 
-This pipelines does the following: [`export`](http://docs.tenzir.com/reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](http://docs.tenzir.com/reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
+This pipelines does the following: [`export`](https://tenzir.com/docs/reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](https://tenzir.com/docs/reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
 
 Auto-completion of pipelines
 
@@ -70,7 +71,7 @@ One more detail: you can **uncollapse nested records** in the results table by c
 
 ## Reshape data at ease
 
-Now that you have a rough understanding of our cockpit, let’s wrangle that data. This is what we’ve designed TQL for, so it should be fun—or at least more fun compared to other tools.
+Now that you have a rough understanding of our cockpit, let’s wrangle that data. This is what we’ve designed TQL for, so it should be fun - or at least more fun compared to other tools.
 
 Begin with selecting a subset of available schemas:
 
@@ -145,11 +146,11 @@ Here we filter on event metadata, starting with `@`. The special `@name` field i
 
 A few notes:
 
-* The [`set`](http://docs.tenzir.com/reference/operators/set.md) operator performs an assignment and creates new fields.
+* The [`set`](https://tenzir.com/docs/reference/operators/set.md) operator performs an assignment and creates new fields.
 * Because `set` is *the* most frequently used operator, it is “implied” and you just write `x = y` instead of `set x = y`. We generally recommend doing so and write it out only out for didactic reasons.
 * You can use `set` to assign schema names, e.g., `@name = "new-schema-name"`.
-* [`select`](http://docs.tenzir.com/reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
-* As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](http://docs.tenzir.com/reference/functions/to_lower.md), which makes working with values a breeze.
+* [`select`](https://tenzir.com/docs/reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
+* As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md), which makes working with values a breeze.
 
 Now what do you do with this normalized data from these two data sources? It just has a new shape, so what? Read on, we’ll show you next.
 
@@ -157,7 +158,7 @@ Now what do you do with this normalized data from these two data sources? It jus
 
 The above example starts with a specific input operator (`export`) and no output operator (we used the Explorer). This is useful for explorative data analysis, but in practice you’d want these sorts of transformations to run continuously. In fact, what you really want is a streaming pipeline that accepts data, potentially from multiple sources, and exposes its results in a way so that you can route it to multiple destinations.
 
-To this end, nodes have a publish/subscribe feature, allowing you to efficiently connect pipelines using static topics (and very soon dynamic routes). The [`publish`](http://docs.tenzir.com/reference/operators/publish.md) and [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) operators are all you need for this. The typical pipeline pattern for composable pipelines looks like this:
+To this end, nodes have a publish/subscribe feature, allowing you to efficiently connect pipelines using static topics (and very soon dynamic routes). The [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operators are all you need for this. The typical pipeline pattern for composable pipelines looks like this:
 
 ```tql
 subscribe "in"
@@ -220,10 +221,4 @@ You’ve just scratched the surface. Here’s where to go next:
 3. [Map your logs to OCSF](../tutorials/map-data-to-ocsf.md)
 4. Send events to your data lake, such as [Amazon Security Lake](../integrations/amazon/security-lake.md)
 
-Curious how it all fits together? Brush up on the [Tenzir architecture](../explanations/deployment.md) to learn more about all moving parts. We’re here to help. Join us at our friendly [Tenzir Discord](https://docs.tenzir.com/discord) if you have any questions.
-
-## Contents
-
-- [Tenzir-v6-migration](tenzir-v6-migration.md)
-- [Installation](installation.md)
-- [Basic Usage](basic-usage/run-pipelines.md)
+Curious how it all fits together? Brush up on the [Tenzir architecture](../explanations/deployment.md) to learn more about all moving parts. We’re here to help. Join us at our friendly [Tenzir Discord](https://discord.tenzir.com) if you have any questions.

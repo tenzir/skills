@@ -1,5 +1,6 @@
 # read_delimited_regex
 
+> Parses an incoming bytes stream into events using a regular expression as delimiter.
 
 Parses an incoming bytes stream into events using a regular expression as delimiter.
 
@@ -84,9 +85,9 @@ from_file "protocol.dat" {
 
 ## See Also
 
-* [`read_all`](http://docs.tenzir.com/reference/operators/read_all.md)
-* [`read_delimited`](http://docs.tenzir.com/reference/operators/read_delimited.md)
-* [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md)
-* [`read_ssv`](http://docs.tenzir.com/reference/operators/read_ssv.md)
-* [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md)
-* [`read_xsv`](http://docs.tenzir.com/reference/operators/read_xsv.md)
+* [`read_all`](https://tenzir.com/docs/reference/operators/read_all.md)
+* [`read_delimited`](https://tenzir.com/docs/reference/operators/read_delimited.md)
+* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
+* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
+* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
+* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)

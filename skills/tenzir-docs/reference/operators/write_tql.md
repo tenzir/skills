@@ -1,5 +1,6 @@
 # write_tql
 
+> Transforms the input event stream to a TQL notation byte stream.
 
 Transforms the input event stream to a TQL notation byte stream.
 
@@ -95,6 +96,6 @@ write_tql strip_null_fields=true
 
 ## See Also
 
-* [`read_tql`](http://docs.tenzir.com/reference/operators/read_tql.md)
-* [`write_json`](http://docs.tenzir.com/reference/operators/write_json.md)
+* [`read_tql`](https://tenzir.com/docs/reference/operators/read_tql.md)
+* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
 * [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)

@@ -1,5 +1,6 @@
 # each
 
+> Spawns a subpipeline for every incoming event, with the event bound to $this.
 
 Spawns a subpipeline for every incoming event, with the event bound to `$this`.
 
@@ -11,9 +12,9 @@ each [parallel=int] { … }
 
 The `each` operator runs a fresh subpipeline for every incoming event. The record of the current event is bound to `$this` inside the subpipeline, so the subpipeline can parametrize its behavior on a per-event basis.
 
-The subpipeline takes no input from `each`. It either emits events—which are forwarded as the operator’s output—or ends with a sink, in which case `each` itself becomes a sink. The subpipeline must not produce bytes.
+The subpipeline takes no input from `each`. It either emits events - which are forwarded as the operator’s output - or ends with a sink, in which case `each` itself becomes a sink. The subpipeline must not produce bytes.
 
-Use `each` for per-event jobs, such as running a lookup, export, or sink whose source depends on the incoming event. For keyed streams that should keep one subpipeline alive per key, use [`group`](http://docs.tenzir.com/reference/operators/group.md) instead.
+Use `each` for per-event jobs, such as running a lookup, export, or sink whose source depends on the incoming event. For keyed streams that should keep one subpipeline alive per key, use [`group`](https://tenzir.com/docs/reference/operators/group.md) instead.
 
 ### `parallel = int (optional)`
 
@@ -78,12 +79,12 @@ each {
 
 ## See Also
 
-* [`cron`](http://docs.tenzir.com/reference/operators/cron.md)
-* [`every`](http://docs.tenzir.com/reference/operators/every.md)
-* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
-* [`group`](http://docs.tenzir.com/reference/operators/group.md)
-* [`parallel`](http://docs.tenzir.com/reference/operators/parallel.md)
-* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`cron`](https://tenzir.com/docs/reference/operators/cron.md)
+* [`every`](https://tenzir.com/docs/reference/operators/every.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
+* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)

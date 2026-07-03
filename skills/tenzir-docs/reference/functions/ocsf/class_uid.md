@@ -1,5 +1,6 @@
 # ocsf::class_uid
 
+> Returns the classuid for a given classname.
 
 Returns the `class_uid` for a given `class_name`.
 
@@ -15,4 +16,4 @@ The `class_name` for which `class_uid` should be returned.
 
 ## See Also
 
-* [`ocsf::class_name`](http://docs.tenzir.com/reference/functions/ocsf/class_name.md)
+* [`ocsf::class_name`](https://tenzir.com/docs/reference/functions/ocsf/class_name.md)

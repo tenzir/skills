@@ -1,5 +1,6 @@
 # float
 
+> Casts an expression to a float.
 
 Casts an expression to a float.
 
@@ -35,10 +36,10 @@ from {x: float("4.2")}
 
 ## See Also
 
-* [`int`](http://docs.tenzir.com/reference/functions/int.md)
-* [`ip`](http://docs.tenzir.com/reference/functions/ip.md)
-* [`string`](http://docs.tenzir.com/reference/functions/string.md)
-* [`subnet`](http://docs.tenzir.com/reference/functions/subnet.md)
-* [`time`](http://docs.tenzir.com/reference/functions/time.md)
-* [`uint`](http://docs.tenzir.com/reference/functions/uint.md)
+* [`int`](https://tenzir.com/docs/reference/functions/int.md)
+* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
+* [`string`](https://tenzir.com/docs/reference/functions/string.md)
+* [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
+* [`time`](https://tenzir.com/docs/reference/functions/time.md)
+* [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
 * [Transform values](../../guides/transformation/transform-values.md)

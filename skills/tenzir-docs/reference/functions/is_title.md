@@ -1,5 +1,6 @@
 # is_title
 
+> Checks if a string follows title case.
 
 Checks if a string follows title case.
 
@@ -25,5 +26,5 @@ from {x: "Hello World".is_title()}
 
 ## See Also
 
-* [`to_title`](http://docs.tenzir.com/reference/functions/to_title.md)
+* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

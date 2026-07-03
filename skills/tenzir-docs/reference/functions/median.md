@@ -1,5 +1,6 @@
 # median
 
+> Computes the approximate median of all grouped values using a t-digest algorithm.
 
 Computes the approximate median of all grouped values using a t-digest algorithm.
 
@@ -30,7 +31,7 @@ summarize median_value=median(x)
 
 ## See Also
 
-* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
-* [`mode`](http://docs.tenzir.com/reference/functions/mode.md)
-* [`quantile`](http://docs.tenzir.com/reference/functions/quantile.md)
+* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
+* [`mode`](https://tenzir.com/docs/reference/functions/mode.md)
+* [`quantile`](https://tenzir.com/docs/reference/functions/quantile.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

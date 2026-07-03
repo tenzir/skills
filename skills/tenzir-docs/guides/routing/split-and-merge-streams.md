@@ -1,11 +1,12 @@
 # Split and merge streams
 
+> This guide shows you how to connect pipelines using publish and subscribe operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
 
-This guide shows you how to connect pipelines using [`publish`](http://docs.tenzir.com/reference/operators/publish.md) and [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
+This guide shows you how to connect pipelines using [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.
 
 ## How publish/subscribe works
 
-The [`publish`](http://docs.tenzir.com/reference/operators/publish.md) operator sends events to a named channel (topic) on a node. The [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md) operator receives events from that channel. Multiple subscribers can receive the same events, and multiple publishers can write to the same topic.
+The [`publish`](https://tenzir.com/docs/reference/operators/publish.md) operator sends events to a named channel (topic) on a node. The [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operator receives events from that channel. Multiple subscribers can receive the same events, and multiple publishers can write to the same topic.
 
 ```tql
 // Publisher pipeline
@@ -137,7 +138,7 @@ There is also a small probability of data loss during shutdown when using dynami
 
 ## Combining with fork
 
-Use [`fork`](http://docs.tenzir.com/reference/operators/fork.md) with [`publish`](http://docs.tenzir.com/reference/operators/publish.md) to send copies of events while continuing the main pipeline:
+Use [`fork`](https://tenzir.com/docs/reference/operators/fork.md) with [`publish`](https://tenzir.com/docs/reference/operators/publish.md) to send copies of events while continuing the main pipeline:
 
 ```tql
 from_file "events.json"
@@ -160,6 +161,6 @@ Pipelines not visible on the overview page at [app.tenzir.com](https://app.tenzi
 * [Send to destinations](send-to-destinations.md)
 * [Fan out with subpipelines](fan-out-with-subpipelines.md)
 * [Load-balance pipelines](load-balance-pipelines.md)
-* [`publish`](http://docs.tenzir.com/reference/operators/publish.md)
-* [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md)
-* [`fork`](http://docs.tenzir.com/reference/operators/fork.md)
+* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)

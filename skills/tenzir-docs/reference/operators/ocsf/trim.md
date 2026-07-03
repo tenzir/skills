@@ -1,5 +1,6 @@
 # ocsf::trim
 
+> Drops fields from OCSF events to reduce their size.
 
 Drops fields from OCSF events to reduce their size.
 
@@ -120,6 +121,6 @@ ocsf::trim drop_optional=true, drop_recommended=true
 
 ## See Also
 
-* [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md)
-* [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md)
+* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md)
 * [Write a package](../../../tutorials/write-a-package.md)

@@ -1,5 +1,6 @@
 # remote
 
+> Forces a pipeline to run remotely at a node.
 
 Forces a pipeline to run remotely at a node.
 
@@ -25,4 +26,4 @@ remote {
 
 ## See Also
 
-* [`local`](http://docs.tenzir.com/reference/operators/local.md)
+* [`local`](https://tenzir.com/docs/reference/operators/local.md)

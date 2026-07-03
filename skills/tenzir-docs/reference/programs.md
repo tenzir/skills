@@ -1,5 +1,6 @@
 # Programs
 
+> TQL programs compose statements into complete data processing workflows that can execute. Valid TQL programs adhere to the following rules:
 
 TQL **programs** compose [statements](statements.md) into complete data processing workflows that can execute. Valid TQL programs adhere to the following rules:
 
@@ -8,7 +9,7 @@ TQL **programs** compose [statements](statements.md) into complete data processi
 
 Pipeline Auto-Completion
 
-When a pipeline is not closed, Tenzir attempts to *auto-complete* it in interactive execution contexts. For the command-line execution context described in [Run pipelines](../guides/basic-usage/run-pipelines.md#on-the-command-line), Tenzir uses standard input and standard output as the missing source or sink. For event pipelines, it prepends `from_stdin { read_json }` or appends `to_stdout { write_tql }`. For byte pipelines, it reads raw bytes from standard input or writes raw bytes to standard output. For the web execution context described in [Run pipelines](../guides/basic-usage/run-pipelines.md#in-the-platform), auto-completion takes place with an output operator: The web app appends [`serve`](http://docs.tenzir.com/reference/operators/serve.md) to turn the dataflow into a REST API, allowing your browser to access it by routing the data through the platform.
+When a pipeline is not closed, Tenzir attempts to *auto-complete* it in interactive execution contexts. For the command-line execution context described in [Run pipelines](../guides/basic-usage/run-pipelines.md#on-the-command-line), Tenzir uses standard input and standard output as the missing source or sink. For event pipelines, it prepends `from_stdin { read_json }` or appends `to_stdout { write_tql }`. For byte pipelines, it reads raw bytes from standard input or writes raw bytes to standard output. For the web execution context described in [Run pipelines](../guides/basic-usage/run-pipelines.md#in-the-platform), auto-completion takes place with an output operator: The web app appends [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md) to turn the dataflow into a REST API, allowing your browser to access it by routing the data through the platform.
 
 ## Statement chaining
 
@@ -60,15 +61,15 @@ Subpipelines are nested pipelines that an outer operator executes based on its o
 
 There are three types of subpipelines based on what they expect and produce:
 
-1. **Closed subpipelines** (void-to-void): Complete programs that run independently, used by operators like [`every`](http://docs.tenzir.com/reference/operators/every.md) and [`subscribe`](http://docs.tenzir.com/reference/operators/subscribe.md).
+1. **Closed subpipelines** (void-to-void): Complete programs that run independently, used by operators like [`every`](https://tenzir.com/docs/reference/operators/every.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md).
 
-2. **Parsing subpipelines** (bytes-to-events): Transform raw bytes into structured events, used by input operators like [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) and [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md).
+2. **Parsing subpipelines** (bytes-to-events): Transform raw bytes into structured events, used by input operators like [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) and [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md).
 
-3. **Printing subpipelines** (events-to-bytes): Transform structured events into raw bytes, used by output operators like [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md) and [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md).
+3. **Printing subpipelines** (events-to-bytes): Transform structured events into raw bytes, used by output operators like [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md) and [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md).
 
 ### Closed subpipelines
 
-The [`every`](http://docs.tenzir.com/reference/operators/every.md) operator executes a closed subpipeline at regular intervals:
+The [`every`](https://tenzir.com/docs/reference/operators/every.md) operator executes a closed subpipeline at regular intervals:
 
 ```tql
 every 1h {
@@ -80,7 +81,7 @@ every 1h {
 
 ### Parsing subpipelines
 
-Input operators like [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md) or [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md) that read raw bytes use parsing subpipelines to convert bytes into events. This pattern separates *where* data comes from (the outer operator) from *how* it’s parsed (the subpipeline):
+Input operators like [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) or [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) that read raw bytes use parsing subpipelines to convert bytes into events. This pattern separates *where* data comes from (the outer operator) from *how* it’s parsed (the subpipeline):
 
 ```tql
 from_file "data.log" {
@@ -103,7 +104,7 @@ When the input operator can infer the format automatically (e.g., from the file 
 from_file "data.json"  // Automatically uses read_json
 ```
 
-Operators that produce events directly, like [`from_kafka`](http://docs.tenzir.com/reference/operators/from_kafka.md) or [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md), don’t take a parsing subpipeline because the data format is inherent to the source.
+Operators that produce events directly, like [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) or [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md), don’t take a parsing subpipeline because the data format is inherent to the source.
 
 ## Comments
 
@@ -165,15 +166,15 @@ Understanding operator behavior helps write efficient pipelines:
 
 **Streaming operators** process events incrementally:
 
-* [`where`](http://docs.tenzir.com/reference/operators/where.md): Filters one event at a time
-* [`select`](http://docs.tenzir.com/reference/operators/select.md): Transforms fields immediately
-* [`drop`](http://docs.tenzir.com/reference/operators/drop.md): Removes fields as events flow
+* [`where`](https://tenzir.com/docs/reference/operators/where.md): Filters one event at a time
+* [`select`](https://tenzir.com/docs/reference/operators/select.md): Transforms fields immediately
+* [`drop`](https://tenzir.com/docs/reference/operators/drop.md): Removes fields as events flow
 
 **Blocking operators** need all input before producing output:
 
-* [`sort`](http://docs.tenzir.com/reference/operators/sort.md): Must see all events to order them
-* [`summarize`](http://docs.tenzir.com/reference/operators/summarize.md): Aggregates across the stream
-* [`reverse`](http://docs.tenzir.com/reference/operators/reverse.md): Needs complete input to reverse order
+* [`sort`](https://tenzir.com/docs/reference/operators/sort.md): Must see all events to order them
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md): Aggregates across the stream
+* [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md): Needs complete input to reverse order
 
  Efficient: streaming operations first:
 
@@ -219,4 +220,4 @@ age = current_time - timestamp      // Runtime calculation
 
 ### Network transparency
 
-TQL pipelines can span network boundaries seamlessly. For example, the [`import`](http://docs.tenzir.com/reference/operators/import.md) operator implicitly performs a network connection based on where it runs. If the `tenzir` binary executes the pipeline, the executor establishesa transparent network connection. If the pipeline runs within a node, the executor passes the data directly to the next operator in the same process.
+TQL pipelines can span network boundaries seamlessly. For example, the [`import`](https://tenzir.com/docs/reference/operators/import.md) operator implicitly performs a network connection based on where it runs. If the `tenzir` binary executes the pipeline, the executor establishesa transparent network connection. If the pipeline runs within a node, the executor passes the data directly to the next operator in the same process.

@@ -1,5 +1,6 @@
 # to_opensearch
 
+> Sends events to a Bulk API compatible with OpenSearch.
 
 Sends events to a Bulk API compatible with OpenSearch.
 
@@ -13,9 +14,9 @@ to_opensearch url:string, action=string, [index=string, id=string, doc=record,
 
 The `to_opensearch` operator sends events to a [Bulk API compatible with OpenSearch](https://opensearch.org/docs/latest/api-reference/document-apis/bulk/). The same implementation also works with Bulk API endpoints compatible with Elasticsearch.
 
-You can also use [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md) as an alias.
+You can also use [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md) as an alias.
 
-The operator appends `/_bulk` to the URL if the path doesn't already end with `/_bulk`. It accumulates multiple events before sending them as a single request. You can control the maximum request size with `max_content_length` and the timeout before sending accumulated events with `buffer_timeout`.
+The operator appends `/_bulk` to the URL if the path doesn’t already end with `/_bulk`. It accumulates multiple events before sending them as a single request. You can control the maximum request size with `max_content_length` and the timeout before sending accumulated events with `buffer_timeout`.
 
 ### `url: string`
 
@@ -27,11 +28,11 @@ An expression for the action that evaluates to a `string`.
 
 Supported actions:
 
-* `create`: Creates a document if it doesn't already exist and returns an error otherwise.
+* `create`: Creates a document if it doesn’t already exist and returns an error otherwise.
 * `delete`: Deletes a document if it exists.
-* `index`: Creates a document if it doesn't exist yet and replaces the document if it already exists.
-* `update`: Updates existing documents and returns an error if the document doesn't exist.
-* `upsert`: Updates a document if it exists, or indexes a new document if it doesn't exist.
+* `index`: Creates a document if it doesn’t exist yet and replaces the document if it already exists.
+* `update`: Updates existing documents and returns an error if the document doesn’t exist.
+* `upsert`: Updates a document if it exists, or indexes a new document if it doesn’t exist.
 
 ### `index = string (optional)`
 
@@ -117,8 +118,8 @@ to_opensearch "localhost:9200", action="create", index="main"
 
 ## See Also
 
-* [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md)
-* [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md)
+* [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
+* [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
 * [Map to ECS](../../guides/normalization/map-to-ecs.md)
 * [OpenSearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)

@@ -1,5 +1,6 @@
 # quantile
 
+> Computes the specified quantile of all grouped values.
 
 Computes the specified quantile of all grouped values.
 
@@ -34,6 +35,6 @@ summarize median_value=quantile(x, q=0.5)
 
 ## See Also
 
-* [`median`](http://docs.tenzir.com/reference/functions/median.md)
-* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
+* [`median`](https://tenzir.com/docs/reference/functions/median.md)
+* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

@@ -1,11 +1,12 @@
-# Security Lake
+# Amazon Security Lake integration
 
+> Send OCSF events to Amazon Security Lake.
 
 [Amazon Security Lake](https://aws.amazon.com/security-lake/) is a managed security data lake on AWS. It collects and stores security data in the Open Cybersecurity Schema Framework (OCSF) format.
 
 <!--?xml version="1.0" standalone="no"?-->
 
-Tenzir sends events to Amazon Security Lake using the [`to_amazon_security_lake`](http://docs.tenzir.com/reference/operators/to_amazon_security_lake.md) operator.
+Tenzir sends events to Amazon Security Lake using the [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) operator.
 
 ## Configuration
 
@@ -17,7 +18,7 @@ The current architectural pattern for Amazon Security Lake requires creating one
 /ext/{custom-source-name}/region={region}/accountId={accountID}/eventDay={YYYYMMDD}/
 ```
 
-This architecture naturally leads to deploying one Tenzir pipeline per custom source. The [`to_amazon_security_lake`](http://docs.tenzir.com/reference/operators/to_amazon_security_lake.md) operator handles the partitioning according to this structure automatically.
+This architecture naturally leads to deploying one Tenzir pipeline per custom source. The [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) operator handles the partitioning according to this structure automatically.
 
 ### Custom Source Setup
 

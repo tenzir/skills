@@ -1,5 +1,6 @@
 # min
 
+> Computes the minimum of all grouped values.
 
 Computes the minimum of all grouped values.
 
@@ -30,7 +31,7 @@ summarize min_value=min(x)
 
 ## See Also
 
-* [`max`](http://docs.tenzir.com/reference/functions/max.md)
-* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
-* [`sum`](http://docs.tenzir.com/reference/functions/sum.md)
+* [`max`](https://tenzir.com/docs/reference/functions/max.md)
+* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
+* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

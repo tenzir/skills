@@ -1,5 +1,6 @@
 # to_amazon_cloudwatch
 
+> Sends events to Amazon CloudWatch Logs.
 
 Sends events to Amazon CloudWatch Logs.
 
@@ -95,7 +96,7 @@ If omitted, the operator uses the region from `aws_iam` when present. Otherwise,
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -172,5 +173,5 @@ to_amazon_cloudwatch "/tenzir/events",
 
 ## See Also
 
-* [`from_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/from_amazon_cloudwatch.md)
-* [CloudWatch](../../integrations/amazon/cloudwatch.md)
+* [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)
+* [Amazon CloudWatch Logs](../../integrations/amazon/cloudwatch.md)

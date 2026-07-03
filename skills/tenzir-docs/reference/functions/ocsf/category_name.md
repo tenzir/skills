@@ -1,5 +1,6 @@
 # ocsf::category_name
 
+> Returns the categoryname for a given categoryuid.
 
 Returns the `category_name` for a given `category_uid`.
 
@@ -15,4 +16,4 @@ The `category_uid` for which `category_name` should be returned.
 
 ## See Also
 
-* [`ocsf::category_uid`](http://docs.tenzir.com/reference/functions/ocsf/category_uid.md)
+* [`ocsf::category_uid`](https://tenzir.com/docs/reference/functions/ocsf/category_uid.md)

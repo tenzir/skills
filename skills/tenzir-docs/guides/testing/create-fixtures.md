@@ -1,5 +1,6 @@
 # Create fixtures
 
+> This guide shows you how to create a fixture, wire it into the test harness, and use it from a test. You will build an HTTP echo server as a running example and then learn how to share fixtures across suites, handle missing dependencies, manage containers, add structured options, and validate test behavior with fixture assertions.
 
 This guide shows you how to create a fixture, wire it into the test harness, and use it from a test. You will build an HTTP echo server as a running example and then learn how to share fixtures across suites, handle missing dependencies, manage containers, add structured options, and validate test behavior with fixture assertions.
 
@@ -111,7 +112,7 @@ skip:
   on: fixture-unavailable
 ```
 
-The harness marks every test in the suite as skipped and includes the exception message in the output. This opt-in design keeps suites failing loudly by default — you only suppress the failure for environments where the missing dependency is expected.
+The harness marks every test in the suite as skipped and includes the exception message in the output. This opt-in design keeps suites failing loudly by default - you only suppress the failure for environments where the missing dependency is expected.
 
 If one test selects the fixture directly, put the same skip mapping in that test’s frontmatter instead:
 
@@ -165,7 +166,7 @@ When a fixture manages a single container directly rather than orchestrating ser
 
 A container-backed fixture follows four steps:
 
-1. **Detect the runtime.** `detect_runtime()` probes the system for Podman first, then Docker, and returns a `RuntimeSpec`. When no runtime is found it returns `None` — raise `FixtureUnavailable` so the suite can [skip gracefully](#handle-unavailable-fixtures).
+1. **Detect the runtime.** `detect_runtime()` probes the system for Podman first, then Docker, and returns a `RuntimeSpec`. When no runtime is found it returns `None` - raise `FixtureUnavailable` so the suite can [skip gracefully](create-fixtures.md#handle-unavailable-fixtures).
 
 2. **Start the container.** `start_detached(runtime, args)` runs `<runtime> run -d` and returns a `ManagedContainer` handle. Pass the same flags you would use on the command line (port mappings, environment variables, image name).
 
@@ -177,7 +178,7 @@ The `example-project/fixtures/container.py` in this repository shows the pattern
 
 ## Add structured options
 
-When a fixture needs runtime configuration — a custom port, a TLS toggle, a database name — declare a frozen dataclass and pass it to `@fixture()`:
+When a fixture needs runtime configuration - a custom port, a TLS toggle, a database name - declare a frozen dataclass and pass it to `@fixture()`:
 
 ```python
 from dataclasses import dataclass
@@ -204,7 +205,7 @@ fixtures:
       port: 9090
 ```
 
-The harness constructs the dataclass from the YAML mapping. Nested dataclasses work too — the harness walks the type annotations recursively. See the [test framework reference](../../reference/test-framework.md#fixture-options) for the full options API.
+The harness constructs the dataclass from the YAML mapping. Nested dataclasses work too - the harness walks the type annotations recursively. See the [test framework reference](../../reference/test-framework.md#fixture-options) for the full options API.
 
 ## Add fixture assertions
 
@@ -241,8 +242,6 @@ from typing import Any
 
 
 from tenzir_test import FixtureHandle, current_options, fixture
-
-
 
 
 @fixture(options=HttpOptions, assertions=HttpAssertions)
@@ -296,7 +295,7 @@ See the [test framework reference](../../reference/test-framework.md#fixture-ass
 
 ## Control fixtures from Python tests
 
-The declarative workflow (`fixtures: [http]`) covers most cases. When a Python-mode test needs to start, stop, or restart a fixture explicitly — for example to simulate a crash — use `acquire_fixture()`:
+The declarative workflow (`fixtures: [http]`) covers most cases. When a Python-mode test needs to start, stop, or restart a fixture explicitly - for example to simulate a crash - use `acquire_fixture()`:
 
 ```python
 # runner: python
@@ -349,4 +348,4 @@ retry: 4
 ---
 ```
 
-The number is the total attempt budget. Treat this as a temporary safety net and investigate persistent flakes — long retry chains mask race conditions.
+The number is the total attempt budget. Treat this as a temporary safety net and investigate persistent flakes - long retry chains mask race conditions.

@@ -1,5 +1,6 @@
 # read_gelf
 
+> Parses an incoming GELF stream into events.
 
 Parses an incoming GELF stream into events.
 

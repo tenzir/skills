@@ -1,5 +1,6 @@
-# Velociraptor
+# Velociraptor integration
 
+> Collect, monitor, and analyze endpoint data for digital forensics and incident response.
 
 [Velociraptor](https://docs.velociraptor.app) is a digital forensics and incident response (DFIR) tool for interrogating endpoints.
 
@@ -43,7 +44,7 @@ The `velociraptor` acts as client and establishes a connection to a Velociraptor
 
 ### Run raw VQL
 
-After you have created a TLS certificate, you can use the [`from_velociraptor`](http://docs.tenzir.com/reference/operators/from_velociraptor.md) operator to execute a [Velociraptor Query Language (VQL)](https://docs.velociraptor.app/docs/vql/) query:
+After you have created a TLS certificate, you can use the [`from_velociraptor`](https://tenzir.com/docs/reference/operators/from_velociraptor.md) operator to execute a [Velociraptor Query Language (VQL)](https://docs.velociraptor.app/docs/vql/) query:
 
 ```tql
 from_velociraptor query="select * from pslist()"

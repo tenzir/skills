@@ -1,5 +1,6 @@
 # value_counts
 
+> Returns a list of all grouped values alongside their frequency.
 
 Returns a list of all grouped values alongside their frequency.
 
@@ -30,6 +31,6 @@ summarize counts=value_counts(x)
 
 ## See Also
 
-* [`mode`](http://docs.tenzir.com/reference/functions/mode.md)
-* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
+* [`mode`](https://tenzir.com/docs/reference/functions/mode.md)
+* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

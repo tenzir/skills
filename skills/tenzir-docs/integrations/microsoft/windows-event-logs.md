@@ -1,5 +1,6 @@
-# Windows Event Logs
+# Microsoft Windows Event Logs integration
 
+> Collects Security, System, Application, and other critical OS logs.
 
 Windows Event Logs record system, security, and application events on Windows. You can collect them into Tenzir for monitoring, troubleshooting, and analysis.
 
@@ -96,7 +97,7 @@ Adapt `input.channels` according to the Event Log channels you would like Fluent
 
 #### Run a Tenzir pipeline
 
-Use the [`from_fluent_bit`](http://docs.tenzir.com/reference/operators/from_fluent_bit.md) source operator with the [Forward input](https://docs.fluentbit.io/manual/pipeline/inputs/forward):
+Use the [`from_fluent_bit`](https://tenzir.com/docs/reference/operators/from_fluent_bit.md) source operator with the [Forward input](https://docs.fluentbit.io/manual/pipeline/inputs/forward):
 
 ```tql
 from_fluent_bit "forward", options={
@@ -236,7 +237,7 @@ To this end, Windows comes with a **Windows Event Forwarding (WEF)** mechanism o
 
 The diagram below illustrates a typical setup:
 
-On the WEC, you typically ship the collected logs away using a third-party agent, as described above. Read below on using [OpenWEC](#collect-logs-via-openwec) as an agent-free alternative.
+On the WEC, you typically ship the collected logs away using a third-party agent, as described above. Read below on using [OpenWEC](windows-event-logs.md#collect-logs-via-openwec) as an agent-free alternative.
 
 The following configuration steps are heavily inspired by [SEKOIA](https://docs.sekoia.io/xdr/features/collect/integrations/endpoint/windows/#windows-event-forwarder-to-windows-event-collector-to-a-concentrator)’s instructions.
 
@@ -256,7 +257,7 @@ The argument `qc` stands for “quick configuration” to perform a basic config
 
 The `-q` flag means “quiet mode” to avoid prompting you for any input or confirmation, i.e., it makes the process non-interactive.
 
-:::caution Unencrypted HTTP This command sets up WinRM to listen on HTTP, which is not encrypted. For a secure production environment, it’s advisable to configure WinRM to use HTTPS, which requires additional steps, including setting up an appropriate server certificate for encryption. :::
+This command sets up WinRM to listen on HTTP, which is not encrypted. For a secure production environment, it’s advisable to configure WinRM to use HTTPS, which requires additional steps, including setting up an appropriate server certificate for encryption.
 
 #### Enable the Event Collector service
 
@@ -381,7 +382,7 @@ Refresh the Local Group Policy settings and apply the changes by running:
 gpupdate /force
 ```
 
-On the WEC, now [verify that the machine forwards events](#verify-the-subscription).
+On the WEC, now [verify that the machine forwards events](windows-event-logs.md#verify-the-subscription).
 
 ## Collect logs via OpenWEC
 
@@ -510,7 +511,7 @@ publish "wec"
 
 ## Parse Windows Event Log XML
 
-When receiving Windows Event Log data in its native XML format, use [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md) to convert the XML into structured records. This function is optimized for the [Windows XML Event Log format](https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema) and handles the `System`, `EventData`, `UserData`, and `RenderingInfo` sections.
+When receiving Windows Event Log data in its native XML format, use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to convert the XML into structured records. This function is optimized for the [Windows XML Event Log format](https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema) and handles the `System`, `EventData`, `UserData`, and `RenderingInfo` sections.
 
 ### Parse XML events from a file
 

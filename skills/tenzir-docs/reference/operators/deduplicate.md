@@ -1,5 +1,6 @@
 # deduplicate
 
+> Removes duplicate events based on a common key.
 
 Removes duplicate events based on a common key.
 
@@ -180,5 +181,5 @@ The first event has a count of `0`. When the next event with `x: 1` is emitted a
 
 ## See Also
 
-* [`sample`](http://docs.tenzir.com/reference/operators/sample.md)
+* [`sample`](https://tenzir.com/docs/reference/operators/sample.md)
 * [Deduplicate events](../../guides/optimization/deduplicate-events.md)

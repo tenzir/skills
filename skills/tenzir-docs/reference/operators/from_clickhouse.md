@@ -1,5 +1,6 @@
 # from_clickhouse
 
+> Fetches data from a ClickHouse server.
 
 Fetches data from a ClickHouse server.
 
@@ -11,7 +12,7 @@ from_clickhouse [table=string, sql=string,
 
 ## Description
 
-The [`from_clickhouse`](http://docs.tenzir.com/reference/operators/from_clickhouse.md) operator issues a query to a ClickHouse server. You can either provide a `table` to read or an `sql` query.
+The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator issues a query to a ClickHouse server. You can either provide a `table` to read or an `sql` query.
 
 ### `uri = string (optional)`
 
@@ -111,7 +112,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 Tenzir maps ClickHouse types to Tenzir types as follows:
 
 | ClickHouse                                        | Tenzir    | Comment                                        |
-| :------------------------------------------------ | :-------- | :--------------------------------------------- |
+| ------------------------------------------------- | --------- | ---------------------------------------------- |
 | `Bool`                                            | `bool`    |                                                |
 | `Int8`, `Int16`, `Int32`, `Int64`                 | `int64`   |                                                |
 | `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`  |                                                |
@@ -166,6 +167,6 @@ from_clickhouse sql="DESCRIBE TABLE events", tls=false
 
 ## See Also
 
-* [`to_clickhouse`](http://docs.tenzir.com/reference/operators/to_clickhouse.md)
+* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
 * [Read from data stores](../../guides/collecting/read-from-data-stores.md)
 * [ClickHouse](../../integrations/clickhouse.md)

@@ -1,5 +1,6 @@
 # internal_memory_size
 
+> Estimates the internal memory size of a value in bytes.
 
 Estimates the internal memory size of a value in bytes.
 
@@ -52,5 +53,5 @@ to_amqp "amqp://user:pass@localhost:5672/"
 
 ## See Also
 
-* [`type_id`](http://docs.tenzir.com/reference/functions/type_id.md)
-* [`type_of`](http://docs.tenzir.com/reference/functions/type_of.md)
+* [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md)
+* [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)

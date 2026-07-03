@@ -1,5 +1,6 @@
 # set
 
+> Assigns a value to a field, creating it if necessary.
 
 Assigns a value to a field, creating it if necessary.
 
@@ -57,7 +58,7 @@ b = move a
 
 ## See Also
 
-* [`move`](http://docs.tenzir.com/reference/operators/move.md)
+* [`move`](https://tenzir.com/docs/reference/operators/move.md)
 * [Statements](../statements.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

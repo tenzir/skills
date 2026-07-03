@@ -1,5 +1,6 @@
 # to_sentinelone_data_lake
 
+> Sends security events to SentinelOne Singularity Data Lake via REST API.
 
 Sends security events to SentinelOne Singularity Data Lake via REST API.
 
@@ -19,15 +20,15 @@ If events are OCSF events, the `time` and `severity_id` fields are automatically
 The OCSF `severity_id` is mapped to the SentinelOne Data Lake `sev` property according to this table:
 
 | OCSF `severity_id` | SentinelOne severity |
-| :----------------: | :------------------: |
-|     0 (Unknown)    |       3 (info)       |
-|  1 (Informational) |       1 (finer)      |
-|       2 (Low)      |       2 (fine)       |
-|     3 (Medium)     |       3 (info)       |
-|      4 (High)      |       4 (warn)       |
-|    5 (Critical)    |       5 (error)      |
-|      6 (Fatal)     |       6 (fatal)      |
-|     99 (Other)     |       3 (info)       |
+| ------------------ | -------------------- |
+| 0 (Unknown)        | 3 (info)             |
+| 1 (Informational)  | 1 (finer)            |
+| 2 (Low)            | 2 (fine)             |
+| 3 (Medium)         | 3 (info)             |
+| 4 (High)           | 4 (warn)             |
+| 5 (Critical)       | 5 (error)            |
+| 6 (Fatal)          | 6 (fatal)            |
+| 99 (Other)         | 3 (info)             |
 
 ### `url: string`
 
@@ -121,5 +122,5 @@ If you already have structured data in Tenzir, prefer sending structured data, a
 
 ## See Also
 
-* [`from_sentinelone_data_lake`](http://docs.tenzir.com/reference/operators/from_sentinelone_data_lake.md)
+* [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md)
 * [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)

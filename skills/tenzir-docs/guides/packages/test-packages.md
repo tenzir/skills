@@ -1,5 +1,6 @@
 # Test packages
 
+> This guide shows you how to add tests to your package. You’ll learn how to write test files, use inline inputs, and run the test harness.
 
 This guide shows you how to add tests to your package. You’ll learn how to write test files, use inline inputs, and run the test harness.
 
@@ -152,7 +153,7 @@ ocsf::derive
 ocsf::cast
 ```
 
-Use [`ocsf::derive`](http://docs.tenzir.com/reference/operators/ocsf/derive.md) to populate sibling enum fields and [`ocsf::cast`](http://docs.tenzir.com/reference/operators/ocsf/cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](http://docs.tenzir.com/reference/functions/now.md).
+Use [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) to populate sibling enum fields and [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](https://tenzir.com/docs/reference/functions/now.md).
 
 ### Test with different arguments
 
@@ -246,7 +247,7 @@ Patterns containing `*`, `?`, or `[` still use fnmatch glob syntax:
 uvx tenzir-test -m 'tests/*/create.tql'
 ```
 
-You can combine paths and patterns — the harness intersects both selections, running only tests that match both the path and a pattern:
+You can combine paths and patterns – the harness intersects both selections, running only tests that match both the path and a pattern:
 
 ```sh
 uvx tenzir-test tests/context/ -m create

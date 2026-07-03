@@ -1,5 +1,6 @@
 # Learn idiomatic TQL
 
+> This tutorial teaches you to write TQL that is clear, efficient, and maintainable. It assumes you already know basic TQL syntax and operators, and shows you how experienced TQL developers approach common patterns.
 
 This tutorial teaches you to write TQL that is clear, efficient, and maintainable. It assumes you already know basic TQL syntax and operators, and shows you how experienced TQL developers approach common patterns.
 
@@ -80,7 +81,9 @@ This Kusto-like style makes code harder to read and maintain, especially with ne
 Quick rule
 
 * **In files**: Always use newlines (vertical)
+
 * **On command-line**: Use pipes (horizontal)
+
 * **Never**: Mix both styles
 
 ### Trailing commas in vertical structures
@@ -148,7 +151,7 @@ from {status: 200, path: "/api"},
 
 Quick rule
 
-Trailing commas are only allowed in contexts with parentheses (’()’), brackets (’\[]’), or braces ('').
+Trailing commas are only allowed in contexts with parentheses (‘()’), brackets (‘\[]’), or braces (‘’).
 
 ### Line continuation in operator arguments
 
@@ -190,7 +193,7 @@ Quick rule
 
 ### Extract bulky arguments before subpipelines
 
-Operators that take a subpipeline often also take record or list arguments. When those arguments span multiple lines, the record braces and subpipeline braces can be hard to distinguish. Move bulky configuration values into `let` bindings so the operator call stays compact and the subpipeline remains visually clear. This pattern is common with [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md), where request records can sit directly before a parsing subpipeline such as [`read_json`](http://docs.tenzir.com/reference/operators/read_json.md).
+Operators that take a subpipeline often also take record or list arguments. When those arguments span multiple lines, the record braces and subpipeline braces can be hard to distinguish. Move bulky configuration values into `let` bindings so the operator call stays compact and the subpipeline remains visually clear. This pattern is common with [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md), where request records can sit directly before a parsing subpipeline such as [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md).
 
 ❌ Hard to scan:
 
@@ -314,17 +317,17 @@ if initiated {
 }
 ```
 
-When the source field is only needed as the condition and not used elsewhere, wrap a `move` in parentheses to consume and test it in a single expression — no separate `drop` required:
+When the source field is only needed as the condition and not used elsewhere, wrap a `move` in parentheses to consume and test it in a single expression - no separate `drop` required:
 
 ```tql
 connection_info = {
   direction_id: 2 if (move raw.initiated) else 1,
   protocol_ver_id: 6 if (move raw.is_ipv6) else 4,
 }
-// raw.initiated and raw.is_ipv6 are already consumed — no drop needed
+// raw.initiated and raw.is_ipv6 are already consumed  -  no drop needed
 ```
 
-The ternary form is appropriate *only for genuinely binary choices*. The moment you need a third branch, switch to `match` for branch pipelines or a [record constant lookup](#use-record-constants-for-value-mappings) for pure value mappings:
+The ternary form is appropriate *only for genuinely binary choices*. The moment you need a third branch, switch to `match` for branch pipelines or a [record constant lookup](learn-idiomatic-tql.md#use-record-constants-for-value-mappings) for pure value mappings:
 
 ```tql
 // Three or more enum-like outcomes → record constant
@@ -515,7 +518,7 @@ tags = concatenate(concatenate(base_tags, ["monitored"]), extra_tags)
 
 When a fragment may be missing, use optional access such as `...profile?` or `...custom_tags?`.
 
-Keep [`merge`](http://docs.tenzir.com/reference/functions/merge.md) and [`concatenate`](http://docs.tenzir.com/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
+Keep [`merge`](https://tenzir.com/docs/reference/functions/merge.md) and [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
 
 ## Field management
 
@@ -570,7 +573,7 @@ When normalizing data (e.g., to OCSF format):
 
 ### Use `replace` to normalize placeholder values
 
-When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](http://docs.tenzir.com/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
+When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](https://tenzir.com/docs/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
 
 ✅ Clear and composable approach:
 
@@ -641,7 +644,7 @@ drop_null_fields
 
 Operator vs. function
 
-Don’t confuse the [`replace`](http://docs.tenzir.com/reference/operators/replace.md) operator with the [`replace`](http://docs.tenzir.com/reference/functions/replace.md) function:
+Don’t confuse the [`replace`](https://tenzir.com/docs/reference/operators/replace.md) operator with the [`replace`](https://tenzir.com/docs/reference/functions/replace.md) function:
 
 * **Operator**: Replaces entire values across all fields in events (e.g., replace all `"-"` with `null`)
 * **Function**: Replaces substrings within a string (e.g., `"hello".replace("l", "r")` → `"herro"`)
@@ -751,7 +754,7 @@ where result > threshold        // Filter after expensive operation
 
 ### Put the stream clock outside keyed aggregations
 
-When you aggregate keys inside event-time windows, put [`window`](http://docs.tenzir.com/reference/operators/window.md) outside [`group`](http://docs.tenzir.com/reference/operators/group.md) if one stream-wide event-time clock should close all buckets. This keeps sparse keys from holding their own windows open until another event for the same key arrives, `idle_timeout` fires, or the input ends.
+When you aggregate keys inside event-time windows, put [`window`](https://tenzir.com/docs/reference/operators/window.md) outside [`group`](https://tenzir.com/docs/reference/operators/group.md) if one stream-wide event-time clock should close all buckets. This keeps sparse keys from holding their own windows open until another event for the same key arrives, `idle_timeout` fires, or the input ends.
 
 ✅ Prefer a single window clock for stream-wide detections:
 
@@ -783,7 +786,7 @@ group user {
 }
 ```
 
-Use [`group`](http://docs.tenzir.com/reference/operators/group.md) around [`window`](http://docs.tenzir.com/reference/operators/window.md) only when each key needs an independent event-time clock. For most stream detections, the outer [`window`](http://docs.tenzir.com/reference/operators/window.md) bounds state more predictably.
+Use [`group`](https://tenzir.com/docs/reference/operators/group.md) around [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs an independent event-time clock. For most stream detections, the outer [`window`](https://tenzir.com/docs/reference/operators/window.md) bounds state more predictably.
 
 ## Composition patterns
 
@@ -996,7 +999,7 @@ let $weak_prime_curves = [
 
 Why you should comment your code
 
-Don’t be skimpy with your comments—here’s why:
+Don’t be skimpy with your comments - here’s why:
 
 * **Prevent “improvements” that break things**: Future developers won’t accidentally “fix” your intentional design choices.
 * **Save investigation time**: Document your research so others don’t repeat the same Stack Overflow searches.
@@ -1004,13 +1007,13 @@ Don’t be skimpy with your comments—here’s why:
 * **Help your future self**: You’ll forget your own reasoning faster than you think.
 * **Speed up onboarding**: New team members understand decisions instead of guessing at intent.
 
-Remember: well-named fields and clear structure communicate *what* your code does—comments explain *why* you chose to do it that way.
+Remember: well-named fields and clear structure communicate *what* your code does - comments explain *why* you chose to do it that way.
 
 ## Data quality
 
 TQL’s diagnostic system helps you maintain data quality by distinguishing between expected variations and genuine problems. Understanding how to work with warnings intentionally is key to building robust pipelines.
 
-In TQL, warnings are not annoyances to suppress—they’re signals about your data’s health. The language provides tools to express your expectations clearly:
+In TQL, warnings are not annoyances to suppress - they’re signals about your data’s health. The language provides tools to express your expectations clearly:
 
 * **No `?`**: Field should exist; warning indicates a problem
 * **With `?`**: Field naturally varies; absence is normal
@@ -1098,7 +1101,7 @@ Performance
 
 ### Treat warnings as errors with `strict`
 
-The [`strict`](http://docs.tenzir.com/reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
+The [`strict`](https://tenzir.com/docs/reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
 
 ✅ Use `strict` for critical data processing:
 
@@ -1288,9 +1291,4 @@ ocsf.start_time = source.start.seconds().from_epoch()
 ocsf.start_time_dt = ocsf.start_time  // Same value, no benefit
 ```
 
-The datetime profile is particularly prone to misuse—it adds `time_dt`, `start_time_dt`, and `end_time_dt` fields that duplicate the base timestamp fields. Since TQL’s `time` type already serializes as ISO 8601 datetimes, these `_dt` variants provide no additional value.
-
-## Contents
-
-- [Write-a-package](write-a-package.md)
-- [Map-data-to-ocsf](map-data-to-ocsf.md)
+The datetime profile is particularly prone to misuse - it adds `time_dt`, `start_time_dt`, and `end_time_dt` fields that duplicate the base timestamp fields. Since TQL’s `time` type already serializes as ISO 8601 datetimes, these `_dt` variants provide no additional value.

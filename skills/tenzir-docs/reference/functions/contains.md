@@ -1,5 +1,6 @@
 # contains
 
+> Searches recursively for a value within data structures.
 
 Searches recursively for a value within data structures.
 
@@ -220,7 +221,7 @@ exact_subnet = contains(subnet, 10.0.0.0/8, exact=true)
 
 ## See Also
 
-* [`equals`](http://docs.tenzir.com/reference/functions/equals.md)
-* [`has`](http://docs.tenzir.com/reference/functions/has.md)
-* [`match_regex`](http://docs.tenzir.com/reference/functions/match_regex.md)
+* [`equals`](https://tenzir.com/docs/reference/functions/equals.md)
+* [`has`](https://tenzir.com/docs/reference/functions/has.md)
+* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

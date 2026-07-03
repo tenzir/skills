@@ -1,5 +1,6 @@
 # subscribe
 
+> Subscribes to events from a channel with a topic.
 
 Subscribes to events from a channel with a topic.
 
@@ -35,8 +36,8 @@ subscribe "alerts", "notices", "critical"
 
 ## See Also
 
-* [`export`](http://docs.tenzir.com/reference/operators/export.md)
-* [`publish`](http://docs.tenzir.com/reference/operators/publish.md)
+* [`export`](https://tenzir.com/docs/reference/operators/export.md)
+* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/routing/split-and-merge-streams.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

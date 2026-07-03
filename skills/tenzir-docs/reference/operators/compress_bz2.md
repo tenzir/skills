@@ -1,5 +1,6 @@
 # compress_bz2
 
+> Compresses a stream of bytes using bz2 compression.
 
 Compresses a stream of bytes using bz2 compression.
 
@@ -42,8 +43,8 @@ to_file "out.bz2" {
 
 ## See Also
 
-* [`compress_brotli`](http://docs.tenzir.com/reference/operators/compress_brotli.md)
-* [`compress_gzip`](http://docs.tenzir.com/reference/operators/compress_gzip.md)
-* [`compress_lz4`](http://docs.tenzir.com/reference/operators/compress_lz4.md)
-* [`compress_zstd`](http://docs.tenzir.com/reference/operators/compress_zstd.md)
-* [`decompress_bz2`](http://docs.tenzir.com/reference/operators/decompress_bz2.md)
+* [`compress_brotli`](https://tenzir.com/docs/reference/operators/compress_brotli.md)
+* [`compress_gzip`](https://tenzir.com/docs/reference/operators/compress_gzip.md)
+* [`compress_lz4`](https://tenzir.com/docs/reference/operators/compress_lz4.md)
+* [`compress_zstd`](https://tenzir.com/docs/reference/operators/compress_zstd.md)
+* [`decompress_bz2`](https://tenzir.com/docs/reference/operators/decompress_bz2.md)

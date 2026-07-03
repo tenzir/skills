@@ -1,5 +1,6 @@
 # metrics
 
+> Retrieves metrics events from a Tenzir node.
 
 Retrieves metrics events from a Tenzir node.
 
@@ -47,7 +48,7 @@ Work on persisted diagnostic events (first), even when `live` is given.
 
 Controls the output shape. The default is `"raw"`, which preserves the native `tenzir.metrics.*` schemas listed below.
 
-Set `shape="prometheus"` to transform metrics into canonical records that are compatible with Prometheus-oriented pipelines. You can send this shape directly to [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md).
+Set `shape="prometheus"` to transform metrics into canonical records that are compatible with Prometheus-oriented pipelines. You can send this shape directly to [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md).
 
 ```tql
 {
@@ -62,7 +63,7 @@ Set `shape="prometheus"` to transform metrics into canonical records that are co
 
 Limited to node health metrics
 
-Only the periodic node health metrics carry a Prometheus shape: `tenzir.metrics.cpu`, `tenzir.metrics.disk`, `tenzir.metrics.memory`, `tenzir.metrics.process`, and `tenzir.metrics.caf`. All other metrics — including `pipeline`, the operator-scoped metrics (`import`, `export`, `publish`, `subscribe`, `subscribe_buffer`, `tcp`, `throttle`, `enrich`, `lookup`), `operator_profile`, `api`, `actor`, `ingest`, `rebuild`, and `platform` — are omitted from the Prometheus shape. The operator emits a warning for each omitted schema.
+Only the periodic node health metrics carry a Prometheus shape: `tenzir.metrics.cpu`, `tenzir.metrics.disk`, `tenzir.metrics.memory`, `tenzir.metrics.process`, and `tenzir.metrics.caf`. All other metrics - including `pipeline`, the operator-scoped metrics (`import`, `export`, `publish`, `subscribe`, `subscribe_buffer`, `tcp`, `throttle`, `enrich`, `lookup`), `operator_profile`, `api`, `actor`, `ingest`, `rebuild`, and `platform` - are omitted from the Prometheus shape. The operator emits a warning for each omitted schema.
 
 The Prometheus shape recursively flattens numeric metric fields into individual records. Duration values are converted to seconds and emitted with a `_seconds` metric suffix.
 
@@ -111,7 +112,7 @@ Contains information about all accessed API endpoints, emitted once per second.
 }
 ```
 
-The schema of the record `params` depends on the API endpoint used. Refer to the [API documentation](https://docs.tenzir.com/reference/node/api) to see the available parameters per endpoint.
+The schema of the record `params` depends on the API endpoint used. Refer to the [API documentation](openapi.md) to see the available parameters per endpoint.
 
 ### `tenzir.metrics.caf`
 
@@ -603,7 +604,7 @@ Contains measurements about the number of read calls and the received bytes per 
 
 ### `tenzir.metrics.throttle`
 
-Contains metrics for the `throttle` operator. Emitted once per second only while the operator is dropping events — that is, when it is configured with `drop=true` and the rate limit is being exceeded.
+Contains metrics for the `throttle` operator. Emitted once per second only while the operator is dropping events - that is, when it is configured with `drop=true` and the rate limit is being exceeded.
 
 ```tql
 {
@@ -775,8 +776,8 @@ select timestamp, handle, reads, writes, bytes_read, bytes_written
 
 ## See Also
 
-* [`diagnostics`](http://docs.tenzir.com/reference/operators/diagnostics.md)
-* [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md)
+* [`diagnostics`](https://tenzir.com/docs/reference/operators/diagnostics.md)
+* [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
 * [Collect metrics](../../guides/analytics/collect-metrics.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Prometheus](../../integrations/prometheus.md)

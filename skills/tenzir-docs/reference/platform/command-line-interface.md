@@ -1,5 +1,6 @@
-# Platform command line interface
+# Command line interface
 
+> The Tenzir Platform command-line interface (CLI) allows you to interact with the Tenzir Platform from the command line to manage organizations, workspaces, and nodes.
 
 The Tenzir Platform command-line interface (CLI) allows you to interact with the Tenzir Platform from the command line to manage organizations, workspaces, and nodes.
 
@@ -335,9 +336,9 @@ If Node-3 doesn’t reconnect within three minutes, a message appears in the con
 
 On-premise setup required
 
-This CLI functionality requires an on-premise platform deployment, available with the [Sovereign Edition](https://tenzir.com/pricing).
+This CLI functionality requires an on-premise platform deployment, available with the [Sovereign Edition](https://tenzir.com/pricing.md).
 
-These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](http://docs.tenzir.com/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
+These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](https://tenzir.com/docs/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
 
 ### Synopsis
 
@@ -379,9 +380,9 @@ The unique ID of the workspace, as shown in `tenzir-platform workspace list` or 
 
 On-premise setup required
 
-You can use this CLI functionality only with an on-premise platform deployment, which is available to users of the [Sovereign Edition](https://tenzir.com/pricing).
+You can use this CLI functionality only with an on-premise platform deployment, which is available to users of the [Sovereign Edition](https://tenzir.com/pricing.md).
 
-These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](http://docs.tenzir.com/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
+These CLI commands are available only to local platform administrators. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](https://tenzir.com/docs/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
 
 ### Synopsis
 

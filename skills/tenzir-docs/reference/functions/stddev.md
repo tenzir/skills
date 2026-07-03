@@ -1,5 +1,6 @@
 # stddev
 
+> Computes the standard deviation of all grouped values.
 
 Computes the standard deviation of all grouped values.
 
@@ -30,6 +31,6 @@ summarize stddev_value=stddev(x)
 
 ## See Also
 
-* [`variance`](http://docs.tenzir.com/reference/functions/variance.md)
-* [`mean`](http://docs.tenzir.com/reference/functions/mean.md)
+* [`variance`](https://tenzir.com/docs/reference/functions/variance.md)
+* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

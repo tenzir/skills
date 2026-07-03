@@ -1,5 +1,6 @@
 # Configure database
 
+> A PostgreSQL database stores the internal state of the platform.
 
 A PostgreSQL database stores the internal state of the platform.
 

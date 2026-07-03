@@ -1,5 +1,6 @@
 # Run the platform
 
+> This guide shows you how to start the Tenzir Platform using Docker Compose. Complete this step after configuring all services.
 
 This guide shows you how to start the Tenzir Platform using Docker Compose. Complete this step after configuring all services.
 

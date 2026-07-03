@@ -1,5 +1,6 @@
 # abs
 
+> Returns the absolute value.
 
 Returns the absolute value.
 

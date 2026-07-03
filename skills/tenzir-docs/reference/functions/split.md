@@ -1,5 +1,6 @@
 # split
 
+> Splits a string into substrings.
 
 Splits a string into substrings.
 
@@ -77,6 +78,6 @@ from {
 
 ## See Also
 
-* [`split_regex`](http://docs.tenzir.com/reference/functions/split_regex.md)
-* [`join`](http://docs.tenzir.com/reference/functions/join.md)
+* [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md)
+* [`join`](https://tenzir.com/docs/reference/functions/join.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

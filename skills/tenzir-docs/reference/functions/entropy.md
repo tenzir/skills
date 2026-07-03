@@ -1,5 +1,6 @@
 # entropy
 
+> Computes the Shannon entropy of all grouped values.
 
 Computes the Shannon entropy of all grouped values.
 
@@ -51,6 +52,6 @@ summarize normalized_entropy=entropy(x, normalize=true)
 
 ## See Also
 
-* [`mode`](http://docs.tenzir.com/reference/functions/mode.md)
-* [`value_counts`](http://docs.tenzir.com/reference/functions/value_counts.md)
+* [`mode`](https://tenzir.com/docs/reference/functions/mode.md)
+* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

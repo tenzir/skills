@@ -1,5 +1,6 @@
 # parse_kv
 
+> Parses a string as key-value pairs.
 
 Parses a string as key-value pairs.
 
@@ -201,6 +202,6 @@ this = { ...input.parse_kv() }
 
 ## See Also
 
-* [`print_kv`](http://docs.tenzir.com/reference/functions/print_kv.md)
-* [`read_kv`](http://docs.tenzir.com/reference/operators/read_kv.md)
+* [`print_kv`](https://tenzir.com/docs/reference/functions/print_kv.md)
+* [`read_kv`](https://tenzir.com/docs/reference/operators/read_kv.md)
 * [Parse string fields](../../guides/parsing/parse-string-fields.md)

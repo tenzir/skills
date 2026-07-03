@@ -1,5 +1,6 @@
 # reverse
 
+> Reverses the event order.
 
 Reverses the event order.
 
@@ -9,7 +10,7 @@ reverse
 
 ## Description
 
-`reverse` is a shorthand notation for [`slice stride=-1`](http://docs.tenzir.com/reference/operators/slice.md).
+`reverse` is a shorthand notation for [`slice stride=-1`](https://tenzir.com/docs/reference/operators/slice.md).
 
 Potentially High Memory Usage
 
@@ -32,5 +33,5 @@ reverse
 
 ## See Also
 
-* [`sort`](http://docs.tenzir.com/reference/operators/sort.md)
+* [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
 * [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)

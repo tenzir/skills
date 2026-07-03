@@ -1,5 +1,6 @@
 # Install a package
 
+> Write your own package
 
 [Packages](../../explanations/packages.md) provide a flexible approach for combining operators, pipelines, contexts, and examples into a unified deployable unit.
 
@@ -18,7 +19,7 @@ The most convenient way to install a package is through the [Tenzir Library](htt
 
 ## Install with the package operator
 
-To install a package interactively in TQL, use the [`package::add`](http://docs.tenzir.com/reference/operators/package/add.md) operator:
+To install a package interactively in TQL, use the [`package::add`](https://tenzir.com/docs/reference/operators/package/add.md) operator:
 
 ```tql
 package::add "/path/to/pkg"
@@ -47,7 +48,7 @@ package::list
 }
 ```
 
-To uninstall a package interactively, use [`package::remove`](http://docs.tenzir.com/reference/operators/package/remove.md) and pass the package ID.
+To uninstall a package interactively, use [`package::remove`](https://tenzir.com/docs/reference/operators/package/remove.md) and pass the package ID.
 
 ```tql
 package::remove "your-package"
@@ -55,7 +56,7 @@ package::remove "your-package"
 
 ## Install from a custom repository
 
-For packages hosted in a Git repository (like a private library), clone the repository and point Tenzir at it. You can reference the entire library directory—Tenzir discovers all packages inside:
+For packages hosted in a Git repository (like a private library), clone the repository and point Tenzir at it. You can reference the entire library directory - Tenzir discovers all packages inside:
 
 ```bash
 git clone https://github.com/your-org/my-packages.git
@@ -125,15 +126,3 @@ inputs:
 * [Publish a package](publish-a-package.md)
 * [Write a package](../../tutorials/write-a-package.md)
 * [Packages](../../explanations/packages.md)
-
-## Contents
-
-- [Create-a-package](create-a-package.md)
-- [Test-packages](test-packages.md)
-- [Add-operators](add-operators.md)
-- [Add-pipelines](add-pipelines.md)
-- [Add-contexts](add-contexts.md)
-- [Add-constants](add-constants.md)
-- [Configure-inputs](configure-inputs.md)
-- [Maintain-a-changelog](maintain-a-changelog.md)
-- [Publish-a-package](publish-a-package.md)

@@ -1,5 +1,6 @@
 # repeat
 
+> Repeats a string a specified number of times.
 
 Repeats a string a specified number of times.
 
@@ -43,7 +44,7 @@ from {message: "na".repeat(0)}
 
 ## See Also
 
-* [`pad_end`](http://docs.tenzir.com/reference/functions/pad_end.md)
-* [`pad_start`](http://docs.tenzir.com/reference/functions/pad_start.md)
-* [`replace`](http://docs.tenzir.com/reference/functions/replace.md)
+* [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md)
+* [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md)
+* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

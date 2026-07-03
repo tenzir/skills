@@ -1,5 +1,6 @@
 # package::remove
 
+> Uninstalls a package.
 
 Uninstalls a package.
 
@@ -25,7 +26,7 @@ package::remove "suricata-ocsf"
 
 ## See Also
 
-* [`package::add`](http://docs.tenzir.com/reference/operators/package/add.md)
-* [`package::list`](http://docs.tenzir.com/reference/operators/package/list.md)
+* [`package::add`](https://tenzir.com/docs/reference/operators/package/add.md)
+* [`package::list`](https://tenzir.com/docs/reference/operators/package/list.md)
 * [Install a package](../../../guides/packages/install-a-package.md)
 * [Write a package](../../../tutorials/write-a-package.md)

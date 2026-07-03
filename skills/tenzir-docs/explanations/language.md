@@ -1,5 +1,6 @@
 # Language
 
+> The Tenzir Query Language (TQL) is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.
 
 The **Tenzir Query Language (TQL)** is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.
 
@@ -24,7 +25,7 @@ While SQL is the standard for relational databases, its design creates friction 
 
 * **Inside-out thinking**: SQL’s rigid `SELECT ... FROM ... WHERE` structure forces you to specify the output format before defining transformations, leading to complex nested subqueries.
 * **Debugging complexity**: Tracing data flow through nested CTEs and subqueries is cumbersome when investigating incidents under time pressure.
-* **Schema rigidity**: SQL assumes uniform, predefined schemas—a poor fit for the heterogeneous mix of logs, alerts, and telemetry that security teams process daily.
+* **Schema rigidity**: SQL assumes uniform, predefined schemas - a poor fit for the heterogeneous mix of logs, alerts, and telemetry that security teams process daily.
 
 The pipeline model offers a more natural workflow:
 
@@ -57,7 +58,7 @@ TQL draws inspiration from Unix pipes, where data flows through a sequence of tr
 
 ### Multi-schema philosophy
 
-Unlike traditional databases that require strict schemas, TQL embraces **heterogeneous data** as a first-class concept. Real-world data pipelines process multiple event types simultaneously—firewall logs, DNS queries, authentication events—each with different schemas.
+Unlike traditional databases that require strict schemas, TQL embraces **heterogeneous data** as a first-class concept. Real-world data pipelines process multiple event types simultaneously - firewall logs, DNS queries, authentication events - each with different schemas.
 
 TQL’s operators are **polymorphic**, adapting to different schemas at runtime:
 

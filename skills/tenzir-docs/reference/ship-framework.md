@@ -1,5 +1,6 @@
 # Ship Framework
 
+> tenzir-ship ships as a Python package that requires Python 3.12 or later. Install it with uv (or pip) and verify the console script:
 
 [`tenzir-ship`](https://github.com/tenzir/ship) helps you ship faster with automated release engineering. Manage changelogs, generate release notes, and publish GitHub releases. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guide for [maintaining a changelog](../guides/packages/maintain-a-changelog.md).
 
@@ -189,7 +190,7 @@ Scope tokens control which entries to display. Pass one as a positional argument
 
 | Token        | Description                                         |
 | ------------ | --------------------------------------------------- |
-| `all`        | All entries (released and unreleased) — the default |
+| `all`        | All entries (released and unreleased) - the default |
 | `unreleased` | Only unreleased entries                             |
 | `released`   | Only released entries                               |
 | `latest`     | Only entries from the latest stable release         |
@@ -286,7 +287,7 @@ tenzir-ship release create [version] [options]
 | `--explicit-links`    | Render @mentions and PR refs as explicit Markdown links    |
 | `--date <YYYY-MM-DD>` | Override release date                                      |
 
-When creating a release, the command also updates version fields in detected package manifest files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`). See the [version bumping configuration](#version-bumping) for details.
+When creating a release, the command also updates version fields in detected package manifest files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`). See the [version bumping configuration](ship-framework.md#version-bumping) for details.
 
 For stable releases, the default and preferred workflow is to omit both the manual bump flags and an explicit `version`. `tenzir-ship` auto-bumps from the unreleased entry types. Use `--patch`, `--minor`, or `--major` only when the automatic detection is not the right fit. Pass an explicit stable `version` only as a rare exact override, for example to re-cut a failed tagged release or to match an externally dictated version.
 
@@ -383,7 +384,7 @@ tenzir-ship release publish [version] [options]
 | `--commit`         | Commit staged changes before tagging (requires `--tag`) |
 | `--commit-message` | Custom commit message (default: `Release {version}`)    |
 
-The command reads project metadata from `config.yaml` or `package.yaml` for the repository slug and uses `notes.md` as the release body. Projects without a `repository` field cannot publish—this is intentional for changelogs that track changes without producing GitHub releases (e.g., modules in a workspace). When you omit `version`, the command resolves the latest release manifest by version, including release candidates.
+The command reads project metadata from `config.yaml` or `package.yaml` for the repository slug and uses `notes.md` as the release body. Projects without a `repository` field cannot publish - this is intentional for changelogs that track changes without producing GitHub releases (e.g., modules in a workspace). When you omit `version`, the command resolves the latest release manifest by version, including release candidates.
 
 #### How it works
 
@@ -430,7 +431,7 @@ The icons indicate step status:
 * **✘** (red): Step failed
 * **○** (dim): Step not yet executed
 
-In this example, the commit and tag were created locally, but the branch push failed—perhaps due to network issues. You can fix the underlying issue and retry the push manually, then run `release publish` again to complete the remaining steps.
+In this example, the commit and tag were created locally, but the branch push failed - perhaps due to network issues. You can fix the underlying issue and retry the push manually, then run `release publish` again to complete the remaining steps.
 
 #### Typical workflow
 
@@ -615,9 +616,9 @@ The `pre-publish` and `post-publish` hooks have access to these environment vari
 
 The workflow resolves authentication in this order:
 
-1. **GitHub App token** — when `github_app_id` and `github_app_private_key` are set. Use this for repository-scoped bot automation with a short-lived token.
-2. **Push token** — when `use_push_token: true` and `push_token` are set. Use this when you want to supply your own token for checkout, pushes, or publishing.
-3. **Default `GITHUB_TOKEN`** — the caller repository’s built-in token. Use this when the workflow only needs to update the current repository.
+1. **GitHub App token** - when `github_app_id` and `github_app_private_key` are set. Use this for repository-scoped bot automation with a short-lived token.
+2. **Push token** - when `use_push_token: true` and `push_token` are set. Use this when you want to supply your own token for checkout, pushes, or publishing.
+3. **Default `GITHUB_TOKEN`** - the caller repository’s built-in token. Use this when the workflow only needs to update the current repository.
 
 Use `GITHUB_TOKEN` when you only need to update the current repository. Use `use_push_token: true` with `push_token`, or use a GitHub App token, when you need pushes or tags created by the workflow to trigger downstream automation.
 
@@ -910,14 +911,14 @@ When creating a release for a parent project, `release create` automatically app
 ## Git Plugin v1.1.0
 
 
-- 🚀 Add commit message templates — *@alice*
-- 🐞 Fix branch detection — *@bob and @codex*
+- 🚀 Add commit message templates  -  *@alice*
+- 🐞 Fix branch detection  -  *@bob and @codex*
 
 
 ## Docs Plugin v1.2.0
 
 
-- 🔧 Improve search indexing — *@alice*
+- 🔧 Improve search indexing  -  *@alice*
 ```
 
 The release manifest records each module’s version at release time in the `modules` field. Subsequent releases compare against this baseline and only include entries from module releases newer than the recorded version. This prevents duplicate entries across parent releases.
@@ -941,7 +942,7 @@ The `--show-modules` option lists discovered modules with their paths for conven
 
 ### Independent versioning
 
-Each module maintains its own version history and releases on its own schedule. There is no coordinated release mechanism—modules evolve independently.
+Each module maintains its own version history and releases on its own schedule. There is no coordinated release mechanism - modules evolve independently.
 
 Typically, modules do not publish GitHub releases themselves. Instead, the parent workspace handles distribution (e.g., bundling modules into a product release or publishing to a package registry). Modules that need to publish standalone GitHub releases can add a `repository` field to their configuration.
 

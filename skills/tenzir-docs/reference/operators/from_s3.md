@@ -1,5 +1,6 @@
 # from_s3
 
+> Reads one or multiple files from Amazon S3.
 
 Reads one or multiple files from Amazon S3.
 
@@ -44,7 +45,7 @@ Defaults to `false`.
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -93,7 +94,10 @@ Pipeline to use for parsing the file. By default, this pipeline is derived from 
 
 Inside the subpipeline, the `$file` variable is available as a record with the following fields:
 
-\| Field | Type | Description | | :------ | :------- | :--------------------------------------- | | `path` | `string` | The absolute path of the file being read | | `mtime` | `time` | The last modification time of the file |
+| Field   | Type     | Description                              |
+| ------- | -------- | ---------------------------------------- |
+| `path`  | `string` | The absolute path of the file being read |
+| `mtime` | `time`   | The last modification time of the file   |
 
 For example, to attach the source path to each event:
 
@@ -161,7 +165,7 @@ from_s3 "s3://public-bucket/zeek/**.log", anonymous=true {
 
 ## See Also
 
-* [`from_file`](http://docs.tenzir.com/reference/operators/from_file.md)
-* [`from_s3`](http://docs.tenzir.com/reference/operators/from_s3.md)
-* [`to_s3`](http://docs.tenzir.com/reference/operators/to_s3.md)
-* [S3](../../integrations/amazon/s3.md)
+* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
+* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
+* [Amazon S3](../../integrations/amazon/s3.md)

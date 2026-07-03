@@ -1,5 +1,6 @@
 # Tune performance
 
+> This guide covers configuration options that affect node performance. You’ll learn how to tune demand scheduling, memory usage, and throughput settings.
 
 This guide covers configuration options that affect node performance. You’ll learn how to tune demand scheduling, memory usage, and throughput settings.
 
@@ -154,7 +155,7 @@ Tenzir processes log messages in a dedicated thread, which by default buffers up
 
 ## Caching
 
-Tenzir Nodes cache results for results for pipelines used in the Tenzir Platform’s Explorer. Internally, this utilizes the [`cache`](http://docs.tenzir.com/reference/operators/cache.md) operator.
+Tenzir Nodes cache results for results for pipelines used in the Tenzir Platform’s Explorer. Internally, this utilizes the [`cache`](https://tenzir.com/docs/reference/operators/cache.md) operator.
 
 Caches have two primary tuning knobs:
 

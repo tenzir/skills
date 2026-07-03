@@ -1,5 +1,6 @@
 # write_kv
 
+> Writes events in a Key-Value format.
 
 Writes events in a Key-Value format.
 
@@ -71,7 +72,7 @@ x.y.z=0 y.y2=42 a=string
 
 ## See Also
 
-* [`parse_kv`](http://docs.tenzir.com/reference/functions/parse_kv.md)
-* [`print_kv`](http://docs.tenzir.com/reference/functions/print_kv.md)
-* [`read_kv`](http://docs.tenzir.com/reference/operators/read_kv.md)
-* [`write_lines`](http://docs.tenzir.com/reference/operators/write_lines.md)
+* [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md)
+* [`print_kv`](https://tenzir.com/docs/reference/functions/print_kv.md)
+* [`read_kv`](https://tenzir.com/docs/reference/operators/read_kv.md)
+* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)

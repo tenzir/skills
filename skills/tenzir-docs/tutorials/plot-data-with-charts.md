@@ -1,5 +1,6 @@
 # Plot data with charts
 
+> In this tutorial, you will learn how to use pipelines to plot data as charts.
 
 In this tutorial, you will learn how to **use pipelines to plot data as charts**.
 
@@ -9,10 +10,10 @@ The Tenzir Query Language (TQL) excels at slicing and dicing even the most compl
 
 Tenzir supports four types of charts, each with a dedicated operator:
 
-1. **Pie**: [`chart_pie`](http://docs.tenzir.com/reference/operators/chart_pie.md)
-2. **Bar**: [`chart_bar`](http://docs.tenzir.com/reference/operators/chart_bar.md)
-3. **Line**: [`chart_line`](http://docs.tenzir.com/reference/operators/chart_line.md)
-4. **Area**: [`chart_area`](http://docs.tenzir.com/reference/operators/chart_area.md)
+1. **Pie**: [`chart_pie`](https://tenzir.com/docs/reference/operators/chart_pie.md)
+2. **Bar**: [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md)
+3. **Line**: [`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md)
+4. **Area**: [`chart_area`](https://tenzir.com/docs/reference/operators/chart_area.md)
 
 ## How to plot data
 
@@ -89,7 +90,7 @@ A good use case for bar charts is visualization of counters of categorical value
    {outcome: "heads", n: 11}
    ```
 
-2. **Plot the data**: Add the [`chart_bar`](http://docs.tenzir.com/reference/operators/chart_bar.md) operator to visualize the counts.
+2. **Plot the data**: Add the [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md) operator to visualize the counts.
 
    Map the outcome and count fields to the x-axis and y-axis:
 
@@ -99,7 +100,7 @@ A good use case for bar charts is visualization of counters of categorical value
    chart_bar x=outcome, y=n
    ```
 
-   Bar charts with categorical labels preserve the input order of the labels. Use [`sort`](http://docs.tenzir.com/reference/operators/sort.md) before [`chart_bar`](http://docs.tenzir.com/reference/operators/chart_bar.md) when you want to order categorical bars by a metric instead of first-seen order.
+   Bar charts with categorical labels preserve the input order of the labels. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) before [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md) when you want to order categorical bars by a metric instead of first-seen order.
 
 ##### Group and stack bars
 
@@ -175,7 +176,7 @@ Log scaling removes linearity. Comparing bar heights no longer reflects a simple
 
 Pie charts are well-understood and frequently occur in management dashboards. Let’s plot some synthetic data with the
 
-[`chart_pie`](http://docs.tenzir.com/reference/operators/chart_pie.md) operator:
+[`chart_pie`](https://tenzir.com/docs/reference/operators/chart_pie.md) operator:
 
 ```tql
 from (
@@ -198,7 +199,7 @@ Bar Charts > Pie Charts
 
 Line charts come in handy when visualizing data trends over a continuous scale, such as time series data.
 
-1. **Shape your data**: For our line chart demo, we’ll use some internal node metrics provided by the [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md) operator. Let’s look at the RAM usage of the node:
+1. **Shape your data**: For our line chart demo, we’ll use some internal node metrics provided by the [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) operator. Let’s look at the RAM usage of the node:
 
    ```tql
    metrics "process"
@@ -212,7 +213,7 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    {timestamp: 2025-04-27T18:16:19.694Z, current_memory_usage: 2385154048, peak_memory_usage: 4021136}
    ```
 
-2. **Plot the data**: Add the [`chart_line`](http://docs.tenzir.com/reference/operators/chart_line.md) operator to visualize the time series. We are going to plot the memory usage within the last day:
+2. **Plot the data**: Add the [`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md) operator to visualize the time series. We are going to plot the memory usage within the last day:
 
    ```tql
    metrics "process"
@@ -230,7 +231,7 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    chart_line x=timestamp, y=mem
    ```
 
-   This looks a lot smoother! **Pro tip**: you can even further [optimize the above pipeline](#optimize-plotting-with-inline-expressions) by using additional operator arguments.
+   This looks a lot smoother! **Pro tip**: you can even further [optimize the above pipeline](plot-data-with-charts.md#optimize-plotting-with-inline-expressions) by using additional operator arguments.
 
 #### Compare multiple series
 
@@ -267,7 +268,7 @@ Area charts are fantastic for visualizing quantities that accumulate over a cont
 
 In the above section about line charts, you can exchange every call to
 
-[`chart_line`](http://docs.tenzir.com/reference/operators/chart_line.md) with [`chart_area`](http://docs.tenzir.com/reference/operators/chart_area.md) and will get a working plot.
+[`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md) with [`chart_area`](https://tenzir.com/docs/reference/operators/chart_area.md) and will get a working plot.
 
 ```tql
 from (

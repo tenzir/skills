@@ -1,9 +1,10 @@
-# Prometheus
+# Prometheus integration
 
+> Prometheus is an open-source monitoring system and time-series database. Tenzir can send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and Vic
 
 [Prometheus](https://prometheus.io/) is an open-source monitoring system and time-series database. Tenzir can send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
 
-Use [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md) with `shape="prometheus"` and [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md) to send Tenzir node metrics to a Prometheus Remote Write endpoint. This integration doesn’t expose a scrape endpoint for the Prometheus pull model.
+Use [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) with `shape="prometheus"` and [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md) to send Tenzir node metrics to a Prometheus Remote Write endpoint. This integration doesn’t expose a scrape endpoint for the Prometheus pull model.
 
 ## Prerequisites
 
@@ -15,7 +16,7 @@ Store endpoint URLs and authentication headers as [secrets](../explanations/secr
 
 ### Send canonical metric events
 
-Send events that already use the default metric shape expected by [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md):
+Send events that already use the default metric shape expected by [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md):
 
 ```tql
 from {
@@ -51,6 +52,6 @@ to_prometheus "prometheus-remote-write-url",
 
 ## See Also
 
-* [`metrics`](http://docs.tenzir.com/reference/operators/metrics.md)
-* [`to_prometheus`](http://docs.tenzir.com/reference/operators/to_prometheus.md)
+* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
 * [Collect metrics](../guides/analytics/collect-metrics.md)

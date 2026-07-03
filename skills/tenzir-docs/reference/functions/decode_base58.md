@@ -1,5 +1,6 @@
 # decode_base58
 
+> Decodes bytes as Base58.
 
 Decodes bytes as Base58.
 
@@ -30,4 +31,4 @@ decoded = bytes.decode_base58()
 
 ## See Also
 
-* [`encode_base58`](http://docs.tenzir.com/reference/functions/encode_base58.md)
+* [`encode_base58`](https://tenzir.com/docs/reference/functions/encode_base58.md)

@@ -1,5 +1,6 @@
 # from_amazon_cloudwatch
 
+> Reads events from Amazon CloudWatch.
 
 Reads events from Amazon CloudWatch.
 
@@ -41,7 +42,7 @@ Supported values:
 * `search`: Search historical events in one log group with `FilterLogEvents`. Use this mode for investigations, bounded backfills, and exports across one or more streams in the group.
 * `replay`: Replay one known log stream with `GetLogEvents`. This mode requires exactly one `stream`.
 
-Defaults to `live`. For detailed mode selection guidance, see [CloudWatch](../../integrations/amazon/cloudwatch.md).
+Defaults to `live`. For detailed mode selection guidance, see [Amazon CloudWatch Logs](../../integrations/amazon/cloudwatch.md).
 
 ### `stream = string|list<string> (optional)`
 
@@ -95,7 +96,7 @@ If omitted, the operator uses the region from `aws_iam` when present. Otherwise,
 
 ### `aws_iam = record (optional)`
 
-Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK's default credential chain.
+Configures explicit AWS credentials or IAM role assumption. If not specified, the operator uses the AWS SDK’s default credential chain.
 
 ```tql
 {
@@ -163,5 +164,5 @@ from_amazon_cloudwatch "/aws/lambda/api",
 
 ## See Also
 
-* [`to_amazon_cloudwatch`](http://docs.tenzir.com/reference/operators/to_amazon_cloudwatch.md)
-* [CloudWatch](../../integrations/amazon/cloudwatch.md)
+* [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md)
+* [Amazon CloudWatch Logs](../../integrations/amazon/cloudwatch.md)

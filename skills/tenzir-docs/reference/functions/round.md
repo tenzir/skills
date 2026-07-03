@@ -1,5 +1,6 @@
 # round
 
+> Rounds a number or a time/duration with a specified unit.
 
 Rounds a number or a time/duration with a specified unit.
 
@@ -53,7 +54,7 @@ from {
 
 ## See Also
 
-* [`ceil`](http://docs.tenzir.com/reference/functions/ceil.md)
-* [`floor`](http://docs.tenzir.com/reference/functions/floor.md)
+* [`ceil`](https://tenzir.com/docs/reference/functions/ceil.md)
+* [`floor`](https://tenzir.com/docs/reference/functions/floor.md)
 * [Transform values](../../guides/transformation/transform-values.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

@@ -1,5 +1,6 @@
 # Platform
 
+> The platform provides fleet management for nodes. With an API and web interface, the platform offers user and workspace administration, authentication via external identity providers (IdP), and dashboards consisting of pipeline-powered charts.
 
 The **platform** provides *fleet management* for [nodes](node.md). With an API and web interface, the platform offers user and workspace administration, authentication via external identity providers (IdP), and dashboards consisting of pipeline-powered charts.
 
@@ -30,7 +31,7 @@ The creator of an organization automatically becomes its first admin.
 
 Organizations
 
-Organizations are not available in the free **Community Edition**. Please see [tenzir.com/pricing](https://tenzir.com/pricing) for a detailed feature comparison.
+Organizations are not available in the free **Community Edition**. Please see [tenzir.com/pricing](https://tenzir.com/pricing.md) for a detailed feature comparison.
 
 ### Workspaces
 
@@ -50,7 +51,7 @@ It’s important to note that a node can only be part of one workspace. There is
 
 ## Deployment Modes
 
-Based on the [Edition](https://tenzir.com/pricing) of Tenzir, you have different deployment modes of the platform. The below diagram illustrates the variants.
+Based on the [Edition](https://tenzir.com/pricing.md) of Tenzir, you have different deployment modes of the platform. The below diagram illustrates the variants.
 
 * **Community Edition**: geared towards single-user deployments, the Community Edition only associates a personal workspace with every user.
 * **Professional Edition**: geared towards small-business deployments, the Professional Edition features organizations for allowing multiple users to collaborate.

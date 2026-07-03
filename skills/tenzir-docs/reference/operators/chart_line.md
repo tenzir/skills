@@ -1,5 +1,6 @@
 # chart_line
 
+> Plots events on an line chart.
 
 Plots events on an line chart.
 
@@ -25,7 +26,7 @@ Positions on the y-axis for each data point. Multiple data points for the same g
 
 Multiple `y` values and their labels can be specified by using the record syntax: `{name: value, ...}`.
 
-For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](http://docs.tenzir.com/reference/functions/mean.md) of the `load` field and labels it as `Avg. Load`.
+For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](https://tenzir.com/docs/reference/functions/mean.md) of the `load` field and labels it as `Avg. Load`.
 
 ### `x_min = any (optional)`
 
@@ -86,7 +87,7 @@ chart_line x=timestamp,
 
 ## See Also
 
-* [`chart_area`](http://docs.tenzir.com/reference/operators/chart_area.md)
-* [`chart_bar`](http://docs.tenzir.com/reference/operators/chart_bar.md)
-* [`chart_pie`](http://docs.tenzir.com/reference/operators/chart_pie.md)
+* [`chart_area`](https://tenzir.com/docs/reference/operators/chart_area.md)
+* [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md)
+* [`chart_pie`](https://tenzir.com/docs/reference/operators/chart_pie.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

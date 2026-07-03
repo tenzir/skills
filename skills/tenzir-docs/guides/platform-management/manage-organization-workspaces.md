@@ -1,5 +1,6 @@
 # Manage organization workspaces
 
+> This guide shows you how to create, view, and delete workspaces that belong to an organization. You’ll learn the difference between personal and organization workspaces and how access control works for shared workspaces.
 
 This guide shows you how to create, view, and delete workspaces that belong to an organization. You’ll learn the difference between personal and organization workspaces and how access control works for shared workspaces.
 

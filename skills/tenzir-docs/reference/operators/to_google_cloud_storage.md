@@ -1,5 +1,6 @@
 # to_google_cloud_storage
 
+> Writes events to one or multiple objects in Google Cloud Storage.
 
 Writes events to one or multiple objects in Google Cloud Storage.
 
@@ -54,7 +55,7 @@ Defaults to `5min`.
 
 A list of fields used to partition events into separate files. For every distinct combination of partition-field values, a separate file (or group of rotated files) is written. The URL must contain a `**` placeholder, which is replaced by the hive-style path `field1=value1/field2=value2/…`.
 
-The partitioning fields are **not** stripped from the written events — they remain in each record.
+The partitioning fields are **not** stripped from the written events - they remain in each record.
 
 ### `{ … }`
 
@@ -93,7 +94,7 @@ to_google_cloud_storage "gs://my-bucket/logs/events_{uuid}.json.gz",
 
 ## See Also
 
-* [`from_google_cloud_storage`](http://docs.tenzir.com/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](http://docs.tenzir.com/reference/operators/to_google_cloud_storage.md)
-* [`to_file`](http://docs.tenzir.com/reference/operators/to_file.md)
-* [Cloud Storage](../../integrations/google/cloud-storage.md)
+* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md)
+* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
+* [Google Cloud Storage](../../integrations/google/cloud-storage.md)

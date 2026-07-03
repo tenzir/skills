@@ -1,5 +1,6 @@
 # Functions
 
+> Functions appear in expressions and take positional and/or named arguments, producing a value as a result of their computation.
 
 Functions appear in [expressions](expressions.md) and take positional and/or named arguments, producing a value as a result of their computation.
 
@@ -1250,7 +1251,7 @@ Checks whether a value is empty.
 
 ### [random](functions/random.md)
 
-Generates a random number in *\[0,1]*.
+Generates a random number in \*\[0,1]\*.
 
 ```tql
 random()

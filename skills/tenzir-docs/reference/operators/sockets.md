@@ -1,5 +1,6 @@
 # sockets
 
+> Shows a snapshot of open sockets.
 
 Shows a snapshot of open sockets.
 
@@ -20,7 +21,7 @@ Tenzir emits socket information with the following schema.
 Contains detailed information about the socket.
 
 | Field         | Type     | Description                                        |
-| :------------ | :------- | :------------------------------------------------- |
+| ------------- | -------- | -------------------------------------------------- |
 | `pid`         | `uint64` | The process identifier.                            |
 | `process`     | `string` | The name of the process involved.                  |
 | `protocol`    | `uint64` | The protocol used for the communication.           |
@@ -41,5 +42,5 @@ select pid, local_addr, remote_addr
 
 ## See Also
 
-* [`files`](http://docs.tenzir.com/reference/operators/files.md)
-* [`processes`](http://docs.tenzir.com/reference/operators/processes.md)
+* [`files`](https://tenzir.com/docs/reference/operators/files.md)
+* [`processes`](https://tenzir.com/docs/reference/operators/processes.md)

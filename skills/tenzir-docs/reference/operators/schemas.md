@@ -1,5 +1,6 @@
 # schemas
 
+> Retrieves all schemas for events stored at a node.
 
 Retrieves all schemas for events stored at a node.
 

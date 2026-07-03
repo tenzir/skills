@@ -1,5 +1,6 @@
 # file_name
 
+> Extracts the file name from a file path.
 
 Extracts the file name from a file path.
 
@@ -25,5 +26,5 @@ from {x: file_name("/path/to/log.json")}
 
 ## See Also
 
-* [`parent_dir`](http://docs.tenzir.com/reference/functions/parent_dir.md)
+* [`parent_dir`](https://tenzir.com/docs/reference/functions/parent_dir.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

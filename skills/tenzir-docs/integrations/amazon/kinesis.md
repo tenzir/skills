@@ -1,11 +1,12 @@
-# Kinesis
+# Amazon Kinesis integration
 
+> Ingest and process real-time data streams from Amazon Kinesis.
 
 [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) is a managed streaming data service on AWS.
 
 Tenzir can receive records from Kinesis streams with
 
-[`from_amazon_kinesis`](http://docs.tenzir.com/reference/operators/from_amazon_kinesis.md) and send records to Kinesis streams with [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md).
+[`from_amazon_kinesis`](https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md) and send records to Kinesis streams with [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md).
 
 When Tenzir reads from Kinesis, it emits one event per Kinesis record. The event uses the `tenzir.amazon_kinesis` schema and contains the raw record payload in the `message` field as a `blob`, together with metadata such as the stream, shard, sequence number, partition key, arrival time, and lag.
 
@@ -20,7 +21,7 @@ The source operator lists shards during startup and discovers new shards when an
 
 ## Configuration
 
-Follow the [Amazon integration configuration](../amazon.md) to authenticate with your AWS credentials.
+Follow the [Amazon integration configuration](https://docs.tenzir.com/integrations/amazon) to authenticate with your AWS credentials.
 
 Alternatively, use the `aws_iam` parameter to provide explicit credentials:
 
@@ -54,10 +55,10 @@ When `endpoint` is omitted, Tenzir checks `AWS_ENDPOINT_URL_KINESIS` first, then
 
 Tenzir needs these Kinesis permissions:
 
-| Operator                                                                                   | Required permissions                                                   |
-| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| [`from_amazon_kinesis`](http://docs.tenzir.com/reference/operators/from_amazon_kinesis.md) | `kinesis:ListShards`, `kinesis:GetShardIterator`, `kinesis:GetRecords` |
-| [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)     | `kinesis:PutRecords`                                                   |
+| Operator                                                                                    | Required permissions                                                   |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [`from_amazon_kinesis`](https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md) | `kinesis:ListShards`, `kinesis:GetShardIterator`, `kinesis:GetRecords` |
+| [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md)     | `kinesis:PutRecords`                                                   |
 
 ## Examples
 
@@ -99,9 +100,9 @@ from_amazon_kinesis "security-events", start=2026-01-01T00:00:00Z
 
 ## See Also
 
-* [`from_amazon_kinesis`](http://docs.tenzir.com/reference/operators/from_amazon_kinesis.md)
-* [`to_amazon_kinesis`](http://docs.tenzir.com/reference/operators/to_amazon_kinesis.md)
+* [`from_amazon_kinesis`](https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md)
+* [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md)
 * [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
-* [SQS](sqs.md)
+* [Amazon SQS](sqs.md)
 * [Kafka](../kafka.md)

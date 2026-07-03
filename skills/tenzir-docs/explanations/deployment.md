@@ -1,5 +1,6 @@
 # Deployment
 
+> This page explains Tenzir’s deployment architecture, which separates data processing from management through a layered design. Three primary abstractions work together:
 
 This page explains Tenzir’s deployment architecture, which separates data processing from management through a layered design. Three primary abstractions work together:
 
@@ -11,15 +12,8 @@ Here’s how they relate schematically:
 
 <!--?xml version="1.0" standalone="no"?-->
 
-When a node starts, it will automatically attempt to connect to the platform, giving you a seamless way to manage and deploy pipelines through a web interface. However, using the platform is optional—pipelines can also be controlled directly via the node’s API with a CRUD-style approach.
+When a node starts, it will automatically attempt to connect to the platform, giving you a seamless way to manage and deploy pipelines through a web interface. However, using the platform is optional - pipelines can also be controlled directly via the node’s API with a CRUD-style approach.
 
 The platform, beyond pipeline management, offers user and workspace administration, authentication support via external identity providers (IdP), and dashboards that consists of charts.
 
 Tenzir hosts one instance of the platform at [app.tenzir.com](https://app.tenzir.com), but you can also [deploy the platform on premises](../guides/platform-setup.md) in fully air-gapped environments.
-
-## Contents
-
-- [Pipeline](pipeline.md)
-- [Node](node.md)
-- [Platform](platform.md)
-- [Language](language.md)

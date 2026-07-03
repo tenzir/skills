@@ -1,5 +1,6 @@
 # hash_sha224
 
+> Computes a SHA-224 hash digest.
 
 Computes a SHA-224 hash digest.
 
@@ -25,14 +26,14 @@ from {x: hash_sha224("foo")}
 
 ## See Also
 
-* [`hash_md5`](http://docs.tenzir.com/reference/functions/hash_md5.md)
-* [`hash_sha1`](http://docs.tenzir.com/reference/functions/hash_sha1.md)
-* [`hash_sha256`](http://docs.tenzir.com/reference/functions/hash_sha256.md)
-* [`hash_sha384`](http://docs.tenzir.com/reference/functions/hash_sha384.md)
-* [`hash_sha512`](http://docs.tenzir.com/reference/functions/hash_sha512.md)
-* [`hash_sha3_224`](http://docs.tenzir.com/reference/functions/hash_sha3_224.md)
-* [`hash_sha3_256`](http://docs.tenzir.com/reference/functions/hash_sha3_256.md)
-* [`hash_sha3_384`](http://docs.tenzir.com/reference/functions/hash_sha3_384.md)
-* [`hash_sha3_512`](http://docs.tenzir.com/reference/functions/hash_sha3_512.md)
-* [`hash_xxh3`](http://docs.tenzir.com/reference/functions/hash_xxh3.md)
+* [`hash_md5`](https://tenzir.com/docs/reference/functions/hash_md5.md)
+* [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md)
+* [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md)
+* [`hash_sha384`](https://tenzir.com/docs/reference/functions/hash_sha384.md)
+* [`hash_sha512`](https://tenzir.com/docs/reference/functions/hash_sha512.md)
+* [`hash_sha3_224`](https://tenzir.com/docs/reference/functions/hash_sha3_224.md)
+* [`hash_sha3_256`](https://tenzir.com/docs/reference/functions/hash_sha3_256.md)
+* [`hash_sha3_384`](https://tenzir.com/docs/reference/functions/hash_sha3_384.md)
+* [`hash_sha3_512`](https://tenzir.com/docs/reference/functions/hash_sha3_512.md)
+* [`hash_xxh3`](https://tenzir.com/docs/reference/functions/hash_xxh3.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

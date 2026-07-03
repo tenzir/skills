@@ -1,11 +1,12 @@
 # Overview
 
+> The Tenzir Platform acts as a fleet management control plane for Tenzir Nodes. Use its web interface to explore data, create pipelines, and build dashboards.
 
 The **Tenzir Platform** acts as a fleet management control plane for Tenzir Nodes. Use its web interface to explore data, create pipelines, and build dashboards.
 
 Sovereign Edition required
 
-This guide shows you how to set up the platform on your own premises with the [Sovereign Edition](https://tenzir.com/pricing). We also offer a hosted cloud version of the platform at [app.tenzir.com](https://app.tenzir.com).
+This guide shows you how to set up the platform on your own premises with the [Sovereign Edition](https://tenzir.com/pricing.md). We also offer a hosted cloud version of the platform at [app.tenzir.com](https://app.tenzir.com).
 
 ## Services
 
@@ -53,15 +54,3 @@ The above guides cover platform deployment. For platform management, see our use
 1. [Configure workspaces](platform-management/configure-workspaces.md)
 2. [Configure dashboards](platform-management/configure-dashboards.md)
 3. [Use ephemeral nodes](platform-management/use-ephemeral-nodes.md)
-
-## Contents
-
-- [Deploy-on-aws](platform-setup/deploy-on-aws.md)
-- [Choose-a-scenario](platform-setup/choose-a-scenario.md)
-- [Configure-reverse-proxy](platform-setup/configure-reverse-proxy.md)
-- [Configure-internal-services](platform-setup/configure-internal-services.md)
-- [Configure-identity-provider](platform-setup/configure-identity-provider.md)
-- [Configure-database](platform-setup/configure-database.md)
-- [Configure-blob-storage](platform-setup/configure-blob-storage.md)
-- [Configure-secret-store](platform-setup/configure-secret-store.md)
-- [Run-the-platform](platform-setup/run-the-platform.md)

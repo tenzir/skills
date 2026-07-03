@@ -1,5 +1,6 @@
 # ocsf::type_uid
 
+> Returns the typeuid for a given typename.
 
 Returns the `type_uid` for a given `type_name`.
 
@@ -15,4 +16,4 @@ The `type_name` for which `type_uid` should be returned.
 
 ## See Also
 
-* [`ocsf::type_name`](http://docs.tenzir.com/reference/functions/ocsf/type_name.md)
+* [`ocsf::type_name`](https://tenzir.com/docs/reference/functions/ocsf/type_name.md)

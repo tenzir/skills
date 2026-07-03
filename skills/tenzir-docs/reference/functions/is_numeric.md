@@ -1,5 +1,6 @@
 # is_numeric
 
+> Checks if a string contains only numeric characters.
 
 Checks if a string contains only numeric characters.
 
@@ -25,6 +26,6 @@ from {x: "1234".is_numeric()}
 
 ## See Also
 
-* [`is_alnum`](http://docs.tenzir.com/reference/functions/is_alnum.md)
-* [`is_alpha`](http://docs.tenzir.com/reference/functions/is_alpha.md)
+* [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md)
+* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)

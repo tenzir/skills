@@ -1,11 +1,12 @@
 # Parse string fields
 
+> This guide shows you how to extract structured data from string fields using TQL’s parsing functions. You’ll learn to parse JSON, YAML, XML, key-value pairs, delimited data, timestamps, and log formats like Syslog, CEF, LEEF, and Windows Event Logs. For custom formats, Grok patterns provide flexible pattern matching.
 
 This guide shows you how to extract structured data from string fields using TQL’s parsing functions. You’ll learn to parse JSON, YAML, XML, key-value pairs, delimited data, timestamps, and log formats like Syslog, CEF, LEEF, and Windows Event Logs. For custom formats, Grok patterns provide flexible pattern matching.
 
 ## Parse JSON
 
-The most common parsing task is extracting JSON from string fields. Use [`parse_json`](http://docs.tenzir.com/reference/functions/parse_json.md):
+The most common parsing task is extracting JSON from string fields. Use [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md):
 
 ```tql
 from {message: r#"{"user": "alice", "action": "login"}"#}
@@ -45,7 +46,7 @@ action = data.action
 
 ## Extract key-value pairs
 
-Many logs use key-value formats. [`parse_kv`](http://docs.tenzir.com/reference/functions/parse_kv.md) handles these automatically:
+Many logs use key-value formats. [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md) handles these automatically:
 
 ```tql
 from {log: "status=200 method=GET path=/api/users duration=45ms"}
@@ -90,7 +91,7 @@ TQL provides parsers for various tabular formats within string fields.
 
 ### CSV
 
-Use [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md):
+Use [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md):
 
 ```tql
 from {line: "alice,30,engineer,SF"}
@@ -111,7 +112,7 @@ record = line.parse_csv(header=["name", "age", "role", "location"])
 
 ### TSV (tab-separated)
 
-Use [`parse_tsv`](http://docs.tenzir.com/reference/functions/parse_tsv.md):
+Use [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md):
 
 ```tql
 from {line: "alice\t30\tengineer"}
@@ -131,7 +132,7 @@ record = line.parse_tsv(header=["name", "age", "role"])
 
 ### SSV (space-separated)
 
-Use [`parse_ssv`](http://docs.tenzir.com/reference/functions/parse_ssv.md):
+Use [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md):
 
 ```tql
 from {line: "alice 30 engineer"}
@@ -151,7 +152,7 @@ record = line.parse_ssv(header=["name", "age", "role"])
 
 ### Custom delimiters
 
-Use [`parse_xsv`](http://docs.tenzir.com/reference/functions/parse_xsv.md) for arbitrary delimiters:
+Use [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md) for arbitrary delimiters:
 
 ```tql
 from {line: "alice|30|engineer|SF"}
@@ -177,7 +178,7 @@ record = line.parse_xsv(
 
 ## Parse YAML
 
-Use [`parse_yaml`](http://docs.tenzir.com/reference/functions/parse_yaml.md) for YAML content:
+Use [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md) for YAML content:
 
 ```tql
 from {config: "user: alice\nrole: admin\npermissions:\n  - read\n  - write"}
@@ -200,7 +201,7 @@ data = config.parse_yaml()
 
 ## Parse XML
 
-Use [`parse_xml`](http://docs.tenzir.com/reference/functions/parse_xml.md) with an XPath expression to extract elements from XML strings:
+Use [`parse_xml`](https://tenzir.com/docs/reference/functions/parse_xml.md) with an XPath expression to extract elements from XML strings:
 
 ```tql
 from {
@@ -224,7 +225,7 @@ Attributes are prefixed with `@` by default. Use `attr_prefix=""` to remove the 
 
 ## Parse Windows Event Logs
 
-Use [`parse_winlog`](http://docs.tenzir.com/reference/functions/parse_winlog.md) for Windows Event Log XML. It preserves the standard Windows event structure with `System` and `EventData` sections:
+Use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) for Windows Event Log XML. It preserves the standard Windows event structure with `System` and `EventData` sections:
 
 ```tql
 from {
@@ -267,7 +268,7 @@ event = xml.parse_winlog()
 
 ## Parse Syslog
 
-Use [`parse_syslog`](http://docs.tenzir.com/reference/functions/parse_syslog.md) for RFC 5424 and RFC 3164 syslog messages:
+Use [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md) for RFC 5424 and RFC 3164 syslog messages:
 
 ```tql
 from {line: "2024-01-15T10:30:45.123Z myhost myapp[1234]: User login failed"}
@@ -291,7 +292,7 @@ syslog = line.parse_syslog()
 
 ## Parse CEF
 
-Use [`parse_cef`](http://docs.tenzir.com/reference/functions/parse_cef.md) for Common Event Format logs from security tools:
+Use [`parse_cef`](https://tenzir.com/docs/reference/functions/parse_cef.md) for Common Event Format logs from security tools:
 
 ```tql
 from {log: "CEF:0|Security|Firewall|1.0|100|Connection Blocked|5|src=10.0.0.1 dst=192.168.1.1"}
@@ -319,7 +320,7 @@ event = log.parse_cef()
 
 ## Parse LEEF
 
-Use [`parse_leef`](http://docs.tenzir.com/reference/functions/parse_leef.md) for Log Event Extended Format (IBM QRadar):
+Use [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md) for Log Event Extended Format (IBM QRadar):
 
 ```tql
 from {log: "LEEF:1.0|Security|Firewall|1.0|100|src=10.0.0.1\tdst=192.168.1.1"}
@@ -345,7 +346,7 @@ event = log.parse_leef()
 
 ## Parse timestamps
 
-The [`time`](http://docs.tenzir.com/reference/functions/time.md) function auto-parses many common timestamp formats without requiring a format string:
+The [`time`](https://tenzir.com/docs/reference/functions/time.md) function auto-parses many common timestamp formats without requiring a format string:
 
 ```tql
 from {ts: "2024-01-15T10:30:45Z"}
@@ -373,7 +374,7 @@ timestamp = ts.time()
 }
 ```
 
-For non-standard formats, use [`parse_time`](http://docs.tenzir.com/reference/functions/parse_time.md) with an explicit format string:
+For non-standard formats, use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with an explicit format string:
 
 ```tql
 from {log: "Event at 15/01/2024"}
@@ -402,7 +403,7 @@ Common format specifiers:
 
 ## Parse with Grok patterns
 
-For complex formats, [`parse_grok`](http://docs.tenzir.com/reference/functions/parse_grok.md) provides powerful pattern matching:
+For complex formats, [`parse_grok`](https://tenzir.com/docs/reference/functions/parse_grok.md) provides powerful pattern matching:
 
 ```tql
 from {log: "2024-01-15 10:30:45 ERROR [UserService] Authentication failed"}

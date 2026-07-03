@@ -1,5 +1,6 @@
 # now
 
+> Gets the current wallclock time.
 
 Gets the current wallclock time.
 
@@ -39,7 +40,7 @@ select ts=now()
 
 ## See Also
 
-* [`from_epoch`](http://docs.tenzir.com/reference/functions/from_epoch.md)
-* [`since_epoch`](http://docs.tenzir.com/reference/functions/since_epoch.md)
+* [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md)
+* [`since_epoch`](https://tenzir.com/docs/reference/functions/since_epoch.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

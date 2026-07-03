@@ -1,5 +1,6 @@
 # concatenate
 
+> Merges two lists.
 
 Merges two lists.
 
@@ -52,9 +53,9 @@ right = concatenate(xs, [2])
 
 ## See Also
 
-* [`append`](http://docs.tenzir.com/reference/functions/append.md)
-* [`merge`](http://docs.tenzir.com/reference/functions/merge.md)
-* [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md)
-* [`zip`](http://docs.tenzir.com/reference/functions/zip.md)
+* [`append`](https://tenzir.com/docs/reference/functions/append.md)
+* [`merge`](https://tenzir.com/docs/reference/functions/merge.md)
+* [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md)
+* [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

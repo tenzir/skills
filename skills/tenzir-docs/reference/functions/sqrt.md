@@ -1,5 +1,6 @@
 # sqrt
 
+> Computes the square root of a number.
 
 Computes the square root of a number.
 

@@ -1,5 +1,6 @@
 # ai::prompt
 
+> Sends each input event to an OpenAI-compatible Responses API endpoint and adds the model response to the event.
 
 Sends each input event to an OpenAI-compatible Responses API endpoint and adds the model response to the event.
 
@@ -132,6 +133,6 @@ select summary=enrichment.ai.text,
 
 ## See Also
 
-* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
-* [`to_http`](http://docs.tenzir.com/reference/operators/to_http.md)
+* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
+* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
 * [Enrich events with AI](../../../guides/enrichment/enrich-events-with-ai.md)

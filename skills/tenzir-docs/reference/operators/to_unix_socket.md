@@ -1,5 +1,6 @@
 # to_unix_socket
 
+> Connects to a Unix domain socket and sends events.
 
 Connects to a Unix domain socket and sends events.
 
@@ -42,8 +43,8 @@ to_unix_socket "/run/collector.sock" { write_json }
 
 ## See Also
 
-* [`from_unix_socket`](http://docs.tenzir.com/reference/operators/from_unix_socket.md)
-* [`accept_unix_socket`](http://docs.tenzir.com/reference/operators/accept_unix_socket.md)
-* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
-* [`write_delimited`](http://docs.tenzir.com/reference/operators/write_delimited.md)
+* [`from_unix_socket`](https://tenzir.com/docs/reference/operators/from_unix_socket.md)
+* [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md)
+* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
+* [`write_delimited`](https://tenzir.com/docs/reference/operators/write_delimited.md)
 * [File](../../integrations/file.md)

@@ -1,5 +1,6 @@
 # yara
 
+> Executes YARA rules on byte streams.
 
 Executes YARA rules on byte streams.
 

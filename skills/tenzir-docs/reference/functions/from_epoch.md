@@ -1,5 +1,6 @@
 # from_epoch
 
+> Interprets a duration as Unix time.
 
 Interprets a duration as Unix time.
 
@@ -40,7 +41,7 @@ from {x: from_epoch(50y + 12w + 20m)}
 
 ## See Also
 
-* [`now`](http://docs.tenzir.com/reference/functions/now.md)
-* [`since_epoch`](http://docs.tenzir.com/reference/functions/since_epoch.md)
+* [`now`](https://tenzir.com/docs/reference/functions/now.md)
+* [`since_epoch`](https://tenzir.com/docs/reference/functions/since_epoch.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

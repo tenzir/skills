@@ -1,5 +1,6 @@
 # accept_elasticsearch
 
+> Accepts incoming Elasticsearch-compatible Bulk API requests and forwards them as events.
 
 Accepts incoming Elasticsearch-compatible Bulk API requests and forwards them as events.
 
@@ -12,7 +13,7 @@ accept_elasticsearch [url:string, keep_actions=bool, max_request_size=int,
 
 The `accept_elasticsearch` operator starts an HTTP server that accepts Elasticsearch-compatible bulk ingestion requests on `/_bulk` and `/{index}/_bulk`. OpenSearch clients can use the same endpoint.
 
-You can also use [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md) as an alias.
+You can also use [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md) as an alias.
 
 For each bulk request, the operator buffers the request body in memory, up to `max_request_size`, optionally decompresses it based on the HTTP `Content-Encoding` header, parses the NDJSON payload, and emits the resulting records as events.
 
@@ -91,7 +92,7 @@ accept_elasticsearch "0.0.0.0:8443",
 
 ## See Also
 
-* [`to_elasticsearch`](http://docs.tenzir.com/reference/operators/to_elasticsearch.md)
-* [`accept_opensearch`](http://docs.tenzir.com/reference/operators/accept_opensearch.md)
+* [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
+* [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
 * [OpenSearch](../../integrations/opensearch.md)

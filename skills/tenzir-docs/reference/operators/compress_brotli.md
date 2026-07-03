@@ -1,5 +1,6 @@
 # compress_brotli
 
+> Compresses a stream of bytes using Brotli compression.
 
 Compresses a stream of bytes using Brotli compression.
 
@@ -46,8 +47,8 @@ to_file "out.brotli" {
 
 ## See Also
 
-* [`compress_bz2`](http://docs.tenzir.com/reference/operators/compress_bz2.md)
-* [`compress_gzip`](http://docs.tenzir.com/reference/operators/compress_gzip.md)
-* [`compress_lz4`](http://docs.tenzir.com/reference/operators/compress_lz4.md)
-* [`compress_zstd`](http://docs.tenzir.com/reference/operators/compress_zstd.md)
-* [`decompress_brotli`](http://docs.tenzir.com/reference/operators/decompress_brotli.md)
+* [`compress_bz2`](https://tenzir.com/docs/reference/operators/compress_bz2.md)
+* [`compress_gzip`](https://tenzir.com/docs/reference/operators/compress_gzip.md)
+* [`compress_lz4`](https://tenzir.com/docs/reference/operators/compress_lz4.md)
+* [`compress_zstd`](https://tenzir.com/docs/reference/operators/compress_zstd.md)
+* [`decompress_brotli`](https://tenzir.com/docs/reference/operators/decompress_brotli.md)

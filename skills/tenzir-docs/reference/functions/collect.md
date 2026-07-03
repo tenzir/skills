@@ -1,5 +1,6 @@
 # collect
 
+> Creates a list of all non-null grouped values, preserving duplicates.
 
 Creates a list of all non-null grouped values, preserving duplicates.
 
@@ -30,6 +31,6 @@ summarize values=collect(x)
 
 ## See Also
 
-* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
-* [`sum`](http://docs.tenzir.com/reference/functions/sum.md)
+* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
+* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)

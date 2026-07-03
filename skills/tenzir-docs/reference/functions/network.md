@@ -1,5 +1,6 @@
 # network
 
+> Retrieves the network address of a subnet.
 
 Retrieves the network address of a subnet.
 

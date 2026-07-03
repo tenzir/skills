@@ -1,5 +1,6 @@
 # drop_matching
 
+> Removes top-level fields from a record when their names match a regular expression.
 
 Removes top-level fields from a record when their names match a regular expression.
 
@@ -73,8 +74,8 @@ select moved = this.select_matching($pattern),
 
 ## See Also
 
-* [`drop`](http://docs.tenzir.com/reference/operators/drop.md)
-* [`select_matching`](http://docs.tenzir.com/reference/functions/select_matching.md)
-* [`match_regex`](http://docs.tenzir.com/reference/functions/match_regex.md)
+* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
+* [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md)
+* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
 * [Shape records](../../guides/transformation/shape-records.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)

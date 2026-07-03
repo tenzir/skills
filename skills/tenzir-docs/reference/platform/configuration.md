@@ -1,5 +1,6 @@
-# Platform Configuration
+# Configuration
 
+> These settings configure the Tenzir Platform.
 
 These settings configure the Tenzir Platform.
 
@@ -237,7 +238,3 @@ workspaces:
             w: 12
             h: 12
 ```
-
-## Contents
-
-- [Command-line-interface](command-line-interface.md)

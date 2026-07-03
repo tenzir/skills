@@ -1,5 +1,6 @@
 # parse_tsv
 
+> Parses a string as tab separated values.
 
 Parses a string as tab separated values.
 
@@ -168,7 +169,7 @@ output = input.parse_tsv(header=["a","b","c"])
 
 ## See Also
 
-* [`read_tsv`](http://docs.tenzir.com/reference/operators/read_tsv.md)
-* [`parse_csv`](http://docs.tenzir.com/reference/functions/parse_csv.md)
-* [`parse_ssv`](http://docs.tenzir.com/reference/functions/parse_ssv.md)
-* [`parse_xsv`](http://docs.tenzir.com/reference/functions/parse_xsv.md)
+* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
+* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
+* [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md)
+* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)

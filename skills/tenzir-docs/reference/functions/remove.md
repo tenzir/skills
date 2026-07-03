@@ -1,5 +1,6 @@
 # remove
 
+> Removes all occurrences of an element from a list.
 
 Removes all occurrences of an element from a list.
 
@@ -56,8 +57,8 @@ xs = xs.remove("apple")
 
 ## See Also
 
-* [`add`](http://docs.tenzir.com/reference/functions/add.md)
-* [`append`](http://docs.tenzir.com/reference/functions/append.md)
-* [`distinct`](http://docs.tenzir.com/reference/functions/distinct.md)
-* [`prepend`](http://docs.tenzir.com/reference/functions/prepend.md)
+* [`add`](https://tenzir.com/docs/reference/functions/add.md)
+* [`append`](https://tenzir.com/docs/reference/functions/append.md)
+* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
+* [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md)
 * [Shape lists](../../guides/transformation/shape-lists.md)

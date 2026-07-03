@@ -1,5 +1,6 @@
 # Map to ASIM
 
+> This guide shows you how to map events to Microsoft Sentinel Advanced Security Information Model (ASIM) records in TQL. You’ll learn how to choose an ASIM schema, populate schema and product metadata, map role-prefixed fields, normalize event results, and preserve unmapped source fields.
 
 This guide shows you how to map events to Microsoft Sentinel Advanced Security Information Model (ASIM) records in TQL. You’ll learn how to choose an ASIM schema, populate schema and product metadata, map role-prefixed fields, normalize event results, and preserve unmapped source fields.
 
@@ -137,7 +138,7 @@ Use the same structure for larger mappings:
 
 ## See Also
 
-* [`to_azure_log_analytics`](http://docs.tenzir.com/reference/operators/to_azure_log_analytics.md)
+* [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md)
 * [Clean up values](clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-asim-skill)
 * [Map to CIM](map-to-cim.md)

@@ -1,5 +1,6 @@
 # starts_with
 
+> Checks whether a string starts with a specified substring.
 
 Checks whether a string starts with a specified substring.
 
@@ -43,7 +44,7 @@ from {
 
 ## See Also
 
-* [`ends_with`](http://docs.tenzir.com/reference/functions/ends_with.md)
+* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Manipulate strings](../../guides/transformation/manipulate-strings.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

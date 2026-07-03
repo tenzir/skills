@@ -1,5 +1,6 @@
-# Cloud Pub/Sub
+# Google Cloud Pub/Sub integration
 
+> Send, receive, and process messages between decoupled applications and services.
 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub) ingests events for streaming into BigQuery, data lakes, or operational databases. Tenzir can act as a publisher that sends messages to a topic, and as a subscriber that receives messages from a subscription.
 

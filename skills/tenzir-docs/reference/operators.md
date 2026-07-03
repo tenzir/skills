@@ -1,5 +1,6 @@
 # Operators
 
+> Tenzir comes with a wide range of built-in pipeline operators.
 
 Tenzir comes with a wide range of built-in pipeline operators.
 
@@ -1349,7 +1350,7 @@ read_auto fallback="lines"
 
 ### [read\_bitz](operators/read_bitz.md)
 
-Parses bytes as *BITZ* format.
+Parses bytes as \*BITZ\* format.
 
 ```tql
 read_bitz
@@ -1585,7 +1586,7 @@ write_all data
 
 ### [write\_bitz](operators/write_bitz.md)
 
-Writes events in *BITZ* format.
+Writes events in \*BITZ\* format.
 
 ```tql
 write_bitz
@@ -1633,7 +1634,7 @@ write_kv
 
 ### [write\_lines](operators/write_lines.md)
 
-Writes events as key-value pairsthe *values* of an event.
+Writes events as key-value pairsthe \*values\* of an event.
 
 ```tql
 write_lines

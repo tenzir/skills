@@ -1,5 +1,6 @@
 # buffer
 
+> An in-memory buffer to improve handling of data spikes in upstream operators.
 
 An in-memory buffer to improve handling of data spikes in upstream operators.
 
@@ -40,5 +41,5 @@ buffer 10M, policy="drop"
 
 ## See Also
 
-* [`cache`](http://docs.tenzir.com/reference/operators/cache.md)
+* [`cache`](https://tenzir.com/docs/reference/operators/cache.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)

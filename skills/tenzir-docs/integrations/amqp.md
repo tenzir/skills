@@ -1,5 +1,6 @@
-# AMQP
+# AMQP integration
 
+> Send and receive messages between systems using a standardized, protocol-based approach.
 
 The [Advanced Message Queuing Protocol (AMQP)](https://www.amqp.org/) is an open standard for message-oriented middleware. It defines how producers, exchanges, queues, and consumers route messages between systems.
 
@@ -29,10 +30,3 @@ By default, `to_amqp` sends each input event as NDJSON. Use the `message` parame
 from_amqp "amqp://admin:pass@0.0.0.1:5672/vhost", queue="events"
 this = string(message).parse_json()
 ```
-
-## Contents
-
-- [Fluent-bit](fluent-bit.md)
-- [Kafka](kafka.md)
-- [Nats](nats.md)
-- [Zeromq](zeromq.md)

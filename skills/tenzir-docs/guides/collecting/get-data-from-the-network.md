@@ -1,5 +1,6 @@
 # Get data from the network
 
+> This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets for incoming data and capture raw packets from network interfaces.
 
 This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets for incoming data and capture raw packets from network interfaces.
 
@@ -9,7 +10,7 @@ This guide shows you how to receive data directly from network sources using TQL
 
 ### Listen for connections
 
-Use [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md) to start a TCP server that accepts incoming connections:
+Use [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) to start a TCP server that accepts incoming connections:
 
 ```tql
 accept_tcp "0.0.0.0:9000" {
@@ -21,7 +22,7 @@ This listens on all interfaces (`0.0.0.0`) on port 9000. Specify a parsing pipel
 
 ### Accept multiple input formats
 
-Use [`read_auto`](http://docs.tenzir.com/reference/operators/read_auto.md) when a TCP endpoint receives data from producers that don’t all use the same format:
+Use [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) when a TCP endpoint receives data from producers that don’t all use the same format:
 
 ```tql
 accept_tcp "0.0.0.0:9000" {
@@ -29,11 +30,11 @@ accept_tcp "0.0.0.0:9000" {
 }
 ```
 
-The detector runs once per connection, so one client can send NDJSON while another sends CSV, Syslog, or another supported format. This pattern is useful for rapid prototyping, shared intake endpoints, and package pipelines where you want to normalize different producer formats after parsing. If most clients send long-lived plain-text streams, use [`read_lines`](http://docs.tenzir.com/reference/operators/read_lines.md) directly instead of waiting for [`read_auto`](http://docs.tenzir.com/reference/operators/read_auto.md) to finish probing.
+The detector runs once per connection, so one client can send NDJSON while another sends CSV, Syslog, or another supported format. This pattern is useful for rapid prototyping, shared intake endpoints, and package pipelines where you want to normalize different producer formats after parsing. If most clients send long-lived plain-text streams, use [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md) directly instead of waiting for [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) to finish probing.
 
 ### Connect to a remote server
 
-Use [`from_tcp`](http://docs.tenzir.com/reference/operators/from_tcp.md) to connect to an existing server:
+Use [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md) to connect to an existing server:
 
 ```tql
 from_tcp "192.168.1.100:9000" {
@@ -71,7 +72,7 @@ accept_tcp "0.0.0.0:514",
 }
 ```
 
-With `auto_detect_tls=true`, [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md) accepts both plaintext clients and clients that start with a TLS ClientHello on the same endpoint.
+With `auto_detect_tls=true`, [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) accepts both plaintext clients and clients that start with a TLS ClientHello on the same endpoint.
 
 ## UDP sockets
 
@@ -79,7 +80,7 @@ With `auto_detect_tls=true`, [`accept_tcp`](http://docs.tenzir.com/reference/ope
 
 ### Receive UDP datagrams
 
-Use [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md) to receive UDP messages as structured events:
+Use [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) to receive UDP messages as structured events:
 
 ```tql
 accept_udp "0.0.0.0:514"
@@ -114,7 +115,7 @@ this = {
 
 ## Packet capture
 
-Capture raw network packets with [Network Interface](../../integrations/nic.md) for deep packet inspection or network forensics.
+Capture raw network packets with [Network Interface Card](../../integrations/nic.md) for deep packet inspection or network forensics.
 
 ### List available interfaces
 
@@ -155,7 +156,7 @@ Each packet becomes an event with metadata and the raw packet data:
 
 ### Decapsulate packets
 
-Extract protocol headers from captured packets using the [`decapsulate`](http://docs.tenzir.com/reference/functions/decapsulate.md) function:
+Extract protocol headers from captured packets using the [`decapsulate`](https://tenzir.com/docs/reference/functions/decapsulate.md) function:
 
 ```tql
 from_nic "eth0" {
@@ -217,11 +218,11 @@ select
 
 ## See also
 
-* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
-* [`accept_udp`](http://docs.tenzir.com/reference/operators/accept_udp.md)
-* [`from_nic`](http://docs.tenzir.com/reference/operators/from_nic.md)
-* [`read_auto`](http://docs.tenzir.com/reference/operators/read_auto.md)
+* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
+* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
+* [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)
+* [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md)
 * [TCP](../../integrations/tcp.md)
 * [UDP](../../integrations/udp.md)
-* [Network Interface](../../integrations/nic.md)
+* [Network Interface Card](../../integrations/nic.md)
 * [Syslog](../../integrations/syslog.md)

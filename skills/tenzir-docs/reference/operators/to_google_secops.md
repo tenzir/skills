@@ -1,5 +1,6 @@
 # to_google_secops
 
+> Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.
 
 Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.
 
@@ -247,6 +248,6 @@ to_google_secops \
 
 ## See Also
 
-* [`to_google_cloud_logging`](http://docs.tenzir.com/reference/operators/to_google_cloud_logging.md)
+* [`to_google_cloud_logging`](https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md)
 * [Map to UDM](../../guides/normalization/map-to-udm.md)
-* [SecOps](../../integrations/google/secops.md)
+* [Google SecOps](../../integrations/google/secops.md)

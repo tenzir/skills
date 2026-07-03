@@ -1,5 +1,6 @@
 # from_microsoft_graph
 
+> Reads events from a Microsoft Graph collection.
 
 Reads events from a Microsoft Graph collection.
 
@@ -16,7 +17,7 @@ The operator uses Microsoft Entra client credentials to fetch access tokens, add
 The operator doesn’t inject its own `@` fields into emitted events. Microsoft Graph may include annotation fields on resource objects, and the operator handles them as follows:
 
 | Field         | Behavior                                                                           |
-| :------------ | :--------------------------------------------------------------------------------- |
+| ------------- | ---------------------------------------------------------------------------------- |
 | `@odata.etag` | Omitted from the emitted event when it appears as a top-level resource field.      |
 | `@odata.type` | Preserved because it can identify polymorphic Graph resource types.                |
 | `@removed`    | Preserved because delta query responses use it to mark deleted or removed objects. |
@@ -40,7 +41,7 @@ Microsoft Entra application credentials for app-only authentication.
 The `auth` record supports the following fields:
 
 | Field           | Type                 | Description                                                           |
-| :-------------- | :------------------- | :-------------------------------------------------------------------- |
+| --------------- | -------------------- | --------------------------------------------------------------------- |
 | `tenant_id`     | `string` or `secret` | The Microsoft Entra tenant ID or tenant domain.                       |
 | `client_id`     | `string` or `secret` | The application client ID.                                            |
 | `client_secret` | `string` or `secret` | The application client secret.                                        |
@@ -58,7 +59,7 @@ For example, Microsoft Graph supports `$select` for `users` and `groups` delta q
 The `odata` record supports the following fields:
 
 | Field    | Type                | Description                                             |
-| :------- | :------------------ | :------------------------------------------------------ |
+| -------- | ------------------- | ------------------------------------------------------- |
 | `filter` | `string`            | A `$filter` expression.                                 |
 | `select` | `list<string>`      | Fields to request with `$select`.                       |
 | `top`    | `uint64` or `int64` | The page size to request with `$top`; must be positive. |
@@ -148,5 +149,5 @@ from_microsoft_graph "users",
 
 ## See Also
 
-* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
+* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
 * [Graph](../../integrations/microsoft/graph.md)

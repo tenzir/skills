@@ -1,5 +1,6 @@
 # subnet
 
+> Converts an expression to a subnet value.
 
 Converts an expression to a subnet value.
 
@@ -66,17 +67,17 @@ from {x: subnet("2001:db8::1")}
 
 ## See Also
 
-* [`float`](http://docs.tenzir.com/reference/functions/float.md)
-* [`int`](http://docs.tenzir.com/reference/functions/int.md)
-* [`ip`](http://docs.tenzir.com/reference/functions/ip.md)
-* [`ip_category`](http://docs.tenzir.com/reference/functions/ip_category.md)
-* [`is_global`](http://docs.tenzir.com/reference/functions/is_global.md)
-* [`is_link_local`](http://docs.tenzir.com/reference/functions/is_link_local.md)
-* [`is_loopback`](http://docs.tenzir.com/reference/functions/is_loopback.md)
-* [`is_multicast`](http://docs.tenzir.com/reference/functions/is_multicast.md)
-* [`is_private`](http://docs.tenzir.com/reference/functions/is_private.md)
-* [`is_v4`](http://docs.tenzir.com/reference/functions/is_v4.md)
-* [`is_v6`](http://docs.tenzir.com/reference/functions/is_v6.md)
-* [`string`](http://docs.tenzir.com/reference/functions/string.md)
-* [`time`](http://docs.tenzir.com/reference/functions/time.md)
-* [`uint`](http://docs.tenzir.com/reference/functions/uint.md)
+* [`float`](https://tenzir.com/docs/reference/functions/float.md)
+* [`int`](https://tenzir.com/docs/reference/functions/int.md)
+* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
+* [`ip_category`](https://tenzir.com/docs/reference/functions/ip_category.md)
+* [`is_global`](https://tenzir.com/docs/reference/functions/is_global.md)
+* [`is_link_local`](https://tenzir.com/docs/reference/functions/is_link_local.md)
+* [`is_loopback`](https://tenzir.com/docs/reference/functions/is_loopback.md)
+* [`is_multicast`](https://tenzir.com/docs/reference/functions/is_multicast.md)
+* [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md)
+* [`is_v4`](https://tenzir.com/docs/reference/functions/is_v4.md)
+* [`is_v6`](https://tenzir.com/docs/reference/functions/is_v6.md)
+* [`string`](https://tenzir.com/docs/reference/functions/string.md)
+* [`time`](https://tenzir.com/docs/reference/functions/time.md)
+* [`uint`](https://tenzir.com/docs/reference/functions/uint.md)

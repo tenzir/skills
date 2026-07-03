@@ -1,5 +1,6 @@
 # print_ssv
 
+> Prints a record as a space-separated string of values.
 
 Prints a record as a space-separated string of values.
 
@@ -9,7 +10,7 @@ print_ssv(input:record, [list_separator=str, null_value=str]) -> string
 
 ## Description
 
-The `print_ssv` function prints a record's values as a space separated string.
+The `print_ssv` function prints a record’s values as a space separated string.
 
 ### `input: record`
 
@@ -19,13 +20,13 @@ The record you want to print.
 
 The string separating the elements in list fields.
 
-Defaults to `","`.
+Defaults to `“,”`.
 
 ### `null_value = str (optional)`
 
 The string denoting an absent value.
 
-Defaults to `"-"`.
+Defaults to `“-”`.
 
 ## Examples
 
@@ -47,5 +48,5 @@ output = this.print_ssv()
 
 ## See Also
 
-* [`write_ssv`](http://docs.tenzir.com/reference/operators/write_ssv.md)
-* [`parse_ssv`](http://docs.tenzir.com/reference/functions/parse_ssv.md)
+* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
+* [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md)

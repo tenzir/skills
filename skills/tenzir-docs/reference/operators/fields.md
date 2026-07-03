@@ -1,5 +1,6 @@
 # fields
 
+> Retrieves all fields stored at a node.
 
 Retrieves all fields stored at a node.
 
@@ -24,5 +25,5 @@ head 5
 
 ## See Also
 
-* [`schemas`](http://docs.tenzir.com/reference/operators/schemas.md)
+* [`schemas`](https://tenzir.com/docs/reference/operators/schemas.md)
 * [Show available schemas](../../guides/edge-storage/show-available-schemas.md)

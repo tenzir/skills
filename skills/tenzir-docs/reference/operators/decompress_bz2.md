@@ -1,5 +1,6 @@
 # decompress_bz2
 
+> Decompresses a stream of bytes in the Bzip2 format.
 
 Decompresses a stream of bytes in the Bzip2 format.
 
@@ -25,8 +26,8 @@ import
 
 ## See Also
 
-* [`compress_bz2`](http://docs.tenzir.com/reference/operators/compress_bz2.md)
-* [`decompress_brotli`](http://docs.tenzir.com/reference/operators/decompress_brotli.md)
-* [`decompress_gzip`](http://docs.tenzir.com/reference/operators/decompress_gzip.md)
-* [`decompress_lz4`](http://docs.tenzir.com/reference/operators/decompress_lz4.md)
-* [`decompress_zstd`](http://docs.tenzir.com/reference/operators/decompress_zstd.md)
+* [`compress_bz2`](https://tenzir.com/docs/reference/operators/compress_bz2.md)
+* [`decompress_brotli`](https://tenzir.com/docs/reference/operators/decompress_brotli.md)
+* [`decompress_gzip`](https://tenzir.com/docs/reference/operators/decompress_gzip.md)
+* [`decompress_lz4`](https://tenzir.com/docs/reference/operators/decompress_lz4.md)
+* [`decompress_zstd`](https://tenzir.com/docs/reference/operators/decompress_zstd.md)

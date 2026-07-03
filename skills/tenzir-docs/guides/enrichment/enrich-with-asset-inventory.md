@@ -2,7 +2,6 @@
 
 > Add asset inventory context to OCSF endpoint and user fields
 
-
 This guide shows you how to enrich OCSF events with asset inventory data from lookup tables. Use this pattern when you have CMDB exports, endpoint inventory, DHCP leases, cloud inventory, or network segment ownership data that should become part of the OCSF event.
 
 The baseline enrichment target is the OCSF `enrichments` array. Use it for general context. When inventory data describes a known OCSF object, such as `src_endpoint`, `dst_endpoint`, `device`, or `user`, write it into that object instead. This makes downstream queries easier because analysts can filter on standard OCSF fields instead of unpacking provider-specific enrichment blobs.
@@ -347,9 +346,9 @@ Use separate lookup tables for endpoint and user objects so each table can follo
 
 ## See Also
 
-* [`context::create_lookup_table`](http://docs.tenzir.com/reference/operators/context/create_lookup_table.md)
-* [`context::update`](http://docs.tenzir.com/reference/operators/context/update.md)
-* [`context::enrich`](http://docs.tenzir.com/reference/operators/context/enrich.md)
+* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
+* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
+* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
 * [Use lookup tables](use-lookup-tables.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

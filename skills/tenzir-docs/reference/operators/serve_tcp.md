@@ -1,5 +1,6 @@
 # serve_tcp
 
+> Listens for incoming TCP connections and sends events to all connected clients.
 
 Listens for incoming TCP connections and sends events to all connected clients.
 
@@ -76,7 +77,7 @@ serve_tcp "0.0.0.0:8443", tls={certfile: "cert.pem", keyfile: "key.pem"} {
 
 ## See Also
 
-* [`accept_tcp`](http://docs.tenzir.com/reference/operators/accept_tcp.md)
-* [`from_tcp`](http://docs.tenzir.com/reference/operators/from_tcp.md)
-* [`to_tcp`](http://docs.tenzir.com/reference/operators/to_tcp.md)
+* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
+* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md)
+* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
 * [TCP](../../integrations/tcp.md)

@@ -1,9 +1,10 @@
-# Graph
+# Graph integration
 
+> Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 
 Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 
-Use [`from_microsoft_graph`](http://docs.tenzir.com/reference/operators/from_microsoft_graph.md) to read events and inventory data from Microsoft Graph collection resources. The operator handles Microsoft Entra client-credentials authentication, emits each object from the OData `value` array, follows `@odata.nextLink` pagination, and uses a bounded default HTTP retry policy for throttling and transient service failures. When Microsoft Graph returns `Retry-After`, the operator waits for that duration before retrying. For resources that support Microsoft Graph delta queries, the operator can store the returned `@odata.deltaLink` in memory and poll for incremental changes.
+Use [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md) to read events and inventory data from Microsoft Graph collection resources. The operator handles Microsoft Entra client-credentials authentication, emits each object from the OData `value` array, follows `@odata.nextLink` pagination, and uses a bounded default HTTP retry policy for throttling and transient service failures. When Microsoft Graph returns `Retry-After`, the operator waits for that duration before retrying. For resources that support Microsoft Graph delta queries, the operator can store the returned `@odata.deltaLink` in memory and poll for incremental changes.
 
 Common security use cases include collecting Microsoft Entra audit and sign-in logs, reading users and groups for enrichment, and extracting inventory from Microsoft 365 services that expose collection resources through Microsoft Graph.
 
@@ -104,7 +105,7 @@ The `odata` options apply only to the initial delta request. Microsoft Graph dec
 
 ## See Also
 
-* [`from_microsoft_graph`](http://docs.tenzir.com/reference/operators/from_microsoft_graph.md)
-* [`from_http`](http://docs.tenzir.com/reference/operators/from_http.md)
-* [Defender](defender.md)
+* [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md)
+* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
+* [Microsoft Defender](defender.md)
 * [Sentinel & Log Analytics](sentinel-log-analytics.md)

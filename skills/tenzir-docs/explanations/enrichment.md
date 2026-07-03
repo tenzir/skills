@@ -1,5 +1,6 @@
 # Enrichment
 
+> Enrichment means adding contextual data to events. The purpose of this added context is to allow for making better decisions, e.g., to triage alerts and weed out false positive, to leverage country information to classify logins as malicious, or to flag a sighting of an indicator of compromise.
 
 Enrichment means adding contextual data to events. The purpose of this added context is to allow for making better decisions, e.g., to triage alerts and weed out false positive, to leverage country information to classify logins as malicious, or to flag a sighting of an indicator of compromise.
 
@@ -65,7 +66,7 @@ Per-key timeouts come in handy when you want to associate lifetimes with observa
 
 Lookup tables offer more than just entries with static values. You can also aggregate into values with [aggregation functions](../reference/functions.md#aggregation). In this case an update of a table entry does not write the new value directly, but rather hands that value to the configured aggregation function, which in turn updates the table value.
 
-For example, the `min` aggregation function computes the minimum over its values. Consider a sequence of context updates with values `3`, `4`, `2`, `3`, `1` for the updated key. Then the value after each update would be `3`, `3`, `2`, `2`, `1`. The example below uses `min` and `max` to implement a first-seen and last-seen timestamps—a common pattern during entity tracking.
+For example, the `min` aggregation function computes the minimum over its values. Consider a sequence of context updates with values `3`, `4`, `2`, `3`, `1` for the updated key. Then the value after each update would be `3`, `3`, `2`, `2`, `1`. The example below uses `min` and `max` to implement a first-seen and last-seen timestamps - a common pattern during entity tracking.
 
 Passive Inventorization
 
@@ -73,7 +74,7 @@ Aggregating into table values instead of just overwriting the value has a pletho
 
 ### Bloom Filter
 
-[Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) are a space-efficient representation of a set. In case you have a massive number of elements but only need to check for set membership. However, the compact spatial representation comes at a cost of a false probability during lookup. You can think of it as a [lookup table](#lookup-table) without values—just keys, but where looking up a key may say “yes” even though the key doesn’t actually exist. The probability of this happening is fortunately configurable.
+[Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) are a space-efficient representation of a set. In case you have a massive number of elements but only need to check for set membership. However, the compact spatial representation comes at a cost of a false probability during lookup. You can think of it as a [lookup table](enrichment.md#lookup-table) without values - just keys, but where looking up a key may say “yes” even though the key doesn’t actually exist. The probability of this happening is fortunately configurable.
 
 A Bloom filter has two tuning knobs:
 
