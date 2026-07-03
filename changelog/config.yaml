@@ -4,3 +4,4 @@ description: >-
   Reusable agent skills that help Tenzir users and contributors work with
   documentation, code review, releases, and project workflows.
 repository: tenzir/skills
+require_pr: true
