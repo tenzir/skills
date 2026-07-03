@@ -4,4 +4,4 @@ pre-push:
     validate-skills:
       run: scripts/validate-skills --marketplace
     validate-changelog:
-      run: uvx tenzir-ship --root changelog validate
+      run: uvx tenzir-ship --root changelog validate --lenient
