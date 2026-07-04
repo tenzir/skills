@@ -10,7 +10,7 @@ Use this skill to choose the right ASIM schema, inspect normalized fields, resol
 
 The generated YAML files are the authoritative reference for this skill.
 If a field, alias, enum value, schema version, condition, or schema behavior is not present in the YAML data, say that it is not documented here.
-Use [source.md](source.md) only as the final provenance anchor for the pinned Microsoft Defender Docs commit and raw Markdown copies.
+Use [source.md](source.md) only as the final provenance anchor for the requested Microsoft Defender Docs ref and raw Markdown copies.
 
 ## How ASIM fits together
 
@@ -84,4 +84,4 @@ Use field files only when you need a cross-schema view of one field.
 | How do user/device/application roles map? | Role-prefix table above, then the selected schema file |
 | What raw Microsoft source backs this data? | [source.md](source.md) |
 
-For provenance, the pinned Microsoft Defender Docs commit, and raw source copies, use [source.md](source.md) as the last anchor.
+For provenance, the requested Microsoft Defender Docs ref, and raw source copies, use [source.md](source.md) as the last anchor.
