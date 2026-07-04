@@ -5,6 +5,13 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 🗂️ Skills
 
+### 🛡️ Tenzir Users
+
+- `tenzir`: Tenzir documentation — TQL, operators, functions, integrations,
+  deployment — plus entry points to the changelog, blog, and product pages
+- `tenzir-manage-packages`: Package lifecycle routing for manifests, UDOs,
+  pipelines, tests, and mappings
+
 ### 🧬 Schemas
 
 - `tenzir-asim`: Microsoft Sentinel ASIM reference — schemas, fields,
@@ -23,13 +30,6 @@ Skills for coding agents in the Tenzir ecosystem, built on the
   profiles, extensions
 - `tenzir-udm`: Google SecOps UDM schema and normalization guidance —
   fields, event/entity types
-
-### 🛡️ Tenzir Users
-
-- `tenzir`: Tenzir documentation — TQL, operators, functions, integrations,
-  deployment — plus entry points to the changelog, blog, and product pages
-- `tenzir-manage-packages`: Package lifecycle routing for manifests, UDOs,
-  pipelines, tests, and mappings
 
 ### 🏗️ Tenzir Contributors
 
