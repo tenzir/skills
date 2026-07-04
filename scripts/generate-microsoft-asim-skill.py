@@ -177,8 +177,8 @@ def raw_url(sha: str, path: str) -> str:
     return f"{GITHUB_RAW}/{sha}/{path}"
 
 
-def blob_url(sha: str, path: str) -> str:
-    return f"{GITHUB_BLOB}/{sha}/{path}"
+def blob_url(ref: str, path: str) -> str:
+    return f"{GITHUB_BLOB}/{ref}/{path}"
 
 
 def fetch_doc(client: httpx.Client, source: SourceRef, path: str) -> RawDoc:
@@ -1207,7 +1207,7 @@ def render_skill_markdown(reference: AsimReference) -> str:
                 "",
                 "The generated YAML files are the authoritative reference for this skill.",
                 "If a field, alias, enum value, schema version, condition, or schema behavior is not present in the YAML data, say that it is not documented here.",
-                "Use [source.md](source.md) only as the final provenance anchor for the pinned Microsoft Defender Docs commit and raw Markdown copies.",
+                "Use [source.md](source.md) only as the final provenance anchor for the requested Microsoft Defender Docs ref and raw Markdown copies.",
                 "",
                 "## How ASIM fits together",
                 "",
@@ -1281,7 +1281,7 @@ def render_skill_markdown(reference: AsimReference) -> str:
                 "| How do user/device/application roles map? | Role-prefix table above, then the selected schema file |",
                 "| What raw Microsoft source backs this data? | [source.md](source.md) |",
                 "",
-                "For provenance, the pinned Microsoft Defender Docs commit, and raw source copies, use [source.md](source.md) as the last anchor.",
+                "For provenance, the requested Microsoft Defender Docs ref, and raw source copies, use [source.md](source.md) as the last anchor.",
                 "",
             ]
         )
@@ -1299,8 +1299,7 @@ def render_source_page(reference: AsimReference) -> str:
         "This skill is generated from Microsoft Defender Docs Markdown. The generated YAML files are the primary agent-facing reference; use this page only when provenance or raw source lookup is needed.",
         "",
         f"- **Requested docs ref**: `{reference.source.ref}`",
-        f"- **Resolved Defender Docs commit**: `{reference.source.sha}`",
-        f"- **Schema catalog source path**: {source_copy_link(reference.catalog.path)} ([upstream]({blob_url(reference.source.sha, reference.catalog.path)}))",
+        f"- **Schema catalog source path**: {source_copy_link(reference.catalog.path)} ([upstream]({blob_url(reference.source.ref, reference.catalog.path)}))",
         f"- **Event schemas**: `{event_schema_count}`",
         f"- **Entity schemas**: `{entity_schema_count}`",
         f"- **Generated schemas**: `{len(reference.schemas)}`",
@@ -1309,6 +1308,7 @@ def render_source_page(reference: AsimReference) -> str:
         f"- **Alias field records**: `{alias_count(reference)}`",
         "",
         "Raw Microsoft Defender Docs Markdown is copied under `docs/sentinel/` for audit and parser debugging.",
+        "Upstream links point at the requested docs ref so scheduled rebuilds do not churn when only the resolved upstream commit changes.",
         "",
         "## Schema source paths",
         "",
@@ -1316,12 +1316,12 @@ def render_source_page(reference: AsimReference) -> str:
     for schema in sorted(reference.schemas, key=lambda item: (item.kind, item.name.casefold())):
         lines.append(
             f"- {data_schema_link(schema)}: {source_copy_link(schema.source.path)} "
-            f"([upstream]({blob_url(reference.source.sha, schema.source.path)}))"
+            f"([upstream]({blob_url(reference.source.ref, schema.source.path)}))"
         )
     lines.extend(["", "## Supporting source paths", ""])
-    lines.append(f"- {source_copy_link(reference.catalog.path)} ([upstream]({blob_url(reference.source.sha, reference.catalog.path)}))")
+    lines.append(f"- {source_copy_link(reference.catalog.path)} ([upstream]({blob_url(reference.source.ref, reference.catalog.path)}))")
     for source in sorted(reference.supporting_sources, key=lambda item: item.path):
-        lines.append(f"- {source_copy_link(source.path)} ([upstream]({blob_url(reference.source.sha, source.path)}))")
+        lines.append(f"- {source_copy_link(source.path)} ([upstream]({blob_url(reference.source.ref, source.path)}))")
     return clean_markdown("\n".join(lines))
 
 
