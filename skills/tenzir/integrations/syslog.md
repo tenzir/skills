@@ -1,3 +1,11 @@
+---
+title: "Syslog integration"
+description: "Send and receive Syslog over UDP, TCP, and other protocols."
+canonical: https://tenzir.com/integrations/syslog
+source: https://tenzir.com/integrations/syslog.md
+section: "Integrations"
+---
+
 # Syslog integration
 
 > Send and receive Syslog over UDP, TCP, and other protocols.

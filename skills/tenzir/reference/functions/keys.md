@@ -1,3 +1,10 @@
+---
+title: "keys"
+canonical: https://tenzir.com/docs/reference/functions/keys
+source: https://tenzir.com/docs/reference/functions/keys.md
+section: "Docs"
+---
+
 # keys
 
 > Retrieves a list of field names from a record.

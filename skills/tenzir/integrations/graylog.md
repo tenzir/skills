@@ -1,3 +1,11 @@
+---
+title: "Graylog integration"
+description: "Collect, index, and analyze log data for monitoring and troubleshooting."
+canonical: https://tenzir.com/integrations/graylog
+source: https://tenzir.com/integrations/graylog.md
+section: "Integrations"
+---
+
 # Graylog integration
 
 > Collect, index, and analyze log data for monitoring and troubleshooting.

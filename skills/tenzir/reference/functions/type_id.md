@@ -1,3 +1,10 @@
+---
+title: "type_id"
+canonical: https://tenzir.com/docs/reference/functions/type_id
+source: https://tenzir.com/docs/reference/functions/type_id.md
+section: "Docs"
+---
+
 # type_id
 
 > Retrieves the type id of an expression.

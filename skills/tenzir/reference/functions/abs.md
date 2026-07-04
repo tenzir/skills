@@ -1,3 +1,10 @@
+---
+title: "abs"
+canonical: https://tenzir.com/docs/reference/functions/abs
+source: https://tenzir.com/docs/reference/functions/abs.md
+section: "Docs"
+---
+
 # abs
 
 > Returns the absolute value.

@@ -1,3 +1,10 @@
+---
+title: "read_gelf"
+canonical: https://tenzir.com/docs/reference/operators/read_gelf
+source: https://tenzir.com/docs/reference/operators/read_gelf.md
+section: "Docs"
+---
+
 # read_gelf
 
 > Parses an incoming GELF stream into events.

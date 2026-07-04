@@ -1,3 +1,10 @@
+---
+title: "random"
+canonical: https://tenzir.com/docs/reference/functions/random
+source: https://tenzir.com/docs/reference/functions/random.md
+section: "Docs"
+---
+
 # random
 
 > Generates a random number in \[0,1].

@@ -1,3 +1,10 @@
+---
+title: "from_tcp"
+canonical: https://tenzir.com/docs/reference/operators/from_tcp
+source: https://tenzir.com/docs/reference/operators/from_tcp.md
+section: "Docs"
+---
+
 # from_tcp
 
 > Connects to a remote TCP or TLS endpoint and receives events.

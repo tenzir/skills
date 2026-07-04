@@ -1,3 +1,10 @@
+---
+title: "Learn idiomatic TQL"
+canonical: https://tenzir.com/docs/tutorials/learn-idiomatic-tql
+source: https://tenzir.com/docs/tutorials/learn-idiomatic-tql.md
+section: "Docs"
+---
+
 # Learn idiomatic TQL
 
 > This tutorial teaches you to write TQL that is clear, efficient, and maintainable. It assumes you already know basic TQL syntax and operators, and shows you how experienced TQL developers approach common patterns.

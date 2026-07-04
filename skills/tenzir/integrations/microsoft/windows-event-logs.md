@@ -1,3 +1,11 @@
+---
+title: "Microsoft Windows Event Logs integration"
+description: "Collects Security, System, Application, and other critical OS logs."
+canonical: https://tenzir.com/integrations/microsoft/windows-event-logs
+source: https://tenzir.com/integrations/microsoft/windows-event-logs.md
+section: "Integrations"
+---
+
 # Microsoft Windows Event Logs integration
 
 > Collects Security, System, Application, and other critical OS logs.

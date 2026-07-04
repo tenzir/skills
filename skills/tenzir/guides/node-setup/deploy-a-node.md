@@ -1,3 +1,10 @@
+---
+title: "Deploy a node"
+canonical: https://tenzir.com/docs/guides/node-setup/deploy-a-node
+source: https://tenzir.com/docs/guides/node-setup/deploy-a-node.md
+section: "Docs"
+---
+
 # Deploy a node
 
 > Deploying a node means spinning it up in one of the supported runtimes. The primary choice is between a containerized with Docker or a native deployment with our static binary that runs on amd64 and arm64 architectures.

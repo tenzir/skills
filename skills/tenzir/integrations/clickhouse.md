@@ -1,3 +1,11 @@
+---
+title: "ClickHouse integration"
+description: "Send structured events to ClickHouse tables."
+canonical: https://tenzir.com/integrations/clickhouse
+source: https://tenzir.com/integrations/clickhouse.md
+section: "Integrations"
+---
+
 # ClickHouse integration
 
 > Send structured events to ClickHouse tables.

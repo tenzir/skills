@@ -1,3 +1,10 @@
+---
+title: "round"
+canonical: https://tenzir.com/docs/reference/functions/round
+source: https://tenzir.com/docs/reference/functions/round.md
+section: "Docs"
+---
+
 # round
 
 > Rounds a number or a time/duration with a specified unit.

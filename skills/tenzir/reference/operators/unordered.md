@@ -1,3 +1,10 @@
+---
+title: "unordered"
+canonical: https://tenzir.com/docs/reference/operators/unordered
+source: https://tenzir.com/docs/reference/operators/unordered.md
+section: "Docs"
+---
+
 # unordered
 
 > Removes ordering assumptions from a pipeline.

@@ -1,3 +1,10 @@
+---
+title: "uint"
+canonical: https://tenzir.com/docs/reference/functions/uint
+source: https://tenzir.com/docs/reference/functions/uint.md
+section: "Docs"
+---
+
 # uint
 
 > Casts an expression to an unsigned integer.

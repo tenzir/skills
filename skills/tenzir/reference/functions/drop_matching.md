@@ -1,3 +1,10 @@
+---
+title: "drop_matching"
+canonical: https://tenzir.com/docs/reference/functions/drop_matching
+source: https://tenzir.com/docs/reference/functions/drop_matching.md
+section: "Docs"
+---
+
 # drop_matching
 
 > Removes top-level fields from a record when their names match a regular expression.

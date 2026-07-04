@@ -1,3 +1,10 @@
+---
+title: "bit_and"
+canonical: https://tenzir.com/docs/reference/functions/bit_and
+source: https://tenzir.com/docs/reference/functions/bit_and.md
+section: "Docs"
+---
+
 # bit_and
 
 > Computes the bit-wise AND of its arguments.

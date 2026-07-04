@@ -1,3 +1,10 @@
+---
+title: "Delete Auth Function"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/delete-auth-function
+source: https://tenzir.com/docs/reference/api/platform/admin/delete-auth-function.md
+section: "Docs"
+---
+
 # Delete Auth Function
 
 > post/admin/delete-auth-function

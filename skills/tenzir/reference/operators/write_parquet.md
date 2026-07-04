@@ -1,3 +1,10 @@
+---
+title: "write_parquet"
+canonical: https://tenzir.com/docs/reference/operators/write_parquet
+source: https://tenzir.com/docs/reference/operators/write_parquet.md
+section: "Docs"
+---
+
 # write_parquet
 
 > Transforms event stream to a Parquet byte stream.

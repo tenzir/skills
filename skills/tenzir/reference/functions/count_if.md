@@ -1,3 +1,10 @@
+---
+title: "count_if"
+canonical: https://tenzir.com/docs/reference/functions/count_if
+source: https://tenzir.com/docs/reference/functions/count_if.md
+section: "Docs"
+---
+
 # count_if
 
 > Counts the events or non-null grouped values matching a given predicate.

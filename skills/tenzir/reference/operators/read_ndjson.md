@@ -1,3 +1,10 @@
+---
+title: "read_ndjson"
+canonical: https://tenzir.com/docs/reference/operators/read_ndjson
+source: https://tenzir.com/docs/reference/operators/read_ndjson.md
+section: "Docs"
+---
+
 # read_ndjson
 
 > Parses an incoming NDJSON (newline-delimited JSON) stream into events.

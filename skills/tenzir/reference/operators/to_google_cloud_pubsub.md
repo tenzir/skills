@@ -1,3 +1,10 @@
+---
+title: "to_google_cloud_pubsub"
+canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub
+source: https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub.md
+section: "Docs"
+---
+
 # to_google_cloud_pubsub
 
 > Publishes events to a Google Cloud Pub/Sub topic.

@@ -1,3 +1,10 @@
+---
+title: "is_empty"
+canonical: https://tenzir.com/docs/reference/functions/is_empty
+source: https://tenzir.com/docs/reference/functions/is_empty.md
+section: "Docs"
+---
+
 # is_empty
 
 > Checks whether a value is empty.

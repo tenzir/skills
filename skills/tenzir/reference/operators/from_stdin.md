@@ -1,3 +1,10 @@
+---
+title: "from_stdin"
+canonical: https://tenzir.com/docs/reference/operators/from_stdin
+source: https://tenzir.com/docs/reference/operators/from_stdin.md
+section: "Docs"
+---
+
 # from_stdin
 
 > Reads and parses events from standard input.

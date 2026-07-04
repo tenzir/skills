@@ -1,3 +1,10 @@
+---
+title: "Map data to OCSF"
+canonical: https://tenzir.com/docs/tutorials/map-data-to-ocsf
+source: https://tenzir.com/docs/tutorials/map-data-to-ocsf.md
+section: "Docs"
+---
+
 # Map data to OCSF
 
 > In this tutorial you’ll learn how to map events to Open Cybersecurity Schema Framework (OCSF). We walk you through an example of events from a network monitor and show how you can use Tenzir pipelines to transform them into OCSF-compliant events.

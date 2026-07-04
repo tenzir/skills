@@ -1,3 +1,10 @@
+---
+title: "Generate Download Url"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/generate-download-url
+source: https://tenzir.com/docs/reference/api/platform/nodes/generate-download-url.md
+section: "Docs"
+---
+
 # Generate Download Url
 
 > post/user/generate-download-url

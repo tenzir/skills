@@ -1,3 +1,10 @@
+---
+title: "processes"
+canonical: https://tenzir.com/docs/reference/operators/processes
+source: https://tenzir.com/docs/reference/operators/processes.md
+section: "Docs"
+---
+
 # processes
 
 > Shows a snapshot of running processes.

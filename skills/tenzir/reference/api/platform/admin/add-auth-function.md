@@ -1,3 +1,10 @@
+---
+title: "Add Auth Function"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/add-auth-function
+source: https://tenzir.com/docs/reference/api/platform/admin/add-auth-function.md
+section: "Docs"
+---
+
 # Add Auth Function
 
 > post/admin/add-auth-function

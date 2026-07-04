@@ -1,3 +1,10 @@
+---
+title: "print_kv"
+canonical: https://tenzir.com/docs/reference/functions/print_kv
+source: https://tenzir.com/docs/reference/functions/print_kv.md
+section: "Docs"
+---
+
 # print_kv
 
 > Prints records in a key-value format.

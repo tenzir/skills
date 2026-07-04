@@ -1,3 +1,10 @@
+---
+title: "Write a package"
+canonical: https://tenzir.com/docs/tutorials/write-a-package
+source: https://tenzir.com/docs/tutorials/write-a-package.md
+section: "Docs"
+---
+
 # Write a package
 
 > This tutorial teaches you how packages bundle pipelines, operators, contexts, and examples. You’ll build a package for an SSL blacklist that detects malicious certificates. You can then install packages from the Tenzir Library or deploy them as code.

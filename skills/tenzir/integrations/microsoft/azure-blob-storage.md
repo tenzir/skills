@@ -1,3 +1,11 @@
+---
+title: "Azure Blob Storage integration"
+description: "Store, retrieve, and manage unstructured data at scale."
+canonical: https://tenzir.com/integrations/microsoft/azure-blob-storage
+source: https://tenzir.com/integrations/microsoft/azure-blob-storage.md
+section: "Integrations"
+---
+
 # Azure Blob Storage integration
 
 > Store, retrieve, and manage unstructured data at scale.

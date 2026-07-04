@@ -1,3 +1,10 @@
+---
+title: "cron"
+canonical: https://tenzir.com/docs/reference/operators/cron
+source: https://tenzir.com/docs/reference/operators/cron.md
+section: "Docs"
+---
+
 # cron
 
 > Runs a pipeline periodically according to a cron expression.

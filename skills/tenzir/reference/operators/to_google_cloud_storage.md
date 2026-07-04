@@ -1,3 +1,10 @@
+---
+title: "to_google_cloud_storage"
+canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_storage
+source: https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md
+section: "Docs"
+---
+
 # to_google_cloud_storage
 
 > Writes events to one or multiple objects in Google Cloud Storage.

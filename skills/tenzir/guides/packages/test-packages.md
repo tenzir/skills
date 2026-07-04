@@ -1,3 +1,10 @@
+---
+title: "Test packages"
+canonical: https://tenzir.com/docs/guides/packages/test-packages
+source: https://tenzir.com/docs/guides/packages/test-packages.md
+section: "Docs"
+---
+
 # Test packages
 
 > This guide shows you how to add tests to your package. You’ll learn how to write test files, use inline inputs, and run the test harness.

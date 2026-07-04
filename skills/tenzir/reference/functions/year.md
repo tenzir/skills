@@ -1,3 +1,10 @@
+---
+title: "year"
+canonical: https://tenzir.com/docs/reference/functions/year
+source: https://tenzir.com/docs/reference/functions/year.md
+section: "Docs"
+---
+
 # year
 
 > Extracts the year component from a timestamp.

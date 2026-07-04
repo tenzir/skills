@@ -1,3 +1,10 @@
+---
+title: "Create Node"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/create-node
+source: https://tenzir.com/docs/reference/api/platform/nodes/create-node.md
+section: "Docs"
+---
+
 # Create Node
 
 > post/user/create-node

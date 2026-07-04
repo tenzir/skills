@@ -1,3 +1,10 @@
+---
+title: "Get Login Info"
+canonical: https://tenzir.com/docs/reference/api/platform/account/get-login-info
+source: https://tenzir.com/docs/reference/api/platform/account/get-login-info.md
+section: "Docs"
+---
+
 # Get Login Info
 
 > post/user/get-login-info

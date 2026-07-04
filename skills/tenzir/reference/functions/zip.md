@@ -1,3 +1,10 @@
+---
+title: "zip"
+canonical: https://tenzir.com/docs/reference/functions/zip
+source: https://tenzir.com/docs/reference/functions/zip.md
+section: "Docs"
+---
+
 # zip
 
 > Combines two lists into a list of pairs.

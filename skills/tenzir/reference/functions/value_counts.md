@@ -1,3 +1,10 @@
+---
+title: "value_counts"
+canonical: https://tenzir.com/docs/reference/functions/value_counts
+source: https://tenzir.com/docs/reference/functions/value_counts.md
+section: "Docs"
+---
+
 # value_counts
 
 > Returns a list of all grouped values alongside their frequency.

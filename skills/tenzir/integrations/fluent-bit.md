@@ -1,3 +1,11 @@
+---
+title: "Fluent Bit integration"
+description: "Collect, process, and forward logs and metrics from various sources to many sinks."
+canonical: https://tenzir.com/integrations/fluent-bit
+source: https://tenzir.com/integrations/fluent-bit.md
+section: "Integrations"
+---
+
 # Fluent Bit integration
 
 > Collect, process, and forward logs and metrics from various sources to many sinks.

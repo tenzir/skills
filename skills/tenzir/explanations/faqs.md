@@ -1,3 +1,10 @@
+---
+title: "FAQs"
+canonical: https://tenzir.com/docs/explanations/faqs
+source: https://tenzir.com/docs/explanations/faqs.md
+section: "Docs"
+---
+
 # FAQs
 
 > This page answers frequently asked questions about Tenzir.

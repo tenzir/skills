@@ -1,3 +1,10 @@
+---
+title: "Use ephemeral nodes"
+canonical: https://tenzir.com/docs/guides/platform-management/use-ephemeral-nodes
+source: https://tenzir.com/docs/guides/platform-management/use-ephemeral-nodes.md
+section: "Docs"
+---
+
 # Use ephemeral nodes
 
 > An ephemeral node is ideal for temporary or auto-scaling deployments. It is a temporary node that you do not have to provision manually first, and it disappears from the workspace when the connection to the platform ends.

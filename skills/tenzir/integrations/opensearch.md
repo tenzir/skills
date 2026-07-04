@@ -1,3 +1,11 @@
+---
+title: "OpenSearch integration"
+description: "Search, analyze, and visualize data with a distributed, open-source platform."
+canonical: https://tenzir.com/integrations/opensearch
+source: https://tenzir.com/integrations/opensearch.md
+section: "Integrations"
+---
+
 # OpenSearch integration
 
 > Search, analyze, and visualize data with a distributed, open-source platform.

@@ -1,3 +1,10 @@
+---
+title: "Update Tenant Name"
+canonical: https://tenzir.com/docs/reference/api/platform/tenant/rename-tenant
+source: https://tenzir.com/docs/reference/api/platform/tenant/rename-tenant.md
+section: "Docs"
+---
+
 # Update Tenant Name
 
 > post/user/rename-tenant

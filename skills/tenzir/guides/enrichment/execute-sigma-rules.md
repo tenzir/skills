@@ -1,3 +1,11 @@
+---
+title: "Execute Sigma rules"
+description: "Run Sigma detection rules on parsed Windows Event Logs and OCSF process events"
+canonical: https://tenzir.com/docs/guides/enrichment/execute-sigma-rules
+source: https://tenzir.com/docs/guides/enrichment/execute-sigma-rules.md
+section: "Docs"
+---
+
 # Execute Sigma rules
 
 > Run Sigma detection rules on parsed Windows Event Logs and OCSF process events

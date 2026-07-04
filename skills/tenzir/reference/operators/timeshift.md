@@ -1,3 +1,10 @@
+---
+title: "timeshift"
+canonical: https://tenzir.com/docs/reference/operators/timeshift
+source: https://tenzir.com/docs/reference/operators/timeshift.md
+section: "Docs"
+---
+
 # timeshift
 
 > Adjusts timestamps relative to a given start time, with an optional speedup.

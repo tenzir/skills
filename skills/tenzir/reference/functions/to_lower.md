@@ -1,3 +1,10 @@
+---
+title: "to_lower"
+canonical: https://tenzir.com/docs/reference/functions/to_lower
+source: https://tenzir.com/docs/reference/functions/to_lower.md
+section: "Docs"
+---
+
 # to_lower
 
 > Converts a string to lowercase.

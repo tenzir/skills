@@ -1,3 +1,10 @@
+---
+title: "write_delimited"
+canonical: https://tenzir.com/docs/reference/operators/write_delimited
+source: https://tenzir.com/docs/reference/operators/write_delimited.md
+section: "Docs"
+---
+
 # write_delimited
 
 > Frames string or blob event values as a byte stream with a separator after each value.

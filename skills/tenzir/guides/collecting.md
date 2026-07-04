@@ -1,3 +1,10 @@
+---
+title: "Overview"
+canonical: https://tenzir.com/docs/guides/collecting
+source: https://tenzir.com/docs/guides/collecting.md
+section: "Docs"
+---
+
 # Overview
 
 > This guide provides an overview of data collection in TQL. You’ll learn about the different approaches for ingesting data from various sources.

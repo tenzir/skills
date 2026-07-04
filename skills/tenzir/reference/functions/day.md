@@ -1,3 +1,10 @@
+---
+title: "day"
+canonical: https://tenzir.com/docs/reference/functions/day
+source: https://tenzir.com/docs/reference/functions/day.md
+section: "Docs"
+---
+
 # day
 
 > Extracts the day component from a timestamp.

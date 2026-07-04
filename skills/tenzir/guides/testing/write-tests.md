@@ -1,3 +1,10 @@
+---
+title: "Write tests"
+canonical: https://tenzir.com/docs/guides/testing/write-tests
+source: https://tenzir.com/docs/guides/testing/write-tests.md
+section: "Docs"
+---
+
 # Write tests
 
 > This guide shows you how to create integration tests with the tenzir-test framework. You’ll set up a standalone repository, write test scenarios, and record reference output to verify your pipelines work as expected. If you already have tests and want to run them, see the run tests guide.
@@ -200,9 +207,7 @@ timeout: 10
 
 
 // Get the version from the running node.
-remote {
-  version
-}
+version
 ```
 
 Because the test needs a node to run, include the built-in `node` fixture and give it a reasonable timeout. The fixture starts `tenzir-node`, injects connection details into the environment, and tears the process down after the run. Capture the baseline via `--update` just like before.

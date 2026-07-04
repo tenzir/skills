@@ -1,3 +1,10 @@
+---
+title: "Collect metrics"
+canonical: https://tenzir.com/docs/guides/analytics/collect-metrics
+source: https://tenzir.com/docs/guides/analytics/collect-metrics.md
+section: "Docs"
+---
+
 # Collect metrics
 
 > Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.

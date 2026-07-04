@@ -1,3 +1,10 @@
+---
+title: "context::reset"
+canonical: https://tenzir.com/docs/reference/operators/context/reset
+source: https://tenzir.com/docs/reference/operators/context/reset.md
+section: "Docs"
+---
+
 # context::reset
 
 > Resets a context.

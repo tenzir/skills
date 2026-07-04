@@ -1,3 +1,10 @@
+---
+title: "write_ssv"
+canonical: https://tenzir.com/docs/reference/operators/write_ssv
+source: https://tenzir.com/docs/reference/operators/write_ssv.md
+section: "Docs"
+---
+
 # write_ssv
 
 > Transforms event stream to SSV (Space-Separated Values) byte stream.

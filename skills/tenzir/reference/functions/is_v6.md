@@ -1,3 +1,10 @@
+---
+title: "is_v6"
+canonical: https://tenzir.com/docs/reference/functions/is_v6
+source: https://tenzir.com/docs/reference/functions/is_v6.md
+section: "Docs"
+---
+
 # is_v6
 
 > Checks whether an IP address has version number 6.

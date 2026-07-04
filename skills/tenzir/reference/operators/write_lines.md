@@ -1,3 +1,10 @@
+---
+title: "write_lines"
+canonical: https://tenzir.com/docs/reference/operators/write_lines
+source: https://tenzir.com/docs/reference/operators/write_lines.md
+section: "Docs"
+---
+
 # write_lines
 
 > Writes events as key-value pairsthe values of an event.

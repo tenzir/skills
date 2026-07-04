@@ -1,3 +1,10 @@
+---
+title: "trim_end"
+canonical: https://tenzir.com/docs/reference/functions/trim_end
+source: https://tenzir.com/docs/reference/functions/trim_end.md
+section: "Docs"
+---
+
 # trim_end
 
 > Trims whitespace or specified characters from the end of a string.

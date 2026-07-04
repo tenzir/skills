@@ -1,3 +1,10 @@
+---
+title: "print_json"
+canonical: https://tenzir.com/docs/reference/functions/print_json
+source: https://tenzir.com/docs/reference/functions/print_json.md
+section: "Docs"
+---
+
 # print_json
 
 > Transforms a value into a JSON string.

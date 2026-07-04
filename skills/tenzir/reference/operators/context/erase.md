@@ -1,3 +1,10 @@
+---
+title: "context::erase"
+canonical: https://tenzir.com/docs/reference/operators/context/erase
+source: https://tenzir.com/docs/reference/operators/context/erase.md
+section: "Docs"
+---
+
 # context::erase
 
 > Removes entries from a context.

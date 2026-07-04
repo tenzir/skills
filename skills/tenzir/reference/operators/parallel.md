@@ -1,3 +1,10 @@
+---
+title: "parallel"
+canonical: https://tenzir.com/docs/reference/operators/parallel
+source: https://tenzir.com/docs/reference/operators/parallel.md
+section: "Docs"
+---
+
 # parallel
 
 > Runs a subpipeline across multiple parallel workers.

@@ -1,3 +1,10 @@
+---
+title: "tail"
+canonical: https://tenzir.com/docs/reference/operators/tail
+source: https://tenzir.com/docs/reference/operators/tail.md
+section: "Docs"
+---
+
 # tail
 
 > Limits the input to the last n events.

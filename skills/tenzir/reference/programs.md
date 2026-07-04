@@ -1,3 +1,10 @@
+---
+title: "Programs"
+canonical: https://tenzir.com/docs/reference/programs
+source: https://tenzir.com/docs/reference/programs.md
+section: "Docs"
+---
+
 # Programs
 
 > TQL programs compose statements into complete data processing workflows that can execute. Valid TQL programs adhere to the following rules:

@@ -1,3 +1,10 @@
+---
+title: "month"
+canonical: https://tenzir.com/docs/reference/functions/month
+source: https://tenzir.com/docs/reference/functions/month.md
+section: "Docs"
+---
+
 # month
 
 > Extracts the month component from a timestamp.

@@ -1,3 +1,10 @@
+---
+title: "all"
+canonical: https://tenzir.com/docs/reference/functions/all
+source: https://tenzir.com/docs/reference/functions/all.md
+section: "Docs"
+---
+
 # all
 
 > Computes the conjunction (AND) of all grouped boolean values.

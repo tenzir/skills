@@ -1,3 +1,10 @@
+---
+title: "trim_start"
+canonical: https://tenzir.com/docs/reference/functions/trim_start
+source: https://tenzir.com/docs/reference/functions/trim_start.md
+section: "Docs"
+---
+
 # trim_start
 
 > Trims whitespace or specified characters from the start of a string.

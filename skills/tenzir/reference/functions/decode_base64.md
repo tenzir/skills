@@ -1,3 +1,10 @@
+---
+title: "decode_base64"
+canonical: https://tenzir.com/docs/reference/functions/decode_base64
+source: https://tenzir.com/docs/reference/functions/decode_base64.md
+section: "Docs"
+---
+
 # decode_base64
 
 > Decodes bytes as Base64.

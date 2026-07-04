@@ -1,3 +1,10 @@
+---
+title: "count_days"
+canonical: https://tenzir.com/docs/reference/functions/count_days
+source: https://tenzir.com/docs/reference/functions/count_days.md
+section: "Docs"
+---
+
 # count_days
 
 > Counts the number of days in a duration.

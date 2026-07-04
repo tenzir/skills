@@ -1,3 +1,10 @@
+---
+title: "api"
+canonical: https://tenzir.com/docs/reference/operators/api
+source: https://tenzir.com/docs/reference/operators/api.md
+section: "Docs"
+---
+
 # api
 
 > Use Tenzir’s REST API directly from a pipeline.

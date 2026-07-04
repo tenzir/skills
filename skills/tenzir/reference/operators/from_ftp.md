@@ -1,3 +1,10 @@
+---
+title: "from_ftp"
+canonical: https://tenzir.com/docs/reference/operators/from_ftp
+source: https://tenzir.com/docs/reference/operators/from_ftp.md
+section: "Docs"
+---
+
 # from_ftp
 
 > Downloads bytes via FTP or FTPS and parses them with a subpipeline.

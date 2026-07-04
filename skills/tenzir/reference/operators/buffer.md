@@ -1,3 +1,10 @@
+---
+title: "buffer"
+canonical: https://tenzir.com/docs/reference/operators/buffer
+source: https://tenzir.com/docs/reference/operators/buffer.md
+section: "Docs"
+---
+
 # buffer
 
 > An in-memory buffer to improve handling of data spikes in upstream operators.

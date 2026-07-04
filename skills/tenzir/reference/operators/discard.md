@@ -1,3 +1,10 @@
+---
+title: "discard"
+canonical: https://tenzir.com/docs/reference/operators/discard
+source: https://tenzir.com/docs/reference/operators/discard.md
+section: "Docs"
+---
+
 # discard
 
 > Discards all incoming events.

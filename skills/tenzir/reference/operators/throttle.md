@@ -1,3 +1,10 @@
+---
+title: "throttle"
+canonical: https://tenzir.com/docs/reference/operators/throttle
+source: https://tenzir.com/docs/reference/operators/throttle.md
+section: "Docs"
+---
+
 # throttle
 
 > Limits the throughput of events in a pipeline.

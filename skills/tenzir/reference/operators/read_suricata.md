@@ -1,3 +1,10 @@
+---
+title: "read_suricata"
+canonical: https://tenzir.com/docs/reference/operators/read_suricata
+source: https://tenzir.com/docs/reference/operators/read_suricata.md
+section: "Docs"
+---
+
 # read_suricata
 
 > Parse an incoming Suricata EVE JSON stream into events.

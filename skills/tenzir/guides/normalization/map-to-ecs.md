@@ -1,3 +1,10 @@
+---
+title: "Map to ECS"
+canonical: https://tenzir.com/docs/guides/normalization/map-to-ecs
+source: https://tenzir.com/docs/guides/normalization/map-to-ecs.md
+section: "Docs"
+---
+
 # Map to ECS
 
 > This guide shows you how to map events to Elastic Common Schema (ECS) in TQL. You’ll learn how to populate required ECS fields, choose event categorization values, map common network fieldsets, preserve source-specific details, and prepare records for Elasticsearch-compatible destinations.

@@ -1,3 +1,10 @@
+---
+title: "Map to ASIM"
+canonical: https://tenzir.com/docs/guides/normalization/map-to-asim
+source: https://tenzir.com/docs/guides/normalization/map-to-asim.md
+section: "Docs"
+---
+
 # Map to ASIM
 
 > This guide shows you how to map events to Microsoft Sentinel Advanced Security Information Model (ASIM) records in TQL. You’ll learn how to choose an ASIM schema, populate schema and product metadata, map role-prefixed fields, normalize event results, and preserve unmapped source fields.

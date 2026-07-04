@@ -1,3 +1,11 @@
+---
+title: "SentinelOne Data Lake integration"
+description: "Send events to SentinelOne Singularity™ Data Lake"
+canonical: https://tenzir.com/integrations/sentinelone-data-lake
+source: https://tenzir.com/integrations/sentinelone-data-lake.md
+section: "Integrations"
+---
+
 # SentinelOne Data Lake integration
 
 > Send events to SentinelOne Singularity™ Data Lake

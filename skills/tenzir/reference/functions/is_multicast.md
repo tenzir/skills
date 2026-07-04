@@ -1,3 +1,10 @@
+---
+title: "is_multicast"
+canonical: https://tenzir.com/docs/reference/functions/is_multicast
+source: https://tenzir.com/docs/reference/functions/is_multicast.md
+section: "Docs"
+---
+
 # is_multicast
 
 > Checks whether an IP address is a multicast address.

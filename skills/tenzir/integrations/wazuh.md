@@ -1,3 +1,11 @@
+---
+title: "Wazuh integration"
+description: "Collects security telemetry and runs detections."
+canonical: https://tenzir.com/integrations/wazuh
+source: https://tenzir.com/integrations/wazuh.md
+section: "Integrations"
+---
+
 # Wazuh integration
 
 > Collects security telemetry and runs detections.

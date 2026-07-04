@@ -1,3 +1,10 @@
+---
+title: "to_splunk"
+canonical: https://tenzir.com/docs/reference/operators/to_splunk
+source: https://tenzir.com/docs/reference/operators/to_splunk.md
+section: "Docs"
+---
+
 # to_splunk
 
 > Sends events to a Splunk HTTP Event Collector (HEC).

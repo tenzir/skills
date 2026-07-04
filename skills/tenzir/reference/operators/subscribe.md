@@ -1,3 +1,10 @@
+---
+title: "subscribe"
+canonical: https://tenzir.com/docs/reference/operators/subscribe
+source: https://tenzir.com/docs/reference/operators/subscribe.md
+section: "Docs"
+---
+
 # subscribe
 
 > Subscribes to events from a channel with a topic.

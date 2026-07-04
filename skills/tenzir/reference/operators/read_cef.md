@@ -1,3 +1,10 @@
+---
+title: "read_cef"
+canonical: https://tenzir.com/docs/reference/operators/read_cef
+source: https://tenzir.com/docs/reference/operators/read_cef.md
+section: "Docs"
+---
+
 # read_cef
 
 > Parses an incoming Common Event Format (CEF) stream into events.

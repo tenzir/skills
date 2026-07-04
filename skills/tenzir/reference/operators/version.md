@@ -1,3 +1,10 @@
+---
+title: "version"
+canonical: https://tenzir.com/docs/reference/operators/version
+source: https://tenzir.com/docs/reference/operators/version.md
+section: "Docs"
+---
+
 # version
 
 > Shows the current version.

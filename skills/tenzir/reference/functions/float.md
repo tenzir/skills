@@ -1,3 +1,10 @@
+---
+title: "float"
+canonical: https://tenzir.com/docs/reference/functions/float
+source: https://tenzir.com/docs/reference/functions/float.md
+section: "Docs"
+---
+
 # float
 
 > Casts an expression to a float.

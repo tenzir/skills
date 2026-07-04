@@ -1,3 +1,10 @@
+---
+title: "Generate User Key"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/generate-user-key
+source: https://tenzir.com/docs/reference/api/platform/admin/generate-user-key.md
+section: "Docs"
+---
+
 # Generate User Key
 
 > post/admin/generate-user-key

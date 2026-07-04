@@ -1,3 +1,10 @@
+---
+title: "replace"
+canonical: https://tenzir.com/docs/reference/functions/replace
+source: https://tenzir.com/docs/reference/functions/replace.md
+section: "Docs"
+---
+
 # replace
 
 > Replaces literal substrings within a string.

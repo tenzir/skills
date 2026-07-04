@@ -1,3 +1,10 @@
+---
+title: "weeks"
+canonical: https://tenzir.com/docs/reference/functions/weeks
+source: https://tenzir.com/docs/reference/functions/weeks.md
+section: "Docs"
+---
+
 # weeks
 
 > Converts a number to equivalent weeks.

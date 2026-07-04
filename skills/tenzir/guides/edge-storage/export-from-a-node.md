@@ -1,3 +1,10 @@
+---
+title: "Export from a node"
+canonical: https://tenzir.com/docs/guides/edge-storage/export-from-a-node
+source: https://tenzir.com/docs/guides/edge-storage/export-from-a-node.md
+section: "Docs"
+---
+
 # Export from a node
 
 > Exporting (or querying) data can be done by running a pipeline that begins with the export input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the export operator runs within the node.

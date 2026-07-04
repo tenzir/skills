@@ -1,3 +1,10 @@
+---
+title: "chart_area"
+canonical: https://tenzir.com/docs/reference/operators/chart_area
+source: https://tenzir.com/docs/reference/operators/chart_area.md
+section: "Docs"
+---
+
 # chart_area
 
 > Plots events on an area chart.

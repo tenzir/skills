@@ -1,3 +1,10 @@
+---
+title: "Shape records"
+canonical: https://tenzir.com/docs/guides/transformation/shape-records
+source: https://tenzir.com/docs/guides/transformation/shape-records.md
+section: "Docs"
+---
+
 # Shape records
 
 > Records (objects) contain key-value pairs. This guide shows you how to work with records - accessing fields, extracting keys, combining fragments, and transforming values.

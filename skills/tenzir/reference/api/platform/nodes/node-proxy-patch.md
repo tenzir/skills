@@ -1,3 +1,10 @@
+---
+title: "Transparent Proxy"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-patch
+source: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-patch.md
+section: "Docs"
+---
+
 # Transparent Proxy
 
 > patch/user/node-proxy/{tenantid}/{nodeid}/{httppath}

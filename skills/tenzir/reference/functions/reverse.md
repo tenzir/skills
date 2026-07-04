@@ -1,3 +1,10 @@
+---
+title: "reverse"
+canonical: https://tenzir.com/docs/reference/functions/reverse
+source: https://tenzir.com/docs/reference/functions/reverse.md
+section: "Docs"
+---
+
 # reverse
 
 > Reverses the characters of a string.

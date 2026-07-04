@@ -1,3 +1,10 @@
+---
+title: "ocsf::trim"
+canonical: https://tenzir.com/docs/reference/operators/ocsf/trim
+source: https://tenzir.com/docs/reference/operators/ocsf/trim.md
+section: "Docs"
+---
+
 # ocsf::trim
 
 > Drops fields from OCSF events to reduce their size.

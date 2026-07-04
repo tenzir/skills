@@ -1,3 +1,10 @@
+---
+title: "split"
+canonical: https://tenzir.com/docs/reference/functions/split
+source: https://tenzir.com/docs/reference/functions/split.md
+section: "Docs"
+---
+
 # split
 
 > Splits a string into substrings.

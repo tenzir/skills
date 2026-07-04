@@ -1,3 +1,10 @@
+---
+title: "to_kafka"
+canonical: https://tenzir.com/docs/reference/operators/to_kafka
+source: https://tenzir.com/docs/reference/operators/to_kafka.md
+section: "Docs"
+---
+
 # to_kafka
 
 > Sends messages to an Apache Kafka topic.

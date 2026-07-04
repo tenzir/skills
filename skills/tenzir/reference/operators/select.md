@@ -1,3 +1,10 @@
+---
+title: "select"
+canonical: https://tenzir.com/docs/reference/operators/select
+source: https://tenzir.com/docs/reference/operators/select.md
+section: "Docs"
+---
+
 # select
 
 > Selects some values and discards the rest.

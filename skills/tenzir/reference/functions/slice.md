@@ -1,3 +1,10 @@
+---
+title: "slice"
+canonical: https://tenzir.com/docs/reference/functions/slice
+source: https://tenzir.com/docs/reference/functions/slice.md
+section: "Docs"
+---
+
 # slice
 
 > Slices a string or list with offsets and strides.

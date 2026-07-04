@@ -1,3 +1,10 @@
+---
+title: "replace_regex"
+canonical: https://tenzir.com/docs/reference/functions/replace_regex
+source: https://tenzir.com/docs/reference/functions/replace_regex.md
+section: "Docs"
+---
+
 # replace_regex
 
 > Replaces characters within a string based on a regular expression.

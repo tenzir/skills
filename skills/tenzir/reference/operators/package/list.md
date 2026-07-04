@@ -1,3 +1,10 @@
+---
+title: "package::list"
+canonical: https://tenzir.com/docs/reference/operators/package/list
+source: https://tenzir.com/docs/reference/operators/package/list.md
+section: "Docs"
+---
+
 # package::list
 
 > Shows installed packages.

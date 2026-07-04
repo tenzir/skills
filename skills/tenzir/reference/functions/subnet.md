@@ -1,3 +1,10 @@
+---
+title: "subnet"
+canonical: https://tenzir.com/docs/reference/functions/subnet
+source: https://tenzir.com/docs/reference/functions/subnet.md
+section: "Docs"
+---
+
 # subnet
 
 > Converts an expression to a subnet value.

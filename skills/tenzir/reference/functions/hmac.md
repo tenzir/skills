@@ -1,3 +1,10 @@
+---
+title: "hmac"
+canonical: https://tenzir.com/docs/reference/functions/hmac
+source: https://tenzir.com/docs/reference/functions/hmac.md
+section: "Docs"
+---
+
 # hmac
 
 > Computes an HMAC (Hash-based Message Authentication Code).

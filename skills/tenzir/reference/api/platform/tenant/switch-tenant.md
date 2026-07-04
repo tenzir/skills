@@ -1,3 +1,10 @@
+---
+title: "Switch Tenant"
+canonical: https://tenzir.com/docs/reference/api/platform/tenant/switch-tenant
+source: https://tenzir.com/docs/reference/api/platform/tenant/switch-tenant.md
+section: "Docs"
+---
+
 # Switch Tenant
 
 > post/user/switch-tenant

@@ -1,3 +1,11 @@
+---
+title: "Google Cloud Pub/Sub integration"
+description: "Send, receive, and process messages between decoupled applications and services."
+canonical: https://tenzir.com/integrations/google/cloud-pubsub
+source: https://tenzir.com/integrations/google/cloud-pubsub.md
+section: "Integrations"
+---
+
 # Google Cloud Pub/Sub integration
 
 > Send, receive, and process messages between decoupled applications and services.

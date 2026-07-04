@@ -1,3 +1,10 @@
+---
+title: "decode_hex"
+canonical: https://tenzir.com/docs/reference/functions/decode_hex
+source: https://tenzir.com/docs/reference/functions/decode_hex.md
+section: "Docs"
+---
+
 # decode_hex
 
 > Decodes bytes from their hexadecimal representation.

@@ -1,6 +1,15 @@
+---
+title: "Overview"
+canonical: https://tenzir.com/docs/reference/api/node/overview
+source: https://tenzir.com/docs/reference/api/node/overview.md
+section: "Docs"
+---
+
 # Overview
 
-> Use the Tenzir REST API to manage pipelines and read pipeline output from a Tenzir node.
+> This reference is generated from the OpenAPI specification.
+
+This reference is generated from the [OpenAPI specification](https://tenzir.com/openapi/node.yaml).
 
 Use the Tenzir REST API to manage pipelines and read pipeline output from a Tenzir node.
 

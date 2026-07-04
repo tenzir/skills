@@ -1,3 +1,10 @@
+---
+title: "Send to destinations"
+canonical: https://tenzir.com/docs/guides/routing/send-to-destinations
+source: https://tenzir.com/docs/guides/routing/send-to-destinations.md
+section: "Docs"
+---
+
 # Send to destinations
 
 > This guide shows you how to send data to various destinations using TQL output operators. You’ll learn about message destinations, data stores, file output patterns, and expression-based serialization.

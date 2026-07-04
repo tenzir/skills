@@ -1,3 +1,10 @@
+---
+title: "read_pcap"
+canonical: https://tenzir.com/docs/reference/operators/read_pcap
+source: https://tenzir.com/docs/reference/operators/read_pcap.md
+section: "Docs"
+---
+
 # read_pcap
 
 > Parses PCAP byte streams into packet events.

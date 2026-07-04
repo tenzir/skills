@@ -1,3 +1,10 @@
+---
+title: "ocsf::type_uid"
+canonical: https://tenzir.com/docs/reference/functions/ocsf/type_uid
+source: https://tenzir.com/docs/reference/functions/ocsf/type_uid.md
+section: "Docs"
+---
+
 # ocsf::type_uid
 
 > Returns the typeuid for a given typename.

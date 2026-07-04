@@ -1,3 +1,10 @@
+---
+title: "serve_http"
+canonical: https://tenzir.com/docs/reference/operators/serve_http
+source: https://tenzir.com/docs/reference/operators/serve_http.md
+section: "Docs"
+---
+
 # serve_http
 
 > Starts an HTTP server and streams bytes produced by a nested pipeline to connected clients.

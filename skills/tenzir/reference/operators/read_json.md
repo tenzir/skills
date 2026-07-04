@@ -1,3 +1,10 @@
+---
+title: "read_json"
+canonical: https://tenzir.com/docs/reference/operators/read_json
+source: https://tenzir.com/docs/reference/operators/read_json.md
+section: "Docs"
+---
+
 # read_json
 
 > Tip

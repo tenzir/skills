@@ -1,3 +1,10 @@
+---
+title: "compress_zstd"
+canonical: https://tenzir.com/docs/reference/operators/compress_zstd
+source: https://tenzir.com/docs/reference/operators/compress_zstd.md
+section: "Docs"
+---
+
 # compress_zstd
 
 > Compresses a stream of bytes using zstd compression.

@@ -1,3 +1,10 @@
+---
+title: "Proxy Cached"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/proxy-cached
+source: https://tenzir.com/docs/reference/api/platform/nodes/proxy-cached.md
+section: "Docs"
+---
+
 # Proxy Cached
 
 > post/user/proxy-cached

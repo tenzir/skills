@@ -1,3 +1,10 @@
+---
+title: "Manage a pipeline"
+canonical: https://tenzir.com/docs/guides/basic-usage/manage-a-pipeline
+source: https://tenzir.com/docs/guides/basic-usage/manage-a-pipeline.md
+section: "Docs"
+---
+
 # Manage a pipeline
 
 > This guide shows you how to control pipeline lifecycles through the app or API. A pipeline transitions through the following states:

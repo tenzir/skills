@@ -1,3 +1,11 @@
+---
+title: "Snowflake integration"
+description: "Store, analyze, and share structured and semi-structured data with a cloud-based warehouse."
+canonical: https://tenzir.com/integrations/snowflake
+source: https://tenzir.com/integrations/snowflake.md
+section: "Integrations"
+---
+
 # Snowflake integration
 
 > Store, analyze, and share structured and semi-structured data with a cloud-based warehouse.

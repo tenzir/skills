@@ -1,3 +1,10 @@
+---
+title: "hash_xxh3"
+canonical: https://tenzir.com/docs/reference/functions/hash_xxh3
+source: https://tenzir.com/docs/reference/functions/hash_xxh3.md
+section: "Docs"
+---
+
 # hash_xxh3
 
 > Computes an XXH3 hash digest.

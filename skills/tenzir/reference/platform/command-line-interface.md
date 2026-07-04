@@ -1,3 +1,10 @@
+---
+title: "Command line interface"
+canonical: https://tenzir.com/docs/reference/platform/command-line-interface
+source: https://tenzir.com/docs/reference/platform/command-line-interface.md
+section: "Docs"
+---
+
 # Command line interface
 
 > The Tenzir Platform command-line interface (CLI) allows you to interact with the Tenzir Platform from the command line to manage organizations, workspaces, and nodes.

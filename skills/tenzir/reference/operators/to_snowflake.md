@@ -1,3 +1,10 @@
+---
+title: "to_snowflake"
+canonical: https://tenzir.com/docs/reference/operators/to_snowflake
+source: https://tenzir.com/docs/reference/operators/to_snowflake.md
+section: "Docs"
+---
+
 # to_snowflake
 
 > Sends events to a Snowflake database.

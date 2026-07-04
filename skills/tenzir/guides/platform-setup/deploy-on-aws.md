@@ -1,3 +1,10 @@
+---
+title: "Deploy on AWS"
+canonical: https://tenzir.com/docs/guides/platform-setup/deploy-on-aws
+source: https://tenzir.com/docs/guides/platform-setup/deploy-on-aws.md
+section: "Docs"
+---
+
 # Deploy on AWS
 
 > This guide walks you through deploying the Tenzir Platform Sovereign Edition on AWS using CloudFormation. The template automates the setup of all required infrastructure components.

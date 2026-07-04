@@ -1,3 +1,11 @@
+---
+title: "Sentinel & Log Analytics integration"
+description: "A rapidly growing cloud-native SIEM, tightly integrated with the Azure ecosystem and a strategic destination for Microsoft-centric organizations."
+canonical: https://tenzir.com/integrations/microsoft/sentinel-log-analytics
+source: https://tenzir.com/integrations/microsoft/sentinel-log-analytics.md
+section: "Integrations"
+---
+
 # Sentinel & Log Analytics integration
 
 > A rapidly growing cloud-native SIEM, tightly integrated with the Azure ecosystem and a strategic destination for Microsoft-centric organizations.

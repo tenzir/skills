@@ -1,3 +1,10 @@
+---
+title: "ends_with"
+canonical: https://tenzir.com/docs/reference/functions/ends_with
+source: https://tenzir.com/docs/reference/functions/ends_with.md
+section: "Docs"
+---
+
 # ends_with
 
 > Checks whether a string ends with a specified substring.

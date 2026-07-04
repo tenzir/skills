@@ -1,3 +1,10 @@
+---
+title: "minute"
+canonical: https://tenzir.com/docs/reference/functions/minute
+source: https://tenzir.com/docs/reference/functions/minute.md
+section: "Docs"
+---
+
 # minute
 
 > Extracts the minute component from a timestamp.

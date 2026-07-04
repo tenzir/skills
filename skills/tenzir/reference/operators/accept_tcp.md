@@ -1,3 +1,10 @@
+---
+title: "accept_tcp"
+canonical: https://tenzir.com/docs/reference/operators/accept_tcp
+source: https://tenzir.com/docs/reference/operators/accept_tcp.md
+section: "Docs"
+---
+
 # accept_tcp
 
 > Listens for incoming TCP or TLS connections and receives events.

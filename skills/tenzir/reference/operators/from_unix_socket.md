@@ -1,3 +1,10 @@
+---
+title: "from_unix_socket"
+canonical: https://tenzir.com/docs/reference/operators/from_unix_socket
+source: https://tenzir.com/docs/reference/operators/from_unix_socket.md
+section: "Docs"
+---
+
 # from_unix_socket
 
 > Connects to a Unix domain socket and receives events.

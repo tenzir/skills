@@ -1,3 +1,10 @@
+---
+title: "int"
+canonical: https://tenzir.com/docs/reference/functions/int
+source: https://tenzir.com/docs/reference/functions/int.md
+section: "Docs"
+---
+
 # int
 
 > Casts an expression to an integer.

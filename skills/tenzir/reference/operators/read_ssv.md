@@ -1,3 +1,10 @@
+---
+title: "read_ssv"
+canonical: https://tenzir.com/docs/reference/operators/read_ssv
+source: https://tenzir.com/docs/reference/operators/read_ssv.md
+section: "Docs"
+---
+
 # read_ssv
 
 > Read SSV (Space-Separated Values) from a byte stream.

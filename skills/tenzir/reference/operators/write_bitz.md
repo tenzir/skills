@@ -1,3 +1,10 @@
+---
+title: "write_bitz"
+canonical: https://tenzir.com/docs/reference/operators/write_bitz
+source: https://tenzir.com/docs/reference/operators/write_bitz.md
+section: "Docs"
+---
+
 # write_bitz
 
 > Writes events in BITZ format.

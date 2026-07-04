@@ -1,3 +1,10 @@
+---
+title: "Update"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/update
+source: https://tenzir.com/docs/reference/api/platform/secrets/update.md
+section: "Docs"
+---
+
 # Update
 
 > post/user/secrets/update

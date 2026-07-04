@@ -1,3 +1,10 @@
+---
+title: "Add"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/add
+source: https://tenzir.com/docs/reference/api/platform/secrets/add.md
+section: "Docs"
+---
+
 # Add
 
 > post/user/secrets/add

@@ -1,3 +1,10 @@
+---
+title: "pass"
+canonical: https://tenzir.com/docs/reference/operators/pass
+source: https://tenzir.com/docs/reference/operators/pass.md
+section: "Docs"
+---
+
 # pass
 
 > Does nothing with the input.

@@ -1,3 +1,11 @@
+---
+title: "Enrich with asset inventory"
+description: "Add asset inventory context to OCSF endpoint and user fields"
+canonical: https://tenzir.com/docs/guides/enrichment/enrich-with-asset-inventory
+source: https://tenzir.com/docs/guides/enrichment/enrich-with-asset-inventory.md
+section: "Docs"
+---
+
 # Enrich with asset inventory
 
 > Add asset inventory context to OCSF endpoint and user fields

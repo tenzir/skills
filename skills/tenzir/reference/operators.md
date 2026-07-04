@@ -1,3 +1,10 @@
+---
+title: "Operators"
+canonical: https://tenzir.com/docs/reference/operators
+source: https://tenzir.com/docs/reference/operators.md
+section: "Docs"
+---
+
 # Operators
 
 > Tenzir comes with a wide range of built-in pipeline operators.
@@ -832,28 +839,12 @@ An in-memory cache shared between pipelines.
 cache "w01wyhTZm3", ttl=10min
 ```
 
-### [local](operators/local.md)
-
-Forces a pipeline to run locally.
-
-```tql
-local { sort foo }
-```
-
 ### [measure](operators/measure.md)
 
 Replaces the input with metrics describing the input.
 
 ```tql
 measure
-```
-
-### [remote](operators/remote.md)
-
-Forces a pipeline to run remotely at a node.
-
-```tql
-remote { version }
 ```
 
 ### [strict](operators/strict.md)

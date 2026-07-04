@@ -1,3 +1,10 @@
+---
+title: "Configure internal services"
+canonical: https://tenzir.com/docs/guides/platform-setup/configure-internal-services
+source: https://tenzir.com/docs/guides/platform-setup/configure-internal-services.md
+section: "Docs"
+---
+
 # Configure internal services
 
 > This guide shows you how to configure the three internal Tenzir services: the UI, Gateway, and Platform API. You’ll set environment variables that control authentication, connectivity, and feature settings.

@@ -1,3 +1,10 @@
+---
+title: "parse_leef"
+canonical: https://tenzir.com/docs/reference/functions/parse_leef
+source: https://tenzir.com/docs/reference/functions/parse_leef.md
+section: "Docs"
+---
+
 # parse_leef
 
 > Parses a string as a LEEF message

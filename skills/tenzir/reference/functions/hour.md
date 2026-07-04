@@ -1,3 +1,10 @@
+---
+title: "hour"
+canonical: https://tenzir.com/docs/reference/functions/hour
+source: https://tenzir.com/docs/reference/functions/hour.md
+section: "Docs"
+---
+
 # hour
 
 > Extracts the hour component from a timestamp.

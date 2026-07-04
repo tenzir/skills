@@ -1,3 +1,10 @@
+---
+title: "accept_udp"
+canonical: https://tenzir.com/docs/reference/operators/accept_udp
+source: https://tenzir.com/docs/reference/operators/accept_udp.md
+section: "Docs"
+---
+
 # accept_udp
 
 > Receives UDP datagrams and outputs structured events.

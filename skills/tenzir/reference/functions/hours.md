@@ -1,3 +1,10 @@
+---
+title: "hours"
+canonical: https://tenzir.com/docs/reference/functions/hours
+source: https://tenzir.com/docs/reference/functions/hours.md
+section: "Docs"
+---
+
 # hours
 
 > Converts a number to equivalent hours.

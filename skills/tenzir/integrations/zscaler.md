@@ -1,3 +1,11 @@
+---
+title: "Zscaler integration"
+description: "Logs all web, firewall, and DNS traffic for users and locations."
+canonical: https://tenzir.com/integrations/zscaler
+source: https://tenzir.com/integrations/zscaler.md
+section: "Integrations"
+---
+
 # Zscaler integration
 
 > Logs all web, firewall, and DNS traffic for users and locations.

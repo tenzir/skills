@@ -1,3 +1,10 @@
+---
+title: "write_feather"
+canonical: https://tenzir.com/docs/reference/operators/write_feather
+source: https://tenzir.com/docs/reference/operators/write_feather.md
+section: "Docs"
+---
+
 # write_feather
 
 > Transforms the input event stream to Feather byte stream.

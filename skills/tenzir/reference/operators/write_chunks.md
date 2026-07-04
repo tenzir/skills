@@ -1,3 +1,10 @@
+---
+title: "write_chunks"
+canonical: https://tenzir.com/docs/reference/operators/write_chunks
+source: https://tenzir.com/docs/reference/operators/write_chunks.md
+section: "Docs"
+---
+
 # write_chunks
 
 > Converts each input event into a separate byte chunk.

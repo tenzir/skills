@@ -1,3 +1,10 @@
+---
+title: "to_upper"
+canonical: https://tenzir.com/docs/reference/functions/to_upper
+source: https://tenzir.com/docs/reference/functions/to_upper.md
+section: "Docs"
+---
+
 # to_upper
 
 > Converts a string to uppercase.

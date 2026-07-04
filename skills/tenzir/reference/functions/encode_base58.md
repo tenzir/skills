@@ -1,3 +1,10 @@
+---
+title: "encode_base58"
+canonical: https://tenzir.com/docs/reference/functions/encode_base58
+source: https://tenzir.com/docs/reference/functions/encode_base58.md
+section: "Docs"
+---
+
 # encode_base58
 
 > Encodes bytes as Base58.

@@ -1,3 +1,10 @@
+---
+title: "is_lower"
+canonical: https://tenzir.com/docs/reference/functions/is_lower
+source: https://tenzir.com/docs/reference/functions/is_lower.md
+section: "Docs"
+---
+
 # is_lower
 
 > Checks if a string is in lowercase.

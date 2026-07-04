@@ -1,3 +1,10 @@
+---
+title: "from_epoch"
+canonical: https://tenzir.com/docs/reference/functions/from_epoch
+source: https://tenzir.com/docs/reference/functions/from_epoch.md
+section: "Docs"
+---
+
 # from_epoch
 
 > Interprets a duration as Unix time.

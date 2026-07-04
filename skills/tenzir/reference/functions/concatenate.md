@@ -1,3 +1,10 @@
+---
+title: "concatenate"
+canonical: https://tenzir.com/docs/reference/functions/concatenate
+source: https://tenzir.com/docs/reference/functions/concatenate.md
+section: "Docs"
+---
+
 # concatenate
 
 > Merges two lists.

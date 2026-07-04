@@ -1,3 +1,10 @@
+---
+title: "print_csv"
+canonical: https://tenzir.com/docs/reference/functions/print_csv
+source: https://tenzir.com/docs/reference/functions/print_csv.md
+section: "Docs"
+---
+
 # print_csv
 
 > Prints a record as a comma-separated string of values.

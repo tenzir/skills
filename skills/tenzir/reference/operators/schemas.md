@@ -1,3 +1,10 @@
+---
+title: "schemas"
+canonical: https://tenzir.com/docs/reference/operators/schemas
+source: https://tenzir.com/docs/reference/operators/schemas.md
+section: "Docs"
+---
+
 # schemas
 
 > Retrieves all schemas for events stored at a node.

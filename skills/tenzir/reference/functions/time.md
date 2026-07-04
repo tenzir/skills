@@ -1,3 +1,10 @@
+---
+title: "time"
+canonical: https://tenzir.com/docs/reference/functions/time
+source: https://tenzir.com/docs/reference/functions/time.md
+section: "Docs"
+---
+
 # time
 
 > Casts an expression to a time value.

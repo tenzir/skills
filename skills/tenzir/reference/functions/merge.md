@@ -1,3 +1,10 @@
+---
+title: "merge"
+canonical: https://tenzir.com/docs/reference/functions/merge
+source: https://tenzir.com/docs/reference/functions/merge.md
+section: "Docs"
+---
+
 # merge
 
 > Combines two records into a single record by merging their fields.

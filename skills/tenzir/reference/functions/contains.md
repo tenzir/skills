@@ -1,3 +1,10 @@
+---
+title: "contains"
+canonical: https://tenzir.com/docs/reference/functions/contains
+source: https://tenzir.com/docs/reference/functions/contains.md
+section: "Docs"
+---
+
 # contains
 
 > Searches recursively for a value within data structures.

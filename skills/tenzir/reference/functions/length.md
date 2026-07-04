@@ -1,3 +1,10 @@
+---
+title: "length"
+canonical: https://tenzir.com/docs/reference/functions/length
+source: https://tenzir.com/docs/reference/functions/length.md
+section: "Docs"
+---
+
 # length
 
 > Retrieves the length of a list.

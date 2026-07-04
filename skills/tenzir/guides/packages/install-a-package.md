@@ -1,3 +1,10 @@
+---
+title: "Install a package"
+canonical: https://tenzir.com/docs/guides/packages/install-a-package
+source: https://tenzir.com/docs/guides/packages/install-a-package.md
+section: "Docs"
+---
+
 # Install a package
 
 > Write your own package

@@ -1,3 +1,10 @@
+---
+title: "read_auto"
+canonical: https://tenzir.com/docs/reference/operators/read_auto
+source: https://tenzir.com/docs/reference/operators/read_auto.md
+section: "Docs"
+---
+
 # read_auto
 
 > Detects the input format of a byte stream and selects a matching reader.

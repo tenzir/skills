@@ -1,3 +1,10 @@
+---
+title: "drop"
+canonical: https://tenzir.com/docs/reference/operators/drop
+source: https://tenzir.com/docs/reference/operators/drop.md
+section: "Docs"
+---
+
 # drop
 
 > Removes fields from the event.

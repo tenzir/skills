@@ -1,3 +1,10 @@
+---
+title: "rare"
+canonical: https://tenzir.com/docs/reference/operators/rare
+source: https://tenzir.com/docs/reference/operators/rare.md
+section: "Docs"
+---
+
 # rare
 
 > Shows the least common values.

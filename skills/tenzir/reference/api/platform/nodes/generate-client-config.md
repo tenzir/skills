@@ -1,3 +1,10 @@
+---
+title: "Generate Client Config"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/generate-client-config
+source: https://tenzir.com/docs/reference/api/platform/nodes/generate-client-config.md
+section: "Docs"
+---
+
 # Generate Client Config
 
 > post/user/generate-client-config

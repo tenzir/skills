@@ -1,6 +1,15 @@
+---
+title: "Overview"
+canonical: https://tenzir.com/docs/reference/api/platform/overview
+source: https://tenzir.com/docs/reference/api/platform/overview.md
+section: "Docs"
+---
+
 # Overview
 
-> API for managing Tenzir Platform workspaces, nodes, and dashboards.
+> This reference is generated from the OpenAPI specification.
+
+This reference is generated from the [OpenAPI specification](https://tenzir.com/openapi/platform.yaml).
 
 API for managing Tenzir Platform workspaces, nodes, and dashboards.
 

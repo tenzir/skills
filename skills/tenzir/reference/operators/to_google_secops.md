@@ -1,3 +1,10 @@
+---
+title: "to_google_secops"
+canonical: https://tenzir.com/docs/reference/operators/to_google_secops
+source: https://tenzir.com/docs/reference/operators/to_google_secops.md
+section: "Docs"
+---
+
 # to_google_secops
 
 > Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.

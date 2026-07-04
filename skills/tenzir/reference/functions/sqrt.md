@@ -1,3 +1,10 @@
+---
+title: "sqrt"
+canonical: https://tenzir.com/docs/reference/functions/sqrt
+source: https://tenzir.com/docs/reference/functions/sqrt.md
+section: "Docs"
+---
+
 # sqrt
 
 > Computes the square root of a number.

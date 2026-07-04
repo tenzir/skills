@@ -1,3 +1,10 @@
+---
+title: "hash_sha512"
+canonical: https://tenzir.com/docs/reference/functions/hash_sha512
+source: https://tenzir.com/docs/reference/functions/hash_sha512.md
+section: "Docs"
+---
+
 # hash_sha512
 
 > Computes a SHA-512 hash digest.

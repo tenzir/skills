@@ -1,3 +1,10 @@
+---
+title: "is_private"
+canonical: https://tenzir.com/docs/reference/functions/is_private
+source: https://tenzir.com/docs/reference/functions/is_private.md
+section: "Docs"
+---
+
 # is_private
 
 > Checks whether an IP address is a private address.

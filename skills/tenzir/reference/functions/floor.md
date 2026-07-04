@@ -1,3 +1,10 @@
+---
+title: "floor"
+canonical: https://tenzir.com/docs/reference/functions/floor
+source: https://tenzir.com/docs/reference/functions/floor.md
+section: "Docs"
+---
+
 # floor
 
 > Computes the floor of a number or a time/duration with a specified unit.

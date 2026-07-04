@@ -1,3 +1,10 @@
+---
+title: "Read from data stores"
+canonical: https://tenzir.com/docs/guides/collecting/read-from-data-stores
+source: https://tenzir.com/docs/guides/collecting/read-from-data-stores.md
+section: "Docs"
+---
+
 # Read from data stores
 
 > This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows from MySQL.

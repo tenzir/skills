@@ -1,3 +1,10 @@
+---
+title: "pipeline::list"
+canonical: https://tenzir.com/docs/reference/operators/pipeline/list
+source: https://tenzir.com/docs/reference/operators/pipeline/list.md
+section: "Docs"
+---
+
 # pipeline::list
 
 > Shows managed pipelines.

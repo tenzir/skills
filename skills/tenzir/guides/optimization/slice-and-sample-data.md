@@ -1,3 +1,10 @@
+---
+title: "Slice and sample data"
+canonical: https://tenzir.com/docs/guides/optimization/slice-and-sample-data
+source: https://tenzir.com/docs/guides/optimization/slice-and-sample-data.md
+section: "Docs"
+---
+
 # Slice and sample data
 
 > When working with data streams, you often need to control which events flow through your pipeline. This guide shows you how to slice event streams, sample data, and control event ordering using TQL operators.

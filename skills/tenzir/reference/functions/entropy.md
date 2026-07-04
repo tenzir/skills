@@ -1,3 +1,10 @@
+---
+title: "entropy"
+canonical: https://tenzir.com/docs/reference/functions/entropy
+source: https://tenzir.com/docs/reference/functions/entropy.md
+section: "Docs"
+---
+
 # entropy
 
 > Computes the Shannon entropy of all grouped values.

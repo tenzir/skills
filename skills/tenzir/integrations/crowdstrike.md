@@ -1,3 +1,11 @@
+---
+title: "CrowdStrike integration"
+description: "Provides real-time event data including process, file, and network activity."
+canonical: https://tenzir.com/integrations/crowdstrike
+source: https://tenzir.com/integrations/crowdstrike.md
+section: "Integrations"
+---
+
 # CrowdStrike integration
 
 > Provides real-time event data including process, file, and network activity.

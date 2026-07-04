@@ -1,3 +1,10 @@
+---
+title: "decompress_zstd"
+canonical: https://tenzir.com/docs/reference/operators/decompress_zstd
+source: https://tenzir.com/docs/reference/operators/decompress_zstd.md
+section: "Docs"
+---
+
 # decompress_zstd
 
 > Decompresses a stream of bytes in the Zstd format.

@@ -1,3 +1,10 @@
+---
+title: "split_regex"
+canonical: https://tenzir.com/docs/reference/functions/split_regex
+source: https://tenzir.com/docs/reference/functions/split_regex.md
+section: "Docs"
+---
+
 # split_regex
 
 > Splits a string into substrings with a regex.

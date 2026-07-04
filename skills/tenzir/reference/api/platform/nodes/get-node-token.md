@@ -1,3 +1,10 @@
+---
+title: "Get Node Token"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/get-node-token
+source: https://tenzir.com/docs/reference/api/platform/nodes/get-node-token.md
+section: "Docs"
+---
+
 # Get Node Token
 
 > post/user/get-node-token

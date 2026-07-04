@@ -1,3 +1,10 @@
+---
+title: "hash_sha3_256"
+canonical: https://tenzir.com/docs/reference/functions/hash_sha3_256
+source: https://tenzir.com/docs/reference/functions/hash_sha3_256.md
+section: "Docs"
+---
+
 # hash_sha3_256
 
 > Computes a SHA3-256 hash digest.

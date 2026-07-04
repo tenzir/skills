@@ -1,3 +1,10 @@
+---
+title: "get"
+canonical: https://tenzir.com/docs/reference/functions/get
+source: https://tenzir.com/docs/reference/functions/get.md
+section: "Docs"
+---
+
 # get
 
 > Gets a field from a record or an element from a list.

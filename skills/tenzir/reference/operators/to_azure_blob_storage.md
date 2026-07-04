@@ -1,3 +1,10 @@
+---
+title: "to_azure_blob_storage"
+canonical: https://tenzir.com/docs/reference/operators/to_azure_blob_storage
+source: https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md
+section: "Docs"
+---
+
 # to_azure_blob_storage
 
 > Writes events to one or multiple blobs in Azure Blob Storage.

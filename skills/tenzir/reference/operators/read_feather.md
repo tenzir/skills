@@ -1,3 +1,10 @@
+---
+title: "read_feather"
+canonical: https://tenzir.com/docs/reference/operators/read_feather
+source: https://tenzir.com/docs/reference/operators/read_feather.md
+section: "Docs"
+---
+
 # read_feather
 
 > Parses an incoming Feather byte stream into events.

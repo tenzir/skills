@@ -1,3 +1,10 @@
+---
+title: "pipeline::activity"
+canonical: https://tenzir.com/docs/reference/operators/pipeline/activity
+source: https://tenzir.com/docs/reference/operators/pipeline/activity.md
+section: "Docs"
+---
+
 # pipeline::activity
 
 > Summarizes the activity of pipelines.

@@ -1,3 +1,10 @@
+---
+title: "Get"
+canonical: https://tenzir.com/docs/reference/api/platform/dashboards/get
+source: https://tenzir.com/docs/reference/api/platform/dashboards/get.md
+section: "Docs"
+---
+
 # Get
 
 > post/user/dashboard/get

@@ -1,3 +1,10 @@
+---
+title: "Tune performance"
+canonical: https://tenzir.com/docs/guides/node-setup/tune-performance
+source: https://tenzir.com/docs/guides/node-setup/tune-performance.md
+section: "Docs"
+---
+
 # Tune performance
 
 > This guide covers configuration options that affect node performance. You’ll learn how to tune demand scheduling, memory usage, and throughput settings.

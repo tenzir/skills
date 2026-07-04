@@ -1,3 +1,10 @@
+---
+title: "remove"
+canonical: https://tenzir.com/docs/reference/functions/remove
+source: https://tenzir.com/docs/reference/functions/remove.md
+section: "Docs"
+---
+
 # remove
 
 > Removes all occurrences of an element from a list.

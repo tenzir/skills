@@ -1,3 +1,10 @@
+---
+title: "sample"
+canonical: https://tenzir.com/docs/reference/operators/sample
+source: https://tenzir.com/docs/reference/operators/sample.md
+section: "Docs"
+---
+
 # sample
 
 > Dynamically samples events from a event stream.

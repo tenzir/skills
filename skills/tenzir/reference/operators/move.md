@@ -1,3 +1,10 @@
+---
+title: "move"
+canonical: https://tenzir.com/docs/reference/operators/move
+source: https://tenzir.com/docs/reference/operators/move.md
+section: "Docs"
+---
+
 # move
 
 > Moves values from one field to another, removing the original field.

@@ -1,3 +1,10 @@
+---
+title: "stddev"
+canonical: https://tenzir.com/docs/reference/functions/stddev
+source: https://tenzir.com/docs/reference/functions/stddev.md
+section: "Docs"
+---
+
 # stddev
 
 > Computes the standard deviation of all grouped values.

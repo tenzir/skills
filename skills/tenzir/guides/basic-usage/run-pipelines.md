@@ -1,3 +1,10 @@
+---
+title: "Run pipelines"
+canonical: https://tenzir.com/docs/guides/basic-usage/run-pipelines
+source: https://tenzir.com/docs/guides/basic-usage/run-pipelines.md
+section: "Docs"
+---
+
 # Run pipelines
 
 > You can run a pipeline via the platform, on the command line using the tenzir binary, or as code via the configuration file.

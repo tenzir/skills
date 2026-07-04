@@ -1,3 +1,10 @@
+---
+title: "context::load"
+canonical: https://tenzir.com/docs/reference/operators/context/load
+source: https://tenzir.com/docs/reference/operators/context/load.md
+section: "Docs"
+---
+
 # context::load
 
 > Loads context state.

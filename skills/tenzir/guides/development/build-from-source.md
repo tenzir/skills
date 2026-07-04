@@ -1,3 +1,10 @@
+---
+title: "Build from source"
+canonical: https://tenzir.com/docs/guides/development/build-from-source
+source: https://tenzir.com/docs/guides/development/build-from-source.md
+section: "Docs"
+---
+
 # Build from source
 
 > Tenzir uses CMake as build system with a C++23 compiler.
@@ -186,4 +193,4 @@ The minimum specified versions reflect those used in CI and manual testing. Olde
 
 Every [release](https://github.com/tenzir/tenzir/releases) includes an [SBOM](https://en.wikipedia.org/wiki/Software_bill_of_materials) in [SPDX](https://spdx.dev) format listing all dependencies and their versions:
 
-[articleLatest SBOMarrow\_forwardDownload the Software Bill of Materials in SPDX format](https://github.com/tenzir/tenzir/releases/latest/download/tenzir.spdx.json)
+[Latest SBOMDownload the Software Bill of Materials in SPDX format](https://github.com/tenzir/tenzir/releases/latest/download/tenzir.spdx.json)

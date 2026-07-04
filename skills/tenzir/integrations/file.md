@@ -1,3 +1,11 @@
+---
+title: "File integration"
+description: "Read from and write to files."
+canonical: https://tenzir.com/integrations/file
+source: https://tenzir.com/integrations/file.md
+section: "Integrations"
+---
+
 # File integration
 
 > Read from and write to files.

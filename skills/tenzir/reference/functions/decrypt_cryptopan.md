@@ -1,3 +1,10 @@
+---
+title: "decrypt_cryptopan"
+canonical: https://tenzir.com/docs/reference/functions/decrypt_cryptopan
+source: https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md
+section: "Docs"
+---
+
 # decrypt_cryptopan
 
 > Decrypts an IP address via Crypto-PAn.

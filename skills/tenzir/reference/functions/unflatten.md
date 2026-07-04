@@ -1,3 +1,10 @@
+---
+title: "unflatten"
+canonical: https://tenzir.com/docs/reference/functions/unflatten
+source: https://tenzir.com/docs/reference/functions/unflatten.md
+section: "Docs"
+---
+
 # unflatten
 
 > Unflattens nested data.

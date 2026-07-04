@@ -1,3 +1,10 @@
+---
+title: "count_minutes"
+canonical: https://tenzir.com/docs/reference/functions/count_minutes
+source: https://tenzir.com/docs/reference/functions/count_minutes.md
+section: "Docs"
+---
+
 # count_minutes
 
 > Counts the number of minutes in a duration.

@@ -1,3 +1,10 @@
+---
+title: "context::enrich"
+canonical: https://tenzir.com/docs/reference/operators/context/enrich
+source: https://tenzir.com/docs/reference/operators/context/enrich.md
+section: "Docs"
+---
+
 # context::enrich
 
 > Enriches events with data from a context.

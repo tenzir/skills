@@ -1,3 +1,10 @@
+---
+title: "print_cef"
+canonical: https://tenzir.com/docs/reference/functions/print_cef
+source: https://tenzir.com/docs/reference/functions/print_cef.md
+section: "Docs"
+---
+
 # print_cef
 
 > Prints records as Common Event Format (CEF) messages

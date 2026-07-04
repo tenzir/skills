@@ -1,3 +1,10 @@
+---
+title: "reverse"
+canonical: https://tenzir.com/docs/reference/operators/reverse
+source: https://tenzir.com/docs/reference/operators/reverse.md
+section: "Docs"
+---
+
 # reverse
 
 > Reverses the event order.

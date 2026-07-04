@@ -1,3 +1,10 @@
+---
+title: "parent_dir"
+canonical: https://tenzir.com/docs/reference/functions/parent_dir
+source: https://tenzir.com/docs/reference/functions/parent_dir.md
+section: "Docs"
+---
+
 # parent_dir
 
 > Extracts the parent directory from a file path.

@@ -1,3 +1,10 @@
+---
+title: "Expose data as a server"
+canonical: https://tenzir.com/docs/guides/routing/expose-data-as-server
+source: https://tenzir.com/docs/guides/routing/expose-data-as-server.md
+section: "Docs"
+---
+
 # Expose data as a server
 
 > This guide shows you how to make pipeline data available to external consumers by starting an HTTP server. You’ll learn how to stream serialized pipeline output to HTTP clients, pick a wire format, and configure connection limits and TLS.

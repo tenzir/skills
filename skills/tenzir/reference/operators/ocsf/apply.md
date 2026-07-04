@@ -1,3 +1,10 @@
+---
+title: "ocsf::apply"
+canonical: https://tenzir.com/docs/reference/operators/ocsf/apply
+source: https://tenzir.com/docs/reference/operators/ocsf/apply.md
+section: "Docs"
+---
+
 # ocsf::apply
 
 > Casts incoming events to their OCSF type.

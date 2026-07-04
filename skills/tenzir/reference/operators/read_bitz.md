@@ -1,3 +1,10 @@
+---
+title: "read_bitz"
+canonical: https://tenzir.com/docs/reference/operators/read_bitz
+source: https://tenzir.com/docs/reference/operators/read_bitz.md
+section: "Docs"
+---
+
 # read_bitz
 
 > Parses bytes as BITZ format.

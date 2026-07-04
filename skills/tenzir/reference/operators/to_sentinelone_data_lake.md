@@ -1,3 +1,10 @@
+---
+title: "to_sentinelone_data_lake"
+canonical: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake
+source: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md
+section: "Docs"
+---
+
 # to_sentinelone_data_lake
 
 > Sends security events to SentinelOne Singularity Data Lake via REST API.

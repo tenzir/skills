@@ -1,3 +1,10 @@
+---
+title: "chart_line"
+canonical: https://tenzir.com/docs/reference/operators/chart_line
+source: https://tenzir.com/docs/reference/operators/chart_line.md
+section: "Docs"
+---
+
 # chart_line
 
 > Plots events on an line chart.

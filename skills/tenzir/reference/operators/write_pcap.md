@@ -1,3 +1,10 @@
+---
+title: "write_pcap"
+canonical: https://tenzir.com/docs/reference/operators/write_pcap
+source: https://tenzir.com/docs/reference/operators/write_pcap.md
+section: "Docs"
+---
+
 # write_pcap
 
 > Serializes packet events as a PCAP byte stream.

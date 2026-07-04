@@ -1,3 +1,10 @@
+---
+title: "read_zeek_json"
+canonical: https://tenzir.com/docs/reference/operators/read_zeek_json
+source: https://tenzir.com/docs/reference/operators/read_zeek_json.md
+section: "Docs"
+---
+
 # read_zeek_json
 
 > Parse an incoming Zeek JSON stream into events.

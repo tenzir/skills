@@ -1,3 +1,10 @@
+---
+title: "max"
+canonical: https://tenzir.com/docs/reference/functions/max
+source: https://tenzir.com/docs/reference/functions/max.md
+section: "Docs"
+---
+
 # max
 
 > Computes the maximum of all grouped values.

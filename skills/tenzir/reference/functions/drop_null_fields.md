@@ -1,3 +1,10 @@
+---
+title: "drop_null_fields"
+canonical: https://tenzir.com/docs/reference/functions/drop_null_fields
+source: https://tenzir.com/docs/reference/functions/drop_null_fields.md
+section: "Docs"
+---
+
 # drop_null_fields
 
 > Returns a record with fields whose value is null removed.

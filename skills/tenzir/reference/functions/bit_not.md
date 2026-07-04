@@ -1,3 +1,10 @@
+---
+title: "bit_not"
+canonical: https://tenzir.com/docs/reference/functions/bit_not
+source: https://tenzir.com/docs/reference/functions/bit_not.md
+section: "Docs"
+---
+
 # bit_not
 
 > Computes the bit-wise NOT of its argument.

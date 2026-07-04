@@ -1,3 +1,10 @@
+---
+title: "List Stores"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/list-stores
+source: https://tenzir.com/docs/reference/api/platform/secrets/list-stores.md
+section: "Docs"
+---
+
 # List Stores
 
 > post/user/secrets/list-stores

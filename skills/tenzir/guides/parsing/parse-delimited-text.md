@@ -1,3 +1,10 @@
+---
+title: "Parse delimited text"
+canonical: https://tenzir.com/docs/guides/parsing/parse-delimited-text
+source: https://tenzir.com/docs/guides/parsing/parse-delimited-text.md
+section: "Docs"
+---
+
 # Parse delimited text
 
 > This guide shows you how to parse text streams into structured events. You’ll learn to split byte streams on newlines or custom delimiters, and parse line-based formats like JSON lines, CSV, TSV, key-value pairs, Syslog, and CEF.

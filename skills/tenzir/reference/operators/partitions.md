@@ -1,3 +1,10 @@
+---
+title: "partitions"
+canonical: https://tenzir.com/docs/reference/operators/partitions
+source: https://tenzir.com/docs/reference/operators/partitions.md
+section: "Docs"
+---
+
 # partitions
 
 > Retrieves metadata about events stored at a node.

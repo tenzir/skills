@@ -1,3 +1,10 @@
+---
+title: "since_epoch"
+canonical: https://tenzir.com/docs/reference/functions/since_epoch
+source: https://tenzir.com/docs/reference/functions/since_epoch.md
+section: "Docs"
+---
+
 # since_epoch
 
 > Interprets a time value as duration since the Unix epoch.

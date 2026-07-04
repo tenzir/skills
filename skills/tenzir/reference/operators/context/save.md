@@ -1,3 +1,10 @@
+---
+title: "context::save"
+canonical: https://tenzir.com/docs/reference/operators/context/save
+source: https://tenzir.com/docs/reference/operators/context/save.md
+section: "Docs"
+---
+
 # context::save
 
 > Saves context state.

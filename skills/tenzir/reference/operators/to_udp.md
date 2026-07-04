@@ -1,3 +1,10 @@
+---
+title: "to_udp"
+canonical: https://tenzir.com/docs/reference/operators/to_udp
+source: https://tenzir.com/docs/reference/operators/to_udp.md
+section: "Docs"
+---
+
 # to_udp
 
 > Sends one UDP datagram per input event.

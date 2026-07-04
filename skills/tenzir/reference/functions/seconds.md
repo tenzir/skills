@@ -1,3 +1,10 @@
+---
+title: "seconds"
+canonical: https://tenzir.com/docs/reference/functions/seconds
+source: https://tenzir.com/docs/reference/functions/seconds.md
+section: "Docs"
+---
+
 # seconds
 
 > Converts a number to equivalent seconds.

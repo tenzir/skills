@@ -1,3 +1,10 @@
+---
+title: "Check Connectivity"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/check-connectivy
+source: https://tenzir.com/docs/reference/api/platform/admin/check-connectivy.md
+section: "Docs"
+---
+
 # Check Connectivity
 
 > post/admin/check-connectivy

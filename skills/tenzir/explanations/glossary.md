@@ -1,3 +1,10 @@
+---
+title: "Glossary"
+canonical: https://tenzir.com/docs/explanations/glossary
+source: https://tenzir.com/docs/explanations/glossary.md
+section: "Docs"
+---
+
 # Glossary
 
 > This page defines central terms in the Tenzir ecosystem.

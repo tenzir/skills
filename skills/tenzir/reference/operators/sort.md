@@ -1,3 +1,10 @@
+---
+title: "sort"
+canonical: https://tenzir.com/docs/reference/operators/sort
+source: https://tenzir.com/docs/reference/operators/sort.md
+section: "Docs"
+---
+
 # sort
 
 > Sorts events by the given expressions.

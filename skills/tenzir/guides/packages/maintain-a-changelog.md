@@ -1,3 +1,10 @@
+---
+title: "Maintain a changelog"
+canonical: https://tenzir.com/docs/guides/packages/maintain-a-changelog
+source: https://tenzir.com/docs/guides/packages/maintain-a-changelog.md
+section: "Docs"
+---
+
 # Maintain a changelog
 
 > This guide shows you how to manage changelog entries and publish releases with tenzir-ship. You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
@@ -150,6 +157,14 @@ uvx tenzir-ship validate
 ```
 
 The validator reports missing metadata, unused entries, duplicate entry IDs, and configuration drift. It also checks changelog directory layout and flags stray items (for example an unexpected `changelog/next/` directory). Add this to CI pipelines to enforce metadata completeness.
+
+If your changelog configuration sets `require_pr: true`, plain validation also fails for unreleased entries without `prs` metadata. Use lenient validation in pre-push hooks so missing PR numbers stay warnings until you create the pull request:
+
+```sh
+uvx tenzir-ship validate --lenient
+```
+
+Other validation errors still fail in lenient mode.
 
 ### View project statistics
 

@@ -1,3 +1,10 @@
+---
+title: "hash_sha3_224"
+canonical: https://tenzir.com/docs/reference/functions/hash_sha3_224
+source: https://tenzir.com/docs/reference/functions/hash_sha3_224.md
+section: "Docs"
+---
+
 # hash_sha3_224
 
 > Computes a SHA3-224 hash digest.

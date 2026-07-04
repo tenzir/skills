@@ -1,3 +1,11 @@
+---
+title: "Enrich events with AI"
+description: "Add AI-generated summaries and labels to OCSF events in Tenzir pipelines"
+canonical: https://tenzir.com/docs/guides/enrichment/enrich-events-with-ai
+source: https://tenzir.com/docs/guides/enrichment/enrich-events-with-ai.md
+section: "Docs"
+---
+
 # Enrich events with AI
 
 > Add AI-generated summaries and labels to OCSF events in Tenzir pipelines

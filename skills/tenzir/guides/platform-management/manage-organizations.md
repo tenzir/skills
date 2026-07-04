@@ -1,3 +1,10 @@
+---
+title: "Manage organizations"
+canonical: https://tenzir.com/docs/guides/platform-management/manage-organizations
+source: https://tenzir.com/docs/guides/platform-management/manage-organizations.md
+section: "Docs"
+---
+
 # Manage organizations
 
 > This guide shows you how to create, configure, and delete organizations in the Tenzir Platform. You’ll learn how to perform these tasks through both the web and the CLI.

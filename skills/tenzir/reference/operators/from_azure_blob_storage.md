@@ -1,3 +1,10 @@
+---
+title: "from_azure_blob_storage"
+canonical: https://tenzir.com/docs/reference/operators/from_azure_blob_storage
+source: https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md
+section: "Docs"
+---
+
 # from_azure_blob_storage
 
 > Reads one or multiple files from Azure Blob Storage.

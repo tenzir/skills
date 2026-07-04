@@ -1,3 +1,10 @@
+---
+title: "measure"
+canonical: https://tenzir.com/docs/reference/operators/measure
+source: https://tenzir.com/docs/reference/operators/measure.md
+section: "Docs"
+---
+
 # measure
 
 > Replaces the input with metrics describing the input.

@@ -1,3 +1,10 @@
+---
+title: "List Tenants"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/global-tenant-list
+source: https://tenzir.com/docs/reference/api/platform/admin/global-tenant-list.md
+section: "Docs"
+---
+
 # List Tenants
 
 > get/admin/global-tenant-list

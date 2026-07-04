@@ -1,3 +1,11 @@
+---
+title: "Microsoft Defender integration"
+description: "Detect, prevent, and respond to security threats across endpoints and networks."
+canonical: https://tenzir.com/integrations/microsoft/defender
+source: https://tenzir.com/integrations/microsoft/defender.md
+section: "Integrations"
+---
+
 # Microsoft Defender integration
 
 > Detect, prevent, and respond to security threats across endpoints and networks.

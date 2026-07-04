@@ -1,3 +1,10 @@
+---
+title: "trim"
+canonical: https://tenzir.com/docs/reference/functions/trim
+source: https://tenzir.com/docs/reference/functions/trim.md
+section: "Docs"
+---
+
 # trim
 
 > Trims whitespace or specified characters from both ends of a string.

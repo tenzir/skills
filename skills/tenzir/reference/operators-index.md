@@ -63,7 +63,7 @@
 ## Filter
 
 - [assert](operators/assert.md): Drops events and emits a warning if the invariant is violated.
-- [assert_throughput](operators/assert_throughput.md): Emits a warning if the pipeline does not have the expected throughput
+- [assert_throughput](operators/assert_throughput.md): Emits a warning if the pipeline is outside the expected throughput range.
 - [deduplicate](operators/deduplicate.md): Removes duplicate events based on a common key.
 - [head](operators/head.md): Limits the input to the first `n` events.
 - [sample](operators/sample.md): Dynamically samples events from a event stream.
@@ -135,9 +135,7 @@
 - [batch](operators/batch.md): The `batch` operator controls the batch size of events.
 - [buffer](operators/buffer.md): An in-memory buffer to improve handling of data spikes in upstream operators.
 - [cache](operators/cache.md): An in-memory cache shared between pipelines.
-- [local](operators/local.md): Forces a pipeline to run locally.
 - [measure](operators/measure.md): Replaces the input with metrics describing the input.
-- [remote](operators/remote.md): Forces a pipeline to run remotely at a node.
 - [strict](operators/strict.md): Treats all warnings as errors.
 - [unordered](operators/unordered.md): Removes ordering assumptions from a pipeline.
 

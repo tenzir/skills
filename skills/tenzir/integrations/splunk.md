@@ -1,3 +1,11 @@
+---
+title: "Splunk integration"
+description: "Collect, index, and analyze machine-generated data for monitoring, searching, and troubleshooting."
+canonical: https://tenzir.com/integrations/splunk
+source: https://tenzir.com/integrations/splunk.md
+section: "Integrations"
+---
+
 # Splunk integration
 
 > Collect, index, and analyze machine-generated data for monitoring, searching, and troubleshooting.

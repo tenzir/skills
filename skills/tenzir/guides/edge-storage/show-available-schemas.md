@@ -1,3 +1,10 @@
+---
+title: "Show available schemas"
+canonical: https://tenzir.com/docs/guides/edge-storage/show-available-schemas
+source: https://tenzir.com/docs/guides/edge-storage/show-available-schemas.md
+section: "Docs"
+---
+
 # Show available schemas
 
 > When you write a pipeline, you often reference field names. If you do not know the shape of your data, you can look up available schemas, i.e., the record types describing top-level events.

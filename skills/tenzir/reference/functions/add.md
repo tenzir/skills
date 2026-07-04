@@ -1,3 +1,10 @@
+---
+title: "add"
+canonical: https://tenzir.com/docs/reference/functions/add
+source: https://tenzir.com/docs/reference/functions/add.md
+section: "Docs"
+---
+
 # add
 
 > Adds an element into a list if it doesn’t already exist (set-insertion).

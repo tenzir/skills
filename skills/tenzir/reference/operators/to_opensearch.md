@@ -1,3 +1,10 @@
+---
+title: "to_opensearch"
+canonical: https://tenzir.com/docs/reference/operators/to_opensearch
+source: https://tenzir.com/docs/reference/operators/to_opensearch.md
+section: "Docs"
+---
+
 # to_opensearch
 
 > Sends events to a Bulk API compatible with OpenSearch.

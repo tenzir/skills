@@ -1,3 +1,11 @@
+---
+title: "Use lookup tables"
+description: "Store reference data in lookup tables and apply it to OCSF events"
+canonical: https://tenzir.com/docs/guides/enrichment/use-lookup-tables
+source: https://tenzir.com/docs/guides/enrichment/use-lookup-tables.md
+section: "Docs"
+---
+
 # Use lookup tables
 
 > Store reference data in lookup tables and apply it to OCSF events

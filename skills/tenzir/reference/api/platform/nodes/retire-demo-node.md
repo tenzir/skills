@@ -1,3 +1,10 @@
+---
+title: "Retire Demo Node"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/retire-demo-node
+source: https://tenzir.com/docs/reference/api/platform/nodes/retire-demo-node.md
+section: "Docs"
+---
+
 # Retire Demo Node
 
 > post/user/retire-demo-node

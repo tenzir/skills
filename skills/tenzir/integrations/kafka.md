@@ -1,3 +1,11 @@
+---
+title: "Kafka integration"
+description: "Publish, subscribe, store, and process streams of records in a distributed messaging system."
+canonical: https://tenzir.com/integrations/kafka
+source: https://tenzir.com/integrations/kafka.md
+section: "Integrations"
+---
+
 # Kafka integration
 
 > Publish, subscribe, store, and process streams of records in a distributed messaging system.

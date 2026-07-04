@@ -1,3 +1,10 @@
+---
+title: "contains_null"
+canonical: https://tenzir.com/docs/reference/functions/contains_null
+source: https://tenzir.com/docs/reference/functions/contains_null.md
+section: "Docs"
+---
+
 # contains_null
 
 > Checks whether the input contains any null values.

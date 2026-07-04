@@ -1,3 +1,10 @@
+---
+title: "Transparent Proxy"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-put
+source: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-put.md
+section: "Docs"
+---
+
 # Transparent Proxy
 
 > put/user/node-proxy/{tenantid}/{nodeid}/{httppath}

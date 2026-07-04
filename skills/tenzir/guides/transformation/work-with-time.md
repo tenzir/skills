@@ -1,3 +1,10 @@
+---
+title: "Work with time"
+canonical: https://tenzir.com/docs/guides/transformation/work-with-time
+source: https://tenzir.com/docs/guides/transformation/work-with-time.md
+section: "Docs"
+---
+
 # Work with time
 
 > Time is fundamental in data analysis. Whether you’re analyzing logs, tracking events, or monitoring systems, you need to parse timestamps, calculate durations, and format dates. This guide shows you how to work with time values in TQL.

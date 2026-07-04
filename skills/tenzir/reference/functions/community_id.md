@@ -1,3 +1,10 @@
+---
+title: "community_id"
+canonical: https://tenzir.com/docs/reference/functions/community_id
+source: https://tenzir.com/docs/reference/functions/community_id.md
+section: "Docs"
+---
+
 # community_id
 
 > Computes the Community ID for a network connection/flow.

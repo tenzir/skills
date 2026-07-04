@@ -1,3 +1,10 @@
+---
+title: "summarize"
+canonical: https://tenzir.com/docs/reference/operators/summarize
+source: https://tenzir.com/docs/reference/operators/summarize.md
+section: "Docs"
+---
+
 # summarize
 
 > Groups events and applies aggregate functions to each group.

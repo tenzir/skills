@@ -1,3 +1,10 @@
+---
+title: "parse_kv"
+canonical: https://tenzir.com/docs/reference/functions/parse_kv
+source: https://tenzir.com/docs/reference/functions/parse_kv.md
+section: "Docs"
+---
+
 # parse_kv
 
 > Parses a string as key-value pairs.

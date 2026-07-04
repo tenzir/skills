@@ -1,3 +1,10 @@
+---
+title: "Delete External Store"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/delete-external-store
+source: https://tenzir.com/docs/reference/api/platform/secrets/delete-external-store.md
+section: "Docs"
+---
+
 # Delete External Store
 
 > post/user/secrets/delete-external-store

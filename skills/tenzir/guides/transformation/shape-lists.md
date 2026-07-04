@@ -1,3 +1,10 @@
+---
+title: "Shape lists"
+canonical: https://tenzir.com/docs/guides/transformation/shape-lists
+source: https://tenzir.com/docs/guides/transformation/shape-lists.md
+section: "Docs"
+---
+
 # Shape lists
 
 > Lists (arrays) contain ordered sequences of values. This guide shows you how to work with lists - accessing elements, sorting and slicing, transforming values, and combining data structures.

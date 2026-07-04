@@ -1,3 +1,10 @@
+---
+title: "is_global"
+canonical: https://tenzir.com/docs/reference/functions/is_global
+source: https://tenzir.com/docs/reference/functions/is_global.md
+section: "Docs"
+---
+
 # is_global
 
 > Checks whether an IP address is a global address.

@@ -1,3 +1,11 @@
+---
+title: "NATS integration"
+description: "NATS is a messaging system for services, edge deployments, and cloud-native applications. Tenzir integrates with NATS JetStream to consume messages from subjects and publish events back to subjects."
+canonical: https://tenzir.com/integrations/nats
+source: https://tenzir.com/integrations/nats.md
+section: "Integrations"
+---
+
 # NATS integration
 
 > NATS is a messaging system for services, edge deployments, and cloud-native applications. Tenzir integrates with NATS JetStream to consume messages from subjects and publish events back to subjects.

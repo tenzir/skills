@@ -1,3 +1,10 @@
+---
+title: "Configure dashboards"
+canonical: https://tenzir.com/docs/guides/platform-management/configure-dashboards
+source: https://tenzir.com/docs/guides/platform-management/configure-dashboards.md
+section: "Docs"
+---
+
 # Configure dashboards
 
 > You can pre-define dashboards for your static workspaces. This practice provides users with ready-to-use visualizations when they access the workspace.

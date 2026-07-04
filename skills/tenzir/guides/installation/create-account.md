@@ -1,3 +1,10 @@
+---
+title: "Create account"
+canonical: https://tenzir.com/docs/guides/installation/create-account
+source: https://tenzir.com/docs/guides/installation/create-account.md
+section: "Docs"
+---
+
 # Create account
 
 > The Tenzir Platform is a web interface for managing pipelines and nodes. Create an account to get started:

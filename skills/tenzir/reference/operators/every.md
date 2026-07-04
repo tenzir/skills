@@ -1,3 +1,10 @@
+---
+title: "every"
+canonical: https://tenzir.com/docs/reference/operators/every
+source: https://tenzir.com/docs/reference/operators/every.md
+section: "Docs"
+---
+
 # every
 
 > Runs a pipeline periodically at a fixed interval.

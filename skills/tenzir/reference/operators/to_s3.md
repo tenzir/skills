@@ -1,3 +1,10 @@
+---
+title: "to_s3"
+canonical: https://tenzir.com/docs/reference/operators/to_s3
+source: https://tenzir.com/docs/reference/operators/to_s3.md
+section: "Docs"
+---
+
 # to_s3
 
 > Writes events to one or multiple objects in Amazon S3.

@@ -1,3 +1,10 @@
+---
+title: "from_mysql"
+canonical: https://tenzir.com/docs/reference/operators/from_mysql
+source: https://tenzir.com/docs/reference/operators/from_mysql.md
+section: "Docs"
+---
+
 # from_mysql
 
 > Reads events from a MySQL database.

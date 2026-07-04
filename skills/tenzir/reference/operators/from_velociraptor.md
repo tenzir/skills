@@ -1,3 +1,10 @@
+---
+title: "from_velociraptor"
+canonical: https://tenzir.com/docs/reference/operators/from_velociraptor
+source: https://tenzir.com/docs/reference/operators/from_velociraptor.md
+section: "Docs"
+---
+
 # from_velociraptor
 
 > Submits VQL to a Velociraptor server and returns the response as events.

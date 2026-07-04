@@ -1,3 +1,10 @@
+---
+title: "write_tsv"
+canonical: https://tenzir.com/docs/reference/operators/write_tsv
+source: https://tenzir.com/docs/reference/operators/write_tsv.md
+section: "Docs"
+---
+
 # write_tsv
 
 > Transforms event stream to TSV (Tab-Separated Values) byte stream.

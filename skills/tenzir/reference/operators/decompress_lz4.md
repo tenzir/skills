@@ -1,3 +1,10 @@
+---
+title: "decompress_lz4"
+canonical: https://tenzir.com/docs/reference/operators/decompress_lz4
+source: https://tenzir.com/docs/reference/operators/decompress_lz4.md
+section: "Docs"
+---
+
 # decompress_lz4
 
 > Decompresses a stream of bytes in the Lz4 format.

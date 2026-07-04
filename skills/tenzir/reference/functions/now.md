@@ -1,3 +1,10 @@
+---
+title: "now"
+canonical: https://tenzir.com/docs/reference/functions/now
+source: https://tenzir.com/docs/reference/functions/now.md
+section: "Docs"
+---
+
 # now
 
 > Gets the current wallclock time.

@@ -1,3 +1,10 @@
+---
+title: "diagnostics"
+canonical: https://tenzir.com/docs/reference/operators/diagnostics
+source: https://tenzir.com/docs/reference/operators/diagnostics.md
+section: "Docs"
+---
+
 # diagnostics
 
 > Retrieves diagnostic events from a Tenzir node.

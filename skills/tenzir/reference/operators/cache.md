@@ -1,3 +1,10 @@
+---
+title: "cache"
+canonical: https://tenzir.com/docs/reference/operators/cache
+source: https://tenzir.com/docs/reference/operators/cache.md
+section: "Docs"
+---
+
 # cache
 
 > An in-memory cache shared between pipelines.

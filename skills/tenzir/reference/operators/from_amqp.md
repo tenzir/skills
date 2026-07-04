@@ -1,3 +1,10 @@
+---
+title: "from_amqp"
+canonical: https://tenzir.com/docs/reference/operators/from_amqp
+source: https://tenzir.com/docs/reference/operators/from_amqp.md
+section: "Docs"
+---
+
 # from_amqp
 
 > Receives messages from an AMQP queue.

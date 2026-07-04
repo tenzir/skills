@@ -1,3 +1,10 @@
+---
+title: "file_contents"
+canonical: https://tenzir.com/docs/reference/functions/file_contents
+source: https://tenzir.com/docs/reference/functions/file_contents.md
+section: "Docs"
+---
+
 # file_contents
 
 > Reads a file’s contents.

@@ -1,3 +1,11 @@
+---
+title: "Use agent skills"
+description: "Install Tenzir agent skills for documentation, schemas, and workflow automation"
+canonical: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills
+source: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md
+section: "Docs"
+---
+
 # Use agent skills
 
 > Install Tenzir agent skills for documentation, schemas, and workflow automation
@@ -14,7 +22,7 @@ Agent Skills
 
 Tenzir publishes the following skills:
 
-### 🧬 Schemas
+### Schemas
 
 * `tenzir-asim`: Microsoft Sentinel ASIM schema and mapping guidance for schemas, fields, aliases, and roles.
 * `tenzir-cef`: ArcSight CEF reference for headers, the extension dictionary, the ESM event schema, and timestamps.
@@ -25,12 +33,12 @@ Tenzir publishes the following skills:
 * `tenzir-ocsf`: OCSF schema reference for event classes, objects, attributes, profiles, and extensions.
 * `tenzir-udm`: Google SecOps UDM schema and normalization guidance for fields, event types, and entities.
 
-### 🛡️ Tenzir Users
+### Tenzir Users
 
-* `tenzir-docs`: Tenzir documentation for TQL, operators, functions, integrations, and deployment.
+* `tenzir`: Tenzir documentation for TQL, operators, functions, integrations, and deployment, plus entry points to the changelog, blog, and product pages.
 * `tenzir-manage-packages`: Package lifecycle routing for manifests, operators, pipelines, tests, and schema mappings.
 
-### 🏗️ Tenzir Contributors
+### Tenzir Contributors
 
 * `tenzir-commit-changes`: Stage, split, and commit changes with clean messages.
 * `tenzir-create-pull-requests`: Open pull requests, add changelog entries, and link documentation PRs.
@@ -42,45 +50,75 @@ Tenzir publishes the following skills:
 
 ## Install skills
 
-Tenzir skills are managed with the [`skills`](https://github.com/vercel-labs/skills) CLI, which supports 40+ coding agents including Claude Code, Cursor, Codex, GitHub Copilot, and more.
+Several skill installers work with the `tenzir/skills` repository. The [`skills`](https://github.com/vercel-labs/skills) CLI supports 40+ coding agents including Claude Code, Cursor, Codex, GitHub Copilot, and more. If you prefer not to run npm tooling, `skeel` (via uv) and the `gh skill` extension (via the GitHub CLI) install the same skills.
+
+The remaining examples on this page use `npx skills`; substitute your preferred installer.
 
 ### Install all skills
 
 Install all Tenzir skills into the current project:
 
-```bash
-npx skills add tenzir/skills
-```
+* gh skill
 
-The CLI auto-detects which coding agents you have installed and prompts you to select targets.
+  ```bash
+  gh skill install tenzir/skills --all
+  ```
+
+* uvx skeel
+
+  ```bash
+  uvx skeel add tenzir/skills
+  ```
+
+* npx skills
+
+  ```bash
+  npx skills add tenzir/skills
+  ```
+
+The installers auto-detect which coding agents you have installed and prompt you to select targets.
 
 ### Install individual skills
 
-Append `@<skill-name>` to install a specific skill from the available skills:
+Name a specific skill from the available skills:
 
-```bash
-npx skills add tenzir/skills@<skill-name>
-```
+* gh skill
 
-### Use the docs skill
+  ```bash
+  gh skill install tenzir/skills <skill-name>
+  ```
+
+* uvx skeel
+
+  ```bash
+  uvx skeel add tenzir/skills <skill-name>
+  ```
+
+* npx skills
+
+  ```bash
+  npx skills add tenzir/skills@<skill-name>
+  ```
+
+### Use the tenzir skill
 
 Install the Tenzir documentation skill when you want an agent to answer questions about TQL, write or debug pipelines, look up operators and functions, or help with parsing, transformation, enrichment, integrations, deployment, and configuration:
 
 ```bash
-npx skills add tenzir/skills@tenzir-docs
+npx skills add tenzir/skills@tenzir
 ```
 
-The `tenzir-docs` skill packages the entire Tenzir documentation with progressive disclosure, so the agent loads a condensed overview first and drills into individual operator, function, and guide pages only when needed.
+The `tenzir` skill packages the entire Tenzir documentation with progressive disclosure, so the agent loads a condensed overview first and drills into individual operator, function, and guide pages only when needed. It also points the agent at live entry points for the changelog, blog, and other tenzir.com pages that the skill does not bundle.
 
 Tell the agent which context you want:
 
 ```text
-Use the tenzir-docs skill to show me how to read Suricata EVE JSON from a file
+Use the tenzir skill to show me how to read Suricata EVE JSON from a file
 and aggregate the alerts by signature.
 ```
 
 ```text
-Use the tenzir-docs skill to explain the difference between the summarize and
+Use the tenzir skill to explain the difference between the summarize and
 top operators.
 ```
 
@@ -281,7 +319,7 @@ npx skills add -g tenzir/skills
 Install a specific skill globally:
 
 ```bash
-npx skills add -g tenzir/skills@tenzir-docs
+npx skills add -g tenzir/skills@tenzir
 ```
 
 ### Target specific agents
@@ -331,7 +369,7 @@ npx skills remove
 Remove a specific skill:
 
 ```bash
-npx skills remove tenzir-docs
+npx skills remove tenzir
 ```
 
 Remove all installed Tenzir skills:

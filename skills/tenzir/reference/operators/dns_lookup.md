@@ -1,3 +1,10 @@
+---
+title: "dns_lookup"
+canonical: https://tenzir.com/docs/reference/operators/dns_lookup
+source: https://tenzir.com/docs/reference/operators/dns_lookup.md
+section: "Docs"
+---
+
 # dns_lookup
 
 > Performs DNS lookups to resolve IP addresses to hostnames or hostnames to IP addresses.

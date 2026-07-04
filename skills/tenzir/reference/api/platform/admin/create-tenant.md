@@ -1,3 +1,10 @@
+---
+title: "Create Tenant"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/create-tenant
+source: https://tenzir.com/docs/reference/api/platform/admin/create-tenant.md
+section: "Docs"
+---
+
 # Create Tenant
 
 > post/admin/create-tenant

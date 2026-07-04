@@ -1,3 +1,10 @@
+---
+title: "map"
+canonical: https://tenzir.com/docs/reference/functions/map
+source: https://tenzir.com/docs/reference/functions/map.md
+section: "Docs"
+---
+
 # map
 
 > Maps each list element to an expression.

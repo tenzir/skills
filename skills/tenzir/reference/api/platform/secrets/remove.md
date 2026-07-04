@@ -1,3 +1,10 @@
+---
+title: "Remove"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/remove
+source: https://tenzir.com/docs/reference/api/platform/secrets/remove.md
+section: "Docs"
+---
+
 # Remove
 
 > post/user/secrets/remove

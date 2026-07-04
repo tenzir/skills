@@ -1,3 +1,10 @@
+---
+title: "env"
+canonical: https://tenzir.com/docs/reference/functions/env
+source: https://tenzir.com/docs/reference/functions/env.md
+section: "Docs"
+---
+
 # env
 
 > Reads an environment variable.

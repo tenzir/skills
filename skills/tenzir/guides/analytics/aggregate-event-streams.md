@@ -1,3 +1,10 @@
+---
+title: "Aggregate event streams"
+canonical: https://tenzir.com/docs/guides/analytics/aggregate-event-streams
+source: https://tenzir.com/docs/guides/analytics/aggregate-event-streams.md
+section: "Docs"
+---
+
 # Aggregate event streams
 
 > This guide shows you how to aggregate event streams with summarize and window. You’ll learn to count, group, compute statistics, and build bounded event-time detections over streaming data.

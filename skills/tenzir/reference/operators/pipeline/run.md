@@ -1,3 +1,10 @@
+---
+title: "pipeline::run"
+canonical: https://tenzir.com/docs/reference/operators/pipeline/run
+source: https://tenzir.com/docs/reference/operators/pipeline/run.md
+section: "Docs"
+---
+
 # pipeline::run
 
 > Starts a pipeline in the node and waits for it to complete.

@@ -1,3 +1,10 @@
+---
+title: "context::create_bloom_filter"
+canonical: https://tenzir.com/docs/reference/operators/context/create_bloom_filter
+source: https://tenzir.com/docs/reference/operators/context/create_bloom_filter.md
+section: "Docs"
+---
+
 # context::create_bloom_filter
 
 > Creates a Bloom filter context.

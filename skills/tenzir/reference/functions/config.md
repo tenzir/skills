@@ -1,3 +1,10 @@
+---
+title: "config"
+canonical: https://tenzir.com/docs/reference/functions/config
+source: https://tenzir.com/docs/reference/functions/config.md
+section: "Docs"
+---
+
 # config
 
 > Reads Tenzir’s configuration file.

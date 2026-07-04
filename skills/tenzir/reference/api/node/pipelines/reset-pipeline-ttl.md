@@ -1,3 +1,10 @@
+---
+title: "Reset the TTL of an existing pipeline"
+canonical: https://tenzir.com/docs/reference/api/node/pipelines/reset-pipeline-ttl
+source: https://tenzir.com/docs/reference/api/node/pipelines/reset-pipeline-ttl.md
+section: "Docs"
+---
+
 # Reset the TTL of an existing pipeline
 
 > post/pipeline/reset-ttl

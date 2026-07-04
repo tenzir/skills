@@ -1,3 +1,10 @@
+---
+title: "Manage organization members"
+canonical: https://tenzir.com/docs/guides/platform-management/manage-organization-members
+source: https://tenzir.com/docs/guides/platform-management/manage-organization-members.md
+section: "Docs"
+---
+
 # Manage organization members
 
 > This guide shows you how to invite people to your organization, manage existing members, and understand the role-based permission model. You’ll learn how to use both the web and the CLI for these tasks.

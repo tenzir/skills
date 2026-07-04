@@ -1,3 +1,10 @@
+---
+title: "Manage organization workspaces"
+canonical: https://tenzir.com/docs/guides/platform-management/manage-organization-workspaces
+source: https://tenzir.com/docs/guides/platform-management/manage-organization-workspaces.md
+section: "Docs"
+---
+
 # Manage organization workspaces
 
 > This guide shows you how to create, view, and delete workspaces that belong to an organization. You’ll learn the difference between personal and organization workspaces and how access control works for shared workspaces.

@@ -1,3 +1,10 @@
+---
+title: "Transparent Proxy"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-get
+source: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-get.md
+section: "Docs"
+---
+
 # Transparent Proxy
 
 > get/user/node-proxy/{tenantid}/{nodeid}/{httppath}

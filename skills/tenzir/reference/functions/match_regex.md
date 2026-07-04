@@ -1,3 +1,10 @@
+---
+title: "match_regex"
+canonical: https://tenzir.com/docs/reference/functions/match_regex
+source: https://tenzir.com/docs/reference/functions/match_regex.md
+section: "Docs"
+---
+
 # match_regex
 
 > Checks if a string partially matches a regular expression.

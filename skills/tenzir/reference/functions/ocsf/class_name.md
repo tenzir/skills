@@ -1,3 +1,10 @@
+---
+title: "ocsf::class_name"
+canonical: https://tenzir.com/docs/reference/functions/ocsf/class_name
+source: https://tenzir.com/docs/reference/functions/ocsf/class_name.md
+section: "Docs"
+---
+
 # ocsf::class_name
 
 > Returns the classname for a given classuid.

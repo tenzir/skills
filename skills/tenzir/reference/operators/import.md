@@ -1,3 +1,10 @@
+---
+title: "import"
+canonical: https://tenzir.com/docs/reference/operators/import
+source: https://tenzir.com/docs/reference/operators/import.md
+section: "Docs"
+---
+
 # import
 
 > Imports events into a Tenzir node.

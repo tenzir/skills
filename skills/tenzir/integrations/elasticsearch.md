@@ -1,3 +1,11 @@
+---
+title: "Elasticsearch integration"
+description: "Index, search, and analyze data in a distributed and scalable manner."
+canonical: https://tenzir.com/integrations/elasticsearch
+source: https://tenzir.com/integrations/elasticsearch.md
+section: "Integrations"
+---
+
 # Elasticsearch integration
 
 > Index, search, and analyze data in a distributed and scalable manner.

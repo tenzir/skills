@@ -1,3 +1,10 @@
+---
+title: "read_lines"
+canonical: https://tenzir.com/docs/reference/operators/read_lines
+source: https://tenzir.com/docs/reference/operators/read_lines.md
+section: "Docs"
+---
+
 # read_lines
 
 > Parses an incoming bytes stream into events.

@@ -1,3 +1,11 @@
+---
+title: "ZeroMQ integration"
+description: "Send, receive, and route messages asynchronously over various transport protocols."
+canonical: https://tenzir.com/integrations/zeromq
+source: https://tenzir.com/integrations/zeromq.md
+section: "Integrations"
+---
+
 # ZeroMQ integration
 
 > Send, receive, and route messages asynchronously over various transport protocols.

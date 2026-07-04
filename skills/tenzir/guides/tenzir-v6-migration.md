@@ -1,3 +1,11 @@
+---
+title: "Tenzir v6 Migration"
+description: "Learn how to migrate legacy TQL pipelines to Tenzir v6, adopt the new execution patterns, and use temporary compatibility controls while you update."
+canonical: https://tenzir.com/docs/guides/tenzir-v6-migration
+source: https://tenzir.com/docs/guides/tenzir-v6-migration.md
+section: "Docs"
+---
+
 # Tenzir v6 Migration
 
 > Learn how to migrate legacy TQL pipelines to Tenzir v6, adopt the new execution patterns, and use temporary compatibility controls while you update.

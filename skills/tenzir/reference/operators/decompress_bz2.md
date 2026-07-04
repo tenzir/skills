@@ -1,3 +1,10 @@
+---
+title: "decompress_bz2"
+canonical: https://tenzir.com/docs/reference/operators/decompress_bz2
+source: https://tenzir.com/docs/reference/operators/decompress_bz2.md
+section: "Docs"
+---
+
 # decompress_bz2
 
 > Decompresses a stream of bytes in the Bzip2 format.

@@ -1,3 +1,10 @@
+---
+title: "Read multiple pipeline outputs"
+canonical: https://tenzir.com/docs/reference/api/node/pipeline-output/read-multiple-pipeline-outputs
+source: https://tenzir.com/docs/reference/api/node/pipeline-output/read-multiple-pipeline-outputs.md
+section: "Docs"
+---
+
 # Read multiple pipeline outputs
 
 > post/serve-multi

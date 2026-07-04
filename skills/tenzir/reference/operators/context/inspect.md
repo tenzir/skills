@@ -1,3 +1,10 @@
+---
+title: "context::inspect"
+canonical: https://tenzir.com/docs/reference/operators/context/inspect
+source: https://tenzir.com/docs/reference/operators/context/inspect.md
+section: "Docs"
+---
+
 # context::inspect
 
 > Resets a context.

@@ -1,3 +1,10 @@
+---
+title: "context::lookup"
+canonical: https://tenzir.com/docs/reference/operators/context/lookup
+source: https://tenzir.com/docs/reference/operators/context/lookup.md
+section: "Docs"
+---
+
 # context::lookup
 
 > Performs live filtering of the import feed using a context and translates context updates into historical queries.

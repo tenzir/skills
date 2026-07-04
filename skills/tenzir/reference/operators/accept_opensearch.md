@@ -1,3 +1,10 @@
+---
+title: "accept_opensearch"
+canonical: https://tenzir.com/docs/reference/operators/accept_opensearch
+source: https://tenzir.com/docs/reference/operators/accept_opensearch.md
+section: "Docs"
+---
+
 # accept_opensearch
 
 > Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.

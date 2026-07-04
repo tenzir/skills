@@ -1,3 +1,10 @@
+---
+title: "Transform data at rest"
+canonical: https://tenzir.com/docs/guides/edge-storage/transform-data-at-rest
+source: https://tenzir.com/docs/guides/edge-storage/transform-data-at-rest.md
+section: "Docs"
+---
+
 # Transform data at rest
 
 > This guide shows you how to transform data already stored in a node. You’ll learn to apply compaction, manage storage quotas, and run retroactive pipelines.

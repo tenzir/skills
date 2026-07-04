@@ -1,3 +1,10 @@
+---
+title: "minutes"
+canonical: https://tenzir.com/docs/reference/functions/minutes
+source: https://tenzir.com/docs/reference/functions/minutes.md
+section: "Docs"
+---
+
 # minutes
 
 > Converts a number to equivalent minutes.

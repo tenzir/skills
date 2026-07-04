@@ -1,3 +1,10 @@
+---
+title: "fork"
+canonical: https://tenzir.com/docs/reference/operators/fork
+source: https://tenzir.com/docs/reference/operators/fork.md
+section: "Docs"
+---
+
 # fork
 
 > Executes a subpipeline with a copy of the input.

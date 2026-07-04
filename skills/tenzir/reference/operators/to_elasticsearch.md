@@ -1,3 +1,10 @@
+---
+title: "to_elasticsearch"
+canonical: https://tenzir.com/docs/reference/operators/to_elasticsearch
+source: https://tenzir.com/docs/reference/operators/to_elasticsearch.md
+section: "Docs"
+---
+
 # to_elasticsearch
 
 > Sends events to a Bulk API compatible with Elasticsearch.

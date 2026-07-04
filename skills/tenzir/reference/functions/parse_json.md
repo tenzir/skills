@@ -1,3 +1,10 @@
+---
+title: "parse_json"
+canonical: https://tenzir.com/docs/reference/functions/parse_json
+source: https://tenzir.com/docs/reference/functions/parse_json.md
+section: "Docs"
+---
+
 # parse_json
 
 > Parses a string as a JSON value.

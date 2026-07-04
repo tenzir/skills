@@ -1,3 +1,10 @@
+---
+title: "write_ndjson"
+canonical: https://tenzir.com/docs/reference/operators/write_ndjson
+source: https://tenzir.com/docs/reference/operators/write_ndjson.md
+section: "Docs"
+---
+
 # write_ndjson
 
 > Transforms the input event stream to a Newline-Delimited JSON byte stream.

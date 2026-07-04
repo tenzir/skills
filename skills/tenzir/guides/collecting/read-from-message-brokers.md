@@ -1,3 +1,10 @@
+---
+title: "Read from message brokers"
+canonical: https://tenzir.com/docs/guides/collecting/read-from-message-brokers
+source: https://tenzir.com/docs/guides/collecting/read-from-message-brokers.md
+section: "Docs"
+---
+
 # Read from message brokers
 
 > This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.

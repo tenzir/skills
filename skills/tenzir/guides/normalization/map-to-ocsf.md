@@ -1,3 +1,10 @@
+---
+title: "Map to OCSF"
+canonical: https://tenzir.com/docs/guides/normalization/map-to-ocsf
+source: https://tenzir.com/docs/guides/normalization/map-to-ocsf.md
+section: "Docs"
+---
+
 # Map to OCSF
 
 > This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.

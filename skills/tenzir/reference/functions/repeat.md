@@ -1,3 +1,10 @@
+---
+title: "repeat"
+canonical: https://tenzir.com/docs/reference/functions/repeat
+source: https://tenzir.com/docs/reference/functions/repeat.md
+section: "Docs"
+---
+
 # repeat
 
 > Repeats a string a specified number of times.

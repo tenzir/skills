@@ -1,3 +1,10 @@
+---
+title: "sum"
+canonical: https://tenzir.com/docs/reference/functions/sum
+source: https://tenzir.com/docs/reference/functions/sum.md
+section: "Docs"
+---
+
 # sum
 
 > Computes the sum of all values.

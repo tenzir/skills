@@ -1,3 +1,10 @@
+---
+title: "Configure project hooks"
+canonical: https://tenzir.com/docs/guides/testing/configure-project-hooks
+source: https://tenzir.com/docs/guides/testing/configure-project-hooks.md
+section: "Docs"
+---
+
 # Configure project hooks
 
 > This guide shows you how to configure tenzir-test project hooks for setup and cleanup tasks that belong next to your tests. You’ll learn how to select local Tenzir binaries before discovery, set project-scoped environment variables, and collect artifacts from failed tests.

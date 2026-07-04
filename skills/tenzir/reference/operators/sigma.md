@@ -1,3 +1,10 @@
+---
+title: "sigma"
+canonical: https://tenzir.com/docs/reference/operators/sigma
+source: https://tenzir.com/docs/reference/operators/sigma.md
+section: "Docs"
+---
+
 # sigma
 
 > Filter the input with Sigma rules and output matching events.

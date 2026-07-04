@@ -1,3 +1,10 @@
+---
+title: "Proxy"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/proxy
+source: https://tenzir.com/docs/reference/api/platform/nodes/proxy.md
+section: "Docs"
+---
+
 # Proxy
 
 > post/user/proxy

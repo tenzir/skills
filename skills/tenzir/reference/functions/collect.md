@@ -1,3 +1,10 @@
+---
+title: "collect"
+canonical: https://tenzir.com/docs/reference/functions/collect
+source: https://tenzir.com/docs/reference/functions/collect.md
+section: "Docs"
+---
+
 # collect
 
 > Creates a list of all non-null grouped values, preserving duplicates.

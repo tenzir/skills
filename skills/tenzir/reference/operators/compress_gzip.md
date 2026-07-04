@@ -1,3 +1,10 @@
+---
+title: "compress_gzip"
+canonical: https://tenzir.com/docs/reference/operators/compress_gzip
+source: https://tenzir.com/docs/reference/operators/compress_gzip.md
+section: "Docs"
+---
+
 # compress_gzip
 
 > Compresses a stream of bytes using gzip compression.

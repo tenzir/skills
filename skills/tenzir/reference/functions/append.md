@@ -1,3 +1,10 @@
+---
+title: "append"
+canonical: https://tenzir.com/docs/reference/functions/append
+source: https://tenzir.com/docs/reference/functions/append.md
+section: "Docs"
+---
+
 # append
 
 > Inserts an element at the back of a list.

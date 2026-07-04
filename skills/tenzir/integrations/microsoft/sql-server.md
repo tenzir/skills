@@ -1,3 +1,11 @@
+---
+title: "Microsoft SQL Server integration"
+description: "Provides audit logs for database activity, logins, and errors."
+canonical: https://tenzir.com/integrations/microsoft/sql-server
+source: https://tenzir.com/integrations/microsoft/sql-server.md
+section: "Integrations"
+---
+
 # Microsoft SQL Server integration
 
 > Provides audit logs for database activity, logins, and errors.

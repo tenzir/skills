@@ -1,3 +1,10 @@
+---
+title: "write_syslog"
+canonical: https://tenzir.com/docs/reference/operators/write_syslog
+source: https://tenzir.com/docs/reference/operators/write_syslog.md
+section: "Docs"
+---
+
 # write_syslog
 
 > Writes events as syslog.

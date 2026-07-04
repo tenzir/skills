@@ -1,3 +1,10 @@
+---
+title: "export"
+canonical: https://tenzir.com/docs/reference/operators/export
+source: https://tenzir.com/docs/reference/operators/export.md
+section: "Docs"
+---
+
 # export
 
 > Retrieves events from a Tenzir node.

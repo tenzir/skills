@@ -1,3 +1,10 @@
+---
+title: "days"
+canonical: https://tenzir.com/docs/reference/functions/days
+source: https://tenzir.com/docs/reference/functions/days.md
+section: "Docs"
+---
+
 # days
 
 > Converts a number to equivalent days.

@@ -1,3 +1,10 @@
+---
+title: "write_kv"
+canonical: https://tenzir.com/docs/reference/operators/write_kv
+source: https://tenzir.com/docs/reference/operators/write_kv.md
+section: "Docs"
+---
+
 # write_kv
 
 > Writes events in a Key-Value format.

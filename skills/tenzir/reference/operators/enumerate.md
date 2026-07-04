@@ -1,3 +1,10 @@
+---
+title: "enumerate"
+canonical: https://tenzir.com/docs/reference/operators/enumerate
+source: https://tenzir.com/docs/reference/operators/enumerate.md
+section: "Docs"
+---
+
 # enumerate
 
 > Add a field with the number of preceding events.

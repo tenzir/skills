@@ -1,3 +1,10 @@
+---
+title: "Configure a node"
+canonical: https://tenzir.com/docs/guides/node-setup/configure-a-node
+source: https://tenzir.com/docs/guides/node-setup/configure-a-node.md
+section: "Docs"
+---
+
 # Configure a node
 
 > The default node configuration is optimized for most common scenarios. But you can fine-tune the settings to match your specific requirements.

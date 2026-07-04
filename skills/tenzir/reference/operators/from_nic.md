@@ -1,3 +1,10 @@
+---
+title: "from_nic"
+canonical: https://tenzir.com/docs/reference/operators/from_nic
+source: https://tenzir.com/docs/reference/operators/from_nic.md
+section: "Docs"
+---
+
 # from_nic
 
 > Captures packets from a network interface and outputs events.

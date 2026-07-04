@@ -1,3 +1,10 @@
+---
+title: "Configure database"
+canonical: https://tenzir.com/docs/guides/platform-setup/configure-database
+source: https://tenzir.com/docs/guides/platform-setup/configure-database.md
+section: "Docs"
+---
+
 # Configure database
 
 > A PostgreSQL database stores the internal state of the platform.

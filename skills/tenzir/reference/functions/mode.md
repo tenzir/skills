@@ -1,3 +1,10 @@
+---
+title: "mode"
+canonical: https://tenzir.com/docs/reference/functions/mode
+source: https://tenzir.com/docs/reference/functions/mode.md
+section: "Docs"
+---
+
 # mode
 
 > Takes the most common non-null grouped value.

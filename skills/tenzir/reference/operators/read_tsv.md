@@ -1,3 +1,10 @@
+---
+title: "read_tsv"
+canonical: https://tenzir.com/docs/reference/operators/read_tsv
+source: https://tenzir.com/docs/reference/operators/read_tsv.md
+section: "Docs"
+---
+
 # read_tsv
 
 > Read TSV (Tab-Separated Values) from a byte stream.

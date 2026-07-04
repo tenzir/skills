@@ -1,3 +1,10 @@
+---
+title: "Enrichment"
+canonical: https://tenzir.com/docs/explanations/enrichment
+source: https://tenzir.com/docs/explanations/enrichment.md
+section: "Docs"
+---
+
 # Enrichment
 
 > Enrichment means adding contextual data to events. The purpose of this added context is to allow for making better decisions, e.g., to triage alerts and weed out false positive, to leverage country information to classify logins as malicious, or to flag a sighting of an indicator of compromise.

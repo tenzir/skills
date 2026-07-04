@@ -1,3 +1,10 @@
+---
+title: "duration"
+canonical: https://tenzir.com/docs/reference/functions/duration
+source: https://tenzir.com/docs/reference/functions/duration.md
+section: "Docs"
+---
+
 # duration
 
 > Casts an expression to a duration value.

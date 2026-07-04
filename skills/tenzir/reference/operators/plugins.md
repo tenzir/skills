@@ -1,3 +1,10 @@
+---
+title: "plugins"
+canonical: https://tenzir.com/docs/reference/operators/plugins
+source: https://tenzir.com/docs/reference/operators/plugins.md
+section: "Docs"
+---
+
 # plugins
 
 > Shows all available plugins and built-ins.

@@ -1,3 +1,10 @@
+---
+title: "Statements"
+canonical: https://tenzir.com/docs/reference/statements
+source: https://tenzir.com/docs/reference/statements.md
+section: "Docs"
+---
+
 # Statements
 
 > TQL programs are a sequence of statements. Operator statements perform various actions on data streams. Each operator statement can be thought of as a modular unit that processes data and can be combined with other operators to create complex dataflows.

@@ -1,3 +1,10 @@
+---
+title: "Transparent Proxy"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-delete
+source: https://tenzir.com/docs/reference/api/platform/nodes/node-proxy-delete.md
+section: "Docs"
+---
+
 # Transparent Proxy
 
 > delete/user/node-proxy/{tenantid}/{nodeid}/{httppath}

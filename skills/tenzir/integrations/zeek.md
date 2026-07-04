@@ -1,3 +1,11 @@
+---
+title: "Zeek integration"
+description: "Inspect, log, and analyze network traffic for security and operational insights."
+canonical: https://tenzir.com/integrations/zeek
+source: https://tenzir.com/integrations/zeek.md
+section: "Integrations"
+---
+
 # Zeek integration
 
 > Inspect, log, and analyze network traffic for security and operational insights.
@@ -92,8 +100,6 @@ pipeline="from_file \"$file_name\" | $read | import"
 
 tenzir "$pipeline"
 ```
-
-Our blog post [Native Zeek Log Rotation & Shipping](https://tenzir.com/blog/native-zeek-log-rotation-and-shipping) provides further details on this method.
 
 ### Run Zeek on a packet pipeline
 

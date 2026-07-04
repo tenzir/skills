@@ -1,3 +1,10 @@
+---
+title: "mean"
+canonical: https://tenzir.com/docs/reference/functions/mean
+source: https://tenzir.com/docs/reference/functions/mean.md
+section: "Docs"
+---
+
 # mean
 
 > Computes the mean of all grouped values.

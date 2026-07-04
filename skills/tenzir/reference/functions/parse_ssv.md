@@ -1,3 +1,10 @@
+---
+title: "parse_ssv"
+canonical: https://tenzir.com/docs/reference/functions/parse_ssv
+source: https://tenzir.com/docs/reference/functions/parse_ssv.md
+section: "Docs"
+---
+
 # parse_ssv
 
 > Parses a string as space separated values.

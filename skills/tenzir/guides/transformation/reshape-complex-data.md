@@ -1,3 +1,10 @@
+---
+title: "Reshape complex data"
+canonical: https://tenzir.com/docs/guides/transformation/reshape-complex-data
+source: https://tenzir.com/docs/guides/transformation/reshape-complex-data.md
+section: "Docs"
+---
+
 # Reshape complex data
 
 > Real-world data is rarely flat. It contains nested structures, arrays of objects, and deeply hierarchical information. This guide shows advanced techniques for reshaping complex data structures to meet your analysis needs.

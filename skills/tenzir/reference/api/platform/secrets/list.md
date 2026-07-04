@@ -1,3 +1,10 @@
+---
+title: "List"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/list
+source: https://tenzir.com/docs/reference/api/platform/secrets/list.md
+section: "Docs"
+---
+
 # List
 
 > post/user/secrets/list

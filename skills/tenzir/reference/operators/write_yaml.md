@@ -1,3 +1,10 @@
+---
+title: "write_yaml"
+canonical: https://tenzir.com/docs/reference/operators/write_yaml
+source: https://tenzir.com/docs/reference/operators/write_yaml.md
+section: "Docs"
+---
+
 # write_yaml
 
 > Transforms the input event stream to YAML byte stream.

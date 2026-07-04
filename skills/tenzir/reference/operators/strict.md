@@ -1,3 +1,10 @@
+---
+title: "strict"
+canonical: https://tenzir.com/docs/reference/operators/strict
+source: https://tenzir.com/docs/reference/operators/strict.md
+section: "Docs"
+---
+
 # strict
 
 > Treats all warnings as errors.

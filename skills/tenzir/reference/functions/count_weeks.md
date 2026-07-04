@@ -1,3 +1,10 @@
+---
+title: "count_weeks"
+canonical: https://tenzir.com/docs/reference/functions/count_weeks
+source: https://tenzir.com/docs/reference/functions/count_weeks.md
+section: "Docs"
+---
+
 # count_weeks
 
 > Counts the number of weeks in a duration.

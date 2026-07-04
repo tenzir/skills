@@ -1,3 +1,10 @@
+---
+title: "count_hours"
+canonical: https://tenzir.com/docs/reference/functions/count_hours
+source: https://tenzir.com/docs/reference/functions/count_hours.md
+section: "Docs"
+---
+
 # count_hours
 
 > Counts the number of hours in a duration.

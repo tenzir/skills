@@ -1,3 +1,10 @@
+---
+title: "pad_end"
+canonical: https://tenzir.com/docs/reference/functions/pad_end
+source: https://tenzir.com/docs/reference/functions/pad_end.md
+section: "Docs"
+---
+
 # pad_end
 
 > Pads a string at the end to a specified length.

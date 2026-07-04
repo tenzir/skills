@@ -1,3 +1,10 @@
+---
+title: "read_grok"
+canonical: https://tenzir.com/docs/reference/operators/read_grok
+source: https://tenzir.com/docs/reference/operators/read_grok.md
+section: "Docs"
+---
+
 # read_grok
 
 > Parses lines of input with a grok pattern.

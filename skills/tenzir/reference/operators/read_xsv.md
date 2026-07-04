@@ -1,3 +1,10 @@
+---
+title: "read_xsv"
+canonical: https://tenzir.com/docs/reference/operators/read_xsv
+source: https://tenzir.com/docs/reference/operators/read_xsv.md
+section: "Docs"
+---
+
 # read_xsv
 
 > Read XSV from a byte stream.

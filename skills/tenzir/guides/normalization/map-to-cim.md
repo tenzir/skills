@@ -1,3 +1,10 @@
+---
+title: "Map to CIM"
+canonical: https://tenzir.com/docs/guides/normalization/map-to-cim
+source: https://tenzir.com/docs/guides/normalization/map-to-cim.md
+section: "Docs"
+---
+
 # Map to CIM
 
 > This guide shows you how to map events to Splunk Common Information Model (CIM) fields in TQL. You’ll learn how to choose a CIM data model and dataset, apply dataset tags, populate normalized fields, set Splunk HEC metadata, and preserve source-specific details.

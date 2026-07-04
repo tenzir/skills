@@ -1,3 +1,11 @@
+---
+title: "IBM QRadar integration"
+description: "Send security events to IBM Security QRadar for SIEM analytics and incident investigation."
+canonical: https://tenzir.com/integrations/qradar
+source: https://tenzir.com/integrations/qradar.md
+section: "Integrations"
+---
+
 # IBM QRadar integration
 
 > Send security events to IBM Security QRadar for SIEM analytics and incident investigation.

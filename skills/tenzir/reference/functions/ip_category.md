@@ -1,3 +1,10 @@
+---
+title: "ip_category"
+canonical: https://tenzir.com/docs/reference/functions/ip_category
+source: https://tenzir.com/docs/reference/functions/ip_category.md
+section: "Docs"
+---
+
 # ip_category
 
 > Returns the type classification of an IP address.

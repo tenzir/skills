@@ -1,3 +1,10 @@
+---
+title: "min"
+canonical: https://tenzir.com/docs/reference/functions/min
+source: https://tenzir.com/docs/reference/functions/min.md
+section: "Docs"
+---
+
 # min
 
 > Computes the minimum of all grouped values.

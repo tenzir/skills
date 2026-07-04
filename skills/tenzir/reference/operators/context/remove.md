@@ -1,3 +1,10 @@
+---
+title: "context::remove"
+canonical: https://tenzir.com/docs/reference/operators/context/remove
+source: https://tenzir.com/docs/reference/operators/context/remove.md
+section: "Docs"
+---
+
 # context::remove
 
 > Deletes a context.

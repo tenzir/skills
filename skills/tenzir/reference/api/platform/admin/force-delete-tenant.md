@@ -1,3 +1,10 @@
+---
+title: "Delete Tenant"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/force-delete-tenant
+source: https://tenzir.com/docs/reference/api/platform/admin/force-delete-tenant.md
+section: "Docs"
+---
+
 # Delete Tenant
 
 > post/admin/force-delete-tenant

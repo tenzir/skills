@@ -1,3 +1,10 @@
+---
+title: "join"
+canonical: https://tenzir.com/docs/reference/functions/join
+source: https://tenzir.com/docs/reference/functions/join.md
+section: "Docs"
+---
+
 # join
 
 > Joins a list of strings into a single string using a separator.

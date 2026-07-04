@@ -1,3 +1,10 @@
+---
+title: "ceil"
+canonical: https://tenzir.com/docs/reference/functions/ceil
+source: https://tenzir.com/docs/reference/functions/ceil.md
+section: "Docs"
+---
+
 # ceil
 
 > Computes the ceiling of a number or a time/duration with a specified unit.

@@ -1,3 +1,10 @@
+---
+title: "length_chars"
+canonical: https://tenzir.com/docs/reference/functions/length_chars
+source: https://tenzir.com/docs/reference/functions/length_chars.md
+section: "Docs"
+---
+
 # length_chars
 
 > Returns the length of a string in characters.

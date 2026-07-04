@@ -1,3 +1,10 @@
+---
+title: "Delete Tenant"
+canonical: https://tenzir.com/docs/reference/api/platform/tenant/delete-tenant
+source: https://tenzir.com/docs/reference/api/platform/tenant/delete-tenant.md
+section: "Docs"
+---
+
 # Delete Tenant
 
 > post/user/delete-tenant

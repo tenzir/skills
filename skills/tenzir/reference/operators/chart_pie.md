@@ -1,3 +1,10 @@
+---
+title: "chart_pie"
+canonical: https://tenzir.com/docs/reference/operators/chart_pie
+source: https://tenzir.com/docs/reference/operators/chart_pie.md
+section: "Docs"
+---
+
 # chart_pie
 
 > Plots events on an pie chart.

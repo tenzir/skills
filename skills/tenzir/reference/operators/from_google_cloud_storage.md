@@ -1,3 +1,10 @@
+---
+title: "from_google_cloud_storage"
+canonical: https://tenzir.com/docs/reference/operators/from_google_cloud_storage
+source: https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md
+section: "Docs"
+---
+
 # from_google_cloud_storage
 
 > Reads one or multiple files from Google Cloud Storage.

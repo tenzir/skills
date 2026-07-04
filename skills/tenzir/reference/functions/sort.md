@@ -1,3 +1,10 @@
+---
+title: "sort"
+canonical: https://tenzir.com/docs/reference/functions/sort
+source: https://tenzir.com/docs/reference/functions/sort.md
+section: "Docs"
+---
+
 # sort
 
 > Sorts lists and record fields.

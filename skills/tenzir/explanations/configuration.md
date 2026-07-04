@@ -1,3 +1,10 @@
+---
+title: "Configuration"
+canonical: https://tenzir.com/docs/explanations/configuration
+source: https://tenzir.com/docs/explanations/configuration.md
+section: "Docs"
+---
+
 # Configuration
 
 > This page explains how to configure the Tenzir CLI and Node. Configuration flows through four layers, sorted by precedence:

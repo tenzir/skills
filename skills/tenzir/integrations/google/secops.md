@@ -1,3 +1,11 @@
+---
+title: "Google SecOps integration"
+description: "Send events to Google SecOps"
+canonical: https://tenzir.com/integrations/google/secops
+source: https://tenzir.com/integrations/google/secops.md
+section: "Integrations"
+---
+
 # Google SecOps integration
 
 > Send events to Google SecOps

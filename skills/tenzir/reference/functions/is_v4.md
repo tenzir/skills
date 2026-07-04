@@ -1,3 +1,10 @@
+---
+title: "is_v4"
+canonical: https://tenzir.com/docs/reference/functions/is_v4
+source: https://tenzir.com/docs/reference/functions/is_v4.md
+section: "Docs"
+---
+
 # is_v4
 
 > Checks whether an IP address has version number 4.

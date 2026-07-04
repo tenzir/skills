@@ -1,3 +1,10 @@
+---
+title: "print_leef"
+canonical: https://tenzir.com/docs/reference/functions/print_leef
+source: https://tenzir.com/docs/reference/functions/print_leef.md
+section: "Docs"
+---
+
 # print_leef
 
 > Prints records as LEEF messages

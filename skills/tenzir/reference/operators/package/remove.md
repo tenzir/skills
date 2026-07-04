@@ -1,3 +1,10 @@
+---
+title: "package::remove"
+canonical: https://tenzir.com/docs/reference/operators/package/remove
+source: https://tenzir.com/docs/reference/operators/package/remove.md
+section: "Docs"
+---
+
 # package::remove
 
 > Uninstalls a package.

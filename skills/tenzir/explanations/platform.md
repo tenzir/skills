@@ -1,3 +1,10 @@
+---
+title: "Platform"
+canonical: https://tenzir.com/docs/explanations/platform
+source: https://tenzir.com/docs/explanations/platform.md
+section: "Docs"
+---
+
 # Platform
 
 > The platform provides fleet management for nodes. With an API and web interface, the platform offers user and workspace administration, authentication via external identity providers (IdP), and dashboards consisting of pipeline-powered charts.

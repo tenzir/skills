@@ -1,3 +1,10 @@
+---
+title: "Parse string fields"
+canonical: https://tenzir.com/docs/guides/parsing/parse-string-fields
+source: https://tenzir.com/docs/guides/parsing/parse-string-fields.md
+section: "Docs"
+---
+
 # Parse string fields
 
 > This guide shows you how to extract structured data from string fields using TQL’s parsing functions. You’ll learn to parse JSON, YAML, XML, key-value pairs, delimited data, timestamps, and log formats like Syslog, CEF, LEEF, and Windows Event Logs. For custom formats, Grok patterns provide flexible pattern matching.

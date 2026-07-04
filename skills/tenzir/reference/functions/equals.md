@@ -1,3 +1,10 @@
+---
+title: "equals"
+canonical: https://tenzir.com/docs/reference/functions/equals
+source: https://tenzir.com/docs/reference/functions/equals.md
+section: "Docs"
+---
+
 # equals
 
 > Checks whether two strings are equal.

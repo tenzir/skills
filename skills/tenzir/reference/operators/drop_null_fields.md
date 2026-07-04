@@ -1,3 +1,10 @@
+---
+title: "drop_null_fields"
+canonical: https://tenzir.com/docs/reference/operators/drop_null_fields
+source: https://tenzir.com/docs/reference/operators/drop_null_fields.md
+section: "Docs"
+---
+
 # drop_null_fields
 
 > Removes fields containing null values from the event.

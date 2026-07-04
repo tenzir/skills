@@ -1,3 +1,10 @@
+---
+title: "has"
+canonical: https://tenzir.com/docs/reference/functions/has
+source: https://tenzir.com/docs/reference/functions/has.md
+section: "Docs"
+---
+
 # has
 
 > Checks whether a record has a specified field.

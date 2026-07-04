@@ -1,3 +1,10 @@
+---
+title: "Secrets"
+canonical: https://tenzir.com/docs/explanations/secrets
+source: https://tenzir.com/docs/explanations/secrets.md
+section: "Docs"
+---
+
 # Secrets
 
 > Operators accept secrets as parameters for sensitive values, such as authentication tokens, passwords, or even URLs.

@@ -1,3 +1,10 @@
+---
+title: "to_zmq"
+canonical: https://tenzir.com/docs/reference/operators/to_zmq
+source: https://tenzir.com/docs/reference/operators/to_zmq.md
+section: "Docs"
+---
+
 # to_zmq
 
 > Connects to a remote ZeroMQ subscriber endpoint and sends events.

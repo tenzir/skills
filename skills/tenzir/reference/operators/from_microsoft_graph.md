@@ -1,3 +1,10 @@
+---
+title: "from_microsoft_graph"
+canonical: https://tenzir.com/docs/reference/operators/from_microsoft_graph
+source: https://tenzir.com/docs/reference/operators/from_microsoft_graph.md
+section: "Docs"
+---
+
 # from_microsoft_graph
 
 > Reads events from a Microsoft Graph collection.

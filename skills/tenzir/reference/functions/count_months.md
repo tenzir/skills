@@ -1,3 +1,10 @@
+---
+title: "count_months"
+canonical: https://tenzir.com/docs/reference/functions/count_months
+source: https://tenzir.com/docs/reference/functions/count_months.md
+section: "Docs"
+---
+
 # count_months
 
 > Counts the number of months in a duration.

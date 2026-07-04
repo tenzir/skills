@@ -1,3 +1,10 @@
+---
+title: "compress_lz4"
+canonical: https://tenzir.com/docs/reference/operators/compress_lz4
+source: https://tenzir.com/docs/reference/operators/compress_lz4.md
+section: "Docs"
+---
+
 # compress_lz4
 
 > Compresses a stream of bytes using lz4 compression.

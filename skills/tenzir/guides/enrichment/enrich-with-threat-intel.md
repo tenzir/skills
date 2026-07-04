@@ -1,3 +1,11 @@
+---
+title: "Enrich with threat intel"
+description: "Add threat intelligence to OCSF enrichments, observables, and OSINT fields"
+canonical: https://tenzir.com/docs/guides/enrichment/enrich-with-threat-intel
+source: https://tenzir.com/docs/guides/enrichment/enrich-with-threat-intel.md
+section: "Docs"
+---
+
 # Enrich with threat intel
 
 > Add threat intelligence to OCSF enrichments, observables, and OSINT fields

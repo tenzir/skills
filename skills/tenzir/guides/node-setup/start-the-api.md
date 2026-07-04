@@ -1,3 +1,10 @@
+---
+title: "Start the API"
+canonical: https://tenzir.com/docs/guides/node-setup/start-the-api
+source: https://tenzir.com/docs/guides/node-setup/start-the-api.md
+section: "Docs"
+---
+
 # Start the API
 
 > The node offers a REST API for CRUD-style pipeline management. By default, the API is not accessible from the outside. Only the platform can access it internaly through the existing node-to-platform connection. To enable the API for direct access, you need to configure the built in web server that exposes the API.

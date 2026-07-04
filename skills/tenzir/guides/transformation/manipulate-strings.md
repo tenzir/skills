@@ -1,3 +1,10 @@
+---
+title: "Manipulate strings"
+canonical: https://tenzir.com/docs/guides/transformation/manipulate-strings
+source: https://tenzir.com/docs/guides/transformation/manipulate-strings.md
+section: "Docs"
+---
+
 # Manipulate strings
 
 > String manipulation is essential for cleaning, formatting, and transforming text data. This guide covers TQL’s comprehensive string functions, from simple case changes to complex pattern matching and encoding operations.

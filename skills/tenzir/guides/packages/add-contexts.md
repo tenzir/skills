@@ -1,3 +1,10 @@
+---
+title: "Add contexts"
+canonical: https://tenzir.com/docs/guides/packages/add-contexts
+source: https://tenzir.com/docs/guides/packages/add-contexts.md
+section: "Docs"
+---
+
 # Add contexts
 
 > This guide shows you how to add enrichment contexts to your package. You’ll learn how to define contexts in the manifest, populate them with data, and test context interactions.

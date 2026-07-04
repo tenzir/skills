@@ -1,3 +1,10 @@
+---
+title: "Configuration"
+canonical: https://tenzir.com/docs/reference/node/configuration
+source: https://tenzir.com/docs/reference/node/configuration.md
+section: "Docs"
+---
+
 # Configuration
 
 > The below example configuration ships with every Tenzir package. Head over to the explanation of the configuration for details on how the various settings work.

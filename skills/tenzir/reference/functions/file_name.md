@@ -1,3 +1,10 @@
+---
+title: "file_name"
+canonical: https://tenzir.com/docs/reference/functions/file_name
+source: https://tenzir.com/docs/reference/functions/file_name.md
+section: "Docs"
+---
+
 # file_name
 
 > Extracts the file name from a file path.

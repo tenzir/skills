@@ -1,3 +1,11 @@
+---
+title: "Velociraptor integration"
+description: "Collect, monitor, and analyze endpoint data for digital forensics and incident response."
+canonical: https://tenzir.com/integrations/velociraptor
+source: https://tenzir.com/integrations/velociraptor.md
+section: "Integrations"
+---
+
 # Velociraptor integration
 
 > Collect, monitor, and analyze endpoint data for digital forensics and incident response.

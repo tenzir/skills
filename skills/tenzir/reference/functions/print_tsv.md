@@ -1,3 +1,10 @@
+---
+title: "print_tsv"
+canonical: https://tenzir.com/docs/reference/functions/print_tsv
+source: https://tenzir.com/docs/reference/functions/print_tsv.md
+section: "Docs"
+---
+
 # print_tsv
 
 > Prints a record as a tab-separated string of values.

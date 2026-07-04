@@ -1,3 +1,11 @@
+---
+title: "Amazon MSK integration"
+description: "Publish and subscribe to Amazon's managed Kafka service."
+canonical: https://tenzir.com/integrations/amazon/msk
+source: https://tenzir.com/integrations/amazon/msk.md
+section: "Integrations"
+---
+
 # Amazon MSK integration
 
 > Publish and subscribe to Amazon's managed Kafka service.

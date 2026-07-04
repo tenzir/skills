@@ -1,3 +1,10 @@
+---
+title: "to_prometheus"
+canonical: https://tenzir.com/docs/reference/operators/to_prometheus
+source: https://tenzir.com/docs/reference/operators/to_prometheus.md
+section: "Docs"
+---
+
 # to_prometheus
 
 > Sends metric events to a Prometheus Remote Write receiver.

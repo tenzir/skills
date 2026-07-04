@@ -1,3 +1,10 @@
+---
+title: "Create fixtures"
+canonical: https://tenzir.com/docs/guides/testing/create-fixtures
+source: https://tenzir.com/docs/guides/testing/create-fixtures.md
+section: "Docs"
+---
+
 # Create fixtures
 
 > This guide shows you how to create a fixture, wire it into the test harness, and use it from a test. You will build an HTTP echo server as a running example and then learn how to share fixtures across suites, handle missing dependencies, manage containers, add structured options, and validate test behavior with fixture assertions.

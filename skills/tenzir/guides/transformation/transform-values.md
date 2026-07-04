@@ -1,3 +1,10 @@
+---
+title: "Transform values"
+canonical: https://tenzir.com/docs/guides/transformation/transform-values
+source: https://tenzir.com/docs/guides/transformation/transform-values.md
+section: "Docs"
+---
+
 # Transform values
 
 > Transforming values is a fundamental part of data processing. This guide shows you how to convert between different data types, perform basic calculations, and manipulate simple values within your events.

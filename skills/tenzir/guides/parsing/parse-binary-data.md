@@ -1,3 +1,10 @@
+---
+title: "Parse binary data"
+canonical: https://tenzir.com/docs/guides/parsing/parse-binary-data
+source: https://tenzir.com/docs/guides/parsing/parse-binary-data.md
+section: "Docs"
+---
+
 # Parse binary data
 
 > This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.

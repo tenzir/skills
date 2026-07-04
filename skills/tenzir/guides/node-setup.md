@@ -1,3 +1,10 @@
+---
+title: "Overview"
+canonical: https://tenzir.com/docs/guides/node-setup
+source: https://tenzir.com/docs/guides/node-setup.md
+section: "Docs"
+---
+
 # Overview
 
 > The Tenzir Node is the vehicle to run pipelines. It is light-weight server application that can be deployed on-premises or in the cloud.

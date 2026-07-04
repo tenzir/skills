@@ -1,3 +1,10 @@
+---
+title: "load_balance"
+canonical: https://tenzir.com/docs/reference/operators/load_balance
+source: https://tenzir.com/docs/reference/operators/load_balance.md
+section: "Docs"
+---
+
 # load_balance
 
 > Routes the data to one of multiple subpipelines.

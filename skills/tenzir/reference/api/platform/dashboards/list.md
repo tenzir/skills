@@ -1,3 +1,10 @@
+---
+title: "List"
+canonical: https://tenzir.com/docs/reference/api/platform/dashboards/list
+source: https://tenzir.com/docs/reference/api/platform/dashboards/list.md
+section: "Docs"
+---
+
 # List
 
 > post/user/dashboard/list

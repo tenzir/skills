@@ -1,3 +1,10 @@
+---
+title: "from_microsoft_sql"
+canonical: https://tenzir.com/docs/reference/operators/from_microsoft_sql
+source: https://tenzir.com/docs/reference/operators/from_microsoft_sql.md
+section: "Docs"
+---
+
 # from_microsoft_sql
 
 > Reads events from Microsoft SQL Server or Azure SQL Database.

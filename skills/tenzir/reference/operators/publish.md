@@ -1,3 +1,10 @@
+---
+title: "publish"
+canonical: https://tenzir.com/docs/reference/operators/publish
+source: https://tenzir.com/docs/reference/operators/publish.md
+section: "Docs"
+---
+
 # publish
 
 > Publishes events to a channel with a topic.

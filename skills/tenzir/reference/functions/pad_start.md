@@ -1,3 +1,10 @@
+---
+title: "pad_start"
+canonical: https://tenzir.com/docs/reference/functions/pad_start
+source: https://tenzir.com/docs/reference/functions/pad_start.md
+section: "Docs"
+---
+
 # pad_start
 
 > Pads a string at the start to a specified length.

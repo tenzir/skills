@@ -1,3 +1,11 @@
+---
+title: "Azure Event Hubs integration"
+description: "Real-time data streaming platform and event ingestion service."
+canonical: https://tenzir.com/integrations/microsoft/azure-event-hubs
+source: https://tenzir.com/integrations/microsoft/azure-event-hubs.md
+section: "Integrations"
+---
+
 # Azure Event Hubs integration
 
 > Real-time data streaming platform and event ingestion service.

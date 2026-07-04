@@ -1,3 +1,10 @@
+---
+title: "ocsf::derive"
+canonical: https://tenzir.com/docs/reference/operators/ocsf/derive
+source: https://tenzir.com/docs/reference/operators/ocsf/derive.md
+section: "Docs"
+---
+
 # ocsf::derive
 
 > Automatically assigns enum strings from their integer counterparts and vice versa.

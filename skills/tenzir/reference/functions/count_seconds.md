@@ -1,3 +1,10 @@
+---
+title: "count_seconds"
+canonical: https://tenzir.com/docs/reference/functions/count_seconds
+source: https://tenzir.com/docs/reference/functions/count_seconds.md
+section: "Docs"
+---
+
 # count_seconds
 
 > Counts the number of seconds in a duration.

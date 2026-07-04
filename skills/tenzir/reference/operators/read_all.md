@@ -1,3 +1,10 @@
+---
+title: "read_all"
+canonical: https://tenzir.com/docs/reference/operators/read_all
+source: https://tenzir.com/docs/reference/operators/read_all.md
+section: "Docs"
+---
+
 # read_all
 
 > Parses an incoming bytes stream into a single event.

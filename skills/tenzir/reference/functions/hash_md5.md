@@ -1,3 +1,10 @@
+---
+title: "hash_md5"
+canonical: https://tenzir.com/docs/reference/functions/hash_md5
+source: https://tenzir.com/docs/reference/functions/hash_md5.md
+section: "Docs"
+---
+
 # hash_md5
 
 > Computes an MD5 hash digest.

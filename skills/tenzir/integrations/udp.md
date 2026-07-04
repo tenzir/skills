@@ -1,3 +1,11 @@
+---
+title: "UDP integration"
+description: "Send and receive lightweight, connectionless datagrams over IP networks."
+canonical: https://tenzir.com/integrations/udp
+source: https://tenzir.com/integrations/udp.md
+section: "Integrations"
+---
+
 # UDP integration
 
 > Send and receive lightweight, connectionless datagrams over IP networks.

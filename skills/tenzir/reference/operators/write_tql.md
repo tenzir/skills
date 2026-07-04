@@ -1,3 +1,10 @@
+---
+title: "write_tql"
+canonical: https://tenzir.com/docs/reference/operators/write_tql
+source: https://tenzir.com/docs/reference/operators/write_tql.md
+section: "Docs"
+---
+
 # write_tql
 
 > Transforms the input event stream to a TQL notation byte stream.

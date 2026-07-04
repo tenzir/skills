@@ -1,3 +1,10 @@
+---
+title: "assert"
+canonical: https://tenzir.com/docs/reference/operators/assert
+source: https://tenzir.com/docs/reference/operators/assert.md
+section: "Docs"
+---
+
 # assert
 
 > Drops events and emits a warning if the invariant is violated.

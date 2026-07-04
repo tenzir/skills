@@ -1,3 +1,10 @@
+---
+title: "is_upper"
+canonical: https://tenzir.com/docs/reference/functions/is_upper
+source: https://tenzir.com/docs/reference/functions/is_upper.md
+section: "Docs"
+---
+
 # is_upper
 
 > Checks if a string is in uppercase.

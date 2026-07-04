@@ -1,3 +1,10 @@
+---
+title: "Packages"
+canonical: https://tenzir.com/docs/explanations/packages
+source: https://tenzir.com/docs/explanations/packages.md
+section: "Docs"
+---
+
 # Packages
 
 > This page explains how packages bundle pipelines, operators, contexts, and examples into a deployable unit. You’ll learn about package design principles and how the components fit together.

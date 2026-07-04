@@ -1,3 +1,10 @@
+---
+title: "files"
+canonical: https://tenzir.com/docs/reference/operators/files
+source: https://tenzir.com/docs/reference/operators/files.md
+section: "Docs"
+---
+
 # files
 
 > Shows file information for a given directory.

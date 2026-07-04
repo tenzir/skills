@@ -1,3 +1,10 @@
+---
+title: "Fan out with subpipelines"
+canonical: https://tenzir.com/docs/guides/routing/fan-out-with-subpipelines
+source: https://tenzir.com/docs/guides/routing/fan-out-with-subpipelines.md
+section: "Docs"
+---
+
 # Fan out with subpipelines
 
 > This guide shows you how to fan out an event stream into subpipelines with each and group. You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like fork, parallel, and loadbalance.

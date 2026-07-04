@@ -1,3 +1,10 @@
+---
+title: "from_kafka"
+canonical: https://tenzir.com/docs/reference/operators/from_kafka
+source: https://tenzir.com/docs/reference/operators/from_kafka.md
+section: "Docs"
+---
+
 # from_kafka
 
 > Receives events from an Apache Kafka topic.

@@ -1,3 +1,10 @@
+---
+title: "is_link_local"
+canonical: https://tenzir.com/docs/reference/functions/is_link_local
+source: https://tenzir.com/docs/reference/functions/is_link_local.md
+section: "Docs"
+---
+
 # is_link_local
 
 > Checks whether an IP address is a link-local address.

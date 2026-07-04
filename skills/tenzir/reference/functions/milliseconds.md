@@ -1,3 +1,10 @@
+---
+title: "milliseconds"
+canonical: https://tenzir.com/docs/reference/functions/milliseconds
+source: https://tenzir.com/docs/reference/functions/milliseconds.md
+section: "Docs"
+---
+
 # milliseconds
 
 > Converts a number to equivalent milliseconds.

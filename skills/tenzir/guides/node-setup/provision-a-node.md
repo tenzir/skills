@@ -1,3 +1,10 @@
+---
+title: "Provision a node"
+canonical: https://tenzir.com/docs/guides/node-setup/provision-a-node
+source: https://tenzir.com/docs/guides/node-setup/provision-a-node.md
+section: "Docs"
+---
+
 # Provision a node
 
 > Provisioning a node means creating one in the platform in your workspace. After provisioning, you can download configuration file with an authentication token - ready to then deploy the node.

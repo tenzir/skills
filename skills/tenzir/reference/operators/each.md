@@ -1,3 +1,10 @@
+---
+title: "each"
+canonical: https://tenzir.com/docs/reference/operators/each
+source: https://tenzir.com/docs/reference/operators/each.md
+section: "Docs"
+---
+
 # each
 
 > Spawns a subpipeline for every incoming event, with the event bound to $this.

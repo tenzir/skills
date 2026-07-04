@@ -1,3 +1,10 @@
+---
+title: "decompress_brotli"
+canonical: https://tenzir.com/docs/reference/operators/decompress_brotli
+source: https://tenzir.com/docs/reference/operators/decompress_brotli.md
+section: "Docs"
+---
+
 # decompress_brotli
 
 > Decompresses a stream of bytes in the Brotli format.

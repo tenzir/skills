@@ -1,3 +1,10 @@
+---
+title: "Add constants"
+canonical: https://tenzir.com/docs/guides/packages/add-constants
+source: https://tenzir.com/docs/guides/packages/add-constants.md
+section: "Docs"
+---
+
 # Add constants
 
 > This guide shows you how to define package-wide constants in a constants.tql file and reference them as pkg::$name from the package’s own operators and pipelines, as well as from any pipeline that uses the package. You’ll learn the let syntax, how bindings build on one another, the rules each binding must satisfy, and when to use a constant instead of an input.

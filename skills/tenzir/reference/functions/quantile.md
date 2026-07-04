@@ -1,3 +1,10 @@
+---
+title: "quantile"
+canonical: https://tenzir.com/docs/reference/functions/quantile
+source: https://tenzir.com/docs/reference/functions/quantile.md
+section: "Docs"
+---
+
 # quantile
 
 > Computes the specified quantile of all grouped values.

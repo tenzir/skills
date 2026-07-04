@@ -1,3 +1,10 @@
+---
+title: "Rename Node"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/rename-node
+source: https://tenzir.com/docs/reference/api/platform/nodes/rename-node.md
+section: "Docs"
+---
+
 # Rename Node
 
 > post/user/rename-node

@@ -1,3 +1,10 @@
+---
+title: "metrics"
+canonical: https://tenzir.com/docs/reference/operators/metrics
+source: https://tenzir.com/docs/reference/operators/metrics.md
+section: "Docs"
+---
+
 # metrics
 
 > Retrieves metrics events from a Tenzir node.

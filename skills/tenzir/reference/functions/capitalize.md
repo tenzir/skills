@@ -1,3 +1,10 @@
+---
+title: "capitalize"
+canonical: https://tenzir.com/docs/reference/functions/capitalize
+source: https://tenzir.com/docs/reference/functions/capitalize.md
+section: "Docs"
+---
+
 # capitalize
 
 > Capitalizes the first character of a string.

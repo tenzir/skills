@@ -1,3 +1,10 @@
+---
+title: "accept_zmq"
+canonical: https://tenzir.com/docs/reference/operators/accept_zmq
+source: https://tenzir.com/docs/reference/operators/accept_zmq.md
+section: "Docs"
+---
+
 # accept_zmq
 
 > Listens on a ZeroMQ endpoint and receives events.

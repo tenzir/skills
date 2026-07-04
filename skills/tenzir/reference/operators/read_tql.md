@@ -1,3 +1,10 @@
+---
+title: "read_tql"
+canonical: https://tenzir.com/docs/reference/operators/read_tql
+source: https://tenzir.com/docs/reference/operators/read_tql.md
+section: "Docs"
+---
+
 # read_tql
 
 > Parses an incoming byte stream of TQL-formatted records into events.

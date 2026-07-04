@@ -1,3 +1,10 @@
+---
+title: "Overview"
+canonical: https://tenzir.com/docs/guides/platform-setup
+source: https://tenzir.com/docs/guides/platform-setup.md
+section: "Docs"
+---
+
 # Overview
 
 > The Tenzir Platform acts as a fleet management control plane for Tenzir Nodes. Use its web interface to explore data, create pipelines, and build dashboards.

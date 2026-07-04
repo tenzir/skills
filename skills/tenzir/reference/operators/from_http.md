@@ -1,3 +1,10 @@
+---
+title: "from_http"
+canonical: https://tenzir.com/docs/reference/operators/from_http
+source: https://tenzir.com/docs/reference/operators/from_http.md
+section: "Docs"
+---
+
 # from_http
 
 > Sends an HTTP/1.1 request and returns the response as events.

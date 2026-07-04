@@ -1,3 +1,10 @@
+---
+title: "Configure blob storage"
+canonical: https://tenzir.com/docs/guides/platform-setup/configure-blob-storage
+source: https://tenzir.com/docs/guides/platform-setup/configure-blob-storage.md
+section: "Docs"
+---
+
 # Configure blob storage
 
 > The blob storage service exists for exchanging files between the platform and nodes. It facilitates not only downloading data from nodes, but also uploading files from your browser to the platform.

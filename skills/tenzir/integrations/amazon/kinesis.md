@@ -1,3 +1,11 @@
+---
+title: "Amazon Kinesis integration"
+description: "Ingest and process real-time data streams from Amazon Kinesis."
+canonical: https://tenzir.com/integrations/amazon/kinesis
+source: https://tenzir.com/integrations/amazon/kinesis.md
+section: "Integrations"
+---
+
 # Amazon Kinesis integration
 
 > Ingest and process real-time data streams from Amazon Kinesis.

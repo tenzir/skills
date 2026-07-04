@@ -1,3 +1,10 @@
+---
+title: "window"
+canonical: https://tenzir.com/docs/reference/operators/window
+source: https://tenzir.com/docs/reference/operators/window.md
+section: "Docs"
+---
+
 # window
 
 > Groups streaming events into event-time windows and runs a subpipeline for each window.

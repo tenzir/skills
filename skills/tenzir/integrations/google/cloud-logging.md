@@ -1,3 +1,11 @@
+---
+title: "Google Cloud Logging integration"
+description: "Send events to Google's log management solution"
+canonical: https://tenzir.com/integrations/google/cloud-logging
+source: https://tenzir.com/integrations/google/cloud-logging.md
+section: "Integrations"
+---
+
 # Google Cloud Logging integration
 
 > Send events to Google's log management solution

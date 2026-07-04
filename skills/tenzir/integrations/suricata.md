@@ -1,3 +1,11 @@
+---
+title: "Suricata integration"
+description: "Detect, log, and analyze network traffic for intrusion detection, prevention, and monitoring."
+canonical: https://tenzir.com/integrations/suricata
+source: https://tenzir.com/integrations/suricata.md
+section: "Integrations"
+---
+
 # Suricata integration
 
 > Detect, log, and analyze network traffic for intrusion detection, prevention, and monitoring.

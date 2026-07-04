@@ -1,3 +1,10 @@
+---
+title: "is_numeric"
+canonical: https://tenzir.com/docs/reference/functions/is_numeric
+source: https://tenzir.com/docs/reference/functions/is_numeric.md
+section: "Docs"
+---
+
 # is_numeric
 
 > Checks if a string contains only numeric characters.

@@ -1,3 +1,10 @@
+---
+title: "python"
+canonical: https://tenzir.com/docs/reference/operators/python
+source: https://tenzir.com/docs/reference/operators/python.md
+section: "Docs"
+---
+
 # python
 
 > Executes Python code against each event of the input.

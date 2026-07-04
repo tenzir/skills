@@ -1,3 +1,10 @@
+---
+title: "first"
+canonical: https://tenzir.com/docs/reference/functions/first
+source: https://tenzir.com/docs/reference/functions/first.md
+section: "Docs"
+---
+
 # first
 
 > Takes the first non-null grouped value.

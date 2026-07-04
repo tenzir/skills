@@ -1,3 +1,10 @@
+---
+title: "last"
+canonical: https://tenzir.com/docs/reference/functions/last
+source: https://tenzir.com/docs/reference/functions/last.md
+section: "Docs"
+---
+
 # last
 
 > Takes the last non-null grouped value.

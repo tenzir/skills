@@ -1,3 +1,10 @@
+---
+title: "Store"
+canonical: https://tenzir.com/docs/reference/api/platform/dashboards/store
+source: https://tenzir.com/docs/reference/api/platform/dashboards/store.md
+section: "Docs"
+---
+
 # Store
 
 > post/user/dashboard/store

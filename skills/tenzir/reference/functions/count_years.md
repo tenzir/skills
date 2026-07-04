@@ -1,3 +1,10 @@
+---
+title: "count_years"
+canonical: https://tenzir.com/docs/reference/functions/count_years
+source: https://tenzir.com/docs/reference/functions/count_years.md
+section: "Docs"
+---
+
 # count_years
 
 > Counts the number of years in a duration.

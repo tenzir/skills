@@ -1,3 +1,10 @@
+---
+title: "top"
+canonical: https://tenzir.com/docs/reference/operators/top
+source: https://tenzir.com/docs/reference/operators/top.md
+section: "Docs"
+---
+
 # top
 
 > Shows the most common values.

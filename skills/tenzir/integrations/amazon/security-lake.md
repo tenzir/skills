@@ -1,3 +1,11 @@
+---
+title: "Amazon Security Lake integration"
+description: "Send OCSF events to Amazon Security Lake."
+canonical: https://tenzir.com/integrations/amazon/security-lake
+source: https://tenzir.com/integrations/amazon/security-lake.md
+section: "Integrations"
+---
+
 # Amazon Security Lake integration
 
 > Send OCSF events to Amazon Security Lake.

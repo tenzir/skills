@@ -1,3 +1,10 @@
+---
+title: "Update Tenant Owner"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/update-tenant
+source: https://tenzir.com/docs/reference/api/platform/admin/update-tenant.md
+section: "Docs"
+---
+
 # Update Tenant Owner
 
 > post/admin/update-tenant

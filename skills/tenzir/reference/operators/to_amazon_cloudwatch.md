@@ -1,3 +1,10 @@
+---
+title: "to_amazon_cloudwatch"
+canonical: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch
+source: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md
+section: "Docs"
+---
+
 # to_amazon_cloudwatch
 
 > Sends events to Amazon CloudWatch Logs.

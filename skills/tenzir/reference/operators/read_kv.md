@@ -1,3 +1,10 @@
+---
+title: "read_kv"
+canonical: https://tenzir.com/docs/reference/operators/read_kv
+source: https://tenzir.com/docs/reference/operators/read_kv.md
+section: "Docs"
+---
+
 # read_kv
 
 > Read Key-Value pairs from a byte stream.

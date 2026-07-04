@@ -1,3 +1,10 @@
+---
+title: "Fetch via HTTP and APIs"
+canonical: https://tenzir.com/docs/guides/collecting/fetch-via-http-and-apis
+source: https://tenzir.com/docs/guides/collecting/fetch-via-http-and-apis.md
+section: "Docs"
+---
+
 # Fetch via HTTP and APIs
 
 > This guide shows you how to interact with HTTP APIs using fromhttp and tohttp operators. You’ll learn to make GET requests, send data, handle authentication, and implement pagination for large result sets.

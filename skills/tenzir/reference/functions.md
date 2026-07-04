@@ -1,3 +1,10 @@
+---
+title: "Functions"
+canonical: https://tenzir.com/docs/reference/functions
+source: https://tenzir.com/docs/reference/functions.md
+section: "Docs"
+---
+
 # Functions
 
 > Functions appear in expressions and take positional and/or named arguments, producing a value as a result of their computation.
@@ -911,6 +918,14 @@ Retrieves a list of field names from a record.
 
 ```tql
 record.keys()
+```
+
+### [map\_keys](functions/map_keys.md)
+
+Renames record fields by applying a lambda to each field name.
+
+```tql
+record.map_keys(key => key.to_lower())
 ```
 
 ### [merge](functions/merge.md)

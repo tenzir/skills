@@ -1,3 +1,10 @@
+---
+title: "median"
+canonical: https://tenzir.com/docs/reference/functions/median
+source: https://tenzir.com/docs/reference/functions/median.md
+section: "Docs"
+---
+
 # median
 
 > Computes the approximate median of all grouped values using a t-digest algorithm.

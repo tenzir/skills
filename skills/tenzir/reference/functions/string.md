@@ -1,3 +1,10 @@
+---
+title: "string"
+canonical: https://tenzir.com/docs/reference/functions/string
+source: https://tenzir.com/docs/reference/functions/string.md
+section: "Docs"
+---
+
 # string
 
 > Casts an expression to a string.

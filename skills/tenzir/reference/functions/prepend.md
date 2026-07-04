@@ -1,3 +1,10 @@
+---
+title: "prepend"
+canonical: https://tenzir.com/docs/reference/functions/prepend
+source: https://tenzir.com/docs/reference/functions/prepend.md
+section: "Docs"
+---
+
 # prepend
 
 > Inserts an element at the start of a list.

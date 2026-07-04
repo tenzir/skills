@@ -1,3 +1,10 @@
+---
+title: "compress_bz2"
+canonical: https://tenzir.com/docs/reference/operators/compress_bz2
+source: https://tenzir.com/docs/reference/operators/compress_bz2.md
+section: "Docs"
+---
+
 # compress_bz2
 
 > Compresses a stream of bytes using bz2 compression.

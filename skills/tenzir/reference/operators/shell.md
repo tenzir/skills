@@ -1,3 +1,10 @@
+---
+title: "shell"
+canonical: https://tenzir.com/docs/reference/operators/shell
+source: https://tenzir.com/docs/reference/operators/shell.md
+section: "Docs"
+---
+
 # shell
 
 > Executes a system command and hooks its stdin and stdout into the pipeline.

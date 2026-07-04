@@ -1,3 +1,10 @@
+---
+title: "read_yaml"
+canonical: https://tenzir.com/docs/reference/operators/read_yaml
+source: https://tenzir.com/docs/reference/operators/read_yaml.md
+section: "Docs"
+---
+
 # read_yaml
 
 > Parses an incoming YAML stream into events.

@@ -1,3 +1,10 @@
+---
+title: "write_csv"
+canonical: https://tenzir.com/docs/reference/operators/write_csv
+source: https://tenzir.com/docs/reference/operators/write_csv.md
+section: "Docs"
+---
+
 # write_csv
 
 > Transforms event stream to CSV (Comma-Separated Values) byte stream.

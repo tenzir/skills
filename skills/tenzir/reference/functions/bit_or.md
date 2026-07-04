@@ -1,3 +1,10 @@
+---
+title: "bit_or"
+canonical: https://tenzir.com/docs/reference/functions/bit_or
+source: https://tenzir.com/docs/reference/functions/bit_or.md
+section: "Docs"
+---
+
 # bit_or
 
 > Computes the bit-wise OR of its arguments.

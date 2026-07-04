@@ -1,3 +1,11 @@
+---
+title: "FTP integration"
+description: "Transfer files between a client and a server using a reliable, connection-based protocol."
+canonical: https://tenzir.com/integrations/ftp
+source: https://tenzir.com/integrations/ftp.md
+section: "Integrations"
+---
+
 # FTP integration
 
 > Transfer files between a client and a server using a reliable, connection-based protocol.

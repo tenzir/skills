@@ -1,3 +1,10 @@
+---
+title: "replace"
+canonical: https://tenzir.com/docs/reference/operators/replace
+source: https://tenzir.com/docs/reference/operators/replace.md
+section: "Docs"
+---
+
 # replace
 
 > Replaces all occurrences of a value with another value.

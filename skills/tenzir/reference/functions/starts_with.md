@@ -1,3 +1,10 @@
+---
+title: "starts_with"
+canonical: https://tenzir.com/docs/reference/functions/starts_with
+source: https://tenzir.com/docs/reference/functions/starts_with.md
+section: "Docs"
+---
+
 # starts_with
 
 > Checks whether a string starts with a specified substring.

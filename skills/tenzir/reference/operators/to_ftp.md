@@ -1,3 +1,10 @@
+---
+title: "to_ftp"
+canonical: https://tenzir.com/docs/reference/operators/to_ftp
+source: https://tenzir.com/docs/reference/operators/to_ftp.md
+section: "Docs"
+---
+
 # to_ftp
 
 > Prints events to bytes and uploads them via FTP or FTPS.

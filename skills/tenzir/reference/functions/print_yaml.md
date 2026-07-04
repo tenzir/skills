@@ -1,3 +1,10 @@
+---
+title: "print_yaml"
+canonical: https://tenzir.com/docs/reference/functions/print_yaml
+source: https://tenzir.com/docs/reference/functions/print_yaml.md
+section: "Docs"
+---
+
 # print_yaml
 
 > Prints a value as a YAML document.

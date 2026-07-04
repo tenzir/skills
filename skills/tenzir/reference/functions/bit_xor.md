@@ -1,3 +1,10 @@
+---
+title: "bit_xor"
+canonical: https://tenzir.com/docs/reference/functions/bit_xor
+source: https://tenzir.com/docs/reference/functions/bit_xor.md
+section: "Docs"
+---
+
 # bit_xor
 
 > Computes the bit-wise XOR of its arguments.

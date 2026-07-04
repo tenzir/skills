@@ -1,3 +1,10 @@
+---
+title: "unroll"
+canonical: https://tenzir.com/docs/reference/operators/unroll
+source: https://tenzir.com/docs/reference/operators/unroll.md
+section: "Docs"
+---
+
 # unroll
 
 > Returns a new event for each member of a list or a record in an event, duplicating the surrounding event.

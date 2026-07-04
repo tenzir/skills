@@ -1,3 +1,10 @@
+---
+title: "Map to UDM"
+canonical: https://tenzir.com/docs/guides/normalization/map-to-udm
+source: https://tenzir.com/docs/guides/normalization/map-to-udm.md
+section: "Docs"
+---
+
 # Map to UDM
 
 > This guide shows you how to map events to Google SecOps Unified Data Model (UDM) records in TQL. You’ll learn how to choose a UDM event type, populate metadata, model participants as UDM nouns, convert enum values, and preserve unmapped source fields.

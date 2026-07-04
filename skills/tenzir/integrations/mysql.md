@@ -1,3 +1,11 @@
+---
+title: "MySQL integration"
+description: "Connects to MySQL over the network using the MySQL wire protocol."
+canonical: https://tenzir.com/integrations/mysql
+source: https://tenzir.com/integrations/mysql.md
+section: "Integrations"
+---
+
 # MySQL integration
 
 > Connects to MySQL over the network using the MySQL wire protocol.

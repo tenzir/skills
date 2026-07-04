@@ -1,3 +1,10 @@
+---
+title: "set"
+canonical: https://tenzir.com/docs/reference/operators/set
+source: https://tenzir.com/docs/reference/operators/set.md
+section: "Docs"
+---
+
 # set
 
 > Assigns a value to a field, creating it if necessary.

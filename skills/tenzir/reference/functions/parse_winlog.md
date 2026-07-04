@@ -1,3 +1,10 @@
+---
+title: "parse_winlog"
+canonical: https://tenzir.com/docs/reference/functions/parse_winlog
+source: https://tenzir.com/docs/reference/functions/parse_winlog.md
+section: "Docs"
+---
+
 # parse_winlog
 
 > Parses a string as a Windows Event Log XML record.

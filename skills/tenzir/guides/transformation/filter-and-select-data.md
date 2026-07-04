@@ -1,3 +1,10 @@
+---
+title: "Filter and select data"
+canonical: https://tenzir.com/docs/guides/transformation/filter-and-select-data
+source: https://tenzir.com/docs/guides/transformation/filter-and-select-data.md
+section: "Docs"
+---
+
 # Filter and select data
 
 > Filtering and selecting are fundamental operations when working with data streams. This guide shows you how to filter events based on conditions and select specific fields from your data.

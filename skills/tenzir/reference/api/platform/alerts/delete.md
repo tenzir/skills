@@ -1,3 +1,10 @@
+---
+title: "Delete"
+canonical: https://tenzir.com/docs/reference/api/platform/alerts/delete
+source: https://tenzir.com/docs/reference/api/platform/alerts/delete.md
+section: "Docs"
+---
+
 # Delete
 
 > post/user/alert/delete

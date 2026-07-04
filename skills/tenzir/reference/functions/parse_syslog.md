@@ -1,3 +1,10 @@
+---
+title: "parse_syslog"
+canonical: https://tenzir.com/docs/reference/functions/parse_syslog
+source: https://tenzir.com/docs/reference/functions/parse_syslog.md
+section: "Docs"
+---
+
 # parse_syslog
 
 > Parses a string as a Syslog message.

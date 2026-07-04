@@ -1,3 +1,10 @@
+---
+title: "Load-balance pipelines"
+canonical: https://tenzir.com/docs/guides/routing/load-balance-pipelines
+source: https://tenzir.com/docs/guides/routing/load-balance-pipelines.md
+section: "Docs"
+---
+
 # Load-balance pipelines
 
 > This guide shows you how to distribute events across multiple destinations using the loadbalance operator. You’ll learn to route events to multiple endpoints for high availability and throughput.

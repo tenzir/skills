@@ -1,3 +1,11 @@
+---
+title: "AMQP integration"
+description: "Send and receive messages between systems using a standardized, protocol-based approach."
+canonical: https://tenzir.com/integrations/amqp
+source: https://tenzir.com/integrations/amqp.md
+section: "Integrations"
+---
+
 # AMQP integration
 
 > Send and receive messages between systems using a standardized, protocol-based approach.

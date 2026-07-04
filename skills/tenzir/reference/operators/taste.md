@@ -1,3 +1,10 @@
+---
+title: "taste"
+canonical: https://tenzir.com/docs/reference/operators/taste
+source: https://tenzir.com/docs/reference/operators/taste.md
+section: "Docs"
+---
+
 # taste
 
 > Limits the input to n events per unique schema.

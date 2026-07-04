@@ -1,3 +1,10 @@
+---
+title: "http"
+canonical: https://tenzir.com/docs/reference/operators/http
+source: https://tenzir.com/docs/reference/operators/http.md
+section: "Docs"
+---
+
 # http
 
 > The http operator is deprecated. Use the dedicated HTTP operators instead.

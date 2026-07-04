@@ -1,3 +1,10 @@
+---
+title: "count"
+canonical: https://tenzir.com/docs/reference/functions/count
+source: https://tenzir.com/docs/reference/functions/count.md
+section: "Docs"
+---
+
 # count
 
 > Counts the events or non-null grouped values.

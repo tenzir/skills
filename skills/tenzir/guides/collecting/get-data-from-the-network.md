@@ -1,3 +1,10 @@
+---
+title: "Get data from the network"
+canonical: https://tenzir.com/docs/guides/collecting/get-data-from-the-network
+source: https://tenzir.com/docs/guides/collecting/get-data-from-the-network.md
+section: "Docs"
+---
+
 # Get data from the network
 
 > This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets for incoming data and capture raw packets from network interfaces.

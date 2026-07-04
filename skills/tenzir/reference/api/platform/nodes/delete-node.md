@@ -1,3 +1,10 @@
+---
+title: "Delete Node"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/delete-node
+source: https://tenzir.com/docs/reference/api/platform/nodes/delete-node.md
+section: "Docs"
+---
+
 # Delete Node
 
 > post/user/delete-node

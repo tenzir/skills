@@ -1,3 +1,10 @@
+---
+title: "parse_time"
+canonical: https://tenzir.com/docs/reference/functions/parse_time
+source: https://tenzir.com/docs/reference/functions/parse_time.md
+section: "Docs"
+---
+
 # parse_time
 
 > Parses a time from a string that follows a specific format.

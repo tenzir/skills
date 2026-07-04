@@ -1,3 +1,10 @@
+---
+title: "decode_base58"
+canonical: https://tenzir.com/docs/reference/functions/decode_base58
+source: https://tenzir.com/docs/reference/functions/decode_base58.md
+section: "Docs"
+---
+
 # decode_base58
 
 > Decodes bytes as Base58.

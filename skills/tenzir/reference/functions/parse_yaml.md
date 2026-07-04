@@ -1,3 +1,10 @@
+---
+title: "parse_yaml"
+canonical: https://tenzir.com/docs/reference/functions/parse_yaml
+source: https://tenzir.com/docs/reference/functions/parse_yaml.md
+section: "Docs"
+---
+
 # parse_yaml
 
 > Parses a string as a YAML value.

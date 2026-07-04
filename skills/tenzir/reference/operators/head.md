@@ -1,3 +1,10 @@
+---
+title: "head"
+canonical: https://tenzir.com/docs/reference/operators/head
+source: https://tenzir.com/docs/reference/operators/head.md
+section: "Docs"
+---
+
 # head
 
 > Limits the input to the first n events.

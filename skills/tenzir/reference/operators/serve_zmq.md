@@ -1,3 +1,10 @@
+---
+title: "serve_zmq"
+canonical: https://tenzir.com/docs/reference/operators/serve_zmq
+source: https://tenzir.com/docs/reference/operators/serve_zmq.md
+section: "Docs"
+---
+
 # serve_zmq
 
 > Listens on a ZeroMQ endpoint and sends events.

@@ -1,3 +1,10 @@
+---
+title: "otherwise"
+canonical: https://tenzir.com/docs/reference/functions/otherwise
+source: https://tenzir.com/docs/reference/functions/otherwise.md
+section: "Docs"
+---
+
 # otherwise
 
 > Returns a fallback value if primary is null.

@@ -1,3 +1,10 @@
+---
+title: "Set Default Store"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/select-store
+source: https://tenzir.com/docs/reference/api/platform/secrets/select-store.md
+section: "Docs"
+---
+
 # Set Default Store
 
 > post/user/secrets/select-store

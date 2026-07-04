@@ -1,3 +1,10 @@
+---
+title: "Configuration"
+canonical: https://tenzir.com/docs/reference/platform/configuration
+source: https://tenzir.com/docs/reference/platform/configuration.md
+section: "Docs"
+---
+
 # Configuration
 
 > These settings configure the Tenzir Platform.

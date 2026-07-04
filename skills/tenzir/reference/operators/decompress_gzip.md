@@ -1,3 +1,10 @@
+---
+title: "decompress_gzip"
+canonical: https://tenzir.com/docs/reference/operators/decompress_gzip
+source: https://tenzir.com/docs/reference/operators/decompress_gzip.md
+section: "Docs"
+---
+
 # decompress_gzip
 
 > Decompresses a stream of bytes in the Gzip format.

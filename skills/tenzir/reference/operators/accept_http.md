@@ -1,3 +1,10 @@
+---
+title: "accept_http"
+canonical: https://tenzir.com/docs/reference/operators/accept_http
+source: https://tenzir.com/docs/reference/operators/accept_http.md
+section: "Docs"
+---
+
 # accept_http
 
 > Accepts incoming HTTP requests and forwards them as events.

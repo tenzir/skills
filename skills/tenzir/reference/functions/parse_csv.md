@@ -1,3 +1,10 @@
+---
+title: "parse_csv"
+canonical: https://tenzir.com/docs/reference/functions/parse_csv
+source: https://tenzir.com/docs/reference/functions/parse_csv.md
+section: "Docs"
+---
+
 # parse_csv
 
 > Parses a string as CSV (Comma-Separated Values).

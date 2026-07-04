@@ -1,3 +1,10 @@
+---
+title: "Plot data with charts"
+canonical: https://tenzir.com/docs/tutorials/plot-data-with-charts
+source: https://tenzir.com/docs/tutorials/plot-data-with-charts.md
+section: "Docs"
+---
+
 # Plot data with charts
 
 > In this tutorial, you will learn how to use pipelines to plot data as charts.

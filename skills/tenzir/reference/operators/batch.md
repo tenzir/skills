@@ -1,3 +1,10 @@
+---
+title: "batch"
+canonical: https://tenzir.com/docs/reference/operators/batch
+source: https://tenzir.com/docs/reference/operators/batch.md
+section: "Docs"
+---
+
 # batch
 
 > The batch operator controls the batch size of events.

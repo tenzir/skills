@@ -1,3 +1,10 @@
+---
+title: "repeat"
+canonical: https://tenzir.com/docs/reference/operators/repeat
+source: https://tenzir.com/docs/reference/operators/repeat.md
+section: "Docs"
+---
+
 # repeat
 
 > Repeats the input a number of times.

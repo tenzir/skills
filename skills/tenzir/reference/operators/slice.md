@@ -1,3 +1,10 @@
+---
+title: "slice"
+canonical: https://tenzir.com/docs/reference/operators/slice
+source: https://tenzir.com/docs/reference/operators/slice.md
+section: "Docs"
+---
+
 # slice
 
 > Keeps a range of events within the interval [begin, end) stepping by stride.

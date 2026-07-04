@@ -1,3 +1,10 @@
+---
+title: "flatten"
+canonical: https://tenzir.com/docs/reference/functions/flatten
+source: https://tenzir.com/docs/reference/functions/flatten.md
+section: "Docs"
+---
+
 # flatten
 
 > Flattens nested data.

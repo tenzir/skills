@@ -1,3 +1,10 @@
+---
+title: "count_distinct"
+canonical: https://tenzir.com/docs/reference/functions/count_distinct
+source: https://tenzir.com/docs/reference/functions/count_distinct.md
+section: "Docs"
+---
+
 # count_distinct
 
 > Counts all distinct non-null grouped values.

@@ -1,3 +1,10 @@
+---
+title: "Test Framework"
+canonical: https://tenzir.com/docs/reference/test-framework
+source: https://tenzir.com/docs/reference/test-framework.md
+section: "Docs"
+---
+
 # Test Framework
 
 > The tenzir-test harness discovers and runs integration tests for pipelines, fixtures, and custom runners. Use this page as a reference for concepts, configuration, and CLI details. For step-by-step walkthroughs, see the guides for running tests, writing tests, creating fixtures, adding custom runners, and configuring project hooks.

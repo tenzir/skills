@@ -1,3 +1,10 @@
+---
+title: "read_parquet"
+canonical: https://tenzir.com/docs/reference/operators/read_parquet
+source: https://tenzir.com/docs/reference/operators/read_parquet.md
+section: "Docs"
+---
+
 # read_parquet
 
 > Reads events from a Parquet byte stream.

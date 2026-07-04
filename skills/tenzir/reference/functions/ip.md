@@ -1,3 +1,10 @@
+---
+title: "ip"
+canonical: https://tenzir.com/docs/reference/functions/ip
+source: https://tenzir.com/docs/reference/functions/ip.md
+section: "Docs"
+---
+
 # ip
 
 > Casts an expression to an IP address.

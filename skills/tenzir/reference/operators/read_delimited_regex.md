@@ -1,3 +1,10 @@
+---
+title: "read_delimited_regex"
+canonical: https://tenzir.com/docs/reference/operators/read_delimited_regex
+source: https://tenzir.com/docs/reference/operators/read_delimited_regex.md
+section: "Docs"
+---
+
 # read_delimited_regex
 
 > Parses an incoming bytes stream into events using a regular expression as delimiter.

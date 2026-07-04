@@ -1,3 +1,10 @@
+---
+title: "List"
+canonical: https://tenzir.com/docs/reference/api/platform/alerts/list
+source: https://tenzir.com/docs/reference/api/platform/alerts/list.md
+section: "Docs"
+---
+
 # List
 
 > post/user/alert/list

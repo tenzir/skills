@@ -1,3 +1,10 @@
+---
+title: "Deduplicate events"
+canonical: https://tenzir.com/docs/guides/optimization/deduplicate-events
+source: https://tenzir.com/docs/guides/optimization/deduplicate-events.md
+section: "Docs"
+---
+
 # Deduplicate events
 
 > The deduplicate operator provides a powerful mechanism to remove duplicate events in a pipeline.

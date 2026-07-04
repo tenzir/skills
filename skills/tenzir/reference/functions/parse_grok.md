@@ -1,3 +1,10 @@
+---
+title: "parse_grok"
+canonical: https://tenzir.com/docs/reference/functions/parse_grok
+source: https://tenzir.com/docs/reference/functions/parse_grok.md
+section: "Docs"
+---
+
 # parse_grok
 
 > Parses a string according to a grok pattern.

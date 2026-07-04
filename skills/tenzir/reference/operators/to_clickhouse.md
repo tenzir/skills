@@ -1,3 +1,10 @@
+---
+title: "to_clickhouse"
+canonical: https://tenzir.com/docs/reference/operators/to_clickhouse
+source: https://tenzir.com/docs/reference/operators/to_clickhouse.md
+section: "Docs"
+---
+
 # to_clickhouse
 
 > Sends events to a ClickHouse table.

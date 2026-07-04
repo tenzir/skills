@@ -1,3 +1,11 @@
+---
+title: "Amazon SQS integration"
+description: "Send, receive, and manage messages between distributed applications."
+canonical: https://tenzir.com/integrations/amazon/sqs
+source: https://tenzir.com/integrations/amazon/sqs.md
+section: "Integrations"
+---
+
 # Amazon SQS integration
 
 > Send, receive, and manage messages between distributed applications.

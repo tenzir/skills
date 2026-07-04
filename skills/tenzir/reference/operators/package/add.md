@@ -1,3 +1,10 @@
+---
+title: "package::add"
+canonical: https://tenzir.com/docs/reference/operators/package/add
+source: https://tenzir.com/docs/reference/operators/package/add.md
+section: "Docs"
+---
+
 # package::add
 
 > Installs a package.

@@ -1,3 +1,10 @@
+---
+title: "length_bytes"
+canonical: https://tenzir.com/docs/reference/functions/length_bytes
+source: https://tenzir.com/docs/reference/functions/length_bytes.md
+section: "Docs"
+---
+
 # length_bytes
 
 > Returns the length of a string in bytes.

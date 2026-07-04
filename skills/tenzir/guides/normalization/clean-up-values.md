@@ -1,3 +1,10 @@
+---
+title: "Clean up values"
+canonical: https://tenzir.com/docs/guides/normalization/clean-up-values
+source: https://tenzir.com/docs/guides/normalization/clean-up-values.md
+section: "Docs"
+---
+
 # Clean up values
 
 > This guide shows you how to clean and normalize values in your data before mapping to a schema. You’ll learn to handle null placeholders, normalize sentinel values, fix types, and provide defaults.

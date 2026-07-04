@@ -1,3 +1,10 @@
+---
+title: "Publish a package"
+canonical: https://tenzir.com/docs/guides/packages/publish-a-package
+source: https://tenzir.com/docs/guides/packages/publish-a-package.md
+section: "Docs"
+---
+
 # Publish a package
 
 > This guide shows you how to publish your package. You’ll learn how to contribute to the Tenzir Community Library and how to set up your own package repository with automated testing.

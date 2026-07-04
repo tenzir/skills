@@ -1,3 +1,10 @@
+---
+title: "from_google_cloud_pubsub"
+canonical: https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub
+source: https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub.md
+section: "Docs"
+---
+
 # from_google_cloud_pubsub
 
 > Subscribes to a Google Cloud Pub/Sub subscription and yields events.

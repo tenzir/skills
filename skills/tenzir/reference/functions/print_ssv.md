@@ -1,3 +1,10 @@
+---
+title: "print_ssv"
+canonical: https://tenzir.com/docs/reference/functions/print_ssv
+source: https://tenzir.com/docs/reference/functions/print_ssv.md
+section: "Docs"
+---
+
 # print_ssv
 
 > Prints a record as a space-separated string of values.

@@ -1,3 +1,10 @@
+---
+title: "to_unix_socket"
+canonical: https://tenzir.com/docs/reference/operators/to_unix_socket
+source: https://tenzir.com/docs/reference/operators/to_unix_socket.md
+section: "Docs"
+---
+
 # to_unix_socket
 
 > Connects to a Unix domain socket and sends events.

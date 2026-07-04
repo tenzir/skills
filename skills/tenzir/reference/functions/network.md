@@ -1,3 +1,10 @@
+---
+title: "network"
+canonical: https://tenzir.com/docs/reference/functions/network
+source: https://tenzir.com/docs/reference/functions/network.md
+section: "Docs"
+---
+
 # network
 
 > Retrieves the network address of a subnet.

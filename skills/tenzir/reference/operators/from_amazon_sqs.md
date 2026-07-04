@@ -1,3 +1,10 @@
+---
+title: "from_amazon_sqs"
+canonical: https://tenzir.com/docs/reference/operators/from_amazon_sqs
+source: https://tenzir.com/docs/reference/operators/from_amazon_sqs.md
+section: "Docs"
+---
+
 # from_amazon_sqs
 
 > Receives messages from an Amazon SQS queue.

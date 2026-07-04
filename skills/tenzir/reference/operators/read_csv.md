@@ -1,3 +1,10 @@
+---
+title: "read_csv"
+canonical: https://tenzir.com/docs/reference/operators/read_csv
+source: https://tenzir.com/docs/reference/operators/read_csv.md
+section: "Docs"
+---
+
 # read_csv
 
 > Read CSV (Comma-Separated Values) from a byte stream.

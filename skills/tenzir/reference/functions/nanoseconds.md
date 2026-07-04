@@ -1,3 +1,10 @@
+---
+title: "nanoseconds"
+canonical: https://tenzir.com/docs/reference/functions/nanoseconds
+source: https://tenzir.com/docs/reference/functions/nanoseconds.md
+section: "Docs"
+---
+
 # nanoseconds
 
 > Converts a number to equivalent nanoseconds.

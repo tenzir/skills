@@ -1,3 +1,10 @@
+---
+title: "format_time"
+canonical: https://tenzir.com/docs/reference/functions/format_time
+source: https://tenzir.com/docs/reference/functions/format_time.md
+section: "Docs"
+---
+
 # format_time
 
 > Formats a time into a string that follows a specific format.

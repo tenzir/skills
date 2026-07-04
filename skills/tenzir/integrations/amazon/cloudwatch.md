@@ -1,3 +1,11 @@
+---
+title: "Amazon CloudWatch Logs integration"
+description: "Centralized logging for AWS resources, applications, and custom logs."
+canonical: https://tenzir.com/integrations/amazon/cloudwatch
+source: https://tenzir.com/integrations/amazon/cloudwatch.md
+section: "Integrations"
+---
+
 # Amazon CloudWatch Logs integration
 
 > Centralized logging for AWS resources, applications, and custom logs.

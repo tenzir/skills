@@ -1,3 +1,10 @@
+---
+title: "is_alpha"
+canonical: https://tenzir.com/docs/reference/functions/is_alpha
+source: https://tenzir.com/docs/reference/functions/is_alpha.md
+section: "Docs"
+---
+
 # is_alpha
 
 > Checks if a string contains only alphabetic characters.

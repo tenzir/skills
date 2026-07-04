@@ -1,3 +1,10 @@
+---
+title: "hash_sha1"
+canonical: https://tenzir.com/docs/reference/functions/hash_sha1
+source: https://tenzir.com/docs/reference/functions/hash_sha1.md
+section: "Docs"
+---
+
 # hash_sha1
 
 > Computes a SHA-1 hash digest.

@@ -1,3 +1,10 @@
+---
+title: "parse_xml"
+canonical: https://tenzir.com/docs/reference/functions/parse_xml
+source: https://tenzir.com/docs/reference/functions/parse_xml.md
+section: "Docs"
+---
+
 # parse_xml
 
 > Parses a string as XML and extracts elements matching an XPath expression.

@@ -1,3 +1,10 @@
+---
+title: "to_amazon_kinesis"
+canonical: https://tenzir.com/docs/reference/operators/to_amazon_kinesis
+source: https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md
+section: "Docs"
+---
+
 # to_amazon_kinesis
 
 > Sends records to an Amazon Kinesis Data Streams stream.

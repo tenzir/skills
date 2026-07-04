@@ -1,3 +1,10 @@
+---
+title: "internal_memory_size"
+canonical: https://tenzir.com/docs/reference/functions/internal_memory_size
+source: https://tenzir.com/docs/reference/functions/internal_memory_size.md
+section: "Docs"
+---
+
 # internal_memory_size
 
 > Estimates the internal memory size of a value in bytes.

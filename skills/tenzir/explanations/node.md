@@ -1,3 +1,10 @@
+---
+title: "Node"
+canonical: https://tenzir.com/docs/explanations/node
+source: https://tenzir.com/docs/explanations/node.md
+section: "Docs"
+---
+
 # Node
 
 > A node is a running process that manages and executes pipelines.

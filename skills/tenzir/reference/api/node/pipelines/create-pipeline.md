@@ -1,3 +1,10 @@
+---
+title: "Create a new pipeline"
+canonical: https://tenzir.com/docs/reference/api/node/pipelines/create-pipeline
+source: https://tenzir.com/docs/reference/api/node/pipelines/create-pipeline.md
+section: "Docs"
+---
+
 # Create a new pipeline
 
 > post/pipeline/create

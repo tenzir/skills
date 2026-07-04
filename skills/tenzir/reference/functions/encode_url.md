@@ -1,3 +1,10 @@
+---
+title: "encode_url"
+canonical: https://tenzir.com/docs/reference/functions/encode_url
+source: https://tenzir.com/docs/reference/functions/encode_url.md
+section: "Docs"
+---
+
 # encode_url
 
 > Encodes strings using URL encoding.

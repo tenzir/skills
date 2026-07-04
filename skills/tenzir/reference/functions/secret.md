@@ -1,3 +1,10 @@
+---
+title: "secret"
+canonical: https://tenzir.com/docs/reference/functions/secret
+source: https://tenzir.com/docs/reference/functions/secret.md
+section: "Docs"
+---
+
 # secret
 
 > Use the value of a secret.

@@ -1,3 +1,10 @@
+---
+title: "write_xsv"
+canonical: https://tenzir.com/docs/reference/operators/write_xsv
+source: https://tenzir.com/docs/reference/operators/write_xsv.md
+section: "Docs"
+---
+
 # write_xsv
 
 > Transforms event stream to XSV byte stream.

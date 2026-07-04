@@ -1,3 +1,10 @@
+---
+title: "to_amqp"
+canonical: https://tenzir.com/docs/reference/operators/to_amqp
+source: https://tenzir.com/docs/reference/operators/to_amqp.md
+section: "Docs"
+---
+
 # to_amqp
 
 > Sends messages to an AMQP exchange.

@@ -1,3 +1,10 @@
+---
+title: "Add External Store"
+canonical: https://tenzir.com/docs/reference/api/platform/secrets/add-external-store
+source: https://tenzir.com/docs/reference/api/platform/secrets/add-external-store.md
+section: "Docs"
+---
+
 # Add External Store
 
 > post/user/secrets/add-external-store

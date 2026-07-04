@@ -1,3 +1,10 @@
+---
+title: "years"
+canonical: https://tenzir.com/docs/reference/functions/years
+source: https://tenzir.com/docs/reference/functions/years.md
+section: "Docs"
+---
+
 # years
 
 > Converts a number to equivalent years.

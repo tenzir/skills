@@ -1,3 +1,10 @@
+---
+title: "Split and merge streams"
+canonical: https://tenzir.com/docs/guides/routing/split-and-merge-streams
+source: https://tenzir.com/docs/guides/routing/split-and-merge-streams.md
+section: "Docs"
+---
+
 # Split and merge streams
 
 > This guide shows you how to connect pipelines using publish and subscribe operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline.

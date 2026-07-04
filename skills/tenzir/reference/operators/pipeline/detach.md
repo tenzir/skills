@@ -1,3 +1,10 @@
+---
+title: "pipeline::detach"
+canonical: https://tenzir.com/docs/reference/operators/pipeline/detach
+source: https://tenzir.com/docs/reference/operators/pipeline/detach.md
+section: "Docs"
+---
+
 # pipeline::detach
 
 > Starts a pipeline in the node.

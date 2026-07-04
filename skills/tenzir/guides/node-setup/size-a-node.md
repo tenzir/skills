@@ -1,3 +1,10 @@
+---
+title: "Size a node"
+canonical: https://tenzir.com/docs/guides/node-setup/size-a-node
+source: https://tenzir.com/docs/guides/node-setup/size-a-node.md
+section: "Docs"
+---
+
 # Size a node
 
 > This guide helps you determine the CPU, RAM, and storage resources needed for a Tenzir node. Use the calculator below to get concrete estimates based on your deployment scenario.

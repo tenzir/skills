@@ -1,3 +1,10 @@
+---
+title: "type_of"
+canonical: https://tenzir.com/docs/reference/functions/type_of
+source: https://tenzir.com/docs/reference/functions/type_of.md
+section: "Docs"
+---
+
 # type_of
 
 > Retrieves the type definition of an expression.

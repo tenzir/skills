@@ -1,3 +1,10 @@
+---
+title: "to_google_cloud_logging"
+canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_logging
+source: https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md
+section: "Docs"
+---
+
 # to_google_cloud_logging
 
 > Sends events to Google Cloud Logging.

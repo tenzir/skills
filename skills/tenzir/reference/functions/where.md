@@ -1,3 +1,10 @@
+---
+title: "where"
+canonical: https://tenzir.com/docs/reference/functions/where
+source: https://tenzir.com/docs/reference/functions/where.md
+section: "Docs"
+---
+
 # where
 
 > Filters list elements based on a predicate.

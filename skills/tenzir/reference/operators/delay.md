@@ -1,3 +1,10 @@
+---
+title: "delay"
+canonical: https://tenzir.com/docs/reference/operators/delay
+source: https://tenzir.com/docs/reference/operators/delay.md
+section: "Docs"
+---
+
 # delay
 
 > Delays events relative to a given start time, with an optional speedup.

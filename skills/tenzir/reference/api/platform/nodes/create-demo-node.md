@@ -1,3 +1,10 @@
+---
+title: "Create Demo Node"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/create-demo-node
+source: https://tenzir.com/docs/reference/api/platform/nodes/create-demo-node.md
+section: "Docs"
+---
+
 # Create Demo Node
 
 > post/user/create-demo-node

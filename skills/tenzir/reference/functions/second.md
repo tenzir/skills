@@ -1,3 +1,10 @@
+---
+title: "second"
+canonical: https://tenzir.com/docs/reference/functions/second
+source: https://tenzir.com/docs/reference/functions/second.md
+section: "Docs"
+---
+
 # second
 
 > Extracts the second component from a timestamp with subsecond precision.

@@ -1,3 +1,10 @@
+---
+title: "fields"
+canonical: https://tenzir.com/docs/reference/operators/fields
+source: https://tenzir.com/docs/reference/operators/fields.md
+section: "Docs"
+---
+
 # fields
 
 > Retrieves all fields stored at a node.

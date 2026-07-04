@@ -1,3 +1,10 @@
+---
+title: "ocsf::category_uid"
+canonical: https://tenzir.com/docs/reference/functions/ocsf/category_uid
+source: https://tenzir.com/docs/reference/functions/ocsf/category_uid.md
+section: "Docs"
+---
+
 # ocsf::category_uid
 
 > Returns the categoryuid for a given categoryname.

@@ -1,3 +1,10 @@
+---
+title: "from_file"
+canonical: https://tenzir.com/docs/reference/operators/from_file
+source: https://tenzir.com/docs/reference/operators/from_file.md
+section: "Docs"
+---
+
 # from_file
 
 > Reads one or multiple files from a filesystem.

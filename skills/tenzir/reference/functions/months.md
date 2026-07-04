@@ -1,3 +1,10 @@
+---
+title: "months"
+canonical: https://tenzir.com/docs/reference/functions/months
+source: https://tenzir.com/docs/reference/functions/months.md
+section: "Docs"
+---
+
 # months
 
 > Converts a number to equivalent months.

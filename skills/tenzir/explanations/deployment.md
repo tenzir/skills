@@ -1,3 +1,10 @@
+---
+title: "Deployment"
+canonical: https://tenzir.com/docs/explanations/deployment
+source: https://tenzir.com/docs/explanations/deployment.md
+section: "Docs"
+---
+
 # Deployment
 
 > This page explains Tenzir’s deployment architecture, which separates data processing from management through a layered design. Three primary abstractions work together:

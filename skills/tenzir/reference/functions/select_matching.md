@@ -1,3 +1,10 @@
+---
+title: "select_matching"
+canonical: https://tenzir.com/docs/reference/functions/select_matching
+source: https://tenzir.com/docs/reference/functions/select_matching.md
+section: "Docs"
+---
+
 # select_matching
 
 > Selects top-level fields from a record when their names match a regular expression.

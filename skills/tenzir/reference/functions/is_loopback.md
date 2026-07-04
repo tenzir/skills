@@ -1,3 +1,10 @@
+---
+title: "is_loopback"
+canonical: https://tenzir.com/docs/reference/functions/is_loopback
+source: https://tenzir.com/docs/reference/functions/is_loopback.md
+section: "Docs"
+---
+
 # is_loopback
 
 > Checks whether an IP address is a loopback address.

@@ -1,3 +1,10 @@
+---
+title: "context::create_lookup_table"
+canonical: https://tenzir.com/docs/reference/operators/context/create_lookup_table
+source: https://tenzir.com/docs/reference/operators/context/create_lookup_table.md
+section: "Docs"
+---
+
 # context::create_lookup_table
 
 > Creates a lookup table context.

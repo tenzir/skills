@@ -1,3 +1,10 @@
+---
+title: "Quickstart"
+canonical: https://tenzir.com/docs/guides/quickstart
+source: https://tenzir.com/docs/guides/quickstart.md
+section: "Docs"
+---
+
 # Quickstart
 
 > Drowning in logs, alerts, and rigid tools? Meet Tenzir - your engine for taming security data. In just a few minutes, you’ll be ingesting, transforming, and enriching data on your terms, with full control. Here’s what you’ll accomplish:

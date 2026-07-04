@@ -1,3 +1,10 @@
+---
+title: "print_ndjson"
+canonical: https://tenzir.com/docs/reference/functions/print_ndjson
+source: https://tenzir.com/docs/reference/functions/print_ndjson.md
+section: "Docs"
+---
+
 # print_ndjson
 
 > Transforms a value into a single-line JSON string.

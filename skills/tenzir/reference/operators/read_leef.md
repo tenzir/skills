@@ -1,3 +1,10 @@
+---
+title: "read_leef"
+canonical: https://tenzir.com/docs/reference/operators/read_leef
+source: https://tenzir.com/docs/reference/operators/read_leef.md
+section: "Docs"
+---
+
 # read_leef
 
 > Parses an incoming LEEF stream into events.

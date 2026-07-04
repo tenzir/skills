@@ -1,3 +1,10 @@
+---
+title: "chart_bar"
+canonical: https://tenzir.com/docs/reference/operators/chart_bar
+source: https://tenzir.com/docs/reference/operators/chart_bar.md
+section: "Docs"
+---
+
 # chart_bar
 
 > Plots events on an bar chart.

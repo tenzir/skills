@@ -1,3 +1,10 @@
+---
+title: "print_xsv"
+canonical: https://tenzir.com/docs/reference/functions/print_xsv
+source: https://tenzir.com/docs/reference/functions/print_xsv.md
+section: "Docs"
+---
+
 # print_xsv
 
 > Prints a record as a delimited sequence of values.

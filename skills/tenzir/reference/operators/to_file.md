@@ -1,3 +1,10 @@
+---
+title: "to_file"
+canonical: https://tenzir.com/docs/reference/operators/to_file
+source: https://tenzir.com/docs/reference/operators/to_file.md
+section: "Docs"
+---
+
 # to_file
 
 > Writes events to one or multiple files on a filesystem.

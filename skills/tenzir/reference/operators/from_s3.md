@@ -1,3 +1,10 @@
+---
+title: "from_s3"
+canonical: https://tenzir.com/docs/reference/operators/from_s3
+source: https://tenzir.com/docs/reference/operators/from_s3.md
+section: "Docs"
+---
+
 # from_s3
 
 > Reads one or multiple files from Amazon S3.

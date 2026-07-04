@@ -1,3 +1,10 @@
+---
+title: "accept_unix_socket"
+canonical: https://tenzir.com/docs/reference/operators/accept_unix_socket
+source: https://tenzir.com/docs/reference/operators/accept_unix_socket.md
+section: "Docs"
+---
+
 # accept_unix_socket
 
 > Listens for incoming Unix domain socket connections and receives events.

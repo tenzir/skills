@@ -1,3 +1,10 @@
+---
+title: "encode_hex"
+canonical: https://tenzir.com/docs/reference/functions/encode_hex
+source: https://tenzir.com/docs/reference/functions/encode_hex.md
+section: "Docs"
+---
+
 # encode_hex
 
 > Encodes bytes into their hexadecimal representation.

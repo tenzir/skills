@@ -1,3 +1,10 @@
+---
+title: "write_json"
+canonical: https://tenzir.com/docs/reference/operators/write_json
+source: https://tenzir.com/docs/reference/operators/write_json.md
+section: "Docs"
+---
+
 # write_json
 
 > Transforms the input event stream to a JSON byte stream.

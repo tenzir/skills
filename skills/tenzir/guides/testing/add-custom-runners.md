@@ -1,3 +1,10 @@
+---
+title: "Add custom runners"
+canonical: https://tenzir.com/docs/guides/testing/add-custom-runners
+source: https://tenzir.com/docs/guides/testing/add-custom-runners.md
+section: "Docs"
+---
+
 # Add custom runners
 
 > Runners tell tenzir-test how to execute a discovered file. This guide shows you how to register the XXD runner from the example project so you can compare binary artifacts by dumping their hexadecimal representation with xxd.

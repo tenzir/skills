@@ -1,3 +1,10 @@
+---
+title: "accept_elasticsearch"
+canonical: https://tenzir.com/docs/reference/operators/accept_elasticsearch
+source: https://tenzir.com/docs/reference/operators/accept_elasticsearch.md
+section: "Docs"
+---
+
 # accept_elasticsearch
 
 > Accepts incoming Elasticsearch-compatible Bulk API requests and forwards them as events.

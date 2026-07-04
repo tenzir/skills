@@ -1,3 +1,10 @@
+---
+title: "AWS Authentication"
+canonical: https://tenzir.com/docs/reference/aws-authentication
+source: https://tenzir.com/docs/reference/aws-authentication.md
+section: "Docs"
+---
+
 # AWS Authentication
 
 > Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared awsiam option used by froms3, tos3, fromamazonsqs, toamazonsqs, fromamazoncloudwatch, toamazoncloudwatch, fromkafka, and tokafka.

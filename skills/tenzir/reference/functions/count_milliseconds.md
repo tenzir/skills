@@ -1,3 +1,10 @@
+---
+title: "count_milliseconds"
+canonical: https://tenzir.com/docs/reference/functions/count_milliseconds
+source: https://tenzir.com/docs/reference/functions/count_milliseconds.md
+section: "Docs"
+---
+
 # count_milliseconds
 
 > Counts the number of milliseconds in a duration.

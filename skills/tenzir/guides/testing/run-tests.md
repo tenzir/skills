@@ -1,3 +1,10 @@
+---
+title: "Run tests"
+canonical: https://tenzir.com/docs/guides/testing/run-tests
+source: https://tenzir.com/docs/guides/testing/run-tests.md
+section: "Docs"
+---
+
 # Run tests
 
 > This guide shows you how to run existing integration tests with the tenzir-test framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.

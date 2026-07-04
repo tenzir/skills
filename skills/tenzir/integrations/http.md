@@ -1,3 +1,11 @@
+---
+title: "HTTP integration"
+description: "Transfer and receive data between clients and servers using a request-response protocol."
+canonical: https://tenzir.com/integrations/http
+source: https://tenzir.com/integrations/http.md
+section: "Integrations"
+---
+
 # HTTP integration
 
 > Transfer and receive data between clients and servers using a request-response protocol.

@@ -1,3 +1,10 @@
+---
+title: "compress_brotli"
+canonical: https://tenzir.com/docs/reference/operators/compress_brotli
+source: https://tenzir.com/docs/reference/operators/compress_brotli.md
+section: "Docs"
+---
+
 # compress_brotli
 
 > Compresses a stream of bytes using Brotli compression.

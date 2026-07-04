@@ -1,3 +1,10 @@
+---
+title: "ocsf::cast"
+canonical: https://tenzir.com/docs/reference/operators/ocsf/cast
+source: https://tenzir.com/docs/reference/operators/ocsf/cast.md
+section: "Docs"
+---
+
 # ocsf::cast
 
 > Casts incoming events to their OCSF type.

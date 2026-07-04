@@ -1,3 +1,10 @@
+---
+title: "decapsulate"
+canonical: https://tenzir.com/docs/reference/functions/decapsulate
+source: https://tenzir.com/docs/reference/functions/decapsulate.md
+section: "Docs"
+---
+
 # decapsulate
 
 > Decapsulates packet data at link, network, and transport layer.

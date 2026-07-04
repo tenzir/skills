@@ -1,3 +1,11 @@
+---
+title: "TCP integration"
+description: "Establish, maintain, and terminate reliable, connection-oriented communication over IP networks."
+canonical: https://tenzir.com/integrations/tcp
+source: https://tenzir.com/integrations/tcp.md
+section: "Integrations"
+---
+
 # TCP integration
 
 > Establish, maintain, and terminate reliable, connection-oriented communication over IP networks.

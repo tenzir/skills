@@ -1,3 +1,10 @@
+---
+title: "Run the platform"
+canonical: https://tenzir.com/docs/guides/platform-setup/run-the-platform
+source: https://tenzir.com/docs/guides/platform-setup/run-the-platform.md
+section: "Docs"
+---
+
 # Run the platform
 
 > This guide shows you how to start the Tenzir Platform using Docker Compose. Complete this step after configuring all services.

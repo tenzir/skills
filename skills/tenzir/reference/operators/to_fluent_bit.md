@@ -1,3 +1,10 @@
+---
+title: "to_fluent_bit"
+canonical: https://tenzir.com/docs/reference/operators/to_fluent_bit
+source: https://tenzir.com/docs/reference/operators/to_fluent_bit.md
+section: "Docs"
+---
+
 # to_fluent_bit
 
 > Sends events via Fluent Bit.

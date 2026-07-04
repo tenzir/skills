@@ -1,3 +1,10 @@
+---
+title: "serve_tcp"
+canonical: https://tenzir.com/docs/reference/operators/serve_tcp
+source: https://tenzir.com/docs/reference/operators/serve_tcp.md
+section: "Docs"
+---
+
 # serve_tcp
 
 > Listens for incoming TCP connections and sends events to all connected clients.

@@ -1,3 +1,10 @@
+---
+title: "context::update"
+canonical: https://tenzir.com/docs/reference/operators/context/update
+source: https://tenzir.com/docs/reference/operators/context/update.md
+section: "Docs"
+---
+
 # context::update
 
 > Updates a context with new data.

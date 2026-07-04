@@ -1,3 +1,10 @@
+---
+title: "shift_left"
+canonical: https://tenzir.com/docs/reference/functions/shift_left
+source: https://tenzir.com/docs/reference/functions/shift_left.md
+section: "Docs"
+---
+
 # shift_left
 
 > Performs a bit-wise left shift.

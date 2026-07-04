@@ -1,3 +1,10 @@
+---
+title: "count_nanoseconds"
+canonical: https://tenzir.com/docs/reference/functions/count_nanoseconds
+source: https://tenzir.com/docs/reference/functions/count_nanoseconds.md
+section: "Docs"
+---
+
 # count_nanoseconds
 
 > Counts the number of nanoseconds in a duration.

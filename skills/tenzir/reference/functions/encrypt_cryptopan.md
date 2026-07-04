@@ -1,3 +1,10 @@
+---
+title: "encrypt_cryptopan"
+canonical: https://tenzir.com/docs/reference/functions/encrypt_cryptopan
+source: https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md
+section: "Docs"
+---
+
 # encrypt_cryptopan
 
 > Encrypts an IP address via Crypto-PAn.

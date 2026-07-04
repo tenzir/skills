@@ -1,3 +1,10 @@
+---
+title: "Mask sensitive data"
+canonical: https://tenzir.com/docs/guides/transformation/mask-sensitive-data
+source: https://tenzir.com/docs/guides/transformation/mask-sensitive-data.md
+section: "Docs"
+---
+
 # Mask sensitive data
 
 > This guide shows you how to mask sensitive fields such as IP addresses, email addresses, account identifiers, and credentials. You’ll learn when to anonymize, hash, redact, or partially reveal a value, and how to combine TQL functions to apply each pattern consistently across your pipelines.

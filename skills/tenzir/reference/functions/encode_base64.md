@@ -1,3 +1,10 @@
+---
+title: "encode_base64"
+canonical: https://tenzir.com/docs/reference/functions/encode_base64
+source: https://tenzir.com/docs/reference/functions/encode_base64.md
+section: "Docs"
+---
+
 # encode_base64
 
 > Encodes bytes as Base64.

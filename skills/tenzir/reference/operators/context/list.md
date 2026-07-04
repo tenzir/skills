@@ -1,3 +1,10 @@
+---
+title: "context::list"
+canonical: https://tenzir.com/docs/reference/operators/context/list
+source: https://tenzir.com/docs/reference/operators/context/list.md
+section: "Docs"
+---
+
 # context::list
 
 > Lists all contexts

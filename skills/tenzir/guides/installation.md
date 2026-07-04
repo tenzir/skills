@@ -1,3 +1,10 @@
+---
+title: "Overview"
+canonical: https://tenzir.com/docs/guides/installation
+source: https://tenzir.com/docs/guides/installation.md
+section: "Docs"
+---
+
 # Overview
 
 > This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node. The package includes two binaries:

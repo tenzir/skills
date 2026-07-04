@@ -1,3 +1,10 @@
+---
+title: "Read and watch files"
+canonical: https://tenzir.com/docs/guides/collecting/read-and-watch-files
+source: https://tenzir.com/docs/guides/collecting/read-and-watch-files.md
+section: "Docs"
+---
+
 # Read and watch files
 
 > This guide shows you how to read files and monitor directories using the fromfile operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.

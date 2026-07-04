@@ -1,3 +1,10 @@
+---
+title: "Security Policy"
+canonical: https://tenzir.com/docs/guides/contribution/security
+source: https://tenzir.com/docs/guides/contribution/security.md
+section: "Docs"
+---
+
 # Security Policy
 
 > Security is a serious matter for us. We want to ensure and maintain a secure environment for our customers and the open-source community.

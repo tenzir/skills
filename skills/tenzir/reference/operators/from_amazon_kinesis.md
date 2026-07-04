@@ -1,3 +1,10 @@
+---
+title: "from_amazon_kinesis"
+canonical: https://tenzir.com/docs/reference/operators/from_amazon_kinesis
+source: https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md
+section: "Docs"
+---
+
 # from_amazon_kinesis
 
 > Receives records from an Amazon Kinesis Data Streams stream.

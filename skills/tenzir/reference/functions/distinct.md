@@ -1,3 +1,10 @@
+---
+title: "distinct"
+canonical: https://tenzir.com/docs/reference/functions/distinct
+source: https://tenzir.com/docs/reference/functions/distinct.md
+section: "Docs"
+---
+
 # distinct
 
 > Creates a sorted list without duplicates of non-null grouped values.

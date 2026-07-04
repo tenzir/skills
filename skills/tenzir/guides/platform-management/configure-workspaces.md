@@ -1,3 +1,10 @@
+---
+title: "Configure workspaces"
+canonical: https://tenzir.com/docs/guides/platform-management/configure-workspaces
+source: https://tenzir.com/docs/guides/platform-management/configure-workspaces.md
+section: "Docs"
+---
+
 # Configure workspaces
 
 > Workspaces in the platform logically group nodes, secrets, and dashboards.

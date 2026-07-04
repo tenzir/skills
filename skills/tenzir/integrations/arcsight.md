@@ -1,3 +1,11 @@
+---
+title: "ArcSight integration"
+description: "OpenText ArcSight is a SIEM and log management ecosystem. Tenzir integrates with ArcSight through open interfaces such as CEF, Syslog, Kafka, and the ArcSight Logger REST API."
+canonical: https://tenzir.com/integrations/arcsight
+source: https://tenzir.com/integrations/arcsight.md
+section: "Integrations"
+---
+
 # ArcSight integration
 
 > OpenText ArcSight is a SIEM and log management ecosystem. Tenzir integrates with ArcSight through open interfaces such as CEF, Syslog, Kafka, and the ArcSight Logger REST API.

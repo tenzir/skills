@@ -1,3 +1,11 @@
+---
+title: "Google Cloud Storage integration"
+description: "Store, retrieve, and manage data objects across a scalable, cloud-based environment."
+canonical: https://tenzir.com/integrations/google/cloud-storage
+source: https://tenzir.com/integrations/google/cloud-storage.md
+section: "Integrations"
+---
+
 # Google Cloud Storage integration
 
 > Store, retrieve, and manage data objects across a scalable, cloud-based environment.

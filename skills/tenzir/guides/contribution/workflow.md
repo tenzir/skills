@@ -1,3 +1,10 @@
+---
+title: "Git and GitHub Workflow"
+canonical: https://tenzir.com/docs/guides/contribution/workflow
+source: https://tenzir.com/docs/guides/contribution/workflow.md
+section: "Docs"
+---
+
 # Git and GitHub Workflow
 
 > The following diagram visualizes our branching model:

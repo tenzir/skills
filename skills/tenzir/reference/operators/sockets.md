@@ -1,3 +1,10 @@
+---
+title: "sockets"
+canonical: https://tenzir.com/docs/reference/operators/sockets
+source: https://tenzir.com/docs/reference/operators/sockets.md
+section: "Docs"
+---
+
 # sockets
 
 > Shows a snapshot of open sockets.

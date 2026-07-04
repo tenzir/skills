@@ -1,3 +1,10 @@
+---
+title: "from_nats"
+canonical: https://tenzir.com/docs/reference/operators/from_nats
+source: https://tenzir.com/docs/reference/operators/from_nats.md
+section: "Docs"
+---
+
 # from_nats
 
 > Consumes messages from a NATS JetStream subject.

@@ -1,3 +1,10 @@
+---
+title: "Language"
+canonical: https://tenzir.com/docs/explanations/language
+source: https://tenzir.com/docs/explanations/language.md
+section: "Docs"
+---
+
 # Language
 
 > The Tenzir Query Language (TQL) is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.

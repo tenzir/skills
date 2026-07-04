@@ -1,3 +1,10 @@
+---
+title: "Update pipeline state"
+canonical: https://tenzir.com/docs/reference/api/node/pipelines/update-pipeline
+source: https://tenzir.com/docs/reference/api/node/pipelines/update-pipeline.md
+section: "Docs"
+---
+
 # Update pipeline state
 
 > post/pipeline/update

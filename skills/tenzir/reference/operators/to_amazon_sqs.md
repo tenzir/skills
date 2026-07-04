@@ -1,3 +1,10 @@
+---
+title: "to_amazon_sqs"
+canonical: https://tenzir.com/docs/reference/operators/to_amazon_sqs
+source: https://tenzir.com/docs/reference/operators/to_amazon_sqs.md
+section: "Docs"
+---
+
 # to_amazon_sqs
 
 > Sends messages to an Amazon SQS queue.

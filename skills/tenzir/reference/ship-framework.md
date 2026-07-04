@@ -1,3 +1,10 @@
+---
+title: "Ship Framework"
+canonical: https://tenzir.com/docs/reference/ship-framework
+source: https://tenzir.com/docs/reference/ship-framework.md
+section: "Docs"
+---
+
 # Ship Framework
 
 > tenzir-ship ships as a Python package that requires Python 3.12 or later. Install it with uv (or pip) and verify the console script:
@@ -475,10 +482,16 @@ When you publish `vX.Y.Z-rc.N`, `tenzir-ship` automatically marks the GitHub rel
 Run structural checks across entry files, release manifests, and exported documentation.
 
 ```text
-tenzir-ship validate
+tenzir-ship validate [options]
 ```
 
-The validator reports missing metadata, unused entries, duplicate entry IDs, and configuration drift across repositories. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
+| Option      | Description                                                |
+| ----------- | ---------------------------------------------------------- |
+| `--lenient` | Demote missing PR metadata issues to warnings, not errors. |
+
+The validator reports missing metadata, unused entries, duplicate entry IDs, and configuration drift across repositories. It also rejects entries that carry `prs` metadata when the config sets `omit_pr: true`, or `authors` metadata when the config sets `omit_author: true`. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
+
+When `require_pr: true` is set, plain validation fails for unreleased entries without `prs` metadata. Use `validate --lenient` in pre-push hooks when a pull request number might not exist yet. Lenient mode demotes only missing PR metadata issues; all other validation errors still fail.
 
 ### stats
 
@@ -660,6 +673,7 @@ Configuration fields:
 | `export_style`   | Default layout: `compact` (bullet-list) or omit for detailed cards       |
 | `explicit_links` | Render @mentions and #PR references as explicit Markdown links (boolean) |
 | `omit_pr`        | Suppress PR numbers in entries (boolean, default `false`)                |
+| `require_pr`     | Require PR numbers in unreleased entries (boolean, default `false`)      |
 | `omit_author`    | Suppress author attribution in entries (boolean, default `false`)        |
 | `components`     | Optional dict mapping component names to descriptions                    |
 | `modules`        | Optional glob pattern for discovering nested changelog projects          |
@@ -674,6 +688,7 @@ description: Core pipeline engine
 repository: tenzir/tenzir
 export_style: compact
 explicit_links: true
+require_pr: true
 components:
   cli: Command-line interface and user commands
   engine: Core pipeline engine internals
@@ -727,7 +742,9 @@ Set `version_bump_mode: off` to disable version file updates entirely.
 
 Version files are only updated when the release version is equal to or newer than the latest existing release. Editing an older release does not downgrade version fields in manifest files.
 
-The `omit_pr` and `omit_author` options suppress PR numbers and author attribution in generated entries. When enabled, the CLI skips auto-detection and ignores any `--pr`, `--author`, or `--co-author` flags (with a warning). Use these options for projects that don’t use GitHub pull requests or prefer anonymous changelog entries.
+The `omit_pr` and `omit_author` options suppress PR numbers and author attribution in generated entries. When enabled, the CLI skips auto-detection and ignores any `--pr`, `--author`, or `--co-author` flags (with a warning). The `validate` command additionally reports an error for entries that carry `prs` or `authors` metadata despite the corresponding option being set, catching entries written to disk without the `add` command. Use these options for projects that don’t use GitHub pull requests or prefer anonymous changelog entries.
+
+The `require_pr` option enforces non-empty `prs` metadata on every unreleased entry. Use it when release notes must always link back to pull requests. It is mutually exclusive with `omit_pr`; use `validate --lenient` for pre-push hooks so missing PR numbers remain warnings until the pull request exists.
 
 The first invocation of `tenzir-ship add` scaffolds a `changelog/` subdirectory with `config.yaml`, inferring defaults from the parent directory name. When you provide an explicit `--root` flag, the CLI uses that directory directly. Projects with `package.yaml` next to `changelog/` reuse the package `id` and `name` automatically.
 

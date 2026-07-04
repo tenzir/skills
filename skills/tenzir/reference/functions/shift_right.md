@@ -1,3 +1,10 @@
+---
+title: "shift_right"
+canonical: https://tenzir.com/docs/reference/functions/shift_right
+source: https://tenzir.com/docs/reference/functions/shift_right.md
+section: "Docs"
+---
+
 # shift_right
 
 > Performs a bit-wise right shift.

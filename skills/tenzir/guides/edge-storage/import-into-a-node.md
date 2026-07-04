@@ -1,3 +1,10 @@
+---
+title: "Import into a node"
+canonical: https://tenzir.com/docs/guides/edge-storage/import-into-a-node
+source: https://tenzir.com/docs/guides/edge-storage/import-into-a-node.md
+section: "Docs"
+---
+
 # Import into a node
 
 > Importing (or ingesting) data can be done by running a pipeline that ends with the import output operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the import operator runs within the node.

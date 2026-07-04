@@ -1,3 +1,10 @@
+---
+title: "from_sentinelone_data_lake"
+canonical: https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake
+source: https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md
+section: "Docs"
+---
+
 # from_sentinelone_data_lake
 
 > Retrieves PowerQuery results from SentinelOne Singularity Data Lake.

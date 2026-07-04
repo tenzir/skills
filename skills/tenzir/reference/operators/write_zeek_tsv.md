@@ -1,3 +1,10 @@
+---
+title: "write_zeek_tsv"
+canonical: https://tenzir.com/docs/reference/operators/write_zeek_tsv
+source: https://tenzir.com/docs/reference/operators/write_zeek_tsv.md
+section: "Docs"
+---
+
 # write_zeek_tsv
 
 > Transforms event stream into Zeek Tab-Separated Value byte stream.

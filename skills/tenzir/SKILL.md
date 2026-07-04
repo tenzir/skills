@@ -578,11 +578,11 @@ Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default cre
 
 #### [Overview](reference/api/node/overview.md)
 
-Use the Tenzir REST API to manage pipelines and read pipeline output from a Tenzir node.
+This reference is generated from the OpenAPI specification.
 
 #### [Overview](reference/api/platform/overview.md)
 
-API for managing Tenzir Platform workspaces, nodes, and dashboards.
+This reference is generated from the OpenAPI specification.
 
 #### [Check node health](reference/api/node/health/ping-node.md)
 
@@ -841,6 +841,10 @@ For the complete operator listing by category, read [Operator Index](reference/o
 For the complete function listing by category, read [Function Index](reference/functions-index.md).
 
 ## Integrations
+
+#### [alphaMountain integration](integrations/alphamountain.md)
+
+Enrich DNS, web, and network telemetry with real-time threat intelligence.
 
 #### [Amazon CloudWatch Logs integration](integrations/amazon/cloudwatch.md)
 

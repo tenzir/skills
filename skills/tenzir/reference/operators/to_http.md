@@ -1,3 +1,10 @@
+---
+title: "to_http"
+canonical: https://tenzir.com/docs/reference/operators/to_http
+source: https://tenzir.com/docs/reference/operators/to_http.md
+section: "Docs"
+---
+
 # to_http
 
 > Sends events as a single HTTP request to a webhook or API endpoint.

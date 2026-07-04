@@ -1,3 +1,10 @@
+---
+title: "Configure inputs"
+canonical: https://tenzir.com/docs/guides/packages/configure-inputs
+source: https://tenzir.com/docs/guides/packages/configure-inputs.md
+section: "Docs"
+---
+
 # Configure inputs
 
 > This guide shows you how to make packages configurable with inputs. You’ll learn how to define input variables, use templating syntax, and provide values during installation.

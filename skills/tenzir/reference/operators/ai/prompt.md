@@ -1,3 +1,10 @@
+---
+title: "ai::prompt"
+canonical: https://tenzir.com/docs/reference/operators/ai/prompt
+source: https://tenzir.com/docs/reference/operators/ai/prompt.md
+section: "Docs"
+---
+
 # ai::prompt
 
 > Sends each input event to an OpenAI-compatible Responses API endpoint and adds the model response to the event.

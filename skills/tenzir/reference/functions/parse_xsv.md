@@ -1,3 +1,10 @@
+---
+title: "parse_xsv"
+canonical: https://tenzir.com/docs/reference/functions/parse_xsv
+source: https://tenzir.com/docs/reference/functions/parse_xsv.md
+section: "Docs"
+---
+
 # parse_xsv
 
 > Parses a string as delimiter separated values.

@@ -1,3 +1,10 @@
+---
+title: "Delete"
+canonical: https://tenzir.com/docs/reference/api/platform/dashboards/delete
+source: https://tenzir.com/docs/reference/api/platform/dashboards/delete.md
+section: "Docs"
+---
+
 # Delete
 
 > post/user/dashboard/delete

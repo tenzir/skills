@@ -1,3 +1,10 @@
+---
+title: "to_amazon_security_lake"
+canonical: https://tenzir.com/docs/reference/operators/to_amazon_security_lake
+source: https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md
+section: "Docs"
+---
+
 # to_amazon_security_lake
 
 > Sends OCSF events to Amazon Security Lake.

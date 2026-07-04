@@ -1,3 +1,10 @@
+---
+title: "from_zmq"
+canonical: https://tenzir.com/docs/reference/operators/from_zmq
+source: https://tenzir.com/docs/reference/operators/from_zmq.md
+section: "Docs"
+---
+
 # from_zmq
 
 > Connects to a remote ZeroMQ publisher and receives events.

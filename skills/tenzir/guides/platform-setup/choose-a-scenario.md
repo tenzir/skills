@@ -1,3 +1,10 @@
+---
+title: "Choose a scenario"
+canonical: https://tenzir.com/docs/guides/platform-setup/choose-a-scenario
+source: https://tenzir.com/docs/guides/platform-setup/choose-a-scenario.md
+section: "Docs"
+---
+
 # Choose a scenario
 
 > We provide several examples of possible platform deployment scenarios. Pick one that best suits your needs.

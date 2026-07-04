@@ -1,3 +1,10 @@
+---
+title: "Spawn Node"
+canonical: https://tenzir.com/docs/reference/api/platform/admin/spawn-node
+source: https://tenzir.com/docs/reference/api/platform/admin/spawn-node.md
+section: "Docs"
+---
+
 # Spawn Node
 
 > post/admin/spawn-node

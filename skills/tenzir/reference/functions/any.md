@@ -1,3 +1,10 @@
+---
+title: "any"
+canonical: https://tenzir.com/docs/reference/functions/any
+source: https://tenzir.com/docs/reference/functions/any.md
+section: "Docs"
+---
+
 # any
 
 > Computes the disjunction (OR) of all grouped boolean values.

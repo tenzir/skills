@@ -1,3 +1,10 @@
+---
+title: "group"
+canonical: https://tenzir.com/docs/reference/operators/group
+source: https://tenzir.com/docs/reference/operators/group.md
+section: "Docs"
+---
+
 # group
 
 > Routes events with the same key through the same subpipeline.

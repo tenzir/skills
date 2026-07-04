@@ -1,3 +1,10 @@
+---
+title: "Helm chart"
+canonical: https://tenzir.com/docs/reference/node/helm-chart
+source: https://tenzir.com/docs/reference/node/helm-chart.md
+section: "Docs"
+---
+
 # Helm chart
 
 > The Tenzir Helm chart deploys one or more tenzir-node instances on a Kubernetes cluster. It deploys nodes only - it does not deploy the Tenzir Platform. Nodes installed through the chart connect to a Platform you have already provisioned, either cloud-hosted at app.tenzir.com or self-hosted through the Sovereign Edition.

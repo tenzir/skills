@@ -1,3 +1,10 @@
+---
+title: "List Nodes"
+canonical: https://tenzir.com/docs/reference/api/platform/nodes/list-nodes
+source: https://tenzir.com/docs/reference/api/platform/nodes/list-nodes.md
+section: "Docs"
+---
+
 # List Nodes
 
 > post/user/list-nodes

@@ -1,3 +1,10 @@
+---
+title: "Create a package"
+canonical: https://tenzir.com/docs/guides/packages/create-a-package
+source: https://tenzir.com/docs/guides/packages/create-a-package.md
+section: "Docs"
+---
+
 # Create a package
 
 > This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, plan reusable operators, add deployable pipelines, and include runnable examples.

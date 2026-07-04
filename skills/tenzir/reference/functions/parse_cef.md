@@ -1,3 +1,10 @@
+---
+title: "parse_cef"
+canonical: https://tenzir.com/docs/reference/functions/parse_cef
+source: https://tenzir.com/docs/reference/functions/parse_cef.md
+section: "Docs"
+---
+
 # parse_cef
 
 > Parses a string as a CEF message

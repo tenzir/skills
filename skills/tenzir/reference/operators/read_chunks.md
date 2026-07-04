@@ -1,3 +1,10 @@
+---
+title: "read_chunks"
+canonical: https://tenzir.com/docs/reference/operators/read_chunks
+source: https://tenzir.com/docs/reference/operators/read_chunks.md
+section: "Docs"
+---
+
 # read_chunks
 
 > Parses binary data into events with a single data field, in a streaming fasion.

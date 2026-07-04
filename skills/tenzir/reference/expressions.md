@@ -1,3 +1,10 @@
+---
+title: "Expressions"
+canonical: https://tenzir.com/docs/reference/expressions
+source: https://tenzir.com/docs/reference/expressions.md
+section: "Docs"
+---
+
 # Expressions
 
 > Expressions form the computational core of TQL. They range from simple literals to complex evaluations.

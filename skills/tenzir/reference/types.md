@@ -1,3 +1,10 @@
+---
+title: "Type System"
+canonical: https://tenzir.com/docs/reference/types
+source: https://tenzir.com/docs/reference/types.md
+section: "Docs"
+---
+
 # Type System
 
 > This page explains TQL’s type system, which provides strong typing with automatic inference. You get type safety without requiring explicit declarations. Key characteristics include:

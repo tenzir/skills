@@ -1,3 +1,10 @@
+---
+title: "nics"
+canonical: https://tenzir.com/docs/reference/operators/nics
+source: https://tenzir.com/docs/reference/operators/nics.md
+section: "Docs"
+---
+
 # nics
 
 > Shows a snapshot of available network interfaces.

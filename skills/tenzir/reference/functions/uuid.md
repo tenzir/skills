@@ -1,3 +1,10 @@
+---
+title: "uuid"
+canonical: https://tenzir.com/docs/reference/functions/uuid
+source: https://tenzir.com/docs/reference/functions/uuid.md
+section: "Docs"
+---
+
 # uuid
 
 > Generates a Universally Unique Identifier (UUID) string.

@@ -1,3 +1,11 @@
+---
+title: "Network Interface Card integration"
+description: "Acquire packets from the network and process them with pipelines."
+canonical: https://tenzir.com/integrations/nic
+source: https://tenzir.com/integrations/nic.md
+section: "Integrations"
+---
+
 # Network Interface Card integration
 
 > Acquire packets from the network and process them with pipelines.

@@ -1,3 +1,10 @@
+---
+title: "decode_url"
+canonical: https://tenzir.com/docs/reference/functions/decode_url
+source: https://tenzir.com/docs/reference/functions/decode_url.md
+section: "Docs"
+---
+
 # decode_url
 
 > Decodes URL encoded strings.

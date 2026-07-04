@@ -1,3 +1,10 @@
+---
+title: "Add operators"
+canonical: https://tenzir.com/docs/guides/packages/add-operators
+source: https://tenzir.com/docs/guides/packages/add-operators.md
+section: "Docs"
+---
+
 # Add operators
 
 > This guide shows you how to create user-defined operators (UDOs) for your package. You’ll learn how to define operators with positional and named arguments, and how to test them with the Test Framework.

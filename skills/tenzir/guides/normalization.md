@@ -1,3 +1,10 @@
+---
+title: "Normalize data"
+canonical: https://tenzir.com/docs/guides/normalization
+source: https://tenzir.com/docs/guides/normalization.md
+section: "Docs"
+---
+
 # Normalize data
 
 > This guide provides an overview of data normalization in TQL. Normalization transforms raw, inconsistent data into a clean, standardized format that’s ready for analysis, storage, and sharing.

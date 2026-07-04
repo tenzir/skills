@@ -1,3 +1,10 @@
+---
+title: "context::create_geoip"
+canonical: https://tenzir.com/docs/reference/operators/context/create_geoip
+source: https://tenzir.com/docs/reference/operators/context/create_geoip.md
+section: "Docs"
+---
+
 # context::create_geoip
 
 > Creates a GeoIP context.

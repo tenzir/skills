@@ -1,3 +1,10 @@
+---
+title: "where"
+canonical: https://tenzir.com/docs/reference/operators/where
+source: https://tenzir.com/docs/reference/operators/where.md
+section: "Docs"
+---
+
 # where
 
 > Keeps only events for which the given predicate is true.

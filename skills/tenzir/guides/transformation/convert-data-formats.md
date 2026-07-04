@@ -1,3 +1,10 @@
+---
+title: "Convert data formats"
+canonical: https://tenzir.com/docs/guides/transformation/convert-data-formats
+source: https://tenzir.com/docs/guides/transformation/convert-data-formats.md
+section: "Docs"
+---
+
 # Convert data formats
 
 > Data comes in many formats. Converting between formats is essential for integration, export, and interoperability. This guide shows you how to transform data between JSON, CSV, YAML, and other common formats using TQL’s print functions.

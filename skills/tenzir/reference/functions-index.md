@@ -147,6 +147,7 @@
 - [get](functions/get.md): Gets a field from a record or an element from a list.
 - [has](functions/has.md): Checks whether a record has a specified field.
 - [keys](functions/keys.md): Retrieves a list of field names from a record.
+- [map_keys](functions/map_keys.md): Renames the top-level fields of a record by applying a lambda to each field name.
 - [merge](functions/merge.md): Combines two records into a single record by merging their fields.
 - [select_matching](functions/select_matching.md): Selects top-level fields from a record when their names match a regular expression.
 - [sort](functions/sort.md): Sorts lists and record fields.

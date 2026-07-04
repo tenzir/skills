@@ -1,3 +1,10 @@
+---
+title: "from_clickhouse"
+canonical: https://tenzir.com/docs/reference/operators/from_clickhouse
+source: https://tenzir.com/docs/reference/operators/from_clickhouse.md
+section: "Docs"
+---
+
 # from_clickhouse
 
 > Fetches data from a ClickHouse server.

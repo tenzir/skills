@@ -1,3 +1,10 @@
+---
+title: "yara"
+canonical: https://tenzir.com/docs/reference/operators/yara
+source: https://tenzir.com/docs/reference/operators/yara.md
+section: "Docs"
+---
+
 # yara
 
 > Executes YARA rules on byte streams.
