@@ -1,0 +1,10 @@
+created: 2026-07-05
+title: Streamlined Tenzir skill collection
+intro: >-
+  This release streamlines the shared Tenzir Skills collection by renaming the bundled
+  documentation skill to tenzir and removing the opinionated shared review workflow.
+  It also keeps scheduled ASIM updates stable when upstream branch movement does not
+  change the copied source content.
+source:
+  mode: sync-stable-queue
+  previous_stable: v2.3.0
