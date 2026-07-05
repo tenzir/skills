@@ -157,4 +157,4 @@ from_microsoft_graph "users",
 ## See Also
 
 * [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
-* [Graph](../../integrations/microsoft/graph.md)
+* [Microsoft Graph](../../integrations/microsoft/graph.md)

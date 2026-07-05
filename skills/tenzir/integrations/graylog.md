@@ -50,6 +50,8 @@ Use [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md
 
 Use a Graylog GELF output when you want Graylog to forward messages from one or more streams to a Tenzir pipeline.
 
+Caution
+
 Graylog documents that the classic GELF output does not use the Enterprise Output Framework. If the configured receiver is unavailable, messages can build up in the Graylog output buffer and block writes to the indexer. Keep the Tenzir listener available, or use a journaled Enterprise output with the GELF outbound payload format when that option is available in your Graylog deployment.
 
 ### Configure the Graylog output

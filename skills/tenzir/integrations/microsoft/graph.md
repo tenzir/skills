@@ -1,12 +1,12 @@
 ---
-title: "Graph integration"
+title: "Microsoft Graph integration"
 description: "Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services."
 canonical: https://tenzir.com/integrations/microsoft/graph
 source: https://tenzir.com/integrations/microsoft/graph.md
 section: "Integrations"
 ---
 
-# Graph integration
+# Microsoft Graph integration
 
 > Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 

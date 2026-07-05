@@ -29,7 +29,7 @@ The source operator lists shards during startup and discovers new shards when an
 
 ## Configuration
 
-Follow the [Amazon integration configuration](https://docs.tenzir.com/integrations/amazon) to authenticate with your AWS credentials.
+Follow the [Amazon integration configuration](../amazon.md) to authenticate with your AWS credentials.
 
 Alternatively, use the `aws_iam` parameter to provide explicit credentials:
 

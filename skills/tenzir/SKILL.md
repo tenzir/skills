@@ -846,6 +846,10 @@ For the complete function listing by category, read [Function Index](reference/f
 
 Enrich DNS, web, and network telemetry with real-time threat intelligence.
 
+#### [Amazon integration](integrations/amazon.md)
+
+Stream events through MSK, store and replay them in S3, ship them to CloudWatch or Amazon Security Lake in OCSF, and pull messages from SQS, all with first-class IAM integration.
+
 #### [Amazon CloudWatch Logs integration](integrations/amazon/cloudwatch.md)
 
 Centralized logging for AWS resources, applications, and custom logs.
@@ -886,6 +890,10 @@ Store, retrieve, and manage unstructured data at scale.
 
 Real-time data streaming platform and event ingestion service.
 
+#### [Cisco integration](integrations/cisco.md)
+
+Connect the Cisco security portfolio: firewall and IPS events from ASA and Firepower, DNS-layer telemetry from Umbrella, plus Duo, Secure Email, and Secure Endpoint.
+
 #### [ClickHouse integration](integrations/clickhouse.md)
 
 Send structured events to ClickHouse tables.
@@ -910,6 +918,10 @@ Collect, process, and forward logs and metrics from various sources to many sink
 
 Transfer files between a client and a server using a reliable, connection-based protocol.
 
+#### [Google integration](integrations/google.md)
+
+Connect Google Cloud, Google SecOps, and Google Workspace: stream through Pub/Sub, store in Cloud Storage, read Cloud Logging, and ship UDM events to SecOps.
+
 #### [Google Cloud Logging integration](integrations/google/cloud-logging.md)
 
 Send events to Google's log management solution
@@ -925,10 +937,6 @@ Store, retrieve, and manage data objects across a scalable, cloud-based environm
 #### [Google SecOps integration](integrations/google/secops.md)
 
 Send events to Google SecOps
-
-#### [Graph integration](integrations/microsoft/graph.md)
-
-Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 
 #### [Graylog integration](integrations/graylog.md)
 
@@ -946,9 +954,17 @@ Send security events to IBM Security QRadar for SIEM analytics and incident inve
 
 Publish, subscribe, store, and process streams of records in a distributed messaging system.
 
+#### [Microsoft integration](integrations/microsoft.md)
+
+Connect Azure, Microsoft 365, and Windows: stream through Event Hubs, store in Blob Storage, ingest into Sentinel, and parse the full Windows telemetry surface.
+
 #### [Microsoft Defender integration](integrations/microsoft/defender.md)
 
 Detect, prevent, and respond to security threats across endpoints and networks.
+
+#### [Microsoft Graph integration](integrations/microsoft/graph.md)
+
+Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 
 #### [Microsoft SQL Server integration](integrations/microsoft/sql-server.md)
 
@@ -976,7 +992,7 @@ Search, analyze, and visualize data with a distributed, open-source platform.
 
 #### [Prometheus integration](integrations/prometheus.md)
 
-Prometheus is an open-source monitoring system and time-series database.
+Send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
 
 #### [Sentinel & Log Analytics integration](integrations/microsoft/sentinel-log-analytics.md)
 

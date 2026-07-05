@@ -1,6 +1,6 @@
 ---
 title: "Prometheus integration"
-description: "Prometheus is an open-source monitoring system and time-series database. Tenzir can send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and Vic"
+description: "Send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics."
 canonical: https://tenzir.com/integrations/prometheus
 source: https://tenzir.com/integrations/prometheus.md
 section: "Integrations"
@@ -8,7 +8,7 @@ section: "Integrations"
 
 # Prometheus integration
 
-> Prometheus is an open-source monitoring system and time-series database. Tenzir can send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and Vic
+> Send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
 
 [Prometheus](https://prometheus.io/) is an open-source monitoring system and time-series database. Tenzir can send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
 

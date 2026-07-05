@@ -58,6 +58,8 @@ curl \
 from_fluent_bit "splunk", options = {port: 8088}
 ```
 
+Tip
+
 Use the dedicated [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) operator to send events to a Splunk HEC.
 
 ### Collect host metrics

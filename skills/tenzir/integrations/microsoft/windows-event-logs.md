@@ -265,6 +265,8 @@ The argument `qc` stands for “quick configuration” to perform a basic config
 
 The `-q` flag means “quiet mode” to avoid prompting you for any input or confirmation, i.e., it makes the process non-interactive.
 
+Caution
+
 This command sets up WinRM to listen on HTTP, which is not encrypted. For a secure production environment, it’s advisable to configure WinRM to use HTTPS, which requires additional steps, including setting up an appropriate server certificate for encryption.
 
 #### Enable the Event Collector service
