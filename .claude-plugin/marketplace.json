@@ -25,7 +25,6 @@
       "skills": [
         "./skills/tenzir-commit-changes",
         "./skills/tenzir-create-pull-requests",
-        "./skills/tenzir-review-changes",
         "./skills/tenzir-design-system",
         "./skills/tenzir-ship",
         "./skills/tenzir-update-docs",

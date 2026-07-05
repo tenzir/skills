@@ -36,8 +36,6 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 - `tenzir-commit-changes`: Stage, split, and commit changes with clean messages
 - `tenzir-create-pull-requests`: Open PRs, add changelog entries, cross-link docs
   PRs
-- `tenzir-review-changes`: Code review with severity ratings and structured
-  findings
 - `tenzir-design-system`: Brand tokens, design principles and invariants, and
   logos for web UIs, documents, slides, and diagrams
 - `tenzir-ship`: Changelog entries, release notes, and GitHub releases
