@@ -42,7 +42,6 @@ Tenzir publishes the following skills:
 
 * `tenzir-commit-changes`: Stage, split, and commit changes with clean messages.
 * `tenzir-create-pull-requests`: Open pull requests, add changelog entries, and link documentation PRs.
-* `tenzir-review-changes`: Review code with severity ratings and structured findings.
 * `tenzir-design-system`: Use frontend design tokens, components, and brand assets.
 * `tenzir-ship`: Write changelog entries, release notes, and GitHub releases.
 * `tenzir-update-docs`: Coordinate docs.tenzir.com updates alongside code changes.
