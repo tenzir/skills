@@ -287,12 +287,14 @@ tenzir-ship release create [version] [options]
 | `--major`             | Manual major bump override from the latest stable release  |
 | `--rc`                | Create or continue a release-candidate series              |
 | `--yes`               | Commit changes (default is dry run)                        |
-| `--title <text>`      | Custom title for release heading                           |
+| `--title <text>`      | Custom title for the release heading                       |
 | `--intro <text>`      | Inline intro text (mutually exclusive with `--intro-file`) |
 | `--intro-file <path>` | Path to intro file (mutually exclusive with `--intro`)     |
 | `--compact`           | Use bullet-list layout for `notes.md`                      |
 | `--explicit-links`    | Render @mentions and PR refs as explicit Markdown links    |
 | `--date <YYYY-MM-DD>` | Override release date                                      |
+
+The `--title` value is stored in the release manifest and used by release views and exports. GitHub release pages include the project and version in addition to this title when you publish the release.
 
 When creating a release, the command also updates version fields in detected package manifest files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`). See the [version bumping configuration](ship-framework.md#version-bumping) for details.
 
@@ -383,6 +385,7 @@ tenzir-ship release publish [version] [options]
 | Option             | Description                                             |
 | ------------------ | ------------------------------------------------------- |
 | `version`          | Release version (defaults to the latest release)        |
+| `--title <format>` | GitHub release title format (see below)                 |
 | `--yes`            | Skip confirmation prompts                               |
 | `--draft`          | Mark as draft                                           |
 | `--prerelease`     | Force a GitHub prerelease                               |
@@ -392,6 +395,28 @@ tenzir-ship release publish [version] [options]
 | `--commit-message` | Custom commit message (default: `Release {version}`)    |
 
 The command reads project metadata from `config.yaml` or `package.yaml` for the repository slug and uses `notes.md` as the release body. Projects without a `repository` field cannot publish - this is intentional for changelogs that track changes without producing GitHub releases (e.g., modules in a workspace). When you omit `version`, the command resolves the latest release manifest by version, including release candidates.
+
+By default, the GitHub release title uses the format `$PROJECT $VERSION: $TITLE`, where `$TITLE` is the release title from `release create --title`. If you create a release without `--title`, the manifest omits the `title` field and GitHub receives the shorter `$PROJECT $VERSION` title:
+
+```sh
+tenzir-ship release create v5.1.0
+tenzir-ship release publish v5.1.0
+# GitHub release title: "Tenzir v5.1.0"
+```
+
+Override the format for a single publish with `--title`:
+
+```sh
+tenzir-ship release publish v5.1.0 --title '[$PROJECT $VERSION] $TITLE'
+# GitHub release title: "[Tenzir v5.1.0] Faster ingest"
+```
+
+The `$PROJECT`, `$VERSION`, and `$TITLE` variables are optional. A format without variables is a literal GitHub title override:
+
+```sh
+tenzir-ship release publish v5.1.0 --title "Faster ingest"
+# GitHub release title: "Faster ingest"
+```
 
 #### How it works
 
