@@ -46,6 +46,29 @@ The algorithm or scheme used to create the fingerprint, normalized to the captio
 
 The identifier of the normalized algorithm or scheme, which was used to create the fingerprint.
 
+### `encoding`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The encoding of the `value` attribute, normalized to the caption of `encoding_id`. In the case of `Other`, it is defined by the event source.
+
+### `encoding_id`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Sibling**: `encoding`
+
+#### Enum values
+
+- `0`: `Unknown` - The encoding of the fingerprint value is not known.
+- `1`: `Hex` - The fingerprint value is encoded as a lowercase or uppercase hexadecimal string.
+- `2`: `Base64` - The fingerprint value is encoded using standard Base64.
+- `3`: `Base64URL` - The fingerprint value is encoded using URL- and filename-safe Base64.
+- `99`: `Other` - The encoding of the fingerprint value is not mapped. See the `encoding` attribute, which contains a data source specific value.
+
+The normalized identifier of the encoding used to represent the fingerprint bytes as the string in `value`. A verifier must decode `value` using this encoding to recover the raw hash bytes.
+
 ### `value`
 
 - **Type**: `file_hash_t`
