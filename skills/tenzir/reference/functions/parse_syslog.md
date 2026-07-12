@@ -285,8 +285,13 @@ output = input.parse_syslog()
 
 If the leading brackets don’t contain valid structured data, the parser leaves the content intact and omits the `structured_data` field.
 
+### Parse an RFC 3164 timestamp
+
+RFC 3164/BSD syslog timestamps don’t include a year or timezone, so `parse_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with a `reference` timestamp to convert it after parsing the syslog message. See [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) for examples with `now()`, fixed references, and timezone offsets.
+
 ## See Also
 
+* [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)
 * [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
 * [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
 * [Syslog](../../integrations/syslog.md)

@@ -74,6 +74,17 @@ With this input, the parser will produce the following output, with the schema n
 }
 ```
 
+RFC 3164 timestamps don’t include a year or timezone, so `read_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with `reference` to convert it to a timestamp. See [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) for examples with fixed references and timezone offsets.
+
+Pipeline
+
+```tql
+from_file "syslog.txt" {
+  read_syslog
+}
+timestamp = timestamp.parse_time("%b %e %H:%M:%S", reference=now())
+```
+
 Some RFC 3164 emitters prepend structured-data blocks to the message content using syntax similar to RFC 5424. When the parser detects valid structured data at the start of the content field, it extracts the key-value pairs into a `structured_data` field and stores the remaining text in `content`. These events use the schema name `syslog.rfc3164.structured`:
 
 ```plaintext

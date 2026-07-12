@@ -12,7 +12,7 @@ section: "Docs"
 Parses a time from a string that follows a specific format.
 
 ```tql
-parse_time(input: string, format: string) -> time
+parse_time(input: string, format: string, [reference=time]) -> time
 ```
 
 ## Description
@@ -67,6 +67,18 @@ The string that specifies the format of `input`, for example `"%m-%d-%Y"`. The a
 | `%z`      | UTC offset                             | `+0000`, `-0430`          |
 | `%Z`      | Time zone abbreviation                 | `UTC`, `EST`              |
 
+### `reference = time (optional)`
+
+An optional timestamp that provides date context for formats whose year is missing. Parsed date fields win, and missing time fields don’t come from `reference`.
+
+If the input contains a month and day but no year, `parse_time` chooses the year that places the parsed timestamp closest to the reference time.
+
+If the input contains no date fields, `parse_time` chooses the date that places the parsed time of day closest to the reference time. Times shortly before or after midnight resolve to the adjacent day.
+
+Other incomplete date formats, including dates built from week numbers such as `%G %V %u`, return null and emit a warning. ISO week fields next to a complete calendar date need no filling, so `parse_time` parses the date and ignores `reference`.
+
+If `reference` is null and a date field is missing, `parse_time` returns null and emits a warning. If `format` includes a complete date, `parse_time` emits a warning that it ignored `reference`. If `format` doesn’t include a year and you don’t set `reference`, `parse_time` uses 1970 and emits a deprecation warning because this will become an error in a future release.
+
 ## Examples
 
 ### Parse a timestamp
@@ -80,6 +92,67 @@ x = x.parse_time("%Y-%m-%d+%H:%M:%S")
 
 ```tql
 {x: 2024-12-31T12:59:42.000000}
+```
+
+### Parse a BSD syslog timestamp
+
+BSD syslog timestamps don’t include a year. Use `reference=now()` for live ingestion, or pass a fixed timestamp when you reprocess historic data.
+
+```tql
+from {
+  timestamp: "May  5 18:16:21",
+}
+timestamp = timestamp.parse_time("%b %e %H:%M:%S", reference=now())
+```
+
+When you pass a fixed reference, the result is deterministic:
+
+```tql
+from {
+  timestamp: "Dec 31 23:59:59",
+}
+timestamp = timestamp.parse_time(
+  "%b %e %H:%M:%S",
+  reference=2026-02-01T00:00:00Z,
+)
+```
+
+```tql
+{timestamp: 2025-12-31T23:59:59Z}
+```
+
+BSD syslog timestamps also don’t include a timezone. If you know the sender’s timezone, add the UTC offset to the string and parse it with `%z`:
+
+```tql
+from {
+  bsd_time: "May  5 18:16:21",
+}
+timestamp = (bsd_time + " +0400").parse_time(
+  "%b %e %H:%M:%S %z",
+  reference=2026-05-05T00:00:00Z,
+)
+```
+
+```tql
+{timestamp: 2026-05-05T14:16:21Z}
+```
+
+### Parse a time without a date
+
+Formats without date fields take their date from `reference`, choosing the day that places the time of day closest to it. Here the reference is two seconds past midnight, so the timestamp resolves to the previous day:
+
+```tql
+from {
+  timestamp: "23:59:58",
+}
+timestamp = timestamp.parse_time(
+  "%H:%M:%S",
+  reference=2026-06-24T00:00:02Z,
+)
+```
+
+```tql
+{timestamp: 2026-06-23T23:59:58Z}
 ```
 
 ## See Also

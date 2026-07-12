@@ -12,9 +12,10 @@ section: "Docs"
 Sends events to a ClickHouse table.
 
 ```tql
-to_clickhouse table=string,
-              [uri=string | (host=string, port=int, user=string, password=string)],
-              [mode=string, primary=field, json=field|[field], tls=bool|record]
+to_clickhouse [table=string,
+               uri=string, host=string, port=int, user=string, password=string,
+               mode=string, primary=field, json=field|[field], low_cardinality=field[field],
+               tls=bool|record]
 ```
 
 ## Description
@@ -91,6 +92,12 @@ When using `mode = "create"` or `mode = "create_append"`, the operator creates t
 
 This is useful when sending heterogeneous data, such as for OCSF `unmapped`.
 
+### `low_cardinality = field|[field] (optional)`
+
+When using `mode = "create"` or `mode = "create_append"`, the operator creates the columns listed in the `low_cardinality` argument as `LowCardinality(String)` instead of plain `String`. This is a ClickHouse storage optimization for columns with few distinct values.
+
+Unlike `json`, the inner type is inferred from the data, so every listed field must be present in the first event that creates the table — otherwise the operator raises an error. `low_cardinality` is only supported for `string` columns. Because it only affects table creation, combining it with `mode = "append"` is an error.
+
 ### `tls = record (optional)`
 
 TLS configuration. Provide an empty record (`tls={}`) to enable TLS with defaults or set fields to customize it.
@@ -123,6 +130,7 @@ Tenzir uses ClickHouse’s [clickhouse-cpp](https://github.com/ClickHouse/clickh
 | Tenzir     | ClickHouse                     | Comment                                                                                           |
 | ---------- | ------------------------------ | ------------------------------------------------------------------------------------------------- |
 | `bool`     | `Bool`                         |                                                                                                   |
+| `string`   | `String`                       |                                                                                                   |
 | `int64`    | `Int64`                        |                                                                                                   |
 | `uint64`   | `UInt64`                       |                                                                                                   |
 | `double`   | `Float64`                      |                                                                                                   |
@@ -141,6 +149,17 @@ Tenzir also supports `Nullable` versions of the above types (or their nested typ
 ### Clickhouse JSON
 
 [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can also write records to the ClickHouse JSON type for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
+
+### Appending to existing columns
+
+When appending to a table that already exists, its columns may use ClickHouse types that [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) would not create on its own. In addition to the types above, the operator writes to:
+
+* `LowCardinality(T)` columns by sending the plain `T` value, for example a `string` into a `LowCardinality(String)` column. ClickHouse adds the `LowCardinality` wrapper on insert.
+* `DateTime64(N)` and `DateTime64(N, 'tz')` columns of any precision `N` and timezone. Tenzir `time` values are truncated to the column’s precision, so digits finer than `N` are dropped. Tenzir creates `time` columns as `DateTime64(9)`, but you can append to a coarser column such as `DateTime64(3, 'UTC')`.
+
+Both also apply within nested `Tuple` and `Array` columns and in their `Nullable` forms, such as `LowCardinality(Nullable(String))`.
+
+An existing table may also contain columns whose type [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) cannot represent, such as `IPv4` or an `Enum`. As long as such a column has a default value (a `DEFAULT`, `MATERIALIZED`, `ALIAS`, or `EPHEMERAL` expression), the operator tolerates it and omits it from the insert, letting ClickHouse fill in the default. If an event does provide a value for such a column, the operator cannot convert it and drops the event with a warning. A column with an unsupported type and no default still raises an error.
 
 ### Table Creation
 
