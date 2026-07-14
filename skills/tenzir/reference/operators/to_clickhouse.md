@@ -262,3 +262,4 @@ This creates the following table:
 * [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [ClickHouse](../../integrations/clickhouse.md)
+* [nano](../../integrations/nano.md)

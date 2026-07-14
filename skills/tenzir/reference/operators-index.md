@@ -80,6 +80,7 @@
 - [each](operators/each.md): Spawns a subpipeline for every incoming event, with the event bound to `$this`.
 - [every](operators/every.md): Runs a pipeline periodically at a fixed interval.
 - [fork](operators/fork.md): Executes a subpipeline with a copy of the input.
+- [fork_merge](operators/fork_merge.md): Runs multiple subpipelines on the same input and merges their outputs.
 - [group](operators/group.md): Routes events with the same key through the same subpipeline.
 - [load_balance](operators/load_balance.md): Routes the data to one of multiple subpipelines.
 - [parallel](operators/parallel.md): Runs a subpipeline across multiple parallel workers.

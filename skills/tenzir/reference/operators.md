@@ -461,6 +461,14 @@ Executes a subpipeline with a copy of the input.
 fork { publish "copy" }
 ```
 
+### [fork\_merge](operators/fork_merge.md)
+
+Runs multiple subpipelines on the same input and merges their outputs.
+
+```tql
+fork_merge { summarize sum(x) }, { summarize count() }
+```
+
 ### [group](operators/group.md)
 
 Routes events with the same key through the same subpipeline.

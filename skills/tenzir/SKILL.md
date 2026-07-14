@@ -978,6 +978,10 @@ Collects Security, System, Application, and other critical OS logs.
 
 Connects to MySQL over the network using the MySQL wire protocol.
 
+#### [nano integration](integrations/nano.md)
+
+Run a lake-native SIEM on ClickHouse for search, detections, cases, and AI-assisted triage.
+
 #### [NATS integration](integrations/nats.md)
 
 NATS is a messaging system for services, edge deployments, and cloud-native applications.

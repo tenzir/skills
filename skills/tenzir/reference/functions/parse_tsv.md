@@ -156,6 +156,8 @@ Type Conflict
 {key: ["0", "1.1.1.1", "example.com"]}
 ```
 
+## Examples
+
 ```tql
 from {
   input: "1\t2\t3"
