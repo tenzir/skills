@@ -44,7 +44,10 @@ Clone `.docs` if it doesn't exist. Otherwise fetch the latest refs from origin.
      specific comment.
    - If a footer already exists, add another `<br>`-separated line instead of
      creating a second footer.
-6. Summarize what changed and note any follow-up work.
+6. Apply the `automerge` label to the docs PR. This marks the companion PR as
+   ready for CI to squash-merge after the linked code PR lands and the docs
+   checks pass.
+7. Summarize what changed and note any follow-up work.
 
 ## Branching
 
