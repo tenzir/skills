@@ -88,9 +88,11 @@ The confidence score as reported by the event source.
 - **Requirement**: optional
 - **Group**: context
 
-Describes the affected device/host. If applicable, it can be used in conjunction with `Resource(s)`.
+Describes the device/host relevant to the finding.
 
-e.g. Specific details about an AWS EC2 instance, that is affected by the Finding.
+If applicable, it can be used in conjunction with `resources`. e.g. The role of the device as the target or the actor, its IP address etc.
+
+If a single device is the source of the finding, rather than a targeted or affected device, use the `Host` profile and populate `device`.
 
 ### `end_time`
 
@@ -106,6 +108,22 @@ The time of the most recent event or finding that contributed to this finding.
 - **Group**: primary
 
 Describes the supporting information about a generated finding.
+
+### `notes`
+
+- **Type**: [`note`](../objects/note.md)
+- **Requirement**: optional
+- **Group**: context
+
+Additional notes related to the finding. Each note in the array can include a comment, the user who made the comment, the time when the note was created, and the time when the note was last modified (typically by the same user). Notes can be used to provide additional context, explanations, or observations by analysts related to the finding over time.
+
+### `resources`
+
+- **Type**: [`resource_details`](../objects/resource_details.md)
+- **Requirement**: recommended
+- **Group**: context
+
+Describes details about resources that were the target of the activity that triggered the finding.
 
 ### `start_time`
 

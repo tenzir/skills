@@ -27,6 +27,7 @@ The digital signature algorithm used to create the signature, normalized to the 
 - `3`: `ECDSA` - Elliptic Curve Digital Signature Algorithm.
 - `4`: `Authenticode` - Authenticode Digital Signature Algorithm.
 - `5`: `Code Signing` - Code Signing Algorithm.
+- `6`: `App Package` - Application Package Signing Algorithm.
 - `99`: `Other`
 
 The identifier of the normalized digital signature algorithm.
@@ -81,6 +82,7 @@ The canonical serialization or signing-envelope scheme used to produce the deter
 - `4`: `DSSE` - Dead Simple Signing Envelope - the PAE (Pre-Authentication Encoding) canonical signing input. Note: DSSE is a signing-envelope scheme, not a hash algorithm; any payload hash is carried separately in the fingerprint object.
 - `5`: `Authenticode` - The Portable Executable (PE) Image Hash procedure that canonicalizes the PE structure into the byte sequence fed to the digest, excluding specified header fields and digesting sections in a defined order. Authenticode bundles canonicalization and signing format: when used, `algorithm_id` is also set to the `Authenticode` enum value.
 - `6`: `Code Signing` - The procedure that describes how hashes of code and other structures form the Code Directory message that is signed. When used, `algorithm_id` is also set to the `Code Signing` enum value.
+- `7`: `App Package` - The Windows Application Package signing procedure that describes how file hashes are stored in the manifest, and how that manifest is signed.
 - `99`: `Other`
 
 The identifier of the normalized canonical serialization or signing-envelope scheme used to produce the deterministic byte sequence that was signed. A verifier must apply the same scheme to reproduce the signing input. Distinct from `algorithm_id`, which identifies how the resulting bytes were signed; some signing formats (e.g. `Authenticode`) define their own canonicalization and populate both fields.

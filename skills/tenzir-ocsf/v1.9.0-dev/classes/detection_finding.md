@@ -150,7 +150,7 @@ Describes the recommended remediation steps to address identified issue(s).
 
 - **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
-- **Group**: context
+- **Group**: primary
 
 Describes details about resources that were the target of the activity that triggered the finding.
 

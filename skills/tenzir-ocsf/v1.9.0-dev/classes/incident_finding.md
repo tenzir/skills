@@ -179,6 +179,14 @@ The impact as an integer value of the finding, valid range 0-100.
 
 A determination based on analytics as to whether a potential breach was found.
 
+### `notes`
+
+- **Type**: [`note`](../objects/note.md)
+- **Requirement**: optional
+- **Group**: context
+
+Additional notes related to the finding. Each note in the array can include a comment, the user who made the comment, the time when the note was created, and the time when the note was last modified (typically by the same user). Notes can be used to provide additional context, explanations, or observations by analysts related to the incident over time.
+
 ### `priority`
 
 - **Type**: `string_t`
