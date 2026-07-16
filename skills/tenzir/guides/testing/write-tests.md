@@ -289,7 +289,7 @@ node.stop()
 
 This imperative style complements the declarative `fixtures: [node]` flow and is especially useful for fault-injection scenarios. The harness preloads helpers like `acquire_fixture`, `Executor`, and `fixtures()`, so Python-mode tests can call them directly.
 
-When you restart the same controller, the node keeps using the state and cache directories it created during the first `start()`. Those paths (exported via `TENZIR_NODE_STATE_DIRECTORY` and `TENZIR_NODE_CACHE_DIRECTORY`) live inside the test’s scratch directory by default and are cleaned up automatically when the controller goes out of scope. Acquire a fresh controller when you need a brand new workspace.
+When you restart the same controller, the node keeps using the state and cache directories it created during the first `start()`. Those paths (exported via `TENZIR_NODE_STATE_DIRECTORY` and `TENZIR_NODE_CACHE_DIRECTORY`) live inside the test’s scratch directory by default. The node’s complete process output is available through `TENZIR_NODE_STDOUT_LOG` and `TENZIR_NODE_STDERR_LOG` in the same workspace. The harness removes these files after the run unless you pass `--keep`. Acquire a fresh controller when you need a brand-new workspace.
 
 ## Step 8: Organize defaults with `test.yaml`
 

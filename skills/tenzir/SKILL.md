@@ -66,83 +66,103 @@ Guides are practical step-by-step explanation to help you achieve a specific goa
 
 ### Get Started
 
-#### [Create account](guides/installation/create-account.md)
-
-The Tenzir Platform is a web interface for managing pipelines and nodes.
-
-#### [Manage a pipeline](guides/basic-usage/manage-a-pipeline.md)
-
-This guide shows you how to control pipeline lifecycles through the app or API.
-
-#### [Overview](guides/installation.md)
-
-This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node.
-
 #### [Quickstart](guides/quickstart.md)
 
 Drowning in logs, alerts, and rigid tools?
-
-#### [Run pipelines](guides/basic-usage/run-pipelines.md)
-
-You can run a pipeline via the platform, on the command line using the tenzir binary, or as code via the configuration file.
 
 #### [Tenzir v6 Migration](guides/tenzir-v6-migration.md)
 
 Learn how to migrate legacy TQL pipelines to Tenzir v6, adopt the new execution patterns, and use temporary compatibility controls while you update.
 
+#### [Overview](guides/installation.md)
+
+This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node.
+
+##### [Create account](guides/installation/create-account.md)
+
+#### [Run pipelines](guides/basic-usage/run-pipelines.md)
+
+You can run a pipeline via the platform, on the command line using the tenzir binary, or as code via the configuration file.
+
+#### [Manage a pipeline](guides/basic-usage/manage-a-pipeline.md)
+
+This guide shows you how to control pipeline lifecycles through the app or API.
+
+#### [Inspect a node](guides/troubleshooting/gather-relevant-information.md)
+
+When something goes wrong, the answers are often in the node’s logs, metrics, and diagnostics.
+
+#### [Debug field values](guides/troubleshooting/debug-field-values.md)
+
+When a field comes out null, holds the wrong value, or has a type you didn’t expect, the cause is almost always visible in a warning or in the data one step upstream.
+
+#### [Investigate slow pipelines](guides/troubleshooting/investigate-slow-pipelines.md)
+
+When a pipeline can’t keep up, you usually notice the symptoms first: a dashboard lags, a downstream system receives data late, or a backlog builds up.
+
+#### [Investigate memory growth](guides/troubleshooting/investigate-memory-growth.md)
+
+When a node’s memory usage keeps climbing, you want to know whether it will level off or end in an out-of-memory kill, and which pipeline is responsible.
+
+#### [Investigate storage growth](guides/troubleshooting/investigate-storage-growth.md)
+
+When the disk fills up on a machine that runs a node, you want to know whether the node is responsible, which data takes the space, and how to cap it.
+
+#### [Reconnect an offline node](guides/troubleshooting/reconnect-an-offline-node.md)
+
+When a node shows as offline in the Tenzir Platform but the process is still running, the node can’t reach the platform’s control plane.
+
 ### Setup
 
-#### [Choose a scenario](guides/platform-setup/choose-a-scenario.md)
+#### [Overview](guides/ai-workbench.md)
 
-We provide several examples of possible platform deployment scenarios.
+Build your own AI Workbench by bringing an AI agent and configuring it with Tenzir’s agent skills.
 
-#### [Configure a node](guides/node-setup/configure-a-node.md)
+##### [Use agent skills](guides/ai-workbench/use-agent-skills.md)
 
-The default node configuration is optimized for most common scenarios.
+#### [Overview](guides/node-setup.md)
 
-#### [Configure blob storage](guides/platform-setup/configure-blob-storage.md)
+The Tenzir Node is the vehicle to run pipelines.
 
-The blob storage service exists for exchanging files between the platform and nodes.
+##### [Provision a node](guides/node-setup/provision-a-node.md)
 
-#### [Configure dashboards](guides/platform-management/configure-dashboards.md)
+##### [Size a node](guides/node-setup/size-a-node.md)
 
-You can pre-define dashboards for your static workspaces.
+##### [Deploy a node](guides/node-setup/deploy-a-node.md)
 
-#### [Configure database](guides/platform-setup/configure-database.md)
+##### [Configure a node](guides/node-setup/configure-a-node.md)
 
-A PostgreSQL database stores the internal state of the platform.
+##### [Configure TLS](guides/node-setup/configure-tls.md)
 
-#### [Configure identity provider](guides/platform-setup/configure-identity-provider.md)
+##### [Start the API](guides/node-setup/start-the-api.md)
 
-The identity provider (IdP) handles authentication for the Tenzir Platform.
+##### [Tune performance](guides/node-setup/tune-performance.md)
 
-#### [Configure internal services](guides/platform-setup/configure-internal-services.md)
+#### [Overview](guides/platform-setup.md)
 
-This guide shows you how to configure the three internal Tenzir services: the UI, Gateway, and Platform API.
+The Tenzir Platform acts as a fleet management control plane for Tenzir Nodes.
 
-#### [Configure reverse proxy](guides/platform-setup/configure-reverse-proxy.md)
+##### [Deploy on AWS](guides/platform-setup/deploy-on-aws.md)
 
-This guide shows you how to configure a reverse proxy for the Tenzir Platform.
+##### [Choose a scenario](guides/platform-setup/choose-a-scenario.md)
 
-#### [Configure secret store](guides/platform-setup/configure-secret-store.md)
+##### [Configure reverse proxy](guides/platform-setup/configure-reverse-proxy.md)
 
-The Tenzir Platform provides a secret store for each workspace.
+##### [Configure internal services](guides/platform-setup/configure-internal-services.md)
 
-#### [Configure TLS](guides/node-setup/configure-tls.md)
+##### [Configure identity provider](guides/platform-setup/configure-identity-provider.md)
 
-Set up TLS encryption for operators and platform connections
+##### [Configure database](guides/platform-setup/configure-database.md)
 
-#### [Configure workspaces](guides/platform-management/configure-workspaces.md)
+##### [Configure blob storage](guides/platform-setup/configure-blob-storage.md)
 
-Workspaces in the platform logically group nodes, secrets, and dashboards.
+##### [Configure secret store](guides/platform-setup/configure-secret-store.md)
 
-#### [Deploy a node](guides/node-setup/deploy-a-node.md)
+##### [Run the platform](guides/platform-setup/run-the-platform.md)
 
-Deploying a node means spinning it up in one of the supported runtimes.
+#### [Manage organizations](guides/platform-management/manage-organizations.md)
 
-#### [Deploy on AWS](guides/platform-setup/deploy-on-aws.md)
-
-This guide walks you through deploying the Tenzir Platform Sovereign Edition on AWS using CloudFormation.
+This guide shows you how to create, configure, and delete organizations in the Tenzir Platform.
 
 #### [Manage organization members](guides/platform-management/manage-organization-members.md)
 
@@ -152,33 +172,13 @@ This guide shows you how to invite people to your organization, manage existing 
 
 This guide shows you how to create, view, and delete workspaces that belong to an organization.
 
-#### [Manage organizations](guides/platform-management/manage-organizations.md)
+#### [Configure workspaces](guides/platform-management/configure-workspaces.md)
 
-This guide shows you how to create, configure, and delete organizations in the Tenzir Platform.
+Workspaces in the platform logically group nodes, secrets, and dashboards.
 
-#### [Overview](guides/ai-workbench.md)
+#### [Configure dashboards](guides/platform-management/configure-dashboards.md)
 
-Build your own AI Workbench by bringing an AI agent and configuring it with Tenzir’s agent skills.
-
-#### [Overview](guides/node-setup.md)
-
-The Tenzir Node is the vehicle to run pipelines.
-
-#### [Overview](guides/platform-setup.md)
-
-The Tenzir Platform acts as a fleet management control plane for Tenzir Nodes.
-
-##### [Provision a node](guides/node-setup/provision-a-node.md)
-
-##### [Run the platform](guides/platform-setup/run-the-platform.md)
-
-##### [Size a node](guides/node-setup/size-a-node.md)
-
-##### [Start the API](guides/node-setup/start-the-api.md)
-
-##### [Tune performance](guides/node-setup/tune-performance.md)
-
-##### [Use agent skills](guides/ai-workbench/use-agent-skills.md)
+You can pre-define dashboards for your static workspaces.
 
 #### [Use ephemeral nodes](guides/platform-management/use-ephemeral-nodes.md)
 
@@ -186,135 +186,47 @@ An ephemeral node is ideal for temporary or auto-scaling deployments.
 
 ### Work with Data
 
-#### [Aggregate event streams](guides/analytics/aggregate-event-streams.md)
-
-This guide shows you how to aggregate event streams with summarize and window.
-
-#### [Clean up values](guides/normalization/clean-up-values.md)
-
-This guide shows you how to clean and normalize values in your data before mapping to a schema.
-
-#### [Collect metrics](guides/analytics/collect-metrics.md)
-
-Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.
-
-#### [Convert data formats](guides/transformation/convert-data-formats.md)
-
-Data comes in many formats.
-
-#### [Deduplicate events](guides/optimization/deduplicate-events.md)
-
-The deduplicate operator provides a powerful mechanism to remove duplicate events in a pipeline.
-
-#### [Enrich events with AI](guides/enrichment/enrich-events-with-ai.md)
-
-Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
-
-#### [Enrich with asset inventory](guides/enrichment/enrich-with-asset-inventory.md)
-
-Add asset inventory context to OCSF endpoint and user fields
-
-#### [Enrich with threat intel](guides/enrichment/enrich-with-threat-intel.md)
-
-Add threat intelligence to OCSF enrichments, observables, and OSINT fields
-
-#### [Execute Sigma rules](guides/enrichment/execute-sigma-rules.md)
-
-Run Sigma detection rules on parsed Windows Event Logs and OCSF process events
-
-#### [Export from a node](guides/edge-storage/export-from-a-node.md)
-
-Exporting (or querying) data can be done by running a pipeline that begins with the export input operator.
-
-#### [Expose data as a server](guides/routing/expose-data-as-server.md)
-
-This guide shows you how to make pipeline data available to external consumers by starting an HTTP server.
-
-#### [Fan out with subpipelines](guides/routing/fan-out-with-subpipelines.md)
-
-This guide shows you how to fan out an event stream into subpipelines with each and group.
-
-#### [Fetch via HTTP and APIs](guides/collecting/fetch-via-http-and-apis.md)
-
-This guide shows you how to interact with HTTP APIs using fromhttp and tohttp operators.
-
-#### [Filter and select data](guides/transformation/filter-and-select-data.md)
-
-Filtering and selecting are fundamental operations when working with data streams.
-
-#### [Get data from the network](guides/collecting/get-data-from-the-network.md)
-
-This guide shows you how to receive data directly from network sources using TQL.
-
-#### [Import into a node](guides/edge-storage/import-into-a-node.md)
-
-Importing (or ingesting) data can be done by running a pipeline that ends with the import output operator.
-
-#### [Load-balance pipelines](guides/routing/load-balance-pipelines.md)
-
-This guide shows you how to distribute events across multiple destinations using the loadbalance operator.
-
-#### [Manipulate strings](guides/transformation/manipulate-strings.md)
-
-String manipulation is essential for cleaning, formatting, and transforming text data.
-
-#### [Map to ASIM](guides/normalization/map-to-asim.md)
-
-This guide shows you how to map events to Microsoft Sentinel Advanced Security Information Model (ASIM) records in TQL.
-
-#### [Map to CIM](guides/normalization/map-to-cim.md)
-
-This guide shows you how to map events to Splunk Common Information Model (CIM) fields in TQL.
-
-#### [Map to ECS](guides/normalization/map-to-ecs.md)
-
-This guide shows you how to map events to Elastic Common Schema (ECS) in TQL.
-
-#### [Map to OCSF](guides/normalization/map-to-ocsf.md)
-
-This guide shows you how to write OCSF mapping operators in TQL.
-
-#### [Map to UDM](guides/normalization/map-to-udm.md)
-
-This guide shows you how to map events to Google SecOps Unified Data Model (UDM) records in TQL.
-
-#### [Mask sensitive data](guides/transformation/mask-sensitive-data.md)
-
-This guide shows you how to mask sensitive fields such as IP addresses, email addresses, account identifiers, and credentials.
-
-#### [Normalize data](guides/normalization.md)
-
-This guide provides an overview of data normalization in TQL.
-
 #### [Overview](guides/collecting.md)
 
 This guide provides an overview of data collection in TQL.
 
-#### [Parse binary data](guides/parsing/parse-binary-data.md)
+##### [Read and watch files](guides/collecting/read-and-watch-files.md)
 
-This guide shows you how to parse binary data formats into structured events.
+##### [Fetch via HTTP and APIs](guides/collecting/fetch-via-http-and-apis.md)
+
+##### [Read from message brokers](guides/collecting/read-from-message-brokers.md)
+
+##### [Read from data stores](guides/collecting/read-from-data-stores.md)
+
+##### [Get data from the network](guides/collecting/get-data-from-the-network.md)
 
 #### [Parse delimited text](guides/parsing/parse-delimited-text.md)
 
 This guide shows you how to parse text streams into structured events.
 
+#### [Parse binary data](guides/parsing/parse-binary-data.md)
+
+This guide shows you how to parse binary data formats into structured events.
+
 #### [Parse string fields](guides/parsing/parse-string-fields.md)
 
 This guide shows you how to extract structured data from string fields using TQL’s parsing functions.
 
-##### [Read and watch files](guides/collecting/read-and-watch-files.md)
+#### [Filter and select data](guides/transformation/filter-and-select-data.md)
 
-##### [Read from data stores](guides/collecting/read-from-data-stores.md)
+Filtering and selecting are fundamental operations when working with data streams.
 
-##### [Read from message brokers](guides/collecting/read-from-message-brokers.md)
+#### [Transform values](guides/transformation/transform-values.md)
 
-#### [Reshape complex data](guides/transformation/reshape-complex-data.md)
+Transforming values is a fundamental part of data processing.
 
-Real-world data is rarely flat.
+#### [Manipulate strings](guides/transformation/manipulate-strings.md)
 
-#### [Send to destinations](guides/routing/send-to-destinations.md)
+String manipulation is essential for cleaning, formatting, and transforming text data.
 
-This guide shows you how to send data to various destinations using TQL output operators.
+#### [Work with time](guides/transformation/work-with-time.md)
+
+Time is fundamental in data analysis.
 
 #### [Shape lists](guides/transformation/shape-lists.md)
 
@@ -324,47 +236,119 @@ Lists (arrays) contain ordered sequences of values.
 
 Records (objects) contain key-value pairs.
 
-#### [Show available schemas](guides/edge-storage/show-available-schemas.md)
+#### [Reshape complex data](guides/transformation/reshape-complex-data.md)
 
-When you write a pipeline, you often reference field names.
+Real-world data is rarely flat.
 
-#### [Slice and sample data](guides/optimization/slice-and-sample-data.md)
+#### [Convert data formats](guides/transformation/convert-data-formats.md)
 
-When working with data streams, you often need to control which events flow through your pipeline.
+Data comes in many formats.
 
-#### [Split and merge streams](guides/routing/split-and-merge-streams.md)
+#### [Mask sensitive data](guides/transformation/mask-sensitive-data.md)
 
-This guide shows you how to connect pipelines using publish and subscribe operators.
+This guide shows you how to mask sensitive fields such as IP addresses, email addresses, account identifiers, and credentials.
 
-#### [Transform data at rest](guides/edge-storage/transform-data-at-rest.md)
+#### [Normalize data](guides/normalization.md)
 
-This guide shows you how to transform data already stored in a node.
+This guide provides an overview of data normalization in TQL.
 
-#### [Transform values](guides/transformation/transform-values.md)
+##### [Clean up values](guides/normalization/clean-up-values.md)
 
-Transforming values is a fundamental part of data processing.
+##### [Map to ASIM](guides/normalization/map-to-asim.md)
+
+##### [Map to CIM](guides/normalization/map-to-cim.md)
+
+##### [Map to ECS](guides/normalization/map-to-ecs.md)
+
+##### [Map to OCSF](guides/normalization/map-to-ocsf.md)
+
+##### [Map to UDM](guides/normalization/map-to-udm.md)
 
 #### [Use lookup tables](guides/enrichment/use-lookup-tables.md)
 
 Store reference data in lookup tables and apply it to OCSF events
 
-#### [Work with time](guides/transformation/work-with-time.md)
+#### [Enrich with asset inventory](guides/enrichment/enrich-with-asset-inventory.md)
 
-Time is fundamental in data analysis.
+Add asset inventory context to OCSF endpoint and user fields
+
+#### [Enrich with threat intel](guides/enrichment/enrich-with-threat-intel.md)
+
+Add threat intelligence to OCSF enrichments, observables, and OSINT fields
+
+#### [Enrich events with AI](guides/enrichment/enrich-events-with-ai.md)
+
+Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
+
+#### [Execute Sigma rules](guides/enrichment/execute-sigma-rules.md)
+
+Run Sigma detection rules on parsed Windows Event Logs and OCSF process events
+
+#### [Slice and sample data](guides/optimization/slice-and-sample-data.md)
+
+When working with data streams, you often need to control which events flow through your pipeline.
+
+#### [Deduplicate events](guides/optimization/deduplicate-events.md)
+
+The deduplicate operator provides a powerful mechanism to remove duplicate events in a pipeline.
+
+#### [Send to destinations](guides/routing/send-to-destinations.md)
+
+This guide shows you how to send data to various destinations using TQL output operators.
+
+#### [Expose data as a server](guides/routing/expose-data-as-server.md)
+
+This guide shows you how to make pipeline data available to external consumers by starting an HTTP server.
+
+#### [Split and merge streams](guides/routing/split-and-merge-streams.md)
+
+This guide shows you how to connect pipelines using publish and subscribe operators.
+
+#### [Fan out with subpipelines](guides/routing/fan-out-with-subpipelines.md)
+
+This guide shows you how to fan out an event stream into subpipelines with each and group.
+
+#### [Load-balance pipelines](guides/routing/load-balance-pipelines.md)
+
+This guide shows you how to distribute events across multiple destinations using the loadbalance operator.
+
+#### [Aggregate event streams](guides/analytics/aggregate-event-streams.md)
+
+This guide shows you how to aggregate event streams with summarize and window.
+
+#### [Collect metrics](guides/analytics/collect-metrics.md)
+
+Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.
+
+#### [Import into a node](guides/edge-storage/import-into-a-node.md)
+
+Importing (or ingesting) data can be done by running a pipeline that ends with the import output operator.
+
+#### [Export from a node](guides/edge-storage/export-from-a-node.md)
+
+Exporting (or querying) data can be done by running a pipeline that begins with the export input operator.
+
+#### [Show available schemas](guides/edge-storage/show-available-schemas.md)
+
+When you write a pipeline, you often reference field names.
+
+#### [Transform data at rest](guides/edge-storage/transform-data-at-rest.md)
+
+This guide shows you how to transform data already stored in a node.
 
 ### Build
 
-#### [Add constants](guides/packages/add-constants.md)
+#### [Install a package](guides/packages/install-a-package.md)
 
-This guide shows you how to define package-wide constants in a constants.tql file and reference them as pkg::$name from the package’s own operators and pipelines, as well as from any pipeline that uses the package.
+Write your own package
 
-#### [Add contexts](guides/packages/add-contexts.md)
+#### [Create a package](guides/packages/create-a-package.md)
 
-This guide shows you how to add enrichment contexts to your package.
+This guide shows you how to create a package from scratch.
 
-#### [Add custom runners](guides/testing/add-custom-runners.md)
+#### [Test packages](guides/packages/test-packages.md)
 
-Runners tell tenzir-test how to execute a discovered file.
+This guide shows you how to add tests to your package.
 
 #### [Add operators](guides/packages/add-operators.md)
 
@@ -374,25 +358,17 @@ This guide shows you how to create user-defined operators (UDOs) for your packag
 
 This guide shows you how to add deployable pipelines to your package.
 
+#### [Add contexts](guides/packages/add-contexts.md)
+
+This guide shows you how to add enrichment contexts to your package.
+
+#### [Add constants](guides/packages/add-constants.md)
+
+This guide shows you how to define package-wide constants in a constants.tql file and reference them as pkg::$name from the package’s own operators and pipelines, as well as from any pipeline that uses the package.
+
 #### [Configure inputs](guides/packages/configure-inputs.md)
 
 This guide shows you how to make packages configurable with inputs.
-
-#### [Configure project hooks](guides/testing/configure-project-hooks.md)
-
-This guide shows you how to configure tenzir-test project hooks for setup and cleanup tasks that belong next to your tests.
-
-#### [Create a package](guides/packages/create-a-package.md)
-
-This guide shows you how to create a package from scratch.
-
-#### [Create fixtures](guides/testing/create-fixtures.md)
-
-This guide shows you how to create a fixture, wire it into the test harness, and use it from a test.
-
-#### [Install a package](guides/packages/install-a-package.md)
-
-Write your own package
 
 #### [Maintain a changelog](guides/packages/maintain-a-changelog.md)
 
@@ -402,27 +378,31 @@ This guide shows you how to manage changelog entries and publish releases with t
 
 This guide shows you how to publish your package.
 
-#### [Run fixtures](guides/testing/run-fixtures.md)
-
-This guide shows you how to start fixtures in standalone mode without running tests.
-
 #### [Run tests](guides/testing/run-tests.md)
 
 This guide shows you how to run existing integration tests with the tenzir-test framework.
-
-#### [Test packages](guides/packages/test-packages.md)
-
-This guide shows you how to add tests to your package.
 
 #### [Write tests](guides/testing/write-tests.md)
 
 This guide shows you how to create integration tests with the tenzir-test framework.
 
+#### [Run fixtures](guides/testing/run-fixtures.md)
+
+This guide shows you how to start fixtures in standalone mode without running tests.
+
+#### [Create fixtures](guides/testing/create-fixtures.md)
+
+This guide shows you how to create a fixture, wire it into the test harness, and use it from a test.
+
+#### [Add custom runners](guides/testing/add-custom-runners.md)
+
+Runners tell tenzir-test how to execute a discovered file.
+
+#### [Configure project hooks](guides/testing/configure-project-hooks.md)
+
+This guide shows you how to configure tenzir-test project hooks for setup and cleanup tasks that belong next to your tests.
+
 ### Contribute
-
-#### [Build from source](guides/development/build-from-source.md)
-
-Tenzir uses CMake as build system with a C++23 compiler.
 
 #### [Code of Conduct](guides/contribution/code-of-conduct.md)
 
@@ -440,6 +420,10 @@ Security is a serious matter for us.
 
 Install TQL language extensions for syntax highlighting in your editor
 
+#### [Build from source](guides/development/build-from-source.md)
+
+Tenzir uses CMake as build system with a C++23 compiler.
+
 ## [Tutorials](tutorials.md)
 
 Tutorials are learning-oriented lessons that take you through a series of steps to complete a project.
@@ -450,13 +434,13 @@ Tutorials are learning-oriented lessons that take you through a series of steps 
 
 This tutorial teaches you to write TQL that is clear, efficient, and maintainable.
 
-#### [Map data to OCSF](tutorials/map-data-to-ocsf.md)
-
-In this tutorial you’ll learn how to map events to Open Cybersecurity Schema Framework (OCSF).
-
 #### [Write a package](tutorials/write-a-package.md)
 
 This tutorial teaches you how packages bundle pipelines, operators, contexts, and examples.
+
+#### [Map data to OCSF](tutorials/map-data-to-ocsf.md)
+
+In this tutorial you’ll learn how to map events to Open Cybersecurity Schema Framework (OCSF).
 
 ### Analytics
 
@@ -474,27 +458,31 @@ Explanations are big-picture explanations of higher-level Tenzir concepts.
 
 This page explains Tenzir’s deployment architecture, which separates data processing from management through a layered design.
 
-#### [Language](explanations/language.md)
+#### [Pipeline](explanations/pipeline.md)
 
-The Tenzir Query Language (TQL) is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.
+A Tenzir pipeline is a chain of operators that represents a dataflow.
 
 #### [Node](explanations/node.md)
 
 A node is a running process that manages and executes pipelines.
 
-#### [Pipeline](explanations/pipeline.md)
-
-A Tenzir pipeline is a chain of operators that represents a dataflow.
-
 #### [Platform](explanations/platform.md)
 
 The platform provides fleet management for nodes.
+
+#### [Language](explanations/language.md)
+
+The Tenzir Query Language (TQL) is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.
 
 ### Concepts
 
 #### [Configuration](explanations/configuration.md)
 
 This page explains how to configure the Tenzir CLI and Node.
+
+#### [Secrets](explanations/secrets.md)
+
+Operators accept secrets as parameters for sensitive values, such as authentication tokens, passwords, or even URLs.
 
 #### [Enrichment](explanations/enrichment.md)
 
@@ -504,19 +492,15 @@ Enrichment means adding contextual data to events.
 
 This page explains how packages bundle pipelines, operators, contexts, and examples into a deployable unit.
 
-#### [Secrets](explanations/secrets.md)
-
-Operators accept secrets as parameters for sensitive values, such as authentication tokens, passwords, or even URLs.
-
 ### Help
-
-#### [FAQs](explanations/faqs.md)
-
-This page answers frequently asked questions about Tenzir.
 
 #### [Glossary](explanations/glossary.md)
 
 This page defines central terms in the Tenzir ecosystem.
+
+#### [FAQs](explanations/faqs.md)
+
+This page answers frequently asked questions about Tenzir.
 
 ## [Reference](reference.md)
 
@@ -524,49 +508,49 @@ The reference has nitty-gritty technical descriptions of how Tenzir works.
 
 ### Language (TQL)
 
+#### [Type System](reference/types.md)
+
+This page explains TQL’s type system, which provides strong typing with automatic inference.
+
 #### [Expressions](reference/expressions.md)
 
 Expressions form the computational core of TQL.
-
-#### [Programs](reference/programs.md)
-
-TQL programs compose statements into complete data processing workflows that can execute.
 
 #### [Statements](reference/statements.md)
 
 TQL programs are a sequence of statements.
 
-#### [Type System](reference/types.md)
+#### [Programs](reference/programs.md)
 
-This page explains TQL’s type system, which provides strong typing with automatic inference.
+TQL programs compose statements into complete data processing workflows that can execute.
 
 ### Components
-
-#### [Command line interface](reference/platform/command-line-interface.md)
-
-The Tenzir Platform command-line interface (CLI) allows you to interact with the Tenzir Platform from the command line to manage organizations, workspaces, and nodes.
 
 #### [Configuration](reference/node/configuration.md)
 
 The below example configuration ships with every Tenzir package.
 
-#### [Configuration](reference/platform/configuration.md)
-
-These settings configure the Tenzir Platform.
-
 #### [Helm chart](reference/node/helm-chart.md)
 
 The Tenzir Helm chart deploys one or more tenzir-node instances on a Kubernetes cluster.
 
+#### [Configuration](reference/platform/configuration.md)
+
+These settings configure the Tenzir Platform.
+
+#### [Command line interface](reference/platform/command-line-interface.md)
+
+The Tenzir Platform command-line interface (CLI) allows you to interact with the Tenzir Platform from the command line to manage organizations, workspaces, and nodes.
+
 ### Tools
-
-#### [Ship Framework](reference/ship-framework.md)
-
-tenzir-ship ships as a Python package that requires Python 3.12 or later.
 
 #### [Test Framework](reference/test-framework.md)
 
 The tenzir-test harness discovers and runs integration tests for pipelines, fixtures, and custom runners.
+
+#### [Ship Framework](reference/ship-framework.md)
+
+tenzir-ship ships as a Python package that requires Python 3.12 or later.
 
 ### Security
 

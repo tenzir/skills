@@ -12,9 +12,10 @@ section: "Docs"
 Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.
 
 ```tql
-to_google_secops [mode=string,] project=string, region=string, instance=string,
-                 [service_credentials=secret, log_type=string,
-                 log_text=blob|string, log_entry_time=time,
+to_google_secops [mode=string, api=string, project=string, region=string,
+                 instance=string, service_credentials=secret,
+                 private_key=secret, client_email=secret, customer_id=secret,
+                 log_type=string, log_text=blob|string, log_entry_time=time,
                  collection_time=time, labels=record, forwarder=string,
                  hint=string, source_filename=string, namespace=string,
                  max_request_size=int, max_batch_events=int,
@@ -23,11 +24,16 @@ to_google_secops [mode=string,] project=string, region=string, instance=string,
 
 ## Description
 
-The `to_google_secops` operator ingests telemetry via the Google SecOps Chronicle import APIs:
+The `to_google_secops` operator supports two Google SecOps API families:
 
-* `mode="raw_log"` sends raw logs to the [`logs.import` API](https://cloud.google.com/chronicle/docs/reference/rest/v1/projects.locations.instances.logTypes.logs/import).
-* `mode="udm_event"` sends each input row as a UDM event to the [`events.import` API](https://cloud.google.com/chronicle/docs/reference/rest/v1/projects.locations.instances.events/import).
-* `mode="udm_entity"` sends each input row as an entity to the [`entities.import` API](https://cloud.google.com/chronicle/docs/reference/rest/v1/projects.locations.instances.entities/import).
+* `api="import"` sends raw logs to the [`logs.import` API](https://cloud.google.com/chronicle/docs/reference/rest/v1/projects.locations.instances.logTypes.logs/import). This is the default.
+* `api="ingestion"` sends raw logs to the [`UnstructuredLogEntries` Ingestion API](https://cloud.google.com/chronicle/docs/reference/ingestion-api#unstructuredlogentries). This API can derive the event timestamp from the raw log when `log_entry_time` is omitted.
+
+The `mode` selects the payload type:
+
+* `mode="raw_log"` supports both `api="import"` and `api="ingestion"`.
+* `mode="udm_event"` sends each input row as a UDM event to the [`events.import` API](https://cloud.google.com/chronicle/docs/reference/rest/v1/projects.locations.instances.events/import) and requires `api="import"`.
+* `mode="udm_entity"` sends each input row as an entity to the [`entities.import` API](https://cloud.google.com/chronicle/docs/reference/rest/v1/projects.locations.instances.entities/import) and requires `api="import"`.
 
 ### `mode = string`
 
@@ -35,17 +41,25 @@ Selects the ingestion mode. Must be `raw_log`, `udm_event`, or `udm_entity`.
 
 Defaults to `raw_log`.
 
+### `api = string`
+
+Selects the Google SecOps API. Must be `import` or `ingestion`.
+
+Defaults to `import`.
+
+The `ingestion` value is only valid with `mode="raw_log"`.
+
 ### `project = string`
 
-The Google Cloud project that owns the SecOps instance.
+The Google Cloud project that owns the SecOps instance. Required with `api="import"` and invalid with `api="ingestion"`.
 
 ### `region = string`
 
-The SecOps location. This also selects the regional API host.
+The SecOps location. This also selects the regional API host. Required with `api="import"` and optional with `api="ingestion"`. The Ingestion API uses its unprefixed US endpoint when this option is omitted or set to `us`.
 
 ### `instance = string`
 
-The SecOps instance ID.
+The SecOps instance ID. Required with `api="import"` and invalid with `api="ingestion"`.
 
 ### `service_credentials = secret (optional)`
 
@@ -53,29 +67,47 @@ Full service-account JSON to use for Google Cloud OAuth2 authentication. Use a s
 
 When omitted, the operator uses Google Application Default Credentials.
 
+Only valid with `api="import"`.
+
+### `private_key = secret`
+
+The PEM-encoded service-account private key. Required with `api="ingestion"`.
+
+### `client_email = secret`
+
+The service-account email address. Required with `api="ingestion"`.
+
+### `customer_id = secret`
+
+The Google SecOps customer ID. Required with `api="ingestion"`.
+
 ### `log_type = string`
 
 The raw log type or entity log type. Required when `mode="raw_log"` or `mode="udm_entity"`.
 
-For raw logs, this selects the SecOps log type in the `logs.import` resource path. For entities, this sets the `logType` field in the `entities.import` request. Use a context source log type accepted by your SecOps instance, such as `AZURE_AD_CONTEXT` for Azure AD user context. This is not the same as the UDM entity type, such as `USER` or `ASSET`.
+For raw logs, this selects the SecOps parser. With `api="import"`, it also selects the log type in the `logs.import` resource path. For entities, this sets the `logType` field in the `entities.import` request. Use a context source log type accepted by your SecOps instance, such as `AZURE_AD_CONTEXT` for Azure AD user context. This is not the same as the UDM entity type, such as `USER` or `ASSET`.
 
-### UDM and Entity Field Names
+### UDM and entity field names
 
-UDM events and entities are sent as ingestion API JSON. Shape these rows with Google’s lowerCamelCase ingestion field names, such as `metadata.eventType` and `metadata.entityType`. Query field names in SecOps search and YARA-L often use snake\_case, such as `metadata.event_type`; those are not the field names to send to the import APIs. The operator forwards each UDM or entity row as-is and does not translate field names.
+UDM events and entities are sent as Import API JSON. Shape these rows with Google’s lowerCamelCase ingestion field names, such as `metadata.eventType` and `metadata.entityType`. Query field names in SecOps search and YARA-L often use snake\_case, such as `metadata.event_type`; those are not the field names to send to the import APIs. The operator forwards each UDM or entity row as-is and does not translate field names.
 
 ### `log_text = blob|string`
 
-The raw log text. String values must contain valid UTF-8. Blob and string values are base64-encoded before they are sent to SecOps.
+The raw log text. String values must contain valid UTF-8.
+
+With `api="import"`, the value may be a blob or string and is base64-encoded before it is sent. With `api="ingestion"`, the value must be a string and is sent as the original raw log.
 
 Required when `mode="raw_log"`.
 
 ### `log_entry_time = time`
 
-The timestamp of the raw log entry. Required when `mode="raw_log"`.
+The timestamp of the raw log entry. Required with `api="import"`.
+
+With `api="ingestion"`, this option is optional. The operator sends it as microseconds since the Unix epoch. When omitted, the raw log must contain a timestamp for Google SecOps to derive.
 
 ### `collection_time = time`
 
-The time at which the raw log entry was collected. Google requires this to be after `log_entry_time`. Required when `mode="raw_log"`.
+The time at which the raw log entry was collected. Google requires this to be after `log_entry_time`. Required with `api="import"` and invalid with `api="ingestion"`.
 
 ### `labels = record (optional)`
 
@@ -90,25 +122,27 @@ labels={
 }
 ```
 
+This structured form is available with `api="import"`. With `api="ingestion"`, every label value must be a string.
+
 Only valid when `mode="raw_log"`.
 
 ### `forwarder = string (optional)`
 
 The SecOps forwarder name to attach to raw logs.
 
-Only valid when `mode="raw_log"`.
+Only valid when `mode="raw_log"` and `api="import"`.
 
 ### `hint = string (optional)`
 
 The parser hint to pass to the `logs.import` API.
 
-Only valid when `mode="raw_log"`.
+Only valid when `mode="raw_log"` and `api="import"`.
 
 ### `source_filename = string (optional)`
 
 The source filename to attach to raw logs.
 
-Only valid when `mode="raw_log"`.
+Only valid when `mode="raw_log"` and `api="import"`.
 
 ### `namespace = string (optional)`
 
@@ -116,15 +150,17 @@ The environment namespace for raw logs.
 
 Only valid when `mode="raw_log"`.
 
+With `api="ingestion"`, this defaults to `tenzir`.
+
 ### `max_request_size = int (optional)`
 
 The maximum number of bytes in the uncompressed request payload.
 
-Defaults to `2M`. Values must be between `100k` and `4M`.
+With `api="import"`, this defaults to `2M` and must be between `100k` and `4M`. With `api="ingestion"`, this defaults to `1M` and must be between `100k` and `1M`.
 
 ### `max_batch_events = int (optional)`
 
-The maximum number of events to include in one import request.
+The maximum number of events to include in one request.
 
 Defaults to `1k`. Must be at least `1`.
 
@@ -136,13 +172,31 @@ Defaults to `5s`.
 
 ### `parallel = int (optional)`
 
-The maximum number of concurrent import requests.
+The maximum number of concurrent requests.
 
 Defaults to `50`. Must be at least `1`.
 
 ## Examples
 
-### Send Raw Logs
+### Forward raw logs without parsing timestamps
+
+Use `api="ingestion"` to let Google SecOps extract the event timestamp from the raw log:
+
+```tql
+from {log: "31-Mar-2025 01:35:02.187 client 0.0.0.0#4238: query: tenzir.com IN A + (255.255.255.255)"}
+to_google_secops \
+  api="ingestion",
+  private_key=secret("my_secops_private_key"),
+  client_email=secret("my_secops_client_email"),
+  customer_id=secret("my_secops_customer_id"),
+  log_text=log,
+  log_type="BIND_DNS",
+  labels={env: "prod"}
+```
+
+Add `log_entry_time` when the pipeline already has the timestamp. Otherwise, omit it and let Google SecOps derive it.
+
+### Send raw logs with the Import API
 
 ```tql
 from {log: "31-Mar-2025 01:35:02.187 client 0.0.0.0#4238: query: tenzir.com IN A + (255.255.255.255)"}
@@ -162,7 +216,7 @@ to_google_secops \
   source_filename="named.log"
 ```
 
-### Send UDM Events
+### Send UDM events
 
 ```tql
 from {
@@ -215,7 +269,7 @@ to_google_secops \
   service_credentials=secret("my_secops_service_account")
 ```
 
-### Send Entities
+### Send entities
 
 ```tql
 from {

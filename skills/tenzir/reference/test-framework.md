@@ -665,17 +665,19 @@ assert result.returncode == 0
 
 * The node process inherits the test directory as its current working directory, letting `tenzir-node.yaml` reference files with relative paths (for example `state/` or `schemas/`).
 
-* Each controller reuses its state and cache directories across `start()`/`stop()` cycles. By default they live under the per-test scratch directory (`TENZIR_TMP_DIR/tenzir-node-*`) and are removed once the fixture context ends. Starting a fresh controller (for example in another test run) yields a brand-new workspace.
+* Each controller reuses its state and cache directories across `start()`/`stop()` cycles. By default, they and the node process logs live under the per-test scratch directory (`TENZIR_TMP_DIR/tenzir-node-*`). The harness removes the scratch directory after the run unless you pass `--keep`. Starting a fresh controller (for example in another test run) yields a brand-new workspace.
 
 * The fixture reuses other inherited arguments (for example `--package-dirs=…`) but replaces any existing `--config=` flag so the node process always honours the chosen configuration file.
 
 * Tests can read `TENZIR_NODE_CLIENT_ENDPOINT`, `TENZIR_NODE_CLIENT_BINARY`, `TENZIR_NODE_CLIENT_TIMEOUT`, `TENZIR_NODE_STATE_DIRECTORY`, and `TENZIR_NODE_CACHE_DIRECTORY` from the environment to connect to the spawned node and inspect its working tree.
 
+* `TENZIR_NODE_STDOUT_LOG` and `TENZIR_NODE_STDERR_LOG` point to the complete process logs. For example, `tail "$TENZIR_NODE_STDERR_LOG"` shows the latest node diagnostics. Pass `--keep` to retain both logs after the run.
+
 * Pipelines launched by the bundled Tenzir runners automatically receive `--endpoint=<value>` when this fixture is active, so they talk to the transient node without additional wiring.
 
 * CLI and node configuration are independent: configure the CLI with `tenzir.yaml` and drop a `tenzir-node.yaml` (or set `TENZIR_NODE_CONFIG`) only when the node needs custom settings.
 
-* When `tenzir-node` fails to start, the fixture reports the exit code and stderr output, making it easier to diagnose startup failures.
+* The fixture drains node output while it waits for the client endpoint, so large startup diagnostics cannot block the process. When `tenzir-node` fails to start, the fixture reports the exit code and stderr output. When an active node exits unexpectedly, it reports the exit code and recent stderr output.
 
 ### Built-in docker-compose fixture
 
@@ -941,7 +943,7 @@ Most users can run `tenzir-test` without any configuration. When `uv` is install
 
 Environment variables support multi-part commands, allowing invocations like `TENZIR_BINARY="uvx tenzir"` or `TENZIR_BINARY="docker exec node tenzir"`. The harness splits these values into argument lists using shell tokenization rules.
 
-Fixtures often publish additional variables (for example `TENZIR_NODE_CLIENT_*`, `TENZIR_NODE_STATE_DIRECTORY`, `TENZIR_NODE_CACHE_DIRECTORY`, `HTTP_FIXTURE_URL`).
+Fixtures often publish additional variables (for example `TENZIR_NODE_CLIENT_*`, `TENZIR_NODE_STATE_DIRECTORY`, `TENZIR_NODE_CACHE_DIRECTORY`, `TENZIR_NODE_STDOUT_LOG`, `TENZIR_NODE_STDERR_LOG`, `HTTP_FIXTURE_URL`).
 
 During execution the harness also adds transient variables such as `TENZIR_TMP_DIR` so tests and fixtures can create temporary artifacts without polluting the repository. Combine it with `--keep` (or `TENZIR_KEEP_TMP_DIRS=1`) when you need to inspect the generated files after a run.
 

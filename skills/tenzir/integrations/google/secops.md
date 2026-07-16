@@ -10,7 +10,7 @@ section: "Integrations"
 
 > Send events to Google SecOps
 
-[Google Security Operations (SecOps)](https://cloud.google.com/security/products/security-operations) is Google’s security operations platform. Tenzir can send raw logs, UDM events, and entity records to Google SecOps using Chronicle import APIs.
+[Google Security Operations (SecOps)](https://cloud.google.com/security/products/security-operations) is Google’s security operations platform. Tenzir can send raw logs, UDM events, and entity records to Google SecOps. Raw logs can use either the Ingestion API or the Chronicle Import API. UDM events and entities use the Import API.
 
 ## UDM mapping
 
@@ -22,11 +22,30 @@ Tenzir’s [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_g
 
 ## Authentication
 
-[`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md) targets a SecOps instance with `project`, `region`, and `instance`. Provide service-account JSON with `service_credentials`, or omit it to use Google Application Default Credentials.
+Authentication depends on the selected API:
+
+* With `api="ingestion"`, provide `private_key`, `client_email`, and `customer_id` as secrets. The `region` is optional.
+* With `api="import"`, identify the SecOps instance with `project`, `region`, and `instance`. Provide service-account JSON with `service_credentials`, or omit it to use Google Application Default Credentials.
 
 ## Examples
 
-### Send Raw Logs
+### Forward raw logs without parsing timestamps
+
+Choose `api="ingestion"` when Google SecOps should parse the timestamp from the raw log. The `log_entry_time` option remains optional on this path:
+
+```tql
+from {log: "31-Mar-2025 01:35:02.187 client 0.0.0.0#4238: query: tenzir.com IN A + (255.255.255.255)"}
+to_google_secops \
+  api="ingestion",
+  private_key=secret("my_secops_private_key"),
+  client_email=secret("my_secops_client_email"),
+  customer_id=secret("my_secops_customer_id"),
+  log_text=log,
+  log_type="BIND_DNS",
+  labels={env: "prod"}
+```
+
+### Send raw logs with the Import API
 
 ```tql
 from {log: "31-Mar-2025 01:35:02.187 client 0.0.0.0#4238: query: tenzir.com IN A + (255.255.255.255)"}
@@ -46,7 +65,7 @@ to_google_secops \
   source_filename="named.log"
 ```
 
-### Send UDM Events
+### Send UDM events
 
 ```tql
 from {
@@ -99,7 +118,7 @@ to_google_secops \
   service_credentials=secret("my_secops_service_account")
 ```
 
-### Send Entities
+### Send entities
 
 ```tql
 from {
