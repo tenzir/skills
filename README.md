@@ -60,9 +60,8 @@ npx skills add -g tenzir/skills
 Install a specific skill into the current project, for example:
 
 ```bash
-npx skills add tenzir/skills@tenzir-commit-changes
-npx skills add tenzir/skills@tenzir-technical-writing
 npx skills add tenzir/skills@tenzir
+npx skills add tenzir/skills@tenzir-manage-packages
 npx skills add tenzir/skills@tenzir-asim
 npx skills add tenzir/skills@tenzir-cef
 npx skills add tenzir/skills@tenzir-cim
@@ -71,6 +70,12 @@ npx skills add tenzir/skills@tenzir-edm
 npx skills add tenzir/skills@tenzir-leef
 npx skills add tenzir/skills@tenzir-ocsf
 npx skills add tenzir/skills@tenzir-udm
+npx skills add tenzir/skills@tenzir-commit-changes
+npx skills add tenzir/skills@tenzir-create-pull-requests
+npx skills add tenzir/skills@tenzir-design-system
+npx skills add tenzir/skills@tenzir-ship
+npx skills add tenzir/skills@tenzir-update-docs
+npx skills add tenzir/skills@tenzir-technical-writing
 ```
 
 ## 📄 License
