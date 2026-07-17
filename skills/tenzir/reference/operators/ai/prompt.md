@@ -115,7 +115,7 @@ Send each event to the default local Ollama endpoint:
 
 ```tql
 from {message: "Summarize this security alert."}
-ai::prompt model="qwen3"
+ai::prompt model="qwen3.6"
 select summary=ai.prompt.text
 ```
 

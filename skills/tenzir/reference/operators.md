@@ -878,7 +878,7 @@ unordered { read_ndjson }
 Sends events to an OpenAI-compatible Responses API endpoint and adds the model response.
 
 ```tql
-ai::prompt model="qwen3"
+ai::prompt model="qwen3.6"
 ```
 
 ### [dns\_lookup](operators/dns_lookup.md)

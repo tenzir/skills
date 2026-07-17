@@ -42,7 +42,7 @@ from {
   confidence_id: 3,
   confidence: "High",
 }
-ai::prompt model="qwen3",
+ai::prompt model="qwen3.6",
            system="Summarize this OCSF detection finding in one sentence for a security analyst.",
            data={
              severity_id: severity_id,
@@ -70,7 +70,7 @@ enrichments = enrichments.add({
 drop ai
 ```
 
-The default endpoint is `http://127.0.0.1:11434/v1`, which matches the standard Ollama OpenAI-compatible API port. The example works with a local model if Ollama is running and the `qwen3` model is available.
+The default endpoint is `http://127.0.0.1:11434/v1`, which matches the standard Ollama OpenAI-compatible API port. The example works with a local model if Ollama is running and the `qwen3.6` model is available.
 
 ## Classify DNS activity
 
@@ -113,7 +113,7 @@ from {
   }],
   enrichments: [],
 }
-ai::prompt model="qwen3",
+ai::prompt model="qwen3.6",
            system="Classify this OCSF DNS event as benign, suspicious, or malicious. Reply with one label and a short reason.",
            data={
              query: query.hostname,
