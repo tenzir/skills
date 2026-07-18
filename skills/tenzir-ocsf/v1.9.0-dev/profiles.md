@@ -10,5 +10,6 @@
 - [Load Balancer](profiles/load_balancer.md)
 - [Network Proxy](profiles/network_proxy.md)
 - [OSINT](profiles/osint.md)
+- [Record Integrity](profiles/record_integrity.md)
 - [Security Control](profiles/security_control.md)
 - [Trace](profiles/trace.md)

@@ -70,4 +70,4 @@ The version of the agent: the agent's own code or configuration revision (e.g., 
 - **Type**: [`file`](file.md)
 - **Requirement**: optional
 
-A document that defines an AI agent's durable role, responsibilities, constraints, and operating boundaries. When available, populate `hashes` on the file for content integrity and `signatures` for provenance.
+A document that defines an AI agent's durable role, responsibilities, constraints, and operating boundaries. When available, populate `hashes` on the file for content integrity and `signatures` for provenance. Integrity of the event that reports this agent is provided separately by the `record_integrity` profile.

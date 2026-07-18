@@ -69,6 +69,34 @@ The encoding of the `value` attribute, normalized to the caption of `encoding_id
 
 The normalized identifier of the encoding used to represent the fingerprint bytes as the string in `value`. A verifier must decode `value` using this encoding to recover the raw hash bytes.
 
+### `serialization`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The canonical serialization scheme used to produce the deterministic byte sequence that was fingerprinted, normalized to the caption of `serialization_id`. In the case of `Other`, it is defined by the event source.
+
+### `serialization_id`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Sibling**: `serialization`
+
+#### Enum values
+
+- `0`: `Unknown`
+- `1`: `Flat` - No canonical serialization was applied; the fingerprint is computed over the data's raw byte sequence, such as the content of a disk file or any other opaque byte stream.
+- `2`: `JCS` - JSON Canonicalization Scheme - deterministic JSON serialization of the structured data prior to hashing.
+- `3`: `JWS` - JSON Web Signature - the JWS Signing Input, i.e. BASE64URL(protected header) '.' BASE64URL(payload).
+- `4`: `COSE` - CBOR Object Signing and Encryption - the CBOR Sig_structure used as the binary input.
+- `5`: `DSSE` - Dead Simple Signing Envelope - the PAE (Pre-Authentication Encoding) canonical input. Note: DSSE is a signing-envelope scheme, not a hash algorithm; the hash algorithm is carried in `algorithm_id`.
+- `6`: `Authenticode` - The Portable Executable (PE) Image Hash procedure that canonicalizes the PE structure into the byte sequence fed to the digest, excluding specified header fields and digesting sections in a defined order.
+- `7`: `Code Signing` - The procedure that describes how hashes of code and other structures form the Code Directory message that is digested.
+- `8`: `App Package` - The Windows Application Package signing procedure that describes how file hashes are stored in the manifest, and how that manifest is signed.
+- `99`: `Other`
+
+The identifier of the normalized canonical serialization scheme used to produce the deterministic byte sequence that was fingerprinted. A verifier must apply the same scheme to reproduce the fingerprinted input. Use `Flat` where the fingerprinted data is an opaque byte sequence, such as file content, to which no canonical serialization was applied. Distinct from `algorithm_id`, which identifies how the resulting bytes were hashed.
+
 ### `value`
 
 - **Type**: `file_hash_t`

@@ -9,7 +9,7 @@ Note: Findings are mutable and as such have a lifecycle, via `Update` activities
 - **Class UID**: `2004`
 - **Category**: Findings
 - **Extends**: [Finding (finding)](finding.md)
-- **Profiles**: [Incident](../profiles/incident.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Security Control](../profiles/security_control.md)
+- **Profiles**: [Incident](../profiles/incident.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Record Integrity](../profiles/record_integrity.md), [Security Control](../profiles/security_control.md)
 
 ## Inherited attributes
 
