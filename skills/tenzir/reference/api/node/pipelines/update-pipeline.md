@@ -29,7 +29,7 @@ The updated definition of the pipeline.
 
 The action that will change the pipeline's running state.
 
-Allowed values`start``pause``stop`
+Allowed values`start``pause``stop``force-stop`
 
 `name``string`optional
 

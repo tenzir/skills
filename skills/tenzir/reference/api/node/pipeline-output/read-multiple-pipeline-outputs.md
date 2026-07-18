@@ -25,9 +25,15 @@ Array items
 
 The output stream identifier returned when the pipeline was launched.
 
-`continuation_token``string`optional
+`continuation_token``string`required
 
-The continuation token from the previous response for this output stream. Omit this field for the initial request.
+The continuation token from the previous response for this output stream. Pass `00000000-0000-0000-0000-000000000000` for the initial request.
+
+`schema``enum`optional
+
+The schema representation to include in this output stream's response. Overrides the request-wide `schema` for this stream only.
+
+Allowed values`legacy``exact``never`
 
 `max_events``integer`optional
 
@@ -49,7 +55,7 @@ Default`5s`
 
 `schema``enum`optional
 
-The schema representation to include in each response. Use `exact` for a representation that matches Tenzir's type system exactly, and `never` to omit schema definitions.
+The default schema representation to include in each response. Use `exact` for a representation that matches Tenzir's type system exactly, and `never` to omit schema definitions. Individual output streams can override this with their own `schema` field.
 
 Allowed values`legacy``exact``never`
 
@@ -62,11 +68,13 @@ Example
   "requests": [
     {
       "serve_id": "query-1",
-      "continuation_token": null
+      "continuation_token": "00000000-0000-0000-0000-000000000000",
+      "schema": null
     },
     {
       "serve_id": "query-2",
-      "continuation_token": "340ce2j"
+      "continuation_token": "340ce2j",
+      "schema": "never"
     }
   ],
   "max_events": 1024,

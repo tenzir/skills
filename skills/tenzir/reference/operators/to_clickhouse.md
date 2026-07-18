@@ -15,6 +15,7 @@ Sends events to a ClickHouse table.
 to_clickhouse [table=string,
                uri=string, host=string, port=int, user=string, password=string,
                mode=string, primary=field, json=field|[field], low_cardinality=field[field],
+               max_batch_rows=int, batch_timeout=duration,
                tls=bool|record]
 ```
 
@@ -98,6 +99,18 @@ When using `mode = "create"` or `mode = "create_append"`, the operator creates t
 
 Unlike `json`, the inner type is inferred from the data, so every listed field must be present in the first event that creates the table — otherwise the operator raises an error. `low_cardinality` is only supported for `string` columns. Because it only affects table creation, combining it with `mode = "append"` is an error.
 
+### `max_batch_rows = int (optional)`
+
+The operator accumulates incoming events per target table and only sends an insert once a table’s buffer reaches this many rows (or `batch_timeout` elapses). This coalesces the tiny slices that heterogeneous input produces into fewer, larger, and far more efficient ClickHouse inserts.
+
+Defaults to `65536`.
+
+### `batch_timeout = duration (optional)`
+
+The maximum time a table’s buffered events wait before being sent, even if the buffer has not yet reached `max_batch_rows`. This bounds the latency of low-volume tables.
+
+Defaults to `1s`.
+
 ### `tls = record (optional)`
 
 TLS configuration. Provide an empty record (`tls={}`) to enable TLS with defaults or set fields to customize it.
@@ -148,7 +161,9 @@ Tenzir also supports `Nullable` versions of the above types (or their nested typ
 
 ### Clickhouse JSON
 
-[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can also write records to the ClickHouse JSON type for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
+[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can write to a ClickHouse `JSON` column for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
+
+A `record` maps to a JSON object. A `string` is also accepted and written verbatim, provided it is a JSON object (it starts with `{`); this lets you serialize events to JSON yourself, for example with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md), and collapse otherwise-heterogeneous events into a single schema for maximum insert throughput (see [Batching](to_clickhouse.md#batching)). A value that is neither a record nor a JSON-object string is written as an empty object (`{}`) with a warning, because ClickHouse `JSON` columns only accept objects at the top level.
 
 ### Appending to existing columns
 
@@ -160,6 +175,12 @@ When appending to a table that already exists, its columns may use ClickHouse ty
 Both also apply within nested `Tuple` and `Array` columns and in their `Nullable` forms, such as `LowCardinality(Nullable(String))`.
 
 An existing table may also contain columns whose type [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) cannot represent, such as `IPv4` or an `Enum`. As long as such a column has a default value (a `DEFAULT`, `MATERIALIZED`, `ALIAS`, or `EPHEMERAL` expression), the operator tolerates it and omits it from the insert, letting ClickHouse fill in the default. If an event does provide a value for such a column, the operator cannot convert it and drops the event with a warning. A column with an unsupported type and no default still raises an error.
+
+### Batching
+
+[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) re-batches events internally to keep inserts efficient. Rather than issuing one INSERT per incoming table slice, it accumulates events per target table and flushes a table once its buffer reaches `max_batch_rows` or has waited `batch_timeout`. This matters most for heterogeneous input: Tenzir emits one table slice per distinct schema, so data like OCSF — where field optionality makes almost every event its own schema — would otherwise produce a storm of tiny single-row inserts.
+
+Batching coalesces same-schema events into large inserts. To also collapse *different* schemas that target the same ClickHouse `JSON` column, serialize the varying field to a JSON string with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md) before the operator: all events then share one schema and batch together, reproducing the throughput of ClickHouse’s `JSONEachRow` format.
 
 ### Table Creation
 
@@ -235,6 +256,16 @@ subscribe "ocsf"
 ocsf::cast null_fill=true
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time, json=unmapped
 ```
+
+Alternatively, for a single high-volume landing table, serialize each event to a JSON string and write it into one `JSON` column. All events then share one schema and [batch](to_clickhouse.md#batching) into large inserts:
+
+```tql
+subscribe "ocsf"
+this = { event: this.print_json(), source_type: class_name }
+to_clickhouse table="ocsf_logs", mode="append"
+```
+
+Here `ocsf_logs` is pre-created on the server with an `event JSON` column, so `mode = "append"` writes the serialized events straight in.
 
 ### Create a new table with multiple fields
 
