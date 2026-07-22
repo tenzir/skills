@@ -126,6 +126,12 @@ Show detailed information for a specific entry:
 uvx tenzir-ship show --card 1
 ```
 
+Entry IDs are scoped to each release. If the same slug appears in more than one release or in `unreleased/`, an exact ID lookup returns every occurrence with its release context:
+
+```sh
+uvx tenzir-ship show --card dependency-compatibility-updates
+```
+
 The card view displays detailed metadata and the full entry body:
 
 ```text
@@ -156,7 +162,7 @@ Run validation checks to catch issues early:
 uvx tenzir-ship validate
 ```
 
-The validator reports missing metadata, unused entries, duplicate entry IDs, and configuration drift. It also checks changelog directory layout and flags stray items (for example an unexpected `changelog/next/` directory). Add this to CI pipelines to enforce metadata completeness.
+The validator reports missing metadata, missing release-local entry files, duplicate IDs within one release manifest, and configuration drift. Reusing an ID in a different release is valid. Validation also checks changelog directory layout and flags stray items (for example an unexpected `changelog/next/` directory). Add this to CI pipelines to enforce metadata completeness.
 
 If your changelog configuration sets `require_pr: true`, plain validation also fails for unreleased entries without `prs` metadata. Use lenient validation in pre-push hooks so missing PR numbers stay warnings until you create the pull request:
 
@@ -629,6 +635,8 @@ pr: 101
 
 Introduces the new pipeline builder UI.
 ```
+
+The filename must be unique among the current unreleased entries. It may reuse a filename from an older release; `tenzir-ship` treats every release directory as a separate namespace.
 
 You can use either singular (`author`, `pr`, `component`) or plural (`authors`, `prs`, `components`) keys. The singular form is shorthand for single values.
 

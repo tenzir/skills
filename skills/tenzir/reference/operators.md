@@ -769,6 +769,14 @@ Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
 from_sentinelone_data_lake "https://…", …
 ```
 
+### [from\_splunk](operators/from_splunk.md)
+
+Runs a Splunk search and returns its results as events.
+
+```tql
+from_splunk "https://splunk.example.com:8089", …
+```
+
 ### [from\_stdin](operators/from_stdin.md)
 
 Reads and parses events from standard input.

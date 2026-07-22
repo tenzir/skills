@@ -223,6 +223,8 @@ The `latest` scope ignores release candidates. It resolves to the newest stable 
 
 The table view (default) lists entries with ID, title, type, project, PRs, and authors. Row numbers count backward from the newest entry, so `#1` always targets the latest change.
 
+Entry IDs are scoped to a release. If an exact ID occurs in multiple releases or also exists in `unreleased/`, `show <entry-id>` returns every occurrence. Cards and tables include the matching release context, Markdown separates the occurrences by release, and each entry in JSON output has a nullable `release` field.
+
 Use `--release` to display entries grouped by release with full release metadata. This is the recommended mode for exporting release notes:
 
 ```sh
@@ -268,6 +270,8 @@ tenzir-ship add [options]
 | `--web`                | Open prefilled GitHub file creation URL      |
 
 The command prompts for any information you do not pass explicitly. The first invocation can scaffold the project automatically, creating a `changelog/` subdirectory with `config.yaml` and `unreleased/`. When you provide an explicit `--root` flag, the CLI uses that directory directly instead of creating a subdirectory. Prefer `tenzir-ship init` when you want to set up the changelog workspace without creating an entry. The CLI names entry files using the slugified title (e.g., `my-feature.md`).
+
+The generated ID must be unique in the current `unreleased/` directory. It may reuse an ID from an older release because each release has its own entry namespace. The command rejects only a filename that already exists in the current unreleased namespace.
 
 By default, the CLI infers the primary author from environment variables (`TENZIR_CHANGELOG_AUTHOR`, `GH_USERNAME`) or the GitHub CLI (`gh api user`). Using `--author` overrides this inference entirely. The `--co-author` option adds to the inferred or explicit author list without replacing it, making it ideal for AI-assisted development, pair programming, or collaborative contributions. Duplicates are removed automatically while preserving order.
 
@@ -514,7 +518,7 @@ tenzir-ship validate [options]
 | ----------- | ---------------------------------------------------------- |
 | `--lenient` | Demote missing PR metadata issues to warnings, not errors. |
 
-The validator reports missing metadata, unused entries, duplicate entry IDs, and configuration drift across repositories. It also rejects entries that carry `prs` metadata when the config sets `omit_pr: true`, or `authors` metadata when the config sets `omit_author: true`. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
+The validator reports missing metadata, release manifests whose referenced entry files are absent from that release’s own `entries/` directory, duplicate entry IDs within one manifest, and configuration drift across repositories. The same ID may appear in different releases. Validation also rejects entries that carry `prs` metadata when the config sets `omit_pr: true`, or `authors` metadata when the config sets `omit_author: true`. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
 
 When `require_pr: true` is set, plain validation fails for unreleased entries without `prs` metadata. Use `validate --lenient` in pre-push hooks when a pull request number might not exist yet. Lenient mode demotes only missing PR metadata issues; all other validation errors still fail.
 
@@ -777,6 +781,8 @@ The first invocation of `tenzir-ship add` scaffolds a `changelog/` subdirectory 
 
 Entry files live in `unreleased/` or `releases/<version>/entries/` as Markdown files with YAML frontmatter. The CLI names entry files using the slugified title (e.g., `my-feature.md`, `fix-bug.md`).
 
+The containing directory defines the entry’s namespace. A slug must be unique within `unreleased/` or one release’s `entries/` directory, but the same slug may appear again in another release. Release manifests resolve every listed ID against their own release directory.
+
 Example entry:
 
 ```markdown
@@ -997,7 +1003,7 @@ When `modules` is configured, `tenzir-ship validate` checks:
 
 ## Troubleshooting
 
-* **Validation errors** – Run `tenzir-ship validate` to identify missing metadata, unused entries, or duplicate IDs.
+* **Validation errors** – Run `tenzir-ship validate` to identify missing metadata, missing release-local entry files, or duplicate IDs within one manifest.
 * **Component mismatch** – When `components` is configured, ensure every entry either omits `component` or uses an allowed label.
 * **Configuration not found** – Ensure `config.yaml` exists in the changelog root or `package.yaml` sits next to the `changelog/` directory. Run `tenzir-ship init` to scaffold the workspace, or let `tenzir-ship add` bootstrap it while creating the first entry.
 * **Version bump fails** – Bump flags resolve from the latest stable release on disk. Create an initial stable release with an explicit version before using `--patch/--minor/--major`. If a release candidate is already outstanding, continue that series with `--rc` or promote it with `release create`.

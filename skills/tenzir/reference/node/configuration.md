@@ -74,8 +74,8 @@ tenzir:
   # semantics as libcurl's `NO_PROXY`: domain entries match the hostname itself
   # and subdomains on a label boundary (`internal` matches `internal`,
   # `host.internal`, and `a.b.internal`, but not `notinternal`); `*` matches
-  # everything; CIDR entries match IP-literal hosts only; `localhost` and
-  # IPv4/IPv6 loopback addresses always bypass.
+  # everything; CIDR entries match IP-literal hosts only; `localhost`,
+  # IPv4/IPv6 loopback, and IPv4/IPv6 link-local addresses always bypass.
   # Falls back to `TENZIR_NO_PROXY`, `NO_PROXY`, or `no_proxy` from the
   # environment when unset, in that order. An explicitly empty
   # `TENZIR_NO_PROXY` or configured `no-proxy` value disables fallback to the
@@ -298,7 +298,8 @@ tenzir:
   # The plugins to load at startup. For relative paths, Tenzir tries to find
   # the files in the specified `tenzir.plugin-dirs`. The special values
   # 'bundled' and 'all' enable autoloading of bundled and all plugins
-  # respectively.
+  # respectively. Note: Add `example` or `/path/to/libtenzir-plugin-example.so`
+  # to load the example plugin.
   plugins: []
 
 
