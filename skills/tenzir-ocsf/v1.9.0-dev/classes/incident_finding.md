@@ -71,7 +71,7 @@ The details of the group assigned to an Incident.
 - **Requirement**: optional
 - **Group**: context
 
-An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques associated to the Incident.
+An array of attack objects, each describing a tactic, technique, and/or sub-technique associated with the Incident.
 
 ### `comment`
 

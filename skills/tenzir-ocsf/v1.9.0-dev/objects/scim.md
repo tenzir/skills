@@ -1,6 +1,6 @@
 # SCIM (scim)
 
-The System for Cross-domain Identity Management (SCIM) Configuration object provides a structured set of attributes related to SCIM protocols used for identity provisioning and management across cloud-based platforms. It standardizes user and group provisioning details, enabling identity synchronization and lifecycle management with compatible Identity Providers (IdPs) and applications. SCIM is defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643)
+The System for Cross-domain Identity Management (SCIM) Configuration object provides a structured set of attributes related to SCIM protocols used for identity provisioning and management across cloud-based platforms. It standardizes user and group provisioning details, enabling identity synchronization and lifecycle management with compatible Identity Providers (IdPs) and applications. SCIM is defined in RFC 7634.
 
 - **Extends**: [Object (object)](object.md)
 
@@ -106,14 +106,14 @@ Maximum number of requests allowed by the SCIM resource within a specified time 
 - **Type**: `json_t`
 - **Requirement**: recommended
 
-SCIM provides a schema for representing groups, identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:Group` as defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643). This attribute will capture key-value pairs for the scheme implemented in a SCIM resource.
+SCIM provides a schema for representing groups, identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:Group` as defined in RFC 7634. This attribute will capture key-value pairs for the scheme implemented in a SCIM resource.
 
 ### `scim_user_schema`
 
 - **Type**: `json_t`
 - **Requirement**: recommended
 
-SCIM provides a resource type for user resources. The core schema for user is identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:User` as defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643). his attribute will capture key-value pairs for the scheme implemented in a SCIM resource. This object is inclusive of both the basic and Enterprise User Schema Extension.
+SCIM provides a resource type for user resources. The core schema for user is identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:User` as defined in RFC 7634. This attribute will capture key-value pairs for the scheme implemented in a SCIM resource. This object is inclusive of both the basic and Enterprise User Schema Extension.
 
 ### `state`
 

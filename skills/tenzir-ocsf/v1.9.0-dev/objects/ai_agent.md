@@ -9,7 +9,7 @@ An autonomous AI agent that performs tasks under delegated authority. Distinguis
 ### `uid`
 
 - **Type**: `string_t`
-- **Requirement**: required
+- **Requirement**: recommended
 
 The stable logical identifier for the agent, assigned by the agent's authoritative source (e.g., its control plane, registry, or issuing identity provider). Persists across restarts and instances. Producers populate this from whatever identity they observe: for a runtime that owns the agent, this is its issued ID; for a gateway or proxy, it is typically derived from the agent's credential. Multiple producers logging the same agent should converge on the same `uid` when they share an authoritative source.
 

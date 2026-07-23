@@ -319,7 +319,7 @@ A threat actor is an individual or group that conducts malicious cyber activitie
 - `RED`: `TLP:RED` - TLP:RED is for the eyes and ears of individual recipients only, no further disclosure. Sources may use TLP:RED when information cannot be effectively acted upon without significant risk for the privacy, reputation, or operations of the organizations involved. Recipients may therefore not share TLP:RED information with anyone else. In the context of a meeting, for example, TLP:RED information is limited to those present at the meeting.
 - `WHITE`: `TLP:WHITE` - TLP:WHITE and TLP:CLEAR may be used interchangeably, TLP:WHITE is the most up to date (as of TLP 2.0) usage.
 
-The [Traffic Light Protocol](https://www.first.org/tlp/) was created to facilitate greater sharing of potentially sensitive information and more effective collaboration. TLP provides a simple and intuitive schema for indicating with whom potentially sensitive information can be shared.
+The Traffic Light Protocol (TLP) was created to facilitate greater sharing of potentially sensitive information and more effective collaboration. TLP provides a simple and intuitive schema for indicating with whom potentially sensitive information can be shared.
 
 ### `type`
 

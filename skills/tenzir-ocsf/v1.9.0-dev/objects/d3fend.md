@@ -1,6 +1,6 @@
-# MITRE D3FEND™ (d3fend)
+# Defensive Countermeasure (d3fend)
 
-The MITRE D3FEND™ object describes the tactic & technique associated with a countermeasure.
+The Defensive Countermeasure object describes the tactic & technique associated with a countermeasure.
 
 - **Extends**: [Object (object)](object.md)
 

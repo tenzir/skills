@@ -21,7 +21,7 @@ Base 64 encoded immutable byte sequence. Traditional Base 64 is preferred but pu
 - **Base type**: `String`
 - **Regex**: `^\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(?:\.\d+)?([Zz]|[\+-]\d{2}:\d{2})?$`
 
-The Internet Date/Time format as defined in [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339.html). For example:
+The Internet Date/Time format as defined in RFC 3339. For example:
 `2024-09-10T23:20:50.520Z`,
 `2024-09-10 23:20:50.520789Z`.
 
@@ -95,7 +95,7 @@ Internet Protocol address (IP address), in either IPv4 or IPv6 format. For examp
 
 - **Caption**: JSON
 
-Embedded JSON value. A value can be a string, or a number, or true or false or null, or an object or an array. These structures can be nested. See [www.json.org](https://www.json.org).
+Embedded JSON value. A value can be a string, or a number, or true or false or null, or an object or an array. These structures can be nested.
 
 ## `long_t`
 

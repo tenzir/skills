@@ -51,4 +51,4 @@ The TLS extension type. For example: `Server Name`.
 - `50`: `signature_algorithms_cert` - The Signature Algorithms extension.
 - `51`: `key_share` - The Key Share extension.
 
-The TLS extension type identifier. See [The Transport Layer Security (TLS) extension page](https://datatracker.ietf.org/doc/html/rfc8446#page-35).
+The TLS extension type identifier.

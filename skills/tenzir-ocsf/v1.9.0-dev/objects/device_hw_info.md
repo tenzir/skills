@@ -32,7 +32,7 @@ The BIOS version. For example: `LENOVO G5ETA2WW (2.62)`.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The chassis type describes the system enclosure or physical form factor. Such as the following examples for Windows [Windows Chassis Types](https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemenclosure)
+The chassis type describes the system enclosure or physical form factor. For example, as described for a Windows chassis type.
 
 ### `cores`
 

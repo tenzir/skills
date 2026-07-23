@@ -28,7 +28,7 @@ Note: The two letter country code should be capitalized. For example: `US` or `C
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The Common Platform Enumeration (CPE) name as described by ([NIST](https://nvd.nist.gov/products/cpe)) For example: `cpe:/a:apple:safari:16.2`.
+The Common Platform Enumeration (CPE) name. For example: `cpe:/a:apple:safari:16.2`.
 
 ### `cpu_bits`
 
@@ -56,7 +56,7 @@ The kernel release of the operating system. On Unix-based systems, this is deter
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The two letter lower case language codes, as defined by [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1). For example: `en` (English), `de` (German), or `fr` (French).
+The two letter lower case language codes, as defined by ISO 639-1. For example: `en` (English), `de` (German), or `fr` (French).
 
 ### `name`
 

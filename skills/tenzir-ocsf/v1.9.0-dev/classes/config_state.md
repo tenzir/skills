@@ -48,7 +48,7 @@ A list of assessments associated with the device.
 - **Requirement**: recommended
 - **Group**: primary
 
-The CIS Benchmark Result object captures results generated from benchmark evaluations as defined by the Center for Internet Security ([CIS](https://www.cisecurity.org/cis-benchmarks/)).
+The CIS Benchmark Result object captures results generated from benchmark evaluations as defined by the Center for Internet Security.
 
 ### `device`
 

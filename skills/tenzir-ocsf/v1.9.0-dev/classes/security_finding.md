@@ -53,7 +53,7 @@ The analytic technique used to analyze and derive insights from the data or info
 - **Requirement**: optional
 - **Group**: context
 
-An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques associated to the Finding.
+An array of attack objects, each describing a tactic, technique, and/or sub-technique associated with the Finding.
 
 ### `cis_csc`
 
@@ -168,7 +168,7 @@ The impact as an integer value of the finding, valid range 0-100.
 - **Requirement**: optional
 - **Group**: context
 
-The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html) provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
+The Kill Chain provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
 
 ### `malware`
 

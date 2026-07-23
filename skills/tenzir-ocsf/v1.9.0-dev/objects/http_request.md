@@ -75,7 +75,7 @@ Additional HTTP headers of an HTTP request or response.
 - `UPDATEREDIRECTREF`: `Update Redirect Reference` - The UPDATEREDIRECTREF method changes the target of a redirect reference resource.
 - `VERSION-CONTROL`: `Version Control` - The VERSION-CONTROL method places the specified resource under version control.
 
-The [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) indicates the desired action to be performed for a given resource.
+The HTTP request method indicates the desired action to be performed for a given resource.
 
 ### `length`
 

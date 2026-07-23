@@ -104,7 +104,7 @@ The stratum level of the NTP server's time source, normalized to the caption of 
 - `17`: `Reserved` - Reserved stratum (possible values: 17-255).
 - `99`: `Other` - The stratum level is not mapped. See the `stratum` attribute, which contains a data source specific value.
 
-The normalized identifier of the stratum level, as defined in [RFC-5905](https://www.rfc-editor.org/rfc/rfc5905.html).
+The normalized identifier of the stratum level of an NTP server's time source, as defined in RFC 5905. Levels range from 0 to 16, with lower numbers representing higher accuracy and greater proximity to the root clock.
 
 ### `version`
 

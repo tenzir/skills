@@ -1,6 +1,6 @@
 # CIS Control (cis_control)
 
-The CIS Control (aka Critical Security Control) object describes a prioritized set of actions to protect your organization and data from cyber-attack vectors. The [CIS Controls](https://www.cisecurity.org/controls) are defined by the Center for Internet Security.
+The CIS Control (aka Critical Security Control) object describes a prioritized set of actions to protect your organization and data from cyber-attack vectors. The CIS Controls are defined by the Center for Internet Security.
 
 - **Extends**: [Object (object)](object.md)
 

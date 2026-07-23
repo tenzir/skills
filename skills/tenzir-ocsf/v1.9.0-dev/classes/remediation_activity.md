@@ -1,6 +1,6 @@
 # Remediation Activity (remediation_activity)
 
-Remediation Activity events report on attempts at remediating a compromised device or computer network. It follows the MITRE countermeasures defined by the D3FEND™ [Matrix](https://d3fend.mitre.org/).
+Remediation Activity events report on attempts at remediating a compromised device or computer network.
 
 - **Class UID**: `7001`
 - **Category**: Remediation
@@ -32,13 +32,14 @@ Remediation Activity events report on attempts at remediating a compromised devi
 
 #### Enum values
 
-- `1`: `Isolate` - Creates logical or physical barriers in a system which reduces opportunities for adversaries to create further accesses. Defined by D3FEND™ [d3f:Isolate](https://d3fend.mitre.org/tactic/d3f:Isolate/).
-- `2`: `Evict` - Removes an adversary or malicious resource from a device or computer network. Defined by D3FEND™ [d3f:Evict](https://d3fend.mitre.org/tactic/d3f:Evict/).
-- `3`: `Restore` - Returns the system to a better state. Defined by D3FEND™ [d3f:Restore](https://d3fend.mitre.org/tactic/d3f:Restore/).
-- `4`: `Harden` - Increases the opportunity cost of computer network exploitation. Defined by D3FEND™ [d3f:Harden](https://d3fend.mitre.org/tactic/d3f:Harden/).
-- `5`: `Detect` - Further identify adversary access to or unauthorized activity on computer networks. Defined by D3FEND™ [d3f:Detect](https://d3fend.mitre.org/tactic/d3f:Detect/).
+- `1`: `Isolate` - Creates logical or physical barriers in a system which reduces opportunities for adversaries to create further accesses.
+- `2`: `Evict` - Removes an adversary or malicious resource from a device or computer network.
+- `3`: `Restore` - Returns the system to a better state.
+- `4`: `Harden` - Increases the opportunity cost of computer network exploitation.
+- `5`: `Detect` - Identify adversary access to or unauthorized activity on computer networks.
+- `6`: `Deceive` - Advertise, entice, and allow potential attackers access to an observed or controlled environment.
 
-Matches the MITRE D3FEND™ Tactic. Note: the Model and Detect Tactics are not supported as remediations by the OCSF Remediation event class.
+Matches the countermeasure tactic. Note: the Model tactic is not supported by the OCSF Remediation event class.
 
 ### `command_uid`
 

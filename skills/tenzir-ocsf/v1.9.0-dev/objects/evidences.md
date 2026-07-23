@@ -13,6 +13,13 @@ A collection of evidence artifacts associated to the activity/activities that tr
 
 Describes details about the user/role/process that was the source of the activity that triggered the detection.
 
+### `ai_agent`
+
+- **Type**: [`ai_agent`](ai_agent.md)
+- **Requirement**: recommended
+
+Describes details about an AI agent associated with the activity that triggered the detection, whether the agent performed the activity, was its target, or was otherwise involved. Use a separate `evidences` entry per agent when a finding involves more than one, such as an agent spawning a sub-agent in violation of usage policy.
+
 ### `api`
 
 - **Type**: [`api`](api.md)

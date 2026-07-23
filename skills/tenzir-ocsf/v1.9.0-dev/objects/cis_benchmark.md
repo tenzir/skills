@@ -1,6 +1,6 @@
 # CIS Benchmark (cis_benchmark)
 
-The CIS Benchmark object describes best practices for securely configuring IT systems, software, networks, and cloud infrastructure as defined by the [Center for Internet Security](https://www.cisecurity.org/cis-benchmarks/). See also [Getting to Know the CIS Benchmarks](https://www.cisecurity.org/insights/blog/getting-to-know-the-cis-benchmarks).
+The CIS Benchmark object describes best practices for securely configuring IT systems, software, networks, and cloud infrastructure as defined by the Center for Internet Security. See also Getting to Know the CIS Benchmarks.
 
 - **Extends**: [Object (object)](object.md)
 

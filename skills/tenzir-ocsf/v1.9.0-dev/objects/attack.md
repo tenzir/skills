@@ -1,6 +1,6 @@
-# MITRE ATT&CK® & ATLAS™ (attack)
+# Attack Tactics & Techniques (attack)
 
-The MITRE ATT&CK® & ATLAS™ object describes the tactic, technique, sub-technique & mitigation associated to an attack.
+The Attack object describes the tactic, technique, sub-technique & mitigation associated to an attack.
 
 - **Extends**: [Object (object)](object.md)
 
@@ -25,14 +25,14 @@ The Sub-technique object describes the MITRE ATT&CK® or ATLAS™ Sub-technique 
 - **Type**: [`tactic`](tactic.md)
 - **Requirement**: recommended
 
-The Tactic object describes the MITRE ATT&CK® or ATLAS™ Tactic ID and/or name that is associated to an attack.
+The Tactic object describes the Tactic ID and/or name associated to an attack.
 
 ### `tactics`
 
 - **Type**: [`tactic`](tactic.md)
 - **Requirement**: optional
 
-The Tactic object describes the tactic ID and/or tactic name that are associated with the attack technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+The Tactics associated with the attack technique.
 
 ### `technique`
 

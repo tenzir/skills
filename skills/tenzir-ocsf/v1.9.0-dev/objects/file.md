@@ -146,7 +146,7 @@ A list of symbols imported by the executable file.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The name of the file as identified within the file itself. This contrasts with the name by which the file is known on disk. Where available, the internal name is widely used by security practitioners and detection content because the on-disk file name is not reliable. On the Windows OS, most PE files contain a [VERSIONINFO](https://learn.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource) resource from which the internal name can be obtained. On macOS, binaries can optionally embed a copy of the application's Info.plist file which in turn contains the name of the executable.
+The name of the file as identified within the file itself. This contrasts with the name by which the file is known on disk. Where available, the internal name is widely used by security practitioners and detection content because the on-disk file name is not reliable. On the Windows OS, most PE files contain a `VERSIONINFO` resource from which the internal name can be obtained. On macOS, binaries can optionally embed a copy of the application's `Info.plist` file which in turn contains the name of the executable.
 
 ### `is_deleted`
 

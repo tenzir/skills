@@ -49,7 +49,7 @@ It can differ from the `created_time` timestamp, which reflects the time this fi
 - **Type**: [`kill_chain_phase`](kill_chain_phase.md)
 - **Requirement**: optional
 
-The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html) provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
+The Kill Chain provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
 
 ### `last_seen_time`
 

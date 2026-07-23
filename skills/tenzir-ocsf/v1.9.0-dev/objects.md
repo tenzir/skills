@@ -95,18 +95,18 @@
 
 ## Threat Intelligence
 
+- [Attack Tactics & Techniques](objects/attack.md)
 - [Campaign](objects/campaign.md)
 - [CVE](objects/cve.md)
 - [CVSS Score](objects/cvss.md)
 - [CWE](objects/cwe.md)
+- [Defensive Countermeasure](objects/d3fend.md)
+- [Defensive Tactic](objects/d3f_tactic.md)
+- [Defensive Technique](objects/d3f_technique.md)
 - [EPSS](objects/epss.md)
 - [Kill Chain Phase](objects/kill_chain_phase.md)
 - [Malware](objects/malware.md)
 - [Malware Scan Info](objects/malware_scan_info.md)
-- [MITRE ATT&CK® & ATLAS™](objects/attack.md)
-- [MITRE D3FEND™](objects/d3fend.md)
-- [MITRE D3FEND™ Tactic](objects/d3f_tactic.md)
-- [MITRE D3FEND™ Technique](objects/d3f_technique.md)
 - [MITRE Mitigation](objects/mitigation.md)
 - [MITRE Sub-technique](objects/sub_technique.md)
 - [MITRE Tactic](objects/tactic.md)

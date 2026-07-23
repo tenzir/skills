@@ -1,6 +1,6 @@
 # Airborne Broadcast Activity (airborne_broadcast_activity)
 
-Airborne Broadcast Activity events report the activity of any aircraft or unmanned system as reported and tracked by Automatic Dependent Surveillance - Broadcast (ADS-B) receivers. Based on the ADS-B standards described in [Code of Federal Regulations (CFR) Title 14 Chapter I Subchapter F Part 91](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91#91.225) and in other general Federal Aviation Administration (FAA) supplemental orders and guidance described [here](https://www.faa.gov/about/office_org/headquarters_offices/avs/offices/afx/afs/afs400/afs410/ads-b).
+Airborne Broadcast Activity events report the activity of any aircraft or unmanned system as reported and tracked by Automatic Dependent Surveillance - Broadcast (ADS-B) receivers. Based on the ADS-B standards described in Code of Federal Regulations (CFR) Title 14 Chapter I Subchapter F Part 91 and in other general Federal Aviation Administration (FAA) supplemental orders and guidance.
 
 - **Class UID**: `8002`
 - **Category**: Unmanned Systems
@@ -104,7 +104,7 @@ Traffic refers to the amount of data transmitted from a ADS-B remote monitoring 
 - **Requirement**: required
 - **Group**: primary
 
-The Unmanned Aerial System object describes the characteristics, Position Location Information (PLI), and other metadata of Unmanned Aerial Systems (UAS) and other unmanned and drone systems used in Remote ID. Remote ID is defined in the Standard Specification for Remote ID and Tracking (ASTM Designation: F3411-22a) [ASTM F3411-22a](https://cdn.standards.iteh.ai/samples/112830/71297057ac42432880a203654f213709/ASTM-F3411-22a.pdf).
+The Unmanned Aerial System object describes the characteristics, Position Location Information (PLI), and other metadata of Unmanned Aerial Systems (UAS) and other unmanned and drone systems used in Remote ID. Remote ID is defined in the Standard Specification for Remote ID and Tracking (ASTM Designation: F3411-22a).
 
 ### `unmanned_system_operating_area`
 

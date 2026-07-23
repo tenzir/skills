@@ -1,6 +1,6 @@
 # CVE (cve)
 
-The Common Vulnerabilities and Exposures (CVE) object represents publicly disclosed cybersecurity vulnerabilities defined in CVE Program catalog ([CVE](https://cve.mitre.org/)). There is one CVE Record for each vulnerability in the catalog.
+The Common Vulnerabilities and Exposures (CVE) object represents publicly disclosed cybersecurity vulnerabilities defined in CVE Program catalog (CVE). There is one CVE Record for each vulnerability in the catalog.
 
 - **Extends**: [Object (object)](object.md)
 
@@ -18,21 +18,21 @@ The Record Creation Date identifies when the CVE ID was issued to a CVE Numberin
 - **Type**: [`cvss`](cvss.md)
 - **Requirement**: recommended
 
-The CVSS object details Common Vulnerability Scoring System ([CVSS](https://www.first.org/cvss/)) scores from the advisory that are related to the vulnerability.
+The CVSS object details Common Vulnerability Scoring System scores from the advisory that are related to the vulnerability.
 
 ### `cwe`
 
 - **Type**: [`cwe`](cwe.md)
 - **Requirement**: optional
 
-The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack. The CWE object is based on the [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) catalog.
+The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack. The CWE object is based on the Common Weakness Enumeration (CWE) catalog.
 
 ### `cwe_uid`
 
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) unique identifier. For example: `CWE-787`.
+The Common Weakness Enumeration (CWE) unique identifier. For example: `CWE-787`.
 
 ### `cwe_url`
 
@@ -53,7 +53,7 @@ A brief description of the CVE Record.
 - **Type**: [`epss`](epss.md)
 - **Requirement**: optional
 
-The Exploit Prediction Scoring System (EPSS) object describes the estimated probability a vulnerability will be exploited. EPSS is a community-driven effort to combine descriptive information about vulnerabilities (CVEs) with evidence of actual exploitation in-the-wild. ([EPSS](https://www.first.org/epss/)).
+The Exploit Prediction Scoring System (EPSS) object describes the estimated probability a vulnerability will be exploited. EPSS is a community-driven effort to combine descriptive information about vulnerabilities (CVEs) with evidence of actual exploitation in-the-wild.
 
 ### `modified_time`
 
@@ -81,7 +81,7 @@ A list of reference URLs with additional information about the CVE Record.
 - **Type**: [`cwe`](cwe.md)
 - **Requirement**: optional
 
-Describes the Common Weakness Enumeration [(CWE)](https://cwe.mitre.org/) details related to the CVE Record.
+Describes the Common Weakness Enumeration details related to the CVE Record.
 
 ### `title`
 
@@ -95,9 +95,9 @@ A title or a brief phrase summarizing the CVE record.
 - **Type**: `string_t`
 - **Requirement**: recommended
 
-The vulnerability type as selected from a large dropdown menu during CVE refinement.
+The vulnerability type as classified in the CVE catalog.
 
-Most frequently used vulnerability types are: `DoS`, `Code Execution`, `Overflow`, `Memory Corruption`, `Sql Injection`, `XSS`, `Directory Traversal`, `Http Response Splitting`, `Bypass something`, `Gain Information`, `Gain Privileges`, `CSRF`, `File Inclusion`. For more information see [Vulnerabilities By Type](https://www.cvedetails.com/vulnerabilities-by-types.php) distributions.
+Most frequently used vulnerability types are: `DoS`, `Code Execution`, `Overflow`, `Memory Corruption`, `Sql Injection`, `XSS`, `Directory Traversal`, `Http Response Splitting`, `Bypass something`, `Gain Information`, `Gain Privileges`, `CSRF`, `File Inclusion`. For more information see Vulnerabilities By Type distributions.
 
 ### `uid`
 

@@ -32,7 +32,7 @@ The name of the continent.
 - **Type**: `float_t`
 - **Requirement**: optional
 
-A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.
+A two-element array, containing a longitude/latitude pair. The format conforms with GeoJSON. For example: `[-73.983, 40.719]`.
 
 ### `country`
 
@@ -72,7 +72,7 @@ Provides quality/containment on geodetic altitude. This is based on ADS-B Geodet
 
 Geohash of the geo-coordinates (latitude and longitude).
 
-[Geohashing](https://en.wikipedia.org/wiki/Geohash) is a geocoding system used to encode geographic coordinates in decimal degrees, to a single string.
+Geohashing is a geocoding system used to encode geographic coordinates in decimal degrees, to a single string.
 
 ### `horizontal_accuracy`
 

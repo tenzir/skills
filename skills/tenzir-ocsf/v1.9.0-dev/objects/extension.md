@@ -1,6 +1,6 @@
 # Schema Extension (extension)
 
-The OCSF Schema Extension object provides detailed information about the schema extension used to construct the event. The schema extensions are registered in the [extensions.md](https://github.com/ocsf/ocsf-schema/blob/main/extensions.md) file.
+The OCSF Schema Extension object provides detailed information about the schema extension used to construct the event. The schema extensions are registered in the `extensions.md` file.
 
 - **Extends**: [Entity (_entity)](_entity.md)
 

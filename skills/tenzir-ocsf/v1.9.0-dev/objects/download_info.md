@@ -50,4 +50,4 @@ The download type, normalized to the caption of the `type_id` value. In the case
 - `5`: `Untrusted` - The file was downloaded from an untrusted server.
 - `99`: `Other` - The file's download type is not mapped. See the `type` attribute, which contains an event source specific value.
 
-The download type ID. The values correspond to the five permitted values of the `ZoneId` property in the [Mark of the Web](https://en.wikipedia.org/wiki/Mark_of_the_Web) metadata of a downloaded file on Windows. Note however that each numeric value is 1 greater than its `ZoneId` equivalent.
+The download type ID. The values correspond to the five permitted values of the `ZoneId` property in the Mark of the Web metadata of a downloaded file on Windows. Note however that each numeric value is 1 greater than its `ZoneId` equivalent.

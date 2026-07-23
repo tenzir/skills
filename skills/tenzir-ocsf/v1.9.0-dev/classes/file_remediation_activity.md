@@ -1,6 +1,6 @@
 # File Remediation Activity (file_remediation_activity)
 
-File Remediation Activity events report on attempts at remediating files. It follows the MITRE countermeasures defined by the D3FEND™ [Matrix](https://d3fend.mitre.org/). Sub-techniques will include File, such as File Removal or Restore File.
+File Remediation Activity events report on attempts at remediating files. Sub-techniques of countermeasures will include File, such as File Removal or Restore File.
 
 - **Class UID**: `7002`
 - **Category**: Remediation

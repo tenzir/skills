@@ -60,7 +60,7 @@ The supported protocol of the Identity Provider. E.g., `SAML`, `OIDC`, or `OAuth
 - **Type**: [`scim`](scim.md)
 - **Requirement**: optional
 
-The System for Cross-domain Identity Management (SCIM) resource object provides a structured set of attributes related to SCIM protocols used for identity provisioning and management across cloud-based platforms. It standardizes user and group provisioning details, enabling identity synchronization and lifecycle management with compatible Identity Providers (IdPs) and applications. SCIM is defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643)
+The System for Cross-domain Identity Management (SCIM) resource object as defined in RFC 7634 provides a structured set of attributes related to SCIM protocols used for identity provisioning and management across cloud-based platforms. It standardizes user and group provisioning details, enabling identity synchronization and lifecycle management with compatible Identity Providers (IdPs) and applications.
 
 ### `sso`
 

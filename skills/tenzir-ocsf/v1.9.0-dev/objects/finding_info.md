@@ -26,7 +26,7 @@ An Attack Graph describes possible routes an attacker could take through an envi
 - **Type**: [`attack`](attack.md)
 - **Requirement**: optional
 
-The [MITRE ATT&CK®](https://attack.mitre.org) technique and associated tactics related to the finding.
+An array of attack objects, each describing a tactic, technique, and/or sub-technique associated with the finding.
 
 ### `created_time`
 
@@ -63,7 +63,7 @@ It can differ from the `created_time` timestamp, which reflects the time this fi
 - **Type**: [`kill_chain_phase`](kill_chain_phase.md)
 - **Requirement**: optional
 
-The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html) provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
+The Kill Chain provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
 
 ### `last_seen_time`
 

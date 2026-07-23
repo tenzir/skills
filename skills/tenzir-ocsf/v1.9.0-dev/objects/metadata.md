@@ -235,4 +235,4 @@ The original size of the OCSF event data in kilobytes before any truncation occu
 - **Type**: `string_t`
 - **Requirement**: required
 
-The version of the OCSF schema, using Semantic Versioning Specification ([SemVer](https://semver.org)). For example: `1.0.0.` Event consumers use the version to determine the available event attributes.
+The version of the OCSF schema, using Semantic Versioning Specification (SemVer). For example: `1.0.0`. Event consumers use the version to determine the available event attributes.

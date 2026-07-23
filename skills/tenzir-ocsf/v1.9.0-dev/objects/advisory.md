@@ -104,14 +104,14 @@ A list of reference URLs with additional information about the vulnerabilities d
 - **Type**: [`cve`](cve.md)
 - **Requirement**: optional
 
-A list of Common Vulnerabilities and Exposures [(CVE)](https://cve.mitre.org/) identifiers related to the vulnerabilities disclosed in the Advisory.
+A list of Common Vulnerabilities and Exposures (CVE) identifiers related to the vulnerabilities disclosed in the Advisory.
 
 ### `related_cwes`
 
 - **Type**: [`cwe`](cwe.md)
 - **Requirement**: optional
 
-A list of Common Weakness Enumeration [(CWE)](https://cwe.mitre.org/) identifiers related to the vulnerabilities disclosed in the Advisory.
+A list of Common Weakness Enumeration (CWE) identifiers related to the vulnerabilities disclosed in the Advisory.
 
 ### `size`
 

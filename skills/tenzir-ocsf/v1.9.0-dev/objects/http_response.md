@@ -25,7 +25,7 @@ The Hypertext Transfer Protocol (HTTP) status code returned from the web server 
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The request header that identifies the original [media type](https://www.iana.org/assignments/media-types/media-types.xhtml)  of the resource (prior to any content encoding applied for sending).
+The HTTP request header that identifies the original media type of the resource (prior to any content encoding applied for sending).
 
 ### `http_headers`
 

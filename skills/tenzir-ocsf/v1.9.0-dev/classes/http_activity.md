@@ -125,4 +125,4 @@ The HTTP Response from a web server to a requester.
 - **Requirement**: recommended
 - **Group**: primary
 
-The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) returned to the client.
+The Hypertext Transfer Protocol (HTTP) status code returned to the client.

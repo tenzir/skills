@@ -11,7 +11,7 @@ The Transport Layer Security (TLS) object describes the negotiated TLS protocol 
 - **Type**: `integer_t`
 - **Requirement**: optional
 
-The integer value of TLS alert if present. The alerts are defined in the TLS specification in [RFC-2246](https://datatracker.ietf.org/doc/html/rfc2246).
+The integer value of a TLS alert per the TLS specification.
 
 ### `certificate`
 

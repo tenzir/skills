@@ -18,7 +18,7 @@ Architecture is a shorthand name describing the type of computer hardware the pa
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The Common Platform Enumeration (CPE) name as described by ([NIST](https://nvd.nist.gov/products/cpe)) For example: `cpe:/a:apple:safari:16.2`.
+The Common Platform Enumeration (CPE) name. For example: `cpe:/a:apple:safari:16.2`.
 
 ### `epoch`
 

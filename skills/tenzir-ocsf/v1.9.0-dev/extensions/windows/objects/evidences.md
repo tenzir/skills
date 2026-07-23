@@ -8,6 +8,7 @@ Extends the evidences object to add Windows specific fields
 
 **From Evidence Artifacts:**
 - `actor` (recommended)
+- `ai_agent` (recommended)
 - `api` (recommended)
 - `connection_info` (recommended)
 - `container` (recommended)

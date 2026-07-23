@@ -1,6 +1,6 @@
-# MITRE D3FEND™ Technique (d3f_technique)
+# Defensive Technique (d3f_technique)
 
-The MITRE D3FEND™ Technique object describes the leaf defensive technique ID and/or name associated to a countermeasure.
+The Defensive Technique object describes the leaf defensive technique ID and/or name associated to a countermeasure.
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
@@ -17,7 +17,7 @@ The name of the defensive technique. For example: `IO Port Restriction`.
 - **Type**: `url_t`
 - **Requirement**: optional
 
-The versioned permalink of the defensive technique. For example: `https://d3fend.mitre.org/technique/d3f:IOPortRestriction/`.
+The versioned permalink of the defensive technique. For example: `https://d3fend.mitre.org/technique/d3f:IOPortRestriction/`
 
 ### `uid`
 

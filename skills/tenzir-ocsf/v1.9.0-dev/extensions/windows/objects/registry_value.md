@@ -82,7 +82,7 @@ The data of the registry value when `type_id` is `REG_MULTI_SZ`.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-A string representation of the value type as specified in [Registry Value Types](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-value-types).
+A string representation of the value type as specified in Windows Registry Value Types.
 
 ### `type_id`
 

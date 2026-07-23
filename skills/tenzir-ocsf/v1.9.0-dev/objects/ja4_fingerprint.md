@@ -39,7 +39,7 @@ The 'd' section of the JA4 fingerprint.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The JA4+ fingerprint type as defined by [FoxIO](https://blog.foxio.io/ja4+-network-fingerprinting target=), normalized to the caption of 'type_id'. In the case of 'Other', it is defined by the event source.
+The JA4+ fingerprint type as defined by FoxIO, normalized to the caption of 'type_id'. In the case of 'Other', it is defined by the event source.
 
 ### `type_id`
 
