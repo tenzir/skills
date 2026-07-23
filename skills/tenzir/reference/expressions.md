@@ -250,6 +250,9 @@ Write dates and timestamps using the [ISO 8601 standard](https://en.wikipedia.or
 * Date only: `2024-10-03`
 * Full timestamp: `2024-10-03T14:30:00Z`
 * With timezone offset: `2024-10-03T14:30:00+02:00`
+* With fractional seconds: `2024-10-03T14:30:00.123+02:00`
+
+Time literals cannot contain spaces. To convert timestamps in other formats, such as `"2024-10-03 14:30:00 GMT"`, parse a string with [`time`](https://tenzir.com/docs/reference/functions/time.md) or [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md).
 
 Time points represent specific moments and support arithmetic with durations:
 

@@ -49,6 +49,9 @@ Timestamps can end with a timezone offset:
 | With colon | `+02:00`, `-05:30` |
 | Without    | `+0200`, `-0530`   |
 | Hour only  | `+02`, `-05`       |
+| Zone name  | `GMT`, `UTC`, `UT` |
+
+Zone names may be preceded by a space, as in `2024-01-15 10:30:45 GMT`. Only these zero-offset names are supported; other zone names like `EST` or `CET` are not recognized.
 
 #### Unix timestamps
 
@@ -68,6 +71,8 @@ Prefix a Unix epoch value with `@`:
 | Past offset   | `now - 30min`, `5min ago` |
 
 For timestamps in non-standard formats, use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with an explicit format string.
+
+If the string does not match any supported format, `time` emits a warning and returns `null`.
 
 ## Examples
 
@@ -119,6 +124,7 @@ from {
   with_colon: time("2024-01-15T10:30:45+02:00"),
   without_colon: time("2024-01-15T10:30:45+0200"),
   hour_only: time("2024-01-15T10:30:45-05"),
+  zone_name: time("2024-01-15 10:30:45 GMT"),
 }
 ```
 
@@ -128,6 +134,7 @@ from {
   with_colon: 2024-01-15T08:30:45Z,
   without_colon: 2024-01-15T08:30:45Z,
   hour_only: 2024-01-15T15:30:45Z,
+  zone_name: 2024-01-15T10:30:45Z,
 }
 ```
 

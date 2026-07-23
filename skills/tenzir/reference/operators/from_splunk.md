@@ -24,7 +24,7 @@ The `from_splunk` operator sends one search request to a Splunk Search Head and 
 
 For each invocation, the operator sends a form-encoded `POST` request to the Splunk management API endpoint `/services/search/v2/jobs/export`. It requests final JSON results and streams them into the pipeline without buffering the complete response. The export endpoint returns one streamed HTTP response, so the operator doesn’t issue pagination requests. Splunk envelope fields such as `preview`, `offset`, and `lastrow` aren’t included in the output.
 
-The operator preserves the fields and values inside each Splunk `result` record and assigns the schema name `tenzir.splunk` to the resulting events. It doesn’t parse `_raw`, convert `_time`, or normalize field names.
+The operator preserves the fields inside each Splunk `result` record and assigns the schema name `tenzir.splunk` to the resulting events. It infers Tenzir types from supported string representations, but doesn’t parse `_raw` or normalize field names.
 
 Splunk `ERROR` and `FATAL` response messages fail the pipeline. The diagnostic includes Splunk’s message and the submitted SPL query. Splunk `WARN` messages produce Tenzir warnings without discarding valid search results.
 
@@ -201,11 +201,21 @@ from_splunk "https://splunk-search-head.example.com:8089",
 ```
 
 ```tql
-{_time: "2025-01-01 00:00:00.000 GMT", user: "alice", outcome: "success"}
-{_time: "2025-01-01 00:01:00.000 GMT", user: "bob", outcome: "failure"}
+{_time: 2025-01-01T00:00:00Z, user: "alice", outcome: "success"}
+{_time: 2025-01-01T00:01:00Z, user: "bob", outcome: "failure"}
 ```
 
-Splunk returns `_time` as a JSON string, so the operator doesn’t convert it to a Tenzir `time` value. Splunk result fields such as `_raw`, `_bkt`, and `_indextime` are available unless the SPL query removes them. The operator always removes Splunk’s `preview`, `offset`, and `lastrow` export-envelope fields.
+Splunk renders `_time` as a JSON string in the search user’s time zone. Tenzir infers a `time` value when the string uses a supported timestamp format. This includes timestamps with `GMT`, `UTC`, `UT`, `Z`, or a numeric UTC offset.
+
+Tenzir currently doesn’t parse named non-zero-offset zones such as `PDT`, `EST`, or `CET`. These abbreviations can be ambiguous, so `_time` remains a string when Splunk returns one of them. Format `_time` with a numeric offset in the SPL query to get a `time` value regardless of the search user’s time zone:
+
+```tql
+search=r#"search index=main | eval _time=strftime(_time, "%FT%T.%Q%:z")"#
+```
+
+For example, Splunk formats a UTC timestamp as `2025-01-01T00:00:00.000+00:00`, which Tenzir infers as a `time` value.
+
+Splunk result fields such as `_raw`, `_bkt`, and `_indextime` are available unless the SPL query removes them. The operator always removes Splunk’s `preview`, `offset`, and `lastrow` export-envelope fields.
 
 ### Use Tenzir times as search boundaries
 
