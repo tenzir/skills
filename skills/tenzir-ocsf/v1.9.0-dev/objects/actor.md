@@ -20,6 +20,13 @@ The client application or service that initiated the activity. This can be in co
 
 The unique identifier of the client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `app_name` is distinct from the `process.pid` or `process.uid` if present.
 
+### `application`
+
+- **Type**: [`application`](application.md)
+- **Requirement**: recommended
+
+The client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `application` is distinct from the `process` if present.
+
 ### `authorizations`
 
 - **Type**: [`authorization`](authorization.md)

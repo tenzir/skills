@@ -7,6 +7,10 @@ Application Lifecycle events report installation, removal, start, stop of an app
 - **Extends**: [Application Activity (application)](application.md)
 - **Profiles**: [AI Operation](../profiles/ai_operation.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md), [Host](../profiles/host.md), [OSINT](../profiles/osint.md), [Record Integrity](../profiles/record_integrity.md), [Security Control](../profiles/security_control.md)
 
+## Constraints
+
+- **At least one of**: `app`, `application`
+
 ## Inherited attributes
 
 **From Base Event:**
@@ -48,7 +52,15 @@ The normalized identifier of the activity that triggered the event. Each event c
 ### `app`
 
 - **Type**: [`product`](../objects/product.md)
-- **Requirement**: required
-- **Group**: primary
+- **Requirement**: optional
+- **Group**: context
 
 The application that was affected by the lifecycle event.  This also applies to self-updating application systems.
+
+### `application`
+
+- **Type**: [`application`](../objects/application.md)
+- **Requirement**: recommended
+- **Group**: primary
+
+The application that was affected by the lifecycle event. This also applies to self-updating application systems. Product identity, such as vendor and version, can be conveyed via the nested `product` attribute.

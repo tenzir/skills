@@ -74,3 +74,11 @@ The AI model involved in this operation. Use for direct model invocations where 
 - **Group**: context
 
 Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
+
+### `delegation`
+
+- **Type**: [`delegation`](../objects/delegation.md)
+- **Requirement**: optional
+- **Group**: context
+
+The delegation under whose authority this AI operation was performed. Links the event to a durable authorization context independent of traces and sessions, enabling correlation of all events executed under the same delegated authority.

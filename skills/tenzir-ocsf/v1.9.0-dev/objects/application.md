@@ -62,6 +62,13 @@ The name of the application.
 
 The identity of the service or user account that owns the application.
 
+### `product`
+
+- **Type**: [`product`](product.md)
+- **Requirement**: optional
+
+The software product that this application is an instance of, carrying product identity such as `vendor_name`, `cpe_name`, and canonical `version`.
+
 ### `region`
 
 - **Type**: `string_t`
