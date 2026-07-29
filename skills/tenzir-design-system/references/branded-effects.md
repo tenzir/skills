@@ -31,16 +31,34 @@ and reads as technical: JetBrains Mono, `text-sm` (compact variant `text-xs`),
 600 weight, +5% tracking, uppercase. Color is applied separately, usually the
 brand gradient above, or muted. See [typography.md](typography.md).
 
+## Links
+
+Neutral with the accent on hover: a link inherits the surrounding text color
+and carries a 1px underline in a softened decoration color (currentColor at
+40% alpha, `--link-underline`) at 0.18em offset; hover and focus-visible turn
+text and underline to the accent (`--link-hover`, aliasing `primary-accent`:
+`blue-600` light, `blue-300` dark). The underline is the affordance, so it
+never relies on color alone. Blue-as-link would spend the brand hue on every
+anchor and stop signaling anything on link-dense surfaces; with this
+treatment the accent appears only under the pointer. Whole-row and card
+anchors skip the underline entirely; their hover fill and layout carry the
+affordance, and titles inside them stay bare. Buttons and CTAs keep their
+solid `primary` fills.
+
+Email is the exception: hover is unreliable there (Outlook ignores it, touch
+has none), so email links render in the paragraph color with a persistent
+full-color underline, and the accent returns only as a `:hover` bonus for
+webmail clients that honor `<style>`.
+
 ## Article prose
 
 Long-form body typography for rendered markdown (blog posts), keyed to tokens:
 body `text-lg` at 1.75 line height (a deliberate long-form exception to the
 paired line height); generous heading rhythm (h2 `text-2xl` with its paired
-tracking, h3 `text-xl`); links in the `primary` hue with a 3px underline
-offset on hover; blockquotes with a `blue-300` inline-start rule, italic and
-muted; inline code in the muted well at `radius-tight`. Hand-rolled against
-tokens rather than a typography plugin, since the palette carries only Tenzir
-hues.
+tracking, h3 `text-xl`); links per the neutral treatment above; blockquotes
+with a `blue-300` inline-start rule, italic and muted; inline code in the
+muted well at `radius-tight`. Hand-rolled against tokens rather than a
+typography plugin, since the palette carries only Tenzir hues.
 
 ## Single-tone logo flatten
 

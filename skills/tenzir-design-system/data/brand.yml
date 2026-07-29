@@ -180,6 +180,9 @@ typography:
     color: neutral-700
     background-color: neutral-100
     line-height: 1.4
+  # Links are neutral with the underline as the affordance; the accent
+  # appears only on hover (web). Print and PDF have no hover, so the body
+  # color plus a persistent underline is the whole treatment here.
   link:
-    color: primary
-    weight: 500
+    color: neutral-700
+    decoration: underline
