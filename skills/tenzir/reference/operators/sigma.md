@@ -19,6 +19,8 @@ sigma path:string, [refresh_interval=duration]
 
 The `sigma` operator executes [Sigma rules](https://github.com/SigmaHQ/sigma) on its input. If a rule matches, the operator emits a `tenzir.sigma` event that wraps the input record into a new record along with the matching rule. The operator discards all events that do not match the provided rules.
 
+The operator runs single Sigma *detection* rules. It does not execute Sigma *correlation* rules (those with a `correlation:` block, such as `event_count`, `value_count`, `temporal`, and `temporal_ordered`). Express these with [`window`](https://tenzir.com/docs/reference/operators/window.md) and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) instead, as shown in [Execute Sigma rules](../../guides/enrichment/execute-sigma-rules.md#express-correlation-rules-in-tql).
+
 Transpilation Process
 
 For each rule, the operator transpiles the YAML into an [expression](../expressions.md) and instantiates a [`where`](https://tenzir.com/docs/reference/operators/where.md) operator, followed by assignments to generate an output. Here’s how the transpilation works. The Sigma rule YAML format requires a `detection` attribute that includes a map of named sub-expression called *search identifiers*. In addition, `detection` must include a final `condition` that combines search identifiers using boolean algebra (AND, OR, and NOT) or syntactic sugar to reference groups of search expressions, e.g., using the `1/all of *` or plain wildcard syntax. Consider the following `detection` embedded in a rule:
@@ -46,26 +48,37 @@ Finally, we combine the expression according to `condition`:
 
 We parse the YAML string values according to Tenzir’s richer data model, e.g., the expression `c: 1.2.3.4` becomes a field named `c` and value `1.2.3.4` of type `ip`, rather than a `string`. Sigma also comes with its own [event taxonomy](https://github.com/SigmaHQ/sigma-specification/blob/main/Taxonomy_specification) to standardize field names. The `sigma` operator currently does not normalize fields according to this taxonomy but rather takes the field names verbatim from the search identifier.
 
-Sigma uses [value modifiers](https://github.com/SigmaHQ/sigma-specification/blob/main/Sigma_specification.md#value-modifiers) to select a concrete relational operator for given search predicate. Without a modifier, Sigma uses equality comparison (`==`) of field and value. For example, the `contains` modifier changes the relational operator to substring search, and the `re` modifier switches to a regular expression match. The table below shows what modifiers the `sigma` operator supports, where ✅ means implemented, 🚧 not yet implemented but possible, and ❌ not yet supported:
+Sigma uses [value modifiers](https://github.com/SigmaHQ/sigma-specification/blob/main/Sigma_specification.md#value-modifiers) to select a concrete relational operator for given search predicate. Without a modifier, Sigma uses equality comparison (`==`) of field and value. For example, the `contains` modifier changes the relational operator to substring search, and the `re` modifier switches to a regular expression match. The table below shows which modifiers the `sigma` operator supports, where ✅ means implemented, 🚧 not yet implemented but planned, and ❌ not yet supported:
 
-| Modifier         | Use                                                      | sigmac | Tenzir |
-| ---------------- | -------------------------------------------------------- | ------ | ------ |
-| `contains`       | perform a substring search with the value                | ✅      | ✅      |
-| `startswith`     | match the value as a prefix                              | ✅      | ✅      |
-| `endswith`       | match the value as a suffix                              | ✅      | ✅      |
-| `base64`         | encode the value with Base64                             | ✅      | ✅      |
-| `base64offset`   | encode value as all three possible Base64 variants       | ✅      | ✅      |
-| `utf16le`/`wide` | transform the value to UTF16 little endian               | ✅      | 🚧     |
-| `utf16be`        | transform the value to UTF16 big endian                  | ✅      | 🚧     |
-| `utf16`          | transform the value to UTF16                             | ✅      | 🚧     |
-| `re`             | interpret the value as regular expression                | ✅      | ✅      |
-| `cidr`           | interpret the value as a IP CIDR                         | ❌      | ✅      |
-| `all`            | changes the expression logic from OR to AND              | ✅      | ✅      |
-| `lt`             | compare less than (`<`) the value                        | ❌      | ✅      |
-| `lte`            | compare less than or equal to (`<=`) the value           | ❌      | ✅      |
-| `gt`             | compare greater than (`>`) the value                     | ❌      | ✅      |
-| `gte`            | compare greater than or equal to (`>=`) the value        | ❌      | ✅      |
-| `expand`         | expand value to placeholder strings, e.g., `%something%` | ❌      | ❌      |
+| Modifier         | Use                                                      | Support |
+| ---------------- | -------------------------------------------------------- | ------- |
+| `contains`       | perform a substring search with the value                | ✅       |
+| `startswith`     | match the value as a prefix                              | ✅       |
+| `endswith`       | match the value as a suffix                              | ✅       |
+| `base64`         | encode the value with Base64                             | ✅       |
+| `base64offset`   | encode value as all three possible Base64 variants       | ✅       |
+| `utf16le`/`wide` | transform the value to UTF16 little endian               | 🚧      |
+| `utf16be`        | transform the value to UTF16 big endian                  | 🚧      |
+| `utf16`          | transform the value to UTF16                             | 🚧      |
+| `re`             | interpret the value as regular expression                | ✅       |
+| `cidr`           | interpret the value as a IP CIDR                         | ✅       |
+| `all`            | changes the expression logic from OR to AND              | ✅       |
+| `lt`             | compare less than (`<`) the value                        | ✅       |
+| `lte`            | compare less than or equal to (`<=`) the value           | ✅       |
+| `gt`             | compare greater than (`>`) the value                     | ✅       |
+| `gte`            | compare greater than or equal to (`>=`) the value        | ✅       |
+| `expand`         | expand value to placeholder strings, e.g., `%something%` | ❌       |
+| `cased`          | match the value case-sensitively                         | ❌       |
+| `i`/`ignorecase` | match the regular expression case-insensitively          | ❌       |
+| `m`/`multiline`  | let regex `^` and `$` match at line boundaries           | ❌       |
+| `s`/`dotall`     | let regex `.` match newline characters                   | ❌       |
+| `exists`         | test whether the field is present in the event           | ❌       |
+| `fieldref`       | compare the field against another field’s value          | ❌       |
+| `windash`        | match Windows `-` and `/` parameter variants             | ❌       |
+| `neq`            | negate the comparison                                    | ❌       |
+| time parts       | extract `minute`/`hour`/`day`/`week`/`month`/`year`      | ❌       |
+
+Tenzir transpiles Sigma rules with its own engine rather than depending on [pySigma](https://github.com/SigmaHQ/pySigma). The operator currently skips unsupported modifiers instead of rejecting them, so a rule that relies on one matches as if the modifier were absent. Avoid the ❌ modifiers above until they are implemented.
 
 ### `path: string`
 

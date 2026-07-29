@@ -321,13 +321,9 @@ from {
 where class_uid == 1007 and activity_id == 1
 
 
-// TQL does not support case-insensitive string matching functions yet. To avoid
-// the verbosity and overhead of calling `to_lower()` repeatedly (and to avoid
-// mutating the event by storing lowercase fields), we can use `match_regex`
-// with raw strings and the case-insensitive `(?i)` flag.
-where process.path.match_regex(r"(?i)\\print\.exe$") \
-  or process.name.match_regex(r"(?i)^print\.exe$") \
-  or process.file.internal_name.match_regex(r"(?i)^print\.exe$")
+where process.path.ends_with("\\print.exe", ignore_case=true) \
+  or process.name.equals("print.exe", ignore_case=true) \
+  or process.file.internal_name.equals("print.exe", ignore_case=true)
 
 
 where process.cmd_line.match_regex(r"(?i)[/-]d") and process.cmd_line.match_regex(
@@ -400,13 +396,57 @@ For the two detection records from the earlier fixture, the windowed pipeline em
 }
 ```
 
+## Express correlation rules in TQL
+
+Sigma also defines [correlation rules](https://github.com/SigmaHQ/sigma-specification/blob/main/specification/sigma-correlation-rules-specification.md): a `correlation:` block that counts or sequences the sightings of one or more detection rules. The `sigma` operator runs single detection rules only and does not execute correlation rules, but each correlation type maps directly onto [`window`](https://tenzir.com/docs/reference/operators/window.md) and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), as the windowed example above already shows for counting. Assume a stream of detection sightings that each carry a `rule` name and a `time`.
+
+These examples use fixed, epoch-aligned time bins. For a sliding “within N minutes of each other” interpretation, use a hopping window instead, as shown in [`window`](https://tenzir.com/docs/reference/operators/window.md#detect-brute-force-logins-with-a-hopping-window).
+
+| Correlation type   | The question it asks                     | TQL building blocks                                     |
+| ------------------ | ---------------------------------------- | ------------------------------------------------------- |
+| `event_count`      | ≥ N sightings per group in a window      | `window` + `summarize count=count()` + `where`          |
+| `value_count`      | ≥ N distinct values of a field per group | `window` + `summarize count_distinct(field)` + `where`  |
+| `temporal`         | several rules fire together, any order   | `window` + `summarize distinct(rule)` + `where`         |
+| `temporal_ordered` | several rules fire in a defined order    | `sort` + `window` + `summarize collect(rule)` + `where` |
+
+The windowed pipeline above is an `event_count` correlation: `count()` with a `where` threshold. A `value_count` correlation counts distinct values of a field instead, for example flagging a host where at least three different users trip the rule within five minutes:
+
+```tql
+window size=5min, on=time {
+  summarize host, users=count_distinct(user)
+  where users >= 3
+}
+```
+
+A `temporal` correlation fires when several different rules match for the same group within a window, in any order:
+
+```tql
+window size=10min, on=time {
+  summarize host, rules=distinct(rule)
+  where rules.contains("recon") and rules.contains("exploit") and rules.contains("exfil")
+}
+```
+
+A `temporal_ordered` correlation adds sequence. Sort by time so the window sees events in order, collect the rule names with [`collect`](https://tenzir.com/docs/reference/functions/collect.md) (which keeps order, unlike [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)), drop unrelated rules, and compare the remaining sequence as a string, because TQL has no list-to-list equality yet:
+
+```tql
+sort time
+window size=10min, on=time {
+  summarize host, sequence=collect(rule)
+  where sequence.where(r => r == "recon" or r == "exploit" or r == "exfil").join(",") == "recon,exploit,exfil"
+}
+```
+
 ## See Also
 
 * [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md)
 * [`select`](https://tenzir.com/docs/reference/operators/select.md)
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`window`](https://tenzir.com/docs/reference/operators/window.md)
 * [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
+* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
+* [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md)
 * [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
 * [Add operators](../packages/add-operators.md)
 * [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
