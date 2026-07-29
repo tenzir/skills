@@ -33,6 +33,11 @@ separated by 1px `neutral-200` borders; `neutral-100` marks recessed wells,
 never the page. Shadows are reserved for floating surfaces
 ([elevation.md](elevation.md)).
 
+Links follow the same principle: they inherit the surrounding text color and
+signal with a muted underline, taking the accent (`blue-600` light,
+`blue-300` dark) only on hover and keyboard focus (`focus-visible`). See
+[branded-effects.md](branded-effects.md).
+
 ## Roles
 
 | Role      | Icon/text       | Subtle background |

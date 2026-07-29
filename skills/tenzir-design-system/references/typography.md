@@ -46,7 +46,7 @@ JetBrains Mono uses the same scale but only `text-xxs` through `text-xl`.
 | Weight   | Value | Use for                                   |
 | -------- | ----- | ----------------------------------------- |
 | regular  | 400   | Body text, general content, code          |
-| medium   | 500   | UI labels, emphasis, links, error messages in code |
+| medium   | 500   | UI labels, emphasis, standalone links (prose links stay regular), error messages in code |
 | semibold | 600   | Headings, important elements, code headlines |
 
 Bolder weights than 600 are not part of the system.
