@@ -104,7 +104,7 @@ The confidence, normalized to the caption of the confidence_id value. In the cas
 - `3`: `High`
 - `99`: `Other` - The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
 
-The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
+The normalized identifier of the confidence level for this incident, representing a summary across all aggregated findings. It reflects the accuracy of the analytics that produced those findings. A lower confidence value indicates a wider finding scope that may produce noisy or potentially non-malicious reports. When the value is `99` (Other), the `confidence` attribute must contain the incident-specific label.
 
 ### `confidence_score`
 
@@ -112,7 +112,7 @@ The normalized confidence refers to the accuracy of the rule that created the fi
 - **Requirement**: optional
 - **Group**: context
 
-The confidence score as reported by the event source.
+The confidence score assigned to the incident by the system or analyst, expressed on a source-specific numeric scale. This score provides finer-grained confidence information than the categorical `confidence_id` value. When `confidence_id` is `99` (Other), the `confidence` attribute should reflect the same assessment if both are populated.
 
 ### `desc`
 
@@ -135,7 +135,7 @@ The time of the most recent event or finding that contributed to this incident.
 - **Requirement**: required
 - **Group**: primary
 
-A list of `finding_info` objects associated to an incident.
+A list of `finding_info` objects.
 
 ### `impact`
 

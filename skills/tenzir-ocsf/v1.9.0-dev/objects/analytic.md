@@ -40,6 +40,13 @@ The name of the analytic that generated the finding.
 
 Other analytics related to this analytic.
 
+### `sensor_info_list`
+
+- **Type**: [`sensor_info`](sensor_info.md)
+- **Requirement**: optional
+
+An array of `sensor_info` objects, each describing a sensor control point analyzed or correlated by the analytic. Each element typically represents a source of `related_events` that contributed to the finding. An individual sensor control point may also directly originate the finding, though more commonly it emits alerts that a downstream consumer treats as findings.
+
 ### `state`
 
 - **Type**: `string_t`

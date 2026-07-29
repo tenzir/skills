@@ -1,6 +1,6 @@
 # Discovery Details (discovery_details)
 
-The Discovery Details object describes results of a discovery task/job.
+The Discovery Details object describes results of a discovery task/job. Each result may be due to the violation of a `rule` associated with a `policy` and have multiple `occurrences`.
 
 - **Extends**: [Object (object)](object.md)
 
@@ -26,6 +26,13 @@ Details about where in the target entity, specified information was discovered. 
 - **Requirement**: optional
 
 Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populated.
+
+### `rule`
+
+- **Type**: [`rule`](rule.md)
+- **Requirement**: recommended
+
+The rule associated with this discovery, usually part of the higher level `policy` from an enclosing class or object.
 
 ### `type`
 

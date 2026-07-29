@@ -31,6 +31,31 @@ The details of the user assigned to an Incident.
 
 The details of the group assigned to an Incident.
 
+### `confidence`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: context
+
+The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+
+### `confidence_id`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Group**: context
+- **Sibling**: `confidence`
+
+#### Enum values
+
+- `0`: `Unknown` - The normalized confidence is unknown.
+- `1`: `Low`
+- `2`: `Medium`
+- `3`: `High`
+- `99`: `Other` - The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+
+The normalized confidence refers to the accuracy of the analytics that produced the alert or finding. See specific usage.
+
 ### `impact`
 
 - **Type**: `string_t`

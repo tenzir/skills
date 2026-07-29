@@ -55,7 +55,7 @@ A user provided comment about the finding.
 - **Requirement**: optional
 - **Group**: context
 
-The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source and should be the same as `confidence_score` if also populated..
 
 ### `confidence_id`
 
@@ -72,7 +72,7 @@ The confidence, normalized to the caption of the confidence_id value. In the cas
 - `3`: `High`
 - `99`: `Other` - The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
 
-The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
+The normalized confidence refers to the accuracy of the analytics that produced the finding. An analytic with a low confidence means that the finding scope is wide and may create finding reports that are noisy or may not be malicious in nature.
 
 ### `confidence_score`
 
@@ -88,11 +88,9 @@ The confidence score as reported by the event source.
 - **Requirement**: optional
 - **Group**: context
 
-Describes the device/host relevant to the finding.
+Describes the affected device/host. It can be used in conjunction with `resources` or when there are multiple devices affected. E.g. The role of the device as target or actor, specific details about a cloud resource compute instance, etc.
 
-If applicable, it can be used in conjunction with `resources`. e.g. The role of the device as the target or the actor, its IP address etc.
-
-If a single device is the source of the finding, rather than a targeted or affected device, use the `Host` profile and populate `device`.
+If a single device is the source of the finding, use the `Host` profile and populate `device`.
 
 ### `end_time`
 

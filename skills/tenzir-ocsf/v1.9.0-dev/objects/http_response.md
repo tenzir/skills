@@ -53,7 +53,7 @@ The length of the entire HTTP response, in number of bytes.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The descriptive message associated with the event or object. See specific usage.
+The HTTP status code and reason phrase returned from the server.
 
 ### `status`
 

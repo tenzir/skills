@@ -53,7 +53,7 @@ Analyst commentary or source commentary about an indicator or OSINT analysis.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The confidence of an indicator being malicious and/or pertinent, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source or analyst.
+The confidence of an indicator or analysis, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source or analyst.
 
 ### `confidence_id`
 
@@ -69,7 +69,7 @@ The confidence of an indicator being malicious and/or pertinent, normalized to t
 - `3`: `High`
 - `99`: `Other` - The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
 
-The normalized confidence refers to the accuracy of collected information related to the OSINT or how pertinent an indicator or analysis is to a specific event or finding. A low confidence means that the information collected or analysis conducted lacked detail or is not accurate enough to qualify an indicator as fully malicious.
+The normalized identifier of the confidence level, reflecting the accuracy or pertinence of the OSINT indicator or analysis. A low confidence indicates that the collected information lacked sufficient detail or accuracy to fully qualify the indicator as malicious. When the value is `99` (Other), the `confidence` attribute must contain the source-specific label.
 
 ### `created_time`
 

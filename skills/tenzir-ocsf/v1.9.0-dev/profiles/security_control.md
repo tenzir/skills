@@ -156,7 +156,7 @@ The confidence, normalized to the caption of the confidence_id value. In the cas
 - `3`: `High`
 - `99`: `Other` - The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
 
-The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
+The normalized confidence refers to the accuracy of the security control or alert. An analytic with a low confidence means that the alerts may be noisy or may not be malicious in nature.
 
 ### `confidence_score`
 
@@ -164,7 +164,7 @@ The normalized confidence refers to the accuracy of the rule that created the fi
 - **Requirement**: optional
 - **Group**: context
 
-The confidence score as reported by the event source.
+The confidence score as reported by the event source. If `confidence_id` is 99 'Other', it should be the same as `confidence` if both are populated.
 
 ### `disposition`
 

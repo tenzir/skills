@@ -231,6 +231,7 @@
 - [Privilege Attack Info](objects/privilege_attack_info.md)
 - [Privilege Info](objects/privilege_info.md)
 - [Scan](objects/scan.md)
+- [Sensor Information](objects/sensor_info.md)
 - [Service Privilege Analysis](objects/service_privilege_analysis.md)
 - [Time Span](objects/timespan.md)
 - [Token](objects/token.md)

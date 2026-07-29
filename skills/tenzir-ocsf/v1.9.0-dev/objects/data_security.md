@@ -41,7 +41,7 @@ Specific pattern, algorithm, fingerprint, or model used for detection.
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The name of the type of data security tool or system that the finding, detection, or alert originated from. E.g., Endpoint, Secure Email Gateway, etc.
+The data security tool or system that the finding, detection, or alert originated from, normalized to the caption of `detection_system_id`. E.g., Endpoint, Secure Email Gateway, etc.
 
 ### `detection_system_id`
 
@@ -51,7 +51,6 @@ The name of the type of data security tool or system that the finding, detection
 
 #### Enum values
 
-- `0`: `Unknown` - The type is not mapped. See the `detection_system` attribute, which contains a data source specific value.
 - `1`: `Endpoint` - A dedicated agent or sensor installed on a device, either a dedicated data security tool or an Endpoint Detection & Response (EDR) tool that can detect sensitive data and/or enforce data security policies. E.g., Forcepoint DLP, Symantec DLP, Microsoft Defender for Endpoint (MDE).
 - `2`: `DLP Gateway` - A Data Loss Prevention (DLP) gateway that is positioned in-line of an information store such as a network share, a database, or otherwise that can detect sensitive data and/or enforce data security policies.
 - `3`: `Mobile Device Management` - A Mobile Device Management (MDM) or Enterprise Mobility Management (EMM) tool that can detect sensitive data and/or enforce data security policies on mobile devices (e.g., cellphones, tablets, End User Devices [EUDs]).
@@ -64,9 +63,8 @@ The name of the type of data security tool or system that the finding, detection
 - `10`: `Application-Level DLP` - A built in Data Loss Prevention (DLP) or other data security capability within a tool or platform such as an Enterprise Resource Planning (ERP) or Customer Relations Management (CRM) tool that can detect sensitive data and/or enforce data security policies.
 - `11`: `Developer Security` - Any Developer Security tool such as an Infrastructure-as-Code (IAC) security scanner, Secrets Detection, or Secure Software Development Lifecycle (SSDLC) tool that can detect sensitive data and/or enforce data security policies. E.g., TruffleHog, GitGuardian, Git-Secrets.
 - `12`: `Data Security Posture Management` - A Data Security Posture Management (DSPM) tool is a continuous monitoring and data discovery solution that can detect sensitive data and/or enforce data security policies for local and cloud environments. E.g., Cyera, Sentra, IBM Polar Security.
-- `99`: `Other` - Any other type of detection system or a multi-variate system made up of several other systems.
 
-The type of data security tool or system that the finding, detection, or alert originated from.
+The normalized identifier of the data security tool or system type from which the finding, detection, or alert originated. When the type is not listed, use `99` (Other) and populate `detection_system` with the source-specific label.
 
 ### `pattern_match`
 
