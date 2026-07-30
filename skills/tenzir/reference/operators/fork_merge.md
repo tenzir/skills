@@ -77,4 +77,4 @@ publish "prioritized"
 
 ## See Also
 
-[`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)

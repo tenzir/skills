@@ -99,5 +99,3 @@ Use live lookups when you need deeper context for a specific indicator, such as 
 
 * [Install a package](../guides/packages/install-a-package.md)
 * [Enrichment](../explanations/enrichment.md)
-* [Tenzir Library](https://app.tenzir.com/library)
-* [alphaMountain](https://www.alphamountain.ai)
