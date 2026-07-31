@@ -69,6 +69,38 @@ to_kafka "alerts"
 
 All subscriber pipelines receive the same events independently.
 
+### Route with event labels
+
+An upstream pipeline can attach OCSF labels when downstream routing needs an event-level classification but not a security judgment. This classifier sends production endpoint events to deeper analysis and treats lab endpoint events as noise. The `add` function preserves existing labels and avoids duplicates:
+
+```tql
+// Upstream classification pipeline
+if device.hostname?.starts_with("prod-") {
+  metadata.labels = metadata.labels.add("deep-analysis")
+} else if device.hostname?.starts_with("lab-") {
+  metadata.labels = metadata.labels.add("noise")
+}
+publish "classified-events"
+```
+
+Later subscribers can act on either label independently of the classifier:
+
+```tql
+// Send production endpoint events to deeper analysis.
+subscribe "classified-events"
+where "deep-analysis" in metadata.labels?
+to_kafka "deep-analysis"
+```
+
+```tql
+// Archive lab endpoint noise separately.
+subscribe "classified-events"
+where "noise" in metadata.labels?
+to_file "noise.jsonl" { write_ndjson }
+```
+
+`metadata.labels` classifies the event for consumers. It does not express that the event may require immediate attention. To make that judgment, follow the guide to [tag an event as an alert](../detection/model-detections-in-ocsf.md#tag-an-event-as-an-alert).
+
 ### Dynamic topics
 
 Route events to different topics based on content:

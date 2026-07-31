@@ -44,7 +44,7 @@ Tenzir publishes the following skills:
 * `tenzir-create-pull-requests`: Open pull requests, add changelog entries, and link documentation PRs.
 * `tenzir-design-system`: Use frontend design tokens, components, and brand assets.
 * `tenzir-ship`: Write changelog entries, release notes, and GitHub releases.
-* `tenzir-update-docs`: Coordinate docs.tenzir.com updates alongside code changes.
+* `tenzir-update-docs`: Coordinate documentation updates alongside code changes.
 * `tenzir-technical-writing`: Write documentation in Tenzir’s technical writing style.
 
 ## Install skills

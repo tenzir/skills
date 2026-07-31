@@ -7,9 +7,9 @@ section: "Docs"
 
 # AWS Authentication
 
-> Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared awsiam option used by froms3, tos3, fromamazonsqs, toamazonsqs, fromamazoncloudwatch, toamazoncloudwatch, fromkafka, and tokafka.
+> Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared awsiam option used by froms3, tos3, fromamazonsqs, toamazonsqs, fromamazoncloudwatch, toamazoncloudwatch, fromkafka, tokafka, and toiceberg. For toiceberg against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
 
-Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md), [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md), [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md), [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md), [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md), [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md), and [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md).
+Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md), [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md), [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md), [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md), [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md), [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md), [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md), and [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md). For [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md) against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
 
 ## Local usage with the AWS CLI
 
@@ -40,7 +40,7 @@ export AWS_PROFILE=my-profile
 tenzir 'from_s3 "s3://my-bucket/data.json"'
 ```
 
-Profiles defined in `~/.aws/config` can chain into other profiles, assume roles with MFA, or use SSO. Tenzir transparently follows these mechanisms through the AWS SDK.
+Profiles defined in `~/.aws/config` can chain into other profiles, assume roles with MFA, use SSO, or run an external `credential_process`. Tenzir transparently follows these mechanisms through the AWS SDK, and reruns a `credential_process` when its temporary credentials need to be refreshed, so long-running pipelines keep authenticating without restarts.
 
 ### Configuring credentials for the service user
 
@@ -89,6 +89,27 @@ Exactly one of the following token sources must be specified in `web_identity`:
 
 Tenzir refreshes credentials automatically before expiration, with exponential backoff retry for transient failures, making this suitable for long-running pipelines.
 
+## IAM Roles Anywhere
+
+For workloads outside AWS that cannot use web identity federation, [IAM Roles Anywhere](https://docs.aws.amazon.com/rolesanywhere/latest/userguide/getting-started.html) exchanges an X.509 client certificate for temporary role credentials. Configure the AWS `aws_signing_helper` as a `credential_process` in a profile:
+
+```ini
+[profile tenzir-writer]
+region = eu-central-1
+credential_process = /usr/local/bin/aws_signing_helper credential-process --certificate /etc/tenzir/aws/client.pem --private-key /etc/tenzir/aws/client-key.pem --trust-anchor-arn arn:aws:rolesanywhere:REGION:ACCOUNT_ID:trust-anchor/TRUST_ANCHOR_ID --profile-arn arn:aws:rolesanywhere:REGION:ACCOUNT_ID:profile/PROFILE_ID --role-arn arn:aws:iam::ACCOUNT_ID:role/TenzirWriter
+```
+
+Select the profile and Region in the Tenzir service environment:
+
+```bash
+export AWS_PROFILE=tenzir-writer
+export AWS_REGION=eu-central-1
+```
+
+The signing helper is a separate AWS executable, not included with Tenzir. Download it and verify its published checksum as described in the [AWS credential helper documentation](https://docs.aws.amazon.com/rolesanywhere/latest/userguide/credential-helper.html), and keep the private key readable only by the user that runs `tenzir-node`.
+
+The AWS SDK reruns the `credential_process` before the temporary credentials expire, so long-running pipelines keep authenticating without restarts. Do not copy the temporary credentials the helper returns into static `aws_iam` fields: they never refresh there, and the pipeline stops authenticating when they expire. When one process needs multiple AWS identities, reference the profile explicitly with `aws_iam={profile: "tenzir-writer"}`; otherwise prefer the default chain with `AWS_PROFILE`.
+
 ## Static credentials
 
 Pass an access key and secret directly. The `access_key_id` and `secret_access_key` options must be specified together. Wrap secrets with [`secret`](https://tenzir.com/docs/reference/functions/secret.md) to keep them out of pipeline definitions:
@@ -121,10 +142,12 @@ The role’s trust policy must allow your active principal (for example an EC2 i
 * [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md)
 * [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md)
 * [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md)
+* [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
 * [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
 * [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
 * [Amazon CloudWatch Logs](../integrations/amazon/cloudwatch.md)
+* [AWS Glue](../integrations/amazon/glue.md)
 * [Amazon MSK](../integrations/amazon/msk.md)
 * [Amazon S3](../integrations/amazon/s3.md)
 * [Amazon Security Lake](../integrations/amazon/security-lake.md)

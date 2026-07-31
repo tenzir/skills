@@ -280,9 +280,29 @@ Add threat intelligence to OCSF enrichments, observables, and OSINT fields
 
 Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
 
-#### [Execute Sigma rules](guides/enrichment/execute-sigma-rules.md)
+#### [Match events with TQL](guides/detection/match-events-with-tql.md)
 
-Run Sigma detection rules on parsed Windows Event Logs and OCSF process events
+Write single-event detections over OCSF events and package their matching and output logic as reusable TQL operators
+
+#### [Model detections in OCSF](guides/detection/model-detections-in-ocsf.md)
+
+Choose an OCSF representation for alertable activity, create Detection Findings, and model their lifecycle
+
+#### [Detect over time windows](guides/detection/detect-over-time-windows.md)
+
+Build streaming detections with event-time windows, from failure thresholds to statistical baselines, with duplicate suppression
+
+#### [Create multi-stage detectors](guides/detection/create-multi-stage-detectors.md)
+
+Combine independent detections into higher-confidence verdicts with correlation combinators, cross-stage state, and suppression
+
+#### [Execute Sigma rules](guides/detection/execute-sigma-rules.md)
+
+Run Sigma rules on parsed and OCSF events, generate findings, and implement unsupported features and correlations in TQL
+
+#### [Scan bytes with YARA](guides/detection/scan-bytes-with-yara.md)
+
+Run YARA rules on files and byte streams in the pipeline and turn matches into OCSF Detection Findings
 
 #### [Slice and sample data](guides/optimization/slice-and-sample-data.md)
 
@@ -487,6 +507,10 @@ Operators accept secrets as parameters for sensitive values, such as authenticat
 #### [Enrichment](explanations/enrichment.md)
 
 Enrichment means adding contextual data to events.
+
+#### [Detections](explanations/detections.md)
+
+Understand how Tenzir matches, correlates, and models security evidence as detection results
 
 #### [Packages](explanations/packages.md)
 
@@ -862,9 +886,17 @@ Send, receive, and manage messages between distributed applications.
 
 Send and receive messages between systems using a standardized, protocol-based approach.
 
+#### [Apache Iceberg integration](integrations/iceberg.md)
+
+An open table format for building lakehouses on object storage, with atomic commits, hidden partitioning, and schema evolution.
+
 #### [ArcSight integration](integrations/arcsight.md)
 
 OpenText ArcSight is a SIEM and log management ecosystem.
+
+#### [AWS Glue integration](integrations/amazon/glue.md)
+
+Write Iceberg tables to the AWS Glue Data Catalog and query them with Athena.
 
 #### [Azure Blob Storage integration](integrations/microsoft/azure-blob-storage.md)
 
@@ -881,6 +913,10 @@ Connect the Cisco security portfolio: firewall and IPS events from ASA and Firep
 #### [ClickHouse integration](integrations/clickhouse.md)
 
 Send structured events to ClickHouse tables.
+
+#### [Cloud Lakehouse integration](integrations/google/cloud-lakehouse.md)
+
+Write Iceberg tables to Google's Lakehouse for Apache Iceberg (formerly BigLake) and query them with BigQuery.
 
 #### [CrowdStrike integration](integrations/crowdstrike.md)
 

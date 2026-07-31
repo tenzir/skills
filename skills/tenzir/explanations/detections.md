@@ -1,0 +1,89 @@
+---
+title: "Detections"
+description: "Understand how Tenzir matches, correlates, and models security evidence as detection results"
+canonical: https://tenzir.com/docs/explanations/detections
+source: https://tenzir.com/docs/explanations/detections.md
+section: "Docs"
+---
+
+# Detections
+
+> Understand how Tenzir matches, correlates, and models security evidence as detection results
+
+A **detection** turns security telemetry into a judgment that something may require attention. In Tenzir, a detection is a data pipeline rather than a separate subsystem: it can prepare evidence, match conditions, correlate sightings, model a result, and route that result with the same TQL building blocks used elsewhere.
+
+This model keeps the matching language independent from the result contract. TQL, Sigma, and YARA identify different kinds of evidence, and each can feed the same downstream representation.
+
+## Follow the detection flow
+
+A complete detection can include five stages:
+
+| Stage     | Purpose                                                               |
+| --------- | --------------------------------------------------------------------- |
+| Prepare   | Parse, normalize, and enrich the evidence that the detection reads.   |
+| Match     | Identify events or bytes that satisfy a condition.                    |
+| Correlate | Combine sightings across entities, time windows, or persistent state. |
+| Model     | Turn the result into an alertable source event or an OCSF finding.    |
+| Deliver   | Route, store, or forward the result for triage and response.          |
+
+Not every detection needs every stage. A single-event predicate can match and model a finding immediately. A behavioral detector may aggregate many events before it has a result, while a multi-stage detector may consume findings from other detections instead of raw telemetry.
+
+Normalization and enrichment make matching logic easier to reuse. OCSF gives structured detections stable field paths across data sources, while contexts add asset, identity, and threat intelligence that can change the meaning of an otherwise ordinary event. The explanations of [enrichment](enrichment.md) and the guide on [mapping events to OCSF](../guides/normalization/map-to-ocsf.md) cover these preparation steps.
+
+## Choose matching logic
+
+Choose the matching language from the evidence and the detection content you already have:
+
+| Evidence and content                         | Matching language                                       | Best fit                                                               |
+| -------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Structured events and native detection logic | [TQL](language.md) | Predicates, transformations, and custom logic over your event schema.  |
+| Structured events and portable rule content  | [Sigma](https://sigmahq.io)                             | Existing Sigma rule sets from public, commercial, or internal sources. |
+| Files, payloads, and other byte streams      | [YARA](https://virustotal.github.io/yara/)              | Rules that inspect raw content rather than structured fields.          |
+
+These languages compose rather than compete. TQL provides the surrounding pipeline even when Sigma or YARA performs the match. The guides on [matching events with TQL](../guides/detection/match-events-with-tql.md), [executing Sigma rules](../guides/detection/execute-sigma-rules.md), and [scanning bytes with YARA](../guides/detection/scan-bytes-with-yara.md) show each matching model.
+
+## Correlate evidence over time
+
+A match can stand on its own or become one input to a broader judgment:
+
+* A **single-event detection** evaluates one event independently.
+* A **windowed detection** counts or compares events within bounded event-time intervals. Thresholds and rolling baselines are common examples.
+* A **multi-stage detection** combines independent sightings for the same entity, either in any order or as a sequence.
+* A **stateful detection** uses a context when memory must outlive one window or pipeline restart.
+
+Correlation increases context, not automatically confidence. The quality of a combined verdict still depends on the stages, grouping keys, time semantics, and thresholds. The guides on [detecting over time windows](../guides/detection/detect-over-time-windows.md) and [creating multi-stage detectors](../guides/detection/create-multi-stage-detectors.md) cover these tradeoffs.
+
+## Distinguish matches, findings, alerts, and incidents
+
+Detection terms describe different parts of the flow:
+
+| Concept                                                               | Meaning                                                                                                                                    |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Source event                                                          | The activity or observation that entered the detection.                                                                                    |
+| Match or sighting                                                     | Evidence that satisfied matching logic. This is a pipeline result, not an OCSF event class.                                                |
+| [Detection Finding](https://schema.ocsf.io/classes/detection_finding) | An OCSF event that represents an analytic result with its own identity, evidence, triage fields, and lifecycle.                            |
+| Alert                                                                 | An event marked with `is_alert: true` because it may require immediate attention. Alertability is independent of event class and severity. |
+| Incident                                                              | A finding that has entered an incident workflow, not every alert or detection match.                                                       |
+
+When a security control judges an activity as it happens, keep the source activity and apply the OCSF [Security Control profile](https://schema.ocsf.io/profiles/security_control). When analysis produces a separate result, emit an OCSF Detection Finding. A Detection Finding can itself be alertable, but the class does not imply `is_alert: true`.
+
+Stable identities let downstream systems deduplicate findings, track lifecycle updates, and link a combined verdict to its source events. The guide on [modeling detections in OCSF](../guides/detection/model-detections-in-ocsf.md) explains these output choices.
+
+## Compose detections for operation
+
+Package matching and result modeling together when they form one reusable detection. Keep source and destination wiring outside that operator so the same detection can run over historical data, a live topic, or a test fixture.
+
+Topics decouple producers from consumers. A stage can publish every finding without knowing which combinators consume it, while each combinator owns its correlation and suppression policy. This keeps stage evidence available for counting, sequencing, and future compositions.
+
+Treat detections as versioned content: give analytics stable identities, test them against representative fixtures and historical data, and package related operators, pipelines, contexts, and tests together. The guides on [adding operators](../guides/packages/add-operators.md), [adding pipelines](../guides/packages/add-pipelines.md), and [writing tests](../guides/testing/write-tests.md) cover this operational layer.
+
+## See also
+
+* [Enrichment](enrichment.md)
+* [Packages](packages.md)
+* [Match events with TQL](../guides/detection/match-events-with-tql.md)
+* [Model detections in OCSF](../guides/detection/model-detections-in-ocsf.md)
+* [Detect over time windows](../guides/detection/detect-over-time-windows.md)
+* [Create multi-stage detectors](../guides/detection/create-multi-stage-detectors.md)
+* [Execute Sigma rules](../guides/detection/execute-sigma-rules.md)
+* [Scan bytes with YARA](../guides/detection/scan-bytes-with-yara.md)

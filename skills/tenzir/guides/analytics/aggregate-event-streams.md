@@ -7,9 +7,9 @@ section: "Docs"
 
 # Aggregate event streams
 
-> This guide shows you how to aggregate event streams with summarize and window. You’ll learn to count, group, compute statistics, and build bounded event-time detections over streaming data.
+> This guide shows you how to aggregate event streams with summarize and window. You’ll learn to count, group, compute statistics, and apply bounded event-time windows to streaming data.
 
-This guide shows you how to aggregate event streams with [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) and [`window`](https://tenzir.com/docs/reference/operators/window.md). You’ll learn to count, group, compute statistics, and build bounded event-time detections over streaming data.
+This guide shows you how to aggregate event streams with [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) and [`window`](https://tenzir.com/docs/reference/operators/window.md). You’ll learn to count, group, compute statistics, and apply bounded event-time windows to streaming data.
 
 ## Understanding the summarize operator
 
@@ -189,126 +189,7 @@ Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when you n
 
 Unlike [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={frequency: ...}`, [`window`](https://tenzir.com/docs/reference/operators/window.md) assigns events by event time. This lets you tolerate out-of-order data with `tolerance` and group entities inside each event-time window. Put [`group`](https://tenzir.com/docs/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs its own event-time clock.
 
-### Detect brute-force login attempts
-
-The following streaming detection uses OCSF Authentication events. It groups failed logons by user and source IP address, counts failures in 10-minute event-time windows, and emits an alert when a pair exceeds the threshold. The sample records show only the OCSF fields used by the detection:
-
-```tql
-from {time: 2024-01-01T10:00:00, activity_id: 1, status_id: 2, user: {name: "alice"}, src_endpoint: {ip: 10.0.0.5}, dst_endpoint: {hostname: "vpn-1"}},
-     {time: 2024-01-01T10:01:00, activity_id: 1, status_id: 2, user: {name: "alice"}, src_endpoint: {ip: 10.0.0.5}, dst_endpoint: {hostname: "vpn-2"}},
-     {time: 2024-01-01T10:02:00, activity_id: 1, status_id: 2, user: {name: "alice"}, src_endpoint: {ip: 10.0.0.5}, dst_endpoint: {hostname: "vpn-1"}},
-     {time: 2024-01-01T10:03:00, activity_id: 1, status_id: 2, user: {name: "alice"}, src_endpoint: {ip: 10.0.0.5}, dst_endpoint: {hostname: "vpn-2"}},
-     {time: 2024-01-01T10:04:00, activity_id: 1, status_id: 2, user: {name: "alice"}, src_endpoint: {ip: 10.0.0.5}, dst_endpoint: {hostname: "vpn-3"}},
-     {time: 2024-01-01T10:05:00, activity_id: 1, status_id: 2, user: {name: "alice"}, src_endpoint: {ip: 10.0.0.5}, dst_endpoint: {hostname: "vpn-3"}},
-     {time: 2024-01-01T10:06:00, activity_id: 1, status_id: 2, user: {name: "bob"}, src_endpoint: {ip: 10.0.0.8}, dst_endpoint: {hostname: "vpn-1"}}
-where activity_id == 1 and status_id == 2
-window size=10min, on=time, tolerance=30s, idle_timeout=5min {
-  group {user: user.name, src_ip: src_endpoint.ip} {
-    summarize failures=count(), target_hosts=count_distinct(dst_endpoint.hostname)
-    user = $group.user
-    src_ip = $group.src_ip
-    start = $window.start
-    end = $window.end
-  }
-}
-where failures >= 5
-select user, src_ip, failures, target_hosts, start, end
-```
-
-```tql
-{
-  user: "alice",
-  src_ip: 10.0.0.5,
-  failures: 6,
-  target_hosts: 3,
-  start: 2024-01-01T10:00:00Z,
-  end: 2024-01-01T10:10:00Z,
-}
-```
-
-In OCSF Authentication events, `activity_id: 1` means logon and `status_id: 2` means failure. The outer [`group`](https://tenzir.com/docs/reference/operators/group.md) gives every user and source IP pair its own event-time clock. The `idle_timeout` closes sparse keys after wall-clock inactivity so live detections don’t wait indefinitely for the next event from the same key.
-
-This example uses tumbling windows because [`window`](https://tenzir.com/docs/reference/operators/window.md) omits `every`. With `size=10min`, the intervals are `[10:00, 10:10)`, `[10:10, 10:20)`, and so on for each grouped user and source IP pair. An event exactly at `10:10` belongs to the second window because window ends are exclusive.
-
-### Detect SMB traffic spikes
-
-You can combine [`window`](https://tenzir.com/docs/reference/operators/window.md) with statistical aggregations to detect SMB traffic spikes. The next example is a lightweight TQL adaptation of Splunk’s [SMB Traffic Spike](https://github.com/splunk/security_content/blob/4493a82b24dc7e93a612c229e842751c853b96c8/detections/network/smb_traffic_spike.yml) analytic. It starts with pre-aggregated OCSF SMB Activity buckets to keep the detection readable and interleaves the sources by timestamp to match event-time order. The sample records show only the OCSF fields used by the detection.
-
-```tql
-from {time: 2024-01-01T00:00:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 10}},
-     {time: 2024-01-01T00:00:00, src_endpoint: {hostname: "file-server-1"}, traffic: {bytes: 120}},
-     {time: 2024-01-01T00:10:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 11}},
-     {time: 2024-01-01T00:10:00, src_endpoint: {hostname: "file-server-1"}, traffic: {bytes: 118}},
-     {time: 2024-01-01T00:20:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 9}},
-     {time: 2024-01-01T00:20:00, src_endpoint: {hostname: "file-server-1"}, traffic: {bytes: 121}},
-     {time: 2024-01-01T00:30:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 10}},
-     {time: 2024-01-01T00:30:00, src_endpoint: {hostname: "file-server-1"}, traffic: {bytes: 119}},
-     {time: 2024-01-01T00:40:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 10}},
-     {time: 2024-01-01T00:40:00, src_endpoint: {hostname: "file-server-1"}, traffic: {bytes: 122}},
-     {time: 2024-01-01T00:50:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 10}},
-     {time: 2024-01-01T00:50:00, src_endpoint: {hostname: "file-server-1"}, traffic: {bytes: 120}},
-     {time: 2024-01-01T01:00:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 80}},
-     {time: 2024-01-01T01:00:00, src_endpoint: {hostname: "file-server-1"}, traffic: {bytes: 123}}
-window size=70min, every=10min, on=time {
-  summarize src=src_endpoint.hostname,
-            samples=count(),
-            avg_bytes=mean(traffic.bytes),
-            stdev_bytes=stddev(traffic.bytes),
-            current_bytes=max(traffic.bytes)
-  upper_bound = avg_bytes + stdev_bytes * 2
-  where samples >= 5 and current_bytes > upper_bound
-  start = $window.start
-  end = $window.end
-}
-select src, current_bytes, upper_bound, start, end
-sort start
-```
-
-```tql
-{
-  src: "workstation-7",
-  current_bytes: 80,
-  upper_bound: 69.00145770426485,
-  start: 2024-01-01T00:00:00Z,
-  end: 2024-01-01T01:10:00Z,
-}
-{
-  src: "workstation-7",
-  current_bytes: 80,
-  upper_bound: 73.85436210874914,
-  start: 2024-01-01T00:10:00Z,
-  end: 2024-01-01T01:20:00Z,
-}
-```
-
-The `workstation-7` bucket with `80` bytes exceeds the mean plus two standard deviations in two 70-minute windows, while the steady file-server traffic stays below its bound. The simplified detector uses the maximum bucket in each window as the candidate spike.
-
-This example uses a hopping window: `size=70min` defines the lookback and `every=10min` moves the window forward every 10 minutes. Around midnight, Tenzir evaluates intervals such as `[00:00, 01:10)`, `[00:10, 01:20)`, and `[00:20, 01:30)`. A 10-minute traffic bucket can participate in multiple open windows, which gives rolling context but can also produce repeated alerts for the same spike unless you add downstream suppression.
-
-Pre-aggregate raw OCSF SMB events
-
-If your input stream contains one OCSF SMB Activity event per file operation, pre-aggregate it into 10-minute bucket events before running the spike detector:
-
-```tql
-from {class_uid: 4006, time: 2024-01-01T00:00:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 4}},
-     {class_uid: 4006, time: 2024-01-01T00:03:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 6}},
-     {class_uid: 4006, time: 2024-01-01T00:10:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 11}}
-where class_uid == 4006
-window size=10min, on=time, tolerance=2min {
-  summarize src=src_endpoint.hostname, smb_bytes=sum(traffic.bytes)
-  time = $window.start
-  src_endpoint = {hostname: src}
-  traffic = {bytes: smb_bytes}
-}
-select time, src_endpoint, traffic
-```
-
-```tql
-{time: 2024-01-01T00:00:00Z, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 10}}
-{time: 2024-01-01T00:10:00Z, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 11}}
-```
-
-This keeps the detector focused on the rolling statistical comparison while the pre-aggregation step handles the raw event volume.
+For complete streaming detections built on these mechanics, such as brute-force login thresholds and statistical traffic-spike baselines with alert suppression, follow the guide on [detecting over time windows](../detection/detect-over-time-windows.md).
 
 ### Compare TQL with KQL, SPL, and Cribl Stream
 

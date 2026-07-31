@@ -125,3 +125,8 @@ You can produce test matches by feeding bytes into the `yara` operator. You will
 ```
 
 Each match has a `rule` field that describes the rule and a `matches` record indexed by string identifier to report a list of matches per rule string.
+
+## See Also
+
+* [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md)
+* [Scan bytes with YARA](../../guides/detection/scan-bytes-with-yara.md)

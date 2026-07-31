@@ -19,7 +19,7 @@ sigma path:string, [refresh_interval=duration]
 
 The `sigma` operator executes [Sigma rules](https://github.com/SigmaHQ/sigma) on its input. If a rule matches, the operator emits a `tenzir.sigma` event that wraps the input record into a new record along with the matching rule. The operator discards all events that do not match the provided rules.
 
-The operator runs single Sigma *detection* rules. It does not execute Sigma *correlation* rules (those with a `correlation:` block, such as `event_count`, `value_count`, `temporal`, and `temporal_ordered`). Express these with [`window`](https://tenzir.com/docs/reference/operators/window.md) and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) instead, as shown in [Execute Sigma rules](../../guides/enrichment/execute-sigma-rules.md#express-correlation-rules-in-tql).
+The operator runs single Sigma *detection* rules. It does not execute Sigma *correlation* rules (those with a `correlation:` block, such as `event_count`, `value_count`, `temporal`, and `temporal_ordered`). Express these with [`window`](https://tenzir.com/docs/reference/operators/window.md) and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) instead, as shown in [the Sigma correlation guide](../../guides/detection/execute-sigma-rules.md#map-correlation-types-to-tql).
 
 Transpilation Process
 
@@ -135,5 +135,5 @@ When you add a new file to `/tmp/rules`, the `sigma` operator transpiles it and 
 
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
-* [Execute Sigma rules](../../guides/enrichment/execute-sigma-rules.md)
+* [Execute Sigma rules](../../guides/detection/execute-sigma-rules.md)
 * [Expressions](../expressions.md)

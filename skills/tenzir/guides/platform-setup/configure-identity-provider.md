@@ -236,22 +236,55 @@ Therefore, some organizations forbid the use of tokens with `offline_access` per
 
 The Tenzir Platform supports authentication using externally-supplied JWTs, which is useful for scenarios where the platform runs behind a proxy that handles authentication, such as Google Cloud IAP or other enterprise proxies.
 
-To configure external JWT authentication, add the `PRIVATE_JWT_FROM_HEADER` environment variable with the name of the HTTP header that contains the JWT token to the environment of the Tenzir UI:
+To enable external JWT authentication, add the `PRIVATE_JWT_FROM_HEADER` environment variable with the name of the HTTP header that carries the JWT to the environment of the Tenzir UI:
 
 ```sh
-PRIVATE_JWT_FROM_HEADER=X-Goog-IAP-JWT-Assertion
+PRIVATE_JWT_FROM_HEADER=x-goog-iap-jwt-assertion
 ```
 
-You must also configure the trusted issuers and audiences using the `TENZIR_PLATFORM_OIDC_TRUSTED_AUDIENCES` environment variable. This variable accepts a JSON object or array of objects containing the issuer and audiences that the platform should accept:
+The platform fully verifies the token it reads from that header. It is not enough for the header to be present: each token must meet the following requirements.
+
+* The token must be a JWT signed with **RS256 or ES256**. Symmetric (HS256) or opaque tokens are rejected.
+* The token’s `iss` claim must match one of the trusted issuers you configure, and its `aud` claim must match one of that issuer’s trusted audiences.
+* The token must carry a `sub` claim, which the platform uses as the user ID, and a valid `exp` claim.
+* The issuer’s public signing keys must be reachable by the platform, either through the standard OpenID discovery document at `<issuer>/.well-known/openid-configuration`, or through an explicit `jwks_uri` that you provide (see below).
+
+You must also configure the trusted issuers and audiences using the `TENZIR_PLATFORM_OIDC_TRUSTED_AUDIENCES` environment variable. This variable accepts a JSON object, or an array of objects, containing the issuer and audiences that the platform should accept. Each entry may optionally include a `jwks_uri`. Provide it when the issuer does not serve an OpenID discovery document at the standard location, so the platform knows where to fetch the signing keys:
 
 ```sh
-# Single issuer configuration
-TENZIR_PLATFORM_OIDC_TRUSTED_AUDIENCES='{"issuer": "https://cloud.google.com/iap", "audiences": ["your-audience"]}'
+# Single issuer that serves OpenID discovery
+TENZIR_PLATFORM_OIDC_TRUSTED_AUDIENCES='{"issuer": "https://accounts.google.com", "audiences": ["your-audience"]}'
+
+
+# Issuer without a discovery document, using an explicit jwks_uri
+TENZIR_PLATFORM_OIDC_TRUSTED_AUDIENCES='{"issuer": "https://cloud.google.com/iap", "audiences": ["your-audience"], "jwks_uri": "https://www.gstatic.com/iap/verify/public_key-jwk"}'
 
 
 # Multiple issuers configuration
 TENZIR_PLATFORM_OIDC_TRUSTED_AUDIENCES='[
   {"issuer": "https://accounts.google.com", "audiences": ["audience1"]},
-  {"issuer": "https://cloud.google.com/iap", "audiences": ["audience2"]}
+  {"issuer": "https://cloud.google.com/iap", "audiences": ["audience2"], "jwks_uri": "https://www.gstatic.com/iap/verify/public_key-jwk"}
 ]'
 ```
+
+Google Cloud IAP
+
+IAP signs its assertions with ES256, sends them in the `x-goog-iap-jwt-assertion` header, and uses the issuer `https://cloud.google.com/iap`. That issuer does not publish an OpenID discovery document, so you must set `jwks_uri` to `https://www.gstatic.com/iap/verify/public_key-jwk` as shown above. The `audiences` value is the IAP audience string for your resource, which has the form `/projects/PROJECT_NUMBER/global/backendServices/SERVICE_ID` (or the App Engine variant).
+
+#### Token claims
+
+The platform reads the following claims from the token. The first five are standard registered claims that any well-formed OAuth or OIDC token already carries, and they are all required:
+
+| Claim     | Required | How the platform uses it                                                                                                                    |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `iss`     | Yes      | Identifies the token’s issuer. Must match one of your trusted issuers, and selects which signing keys verify the token.                     |
+| `sub`     | Yes      | Stable, unique identifier for the user. The platform uses it as the user ID.                                                                |
+| `aud`     | Yes      | Intended audience of the token. Must match one of the trusted audiences you configure for the issuer.                                       |
+| `exp`     | Yes      | Expiration time. The platform rejects expired tokens.                                                                                       |
+| `iat`     | Yes      | Time the token was issued.                                                                                                                  |
+| `email`   | Optional | Matched against email-domain access rules, and shown in the user interface.                                                                 |
+| `name`    | Optional | Display name shown in the user interface.                                                                                                   |
+| `picture` | Optional | URL of a profile picture shown in the user interface.                                                                                       |
+| `mfa`     | Optional | Boolean indicating whether the user completed a multi-factor authentication challenge. Used by organizations that require sign-in with MFA. |
+
+Workspace and organization access rules can additionally match on provider-specific claims, such as an organization or role claim. You configure those claim names as part of the access rules rather than here.

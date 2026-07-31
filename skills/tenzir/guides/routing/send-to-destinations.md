@@ -53,13 +53,22 @@ to_amazon_kinesis "security-events"
 
 ### Data stores
 
-Send events to data stores like [ClickHouse](../../integrations/clickhouse.md) and [Snowflake](../../integrations/snowflake.md).
+Send events to data stores like [ClickHouse](../../integrations/clickhouse.md), [Apache Iceberg](../../integrations/iceberg.md), and [Snowflake](../../integrations/snowflake.md).
 
 Send structured events to ClickHouse:
 
 ```tql
 subscribe "security-events"
 to_clickhouse table="alerts", primary=time, mode="create_append", tls=false
+```
+
+Write to an Apache Iceberg lakehouse table through a REST catalog:
+
+```tql
+subscribe "security-events"
+to_iceberg "security.events",
+  catalog="https://catalog.example.com",
+  partition_by=[day(time)]
 ```
 
 Write batches to Snowflake with bulk ingestion:
@@ -217,4 +226,5 @@ to_kafka f"events.{event_type}"
 * [Load-balance pipelines](load-balance-pipelines.md)
 * [Split and merge streams](split-and-merge-streams.md)
 * [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
+* [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
 * [`to_snowflake`](https://tenzir.com/docs/reference/operators/to_snowflake.md)

@@ -167,5 +167,6 @@ group {user: user, src_ip: src_ip} {
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [`every`](https://tenzir.com/docs/reference/operators/every.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
+* [Detect over time windows](../../guides/detection/detect-over-time-windows.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

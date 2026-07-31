@@ -7,9 +7,9 @@ section: "Docs"
 
 # Map to OCSF
 
-> This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.
+> This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and finalize your output with Tenzir’s native OCSF operators. The guide assumes you’ve already identified your target OCSF event class and profiles.
 
-This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and validate your output. The guide assumes you’ve already identified your target OCSF event class and profiles.
+This guide shows you how to write OCSF mapping operators in TQL. You’ll learn to organize mappings by attribute groups, handle unmapped fields, and finalize your output with Tenzir’s native OCSF operators. The guide assumes you’ve already identified your target OCSF event class and profiles.
 
 OCSF Tutorial
 
@@ -136,7 +136,7 @@ $event = {...$event.ocsf, unmapped: $event.panos}
 * **Only use `drop` for multi-use fields**: When a field appears in multiple mappings, drop it after the last use. Prefer `move` and single assignments.
 * **Keep unmapped residue**: Fields left under the source namespace still need review or an intentional decision to preserve source-specific data.
 * **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) expand the minimal event before validation.
-* **Validate the result**: Run [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) and [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) after the mapper returns the OCSF event.
+* **Finalize the result**: After the mapper returns the OCSF event, set `type_uid` and use Tenzir’s native OCSF operators to derive enum siblings and validate the event against its schema.
 
 Why use `$event`?
 
@@ -279,14 +279,38 @@ ocsf::derive
 ocsf::cast
 ```
 
-### Validation gate
+## Use native OCSF operators
 
-The [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) operator is the primary schema validation gate. It ensures that your mapping produces schema-compliant output.
+Tenzir ships operators for completing, validating, and reducing OCSF events:
 
-Your mapping is complete once [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) no longer emits warnings.
+| Operator                                                                     | Purpose                                                                                                                                               |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) | Derives integer and string enum siblings in either direction and warns about inconsistent pairs.                                                      |
+| [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)     | Casts an event to the OCSF type selected by its version, class, profiles, and extensions. It warns about fields outside that schema and removes them. |
+| [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md)     | Removes fields according to their OCSF requirement levels when you need to reduce event size.                                                         |
+
+Use derivation and casting at the boundary after your mapping operator returns:
+
+```tql
+paloalto::ngfw::ocsf::map
+type_uid = class_uid * 100 + activity_id
+ocsf::derive
+ocsf::cast
+```
+
+Set `type_uid` explicitly because [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) does not currently compute it. The operator fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling.
+
+The [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) operator is the primary schema validation gate. Your mapping is complete when it no longer emits warnings. Use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when a downstream system requires those output shapes or physical representations.
+
+After validation, optionally run [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md) to minimize events for storage or transport. Its options let you keep or drop fields that OCSF marks as optional or recommended.
+
+Use `ocsf::cast` instead of `ocsf::apply`
+
+The [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md) operator is deprecated. Use [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) for new pipelines.
 
 ## See also
 
+* [Model detections in OCSF](../detection/model-detections-in-ocsf.md)
 * [Clean up values](clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ocsf-skill)
 * [Map to ASIM](map-to-asim.md)
