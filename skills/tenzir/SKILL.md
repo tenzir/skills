@@ -1006,6 +1006,10 @@ Run a lake-native SIEM on ClickHouse for search, detections, cases, and AI-assis
 
 NATS is a messaging system for services, edge deployments, and cloud-native applications.
 
+#### [NetFlow integration](integrations/netflow.md)
+
+Collect and process NetFlow v5, NetFlow v9, and IPFIX flow telemetry.
+
 #### [Network Interface Card integration](integrations/nic.md)
 
 Acquire packets from the network and process them with pipelines.

@@ -229,6 +229,7 @@
 - [read_leef](operators/read_leef.md): Parses an incoming [LEEF](https://www.ibm.com/docs/en/dsm?topic=overview-leef-event-components) stream into events.
 - [read_lines](operators/read_lines.md): Parses an incoming bytes stream into events.
 - [read_ndjson](operators/read_ndjson.md): Parses an incoming NDJSON (newline-delimited JSON) stream into events.
+- [read_netflow](operators/read_netflow.md): Parses NetFlow v5, NetFlow v9, and IPFIX messages into flow events.
 - [read_parquet](operators/read_parquet.md): Reads events from a Parquet byte stream.
 - [read_pcap](operators/read_pcap.md): Parses PCAP byte streams into packet events.
 - [read_ssv](operators/read_ssv.md): Read SSV (Space-Separated Values) from a byte stream.

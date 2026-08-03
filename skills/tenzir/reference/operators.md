@@ -1459,6 +1459,14 @@ Parses an incoming NDJSON (newline-delimited JSON) stream into events.
 read_ndjson
 ```
 
+### [read\_netflow](operators/read_netflow.md)
+
+Parses NetFlow v5, NetFlow v9, and IPFIX messages into flow events.
+
+```tql
+read_netflow
+```
+
 ### [read\_parquet](operators/read_parquet.md)
 
 Reads events from a Parquet byte stream.
