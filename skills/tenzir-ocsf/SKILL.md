@@ -22,8 +22,9 @@ one version per answer.
 - [1.5.0](v1.5.0.md)
 - [1.6.0](v1.6.0.md)
 - [1.7.0](v1.7.0.md)
-- **[1.8.0](v1.8.0.md)** ← latest stable
-- [1.9.0-dev](v1.9.0-dev.md) ← unreleased development snapshot
+- [1.8.0](v1.8.0.md)
+- **[1.9.0](v1.9.0.md)** ← latest stable
+- [1.10.0-dev](v1.10.0-dev.md) ← unreleased development snapshot
 
 Each version page links to its classes, objects, profiles, extensions, and
 types.
