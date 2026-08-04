@@ -103,4 +103,8 @@ Wait briefly for the run to register, find its ID, then watch it.
 Verify:
 
 - If the run succeeds, report the GitHub release URL.
+- A project whose workflow passes `create-github-release: false` to the
+  reusable workflow stops after pushing the tag, so no release exists to link.
+  Report the tag and the run URL instead of treating the missing release as a
+  failure.
 - If it fails, report the run URL so the user can inspect the logs.
