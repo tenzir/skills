@@ -35,6 +35,12 @@ from {
 }
 ```
 
+Arithmetic operators propagate `null` without a warning. If either operand is `null`, the expression evaluates to `null`.
+
+Comparisons have explicit null behavior. If both operands are `null`, `==`, `>=`, and `<=` evaluate to `true`, `!=` evaluates to `false`, and strict ordering with `>` or `<` evaluates to `null`. If exactly one operand is `null`, `==` evaluates to `false`, `!=` evaluates to `true`, and ordered comparisons evaluate to `null`.
+
+Unsupported operations, such as `5 in null`, continue to emit a warning.
+
 The `else` operator provides null coalescing:
 
 ```tql
