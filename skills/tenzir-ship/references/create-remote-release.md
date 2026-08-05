@@ -57,8 +57,12 @@ gh workflow run <workflow-file> \
 ```
 
 Do not specify a version bump unless explicitly requested. The workflow will
-pick the appropriate bump according to the changelog entry types. If an
-outstanding release candidate exists, this same version-less invocation
+pick the appropriate bump according to the changelog entry types. For a project
+whose latest stable release is `0.x`, a breaking entry triggers a minor bump and
+automatic inference never selects `1.0.0`. Use `bump=major` or an explicit
+`version=1.0.0` when the user chooses to declare the first stable release.
+Starting with `1.0.0`, breaking entries trigger major bumps. If an outstanding
+release candidate exists, this same version-less invocation
 promotes the latest RC to its matching stable release automatically. This is
 the only promotion path for the active RC. Promotion is cumulative: entries
 added to the unreleased queue after the last candidate snapshot are folded

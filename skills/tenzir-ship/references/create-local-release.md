@@ -66,6 +66,12 @@ This auto-bumps the version to the next version according to the set of
 available changelog entries. Auto-bumping is the best default and should always
 be used unless the user explicitly asks for something different.
 
+For a project whose latest stable release is `0.x`, a breaking entry triggers a
+minor bump. Automatic inference never transitions such a project to `1.0.0`.
+Use `--major` or pass `1.0.0` explicitly when the user chooses to declare the
+first stable release. Starting with `1.0.0`, breaking entries trigger major
+bumps.
+
 If the latest release is an outstanding release candidate, this same
 version-less command promotes that latest RC to its matching stable release
 automatically. This is the only promotion path after `release create --rc`.
