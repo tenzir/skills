@@ -17,7 +17,7 @@ where(xs:list, any->bool) -> list
 
 ## Description
 
-The `where` function keeps only elements of a list for which a predicate evaluates to `true`.
+The `where` function keeps only elements of a list for which a predicate evaluates to `true`. A `null` result is falsy, so the function discards the element. See [Null is falsy in predicates](../expressions.md#null).
 
 ### `xs: list`
 

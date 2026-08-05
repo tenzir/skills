@@ -39,7 +39,13 @@ Arithmetic operators propagate `null` without a warning. If either operand is `n
 
 Comparisons have explicit null behavior. If both operands are `null`, `==`, `>=`, and `<=` evaluate to `true`, `!=` evaluates to `false`, and strict ordering with `>` or `<` evaluates to `null`. If exactly one operand is `null`, `==` evaluates to `false`, `!=` evaluates to `true`, and ordered comparisons evaluate to `null`.
 
-Unsupported operations, such as `5 in null`, continue to emit a warning.
+Operator-specific behavior takes precedence over generic null propagation. If an otherwise unsupported binary operation has a `null`-typed operand, it evaluates to `null` without a warning. For example, `5 in null` evaluates to `null`.
+
+Logical operators preserve `null` according to three-valued logic. For example, `true and null` and `false or null` evaluate to `null`, while `false and null` evaluates to `false` and `true or null` evaluates to `true`.
+
+Null is falsy in predicates
+
+In predicate positions, `null` is **falsy**: only `true` selects a branch, matches a guard, passes a filter, or contributes to a conditional count. `false` and `null` take the false or non-matching path without a warning. Here, falsy describes control flow. It does not convert `null` into the boolean value `false`, and the expression itself remains `null`. Non-null values other than booleans still produce a type warning. Assertions also continue to warn when an invariant evaluates to `null`, because an assertion reports every failed invariant.
 
 The `else` operator provides null coalescing:
 
@@ -902,6 +908,8 @@ Use conditional expressions when one value depends on a predicate. If you need t
 
 TQL uses Python-style conditional expressions, i.e., `x if condition else y` where `x`, `y`, and `condition` are expressions.
 
+When `condition` evaluates to `null`, it is falsy, so the expression selects `y` without a warning. The condition still evaluates to `null`.
+
 Use conditionals in assignments and format strings:
 
 ```tql
@@ -924,7 +932,7 @@ priority = 1 if severity == "critical" else 2 if severity == "high" else 3
 
 ### Standalone `if`
 
-`if` acts as a guard, returning `null` when false:
+`if` acts as a guard, returning `null` when its condition is false or `null`:
 
 ```tql
 from {

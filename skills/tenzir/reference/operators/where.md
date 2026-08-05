@@ -17,7 +17,7 @@ where predicate:bool
 
 ## Description
 
-The `where` operator only keeps events that match the provided predicate and discards all other events. Only events for which it evaluates to `true` pass.
+The `where` operator only keeps events that match the provided predicate and discards all other events. Only events for which it evaluates to `true` pass. If the predicate evaluates to `null`, it is falsy, so `where` discards the event. See [Null is falsy in predicates](../expressions.md#null).
 
 ## Examples
 

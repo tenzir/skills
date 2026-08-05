@@ -17,7 +17,7 @@ count_if(xs:list, predicate:any -> bool) -> int
 
 ## Description
 
-The `count_if` function returns the number of non-null values in `xs` that satisfy the given `predicate`.
+The `count_if` function returns the number of non-null values in `xs` that satisfy the given `predicate`. A `null` result is falsy and does not increase the count. See [Null is falsy in predicates](../expressions.md#null).
 
 ### `xs: list`
 

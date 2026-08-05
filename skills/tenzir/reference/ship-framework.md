@@ -59,7 +59,17 @@ client.release_create(assume_yes=True)
 
 # Publish defaults to the latest release (stable or RC)
 client.release_publish(create_tag=True, assume_yes=True)
+
+
+# Push the release tag and create the GitHub release later
+client.release_publish(
+    create_tag=True,
+    create_github_release=False,
+    assume_yes=True,
+)
 ```
+
+Set `create_github_release=False` together with `create_tag=True`. The method rejects the skipped-release mode without a tag because no publish step would remain.
 
 Version identifiers passed to `show()` must match existing release directories in `releases/<version>/`. The method validates identifiers against release manifests on disk. Scope tokens like `"unreleased"`, `"released"`, and `"latest"` work without corresponding directories.
 
@@ -380,23 +390,34 @@ git commit -m "Release $(tenzir-ship release version)"
 
 ### release publish
 
-Publish a release to GitHub via `gh`.
+Publish a release with optional git and GitHub steps.
 
 ```text
 tenzir-ship release publish [version] [options]
 ```
 
-| Option             | Description                                             |
-| ------------------ | ------------------------------------------------------- |
-| `version`          | Release version (defaults to the latest release)        |
-| `--title <format>` | GitHub release title format (see below)                 |
-| `--yes`            | Skip confirmation prompts                               |
-| `--draft`          | Mark as draft                                           |
-| `--prerelease`     | Force a GitHub prerelease                               |
-| `--no-latest`      | Prevent GitHub from marking as latest release           |
-| `--tag`            | Create and push annotated Git tag                       |
-| `--commit`         | Commit staged changes before tagging (requires `--tag`) |
-| `--commit-message` | Custom commit message (default: `Release {version}`)    |
+| Option                | Description                                                       |
+| --------------------- | ----------------------------------------------------------------- |
+| `version`             | Release version (defaults to the latest release)                  |
+| `--title <format>`    | GitHub release title format (see below)                           |
+| `--yes`               | Skip confirmation prompts                                         |
+| `--draft`             | Mark as draft                                                     |
+| `--prerelease`        | Force a GitHub prerelease                                         |
+| `--no-latest`         | Prevent GitHub from marking as latest release                     |
+| `--tag`               | Create and push annotated Git tag                                 |
+| `--commit`            | Commit staged changes before tagging (requires `--tag`)           |
+| `--commit-message`    | Custom commit message (default: `Release {version}`)              |
+| `--no-github-release` | Push the tag without creating a GitHub release (requires `--tag`) |
+
+Without `--yes`, the command lists the steps it is about to run and asks for confirmation before the first one, so declining leaves the working tree and the remote untouched.
+
+Combine `--no-github-release` with `--tag` to stop after the tag is pushed:
+
+```sh
+tenzir-ship release publish --commit --tag --no-github-release --yes
+```
+
+The command rejects `--no-github-release` without `--tag` because no publish step would remain. Use this mode when the release belongs in a repository other than the one being pushed to, or when the release should appear only after downstream builds have proven the tag releasable. A separate process must then create the release. Since only that step shells out to `gh`, the CLI is not required when it is skipped.
 
 The command reads project metadata from `config.yaml` or `package.yaml` for the repository slug and uses `notes.md` as the release body. Projects without a `repository` field cannot publish - this is intentional for changelogs that track changes without producing GitHub releases (e.g., modules in a workspace). When you omit `version`, the command resolves the latest release manifest by version, including release candidates.
 
@@ -424,28 +445,28 @@ tenzir-ship release publish v5.1.0 --title "Faster ingest"
 
 #### How it works
 
-The `release publish` command executes the following steps:
+The `release publish` command executes the following steps. Before starting, it rejects `--no-github-release` without `--tag` because that combination would leave nothing to publish.
 
 1. **Validate configuration**: Checks that the `repository` field is set in `config.yaml` or `package.yaml`. This field determines the GitHub repository to publish to (e.g., `tenzir/tenzir`).
 
-2. **Check for `gh` CLI**: Verifies that the [GitHub CLI](https://cli.github.com/) is installed and available in `PATH`. The command uses `gh` for all GitHub operations.
+2. **Check for `gh` CLI**: Verifies that the [GitHub CLI](https://cli.github.com/) is installed and available in `PATH`. Only the GitHub release step uses `gh`, so this check is skipped with `--no-github-release`.
 
 3. **Find release manifest**: Locates the release manifest at `releases/<version>/manifest.yaml`. Fails if the specified version doesn’t exist.
 
 4. **Verify release notes**: Checks that `releases/<version>/notes.md` exists and is non-empty. If missing, prompts you to run `release create` first.
 
-5. **Commit staged changes** (if `--commit`): Creates a git commit with all staged changes. Requires `--tag` to be set. Uses the commit message from `--commit-message`, the `release.commit_message` config field, or defaults to `Release {version}`.
+5. **Check for an existing GitHub release**: Queries GitHub to determine whether a release for this version already exists, which decides between `gh release edit` and `gh release create`. The query only reads, so it runs before anything is modified. Skipped with `--no-github-release`.
 
-6. **Create and push git tag** (if `--tag`): Creates an annotated git tag named after the version with message `Release {version}`. If the tag already exists, skips creation but continues. Pushes the current branch to its upstream remote, then pushes the tag to the remote matching the configured repository.
+6. **Confirm**: Unless `--yes` is provided, lists every step about to run - including the exact `gh` command - and prompts for confirmation. This happens before the first modification, so declining leaves the working tree and the remote untouched.
 
-7. **Check for existing GitHub release**: Queries GitHub to determine if a release with this version already exists.
+7. **Commit staged changes** (if `--commit`): Creates a git commit with all staged changes. Requires `--tag` to be set. Uses the commit message from `--commit-message`, the `release.commit_message` config field, or defaults to `Release {version}`.
 
-8. **Create or update GitHub release**:
+8. **Create and push git tag** (if `--tag`): Creates an annotated git tag named after the version with message `Release {version}`. If the tag already exists, skips creation but continues. Pushes the current branch to its upstream remote, then pushes the tag to the remote matching the configured repository.
+
+9. **Create or update GitHub release**: Skipped entirely with `--no-github-release`, which stops the command here.
 
    * If the release exists, runs `gh release edit` to update the release notes and title.
    * If the release doesn’t exist, runs `gh release create` with the version tag, release notes from `notes.md`, and optional `--draft`, `--prerelease`, or `--latest=false` flags. Release-candidate tags automatically add `--prerelease` and `--latest=false`.
-
-9. **Confirm and execute**: Unless `--yes` is provided, prompts for confirmation before running the `gh` command. Shows the exact action (`gh release create` or `gh release edit`) that will run.
 
 #### Handling failures
 
@@ -616,12 +637,13 @@ The `pre-publish` and `post-publish` hooks have access to these environment vari
 
 #### Release control inputs
 
-| Input                              | Type    | Required | Default | Description                                                 |
-| ---------------------------------- | ------- | -------- | ------- | ----------------------------------------------------------- |
-| `skip-publish`                     | boolean | no       | `false` | Create and prepare release but skip publish, tag, and push  |
-| `publish-no-latest-on-non-main`    | boolean | no       | `false` | Pass `--no-latest` on non-main branch releases              |
-| `copy-release-to-main-on-non-main` | boolean | no       | `false` | Copy release manifests back to `main` for non-main releases |
-| `update-latest-branch-on-main`     | boolean | no       | `false` | Force-update the `latest` branch when releasing from `main` |
+| Input                              | Type    | Required | Default | Description                                                    |
+| ---------------------------------- | ------- | -------- | ------- | -------------------------------------------------------------- |
+| `skip-publish`                     | boolean | no       | `false` | Create and prepare release but skip publish, tag, and push     |
+| `create-github-release`            | boolean | no       | `true`  | Create the GitHub release; `false` stops after pushing the tag |
+| `publish-no-latest-on-non-main`    | boolean | no       | `false` | Pass `--no-latest` on non-main branch releases                 |
+| `copy-release-to-main-on-non-main` | boolean | no       | `false` | Copy release manifests back to `main` for non-main releases    |
+| `update-latest-branch-on-main`     | boolean | no       | `false` | Force-update the `latest` branch when releasing from `main`    |
 
 #### Auth inputs
 
