@@ -1,0 +1,13 @@
+field: gen_ai.tool.definitions
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-tool-definitions
+description: The list of source system tool definitions available to the GenAI agent or model.
+example: "{\n  \"type\": \"function\",\n  \"name\": \"get_current_weather\",\n  \"description\": \"Get the current weather in a given location\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"location\": {\n        \"type\": \"string\",\n        \"description\": \"The city and state, e.g. San Francisco, CA\"\n      },\n      \"unit\": {\n        \"type\": \"string\",\n        \"enum\": [\n          \"celsius\",\n          \"fahrenheit\"\n        ]\n      }\n    },\n    \"required\": [\n      \"location\",\n      \"unit\"\n    ]\n  }\n}"
+flat_name: gen_ai.tool.definitions
+level: extended
+name: tool.definitions
+otel:
+- relation: match
+  stability: development
+type: flattened

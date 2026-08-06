@@ -16,7 +16,7 @@ description: >-
 
 Elastic Common Schema (ECS) defines common fields for logs, metrics, security telemetry, and observability data so events from different sources can be queried and correlated consistently.
 
-This skill is generated from the latest supported ECS release in this repository: `v9.4.0` / `9.4.0`.
+This skill is generated from the latest supported ECS release in this repository: `v9.5.0` / `9.5.0`.
 Use the YAML files as the authoritative reference for exact field names, fieldsets, types, levels, allowed values, normalization hints, reuse metadata, and OpenTelemetry relations.
 Use the Markdown docs only for conceptual guidance, mapping examples, and implementation conventions.
 If a field, fieldset, allowed value, or relation is not present in the YAML data, say that it is not documented here.

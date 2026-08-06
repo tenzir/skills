@@ -10,4 +10,4 @@ name: request.seed
 otel:
 - relation: match
   stability: development
-type: integer
+type: long

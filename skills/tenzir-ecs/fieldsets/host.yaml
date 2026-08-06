@@ -496,6 +496,12 @@ fields:
   type: float
   description: A normalized risk score calculated by an external system.
   original_fieldset: risk
+- name: host.tags
+  type: keyword
+  description: User-configurable tags used to classify a host.
+  normalize:
+  - array
+  alpha: This field is alpha and subject to change.
 - name: host.target.architecture
   type: keyword
   description: Operating system architecture.
@@ -971,6 +977,13 @@ fields:
   type: float
   description: A normalized risk score calculated by an external system.
   original_fieldset: risk
+- name: host.target.tags
+  type: keyword
+  description: User-configurable tags used to classify a host.
+  original_fieldset: host
+  normalize:
+  - array
+  alpha: This field is alpha and subject to change.
 - name: host.target.type
   type: keyword
   description: Type of host.

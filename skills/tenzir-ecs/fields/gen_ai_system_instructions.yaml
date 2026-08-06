@@ -1,0 +1,13 @@
+field: gen_ai.system_instructions
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-system-instructions
+description: The system message or instructions provided to the GenAI model separately from the chat history.
+example: "{\n  \"type\": \"text\",\n  \"content\": \"You are an Agent that greet users, always use greetings tool to respond\"\n}"
+flat_name: gen_ai.system_instructions
+level: extended
+name: system_instructions
+otel:
+- relation: match
+  stability: development
+type: flattened

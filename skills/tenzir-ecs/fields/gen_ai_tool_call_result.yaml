@@ -1,0 +1,13 @@
+field: gen_ai.tool.call.result
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-tool-call-result
+description: The result returned by the tool call (if any and if execution was successful).
+example: "{\n  \"temperature_range\": {\n    \"high\": 75,\n    \"low\": 60\n  },\n  \"conditions\": \"sunny\"\n}"
+flat_name: gen_ai.tool.call.result
+level: extended
+name: tool.call.result
+otel:
+- relation: match
+  stability: development
+type: flattened

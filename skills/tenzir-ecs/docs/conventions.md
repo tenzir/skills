@@ -21,7 +21,7 @@ Elasticsearch can index text using datatypes:
 
 ## Default Elasticsearch convention for indexing text fields [_default_elasticsearch_convention_for_indexing_text_fields]
 
-Unless your index mapping or index template specifies otherwise (as the [ECS index template](https://github.com/elastic/ecs/blob/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/docs/reference/ecs-artifacts.md) does), Elasticsearch indexes a text field as `text` at the canonical field name, and indexes a second time as `keyword`, nested in a multi-field.
+Unless your index mapping or index template specifies otherwise (as the [ECS index template](https://github.com/elastic/ecs/blob/401807e0547301525acd28c4fb667203fec66d59/docs/reference/ecs-artifacts.md) does), Elasticsearch indexes a text field as `text` at the canonical field name, and indexes a second time as `keyword`, nested in a multi-field.
 
 Default Elasticsearch convention:
 

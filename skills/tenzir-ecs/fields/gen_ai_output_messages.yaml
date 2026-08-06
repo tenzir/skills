@@ -1,0 +1,13 @@
+field: gen_ai.output.messages
+fieldset: gen_ai
+beta: This field is beta and subject to change.
+dashed_name: gen-ai-output-messages
+description: Messages returned by the model where each message represents a specific model response (choice, candidate).
+example: "{\n  \"role\": \"assistant\",\n  \"parts\": [\n    {\n      \"type\": \"text\",\n      \"content\": \"The weather in Paris is currently rainy with a temperature of 57°F.\"\n    }\n  ],\n  \"finish_reason\": \"stop\"\n}"
+flat_name: gen_ai.output.messages
+level: extended
+name: output.messages
+otel:
+- relation: match
+  stability: development
+type: flattened

@@ -20,16 +20,28 @@ fields:
   type: keyword
   description: Human-readable name of the GenAI agent provided by the application.
   beta: This field is beta and subject to change.
+- name: gen_ai.input.messages
+  type: flattened
+  description: The chat history provided to the model as an input.
+  beta: This field is beta and subject to change.
 - name: gen_ai.operation.name
   type: keyword
   description: The name of the operation being performed.
+  beta: This field is beta and subject to change.
+- name: gen_ai.output.messages
+  type: flattened
+  description: Messages returned by the model where each message represents a specific model response (choice, candidate).
   beta: This field is beta and subject to change.
 - name: gen_ai.output.type
   type: keyword
   description: Represents the content type requested by the client.
   beta: This field is beta and subject to change.
+- name: gen_ai.provider.name
+  type: keyword
+  description: The Generative AI provider as identified by the client or server instrumentation.
+  beta: This field is beta and subject to change.
 - name: gen_ai.request.choice.count
-  type: integer
+  type: long
   description: The target number of candidate completions to return.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.encoding_formats
@@ -41,7 +53,7 @@ fields:
   description: The frequency penalty setting for the GenAI request.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.max_tokens
-  type: integer
+  type: long
   description: The maximum number of tokens the model generates for a request.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.model
@@ -53,7 +65,7 @@ fields:
   description: The presence penalty setting for the GenAI request.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.seed
-  type: integer
+  type: long
   description: Requests with same seed value more likely to return same result.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.stop_sequences
@@ -84,17 +96,29 @@ fields:
   type: keyword
   description: The name of the model that generated the response.
   beta: This field is beta and subject to change.
-- name: gen_ai.system
-  type: keyword
-  description: The Generative AI product as identified by the client or server instrumentation.
+- name: gen_ai.system_instructions
+  type: flattened
+  description: The system message or instructions provided to the GenAI model separately from the chat history.
   beta: This field is beta and subject to change.
 - name: gen_ai.token.type
   type: keyword
   description: The type of token being counted.
   beta: This field is beta and subject to change.
+- name: gen_ai.tool.call.arguments
+  type: flattened
+  description: Parameters passed to the tool call.
+  beta: This field is beta and subject to change.
 - name: gen_ai.tool.call.id
   type: keyword
   description: The tool call identifier.
+  beta: This field is beta and subject to change.
+- name: gen_ai.tool.call.result
+  type: flattened
+  description: The result returned by the tool call (if any and if execution was successful).
+  beta: This field is beta and subject to change.
+- name: gen_ai.tool.definitions
+  type: flattened
+  description: The list of source system tool definitions available to the GenAI agent or model.
   beta: This field is beta and subject to change.
 - name: gen_ai.tool.name
   type: keyword
@@ -105,10 +129,10 @@ fields:
   description: Type of the tool utilized by the agent
   beta: This field is beta and subject to change.
 - name: gen_ai.usage.input_tokens
-  type: integer
+  type: long
   description: The number of tokens used in the GenAI input (prompt).
   beta: This field is beta and subject to change.
 - name: gen_ai.usage.output_tokens
-  type: integer
+  type: long
   description: The number of tokens used in the GenAI response (completion).
   beta: This field is beta and subject to change.

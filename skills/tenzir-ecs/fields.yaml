@@ -4486,11 +4486,23 @@ fields:
   type: keyword
   description: Human-readable name of the GenAI agent provided by the application.
   beta: This field is beta and subject to change.
+- name: gen_ai.input.messages
+  path: fields/gen_ai_input_messages.yaml
+  fieldset: gen_ai
+  type: flattened
+  description: The chat history provided to the model as an input.
+  beta: This field is beta and subject to change.
 - name: gen_ai.operation.name
   path: fields/gen_ai_operation_name.yaml
   fieldset: gen_ai
   type: keyword
   description: The name of the operation being performed.
+  beta: This field is beta and subject to change.
+- name: gen_ai.output.messages
+  path: fields/gen_ai_output_messages.yaml
+  fieldset: gen_ai
+  type: flattened
+  description: Messages returned by the model where each message represents a specific model response (choice, candidate).
   beta: This field is beta and subject to change.
 - name: gen_ai.output.type
   path: fields/gen_ai_output_type.yaml
@@ -4498,10 +4510,16 @@ fields:
   type: keyword
   description: Represents the content type requested by the client.
   beta: This field is beta and subject to change.
+- name: gen_ai.provider.name
+  path: fields/gen_ai_provider_name.yaml
+  fieldset: gen_ai
+  type: keyword
+  description: The Generative AI provider as identified by the client or server instrumentation.
+  beta: This field is beta and subject to change.
 - name: gen_ai.request.choice.count
   path: fields/gen_ai_request_choice_count.yaml
   fieldset: gen_ai
-  type: integer
+  type: long
   description: The target number of candidate completions to return.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.encoding_formats
@@ -4519,7 +4537,7 @@ fields:
 - name: gen_ai.request.max_tokens
   path: fields/gen_ai_request_max_tokens.yaml
   fieldset: gen_ai
-  type: integer
+  type: long
   description: The maximum number of tokens the model generates for a request.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.model
@@ -4537,7 +4555,7 @@ fields:
 - name: gen_ai.request.seed
   path: fields/gen_ai_request_seed.yaml
   fieldset: gen_ai
-  type: integer
+  type: long
   description: Requests with same seed value more likely to return same result.
   beta: This field is beta and subject to change.
 - name: gen_ai.request.stop_sequences
@@ -4582,11 +4600,11 @@ fields:
   type: keyword
   description: The name of the model that generated the response.
   beta: This field is beta and subject to change.
-- name: gen_ai.system
-  path: fields/gen_ai_system.yaml
+- name: gen_ai.system_instructions
+  path: fields/gen_ai_system_instructions.yaml
   fieldset: gen_ai
-  type: keyword
-  description: The Generative AI product as identified by the client or server instrumentation.
+  type: flattened
+  description: The system message or instructions provided to the GenAI model separately from the chat history.
   beta: This field is beta and subject to change.
 - name: gen_ai.token.type
   path: fields/gen_ai_token_type.yaml
@@ -4594,11 +4612,29 @@ fields:
   type: keyword
   description: The type of token being counted.
   beta: This field is beta and subject to change.
+- name: gen_ai.tool.call.arguments
+  path: fields/gen_ai_tool_call_arguments.yaml
+  fieldset: gen_ai
+  type: flattened
+  description: Parameters passed to the tool call.
+  beta: This field is beta and subject to change.
 - name: gen_ai.tool.call.id
   path: fields/gen_ai_tool_call_id.yaml
   fieldset: gen_ai
   type: keyword
   description: The tool call identifier.
+  beta: This field is beta and subject to change.
+- name: gen_ai.tool.call.result
+  path: fields/gen_ai_tool_call_result.yaml
+  fieldset: gen_ai
+  type: flattened
+  description: The result returned by the tool call (if any and if execution was successful).
+  beta: This field is beta and subject to change.
+- name: gen_ai.tool.definitions
+  path: fields/gen_ai_tool_definitions.yaml
+  fieldset: gen_ai
+  type: flattened
+  description: The list of source system tool definitions available to the GenAI agent or model.
   beta: This field is beta and subject to change.
 - name: gen_ai.tool.name
   path: fields/gen_ai_tool_name.yaml
@@ -4615,13 +4651,13 @@ fields:
 - name: gen_ai.usage.input_tokens
   path: fields/gen_ai_usage_input_tokens.yaml
   fieldset: gen_ai
-  type: integer
+  type: long
   description: The number of tokens used in the GenAI input (prompt).
   beta: This field is beta and subject to change.
 - name: gen_ai.usage.output_tokens
   path: fields/gen_ai_usage_output_tokens.yaml
   fieldset: gen_ai
-  type: integer
+  type: long
   description: The number of tokens used in the GenAI response (completion).
   beta: This field is beta and subject to change.
 - name: group.domain
@@ -5286,6 +5322,14 @@ fields:
   type: float
   description: A normalized risk score calculated by an external system.
   original_fieldset: risk
+- name: host.tags
+  path: fields/host_tags.yaml
+  fieldset: host
+  type: keyword
+  description: User-configurable tags used to classify a host.
+  normalize:
+  - array
+  alpha: This field is alpha and subject to change.
 - name: host.target.architecture
   path: fields/host_target_architecture.yaml
   fieldset: host
@@ -5949,6 +5993,15 @@ fields:
   type: float
   description: A normalized risk score calculated by an external system.
   original_fieldset: risk
+- name: host.target.tags
+  path: fields/host_target_tags.yaml
+  fieldset: host
+  type: keyword
+  description: User-configurable tags used to classify a host.
+  original_fieldset: host
+  normalize:
+  - array
+  alpha: This field is alpha and subject to change.
 - name: host.target.type
   path: fields/host_target_type.yaml
   fieldset: host
@@ -16968,3 +17021,9 @@ fields:
   fieldset: vulnerability
   type: keyword
   description: Severity of the vulnerability.
+- name: vulnerability.status
+  path: fields/vulnerability_status.yaml
+  fieldset: vulnerability
+  type: keyword
+  description: Lifecycle state of a vulnerability finding.
+  beta: This field is beta and subject to change.

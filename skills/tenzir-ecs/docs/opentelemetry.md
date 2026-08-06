@@ -6,7 +6,7 @@ While both schemes complement each other in large areas and thus offer mutual ad
 
 ## Relation between ECS and Semantic Conventions [ecs-opentelemetry-relation]
 
-The [ECS schema files](https://github.com/elastic/ecs/tree/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/schemas) contain an explicit mapping between ECS fields and corresponding OTel semnatic convention attributes. This can be used to generate tooling for compatibility between ECS and semnatic conventions (e.g. alias fields in Elasticsearch). The relation between individual ECS fields and corresponding OTel semantic conventions attributes follows one of the following categories:
+The [ECS schema files](https://github.com/elastic/ecs/tree/401807e0547301525acd28c4fb667203fec66d59/schemas) contain an explicit mapping between ECS fields and corresponding OTel semnatic convention attributes. This can be used to generate tooling for compatibility between ECS and semnatic conventions (e.g. alias fields in Elasticsearch). The relation between individual ECS fields and corresponding OTel semantic conventions attributes follows one of the following categories:
 
 | Category | Description |
 | --- | --- |
@@ -20,5 +20,5 @@ The [ECS schema files](https://github.com/elastic/ecs/tree/354fd8d0ca99faa15405d
 
 The following documentation pages provide an overview and more details on the alignment between ECS and OTel semantic conventions:
 
-* [OTel Alignment Overview](https://github.com/elastic/ecs/blob/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/docs/reference/ecs-otel-alignment-overview.md)
-* [Field & Attributes Alignment](https://github.com/elastic/ecs/blob/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/docs/reference/ecs-otel-alignment-details.md)
+* [OTel Alignment Overview](https://github.com/elastic/ecs/blob/401807e0547301525acd28c4fb667203fec66d59/docs/reference/ecs-otel-alignment-overview.md)
+* [Field & Attributes Alignment](https://github.com/elastic/ecs/blob/401807e0547301525acd28c4fb667203fec66d59/docs/reference/ecs-otel-alignment-details.md)

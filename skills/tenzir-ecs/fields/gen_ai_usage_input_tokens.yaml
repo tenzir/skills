@@ -10,4 +10,4 @@ name: usage.input_tokens
 otel:
 - relation: match
   stability: development
-type: integer
+type: long

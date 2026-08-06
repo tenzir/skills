@@ -10,4 +10,4 @@ name: request.choice.count
 otel:
 - relation: match
   stability: development
-type: integer
+type: long

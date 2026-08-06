@@ -157,9 +157,15 @@ fields:
     match: development
   gen_ai.agent.name:
     match: development
+  gen_ai.input.messages:
+    match: development
   gen_ai.operation.name:
     match: development
+  gen_ai.output.messages:
+    match: development
   gen_ai.output.type:
+    match: development
+  gen_ai.provider.name:
     match: development
   gen_ai.request.choice.count:
     match: development
@@ -189,13 +195,17 @@ fields:
     match: development
   gen_ai.response.model:
     match: development
-  gen_ai.system:
-    equivalent:
-      attribute: gen_ai.provider.name
-      stability: development
+  gen_ai.system_instructions:
+    match: development
   gen_ai.token.type:
     match: development
+  gen_ai.tool.call.arguments:
+    match: development
   gen_ai.tool.call.id:
+    match: development
+  gen_ai.tool.call.result:
+    match: development
+  gen_ai.tool.definitions:
     match: development
   gen_ai.tool.name:
     match: development

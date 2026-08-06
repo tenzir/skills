@@ -20,7 +20,7 @@ Here are the subjects covered in this page.
 
 User fields can be present in any kind of event, without affecting the event’s categorization.
 
-However when the event is about IAM (Identity and Account Management), it should be categorized as follows. In this section we’ll cover specifically `event.category` and `event.type` with regards to IAM activity. Make sure to read the [Categorization section](https://github.com/elastic/ecs/blob/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/docs/reference/ecs-category-field-values-reference.md) to see all allowed values, and read more about `event.kind` and `event.outcome`.
+However when the event is about IAM (Identity and Account Management), it should be categorized as follows. In this section we’ll cover specifically `event.category` and `event.type` with regards to IAM activity. Make sure to read the [Categorization section](https://github.com/elastic/ecs/blob/401807e0547301525acd28c4fb667203fec66d59/docs/reference/ecs-category-field-values-reference.md) to see all allowed values, and read more about `event.kind` and `event.outcome`.
 
 ::::{note}
 IAM activity is a bit particular in that events are expected to be assigned 2 event types. One of them indicates the type of activity (creation, deletion, change, etc.), and the other indicates whether a user or a group is the target of the management activity.
@@ -321,4 +321,4 @@ Like the other fields in the [related](../../fieldsets/related.yaml) field set, 
 
 ## Mapping examples [ecs-user-usage-mappings]
 
-For examples of mapping events from various sources, you can look at [RFC 0007 in section Source Data](https://github.com/elastic/ecs/blob/354fd8d0ca99faa15405d1ea1d3bb396724d3e5a/rfcs/text/0007-multiple-users.md#source-data).
+For examples of mapping events from various sources, you can look at [RFC 0007 in section Source Data](https://github.com/elastic/ecs/blob/401807e0547301525acd28c4fb667203fec66d59/rfcs/text/0007-multiple-users.md#source-data).
