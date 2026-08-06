@@ -180,7 +180,7 @@ Get an overview of your project’s release history and entry distribution:
 uvx tenzir-ship stats
 ```
 
-Single projects show a vertical card layout with sections for project metadata, releases, entry types, and status. Multi-module projects display a compact table comparing all modules.
+Single projects show a vertical card layout with sections for project metadata, releases, entry types, and status. Multi-module projects display a compact table comparing all modules. The next release uses the same automatic resolution as `release create`. When an active release candidate exists, it reports that candidate’s stable target.
 
 Export statistics as JSON for automation:
 
@@ -207,6 +207,8 @@ uvx tenzir-ship release create --yes
 ```
 
 This auto-bumps the version from the unreleased entry types, creates `releases/<resolved-version>/`, generates `notes.md`, and updates `manifest.yaml`.
+
+For a project whose latest stable release is `0.x`, a breaking entry triggers a minor bump. For example, a breaking entry after `v0.4.2` produces `v0.5.0`. Automatic inference never selects `v1.0.0` from a `0.x` release. Use `--major` or pass `v1.0.0` explicitly when you want to declare the first stable release. Breaking entries trigger major bumps after the project reaches `v1.0.0`.
 
 The `--patch`, `--minor`, and `--major` shortcuts resolve from the latest stable release. The same stable-only rule applies to `show latest`, and `release version`. In contrast, `release publish` without a version targets the latest release, including release candidates.
 
@@ -288,7 +290,7 @@ The RC workflow has three outcomes only:
 * Run `release create` without a version or bump flag to promote the active RC.
 * Run `release create <new-version>` or a manual bump flag to leave the RC cycle and ship a different stable release instead.
 
-Promotion is cumulative: entries added to `unreleased/` after the last candidate snapshot are folded into the stable release and consumed from the queue, just as a follow-up candidate would include them.
+Promotion is cumulative: entries added to `unreleased/` after the last candidate snapshot are folded into the stable release and consumed from the queue, just as a follow-up candidate would include them. The active candidate’s stable target takes precedence over entry-driven inference, so a breaking entry added during a `v1.0.0-rc.N` cycle does not change the promotion target to `v2.0.0`.
 
 Promoting to stable closes the RC cycle and removes that cycle’s `vX.Y.Z-rc.N` manifests from `releases/`. An explicit version matching the active RC base is rejected, and manual bump flags never promote the active RC.
 

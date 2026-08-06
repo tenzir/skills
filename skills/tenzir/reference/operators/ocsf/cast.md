@@ -17,7 +17,7 @@ ocsf::cast [encode_variants=bool, null_fill=bool, timestamp_to_ms=bool]
 
 ## Description
 
-The `ocsf::cast` operator casts incoming events to their corresponding OCSF event class type. Four fields determine the resulting type: `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid`. The operator casts events sharing the same values for these fields to the same type. Tenzir supports all OCSF versions (including `-dev` versions), all profiles, and all event classes. Currently, we limit extensions to those versioned with OCSF, including the `win` and `linux` extensions.
+The `ocsf::cast` operator casts incoming events to their corresponding OCSF event class type. Four fields determine the resulting type: `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid`. The operator casts events sharing the same values for these fields to the same type. For the available stable and development schema versions, see the [OCSF compatibility overview](https://tenzir.com/solutions/use-cases/data-normalization-ocsf.md#data-normalization-ocsf-version). Tenzir supports all profiles and event classes. Currently, we limit extensions to those versioned with OCSF, including the `win` and `linux` extensions.
 
 The operator performs these steps:
 

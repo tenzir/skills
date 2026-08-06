@@ -314,7 +314,17 @@ When creating a release, the command also updates version fields in detected pac
 
 For stable releases, the default and preferred workflow is to omit both the manual bump flags and an explicit `version`. `tenzir-ship` auto-bumps from the unreleased entry types. Use `--patch`, `--minor`, or `--major` only when the automatic detection is not the right fit. Pass an explicit stable `version` only as a rare exact override, for example to re-cut a failed tagged release or to match an externally dictated version.
 
-If an outstanding release candidate exists, the same version-less stable command promotes the latest RC to its matching stable release automatically. This is the only promotion path for the active RC. If you need to leave the RC cycle and ship a different stable release instead, pass a new explicit version such as `v1.2.4`, `v1.3.0`, or `v2.0.0`. An explicit version matching the active RC base is rejected.
+Automatic inference uses the latest stable release as its base, or an implicit `0.0.0` when no stable release exists. The highest-impact unreleased entry selects the bump:
+
+| Entry type        | Latest stable is `0.x` | Latest stable is `1.x` or later |
+| ----------------- | ---------------------- | ------------------------------- |
+| Bug fix           | Patch                  | Patch                           |
+| Feature or change | Minor                  | Minor                           |
+| Breaking change   | Minor                  | Major                           |
+
+Entry-driven inference therefore never transitions a project from `0.x` to `1.0.0`. Run `release create --major` or pass `1.0.0` explicitly when you want to declare the first stable release.
+
+If an outstanding release candidate exists, the same version-less stable command promotes the latest RC to its matching stable release automatically. This is the only promotion path for the active RC. The active target takes precedence over entry-driven inference, so entries added during an RC cycle do not select a different version. The `stats` command reports this stable target as the next release. If you need to leave the RC cycle and ship a different stable release instead, pass a new explicit version such as `v1.2.4`, `v1.3.0`, or `v2.0.0`. An explicit version matching the active RC base is rejected.
 
 The command renders `notes.md`, updates `manifest.yaml`, and writes entry snapshots into `entries/`. Stable releases consume matching entry files from `unreleased/`. Release candidates created with `--rc` copy the current unreleased queue without consuming it, so you can iterate on `-rc.N` releases before promoting one to stable. It performs a dry run by default. When the release already exists, the CLI refreshes metadata and synchronizes the selected entries. If no changelog entries are available, the command still succeeds when you provide `--intro` or `--intro-file`, creating an intro-only release. This is useful for re-publishing after yanking a package or retrying a failed publish workflow. Without either entries or intro text, the command fails with an error.
 
@@ -564,7 +574,7 @@ The command adapts its display based on the project structure:
 Statistics include:
 
 * **Project info**: Name, latest version, age since last release
-* **Releases**: Total count, time span, release cadence (exponentially weighted for recent activity)
+* **Releases**: Total count, time span, release cadence (exponentially weighted for recent activity), and the next automatically selected version
 * **Entry types**: Distribution of breaking, feature, change, and bugfix entries with percentages
 * **Entry status**: Total, shipped, and unreleased counts
 
