@@ -7,9 +7,9 @@ section: "Docs"
 
 # Parse binary data
 
-> This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
+> This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, network flow messages in NetFlow and IPFIX, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
 
-This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
+This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, network flow messages in NetFlow and IPFIX, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
 
 The examples use [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
 
@@ -48,6 +48,20 @@ from_file "data.feather" {
 ```
 
 Use [`read_feather`](https://tenzir.com/docs/reference/operators/read_feather.md) to parse Feather files.
+
+## NetFlow and IPFIX
+
+NetFlow v5, NetFlow v9, and IPFIX encode network flow summaries as binary wire messages. Use [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) to parse a file containing consecutive raw messages:
+
+```tql
+from_file "flows.ipfix" {
+  read_netflow
+}
+```
+
+Specify [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) explicitly. It detects the protocol version of every message and retains NetFlow v9 and IPFIX templates across messages.
+
+The input must contain raw wire-format messages. [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) does not parse PCAP headers or the nfdump container used by `nfcapd.*` files. For live collection and ways to process nfdump files, see the [NetFlow](../../integrations/netflow.md) integration.
 
 ## PCAP
 

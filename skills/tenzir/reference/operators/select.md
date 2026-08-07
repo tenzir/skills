@@ -25,7 +25,7 @@ The field to keep. If it does not exist, it’s given the value `null` and a war
 
 ### `assignment`
 
-An assignment of the form `<field>=<expr>`.
+An assignment of the form `<field>=<expr>`. Use brackets to compute a path segment at runtime, as in `result[key] = value`. The index expression must return a string. Otherwise, Tenzir emits a warning and skips the assignment for that event.
 
 ## Examples
 
@@ -63,6 +63,21 @@ select id=name.to_upper(), pos.x, added=true
     x: 1,
   },
   added: true,
+}
+```
+
+### Compute a selected field name
+
+```tql
+from {key: "latency", value: 42, ignored: true}
+select metrics[key] = value
+```
+
+```tql
+{
+  metrics: {
+    latency: 42,
+  },
 }
 ```
 

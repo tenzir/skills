@@ -100,6 +100,23 @@ An assignment statement in TQL is structured as `<place> = <expression>`, where 
 
 The `<place>` can also reference a field path. For example, the statement `foo.bar = 42` assigns the value 42 to the field `bar` within the record `foo`. If `foo` is not a record or does not exist before, it will be set to a record containing just the field `bar`.
 
+Use brackets to derive a field name from an expression. Tenzir evaluates the expression separately for each event, and the result must be a string. If the result is `null` or has another type, Tenzir emits a warning and skips the assignment for that event.
+
+```tql
+from {key: "latency", value: 42}
+metrics[key] = value
+```
+
+```tql
+{
+  key: "latency",
+  value: 42,
+  metrics: {
+    latency: 42,
+  },
+}
+```
+
 ```tql
 category_name = "Network Activity"
 type_uid = class_uid * 100 + activity_id

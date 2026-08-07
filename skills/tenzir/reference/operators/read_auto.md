@@ -30,7 +30,7 @@ Detection works in two layers:
 
 Detection is strict by default. If no reader is capable, or if two formats with equal specificity match the same probe, `read_auto` emits an error instead of guessing. A reader that needs more evidence delays the decision until more input arrives, the input ends, or the probe reaches `max_probe_bytes`. Once a single best candidate exists, `read_auto` starts that reader, replays the buffered bytes, and forwards the rest of the stream unchanged.
 
-The built-in detectors cover common JSON, delimited text, security log, and magic-byte formats, including NDJSON, JSON objects, JSON arrays of objects, CSV, TSV, key-value text, YAML, Syslog, CEF, LEEF, Zeek TSV, Suricata EVE JSON, Zeek JSON, GELF, PCAP, Feather, BITZ, and Parquet. Formats that accept nearly arbitrary text never participate in detection: space-separated values look like prose, so select [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md) explicitly, and Syslog messages without a `<PRI>` prefix look like free-form text, so they only match via `fallback`.
+The built-in detectors cover common JSON, delimited text, security log, and magic-byte formats, including NDJSON, JSON objects, JSON arrays of objects, CSV, TSV, key-value text, YAML, Syslog, CEF, LEEF, Zeek TSV, Suricata EVE JSON, Zeek JSON, GELF, NetFlow v5, NetFlow v9, IPFIX, PCAP, Feather, BITZ, and Parquet. Formats that accept nearly arbitrary text never participate in detection: space-separated values look like prose, so select [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md) explicitly, and Syslog messages without a `<PRI>` prefix look like free-form text, so they only match via `fallback`.
 
 The output uses the schema name that the selected reader would normally assign. For example, detected CSV input produces the same schema name as [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md), and detected NDJSON input produces the same schema name as [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md). Inspect `@name` to see the schema name. `read_auto` does not add a separate field with the detected format.
 
@@ -137,6 +137,7 @@ The detector runs separately for each connection. This makes the pattern useful 
 * [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
 * [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
 * [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md)
+* [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md)
 * [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
 * [`read_yaml`](https://tenzir.com/docs/reference/operators/read_yaml.md)
 * [Get data from the network](../../guides/collecting/get-data-from-the-network.md)

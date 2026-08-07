@@ -7,9 +7,9 @@ section: "Docs"
 
 # Get data from the network
 
-> This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets for incoming data and capture raw packets from network interfaces.
+> This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets, collect network flow telemetry, and capture raw packets from network interfaces.
 
-This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets for incoming data and capture raw packets from network interfaces.
+This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets, collect network flow telemetry, and capture raw packets from network interfaces.
 
 ## TCP sockets
 
@@ -120,9 +120,26 @@ this = {
 }
 ```
 
+## Network flow telemetry
+
+Routers, switches, firewalls, and software exporters can summarize network conversations as NetFlow v5, NetFlow v9, or IPFIX. Flow telemetry usually requires less bandwidth and storage than packet capture because it reports connection metadata and counters rather than every packet.
+
+### Receive NetFlow and IPFIX
+
+Use [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) after [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) to decode flow datagrams:
+
+```tql
+accept_udp "0.0.0.0:2055", binary=true
+read_netflow
+```
+
+Set `binary=true` so that each datagram retains its binary payload. The parser detects every message’s protocol version and uses the `peer` metadata to keep template state separate between exporters. Start the collector before the exporters send data because NetFlow v9 and IPFIX data records can depend on templates sent in earlier datagrams.
+
+For a complete collector, `nfcapd` forwarding, and archived data, see the [NetFlow](../../integrations/netflow.md) integration.
+
 ## Packet capture
 
-Capture raw network packets with [Network Interface Card](../../integrations/nic.md) for deep packet inspection or network forensics.
+Capture raw network packets with [Network Interface Card](../../integrations/nic.md) when you need per-packet data for deep packet inspection or network forensics.
 
 ### List available interfaces
 
@@ -205,9 +222,9 @@ from_file "capture.pcap" {
 packet = decapsulate(this)
 ```
 
-### Extract flow summaries
+### Extract packet tuples
 
-Capture packets and extract flow-level summaries:
+Extract network and transport fields from each captured packet:
 
 ```tql
 from_nic "eth0" {
@@ -229,7 +246,9 @@ select
 * [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
 * [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)
 * [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md)
+* [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md)
 * [TCP](../../integrations/tcp.md)
 * [UDP](../../integrations/udp.md)
+* [NetFlow](../../integrations/netflow.md)
 * [Network Interface Card](../../integrations/nic.md)
 * [Syslog](../../integrations/syslog.md)

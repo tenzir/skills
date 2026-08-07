@@ -82,20 +82,29 @@ See the [data store guide](collecting/read-from-data-stores.md) for table reads,
 
 ### Network data
 
-Receive data over TCP or UDP sockets, or capture packets from network interfaces:
+Receive data over TCP or UDP sockets, collect NetFlow and IPFIX flow telemetry, or capture packets from network interfaces:
 
 ```tql
 // UDP syslog receiver
 accept_udp "0.0.0.0:514"
 
 
+// NetFlow v5, NetFlow v9, and IPFIX collector
+accept_udp "0.0.0.0:2055", binary=true
+read_netflow
+
+
 // TCP with TLS
 accept_tcp "0.0.0.0:8443", tls={} {
   read_json
 }
+
+
+// Raw packet capture
+from_nic "eth0"
 ```
 
-See the [network data guide](collecting/get-data-from-the-network.md) for socket configurations and packet capture.
+See the [network data guide](collecting/get-data-from-the-network.md) for socket configurations, flow telemetry, and packet capture.
 
 ## Sending data to destinations
 

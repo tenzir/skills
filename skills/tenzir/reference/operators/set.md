@@ -18,7 +18,7 @@ set field=expr...
 
 ## Description
 
-Assigns a value to a field, creating it if necessary. If the field does not exist, it is appended to the end. If the field name is a path such as `foo.bar.baz`, records for `foo` and `bar` will be created if they do not exist yet.
+Assigns a value to a field, creating it if necessary. If the field does not exist, it is appended to the end. If the field name is a path such as `foo.bar.baz`, records for `foo` and `bar` will be created if they do not exist yet. Use brackets to compute a path segment at runtime, as in `foo[key] = value`. The index expression must return a string. Otherwise, Tenzir emits a warning and skips the assignment for that event.
 
 Within assignments, the `move` keyword in front of a field causes a field to be removed from the input after evaluation.
 
@@ -50,6 +50,23 @@ a = "Hello"
 
 ```tql
 {a: "Hello", b: 2}
+```
+
+### Compute a field name
+
+```tql
+from {key: "latency", value: 42}
+metrics[key] = value
+```
+
+```tql
+{
+  key: "latency",
+  value: 42,
+  metrics: {
+    latency: 42,
+  },
+}
 ```
 
 ### Move a field

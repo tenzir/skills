@@ -25,6 +25,17 @@ accept_udp "0.0.0.0:514"
 this = data.parse_syslog()
 ```
 
+### Receive NetFlow and IPFIX
+
+Set `binary=true` to preserve the message bytes, then pass each datagram to [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md):
+
+```tql
+accept_udp "0.0.0.0:2055", binary=true
+read_netflow
+```
+
+[`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) detects NetFlow v5, NetFlow v9, and IPFIX and uses the peer metadata to isolate exporter-specific template state. See the [NetFlow](netflow.md) integration for complete collector setup.
+
 ### Send events to a UDP socket
 
 ```tql
