@@ -217,9 +217,12 @@ Add a parsing subpipeline when reading encoded bytes from standard input. Add a 
 
 | Legacy pattern                   | Use in v6                                  |
 | -------------------------------- | ------------------------------------------ |
+| `move destination=source`        | `destination = move source`                |
 | `http` as a per-event API call   | `each` with `from_http`                    |
 | `from_http ..., metadata_field=` | `$response` inside the parsing subpipeline |
 | `from_http ..., server=true`     | `accept_http`                              |
+
+The `move` operator has been removed. Use the `move` expression on the right side of an assignment instead. Write one assignment for each field that you want to move.
 
 Use `each` when the nested work should start its own source for every input event. Keep `http` when you need to enrich the current event with an HTTP response. Listening for incoming HTTP requests is now handled by `accept_http`.
 

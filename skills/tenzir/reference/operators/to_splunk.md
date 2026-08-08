@@ -239,9 +239,10 @@ from {
 this = { event: this }
 
 
-// hoist the splunk specific fields back out, so they are no longer part of the
+// hoist the Splunk-specific fields back out, so they are no longer part of the
 // sent event
-move host = event.host, source = event.source
+host = move event.host
+source = move event.source
 
 
 to_splunk "https://localhost:8088",

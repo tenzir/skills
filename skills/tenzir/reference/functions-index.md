@@ -12,6 +12,7 @@
 - [entropy](functions/entropy.md): Computes the Shannon entropy of all grouped values.
 - [first](functions/first.md): Takes the first non-null grouped value.
 - [last](functions/last.md): Takes the last non-null grouped value.
+- [mad](functions/mad.md): Computes the median absolute deviation of all grouped values.
 - [max](functions/max.md): Computes the maximum of all grouped values.
 - [mean](functions/mean.md): Computes the mean of all grouped values.
 - [median](functions/median.md): Computes the approximate median of all grouped values using a t-digest algorithm.
@@ -19,6 +20,7 @@
 - [mode](functions/mode.md): Takes the most common non-null grouped value.
 - [otherwise](functions/otherwise.md): Returns a `fallback` value if `primary` is `null`.
 - [quantile](functions/quantile.md): Computes the specified quantile of all grouped values.
+- [skewness](functions/skewness.md): Computes the skewness of all grouped values.
 - [stddev](functions/stddev.md): Computes the standard deviation of all grouped values.
 - [sum](functions/sum.md): Computes the sum of all values.
 - [value_counts](functions/value_counts.md): Returns a list of all grouped values alongside their frequency.
@@ -77,7 +79,11 @@
 
 - [add](functions/add.md): Adds an element into a list if it doesn’t already exist (set-insertion).
 - [append](functions/append.md): Inserts an element at the back of a list.
+- [autocorrelation](functions/autocorrelation.md): Computes normalized autocorrelation coefficients of a list.
+- [dominant_period](functions/dominant_period.md): Recovers the strongest period from a list of timestamps.
+- [periodogram](functions/periodogram.md): Computes the spectral power of a list per period.
 - [concatenate](functions/concatenate.md): Merges two lists.
+- [deltas](functions/deltas.md): Computes the successive differences between list elements.
 - [get](functions/get.md): Gets a field from a record or an element from a list.
 - [length](functions/length.md): Retrieves the length of a list.
 - [map](functions/map.md): Maps each list element to an expression.

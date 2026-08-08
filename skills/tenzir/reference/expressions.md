@@ -706,25 +706,10 @@ new_field = old_field
 drop old_field
 ```
 
-In addition to the `move` keyword, there exists a [`move`](https://tenzir.com/docs/reference/operators/move.md) operator that is a convenient alternative when relocating multiple fields. For example, this sequence of assignments with the `move` keyword:
-
-```tql
-x = move foo
-y = move bar
-z = move baz
-```
-
-can be rewritten succinctly with the [`move`](https://tenzir.com/docs/reference/operators/move.md) operator:
-
-```tql
-move x=foo, y=bar, z=baz
-```
-
 Key points
 
 * Only usable in expression position (right side of `=`)
 * Only works with fields, not arbitrary expressions
-* Different from the [`move`](https://tenzir.com/docs/reference/operators/move.md) operator that is a statement
 
 ### Metadata
 

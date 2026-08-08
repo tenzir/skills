@@ -104,6 +104,14 @@ Takes the last non-null grouped value.
 last([1,2,null])
 ```
 
+### [mad](functions/mad.md)
+
+Computes the median absolute deviation of all grouped values.
+
+```tql
+mad([1,2,3,4,100])
+```
+
 ### [max](functions/max.md)
 
 Computes the maximum of all grouped values.
@@ -158,6 +166,14 @@ Computes the specified quantile of all grouped values.
 
 ```tql
 quantile([1,2,3,4], q=0.5)
+```
+
+### [skewness](functions/skewness.md)
+
+Computes the skewness of all grouped values.
+
+```tql
+skewness([1,1,1,10])
 ```
 
 ### [stddev](functions/stddev.md)
@@ -492,12 +508,44 @@ Inserts an element at the back of a list.
 xs.append(y)
 ```
 
+### [autocorrelation](functions/autocorrelation.md)
+
+Computes normalized autocorrelation coefficients of a list.
+
+```tql
+xs.autocorrelation()
+```
+
+### [dominant\_period](functions/dominant_period.md)
+
+Recovers the strongest period from a list of timestamps.
+
+```tql
+times.dominant_period(resolution=5s)
+```
+
+### [periodogram](functions/periodogram.md)
+
+Computes the spectral power of a list per period.
+
+```tql
+xs.periodogram()
+```
+
 ### [concatenate](functions/concatenate.md)
 
 Merges two lists.
 
 ```tql
 concatenate(xs, ys)
+```
+
+### [deltas](functions/deltas.md)
+
+Computes the successive differences between list elements.
+
+```tql
+xs.deltas()
 ```
 
 ### [get](functions/get.md)

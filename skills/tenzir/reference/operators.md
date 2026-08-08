@@ -921,14 +921,6 @@ Add a field with the number of preceding events.
 enumerate num
 ```
 
-### [move](operators/move.md)
-
-Moves values from one field to another, removing the original field.
-
-```tql
-move id=parsed_id, ctx.message=incoming.status
-```
-
 ### [replace](operators/replace.md)
 
 Replaces all occurrences of a value with another value.

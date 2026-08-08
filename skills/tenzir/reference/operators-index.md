@@ -148,7 +148,6 @@
 - [drop](operators/drop.md): Removes fields from the event.
 - [drop_null_fields](operators/drop_null_fields.md): Removes fields containing null values from the event.
 - [enumerate](operators/enumerate.md): Add a field with the number of preceding events.
-- [move](operators/move.md): Moves values from one field to another, removing the original field.
 - [replace](operators/replace.md): Replaces all occurrences of a value with another value.
 - [select](operators/select.md): Selects some values and discards the rest.
 - [set](operators/set.md): Assigns a value to a field, creating it if necessary.
