@@ -41,10 +41,23 @@ Examples:
 
 ### Authors
 
-The primary author gets automatically inferred when `gh` is logged in. For
-self-authored PRs, do not specify `--author` explicitly unless you get an error.
-When adding changelog entries for external contributions, add the GitHub
-username of the contributor.
+The CLI attempts to infer the primary author when `gh` is logged in. For known
+external contributions, pass the human contributor's GitHub username with
+`--author`.
+
+Authors are people. Never record a coding agent, bot, tool, provider, or model
+through `--author`, `--co-author`, or entry frontmatter. Do not assume an
+inferred GitHub login belongs to a person: CI and coding-agent credentials can
+resolve to bots, GitHub Apps, or machine users.
+
+After creating or updating an entry, inspect every value in its `authors`
+metadata. When `gh` is available, check an inferred login with
+`gh api users/<login> --jq .type`, but treat `User` only as a candidate because
+machine users can report that type. Confirm from the task or pull request
+context that the account belongs to a human contributor. If the inferred value
+is non-human and the contributor is known, replace it with the person's GitHub
+username. If no human can be identified confidently, remove `author` or
+`authors` from the entry. Never guess an identity.
 
 If the project config sets `omit_author: true`, do not record authors at
 all—neither via `--author`/`--co-author` flags nor by writing `authors` into
@@ -231,8 +244,7 @@ Then invoke `tenzir-ship` to add the entry:
 uvx tenzir-ship add \
   --title "<title>" \
   --type <type> \
-  --description-file /tmp/description.md \
-  --co-author <github-username>
+  --description-file /tmp/description.md
 ```
 
 Notes:
@@ -246,10 +258,8 @@ Notes:
 - Add `--pr <number>` only when the PR number is already known, such as in CI.
   Otherwise rely on auto-inference or update `prs` after filing the PR. Skip
   PR numbers entirely when the config sets `omit_pr: true`.
-- Set `--co-author <github-username>` only to a real GitHub username for
-  agent-authored entries, e.g., `claude` or `codex`.
-- For OpenAI-assisted work, use the GitHub username `codex`. For
-  Anthropic-assisted work, use `claude`. Do not use product or model names.
+- Use `--co-author <github-username>` only for an additional human
+  contributor. Never use it to identify a coding agent or other tool.
 
 On success, remove the temporary description file.
 
