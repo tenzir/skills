@@ -84,6 +84,9 @@
 - [periodogram](functions/periodogram.md): Computes the spectral power of a list per period.
 - [concatenate](functions/concatenate.md): Merges two lists.
 - [deltas](functions/deltas.md): Computes the successive differences between list elements.
+- [ewma](functions/ewma.md): Computes an exponentially weighted moving average over a list.
+- [ewm_variance](functions/ewm_variance.md): Computes an exponentially weighted moving variance over a list.
+- [ewm_stddev](functions/ewm_stddev.md): Computes an exponentially weighted moving standard deviation over a list.
 - [get](functions/get.md): Gets a field from a record or an element from a list.
 - [length](functions/length.md): Retrieves the length of a list.
 - [map](functions/map.md): Maps each list element to an expression.

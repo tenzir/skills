@@ -548,6 +548,30 @@ Computes the successive differences between list elements.
 xs.deltas()
 ```
 
+### [ewma](functions/ewma.md)
+
+Computes an exponentially weighted moving average over a list.
+
+```tql
+xs.ewma(span=3)
+```
+
+### [ewm\_variance](functions/ewm_variance.md)
+
+Computes an exponentially weighted moving variance over a list.
+
+```tql
+xs.ewm_variance(span=3)
+```
+
+### [ewm\_stddev](functions/ewm_stddev.md)
+
+Computes an exponentially weighted moving standard deviation over a list.
+
+```tql
+xs.ewm_stddev(span=3)
+```
+
 ### [get](functions/get.md)
 
 Gets a field from a record or an element from a list

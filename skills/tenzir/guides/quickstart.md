@@ -51,7 +51,7 @@ Tenzir Query Language (TQL)
 
 One major difference to other pipeline tools is that Tenzir comes with a full-fledged streaming execution engine and domain-specific language to process data. TQL is a powerful dataflow language similar to Splunk’s SPL or Microsoft’s KQL, just with a lot more power when it comes to transforming data.
 
-Also check out our [FAQ entry](../explanations/faqs.md#why-did-you-create-a-new-query-language-why-not-sql) for why we did not opt for SQL.
+The FAQ entry on [why Tenzir created TQL instead of using SQL](https://tenzir.com/faqs/why-tql-instead-of-sql.md) explains the language design in more detail.
 
 ## Explore the demo data
 

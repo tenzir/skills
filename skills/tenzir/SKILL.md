@@ -522,10 +522,6 @@ This page explains how packages bundle pipelines, operators, contexts, and examp
 
 This page defines central terms in the Tenzir ecosystem.
 
-#### [FAQs](explanations/faqs.md)
-
-This page answers frequently asked questions about Tenzir.
-
 ## [Reference](reference.md)
 
 The reference has nitty-gritty technical descriptions of how Tenzir works.

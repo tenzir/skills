@@ -98,7 +98,7 @@ A set of pipelines to integrate with a third-party product.
 An integration describes use cases in combination with a specific product or tool. Based on the depth of the configuration, this may require configuration on either end.
 
 * List of [all integrations](https://tenzir.com/integrations)
-* [Does Tenzir have an integration for *X*?](faqs.md#do-you-have-an-integration-for-x)
+* [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x.md)
 
 ## Library
 

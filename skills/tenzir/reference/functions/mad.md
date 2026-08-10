@@ -65,6 +65,8 @@ select jitter = times.sort().deltas().mad()
 ## See Also
 
 * [`deltas`](https://tenzir.com/docs/reference/functions/deltas.md)
+* [`ewm_stddev`](https://tenzir.com/docs/reference/functions/ewm_stddev.md)
+* [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md)
 * [`median`](https://tenzir.com/docs/reference/functions/median.md)
 * [`skewness`](https://tenzir.com/docs/reference/functions/skewness.md)
 * [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
