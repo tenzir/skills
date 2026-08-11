@@ -48,10 +48,11 @@ A match can stand on its own or become one input to a broader judgment:
 
 * A **single-event detection** evaluates one event independently.
 * A **windowed detection** counts or compares events within bounded event-time intervals. Thresholds and rolling baselines are common examples.
+* A **behavioral detection** measures the shape of activity rather than its volume, such as the regularity of a beacon’s check-in cadence.
 * A **multi-stage detection** combines independent sightings for the same entity, either in any order or as a sequence.
 * A **stateful detection** uses a context when memory must outlive one window or pipeline restart.
 
-Correlation increases context, not automatically confidence. The quality of a combined verdict still depends on the stages, grouping keys, time semantics, and thresholds. The guides on [detecting over time windows](../guides/detection/detect-over-time-windows.md) and [creating multi-stage detectors](../guides/detection/create-multi-stage-detectors.md) cover these tradeoffs.
+Correlation increases context, not automatically confidence. The quality of a combined verdict still depends on the stages, grouping keys, time semantics, and thresholds. The guides on [detecting over time windows](../guides/detection/detect-over-time-windows.md), [detecting periodic behavior](../guides/detection/detect-periodic-behavior.md), and [creating multi-stage detectors](../guides/detection/create-multi-stage-detectors.md) cover these tradeoffs.
 
 ## Distinguish matches, findings, alerts, and incidents
 
@@ -67,7 +68,20 @@ Detection terms describe different parts of the flow:
 
 When a security control judges an activity as it happens, keep the source activity and apply the OCSF [Security Control profile](https://schema.ocsf.io/profiles/security_control). When analysis produces a separate result, emit an OCSF Detection Finding. A Detection Finding can itself be alertable, but the class does not imply `is_alert: true`.
 
-Stable identities let downstream systems deduplicate findings, track lifecycle updates, and link a combined verdict to its source events. The guide on [modeling detections in OCSF](../guides/detection/model-detections-in-ocsf.md) explains these output choices.
+Stable identities let downstream systems deduplicate findings, track lifecycle updates, and link a combined verdict to its source events. A finding also carries its classification as data: `finding_info.attacks` embeds MITRE ATT\&CK tactic and technique mappings in the event itself rather than in rule metadata, so the mapping survives routing, storage, and correlation. The guide on [modeling detections in OCSF](../guides/detection/model-detections-in-ocsf.md) explains these output choices.
+
+## Choose the alerting posture
+
+Not every detection should page an analyst. Detection catalogs such as Splunk’s [security\_content](https://github.com/splunk/security_content) encode this intent as rule metadata, distinguishing direct alerts, risk-contributing anomalies, hunting queries, and correlations. OCSF expresses the same posture in each finding as data:
+
+| Posture  | Intent                                        | OCSF encoding                                                                           |
+| -------- | --------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Alert    | The match is actionable on its own.           | Detection Finding with `is_alert: true` and a `severity_id` that reflects the impact.   |
+| Evidence | The match matters in aggregate, not alone.    | Detection Finding with `risk_score` and `confidence_id`, without the alert flag.        |
+| Hunt     | An analyst explores a hypothesis.             | Pipeline results over stored events, without a finding.                                 |
+| Combine  | Several weak signals form one strong verdict. | A new Detection Finding that links its contributing findings and sets `is_alert: true`. |
+
+The posture is independent of the analytic method recorded in `analytic.type_id`: a high-confidence rule can emit evidence rather than an alert, and a statistical detector can alert directly when its precision has earned it. Pairing evidence-posture findings with a risk-accumulating combinator, as the guide on [accumulating risk per entity](../guides/detection/create-multi-stage-detectors.md#accumulate-risk-per-entity) shows, lets low-confidence detections contribute without paging anyone.
 
 ## Compose detections for operation
 
@@ -75,7 +89,7 @@ Package matching and result modeling together when they form one reusable detect
 
 Topics decouple producers from consumers. A stage can publish every finding without knowing which combinators consume it, while each combinator owns its correlation and suppression policy. This keeps stage evidence available for counting, sequencing, and future compositions.
 
-Treat detections as versioned content: give analytics stable identities, test them against representative fixtures and historical data, and package related operators, pipelines, contexts, and tests together. The guides on [adding operators](../guides/packages/add-operators.md), [adding pipelines](../guides/packages/add-pipelines.md), and [writing tests](../guides/testing/write-tests.md) cover this operational layer.
+Treat detections as versioned content: give analytics stable identities, test them against representative example data and historical events, and package related operators, pipelines, contexts, and tests together. The guides on [adding operators](../guides/packages/add-operators.md), [adding pipelines](../guides/packages/add-pipelines.md), and [writing tests](../guides/testing/write-tests.md) cover this operational layer. Our [`tenzir` package](https://github.com/tenzir/library/tree/main/tenzir) applies this model and ships streaming network detectors under the `tenzir::detect::network` namespace.
 
 ## See also
 

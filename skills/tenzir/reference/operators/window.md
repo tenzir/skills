@@ -23,7 +23,11 @@ Unlike `every`, which reruns a subpipeline on a wall-clock schedule, `window` op
 
 `window` creates **fixed windows** of width `size`. These include tumbling windows (non-overlapping) and hopping windows (overlapping). Fixed windows use left-closed, right-open intervals: `[start, end)`. An event whose timestamp equals the window end belongs to the next window. Window boundaries are aligned to the Unix epoch.
 
-`window` has no built-in partition key. To maintain independent windows per entity - per user, host, or source IP address - wrap `window` in an outer `group` operator. The grouping key is then available inside the subpipeline as `$group`. Each key advances its own event-time clock, so sparse keys may close their windows late, or not until the input ends, unless `idle_timeout` is set.
+`window` has no built-in partition key. For keyed aggregations, put `group` inside `window` by default. The stream then has one event-time clock, and closing a window also closes every group subpipeline inside it. This bounds high-cardinality state without waiting for another event from each key.
+
+Use independent per-key clocks deliberately
+
+Put `group` outside `window` only when each key requires an independent event-time clock. A busy key then cannot make a sparse key late, but sparse keys may keep their windows and group state alive until their own next event, `idle_timeout`, or the end of the input.
 
 ### The event-time clock
 
@@ -100,15 +104,15 @@ window size=1h, on=ts, tolerance=5min {
 
 ### Detect brute-force logins with a hopping window
 
-Detect many failed logins for the same user from the same source IP address in a 10-minute window that advances every minute. The outer `group` gives each user/IP pair its own window clock.
+Detect many failed logins for the same user from the same source IP address in a 10-minute window that advances every minute. The outer `window` bounds every user/IP group with one stream-wide clock.
 
 ```tql
 from_kafka "auth-events"
 this = message.parse_json()
 ts = ts.time()
 where action == "login" and outcome == "failure"
-group {user: user, src_ip: src_ip} {
-  window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
+window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
+  group {user: user, src_ip: src_ip} {
     summarize failures=count(), target_hosts=distinct(host)
     user = $group.user
     src_ip = $group.src_ip
@@ -128,8 +132,8 @@ from_kafka "auth-events"
 this = message.parse_json()
 ts = ts.time()
 where action == "login" and outcome == "failure"
-group src_ip {
-  window size=15min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
+window size=15min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
+  group src_ip {
     summarize attempts=count(), users=count_distinct(user)
     src_ip = $group
     start = $window.start
@@ -148,8 +152,8 @@ from_kafka "auth-events"
 this = message.parse_json()
 ts = ts.time()
 where action == "login" and outcome == "failure"
-group {user: user, src_ip: src_ip} {
-  window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
+window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
+  group {user: user, src_ip: src_ip} {
     summarize failures=count()
     user = $group.user
     src_ip = $group.src_ip

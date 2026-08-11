@@ -82,27 +82,16 @@ The CLI prompts for missing information interactively. Use one-key shortcuts for
 
 ### Add co-authors
 
-Use `--co-author` to credit additional contributors alongside the automatically inferred author:
+Use `--co-author` to credit an additional human contributor alongside the automatically inferred author:
 
 ```sh
 uvx tenzir-ship add \
   --title "Implement caching layer" \
   --type feature \
-  --co-author claude
+  --co-author alice
 ```
 
-This is ideal for AI-assisted development, pair programming, or collaborative contributions. The CLI infers the primary author from environment variables or the GitHub CLI, then appends co-authors in the order you specify:
-
-```sh
-uvx tenzir-ship add \
-  --title "Refactor authentication" \
-  --type change \
-  --co-author claude \
-  --co-author copilot \
-  --pr 150
-```
-
-You can also combine `--author` with `--co-author` to set the primary author explicitly:
+The CLI infers the primary author from environment variables or the GitHub CLI, then appends human co-authors in the order you specify. You can combine `--author` with `--co-author` to set the primary author explicitly:
 
 ```sh
 uvx tenzir-ship add \
@@ -111,6 +100,8 @@ uvx tenzir-ship add \
   --author alice \
   --co-author bob
 ```
+
+Author metadata represents people. Do not record coding agents, bots, tools, providers, or models through `--author`, `--co-author`, or entry frontmatter. Inference can resolve to an automation account in CI or an agent environment, so inspect the generated `authors` metadata. Confirm that every inferred login belongs to a human contributor. Pass `--author` for a known human, or remove the author metadata when no human can be identified confidently. Record tool provenance in commit metadata instead.
 
 ### View pending changes
 
@@ -136,15 +127,14 @@ The card view displays detailed metadata and the full entry body:
 
 ```text
 ❯ tenzir-ship show --card 1
-╭─ 🐞 Normalize release note paragraphs ───────────────────────────────────╮
-│ Entry ID:  normalize-release-note-paragraphs                             │
+╭─ 🐞 Fix authentication timeout ──────────────────────────────────────────╮
+│ Entry ID:  fix-authentication-timeout                                    │
 │ Type:      bugfix                                                        │
 │ Created:   2025-10-27                                                    │
-│ Authors:   @codex                                                        │
+│ Authors:   @alice                                                        │
 │ Status:    Released in v0.4.1                                            │
 │ ──────────────────────────────────────────────────────────────────────── │
-│ GitHub release notes now collapse soft line breaks from entry bodies so  │
-│ paragraphs render as expected.                                           │
+│ Sessions no longer expire prematurely during active use.                 │
 ╰──────────────────────────────────────────────────────────────────────────╯
 ```
 

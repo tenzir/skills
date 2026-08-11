@@ -273,7 +273,7 @@ detection:
 level: high
 ```
 
-Run it on OCSF events like any other rule. The fixture contains one matching credential-store dump and one benign `print.exe` launch:
+Run it on OCSF events like any other rule. The example data contains one matching credential-store dump and one benign `print.exe` launch:
 
 ```tql
 from {
@@ -371,6 +371,9 @@ Only the credential-store dump matches; the benign launch passes through the ope
 The `{event, rule}` wrapper is operator output, not a finding. Reshape it into an OCSF [Detection Finding](https://schema.ocsf.io/classes/detection_finding) (`class_uid: 2004`) so Sigma matches flow through the same downstream processing as every other detection. Give every rule a stable `id` before this step because it identifies both the analytic and the resulting finding:
 
 ```tql
+let $finding_time = 2026-04-28T10:01:05Z
+
+
 from {
   time: 2026-04-28T10:01:00Z,
   metadata: {uid: "process-activity-52517", version: "1.8.0"},
@@ -388,10 +391,11 @@ from {
 sigma "rules/ocsf/print-dump-ocsf.yml"
 // Reshape the {event, rule} wrapper into a Detection Finding.
 this = {
-  time: event.time,
+  time: $finding_time, // use now() in a live pipeline
   metadata: {
+    product: {name: "Tenzir", vendor_name: "Tenzir"},
     uid: f"finding-create-sigma-{rule.id}-{event.metadata.uid}",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 2004,
   category_uid: 2,
@@ -416,52 +420,55 @@ this = {
   }],
 }
 type_uid = class_uid * 100 + activity_id
-ocsf::cast
 ```
 
 ```tql
 {
-  activity_id: 1,
-  category_uid: 2,
+  time: 2026-04-28T10:01:05Z,
+  metadata: {
+    product: {
+      name: "Tenzir",
+      vendor_name: "Tenzir",
+    },
+    uid: "finding-create-sigma-2fcda7e2-8c57-4904-86ac-37fc3157e09d-process-activity-52517",
+    version: "1.9.0",
+  },
   class_uid: 2004,
+  category_uid: 2,
+  activity_id: 1,
+  severity_id: 4,
+  status_id: 1,
+  is_alert: true,
+  finding_info: {
+    uid: "sigma-2fcda7e2-8c57-4904-86ac-37fc3157e09d-process-activity-52517",
+    title: "Sensitive File Dump Via Print.EXE",
+    analytic: {
+      name: "Sensitive File Dump Via Print.EXE",
+      uid: "2fcda7e2-8c57-4904-86ac-37fc3157e09d",
+      type_id: 1,
+    },
+  },
   device: {
     hostname: "WORKSTATION-17",
   },
   evidences: [
     {
+      uid: "process-activity-52517",
       actor: {
         user: {
           name: "alice",
         },
       },
       process: {
-        cmd_line: "print.exe /D:C:\\Windows\\System32\\config\\SAM C:\\Temp\\sam.bak",
+        name: "print.exe",
+        path: "C:\\Windows\\System32\\print.exe",
         file: {
           internal_name: "Print.EXE",
         },
-        name: "print.exe",
-        path: "C:\\Windows\\System32\\print.exe",
+        cmd_line: "print.exe /D:C:\\Windows\\System32\\config\\SAM C:\\Temp\\sam.bak",
       },
-      uid: "process-activity-52517",
     },
   ],
-  finding_info: {
-    analytic: {
-      name: "Sensitive File Dump Via Print.EXE",
-      type_id: 1,
-      uid: "2fcda7e2-8c57-4904-86ac-37fc3157e09d",
-    },
-    title: "Sensitive File Dump Via Print.EXE",
-    uid: "sigma-2fcda7e2-8c57-4904-86ac-37fc3157e09d-process-activity-52517",
-  },
-  is_alert: true,
-  metadata: {
-    uid: "finding-create-sigma-2fcda7e2-8c57-4904-86ac-37fc3157e09d-process-activity-52517",
-    version: "1.8.0",
-  },
-  severity_id: 4,
-  status_id: 1,
-  time: 2026-04-28T10:01:00Z,
   type_uid: 200401,
 }
 ```
@@ -514,7 +521,7 @@ When your source emits OCSF Process Activity events, translate the selectors to 
 | `CommandLine`          | `process.cmd_line`                      |
 | Host and user grouping | `device.hostname` and `actor.user.name` |
 
-The `windash` modifier, which matches both `/D` and `-D` parameter spellings, has a direct regex equivalent: `[/-]d`. The `process.file` object is optional in OCSF, so the predicate reads it with `?` access and a trailing `== true`, following the optional-field guidance in the section on [filtering by event type and fields](match-events-with-tql.md#filter-by-event-type-and-fields). The following fixture contains two matching process launches and one benign `print.exe` launch. The pipeline keeps the rule’s single-event semantics and emits one detection per matching event:
+The `windash` modifier, which matches both `/D` and `-D` parameter spellings, has a direct regex equivalent: `[/-]d`. The `process.file` object is optional in OCSF, so the predicate reads it with `?` access and a trailing `== true`, following the optional-field guidance in the section on [filtering by event type and fields](match-events-with-tql.md#filter-by-event-type-and-fields). The following example data contains two matching process launches and one benign `print.exe` launch. The pipeline keeps the rule’s single-event semantics and emits one detection per matching event:
 
 ```tql
 from {
@@ -616,7 +623,7 @@ The `sigma` operator runs single detection rules only and does not execute corre
 
 ### Express count correlations
 
-The two count types threshold sightings of a single rule with the same event-time windows used for native TQL detections. The fixtures are simplified sightings carrying `time`, `host`, `user`, and `rule`; in production these values come from Detection Finding fields such as `device.hostname` and `finding_info.analytic.uid`. The examples use fixed, epoch-aligned time bins; use a hopping window for a sliding interpretation. For brevity, they also share one event-time clock across hosts and omit `tolerance`; in production, wrap the window in a [`group`](https://tenzir.com/docs/reference/operators/group.md) keyed by the correlation entity, as the [brute-force detector](detect-over-time-windows.md#count-events-in-tumbling-windows) does.
+The two count types threshold sightings of a single rule with the same event-time windows used for native TQL detections. The example data sets are simplified sightings carrying `time`, `host`, `user`, and `rule`; in production these values come from Detection Finding fields such as `device.hostname` and `finding_info.analytic.uid`. The examples use fixed, epoch-aligned time bins; use a hopping window for a sliding interpretation. They also share one event-time clock across hosts and omit `tolerance`. In production, keep [`window`](https://tenzir.com/docs/reference/operators/window.md) on the outside so it bounds keyed state, put [`group`](https://tenzir.com/docs/reference/operators/group.md) inside it when the correlation needs a full keyed subpipeline, and size `tolerance` for ingestion skew.
 
 An `event_count` correlation fires when the same rule matches repeatedly for a group within a window:
 

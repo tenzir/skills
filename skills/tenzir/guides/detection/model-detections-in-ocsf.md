@@ -12,6 +12,10 @@ section: "Docs"
 
 This guide shows you how to model detection results in [OCSF](https://schema.ocsf.io). Add the [Security Control profile](https://schema.ocsf.io/profiles/security_control) when a verdict belongs on the original activity event. Generate a [Detection Finding](https://schema.ocsf.io/classes/detection_finding) when an analytic result needs its own identity, evidence, and lifecycle.
 
+Schema enforcement is optional
+
+The examples construct their intended OCSF records directly. Add [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) for enum sibling expansion or [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) for schema enforcement at a pipeline boundary when you need either behavior. They are not part of the detection semantics.
+
 ## Choose the OCSF representation
 
 Start by separating alertability from the event shape, then decide whether the judgment belongs on the source activity or in a finding.
@@ -84,42 +88,41 @@ is_alert = true
 action_id = 3       // Observed: the control neither allowed nor denied it
 disposition_id = 15 // Detected
 type_uid = class_uid * 100 + activity_id
-ocsf::cast
 ```
 
 ```tql
 {
-  action_id: 3,
-  activity_id: 1,
-  actor: {
-    user: {
-      name: "alice",
-    },
-  },
-  category_uid: 1,
-  class_uid: 1007,
-  device: {
-    hostname: "ws-17",
-  },
-  disposition_id: 15,
-  is_alert: true,
+  time: 2026-07-01T12:00:00Z,
   metadata: {
     product: {
       name: "Windows Security",
       vendor_name: "Microsoft",
     },
+    uid: "process-activity-52501",
+    version: "1.8.0",
     profiles: [
       "security_control",
     ],
-    uid: "process-activity-52501",
-    version: "1.8.0",
+  },
+  class_uid: 1007,
+  category_uid: 1,
+  activity_id: 1,
+  severity_id: 1,
+  device: {
+    hostname: "ws-17",
+  },
+  actor: {
+    user: {
+      name: "alice",
+    },
   },
   process: {
-    cmd_line: "powershell.exe -File C:\\scripts\\report.ps1",
     name: "PowerShell.EXE",
+    cmd_line: "powershell.exe -File C:\\scripts\\report.ps1",
   },
-  severity_id: 1,
-  time: 2026-07-01T12:00:00Z,
+  is_alert: true,
+  action_id: 3,
+  disposition_id: 15,
   type_uid: 100701,
 }
 ```
@@ -154,6 +157,8 @@ Use a Detection Finding when an analytic consumes one or more source events and 
 The [Finding Information object](https://schema.ocsf.io/objects/finding_info) requires `finding_info.uid`. Build it from stable analytic and source-event identities so rerunning the detection produces the same finding identifier. Keep this identifier unchanged when the finding is updated or closed.
 
 The nested [Analytic object](https://schema.ocsf.io/objects/analytic) identifies what produced the result. Give it a stable `uid`, a human-readable `name`, an analytic `type_id`, and a version when the detection content is versioned.
+
+When the analytic maps to MITRE ATT\&CK, record the tactic and technique in `finding_info.attacks` using the [Attack object](https://schema.ocsf.io/objects/attack). Consumers can then route and correlate findings by technique instead of parsing titles.
 
 Finding identity versus event identity
 
@@ -241,6 +246,12 @@ this = {
       type_id: 1,
       version: "1.0.0",
     },
+    // The ATT&CK mapping travels inside the finding as data.
+    attacks: [{
+      tactic: {uid: "TA0006", name: "Credential Access"},
+      technique: {uid: "T1003", name: "OS Credential Dumping"},
+      sub_technique: {uid: "T1003.002", name: "Security Account Manager"},
+    }],
     related_events: [{
       uid: metadata.uid,
       type_uid: class_uid * 100 + activity_id,
@@ -252,58 +263,11 @@ this = {
   evidences: [{uid: metadata.uid, actor: actor, process: process}],
 }
 type_uid = class_uid * 100 + activity_id
-ocsf::cast
 ```
 
 ```tql
 {
-  activity_id: 1,
-  category_uid: 2,
-  class_uid: 2004,
-  confidence_id: 3,
-  device: {
-    hostname: "WORKSTATION-17",
-  },
-  evidences: [
-    {
-      actor: {
-        user: {
-          name: "alice",
-        },
-      },
-      process: {
-        cmd_line: "print.exe /D:C:\\Windows\\System32\\config\\SAM C:\\Temp\\sam.bak",
-        file: {
-          internal_name: "Print.EXE",
-        },
-        name: "print.exe",
-        path: "C:\\Windows\\System32\\print.exe",
-      },
-      uid: "process-activity-52517",
-    },
-  ],
-  finding_info: {
-    analytic: {
-      name: "Sensitive File Dump Via Print.EXE",
-      type_id: 1,
-      uid: "windows_threats::print_sensitive_dump",
-      version: "1.0.0",
-    },
-    created_time: 2026-04-28T10:01:05Z,
-    first_seen_time: 2026-04-28T10:01:00Z,
-    last_seen_time: 2026-04-28T10:01:00Z,
-    related_events: [
-      {
-        created_time: 2026-04-28T10:01:00Z,
-        severity_id: 1,
-        type_uid: 100701,
-        uid: "process-activity-52517",
-      },
-    ],
-    title: "Sensitive File Dump Via Print.EXE",
-    uid: "print-dump-process-activity-52517",
-  },
-  is_alert: true,
+  time: 2026-04-28T10:01:05Z,
   metadata: {
     product: {
       name: "Tenzir",
@@ -312,14 +276,76 @@ ocsf::cast
     uid: "finding-create-process-activity-52517",
     version: "1.8.0",
   },
+  class_uid: 2004,
+  category_uid: 2,
+  activity_id: 1,
   severity_id: 4,
+  confidence_id: 3,
   status_id: 1,
-  time: 2026-04-28T10:01:05Z,
+  is_alert: true,
+  finding_info: {
+    uid: "print-dump-process-activity-52517",
+    title: "Sensitive File Dump Via Print.EXE",
+    created_time: 2026-04-28T10:01:05Z,
+    first_seen_time: 2026-04-28T10:01:00Z,
+    last_seen_time: 2026-04-28T10:01:00Z,
+    analytic: {
+      name: "Sensitive File Dump Via Print.EXE",
+      uid: "windows_threats::print_sensitive_dump",
+      type_id: 1,
+      version: "1.0.0",
+    },
+    attacks: [
+      {
+        tactic: {
+          uid: "TA0006",
+          name: "Credential Access",
+        },
+        technique: {
+          uid: "T1003",
+          name: "OS Credential Dumping",
+        },
+        sub_technique: {
+          uid: "T1003.002",
+          name: "Security Account Manager",
+        },
+      },
+    ],
+    related_events: [
+      {
+        uid: "process-activity-52517",
+        type_uid: 100701,
+        created_time: 2026-04-28T10:01:00Z,
+        severity_id: 1,
+      },
+    ],
+  },
+  device: {
+    hostname: "WORKSTATION-17",
+  },
+  evidences: [
+    {
+      uid: "process-activity-52517",
+      actor: {
+        user: {
+          name: "alice",
+        },
+      },
+      process: {
+        name: "print.exe",
+        path: "C:\\Windows\\System32\\print.exe",
+        file: {
+          internal_name: "Print.EXE",
+        },
+        cmd_line: "print.exe /D:C:\\Windows\\System32\\config\\SAM C:\\Temp\\sam.bak",
+      },
+    },
+  ],
   type_uid: 200401,
 }
 ```
 
-The example sets the required OCSF identifiers explicitly and casts the event to its OCSF schema. The guide on [mapping to OCSF](../normalization/map-to-ocsf.md#use-native-ocsf-operators) explains derivation, schema casting, validation, and field trimming.
+The example sets the required OCSF identifiers explicitly. The guide on [mapping to OCSF](../normalization/map-to-ocsf.md#use-native-ocsf-operators) explains optional derivation, schema enforcement, validation, and field trimming.
 
 ## Manage the finding lifecycle
 
@@ -340,7 +366,6 @@ A Detection Finding is not automatically an incident. When it requires incident 
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
 * [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
 * [Match events with TQL](match-events-with-tql.md)
 * [Detect over time windows](detect-over-time-windows.md)

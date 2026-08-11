@@ -957,6 +957,15 @@ uvx tenzir-test --update
 
 `--purge` removes stale artifacts (diffs, temporary files). Keep generated `.txt` files under version control so future runs can diff against them.
 
+The harness rewrites absolute paths in captured output, such as the ones that `tenzir` prints in diagnostics, as relative paths. Paths inside the package that owns a test are relative to that package, so a baseline stays valid whether you run the harness on the package, on its `tests` directory, or on the surrounding library. All other paths are relative to the project root.
+
+For example, a baseline that captures a diagnostic from a test in the `microsoft` package refers to that package’s operators without the package prefix:
+
+```text
+warning: assertion failed: unsupported OCSF to ASIM mapping
+  --> operators/asim/ocsf/map.tql:61:12
+```
+
 ## Troubleshooting
 
 * **Missing binaries** – The harness auto-detects binaries on `PATH` and falls back to `uvx tenzir` when `uv` is installed. If neither is available, set the `TENZIR_BINARY` and `TENZIR_NODE_BINARY` environment variables to point at your installation.

@@ -34,7 +34,7 @@ client.add(
     title="API entry",
     entry_type="feature",
     description="Body text",
-    co_authors=["codex"],
+    co_authors=["alice"],
 )
 
 
@@ -273,8 +273,8 @@ tenzir-ship add [options]
 | `--title <text>`       | Entry title                                  |
 | `--type <type>`        | `breaking`, `feature`, `bugfix`, or `change` |
 | `--description <text>` | Entry body                                   |
-| `--author <name>`      | Contributor name (repeatable)                |
-| `--co-author <name>`   | Additional contributor (repeatable)          |
+| `--author <name>`      | Human contributor name (repeatable)          |
+| `--co-author <name>`   | Additional human contributor (repeatable)    |
 | `--pr <number>`        | Pull request number (repeatable)             |
 | `--component <label>`  | Component label (repeatable)                 |
 | `--web`                | Open prefilled GitHub file creation URL      |
@@ -283,7 +283,7 @@ The command prompts for any information you do not pass explicitly. The first in
 
 The generated ID must be unique in the current `unreleased/` directory. It may reuse an ID from an older release because each release has its own entry namespace. The command rejects only a filename that already exists in the current unreleased namespace.
 
-By default, the CLI infers the primary author from environment variables (`TENZIR_CHANGELOG_AUTHOR`, `GH_USERNAME`) or the GitHub CLI (`gh api user`). Using `--author` overrides this inference entirely. The `--co-author` option adds to the inferred or explicit author list without replacing it, making it ideal for AI-assisted development, pair programming, or collaborative contributions. Duplicates are removed automatically while preserving order.
+By default, the CLI infers the primary author from environment variables (`TENZIR_CHANGELOG_AUTHOR`, `GH_USERNAME`) or the GitHub CLI (`gh api user`). Using `--author` overrides this inference entirely. The `--co-author` option adds another human contributor to the inferred or explicit author list without replacing it. In CI and agent environments, inference can resolve to a bot, GitHub App, or machine user. Inspect the generated `authors` metadata and confirm that every login belongs to a human contributor. Pass `--author` for a known human, or remove author metadata when no human can be identified confidently. Do not record coding agents, bots, tools, providers, or models as authors. Record tool provenance in commit metadata instead. Duplicates are removed automatically while preserving order.
 
 ### release create
 
@@ -839,7 +839,7 @@ Frontmatter fields:
 | -------------------------- | ------------- | -------- | ---------------------------------------------- |
 | `title`                    | string        | yes      | Entry title                                    |
 | `type`                     | string        | yes      | `breaking`, `feature`, `bugfix`, or `change`   |
-| `author` / `authors`       | list\[string] | no       | Contributor names (singular or plural form)    |
+| `author` / `authors`       | list\[string] | no       | Human contributor names (singular or plural)   |
 | `created`                  | string        | yes      | Creation datetime in ISO 8601 UTC format       |
 | `pr` / `prs`               | list\[int]    | no       | Pull request numbers (singular or plural form) |
 | `component` / `components` | list\[string] | no       | Labels matching configured components          |
@@ -992,7 +992,7 @@ When creating a release for a parent project, `release create` automatically app
 
 
 - 🚀 Add commit message templates  -  *@alice*
-- 🐞 Fix branch detection  -  *@bob and @codex*
+- 🐞 Fix branch detection  -  *@bob and @carol*
 
 
 ## Docs Plugin v1.2.0

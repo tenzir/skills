@@ -45,9 +45,9 @@ A stage can call one packaged operator that both matches and models the result, 
 
 ## Correlate stages within a window
 
-The simplest combinators ask whether several stages fired for the same entity within a time window, together or in a required order. These are Sigma’s `temporal` and `temporal_ordered` correlation types; the Sigma guide’s [correlation-rule mapping](execute-sigma-rules.md#map-correlation-types-to-tql) shows how all four Sigma correlation types translate to TQL. The fixtures are simplified sightings carrying `time`, `host`, and `rule`. In production, these values come from Detection Finding fields: `device.hostname` for the host and `finding_info.analytic.uid` for the rule. The combined-finding example maps those fields into a complete verdict.
+The simplest combinators ask whether several stages fired for the same entity within a time window, together or in a required order. These are Sigma’s `temporal` and `temporal_ordered` correlation types; the Sigma guide’s [correlation-rule mapping](execute-sigma-rules.md#map-correlation-types-to-tql) shows how all four Sigma correlation types translate to TQL. The example data sets are simplified sightings carrying `time`, `host`, and `rule`. In production, these values come from Detection Finding fields: `device.hostname` for the host and `finding_info.analytic.uid` for the rule. The combined-finding example maps those fields into a complete verdict.
 
-These examples use fixed, epoch-aligned time bins. For a sliding “within N minutes of each other” interpretation, use a hopping window instead, as shown in [`window`](https://tenzir.com/docs/reference/operators/window.md#detect-brute-force-logins-with-a-hopping-window). For brevity, they also share one event-time clock across hosts and omit `tolerance`. In production, wrap the window in a [`group`](https://tenzir.com/docs/reference/operators/group.md) keyed by the correlated entity, as the [brute-force detector](detect-over-time-windows.md#count-events-in-tumbling-windows) does, so a busy host cannot close windows on another host’s late sightings.
+These examples use fixed, epoch-aligned time bins. For a sliding “within N minutes of each other” interpretation, use a hopping window instead, as shown in [`window`](https://tenzir.com/docs/reference/operators/window.md#detect-brute-force-logins-with-a-hopping-window). The examples share one event-time clock across hosts and omit `tolerance`. In production, keep [`window`](https://tenzir.com/docs/reference/operators/window.md) on the outside so closing it also expires all high-cardinality correlation groups. Put [`group`](https://tenzir.com/docs/reference/operators/group.md) inside the window when a correlation needs a full keyed subpipeline, and size `tolerance` for ingestion skew. Use an outer group only when each entity must advance its own event-time clock.
 
 ### Match stages in any order
 
@@ -77,7 +77,7 @@ window size=10min, on=time {
 
 ### Match first occurrences in order
 
-A `temporal_ordered` correlation adds sequence. Compare the first occurrence of each stage: aggregate a per-stage timestamp with [`min`](https://tenzir.com/docs/reference/functions/min.md) over a conditional expression, then require the timestamps to be strictly ordered. This tolerates repeated sightings of a stage, which real detections produce routinely. In this fixture, `ws-17` triggers `recon` twice before progressing and still matches, while `ws-9` saw all three stages in the wrong order and stays silent:
+A `temporal_ordered` correlation adds sequence. Compare the first occurrence of each stage: aggregate a per-stage timestamp with [`min`](https://tenzir.com/docs/reference/functions/min.md) over a conditional expression, then require the timestamps to be strictly ordered. This tolerates repeated sightings of a stage, which real detections produce routinely. In this example, `ws-17` triggers `recon` twice before progressing and still matches, while `ws-9` saw all three stages in the wrong order and stays silent:
 
 ```tql
 from {time: 2026-07-01T10:00:00Z, host: "ws-17", rule: "recon"},
@@ -147,6 +147,47 @@ drop target_sequence
 ```
 
 Here `ws-17` matches despite the early `exploit`, because `recon` at 10:01, `exploit` at 10:02, and `exfil` at 10:03 form the required subsequence. The exact-equality filter removes unrelated rule names before scanning, so names that only contain a stage name cannot satisfy the correlation. [`collect`](https://tenzir.com/docs/reference/functions/collect.md) keeps arrival order (unlike [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)), so [`sort`](https://tenzir.com/docs/reference/operators/sort.md) establishes event-time order inside each window before the collection. Keeping the sort inside the window bounds its input; a global sort would wait forever on a live stream.
+
+### Accumulate risk per entity
+
+The previous combinators ask *whether* stages fired. Risk accumulation asks *how much* evidence accrued: every finding contributes a score, the combinator sums scores per entity, and a verdict fires when the total crosses a threshold. This absorbs low-confidence detections that should not alert on their own, the evidence posture described in the explanation of [alerting postures](../../explanations/detections.md#choose-the-alerting-posture), and mirrors the risk-based alerting model that SIEM correlation rules built on scored observations use.
+
+The example data carries a `risk` score per sighting. Requiring both a risk threshold and at least two distinct analytics keeps one noisy detection from alerting by itself: `ws-17` crosses the threshold with three different analytics, while `ws-9` accumulates two sightings of the same analytic and stays silent on both grounds:
+
+```tql
+let $risk_threshold = 60
+
+
+from {time: 2026-07-01T09:10:00Z, host: "ws-17", rule: "beacon_cadence", risk: 25},
+     {time: 2026-07-01T11:40:00Z, host: "ws-17", rule: "smb_traffic_spike", risk: 20},
+     {time: 2026-07-01T13:05:00Z, host: "ws-17", rule: "outbound_volume_burst", risk: 30},
+     {time: 2026-07-01T10:00:00Z, host: "ws-9", rule: "smb_traffic_spike", risk: 20},
+     {time: 2026-07-01T12:30:00Z, host: "ws-9", rule: "smb_traffic_spike", risk: 20}
+window size=24h, on=time {
+  summarize host,
+            risk=sum(risk),
+            analytics=distinct(rule),
+            first_seen=min(time),
+            last_seen=max(time)
+  where risk >= $risk_threshold and analytics.length() >= 2
+}
+```
+
+```tql
+{
+  host: "ws-17",
+  risk: 75,
+  analytics: [
+    "outbound_volume_burst",
+    "beacon_cadence",
+    "smb_traffic_spike",
+  ],
+  first_seen: 2026-07-01T09:10:00Z,
+  last_seen: 2026-07-01T13:05:00Z,
+}
+```
+
+In production, the scores come from the findings themselves: stages stamp the OCSF `risk_score` field when they emit a Detection Finding, and the combinator groups by the entity fields the findings share, such as `device.hostname` or `actor.user.name`. Enrichment can scale a stage’s base score by asset criticality before the sum. For a sliding risk horizon, use a hopping window (`every=`) and suppress the repeated verdicts it produces, as shown in [suppressing repeated verdicts](create-multi-stage-detectors.md#suppress-repeated-verdicts).
 
 ## Manage state beyond the window
 
@@ -226,6 +267,7 @@ let $stage_uids = [
   "windows_threats::print_sensitive_dump",
   "smb_traffic_spike",
 ]
+let $finding_time = 2026-07-01T10:06:05Z
 
 
 from {
@@ -283,10 +325,11 @@ window size=10min, on=time {
     and stages.contains("smb_traffic_spike")
 }
 this = {
-  time: last,
+  time: $finding_time, // use now() in a live pipeline
   metadata: {
+    product: {name: "Tenzir", vendor_name: "Tenzir"},
     uid: f"finding-create-multistage-{host}-{first}",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 2004,
   category_uid: 2,
@@ -310,23 +353,34 @@ this = {
   device: {hostname: host},
 }
 type_uid = class_uid * 100 + activity_id
-ocsf::cast
 ```
 
 ```tql
 {
-  activity_id: 1,
-  category_uid: 2,
-  class_uid: 2004,
-  device: {
-    hostname: "ws-17",
+  time: 2026-07-01T10:06:05Z,
+  metadata: {
+    product: {
+      name: "Tenzir",
+      vendor_name: "Tenzir",
+    },
+    uid: "finding-create-multistage-ws-17-2026-07-01T10:00:00Z",
+    version: "1.9.0",
   },
+  class_uid: 2004,
+  category_uid: 2,
+  activity_id: 1,
+  severity_id: 5,
+  status_id: 1,
+  is_alert: true,
+  start_time: 2026-07-01T10:00:00Z,
   end_time: 2026-07-01T10:06:00Z,
   finding_info: {
+    uid: "multistage-ws-17-2026-07-01T10:00:00Z",
+    title: "Multi-stage intrusion on ws-17",
     analytic: {
       name: "Multi-stage intrusion",
-      type_id: 1,
       uid: "multistage_intrusion",
+      type_id: 1,
     },
     related_events: [
       {
@@ -340,23 +394,15 @@ ocsf::cast
       },
     ],
     related_events_count: 3,
-    title: "Multi-stage intrusion on ws-17",
-    uid: "multistage-ws-17-2026-07-01T10:00:00Z",
   },
-  is_alert: true,
-  metadata: {
-    uid: "finding-create-multistage-ws-17-2026-07-01T10:00:00Z",
-    version: "1.8.0",
+  device: {
+    hostname: "ws-17",
   },
-  severity_id: 5,
-  start_time: 2026-07-01T10:00:00Z,
-  status_id: 1,
-  time: 2026-07-01T10:06:00Z,
   type_uid: 200401,
 }
 ```
 
-The verdict follows the same conventions as its stages: `time` stamps the newest contributing evidence, `start_time` and `end_time` span it, and the severity reflects the combination, not any single stage. What makes it a multi-stage verdict is the linkage: `related_events` and `related_events_count` let analysts pivot from the verdict to every contributing finding.
+The verdict follows the same conventions as its stages: `time` records when the combined finding was created, `start_time` and `end_time` span the contributing evidence, and the severity reflects the combination, not any single stage. What makes it a multi-stage verdict is the linkage: `related_events` and `related_events_count` let analysts pivot from the verdict to every contributing finding.
 
 ### Escalate through an incident workflow
 

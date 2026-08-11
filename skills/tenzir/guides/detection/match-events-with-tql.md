@@ -16,7 +16,7 @@ Why a query language for detections?
 
 Most detections in practice are standard queries: filter an event stream on a few fields, compare strings, count occurrences. Query languages are a great fit for expressing them, and the Microsoft ecosystem shows how far that scales: KQL powers a thriving community that shares detections by the thousands. TQL performs the same transformations directly in the pipeline, and its tight integration with OCSF and the surrounding security tooling makes it a strong fit for security operations beyond detection alone: the same language collects, normalizes, enriches, and routes.
 
-The examples use OCSF events. Every fixture shows only the fields the detection reads. They progress from simple field comparisons to regular expressions, membership tests, and event lists before packaging the matching and output logic as a reusable detection.
+The examples use OCSF events. Every example shows only the fields the detection reads. They progress from simple field comparisons to regular expressions, membership tests, and event lists before packaging the matching and output logic as a reusable detection.
 
 ## Filter by event type and fields
 
@@ -228,10 +228,11 @@ where process.cmd_line.match_regex(r"(?i)[/-]d") and process.cmd_line.match_rege
   r"(?i)\\config\\(sam|security|system)|\\windows\\ntds\\ntds\.dit"
 )
 this = {
-  time: time,
+  time: now(),
   metadata: {
+    product: {name: "Tenzir", vendor_name: "Tenzir"},
     uid: f"finding-create-print-dump-{device.hostname}-{time}",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 2004,
   category_uid: 2,
@@ -252,7 +253,6 @@ this = {
   evidences: [{actor: actor, process: process}],
 }
 type_uid = class_uid * 100 + activity_id
-ocsf::cast
 ```
 
 ### Connect the detection to a pipeline

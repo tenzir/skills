@@ -113,8 +113,9 @@ from_file "invoice.pdf.exe", mmap=true {
 this = {
   time: 2026-07-01T12:00:00Z, // use now() in a live pipeline
   metadata: {
+    product: {name: "Tenzir", vendor_name: "Tenzir"},
     uid: f"finding-create-yara-{rule.namespace}-{rule.identifier}-invoice.pdf.exe",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 2004,
   category_uid: 2,
@@ -144,14 +145,35 @@ this = {
   },
 }
 type_uid = class_uid * 100 + activity_id
-ocsf::cast
 ```
 
 ```tql
 {
-  activity_id: 1,
-  category_uid: 2,
+  time: 2026-07-01T12:00:00Z,
+  metadata: {
+    product: {
+      name: "Tenzir",
+      vendor_name: "Tenzir",
+    },
+    uid: "finding-create-yara-default-SuspiciousDropper-invoice.pdf.exe",
+    version: "1.9.0",
+  },
   class_uid: 2004,
+  category_uid: 2,
+  activity_id: 1,
+  severity_id: 4,
+  status_id: 1,
+  is_alert: true,
+  finding_info: {
+    uid: "yara-default-SuspiciousDropper-invoice.pdf.exe",
+    title: "YARA match: SuspiciousDropper",
+    desc: "Detects marker strings of the demo dropper family",
+    analytic: {
+      name: "SuspiciousDropper",
+      uid: "yara:default:SuspiciousDropper",
+      type_id: 1,
+    },
+  },
   evidences: [
     {
       file: {
@@ -161,31 +183,13 @@ ocsf::cast
       },
     },
   ],
-  finding_info: {
-    analytic: {
-      name: "SuspiciousDropper",
-      type_id: 1,
-      uid: "yara:default:SuspiciousDropper",
-    },
-    desc: "Detects marker strings of the demo dropper family",
-    title: "YARA match: SuspiciousDropper",
-    uid: "yara-default-SuspiciousDropper-invoice.pdf.exe",
-  },
-  is_alert: true,
-  metadata: {
-    uid: "finding-create-yara-default-SuspiciousDropper-invoice.pdf.exe",
-    version: "1.8.0",
-  },
-  severity_id: 4,
-  status_id: 1,
-  time: 2026-07-01T12:00:00Z,
-  type_uid: 200401,
   unmapped: {
     matched_strings: [
       "$marker",
       "$c2",
     ],
   },
+  type_uid: 200401,
 }
 ```
 
