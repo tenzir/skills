@@ -26,7 +26,7 @@ The current architectural pattern for Amazon Security Lake requires creating one
 /ext/{custom-source-name}/region={region}/accountId={accountID}/eventDay={YYYYMMDD}/
 ```
 
-This architecture naturally leads to deploying one Tenzir pipeline per custom source. The [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) operator handles the partitioning according to this structure automatically.
+This architecture naturally leads to deploying one Tenzir pipeline per custom source. The [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) operator handles the partitioning according to this structure automatically. It sorts each file by event time, so its `timeout` determines when a file closes and the incoming data rate determines the final size.
 
 ### Custom Source Setup
 
@@ -120,3 +120,9 @@ to_amazon_security_lake $s3_uri,
   region="eu-west-2",
   accountId="123456789012"
 ```
+
+## See Also
+
+* [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md)
+* [Write partitioned files](../../guides/routing/write-partitioned-files.md)
+* [AWS Authentication](../../reference/aws-authentication.md)

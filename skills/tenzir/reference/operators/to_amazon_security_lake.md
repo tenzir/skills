@@ -20,9 +20,15 @@ to_amazon_security_lake s3_uri:string, region=string, account_id=string,
 
 The `to_amazon_security_lake` operator sends OCSF events to [Amazon Security Lake](https://aws.amazon.com/security-lake/), AWS’s centralized security data repository that normalizes and stores security data from multiple sources.
 
-The operator automatically handles Amazon Security Lake’s partitioning requirements and file size constraints, but does not validate the OCSF schema of the events. Consider [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md) in your pipeline to ensure schema compliance.
+The operator handles Amazon Security Lake’s partitioning, Parquet, sorting, and AWS role conventions. It derives `eventDay` from the UTC value of the required `time` field and writes Zstandard-compressed Parquet objects under:
 
-For a list of OCSF event classes supported by Amazon Security Lake, see the [AWS documentation](https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html#ocsf-eventclass). The operator generates random UUID (v7) file names with a `.parquet` extension.
+```text
+{s3_uri}/region={region}/accountId={account_id}/eventDay={YYYYMMDD}/{uuid}.parquet
+```
+
+It sorts each object by `time`. Sorting buffers all events for the open partition before producing bytes, so `timeout`, the end of input, or a graceful stop determines when the object closes. The operator does not enforce a maximum object size, and the final size depends on the data accumulated during that interval. Our guide on [Write partitioned files](../../guides/routing/write-partitioned-files.md) explains how buffering affects file rotation.
+
+The operator does not validate the OCSF schema of the events. Consider [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md) in your pipeline to ensure schema compliance. For a list of OCSF event classes supported by Amazon Security Lake, see the [AWS documentation](https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html#ocsf-eventclass).
 
 ### `s3_uri: string`
 
@@ -111,4 +117,5 @@ to_amazon_security_lake $s3_uri,
 
 * [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
+* [Write partitioned files](../../guides/routing/write-partitioned-files.md)
 * [Amazon Security Lake](../../integrations/amazon/security-lake.md)

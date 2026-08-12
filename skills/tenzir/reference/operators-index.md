@@ -83,6 +83,7 @@
 - [fork_merge](operators/fork_merge.md): Runs multiple subpipelines on the same input and merges their outputs.
 - [group](operators/group.md): Routes events with the same key through the same subpipeline.
 - [load_balance](operators/load_balance.md): Routes the data to one of multiple subpipelines.
+- [merge](operators/merge.md): Merges the output of a source subpipeline into the main stream.
 - [parallel](operators/parallel.md): Runs a subpipeline across multiple parallel workers.
 - [pass](operators/pass.md): Does nothing with the input.
 - [repeat](operators/repeat.md): Repeats the input a number of times.

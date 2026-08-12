@@ -19,6 +19,8 @@ replace(x:string, pattern:string, replacement:string, [max=int], [ignore_case=bo
 
 The `replace` function returns a new string where occurrences of `pattern` in `x` are replaced with `replacement`, up to `max` times. If `max` is omitted, all occurrences are replaced.
 
+`pattern` and `replacement` can be fields or other expressions. The function evaluates them separately for every input event. If `pattern` evaluates to an empty string or `null`, the function leaves `x` unchanged. If `replacement` evaluates to `null`, the function removes matching patterns, as if the replacement were an empty string. If `x` evaluates to `null`, the function returns `null`.
+
 Set `ignore_case=true` to match using full Unicode case folding instead of case-sensitive matching.
 
 ### `x: string`
@@ -65,6 +67,27 @@ from {x: "hello".replace("l", "r", max=1)}
 
 ```tql
 {x: "herlo"}
+```
+
+### Replace using a field value
+
+Use a field as the pattern to redact a normalized email address from an OCSF `raw_data` field.
+
+```tql
+from {
+  raw_data: "Authentication succeeded for alice@example.com",
+  user: {email_addr: "alice@example.com"},
+}
+
+
+raw_data = raw_data.replace(user.email_addr, "***")
+```
+
+```tql
+{
+  raw_data: "Authentication succeeded for ***",
+  user: {email_addr: "alice@example.com"},
+}
 ```
 
 ### Replace case-insensitively

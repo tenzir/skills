@@ -320,6 +320,10 @@ The deduplicate operator provides a powerful mechanism to remove duplicate event
 
 This guide shows you how to send data to various destinations using TQL output operators.
 
+#### [Write partitioned files](guides/routing/write-partitioned-files.md)
+
+Partitioned files organize an event stream into separate files or objects based on field values.
+
 #### [Expose data as a server](guides/routing/expose-data-as-server.md)
 
 This guide shows you how to make pipeline data available to external consumers by starting an HTTP server.

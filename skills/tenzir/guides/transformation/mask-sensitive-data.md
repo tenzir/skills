@@ -180,6 +180,30 @@ if password? != null {
 
 Records without a `password` field pass through unchanged.
 
+### Redact a structured value from raw data
+
+Normalized events can retain a sensitive value in both a structured field and the original `raw_data`. Use the structured field as the dynamic pattern for [`replace`](https://tenzir.com/docs/reference/functions/replace.md) before you overwrite it:
+
+```tql
+from {
+  raw_data: "Authentication succeeded for alice@example.com",
+  user: {email_addr: "alice@example.com"},
+}
+
+
+raw_data = raw_data.replace(user.email_addr, "***")
+user.email_addr = "***"
+```
+
+```tql
+{
+  raw_data: "Authentication succeeded for ***",
+  user: {email_addr: "***"},
+}
+```
+
+The order matters because the first assignment uses the original `user.email_addr` as its pattern. After the replacement, you can mask the structured field without leaving the email address in `raw_data`.
+
 ## Reveal a prefix and mask the rest
 
 Sometimes you want analysts to recognize a value at a glance without exposing all of it. Combine [`slice`](https://tenzir.com/docs/reference/functions/slice.md) with [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md) or [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md) to keep either end of the value:
@@ -301,6 +325,7 @@ The examples above use plain `let` bindings because [`secret`](https://tenzir.co
 * [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
 * [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md)
 * [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md)
+* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
 * [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md)
 * [`year`](https://tenzir.com/docs/reference/functions/year.md)
 * [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md)

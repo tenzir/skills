@@ -19,6 +19,8 @@ replace_regex(x:string, pattern:string, replacement:string, [max=int]) -> string
 
 The `replace_regex` function returns a new string where substrings in `x` that match `pattern` are replaced with `replacement`, up to `max` times. If `max` is omitted, all matches are replaced.
 
+An empty regular expression matches at every string boundary. For example, `"abc".replace_regex("", "-")` returns `"-a-b-c-"`. In contrast, an empty literal pattern passed to [`replace`](https://tenzir.com/docs/reference/functions/replace.md) leaves the subject unchanged.
+
 ### `x: string`
 
 The subject to replace the action on.

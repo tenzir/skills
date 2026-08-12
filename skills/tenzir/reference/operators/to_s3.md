@@ -74,7 +74,9 @@ See [AWS Authentication](../aws-authentication.md) for a description of every fi
 
 ### `max_size = int (optional)`
 
-Rotates to a new file after the current file exceeds this size in bytes. Because rotation only fires after the threshold is crossed, individual files may be slightly larger than `max_size`.
+Rotates to a new file after the writer subpipeline emits at least this many bytes. The operator checks the size after each emitted chunk, so the resulting file can exceed `max_size` by that chunk and by final format metadata.
+
+Size-based rotation requires the writer subpipeline to emit bytes while it receives events. A blocking operator such as `sort` buffers its complete input, so `max_size` cannot split its output. In that case, `timeout`, the end of input, or a graceful stop closes the file.
 
 Defaults to `100M`.
 
@@ -88,7 +90,7 @@ Defaults to `5min`.
 
 A list of fields used to partition events into separate files. For every distinct combination of partition-field values, a separate file (or group of rotated files) is written. The URL must contain a `**` placeholder, which is replaced by the hive-style path `field1=value1/field2=value2/…`.
 
-The partitioning fields are **not** stripped from the written events - they remain in each record.
+The operator removes the partition fields before it sends events to the writer subpipeline. Their values remain available in the generated path, but not in the serialized records.
 
 ### `{ … }`
 

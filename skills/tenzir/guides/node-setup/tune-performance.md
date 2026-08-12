@@ -47,6 +47,40 @@ The `tenzir.import.batch-timeout` option sets a timeout for forwarding buffered 
 
 The `tenzir.import.read-timeout` option determines how long a call to read data from the input will block. After the read timeout elapses, Tenzir tries again at a later. The default value is 10 seconds.
 
+## Parallelism
+
+Every operator of a pipeline runs on a single core by default. Enable parallelism to let Tenzir run CPU-bound operators on several cores at once. Add a `// parallelism:` comment to the leading comment lines of the pipeline:
+
+```tql
+// parallelism: max
+from_file "/var/log/events/*.json", watch=10s
+ocsf::cast
+where severity_id >= 4
+to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
+```
+
+The comment travels with the pipeline, so it works wherever the pipeline runs, including on a node. It accepts:
+
+* `disabled`, the default, which runs one instance of every operator.
+* `max`, which runs one instance per CPU core.
+* A positive integer, which runs that many instances.
+
+The `tenzir` binary also accepts a `--parallelism` option with the same values. It applies to pipelines that carry no comment, which makes it useful for trying out a degree of parallelism without editing the pipeline.
+
+Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) can, because they treat each event on its own. Tenzir leaves the remaining operators at a single instance.
+
+Operators that group related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive events partitioned by their keys. Tenzir runs them on at most 4 instances, because partitioning splits batches and the resulting per-event overhead grows with the number of partitions. Raise or lower that bound with `limit_partitions`:
+
+```tql
+// parallelism: max,limit_partitions=8
+from_file "/var/log/flows/*.json"
+summarize dest_ip, bytes=sum(bytes)
+```
+
+Parallelism reorders events
+
+Parallel instances work at different speeds, so a parallel pipeline can emit events in a different order than it received them. Keep parallelism disabled when the input order carries meaning. The explanation of [parallel execution](../../explanations/pipeline.md#parallel-execution) covers why ordering and parallelism conflict.
+
 ## Storage Engine
 
 The central component of Tenzir’s storage engine is the *catalog*. It owns the partitions, keeps metadata about them, and maintains a set of sparse secondary indexes to identify relevant partitions for a given query.

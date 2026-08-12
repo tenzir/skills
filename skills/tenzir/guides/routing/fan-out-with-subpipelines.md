@@ -7,9 +7,9 @@ section: "Docs"
 
 # Fan out with subpipelines
 
-> This guide shows you how to fan out an event stream into subpipelines with each and group. You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like fork, parallel, and loadbalance.
+> This guide shows you how to fan out an event stream into subpipelines with each and group. You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like fork, parallel, and loadbalance, as well as from merge, which adds a source rather than a branch.
 
-This guide shows you how to fan out an event stream into subpipelines with [`each`](https://tenzir.com/docs/reference/operators/each.md) and [`group`](https://tenzir.com/docs/reference/operators/group.md). You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like [`fork`](https://tenzir.com/docs/reference/operators/fork.md), [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md), and [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md).
+This guide shows you how to fan out an event stream into subpipelines with [`each`](https://tenzir.com/docs/reference/operators/each.md) and [`group`](https://tenzir.com/docs/reference/operators/group.md). You’ll learn when to spawn one subpipeline per event, when to keep one subpipeline per key, and how these operators differ from fixed fan-out operators like [`fork`](https://tenzir.com/docs/reference/operators/fork.md), [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md), and [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md), as well as from [`merge`](https://tenzir.com/docs/reference/operators/merge.md), which adds a source rather than a branch.
 
 ## Choose a fan-out pattern
 
@@ -18,6 +18,7 @@ Tenzir has several operators that send events into subpipelines. Choose the oper
 | Operator                                                                      | Subpipelines                          | Event flow                                                         | Use case                                                      |
 | ----------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- |
 | [`fork`](https://tenzir.com/docs/reference/operators/fork.md)                 | One fixed side branch                 | Every event goes to the main pipeline and the side branch          | Archive or publish a copy while continuing processing         |
+| [`merge`](https://tenzir.com/docs/reference/operators/merge.md)               | One fixed side source                 | The side branch produces events that join the main stream          | Pull a second input into the pipeline                         |
 | [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)         | A fixed number of workers             | Each event goes to one worker running the same subpipeline         | Speed up CPU-heavy or I/O-heavy work                          |
 | [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md) | One branch per configured target      | Each event goes to one target                                      | Distribute load across equivalent sinks                       |
 | [`each`](https://tenzir.com/docs/reference/operators/each.md)                 | One fresh subpipeline per input event | The input event is available as `$this`; it is not passed as input | Run a per-event job, such as a lookup or export               |
@@ -123,6 +124,7 @@ This creates one subpipeline per tenant and writes matching events to that subpi
 * [`each`](https://tenzir.com/docs/reference/operators/each.md)
 * [`group`](https://tenzir.com/docs/reference/operators/group.md)
 * [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`merge`](https://tenzir.com/docs/reference/operators/merge.md)
 * [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
 * [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
 * [`publish`](https://tenzir.com/docs/reference/operators/publish.md)

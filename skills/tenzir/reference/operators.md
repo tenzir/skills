@@ -485,6 +485,14 @@ Routes the data to one of multiple subpipelines.
 load_balance $over { publish $over }
 ```
 
+### [merge](operators/merge.md)
+
+Merges the output of a source subpipeline into the main stream.
+
+```tql
+merge { subscribe "extra" }
+```
+
 ### [parallel](operators/parallel.md)
 
 Runs a subpipeline across multiple parallel workers.
