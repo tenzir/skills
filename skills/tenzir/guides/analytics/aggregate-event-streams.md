@@ -7,9 +7,9 @@ section: "Docs"
 
 # Aggregate event streams
 
-> This guide shows you how to aggregate event streams with summarize and window. You’ll learn to count, group, compute statistics, and apply bounded event-time windows to streaming data.
+> This guide shows you how to aggregate event streams with summarize and window. You’ll learn to count, group, compute statistics, and apply bounded time and count windows to streaming data.
 
-This guide shows you how to aggregate event streams with [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) and [`window`](https://tenzir.com/docs/reference/operators/window.md). You’ll learn to count, group, compute statistics, and apply bounded event-time windows to streaming data.
+This guide shows you how to aggregate event streams with [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) and [`window`](https://tenzir.com/docs/reference/operators/window.md). You’ll learn to count, group, compute statistics, and apply bounded time and count windows to streaming data.
 
 ## Understanding the summarize operator
 
@@ -161,6 +161,77 @@ summarize avg_duration = mean(duration), action_count = count(), user, action
 }
 ```
 
+## Add running statistics to events
+
+Choose between incremental aggregation and a bounded trailing window based on whether old events must expire from the result.
+
+Use cumulative event emission from [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) for unbounded running aggregates. It preserves each event and updates compact aggregate state:
+
+```tql
+from {user: "alice", bytes: 10},
+     {user: "bob", bytes: 5},
+     {user: "alice", bytes: 20}
+summarize running_bytes=sum(bytes), events=count(), user,
+  options={mode: "cumulative"}
+```
+
+```tql
+{user: "alice", bytes: 10, running_bytes: 10, events: 1}
+{user: "bob", bytes: 5, running_bytes: 5, events: 1}
+{user: "alice", bytes: 20, running_bytes: 30, events: 2}
+```
+
+This corresponds to Splunk `streamstats` without `window` or `time_window`:
+
+```spl
+... | streamstats sum(bytes) AS running_bytes count AS events BY user
+```
+
+With the default per-event cadence, `options={mode: "reset"}` calculates the aggregate fields from each input event independently. For example, `sum(bytes)` contains the current event’s `bytes` value instead of a running total. Event emission preserves input fields, treats grouping fields only as state keys, emits nothing for empty input, and doesn’t add a duplicate summary when the input ends.
+
+Set `emit` to a positive `int` to emit less frequently. For example, `options={emit: 100, mode: "cumulative"}` enriches every 100th input event with running aggregates. If the input ends before the next boundary, `summarize` enriches and emits the final input event.
+
+Use a trailing [`window`](https://tenzir.com/docs/reference/operators/window.md) when only a bounded count or time horizon should contribute. By default, a trailing window runs an arbitrary subpipeline once per input event and exposes that event as `$window.event`:
+
+```tql
+group user {
+  window size=5min, trailing=true, on=ts {
+    summarize rolling_bytes=sum(bytes), events=count()
+    this = {
+      ...$window.event,
+      rolling_bytes: rolling_bytes,
+      events: events,
+    }
+  }
+}
+```
+
+Keep trailing history keyed
+
+The outer `group` is intentional. Each event enters one user subpipeline, so the trailing window replays only that user’s retained history. Moving `group` inside the trailing window would replay the stream-wide history for every event and could emit one result for every user in that history. The recommendation to put `window` outside `group` applies to fixed windows that should share one stream clock, not to keyed trailing windows.
+
+This form corresponds to Splunk `streamstats time_window=5m ... BY user`. Use `size=100, trailing=true` for the count-based equivalent of `streamstats window=100`. Generic trailing windows replay their retained history for every invocation, so prefer incremental `summarize` when you don’t need a bounded horizon or arbitrary subpipeline logic.
+
+Set `every` to evaluate retained history less frequently. For example, `window size=10_000, every=100, trailing=true` evaluates the latest 10,000 events after every 100 inputs. Unlike event-count emission from `summarize`, a trailing `window` doesn’t fire a final partial cadence when its input ends.
+
+A `summarize` without options emits one final result from each trailing window. If you also set `options.emit`, that inner cadence starts fresh for every window invocation and can emit multiple prefix results while consuming the replayed history. Leave `options.emit` unset when you want one result per `window` cadence.
+
+## Emit processing-time summaries
+
+Set `emit` to a duration and choose `"reset"` or `"cumulative"` mode to emit on a processing-time cadence. Reset mode reports only events received since the previous boundary:
+
+```tql
+summarize src_ip, events=count(), options={emit: 30s, mode: "reset"}
+```
+
+Cumulative mode retains state and reports the total so far:
+
+```tql
+summarize src_ip, events=count(), options={emit: 30s, mode: "cumulative"}
+```
+
+Both forms emit a final partial summary when the input ends. They differ from [`window`](https://tenzir.com/docs/reference/operators/window.md) because arrival time, not an event timestamp, determines the boundary.
+
 ## Aggregate periodic snapshots
 
 Use [`every`](https://tenzir.com/docs/reference/operators/every.md) when the aggregation is tied to a wall-clock schedule, such as polling an inventory API every 10 minutes and publishing a current count of endpoint states. This pattern works well for dashboards, reports, cache refreshes, and external API polling where each run describes the current snapshot.
@@ -185,9 +256,11 @@ The wall-clock schedule is not an event-time window. If the pipeline starts at 0
 
 ## Window event streams
 
-Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when you need bounded event-time aggregations on a stream. The operator creates one subpipeline per fixed time range. Inside that subpipeline, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) to compute counts, distinct values, and statistics for the events in that window.
+Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when an aggregation needs bounded time or event-count state. Tumbling and hopping windows create one subpipeline per aligned range. By default, trailing windows create one subpipeline per event. Set `every` or `trigger` to restrict which events fire one. Inside any form, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) to compute counts, distinct values, and statistics.
 
-Unlike [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={frequency: ...}`, [`window`](https://tenzir.com/docs/reference/operators/window.md) assigns events by event time. This lets you tolerate out-of-order data with `tolerance` and group entities inside each event-time window. Put [`group`](https://tenzir.com/docs/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs its own event-time clock.
+For duration windows, specify `on` to assign events by event time and accept out-of-order data with `tolerance`. Omit `on` for processing-time windows that close on their wall-clock boundary. Use an unsigned integer `size` for windows that close after a number of events rather than an amount of time.
+
+Put [`group`](https://tenzir.com/docs/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs its own event-time clock or trailing history. For aligned fixed detections, an outer `window` with groups inside usually bounds high-cardinality state more predictably.
 
 For complete streaming detections built on these mechanics, such as brute-force login thresholds and statistical traffic-spike baselines with alert suppression, follow the guide on [detecting over time windows](../detection/detect-over-time-windows.md).
 
@@ -221,23 +294,23 @@ Grouped aggregation computes separate aggregate results for each key, such as on
 
 Periodic processing-time aggregation emits results on a wall-clock or processing-time cadence. Use it for live dashboards and operational metrics when arrival time matters more than event timestamps.
 
-| System       | Support | Notes                                                                                                                                                                      |
-| ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) `options={frequency: ...}` or [`every`](https://tenzir.com/docs/reference/operators/every.md). |
-| KQL          | ⚠️      | Use scheduled or continuous query patterns.                                                                                                                                |
-| SPL          | ⚠️      | Use real-time or scheduled searches.                                                                                                                                       |
-| Cribl Stream | ⚠️      | Use Scheduled Collectors; Aggregations use event-time buckets.                                                                                                             |
+| System       | Support | Notes                                                                                                                                                                                                                                                                 |
+| ------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) without `on`, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) `options={emit: 30s, mode: "reset"}`, or [`every`](https://tenzir.com/docs/reference/operators/every.md). |
+| KQL          | ⚠️      | Use scheduled or continuous query patterns.                                                                                                                                                                                                                           |
+| SPL          | ⚠️      | Use real-time or scheduled searches.                                                                                                                                                                                                                                  |
+| Cribl Stream | ⚠️      | Use Scheduled Collectors; Aggregations use event-time buckets.                                                                                                                                                                                                        |
 
 #### Periodic running stats
 
 Periodic running stats emit accumulated values repeatedly instead of waiting for the stream to end. They show the total so far, not a bounded rolling lookback.
 
-| System       | Support | Notes                                                                                                                       |
-| ------------ | ------- | --------------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) `options={frequency: ..., mode: "cumulative"}`. |
-| KQL          | ⚠️      | Use scheduled or continuous query patterns.                                                                                 |
-| SPL          | ⚠️      | Use `streamstats` or scheduled searches.                                                                                    |
-| Cribl Stream | ⚠️      | Enable `Cumulative aggregations` in Aggregations.                                                                           |
+| System       | Support | Notes                                                                                                                  |
+| ------------ | ------- | ---------------------------------------------------------------------------------------------------------------------- |
+| TQL          | ✅       | Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) `options={emit: 30s, mode: "cumulative"}`. |
+| KQL          | ⚠️      | Use scheduled or continuous query patterns.                                                                            |
+| SPL          | ⚠️      | Use `streamstats` or scheduled searches.                                                                               |
+| Cribl Stream | ⚠️      | Enable `Cumulative aggregations` in Aggregations.                                                                      |
 
 #### Wall-clock subpipeline batches
 
@@ -269,19 +342,32 @@ Hopping event-time windows use a window size that is larger than the step betwee
 | ------------ | ------- | ------------------------------------------------------------------------------------------------- |
 | TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `size=1h, every=5m, on=ts`. |
 | KQL          | ⚠️      | Use manual expansion or plugins for specific metrics.                                             |
-| SPL          | ⚠️      | Use `streamstats` workarounds or manual bucketing.                                                |
+| SPL          | ⚠️      | Use manual expansion or bucketing.                                                                |
 | Cribl Stream | ❌       | No hopping window option.                                                                         |
 
-#### Per-input-event rolling stats
+#### Fixed count windows
 
-Per-input-event rolling stats update a trailing calculation for each arriving event. This is different from periodic emission because the output cadence follows events, not a timer.
+Fixed count windows close after a bounded number of arriving events rather than at a time boundary. They are useful for batching and sample-based analytics where table-slice boundaries must not affect the result.
 
-| System       | Support | Notes                                                                                                        |
-| ------------ | ------- | ------------------------------------------------------------------------------------------------------------ |
-| TQL          | ❌       | Not native; [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) `frequency` is periodic. |
-| KQL          | ⚠️      | Use manual expansion or row-window functions.                                                                |
-| SPL          | ✅       | Use `streamstats time_window=...`.                                                                           |
-| Cribl Stream | ❌       | Aggregations emit window events.                                                                             |
+| System       | Support | Notes                                                                                                     |
+| ------------ | ------- | --------------------------------------------------------------------------------------------------------- |
+| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `size=100` or `size=100, every=10`. |
+| KQL          | ⚠️      | Use row numbering and manual bucketing.                                                                   |
+| SPL          | ⚠️      | Use `streamstats window=...` for per-event results.                                                       |
+| Cribl Stream | ⚠️      | Batch controls exist without a general count-window block.                                                |
+
+#### Per-input-event running and rolling stats
+
+Per-input-event statistics update a calculation for each arriving event. This is different from periodic emission because the output cadence follows events, not a timer. Running statistics retain unbounded aggregate state, while rolling statistics expire events outside a trailing count or time horizon.
+
+| System       | Support | Notes                                                                                                                                                                                                                                                           |
+| ------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TQL          | ✅       | Use cumulative event emission from [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) for unbounded state or `trailing=true` with a duration or count [`window`](https://tenzir.com/docs/reference/operators/window.md) for bounded state. |
+| KQL          | ⚠️      | Use manual expansion or row-window functions.                                                                                                                                                                                                                   |
+| SPL          | ✅       | Use `streamstats`; `window` and `time_window` add bounded history.                                                                                                                                                                                              |
+| Cribl Stream | ❌       | Aggregations emit window events.                                                                                                                                                                                                                                |
+
+For unbounded running aggregates, TQL’s cumulative event emission from [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) avoids replaying a trailing history. This is the direct counterpart to `streamstats` without either bound.
 
 #### Per-key event-time windows
 
@@ -329,7 +415,7 @@ An arbitrary per-key subpipeline can do more than compute a fixed aggregate list
 
 #### Arbitrary subpipeline per window
 
-An arbitrary per-window subpipeline runs custom logic inside each event-time range. It covers detections that need more than a fixed aggregate list, such as post-aggregation filtering or alert formatting.
+An arbitrary per-window subpipeline runs custom logic inside each time range, count range, or per-event trailing history. It covers detections that need more than a fixed aggregate list, such as post-aggregation filtering or alert formatting.
 
 | System       | Support | Notes                                                                            |
 | ------------ | ------- | -------------------------------------------------------------------------------- |

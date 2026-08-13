@@ -18,9 +18,12 @@ Start with the time semantics, then build a threshold detector over tumbling win
 
 Streaming detections answer questions about when things happened, not when events arrived. Three mechanisms look similar but behave differently:
 
-* [`window`](https://tenzir.com/docs/reference/operators/window.md) assigns events to intervals by **event time** (`on=time`) and tolerates out-of-order arrivals via `tolerance`. Use it for detections, where a delayed event can change the answer.
-* [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a **wall-clock** schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analytics/aggregate-event-streams.md#aggregate-periodic-snapshots).
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={frequency: ...}` emits periodically by processing time. It bounds neither by event time nor by a schedule you can reason about for detection semantics.
+* [`window`](https://tenzir.com/docs/reference/operators/window.md) with `on=time` assigns events to fixed intervals by **event time** and tolerates out-of-order arrivals via `tolerance`. Use it for detections where a delayed event can change the answer.
+* [`window`](https://tenzir.com/docs/reference/operators/window.md) without `on` assigns events by **processing time** and closes at epoch-aligned wall-clock boundaries. This is useful when arrival time is the intended detection clock.
+* [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analytics/aggregate-event-streams.md#aggregate-periodic-snapshots).
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={emit: 5min, mode: "reset"}` emits aggregate updates on a processing-time cadence, but it doesn’t create event-time evidence intervals.
+
+The examples in this guide use aligned tumbling or hopping windows, which run one subpipeline per fixed interval. By default, a trailing window with `trailing=true` instead runs once per input event and can enrich the triggering event through `$window.event`. That maps to bounded Splunk `streamstats`, but generic trailing windows replay their retained history for every invocation. Set `every` to sample that history at a lower count or duration cadence. Set `trigger` to fire only for events that can produce a result, such as a successful login after repeated failures. Prefer aligned windows for periodic detection decisions unless you specifically need event-anchored results.
 
 Size `tolerance` against the real skew in your telemetry: compare `time` (when the event occurred) with `metadata.logged_time` and `metadata.processed_time` (when it was recorded and processed) to see how late your events actually arrive, and give the window at least that much slack.
 
@@ -76,7 +79,7 @@ The Sigma guide applies the same window pattern to [`event_count` and `value_cou
 
 ## Compare observations with a rolling baseline
 
-A rolling-baseline detector compares recent observations with historical context. This section develops that pattern from threshold calculation to duplicate suppression and OCSF finding output, using an SMB traffic spike detector as the concrete example.
+A rolling-baseline detector compares recent observations with historical context. This section develops that pattern from threshold calculation to duplicate suppression and OCSF finding output, using an SMB traffic spike detector as the concrete example. The rolling window carries its history in stream state, which suits horizons of minutes to hours; for baselines learned over days or weeks, the guide on [baselining behavior from stored events](baseline-from-stored-events.md) moves the learning into a scheduled pipeline.
 
 ### Calculate a rolling threshold
 
@@ -131,7 +134,7 @@ sort start
 
 The `workstation-7` bucket with `80` bytes exceeds the mean plus two standard deviations in two 70-minute windows, while the steady file-server traffic stays below its bound. The simplified detector uses the maximum bucket in each window as the candidate spike.
 
-This example uses a hopping window: `size=70min` defines the lookback and `every=10min` moves the window forward every 10 minutes. Around midnight, Tenzir evaluates intervals such as `[00:00, 01:10)`, `[00:10, 01:20)`, and `[00:20, 01:30)`. A 10-minute traffic bucket can participate in multiple open windows, which gives rolling context but also fires repeatedly for the same spike, as the doubled output shows. The suppression step removes those duplicates before finding conversion. The example stays close to the upstream analytic and omits `tolerance`. Production deployments should keep the stream-wide window on the outside so it bounds all keyed state, group sources inside it as this keyed [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) already does, and size a tolerance for ingestion skew.
+This example uses a fixed hopping window: `size=70min` defines the lookback and `every=10min` moves the window forward every 10 minutes. Around midnight, Tenzir evaluates intervals such as `[00:00, 01:10)`, `[00:10, 01:20)`, and `[00:20, 01:30)`. A 10-minute traffic bucket can participate in multiple open windows, which gives rolling context but also fires repeatedly for the same spike, as the doubled output shows. The suppression step removes those duplicates before finding conversion. The example stays close to the upstream analytic and omits `tolerance`. Production deployments should keep the stream-wide window on the outside so it bounds all keyed state, group sources inside it as this keyed [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) already does, and size a tolerance for ingestion skew.
 
 In OCSF [Network Activity](https://schema.ocsf.io/classes/network_activity) and [SMB Activity](https://schema.ocsf.io/classes/smb_activity) events, `traffic.bytes` is a per-observation measurement, so summing it across a window is correct. Do not aggregate `cumulative_traffic.bytes` the same way: it carries running totals, and repeatedly summing it counts the same bytes many times over.
 
@@ -430,6 +433,7 @@ Summing per asset rather than per connection defeats chunked transfers that stay
 * [`median`](https://tenzir.com/docs/reference/functions/median.md)
 * [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
 * [Aggregate event streams](../analytics/aggregate-event-streams.md)
+* [Baseline behavior from stored events](baseline-from-stored-events.md)
 * [Detect periodic behavior](detect-periodic-behavior.md)
 * [Match events with TQL](match-events-with-tql.md)
 * [Model detections in OCSF](model-detections-in-ocsf.md)

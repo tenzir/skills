@@ -17,15 +17,15 @@ summarize (group|aggregation)..., [options={...}]
 
 ## Description
 
-The `summarize` operator groups events according to certain fields and applies [aggregation functions](../functions.md#aggregation) to each group. By default, the operator consumes the entire input before producing any output, and may reorder the event stream.
+The `summarize` operator groups events according to certain fields and applies [aggregation functions](../functions.md#aggregation) to each group. By default, the operator consumes the entire input before producing a final summary and may reorder the event stream.
 
-With the `options` argument, you can enable periodic emission of results at fixed intervals for real-time streaming analytics.
+Set `options` to emit enriched results after a number of input events or to emit summaries periodically in processing time. Event-count emission preserves the triggering input event and adds the current aggregate values. Periodic and final emission produce summary events that contain only group and aggregate fields.
 
-The order of the output fields follows the sequence of the provided arguments. Unspecified fields are dropped.
+The order of summary fields follows the sequence of the provided arguments. In event mode, aggregate fields are assigned in argument order with the same nested field and collision behavior as normal assignments.
 
-Potentially High Memory Usage
+Potentially high memory usage
 
-Use caution when applying this operator to large inputs. It currently buffers all data in memory. Out-of-core processing is on our roadmap.
+Each group keeps aggregation state until an emission resets it or the pipeline ends. Streams with many unique group keys can therefore consume significant memory.
 
 ### `group`
 
@@ -39,19 +39,34 @@ If no name is specified, the aggregation function call will automatically genera
 
 ### `options`
 
-The optional `options` argument accepts a record with the following fields:
+The optional `options` record controls when `summarize` emits results and whether it retains aggregation state:
 
-#### `frequency: duration`
+| Options                       | Behavior                                                                                                          |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| No options or `options={}`    | Emit one final summary when the input ends.                                                                       |
+| `mode: "reset"`               | Emit every input event with aggregates for that event.                                                            |
+| `mode: "cumulative"`          | Emit every input event with running aggregates.                                                                   |
+| `emit: <int>` and `mode`      | Emit an enriched event after the specified number of input events and emit the final event of a partial interval. |
+| `emit: <duration>` and `mode` | Emit summaries periodically in processing time and emit a final partial summary.                                  |
 
-Emit aggregation results at the specified interval instead of waiting for the input to end. When set, results are emitted periodically and also when the input stream ends.
+Setting `emit` without `mode` produces an error.
 
-#### `mode: string`
+#### `emit: int | duration`
 
-Controls how aggregations behave between emissions. Only applies when `frequency` is set. Possible values:
+`emit` defines an event-count or processing-time cadence.
 
-* `"reset"` (default): Clear aggregations after each emission, providing per-interval metrics.
-* `"cumulative"`: Keep accumulating values across emissions, providing running totals.
-* `"update"`: Only emit groups whose values changed since the last emission, reducing output noise in monitoring scenarios.
+Use a positive `int` to emit after a number of input events. Tenzir includes the triggering event in the aggregation, preserves that event, and adds the current aggregate values. For example, `emit: 1` enriches every input event, while `emit: 100` enriches every 100th event. When the input ends before reaching the next boundary, Tenzir enriches and emits the final input event. Empty input produces no output.
+
+Use a positive duration to emit summaries on a processing-time interval. The interval must be at least 10ms. Timer mode emits a final partial summary when the input ends and emits nothing for empty input.
+
+#### `mode: "reset" | "cumulative"`
+
+Choose how aggregation state behaves after each emission:
+
+* `"reset"`: Clear state at every event-count or timer boundary.
+* `"cumulative"`: Retain state and produce running values.
+
+When you specify `mode` without `emit`, `emit` defaults to `1`.
 
 ## Examples
 
@@ -125,29 +140,48 @@ ts = round(ts, 1h)
 summarize ts, src_ip, dest_ip, sum(bytes_in), sum(bytes_out)
 ```
 
+### Add running totals to every event
+
+Preserve each event and add a running byte total for its source:
+
+```tql
+summarize total_bytes=sum(bytes), src_ip, options={mode: "cumulative"}
+```
+
+This behavior corresponds to Splunk’s `streamstats sum(bytes) BY src_ip`. Grouping fields select independent state buckets; they don’t replace or remove fields in the input event.
+
+Use reset mode to compute aggregates from only the current event:
+
+```tql
+summarize event_bytes=sum(bytes), options={mode: "reset"}
+```
+
+### Emit running totals every 100 events
+
+Preserve every 100th event and add the running event count for its source IP:
+
+```tql
+summarize events=count(), src_ip,
+  options={emit: 100, mode: "cumulative"}
+```
+
 ### Emit aggregations every 5 seconds
 
 Count events per source IP and emit results every 5 seconds, resetting the count after each emission:
 
 ```tql
-summarize count(this), src_ip, options={frequency: 5s}
+summarize count(this), src_ip, options={emit: 5s, mode: "reset"}
 ```
 
-### Emit cumulative totals
+### Emit cumulative totals periodically
 
 Sum bytes and emit running totals every minute:
 
 ```tql
-summarize sum(bytes), options={frequency: 1min, mode: "cumulative"}
+summarize sum(bytes), options={emit: 1min, mode: "cumulative"}
 ```
 
-### Emit only when values change
-
-Count events by severity and only emit when counts change, reducing output noise:
-
-```tql
-summarize count(this), severity, options={frequency: 10s, mode: "update"}
-```
+Timer emission uses processing time. For fixed or hopping event-time ranges, use [`window`](https://tenzir.com/docs/reference/operators/window.md). `summarize` doesn’t keep a bounded trailing history, so a Splunk `streamstats` query with `window` or `time_window` still requires a windowing strategy.
 
 ## See Also
 

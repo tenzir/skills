@@ -54,7 +54,7 @@ The gap more than doubles the mean and pushes the standard deviation past three 
 
 ## Score a beacon candidate
 
-Collect timestamps and flow byte counts per connection tuple inside a window, then filter on both distributions. [Statistical dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion) describes how widely values vary around a typical value. This pipeline limits relative dispersion by requiring MAD to stay within a fraction of the median. The sample records show only the OCSF fields the detection uses:
+Collect timestamps and flow byte counts per connection tuple inside a fixed event-time window, then filter on both distributions. [Statistical dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion) describes how widely values vary around a typical value. This pipeline limits relative dispersion by requiring MAD to stay within a fraction of the median. The sample records show only the OCSF fields the detection uses:
 
 ```tql
 let $min_samples = 8
@@ -131,7 +131,7 @@ select src_ip, dst_ip, dst_port, samples, interval_median, interval_mad,
 
 Keep [`sort`](https://tenzir.com/docs/reference/operators/sort.md) inside the window so it buffers one tuple and period rather than an unbounded stream. The MAD bound relative to the median sets the jitter tolerance: at `0.2`, a beacon randomizing its sleep by plus or minus 20 percent still passes.
 
-The window bounds which cadences you can observe. Eight samples in 30 minutes caps the detectable period near three minutes, so an implant sleeping for an hour needs hourly or daily windows, or a scheduled query over stored events.
+The fixed window bounds which cadences you can observe and runs one window invocation per aligned interval, in which each qualifying connection tuple can yield a candidate. Eight samples in 30 minutes caps the detectable period near three minutes, so an implant sleeping for an hour needs hourly or daily windows, or a scheduled query over stored events, as the guide on [baselining behavior from stored events](baseline-from-stored-events.md) develops.
 
 Update checks, monitoring agents, and health probes are periodic by design. Filter them out with destination reputation, first-seen time, or asset role before routing results as alerts.
 
@@ -172,7 +172,7 @@ drop times
 
 The series skips a check-in at `10:04` and still yields the one-minute period. This approach is especially useful when unrelated traffic interleaves with the periodic events and the inter-arrival intervals no longer describe one cadence.
 
-Apply the same calculation per connection tuple inside a bounded window:
+Apply the same calculation per connection tuple inside a fixed hopping window. The window starts a new subpipeline at five-minute event-time hops rather than once for every input event:
 
 detect-dominant-period.tql
 

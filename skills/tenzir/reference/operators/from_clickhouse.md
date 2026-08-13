@@ -125,6 +125,7 @@ Tenzir maps ClickHouse types to Tenzir types as follows:
 | `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`  |                                                |
 | `Float32`, `Float64`                              | `double`  |                                                |
 | `String`, `FixedString(N)`                        | `string`  |                                                |
+| `JSON`                                            | `string`  | Emitted as one-line JSON text.                 |
 | `UUID`                                            | `string`  | Emitted as canonical UUID text.                |
 | `Enum8`, `Enum16`                                 | `string`  | Emitted as the enum label.                     |
 | `Decimal`, `Decimal32`, `Decimal64`, `Decimal128` | `string`  | Emitted as decimal text to preserve precision. |

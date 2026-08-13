@@ -7,89 +7,162 @@ section: "Docs"
 
 # window
 
-> Groups streaming events into event-time windows and runs a subpipeline for each window.
+> Runs a subpipeline over time-based or count-based windows.
 
-Groups streaming events into event-time windows and runs a subpipeline for each window.
+Runs a subpipeline over time-based or count-based windows.
 
 ```tql
-window size=duration, on=expr, [every=duration, tolerance=duration, idle_timeout=duration] { … }
+window size=duration|uint,
+       [every=duration|uint],
+       [trailing=bool],
+       [on=expression],
+       [trigger=expression],
+       [tolerance=duration],
+       [idle_timeout=duration] {
+  …
+}
 ```
 
 ## Description
 
-The `window` operator splits an event stream into bounded time ranges. Each window has its own subpipeline. Events are streamed directly into the subpipeline rather than buffered and replayed when the window closes, so a subpipeline that only filters or transforms forwards events as they arrive. The subpipeline either emits events - which are forwarded as the operator’s output - or ends with a sink, in which case `window` itself becomes a sink. The subpipeline must not produce bytes.
+The `window` operator assigns events to bounded subpipelines. The types of `size` and `every` select the window basis, while `trailing=true` selects windows anchored to input events:
 
-Unlike `every`, which reruns a subpipeline on a wall-clock schedule, `window` operates on event time: it assigns each event to windows by the timestamp that `on` evaluates to. Use `summarize` without `window` to aggregate the complete input, or `summarize` with `options={frequency: ...}` for processing-time periodic emission when you don’t need event-time windows or late-event handling.
+| `size`           | `every`          | `trailing` | Window type                     |
+| ---------------- | ---------------- | ---------- | ------------------------------- |
+| Duration         | Omitted          | `false`    | Tumbling time windows           |
+| Duration         | Duration         | `false`    | Hopping time windows            |
+| Duration         | Omitted          | `true`     | Trailing time window per event  |
+| Duration         | Duration         | `true`     | Sampled trailing time windows   |
+| Unsigned integer | Omitted          | `false`    | Tumbling count windows          |
+| Unsigned integer | Unsigned integer | `false`    | Hopping count windows           |
+| Unsigned integer | Omitted          | `true`     | Trailing count window per event |
+| Unsigned integer | Unsigned integer | `true`     | Sampled trailing count windows  |
 
-`window` creates **fixed windows** of width `size`. These include tumbling windows (non-overlapping) and hopping windows (overlapping). Fixed windows use left-closed, right-open intervals: `[start, end)`. An event whose timestamp equals the window end belongs to the next window. Window boundaries are aligned to the Unix epoch.
+Tumbling and hopping windows are **fixed windows**. Their boundaries align to the Unix epoch for time windows and offset zero for count windows. A tumbling window starts every `size`; a hopping window starts every `every`. When `every < size`, fixed windows overlap and one event can enter multiple subpipelines.
 
-`window` has no built-in partition key. For keyed aggregations, put `group` inside `window` by default. The stream then has one event-time clock, and closing a window also closes every group subpipeline inside it. This bounds high-cardinality state without waiting for another event from each key.
+A **trailing window** is anchored to the event that fires it and closes immediately after its subpipeline runs. It includes the triggering event and the bounded history that precedes it. By default, every input event produces an invocation. Set `every` to sample the history at a count or duration cadence, and set `trigger` to restrict which events can fire the subpipeline. All events still enter the retained history and advance the cadence.
+
+Events stream directly into fixed-window subpipelines. Trailing windows retain and replay their bounded history for each invocation. A subpipeline can emit events, which become the operator output, or end with a sink, which makes `window` a sink. It must not produce bytes. The operator doesn’t emit empty windows. Outputs from concurrent window subpipelines can interleave; `window` doesn’t guarantee output ordering.
+
+### Time clocks
+
+A duration `size` uses one of two clocks:
+
+* Specify `on` to use **event time**. The expression supplies each event’s timestamp, and the largest observed timestamp advances the clock.
+* Omit `on` to use **processing time**. The event’s wall-clock arrival time determines its window.
+
+Fixed event-time windows close when the event-time clock reaches the window end plus `tolerance`. The newest window can therefore remain open until a later event arrives, `idle_timeout` expires, or the input ends. Late events whose windows have already closed are dropped with a warning.
+
+Fixed processing-time windows close at their wall-clock boundary, even when no later event arrives. Their boundaries are epoch-aligned, not relative to the pipeline start time. Restored windows whose end has passed close immediately.
+
+Trailing event-time windows initially require nondecreasing timestamps. An event with a regressing timestamp is dropped with a warning because an emitted trailing result cannot be corrected. Duplicate timestamps are accepted and produce separate results. Trailing processing-time windows follow arrival order.
+
+### Count offsets
+
+A count window assigns the first event offset `0`, the next event offset `1`, and so on. Fixed count windows use half-open offset ranges. For example, `size=100` creates `[0, 100)`, `[100, 200)`, and later ranges. The operator closes a window when it reaches the exclusive finish offset, independent of how events are divided into table slices.
+
+Count windows follow arrival order. They don’t accept `on`, `tolerance`, or `idle_timeout`.
+
+### Keyed windows
+
+`window` has no built-in partition key. For fixed-window aggregations, put [`group`](https://tenzir.com/docs/reference/operators/group.md) inside `window` by default. The stream then has one clock, and closing a window also closes every group subpipeline inside it. This bounds high-cardinality state without waiting for another event from each key.
+
+Put `group` outside `window` when each key requires independent fixed-window clocks or independent trailing history. A busy key then cannot advance another key’s event-time clock or enter its retained history.
 
 Use independent per-key clocks deliberately
 
-Put `group` outside `window` only when each key requires an independent event-time clock. A busy key then cannot make a sparse key late, but sparse keys may keep their windows and group state alive until their own next event, `idle_timeout`, or the end of the input.
+An outer `group` also gives sparse keys independent lifetimes. A sparse fixed window can remain open until that key receives another event, its `idle_timeout` expires, or the input ends.
 
-### The event-time clock
+### Trailing-window cost
 
-`window` processes events in stream order and uses the timestamp that `on` evaluates to for window assignment. The current time is the largest timestamp observed so far, which only ever moves forward.
+A generic trailing window replays every retained event through a new subpipeline for every invocation. Without `every` or `trigger`, its work is approximately the number of input events multiplied by the average retained event count. Large or dense time windows can therefore consume substantial CPU and memory. Tenzir warns when a trailing window retains 100,000 events and never drops retained events to enforce a hidden limit.
 
-A window closes once the clock reaches its end plus `tolerance`. The window’s subpipeline then closes and its output is streamed out. Because closing is driven by observed timestamps, the most recent windows stay open until a later event arrives. Two mechanisms bound this wait:
+Set `every` to sample retained history at a lower cadence. Set `trigger` when only some events warrant evaluation. The operator always maintains the retained history, but it replays the history only when the cadence is due and the trigger matches.
 
-* `idle_timeout` force-closes an open window after that much wall-clock time passes without a new event.
-* When the input ends, all open windows are closed.
+A [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) without `options` emits one final summary for each replayed window. Its `options.emit` cadence is independent: it starts fresh with each window invocation and can emit multiple prefix summaries while consuming the replayed history. Leave `options.emit` unset when you want one rolling result per outer `window` cadence.
 
-Output is streamed directly out of each window. Windows are usually closed in window-time order, but `window` makes no ordering guarantees about its output.
+For basic unbounded running aggregates, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with cumulative event emission instead. It updates aggregate state incrementally and corresponds to Splunk `streamstats` without `window` or `time_window`:
 
-Events are processed in stream order, independent of how they are grouped into batches: an event is late when an earlier event already advanced the clock to the close point of its window. Late events - those for a window that has already closed - are dropped with a warning. With overlapping windows an event is still delivered to whichever of its target windows are open; it is only reported as dropped when *all* of its target windows have already closed. The operator does not emit empty windows.
+```tql
+summarize rolling_bytes=sum(bytes), host,
+  options={mode: "cumulative"}
+```
 
-### `size = duration`
+Use a trailing `window` when you need bounded `streamstats` semantics or an arbitrary subpipeline:
 
-The length of a fixed window.
+| Splunk SPL                                      | TQL                                                           |
+| ----------------------------------------------- | ------------------------------------------------------------- |
+| `streamstats sum(bytes) BY host`                | Cumulative event emission from `summarize`                    |
+| `streamstats window=100 sum(bytes) BY host`     | `group host { window size=100, trailing=true { … } }`         |
+| `streamstats time_window=5m sum(bytes) BY host` | `group host { window size=5min, trailing=true, on=ts { … } }` |
 
-If `every` is omitted, `window` starts one window every `size`, creating non-overlapping tumbling windows.
+## Parameters
 
-### `on = expr`
+### `size = duration|uint`
 
-The event-time expression; it must evaluate to a timestamp. `window` uses this value as the event time of each event.
+The positive duration or event count that defines the window width.
 
-Use `on=now()` to window by processing time, i.e. by wall-clock arrival.
+### `every = duration|uint` (optional)
 
-Events for which `on` evaluates to null, or to a value that is not a timestamp, are dropped with a warning.
+The positive distance between window invocations. It must have the same type as `size`.
 
-### `every = duration (optional)`
+For fixed windows, `every` determines the distance between aligned window starts and must not exceed `size`. Omit it for tumbling windows.
 
-The distance between the start times of fixed windows. Defaults to `size`.
+For trailing windows, `every` defines a minimum count or duration cadence and can exceed `size`. A count cadence becomes due after that many input events. A duration cadence starts with the first input event and becomes due once the selected clock advances by that duration. The next event that satisfies `trigger` fires the window and starts a new cadence. `window` doesn’t fire a final partial cadence when the input ends.
 
-If `every < size`, windows overlap and an event can belong to multiple windows. Use this form for sliding-style detections that should update frequently. An event that falls into several overlapping windows is copied to each participating window’s subpipeline. Each overlapping window runs its own subpipeline, so a non-aggregating subpipeline duplicates its pass-through output once per window.
+Omit `every` to let every event that satisfies `trigger` fire a trailing window.
 
-`every` must not be greater than `size`.
+### `trailing = bool` (optional)
 
-### `tolerance = duration (optional)`
+Set to `true` to anchor windows to input events instead of fixed boundaries. This works with duration and count windows and can be combined with `every`. It defaults to `false`.
 
-The amount of out-of-order event time to wait for before closing a window. It applies to event time only. Defaults to `0s`: a window closes as soon as the event-time clock reaches the window end. Increase it to tolerate out-of-order data.
+### `on = expression` (optional)
 
-`window` tracks the largest timestamp observed so far and closes a window once that value reaches the window end plus `tolerance`. Events that arrive after their window closed are dropped with a warning.
+The event-time expression for duration windows. It must evaluate to a timestamp. Events for which it evaluates to null or another type are dropped with a warning.
 
-### `idle_timeout = duration (optional)`
+Omit `on` to use processing time. Count windows reject `on`.
 
-The maximum wall-clock time a window may stay open without receiving a new event before it is force-closed and emitted. This makes `window` well suited to low-volume streams: results arrive promptly even when the next event is far off, instead of waiting for it or for the end of the input. Defaults to infinite: windows then close only via `tolerance` or at the end of the input.
+### `trigger = expression` (optional)
+
+A boolean expression that selects which events can fire a trailing window. Every event enters the retained history, advances the clock and cadence, and counts toward the offsets, but only events for which `trigger` evaluates to `true` run the subpipeline. When an `every` cadence is due, it remains due until a matching event arrives. Events for which it evaluates to null or another type never fire, and the operator warns about them.
+
+Use `trigger` when only some events warrant evaluating the window, such as a successful login after repeated failures. It avoids replaying the retained history for events that cannot produce a result.
+
+Omit `trigger` to fire on every event. Fixed windows reject `trigger` because their boundaries, not events, drive evaluation.
+
+### `tolerance = duration` (optional)
+
+The nonnegative amount of out-of-order event time that a fixed event-time window accepts before closing. It defaults to `0s`.
+
+Only fixed duration windows with `on` accept `tolerance`. Trailing windows reject it because they emit results immediately and cannot correct them later.
+
+### `idle_timeout = duration` (optional)
+
+The positive wall-clock time that a fixed event-time window can remain open without receiving an event. The timeout force-closes the window. By default, fixed event-time windows close only when event time advances far enough or the input ends.
+
+Only fixed duration windows with `on` accept `idle_timeout`. Fixed processing-time windows already close at their wall-clock boundary.
 
 ### `{ … }`
 
-The subpipeline to run for each window. Inside the subpipeline, `$window` is a record with the current window’s boundaries:
+The subpipeline for each window. Inside it, `$window` contains the metadata that applies to the selected window:
 
-| Field           | Type | Description                 |
-| --------------- | ---- | --------------------------- |
-| `$window.start` | time | The inclusive window start. |
-| `$window.end`   | time | The exclusive window end.   |
+| Field            | Type   | Description                                 |
+| ---------------- | ------ | ------------------------------------------- |
+| `$window.start`  | time   | The time-window start.                      |
+| `$window.end`    | time   | The time-window end.                        |
+| `$window.begin`  | uint   | The inclusive count-window start offset.    |
+| `$window.finish` | uint   | The exclusive count-window finish offset.   |
+| `$window.event`  | record | The event that triggered a trailing window. |
 
-The operator does not add these fields automatically; assign them explicitly when you want them in the output.
+Fixed time intervals are left-closed and right-open: `[start, end)`. Trailing time intervals include both boundaries: `[start, end]`. Only fields that apply to the selected basis and shape are present.
+
+The operator doesn’t add metadata to output events automatically. Assign it inside the subpipeline when you need it.
 
 ## Examples
 
 ### Count security events per hour
 
-Count events by severity in one-hour tumbling windows. Grouping by severity inside `summarize` keeps a single global hourly clock.
+Count events by severity in epoch-aligned, one-hour event-time windows:
 
 ```tql
 from_kafka "security-events"
@@ -102,14 +175,92 @@ window size=1h, on=ts, tolerance=5min {
 }
 ```
 
-### Detect brute-force logins with a hopping window
-
-Detect many failed logins for the same user from the same source IP address in a 10-minute window that advances every minute. The outer `window` bounds every user/IP group with one stream-wide clock.
+Omit `on` to assign arriving events to processing-time windows that close on the wall clock:
 
 ```tql
-from_kafka "auth-events"
-this = message.parse_json()
-ts = ts.time()
+window size=5s {
+  summarize events=count()
+}
+```
+
+### Process count-based batches
+
+Run one subpipeline for each 100-event batch. When finite input ends, the subpipeline processes the final partial batch:
+
+```tql
+window size=100 {
+  summarize events=count()
+  begin = $window.begin
+  finish = $window.finish
+}
+```
+
+Use `every=10` to start a 100-event window every 10 events.
+
+### Add a rolling time total to every event
+
+The trailing interval for an event at `ts` contains events from `ts - 5min` through `ts`, including both endpoints. The outer group keeps independent host histories:
+
+```tql
+group host {
+  window size=5min, trailing=true, on=ts {
+    summarize rolling_bytes=sum(bytes), events=count()
+    this = {
+      ...$window.event,
+      rolling_bytes: rolling_bytes,
+      events: events,
+    }
+  }
+}
+```
+
+The equivalent count-based form keeps the current event and up to 99 preceding events:
+
+```tql
+window size=100, trailing=true {
+  summarize rolling_mean=mean(latency)
+  this = {...$window.event, rolling_mean: rolling_mean}
+}
+```
+
+### Sample an expensive rolling aggregate
+
+Recompute a percentile over the most recent 10,000 events after every 100 input events. The inner `summarize` omits `options.emit`, so it produces one result per window invocation:
+
+```tql
+window size=10_000, every=100, trailing=true {
+  summarize p99=quantile(latency, 0.99)
+  this = {...$window.event, p99: p99}
+}
+```
+
+Use a duration `size` and `every` for rolling dashboard snapshots such as the last hour evaluated every minute.
+
+### Detect a successful login after repeated failures
+
+A trigger fires the trailing window only for successful logins. The preceding failures stay in the retained history and become the evidence attached to the triggering event:
+
+```tql
+where class_uid == 3002 and activity_id == 1
+group user.name {
+  window size=10min, trailing=true, on=time, trigger=status_id == 1 {
+    summarize failures=count_if(status_id, x => x == 2)
+    where failures >= 5
+    this = {
+      ...$window.event,
+      prior_failures: failures,
+      evidence_start: $window.start,
+      evidence_end: $window.end,
+    }
+  }
+}
+```
+
+### Detect brute-force logins with a hopping window
+
+Use a fixed event-time window to evaluate grouped detections over aligned intervals instead of enriching every event. Each interval can produce one alert per qualifying group:
+
+```tql
 where action == "login" and outcome == "failure"
 window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
   group {user: user, src_ip: src_ip} {
@@ -121,48 +272,6 @@ window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
   }
 }
 where failures >= 20
-```
-
-### Detect password spraying
-
-Detect a single source IP address that fails authentication for many distinct users within 15 minutes.
-
-```tql
-from_kafka "auth-events"
-this = message.parse_json()
-ts = ts.time()
-where action == "login" and outcome == "failure"
-window size=15min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
-  group src_ip {
-    summarize attempts=count(), users=count_distinct(user)
-    src_ip = $group
-    start = $window.start
-    end = $window.end
-  }
-}
-where users >= 25 and attempts >= 50
-```
-
-### Send alerts directly from the window subpipeline
-
-The subpipeline can end with a sink. This form makes `window` a sink and sends detections as soon as each window closes.
-
-```tql
-from_kafka "auth-events"
-this = message.parse_json()
-ts = ts.time()
-where action == "login" and outcome == "failure"
-window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
-  group {user: user, src_ip: src_ip} {
-    summarize failures=count()
-    user = $group.user
-    src_ip = $group.src_ip
-    where failures >= 20
-    to_http "https://example.org/security-alerts" {
-      write_json
-    }
-  }
-}
 ```
 
 ## See Also

@@ -793,7 +793,7 @@ group user {
 }
 ```
 
-Use [`group`](https://tenzir.com/docs/reference/operators/group.md) around [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs an independent event-time clock. For most stream detections, the outer [`window`](https://tenzir.com/docs/reference/operators/window.md) bounds state more predictably.
+Use [`group`](https://tenzir.com/docs/reference/operators/group.md) around [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs an independent event-time clock or independent trailing history. For fixed windows that share one stream clock, put [`window`](https://tenzir.com/docs/reference/operators/window.md) outside [`group`](https://tenzir.com/docs/reference/operators/group.md) so state closes more predictably.
 
 ## Composition patterns
 

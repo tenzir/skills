@@ -292,6 +292,10 @@ Choose an OCSF representation for alertable activity, create Detection Findings,
 
 Build streaming detections with event-time windows, from failure thresholds to statistical baselines, with duplicate suppression
 
+#### [Baseline behavior from stored events](guides/detection/baseline-from-stored-events.md)
+
+Learn per-entity baselines from stored events on a schedule, publish them as lookup tables, and judge live streams with robust scores
+
 #### [Detect periodic behavior](guides/detection/detect-periodic-behavior.md)
 
 Score beaconing cadence with robust statistics, recover periods with autocorrelation, and catch implants that hold one connection open

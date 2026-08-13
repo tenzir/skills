@@ -98,6 +98,7 @@ Treat detections as versioned content: give analytics stable identities, test th
 * [Match events with TQL](../guides/detection/match-events-with-tql.md)
 * [Model detections in OCSF](../guides/detection/model-detections-in-ocsf.md)
 * [Detect over time windows](../guides/detection/detect-over-time-windows.md)
+* [Baseline behavior from stored events](../guides/detection/baseline-from-stored-events.md)
 * [Create multi-stage detectors](../guides/detection/create-multi-stage-detectors.md)
 * [Execute Sigma rules](../guides/detection/execute-sigma-rules.md)
 * [Scan bytes with YARA](../guides/detection/scan-bytes-with-yara.md)

@@ -54,7 +54,7 @@ Subscribe to a topic, aggregate over a time window, and ship the result to an ex
 ```tql
 subscribe "firewall-events"
 summarize start=min(time), end=max(time), size=sum(internal_memory_size(this)),
-          options={frequency: 15min}
+          options={emit: 15min, mode: "reset"}
 to_amqp "amqp://user:pass@localhost:5672/"
 ```
 
