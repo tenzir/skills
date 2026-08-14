@@ -195,7 +195,7 @@ Use a trailing [`window`](https://tenzir.com/docs/reference/operators/window.md)
 
 ```tql
 group user {
-  window size=5min, trailing=true, on=ts {
+  window size=5min, trailing=true, on=ts, tolerance=30s {
     summarize rolling_bytes=sum(bytes), events=count()
     this = {
       ...$window.event,
@@ -210,7 +210,9 @@ Keep trailing history keyed
 
 The outer `group` is intentional. Each event enters one user subpipeline, so the trailing window replays only that user’s retained history. Moving `group` inside the trailing window would replay the stream-wide history for every event and could emit one result for every user in that history. The recommendation to put `window` outside `group` applies to fixed windows that should share one stream clock, not to keyed trailing windows.
 
-This form corresponds to Splunk `streamstats time_window=5m ... BY user`. Use `size=100, trailing=true` for the count-based equivalent of `streamstats window=100`. Generic trailing windows replay their retained history for every invocation, so prefer incremental `summarize` when you don’t need a bounded horizon or arbitrary subpipeline logic.
+This form corresponds to Splunk `streamstats time_window=5m ... BY user`. The `tolerance` buffers slightly out-of-order events and evaluates them in event-time order. Events that arrive later than the tolerance are dropped with a warning. The reorder buffer can retain up to `tolerance` worth of events in addition to the five-minute trailing history.
+
+Use `size=100, trailing=true` for the count-based equivalent of `streamstats window=100`. Generic trailing windows replay their retained history for every invocation, so prefer incremental `summarize` when you don’t need a bounded horizon or arbitrary subpipeline logic.
 
 Set `every` to evaluate retained history less frequently. For example, `window size=10_000, every=100, trailing=true` evaluates the latest 10,000 events after every 100 inputs. Unlike event-count emission from `summarize`, a trailing `window` doesn’t fire a final partial cadence when its input ends.
 
@@ -258,7 +260,7 @@ The wall-clock schedule is not an event-time window. If the pipeline starts at 0
 
 Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when an aggregation needs bounded time or event-count state. Tumbling and hopping windows create one subpipeline per aligned range. By default, trailing windows create one subpipeline per event. Set `every` or `trigger` to restrict which events fire one. Inside any form, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) to compute counts, distinct values, and statistics.
 
-For duration windows, specify `on` to assign events by event time and accept out-of-order data with `tolerance`. Omit `on` for processing-time windows that close on their wall-clock boundary. Use an unsigned integer `size` for windows that close after a number of events rather than an amount of time.
+For duration windows, specify `on` to assign events by event time and accept out-of-order data with `tolerance`. Fixed windows delay closure by the tolerance, while trailing windows reorder events within it before evaluating event-anchored history. Omit `on` for processing-time windows that close on their wall-clock boundary. Use an unsigned integer `size` for windows that close after a number of events rather than an amount of time.
 
 Put [`group`](https://tenzir.com/docs/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs its own event-time clock or trailing history. For aligned fixed detections, an outer `window` with groups inside usually bounds high-cardinality state more predictably.
 
@@ -382,7 +384,7 @@ Per-key event-time windows keep separate windowed results for each entity. Event
 
 #### Streaming late-event tolerance
 
-Streaming late-event tolerance controls how long a window remains open for out-of-order events. It lets a pipeline accept delayed data without holding every window until the input ends.
+Streaming late-event tolerance lets a pipeline accept delayed data without holding every window until the input ends. Fixed windows stay open for the tolerance, while trailing windows buffer and reorder events within it before evaluation.
 
 | System       | Support | Notes                                                                                  |
 | ------------ | ------- | -------------------------------------------------------------------------------------- |

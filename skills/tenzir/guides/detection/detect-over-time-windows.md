@@ -18,14 +18,14 @@ Start with the time semantics, then build a threshold detector over tumbling win
 
 Streaming detections answer questions about when things happened, not when events arrived. Three mechanisms look similar but behave differently:
 
-* [`window`](https://tenzir.com/docs/reference/operators/window.md) with `on=time` assigns events to fixed intervals by **event time** and tolerates out-of-order arrivals via `tolerance`. Use it for detections where a delayed event can change the answer.
+* [`window`](https://tenzir.com/docs/reference/operators/window.md) with `on=time` uses **event time**. Fixed windows assign events to aligned intervals, while trailing windows evaluate event-anchored history. Both forms tolerate out-of-order arrivals via `tolerance`. Use them for detections where a delayed event can change the answer.
 * [`window`](https://tenzir.com/docs/reference/operators/window.md) without `on` assigns events by **processing time** and closes at epoch-aligned wall-clock boundaries. This is useful when arrival time is the intended detection clock.
 * [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analytics/aggregate-event-streams.md#aggregate-periodic-snapshots).
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={emit: 5min, mode: "reset"}` emits aggregate updates on a processing-time cadence, but it doesn’t create event-time evidence intervals.
 
-The examples in this guide use aligned tumbling or hopping windows, which run one subpipeline per fixed interval. By default, a trailing window with `trailing=true` instead runs once per input event and can enrich the triggering event through `$window.event`. That maps to bounded Splunk `streamstats`, but generic trailing windows replay their retained history for every invocation. Set `every` to sample that history at a lower count or duration cadence. Set `trigger` to fire only for events that can produce a result, such as a successful login after repeated failures. Prefer aligned windows for periodic detection decisions unless you specifically need event-anchored results.
+The examples in this guide use aligned tumbling or hopping windows, which run one subpipeline per fixed interval. By default, a trailing window with `trailing=true` instead runs once per input event and can enrich the triggering event through `$window.event`. That maps to bounded Splunk `streamstats`, but generic trailing windows replay their retained history for every invocation. Set `every` to sample that history at a lower count or duration cadence. Set `trigger` to fire only for events that can produce a result, such as a successful login after repeated failures. Add `tolerance` when trailing input can arrive out of order. Tenzir reorders events within the tolerance before evaluating their event-anchored history and warns about later events. Prefer aligned windows for periodic detection decisions unless you specifically need event-anchored results.
 
-Size `tolerance` against the real skew in your telemetry: compare `time` (when the event occurred) with `metadata.logged_time` and `metadata.processed_time` (when it was recorded and processed) to see how late your events actually arrive, and give the window at least that much slack.
+Size `tolerance` against the real skew in your telemetry: compare `time` (when the event occurred) with `metadata.logged_time` and `metadata.processed_time` (when it was recorded and processed) to see how late your events actually arrive, and give the window at least that much slack. For trailing windows, account for the additional memory: the reorder buffer can retain up to `tolerance` worth of events in addition to the trailing `size`.
 
 ## Count events in tumbling windows
 
@@ -76,6 +76,66 @@ This example uses tumbling windows because [`window`](https://tenzir.com/docs/re
 When your producers populate stable entity identifiers, group by those instead of display values: `user.uid` survives renames and `device.uid` survives DHCP churn, where `user.name` and hostnames do not.
 
 The Sigma guide applies the same window pattern to [`event_count` and `value_count` correlations](https://tenzir.com/docs/guides/detection/execute-sigma-rules.md#express-count-correlations).
+
+## Detect geographically impossible logins
+
+A trailing window can compare each authentication event with recent logins for the same user. Combine it with [`geo_distance`](https://tenzir.com/docs/reference/functions/geo_distance.md) to flag an account that appears more than 1,000 kilometers away from a prior location within one hour:
+
+```tql
+from {
+  time: 2024-01-01T10:00:00,
+  user: {name: "alice"},
+  src_endpoint: {
+    location: {city: "San Francisco", long: -122.4194, lat: 37.7749},
+  },
+}, {
+  time: 2024-01-01T10:30:00,
+  user: {name: "alice"},
+  src_endpoint: {
+    location: {city: "Berlin", long: 13.405, lat: 52.52},
+  },
+}
+group user.name {
+  window size=1h, trailing=true, on=time, tolerance=1min {
+    summarize logins=count(),
+              max_distance_m=max(
+                geo_distance(
+                  src_endpoint.location.long,
+                  src_endpoint.location.lat,
+                  $window.event.src_endpoint.location.long,
+                  $window.event.src_endpoint.location.lat,
+                  spheroid=true,
+                ),
+              )
+    where logins >= 2 and max_distance_m > 1000000
+    this = {
+      ...$window.event,
+      max_distance_m: int(max_distance_m),
+      evidence_start: $window.start,
+      evidence_end: $window.end,
+    }
+  }
+}
+select user=user.name,
+       city=src_endpoint.location.city,
+       max_distance_m,
+       evidence_start,
+       evidence_end
+```
+
+```tql
+{
+  user: "alice",
+  city: "Berlin",
+  max_distance_m: 9128788,
+  evidence_start: 2024-01-01T09:30:00Z,
+  evidence_end: 2024-01-01T10:30:00Z,
+}
+```
+
+The per-user [`group`](https://tenzir.com/docs/reference/operators/group.md) isolates login histories. For each event, the trailing [`window`](https://tenzir.com/docs/reference/operators/window.md) retains the preceding hour, while `$window.event` provides the current location. The one-minute `tolerance` reorders slightly late login events before evaluating their histories. [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) calculates the greatest distance between the current location and every login in the retained history.
+
+IP geolocation can be imprecise, and VPNs, proxies, and mobile networks can produce legitimate jumps. Treat this pattern as a signal to combine with device identity, authentication strength, and network ownership rather than as a standalone verdict.
 
 ## Compare observations with a rolling baseline
 

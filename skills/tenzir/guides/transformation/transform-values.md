@@ -581,6 +581,45 @@ sqrt_y = y.sqrt()
 }
 ```
 
+### Enforce a geographic access boundary
+
+Use [`geo_distance`](https://tenzir.com/docs/reference/functions/geo_distance.md) to compare geolocated authentication events with an allowed location. This example keeps logins more than 50 kilometers from a San Francisco office:
+
+```tql
+from {
+  user: {name: "alice"},
+  src_endpoint: {
+    location: {city: "Oakland", long: -122.2711, lat: 37.8044},
+  },
+}, {
+  user: {name: "bob"},
+  src_endpoint: {
+    location: {city: "Berlin", long: 13.405, lat: 52.52},
+  },
+}
+distance_to_hq_m = int(
+  geo_distance(
+    src_endpoint.location.long,
+    src_endpoint.location.lat,
+    -122.4194,
+    37.7749,
+    spheroid=true,
+  ),
+)
+where distance_to_hq_m > 50000
+select user=user.name, city=src_endpoint.location.city, distance_to_hq_m
+```
+
+```tql
+{
+  user: "bob",
+  city: "Berlin",
+  distance_to_hq_m: 9128788,
+}
+```
+
+[`geo_distance`](https://tenzir.com/docs/reference/functions/geo_distance.md) takes longitude before latitude and returns meters. The `spheroid=true` argument uses the WGS-84 reference ellipsoid for the more accurate distance calculation.
+
 ## Working with null values
 
 Handle missing or null values gracefully in your data.

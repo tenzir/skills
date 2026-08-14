@@ -654,12 +654,36 @@ Computes the ceiling of a number or a time/duration with a specified unit.
 ceil(4.2)
 ```
 
+### [exp](functions/exp.md)
+
+Computes the natural exponential function.
+
+```tql
+exp(1)
+```
+
 ### [floor](functions/floor.md)
 
 Computes the floor of a number or a time/duration with a specified unit.
 
 ```tql
 floor(4.8)
+```
+
+### [log](functions/log.md)
+
+Computes a logarithm with an optional base.
+
+```tql
+log(8, 2)
+```
+
+### [pow](functions/pow.md)
+
+Raises a number to a power.
+
+```tql
+pow(2, 10)
 ```
 
 ### [round](functions/round.md)

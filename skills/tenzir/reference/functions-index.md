@@ -100,7 +100,10 @@
 
 - [abs](functions/abs.md): Returns the absolute value.
 - [ceil](functions/ceil.md): Computes the ceiling of a number or a time/duration with a specified unit.
+- [exp](functions/exp.md): Computes the natural exponential function.
 - [floor](functions/floor.md): Computes the floor of a number or a time/duration with a specified unit.
+- [log](functions/log.md): Computes a logarithm with an optional base.
+- [pow](functions/pow.md): Raises a number to a power.
 - [round](functions/round.md): Rounds a number or a time/duration with a specified unit.
 - [sqrt](functions/sqrt.md): Computes the square root of a number.
 
@@ -267,4 +270,5 @@
 
 ## Additional Pages
 
+- [geo_distance](functions/geo_distance.md): Computes the surface distance between two geographic coordinates.
 - [hmac](functions/hmac.md): Computes an HMAC (Hash-based Message Authentication Code).

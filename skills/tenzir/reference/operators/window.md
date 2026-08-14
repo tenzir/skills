@@ -55,7 +55,7 @@ Fixed event-time windows close when the event-time clock reaches the window end 
 
 Fixed processing-time windows close at their wall-clock boundary, even when no later event arrives. Their boundaries are epoch-aligned, not relative to the pipeline start time. Restored windows whose end has passed close immediately.
 
-Trailing event-time windows initially require nondecreasing timestamps. An event with a regressing timestamp is dropped with a warning because an emitted trailing result cannot be corrected. Duplicate timestamps are accepted and produce separate results. Trailing processing-time windows follow arrival order.
+Trailing event-time windows reorder events within `tolerance` before evaluating their subpipelines. Events that arrive more than `tolerance` behind the largest observed timestamp are dropped with the same late-event warning as fixed windows. The default tolerance of `0s` requires nondecreasing timestamps. Duplicate timestamps are accepted and produce separate results. Trailing processing-time windows follow arrival order.
 
 ### Count offsets
 
@@ -75,7 +75,7 @@ An outer `group` also gives sparse keys independent lifetimes. A sparse fixed wi
 
 ### Trailing-window cost
 
-A generic trailing window replays every retained event through a new subpipeline for every invocation. Without `every` or `trigger`, its work is approximately the number of input events multiplied by the average retained event count. Large or dense time windows can therefore consume substantial CPU and memory. Tenzir warns when a trailing window retains 100,000 events and never drops retained events to enforce a hidden limit.
+A generic trailing window replays every retained event through a new subpipeline for every invocation. Without `every` or `trigger`, its work is approximately the number of input events multiplied by the average retained event count. Large or dense time windows can therefore consume substantial CPU and memory. For event-time windows, the reorder buffer can retain up to `tolerance` worth of events in addition to the trailing `size`. Tenzir warns when a trailing window retains 100,000 events and never drops retained events to enforce a hidden limit.
 
 Set `every` to sample retained history at a lower cadence. Set `trigger` when only some events warrant evaluation. The operator always maintains the retained history, but it replays the history only when the cadence is due and the trigger matches.
 
@@ -132,9 +132,11 @@ Omit `trigger` to fire on every event. Fixed windows reject `trigger` because th
 
 ### `tolerance = duration` (optional)
 
-The nonnegative amount of out-of-order event time that a fixed event-time window accepts before closing. It defaults to `0s`.
+The nonnegative amount of out-of-order event time to accept. It defaults to `0s`.
 
-Only fixed duration windows with `on` accept `tolerance`. Trailing windows reject it because they emit results immediately and cannot correct them later.
+For fixed event-time windows, `tolerance` delays closing until the event-time clock reaches the window end plus the tolerance. For trailing event-time windows, it holds events in a reorder buffer until the observed watermark reaches their timestamp plus the tolerance. Events that arrive later are dropped with a warning.
+
+Only duration windows with `on` accept `tolerance`.
 
 ### `idle_timeout = duration` (optional)
 
@@ -199,11 +201,11 @@ Use `every=10` to start a 100-event window every 10 events.
 
 ### Add a rolling time total to every event
 
-The trailing interval for an event at `ts` contains events from `ts - 5min` through `ts`, including both endpoints. The outer group keeps independent host histories:
+The trailing interval for an event at `ts` contains events from `ts - 5min` through `ts`, including both endpoints. The outer group keeps independent host histories. A 30-second tolerance reorders slightly late events before evaluating the trailing windows:
 
 ```tql
 group host {
-  window size=5min, trailing=true, on=ts {
+  window size=5min, trailing=true, on=ts, tolerance=30s {
     summarize rolling_bytes=sum(bytes), events=count()
     this = {
       ...$window.event,
