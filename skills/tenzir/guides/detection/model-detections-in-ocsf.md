@@ -190,7 +190,7 @@ A high-confidence finding can have low severity, and a high-severity finding doe
 
 ### Build the finding
 
-The following example reshapes a credential-dump match from the [rule translation](execute-sigma-rules.md#translate-unsupported-rules-to-tql) in the Sigma guide:
+The following example reshapes the credential-dump match from our guide on [packaging a complete TQL detection](match-events-with-tql.md#package-the-complete-detection):
 
 ```tql
 let $finding_time = 2026-04-28T10:01:05Z

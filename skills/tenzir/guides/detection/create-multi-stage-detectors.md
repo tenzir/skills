@@ -25,12 +25,16 @@ windows_threats::detections::print_sensitive_dump
 publish "detections"
 ```
 
+A second stage can publish findings to the same topic:
+
 ```tql
 // Stage 2: a statistical detection over SMB traffic.
 subscribe "ocsf.smb-activity"
 windows_threats::detections::smb_traffic_spike
 publish "detections"
 ```
+
+The combinator consumes the shared stream of findings:
 
 ```tql
 // Combinator: subscribe to all stage findings and correlate.
@@ -45,7 +49,7 @@ A stage can call one packaged operator that both matches and models the result, 
 
 ## Correlate stages within a window
 
-The simplest combinators ask whether several stages fired for the same entity within a time window, together or in a required order. These are Sigma’s `temporal` and `temporal_ordered` correlation types; the Sigma guide’s [correlation-rule mapping](execute-sigma-rules.md#map-correlation-types-to-tql) shows how all four Sigma correlation types translate to TQL. The example data sets are simplified sightings carrying `time`, `host`, and `rule`. In production, these values come from Detection Finding fields: `device.hostname` for the host and `finding_info.analytic.uid` for the rule. The combined-finding example maps those fields into a complete verdict.
+The simplest combinators ask whether several stages fired for the same entity within a time window, together or in a required order. These correspond to Sigma’s `temporal` and `temporal_ordered` correlation types. The examples in this section show how both types translate to TQL. The example data sets are simplified sightings carrying `time`, `host`, and `rule`. In production, these values come from Detection Finding fields: `device.hostname` for the host and `finding_info.analytic.uid` for the rule. The combined-finding example maps those fields into a complete verdict.
 
 These examples use fixed, epoch-aligned time bins. For a sliding “within N minutes of each other” interpretation, use a hopping window instead, as shown in [`window`](https://tenzir.com/docs/reference/operators/window.md#detect-brute-force-logins-with-a-hopping-window). The examples share one event-time clock across hosts and omit `tolerance`. In production, keep [`window`](https://tenzir.com/docs/reference/operators/window.md) on the outside so closing it also expires all high-cardinality correlation groups. Put [`group`](https://tenzir.com/docs/reference/operators/group.md) inside the window when a correlation needs a full keyed subpipeline, and size `tolerance` for ingestion skew. Use an outer group only when each entity must advance its own event-time clock.
 

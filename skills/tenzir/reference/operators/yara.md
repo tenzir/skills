@@ -7,124 +7,193 @@ section: "Docs"
 
 # yara
 
-> Executes YARA rules on byte streams.
+> Executes YARA-X rules on a finite byte stream.
 
-Executes YARA rules on byte streams.
+Executes YARA-X rules on a finite byte stream.
 
 ```tql
-yara rule:string|list<string>, [compiled_rules=bool, fast_scan=bool]
+yara path=string|list<string>, [include_dirs=string|list<string>, fast_scan=bool, timeout=duration, max_input_size=int, max_matches_per_pattern=int, format="ocsf"|"plain"]
+
+
+yara rules=string|list<string>, [include_dirs=string|list<string>, fast_scan=bool, timeout=duration, max_input_size=int, max_matches_per_pattern=int, format="ocsf"|"plain"]
 ```
 
 ## Description
 
-The `yara` operator applies [YARA](https://virustotal.github.io/yara/) rules to an input of bytes and emits rule context for each match.
+The `yara` operator applies [YARA-X](https://virustotal.github.io/yara-x/) rules to bytes. By default, it emits one OCSF [Detection Finding](https://schema.ocsf.io/classes/detection_finding) with the Security Control profile for every matching rule. Set `format="plain"` to emit the original input and native YARA rule metadata instead. Nonmatching rules produce no output.
 
-We modeled the operator after the official [`yara` command-line utility](https://yara.readthedocs.io/en/stable/commandline.html) to enable a familiar experience for command-line users. Similar to the official `yara` command, the operator compiles the rules by default unless you provide the `compiled_rules=true` option. To quote from the above link:
+Specify exactly one rule source with `path=` or `rules=`. The operator compiles rules before it accepts input. It does not accept precompiled rules.
 
-> This is a security measure to prevent users from inadvertently using compiled rules coming from a third-party. Using compiled rules from untrusted sources can lead to the execution of malicious code in your computer.
+The operator buffers its entire logical input and scans when the input ends. Matches can therefore span chunk boundaries, but the input must be finite. The `max_input_size` option bounds the buffered data.
 
-The operator scans the entire logical input as one contiguous byte sequence. It buffers the full input in memory and runs the YARA scan when the input ends. This lets matches span chunk boundaries, but it also means the operator is only suitable for finite byte streams.
+Tenzir enables the same YARA-X module set in every supported build:
 
-### `rule: string | list<string>`
+* `console`
+* `crx`
+* `dex`
+* `dotnet`
+* `elf`
+* `hash`
+* `lnk`
+* `macho`
+* `math`
+* `pe`
+* `string`
+* `time`
+* `zip`
 
-The path to one YARA rule or a list of rule paths.
+The `vt` and `cuckoo` modules are unsupported because Tenzir does not provide their runtime data. The optional `magic` module is not enabled, and experimental and test modules are excluded. Importing a banned module produces a compiler diagnostic.
 
-If a path is a directory, the operator attempts to recursively add all contained files as YARA rules.
+Rule paths and includes can read local files, so treat them as trusted node configuration. Filesystem-backed rules compile when the operator starts and do not hot-reload. Restart or replace the pipeline after changing them.
 
-### `compiled_rules = bool (optional)`
+### `path = string | list<string>`
 
-Whether to interpret the rules as compiled.
+A rule file, rule directory, or list of files and directories. Directories are traversed recursively, and every file ending in `.yar` or `.yara` is compiled as a root source. Give include-only dependencies another extension, such as `.inc`, or pass the root files explicitly. Discovery is deterministic, overlapping paths are deduplicated, and symbolic links are rejected.
 
-When you provide this flag, you must provide exactly one rule path as the positional argument.
+### `rules = string | list<string>`
+
+One inline YARA rule source or a list of sources.
+
+### `include_dirs = string | list<string> (optional)`
+
+Additional directories used to resolve `include` directives. For rules loaded with `path=`, the parent directory of every root rule file is also searched. YARA-X uses one ordered include search path for the complete ruleset, not a separate path for each root. Use unique include paths when roots come from multiple directories.
 
 ### `fast_scan = bool (optional)`
 
-Enable fast matching mode.
+Stop collecting matches for each pattern after the first match. The finding’s `evidences[0].data.matches_complete` field is `false` because the evidence is incomplete.
+
+Defaults to `false`.
+
+### `timeout = duration (optional)`
+
+The maximum duration of one scan, with whole-second precision.
+
+Defaults to `1min`. A timeout must be positive and use whole-second precision. The limit is best-effort because YARA-X may not stop immediately in every condition-evaluation path. A timeout produces an error and no partial output.
+
+### `max_input_size = int (optional)`
+
+The maximum number of input bytes that the operator buffers. The operator rejects a larger input before scanning it.
+
+Defaults to `1Gi`. Exceeding the limit produces an error and no partial output. Because the operator snapshots buffered input, a snapshot can approach this limit.
+
+### `max_matches_per_pattern = int (optional)`
+
+The maximum number of matches emitted as evidence for each pattern. This limit does not affect rule evaluation. Reaching it sets `evidences[0].data.matches_complete` to `false` and emits a warning. Independently, the operator stores at most `10000` match records and `16MiB` of Base64-encoded match data across the entire scan. After the data budget is reached, further match records retain their pattern, offset, and length but omit their `data` field.
+
+Defaults to `1000`. Values must be less than `1000000`, the internal YARA-X match storage limit, so the operator can reliably detect incomplete evidence.
+
+### `format = "ocsf" | "plain" (optional)`
+
+The output format:
+
+* `"ocsf"` emits an `ocsf.detection_finding` event with the applied rule and match evidence.
+* `"plain"` emits a `tenzir.yara` event containing the original input in `input` and the matched rule descriptor in `rule`.
+
+Defaults to `"ocsf"`.
 
 ## Examples
 
-The example below shows how you can scan a file with YARA rules.
-
 ### Scan a file
 
-Scan a file with a set of YARA rules:
+Scan a file with every `.yar` and `.yara` rule below a directory:
 
 ```tql
-from_file "evil.exe", mmap=true {
-  yara "rule.yara"
+from_file "suspicious.exe", mmap=true {
+  yara path="/etc/tenzir/yara"
 }
 ```
 
-Memory mapping optimization
-
-When reading from a local file, `from_file ..., mmap=true` uses `mmap(2)` so `yara` can scan one contiguous chunk without an extra copy. Without `mmap=true`, `from_file` may deliver multiple chunks; `yara` still works because it buffers and joins the full input before scanning.
+Using `mmap=true` avoids an extra copy when the local file can be memory mapped. The operator still works with chunked input because it buffers the complete byte stream.
 
 Finite inputs only
 
-`yara` waits for the end of input before it emits any matches. Don’t use it on never-ending byte streams.
+`yara` waits for the end of input before it emits findings. Do not use it on a never-ending byte stream.
 
-Let’s unpack a concrete example:
+### Use an inline rule
 
-```plaintext
-rule test {
+```tql
+from_file "suspicious.exe", mmap=true {
+  yara rules=r#"
+rule SuspiciousDropper {
   meta:
-    string = "string meta data"
-    integer = 42
-    boolean = true
-
-
+    description = "Detects a demo dropper marker"
   strings:
-    $foo = "foo"
-    $bar = "bar"
-    $baz = "baz"
-
-
+    $marker = "DROPPER-STAGE-2"
   condition:
-    ($foo and $bar) or $baz
+    $marker
+}
+"#
 }
 ```
 
-You can produce test matches by feeding bytes into the `yara` operator. You will get one `yara.match` per matching rule:
+With the default `format="ocsf"`, a match produces an `ocsf.detection_finding` event. The finding records the rule in `policy`, its `yara:<namespace>:<identifier>` identity in `finding_info.analytic`, and the input digest and ordered matches in `evidences`:
 
 ```tql
 {
-  rule: {
-    identifier: "test",
-    namespace: "default",
-    tags: [],
-    meta: {
-      string: "string meta data",
-      integer: 42,
-      boolean: true
-    },
-    strings: {
-      "$foo": "foo",
-      "$bar": "bar",
-      "$baz": "baz"
-    }
+  class_uid: 2004,
+  category_uid: 2,
+  activity_id: 1,
+  type_uid: 200401,
+  metadata: {
+    version: "1.9.0",
+    profiles: ["security_control"],
+    product: {name: "Tenzir", vendor_name: "Tenzir"},
   },
-  matches: {
-    "$foo": [
-      {
-        data: "Zm9v",
-        base: 0,
+  finding_info: {
+    title: "YARA match: SuspiciousDropper",
+    desc: "Detects a demo dropper marker",
+    analytic: {
+      uid: "yara:default:SuspiciousDropper",
+      name: "SuspiciousDropper",
+      type_id: 1,
+    },
+  },
+  policy: {
+    uid: "yara:default:SuspiciousDropper",
+    name: "SuspiciousDropper",
+    type: "YARA rule",
+    is_applied: true,
+  },
+  evidences: [{
+    name: "Scanned byte stream",
+    data: {
+      input: {size: 15, sha256: "…"},
+      matches_complete: true,
+      matches: [{
+        pattern: "$marker",
         offset: 0,
-        match_length: 3
-      }
-    ],
-    "$bar": [
-      {
-        data: "YmFy",
-        base: 0,
-        offset: 4,
-        match_length: 3
-      }
-    ]
-  }
+        length: 15,
+        data: {encoding: "base64", value: "RFJPUFBFUi1TVEFHRS0y"},
+      }],
+    },
+  }],
 }
 ```
 
-Each match has a `rule` field that describes the rule and a `matches` record indexed by string identifier to report a list of matches per rule string.
+### Emit the native YARA representation
+
+Use `format="plain"` when you need the original bytes and rule metadata without an OCSF envelope:
+
+```tql
+from_file "suspicious.exe", mmap=true {
+  yara path="/etc/tenzir/yara", format="plain"
+}
+```
+
+The operator emits one `tenzir.yara` event for every matched rule:
+
+```tql
+{
+  input: b"DROPPER-STAGE-2",
+  rule: {
+    identifier: "SuspiciousDropper",
+    namespace: "default",
+    tags: [],
+    meta: {description: "Detects a demo dropper marker"},
+    patterns: ["$marker"],
+  },
+}
+```
 
 ## See Also
 

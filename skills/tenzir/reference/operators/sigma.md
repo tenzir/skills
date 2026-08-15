@@ -7,133 +7,202 @@ section: "Docs"
 
 # sigma
 
-> Filter the input with Sigma rules and output matching events.
+> Evaluate Sigma detection rules against structured events.
 
-Filter the input with Sigma rules and output matching events.
+Evaluate Sigma detection rules against structured events.
 
 ```tql
-sigma path:string, [refresh_interval=duration]
+sigma path=string|list<string>, [refresh_interval=duration, format="ocsf"|"plain"]
+
+
+sigma rules=string|list<string>, [format="ocsf"|"plain"]
 ```
 
 ## Description
 
-The `sigma` operator executes [Sigma rules](https://github.com/SigmaHQ/sigma) on its input. If a rule matches, the operator emits a `tenzir.sigma` event that wraps the input record into a new record along with the matching rule. The operator discards all events that do not match the provided rules.
+The `sigma` operator evaluates [Sigma](https://sigmahq.io/) detection rules against each input event. By default, every match produces an OCSF Detection Finding with the Security Control profile. Set `format="plain"` to emit a lightweight `tenzir.sigma` record with the original event and the applied rule. Events that match no rule produce no output.
 
-The operator runs single Sigma *detection* rules. It does not execute Sigma *correlation* rules (those with a `correlation:` block, such as `event_count`, `value_count`, `temporal`, and `temporal_ordered`). Express these with [`window`](https://tenzir.com/docs/reference/operators/window.md) and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) instead, as shown in [the Sigma correlation guide](../../guides/detection/execute-sigma-rules.md#map-correlation-types-to-tql).
+Specify exactly one source with `path=` or `rules=`.
 
-Transpilation Process
+The operator implements Sigma v2.1 detection rules and global filters for the default `sigma` taxonomy. Correlation rules are not supported.
 
-For each rule, the operator transpiles the YAML into an [expression](../expressions.md) and instantiates a [`where`](https://tenzir.com/docs/reference/operators/where.md) operator, followed by assignments to generate an output. Here’s how the transpilation works. The Sigma rule YAML format requires a `detection` attribute that includes a map of named sub-expression called *search identifiers*. In addition, `detection` must include a final `condition` that combines search identifiers using boolean algebra (AND, OR, and NOT) or syntactic sugar to reference groups of search expressions, e.g., using the `1/all of *` or plain wildcard syntax. Consider the following `detection` embedded in a rule:
+## Rule sources
 
-```yaml
-detection:
-  foo:
-    a: 42
-    b: "evil"
-  bar:
-    c: 1.2.3.4
-  condition: foo or not bar
-```
+Choose a filesystem source for a managed rule repository and an inline source for rules that belong to the pipeline itself.
 
-We translate this rule piece by building a symbol table of all keys (`foo` and `bar`). Each sub-expression is a valid expression in itself:
+### `path = string | list<string>`
 
-1. `foo`: `a == 42 && b == "evil"`
-2. `bar`: `c == 1.2.3.4`
+A rule file, a directory, or a non-empty list of files and directories. Directories are searched recursively in deterministic order and include files ending in `.yaml` or `.yml`. An explicitly named file can use another extension. Overlapping path entries are deduplicated, and a file can contain multiple YAML documents.
 
-Finally, we combine the expression according to `condition`:
+The operator refreshes filesystem-backed rules. A successfully reloaded rule replaces its previous version. If a changed document no longer parses or validates, the operator reports the error and retains its last valid version. Failures in one source do not disable valid rules from other sources. Removing a file from a successfully inspected directory removes its rules.
 
-```tql
-(a == 42 && b == "evil") || ! (c == 1.2.3.4)
-```
+### `rules = string | list<string>`
 
-We parse the YAML string values according to Tenzir’s richer data model, e.g., the expression `c: 1.2.3.4` becomes a field named `c` and value `1.2.3.4` of type `ip`, rather than a `string`. Sigma also comes with its own [event taxonomy](https://github.com/SigmaHQ/sigma-specification/blob/main/Taxonomy_specification) to standardize field names. The `sigma` operator currently does not normalize fields according to this taxonomy but rather takes the field names verbatim from the search identifier.
+One constant string or a non-empty list of constant strings containing Sigma YAML. Each string can contain one document or a multi-document collection. Constant `let` bindings and multiline raw strings are supported.
 
-Sigma uses [value modifiers](https://github.com/SigmaHQ/sigma-specification/blob/main/Sigma_specification.md#value-modifiers) to select a concrete relational operator for given search predicate. Without a modifier, Sigma uses equality comparison (`==`) of field and value. For example, the `contains` modifier changes the relational operator to substring search, and the `re` modifier switches to a regular expression match. The table below shows which modifiers the `sigma` operator supports, where ✅ means implemented, 🚧 not yet implemented but planned, and ❌ not yet supported:
-
-| Modifier         | Use                                                      | Support |
-| ---------------- | -------------------------------------------------------- | ------- |
-| `contains`       | perform a substring search with the value                | ✅       |
-| `startswith`     | match the value as a prefix                              | ✅       |
-| `endswith`       | match the value as a suffix                              | ✅       |
-| `base64`         | encode the value with Base64                             | ✅       |
-| `base64offset`   | encode value as all three possible Base64 variants       | ✅       |
-| `utf16le`/`wide` | transform the value to UTF16 little endian               | 🚧      |
-| `utf16be`        | transform the value to UTF16 big endian                  | 🚧      |
-| `utf16`          | transform the value to UTF16                             | 🚧      |
-| `re`             | interpret the value as regular expression                | ✅       |
-| `cidr`           | interpret the value as a IP CIDR                         | ✅       |
-| `all`            | changes the expression logic from OR to AND              | ✅       |
-| `lt`             | compare less than (`<`) the value                        | ✅       |
-| `lte`            | compare less than or equal to (`<=`) the value           | ✅       |
-| `gt`             | compare greater than (`>`) the value                     | ✅       |
-| `gte`            | compare greater than or equal to (`>=`) the value        | ✅       |
-| `expand`         | expand value to placeholder strings, e.g., `%something%` | ❌       |
-| `cased`          | match the value case-sensitively                         | ❌       |
-| `i`/`ignorecase` | match the regular expression case-insensitively          | ❌       |
-| `m`/`multiline`  | let regex `^` and `$` match at line boundaries           | ❌       |
-| `s`/`dotall`     | let regex `.` match newline characters                   | ❌       |
-| `exists`         | test whether the field is present in the event           | ❌       |
-| `fieldref`       | compare the field against another field’s value          | ❌       |
-| `windash`        | match Windows `-` and `/` parameter variants             | ❌       |
-| `neq`            | negate the comparison                                    | ❌       |
-| time parts       | extract `minute`/`hour`/`day`/`week`/`month`/`year`      | ❌       |
-
-Tenzir transpiles Sigma rules with its own engine rather than depending on [pySigma](https://github.com/SigmaHQ/pySigma). The operator currently skips unsupported modifiers instead of rejecting them, so a rule that relies on one matches as if the modifier were absent. Avoid the ❌ modifiers above until they are implemented.
-
-### `path: string`
-
-The rule to match.
-
-If `path` points to a rule, the operator transpiles the rule file at the time of pipeline creation.
-
-If this points to a directory, the operator watches it and attempts to parse each contained file as a Sigma rule. The `sigma` operator matches if *any* of the contained rules match, effectively creating a disjunction of all rules inside the directory.
+Inline rules are parsed when Tenzir constructs the pipeline. They perform no runtime filesystem access and cannot be combined with `refresh_interval`.
 
 ### `refresh_interval = duration (optional)`
 
-How often the `sigma` operator looks at the specified rule or directory of rules to update its internal state.
+How often a filesystem-backed source is checked for changes.
 
 Defaults to `5s`.
 
+### `format = "ocsf" | "plain" (optional)`
+
+The output format:
+
+* `"ocsf"` emits an `ocsf.detection_finding` event with the applied rule, source event, and causal match provenance.
+* `"plain"` emits a `tenzir.sigma` event with the source event in `event` and the applied, filter-adjusted rule in `rule`.
+
+Defaults to `"ocsf"`.
+
+## Matching behavior
+
+Sigma field names apply directly to the input event. The operator does not map rule fields to another taxonomy and does not classify events by `logsource`. The `logsource` section describes the rule and scopes global filters, but it never filters input events by itself.
+
+For a field name that contains dots, the operator first looks for the complete name as an exact top-level key. If that key is absent, it interprets the dots as nested field traversal. For example, `process.name` selects a top-level `"process.name"` field when present and otherwise selects `name` below the `process` record.
+
+Keyword selections recursively inspect every string-valued leaf, including strings inside nested records and lists. They do not serialize records or coerce non-string values.
+
+A list-valued `condition` is treated as a list of OR-linked queries. Conditions support `and`, `or`, `not`, parentheses, `1 of`, `all of`, `them`, and wildcard search-identifier patterns. Numeric quantifiers greater than `1` and the non-standard `any of` spelling are rejected.
+
+Keyword selections inspect strings inside lists, but named field lookup follows record fields only.
+
+Sigma v3
+
+A document whose `sigma-version` resolves to a major other than `2` is rejected instead of being interpreted with different semantics. Provisional Sigma v3 selectors such as `[any]`, `[all]`, `[none]`, and positional array indices are therefore not supported.
+
+## Modifiers
+
+The operator validates every modifier chain before it executes a rule. Unknown, unsupported, incorrectly ordered, or type-incompatible modifiers reject the affected rule with an actionable diagnostic. Nothing is silently ignored.
+
+| Modifiers                                        | Behavior                                                                                                                              |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `contains`, `startswith`, `endswith`             | Match a substring, prefix, or suffix.                                                                                                 |
+| `cased`                                          | Make a normally case-insensitive string comparison case-sensitive.                                                                    |
+| `windash`                                        | Treat a word-initial Windows `-` and `/` as interchangeable.                                                                          |
+| `re` with `i`, `m`, `s`                          | Match a regular expression with optional ignore-case, multiline, and dot-all flags. The flags are sub-modifiers and must follow `re`. |
+| `base64`, `base64offset`                         | Match Base64 encodings of a value.                                                                                                    |
+| `utf16le`/`wide`, `utf16be`, `utf16`             | Encode a string as UTF-16. These must be followed by `base64` or `base64offset`.                                                      |
+| `cidr`                                           | Match an IP address against a subnet.                                                                                                 |
+| `lt`, `lte`, `gt`, `gte`, `neq`                  | Compare values.                                                                                                                       |
+| `exists`                                         | Test whether a field exists. It takes one boolean and cannot be combined with another modifier.                                       |
+| `fieldref`                                       | Compare against another event field. It can only be combined with `neq`.                                                              |
+| `minute`, `hour`, `day`, `week`, `month`, `year` | Extract a time part before comparison.                                                                                                |
+| `all`                                            | Require every value in a list instead of any value.                                                                                   |
+
+The `expand` modifier requires a placeholder mapping, which this operator does not provide. A rule that uses `expand` is rejected. Replace placeholders with concrete values before loading the rule.
+
+## Global filters
+
+The operator supports Sigma v2.1 global filter documents. A filter can target detection rules by unique `id` or `name`, or use `rules: any` for every compatible rule. Its condition is added conjunctively to each target rule.
+
+Filter compatibility uses subset matching over `logsource.category`, `logsource.product`, and `logsource.service`: every value declared by the filter must equal the corresponding target-rule value. A target rule may be more specific. The `definition` key does not participate in this check.
+
+An unknown or ambiguous target, an incompatible log source, or an invalid new filter produces a warning. The target detection continues without that newly invalid filter unless a last valid version of the filter is available.
+
+## OCSF output
+
+The default output is an OCSF 1.9.0 Detection Finding. The mapping separates the analytic, applied policy, source evidence, and match explanation so generic OCSF consumers can process the result without a Sigma-specific event class.
+
+Every finding includes these fixed fields:
+
+* `class_uid: 2004`, `category_uid: 2`, `activity_id: 1`, and `type_uid: 200401`.
+* `status_id: 1`, `action_id: 3`, and `disposition_id: 15`.
+* `metadata.version: "1.9.0"`, the Tenzir product identity, and the `security_control` profile.
+* Sigma `level` mapped to `severity_id`: missing to `0`, `informational` to `1`, `low` to `2`, `medium` to `3`, `high` to `4`, and `critical` to `5`.
+
+The operator does not infer `is_alert`. Set alertability downstream according to your operational policy.
+
+Rule and match details use standard OCSF fields:
+
+* `finding_info.analytic` holds the normalized rule identity. It uses the Sigma `id`, or a deterministic content fingerprint when the rule has no ID.
+* `policy.data` holds the complete applied rule, including global-filter adjustments. `policy.is_applied` is `true`.
+* `evidences[0].data` holds the original input event.
+* `finding_info.traits` lists the causal search identifiers in rule order.
+* `observables` contain positive matched field values.
+* `evidences[1].sigma` records the condition trace, declared and resolved fields, matcher, case mode, polarity, and matched values. Negative and absence decisions remain in the trace but do not create observables.
+* Sigma ATT\&CK tags populate `finding_info.attacks` and the Security Control profile’s top-level `attacks` field.
+* The rule’s abstract `logsource` populates `finding_info.data_sources`.
+
+Set `format="plain"` when you only need the native `{event, rule}` shape. You can also project that shape from the default finding:
+
+```tql
+this = {
+  event: evidences[0].data,
+  rule: policy.data,
+}
+```
+
+## Metrics
+
+For every non-empty input batch, the operator emits a `tenzir.metrics.sigma` event with these fields:
+
+* `events`: The number of input events processed.
+* `rule_evaluations`: The number of input events multiplied by the number of active detection rules.
+* `matches`: The number of rule matches. One event can match multiple rules.
+
+Inspect these events with the `metrics` operator:
+
+```tql
+metrics "sigma", live=true
+```
+
 ## Examples
+
+The examples use inline content for self-contained pipelines and `path=` for managed rule repositories.
+
+### Run an inline rule
+
+```tql
+from {user: "alice", action: "login"}
+sigma rules=r#"
+title: Alice login
+id: 4ad8b047-62b0-4d4d-a7ad-6f3fc8c56c6f
+logsource:
+  category: authentication
+detection:
+  selection:
+    user: alice
+    action: login
+  condition: selection
+level: medium
+"#
+select title=finding_info.title,
+       severity_id,
+       event=evidences[0].data,
+       identifiers=finding_info.traits
+```
+
+### Run and refresh a rule set
+
+```tql
+from_file "eve.json", watch=10s {
+  read_suricata
+}
+sigma path=["/etc/tenzir/sigma/network", "/etc/tenzir/sigma/local.yml"],
+      refresh_interval=30s
+```
 
 ### Apply a Sigma rule to Windows Event Log XML
 
-Use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before you run Windows Sigma rules:
+Use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before applying rules whose fields match that parsed schema:
 
 ```tql
 from_file "windows-security.xml" {
   read_delimited "</Event>\n", include_separator=true
 }
 this = data.parse_winlog()
-sigma "rule.yaml"
+sigma path="rules/windows.yml"
 ```
-
-### Run a Sigma rule on historical data
-
-Apply a Sigma rule over historical data in a node from the last day:
-
-```tql
-export
-where ts > now() - 1d
-sigma "rule.yaml"
-```
-
-### Stream a file and apply a set of Sigma rules to it
-
-Watch a directory of Sigma rules and apply all of them on a continuous stream of Suricata events:
-
-```tql
-from_file "eve.json", watch=10s {
-  read_suricata
-}
-sigma "/tmp/rules/"
-```
-
-When you add a new file to `/tmp/rules`, the `sigma` operator transpiles it and will match it on all subsequent inputs.
 
 ## See Also
 
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`window`](https://tenzir.com/docs/reference/operators/window.md)
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
 * [Execute Sigma rules](../../guides/detection/execute-sigma-rules.md)
+* [Model detections in OCSF](../../guides/detection/model-detections-in-ocsf.md)
 * [Expressions](../expressions.md)

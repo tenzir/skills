@@ -281,7 +281,7 @@ where failures >= 20
 * [`group`](https://tenzir.com/docs/reference/operators/group.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [`every`](https://tenzir.com/docs/reference/operators/every.md)
-* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
+* [Window event streams](../../guides/analytics/window-event-streams.md)
 * [Detect over time windows](../../guides/detection/detect-over-time-windows.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

@@ -19,13 +19,15 @@ summarize (group|aggregation)..., [options={...}]
 
 The `summarize` operator groups events according to certain fields and applies [aggregation functions](../functions.md#aggregation) to each group. By default, the operator consumes the entire input before producing a final summary and may reorder the event stream.
 
-Set `options` to emit enriched results after a number of input events or to emit summaries periodically in processing time. Event-count emission preserves the triggering input event and adds the current aggregate values. Periodic and final emission produce summary events that contain only group and aggregate fields.
+Set `options` to control three independent aspects of aggregation: `emit` defines when a result becomes complete, `mode` defines which events contribute to the result, and `output` defines which rows represent it. Event-count emission preserves the event that reaches the boundary by default. Final event output preserves every input event and adds the completed aggregate values for its group. Periodic and final summary output produces records that contain only group and aggregate fields.
 
-The order of summary fields follows the sequence of the provided arguments. In event mode, aggregate fields are assigned in argument order with the same nested field and collision behavior as normal assignments.
+The order of summary fields follows the sequence of the provided arguments. Aggregate fields are assigned in argument order with the same nested field and collision behavior as normal assignments. Trigger and event output use grouping fields only as state keys. A renamed group such as `key=user` doesn’t add or replace `key` in an enriched event.
 
 Potentially high memory usage
 
 Each group keeps aggregation state until an emission resets it or the pipeline ends. Streams with many unique group keys can therefore consume significant memory.
+
+The `events` output policy currently buffers every input event until the finite input ends. Tenzir warns once the buffered input reaches approximately 512 MiB, but it doesn’t truncate the input or enforce a hidden limit. Use `window` or reduce the input population when you need a memory bound.
 
 ### `group`
 
@@ -39,34 +41,51 @@ If no name is specified, the aggregation function call will automatically genera
 
 ### `options`
 
-The optional `options` record controls when `summarize` emits results and whether it retains aggregation state:
+The optional `options` record separates the emission boundary, aggregation state, and output policy:
 
-| Options                       | Behavior                                                                                                          |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| No options or `options={}`    | Emit one final summary when the input ends.                                                                       |
-| `mode: "reset"`               | Emit every input event with aggregates for that event.                                                            |
-| `mode: "cumulative"`          | Emit every input event with running aggregates.                                                                   |
-| `emit: <int>` and `mode`      | Emit an enriched event after the specified number of input events and emit the final event of a partial interval. |
-| `emit: <duration>` and `mode` | Emit summaries periodically in processing time and emit a final partial summary.                                  |
+| Options                       | Behavior                                                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| No options or `options={}`    | Emit one final summary when the input ends.                                                                          |
+| `mode: "reset"`               | Emit every input event with aggregates for that event.                                                               |
+| `mode: "cumulative"`          | Emit every input event with running aggregates.                                                                      |
+| `emit: <int>` and `mode`      | Emit the triggering event after the specified number of input events and emit the final event of a partial interval. |
+| `emit: <duration>` and `mode` | Emit summaries periodically in processing time and emit a final partial summary.                                     |
+| `output: "events"`            | Buffer the finite input, then emit every event with the final aggregates for its group.                              |
 
-Setting `emit` without `mode` produces an error.
+Setting a count or duration `emit` value without `mode` produces an error.
 
-#### `emit: int | duration`
+#### `emit: int | duration | "final"`
 
-`emit` defines an event-count or processing-time cadence.
+`emit` defines when an aggregate result becomes complete. Set it to `"final"` to wait until the input ends and produce one completed result. On an unbounded stream, this boundary doesn’t occur unless an enclosing operator such as `window` supplies a finite input.
 
 Use a positive `int` to emit after a number of input events. Tenzir includes the triggering event in the aggregation, preserves that event, and adds the current aggregate values. For example, `emit: 1` enriches every input event, while `emit: 100` enriches every 100th event. When the input ends before reaching the next boundary, Tenzir enriches and emits the final input event. Empty input produces no output.
 
 Use a positive duration to emit summaries on a processing-time interval. The interval must be at least 10ms. Timer mode emits a final partial summary when the input ends and emits nothing for empty input.
 
+Defaults to `"final"`.
+
 #### `mode: "reset" | "cumulative"`
 
-Choose how aggregation state behaves after each emission:
+Choose which events contribute to each result:
 
 * `"reset"`: Clear state at every event-count or timer boundary.
 * `"cumulative"`: Retain state and produce running values.
 
-When you specify `mode` without `emit`, `emit` defaults to `1`.
+When you specify `mode` without `emit` or `output`, `emit` defaults to `1` to preserve the existing event-by-event shorthand. State mode doesn’t affect a final result because the input has only one boundary.
+
+#### `output: "summary" | "trigger" | "events"`
+
+Choose which rows represent a completed result:
+
+* `"summary"`: Emit one aggregate record per group. Final and duration boundaries use this policy by default. Choose this policy when you need the aggregate results, not the original events.
+* `"trigger"`: Enrich only the event that reaches a count boundary. Count boundaries use this policy by default. This treats one real input event as a checkpoint carrying interval or cumulative statistics without replaying the other events.
+* `"events"`: Emit every input event exactly once with the final aggregate values for its group. Choose this policy when every original event needs the completed statistics. Empty input produces no output.
+
+The current implementation accepts `summary` at final and duration boundaries, `trigger` at count boundaries, and `events` at the final input boundary. It rejects other combinations. In particular, `events` cannot be combined with a count or duration `emit` value or the legacy `frequency` option.
+
+A count boundary applies to the entire input of one `summarize` instance, not independently to each grouping key. With `trigger`, only the triggering event’s group is represented in the output. In reset mode, state for the other groups is also cleared at that boundary. Put `summarize` inside an outer `group` subpipeline when each key needs an independent count and checkpoint.
+
+Inside `window`, the window lifecycle supplies a finite input boundary. Event output preserves the order in which its `summarize` invocation receives events. Outputs from concurrent `window` subpipelines can still interleave, as described in the `window` reference.
 
 ## Examples
 
@@ -156,14 +175,38 @@ Use reset mode to compute aggregates from only the current event:
 summarize event_bytes=sum(bytes), options={mode: "reset"}
 ```
 
-### Emit running totals every 100 events
+### Add final statistics to every event
 
-Preserve every 100th event and add the running event count for its source IP:
+Preserve the input and add the final average and sample count for each user:
 
 ```tql
-summarize events=count(), src_ip,
-  options={emit: 100, mode: "cumulative"}
+from {user: "alice", value: 10},
+     {user: "alice", value: 20},
+     {user: "bob", value: 5}
+summarize user,
+          avg=mean(value),
+          samples=count(),
+          options={output: "events"}
 ```
+
+```tql
+{user: "alice", value: 10, avg: 15.0, samples: 2}
+{user: "alice", value: 20, avg: 15.0, samples: 2}
+{user: "bob", value: 5, avg: 5.0, samples: 1}
+```
+
+This behavior corresponds to Splunk’s `eventstats`. Compose event output with `window` to attach final statistics for each fixed, trailing, count, or event-time window.
+
+### Emit a checkpoint every 100 events
+
+Preserve every 100th event as a checkpoint and add stream-wide running totals:
+
+```tql
+summarize events=count(), total_bytes=sum(bytes),
+  options={emit: 100, mode: "cumulative", output: "trigger"}
+```
+
+The output retains the triggering event’s fields, including its timestamp and source metadata. Only that event represents the checkpoint; the other 99 events aren’t emitted.
 
 ### Emit aggregations every 5 seconds
 
@@ -191,5 +234,6 @@ Timer emission uses processing time. For fixed or hopping event-time ranges, use
 * [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
 * [`count`](https://tenzir.com/docs/reference/functions/count.md)
 * [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
+* [Shape aggregation results](../../guides/analytics/shape-aggregation-results.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

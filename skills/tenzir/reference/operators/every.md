@@ -100,7 +100,7 @@ every 1h {
 * [`each`](https://tenzir.com/docs/reference/operators/each.md)
 * [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
+* [Shape aggregation results](../../guides/analytics/shape-aggregation-results.md)
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)

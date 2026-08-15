@@ -20,7 +20,7 @@ Streaming detections answer questions about when things happened, not when event
 
 * [`window`](https://tenzir.com/docs/reference/operators/window.md) with `on=time` uses **event time**. Fixed windows assign events to aligned intervals, while trailing windows evaluate event-anchored history. Both forms tolerate out-of-order arrivals via `tolerance`. Use them for detections where a delayed event can change the answer.
 * [`window`](https://tenzir.com/docs/reference/operators/window.md) without `on` assigns events by **processing time** and closes at epoch-aligned wall-clock boundaries. This is useful when arrival time is the intended detection clock.
-* [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analytics/aggregate-event-streams.md#aggregate-periodic-snapshots).
+* [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analytics/shape-aggregation-results.md#aggregate-periodic-snapshots).
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={emit: 5min, mode: "reset"}` emits aggregate updates on a processing-time cadence, but it doesn’t create event-time evidence intervals.
 
 The examples in this guide use aligned tumbling or hopping windows, which run one subpipeline per fixed interval. By default, a trailing window with `trailing=true` instead runs once per input event and can enrich the triggering event through `$window.event`. That maps to bounded Splunk `streamstats`, but generic trailing windows replay their retained history for every invocation. Set `every` to sample that history at a lower count or duration cadence. Set `trigger` to fire only for events that can produce a result, such as a successful login after repeated failures. Add `tolerance` when trailing input can arrive out of order. Tenzir reorders events within the tolerance before evaluating their event-anchored history and warns about later events. Prefer aligned windows for periodic detection decisions unless you specifically need event-anchored results.
@@ -75,7 +75,7 @@ This example uses tumbling windows because [`window`](https://tenzir.com/docs/re
 
 When your producers populate stable entity identifiers, group by those instead of display values: `user.uid` survives renames and `device.uid` survives DHCP churn, where `user.name` and hostnames do not.
 
-The Sigma guide applies the same window pattern to [`event_count` and `value_count` correlations](https://tenzir.com/docs/guides/detection/execute-sigma-rules.md#express-count-correlations).
+The same window pattern implements Sigma’s [`event_count` and `value_count` correlations](https://github.com/SigmaHQ/sigma-specification/blob/main/specification/sigma-correlation-rules-specification.md).
 
 ## Detect geographically impossible logins
 
@@ -492,7 +492,7 @@ Summing per asset rather than per connection defeats chunked transfers that stay
 * [`count_if`](https://tenzir.com/docs/reference/functions/count_if.md)
 * [`median`](https://tenzir.com/docs/reference/functions/median.md)
 * [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
-* [Aggregate event streams](../analytics/aggregate-event-streams.md)
+* [Window event streams](../analytics/window-event-streams.md)
 * [Baseline behavior from stored events](baseline-from-stored-events.md)
 * [Detect periodic behavior](detect-periodic-behavior.md)
 * [Match events with TQL](match-events-with-tql.md)

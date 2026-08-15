@@ -265,7 +265,7 @@ windows_threats::detections::print_sensitive_dump
 publish "detections"
 ```
 
-Split a detection into smaller operators when that improves reuse or testing, not because every operator must stop at the predicate. Windowing, correlation, and suppression can live in the detection or compose as separate stages. The guides on [detecting over time windows](detect-over-time-windows.md) and [creating multi-stage detectors](create-multi-stage-detectors.md) show those patterns. The build guides on [adding operators](../packages/add-operators.md), [adding pipelines](../packages/add-pipelines.md), and [writing tests](../testing/write-tests.md) cover reusable logic, deployment wiring, and test fixtures.
+Split a detection into smaller operators when that improves reuse or testing, not because every operator must stop at the predicate. Windowing, correlation, and suppression can live in the detection or compose as separate stages. The guides on [detecting over time windows](detect-over-time-windows.md) and [creating multi-stage detectors](create-multi-stage-detectors.md) show those patterns. Our guide on [adding operators to a package](../packages/add-operators.md) explains how to turn this pattern into a reusable, parameterized user-defined operator with tests.
 
 ## See Also
 

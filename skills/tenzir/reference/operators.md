@@ -223,18 +223,18 @@ context::update "ctx", key=x, value=y
 
 ### [sigma](operators/sigma.md)
 
-Filter the input with Sigma rules and output matching events.
+Executes Sigma rules on structured events and emits OCSF Detection Findings.
 
 ```tql
-sigma "/tmp/rules/"
+sigma path="/tmp/rules/"
 ```
 
 ### [yara](operators/yara.md)
 
-Executes YARA rules on byte streams.
+Executes YARA-X rules on byte streams and emits OCSF Detection Findings.
 
 ```tql
-yara "/path/to/rules"
+yara path="/path/to/rules"
 ```
 
 ## Encode & Decode

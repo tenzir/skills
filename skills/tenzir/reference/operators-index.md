@@ -39,8 +39,8 @@
 
 ## Detection
 
-- [sigma](operators/sigma.md): Filter the input with Sigma rules and output matching events.
-- [yara](operators/yara.md): Executes YARA rules on byte streams.
+- [sigma](operators/sigma.md): Evaluate Sigma detection rules against structured events.
+- [yara](operators/yara.md): Executes YARA-X rules on a finite byte stream.
 
 ## Encode & Decode
 

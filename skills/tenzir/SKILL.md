@@ -306,11 +306,11 @@ Combine independent detections into higher-confidence verdicts with correlation 
 
 #### [Execute Sigma rules](guides/detection/execute-sigma-rules.md)
 
-Run Sigma rules on parsed and OCSF events, generate findings, and implement unsupported features and correlations in TQL
+Run Sigma v2.1 rules on structured events and emit OCSF Detection Findings with causal match evidence
 
 #### [Scan bytes with YARA](guides/detection/scan-bytes-with-yara.md)
 
-Run YARA rules on files and byte streams in the pipeline and turn matches into OCSF Detection Findings
+Run YARA-X rules on files and finite byte streams and emit OCSF or native matches
 
 #### [Slice and sample data](guides/optimization/slice-and-sample-data.md)
 
@@ -346,19 +346,31 @@ This guide shows you how to distribute events across multiple destinations using
 
 #### [Aggregate event streams](guides/analytics/aggregate-event-streams.md)
 
-This guide shows you how to aggregate event streams with summarize and window.
+This guide shows you how to produce compact aggregate records with summarize.
 
-#### [Collect metrics](guides/analytics/collect-metrics.md)
+#### [Shape aggregation results](guides/analytics/shape-aggregation-results.md)
 
-Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.
+This guide shows you how to choose which rows represent an aggregate result.
 
 #### [Import into a node](guides/edge-storage/import-into-a-node.md)
 
 Importing (or ingesting) data can be done by running a pipeline that ends with the import output operator.
 
+#### [Window event streams](guides/analytics/window-event-streams.md)
+
+Use window when an aggregation needs bounded time or event-count state.
+
+#### [Calculate aggregate statistics](guides/analytics/calculate-aggregate-statistics.md)
+
+This guide shows you how to choose and combine aggregate functions for distributions, collected values, conditions, and operational summaries.
+
 #### [Export from a node](guides/edge-storage/export-from-a-node.md)
 
 Exporting (or querying) data can be done by running a pipeline that begins with the export input operator.
+
+#### [Collect metrics](guides/analytics/collect-metrics.md)
+
+Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.
 
 #### [Show available schemas](guides/edge-storage/show-available-schemas.md)
 
