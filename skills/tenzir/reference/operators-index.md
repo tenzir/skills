@@ -231,7 +231,7 @@
 - [read_ndjson](operators/read_ndjson.md): Parses an incoming NDJSON (newline-delimited JSON) stream into events.
 - [read_netflow](operators/read_netflow.md): Parses NetFlow v5, NetFlow v9, and IPFIX messages into flow events.
 - [read_parquet](operators/read_parquet.md): Reads events from a Parquet byte stream.
-- [read_pcap](operators/read_pcap.md): Parses PCAP byte streams into packet events.
+- [read_pcap](operators/read_pcap.md): Parses PCAP and PCAPNG byte streams into packet events.
 - [read_ssv](operators/read_ssv.md): Read SSV (Space-Separated Values) from a byte stream.
 - [read_suricata](operators/read_suricata.md): Parse an incoming [Suricata EVE JSON](https://suricata.readthedocs.io/en/latest/output/eve/eve-json-output.html) stream into events.
 - [read_syslog](operators/read_syslog.md): Parses an incoming Syslog stream into events.
@@ -261,7 +261,7 @@
 - [write_lines](operators/write_lines.md): Writes events as key-value pairsthe *values* of an event.
 - [write_ndjson](operators/write_ndjson.md): Transforms the input event stream to a Newline-Delimited JSON byte stream.
 - [write_parquet](operators/write_parquet.md): Transforms event stream to a Parquet byte stream.
-- [write_pcap](operators/write_pcap.md): Serializes packet events as a PCAP byte stream.
+- [write_pcap](operators/write_pcap.md): Serializes packet events as a PCAP or PCAPNG byte stream.
 - [write_ssv](operators/write_ssv.md): Transforms event stream to SSV (Space-Separated Values) byte stream.
 - [write_syslog](operators/write_syslog.md): Writes events as syslog.
 - [write_tql](operators/write_tql.md): Transforms the input event stream to a TQL notation byte stream.

@@ -7,21 +7,31 @@ section: "Docs"
 
 # write_pcap
 
-> Serializes packet events as a PCAP byte stream.
+> Serializes packet events as a PCAP or PCAPNG byte stream.
 
-Serializes packet events as a PCAP byte stream.
+Serializes packet events as a PCAP or PCAPNG byte stream.
 
 ```tql
-write_pcap
+write_pcap [format=string]
 ```
 
 ## Description
 
-The `write_pcap` operator transforms packet events into a [PCAP](https://datatracker.ietf.org/doc/id/draft-gharris-opsawg-pcap-00.html) byte stream.
+The `write_pcap` operator transforms packet events into a [PCAP](https://datatracker.ietf.org/doc/id/draft-gharris-opsawg-pcap-00.html) or [PCAPNG](https://www.ietf.org/archive/id/draft-tuexen-opsawg-pcapng-05.html) byte stream.
 
 The operator accepts `pcap.packet` events. When present, it also uses `pcap.file_header` events emitted by [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) to preserve the original timestamp precision and byte order.
 
 If no `pcap.file_header` event is present, `write_pcap` generates a file header from the first packet’s `linktype` and writes timestamps with nanosecond precision.
+
+The default `format="auto"` preserves PCAPNG input from [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) and otherwise writes classic PCAP.
+
+### `format = string (optional)`
+
+Controls the output format. The supported values are:
+
+* `"auto"` selects PCAPNG for packet events with `section_id` and `interface_id` fields and classic PCAP otherwise.
+* `"pcap"` always writes classic PCAP.
+* `"pcapng"` always writes PCAPNG.
 
 The structured representation of packets has the `pcap.packet` schema:
 
@@ -33,11 +43,9 @@ pcap.packet:
     - captured_packet_length: uint64
     - original_packet_length: uint64
     - data: blob
+    - section_id: uint64 # PCAPNG input only
+    - interface_id: uint64 # PCAPNG input only
 ```
-
-PCAPNG
-
-The current implementation does *not* support [PCAPNG](https://www.ietf.org/archive/id/draft-tuexen-opsawg-pcapng-05.html).
 
 ## Examples
 
@@ -47,6 +55,15 @@ The current implementation does *not* support [PCAPNG](https://www.ietf.org/arch
 from_nic "en1"
 to_file "/logs/packets.pcap" {
   write_pcap
+}
+```
+
+### Write a PCAPNG file
+
+```tql
+from_nic "en1"
+to_file "/logs/packets.pcapng" {
+  write_pcap format="pcapng"
 }
 ```
 

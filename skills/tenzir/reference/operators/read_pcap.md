@@ -7,9 +7,9 @@ section: "Docs"
 
 # read_pcap
 
-> Parses PCAP byte streams into packet events.
+> Parses PCAP and PCAPNG byte streams into packet events.
 
-Parses PCAP byte streams into packet events.
+Parses PCAP and PCAPNG byte streams into packet events.
 
 ```tql
 read_pcap [emit_file_headers=bool]
@@ -17,15 +17,13 @@ read_pcap [emit_file_headers=bool]
 
 ## Description
 
-The `read_pcap` operator converts raw bytes representing a [PCAP](https://datatracker.ietf.org/doc/id/draft-gharris-opsawg-pcap-00.html) file into events.
+The `read_pcap` operator converts raw bytes representing a [PCAP](https://datatracker.ietf.org/doc/id/draft-gharris-opsawg-pcap-00.html) or [PCAPNG](https://www.ietf.org/archive/id/draft-tuexen-opsawg-pcapng-05.html) file into events. It detects the format from the file header.
 
-PCAPNG
-
-The current implementation does *not* support [PCAPNG](https://www.ietf.org/archive/id/draft-tuexen-opsawg-pcapng-05.html).
+For PCAPNG input, the operator supports multiple interfaces, timestamp resolutions, byte orders, and concatenated sections. It skips blocks that don’t contain packets or interface descriptions.
 
 ### `emit_file_headers = bool (optional)`
 
-Emit a `pcap.file_header` event that represents the PCAP file header. If present, the parser injects this additional event before the subsequent stream of packets.
+Emit a `pcap.file_header` event that represents a classic PCAP file header. If present, the parser injects this additional event before the subsequent stream of packets. This option has no effect on PCAPNG input.
 
 Emitting this extra event makes it possible to seed [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
 
@@ -55,13 +53,15 @@ Contains the global header for one PCAP trace.
 
 Contains one captured packet from the trace.
 
-| Field                    | Type     | Description                            |
-| ------------------------ | -------- | -------------------------------------- |
-| `timestamp`              | `time`   | The time when the packet was captured. |
-| `linktype`               | `uint64` | The link-layer type of the packet.     |
-| `original_packet_length` | `uint64` | The length of the original packet.     |
-| `captured_packet_length` | `uint64` | The length of the captured packet.     |
-| `data`                   | `blob`   | The captured packet payload.           |
+| Field                    | Type     | Description                             |
+| ------------------------ | -------- | --------------------------------------- |
+| `timestamp`              | `time`   | The time when the packet was captured.  |
+| `linktype`               | `uint64` | The link-layer type of the packet.      |
+| `original_packet_length` | `uint64` | The length of the original packet.      |
+| `captured_packet_length` | `uint64` | The length of the captured packet.      |
+| `data`                   | `blob`   | The captured packet payload.            |
+| `section_id`             | `uint64` | The PCAPNG section index, if present.   |
+| `interface_id`           | `uint64` | The PCAPNG interface index, if present. |
 
 ## Examples
 
@@ -69,6 +69,14 @@ Contains one captured packet from the trace.
 
 ```tql
 from_file "/tmp/trace.pcap" {
+  read_pcap
+}
+```
+
+### Read packets from a PCAPNG file
+
+```tql
+from_file "/tmp/trace.pcapng" {
   read_pcap
 }
 ```

@@ -211,16 +211,9 @@ Use a Berkeley Packet Filter (BPF) expression to drop unwanted traffic before Te
 from_nic "eth0", filter="tcp port 443"
 ```
 
-### Read PCAP files
+Working with packet capture files
 
-The same parsing works for PCAP files:
-
-```tql
-from_file "capture.pcap" {
-  read_pcap
-}
-packet = decapsulate(this)
-```
+To read, write, or convert PCAP and PCAPNG files, see our guide to [Parse binary data](../parsing/parse-binary-data.md#pcap-and-pcapng).
 
 ### Extract packet tuples
 
@@ -242,11 +235,6 @@ select
 
 ## See also
 
-* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
-* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
-* [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)
-* [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md)
-* [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md)
 * [TCP](../../integrations/tcp.md)
 * [UDP](../../integrations/udp.md)
 * [NetFlow](../../integrations/netflow.md)

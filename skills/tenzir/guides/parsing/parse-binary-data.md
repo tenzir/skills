@@ -7,9 +7,9 @@ section: "Docs"
 
 # Parse binary data
 
-> This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, network flow messages in NetFlow and IPFIX, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
+> This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, network flow messages in NetFlow and IPFIX, packet captures in PCAP and PCAPNG formats, Tenzir’s native BITZ format, and compressed data.
 
-This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, network flow messages in NetFlow and IPFIX, packet captures in PCAP format, Tenzir’s native BITZ format, and compressed data.
+This guide shows you how to parse binary data formats into structured events. You’ll learn to work with columnar formats like Parquet and Feather, network flow messages in NetFlow and IPFIX, packet captures in PCAP and PCAPNG formats, Tenzir’s native BITZ format, and compressed data.
 
 The examples use [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) with a [parsing subpipeline](../../reference/programs.md#parsing-subpipelines) to illustrate each technique.
 
@@ -63,12 +63,14 @@ Specify [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflo
 
 The input must contain raw wire-format messages. [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) does not parse PCAP headers or the nfdump container used by `nfcapd.*` files. For live collection and ways to process nfdump files, see the [NetFlow](../../integrations/netflow.md) integration.
 
-## PCAP
+## PCAP and PCAPNG
 
-[PCAP](https://wiki.wireshark.org/Development/LibpcapFileFormat) is the standard format for packet captures. Use [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) to parse captured packets:
+[PCAP](https://wiki.wireshark.org/Development/LibpcapFileFormat) and [PCAPNG](https://pcapng.com/) store captured network packets. PCAPNG extends the classic format with sections, multiple capture interfaces, and per-interface timestamp settings.
+
+Use [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) for either format. The operator detects the format from the file header:
 
 ```tql
-from_file "capture.pcap" {
+from_file "capture.pcapng" {
   read_pcap
 }
 ```
@@ -80,7 +82,7 @@ from_file "capture.pcap" {
 Use [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md) to parse directly from a live interface. TQL also includes lightweight packet processing functions. For example, you can extract protocol headers from raw packet data using the [`decapsulate`](https://tenzir.com/docs/reference/functions/decapsulate.md) function:
 
 ```tql
-from_file "capture.pcap" {
+from_file "capture.pcapng" {
   read_pcap
 }
 packet = decapsulate(this)
@@ -88,6 +90,17 @@ packet = decapsulate(this)
 
 ```tql
 {packet: {ether: {src: "64-9E-F3-BE-DB-66", dst: "00-16-3C-F1-FD-6D", type: 2048}, ip: {src: "192.168.1.100", dst: "10.0.0.1", type: 6}, tcp: {src_port: 54321, dst_port: 443}, community_id: "1:YXWfTYEyYLKVv5Ge4WqijUnKTrM="}}
+```
+
+Use [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md) to produce packet capture files. It retains PCAPNG when you pass through events from [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md). Set `format="pcapng"` to convert other packet events explicitly:
+
+```tql
+from_file "capture.pcap" {
+  read_pcap
+}
+to_file "capture.pcapng" {
+  write_pcap format="pcapng"
+}
 ```
 
 ## BITZ
