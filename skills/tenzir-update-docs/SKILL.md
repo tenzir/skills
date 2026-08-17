@@ -88,6 +88,9 @@ Code PR example:
 Before opening the docs PR:
 
 1. Confirm the changed pages still fit their Diataxis section.
-2. Check nearby pages and "See also" links for follow-on edits.
+2. Check nearby pages and "See also" links for follow-on edits. Reserve "See
+   also" for related guides, tutorials, integrations, and broader references.
+   Link individual operators inline where they are relevant instead of listing
+   them in "See also".
 3. Ensure code samples, paths, and UI labels match the current product
    behavior.
