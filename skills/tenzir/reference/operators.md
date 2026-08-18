@@ -585,6 +585,14 @@ Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as ev
 accept_opensearch "0.0.0.0:9200"
 ```
 
+### [accept\_relp](operators/accept_relp.md)
+
+Receives Syslog messages over the Reliable Event Logging Protocol.
+
+```tql
+accept_relp "0.0.0.0:2514"
+```
+
 ### [accept\_tcp](operators/accept_tcp.md)
 
 Accepts incoming TCP or TLS connections and yields events.

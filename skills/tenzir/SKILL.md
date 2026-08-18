@@ -1042,6 +1042,14 @@ Search, analyze, and visualize data with a distributed, open-source platform.
 
 Send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
 
+#### [RELP integration](integrations/relp.md)
+
+Receive Syslog messages with application-level acknowledgements, retransmission, and optional TLS.
+
+#### [rsyslog integration](integrations/rsyslog.md)
+
+Forward Syslog to Tenzir with RELP acknowledgements, retries, queues, and optional mutual TLS.
+
 #### [Sentinel & Log Analytics integration](integrations/microsoft/sentinel-log-analytics.md)
 
 A rapidly growing cloud-native SIEM, tightly integrated with the Azure ecosystem and a strategic destination for Microsoft-centric organizations.
@@ -1064,7 +1072,7 @@ Detect, log, and analyze network traffic for intrusion detection, prevention, an
 
 #### [Syslog integration](integrations/syslog.md)
 
-Send and receive Syslog over UDP, TCP, and other protocols.
+Send and receive Syslog over UDP, TCP, and RELP.
 
 #### [TCP integration](integrations/tcp.md)
 

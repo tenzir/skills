@@ -28,6 +28,7 @@ tenzir:
 
 These settings apply automatically to operators that use node-level TLS, including:
 
+* [`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md)
 * [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
 * [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
 * [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)

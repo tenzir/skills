@@ -1,6 +1,6 @@
 ---
 title: "Syslog integration"
-description: "Send and receive Syslog over UDP, TCP, and other protocols."
+description: "Send and receive Syslog over UDP, TCP, and RELP."
 canonical: https://tenzir.com/integrations/syslog
 source: https://tenzir.com/integrations/syslog.md
 section: "Integrations"
@@ -8,9 +8,9 @@ section: "Integrations"
 
 # Syslog integration
 
-> Send and receive Syslog over UDP, TCP, and other protocols.
+> Send and receive Syslog over UDP, TCP, and RELP.
 
-Tenzir supports parsing Syslog messages from transport protocols such as UDP and TCP, and emitting Syslog-formatted byte streams. This enables seamless integration with Syslog-based systems for ingesting or exporting logs.
+Tenzir supports parsing Syslog messages from transport protocols such as UDP, TCP, and [RELP](relp.md), and emitting Syslog-formatted byte streams. This enables seamless integration with Syslog-based systems for ingesting or exporting logs.
 
 Syslog support in Tenzir is powered by two components:
 
@@ -41,6 +41,8 @@ publish "syslog"
 ```
 
 The pipeline inside [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) executes *for each accepted connection*.
+
+For senders that require application-level acknowledgements, use our [RELP](relp.md) integration. To configure an rsyslog sender with RELP, retries, and persistent queues, see our [rsyslog](rsyslog.md) integration.
 
 ### Parsing CEF, LEEF, or JSON Payloads
 
@@ -151,7 +153,7 @@ When receiving syslog over TCP, some implementations use [RFC 6587](https://data
 
 Here, `65` is the byte count of the syslog message that follows.
 
-Tenzir auto-detects octet-counted messages in both [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md) for streaming input and [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md) for parsing individual strings. Use the `octet_counting` parameter to require or disable this behavior.
+[`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md) auto-detects an RFC 6587 prefix when parsing an individual string. For streaming input, [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md) uses newline framing by default. Set `octet_counting=true` to make [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md) require RFC 6587 length prefixes and use them as message boundaries.
 
 ### RFC 3164 messages with structured data
 

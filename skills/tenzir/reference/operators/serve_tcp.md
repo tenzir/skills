@@ -38,11 +38,11 @@ TLS configuration. Provide an empty record (`tls={}`) to enable TLS with default
   min_version: string,          // minimum TLS version (`"1.0"`, `"1.1"`, `"1.2"`, "1.3"`).
   ciphers: string,              // OpenSSL cipher list string.
   client_ca: string,            // CA to validate client certificates.
-  require_client_cert,          // require clients to present a certificate.
+  require_client_cert: bool,    // require clients to present a certificate.
 }
 ```
 
-The `client_ca` and `require_client_cert` options are only applied for operators that accept incoming client connections, and otherwise ignored.
+The `client_ca` and `require_client_cert` options are only valid for operators that accept incoming client connections.
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 

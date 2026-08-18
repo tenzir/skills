@@ -81,6 +81,21 @@ accept_tcp "0.0.0.0:514",
 
 With `auto_detect_tls=true`, [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) accepts both plaintext clients and clients that start with a TLS ClientHello on the same endpoint.
 
+## Reliable Syslog
+
+[RELP](../../integrations/relp.md) adds application-level acknowledgements to Syslog transport. Use [`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md) when a sender supports RELP:
+
+```tql
+accept_relp "0.0.0.0:2514"
+syslog = data.parse_syslog()
+```
+
+[`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md) preserves each RELP message boundary. The default [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md) mode accepts ordinary Syslog payloads and payloads that retain an RFC 6587 length prefix.
+
+Each RELP `syslog` command becomes one event. The `data` field preserves the complete Syslog payload, including embedded newlines, while `peer` identifies the client and `relp.transaction_id` identifies the RELP transaction.
+
+RELP protects messages in flight: the sender waits for Tenzir to acknowledge each message and can retransmit it if the connection fails first. Retransmission can produce duplicate events, so design downstream processing to tolerate them. An acknowledgement means that the complete payload entered a bounded in-memory input queue, not that downstream processing completed or a destination stored the event.
+
 ## UDP sockets
 
 [UDP](../../integrations/udp.md) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.

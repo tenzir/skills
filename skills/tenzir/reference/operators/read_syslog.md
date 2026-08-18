@@ -125,11 +125,10 @@ For example, where `65` is the byte count of the syslog message that follows:
 65 <165>1 2023-10-11T22:14:15.003Z host app 1234 ID01 - Test message
 ```
 
-The parameter supports three modes:
+The parameter supports two modes:
 
-* **Not specified (default)**: Auto-detect. Strips a length prefix if present and valid, otherwise parses the input as-is.
-* **`octet_counting=true`**: Require a length prefix. Emits a warning and returns null if the input lacks a valid prefix.
-* **`octet_counting=false`**: Never strip a length prefix. Parse the input as-is, treating any leading digits as part of the message.
+* **`octet_counting=false` (default)**: Split the stream at newlines and don’t interpret a leading length prefix.
+* **`octet_counting=true`**: Frame the stream using the declared message lengths. A missing or invalid length prefix stops the parser with an error.
 
 ### `raw_message = field (optional)`
 
@@ -281,17 +280,17 @@ from_file "/var/log/auth.log" {
 
 ### Parse octet-counted syslog over TCP
 
-When receiving syslog over TCP from systems that use RFC 6587 octet counting, the parser auto-detects and strips the length prefix:
+When receiving Syslog over TCP from systems that use RFC 6587 octet counting, enable length-based framing explicitly:
 
 Pipeline
 
 ```tql
 accept_tcp "0.0.0.0:514" {
-  read_syslog
+  read_syslog octet_counting=true
 }
 ```
 
-Use `octet_counting=true` to require the prefix or `octet_counting=false` to disable auto-detection entirely.
+Omit the option for newline-delimited Syslog streams.
 
 ### Parse Check Point structured data variants
 
