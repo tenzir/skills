@@ -36,9 +36,9 @@ Three places list skills and must stay consistent:
 
 ### `tenzir` page references in workflow skills
 
-Workflow skills (e.g., `tenzir-manage-packages`) point to
-`tenzir` pages by relative path (e.g., `guides/packages/create-a-package.md`)
-instead of duplicating documentation content. These paths must stay in sync with
+Workflow skills point to `tenzir` pages by relative path (for example,
+`guides/packages/create-a-package.md`) instead of duplicating documentation
+content. These paths must stay in sync with
 the generated `tenzir` skill tree:
 
 - After regenerating `tenzir`, verify that every path referenced in a

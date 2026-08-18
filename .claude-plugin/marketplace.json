@@ -16,8 +16,7 @@
     {
       "name": "🛡️ Tenzir Users",
       "skills": [
-        "./skills/tenzir",
-        "./skills/tenzir-manage-packages"
+        "./skills/tenzir"
       ]
     },
     {
