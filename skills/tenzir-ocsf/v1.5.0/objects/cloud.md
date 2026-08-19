@@ -32,6 +32,8 @@ Organization and org unit relevant to the event or object.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `account.uid` attribute instead.
+
 The unique identifier of a Cloud project.
 
 ### `provider`

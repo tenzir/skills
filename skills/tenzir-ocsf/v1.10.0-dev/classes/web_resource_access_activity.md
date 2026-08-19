@@ -2,6 +2,8 @@
 
 Web Resource Access Activity events describe successful/failed attempts to access a web resource over HTTP.
 
+> **Deprecated since v1.1.0.** Use the `web_resources_activity` class with the `security_control` and/or `network_proxy` profile instead.
+
 - **Class UID**: `6004`
 - **Category**: Application Activity
 - **Extends**: [Application Activity (application)](application.md)
@@ -61,6 +63,8 @@ Details about the HTTP response, if available.
 - **Type**: [`network_proxy`](../objects/network_proxy.md)
 - **Requirement**: optional
 - **Group**: context
+
+> **Deprecated since v1.1.0.** Use the `proxy_endpoint` attribute instead.
 
 Details about the proxy service, if available.
 

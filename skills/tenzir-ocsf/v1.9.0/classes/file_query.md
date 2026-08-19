@@ -2,6 +2,8 @@
 
 File Query events report information about files that are present on the system.
 
+> **Deprecated since v1.5.0.** Use the `evidence_info` class.
+
 - **Class UID**: `5007`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)

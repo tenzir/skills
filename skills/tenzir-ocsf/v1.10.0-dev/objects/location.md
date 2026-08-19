@@ -32,6 +32,8 @@ The name of the continent.
 - **Type**: `float_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.2.0.** Use the `lat` and `long` attributes instead.
+
 A two-element array, containing a longitude/latitude pair. The format conforms with GeoJSON. For example: `[-73.983, 40.719]`.
 
 ### `country`
@@ -92,6 +94,8 @@ Indicates whether the location is on-premises.
 
 - **Type**: `string_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.5.0.** Use the `network_endpoint.isp` or `whois.isp` attribute according to your use-case.
 
 The name of the Internet Service Provider (ISP).
 

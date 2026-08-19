@@ -18,6 +18,8 @@ The number of discovered entities of the specified type.
 - **Type**: [`occurrence_details`](occurrence_details.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use `occurrences` instead.
+
 Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populated.
 
 ### `occurrences`

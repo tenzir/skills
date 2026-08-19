@@ -91,6 +91,8 @@ The managed entity that is being acted upon.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.9.0.** Use the `updated_entity` attribute instead.
+
 The updated managed entity.
 
 ### `updated_entity`

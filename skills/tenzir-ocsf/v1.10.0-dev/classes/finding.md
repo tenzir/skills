@@ -47,6 +47,8 @@ The finding activity name, as defined by the `activity_id`. When `activity_id` i
 - **Requirement**: optional
 - **Group**: context
 
+> **Deprecated since v1.9.0.** Use the `notes` attribute instead.
+
 A user provided comment about the finding.
 
 ### `confidence`

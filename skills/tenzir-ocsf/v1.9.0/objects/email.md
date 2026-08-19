@@ -39,6 +39,8 @@ The human-readable email header Cc Mailbox values. For example `'Example User <e
 - **Type**: `email_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `delivered_to_list` attribute instead.
+
 The machine-readable Delivered-To email header field. For example `example.user@usersdomain.com`
 
 ### `delivered_to_list`
@@ -117,6 +119,8 @@ The email authentication header.
 - **Type**: `email_t`
 - **Requirement**: recommended
 
+> **Deprecated since v1.4.0.** Use the `reply_to_list` attribute instead.
+
 The machine-readable email header Reply-To value, as defined by RFC 5322. For example `example.user@usersdomain.com`
 
 ### `reply_to_list`
@@ -166,12 +170,16 @@ The size in bytes of the email, including attachments.
 - **Type**: `email_t`
 - **Requirement**: recommended
 
+> **Deprecated since v1.4.0.** Use the `from` attribute instead.
+
 The value of the SMTP MAIL FROM command.
 
 ### `smtp_to`
 
 - **Type**: `email_t`
 - **Requirement**: recommended
+
+> **Deprecated since v1.4.0.** Use the `to` attribute instead.
 
 The value of the SMTP envelope RCPT TO command.
 

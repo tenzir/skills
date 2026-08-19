@@ -88,6 +88,8 @@ The normalized identifier of the endpoint that initiated the network communicati
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.9.0.** Use `initiator_id` instead, which provides richer semantics for bi-flow and asymmetric flow scenarios.
+
 `true` denotes that `src_endpoint` and `dst_endpoint` correctly identify the initiator and responder respectively. `false` denotes that the event source has arbitrarily assigned one peer to `src_endpoint` and the other to `dst_endpoint`, in other words that initiator and responder are not being asserted. This can occur, for example, when the event source is a network appliance that has not observed the initiation of a given connection. In the absence of this attribute, interpretation of the initiator and responder is implementation-specific.
 
 ### `src_endpoint`

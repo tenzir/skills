@@ -83,6 +83,8 @@ Details about the product that reported the related event/finding.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `uid` attribute in the `product` object instead. See specific usage.
+
 The unique identifier of the product that reported the related event.
 
 ### `severity`

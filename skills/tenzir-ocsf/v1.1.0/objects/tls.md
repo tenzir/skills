@@ -46,6 +46,8 @@ The client cipher suites that were exchanged during the TLS handshake negotiatio
 - **Type**: [`tls_extension`](tls_extension.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the  `tls_extension_list`  attribute instead.
+
 The list of TLS extensions.
 
 ### `tls_extension_list`

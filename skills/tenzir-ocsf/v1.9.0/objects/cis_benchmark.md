@@ -2,6 +2,8 @@
 
 The CIS Benchmark object describes best practices for securely configuring IT systems, software, networks, and cloud infrastructure as defined by the Center for Internet Security. See also Getting to Know the CIS Benchmarks.
 
+> **Deprecated since v1.5.0.** Use the `compliance.checks` attribute instead.
+
 - **Extends**: [Object (object)](object.md)
 
 ## Attributes

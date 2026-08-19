@@ -11,12 +11,16 @@ The Actor object contains details about the user, role, application, service, or
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.9.0.** Use the `application.name` attribute instead.
+
 The client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `app_name` is distinct from the `process` if present.
 
 ### `app_uid`
 
 - **Type**: `string_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.9.0.** Use the `application.uid` attribute instead.
 
 The unique identifier of the client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `app_name` is distinct from the `process.pid` or `process.uid` if present.
 
@@ -52,6 +56,8 @@ This object describes details about the Identity Provider used.
 
 - **Type**: `string_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.2.0.** Use the `application` attribute instead.
 
 The name of the service that invoked the activity as described in the event.
 

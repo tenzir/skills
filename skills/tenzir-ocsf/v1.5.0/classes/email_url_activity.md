@@ -2,6 +2,8 @@
 
 Email URL Activity events report URLs within an email.
 
+> **Deprecated since v1.3.0.** Use the `Email Activity` class with the `email.urls[]` array instead.
+
 - **Class UID**: `4012`
 - **Category**: Network Activity
 - **Extends**: [Base Event (base_event)](base_event.md)
@@ -45,6 +47,8 @@ The normalized identifier of the activity that triggered the event.
 - **Type**: `string_t`
 - **Requirement**: required
 - **Group**: primary
+
+> **Deprecated since v1.4.0.** Use the `email.uid` attribute instead.
 
 The unique identifier of the email, used to correlate related email alert and activity events.
 

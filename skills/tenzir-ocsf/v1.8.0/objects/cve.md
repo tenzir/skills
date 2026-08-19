@@ -25,6 +25,8 @@ The CVSS object details Common Vulnerability Scoring System ([CVSS](https://www.
 - **Type**: [`cwe`](cwe.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use `related_cwes` attribute instead.
+
 The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack. The CWE object is based on the [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) catalog.
 
 ### `cwe_uid`
@@ -32,12 +34,16 @@ The CWE object represents a weakness in a software system that can be exploited 
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the `related_cwes` object attributes instead.
+
 The [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) unique identifier. For example: `CWE-787`.
 
 ### `cwe_url`
 
 - **Type**: `url_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.1.0.** Use the `related_cwes` object attributes instead.
 
 Common Weakness Enumeration (CWE) definition URL. For example: `https://cwe.mitre.org/data/definitions/787.html`.
 

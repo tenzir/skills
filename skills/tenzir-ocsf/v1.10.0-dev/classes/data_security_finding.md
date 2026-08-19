@@ -40,6 +40,7 @@ Note: If the Finding is an incident, i.e. requires incident workflow, also apply
 - `2`: `Update` - An existing Data Security finding is updated with more information.
 - `3`: `Close` - An existing Data Security finding is closed, this can be due to any resolution (e.g., True Positive, False Positive, etc.).
 - `4`: `Suppressed` - An existing Data Security finding is suppressed due to inaccurate detection techniques or a known true negative.
+  - **Deprecated since v1.4.0.** Use `status_id` attribute instead.
 
 The normalized identifier of the Data Security Finding activity.
 

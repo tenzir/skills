@@ -31,6 +31,8 @@ The full path to the image file.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `labels or tags` attribute instead.
+
 The image tag. For example: `1.11-alpine`.
 
 ### `tags`

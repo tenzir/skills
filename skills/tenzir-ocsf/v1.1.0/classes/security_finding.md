@@ -2,6 +2,8 @@
 
 Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
 
+> **Deprecated since v1.1.0.** Use the new specific classes according to the use-case: `Vulnerability Finding, Compliance Finding, Detection Finding, Incident Finding.`
+
 - **Class UID**: `2001`
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
@@ -108,6 +110,8 @@ A list of data sources utilized in generation of the finding.
 - **Type**: `json_t`
 - **Requirement**: optional
 - **Group**: context
+
+> **Deprecated since v1.1.0.** Use the  `evidences`  attribute instead.
 
 The data the finding exposes to the analyst.
 

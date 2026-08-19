@@ -66,6 +66,8 @@ The Endpoint for which the user session was targeted.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.9.0.** Use `groups` instead.
+
 Group that was assigned to the new user session.
 
 ### `groups`

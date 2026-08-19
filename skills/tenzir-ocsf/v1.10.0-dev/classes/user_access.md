@@ -2,6 +2,8 @@
 
 User Access Management events report management updates to a user's privileges.
 
+> **Deprecated since v1.9.0.** Use the `user_management` class instead.
+
 - **Class UID**: `3005`
 - **Category**: Identity & Access Management
 - **Extends**: [Identity & Access Management (iam)](iam.md)
@@ -65,6 +67,8 @@ List of privileges assigned to a user.
 - **Type**: [`resource_details`](../objects/resource_details.md)
 - **Requirement**: recommended
 - **Group**: primary
+
+> **Deprecated since v1.5.0.** Use the `resources` attribute instead.
 
 Resource that the privileges give access to.
 

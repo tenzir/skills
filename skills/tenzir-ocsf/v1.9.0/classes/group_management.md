@@ -91,6 +91,8 @@ A list of privileges assigned to the group.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.9.0.** User `resources` instead.
+
 Resource that the privileges give access to.
 
 ### `resources`
@@ -122,6 +124,8 @@ The intended state of the `group` after the update. On `Success`, represents the
 - **Type**: [`user`](../objects/user.md)
 - **Requirement**: recommended
 - **Group**: primary
+
+> **Deprecated since v1.9.0.** Use `users` instead.
 
 A user that was added to or removed from `group`.
 

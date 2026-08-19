@@ -2,6 +2,8 @@
 
 Account Change events report when specific user account management tasks are performed, such as a user/role being created or role assigned, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
 
+> **Deprecated since v1.9.0.** Use the `user_management` class instead.
+
 - **Class UID**: `3001`
 - **Category**: Identity & Access Management
 - **Extends**: [Identity & Access Management (iam)](iam.md)
@@ -74,6 +76,8 @@ Details about the IAM policies associated with the Attach/Detach Policy activiti
 - **Requirement**: optional
 - **Group**: context
 
+> **Deprecated since v1.4.0.** Use the `policies` attribute instead.
+
 Details about the IAM policy associated to the Attach/Detach Policy activities.
 
 ### `user`
@@ -89,5 +93,7 @@ The user that was a target of an activity.
 - **Type**: [`user`](../objects/user.md)
 - **Requirement**: recommended
 - **Group**: primary
+
+> **Deprecated since v1.9.0.** Use the `updated_user` attribute instead.
 
 The result of the user account change. It should contain the new values of the changed attributes.

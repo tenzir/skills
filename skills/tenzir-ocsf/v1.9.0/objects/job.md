@@ -12,6 +12,8 @@ The Job object provides information about a scheduled job or task, including its
 - **Requirement**: recommended
 - **Observable**: 13
 
+> **Deprecated since v1.9.0.** Use the `job_action.cmd_line` attribute instead.
+
 The job command line.
 
 ### `created_time`
@@ -54,6 +56,8 @@ An array of conditions or events that, when met, will initiate the job to perfor
 - **Type**: `timestamp_t`
 - **Requirement**: recommended
 
+> **Deprecated since v1.9.0.** Use the `job_trigger.last_run_time` attribute instead.
+
 The time when the job was last run.
 
 ### `name`
@@ -67,6 +71,8 @@ The name of the job.
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.9.0.** Use the `job_trigger.next_run_time` attribute instead.
 
 The time when the job will next be run.
 

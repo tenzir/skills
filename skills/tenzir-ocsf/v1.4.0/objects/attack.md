@@ -25,6 +25,8 @@ The Tactic object describes the tactic ID and/or name that is associated to an a
 - **Type**: [`tactic`](tactic.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the `tactic` attribute instead.
+
 The Tactic object describes the tactic ID and/or tactic name that are associated with the attack technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
 
 ### `technique`

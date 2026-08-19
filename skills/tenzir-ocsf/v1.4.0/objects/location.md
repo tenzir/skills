@@ -32,6 +32,8 @@ The name of the continent.
 - **Type**: `float_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.2.0.** Use specific `lat, long` attributes instead.
+
 A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.
 
 ### `country`

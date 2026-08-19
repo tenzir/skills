@@ -39,6 +39,8 @@ This object describes details about the Identity Provider used.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.2.0.** Use  `app_name, app_uid`  attributes instead.
+
 The name of the service that invoked the activity as described in the event.
 
 ### `process`

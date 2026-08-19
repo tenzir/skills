@@ -2,6 +2,8 @@
 
 Service Query events report information about running services.
 
+> **Deprecated since v1.5.0.** Use the `evidence_info` class.
+
 - **Class UID**: `5016`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)

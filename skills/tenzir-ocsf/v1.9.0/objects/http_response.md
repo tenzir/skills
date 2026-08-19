@@ -53,6 +53,8 @@ The length of the entire HTTP response, in number of bytes.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.9.0.** Redundant with the `code` and `status` attributes, which together convey the HTTP status code and its reason phrase. Use `code` for the numeric value and `status` for the human-readable label.
+
 The HTTP status code and reason phrase returned from the server.
 
 ### `status`

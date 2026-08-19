@@ -106,4 +106,6 @@ Describes details about web resources that were affected by an activity/event.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.9.0.** Use the `updated_web_resources` attribute instead.
+
 The results of the activity on web resources. It should contain the new values of the changed attributes of the web resources.

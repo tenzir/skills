@@ -2,6 +2,8 @@
 
 Registry Key Query events report information about discovered Windows registry keys.
 
+> **Deprecated since v1.5.0.** Use the `evidence_info` class instead. Populate `query_evidence.reg_key` and set `query_type_id` to `Registry Key`.
+
 - **Event UID**: `4`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](../../../classes/discovery_result.md)
