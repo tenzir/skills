@@ -34,6 +34,8 @@ See the [Expose data as a server](../guides/routing/expose-data-as-server.md) gu
 
 Use [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md) to spin up an HTTP server that turns incoming requests into pipeline events. This is useful for receiving webhooks, building custom API endpoints, or ingesting data pushed by external systems.
 
+For OpenTelemetry logs, metrics, and traces, use the protocol-aware [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) receiver instead of parsing OTLP requests with [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md). See [Get data from the network](../guides/collecting/get-data-from-the-network.md) for OpenTelemetry SDK and Collector configuration.
+
 ## Proxies
 
 Outbound HTTP requests from [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) and [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md) use the node-level HTTP proxy settings. See [Configuration](../explanations/configuration.md#outbound-proxy-configuration) to configure proxy URLs, bypass rules, and environment variable fallbacks.

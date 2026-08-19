@@ -199,23 +199,28 @@ from_fluent_bit "plugin"
 
 ## Examples
 
-### OpenTelemetry
+### Receive MQTT messages
 
-Ingest [OpenTelemetry](https://docs.fluentbit.io/manual/pipeline/inputs/slack) logs, metrics, and traces:
+Use Fluent Bit’s [MQTT input](https://docs.fluentbit.io/manual/data-pipeline/inputs/mqtt) to receive JSON messages from MQTT publishers:
 
 ```tql
-from_fluent_bit "opentelemetry"
+from_fluent_bit "mqtt", options={
+  listen: "0.0.0.0",
+  port: 1883,
+  payload_key: "payload",
+}
 ```
 
-You can then send JSON-encoded log data to a freshly created API endpoint:
+Publish a message with an MQTT client:
 
 ```bash
-curl \
-  --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"resourceLogs":[{"resource":{},"scopeLogs":[{"scope":{},"logRecords":[{"timeUnixNano":"1660296023390371588","body":{"stringValue":"{\"message\":\"dummy\"}"},"traceId":"","spanId":""}]}]}]}' \
-  http://0.0.0.0:4318/v1/logs
+mosquitto_pub \
+  --host tenzir.example.com \
+  --topic sensors/temperature \
+  --message '{"sensor_id":"rack-7","celsius":22.4}'
 ```
+
+The input emits the MQTT topic and stores the JSON message under `payload`.
 
 ### Splunk
 
@@ -225,7 +230,6 @@ Handle [Splunk](https://docs.fluentbit.io/manual/pipeline/inputs/splunk) HEC req
 from_fluent_bit "splunk", options={port: 8088}
 ```
 
-## See Also
+## See also
 
-* [`to_fluent_bit`](https://tenzir.com/docs/reference/operators/to_fluent_bit.md)
 * [Fluent Bit](../../integrations/fluent-bit.md)

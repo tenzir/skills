@@ -281,6 +281,7 @@
 
 ## Additional Pages
 
+- [accept_otlp](operators/accept_otlp.md): Receives OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
 - [from_opensearch](operators/from_opensearch.md): The `from_opensearch` operator is no longer available.
 - [http](operators/http.md): The `http` operator is deprecated. Use the dedicated HTTP operators instead.
 - [read_chunks](operators/read_chunks.md): Parses binary data into events with a single `data` field, in a streaming fasion.

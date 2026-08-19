@@ -36,7 +36,6 @@ Tenzir publishes the following skills:
 ### Tenzir Users
 
 * `tenzir`: Tenzir documentation for TQL, operators, functions, integrations, and deployment, plus entry points to the changelog, blog, and product pages.
-* `tenzir-manage-packages`: Package lifecycle routing for manifests, operators, pipelines, tests, and schema mappings.
 
 ### Tenzir Contributors
 

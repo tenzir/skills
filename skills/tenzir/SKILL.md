@@ -1038,6 +1038,10 @@ Acquire packets from the network and process them with pipelines.
 
 Search, analyze, and visualize data with a distributed, open-source platform.
 
+#### [OpenTelemetry integration](integrations/opentelemetry.md)
+
+Receive OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
+
 #### [Prometheus integration](integrations/prometheus.md)
 
 Send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.

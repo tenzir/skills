@@ -36,21 +36,24 @@ with the [`to_fluent_bit`](https://tenzir.com/docs/reference/operators/to_fluent
 
 ## Examples
 
-### Ingest OpenTelemetry logs, metrics, and traces
+### Receive MQTT device alerts
+
+Tenzir does not have a native MQTT receiver. Use Fluent Bit’s [MQTT input](https://docs.fluentbit.io/manual/data-pipeline/inputs/mqtt) to expose an MQTT endpoint instead:
 
 ```tql
-from_fluent_bit "opentelemetry"
+from_fluent_bit "mqtt", options={buffer_size: 16384}
 ```
 
-You can then send JSON-encoded log data to a freshly created API endpoint:
+The input listens on port `1883` by default and accepts JSON maps. For example, publish an equipment alert with an MQTT client:
 
 ```bash
-curl \
-  --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"resourceLogs":[{"resource":{},"scopeLogs":[{"scope":{},"logRecords":[{"timeUnixNano":"1660296023390371588","body":{"stringValue":"{\"message\":\"dummy\"}"},"traceId":"","spanId":""}]}]}]}' \
-  http://0.0.0.0:4318/v1/logs
+mosquitto_pub \
+  --host tenzir.example.com \
+  --topic factory/press-4/alerts \
+  --message '{"severity":"critical","code":"overheat"}'
 ```
+
+The resulting event contains the MQTT topic alongside the `severity` and `code` fields.
 
 ### Imitate a Splunk HEC endpoint
 

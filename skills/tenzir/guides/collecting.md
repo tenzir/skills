@@ -17,7 +17,7 @@ TQL provides two types of input operators:
 
   [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
 
-* **Direct event operators** like [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) and [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) produce structured events directly without an intermediate byte stream.
+* **Direct event operators** like [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md), [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md), and [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) produce structured events directly without an intermediate byte stream.
 
 ## Collection patterns
 
@@ -82,9 +82,13 @@ See the [data store guide](collecting/read-from-data-stores.md) for table reads,
 
 ### Network data
 
-Receive data over TCP or UDP sockets, collect NetFlow and IPFIX flow telemetry, or capture packets from network interfaces:
+Receive OpenTelemetry signals, listen on TCP or UDP sockets, collect NetFlow and IPFIX flow telemetry, or capture packets from network interfaces:
 
 ```tql
+// OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC
+accept_otlp "0.0.0.0:4318"
+
+
 // UDP syslog receiver
 accept_udp "0.0.0.0:514"
 
@@ -104,7 +108,7 @@ accept_tcp "0.0.0.0:8443", tls={} {
 from_nic "eth0"
 ```
 
-See the [network data guide](collecting/get-data-from-the-network.md) for socket configurations, flow telemetry, and packet capture.
+See the [network data guide](collecting/get-data-from-the-network.md) for OTLP/HTTP ingestion, socket configuration, flow telemetry, and packet capture.
 
 ## Sending data to destinations
 

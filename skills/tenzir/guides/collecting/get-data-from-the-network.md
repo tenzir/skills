@@ -7,9 +7,39 @@ section: "Docs"
 
 # Get data from the network
 
-> This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets, collect network flow telemetry, and capture raw packets from network interfaces.
+> This guide shows you how to receive data directly from network sources using TQL. You’ll learn to receive OpenTelemetry signals, listen on TCP and UDP sockets, collect network flow telemetry, and capture raw packets from network interfaces.
 
-This guide shows you how to receive data directly from network sources using TQL. You’ll learn to listen on TCP and UDP sockets, collect network flow telemetry, and capture raw packets from network interfaces.
+This guide shows you how to receive data directly from network sources using TQL. You’ll learn to receive OpenTelemetry signals, listen on TCP and UDP sockets, collect network flow telemetry, and capture raw packets from network interfaces.
+
+## OpenTelemetry over OTLP
+
+Use [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) to receive OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
+
+Listen on the standard OTLP/HTTP port:
+
+```tql
+accept_otlp "0.0.0.0:4318"
+```
+
+Configure an OpenTelemetry SDK to send Protobuf over HTTP:
+
+```bash
+export OTEL_EXPORTER_OTLP_ENDPOINT=http://tenzir.example.com:4318
+export OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+```
+
+For OTLP/gRPC, listen on port `4317` instead:
+
+```tql
+accept_otlp "0.0.0.0:4317", transport="grpc"
+```
+
+```bash
+export OTEL_EXPORTER_OTLP_ENDPOINT=http://tenzir.example.com:4317
+export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+```
+
+Run separate pipelines when you need both transports. See the [OpenTelemetry](../../integrations/opentelemetry.md) integration for Collector and TLS configuration.
 
 ## TCP sockets
 
