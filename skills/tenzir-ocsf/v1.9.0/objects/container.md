@@ -74,6 +74,8 @@ The size of the container image.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `labels` or `tags` attribute instead.
+
 The tag used by the container. It can indicate version, format, OS.
 
 ### `tags`

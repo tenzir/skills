@@ -244,6 +244,8 @@ The object security descriptor.
 - **Type**: [`digital_signature`](digital_signature.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.8.0.** Use the `signatures` attribute.
+
 The digital signature of the file.
 
 ### `signatures`

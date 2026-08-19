@@ -2,6 +2,8 @@
 
 Network File Activity events report file activities traversing the network, including file storage services such as Box, MS OneDrive, or Google Drive.
 
+> **Deprecated since v1.1.0.** Use the new class: `'File Hosting Activity' in the 'Application' category.`
+
 - **Class UID**: `4010`
 - **Category**: Network Activity
 - **Extends**: [Network (network)](network.md)

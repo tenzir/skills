@@ -2,6 +2,8 @@
 
 Email File Activity events report files within emails.
 
+> **Deprecated since v1.3.0.** Use the `email_activity` class with the `email.files[]` array instead.
+
 - **Class UID**: `4011`
 - **Category**: Network Activity
 - **Extends**: [Base Event (base_event)](base_event.md)
@@ -45,6 +47,8 @@ The normalized identifier of the activity that triggered the event. Each event c
 - **Type**: `string_t`
 - **Requirement**: required
 - **Group**: primary
+
+> **Deprecated since v1.4.0.** Use the `email.uid` attribute instead.
 
 The unique identifier of the email, used to correlate related email alert and activity events.
 

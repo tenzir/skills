@@ -60,6 +60,8 @@ Details about the file/object within a databucket.
 - **Type**: [`group`](group.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.6.0.** Use the `groups` attribute instead.
+
 The name of the related resource group.
 
 ### `groups`

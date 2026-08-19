@@ -48,6 +48,8 @@ The device that is being discovered by an inventory process.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.4.0.** Use the `sbom` attribute instead.
+
 The device software that is being discovered by an inventory process.
 
 ### `product`

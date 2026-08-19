@@ -56,6 +56,8 @@ List of privileges assigned to a user.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.5.0.** Use the `resources` attribute instead.
+
 Resource that the privileges give access to.
 
 ### `resources`

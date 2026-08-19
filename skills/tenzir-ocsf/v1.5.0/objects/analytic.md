@@ -38,6 +38,8 @@ The name of the analytic that generated the finding.
 - **Type**: [`analytic`](analytic.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.0.0.** Related Analytics has been decoupled from this object, instead use `finding_info.related_analytics`.
+
 Other analytics related to this analytic.
 
 ### `type`

@@ -2,6 +2,8 @@
 
 Prefetch Query events report information about Windows prefetch files.
 
+> **Deprecated since v1.5.0.** Use the `Evidence Info` class with the `Query Evidence` object populated with `File` instead.
+
 - **Event UID**: `19`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](../../../classes/discovery_result.md)

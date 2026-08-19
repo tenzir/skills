@@ -125,4 +125,6 @@ The HTTP Response from a web server to a requester.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.1.0.** Use the `http_response.code` attribute instead.
+
 The Hypertext Transfer Protocol (HTTP) status code returned to the client.

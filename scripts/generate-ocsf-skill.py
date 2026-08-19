@@ -94,6 +94,39 @@ def clean_description(text: str, *, relative_link_prefix: str = "") -> str:
     return rendered.strip()
 
 
+def format_deprecation(
+    deprecation: object,
+    *,
+    relative_link_prefix: str = "",
+) -> str:
+    if not isinstance(deprecation, dict):
+        return ""
+
+    since = deprecation.get("since")
+    if isinstance(since, str) and since:
+        version = since if since.startswith("v") else f"v{since}"
+        notice = f"**Deprecated since {version}.**"
+    else:
+        notice = "**Deprecated.**"
+
+    message = clean_description(
+        deprecation.get("message", ""),
+        relative_link_prefix=relative_link_prefix,
+    )
+    if message:
+        return f"{notice} {message}"
+
+    superseded_by = deprecation.get("superseded_by")
+    if isinstance(superseded_by, list) and superseded_by:
+        replacements = ", ".join(f"`{name}`" for name in superseded_by)
+        return f"{notice} Superseded by {replacements}."
+    return notice
+
+
+def format_blockquote(text: str) -> str:
+    return "\n".join(f"> {line}" if line else ">" for line in text.splitlines())
+
+
 def format_meta_list(entries: list[tuple[str, object]]) -> str:
     lines = [
         f"- **{label}**: {value}"
@@ -410,7 +443,19 @@ def format_attribute(
             label = value.get("caption") or key
             suffix = f" - {enum_desc}" if enum_desc else ""
             lines.append(f"- `{key}`: `{label}`{suffix}")
+            deprecation = format_deprecation(
+                value.get("@deprecated"),
+                relative_link_prefix=relative_link_prefix,
+            )
+            if deprecation:
+                lines.append(f"  - {deprecation}")
         lines.append("")
+    deprecation = format_deprecation(
+        data.get("@deprecated"),
+        relative_link_prefix=relative_link_prefix,
+    )
+    if deprecation:
+        lines.extend([format_blockquote(deprecation), ""])
     if desc:
         lines.extend([desc, ""])
     return "\n".join(lines)
@@ -482,6 +527,7 @@ def render_entity_page(
     description: str | None,
     meta_entries: list[tuple[str, object]],
     attributes: list[tuple[str, dict]],
+    deprecation: object = None,
     constraints: dict | None = None,
     associations: dict | None = None,
     inherited_attributes: list[tuple[str, list[tuple[str, str]]]] | None = None,
@@ -491,6 +537,12 @@ def render_entity_page(
     lines = [f"# {title}", ""]
     if description:
         lines.extend([clean_description(description, relative_link_prefix=relative_link_prefix), ""])
+    deprecation_notice = format_deprecation(
+        deprecation,
+        relative_link_prefix=relative_link_prefix,
+    )
+    if deprecation_notice:
+        lines.extend([format_blockquote(deprecation_notice), ""])
     meta = format_meta_list(meta_entries)
     if meta:
         lines.extend([meta, ""])
@@ -1148,6 +1200,7 @@ def main() -> None:
                 page = render_entity_page(
                     title=f"{class_data.get('caption') or name} ({name})",
                     description=class_data.get("description"),
+                    deprecation=class_data.get("@deprecated"),
                     meta_entries=[
                         ("Class UID", f"`{class_uid}`" if class_uid is not None else ""),
                         (
@@ -1204,6 +1257,7 @@ def main() -> None:
                         f"Abstract base class for {category_info.get('caption', name)} event classes. "
                         "Concrete classes in this category extend this class and inherit its attributes."
                     ),
+                    deprecation=intermediate_data.get("@deprecated"),
                     meta_entries=[
                         (
                             "Category",
@@ -1253,6 +1307,7 @@ def main() -> None:
                 page = render_entity_page(
                     title=f"{object_data.get('caption') or name} ({name})",
                     description=object_data.get("description"),
+                    deprecation=object_data.get("@deprecated"),
                     meta_entries=[
                         (
                             "Extends",
@@ -1296,6 +1351,7 @@ def main() -> None:
                 page = render_entity_page(
                     title=f"{profile_data.get('caption') or name} ({name})",
                     description=profile_data.get("description"),
+                    deprecation=profile_data.get("@deprecated"),
                     meta_entries=[],
                     attributes=[
                         (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
@@ -1396,6 +1452,7 @@ def main() -> None:
                     page = render_entity_page(
                         title=f"{event_data.get('caption') or event_name} ({event_name})",
                         description=event_data.get("description"),
+                        deprecation=event_data.get("@deprecated"),
                         meta_entries=[
                             ("Event UID", f"`{event_data['uid']}`" if event_data.get("uid") is not None else ""),
                             (
@@ -1458,6 +1515,7 @@ def main() -> None:
                     page = render_entity_page(
                         title=f"{object_data.get('caption') or object_name} ({object_name})",
                         description=object_data.get("description"),
+                        deprecation=object_data.get("@deprecated"),
                         meta_entries=[
                             (
                                 "Extends",
@@ -1537,6 +1595,7 @@ def main() -> None:
                     page = render_entity_page(
                         title=f"{profile_data.get('caption') or profile_name} ({profile_name})",
                         description=profile_data.get("description"),
+                        deprecation=profile_data.get("@deprecated"),
                         meta_entries=[],
                         attributes=[
                             (

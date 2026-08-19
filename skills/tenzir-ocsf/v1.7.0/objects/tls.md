@@ -46,6 +46,8 @@ The client cipher suites that were exchanged during the TLS handshake negotiatio
 - **Type**: [`tls_extension`](tls_extension.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the `tls_extension_list` attribute instead.
+
 The list of TLS extensions.
 
 ### `handshake_dur`
@@ -80,6 +82,8 @@ The length of the encryption key.
 
 - **Type**: [`san`](san.md)
 - **Requirement**: optional
+
+> **Deprecated since v1.4.0.** Use `tls.certificate.sans` attribute instead.
 
 The list of subject alternative names that are secured by a specific certificate.
 

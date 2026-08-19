@@ -32,6 +32,8 @@ The identifier of the original event. For example the numerical Windows Event Co
 - **Type**: [`extension`](extension.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the `extensions` attribute instead.
+
 The schema extension used to create the event.
 
 ### `extensions`

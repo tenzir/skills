@@ -10,6 +10,8 @@ The Data Classification profile adds attributes to spepcific resource objects, a
 - **Requirement**: recommended
 - **Group**: context
 
+> **Deprecated since v1.4.0.** Use the attribute `data_classifications` instead
+
 The Data Classification object includes information about data classification levels and data category types.
 
 ### `data_classifications`

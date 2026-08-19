@@ -25,6 +25,8 @@ The Event ID or Code that the product uses to describe the event.
 - **Type**: [`extension`](extension.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the  `extensions`  attribute instead.
+
 The schema extension used to create the event.
 
 ### `extensions`

@@ -102,6 +102,8 @@ The image used as a template to run the virtual machine.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `imei_list` attribute instead.
+
 The International Mobile Equipment Identity that is associated with the device.
 
 ### `imei_list`

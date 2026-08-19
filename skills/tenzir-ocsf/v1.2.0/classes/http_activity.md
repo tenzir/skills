@@ -75,6 +75,8 @@ The HTTP Response from a web server to a requester.
 - **Type**: `integer_t`
 - **Group**: primary
 
+> **Deprecated since v1.1.0.** Use the  `http_response.code`  attribute instead.
+
 The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) returned to the client.
 
 ### `file`

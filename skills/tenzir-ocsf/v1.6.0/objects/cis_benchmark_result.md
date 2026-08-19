@@ -2,6 +2,8 @@
 
 The CIS Benchmark Result object contains information as defined by the Center for Internet Security ([CIS](https://www.cisecurity.org/cis-benchmarks/)) benchmark result. CIS Benchmarks are a collection of best practices for securely configuring IT systems, software, networks, and cloud infrastructure.
 
+> **Deprecated since v1.5.0.** Use the Compliance object with Checks object instead.
+
 - **Extends**: [Object (object)](object.md)
 
 ## Attributes

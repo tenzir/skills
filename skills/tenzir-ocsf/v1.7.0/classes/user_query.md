@@ -2,6 +2,8 @@
 
 User Query events report user data that have been discovered, queried, polled or searched. This event differs from User Inventory as it describes the result of a targeted search by filtering a subset of user attributes.
 
+> **Deprecated since v1.5.0.** Use the `Live Evidence Info` class.
+
 - **Class UID**: `5018`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)

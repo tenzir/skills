@@ -112,6 +112,8 @@ A Url link used to access the original incident.
 - **Requirement**: optional
 - **Group**: context
 
+> **Deprecated since v1.5.0.** Use `tickets` instead.
+
 The linked ticket in the ticketing system.
 
 ### `tickets`

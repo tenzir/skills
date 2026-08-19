@@ -66,6 +66,8 @@ Details about the IAM policies associated with the Attach/Detach Policy activiti
 - **Requirement**: optional
 - **Group**: context
 
+> **Deprecated since v1.4.0.** Use the `policies` attribute instead.
+
 Details about the IAM policy associated to the Attach/Detach Policy activities.
 
 ### `user`

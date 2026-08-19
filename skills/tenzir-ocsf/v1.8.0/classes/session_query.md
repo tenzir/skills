@@ -2,6 +2,8 @@
 
 User Session Query events report information about existing user sessions.
 
+> **Deprecated since v1.5.0.** Use the `Live Evidence Info` class.
+
 - **Class UID**: `5017`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)

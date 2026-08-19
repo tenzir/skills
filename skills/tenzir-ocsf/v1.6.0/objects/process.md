@@ -58,6 +58,8 @@ The normalized identifier of the process integrity level (Windows only).
 - **Type**: `file_path_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `ancestry` attribute.
+
 The lineage of the process, represented by a list of paths for each ancestor process. For example: `['/usr/sbin/sshd', '/usr/bin/bash', '/usr/bin/whoami']`.
 
 ### `loaded_modules`
@@ -106,6 +108,8 @@ The time when the process was terminated.
 
 - **Type**: `integer_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.6.0.** `tid` is deprecated in favor of `ptid`. `ptid` has type `long_t` which can accommodate the thread identifiers returned by all platforms (e.g. 64-bit on MacOS).
 
 The identifier of the thread associated with the event, as returned by the operating system.
 

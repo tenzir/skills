@@ -147,6 +147,8 @@ The Protocol Name specifies the email communication protocol, such as SMTP, IMAP
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.4.0.** Use the `command` attribute instead.
+
 The value of the SMTP HELO or EHLO command sent by the initiator (client).
 
 ### `src_endpoint`

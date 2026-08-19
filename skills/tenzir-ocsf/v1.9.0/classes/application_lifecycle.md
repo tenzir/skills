@@ -55,6 +55,8 @@ The normalized identifier of the activity that triggered the event. Each event c
 - **Requirement**: optional
 - **Group**: context
 
+> **Deprecated since v1.9.0.** Use the `application` attribute instead.
+
 The application that was affected by the lifecycle event.  This also applies to self-updating application systems.
 
 ### `application`

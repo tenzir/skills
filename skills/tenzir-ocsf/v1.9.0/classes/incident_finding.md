@@ -79,6 +79,8 @@ An array of attack objects, each describing a tactic, technique, and/or sub-tech
 - **Requirement**: optional
 - **Group**: context
 
+> **Deprecated since v1.9.0.** Use the `notes` attribute instead.
+
 Additional user supplied details for updating or closing the incident.
 
 ### `confidence`
@@ -258,6 +260,8 @@ The normalized incident lifecycle status identifier. This tracks the incident ma
 - **Type**: [`ticket`](../objects/ticket.md)
 - **Requirement**: optional
 - **Group**: context
+
+> **Deprecated since v1.5.0.** Use `tickets` instead.
 
 The linked ticket in the ticketing system.
 

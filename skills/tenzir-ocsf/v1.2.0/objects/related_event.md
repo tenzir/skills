@@ -39,6 +39,8 @@ The unique identifier of the product that reported the related event.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.2.0.** Use `type_name` attribute instead.
+
 The type of the related event, as defined by `type_uid`.
 
 For example: `Process Activity: Launch.`

@@ -2,6 +2,8 @@
 
 Device Config State events report device configuration data, device assessments, and/or CIS Benchmark results.
 
+> **Deprecated since v1.5.0.** Use `compliance_finding` class.
+
 - **Class UID**: `5002`
 - **Category**: Discovery
 - **Extends**: [Discovery (discovery)](discovery.md)
@@ -47,6 +49,8 @@ A list of assessments associated with the device.
 - **Type**: [`cis_benchmark_result`](../objects/cis_benchmark_result.md)
 - **Requirement**: recommended
 - **Group**: primary
+
+> **Deprecated since v1.5.0.** Use the `compliance.checks` attribute instead.
 
 The CIS Benchmark Result object captures results generated from benchmark evaluations as defined by the Center for Internet Security.
 

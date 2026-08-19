@@ -2,6 +2,8 @@
 
 The CIS Critical Security Control (CSC) contains information as defined by the Center for Internet Security Critical Security Controls (CIS CSC). Prioritized set of actions to protect your organization and data from cyber-attack vectors.
 
+> **Deprecated since v1.5.0.** Use the `cis_control` object instead.
+
 - **Extends**: [Object (object)](object.md)
 
 ## Attributes

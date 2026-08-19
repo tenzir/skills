@@ -101,6 +101,7 @@ A string representation of the value type as specified in Windows Registry Value
 - `7`: `REG_NONE` - A value with no declared type.
 - `8`: `REG_QWORD` - A 64-bit integer.
 - `9`: `REG_QWORD_LITTLE_ENDIAN` - Not defined in Windows documentation and previously added to OCSF in error.
+  - **Deprecated since v1.6.0.** Use `REG_QWORD` instead.
 - `10`: `REG_SZ` - A string.
 
 The value type ID.

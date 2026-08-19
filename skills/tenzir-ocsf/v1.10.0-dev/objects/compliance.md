@@ -32,12 +32,16 @@ A list of compliance checks associated with specific industry standards or frame
 - **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.5.0.** Use the `checks` attribute instead.
+
 A list of reference KB articles that provide information to help organizations understand, interpret, and implement compliance standards. They provide guidance, best practices, and examples.
 
 ### `compliance_standards`
 
 - **Type**: [`kb_article`](kb_article.md)
 - **Requirement**: optional
+
+> **Deprecated since v1.5.0.** Use the `checks` attribute instead.
 
 A list of established guidelines or criteria that define specific requirements an organization must follow.
 
@@ -94,6 +98,8 @@ The resultant status code of the compliance check.
 
 - **Type**: `string_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.4.0.** Use the `status_details` attribute instead.
 
 The contextual description of the `status, status_code` values.
 

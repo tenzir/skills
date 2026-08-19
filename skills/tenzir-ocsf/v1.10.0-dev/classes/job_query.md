@@ -2,6 +2,8 @@
 
 Job Query events report information about scheduled jobs.
 
+> **Deprecated since v1.5.0.** Use the `evidence_info` class.
+
 - **Class UID**: `5010`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)

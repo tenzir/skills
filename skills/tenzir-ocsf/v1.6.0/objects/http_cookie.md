@@ -25,6 +25,8 @@ The expiration time of the HTTP cookie.
 - **Type**: `boolean_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the `is_http_only` attribute instead.
+
 A cookie attribute to make it inaccessible via JavaScript
 
 ### `is_http_only`
@@ -66,6 +68,8 @@ The cookie attribute that lets servers specify whether/when cookies are sent wit
 
 - **Type**: `boolean_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.1.0.** Use the `is_secure` attribute instead.
 
 The cookie attribute to only send cookies to the server with an encrypted request over the HTTPS protocol.
 

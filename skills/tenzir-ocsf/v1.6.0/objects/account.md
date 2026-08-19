@@ -46,7 +46,9 @@ The account type, normalized to the caption of 'account_type_id'. In the case of
 - `1`: `LDAP Account`
 - `2`: `Windows Account`
 - `3`: `AWS IAM User`
+  - **Deprecated since v1.6.0.** Utilize `user.type_id` to represent this information.
 - `4`: `AWS IAM Role`
+  - **Deprecated since v1.6.0.** Utilize `user.type_id` to represent this information.
 - `5`: `GCP Account`
 - `6`: `Azure AD Account`
 - `7`: `Mac OS Account`

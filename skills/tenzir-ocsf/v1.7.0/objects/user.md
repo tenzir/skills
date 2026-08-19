@@ -19,6 +19,8 @@ The user's account or the account associated with the user.
 - **Requirement**: optional
 - **Observable**: 19
 
+> **Deprecated since v1.6.0.** Use `programmatic_credentials` instead.
+
 The unique identifier of the user's credential. For example, AWS Access Key ID.
 
 ### `display_name`

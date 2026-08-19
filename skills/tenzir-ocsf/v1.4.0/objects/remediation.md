@@ -25,6 +25,8 @@ A list of KB articles or patches related to an endpoint. A KB Article contains m
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the `kb_article_list` attribute instead.
+
 The KB article/s related to the entity. A KB Article contains metadata that describes the patch or an update.
 
 ### `references`

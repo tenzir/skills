@@ -2,6 +2,8 @@
 
 Registry Value Query events report information about discovered Windows registry values.
 
+> **Deprecated since v1.5.0.** Use the `evidence_info` class instead. Populate `query_evidence.reg_value` and set `query_type_id` to `Registry Value`.
+
 - **Event UID**: `5`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](../../../classes/discovery_result.md)

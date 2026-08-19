@@ -60,6 +60,8 @@ Describes the recommended remediation steps to address identified issue(s).
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.3.0.** Use the `resources` attribute instead.
+
 Describes details about the resource that is the subject of the compliance check.
 
 ### `resources`

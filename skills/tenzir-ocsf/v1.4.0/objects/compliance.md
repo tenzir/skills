@@ -67,6 +67,8 @@ The resultant status code of the compliance check.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the  `status_details`  attribute instead.
+
 The contextual description of the `status, status_code` values.
 
 ### `status_details`

@@ -21,6 +21,8 @@ The DNS Answer object represents a specific response provided by the Domain Name
 - `5`: `Authentic Data`
 - `6`: `Checking Disabled`
 
+> **Deprecated since v1.9.0.** Use `dns_activity.flag_ids` instead.
+
 The list of DNS answer header flag IDs.
 
 ### `flags`
@@ -28,11 +30,15 @@ The list of DNS answer header flag IDs.
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.9.0.** Use `dns_activity.flags` instead.
+
 The list of DNS answer header flags.
 
 ### `packet_uid`
 
 - **Type**: `integer_t`
 - **Requirement**: recommended
+
+> **Deprecated since v1.9.0.** Use `dns_activity.transaction_id` instead.
 
 The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.

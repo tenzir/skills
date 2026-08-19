@@ -2,6 +2,8 @@
 
 Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
 
+> **Deprecated since v1.1.0.** Use the new specific classes according to the use-case: `Vulnerability Finding, Compliance Finding, Detection Finding, Incident Finding, Data Security Finding.`
+
 - **Class UID**: `2001`
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
@@ -61,6 +63,8 @@ An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the ta
 - **Requirement**: optional
 - **Group**: context
 
+> **Deprecated since v1.5.0.** Use CIS Controls for standard benchmark controls.
+
 The CIS Critical Security Controls is a list of top 20 actions and practices an organization’s security team can take on such that cyber attacks or malware, are minimized and prevented.
 
 ### `compliance`
@@ -117,6 +121,8 @@ A list of data sources utilized in generation of the finding.
 - **Type**: `json_t`
 - **Requirement**: optional
 - **Group**: context
+
+> **Deprecated since v1.1.0.** Use the `evidences` attribute instead.
 
 The data the finding exposes to the analyst.
 

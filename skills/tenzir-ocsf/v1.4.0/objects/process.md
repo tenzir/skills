@@ -58,6 +58,8 @@ The normalized identifier of the process integrity level (Windows only).
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.4.0.** Use the `ancestry` attribute.
+
 The lineage of the process, represented by a list of paths for each ancestor process. For example: `['/usr/sbin/sshd', '/usr/bin/bash', '/usr/bin/whoami']`.
 
 ### `loaded_modules`

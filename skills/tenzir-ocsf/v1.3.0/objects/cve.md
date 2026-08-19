@@ -32,12 +32,16 @@ The CWE object represents a weakness in a software system that can be exploited 
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the  `cwe`  object attributes instead.
+
 The [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) unique identifier. For example: `CWE-787`.
 
 ### `cwe_url`
 
 - **Type**: `url_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.1.0.** Use the  `cwe`  object attributes instead.
 
 Common Weakness Enumeration (CWE) definition URL. For example: `https://cwe.mitre.org/data/definitions/787.html`.
 

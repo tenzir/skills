@@ -2,6 +2,8 @@
 
 Network Connection Query events report information about active network connections.
 
+> **Deprecated since v1.5.0.** Use the `Live Evidence Info` class.
+
 - **Class UID**: `5012`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](discovery_result.md)

@@ -32,6 +32,8 @@ The Tactic object describes the Tactic ID and/or name associated to an attack.
 - **Type**: [`tactic`](tactic.md)
 - **Requirement**: optional
 
+> **Deprecated since v1.1.0.** Use the `tactic` attribute instead.
+
 The Tactics associated with the attack technique.
 
 ### `technique`

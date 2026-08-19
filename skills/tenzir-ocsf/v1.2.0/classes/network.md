@@ -50,6 +50,8 @@ The responder (server) in a network connection.
 - **Requirement**: recommended
 - **Group**: primary
 
+> **Deprecated since v1.1.0.** Use the  `proxy_endpoint`  attribute instead.
+
 The proxy (server) in a network connection.
 
 ### `src_endpoint`

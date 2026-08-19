@@ -46,6 +46,8 @@ The total number of processor cores across all installed CPUs on the system. For
 - **Type**: `string_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.9.0.** Use `cpu_info_list[*].cpu_architecture` instead.
+
 The CPU architecture, normalized to the caption of the `cpu_architecture_id` value. In the case of `Other`, it is defined by the source.
 
 ### `cpu_architecture_id`
@@ -62,6 +64,8 @@ The CPU architecture, normalized to the caption of the `cpu_architecture_id` val
 - `3`: `RISC-V` - CPU uses the RISC-V ISA. For bitness, refer to `cpu_bits`.
 - `99`: `Other` - The CPU architecture is not mapped. See the `cpu_architecture` attribute, which contains a data source specific value.
 
+> **Deprecated since v1.9.0.** Use `cpu_info_list[*].cpu_architecture_id` instead.
+
 The normalized identifier of the CPU architecture.
 
 ### `cpu_bits`
@@ -69,12 +73,16 @@ The normalized identifier of the CPU architecture.
 - **Type**: `integer_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.9.0.** Use `cpu_info_list[*].cpu_bits` instead.
+
 The cpu architecture, the number of bits used for addressing in memory. For example: `32` or `64`.
 
 ### `cpu_cores`
 
 - **Type**: `integer_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.9.0.** Use `cpu_info_list[*].cores` instead.
 
 The number of processor cores in all installed processors. For Example: `42`.
 
@@ -97,12 +105,16 @@ A list of `cpu_info` objects, each describing a physical CPU package installed i
 - **Type**: `integer_t`
 - **Requirement**: optional
 
+> **Deprecated since v1.9.0.** Use `cpu_info_list[*].speed_mhz` instead.
+
 The speed of the processor in Mhz. For Example: `4200`.
 
 ### `cpu_type`
 
 - **Type**: `string_t`
 - **Requirement**: optional
+
+> **Deprecated since v1.9.0.** Use `cpu_info_list[*].model` and `cpu_info_list[*].vendor_name` instead.
 
 The processor type. For example: `x86 Family 6 Model 37 Stepping 5`.
 
