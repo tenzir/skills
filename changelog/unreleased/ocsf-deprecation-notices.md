@@ -4,7 +4,7 @@ type: bugfix
 authors:
   - zedoraps
 prs:
-  - 36
+  - 37
 created: 2026-08-19T10:12:45.507392Z
 ---
 
