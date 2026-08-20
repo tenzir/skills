@@ -82,7 +82,7 @@ The [`every`](https://tenzir.com/docs/reference/operators/every.md) operator exe
 every 1h {
   from_http "api.example.com"
   select domain, risk
-  context::update "domains", key=domain, value=risk
+  context_update "domains", key=domain, value=risk
 }
 ```
 

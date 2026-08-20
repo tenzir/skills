@@ -22,7 +22,7 @@ Use the path that matches the role ClickHouse plays in your deployment:
 
 | Goal                                   | ClickHouse role                                                                        | Tenzir building blocks                                                                                                                                                                                                                               |
 | -------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Build a security data lake             | Destination for OCSF-normalized telemetry                                              | [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md), [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)                                                                                            |
+| Build a security data lake             | Destination for OCSF-normalized telemetry                                              | [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md), [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)                                                                                             |
 | Keep a schema you manage in ClickHouse | Existing MergeTree table with explicit types, TTLs, projections, or materialized views | [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) with `mode="append"`                                                                                                                                                 |
 | Query retained telemetry               | Source table or SQL query result                                                       | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)                                                                                                                                                                  |
 | Run lake-backed hunts or detections    | SQL engine for filtering, grouping, and sorting large event sets                       | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), [`where`](https://tenzir.com/docs/reference/operators/where.md), [`publish`](https://tenzir.com/docs/reference/operators/publish.md)                            |
@@ -79,17 +79,17 @@ These examples assume that ClickHouse runs on the same host as Tenzir and allows
 
 ### Land OCSF telemetry in ClickHouse
 
-Use this path when ClickHouse is your security data lake. Tenzir can create tables from incoming events, and [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) keeps the ClickHouse schema stable by casting events to the selected OCSF class and filling missing fields with typed nulls.
+Use this path when ClickHouse is your security data lake. Tenzir can create tables from incoming events, and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) keeps the ClickHouse schema stable by casting events to the selected OCSF class and filling missing fields with typed nulls.
 
 ```tql
 from_file "ocsf_network_activity.json"
-ocsf::cast null_fill=true
+ocsf_cast null_fill=true
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}",
               primary=time, json=unmapped,
               tls=false
 ```
 
-When creating a table, the [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Make sure the first event doesn’t contain untyped nulls or empty records. [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) helps because it gives expected OCSF fields explicit types before the table is created.
+When creating a table, the [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Make sure the first event doesn’t contain untyped nulls or empty records. [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) helps because it gives expected OCSF fields explicit types before the table is created.
 
 The `json=unmapped` option creates the OCSF `unmapped` field as a ClickHouse `JSON` column, preserving its nested structure so you can query into its fields directly.
 
@@ -189,7 +189,7 @@ to_s3 "s3://security-exports/clickhouse/network_activity_{uuid}.parquet" {
 ## See Also
 
 * [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
-* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
 * [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
 * [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)

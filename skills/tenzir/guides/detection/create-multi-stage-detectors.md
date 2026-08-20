@@ -204,21 +204,21 @@ Lookup-table contexts provide state that outlives any window and is shared acros
 Create the context once:
 
 ```tql
-context::create_lookup_table "seen_hosts"
+context_create_lookup_table "seen_hosts"
 ```
 
-Then filter findings to first-time hosts. [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md) adds a field named after the context, which stays `null` for unknown keys, and [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md) remembers the key. Two details make the pipeline correct: `context::update` consumes its input without emitting anything, so it runs on a [`fork`](https://tenzir.com/docs/reference/operators/fork.md) branch while the main stream continues; and because the enrich step runs before the update lands, several findings for the same new host can be in flight together, all still enriched with `null`, so [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) closes that gap inside the pipeline. Its `create_timeout` only needs to outlast the context update; keeping it short stops the in-pipeline cache from growing with hostname cardinality:
+Then filter findings to first-time hosts. [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md) adds a field named after the context, which stays `null` for unknown keys, and [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) remembers the key. Two details make the pipeline correct: `context_update` consumes its input without emitting anything, so it runs on a [`fork`](https://tenzir.com/docs/reference/operators/fork.md) branch while the main stream continues; and because the enrich step runs before the update lands, several findings for the same new host can be in flight together, all still enriched with `null`, so [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) closes that gap inside the pipeline. Its `create_timeout` only needs to outlast the context update; keeping it short stops the in-pipeline cache from growing with hostname cardinality:
 
 ```tql
 from {time: 2026-07-01T10:00:00Z, host: "ws-17", rule: "print-dump"},
      {time: 2026-07-01T10:02:00Z, host: "ws-17", rule: "encoded-powershell"},
      {time: 2026-07-01T10:05:00Z, host: "ws-9", rule: "smb-spike"}
-context::enrich "seen_hosts", key=host
+context_enrich "seen_hosts", key=host
 where seen_hosts == null
 drop seen_hosts
 deduplicate host, create_timeout=1min
 fork {
-  context::update "seen_hosts", key=host, value=time
+  context_update "seen_hosts", key=host, value=time
 }
 ```
 
@@ -415,15 +415,6 @@ A multi-stage match is still a Detection Finding. OCSF reserves [Incident Findin
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`window`](https://tenzir.com/docs/reference/operators/window.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
-* [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
-* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
-* [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md)
-* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
-* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
-* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
 * [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
 * [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
 * [`min`](https://tenzir.com/docs/reference/functions/min.md)

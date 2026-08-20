@@ -23,19 +23,19 @@
 
 ## Contexts
 
-- [context::create_bloom_filter](operators/context/create_bloom_filter.md): Creates a Bloom filter context.
-- [context::create_geoip](operators/context/create_geoip.md): Creates a GeoIP context.
-- [context::create_lookup_table](operators/context/create_lookup_table.md): Creates a lookup table context.
-- [context::enrich](operators/context/enrich.md): Enriches events with data from a context.
-- [context::erase](operators/context/erase.md): Removes entries from a context.
-- [context::inspect](operators/context/inspect.md): Resets a context.
-- [context::list](operators/context/list.md): Lists all contexts
-- [context::load](operators/context/load.md): Loads context state.
-- [context::lookup](operators/context/lookup.md): Performs live filtering of the import feed using a context and translates context updates into historical queries.
-- [context::remove](operators/context/remove.md): Deletes a context.
-- [context::reset](operators/context/reset.md): Resets a context.
-- [context::save](operators/context/save.md): Saves context state.
-- [context::update](operators/context/update.md): Updates a context with new data.
+- [context_create_bloom_filter](operators/context_create_bloom_filter.md): Creates a Bloom filter context.
+- [context_create_geoip](operators/context_create_geoip.md): Creates a GeoIP context.
+- [context_create_lookup_table](operators/context_create_lookup_table.md): Creates a lookup table context.
+- [context_enrich](operators/context_enrich.md): Enriches events with data from a context.
+- [context_erase](operators/context_erase.md): Removes entries from a context.
+- [context_inspect](operators/context_inspect.md): Resets a context.
+- [context_list](operators/context_list.md): Lists all contexts
+- [context_load](operators/context_load.md): Loads context state.
+- [context_lookup](operators/context_lookup.md): Performs live filtering of the import feed using a context and translates context updates into historical queries.
+- [context_remove](operators/context_remove.md): Deletes a context.
+- [context_reset](operators/context_reset.md): Resets a context.
+- [context_save](operators/context_save.md): Saves context state.
+- [context_update](operators/context_update.md): Updates a context with new data.
 
 ## Detection
 
@@ -145,7 +145,7 @@
 
 ## Modify
 
-- [ai::prompt](operators/ai/prompt.md): Sends each input event to an OpenAI-compatible Responses API endpoint and adds the model response to the event.
+- [ai_prompt](operators/ai_prompt.md): Sends each input event to an OpenAI-compatible Responses API endpoint and adds the model response to the event.
 - [dns_lookup](operators/dns_lookup.md): Performs DNS lookups to resolve IP addresses to hostnames or hostnames to IP addresses.
 - [drop](operators/drop.md): Removes fields from the event.
 - [drop_null_fields](operators/drop_null_fields.md): Removes fields containing null values from the event.
@@ -167,9 +167,9 @@
 ## OCSF
 
 - [ocsf::apply](operators/ocsf/apply.md): Casts incoming events to their OCSF type.
-- [ocsf::cast](operators/ocsf/cast.md): Casts incoming events to their OCSF type.
-- [ocsf::derive](operators/ocsf/derive.md): Automatically assigns enum strings from their integer counterparts and vice versa.
-- [ocsf::trim](operators/ocsf/trim.md): Drops fields from OCSF events to reduce their size.
+- [ocsf_cast](operators/ocsf_cast.md): Casts incoming events to their OCSF type.
+- [ocsf_derive](operators/ocsf_derive.md): Automatically assigns enum strings from their integer counterparts and vice versa.
+- [ocsf_trim](operators/ocsf_trim.md): Drops fields from OCSF events to reduce their size.
 
 ## Outputs
 
@@ -209,9 +209,9 @@
 
 ## Packages
 
-- [package::add](operators/package/add.md): Installs a package.
-- [package::list](operators/package/list.md): Shows installed packages.
-- [package::remove](operators/package/remove.md): Uninstalls a package.
+- [package_add](operators/package_add.md): Installs a package.
+- [package_list](operators/package_list.md): Shows installed packages.
+- [package_remove](operators/package_remove.md): Uninstalls a package.
 
 ## Parsing
 
@@ -245,10 +245,10 @@
 
 ## Pipelines
 
-- [pipeline::activity](operators/pipeline/activity.md): Summarizes the activity of pipelines.
-- [pipeline::detach](operators/pipeline/detach.md): Starts a pipeline in the node.
-- [pipeline::list](operators/pipeline/list.md): Shows managed pipelines.
-- [pipeline::run](operators/pipeline/run.md): Starts a pipeline in the node and waits for it to complete.
+- [pipeline_activity](operators/pipeline_activity.md): Summarizes the activity of pipelines.
+- [pipeline_detach](operators/pipeline_detach.md): Starts a pipeline in the node.
+- [pipeline_list](operators/pipeline_list.md): Shows managed pipelines.
+- [pipeline_run](operators/pipeline_run.md): Starts a pipeline in the node and waits for it to complete.
 
 ## Printing
 

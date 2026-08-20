@@ -45,7 +45,7 @@ Populate a pre-created endpoint inventory table. The `unflatten_separator` optio
 from_file "endpoint-assets.csv" {
   read_csv unflatten_separator="."
 }
-context::update "endpoint_assets", key=ip
+context_update "endpoint_assets", key=ip
 ```
 
 ## Enrich into `enrichments`
@@ -73,7 +73,7 @@ from {
   },
   enrichments: [],
 }
-context::enrich "endpoint_assets",
+context_enrich "endpoint_assets",
   key=src_endpoint.ip,
   into=enrichments,
   mode="append",
@@ -149,8 +149,8 @@ from {
     dst_ip: 10.0.1.20,
   },
 }
-context::enrich "endpoint_assets", key=unmapped.src_ip, into=src_endpoint
-context::enrich "endpoint_assets", key=unmapped.dst_ip, into=dst_endpoint
+context_enrich "endpoint_assets", key=unmapped.src_ip, into=src_endpoint
+context_enrich "endpoint_assets", key=unmapped.dst_ip, into=dst_endpoint
 ```
 
 ```tql
@@ -230,7 +230,7 @@ Populate a pre-created subnet table:
 from_file "network-segments.csv" {
   read_csv
 }
-context::update "network_segments", key=subnet, value={
+context_update "network_segments", key=subnet, value={
   subnet_uid: subnet_uid,
   zone: zone,
   owner: {
@@ -256,7 +256,7 @@ from {
     src_ip: 10.0.0.15,
   },
 }
-context::enrich "network_segments", key=unmapped.src_ip, into=src_endpoint
+context_enrich "network_segments", key=unmapped.src_ip, into=src_endpoint
 ```
 
 ```tql
@@ -299,7 +299,7 @@ from {
   type: "User",
   has_mfa: true,
 }
-context::update "users", key=name
+context_update "users", key=name
 ```
 
 Enrich the actor user by keeping the source username in `unmapped` and writing the lookup result directly to `actor.user`:
@@ -319,7 +319,7 @@ from {
     actor_user_name: "alice",
   },
 }
-context::enrich "users", key=unmapped.actor_user_name, into=actor.user
+context_enrich "users", key=unmapped.actor_user_name, into=actor.user
 ```
 
 ```tql
@@ -354,9 +354,6 @@ Use separate lookup tables for endpoint and user objects so each table can follo
 
 ## See Also
 
-* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
-* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
-* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
 * [Use lookup tables](use-lookup-tables.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

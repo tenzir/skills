@@ -33,7 +33,7 @@ uvx tenzir-test --help
 * **Input** – Data accessed with `TENZIR_INPUTS`; defaults to `<root>/inputs` but you can override it per directory or per test with an `inputs:` setting. The harness also supports inline inputs via `TENZIR_INPUT` for test-specific data files.
 * **Stdin** – Content piped to the test process via a `.stdin` file placed next to the test. The harness exposes the file path via `TENZIR_STDIN` and automatically pipes its content to the subprocess stdin.
 * **Scratch directory** – Ephemeral workspace exposed as `TENZIR_TMP_DIR` during each test run.
-* **Artifact / Baseline** – Runner output persisted next to the test; regenerate with `--update`.
+* **Artifact / Baseline** – Runner output persisted next to the test; regenerate with `--update`. For TQL and shell tests, the baseline records diagnostics from stderr before normal output from stdout. The harness captures both channels separately, so their runtime scheduling does not affect the baseline.
 * **Configuration sources** – Frontmatter plus inherited `test.yaml` files; `tenzir.yaml` still configures the Tenzir binary.
 
 A typical project layout looks like this:

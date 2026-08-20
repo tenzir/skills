@@ -135,7 +135,7 @@ $event = {...$event.ocsf, unmapped: $event.panos}
 * **Use `move`**: Transfer fields with `move` to simultaneously assign and remove from source, for example `$event.ocsf.time = move $event.panos.time_generated`.
 * **Only use `drop` for multi-use fields**: When a field appears in multiple mappings, drop it after the last use. Prefer `move` and single assignments.
 * **Keep unmapped residue**: Fields left under the source namespace still need review or an intentional decision to preserve source-specific data.
-* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) expand the minimal event before validation.
+* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) expand the minimal event before validation.
 * **Finalize the result**: After the mapper returns the OCSF event, set `type_uid` and use Tenzir’s native OCSF operators to derive enum siblings and validate the event against its schema.
 
 Why use `$event`?
@@ -258,8 +258,8 @@ from_file env("TENZIR_INPUT") {
   read_json
 }
 paloalto::ngfw::ocsf::map
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 ```
 
 This requires that your test file has a sibling `.input` file that the [test framework](../testing/write-tests.md) exposes through `TENZIR_INPUT`. Use the reader that matches your fixture format.
@@ -275,38 +275,38 @@ paloalto::ngfw::ocsf::map event=panos
 panos.raw_data = move line
 panos.raw_data_size = panos.raw_data.length_bytes()
 this = panos
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 ```
 
 ## Use native OCSF operators
 
 Tenzir ships operators for completing, validating, and reducing OCSF events:
 
-| Operator                                                                     | Purpose                                                                                                                                               |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) | Derives integer and string enum siblings in either direction and warns about inconsistent pairs.                                                      |
-| [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)     | Casts an event to the OCSF type selected by its version, class, profiles, and extensions. It warns about fields outside that schema and removes them. |
-| [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md)     | Removes fields according to their OCSF requirement levels when you need to reduce event size.                                                         |
+| Operator                                                                    | Purpose                                                                                                                                               |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) | Derives integer and string enum siblings in either direction and warns about inconsistent pairs.                                                      |
+| [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)     | Casts an event to the OCSF type selected by its version, class, profiles, and extensions. It warns about fields outside that schema and removes them. |
+| [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)     | Removes fields according to their OCSF requirement levels when you need to reduce event size.                                                         |
 
 Use derivation and casting at the boundary after your mapping operator returns:
 
 ```tql
 paloalto::ngfw::ocsf::map
 type_uid = class_uid * 100 + activity_id
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 ```
 
-Set `type_uid` explicitly because [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) does not currently compute it. The operator fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling.
+Set `type_uid` explicitly because [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) does not currently compute it. The operator fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling.
 
-The [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) operator is the primary schema validation gate. Your mapping is complete when it no longer emits warnings. Use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when a downstream system requires those output shapes or physical representations.
+The [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator is the primary schema validation gate. Your mapping is complete when it no longer emits warnings. Use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when a downstream system requires those output shapes or physical representations.
 
-After validation, optionally run [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md) to minimize events for storage or transport. Its options let you keep or drop fields that OCSF marks as optional or recommended.
+After validation, optionally run [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md) to minimize events for storage or transport. Its options let you keep or drop fields that OCSF marks as optional or recommended.
 
-Use `ocsf::cast` instead of `ocsf::apply`
+Use `ocsf_cast` instead of `ocsf::apply`
 
-The [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md) operator is deprecated. Use [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) for new pipelines.
+The [`ocsf::apply`](https://tenzir.com/docs/reference/operators/ocsf/apply.md) operator is deprecated. Use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) for new pipelines.
 
 ## See also
 

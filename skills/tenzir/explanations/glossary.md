@@ -131,6 +131,15 @@ Runtime statistics about the node and pipeline execution.
 
 * [Collect metrics](../guides/analytics/collect-metrics.md)
 
+## Module
+
+A namespace for the [operators](glossary.md#operator) and [functions](glossary.md#function) of a [package](glossary.md#package), written with `::` as separator, as in `acme::ocsf::map`.
+
+Modules are exclusive to packages, and the package identifier is always the leading segment. Builtin operators and functions use flat names, such as [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md), so no builtin can shadow a package’s entities.
+
+* Read more about [modules](packages.md#modules)
+* [Add operators](../guides/packages/add-operators.md)
+
 ## OCSF
 
 The [Open Cybersecurity Schema Framework (OCSF)](https://schema.ocsf.io) is a cross-vendor schema for security event data. Our [community library](glossary.md#library) contains packages that map data sources to OCSF.

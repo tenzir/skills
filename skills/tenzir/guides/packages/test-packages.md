@@ -139,8 +139,8 @@ from_file env("TENZIR_INPUT") {
   read_json
 }
 acme::ocsf::map
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 ```
 
 Public mapping UDOs use `event=this` by default, so this form maps the current record. If the test parses the source event into a field, pass the mapping scope explicitly and add raw payload attributes after the mapper returns:
@@ -156,11 +156,11 @@ acme::ocsf::map event=event
 event.raw_data = move line
 event.raw_data_size = event.raw_data.length_bytes()
 this = event
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 ```
 
-Use [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) to populate sibling enum fields and [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](https://tenzir.com/docs/reference/functions/now.md).
+Use [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) to populate sibling enum fields and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](https://tenzir.com/docs/reference/functions/now.md).
 
 ### Test with different arguments
 

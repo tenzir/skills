@@ -55,7 +55,7 @@ Changes to context arguments only apply when the context is first created. Updat
 
 ## Populate contexts with data
 
-Use the [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md) operator to populate a context. This typically happens in a pipeline that fetches data from an external source:
+Use the [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) operator to populate a context. This typically happens in a pipeline that fetches data from an external source:
 
 pipelines/update-lookup-table.tql
 
@@ -72,18 +72,18 @@ every 1h {
   from_http "https://feeds.example.com/indicators.json"
 }
 parse_json
-context::update "threat-indicators", key=indicator
+context_update "threat-indicators", key=indicator
 ```
 
 The `key` parameter specifies which field to use as the lookup key. The entire event becomes the value associated with that key.
 
 ## Use contexts for enrichment
 
-Use the [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md) operator to look up values and add context data to events:
+Use the [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md) operator to look up values and add context data to events:
 
 ```tql
 subscribe "network-events"
-context::enrich "threat-indicators", key=dst_ip
+context_enrich "threat-indicators", key=dst_ip
 where threat-indicators != null
 publish "alerts"
 ```
@@ -122,7 +122,7 @@ tests/context/01-list.tql
 
 ```tql
 // Verify the context exists after package installation
-context::list
+context_list
 where name == "my-context"
 ```
 
@@ -133,7 +133,7 @@ tests/context/02-update.tql
 ```tql
 // Load data into the context
 from_file env("TENZIR_INPUT")
-context::update "my-context", key=indicator
+context_update "my-context", key=indicator
 ```
 
 The input file provides the test data:
@@ -151,7 +151,7 @@ tests/context/03-inspect.tql
 
 ```tql
 // Verify the context contains expected data
-context::inspect "my-context"
+context_inspect "my-context"
 sort indicator
 ```
 

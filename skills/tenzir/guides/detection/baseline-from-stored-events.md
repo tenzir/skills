@@ -19,7 +19,7 @@ The solution uses one opinionated execution boundary: ClickHouse reduces raw eve
 Create the lookup-table context once before starting the learner or detector:
 
 ```tql
-context::create_lookup_table "egress-baseline"
+context_create_lookup_table "egress-baseline"
 ```
 
 The context is the contract between the two pipelines. The learner updates one record per asset, and the detector reads that record without restarting when it changes.
@@ -48,7 +48,7 @@ every 1d {
   // Do not judge an asset from thin history.
   where samples >= 100
   updated_at = now()
-  context::update "egress-baseline", key=asset
+  context_update "egress-baseline", key=asset
 }
 ```
 
@@ -73,7 +73,7 @@ window size=15min, on=time, tolerance=1min, idle_timeout=5min {
     end = $window.end
   }
 }
-context::enrich "egress-baseline", key=asset, into=baseline
+context_enrich "egress-baseline", key=asset, into=baseline
 if baseline == null {
   baseline_status = "missing"
 } else if now() - baseline.updated_at >= 2d {
@@ -128,12 +128,6 @@ The guide on [detecting over time windows](detect-over-time-windows.md#compare-o
 
 * [Detections](../../explanations/detections.md)
 * [Enrichment](../../explanations/enrichment.md)
-* [`every`](https://tenzir.com/docs/reference/operators/every.md)
-* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
-* [`window`](https://tenzir.com/docs/reference/operators/window.md)
-* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
-* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
-* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
 * [`median`](https://tenzir.com/docs/reference/functions/median.md)
 * [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
 * [ClickHouse](../../integrations/clickhouse.md)

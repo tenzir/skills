@@ -18,7 +18,7 @@ Point [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md) 
 
 ```tql
 subscribe "ocsf"
-ocsf::cast
+ocsf_cast
 to_iceberg "security.events",
   catalog="https://glue.eu-central-1.amazonaws.com/iceberg",
   catalog_aws_service="glue",

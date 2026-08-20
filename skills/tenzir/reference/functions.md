@@ -738,52 +738,52 @@ encrypt_cryptopan(1.2.3.4)
 
 ## OCSF
 
-### [ocsf::category\_name](functions/ocsf/category_name.md)
+### [ocsf\_category\_name](functions/ocsf_category_name.md)
 
 Returns the `category_name` for a given `category_uid`.
 
 ```tql
-ocsf::category_name(2)
+ocsf_category_name(2)
 ```
 
-### [ocsf::category\_uid](functions/ocsf/category_uid.md)
+### [ocsf\_category\_uid](functions/ocsf_category_uid.md)
 
 Returns the `category_uid` for a given `category_name`.
 
 ```tql
-ocsf::category_uid("Findings")
+ocsf_category_uid("Findings")
 ```
 
-### [ocsf::class\_name](functions/ocsf/class_name.md)
+### [ocsf\_class\_name](functions/ocsf_class_name.md)
 
 Returns the `class_name` for a given `class_uid`.
 
 ```tql
-ocsf::class_name(4003)
+ocsf_class_name(4003)
 ```
 
-### [ocsf::class\_uid](functions/ocsf/class_uid.md)
+### [ocsf\_class\_uid](functions/ocsf_class_uid.md)
 
 Returns the `class_uid` for a given `class_name`.
 
 ```tql
-ocsf::class_uid("DNS Activity")
+ocsf_class_uid("DNS Activity")
 ```
 
-### [ocsf::type\_name](functions/ocsf/type_name.md)
+### [ocsf\_type\_name](functions/ocsf_type_name.md)
 
 Returns the `type_name` for a given `type_uid`.
 
 ```tql
-ocsf::type_name(400704)
+ocsf_type_name(400704)
 ```
 
-### [ocsf::type\_uid](functions/ocsf/type_uid.md)
+### [ocsf\_type\_uid](functions/ocsf_type_uid.md)
 
 Returns the `type_uid` for a given `type_name`.
 
 ```tql
-ocsf::type_uid("SSH Activity: Fail")
+ocsf_type_uid("SSH Activity: Fail")
 ```
 
 ## Parsing

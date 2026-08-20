@@ -66,7 +66,7 @@ from {
   },
   enrichments: [],
 }
-context::enrich "domain_indicator_enrichments",
+context_enrich "domain_indicator_enrichments",
   key=query.hostname,
   into=enrichments,
   mode="append",
@@ -132,7 +132,7 @@ from {
     },
   },
 }
-context::update "domain_reputation", key=indicator, value=observable
+context_update "domain_reputation", key=indicator, value=observable
 ```
 
 Attach the reputation to an OCSF observable for `query.hostname`:
@@ -155,7 +155,7 @@ from {
   rcode: "NoError",
   observables: [],
 }
-context::enrich "domain_reputation",
+context_enrich "domain_reputation",
   key=query.hostname,
   into=observables,
   mode="append"
@@ -221,7 +221,7 @@ from {
     },
   },
 }
-context::update "domain_osint", key=indicator, value=osint
+context_update "domain_osint", key=indicator, value=osint
 ```
 
 Append the OSINT object directly:
@@ -245,7 +245,7 @@ from {
   rcode: "NoError",
   osint: [],
 }
-context::enrich "domain_osint",
+context_enrich "domain_osint",
   key=query.hostname,
   into=osint,
   mode="append"
@@ -314,7 +314,7 @@ from {
     }],
   },
 }
-context::update "domain_malware", key=indicator, value=osint
+context_update "domain_malware", key=indicator, value=osint
 ```
 
 Append the OSINT record with the malware object:
@@ -338,7 +338,7 @@ from {
   rcode: "NoError",
   osint: [],
 }
-context::enrich "domain_malware",
+context_enrich "domain_malware",
   key=query.hostname,
   into=osint,
   mode="append"
@@ -395,9 +395,6 @@ Keeping one table per OCSF object and indicator type prevents ambiguous values, 
 
 ## See Also
 
-* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
-* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
-* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
 * [Use lookup tables](use-lookup-tables.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

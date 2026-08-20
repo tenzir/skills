@@ -116,7 +116,7 @@ Start with cleanup, then choose the schema guide for your target platform. Schem
 * Identify the correct event class
 * Map fields by attribute group
 * Handle unmapped fields
-* Validate with `ocsf::cast`
+* Validate with `ocsf_cast`
 
 ### Map to UDM
 

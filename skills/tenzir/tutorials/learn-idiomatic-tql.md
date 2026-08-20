@@ -1169,7 +1169,7 @@ strict {
 
 
   // Normal processing
-  context::enrich "geo", key=source
+  context_enrich "geo", key=source
 }
 
 

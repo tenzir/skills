@@ -80,7 +80,7 @@ every {{ inputs.refresh_interval }} {
   from_http "{{ inputs.api_endpoint }}"
 }
 parse_json
-context::update "{{ inputs.context_name }}", key=id
+context_update "{{ inputs.context_name }}", key=id
 ```
 
 Users provide input values during [package installation](install-a-package.md).
@@ -140,12 +140,12 @@ In the [Tenzir Library](https://app.tenzir.com/library):
 
 The Library shows input names, descriptions, and default values to guide users.
 
-### package::add operator
+### package\_add operator
 
-Use the [`package::add`](https://tenzir.com/docs/reference/operators/package/add.md) operator with an `inputs` record:
+Use the [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md) operator with an `inputs` record:
 
 ```tql
-package::add "/path/to/package", inputs={
+package_add "/path/to/package", inputs={
   refresh_interval: "24h",
   api_endpoint: "https://api.example.com/data",
 }
@@ -155,7 +155,7 @@ Omit inputs that have defaults to use the default values:
 
 ```tql
 // Uses default refresh_interval, overrides api_endpoint
-package::add "/path/to/package", inputs={
+package_add "/path/to/package", inputs={
   api_endpoint: "https://custom.example.com/feed",
 }
 ```

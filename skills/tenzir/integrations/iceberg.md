@@ -22,7 +22,7 @@ Map events to [OCSF](https://schema.ocsf.io) upstream and let [`to_iceberg`](htt
 
 ```tql
 subscribe "ocsf"
-ocsf::cast
+ocsf_cast
 to_iceberg "security.ocsf",
   catalog="https://catalog.example.com",
   partition_by=[class_uid, day(time)]
@@ -55,7 +55,7 @@ Existing tables keep their own partition spec and schema governance; Tenzir appe
 ## See Also
 
 * [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
-* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [AWS Glue](amazon/glue.md)
 * [Cloud Lakehouse](google/cloud-lakehouse.md)
 * [Send to destinations](../guides/routing/send-to-destinations.md)

@@ -202,7 +202,7 @@ select time, file_name=file.name
 }
 ```
 
-For large indicator sets, move the list into a lookup table and use `context::enrich` instead, as the guide on [enriching with threat intelligence](../enrichment/enrich-with-threat-intel.md) shows.
+For large indicator sets, move the list into a lookup table and use `context_enrich` instead, as the guide on [enriching with threat intelligence](../enrichment/enrich-with-threat-intel.md) shows.
 
 ## Turn a match into a reusable detection
 
@@ -270,8 +270,6 @@ Split a detection into smaller operators when that improves reuse or testing, no
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
 * [`equals`](https://tenzir.com/docs/reference/functions/equals.md)
 * [`contains`](https://tenzir.com/docs/reference/functions/contains.md)
 * [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)

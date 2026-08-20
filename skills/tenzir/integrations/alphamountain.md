@@ -37,8 +37,8 @@ every 1h {
     risk_min=8.5,
     risk_max=10.0
   alphamountain::ocsf::map
-  ocsf::derive
-  ocsf::cast
+  ocsf_derive
+  ocsf_cast
 }
 publish "ocsf"
 ```
@@ -89,8 +89,8 @@ For investigations, call the live alphaMountain API operators and map the result
 alphamountain::intelligence::hostname license=secret("alphamountain_license"),
   hostname="suspicious.example"
 alphamountain::ocsf::map
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 ```
 
 Use live lookups when you need deeper context for a specific indicator, such as WHOIS, passive DNS, DGA probability, impersonation signals, DNS answers, GeoIP, ASN data, or shared infrastructure.

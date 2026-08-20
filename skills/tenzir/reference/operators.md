@@ -115,108 +115,108 @@ subscribe "topic"
 
 ## Contexts
 
-### [context::create\_bloom\_filter](operators/context/create_bloom_filter.md)
+### [context\_create\_bloom\_filter](operators/context_create_bloom_filter.md)
 
 Creates a Bloom filter context.
 
 ```tql
-context::create_bloom_filter "ctx", capacity=1Mi, fp_probability=0.01
+context_create_bloom_filter "ctx", capacity=1Mi, fp_probability=0.01
 ```
 
-### [context::create\_geoip](operators/context/create_geoip.md)
+### [context\_create\_geoip](operators/context_create_geoip.md)
 
 Creates a GeoIP context.
 
 ```tql
-context::create_geoip "ctx", db_path="GeoLite2-City.mmdb"
+context_create_geoip "ctx", db_path="GeoLite2-City.mmdb"
 ```
 
-### [context::create\_lookup\_table](operators/context/create_lookup_table.md)
+### [context\_create\_lookup\_table](operators/context_create_lookup_table.md)
 
 Creates a lookup table context.
 
 ```tql
-context::create_lookup_table "ctx"
+context_create_lookup_table "ctx"
 ```
 
-### [context::enrich](operators/context/enrich.md)
+### [context\_enrich](operators/context_enrich.md)
 
 Enriches events with data from a context.
 
 ```tql
-context::enrich "ctx", key=x
+context_enrich "ctx", key=x
 ```
 
-### [context::erase](operators/context/erase.md)
+### [context\_erase](operators/context_erase.md)
 
 Removes entries from a context.
 
 ```tql
-context::erase "ctx", key=x
+context_erase "ctx", key=x
 ```
 
-### [context::inspect](operators/context/inspect.md)
+### [context\_inspect](operators/context_inspect.md)
 
 Resets a context.
 
 ```tql
-context::inspect "ctx"
+context_inspect "ctx"
 ```
 
-### [context::list](operators/context/list.md)
+### [context\_list](operators/context_list.md)
 
 Lists all contexts.
 
 ```tql
-context::list
+context_list
 ```
 
-### [context::load](operators/context/load.md)
+### [context\_load](operators/context_load.md)
 
 Loads context state.
 
 ```tql
-context::load "ctx"
+context_load "ctx"
 ```
 
-### [context::lookup](operators/context/lookup.md)
+### [context\_lookup](operators/context_lookup.md)
 
 Performs unified matching.
 
 ```tql
-context::lookup "ctx", key=field
+context_lookup "ctx", key=field
 ```
 
-### [context::remove](operators/context/remove.md)
+### [context\_remove](operators/context_remove.md)
 
 Deletes a context.
 
 ```tql
-context::remove "ctx"
+context_remove "ctx"
 ```
 
-### [context::reset](operators/context/reset.md)
+### [context\_reset](operators/context_reset.md)
 
 Resets a context.
 
 ```tql
-context::reset "ctx"
+context_reset "ctx"
 ```
 
-### [context::save](operators/context/save.md)
+### [context\_save](operators/context_save.md)
 
 Saves context state.
 
 ```tql
-context::save "ctx"
+context_save "ctx"
 ```
 
-### [context::update](operators/context/update.md)
+### [context\_update](operators/context_update.md)
 
 Updates a context with new data.
 
 ```tql
-context::update "ctx", key=x, value=y
+context_update "ctx", key=x, value=y
 ```
 
 ## Detection
@@ -897,12 +897,12 @@ unordered { read_ndjson }
 
 ## Modify
 
-### [ai::prompt](operators/ai/prompt.md)
+### [ai\_prompt](operators/ai_prompt.md)
 
 Sends events to an OpenAI-compatible Responses API endpoint and adds the model response.
 
 ```tql
-ai::prompt model="qwen3.6"
+ai_prompt model="qwen3.8"
 ```
 
 ### [dns\_lookup](operators/dns_lookup.md)
@@ -1029,28 +1029,28 @@ Casts incoming events to their OCSF type.
 ocsf::apply
 ```
 
-### [ocsf::cast](operators/ocsf/cast.md)
+### [ocsf\_cast](operators/ocsf_cast.md)
 
 Casts incoming events to their OCSF type.
 
 ```tql
-ocsf::cast
+ocsf_cast
 ```
 
-### [ocsf::derive](operators/ocsf/derive.md)
+### [ocsf\_derive](operators/ocsf_derive.md)
 
 Automatically assigns enum strings from their integer counterparts and vice versa.
 
 ```tql
-ocsf::derive
+ocsf_derive
 ```
 
-### [ocsf::trim](operators/ocsf/trim.md)
+### [ocsf\_trim](operators/ocsf_trim.md)
 
 Drops fields from OCSF events to reduce their size.
 
 ```tql
-ocsf::trim
+ocsf_trim
 ```
 
 ## Outputs
@@ -1321,28 +1321,28 @@ to_zmq "tcp://collector.example.com:5555", encoding="json", prefix=f"{kind}/"
 
 ## Packages
 
-### [package::add](operators/package/add.md)
+### [package\_add](operators/package_add.md)
 
 Installs a package.
 
 ```tql
-package::add "suricata-ocsf"
+package_add "suricata-ocsf"
 ```
 
-### [package::list](operators/package/list.md)
+### [package\_list](operators/package_list.md)
 
 Shows installed packages.
 
 ```tql
-package::list
+package_list
 ```
 
-### [package::remove](operators/package/remove.md)
+### [package\_remove](operators/package_remove.md)
 
 Uninstalls a package.
 
 ```tql
-package::remove "suricata-ocsf"
+package_remove "suricata-ocsf"
 ```
 
 ## Parsing
@@ -1565,36 +1565,36 @@ read_zeek_tsv
 
 ## Pipelines
 
-### [pipeline::activity](operators/pipeline/activity.md)
+### [pipeline\_activity](operators/pipeline_activity.md)
 
 Summarizes the activity of pipelines.
 
 ```tql
-pipeline::activity range=1d, interval=1h
+pipeline_activity range=1d, interval=1h
 ```
 
-### [pipeline::detach](operators/pipeline/detach.md)
+### [pipeline\_detach](operators/pipeline_detach.md)
 
 Starts a pipeline in the node.
 
 ```tql
-pipeline::detach { … }
+pipeline_detach { … }
 ```
 
-### [pipeline::list](operators/pipeline/list.md)
+### [pipeline\_list](operators/pipeline_list.md)
 
 Shows managed pipelines.
 
 ```tql
-pipeline::list
+pipeline_list
 ```
 
-### [pipeline::run](operators/pipeline/run.md)
+### [pipeline\_run](operators/pipeline_run.md)
 
 Starts a pipeline in the node and waits for it to complete.
 
 ```tql
-pipeline::run { … }
+pipeline_run { … }
 ```
 
 ## Printing

@@ -91,7 +91,7 @@ let $account_id = ...
 
 subscribe $in
 where @name == "ocsf.http_activity"
-ocsf::apply
+ocsf_cast
 to_amazon_security_lake $url, region=$region, account_id=$account_id, timeout=10m
 ```
 
@@ -115,7 +115,7 @@ let $s3_uri = "s3://aws-security-data-lake-eu-west-2-lake-abcdefghijklmnopqrstuv
 
 from_kafka "ocsf_events"
 read_ndjson
-where class_uid == ocsf::class_uid("Network Activity")
+where class_uid == ocsf_class_uid("Network Activity")
 to_amazon_security_lake $s3_uri,
   region="eu-west-2",
   accountId="123456789012"

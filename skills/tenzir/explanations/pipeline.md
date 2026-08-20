@@ -47,7 +47,7 @@ It’s important to mention that most of the time you don’t have to worry abou
 
 The operators of a pipeline always run concurrently: while one operator parses a batch, the next one already transforms the previous batch. Beyond that, Tenzir can run a *single* operator on multiple cores by replicating it into several instances that each process a share of the batches.
 
-Which operators Tenzir replicates depends on what they need to see. An operator that treats every event on its own, such as [`where`](https://tenzir.com/docs/reference/operators/where.md), an assignment, or [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md), works on any batch it receives, so Tenzir hands its instances whichever batches are available.
+Which operators Tenzir replicates depends on what they need to see. An operator that treats every event on its own, such as [`where`](https://tenzir.com/docs/reference/operators/where.md), an assignment, or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md), works on any batch it receives, so Tenzir hands its instances whichever batches are available.
 
 Operators that combine related events need more care. [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) only produce the right result if every event of a group reaches the same instance. Tenzir therefore partitions the stream by the operator’s key fields and routes each event to the instance that owns its key.
 

@@ -26,16 +26,16 @@ The most convenient way to install a package is through the [Tenzir Library](htt
 
 ## Install with the package operator
 
-To install a package interactively in TQL, use the [`package::add`](https://tenzir.com/docs/reference/operators/package/add.md) operator:
+To install a package interactively in TQL, use the [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md) operator:
 
 ```tql
-package::add "/path/to/pkg"
+package_add "/path/to/pkg"
 ```
 
 This installs the package from the directory `/path/to/pkg`. Pass an `inputs` record to adjust the package configuration and replace the package’s templates with concrete values:
 
 ```tql
-package::add "package.yaml", inputs={
+package_add "package.yaml", inputs={
   endpoint: "localhost:42000",
   policy: "block",
 }
@@ -44,7 +44,7 @@ package::add "package.yaml", inputs={
 Your package now appears when you list all installed packages:
 
 ```tql
-package::list
+package_list
 ```
 
 ```tql
@@ -55,10 +55,10 @@ package::list
 }
 ```
 
-To uninstall a package interactively, use [`package::remove`](https://tenzir.com/docs/reference/operators/package/remove.md) and pass the package ID.
+To uninstall a package interactively, use [`package_remove`](https://tenzir.com/docs/reference/operators/package_remove.md) and pass the package ID.
 
 ```tql
-package::remove "your-package"
+package_remove "your-package"
 ```
 
 ## Install from a custom repository
@@ -83,7 +83,7 @@ tenzir:
 You can also install individual packages interactively:
 
 ```tql
-package::add "/path/to/my-packages/package-one"
+package_add "/path/to/my-packages/package-one"
 ```
 
 ## Install with Infrastructure as Code (IaC)

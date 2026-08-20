@@ -116,12 +116,12 @@
 
 ## OCSF
 
-- [ocsf::category_name](functions/ocsf/category_name.md): Returns the `category_name` for a given `category_uid`.
-- [ocsf::category_uid](functions/ocsf/category_uid.md): Returns the `category_uid` for a given `category_name`.
-- [ocsf::class_name](functions/ocsf/class_name.md): Returns the `class_name` for a given `class_uid`.
-- [ocsf::class_uid](functions/ocsf/class_uid.md): Returns the `class_uid` for a given `class_name`.
-- [ocsf::type_name](functions/ocsf/type_name.md): Returns the `type_name` for a given `type_uid`.
-- [ocsf::type_uid](functions/ocsf/type_uid.md): Returns the `type_uid` for a given `type_name`.
+- [ocsf_category_name](functions/ocsf_category_name.md): Returns the `category_name` for a given `category_uid`.
+- [ocsf_category_uid](functions/ocsf_category_uid.md): Returns the `category_uid` for a given `category_name`.
+- [ocsf_class_name](functions/ocsf_class_name.md): Returns the `class_name` for a given `class_uid`.
+- [ocsf_class_uid](functions/ocsf_class_uid.md): Returns the `class_uid` for a given `class_name`.
+- [ocsf_type_name](functions/ocsf_type_name.md): Returns the `type_name` for a given `type_uid`.
+- [ocsf_type_uid](functions/ocsf_type_uid.md): Returns the `type_uid` for a given `type_name`.
 
 ## Parsing
 

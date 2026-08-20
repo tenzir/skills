@@ -22,6 +22,14 @@ Packages solve common distribution challenges:
 * **Testability**: The Test Framework validates package behavior
 * **Discoverability**: The Tenzir Library makes packages findable and installable
 
+## Modules
+
+A **module** is a namespace for the operators and functions that a package brings along. Modules use `::` as separator, and the package identifier is always the leading segment, as in `acme::ocsf::map`.
+
+Modules exist so that packages can pick natural names without colliding with each other. Two packages may both provide a `map` operator, because their fully qualified names differ. Nested namespaces add further segments, which lets a package group related entities, such as `acme::ocsf::events::dns` next to `acme::ocsf::events::http`.
+
+Modules are exclusive to packages. Builtin operators and functions use flat names, such as [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md), and never occupy a module. That separation makes the origin of an entity visible in its name: a name with `::` comes from a package, and a name without it is builtin. It also means no builtin can shadow a package’s entities, so a package is free to use a module name like `context` or `ocsf`.
+
 ## Package structure
 
 A package is a directory with the following structure:

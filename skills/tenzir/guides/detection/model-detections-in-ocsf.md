@@ -14,7 +14,7 @@ This guide shows you how to model detection results in [OCSF](https://schema.ocs
 
 Schema enforcement is optional
 
-The examples construct their intended OCSF records directly. Add [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) for enum sibling expansion or [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) for schema enforcement at a pipeline boundary when you need either behavior. They are not part of the detection semantics.
+The examples construct their intended OCSF records directly. Add [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) for enum sibling expansion or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) for schema enforcement at a pipeline boundary when you need either behavior. They are not part of the detection semantics.
 
 ## Choose the OCSF representation
 
@@ -366,7 +366,6 @@ A Detection Finding is not automatically an incident. When it requires incident 
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
 * [Match events with TQL](match-events-with-tql.md)
 * [Detect over time windows](detect-over-time-windows.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)

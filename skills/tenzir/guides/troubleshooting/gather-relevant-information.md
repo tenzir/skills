@@ -228,10 +228,10 @@ where severity == "error"
 select timestamp, pipeline_id, pipeline_name, message
 ```
 
-Each diagnostic carries the error `message` along with the `pipeline_id` and `pipeline_name` of the pipeline that triggered it. Use the ID to find the pipeline in the Explorer or correlate it with metrics. On the command line, [`pipeline::list`](https://tenzir.com/docs/reference/operators/pipeline/list.md) resolves the ID to the pipeline’s state and definition:
+Each diagnostic carries the error `message` along with the `pipeline_id` and `pipeline_name` of the pipeline that triggered it. Use the ID to find the pipeline in the Explorer or correlate it with metrics. On the command line, [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md) resolves the ID to the pipeline’s state and definition:
 
 ```tql
-pipeline::list
+pipeline_list
 where id == "1b2786b6-7bf9-4285-9621-6a4feeed62ad"
 select name, state, definition
 ```
@@ -296,7 +296,7 @@ head 10
 // ...
 ```
 
-Unlike most other metrics, `operator_profile` carries only the pipeline ID, not the name. Resolve it with `pipeline::list`, as described in [Find failing pipelines](gather-relevant-information.md#find-failing-pipelines). Deployed pipelines and interactive queries compete for the same cores, so a few compute-heavy pipelines can stall the Explorer and ad-hoc runs for everyone. To find out why the top pipeline is expensive, see [Investigate slow pipelines](investigate-slow-pipelines.md#find-the-slow-operator).
+Unlike most other metrics, `operator_profile` carries only the pipeline ID, not the name. Resolve it with `pipeline_list`, as described in [Find failing pipelines](gather-relevant-information.md#find-failing-pipelines). Deployed pipelines and interactive queries compete for the same cores, so a few compute-heavy pipelines can stall the Explorer and ad-hoc runs for everyone. To find out why the top pipeline is expensive, see [Investigate slow pipelines](investigate-slow-pipelines.md#find-the-slow-operator).
 
 ## Build a reproducible sample
 
@@ -339,10 +339,6 @@ A good reproducer runs without external dependencies, shows the unexpected behav
 
 ## See also
 
-* [`diagnostics`](https://tenzir.com/docs/reference/operators/diagnostics.md)
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
-* [`pipeline::list`](https://tenzir.com/docs/reference/operators/pipeline/list.md)
-* [`version`](https://tenzir.com/docs/reference/operators/version.md)
 * [`config`](https://tenzir.com/docs/reference/functions/config.md)
 * [Run pipelines](../basic-usage/run-pipelines.md)
 * [Configure a node](../node-setup/configure-a-node.md)

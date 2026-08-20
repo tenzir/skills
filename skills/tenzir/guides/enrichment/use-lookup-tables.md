@@ -12,11 +12,11 @@ section: "Docs"
 
 This guide shows you how to use lookup tables in Tenzir to store reference data and apply it to OCSF events. Use lookup tables when you have data keyed by an event value, such as a user ID, hostname, IP address, subnet, file hash, or cloud resource ID.
 
-A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md). This guide covers the basic lookup table lifecycle first, then shows where lookup results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the lookup result describes a specific OCSF object, enrich that object instead.
+A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md). This guide covers the basic lookup table lifecycle first, then shows where lookup results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the lookup result describes a specific OCSF object, enrich that object instead.
 
 ## Set up lookup tables
 
-Create lookup tables in separate setup pipelines with [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md), or define them as code by adding them to `tenzir.contexts` in `tenzir.yaml`:
+Create lookup tables in separate setup pipelines with [`context_create_lookup_table`](https://tenzir.com/docs/reference/operators/context_create_lookup_table.md), or define them as code by adding them to `tenzir.contexts` in `tenzir.yaml`:
 
 \<prefix>/etc/tenzir/tenzir.yaml
 
@@ -33,7 +33,7 @@ You can also create lookup tables from the **Contexts** tab in the platform.
 
 ## Add entries
 
-Use [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md) to add or replace lookup-table entries. This example stores user role metadata keyed by the OCSF user UID:
+Use [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) to add or replace lookup-table entries. This example stores user role metadata keyed by the OCSF user UID:
 
 ```tql
 from {
@@ -42,7 +42,7 @@ from {
   department: "Security Operations",
   privileges: ["investigate", "contain"],
 }
-context::update "user_roles", key=user_uid, value={
+context_update "user_roles", key=user_uid, value={
   role: role,
   department: department,
   privileges: privileges,
@@ -81,7 +81,7 @@ from {
   },
   enrichments: [],
 }
-context::enrich "user_roles",
+context_enrich "user_roles",
   key=user.uid,
   into=enrichments,
   mode="append",
@@ -138,7 +138,7 @@ from {
   type: "Admin",
   has_mfa: true,
 }
-context::update "users", key=uid
+context_update "users", key=uid
 ```
 
 Enrich an Authentication event by looking up the source user ID from `unmapped` and writing the result directly into the OCSF `user` object:
@@ -161,7 +161,7 @@ from {
     user_uid: "S-1-5-21-1001",
   },
 }
-context::enrich "users", key=unmapped.user_uid, into=user
+context_enrich "users", key=unmapped.user_uid, into=user
 ```
 
 ```tql
@@ -208,7 +208,7 @@ Populate a pre-created subnet table:
 from {subnet: 10.0.0.0/22, zone: "corp", owner: {name: "platform"}},
      {subnet: 10.0.0.0/24, zone: "production", owner: {name: "web-platform"}},
      {subnet: 10.0.1.0/24, zone: "database", owner: {name: "data-platform"}}
-context::update "network_segments", key=subnet, value={
+context_update "network_segments", key=subnet, value={
   subnet_uid: subnet,
   zone: zone,
   owner: owner,
@@ -233,8 +233,8 @@ from {
     dst_ip: 10.0.1.20,
   },
 }
-context::enrich "network_segments", key=unmapped.src_ip, into=src_endpoint
-context::enrich "network_segments", key=unmapped.dst_ip, into=dst_endpoint
+context_enrich "network_segments", key=unmapped.src_ip, into=src_endpoint
+context_enrich "network_segments", key=unmapped.dst_ip, into=dst_endpoint
 ```
 
 ```tql
@@ -292,7 +292,7 @@ from {
   action: "deny",
   reason: "Database tier is not internet-facing",
 }
-context::update "access_policies", key=key, value={
+context_update "access_policies", key=key, value={
   action: action,
   reason: reason,
 }
@@ -309,7 +309,7 @@ from {
     zone: "dmz",
   },
 }
-context::enrich "access_policies",
+context_enrich "access_policies",
   key={
     src_zone: src_endpoint.zone,
     dst_zone: dst_endpoint.zone,
@@ -336,31 +336,31 @@ Compound keys keep the lookup deterministic when a single event field isn’t se
 
 ## Manage table entries
 
-Use [`context::inspect`](https://tenzir.com/docs/reference/operators/context/inspect.md) to view entries:
+Use [`context_inspect`](https://tenzir.com/docs/reference/operators/context_inspect.md) to view entries:
 
 ```tql
-context::inspect "user_roles"
+context_inspect "user_roles"
 ```
 
-Use [`context::erase`](https://tenzir.com/docs/reference/operators/context/erase.md) to remove one entry:
+Use [`context_erase`](https://tenzir.com/docs/reference/operators/context_erase.md) to remove one entry:
 
 ```tql
 from {user_uid: "S-1-5-21-1001"}
-context::erase "user_roles", key=user_uid
+context_erase "user_roles", key=user_uid
 ```
 
-Use [`context::remove`](https://tenzir.com/docs/reference/operators/context/remove.md) to delete the lookup table and its persisted data:
+Use [`context_remove`](https://tenzir.com/docs/reference/operators/context_remove.md) to delete the lookup table and its persisted data:
 
 ```tql
-context::remove "user_roles"
+context_remove "user_roles"
 ```
 
-Use [`context::save`](https://tenzir.com/docs/reference/operators/context/save.md) and [`context::load`](https://tenzir.com/docs/reference/operators/context/load.md) to export and import a lookup table.
+Use [`context_save`](https://tenzir.com/docs/reference/operators/context_save.md) and [`context_load`](https://tenzir.com/docs/reference/operators/context_load.md) to export and import a lookup table.
 
 Export a lookup table to a file:
 
 ```tql
-context::save "user_roles"
+context_save "user_roles"
 to_file "user_roles.bin"
 ```
 
@@ -368,7 +368,7 @@ Import a lookup table from a file:
 
 ```tql
 from_file "user_roles.bin"
-context::load "user_roles"
+context_load "user_roles"
 ```
 
 Caution
@@ -377,7 +377,7 @@ Loading replaces the entire lookup table state. Save the current table first if 
 
 ## Expire stale entries
 
-Set timeouts on [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md) when the lookup table contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
+Set timeouts on [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) when the lookup table contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
 
 ```tql
 from {
@@ -385,7 +385,7 @@ from {
   confidence: 90,
   source: "ThreatFeed",
 }
-context::update "active_indicators",
+context_update "active_indicators",
   key=indicator,
   value={
     confidence: confidence,
@@ -400,13 +400,6 @@ context::update "active_indicators",
 
 ## See Also
 
-* [`context::create_lookup_table`](https://tenzir.com/docs/reference/operators/context/create_lookup_table.md)
-* [`context::update`](https://tenzir.com/docs/reference/operators/context/update.md)
-* [`context::enrich`](https://tenzir.com/docs/reference/operators/context/enrich.md)
-* [`context::inspect`](https://tenzir.com/docs/reference/operators/context/inspect.md)
-* [`context::erase`](https://tenzir.com/docs/reference/operators/context/erase.md)
-* [`context::save`](https://tenzir.com/docs/reference/operators/context/save.md)
-* [`context::load`](https://tenzir.com/docs/reference/operators/context/load.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

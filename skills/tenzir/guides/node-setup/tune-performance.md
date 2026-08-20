@@ -54,7 +54,7 @@ Every operator of a pipeline runs on a single core by default. Enable parallelis
 ```tql
 // parallelism: max
 from_file "/var/log/events/*.json", watch=10s
-ocsf::cast
+ocsf_cast
 where severity_id >= 4
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 ```
@@ -67,7 +67,7 @@ The comment travels with the pipeline, so it works wherever the pipeline runs, i
 
 The `tenzir` binary also accepts a `--parallelism` option with the same values. It applies to pipelines that carry no comment, which makes it useful for trying out a degree of parallelism without editing the pipeline.
 
-Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) can, because they treat each event on its own. Tenzir leaves the remaining operators at a single instance.
+Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) can, because they treat each event on its own. Tenzir leaves the remaining operators at a single instance.
 
 Operators that group related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive events partitioned by their keys. Tenzir runs them on at most 4 instances, because partitioning splits batches and the resulting per-event overhead grows with the number of partitions. Raise or lower that bound with `limit_partitions`:
 

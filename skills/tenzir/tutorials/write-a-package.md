@@ -166,7 +166,7 @@ This pipeline translates the original feed into this shape:
 
 OCSF Verbosity
 
-You may notice that this shape is a lot more verbose than the original event. This additional structure is normal when upgrading raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md) operator or manually by [`drop`](https://tenzir.com/docs/reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
+You may notice that this shape is a lot more verbose than the original event. This additional structure is normal when upgrading raw data to a semantically richer representation like OCSF. You can always trim the feed down again later, either automatically with our [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md) operator or manually by [`drop`](https://tenzir.com/docs/reference/operators/drop.md)ping fields. But while the data is in motion, the additional semantics unlock generic analytics when the context of the original source is long gone.
 
 We’re not done yet. Let’s create one final operator that wraps a single fetch into an OCSF event that describes a single collection of IoCs: the [OSINT Inventory Info](https://schema.ocsf.io/1.6.0/classes/osint_inventory_info) event.
 
@@ -268,7 +268,7 @@ every 1h {
   sslbl::fetch
 }
 sslbl::ocsf::to_osint
-context::update "sslbl", key=value
+context_update "sslbl", key=value
 ```
 
 Thanks to our user-defined operators, implementing these two different pipelines doesn’t take much effort.
@@ -293,7 +293,7 @@ description: |
 
 sslbl::fetch
 sslbl::ocsf::to_osint
-context::update "sslbl", key=value
+context_update "sslbl", key=value
 ```
 
 ### Example 2: Enrich with the context
@@ -348,7 +348,7 @@ description: |
 ---
 
 
-context::inspect "sslbl"
+context_inspect "sslbl"
 select malware = value.malware[0].name
 top malware
 chart_pie x=malware, y=count
@@ -365,7 +365,7 @@ every {{ inputs.refresh_interval }} {
   sslbl::fetch
 }
 sslbl::ocsf::to_osint
-context::update "sslbl", key=value
+context_update "sslbl", key=value
 ```
 
 Define the input in `package.yaml` with a default value, then users can override it during installation. See [Configure inputs](../guides/packages/configure-inputs.md) for the full templating guide.

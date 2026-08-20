@@ -17,7 +17,7 @@ ocsf::apply [preserve_variants=bool]
 
 Deprecated
 
-The `ocsf::apply` operator is deprecated. Use [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) instead.
+The `ocsf::apply` operator is deprecated. Use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) instead.
 
 ## Description
 
@@ -107,6 +107,6 @@ to_clickhouse table="network_activity"
 
 ## See Also
 
-* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
-* [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md)
-* [`ocsf::trim`](https://tenzir.com/docs/reference/operators/ocsf/trim.md)
+* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
+* [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
+* [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)

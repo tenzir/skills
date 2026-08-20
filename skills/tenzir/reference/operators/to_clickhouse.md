@@ -167,7 +167,7 @@ Tenzir also supports `Nullable` versions of the above types (or their nested typ
 
 ### Clickhouse JSON
 
-[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can write to a ClickHouse `JSON` column for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time. The one exception is [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md): fields it marks as free-form, such as `unmapped` or `file.xattributes`, are created as `JSON` columns automatically, without listing them in `json`.
+[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can write to a ClickHouse `JSON` column for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time. The one exception is [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md): fields it marks as free-form, such as `unmapped` or `file.xattributes`, are created as `JSON` columns automatically, without listing them in `json`.
 
 A `record` maps to a JSON object. A `string` is also accepted and written verbatim, provided it is a JSON object (it starts with `{`); this lets you serialize events to JSON yourself, for example with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md), and collapse otherwise-heterogeneous events into a single schema for maximum insert throughput (see [Batching](to_clickhouse.md#batching)). A value that is neither a record nor a JSON-object string is written as an empty object (`{}`) with a warning, because ClickHouse `JSON` columns only accept objects at the top level.
 
@@ -255,15 +255,15 @@ This writes to `security.alerts`.
 
 ### Send OCSF data to ClickHouse
 
-When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md). This fills any missing fields with `null`, ensuring a single schema.
+When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md). This fills any missing fields with `null`, ensuring a single schema.
 
 ```tql
 subscribe "ocsf"
-ocsf::cast null_fill=true
+ocsf_cast null_fill=true
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time
 ```
 
-[`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) also internally marks free form fields such as `unmapped` or `file.xattributes`. [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will then automatically use the ClickHouse JSON type for these fields without the need to explicit specify them in the `json=...` argument.
+[`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) also internally marks free form fields such as `unmapped` or `file.xattributes`. [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will then automatically use the ClickHouse JSON type for these fields without the need to explicit specify them in the `json=...` argument.
 
 Alternatively, for a single high-volume landing table, serialize each event to a JSON string and write it into one `JSON` column. All events then share one schema and [batch](to_clickhouse.md#batching) into large inserts:
 
@@ -298,7 +298,7 @@ This creates the following table:
 ## See Also
 
 * [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
-* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)
 * [ClickHouse](../../integrations/clickhouse.md)
 * [nano](../../integrations/nano.md)

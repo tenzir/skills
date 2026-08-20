@@ -26,8 +26,8 @@ every 1h {
   }
 }
 acme::ocsf::map
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 publish "normalized-events"
 ```
 
@@ -48,8 +48,8 @@ acme::ocsf::map event=event
 event.raw_data = move line
 event.raw_data_size = event.raw_data.length_bytes()
 this = event
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 publish "normalized-events"
 ```
 
@@ -76,7 +76,7 @@ every 1h {
     read_json
   }
 }
-context::update "threat-intel", key=indicator
+context_update "threat-intel", key=indicator
 ```
 
 ### `restart-on-error`

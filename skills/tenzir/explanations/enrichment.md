@@ -59,9 +59,9 @@ Every table entry has three optional expiration timeouts that evict the entry. T
 
 The three timeout types are:
 
-1. **Create timeout**: Whenever a new entry is created in the table, e.g., through `context::update`, this timeout starts counting down. This happens exactly once and the timer cannot be reset. Therefore, a create timeout is an *upper bound* on the lifetime of an entry.
-2. **Write timeout**: Whenever an update modifies a table entry by writing a new value for a given key with `context::update`, this timeout resets.
-3. **Read timeout**: Whenever an entry is accessed, which happens during `context::enrich`, this timeout resets.
+1. **Create timeout**: Whenever a new entry is created in the table, e.g., through `context_update`, this timeout starts counting down. This happens exactly once and the timer cannot be reset. Therefore, a create timeout is an *upper bound* on the lifetime of an entry.
+2. **Write timeout**: Whenever an update modifies a table entry by writing a new value for a given key with `context_update`, this timeout resets.
+3. **Read timeout**: Whenever an entry is accessed, which happens during `context_enrich`, this timeout resets.
 
 All three timers start at table entry creation, i.e., creating an entry is the “0th” write and read.
 

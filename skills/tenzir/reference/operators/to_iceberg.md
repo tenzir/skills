@@ -197,7 +197,7 @@ Map events to OCSF upstream, then let the operator create and maintain the table
 
 ```tql
 subscribe "ocsf"
-ocsf::cast
+ocsf_cast
 to_iceberg "security.ocsf",
   catalog="https://catalog.example.com",
   partition_by=[class_uid, day(time)]
@@ -217,7 +217,7 @@ to_iceberg "lake.events",
 
 ```tql
 subscribe "ocsf"
-ocsf::cast
+ocsf_cast
 to_iceberg "security.events",
   catalog="https://glue.eu-central-1.amazonaws.com/iceberg",
   catalog_aws_service="glue",
@@ -265,7 +265,7 @@ to_iceberg "lake.events",
 
 ## See Also
 
-* [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md)
+* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
 * [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)

@@ -15,7 +15,7 @@ This guide shows you how to create user-defined operators (UDOs) for your packag
 
 **User-defined operators (UDOs)** are reusable building blocks that you can use in your pipelines. Place operator files in the `operators` directory of your package.
 
-Tenzir names operators using the convention `<package>::[dirs...]::<basename>`. For example, a file at `operators/ocsf/map.tql` in a package with ID `acme` becomes the operator `acme::ocsf::map`.
+Tenzir names operators using the convention `<package>::[dirs...]::<basename>`. For example, a file at `operators/ocsf/map.tql` in a package with ID `acme` becomes the operator `acme::ocsf::map`. The `::` separator forms a [module](../../explanations/packages.md#modules), which only packages use, so no builtin can shadow your operators.
 
 operators/ocsf/auth.tql
 
@@ -537,12 +537,12 @@ $event.ocsf.answers = move $event.acme.dns_answers
 // ... additional field mappings
 ```
 
-After the package mapper runs, callers can run the shared OCSF helpers. Public mappers should accept a named `event` field argument with `default: this`. Internal mappers receive the current mapping scope explicitly via `event=$event`. The mapper should produce minimal OCSF, and [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) expands it with derived sibling fields before [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf/cast.md) validates the final shape:
+After the package mapper runs, callers can run the shared OCSF helpers. Public mappers should accept a named `event` field argument with `default: this`. Internal mappers receive the current mapping scope explicitly via `event=$event`. The mapper should produce minimal OCSF, and [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) expands it with derived sibling fields before [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) validates the final shape:
 
 ```tql
 acme::ocsf::map
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 ```
 
 These operators compose into an end-to-end pipeline:
@@ -552,8 +552,8 @@ from_file "logs/mixed.json" {
   read_json
 }
 acme::ocsf::map
-ocsf::derive
-ocsf::cast
+ocsf_derive
+ocsf_cast
 publish "ocsf"
 ```
 
@@ -569,7 +569,7 @@ When building operator hierarchies, follow these guidelines:
 * **Name the target schema first**: Put the target namespace before any source schema namespace. For example, use `acme::ocsf::map` for source-to-OCSF mapping and `acme::cim::ocsf::map` for OCSF-to-CIM mapping.
 * **Keep cleanup close to mapping**: Put source-specific normalization and shared OCSF setup in the main mapper before dispatch.
 * **Stay inside `$event`**: Use an initial spread to create source and target namespaces, then only mutate fields below `$event` inside mapping UDOs.
-* **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf::derive`](https://tenzir.com/docs/reference/operators/ocsf/derive.md) to add derived sibling fields.
+* **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) to add derived sibling fields.
 * **Use dispatchers for routing**: Route events based on type or other criteria.
 * **Mirror directory structure**: Operator names reflect their location.
 * **Provide fallbacks**: Handle unrecognized inputs gracefully.

@@ -10,9 +10,9 @@ section: "Docs"
 
 > Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
 
-This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai::prompt`](https://tenzir.com/docs/reference/operators/ai/prompt.md).
+This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md).
 
-The [`ai::prompt`](https://tenzir.com/docs/reference/operators/ai/prompt.md) operator sends one request per input event to an OpenAI-compatible Responses API endpoint. Use it when a deterministic rule or lookup table is too rigid, and keep the prompt payload small and explicit. The examples use compact OCSF-style records as `from {...}` starting points so you can focus on the enrichment pattern.
+The [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md) operator sends one request per input event to an OpenAI-compatible Responses API endpoint. Use it when a deterministic rule or lookup table is too rigid, and keep the prompt payload small and explicit. The examples use compact OCSF-style records as `from {...}` starting points so you can focus on the enrichment pattern.
 
 OCSF events have an `enrichments` field for inline enrichment data associated with an event or finding. The examples write the model result to a temporary field, use [`add`](https://tenzir.com/docs/reference/functions/add.md) to add an OCSF `enrichment` object to `enrichments`, and then remove the temporary field.
 
@@ -42,7 +42,7 @@ from {
   confidence_id: 3,
   confidence: "High",
 }
-ai::prompt model="qwen3.6",
+ai_prompt model="qwen3.8",
            system="Summarize this OCSF detection finding in one sentence for a security analyst.",
            data={
              severity_id: severity_id,
@@ -56,7 +56,7 @@ enrichments = enrichments.add({
   name: "finding_info.uid",
   value: finding_info.uid,
   type: "ai_summary",
-  provider: "Tenzir ai::prompt",
+  provider: "Tenzir ai_prompt",
   short_desc: ai.summary.text,
   src_url: "http://127.0.0.1:11434/v1/responses",
   created_time: now(),
@@ -70,7 +70,7 @@ enrichments = enrichments.add({
 drop ai
 ```
 
-The default endpoint is `http://127.0.0.1:11434/v1`, which matches the standard Ollama OpenAI-compatible API port. The example works with a local model if Ollama is running and the `qwen3.6` model is available.
+The default endpoint is `http://127.0.0.1:11434/v1`, which matches the standard Ollama OpenAI-compatible API port. The example works with a local model if Ollama is running and the `qwen3.8` model is available.
 
 ## Classify DNS activity
 
@@ -113,7 +113,7 @@ from {
   }],
   enrichments: [],
 }
-ai::prompt model="qwen3.6",
+ai_prompt model="qwen3.8",
            system="Classify this OCSF DNS event as benign, suspicious, or malicious. Reply with one label and a short reason.",
            data={
              query: query.hostname,
@@ -130,7 +130,7 @@ enrichments = enrichments.add({
   name: "query.hostname",
   value: query.hostname,
   type: "ai_classification",
-  provider: "Tenzir ai::prompt",
+  provider: "Tenzir ai_prompt",
   short_desc: ai.classification.text,
   src_url: "http://127.0.0.1:11434/v1/responses",
   created_time: now(),
@@ -172,7 +172,7 @@ from {
   confidence_id: 2,
   confidence: "Medium",
 }
-ai::prompt model="gpt-4.1-mini",
+ai_prompt model="gpt-4.1-mini",
            endpoint=secret("openai-endpoint"),
            api_key=secret("openai-api-key"),
            system="Suggest one next investigation step for this OCSF finding.",
@@ -188,7 +188,7 @@ enrichments = enrichments.add({
   name: "finding_info.uid",
   value: finding_info.uid,
   type: "ai_next_step",
-  provider: "Tenzir ai::prompt",
+  provider: "Tenzir ai_prompt",
   short_desc: ai.next_step.text,
   src_url: "https://api.openai.com/v1/responses",
   created_time: now(),
@@ -214,6 +214,5 @@ Model calls can send sensitive event data to another process or service. Prefer 
 
 ## See Also
 
-* [`ai::prompt`](https://tenzir.com/docs/reference/operators/ai/prompt.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)
