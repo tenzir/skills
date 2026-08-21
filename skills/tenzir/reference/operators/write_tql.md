@@ -105,4 +105,4 @@ write_tql strip_null_fields=true
 
 * [`read_tql`](https://tenzir.com/docs/reference/operators/read_tql.md)
 * [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
-* [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

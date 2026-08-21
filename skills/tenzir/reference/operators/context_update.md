@@ -109,5 +109,5 @@ context_update "ctx", key=x, value=x*x
 * [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
 * [Enrich with threat intel](../../guides/enrichment/enrich-with-threat-intel.md)
 * [Enrich with asset inventory](../../guides/enrichment/enrich-with-asset-inventory.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 * [Enrichment](../../explanations/enrichment.md)

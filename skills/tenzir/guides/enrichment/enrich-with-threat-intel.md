@@ -53,7 +53,7 @@ from {
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   query: {
     hostname: "malware.example",
@@ -82,7 +82,7 @@ context_enrich "domain_indicator_enrichments",
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   query: {
     hostname: "malware.example",
@@ -146,7 +146,7 @@ from {
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   query: {
     hostname: "malware.example",
@@ -170,7 +170,7 @@ context_enrich "domain_reputation",
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   query: {
     hostname: "malware.example",
@@ -235,7 +235,7 @@ from {
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
     profiles: ["osint"],
   },
   query: {
@@ -260,7 +260,7 @@ context_enrich "domain_osint",
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
     profiles: ["osint"],
   },
   query: {
@@ -328,7 +328,7 @@ from {
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
     profiles: ["osint"],
   },
   query: {
@@ -353,7 +353,7 @@ context_enrich "domain_malware",
   type_uid: 400302,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
     profiles: ["osint"],
   },
   query: {

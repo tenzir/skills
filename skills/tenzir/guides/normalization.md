@@ -7,141 +7,35 @@ section: "Docs"
 
 # Normalize data
 
-> This guide provides an overview of data normalization in TQL. Normalization transforms raw, inconsistent data into a clean, standardized format that’s ready for analysis, storage, and sharing.
+> These guides take you from source-specific events to a schema your downstream tools understand. Start with cleanup, then pick the guide for your target schema. We map sources to OCSF first and translate from there, and our explanation of normalization makes the case for why.
 
-This guide provides an overview of data normalization in TQL. Normalization transforms raw, inconsistent data into a clean, standardized format that’s ready for analysis, storage, and sharing.
+These guides take you from source-specific events to a schema your downstream tools understand. Start with cleanup, then pick the guide for your target schema. We map sources to OCSF first and translate from there, and our explanation of [normalization](../explanations/normalization.md) makes the case for why.
 
-## What is normalization?
+## Fix the data first
 
-Normalization involves several key transformations:
+[Clean up values](normalization/clean-up-values.md) replaces null placeholders such as `"None"`, `"N/A"`, and `"-"`, converts strings to timestamps, IP addresses, and numbers, and supplies defaults for missing fields. Mapping bad values into a good schema only moves the problem.
 
-1. **Clean up values** - Replace nulls, normalize sentinels, fix types
-2. **Map to schemas** - Translate fields to a standard schema like ASIM, CIM, ECS, OCSF, or UDM
-3. **Package mappings** - Create reusable, tested mapping operators
+## Choose a target schema
 
-Each step builds on the previous. Start with clean data, then map to your target schema, and finally package your mappings for production use.
+Pick the schema your analytics platform reads. The guides are listed alphabetically, and each one covers the decisions its schema adds.
 
-## Why normalize?
+[Map to ASIM](normalization/map-to-asim.md) maps to Microsoft Sentinel ASIM: choose the event or entity schema, populate schema and product metadata, map the role-prefixed field families, and keep the residue in `AdditionalFields`.
 
-Raw data from different sources varies in:
+[Map to CIM](normalization/map-to-cim.md) maps to Splunk CIM: choose the data model and dataset, apply tags and constraints so acceleration works, and send the result to HEC with the right metadata.
 
-* **Field names**: `src_ip` vs `source_address` vs `client.ip`
-* **Value formats**: `"true"` vs `true` vs `1` vs `"yes"`
-* **Missing values**: `null` vs `""` vs `"-"` vs `"N/A"`
-* **Timestamps**: Unix epochs vs ISO strings vs custom formats
+[Map to ECS](normalization/map-to-ecs.md) maps to Elastic Common Schema: set `@timestamp` and `ecs.version`, choose the `event.*` categorization, map the source, destination, network, and observer fieldsets, and keep source-specific details in a custom namespace.
 
-Normalization solves these inconsistencies, enabling:
+[Map to OCSF](normalization/map-to-ocsf.md) maps to OCSF, our default target: identify the event class, map by attribute group, handle unmapped fields, and validate with `ocsf_cast`.
 
-* Unified queries across data sources
-* Reliable enrichment and correlation
-* Consistent analytics and dashboards
-* Interoperability with external tools
+[Map to UDM](normalization/map-to-udm.md) maps to Google SecOps UDM: choose the event type, populate metadata and participant nouns, convert values to UDM enums, and keep the residue in `additional`.
 
-## The normalization pipeline
+## Ship the mapping
 
-A typical normalization pipeline follows this structure:
-
-```tql
-// 1. Collect raw data
-from_kafka "raw-events"
-
-
-// 2. Parse into a structured event
-event = message.parse_json()
-
-
-// 3. Clean up values
-replace event, what="N/A", with=null
-replace event, what="-", with=null
-
-
-// 4. Map to target schema
-my_source::ocsf::map event=event
-
-
-// 5. Preserve the raw payload after mapping
-event.raw_data = move message
-event.raw_data_size = event.raw_data.length_bytes()
-this = event
-
-
-// 6. Output normalized events
-publish "normalized-events"
-```
-
-## Normalization guides
-
-Start with cleanup, then choose the schema guide for your target platform. Schema guides are listed alphabetically by acronym.
-
-### Clean up values
-
-[Clean up values](normalization/clean-up-values.md) - Start by fixing data quality issues:
-
-* Replace null placeholders (`"None"`, `"N/A"`, `"-"`)
-* Normalize sentinel values
-* Fix types (strings to timestamps, IPs, numbers)
-* Provide default values for missing fields
-
-### Map to ASIM
-
-[Map to ASIM](normalization/map-to-asim.md) - Learn how to map events to Microsoft Sentinel ASIM records:
-
-* Choose the correct ASIM event or entity schema
-* Populate schema, product, and event metadata
-* Map role-prefixed source, destination, actor, target, and device fields
-* Preserve unmapped fields in `AdditionalFields`
-
-### Map to CIM
-
-[Map to CIM](normalization/map-to-cim.md) - Learn how to map events to Splunk CIM fields:
-
-* Choose the correct CIM data model and dataset
-* Apply dataset tags and constraints
-* Populate normalized fields for data model acceleration
-* Send mapped events to Splunk HEC with metadata
-
-### Map to ECS
-
-[Map to ECS](normalization/map-to-ecs.md) - Learn how to map events to Elastic Common Schema fields:
-
-* Populate `@timestamp` and `ecs.version`
-* Choose `event.kind`, `event.category`, and `event.type`
-* Map source, destination, network, and observer fieldsets
-* Preserve source-specific details in a custom namespace
-
-### Map to OCSF
-
-[Map to OCSF](normalization/map-to-ocsf.md) - Learn the comprehensive approach to OCSF mapping:
-
-* Identify the correct event class
-* Map fields by attribute group
-* Handle unmapped fields
-* Validate with `ocsf_cast`
-
-### Map to UDM
-
-[Map to UDM](normalization/map-to-udm.md) - Learn how to map events to Google SecOps UDM records:
-
-* Choose the correct UDM event type
-* Populate metadata and participant nouns
-* Convert source values to UDM enums
-* Preserve unmapped fields in `additional`
-
-## When to normalize
-
-Normalize data at the ingestion point in your pipeline:
-
-```plaintext
-Collection → Parsing → Normalization → Storage/Forwarding
-              ↑
-        You are here
-```
-
-Normalizing early ensures all downstream consumers work with consistent data. Avoid normalizing the same data multiple times by storing normalized events.
+A mapping that lives in a package gets a test, a version, and one place to fix a field. [Onboard a data source](../tutorials/onboard-a-data-source.md) builds one from a single log line and ships it as an installable package.
 
 ## See also
 
 * [Parse string fields](parsing/parse-string-fields.md)
 * [Create a package](packages/create-a-package.md)
 * [Write tests](testing/write-tests.md)
-* [Map data to OCSF](../tutorials/map-data-to-ocsf.md)
+* [Normalization](../explanations/normalization.md)

@@ -11,11 +11,13 @@ section: "Docs"
 
 This guide shows you how to create user-defined operators (UDOs) for your package. You’ll learn how to define operators with positional and named arguments, and how to test them with the Test Framework.
 
+For a worked parser, follow the tutorial on [parsing logs into events](../../tutorials/onboard-a-data-source.md#parse-it-in-the-pipeline). The tutorial on [mapping events to OCSF](../../tutorials/onboard-a-data-source.md#map-it-to-ocsf) shows how to compose a public mapper with internal mapping UDOs. The tutorial on [packaging a use case](../../tutorials/onboard-a-data-source.md) combines both behind an end-to-end normalizer.
+
 ## Create a user-defined operator
 
 **User-defined operators (UDOs)** are reusable building blocks that you can use in your pipelines. Place operator files in the `operators` directory of your package.
 
-Tenzir names operators using the convention `<package>::[dirs...]::<basename>`. For example, a file at `operators/ocsf/map.tql` in a package with ID `acme` becomes the operator `acme::ocsf::map`. The `::` separator forms a [module](../../explanations/packages.md#modules), which only packages use, so no builtin can shadow your operators.
+Tenzir names operators using the convention `<package>::[dirs...]::<basename>`. For example, a file at `operators/ocsf/map.tql` in a package with ID `vendor` becomes the operator `vendor::ocsf::map`. The `::` separator forms a [module](../../explanations/packages.md#modules), which only packages use, so no builtin can shadow your operators.
 
 operators/ocsf/auth.tql
 
@@ -35,9 +37,17 @@ After installing the package, use the operator in any pipeline:
 
 ```tql
 from_file "auth.json"
-acme::ocsf::auth
+vendor::ocsf::auth
 publish "ocsf-events"
 ```
+
+### Choose a namespace
+
+Name the package after the vendor and give each of the vendor’s products a directory below it, so operator names read `vendor::product::<operator>`. Our `amazon` package does this: `amazon::vpc_flow::parse_v2` sits next to `amazon::route53::ocsf::map`, and adding another AWS service means adding a directory rather than renaming anything.
+
+Drop the product level when the vendor ships one thing, or when vendor and product are the same name. Our `zeek` package is `zeek::ocsf::map`, not `zeek::zeek::ocsf::map`.
+
+Examples in these guides use the single-level form, as in `vendor::ocsf::map`, because a second placeholder segment adds length without teaching anything. Read them as the one-product case, and insert your product level where a vendor package needs it.
 
 ## Add parameters to operators
 
@@ -116,7 +126,7 @@ Call this operator with positional arguments:
 
 ```tql
 from {x: 1}
-acme::tag name, "Alice"
+vendor::tag name, "Alice"
 ```
 
 ```tql
@@ -151,7 +161,7 @@ Call this operator with both positional and named arguments:
 
 ```tql
 from {x: 1}
-acme::tag name, "Alice", prefix="User: "
+vendor::tag name, "Alice", prefix="User: "
 ```
 
 ```tql
@@ -181,7 +191,7 @@ Calling the operator without arguments uses the default value:
 
 ```tql
 from {}
-acme::greet
+vendor::greet
 ```
 
 ```tql
@@ -192,7 +202,7 @@ Passing an explicit argument overrides the default:
 
 ```tql
 from {}
-acme::greet "Alice"
+vendor::greet "Alice"
 ```
 
 ```tql
@@ -221,7 +231,7 @@ Using the operator:
 
 ```tql
 from {count: 5, score: 10}
-acme::double_value count
+vendor::double_value count
 ```
 
 ```tql
@@ -254,7 +264,7 @@ Using the operator:
 
 ```tql
 from {event: {}}
-acme::tag_nested event, "dynamic-status", "ok"
+vendor::tag_nested event, "dynamic-status", "ok"
 ```
 
 ```tql
@@ -290,7 +300,7 @@ Calling the operator without arguments wraps the whole event:
 
 ```tql
 from {name: "Alice"}
-acme::wrap
+vendor::wrap
 ```
 
 ```tql
@@ -305,7 +315,7 @@ Passing an explicit selector wraps just that field:
 
 ```tql
 from {name: "Alice"}
-acme::wrap field=name
+vendor::wrap field=name
 ```
 
 ```tql
@@ -346,7 +356,7 @@ When the caller omits `target`, the operator skips the redaction:
 
 ```tql
 from {message: "hello", secret: "s3cret"}
-acme::redact message
+vendor::redact message
 ```
 
 ```tql
@@ -357,7 +367,7 @@ When the caller provides `target`, the operator redacts that field:
 
 ```tql
 from {message: "hello", secret: "s3cret"}
-acme::redact message, target=secret
+vendor::redact message, target=secret
 ```
 
 ```tql
@@ -412,27 +422,35 @@ args:
 utils::scale $field, factor=$multiplier
 ```
 
-## Modularize packages with operator hierarchies
+## Build layered normalization APIs
 
-Complex packages benefit from breaking functionality into a hierarchy of operators that call each other. This pattern keeps individual operators focused, enables independent testing, and creates a clear structure that mirrors your directory layout.
+Complex packages benefit from one call that covers the common case and composable operators for users who need control between stages. We use *parse* for string to record, *map* for record to record, and *normalize* for the product’s end-to-end path over a raw payload. A normalizer parses, maps, and adds provenance, while callers that already hold a structured event call the mapper directly. For a product that targets OCSF, expose these layers:
 
-Consider a package that normalizes various event types to OCSF. Keep source-specific cleanup, shared OCSF setup, and dispatch in one main mapper, then delegate only event-specific mapping details to leaf operators:
+| Operator                  | Purpose                                                             |
+| ------------------------- | ------------------------------------------------------------------- |
+| `vendor::parse_*`         | Turn one known raw format into a structured source event.           |
+| `vendor::parse`           | Classify the raw format and delegate to the matching parser.        |
+| `vendor::ocsf::map`       | Map one structured source event to minimal OCSF.                    |
+| `vendor::ocsf::normalize` | Apply the product’s complete standard procedure to one raw payload. |
+| `vendor::ocsf::events::*` | Map specific event types such as DNS, HTTP, or authentication.      |
 
-| Operator                | Purpose                                               |
-| ----------------------- | ----------------------------------------------------- |
-| `acme::ocsf::map`       | Main mapper: cleanup, shared OCSF setup, and dispatch |
-| `acme::ocsf::base`      | Fallback: maps to OCSF Base Event                     |
-| `acme::ocsf::events::*` | Event-specific mapping such as dns, http, or auth     |
+Skip the parse layer, and with it the normalizer, when a built-in reader already produces events. A package for a product that Tenzir reads natively, such as Zeek with [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md), starts at the mapper.
 
 This hierarchy maps directly to your directory structure:
 
 * operators/
 
+  * parse.tql
+
+  * parse\_csv.tql
+
+  * parse\_json.tql
+
   * ocsf/
 
-    * base.tql
-
     * map.tql
+
+    * normalize.tql
 
     * events/
 
@@ -440,139 +458,221 @@ This hierarchy maps directly to your directory structure:
       * http.tql
       * auth.tql
 
-The main mapper keeps source residue in a product-specific `acme` namespace, performs source-specific cleanup, adds shared OCSF fields, routes events to specialized mappers based on a stable event discriminator, and returns the mapped OCSF event:
+### Map events
+
+Give the public mapper an optional positional event and a named output. Both default to `this`, so `vendor::ocsf::map` maps the current event in place. Set the product identity first, then dispatch, and let the fallback arm produce an OCSF Base Event. That arm catches both an unrecognized event type and a `null` event, which is what a parser yields when it recognized no format:
 
 operators/ocsf/map.tql
 
 ```tql
 ---
 args:
-  named:
+  positional:
     - name: event
-      description: The field that holds the event to map.
+      description: The structured event to map.
+      type: field
+      default: this
+  named:
+    - name: into
+      description: The field that receives the OCSF event.
       type: field
       default: this
 ---
 
 
-$event = {...$event, acme: $event, ocsf: {}}
-
-
-$event.ocsf.metadata = {
-  product: {
-    name: "ACME Logs",
-    vendor_name: "ACME",
-  },
-  version: "1.8.0",
+$into = {
+  event: $event,
+  ocsf: {},
 }
-$event.ocsf.severity_id = 1
 
 
-match $event.acme.event_type {
+// Every event carries the product identity, whatever its class.
+$into.ocsf.metadata = {
+  product: {
+    name: "Product",
+    vendor_name: "Vendor",
+  },
+  version: "1.9.0",
+}
+$into.ocsf.severity_id = 1
+
+
+match $into.event.event_type? {
   "dns" => {
-    acme::ocsf::events::dns event=$event
+    vendor::ocsf::events::dns $into
   }
-  "http" => {
-    acme::ocsf::events::http event=$event
+  "http" | "https" => {
+    vendor::ocsf::events::http $into
   }
   "auth" => {
-    acme::ocsf::events::auth event=$event
+    vendor::ocsf::events::auth $into
   }
   _ => {
-    acme::ocsf::base event=$event
+    // Unsupported event type, or a payload that no parser understood: all we
+    // can say is that an event happened.
+    @name = "ocsf.base_event"
+    $into.ocsf.category_uid = 0
+    $into.ocsf.class_uid = 0
+    $into.ocsf.activity_id = 0
+    $into.ocsf.type_uid = 0
   }
 }
 
 
-$event = {...$event.ocsf, unmapped: $event.acme}
+$into = {...$into.ocsf, unmapped: $into.event}
 ```
 
-The fallback operator ensures that unrecognized events still conform to OCSF by mapping them to the Base Event class:
+Use `|` to give one arm several patterns. The event-specific operators `move` fields out of `$into.event` as they map them, so the closing statement returns whatever they left behind. An unsupported event type therefore keeps its complete source record in `unmapped`, and a `null` event leaves `unmapped` null.
 
-operators/ocsf/base.tql
+TQL evaluates `$event` before assigning `$into`. Exact aliasing such as `vendor::ocsf::map this, into=this` is therefore well-defined. After initializing the output, access the source only through `$into.event`.
 
-```tql
----
-args:
-  named:
-    - name: event
-      description: The field that holds the event to map.
-      type: field
----
+Do not set the Base Event classification before the dispatcher. It reads as if the anomaly were the normal case, it costs work on every event that a recognized type immediately overwrites, and a dispatcher that falls back to `@name` as its discriminator would read the name the operator just wrote.
 
+A `match` puts its wildcard arm last, so one fallback arm covers both an unrecognized event type and a `null` event. A mapper without a dispatcher instead guards the `null` case first, as `amazon::vpc_flow::ocsf::map` does, which keeps the remaining statements free of the exceptional case.
 
-@name = "ocsf.base_event"
-$event.ocsf.category_uid = 0
-$event.ocsf.class_uid = 0
-$event.ocsf.activity_id = 0
-$event.ocsf.type_uid = 0
-$event.ocsf.severity_id = 0
-$event.ocsf.time = now()
-```
+The Base Event needs no `time`, and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) accepts an event without one, and a payload nobody parsed has no timestamp to report, so inventing one with [`now`](https://tenzir.com/docs/reference/functions/now.md) would cost a clock call per event and make baselines non-deterministic.
 
-Each leaf operator handles one specific event type:
+Internal mapping operators accept their working scope as a required positional argument. Each leaf operator handles one specific event type:
 
 operators/ocsf/events/dns.tql
 
 ```tql
 ---
 args:
-  named:
-    - name: event
-      description: The field that holds the event to map.
+  positional:
+    - name: scope
+      description: The active mapping scope.
       type: field
 ---
 
 
 @name = "ocsf.dns_activity"
-$event.ocsf.category_uid = 4
-$event.ocsf.class_uid = 4003
-$event.ocsf.activity_id = 1
-$event.ocsf.type_uid = $event.ocsf.class_uid * 100 + $event.ocsf.activity_id
+$scope.ocsf.category_uid = 4
+$scope.ocsf.class_uid = 4003
+$scope.ocsf.activity_id = 1
+$scope.ocsf.type_uid = $scope.ocsf.class_uid * 100 + $scope.ocsf.activity_id
 
 
-$event.ocsf.query.hostname = move $event.acme.query_name
-$event.ocsf.query.type = move $event.acme.query_type
-$event.ocsf.answers = move $event.acme.dns_answers
+$scope.ocsf.query.hostname = move $scope.event.query_name
+$scope.ocsf.query.type = move $scope.event.query_type
+$scope.ocsf.answers = move $scope.event.dns_answers
 // ... additional field mappings
 ```
 
-After the package mapper runs, callers can run the shared OCSF helpers. Public mappers should accept a named `event` field argument with `default: this`. Internal mappers receive the current mapping scope explicitly via `event=$event`. The mapper should produce minimal OCSF, and [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) expands it with derived sibling fields before [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) validates the final shape:
+### Classify raw formats in one parser
+
+Give each raw format its own parser, then add `vendor::parse` to classify the format and delegate. Classifying in one place keeps the classifier next to the parsers it selects and keeps every caller, including the normalizer, free of format logic:
+
+operators/parse.tql
 
 ```tql
-acme::ocsf::map
-ocsf_derive
-ocsf_cast
-```
+---
+args:
+  positional:
+    - name: log
+      description: The field holding the raw log line.
+      type: field
+  named:
+    - name: into
+      description: The field that receives the parsed event.
+      type: field
+      default: this
+---
 
-These operators compose into an end-to-end pipeline:
 
-```tql
-from_file "logs/mixed.json" {
-  read_json
+if $log.starts_with("{") {
+  vendor::parse_json $log, into=$into
+} else if $log.match_regex(vendor::$csv_classifier) {
+  vendor::parse_csv $log, into=$into
+} else {
+  $into = null
 }
-acme::ocsf::map
-ocsf_derive
-ocsf_cast
-publish "ocsf"
 ```
 
-The parser stays with the source operator, while `acme::ocsf::map` owns cleanup, shared OCSF setup, and dispatch.
+Classify exact known formats rather than guessing from a version token that custom formats may share, and add branches as the package learns more formats. A `null` output says “no supported format matched”, which is all a caller needs to know.
 
-This explicit event scope is a package convention while TQL has user-defined operators but not user-defined functions. Passing `event` gives each mapper one mutable record scope, keeps internal helper operators from touching unrelated fields, and lets callers map a parsed record that lives in a field.
+### Normalize a raw payload end to end
+
+Add `vendor::ocsf::normalize` as the stable entry point for users who want the product’s standard OCSF result from a raw payload. It takes the payload positionally and writes to `into=this` by default:
+
+operators/ocsf/normalize.tql
+
+```tql
+---
+args:
+  positional:
+    - name: input
+      description: The raw payload to normalize.
+      type: field
+  named:
+    - name: into
+      description: The field that receives the OCSF event.
+      type: field
+      default: this
+---
+
+
+assert type_of($input).kind == "string", message="expected a raw payload"
+
+
+// Parsing yields null for an unsupported format, which the mapper turns into an
+// OCSF Base Event.
+vendor::parse $input, into=$into.event
+vendor::ocsf::map $into.event, into=$into.event
+
+
+$into = {
+  ...$into.event,
+  raw_data: $input,
+  raw_data_size: $input.length_bytes(),
+}
+```
+
+The normalizer composes the layers below it and owns exactly one decision: that the payload becomes `raw_data`. Because a raw payload is a string and the result is a record, the input can never alias the output, so no snapshot is needed.
+
+Restricting the normalizer to raw payloads keeps the layers honest. A pipeline that already holds a structured event, whether from a JSON reader or from a package parser it called itself, continues with the mapper:
+
+```tql
+vendor::parse_json message, into=event
+event.tenant = "production"
+vendor::ocsf::map event, into=ocsf
+this = {
+  ...ocsf,
+  raw_data: message,
+  raw_data_size: message.length_bytes(),
+}
+```
+
+After normalization or mapping, callers can run the shared OCSF helpers. The package produces minimal OCSF, [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) adds derived sibling fields, and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) validates the final shape:
+
+```tql
+vendor::ocsf::normalize line
+ocsf_derive
+ocsf_cast
+```
+
+If a caller writes the result into an envelope, flatten it before running the current stream-oriented OCSF helpers:
+
+```tql
+vendor::ocsf::normalize message, into=ocsf
+this = move ocsf
+ocsf_derive
+ocsf_cast
+```
 
 ### Design principles
 
 When building operator hierarchies, follow these guidelines:
 
-* **Expose one mapper contract**: Accept parsed source events through a main package mapper, for example `acme::ocsf::map`, with `event=this` as the default scope.
-* **Name the target schema first**: Put the target namespace before any source schema namespace. For example, use `acme::ocsf::map` for source-to-OCSF mapping and `acme::cim::ocsf::map` for OCSF-to-CIM mapping.
-* **Keep cleanup close to mapping**: Put source-specific normalization and shared OCSF setup in the main mapper before dispatch.
-* **Stay inside `$event`**: Use an initial spread to create source and target namespaces, then only mutate fields below `$event` inside mapping UDOs.
-* **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) to add derived sibling fields.
-* **Use dispatchers for routing**: Route events based on type or other criteria.
-* **Mirror directory structure**: Operator names reflect their location.
-* **Provide fallbacks**: Handle unrecognized inputs gracefully.
+* **Expose one standard call**: Provide one `target::normalize` operator that applies the complete transformation for one raw payload.
+* **Keep the layers reachable**: Expose parsers and a mapper independently for users who need control between stages.
+* **Use positional inputs and named outputs**: Make data flow read from left to right, with `into=this` as the output default.
+* **Snapshot before writing**: Initialize `$into` from every input before changing the output, then use only fields below `$into`.
+* **Name the target schema first**: Use `vendor::ocsf::map` for source-to-OCSF mapping and `vendor::cim::ocsf::map` for OCSF-to-CIM mapping.
+* **Keep cleanup close to mapping**: Put source-specific cleanup and shared OCSF setup in the main mapper before dispatch.
+* **Produce minimal OCSF**: Set identifiers and source-derived attributes in the mapper, then use [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) for derived sibling fields.
+* **Use dispatchers for routing**: Route raw formats in `parse` and event types in the mapper, so the normalizer only composes the layers.
+* **Fall back to the Base Event**: Let the dispatcher’s final arm produce a Base Event, so unsupported formats and unrecognized event types still yield a valid OCSF event that carries its payload.
 
 ## See also
 
@@ -580,4 +680,4 @@ When building operator hierarchies, follow these guidelines:
 * [Add pipelines](add-pipelines.md)
 * [Add constants](add-constants.md)
 * [Test packages](test-packages.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

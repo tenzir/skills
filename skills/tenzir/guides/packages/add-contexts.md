@@ -11,6 +11,8 @@ section: "Docs"
 
 This guide shows you how to add enrichment contexts to your package. You’ll learn how to define contexts in the manifest, populate them with data, and test context interactions.
 
+For a complete collection, update, enrichment, refresh, and testing workflow, follow the tutorial on [adding contexts for enrichment](../../tutorials/add-contexts-for-enrichment.md).
+
 ## Define contexts in the manifest
 
 Contexts provide stateful enrichment capabilities. Define them in the `contexts` section of your `package.yaml`. The node creates these contexts when you install the package.
@@ -173,4 +175,4 @@ Each test can depend on state left by previous tests in the suite.
 * [Test packages](test-packages.md)
 * [Use lookup tables](../enrichment/use-lookup-tables.md)
 * [Enrichment](../../explanations/enrichment.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

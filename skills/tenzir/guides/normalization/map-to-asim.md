@@ -33,109 +33,12 @@ For a `NetworkSession` event, start with these core fields:
 * `EventResult`: The normalized result, such as `Success` or `Failure`.
 * `Src*` and `Dst*`: The source and destination participants.
 
-## Write a small mapping
+## Apply ASIM rules
 
-The following example shows a package mapper that maps a parsed firewall connection event to an ASIM `NetworkSession` record. It keeps all mapping work inside the `event` argument, puts the source data under `fw`, sets the ASIM schema constants, normalizes the device action and result, maps source and destination fields, and preserves unmapped residue in `AdditionalFields`.
+Mappings live in packages as operators. Our tutorial on [onboarding a data source](../../tutorials/onboard-a-data-source.md) builds one from a log line to an installable package, and the same workflow applies here because only the target fields differ.
 
-```tql
----
-args:
-  named:
-    - name: event
-      description: The field that holds the event to map.
-      type: field
-      default: this
----
+These rules are specific to ASIM:
 
-
-$event = {...$event, fw: $event, asim: {}}
-
-
-let $actions = {
-  allow: "Allow",
-  allowed: "Allow",
-  block: "Deny",
-  blocked: "Deny",
-  deny: "Deny",
-  denied: "Deny",
-  drop: "Drop",
-  dropped: "Drop",
-}
-
-
-let $results = {
-  allow: "Success",
-  allowed: "Success",
-  block: "Failure",
-  blocked: "Failure",
-  deny: "Failure",
-  denied: "Failure",
-  drop: "Failure",
-  dropped: "Failure",
-}
-
-
-$event.asim.EventSchema = "NetworkSession"
-$event.asim.EventSchemaVersion = "0.2.7"
-$event.asim.EventType = "NetworkSession"
-$event.asim.EventCount = 1
-$event.asim.EventStartTime = $event.fw.ts
-$event.asim.EventEndTime = move $event.fw.ts
-$event.asim.EventVendor = "Example Networks"
-$event.asim.EventProduct = "Example Firewall"
-$event.asim.Dvc = $event.fw.device
-$event.asim.DvcHostname = move $event.fw.device
-$event.asim.DvcAction = $actions[$event.fw.action.to_lower()]? else $event.fw.action
-$event.asim.EventResult = $results[$event.fw.action.to_lower()]? else "NA"
-$event.asim.DvcOriginalAction = move $event.fw.action
-$event.asim.SrcIpAddr = move $event.fw.src_ip
-$event.asim.SrcPortNumber = move $event.fw.src_port
-$event.asim.DstIpAddr = move $event.fw.dst_ip
-$event.asim.DstPortNumber = move $event.fw.dst_port
-$event.asim.NetworkProtocol = (move $event.fw.proto).to_upper()
-$event.asim.SrcBytes = move $event.fw.bytes_out
-$event.asim.DstBytes = move $event.fw.bytes_in
-$event.asim.NetworkBytes = $event.asim.SrcBytes + $event.asim.DstBytes
-
-
-$event = {...$event.asim, AdditionalFields: $event.fw}
-```
-
-A call with a firewall event such as `{ts: 2024-01-15T10:30:45Z, action: "allowed", src_ip: "10.0.0.5", src_port: 51544, dst_ip: "203.0.113.10", dst_port: 443, proto: "tcp", bytes_out: 1280, bytes_in: 8192, device: "edge-fw-01"}` produces an ASIM event like this:
-
-```tql
-{
-  EventSchema: "NetworkSession",
-  EventSchemaVersion: "0.2.7",
-  EventType: "NetworkSession",
-  EventCount: 1,
-  EventStartTime: 2024-01-15T10:30:45Z,
-  EventEndTime: 2024-01-15T10:30:45Z,
-  EventVendor: "Example Networks",
-  EventProduct: "Example Firewall",
-  Dvc: "edge-fw-01",
-  DvcHostname: "edge-fw-01",
-  DvcAction: "Allow",
-  EventResult: "Success",
-  DvcOriginalAction: "allowed",
-  SrcIpAddr: "10.0.0.5",
-  SrcPortNumber: 51544,
-  DstIpAddr: "203.0.113.10",
-  DstPortNumber: 443,
-  NetworkProtocol: "TCP",
-  SrcBytes: 1280,
-  DstBytes: 8192,
-  NetworkBytes: 9472,
-  AdditionalFields: {},
-}
-```
-
-## Apply the mapping pattern
-
-Use the same structure for larger mappings:
-
-* **Use the event scope**: Package mappers accept a named `event` field argument with `default: this`, create source and target namespaces with an initial spread, and mutate only fields below `$event`.
-* **Keep a source namespace**: Keep the parsed event under a short namespace such as `fw`, `dns`, `edr`, or `event` before you create ASIM fields.
 * **Set the schema fields early**: Let `EventSchema` and `EventSchemaVersion` drive which field records, constants, and conditional requirements you apply.
 * **Map participants with role prefixes**: Use prefixes such as `Src`, `Dst`, `Actor`, `Target`, `Acting`, and `Dvc` to distinguish entities in the event.
 * **Populate by field class**: Start with `Mandatory` fields, add useful `Recommended` fields, and populate `Conditional` fields when their documented condition applies.
@@ -155,3 +58,4 @@ Use the same structure for larger mappings:
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
 * [Sentinel & Log Analytics](../../integrations/microsoft/sentinel-log-analytics.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

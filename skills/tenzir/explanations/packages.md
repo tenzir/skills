@@ -24,9 +24,9 @@ Packages solve common distribution challenges:
 
 ## Modules
 
-A **module** is a namespace for the operators and functions that a package brings along. Modules use `::` as separator, and the package identifier is always the leading segment, as in `acme::ocsf::map`.
+A **module** is a namespace for the operators and functions that a package brings along. Modules use `::` as separator, and the package identifier is always the leading segment, as in `vendor::ocsf::map`.
 
-Modules exist so that packages can pick natural names without colliding with each other. Two packages may both provide a `map` operator, because their fully qualified names differ. Nested namespaces add further segments, which lets a package group related entities, such as `acme::ocsf::events::dns` next to `acme::ocsf::events::http`.
+Modules exist so that packages can pick natural names without colliding with each other. Two packages may both provide a `map` operator, because their fully qualified names differ. Nested namespaces add further segments, which lets a package group related entities, such as `vendor::ocsf::events::dns` next to `vendor::ocsf::events::http`.
 
 Modules are exclusive to packages. Builtin operators and functions use flat names, such as [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md), and never occupy a module. That separation makes the origin of an entity visible in its name: a name with `::` comes from a package, and a name without it is builtin. It also means no builtin can shadow a package’s entities, so a package is free to use a module name like `context` or `ocsf`.
 
@@ -68,11 +68,11 @@ The `package.yaml` manifest is the only required file. It identifies the directo
 
 ### Operators
 
-**User-defined operators (UDOs)** in the `operators` directory provide reusable building blocks. Tenzir names them using the convention `<package>::[dirs...]::<basename>`.
+**User-defined operators (UDOs)** in the `operators` directory provide reusable building blocks. Tenzir names them using the convention `<package>::[dirs...]::<basename>`, which by convention resolves to `vendor::product::<operator>` for a vendor with several products and to `vendor::<operator>` for a vendor with one, as our guide on [choosing a namespace](../guides/packages/add-operators.md#choose-a-namespace) describes.
 
 Operators can accept [positional and named arguments](../guides/packages/add-operators.md#add-parameters-to-operators) for flexible, parameterized transformations.
 
-Packages that normalize to OCSF should expose mapping as operators too, usually with a dispatcher such as `vendor::product::ocsf::map` and event-specific operators under `operators/.../ocsf/events/`.
+Packages that onboard a data source name their operators after the step they perform, which our guide on [building layered normalization APIs](../guides/packages/add-operators.md#build-layered-normalization-apis) describes in full.
 
 ### Pipelines
 
@@ -141,4 +141,4 @@ Write tests for operators and contexts early. The Test Framework makes testing s
 * [Add contexts](../guides/packages/add-contexts.md)
 * [Add constants](../guides/packages/add-constants.md)
 * [Maintain a changelog](../guides/packages/maintain-a-changelog.md)
-* [Write a package](../tutorials/write-a-package.md)
+* [Onboard a data source](../tutorials/onboard-a-data-source.md)

@@ -1021,14 +1021,6 @@ version
 
 ## OCSF
 
-### [ocsf::apply](operators/ocsf/apply.md)
-
-Casts incoming events to their OCSF type.
-
-```tql
-ocsf::apply
-```
-
 ### [ocsf\_cast](operators/ocsf_cast.md)
 
 Casts incoming events to their OCSF type.

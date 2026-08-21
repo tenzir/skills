@@ -11,6 +11,8 @@ section: "Docs"
 
 This guide provides an overview of data collection in TQL. You’ll learn about the different approaches for ingesting data from various sources.
 
+Collection is the first stage of the data lifecycle, and the only one that talks to a system outside your control. [Learn the data lifecycle](../tutorials/learn-the-data-lifecycle.md) shows what comes after it.
+
 TQL provides two types of input operators:
 
 * **`from_*` operators** like [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) and

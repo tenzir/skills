@@ -166,7 +166,6 @@
 
 ## OCSF
 
-- [ocsf::apply](operators/ocsf/apply.md): Casts incoming events to their OCSF type.
 - [ocsf_cast](operators/ocsf_cast.md): Casts incoming events to their OCSF type.
 - [ocsf_derive](operators/ocsf_derive.md): Automatically assigns enum strings from their integer counterparts and vice versa.
 - [ocsf_trim](operators/ocsf_trim.md): Drops fields from OCSF events to reduce their size.

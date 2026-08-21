@@ -56,7 +56,7 @@ from {
   metadata: {
     product: {name: "Windows Security", vendor_name: "Microsoft"},
     uid: "process-activity-52501",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 1007,
   category_uid: 1,
@@ -70,7 +70,7 @@ from {
   metadata: {
     product: {name: "Windows Security", vendor_name: "Microsoft"},
     uid: "process-activity-52502",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 1007,
   category_uid: 1,
@@ -99,7 +99,7 @@ type_uid = class_uid * 100 + activity_id
       vendor_name: "Microsoft",
     },
     uid: "process-activity-52501",
-    version: "1.8.0",
+    version: "1.9.0",
     profiles: [
       "security_control",
     ],
@@ -201,7 +201,7 @@ from {
   metadata: {
     product: {name: "Windows Security", vendor_name: "Microsoft"},
     uid: "process-activity-52517",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 1007,
   activity_id: 1,
@@ -225,7 +225,7 @@ this = {
   metadata: {
     product: {name: "Tenzir", vendor_name: "Tenzir"},
     uid: f"finding-create-{metadata.uid}",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 2004,
   category_uid: 2,
@@ -274,7 +274,7 @@ type_uid = class_uid * 100 + activity_id
       vendor_name: "Tenzir",
     },
     uid: "finding-create-process-activity-52517",
-    version: "1.8.0",
+    version: "1.9.0",
   },
   class_uid: 2004,
   category_uid: 2,

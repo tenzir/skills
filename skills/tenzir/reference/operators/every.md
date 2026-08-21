@@ -104,4 +104,4 @@ every 1h {
 * [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
 * [Work with time](../../guides/transformation/work-with-time.md)
 * [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

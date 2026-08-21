@@ -250,7 +250,7 @@ This guide shows you how to mask sensitive fields such as IP addresses, email ad
 
 #### [Normalize data](guides/normalization.md)
 
-This guide provides an overview of data normalization in TQL.
+These guides take you from source-specific events to a schema your downstream tools understand.
 
 ##### [Clean up values](guides/normalization/clean-up-values.md)
 
@@ -474,17 +474,23 @@ Tutorials are learning-oriented lessons that take you through a series of steps 
 
 ### Fundamentals
 
+#### [Learn the data lifecycle](tutorials/learn-the-data-lifecycle.md)
+
+Security data arrives as somebody else’s text and has to end up as something a detection, a dashboard, or an auditor can use.
+
 #### [Learn idiomatic TQL](tutorials/learn-idiomatic-tql.md)
 
 This tutorial teaches you to write TQL that is clear, efficient, and maintainable.
 
-#### [Write a package](tutorials/write-a-package.md)
+### Development
 
-This tutorial teaches you how packages bundle pipelines, operators, contexts, and examples.
+#### [Onboard a data source](tutorials/onboard-a-data-source.md)
 
-#### [Map data to OCSF](tutorials/map-data-to-ocsf.md)
+Onboarding a data source means turning one product’s output into events that every later stage of the data lifecycle can use.
 
-In this tutorial you’ll learn how to map events to Open Cybersecurity Schema Framework (OCSF).
+#### [Add contexts for enrichment](tutorials/add-contexts-for-enrichment.md)
+
+A context is state, not code.
 
 ### Analytics
 
@@ -528,6 +534,10 @@ This page explains how to configure the Tenzir CLI and Node.
 
 Operators accept secrets as parameters for sensitive values, such as authentication tokens, passwords, or even URLs.
 
+#### [Normalization](explanations/normalization.md)
+
+Why Tenzir maps every source to OCSF first and translates from there
+
 #### [Enrichment](explanations/enrichment.md)
 
 Enrichment means adding contextual data to events.
@@ -544,7 +554,7 @@ This page explains how packages bundle pipelines, operators, contexts, and examp
 
 #### [Glossary](explanations/glossary.md)
 
-This page defines central terms in the Tenzir ecosystem.
+This page defines the terms that name things you work with in Tenzir: the components, the entities a pipeline manipulates, and the units we ship.
 
 ## [Reference](reference.md)
 

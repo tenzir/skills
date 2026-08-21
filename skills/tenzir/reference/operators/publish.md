@@ -56,4 +56,4 @@ publish f"suricata.{event_type}"
 * [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/routing/split-and-merge-streams.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

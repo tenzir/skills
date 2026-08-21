@@ -13,7 +13,7 @@ section: "Docs"
 
 Write your own package
 
-Want to create your own package? Check out our [package development tutorial](../../tutorials/write-a-package.md).
+Want to create your own package? Check out our [package development tutorial](../../tutorials/onboard-a-data-source.md).
 
 ## Install from the Tenzir Library
 
@@ -131,5 +131,5 @@ inputs:
 
 * [Configure inputs](configure-inputs.md)
 * [Publish a package](publish-a-package.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 * [Packages](../../explanations/packages.md)

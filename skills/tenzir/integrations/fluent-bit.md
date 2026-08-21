@@ -12,7 +12,7 @@ section: "Integrations"
 
 [Fluent Bit](https://fluentbit.io) is an open source observability pipeline. Tenzir embeds Fluent Bit, exposing all its [inputs](https://docs.fluentbit.io/manual/pipeline/inputs) via [`from_fluent_bit`](https://tenzir.com/docs/reference/operators/from_fluent_bit.md) and [outputs](https://docs.fluentbit.io/manual/pipeline/outputs) via [`to_fluent_bit`](https://tenzir.com/docs/reference/operators/to_fluent_bit.md)
 
-This makes Tenzir effectively a superset of Fluent Bit.
+This makes Tenzir effectively a superset of Fluent Bit, and our [Tenzir vs. Fluent Bit comparison](https://tenzir.com/product/comparisons/fluent-bit.md) shows what the surrounding pipeline language, detection runtime, and storage engine add on top of the plugins.
 
 Fluent Bit [parsers](https://docs.fluentbit.io/manual/pipeline/parsers) map to Tenzir operators that accept bytes as input and produce events as output. Fluent Bit [filters](https://docs.fluentbit.io/manual/pipeline/filters) correspond to Tenzir operators that perform event-to-event transformations. Tenzir does not expose Fluent Bit parsers and filters, only inputs and output.
 

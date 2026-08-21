@@ -88,13 +88,21 @@ A Bloom filter has two tuning knobs:
 1. **Capacity**: the maximum number of items in the filter.
 2. **False-positive probability**: the chance of reporting an item not in the filter.
 
-These two parameters dictate the space usage of the Bloom filter. Consult Thomas Hurst’s [Bloom Filter Calculator](https://hur.st/bloomfilter/) for finding the optimal configuration for your use case.
+These two parameters dictate the space usage. A filter holding $n$ items with false-positive probability $p$ needs
+
+$$
+m = -\frac{n \ln p}{(\ln 2)^2} \text{ bits}
+$$
+
+which comes to 9.6 bits per item at $p = 0.01$ and 14.4 bits at $p = 0.001$. That cost per item is independent of how large the items are, which is where the savings come from. Consult Thomas Hurst’s [Bloom Filter Calculator](https://hur.st/bloomfilter/) for finding the optimal configuration for your use case.
 
 Tenzir’s Bloom filter implementation is a C++ rebuild of DCSO’s [bloom](https://github.com/DCSO/bloom) library. It is binary-compatible and uses the exact same method for FNV1 hashing and parameter calculation, making it a drop-in replacement for `bloom` users.
 
 Large Observable Sets
 
-Let’s say you have a 10 billion SHA256 hash digests of malware samples. Your endpoint telemetry provides a SHA256 along with every process creation event. You’d like to check whether the newly created process is in the malware set. With a lookup table, you would need at least 256 / 8 \* 100^6 = 320 GB of memory. With a Bloom filter that has a 1% false positive rate, you can represent the same set with XXX memory. A lot less!
+Let’s say you have 10 billion SHA256 hash digests of malware samples. Your endpoint telemetry provides a SHA256 along with every process creation event. You’d like to check whether the newly created process is in the malware set. With a lookup table, the 32-byte keys alone need $10^{10} \times 32 = 320$ GB.
+
+A Bloom filter at $p = 0.01$ spends 9.6 bits per digest instead of 256, so the same set fits in $10^{10} \times 9.6 / 8 \approx 12$ GB, a factor of 27 less.
 
 ### GeoIP Database
 

@@ -11,6 +11,10 @@ section: "Docs"
 
 This guide shows you how to make packages configurable with inputs. You’ll learn how to define input variables, use templating syntax, and provide values during installation.
 
+Prefer operator arguments
+
+Expose what varies as arguments of a [user-defined operator](add-operators.md#add-parameters-to-operators) whenever you can. Arguments are typed, documented next to the operator, checked when a pipeline compiles, and free to differ per call. An input is fixed for the whole installation, so reserve it for values that belong to the environment rather than to a call, such as an endpoint or a credential a packaged pipeline needs.
+
 ## What are inputs
 
 **Inputs** are template variables that Tenzir replaces with user-provided values when you install a package. They allow package definitions to remain independent of the deployed environment.
@@ -257,4 +261,4 @@ inputs:
 * [Create a package](create-a-package.md)
 * [Install a package](install-a-package.md)
 * [Add constants](add-constants.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

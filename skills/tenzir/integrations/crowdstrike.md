@@ -70,7 +70,7 @@ from {
   type_uid: 400106,
   metadata: {
     product: {name: "Tenzir", vendor_name: "Tenzir"},
-    version: "1.8.0",
+    version: "1.9.0",
   },
   src_endpoint: {ip: 10.0.1.12, port: 53014},
   dst_endpoint: {ip: 198.51.100.42, port: 443},

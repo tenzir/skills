@@ -31,7 +31,7 @@ from {
   severity_id: 4,
   message: "Suspicious PowerShell command downloaded a script from a newly registered domain.",
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   finding_info: {
     uid: "finding-42",
@@ -89,7 +89,7 @@ from {
   severity_id: 1,
   message: "DNS response for suspicious-update.example resolved to 198.51.100.42.",
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   query: {
     hostname: "suspicious-update.example",
@@ -161,7 +161,7 @@ from {
   severity_id: 3,
   message: "Detection confidence increased after related network activity.",
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   finding_info: {
     uid: "finding-43",

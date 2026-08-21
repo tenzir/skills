@@ -15,7 +15,7 @@ This guide shows you how to create a package from scratch. You’ll learn how to
 
 Create a directory with the standard package layout:
 
-* acme/
+* vendor/
 
   * changelog/ User-facing documentation of changes
 
@@ -55,7 +55,7 @@ package.yaml
 
 ```yaml
 # The unique ID of the package. (required)
-id: acme
+id: vendor
 
 
 # The display name of the package and a path to an icon for the package.
@@ -89,8 +89,8 @@ package.yaml
 
 ```yaml
 metadata:
-  vendor: Acme
-  source: https://github.com/acme/tenzir-packages
+  vendor: Vendor
+  source: https://github.com/vendor/tenzir-packages
 ```
 
 Unknown top-level keys outside the package schema fail validation. Put non-engine package data under `metadata` instead.
@@ -116,9 +116,13 @@ Reference inputs using `{{ inputs.input-id }}` syntax. See [Configure inputs](co
 A package can expose several capabilities at once. Treat user-defined operators as the reusable API, deployable pipelines as operational templates, examples as short usage snippets, and tests as the executable contract.
 
 * Put reusable package capabilities under `operators/`.
-* If the package maps to OCSF, expose a main mapper such as `acme::ocsf::map` that accepts a named `event` field argument with `default: this`, creates a source namespace and an OCSF target namespace with an initial spread, performs source-specific cleanup and shared OCSF setup inside `$event`, produces minimal OCSF, and dispatches to event-specific operators under a local namespace such as `operators/ocsf/events/`.
-* If the package maps between normalized schemas, put the target schema before the source schema in the operator namespace, for example `acme::cim::ocsf::map` for OCSF-to-CIM mapping.
-* Put complete workflows with an input and output under `pipelines/`. Disable optional operational pipelines by default with `disabled: true`.
+* Give parsers a required positional input field and a named `into` output that defaults to `this`. Parsers turn raw input into structured source events.
+* If the package maps to OCSF, expose a main mapper such as `vendor::ocsf::map`. Give it an optional positional event field and a named `into` output, both defaulting to `this`. Snapshot the source under the output before mapping.
+* Expose a paved-road operator such as `vendor::ocsf::normalize` for the product’s complete standard procedure. It should accept every product representation the package supports, parse strings when necessary, proceed directly when the input is already structured, map to the target schema, apply standard policy, and write the complete result to `into=this` by default.
+* Name the package after the vendor and give each of the vendor’s products a directory below it, as our guide on [choosing a namespace](add-operators.md#choose-a-namespace) explains.
+* If the package maps between normalized schemas, put the target schema before the source schema in the operator namespace, for example `vendor::cim::ocsf::map` for OCSF-to-CIM mapping.
+* Prefer operator arguments over installation inputs for anything a caller might vary. Arguments are typed and checked per call, while an input is fixed for the whole installation.
+* Put complete workflows with an input and output under `pipelines/` only when the package must own a running workflow, and disable them by default with `disabled: true`. Otherwise let users build pipelines from your operators.
 * Put focused snippets under `examples/` so users can quickly try the package after installation.
 * Put deterministic tests under `tests/`, including baselines for every public operator.
 
@@ -132,8 +136,8 @@ examples/basic-usage.tql
 
 ```tql
 // Demonstrate the primary use case
-acme::fetch
-acme::transform
+vendor::fetch
+vendor::transform
 head 10
 ```
 
@@ -143,9 +147,9 @@ examples/advanced-usage.tql
 
 ```tql
 // Show a more complex scenario
-acme::fetch
+vendor::fetch
 where severity == "high"
-acme::enrich
+vendor::enrich
 publish "alerts"
 ```
 
@@ -163,5 +167,5 @@ If your package uses enrichment contexts, add a `contexts` key to the manifest. 
 * [Add pipelines](add-pipelines.md)
 * [Add constants](add-constants.md)
 * [Maintain a changelog](maintain-a-changelog.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 * [Packages](../../explanations/packages.md)

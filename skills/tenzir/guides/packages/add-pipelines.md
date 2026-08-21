@@ -11,6 +11,10 @@ section: "Docs"
 
 This guide shows you how to add deployable pipelines to your package. You’ll learn about pipeline frontmatter options and when to use pipelines versus operators.
 
+Prefer operators
+
+Ship reusable [user-defined operators](add-operators.md) and let users write the pipelines around them. A packaged pipeline hard-codes one deployment’s sources, destinations, and schedule, which users then have to configure through installation inputs instead of operator arguments. Add a pipeline when the package must own a running workflow, such as keeping a context current.
+
 ## Create a pipeline
 
 The `pipelines` directory contains fully deployable TQL pipelines. Unlike [user-defined operators (UDOs)](add-operators.md), pipelines are complete units that must begin with an input operator and end with an output operator.
@@ -25,15 +29,15 @@ every 1h {
     read_json
   }
 }
-acme::ocsf::map
+vendor::ocsf::map
 ocsf_derive
 ocsf_cast
 publish "normalized-events"
 ```
 
-When you install the package, the node automatically runs any enabled pipelines. The source operator handles fetching and parsing, while the package UDO handles cleanup, mapping, and other reusable transformation logic. Use enabled pipelines only when the package should take action as soon as it is installed. Ship optional operational workflows as disabled templates unless automatic execution is the package’s core behavior.
+When you install the package, the node automatically runs any enabled pipelines. The source operator handles collection and may already decode data into events, while the package UDO handles the product’s remaining parsing, cleanup, mapping, and other reusable transformation logic. Use enabled pipelines only when the package should take action as soon as it is installed. Ship optional operational workflows as disabled templates unless automatic execution is the package’s core behavior.
 
-Public mapping UDOs should default to mapping the current event, so `acme::ocsf::map` works when the source operator already emits parsed source events. If your pipeline keeps the parsed source event in a field, pass that field explicitly and add extra attributes after the mapper returns:
+Public mapping UDOs should default to mapping the current event, so `vendor::ocsf::map` works when the source operator already emits parsed source events. Use the paved-road normalizer for the product’s complete standard procedure. This example starts with raw lines, so normalization includes parsing and provenance:
 
 pipelines/fetch-raw-and-normalize.tql
 
@@ -43,11 +47,46 @@ every 1h {
     read_lines
   }
 }
-event = line.parse_json()
-acme::ocsf::map event=event
-event.raw_data = move line
-event.raw_data_size = event.raw_data.length_bytes()
-this = event
+vendor::ocsf::normalize line
+ocsf_derive
+ocsf_cast
+publish "normalized-events"
+```
+
+If collection already produces structured product events, the pipeline calls the mapper instead, because the normalizer always starts from a raw payload:
+
+pipelines/fetch-json-and-map.tql
+
+```tql
+every 1h {
+  from_http "https://api.example.com/events" {
+    read_json
+  }
+}
+vendor::ocsf::map
+ocsf_derive
+ocsf_cast
+publish "normalized-events"
+```
+
+Use the composable parser and mapper when the pipeline must inspect or modify the structured source event between stages:
+
+pipelines/fetch-raw-and-customize.tql
+
+```tql
+every 1h {
+  from_http "https://api.example.com/events" {
+    read_lines
+  }
+}
+vendor::parse line, into=event
+event.tenant = "production"
+vendor::ocsf::map event, into=ocsf
+this = {
+  ...ocsf,
+  raw_data: line,
+  raw_data_size: line.length_bytes(),
+}
 ocsf_derive
 ocsf_cast
 publish "normalized-events"
@@ -161,9 +200,11 @@ restart-on-error: 5m
 
 
 every 1h {
-  acme::fetch
+  from_http "https://api.example.com/events" {
+    read_lines
+  }
 }
-acme::ocsf::normalize
+vendor::ocsf::normalize line
 publish "ocsf"
 ```
 
@@ -197,5 +238,5 @@ For flexible packages, consider shipping both: operators that provide reusable c
 * [Create a package](create-a-package.md)
 * [Add operators](add-operators.md)
 * [Add contexts](add-contexts.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 * [Packages](../../explanations/packages.md)

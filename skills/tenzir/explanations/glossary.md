@@ -7,9 +7,9 @@ section: "Docs"
 
 # Glossary
 
-> This page defines central terms in the Tenzir ecosystem.
+> This page defines the terms that name things you work with in Tenzir: the components, the entities a pipeline manipulates, and the units we ship. For the names of the transformations themselves, see Learn the data lifecycle.
 
-This page defines central terms in the Tenzir ecosystem.
+This page defines the terms that name things you work with in Tenzir: the components, the entities a pipeline manipulates, and the units we ship. For the names of the transformations themselves, see [Learn the data lifecycle](../tutorials/learn-the-data-lifecycle.md).
 
 Missing term?
 
@@ -17,54 +17,53 @@ If you are missing a term, please open a [GitHub Discussion](https://github.com/
 
 ## App
 
-Web user interface to access [platform](glossary.md#platform) at [app.tenzir.com](https://app.tenzir.com).
+The web interface to the [platform](glossary.md#platform), at [app.tenzir.com](https://app.tenzir.com).
 
-The app is a web application that partially runs in the user’s browser. It is written in [Svelte](https://svelte.dev/).
+Use the app to write and run [pipelines](glossary.md#pipeline), explore their output, install [packages](glossary.md#package), build dashboards, and manage nodes and secrets. Everything it does is also available through the API.
 
 ## Catalog
 
-Maintains [partition](glossary.md#partition) ownership and metadata.
+The component that tracks which [partitions](glossary.md#partition) exist and what they contain.
 
-The catalog is a component in the [node](glossary.md#node) that owns the [partitions](glossary.md#partition), keeps metadata about them, and maintains a set of sparse secondary indexes to identify relevant partitions for a given query. It offers a transactional interface for adding and removing partitions.
+When a query runs against [edge storage](glossary.md#edge-storage), the catalog narrows the search to the partitions that can hold matching events, using sparse in-memory indexes over their metadata. Its memory budget is tunable.
 
-## Connector
-
-Connects a pipeline to an external resource.
-
-A connector is usually exposed as a source operator that reads from a resource, or as a sink operator that writes to a resource.
+* [Configure the catalog](../guides/node-setup/tune-performance.md#configure-the-catalog)
 
 ## Context
 
 A stateful object used for in-band enrichment.
 
-Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP database. They live inside a node and you can enrich with them in other pipelines.
+Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP database. Pipelines look values up in them with [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md), and something has to keep them current.
 
 * Read more about [enrichment](enrichment.md)
+* [Add contexts for enrichment](../tutorials/add-contexts-for-enrichment.md)
 
 ## Destination
 
-An pipeline ending with an [output](glossary.md#output) operator preceded by a [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) input operator.
+A [pipeline](glossary.md#pipeline) that ends in an [output](glossary.md#output) operator and starts with [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md).
 
 * Learn more about [pipelines](pipeline.md)
 
 ## Edge Storage
 
-The indexed storage that pipelines can use at the [node](glossary.md#node). Every node has a light-weight storage engine for importing and exporting events. You must mount the storage into the node such that it can be used from [pipelines](glossary.md#pipeline) using the [`import`](https://tenzir.com/docs/reference/operators/import.md) and [`export`](https://tenzir.com/docs/reference/operators/export.md) [operators](glossary.md#operator). The storage cengine comes with a [catalog](glossary.md#catalog) that tracks [partitions](glossary.md#partition) and keeps sparse [indexes](glossary.md#index) to accelerate historical queries.
+The storage that ships with a [node](glossary.md#node), written with [`import`](https://tenzir.com/docs/reference/operators/import.md) and queried with [`export`](https://tenzir.com/docs/reference/operators/export.md).
+
+Edge storage keeps events in [partitions](glossary.md#partition) of Parquet or Feather and uses a [catalog](glossary.md#catalog) to skip the ones a query cannot match. It suits local buffering and recent-history queries. For long retention, write to object storage or a database instead.
 
 * [Ingest data into the node’s edge storage](../guides/edge-storage/import-into-a-node.md)
 * [Query the node’s edge storage](../guides/edge-storage/export-from-a-node.md)
 
 ## Event
 
-A record of typed data. Think of events as JSON objects, but with a richer [type system](../reference/types.md) that also has timestamps, durations, IP addresses, and more. Events have fields and can contain numerous shapes that describe its types (= the [schema](glossary.md#schema)).
+One record of typed data, and the unit that [pipelines](glossary.md#pipeline) move.
 
-* Learn more about [pipelines](pipeline.md)
+Think of an event as a JSON object with a stricter [type system](../reference/types.md): besides strings, numbers, and records, a field can be a timestamp, a duration, an IP address, or a subnet. The shape of an event is its [schema](glossary.md#schema), and one pipeline can carry events of many schemas at once.
 
 ## Format
 
-Translates between bytes and events.
+A data representation that Tenzir can read or write, such as JSON, CSV, Syslog, CEF, or PCAP.
 
-A format is either supported by a *parser* that converts bytes to events, or a *printer* that converts events to bytes. Example formats are JSON, CEF, or PCAP.
+Each format has a [parser](glossary.md#parser), a [printer](glossary.md#printer), or both. Formats are independent of where the bytes come from, so any format works with any connection.
 
 * See available [operators for parsing](../reference/operators.md#parsing)
 * See available [operators for printing](../reference/operators.md#printing)
@@ -73,146 +72,141 @@ A format is either supported by a *parser* that converts bytes to events, or a *
 
 ## Function
 
-Computes something over a value in an [event](glossary.md#event). Unlike operators that work on streams of events, functions can only act on single values.
+Computes a value from other values, inside an expression.
+
+A function acts on single values, while an [operator](glossary.md#operator) acts on a stream of [events](glossary.md#event). Examples of functions are `time.round(1s)` and `ip.is_v6()`, while `where` and `summarize` are operators.
 
 * See available [functions](../reference/functions.md)
 
-## Index
-
-Optional data structures for accelerating queries involving the node’s [edge storage](glossary.md#edge-storage).
-
-Tenzir featres in-memory *sparse* indexes that point to [partitions](glossary.md#partition).
-
-* [Configure the catalog](../guides/node-setup/tune-performance.md#configure-the-catalog)
-
 ## Input
 
-An [operator](glossary.md#operator) that only producing data, without consuming anything.
+An [operator](glossary.md#operator) that only produces data, without consuming anything. A pipeline starts with one.
 
 * Learn more about [pipelines](pipeline.md)
 
 ## Integration
 
-A set of pipelines to integrate with a third-party product.
+Documentation and prebuilt TQL for working with one third-party product.
 
-An integration describes use cases in combination with a specific product or tool. Based on the depth of the configuration, this may require configuration on either end.
+An integration tells you which operators to use for a given vendor, what to configure on their side, and which [package](glossary.md#package) to install if one exists.
 
 * List of [all integrations](https://tenzir.com/integrations)
 * [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x.md)
 
 ## Library
 
-A collection of [packages](glossary.md#package).
+Our collection of [packages](glossary.md#package), installable from the [app](glossary.md#app).
 
-Our community library is [freely available at GitHub](https://github.com/tenzir/library).
-
-## Source
-
-An operator that reads from an external resource.
-
-A source is the dual to a [sink](glossary.md#sink). It has no input and emits events or bytes into the pipeline.
-
-* Learn more about [pipelines](pipeline.md)
-
-## Node
-
-A host for [pipelines](glossary.md#pipeline) and storage reachable over the network.
-
-The `tenzir-node` binary starts a node in a dedicated server process that listens on TCP port 5158.
-
-* [Deploy a node](../guides/node-setup/provision-a-node.md)
-* Use the [REST API](../reference/operators/openapi.md) to manage a node
-* [Import into a node](../guides/edge-storage/import-into-a-node.md)
-* [Export from a node](../guides/edge-storage/export-from-a-node.md)
+The community library is [freely available on GitHub](https://github.com/tenzir/library), and you can point a node at your own repository instead.
 
 ## Metrics
 
-Runtime statistics about the node and pipeline execution.
+Built-in telemetry about pipeline and node behavior, queryable as [events](glossary.md#event).
+
+Metrics answer operational questions: what a pipeline ingested, where it stalled, how much memory it used.
 
 * [Collect metrics](../guides/analytics/collect-metrics.md)
 
 ## Module
 
-A namespace for the [operators](glossary.md#operator) and [functions](glossary.md#function) of a [package](glossary.md#package), written with `::` as separator, as in `acme::ocsf::map`.
+A namespace for the [operators](glossary.md#operator) and [functions](glossary.md#function) of a [package](glossary.md#package), written with `::` as separator, as in `vendor::ocsf::map`.
 
 Modules are exclusive to packages, and the package identifier is always the leading segment. Builtin operators and functions use flat names, such as [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md), so no builtin can shadow a package’s entities.
 
 * Read more about [modules](packages.md#modules)
 * [Add operators](../guides/packages/add-operators.md)
 
+## Node
+
+A long-running process that hosts [pipelines](glossary.md#pipeline), [contexts](glossary.md#context), installed [packages](glossary.md#package), and [edge storage](glossary.md#edge-storage).
+
+A node connects itself to the [platform](glossary.md#platform), which is how the [app](glossary.md#app) reaches it. Pipelines you run in the app execute on the node, close to your data, so telemetry never has to leave your network.
+
+* [Deploy a node](../guides/node-setup/provision-a-node.md)
+* Use the [REST API](../reference/operators/openapi.md) to manage a node
+* [Import into a node](../guides/edge-storage/import-into-a-node.md)
+* [Export from a node](../guides/edge-storage/export-from-a-node.md)
+
 ## OCSF
 
-The [Open Cybersecurity Schema Framework (OCSF)](https://schema.ocsf.io) is a cross-vendor schema for security event data. Our [community library](glossary.md#library) contains packages that map data sources to OCSF.
+The [Open Cybersecurity Schema Framework](https://schema.ocsf.io), a vendor-neutral [schema](glossary.md#schema) for security events.
 
-* [Map data to OCSF](../tutorials/map-data-to-ocsf.md)
+OCSF is the default target when we normalize data, because a detection written against an OCSF class works for every source that maps to it. Our [library](glossary.md#library) ships mappings for common sources, and dedicated operators derive and type-check the result.
+
+* [Onboard a data source](../tutorials/onboard-a-data-source.md)
 
 ## Operator
 
-The building block of a [pipeline](glossary.md#pipeline).
+The unit of computation in a [pipeline](glossary.md#pipeline), and one line of TQL.
 
-An operator is an [input](glossary.md#input), a [transformation](glossary.md#transformation), or an [output](glossary.md#output).
+An operator is an [input](glossary.md#input), a [transformation](glossary.md#transformation), or an [output](glossary.md#output). Packages add their own operators, which you call exactly like the builtin ones.
 
 * See all available [operators](../reference/operators.md)
 
 ## Output
 
-An [operator](glossary.md#operator) consuming data, without producing anything.
+An [operator](glossary.md#operator) that only consumes data, without producing anything. A pipeline ends with one.
 
 * Learn more about [pipelines](pipeline.md)
-
-## PaC
-
-The acronym PaC stands for *Pipelines as Code*. It is meant as an adaptation of [Infrastructure as Code (IaC)](https://en.wikipedia.org/wiki/Infrastructure_as_code) with pipelines represent the (data) infrastructure that is provisioning as code.
-
-* Learn how to provision [piplines as code](../guides/basic-usage/run-pipelines.md#as-code).
 
 ## Package
 
-A collection of [pipelines](glossary.md#pipeline) and [contexts](glossary.md#context).
+The unit we ship and you install: everything needed for one use case.
+
+A package contains [operators](glossary.md#operator), constants, [contexts](glossary.md#context), runnable examples, and tests, and optionally [pipelines](glossary.md#pipeline) that start when you install it. Installing one adds its operators to your [module](glossary.md#module) namespace, so you call them from your own pipelines instead of copying TQL.
 
 * Read more about [packages](packages.md)
-* [Learn how to write a package](../tutorials/write-a-package.md)
+* [Onboard a data source](../tutorials/onboard-a-data-source.md)
 
 ## Parser
 
-A bytes-to-events operator.
+What turns bytes of a [format](glossary.md#format) into [events](glossary.md#event).
 
-A parser is the dual to a [printer](glossary.md#printer). You use parsers via the `read_*` operators. There exist also [functions](glossary.md#function) for applying parsers to string values.
+Parsers appear as the `read_*` operators, and as `parse_*` [functions](glossary.md#function) when the input is a string field instead of a byte stream. A parser is the dual of a [printer](glossary.md#printer).
 
-* Learn more about [pipelines](pipeline.md)
 * See available [operators for parsing](../reference/operators.md#parsing)
 * See available [functions for parsing](../reference/functions.md#parsing)
 
 ## Partition
 
-The horizontal scaling unit of the storage attached to a [node](glossary.md#node).
+The unit in which [edge storage](glossary.md#edge-storage) writes and reads events.
 
-A partition contains the raw data and optionally a set of indexes. Supported formats are [Parquet](https://parquet.apache.org) or [Feather](https://arrow.apache.org/docs/python/feather.html).
+One partition is a [Parquet](https://parquet.apache.org) or [Feather](https://arrow.apache.org/docs/python/feather.html) file holding events of one [schema](glossary.md#schema). Partition size trades write amplification against query granularity.
 
 ## Pipeline
 
-Combines a set of [operators](glossary.md#operator) into a dataflow graph.
+A sequence of [operators](glossary.md#operator) that data flows through, written in [TQL](glossary.md#tql).
+
+A pipeline can run once and return a result, or run continuously until you stop it. Pipelines connect to each other through topics with [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), which is how a deployment ends up as many small pipelines rather than one large one.
 
 * Learn more about [pipelines](pipeline.md)
 * [Run a pipeline](../guides/basic-usage/run-pipelines.md)
 
 ## Platform
 
-The control plane for nodes and pipelines, accessible at [app.tenzir.com](https://app.tenzir.com).
+The control plane that your nodes connect to, reachable through the [app](glossary.md#app) and the API.
+
+The platform holds workspaces, user access, secrets, and dashboards, and it relays what you do in the app to the right node. Events stay on the node unless a pipeline sends them elsewhere. You can use ours or run your own.
 
 * Understand the [Tenzir architecture](deployment.md)
+* Read more about [the platform](platform.md)
 
 ## Printer
 
-An events-to-bytes operator.
+What turns [events](glossary.md#event) into bytes of a [format](glossary.md#format).
 
-A [format](glossary.md#format) that translates events into bytes.
+Printers appear as the `write_*` operators, and as `print_*` [functions](glossary.md#function) when you want a string field instead of a byte stream. A printer is the dual of a [parser](glossary.md#parser).
 
-A printer is the dual to a [parser](glossary.md#parser). Use printers via the `write_*` operators or as printing subpipelines in output operators.
-
-* Learn more about [pipelines](pipeline.md)
 * See available [operators for printing](../reference/operators.md#printing)
 * See available [functions for printing](../reference/functions.md#printing)
+
+## Schema
+
+The named record type of an [event](glossary.md#event): its field names and their types.
+
+Events with the same fields share a schema, and `@name` sets or reads its name. A pipeline can carry several schemas at once, and operators apply to the ones where they make sense.
+
+* [Show available schemas in the edge storage](../guides/edge-storage/show-available-schemas.md)
 
 ## Sink
 
@@ -222,28 +216,25 @@ A sink is the dual to a [source](glossary.md#source). It consumes events or byte
 
 * Learn more about [pipelines](pipeline.md)
 
-## Schema
-
-A top-level record type of an event.
-
-* [Show available schemas in the edge storage](../guides/edge-storage/show-available-schemas.md)
-
 ## Source
 
-An pipeline starting with an [input](glossary.md#input) operator followed by a [`publish`](https://tenzir.com/docs/reference/operators/publish.md) output operator.
+An [operator](glossary.md#operator) that reads from an external resource, or a [pipeline](glossary.md#pipeline) that starts with an [input](glossary.md#input) operator and ends in [`publish`](https://tenzir.com/docs/reference/operators/publish.md).
+
+The operator sense is the dual to a [sink](glossary.md#sink): it has no input and emits events or bytes into the pipeline. The pipeline sense is the counterpart to a [destination](glossary.md#destination).
 
 * Learn more about [pipelines](pipeline.md)
 
 ## TQL
 
-An acronym for *Tenzir Query Language*.
+The Tenzir Query Language, in which you write [pipelines](glossary.md#pipeline).
 
-TQL is the language in which users write [pipelines](glossary.md#pipeline).
+TQL reads top to bottom, one [operator](glossary.md#operator) per line, and covers collection, transformation, analytics, and delivery in one language. It has no separate configuration dialect: what you type in the [app](glossary.md#app) is what a deployed pipeline contains.
 
 * Learn more about the [language](language.md)
+* [Learn idiomatic TQL](../tutorials/learn-idiomatic-tql.md)
 
 ## Transformation
 
-An [operator](glossary.md#operator) consuming both input and producing output.
+An [operator](glossary.md#operator) that both consumes and produces data. Most operators are transformations.
 
 * Learn more about [pipelines](pipeline.md)

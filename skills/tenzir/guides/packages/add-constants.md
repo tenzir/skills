@@ -11,6 +11,8 @@ section: "Docs"
 
 This guide shows you how to define package-wide constants in a `constants.tql` file and reference them as `pkg::$name` from the package’s own operators and pipelines, as well as from any pipeline that uses the package. You’ll learn the `let` syntax, how bindings build on one another, the rules each binding must satisfy, and when to use a constant instead of an input.
 
+Our tutorial on [onboarding a data source](../../tutorials/onboard-a-data-source.md#extract-the-parsing-into-an-operator) shows how package constants publish reusable classifiers, patterns, headers, and pattern definitions.
+
 ## Define constants
 
 Place a `constants.tql` file at the root of your package. Each `let` binding defines a named constant that Tenzir evaluates once when it loads the package:
@@ -26,7 +28,7 @@ A constant can be any value - a number, string, list, or record - which makes `c
 
 ## Reference constants
 
-Reference a constant from anywhere with `<package>::$name`, using your package’s ID as the prefix. In a package with ID `acme`, the bindings above become `acme::$threshold` and `acme::$severities`.
+Reference a constant from anywhere with `<package>::$name`, using your package’s ID as the prefix. In a package with ID `vendor`, the bindings above become `vendor::$threshold` and `vendor::$severities`.
 
 ### From the package’s own operators
 
@@ -35,16 +37,16 @@ Inside the package, operators and pipelines reference constants so the same valu
 operators/ocsf/map.tql
 
 ```tql
-ocsf.severity_id = acme::$severities[severity]
+ocsf.severity_id = vendor::$severities[severity]
 ```
 
 ### From external pipelines
 
-Once the `acme` package is available, any pipeline can reference its constants:
+Once the `vendor` package is available, any pipeline can reference its constants:
 
 ```tql
 from {severity: 9}, {severity: 3}
-where severity >= acme::$threshold
+where severity >= vendor::$threshold
 ```
 
 ```tql
@@ -96,5 +98,5 @@ Reach for a constant when the package author owns the value and wants to share i
 * [Add operators](add-operators.md)
 * [Configure inputs](configure-inputs.md)
 * [Create a package](create-a-package.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 * [Packages](../../explanations/packages.md)

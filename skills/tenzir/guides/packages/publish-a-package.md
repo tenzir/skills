@@ -217,4 +217,4 @@ chmod +x .github/scripts/detect-touched-packages.sh
 * [Create a package](create-a-package.md)
 * [Test packages](test-packages.md)
 * [Install a package](install-a-package.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

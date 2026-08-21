@@ -107,7 +107,7 @@ let $s3_uri = "s3://aws-security-data-lake-eu-west-2-lake-abcdefghijklmnopqrstuv
 
 subscribe "ocsf"
 where @name == "ocsf.network_activity"
-ocsf::apply
+ocsf_cast
 to_amazon_security_lake $s3_uri,
   region="eu-west-2",
   account_id="123456789012"

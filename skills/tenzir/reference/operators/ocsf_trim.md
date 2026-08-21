@@ -130,4 +130,4 @@ ocsf_trim drop_optional=true, drop_recommended=true
 
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

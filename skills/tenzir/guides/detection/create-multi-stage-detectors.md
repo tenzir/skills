@@ -276,7 +276,7 @@ let $finding_time = 2026-07-01T10:06:05Z
 
 from {
   time: 2026-07-01T10:00:00Z,
-  metadata: {uid: "finding-create-recon-ws-17-1000", version: "1.8.0"},
+  metadata: {uid: "finding-create-recon-ws-17-1000", version: "1.9.0"},
   class_uid: 2004,
   device: {hostname: "ws-17"},
   finding_info: {
@@ -285,7 +285,7 @@ from {
   },
 }, {
   time: 2026-07-01T10:03:00Z,
-  metadata: {uid: "finding-create-print-dump-ws-17-1003", version: "1.8.0"},
+  metadata: {uid: "finding-create-print-dump-ws-17-1003", version: "1.9.0"},
   class_uid: 2004,
   device: {hostname: "ws-17"},
   finding_info: {
@@ -298,7 +298,7 @@ from {
   },
 }, {
   time: 2026-07-01T10:06:00Z,
-  metadata: {uid: "finding-create-smb-spike-ws-17-1006", version: "1.8.0"},
+  metadata: {uid: "finding-create-smb-spike-ws-17-1006", version: "1.9.0"},
   class_uid: 2004,
   device: {hostname: "ws-17"},
   finding_info: {
@@ -307,7 +307,7 @@ from {
   },
 }, {
   time: 2026-07-01T10:01:00Z,
-  metadata: {uid: "finding-create-recon-ws-9-1001", version: "1.8.0"},
+  metadata: {uid: "finding-create-recon-ws-9-1001", version: "1.9.0"},
   class_uid: 2004,
   device: {hostname: "ws-9"},
   finding_info: {

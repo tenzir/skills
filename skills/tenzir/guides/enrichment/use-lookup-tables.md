@@ -70,7 +70,7 @@ from {
   type_uid: 300201,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   user: {
     uid: "S-1-5-21-1001",
@@ -97,7 +97,7 @@ context_enrich "user_roles",
   type_uid: 300201,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   user: {
     uid: "S-1-5-21-1001",
@@ -152,7 +152,7 @@ from {
   type_uid: 300201,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   service: {
     name: "vpn",
@@ -173,7 +173,7 @@ context_enrich "users", key=unmapped.user_uid, into=user
   type_uid: 300201,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   service: {
     name: "vpn",
@@ -226,7 +226,7 @@ from {
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     src_ip: 10.0.0.15,
@@ -246,7 +246,7 @@ context_enrich "network_segments", key=unmapped.dst_ip, into=dst_endpoint
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     src_ip: 10.0.0.15,

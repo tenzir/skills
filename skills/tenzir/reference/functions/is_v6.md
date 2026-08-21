@@ -46,4 +46,4 @@ from {
 * [`is_multicast`](https://tenzir.com/docs/reference/functions/is_multicast.md)
 * [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md)
 * [`is_v4`](https://tenzir.com/docs/reference/functions/is_v4.md)
-* [Map data to OCSF](../../tutorials/map-data-to-ocsf.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

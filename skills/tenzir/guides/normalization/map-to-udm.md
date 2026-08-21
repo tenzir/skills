@@ -34,124 +34,12 @@ For a `NETWORK_CONNECTION` event, UDM expects these core sections:
 * `target`: The destination machine if it differs from the principal.
 * `network`: The protocol, ports, byte counts, and other connection details.
 
-## Write a small mapping
+## Apply UDM rules
 
-The following example shows a package mapper that maps a parsed firewall connection event to UDM. It keeps all mapping work inside the `event` argument, puts the source data under `fw`, moves one-use fields into UDM, converts source strings to UDM enum values, and preserves unmapped residue in `additional`.
+Mappings live in packages as operators. Our tutorial on [onboarding a data source](../../tutorials/onboard-a-data-source.md) builds one from a log line to an installable package, and the same workflow applies here because only the target fields differ.
 
-```tql
----
-args:
-  named:
-    - name: event
-      description: The field that holds the event to map.
-      type: field
-      default: this
----
+These rules are specific to UDM:
 
-
-$event = {...$event, fw: $event, udm: {}}
-
-
-let $ip_protocols = {
-  tcp: "TCP",
-  udp: "UDP",
-  icmp: "ICMP",
-}
-
-
-let $actions = {
-  allow: "ALLOW",
-  allowed: "ALLOW",
-  deny: "BLOCK",
-  denied: "BLOCK",
-  block: "BLOCK",
-  blocked: "BLOCK",
-}
-
-
-$event.udm.metadata = {
-  eventTimestamp: move $event.fw.ts,
-  eventType: "NETWORK_CONNECTION",
-  vendorName: "Example Networks",
-  productName: "Example Firewall",
-  productEventType: $event.fw.action,
-}
-
-
-$event.udm.principal = {
-  ip: [move $event.fw.src_ip],
-  port: move $event.fw.src_port,
-}
-
-
-$event.udm.target = {
-  ip: [move $event.fw.dst_ip],
-  port: move $event.fw.dst_port,
-}
-
-
-$event.udm.network = {
-  ipProtocol: $ip_protocols[(move $event.fw.proto).to_lower()]? else "UNKNOWN_IP_PROTOCOL",
-  sentBytes: move $event.fw.bytes_out,
-  receivedBytes: move $event.fw.bytes_in,
-}
-
-
-$event.udm.securityResult = [{
-  action: [$actions[$event.fw.action.to_lower()]? else "UNKNOWN_ACTION"],
-  actionDetails: move $event.fw.action,
-}]
-
-
-$event = {...$event.udm, additional: $event.fw}
-```
-
-A call with a firewall event such as `{ts: 2024-01-15T10:30:45Z, action: "allowed", src_ip: "10.0.0.5", src_port: 51544, dst_ip: "203.0.113.10", dst_port: 443, proto: "tcp", bytes_out: 1280, bytes_in: 8192}` produces a UDM event like this:
-
-```tql
-{
-  metadata: {
-    eventTimestamp: 2024-01-15T10:30:45Z,
-    eventType: "NETWORK_CONNECTION",
-    vendorName: "Example Networks",
-    productName: "Example Firewall",
-    productEventType: "allowed",
-  },
-  principal: {
-    ip: [
-      "10.0.0.5",
-    ],
-    port: 51544,
-  },
-  target: {
-    ip: [
-      "203.0.113.10",
-    ],
-    port: 443,
-  },
-  network: {
-    ipProtocol: "TCP",
-    sentBytes: 1280,
-    receivedBytes: 8192,
-  },
-  securityResult: [
-    {
-      action: [
-        "ALLOW",
-      ],
-      actionDetails: "allowed",
-    },
-  ],
-  additional: {},
-}
-```
-
-## Apply the mapping pattern
-
-Use the same structure for larger mappings:
-
-* **Use the event scope**: Package mappers accept a named `event` field argument with `default: this`, create source and target namespaces with an initial spread, and mutate only fields below `$event`.
-* **Keep a source namespace**: Keep the parsed event under a short namespace such as `fw`, `dns`, `edr`, or `event` before you create UDM fields.
 * **Set `metadata.eventType` early**: Let the UDM event type drive which participant nouns and protocol fields you populate.
 * **Model participants as nouns**: Use `principal` for the initiating entity, `target` for the destination, `observer` for the sensor, and `intermediary` for proxies or middleboxes.
 * **Convert enum values explicitly**: Map source strings to UDM enum names such as `TCP`, `UDP`, `ALLOW`, or `BLOCK`.
@@ -168,3 +56,4 @@ Use the same structure for larger mappings:
 * [Map to OCSF](map-to-ocsf.md)
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

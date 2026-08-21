@@ -85,4 +85,4 @@ b = move a
 * [Statements](../statements.md)
 * [Filter and select data](../../guides/transformation/filter-and-select-data.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

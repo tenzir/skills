@@ -19,7 +19,7 @@ Tests are your safety net during development. The baseline-driven workflow lets 
 
 Place test files in the `tests` directory of your package:
 
-* acme/
+* vendor/
 
   * tests/
 
@@ -104,7 +104,7 @@ tests/network/tcp/analysis.tql
 
 ```tql
 from_file f"{env("TENZIR_INPUTS")}/packets.pcap"
-acme::analyze
+vendor::analyze
 ```
 
 Place `inputs/` directories as close to the tests that use them as possible. This keeps related data together and makes it clear which tests depend on which files. Prefer inline `.input` files for single-test data and local `inputs/` directories for data shared within a test group.
@@ -118,14 +118,17 @@ Test pipelines exercise your package logic with known input and produce determin
 tests/normalize.tql
 
 ```tql
-from_file env("TENZIR_INPUT")
-acme::normalize
+from_file env("TENZIR_INPUT") {
+  read_lines
+}
+vendor::ocsf::normalize line
+ocsf_cast
 ```
 
 tests/normalize.input
 
-```json
-{"@timestamp": "2024-01-15T10:30:00Z", "msg": "test"}
+```text
+2024-01-15T10:30:00Z auth alice success
 ```
 
 ### Test OCSF mappings
@@ -138,12 +141,11 @@ tests/ocsf/auth.tql
 from_file env("TENZIR_INPUT") {
   read_json
 }
-acme::ocsf::map
-ocsf_derive
+vendor::ocsf::map
 ocsf_cast
 ```
 
-Public mapping UDOs use `event=this` by default, so this form maps the current record. If the test parses the source event into a field, pass the mapping scope explicitly and add raw payload attributes after the mapper returns:
+The mapper’s optional positional input and named output both default to `this`, so this form maps the current record in place. Test the paved-road normalizer with a raw payload, which covers format dispatch, parsing, mapping, and provenance in one call:
 
 tests/ocsf/auth-raw\.tql
 
@@ -151,16 +153,42 @@ tests/ocsf/auth-raw\.tql
 from_file env("TENZIR_INPUT") {
   read_lines
 }
-event = line.parse_json()
-acme::ocsf::map event=event
-event.raw_data = move line
-event.raw_data_size = event.raw_data.length_bytes()
-this = event
-ocsf_derive
+vendor::ocsf::normalize line
 ocsf_cast
 ```
 
-Use [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) to populate sibling enum fields and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) to validate the mapped event against the OCSF schema. This lets the mapper stay minimal while the baseline captures the comprehensive OCSF shape that consumers see. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](https://tenzir.com/docs/reference/functions/now.md).
+Add a test for a payload in an unsupported format, which the mapper turns into an OCSF Base Event that carries the payload:
+
+tests/ocsf/auth-unsupported.tql
+
+```tql
+from_file env("TENZIR_INPUT") {
+  read_lines
+}
+vendor::ocsf::normalize line
+ocsf_cast
+```
+
+Add a staged test when callers can customize the structured source event:
+
+tests/ocsf/auth-staged.tql
+
+```tql
+from_file env("TENZIR_INPUT") {
+  read_lines
+}
+vendor::parse line, into=event
+event.tenant = "production"
+vendor::ocsf::map event, into=ocsf
+this = {
+  ...ocsf,
+  raw_data: line,
+  raw_data_size: line.length_bytes(),
+}
+ocsf_cast
+```
+
+Use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) to validate the mapped event against the OCSF schema, so the baseline captures the schema that consumers see. Leave [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) out of tests: a package produces minimal OCSF, and expanding it into sibling enum fields is a decision each caller makes. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](https://tenzir.com/docs/reference/functions/now.md).
 
 ### Test with different arguments
 
@@ -170,7 +198,7 @@ tests/tag-defaults.tql
 
 ```tql
 from {hash: "abc123"}
-acme::tag indicator
+vendor::tag indicator
 ```
 
 With a custom prefix:
@@ -179,7 +207,7 @@ tests/tag-with-prefix.tql
 
 ```tql
 from {hash: "abc123"}
-acme::tag indicator, prefix="IOC: "
+vendor::tag indicator, prefix="IOC: "
 ```
 
 ### Test error conditions
@@ -195,7 +223,7 @@ error: true
 
 
 from {invalid: null}
-acme::strict_parse
+vendor::strict_parse
 ```
 
 ## Run tests
@@ -307,4 +335,4 @@ Run `uvx tenzir-test --update` to regenerate baselines after intentional changes
 * [Add operators](add-operators.md)
 * [Add contexts](add-contexts.md)
 * [Test Framework](../../reference/test-framework.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

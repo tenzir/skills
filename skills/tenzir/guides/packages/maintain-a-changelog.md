@@ -747,4 +747,4 @@ uvx tenzir-ship show v0.1.0 --release --json
 ## See also
 
 * [Ship Framework](../../reference/ship-framework.md)
-* [Write a package](../../tutorials/write-a-package.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

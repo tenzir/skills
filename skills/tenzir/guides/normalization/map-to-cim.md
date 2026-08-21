@@ -34,98 +34,12 @@ For `Network_Traffic / All_Traffic`, start with these fields and tags:
 * `bytes`, `bytes_in`, and `bytes_out`: Traffic volume fields.
 * `dvc` and `vendor_product`: The reporting product context.
 
-## Write a small mapping
+## Apply CIM rules
 
-The following example shows a package mapper that maps a parsed firewall connection event to CIM Network Traffic fields. It keeps all mapping work inside the `event` argument, puts the source data under `fw`, applies the dataset tags, normalizes action and transport values, maps endpoint fields, and preserves unmapped residue for review.
+Mappings live in packages as operators. Our tutorial on [onboarding a data source](../../tutorials/onboard-a-data-source.md) builds one from a log line to an installable package, and the same workflow applies here because only the target fields differ.
 
-```tql
----
-args:
-  named:
-    - name: event
-      description: The field that holds the event to map.
-      type: field
-      default: this
----
+These rules are specific to CIM:
 
-
-$event = {...$event, fw: $event, cim: {}}
-
-
-let $actions = {
-  allow: "allowed",
-  allowed: "allowed",
-  block: "blocked",
-  blocked: "blocked",
-  deny: "blocked",
-  denied: "blocked",
-  drop: "blocked",
-  dropped: "blocked",
-  teardown: "teardown",
-}
-
-
-$event.cim._time = move $event.fw.ts
-$event.cim.tag = ["network", "communicate"]
-$event.cim.host = $event.fw.device
-$event.cim.source = "example-firewall"
-$event.cim.sourcetype = "example:firewall"
-$event.cim.vendor_product = "Example Networks Example Firewall"
-$event.cim.action = $actions[$event.fw.action.to_lower()]? else $event.fw.action.to_lower()
-$event.cim.src = $event.fw.src_ip
-$event.cim.src_ip = move $event.fw.src_ip
-$event.cim.src_port = move $event.fw.src_port
-$event.cim.dest = $event.fw.dst_ip
-$event.cim.dest_ip = move $event.fw.dst_ip
-$event.cim.dest_port = move $event.fw.dst_port
-$event.cim.transport = (move $event.fw.proto).to_lower()
-$event.cim.bytes_out = move $event.fw.bytes_out
-$event.cim.bytes_in = move $event.fw.bytes_in
-$event.cim.bytes = $event.cim.bytes_in + $event.cim.bytes_out
-$event.cim.dvc = move $event.fw.device
-
-
-drop $event.fw.action
-
-
-$event = {...$event.cim, unmapped: $event.fw}
-```
-
-A call with a firewall event such as `{ts: 2024-01-15T10:30:45Z, action: "allowed", src_ip: "10.0.0.5", src_port: 51544, dst_ip: "203.0.113.10", dst_port: 443, proto: "tcp", bytes_out: 1280, bytes_in: 8192, device: "edge-fw-01"}` produces a CIM event like this:
-
-```tql
-{
-  _time: 2024-01-15T10:30:45Z,
-  tag: [
-    "network",
-    "communicate",
-  ],
-  host: "edge-fw-01",
-  source: "example-firewall",
-  sourcetype: "example:firewall",
-  vendor_product: "Example Networks Example Firewall",
-  action: "allowed",
-  src: "10.0.0.5",
-  src_ip: "10.0.0.5",
-  src_port: 51544,
-  dest: "203.0.113.10",
-  dest_ip: "203.0.113.10",
-  dest_port: 443,
-  transport: "tcp",
-  bytes_out: 1280,
-  bytes_in: 8192,
-  bytes: 9472,
-  dvc: "edge-fw-01",
-  unmapped: {},
-}
-```
-
-## Apply the mapping pattern
-
-Use the same structure for larger mappings:
-
-* **Use the event scope**: Package mappers accept a named `event` field argument with `default: this`, create source and target namespaces with an initial spread, and mutate only fields below `$event`.
-* **Keep a source namespace**: Keep the parsed event under a short namespace such as `fw`, `dns`, `edr`, or `event` before you create CIM fields.
 * **Choose the dataset first**: Let the CIM data model, dataset tags, and constraints drive the mapping.
 * **Apply dataset tags**: Include the tags from the selected dataset and its parent chain so Splunk data model searches can find the event.
 * **Populate recommended fields**: Map recommended fields such as `src`, `dest`, `action`, `transport`, `dvc`, and `vendor_product` when the source provides them.
@@ -137,7 +51,7 @@ Use the same structure for larger mappings:
 When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) options:
 
 ```tql
-my_source::cim::map
+vendor::product::cim::map
 to_splunk "https://splunk.example.com:8088",
   hec_token=secret("splunk-hec-token"),
   time=_time,
@@ -149,8 +63,8 @@ to_splunk "https://splunk.example.com:8088",
 If the parsed source event lives in a nested field, pass that field explicitly and promote the mapped CIM event before the sink reads top-level metadata:
 
 ```tql
-my_source::cim::map event=parsed
-this = parsed
+vendor::product::cim::map parsed, into=cim
+this = move cim
 to_splunk "https://splunk.example.com:8088",
   hec_token=secret("splunk-hec-token"),
   time=_time,
@@ -173,3 +87,4 @@ Use the `index` option when the destination index differs per event.
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
 * [Splunk](../../integrations/splunk.md)
+* [Onboard a data source](../../tutorials/onboard-a-data-source.md)

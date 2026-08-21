@@ -61,7 +61,7 @@ from {
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   src_endpoint: {
     ip: 10.0.0.15,
@@ -89,7 +89,7 @@ context_enrich "endpoint_assets",
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   src_endpoint: {
     ip: 10.0.0.15,
@@ -142,7 +142,7 @@ from {
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     src_ip: 10.0.0.15,
@@ -162,7 +162,7 @@ context_enrich "endpoint_assets", key=unmapped.dst_ip, into=dst_endpoint
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     src_ip: 10.0.0.15,
@@ -250,7 +250,7 @@ from {
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     src_ip: 10.0.0.15,
@@ -268,7 +268,7 @@ context_enrich "network_segments", key=unmapped.src_ip, into=src_endpoint
   type_uid: 400106,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     src_ip: 10.0.0.15,
@@ -313,7 +313,7 @@ from {
   type_uid: 300201,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     actor_user_name: "alice",
@@ -331,7 +331,7 @@ context_enrich "users", key=unmapped.actor_user_name, into=actor.user
   type_uid: 300201,
   severity_id: 1,
   metadata: {
-    version: "1.8.0",
+    version: "1.9.0",
   },
   unmapped: {
     actor_user_name: "alice",
