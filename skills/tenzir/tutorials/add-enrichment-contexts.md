@@ -1,11 +1,11 @@
 ---
-title: "Add contexts for enrichment"
-canonical: https://tenzir.com/docs/tutorials/add-contexts-for-enrichment
-source: https://tenzir.com/docs/tutorials/add-contexts-for-enrichment.md
+title: "Add enrichment contexts"
+canonical: https://tenzir.com/docs/tutorials/add-enrichment-contexts
+source: https://tenzir.com/docs/tutorials/add-enrichment-contexts.md
 section: "Docs"
 ---
 
-# Add contexts for enrichment
+# Add enrichment contexts
 
 > A context is state, not code. Tenzir holds it, pipelines look things up in it, and somebody has to keep it current. This tutorial adds the Geo Open package next to the Amazon package from the earlier Development tutorials and enriches the OCSF Network Activity events from Onboard a data source with country and ASN data.
 

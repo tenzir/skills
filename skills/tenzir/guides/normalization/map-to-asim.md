@@ -49,7 +49,7 @@ These rules are specific to ASIM:
 ## See Also
 
 * [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md)
-* [Clean up values](clean-up-values.md)
+* [Clean up values](../parsing/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-asim-skill)
 * [Map to CIM](map-to-cim.md)
 * [Map to ECS](map-to-ecs.md)

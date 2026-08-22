@@ -84,7 +84,7 @@
 - [group](operators/group.md): Routes events with the same key through the same subpipeline.
 - [load_balance](operators/load_balance.md): Routes the data to one of multiple subpipelines.
 - [merge](operators/merge.md): Merges the output of a source subpipeline into the main stream.
-- [parallel](operators/parallel.md): Runs a subpipeline across multiple parallel workers.
+- [parallel](operators/parallel.md): Annotates desired parallelization degree.
 - [pass](operators/pass.md): Does nothing with the input.
 - [repeat](operators/repeat.md): Repeats the input a number of times.
 - [throttle](operators/throttle.md): Limits the throughput of events in a pipeline.

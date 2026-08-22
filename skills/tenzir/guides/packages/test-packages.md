@@ -141,11 +141,13 @@ tests/ocsf/auth.tql
 from_file env("TENZIR_INPUT") {
   read_json
 }
-vendor::ocsf::map
+this = {event: this}
+vendor::ocsf::map event, ocsf
+this = move ocsf
 ocsf_cast
 ```
 
-The mapper’s optional positional input and named output both default to `this`, so this form maps the current record in place. Test the paved-road normalizer with a raw payload, which covers format dispatch, parsing, mapping, and provenance in one call:
+The mapper reads one field and writes another, so the test stages the input under a field of its own and lifts the result afterwards. Test the normalizer with a raw payload, which covers format dispatch, parsing, mapping, and provenance in one call:
 
 tests/ocsf/auth-raw\.tql
 
@@ -177,9 +179,9 @@ tests/ocsf/auth-staged.tql
 from_file env("TENZIR_INPUT") {
   read_lines
 }
-vendor::parse line, into=event
+vendor::parse line, event
 event.tenant = "production"
-vendor::ocsf::map event, into=ocsf
+vendor::ocsf::map event, ocsf
 this = {
   ...ocsf,
   raw_data: line,

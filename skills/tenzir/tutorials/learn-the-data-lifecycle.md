@@ -109,7 +109,7 @@ Enrichment adds what the event does not carry: geography, asset ownership, threa
 context_enrich "geo-open", key=dst_endpoint.ip, into=dst_endpoint.geo
 ```
 
-The lookup lives in a context that updates on its own schedule, so enrichment stays one operator call. See [lookup tables](../guides/enrichment/use-lookup-tables.md), [threat intelligence](../guides/enrichment/enrich-with-threat-intel.md), [asset inventory](../guides/enrichment/enrich-with-asset-inventory.md), and [models](../guides/enrichment/enrich-events-with-ai.md), or build a context in [Add contexts for enrichment](add-contexts-for-enrichment.md).
+The lookup lives in a context that updates on its own schedule, so enrichment stays one operator call. See [lookup tables](../guides/enrichment/use-lookup-tables.md), [threat intelligence](../guides/enrichment/enrich-with-threat-intel.md), [asset inventory](../guides/enrichment/enrich-with-asset-inventory.md), and [models](../guides/enrichment/enrich-events-with-ai.md), or build a context in [Add enrichment contexts](add-enrichment-contexts.md).
 
 ### Aggregate
 

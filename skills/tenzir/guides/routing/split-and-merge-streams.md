@@ -141,7 +141,7 @@ where severity in ["high", "critical"]
 to_splunk "https://splunk:8088", hec_token=secret("HEC_TOKEN")
 ```
 
-The subpipeline must end in a sink, so its events never rejoin the main stream. Use [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md) when you want both branches to transform the events and then feed their results back into one stream. To spread work over identical workers instead of branching by purpose, the guide on how to [fan out with subpipelines](fan-out-with-subpipelines.md) compares `fork` with [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md), [`each`](https://tenzir.com/docs/reference/operators/each.md), and [`group`](https://tenzir.com/docs/reference/operators/group.md).
+The subpipeline must end in a sink, so its events never rejoin the main stream. Use [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md) when you want both branches to transform the events and then feed their results back into one stream. To send events into subpipelines per event or per key instead of branching by purpose, the guide on how to [fan out with subpipelines](fan-out-with-subpipelines.md) compares `fork` with [`each`](https://tenzir.com/docs/reference/operators/each.md) and [`group`](https://tenzir.com/docs/reference/operators/group.md).
 
 ## Fan-in: merge streams
 

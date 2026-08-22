@@ -7,9 +7,9 @@ section: "Docs"
 
 # Create a package
 
-> This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, plan reusable operators, add deployable pipelines, and include runnable examples.
+> This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, choose between operators and pipelines, and ship runnable examples.
 
-This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, plan reusable operators, add deployable pipelines, and include runnable examples.
+This guide shows you how to create a package from scratch. You’ll learn how to set up the directory structure, write the manifest, choose between operators and pipelines, and ship runnable examples.
 
 ## Create the package scaffold
 
@@ -45,7 +45,7 @@ The `tests/inputs/` directory holds sample data that the test harness makes avai
 
 ## Add the package manifest
 
-The `package.yaml` file is the **package manifest**. It identifies the directory as a package and contains descriptive fields, categories, external metadata, context definitions, and input specifications.
+The `package.yaml` file is the **package manifest**. It marks the directory as a package and declares the package’s identity, the metadata the Tenzir Library shows, and the inputs users fill in at installation.
 
 ### Add descriptive metadata
 
@@ -83,7 +83,7 @@ categories:
 
 ### Add external metadata
 
-Use top-level `categories` for the Library grouping. Valid values are `sources`, `destinations`, `mappings`, and `contexts`. Use the top-level `metadata` field for data consumed by external tools. Tenzir accepts this field but does not interpret its contents.
+The top-level `metadata` field carries data for external tools. Tenzir accepts the field but never interprets its contents.
 
 package.yaml
 
@@ -93,11 +93,11 @@ metadata:
   source: https://github.com/vendor/tenzir-packages
 ```
 
-Unknown top-level keys outside the package schema fail validation. Put non-engine package data under `metadata` instead.
+Unknown top-level keys fail validation, so put anything Tenzir does not define under `metadata`.
 
 ### Define inputs
 
-**Inputs** provide a templating mechanism that replaces variables with user-provided values during installation. This makes packages configurable without modifying source files.
+**Inputs** are variables that the node replaces with user-provided values when someone installs the package.
 
 package.yaml
 
@@ -109,55 +109,54 @@ inputs:
     default: 1h
 ```
 
-Reference inputs using `{{ inputs.input-id }}` syntax. See [Configure inputs](configure-inputs.md) for the complete templating guide.
+Reference an input as `{{ inputs.input-id }}`, which our guide on [configuring inputs](configure-inputs.md) covers in full.
 
-## Plan package capabilities
+An input is fixed for the whole installation, so reach for it only when a value belongs to the deployment rather than to a call. Anything a caller might vary belongs in an operator argument, which is typed and checked every time the pipeline compiles.
 
-A package can expose several capabilities at once. Treat user-defined operators as the reusable API, deployable pipelines as operational templates, examples as short usage snippets, and tests as the executable contract.
+## Operators versus pipelines
 
-* Put reusable package capabilities under `operators/`.
-* Give parsers a required positional input field and a named `into` output that defaults to `this`. Parsers turn raw input into structured source events.
-* If the package maps to OCSF, expose a main mapper such as `vendor::ocsf::map`. Give it an optional positional event field and a named `into` output, both defaulting to `this`. Snapshot the source under the output before mapping.
-* Expose a paved-road operator such as `vendor::ocsf::normalize` for the product’s complete standard procedure. It should accept every product representation the package supports, parse strings when necessary, proceed directly when the input is already structured, map to the target schema, apply standard policy, and write the complete result to `into=this` by default.
-* Name the package after the vendor and give each of the vendor’s products a directory below it, as our guide on [choosing a namespace](add-operators.md#choose-a-namespace) explains.
-* If the package maps between normalized schemas, put the target schema before the source schema in the operator namespace, for example `vendor::cim::ocsf::map` for OCSF-to-CIM mapping.
-* Prefer operator arguments over installation inputs for anything a caller might vary. Arguments are typed and checked per call, while an input is fixed for the whole installation.
-* Put complete workflows with an input and output under `pipelines/` only when the package must own a running workflow, and disable them by default with `disabled: true`. Otherwise let users build pipelines from your operators.
-* Put focused snippets under `examples/` so users can quickly try the package after installation.
-* Put deterministic tests under `tests/`, including baselines for every public operator.
+Every capability you add is either a user-defined operator or a pipeline, so settle that question before you write either one.
+
+| Aspect        | Operators                      | Pipelines                            |
+| ------------- | ------------------------------ | ------------------------------------ |
+| **Purpose**   | Reusable building blocks       | Complete workflows                   |
+| **Execution** | Called explicitly by other TQL | Run automatically on install         |
+| **Structure** | No input/output restrictions   | Must have input and output operators |
+| **Testing**   | Test with sample data          | Test with fixtures or mocks          |
+
+Write an operator for a transformation users will reuse, compose with other operations, and call at a moment they choose.
+
+Write a pipeline for a self-contained workflow that the package itself should run, such as refreshing a context every hour.
+
+Most packages ship both: operators that carry the reusable capabilities, and disabled pipelines that demonstrate how to compose them. Our guide on [adding pipelines](add-pipelines.md) covers the frontmatter that controls scheduling, restarts, and whether a pipeline runs at all.
 
 ## Add examples
 
-The `examples` directory contains self-contained code snippets that demonstrate how to use the package. These snippets appear in the [Tenzir Library](https://app.tenzir.com/library) and provide runnable TQL code that users can execute after installing the package.
-
-Create example files that showcase your package’s features:
+The `examples` directory holds self-contained snippets that run after installation. They appear in the [Tenzir Library](https://app.tenzir.com/library), which makes them the first TQL most users see from your package, so they run on a literal event rather than on live credentials. Start with the shortest path through the package:
 
 examples/basic-usage.tql
 
 ```tql
-// Demonstrate the primary use case
-vendor::fetch
-vendor::transform
-head 10
+from {message: "2026-01-15T10:30:00Z auth alice success"}
+vendor::ocsf::normalize message
 ```
 
-For more complex scenarios, combine multiple operators and show how they work together:
+Then show a snippet per use case the package supports:
 
-examples/advanced-usage.tql
+examples/alert-on-high-severity.tql
 
 ```tql
-// Show a more complex scenario
-vendor::fetch
-where severity == "high"
-vendor::enrich
+from {message: "2026-01-15T10:31:00Z auth root failure"}
+vendor::ocsf::normalize message
+where severity_id >= 4
 publish "alerts"
 ```
 
-Keep examples focused and self-contained. Each example should demonstrate a single concept or use case.
+One example, one use case. An example that needs a paragraph of setup belongs in a pipeline or a test.
 
 ## Define contexts
 
-If your package uses enrichment contexts, add a `contexts` key to the manifest. See [Add contexts](add-contexts.md) for the full schema and usage details.
+A package that enriches events declares its lookup tables and other contexts under a `contexts` key in the manifest, which our guide on [adding contexts](add-contexts.md) documents with the full schema.
 
 ## See also
 

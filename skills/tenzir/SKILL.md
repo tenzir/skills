@@ -212,6 +212,10 @@ This guide shows you how to parse binary data formats into structured events.
 
 This guide shows you how to extract structured data from string fields using TQL’s parsing functions.
 
+#### [Clean up values](guides/parsing/clean-up-values.md)
+
+This guide shows you how to clean and normalize values in your data before mapping to a schema.
+
 #### [Filter and select data](guides/transformation/filter-and-select-data.md)
 
 Filtering and selecting are fundamental operations when working with data streams.
@@ -251,8 +255,6 @@ This guide shows you how to mask sensitive fields such as IP addresses, email ad
 #### [Normalize data](guides/normalization.md)
 
 These guides take you from source-specific events to a schema your downstream tools understand.
-
-##### [Clean up values](guides/normalization/clean-up-values.md)
 
 ##### [Map to ASIM](guides/normalization/map-to-asim.md)
 
@@ -488,7 +490,7 @@ This tutorial teaches you to write TQL that is clear, efficient, and maintainabl
 
 Onboarding a data source means turning one product’s output into events that every later stage of the data lifecycle can use.
 
-#### [Add contexts for enrichment](tutorials/add-contexts-for-enrichment.md)
+#### [Add enrichment contexts](tutorials/add-enrichment-contexts.md)
 
 A context is state, not code.
 

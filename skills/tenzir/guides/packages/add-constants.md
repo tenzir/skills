@@ -11,7 +11,7 @@ section: "Docs"
 
 This guide shows you how to define package-wide constants in a `constants.tql` file and reference them as `pkg::$name` from the package’s own operators and pipelines, as well as from any pipeline that uses the package. You’ll learn the `let` syntax, how bindings build on one another, the rules each binding must satisfy, and when to use a constant instead of an input.
 
-Our tutorial on [onboarding a data source](../../tutorials/onboard-a-data-source.md#extract-the-parsing-into-an-operator) shows how package constants publish reusable classifiers, patterns, headers, and pattern definitions.
+Our tutorial on [onboarding a data source](../../tutorials/onboard-a-data-source.md#create-the-parser) shows how package constants publish reusable classifiers, patterns, headers, and pattern definitions.
 
 ## Define constants
 

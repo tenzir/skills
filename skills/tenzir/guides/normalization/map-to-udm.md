@@ -48,7 +48,7 @@ These rules are specific to UDM:
 ## See Also
 
 * [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
-* [Clean up values](clean-up-values.md)
+* [Clean up values](../parsing/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-udm-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to CIM](map-to-cim.md)

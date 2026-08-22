@@ -37,9 +37,9 @@ OCSF mapping is a bipartite graph transformation: source fields form one vertex 
 
 ### Package layout
 
-Put the target schema first in mapping namespaces. Source-to-OCSF packages use `paloalto::ngfw::ocsf::map`, and cross-schema mappings keep the same rule, for example `paloalto::ngfw::asim::ocsf::map` for OCSF-to-ASIM mapping.
+Put the target schema first in mapping namespaces, and let the vendor that owns a schema host the mappers into it. Source-to-OCSF packages use `paloalto::ngfw::ocsf::map`, while the mappers out of OCSF live with their target: `splunk::cim::ocsf::map` for Splunk CIM and `microsoft::asim::ocsf::map` for Microsoft Sentinel ASIM.
 
-A product with several event types needs a dispatcher that routes each recognized event type to an operator under `ocsf/events/` and falls back to the OCSF Base Event. Our guide on [building layered normalization APIs](../packages/add-operators.md#build-layered-normalization-apis) shows that hierarchy together with the normalizer that wraps it, and our guide on [testing packages](../packages/test-packages.md) covers the tests and baselines that go with it.
+A product with several event types needs a dispatcher that routes each recognized event type to an operator under `ocsf/events/` and falls back to the OCSF Base Event. Our tutorial on [creating the mapper](../../tutorials/onboard-a-data-source.md#create-the-mapper) shows that hierarchy together with the normalizer that wraps it, and our guide on [testing packages](../packages/test-packages.md) covers the tests and baselines that go with it.
 
 How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
 
@@ -77,7 +77,7 @@ They also make a mapping readable in the other direction. Writing `where class_u
 ## See also
 
 * [Model detections in OCSF](../detection/model-detections-in-ocsf.md)
-* [Clean up values](clean-up-values.md)
+* [Clean up values](../parsing/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ocsf-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to CIM](map-to-cim.md)

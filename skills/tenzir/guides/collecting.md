@@ -112,6 +112,30 @@ from_nic "eth0"
 
 See the [network data guide](collecting/get-data-from-the-network.md) for OTLP/HTTP ingestion, socket configuration, flow telemetry, and packet capture.
 
+### Fetch data referenced in events
+
+Some sources emit a reference to data instead of the data itself. Use [`each`](https://tenzir.com/docs/reference/operators/each.md) to start one source pipeline for every reference event.
+
+For example, assume that each Amazon SQS message contains a JSON object with an `object_url` field:
+
+```tql
+from_amazon_sqs "sqs://object-notifications"
+this = message.parse_json()
+each {
+  from_s3 $this.object_url {
+    read_auto
+  }
+}
+```
+
+One subpipeline per reference event
+
+[`each`](https://tenzir.com/docs/reference/operators/each.md) starts a fresh subpipeline for every reference event. The current reference is available as `$this`, so the source operator can use fields from the reference event. The fetched events flow back into one output stream.
+
+Only accept references from trusted producers. A URL supplied by an untrusted event could direct the Tenzir Node to an internal or sensitive network location.
+
+For an SQS-to-S3 example, see the [CrowdStrike](../integrations/crowdstrike.md) integration, which uses this pattern to collect Falcon Data Replicator events.
+
 ## Sending data to destinations
 
 For routing data to outputs, see the [Routing guides](routing/send-to-destinations.md), which cover destination operators, file output, load balancing, and pipeline connections.

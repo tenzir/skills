@@ -7,56 +7,41 @@ section: "Docs"
 
 # parallel
 
-> Runs a subpipeline across multiple parallel workers.
+> Annotates desired parallelization degree.
 
-Runs a subpipeline across multiple parallel workers.
+Annotates desired parallelization degree.
 
 ```tql
-parallel [jobs:int] [, route_by=any] { … }
+parallel [jobs:int] { … }
 ```
 
 ## Description
 
-The [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) operator distributes incoming events across multiple parallel instances of a subpipeline. Each event is processed by exactly one worker.
+The [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) operator marks the operators in its subpipeline to run on multiple cores. It applies the same mechanism as the `// parallelism:` comment, which covers a whole pipeline, to a section of one.
 
-Use this operator to parallelize CPU-intensive transformations or I/O-bound operations that would otherwise bottleneck on a single thread.
+Tenzir replicates only those operators that can work on any batch they receive, such as [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments, [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and [`ocsf::cast`](https://tenzir.com/docs/reference/operators/ocsf::cast). Operators that combine related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive a stream partitioned by their own key fields, so every event of a group reaches the instance that owns it. Tenzir leaves the remaining operators, including sources and most sinks, at a single instance. Our explanation of [parallel execution](../../explanations/pipeline.md#parallel-execution) covers which operators fall into which category.
 
-By default, events are distributed across workers using an adaptive round-robin strategy that keeps worker loads balanced. Use `route_by` to instead route events deterministically by a key, ensuring that all events with the same key value go to the same worker.
+Reach for `parallel` when profiling points at a section of a pipeline rather than at the pipeline as a whole. To parallelize a whole pipeline, prefer the `// parallelism:` comment described in our guide on [tuning performance](../../guides/node-setup/tune-performance.md#parallelism).
 
-This operator may reorder the event stream since workers process events concurrently.
+Parallelism reorders events
 
-When used as a source operator (without upstream input), `parallel` spawns multiple independent instances of the subpipeline. This is useful for running the same source pipeline with concurrent connections.
-
-Expert Operator
-
-The `parallel` operator is a building block for performance optimization. Use it when you have identified a specific bottleneck that benefits from parallelization. Not all operations scale linearly with parallelism.
+Operator instances work at different speeds, so a block can emit events in a different order than it received them. Avoid `parallel` when the event order carries meaning.
 
 ### `jobs: int (optional)`
 
-The number of parallel workers to spawn. Must be greater than zero. Defaults to the number of available CPU cores.
+The number of instances to run each replicated operator on. Must be greater than zero.
 
-### `route_by = any (optional)`
-
-An expression evaluated per event to determine which worker processes it. Events with the same `route_by` value are always sent to the same worker. This guarantees that related events are grouped together, which is required for stateful subpipelines like [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md).
-
-Cannot be used when `parallel` is used as a source operator.
+Defaults to `8`.
 
 ### `{ … }`
 
-The subpipeline to run in parallel. The subpipeline may either:
-
-* Produce events as output (transformation)
-* End with a sink (void output)
-
-When `parallel` is used as a source operator, the subpipeline runs as an independent source producing events or as a full pipeline ending with a sink.
-
-The subpipeline must not produce bytes as output.
+The subpipeline to parallelize. It may transform events, end in a sink, or start with its own source. It must not produce bytes.
 
 ## Examples
 
 ### Parse JSON in parallel
 
-Parse raw JSON strings across multiple workers:
+Parse raw JSON strings on four cores:
 
 ```tql
 subscribe "raw"
@@ -65,29 +50,30 @@ parallel 4 {
 }
 ```
 
-### Route events by source IP
+### Deduplicate flows in parallel
 
-Ensure events from the same source IP are always handled by the same worker, enabling per-source deduplication:
-
-```tql
-subscribe "events"
-parallel route_by=src_ip {
-  deduplicate src_ip, dst_ip, dst_port
-}
-```
-
-### Make parallel HTTP requests
-
-Send events to Google SecOps with 4 concurrent connections:
+Operators that need related events together partition their input themselves, so a block around them needs no routing configuration:
 
 ```tql
 subscribe "events"
 parallel 4 {
-  to_google_secops project="…", region="us", instance="…",
-                   service_credentials=secret("secops_service_account"),
-                   log_type="…", log_text=raw,
-                   log_entry_time=ts, collection_time=now()
+  deduplicate src_ip, dst_ip, dst_port
 }
+```
+
+Tenzir routes every event with the same `src_ip`, `dst_ip`, and `dst_port` to the same instance of [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md).
+
+### Parallelize one section of a pipeline
+
+Cast to OCSF on eight cores while the surrounding operators stay on one:
+
+```tql
+from_file "/var/log/events/*.json", watch=10s
+parallel {
+  ocsf::cast
+  where severity_id >= 4
+}
+to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 ```
 
 ## See Also
@@ -95,4 +81,5 @@ parallel 4 {
 * [`each`](https://tenzir.com/docs/reference/operators/each.md)
 * [`group`](https://tenzir.com/docs/reference/operators/group.md)
 * [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
+* [Tune performance](../../guides/node-setup/tune-performance.md)
 * [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)

@@ -225,7 +225,7 @@ You’ve just scratched the surface. Here’s where to go next:
 
 1. Explore the [Library](https://app.tenzir.com/library) and browse through packages of pre-built pipelines.
 2. [Visualize pipeline insights and build dashboards](../tutorials/plot-data-with-charts.md)
-3. [Map events to OCSF](../tutorials/onboard-a-data-source.md#map-it-to-ocsf)
+3. [Map events to OCSF](../tutorials/onboard-a-data-source.md#map-to-ocsf)
 4. Send events to your data lake, such as [Amazon Security Lake](../integrations/amazon/security-lake.md)
 
 Curious how it all fits together? Brush up on the [Tenzir architecture](../explanations/deployment.md) to learn more about all moving parts. We’re here to help. Join us at our friendly [Tenzir Discord](https://discord.tenzir.com) if you have any questions.

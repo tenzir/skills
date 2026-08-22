@@ -887,4 +887,4 @@ reading = f"{temp_c}°C in {location}"
 
 * [Filter and select data](filter-and-select-data.md)
 * [Manipulate strings](manipulate-strings.md)
-* [Clean up values](../normalization/clean-up-values.md)
+* [Clean up values](../parsing/clean-up-values.md)

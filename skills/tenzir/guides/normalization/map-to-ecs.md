@@ -48,16 +48,18 @@ These rules are specific to ECS:
 After you map events to ECS, send them to Elasticsearch or OpenSearch with the Bulk API operators:
 
 ```tql
-vendor::product::ecs::map
+elastic::ecs::map ocsf, ecs
+this = move ecs
 to_elasticsearch "https://elasticsearch.example.com:9200",
   action="index",
   index="ecs-events"
 ```
 
-If the parsed source event lives in a nested field, pass that field explicitly and promote the mapped ECS document before indexing:
+The mapper reads one field and writes another, so a pipeline holding an OCSF event at the top level stages it first, then promotes the ECS document before indexing:
 
 ```tql
-vendor::product::ecs::map parsed, into=ecs
+this = {ocsf: this}
+elastic::ecs::map ocsf, ecs
 this = move ecs
 to_elasticsearch "https://elasticsearch.example.com:9200",
   action="index",
@@ -70,7 +72,7 @@ Use [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.
 
 * [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
 * [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
-* [Clean up values](clean-up-values.md)
+* [Clean up values](../parsing/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ecs-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to CIM](map-to-cim.md)

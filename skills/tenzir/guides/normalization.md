@@ -7,13 +7,9 @@ section: "Docs"
 
 # Normalize data
 
-> These guides take you from source-specific events to a schema your downstream tools understand. Start with cleanup, then pick the guide for your target schema. We map sources to OCSF first and translate from there, and our explanation of normalization makes the case for why.
+> These guides take you from source-specific events to a schema your downstream tools understand. We map sources to OCSF first and translate from there, and our explanation of normalization makes the case for why.
 
-These guides take you from source-specific events to a schema your downstream tools understand. Start with cleanup, then pick the guide for your target schema. We map sources to OCSF first and translate from there, and our explanation of [normalization](../explanations/normalization.md) makes the case for why.
-
-## Fix the data first
-
-[Clean up values](normalization/clean-up-values.md) replaces null placeholders such as `"None"`, `"N/A"`, and `"-"`, converts strings to timestamps, IP addresses, and numbers, and supplies defaults for missing fields. Mapping bad values into a good schema only moves the problem.
+These guides take you from source-specific events to a schema your downstream tools understand. We map sources to OCSF first and translate from there, and our explanation of [normalization](../explanations/normalization.md) makes the case for why.
 
 ## Choose a target schema
 

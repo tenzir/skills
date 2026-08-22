@@ -109,5 +109,5 @@ this = message.parse_json()
 
 * [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md)
 * [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
-* [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
+* [Read from message brokers](../../guides/collecting/read-from-message-brokers.md#fetch-data-referenced-in-messages)
 * [Send to destinations](../../guides/routing/send-to-destinations.md)

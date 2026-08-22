@@ -77,6 +77,17 @@ from_file "/var/log/flows/*.json"
 summarize dest_ip, bytes=sum(bytes)
 ```
 
+When only one section of a pipeline is the bottleneck, wrap it in [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) instead. The operators inside run on the given number of cores, and the rest of the pipeline stays on one:
+
+```tql
+from_file "/var/log/events/*.json", watch=10s
+parallel 4 {
+  ocsf::cast
+  where severity_id >= 4
+}
+to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
+```
+
 Parallelism reorders events
 
 Parallel instances work at different speeds, so a parallel pipeline can emit events in a different order than it received them. Keep parallelism disabled when the input order carries meaning. The explanation of [parallel execution](../../explanations/pipeline.md#parallel-execution) covers why ordering and parallelism conflict.

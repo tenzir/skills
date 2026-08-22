@@ -1,7 +1,7 @@
 ---
 title: "Clean up values"
-canonical: https://tenzir.com/docs/guides/normalization/clean-up-values
-source: https://tenzir.com/docs/guides/normalization/clean-up-values.md
+canonical: https://tenzir.com/docs/guides/parsing/clean-up-values
+source: https://tenzir.com/docs/guides/parsing/clean-up-values.md
 section: "Docs"
 ---
 

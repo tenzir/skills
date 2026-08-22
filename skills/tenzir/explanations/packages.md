@@ -72,7 +72,7 @@ The `package.yaml` manifest is the only required file. It identifies the directo
 
 Operators can accept [positional and named arguments](../guides/packages/add-operators.md#add-parameters-to-operators) for flexible, parameterized transformations.
 
-Packages that onboard a data source name their operators after the step they perform, which our guide on [building layered normalization APIs](../guides/packages/add-operators.md#build-layered-normalization-apis) describes in full.
+Packages that onboard a data source name their operators after the step they perform, which our tutorial on [onboarding a data source](../tutorials/onboard-a-data-source.md#fit-it-into-the-data-lifecycle) describes in full.
 
 ### Pipelines
 

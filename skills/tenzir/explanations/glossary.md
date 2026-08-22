@@ -36,7 +36,7 @@ A stateful object used for in-band enrichment.
 Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP database. Pipelines look values up in them with [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md), and something has to keep them current.
 
 * Read more about [enrichment](enrichment.md)
-* [Add contexts for enrichment](../tutorials/add-contexts-for-enrichment.md)
+* [Add enrichment contexts](../tutorials/add-enrichment-contexts.md)
 
 ## Destination
 

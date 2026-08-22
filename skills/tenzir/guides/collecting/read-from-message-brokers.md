@@ -152,6 +152,12 @@ parsed = message.parse_json()
 
 The operator produces events with a `message` field containing the raw message content. Parse it to extract structured data.
 
+## Fetch data referenced in messages
+
+A broker message may contain a reference to data stored elsewhere instead of carrying the data itself. After parsing the message, use [`each`](https://tenzir.com/docs/reference/operators/each.md) to start a source subpipeline that fetches the referenced data.
+
+See [Collecting](../collecting.md#fetch-data-referenced-in-events) for the general collection pattern.
+
 ## See also
 
 * [Parse string fields](../parsing/parse-string-fields.md)

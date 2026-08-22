@@ -11,7 +11,7 @@ section: "Docs"
 
 This guide shows you how to add enrichment contexts to your package. You’ll learn how to define contexts in the manifest, populate them with data, and test context interactions.
 
-For a complete collection, update, enrichment, refresh, and testing workflow, follow the tutorial on [adding contexts for enrichment](../../tutorials/add-contexts-for-enrichment.md).
+For a complete collection, update, enrichment, refresh, and testing workflow, follow the tutorial on [adding enrichment contexts](../../tutorials/add-enrichment-contexts.md).
 
 ## Define contexts in the manifest
 

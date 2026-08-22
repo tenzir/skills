@@ -51,7 +51,8 @@ These rules are specific to CIM:
 When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) options:
 
 ```tql
-vendor::product::cim::map
+splunk::cim::map ocsf, cim
+this = move cim
 to_splunk "https://splunk.example.com:8088",
   hec_token=secret("splunk-hec-token"),
   time=_time,
@@ -60,10 +61,11 @@ to_splunk "https://splunk.example.com:8088",
   sourcetype=sourcetype
 ```
 
-If the parsed source event lives in a nested field, pass that field explicitly and promote the mapped CIM event before the sink reads top-level metadata:
+The mapper reads one field and writes another, so a pipeline holding an OCSF event at the top level stages it first, then promotes the CIM event before the sink reads top-level metadata:
 
 ```tql
-vendor::product::cim::map parsed, into=cim
+this = {ocsf: this}
+splunk::cim::map ocsf, cim
 this = move cim
 to_splunk "https://splunk.example.com:8088",
   hec_token=secret("splunk-hec-token"),
@@ -78,7 +80,7 @@ Use the `index` option when the destination index differs per event.
 ## See Also
 
 * [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
-* [Clean up values](clean-up-values.md)
+* [Clean up values](../parsing/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-cim-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to ECS](map-to-ecs.md)
