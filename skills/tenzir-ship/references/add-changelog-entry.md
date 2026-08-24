@@ -61,19 +61,25 @@ username. If no human can be identified confidently, remove `author` or
 
 If the project config sets `omit_author: true`, do not record authors at
 all—neither via `--author`/`--co-author` flags nor by writing `authors` into
-the entry frontmatter. Validation rejects entries that carry `authors`
-metadata in such projects. Check the changelog's `config.yaml` for this
-option, or the `package.yaml` next to the changelog directory when no
+the entry frontmatter. Validation rejects unreleased entries that carry
+`authors` metadata in such projects. Check the changelog's `config.yaml` for
+this option, or the `package.yaml` next to the changelog directory when no
 `config.yaml` exists.
+
+If the project config sets `require_author: true`, every unreleased entry must
+carry a non-empty `authors` list. The `add` command warns when it cannot find an
+author, and `validate` fails the entry. Record only confirmed human
+contributors. Never guess an identity to satisfy validation.
 
 ### PR numbers
 
 If the project config sets `omit_pr: true`, do not record PR numbers at
 all—neither via `--pr` nor by writing `prs` into the entry frontmatter.
 The `add` command ignores explicit `--pr` values with a warning in these
-projects. Check the changelog's `config.yaml` for this option, or the
-`package.yaml` next to the changelog directory when no `config.yaml` exists.
-Skip the rest of this section.
+projects, and validation rejects `prs` metadata in unreleased entries. Check
+the changelog's `config.yaml` for this option, or the `package.yaml` next to
+the changelog directory when no `config.yaml` exists. Skip the rest of this
+section.
 
 If the project config sets `require_pr: true`, every unreleased entry must
 carry `prs` metadata. Plain `validate` fails when unreleased entries are missing
@@ -274,4 +280,8 @@ uvx tenzir-ship validate
 ```
 
 Pass the same `--root <path/to/changelog>` you used for `add`. Fix any
-reported issues before committing the entry.
+reported issues before committing the entry. Metadata policies such as
+`omit_pr` and `require_author` apply to unreleased entries by default. Pass
+`--all-entries` to audit released entries against the current policies too.
+When combined with `--all-entries`, `--lenient` also demotes missing PRs in
+released entries. It never demotes missing authors or forbidden metadata.
