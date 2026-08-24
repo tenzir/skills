@@ -23,11 +23,11 @@ Place test files in the `tests` directory of your package:
 
   * tests/
 
-    * normalize.input Sample data for the test
+    * parse.input Sample data for the test
 
-    * normalize.tql Test file
+    * parse.tql Test file
 
-    * normalize.txt Expected output baseline
+    * parse.txt Expected output baseline
 
     * context/
 
@@ -45,7 +45,7 @@ Each test consists of:
 
 ## Use inline inputs
 
-**Inline inputs** are the preferred way to provide test data. Place a `.input` file next to your test file with the same base name:
+Place a `.input` file next to your test file with the same base name when the data belongs to that one test:
 
 * tests/
 
@@ -71,11 +71,11 @@ Alice,42
 Bob,17
 ```
 
-Inline inputs keep test data next to the test that uses it, making tests self-contained and easy to understand.
+Inline inputs keep test data next to the test that uses it.
 
 ### When to use shared inputs
 
-For data shared across multiple tests in a subdirectory, create a local `inputs/` directory. The harness uses the **nearest `inputs/` directory** when resolving `TENZIR_INPUTS`:
+Most tests in the [Tenzir Library](https://github.com/tenzir/library) read from a shared `inputs/` directory instead, because several tests exercise the same sample events through different operators. The harness uses the nearest `inputs/` directory when resolving `TENZIR_INPUTS`:
 
 * tests/
 
@@ -103,11 +103,13 @@ Access shared inputs in TQL:
 tests/network/tcp/analysis.tql
 
 ```tql
-from_file f"{env("TENZIR_INPUTS")}/packets.pcap"
+from_file f"{env("TENZIR_INPUTS")}/packets.pcap" {
+  read_pcap
+}
 vendor::analyze
 ```
 
-Place `inputs/` directories as close to the tests that use them as possible. This keeps related data together and makes it clear which tests depend on which files. Prefer inline `.input` files for single-test data and local `inputs/` directories for data shared within a test group.
+Place `inputs/` directories as close to the tests that use them as possible. This keeps related data together and makes it clear which tests depend on which files.
 
 ## Write test pipelines
 
@@ -115,82 +117,40 @@ Test pipelines exercise your package logic with known input and produce determin
 
 ### Test an operator
 
-tests/normalize.tql
+Test the operator your users call, not the building blocks it composes. An operator that writes into a field needs the test to lift the result:
 
-```tql
-from_file env("TENZIR_INPUT") {
-  read_lines
-}
-vendor::ocsf::normalize line
-ocsf_cast
-```
-
-tests/normalize.input
-
-```text
-2024-01-15T10:30:00Z auth alice success
-```
-
-### Test OCSF mappings
-
-OCSF mapping tests should exercise the package mapper and run the shared OCSF helpers before comparing against a baseline. This verifies both your mapping logic and the final schema shape that downstream pipelines consume.
-
-tests/ocsf/auth.tql
-
-```tql
-from_file env("TENZIR_INPUT") {
-  read_json
-}
-this = {event: this}
-vendor::ocsf::map event, ocsf
-this = move ocsf
-ocsf_cast
-```
-
-The mapper reads one field and writes another, so the test stages the input under a field of its own and lifts the result afterwards. Test the normalizer with a raw payload, which covers format dispatch, parsing, mapping, and provenance in one call:
-
-tests/ocsf/auth-raw\.tql
-
-```tql
-from_file env("TENZIR_INPUT") {
-  read_lines
-}
-vendor::ocsf::normalize line
-ocsf_cast
-```
-
-Add a test for a payload in an unsupported format, which the mapper turns into an OCSF Base Event that carries the payload:
-
-tests/ocsf/auth-unsupported.tql
-
-```tql
-from_file env("TENZIR_INPUT") {
-  read_lines
-}
-vendor::ocsf::normalize line
-ocsf_cast
-```
-
-Add a staged test when callers can customize the structured source event:
-
-tests/ocsf/auth-staged.tql
+tests/parse.tql
 
 ```tql
 from_file env("TENZIR_INPUT") {
   read_lines
 }
 vendor::parse line, event
-event.tenant = "production"
-vendor::ocsf::map event, ocsf
-this = {
-  ...ocsf,
-  raw_data: line,
-  raw_data_size: line.length_bytes(),
-}
-ocsf_cast
+this = move event
 ```
 
-Use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) to validate the mapped event against the OCSF schema, so the baseline captures the schema that consumers see. Leave [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) out of tests: a package produces minimal OCSF, and expanding it into sibling enum fields is a decision each caller makes. Drop or replace non-deterministic fields before the comparison, such as processing timestamps created with [`now`](https://tenzir.com/docs/reference/functions/now.md).
+tests/parse.input
+
+```text
+2024-01-15T10:30:00Z auth alice success
+```
+
+### Pin the output schema
+
+Validate the schema your operator promises, so the baseline shows what consumers see. For OCSF, [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) validates and [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md) keeps the baseline short:
+
+tests/ocsf/auth.tql
+
+```tql
+from_file f"{env("TENZIR_INPUTS")}/auth.ndjson" {
+  read_ndjson
+}
+vendor::ocsf::normalize
+ocsf_cast
+drop_null_fields
+```
+
+Leave out what each caller decides, such as [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md), and replace non-deterministic values such as [`now`](https://tenzir.com/docs/reference/functions/now.md). For a full package walkthrough, see [Onboard a data source](../../tutorials/onboard-a-data-source.md).
 
 ### Test with different arguments
 
@@ -250,7 +210,7 @@ When the output looks correct, save it as the baseline:
 uvx tenzir-test --update
 ```
 
-This creates or updates `.txt` files next to each test. For example, `tests/normalize.tql` produces `tests/normalize.txt`.
+This creates or updates `.txt` files next to each test. For example, `tests/parse.tql` produces `tests/parse.txt`.
 
 ### Compare against baselines
 
@@ -267,7 +227,7 @@ The harness reports differences between actual output and baselines. Use `--verb
 Target individual tests or directories:
 
 ```sh
-uvx tenzir-test tests/normalize.tql
+uvx tenzir-test tests/parse.tql
 uvx tenzir-test tests/context/
 ```
 
@@ -284,7 +244,7 @@ Patterns containing `*`, `?`, or `[` still use fnmatch glob syntax:
 uvx tenzir-test -m 'tests/*/create.tql'
 ```
 
-You can combine paths and patterns – the harness intersects both selections, running only tests that match both the path and a pattern:
+You can combine paths and patterns. The harness intersects both selections, running only tests that match both the path and a pattern:
 
 ```sh
 uvx tenzir-test tests/context/ -m create
@@ -305,13 +265,14 @@ timeout: 60
 // Long-running test pipeline
 ```
 
-| Option     | Type    | Default   | Description                               |
-| ---------- | ------- | --------- | ----------------------------------------- |
-| `timeout`  | integer | 30        | Command timeout in seconds                |
-| `error`    | boolean | false     | Expect non-zero exit code                 |
-| `skip`     | string  | unset     | Skip test with reason                     |
-| `fixtures` | list    | `[]`      | Fixtures to request                       |
-| `runner`   | string  | by suffix | Runner name (`tenzir`, `python`, `shell`) |
+| Option        | Type           | Default   | Description                               |
+| ------------- | -------------- | --------- | ----------------------------------------- |
+| `timeout`     | integer        | 30        | Command timeout in seconds                |
+| `error`       | boolean        | false     | Expect non-zero exit code                 |
+| `skip`        | string         | unset     | Skip test with reason                     |
+| `fixtures`    | list           | `[]`      | Fixtures to request                       |
+| `runner`      | string         | by suffix | Runner name (`tenzir`, `python`, `shell`) |
+| `pre-compare` | string or list | `[]`      | Transform both sides before comparing     |
 
 ## Troubleshooting
 
@@ -325,7 +286,9 @@ Ensure the test suite has `fixtures: [node]` in `test.yaml`. The node fixture au
 
 ### Non-deterministic output
 
-Tests must produce deterministic output. Use `sort` to order results, and avoid timestamps or random values in output. For time-based tests, use fixed input data rather than `now()`.
+Tests must produce deterministic output. When only the order varies, add `pre-compare: sort` to the frontmatter rather than a `sort` operator, which would leave test scaffolding in the pipeline. See [pre-compare transforms](../../reference/test-framework.md#pre-compare-transforms).
+
+Avoid timestamps and random values in output. For time-based tests, use fixed input data rather than `now()`.
 
 ### Baseline mismatch after changes
 

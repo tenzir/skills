@@ -63,10 +63,11 @@ Create your first scenario under `tests/`. The harness discovers tests recursive
 tests/high-severity.tql
 
 ```tql
-from_file f"{env("TENZIR_INPUTS")}/alerts.ndjson"
+from_file f"{env("TENZIR_INPUTS")}/alerts.ndjson" {
+  read_ndjson
+}
 where severity >= 5
-project id, message
-sort id
+select id, message
 ```
 
 The harness also injects a unique scratch directory into `TENZIR_TMP_DIR` while each test executes. Use it for transient files you do not want under version control; pass `--keep` when you run `tenzir-test` if you need to inspect the generated artifacts afterwards.
@@ -91,12 +92,20 @@ uvx tenzir-test --update
 
 The command produces `tests/high-severity.txt` with the captured stdout.
 
-```json
-{"id":1,"message":"Disk usage above 90%"}
-{"id":3,"message":"Authentication failure on admin"}
+```tql
+{
+  id: 1,
+  message: "Disk usage above 90%",
+}
+{
+  id: 3,
+  message: "Authentication failure on admin",
+}
 ```
 
 Review the reference file, adjust the pipeline if needed, and rerun `--update` until you are satisfied with the results. Commit the `.tql` test and `.txt` baseline together so future runs can compare against known-good output. At this point you can [run the test suite](run-tests.md) without `--update` to verify that the actual output matches the baseline.
+
+If the pipeline emits the right events in a varying order, as `summarize` does for its groups, add `pre-compare: sort` to the frontmatter instead of ending the pipeline with a `sort` operator. See [pre-compare transforms](../../reference/test-framework.md#pre-compare-transforms).
 
 ## Step 6: Provide stdin input
 
@@ -120,7 +129,6 @@ tests/parsing/csv.tql
 
 ```tql
 read_csv
-sort name
 ```
 
 Run the test with `--update` to capture the baseline:

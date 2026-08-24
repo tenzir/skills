@@ -82,7 +82,7 @@ When only one section of a pipeline is the bottleneck, wrap it in [`parallel`](h
 ```tql
 from_file "/var/log/events/*.json", watch=10s
 parallel 4 {
-  ocsf::cast
+  ocsf_cast
   where severity_id >= 4
 }
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }

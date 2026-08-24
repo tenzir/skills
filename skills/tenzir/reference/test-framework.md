@@ -528,18 +528,19 @@ The harness cycles between three internal modes:
 
 Common frontmatter keys:
 
-| Key            | Type            | Default   | Description                                                                                                                                                |
-| -------------- | --------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `runner`       | string          | by suffix | Runner name (`tenzir`, `python`, `shell`, custom).                                                                                                         |
-| `fixtures`     | list            | `[]`      | Requested fixtures. Accepts bare names and structured options mappings.                                                                                    |
-| `timeout`      | integer (s)     | `30`      | Command timeout. (`--coverage` multiplies it by five.)                                                                                                     |
-| `error`        | boolean         | `false`   | Expect a non-zero exit code.                                                                                                                               |
-| `skip`         | string or dict  | unset     | Mark tests as skipped. See [skip configuration](test-framework.md#skip-configuration).                                   |
-| `requires`     | mapping         | unset     | Capability requirements. See [capability requirements](test-framework.md#capability-requirements). Directory-level only. |
-| `inputs`       | string          | project   | Override `TENZIR_INPUTS` for this directory or test.                                                                                                       |
-| `assertions`   | mapping         | `{}`      | Post-test assertion payloads. See [assertions](test-framework.md#assertions).                                            |
-| `retry`        | integer         | `1`       | Total attempt budget for flaky tests (see below).                                                                                                          |
-| `package-dirs` | list of strings | inherit   | Directory-only; extra packages merged with CLI `--package-dirs`.                                                                                           |
+| Key            | Type            | Default   | Description                                                                                                                                                                   |
+| -------------- | --------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `runner`       | string          | by suffix | Runner name (`tenzir`, `python`, `shell`, custom).                                                                                                                            |
+| `fixtures`     | list            | `[]`      | Requested fixtures. Accepts bare names and structured options mappings.                                                                                                       |
+| `timeout`      | integer (s)     | `30`      | Command timeout. (`--coverage` multiplies it by five.)                                                                                                                        |
+| `error`        | boolean         | `false`   | Expect a non-zero exit code.                                                                                                                                                  |
+| `skip`         | string or dict  | unset     | Mark tests as skipped. See [skip configuration](test-framework.md#skip-configuration).                                                      |
+| `requires`     | mapping         | unset     | Capability requirements. See [capability requirements](test-framework.md#capability-requirements). Directory-level only.                    |
+| `inputs`       | string          | project   | Override `TENZIR_INPUTS` for this directory or test.                                                                                                                          |
+| `assertions`   | mapping         | `{}`      | Post-test assertion payloads. See [assertions](test-framework.md#assertions).                                                               |
+| `pre-compare`  | string or list  | `[]`      | Transform the baseline and the actual output before comparing them. See [pre-compare transforms](test-framework.md#pre-compare-transforms). |
+| `retry`        | integer         | `1`       | Total attempt budget for flaky tests (see below).                                                                                                                             |
+| `package-dirs` | list of strings | inherit   | Directory-only; extra packages merged with CLI `--package-dirs`.                                                                                                              |
 
 `test.yaml` files accept the same keys and apply recursively to child directories. A relative `inputs:` value resolves against the file that defines it, so `inputs: ../data` inside `tests/alerts/test.yaml` points at `tests/data/`. Frontmatter values follow the same rule and win over directory defaults. Adjacent `tenzir.yaml` files still configure the Tenzir binary; the harness appends `--config=<file>` automatically. The lookup keeps working even when you point the CLI at extra directories on the command line.
 
@@ -965,6 +966,43 @@ For example, a baseline that captures a diagnostic from a test in the `microsoft
 warning: assertion failed: unsupported OCSF to ASIM mapping
   --> operators/asim/ocsf/map.tql:61:12
 ```
+
+### Pre-compare transforms
+
+Use `pre-compare` when a test produces the right events in an unpredictable order. The harness transforms the baseline and the actual output the same way, then compares the results.
+
+`sort` is the only transform. It moves the ordering requirement out of the pipeline, so a test no longer needs a trailing `sort` operator that the package itself would never run.
+
+Before, where the last operator exists only to make the baseline stable:
+
+```tql
+from_file "events.ndjson" {
+  read_ndjson
+}
+summarize severity, events=count()
+sort severity
+```
+
+After, where the frontmatter carries that requirement:
+
+```tql
+---
+pre-compare: sort
+---
+from_file "events.ndjson" {
+  read_ndjson
+}
+summarize severity, events=count()
+```
+
+`sort` orders whole events, not lines. It reads a `{` alone in the first column as the start of an event and the matching `}` in the first column as its end, which is how TQL prints events by default. Everything else counts as one unit per line, so NDJSON sorts one event per line.
+
+Two kinds of output have no first-column braces, so `sort` shuffles their lines and destroys them. Do not use it on either one:
+
+* Indented structured output, such as a pretty-printed JSON array.
+* Multiline diagnostics, where the continuation lines sort away from the header they belong to.
+
+`--update` writes raw output to the baseline. Transforms run at comparison time only, so the file on disk keeps the order the test produced.
 
 ## Troubleshooting
 

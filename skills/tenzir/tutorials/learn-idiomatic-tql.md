@@ -380,11 +380,12 @@ match action {
 }
 ```
 
-Use guarded arms when the case also depends on another field:
+Match arms should describe values or ranges of the expression after `match`. Use a [guard](../reference/statements.md#guards) when the case also depends on another field, and let one guard cover every pattern it applies to instead of repeating an `if` in each arm:
 
 ```tql
 from {status: 503, retries: 1},
      {status: 503, retries: 0},
+     {status: 429, retries: 1},
      {status: 429, retries: 0},
      {status: 404, retries: 0}
 match status {
@@ -416,6 +417,11 @@ match status {
 }
 {
   status: 429,
+  retries: 1,
+  action: "retry",
+}
+{
+  status: 429,
   retries: 0,
   action: "throttle",
 }
@@ -426,7 +432,77 @@ match status {
 }
 ```
 
-Keep `if` for a single predicate or a simple binary decision. Use record constants when you only map keys to values and don’t need to run different statements.
+TQL range patterns exclude both endpoints. The pattern `499..600` therefore matches numeric values greater than `499` and less than `600`. For integer HTTP status codes, `199..300` covers `200` through `299`, `399..500` covers `400` through `499`, and `499..600` covers `500` through `599`.
+
+A guard belongs to an arm that still matches on a value. Once the pattern is a wildcard, the guard carries the whole decision and `match` degenerates into an `if` ladder.
+
+❌ Wildcard guards:
+
+```tql
+match event_code {
+  _ if event_code.starts_with("user.") => {
+    category = "user"
+  }
+  _ if event_code.starts_with("group.") => {
+    category = "group"
+  }
+  _ => {
+    category = "unknown"
+  }
+}
+```
+
+Reach for `if` and `else if` when the branches depend on predicates such as `contains`, `starts_with`, regular-expression matches, field presence, or a combination of fields.
+
+✅ Predicate ladder:
+
+```tql
+if event_code.starts_with("user.") {
+  category = "user"
+} else if event_code.starts_with("group.") {
+  category = "group"
+} else {
+  category = "unknown"
+}
+```
+
+If the source value has a documented structure, extract its categorical part and match that value instead. Match the runtime expression directly, because `let` only binds constants.
+
+✅ Match on the extracted category:
+
+```tql
+match event_code.split(".")[0] {
+  "user" => {
+    category = "user"
+  }
+  "group" => {
+    category = "group"
+  }
+  _ => {
+    category = "unknown"
+  }
+}
+```
+
+A match expression can also be a list when several fields form one finite category:
+
+```tql
+match [src_role, dst_role] {
+  ["lan", "wan"] => {
+    direction = "outbound"
+  }
+  ["wan", "lan"] => {
+    direction = "inbound"
+  }
+  _ => {
+    direction = "unknown"
+  }
+}
+```
+
+List patterns compare element by element, so a `null` in either field falls through to `_`.
+
+Keep `if` for predicates, branch selection that depends on which field or schema is present, null checks, and binary control flow. Use record constants when you only map keys to values and don’t need to run different statements.
 
 ### Use `in` for multi-value membership tests
 
