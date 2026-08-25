@@ -35,4 +35,4 @@ dur = duration(str)
 ## See Also
 
 * [`time`](https://tenzir.com/docs/reference/functions/time.md)
-* [Work with time](../../guides/transformation/work-with-time.md)
+* [Calculate with time](../../guides/shape/calculate-with-time.md)

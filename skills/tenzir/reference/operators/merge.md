@@ -31,7 +31,7 @@ merge {
 import
 ```
 
-The guide on how to [merge streams within a single pipeline](../../guides/routing/split-and-merge-streams.md#merge-within-a-single-pipeline) contrasts this with connecting separate pipelines through a topic.
+The guide on how to [merge streams within a single pipeline](../../guides/route/split-and-merge-streams.md#merge-within-a-single-pipeline) contrasts this with connecting separate pipelines through a topic.
 
 ### `{ … }`
 
@@ -62,4 +62,4 @@ merge {
 
 * [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
 * [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md)
-* [Split and merge streams](../../guides/routing/split-and-merge-streams.md)
+* [Split and merge streams](../../guides/route/split-and-merge-streams.md)

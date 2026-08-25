@@ -37,4 +37,4 @@ from {x: "HELLO".to_lower()}
 * [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
 * [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
 * [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

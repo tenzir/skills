@@ -43,4 +43,4 @@ from {x: hash_sha224("foo")}
 * [`hash_sha3_384`](https://tenzir.com/docs/reference/functions/hash_sha3_384.md)
 * [`hash_sha3_512`](https://tenzir.com/docs/reference/functions/hash_sha3_512.md)
 * [`hash_xxh3`](https://tenzir.com/docs/reference/functions/hash_xxh3.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

@@ -62,5 +62,5 @@ head 5
 * [`rare`](https://tenzir.com/docs/reference/operators/rare.md)
 * [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
+* [Aggregate event streams](../../guides/aggregate/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

@@ -50,5 +50,5 @@ from {
 
 * [`community_id`](https://tenzir.com/docs/reference/functions/community_id.md)
 * [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
-* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)
+* [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

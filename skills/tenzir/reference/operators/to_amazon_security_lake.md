@@ -26,7 +26,7 @@ The operator handles Amazon Security Lake’s partitioning, Parquet, sorting, an
 {s3_uri}/region={region}/accountId={account_id}/eventDay={YYYYMMDD}/{uuid}.parquet
 ```
 
-It sorts each object by `time`. Sorting buffers all events for the open partition before producing bytes, so `timeout`, the end of input, or a graceful stop determines when the object closes. The operator does not enforce a maximum object size, and the final size depends on the data accumulated during that interval. Our guide on [Write partitioned files](../../guides/routing/write-partitioned-files.md) explains how buffering affects file rotation.
+It sorts each object by `time`. Sorting buffers all events for the open partition before producing bytes, so `timeout`, the end of input, or a graceful stop determines when the object closes. The operator does not enforce a maximum object size, and the final size depends on the data accumulated during that interval. Our guide on [Write partitioned files](../../guides/store/write-partitioned-files.md) explains how buffering affects file rotation.
 
 The operator does not validate the OCSF schema of the events. Consider [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) in your pipeline to ensure schema compliance. For a list of OCSF event classes supported by Amazon Security Lake, see the [AWS documentation](https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html#ocsf-eventclass).
 
@@ -117,5 +117,5 @@ to_amazon_security_lake $s3_uri,
 
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
-* [Write partitioned files](../../guides/routing/write-partitioned-files.md)
+* [Write partitioned files](../../guides/store/write-partitioned-files.md)
 * [Amazon Security Lake](../../integrations/amazon/security-lake.md)

@@ -35,4 +35,4 @@ from { x: since_epoch(2021-02-24) }
 
 * [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md)
 * [`now`](https://tenzir.com/docs/reference/functions/now.md)
-* [Work with time](../../guides/transformation/work-with-time.md)
+* [Calculate with time](../../guides/shape/calculate-with-time.md)

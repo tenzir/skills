@@ -63,5 +63,5 @@ from {
 
 * [`ceil`](https://tenzir.com/docs/reference/functions/ceil.md)
 * [`floor`](https://tenzir.com/docs/reference/functions/floor.md)
-* [Transform values](../../guides/transformation/transform-values.md)
+* [Transform values](../../guides/shape/transform-values.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

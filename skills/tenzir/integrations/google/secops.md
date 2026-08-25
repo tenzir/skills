@@ -14,7 +14,7 @@ section: "Integrations"
 
 ## UDM mapping
 
-Google SecOps stores normalized security data in the Unified Data Model (UDM). Use [Map to UDM](../../guides/normalization/map-to-udm.md) to shape parsed events into API-facing UDM records.
+Google SecOps stores normalized security data in the Unified Data Model (UDM). Use [Map to UDM](../../guides/normalize/map-to-udm.md) to shape parsed events into API-facing UDM records.
 
 For agent-assisted work, follow [Use agent skills](../../guides/ai-workbench/use-agent-skills.md#use-the-udm-skill) to use the `tenzir-udm` skill. The skill helps map logs into UDM API ingestion payloads with names such as `metadata.eventType`, and write YARA-L or rule field paths with names such as `metadata.event_type`.
 

@@ -35,4 +35,4 @@ from {x: "hello".is_printable()}
 
 * [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md)
 * [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

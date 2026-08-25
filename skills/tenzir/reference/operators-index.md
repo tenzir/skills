@@ -3,6 +3,7 @@
 ## Analyze
 
 - [rare](operators/rare.md): Shows the least common values.
+- [reorder](operators/reorder.md): Orders events by timestamp while accepting bounded event-time disorder.
 - [reverse](operators/reverse.md): Reverses the event order.
 - [sort](operators/sort.md): Sorts events by the given expressions.
 - [summarize](operators/summarize.md): Groups events and applies aggregate functions to each group.
@@ -150,6 +151,7 @@
 - [drop](operators/drop.md): Removes fields from the event.
 - [drop_null_fields](operators/drop_null_fields.md): Removes fields containing null values from the event.
 - [enumerate](operators/enumerate.md): Add a field with the number of preceding events.
+- [lag](operators/lag.md): Adds a preceding value or event to each current event.
 - [replace](operators/replace.md): Replaces all occurrences of a value with another value.
 - [select](operators/select.md): Selects some values and discards the rest.
 - [set](operators/set.md): Assigns a value to a field, creating it if necessary.

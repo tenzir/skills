@@ -71,5 +71,5 @@ to_azure_log_analytics tenant_id="00a00a00-0a00-0a00-00aa-000aa0a0a000",
 
 ## See Also
 
-* [Map to ASIM](../../guides/normalization/map-to-asim.md)
+* [Map to ASIM](../../guides/normalize/map-to-asim.md)
 * [Sentinel & Log Analytics](../../integrations/microsoft/sentinel-log-analytics.md)

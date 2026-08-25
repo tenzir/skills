@@ -51,4 +51,4 @@ context_erase "network-classification", key=network
 * [`context_reset`](https://tenzir.com/docs/reference/operators/context_reset.md)
 * [`context_save`](https://tenzir.com/docs/reference/operators/context_save.md)
 * [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md)
-* [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
+* [Use lookup tables](../../guides/enrich/use-lookup-tables.md)

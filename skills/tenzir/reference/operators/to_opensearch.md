@@ -127,6 +127,6 @@ to_opensearch "localhost:9200", action="create", index="main"
 
 * [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
 * [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
-* [Map to ECS](../../guides/normalization/map-to-ecs.md)
+* [Map to ECS](../../guides/normalize/map-to-ecs.md)
 * [OpenSearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)

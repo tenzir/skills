@@ -48,5 +48,5 @@ this = string(message).parse_json()
 
 * [`from_nats`](https://tenzir.com/docs/reference/operators/from_nats.md)
 * [`to_nats`](https://tenzir.com/docs/reference/operators/to_nats.md)
-* [Read from message brokers](../guides/collecting/read-from-message-brokers.md)
-* [Send to destinations](../guides/routing/send-to-destinations.md)
+* [Read from message brokers](../guides/collect/read-from-message-brokers.md)
+* [Send to destinations](../guides/route/send-to-destinations.md)

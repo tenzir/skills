@@ -65,4 +65,4 @@ from {xs: split_regex("a1b2c3", r"\d", max=1)}
 
 * [`split`](https://tenzir.com/docs/reference/functions/split.md)
 * [`join`](https://tenzir.com/docs/reference/functions/join.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

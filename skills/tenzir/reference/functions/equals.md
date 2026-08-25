@@ -74,4 +74,4 @@ from {
 * [`contains`](https://tenzir.com/docs/reference/functions/contains.md)
 * [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
 * [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

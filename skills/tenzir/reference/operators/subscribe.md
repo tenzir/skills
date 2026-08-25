@@ -46,5 +46,5 @@ subscribe "alerts", "notices", "critical"
 * [`export`](https://tenzir.com/docs/reference/operators/export.md)
 * [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
 * [Quickstart](../../guides/quickstart.md)
-* [Split and merge streams](../../guides/routing/split-and-merge-streams.md)
+* [Split and merge streams](../../guides/route/split-and-merge-streams.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

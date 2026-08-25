@@ -61,6 +61,6 @@ from_file "/tmp/conn.log" {
 
 * [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md)
 * [`write_zeek_tsv`](https://tenzir.com/docs/reference/operators/write_zeek_tsv.md)
-* [Import into a node](../../guides/edge-storage/import-into-a-node.md)
+* [Import into a node](../../guides/store/import-into-a-node.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 * [Zeek](../../integrations/zeek.md)

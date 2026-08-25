@@ -69,4 +69,4 @@ select x = this.get("x", -1), y = this.get("y", -1)
 ## See Also
 
 * [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
-* [Shape lists](../../guides/transformation/shape-lists.md)
+* [Shape lists](../../guides/shape/shape-lists.md)

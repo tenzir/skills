@@ -64,5 +64,5 @@ head 20
 
 * [`import`](https://tenzir.com/docs/reference/operators/import.md)
 * [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
-* [Export from a node](../../guides/edge-storage/export-from-a-node.md)
+* [Export from a node](../../guides/search/export-from-a-node.md)
 * [Quickstart](../../guides/quickstart.md)

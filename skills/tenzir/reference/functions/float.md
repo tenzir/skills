@@ -49,4 +49,4 @@ from {x: float("4.2")}
 * [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
 * [`time`](https://tenzir.com/docs/reference/functions/time.md)
 * [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
-* [Transform values](../../guides/transformation/transform-values.md)
+* [Transform values](../../guides/shape/transform-values.md)

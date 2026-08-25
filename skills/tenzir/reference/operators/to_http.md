@@ -218,5 +218,5 @@ The `head 1000` limits the input so that `buffer_all` has a finite body to buffe
 * [`each`](https://tenzir.com/docs/reference/operators/each.md)
 * [`every`](https://tenzir.com/docs/reference/operators/every.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
-* [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
+* [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
 * [HTTP](../../integrations/http.md)

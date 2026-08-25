@@ -110,7 +110,7 @@ from_amazon_kinesis "security-events", start=2026-01-01T00:00:00Z
 
 * [`from_amazon_kinesis`](https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md)
 * [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md)
-* [Read from message brokers](../../guides/collecting/read-from-message-brokers.md)
-* [Send to destinations](../../guides/routing/send-to-destinations.md)
+* [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
+* [Send to destinations](../../guides/route/send-to-destinations.md)
 * [Amazon SQS](sqs.md)
 * [Kafka](../kafka.md)

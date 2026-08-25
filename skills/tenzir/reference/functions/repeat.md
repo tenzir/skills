@@ -54,4 +54,4 @@ from {message: "na".repeat(0)}
 * [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md)
 * [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md)
 * [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

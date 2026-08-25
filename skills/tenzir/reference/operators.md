@@ -21,6 +21,14 @@ Shows the least common values.
 rare auth.token
 ```
 
+### [reorder](operators/reorder.md)
+
+Orders events by timestamp while accepting bounded event-time disorder.
+
+```tql
+reorder on=time, tolerance=2min
+```
+
 ### [reverse](operators/reverse.md)
 
 Reverses the event order.
@@ -935,6 +943,14 @@ Add a field with the number of preceding events.
 
 ```tql
 enumerate num
+```
+
+### [lag](operators/lag.md)
+
+Adds a preceding value or event to each current event.
+
+```tql
+lag value=location, into=previous_location
 ```
 
 ### [replace](operators/replace.md)

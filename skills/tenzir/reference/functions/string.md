@@ -39,5 +39,5 @@ from {x: string(1.2.3.4)}
 * [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
 * [`time`](https://tenzir.com/docs/reference/functions/time.md)
 * [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
-* [Transform values](../../guides/transformation/transform-values.md)
+* [Transform values](../../guides/shape/transform-values.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

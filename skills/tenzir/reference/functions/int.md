@@ -71,4 +71,4 @@ from {x: int("0x42", base=16)}
 * [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
 * [`time`](https://tenzir.com/docs/reference/functions/time.md)
 * [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
-* [Transform values](../../guides/transformation/transform-values.md)
+* [Transform values](../../guides/shape/transform-values.md)

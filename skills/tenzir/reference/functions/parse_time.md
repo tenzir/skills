@@ -159,4 +159,4 @@ timestamp = timestamp.parse_time(
 
 * [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md)
 * [`time`](https://tenzir.com/docs/reference/functions/time.md)
-* [Work with time](../../guides/transformation/work-with-time.md)
+* [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)

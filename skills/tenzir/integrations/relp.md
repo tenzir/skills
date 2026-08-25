@@ -89,4 +89,4 @@ Connections that start with a TLS ClientHello use TLS. Other connections continu
 
 For a complete `omrelp` sender configuration with retries, queues, and mutual TLS, see our [rsyslog](rsyslog.md) integration.
 
-Our [Get data from the network](../guides/collecting/get-data-from-the-network.md) guide compares RELP with other network collection options.
+Our [Get data from the network](../guides/collect/get-data-from-the-network.md) guide compares RELP with other network collection options.

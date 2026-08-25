@@ -271,5 +271,5 @@ The operator currently supports scalar samples only. It does not support native 
 
 * [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
 * [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
-* [Collect metrics](../../guides/analytics/collect-metrics.md)
+* [Collect metrics](../../guides/observability/collect-metrics.md)
 * [Prometheus](../../integrations/prometheus.md)

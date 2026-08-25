@@ -43,4 +43,4 @@ select zs = zip(xs, ys)
 
 * [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
 * [`map`](https://tenzir.com/docs/reference/functions/map.md)
-* [Shape lists](../../guides/transformation/shape-lists.md)
+* [Shape lists](../../guides/shape/shape-lists.md)

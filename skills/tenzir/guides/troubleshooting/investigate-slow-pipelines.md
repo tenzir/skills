@@ -69,7 +69,7 @@ If your node is connected to the Tenzir Platform, the **Insights** tab on the pi
 
 Once you know whether the pipeline is compute-bound, input-bound, or output-bound, address it:
 
-* **Compute-bound**: check the pipeline for avoidable work first; see the performance considerations in [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md#performance-considerations). If the pipeline is already minimal, spread the work across parallel pipelines. See [Load-balance pipelines](../routing/load-balance-pipelines.md).
+* **Compute-bound**: check the pipeline for avoidable work first; see the performance considerations in [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md#performance-considerations). If the pipeline is already minimal, spread the work across parallel pipelines. See [Load-balance pipelines](../route/load-balance-pipelines.md).
 * **Throughput limited by batching or buffering**: adjust the relevant knobs. See [Tune performance](../node-setup/tune-performance.md).
 
 ## See also
@@ -78,4 +78,4 @@ Once you know whether the pipeline is compute-bound, input-bound, or output-boun
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 * [Investigate memory growth](investigate-memory-growth.md)
 * [Tune performance](../node-setup/tune-performance.md)
-* [Load-balance pipelines](../routing/load-balance-pipelines.md)
+* [Load-balance pipelines](../route/load-balance-pipelines.md)

@@ -110,4 +110,4 @@ from {
 
 * [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md)
 * [`replace`](https://tenzir.com/docs/reference/operators/replace.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

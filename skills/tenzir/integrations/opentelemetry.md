@@ -148,7 +148,7 @@ See [Configure TLS](../guides/node-setup/configure-tls.md) for the complete TLS 
 
 ## See Also
 
-* [Get data from the network](../guides/collecting/get-data-from-the-network.md)
+* [Get data from the network](../guides/collect/get-data-from-the-network.md)
 * [ClickHouse](clickhouse.md)
 * [Fluent Bit](fluent-bit.md)
 * [HTTP](http.md)

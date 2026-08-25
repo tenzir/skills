@@ -83,4 +83,4 @@ top key
 
 * [`has`](https://tenzir.com/docs/reference/functions/has.md)
 * [`get`](https://tenzir.com/docs/reference/functions/get.md)
-* [Shape records](../../guides/transformation/shape-records.md)
+* [Shape records](../../guides/shape/shape-records.md)

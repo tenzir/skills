@@ -67,4 +67,4 @@ from {x: "--hello--world--".trim("-")}
 
 * [`trim_start`](https://tenzir.com/docs/reference/functions/trim_start.md)
 * [`trim_end`](https://tenzir.com/docs/reference/functions/trim_end.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

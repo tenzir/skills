@@ -39,4 +39,4 @@ encoded = bytes.encode_hex()
 ## See Also
 
 * [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

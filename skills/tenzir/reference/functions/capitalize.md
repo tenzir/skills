@@ -36,4 +36,4 @@ from {x: "hello world".capitalize()}
 * [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
 * [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md)
 * [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

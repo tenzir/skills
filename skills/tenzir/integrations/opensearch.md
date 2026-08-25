@@ -128,5 +128,5 @@ You can now configure a [Logstash output](https://opensearch.org/docs/latest/too
 
 ## See Also
 
-* [Fetch via HTTP and APIs](../guides/collecting/fetch-via-http-and-apis.md)
+* [Fetch via HTTP and APIs](../guides/collect/fetch-via-http-and-apis.md)
 * [Elasticsearch](elasticsearch.md)

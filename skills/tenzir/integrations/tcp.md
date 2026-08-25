@@ -34,7 +34,7 @@ Use [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) to
 
 Use [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md) to start a TCP server that broadcasts pipeline output to all connected clients. A nested pipeline serializes events into bytes before sending.
 
-See [Get data from the network](../guides/collecting/get-data-from-the-network.md) for practical examples.
+See [Get data from the network](../guides/collect/get-data-from-the-network.md) for practical examples.
 
 ## SSL/TLS
 

@@ -45,4 +45,4 @@ to_file "snapshot.mmdb"
 * [`context_remove`](https://tenzir.com/docs/reference/operators/context_remove.md)
 * [`context_reset`](https://tenzir.com/docs/reference/operators/context_reset.md)
 * [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md)
-* [Use lookup tables](../../guides/enrichment/use-lookup-tables.md)
+* [Use lookup tables](../../guides/enrich/use-lookup-tables.md)

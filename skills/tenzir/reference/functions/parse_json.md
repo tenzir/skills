@@ -161,4 +161,4 @@ output = input.parse_json()
 ## See Also
 
 * [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
-* [Parse string fields](../../guides/parsing/parse-string-fields.md)
+* [Parse string fields](../../guides/parse/parse-string-fields.md)

@@ -196,6 +196,6 @@ to_s3 "s3://security-exports/clickhouse/network_activity_{uuid}.parquet" {
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)
-* [Read from data stores](../guides/collecting/read-from-data-stores.md)
-* [Send to destinations](../guides/routing/send-to-destinations.md)
+* [Read from data stores](../guides/collect/read-from-data-stores.md)
+* [Send to destinations](../guides/route/send-to-destinations.md)
 * [Secrets](../explanations/secrets.md)

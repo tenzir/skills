@@ -51,7 +51,7 @@ Sink arguments:
 * `mode="append"` writes into the existing table. The `json=` option is for table creation only and errors in `append` mode.
 * TLS is on by default; use port `9440` for a remote cluster. For local testing against a plaintext deployment colocated with nano, add `tls=false`.
 
-Where the OCSF stream comes from is up to you. When the input is raw logs rather than OCSF, [map it to OCSF](../guides/normalization/map-to-ocsf.md) 1.8.0 first; nano’s [direct OCSF ingestion guide](https://nano.rs/docs/ocsf/integrations/direct-ocsf/) has per-source mappings.
+Where the OCSF stream comes from is up to you. When the input is raw logs rather than OCSF, [map it to OCSF](../guides/normalize/map-to-ocsf.md) 1.8.0 first; nano’s [direct OCSF ingestion guide](https://nano.rs/docs/ocsf/integrations/direct-ocsf/) has per-source mappings.
 
 ## Read events back from nano
 
@@ -75,5 +75,5 @@ publish "nano-findings"
 
 * [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
 * [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
-* [Map to OCSF](../guides/normalization/map-to-ocsf.md)
+* [Map to OCSF](../guides/normalize/map-to-ocsf.md)
 * [ClickHouse](clickhouse.md)

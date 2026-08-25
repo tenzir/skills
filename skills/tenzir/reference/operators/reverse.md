@@ -41,4 +41,4 @@ reverse
 ## See Also
 
 * [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
-* [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)
+* [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)

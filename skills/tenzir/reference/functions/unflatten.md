@@ -81,5 +81,5 @@ this = unflatten(this)
 ## See Also
 
 * [`flatten`](https://tenzir.com/docs/reference/functions/flatten.md)
-* [Shape records](../../guides/transformation/shape-records.md)
-* [Reshape complex data](../../guides/transformation/reshape-complex-data.md)
+* [Shape records](../../guides/shape/shape-records.md)
+* [Reshape complex data](../../guides/shape/reshape-complex-data.md)

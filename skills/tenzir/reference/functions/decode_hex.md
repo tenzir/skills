@@ -50,4 +50,4 @@ decoded = bytes.decode_hex()
 ## See Also
 
 * [`encode_hex`](https://tenzir.com/docs/reference/functions/encode_hex.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

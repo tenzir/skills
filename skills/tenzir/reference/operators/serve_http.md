@@ -106,5 +106,5 @@ serve_http "0.0.0.0:8443",
 * [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md)
 * [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
 * [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
-* [Expose data as a server](../../guides/routing/expose-data-as-server.md)
+* [Expose data as a server](../../guides/route/expose-data-as-server.md)
 * [HTTP](../../integrations/http.md)

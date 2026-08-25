@@ -142,4 +142,4 @@ select summary=enrichment.ai.text,
 
 * [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
 * [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
-* [Enrich events with AI](../../guides/enrichment/enrich-events-with-ai.md)
+* [Enrich events with AI](../../guides/enrich/enrich-events-with-ai.md)

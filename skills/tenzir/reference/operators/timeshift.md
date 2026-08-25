@@ -17,7 +17,7 @@ timeshift field:time, [start=time, speed=double]
 
 ## Description
 
-The `timeshift` operator adjusts a series of time values by anchoring them around a given `start` time.
+The `timeshift` operator adjusts a series of time values by anchoring them around a given `start` time. It preserves input order, including timestamp regressions. Use [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) first when later operators require chronological input.
 
 With `speed`, you can adjust the relative speed of the time series induced by `field` with a multiplicative factor. This has the effect of making the time series “faster” for values great than 1 and “slower” for values less than 1.
 
@@ -64,4 +64,4 @@ timeshift ts, start=1984-01-01, speed=0.01
 ## See Also
 
 * [`delay`](https://tenzir.com/docs/reference/operators/delay.md)
-* [Work with time](../../guides/transformation/work-with-time.md)
+* [Replay historical events](../../guides/replay/replay-historical-events.md)

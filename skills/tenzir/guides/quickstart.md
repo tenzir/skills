@@ -39,7 +39,7 @@ Spinning up a demo node can take up to 2 minutes. Sorry for the wait, we’ll cu
 
 ## Get started with demo data
 
-Our demo nodes have the Demo Node [package](../explanations/packages.md) pre-installed, giving you sample pipelines that fetch data from a public cloud bucket and [store it into the node’s edge storage](edge-storage/import-into-a-node.md). Once you have the sample data in the node, it will be simpler to work with it.
+Our demo nodes have the Demo Node [package](../explanations/packages.md) pre-installed, giving you sample pipelines that fetch data from a public cloud bucket and [store it into the node’s edge storage](store/import-into-a-node.md). Once you have the sample data in the node, it will be simpler to work with it.
 
 The **Packages** tab shows that the demo node package is installed:
 

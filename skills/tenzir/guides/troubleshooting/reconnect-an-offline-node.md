@@ -65,7 +65,7 @@ select endpoint = tenzir["platform-control-endpoint"]
 
 The token itself is omitted from the output so it can’t leak, but its presence still matters: a node with no token never connects. Set the token and endpoint through `tenzir.yaml` or the `TENZIR_TOKEN` and `TENZIR_PLATFORM_CONTROL_ENDPOINT` environment variables, then restart the node. Many tokens embed the control endpoint, so setting the endpoint separately is only needed to override it. See [Configure a node](../node-setup/configure-a-node.md) for details.
 
-If the endpoint and token are correct and the network allows the outbound WebSocket, but the node still can’t connect, capture the connection error from the logs and the `platform` metric and share them with Tenzir support, as described in [Inspect a node](gather-relevant-information.md).
+If the endpoint and token are correct and the network allows the outbound WebSocket, but the node still can’t connect, capture the connection error from the logs and the `platform` metric and share them with Tenzir support, as described in [Inspect a node](../observability/inspect-a-node.md).
 
 ## See also
 
@@ -73,4 +73,4 @@ If the endpoint and token are correct and the network allows the outbound WebSoc
 * [`config`](https://tenzir.com/docs/reference/functions/config.md)
 * [Configure a node](../node-setup/configure-a-node.md)
 * [Configure TLS](../node-setup/configure-tls.md)
-* [Inspect a node](gather-relevant-information.md)
+* [Inspect a node](../observability/inspect-a-node.md)

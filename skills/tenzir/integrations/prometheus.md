@@ -62,4 +62,4 @@ to_prometheus "prometheus-remote-write-url",
 
 * [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
 * [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
-* [Collect metrics](../guides/analytics/collect-metrics.md)
+* [Collect metrics](../guides/observability/collect-metrics.md)

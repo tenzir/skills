@@ -36,4 +36,4 @@ from {x: "hello123".is_alnum()}
 * [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
 * [`is_numeric`](https://tenzir.com/docs/reference/functions/is_numeric.md)
 * [`is_printable`](https://tenzir.com/docs/reference/functions/is_printable.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

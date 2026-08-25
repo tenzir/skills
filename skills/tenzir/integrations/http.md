@@ -18,7 +18,7 @@ When retrieving data from an API or website, you prepare your HTTP request and g
 
 Use [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) to issue a one-shot HTTP request and stream the response body chunks into its parser sub-pipeline as they arrive. The operator automatically infers the response format from the URL extension or `Content-Type` header.
 
-See the [Fetch via HTTP and APIs](../guides/collecting/fetch-via-http-and-apis.md) guide for practical examples covering authentication, pagination, error handling, and data enrichment.
+See the [Fetch via HTTP and APIs](../guides/collect/fetch-via-http-and-apis.md) guide for practical examples covering authentication, pagination, error handling, and data enrichment.
 
 ## Sending data to webhooks and APIs
 
@@ -28,13 +28,13 @@ Use [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md) to send 
 
 Use [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md) to start an HTTP server that streams the bytes produced by a nested pipeline to connected clients. For example, use [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) when you want NDJSON over HTTP or [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md) when you want plain text.
 
-See the [Expose data as a server](../guides/routing/expose-data-as-server.md) guide for practical examples covering serialization, connection limits, and TLS.
+See the [Expose data as a server](../guides/route/expose-data-as-server.md) guide for practical examples covering serialization, connection limits, and TLS.
 
 ## Accepting incoming requests
 
 Use [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md) to spin up an HTTP server that turns incoming requests into pipeline events. This is useful for receiving webhooks, building custom API endpoints, or ingesting data pushed by external systems.
 
-For OpenTelemetry logs, metrics, and traces, use the protocol-aware [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) receiver instead of parsing OTLP requests with [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md). See [Get data from the network](../guides/collecting/get-data-from-the-network.md) for OpenTelemetry SDK and Collector configuration.
+For OpenTelemetry logs, metrics, and traces, use the protocol-aware [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) receiver instead of parsing OTLP requests with [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md). See [Get data from the network](../guides/collect/get-data-from-the-network.md) for OpenTelemetry SDK and Collector configuration.
 
 ## Proxies
 

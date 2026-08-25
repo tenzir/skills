@@ -254,5 +254,5 @@ to_splunk "https://localhost:8088",
 
 ## See Also
 
-* [Map to CIM](../../guides/normalization/map-to-cim.md)
+* [Map to CIM](../../guides/normalize/map-to-cim.md)
 * [Splunk](../../integrations/splunk.md)

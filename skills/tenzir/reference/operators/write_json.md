@@ -99,4 +99,4 @@ write_json strip_null_fields=true
 * [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md)
 * [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
 * [`write_tql`](https://tenzir.com/docs/reference/operators/write_tql.md)
-* [Convert data formats](../../guides/transformation/convert-data-formats.md)
+* [Convert data formats](../../guides/shape/convert-data-formats.md)

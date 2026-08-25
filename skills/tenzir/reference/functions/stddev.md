@@ -40,4 +40,4 @@ summarize stddev_value=stddev(x)
 
 * [`variance`](https://tenzir.com/docs/reference/functions/variance.md)
 * [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
-* [Aggregate event streams](../../guides/analytics/aggregate-event-streams.md)
+* [Aggregate event streams](../../guides/aggregate/aggregate-event-streams.md)

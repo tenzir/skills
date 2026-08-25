@@ -28,7 +28,7 @@ A complete detection can include five stages:
 
 Not every detection needs every stage. A single-event predicate can match and model a finding immediately. A behavioral detector may aggregate many events before it has a result, while a multi-stage detector may consume findings from other detections instead of raw telemetry.
 
-Normalization and enrichment make matching logic easier to reuse. OCSF gives structured detections stable field paths across data sources, while contexts add asset, identity, and threat intelligence that can change the meaning of an otherwise ordinary event. The explanations of [enrichment](enrichment.md) and the guide on [mapping events to OCSF](../guides/normalization/map-to-ocsf.md) cover these preparation steps.
+Normalization and enrichment make matching logic easier to reuse. OCSF gives structured detections stable field paths across data sources, while contexts add asset, identity, and threat intelligence that can change the meaning of an otherwise ordinary event. The explanations of [enrichment](enrichment.md) and the guide on [mapping events to OCSF](../guides/normalize/map-to-ocsf.md) cover these preparation steps.
 
 ## Choose matching logic
 
@@ -40,7 +40,7 @@ Choose the matching language from the evidence and the detection content you alr
 | Structured events and portable rule content  | [Sigma](https://sigmahq.io)                             | Existing Sigma rule sets from public, commercial, or internal sources.           |
 | Files, payloads, and other byte streams      | [YARA-X](https://virustotal.github.io/yara-x/)          | Rules that inspect raw content and emit findings with byte-level match evidence. |
 
-These languages compose rather than compete. TQL provides the surrounding pipeline even when Sigma or YARA performs the match. The guides on [matching events with TQL](../guides/detection/match-events-with-tql.md), [executing Sigma rules](../guides/detection/execute-sigma-rules.md), and [scanning bytes with YARA](../guides/detection/scan-bytes-with-yara.md) show each matching model.
+These languages compose rather than compete. TQL provides the surrounding pipeline even when Sigma or YARA performs the match. The guides on [matching events with TQL](../guides/detect/match-events-with-tql.md), [executing Sigma rules](../guides/detect/execute-sigma-rules.md), and [scanning bytes with YARA](../guides/detect/scan-bytes-with-yara.md) show each matching model.
 
 ## Correlate evidence over time
 
@@ -52,7 +52,7 @@ A match can stand on its own or become one input to a broader judgment:
 * A **multi-stage detection** combines independent sightings for the same entity, either in any order or as a sequence.
 * A **stateful detection** uses a context when memory must outlive one window or pipeline restart.
 
-Correlation increases context, not automatically confidence. The quality of a combined verdict still depends on the stages, grouping keys, time semantics, and thresholds. The guides on [detecting over time windows](../guides/detection/detect-over-time-windows.md), [detecting periodic behavior](../guides/detection/detect-periodic-behavior.md), and [creating multi-stage detectors](../guides/detection/create-multi-stage-detectors.md) cover these tradeoffs.
+Correlation increases context, not automatically confidence. The quality of a combined verdict still depends on the stages, grouping keys, time semantics, and thresholds. The guides on [detecting over time windows](../guides/detect/detect-over-time-windows.md), [detecting periodic behavior](../guides/detect/detect-periodic-behavior.md), and [creating multi-stage detectors](../guides/detect/create-multi-stage-detectors.md) cover these tradeoffs.
 
 ## Distinguish matches, findings, alerts, and incidents
 
@@ -68,7 +68,7 @@ Detection terms describe different parts of the flow:
 
 When a security control judges an activity as it happens, keep the source activity and apply the OCSF [Security Control profile](https://schema.ocsf.io/profiles/security_control). When analysis produces a separate result, emit an OCSF Detection Finding. A Detection Finding can itself be alertable, but the class does not imply `is_alert: true`.
 
-Stable identities let downstream systems deduplicate findings, track lifecycle updates, and link a combined verdict to its source events. A finding also carries its classification as data: `finding_info.attacks` embeds MITRE ATT\&CK tactic and technique mappings in the event itself rather than in rule metadata, so the mapping survives routing, storage, and correlation. The guide on [modeling detections in OCSF](../guides/detection/model-detections-in-ocsf.md) explains these output choices.
+Stable identities let downstream systems deduplicate findings, track lifecycle updates, and link a combined verdict to its source events. A finding also carries its classification as data: `finding_info.attacks` embeds MITRE ATT\&CK tactic and technique mappings in the event itself rather than in rule metadata, so the mapping survives routing, storage, and correlation. The guide on [modeling detections in OCSF](../guides/detect/model-detections-in-ocsf.md) explains these output choices.
 
 ## Choose the alerting posture
 
@@ -81,7 +81,7 @@ Not every detection should page an analyst. Detection catalogs such as Splunk’
 | Hunt     | An analyst explores a hypothesis.             | Pipeline results over stored events, without a finding.                                 |
 | Combine  | Several weak signals form one strong verdict. | A new Detection Finding that links its contributing findings and sets `is_alert: true`. |
 
-The posture is independent of the analytic method recorded in `analytic.type_id`: a high-confidence rule can emit evidence rather than an alert, and a statistical detector can alert directly when its precision has earned it. Pairing evidence-posture findings with a risk-accumulating combinator, as the guide on [accumulating risk per entity](../guides/detection/create-multi-stage-detectors.md#accumulate-risk-per-entity) shows, lets low-confidence detections contribute without paging anyone.
+The posture is independent of the analytic method recorded in `analytic.type_id`: a high-confidence rule can emit evidence rather than an alert, and a statistical detector can alert directly when its precision has earned it. Pairing evidence-posture findings with a risk-accumulating combinator, as the guide on [accumulating risk per entity](../guides/detect/create-multi-stage-detectors.md#accumulate-risk-per-entity) shows, lets low-confidence detections contribute without paging anyone.
 
 ## Compose detections for operation
 
@@ -95,11 +95,11 @@ Treat detections as versioned content: give analytics stable identities, test th
 
 * [Enrichment](enrichment.md)
 * [Packages](packages.md)
-* [Match events with TQL](../guides/detection/match-events-with-tql.md)
-* [Model detections in OCSF](../guides/detection/model-detections-in-ocsf.md)
-* [Detect over time windows](../guides/detection/detect-over-time-windows.md)
-* [Baseline behavior from stored events](../guides/detection/baseline-from-stored-events.md)
-* [Create multi-stage detectors](../guides/detection/create-multi-stage-detectors.md)
-* [Execute Sigma rules](../guides/detection/execute-sigma-rules.md)
-* [Scan bytes with YARA](../guides/detection/scan-bytes-with-yara.md)
+* [Match events with TQL](../guides/detect/match-events-with-tql.md)
+* [Model detections in OCSF](../guides/detect/model-detections-in-ocsf.md)
+* [Detect over time windows](../guides/detect/detect-over-time-windows.md)
+* [Baseline behavior from stored events](../guides/detect/baseline-from-stored-events.md)
+* [Create multi-stage detectors](../guides/detect/create-multi-stage-detectors.md)
+* [Execute Sigma rules](../guides/detect/execute-sigma-rules.md)
+* [Scan bytes with YARA](../guides/detect/scan-bytes-with-yara.md)
 * [Add operators](../guides/packages/add-operators.md)

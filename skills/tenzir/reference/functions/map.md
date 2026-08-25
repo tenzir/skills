@@ -152,4 +152,4 @@ l = l.map(str => str.parse_json())
 
 * [`where`](https://tenzir.com/docs/reference/functions/where.md)
 * [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
-* [Shape lists](../../guides/transformation/shape-lists.md)
+* [Shape lists](../../guides/shape/shape-lists.md)

@@ -82,4 +82,4 @@ to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 * [`group`](https://tenzir.com/docs/reference/operators/group.md)
 * [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
 * [Tune performance](../../guides/node-setup/tune-performance.md)
-* [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)
+* [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)

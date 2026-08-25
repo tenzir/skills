@@ -47,4 +47,4 @@ this = {
 
 * [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
 * [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
-* [Shape records](../../guides/transformation/shape-records.md)
+* [Shape records](../../guides/shape/shape-records.md)

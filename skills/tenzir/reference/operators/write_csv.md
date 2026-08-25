@@ -58,4 +58,4 @@ x,y,z
 * [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
 * [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
 * [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
-* [Convert data formats](../../guides/transformation/convert-data-formats.md)
+* [Convert data formats](../../guides/shape/convert-data-formats.md)

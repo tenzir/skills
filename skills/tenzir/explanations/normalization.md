@@ -59,10 +59,10 @@ Also expect asymmetry between targets. OCSF is more expressive than most schemas
 
 ## Where to go next
 
-Our guides on [normalizing data](../guides/normalization.md) cover each target schema and the decisions it forces, starting with [mapping to OCSF](../guides/normalization/map-to-ocsf.md). Normalization is also the third stage of the data lifecycle, and [Learn the data lifecycle](../tutorials/learn-the-data-lifecycle.md) shows what sits around it.
+Our guides on [normalizing data](../guides/normalize.md) cover each target schema and the decisions it forces, starting with [mapping to OCSF](../guides/normalize/map-to-ocsf.md). Normalization is also the fourth stage of the data lifecycle, after shaping, and [Learn the data lifecycle](../tutorials/learn-the-data-lifecycle.md) shows what sits around it.
 
 ## See also
 
-* [Map to OCSF](../guides/normalization/map-to-ocsf.md)
+* [Map to OCSF](../guides/normalize/map-to-ocsf.md)
 * [Enrichment](enrichment.md)
 * [Detections](detections.md)

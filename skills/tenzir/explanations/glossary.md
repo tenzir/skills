@@ -50,8 +50,8 @@ The storage that ships with a [node](glossary.md#node), written with [`import`](
 
 Edge storage keeps events in [partitions](glossary.md#partition) of Parquet or Feather and uses a [catalog](glossary.md#catalog) to skip the ones a query cannot match. It suits local buffering and recent-history queries. For long retention, write to object storage or a database instead.
 
-* [Ingest data into the node’s edge storage](../guides/edge-storage/import-into-a-node.md)
-* [Query the node’s edge storage](../guides/edge-storage/export-from-a-node.md)
+* [Ingest data into the node’s edge storage](../guides/store/import-into-a-node.md)
+* [Query the node’s edge storage](../guides/search/export-from-a-node.md)
 
 ## Event
 
@@ -105,7 +105,7 @@ Built-in telemetry about pipeline and node behavior, queryable as [events](gloss
 
 Metrics answer operational questions: what a pipeline ingested, where it stalled, how much memory it used.
 
-* [Collect metrics](../guides/analytics/collect-metrics.md)
+* [Collect metrics](../guides/observability/collect-metrics.md)
 
 ## Module
 
@@ -124,8 +124,8 @@ A node connects itself to the [platform](glossary.md#platform), which is how the
 
 * [Deploy a node](../guides/node-setup/provision-a-node.md)
 * Use the [REST API](../reference/operators/openapi.md) to manage a node
-* [Import into a node](../guides/edge-storage/import-into-a-node.md)
-* [Export from a node](../guides/edge-storage/export-from-a-node.md)
+* [Import into a node](../guides/store/import-into-a-node.md)
+* [Export from a node](../guides/search/export-from-a-node.md)
 
 ## OCSF
 
@@ -206,7 +206,7 @@ The named record type of an [event](glossary.md#event): its field names and thei
 
 Events with the same fields share a schema, and `@name` sets or reads its name. A pipeline can carry several schemas at once, and operators apply to the ones where they make sense.
 
-* [Show available schemas in the edge storage](../guides/edge-storage/show-available-schemas.md)
+* [Show available schemas in the edge storage](../guides/store/show-available-schemas.md)
 
 ## Sink
 

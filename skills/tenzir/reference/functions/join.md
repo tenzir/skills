@@ -45,4 +45,4 @@ from {x: join(["a", "b", "c"], "-")}
 
 * [`split`](https://tenzir.com/docs/reference/functions/split.md)
 * [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

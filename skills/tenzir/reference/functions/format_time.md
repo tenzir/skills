@@ -86,5 +86,5 @@ x = x.format_time("%d.%m.%Y")
 
 * [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)
 * [`time`](https://tenzir.com/docs/reference/functions/time.md)
-* [Work with time](../../guides/transformation/work-with-time.md)
-* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)
+* [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)
+* [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

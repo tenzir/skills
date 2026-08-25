@@ -21,7 +21,7 @@ The `delay` operator replays a dataflow according to a time field by introducing
 
 With the `speed` option, you can adjust the sleep time of the time series induced by `field` with a multiplicative factor. This has the effect of making the time series “faster” for values great than 1 and “slower” for values less than 1. Unless you provide a start time with `start`, the operator will anchor the timestamps in `field` to begin with the current wall clock time, as if you provided `start=now()`.
 
-The diagram below illustrates the effect of applying `delay` to dataflow. If an event in the stream has a timestamp the precedes the previous event, `delay` emits it instantly. Otherwise `delay` sleeps the amount of time to reach the next timestamp. As shown in the last illustration, the `speed` factor has a scaling effect on the inter-arrival times.
+The diagram below illustrates the effect of applying `delay` to dataflow. If an event in the stream has a timestamp that precedes the previous event, `delay` emits it instantly. Use [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before `delay` when the input may contain bounded timestamp regressions. Otherwise, `delay` sleeps the amount of time to reach the next timestamp. As shown in the last illustration, the `speed` factor has a scaling effect on the inter-arrival times.
 
 The options `start` and `speed` work independently, i.e., you can use them separately or both together.
 
@@ -88,4 +88,4 @@ delay ts, start=now()+2h
 ## See Also
 
 * [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md)
-* [Work with time](../../guides/transformation/work-with-time.md)
+* [Replay historical events](../../guides/replay/replay-historical-events.md)

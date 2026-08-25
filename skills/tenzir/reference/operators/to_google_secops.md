@@ -310,5 +310,5 @@ to_google_secops \
 ## See Also
 
 * [`to_google_cloud_logging`](https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md)
-* [Map to UDM](../../guides/normalization/map-to-udm.md)
+* [Map to UDM](../../guides/normalize/map-to-udm.md)
 * [Google SecOps](../../integrations/google/secops.md)

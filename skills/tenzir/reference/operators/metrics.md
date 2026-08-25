@@ -785,6 +785,6 @@ select timestamp, handle, reads, writes, bytes_read, bytes_written
 
 * [`diagnostics`](https://tenzir.com/docs/reference/operators/diagnostics.md)
 * [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
-* [Collect metrics](../../guides/analytics/collect-metrics.md)
+* [Collect metrics](../../guides/observability/collect-metrics.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Prometheus](../../integrations/prometheus.md)

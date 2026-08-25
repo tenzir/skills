@@ -33,4 +33,4 @@ head 5
 ## See Also
 
 * [`schemas`](https://tenzir.com/docs/reference/operators/schemas.md)
-* [Show available schemas](../../guides/edge-storage/show-available-schemas.md)
+* [Show available schemas](../../guides/store/show-available-schemas.md)

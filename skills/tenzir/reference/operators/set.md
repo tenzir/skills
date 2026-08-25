@@ -83,6 +83,6 @@ b = move a
 ## See Also
 
 * [Statements](../statements.md)
-* [Filter and select data](../../guides/transformation/filter-and-select-data.md)
+* [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

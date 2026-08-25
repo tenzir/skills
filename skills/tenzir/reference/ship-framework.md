@@ -44,6 +44,10 @@ client.show(identifiers=["v1.0.0"], release_mode=True, view="markdown")
 client.show(identifiers=["released"], release_mode=True, view="json")
 
 
+# Apply entry metadata policies to released entries too
+client.validate(all_entries=True)
+
+
 # Get the latest stable version
 version = client.release_version()  # Returns "v1.0.0"
 bare_version = client.release_version(bare=True)  # Returns "1.0.0"
@@ -284,6 +288,8 @@ The command prompts for any information you do not pass explicitly. The first in
 The generated ID must be unique in the current `unreleased/` directory. It may reuse an ID from an older release because each release has its own entry namespace. The command rejects only a filename that already exists in the current unreleased namespace.
 
 By default, the CLI infers the primary author from environment variables (`TENZIR_CHANGELOG_AUTHOR`, `GH_USERNAME`) or the GitHub CLI (`gh api user`). Using `--author` overrides this inference entirely. The `--co-author` option adds another human contributor to the inferred or explicit author list without replacing it. In CI and agent environments, inference can resolve to a bot, GitHub App, or machine user. Inspect the generated `authors` metadata and confirm that every login belongs to a human contributor. Pass `--author` for a known human, or remove author metadata when no human can be identified confidently. Do not record coding agents, bots, tools, providers, or models as authors. Record tool provenance in commit metadata instead. Duplicates are removed automatically while preserving order.
+
+When `require_author: true` is set and the command cannot resolve an author, `add` warns but still writes the entry. The next `validate` call fails until you add a confirmed human contributor. The command behaves the same way for a missing PR number when `require_pr: true` is set, except `validate --lenient` can demote that missing PR to a warning.
 
 ### release create
 
@@ -545,13 +551,16 @@ Run structural checks across entry files, release manifests, and exported docume
 tenzir-ship validate [options]
 ```
 
-| Option      | Description                                                |
-| ----------- | ---------------------------------------------------------- |
-| `--lenient` | Demote missing PR metadata issues to warnings, not errors. |
+| Option          | Description                                                |
+| --------------- | ---------------------------------------------------------- |
+| `--lenient`     | Demote missing PR metadata issues to warnings, not errors. |
+| `--all-entries` | Apply entry metadata policies to released entries too.     |
 
-The validator reports missing metadata, release manifests whose referenced entry files are absent from that release’s own `entries/` directory, duplicate entry IDs within one manifest, and configuration drift across repositories. The same ID may appear in different releases. Validation also rejects entries that carry `prs` metadata when the config sets `omit_pr: true`, or `authors` metadata when the config sets `omit_author: true`. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
+The validator reports missing metadata, release manifests whose referenced entry files are absent from that release’s own `entries/` directory, duplicate entry IDs within one manifest, and configuration drift across repositories. The same ID may appear in different releases. Validation also rejects unreleased entries that carry `prs` metadata when the configuration sets `omit_pr: true`, or `authors` metadata when it sets `omit_author: true`. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
 
-When `require_pr: true` is set, plain validation fails for unreleased entries without `prs` metadata. Use `validate --lenient` in pre-push hooks when a pull request number might not exist yet. Lenient mode demotes only missing PR metadata issues; all other validation errors still fail.
+The `require_pr: true` setting makes plain validation fail for unreleased entries without `prs` metadata. The `require_author: true` setting similarly requires a non-empty `authors` list. Use `validate --lenient` in pre-push hooks when a pull request number might not exist yet. Lenient mode demotes only missing PR metadata issues. All other validation errors still fail.
+
+Entry metadata policies apply to unreleased entries by default, so a new policy doesn’t invalidate published history. Run `validate --all-entries` to audit released entries against the current policies too. Other structural and schema checks continue to cover both unreleased and released entries in either mode. When you combine `--all-entries` with `--lenient`, missing PRs in released entries also become warnings. Run without `--lenient` for a strict history audit. Missing authors and forbidden metadata remain errors in both modes.
 
 ### stats
 
@@ -733,9 +742,10 @@ Configuration fields:
 | `repository`     | GitHub slug (e.g., `owner/repo`) required by `release publish`           |
 | `export_style`   | Default layout: `compact` (bullet-list) or omit for detailed cards       |
 | `explicit_links` | Render @mentions and #PR references as explicit Markdown links (boolean) |
-| `omit_pr`        | Suppress PR numbers in entries (boolean, default `false`)                |
+| `omit_pr`        | Forbid PR numbers in unreleased entries (boolean, default `false`)       |
 | `require_pr`     | Require PR numbers in unreleased entries (boolean, default `false`)      |
-| `omit_author`    | Suppress author attribution in entries (boolean, default `false`)        |
+| `omit_author`    | Forbid authors in unreleased entries (boolean, default `false`)          |
+| `require_author` | Require authors in unreleased entries (boolean, default `false`)         |
 | `components`     | Optional dict mapping component names to descriptions                    |
 | `modules`        | Optional glob pattern for discovering nested changelog projects          |
 | `release`        | Release settings block (see below)                                       |
@@ -750,6 +760,7 @@ repository: tenzir/tenzir
 export_style: compact
 explicit_links: true
 require_pr: true
+require_author: true
 components:
   cli: Command-line interface and user commands
   engine: Core pipeline engine internals
@@ -803,9 +814,13 @@ Set `version_bump_mode: off` to disable version file updates entirely.
 
 Version files are only updated when the release version is equal to or newer than the latest existing release. Editing an older release does not downgrade version fields in manifest files.
 
-The `omit_pr` and `omit_author` options suppress PR numbers and author attribution in generated entries. When enabled, the CLI skips auto-detection and ignores any `--pr`, `--author`, or `--co-author` flags (with a warning). The `validate` command additionally reports an error for entries that carry `prs` or `authors` metadata despite the corresponding option being set, catching entries written to disk without the `add` command. Use these options for projects that don’t use GitHub pull requests or prefer anonymous changelog entries.
+The `omit_pr` and `omit_author` options suppress PR numbers and author attribution in generated entries. When enabled, the CLI skips auto-detection and ignores any `--pr`, `--author`, or `--co-author` flags with a warning. The `validate` command reports an error for unreleased entries that carry `prs` or `authors` metadata despite the corresponding option. Use these options for projects that don’t use GitHub pull requests or prefer anonymous changelog entries.
 
-The `require_pr` option enforces non-empty `prs` metadata on every unreleased entry. Use it when release notes must always link back to pull requests. It is mutually exclusive with `omit_pr`; use `validate --lenient` for pre-push hooks so missing PR numbers remain warnings until the pull request exists.
+The `require_pr` option enforces non-empty `prs` metadata on every unreleased entry. Use it when release notes must always link back to pull requests. Setting it together with `omit_pr` fails configuration loading. Use `validate --lenient` for pre-push hooks so missing PR numbers remain warnings until the pull request exists.
+
+The `require_author` option enforces non-empty `authors` metadata on every unreleased entry. Setting it together with `omit_author` fails configuration loading. Missing authors remain errors in lenient mode.
+
+These entry metadata policies are forward-looking. They apply to unreleased entries during normal validation and don’t invalidate published history when you change a policy. Run `validate --all-entries` to apply them to released entries too.
 
 The first invocation of `tenzir-ship add` scaffolds a `changelog/` subdirectory with `config.yaml`, inferring defaults from the parent directory name. When you provide an explicit `--root` flag, the CLI uses that directory directly. Projects with `package.yaml` next to `changelog/` reuse the package `id` and `name` automatically.
 

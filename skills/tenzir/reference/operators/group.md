@@ -81,5 +81,5 @@ group tenant {
 * [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
 * [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)
+* [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

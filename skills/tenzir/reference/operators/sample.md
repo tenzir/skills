@@ -131,4 +131,4 @@ With `log10` mode, even at 100,000 events per period, the sampling rate is only 
 ## See Also
 
 * [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md)
-* [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)
+* [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)

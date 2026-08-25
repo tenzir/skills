@@ -151,4 +151,4 @@ Events become visible to readers when [`to_iceberg`](https://tenzir.com/docs/ref
 * [AWS Authentication](../../reference/aws-authentication.md)
 * [Apache Iceberg](../iceberg.md)
 * [Amazon S3](s3.md)
-* [Send to destinations](../../guides/routing/send-to-destinations.md)
+* [Send to destinations](../../guides/route/send-to-destinations.md)

@@ -198,4 +198,4 @@ The operator emits one `tenzir.yara` event for every matched rule:
 ## See Also
 
 * [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md)
-* [Scan bytes with YARA](../../guides/detection/scan-bytes-with-yara.md)
+* [Scan bytes with YARA](../../guides/detect/scan-bytes-with-yara.md)

@@ -39,4 +39,4 @@ encoded = bytes.encode_base64()
 ## See Also
 
 * [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

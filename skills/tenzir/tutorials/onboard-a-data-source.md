@@ -75,7 +75,7 @@ Addresses are `ip` values, ports and counters are numbers, and `start` and `end`
 
 Cleaning belongs to parsing
 
-Parsing owns the types. It also owns the `-` that Amazon writes for a field it cannot fill, which `null_value="-"` handled above, along with the placeholders other products emit such as `"None"` and `"N/A"`, strings that should be numbers or durations, and values that need trimming or a default. Our guide on [cleaning up values](../guides/parsing/clean-up-values.md) works through each conversion.
+Parsing owns the types. It also owns the `-` that Amazon writes for a field it cannot fill, which `null_value="-"` handled above, along with the placeholders other products emit such as `"None"` and `"N/A"`, strings that should be numbers or durations, and values that need trimming or a default. Our guide on [cleaning up values](../guides/parse/clean-up-values.md) works through each conversion.
 
 Parsing keeps the source’s own vocabulary. The field names are still Amazon’s, and the `NODATA` record’s zero counters stay zeroes, because the parser reports what the source said. The schema decision comes later, which is what lets the same parsing feed OCSF today and something else tomorrow.
 
@@ -192,7 +192,7 @@ That is the parsing layer finished: Amazon’s own field names, with `ip`, `port
 
 ## Map to OCSF
 
-Parsing kept Amazon’s vocabulary. Mapping translates it into a target schema, and VPC Flow Logs describe network connections, so they become [OCSF Network Activity](https://schema.ocsf.io/1.9.0/classes/network_activity). Our guide on [mapping to OCSF](../guides/normalization/map-to-ocsf.md) covers choosing a class and working through the attribute groups.
+Parsing kept Amazon’s vocabulary. Mapping translates it into a target schema, and VPC Flow Logs describe network connections, so they become [OCSF Network Activity](https://schema.ocsf.io/1.9.0/classes/network_activity). Our guide on [mapping to OCSF](../guides/normalize/map-to-ocsf.md) covers choosing a class and working through the attribute groups.
 
 ### Create the mapper
 
@@ -699,5 +699,5 @@ Run both examples to check the transformation without AWS access, then point you
 ## Next
 
 * [Add enrichment contexts](add-enrichment-contexts.md) adds a context package and enriches the endpoints you just mapped.
-* Our guide on [mapping to OCSF](../guides/normalization/map-to-ocsf.md) goes deeper on classes, attribute groups, and validation.
-* Our guides on [normalizing data](../guides/normalization.md) cover the other target schemas, which start from the OCSF event this package produces.
+* Our guide on [mapping to OCSF](../guides/normalize/map-to-ocsf.md) goes deeper on classes, attribute groups, and validation.
+* Our guides on [normalizing data](../guides/normalize.md) cover the other target schemas, which start from the OCSF event this package produces.

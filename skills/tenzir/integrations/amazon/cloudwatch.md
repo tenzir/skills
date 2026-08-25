@@ -148,6 +148,6 @@ to_amazon_cloudwatch "/tenzir/alerts",
 
 * [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)
 * [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md)
-* [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
-* [Send to destinations](../../guides/routing/send-to-destinations.md)
+* [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
+* [Send to destinations](../../guides/route/send-to-destinations.md)
 * [AWS Authentication](../../reference/aws-authentication.md)

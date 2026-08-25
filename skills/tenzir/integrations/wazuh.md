@@ -141,6 +141,6 @@ Use this path for custom index storage or other indexer-specific workflows. It b
 * [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
 * [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
 * [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [Fetch via HTTP and APIs](../guides/collecting/fetch-via-http-and-apis.md)
+* [Fetch via HTTP and APIs](../guides/collect/fetch-via-http-and-apis.md)
 * [OpenSearch](opensearch.md)
 * [Syslog](syslog.md)

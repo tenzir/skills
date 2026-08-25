@@ -1,0 +1,218 @@
+---
+title: "Shape records"
+canonical: https://tenzir.com/docs/guides/shape/shape-records
+source: https://tenzir.com/docs/guides/shape/shape-records.md
+section: "Docs"
+---
+
+# Shape records
+
+> Records (objects) contain key-value pairs. This guide shows you how to work with records - accessing fields, extracting keys, combining fragments, and transforming values.
+
+Records (objects) contain key-value pairs. This guide shows you how to work with records - accessing fields, extracting keys, combining fragments, and transforming values.
+
+## Access record fields
+
+Get values using dot notation or brackets:
+
+```tql
+from {
+  user: {
+    name: "Alice",
+    age: 30,
+    address: {
+      city: "NYC",
+      zip: "10001"
+    }
+  }
+}
+name = user.name
+city = user.address.city
+zip = user["address"]["zip"]
+has_email = user.has("email")
+```
+
+```tql
+{
+  user: {
+    name: "Alice",
+    age: 30,
+    address: {city: "NYC", zip: "10001"}
+  },
+  name: "Alice",
+  city: "NYC",
+  zip: "10001",
+  has_email: false
+}
+```
+
+## Get keys and values
+
+Extract field names and values:
+
+```tql
+from {
+  config: {
+    host: "localhost",
+    port: 8080,
+    ssl: true
+  }
+}
+field_names = config.keys()
+// Note: values() function is not available
+num_fields = config.keys().length()
+```
+
+```tql
+{
+  config: {host: "localhost", port: 8080, ssl: true},
+  field_names: ["host", "port", "ssl"],
+  num_fields: 3
+}
+```
+
+## Combine records with spread
+
+Use the spread operator `...` to combine records. Spread keeps the resulting record visible where you construct it, and lets you mix existing fragments with literals or computed fields. Later fields overwrite earlier fields, so put defaults first and overrides last:
+
+```tql
+from {
+  defaults: {host: "localhost", port: 80, ssl: false},
+  custom: {port: 8080, ssl: true}
+}
+service = {
+  ...defaults,
+  ...custom,
+  debug: true,
+}
+```
+
+```tql
+{
+  defaults: {host: "localhost", port: 80, ssl: false},
+  custom: {port: 8080, ssl: true},
+  service: {
+    host: "localhost",
+    port: 8080,
+    ssl: true,
+    debug: true
+  }
+}
+```
+
+Use optional access when a record fragment may be missing. If the spread expression evaluates to `null`, it contributes no fields, so an explicit `else {}` fallback is not necessary:
+
+```tql
+from {account: {id: 1, name: "Alice"}}
+user = {
+  ...account,
+  ...account.profile?,
+  active: true,
+}
+```
+
+```tql
+{
+  account: {
+    id: 1,
+    name: "Alice",
+  },
+  user: {
+    id: 1,
+    name: "Alice",
+    active: true,
+  },
+}
+```
+
+The [`merge`](https://tenzir.com/docs/reference/functions/merge.md) function returns the same result for two records, including `null` fragments, but prefer spread in transformation code when you construct the resulting record.
+
+## Transform record values
+
+Note: The `map_values` function is not available in TQL. To transform record values, you would need to reconstruct the record with transformed values manually:
+
+```tql
+from {
+  prices: {
+    apple: 1.50,
+    banana: 0.75,
+    orange: 2.00
+  }
+}
+// Manual transformation example:
+with_tax = {
+  apple: prices.apple * 1.1,
+  banana: prices.banana * 1.1,
+  orange: prices.orange * 1.1
+}
+```
+
+## Filter record fields
+
+Keep explicit fields by constructing a new record. Use [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md) and [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md) when field names follow a pattern:
+
+```tql
+from {
+  user: {
+    id: 123,
+    name: "Alice",
+    email: "alice@example.com",
+    password: "secret",
+    api_key: "xyz123"
+  }
+}
+public_info = {
+  id: user.id,
+  name: user.name,
+  email: user.email
+}
+contact = {
+  name: user.name,
+  email: user.email
+}
+credentials = user.select_matching("(password|api_key)$")
+safe_user = user.drop_matching("(password|api_key)$")
+```
+
+```tql
+{
+  user: {
+    id: 123,
+    name: "Alice",
+    email: "alice@example.com",
+    password: "secret",
+    api_key: "xyz123"
+  },
+  public_info: {
+    id: 123,
+    name: "Alice",
+    email: "alice@example.com"
+  },
+  contact: {
+    name: "Alice",
+    email: "alice@example.com"
+  },
+  credentials: {
+    password: "secret",
+    api_key: "xyz123"
+  },
+  safe_user: {
+    id: 123,
+    name: "Alice",
+    email: "alice@example.com"
+  }
+}
+```
+
+The matching functions inspect only top-level field names on the record you call them on. They don’t recurse into nested records.
+
+## See Also
+
+* [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md)
+* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
+* [`merge`](https://tenzir.com/docs/reference/functions/merge.md)
+* [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md)
+* [Shape lists](shape-lists.md)
+* [Filter and select data](../optimize/filter-and-select-data.md)
+* [Transform values](transform-values.md)
+* [Reshape complex data](reshape-complex-data.md)

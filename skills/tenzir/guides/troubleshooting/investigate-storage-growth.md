@@ -67,7 +67,7 @@ Two things to read from the output:
 * **`internal: true`** marks the node’s own data: metrics and diagnostics. The node collects these continuously, so they grow even when you don’t import anything. Retention settings cap them, as described later in this guide.
 * **Your schemas** show what imported data costs. The `store.url` field of each partition points at the backing file in the state directory, if you want to verify sizes on disk.
 
-To explore what the stored data contains, see [Show available schemas](../edge-storage/show-available-schemas.md).
+To explore what the stored data contains, see [Show available schemas](../store/show-available-schemas.md).
 
 ## Cap the growth
 
@@ -86,12 +86,12 @@ Caution
 
 Short retention periods degrade pipeline activity and diagnostics views in the Tenzir Platform, and they limit how far back you can look when troubleshooting; the restart and memory investigations in this section rely on metrics history.
 
-For imported data, the node can delete or transform old events automatically, either when a disk budget is exceeded or after a retention span. See [Transform data at rest](../edge-storage/transform-data-at-rest.md) for the available strategies, including manual compaction.
+For imported data, the node can delete or transform old events automatically, either when a disk budget is exceeded or after a retention span. See [Transform data at rest](../store/transform-data-at-rest.md) for the available strategies, including manual compaction.
 
 ## See also
 
 * [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
 * [`partitions`](https://tenzir.com/docs/reference/operators/partitions.md)
-* [Show available schemas](../edge-storage/show-available-schemas.md)
-* [Transform data at rest](../edge-storage/transform-data-at-rest.md)
-* [Inspect a node](gather-relevant-information.md)
+* [Show available schemas](../store/show-available-schemas.md)
+* [Transform data at rest](../store/transform-data-at-rest.md)
+* [Inspect a node](../observability/inspect-a-node.md)

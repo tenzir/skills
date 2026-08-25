@@ -87,4 +87,4 @@ from {
 
 * [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md)
 * [`join`](https://tenzir.com/docs/reference/functions/join.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

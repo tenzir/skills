@@ -34,7 +34,7 @@ warning: binary operator `mul` not implemented for `string` and `int64`
 {count: "3", doubled: null}
 ```
 
-The field came in as a string, but the expression treats it as a number, so the result is `null`. On a deployed pipeline the same warning appears in diagnostics instead of on your terminal; see [Inspect a node](gather-relevant-information.md#find-failing-pipelines).
+The field came in as a string, but the expression treats it as a number, so the result is `null`. On a deployed pipeline the same warning appears in diagnostics instead of on your terminal; see [Inspect a node](../observability/inspect-a-node.md#find-failing-pipelines).
 
 ## Check a field’s type
 
@@ -100,7 +100,7 @@ The same pipeline streams the events to your terminal when you run it over the C
 tenzir 'subscribe "alerts" | severity = severity.int() | head 5'
 ```
 
-This is a quick way to develop a mapping or a user-defined operator against live events before wiring it into a deployed pipeline. One caveat: operators from a package installed on the node aren’t visible to your local CLI, so test those in the Explorer. See [Split and merge streams](../routing/split-and-merge-streams.md) for how topics connect pipelines.
+This is a quick way to develop a mapping or a user-defined operator against live events before wiring it into a deployed pipeline. One caveat: operators from a package installed on the node aren’t visible to your local CLI, so test those in the Explorer. See [Split and merge streams](../route/split-and-merge-streams.md) for how topics connect pipelines.
 
 ## Handle missing fields
 
@@ -131,7 +131,7 @@ The field is `source_ip`, not `src_ip`. If a field is legitimately absent from s
 
 * [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)
 * [`int`](https://tenzir.com/docs/reference/functions/int.md)
-* [Transform values](../transformation/transform-values.md)
-* [Filter and select data](../transformation/filter-and-select-data.md)
-* [Split and merge streams](../routing/split-and-merge-streams.md)
-* [Inspect a node](gather-relevant-information.md)
+* [Transform values](../shape/transform-values.md)
+* [Filter and select data](../optimize/filter-and-select-data.md)
+* [Split and merge streams](../route/split-and-merge-streams.md)
+* [Inspect a node](../observability/inspect-a-node.md)

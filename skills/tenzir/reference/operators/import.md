@@ -36,4 +36,4 @@ import
 
 * [`export`](https://tenzir.com/docs/reference/operators/export.md)
 * [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
-* [Import into a node](../../guides/edge-storage/import-into-a-node.md)
+* [Import into a node](../../guides/store/import-into-a-node.md)

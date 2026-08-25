@@ -12,7 +12,7 @@ section: "Integrations"
 
 Windows Event Logs record system, security, and application events on Windows. You can collect them into Tenzir for monitoring, troubleshooting, and analysis.
 
-Once Windows Event Logs are flowing in a Tenzir pipeline, you can use any operator to process them. The below examples simply [import all data into a node](../../guides/edge-storage/import-into-a-node.md).
+Once Windows Event Logs are flowing in a Tenzir pipeline, you can use any operator to process them. The below examples simply [import all data into a node](../../guides/store/import-into-a-node.md).
 
 ## Collect logs with an agent
 

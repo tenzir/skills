@@ -38,4 +38,4 @@ from {x: "hello".is_alpha()}
 * [`is_numeric`](https://tenzir.com/docs/reference/functions/is_numeric.md)
 * [`is_printable`](https://tenzir.com/docs/reference/functions/is_printable.md)
 * [`is_upper`](https://tenzir.com/docs/reference/functions/is_upper.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

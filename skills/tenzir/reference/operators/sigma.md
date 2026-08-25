@@ -203,6 +203,6 @@ sigma path="rules/windows.yml"
 * [`window`](https://tenzir.com/docs/reference/operators/window.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
-* [Execute Sigma rules](../../guides/detection/execute-sigma-rules.md)
-* [Model detections in OCSF](../../guides/detection/model-detections-in-ocsf.md)
+* [Execute Sigma rules](../../guides/detect/execute-sigma-rules.md)
+* [Model detections in OCSF](../../guides/detect/model-detections-in-ocsf.md)
 * [Expressions](../expressions.md)

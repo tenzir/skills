@@ -47,4 +47,4 @@ tail 5
 
 * [`head`](https://tenzir.com/docs/reference/operators/head.md)
 * [`slice`](https://tenzir.com/docs/reference/operators/slice.md)
-* [Slice and sample data](../../guides/optimization/slice-and-sample-data.md)
+* [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)

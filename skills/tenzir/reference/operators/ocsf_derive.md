@@ -126,5 +126,5 @@ warning: found inconsistency between `activity_id` and `activity_name`
 
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
-* [Map to OCSF](../../guides/normalization/map-to-ocsf.md)
+* [Map to OCSF](../../guides/normalize/map-to-ocsf.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

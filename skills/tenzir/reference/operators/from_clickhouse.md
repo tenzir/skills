@@ -176,6 +176,6 @@ from_clickhouse sql="DESCRIBE TABLE events", tls=false
 ## See Also
 
 * [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
-* [Read from data stores](../../guides/collecting/read-from-data-stores.md)
+* [Read from data stores](../../guides/collect/read-from-data-stores.md)
 * [ClickHouse](../../integrations/clickhouse.md)
 * [nano](../../integrations/nano.md)

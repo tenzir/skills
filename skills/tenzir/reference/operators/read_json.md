@@ -292,4 +292,4 @@ Example Output
 * [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
 * [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md)
 * [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
-* [Convert data formats](../../guides/transformation/convert-data-formats.md)
+* [Convert data formats](../../guides/shape/convert-data-formats.md)

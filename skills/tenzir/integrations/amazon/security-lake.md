@@ -124,5 +124,5 @@ to_amazon_security_lake $s3_uri,
 ## See Also
 
 * [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md)
-* [Write partitioned files](../../guides/routing/write-partitioned-files.md)
+* [Write partitioned files](../../guides/store/write-partitioned-files.md)
 * [AWS Authentication](../../reference/aws-authentication.md)

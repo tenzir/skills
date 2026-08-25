@@ -258,7 +258,7 @@ every 5m {
 publish "splunk-results"
 ```
 
-The `now` parameter gives every relative boundary in one invocation the same anchor, including retries. Adjust the event-time window to the maximum delay that you accept. Overlapping index-time windows can return an event more than once. [Deduplicate events](../../guides/optimization/deduplicate-events.md) by a stable identifier when duplicates aren’t acceptable.
+The `now` parameter gives every relative boundary in one invocation the same anchor, including retries. Adjust the event-time window to the maximum delay that you accept. Overlapping index-time windows can return an event more than once. [Deduplicate events](../../guides/optimize/deduplicate-events.md) by a stable identifier when duplicates aren’t acceptable.
 
 ## Limitations
 

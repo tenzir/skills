@@ -140,4 +140,4 @@ To clean up a test, drop the table and namespace with an Iceberg-aware engine, d
 * [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
 * [Apache Iceberg](../iceberg.md)
 * [Google Cloud Storage](cloud-storage.md)
-* [Send to destinations](../../guides/routing/send-to-destinations.md)
+* [Send to destinations](../../guides/route/send-to-destinations.md)

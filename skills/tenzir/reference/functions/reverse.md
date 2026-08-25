@@ -37,4 +37,4 @@ from {x: reverse("hello")}
 
 * [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
 * [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)

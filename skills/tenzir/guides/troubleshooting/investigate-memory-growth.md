@@ -32,7 +32,7 @@ select timestamp, process_bytes=process.current_bytes,
 }
 ```
 
-The shape of the curve narrows down the cause. A steady climb that never comes down points at data accumulating somewhere inside the node. A sawtooth (climb, sharp drop, climb again) means the process is already being killed and restarted; in that case, first confirm the kill as described in [Check for unexpected restarts](gather-relevant-information.md#check-for-unexpected-restarts). To see the shape at a glance, plot the data as described in [Plot data with charts](../../tutorials/plot-data-with-charts.md).
+The shape of the curve narrows down the cause. A steady climb that never comes down points at data accumulating somewhere inside the node. A sawtooth (climb, sharp drop, climb again) means the process is already being killed and restarted; in that case, first confirm the kill as described in [Check for unexpected restarts](../observability/inspect-a-node.md#check-for-unexpected-restarts). To see the shape at a glance, plot the data as described in [Plot data with charts](../../tutorials/plot-data-with-charts.md).
 
 ## Find where data piles up
 
@@ -78,7 +78,7 @@ This streams one sample per second for every operator holding more than 1 MB at 
 
 Backlogs like this are self-limiting. An operator only runs when its downstream operators want more input, so a slow operator slows the entire pipeline down to its pace; this mechanism is called back pressure. Before it kicks in, the connection between two operators holds up to roughly 100 MiB, which is why the `buffered` value in the earlier output plateaus just above that mark. A pipeline with many operators can therefore hold several hundred megabytes of in-flight data, but a single backlog never grows without bounds.
 
-If the bottleneck operator is healthy but too slow for the data rate, consider spreading the load across multiple pipelines. See [Load-balance pipelines](../routing/load-balance-pipelines.md).
+If the bottleneck operator is healthy but too slow for the data rate, consider spreading the load across multiple pipelines. See [Load-balance pipelines](../route/load-balance-pipelines.md).
 
 ## Break down what the memory holds
 
@@ -109,11 +109,11 @@ select timestamp, table_slices, chunks
 
 High `table_slices` numbers mean event data is held in memory: backlogs, buffers, or in-progress aggregations. If both stay low while the process keeps growing, the memory goes elsewhere, and the node can tell you where: it optionally collects per-allocator and per-component allocation statistics in the `tenzir.metrics.memory` schema. See [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) for the full schema and the environment variables that enable the detailed collection.
 
-If none of this explains the growth, capture the memory trend and the operator profile output and share them with Tenzir support, as described in [Inspect a node](gather-relevant-information.md).
+If none of this explains the growth, capture the memory trend and the operator profile output and share them with Tenzir support, as described in [Inspect a node](../observability/inspect-a-node.md).
 
 ## See also
 
 * [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
-* [Inspect a node](gather-relevant-information.md)
-* [Load-balance pipelines](../routing/load-balance-pipelines.md)
+* [Inspect a node](../observability/inspect-a-node.md)
+* [Load-balance pipelines](../route/load-balance-pipelines.md)
 * [Size a node](../node-setup/size-a-node.md)

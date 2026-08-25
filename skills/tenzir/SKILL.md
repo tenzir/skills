@@ -88,30 +88,6 @@ You can run a pipeline via the platform, on the command line using the tenzir bi
 
 This guide shows you how to control pipeline lifecycles through the app or API.
 
-#### [Inspect a node](guides/troubleshooting/gather-relevant-information.md)
-
-When something goes wrong, the answers are often in the node’s logs, metrics, and diagnostics.
-
-#### [Debug field values](guides/troubleshooting/debug-field-values.md)
-
-When a field comes out null, holds the wrong value, or has a type you didn’t expect, the cause is almost always visible in a warning or in the data one step upstream.
-
-#### [Investigate slow pipelines](guides/troubleshooting/investigate-slow-pipelines.md)
-
-When a pipeline can’t keep up, you usually notice the symptoms first: a dashboard lags, a downstream system receives data late, or a backlog builds up.
-
-#### [Investigate memory growth](guides/troubleshooting/investigate-memory-growth.md)
-
-When a node’s memory usage keeps climbing, you want to know whether it will level off or end in an out-of-memory kill, and which pipeline is responsible.
-
-#### [Investigate storage growth](guides/troubleshooting/investigate-storage-growth.md)
-
-When the disk fills up on a machine that runs a node, you want to know whether the node is responsible, which data takes the space, and how to cap it.
-
-#### [Reconnect an offline node](guides/troubleshooting/reconnect-an-offline-node.md)
-
-When a node shows as offline in the Tenzir Platform but the process is still running, the node can’t reach the platform’s control plane.
-
 ### Setup
 
 #### [Overview](guides/ai-workbench.md)
@@ -184,203 +160,215 @@ You can pre-define dashboards for your static workspaces.
 
 An ephemeral node is ideal for temporary or auto-scaling deployments.
 
-### Work with Data
+### Collect
 
-#### [Overview](guides/collecting.md)
+#### [Overview](guides/collect.md)
 
-This guide provides an overview of data collection in TQL.
+Read events and bytes from files, APIs, brokers, stores, and networks.
 
-##### [Read and watch files](guides/collecting/read-and-watch-files.md)
+##### [Read and watch files](guides/collect/read-and-watch-files.md)
 
-##### [Fetch via HTTP and APIs](guides/collecting/fetch-via-http-and-apis.md)
+##### [Fetch via HTTP and APIs](guides/collect/fetch-via-http-and-apis.md)
 
-##### [Read from message brokers](guides/collecting/read-from-message-brokers.md)
+##### [Read from message brokers](guides/collect/read-from-message-brokers.md)
 
-##### [Read from data stores](guides/collecting/read-from-data-stores.md)
+##### [Read from data stores](guides/collect/read-from-data-stores.md)
 
-##### [Get data from the network](guides/collecting/get-data-from-the-network.md)
+##### [Get data from the network](guides/collect/get-data-from-the-network.md)
 
-#### [Parse delimited text](guides/parsing/parse-delimited-text.md)
+### Parse
 
-This guide shows you how to parse text streams into structured events.
+#### [Overview](guides/parse.md)
 
-#### [Parse binary data](guides/parsing/parse-binary-data.md)
+Turn byte streams and text fields into structured events.
 
-This guide shows you how to parse binary data formats into structured events.
+##### [Parse delimited text](guides/parse/parse-delimited-text.md)
 
-#### [Parse string fields](guides/parsing/parse-string-fields.md)
+##### [Parse binary data](guides/parse/parse-binary-data.md)
 
-This guide shows you how to extract structured data from string fields using TQL’s parsing functions.
+##### [Parse string fields](guides/parse/parse-string-fields.md)
 
-#### [Clean up values](guides/parsing/clean-up-values.md)
+##### [Clean up values](guides/parse/clean-up-values.md)
 
-This guide shows you how to clean and normalize values in your data before mapping to a schema.
+### Shape
 
-#### [Filter and select data](guides/transformation/filter-and-select-data.md)
+#### [Overview](guides/shape.md)
 
-Filtering and selecting are fundamental operations when working with data streams.
+Prepare event fields and records for downstream processing.
 
-#### [Transform values](guides/transformation/transform-values.md)
+##### [Transform values](guides/shape/transform-values.md)
 
-Transforming values is a fundamental part of data processing.
+##### [Manipulate strings](guides/shape/manipulate-strings.md)
 
-#### [Manipulate strings](guides/transformation/manipulate-strings.md)
+##### [Normalize event timestamps](guides/shape/normalize-event-timestamps.md)
 
-String manipulation is essential for cleaning, formatting, and transforming text data.
+##### [Repair out-of-order events](guides/shape/repair-out-of-order-events.md)
 
-#### [Work with time](guides/transformation/work-with-time.md)
+##### [Calculate with time](guides/shape/calculate-with-time.md)
 
-Time is fundamental in data analysis.
+##### [Shape lists](guides/shape/shape-lists.md)
 
-#### [Shape lists](guides/transformation/shape-lists.md)
+##### [Shape records](guides/shape/shape-records.md)
 
-Lists (arrays) contain ordered sequences of values.
+##### [Reshape complex data](guides/shape/reshape-complex-data.md)
 
-#### [Shape records](guides/transformation/shape-records.md)
+##### [Convert data formats](guides/shape/convert-data-formats.md)
 
-Records (objects) contain key-value pairs.
+### Normalize
 
-#### [Reshape complex data](guides/transformation/reshape-complex-data.md)
+#### [Overview](guides/normalize.md)
 
-Real-world data is rarely flat.
+Map source-specific events into a shared schema.
 
-#### [Convert data formats](guides/transformation/convert-data-formats.md)
+##### [Map to ASIM](guides/normalize/map-to-asim.md)
 
-Data comes in many formats.
+##### [Map to CIM](guides/normalize/map-to-cim.md)
 
-#### [Mask sensitive data](guides/transformation/mask-sensitive-data.md)
+##### [Map to ECS](guides/normalize/map-to-ecs.md)
 
-This guide shows you how to mask sensitive fields such as IP addresses, email addresses, account identifiers, and credentials.
+##### [Map to OCSF](guides/normalize/map-to-ocsf.md)
 
-#### [Normalize data](guides/normalization.md)
+##### [Map to UDM](guides/normalize/map-to-udm.md)
 
-These guides take you from source-specific events to a schema your downstream tools understand.
+### Optimize
 
-##### [Map to ASIM](guides/normalization/map-to-asim.md)
+#### [Overview](guides/optimize.md)
 
-##### [Map to CIM](guides/normalization/map-to-cim.md)
+Reduce data volume and processing work in a pipeline.
 
-##### [Map to ECS](guides/normalization/map-to-ecs.md)
+##### [Filter and select data](guides/optimize/filter-and-select-data.md)
 
-##### [Map to OCSF](guides/normalization/map-to-ocsf.md)
+##### [Slice and sample data](guides/optimize/slice-and-sample-data.md)
 
-##### [Map to UDM](guides/normalization/map-to-udm.md)
+##### [Deduplicate events](guides/optimize/deduplicate-events.md)
 
-#### [Use lookup tables](guides/enrichment/use-lookup-tables.md)
+### Protect
 
-Store reference data in lookup tables and apply it to OCSF events
+#### [Overview](guides/protect.md)
 
-#### [Enrich with asset inventory](guides/enrichment/enrich-with-asset-inventory.md)
+Limit sensitive-data exposure while preserving useful structure.
 
-Add asset inventory context to OCSF endpoint and user fields
+##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
 
-#### [Enrich with threat intel](guides/enrichment/enrich-with-threat-intel.md)
+### Enrich
 
-Add threat intelligence to OCSF enrichments, observables, and OSINT fields
+#### [Overview](guides/enrich.md)
 
-#### [Enrich events with AI](guides/enrichment/enrich-events-with-ai.md)
+Add context that the original event does not contain.
 
-Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
+##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
 
-#### [Match events with TQL](guides/detection/match-events-with-tql.md)
+##### [Enrich with asset inventory](guides/enrich/enrich-with-asset-inventory.md)
 
-Write single-event detections over OCSF events and package their matching and output logic as reusable TQL operators
+##### [Enrich with threat intel](guides/enrich/enrich-with-threat-intel.md)
 
-#### [Model detections in OCSF](guides/detection/model-detections-in-ocsf.md)
+##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
 
-Choose an OCSF representation for alertable activity, create Detection Findings, and model their lifecycle
+### Aggregate
 
-#### [Detect over time windows](guides/detection/detect-over-time-windows.md)
+#### [Overview](guides/aggregate.md)
 
-Build streaming detections with event-time windows, from failure thresholds to statistical baselines, with duplicate suppression
+Turn event streams into summaries and statistics.
 
-#### [Baseline behavior from stored events](guides/detection/baseline-from-stored-events.md)
+##### [Aggregate event streams](guides/aggregate/aggregate-event-streams.md)
 
-Learn per-entity baselines from stored events on a schedule, publish them as lookup tables, and judge live streams with robust scores
+##### [Shape aggregation results](guides/aggregate/shape-aggregation-results.md)
 
-#### [Detect periodic behavior](guides/detection/detect-periodic-behavior.md)
+##### [Window event streams](guides/aggregate/window-event-streams.md)
 
-Score beaconing cadence with robust statistics, recover periods with autocorrelation, and catch implants that hold one connection open
+##### [Calculate aggregate statistics](guides/aggregate/calculate-aggregate-statistics.md)
 
-#### [Create multi-stage detectors](guides/detection/create-multi-stage-detectors.md)
+### Detect
 
-Combine independent detections into higher-confidence verdicts with correlation combinators, cross-stage state, and suppression
+#### [Overview](guides/detect.md)
 
-#### [Execute Sigma rules](guides/detection/execute-sigma-rules.md)
+Match security activity and model the resulting findings.
 
-Run Sigma v2.1 rules on structured events and emit OCSF Detection Findings with causal match evidence
+##### [Match events with TQL](guides/detect/match-events-with-tql.md)
 
-#### [Scan bytes with YARA](guides/detection/scan-bytes-with-yara.md)
+##### [Model detections in OCSF](guides/detect/model-detections-in-ocsf.md)
 
-Run YARA-X rules on files and finite byte streams and emit OCSF or native matches
+##### [Detect over time windows](guides/detect/detect-over-time-windows.md)
 
-#### [Slice and sample data](guides/optimization/slice-and-sample-data.md)
+##### [Baseline behavior from stored events](guides/detect/baseline-from-stored-events.md)
 
-When working with data streams, you often need to control which events flow through your pipeline.
+##### [Detect periodic behavior](guides/detect/detect-periodic-behavior.md)
 
-#### [Deduplicate events](guides/optimization/deduplicate-events.md)
+##### [Create multi-stage detectors](guides/detect/create-multi-stage-detectors.md)
 
-The deduplicate operator provides a powerful mechanism to remove duplicate events in a pipeline.
+##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
 
-#### [Send to destinations](guides/routing/send-to-destinations.md)
+##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
 
-This guide shows you how to send data to various destinations using TQL output operators.
+### Store
 
-#### [Write partitioned files](guides/routing/write-partitioned-files.md)
+#### [Overview](guides/store.md)
 
-Partitioned files organize an event stream into separate files or objects based on field values.
+Persist events for later search, replay, and analysis.
 
-#### [Expose data as a server](guides/routing/expose-data-as-server.md)
+##### [Write partitioned files](guides/store/write-partitioned-files.md)
 
-This guide shows you how to make pipeline data available to external consumers by starting an HTTP server.
+##### [Import into a node](guides/store/import-into-a-node.md)
 
-#### [Split and merge streams](guides/routing/split-and-merge-streams.md)
+##### [Show available schemas](guides/store/show-available-schemas.md)
 
-This guide shows you how to connect pipelines using publish and subscribe operators.
+##### [Transform data at rest](guides/store/transform-data-at-rest.md)
 
-#### [Fan out with subpipelines](guides/routing/fan-out-with-subpipelines.md)
+### Search
 
-This guide shows you how to fan out an event stream into subpipelines with each and group.
+#### [Overview](guides/search.md)
 
-#### [Load-balance pipelines](guides/routing/load-balance-pipelines.md)
+Query stored events and continue processing the results.
 
-This guide shows you how to distribute events across multiple destinations using the loadbalance operator.
+##### [Export from a node](guides/search/export-from-a-node.md)
 
-#### [Aggregate event streams](guides/analytics/aggregate-event-streams.md)
+### Route
 
-This guide shows you how to produce compact aggregate records with summarize.
+#### [Overview](guides/route.md)
 
-#### [Shape aggregation results](guides/analytics/shape-aggregation-results.md)
+Deliver event streams to the systems that need them.
 
-This guide shows you how to choose which rows represent an aggregate result.
+##### [Send to destinations](guides/route/send-to-destinations.md)
 
-#### [Import into a node](guides/edge-storage/import-into-a-node.md)
+##### [Expose data as a server](guides/route/expose-data-as-server.md)
 
-Importing (or ingesting) data can be done by running a pipeline that ends with the import output operator.
+##### [Split and merge streams](guides/route/split-and-merge-streams.md)
 
-#### [Window event streams](guides/analytics/window-event-streams.md)
+##### [Fan out with subpipelines](guides/route/fan-out-with-subpipelines.md)
 
-Use window when an aggregation needs bounded time or event-count state.
+##### [Load-balance pipelines](guides/route/load-balance-pipelines.md)
 
-#### [Calculate aggregate statistics](guides/analytics/calculate-aggregate-statistics.md)
+### Replay
 
-This guide shows you how to choose and combine aggregate functions for distributions, collected values, conditions, and operational summaries.
+#### [Overview](guides/replay.md)
 
-#### [Export from a node](guides/edge-storage/export-from-a-node.md)
+Run stored events through live pipelines again.
 
-Exporting (or querying) data can be done by running a pipeline that begins with the export input operator.
+##### [Replay historical events](guides/replay/replay-historical-events.md)
 
-#### [Collect metrics](guides/analytics/collect-metrics.md)
+### Operate
 
-Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.
+#### [Overview](guides/observability.md)
 
-#### [Show available schemas](guides/edge-storage/show-available-schemas.md)
+Inspect node, pipeline, and host behavior.
 
-When you write a pipeline, you often reference field names.
+#### [Overview](guides/troubleshooting.md)
 
-#### [Transform data at rest](guides/edge-storage/transform-data-at-rest.md)
+Diagnose pipeline failures, resource growth, and node connectivity.
 
-This guide shows you how to transform data already stored in a node.
+##### [Inspect a node](guides/observability/inspect-a-node.md)
+
+##### [Collect metrics](guides/observability/collect-metrics.md)
+
+##### [Debug field values](guides/troubleshooting/debug-field-values.md)
+
+##### [Investigate slow pipelines](guides/troubleshooting/investigate-slow-pipelines.md)
+
+##### [Investigate memory growth](guides/troubleshooting/investigate-memory-growth.md)
+
+##### [Investigate storage growth](guides/troubleshooting/investigate-storage-growth.md)
+
+##### [Reconnect an offline node](guides/troubleshooting/reconnect-an-offline-node.md)
 
 ### Build
 
@@ -469,6 +457,12 @@ Install TQL language extensions for syntax highlighting in your editor
 #### [Build from source](guides/development/build-from-source.md)
 
 Tenzir uses CMake as build system with a C++23 compiler.
+
+### Other
+
+#### [Work with time](guides/shape/work-with-time.md)
+
+We split this guide into focused tasks.
 
 ## [Tutorials](tutorials.md)
 

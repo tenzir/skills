@@ -70,5 +70,5 @@ from {x: "hello world".pad_end(5)}
 * [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md)
 * [`trim`](https://tenzir.com/docs/reference/functions/trim.md)
 * [`trim_end`](https://tenzir.com/docs/reference/functions/trim_end.md)
-* [Manipulate strings](../../guides/transformation/manipulate-strings.md)
-* [Mask sensitive data](../../guides/transformation/mask-sensitive-data.md)
+* [Manipulate strings](../../guides/shape/manipulate-strings.md)
+* [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

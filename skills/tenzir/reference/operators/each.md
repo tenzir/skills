@@ -93,5 +93,5 @@ each {
 * [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
 * [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
-* [Fetch via HTTP and APIs](../../guides/collecting/fetch-via-http-and-apis.md)
-* [Fan out with subpipelines](../../guides/routing/fan-out-with-subpipelines.md)
+* [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
+* [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)

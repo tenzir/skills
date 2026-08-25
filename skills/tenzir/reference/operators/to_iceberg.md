@@ -268,7 +268,7 @@ to_iceberg "lake.events",
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
 * [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
-* [Send to destinations](../../guides/routing/send-to-destinations.md)
+* [Send to destinations](../../guides/route/send-to-destinations.md)
 * [Apache Iceberg](../../integrations/iceberg.md)
 * [AWS Glue](../../integrations/amazon/glue.md)
 * [Cloud Lakehouse](../../integrations/google/cloud-lakehouse.md)

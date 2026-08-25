@@ -7,19 +7,19 @@ section: "Docs"
 
 # Learn the data lifecycle
 
-> Security data arrives as somebody else’s text and has to end up as something a detection, a dashboard, or an auditor can use. We call the steps in between the data lifecycle, and we group its twelve stages into four phases, with replay closing the loop back to the first one.
+> Security data arrives as somebody else’s text and has to end up as something a detection, a dashboard, or an auditor can use. We call the steps in between the data lifecycle, and we group its thirteen stages into four phases, with replay closing the loop back to the first one.
 
-Security data arrives as somebody else’s text and has to end up as something a detection, a dashboard, or an auditor can use. We call the steps in between the **data lifecycle**, and we group its twelve stages into four phases, with replay closing the loop back to the first one.
+Security data arrives as somebody else’s text and has to end up as something a detection, a dashboard, or an auditor can use. We call the steps in between the **data lifecycle**, and we group its thirteen stages into four phases, with replay closing the loop back to the first one.
 
 This page is the map. Each stage below gets a definition, a short snippet, and links to the guides that go deep. Read it once to learn the vocabulary, then come back to it when you need to find where something belongs.
 
-Only the first three stages have a required order, because data has to arrive before anything can parse it, and it has to be parsed before anything can map it to a schema. Everything else depends on what you are building. A real deployment runs most of these at the same time in separate pipelines, connected by [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), so the picture is a vocabulary rather than a queue.
+Only the first four stages have a required order. Data has to arrive before anything can parse it, parsing has to expose fields before shaping can prepare them, and normalization then maps them to a schema. Everything else depends on what you are building. A real deployment runs most of these at the same time in separate pipelines, connected by [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), so the picture is a vocabulary rather than a queue.
 
 Every stage is ordinary TQL. Nothing on this page is a special mode, a plugin, or a configuration file.
 
 ## Get data in
 
-The first phase turns somebody else’s output into events the other nine stages can rely on.
+The first phase turns somebody else’s output into structured, mapping-ready events.
 
 ### Collect
 
@@ -32,7 +32,7 @@ from_file "s3://example-flow-logs/AWSLogs/**/*.log.gz", watch=true {
 }
 ```
 
-Collection operators carry the connection details, the credentials, and the retry behavior, which is why they are the only ones that ever fail because something outside your pipeline is down. Read from [files and object storage](../guides/collecting/read-and-watch-files.md), [HTTP APIs](../guides/collecting/fetch-via-http-and-apis.md), [message brokers](../guides/collecting/read-from-message-brokers.md), [data stores](../guides/collecting/read-from-data-stores.md), or [the network](../guides/collecting/get-data-from-the-network.md).
+Collection operators carry the connection details, the credentials, and the retry behavior, which is why they are the only ones that ever fail because something outside your pipeline is down. Read from [files and object storage](../guides/collect/read-and-watch-files.md), [HTTP APIs](../guides/collect/fetch-via-http-and-apis.md), [message brokers](../guides/collect/read-from-message-brokers.md), [data stores](../guides/collect/read-from-data-stores.md), or [the network](../guides/collect/get-data-from-the-network.md).
 
 ### Parse
 
@@ -43,7 +43,22 @@ flow = message.parse_ssv(header=amazon::$vpc_flow_v2_header, null_value="-")
 flow.start = flow.start.seconds().from_epoch()
 ```
 
-Parsing decides nothing about a target schema, which is what lets the same parsing feed OCSF today and ECS tomorrow. Many sources need no parsing step at all, because a `read_*` operator already produces events. Parse [string fields](../guides/parsing/parse-string-fields.md), [delimited text](../guides/parsing/parse-delimited-text.md), and [binary data](../guides/parsing/parse-binary-data.md).
+Parsing decides nothing about a target schema, which is what lets the same parsing feed OCSF today and ECS tomorrow. Many sources need no parsing step at all, because a `read_*` operator already produces events. Parse [string fields](../guides/parse/parse-string-fields.md), [delimited text](../guides/parse/parse-delimited-text.md), and [binary data](../guides/parse/parse-binary-data.md).
+
+### Shape
+
+Shaping prepares source fields for mapping: rename, nest, flatten, round, derive, drop.
+
+```tql
+duration = count_milliseconds(end_time - time).round()
+src_endpoint = {...src_endpoint, internal: src_endpoint.ip in 10.0.0.0/8}
+```
+
+This first shaping pass fixes types and structure before normalization. Further shaping can happen anywhere in a pipeline. See [reshaping complex data](../guides/shape/reshape-complex-data.md), [working with records](../guides/shape/shape-records.md), and [normalizing event timestamps](../guides/shape/normalize-event-timestamps.md).
+
+## Make it fit
+
+The second phase maps events to a shared schema and controls which of them continue.
 
 ### Normalize
 
@@ -58,22 +73,7 @@ src_endpoint = {ip: move unmapped.srcaddr, port: move unmapped.srcport}
 ocsf_derive
 ```
 
-Two habits make normalization safe. Whatever has no target field stays in `unmapped`, so nothing disappears silently, and the original payload stays in `raw_data`, so an analyst can always compare the mapped event against what the source sent. Our explanation of [normalization](../explanations/normalization.md) covers why this stage belongs at ingest, and the guide on [mapping to OCSF](../guides/normalization/map-to-ocsf.md) walks through one target schema.
-
-## Make it fit
-
-The second phase changes how events look and how many of them continue, without changing what they mean.
-
-### Shape
-
-Shaping restructures events: rename, nest, flatten, round, derive, drop.
-
-```tql
-duration = count_milliseconds(end_time - time).round()
-src_endpoint = {...src_endpoint, internal: src_endpoint.ip in 10.0.0.0/8}
-```
-
-Shaping works at any point, before or after normalization. See [reshaping complex data](../guides/transformation/reshape-complex-data.md), [working with records](../guides/transformation/shape-records.md), and [working with time](../guides/transformation/work-with-time.md).
+Two habits make normalization safe. Whatever has no target field stays in `unmapped`, so nothing disappears silently, and the original payload stays in `raw_data`, so an analyst can always compare the mapped event against what the source sent. Our explanation of [normalization](../explanations/normalization.md) covers why this stage belongs at ingest, and the guide on [mapping to OCSF](../guides/normalize/map-to-ocsf.md) walks through one target schema.
 
 ### Optimize
 
@@ -84,18 +84,18 @@ where action_id == 2 or traffic.bytes > 1k
 deduplicate src_endpoint.ip, dst_endpoint.ip, create_timeout=1h
 ```
 
-Filtering and deduplication cost almost nothing in a running pipeline, and volume you drop here never reaches a bill or an analyst. See [filtering and selecting data](../guides/transformation/filter-and-select-data.md).
+Filtering and deduplication cost almost nothing in a running pipeline, and volume you drop here never reaches a bill or an analyst. See [filtering and selecting data](../guides/optimize/filter-and-select-data.md).
 
-### Anonymize
+### Protect
 
-Anonymization removes identities while keeping the relationships that investigations need.
+Protection limits sensitive-data exposure while keeping the relationships that investigations need. Anonymization removes identities irreversibly, pseudonymization replaces them with stable substitutes, and encryption keeps them recoverable by authorized parties.
 
 ```tql
 src_endpoint.ip = encrypt_cryptopan(src_endpoint.ip, seed=secret("CRYPTOPAN_SEED"))
 user.email_addr = f"*****@{user.email_addr.split("@")[1]}"
 ```
 
-Prefix-preserving encryption keeps subnet structure intact even though the addresses are no longer real. Do this before events leave your trust boundary. See [masking sensitive data](../guides/transformation/mask-sensitive-data.md).
+Prefix-preserving encryption keeps subnet structure intact while hiding the original addresses. Protect sensitive fields before events leave your trust boundary. See [masking sensitive data](../guides/protect/mask-sensitive-data.md).
 
 ## Add meaning
 
@@ -109,7 +109,7 @@ Enrichment adds what the event does not carry: geography, asset ownership, threa
 context_enrich "geo-open", key=dst_endpoint.ip, into=dst_endpoint.geo
 ```
 
-The lookup lives in a context that updates on its own schedule, so enrichment stays one operator call. See [lookup tables](../guides/enrichment/use-lookup-tables.md), [threat intelligence](../guides/enrichment/enrich-with-threat-intel.md), [asset inventory](../guides/enrichment/enrich-with-asset-inventory.md), and [models](../guides/enrichment/enrich-events-with-ai.md), or build a context in [Add enrichment contexts](add-enrichment-contexts.md).
+The lookup lives in a context that updates on its own schedule, so enrichment stays one operator call. See [lookup tables](../guides/enrich/use-lookup-tables.md), [threat intelligence](../guides/enrich/enrich-with-threat-intel.md), [asset inventory](../guides/enrich/enrich-with-asset-inventory.md), and [models](../guides/enrich/enrich-events-with-ai.md), or build a context in [Add enrichment contexts](add-enrichment-contexts.md).
 
 ### Aggregate
 
@@ -123,7 +123,7 @@ window size=1h, every=10min, on=time {
 }
 ```
 
-This is the one stage that changes cardinality, so everything after it sees summaries instead of events. That makes it the input to charts, dashboards, and the baselines that detections compare against. See [aggregating event streams](../guides/analytics/aggregate-event-streams.md), [windowing event streams](../guides/analytics/window-event-streams.md), and [Plot data with charts](plot-data-with-charts.md).
+This is the one stage that changes cardinality, so everything after it sees summaries instead of events. That makes it the input to charts, dashboards, and the baselines that detections compare against. See [aggregating event streams](../guides/aggregate/aggregate-event-streams.md), [windowing event streams](../guides/aggregate/window-event-streams.md), and [Plot data with charts](plot-data-with-charts.md).
 
 ### Detect
 
@@ -135,7 +135,7 @@ summarize src=src_endpoint.ip, rejects=count()
 where rejects > 100
 ```
 
-Because detections run on normalized events, one rule covers every source that maps to the same class. See [matching events with TQL](../guides/detection/match-events-with-tql.md), [executing Sigma rules](../guides/detection/execute-sigma-rules.md), [detecting over time windows](../guides/detection/detect-over-time-windows.md), and [modeling detections in OCSF](../guides/detection/model-detections-in-ocsf.md).
+Because detections run on normalized events, one rule covers every source that maps to the same class. See [matching events with TQL](../guides/detect/match-events-with-tql.md), [executing Sigma rules](../guides/detect/execute-sigma-rules.md), [detecting over time windows](../guides/detect/detect-over-time-windows.md), and [modeling detections in OCSF](../guides/detect/model-detections-in-ocsf.md).
 
 ## Put it to work
 
@@ -152,7 +152,7 @@ to_s3 "s3://security-lake/ocsf/network/**/data_{uuid}.parquet",
 }
 ```
 
-Columnar files with compression and partitioning keep both cost and query time down. See [writing partitioned files](../guides/routing/write-partitioned-files.md) and [importing into storage](../guides/edge-storage/import-into-a-node.md).
+Columnar files with compression and partitioning keep both cost and query time down. See [writing partitioned files](../guides/store/write-partitioned-files.md) and [importing into storage](../guides/store/import-into-a-node.md).
 
 ### Search
 
@@ -165,7 +165,7 @@ from_clickhouse uri="clickhouse://clickhouse:9000/security", sql=r#"
 "#
 ```
 
-Push filtering, sorting, and projection into the system that holds the data, then continue in TQL. See [querying storage](../guides/edge-storage/export-from-a-node.md) and [reading from data stores](../guides/collecting/read-from-data-stores.md).
+Push filtering, sorting, and projection into the system that holds the data, then continue in TQL. See [querying storage](../guides/search/export-from-a-node.md) and [reading from data stores](../guides/collect/read-from-data-stores.md).
 
 ### Route
 
@@ -180,7 +180,7 @@ fork {
 publish "ocsf.archive"
 ```
 
-The [`fork`](https://tenzir.com/docs/reference/operators/fork.md) operator sends a copy down a branch while the main stream continues, so one collection pipeline can feed a SIEM, an archive, and an alerting path. See [sending to destinations](../guides/routing/send-to-destinations.md), [fanning out with subpipelines](../guides/routing/fan-out-with-subpipelines.md), and [load balancing](../guides/routing/load-balance-pipelines.md).
+The [`fork`](https://tenzir.com/docs/reference/operators/fork.md) operator sends a copy down a branch while the main stream continues, so one collection pipeline can feed a SIEM, an archive, and an alerting path. See [sending to destinations](../guides/route/send-to-destinations.md), [fanning out with subpipelines](../guides/route/fan-out-with-subpipelines.md), and [load balancing](../guides/route/load-balance-pipelines.md).
 
 ## Close the loop
 
@@ -198,7 +198,7 @@ delay time, speed=20.0
 publish "ocsf.network"
 ```
 
-That is the arrow on the right of the diagram, and it is why storage matters beyond compliance. Replay drives a changed detection against a real incident, backfills after you fix a mapping, and paces a demo. Here [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md) rewrites the timestamps and [`delay`](https://tenzir.com/docs/reference/operators/delay.md) controls the speed.
+That is the arrow on the right of the diagram, and it is why storage matters beyond compliance. Replay drives a changed detection against a real incident, backfills after you fix a mapping, and paces a demo. Here [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md) rewrites the timestamps and [`delay`](https://tenzir.com/docs/reference/operators/delay.md) controls the speed. The guide on [replaying historical events](../guides/replay/replay-historical-events.md) covers ordering large archives, preserving original timestamps, and isolating replay side effects.
 
 ## Put it together
 

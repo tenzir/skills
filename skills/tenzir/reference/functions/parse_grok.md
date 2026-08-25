@@ -195,4 +195,4 @@ output.dur = output.dur * 1s
 ## See Also
 
 * [`read_grok`](https://tenzir.com/docs/reference/operators/read_grok.md)
-* [Parse string fields](../../guides/parsing/parse-string-fields.md)
+* [Parse string fields](../../guides/parse/parse-string-fields.md)

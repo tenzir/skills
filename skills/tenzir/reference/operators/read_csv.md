@@ -213,4 +213,4 @@ read_csv header="message,count,ip"
 * [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
 * [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
 * [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
-* [Convert data formats](../../guides/transformation/convert-data-formats.md)
+* [Convert data formats](../../guides/shape/convert-data-formats.md)

@@ -61,6 +61,8 @@ sort src_ip, -dest_ip
 
 ## See Also
 
+* [Repair out-of-order events](../../guides/shape/repair-out-of-order-events.md)
+* [Replay historical events](../../guides/replay/replay-historical-events.md)
 * [`rare`](https://tenzir.com/docs/reference/operators/rare.md)
 * [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md)
 * [`top`](https://tenzir.com/docs/reference/operators/top.md)

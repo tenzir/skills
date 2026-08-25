@@ -50,5 +50,5 @@ drop role, info.id
 
 * [`select`](https://tenzir.com/docs/reference/operators/select.md)
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
-* [Filter and select data](../../guides/transformation/filter-and-select-data.md)
+* [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

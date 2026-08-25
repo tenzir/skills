@@ -160,7 +160,15 @@ If your changelog configuration sets `require_pr: true`, plain validation also f
 uvx tenzir-ship validate --lenient
 ```
 
-Other validation errors still fail in lenient mode.
+Set `require_author: true` to require a non-empty `authors` list on each unreleased entry. Missing authors and other validation errors still fail in lenient mode.
+
+Entry metadata policies apply to unreleased entries by default. This lets you adopt `require_author`, `require_pr`, `omit_author`, or `omit_pr` without rewriting published releases. Audit the complete history against the current policies when needed:
+
+```sh
+uvx tenzir-ship validate --all-entries
+```
+
+For a strict history audit, don’t combine `--all-entries` with `--lenient`. Lenient mode also demotes missing PRs in released entries, but missing authors and forbidden metadata remain errors.
 
 ### View project statistics
 
