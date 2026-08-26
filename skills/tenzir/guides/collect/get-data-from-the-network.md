@@ -41,6 +41,16 @@ export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 
 Run separate pipelines when you need both transports. See the [OpenTelemetry](../../integrations/opentelemetry.md) integration for Collector and TLS configuration.
 
+## Splunk HEC
+
+Use [`accept_splunk`](https://tenzir.com/docs/reference/operators/accept_splunk.md) to receive event and raw requests from clients that send data through the Splunk HTTP Event Collector (HEC) protocol:
+
+```tql
+accept_splunk hec_token=secret("splunk-hec-token")
+```
+
+The operator listens on the standard HEC port `8088` and accepts gzip-compressed requests. Configure each exporter with the same token and disable indexer acknowledgements. See the [`endpoint` argument](https://tenzir.com/docs/reference/operators/accept_splunk.md#endpoint-string-optional) for custom ports, the [`tls` argument](https://tenzir.com/docs/reference/operators/accept_splunk.md#tls--record-optional) for TLS, and the [output schemas](../../reference/operators/accept_splunk.md#output).
+
 ## TCP sockets
 
 [TCP](../../integrations/tcp.md) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
@@ -285,3 +295,4 @@ select
 * [NetFlow](../../integrations/netflow.md)
 * [Network Interface Card](../../integrations/nic.md)
 * [Syslog](../../integrations/syslog.md)
+* [Splunk](../../integrations/splunk.md)

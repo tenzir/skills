@@ -102,6 +102,7 @@
 - [accept_elasticsearch](operators/accept_elasticsearch.md): Accepts incoming Elasticsearch-compatible Bulk API requests and forwards them as events.
 - [accept_http](operators/accept_http.md): Accepts incoming HTTP requests and forwards them as events.
 - [accept_opensearch](operators/accept_opensearch.md): Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.
+- [accept_splunk](operators/accept_splunk.md): Receives events through a Splunk HTTP Event Collector (HEC) endpoint.
 - [accept_relp](operators/accept_relp.md): Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://tenzir.com/integrations/relp.md).
 - [accept_tcp](operators/accept_tcp.md): Listens for incoming TCP or TLS connections and receives events.
 - [accept_udp](operators/accept_udp.md): Receives UDP datagrams and outputs structured events.

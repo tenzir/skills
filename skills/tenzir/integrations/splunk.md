@@ -10,7 +10,7 @@ section: "Integrations"
 
 > Collect, index, and analyze machine-generated data for monitoring, searching, and troubleshooting.
 
-[Splunk](https://splunk.com) is a SIEM solution for storing and processing logs. Tenzir can send data to Splunk via HEC and query Splunk searches.
+[Splunk](https://splunk.com) is a SIEM solution for storing and processing logs. Tenzir can receive and send data through HEC and query Splunk searches.
 
 ## Examples
 
@@ -49,21 +49,21 @@ Tenzir initiates the connection to Splunk. Store the complete REST API authoriza
 
 For recurring collection, wrap [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) in [`every`](https://tenzir.com/docs/reference/operators/every.md). Use explicit overlapping time windows when Splunk can index events late, and deduplicate repeated results downstream.
 
-### Spawn a HEC endpoint as pipeline source
+### Receive HEC events
 
-To send data to a Tenzir pipeline instead of Splunk, you can open a Splunk [HTTP Event Collector (HEC)](https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector) endpoint using the [`from_fluent_bit`](https://tenzir.com/docs/reference/operators/from_fluent_bit.md) source operator.
-
-For example, to onboard all data into a Tenzir node instead of Splunk, point your data source to the IP address of the Tenzir node at port 9880 by deploying this pipeline:
+Use [`accept_splunk`](https://tenzir.com/docs/reference/operators/accept_splunk.md) to receive HEC requests directly in a Tenzir pipeline:
 
 ```tql
-from_fluent_bit "splunk", options={
-  splunk_token: "TOKEN",
-}
+accept_splunk hec_token=secret("splunk-hec-token")
 publish "splunk"
 ```
 
-Replace `TOKEN` with the Splunk token configured at your data source.
+The operator listens on the standard HEC port `8088`. Configure the same token in each exporter and disable indexer acknowledgements. Event requests retain their HEC envelope, while raw requests retain the complete body for downstream parsing.
 
-To listen on a different IP address, e.g., 1.2.3.4 add `listen: 1.2.3.4` to the `options` argument.
+For clients that still target port `9880`, set the listener explicitly:
 
-For more details, read the official [Fluent Bit documentation of the Splunk input](https://docs.fluentbit.io/manual/pipeline/inputs/splunk).
+```tql
+accept_splunk "0.0.0.0:9880",
+  hec_token=secret("splunk-hec-token")
+publish "splunk"
+```

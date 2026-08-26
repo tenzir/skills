@@ -47,13 +47,13 @@ It’s important to mention that most of the time you don’t have to worry abou
 
 The operators of a pipeline always run concurrently: while one operator parses a batch, the next one already transforms the previous batch. Beyond that, Tenzir can run a *single* operator on multiple cores by replicating it into several instances that each process a share of the batches.
 
+The planner rewrites the single chain of operators into several lanes that run side by side, fanning batches out across the instances, exchanging them where an operator needs it, and gathering them again at the end. An expensive operator then stops being a single-core bottleneck, because several cores work on it at once:
+
 Which operators Tenzir replicates depends on what they need to see. An operator that treats every event on its own, such as [`where`](https://tenzir.com/docs/reference/operators/where.md), an assignment, or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md), works on any batch it receives, so Tenzir hands its instances whichever batches are available.
 
 Operators that combine related events need more care. [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) only produce the right result if every event of a group reaches the same instance. Tenzir therefore partitions the stream by the operator’s key fields and routes each event to the instance that owns its key.
 
-Parallelism trades event order for throughput. Instances work at different speeds, so events overtake each other and a parallel pipeline can emit them in a different order than it received them. Tenzir also relaxes its ordering optimizations once parallelism is on, for example by demultiplexing a heterogeneous stream into homogeneous batches per schema. Order-sensitive pipelines therefore run without parallelism unless you turn it on.
-
-Because of this trade-off, parallelism is off by default. You opt in per pipeline with a `// parallelism:` comment, as the guide on [tuning performance](../guides/node-setup/tune-performance.md#parallelism) shows.
+Parallelism is off by default. You opt in per pipeline with a `// parallelism:` comment, as the guide on [tuning performance](../guides/node-setup/tune-performance.md#parallelism) shows.
 
 ## Unified Live Stream Processing and Historical Queries
 

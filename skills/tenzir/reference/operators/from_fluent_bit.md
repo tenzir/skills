@@ -222,14 +222,6 @@ mosquitto_pub \
 
 The input emits the MQTT topic and stores the JSON message under `payload`.
 
-### Splunk
-
-Handle [Splunk](https://docs.fluentbit.io/manual/pipeline/inputs/splunk) HEC requests:
-
-```tql
-from_fluent_bit "splunk", options={port: 8088}
-```
-
 ## See also
 
 * [Fluent Bit](../../integrations/fluent-bit.md)

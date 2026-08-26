@@ -593,6 +593,14 @@ Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as ev
 accept_opensearch "0.0.0.0:9200"
 ```
 
+### [accept\_splunk](operators/accept_splunk.md)
+
+Receives events through a Splunk HTTP Event Collector endpoint.
+
+```tql
+accept_splunk hec_token=secret("splunk-hec-token")
+```
+
 ### [accept\_relp](operators/accept_relp.md)
 
 Receives Syslog messages over the Reliable Event Logging Protocol.

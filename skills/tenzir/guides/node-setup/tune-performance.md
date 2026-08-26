@@ -49,33 +49,38 @@ The `tenzir.import.read-timeout` option determines how long a call to read data 
 
 ## Parallelism
 
-Every operator of a pipeline runs on a single core by default. Enable parallelism to let Tenzir run CPU-bound operators on several cores at once. Add a `// parallelism:` comment to the leading comment lines of the pipeline:
+Every operator of a pipeline runs on a single core by default. Enable parallelism to let Tenzir run CPU-bound operators on several cores at once.
+
+### Config
+
+Configure parallelism for an individual pipeline with a `// parallelism:` directive in its leading comments:
 
 ```tql
-// parallelism: max
+// parallelism: 8
 from_file "/var/log/events/*.json", watch=10s
 ocsf_cast
 where severity_id >= 4
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 ```
 
-The comment travels with the pipeline, so it works wherever the pipeline runs, including on a node. It accepts:
+Start with `// parallelism: 8` and measure the result for your workload. The planner replicates eligible operators into parallel lanes, routes batches across them, and gathers the output again. This diagram uses three lanes to illustrate the plan shape:
+
+Parallelism directive can be one of:
 
 * `disabled`, the default, which runs one instance of every operator.
 * `max`, which runs one instance per CPU core.
 * A positive integer, which runs that many instances.
 
-The `tenzir` binary also accepts a `--parallelism` option with the same values. It applies to pipelines that carry no comment, which makes it useful for trying out a degree of parallelism without editing the pipeline.
+To set a default for every pipeline that runs in a node, configure `tenzir.parallelism` in `tenzir.yaml`:
 
-Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) can, because they treat each event on its own. Tenzir leaves the remaining operators at a single instance.
+\<configdir>/tenzir/tenzir.yaml
 
-Operators that group related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive events partitioned by their keys. Tenzir runs them on at most 4 instances, because partitioning splits batches and the resulting per-event overhead grows with the number of partitions. Raise or lower that bound with `limit_partitions`:
-
-```tql
-// parallelism: max,limit_partitions=8
-from_file "/var/log/flows/*.json"
-summarize dest_ip, bytes=sum(bytes)
+```yaml
+tenzir:
+  parallelism: 8
 ```
+
+The node setting accepts the same values as the directive. A pipeline directive overrides the node default.
 
 When only one section of a pipeline is the bottleneck, wrap it in [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) instead. The operators inside run on the given number of cores, and the rest of the pipeline stays on one:
 
@@ -90,7 +95,25 @@ to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 
 Parallelism reorders events
 
-Parallel instances work at different speeds, so a parallel pipeline can emit events in a different order than it received them. Keep parallelism disabled when the input order carries meaning. The explanation of [parallel execution](../../explanations/pipeline.md#parallel-execution) covers why ordering and parallelism conflict.
+Parallel instances work at different speeds, so a parallel pipeline can emit events in a different order than it received them. Keep parallelism disabled when the input order carries meaning.
+
+### Planner
+
+Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
+
+Operators that group related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive events partitioned by their keys. Tenzir runs them on at most 4 instances, because partitioning splits batches and the resulting per-event overhead grows with the number of partitions. Raise or lower that bound with `limit_partitions`:
+
+```tql
+// parallelism: max,limit_partitions=8
+from_file "/var/log/flows/*.json"
+summarize dest_ip, bytes=sum(bytes)
+```
+
+### Fusing
+
+Parallelism also changes how much memory a pipeline holds, and usually for the better. Each channel between two operators is a buffer, so splitting a pipeline into several lanes would multiply both the number of channels and the data sitting in them. Tenzir avoids that by fusing the operators of a lane into a single group. Operators inside a group hand batches to each other directly, with no channel in between, and a group carries one batch through all of its operators before it consumes the next one:
+
+A parallel pipeline therefore tends to hold less memory than the same pipeline running on a single core, not more. The difference is largest when a pipeline is back-pressured, for example when a slow sink lets every channel upstream of it fill up.
 
 ## Storage Engine
 

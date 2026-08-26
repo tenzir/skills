@@ -85,7 +85,54 @@ The current implementation accepts `summary` at final and duration boundaries, `
 
 A count boundary applies to the entire input of one `summarize` instance, not independently to each grouping key. With `trigger`, only the triggering event’s group is represented in the output. In reset mode, state for the other groups is also cleared at that boundary. Put `summarize` inside an outer `group` subpipeline when each key needs an independent count and checkpoint.
 
-Inside `window`, the window lifecycle supplies a finite input boundary. Event output preserves the order in which its `summarize` invocation receives events. Outputs from concurrent `window` subpipelines can still interleave, as described in the `window` reference.
+Inside [`window`](https://tenzir.com/docs/reference/operators/window.md), the window lifecycle supplies a finite input boundary. Without parallelism, event output preserves the order in which its `summarize` invocation receives events. Outputs from concurrent [`window`](https://tenzir.com/docs/reference/operators/window.md) subpipelines can still interleave, as described in the [`window`](https://tenzir.com/docs/reference/operators/window.md) reference.
+
+### Parallelization
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `summarize` on several cores at once. It partitions the input by the `group` fields so that every event of a group reaches the same instance, which keeps each group’s aggregation state in one place. Because partitioning splits batches, Tenzir runs at most `limit_partitions` instances, four by default.
+
+Two configurations keep `summarize` on a single instance:
+
+* You specify no `group` field. One global aggregation state has to see every event, so replicating the operator would produce a partial result per instance instead of one result.
+* You set `emit` to a count greater than `1`. The count applies to the entire input of one instance, so each replica would count only the share of the input it receives.
+
+Every other configuration parallelizes, including `emit: "final"`, `emit: 1`, a duration `emit`, and `output: "events"`. For example, this final aggregation can run one `summarize` instance per hash partition:
+
+```tql
+// parallelism: max
+from {host: "a", bytes: 10}, {host: "b", bytes: 20}
+summarize host, bytes=sum(bytes)
+```
+
+A count emission greater than `1` keeps the same pipeline on one `summarize` instance:
+
+```tql
+// parallelism: max
+from {host: "a", bytes: 10}, {host: "b", bytes: 20}
+summarize host, bytes=sum(bytes), options={emit: 2, mode: "reset"}
+```
+
+With final or per-event emission, partitioning keeps each group’s complete state on one instance. Parallelism therefore preserves the groups and the values of order-independent aggregates such as [`count`](https://tenzir.com/docs/reference/functions/count.md) and [`min`](https://tenzir.com/docs/reference/functions/min.md). An upstream parallel stage can reorder a group’s events before they reach `summarize`, which can change order-sensitive aggregates such as [`first`](https://tenzir.com/docs/reference/functions/first.md), [`last`](https://tenzir.com/docs/reference/functions/last.md), and [`collect`](https://tenzir.com/docs/reference/functions/collect.md).
+
+With duration-based emission, each replica maintains its own timer. Parallelism can therefore change the number and aggregate values of periodic summaries, especially when aggregates reset after emission. Parallelism can also change the output order.
+
+Parallel instances emit events out of order
+
+Instances work at different speeds, and each one emits the groups it owns as it completes them. With `output: "events"` or `output: "trigger"`, output from the instances can interleave instead of following input order. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) on an ordering field, or keep parallelism disabled, when the order carries meaning.
+
+Parallel instances keep independent timers
+
+A duration `emit` measures processing time per instance, and an instance starts its first interval when it receives its first event. Instances therefore neither start at the same moment nor stay aligned with each other. Every group still receives a complete series of summaries, but summaries of groups that live on different instances can cover different time windows, so their values aren’t comparable across groups.
+
+Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when the intervals have to line up. Its fixed windows align to the Unix epoch rather than to the arrival of the first event, so every group shares the same boundaries no matter which instance owns it:
+
+```tql
+window size=1h {
+  summarize dest_ip, bytes=sum(bytes)
+}
+```
+
+Keeping parallelism disabled also restores a single timer.
 
 ## Examples
 
