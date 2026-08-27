@@ -72,10 +72,11 @@ measure
 ```tql
 {
   timestamp: 2023-04-28T10:26:45.159885,
-  events: 65536,
+  events: 8192,
   schema_id: "d49102998baae44a",
   schema: "suricata.dns"
 }
+...
 {
   timestamp: 2023-04-28T10:26:45.812321,
   events: 412,

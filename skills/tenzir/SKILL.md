@@ -264,19 +264,27 @@ Add context that the original event does not contain.
 
 ##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
 
-### Aggregate
+### Analyze
 
-#### [Overview](guides/aggregate.md)
+#### [Overview](guides/analyze.md)
 
-Turn event streams into summaries and statistics.
+Summarize event streams and compare current activity with prior behavior.
 
-##### [Aggregate event streams](guides/aggregate/aggregate-event-streams.md)
+##### [Aggregate event streams](guides/analyze/aggregate-event-streams.md)
 
-##### [Shape aggregation results](guides/aggregate/shape-aggregation-results.md)
+##### [Shape aggregation results](guides/analyze/shape-aggregation-results.md)
 
-##### [Window event streams](guides/aggregate/window-event-streams.md)
+##### [Window event streams](guides/analyze/window-event-streams.md)
 
-##### [Calculate aggregate statistics](guides/aggregate/calculate-aggregate-statistics.md)
+##### [Calculate aggregate statistics](guides/analyze/calculate-aggregate-statistics.md)
+
+##### [Find unseen and rare values](guides/analyze/find-unseen-and-rare-values.md)
+
+##### [Set adaptive thresholds from a baseline](guides/analyze/set-adaptive-thresholds-from-a-baseline.md)
+
+##### [Identify distribution drift](guides/analyze/identify-distribution-drift.md)
+
+##### [Find cardinality spikes](guides/analyze/find-cardinality-spikes.md)
 
 ### Detect
 

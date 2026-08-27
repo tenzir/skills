@@ -47,7 +47,7 @@ A **trailing window** is anchored to the event that fires it and closes immediat
 
 A **session window** uses `gap`. The first event starts a session. With event time, each later event joins while its distance from the previous event is at most `gap`. A greater distance closes the current session and starts another one. With processing time, arrivals up to and including the wall-clock gap deadline join the session, while a later arrival starts a new one. Omit `size` for an unbounded session, or set it to a duration or integer to cap the session by total duration or event count.
 
-Events stream directly into fixed and session subpipelines. A session keeps one subpipeline alive until inactivity or an explicit bound closes it. A session subpipeline that stops early, such as one starting with `head`, consumes the remaining events delivered with it; the next event then starts a new session even within the gap. Trailing windows retain and replay their bounded history for each invocation. A subpipeline can emit events, which become the operator output, or end with a sink, which makes `window` a sink. It must not produce bytes. The operator doesn’t emit empty windows. Outputs from concurrent window subpipelines can interleave; `window` doesn’t guarantee output ordering.
+Events stream directly into fixed and session subpipelines. A session keeps one subpipeline alive until inactivity or an explicit bound closes it. A session subpipeline that stops early, such as one starting with `head`, consumes the remaining events delivered with it; the next event then starts a new session even within the gap. Trailing windows retain and replay their bounded history for each invocation. A subpipeline can emit events, which become the operator output, or end with a sink, which makes `window` a sink. It must not produce bytes. The operator doesn’t emit empty windows. Outputs from trailing and session subpipelines preserve window creation order: `window` emits all output from one invocation before output from the next. Outputs from concurrent fixed-window subpipelines can interleave.
 
 ### Time clocks
 
@@ -330,7 +330,7 @@ where failures >= 20
 * [`group`](https://tenzir.com/docs/reference/operators/group.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [`every`](https://tenzir.com/docs/reference/operators/every.md)
-* [Window event streams](../../guides/aggregate/window-event-streams.md)
+* [Window event streams](../../guides/analyze/window-event-streams.md)
 * [Detect over time windows](../../guides/detect/detect-over-time-windows.md)
 * [Repair out-of-order events](../../guides/shape/repair-out-of-order-events.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

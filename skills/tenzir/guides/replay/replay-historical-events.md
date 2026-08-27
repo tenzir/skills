@@ -191,5 +191,5 @@ Inspect warnings and output before connecting the replay to its intended consume
 
 * [Normalize event timestamps](../shape/normalize-event-timestamps.md)
 * [Repair out-of-order events](../shape/repair-out-of-order-events.md)
-* [Window event streams](../aggregate/window-event-streams.md)
+* [Window event streams](../analyze/window-event-streams.md)
 * [Detect over time windows](../detect/detect-over-time-windows.md)

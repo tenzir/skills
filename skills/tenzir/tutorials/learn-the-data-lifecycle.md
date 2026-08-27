@@ -111,19 +111,22 @@ context_enrich "geo-open", key=dst_endpoint.ip, into=dst_endpoint.geo
 
 The lookup lives in a context that updates on its own schedule, so enrichment stays one operator call. See [lookup tables](../guides/enrich/use-lookup-tables.md), [threat intelligence](../guides/enrich/enrich-with-threat-intel.md), [asset inventory](../guides/enrich/enrich-with-asset-inventory.md), and [models](../guides/enrich/enrich-events-with-ai.md), or build a context in [Add enrichment contexts](add-enrichment-contexts.md).
 
-### Aggregate
+### Analyze
 
-Aggregation turns many events into a statement about them.
+Analysis turns an event stream into statements about its activity. It can reduce many events to a summary, retain a distribution in bounded state, or compare current behavior with a baseline.
 
 ```tql
-window size=1h, every=10min, on=time {
-  summarize src=src_endpoint.ip, bytes=sum(traffic.bytes), flows=count()
-  sort -bytes
-  head 10
+window size=15min, on=time {
+  summarize agent=ai_agent.name,
+    durations=tdigest(trace.span.duration),
+    operations=frequency_table(api.operation),
+    sessions=hll(ai_agent.instance_uid)
+  p95_duration_ms = tdigest_quantile(durations, 0.95)
+  active_sessions = hll_cardinality(sessions)
 }
 ```
 
-This is the one stage that changes cardinality, so everything after it sees summaries instead of events. That makes it the input to charts, dashboards, and the baselines that detections compare against. See [aggregating event streams](../guides/aggregate/aggregate-event-streams.md), [windowing event streams](../guides/aggregate/window-event-streams.md), and [Plot data with charts](plot-data-with-charts.md).
+Analysis powers charts, dashboards, and baselines. It can also expose [rare values](../guides/analyze/find-unseen-and-rare-values.md), [set adaptive thresholds](../guides/analyze/set-adaptive-thresholds-from-a-baseline.md), [identify distribution drift](../guides/analyze/identify-distribution-drift.md), or [find a cardinality change](../guides/analyze/find-cardinality-spikes.md). None of these results decides by itself that the activity is malicious. See [aggregating event streams](../guides/analyze/aggregate-event-streams.md), [windowing event streams](../guides/analyze/window-event-streams.md), and [Plot data with charts](plot-data-with-charts.md).
 
 ### Detect
 

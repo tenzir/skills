@@ -62,4 +62,4 @@ head 5
 * [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [`top`](https://tenzir.com/docs/reference/operators/top.md)
-* [Aggregate event streams](../../guides/aggregate/aggregate-event-streams.md)
+* [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

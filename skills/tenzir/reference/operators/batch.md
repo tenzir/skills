@@ -29,7 +29,7 @@ Note that the operator maintains separate buffers for each distinct schema. Each
 
 How many events to put into one batch at most.
 
-Defaults to `65536`.
+Defaults to `8192`.
 
 ### `timeout = duration (optional)`
 

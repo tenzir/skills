@@ -151,7 +151,7 @@ String formatting discards the type information that event-time operators use. I
 After normalization, choose the next task:
 
 * Follow [repairing out-of-order events](repair-out-of-order-events.md) when nearby timestamps can regress and downstream logic depends on sequence.
-* Follow [windowing event streams](../aggregate/window-event-streams.md) for event-time aggregation and late-event tolerance.
+* Follow [windowing event streams](../analyze/window-event-streams.md) for event-time aggregation and late-event tolerance.
 * Follow [replaying historical events](../replay/replay-historical-events.md) to shift and pace stored telemetry.
 
 ## See also

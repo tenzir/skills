@@ -109,7 +109,7 @@ Like `json`, a listed field can be a top-level field or a nested field reached t
 
 The operator accumulates incoming events per target table and only sends an insert once a table’s buffer reaches this many rows (or `batch_timeout` elapses). This coalesces the tiny slices that heterogeneous input produces into fewer, larger, and far more efficient ClickHouse inserts.
 
-Defaults to `65536`.
+Defaults to `8192`.
 
 ### `batch_timeout = duration (optional)`
 

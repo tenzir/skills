@@ -11,6 +11,9 @@
 - [distinct](functions/distinct.md): Creates a sorted list without duplicates of non-null grouped values.
 - [entropy](functions/entropy.md): Computes the Shannon entropy of all grouped values.
 - [first](functions/first.md): Takes the first non-null grouped value.
+- [frequency_table](functions/frequency_table.md): Builds an exact, mergeable table of categorical value counts.
+- [histogram](functions/histogram.md): Builds a fixed-width histogram of all grouped numeric values.
+- [hll](functions/hll.md): Builds a mergeable HyperLogLog model for approximate distinct counts.
 - [last](functions/last.md): Takes the last non-null grouped value.
 - [mad](functions/mad.md): Computes the median absolute deviation of all grouped values.
 - [max](functions/max.md): Computes the maximum of all grouped values.
@@ -23,6 +26,7 @@
 - [skewness](functions/skewness.md): Computes the skewness of all grouped values.
 - [stddev](functions/stddev.md): Computes the standard deviation of all grouped values.
 - [sum](functions/sum.md): Computes the sum of all values.
+- [tdigest](functions/tdigest.md): Builds a mergeable t-digest model of a numeric distribution.
 - [value_counts](functions/value_counts.md): Returns a list of all grouped values alongside their frequency.
 - [variance](functions/variance.md): Computes the variance of all grouped values.
 
@@ -41,6 +45,13 @@
 - [decode_base64](functions/decode_base64.md): Decodes bytes as Base64.
 - [decode_hex](functions/decode_hex.md): Decodes bytes from their hexadecimal representation.
 - [decode_url](functions/decode_url.md): Decodes URL encoded strings.
+
+## Distributions
+
+- [ecdf](functions/ecdf.md): Evaluates an empirical cumulative distribution function at a value.
+- [jensen_shannon](functions/jensen_shannon.md): Computes the Jensen-Shannon divergence between aligned weight vectors.
+- [kolmogorov_smirnov](functions/kolmogorov_smirnov.md): Computes the two-sample Kolmogorov-Smirnov distance.
+- [wasserstein](functions/wasserstein.md): Computes the first Wasserstein distance between empirical distributions.
 
 ## Encoding
 
@@ -106,6 +117,17 @@
 - [pow](functions/pow.md): Raises a number to a power.
 - [round](functions/round.md): Rounds a number or a time/duration with a specified unit.
 - [sqrt](functions/sqrt.md): Computes the square root of a number.
+
+## Models
+
+- [histogram_bucket](functions/histogram_bucket.md): Returns the histogram bucket containing a value.
+- [hll_cardinality](functions/hll_cardinality.md): Estimates the distinct cardinality of a [HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog) model.
+- [frequency_table_count](functions/frequency_table_count.md): Returns the exact count of a value in a frequency-table model.
+- [model_distance](functions/model_distance.md): Computes a distance between compatible statistical models.
+- [model_divergence](functions/model_divergence.md): Computes a divergence between compatible statistical models.
+- [model_merge](functions/model_merge.md): Merges compatible statistical model records.
+- [tdigest_cdf](functions/tdigest_cdf.md): Estimates a cumulative probability from a t-digest model.
+- [tdigest_quantile](functions/tdigest_quantile.md): Estimates a quantile from a t-digest model.
 
 ## Networking
 

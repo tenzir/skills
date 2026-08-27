@@ -288,4 +288,4 @@ unix_millis = timestamp.since_epoch().count_milliseconds()
 ## See also
 
 * [Normalize event timestamps](normalize-event-timestamps.md)
-* [Window event streams](../aggregate/window-event-streams.md)
+* [Window event streams](../analyze/window-event-streams.md)

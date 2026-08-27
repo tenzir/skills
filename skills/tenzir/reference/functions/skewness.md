@@ -79,4 +79,4 @@ A perfectly regular beacon has zero-dispersion intervals and yields exactly `0.0
 * [`median`](https://tenzir.com/docs/reference/functions/median.md)
 * [`quantile`](https://tenzir.com/docs/reference/functions/quantile.md)
 * [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
-* [Aggregate event streams](../../guides/aggregate/aggregate-event-streams.md)
+* [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

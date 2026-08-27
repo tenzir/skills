@@ -33,7 +33,7 @@ Tenzir processes events in batches. Because the structured data has the shape of
 
 Most components in Tenzir operate on table slices, which makes the table slice size a fundamental tuning knob on the spectrum of throughput and latency. Small table slices allow for shorter processing times, resulting in more scheduler context switches and a more balanced workload. But the increased pressure on the scheduler comes at the cost of throughput. Conversely, a large table slice size creates more work for each actor invocation and makes them yield less frequently to the scheduler. As a result, other actors scheduled on the same thread may have to wait a little longer.
 
-The option `tenzir.import.batch-size` sets an upper bound for the number of events per table slice. It defaults to 65,536.
+The option `tenzir.import.batch-size` sets an upper bound for the number of events per table slice. It defaults to 8,192.
 
 The option controls the maximum number of events per table slice, but not necessarily the number of events until a component forwards a batch to the next stage in a stream. The CAF streaming framework uses a credit-based flow-control mechanism to determine buffering of tables slices.
 
@@ -67,7 +67,7 @@ Start with `// parallelism: 8` and measure the result for your workload. The pla
 
 Parallelism directive can be one of:
 
-* `disabled`, the default, which runs one instance of every operator.
+* `disabled`, the default, which runs one instance of every operator. Adjacent operators still run [fused](tune-performance.md#fusing) into a single group, same as an explicit degree.
 * `max`, which runs one instance per CPU core.
 * A positive integer, which runs that many instances.
 
@@ -111,9 +111,17 @@ summarize dest_ip, bytes=sum(bytes)
 
 ### Fusing
 
-Parallelism also changes how much memory a pipeline holds, and usually for the better. Each channel between two operators is a buffer, so splitting a pipeline into several lanes would multiply both the number of channels and the data sitting in them. Tenzir avoids that by fusing the operators of a lane into a single group. Operators inside a group hand batches to each other directly, with no channel in between, and a group carries one batch through all of its operators before it consumes the next one:
+Each channel between two operators is a buffer, so splitting a pipeline into several lanes would multiply both the number of channels and the data sitting in them. Tenzir avoids that by fusing the operators of a lane into a single group. Operators inside a group hand batches to each other directly, with no channel in between, and a group carries one batch through all of its operators before it consumes the next one:
 
-A parallel pipeline therefore tends to hold less memory than the same pipeline running on a single core, not more. The difference is largest when a pipeline is back-pressured, for example when a slow sink lets every channel upstream of it fill up.
+Tenzir fuses by default, even for pipelines that never opt into parallelism, because it lowers memory usage for the vast majority of pipelines, which are not CPU-bound. The trade-off is a lower throughput ceiling for the pipelines that are: fused operators hand off one batch at a time instead of overlapping work across actors, so a chain of otherwise CPU-bound operators can lose up to 40% of its peak throughput compared to running unfused. Pipelines that hit this ceiling benefit from an explicit `// parallelism: <n>` directive, which spreads the work across `<n>` instances again.
+
+To opt a pipeline out of fusing entirely, add the `fused=none` option to the parallelism directive:
+
+```tql
+// parallelism: 1,fused=none
+```
+
+Setting `fused=all` goes the other direction and fuses every channel in the pipeline, including the ones between lanes that would otherwise stay unfused. A parallel pipeline with the default `fused=parallel` tends to hold less memory than the same pipeline running on a single core, not more. The difference is largest when a pipeline is back-pressured, for example when a slow sink lets every channel upstream of it fill up.
 
 ## Storage Engine
 

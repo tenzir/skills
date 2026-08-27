@@ -40,4 +40,4 @@ summarize counts=value_counts(x)
 
 * [`mode`](https://tenzir.com/docs/reference/functions/mode.md)
 * [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
-* [Aggregate event streams](../../guides/aggregate/aggregate-event-streams.md)
+* [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

@@ -1,7 +1,7 @@
 ---
 title: "Calculate aggregate statistics"
-canonical: https://tenzir.com/docs/guides/aggregate/calculate-aggregate-statistics
-source: https://tenzir.com/docs/guides/aggregate/calculate-aggregate-statistics.md
+canonical: https://tenzir.com/docs/guides/analyze/calculate-aggregate-statistics
+source: https://tenzir.com/docs/guides/analyze/calculate-aggregate-statistics.md
 section: "Docs"
 ---
 
@@ -139,6 +139,17 @@ summarize frequencies = value_counts(category),
   info_entropy: 1.0549201679861442,
 }
 ```
+
+## Preserve distributions for later analysis
+
+Use mergeable model aggregations when a distribution must survive the current pipeline or combine with later results:
+
+* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md) keeps exact counts for categorical values.
+* [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md) keeps exact counts for fixed numeric ranges.
+* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md) approximates a numeric distribution in bounded state.
+* [`hll`](https://tenzir.com/docs/reference/functions/hll.md) estimates distinct values in bounded state.
+
+The models are ordinary TQL records that you can query, store in lookup tables, and merge across compatible windows or partitions. Our [analysis guides](../analyze.md) show how to use them for rare values, adaptive thresholds, distribution drift, and cardinality spikes.
 
 ## Collecting values
 

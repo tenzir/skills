@@ -1,7 +1,7 @@
 ---
 title: "Shape aggregation results"
-canonical: https://tenzir.com/docs/guides/aggregate/shape-aggregation-results
-source: https://tenzir.com/docs/guides/aggregate/shape-aggregation-results.md
+canonical: https://tenzir.com/docs/guides/analyze/shape-aggregation-results
+source: https://tenzir.com/docs/guides/analyze/shape-aggregation-results.md
 section: "Docs"
 ---
 

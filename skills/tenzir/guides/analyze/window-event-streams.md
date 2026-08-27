@@ -1,7 +1,7 @@
 ---
 title: "Window event streams"
-canonical: https://tenzir.com/docs/guides/aggregate/window-event-streams
-source: https://tenzir.com/docs/guides/aggregate/window-event-streams.md
+canonical: https://tenzir.com/docs/guides/analyze/window-event-streams
+source: https://tenzir.com/docs/guides/analyze/window-event-streams.md
 section: "Docs"
 ---
 
@@ -34,7 +34,7 @@ For complete streaming detections built on these mechanics, such as brute-force 
 
 ## Group activity into session windows
 
-Session windows model bursts whose boundaries come from inactivity rather than an aligned clock. The first event opens a session. Each later event joins it while the gap from the previous event stays within `gap`. The session can last much longer than `gap` if activity continues.
+Session windows model bursts whose boundaries come from inactivity rather than an aligned clock. The first event opens a session. Each later event joins it while the gap from the previous event stays within `gap`. The session can last much longer than `gap` if activity continues. Output preserves session order, so a later session cannot overtake an earlier one when their subpipelines finish concurrently.
 
 ### Build per-key event-time sessions
 

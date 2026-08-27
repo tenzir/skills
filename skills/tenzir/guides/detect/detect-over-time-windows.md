@@ -12,7 +12,7 @@ section: "Docs"
 
 This guide shows you how to build detections that need more than one event: failure thresholds, traffic spikes, and behavioral baselines. The building blocks are [`window`](https://tenzir.com/docs/reference/operators/window.md) for bounded event-time state and [`group`](https://tenzir.com/docs/reference/operators/group.md) for per-entity isolation, with [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) computing the statistics inside each window.
 
-Start with the time semantics, then build a threshold detector over tumbling windows. From there, develop the general pattern for a rolling-baseline detector through duplicate suppression and OCSF finding output, and close with compact network detectors for scanning and exfiltration. The guide on [aggregating event streams](../aggregate/aggregate-event-streams.md) covers the general aggregation vocabulary behind these examples.
+Start with the time semantics, then build a threshold detector over tumbling windows. From there, develop the general pattern for a rolling-baseline detector through duplicate suppression and OCSF finding output, and close with compact network detectors for scanning and exfiltration. The guide on [aggregating event streams](../analyze/aggregate-event-streams.md) covers the general aggregation vocabulary behind these examples.
 
 ## Build detections on event time
 
@@ -20,7 +20,7 @@ Streaming detections answer questions about when things happened, not when event
 
 * [`window`](https://tenzir.com/docs/reference/operators/window.md) with `on=time` uses **event time**. Fixed windows assign events to aligned intervals and keep them open for `tolerance`, but their subpipelines receive events in arrival order. Trailing windows reorder events within `tolerance` before evaluating event-anchored history. Use event-time windows for detections where a delayed event can change the answer.
 * [`window`](https://tenzir.com/docs/reference/operators/window.md) without `on` assigns events by **processing time** and closes at epoch-aligned wall-clock boundaries. This is useful when arrival time is the intended detection clock.
-* [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../aggregate/shape-aggregation-results.md#aggregate-periodic-snapshots).
+* [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analyze/shape-aggregation-results.md#aggregate-periodic-snapshots).
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={emit: 5min, mode: "reset"}` emits aggregate updates on a processing-time cadence, but it doesn’t create event-time evidence intervals.
 
 Order-independent fixed-window calculations such as counts and sums need no separate ordering step. Put [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before a fixed window when its subpipeline compares consecutive events or collects an activity sequence. Do not add it before a trailing event-time window for the same timestamp and tolerance because that window already performs the reorder. See the guide on [repairing out-of-order events](../shape/repair-out-of-order-events.md) for the complete ordering decision.
@@ -534,7 +534,7 @@ Summing per asset rather than per connection defeats chunked transfers that stay
 * [`count_if`](https://tenzir.com/docs/reference/functions/count_if.md)
 * [`median`](https://tenzir.com/docs/reference/functions/median.md)
 * [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
-* [Window event streams](../aggregate/window-event-streams.md)
+* [Window event streams](../analyze/window-event-streams.md)
 * [Baseline behavior from stored events](baseline-from-stored-events.md)
 * [Detect periodic behavior](detect-periodic-behavior.md)
 * [Match events with TQL](match-events-with-tql.md)

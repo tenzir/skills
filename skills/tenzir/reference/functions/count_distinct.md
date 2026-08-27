@@ -40,4 +40,4 @@ summarize unique=count_distinct(x)
 
 * [`count`](https://tenzir.com/docs/reference/functions/count.md)
 * [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
-* [Aggregate event streams](../../guides/aggregate/aggregate-event-streams.md)
+* [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

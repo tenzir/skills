@@ -96,6 +96,30 @@ Takes the first non-null grouped value.
 first([null,2,3])
 ```
 
+### [frequency\_table](functions/frequency_table.md)
+
+Builds an exact, mergeable table of categorical value counts.
+
+```tql
+frequency_table(["a","b","a"])
+```
+
+### [histogram](functions/histogram.md)
+
+Builds a fixed-width histogram of all grouped numeric values.
+
+```tql
+histogram([1,2,3,4], bins=4, width=2.5)
+```
+
+### [hll](functions/hll.md)
+
+Builds a mergeable HyperLogLog model for approximate distinct counts.
+
+```tql
+hll(["alice","bob","alice"])
+```
+
 ### [last](functions/last.md)
 
 Takes the last non-null grouped value.
@@ -190,6 +214,14 @@ Computes the sum of all values.
 
 ```tql
 sum([1,2,3])
+```
+
+### [tdigest](functions/tdigest.md)
+
+Builds a mergeable t-digest model of a numeric distribution.
+
+```tql
+tdigest([1,2,3,4])
 ```
 
 ### [value\_counts](functions/value_counts.md)
@@ -290,6 +322,40 @@ Decodes URL encoded strings.
 
 ```tql
 decode_url("Hello%20World")
+```
+
+## Distributions
+
+### [ecdf](functions/ecdf.md)
+
+Evaluates an empirical cumulative distribution function at a value.
+
+```tql
+ecdf([1,2,2,4], 2)
+```
+
+### [jensen\_shannon](functions/jensen_shannon.md)
+
+Computes the Jensen-Shannon divergence between aligned weight vectors.
+
+```tql
+jensen_shannon([10,20,0], [5,20,5])
+```
+
+### [kolmogorov\_smirnov](functions/kolmogorov_smirnov.md)
+
+Computes the two-sample Kolmogorov-Smirnov distance.
+
+```tql
+kolmogorov_smirnov([1,2,3], [2,3,4])
+```
+
+### [wasserstein](functions/wasserstein.md)
+
+Computes the first Wasserstein distance between empirical distributions.
+
+```tql
+wasserstein([1,2,3], [2,3,4])
 ```
 
 ## Encoding
@@ -700,6 +766,72 @@ Computes the square root of a number.
 
 ```tql
 sqrt(49)
+```
+
+## Models
+
+### [histogram\_bucket](functions/histogram_bucket.md)
+
+Returns the histogram bucket containing a value.
+
+```tql
+histogram_bucket(model, x)
+```
+
+### [hll\_cardinality](functions/hll_cardinality.md)
+
+Estimates the distinct cardinality of a HyperLogLog model.
+
+```tql
+hll_cardinality(model)
+```
+
+### [frequency\_table\_count](functions/frequency_table_count.md)
+
+Returns the exact count of a value in a frequency-table model.
+
+```tql
+frequency_table_count(model, x)
+```
+
+### [model\_distance](functions/model_distance.md)
+
+Computes a distance between compatible statistical models.
+
+```tql
+model_distance(p, q, method="wasserstein")
+```
+
+### [model\_divergence](functions/model_divergence.md)
+
+Computes a divergence between compatible statistical models.
+
+```tql
+model_divergence(p, q, method="jensen_shannon")
+```
+
+### [model\_merge](functions/model_merge.md)
+
+Merges compatible statistical model records.
+
+```tql
+model_merge([a,b,c])
+```
+
+### [tdigest\_cdf](functions/tdigest_cdf.md)
+
+Estimates a cumulative probability from a t-digest model.
+
+```tql
+tdigest_cdf(model, x)
+```
+
+### [tdigest\_quantile](functions/tdigest_quantile.md)
+
+Estimates a quantile from a t-digest model.
+
+```tql
+tdigest_quantile(model, 0.99)
 ```
 
 ## Networking

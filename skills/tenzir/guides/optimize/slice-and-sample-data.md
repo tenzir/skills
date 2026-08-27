@@ -264,4 +264,4 @@ head 2
 
 * [Filter and select data](filter-and-select-data.md)
 * [Deduplicate events](deduplicate-events.md)
-* [Aggregate event streams](../aggregate/aggregate-event-streams.md)
+* [Aggregate event streams](../analyze/aggregate-event-streams.md)

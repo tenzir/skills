@@ -183,5 +183,5 @@ Treat repeated warnings as a contract problem. Normalize the timestamp, raise th
 
 * [Normalize event timestamps](normalize-event-timestamps.md)
 * [Replay historical events](../replay/replay-historical-events.md)
-* [Window event streams](../aggregate/window-event-streams.md)
+* [Window event streams](../analyze/window-event-streams.md)
 * [Detect over time windows](../detect/detect-over-time-windows.md)

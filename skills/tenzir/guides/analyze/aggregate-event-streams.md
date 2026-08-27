@@ -1,7 +1,7 @@
 ---
 title: "Aggregate event streams"
-canonical: https://tenzir.com/docs/guides/aggregate/aggregate-event-streams
-source: https://tenzir.com/docs/guides/aggregate/aggregate-event-streams.md
+canonical: https://tenzir.com/docs/guides/analyze/aggregate-event-streams
+source: https://tenzir.com/docs/guides/analyze/aggregate-event-streams.md
 section: "Docs"
 ---
 
