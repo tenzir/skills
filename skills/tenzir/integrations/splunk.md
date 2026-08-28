@@ -58,7 +58,18 @@ accept_splunk hec_token=secret("splunk-hec-token")
 publish "splunk"
 ```
 
-The operator listens on the standard HEC port `8088`. Configure the same token in each exporter and disable indexer acknowledgements. Event requests retain their HEC envelope, while raw requests retain the complete body for downstream parsing.
+The operator listens on the standard HEC port `8088`. Configure the same token in each exporter. Event requests retain their HEC envelope, while raw requests retain the complete body for downstream parsing.
+
+Enable HEC indexer acknowledgements when the exporter requires confirmation that a checkpoint covers each request:
+
+```tql
+accept_splunk hec_token=secret("splunk-hec-token"),
+  ack=true,
+  ack_timeout=10min
+publish "splunk"
+```
+
+With `ack=true`, the exporter must send the same UUID in the `X-Splunk-Request-Channel` header or `channel` query parameter for event, raw, and acknowledgement requests. Tenzir returns an `ackId` for each accepted event or raw request. Queries to `/services/collector/ack` return `true` after a checkpoint containing the request commits, and continue to return `true` until `ack_timeout` expires. Until pipeline checkpointing is enabled, these queries return `false`.
 
 For clients that still target port `9880`, set the listener explicitly:
 

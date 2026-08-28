@@ -13,7 +13,8 @@ Receives events through a Splunk HTTP Event Collector (HEC) endpoint.
 
 ```tql
 accept_splunk [endpoint:string], hec_token=string,
-  [max_request_size=int, max_connections=int, tls=record]
+  [max_request_size=int, max_connections=int, ack=bool,
+   max_pending_acks=int, ack_timeout=duration, tls=record]
 ```
 
 ## Description
@@ -22,7 +23,7 @@ The `accept_splunk` operator starts a HEC-compatible HTTP server. It supports th
 
 The operator validates the complete request before it emits any events. A successful response means that Tenzir accepted every event into the pipeline. It doesn’t mean that a downstream destination stored the events.
 
-HEC indexer acknowledgements aren’t supported. The `/services/collector/ack` endpoint returns `ACK is disabled`. Disable indexer acknowledgements in each exporter that sends data to this endpoint.
+You can enable the HEC acknowledgement protocol with `ack=true`. The response to each accepted event request then contains an `ackId`. Clients query the status at `/services/collector/ack` with the same HEC token and request channel. The status becomes `true` after a checkpoint containing the complete request commits. Until pipeline checkpointing is enabled, acknowledgement statuses remain `false`.
 
 ### `endpoint: string (optional)`
 
@@ -63,6 +64,24 @@ Defaults to `10Mi`.
 The maximum number of concurrent HTTP requests. Requests wait for an available slot when the limit is reached.
 
 Defaults to `10`.
+
+### `ack = bool (optional)`
+
+Enables the HEC acknowledgement protocol. When enabled, every event and raw request must provide a UUID-formatted channel in the `X-Splunk-Request-Channel` header or the `channel` query parameter. The operator canonicalizes equivalent UUID spellings before matching channels.
+
+Defaults to `false`. The `/services/collector/ack` endpoint returns `ACK is disabled` while acknowledgements are disabled.
+
+### `max_pending_acks = int (optional)`
+
+The maximum number of acknowledgement IDs retained for checkpointing and client queries. The server rejects new event requests with `503 Server is busy` after it reaches the limit.
+
+Defaults to `1000000`.
+
+### `ack_timeout = duration (optional)`
+
+The time to retain an acknowledgement ID. Ready IDs continue to return `true` throughout this period, making repeated queries safe if an HTTP response is lost. Expired IDs return `false` and no longer count towards `max_pending_acks`.
+
+Defaults to `10min`.
 
 ### `tls = record (optional)`
 
@@ -142,6 +161,15 @@ publish "splunk"
 ```
 
 Configure the exporter to send HEC requests to port `8088` on the Tenzir node.
+
+### Receive events with acknowledgements
+
+```tql
+accept_splunk hec_token=secret("splunk-hec-token"), ack=true
+publish "splunk"
+```
+
+Configure the exporter to use a stable UUID as its HEC request channel and to poll `/services/collector/ack`. An acknowledgement covers the complete HTTP request, including every event in a batch.
 
 ### Replace a HEC listener on port 9880
 

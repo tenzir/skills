@@ -519,6 +519,72 @@ accept_tcp "10.0.0.1:1514" {
 publish "wec"
 ```
 
+## Process exported EVTX files
+
+Windows exports Event Logs in the binary EVTX format. The [`evtx_dump`](https://github.com/omerbenamram/evtx) utility converts an EVTX file to the native Windows Event Log XML that Tenzir parses.
+
+### Convert EVTX to XML
+
+Convert an exported Security log to a stream of XML events:
+
+```sh
+evtx_dump \
+  --threads 1 \
+  --format xml \
+  --dont-show-record-number \
+  --no-indent \
+  Security.evtx > Security.xml
+```
+
+The `--threads 1` option preserves the original event order. You can omit it when ordering does not matter. The remaining options produce concatenated XML records without the `Record N` lines that `evtx_dump` displays by default.
+
+### Parse converted events
+
+Split the XML stream at each closing `Event` element and use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to turn every event into a structured record:
+
+```tql
+from_file "Security.xml" {
+  read_delimited "</Event>\n", include_separator=true
+}
+this = data.parse_winlog()
+```
+
+The parser turns Windows XML attributes into regular fields, parses timestamps, and uses the names on `EventData` elements as field names.
+
+### Normalize converted events to OCSF
+
+[Install the Microsoft package](../../guides/packages/install-a-package.md) to map supported Windows events to OCSF. Events without a specialized mapping become OCSF Base Events and retain their provider data in `unmapped`.
+
+```tql
+from_file "Security.xml" {
+  read_delimited "</Event>\n", include_separator=true
+}
+microsoft::windows::ocsf::normalize data
+```
+
+### Stream EVTX directly into Tenzir
+
+You can avoid an intermediate XML file by piping `evtx_dump` into the Tenzir CLI. Save the following pipeline as `evtx-to-ocsf.tql`:
+
+```tql
+from_stdin {
+  read_delimited "</Event>\n", include_separator=true
+}
+microsoft::windows::ocsf::normalize data
+```
+
+Run the converter and pipeline together:
+
+```sh
+evtx_dump \
+  --threads 1 \
+  --format xml \
+  --dont-show-record-number \
+  --no-indent \
+  Security.evtx \
+  | tenzir -f evtx-to-ocsf.tql
+```
+
 ## Parse Windows Event Log XML
 
 When receiving Windows Event Log data in its native XML format, use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to convert the XML into structured records. This function is optimized for the [Windows XML Event Log format](https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema) and handles the `System`, `EventData`, `UserData`, and `RenderingInfo` sections.

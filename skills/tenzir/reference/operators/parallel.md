@@ -12,7 +12,7 @@ section: "Docs"
 Annotates desired parallelization degree.
 
 ```tql
-parallel [jobs:int] { … }
+parallel [jobs:int, fuse=string, limit_partitions=int] { … }
 ```
 
 ## Description
@@ -31,7 +31,23 @@ Operator instances work at different speeds, so a block can emit events in a dif
 
 The number of instances to run each replicated operator on. Must be greater than zero.
 
-Defaults to `8`.
+Defaults to `8`, or to the number of available cores if that is lower.
+
+### `fuse = string (optional)`
+
+Controls which operator-to-operator channels inside the block are [fused](../../guides/node-setup/tune-performance.md#fusing), i.e., run run-to-completion without a buffer in between:
+
+* `"none"`: never fuse a channel.
+* `"parallel"`: fuse only matched lane-to-lane channels between parallelizable operators.
+* `"all"`: fuse every channel.
+
+Defaults to the surrounding pipeline’s setting, which is `"parallel"` unless a `// parallelism:` directive says otherwise.
+
+### `limit_partitions = int (optional)`
+
+The upper bound on the number of instances for operators whose input must be partitioned by key, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md). Must be greater than zero.
+
+Defaults to the surrounding pipeline’s setting, which is `4` unless a `// parallelism:` directive says otherwise.
 
 ### `{ … }`
 
@@ -61,7 +77,26 @@ parallel 4 {
 }
 ```
 
-Tenzir routes every event with the same `src_ip`, `dst_ip`, and `dst_port` to the same instance of [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md).
+Tenzir routes every event with the same `src_ip`, `dst_ip`, and `dst_port` to the same instance of [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md). Raise `limit_partitions` to spread those keys over more than the default four instances:
+
+```tql
+subscribe "events"
+parallel 8, limit_partitions=8 {
+  deduplicate src_ip, dst_ip, dst_port
+}
+```
+
+### Trade memory for throughput
+
+A block of CPU-bound operators can gain throughput by giving every channel inside it its own buffer instead of running fused:
+
+```tql
+subscribe "events"
+parallel 4, fuse="none" {
+  ocsf_cast
+  where severity_id >= 4
+}
+```
 
 ### Parallelize one section of a pipeline
 

@@ -109,19 +109,36 @@ from_file "/var/log/flows/*.json"
 summarize dest_ip, bytes=sum(bytes)
 ```
 
+[`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) accepts the same option for a single block:
+
+```tql
+parallel 8, limit_partitions=8 {
+  summarize dest_ip, bytes=sum(bytes)
+}
+```
+
 ### Fusing
 
 Each channel between two operators is a buffer, so splitting a pipeline into several lanes would multiply both the number of channels and the data sitting in them. Tenzir avoids that by fusing the operators of a lane into a single group. Operators inside a group hand batches to each other directly, with no channel in between, and a group carries one batch through all of its operators before it consumes the next one:
 
 Tenzir fuses by default, even for pipelines that never opt into parallelism, because it lowers memory usage for the vast majority of pipelines, which are not CPU-bound. The trade-off is a lower throughput ceiling for the pipelines that are: fused operators hand off one batch at a time instead of overlapping work across actors, so a chain of otherwise CPU-bound operators can lose up to 40% of its peak throughput compared to running unfused. Pipelines that hit this ceiling benefit from an explicit `// parallelism: <n>` directive, which spreads the work across `<n>` instances again.
 
-To opt a pipeline out of fusing entirely, add the `fused=none` option to the parallelism directive:
+To opt a pipeline out of fusing entirely, add the `fuse=none` option to the parallelism directive:
 
 ```tql
-// parallelism: 1,fused=none
+// parallelism: 1,fuse=none
 ```
 
-Setting `fused=all` goes the other direction and fuses every channel in the pipeline, including the ones between lanes that would otherwise stay unfused. A parallel pipeline with the default `fused=parallel` tends to hold less memory than the same pipeline running on a single core, not more. The difference is largest when a pipeline is back-pressured, for example when a slow sink lets every channel upstream of it fill up.
+Setting `fuse=all` goes the other direction and fuses every channel in the pipeline, including the ones between lanes that would otherwise stay unfused. A parallel pipeline with the default `fuse=parallel` tends to hold less memory than the same pipeline running on a single core, not more. The difference is largest when a pipeline is back-pressured, for example when a slow sink lets every channel upstream of it fill up.
+
+[`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) takes the same values as a `fuse` argument, scoped to the operators inside its block:
+
+```tql
+parallel 4, fuse="none" {
+  ocsf_cast
+  where severity_id >= 4
+}
+```
 
 ## Storage Engine
 
