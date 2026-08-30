@@ -31,6 +31,26 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ## 📦 Install
 
+### As a plugin
+
+Add the Tenzir marketplace and install `skills@tenzir`.
+
+Codex:
+
+```bash
+codex plugin marketplace add tenzir/agent-plugins
+codex plugin add skills@tenzir
+```
+
+Claude Code:
+
+```
+/plugin marketplace add tenzir/agent-plugins
+/plugin install skills@tenzir
+```
+
+### With `npx skills`
+
 Install all skills into the current project:
 
 ```bash

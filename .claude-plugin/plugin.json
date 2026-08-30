@@ -1,0 +1,21 @@
+{
+  "name": "skills",
+  "version": "0.1.0",
+  "description": "Use Tenzir, TQL, and security-data schemas in Claude Code.",
+  "author": {
+    "name": "Tenzir",
+    "email": "info@tenzir.com",
+    "url": "https://tenzir.com"
+  },
+  "homepage": "https://github.com/tenzir/skills",
+  "repository": "https://github.com/tenzir/skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "tenzir",
+    "tql",
+    "security",
+    "schemas",
+    "siem"
+  ],
+  "skills": "./skills/"
+}
