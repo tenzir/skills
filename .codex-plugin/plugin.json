@@ -1,0 +1,42 @@
+{
+  "name": "skills",
+  "version": "0.1.0",
+  "description": "Use Tenzir, TQL, and security-data schemas in Codex.",
+  "author": {
+    "name": "Tenzir",
+    "email": "info@tenzir.com",
+    "url": "https://tenzir.com"
+  },
+  "homepage": "https://github.com/tenzir/skills",
+  "repository": "https://github.com/tenzir/skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "tenzir",
+    "tql",
+    "security",
+    "schemas",
+    "siem"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Tenzir Skills",
+    "shortDescription": "Tenzir and security-data guidance",
+    "longDescription": "Work with Tenzir, TQL, and security-data schemas.",
+    "developerName": "Tenzir",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://tenzir.com",
+    "defaultPrompt": [
+      "Help me write a TQL pipeline",
+      "Map these events to OCSF",
+      "Map these events to ECS"
+    ],
+    "brandColor": "#0A54FF",
+    "composerIcon": "./assets/logomark-dark.svg",
+    "logo": "./assets/logomark-dark.svg",
+    "logoDark": "./assets/logomark-light.svg"
+  }
+}
