@@ -3,6 +3,8 @@ title: Developer skills moved to tenzir/dev-skills
 type: breaking
 authors:
   - mavam
+prs:
+  - 38
 created: 2026-08-30T10:44:13.627519Z
 ---
 
