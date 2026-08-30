@@ -58,6 +58,18 @@ jobs:
         set -euo pipefail
 
         uvx --from lefthook==2.1.6 lefthook run pre-push --all-files
+      post-create: |
+        set -euo pipefail
+
+        # Keep the plugin manifests at the version just released. The workflow
+        # stages tracked changes before publishing, so this lands in the
+        # release commit.
+        version="$(tenzir-ship --root changelog release version --bare)"
+        for manifest in .claude-plugin/plugin.json .codex-plugin/plugin.json; do
+          jq --arg version "$version" '.version = $version' "$manifest" \
+            > "$manifest.tmp"
+          mv "$manifest.tmp" "$manifest"
+        done
       github_app_id: ${{ vars.TENZIR_GITHUB_APP_ID }}
       git_user_name: tenzir-bot
       git_user_email: engineering@tenzir.com

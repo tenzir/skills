@@ -11,8 +11,8 @@ internally consistent.
 
 We use `.claude-plugin/marketplace.json` to put the skills into different
 groups. This is for `npx skills` to pick this up and _not_ a claude-only
-mechanism. Every skill directory in `skills/` (that is, every directory
-containing a `SKILL.md`) must be referenced exactly once in this file.
+mechanism. Every skill directory in `skills/` must be referenced exactly once in
+this file.
 
 The following skills are generated or synced from another repository and must
 not be edited by hand here:
@@ -27,28 +27,7 @@ not be edited by hand here:
 - `skills/tenzir-ocsf/`
 - `skills/tenzir-udm/`
 
-Three places list skills and must stay consistent:
-
-1. `skills/` directory — source of truth
-2. `.claude-plugin/marketplace.json` — validated by CI
-3. `README.md` skills table — update manually when adding or removing skills
-
 ## Skill authoring guidelines
-
-Adhere to the following guidelines when creating content.
-
-### Descriptions
-
-Skill descriptions are the primary triggering mechanism. Write them to be
-slightly "pushy": include both what the skill does and the natural phrases a
-user might say when they need it. Descriptions should cover implicit triggers
-(for example, a user saying "ship this" should trigger the pull request skill
-even without the words "pull request").
-
-Do not put tool invocations (specific CLI commands, flags, or API calls) into
-SKILL.md bodies unless the skill is correcting a specific mistake the model
-would otherwise make. Prefer explaining intent and letting the model choose the
-best way to accomplish each step.
 
 ### Writing style
 
@@ -78,7 +57,7 @@ relationship just because two skills cover related topics.
 Keep the README as a concise reference.
 
 The primary user-facing documentation with is at
-https://docs.tenzir.com/guides/ai-workbench/use-agent-skills/.
+https://tenzir.com/docs/guides/ai-workbench/use-agent-skills/.
 
 ## Validation
 
