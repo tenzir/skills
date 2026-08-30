@@ -35,8 +35,8 @@
       "Map these events to ECS"
     ],
     "brandColor": "#0A54FF",
-    "composerIcon": "./assets/logomark-dark.svg",
-    "logo": "./assets/logomark-dark.svg",
-    "logoDark": "./assets/logomark-light.svg"
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg",
+    "logoDark": "./assets/logo-dark.svg"
   }
 }
