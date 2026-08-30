@@ -1,7 +1,7 @@
 # Tenzir Skills
 
-This repository contains the shared Tenzir skill collection: reusable skills
-for coding agents in and around the Tenzir ecosystem.
+This repository contains reusable, user-facing skills for coding agents in the
+Tenzir ecosystem.
 
 ## Organization
 
@@ -25,7 +25,6 @@ not be edited by hand here:
 - `skills/tenzir/`
 - `skills/tenzir-leef/`
 - `skills/tenzir-ocsf/`
-- `skills/tenzir-ship/`
 - `skills/tenzir-udm/`
 
 Three places list skills and must stay consistent:
@@ -33,21 +32,6 @@ Three places list skills and must stay consistent:
 1. `skills/` directory — source of truth
 2. `.claude-plugin/marketplace.json` — validated by CI
 3. `README.md` skills table — update manually when adding or removing skills
-
-### `tenzir` page references in workflow skills
-
-Workflow skills point to `tenzir` pages by relative path (for example,
-`guides/packages/create-a-package.md`) instead of duplicating documentation
-content. These paths must stay in sync with
-the generated `tenzir` skill tree:
-
-- After regenerating `tenzir`, verify that every path referenced in a
-  workflow skill still resolves to a file under `skills/tenzir/`.
-- When renaming or removing a `tenzir` page, search workflow skills for
-  the old path and update it.
-- Never copy guide or tutorial content into a workflow skill. The skill provides
-  the workflow structure (steps, results, ordering); `tenzir` provides the
-  domain knowledge.
 
 ## Skill authoring guidelines
 
