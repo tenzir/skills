@@ -61,3 +61,17 @@ if ! cmp -s "$local_skills" "$marketplace_skills"; then
 fi
 
 echo "marketplace.json is valid."
+
+# The plugin manifests carry one shared version, which the release workflow
+# rewrites from the changelog. Guard against the two drifting apart.
+claude_version=$(jq -r '.version' .claude-plugin/plugin.json)
+codex_version=$(jq -r '.version' .codex-plugin/plugin.json)
+
+if [[ "$claude_version" != "$codex_version" ]]; then
+  echo "Plugin manifest versions disagree:"
+  echo "  .claude-plugin/plugin.json: ${claude_version}"
+  echo "  .codex-plugin/plugin.json:  ${codex_version}"
+  exit 1
+fi
+
+echo "plugin.json versions agree (${claude_version})."

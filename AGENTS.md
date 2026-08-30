@@ -9,20 +9,16 @@ The `skills/` tree mixes hand-maintained skills with generated ones, and the
 surrounding metadata files keep the collection installable, discoverable, and
 internally consistent.
 
-Three manifests describe this collection, each for a different consumer:
+We use `.claude-plugin/marketplace.json` to put the skills into different
+groups. This is for `npx skills` to pick this up and _not_ a claude-only
+mechanism. Every skill directory in `skills/` (that is, every directory
+containing a `SKILL.md`) must be referenced exactly once in this file.
 
-- `.claude-plugin/marketplace.json` groups the skills for `npx skills` to pick
-  up. Despite the directory it sits in, it follows the
-  [Agent Skills](https://agentskills.io) schema and is _not_ a Claude Code
-  marketplace. Every skill directory in `skills/` (that is, every directory
-  containing a `SKILL.md`) must be referenced exactly once in this file.
-- `.codex-plugin/plugin.json` is the Codex plugin manifest.
-- `.claude-plugin/plugin.json` is the Claude Code plugin manifest.
-
-Both `plugin.json` files expose the `skills/` tree wholesale as the `skills`
-plugin of the `tenzir` marketplace in
-[tenzir/agent-plugins](https://github.com/tenzir/agent-plugins). Keep their
-`version` fields in sync with each other.
+Two more files publish the whole `skills/` tree as the `skills` plugin in
+[tenzir/agent-plugins](https://github.com/tenzir/agent-plugins):
+`.codex-plugin/plugin.json` for Codex and `.claude-plugin/plugin.json` for
+Claude Code. Both carry the same version, and the release workflow sets it, so
+never edit it by hand. CI fails when the two drift apart.
 
 The following skills are generated or synced from another repository and must
 not be edited by hand here:
@@ -43,8 +39,7 @@ Three places list skills and must stay consistent:
 2. `.claude-plugin/marketplace.json` — validated by CI
 3. `README.md` skills table — update manually when adding or removing skills
 
-The two `plugin.json` files need no update, because they expose the `skills/`
-tree wholesale.
+The `plugin.json` files name no individual skills, so they need no update.
 
 ## Skill authoring guidelines
 
