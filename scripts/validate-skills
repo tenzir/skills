@@ -24,6 +24,13 @@ if ! command -v skills-ref >/dev/null 2>&1; then
   uv tool install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
 fi
 
+find skills -mindepth 1 -maxdepth 1 -type d -print | sort | while read -r skill_dir; do
+  if [[ ! -f "$skill_dir/SKILL.md" ]]; then
+    echo "Missing SKILL.md in ${skill_dir}"
+    exit 1
+  fi
+done
+
 find skills -name SKILL.md -print | sed 's#/SKILL.md$##' | sort | while read -r skill_dir; do
   echo "Validating ${skill_dir}"
   skills-ref validate "${skill_dir}"
