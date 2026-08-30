@@ -18,17 +18,6 @@
       "skills": [
         "./skills/tenzir"
       ]
-    },
-    {
-      "name": "🏗️ Tenzir Contributors",
-      "skills": [
-        "./skills/tenzir-commit-changes",
-        "./skills/tenzir-create-pull-requests",
-        "./skills/tenzir-design-system",
-        "./skills/tenzir-ship",
-        "./skills/tenzir-update-docs",
-        "./skills/tenzir-technical-writing"
-      ]
     }
   ]
 }

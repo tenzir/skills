@@ -29,18 +29,6 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 - `tenzir-udm`: Google SecOps UDM schema and normalization guidance —
   fields, event/entity types
 
-### 🏗️ Tenzir Contributors
-
-- `tenzir-commit-changes`: Stage, split, and commit changes with clean messages
-- `tenzir-create-pull-requests`: Open PRs, add changelog entries, cross-link docs
-  PRs
-- `tenzir-design-system`: Brand tokens, design principles and invariants, and
-  logos for web UIs, documents, slides, and diagrams
-- `tenzir-ship`: Changelog entries, release notes, and GitHub releases
-- `tenzir-update-docs`: Coordinate docs.tenzir.com updates alongside code changes
-- `tenzir-technical-writing`: Technical documentation style following Google's
-  developer docs guide
-
 ## 📦 Install
 
 Install all skills into the current project:
@@ -67,12 +55,6 @@ npx skills add tenzir/skills@tenzir-edm
 npx skills add tenzir/skills@tenzir-leef
 npx skills add tenzir/skills@tenzir-ocsf
 npx skills add tenzir/skills@tenzir-udm
-npx skills add tenzir/skills@tenzir-commit-changes
-npx skills add tenzir/skills@tenzir-create-pull-requests
-npx skills add tenzir/skills@tenzir-design-system
-npx skills add tenzir/skills@tenzir-ship
-npx skills add tenzir/skills@tenzir-update-docs
-npx skills add tenzir/skills@tenzir-technical-writing
 ```
 
 ## 📄 License
