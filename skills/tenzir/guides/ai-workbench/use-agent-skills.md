@@ -1,6 +1,6 @@
 ---
 title: "Use agent skills"
-description: "Install Tenzir agent skills for documentation, schemas, and workflow automation"
+description: "Install Tenzir agent skills for documentation and security schemas"
 canonical: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills
 source: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md
 section: "Docs"
@@ -8,7 +8,7 @@ section: "Docs"
 
 # Use agent skills
 
-> Install Tenzir agent skills for documentation, schemas, and workflow automation
+> Install Tenzir agent skills for documentation and security schemas
 
 This guide shows you how to install and manage Tenzir’s agent skills. You’ll learn which skills are available, how to add skills globally or per project, install individual skills, and keep them up to date.
 
@@ -36,15 +36,6 @@ Tenzir publishes the following skills:
 ### Tenzir Users
 
 * `tenzir`: Tenzir documentation for TQL, operators, functions, integrations, and deployment, plus entry points to the changelog, blog, and product pages.
-
-### Tenzir Contributors
-
-* `tenzir-commit-changes`: Stage, split, and commit changes with clean messages.
-* `tenzir-create-pull-requests`: Open pull requests, add changelog entries, and link documentation PRs.
-* `tenzir-design-system`: Use frontend design tokens, components, and brand assets.
-* `tenzir-ship`: Write changelog entries, release notes, and GitHub releases.
-* `tenzir-update-docs`: Coordinate documentation updates alongside code changes.
-* `tenzir-technical-writing`: Write documentation in Tenzir’s technical writing style.
 
 ## Install skills
 
