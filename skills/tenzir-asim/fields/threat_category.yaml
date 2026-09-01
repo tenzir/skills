@@ -1,5 +1,5 @@
 name: ThreatCategory
-summary: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominor, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
+summary: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominer, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
 schemas:
 - name: AlertEvent
   role: threat
@@ -14,14 +14,14 @@ schemas:
   - Adware
   - Spyware
   - Rootkit
-  - Cryptominor
+  - Cryptominer
   - Phishing
   - Spam
   - MaliciousUrl
   - Spoofing
   - Security Policy Violation
   - Unknown
-  description: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominor, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
+  description: 'The category of the threat or malware identified in the alert. Supported values are: Malware, Ransomware, Trojan, Virus, Worm, Adware, Spyware, Rootkit, Cryptominer, Phishing, Spam, MaliciousUrl, Spoofing, Security Policy Violation, Unknown'
 - name: AuditEvent
   role: threat
   class: Optional
