@@ -20,6 +20,13 @@ Additional data about the edge such as weight, distance, or custom properties.
 
 Indicates whether the edge is (`true`) or undirected (`false`).
 
+### `labels`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The list of labels attached to this edge. Labels can be used to categorize, filter, and group edges within a graph.
+
 ### `name`
 
 - **Type**: `string_t`

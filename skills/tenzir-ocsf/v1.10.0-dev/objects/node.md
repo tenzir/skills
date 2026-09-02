@@ -20,6 +20,13 @@ Additional data about the node stored as key-value pairs. Can include custom pro
 
 A human-readable description of the node's purpose or meaning in the graph.
 
+### `labels`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The list of labels attached to this node. Labels can be used to categorize, filter, and group nodes within a graph.
+
 ### `name`
 
 - **Type**: `string_t`

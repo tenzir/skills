@@ -122,6 +122,41 @@ The impact as an integer value of the finding, valid range 0-100.
 
 Indicates that the event is considered to be an alertable signal. For example, an `activity_id` of 'Create' could constitute an alertable signal and the value would be `true`, while 'Close' likely would not and either omit the attribute or set its value to `false`. Note that other events with the `security_control` profile may also be deemed alertable signals and may also carry `is_alert = true` attributes.
 
+### `likelihood`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: context
+
+The likelihood, normalized to the caption of the `likelihood_id` value. In the case of 'Other', it is defined by the event source.
+
+### `likelihood_id`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Group**: context
+- **Sibling**: `likelihood`
+
+#### Enum values
+
+- `0`: `Unknown` - The normalized likelihood is unknown.
+- `1`: `Very Low` - The probability that the reported threat activity will occur or succeed is very low.
+- `2`: `Low` - The probability that the reported threat activity will occur or succeed is low.
+- `3`: `Moderate` - The probability that the reported threat activity will occur or succeed is moderate.
+- `4`: `High` - The probability that the reported threat activity will occur or succeed is high.
+- `5`: `Very High` - The probability that the reported threat activity will occur or succeed is very high.
+- `99`: `Other` - The likelihood is not mapped to the defined enum values. See the `likelihood` attribute, which contains a data source specific value.
+
+The normalized likelihood of the finding, representing a subjective assessment of the probability that the reported threat activity will occur or succeed.
+
+### `likelihood_score`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Group**: context
+
+The likelihood score as reported by the event source.
+
 ### `malware`
 
 - **Type**: [`malware`](../objects/malware.md)
