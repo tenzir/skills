@@ -1012,6 +1012,10 @@ Publish, subscribe, store, and process streams of records in a distributed messa
 
 Connect Azure, Microsoft 365, and Windows: stream through Event Hubs, store in Blob Storage, ingest into Sentinel, and parse the full Windows telemetry surface.
 
+#### [Microsoft 365 / Office 365 integration](integrations/microsoft/365.md)
+
+Collect unified audit logs for activity across Exchange, SharePoint, Microsoft Entra ID, Teams, and other Microsoft 365 services.
+
 #### [Microsoft Defender integration](integrations/microsoft/defender.md)
 
 Detect, prevent, and respond to security threats across endpoints and networks.

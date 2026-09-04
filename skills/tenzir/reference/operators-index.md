@@ -121,6 +121,7 @@
 - [from_google_cloud_storage](operators/from_google_cloud_storage.md): Reads one or multiple files from Google Cloud Storage.
 - [from_http](operators/from_http.md): Sends an HTTP/1.1 request and returns the response as events.
 - [from_kafka](operators/from_kafka.md): Receives events from an Apache Kafka topic.
+- [from_microsoft_365_activity](operators/from_microsoft_365_activity.md): Reads unified audit records from the Microsoft 365 Management Activity API.
 - [from_microsoft_graph](operators/from_microsoft_graph.md): Reads events from a Microsoft Graph collection.
 - [from_microsoft_sql](operators/from_microsoft_sql.md): Reads events from Microsoft SQL Server or Azure SQL Database.
 - [from_mysql](operators/from_mysql.md): Reads events from a MySQL database.

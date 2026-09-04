@@ -745,6 +745,14 @@ Receives events from an Apache Kafka topic.
 from_kafka "logs"
 ```
 
+### [from\_microsoft\_365\_activity](operators/from_microsoft_365_activity.md)
+
+Reads unified audit records from the Microsoft 365 Management Activity API.
+
+```tql
+from_microsoft_365_activity auth={…}, content_types=["Audit.General"]
+```
+
 ### [from\_microsoft\_graph](operators/from_microsoft_graph.md)
 
 Reads events from a Microsoft Graph collection.
