@@ -9,7 +9,7 @@ fields:
   role: entity
   class: Mandatory
   type: string
-  description: The Azure Active Directory tenant identifier associated with the asset or entity.
+  description: The Microsoft Entra tenant identifier associated with the asset or entity.
 - name: AssetClassificationLastScanDateTime
   role: asset
   class: Mandatory
@@ -312,7 +312,7 @@ fields:
   role: entity
   class: Optional
   type: string
-  description: The name of the identity directory, such as Azure AD, GCP, AWS, associated with the entity.
+  description: The name of the identity directory, such as Microsoft Entra ID, GCP, or AWS, associated with the entity.
 - name: InternalUsersCount
   class: Optional
   type: int

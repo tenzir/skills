@@ -1,8 +1,8 @@
 name: IdentityDirectoryName
-summary: The name of the identity directory, such as Azure AD, GCP, AWS, associated with the entity.
+summary: The name of the identity directory, such as Microsoft Entra ID, GCP, or AWS, associated with the entity.
 schemas:
 - name: AssetEntity
   role: entity
   class: Optional
   type: string
-  description: The name of the identity directory, such as Azure AD, GCP, AWS, associated with the entity.
+  description: The name of the identity directory, such as Microsoft Entra ID, GCP, or AWS, associated with the entity.
