@@ -306,6 +306,8 @@ Match security activity and model the resulting findings.
 
 ##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
 
+##### [Check Sigma rule compatibility with OCSF](guides/detect/check-sigma-rule-compatibility-with-ocsf.md)
+
 ##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
 
 ### Store
@@ -615,6 +617,10 @@ tenzir-ship ships as a Python package that requires Python 3.12 or later.
 #### [AWS Authentication](reference/aws-authentication.md)
 
 Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials.
+
+#### [Azure Authentication](reference/azure-authentication.md)
+
+Tenzir’s Azure operators authenticate with Microsoft Entra ID using the Azure SDK’s default credential chain, a shared account key, an application client secret, or workload identity federation.
 
 ### API
 
@@ -1080,6 +1086,10 @@ A rapidly growing cloud-native SIEM, tightly integrated with the Azure ecosystem
 
 Send events to SentinelOne Singularity™ Data Lake
 
+#### [Sigma integration](integrations/sigma.md)
+
+Run stock Sigma detection rules on streaming events, natively on OCSF.
+
 #### [Snowflake integration](integrations/snowflake.md)
 
 Store, analyze, and share structured and semi-structured data with a cloud-based warehouse.
@@ -1111,6 +1121,10 @@ Collect, monitor, and analyze endpoint data for digital forensics and incident r
 #### [Wazuh integration](integrations/wazuh.md)
 
 Collects security telemetry and runs detections.
+
+#### [YARA integration](integrations/yara.md)
+
+Scan files and byte streams with YARA-X rules directly in the pipeline.
 
 #### [Zeek integration](integrations/zeek.md)
 

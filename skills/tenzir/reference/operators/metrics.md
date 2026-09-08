@@ -308,14 +308,6 @@ Contains statistics about allocated memory.
       rss_anon_bytes: uint64, // Resident anonymous memory.
       file_rss_bytes: uint64, // Resident file-backed memory.
       rss_shmem_bytes: uint64, // Resident shared memory.
-    },
-    smaps: { // Values aggregated from `/proc/self/smaps`.
-      rss_bytes: uint64, // Resident set size.
-      pss_bytes: uint64, // Proportional set size.
-      private_clean_bytes: uint64, // Private clean pages.
-      private_dirty_bytes: uint64, // Private dirty pages.
-      anonymous_rss_bytes: uint64, // Resident anonymous memory.
-      swap_bytes: uint64, // Swapped-out memory.
       hugetlb_bytes: uint64, // Memory backed by huge pages.
     },
     heap: {

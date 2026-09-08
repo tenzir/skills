@@ -83,9 +83,31 @@ Exactly one of the following token sources must be specified in `web_identity`:
 
   * `url` (required): The HTTP endpoint URL that returns a token.
   * `headers`: HTTP headers to include in the token request. For Azure IMDS, you typically need `{Metadata: "true"}`.
+  * `query_params`: Query parameters to append to `url`. Keys and values are percent-encoded. Existing query parameters in `url` are preserved. Most providers expect the target audience here, which for AWS is `sts.amazonaws.com`.
   * `path`: JSON path to extract the token from the endpoint response. Defaults to `.access_token`. Set to `null` for endpoints that return the token as plain text.
 
 * **`token`**: Direct token value, useful for testing or when the token comes from another source.
+
+Both `headers` and `query_params` take `string` or [`secret`](https://tenzir.com/docs/reference/functions/secret.md) values.
+
+The GitHub Actions token endpoint URL in `ACTIONS_ID_TOKEN_REQUEST_URL` already includes an `api-version` parameter. Use `query_params` to append the audience while preserving that parameter:
+
+```tql
+from_s3 "s3://my-bucket/data.json", aws_iam={
+  region: "us-east-1",
+  assume_role: "arn:aws:iam::123456789012:role/GitHubActionsRole",
+  web_identity: {
+    token_endpoint: {
+      url: env("ACTIONS_ID_TOKEN_REQUEST_URL"),
+      query_params: { "audience": "sts.amazonaws.com" },
+      headers: {
+        "Authorization": "Bearer " + env("ACTIONS_ID_TOKEN_REQUEST_TOKEN"),
+      },
+      path: ".value",
+    },
+  },
+}
+```
 
 Tenzir refreshes credentials automatically before expiration, with exponential backoff retry for transient failures, making this suitable for long-running pipelines.
 
@@ -146,6 +168,7 @@ The role’s trust policy must allow your active principal (for example an EC2 i
 * [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
 * [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
+* [Azure Authentication](azure-authentication.md)
 * [Amazon CloudWatch Logs](../integrations/amazon/cloudwatch.md)
 * [AWS Glue](../integrations/amazon/glue.md)
 * [Amazon MSK](../integrations/amazon/msk.md)

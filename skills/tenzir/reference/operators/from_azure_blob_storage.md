@@ -12,22 +12,15 @@ section: "Docs"
 Reads one or multiple files from Azure Blob Storage.
 
 ```tql
-from_azure_blob_storage url:string, [account_key=string, watch=duration,
-  remove=bool, rename=string->string, max_age=duration] { … }
+from_azure_blob_storage url:string, [account_key=string, azure_auth=record,
+  watch=duration, remove=bool, rename=string->string, max_age=duration] { … }
 ```
 
 ## Description
 
 The `from_azure_blob_storage` operator reads files from Azure Blob Storage, with support for glob patterns, automatic format detection, and file monitoring.
 
-By default, authentication is handled by the Azure SDK’s credential chain which may read from multiple environment variables, such as:
-
-* `AZURE_TENANT_ID`
-* `AZURE_CLIENT_ID`
-* `AZURE_CLIENT_SECRET`
-* `AZURE_AUTHORITY_HOST`
-* `AZURE_CLIENT_CERTIFICATE_PATH`
-* `AZURE_FEDERATED_TOKEN_FILE`
+By default, authentication is handled by the Azure SDK’s credential chain, which reads process-wide environment variables. Pass `azure_auth` to give one operator instance its own Entra identity, as our [Azure Authentication](../azure-authentication.md) reference explains.
 
 ### `url: string`
 
@@ -51,6 +44,14 @@ Run `az login` on the command-line to authenticate the current user with Azure�
 ### `account_key = string (optional)`
 
 Account key for authenticating with Azure Blob Storage.
+
+Cannot be combined with `azure_auth`.
+
+### `azure_auth = record (optional)`
+
+Microsoft Entra ID credentials for this operator instance, either an application client secret or a federated OIDC token. Our [Azure Authentication](../azure-authentication.md) reference describes every field.
+
+Cannot be combined with `account_key`.
 
 ### `watch = duration (optional)`
 
@@ -112,6 +113,21 @@ from_azure_blob_storage "abfs://my-container/data/**.json"
 from_azure_blob_storage "abfs://container/data.csv", account_key="your-account-key"
 ```
 
+### Read blobs with workload identity federation
+
+```tql
+from_azure_blob_storage "abfss://logs@account.dfs.core.windows.net/**.json",
+  azure_auth={
+    tenant_id: secret("entra-tenant-id"),
+    client_id: secret("entra-client-id"),
+    web_identity: {
+      token_file: "/var/run/secrets/azure/tokens/azure-identity-token",
+    },
+  } {
+  read_json
+}
+```
+
 ### Read Suricata EVE JSON logs continuously
 
 ```tql
@@ -141,4 +157,5 @@ from_azure_blob_storage "abfs://data/**.json" {
 * [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
 * [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
 * [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md)
+* [Azure Authentication](../azure-authentication.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

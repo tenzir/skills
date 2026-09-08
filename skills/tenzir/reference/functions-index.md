@@ -276,6 +276,7 @@
 
 ## Type System
 
+- [blob](functions/blob.md): Converts a UTF-8 string to a blob without encoding it first.
 - [duration](functions/duration.md): Casts an expression to a duration value.
 - [float](functions/float.md): Casts an expression to a float.
 - [int](functions/int.md): Casts an expression to an integer.

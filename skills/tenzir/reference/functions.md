@@ -1784,6 +1784,14 @@ Trims whitespace or specified characters from the start of a string.
 
 ### Conversion
 
+### [blob](functions/blob.md)
+
+Converts a UTF-8 string to a blob.
+
+```tql
+blob("Tenzir")
+```
+
 ### [duration](functions/duration.md)
 
 Casts an expression to a duration value.

@@ -12,22 +12,16 @@ section: "Docs"
 Writes events to one or multiple blobs in Azure Blob Storage.
 
 ```tql
-to_azure_blob_storage url:string, [account_key=string, max_size=int,
-                     timeout=duration, partition_by=list<field>] { … }
+to_azure_blob_storage url:string, [account_key=string, azure_auth=record,
+                     max_size=int, timeout=duration,
+                     partition_by=list<field>] { … }
 ```
 
 ## Description
 
 The `to_azure_blob_storage` operator writes events to Azure Blob Storage, automatically opening new blobs when a rotation condition triggers. It supports hive-style partitioning through a `**` placeholder in the URL and per-partition unique blob names through a `{uuid}` placeholder.
 
-By default, authentication is handled by the Azure SDK’s credential chain which may read from multiple environment variables, such as:
-
-* `AZURE_TENANT_ID`
-* `AZURE_CLIENT_ID`
-* `AZURE_CLIENT_SECRET`
-* `AZURE_AUTHORITY_HOST`
-* `AZURE_CLIENT_CERTIFICATE_PATH`
-* `AZURE_FEDERATED_TOKEN_FILE`
+By default, authentication is handled by the Azure SDK’s credential chain, which reads process-wide environment variables. Pass `azure_auth` to give one operator instance its own Entra identity, as our [Azure Authentication](../azure-authentication.md) reference explains.
 
 ### `url: string`
 
@@ -54,6 +48,14 @@ Run `az login` on the command-line to authenticate the current user with Azure�
 ### `account_key = string (optional)`
 
 Account key for authenticating with Azure Blob Storage.
+
+Cannot be combined with `azure_auth`.
+
+### `azure_auth = record (optional)`
+
+Microsoft Entra ID credentials for this operator instance, either an application client secret or a federated OIDC token. Our [Azure Authentication](../azure-authentication.md) reference describes every field.
+
+Cannot be combined with `account_key`.
 
 ### `max_size = int (optional)`
 
@@ -109,6 +111,21 @@ to_azure_blob_storage "abfs://container/data/out_{uuid}.json",
 }
 ```
 
+### Write blobs with workload identity federation
+
+```tql
+to_azure_blob_storage "abfss://results@account.dfs.core.windows.net/out_{uuid}.json",
+  azure_auth={
+    tenant_id: secret("entra-tenant-id"),
+    client_id: secret("entra-client-id"),
+    web_identity: {
+      token_file: "/var/run/secrets/azure/tokens/azure-identity-token",
+    },
+  } {
+  write_ndjson
+}
+```
+
 ### Rotate to a new blob every 5 minutes
 
 ```tql
@@ -123,4 +140,5 @@ to_azure_blob_storage "abfs://my-container/logs/events_{uuid}.json",
 * [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
 * [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md)
 * [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
+* [Azure Authentication](../azure-authentication.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)

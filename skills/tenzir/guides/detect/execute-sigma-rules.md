@@ -14,87 +14,7 @@ This guide shows you how to execute [Sigma](https://sigmahq.io/) detection rules
 
 Tenzir evaluates Sigma v2.1 detection rules and global filters. Every match becomes an OCSF Detection Finding by default, so Sigma output can share the same routing, storage, and triage path as findings from YARA-X and native TQL.
 
-## Run a self-contained rule
-
-Use `rules=` when the rule belongs to the pipeline. The following example matches an OCSF Process Activity event whose PowerShell command line contains an encoded-command argument:
-
-```tql
-from {
-  time: 2026-08-14T10:00:00Z,
-  metadata: {uid: "process-activity-52517", version: "1.9.0"},
-  class_uid: 1007,
-  activity_id: 1,
-  device: {hostname: "workstation-17"},
-  actor: {user: {name: "alice"}},
-  process: {
-    name: "PowerShell.EXE",
-    cmd_line: "powershell.exe /EncodedCommand SQBFAFgA",
-  },
-}
-sigma rules=r#"
-title: Encoded PowerShell Command
-id: 7f01f6b8-9f1e-48f5-bab9-2d1f7040c6a1
-status: experimental
-logsource:
-  category: process_creation
-  product: windows
-detection:
-  selection:
-    class_uid: 1007
-    activity_id: 1
-    process.name|endswith: 'powershell.exe'
-    process.cmd_line|windash|contains:
-      - ' -enc '
-      - ' -EncodedCommand '
-  condition: selection
-level: high
-tags:
-  - attack.execution
-  - attack.t1059.001
-"#
-select title=finding_info.title,
-       severity_id,
-       event=evidences[0].data,
-       traits=finding_info.traits,
-       fields=evidences[1].sigma.fields
-```
-
-The `windash` modifier lets the values that contain `-enc` and `-EncodedCommand` also match the Windows `/enc` and `/EncodedCommand` forms. String matching is case-insensitive unless a rule adds `cased`.
-
-The selected result has this shape:
-
-```tql
-{
-  title: "Encoded PowerShell Command",
-  severity_id: 4,
-  event: {
-    time: 2026-08-14T10:00:00Z,
-    metadata: {uid: "process-activity-52517", version: "1.9.0"},
-    class_uid: 1007,
-    activity_id: 1,
-    device: {hostname: "workstation-17"},
-    actor: {user: {name: "alice"}},
-    process: {
-      name: "PowerShell.EXE",
-      cmd_line: "powershell.exe /EncodedCommand SQBFAFgA",
-    },
-  },
-  traits: [{name: "selection", type: "sigma:search-identifier"}],
-  fields: [
-    {
-      field: "class_uid",
-      matcher: "equals",
-      case: "insensitive",
-      polarity: "positive",
-      value: "1007",
-      path: null,
-    },
-    // The remaining causal field matches follow in rule order.
-  ],
-}
-```
-
-One input event can match multiple rules. The operator emits one finding per matching rule in deterministic source order.
+To verify a stock rule against normalized events, follow our worked guide on [checking Sigma rule compatibility with OCSF](check-sigma-rule-compatibility-with-ocsf.md). It includes a self-contained pipeline, expected output, and failure diagnostics.
 
 ## Choose a rule source
 
@@ -141,9 +61,11 @@ sigma rules=[$login_rule]
 
 Tenzir validates inline rules when it constructs the pipeline and includes the content in the operator plan. Inline rules do not access the filesystem at runtime and cannot use `refresh_interval`.
 
-## Align rule fields with event fields
+## Choose automatic or direct matching
 
-The operator applies Sigma field names directly to each input record. It does not normalize a field taxonomy or infer a log source from the event.
+The default `mapping="auto"` recognizes an OCSF-shaped table schema when `metadata.version` is a string and `class_uid` is an `int64` or `uint64`. It plans matching once for that schema, uses semantic projections for supported stock fields, and keeps direct matching for other schemas. The values of `metadata.version` and `class_uid` do not control dispatch for individual rows.
+
+Structural recognition deliberately favors predictable columnar execution over per-row dispatch. It also recognizes a non-OCSF schema that happens to contain both typed fields. Use `mapping="direct"` for that input. Direct mode is also the escape hatch for rules that intentionally interpret their fields literally on OCSF data.
 
 ### Understand field lookup
 
@@ -151,33 +73,39 @@ For a field name such as `process.name`, Tenzir first checks whether the event h
 
 Keyword selections have no field name. They recursively inspect every string leaf in records and lists and match when any leaf satisfies the keyword. They do not serialize complete events or compare numbers as strings.
 
-### Map fields before matching
-
-When an imported rule expects generic Windows names such as `Image` and `CommandLine`, map the parsed source fields before applying it:
+An OCSF-native field path that has no stock projection also resolves directly in automatic mode:
 
 ```tql
-from_file "windows-security.xml" {
-  read_delimited "</Event>\n", include_separator=true
-}
-this = data.parse_winlog()
-
-
-Image = EventData.NewProcessName
-CommandLine = EventData.CommandLine
-ParentImage = EventData.ParentProcessName
-User = EventData.SubjectUserName
-
-
-sigma path="rules/windows/process-creation.yml"
+subscribe "ocsf"
+sigma rules=r#"
+title: OCSF-native process path
+detection:
+  selection:
+    process.path|endswith: '\powershell.exe'
+  condition: selection
+"#
 ```
 
-The original parsed record remains available because these assignments add fields rather than replacing the event. Alternatively, rewrite the rule once against OCSF paths so the same detection works for every source that you normalize to OCSF.
+Use `mapping="direct"` as the explicit opt-out when a rule intentionally names custom fields on OCSF events:
 
-### Treat `logsource` as metadata
+```tql
+subscribe "custom-ocsf"
+sigma path="rules/custom-ocsf.yml", mapping="direct"
+```
 
-A rule’s `logsource` does not filter input events. Tenzir has no universal way to infer Sigma’s `category`, `product`, and `service` classifiers from an arbitrary record, so automatic filtering could silently discard valid input. Gate the stream in TQL, for example by `class_uid`, and use Sigma fields for the remaining predicates.
+Direct mode interprets every field literally and never uses `logsource` to filter events. It also preserves the previous matching behavior for pipelines that add source-compatible aliases before `sigma`.
 
-The operator still preserves `logsource` in the finding and uses it to decide whether a global filter is compatible with a target rule.
+### Use conservative `logsource` guards
+
+A translated rule outgrows its original producer: once its fields resolve to OCSF paths, a Zeek DNS rule is a DNS Activity rule and matches conformant events from any source. Automatic mode therefore uses `logsource` for semantic constraints only: a Windows process-creation rule rejects a known DNS class, a Process Activity Terminate event, or a Linux operating system. Producer identity matters only for provenance-scoped fields whose values live in a source-specific namespace, such as Sysmon event IDs: a rule that matches `EventID` keeps a producer guard so Sysmon event 13 never compares against a Security-log event code. Missing, null, unknown, and unfamiliar optional classifiers stay eligible. This prevents sparse but matchable OCSF events from becoming false negatives.
+
+Semantic projections apply to the logsource families in the [mapping catalog](check-sigma-rule-compatibility-with-ocsf.md#mapping-catalog). Other rules resolve their fields literally against the schema or skip safely when a required field is absent.
+
+The operator preserves `logsource` in the finding and also uses it to decide whether a global filter is compatible with a target rule.
+
+### Fail closed on unsafe translations
+
+Some source fields survive normalization only as vendor residue or disappear entirely. A field without a semantic projection first resolves literally against the OCSF-shaped schema. If it is absent, a Sysmon rule that depends on `CallTrace`, `SourceThreadId`, or `TerminalSessionId` cannot be translated safely without an explicit stable representation. Tenzir skips the complete rule for that schema and warns once per active rule revision. It never removes the condition or substitutes a field that merely looks related.
 
 ## Use Sigma v2.1 behavior
 
@@ -198,7 +126,7 @@ Modifier order and value types matter. The operator rejects unknown modifiers, i
 Use `windash` when a rule must recognize both Windows argument prefixes:
 
 ```yaml
-CommandLine|windash|contains: ' -EncodedCommand '
+CommandLine|windash|contains: " -EncodedCommand "
 ```
 
 For a native TQL translation of the same concept, the equivalent predicate is a case-insensitive regex such as `r"(?i)[/-]encodedcommand"`.
@@ -254,7 +182,7 @@ Sigma correlation documents are also rejected. Express temporal and aggregate co
 
 ## Consume the OCSF finding
 
-The default result separates normalized analytic identity, the applied policy, the original evidence, and causal match details.
+The default result separates normalized analytic identity, the applied policy, the original evidence, and causal match details. One input event can match multiple rules; the operator emits one finding per matching rule in deterministic source order.
 
 ### Inspect the mapping
 

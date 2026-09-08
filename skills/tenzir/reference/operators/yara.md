@@ -48,11 +48,11 @@ Rule paths and includes can read local files, so treat them as trusted node conf
 
 ### `path = string | list<string>`
 
-A rule file, rule directory, or list of files and directories. Directories are traversed recursively, and every file ending in `.yar` or `.yara` is compiled as a root source. Give include-only dependencies another extension, such as `.inc`, or pass the root files explicitly. Discovery is deterministic, overlapping paths are deduplicated, and symbolic links are rejected.
+A rule file, rule directory, or list of files and directories. Exactly one of `path` and `rules` must be provided. Directories are traversed recursively, and every file ending in `.yar` or `.yara` is compiled as a root source. Give include-only dependencies another extension, such as `.inc`, or pass the root files explicitly. Discovery is deterministic, overlapping paths are deduplicated, and symbolic links are rejected.
 
 ### `rules = string | list<string>`
 
-One inline YARA rule source or a list of sources.
+One inline YARA rule source or a list of sources. Exactly one of `path` and `rules` must be provided.
 
 ### `include_dirs = string | list<string> (optional)`
 

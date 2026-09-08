@@ -12,10 +12,11 @@ section: "Docs"
 Evaluate Sigma detection rules against structured events.
 
 ```tql
-sigma path=string|list<string>, [refresh_interval=duration, format="ocsf"|"plain"]
+sigma path=string|list<string>, [refresh_interval=duration, format="ocsf"|"plain",
+                                 mapping="auto"|"direct"]
 
 
-sigma rules=string|list<string>, [format="ocsf"|"plain"]
+sigma rules=string|list<string>, [format="ocsf"|"plain", mapping="auto"|"direct"]
 ```
 
 ## Description
@@ -26,25 +27,23 @@ Specify exactly one source with `path=` or `rules=`.
 
 The operator implements Sigma v2.1 detection rules and global filters for the default `sigma` taxonomy. Correlation rules are not supported.
 
-## Rule sources
-
-Choose a filesystem source for a managed rule repository and an inline source for rules that belong to the pipeline itself.
+See [Execute Sigma rules](../../guides/detect/execute-sigma-rules.md) for a problem-oriented walkthrough of rule sources, matching modes, and finding consumption.
 
 ### `path = string | list<string>`
 
-A rule file, a directory, or a non-empty list of files and directories. Directories are searched recursively in deterministic order and include files ending in `.yaml` or `.yml`. An explicitly named file can use another extension. Overlapping path entries are deduplicated, and a file can contain multiple YAML documents.
+A rule file, a directory, or a non-empty list of files and directories. Exactly one of `path` and `rules` must be provided. Directories are searched recursively in deterministic order and include files ending in `.yaml` or `.yml`. An explicitly named file can use another extension. Overlapping path entries are deduplicated, and a file can contain multiple YAML documents.
 
 The operator refreshes filesystem-backed rules. A successfully reloaded rule replaces its previous version. If a changed document no longer parses or validates, the operator reports the error and retains its last valid version. Failures in one source do not disable valid rules from other sources. Removing a file from a successfully inspected directory removes its rules.
 
 ### `rules = string | list<string>`
 
-One constant string or a non-empty list of constant strings containing Sigma YAML. Each string can contain one document or a multi-document collection. Constant `let` bindings and multiline raw strings are supported.
+One constant string or a non-empty list of constant strings containing Sigma YAML. Each string can contain one document or a multi-document collection. Constant `let` bindings and multiline raw strings are supported. Exactly one of `path` and `rules` must be provided.
 
 Inline rules are parsed when Tenzir constructs the pipeline. They perform no runtime filesystem access and cannot be combined with `refresh_interval`.
 
 ### `refresh_interval = duration (optional)`
 
-How often a filesystem-backed source is checked for changes.
+How often a filesystem-backed source is checked for changes. Requires `path`.
 
 Defaults to `5s`.
 
@@ -57,17 +56,38 @@ The output format:
 
 Defaults to `"ocsf"`.
 
-## Matching behavior
+### `mapping = "auto" | "direct" (optional)`
 
-Sigma field names apply directly to the input event. The operator does not map rule fields to another taxonomy and does not classify events by `logsource`. The `logsource` section describes the rule and scopes global filters, but it never filters input events by itself.
+How rule fields apply to input events:
+
+* `"auto"` recognizes OCSF-shaped table schemas and applies semantic projections for supported Sigma fields. Other schemas keep direct field matching.
+* `"direct"` matches every Sigma field literally and does not use `logsource` to classify input.
+
+Defaults to `"auto"`.
+
+## OCSF matching
+
+With `mapping="auto"`, the operator selects matching behavior once per input schema. A schema is OCSF-shaped when `metadata.version` has type `string` and `class_uid` has type `int64` or `uint64`; other schemas keep direct matching.
+
+For recognized OCSF events, the operator interprets supported Sigma fields by their source meaning: it translates the rule predicate as if the source event had passed through a source-to-OCSF mapping, without transforming the event. An OCSF-native path that no projection claims resolves literally, so rules can mix supported stock fields and explicit OCSF paths.
+
+The `logsource` guard rejects known class, activity, and operating-system contradictions. A translated rule is a statement about its OCSF event class, not about one producer: a Zeek DNS rule matches conformant DNS Activity from any source. Producer constraints apply only when a rule uses a provenance-scoped field whose value lives in a source-specific namespace, such as Sysmon event IDs in `metadata.event_code`. Missing, null, or unknown classifiers keep an event eligible. A rule field that has no projection and does not exist in the schema makes the complete rule unsafe for that schema: the operator skips it and warns once per active rule revision instead of evaluating a weakened condition.
+
+Check rule compatibility
+
+Explore the [Sigma-to-OCSF catalog](../../guides/detect/check-sigma-rule-compatibility-with-ocsf.md#mapping-catalog) for supported logsources and their OCSF classes.
+
+## Field resolution
 
 For a field name that contains dots, the operator first looks for the complete name as an exact top-level key. If that key is absent, it interprets the dots as nested field traversal. For example, `process.name` selects a top-level `"process.name"` field when present and otherwise selects `name` below the `process` record.
 
-Keyword selections recursively inspect every string-valued leaf, including strings inside nested records and lists. They do not serialize records or coerce non-string values.
+Keyword selections recursively inspect every string-valued leaf, including strings inside nested records and lists. They do not serialize records or coerce non-string values. Named field lookup follows record fields only.
+
+A detection item over a field that the event does not carry never matches. This keeps conditions two-valued: in `selection and not filter`, a filter whose field is absent evaluates to false, so the negation holds and the rule can still match.
+
+## Conditions
 
 A list-valued `condition` is treated as a list of OR-linked queries. Conditions support `and`, `or`, `not`, parentheses, `1 of`, `all of`, `them`, and wildcard search-identifier patterns. Numeric quantifiers greater than `1` and the non-standard `any of` spelling are rejected.
-
-Keyword selections inspect strings inside lists, but named field lookup follows record fields only.
 
 Sigma v3
 
@@ -91,6 +111,8 @@ The operator validates every modifier chain before it executes a rule. Unknown, 
 | `fieldref`                                       | Compare against another event field. It can only be combined with `neq`.                                                              |
 | `minute`, `hour`, `day`, `week`, `month`, `year` | Extract a time part before comparison.                                                                                                |
 | `all`                                            | Require every value in a list instead of any value.                                                                                   |
+
+In automatic mode, `exists` tests whether the projected source path and its enclosing object are represented. A present null value therefore exists even though ordinary comparisons against it do not match. `fieldref` resolves both field operands independently, so a supported projection can be compared with another projection or with a literal schema field.
 
 The `expand` modifier requires a placeholder mapping, which this operator does not provide. A rule that uses `expand` is rejected. Replace placeholders with concrete values before loading the rule.
 
@@ -121,7 +143,7 @@ Rule and match details use standard OCSF fields:
 * `policy.data` holds the complete applied rule, including global-filter adjustments. `policy.is_applied` is `true`.
 * `evidences[0].data` holds the original input event.
 * `finding_info.traits` lists the causal search identifiers in rule order.
-* `observables` contain positive matched field values.
+* `observables` contain positive matched field values and point at the projected source path that supplied each value.
 * `evidences[1].sigma` records the condition trace, declared and resolved fields, matcher, case mode, polarity, and matched values. Negative and absence decisions remain in the trace but do not create observables.
 * Sigma ATT\&CK tags populate `finding_info.attacks` and the Security Control profile’s top-level `attacks` field.
 * The rule’s abstract `logsource` populates `finding_info.data_sources`.
@@ -140,7 +162,7 @@ this = {
 For every non-empty input batch, the operator emits a `tenzir.metrics.sigma` event with these fields:
 
 * `events`: The number of input events processed.
-* `rule_evaluations`: The number of input events multiplied by the number of active detection rules.
+* `rule_evaluations`: The number of input events multiplied by the number of rules that can be evaluated for the input schema. Rules skipped because a field cannot be resolved are not counted.
 * `matches`: The number of rule matches. One event can match multiple rules.
 
 Inspect these events with the `metrics` operator:
