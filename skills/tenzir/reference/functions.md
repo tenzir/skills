@@ -920,6 +920,14 @@ ocsf_type_uid("SSH Activity: Fail")
 
 ## Parsing
 
+### [parse\_avro](functions/parse_avro.md)
+
+Parses an Apache Avro binary datum.
+
+```tql
+blob.parse_avro(schema={type: "string"})
+```
+
 ### [parse\_cef](functions/parse_cef.md)
 
 Parses a string as a CEF message

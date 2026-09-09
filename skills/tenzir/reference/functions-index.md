@@ -147,6 +147,7 @@
 
 ## Parsing
 
+- [parse_avro](functions/parse_avro.md): Parses an Apache Avro binary datum.
 - [parse_cef](functions/parse_cef.md): Parses a string as a CEF message
 - [parse_csv](functions/parse_csv.md): Parses a string as CSV (Comma-Separated Values).
 - [parse_grok](functions/parse_grok.md): Parses a string according to a grok pattern.

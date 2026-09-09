@@ -926,6 +926,10 @@ Send, receive, and manage messages between distributed applications.
 
 Send and receive messages between systems using a standardized, protocol-based approach.
 
+#### [Apache Avro integration](integrations/avro.md)
+
+Decode schema-driven Apache Avro binary data from streams, files, and message brokers.
+
 #### [Apache Iceberg integration](integrations/iceberg.md)
 
 An open table format for building lakehouses on object storage, with atomic commits, hidden partitioning, and schema evolution.

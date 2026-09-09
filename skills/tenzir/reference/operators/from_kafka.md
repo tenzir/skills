@@ -13,12 +13,14 @@ Receives events from an Apache Kafka topic.
 
 ```tql
 from_kafka topic:string, [count=int, exit=bool, offset=int|string, options=record,
-           aws_iam=record, aws_region=string, batch_size=int]
+           aws_iam=record, aws_region=string, batch_size=int,
+           schema_registry=string|secret, schema_registry_headers=record,
+           schema_registry_tls=bool|record]
 ```
 
 ## Description
 
-The `from_kafka` operator consumes messages from a Kafka topic and produces events containing the message payload as a string field.
+The `from_kafka` operator consumes messages from a Kafka topic and produces events containing the message payload as a string field. With `schema_registry`, it decodes Avro message values directly into structured events.
 
 The implementation uses the official [librdkafka](https://github.com/confluentinc/librdkafka) from Confluent and supports all [configuration options](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md). You can specify them via `options` parameter as `{key: value, ...}`.
 
@@ -29,7 +31,7 @@ The operator injects the following default librdkafka configuration values in ca
 * `group.id`: `tenzir`
 * `enable.auto.commit`: `false` (This option cannot be changed)
 
-Each consumed message is produced as an event with the following schema:
+Without `schema_registry`, each consumed message is produced as an event with the following schema:
 
 ```tql
 {
@@ -78,6 +80,44 @@ We recommend factoring these options into the plugin-specific `kafka.yaml` so th
 The number of messages to accumulate before emitting a batch. The operator commits offsets after each batch to improve throughput.
 
 Defaults to `10k`.
+
+### `schema_registry = string|secret (optional)`
+
+The URL of a Confluent-compatible Schema Registry used to decode Avro message values.
+
+The operator accepts version 0 schema IDs and version 1 schema GUIDs in either the payload prefix or the `__value_schema_id` Kafka header. It checks the last such header first and falls back to the payload prefix when the header is absent or null. A malformed, non-null header produces an error. With a non-null header, the message value contains the datum directly, without a schema identifier prefix.
+
+The URL may include a base path, but must have a valid host and must not contain a query or fragment.
+
+Schemas are fetched by the identifier in each message, including their named references, and cached for reuse. Messages may use different schema versions. The registry must return Avro schemas. Kafka keys are not decoded.
+
+Avro records become events; other top-level Avro values are wrapped in a `value` field. Kafka tombstones produce no event, but count towards `count`. Empty, non-null payloads are decoded according to their schema. Each value must contain exactly one datum; trailing bytes produce an error. Top-level `bytes` values use the Confluent encoding, with no Avro length prefix.
+
+Values use the type mapping of [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md). Recursive schemas and arrays whose item schema does not have a fixed Tenzir type are unsupported. Each datum is limited to 16 MiB in encoded form and in the decoder’s estimated in-memory representation. Registry response bodies for one schema and its references are limited to 16 MiB in total. Cyclic references are unsupported; a lookup supports at most 128 named references and 32 schema levels, including the root schema.
+
+Registry requests retry transient failures. An unrecoverable registry error, invalid schema, or malformed datum stops the pipeline without committing the failed batch or later messages. Restarting with the same consumer group can replay messages from that batch when using `offset="stored"`.
+
+Avro batches are emitted and committed in fetch order, preserving message order within each partition. The consumer continues polling while registry requests are pending and while accepted batches drain. If its assignment changes while an Avro batch is in flight, the operator stops with an error and rejects offsets from the old assignment. Already emitted but uncommitted events may be replayed after restarting.
+
+```tql
+from_kafka "events",
+  schema_registry="https://registry.example.com:8081",
+  options={"bootstrap.servers": "kafka.example.com:9092"}
+```
+
+### `schema_registry_headers = record (optional)`
+
+HTTP headers for registry requests. Values may be strings or secrets. Use this for registry authentication, which is separate from Kafka broker authentication. Requires `schema_registry`.
+
+```tql
+from_kafka "events",
+  schema_registry="https://registry.example.com",
+  schema_registry_headers={Authorization: secret("registry-authorization")}
+```
+
+### `schema_registry_tls = bool|record (optional)`
+
+TLS settings for registry requests, using the same client TLS options as [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md). HTTPS uses TLS with certificate verification by default. Requires `schema_registry`.
 
 ## Amazon MSK
 

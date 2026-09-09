@@ -13,9 +13,9 @@ This guide shows you how to read from external data stores with TQL. You’ll le
 
 Today, this guide focuses on [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) and [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md). As Tenzir adds more data store integrations, the same patterns will apply.
 
-## Read a full table
+## Read a table
 
-Use `table=...` when you want to fetch all rows from a table.
+Use `table=...` to read a table as structured events.
 
 Read a ClickHouse table:
 
@@ -44,13 +44,22 @@ from_mysql table="users",
            database="identity"
 ```
 
-Use this mode when you want Tenzir to treat the table as the source of truth and apply filtering later in the pipeline.
+With ClickHouse, the operators that follow travel into the query. A `where` becomes a `WHERE` clause, a `select` narrows the columns, and a `head` adds a `LIMIT`, so this pipeline reads only matching rows and the columns it names:
 
-## Push filters and projections into SQL
+```tql
+from_clickhouse table="security.events"
+where severity >= 3 and source == "fw"
+select time, host, message
+head 1000
+```
 
-Use `sql=...` when the data store should do the filtering, sorting, or column selection before Tenzir receives the rows.
+The reference for [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) lists which predicates translate. Anything that does not, such as a function call, runs in Tenzir with the same result. With MySQL, `table` mode fetches every row and the pipeline filters afterwards.
 
-Filter in ClickHouse:
+## Shape results with SQL
+
+Use `sql=...` when the data store should sort, aggregate, join, or cast before Tenzir receives the rows, or when you read from MySQL and want the database to filter.
+
+Sort in ClickHouse:
 
 ```tql
 from_clickhouse sql="SELECT time, host, severity, message FROM events WHERE severity >= 3 ORDER BY time DESC",
@@ -69,7 +78,7 @@ from_mysql sql="SELECT id, user, last_login FROM users WHERE active = 1 ORDER BY
            database="identity"
 ```
 
-This pattern reduces network traffic and lets you use the source system’s query planner and indexes.
+This pattern lets you use the full query language of the source system. Tenzir sends the query as is and applies the rest of the pipeline to the result.
 
 ## Inspect metadata
 

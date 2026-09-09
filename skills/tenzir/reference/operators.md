@@ -1387,6 +1387,14 @@ Detects the input format of a byte stream and selects a matching reader.
 read_auto fallback="lines"
 ```
 
+### [read\_avro](operators/read_avro.md)
+
+Parses Apache Avro binary data into events.
+
+```tql
+read_avro
+```
+
 ### [read\_bitz](operators/read_bitz.md)
 
 Parses bytes as \*BITZ\* format.

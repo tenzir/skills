@@ -200,6 +200,14 @@ Printers appear as the `write_*` operators, and as `print_*` [functions](glossar
 * See available [operators for printing](../reference/operators.md#printing)
 * See available [functions for printing](../reference/functions.md#printing)
 
+## Pushdown
+
+Moving a requirement of a later [operator](glossary.md#operator) toward the [source](glossary.md#source) of a [pipeline](glossary.md#pipeline), so that upstream operators can act on it early.
+
+Before a pipeline runs, Tenzir carries the predicates of `where`, the row limit of `head`, the fields that `select` keeps, and the ordering that downstream operators need upstream. A source such as `from_clickhouse` acts on what it understands, for example by adding a `WHERE` clause to the SQL query it sends, and a [parser](glossary.md#parser) that learns the order does not matter batches events more efficiently. Results stay the same whether or not an operator acts on a pushed-down requirement.
+
+* Learn more about [pipeline optimization](pipeline.md#optimization)
+
 ## Schema
 
 The named record type of an [event](glossary.md#event): its field names and their types.

@@ -41,7 +41,7 @@ The table to read from.
 
 You can qualify the table as `<database>.<table>`. If you omit the database, ClickHouse uses the current database selected by the URI or server defaults.
 
-Use this mode when you want to read a whole table and preserve named tuple fields from the table schema.
+Use this mode when you want to read a table and preserve named tuple fields from the table schema. Tenzir pushes filters, field selections, and limits from the rest of the pipeline into the query it sends; see [Optimizations](from_clickhouse.md#optimizations).
 
 Note
 
@@ -53,7 +53,7 @@ Use exactly one of `table` or `sql`.
 
 A custom SQL query to execute.
 
-Use this mode when you want ClickHouse to filter, project, sort, or cast data before Tenzir reads it.
+Use this mode when you need SQL features that `table` mode does not express, such as sorting, joins, aggregations, or casts. Tenzir sends the query as is and does not rewrite it.
 
 For metadata queries such as `SHOW TABLES`, `DESCRIBE TABLE`, or queries against `system.tables` and `system.columns`, use `sql`.
 
@@ -138,6 +138,56 @@ Tenzir maps ClickHouse types to Tenzir types as follows:
 
 `Map(...)` is not currently supported. Cast unsupported columns in `sql` or omit them from the query result.
 
+## Optimizations
+
+In `table` mode, the operator acts on the hints that the [optimizer](../../explanations/pipeline.md#optimization) pushes toward it by translating the operators that follow it into the `SELECT` it sends, so that ClickHouse reads and transfers only what the pipeline needs:
+
+* [`where`](https://tenzir.com/docs/reference/operators/where.md) becomes a `WHERE` clause.
+* [`select`](https://tenzir.com/docs/reference/operators/select.md) narrows the selected columns to the fields the pipeline reads, including fields that only the filter references.
+* [`head`](https://tenzir.com/docs/reference/operators/head.md) adds a `LIMIT`.
+
+For example, the pipeline
+
+```tql
+from_clickhouse table="logs.events"
+where severity > 3 or source == "fw" and code in [401, 403]
+select id, message
+head 100
+```
+
+sends a query equivalent to
+
+```sql
+SELECT id, message, severity, source, code
+FROM logs.events
+WHERE (severity > 3 OR (source = 'fw' AND code IN (401, 403)))
+LIMIT 100
+```
+
+The `where`, `select`, and `head` operators stay in the pipeline, so the result is the same whether or not a part of the pipeline was pushed into SQL.
+
+To keep results identical, the operator only translates predicates whose ClickHouse semantics match TQL exactly:
+
+* Comparisons of a column with a literal of the same kind: `==` and `!=` for numbers, strings, and booleans; `<`, `<=`, `>`, and `>=` for numbers.
+* Null checks with `== null` and `!= null`.
+* `in` with a list of literals of the column’s kind.
+* `and`, `or`, and `not`.
+* Bare boolean columns.
+
+Nested fields address elements of named tuples, so `meta.level > 2` translates when `meta` is a `Tuple(source String, level Int64)` column. Pushed predicates produce the same rows as TQL, including for `null` values, so `not (x == 1)` keeps rows where `x` is `null` either way.
+
+Everything else runs in Tenzir with unchanged results. This includes function calls, comparisons between two columns, comparisons against `time`, `ip`, or `duration` values, and columns with `Enum`, `Decimal`, `UUID`, `FixedString`, `Date`, `DateTime`, or `IPv4`/`IPv6` types.
+
+A predicate that mixes translatable and untranslatable parts is split along its `and`s: each conjunct that translates goes into the query, and the others run in Tenzir. An `or` or `not` is pushed only when all of its operands translate, since no part of it can be evaluated separately. For example,
+
+```tql
+where (severity > 3 or message.starts_with("ALERT")) and source == "fw"
+```
+
+sends `WHERE source = 'fw'` and evaluates the parenthesized disjunction in Tenzir. When a predicate that precedes the `head` stays in Tenzir, the limit is enforced in Tenzir as well and the query has no `LIMIT`, since ClickHouse cannot count rows that Tenzir has yet to filter. A `where` that follows the `head` does not affect the `LIMIT`.
+
+In `sql` mode, Tenzir sends your query as is and applies the pipeline’s operators to the result.
+
 ## Examples
 
 ### Read all rows from a table
@@ -154,7 +204,18 @@ from_clickhouse uri="clickhouse://default:secret@clickhouse.example.com:9000/sec
                 tls=false
 ```
 
-### Run a filtered SQL query
+### Filter and select on the server
+
+```tql
+from_clickhouse table="events", tls=false
+where severity >= 3 and source == "fw"
+select time, message
+head 50
+```
+
+ClickHouse evaluates the filter, returns only `time`, `message`, `severity`, and `source`, and stops after 50 matching rows.
+
+### Run a custom SQL query
 
 ```tql
 from_clickhouse sql="SELECT * FROM events WHERE severity >= 3 ORDER BY time DESC",

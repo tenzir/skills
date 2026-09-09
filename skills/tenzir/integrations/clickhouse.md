@@ -144,15 +144,16 @@ Create the ClickHouse table first when you need explicit types, table engines, T
 
 ### Read data from ClickHouse
 
-Use table mode when you want Tenzir to read a ClickHouse table as structured events.
+Use table mode when you want Tenzir to read a ClickHouse table as structured events. Tenzir pushes the `where`, `select`, and `head` operators that follow into the query it sends, so ClickHouse evaluates the filter and returns only the columns and rows the pipeline needs:
 
 ```tql
 from_clickhouse table="ocsf.Network_Activity", tls=false
-where time > now() - 1d and severity_id >= 3
+where severity_id >= 3 and status_id == 2
+select time, src_endpoint, dst_endpoint, severity_id
 publish "clickhouse-network-activity"
 ```
 
-Use SQL mode when ClickHouse should project, aggregate, sort, or otherwise shape the result before Tenzir receives it:
+Use SQL mode when ClickHouse should aggregate, sort, join, or otherwise shape the result in ways that `table` mode does not express:
 
 ```tql
 from_clickhouse sql="SELECT time, host, severity, message FROM security.events WHERE severity >= 3 ORDER BY time DESC",

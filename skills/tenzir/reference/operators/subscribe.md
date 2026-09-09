@@ -27,6 +27,14 @@ During shutdown, `subscribe` will wait for `publish` to drain all data before sh
 
 Optional channel names to subscribe to. If unspecified, the operator subscribes to the topic `main`.
 
+## Optimizations
+
+The operator acts on the predicates that the [optimizer](../../explanations/pipeline.md#optimization) pushes toward it. A [`where`](https://tenzir.com/docs/reference/operators/where.md) that follows `subscribe` becomes part of the subscription, and the node drops non-matching events before they enter the pipeline. This keeps back pressure and the per-pipeline queues limited to events the pipeline actually processes.
+
+A predicate translates when it compares a field or the `@name` metadata with a literal, uses `in` with a list or a subnet, or combines such comparisons with `and`, `or`, and `not`. Predicates that call functions run in the operator instead.
+
+The operator does not act on limits or field selections.
+
 ## Examples
 
 ### Subscribe to the events under a topic

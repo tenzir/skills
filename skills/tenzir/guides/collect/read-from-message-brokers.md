@@ -28,6 +28,21 @@ from_kafka "security-events"
 this = message.parse_json()
 ```
 
+### Decode Avro messages
+
+For messages produced with a Confluent-compatible Schema Registry serializer, set `schema_registry` to decode Avro values directly into events:
+
+```tql
+from_kafka "security-events",
+  schema_registry="https://registry.example.com"
+```
+
+The operator fetches the writer schema identified by each message. Configure `schema_registry_headers` and `schema_registry_tls` for registry authentication and TLS; the [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) reference describes these options.
+
+When each message contains a bare Avro datum without registry framing, decode the `message` string with [`parse_avro`](https://tenzir.com/docs/reference/functions/parse_avro.md) and the writer schema. Its reference includes a complete example.
+
+Our [Apache Avro](../../integrations/avro.md) integration explains the difference between binary datums and Avro Object Container Files and how to decode each format.
+
 ### Control the read offset
 
 The `offset` option determines where to start reading:
@@ -161,6 +176,7 @@ See [Collect](../collect.md#fetch-data-referenced-in-events) for the general col
 ## See also
 
 * [Parse string fields](../parse/parse-string-fields.md)
+* [Apache Avro](../../integrations/avro.md)
 * [Kafka](../../integrations/kafka.md)
 * [NATS](../../integrations/nats.md)
 * [AMQP](../../integrations/amqp.md)
