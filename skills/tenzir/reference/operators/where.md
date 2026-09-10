@@ -46,3 +46,5 @@ where src_ip in 10.10.5.0/25 and (orig_bytes > 1Mi or duration > 30min)
 * [`select`](https://tenzir.com/docs/reference/operators/select.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

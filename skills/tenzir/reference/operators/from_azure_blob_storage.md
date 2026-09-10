@@ -99,6 +99,10 @@ from_file "/data/*.json" {
 }
 ```
 
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+
 ## Examples
 
 ### Read every JSON file from a container
@@ -159,3 +163,5 @@ from_azure_blob_storage "abfs://data/**.json" {
 * [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md)
 * [Azure Authentication](../azure-authentication.md)
 * [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

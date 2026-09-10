@@ -87,6 +87,10 @@ from_file "/data/*.json" {
 }
 ```
 
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+
 ## Examples
 
 ### Read every JSON file from a bucket
@@ -131,3 +135,5 @@ from_google_cloud_storage "gs://security-logs/suricata/**.json" {
 * [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
 * [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md)
 * [Google Cloud Storage](../../integrations/google/cloud-storage.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

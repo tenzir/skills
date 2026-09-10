@@ -33,6 +33,10 @@ The subpipeline to run for every distinct key. The subpipeline receives the matc
 
 Inside the subpipeline, `$group` refers to the current key.
 
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `group` on several cores at once. It partitions the input by `over` so that every event of a group reaches the same instance, which caps the number of instances at `limit_partitions`, four by default.
+
 ## Examples
 
 ### Summarize each tenant independently
@@ -83,3 +87,5 @@ group tenant {
 * [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
 * [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

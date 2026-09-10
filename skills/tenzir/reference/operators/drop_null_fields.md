@@ -169,3 +169,5 @@ In this example:
 * [`select`](https://tenzir.com/docs/reference/operators/select.md)
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

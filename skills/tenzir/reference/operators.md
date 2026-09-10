@@ -753,6 +753,14 @@ Reads unified audit records from the Microsoft 365 Management Activity API.
 from_microsoft_365_activity auth={…}, content_types=["Audit.General"]
 ```
 
+### [from\_microsoft\_defender](operators/from_microsoft_defender.md)
+
+Runs a Microsoft Defender advanced hunting query and reads its results.
+
+```tql
+from_microsoft_defender "DeviceEvents | take 10", azure_auth={…}
+```
+
 ### [from\_microsoft\_graph](operators/from_microsoft_graph.md)
 
 Reads events from a Microsoft Graph collection.

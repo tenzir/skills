@@ -64,3 +64,5 @@ unroll y
 * [`flatten`](https://tenzir.com/docs/reference/functions/flatten.md)
 * [Enrich with threat intel](../../guides/enrich/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

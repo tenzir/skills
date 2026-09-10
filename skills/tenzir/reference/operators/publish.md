@@ -29,6 +29,10 @@ During shutdown, `subscribe` will wait for `publish` to drain all data before sh
 
 An optional topic for publishing events under. If unspecified, the operator publishes events to the topic `main`.
 
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `publish` on several cores at once, as long as `topic` is a constant. A topic that varies per event keeps `publish` on a single instance.
+
 ## Examples
 
 ### Publish Zeek connection logs under the fixed topic `zeek`
@@ -57,3 +61,5 @@ publish f"suricata.{event_type}"
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/route/split-and-merge-streams.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -101,6 +101,36 @@ Parallel instances work at different speeds, so a parallel pipeline can emit eve
 
 Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
 
+These operators run on multiple cores:
+
+<!-- Plain list markup (no `not-content`) so the items inherit the surrounding
+     docs list styling: same bullets, indent, and item spacing as an authored
+     list. -->
+
+* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
+* [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md)
+* [`discard`](https://tenzir.com/docs/reference/operators/discard.md)
+* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
+* [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md)
+* [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
+* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
+* [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)
+* [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
+* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
+* [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
+* [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
+* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`replace`](https://tenzir.com/docs/reference/operators/replace.md)
+* [`set`](https://tenzir.com/docs/reference/operators/set.md)
+* [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md)
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
+* [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
+* [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md)
+* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+
 Operators that group related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive events partitioned by their keys. Tenzir runs them on at most 4 instances, because partitioning splits batches and the resulting per-event overhead grows with the number of partitions. Raise or lower that bound with `limit_partitions`:
 
 ```tql

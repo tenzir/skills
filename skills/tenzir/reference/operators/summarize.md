@@ -284,3 +284,5 @@ Timer emission uses processing time. For fixed or hopping event-time ranges, use
 * [Shape aggregation results](../../guides/analyze/shape-aggregation-results.md)
 * [Window event streams](../../guides/analyze/window-event-streams.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -60,6 +60,12 @@ The read timeout must be smaller than the write and create timeouts.
 
 When specified, adds a field to each output event containing the number of events that were dropped since the last output for that key. Events that are the first occurrence of a key or that trigger output after expiration have a count of `0`.
 
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `deduplicate` on several cores at once. It partitions the input by `keys`, or by the entire event when you omit them, which caps the number of instances at `limit_partitions`, four by default.
+
+Setting `distance` keeps `deduplicate` on a single instance, because the distance counts events in arrival order.
+
 ## Examples
 
 ### Deduplicate entire events
@@ -191,3 +197,5 @@ The first event has a count of `0`. When the next event with `x: 1` is emitted a
 * [`sample`](https://tenzir.com/docs/reference/operators/sample.md)
 * [Detect over time windows](../../guides/detect/detect-over-time-windows.md)
 * [Deduplicate events](../../guides/optimize/deduplicate-events.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -52,3 +52,5 @@ drop role, info.id
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

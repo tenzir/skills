@@ -29,3 +29,5 @@ This operator is mainly used to test or benchmark pipelines.
 export
 discard
 ```
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

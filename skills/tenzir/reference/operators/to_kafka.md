@@ -39,7 +39,7 @@ Defaults to `this.print_ndjson()` when not specified.
 
 ### `key = string (optional)`
 
-Sets a fixed key for all messages.
+Sets a fixed key for all messages. This keeps the operator on a single instance, as described in [Parallelism](to_kafka.md#parallelism).
 
 ### `timestamp = time (optional)`
 
@@ -75,6 +75,14 @@ See [AWS Authentication](../aws-authentication.md) for a description of every fi
 ### `aws_region = string (optional)`
 
 The AWS region used to construct the MSK authentication URL. Required when connecting to MSK with IAM authentication.
+
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_kafka` sends through its own producer. Unlike [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md), the operator scales past the topic’s partition count, because any producer may write to any partition.
+
+Kafka orders messages only within a partition, and without a `key` the partitioner spreads messages across all of them, so a topic never reflects the pipeline’s event order. Parallelism does change what a single partition sees: instead of a contiguous run of events from one producer, it receives messages interleaved from all of them. Keep parallelism disabled if a consumer of the topic relies on the order within one partition.
+
+Setting `key` keeps the operator on a single instance. The key is one constant for the whole run, so every message hashes to the same partition. Independent producers would interleave their requests into that partition without gaining any throughput, because a partition accepts writes at the same rate no matter how many producers target it.
 
 ## Examples
 
@@ -121,3 +129,5 @@ to_kafka "metrics", message=this.print_ndjson(), key="server-01"
 * [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

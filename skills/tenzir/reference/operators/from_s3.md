@@ -115,6 +115,10 @@ from_file "/data/*.json" {
 }
 ```
 
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+
 ## Examples
 
 ### Read every JSON file from a bucket
@@ -176,3 +180,5 @@ from_s3 "s3://public-bucket/zeek/**.log", anonymous=true {
 * [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
 * [Amazon S3](../../integrations/amazon/s3.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

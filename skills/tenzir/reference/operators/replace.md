@@ -98,3 +98,5 @@ replace what=192.168.1.1, with="REDACTED"
 
 * [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

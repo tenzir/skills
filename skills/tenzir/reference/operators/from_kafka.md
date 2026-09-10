@@ -119,6 +119,18 @@ from_kafka "events",
 
 TLS settings for registry requests, using the same client TLS options as [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md). HTTPS uses TLS with certificate verification by default. Requires `schema_registry`.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), every instance of `from_kafka` joins the same consumer group. The broker splits the subscribed partitions among the instances, so only one instance reads a given partition at a time. Delivery stays at-least-once: a partition that moves between instances can replay messages that no instance committed yet.
+
+The topic’s partition count therefore caps how far the operator scales. Kafka assigns a partition to exactly one member of a group, so instances beyond the partition count receive an empty assignment and finish immediately. Reading a single-partition topic runs on one core no matter which degree you ask for. To read a topic with more parallelism, raise its partition count.
+
+The operator falls back to a single instance when an argument ties the run to one consumer:
+
+* `count`, because the limit applies per instance. Ten instances with `count=3` would emit 30 messages instead of 3.
+* `offset`, unless it is `"stored"`. Every other value is re-applied whenever a consumer is assigned a partition, so a partition moving between instances would rewind or skip ahead instead of resuming from the group’s committed offset.
+* `group.instance.id`, set either in `options` or in `kafka.yaml`, because it names one static member of the group. The broker fences instances that share the name as duplicates.
+
 ## Amazon MSK
 
 The operator supports [Amazon MSK](../../integrations/amazon/msk.md) with IAM authentication.
@@ -186,3 +198,5 @@ from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 * [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

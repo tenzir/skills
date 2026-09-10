@@ -228,3 +228,5 @@ sigma path="rules/windows.yml"
 * [Execute Sigma rules](../../guides/detect/execute-sigma-rules.md)
 * [Model detections in OCSF](../../guides/detect/model-detections-in-ocsf.md)
 * [Expressions](../expressions.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

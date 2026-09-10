@@ -172,9 +172,13 @@ Defaults to `5s`.
 
 ### `parallel = int (optional)`
 
-The maximum number of concurrent requests.
+The maximum number of concurrent requests per operator instance.
 
 Defaults to `50`. Must be at least `1`.
+
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `to_google_secops` on several cores at once. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
 
 ## Examples
 
@@ -312,3 +316,5 @@ to_google_secops \
 * [`to_google_cloud_logging`](https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md)
 * [Map to UDM](../../guides/normalize/map-to-udm.md)
 * [Google SecOps](../../integrations/google/secops.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

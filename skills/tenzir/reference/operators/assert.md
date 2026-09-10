@@ -59,3 +59,5 @@ assert @name == "ocsf.network_activity"
 * [`assert_throughput`](https://tenzir.com/docs/reference/operators/assert_throughput.md)
 * [`where`](https://tenzir.com/docs/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

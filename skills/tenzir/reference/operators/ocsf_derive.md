@@ -128,3 +128,5 @@ warning: found inconsistency between `activity_id` and `activity_name`
 * [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

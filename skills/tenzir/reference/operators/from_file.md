@@ -80,6 +80,10 @@ Defaults to `false`.
 
 The pipeline uses the same format and compression inference logic as other file sources.
 
+### Parallelism
+
+When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+
 ## Examples
 
 ### Read every `.csv` file from S3
@@ -124,3 +128,5 @@ from_file "/logs/*.json", max_age=1h
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
 * [Import into a node](../../guides/store/import-into-a-node.md)
 * [File](../../integrations/file.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.
