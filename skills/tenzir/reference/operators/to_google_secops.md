@@ -172,9 +172,9 @@ Defaults to `5s`.
 
 ### `parallel = int (optional)`
 
-The maximum number of concurrent requests per operator instance.
+The maximum number of concurrent requests per operator instance. Set `parallel=1` to send one request at a time.
 
-Defaults to `50`. Must be at least `1`.
+Defaults to `8`. Must be at least `1`.
 
 ### Parallelism
 

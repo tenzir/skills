@@ -16,7 +16,7 @@ to_google_cloud_logging log_id=string, [project=string, organization=string,
           billing_account=string, folder=string,] [resource_type=string,
           resource_labels=record, payload=string, severity=string,
           timestamp=time, service_credentials=string, batch_timeout=duration,
-          max_batch_size=int]
+          max_batch_size=int, parallel=int]
 ```
 
 ## Description
@@ -89,6 +89,18 @@ Maximum events to batch before sending.
 
 Defaults to `1k`.
 
+### `parallel = int (optional)`
+
+The maximum number of concurrent requests per operator instance.
+
+Defaults to `10`. Must be at least `1`.
+
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_google_cloud_logging` batches, authenticates, and sends independently with its own client and credentials. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+
+The API ingests every request on its own and gives no ordering guarantee across requests. Keep the effective concurrency in mind when tuning `parallel` against your project’s [Cloud Logging write quota](https://cloud.google.com/logging/quotas).
+
 ## Example
 
 ## Send logs, authenticating automatically via ADC
@@ -118,3 +130,5 @@ to_google_cloud_logging log_id="LOG_ID", project="PROJECT_ID"
 
 * [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
 * [Google Cloud Logging](../../integrations/google/cloud-logging.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

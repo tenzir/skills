@@ -13,7 +13,8 @@ Sends events to the Microsoft Azure Logs Ingestion API.
 
 ```tql
 to_azure_log_analytics tenant_id=string, client_id=string, client_secret=string,
-      dce=string, dcr=string, stream=string, [batch_timeout=duration]
+      dce=string, dcr=string, stream=string, [batch_timeout=duration,
+      parallel=int]
 ```
 
 ## Description
@@ -54,6 +55,18 @@ Maximum duration to wait for new events before sending a batch.
 
 Defaults to `5s`.
 
+### `parallel = int (optional)`
+
+The maximum number of concurrent requests per operator instance. Values greater than `1` let the operator send the next batch before the API responded to the previous one, at the cost of the API no longer receiving batches in the order the operator produced them. Set `parallel=1` to send one request at a time.
+
+Defaults to `8`. Must be at least `1`.
+
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_azure_log_analytics` accumulates its own batches and sends them with its own access token and connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+
+The Logs Ingestion API accepts every request on its own and gives no ordering guarantee across requests, so the table never reflects a strict pipeline order once more than one request is in flight.
+
 ## Examples
 
 ### Upload `custom.mydata` events to the stream `Custom-MyData`
@@ -73,3 +86,5 @@ to_azure_log_analytics tenant_id="00a00a00-0a00-0a00-00aa-000aa0a0a000",
 
 * [Map to ASIM](../../guides/normalize/map-to-asim.md)
 * [Sentinel & Log Analytics](../../integrations/microsoft/sentinel-log-analytics.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

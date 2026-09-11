@@ -65,7 +65,7 @@ Defaults to `1s`.
 
 The maximum number of concurrent `PutRecords` requests.
 
-Values greater than one overlap request round trips and multiply write throughput accordingly, but concurrent requests can complete out of order. If you use a fixed `partition_key` and depend on strict ordering within a shard, keep the default.
+Values greater than one overlap request round trips and multiply write throughput accordingly, but concurrent requests can complete out of order. `PutRecords` also does not guarantee record order with one request in flight, so this operator cannot provide strict ordering within a shard at any value.
 
 The value must be greater than zero.
 
@@ -101,6 +101,12 @@ Configures explicit AWS credentials or IAM role assumption. If not specified, th
 ```
 
 See [AWS Authentication](../aws-authentication.md) for a description of every field, the default credential chain, web identity configuration, and local authentication with the AWS CLI.
+
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_amazon_kinesis` sends records through its own Kinesis client.
+
+The `partition_key` routes records to shards but does not pin them to an instance: two events with the same partition key may be produced by different instances and therefore arrive in their shard out of the pipeline’s event order. The operator uses `PutRecords`, which does not guarantee record order even within one request. As a result, `to_amazon_kinesis` cannot guarantee ordering within a shard regardless of the pipeline’s or operator’s parallelism.
 
 ## Examples
 
@@ -163,3 +169,5 @@ to_amazon_kinesis "security-events",
 * [`from_amazon_kinesis`](https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
 * [Amazon Kinesis](../../integrations/amazon/kinesis.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

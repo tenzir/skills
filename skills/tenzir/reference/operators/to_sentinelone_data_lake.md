@@ -86,6 +86,12 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 For SentinelOne endpoints that use a private CA, set `tls={cacert: "/path/to/ca.pem"}`.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_sentinelone_data_lake` batches, authenticates, and sends independently with its own connection pool. Each instance sends at most 16 concurrent requests, so the pipeline-wide bound is 16 times the number of instances.
+
+The API ingests every request on its own and gives no ordering guarantee across requests.
+
 ## Examples
 
 ### Send events to SentinelOne Data Lake
@@ -131,3 +137,5 @@ If you already have structured data in Tenzir, prefer sending structured data, a
 
 * [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md)
 * [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

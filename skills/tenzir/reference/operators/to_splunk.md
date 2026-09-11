@@ -16,7 +16,7 @@ to_splunk url:string, hec_token=string,
           [event=any, raw=string, host=string, source=string,
           sourcetype=expr, index=expr, time=expr, fields=record,
           queue=string, include_nulls=bool, max_content_length=int,
-          buffer_timeout=duration, compress=bool, tls=record]
+          buffer_timeout=duration, parallel=int, compress=bool, tls=record]
 ```
 
 ## Description
@@ -145,11 +145,23 @@ The maximum amount of time for which the operator accumulates messages before se
 
 Defaults to `5s`.
 
+### `parallel = int (optional)`
+
+The maximum number of concurrent requests per operator instance. Values greater than `1` let the operator send the next message before the HEC endpoint responded to the previous one, at the cost of the endpoint no longer receiving messages in the order the operator produced them. Set `parallel=1` to send one request at a time.
+
+Defaults to `8`. Must be at least `1`.
+
 ### `compress = bool (optional)`
 
 Whether to compress the message body using standard gzip.
 
 Defaults to `true`.
+
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_splunk` accumulates its own messages and sends them with its own HEC token and connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+
+HEC indexes every request on its own and gives no ordering guarantee across requests, so the indexer never sees a strict pipeline order once more than one request is in flight.
 
 ## Examples
 
@@ -256,3 +268,5 @@ to_splunk "https://localhost:8088",
 
 * [Map to CIM](../../guides/normalize/map-to-cim.md)
 * [Splunk](../../integrations/splunk.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

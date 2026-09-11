@@ -90,6 +90,12 @@ If `true`, the broker returns an undeliverable message when no consumer can rece
 
 Defaults to `false`.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_amqp` opens its own connection and channel.
+
+The `routing_key` routes messages to queues but does not pin them to an instance: two events with the same routing key may be published by different instances and therefore arrive in their queue out of the pipeline’s event order. Keep parallelism disabled if a consumer relies on the order within one queue.
+
 ## Examples
 
 ### Send events to an AMQP exchange
@@ -122,3 +128,5 @@ to_amqp "amqp://broker/vhost", message=payload, options={
 * [`from_amqp`](https://tenzir.com/docs/reference/operators/from_amqp.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
 * [AMQP](../../integrations/amqp.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -133,6 +133,10 @@ Events that exceed CloudWatch event size or timestamp limits are skipped with a 
 
 For HTTP ingestion methods, the operator skips individual events larger than 256 KiB and batches accepted events into one HTTP request until the request reaches the 1 MiB limit.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_amazon_cloudwatch` sends log events through its own CloudWatch client. Concurrent writers to the same log stream are safe, but events from different instances may interleave out of the pipeline’s event order. CloudWatch sorts log events by timestamp, but when multiple events have the same timestamp, concurrent requests can affect their retrieval order.
+
 ## Examples
 
 ### Write events to a log stream
@@ -182,3 +186,5 @@ to_amazon_cloudwatch "/tenzir/events",
 
 * [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)
 * [Amazon CloudWatch Logs](../../integrations/amazon/cloudwatch.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

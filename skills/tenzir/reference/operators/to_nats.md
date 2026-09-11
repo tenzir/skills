@@ -79,6 +79,10 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 NATS uses the standard Tenzir `tls` record. The nats.c library does not expose a minimum TLS version setting, so `tls.min_version` is accepted for record compatibility but ignored with a warning.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_nats` publishes through its own connection. Messages from different instances interleave on the subject, so subscribers may observe events out of the pipeline’s event order. Keep parallelism disabled if a consumer of the subject relies on that order.
+
 ## Examples
 
 ### Publish a JSON event
@@ -119,3 +123,5 @@ to_nats "alerts",
 * [`from_nats`](https://tenzir.com/docs/reference/operators/from_nats.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
 * [NATS](../../integrations/nats.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -35,6 +35,10 @@ The Pub/Sub topic to publish to.
 
 A string to publish as the message.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_google_cloud_pubsub` publishes through its own connection. The operator sets no ordering keys, so Pub/Sub delivers messages without an ordering guarantee either way, and replicating the operator changes nothing for subscribers.
+
 ## Examples
 
 ### Send alert text to a topic
@@ -51,3 +55,5 @@ to_google_cloud_pubsub project_id="amazing-project-123456", topic_id="alerts-top
 
 * [`from_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub.md)
 * [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

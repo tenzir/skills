@@ -63,6 +63,10 @@ Configures explicit AWS credentials or IAM role assumption. If not specified, th
 
 See [AWS Authentication](../aws-authentication.md) for a description of every field, the default credential chain, web identity configuration, and local authentication with the AWS CLI.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_amazon_sqs` sends messages through its own SQS client. Standard queues give no ordering guarantee across messages, so replicating the operator weakens no guarantee that a single instance provided.
+
 ## Examples
 
 ### Send events to a queue
@@ -120,3 +124,5 @@ to_amazon_sqs "my-queue", aws_iam={
 * [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
 * [Amazon SQS](../../integrations/amazon/sqs.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

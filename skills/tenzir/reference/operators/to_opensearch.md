@@ -14,7 +14,8 @@ Sends events to a Bulk API compatible with OpenSearch.
 ```tql
 to_opensearch url:string, action=string, [index=string, id=string, doc=record,
   user=string, passwd=string, tls=record, include_nulls=bool,
-  max_content_length=int, buffer_timeout=duration, compress=bool]
+  max_content_length=int, buffer_timeout=duration, parallel=int,
+  compress=bool]
 ```
 
 ## Description
@@ -108,11 +109,23 @@ The maximum amount of time for which the operator accumulates events before send
 
 Defaults to `5s`.
 
+### `parallel = int (optional)`
+
+The maximum number of concurrent requests per operator instance. Values greater than `1` let the operator send the next request before the Bulk API responded to the previous one, at the cost of the endpoint no longer receiving requests in the order the operator produced them. Set `parallel=1` to send one request at a time.
+
+Defaults to `8`. Must be at least `1`.
+
 ### `compress = bool (optional)`
 
 Whether to compress the message body using standard gzip.
 
 Defaults to `true`.
+
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_opensearch` accumulates its own events and sends them over its own connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+
+The Bulk API applies every request on its own and gives no ordering guarantee across requests. Documents that repeatedly update the same `id` may therefore end up in a different final state than the pipeline order suggests, both with `parallel` greater than `1` and with parallelism enabled.
 
 ## Examples
 
@@ -130,3 +143,5 @@ to_opensearch "localhost:9200", action="create", index="main"
 * [Map to ECS](../../guides/normalize/map-to-ecs.md)
 * [OpenSearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.
