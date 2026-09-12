@@ -156,6 +156,12 @@ to_azure_blob_storage "abfss://results@account.dfs.core.windows.net/run.json",
 
 The [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md) operator uses an `auth` record with `tenant_id`, `client_id`, `client_secret`, `scope`, and `authority`. It supports client-secret authentication and does not accept `web_identity`.
 
+## Azure Log Analytics queries
+
+The experimental [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) operator requires an `azure_auth` record with `tenant_id`, `client_id`, and `client_secret`. It also accepts `scope` and `authority`; the default scope is `https://api.loganalytics.io/.default`. This differs from the Logs Ingestion API scope used by [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md).
+
+Grant the application query access to the target workspace, for example with the **Log Analytics Reader** role. The query operator doesn’t support ambient credentials or `web_identity`. It uses the shared client-credentials token provider rather than the Azure SDK credential chain.
+
 ## See Also
 
 * [AWS Authentication](aws-authentication.md)

@@ -7,17 +7,17 @@ section: "Docs"
 
 # Tune performance
 
-> This guide covers configuration options that affect node performance. You’ll learn how to tune demand scheduling, memory usage, and throughput settings.
+> This guide covers configuration options that affect node performance. You’ll learn how to tune buffering, batch sizes, memory usage, and parallelism.
 
-This guide covers configuration options that affect node performance. You’ll learn how to tune demand scheduling, memory usage, and throughput settings.
+This guide covers configuration options that affect node performance. You’ll learn how to tune buffering, batch sizes, memory usage, and parallelism.
 
 ## Demand
 
-Tenzir schedules operators asynchronously. Within a pipeline, every operator sends elements (events or bytes) downstream to the next operator, and demand upstream to the previous operator. If an operator has no downstream demand, Tenzir’s pipeline execution engine stops scheduling the operator.
+Back pressure limits how far producers can run ahead of consumers. The executor uses bounded channels between unfused jobs. When a channel fills, its producer waits for the consumer to make room. Operators inside a fused group hand batches directly to each other without an intermediate channel, as our [executor explanation](../../explanations/executor.md#jobs-and-channels) describes.
 
-The configuration section `tenzir.demand` controls how operators issue demand to their upstream operators. See the [example configuration](../../reference/node/configuration.md) for all available options.
+The configuration section `tenzir.demand` controls buffering for in-memory topics used by [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), not every channel in an execution plan. Our [example configuration](../../reference/node/configuration.md) lists the available options.
 
-For example, to minimize memory usage of pipelines at the cost of performance, set the following option:
+For example, to reduce topic buffering at the cost of throughput, set the following option:
 
 ```yaml
 tenzir:
@@ -31,11 +31,11 @@ Tenzir processes events in batches. Because the structured data has the shape of
 
 ### Size
 
-Most components in Tenzir operate on table slices, which makes the table slice size a fundamental tuning knob on the spectrum of throughput and latency. Small table slices allow for shorter processing times, resulting in more scheduler context switches and a more balanced workload. But the increased pressure on the scheduler comes at the cost of throughput. Conversely, a large table slice size creates more work for each actor invocation and makes them yield less frequently to the scheduler. As a result, other actors scheduled on the same thread may have to wait a little longer.
+Most components in Tenzir operate on table slices, so their size affects both throughput and latency. Smaller batches reduce the work in each processing step, but increase per-batch overhead. Larger batches amortize that overhead and can improve throughput, at the cost of more memory and longer processing steps.
 
 The option `tenzir.import.batch-size` sets an upper bound for the number of events per table slice. It defaults to 8,192.
 
-The option controls the maximum number of events per table slice, but not necessarily the number of events until a component forwards a batch to the next stage in a stream. The CAF streaming framework uses a credit-based flow-control mechanism to determine buffering of tables slices.
+The option limits batch sizes; it does not bound all buffering in a pipeline. Memory usage also depends on the number of channels, their capacity, and any state that operators retain.
 
 Caution
 
@@ -163,7 +163,7 @@ parallel 8, limit_partitions=8 {
 
 Each channel between two operators is a buffer, so splitting a pipeline into several lanes would multiply both the number of channels and the data sitting in them. Tenzir avoids that by fusing the operators of a lane into a single group. Operators inside a group hand batches to each other directly, with no channel in between, and a group carries one batch through all of its operators before it consumes the next one:
 
-Tenzir fuses by default, even for pipelines that never opt into parallelism, because it lowers memory usage for the vast majority of pipelines, which are not CPU-bound. The trade-off is a lower throughput ceiling for the pipelines that are: fused operators hand off one batch at a time instead of overlapping work across actors, so a chain of otherwise CPU-bound operators can lose up to 40% of its peak throughput compared to running unfused. Pipelines that hit this ceiling benefit from an explicit `// parallelism: <n>` directive, which spreads the work across `<n>` instances again.
+Tenzir fuses by default, even for pipelines that never opt into parallelism, because it lowers memory usage for the vast majority of pipelines, which are not CPU-bound. The trade-off is a lower throughput ceiling for the pipelines that are: fused operators hand off one batch at a time instead of overlapping work across channel-connected jobs, so a chain of otherwise CPU-bound operators can lose up to 40% of its peak throughput compared to running unfused. Pipelines that hit this ceiling benefit from an explicit `// parallelism: <n>` directive, which spreads the work across `<n>` instances again.
 
 To opt a pipeline out of fusing entirely, add the `fuse=none` option to the parallelism directive:
 

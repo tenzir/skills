@@ -116,4 +116,4 @@ The `odata` options apply only to the initial delta request. Microsoft Graph dec
 * [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md)
 * [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
 * [Microsoft Defender](defender.md)
-* [Sentinel & Log Analytics](sentinel-log-analytics.md)
+* [Microsoft Sentinel](sentinel.md)

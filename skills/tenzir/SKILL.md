@@ -362,15 +362,17 @@ Run stored events through live pipelines again.
 
 Inspect node, pipeline, and host behavior.
 
-#### [Overview](guides/troubleshooting.md)
-
-Diagnose pipeline failures, resource growth, and node connectivity.
-
 ##### [Inspect a node](guides/observability/inspect-a-node.md)
 
 ##### [Collect metrics](guides/observability/collect-metrics.md)
 
+#### [Overview](guides/troubleshooting.md)
+
+Diagnose compilation issues, pipeline failures, resource growth, and node connectivity.
+
 ##### [Debug field values](guides/troubleshooting/debug-field-values.md)
+
+##### [Inspect the compilation output](guides/troubleshooting/inspect-compilation-output.md)
 
 ##### [Investigate slow pipelines](guides/troubleshooting/investigate-slow-pipelines.md)
 
@@ -528,7 +530,11 @@ The platform provides fleet management for nodes.
 
 #### [Language](explanations/language.md)
 
-The Tenzir Query Language (TQL) is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.
+Understand TQL's dataflow model, streaming and batch semantics, and support for events with different schemas.
+
+#### [Executor](explanations/executor.md)
+
+Understand how Tenzir compiles TQL into an execution plan and runs operators with fused handoffs, channels, subpipelines, and parallel jobs.
 
 ### Concepts
 
@@ -926,6 +932,10 @@ Send, receive, and manage messages between distributed applications.
 
 Send and receive messages between systems using a standardized, protocol-based approach.
 
+#### [Anthropic Claude Code integration](integrations/anthropic.md)
+
+Turn coding agent activity into OCSF security telemetry: commands, files, tools, and who approved them.
+
 #### [Apache Avro integration](integrations/avro.md)
 
 Decode schema-driven Apache Avro binary data from streams, files, and message brokers.
@@ -949,6 +959,10 @@ Store, retrieve, and manage unstructured data at scale.
 #### [Azure Event Hubs integration](integrations/microsoft/azure-event-hubs.md)
 
 Real-time data streaming platform and event ingestion service.
+
+#### [Azure Log Analytics integration](integrations/microsoft/azure-log-analytics.md)
+
+Query workspace data and send events to Azure Monitor Logs with Tenzir.
 
 #### [Cisco integration](integrations/cisco.md)
 
@@ -1034,6 +1048,10 @@ Detect, prevent, and respond to security threats across endpoints and networks.
 
 Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
 
+#### [Microsoft Sentinel integration](integrations/microsoft/sentinel.md)
+
+Prepare and route security telemetry for Microsoft's cloud-native SIEM.
+
 #### [Microsoft SQL Server integration](integrations/microsoft/sql-server.md)
 
 Provides audit logs for database activity, logins, and errors.
@@ -1062,6 +1080,10 @@ Collect and process NetFlow v5, NetFlow v9, and IPFIX flow telemetry.
 
 Acquire packets from the network and process them with pipelines.
 
+#### [OpenAI Codex integration](integrations/openai.md)
+
+Turn coding agent activity into OCSF security telemetry: commands, files, sandbox verdicts, and model traffic.
+
 #### [OpenSearch integration](integrations/opensearch.md)
 
 Search, analyze, and visualize data with a distributed, open-source platform.
@@ -1081,10 +1103,6 @@ Receive Syslog messages with application-level acknowledgements, retransmission,
 #### [rsyslog integration](integrations/rsyslog.md)
 
 Forward Syslog to Tenzir with RELP acknowledgements, retries, queues, and optional mutual TLS.
-
-#### [Sentinel & Log Analytics integration](integrations/microsoft/sentinel-log-analytics.md)
-
-A rapidly growing cloud-native SIEM, tightly integrated with the Azure ecosystem and a strategic destination for Microsoft-centric organizations.
 
 #### [SentinelOne Data Lake integration](integrations/sentinelone-data-lake.md)
 

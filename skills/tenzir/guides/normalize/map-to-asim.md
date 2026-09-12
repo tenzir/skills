@@ -57,5 +57,5 @@ These rules are specific to ASIM:
 * [Map to UDM](map-to-udm.md)
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
-* [Sentinel & Log Analytics](../../integrations/microsoft/sentinel-log-analytics.md)
+* [Microsoft Sentinel](../../integrations/microsoft/sentinel.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

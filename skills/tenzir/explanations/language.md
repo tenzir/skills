@@ -1,5 +1,6 @@
 ---
 title: "Language"
+description: "Understand TQL's dataflow model, streaming and batch semantics, and support for events with different schemas."
 canonical: https://tenzir.com/docs/explanations/language
 source: https://tenzir.com/docs/explanations/language.md
 section: "Docs"
@@ -7,98 +8,83 @@ section: "Docs"
 
 # Language
 
-> The Tenzir Query Language (TQL) is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.
+> Understand TQL's dataflow model, streaming and batch semantics, and support for events with different schemas.
 
-The **Tenzir Query Language (TQL)** is a dataflow language designed for processing of unstructured byte-streams and semi-structured events.
+The **Tenzir Query Language (TQL)** is a dataflow language for processing unstructured byte streams and structured events. A TQL program describes [pipelines](pipeline.md) that collect, parse, transform, and route data without requiring you to manage threads or buffers.
 
-TQL is built on a powerful streaming execution engine, but it shields you from the complexity of low-level data processing. It provides a rich set of building blocks to create intricate [pipelines](pipeline.md) that collect, transform, and route data. You can also embed your TQL programs into reusable [packages](packages.md) to create one-click deployable use cases.
+TQL sits between the execution engine and the reusable integrations and packages that build on it:
 
-<!--?xml version="1.0" standalone="no"?-->
+The [streaming executor](executor.md) plans a directed acyclic graph (DAG) and processes typed events in columnar batches. TQL supplies the operators, functions, and expressions that describe the work. Our [integrations](https://tenzir.com/product/integrations.md) connect those pipelines to systems such as Syslog, Kafka, S3, Google Cloud, and Azure. Our [packages](packages.md) bundle reusable components for data sources, threat intelligence, and OCSF mappings into deployable use cases.
+
+A sequence of operators in the source does not imply one thread per operator. The executor decides how to group operators, where to create parallel instances, and how data moves between them. Operators in a fused group hand batches directly to each other; bounded channels connect jobs across unfused boundaries. These execution choices are separate from the language constructs you use to express a pipeline.
 
 ## Why TQL?
 
-Security practitioners need to collect, transform, and analyze telemetry without the complexity of general-purpose data engineering tools. We created TQL to meet this need by synthesizing the best ideas from languages that security teams already use:
+Security data often needs several steps before it can support a detection or investigation: decode a payload, extract fields, normalize types, enrich records, and send the result to another system. TQL expresses those steps in dataflow order.
 
-* **Splunk SPL’s familiarity**: Operators that security analysts recognize
-* **Kusto’s power**: Rich aggregation and time-series capabilities
-* **Unix pipes’ composability**: Small, focused operators that chain together
-* **jq’s flexibility**: Powerful transformations on semi-structured data
+Its pipeline composition is familiar if you’ve used Unix pipes, Splunk SPL, or Kusto Query Language. Unlike shell pipelines that primarily exchange text, TQL operators can exchange either bytes or typed events. Functions transform nested records and lists as well as scalar values.
 
-TQL combines the power of a streaming execution engine with an intuitive pipeline syntax that mirrors how practitioners think about data processing. This approach is validated by nearly every modern SIEM (Splunk SPL, Elastic ES|QL, Microsoft KQL) and offers several advantages over traditional query languages like SQL.
+The pipeline model supports several ways to develop and maintain that work:
 
-Why not SQL?
+* Build a pipeline incrementally, adding a transformation after checking its input.
+* Inspect intermediate results by removing or commenting out downstream operators, as our guide on [debugging field values](../guides/troubleshooting/debug-field-values.md#inspect-the-pipeline-step-by-step) demonstrates.
+* Reuse transformations in user-defined operators and packages instead of repeating them across pipelines.
 
-While SQL is the standard for relational databases, its design creates friction in security operations:
+SQL remains useful for querying tables. TQL focuses on composing dataflows that can collect bytes, parse events, enrich records, and deliver results in one program. This is a difference in focus, not a requirement to give up the SQL systems that produce or consume your data.
 
-* **Inside-out thinking**: SQL’s rigid `SELECT ... FROM ... WHERE` structure forces you to specify the output format before defining transformations, leading to complex nested subqueries.
-* **Debugging complexity**: Tracing data flow through nested CTEs and subqueries is cumbersome when investigating incidents under time pressure.
-* **Schema rigidity**: SQL assumes uniform, predefined schemas - a poor fit for the heterogeneous mix of logs, alerts, and telemetry that security teams process daily.
+## Core concepts
 
-The pipeline model offers a more natural workflow:
-
-* **Sequential reasoning**: Data flows top-to-bottom, matching your mental model.
-* **Incremental construction**: Build queries step-by-step, testing at each stage.
-* **Isolated debugging**: Inspect intermediate results by commenting out downstream operators.
-* **Composability**: Combine simple operators into sophisticated workflows.
-
-## Core Concepts
+Two properties shape how you write TQL: the same operators can process finite and ongoing inputs, and one pipeline can carry events with different schemas.
 
 ### Unified streaming and batch processing
 
-TQL seamlessly handles both real-time and historical analysis. Unlike traditional tools that require separate codebases for streaming and batch workflows, TQL uses the same pipeline logic for both.
-
-Process archived data from a data lake:
+TQL uses the same downstream operators for archived data and live streams. For example, a Parquet archive with a typed `timestamp` field can feed a filter directly:
 
 ```tql
-from_file "s3://bucket/logs/2024-01/*.parquet"
-where timestamp > 2024-01-15T00:00:00
+from_file "s3://bucket/logs/2026-01/*.parquet" { read_parquet }
+where timestamp >= 2026-01-15T00:00:00Z
 ```
 
-Or monitor a live stream from a message bus:
+The [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) source instead produces a `message` string by default. For JSON messages, parse the payload and convert its timestamp string before applying the same filter:
 
 ```tql
-from_kafka "topic"
-where timestamp > now() - 1h
+from_kafka "logs"
+this = message.parse_json()
+timestamp = timestamp.time()
+where timestamp >= 2026-01-15T00:00:00Z
 ```
 
-TQL draws inspiration from Unix pipes, where data flows through a sequence of transformations. But unlike shell pipelines that primarily work on text, TQL operates on both unstructured data (bytes) and structured data (events).
+A finite source ends when it exhausts its input; a live source can wait for future events. Streaming input does not make every operation incremental. For example, [`sort`](https://tenzir.com/docs/reference/operators/sort.md) buffers its input and needs it to end before it can emit a globally sorted result.
 
 ### Multi-schema philosophy
 
-Unlike traditional databases that require strict schemas, TQL embraces **heterogeneous data** as a first-class concept. Real-world data pipelines process multiple event types simultaneously - firewall logs, DNS queries, authentication events - each with different schemas.
+A pipeline can carry **heterogeneous data**: firewall logs, DNS queries, and authentication events with different fields and types. Each event still has a schema. TQL does not require all events in a pipeline to share one schema.
 
-TQL’s operators are **polymorphic**, adapting to different schemas at runtime:
+Operators resolve fields against the schemas they receive. This pipeline filters two event shapes without requiring both to contain the same fields:
 
 ```tql
-// Single pipeline processing multiple event types
-from_file "mixed_security_logs.json"
-where timestamp > now() - 1h
+from {kind: "network", src_ip: 192.0.2.10, severity: "high"},
+     {kind: "auth", username: "alice", risk_score: 0.9}
 where severity? == "high" or risk_score? > 0.8
-select \
-  timestamp,
-  event_type=@name,            // Capture the schema name
-  message,                     // Common field
-  src_ip?,                     // Present in network events
-  username?,                   // Present in auth events
-  dns_query?                   // Present in DNS events
+select kind, src_ip?, username?
 ```
 
-This philosophy enables powerful patterns:
+```tql
+{kind: "network", src_ip: 192.0.2.10, username: null}
+{kind: "auth", src_ip: null, username: "alice"}
+```
 
-* **Type-aware aggregation**: Group and aggregate across different schemas
-* **Unified processing**: Apply common transformations to diverse data
-* **Schema evolution**: Handle changing schemas without pipeline updates
-* **Mixed-source correlation**: Join events from different systems
+The optional field access `?` suppresses a warning when a field is absent and returns `null`. It does not convert incompatible values: a numeric comparison still requires a suitable type. Our [type system reference](../reference/types.md) describes the available types, and our [guide on transforming values](../guides/shape/transform-values.md) shows how to convert them.
 
-## Language Structure
+This model lets you apply common transformations while retaining source-specific fields. Schema changes can still require pipeline changes when a field’s type or meaning changes.
 
-The language documentation is organized into four main sections:
+## Language structure
 
-* [**Types**](../reference/types.md): TQL’s type system with domain-specific types for security and network data
-* [**Expressions**](../reference/expressions.md): The computational core of TQL, from literals to complex evaluations
-* [**Statements**](../reference/statements.md): Control and structure with bindings, operators, and control flow
-* [**Programs**](../reference/programs.md): Complete data processing workflows and execution model
+Our language reference separates the building blocks from complete programs:
 
-Learn Idiomatic TQL
+* [Types](../reference/types.md) define values, including domain-specific types for security and network data.
+* [Expressions](../reference/expressions.md) compute values, from literals and field access to function calls.
+* [Statements](../reference/statements.md) bind names, invoke operators, and control dataflow.
+* [Programs](../reference/programs.md) combine statements into complete TQL programs.
 
-Ready to get hands-on? Read the [tutorial on learning idiomatic TQL](../tutorials/learn-idiomatic-tql.md), with concrete examples and best practices.
+Our [tutorial on learning idiomatic TQL](../tutorials/learn-idiomatic-tql.md) puts these building blocks together with runnable examples. Our [executor explanation](executor.md) describes how a program becomes a running dataflow.

@@ -13,7 +13,7 @@ A Tenzir **pipeline** is a chain of **operators** that represents a dataflow. Op
 
 Our pipelines have 3 types of operators: **inputs** that produce data, **outputs** that consume data, and **transformations** that do both:
 
-You write pipelines in the [Tenzir Query Language (TQL)](language.md), a language that we developed from the ground up to concisely describe such dataflows.
+You write pipelines in the [Tenzir Query Language (TQL)](language.md), a language that we developed from the ground up to concisely describe such dataflows. Our explanation of the [pipeline executor](executor.md) covers how Tenzir runs them, including operator fusion and parallel execution.
 
 Learn TQL
 
@@ -42,18 +42,6 @@ The schema variance begins early in the data flow, where parsers emit events wit
 Some operators only work with exactly one instance per schema internally, such as [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md), which first writes a header and then all subsequent rows have to adhere to the emitted schema. Such operators cannot handle events with changing schemas.
 
 It’s important to mention that most of the time you don’t have to worry about schemas. They are there for you when you want to work with them, but it’s often enough to just specified the fields that you want to work with, e.g., `where id.orig_h in 10.0.0.0/8`, or `select src_ip, dest_ip, proto`. Schemas are inferred automatically in parsers, but you can also seed a parser with a schema that you define explicitly.
-
-## Parallel Execution
-
-The operators of a pipeline always run concurrently: while one operator parses a batch, the next one already transforms the previous batch. Beyond that, Tenzir can run a *single* operator on multiple cores by replicating it into several instances that each process a share of the batches.
-
-The planner rewrites the single chain of operators into several lanes that run side by side, fanning batches out across the instances, exchanging them where an operator needs it, and gathering them again at the end. An expensive operator then stops being a single-core bottleneck, because several cores work on it at once:
-
-Which operators Tenzir replicates depends on what they need to see. An operator that treats every event on its own, such as [`where`](https://tenzir.com/docs/reference/operators/where.md), an assignment, or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md), works on any batch it receives, so Tenzir hands its instances whichever batches are available.
-
-Operators that combine related events need more care. [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) only produce the right result if every event of a group reaches the same instance. Tenzir therefore partitions the stream by the operator’s key fields and routes each event to the instance that owns its key.
-
-Parallelism is off by default. You opt in per pipeline with a `// parallelism:` comment, as the guide on [tuning performance](../guides/node-setup/tune-performance.md#parallelism) shows.
 
 ## Optimization
 

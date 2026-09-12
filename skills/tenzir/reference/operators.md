@@ -681,6 +681,14 @@ Reads one or multiple files from Azure Blob Storage.
 from_azure_blob_storage "abfs://container/data/**.json"
 ```
 
+### [from\_azure\_log\_analytics](operators/from_azure_log_analytics.md)
+
+Runs a KQL query against an Azure Log Analytics workspace and reads its results.
+
+```tql
+from_azure_log_analytics "SecurityEvent | take 10", workspace_id="…", azure_auth={…}
+```
+
 ### [from\_clickhouse](operators/from_clickhouse.md)
 
 Reads rows or metadata from ClickHouse.

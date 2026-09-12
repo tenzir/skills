@@ -19,7 +19,7 @@ to_azure_log_analytics tenant_id=string, client_id=string, client_secret=string,
 
 ## Description
 
-Sends events to the Microsoft [Azure Logs Ingestion API](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview).
+Sends events to the Microsoft [Azure Logs Ingestion API](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview). To query data already stored in a workspace, use the experimental [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) operator instead. Querying requires workspace read permissions, not the DCR permissions used for ingestion.
 
 The `to_azure_log_analytics` operator makes it possible to upload events to [supported tables](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables) or to [custom tables](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/create-custom-table?tabs=azure-portal-1%2Cazure-portal-2%2Cazure-portal-3#create-a-custom-table) in Microsoft Azure.
 
@@ -85,6 +85,6 @@ to_azure_log_analytics tenant_id="00a00a00-0a00-0a00-00aa-000aa0a0a000",
 ## See Also
 
 * [Map to ASIM](../../guides/normalize/map-to-asim.md)
-* [Sentinel & Log Analytics](../../integrations/microsoft/sentinel-log-analytics.md)
+* [Azure Log Analytics](../../integrations/microsoft/azure-log-analytics.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

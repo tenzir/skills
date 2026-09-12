@@ -157,7 +157,9 @@ A `let` statement introduces a constant that gets substituted during [expression
 
 ## `if`
 
-The `if` statement is a primitive designed to route data based on a predicate. Its typical usage follows the syntax `if <expression> { … } else { … }`, where two subpipelines are specified within the braces. When its expression evaluates to `true`, the first pipeline processes the event. Conversely, when it evaluates to `false` or `null`, it is routed through the second one without a warning. In this predicate position, `null` is falsy. This describes which branch Tenzir takes and does not convert `null` into the boolean value `false`. Other non-boolean values produce a type warning and follow the second branch.
+The `if` statement is a primitive designed to route data based on a predicate. Its typical usage follows the syntax `if <expression> { … } else { … }`, where two subpipelines are specified within the braces. Because `if` routes incoming events, it cannot be the first statement in a pipeline.
+
+When its expression evaluates to `true`, the first pipeline processes the event. Conversely, when it evaluates to `false` or `null`, it is routed through the second one without a warning. In this predicate position, `null` is falsy. This describes which branch Tenzir takes and does not convert `null` into the boolean value `false`. Other non-boolean values produce a type warning and follow the second branch.
 
 After the `if` statement the event flow from both pipelines is joined together. The `else` clause can be omitted, resulting in the syntax `if <expression> { … }`, which has the same behavior as `if <expression> { … } else {}`. Additionally, the `else` keyword can be followed by another `if` statement, allowing for chained `if` statements. This chaining can be repeated, enabling complex conditional logic to be implemented.
 
