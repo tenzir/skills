@@ -40,6 +40,19 @@ if [[ "$validate_marketplace" != true ]]; then
   exit 0
 fi
 
+# The local catalog exposes the root plugin, whose identity must agree with
+# both clients' manifests before either client installs it.
+jq -e --slurpfile claude .claude-plugin/plugin.json \
+  --slurpfile codex .codex-plugin/plugin.json '
+  (.plugins | length) == 1 and
+  .plugins[0].source == "./" and
+  .plugins[0].name == $claude[0].name and
+  .plugins[0].name == $codex[0].name
+' .claude-plugin/marketplace.json >/dev/null || {
+  echo "The marketplace must expose one root plugin matching both manifests."
+  exit 1
+}
+
 local_skills=$(mktemp)
 marketplace_skills=$(mktemp)
 trap 'rm -f "$local_skills" "$marketplace_skills"' EXIT
