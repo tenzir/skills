@@ -1,7 +1,15 @@
 {
+  "name": "tenzir-skills",
+  "owner": {
+    "name": "Tenzir",
+    "url": "https://tenzir.com"
+  },
+  "description": "Tenzir skills grouped by topic",
   "plugins": [
     {
-      "name": "🧬 Schemas",
+      "name": "schemas",
+      "displayName": "🧬 Schemas",
+      "source": "./",
       "skills": [
         "./skills/tenzir-asim",
         "./skills/tenzir-cef",
@@ -14,7 +22,9 @@
       ]
     },
     {
-      "name": "🛡️ Tenzir Users",
+      "name": "tenzir-users",
+      "displayName": "🛡️ Tenzir Users",
+      "source": "./",
       "skills": [
         "./skills/tenzir"
       ]
