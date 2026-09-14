@@ -1,7 +1,15 @@
 {
+  "name": "tenzir-skills",
+  "owner": {
+    "name": "Tenzir",
+    "url": "https://tenzir.com"
+  },
+  "description": "Tenzir and security-data skills",
   "plugins": [
     {
-      "name": "🧬 Schemas",
+      "name": "skills",
+      "displayName": "Tenzir Skills",
+      "source": "./",
       "skills": [
         "./skills/tenzir-asim",
         "./skills/tenzir-cef",
@@ -10,12 +18,7 @@
         "./skills/tenzir-edm",
         "./skills/tenzir-leef",
         "./skills/tenzir-ocsf",
-        "./skills/tenzir-udm"
-      ]
-    },
-    {
-      "name": "🛡️ Tenzir Users",
-      "skills": [
+        "./skills/tenzir-udm",
         "./skills/tenzir"
       ]
     }

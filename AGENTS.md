@@ -9,10 +9,10 @@ The `skills/` tree mixes hand-maintained skills with generated ones, and the
 surrounding metadata files keep the collection installable, discoverable, and
 internally consistent.
 
-We use `.claude-plugin/marketplace.json` to put the skills into different
-groups. This is for `npx skills` to pick this up and _not_ a claude-only
-mechanism. Every skill directory in `skills/` must be referenced exactly once in
-this file.
+The `.claude-plugin/marketplace.json` catalog exposes the root plugin as
+`skills`, matching both plugin manifests. Its explicit skill list also supports
+`npx skills` discovery. Reference every skill directory in `skills/` exactly once
+in this entry.
 
 The following skills are generated or synced from another repository and must
 not be edited by hand here:
