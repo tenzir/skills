@@ -46,6 +46,12 @@ The `requirements` flag can be used to pass additional package dependencies in t
 
 The string is passed verbatim to `pip install`. To add multiple dependencies, separate them with a space: `requirements="foo bar"`.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `python` runs its own Python subprocess. Events can therefore reach separate interpreter sessions and finish in a different order.
+
+Every subprocess maintains independent interpreter and module state. External side effects from the instances can overlap and interleave. Use a pipeline degree of one when your Python program requires one continuous interpreter session or ordered side effects.
+
 ## Secrets
 
 By default, the `python` operator does not accept secrets. If you want to allow usage of secrets in the `code` argument, you can enable the configuration option `tenzir.allow-secrets-in-escape-hatches`.
@@ -94,3 +100,5 @@ python r#"
 ## See Also
 
 * [`shell`](https://tenzir.com/docs/reference/operators/shell.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

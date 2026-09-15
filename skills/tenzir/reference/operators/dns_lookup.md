@@ -64,6 +64,10 @@ Where each record has the structure:
 
 If an individual lookup fails or times out, the result field will be `null`. If Tenzir cannot initialize DNS resolution at all, the operator emits an error and stops instead of writing `null` results.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `dns_lookup` resolves its input independently and maintains its own DNS cache. Separate instances can therefore request the same name more than once. The operator doesn’t impose a lookup concurrency limit.
+
 ## Examples
 
 ### Reverse DNS lookup
@@ -151,3 +155,5 @@ dns_lookup destination, result=dest_ips
 ## See Also
 
 * [`set`](https://tenzir.com/docs/reference/operators/set.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

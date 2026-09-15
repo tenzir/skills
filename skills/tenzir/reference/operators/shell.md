@@ -27,6 +27,10 @@ Lots of escaping?
 
 Try using raw string literals: `r#"echo "i can use quotes""#`.
 
+## Parallelism
+
+The `shell` operator stays on a single instance in a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism). One subprocess consumes the complete input byte stream. Splitting the stream among several commands would change command state, side effects, and output.
+
 ## Secrets
 
 By default, the `shell` operator does not accept secrets. If you want to allow usage of secrets in the `cmd` argument, you can enable the configuration option `tenzir.allow-secrets-in-escape-hatches`.

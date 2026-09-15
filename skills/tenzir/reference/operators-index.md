@@ -145,6 +145,7 @@
 - [buffer](operators/buffer.md): An in-memory buffer to improve handling of data spikes in upstream operators.
 - [cache](operators/cache.md): An in-memory cache shared between pipelines.
 - [measure](operators/measure.md): Replaces the input with metrics describing the input.
+- [quiet](operators/quiet.md): Suppresses runtime warnings from a pipeline.
 - [strict](operators/strict.md): Treats all warnings as errors.
 - [unordered](operators/unordered.md): Removes ordering assumptions from a pipeline.
 

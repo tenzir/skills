@@ -919,6 +919,14 @@ Replaces the input with metrics describing the input.
 measure
 ```
 
+### [quiet](operators/quiet.md)
+
+Suppresses runtime warnings from a pipeline.
+
+```tql
+quiet { assert false, message="this warning will be suppressed" }
+```
+
 ### [strict](operators/strict.md)
 
 Treats all warnings as errors.

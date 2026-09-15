@@ -45,6 +45,12 @@ When set, delivery metadata is attached at the given field path. Each event then
 }
 ```
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `from_google_cloud_pubsub` creates a subscriber for the same subscription. Pub/Sub distributes messages among the subscribers, which lets the pipeline pull messages concurrently.
+
+Every subscriber requests an acknowledgement after placing a message in its local queue, before the pipeline processes the corresponding event. A message can therefore be lost if the pipeline stops before processing it. Pub/Sub can still redeliver a message when the acknowledgement doesn’t succeed.
+
 ## Examples
 
 ### Consume messages and parse JSON
@@ -75,3 +81,5 @@ from_google_cloud_pubsub project_id="amazing-project-123456", subscription_id="m
 
 * [`to_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub.md)
 * [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -123,6 +123,20 @@ If `true`, the broker expects acknowledgements for messages. If `false`, the bro
 
 Defaults to `false`.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), `from_amqp` can attach several consumers to the same classic or quorum queue. The broker can distribute messages among these consumers.
+
+The operator runs multiple instances only when all of these conditions hold:
+
+* `queue` names a non-empty queue.
+* `exclusive` and `passive` are `false`.
+* `queue_arguments` explicitly sets `"x-queue-type"` to `"classic"` or `"quorum"`.
+
+All other configurations stay on a single instance. In particular, a missing queue type isn’t sufficient because the broker can default to a stream queue. Stream consumers maintain independent offsets and would each receive the same messages.
+
+Setting `"x-single-active-consumer": true` still permits multiple operator instances, but RabbitMQ delivers messages to only one of them at a time. This setting preserves delivery semantics but doesn’t improve throughput.
+
 ## Examples
 
 ### Receive messages from an AMQP queue
@@ -166,3 +180,5 @@ from_amqp "amqp://broker/vhost",
 * [`to_amqp`](https://tenzir.com/docs/reference/operators/to_amqp.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
 * [AMQP](../../integrations/amqp.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

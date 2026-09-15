@@ -19,6 +19,8 @@ strict { … }
 
 The `strict` operator takes a pipeline as an argument and treats all warnings emitted by the execution of the pipeline as errors. This is useful when you want to stop a pipeline on warnings or unexpected diagnostics.
 
+To suppress runtime warnings instead, use the experimental [`quiet`](https://tenzir.com/docs/reference/quiet/) operator.
+
 ## Examples
 
 ### Stop the pipeline on any warnings when sending logs

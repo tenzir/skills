@@ -69,6 +69,10 @@ Defaults to `10min`, or the value specified in the `tenzir.cache.lifetime` optio
 
 If set, defines an upper bound for the lifetime of the cache. Unlike the `read_timeout` option, this does not refresh when the cache is accessed.
 
+## Parallelism
+
+The `cache` operator stays on a single instance in a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism). Multiple writers would compete for the cache’s single writer identity, while multiple readers would each replay the full cache.
+
 ## Examples
 
 ### Cache the results of an expensive query

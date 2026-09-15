@@ -35,6 +35,12 @@ The subpipeline to spawn for each event. Must start with a source.
 
 Inside the subpipeline, `$this` refers to the record of the current input event.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `each` owns and runs its own child subpipelines. The `parallel` argument limits each instance separately. At a pipeline degree of `N`, up to `N * parallel` child subpipelines can therefore run at once.
+
+For example, `// parallelism: 4` together with `each parallel=10` permits up to 40 concurrent child subpipelines. Keep this combined limit in mind when a child subpipeline connects to a service with concurrency or rate limits.
+
 ## Examples
 
 ### Run a lookup per event
@@ -95,3 +101,5 @@ each {
 * [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
 * [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.

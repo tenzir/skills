@@ -52,6 +52,10 @@ The style of the enriched value:
 
 Defaults to `plain`.
 
+## Parallelism
+
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), multiple instances of `context_enrich` issue lookups concurrently. Every lookup is an atomic read from the shared context. Context updates can take effect between lookups, as they can with a single instance.
+
 ## Examples
 
 ### Enrich with a lookup table
@@ -144,3 +148,5 @@ context_enrich "ctx", key=x, into=enrichments, mode="append"
 * [Enrich with asset inventory](../../guides/enrich/enrich-with-asset-inventory.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 * [Enrichment](../../explanations/enrichment.md)
+
+Parallelizable: a parallel pipeline may run this operator on several cores at once.
