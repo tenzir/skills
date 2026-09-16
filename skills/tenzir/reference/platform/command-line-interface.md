@@ -235,7 +235,7 @@ Outputs the list of secrets in JSON format when used with the `tenzir-platform s
 
 You can configure workspaces to use external secret stores instead of the Tenzir Platform’s built-in secret store.
 
-Currently, the platform supports [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) and [HashiCorp Vault](https://www.vaultproject.io/) as external stores.
+Currently, the platform supports [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) and [HashiCorp Vault](https://www.vaultproject.io/), and [Azure Key Vault](https://azure.microsoft.com/products/key-vault) as external stores.
 
 By default, the platform mounts external secret stores as read-only. You can’t add or update secrets from the CLI or web interface. Some external secret store implementations may offer write access options.
 
@@ -255,6 +255,18 @@ tenzir-platform secret store add vault
     (--token=<token> | --role-id=<role_id> --secret-id=<secret_id>)
     [--name=<name>]
     [--namespace=<namespace>]
+tenzir-platform secret store add azure
+    --vault-url=<vault_url>
+    --azure-tenant-id=<azure_tenant_id>
+    --client-id=<client_id>
+    --client-secret=<client_secret>
+    [--name=<name>]
+tenzir-platform secret store add azure
+    --vault-url=<vault_url>
+    --managed-identity
+    --workspace=<workspace_id>
+    [--managed-identity-client-id=<managed_identity_client_id>]
+    [--name=<name>]
 tenzir-platform secret store set-default <store_id>
 tenzir-platform secret store delete <store_id>
 tenzir-platform secret store list [--json]
@@ -287,6 +299,14 @@ The `--mount` parameter specifies the path to a Vault [KV version 2](https://dev
 For Vault Enterprise deployments, use the `--namespace` parameter to specify the namespace.
 
 Vault secrets are returned as JSON by default. You can append a `:key` suffix to the secret name to return just the value of that key as a string instead. For example, if a secret at path `database` contains keys `username` and `password`, use `secret("database:password")` in your pipeline to retrieve only the password value.
+
+For Azure Key Vault, choose one of the following authentication methods:
+
+1. **Service principal authentication**: Pass the Entra tenant ID, client ID, and client secret. Grant the service principal permission to list and get secrets in the vault before you run the command.
+
+2. **Managed identity authentication**: Pass `--managed-identity` when the platform API runs on an Azure resource with a managed identity. The command uses the resource’s system-assigned identity by default. For a user-assigned identity, pass its client ID with `--managed-identity-client-id=<client_id>`. Managed identity authentication does not require an Azure tenant ID or client secret. A platform administrator must run this command and identify the target workspace with `--workspace=<workspace_id>`. This explicit administrator action binds the deployment identity and vault to that workspace.
+
+Grant the managed identity the **Key Vault Secrets User** role when the vault uses Azure role-based access control. For a vault that uses access policies, grant the identity `list` and `get` permissions for secrets. Azure Key Vault stores are read-only, and the platform always retrieves the latest secret version by name.
 
 ## Manage Alerts
 

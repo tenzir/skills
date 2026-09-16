@@ -89,3 +89,35 @@ tenzir-platform secret store add vault \
   ```
 
 See the [CLI reference](../../reference/platform/command-line-interface.md#manage-external-secret-stores) for more details.
+
+### Azure Key Vault
+
+To add Azure Key Vault as an external secret store, choose either an Entra service principal or a managed identity. In both cases, grant the identity permission to list and get secrets in the vault. Then run the command for the currently selected workspace.
+
+Add Azure Key Vault as an external secret store
+
+```sh
+tenzir-platform secret store add azure \
+  --vault-url=https://example.vault.azure.net \
+  --azure-tenant-id=<entra_tenant_id> \
+  --client-id=<client_id> \
+  --client-secret=<client_secret>
+```
+
+The platform uses the service principal to read enabled secrets and retrieves the latest version for each secret by name. Azure Key Vault stores are read-only in the platform, so create, update, rotate, and delete secrets in Azure.
+
+The command stores the client secret in the platform’s workspace configuration. The platform masks it when it returns secret-store metadata.
+
+If the platform API runs on an Azure resource with a managed identity, you can use that identity instead of a service principal:
+
+Add Azure Key Vault with a managed identity
+
+```sh
+tenzir-platform secret store add azure \
+  --vault-url=https://example.vault.azure.net \
+  --managed-identity
+```
+
+This uses the resource’s system-assigned identity. For a user-assigned identity, pass its client ID with `--managed-identity-client-id=<client_id>`. Managed identity authentication does not require an Azure tenant ID or client secret, and the platform does not store either credential in the workspace configuration.
+
+See the [CLI reference](../../reference/platform/command-line-interface.md#manage-external-secret-stores) for more details.
