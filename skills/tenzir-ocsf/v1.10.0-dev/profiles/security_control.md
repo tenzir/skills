@@ -164,7 +164,7 @@ The normalized confidence refers to the accuracy of the security control or aler
 - **Requirement**: optional
 - **Group**: context
 
-The confidence score as reported by the event source. If `confidence_id` is 99 'Other', it should be the same as `confidence` if both are populated.
+The confidence score as reported by the source or assigned by the analyst expressed on a source-specific numeric scale. This score provides finer-grained confidence information than the categorical `confidence_id` value. If `confidence_id` is 99 'Other', it should reflect the the same assessment as `confidence` if both are populated.
 
 ### `disposition`
 

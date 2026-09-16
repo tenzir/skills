@@ -114,7 +114,7 @@ The normalized identifier of the confidence level for this incident, representin
 - **Requirement**: optional
 - **Group**: context
 
-The confidence score assigned to the incident by the system or analyst, expressed on a source-specific numeric scale. This score provides finer-grained confidence information than the categorical `confidence_id` value. When `confidence_id` is `99` (Other), the `confidence` attribute should reflect the same assessment if both are populated.
+The confidence score assigned to the incident by the system or analyst, expressed on a source-specific numeric scale. This score provides finer-grained confidence information than the categorical `confidence_id` value. When `confidence_id` is `99` (Other), the `confidence` attribute may reflect the same assessment if both are populated.
 
 ### `desc`
 

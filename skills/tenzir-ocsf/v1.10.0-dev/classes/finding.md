@@ -57,7 +57,7 @@ A user provided comment about the finding.
 - **Requirement**: optional
 - **Group**: context
 
-The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source and should be the same as `confidence_score` if also populated..
+The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
 
 ### `confidence_id`
 
@@ -82,7 +82,7 @@ The normalized confidence refers to the accuracy of the analytics that produced 
 - **Requirement**: optional
 - **Group**: context
 
-The confidence score as reported by the event source.
+The confidence score. See specific usage.
 
 ### `device`
 

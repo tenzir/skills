@@ -106,7 +106,7 @@ The normalized confidence refers to the accuracy of the analytics that produced 
 - **Requirement**: recommended
 - **Group**: primary
 
-The confidence score as reported by the event source.
+The confidence score. See specific usage.
 
 ### `data_sources`
 
