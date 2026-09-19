@@ -90,6 +90,14 @@ The normalized impact of the incident or finding. Per NIST, this is the magnitud
 
 The impact as an integer value of the finding, valid range 0-100.
 
+### `is_declared_incident`
+
+- **Type**: `boolean_t`
+- **Requirement**: optional
+- **Group**: context
+
+Indicates that the Finding (or Incident Finding) is declared to be an incident, subject to the meaning of incident to an organization.
+
 ### `is_suspected_breach`
 
 - **Type**: `boolean_t`

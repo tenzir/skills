@@ -162,7 +162,7 @@ The normalized finding lifecycle status identifier. Unlike the status of an acti
 
 - **Type**: `timestamp_t`
 
-The finding creation time - when the finding was first generated, not when the underlying activity occurred. For the time range of contributing events, use `start_time` and `end_time`.
+The finding time - when the finding was first created, updated, or closed; not when the underlying activity occurred. For the time range of related events contributing to the finding (`finding_info.related_events[]`), use `start_time` and `end_time`. For the times when the finding was created (`activity_id` = 1) or resolved (`activity_id` = 2 or 3 and `status_id` = 4), populate `finding_info.created_time` or `finding_info.resolved_time` with this value.
 
 ### `vendor_attributes`
 

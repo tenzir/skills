@@ -173,6 +173,14 @@ The normalized impact of the incident or finding. Per NIST, this is the magnitud
 
 The impact as an integer value of the finding, valid range 0-100.
 
+### `is_declared_incident`
+
+- **Type**: `boolean_t`
+- **Requirement**: optional
+- **Group**: context
+
+Indicates that the Finding (or Incident Finding) is declared to be an incident, subject to the meaning of incident to an organization.
+
 ### `is_suspected_breach`
 
 - **Type**: `boolean_t`
@@ -214,6 +222,14 @@ The priority, normalized to the caption of the priority_id value. In the case of
 - `99`: `Other` - The priority is not normalized.
 
 The normalized priority. Priority identifies the relative importance of the incident or finding. It is a measurement of urgency.
+
+### `resolved_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: recommended
+- **Group**: occurrence
+
+The time when the incident was resolved. Populate when `status_id` is 4 (Resolved).
 
 ### `src_url`
 
@@ -277,7 +293,7 @@ The associated ticket(s) in the ticketing system. Each ticket contains details l
 
 - **Type**: `timestamp_t`
 
-The incident creation time - when the incident was first opened, not when the underlying activity occurred. For the time range of contributing events, use `start_time` and `end_time`.
+The incident time - when the incident was first created, updated, or closed; not when the underlying findings or activity occurred. For the time range of contributing findings and events, use `start_time` and `end_time`. For the time when the incident was resolved, use `resolved_time`.
 
 ### `vendor_attributes`
 

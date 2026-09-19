@@ -31,7 +31,7 @@ An array of attack objects, each describing a tactic, technique, and/or sub-tech
 ### `created_time`
 
 - **Type**: `timestamp_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The time when the finding was created.
 
@@ -117,6 +117,14 @@ Describes events and/or other findings related to the finding as identified by t
 - **Requirement**: optional
 
 Number of related events or findings.
+
+### `resolved_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: recommended
+- **Group**: occurrence
+
+The time when the finding was resolved. Populate when the finding's `status_id` is 4 (Resolved).
 
 ### `src_url`
 
