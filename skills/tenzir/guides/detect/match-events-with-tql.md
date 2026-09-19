@@ -45,7 +45,7 @@ from {
 // class_name: "Process Activity", activity_name: "Launch"
 where class_uid == 1007 and activity_id == 1
 where process.name.equals("powershell.exe", ignore_case=true) \
-  and process.cmd_line.contains("-encodedcommand", ignore_case=true)
+  and process.cmd_line.search("-encodedcommand", ignore_case=true)
 ```
 
 ```tql
@@ -66,7 +66,7 @@ where process.name.equals("powershell.exe", ignore_case=true) \
 Two details matter for OCSF data:
 
 * **Match on numeric identifiers.** `class_uid == 1007` and `activity_id == 1` select OCSF Process Activity launch events. The sibling labels (`class_name`, `activity_name`) are display fields; detection logic keys on the stable integers.
-* **Compare strings case-insensitively.** OCSF preserves vendor casing, so Windows process names can arrive as `PowerShell.EXE` or `powershell.exe`. [`equals`](https://tenzir.com/docs/reference/functions/equals.md), [`contains`](https://tenzir.com/docs/reference/functions/contains.md), [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md), and [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md) all take `ignore_case=true`.
+* **Compare strings case-insensitively.** OCSF preserves vendor casing, so Windows process names can arrive as `PowerShell.EXE` or `powershell.exe`. [`equals`](https://tenzir.com/docs/reference/functions/equals.md), [`search`](https://tenzir.com/docs/reference/functions/search.md), [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md), and [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md) all take `ignore_case=true`.
 
 Handle optional fields
 
@@ -74,7 +74,7 @@ OCSF events may omit fields. Gate on `class_uid` before reading class-specific f
 
 ```tql
 // class_name: "Process Activity"
-where class_uid == 1007 and process.cmd_line?.contains("-enc") == true
+where class_uid == 1007 and process.cmd_line?.search("-enc") == true
 ```
 
 ## Build richer predicates
@@ -271,7 +271,7 @@ Split a detection into smaller operators when that improves reuse or testing, no
 
 * [Detections](../../explanations/detections.md)
 * [`equals`](https://tenzir.com/docs/reference/functions/equals.md)
-* [`contains`](https://tenzir.com/docs/reference/functions/contains.md)
+* [`search`](https://tenzir.com/docs/reference/functions/search.md)
 * [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
 * [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
 * [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)

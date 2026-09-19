@@ -220,7 +220,7 @@ Many string functions accept an `ignore_case` argument so you can match without 
 from {
   is_get: "Get".starts_with("get", ignore_case=true),
   same_host: "Example.COM".equals("example.com", ignore_case=true),
-  has_strasse: "STRASSE".contains("straße", ignore_case=true),
+  has_strasse: "STRASSE".search("straße", ignore_case=true),
 }
 ```
 
@@ -236,7 +236,7 @@ Functions that support `ignore_case`:
 
 * [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md) - Check string prefix
 * [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md) - Check string suffix
-* [`contains`](https://tenzir.com/docs/reference/functions/contains.md) - Search for a substring
+* [`search`](https://tenzir.com/docs/reference/functions/search.md) - Search for a substring
 * [`equals`](https://tenzir.com/docs/reference/functions/equals.md) - Compare two strings for equality
 * [`replace`](https://tenzir.com/docs/reference/functions/replace.md) - Replace a literal substring
 * [`split`](https://tenzir.com/docs/reference/functions/split.md) - Split on a literal delimiter

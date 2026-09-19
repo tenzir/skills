@@ -64,7 +64,7 @@ from {time: 2026-07-01T10:00:00Z, host: "ws-17", rule: "recon"},
      {time: 2026-07-01T10:01:00Z, host: "ws-9", rule: "recon"}
 window size=10min, on=time {
   summarize host, rules=distinct(rule)
-  where rules.contains("recon") and rules.contains("exploit") and rules.contains("exfil")
+  where rules.search("recon") and rules.search("exploit") and rules.search("exfil")
 }
 ```
 
@@ -324,9 +324,9 @@ window size=10min, on=time {
             source_event_uids=collect(metadata.uid),
             first=min(time),
             last=max(time)
-  where stages.contains("recon_scan") \
-    and stages.contains("windows_threats::print_sensitive_dump") \
-    and stages.contains("smb_traffic_spike")
+  where stages.search("recon_scan") \
+    and stages.search("windows_threats::print_sensitive_dump") \
+    and stages.search("smb_traffic_spike")
 }
 this = {
   time: $finding_time, // use now() in a live pipeline

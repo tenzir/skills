@@ -452,7 +452,7 @@ match event_code {
 }
 ```
 
-Reach for `if` and `else if` when the branches depend on predicates such as `contains`, `starts_with`, regular-expression matches, field presence, or a combination of fields.
+Reach for `if` and `else if` when the branches depend on predicates such as `search`, `starts_with`, regular-expression matches, field presence, or a combination of fields.
 
 ✅ Predicate ladder:
 

@@ -71,7 +71,7 @@ from {
 
 ## See Also
 
-* [`contains`](https://tenzir.com/docs/reference/functions/contains.md)
+* [`search`](https://tenzir.com/docs/reference/functions/search.md)
 * [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
 * [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

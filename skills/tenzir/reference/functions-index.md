@@ -233,7 +233,7 @@
 
 ## Utility
 
-- [contains](functions/contains.md): Searches recursively for a value within data structures.
+- [search](functions/search.md): Searches recursively for a value within data structures.
 - [contains_null](functions/contains_null.md): Checks whether the input contains any `null` values.
 - [is_empty](functions/is_empty.md): Checks whether a value is empty.
 - [random](functions/random.md): Generates a random number in *\[0,1]*.
@@ -294,5 +294,6 @@
 
 ## Additional Pages
 
+- [contains](functions/contains.md): The `contains` function is a deprecated alias for [`search`](https://tenzir.com/docs/reference/functions/search.md). It still works, but emits a deprecation warning. Replace `contains(input, target)` with `search(input, target)`, or `input.contains(target)` with `input.search(target)`. The `exact` and `ignore_case` options are unchanged.
 - [geo_distance](functions/geo_distance.md): Computes the surface distance between two geographic coordinates.
 - [hmac](functions/hmac.md): Computes an HMAC (Hash-based Message Authentication Code).

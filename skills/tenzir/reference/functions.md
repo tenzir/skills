@@ -1476,12 +1476,12 @@ years(100)
 
 ## Utility
 
-### [contains](functions/contains.md)
+### [search](functions/search.md)
 
 Searches for a value within data structures recursively.
 
 ```tql
-this.contains("value")
+this.search("value")
 ```
 
 ### [contains\_null](functions/contains_null.md)
