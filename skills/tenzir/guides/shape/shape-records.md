@@ -71,6 +71,42 @@ num_fields = config.keys().length()
 }
 ```
 
+## Build records from dynamic field names
+
+When field names arrive as data, use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to turn key/value entries into a record. For example, convert an attribute list from an API into named fields without knowing the attribute names in advance.
+
+```tql
+from {
+  attributes: [
+    {
+      key: "service",
+      value: "ssh",
+    },
+    {
+      key: "port",
+      value: 22,
+    },
+    {
+      key: "enabled",
+      value: true,
+    },
+  ],
+}
+select config=collect_record(attributes)
+```
+
+```tql
+{
+  config: {
+    service: "ssh",
+    port: 22,
+    enabled: true,
+  },
+}
+```
+
+Each entry must have exactly the fields `key` and `value` to use this form. Two-element lists such as `["port", 22]` work too. Other records contribute their fields directly. If a key occurs more than once, its last value wins, including `null`.
+
 ## Combine records with spread
 
 Use the spread operator `...` to combine records. Spread keeps the resulting record visible where you construct it, and lets you mix existing fragments with literals or computed fields. Later fields overwrite earlier fields, so put defaults first and overrides last:

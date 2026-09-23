@@ -414,6 +414,30 @@ avg_age = users.map(u => u.age).sum() / users.length()
 }
 ```
 
+## Turn parallel lists into a record
+
+When an API supplies field names and values in separate lists, pass both to [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md). This creates named fields directly, without an intermediate [`zip`](https://tenzir.com/docs/reference/functions/zip.md) result. The lists must have the same length. Keys are automatically converted with [`string`](https://tenzir.com/docs/reference/functions/string.md), so `42` becomes `"42"` and `null` becomes `"null"`.
+
+```tql
+from {
+  names: ["service", "port", "enabled"],
+  values: ["ssh", 22, true],
+}
+select config=collect_record(names, values)
+```
+
+```tql
+{
+  config: {
+    service: "ssh",
+    port: 22,
+    enabled: true,
+  },
+}
+```
+
+The function preserves each value’s type. For a single list of key/value entries, follow our guide on [building records from dynamic field names](shape-records.md#build-records-from-dynamic-field-names).
+
 ## Advanced transformations
 
 ### Zip lists together

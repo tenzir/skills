@@ -5,6 +5,7 @@
 - [all](functions/all.md): Computes the conjunction (AND) of all grouped boolean values.
 - [any](functions/any.md): Computes the disjunction (OR) of all grouped boolean values.
 - [collect](functions/collect.md): Creates a list of all non-null grouped values, preserving duplicates.
+- [collect_record](functions/collect_record.md): Collects key/value entries or record fragments into a record.
 - [count](functions/count.md): Counts the events or non-null grouped values.
 - [count_distinct](functions/count_distinct.md): Counts all distinct non-null grouped values.
 - [count_if](functions/count_if.md): Counts the events or non-null grouped values matching a given predicate.

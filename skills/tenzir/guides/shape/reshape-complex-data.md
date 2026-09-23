@@ -230,6 +230,42 @@ long_format = [
 }
 ```
 
+### Convert a metric list to a wide record
+
+Use [`map`](https://tenzir.com/docs/reference/functions/map.md) to turn each metric into a key/value pair, then use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to make each metric name a field. This reverses the wide-to-long transformation within one event, without hardcoding the metric names.
+
+```tql
+from {
+  readings: [
+    {
+      metric: "cpu_usage",
+      value: 45,
+    },
+    {
+      metric: "memory_usage",
+      value: 62,
+    },
+    {
+      metric: "disk_usage",
+      value: 78,
+    },
+  ],
+}
+select metrics=readings.map(r => [r.metric, r.value]).collect_record()
+```
+
+```tql
+{
+  metrics: {
+    cpu_usage: 45,
+    memory_usage: 62,
+    disk_usage: 78,
+  },
+}
+```
+
+Repeated metric names keep their last value. Names containing dots remain literal field names rather than creating nested records.
+
 ### Transform to event stream
 
 Convert arrays to event streams for processing:
@@ -390,6 +426,38 @@ merged = {
 ```
 
 Optional fragments compose the same way: use `...user.profile?` when a fragment may be missing. If the spread expression evaluates to `null`, it contributes no fields.
+
+### Merge a list of record fragments
+
+When the fragments already form a list, use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) instead of spreading each element individually. This works even when the number of fragments varies between events.
+
+```tql
+from {
+  fragments: [
+    {
+      host: "sensor",
+      port: 80,
+    },
+    {
+      port: 443,
+      tls: true,
+    },
+  ],
+}
+select service=collect_record(fragments)
+```
+
+```tql
+{
+  service: {
+    host: "sensor",
+    port: 443,
+    tls: true,
+  },
+}
+```
+
+Later fragments overwrite earlier fields. Nested records are replaced, not merged recursively. A fragment with exactly `key` and `value` is decoded as an entry instead of contributing those two literal fields.
 
 ## Handle dynamic schemas
 

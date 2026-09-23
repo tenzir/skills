@@ -48,6 +48,17 @@ Creates a list of all non-null grouped values, preserving duplicates.
 collect([1,2,2,3])
 ```
 
+### [collect\_record](functions/collect_record.md)
+
+Collects key/value entries or record fragments into a record.
+
+```tql
+collect_record([
+  ["a", 1],
+  ["b", true],
+])
+```
+
 ### [count](functions/count.md)
 
 Counts the events or non-null grouped values.

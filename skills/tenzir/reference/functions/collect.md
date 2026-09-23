@@ -38,6 +38,7 @@ summarize values=collect(x)
 
 ## See Also
 
+* [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md)
 * [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
 * [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
