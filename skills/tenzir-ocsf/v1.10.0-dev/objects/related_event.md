@@ -1,6 +1,8 @@
 # Related Event/Finding (related_event)
 
-The Related Event object describes an event or another finding related to a finding. It may or may not be an OCSF event.
+The Related Event object describes an event or another finding related to a finding. It may or may not be an OCSF event. Using this class, a hierarchy of findings can be expressed when intermediate findings are themselves analyzed into a higher level finding. Typically these events or intermediate findings contribute to the parent finding via this finding's `analytic`. The full event or finding is referenced by the `uid` attribute, and summarized by other attributes of this object. The `observables` attribute can carry just the observables of the related event or finding, and the full event can be included in the `raw_data` attribute.
+
+Note: If the related event is a finding, `finding_info` should be populated with its `finding_info.uid` attribute equal to `uid`. That finding may also have related events.
 
 - **Extends**: [Object (object)](object.md)
 
@@ -35,6 +37,14 @@ If the related event/finding is in OCSF and is a Finding, then this value should
 - **Requirement**: optional
 
 A description of the related event/finding.
+
+### `finding_info`
+
+- **Type**: [`finding_info`](finding_info.md)
+- **Requirement**: recommended
+- **Group**: context
+
+Describes the supporting information about a related finding which itself may contain its own related events or findings.
 
 ### `first_seen_time`
 
@@ -88,6 +98,55 @@ Details about the product that reported the related event/finding.
 > **Deprecated since v1.4.0.** Use the `product.uid` attribute instead.
 
 The unique identifier of the product that reported the related event.
+
+### `raw_data`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The content of the related event or finding. This is the data pointed to by the `uid` attribute. Populate when the entire related event is carried with the finding.
+
+### `risk_details`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: context
+
+Describes the risk associated with a related finding.
+
+### `risk_level`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: context
+
+The risk level, normalized to the caption of the risk_level_id value.
+
+### `risk_level_id`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Group**: context
+- **Sibling**: `risk_level`
+
+#### Enum values
+
+- `0`: `Info`
+- `1`: `Low`
+- `2`: `Medium`
+- `3`: `High`
+- `4`: `Critical`
+- `99`: `Other` - The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+
+The normalized risk level id.
+
+### `risk_score`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Group**: context
+
+The risk score as reported by the event source.
 
 ### `severity`
 
@@ -152,7 +211,21 @@ The list of key traits or characteristics extracted from the related event/findi
 
 The type of the related event/finding.
 
-Populate if the related event/finding is `NOT` in OCSF. If it is in OCSF, then utilize `type_name, type_uid` instead.
+Populate if the related event/finding is `NOT` in OCSF and `type_id` is 99 (Other). If it is in OCSF, then utilize `type_name, type_uid` for a type-specific value.
+
+### `type_id`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Sibling**: `type`
+
+#### Enum values
+
+- `1`: `Activity` - The related event is a normal OCSF activity.
+- `2`: `Alert` - The related event is an OCSF alert using the `security_control` profile with `is_alert = true`.
+- `3`: `Finding` - The related event is an OCSF finding or intermediate finding. Intermediate findings are ordinary findings analyzed into higher level findings.
+
+The normalized identifier of the related event type.
 
 ### `type_name`
 

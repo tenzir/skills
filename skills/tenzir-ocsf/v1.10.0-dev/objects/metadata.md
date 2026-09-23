@@ -57,6 +57,49 @@ Indicates whether the OCSF event data has been truncated due to size limitations
 
 The list of labels attached to the event. For example: `["sample", "dev"]`
 
+### `log_facility`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The syslog facility, normalized to the caption of the `log_facility_id` value. In the case of 'Other', it is defined by the event source.
+
+### `log_facility_id`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Sibling**: `log_facility`
+
+#### Enum values
+
+- `0`: `kern` - Kernel messages.
+- `1`: `user` - User-level messages.
+- `2`: `mail` - Mail system.
+- `3`: `daemon` - System daemons.
+- `4`: `auth` - Security and authorization messages.
+- `5`: `syslog` - Messages generated internally by the syslog process.
+- `6`: `lpr` - Line printer subsystem.
+- `7`: `news` - Network news subsystem.
+- `8`: `uucp` - UUCP subsystem.
+- `9`: `cron` - Clock daemon.
+- `10`: `authpriv` - Security and authorization messages, distinguished from facility 4 by convention and conventionally reserved for privileged access.
+- `11`: `ftp` - FTP daemon.
+- `12`: `ntp` - NTP subsystem.
+- `13`: `audit` - Log audit.
+- `14`: `console` - Console messages, per the RFC 5427 SyslogFacility mapping. RFC 5424 Table 1 lists facility 14 as 'log alert'.
+- `15`: `cron2` - A second cron or clock daemon facility used by some systems such as Solaris, distinct from facility 9, per the RFC 5427 SyslogFacility mapping. RFC 5424 Table 1 lists facility 15 as 'clock daemon'.
+- `16`: `local0` - Local use 0.
+- `17`: `local1` - Local use 1.
+- `18`: `local2` - Local use 2.
+- `19`: `local3` - Local use 3.
+- `20`: `local4` - Local use 4.
+- `21`: `local5` - Local use 5.
+- `22`: `local6` - Local use 6.
+- `23`: `local7` - Local use 7.
+- `99`: `Other` - The facility is not mapped. See the `log_facility` attribute, which contains a data source specific value.
+
+The facility of the source syslog message, identifying the originating subsystem that generated it. The facility is independent of severity and is not recoverable from `severity_id`. A relay may rewrite or regenerate a message, so this reflects the source (original) facility rather than a value guaranteed to be stable across hops, and it should be populated only when the source is syslog or an equivalent facility mapping is unambiguous. There is no `Unknown` value: `0` is the kernel (`kern`) facility, so an absent or malformed PRI must not be mapped to `0`; use `99` (Other) for a known nonstandard or source-defined facility.
+
 ### `log_format`
 
 - **Type**: `string_t`

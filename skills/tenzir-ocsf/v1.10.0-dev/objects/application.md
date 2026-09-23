@@ -6,12 +6,36 @@ An Application describes the details for an inventoried application as reported 
 
 ## Attributes
 
+### `created_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: optional
+
+The time when the application was known to have been created.
+
 ### `criticality`
 
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The criticality of the application as defined by the event source.
+Criticality or relative importance of a resource/object in question, normalized to the caption of `criticality_id`. In the case of Other, the value is defined by the event source.
+
+### `criticality_id`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Sibling**: `criticality`
+
+#### Enum values
+
+- `0`: `Unknown` - The criticality level is unknown.
+- `1`: `Low` - Minimal operational or security importance.
+- `2`: `Medium` - Affects localized functions or specific business processes.
+- `3`: `High` - Critical to core operations. Compromise leads to significant, but recoverable disruptions.
+- `4`: `Very High` - Mission critical, essential to business survival. Compromise could result in catastrophic consequences.
+- `99`: `Other` - The criticality level is not mapped. See the `criticality` attribute, which contains a data source specific value.
+
+Criticality or relative importance of a resource/object in question.
 
 ### `data`
 
@@ -26,6 +50,13 @@ Additional data describing the application.
 - **Requirement**: optional
 
 A description or commentary for an application, usually retrieved from an upstream system.
+
+### `first_seen_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: optional
+
+The initial discovery time of the application.
 
 ### `group`
 
@@ -47,6 +78,20 @@ The fully qualified name of the application.
 - **Requirement**: optional
 
 The list of labels associated to the application.
+
+### `last_seen_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: optional
+
+The most recent discovery time of the application.
+
+### `modified_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: optional
+
+The time when the application was last known to have been modified.
 
 ### `name`
 
@@ -120,6 +165,13 @@ The risk score as reported by the event source.
 - **Requirement**: optional
 
 The Software Bill of Materials (SBOM) associated with the application
+
+### `src_url`
+
+- **Type**: `url_t`
+- **Requirement**: optional
+
+The URL to the application's record or detail page within the reporting event source (e.g., a link to the application in the security tool's UI).
 
 ### `tags`
 
