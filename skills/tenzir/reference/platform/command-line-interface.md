@@ -371,33 +371,60 @@ These CLI commands are available only to local platform administrators. The [`TE
 
 ```text
 tenzir-platform admin list-global-workspaces
-tenzir-platform admin create-workspace <owner_namespace> <owner_id> [--name <workspace_name>]
+tenzir-platform admin create-workspace <owner_namespace> <owner_id> [--name=<workspace_name>] [--category=<workspace_category>]
+tenzir-platform admin update-workspace <workspace_id> [--name=<workspace_name>] [--icon-url=<icon_url>] [--owner-namespace=<owner_namespace>] [--owner-id=<owner_id>] [--category=<workspace_category>]
 tenzir-platform admin delete-workspace <workspace_id>
 ```
 
 ### Description
 
-The `tenzir-platform admin list-global-workspaces`, `tenzir-platform admin create-workspace`, and `tenzir-platform admin delete-workspace` commands list, create, or delete workspaces, respectively.
+The `tenzir-platform admin list-global-workspaces`, `tenzir-platform admin create-workspace`, `tenzir-platform admin update-workspace`, and `tenzir-platform admin delete-workspace` commands list, create, update, or delete workspaces, respectively.
+
+New workspaces need an access rule
+
+Only a `user` workspace comes with a default access rule. A `team` or `organization` workspace starts without any rule, so nobody can open it and it does not show up in `tenzir-platform workspace list`, not even for platform administrators. Until you add an [access rule](command-line-interface.md#configure-access-rules), `tenzir-platform admin list-global-workspaces` is the only command that shows the workspace.
 
 #### `<owner_namespace>`
 
-Either `user` or `organization`, depending on whether the workspace associates with a user or an organization.
+One of `user`, `organization`, or `team`, depending on who owns the workspace:
+
+* `user`: a single person, identified by the `sub` claim of their OIDC token.
+* `organization`: an organization that already exists in the platform, created with [`tenzir-platform org create`](https://tenzir.com/docs/reference/platform/command-line-interface.md#manage-organizations). The workspace follows that organization’s membership and policies.
+
+The `team` namespace is the custom option. Its owner id is a label of your own choosing, such as a customer or department name, which the platform stores as-is and never derives access from. Use it to define who reaches a workspace entirely through [access rules](command-line-interface.md#configure-access-rules), instead of delegating that decision to the platform’s organization membership.
 
 The selected namespace determines the *default* access rules for the workspace:
 
 * For a user workspace, the platform creates a single access rule that allows access to the user whose user ID matches the given `owner_id`.
-* For an organization workspace, the platform creates no rules by default. You must manually add them using the `add-auth-rule` subcommand described below.
+* For a team or organization workspace, the platform creates no rules by default. You must manually add them using the `add-auth-rule` subcommand described below.
 
 #### `<owner_id>`
 
 The unique ID of the workspace owner:
 
 * If `<owner_namespace>` is `user`, this matches the user’s `sub` claim in the OIDC token.
-* If `<owner_namespace>` is `organization`, this is an arbitrary string that uniquely identifies the organization the workspace belongs to.
+* If `<owner_namespace>` is `organization`, this is the ID of an existing organization and has the form `org-xxxxxxxx`. A workspace that names an organization that does not exist fails to open with a server error, so use the `team` namespace for free-form identifiers.
+* If `<owner_namespace>` is `team`, this is an arbitrary string that uniquely identifies the team the workspace belongs to.
 
 #### `--name <workspace_name>`
 
 The name of the workspace as shown in the app.
+
+#### `--category <workspace_category>`
+
+An arbitrary string that the app uses as a header when it groups several workspaces of the same owner. Only workspaces that share an owner ID group together.
+
+#### `--icon-url <icon_url>`
+
+The image that the app shows for this workspace.
+
+#### `--owner-namespace <owner_namespace>` and `--owner-id <owner_id>`
+
+The new owner of an existing workspace. Both options take the same values as the corresponding `create-workspace` arguments. Use them to correct a workspace that carries the wrong owner, such as one that names a nonexistent organization:
+
+```bash
+tenzir-platform admin update-workspace <workspace_id> --owner-namespace=team --owner-id=<owner_id>
+```
 
 #### `<workspace_id>`
 
@@ -420,11 +447,11 @@ tenzir-platform admin list-auth-rules <workspace_id>
 tenzir-platform admin add-auth-rule allow-all <workspace_id>
 tenzir-platform admin add-auth-rule user <workspace_id> <user_id>
 tenzir-platform admin add-auth-rule
-    email-domain <workspace_id> <connection> <domain>
+    email-domain <workspace_id> <domain> [--connection=<connection>]
 tenzir-platform admin add-auth-rule
-    organization-membership <workspace_id> <connection> <organization_claim> <organization>
+    organization-membership <workspace_id> <organization_claim> <organization> [--connection=<connection>]
 tenzir-platform admin add-auth-rule
-    organization-role <workspace_id> <connection> <roles_claim> <role> <organization_claim> <organization>
+    organization-role <workspace_id> <roles_claim> <role> <organization_claim> <organization> [--connection=<connection>]
 
 
 tenzir-platform admin delete-auth-rule <workspace_id> <auth_rule_index>
@@ -436,16 +463,22 @@ You can use the `tenzir-platform admin list-auth-rules`, `tenzir-platform admin 
 
 Authentication rules allow you to access the workspace with the provided `<workspace_id>` if your `id_token` matches the configured rule. You gain access to a workspace if any configured rule allows access. The following rules exist:
 
-* **Email Suffix Rule**: `tenzir-platform admin add-auth-rule email-domain` allows access if the `id_token` contains a `connection` field that exactly matches the provided `<connection>` and an `email` field that ends with the configured `<domain>`.
+* **Email Suffix Rule**: `tenzir-platform admin add-auth-rule email-domain` allows access if the `id_token` contains an `email` field that ends with the configured `<domain>`.
 
-* **Organization Membership**: `tenzir-platform admin add-auth-rule organization-membership` allows access if the `id_token` contains a `connection` field that exactly matches the provided `<connection>` and an `<organization_claim>` field that exactly matches the provided `<organization>`.
+* **Organization Membership**: `tenzir-platform admin add-auth-rule organization-membership` allows access if the `id_token` contains an `<organization_claim>` field that exactly matches the provided `<organization>`.
 
   Note that you can freely choose the `<organization_claim>` and `<organization>`, so you can also repurpose this rule for generic claims that are not necessarily related to organizations.
 
-* **Organization Role Rule**: `tenzir-platform admin add-auth-rule organization-role` allows access if the `id_token` contains a `connection` field that exactly matches the provided `<connection>`, an `<organization_claim>` field that exactly matches the provided `<organization>`, and a `<roles_claim>` field that must be a list containing a value exactly matching `<role>`.
+* **Organization Role Rule**: `tenzir-platform admin add-auth-rule organization-role` allows access if the `id_token` contains an `<organization_claim>` field that exactly matches the provided `<organization>`, and a `<roles_claim>` field that must be a list containing a value exactly matching `<role>`.
 
   We recommend using organization role rules to check if you have a specific role with an organization.
 
 * **User Rule**: `tenzir-platform admin add-auth-rule user` allows access if the `id_token` contains a `sub` field that exactly matches the provided `<user_id>`.
 
 * **Allow all rule**: `tenzir-platform admin add-auth-rule allow-all` allows access to every user. Use this rule to set up a workspace that all users of a platform instance can access.
+
+#### `--connection <connection>`
+
+Restricts a rule to `sub` claims that start with `<connection>|`. Omit the option to let the rule match any `sub` claim.
+
+The intended use case is an identity provider that is itself federated. Such a provider brokers several upstream providers and records which one a user came from as a prefix of the `sub` claim. Auth0, for example, calls these upstreams connections and issues a `sub` such as `github|132020102`, so passing `--connection=github` holds the rule to users who arrived through that upstream.

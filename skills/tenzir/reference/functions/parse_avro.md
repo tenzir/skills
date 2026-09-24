@@ -72,6 +72,7 @@ this = message.parse_avro(schema={
 ## See Also
 
 * [Apache Avro](../../integrations/avro.md)
+* [`print_avro`](https://tenzir.com/docs/reference/functions/print_avro.md)
 * [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md)
 * [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md)
 * [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)

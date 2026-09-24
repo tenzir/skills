@@ -1045,6 +1045,14 @@ string.parse_yaml()
 
 ## Printing
 
+### [print\_avro](functions/print_avro.md)
+
+Encodes a value as an Apache Avro binary datum.
+
+```tql
+value.print_avro(schema={type: "long"})
+```
+
 ### [print\_cef](functions/print_cef.md)
 
 Prints records as Common Event Format (CEF) messages

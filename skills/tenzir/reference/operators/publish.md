@@ -23,7 +23,7 @@ Note
 
 The `publish` operator does not guarantee that events stay in their original order.
 
-During shutdown, `subscribe` will wait for `publish` to drain all data before shutting down itself. This prevents data loss, as long as pub/sub do not form cycles and `publish` does not use dynamic topic names.
+During node shutdown, `subscribe` waits for `publish` to drain all data before shutting down itself. This prevents data loss, as long as pub/sub do not form cycles and `publish` does not use dynamic topic names.
 
 ### `topic: string (optional)`
 

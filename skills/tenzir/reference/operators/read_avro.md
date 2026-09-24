@@ -86,4 +86,5 @@ from_file "events.bin" {
 
 * [Apache Avro](../../integrations/avro.md)
 * [`parse_avro`](https://tenzir.com/docs/reference/functions/parse_avro.md)
+* [`print_avro`](https://tenzir.com/docs/reference/functions/print_avro.md)
 * [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)

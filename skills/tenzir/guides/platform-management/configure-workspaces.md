@@ -28,26 +28,37 @@ Only local platform administrators can manage workspaces dynamically. The [`TENZ
 
 ### Creating and managing workspaces
 
-You can create workspaces for either individual users or organizations. When you create a user workspace, it’s automatically configured with access for that specific user. Organization workspaces start with no access rules, giving you full control over who can access them.
+You can create a workspace for an individual user, for a team, or for an organization. A user workspace comes with access for that specific user. Team and organization workspaces start with no access rules, giving you full control over who can access them.
+
+Choose the owner namespace by deciding who controls access to the workspace:
+
+* Use `user` for a workspace that belongs to one person.
+* Use `organization` for an organization that already exists in the platform, so that the workspace follows that organization’s membership and policies. Its ID has the form `org-xxxxxxxx`, and a workspace that names an organization that does not exist fails to open with a server error.
+
+The `team` namespace is the custom option, and the one most Sovereign Edition deployments want. Its owner ID is a label of your own choosing, such as a customer or department name, which the platform never derives access from. Use it to admit users through [access rules](configure-workspaces.md#understanding-access-control) that match the claims your identity provider issues, instead of modelling those groups as platform organizations.
 
 For a detailed overview, of the available commands, take a look at our [CLI reference documentation](../../reference/platform/command-line-interface.md).
 
-### Example: Setting up an organization workspace
+Add an access rule before you hand out the workspace
 
-Let’s walk through creating a workspace for the fictional “Scrooge & Marley Counting House” organization:
+A team or organization workspace has no access rules when you create it. Nobody can open it, and it does not appear in `tenzir-platform workspace list`, not even for platform administrators. Creating a workspace is therefore always at least two commands: one to create it, and one to grant access. Use `tenzir-platform admin list-global-workspaces` to see workspaces that no rule matches yet.
 
-1. **Create the organization workspace:**
+### Example: Setting up a team workspace
+
+Let’s walk through creating a workspace for the fictional “Scrooge & Marley Counting House” team, with access granted entirely through access rules:
+
+1. **Create the team workspace:**
 
    ```bash
-   tenzir-platform admin create-workspace organization scrooge-marley --name "Scrooge & Marley Counting House"
+   tenzir-platform admin create-workspace team scrooge-marley --name "Scrooge & Marley Counting House"
    ```
 
-   This creates a workspace with the organization ID `scrooge-marley` and the display name “Scrooge & Marley Counting House”.
+   This creates a workspace with the owner ID `scrooge-marley` and the display name “Scrooge & Marley Counting House”. The command prints the ID of the new workspace, which the following steps use as `<workspace_id>`.
 
 2. **Configure access for employees with company email addresses:**
 
    ```bash
-   tenzir-platform admin add-auth-rule email-domain <workspace_id> <connection> '@scroogemarley.com'
+   tenzir-platform admin add-auth-rule email-domain <workspace_id> '@scroogemarley.com'
    ```
 
 3. **Add a specific user:**
@@ -61,8 +72,16 @@ Let’s walk through creating a workspace for the fictional “Scrooge & Marley 
 4. **Grant access to users with the “accountant” role:**
 
    ```bash
-   tenzir-platform admin add-auth-rule organization-role <workspace_id> <connection> roles accountant organization scrooge-marley
+   tenzir-platform admin add-auth-rule organization-role <workspace_id> roles accountant organization scrooge-marley
    ```
+
+Each rule accepts an optional `--connection` flag that restricts it to `sub` claims starting with a given prefix. This is meant for an identity provider that is itself federated and records the upstream provider a user came from as that prefix, such as `github|132020102`.
+
+If you gave a workspace the wrong owner, correct it without recreating it:
+
+```bash
+tenzir-platform admin update-workspace <workspace_id> --owner-namespace=team --owner-id=scrooge-marley
+```
 
 If you later need to remove the workspace:
 

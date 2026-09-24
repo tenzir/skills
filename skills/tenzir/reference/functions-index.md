@@ -165,6 +165,7 @@
 
 ## Printing
 
+- [print_avro](functions/print_avro.md): Encodes a value as an Apache Avro binary datum.
 - [print_cef](functions/print_cef.md): Prints records as Common Event Format (CEF) messages
 - [print_csv](functions/print_csv.md): Prints a record as a comma-separated string of values.
 - [print_json](functions/print_json.md): Transforms a value into a JSON string.
