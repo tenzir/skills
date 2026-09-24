@@ -6,6 +6,20 @@ The Job object provides information about a scheduled job or task, including its
 
 ## Attributes
 
+### `bytes_processed`
+
+- **Type**: `long_t`
+- **Requirement**: optional
+
+The number of bytes the job read or examined while performing its work.
+
+### `bytes_written`
+
+- **Type**: `long_t`
+- **Requirement**: optional
+
+The number of bytes the job committed to the destination, after any compression or deduplication was applied.
+
 ### `cmd_line`
 
 - **Type**: `string_t`
@@ -76,6 +90,51 @@ The name of the job.
 
 The time when the job will next be run.
 
+### `progress_current`
+
+- **Type**: `long_t`
+- **Requirement**: optional
+
+The units of work the job has completed so far, counted in `progress_unit`.
+
+### `progress_total`
+
+- **Type**: `long_t`
+- **Requirement**: optional
+
+The total units of work the job is expected to perform, counted in `progress_unit`.
+
+### `progress_unit`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The unit that the job's `progress_current` and `progress_total` are counted in, normalized to the caption of the `progress_unit_id` value. In the case of 'Other', it is defined by the event source.
+
+### `progress_unit_id`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Sibling**: `progress_unit`
+
+#### Enum values
+
+- `0`: `Unknown` - The unit is unknown.
+- `1`: `Bytes` - Bytes of data.
+- `2`: `Files` - Files or file-system objects.
+- `3`: `Records` - Records, such as database rows, documents, or log records.
+- `4`: `Items` - Generic countable items or work units.
+- `99`: `Other` - The unit is not mapped. See the `progress_unit` attribute, which contains a data source specific value.
+
+The normalized identifier of the unit that the job's `progress_current` and `progress_total` are counted in.
+
+### `queue_name`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The name of the queue that the job was dispatched to.
+
 ### `run_state`
 
 - **Type**: `string_t`
@@ -100,6 +159,13 @@ The run state of the job.
 - `99`: `Other`
 
 The run state ID of the job.
+
+### `throughput`
+
+- **Type**: `long_t`
+- **Requirement**: optional
+
+The rate at which the job processed data, in bytes per second.
 
 ### `type`
 
