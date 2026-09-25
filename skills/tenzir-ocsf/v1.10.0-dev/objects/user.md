@@ -9,7 +9,7 @@ The User object describes the characteristics of a user/person or a security pri
 ### `account`
 
 - **Type**: [`account`](account.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The user's account or the account associated with the user.
 

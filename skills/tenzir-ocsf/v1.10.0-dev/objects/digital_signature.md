@@ -115,3 +115,10 @@ The digital signature state defines the signature state, normalized to the capti
 - `10`: `Broken` - The digital signature is malformed and could not be processed.
 
 The normalized identifier of the signature state.
+
+### `value`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The signature bytes, encoded using standard Base64 (RFC 4648, Section 4, with padding): the raw signature output of the algorithm in `algorithm_id`, not a container or envelope format such as a CMS/PKCS#7 structure or a complete JWS. A verifier decodes this value, reproduces the signing input per `serialization_id`, and checks the result using `algorithm_id` and the key in `certificate`. Present only when the event producer holds the raw signature bytes; omit when only descriptive metadata (algorithm, state, certificate) is available.
