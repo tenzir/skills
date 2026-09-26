@@ -120,4 +120,3 @@ throttle rate=500, drop=true
 
 * [`assert_throughput`](https://tenzir.com/docs/reference/operators/assert_throughput.md)
 * [`batch`](https://tenzir.com/docs/reference/operators/batch.md)
-* [`buffer`](https://tenzir.com/docs/reference/operators/buffer.md)

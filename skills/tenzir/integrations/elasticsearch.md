@@ -117,7 +117,7 @@ The above example updates the document with ID `XXX` with the contents from the 
 
 ### Accept data by emulating Elasticsearch
 
-Tenzir can act as a drop-in replacement for Elasticsearch by accepting data via a Bulk API endpoint. This allows you to point your [Logstash](https://www.elastic.co/logstash)or Beats instances to Tenzir instead.
+Tenzir can act as a drop-in replacement for Elasticsearch by accepting data via a Bulk API endpoint. This allows you to point your [Logstash](https://www.elastic.co/logstash) or Beats instances to Tenzir instead.
 
 ```tql
 accept_elasticsearch "0.0.0.0:9200", keep_actions=true

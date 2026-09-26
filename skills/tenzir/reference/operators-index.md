@@ -142,7 +142,6 @@
 
 - [api](operators/api.md): Use Tenzir’s REST API directly from a pipeline.
 - [batch](operators/batch.md): The `batch` operator controls the batch size of events.
-- [buffer](operators/buffer.md): An in-memory buffer to improve handling of data spikes in upstream operators.
 - [cache](operators/cache.md): An in-memory cache shared between pipelines.
 - [measure](operators/measure.md): Replaces the input with metrics describing the input.
 - [quiet](operators/quiet.md): Suppresses runtime warnings from a pipeline.

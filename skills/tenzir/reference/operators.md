@@ -895,14 +895,6 @@ The `batch` operator controls the batch size of events.
 batch timeout=1s
 ```
 
-### [buffer](operators/buffer.md)
-
-An in-memory buffer to improve handling of data spikes in upstream operators.
-
-```tql
-buffer 10M, policy="drop"
-```
-
 ### [cache](operators/cache.md)
 
 An in-memory cache shared between pipelines.

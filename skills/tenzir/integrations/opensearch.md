@@ -117,7 +117,7 @@ The above example updates the document with ID `XXX` with the contents from the 
 
 ### Accept data by emulating OpenSearch
 
-Tenzir can act as a drop-in replacement for OpenSearch by accepting data via a Bulk API endpoint. This allows you to point your [Logstash](https://opensearch.org/docs/latest/tools/logstash/index/)or Beats instances to Tenzir instead.
+Tenzir can act as a drop-in replacement for OpenSearch by accepting data via a Bulk API endpoint. This allows you to point your [Logstash](https://opensearch.org/docs/latest/tools/logstash/index/) or Beats instances to Tenzir instead.
 
 ```tql
 accept_opensearch "0.0.0.0:9200", keep_actions=true

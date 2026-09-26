@@ -102,7 +102,3 @@ Get the same statistics, assuming the cache still exists:
 cache "some-unique-identifier", mode="read"
 summarize src_ip, total=sum(total), destinations=count(dest_ip)
 ```
-
-## See Also
-
-* [`buffer`](https://tenzir.com/docs/reference/operators/buffer.md)

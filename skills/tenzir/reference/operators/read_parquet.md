@@ -29,8 +29,8 @@ Tenzir currently assumes that all Parquet files use metadata recognized by Tenzi
 
 The operator acts on the hints that the [optimizer](../../explanations/pipeline.md#optimization) pushes toward it:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md) predicates are evaluated as each row group decodes.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) narrows the decoded columns to the top-level fields the pipeline reads, including fields that only the filter references. Nested selections retain the containing top-level field.
+* [`where`](https://tenzir.com/docs/reference/operators/where.md) predicates are evaluated as each row group decodes. Row groups whose statistics show that no row can match are skipped entirely. This works best for comparisons of a sorted or clustered field, such as a timestamp, with a constant.
+* [`select`](https://tenzir.com/docs/reference/operators/select.md) narrows the decoded columns to the fields the pipeline reads, including fields that only the filter references. Selecting a field of a record decodes only that field. Fields inside lists and maps, and values such as subnets, are decoded whole.
 * [`head`](https://tenzir.com/docs/reference/operators/head.md) stops decoding once enough events pass the filter.
 
 The `where`, `select`, and `head` operators stay in the pipeline, so the result is the same whether or not the reader acts on the hints. A filter that calls a function conservatively keeps all columns.

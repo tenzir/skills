@@ -21,6 +21,11 @@ The `write_pcap` operator transforms packet events into a [PCAP](https://datatra
 
 The operator accepts `pcap.packet` events. When present, it also uses `pcap.file_header` events emitted by [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) to preserve the original timestamp precision and byte order.
 
+Each packet needs a `linktype`, a `timestamp`, and its `data`. The lengths are optional:
+
+* A missing `captured_packet_length` defaults to the size of `data`.
+* A missing `original_packet_length` defaults to the captured length, which marks the packet as not truncated. Provide `original_packet_length` alone to write a truncated packet.
+
 If no `pcap.file_header` event is present, `write_pcap` generates a file header from the first packet’s `linktype` and writes timestamps with nanosecond precision.
 
 The default `format="auto"` preserves PCAPNG input from [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) and otherwise writes classic PCAP.
@@ -64,6 +69,22 @@ to_file "/logs/packets.pcap" {
 from_nic "en1"
 to_file "/logs/packets.pcapng" {
   write_pcap format="pcapng"
+}
+```
+
+### Write packets from raw bytes
+
+The packet lengths default to the size of the data:
+
+```tql
+from {
+  linktype: 1,
+  timestamp: 2020-01-02T03:04:05Z,
+  data: b"\x00\x01\x02",
+}
+@name = "pcap.packet"
+to_file "/tmp/packet.pcap" {
+  write_pcap
 }
 ```
 
