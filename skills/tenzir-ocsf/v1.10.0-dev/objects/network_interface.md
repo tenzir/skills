@@ -81,6 +81,6 @@ The network interface type identifier.
 ### `uid`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The unique identifier for the network interface.

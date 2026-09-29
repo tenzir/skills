@@ -16,7 +16,7 @@ The URL that referred to `src_url`. This is typically the URL of a web page cont
 ### `src_endpoint`
 
 - **Type**: [`network_endpoint`](network_endpoint.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 
 Information about the network endpoint from which the file was downloaded.
 

@@ -116,7 +116,7 @@ The International Mobile Equipment Identity values that are associated with the 
 ### `ip`
 
 - **Type**: `ip_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The device IP address, in either IPv4 or IPv6 format.
 
@@ -214,7 +214,7 @@ The time when the device was last known to have been modified.
 ### `name`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The alternate device name, ordinarily as assigned by an administrator.
 

@@ -52,7 +52,7 @@ The normalized identifier of the activity that triggered the event. Each event c
 ### `app`
 
 - **Type**: [`product`](../objects/product.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Group**: context
 
 > **Deprecated since v1.9.0.** Use the `application` attribute instead.

@@ -9,20 +9,20 @@ The Parameter object provides details regarding a parameter of a a function.
 ### `name`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The parameter name.
 
 ### `post_value`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The parameter value after function execution.
 
 ### `pre_value`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The parameter value before function execution.

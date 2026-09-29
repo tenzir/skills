@@ -9,6 +9,9 @@ The startup item object describes an application component that has associated s
 **From Startup Item:**
 - `name` (required)
 - `start_type_id` (required)
+- `driver` (recommended)
+- `job` (recommended)
+- `process` (recommended)
 - `run_state_id` (recommended)
 - `type_id` (recommended)
 
@@ -17,6 +20,6 @@ The startup item object describes an application component that has associated s
 ### `win_service`
 
 - **Type**: [`win_service`](../objects/win_service.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The startup item Windows service resource.

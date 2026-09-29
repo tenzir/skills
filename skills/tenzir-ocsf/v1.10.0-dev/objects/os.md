@@ -68,14 +68,14 @@ The operating system name.
 ### `sp_name`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The name of the latest Service Pack.
 
 ### `sp_ver`
 
 - **Type**: `integer_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The version number of the latest Service Pack.
 
@@ -110,6 +110,6 @@ The type identifier of the operating system.
 ### `version`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The version of the OS running on the device that originated the event. For example: "Windows 10", "OS X 10.7", or "iOS 9".

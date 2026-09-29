@@ -30,7 +30,7 @@ The name of the aircraft, such as the such as the flight name or callsign.
 ### `serial_number`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Observable**: 37
 
 The serial number of the aircraft.
@@ -66,7 +66,7 @@ The primary identification identifier for an aircraft, such as the 24-bit Intern
 ### `uid_alt`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 A secondary identification identifier for an aircraft, such as the 4-digit squawk (octal representation).
 

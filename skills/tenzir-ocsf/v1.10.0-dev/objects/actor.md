@@ -9,7 +9,7 @@ The Actor object contains details about the user, role, application, service, or
 ### `app_name`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 > **Deprecated since v1.9.0.** Use the `application.name` attribute instead.
 
@@ -18,7 +18,7 @@ The client application or service that initiated the activity. This can be in co
 ### `app_uid`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 > **Deprecated since v1.9.0.** Use the `application.uid` attribute instead.
 
@@ -41,7 +41,7 @@ Provides details about an authorization, such as authorization outcome, and any 
 ### `iam_role`
 
 - **Type**: [`iam_role`](iam_role.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The actor's role, or as an alternative to `user` or `process` when the role is serving as a security principal for the operation that initiated the activity.
 
@@ -55,7 +55,7 @@ This object describes details about the Identity Provider used.
 ### `invoked_by`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 > **Deprecated since v1.2.0.** Use the `application` attribute instead.
 
@@ -71,7 +71,7 @@ The process that initiated the activity.
 ### `session`
 
 - **Type**: [`session`](session.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The user session from which the activity was initiated.
 

@@ -37,7 +37,7 @@ Note: If the Finding is an incident, i.e. requires incident workflow, also apply
 ### `access_analysis_result`
 
 - **Type**: [`access_analysis_result`](../objects/access_analysis_result.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Group**: context
 
 Describes access relationships and pathways between identities, resources, focusing on who can access what and through which mechanisms. This evaluates access levels (read/write/admin), access types (direct, cross-account, public, federated), and the conditions under which access is granted. Use this for resource-centric security assessments such as external access discovery, public exposure analysis, etc.

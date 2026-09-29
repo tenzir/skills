@@ -106,7 +106,7 @@ The networking protocol associated with the Remote ID device or beacon. E.g. `BL
 ### `src_endpoint`
 
 - **Type**: [`network_endpoint`](../objects/network_endpoint.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Group**: context
 
 The network source endpoint.

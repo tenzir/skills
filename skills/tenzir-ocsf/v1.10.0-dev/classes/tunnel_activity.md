@@ -57,7 +57,7 @@ The normalized identifier of the activity that triggered the event. Each event c
 ### `connection_info`
 
 - **Type**: [`network_connection_info`](../objects/network_connection_info.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Group**: context
 
 The tunnel connection information.
@@ -105,7 +105,7 @@ The initiator (client) of the tunnel connection.
 ### `traffic`
 
 - **Type**: [`network_traffic`](../objects/network_traffic.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Group**: context
 
 Traffic refers to the amount of data moving across the tunnel at a given point of time. Ex: `bytes_in` and `bytes_out`.

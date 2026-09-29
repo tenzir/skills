@@ -95,7 +95,7 @@ The size in bytes for the kb article.
 ### `src_url`
 
 - **Type**: `url_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The kb article link from the source vendor.
 

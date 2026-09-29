@@ -52,7 +52,7 @@ The incident activity name, as defined by the `activity_id`. When `activity_id` 
 ### `assignee`
 
 - **Type**: [`user`](../objects/user.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Group**: context
 
 The details of the user assigned to an Incident.
@@ -60,7 +60,7 @@ The details of the user assigned to an Incident.
 ### `assignee_group`
 
 - **Type**: [`group`](../objects/group.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 - **Group**: context
 
 The details of the group assigned to an Incident.

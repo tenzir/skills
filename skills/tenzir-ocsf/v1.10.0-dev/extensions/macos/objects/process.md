@@ -16,4 +16,5 @@ Extends the process object to add macOS specific fields
 - `cmd_line` (recommended)
 - `cpid` (recommended)
 - `created_time` (recommended)
+- `path` (recommended)
 - `pid` (recommended)

@@ -12,6 +12,7 @@ Extends the evidences object to add Windows specific fields
 - `api` (recommended)
 - `connection_info` (recommended)
 - `container` (recommended)
+- `data` (recommended)
 - `database` (recommended)
 - `databucket` (recommended)
 - `device` (recommended)

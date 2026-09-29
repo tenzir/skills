@@ -44,6 +44,6 @@ The details of any policy associated with an assessment.
 ### `uid`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The unique identifier of the configuration or signal being assessed. For example: the `signal_id`.

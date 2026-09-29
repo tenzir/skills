@@ -44,7 +44,7 @@ Describes details about the container associated to the activity that triggered 
 ### `data`
 
 - **Type**: `json_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 Additional evidence data that is not accounted for in the specific evidence attributes. `Use only when absolutely necessary.`
 

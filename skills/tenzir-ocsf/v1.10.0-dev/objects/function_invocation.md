@@ -9,20 +9,20 @@ The Function Invocation object provides details regarding the invocation of a fu
 ### `error`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The error indication returned from the function. This may differ from the return value (e.g. when `errno` is used).
 
 ### `parameters`
 
 - **Type**: [`parameter`](parameter.md)
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The parameters passed into a function invocation.
 
 ### `return_value`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The value returned from a function.

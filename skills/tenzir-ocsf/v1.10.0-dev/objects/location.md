@@ -116,7 +116,7 @@ The geographical Longitude coordinate represented in Decimal Degrees (DD). For e
 ### `postal_code`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The postal code of the location.
 
@@ -137,6 +137,6 @@ The provider of the geographical location data.
 ### `region`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The alphanumeric code that identifies the principal subdivision (e.g. province or state) of the country. For example, 'CH-VD' for the Canton of Vaud, Switzerland

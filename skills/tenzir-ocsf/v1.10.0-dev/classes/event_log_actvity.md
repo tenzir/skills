@@ -9,7 +9,7 @@ Event Log Activity events report actions pertaining to the system's event loggin
 
 ## Constraints
 
-- **At least one of**: `log_file`, `log_name`, `log_provider`, `log_type`, `log_type_id`
+- **At least one of**: `file`, `log_name`, `log_provider`, `log_type`, `log_type_id`
 
 ## Associations
 

@@ -23,7 +23,7 @@ The detailed geographical location usually associated with an IP address.
 ### `name`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The name of the unmanned system as reported by tracking or sensing hardware.
 

@@ -13,6 +13,13 @@ The Network Endpoint object describes characteristics of a network endpoint. The
 
 The Autonomous System details associated with an IP address.
 
+### `domain`
+
+- **Type**: `string_t`
+- **Requirement**: recommended
+
+The name of the domain. See specific usage.
+
 ### `fingerprints`
 
 - **Type**: [`fingerprint`](fingerprint.md)

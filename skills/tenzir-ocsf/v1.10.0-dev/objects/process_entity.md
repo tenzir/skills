@@ -37,7 +37,7 @@ The friendly name of the process, for example: `Notepad++`.
 ### `path`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The process file path.
 

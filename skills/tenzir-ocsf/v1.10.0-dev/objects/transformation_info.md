@@ -37,7 +37,7 @@ Time of the transformation.
 ### `uid`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The unique identifier of the mapping or transformation.
 

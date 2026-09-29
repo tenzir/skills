@@ -45,7 +45,7 @@ The policy name. For example: `AdministratorAccess Policy`.
 ### `type`
 
 - **Type**: `string_t`
-- **Requirement**: optional
+- **Requirement**: recommended
 
 The policy type. For example: `Identity Policy, Resource Policy, Service Control Policy, etc.`.
 
