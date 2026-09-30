@@ -53,7 +53,7 @@ The observable value type identifier.
 - **Requirement**: optional
 - **Sibling**: `type_name`
 
-The OCSF event type UID (`type_uid`) of the source event that this observable was extracted from. This field enables filtering and categorizing observables by their originating event type. For example: `300101` for Network Activity (class_uid 3001) with activity_id 1.
+The OCSF event type UID (`type_uid`) of the source event that this observable was extracted from. This field enables filtering and categorizing observables by their originating event type. For example: `400101` for Network Activity (class_uid 4001) with activity_id 1.
 
 ### `value`
 
