@@ -16,6 +16,7 @@ AI-specific attributes for model operations, retrieval systems, and agent activi
 - Device Power State Activity
 - DHCP Activity
 - DNS Activity
+- DNS Zone Transfer Activity
 - Email Activity
 - Entity Management
 - Event Log Activity

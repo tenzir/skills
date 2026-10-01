@@ -30,6 +30,7 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 - Discovery
 - Discovery Result
 - DNS Activity
+- DNS Zone Transfer Activity
 - Drone Flights Activity
 - Email Activity
 - Email File Activity

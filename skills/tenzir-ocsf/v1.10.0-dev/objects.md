@@ -219,6 +219,7 @@
 - [Delegation](objects/delegation.md)
 - [DNS Resource Record](objects/dns_resource_record.md)
 - [DNS Section](objects/dns_section.md)
+- [DNS SOA Record](objects/dns_soa.md)
 - [Download Info](objects/download_info.md)
 - [GPU Information](objects/gpu_info.md)
 - [IAM Role](objects/iam_role.md)

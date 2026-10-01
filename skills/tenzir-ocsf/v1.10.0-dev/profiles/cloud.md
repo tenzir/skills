@@ -29,6 +29,7 @@ The attributes that describe information specific to Cloud services/applications
 - Discovery
 - Discovery Result
 - DNS Activity
+- DNS Zone Transfer Activity
 - Drone Flights Activity
 - Email Activity
 - Email File Activity

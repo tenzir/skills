@@ -1,6 +1,6 @@
 # Network Connection Information (network_connection_info)
 
-The Network Connection Information object describes characteristics of an OSI Transport Layer communication, including TCP and UDP.
+The Network Connection Information object describes characteristics of a network communication at the OSI Network Layer, such as ICMP and ICMPv6, or the OSI Transport Layer, such as TCP and UDP. Despite its name, the object is not limited to connection-oriented protocols: it also describes connectionless exchanges such as UDP and ICMP.
 
 - **Extends**: [Object (object)](object.md)
 
@@ -78,6 +78,27 @@ The normalized identifier of the direction of the initiated connection, traffic,
 - **Requirement**: optional
 
 The Connection Flag History summarizes events in a network connection. For example flags  `ShAD`  representing SYN, SYN/ACK, ACK and Data exchange.
+
+### `icmp_code`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+
+The control message code, which qualifies `icmp_type`. Applies to both ICMP and ICMPv6 and, like `icmp_type`, is interpreted against the Internet Assigned Numbers Authority (IANA) registry for the protocol in use (IP protocol number `1` for ICMP, `58` for ICMPv6).
+
+### `icmp_type`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+
+The control message type. Applies to both ICMP and ICMPv6, which the Internet Assigned Numbers Authority (IANA) numbers in separate registries, so the same value can identify different messages: interpret it against the registry for the protocol in use (IP protocol number `1` for ICMP, `58` for ICMPv6). For example: `8` for an ICMP Echo Request, or `128` for an ICMPv6 Echo Request.
+
+### `icmp_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+
+The identifier carried in an ICMP query message or an ICMPv6 informational message, such as an Echo Request or a Timestamp message, and repeated in the matching reply, used to correlate the request with its reply.
 
 ### `protocol_name`
 

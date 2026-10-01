@@ -6,6 +6,7 @@ The attributes that identify network proxy attributes.
 
 - DHCP Activity
 - DNS Activity
+- DNS Zone Transfer Activity
 - FTP Activity
 - HTTP Activity
 - Network

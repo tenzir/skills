@@ -29,6 +29,7 @@ The attributes including disposition that represent the outcome of a security co
 - Discovery
 - Discovery Result
 - DNS Activity
+- DNS Zone Transfer Activity
 - Drone Flights Activity
 - Email Activity
 - Email File Activity

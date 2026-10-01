@@ -6,6 +6,7 @@ The attributes that describe information specific to load balancers.
 
 - DHCP Activity
 - DNS Activity
+- DNS Zone Transfer Activity
 - FTP Activity
 - HTTP Activity
 - Network

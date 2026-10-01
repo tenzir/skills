@@ -29,6 +29,7 @@ The OSINT (Open Source Intelligence) profile contains one or more indicators and
 - Discovery
 - Discovery Result
 - DNS Activity
+- DNS Zone Transfer Activity
 - Drone Flights Activity
 - Email Activity
 - Email File Activity

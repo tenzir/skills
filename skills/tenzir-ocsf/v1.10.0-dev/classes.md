@@ -79,6 +79,7 @@ Network Activity events.
 - [Network (network)](classes/network.md) [base class]
 - [DHCP Activity](classes/dhcp_activity.md)
 - [DNS Activity](classes/dns_activity.md)
+- [DNS Zone Transfer Activity](classes/dns_zone_transfer_activity.md)
 - [Email Activity](classes/email_activity.md)
 - [Email File Activity](classes/email_file_activity.md)
 - [Email URL Activity](classes/email_url_activity.md)

@@ -29,6 +29,7 @@ Adds host and actor context to event classes. Apply this profile when the event 
 - Discovery
 - Discovery Result
 - DNS Activity
+- DNS Zone Transfer Activity
 - Drone Flights Activity
 - Email Activity
 - Email File Activity

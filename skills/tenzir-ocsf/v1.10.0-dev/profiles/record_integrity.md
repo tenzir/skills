@@ -29,6 +29,7 @@ The Record Integrity profile adds one or more cryptographic attestations over th
 - Discovery
 - Discovery Result
 - DNS Activity
+- DNS Zone Transfer Activity
 - Drone Flights Activity
 - Email Activity
 - Email File Activity
