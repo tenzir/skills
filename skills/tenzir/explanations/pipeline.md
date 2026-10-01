@@ -52,7 +52,11 @@ Before a pipeline runs, the **optimizer** rewrites it so that the source reads, 
 * A **limit** from [`head`](https://tenzir.com/docs/reference/operators/head.md): how many events downstream needs at most.
 * A **projection** from [`select`](https://tenzir.com/docs/reference/operators/select.md): the fields downstream reads.
 
-An operator that does not affect a requirement passes it on. One that does, adjusts or stops it: [`set`](https://tenzir.com/docs/reference/operators/set.md) keeps a predicate that reads the field it assigns, [`sort`](https://tenzir.com/docs/reference/operators/sort.md) stops a limit because it needs all of its input, and any reference to `this` widens a projection to all fields. The source at the start receives what survived and acts on the parts it understands.
+An operator that does not affect a requirement passes it on. One that does, adjusts or stops it: [`set`](https://tenzir.com/docs/reference/operators/set.md) rewrites a predicate over the fields it assigns, [`sort`](https://tenzir.com/docs/reference/operators/sort.md) stops a limit because it needs all of its input, and any reference to `this` widens a projection to all fields. The source at the start receives what survived and acts on the parts it understands.
+
+The rewrite through [`set`](https://tenzir.com/docs/reference/operators/set.md) lets a filter pass field renames, constants, record literals, and whole-event assignments such as `this = move this.ocsf`. For example, `y = x | where y == 42` turns into `where x == 42 | y = x`. A field that `move` or [`drop`](https://tenzir.com/docs/reference/operators/drop.md) removes reads as `null`. When a predicate reads a field without an exact equivalent in the input, for example one assigned from `now()`, the predicate stays after the assignment. This is how a filter on OCSF fields reaches the source through a normalization operator.
+
+On the way, the optimizer simplifies every predicate. It evaluates the parts that do not depend on the event and removes the branches of `and` and `or` that cannot change the result. After `class_uid = 3002`, the predicate `class_uid == 3002 and src_ip == 1.2.3.4` becomes `src_ip == 1.2.3.4`, and `class_uid == 4001` becomes `false`. A part that would emit a warning at runtime, such as `1 / 0`, stays as it is.
 
 Take this pipeline:
 

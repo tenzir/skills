@@ -201,8 +201,10 @@ select result=collect_record(entries)
 ## See Also
 
 * [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
+* [`entries`](https://tenzir.com/docs/reference/functions/entries.md)
 * [`merge`](https://tenzir.com/docs/reference/functions/merge.md)
 * [`string`](https://tenzir.com/docs/reference/functions/string.md)
+* [`values`](https://tenzir.com/docs/reference/functions/values.md)
 * [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

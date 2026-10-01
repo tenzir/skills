@@ -438,6 +438,8 @@ select config=collect_record(names, values)
 
 The function preserves each value’s type. For a single list of key/value entries, follow our guide on [building records from dynamic field names](shape-records.md#build-records-from-dynamic-field-names).
 
+To split a record back into parallel lists, use [`keys`](https://tenzir.com/docs/reference/functions/keys.md) and [`values`](https://tenzir.com/docs/reference/functions/values.md). They list the fields in the same order, so `collect_record(config.keys(), config.values())` returns `config`.
+
 ## Advanced transformations
 
 ### Zip lists together

@@ -230,6 +230,56 @@ long_format = [
 }
 ```
 
+### Convert wide fields to long format without naming them
+
+The previous example lists every metric by hand. When the metrics differ between events, or new ones can appear, use [`entries`](https://tenzir.com/docs/reference/functions/entries.md) to turn each field into a `key` and `value` record. Then use [`where`](https://tenzir.com/docs/reference/functions/where.md) to skip the fields that are not metrics and [`map`](https://tenzir.com/docs/reference/functions/map.md) to build the long format:
+
+```tql
+from {
+  metrics: {
+    timestamp: "2024-01-15T10:00:00",
+    cpu_usage: 45,
+    memory_usage: 62,
+    disk_usage: 78
+  }
+}
+long_format = metrics.entries().where(e => e.key != "timestamp").map(e => {
+  timestamp: metrics.timestamp,
+  metric: e.key,
+  value: e.value,
+})
+```
+
+```tql
+{
+  metrics: {
+    timestamp: "2024-01-15T10:00:00",
+    cpu_usage: 45,
+    memory_usage: 62,
+    disk_usage: 78,
+  },
+  long_format: [
+    {
+      timestamp: "2024-01-15T10:00:00",
+      metric: "cpu_usage",
+      value: 45,
+    },
+    {
+      timestamp: "2024-01-15T10:00:00",
+      metric: "memory_usage",
+      value: 62,
+    },
+    {
+      timestamp: "2024-01-15T10:00:00",
+      metric: "disk_usage",
+      value: 78,
+    },
+  ],
+}
+```
+
+The metric names come from the field names, so new metrics appear in the output without changing the pipeline. Follow this with [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md) to emit one event per metric, as shown in [Transform to event stream](reshape-complex-data.md#transform-to-event-stream).
+
 ### Convert a metric list to a wide record
 
 Use [`map`](https://tenzir.com/docs/reference/functions/map.md) to turn each metric into a key/value pair, then use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to make each metric name a field. This reverses the wide-to-long transformation within one event, without hardcoding the metric names.
@@ -311,6 +361,31 @@ items = [
   response.item_1,
   response.item_2
 ]
+```
+
+```tql
+{
+  response: {...},
+  items: [
+    {name: "Widget", price: 9.99},
+    {name: "Gadget", price: 19.99},
+    {name: "Tool", price: 14.99},
+  ]
+}
+```
+
+When the number of items varies, select the fields by name with [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md) and take their values with [`values`](https://tenzir.com/docs/reference/functions/values.md). The items keep their field order, and a response without items produces an empty list:
+
+```tql
+from {
+  response: {
+    item_0: {name: "Widget", price: 9.99},
+    item_1: {name: "Gadget", price: 19.99},
+    item_2: {name: "Tool", price: 14.99},
+    total_items: 3
+  }
+}
+items = response.select_matching("^item_").values()
 ```
 
 ```tql

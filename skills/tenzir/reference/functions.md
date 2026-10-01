@@ -1151,6 +1151,14 @@ Removes fields whose value is null from a record.
 drop_null_fields({a: null, b: 1})
 ```
 
+### [entries](functions/entries.md)
+
+Converts a record into a list of key/value entries.
+
+```tql
+record.entries()
+```
+
 ### [get](functions/get.md)
 
 Gets a field from a record or an element from a list
@@ -1205,6 +1213,14 @@ Sorts lists and record fields.
 
 ```tql
 xs.sort()
+```
+
+### [values](functions/values.md)
+
+Retrieves a list of field values from a record.
+
+```tql
+record.values()
 ```
 
 ## Runtime

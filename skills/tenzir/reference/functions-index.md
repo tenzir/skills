@@ -181,6 +181,7 @@
 
 - [drop_matching](functions/drop_matching.md): Removes top-level fields from a record when their names match a regular expression.
 - [drop_null_fields](functions/drop_null_fields.md): Returns a record with fields whose value is `null` removed.
+- [entries](functions/entries.md): Converts a record into a list of key/value entries.
 - [get](functions/get.md): Gets a field from a record or an element from a list.
 - [has](functions/has.md): Checks whether a record has a specified field.
 - [keys](functions/keys.md): Retrieves a list of field names from a record.
@@ -188,6 +189,7 @@
 - [merge](functions/merge.md): Combines two records into a single record by merging their fields.
 - [select_matching](functions/select_matching.md): Selects top-level fields from a record when their names match a regular expression.
 - [sort](functions/sort.md): Sorts lists and record fields.
+- [values](functions/values.md): Retrieves a list of field values from a record.
 
 ## Runtime
 
