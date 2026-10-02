@@ -7,11 +7,11 @@ section: "Docs"
 
 # Read from data stores
 
-> This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows from MySQL.
+> This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows.
 
-This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows from MySQL.
+This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows.
 
-Today, this guide focuses on [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) and [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md). As Tenzir adds more data store integrations, the same patterns will apply.
+Today, this guide focuses on [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md), [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), and [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md). As Tenzir adds more data store integrations, the same patterns will apply.
 
 ## Read a table
 
@@ -42,6 +42,12 @@ from_mysql table="users",
            user="tenzir",
            password=secret("MYSQL_PASSWORD"),
            database="identity"
+```
+
+Read a table from a local DuckDB database file. DuckDB runs embedded in Tenzir, so there is no connection to configure:
+
+```tql
+from_duckdb "alerts.duckdb", table="alerts"
 ```
 
 With ClickHouse, the operators that follow travel into the query. A `where` becomes a `WHERE` clause, a `select` narrows the columns, and a `head` adds a `LIMIT`, so this pipeline reads only matching rows and the columns it names:
@@ -78,11 +84,18 @@ from_mysql sql="SELECT id, user, last_login FROM users WHERE active = 1 ORDER BY
            database="identity"
 ```
 
+Query files through DuckDB. An in-memory DuckDB database reads Parquet, CSV, and JSON files directly, and the query result becomes the event stream:
+
+```tql
+from_duckdb ":memory:",
+  sql="SELECT * FROM 'flows/*.parquet' WHERE bytes > 1000000"
+```
+
 This pattern lets you use the full query language of the source system. Tenzir sends the query as is and applies the rest of the pipeline to the result.
 
 ## Inspect metadata
 
-Both operators can return metadata instead of table rows.
+All three operators can return metadata instead of table rows.
 
 List ClickHouse tables in a database:
 
@@ -104,11 +117,18 @@ from_mysql table="users",
            database="identity"
 ```
 
-Use metadata queries when you want to discover available tables, inspect a schema, or validate assumptions before you run a larger pipeline. In ClickHouse, prefer regular SQL such as `SHOW`, `DESCRIBE`, or queries against system catalogs.
+List the tables in a DuckDB database:
 
-## Poll for new rows from MySQL
+```tql
+from_duckdb "alerts.duckdb",
+  sql="SELECT table_schema, table_name FROM information_schema.tables"
+```
 
-MySQL supports a live polling mode for tables with a monotonically increasing integer tracking column.
+Use metadata queries when you want to discover available tables, inspect a schema, or validate assumptions before you run a larger pipeline. In ClickHouse and DuckDB, prefer regular SQL such as `SHOW`, `DESCRIBE`, or queries against system catalogs.
+
+## Poll for new rows
+
+MySQL and DuckDB support a live polling mode for tables with a monotonically increasing integer tracking column.
 
 ```tql
 from_mysql table="audit_log",
@@ -121,13 +141,20 @@ from_mysql table="audit_log",
 where severity == "high"
 ```
 
+With DuckDB, live mode picks up rows that other pipelines in the same node append to the table:
+
+```tql
+from_duckdb "alerts.duckdb", table="alerts", live=true, tracking_column="id"
+where severity == "high"
+```
+
 Use this mode when you want to turn a database table into a continuously polled event source.
 
 `from_clickhouse` does not currently provide a comparable live mode. It runs a query, emits the result, and then finishes.
 
 ## Shape rows after reading
 
-Both operators produce structured events, so you can transform the result right away.
+All three operators produce structured events, so you can transform the result right away.
 
 ```tql
 from_clickhouse sql="SELECT host, severity, message FROM events",

@@ -980,6 +980,10 @@ Write Iceberg tables to Google's Lakehouse for Apache Iceberg (formerly BigLake)
 
 Provides real-time event data including process, file, and network activity.
 
+#### [DuckDB integration](integrations/duckdb.md)
+
+Read from and write to DuckDB database files with an embedded DuckDB engine.
+
 #### [Elasticsearch integration](integrations/elasticsearch.md)
 
 Index, search, and analyze data in a distributed and scalable manner.

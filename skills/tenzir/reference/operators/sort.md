@@ -25,11 +25,27 @@ This operator performs a stable sort (preserves relative ordering when all expre
 
 Potentially High Memory Usage
 
-Use caution when applying this operator to large inputs. It currently buffers all data in memory. Out-of-core processing is on our roadmap.
+Without a downstream limit, this operator buffers all data in memory. With Nova execution enabled, an eligible downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the retained events and sort keys. Sorting still reads the complete input before producing output. Out-of-core processing is on our roadmap.
 
 ### `[-]expr`
 
 An expression that is evaluated for each event. Normally, events are sorted in ascending order. If the expression starts with `-`, descending order is used instead. In both cases, `null` is put last.
+
+## Optimizations
+
+With Nova execution enabled, a downstream `head N` lets `sort` retain only a bounded set of candidates for the first `N` results. Filters that move before `sort` run before candidate selection, so the bound counts matching events. A filter that must stay after a downstream `head` does not change that head’s bound.
+
+```tql
+sort -timestamp
+where severity == "high"
+head 10
+```
+
+Sorting still inspects every input event. It never pushes the limit upstream as a prefix limit. A downstream [`select`](https://tenzir.com/docs/reference/operators/select.md) can reduce upstream fields, while preserving dependencies of sort expressions and filters. Sorting by the whole event retains all fields.
+
+The sort stages of [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) use the same optimization. Their aggregation still processes the full input and retains all groups.
+
+Use `--dump-opt-ir` to inspect the retained sort bound and upstream projection.
 
 ## Examples
 

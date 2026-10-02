@@ -14,10 +14,16 @@ Sends events to a ClickHouse table.
 ```tql
 to_clickhouse [table=string,
                uri=string, host=string, port=int, user=string, password=string,
-               mode=string, primary=field, json=field|[field], low_cardinality=field[field],
+               mode=string, primary=field, json=field|[field], low_cardinality=field|[field],
                max_batch_rows=int, batch_timeout=duration,
                tls=bool|record]
 ```
+
+## Catch-all columns
+
+In an existing table, mark one writable, top-level `JSON` column with `COMMENT 'tenzir:catch_all'` to collect fields that do not map to other columns. The catch-all column must use plain `JSON` without a default expression, and its name must not contain dots.
+
+Our [ClickHouse integration guide](../../integrations/clickhouse.md#catch-all-columns) covers table setup, OCSF examples, type and JSON behavior, restrictions, and schema changes.
 
 ## Description
 
@@ -77,7 +83,7 @@ Mutually exclusive with `uri`.
 
 ### `mode = string (optional)`
 
-* `"create"` Create a table and database. Fails the table already exists.
+* `"create"` Create a table and database. Fails if the table already exists.
 * `"append"` Appends to an existing table. Fails if the table or database do not exist.
 * `"create_append"` Creates a table and database if they do not exist. Appends if the table already exists.
 
@@ -89,7 +95,7 @@ The primary key to use when creating a table. Required for `mode = "create"` as 
 
 ### `json = field|[field] (optional)`
 
-When using `mode = "create"` or `mode = "create_append"`, the operator creates the listed fields as the ClickHouse `JSON` type instead of inferring them from the first event. A listed field is created as a `JSON` column even when the event omits it. Because `json` only affects table creation, combining it with `mode = "append"` is an error.
+When using `mode = "create"` or `mode = "create_append"`, the operator creates the listed fields as the ClickHouse `JSON` type instead of inferring them from the first event. A listed top-level field is created as a `JSON` column even when the event omits it. Nested fields must be present in the first event. Because `json` only affects table creation, combining it with `mode = "append"` is an error.
 
 A listed field can be a top-level field or a nested field reached through records. This is useful when sending heterogeneous data, such as for OCSF `unmapped` or a nested, dynamically-shaped sub-object like `file.xattributes`:
 
@@ -99,21 +105,21 @@ to_clickhouse table="events", primary=id, json=file.xattributes
 
 ### `low_cardinality = field|[field] (optional)`
 
-When using `mode = "create"` or `mode = "create_append"`, the operator creates the columns listed in the `low_cardinality` argument as `LowCardinality(String)` instead of plain `String`. This is a ClickHouse storage optimization for columns with few distinct values.
+When using `mode = "create"` or `mode = "create_append"`, the operator creates the string columns listed in `low_cardinality` with dictionary encoding. This reduces storage for columns with few distinct values. Non-primary columns use `LowCardinality(Nullable(String))`; primary columns use `LowCardinality(String)`.
 
-Unlike `json`, the inner type is inferred from the data, so every listed field must be present in the first event that creates the table — otherwise the operator raises an error. `low_cardinality` is only supported for `string` columns. Because it only affects table creation, combining it with `mode = "append"` is an error.
+Unlike `json`, the inner type is inferred from the data, so every listed field must be present in the first event that creates the table; otherwise the operator raises an error. `low_cardinality` is only supported for `string` columns. Because it only affects table creation, combining it with `mode = "append"` is an error.
 
 Like `json`, a listed field can be a top-level field or a nested field reached through records.
 
 ### `max_batch_rows = int (optional)`
 
-The operator accumulates incoming events per target table and only sends an insert once a table’s buffer reaches this many rows (or `batch_timeout` elapses). This coalesces the tiny slices that heterogeneous input produces into fewer, larger, and far more efficient ClickHouse inserts.
+The operator accumulates incoming events per target table and flushes its buffer when it reaches this many rows or `batch_timeout` elapses. It also flushes remaining events when the pipeline finishes or checkpoints. Batching combines small groups of events into larger inserts.
 
 Defaults to `8192`.
 
 ### `batch_timeout = duration (optional)`
 
-The maximum time a table’s buffered events wait before being sent, even if the buffer has not yet reached `max_batch_rows`. This bounds the latency of low-volume tables.
+The time after which the operator flushes a table’s buffered events, even if the buffer has not reached `max_batch_rows`. Queued writes and backpressure can delay insertion beyond this timeout.
 
 Defaults to `1s`.
 
@@ -140,9 +146,9 @@ Any value not specified in the record will either be picked up from the configur
 
 See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
 
-Path to the key for the client certificate.
-
 ## Types
+
+This section describes automatic table creation and insertion into unmarked tables. Our ClickHouse integration guide describes the [type and JSON behavior of catch-all tables](../../integrations/clickhouse.md#json-values-and-type-restrictions).
 
 Tenzir uses ClickHouse’s [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) client library to communicate with ClickHouse. The below table explains the translation from Tenzir’s types to ClickHouse:
 
@@ -169,36 +175,40 @@ Tenzir also supports `Nullable` versions of the above types (or their nested typ
 
 [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can write to a ClickHouse `JSON` column for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time. The one exception is [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md): fields it marks as free-form, such as `unmapped` or `file.xattributes`, are created as `JSON` columns automatically, without listing them in `json`.
 
-A `record` maps to a JSON object. A `string` is also accepted and written verbatim, provided it is a JSON object (it starts with `{`); this lets you serialize events to JSON yourself, for example with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md), and collapse otherwise-heterogeneous events into a single schema for maximum insert throughput (see [Batching](to_clickhouse.md#batching)). A value that is neither a record nor a JSON-object string is written as an empty object (`{}`) with a warning, because ClickHouse `JSON` columns only accept objects at the top level.
+A `record` maps to a JSON object. A `string` is also accepted and written verbatim if its first non-whitespace character is `{`; ClickHouse validates the JSON. Serializing varying records with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md) can help combine events into larger inserts (see [Batching](to_clickhouse.md#batching)). A value that is neither a record nor a JSON-object string is written as an empty object (`{}`) with a warning, because ClickHouse `JSON` columns only accept objects at the top level.
 
 ### Appending to existing columns
 
-When appending to a table that already exists, its columns may use ClickHouse types that [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) would not create on its own. In addition to the types above, the operator writes to:
+When appending to existing tables, the operator supports `UInt16`, `UInt32`, `Int8`, `Int16`, `Int32`, and `Float32` columns in addition to the types it creates automatically. Values must fit the destination’s range and precision. Incompatible values for these typed columns produce a warning and drop the affected event, including in tables with a catch-all. In tables without a catch-all column, `UInt8` retains the legacy boolean mapping: `false` becomes `0` and `true` becomes `1`.
 
-* `LowCardinality(T)` columns by sending the plain `T` value, for example a `string` into a `LowCardinality(String)` column. ClickHouse adds the `LowCardinality` wrapper on insert.
-* `DateTime64(N)` and `DateTime64(N, 'tz')` columns of any precision `N` and timezone. Tenzir `time` values are truncated to the column’s precision, so digits finer than `N` are dropped. Tenzir creates `time` columns as `DateTime64(9)`, but you can append to a coarser column such as `DateTime64(3, 'UTC')`.
+The operator also writes to:
+
+* `LowCardinality(String)` and `LowCardinality(Nullable(String))` columns by sending string values.
+* `DateTime64(N)` and `DateTime64(N, 'tz')` columns with precision `N` from 0 to 9 and an optional timezone. Tenzir rounds `time` values down to the column’s precision. Tenzir creates `time` columns as `DateTime64(9)`, but you can append to a coarser column such as `DateTime64(3, 'UTC')`.
 
 Both also apply within nested `Tuple` and `Array` columns and in their `Nullable` forms, such as `LowCardinality(Nullable(String))`.
 
-An existing table may also contain columns whose type [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) cannot represent, such as `IPv4` or an `Enum`. As long as such a column has a default value (a `DEFAULT`, `MATERIALIZED`, `ALIAS`, or `EPHEMERAL` expression), the operator tolerates it and omits it from the insert, letting ClickHouse fill in the default. If an event does provide a value for such a column, the operator cannot convert it and drops the event with a warning. A column with an unsupported type and no default still raises an error.
+An existing table may contain writable columns with unsupported types, such as `Enum`. If such a column has a `DEFAULT` expression, the operator can omit it and let ClickHouse fill in the default. Providing a value for that column causes the event to be dropped with a warning. An unsupported writable column without a default raises an error.
+
+ClickHouse computes `MATERIALIZED` and `ALIAS` columns. In tables without a catch-all, Tenzir ignores supplied values for these columns with a warning. In tables with a catch-all, input matching `MATERIALIZED`, `ALIAS`, or `EPHEMERAL` columns remains in the catch-all.
 
 ### Batching
 
-[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) re-batches events internally to keep inserts efficient. Rather than issuing one INSERT per incoming table slice, it accumulates events per target table and flushes a table once its buffer reaches `max_batch_rows` or has waited `batch_timeout`. This matters most for heterogeneous input: Tenzir emits one table slice per distinct schema, so data like OCSF — where field optionality makes almost every event its own schema — would otherwise produce a storm of tiny single-row inserts.
+The operator buffers events per destination table and groups events with the same prepared schema into inserts. The `max_batch_rows` and `batch_timeout` options control when buffers are flushed.
 
-Batching coalesces same-schema events into large inserts. To also collapse *different* schemas that target the same ClickHouse `JSON` column, serialize the varying field to a JSON string with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md) before the operator: all events then share one schema and batch together, reproducing the throughput of ClickHouse’s `JSONEachRow` format.
+If varying record fields map to ClickHouse `JSON` columns, serializing them with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md) can reduce schema variation and allow larger batches. Other fields must also have matching types for events to share a batch.
 
 ### Table Creation
 
-When a ClickHouse table is created from Tenzir, all columns except the `primary` will be created as `Nullable`. For example, a column of type `ip` will be created as `Nullable(IPv6)`, while a `list<int64>` will be created as `Array(Nullable(Int64))`.
+When Tenzir creates a ClickHouse table, scalar columns other than the primary key are nullable. Arrays and tuples have nullable elements or fields rather than a nullable container. JSON columns use plain `JSON`. For example, an `ip` field becomes `Nullable(IPv6)`, while a `list<int64>` becomes `Array(Nullable(Int64))`.
 
 The table will be created from the first event the operator receives. Should this first event contain unsupported types/values, an error is raised.
 
 #### Untyped nulls
 
-Tenzir has both typed and untyped nulls. Typed nulls have a type, but no value. They are no problem for `to_clickhouse`.
+Tenzir has both typed and untyped nulls. Typed nulls have a type, but no value. They can be stored in nullable ClickHouse columns.
 
-For untyped nulls, the type itself is `null`, which cannot be supported by the `to_clickhouse` operator when creating a table.
+For untyped nulls, the type itself is `null`, so the operator cannot infer a ClickHouse column type. Fields selected as JSON, either with `json=` or through OCSF free-form object annotations, are an exception.
 
 Typed and Untyped Nulls in Tenzir
 
@@ -217,28 +227,30 @@ Untyped nulls are usually directly caused by nulls in the input, such as in a JS
 }
 ```
 
-If your input format has untyped nulls, but you know the type, you can either define an a schema and use that when parsing the input, or you can explicitly cast the columns to their desired type:
+If your input format has untyped nulls, but you know the type, you can either define a schema and use that when parsing the input, or you can explicitly cast the columns to their desired type:
 
 ```tql
 from (
-  { value: null },
-  { value: 42 },
+  { id: 1, value: null },
+  { id: 2, value: 42 },
 )
 value = int(value) // explicit cast turns untyped into typed nulls
-to_clickhouse "example_table", primary=value
+to_clickhouse table="example_table", primary=id
 ```
 
 #### Empty records
 
-Empty records cannot be send to ClickHouse. Should an empty record appear in the first event, an error is raised.
+An empty record cannot define a ClickHouse `Tuple` column. It causes an error during table creation unless the field is selected as JSON. Empty records are valid inside JSON columns, including the catch-all.
 
 ## Examples
 
-### Send CSV file to a local ClickHouse instance, without TLS
+### Append a CSV file to an existing local table
+
+Create `my_table` with columns matching the CSV fields before running:
 
 ```tql
 from_file "my_file.csv"
-to_clickhouse table="my_table", tls=false
+to_clickhouse table="my_table", mode="append", tls=false
 ```
 
 ### Use a connection URI
@@ -255,7 +267,7 @@ This writes to `security.alerts`.
 
 ### Send OCSF data to ClickHouse
 
-When sending OCSF data to ClickHouse, it is important to ensure that a consistent schema is sent. For this, we can use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md). This fills any missing fields with `null`, ensuring a single schema.
+Use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) with `null_fill=true` to fill missing optional fields with typed nulls and reduce schema variation. Free-form fields and differences in OCSF classes, versions, profiles, or extensions can still produce different schemas.
 
 ```tql
 subscribe "ocsf"
@@ -263,7 +275,7 @@ ocsf_cast null_fill=true
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}", primary=time
 ```
 
-[`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) also internally marks free form fields such as `unmapped` or `file.xattributes`. [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will then automatically use the ClickHouse JSON type for these fields without the need to explicit specify them in the `json=...` argument.
+[`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) also internally marks free form fields such as `unmapped` or `file.xattributes`. [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will then automatically use the ClickHouse JSON type for these fields without the need to explicitly specify them in the `json=...` argument.
 
 Alternatively, for a single high-volume landing table, serialize each event to a JSON string and write it into one `JSON` column. All events then share one schema and [batch](to_clickhouse.md#batching) into large inserts:
 

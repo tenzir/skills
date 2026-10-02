@@ -45,7 +45,7 @@ Use this mode when you want to read a table and preserve named tuple fields from
 
 Note
 
-ClickHouse omits `ALIAS` and `MATERIALIZED` columns from `SELECT *`. The `table` option therefore does not include such columns. To read them, use `sql` with an explicit column list.
+By default, ClickHouse omits `ALIAS` and `MATERIALIZED` columns from `SELECT *`, so the `table` option does not include them. To read them, use `sql` with an explicit column list.
 
 Use exactly one of `table` or `sql`.
 
@@ -118,23 +118,30 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 Tenzir maps ClickHouse types to Tenzir types as follows:
 
-| ClickHouse                                        | Tenzir    | Comment                                        |
-| ------------------------------------------------- | --------- | ---------------------------------------------- |
-| `Bool`                                            | `bool`    |                                                |
-| `Int8`, `Int16`, `Int32`, `Int64`                 | `int64`   |                                                |
-| `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`  |                                                |
-| `Float32`, `Float64`                              | `double`  |                                                |
-| `String`, `FixedString(N)`                        | `string`  |                                                |
-| `JSON`                                            | `string`  | Emitted as one-line JSON text.                 |
-| `UUID`                                            | `string`  | Emitted as canonical UUID text.                |
-| `Enum8`, `Enum16`                                 | `string`  | Emitted as the enum label.                     |
-| `Decimal`, `Decimal32`, `Decimal64`, `Decimal128` | `string`  | Emitted as decimal text to preserve precision. |
-| `Date`, `Date32`, `DateTime`, `DateTime64`        | `time`    |                                                |
-| `IPv4`, `IPv6`                                    | `ip`      |                                                |
-| `Tuple(...)`                                      | `record`  |                                                |
-| `Array(T)`                                        | `list<T>` |                                                |
-| `Array(UInt8)`                                    | `blob`    |                                                |
-| `Nullable(T)`                                     | `T`       | Null values stay null.                         |
+| ClickHouse                                        | Tenzir      | Comment                                                 |
+| ------------------------------------------------- | ----------- | ------------------------------------------------------- |
+| `Bool`                                            | `bool`      |                                                         |
+| `Int8`, `Int16`, `Int32`, `Int64`                 | `int64`     |                                                         |
+| `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`    |                                                         |
+| `Int128`, `UInt128`                               | `string`    | Emitted as integer text to preserve precision.          |
+| `Time`, `Time64`                                  | `duration`  |                                                         |
+| `LowCardinality(T)`                               | Same as `T` | Dictionary encoding does not change the resulting type. |
+| `Float32`, `Float64`                              | `double`    |                                                         |
+| `String`, `FixedString(N)`                        | `string`    |                                                         |
+| `JSON`                                            | `string`    | Emitted as one-line JSON text.                          |
+| `UUID`                                            | `string`    | Emitted as canonical UUID text.                         |
+| `Enum8`, `Enum16`                                 | `string`    | Emitted as the enum label.                              |
+| `Decimal`, `Decimal32`, `Decimal64`, `Decimal128` | `string`    | Emitted as decimal text to preserve precision.          |
+| `Date`, `Date32`, `DateTime`, `DateTime64`        | `time`      |                                                         |
+| `IPv4`, `IPv6`                                    | `ip`        |                                                         |
+| `Tuple(...)`                                      | `record`    |                                                         |
+| `Array(T)`                                        | `list<T>`   |                                                         |
+| `Array(UInt8)`                                    | `blob`      |                                                         |
+| `Nullable(T)`                                     | `T`         | Null values stay null.                                  |
+
+Date and timestamp values outside Tenzir’s nanosecond timestamp range become null with a warning.
+
+When reading JSON written with `json_type_escape_dots_in_keys=1`, use `sql` with `SETTINGS json_type_escape_dots_in_keys=1` to restore literal dotted keys. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`. This applies to JSON written to [tables with a catch-all](../../integrations/clickhouse.md#preserve-dotted-json-keys). The `table` form does not enable this setting automatically.
 
 `Map(...)` is not currently supported. Cast unsupported columns in `sql` or omit them from the query result.
 
