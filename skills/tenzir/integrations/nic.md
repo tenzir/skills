@@ -14,6 +14,8 @@ Tenzir supports capturing packets from a network interface card (NIC).
 
 Use [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md) to capture live packets as events:
 
+Packet pipeline
+
 `from_nic` uses [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) by default.
 
 ## Examples

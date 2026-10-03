@@ -37,4 +37,6 @@ For the [API](../../reference/operators/openapi.md), use the following endpoints
 
 The diagram below illustrates the various states, where circles correspond to states and arrows to state transitions:
 
+Pipeline States
+
 The grey buttons indicate the actions you, as a user, can take to transition into a different state. The orange arrows are transitions that take place automatically based on system events.

@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Apache Kafka](https://kafka.apache.org) is a distributed open-source message broker. The Tenzir integration can publish (send messages to a topic) or subscribe (receive) messages from a topic.
 
+Kafka Diagram
+
 Internally, we use Confluent’s official [librdkafka](https://github.com/confluentinc/librdkafka) library, which gives us full control in passing options.
 
 ## Examples

@@ -13,6 +13,8 @@ Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when an ag
 
 The model covers eight `size`-based combinations plus inactivity-defined sessions. The left column shows duration windows, while the right column shows event-count windows. Blue marks fixed windows, green marks trailing windows, and purple marks sessions. Highlighted events show the reduced firing cadence of sampled trailing windows.
 
+Nine timeline diagrams compare tumbling, hopping, trailing per-event, sampled trailing, and session windows over time and event counts. Blue fixed windows partition or overlap the timeline. Green trailing windows end at events. A purple session example groups events at 0, 4, and 8 minutes, then starts a new session after a seven-minute gap.
+
 For duration windows, specify `on` to assign events by event time and accept out-of-order data with `tolerance`. Fixed windows delay closure by the tolerance but pass events to their subpipelines in arrival order. Trailing and session windows reorder events within that tolerance before evaluating event order. Omit `on` for processing-time windows that close on their wall-clock boundary. Use an integer `size` for windows that close after a number of events rather than an amount of time.
 
 Put [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before a fixed window only when its subpipeline needs timestamp order, for example to collect an activity sequence. The guide on [repairing out-of-order events](../shape/repair-out-of-order-events.md) explains when to use `reorder`, a complete `sort`, or window tolerance alone.

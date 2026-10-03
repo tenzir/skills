@@ -12,6 +12,8 @@ section: "Integrations"
 
 Tenzir supports the [File Transfer Protocol (FTP)](https://en.wikipedia.org/wiki/File_Transfer_Protocol), both downloading and uploading files. Use [`from_ftp`](https://tenzir.com/docs/reference/operators/from_ftp.md) to download bytes and parse them with a subpipeline, and use [`to_ftp`](https://tenzir.com/docs/reference/operators/to_ftp.md) to print events with a subpipeline and upload the result.
 
+FTP
+
 FTP consists of two separate TCP connections, one control and one data connection. This can be tricky for some firewalls and may require special attention.
 
 ## Examples

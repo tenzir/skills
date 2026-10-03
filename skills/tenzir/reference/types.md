@@ -29,6 +29,8 @@ where severity?.to_upper() == "HIGH" // Safe navigation with type conversion
 
 The diagram below illustrates the type system at a glance:
 
+Type System
+
 Tenzir’s type system is a superset of JSON: Every valid JSON object is a valid Tenzir value, but there also additional types available, such as `ip` and `subnet`.
 
 ### Basic Types

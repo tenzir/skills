@@ -10,3 +10,5 @@ section: "Docs"
 > Tutorials are learning-oriented lessons that take you through a series of steps to complete a project. They are most useful when you want to get started with Tenzir.
 
 **Tutorials** are learning-oriented lessons that take you through a series of steps to complete a project. They are most useful when you want to get started with Tenzir.
+
+Documentation structure

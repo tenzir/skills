@@ -20,6 +20,8 @@ from_velociraptor [request_name=string, org_id=string, max_rows=int,
 
 The `from_velociraptor` input operator provides a request-response interface to a [Velociraptor](https://docs.velociraptor.app) server:
 
+Velociraptor
+
 The pipeline operator is the client and it establishes a connection to a Velociraptor server. The client request contains a query written in the [Velociraptor Query Language (VQL)](https://docs.velociraptor.app/docs/vql), a SQL-inspired language with a `SELECT .. FROM .. WHERE` structure.
 
 You can either send a raw VQL query via `from_velociraptor query "<vql>"` to a server and processs the response, or hook into a continuous feed of artifacts via `from_velociraptor subscribe <artifact>`. Whenever a hunt runs that contains this artifact, the server will forward it to the pipeline and emit the artifact payload in the response field `HuntResults`.

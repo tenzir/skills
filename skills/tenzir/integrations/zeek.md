@@ -12,6 +12,8 @@ section: "Integrations"
 
 The [Zeek](https://zeek.org) network monitor translates raw packets into structured logs. Tenzir supports various Zeek use cases, such as continuous ingestion, ad-hoc log file processing, and even generating Zeek logs.
 
+Zeek
+
 Zeek logs come in three forms in practice, all of which Tenzir can parse natively:
 
 1. Tab-Separated Values (TSV) with a custom header.

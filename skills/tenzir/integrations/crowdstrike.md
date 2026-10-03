@@ -14,6 +14,8 @@ This page shows you how to send events from Tenzir to [CrowdStrike Falcon Next-G
 
 [CrowdStrike Falcon Next-Gen SIEM](https://www.crowdstrike.com/en-us/platform/next-gen-siem/) is CrowdStrike’s security information and event management platform. Tenzir can forward events to Falcon Next-Gen SIEM through its [HEC/HTTP connector](https://developer.crowdstrike.com/ngsiem/data-ingestion/) and can consume Falcon Data Replicator data from the SQS-to-S3 delivery path used by CrowdStrike and many SIEM integrations.
 
+CrowdStrike integration
+
 Validate in your Falcon tenant
 
 The examples use public connector patterns from CrowdStrike and integration partners. Connector names, available parsers, and generated URLs can differ by tenant, region, and entitlement. Use the API URL and parser settings shown in your Falcon console.

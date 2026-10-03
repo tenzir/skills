@@ -22,6 +22,8 @@ The following invariants apply:
 
 The diagram below illustrates these mechanics:
 
+Pipeline in the Browser
+
 For example, write `from {x: 42}` and click *Run* to see a single event show up.
 
 ## On the command line
@@ -47,6 +49,8 @@ cat input.yaml | tenzir 'read_yaml | select x | write_csv'
 ```
 
 The diagram below illustrates these mechanics:
+
+Pipeline on the command line
 
 For example, run `tenzir 'version | drop dependencies'` to see a single event in the terminal:
 

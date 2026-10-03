@@ -23,6 +23,8 @@ With the `speed` option, you can adjust the sleep time of the time series induce
 
 The diagram below illustrates the effect of applying `delay` to dataflow. If an event in the stream has a timestamp that precedes the previous event, `delay` emits it instantly. Use [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before `delay` when the input may contain bounded timestamp regressions. Otherwise, `delay` sleeps the amount of time to reach the next timestamp. As shown in the last illustration, the `speed` factor has a scaling effect on the inter-arrival times.
 
+Delay
+
 The options `start` and `speed` work independently, i.e., you can use them separately or both together.
 
 ### `field: time`

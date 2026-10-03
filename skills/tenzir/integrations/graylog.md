@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Graylog](https://graylog.org/) is a log management and SIEM platform that routes messages through inputs, streams, processing pipelines, index sets, destinations, and outputs. Tenzir can receive GELF streams from Graylog, send GELF into Graylog inputs, and access the OpenSearch or Elasticsearch search backend when you need backend-level queries.
 
+Graylog message flow
+
 ## Choose an integration path
 
 Use GELF when Graylog should ingest, route, index, and alert on the events. Use direct backend access only when you intentionally want to bypass Graylog’s ingestion path.

@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) is a monitoring and observability service in AWS. Tenzir can read CloudWatch events with [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md) and write events with [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md).
 
+CloudWatch
+
 CloudWatch stores log data in log groups and log streams. Use Tenzir to live tail new logs, search historical logs with filter patterns, replay one log stream, or forward pipeline output into an existing log stream.
 
 ## Configuration

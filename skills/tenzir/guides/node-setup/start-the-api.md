@@ -55,17 +55,23 @@ There exist four modes to start the REST API, each of which suits a slightly dif
 
 The developer mode bypasses encryption and authentication token verification.
 
+Developer Mode
+
 Pass `--mode=dev` to start the REST API in developer mode.
 
 ### Server mode
 
 The server mode reflects the “traditional” mode of operation where the server binds to a network interface. This mode only accepts HTTPS connections and requires a valid authentication token for every request. This is the default mode of operation.
 
+Server Mode
+
 Pass `--mode=server` to start the REST API in server mode.
 
 ### Upstream TLS mode
 
 The upstream TLS mode is suitable when Tenzir sits upstream of a separate TLS terminator that is running on the same machine. This kind of setup is commonly encountered when running nginx as a reverse proxy.
+
+Upstream TLS Mode
 
 Tenzir only listens on localhost addresses, accepts plain HTTP but still checks authentication tokens.
 
@@ -76,5 +82,7 @@ Pass `--mode=upstream` to start the REST API in server mode.
 The mutual TLS mode is suitable when Tenzir sits upstream of a separate TLS terminator that may be running on a different machine. This setup is commonly encountered when running [nginx](https://nginx.org) as a load balancer. Tenzir would typically be configured to use a self-signed certificate in this setup.
 
 Tenzir only accepts HTTPS requests, requires TLS client certificates for incoming connections, and requires valid authentication tokens for any authenticated endpoints.
+
+mTLS Mode
 
 Pass `--mode=mtls` to start the REST API in server mode.

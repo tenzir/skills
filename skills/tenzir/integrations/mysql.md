@@ -12,6 +12,8 @@ section: "Integrations"
 
 [MySQL](https://www.mysql.com/) is an open-source relational database management system widely used for web applications, data warehousing, and enterprise applications.
 
+MySQL Diagram
+
 Tenzir connects to MySQL over the network using the MySQL wire protocol. Tenzir communicates with MySQL via the host and port you specify in the [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) operator. This means:
 
 * **Network**: Tenzir and MySQL can run on the same machine (using `localhost`) or on different machines in the same network. You just need to make sure that Tenzir can reach the MySQL server.

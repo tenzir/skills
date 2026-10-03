@@ -27,6 +27,8 @@ These two operations combined offer *unified matching*, i.e., automated retro ma
 
 The diagram below illustrates how the operator works:
 
+lookup
+
 ### `name: string`
 
 The name of the context to lookup with.

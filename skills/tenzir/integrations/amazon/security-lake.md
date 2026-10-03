@@ -12,13 +12,13 @@ section: "Integrations"
 
 [Amazon Security Lake](https://aws.amazon.com/security-lake/) is a managed security data lake on AWS. It collects and stores security data in the Open Cybersecurity Schema Framework (OCSF) format.
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Amazon security Lake
 
 Tenzir sends events to Amazon Security Lake using the [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) operator.
 
 ## Configuration
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Amazon security Lake
 
 The current architectural pattern for Amazon Security Lake requires creating one custom source per OCSF event class. This design ensures clean data organization, with each custom source receiving its own dedicated directory under `/ext` in the S3 bucket. Since each Parquet file must contain records of only one OCSF event class, this one-to-one mapping between custom sources and event classes is the most practical approach. The partition path follows this structure:
 

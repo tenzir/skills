@@ -14,6 +14,8 @@ section: "Integrations"
 
 You can let Tenzir create a table for each OCSF class, append to a schema you manage, or combine selected typed columns with a JSON catch-all. The choice determines how the table handles fields that vary between events.
 
+ClickHouse integration
+
 ## Choose an integration path
 
 Choose a write pattern based on how you want to manage the destination schema. You can use the read and export patterns with any of these tables.

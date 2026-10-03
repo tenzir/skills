@@ -11,6 +11,8 @@ section: "Docs"
 
 Exporting (or *querying*) data can be done by [running a pipeline](../basic-usage/run-pipelines.md) that begins with the [`export`](https://tenzir.com/docs/reference/operators/export.md) input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `export` operator runs within the node.
 
+Export
+
 Let’s bring back a sample of historical data we [imported in the previous section](../store/import-into-a-node.md):
 
 ```tql

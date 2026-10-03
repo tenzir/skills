@@ -10,6 +10,8 @@ section: "Integrations"
 
 > Index, search, and analyze data in a distributed and scalable manner.
 
+Elasticsearch
+
 [Elasticsearch](https://www.elastic.co/elasticsearch) is a search and observability suite for unstructured data. Tenzir can send events to Elasticsearch and emulate a Elasticsearch-compatible Bulk API endpoint.
 
 When sending data to Elasticsearch, Tenzir uses the [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html)and attempts to maximally batch events for throughput, accumulating multiple events before shipping them within a single API call. You can control batching behavior with the `max_content_length` and`buffer_timeout` options.

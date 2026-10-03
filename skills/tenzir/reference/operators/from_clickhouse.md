@@ -182,7 +182,7 @@ To keep results identical, the operator only translates predicates whose ClickHo
 * Null checks with `== null` and `!= null`.
 * `in` with a list of such literals, and `ip in subnet`.
 * Comparisons between two columns of the same kind. Temporal columns must share their exact type, such as two `DateTime64(3)` columns.
-* The string functions `starts_with`, `ends_with`, and `length_bytes`, and substring search with `"needle" in haystack`.
+* The string functions `starts_with`, `ends_with`, and `length_bytes`, and substring search with `"needle" in haystack`. With `ignore_case=true`, `starts_with` and `ends_with` translate approximately, as explained in [Case-insensitive matching](from_clickhouse.md#case-insensitive-matching), and so does `match_regex`, as explained in [Regular expressions](from_clickhouse.md#regular-expressions).
 * Arithmetic that cannot overflow: `+`, `-`, and `*` on integer columns of at most 32 bits with a literal whose magnitude is below 2^31, and any `+`, `-`, `*`, or `/` that yields a floating-point number, except division by zero.
 * Expressions that consist of literals only, such as `1024 * 1024` or `2024-01-01 + 1d`, which are computed ahead of time.
 * `and`, `or`, and `not`.
@@ -192,9 +192,17 @@ Literals are rendered in the column’s own ClickHouse type, so the comparison n
 
 Nested fields address elements of named tuples, so `meta.level > 2` translates when `meta` is a `Tuple(source String, level Int64)` column, and selecting `meta.level` transfers only that element. A tuple with an element of an [unsupported type](from_clickhouse.md#types) is absent from the result as a whole, so its elements are neither compared in SQL nor narrowed by a projection. Pushed predicates produce the same rows as TQL, including for `null` values, so `not (x == 1)` keeps rows where `x` is `null` either way.
 
+### Case-insensitive matching
+
+A predicate such as `msg.starts_with("error", ignore_case=true)` goes into the query as `startsWith(lowerUTF8(msg), lowerUTF8('error'))`. This is a deliberate exception to the rule that pushdown never changes results, made so that a common filter reaches the database. ClickHouse lowercases one character at a time, which agrees with TQL for ASCII and most other text. TQL applies full Unicode case folding instead, which differs for a few characters: it folds `ß` to `ss`, so `"Straße".starts_with("strass", ignore_case=true)` is `true` in TQL but matches no row in ClickHouse.
+
+### Regular expressions
+
+A predicate such as `msg.match_regex("^ERROR [0-9]+")` goes into the query as `match(msg, '(?-s)^ERROR [0-9]+')`. Both TQL and ClickHouse use the RE2 library. ClickHouse lets `.` match a newline, and the `(?-s)` prefix turns that off again, so that the pattern matches the same text as in TQL. Like case-insensitive matching, this is a deliberate exception to the rule that pushdown never changes results: ClickHouse bundles its own release of RE2, which may disagree with TQL’s on rarely used syntax, and its behavior is undefined for `String` values that are not valid UTF-8. A pattern that contains a NUL byte runs in Tenzir.
+
 ### IP addresses in string columns
 
-Many ClickHouse tables store IP addresses as `String`. In TQL, comparing a string with an `ip` value is a type mismatch that yields `null`, so a predicate such as `src == 1.1.1.1` against such a column would match no rows. This is the one deliberate exception to the rule that pushdown never changes results: in `table` mode, the operator resolves such a predicate by the column’s type: an `ip` literal that is compared for equality with a `String` column, or listed in an `in` test against one, becomes its canonical text. The predicate `src == 1.1.1.1` then reads `src == "1.1.1.1"` and is pushed as `src = '1.1.1.1'`, which also lets ClickHouse use an index on the column. The canonical text is the dotted form for IPv4 and the lowercase compressed form for IPv6, so `2001:DB8::1` in TQL matches the text `2001:db8::1` but not `2001:0db8::1`.
+Many ClickHouse tables store IP addresses as `String`. In TQL, comparing a string with an `ip` value is a type mismatch that yields `null`, so a predicate such as `src == 1.1.1.1` against such a column would match no rows. This is another deliberate exception to the rule that pushdown never changes results: in `table` mode, the operator resolves such a predicate by the column’s type: an `ip` literal that is compared for equality with a `String` column, or listed in an `in` test against one, becomes its canonical text. The predicate `src == 1.1.1.1` then reads `src == "1.1.1.1"` and is pushed as `src = '1.1.1.1'`, which also lets ClickHouse use an index on the column. The canonical text is the dotted form for IPv4 and the lowercase compressed form for IPv6, so `2001:DB8::1` in TQL matches the text `2001:db8::1` but not `2001:0db8::1`.
 
 Membership in a subnet has no textual form. The operator rewrites `src in 10.0.0.0/8` to `src.ip() in 10.0.0.0/8`, which parses the column in Tenzir, and pushes a *prefilter* that lets ClickHouse drop rows it can rule out with its own parser while keeping every row it cannot parse:
 

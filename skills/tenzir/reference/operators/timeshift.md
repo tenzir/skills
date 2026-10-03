@@ -21,6 +21,8 @@ The `timeshift` operator adjusts a series of time values by anchoring them aroun
 
 With `speed`, you can adjust the relative speed of the time series induced by `field` with a multiplicative factor. This has the effect of making the time series “faster” for values great than 1 and “slower” for values less than 1.
 
+Timeshift
+
 ### `field: time`
 
 The field containing the timestamp values.

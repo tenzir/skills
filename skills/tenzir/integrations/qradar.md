@@ -14,6 +14,8 @@ section: "Integrations"
 
 QRadar also supports proprietary collection and appliance workflows. Tenzir does not provide a dedicated QRadar operator. Prefer LEEF over TLS Syslog when QRadar should ingest live events from Tenzir.
 
+IBM QRadar integration paths
+
 ## Choose an integration path
 
 Use the path that matches where QRadar sits in your deployment:

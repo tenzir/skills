@@ -65,6 +65,8 @@ to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 
 Start with `// parallelism: 8` and measure the result for your workload. The planner replicates eligible operators into parallel lanes, routes batches across them, and gathers the output again. This diagram uses three lanes to illustrate the plan shape:
 
+A source fans batches into three parallel lanes, each containing where, set, ocsf\_cast, and drop\_null\_fields instances at different stages of processing, before a single to\_clickhouse sink gathers the outputs
+
 Parallelism directive can be one of:
 
 * `disabled`, the default, which runs one instance of every operator. Adjacent operators still run [fused](tune-performance.md#fusing) into a single group, same as an explicit degree.
@@ -169,6 +171,8 @@ parallel 8, limit_partitions=8 {
 
 Each channel between two operators is a buffer, so splitting a pipeline into several lanes would multiply both the number of channels and the data sitting in them. Tenzir avoids that by fusing the operators of a lane into a single group. Operators inside a group hand batches to each other directly, with no channel in between, and a group carries one batch through all of its operators before it consumes the next one:
 
+Three parallel lanes of where, ocsf\_cast, and set, each with an active batch inside every operator and two batches queued in each internal channel, next to the same three lanes fused into groups with no internal channels and one batch in flight each. Dashed input and output channels show that both plans are sections of a larger pipeline
+
 Tenzir fuses by default, even for pipelines that never opt into parallelism, because it lowers memory usage for the vast majority of pipelines, which are not CPU-bound. The trade-off is a lower throughput ceiling for the pipelines that are: fused operators hand off one batch at a time instead of overlapping work across channel-connected jobs, so a chain of otherwise CPU-bound operators can lose up to 40% of its peak throughput compared to running unfused. Pipelines that hit this ceiling benefit from an explicit `// parallelism: <n>` directive, which spreads the work across `<n>` instances again.
 
 To opt a pipeline out of fusing entirely, add the `fuse=none` option to the parallelism directive:
@@ -191,6 +195,8 @@ parallel 4, fuse="none" {
 ## Storage Engine
 
 The central component of Tenzir’s storage engine is the *catalog*. It owns the partitions, keeps metadata about them, and maintains a set of sparse secondary indexes to identify relevant partitions for a given query.
+
+Catalog Indexes
 
 The catalog’s secondary indexes are space-efficient sketch data structures (e.g., Bloom filters, min-max summaries) that have a low memory footprint but may yield false positives. Tenzir keeps all sketches in memory.
 
@@ -254,6 +260,8 @@ Currently, the default value is taken from Apache Arrow itself.
 ### Rebuild partitions
 
 The `rebuild` command re-ingests events from existing partitions and replaces them with new partitions. This makes it possible to upgrade persistent state to a newer version, or recreate persistent state after changing configuration parameters, e.g., switching from the Feather to the Parquet store backend. The following diagram illustrates this “defragmentation” process:
+
+Rebuild
 
 Rebuilding partitions also recreates their sketches. The process takes place asynchronously in the background. Control this behavior in your `tenzir.yaml` configuration file, to disable or adjust the resources to spend on automatic rebuilding:
 

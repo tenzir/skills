@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Snowflake](https://snowflake.com) is a multi-cloud data warehouse. Tenzir can send events from a pipeline to [Snowflake databases](https://docs.snowflake.com/en/sql-reference/ddl-database).
 
+Snowflake
+
 Use the [`to_snowflake`](https://tenzir.com/docs/reference/operators/to_snowflake.md) output operator at the end of a pipeline to send events to a specific table.
 
 ADBC

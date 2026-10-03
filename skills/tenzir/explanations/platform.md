@@ -19,6 +19,8 @@ There exist three primary entities in the platform:
 
 The diagram below illustrates their relationship.
 
+Platform Components
+
 ### Users
 
 A **user** is an individual account authenticated by an external Identity Provider (IdP). Users can own personal workspaces directly or join an organization to collaborate with others.
@@ -54,11 +56,15 @@ For details on managing these entities, see the platform management guides:
 
 The following diagram visualizes the platform’s data model (highlighted) and how the entities relate to each other with respect to their multiplicities.
 
+Platform Data Model
+
 It’s important to note that a node can only be part of one workspace. There is no support for “multi-homing” as it would create non-trivial questions about how to reconcile secrets and permissions from multiple workspaces.
 
 ## Deployment Modes
 
 Based on the [Edition](https://tenzir.com/pricing.md) of Tenzir, you have different deployment modes of the platform. The below diagram illustrates the variants.
+
+Deployment Modes
 
 * **Community Edition**: geared towards single-user deployments, the Community Edition only associates a personal workspace with every user.
 * **Professional Edition**: geared towards small-business deployments, the Professional Edition features organizations for allowing multiple users to collaborate.

@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Cloud Storage](https://cloud.google.com/storage) is Google’s object storage service. Tenzir can treat it like a local filesystem to read and write files.
 
+Google Cloud Storage
+
 ## Configuration
 
 You need to configure appropriate credentials using Google’s [Application Default Credentials](https://google.aip.dev/auth/4110).

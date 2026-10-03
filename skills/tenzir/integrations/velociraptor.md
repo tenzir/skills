@@ -14,6 +14,8 @@ section: "Integrations"
 
 Use Tenzir to conveniently speak with a Velociraptor server over the [gRPC API](https://docs.velociraptor.app/docs/server_automation/server_api/).
 
+Velociraptor
+
 ## Create a TLS certificate to communicate with Velociraptor
 
 The `velociraptor` acts as client and establishes a connection to a Velociraptor server via gRPC. All Velociraptor client-to-server communication is mutually authenticated and encrypted via TLS certificates. This means you must provide a client-side certificate, which you can generate as follows. (Velociraptor ships as a static binary that we refer to as `velociraptor-binary` here.)

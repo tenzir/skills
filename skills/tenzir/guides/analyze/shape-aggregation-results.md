@@ -21,6 +21,8 @@ The `output` policy determines whether a completed aggregate result replaces, sa
 
 The same input population therefore produces three different result shapes:
 
+Three aggregation flows show original event records becoming a final summary, one checkpoint event, or a set of enriched events. The output policies map to stats, streamstats checkpoints, and eventstats.
+
 Final and processing-time boundaries use `summary` by default. Count boundaries use `trigger` by default. The current implementation supports `events` only at the final input boundary. See the [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) reference for the complete option matrix.
 
 ## Add running statistics to events

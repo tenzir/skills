@@ -11,7 +11,11 @@ section: "Docs"
 
 A Tenzir **pipeline** is a chain of **operators** that represents a dataflow. Operators are the atomic building blocks that produce, transform, or consume data. Think of them as Unix or Powershell commands where the result from one command is feeding into the next:
 
+Pipeline Chaining
+
 Our pipelines have 3 types of operators: **inputs** that produce data, **outputs** that consume data, and **transformations** that do both:
+
+Pipeline Structure
 
 You write pipelines in the [Tenzir Query Language (TQL)](language.md), a language that we developed from the ground up to concisely describe such dataflows. Our explanation of the [pipeline executor](executor.md) covers how Tenzir runs them, including operator fusion and parallel execution.
 
@@ -25,9 +29,13 @@ Tenzir pipelines operate both ond unstructured stream of bytes and typed event s
 
 An operator has an **upstream** and **downstream** type:
 
+Upstream and Downstream Types
+
 This typing ensures pipelines are well-formed. Adjacent operators must have matching types: the downstream type of one operator must match the upstream type of the next, i.e., upstream/downstream types of adjacent operators have to match. Otherwise the pipeline is malformed.
 
 With these operators as building blocks, you can create all kinds of pipelines, as long as they follow the two principal rules of (1) sequencing inputs, transformations, and outputs, and (2) ensuring that operator upstream/downstream types match. Here are examples of other valid pipeline variations:
+
+Operator Composition Examples
 
 ## Multi-Schema Dataflows
 
@@ -35,9 +43,11 @@ As mentioned above, pipelines can transport both *bytes* and *events*. Let’s g
 
 Unique about Tenzir’s pipeline executor is that a single pipeline can process events with *multiple schemas*. When you typically work with data frames, your workload runs on input with a fixed schema, e.g., when you query a database table. In Tenzir, schemas can change dynamically during the execution of a pipeline, much like document-oriented engines that work on JSON or have one-event-at-a-time processing semantics. Tenzir is unique in that it gives the user the feeling of operating on a single event at a time while hiding the structured data frame batching behind the scenes. Thus, Tenzir combines the performance of structured query engines with the flexibility of document-oriented engines, making it perfect fit for processing *semi-structured data* at scale:
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Structured vs document-oriented engines
 
 The schema variance begins early in the data flow, where parsers emit events with changing schemas as they encounter changing fields. If an operator detects a schema changes, it creates a new batch of events. In terms of performance, the worst case for Tenzir is a ordered stream of schema-switching events, with every event having a new schema than the previous one. But even for those scenarios operators can efficiently build homogeneous batches when the inter-event order does not matter. Similar to predicate pushdown, Tenzir operators support *ordering pushdown* to signal to upstream operators that the event order only matters intra-schema but not inter-schema. In this case the operator transparently “demultiplex” a heterogeneous event stream into N homogeneous streams. The [`sort`](https://tenzir.com/docs/reference/operators/sort.md) operator is an example of such an operator; it pushes its ordering requirements upstream, allowing parsers to efficiently create multiple streams events in parallel. The [Optimization](pipeline.md#optimization) section describes this and the other rewrites the optimizer performs.
+
+Multi-schema Example
 
 Some operators only work with exactly one instance per schema internally, such as [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md), which first writes a header and then all subsequent rows have to adhere to the emitted schema. Such operators cannot handle events with changing schemas.
 
@@ -56,7 +66,7 @@ An operator that does not affect a requirement passes it on. One that does, adju
 
 The rewrite through [`set`](https://tenzir.com/docs/reference/operators/set.md) lets a filter pass field renames, constants, record literals, and whole-event assignments such as `this = move this.ocsf`. For example, `y = x | where y == 42` turns into `where x == 42 | y = x`. A field that `move` or [`drop`](https://tenzir.com/docs/reference/operators/drop.md) removes reads as `null`. When a predicate reads a field without an exact equivalent in the input, for example one assigned from `now()`, the predicate stays after the assignment. This is how a filter on OCSF fields reaches the source through a normalization operator.
 
-On the way, the optimizer simplifies every predicate. It evaluates the parts that do not depend on the event and removes the branches of `and` and `or` that cannot change the result. After `class_uid = 3002`, the predicate `class_uid == 3002 and src_ip == 1.2.3.4` becomes `src_ip == 1.2.3.4`, and `class_uid == 4001` becomes `false`. A part that would emit a warning at runtime, such as `1 / 0`, stays as it is.
+On the way, the optimizer simplifies every predicate. It evaluates the parts that do not depend on the event and removes the branches of `and` and `or` that cannot change the result. After `class_uid = 3002`, the predicate `class_uid == 3002 and src_ip == 1.2.3.4` becomes `src_ip == 1.2.3.4`, and `class_uid == 4001` becomes `false`. The optimizer does not evaluate a part that would emit a warning at runtime, such as `1 / 0`. Removing a branch can still drop its warnings: `x == 1 / 0 or true` becomes `true` and no longer warns.
 
 Take this pipeline:
 

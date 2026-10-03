@@ -12,7 +12,7 @@ section: "Integrations"
 
 [Azure Event Hubs](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about) is a real-time event ingestion service. It can receive and process millions of events per second, and it provides a Kafka endpoint for streaming data from Microsoft services to Tenzir.
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Azure Event Hubs
 
 Many Microsoft security services can stream events in real time to Tenzir using Azure Event Hubs, including [Microsoft Defender](defender.md), [Microsoft Sentinel](https://learn.microsoft.com/en-us/azure/sentinel/overview), and other Azure services.
 

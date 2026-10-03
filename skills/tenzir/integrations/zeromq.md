@@ -12,6 +12,8 @@ section: "Integrations"
 
 [ZeroMQ](https://zeromq.org/) (0mq) is a light-weight messaging framework with various socket types. Tenzir supports writing to [PUB sockets](https://zeromq.org/socket-api/#pub-socket) and reading from [SUB sockets](https://zeromq.org/socket-api/#sub-socket), both in bind mode and connect mode.
 
+ZeroMQ
+
 Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
 The event-oriented ZeroMQ operators are:

@@ -12,6 +12,8 @@ section: "Integrations"
 
 Tenzir can read from and write to local files, cloud object storage, standard input, standard output, and standard error.
 
+File
+
 When `~` is the first character in the file path, the operator substitutes it with the `$HOME` environment variable.
 
 Use [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) to read files with glob patterns, automatic format detection, and file monitoring. For writing, use [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md) with a print operator.

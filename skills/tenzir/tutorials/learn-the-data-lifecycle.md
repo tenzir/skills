@@ -11,6 +11,8 @@ section: "Docs"
 
 Security data arrives as somebody else’s text and has to end up as something a detection, a dashboard, or an auditor can use. We call the steps in between the **data lifecycle**, and we group its thirteen stages into four phases, with replay closing the loop back to the first one.
 
+The data lifecycle
+
 This page is the map. Each stage below gets a definition, a short snippet, and links to the guides that go deep. Read it once to learn the vocabulary, then come back to it when you need to find where something belongs.
 
 Only the first four stages have a required order. Data has to arrive before anything can parse it, parsing has to expose fields before shaping can prepare them, and normalization then maps them to a schema. Everything else depends on what you are building. A real deployment runs most of these at the same time in separate pipelines, connected by [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), so the picture is a vocabulary rather than a queue.

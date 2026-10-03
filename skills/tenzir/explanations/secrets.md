@@ -108,7 +108,7 @@ Managed secrets are identified by their name and can come from the following sou
 2. The configuration of the Tenzir Node
 3. The Tenzir Platform secret store for the workspace the Tenzir Node belongs to
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Resolution
 
 Access a managed secret’s value with the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function.
 

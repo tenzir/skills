@@ -166,7 +166,7 @@ Prerequisites
 
 Before you begin, you’ll need a valid `TENZIR_TOKEN` for your node. Obtain one by [provisioning a node](provision-a-node.md), select the *other* tab, and click on the text box to copy the shown token.
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->AWS Architecture
 
 You can deploy a Tenzir node using either [CloudFormation](https://aws.amazon.com/cloudformation/) for automated setup or manually through the AWS console. Both methods support deploying as many nodes as you need.
 

@@ -19,6 +19,8 @@ This guide shows you how to set up the platform on your own premises with the [S
 
 The platform integrates three types of services, as the diagram below illustrates:
 
+Platform Services
+
 1. **Internal**: Tenzir provides the (gray) internal services. They are core to the platform’s operation.
 2. **External**: You provide the (blue) external services. We do not ship these, so you must bring your own.
 3. **Configurable**: You can use our bundled (yellow) configurable services or provide your own.

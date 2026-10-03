@@ -12,7 +12,7 @@ section: "Docs"
 Replaces the input with metrics describing the input.
 
 ```tql
-measure [cumulative=bool]
+measure [cumulative=bool, by_schema=bool]
 ```
 
 ## Description
@@ -42,6 +42,23 @@ type tenzir.measure.bytes = record{
 ### `cumulative = bool (optional)`
 
 Whether to emit running totals for the `events` and `bytes` fields rather than per-batch statistics.
+
+### `by_schema = bool (optional)`
+
+Whether to count events per schema. Defaults to `true`.
+
+When `false`, the operator counts all events together and emits a single metric per batch without the `schema_id` and `schema` fields:
+
+Events Metrics (by\_schema=false)
+
+```text
+type tenzir.measure.events = record{
+  timestamp: time,
+  events: uint64,
+}
+```
+
+This option has no effect when measuring bytes.
 
 ## Examples
 

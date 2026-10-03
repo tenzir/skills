@@ -12,7 +12,7 @@ section: "Integrations"
 
 [SentinelOne](https://www.sentinelone.com) is a cybersecurity platform that provides endpoint protection and threat detection. The SentinelOne [Singularity Data Lake](https://www.sentinelone.com/products/singularity-data-lake/) allows you to store and analyze security events at scale. Tenzir provides bidirectional integration with the SentinelOne Data Lake via its REST API.
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->SentinelOne Data Lake
 
 ## Query events from SentinelOne Data Lake
 

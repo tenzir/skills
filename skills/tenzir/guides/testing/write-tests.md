@@ -107,6 +107,8 @@ Review the reference file, adjust the pipeline if needed, and rerun `--update` u
 
 If the pipeline emits the right events in a varying order, as `summarize` does for its groups, add `pre-compare: sort` to the frontmatter instead of ending the pipeline with a `sort` operator. See [pre-compare transforms](../../reference/test-framework.md#pre-compare-transforms).
 
+If runtime warnings are irrelevant to what a test checks, add `quiet: true` to its frontmatter to exclude them from the baseline. Leave this setting disabled when the warning diagnostics themselves are part of the expected output. Errors and compilation diagnostics remain visible. You can also set this key in `test.yaml` for a directory and override it with `quiet: false` in individual tests. Read about [runtime warning suppression](../../reference/test-framework.md#runtime-warning-suppression) for the full behavior.
+
 ## Step 6: Provide stdin input
 
 Some tests need data piped to stdin rather than read from files. Place a `.stdin` file next to the test to provide this content automatically. This simplifies TQL tests by letting pipelines start with a parser directly.

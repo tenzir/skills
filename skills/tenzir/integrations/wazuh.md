@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Wazuh](https://wazuh.com/) is an open source XDR and SIEM platform. Tenzir can forward events to Wazuh over Syslog and query Wazuh alerts from the Wazuh indexer API.
 
+Wazuh
+
 ## Configure Wazuh to receive Syslog
 
 Wazuh can receive Syslog messages on the Wazuh server with a `<remote>` configuration in `/var/ossec/etc/ossec.conf`. For example, this configuration accepts TCP Syslog from a Tenzir node at `10.0.0.5`:

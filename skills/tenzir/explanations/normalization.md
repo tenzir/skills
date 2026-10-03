@@ -35,6 +35,8 @@ The naive answer is to pick your platform’s schema and map everything into it.
 
 We normalize every source to OCSF first, then translate OCSF into whatever a destination wants. Twenty sources and three destinations becomes twenty mappings plus three, not sixty, and a new source costs exactly one mapping regardless of how many places its events end up.
 
+Every schema translates to every other one through OCSF in the middle, instead of pair by pair
+
 The same reasoning runs in reverse. Data that arrives already mapped to one platform’s schema becomes OCSF once, and from there reaches every other target, which is what makes migrations tractable.
 
 That only works if the intermediate schema can hold everything the sources say. An intermediate that quietly drops fields would poison every destination downstream of it. OCSF qualifies for three reasons:

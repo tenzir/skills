@@ -12,6 +12,8 @@ section: "Integrations"
 
 The [User Datagram Protocol (UDP)](https://en.wikipedia.org/wiki/User_Datagram_Protocol) is a connection-less protocol to send messages on an IP network. Tenzir supports writing to and reading from UDP sockets, both in server (listening) and client (connect) mode.
 
+UDP
+
 Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
 ## Examples

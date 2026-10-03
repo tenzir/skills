@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) is Azure’s object storage service. Tenzir can treat it like a local filesystem to read and write files.
 
+Azure Blob Storage
+
 ## Examples
 
 Use [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md) to read files from Azure Blob Storage. It supports glob patterns and automatic format detection. For writing, use [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md) with a print operator.

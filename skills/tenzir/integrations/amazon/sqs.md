@@ -14,6 +14,8 @@ section: "Integrations"
 
 Tenzir can receive messages from SQS queues with [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md) and send messages to SQS queues with [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md).
 
+SQS
+
 When Tenzir reads from an SQS queue, it emits one event per SQS message. The event uses the `tenzir.sqs` schema and contains the message body in the `message` field together with SQS metadata such as the message ID, receive count, and send time.
 
 By default, Tenzir deletes each received message from the queue after it emits the event. Set `keep_messages=true` to receive messages without deleting them. Combine it with `visibility_timeout` to control when SQS makes the messages visible again:

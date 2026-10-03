@@ -113,9 +113,9 @@ For local databases, a batch is written completely or not at all. DuckDB rejects
 
 ## Remote databases
 
-Tenzir bundles Quack and its HTTP transport; connecting never downloads an extension. Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
+Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
 
-Quack is a beta protocol. The bundled DuckDB 1.5.5 client was tested against a DuckDB 1.5.5 server with Quack revision `c1548111c1bfd16207e22fd3cb7e4bde1335b9d0`. Compatibility with other versions is not guaranteed.
+Quack is a beta protocol. Our [DuckDB integration](../../integrations/duckdb.md#quack) describes the bundled extensions and tested client and server versions.
 
 The tested Quack version cannot attach databases containing sequence-backed column defaults. This prevents `to_duckdb` from connecting, even when writing to another table in that database. Remote reads do not have this limitation.
 

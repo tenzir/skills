@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Amazon Managed Streaming for Apache Kafka (Amazon MSK)](https://aws.amazon.com/msk/) is a managed Kafka service on AWS. It handles infrastructure and operations, making it easier to run Kafka applications and Kafka Connect connectors without becoming a Kafka expert.
 
+Amazon MSK
+
 ## Sending and Receiving
 
 Tenzir’s Kafka operators [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) and [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md) can send and receive events from Amazon MSK Clusters.

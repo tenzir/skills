@@ -10,6 +10,8 @@ section: "Integrations"
 
 > Search, analyze, and visualize data with a distributed, open-source platform.
 
+OpenSearch
+
 [OpenSearch](https://opensearch.org) is a search and observability suite for unstructured data. Tenzir can send events to OpenSearch and emulate a OpenSearch-compatible Bulk API endpoint.
 
 When sending data to OpenSearch, Tenzir uses the [Bulk API](https://opensearch.org/docs/latest/api-reference/document-apis/bulk/)and attempts to maximally batch events for throughput, accumulating multiple events before shipping them within a single API call. You can control batching behavior with the `max_content_length` and`buffer_timeout` options.

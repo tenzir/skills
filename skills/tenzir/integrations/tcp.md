@@ -12,6 +12,8 @@ section: "Integrations"
 
 The [Transmission Control Protocol (TCP)](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) provides a bidirectional byte stream over IP. Tenzir provides operators for both sides of a TCP conversation: connecting to remote endpoints, accepting incoming connections, and serving data to connected clients.
 
+TCP
+
 Use the IP address `0.0.0.0` to listen on all available network interfaces.
 
 ## Connecting to remote endpoints

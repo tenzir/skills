@@ -54,6 +54,8 @@ The planner turns the optimized IR into an executable directed acyclic graph (DA
 
 Conditionals such as [`if`](https://tenzir.com/docs/reference/statements.md#if) and [`match`](https://tenzir.com/docs/reference/statements.md#match) route each event through one branch. The [`fork`](https://tenzir.com/docs/reference/operators/fork.md) operator copies events into a side pipeline, while [`merge`](https://tenzir.com/docs/reference/operators/merge.md) adds events from another source. The [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md) operator copies events across several branches and combines their results, and [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) lets eligible operators run in multiple parallel copies.
 
+The IR shows one pipeline with nested subpipelines in merge, if, and fork. A hatched arrow points to the plan DAG, where merge adds a second source, if branches and rejoins, and fork splits off a sink.
+
 The resulting plan determines where streams split and rejoin, which operators can run concurrently, and where event order may change. Some subpipelines cannot be included in the initial plan: for example, `group` creates them as new keys arrive, so the executor plans those child graphs at runtime. The [Subpipelines](executor.md#subpipelines) section explains this distinction.
 
 ## Jobs and channels
@@ -68,13 +70,19 @@ Channels connect jobs across unfused boundaries. A channel carries event batches
 
 By default, Tenzir fuses adjacent operators in a lane into a single group, even in pipelines that do not opt into parallelism. Operators inside a fused group hand batches directly to each other, with no channel or buffer between them. The group carries one batch through all of its operators before consuming the next, rather than overlapping their work.
 
+Two versions of the same five-operator chain side by side: on the left every pair of operators is separated by a channel, on the right the middle three operators sit inside one group box that keeps only the channels leading into and out of it
+
 Our performance guide explains [operator fusion and its trade-offs](../guides/node-setup/tune-performance.md#fusing).
 
 ## Parallel execution
 
 Pipeline parallelism changes the degree of eligible planned operators. The planner replicates operators that can process independent work and leaves sequential operators at degree one.
 
+A sequential pipeline on the left and the same pipeline parallelized into three lanes on the right
+
 For stateless transformations, the executor scatters batches across available jobs. For a stateful operation whose result depends on a key, the planner adds a shuffle: it evaluates the partition key and sends equal keys to the same job. This preserves per-key semantics for operations such as grouped aggregation and deduplication.
+
+Events routed across three parallel lanes so that every event with the same key reaches the same summarize instance
 
 A parallel file source can assign files to jobs with a stable hash of each file path, so different instances do not read the same file. This source-level assignment differs from downstream exchanges, which partition data that already flows through channels.
 

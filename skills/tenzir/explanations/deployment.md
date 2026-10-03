@@ -17,7 +17,7 @@ This page explains Tenzir’s deployment architecture, which separates data proc
 
 Here’s how they relate schematically:
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Pipelines, Nodes, Platform
 
 When a node starts, it will automatically attempt to connect to the platform, giving you a seamless way to manage and deploy pipelines through a web interface. However, using the platform is optional - pipelines can also be controlled directly via the node’s API with a CRUD-style approach.
 

@@ -50,6 +50,8 @@ Operators have an *upstream* and *downstream* type, which can be:
 
 The diagram below illustrates the cross-product of upstream and downstream types:
 
+Upstream and Downstream Types
+
 Here are visual examples that illustrate the upstream and downstream operator types.
 
 ```tql
@@ -59,6 +61,8 @@ to_file "s3://bucket/dir/file.parquet"
 ```
 
 This pipeline consists of three operators:
+
+Operator Composition Example 1
 
 Let’s break it down:
 
@@ -75,6 +79,8 @@ from_file "events.ndjson" {
 select host, message
 to_zmq "tcp://1.2.3.4", encoding="yaml"
 ```
+
+Operator Composition Example 2
 
 Here, we use a separate set of operators that go through bytes explicitly. Let’s break it down as well:
 

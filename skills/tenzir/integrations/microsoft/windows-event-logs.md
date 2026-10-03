@@ -18,6 +18,8 @@ Once Windows Event Logs are flowing in a Tenzir pipeline, you can use any operat
 
 Installing a third-party agent to ship logs away from a Windows machine is common way to send events to a remote location.
 
+Windows Events with Agent
+
 Regardless of the concrete agent you are using for shipping, the high-level setup is always the same: the agent sends events in a push-based to a Tenzir pipeline.
 
 ### Winlogbeat
@@ -245,6 +247,8 @@ To this end, Windows comes with a **Windows Event Forwarding (WEF)** mechanism o
 
 The diagram below illustrates a typical setup:
 
+WEF & WEC
+
 On the WEC, you typically ship the collected logs away using a third-party agent, as described above. Read below on using [OpenWEC](windows-event-logs.md#collect-logs-via-openwec) as an agent-free alternative.
 
 The following configuration steps are heavily inspired by [SEKOIA](https://docs.sekoia.io/xdr/features/collect/integrations/endpoint/windows/#windows-event-forwarder-to-windows-event-collector-to-a-concentrator)’s instructions.
@@ -397,6 +401,8 @@ On the WEC, now [verify that the machine forwards events](windows-event-logs.md#
 ## Collect logs via OpenWEC
 
 Instead of natively running a WEC on a Windows machine, you can also run the third-party implementation [OpenWEC](https://github.com/cea-sec/openwec).
+
+OpenWEC
 
 From a functional perspective, this setup is identical to running a native WEC, but it does not require an additional agent at the WEC. In addition, OpenWEC can be scaled redundantly for high availability setups.
 

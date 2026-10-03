@@ -11,7 +11,7 @@ section: "Docs"
 
 The following diagram visualizes our branching model:
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Git Branching Model
 
 Our git workflow looks as follows:
 

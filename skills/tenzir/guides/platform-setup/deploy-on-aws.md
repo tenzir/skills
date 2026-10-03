@@ -19,7 +19,7 @@ You need a subscription to the [Tenzir Platform - Sovereign Edition](https://aws
 
 The deployment creates a complete platform infrastructure with the following components:
 
-<!--?xml version="1.0" standalone="no"?-->
+<!--?xml version="1.0" standalone="no"?-->Platform AWS Architecture
 
 The architecture consists of:
 

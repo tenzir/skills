@@ -16,6 +16,8 @@ For security analytics and ASIM normalization, use our [Microsoft Sentinel](sent
 
 ## Workspace ingestion
 
+Workspace ingestion architecture
+
 To get data into a workspace, Azure uses two components:
 
 1. A [Data Collection Endpoint (DCE)](https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-endpoint-overview) receives your data via HTTPS. This is the URL Tenzir sends events to.

@@ -14,6 +14,8 @@ The **Tenzir Query Language (TQL)** is a dataflow language for processing unstru
 
 TQL sits between the execution engine and the reusable integrations and packages that build on it:
 
+Four layers from bottom to top: a streaming execution engine with a DAG executor and custom data model; TQL operators and functions; native integrations; and packages for deployable use cases.
+
 The [streaming executor](executor.md) plans a directed acyclic graph (DAG) and processes typed events in columnar batches. TQL supplies the operators, functions, and expressions that describe the work. Our [integrations](https://tenzir.com/product/integrations.md) connect those pipelines to systems such as Syslog, Kafka, S3, Google Cloud, and Azure. Our [packages](packages.md) bundle reusable components for data sources, threat intelligence, and OCSF mappings into deployable use cases.
 
 A sequence of operators in the source does not imply one thread per operator. The executor decides how to group operators, where to create parallel instances, and how data moves between them. Operators in a fused group hand batches directly to each other; bounded channels connect jobs across unfused boundaries. These execution choices are separate from the language constructs you use to express a pipeline.

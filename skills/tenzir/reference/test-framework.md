@@ -528,23 +528,50 @@ The harness cycles between three internal modes:
 
 Common frontmatter keys:
 
-| Key            | Type            | Default   | Description                                                                                                                                                                   |
-| -------------- | --------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `runner`       | string          | by suffix | Runner name (`tenzir`, `python`, `shell`, custom).                                                                                                                            |
-| `fixtures`     | list            | `[]`      | Requested fixtures. Accepts bare names and structured options mappings.                                                                                                       |
-| `timeout`      | integer (s)     | `30`      | Command timeout. (`--coverage` multiplies it by five.)                                                                                                                        |
-| `error`        | boolean         | `false`   | Expect a non-zero exit code.                                                                                                                                                  |
-| `skip`         | string or dict  | unset     | Mark tests as skipped. See [skip configuration](test-framework.md#skip-configuration).                                                      |
-| `requires`     | mapping         | unset     | Capability requirements. See [capability requirements](test-framework.md#capability-requirements). Directory-level only.                    |
-| `inputs`       | string          | project   | Override `TENZIR_INPUTS` for this directory or test.                                                                                                                          |
-| `assertions`   | mapping         | `{}`      | Post-test assertion payloads. See [assertions](test-framework.md#assertions).                                                               |
-| `pre-compare`  | string or list  | `[]`      | Transform the baseline and the actual output before comparing them. See [pre-compare transforms](test-framework.md#pre-compare-transforms). |
-| `retry`        | integer         | `1`       | Total attempt budget for flaky tests (see below).                                                                                                                             |
-| `package-dirs` | list of strings | inherit   | Directory-only; extra packages merged with CLI `--package-dirs`.                                                                                                              |
+| Key            | Type            | Default   | Description                                                                                                                                                                                    |
+| -------------- | --------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `runner`       | string          | by suffix | Runner name (`tenzir`, `python`, `shell`, custom).                                                                                                                                             |
+| `fixtures`     | list            | `[]`      | Requested fixtures. Accepts bare names and structured options mappings.                                                                                                                        |
+| `timeout`      | integer (s)     | `30`      | Command timeout. (`--coverage` multiplies it by five.)                                                                                                                                         |
+| `error`        | boolean         | `false`   | Expect a non-zero exit code.                                                                                                                                                                   |
+| `quiet`        | boolean         | `false`   | Suppress runtime warnings from the test pipeline with the `tenzir` runner. See [runtime warning suppression](test-framework.md#runtime-warning-suppression). |
+| `skip`         | string or dict  | unset     | Mark tests as skipped. See [skip configuration](test-framework.md#skip-configuration).                                                                       |
+| `requires`     | mapping         | unset     | Capability requirements. See [capability requirements](test-framework.md#capability-requirements). Directory-level only.                                     |
+| `inputs`       | string          | project   | Override `TENZIR_INPUTS` for this directory or test.                                                                                                                                           |
+| `assertions`   | mapping         | `{}`      | Post-test assertion payloads. See [assertions](test-framework.md#assertions).                                                                                |
+| `pre-compare`  | string or list  | `[]`      | Transform the baseline and the actual output before comparing them. See [pre-compare transforms](test-framework.md#pre-compare-transforms).                  |
+| `retry`        | integer         | `1`       | Total attempt budget for flaky tests (see below).                                                                                                                                              |
+| `package-dirs` | list of strings | inherit   | Directory-only; extra packages merged with CLI `--package-dirs`.                                                                                                                               |
 
 `test.yaml` files accept the same keys and apply recursively to child directories. A relative `inputs:` value resolves against the file that defines it, so `inputs: ../data` inside `tests/alerts/test.yaml` points at `tests/data/`. Frontmatter values follow the same rule and win over directory defaults. Adjacent `tenzir.yaml` files still configure the Tenzir binary; the harness appends `--config=<file>` automatically. The lookup keeps working even when you point the CLI at extra directories on the command line.
 
 `retry` represents the **total number of attempts** the harness should make before declaring the test failed. Intermediate attempts stay quiet; the final outcome line includes `attempts=N/M` whenever the budget exceeds one. Keep the value small and treat it as a temporary guardrail while you fix the underlying flakiness.
+
+### Runtime warning suppression
+
+Set `quiet: true` when runtime warnings are irrelevant to the behavior your test verifies. Leave it disabled when the warning diagnostics themselves are part of the expected output.
+
+For example, this test checks the result of parsing an invalid timestamp, not the warning diagnostic:
+
+```tql
+---
+quiet: true
+---
+from {time: "not a timestamp"}
+time = time.parse_time("%Y-%m-%d")
+```
+
+The `tenzir` runner evaluates the test inside a [`quiet`](https://tenzir.com/docs/reference/operators/quiet.md) block. Runtime warnings from the pipeline and its nested pipelines are suppressed, while events and bytes flow through unchanged. Errors still fail the test unless you set `error: true`, and compilation diagnostics remain visible. The setting works in comparison, update, and passthrough modes and requires a Tenzir binary that supports `quiet`.
+
+To apply the setting to a directory and its descendants, add it to `test.yaml`:
+
+```yaml
+quiet: true
+```
+
+Set `quiet: false` in a test’s frontmatter or a child directory’s `test.yaml` to restore runtime warnings. The setting does not suppress warnings from fixtures, other runners, or command-line logging. It suppresses all runtime warnings from the test pipeline, not individual warning messages. To limit suppression to part of a pipeline, use the TQL `quiet` operator directly instead.
+
+Diagnostic line numbers reflect the additional `quiet` block around the test. Use `--keep` to retain the wrapped pipeline in `TENZIR_TMP_DIR` for inspection.
 
 ### Skip configuration
 

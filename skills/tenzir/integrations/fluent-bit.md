@@ -14,6 +14,8 @@ section: "Integrations"
 
 This makes Tenzir effectively a superset of Fluent Bit, and our [Tenzir vs. Fluent Bit comparison](https://tenzir.com/product/comparisons/fluent-bit.md) shows what the surrounding pipeline language, detection runtime, and storage engine add on top of the plugins.
 
+Fluent Bit Inputs & Outputs
+
 Fluent Bit [parsers](https://docs.fluentbit.io/manual/pipeline/parsers) map to Tenzir operators that accept bytes as input and produce events as output. Fluent Bit [filters](https://docs.fluentbit.io/manual/pipeline/filters) correspond to Tenzir operators that perform event-to-event transformations. Tenzir does not expose Fluent Bit parsers and filters, only inputs and output.
 
 Internally, Fluent Bit uses [MsgPack](https://msgpack.org/) to encode events whereas Tenzir uses [Arrow](https://arrow.apache.org) record batches. The `fluentbit` source operator transposes MsgPack to Arrow, and the `fluentbit` sink performs the reverse operation.

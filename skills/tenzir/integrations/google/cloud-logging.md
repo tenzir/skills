@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Google Cloud Logging](https://cloud.google.com/logging) is Google’s log management solution. Tenzir can send events to Google Cloud Logging.
 
+Google Cloud Logging
+
 ## Examples
 
 ### Send an event to Google Cloud Logging

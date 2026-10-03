@@ -12,6 +12,8 @@ section: "Integrations"
 
 Tenzir supports parsing Syslog messages from transport protocols such as UDP, TCP, and [RELP](relp.md), and emitting Syslog-formatted byte streams. This enables seamless integration with Syslog-based systems for ingesting or exporting logs.
 
+Syslog
+
 Syslog support in Tenzir is powered by two components:
 
 * [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md): a parser that turns unstructured Syslog messages into structured events.

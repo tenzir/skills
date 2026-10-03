@@ -13,6 +13,8 @@ Enrichment means adding contextual data to events. The purpose of this added con
 
 Tenzir comes a flexible enrichment framework where the central abstraction is a **context**: a stateful object that can be updated with pipelines and used for enrichment in other pipelines:
 
+Context update & enrich
+
 The update and enrich operations can occur concurrently. This allows for creating highly dynamic use cases where context state rapidly changes, such as when modelling the threat landscape or internal network infrastructure.
 
 Reusing pipelines as mechanism for context updates (as opposed to other systems that, say, offer a separate interface to only load static CSV files) has the benefit that we can leverage the full power of TQL. In other words, we can reuse *all* existing connectors, formats, periodic scheduling, and more.
@@ -20,6 +22,8 @@ Reusing pipelines as mechanism for context updates (as opposed to other systems 
 ## Enrichment Modes
 
 In general, we distinguish three different contextualization modes:
+
+Contextualization Modes
 
 1. **In-band**. The context data is co-located with the pipeline that enriches the dataflow. For high-velocity pipelines with thousands of events per second, this is of often the only way to enrich.
 2. **Out-of-band**. The context data is outside of the to-be-contextualized dataflow. The most common example of this kind are REST APIs. Enrichment then means performing one API call per event, waiting for the result, and then merging it into the event to continue processing. For public APIs, latencies are in the tens to hundreds of milliseconds, making this mode suitable for low-velocity.
@@ -35,6 +39,8 @@ Tenzir features several context types:
 * **GeoIP database**: a special-purpose table for attaching geographic information to IP addresses.
 * **Bloom filter**: a compact representation of a sets that allows for membership tests only, with the space efficiency coming at the cost a false positives during lookup.
 
+Context types
+
 If these built-in types do not suffice for your needs, you can also write your own C++ context plugin.
 
 ### Lookup Table
@@ -47,6 +53,8 @@ There are three particularly powerful features of lookup tables that we describe
 
 When table keys are of type `subnet`, you can probe the lookup table with values of type `ip` in addition. For example, if you have a key `10.0.0.0/8` you can perform a lookup with `10.0.0.1`, `10.1.1.1`, etc. The lookup table will always return the value associated with `10.0.0.0/8`.
 
+Subnet Keys
+
 When a table contains subnet keys with overlapping ranges, such as `10.0.0.0/22` and `10.0.0.0/24`, a lookup returns the entry with the *longest-prefix match* of the key. For example, probing the table with `10.0.0.1` returns the value associated with the `/24` subnet, because it is a longer match (24 > 22).
 
 Modeling CMDB & Asset Inventory
@@ -56,6 +64,8 @@ Subnet key matching comes in handy when you are building lookup tables that repr
 #### 2. Per-Key Create/Write/Read Expiration
 
 Every table entry has three optional expiration timeouts that evict the entry. These timeout are compounding, so it suffices if *one* of them fires to trigger eviction.
+
+Expiration
 
 The three timeout types are:
 
@@ -74,6 +84,8 @@ Per-key timeouts come in handy when you want to associate lifetimes with observa
 Lookup tables offer more than just entries with static values. You can also aggregate into values with [aggregation functions](../reference/functions.md#aggregation). In this case an update of a table entry does not write the new value directly, but rather hands that value to the configured aggregation function, which in turn updates the table value.
 
 For example, the `min` aggregation function computes the minimum over its values. Consider a sequence of context updates with values `3`, `4`, `2`, `3`, `1` for the updated key. Then the value after each update would be `3`, `3`, `2`, `2`, `1`. The example below uses `min` and `max` to implement a first-seen and last-seen timestamps - a common pattern during entity tracking.
+
+Aggregation
 
 Passive Inventorization
 

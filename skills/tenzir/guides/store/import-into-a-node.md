@@ -11,6 +11,8 @@ section: "Docs"
 
 Importing (or *ingesting*) data can be done by [running a pipeline](../basic-usage/run-pipelines.md) that ends with the [`import`](https://tenzir.com/docs/reference/operators/import.md) output operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `import` operator runs within the node.
 
+Import
+
 Consider this example that takes a Zeek conn.log from our M57 dataset:
 
 ```tql

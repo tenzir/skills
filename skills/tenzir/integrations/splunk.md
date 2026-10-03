@@ -12,6 +12,8 @@ section: "Integrations"
 
 [Splunk](https://splunk.com) is a SIEM solution for storing and processing logs. Tenzir can receive and send data through HEC and query Splunk searches.
 
+Splunk
+
 ## Examples
 
 ### Send data to an existing HEC endpoint

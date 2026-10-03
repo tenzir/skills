@@ -14,6 +14,8 @@ The [Advanced Message Queuing Protocol (AMQP)](https://www.amqp.org/) is an open
 
 The diagram below shows the key abstractions and how they relate to a pipeline:
 
+AMQP Diagram
+
 Tenzir supports sending and receiving messages via AMQP version 0-9-1.
 
 When receiving messages, Tenzir emits each AMQP payload in the `message` field as a blob. Parse this field in the pipeline when the payload contains structured data.

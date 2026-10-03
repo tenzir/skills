@@ -13,6 +13,8 @@ In this tutorial, you will learn how to **use pipelines to plot data as charts**
 
 The Tenzir Query Language (TQL) excels at slicing and dicing even the most complex shapes of data. But turning tabular results into actionable insights often calls for visualization. This is where charts come into play.
 
+Charts
+
 ## Available chart types
 
 Tenzir supports four types of charts, each with a dedicated operator:
@@ -29,6 +31,8 @@ Plotting data in the Explorer involves three steps:
 1. [Run a pipeline](../guides/basic-usage/run-pipelines.md) to prepare the data.
 2. Add a `chart_*` operator to render the plot.
 3. View the chart below the Editor.
+
+Pipeline to Chart
 
 After generating a chart, you can **download it** or **add it to a dashboard** to make it permanent refresh it periodically.
 
