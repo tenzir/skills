@@ -13,7 +13,7 @@ The [`tenzir-test`](https://github.com/tenzir/test) harness discovers and runs i
 
 ## Install
 
-`tenzir-test` ships as a Python package that requires Python 3.12 or later. Install it with [`uv`](https://docs.astral.sh/uv/) (or `pip`) and verify the console script:
+`tenzir-test` ships as a Python package that requires Python 3.13 or later. Install it with [`uv`](https://docs.astral.sh/uv/) (or `pip`) and verify the console script:
 
 ```sh
 uv add tenzir-test
@@ -118,6 +118,7 @@ Useful options:
 * `--package-dirs <path>`: Extra package directories for Tenzir binaries. Repeatable and accepts comma-separated lists. Entries merge with any `package-dirs:` declared in directory `test.yaml` files, then get normalized, de-duplicated, and exported via `TENZIR_PACKAGE_DIRS`.
 * `--debug`: Emit framework-level diagnostics (fixture lifecycle, discovery notes, comparison targets, etc.) and automatically enable verbose output so you see all test results (pass/skip/fail) instead of only failures. The same mode is available via `TENZIR_TEST_DEBUG=1`.
 * `--summary`: Print the tabular breakdown and failure tree after each project.
+* `--report-json FILE`: Write a versioned JSON report. Use `-` to emit tagged JSON records in stdout for CI wrappers and sandboxed builds. Reports also work with `--no-hooks` and `--no-diff`, but not with standalone `--fixture` mode.
 * `--diff/--no-diff`: Toggle unified diff output for failed comparisons. Diffs are shown by default; disable them when you only need aggregated statistics.
 * `--diff-stat/--no-diff-stat`: Show (or suppress) the per-file change counter, which summarises additions and deletions even when the diff body is hidden.
 * `--passthrough`: Stream raw stdout/stderr to the terminal instead of comparing against reference artifacts. The harness forces single-job execution (overriding `--jobs` when necessary) and ignores `--update` while passthrough is active. Passthrough mode automatically enables verbose output.
@@ -133,6 +134,63 @@ Useful options:
 * `--disable-inline-dependency-install`: Disable runtime installation for inline Python dependencies declared by tests or fixtures. Use this when another tool provisions the Python environment.
 
 Set `TENZIR_TEST_DEBUG=1` in CI when you want the same diagnostics without passing `--debug` on the command line.
+
+## Structured reports
+
+Use `--report-json` to collect test results without parsing terminal output:
+
+```sh
+uvx tenzir-test --root test --report-json artifacts/tests.json
+```
+
+Reports do not change the test exit code or terminal output. They work with `--no-hooks`, `--no-diff`, parallel jobs, suites, retries, and satellite projects. Report paths are relative to the working directory at the start of the invocation, independently of `--root` and the report file’s location. Run the harness from the checkout root to produce repository-relative paths for CI. Paths use forward slashes and can contain `..` for projects outside that directory. Consumers must validate paths before linking or annotating source files.
+
+### File format
+
+The report is a UTF-8 JSON document with these fields:
+
+* `schema_version`: The format version, currently `1`.
+* `root`: The absolute working directory at the start of the invocation.
+* `exit_code`: The harness exit code.
+* `interrupted`: Whether the run was interrupted.
+* `errors`: Harness-level errors, such as configuration or hook failures.
+* `summary`: Counts named `total`, `passed`, `failed`, and `skipped`.
+* `tests`: Final results sorted by project and path.
+
+Each test result contains:
+
+* `path` and `project`: The test file and project directory, relative to `root`.
+* `runner` and `suite`: The runner name and optional suite name.
+* `outcome`: `passed`, `failed`, or `skipped`.
+* `attempts` and `duration`: The attempt count and elapsed seconds.
+* `reason`: A failure diagnostic or skip reason, when available.
+* `stdout`, `stderr`, and `returncode`: Captured subprocess output and exit code for a failing test. These describe the last subprocess captured through the harness’s `run_subprocess` helper. Output from custom runners that bypass that helper or stream output in passthrough mode is not captured.
+* `diff`: Plain unified diffs, including reference filenames, for mismatched expectations. Multiple comparisons are concatenated.
+* `truncated`: Whether any diagnostic was shortened.
+
+Diagnostic text has no ANSI styling. Each text field is bounded to 6,000 characters after JSON encoding. Keep raw logs as a companion artifact when you need complete output. Only the final retry contributes diagnostics; a test that passes after retrying has no failure output.
+
+A suite-level fixture failure appears as a failed result for the suite’s `test.yaml`, with `runner` set to `suite`. It contributes to report counts even if no individual test ran. Harness-level errors do not increase failed-test counts, so consumers must also check `exit_code`, `errors`, and `interrupted`.
+
+The harness writes reports on normal completion, test failures, harness errors, and handled interruptions. It atomically replaces an existing report and creates parent directories when needed. A forced process kill cannot write a final report. An error writing a report fails the invocation rather than silently leaving an old result behind.
+
+### Forward reports through build logs
+
+When tests run in a build sandbox, use `--report-json -`:
+
+```sh
+uvx tenzir-test --root test --report-json -
+```
+
+Instead of a JSON document, this emits tagged JSON lines alongside normal terminal output. Every record begins with the literal `TENZIR_TEST_REPORT `, followed by a JSON object containing `schema_version: 1` and an `event`:
+
+* `start`: Contains `root` and begins one invocation.
+* `test`: Contains one final test result in `test`.
+* `finish`: Contains `exit_code`, `interrupted`, `errors`, and `summary`.
+
+Records are flushed as tests complete, so consumers can preserve partial results when the build is interrupted. A missing `finish` means the invocation is incomplete, not successful. Multiple invocations can share one build log; each `start` begins a separate report. Build tools may prepend a log prefix to each line. Consumers should remove that prefix, decode only tagged records, and keep the remaining lines as human-readable logs. Do not infer failures from terminal symbols or parse diffs from display formatting.
+
+Within schema version 1, consumers should ignore unknown fields and events. Incompatible format changes increment `schema_version`.
 
 ## Python API
 
@@ -154,6 +212,15 @@ for project in result.project_results:
 ```
 
 The helper mirrors the CLI options but returns an `ExecutionResult` with aggregated `Summary` objects and metadata you can inspect or serialize. Errors surface as `HarnessError` exceptions so callers can control reporting and retry logic.
+
+The `execute()` and `tenzir_test.run.run_cli()` helpers accept `report_json` as an optional `Path` argument:
+
+```python
+result = execute(
+    root=Path("test"),
+    report_json=Path("artifacts/tests.json"),
+)
+```
 
 ## Selections
 

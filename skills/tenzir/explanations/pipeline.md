@@ -88,7 +88,7 @@ LIMIT 100
 
 Every rewrite preserves results. The `where`, `select`, and `head` stay in the pipeline, so a source that acts on a hint only partially, or not at all, still produces the same output. When only part of a predicate translates, for example because it calls a function the backend does not have, the source pushes what it can and evaluates the rest itself.
 
-Which hints a source acts on depends on its backend. A source that acts on them, such as [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), has an *Optimizations* section on its reference page that states what it pushes and what stays in Tenzir. Parsers use the ordering requirement as described in [Multi-Schema Dataflows](pipeline.md#multi-schema-dataflows).
+Which hints a source acts on depends on its backend. [Optimizations](../reference/optimizations.md) lists the operators that act on hints and states, for each database, which predicates go into the query and which stay in Tenzir. Parsers use the ordering requirement as described in [Multi-Schema Dataflows](pipeline.md#multi-schema-dataflows).
 
 Federated Search
 

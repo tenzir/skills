@@ -590,6 +590,10 @@ TQL programs are a sequence of statements.
 
 TQL programs compose statements into complete data processing workflows that can execute.
 
+#### [Overview](reference/optimizations.md)
+
+Tenzir runs part of a pipeline where the data lives.
+
 ### Components
 
 #### [Configuration](reference/node/configuration.md)
@@ -882,6 +886,13 @@ Functions appear in expressions and take positional and/or named arguments, prod
 
 - [Configuration](reference/node/configuration.md)
 - [Helm chart](reference/node/helm-chart.md)
+
+#### Overview Index
+
+- [ClickHouse](reference/optimizations/clickhouse.md)
+- [DuckDB](reference/optimizations/duckdb.md)
+- [Microsoft SQL Server](reference/optimizations/microsoft-sql.md)
+- [MySQL](reference/optimizations/mysql.md)
 
 #### Platform Index
 

@@ -119,72 +119,7 @@ A `time` covers the years 1678 to 2261 with nanosecond precision. Timestamps and
 
 ## Optimizations
 
-In `table` mode, the operator acts on the hints that the [optimizer](../../explanations/pipeline.md#optimization) pushes toward it by translating the operators that follow it into the `SELECT` it sends, so that DuckDB reads and returns only what the pipeline needs:
-
-* [`where`](https://tenzir.com/docs/reference/operators/where.md) becomes a `WHERE` clause.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) narrows the selected columns to the top-level columns that the pipeline reads, including those that only a filter running in Tenzir needs. Fields that do not exist in the table are left to `select`, which fills them with `null`.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md) adds a `LIMIT`.
-
-For example, the pipeline
-
-```tql
-from_duckdb "events.duckdb", table="alerts"
-where severity >= 3 and rule.starts_with("ET ")
-select id, message
-head 100
-```
-
-sends a query equivalent to
-
-```sql
-SELECT "id", "message", "severity", "rule"
-FROM "alerts"
-WHERE "severity" >= 3 AND starts_with("rule", 'ET ')
-LIMIT 100
-```
-
-The result is the same whether or not a part of the pipeline runs in DuckDB. To keep it that way, the operator only translates predicates whose DuckDB semantics match TQL exactly:
-
-* Comparisons of a column with a literal of matching kind: numbers against integer, `FLOAT`, and `DOUBLE` columns, strings against `VARCHAR` columns, and `time` values against `DATE`, `TIMESTAMP`, `TIMESTAMP_S`, `TIMESTAMP_MS`, `TIMESTAMP_NS`, and `TIMESTAMP WITH TIME ZONE` columns. Booleans compare for equality only.
-* Null checks with `== null` and `!= null`.
-* Membership tests with `in` and a list of such literals.
-* Comparisons between two columns of the same kind. Temporal columns must share their exact type.
-* Fields of `STRUCT` columns, such as `meta.level`, with the same rules as columns.
-* The string functions `starts_with`, `ends_with`, and `length_bytes`, and substring search with `"needle" in haystack`. With `ignore_case=true`, `starts_with` and `ends_with` translate approximately, and so does `match_regex`, as [Approximate matching](from_duckdb.md#approximate-matching) explains.
-* Arithmetic that cannot overflow: `+`, `-`, and `*` on integer columns of at most 32 bits with a literal whose magnitude is below 2^31, and any `+`, `-`, `*`, or `/` that yields a floating-point number, except division by zero.
-* Expressions that consist of literals only, such as `2024-01-01 + 1d`, which are computed ahead of time.
-* The boolean operators `and`, `or`, and `not`.
-* Bare boolean columns.
-
-Where DuckDB’s own semantics differ from TQL, the query spells out TQL’s:
-
-* DuckDB considers `NaN` equal to itself and greater than every other number. A comparison of a floating-point value carries a guard that makes `NaN` compare as in TQL: `x > 1.5` becomes `x > 1.5e0 AND NOT isnan(x)`. Numbers are spelled as `DOUBLE` literals, so that DuckDB widens a `FLOAT` column to `DOUBLE` like TQL does, instead of comparing in single precision.
-* DuckDB computes arithmetic in the types of its operands, so that it can overflow or lose precision where TQL does not. The query widens the column first: `n + 1 > 5` becomes `CAST(n AS BIGINT) + 1 > 5`, and `n * 0.5 > 5` computes in `DOUBLE`.
-* DuckDB reads `meta.level` as the column `level` of a table `meta` if there is one. A field therefore goes into the query as `struct_extract(meta, 'level')`.
-* A `VARCHAR` column with a collation, such as `COLLATE NOCASE`, compares text without regard to case, and so does every `VARCHAR` column when the database sets a `default_collation`. Such a column goes into the query with the binary collation, which compares bytes like TQL: `name == "a"` becomes `name COLLATE "binary" = 'a'`. DuckDB still skips row groups by their minimum and maximum values for such a comparison.
-
-Literals take the column’s own type, so a comparison never depends on the session time zone. Values that Tenzir cannot represent, such as `infinity` or a `DATE` past the year 2262, compare as `null` in both places. An `ip` literal that is compared for equality with a `VARCHAR` column, or listed in an `in` test against one, becomes its canonical text, as with the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator. The predicate `src == 1.1.1.1` then matches rows whose `src` reads `1.1.1.1`.
-
-Everything else runs in Tenzir with unchanged results. This includes:
-
-* Columns that arrive as strings, such as `DECIMAL`, `UUID`, `ENUM`, and `UNION` columns (see [Types](from_duckdb.md#types)), and `BLOB`, `INTERVAL`, `LIST`, `ARRAY`, and `MAP` columns, including the values nested in them.
-* Arithmetic on 64-bit integer columns or between two columns.
-* Subnet membership tests on `VARCHAR` columns, such as `src in 10.0.0.0/8`.
-* Strings that contain NUL bytes, and all other functions.
-
-A predicate that mixes translatable and untranslatable parts is split along its `and`s: each conjunct that translates goes into the query, and the others run in Tenzir. An `or` or `not` is pushed only when all of its operands translate. When a predicate that precedes the `head` stays in Tenzir, the limit is enforced in Tenzir as well and the query has no `LIMIT`, since DuckDB cannot count rows that Tenzir has yet to filter.
-
-In live mode, every polling query carries the `WHERE` clause and the narrowed columns, but never a `LIMIT`, since the limit counts events across polls.
-
-A user-provided `sql` query is never rewritten. Tenzir applies the pipeline’s operators to its result.
-
-### Approximate matching
-
-Two kinds of predicates translate approximately. This is a deliberate exception to identical results, made so that common filters reach the database.
-
-A predicate such as `msg.starts_with("error", ignore_case=true)` goes into the query as `starts_with(lower(msg), lower('error'))`. DuckDB lowercases one character at a time, which agrees with TQL for ASCII and most other text. TQL applies full Unicode case folding instead, which differs for a few characters: it folds `ß` to `ss`, so `"Straße".starts_with("strass", ignore_case=true)` is `true` in TQL but matches no row in DuckDB.
-
-A predicate such as `msg.match_regex("^ERROR [0-9]+")` goes into the query as `regexp_matches(msg, '^ERROR [0-9]+')`. Both TQL and DuckDB use the RE2 library with the same options: the pattern matches anywhere in the string, `.` does not match a newline, and `^` and `$` match only at the start and end of the string. DuckDB bundles its own release of RE2, which may disagree with TQL’s on rarely used syntax.
+When the operator reads a table, it lets DuckDB do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that DuckDB returns only the rows and columns that the pipeline needs. The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which filters DuckDB evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Remote databases
 

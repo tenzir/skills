@@ -122,21 +122,20 @@ Use `tls=true` to enable TLS with default settings and certificate verification,
 
 The operator maps MySQL types to [Type System](../types.md) as follows:
 
-| MySQL Type                    | Tenzir Type   | Notes                  |
-| ----------------------------- | ------------- | ---------------------- |
-| `TINYINT(1)`                  | `bool`        | Boolean representation |
-| `TINYINT`, `SMALLINT`, `INT`  | `int64`       |                        |
-| `BIGINT`                      | `int64`       |                        |
-| `BIGINT UNSIGNED`             | `uint64`      |                        |
-| `FLOAT`, `DOUBLE`             | `double`      |                        |
-| `DECIMAL`, `NUMERIC`          | `double`      | May lose precision     |
-| `DATE`, `DATETIME`            | `time`        |                        |
-| `TIMESTAMP`                   | `time`        |                        |
-| `TIME`                        | `duration`    |                        |
-| `CHAR`, `VARCHAR`, `TEXT`     | `string`      |                        |
-| `BINARY`, `VARBINARY`, `BLOB` | `blob`        |                        |
-| `JSON`                        | `string`      |                        |
-| `ENUM`                        | `enumeration` |                        |
+| MySQL Type                                          | Tenzir Type | Notes                            |
+| --------------------------------------------------- | ----------- | -------------------------------- |
+| `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, `BIGINT` | `int64`     | Includes `BOOL` and `YEAR`       |
+| The same types with `UNSIGNED`                      | `uint64`    |                                  |
+| `FLOAT`, `DOUBLE`                                   | `double`    | `FLOAT` has 6 significant digits |
+| `DECIMAL`, `NUMERIC`                                | `double`    | May lose precision               |
+| `BLOB` and other binary blob types                  | `blob`      |                                  |
+| All other types                                     | `string`    | The text that MySQL sends        |
+
+All other types include `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `VARBINARY`, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, `JSON`, `ENUM`, and `SET`. Convert them in the pipeline where you need another type, for example with the [`time`](https://tenzir.com/docs/reference/functions/time.md) or [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) functions.
+
+## Optimizations
+
+When the operator reads a table, it lets MySQL do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that MySQL returns only the rows and columns that the pipeline needs. The page on [MySQL optimizations](../optimizations/mysql.md) describes which filters MySQL evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Examples
 
@@ -144,6 +143,17 @@ The operator maps MySQL types to [Type System](../types.md) as follows:
 
 ```tql
 from_mysql table="users", host="db.example.com", database="mydb"
+```
+
+### Filter rows in MySQL
+
+The `where`, `select`, and `head` operators go into the query, so MySQL returns only the ten matching rows with two columns:
+
+```tql
+from_mysql table="logins", host="db.example.com", database="audit"
+where user == "admin" and result != "success"
+select user, source
+head 10
 ```
 
 ### Use a connection URI

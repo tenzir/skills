@@ -196,4 +196,31 @@ Here `example-library` contains multiple packages, so the harness loads them all
 
 ## Automate runs
 
-Once the suite passes locally, integrate it into your CI pipeline. Configure the job to install Python 3.12, install `tenzir-test`, provision or download the required Tenzir binaries, and execute `uvx tenzir-test --root .`. For reproducible results, keep your datasets small and deterministic, and prefer fixtures that wipe state between runs.
+Once the suite passes locally, integrate it into your CI pipeline. Configure the job to install Python 3.13, install `tenzir-test`, provision or download the required Tenzir binaries, and execute `uvx tenzir-test --root .`. For reproducible results, keep your datasets small and deterministic, and prefer fixtures that wipe state between runs.
+
+### Export CI reports
+
+Write a structured report when you need CI to identify failed tests without searching terminal logs. Run the command from the checkout root so paths in the report match files in your repository:
+
+```sh
+uvx tenzir-test --root test --report-json artifacts/tests.json
+```
+
+The report includes final outcomes, failed test paths, diagnostics, and plain diffs. It also records skipped tests and harness-level errors. Keep the raw log as a companion artifact because diagnostic fields can be truncated.
+
+Upload the report even when the test step fails. For example, after provisioning the binaries in a GitHub Actions job:
+
+```yaml
+- name: Run integration tests
+  run: uvx tenzir-test --root test --report-json artifacts/tests.json
+- name: Upload test reports
+  if: always()
+  uses: actions/upload-artifact@v7
+  with:
+    name: test-results
+    path: artifacts/tests.json
+```
+
+Your CI wrapper can use the report to publish test summaries and source-file annotations. The harness does not create those automatically.
+
+If tests run inside a build sandbox that cannot export a report file, use `--report-json -` instead. This emits tagged JSON records alongside the normal log, so the wrapper can retain partial results as tests finish. Treat a missing completion record as an incomplete run, not a success. The [structured report reference](../../reference/test-framework.md#structured-reports) describes the schema, stream protocol, path validation, and diagnostic limits.
