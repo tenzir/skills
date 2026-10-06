@@ -633,6 +633,14 @@ Accepts incoming Unix domain socket connections and yields events.
 accept_unix_socket "/run/collector.sock" { read_json }
 ```
 
+### [accept\_wef](operators/accept_wef.md)
+
+Receives Windows events through Windows Event Forwarding.
+
+```tql
+accept_wef kerberos={…}, subscriptions=[…]
+```
+
 ### [accept\_zmq](operators/accept_zmq.md)
 
 Listens on a ZeroMQ endpoint and receives events.

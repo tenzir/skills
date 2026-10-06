@@ -107,6 +107,7 @@
 - [accept_tcp](operators/accept_tcp.md): Listens for incoming TCP or TLS connections and receives events.
 - [accept_udp](operators/accept_udp.md): Receives UDP datagrams and outputs structured events.
 - [accept_unix_socket](operators/accept_unix_socket.md): Listens for incoming Unix domain socket connections and receives events.
+- [accept_wef](operators/accept_wef.md): Receives Windows events through [Windows Event Forwarding (WEF)](https://tenzir.com/integrations/microsoft/windows-event-forwarding.md).
 - [accept_zmq](operators/accept_zmq.md): Listens on a ZeroMQ endpoint and receives events.
 - [from_amazon_cloudwatch](operators/from_amazon_cloudwatch.md): Reads events from Amazon CloudWatch.
 - [from_amazon_kinesis](operators/from_amazon_kinesis.md): Receives records from an [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) stream.

@@ -38,6 +38,63 @@ with the [`to_fluent_bit`](https://tenzir.com/docs/reference/operators/to_fluent
 
 ## Examples
 
+### Collect Windows Event Logs
+
+Fluent Bit runs as an agent on Windows and reads the event log with its [`winevtlog` input](https://docs.fluentbit.io/manual/pipeline/inputs/windows-event-log-winevtlog). To collect Windows Event Logs without an agent on the hosts, see the [Microsoft Windows Event Forwarding](microsoft/windows-event-forwarding.md) page.
+
+First, install Fluent Bit on Windows according to the [official instructions](https://docs.fluentbit.io/manual/installation/windows). Then create a [YAML configuration](https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/yaml/configuration-file) that sends the events via the [Forward output](https://docs.fluentbit.io/manual/pipeline/outputs/forward), which encodes them in Fluent Bit’s MsgPack-based wire format:
+
+fluent-bit.yaml
+
+```yaml
+input:
+  - name: winevtlog
+    channels: Setup,Windows PowerShell
+    interval_sec: 1
+    db: winevtlog.sqlite
+output:
+  - name: forward
+    match: "*"
+    host: 10.0.0.1
+```
+
+Adapt `input.channels` to the Event Log channels that Fluent Bit should monitor.
+
+Receive the events with the [Forward input](https://docs.fluentbit.io/manual/pipeline/inputs/forward). The `listen` option must match the `host` in the Fluent Bit configuration:
+
+```tql
+from_fluent_bit "forward", options={
+  listen: 10.0.0.1,
+}
+publish "windows"
+```
+
+Test the setup by running Fluent Bit on the command line:
+
+```plaintext
+C:\Program Files\fluent-bit\bin\fluent-bit.exe -c \fluent-bit\conf\fluent-bit.yaml
+```
+
+To make the setup permanent, [run Fluent Bit as a service](https://docs.fluentbit.io/manual/installation/windows#windows-service-support) that starts at boot:
+
+```plaintext
+sc.exe create fluent-bit binpath= "\fluent-bit\bin\fluent-bit.exe -c \fluent-bit\conf\fluent-bit.yaml"
+sc.exe config fluent-bit start= auto
+sc.exe start fluent-bit
+sc.exe query fluent-bit
+```
+
+[Install the Microsoft package](../guides/packages/install-a-package.md) to map the Windows events to OCSF. The `microsoft::windows::ocsf::normalize` operator recognizes the records of Fluent Bit:
+
+```tql
+from_fluent_bit "forward", options={
+  listen: 10.0.0.1,
+}
+microsoft::windows::ocsf::normalize
+ocsf_derive
+publish "ocsf"
+```
+
 ### Receive MQTT device alerts
 
 Tenzir does not have a native MQTT receiver. Use Fluent Bit’s [MQTT input](https://docs.fluentbit.io/manual/data-pipeline/inputs/mqtt) to expose an MQTT endpoint instead:

@@ -1071,9 +1071,21 @@ Prepare and route security telemetry for Microsoft's cloud-native SIEM.
 
 Provides audit logs for database activity, logins, and errors.
 
+#### [Microsoft Windows Event Collector integration](integrations/microsoft/windows-event-collector.md)
+
+Ships the events that a Windows Event Collector gathers to Tenzir, or replaces the collector with Tenzir.
+
+#### [Microsoft Windows Event Forwarding integration](integrations/microsoft/windows-event-forwarding.md)
+
+Receives the events that Windows hosts forward natively, without an agent or a Windows Event Collector.
+
 #### [Microsoft Windows Event Logs integration](integrations/microsoft/windows-event-logs.md)
 
 Collects Security, System, Application, and other critical OS logs.
+
+#### [Microsoft Windows EVTX Files integration](integrations/microsoft/evtx.md)
+
+Parses exported Windows Event Log files in the binary EVTX format for forensic analysis.
 
 #### [MySQL integration](integrations/mysql.md)
 
@@ -1095,6 +1107,10 @@ Collect and process NetFlow v5, NetFlow v9, and IPFIX flow telemetry.
 
 Acquire packets from the network and process them with pipelines.
 
+#### [NXLog integration](integrations/nxlog.md)
+
+Ships Windows Event Logs and other telemetry from the NXLog Agent to Tenzir.
+
 #### [OpenAI Codex integration](integrations/openai.md)
 
 Turn coding agent activity into OCSF security telemetry: commands, files, sandbox verdicts, and model traffic.
@@ -1106,6 +1122,14 @@ Search, analyze, and visualize data with a distributed, open-source platform.
 #### [OpenTelemetry integration](integrations/opentelemetry.md)
 
 Receive OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
+
+#### [OpenWEC integration](integrations/openwec.md)
+
+Receives the Windows events that the open-source Windows Event Collector for Linux gathers.
+
+#### [PowerShell Script Block Logging integration](integrations/powershell-script-block-logging.md)
+
+Captures deobfuscated PowerShell commands, critical for detecting fileless malware and living-off-the-land attacks.
 
 #### [Prometheus integration](integrations/prometheus.md)
 
@@ -1143,6 +1167,10 @@ Detect, log, and analyze network traffic for intrusion detection, prevention, an
 
 Send and receive Syslog over UDP, TCP, and RELP.
 
+#### [Sysmon integration](integrations/sysmon.md)
+
+Advanced system monitor that logs detailed host activity for threat hunting.
+
 #### [TCP integration](integrations/tcp.md)
 
 Establish, maintain, and terminate reliable, connection-oriented communication over IP networks.
@@ -1158,6 +1186,10 @@ Collect, monitor, and analyze endpoint data for digital forensics and incident r
 #### [Wazuh integration](integrations/wazuh.md)
 
 Collects security telemetry and runs detections.
+
+#### [Winlogbeat integration](integrations/winlogbeat.md)
+
+Ships Windows Event Logs from Elastic's Winlogbeat agent to Tenzir.
 
 #### [YARA integration](integrations/yara.md)
 

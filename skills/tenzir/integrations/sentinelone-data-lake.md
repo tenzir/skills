@@ -19,21 +19,25 @@ section: "Integrations"
 Use the [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) operator to retrieve security events from the Data Lake using PowerQuery:
 
 ```tql
-from_sentinelone_data_lake "https://xdr.eu1.sentinelone.net",
-  token=secret("SENTINELONE_TOKEN"),
-  query="EventType = 'Process Creation'",
+from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
+  token=secret("SENTINELONE_CONSOLE_TOKEN"),
+  query="EventType = 'Process Creation' | limit 5000",
   start=now()-7d
 ```
 
-Replace `https://xdr.eu1.sentinelone.net` with your regional SentinelOne endpoint and configure the `SENTINELONE_TOKEN` secret with your API token.
+Use your tenant’s console URL and configure the `SENTINELONE_CONSOLE_TOKEN` secret with a console service-user API token. The operator uses the Long Running Query API; regional `xdr.*.sentinelone.net` URLs and scoped SDL Log Read keys are no longer supported.
+
+Without explicit bounds, queries cover the past 24 hours. PowerQuery returns at most 1,000 rows by default for queries without `limit` or `group`; include `| limit N` in the PowerQuery string to request more rows. The operator reads the final result without paging.
+
+On multi-account tenants, add `account_ids=["<account-id>"]` if tenant scope doesn’t include the account containing your data.
 
 ### Specify a custom time range
 
 You can specify both start and end times to retrieve events from a specific window:
 
 ```tql
-from_sentinelone_data_lake "https://xdr.eu1.sentinelone.net",
-  token=secret("SENTINELONE_TOKEN"),
+from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
+  token=secret("SENTINELONE_CONSOLE_TOKEN"),
   query="ThreatIndicator IsNotNull",
   start=now()-10d,
   end=now()-3d
