@@ -1,0 +1,142 @@
+---
+title: "SentinelOne"
+canonical: https://tenzir.com/docs/reference/optimizations/sentinelone
+source: https://tenzir.com/docs/reference/optimizations/sentinelone.md
+section: "Docs"
+---
+
+# SentinelOne
+
+> When you omit query, fromsentinelonedatalake uses the operators that follow it to narrow the search window, send safe prefilters, and choose how to retrieve events. You express the result you want in TQL; there is no retrieval mode flag or separate schema-discovery step.
+
+When you omit `query`, [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) uses the operators that follow it to narrow the search window, send safe prefilters, and choose how to retrieve events. You express the result you want in TQL; there is no retrieval mode flag or separate schema-discovery step.
+
+Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+
+## When it applies
+
+* **TQL mode** applies when you omit `query`. The operator chooses between complete-event log search (LOG) and projected PowerQuery (PQ).
+* **PowerQuery mode** applies when you provide `query`. Your query and its time window stay unchanged. Tenzir applies downstream operators to the native result, without switching to LOG or paginating it. Rewriting a native query could move filtering before its result cap and select different rows.
+
+In TQL mode, at least one supported prefilter, inferred time bound, pushable limit, or explicit `start` or `end` must constrain the request. Otherwise the operator reports an error before contacting SentinelOne. For example, a bare source or a local-only `match_regex` filter followed by [`head`](https://tenzir.com/docs/reference/operators/head.md) cannot supply such a constraint. Add a time window for local-only searches.
+
+## Complete events or selected columns
+
+A filter does not restrict the output schema. Neither do timestamp bounds nor [`head`](https://tenzir.com/docs/reference/operators/head.md). This exploratory pipeline retrieves complete parsed events, including fields that it never names:
+
+```tql
+from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
+  token=secret("sentinelone-console-token")
+where timestamp >= 2024-01-01 and timestamp < 2024-01-02
+where event.type == "DNS Resolved"
+head 100
+```
+
+The operator uses LOG, returns the attributes in each match’s `values` object, and adds the match’s `timestamp`, `severity`, and `threadId` metadata. Dotted attribute names become nested records. Fields such as `event.dns.request` and `event.dns.response` remain available without an explicit `select`. Pagination cursors are transport metadata, not output fields.
+
+A restrictive projection can use PQ to transfer fewer fields. For example:
+
+```tql
+from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
+  token=secret("sentinelone-console-token")
+where timestamp >= 2024-01-01 and timestamp < 2024-01-02
+where event.type == "DNS Resolved" and src.ip.match_regex("^10\\.")
+select event.type, account.id
+```
+
+The initial PQ request is:
+
+```text
+| filter ((event.type) == ("DNS Resolved"))
+| columns timestamp, event.type, src.ip, account.id
+```
+
+The regular expression stays local. Its field is requested along with the selected fields so Tenzir can evaluate it. The `columns` stage always requests `timestamp`; without an explicit column list, PQ normally returns only `timestamp` and `message`.
+
+The operator uses LOG instead when it cannot enumerate a complete, valid column list. Examples include:
+
+* Whole-event inspection, such as `"event_id" in this.keys()`.
+* Dynamic indexing, such as `this[key] == 1`.
+* A whole record and one of its children, such as `where event.type == "DNS Resolved" | select event`.
+* Field names that cannot be rendered safely in PQ, or a column list that reaches the query-size budget.
+
+A finite path alone does not prove that a field is a scalar. SentinelOne stores children under dotted names: `columns event` does not fetch `event.type`. If a projected PQ response contains null or structured cells, the operator discards that response and retries the same window through LOG before emitting events. This also handles `select event` without a predicate naming its children. Legitimately absent or nullable fields can therefore cost an additional request. Select known scalar leaf fields when you want the most efficient projected read.
+
+Both retrieval paths preserve the `raw` setting. It disables string inference, not dotted-name reconstruction or timestamp-metadata conversion.
+
+## Filters are prefilters
+
+Remote predicates must retain every possible TQL match, but may return extra candidates. For example, SentinelOne may coerce the string `"42"` to match the number `42`. Tenzir evaluates every original [`where`](https://tenzir.com/docs/reference/operators/where.md) predicate locally, including the predicates sent remotely.
+
+A predicate splits at `and`: supported parts run remotely, and the rest run only in Tenzir. An `or` runs remotely only if all its operands translate safely. For example, `where (severity > 3 or msg.match_regex("x")) and source == "fw"` sends `((source) == ("fw"))` as a LOG initial-search filter or a PQ `filter` stage. Unsupported predicates never cause their required fields to disappear.
+
+### Filters that SentinelOne evaluates
+
+* Equality with string, boolean, and numeric literals.
+* Membership with `in` and a non-empty list of those literals without `null`.
+* Ordering comparisons with numbers or ASCII string bounds.
+* `starts_with`, `ends_with`, and substring search with `"needle" in haystack`, using non-empty string literals and without `ignore_case=true`.
+* The boolean operators `and` and `or`.
+
+### Filters that stay in Tenzir
+
+* Negation, inequality, and null checks.
+* Regular expressions, IP and subnet comparisons.
+* Arithmetic, conditionals, and other functions.
+* Comparisons between two fields.
+* String literals containing control characters and integers beyond ±2^53.
+* Whole-event inspection and dynamic indexing.
+
+Presence checks stay local because `event != null` can refer to a record reconstructed from `event.type`. A remote flat-field check such as `event = *` would incorrectly exclude that event.
+
+## Predicate spelling
+
+LOG initial-search filters and PQ `filter` stages use the same tested predicate spellings:
+
+| TQL                  | Remote predicate                       | Reason                                             |
+| -------------------- | -------------------------------------- | -------------------------------------------------- |
+| `x == "a"`           | `(x) == ("a")`                         | Parentheses avoid precedence surprises.            |
+| `x.starts_with("a")` | `(x) starts_with:matchcase("a")`       | Explicit case-sensitive matching.                  |
+| `x.ends_with("a")`   | `(x) ends_with:matchcase("a")`         | Explicit case-sensitive matching.                  |
+| `"a" in x`           | `(x) contains:matchcase("a")`          | Explicit case-sensitive matching.                  |
+| `x == true`, or `x`  | `((x) == (true)) or ((x) == ("true"))` | Tenzir can infer the string `"true"` as a boolean. |
+| `x in [1, true]`     | `(x) in (1, true, "true")`             | Include the inferred boolean representation.       |
+| `a and b`, `a or b`  | `(a) and (b)`, `(a) or (b)`            | Preserve grouping.                                 |
+
+A bare field name searches full text instead of testing a boolean. Remote string ordering uses UTF-16 code units instead of TQL’s UTF-8 bytes, so only ASCII bounds are pushed. LOG uses an empty search filter when the time window alone constrains the request; it does not accept PQ’s constant-true filter.
+
+## Time window
+
+Comparisons of `timestamp` with time literals or bound `let` values supply missing request bounds, including historical windows outside the default past 24 hours. Bind relative times with `let`, as in `let $end = now()`.
+
+Inferred bounds round outward to whole milliseconds and never widen explicit `start` or `end` arguments. An `or` of time ranges searches their enclosing range. Local evaluation preserves exact precision and inclusivity. A narrowed window that cannot contain an event completes without sending a request.
+
+## Limits and the result cap
+
+A [`head`](https://tenzir.com/docs/reference/operators/head.md) counts events **after local filtering**. LOG continues fetching candidate pages until the limit is satisfied or the search is exhausted; a page with no local matches does not end the read.
+
+LOG requests at most 1,000 candidates per page. A full page continues by launching a new query with the last match’s cursor in `log.cursor`. Continuation includes the boundary match: the operator verifies and removes that one duplicate. It does not advance by timestamp, so distinct events with identical timestamps are retained. A short page ends the read; `estimatedMatchCount` is not used as an exact count.
+
+PQ normally caps ungrouped results at 1,000 rows. A generated PQ response at that cap switches to LOG before emitting anything, unless an unfiltered pushed `head` intentionally requested no more than the cap. An unfiltered `head` can also become a PQ `limit` stage. These rules avoid silently stopping a TQL-generated read at PQ’s default candidate cap.
+
+Explicit `query` requests retain native capped-result semantics. They do not use this continuation or fallback.
+
+The total `timeout` covers all requests, including a PQ-to-LOG fallback, LOG pages, and retries. Earlier LOG pages may already have been emitted when a later page fails or times out. Treat that run as incomplete. Result ordering is not guaranteed; different retrieval paths can return different orders. Pages are separate queries, not a snapshot of a changing data lake.
+
+For generated reads, explicit API omission counters or time-limit indicators also trigger a PQ-to-LOG fallback. If a LOG response reports those omissions, the read fails instead of presenting that page as complete. Unreported API-side omissions cannot be detected. Explicit native queries retain their existing behavior for these indicators.
+
+## Query size
+
+Generated query text is limited to 10,000 bytes. For PQ, required columns take precedence over prefilters. Oversized predicates stay local, while later, smaller predicates can still contribute. An oversized required column list selects LOG instead of dropping fields.
+
+If SentinelOne rejects a generated query, the operator fails. It does not recover from a parser error by launching an unrestricted scan.
+
+## Verify an optimization
+
+Print the optimized pipeline to inspect the hints received by the source:
+
+```sh
+tenzir --dump-opt-ir 'from_sentinelone_data_lake "https://<tenant>.sentinelone.net", token=secret("s1") | where event.type == "DNS Resolved" | head 10'
+```
+
+The source shows predicates as `filter`, the limit as `limit`, and field requirements as `projection`. Startup planning chooses LOG or PQ, and Tenzir rechecks the complete filter chain.

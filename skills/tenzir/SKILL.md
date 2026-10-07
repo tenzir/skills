@@ -893,6 +893,7 @@ Functions appear in expressions and take positional and/or named arguments, prod
 - [DuckDB](reference/optimizations/duckdb.md)
 - [Microsoft SQL Server](reference/optimizations/microsoft-sql.md)
 - [MySQL](reference/optimizations/mysql.md)
+- [SentinelOne](reference/optimizations/sentinelone.md)
 
 #### Platform Index
 
@@ -1073,11 +1074,11 @@ Provides audit logs for database activity, logins, and errors.
 
 #### [Microsoft Windows Event Collector integration](integrations/microsoft/windows-event-collector.md)
 
-Ships the events that a Windows Event Collector gathers to Tenzir, or replaces the collector with Tenzir.
+Receives events from a Windows Event Collector through the shipping agent of your choice.
 
 #### [Microsoft Windows Event Forwarding integration](integrations/microsoft/windows-event-forwarding.md)
 
-Receives the events that Windows hosts forward natively, without an agent or a Windows Event Collector.
+Acts as the collector for Windows Event Forwarding, without a Windows server or shipping agent.
 
 #### [Microsoft Windows Event Logs integration](integrations/microsoft/windows-event-logs.md)
 

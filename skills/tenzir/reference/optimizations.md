@@ -52,15 +52,16 @@ The [database pages](optimizations.md#filters-by-database) state which databases
 
 These operators act on hints:
 
-| Operator                                                                                  | Filters                      | Projections             | Limits            |
-| ----------------------------------------------------------------------------------------- | ---------------------------- | ----------------------- | ----------------- |
-| [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)       | In the query                 | Including tuple fields  | In the query      |
-| [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)               | In the query                 | Top-level columns       | In the query      |
-| [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md) | In the query                 | Top-level columns       | In the query      |
-| [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                 | In the query                 | Top-level columns       | In the query      |
-| [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)             | While decoding, by row group | Including record fields | Stops decoding    |
-| [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)                   | At the node                  | No                      | No                |
-| [`sort`](https://tenzir.com/docs/reference/operators/sort.md)                             | Moved before the sort        | Passed on               | Keeps the top `N` |
+| Operator                                                                                                  | Filters                      | Projections             | Limits            |
+| --------------------------------------------------------------------------------------------------------- | ---------------------------- | ----------------------- | ----------------- |
+| [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)                       | In the query                 | Including tuple fields  | In the query      |
+| [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                               | In the query                 | Top-level columns       | In the query      |
+| [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md)                 | In the query                 | Top-level columns       | In the query      |
+| [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                                 | In the query                 | Top-level columns       | In the query      |
+| [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) | As prefilters in the query   | Including nested fields | Without filters   |
+| [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)                             | While decoding, by row group | Including record fields | Stops decoding    |
+| [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)                                   | At the node                  | No                      | No                |
+| [`sort`](https://tenzir.com/docs/reference/operators/sort.md)                                             | Moved before the sort        | Passed on               | Keeps the top `N` |
 
 The reference page of each operator describes the details.
 
@@ -77,6 +78,15 @@ In table mode, these rules hold for every database:
 * **Limits** go into the query only if every predicate before the [`head`](https://tenzir.com/docs/reference/operators/head.md) did, since the database cannot count rows that Tenzir has yet to filter. Otherwise, the operator enforces the limit itself.
 * **Projections** narrow the selected columns to those that the pipeline reads, including columns that only a predicate running in Tenzir needs. Fields that the table does not have are left to [`select`](https://tenzir.com/docs/reference/operators/select.md), which fills them with `null`.
 * **Live mode**, which polls a table for new rows, carries the `WHERE` clause and the narrowed columns into every poll, but never a limit, since the limit counts events across polls. The operator plans each poll anew, so that columns added to the table while the pipeline runs take part in later polls.
+
+## SentinelOne
+
+[`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) optimizes only when you omit `query`, and it differs from the database sources in two ways:
+
+* **Filters are prefilters.** PowerQuery coerces types and compares values differently from TQL, so a pushed filter may let extra events through. Tenzir therefore evaluates every original predicate as well, including those that the operator sent.
+* **Projections are required.** SentinelOne returns only `timestamp` and `message` by default, so the operator requests the fields that the filters and the rest of the pipeline read.
+
+Generated TQL reads handle PQ’s 1,000-row cap transparently: a capped response is discarded before emission and retried through paginated LOG queries, unless an unfiltered pushed `head` intentionally requested no more than the cap. Explicit native `query` requests retain capped-result semantics. Our [SentinelOne optimization reference](optimizations/sentinelone.md#limits-and-the-result-cap) explains the fallback and continuation behavior.
 
 ## Filters by database
 

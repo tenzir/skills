@@ -12,25 +12,30 @@ section: "Integrations"
 
 Windows Event Logs record system, security, and application events on Windows. You can collect them into Tenzir for monitoring, troubleshooting, and analysis.
 
-Every Windows host can forward its events with Windows Event Forwarding (WEF), and Tenzir receives them natively, without an agent on the hosts or a Windows server in between. Alternatively, you can ship events through a collector or an agent that you already run, or process exported EVTX files.
+Tenzir can be your Windows Event Collector (WEC) or receive events from a collector you already run. Both architectures use the built-in Windows Event Forwarding (WEF) on the hosts:
+
+* Use [Tenzir as the WEC](windows-event-forwarding.md). The [`accept_wef`](https://tenzir.com/docs/reference/operators/accept_wef.md) operator manages subscriptions and receives events directly from Windows hosts. No separate Windows collector or shipping agent is needed.
+* Use [Tenzir with a WEC](windows-event-collector.md). Keep your Windows collector and use the agent of your choice to read its `ForwardedEvents` channel and send the events to a supported Tenzir input. Tenzir is not tied to a particular agent.
+
+You can also collect through OpenWEC, run an agent on every host, or process exported EVTX files.
 
 ## Choose a collection method
 
 The methods differ in what they need on the hosts and in between:
 
-| Method                                                                                                      | On the hosts                           | In between                            |
-| ----------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------------------------------- |
-| [Microsoft Windows Event Forwarding](windows-event-forwarding.md) | Built in, configured by a Group Policy | Nothing, Tenzir is the collector      |
-| [Microsoft Windows Event Collector](windows-event-collector.md)   | Built in, configured by a Group Policy | A Windows Server and a shipping agent |
-| [OpenWEC](../openwec.md)                                                       | Built in, configured by a Group Policy | A Linux server with OpenWEC           |
-| [Winlogbeat](../winlogbeat.md)                                                 | An agent on every host                 | Nothing                               |
-| [NXLog](../nxlog.md)                                                           | An agent on every host                 | Nothing                               |
-| [Fluent Bit](../fluent-bit.md)                                                 | An agent on every host                 | Nothing                               |
-| [Microsoft Windows EVTX Files](evtx.md)                           | An export of the logs                  | Nothing                               |
+| Method                                                                       | On the hosts                           | In between                            |
+| ---------------------------------------------------------------------------- | -------------------------------------- | ------------------------------------- |
+| [WEF](windows-event-forwarding.md) | Built in, configured by a Group Policy | Nothing, Tenzir is the collector      |
+| [WEC](windows-event-collector.md)  | Built in, configured by a Group Policy | A Windows Server and a shipping agent |
+| [OpenWEC](../openwec.md)                        | Built in, configured by a Group Policy | A Linux server with OpenWEC           |
+| [Winlogbeat](../winlogbeat.md)                  | An agent on every host                 | Nothing                               |
+| [NXLog](../nxlog.md)                            | An agent on every host                 | Nothing                               |
+| [Fluent Bit](../fluent-bit.md)                  | An agent on every host                 | Nothing                               |
+| [Windows EVTX Files](evtx.md)      | An export of the logs                  | Nothing                               |
 
-Start with Windows Event Forwarding for new deployments. It authenticates the hosts with Kerberos or client certificates and resumes after outages without losing events. If you already run a Windows Event Collector or OpenWEC, you can keep it and send its events to Tenzir, and later point the hosts at Tenzir instead. Agents suit fleets that already run one, and EVTX files suit forensic investigations of individual hosts.
+Choose direct WEF collection when you want Tenzir to manage subscriptions and receive events in one pipeline. Keep a Windows Event Collector when you want it to gather the events, and choose the shipping agent that fits your deployment. You can also keep an OpenWEC deployment and send its events to Tenzir. Agents on every host suit fleets that already run one, and EVTX files suit forensic investigations of individual hosts.
 
-Windows Events with Agent
+Windows hosts run an agent such as Fluent Bit, Winlogbeat, or NXLog to read the Application, Security, System, Setup, and ForwardedEvents channels and send events to Tenzir.
 
 Two Windows features add detail to what the event logs record: [Sysmon](../sysmon.md) logs process, network, and registry activity, and [PowerShell Script Block Logging](../powershell-script-block-logging.md) logs the PowerShell code that runs on a host.
 

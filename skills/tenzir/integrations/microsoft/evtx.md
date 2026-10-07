@@ -23,7 +23,7 @@ brew install evtx
 cargo install evtx
 ```
 
-To try the examples on this page, use the sample files in the [`samples` directory](https://github.com/omerbenamram/evtx/tree/master/samples) of the project, such as `security.evtx` and `sysmon.evtx`.
+To reproduce the outputs, download the [EVTX samples](https://github.com/omerbenamram/evtx/tree/master/samples). Save `security.evtx` as `Security.evtx`, `sysmon.evtx` as `Sysmon.evtx`, and `Archive-ForwardedEvents-test.evtx` as `ForwardedEvents.evtx`.
 
 ## Convert EVTX to XML
 
@@ -40,14 +40,24 @@ evtx_dump \
 
 The `--threads 1` option preserves the original event order. You can omit it when ordering does not matter. The remaining options produce concatenated XML records without the `Record N` lines that `evtx_dump` displays by default.
 
-Split the XML stream at each closing `Event` element and turn every event into a structured record:
+Split the XML stream at each closing `Event` element, remove [invalid control characters](evtx.md#handle-characters-that-xml-does-not-allow), and inspect a few fields of the first two parsed events:
 
 ```tql
 from_file "Security.xml" {
   read_delimited "</Event>\n", include_separator=true
 }
+data = data.replace_regex("[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F]", "")
 this = data.parse_winlog()
+select id=System.EventID, channel=System.Channel, computer=System.Computer
+head 2
 ```
+
+```tql
+{id: 4608, channel: "Security", computer: "37L4247F27-25"}
+{id: 4624, channel: "Security", computer: "37L4247F27-25"}
+```
+
+Omit `select` and `head` to keep the complete events.
 
 ## Read EVTX files in a pipeline
 
@@ -144,6 +154,13 @@ this = data.parse_winlog()
 where System.EventID == 4624
 summarize user=EventData.TargetUserName, logon_type=EventData.LogonType, logons=count()
 sort -logons
+head 3
+```
+
+```tql
+{user: "SYSTEM", logon_type: 5, logons: 337}
+{user: "fsir", logon_type: 2, logons: 80}
+{user: "SYSTEM", logon_type: 0, logons: 40}
 ```
 
 ### Find repeated failed logons
@@ -159,6 +176,12 @@ where System.EventID == 4625
 summarize user=EventData.TargetUserName, source=EventData.IpAddress, failures=count()
 where failures >= 10
 sort -failures
+head 3
+```
+
+```tql
+{user: "psadmin", source: 10.115.247.239, failures: 71}
+{user: "CTX-WS16-FS-T3$", source: 10.115.55.139, failures: 56}
 ```
 
 The `IpAddress` field is of type `ip`, so you can filter it with subnets, such as `where source in 10.0.0.0/8`.

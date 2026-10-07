@@ -33,7 +33,7 @@ The continuation token from the previous response for this output stream. Pass `
 
 The schema representation to include in this output stream's response. Overrides the request-wide `schema` for this stream only.
 
-Allowed values`legacy``exact``never`
+Allowed values`exact``never`
 
 `max_events``integer`optional
 
@@ -55,11 +55,11 @@ Default`5s`
 
 `schema``enum`optional
 
-The default schema representation to include in each response. Use `exact` for a representation that matches Tenzir's type system exactly, and `never` to omit schema definitions. Individual output streams can override this with their own `schema` field.
+The default schema representation to include in each response. Use `never` to omit schema definitions. Individual output streams can override this with their own `schema` field.
 
-Allowed values`legacy``exact``never`
+Allowed values`exact``never`
 
-Default`legacy`
+Default`exact`
 
 Example
 

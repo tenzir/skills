@@ -18,18 +18,16 @@ Zscaler NSS
 
 ### Configure Tenzir
 
-First, spin up a Tenzir pipeline that mimics a [Splunk HEC endpoint](splunk.md):
+Use [`accept_splunk`](https://tenzir.com/docs/reference/operators/accept_splunk.md) to receive HEC events over HTTPS:
 
 ```tql
-from_fluent_bit "splunk", options={
-  listen: 0.0.0.0,
-  port: 8088,
-  splunk_token: YOUR_TOKEN,
-}
+accept_splunk "https://0.0.0.0:8088",
+  hec_token=secret("zscaler-hec-token"),
+  tls={certfile: "server.crt", keyfile: "server.key"}
 publish "zscaler"
 ```
 
-In the above example, the pipeline uses `0.0.0.0` to listen on all IP addresses available.
+The listener accepts HTTPS on all interfaces at port `8088`. Store your HEC token in the `zscaler-hec-token` secret. Provide a TLS certificate valid for the public hostname or IP address used in the feed URL, with its corresponding private key. Zscaler requires a chain ending at a [publicly trusted certificate authority](https://help.zscaler.com/zia/adding-cloud-nss-feeds-web-logs). Self-signed or internally issued certificates do not pass its connectivity test.
 
 ### Create a Cloud NSS Feed
 
@@ -49,20 +47,22 @@ In the new dialog, configure the following options:
 
 * **SIEM Rate**: Unlimited
 
-* **SIEM Type**: Other
+* **SIEM Type**: Splunk
 
 * **OAuth 2.0 Authentication**: disabled
 
 * **Max Batch Size**: 16 KB
 
-* **API URL**: Enter the URL that identifies the Tenzir pipeline where the Splunk HEC endpoint is listening, e.g., <https://1.2.3.4:8080/services/collector>.
+* **API URL**: Enter the URL that identifies the Tenzir pipeline where the Splunk HEC endpoint is listening, e.g., `https://1.2.3.4:8088/services/collector`.
 
-* **HTTP Headers**: Add your token from the Tenzir pipeline enable compression with the following two headers.
+* **HTTP Headers**: Use the same token as in the Tenzir secret:
 
-  * `Authorization`: `YOUR_TOKEN`
+  * `Authorization`: `Splunk YOUR_TOKEN`
   * `Content-Encoding`: `gzip`
 
 * **Feed Output Type**: JSON
+
+* **Feed Output Format**: Use a HEC JSON envelope with the log record inside its `event` field. Zscaler provides the complete web-log template in its [Splunk deployment guide](https://help.zscaler.com/downloads/zscaler-technology-partners/operations/zscaler-and-splunk-deployment-guide/Zscaler-Splunk-Deployment-Guide-FINAL.pdf).
 
 * **JSON Array Notation**: disabled
 

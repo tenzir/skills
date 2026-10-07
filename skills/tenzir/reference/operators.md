@@ -718,7 +718,7 @@ from_file "s3://data/**.json"
 Receives events via Fluent Bit.
 
 ```tql
-from_fluent_bit "opentelemetry"
+from_fluent_bit "mqtt"
 ```
 
 ### [from\_ftp](operators/from_ftp.md)
@@ -827,7 +827,7 @@ from_s3 "s3://my-bucket/data/**.json"
 
 ### [from\_sentinelone\_data\_lake](operators/from_sentinelone_data_lake.md)
 
-Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
+Queries SentinelOne Singularity Data Lake with TQL.
 
 ```tql
 from_sentinelone_data_lake "https://…", …

@@ -25,7 +25,7 @@ Internally, Fluent Bit uses [MsgPack](https://msgpack.org/) to encode events whe
 An invocation of the `fluent-bit` commandline utility
 
 ```bash
-fluent-bit -o input_plugin -p key1=value1 -p key2=value2 -p…
+fluent-bit -i input_plugin -p key1=value1 -p key2=value2 -p…
 ```
 
 translates to Tenzir’s [`from_fluent_bit`](https://tenzir.com/docs/reference/operators/from_fluent_bit.md) operator as follows:
@@ -114,16 +114,6 @@ mosquitto_pub \
 
 The resulting event contains the MQTT topic alongside the `severity` and `code` fields.
 
-### Imitate a Splunk HEC endpoint
-
-```tql
-from_fluent_bit "splunk", options = {port: 8088}
-```
-
-Tip
-
-Use the dedicated [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) operator to send events to a Splunk HEC.
-
 ### Collect host metrics
 
 Use Fluent Bit’s Node Exporter Metrics input plugin to collect host metrics from Linux systems:
@@ -136,12 +126,4 @@ from_fluent_bit "node_exporter_metrics", options={scrape_interval: 5}
 
 ```tql
 to_fluent_bit "datadog", options = {apikey: "XXX"}
-```
-
-### Send to Elasticsearch
-
-Use Fluent Bit’s Elasticsearch output plugin to send data to Elasticsearch:
-
-```tql
-to_fluent_bit "es", options={host: "192.168.2.3", port: 9200, index: "my_index"}
 ```

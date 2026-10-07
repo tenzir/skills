@@ -131,7 +131,7 @@
 - [from_nats](operators/from_nats.md): Consumes messages from a NATS JetStream subject.
 - [from_nic](operators/from_nic.md): Captures packets from a network interface and outputs events.
 - [from_s3](operators/from_s3.md): Reads one or multiple files from Amazon S3.
-- [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md): Retrieves PowerQuery results from SentinelOne Singularity Data Lake.
+- [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md): Queries SentinelOne Singularity Data Lake with TQL.
 - [from_splunk](operators/from_splunk.md): Runs a Splunk search and returns its results as events.
 - [from_stdin](operators/from_stdin.md): Reads and parses events from standard input.
 - [from_tcp](operators/from_tcp.md): Connects to a remote TCP or TLS endpoint and receives events.

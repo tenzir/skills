@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Windows Event Collector integration"
-description: "Ships the events that a Windows Event Collector gathers to Tenzir, or replaces the collector with Tenzir."
+description: "Receives events from a Windows Event Collector through the shipping agent of your choice."
 canonical: https://tenzir.com/integrations/microsoft/windows-event-collector
 source: https://tenzir.com/integrations/microsoft/windows-event-collector.md
 section: "Integrations"
@@ -8,13 +8,15 @@ section: "Integrations"
 
 # Microsoft Windows Event Collector integration
 
-> Ships the events that a Windows Event Collector gathers to Tenzir, or replaces the collector with Tenzir.
+> Receives events from a Windows Event Collector through the shipping agent of your choice.
 
 A Windows Event Collector (WEC) is a Windows Server that receives the events that hosts forward with Windows Event Forwarding (WEF). The hosts use Windows Remote Management (WinRM) to fetch the subscriptions of the collector and push the selected events, which the collector writes to its `ForwardedEvents` channel. Subscriptions define which events to collect from which hosts, using criteria such as event IDs, keywords, or log levels.
 
-WEF & WEC
+In this architecture, Tenzir sits downstream of the WEC. You keep the Windows collector and use the agent of your choice to read its `ForwardedEvents` channel and send the events to a supported Tenzir input. Tenzir does not require a particular shipping agent.
 
-If you already run a collector, you can ship its `ForwardedEvents` channel to Tenzir with an agent. Tenzir can also [replace the collector](windows-event-collector.md#replace-the-collector-with-tenzir), because [`accept_wef`](https://tenzir.com/docs/reference/operators/accept_wef.md) receives the events of the hosts directly, without a Windows Server or an agent.
+Tenzir with a WEC: Windows hosts forward events to a Windows collector, and an agent ships its ForwardedEvents channel to Tenzir.
+
+Tenzir can also [be the WEC itself](windows-event-collector.md#replace-the-collector-with-tenzir). The [`accept_wef`](https://tenzir.com/docs/reference/operators/accept_wef.md) operator manages subscriptions and receives events directly from the hosts, without an intermediate Windows collector or shipping agent. Our [Microsoft Windows Event Forwarding](windows-event-forwarding.md) integration describes that architecture.
 
 ## Set up the Windows Event Collector
 
@@ -46,7 +48,9 @@ As with WinRM, `qc` performs a quick configuration and `/q` skips all prompts. T
 
 ### Create a subscription
 
-Create a subscription file:
+Create `DC_SUBSCRIPTION.xml` with a source-initiated subscription:
+
+Complete subscription XML
 
 DC\_SUBSCRIPTION.xml
 
@@ -137,7 +141,9 @@ Apply the policy with `gpupdate /force`, and [verify the subscription](windows-e
 
 ## Ship the collected events to Tenzir
 
-Install an agent on the collector that reads the `ForwardedEvents` channel and sends its events to Tenzir. The [Winlogbeat](../winlogbeat.md), [NXLog](../nxlog.md), and [Fluent Bit](../fluent-bit.md) pages describe the agents and the matching Tenzir pipelines. Configure the agent for the `ForwardedEvents` channel, for example in Winlogbeat:
+Choose an agent that reads the `ForwardedEvents` channel and delivers its events to a supported Tenzir input. The choice of agent determines the input operator and event format of the receiving pipeline, not whether Tenzir can work with your WEC.
+
+For configuration examples, our [Winlogbeat](../winlogbeat.md), [NXLog](../nxlog.md), and [Fluent Bit](../fluent-bit.md) integrations describe the agents and matching Tenzir pipelines. These are examples, not a required set of agents. Configure the agent for the `ForwardedEvents` channel, for example in Winlogbeat:
 
 winlogbeat.yml
 

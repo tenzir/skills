@@ -45,11 +45,11 @@ Default`5s`
 
 `schema``enum`optional
 
-The schema representation to include in the response. Use `exact` for a representation that matches Tenzir's type system exactly, and `never` to omit schema definitions.
+The schema representation to include in the response. Use `never` to omit schema definitions.
 
-Allowed values`legacy``exact``never`
+Allowed values`exact``never`
 
-Default`legacy`
+Default`exact`
 
 Example
 
@@ -117,10 +117,10 @@ Example
       "definition": {
         "name": "tenzir.summarize",
         "kind": "record",
-        "type": "tenzir.summarize",
-        "attributes": {},
-        "path": [],
-        "fields": []
+        "attributes": [],
+        "state": {
+          "fields": []
+        }
       }
     }
   ],

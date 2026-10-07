@@ -12,7 +12,9 @@ section: "Integrations"
 
 [OpenWEC](https://github.com/cea-sec/openwec) is an open-source Windows Event Collector for Linux. Windows hosts forward their events to it with Windows Event Forwarding, and OpenWEC sends them on to outputs such as files, Kafka, or TCP. If you run OpenWEC, you can send the events that it collects to Tenzir.
 
-OpenWEC
+An administrator configures subscriptions on OpenWEC. Windows hosts forward the matching event logs to OpenWEC, which sends them to Tenzir.
+
+Collect directly with Tenzir
 
 Tenzir can also [replace OpenWEC](openwec.md#replace-openwec-with-tenzir), because [`accept_wef`](https://tenzir.com/docs/reference/operators/accept_wef.md) receives the events of the hosts directly.
 

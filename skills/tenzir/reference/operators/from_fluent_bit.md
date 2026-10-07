@@ -24,7 +24,7 @@ The `from_fluent_bit` operator acts as a bridge into the [Fluent Bit](https://do
 An invocation of the `fluent-bit` commandline utility
 
 ```bash
-fluent-bit -o plugin -p key1=value1 -p key2=value2 -p…
+fluent-bit -i plugin -p key1=value1 -p key2=value2 -p…
 ```
 
 translates to our `from_fluent_bit` operator as follows:

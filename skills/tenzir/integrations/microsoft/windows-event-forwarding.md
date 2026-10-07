@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Windows Event Forwarding integration"
-description: "Receives the events that Windows hosts forward natively, without an agent or a Windows Event Collector."
+description: "Acts as the collector for Windows Event Forwarding, without a Windows server or shipping agent."
 canonical: https://tenzir.com/integrations/microsoft/windows-event-forwarding
 source: https://tenzir.com/integrations/microsoft/windows-event-forwarding.md
 section: "Integrations"
@@ -8,9 +8,15 @@ section: "Integrations"
 
 # Microsoft Windows Event Forwarding integration
 
-> Receives the events that Windows hosts forward natively, without an agent or a Windows Event Collector.
+> Acts as the collector for Windows Event Forwarding, without a Windows server or shipping agent.
 
-Windows Event Forwarding (WEF) is built into every Windows host. The hosts fetch subscriptions from a *subscription manager* that a Group Policy names. A subscription defines which events to forward. The hosts then push those events to the collector of the subscription. The experimental [`accept_wef`](https://tenzir.com/docs/reference/operators/accept_wef.md) operator plays both roles, so Windows hosts forward their events directly to a Tenzir pipeline, without an agent on the hosts or a Windows Event Collector in between.
+Tenzir can be your Windows Event Collector (WEC). The [`accept_wef`](https://tenzir.com/docs/reference/operators/accept_wef.md) operator receives events directly from Windows hosts through Windows Event Forwarding (WEF), without an intermediate Windows collector or shipping agent.
+
+WEF is built into every Windows host. A Group Policy points the hosts at a *subscription manager*, which provides subscriptions that define the events to forward. The hosts push those events to the collector of the subscription. The [`accept_wef`](https://tenzir.com/docs/reference/operators/accept_wef.md) operator acts as both the subscription manager and the collector.
+
+Tenzir as the WEC: Windows hosts fetch subscriptions from Tenzir and forward matching events directly to accept\_wef, which acts as the subscription manager and event collector.
+
+You can also keep a Windows collector and ship its events to Tenzir with the agent of your choice. Our [Microsoft Windows Event Collector](windows-event-collector.md) integration describes that architecture.
 
 Hosts authenticate in one of two ways:
 
