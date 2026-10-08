@@ -1,6 +1,6 @@
 # Role Management (role_management)
 
-Role Management events report lifecycle management of a role, as well as privileges, policies, credentials, and resources associated with the role. There are two ways updates to the state of a role may be expressed: Using the `Update` activity, for example when updating multiple items at one time, the `updated_role` reflects the changes made to `iam_role`. Using discrete activities, such as `Assign Privileges` the state change is expressed by the `privileges` attribute. Optionally, on success, the `updated_role` reflects the new state of the role. Roles assigned or removed from users and groups are expressed by the `User Management` and `Group Management` classes.
+Role Management events report lifecycle management of a role, as well as privileges, policies, credentials, and resources associated with the role. There are two ways updates to the state of a role may be expressed: Using the `Update` activity, for example when updating multiple items at one time, the `updated_role` reflects the changes made to `iam_role`. Using discrete activities, such as `Assign Privileges` the state change is expressed by the `privileges` attribute. Optionally, on success, the `updated_role` reflects the new state of the role. Roles assigned or removed from users and groups are expressed by the `User Management` and `Group Management` classes. Role Management events also cover roles bound to AI agents, e.g., an agent's role being created, updated, or having privileges, resources, policies, or credentials granted, revoked, attached, detached, added, or removed. The `ai_agent` attribute identifies the agent associated with `iam_role`.
 
 - **Class UID**: `3008`
 - **Category**: Identity & Access Management
@@ -50,6 +50,12 @@ Role Management events report lifecycle management of a role, as well as privile
 - `11`: `Remove Programmatic Credentials` - Remove credentials from a role. Use `programmatic_credentials` to be removed from `iam_role`.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
+
+### `ai_agent`
+
+- **Type**: [`ai_agent`](../objects/ai_agent.md)
+
+The AI agent that `iam_role` is provisioned for or bound to, e.g., an agent's execution role or the permission set governing an agentic service. Populate when the role being managed belongs to an AI agent rather than a human user or service.
 
 ### `iam_role`
 

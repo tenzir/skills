@@ -60,6 +60,14 @@ AI-specific attributes for model operations, retrieval systems, and agent activi
 
 The autonomous AI agent that performed this operation. Carries model identity via `ai_agent.ai_model`. Populate when the action was performed by an agent rather than a direct model call.
 
+### `ai_capability`
+
+- **Type**: [`ai_capability`](../objects/ai_capability.md)
+- **Requirement**: optional
+- **Group**: context
+
+The AI capability invoked in this operation: a tool, resource, or prompt, in the sense of the MCP primitives. Records the capability's identity, kind, provenance, declared contracts, and declared safety hints. Transport details remain on the event's transport attributes (e.g., `api`, `http_request`), and affected objects remain in `resources`. Producers deriving `activity_id` from the capability's declared hints (e.g., mapping a declared read-only tool to `Read`) should note the hints are self-declared and unverified; when the observed operation contradicts the declaration, classify by observed behavior.
+
 ### `ai_model`
 
 - **Type**: [`ai_model`](../objects/ai_model.md)

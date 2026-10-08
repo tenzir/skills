@@ -211,6 +211,7 @@
 - [Additional Restriction](objects/additional_restriction.md)
 - [Advisory](objects/advisory.md)
 - [AI Agent](objects/ai_agent.md)
+- [AI Capability](objects/ai_capability.md)
 - [AI Model](objects/ai_model.md)
 - [Attestation](objects/attestation.md)
 - [Clipboard](objects/clipboard.md)

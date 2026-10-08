@@ -30,6 +30,12 @@ Application Lifecycle events report installation, removal, start, stop of an app
 
 ## Attributes
 
+### `ai_agent`
+
+- **Type**: [`ai_agent`](../objects/ai_agent.md)
+
+The affected application, when it is itself an AI agent.
+
 ### `activity_id`
 
 - **Type**: `integer_t`
