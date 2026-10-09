@@ -31,9 +31,9 @@ The continuation token from the previous response for this output stream. Pass `
 
 `schema``enum`optional
 
-The schema representation to include in this output stream's response. Overrides the request-wide `schema` for this stream only.
+The schema representation to include in this output stream's response. Use `name_and_type` to report names and structural type IDs. Overrides the request-wide `schema` for this stream only.
 
-Allowed values`exact``never`
+Allowed values`exact``never``name_and_type`
 
 `max_events``integer`optional
 
@@ -55,9 +55,9 @@ Default`5s`
 
 `schema``enum`optional
 
-The default schema representation to include in each response. Use `never` to omit schema definitions. Individual output streams can override this with their own `schema` field.
+The default schema representation to include in each response. Use `never` to omit definitions, or `name_and_type` to report names and structural type IDs. Individual output streams can override this with their own `schema` field.
 
-Allowed values`exact``never`
+Allowed values`exact``never``name_and_type`
 
 Default`exact`
 
@@ -108,11 +108,15 @@ Array items
 
 `schema_id``string`optional
 
-The unique schema identifier.
+The schema identifier when `schema` is `exact`.
+
+`type_id``string`optional
+
+The structural type ID when `schema` is `name_and_type`.
 
 `definition``unknown`optional
 
-The schema definition in JSON format.
+The structural definition in JSON format. In `name_and_type` mode, the schema name is omitted but chart attributes are retained when present.
 
 `events``array<object>`required
 
@@ -122,7 +126,15 @@ Array items
 
 `schema_id``string`optional
 
-The unique schema identifier.
+The schema identifier when `schema` is `exact` or `never`.
+
+`schema``string`optional
+
+The schema name when `schema` is `name_and_type`.
+
+`type_id``string`optional
+
+The structural type ID when `schema` is `name_and_type`. Matches `type_id(this)` for the row.
 
 `data``object`optional
 

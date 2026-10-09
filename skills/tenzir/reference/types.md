@@ -64,7 +64,7 @@ Complex types are stateful types that carry additional runtime information.
 
 #### List
 
-The `list` type is an ordered sequence of values with a fixed element type.
+The `list` type is an ordered sequence of values. Its elements may have different types.
 
 Lists have zero or more elements.
 

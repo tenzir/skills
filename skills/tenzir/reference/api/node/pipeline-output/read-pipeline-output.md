@@ -45,9 +45,9 @@ Default`5s`
 
 `schema``enum`optional
 
-The schema representation to include in the response. Use `never` to omit schema definitions.
+The schema representation to include in the response. Use `never` to omit definitions, or `name_and_type` to report each event's schema name and structural type ID with definitions indexed by type ID.
 
-Allowed values`exact``never`
+Allowed values`exact``never``name_and_type`
 
 Default`exact`
 
@@ -85,11 +85,15 @@ Array items
 
 `schema_id``string`optional
 
-The unique schema identifier.
+The schema identifier when `schema` is `exact`.
+
+`type_id``string`optional
+
+The structural type ID when `schema` is `name_and_type`.
 
 `definition``unknown`optional
 
-The schema definition in JSON format.
+The structural definition in JSON format. In `name_and_type` mode, the schema name is omitted but chart attributes are retained when present.
 
 `events``array<object>`required
 
@@ -99,7 +103,15 @@ Array items
 
 `schema_id``string`optional
 
-The unique schema identifier.
+The schema identifier when `schema` is `exact` or `never`.
+
+`schema``string`optional
+
+The schema name when `schema` is `name_and_type`.
+
+`type_id``string`optional
+
+The structural type ID when `schema` is `name_and_type`. Matches `type_id(this)` for the row.
 
 `data``object`optional
 

@@ -18,7 +18,7 @@ These binaries run pipelines on your machine. To manage pipelines through a web 
 
 Supported Platforms
 
-Tenzir runs on **macOS** (Apple Silicon) and **Linux** (x86\_64, ARM64).
+Tenzir runs on **macOS 26 or newer** (Apple Silicon) and **Linux** (x86\_64, ARM64).
 
 Choose the installation method that fits your use case.
 

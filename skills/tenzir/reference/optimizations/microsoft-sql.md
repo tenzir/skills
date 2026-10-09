@@ -47,6 +47,10 @@ WHERE [severity] >= 3
 
 Here, `<hex of rule>` stands for the bytes of the `rule` column in hexadecimal, which the [text comparisons](microsoft-sql.md#text-comparisons) section explains. The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators still run in Tenzir on the rows that SQL Server returns, so the result is the same whether SQL Server evaluated a filter or not.
 
+## Aggregation input columns
+
+With final summary output, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) also narrows the input columns, subject to the [selected-column rules](microsoft-sql.md#selected-columns). The [aggregation projection rules](../optimizations.md#aggregation-input-projections) apply to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) as well. Aggregation still runs in Tenzir, not in a SQL `GROUP BY`; a [`head`](https://tenzir.com/docs/reference/operators/head.md) after it does not add an input `TOP`. Explicit `sql` and `query` arguments remain unchanged.
+
 ## Filters that SQL Server evaluates
 
 The operator puts a filter into the query only if SQL Server evaluates it exactly like Tenzir. These filters qualify:

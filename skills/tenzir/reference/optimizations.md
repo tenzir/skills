@@ -33,7 +33,7 @@ This reference explains how such optimizations come about, what they promise abo
 Before a pipeline runs, Tenzir’s [optimizer](../explanations/pipeline.md#optimization) walks it from the last operator to the first and tells each operator what the operators after it will do. We call this information **hints**, and there are three kinds:
 
 * **Filters**: the predicates of the [`where`](https://tenzir.com/docs/reference/operators/where.md) operators.
-* **Projections**: the fields that [`select`](https://tenzir.com/docs/reference/operators/select.md) keeps.
+* **Projections**: the fields that downstream operators need, such as the fields that [`select`](https://tenzir.com/docs/reference/operators/select.md) keeps or a final [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) reads.
 * **Limits**: the number of events that [`head`](https://tenzir.com/docs/reference/operators/head.md) keeps.
 
 An operator that understands a hint acts on it, for example by turning a filter into a `WHERE` clause. The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators stay in the pipeline regardless and run on what the operator produces, so an operator that acts on a hint only partially, or not at all, still produces the same result.
@@ -52,18 +52,49 @@ The [database pages](optimizations.md#filters-by-database) state which databases
 
 These operators act on hints:
 
-| Operator                                                                                                  | Filters                      | Projections             | Limits            |
-| --------------------------------------------------------------------------------------------------------- | ---------------------------- | ----------------------- | ----------------- |
-| [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)                       | In the query                 | Including tuple fields  | In the query      |
-| [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                               | In the query                 | Top-level columns       | In the query      |
-| [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md)                 | In the query                 | Top-level columns       | In the query      |
-| [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                                 | In the query                 | Top-level columns       | In the query      |
-| [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) | As prefilters in the query   | Including nested fields | Without filters   |
-| [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)                             | While decoding, by row group | Including record fields | Stops decoding    |
-| [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)                                   | At the node                  | No                      | No                |
-| [`sort`](https://tenzir.com/docs/reference/operators/sort.md)                                             | Moved before the sort        | Passed on               | Keeps the top `N` |
+| Operator                                                                                                  | Filters                      | Projections                | Limits                 |
+| --------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- | ---------------------- |
+| [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)                       | In the query                 | Including tuple fields     | In the query           |
+| [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                               | In the query                 | Top-level columns          | In the query           |
+| [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md)                 | In the query                 | Top-level columns          | In the query           |
+| [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                                 | In the query                 | Top-level columns          | In the query           |
+| [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) | As prefilters in the query   | Including nested fields    | Without filters        |
+| [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)                             | While decoding, by row group | Including record fields    | Stops decoding         |
+| [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)                                   | At the node                  | No                         | No                     |
+| [`sort`](https://tenzir.com/docs/reference/operators/sort.md)                                             | Moved before the sort        | Passed on                  | Keeps the top `N`      |
+| [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) (final summary)                   | Kept after aggregation       | Group and aggregate inputs | Kept after aggregation |
 
 The reference page of each operator describes the details.
+
+## Aggregation input projections
+
+With final summary output, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) supplies its own projection hint. You do not need an explicit [`select`](https://tenzir.com/docs/reference/operators/select.md) before aggregation:
+
+```tql
+from_mysql table="events", host="db.example.com", database="soc"
+summarize host, events=count(), bytes=sum(bytes)
+head 10
+```
+
+The source can read only `host` and `bytes`. For this table, the generated query is equivalent to:
+
+```sql
+SELECT `host`, `bytes` FROM `events`
+```
+
+This is input projection, not remote aggregation. The query has no `GROUP BY`, `COUNT`, `SUM`, or `LIMIT`. Tenzir groups and aggregates the complete input, then keeps at most ten summary rows. Filters after `summarize` also stay after aggregation; filters before it can still reach the source.
+
+These rules preserve the aggregation’s inputs and behavior:
+
+* All grouping keys remain required, even if a later selection drops them.
+* All aggregate arguments remain required, even if their results are unused, because evaluating them can produce diagnostics.
+* Output aliases are not input dependencies. In the example, `events` does not request a source column.
+* A keyless `summarize events=count()` needs the row count but no field values. A source may still read a column or emit a placeholder per row to preserve that count; it does not replace the pipeline with a remote `COUNT(*)`.
+* Whole-event access, such as `collect(this)`, and dynamic field access, such as `sum(this[key])`, prevent narrowing.
+* Options must be resolved before `summarize` supplies a projection. Inside runtime-bound subpipelines, such as [`group`](https://tenzir.com/docs/reference/operators/group.md) and [`window`](https://tenzir.com/docs/reference/operators/window.md), an unresolved `summarize` does not narrow the enclosing source.
+* Input ordering requirements remain intact for order-sensitive aggregates. Trigger output, event output, and periodic summaries retain their barriers.
+
+The [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) operators compile into `summarize` and [`sort`](https://tenzir.com/docs/reference/operators/sort.md), so they benefit from the same input projection. A following [`head`](https://tenzir.com/docs/reference/operators/head.md) still limits groups, not raw input events. Source-specific column rules and fields required by earlier operators still apply.
 
 ## Database sources
 
@@ -84,7 +115,7 @@ In table mode, these rules hold for every database:
 [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) optimizes only when you omit `query`, and it differs from the database sources in two ways:
 
 * **Filters are prefilters.** PowerQuery coerces types and compares values differently from TQL, so a pushed filter may let extra events through. Tenzir therefore evaluates every original predicate as well, including those that the operator sent.
-* **Projections are required.** SentinelOne returns only `timestamp` and `message` by default, so the operator requests the fields that the filters and the rest of the pipeline read.
+* **Projections choose the retrieval mode.** A finite field list from [`select`](https://tenzir.com/docs/reference/operators/select.md) or a final [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) can use projected PowerQuery (PQ). Whole-event reads use LOG instead of PQ’s default `timestamp` and `message` columns.
 
 Generated TQL reads handle PQ’s 1,000-row cap transparently: a capped response is discarded before emission and retried through paginated LOG queries, unless an unfiltered pushed `head` intentionally requested no more than the cap. Explicit native `query` requests retain capped-result semantics. Our [SentinelOne optimization reference](optimizations/sentinelone.md#limits-and-the-result-cap) explains the fallback and continuation behavior.
 

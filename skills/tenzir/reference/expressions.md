@@ -41,6 +41,8 @@ Comparisons have explicit null behavior. If both operands are `null`, `==`, `>=`
 
 Operator-specific behavior takes precedence over generic null propagation. If an otherwise unsupported binary operation has a `null`-typed operand, it evaluates to `null` without a warning. For example, `5 in null` evaluates to `null`.
 
+Membership testing with `in` compares values rather than types, so an element of a different type simply does not match. For example, `"x" in [1d]` evaluates to `false` and `"x" not in [1d]` evaluates to `true`. Comparing two non-null values of different types with `==` or `!=` still evaluates to `null` and emits a warning.
+
 Logical operators preserve `null` according to three-valued logic. For example, `true and null` and `false or null` evaluate to `null`, while `false and null` evaluates to `false` and `true or null` evaluates to `true`.
 
 Null is falsy in predicates
@@ -356,7 +358,7 @@ Secrets support concatenation with `+` and can be used in format strings. When a
 
 ### List
 
-TQL has *typed* lists, which means that the type of the elements in a list is fixed and must not change per element. Lists use brackets to sequence data. `[]` denotes the empty list. Specify items with comma-delimited expressions:
+TQL lists may contain elements of different types. Lists use brackets to sequence data. `[]` denotes the empty list. Specify items with comma-delimited expressions:
 
 ```tql
 let $ports = [80, 443, 8080]
@@ -867,6 +869,22 @@ has_error = "error" in message
 ```
 
 To negate membership tests, use `not in` or `not (value in container)`.
+
+A list may hold elements of different types. `in` compares the value against each element, so it finds a match regardless of the other elements’ types:
+
+```tql
+from {
+  found: "x" in [1d, "x"],
+  missing: "y" in [1d, "x"],
+}
+```
+
+```tql
+{
+  found: true,
+  missing: false,
+}
+```
 
 ### Operator Precedence
 

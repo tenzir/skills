@@ -134,6 +134,22 @@ window size=1h {
 
 Keeping parallelism disabled also restores a single timer.
 
+## Optimizations
+
+With final summary output, `summarize` tells projection-capable sources which input fields it needs. For example:
+
+```tql
+from_mysql table="events", host="db.example.com", database="soc"
+summarize host, events=count(), bytes=sum(bytes)
+head 10
+```
+
+The source can read only `host` and `bytes`, without an explicit [`select`](https://tenzir.com/docs/reference/operators/select.md). Aggregation still runs in Tenzir and consumes the complete input. The [`head`](https://tenzir.com/docs/reference/operators/head.md) limits summary rows, not the events contributing to them.
+
+All grouping keys and aggregate inputs remain required, even if a later selection drops their results. An aggregation that reads the whole event or uses dynamic field access prevents narrowing. Trigger output, event output, and periodic summaries retain their optimization barriers. Projection is also withheld while options are unresolved in a runtime-bound subpipeline, such as [`group`](https://tenzir.com/docs/reference/operators/group.md) or [`window`](https://tenzir.com/docs/reference/operators/window.md).
+
+The [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) operators use `summarize` internally and benefit from the same input-field optimization. Our [aggregation input projection reference](../optimizations.md#aggregation-input-projections) explains the generated query and the shared rules across sources.
+
 ## Examples
 
 ### Compute the sum of a field over all events

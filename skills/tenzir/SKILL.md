@@ -1048,6 +1048,10 @@ Send security events to IBM Security QRadar for SIEM analytics and incident inve
 
 Publish, subscribe, store, and process streams of records in a distributed messaging system.
 
+#### [Kunai integration](integrations/kunai.md)
+
+Monitors Linux hosts with eBPF and records process, file, and network activity.
+
 #### [Microsoft integration](integrations/microsoft.md)
 
 Connect Azure, Microsoft 365, and Windows: stream through Event Hubs, store in Blob Storage, ingest into Sentinel, and parse the full Windows telemetry surface.

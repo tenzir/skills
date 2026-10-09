@@ -64,6 +64,29 @@ A finite path alone does not prove that a field is a scalar. SentinelOne stores 
 
 Both retrieval paths preserve the `raw` setting. It disables string inference, not dotted-name reconstruction or timestamp-metadata conversion.
 
+## Aggregation input columns
+
+With final summary output, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) can request a finite set of input fields without an explicit [`select`](https://tenzir.com/docs/reference/operators/select.md):
+
+```tql
+from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
+  token=secret("sentinelone-console-token"),
+  account_ids=["<account-id>"],
+  start=2024-01-01, end=2024-01-02
+summarize event.type, n=count()
+head 10
+```
+
+The initial PQ request is:
+
+```text
+| columns timestamp, event.type
+```
+
+The count and grouping still run in Tenzir. The query contains neither a PowerQuery aggregation nor a `limit` stage: [`head`](https://tenzir.com/docs/reference/operators/head.md) limits summary rows, not contributing events. A keyless `summarize n=count()` requests only the mandatory `timestamp` column, rather than sending a remote count.
+
+The [result-cap fallback and LOG continuation](sentinelone.md#limits-and-the-result-cap) still retrieve the complete input, even when you request only a few summary rows. Whole-event or dynamic aggregate arguments require complete events instead. Our [shared aggregation projection rules](../optimizations.md#aggregation-input-projections) describe the other dependencies and barriers; [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) inherit these rules. Explicit native `query` requests remain unchanged.
+
 ## Filters are prefilters
 
 Remote predicates must retain every possible TQL match, but may return extra candidates. For example, SentinelOne may coerce the string `"42"` to match the number `42`. Tenzir evaluates every original [`where`](https://tenzir.com/docs/reference/operators/where.md) predicate locally, including the predicates sent remotely.
