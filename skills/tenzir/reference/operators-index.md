@@ -151,6 +151,7 @@
 
 ## Modify
 
+- [ai_decide](operators/ai_decide.md): Asks a decision model typed questions about each event and adds the answers to the event.
 - [ai_prompt](operators/ai_prompt.md): Sends each input event to an OpenAI-compatible Responses API endpoint and adds the model response to the event.
 - [dns_lookup](operators/dns_lookup.md): Performs DNS lookups to resolve IP addresses to hostnames or hostnames to IP addresses.
 - [drop](operators/drop.md): Removes fields from the event.

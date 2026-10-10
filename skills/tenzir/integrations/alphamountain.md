@@ -66,7 +66,7 @@ After the context is available, enrich the OCSF telemetry stream and route only 
 ```tql
 subscribe "ocsf"
 tenzir::osint::enrich
-where osint?.any(x => x.severity_id >= 4)
+where osint?.map(x => x.severity_id >= 4).any()
 publish "siem"
 ```
 

@@ -403,7 +403,113 @@ Encodes strings using URL encoding.
 encode_url("Hello World")
 ```
 
+## Encryption
+
+### [decrypt\_aes\_gcm](functions/decrypt_aes_gcm.md)
+
+Decrypts a value that was encrypted with AES-GCM.
+
+```tql
+decrypt_aes_gcm(ciphertext, key=$key)
+```
+
+### [decrypt\_aes\_gcm\_siv](functions/decrypt_aes_gcm_siv.md)
+
+Decrypts a value that was encrypted with AES-GCM-SIV.
+
+```tql
+decrypt_aes_gcm_siv(ciphertext, key=$key)
+```
+
+### [decrypt\_aes\_siv](functions/decrypt_aes_siv.md)
+
+Decrypts a value that was encrypted with AES-SIV.
+
+```tql
+decrypt_aes_siv(ciphertext, key=$key)
+```
+
+### [decrypt\_cryptopan](functions/decrypt_cryptopan.md)
+
+Decrypts an IP address via Crypto-PAn.
+
+```tql
+decrypt_cryptopan(1.2.3.4, seed=$seed)
+```
+
+### [decrypt\_ff1](functions/decrypt_ff1.md)
+
+Decrypts a string that was encrypted with format-preserving encryption (FF1).
+
+```tql
+decrypt_ff1("3480-5050-4367-0686", key=$key)
+```
+
+### [decrypt\_hpke](functions/decrypt_hpke.md)
+
+Decrypts a value that was encrypted with HPKE.
+
+```tql
+decrypt_hpke(ciphertext, private_key=$private_key)
+```
+
+### [encrypt\_aes\_gcm](functions/encrypt_aes_gcm.md)
+
+Encrypts a value with AES-GCM.
+
+```tql
+encrypt_aes_gcm("alice@example.com", key=$key)
+```
+
+### [encrypt\_aes\_gcm\_siv](functions/encrypt_aes_gcm_siv.md)
+
+Encrypts a value with AES-GCM-SIV.
+
+```tql
+encrypt_aes_gcm_siv("alice@example.com", key=$key)
+```
+
+### [encrypt\_aes\_siv](functions/encrypt_aes_siv.md)
+
+Encrypts a value deterministically with AES-SIV.
+
+```tql
+encrypt_aes_siv("alice@example.com", key=$key)
+```
+
+### [encrypt\_cryptopan](functions/encrypt_cryptopan.md)
+
+Encrypts an IP address via Crypto-PAn.
+
+```tql
+encrypt_cryptopan(1.2.3.4, seed=$seed)
+```
+
+### [encrypt\_ff1](functions/encrypt_ff1.md)
+
+Encrypts a string with format-preserving encryption (FF1).
+
+```tql
+encrypt_ff1("4111-1111-1111-1111", key=$key)
+```
+
+### [encrypt\_hpke](functions/encrypt_hpke.md)
+
+Encrypts a value for the holder of a private key with HPKE.
+
+```tql
+encrypt_hpke("alice@example.com", public_key=$public_key)
+```
+
 ## Hashing
+
+### [hash\_crc32](functions/hash_crc32.md)
+
+Computes a CRC-32 checksum.
+
+```tql
+hash_crc32("foo")
+```
 
 ### [hash\_md5](functions/hash_md5.md)
 
@@ -491,6 +597,14 @@ Computes an XXH3 hash digest.
 
 ```tql
 hash_xxh3("foo")
+```
+
+### [hmac](functions/hmac.md)
+
+Computes an HMAC (Hash-based Message Authentication Code).
+
+```tql
+hmac("foo", secret("hmac-key"))
 ```
 
 ## IP
@@ -861,22 +975,6 @@ Decapsulates packet data at link, network, and transport layer.
 
 ```tql
 decapsulate(this)
-```
-
-### [decrypt\_cryptopan](functions/decrypt_cryptopan.md)
-
-Decrypts an IP address via Crypto-PAn.
-
-```tql
-decrypt_cryptopan(1.2.3.4)
-```
-
-### [encrypt\_cryptopan](functions/encrypt_cryptopan.md)
-
-Encrypts an IP address via Crypto-PAn.
-
-```tql
-encrypt_cryptopan(1.2.3.4)
 ```
 
 ## OCSF
@@ -1621,6 +1719,14 @@ Checks if a string is in lowercase.
 "hello".is_lower()
 ```
 
+### [is\_luhn\_valid](functions/is_luhn_valid.md)
+
+Checks if a string of digits has a valid Luhn checksum.
+
+```tql
+"4111111111111111".is_luhn_valid()
+```
+
 ### [is\_numeric](functions/is_numeric.md)
 
 Checks if a string contains only numeric characters.
@@ -1667,6 +1773,14 @@ Returns the length of a string in characters.
 
 ```tql
 "hello".length_chars()
+```
+
+### [luhn\_check\_digit](functions/luhn_check_digit.md)
+
+Computes the Luhn check digit of a string of digits.
+
+```tql
+"7992739871".luhn_check_digit()
 ```
 
 ### [match\_regex](functions/match_regex.md)

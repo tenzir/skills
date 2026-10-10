@@ -61,8 +61,24 @@
 - [encode_hex](functions/encode_hex.md): Encodes bytes into their hexadecimal representation.
 - [encode_url](functions/encode_url.md): Encodes strings using URL encoding.
 
+## Encryption
+
+- [decrypt_aes_gcm](functions/decrypt_aes_gcm.md): Decrypts a value that was encrypted with AES-GCM.
+- [decrypt_aes_gcm_siv](functions/decrypt_aes_gcm_siv.md): Decrypts a value that was encrypted with AES-GCM-SIV.
+- [decrypt_aes_siv](functions/decrypt_aes_siv.md): Decrypts a value that was encrypted with AES-SIV.
+- [decrypt_cryptopan](functions/decrypt_cryptopan.md): Decrypts an IP address via Crypto-PAn.
+- [decrypt_ff1](functions/decrypt_ff1.md): Decrypts a string that was encrypted with format-preserving encryption (FF1).
+- [decrypt_hpke](functions/decrypt_hpke.md): Decrypts a value that was encrypted with HPKE.
+- [encrypt_aes_gcm](functions/encrypt_aes_gcm.md): Encrypts a value with AES-GCM.
+- [encrypt_aes_gcm_siv](functions/encrypt_aes_gcm_siv.md): Encrypts a value with AES-GCM-SIV.
+- [encrypt_aes_siv](functions/encrypt_aes_siv.md): Encrypts a value deterministically with AES-SIV.
+- [encrypt_cryptopan](functions/encrypt_cryptopan.md): Encrypts an IP address via Crypto-PAn.
+- [encrypt_ff1](functions/encrypt_ff1.md): Encrypts a string with format-preserving encryption (FF1).
+- [encrypt_hpke](functions/encrypt_hpke.md): Encrypts a value for the holder of a private key with HPKE.
+
 ## Hashing
 
+- [hash_crc32](functions/hash_crc32.md): Computes a CRC-32 checksum.
 - [hash_md5](functions/hash_md5.md): Computes an MD5 hash digest.
 - [hash_sha1](functions/hash_sha1.md): Computes a SHA-1 hash digest.
 - [hash_sha224](functions/hash_sha224.md): Computes a SHA-224 hash digest.
@@ -74,6 +90,7 @@
 - [hash_sha384](functions/hash_sha384.md): Computes a SHA-384 hash digest.
 - [hash_sha512](functions/hash_sha512.md): Computes a SHA-512 hash digest.
 - [hash_xxh3](functions/hash_xxh3.md): Computes an XXH3 hash digest.
+- [hmac](functions/hmac.md): Computes an HMAC (Hash-based Message Authentication Code).
 
 ## IP
 
@@ -134,8 +151,6 @@
 
 - [community_id](functions/community_id.md): Computes the Community ID for a network connection/flow.
 - [decapsulate](functions/decapsulate.md): Decapsulates packet data at link, network, and transport layer.
-- [decrypt_cryptopan](functions/decrypt_cryptopan.md): Decrypts an IP address via Crypto-PAn.
-- [encrypt_cryptopan](functions/encrypt_cryptopan.md): Encrypts an IP address via Crypto-PAn.
 
 ## OCSF
 
@@ -253,12 +268,14 @@
 - [is_alnum](functions/is_alnum.md): Checks if a string is alphanumeric.
 - [is_alpha](functions/is_alpha.md): Checks if a string contains only alphabetic characters.
 - [is_lower](functions/is_lower.md): Checks if a string is in lowercase.
+- [is_luhn_valid](functions/is_luhn_valid.md): Checks if a string of digits has a valid Luhn checksum.
 - [is_numeric](functions/is_numeric.md): Checks if a string contains only numeric characters.
 - [is_printable](functions/is_printable.md): Checks if a string contains only printable characters.
 - [is_title](functions/is_title.md): Checks if a string follows title case.
 - [is_upper](functions/is_upper.md): Checks if a string is in uppercase.
 - [length_bytes](functions/length_bytes.md): Returns the length of a string in bytes.
 - [length_chars](functions/length_chars.md): Returns the length of a string in characters.
+- [luhn_check_digit](functions/luhn_check_digit.md): Computes the Luhn check digit of a string of digits.
 - [match_regex](functions/match_regex.md): Checks if a string partially matches a regular expression.
 - [slice](functions/slice.md): Slices a string or list with offsets and strides.
 - [starts_with](functions/starts_with.md): Checks whether a string starts with a specified substring.
@@ -300,4 +317,3 @@
 
 - [contains](functions/contains.md): The `contains` function is a deprecated alias for [`search`](https://tenzir.com/docs/reference/functions/search.md). It still works, but emits a deprecation warning. Replace `contains(input, target)` with `search(input, target)`, or `input.contains(target)` with `input.search(target)`. The `exact` and `ignore_case` options are unchanged.
 - [geo_distance](functions/geo_distance.md): Computes the surface distance between two geographic coordinates.
-- [hmac](functions/hmac.md): Computes an HMAC (Hash-based Message Authentication Code).

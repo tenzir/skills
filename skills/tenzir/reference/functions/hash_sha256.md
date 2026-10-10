@@ -28,11 +28,12 @@ from {x: hash_sha256("foo")}
 ```
 
 ```tql
-{x: "2c26b46b68ffc68ff99b453c1d30413413422e6e6c8ee90c3abeac38044e8a8c1b0"}
+{x: "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"}
 ```
 
 ## See Also
 
+* [`hash_crc32`](https://tenzir.com/docs/reference/functions/hash_crc32.md)
 * [`hash_md5`](https://tenzir.com/docs/reference/functions/hash_md5.md)
 * [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md)
 * [`hash_sha224`](https://tenzir.com/docs/reference/functions/hash_sha224.md)

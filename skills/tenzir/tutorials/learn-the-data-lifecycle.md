@@ -97,7 +97,7 @@ src_endpoint.ip = encrypt_cryptopan(src_endpoint.ip, seed=secret("CRYPTOPAN_SEED
 user.email_addr = f"*****@{user.email_addr.split("@")[1]}"
 ```
 
-Prefix-preserving encryption keeps subnet structure intact while hiding the original addresses. Protect sensitive fields before events leave your trust boundary. See [masking sensitive data](../guides/protect/mask-sensitive-data.md).
+Prefix-preserving encryption keeps subnet structure intact while hiding the original addresses. Protect sensitive fields before events leave your trust boundary. Our guides on [masking sensitive data](../guides/protect/mask-sensitive-data.md) and [encrypting sensitive data](../guides/protect/encrypt-sensitive-data.md) show the techniques in depth.
 
 ## Add meaning
 

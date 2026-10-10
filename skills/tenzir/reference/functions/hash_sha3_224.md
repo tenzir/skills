@@ -33,6 +33,7 @@ from {x: hash_sha3_224("foo")}
 
 ## See Also
 
+* [`hash_crc32`](https://tenzir.com/docs/reference/functions/hash_crc32.md)
 * [`hash_md5`](https://tenzir.com/docs/reference/functions/hash_md5.md)
 * [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md)
 * [`hash_sha224`](https://tenzir.com/docs/reference/functions/hash_sha224.md)

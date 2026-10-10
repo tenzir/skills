@@ -20,7 +20,9 @@ ai_prompt model=string, [endpoint=string, system=string, data=any,
 
 ## Description
 
-The `ai_prompt` operator evaluates one request per input event. By default, it serializes `this` as compact JSON and sends that string as the Responses API `input` field. Set `data` to use another expression instead. String values are also serialized as JSON strings before they are sent.
+The `ai_prompt` operator evaluates one request per input event. By default, it serializes the event as compact JSON and sends that string as the Responses API `input` field. Set `data` to use another expression instead. String values are also serialized as JSON strings before they are sent.
+
+The default input leaves out the `ai` field and the `into` field, which hold the results of earlier calls. To send them anyway, pass them explicitly, for example with `data={alert: alert, summary: ai.summary.text}`, or send the whole event with `data=this`.
 
 The operator uses `http://127.0.0.1:11434/v1` as its default endpoint, which matches the standard Ollama OpenAI-compatible API port. The operator appends `/responses` to the endpoint and sends a `POST` request to the Responses API. It doesn’t use the Chat Completions API. For providers that support the Responses API `store` flag, the operator sets it to `false`.
 
@@ -65,7 +67,7 @@ Instructions to send as the Responses API `instructions` field.
 
 The value to send as the request input after JSON serialization.
 
-Defaults to `this`.
+Defaults to the event without the `ai` field and without the `into` field.
 
 ### `into = field (optional)`
 
@@ -83,9 +85,9 @@ The API key is resolved as a [secret](../../explanations/secrets.md).
 
 ### `temperature = double (optional)`
 
-Sampling temperature to send with the request.
+Sampling temperature to send with the request, between `0` and `2`.
 
-Defaults to `0`.
+If you omit this argument, Tenzir sends no temperature and the model uses its own default. Some models, such as `gpt-5-mini`, reject the parameter.
 
 ### `max_tokens = uint (optional)`
 
@@ -140,6 +142,7 @@ select summary=enrichment.ai.text,
 
 ## See Also
 
+* [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md)
 * [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
 * [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
 * [Enrich events with AI](../../guides/enrich/enrich-events-with-ai.md)

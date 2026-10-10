@@ -12,7 +12,7 @@ section: "Docs"
 Decrypts an IP address via Crypto-PAn.
 
 ```tql
-decrypt_cryptopan(address:ip, [seed=string], [family=string])
+decrypt_cryptopan(address:ip, [seed=secret], [family=string])
 ```
 
 ## Description
@@ -27,9 +27,13 @@ By default, `decrypt_cryptopan` infers the address family from the ciphertext: a
 
 The IP address to decrypt.
 
-### `seed = string (optional)`
+### `seed = secret (optional)`
 
-A 64-character seed that describes a hexadecimal value. When the seed is shorter than 64 characters, the function appends zeros to match the size; when it is longer, it truncates the seed.
+The key of the permutation, as a secret with exactly 32 bytes.
+
+Read the seed with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A plain value or a secret of another size is an error when the pipeline starts. If your secret store holds the seed in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md), for example `seed=secret("cryptopan-key").decode_hex()`.
+
+Without a seed, the function uses a key of zeros. Anyone can reverse addresses that use that key, so always pass a seed to protect addresses.
 
 ### `family = string (optional)`
 
@@ -39,14 +43,15 @@ Set this to `ipv6` when decrypting an IPv6 ciphertext that happens to look like 
 
 ## Examples
 
+The examples read their seed from a secret store that holds the secret `cryptopan-key` with the hex-encoded value `000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`.
+
 ### Decrypt IP address fields
 
 ```tql
-let $seed = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
-from {
-  src: decrypt_cryptopan(2.90.93.17, seed=$seed),
-  dst: decrypt_cryptopan(dd92:2c44:3fc0:ff1e:7ff9:c7f0:8180:7e00, seed=$seed),
-}
+let $seed = secret("cryptopan-key").decode_hex()
+from {src: 2.90.93.17, dst: dd92:2c44:3fc0:ff1e:7ff9:c7f0:8180:7e00}
+src = src.decrypt_cryptopan(seed=$seed)
+dst = dst.decrypt_cryptopan(seed=$seed)
 ```
 
 ```tql
@@ -59,10 +64,9 @@ from {
 ### Decrypt an IPv4-mapped IPv6 ciphertext
 
 ```tql
-let $seed = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
-from {
-  address: decrypt_cryptopan(192.0.2.1, seed=$seed, family="ipv6"),
-}
+let $seed = secret("cryptopan-key").decode_hex()
+from {address: 192.0.2.1}
+address = address.decrypt_cryptopan(seed=$seed, family="ipv6")
 ```
 
 ```tql

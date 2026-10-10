@@ -18,6 +18,8 @@ Pick the technique that matches the downstream use case:
 * **Redact** when the value must not leave the pipeline in any recoverable form.
 * **Partially reveal** when an operator or analyst needs enough context to recognize a record without seeing the full value.
 
+When authorized people must be able to recover the original value, encrypt it instead. Our guide on [encrypting sensitive data](encrypt-sensitive-data.md) covers this case.
+
 The strongest mask is no field at all. When a sensitive field has no downstream use, drop it instead of transforming it with [`drop`](https://tenzir.com/docs/reference/operators/drop.md) or by omitting it from [`select`](https://tenzir.com/docs/reference/operators/select.md):
 
 ```tql
@@ -30,13 +32,14 @@ The rest of this guide covers the cases where you do need to keep something.
 
 Use [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) to replace IP addresses with prefix-preserving pseudonyms. Two addresses in the same subnet produce two anonymized addresses in the same subnet, which keeps flow analysis meaningful while removing the original IPs.
 
+The seed is a secret with 32 bytes. This example assumes that your secret store holds the secret `cryptopan-key` with the hex-encoded value `000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`:
+
 ```tql
-let $seed = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
-from {
-  client_ip: encrypt_cryptopan(192.168.1.100, seed=$seed),
-  server_ip: encrypt_cryptopan(8.8.8.8, seed=$seed),
-  peer_ip: encrypt_cryptopan(192.168.1.42, seed=$seed),
-}
+let $seed = secret("cryptopan-key").decode_hex()
+from {client_ip: 192.168.1.100, server_ip: 8.8.8.8, peer_ip: 192.168.1.42}
+client_ip = client_ip.encrypt_cryptopan(seed=$seed)
+server_ip = server_ip.encrypt_cryptopan(seed=$seed)
+peer_ip = peer_ip.encrypt_cryptopan(seed=$seed)
 ```
 
 ```tql
@@ -47,7 +50,7 @@ from {
 }
 ```
 
-The two addresses originally in `192.168.1.0/24` still share a prefix (`2.149.252.0/24`) after anonymization, while `8.8.8.8` ends up in an unrelated range. Keep the seed in your secret store and inject it into the pipeline so the value never appears in pipeline definitions.
+The two addresses originally in `192.168.1.0/24` still share a prefix (`2.149.252.0/24`) after anonymization, while `8.8.8.8` ends up in an unrelated range. Because the seed comes from your secret store, it never appears in the pipeline definition.
 
 Crypto-PAn is reversible
 
@@ -56,12 +59,11 @@ Crypto-PAn is a keyed pseudonymization scheme, not a one-way function. Anyone wi
 When an authorized investigator needs to round-trip an event back to its original IPs, pass the same seed to [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md):
 
 ```tql
-let $seed = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
-from {
-  client_ip: decrypt_cryptopan(2.149.252.148, seed=$seed),
-  server_ip: decrypt_cryptopan(245.155.245.195, seed=$seed),
-  peer_ip: decrypt_cryptopan(2.149.252.239, seed=$seed),
-}
+let $seed = secret("cryptopan-key").decode_hex()
+from {client_ip: 2.149.252.148, server_ip: 245.155.245.195, peer_ip: 2.149.252.239}
+client_ip = client_ip.decrypt_cryptopan(seed=$seed)
+server_ip = server_ip.decrypt_cryptopan(seed=$seed)
+peer_ip = peer_ip.decrypt_cryptopan(seed=$seed)
 ```
 
 ```tql
@@ -126,15 +128,14 @@ A different seed produces a completely different digest for the same input, so k
 
 ### Authenticate with HMAC
 
-When compliance language asks for HMAC-SHA256 specifically, or when you need the formal guarantees of a keyed message authentication code, use [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md):
+When compliance language asks for HMAC-SHA256 specifically, or when you need the formal guarantees of a keyed message authentication code, use [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md). Its key is a secret, so it never appears in the pipeline definition. This example assumes that your secret store holds the secret `hmac-key` with the value `some-random-string`:
 
 ```tql
-let $key = "some-random-string"
 from {
   user: "alice",
   email: "alice@example.com",
 }
-email = hmac(email, $key)
+email = hmac(email, secret("hmac-key"))
 ```
 
 ```tql
@@ -144,7 +145,7 @@ email = hmac(email, $key)
 }
 ```
 
-`hmac` defaults to SHA-256 and accepts `algorithm="sha512"`, `"sha384"`, `"sha1"`, or `"md5"`. The function is marked experimental and the key currently has to be a plain string; secret support is planned.
+The `hmac` function defaults to SHA-256 and accepts `algorithm="sha512"`, `"sha384"`, `"sha1"`, or `"md5"`.
 
 ## Redact values with a fixed mask
 
@@ -228,6 +229,29 @@ For `account_id`, `slice(end=4)` takes the first four characters and `pad_end(8,
 
 For `card_number`, `slice(begin=-4)` takes the last four digits and `pad_start(16, "*")` prepends twelve `*` characters to match the original length. This is the conventional display format for payment card numbers. Adjust the slice offsets and pad lengths to control how much of the value stays visible.
 
+### Mask only valid card numbers
+
+A field such as a payment reference can hold card numbers next to other identifiers that you want to keep. Use [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md) to mask only the values that pass the Luhn check of card numbers:
+
+```tql
+from {payment_ref: "4111111111111111"},
+     {payment_ref: "378282246310005"},
+     {payment_ref: "ORD-2024-0042"}
+if payment_ref.is_luhn_valid() {
+  payment_ref = payment_ref.slice(begin=-4).pad_start(payment_ref.length_bytes(), "*")
+}
+```
+
+```tql
+{payment_ref: "************1111"}
+{payment_ref: "***********0005"}
+{payment_ref: "ORD-2024-0042"}
+```
+
+Padding to the length of each value keeps the 15 digits of the American Express number in the second event.
+
+The check is necessary but not sufficient for a card number: one in ten random strings of digits passes it. When a field can hold other numbers, combine the check with further conditions, such as the expected length. Conversely, a mistyped card number fails the check and stays unmasked, so add an `else` branch when no such value may leave the pipeline.
+
 ## Mask parts of an email address
 
 Email addresses have structure you can exploit. Sometimes you want to hide who the user is but keep the provider visible for analytics; other times you want just enough of both parts for an analyst to recognize a record.
@@ -310,9 +334,9 @@ birth_year = dob.year()
 
 For a string label such as `"1985"`, use [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md) with `"%Y"`.
 
-`secret()` and function arguments
+Salts of hash functions
 
-The examples above use plain `let` bindings because [`secret`](https://tenzir.com/docs/reference/functions/secret.md) does not yet resolve inside function arguments. Until that lands, source seeds, salts, and HMAC keys through your deployment’s secret-injection mechanism (such as environment variables populated from a secret store) and bind them with `let`, as shown above. Direct `secret()` use inside `hash_*`, `hmac`, and `encrypt_cryptopan` arguments is planned.
+The key of [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md), the seeds of [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) and [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md), and the keys of the [encryption functions](encrypt-sensitive-data.md) must be secrets. The `seed` arguments of the `hash_*` functions accept only plain strings. Source salts through your deployment’s secret-injection mechanism, such as environment variables populated from a secret store, and bind them with `let`.
 
 ## See also
 
@@ -333,4 +357,6 @@ The examples above use plain `let` bindings because [`secret`](https://tenzir.co
 * [Manipulate strings](../shape/manipulate-strings.md)
 * [Transform values](../shape/transform-values.md)
 * [Normalize event timestamps](../shape/normalize-event-timestamps.md)
+* [Encrypt sensitive data](encrypt-sensitive-data.md)
+* [Encryption](../../explanations/encryption.md)
 * [Secrets](../../explanations/secrets.md)

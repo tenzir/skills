@@ -28,7 +28,7 @@ This operator is the dual to [`rare`](https://tenzir.com/docs/reference/operator
 
 Potentially High Memory Usage
 
-Use caution when applying this operator to large inputs. It currently buffers aggregation state in memory. With Nova execution enabled, a downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the final sort’s retained candidates, but does not reduce the number of aggregation groups. Out-of-core processing is on our roadmap.
+Use caution when applying this operator to large inputs. It currently buffers aggregation state in memory. A downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the final sort’s retained candidates, but does not reduce the number of aggregation groups. Out-of-core processing is on our roadmap.
 
 ### `x: field`
 

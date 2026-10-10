@@ -29,10 +29,6 @@ The operator supports two query modes:
 
 Use exactly one of `table` or `sql`.
 
-Requires Nova
-
-This operator requires the Nova execution engine. Start `tenzir` or `tenzir-node` with `--nova` to use it.
-
 ### `uri: string`
 
 A local database path, an in-memory database name, or a Quack URI.

@@ -12,7 +12,7 @@ section: "Docs"
 Encrypts an IP address via Crypto-PAn.
 
 ```tql
-encrypt_cryptopan(address:ip, [seed=string])
+encrypt_cryptopan(address:ip, [seed=secret])
 ```
 
 ## Description
@@ -23,26 +23,31 @@ The `encrypt_cryptopan` function encrypts the IP `address` using the [Crypto-PAn
 
 The IP address to encrypt.
 
-### `seed = string (optional)`
+### `seed = secret (optional)`
 
-A 64-character seed that describes a hexadecimal value. When the seed is shorter than 64 characters, the function appends zeros to match the size; when it is longer, it truncates the seed.
+The key of the permutation, as a secret with exactly 32 bytes.
+
+Read the seed with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A plain value or a secret of another size is an error when the pipeline starts. If your secret store holds the seed in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md), for example `seed=secret("cryptopan-key").decode_hex()`.
+
+Without a seed, the function uses a key of zeros. Anyone can reverse addresses that use that key, so always pass a seed to protect addresses.
 
 ## Examples
+
+The examples read their seed from a secret store that holds the secret `cryptopan-key` with the hex-encoded value `000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`.
 
 ### Encrypt IP address fields
 
 ```tql
-let $seed = "deadbeef"
-from {
-  src: encrypt_cryptopan(114.13.11.35, seed=$seed),
-  dst: encrypt_cryptopan(114.56.11.200, seed=$seed),
-}
+let $seed = secret("cryptopan-key").decode_hex()
+from {src: 114.13.11.35, dst: 114.56.11.200}
+src = src.encrypt_cryptopan(seed=$seed)
+dst = dst.encrypt_cryptopan(seed=$seed)
 ```
 
 ```tql
 {
-  src: 117.179.11.60,
-  dst: 117.135.244.180,
+  src: 162.61.72.224,
+  dst: 162.4.52.80,
 }
 ```
 

@@ -945,6 +945,14 @@ unordered { read_ndjson }
 
 ## Modify
 
+### [ai\_decide](operators/ai_decide.md)
+
+Asks a decision model typed questions about each event and adds the answers.
+
+```tql
+ai_decide "Is this event malicious?", model="english", endpoint="http://127.0.0.1:8000/v1"
+```
+
 ### [ai\_prompt](operators/ai_prompt.md)
 
 Sends events to an OpenAI-compatible Responses API endpoint and adds the model response.

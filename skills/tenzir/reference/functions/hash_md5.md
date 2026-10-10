@@ -41,6 +41,7 @@ from { x: hash_md5("foo") }
 
 ## See Also
 
+* [`hash_crc32`](https://tenzir.com/docs/reference/functions/hash_crc32.md)
 * [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md)
 * [`hash_sha224`](https://tenzir.com/docs/reference/functions/hash_sha224.md)
 * [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md)

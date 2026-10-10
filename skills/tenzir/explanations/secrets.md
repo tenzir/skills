@@ -7,9 +7,9 @@ section: "Docs"
 
 # Secrets
 
-> Operators accept secrets as parameters for sensitive values, such as authentication tokens, passwords, or even URLs.
+> Operators and functions accept secrets as parameters for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
 
-Operators accept secrets as parameters for sensitive values, such as authentication tokens, passwords, or even URLs.
+Operators and functions accept secrets as parameters for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
 
 Security Design
 
@@ -19,7 +19,7 @@ Read more in the [Security Design](secrets.md#security-design) section.
 
 ## Usage in TQL
 
-You can use secret values only with operators that accept secrets. Operators generally do not document that they accept a secret, but they will accept secrets where appropriate.
+You can use secret values only with operators and functions that accept secrets. Operators generally do not document that they accept a secret, but they will accept secrets where appropriate. Functions list the type `secret` in their signature for every parameter that accepts one.
 
 You have two ways to pass an argument to an operator that expects a secret. The following examples use the [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) operator, which expects a HEC-token for authentication:
 
@@ -39,13 +39,20 @@ You have two ways to pass an argument to an operator that expects a secret. The 
 
   The operator fetches the secret named `splunk-hec-token` to authenticate with the Splunk endpoint.
 
+Function parameters with the type `secret` in their signature accept secrets, for example the key of [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md) or of the encryption functions such as [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md). These parameters accept only secrets. Other function parameters don’t accept secrets, for example the `seed` of the `hash_*` functions. In addition, the encoding and decoding functions transform secrets, as the [Encoding & Decoding](secrets.md#encoding--decoding) section describes. Bind a secret with `let` to use it in several places:
+
+```tql
+let $key = secret("pii-key").decode_hex()
+email = email.encrypt_aes_gcm_siv(key=$key)
+```
+
 ## The `secret` type
 
 Tenzir’s [type system](../reference/types.md) includes secrets as a special type. You can access secrets only with the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function.
 
 ### Internals
 
-A value of type `secret` contains only the secret’s name, not the secret value itself. When a pipeline operator uses a secret, it resolves the name asynchronously. For ad-hoc secrets created from a string literal, the name and value of the secret are identical, so no lookup occurs.
+A value of type `secret` contains only the secret’s name, not the secret value itself. When a pipeline operator or function uses a secret, Tenzir resolves the name asynchronously. For ad-hoc secrets created from a string literal, the name and value of the secret are identical, so no lookup occurs.
 
 ### Supported Operations
 
@@ -112,7 +119,7 @@ Managed secrets are identified by their name and can come from the following sou
 
 Access a managed secret’s value with the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function.
 
-The Tenzir Node looks up the secret’s actual value only when an operator requires it. It first checks the config, with environment variables taking precedence over configuration file entries. If the secret is not found there, the node requests it from the Tenzir Platform.
+The Tenzir Node looks up the secret’s actual value only when an operator or a function requires it. It first checks the config, with environment variables taking precedence over configuration file entries. If the secret is not found there, the node requests it from the Tenzir Platform.
 
 If the value is transferred over any network connection, it is additionally encrypted using [ECIES](https://en.wikipedia.org/wiki/Integrated_Encryption_Scheme) with a one-time, per-secret key. The value remains encrypted throughout the transfer until the final usage site.
 

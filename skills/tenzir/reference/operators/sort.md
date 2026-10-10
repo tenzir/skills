@@ -25,7 +25,7 @@ This operator performs a stable sort (preserves relative ordering when all expre
 
 Potentially High Memory Usage
 
-Without a downstream limit, this operator buffers all data in memory. With Nova execution enabled, an eligible downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the retained events and sort keys. Sorting still reads the complete input before producing output. Out-of-core processing is on our roadmap.
+Without a downstream limit, this operator buffers all data in memory. An eligible downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the retained events and sort keys. Sorting still reads the complete input before producing output. Out-of-core processing is on our roadmap.
 
 ### `[-]expr`
 
@@ -33,7 +33,7 @@ An expression that is evaluated for each event. Normally, events are sorted in a
 
 ## Optimizations
 
-With Nova execution enabled, a downstream `head N` lets `sort` retain only a bounded set of candidates for the first `N` results. Filters that move before `sort` run before candidate selection, so the bound counts matching events. A filter that must stay after a downstream `head` does not change that head’s bound.
+A downstream `head N` lets `sort` retain only a bounded set of candidates for the first `N` results. Filters that move before `sort` run before candidate selection, so the bound counts matching events. A filter that must stay after a downstream `head` does not change that head’s bound.
 
 ```tql
 sort -timestamp

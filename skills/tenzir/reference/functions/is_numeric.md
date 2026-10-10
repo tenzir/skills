@@ -35,4 +35,5 @@ from {x: "1234".is_numeric()}
 
 * [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md)
 * [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
+* [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

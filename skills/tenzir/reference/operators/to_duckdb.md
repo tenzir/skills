@@ -29,10 +29,6 @@ By default, the operator creates the table from the first batch of events it rec
 
 The operator emits a warning the first time each of these happens for a field. To keep all data, filter and reshape heterogeneous streams with [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) before writing them, or write each event kind to its own table.
 
-Requires Nova
-
-This operator requires the Nova execution engine. Start `tenzir` or `tenzir-node` with `--nova` to use it.
-
 ### `uri: string`
 
 A local database path, an in-memory database name, or a Quack URI. For a file path, the operator creates the file if it does not exist.

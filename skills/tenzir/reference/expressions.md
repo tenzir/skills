@@ -37,11 +37,13 @@ from {
 
 Arithmetic operators propagate `null` without a warning. If either operand is `null`, the expression evaluates to `null`.
 
-Comparisons have explicit null behavior. If both operands are `null`, `==`, `>=`, and `<=` evaluate to `true`, `!=` evaluates to `false`, and strict ordering with `>` or `<` evaluates to `null`. If exactly one operand is `null`, `==` evaluates to `false`, `!=` evaluates to `true`, and ordered comparisons evaluate to `null`.
+Equality is total: `==` and `!=` always answer and never warn. They compare values rather than types, so numeric types still compare by magnitude across types. Operands that cannot be equal, which includes any other pair of different types, are simply not equal, so `==` evaluates to `false` and `!=` evaluates to `true`. For example, both `null == 1d` and `"x" == 1d` evaluate to `false`, while `1 == 1.0` evaluates to `true`. A `null` is just one instance of that rule.
+
+Ordered comparisons are partial. If both operands are `null`, `>=` and `<=` evaluate to `true`, and strict ordering with `>` or `<` evaluates to `null`. If exactly one operand is `null`, or if the two operands have no shared order, `<`, `>`, `<=`, and `>=` evaluate to `null`.
 
 Operator-specific behavior takes precedence over generic null propagation. If an otherwise unsupported binary operation has a `null`-typed operand, it evaluates to `null` without a warning. For example, `5 in null` evaluates to `null`.
 
-Membership testing with `in` compares values rather than types, so an element of a different type simply does not match. For example, `"x" in [1d]` evaluates to `false` and `"x" not in [1d]` evaluates to `true`. Comparing two non-null values of different types with `==` or `!=` still evaluates to `null` and emits a warning.
+Testing list membership with `in` follows the same rule, because it compares the value against each element with `==`: an element of a different type simply does not match. For example, `"x" in [1d]` evaluates to `false` and `"x" not in [1d]` evaluates to `true`, while `"x" in [1d, "x"]` evaluates to `true`. The other forms of `in`, such as substring and subnet containment, are separate operations.
 
 Logical operators preserve `null` according to three-valued logic. For example, `true and null` and `false or null` evaluate to `null`, while `false and null` evaluates to `false` and `true or null` evaluates to `true`.
 
@@ -784,7 +786,7 @@ For detailed type coercion rules and more examples, see the specific type sectio
 
 #### Comparison
 
-All types support equality comparison (`==`, `!=`). Additionally, ordered types support relational comparisons (`<`, `<=`, `>`, `>=`):
+All types support equality comparison (`==`, `!=`), including across types: values that cannot be equal are simply not equal, rather than a warning. Additionally, ordered types support relational comparisons (`<`, `<=`, `>`, `>=`), which evaluate to `null` for operands that have no shared order:
 
 ```tql
 from {
@@ -814,7 +816,7 @@ set greater_equal = a >= b
 
 **Comparison rules by type:**
 
-* **All types**: Can compare equality with themselves and with `null`
+* **All types**: Can compare equality with any other type; unrelated types are never equal
 * **Numeric types**: Can compare across different numeric types; ordered by magnitude
 * **Strings**: Compare lexicographically (dictionary order)
 * **IP addresses**: Ordered by their IPv6 bit pattern
