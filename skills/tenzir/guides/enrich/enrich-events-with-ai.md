@@ -148,7 +148,7 @@ Use `concurrency` to control how many requests can run at the same time. Keep th
 
 ## Triage with typed decisions first
 
-A language model is slow and expensive to call for every event. A **decision model** answers typed questions instead: a yes/no probability, one option out of a fixed set, or a score on an ordered scale. The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator asks such questions through the System One API, which hosted Jev and a local Laya server implement. Use it as a first tier that filters events, and send only the remaining events to [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md).
+A language model is slow and expensive to call for every event. A **decision model** answers typed questions instead: a yes/no probability, one option out of a fixed set, or a score on an ordered scale. The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator asks such questions of hosted Jev, Cloudflare’s Clef on Workers AI, the OpenAI Decisions API, or a local Laya server, and you choose the provider with the `endpoint`. Use it as a first tier that filters events, and send only the remaining events to [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md).
 
 This example rates the command of an OCSF `process_activity` event on a three-level scale. Levels start at 0, so a score of at least 1.5 means that the model leans toward the highest level. Only risky commands reach the language model:
 
@@ -303,10 +303,10 @@ If a request fails, Tenzir keeps the input event and writes `null` to the tempor
 where ai.next_step != null
 ```
 
-The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator also writes `null` when a request fails. For triage, decide whether a failure should hide or surface an event. To fail open and keep events that the model couldn’t assess, test for `null` first:
+The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator also writes `null` when a request fails, and an answer is `null` when the model refuses the question. For triage, decide whether a failure should hide or surface an event. To fail open and keep events that the model couldn’t assess, test the answer for `null` first:
 
 ```tql
-where ai.decide == null or ai.decide.answer.score >= 1.5
+where ai.decide.answer? == null or ai.decide.answer.score >= 1.5
 ```
 
 Model calls can send sensitive event data to another process or service. Prefer `data={...}` over sending the whole event, omit fields that aren’t needed for the task, and use secrets for endpoint URLs and API keys.
