@@ -68,8 +68,7 @@ Example
   "requests": [
     {
       "serve_id": "query-1",
-      "continuation_token": "00000000-0000-0000-0000-000000000000",
-      "schema": null
+      "continuation_token": "00000000-0000-0000-0000-000000000000"
     },
     {
       "serve_id": "query-2",
